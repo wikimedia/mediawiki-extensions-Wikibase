@@ -152,14 +152,14 @@
 					clearTimeout( self._animationTimeout );
 					self._animationTimeout = setTimeout( function() {
 						self.showExtension();
-					}, 250 );
+					}, 250 ); //TODO: Fixed values can't be changed nor turned off
 				}
 			} )
 			.on( 'blur.' + this.widgetName, function( event ) {
 				clearTimeout( self._animationTimeout );
 				self._animationTimeout = setTimeout( function() {
 					self.hideExtension();
-				}, 250 );
+				}, 250 ); //TODO: Fixed values can't be changed nor turned off
 			} )
 			.on( 'keydown.' + this.widgetName, function( event ) {
 				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
@@ -355,7 +355,7 @@
 				'extensionexpansion',
 				'fadeIn',
 				{
-					duration: 150,
+					duration: 150, //TODO: Fixed values can't be changed nor turned off
 					complete: function() {
 						if( $.isFunction( callback ) ) {
 							callback();
@@ -376,7 +376,7 @@
 				'extensionremoval',
 				'fadeOut',
 				{
-					duration: 150,
+					duration: 150, //TODO: Fixed values can't be changed nor turned off
 					complete: function() {
 						inputExtendersWithVisibleExtension.remove( self );
 						if( $.isFunction( callback ) ) {
