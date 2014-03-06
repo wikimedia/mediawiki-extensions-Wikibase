@@ -2,12 +2,8 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( define ) {
-'use strict';
-
-var DEPS = ['time.Time', 'jquery', 'qunit'];
-
-define( DEPS, function( Time, $, QUnit ) {
+define( ['time/time.Time', 'jquery', 'qunit'], function( Time, $, QUnit ) {
+	'use strict';
 
 	QUnit.module( 'Time.js: time.Time.knowsPrecision' );
 
@@ -42,5 +38,3 @@ define( DEPS, function( Time, $, QUnit ) {
 	} );
 
 } );
-
-}( define ) );

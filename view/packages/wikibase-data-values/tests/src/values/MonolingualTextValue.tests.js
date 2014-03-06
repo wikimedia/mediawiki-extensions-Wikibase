@@ -2,17 +2,13 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'dataValues',
-	'util.inherit',
-	'dataValues.DataValue.tests',
-	'dataValues.MonolingualTextValue'
-];
-
-define( DEPS, function( dv, util ) {
+define( [
+	'dataValues/dataValues',
+	'util/util.inherit',
+	'tests/src/dataValues.DataValue.tests',
+	'values/MonolingualTextValue'
+], function( dv, util ) {
+	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
 
@@ -60,5 +56,3 @@ define( DEPS, function( dv, util ) {
 	test.runTests( 'dataValues.MonolingualTextValue' );
 
 } );
-
-}( define ) );

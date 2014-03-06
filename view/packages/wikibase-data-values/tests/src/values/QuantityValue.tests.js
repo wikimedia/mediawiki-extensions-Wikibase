@@ -2,18 +2,14 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'dataValues',
-	'util.inherit',
-	'dataValues.DataValue.tests',
-	'dataValues.DecimalValue',
-	'dataValues.QuantityValue'
-];
-
-define( DEPS, function( dv, util ) {
+define( [
+	'dataValues/dataValues',
+	'util/util.inherit',
+	'tests/src/dataValues.DataValue.tests',
+	'values/DecimalValue',
+	'values/QuantityValue'
+], function( dv, util ) {
+	'use strict';
 
 	var PARENT = dv.tests.DataValueTest;
 
@@ -51,5 +47,3 @@ define( DEPS, function( dv, util ) {
 	test.runTests( 'dataValues.QuantityValueTest' );
 
 } );
-
-}( define ) );
