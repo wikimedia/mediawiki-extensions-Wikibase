@@ -98,12 +98,13 @@ class ClaimSummaryBuilder {
 	}
 
 	/**
-	 * Build key (property) => value pairs for summary arguments
+	 * Builds an associative array that can be used as summary arguments. It uses property IDs as
+	 * array keys and builds arrays of the main Snaks of all Claims given by the GUIDs.
 	 *
 	 * @param Claims $claims
 	 * @param string[] $guids
 	 *
-	 * @return mixed[] // propertyId (prefixed) => array of values
+	 * @return array[] Associative array that contains property ID => array of main Snaks
 	 */
 	protected function buildSummaryArgs( Claims $claims, array $guids ) {
 		$pairs = array();
@@ -121,6 +122,7 @@ class ClaimSummaryBuilder {
 			}
 		}
 
-		return ( array( $pairs ) );
+		return array( $pairs );
 	}
+
 }
