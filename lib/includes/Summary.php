@@ -48,7 +48,7 @@ class Summary {
 	protected $userSummary;
 
 	/**
-	 * indicates a specific type of formatting
+	 * Indicates a specific type of formatting
 	 */
 	const USE_COMMENT = 2;
 	const USE_SUMMARY = 4;
@@ -59,11 +59,11 @@ class Summary {
 	 *
 	 * @since 0.4
 	 *
-	 * @param string     $moduleName  the module part of the autocomment
-	 * @param string     $actionName  the action part of the autocomment
-	 * @param string     $language    the language to use as the second autocomment argument
-	 * @param object[]   $commentArgs the arguments to the autocomment
-	 * @param object[]   $summaryArgs the arguments to the autosummary
+	 * @param string $moduleName The module part of the auto comment
+	 * @param string $actionName The action part of the auto comment
+	 * @param string $language   The language to use as the second auto comment argument
+	 * @param array $commentArgs The arguments to the auto comment
+	 * @param array $summaryArgs The arguments to the auto summary
 	 */
 	public function __construct( $moduleName = null, $actionName = null, $language = null,
 		$commentArgs = array(), $summaryArgs = array()
@@ -181,11 +181,11 @@ class Summary {
 	}
 
 	/**
-	 * Add autocomment arguments.
+	 * Add auto comment arguments.
 	 *
 	 * @since 0.4
 	 *
-	 * @param array|strings... parts to be stringed together
+	 * @param mixed [$args,...] Parts to be stringed together
 	 */
 	public function addAutoCommentArgs( /*...*/ ) {
 		$args = func_get_args();
@@ -197,13 +197,12 @@ class Summary {
 		$this->commentArgs = array_merge( $this->commentArgs, $args );
 	}
 
-
 	/**
-	 * Add to the summary part
+	 * Add arguments to the summary part.
 	 *
 	 * @since 0.4
 	 *
-	 * @param array|strings... parts to be stringed together
+	 * @param mixed [$args,...] Parts to be stringed together
 	 */
 	public function addAutoSummaryArgs( /*...*/ ) {
 		$args = func_get_args();
@@ -216,21 +215,21 @@ class Summary {
 	}
 
 	/**
-	 * @return object[]
+	 * @return array
 	 */
 	public function getCommentArgs() {
 		return $this->commentArgs;
 	}
 
 	/**
-	 * @return object[]
+	 * @return array
 	 */
 	public function getAutoSummaryArgs() {
 		return $this->summaryArgs;
 	}
 
 	/**
-	 * @deprecated use SummaryFormatter instead
+	 * @deprecated Use SummaryFormatter instead
 	 * @throws LogicException
 	 */
 	public function toString() {

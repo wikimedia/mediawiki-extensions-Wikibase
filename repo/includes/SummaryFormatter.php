@@ -49,11 +49,13 @@ class SummaryFormatter {
 	 * @param EntityIdFormatter $idFormatter
 	 * @param ValueFormatter $valueFormatter
 	 * @param SnakFormatter $snakFormatter
-	 * @param \Language $language
+	 * @param Language $language
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdFormatter $idFormatter, ValueFormatter $valueFormatter, SnakFormatter $snakFormatter, Language $language ) {
+	public function __construct( EntityIdFormatter $idFormatter, ValueFormatter $valueFormatter,
+		SnakFormatter $snakFormatter, Language $language
+	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
 			throw new InvalidArgumentException(
 				'Expected $snakFormatter to procude text/plain output, not '
@@ -77,6 +79,7 @@ class SummaryFormatter {
 	 * @since 0.5
 	 *
 	 * @param Summary $summary
+	 *
 	 * @return string with a formatted comment, or possibly an empty string
 	 */
 	public function formatAutoComment( Summary $summary ) {
@@ -100,7 +103,7 @@ class SummaryFormatter {
 	}
 
 	/**
-	 * Format the autosummary part of a full summary
+	 * Formats the auto summary part of a full summary.
 	 *
 	 * @since 0.4
 	 *
@@ -108,7 +111,7 @@ class SummaryFormatter {
 	 *
 	 * @throws \MWException
 	 *
-	 * @return string The $parts concatenated
+	 * @return string The auto summary arguments comma-separated
 	 */
 	public function formatAutoSummary( Summary $summary ) {
 		$summaryArgs = $summary->getAutoSummaryArgs();
@@ -131,7 +134,7 @@ class SummaryFormatter {
 	}
 
 	/**
-	 * @param mixed[] $args
+	 * @param array $args
 	 *
 	 * @return string[]
 	 */
@@ -151,7 +154,7 @@ class SummaryFormatter {
 	}
 
 	/**
-	 * Format an autosummary argument
+	 * Format an auto summary argument
 	 *
 	 * @since 0.4
 	 *
@@ -255,12 +258,16 @@ class SummaryFormatter {
 	 * @since 0.5
 	 *
 	 * @param Summary $summary
-	 * @param int $length max length of the summary
-	 * @param int $format bitset indicating what to include, see the USE_XXX constants.
+	 * @param int $length Max length of the summary
+	 * @param int $format Bit field indicating what to include, see the Summary::USE_XXX constants.
 	 *
 	 * @return string to be used for the summary
+	 *
+	 * @see Summary::USE_ALL
 	 */
-	public function formatSummary( Summary $summary, $length = SUMMARY_MAX_LENGTH, $format = Summary::USE_ALL ) {
+	public function formatSummary( Summary $summary, $length = SUMMARY_MAX_LENGTH,
+		$format = Summary::USE_ALL
+	) {
 		$userSummary = $summary->getUserSummary();
 
 		if ( !is_null( $userSummary ) ) {
@@ -271,8 +278,10 @@ class SummaryFormatter {
 
 		$autoComment = $this->formatAutoComment( $summary );
 
-		$autoComment = ( $format & Summary::USE_COMMENT ) ? $this->stringNormalizer->trimToNFC( $autoComment ) : '';
-		$autoSummary = ( $format & Summary::USE_SUMMARY ) ? $this->stringNormalizer->trimToNFC( $autoSummary ) : '';
+		$autoComment = ( $format & Summary::USE_COMMENT )
+			? $this->stringNormalizer->trimToNFC( $autoComment ) : '';
+		$autoSummary = ( $format & Summary::USE_SUMMARY )
+			? $this->stringNormalizer->trimToNFC( $autoSummary ) : '';
 
 		$totalSummary = self::assembleSummaryString( $autoComment, $autoSummary, $length );
 		return $totalSummary;
