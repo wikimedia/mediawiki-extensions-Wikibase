@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_584b1acd",
+        "filename": "lib/tests/phpunit/formatters/GlobeCoordinateDetailsFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:27:44Z",
+      "side": 1,
+      "message": "Another test that covers itself. :-(",
+      "revId": "bf7f112b48cc5eae621edecf16adbff2dfb413ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_38484ece",
+        "filename": "lib/tests/phpunit/formatters/GlobeCoordinateDetailsFormatterTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:27:44Z",
+      "side": 1,
+      "message": "Same.",
+      "revId": "bf7f112b48cc5eae621edecf16adbff2dfb413ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
