@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_78c5b63f",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:23:51Z",
+      "side": 1,
+      "message": "\u0027ISO timestamp\u0027 please, see PS1.",
+      "revId": "7ad90148110036a3e06e98cd2ffb98cfeb6de8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_58d55ae8",
+        "filename": "lib/includes/formatters/TimeDetailsFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:23:51Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure these strval() do absolutely nothing, htmlspecialchars() does this anyway. Am I missing something? Do you think it\u0027s more clear that way?",
+      "revId": "7ad90148110036a3e06e98cd2ffb98cfeb6de8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_38d28e01",
+        "filename": "lib/tests/phpunit/formatters/TimeDetailsFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:23:51Z",
+      "side": 1,
+      "message": "The test covers itself? Uh...",
+      "revId": "7ad90148110036a3e06e98cd2ffb98cfeb6de8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_1803527b",
+        "filename": "lib/tests/phpunit/formatters/TimeDetailsFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:23:51Z",
+      "side": 1,
+      "message": "Same.",
+      "revId": "7ad90148110036a3e06e98cd2ffb98cfeb6de8e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
