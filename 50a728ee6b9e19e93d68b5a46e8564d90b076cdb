@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_1dfea401",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-06T13:54:25Z",
+      "side": 1,
+      "message": "no prefix or suffix? $repoSiteName . \u0027-sitename\u0027, perhaps? Just seems safer. No strong feelings.",
+      "revId": "50a728ee6b9e19e93d68b5a46e8564d90b076cdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_dd039c0e",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-06T13:54:25Z",
+      "side": 1,
+      "message": "Can we at least auto-detect thisWikiIsTheRepo based on repoDatabase? See my comment on PS2.",
+      "revId": "50a728ee6b9e19e93d68b5a46e8564d90b076cdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
