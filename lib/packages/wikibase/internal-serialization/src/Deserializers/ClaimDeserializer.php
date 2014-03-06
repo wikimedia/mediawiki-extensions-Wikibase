@@ -5,7 +5,10 @@ namespace Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
+use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -38,14 +41,7 @@ class ClaimDeserializer implements Deserializer {
 		$this->assertHasKey( 'q', 'Qualifiers serialization is missing' );
 		$this->assertHasKey( 'g', 'Guid is missing in Claim serialization' );
 
-		$claim = new Claim(
-			$this->snakDeserializer->deserialize( $serialization['m'] ),
-			$this->qualifiersDeserializer->deserialize( $serialization['q'] )
-		);
-
-		$claim->setGuid( $serialization['g'] );
-
-		return $claim;
+		return $this->newClaimFormSerialization();
 	}
 
 	private function assertIsArray() {
@@ -58,6 +54,76 @@ class ClaimDeserializer implements Deserializer {
 		if ( !array_key_exists( $key, $this->serialization ) ) {
 			throw new MissingAttributeException( $key, $message );
 		}
+	}
+
+	private function newClaimFormSerialization() {
+		$claim = $this->newClaimOrStatement();
+
+		$this->setGuid( $claim );
+
+		return $claim;
+	}
+
+	private function newClaimOrStatement() {
+		if ( $this->isStatement() ) {
+			return $this->getStatement();
+		}
+		else {
+			return $this->getClaim();
+		}
+	}
+
+	private function isStatement() {
+		return array_key_exists( 'rank', $this->serialization );
+	}
+
+	private function getClaim() {
+		return new Claim(
+			$this->getMainSnak(),
+			$this->getQualifiers()
+		);
+	}
+
+	private function getStatement() {
+		$statement = new Statement(
+			$this->getMainSnak(),
+			$this->getQualifiers(),
+			$this->getReferences()
+		);
+
+		$this->setRank( $statement );
+
+		return $statement;
+	}
+
+	private function setRank( Statement $statement ) {
+		try {
+			$statement->setRank( $this->serialization['rank'] );
+		}
+		catch ( InvalidArgumentException $ex ) {
+			throw new DeserializationException( $ex->getMessage(), $ex );
+		}
+	}
+
+	private function getMainSnak() {
+		return $this->snakDeserializer->deserialize( $this->serialization['m'] );
+	}
+
+	private function getQualifiers() {
+		return $this->qualifiersDeserializer->deserialize( $this->serialization['q'] );
+	}
+
+	private function setGuid( Claim $claim ) {
+		try {
+			$claim->setGuid( $this->serialization['g'] );
+		}
+		catch ( InvalidArgumentException $ex ) {
+			throw new DeserializationException( $ex->getMessage(), $ex );
+		}
+	}
+
+	private function getReferences() {
+		return new ReferenceList( array() );
 	}
 
 }
