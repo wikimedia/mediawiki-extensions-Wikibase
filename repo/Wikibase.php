@@ -83,6 +83,7 @@ call_user_func( function() {
 		return new \ValueParsers\QuantityParser( $options, $unlocalizer );
 	};
 
+	$wgValueParsers['time'] = 'Wikibase\Lib\Parsers\TimeParser';
 	$wgValueParsers['bool'] = 'ValueParsers\BoolParser';
 	$wgValueParsers['float'] = 'ValueParsers\FloatParser';
 	$wgValueParsers['globecoordinate'] = 'ValueParsers\GlobeCoordinateParser';
