@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_feb64ff5",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-06T18:19:21Z",
+      "side": 1,
+      "message": "But why would that ever be empty? Shouldn\u0027t at least contain the current UI language? If not, shouldn\u0027t it be called wbExtraLanguages?",
+      "parentUuid": "4e04eb01_38e60e40",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_f32faf38",
         "filename": "repo/includes/UserLanguageLookup.php",
         "patchSetId": 6
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Not sure what you mean. Do you have a suggestion? I would say it\u0027s a value object now. To query an other user you have to create a new object. Please note that I didn\u0027t really invented this, the constructor was used that way in Wikibase.hooks.php before.",
       "parentUuid": "4e04eb01_f32faf38",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9ed18b28",
+        "filename": "repo/includes/UserLanguageLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-06T18:19:21Z",
+      "side": 1,
+      "message": "...but there was no constructor before? \n\nIt\u0027s not a value object, because it uses global state (and should be using services injected via the constructor instead). A value object has no side effects, and thus doesn\u0027t access services.\n\nSee http://misko.hevery.com/2008/09/30/to-new-or-not-to-new/ for what I mean. It\u0027s not gospel, and I see a big problem right now, but it\u0027s somethign to keep in mind.\n\nMy suggestion would be to pass the user as a parameter to the methods, not have it as a member.",
+      "parentUuid": "4e04eb01_3863aea8",
       "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_7eca3f72",
+        "filename": "repo/tests/phpunit/includes/UserLanguageLookupDouble.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-06T18:19:21Z",
+      "side": 1,
+      "message": "You could mock the user object, which would give you control over the user settings it returns. \n\nIdeally, there would be a UserSettings service injected into the UserLanguageObject which you could mock.\n\nOverall, this is pretty hack, but ok if the alternative is more messy. I\u0027d give mockign the user object a try.",
+      "parentUuid": "4e04eb01_98e3e231",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_f3920f4e",
         "filename": "repo/tests/phpunit/includes/UserLanguagesTest.php",
         "patchSetId": 6
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "Because explode( \u0027|\u0027, \u0027\u0027 ) returns array( \u0027\u0027 ) which is not what I want. It\u0027s only for the test setup, not \"needed\" in production. I could inline this 4 times. Or make the provider return an array of arrays of arrays. Which is ugly and unmaintainable.",
       "parentUuid": "4e04eb01_f3920f4e",
+      "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5ec78367",
+        "filename": "repo/tests/phpunit/includes/UserLanguagesTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-06T18:19:21Z",
+      "side": 1,
+      "message": "oh, right, i see. fine, then.",
+      "parentUuid": "4e04eb01_18f0f2f9",
       "revId": "628bbde50f29a466ef694935ee3744c5092715ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
