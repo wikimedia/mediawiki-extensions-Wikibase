@@ -33,6 +33,24 @@
       "revId": "50a728ee6b9e19e93d68b5a46e8564d90b076cdb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_bd6d70c9",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-06T14:09:04Z",
+      "side": 1,
+      "message": "do \"$settings-\u003egetSetting( \u0027repoDatabase\u0027 ) \u003d\u003d\u003d false\" as a proxy for this wiki is repo? \n\nnot convinced that\u0027s more clear and less error prone, though don\u0027t have a better suggestion at the moment.  could work though.\n\nIf we find a better approach, then I think it should be applied to all the settings that use \"thisWikiIsTheRepo\".",
+      "parentUuid": "4e04eb01_dd039c0e",
+      "revId": "50a728ee6b9e19e93d68b5a46e8564d90b076cdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
