@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_38116efc",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:10:46Z",
+      "side": 1,
+      "message": "Doesn\u0027t this invert the default compared to how it was before?\nBefore: default\u003dtrue?false:true, so default\u003dfalse.\nAfter: default\u003dtrue.",
+      "revId": "5ce228602e1acd26715ecc0393a0721f5b3312e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f8de6643",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:10:46Z",
+      "side": 1,
+      "message": "Should this have a FIXME or something like that to have it removed some day?",
+      "revId": "5ce228602e1acd26715ecc0393a0721f5b3312e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_38c72e69",
+        "filename": "client/includes/recentchanges/RecentChangesFilterOptions.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:10:46Z",
+      "side": 1,
+      "message": "Not really better, just a suggestion, maybe you like it.\nif ( isset( $this-\u003eopts[\u0027hidewikidata\u0027] ) ) {\n\treturn $this-\u003eopts[\u0027hidewikidata\u0027] \u003d\u003d\u003d true;\n}\nif ( isset( $this-\u003eopts[\u0027hidewikibase\u0027] ) ) {\n\treturn $this-\u003eopts[\u0027hidewikibase\u0027] \u003d\u003d\u003d true;\n}\nreturn false;",
+      "revId": "5ce228602e1acd26715ecc0393a0721f5b3312e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d8adea99",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFilterOptionsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-06T16:10:46Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be changed to \"base\" too?",
+      "revId": "5ce228602e1acd26715ecc0393a0721f5b3312e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
