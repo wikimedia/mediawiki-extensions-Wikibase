@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_0209a3e0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-06T11:13:00Z",
+      "side": 1,
+      "message": "then it requires saving options. (note there is some caching going on also)\n\nI think it\u0027s better to handle updating options with a maintenance script",
+      "parentUuid": "4e04eb01_39062d24",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_c409a030",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 4
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_c20e1be8",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-06T11:13:00Z",
+      "side": 1,
+      "message": "should be done consistently as the other settings below. and where is repoDatabaseName setting? in lib?",
+      "parentUuid": "4e04eb01_2424c4ac",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_843278ed",
         "filename": "client/includes/recentchanges/RecentChangesFilterOptions.php",
         "patchSetId": 4
@@ -64,6 +100,24 @@
       "writtenOn": "2014-03-03T14:18:15Z",
       "side": 1,
       "message": "Is this related to the MagicWord change?",
+      "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a2f78fcf",
+        "filename": "client/includes/recentchanges/RecentChangesFilterOptions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-06T11:13:00Z",
+      "side": 1,
+      "message": "how is it not related? \"removing references to wikidata\"?",
+      "parentUuid": "4e04eb01_843278ed",
       "revId": "13d7316f1ae5d4240178e36dd9bb23ac8f123f09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
