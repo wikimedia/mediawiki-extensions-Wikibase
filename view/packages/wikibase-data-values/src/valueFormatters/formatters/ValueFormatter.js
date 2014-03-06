@@ -48,6 +48,8 @@
 		 * @since 0.1
 		 *
 		 * @param {dataValues.DataValue} dataValue
+		 * @param {string} [dataTypeId]
+		 * @param {string} [outputType] The output's preferred MIME type
 		 *
 		 * @return {$.Promise}
 		 *         Parameters:
