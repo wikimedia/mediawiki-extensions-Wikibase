@@ -16,6 +16,7 @@ use Wikibase\Lib\SnakFormatter;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group FormatSnakValueAPI
  *
  * @group medium
  *
@@ -38,6 +39,11 @@ class FormatSnakValueTest extends \ApiTestCase {
 			TimeValue::PRECISION_DAY,
 			TimeFormatter::CALENDAR_GREGORIAN );
 
+		$november = new TimeValue( '+00000002013-11-10T00:00:00Z',
+			1 * 60 * 60, 0, 0,
+			TimeValue::PRECISION_MONTH,
+			TimeFormatter::CALENDAR_GREGORIAN );
+
 		return array(
 			array( new StringValue( 'test' ),
 				null,
@@ -50,6 +56,12 @@ class FormatSnakValueTest extends \ApiTestCase {
 				null,
 				array( TimeFormatter::OPT_LANG => 'en' ),
 				'/^11 November 2013$/' ),
+
+			array( $november,
+				null,
+				null,
+				array( TimeFormatter::OPT_LANG => 'en' ),
+				'/^November 2013$/' ),
 
 			/* // TimeFormatter is currently bypassed; This test can only work once we start using it again.
 			array( $november11,
