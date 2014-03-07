@@ -9,7 +9,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @licence GNU GPL v2+
@@ -30,7 +29,7 @@ class ClaimDeserializer implements Deserializer {
 	/**
 	 * @param mixed $serialization
 	 *
-	 * @return SnakList
+	 * @return Claim
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
