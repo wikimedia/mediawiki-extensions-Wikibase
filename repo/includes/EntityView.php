@@ -9,6 +9,10 @@ use InvalidArgumentException;
 use Language;
 use ParserOutput;
 use SpecialPageFactory;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -36,6 +40,11 @@ abstract class EntityView extends ContextSource {
 	protected $entityRevisionLookup;
 
 	/**
+	 * @var EntityLookup
+	 */
+	protected $entityLookup;
+
+	/**
 	 * @var EntityTitleLookup
 	 */
 	protected $entityTitleLookup;
@@ -59,6 +68,16 @@ abstract class EntityView extends ContextSource {
 	 * @var ParserOutputJsConfigBuilder
 	 */
 	protected $configBuilder;
+
+	/**
+	 * @var EntityInfoTermLookup
+	 */
+	protected $entityTermLookup;
+
+	/**
+	 * @var EntityIdHtmlLinkFormatter
+	 */
+	protected $entityIdHtmlLinkFormatter;
 
 	/**
 	 * @var ClaimHtmlGenerator
@@ -88,6 +107,7 @@ abstract class EntityView extends ContextSource {
 	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 *
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
@@ -99,6 +119,7 @@ abstract class EntityView extends ContextSource {
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityInfoBuilder $entityInfoBuilder,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		SerializationOptions $options,
 		ParserOutputJsConfigBuilder $configBuilder
@@ -112,6 +133,7 @@ abstract class EntityView extends ContextSource {
 		$this->setContext( $context );
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityInfoBuilder = $entityInfoBuilder;
+		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->options = $options;
 		$this->configBuilder = $configBuilder;
@@ -119,15 +141,33 @@ abstract class EntityView extends ContextSource {
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->textInjector = new TextInjector();
 
+		$options = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => $this->getLanguage(),
+		) );
+		if ( $this->options->hasOption( 'languages' ) ) {
+			$languageFallbackChains = $this->options->getLanguageFallbackChains();
+			$languageCode = $this->getLanguage()->getCode();
+			if ( isset( $languageFallbackChains[$languageCode] ) ) {
+				$options->setOption( 'languages', $languageFallbackChains[$languageCode] );
+			}
+		}
+		$this->entityTermLookup = new EntityInfoTermLookup( array() );
+		// FIXME: This should use a builder
+		$this->entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter(
+			$options,
+			$this->entityTermLookup,
+			$this->entityTitleLookup
+		);
+
 		// @todo inject in constructor
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$this->entityIdHtmlLinkFormatter
 		);
 
 		$this->claimHtmlGenerator = new ClaimHtmlGenerator(
 			$snakHtmlGenerator,
-			$entityTitleLookup
+			$this->entityIdHtmlLinkFormatter
 		);
 	}
 
@@ -535,7 +575,8 @@ abstract class EntityView extends ContextSource {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 
-		$propertyInfo = $this->getPropertyInfo( $entity, $this->getLanguage()->getCode() );
+		$entityInfo = $this->getEntityInfo( $entity, $this->getLanguage()->getCode() );
+		$this->entityTermLookup->setEntityInfo( $entityInfo );
 
 		/**
 		 * @var string $claimsHtml
@@ -549,9 +590,9 @@ abstract class EntityView extends ContextSource {
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
 			$key = $propertyId->getSerialization();
 			$propertyLabel = $key;
-			if ( isset( $propertyInfo[$key] ) && !empty( $propertyInfo[$key]['labels'] ) ) {
-				$propertyInfoLabel = reset( $propertyInfo[$key]['labels'] );
-				$propertyLabel = $propertyInfoLabel['value'];
+			if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
+				$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
+				$propertyLabel = $entityInfoLabel['value'];
 			}
 
 			$propertyLink = \Linker::link(
@@ -564,7 +605,6 @@ abstract class EntityView extends ContextSource {
 			foreach( $claims as $claim ) {
 				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 					$claim,
-					$propertyInfo,
 					$htmlForEditSection
 				);
 			}
@@ -652,7 +692,7 @@ abstract class EntityView extends ContextSource {
 	 * @todo: We may also want to have the descriptions, in addition to the labels
 	 * @return array[] Property info array that maps property IDs to labels.
 	 */
-	protected function getPropertyInfo( Entity $entity, $languageCode ) {
+	protected function getEntityInfo( Entity $entity, $languageCode ) {
 		wfProfileIn( __METHOD__ );
 		// TODO: Share cache with PropertyLabelResolver
 		// TODO: ... or share info with getBasicEntityInfo.

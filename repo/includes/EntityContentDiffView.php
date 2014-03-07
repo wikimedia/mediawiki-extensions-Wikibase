@@ -73,7 +73,10 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$entityTermLookup = new EntityRetrievingTermLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityLookup()
+		);
+		$labelFormatter = new EntityIdLabelFormatter( $options, $entityTermLookup );
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
 		$formatterFactory = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory();

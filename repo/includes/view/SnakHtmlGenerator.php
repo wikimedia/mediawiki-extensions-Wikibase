@@ -4,7 +4,7 @@ namespace Wikibase\View;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\EntityTitleLookup;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakFormatter;
@@ -31,43 +31,44 @@ class SnakHtmlGenerator {
 	/**
 	 * @since 0.5
 	 *
-	 * @var EntityTitleLookup
+	 * @var EntityIdHtmlLinkFormatter
 	 */
-	protected $entityTitleLookup;
+	protected $entityIdHtmlLinkFormatter;
 
 	/**
 	 * @param SnakFormatter $snakFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
+		EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter
 	) {
 		$this->snakFormatter = $snakFormatter;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityIdHtmlLinkFormatter = $entityIdHtmlLinkFormatter;
 	}
 
 	/**
 	 * Generates the HTML for a single snak.
 	 *
 	 * @param Snak $snak
-	 * @param array[] $propertyInfo
 	 * @param bool $showPropertyLink
 	 *
 	 * @return string
 	 */
-	public function getSnakHtml( Snak $snak, array $propertyInfo, $showPropertyLink = false ) {
-		$snakViewVariation = $this->getSnakViewVariation( $snak );
-		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
-
+	public function getSnakHtml( Snak $snak, $showPropertyLink = false ) {
+		$propertyLink = '';
+		$snakViewCssClass = 'wb-snakview-variation-' . $this->getSnakViewVariation( $snak );
 		$formattedValue = $this->getFormattedSnakValue( $snak );
+
+		if ( $showPropertyLink ) {
+			$propertyLink = $this->entityIdHtmlLinkFormatter->formatEntityId(
+				$snak->getPropertyId()
+			);
+		}
 
 		if ( $formattedValue === '' ) {
 			$formattedValue = '&nbsp;';
 		}
-
-		$propertyLink = $showPropertyLink ?
-			$this->makePropertyLink( $snak, $propertyInfo, $showPropertyLink ) : '';
 
 		$html = wfTemplate( 'wb-snak',
 			// Display property link only once for snaks featuring the same property:
@@ -77,30 +78,6 @@ class SnakHtmlGenerator {
 		);
 
 		return $html;
-	}
-
-	/**
-	 * @param Snak $snak
-	 * @param array[] $propertyInfo
-	 *
-	 * @return string
-	 */
-	private function makePropertyLink( Snak $snak, array $propertyInfo ) {
-		$propertyId = $snak->getPropertyId();
-		$key = $propertyId->getSerialization();
-		$propertyLabel = $key;
-		if ( isset( $propertyInfo[$key] ) && !empty( $propertyInfo[$key]['labels'] ) ) {
-			$propertyInfoLabel = reset( $propertyInfo[$key]['labels'] );
-			$propertyLabel = $propertyInfoLabel['value'];
-		}
-
-		// @todo use EntityIdHtmlLinkFormatter here
-		$propertyLink = \Linker::link(
-			$this->entityTitleLookup->getTitleForId( $propertyId ),
-			htmlspecialchars( $propertyLabel )
-		);
-
-		return $propertyLink;
 	}
 
 	/**
@@ -121,6 +98,7 @@ class SnakHtmlGenerator {
 	 */
 	protected function getFormattedSnakValue( $snak ) {
 		try {
+			// TODO: Pass info about the entities used in the snak
 			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {
 			return $this->getInvalidSnakMessage();

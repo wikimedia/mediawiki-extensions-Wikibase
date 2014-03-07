@@ -4,11 +4,10 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\EntityLookup;
+use Wikibase\EntityTermLookup;
 use Wikibase\LanguageFallbackChain;
 
 /**
@@ -18,6 +17,7 @@ use Wikibase\LanguageFallbackChain;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  *
  * @todo: add support for language fallback chains
  */
@@ -38,23 +38,26 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	const FALLBACK_NONE = 2;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityTermLookup
 	 */
-	protected $entityLookup;
+	protected $entityTermLookup;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param FormatterOptions $options Supported options: OPT_RESOLVE_ID (boolean),
 	 *        OPT_LABEL_FALLBACK (FALLBACK_XXX)
-	 * @param EntityLookup $entityLookup
+	 * @param EntityTermLookup $entityTermLookup
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
+	public function __construct(
+		FormatterOptions $options,
+		EntityTermLookup $entityTermLookup
+	) {
 		parent::__construct( $options );
 
-		$this->entityLookup = $entityLookup;
+		$this->entityTermLookup = $entityTermLookup;
 
 		$this->defaultOption( self::OPT_RESOLVE_ID, true );
 		$this->defaultOption( self::OPT_LABEL_FALLBACK, self::FALLBACK_PREFIXED_ID );
@@ -78,25 +81,20 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	}
 
 	/**
-	 * Format an EntityId data value
+	 * @see EntityIdFormatter::formatEntityId
 	 *
-	 * @since 0.4
+	 * @param EntityId $entityId
+	 * @param bool $exists
 	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
+	 * @throws FormattingException
 	 * @return string
-	 *
-	 * @throws RuntimeException
-	 * @throws InvalidArgumentException
 	 */
-	public function format( $value ) {
-		$value = $this->unwrapEntityId( $value );
-
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
 		$label = null;
 
 		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
 			try {
-				$label = $this->lookupItemLabel( $value );
+				$label = $this->lookupEntityLabel( $entityId );
 			} catch ( OutOfBoundsException $ex ) {
 				/* Use fallbacks below */
 			}
@@ -104,75 +102,55 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 
 		if ( !is_string( $label ) ) {
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
+				case self::FALLBACK_PREFIXED_ID:
+					$label = parent::formatEntityId( $entityId, $exists );
+					break;
 				case self::FALLBACK_EMPTY_STRING:
 					$label = '';
 					break;
-				case self::FALLBACK_PREFIXED_ID:
-					$label = $value->getPrefixedId();
-					break;
 				default:
-					throw new FormattingException( 'No label found for ' . $value );
+					throw new FormattingException( 'No label found for ' . $entityId );
 			}
 		}
 
-		assert( is_string( $label ) );
 		return $label;
 	}
 
 	/**
-	 * Unwrap an EntityId value which might be wrapped in an EntityIdValue
+	 * @param EntityId $entityId
 	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
-	 * @return EntityId
-	 *
-	 * @throws InvalidArgumentException
+	 * @return bool
 	 */
-
-	protected function unwrapEntityId( $value ) {
-		if ( $value instanceof EntityIdValue ) {
-			$value = $value->getEntityId();
+	protected function entityIdExists( EntityId $entityId ) {
+		try {
+			// FIXME: This "misuse" of the interface is not nice.
+			$this->entityTermLookup->getLabelForId( $entityId, null );
+		} catch ( OutOfBoundsException $ex ) {
+			return false;
 		}
 
-		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
-		}
-
-		return $value;
+		return true;
 	}
 
 	/**
-	 * Lookup a label for an entity
-	 *
-	 * @since 0.4
-	 *
 	 * @param EntityId $entityId
 	 *
 	 * @throws OutOfBoundsException If an entity with that ID does not exist.
-	 * @return string|bool False if no label was found in the language or language fallback chain.
+	 * @return string|null Null if no label was found in the language or language fallback chain.
 	 */
-	protected function lookupItemLabel( EntityId $entityId ) {
-		$entity = $this->entityLookup->getEntity( $entityId );
-
-		if ( $entity === null ) {
-			throw new OutOfBoundsException( "An Entity with the id $entityId does not exist" );
-		}
-
-		/* @var LanguageFallbackChain $languageFallbackChain */
+	protected function lookupEntityLabel( EntityId $entityId ) {
 		if ( $this->options->hasOption( 'languages' ) ) {
+			/* @var LanguageFallbackChain $languageFallbackChain */
 			$languageFallbackChain = $this->getOption( 'languages' );
 
-			$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
+			return $this->entityTermLookup->getLabelValueForId( $entityId, $languageFallbackChain );
+		} elseif ( $this->options->hasOption( self::OPT_LANG ) ) {
+			$languageCode = $this->getOption( self::OPT_LANG );
 
-			if ( $extractedData === null ) {
-				return false;
-			} else {
-				return $extractedData['value'];
-			}
-		} else {
-			$lang = $this->getOption( self::OPT_LANG );
-			return $entity->getLabel( $lang );
+			return $this->entityTermLookup->getLabelForId( $entityId, $languageCode );
 		}
+
+		return null;
 	}
 
 }

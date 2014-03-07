@@ -12,6 +12,8 @@ use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRetrievingTermLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
@@ -29,6 +31,11 @@ class WikibaseValueFormatterBuilders {
 	 * @var EntityLookup
 	 */
 	protected $entityLookup;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $entityTitleLookup;
 
 	/**
 	 * @var Language
@@ -100,15 +107,18 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	/**
-	 * @param EntityLookup $lookup
+	 * @param EntityLookup $entityLookup
 	 * @param Language $defaultLanguage
+	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
-		EntityLookup $lookup,
-		Language $defaultLanguage
+		EntityLookup $entityLookup,
+		Language $defaultLanguage,
+		EntityTitleLookup $entityTitleLookup = null
 	) {
-		$this->entityLookup = $lookup;
+		$this->entityLookup = $entityLookup;
 		$this->defaultLanguage = $defaultLanguage;
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -499,7 +509,8 @@ class WikibaseValueFormatterBuilders {
 	 * @return EntityIdLabelFormatter
 	 */
 	protected static function newEntityIdFormatter( FormatterOptions $options, $builders ) {
-		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+		$entityTermLookup = new EntityRetrievingTermLookup( $builders->entityLookup );
+		return new EntityIdLabelFormatter( $options, $entityTermLookup );
 	}
 
 	/**
@@ -512,7 +523,9 @@ class WikibaseValueFormatterBuilders {
 	 * @return EntityIdHtmlLinkFormatter
 	 */
 	protected static function newEntityIdHtmlLinkFormatter( FormatterOptions $options, $builders ) {
-		return new EntityIdHtmlLinkFormatter( $options, $builders->entityLookup );
+		$entityTermLookup = new EntityRetrievingTermLookup( $builders->entityLookup );
+		return new EntityIdHtmlLinkFormatter( $options, $entityTermLookup,
+			$builders->entityTitleLookup );
 	}
 
 	/**
@@ -582,4 +595,5 @@ class WikibaseValueFormatterBuilders {
 
 		return $escapingFormatters;
 	}
+
 }
