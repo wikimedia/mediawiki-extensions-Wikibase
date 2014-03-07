@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_7b05a615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-07T22:53:04Z",
+      "side": 1,
+      "message": "not deployed... so not that hot :)",
+      "revId": "b9cec961eb1e6ac5337638378a6f3ebb888f45fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_db127a63",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-07T22:53:04Z",
+      "side": 1,
+      "message": "this shouldn\u0027t be done inline",
+      "revId": "b9cec961eb1e6ac5337638378a6f3ebb888f45fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
