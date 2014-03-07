@@ -937,6 +937,27 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Remove span tag (added by Cirrus) placed around title search hit for entity titles
+	 * to highlight matches in bold.
+	 *
+	 * @todo highlight the Q## part of the entity link formatting and highlight label matches
+	 *
+	 * @param string &$link_t
+	 * @param string &$titleSnippet
+	 * @param SearchResult $result
+	 */
+	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
+		$title = $result->getTitle();
+		$entityNamespaces = NamespaceUtils::getEntityNamespaces();
+
+		if ( in_array( $title->getNamespace(), $entityNamespaces ) ) {
+			$titleSnippet = $title->getPrefixedText();
+		}
+
+		return true;
+	}
+
+	/**
 	 * Handler for the TitleGetRestrictionTypes hook.
 	 *
 	 * Implemented to prevent people from protecting pages from being
