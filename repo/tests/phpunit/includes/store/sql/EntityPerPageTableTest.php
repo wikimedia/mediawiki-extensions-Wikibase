@@ -37,24 +37,31 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 * @return EntityPerPageTable
 	 */
 	protected function newEntityPerPageTable( array $entities ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$table = new EntityPerPageTable();
 		$table->clear();
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 
 		foreach ( $entities as $entity ) {
 			if ( $entity instanceof Property ) {
 				$entity->setDataTypeId( 'string' );
 			}
 
-			$content = $wikibaseRepo->getEntityContentFactory()->newFromEntity( $entity );
-			$title = $content->getTitle();
+			$title = null;
 
-			if ( !$title || !$title->exists() ) {
-				$content->save( 'test', null, EDIT_NEW );
-				$title = $content->getTitle();
+			if ( $entity->getId() !== null ) {
+				$title = $titleLookup->getTitleForId( $entity->getId() );
 			}
 
-			$table->addEntityPage( $content->getEntity()->getId(), $title->getArticleID() );
+			if ( !$title || !$title->exists() ) {
+				$rev = $store->saveEntity( $entity, "test", $GLOBALS['wgUser'], EDIT_NEW );
+
+				$entity = $rev->getEntity();
+				$title = $titleLookup->getTitleForId( $entity->getId() );
+			}
+
+			$table->addEntityPage( $entity->getId(), $title->getArticleID() );
 		}
 
 		return $table;

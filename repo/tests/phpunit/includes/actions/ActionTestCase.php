@@ -14,8 +14,11 @@ use OutputPage;
 use RequestContext;
 use Title;
 use User;
+use Wikibase\Entity;
+use Wikibase\EntityRevision;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use TestSites;
 
@@ -264,28 +267,24 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @throws MWException
 	 */
 	public static function createTestItem( $handle, array $revisions ) { //@todo: provide this for all kinds of entities.
-		$content = null;
+		global $wgUser;
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		/* @var EntityRevision $rev */
+		/* @var Entity $item */
+		$rev = null;
 
 		foreach ( $revisions as $item ) {
-			if ( $content == null ) {
-				$content = ItemContent::newFromItem( $item );
-				$status = $content->save( "Creating test item '$handle'", null, EDIT_NEW );
+			if ( $rev == null ) {
+				$rev = $store->saveEntity( $item, "Creating test item '$handle'", $wgUser, EDIT_NEW );
 			} else {
-				$item->setId( $content->getItem()->getId()->getNumericId() );
-				$content = ItemContent::newFromItem( $item );
-				$status = $content->save( "Changing test item '$handle'", null, EDIT_UPDATE );
-			}
-
-			if ( !$status->isOK() ) {
-				throw new MWException( "failed to generate test item" );
+				$item->setId( $rev->getEntity()->getId() );
+				$rev = $store->saveEntity( $item, "Changing test item '$handle'", $wgUser, EDIT_UPDATE );
 			}
 		}
 
-		$page = WikiPage::factory( $content->getTitle() );
-		$item = $content->getItem();
-
-		$item->revid = $page->getLatest(); //XXX: hack - glue refid to item, so we can compare it later in resetTestItem()
-
+		$item->revid = $rev->getRevision(); //XXX: hack - glue refid to item, so we can compare it later in resetTestItem()
 		return $item;
 	}
 
