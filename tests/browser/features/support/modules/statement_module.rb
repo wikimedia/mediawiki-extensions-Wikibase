@@ -50,8 +50,8 @@ module StatementPage
     @browser.element(css: ".wb-claimlistview:nth-child(#{group_index}) div.wb-claim-name")
   end
 
-  def statement_string_value_element(group_index, claim_index)
-    @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//textarea[contains(@class, 'valueview-input')]")
+  def statement_string_value(group_index, claim_index)
+    @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//div[contains(@class, 'valueview-instaticmode')]").text
   end
 
   def edit_claim(group_index, claim_index)
