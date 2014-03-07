@@ -2,17 +2,15 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
 use MediaWikiTestCase;
-use OutputPage;
 use RequestContext;
 use Title;
-use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Claim;
-use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -20,16 +18,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\EntityInfoBuilder;
+use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
-use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\ParserOutputJsConfigBuilder;
@@ -68,6 +63,15 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 	public function getTitleForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getPrefixedId();
 		return Title::makeTitle( NS_MAIN, $name );
+	}
+
+	/**
+	 * @return EntityLookup
+	 */
+	protected function getEntityLookupMock() {
+		$lookup = $this->getMock( 'Wikibase\EntityLookup' );
+
+		return $lookup;
 	}
 
 	/**
@@ -110,8 +114,12 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 	 * @throws InvalidArgumentException
 	 * @return EntityView
 	 */
-	protected function newEntityView( $entityType, EntityInfoBuilder $entityInfoBuilder = null,
-		EntityTitleLookup $entityTitleLookup = null, IContextSource $context = null,
+	protected function newEntityView(
+		$entityType,
+		EntityInfoBuilder $entityInfoBuilder = null,
+		EntityLookup $entityLookup = null,
+		EntityTitleLookup $entityTitleLookup = null,
+		\IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
 	) {
 		if ( !is_string( $entityType ) ) {
@@ -134,6 +142,10 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 
 		if ( !$entityInfoBuilder ) {
 			$entityInfoBuilder = $mockRepo;
+		}
+
+		if ( !$entityLookup ) {
+			$entityLookup = $this->getEntityLookupMock();
 		}
 
 		if ( !$entityTitleLookup ) {
@@ -167,6 +179,7 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			$snakFormatter,
 			$mockRepo,
 			$entityInfoBuilder,
+			$entityLookup,
 			$entityTitleLookup,
 			$options,
 			$configBuilder

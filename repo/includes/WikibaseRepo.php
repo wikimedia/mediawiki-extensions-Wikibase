@@ -19,6 +19,7 @@ use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\i18n\MessageParameterFormatter;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
+use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -43,7 +44,6 @@ use Wikibase\SnakFactory;
 use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Utils;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
@@ -472,7 +472,6 @@ class WikibaseRepo {
 	 */
 	protected function newValueFormatterFactory() {
 		$builders = $this->getValueFormatterBuilders();
-
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		return $factory;
 	}
@@ -511,9 +510,7 @@ class WikibaseRepo {
 
 		$options = new FormatterOptions();
 		$idFormatter = new EntityIdLinkFormatter( $options, $this->getEntityContentFactory() );
-
 		$valueFormatterBuilders = $this->getValueFormatterBuilders();
-
 		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
 			$this->getPropertyDataTypeLookup()
@@ -657,4 +654,5 @@ class WikibaseRepo {
 
 		return $map;
 	}
+
 }

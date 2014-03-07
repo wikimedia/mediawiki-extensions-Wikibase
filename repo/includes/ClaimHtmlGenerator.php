@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use DataValues\DataValue;
+use ValueFormatters\FormatterOptions;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\View\SnakHtmlGenerator;
 
@@ -27,20 +30,20 @@ class ClaimHtmlGenerator {
 	/**
 	 * @since 0.5
 	 *
-	 * @var EntityTitleLookup
+	 * @var EntityIdHtmlLinkFormatter
 	 */
-	protected $entityTitleLookup;
+	protected $entityIdHtmlLinkFormatter;
 
 	/**
 	 * @param SnakHtmlGenerator $snakHtmlGenerator
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter
 	 */
 	public function __construct(
 		SnakHtmlGenerator $snakHtmlGenerator,
-		EntityTitleLookup $entityTitleLookup
+		EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter
 	) {
 		$this->snakHtmlGenerator = $snakHtmlGenerator;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityIdHtmlLinkFormatter = $entityIdHtmlLinkFormatter;
 	}
 
 	/**
@@ -49,17 +52,15 @@ class ClaimHtmlGenerator {
 	 * @since 0.4
 	 *
 	 * @param Claim $claim the claim to render
-	 * @param array[] $entityInfo
 	 * @param null|string $editSectionHtml has the html for the edit section
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim( Claim $claim, array $entityInfo, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Claim $claim, $editSectionHtml = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$claim->getMainSnak(),
-			$entityInfo,
 			false
 		);
 
@@ -67,7 +68,7 @@ class ClaimHtmlGenerator {
 			$claimHtml = wfTemplate( 'wb-claim',
 				$claim->getGuid(),
 				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
+				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
 				$editSectionHtml
 			);
 		} else {
@@ -82,6 +83,7 @@ class ClaimHtmlGenerator {
 				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
 			);
 
+			/** @var \Wikibase\Statement $claim */
 			$referenceList = $claim->getReferences();
 			$referencesHeading = wfMessage(
 				'wikibase-ui-pendingquantitycounter-nonpending',
@@ -92,16 +94,13 @@ class ClaimHtmlGenerator {
 				count( $referenceList )
 			)->text();
 
-			$referencesHtml = $this->getHtmlForReferences(
-				$claim->getReferences(),
-				$entityInfo
-			);
+			$referencesHtml = $this->getHtmlForReferences( $claim->getReferences() );
 
 			$claimHtml = wfTemplate( 'wb-statement',
 				$rankHtml,
 				$claim->getGuid(),
 				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
+				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
 				$editSectionHtml,
 				$referencesHeading,
 				$referencesHtml
@@ -116,11 +115,10 @@ class ClaimHtmlGenerator {
 	 * Generates and returns the HTML representing a claim's qualifiers.
 	 *
 	 * @param Snaks $qualifiers
-	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForQualifiers( Snaks $qualifiers, array $entityInfo ) {
+	protected function getHtmlForQualifiers( Snaks $qualifiers ) {
 		$qualifiersByProperty = new ByPropertyIdArray( $qualifiers );
 		$qualifiersByProperty->buildIndex();
 
@@ -128,8 +126,7 @@ class ClaimHtmlGenerator {
 
 		foreach( $qualifiersByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
-				$qualifiersByProperty->getByPropertyId( $propertyId ),
-				$entityInfo
+				$qualifiersByProperty->getByPropertyId( $propertyId )
 			);
 		}
 
@@ -140,15 +137,14 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a ReferenceList object.
 	 *
 	 * @param ReferenceList $referenceList
-	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReferences( ReferenceList $referenceList, array $entityInfo ) {
+	protected function getHtmlForReferences( ReferenceList $referenceList ) {
 		$referencesHtml = '';
 
 		foreach( $referenceList as $reference ) {
-			$referencesHtml .= $this->getHtmlForReference( $reference, $entityInfo );
+			$referencesHtml .= $this->getHtmlForReference( $reference );
 		}
 
 		return $this->wrapInListview( $referencesHtml );
@@ -166,11 +162,10 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a Reference object.
 	 *
 	 * @param Reference $reference
-	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReference( $reference, array $entityInfo ) {
+	protected function getHtmlForReference( $reference ) {
 		$referenceSnaksByProperty = new ByPropertyIdArray( $reference->getSnaks() );
 		$referenceSnaksByProperty->buildIndex();
 
@@ -178,8 +173,7 @@ class ClaimHtmlGenerator {
 
 		foreach( $referenceSnaksByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
-				$referenceSnaksByProperty->getByPropertyId( $propertyId ),
-				$entityInfo
+				$referenceSnaksByProperty->getByPropertyId( $propertyId )
 			);
 		}
 
@@ -193,16 +187,15 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a list of snaks.
 	 *
 	 * @param Snak[] $snaks
-	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getSnaklistviewHtml( $snaks, array $entityInfo ) {
+	protected function getSnaklistviewHtml( $snaks ) {
 		$snaksHtml = '';
 		$i = 0;
 
 		foreach( $snaks as $snak ) {
-			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, $entityInfo, ( $i++ === 0 ) );
+			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, ( $i++ === 0 ) );
 		}
 
 		return wfTemplate(

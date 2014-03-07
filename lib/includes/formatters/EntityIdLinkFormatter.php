@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Lib;
+
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 
@@ -18,11 +19,12 @@ class EntityIdLinkFormatter extends EntityIdTitleFormatter {
 	 * @see EntityIdFormatter::formatEntityId
 	 *
 	 * @param EntityId $entityId
+	 * @param bool $exists
 	 *
 	 * @return string
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
-		$title = parent::formatEntityId( $entityId );
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
+		$title = parent::formatEntityId( $entityId, $exists );
 
 		return "[[$title]]";
 	}

@@ -31,6 +31,11 @@ HTML;
 <hr class="wb-hr" />
 HTML;
 
+	$templates['wb-entity-undefinedinfo'] =
+		<<<HTML
+$1 <span class="wb-entity-undefinedinfo">$2</span>
+HTML;
+
 	$templates['wb-entity-toc'] =
 <<<HTML
 <div id="toc" class="toc wb-toc">

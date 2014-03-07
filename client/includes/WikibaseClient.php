@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRetrievingTermLookup;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
@@ -193,10 +194,8 @@ final class WikibaseClient {
 		$options = new FormatterOptions( array(
 			EntityIdLabelFormatter::OPT_LANG => $languageCode
 		) );
-
-		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
-
-		return $labelFormatter;
+		$entityTermLookup = new EntityRetrievingTermLookup( $this->getEntityLookup() );
+		return new EntityIdLabelFormatter( $options, $entityTermLookup );
 	}
 
 	/**

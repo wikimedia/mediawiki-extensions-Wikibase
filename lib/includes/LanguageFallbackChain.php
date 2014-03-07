@@ -38,7 +38,7 @@ class LanguageFallbackChain {
 	/**
 	 * Try to fetch the best value in a multilingual data array.
 	 *
-	 * @param string[] $data Multilingual data with language codes as keys
+	 * @param array $data Multilingual data with language codes as keys
 	 *
 	 * @return null|array of three items: array(
 	 * 	'value' => finally fetched and translated value
@@ -52,11 +52,16 @@ class LanguageFallbackChain {
 			$fetchCode = $languageWithConversion->getFetchLanguageCode();
 
 			if ( isset( $data[$fetchCode] ) ) {
-				return array(
-					'value' => $languageWithConversion->translate( $data[$fetchCode] ),
-					'language' => $languageWithConversion->getLanguageCode(),
-					'source' => $languageWithConversion->getSourceLanguageCode(),
-				);
+				// Return pre-build data from an EntityInfoBuilder as it is
+				if ( is_array( $data[$fetchCode] ) ) {
+					return $data[$fetchCode];
+				} else {
+					return array(
+						'value' => $languageWithConversion->translate( $data[$fetchCode] ),
+						'language' => $languageWithConversion->getLanguageCode(),
+						'source' => $languageWithConversion->getSourceLanguageCode(),
+					);
+				}
 			}
 		}
 

@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyNoValueSnak;
@@ -52,9 +52,18 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		$lang = Language::factory( 'en' );
+		$entityTitleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return \Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
+		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
+			$entityLookup,
+			Language::factory( 'en' ),
+			$entityTitleLookup
+		);
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup );
 	}
 

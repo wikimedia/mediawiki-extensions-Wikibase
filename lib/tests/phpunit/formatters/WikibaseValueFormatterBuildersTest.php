@@ -53,7 +53,18 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+		$entityTitleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return \Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
+		return new WikibaseValueFormatterBuilders(
+			$entityLookup,
+			Language::factory( 'en' ),
+			$entityTitleLookup
+		);
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
@@ -492,4 +503,5 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			),
 		);
 	}
+
 }

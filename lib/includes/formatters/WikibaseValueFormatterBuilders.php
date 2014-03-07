@@ -12,6 +12,7 @@ use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRetrievingTermLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -106,16 +107,16 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	/**
-	 * @param EntityLookup $lookup
+	 * @param EntityLookup $entityLookup
 	 * @param Language $defaultLanguage
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
-		EntityLookup $lookup,
+		EntityLookup $entityLookup,
 		Language $defaultLanguage,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		$this->entityLookup = $lookup;
+		$this->entityLookup = $entityLookup;
 		$this->defaultLanguage = $defaultLanguage;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
@@ -511,7 +512,8 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+		$entityTermLookup = new EntityRetrievingTermLookup( $builders->entityLookup );
+		return new EntityIdLabelFormatter( $options, $entityTermLookup );
 	}
 
 	/**
@@ -527,9 +529,10 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
+		$entityTermLookup = new EntityRetrievingTermLookup( $builders->entityLookup );
 		return new EntityIdHtmlLinkFormatter(
 			$options,
-			$builders->entityLookup,
+			$entityTermLookup,
 			$builders->entityTitleLookup
 		);
 	}

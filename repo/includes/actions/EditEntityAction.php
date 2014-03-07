@@ -9,9 +9,9 @@ use IContextSource;
 use Linker;
 use MWException;
 use Page;
+use Revision;
 use SiteSQLStore;
 use Status;
-use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use WebRequest;
@@ -64,7 +64,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$entityTermLookup = new EntityRetrievingTermLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityLookup()
+		);
+		$labelFormatter = new EntityIdLabelFormatter( $options, $entityTermLookup );
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
 		$formatterFactory = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory();
