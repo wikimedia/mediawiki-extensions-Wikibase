@@ -16,6 +16,24 @@
       "revId": "1c53eeee4e44fecd66440984afd26de51e5b77ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b87d77b2",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-07T16:59:17Z",
+      "side": 1,
+      "message": "onUserLoadOptions handles carrying over the old preference values to the new preference to behave same.\n\nwe will need to run a script to update preferences in the database. I see the userOptions.php script in core but don\u0027t think that does quite what we need. So think we need to provide one (in another patch).",
+      "parentUuid": "4e04eb01_b89b3778",
+      "revId": "1c53eeee4e44fecd66440984afd26de51e5b77ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
