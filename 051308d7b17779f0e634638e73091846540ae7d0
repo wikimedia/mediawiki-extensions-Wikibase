@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_182a2b7a",
+        "filename": "tests/browser/features/step_definitions/statement_steps.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-07T14:25:09Z",
+      "side": 1,
+      "message": "Debug output?",
+      "revId": "051308d7b17779f0e634638e73091846540ae7d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
