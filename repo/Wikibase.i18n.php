@@ -2719,8 +2719,6 @@ $messages['bn'] = array(
 	'action-label-update' => 'লেবেল হালনাগাদ',
 	'action-description-remove' => 'বিবরণ মুছুন',
 	'action-description-update' => 'বিবরণ হালনাগাদ',
-	'wikibase-time-precision-annum' => '$1 বছরে',
-	'wikibase-time-precision-10annum' => '$1',
 );
 
 /** Breton (brezhoneg)
@@ -6027,6 +6025,7 @@ $messages['fa'] = array(
 	'wikibase-modifyentity-id' => 'شناسه:',
 	'wikibase-modifyterm-language' => 'زبان:',
 	'special-mergeitems' => 'ادغام دو مورد',
+	'wikibase-mergeitems-intro' => 'اگر شما دو مورد را ادغام می‌کنید، همه برچسب‌ها، توصیفات، نام‌های مستعار، لینک‌های سایت و اضهارات از یک مورد به دیگری حذف خواهد‌شد.',
 	'wikibase-mergeitems-fromid' => 'شناسه برای ادغام از',
 	'wikibase-mergeitems-toid' => 'شناسه برای ادغام به',
 	'wikibase-mergeitems-submit' => 'ادغام موارد',
@@ -6156,38 +6155,31 @@ $messages['fa'] = array(
 	'wikibase-property-summary-wbsetaliases-remove' => 'حذف {{PLURAL:$1|نام مستعار|نام مستعار}} [$2]',
 	'wikibase-property-summary-special-create-property' => 'ایجاد یک ویژگی [$2] با {{PLURAL:$1|مقدار|مقدارها}}',
 	'wikibase-listdatatypes-wikibase-item-head' => 'آیتم',
-	'wikibase-listdatatypes-wikibase-item-body' => 'به آیتم‌های دیگر موجود در این پروژه پیوند بدهید. هنگامی که در حال واردکردن آیتم هستید، ویکی‌داده به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
-* شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
-* بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
-* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
-* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'لینک برای دیگر موارد در پروژه. در طول ورود "مورد" فضای نام در اطلاعات ویکی برای تطبیق ورودی‌ها جستجو خواهد‌شد. این شامل زمینه متن ورودی تنها است.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'رسانه‌های ویکی‌انبار',
-	'wikibase-listdatatypes-commonsmedia-body' => 'به فایل های موجود در ویکی انبار پیوند بدهید. هنگامی که در حال واردکردن نام فایل هستید، ویکی‌انبار به صورت خودکار به یافتن ورودی‌های که با آن بخوانند اقدام می‌کند. ورودی مد نظر، فقط باید متن خام(بدون عدد) باشد.
-* شمای کلی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
-* بخش سلسله مراتبی - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته ای غیرمستقیم به آن ارجاع می‌دهد
-* کوئری - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد
-* تکه - چیزی که شناسانهٔ یکنواخت منبع(یوآرآی)رشته‌ای غیرمستقیم به آن ارجاع می‌دهد', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'لینک برای پوشه‌های ذخیره شده در مدیاویکی عادی. در طول ورود "پوشه" فضای نام عادی ویکی برای تطبیق ورودی‌ها جستجو خواهد‌شد.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'مختصات جغرافیایی',
-	'wikibase-listdatatypes-globe-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سیستم های زئومتریک بیان می شود.
+	'wikibase-listdatatypes-globe-coordinate-body' => 'داده حروفی برای مکان جغرافیایی یک جرم درخشان آسمانی که به صورت طول جغرافیایی-عرض جغرافیایی بر حسب درجه یا بوسیله سامانه‌های زئومتریک بیان می‌شود.
 * عرض جغرافیایی - بخش اول مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (شمالی/جنوبی) مشخص می شود
 * طول جغرافیایی - بخش دوم مقدار داده که به صورت یک رشته و بر حسب (شناوری در هوا، درجه-دقیقه-ثانیه، درجه-دقیقه، درجه-درجه) بیان شده و جهت آن با یک حرف مخفف (خاوری/باختریی) مشخص می شود
-* ارتفاع(اختیاری) - مقدار مشخص(؟)ارتفاع از سطح مرجع، برای کره "زمین" که کره مرجع آن "WGS84" است
-* کره(اختیاری) - مقداری مشخص(؟)که بر حسب جسم آسمانی تعیین شده، به صورت پیشفرض کره "زمین" و "WGS84" است', # Fuzzy
+* ارتفاع(اختیاری) - مقدار مشخص (؟) ارتفاع از سطح مرجع، برای کرهٔ «زمین» که کرهٔ مرجع آن "WGS84" است
+* کره(اختیاری) - مقداری مشخص(؟)که بر حسب جسم آسمانی تعیین شده، به صورت پیشفرض کره «زمین» و "WGS84" است',
 	'wikibase-listdatatypes-quantity-head' => 'کمیت',
-	'wikibase-listdatatypes-quantity-body' => 'داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
-* مقدار - بخشی نامعلوم از رشته(اندازه گیری شده با پیشوندی نامعلوم)
-* یکا - بخشی نامعلوم از رشته(اندازه گیری شده با جسمی غیر استاندارد)
-* دقت(اختیاری) - مقداری معلوم(مشخص) که یکای آن همان یکای مقدار است', # Fuzzy
+	'wikibase-listdatatypes-quantity-body' => 'زمینه داده های حروفی برای یک کمیت که به یک نوع یکای دقیق مربوط می شود. یکا، در واقع با مقدار وارد شده همراه می آید.
+* مقدار - بخشی نامعلوم از رشته(اندازه‌گیری شده با پیشوندی نامعلوم)
+* واحد – ضمنی بخشی از رشته که به صورت پیش فرض به "1" (نقشه برداری به استاندارد بدن معلوم است)
+ * upperbound - مقدار در بالا محدود
+ * lowerbound - مقدار در حد پایین',
 	'wikibase-listdatatypes-monolingual-text-head' => 'متن تک‌زبانه',
 	'wikibase-listdatatypes-monolingual-text-body' => 'داده حروفی به صورت رشته ای که در زبان های دیگر واژه جدیدی برای آن ابداع نشده باشد. این نوع داده رشته ای فقط یک بار تعریف شده و در تمام زبان ها از همان تعریف استفاده می شود. نمونه های بارز این نوع رشته، نام های جغرافیایی هستند که با یک زبان محلی نوشته می شوند و نام های شناسه ای که به یک فرمول شیمیایی یا نام علمی لاتین اختصاص داده می شوند.
 * زبان - مقداری مشخص برای شناساندن متن
 * متن - مقداری مشخص برای رشته ای به زبانی مشخص',
 	'wikibase-listdatatypes-multilingual-text-head' => 'متن چندزبانه',
-	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته ای که می بایست آنرا به سایر زبان ها ترجمه نمود. معمولا برای چیزهایی به کار می رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان های مختلف و با سیستم های نوشتاری مختلف نمود پیدا می کنند.
-* زبان - مقداری معین(معلوم)که زبان به کار رفته در بخش متن را می شناساند
+	'wikibase-listdatatypes-multilingual-text-body' => 'داده حروفی برای رشته‌ای که می‌بایست آن را به سایر زبان‌ها ترجمه نمود. معمولاً برای چیزهایی به کار می‌رود که مورد اقبال عمومی است ولی فاقد صورت نوشتاری محلی است. چیزهایی که در زبان‌های مختلف و با سامانه‌های نوشتاری مختلف نمود پیدا می‌کنند.
+* زبان - مقداری معین که زبان به کار رفته در بخش متن را می‌شناساند
 * متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-string-head' => 'رشته',
-	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سیستم های نوشتاری غیر حرف نگاری می شوند.
+	'wikibase-listdatatypes-string-body' => 'داده حروفی برای یک رشته کارکتر. در مواقعی که صورت نوشتاری یک شناسه بدون تبعیت از زبانی معین نوشته شده باشد، این نوع داده ها زیاد به کار می روند. بعضی اوقات این نوع داده ها در قالب سامانه‌های نوشتاری غیر حرف نگاری می شوند.
 * زبان - مقداری معین برای شناساندن زبان بخش متن
 * متن - مقداری معین برای رشته متغیر مختص آن زبان',
 	'wikibase-listdatatypes-time-head' => 'زمان',
@@ -6234,12 +6226,6 @@ $messages['fa'] = array(
 	'action-label-update' => 'به روز کردن برچسب ها',
 	'action-description-remove' => 'پاک‌کردن توضیحات',
 	'action-description-update' => 'به روز رسانی توضیحات',
-	'wikibase-time-precision-Gannum' => 'در $1 میلیارد سال',
-	'wikibase-time-precision-Mannum' => 'در $1 میلیون سال',
-	'wikibase-time-precision-annum' => 'در $1 سال',
-	'wikibase-time-precision-millennium' => '$1. هزاره',
-	'wikibase-time-precision-century' => '$1. قرن',
-	'wikibase-time-precision-10annum' => '$1 ثانیه',
 );
 
 /** Finnish (suomi)
@@ -6954,12 +6940,6 @@ ffirmation ajoutée}}',
 	'action-label-update' => 'mettre à jour des libellés',
 	'action-description-remove' => 'effacer des descriptions',
 	'action-description-update' => 'mettre à jour des descriptions',
-	'wikibase-time-precision-Gannum' => 'dans $1 milliards d’années',
-	'wikibase-time-precision-Mannum' => 'dans $1 millions d’années',
-	'wikibase-time-precision-annum' => 'dans $1 années',
-	'wikibase-time-precision-millennium' => '$1. millénaire',
-	'wikibase-time-precision-century' => '$1. siècle',
-	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** Franco-Provençal (arpetan)
@@ -7501,12 +7481,6 @@ O seu enderezo IP quedará rexistrado no historial de revisións desta entidade.
 	'action-label-update' => 'actualizar etiquetas',
 	'action-description-remove' => 'eliminar descricións',
 	'action-description-update' => 'actualizar descricións',
-	'wikibase-time-precision-Gannum' => 'en $1 mil millóns de anos',
-	'wikibase-time-precision-Mannum' => 'en $1 millóns de anos',
-	'wikibase-time-precision-annum' => 'en $1 anos',
-	'wikibase-time-precision-millennium' => 'milenio $1',
-	'wikibase-time-precision-century' => 'século $1',
-	'wikibase-time-precision-10annum' => 'anos $1',
 );
 
 /** Swiss German (Alemannisch)
@@ -7546,7 +7520,7 @@ $messages['gu'] = array(
 	'wikibase-description-empty' => 'કોઈ વર્ણન વ્યાખ્યાયિત થયું નથી',
 	'wikibase-description-edit-placeholder' => 'વર્ણન ઉમેરો',
 	'wikibase-sitelink-site-edit-placeholder' => 'સાઈટ',
-	'wikibase-sitelink-page-edit-placeholder' => 'લેખ', # Fuzzy
+	'wikibase-sitelink-page-edit-placeholder' => 'પાનું',
 	'wikibase-terms' => 'અન્ય ભાષાઓમાં',
 	'wikibase-remove' => 'હટાવો',
 	'wikibase-undo-title' => '"$1"ના ફેરફારો પાછા વાળી રહ્યા છીએ',
@@ -7613,7 +7587,7 @@ $messages['gu'] = array(
 	'wikibase-listdatatypes-wikibase-item-head' => 'વસ્તુ',
 	'wikibase-listdatatypes-time-head' => 'સમય',
 	'action-item-create' => 'વસ્તુઓ બનાવો',
-	'action-item-remove' => 'વસ્તુઓ દૂર કરો', # Fuzzy
+	'action-item-remove' => 'વસ્તુઓ દૂર કરો',
 );
 
 /** Hebrew (עברית)
@@ -7912,8 +7886,8 @@ $messages['he'] = array(
 	'wikibase-listdatatypes-globe-coordinate-body' => 'נתונים מפורשים על מיקום גאוגרפי בתור זוג קו־רוחב–קו־אורך ב־gms או במעלות עשרוניות לגוף השמימי הנתון. בררת המחדל היא להשתמש בכדור הארץ ובמערכת גאודזית עולמית (WGS84). מתווספים רזולוציה וטווח.
 * latitude – החלק המשתמע הראשון (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־N/S בסוף
 * longitude – החלק המשתמע השני (float, dms, dm, dd) של מחרוזת נקודות הציון, הכיוון ניתן בסימן בהתחלה או ב־E/W בסוף
-* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "Earth" )"כדור הארץ"), "http://www.wikidata.org/entity/Q2"
-* precision – הדיוק המספרי של נקודת הציון', # Fuzzy
+* globe ערך נתונים מפורש (?), נתון כגוף שמימי כאשר בררת המחדל היא "Earth" ("כדור הארץ"), "http://www.wikidata.org/entity/Q2"
+* precision – הדיוק המספרי של נקודת הציון',
 	'wikibase-listdatatypes-quantity-head' => 'כמות',
 	'wikibase-listdatatypes-quantity-body' => 'שדה נתונים מפורשים שמתייחס ליחידה כלשהי שמודרת היטב. היחידה האמתית אמורה להיות בערכי הנתונים המוזנים.
 * amount – חלק משתמע של המחרוזת (מיפוי של תחילית היחידה אינו ברור)
@@ -7975,12 +7949,6 @@ $messages['he'] = array(
 	'action-label-update' => 'לעדכן תוויות',
 	'action-description-remove' => 'למחוק תיאורים',
 	'action-description-update' => 'לעדכן תיאורים',
-	'wikibase-time-precision-Gannum' => 'ב־$1 מיליארד שנים',
-	'wikibase-time-precision-Mannum' => 'ב־$1 מיליון שנים',
-	'wikibase-time-precision-annum' => 'ב־$1 שנים',
-	'wikibase-time-precision-millennium' => '$1 מילניומים',
-	'wikibase-time-precision-century' => '$1. מאות',
-	'wikibase-time-precision-10annum' => '$1 עשורים',
 );
 
 /** Hindi (हिन्दी)
@@ -9483,12 +9451,6 @@ alla eiginleika og þar að auki gilda gagnagerð.',
 	'action-label-update' => 'uppfæra merkimiða',
 	'action-description-remove' => 'fjarlægja lýsingar',
 	'action-description-update' => 'uppfæra lýsingar',
-	'wikibase-time-precision-Gannum' => 'í $1 milljarða ára',
-	'wikibase-time-precision-Mannum' => 'í $1 milljón ár',
-	'wikibase-time-precision-annum' => 'í $1 ár',
-	'wikibase-time-precision-millennium' => '$1. árþúsundið',
-	'wikibase-time-precision-century' => '$1. öldin',
-	'wikibase-time-precision-10annum' => '$1 áratugurinn',
 );
 
 /** Italian (italiano)
@@ -9856,12 +9818,6 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'action-label-update' => 'aggiornare le etichette',
 	'action-description-remove' => 'cancellare le descrizioni',
 	'action-description-update' => 'aggiornare le descrizioni',
-	'wikibase-time-precision-Gannum' => '$1 miliardi di anni',
-	'wikibase-time-precision-Mannum' => '$1 milioni di anni',
-	'wikibase-time-precision-annum' => '$1 anni',
-	'wikibase-time-precision-millennium' => '$1 millenni',
-	'wikibase-time-precision-century' => '$1 secoli',
-	'wikibase-time-precision-10annum' => 'anni $1',
 );
 
 /** Japanese (日本語)
@@ -12056,12 +12012,6 @@ $messages['mk'] = array(
 	'action-label-update' => 'поднова на етикети',
 	'action-description-remove' => 'бришење на описи',
 	'action-description-update' => 'поднова на описи',
-	'wikibase-time-precision-Gannum' => 'за $1 милијарди години',
-	'wikibase-time-precision-Mannum' => 'за $1 милиони години',
-	'wikibase-time-precision-annum' => 'за $1 години',
-	'wikibase-time-precision-millennium' => '$1. илјадалетие',
-	'wikibase-time-precision-century' => '$1. век',
-	'wikibase-time-precision-10annum' => '$1 децении',
 );
 
 /** Malayalam (മലയാളം)
@@ -14484,10 +14434,6 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 	'action-label-update' => 'aktualizacji etykiet',
 	'action-description-remove' => 'kasowania opisów',
 	'action-description-update' => 'aktualizacji opisów',
-	'wikibase-time-precision-Gannum' => 'w $1 mld lat',
-	'wikibase-time-precision-Mannum' => 'w $1 mln lat',
-	'wikibase-time-precision-millennium' => '$1. tysiąclecie',
-	'wikibase-time-precision-century' => '$1. wiek',
 );
 
 /** Piedmontese (Piemontèis)
@@ -14851,12 +14797,6 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'action-label-update' => 'agiorné dle tichëtte',
 	'action-description-remove' => 'scancelé dle descrission',
 	'action-description-update' => 'agiorné dle descrission',
-	'wikibase-time-precision-Gannum' => "da-sì $1 miliard d'agn",
-	'wikibase-time-precision-Mannum' => "da-sì $1 milion d'agn",
-	'wikibase-time-precision-annum' => 'da-sì $1 agn',
-	'wikibase-time-precision-millennium' => "$1. milen-a d'agn",
-	'wikibase-time-precision-century' => '$1. sécol',
-	'wikibase-time-precision-10annum' => "$1 desen-e d'agn",
 );
 
 /** Pashto (پښتو)
@@ -17827,12 +17767,6 @@ $messages['uk'] = array(
 	'action-label-update' => 'оновлення назв',
 	'action-description-remove' => 'знищити описи',
 	'action-description-update' => 'оновлення описів',
-	'wikibase-time-precision-Gannum' => 'у $1 млрд. років',
-	'wikibase-time-precision-Mannum' => 'у $1 мільйон років',
-	'wikibase-time-precision-annum' => 'у $1 років',
-	'wikibase-time-precision-millennium' => '$1. тисячоліття',
-	'wikibase-time-precision-century' => '$1. століття',
-	'wikibase-time-precision-10annum' => '$1 десятиріччя',
 );
 
 /** Urdu (اردو)
@@ -19208,12 +19142,6 @@ $messages['zh-hans'] = array(
 	'action-label-update' => '更新标签',
 	'action-description-remove' => '清除说明',
 	'action-description-update' => '更新说明',
-	'wikibase-time-precision-Gannum' => '$1十亿年中',
-	'wikibase-time-precision-Mannum' => '$1百万年中',
-	'wikibase-time-precision-annum' => '$1年中',
-	'wikibase-time-precision-millennium' => '$1千年',
-	'wikibase-time-precision-century' => '$1世纪',
-	'wikibase-time-precision-10annum' => '$1',
 );
 
 /** Traditional Chinese (中文（繁體）‎)

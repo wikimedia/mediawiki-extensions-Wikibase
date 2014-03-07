@@ -188,13 +188,16 @@ Note that the default message says the user shall "reload and save", but after a
 {{Identical|Unit}}',
 	'wikibase-timedetails-time' => 'Label used for the rendered version of a time value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-timedetails-isotime' => 'Label used for the "isotime" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
-	'wikibase-timedetails-timezone' => 'Label used for the "timezone" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-timedetails-timezone' => 'Label used for the "timezone" field of a time value when showing a detailed representation of the time, e.g. in a diff.
+{{Identical|Time zone}}',
 	'wikibase-timedetails-calendar' => 'Label used for the "calendar" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-timedetails-precision' => 'Label used for the "precision" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-timedetails-before' => 'Label used for the "before" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-timedetails-after' => 'Label used for the "after" field of a time value when showing a detailed representation of the time, e.g. in a diff.',
-	'wikibase-globedetails-longitude' => 'Label used for the "longitude" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
-	'wikibase-globedetails-latitude' => 'Label used for the "latitude" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
+	'wikibase-globedetails-longitude' => 'Label used for the "longitude" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.
+{{Identical|Longitude}}',
+	'wikibase-globedetails-latitude' => 'Label used for the "latitude" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.
+{{Identical|Latitude}}',
 	'wikibase-globedetails-precision' => 'Label used for the "precision" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-globedetails-globe' => 'Label used for the "globe" field of a globecoordinate value when showing a detailed representation of the time, e.g. in a diff.',
 	'wikibase-replicationnote' => 'Note telling the user that it can take a few minutes until the made changes are visible on all wikis.
@@ -307,7 +310,6 @@ Parameters:
 {{Identical|Item}}',
 	'datatypes-type-commonsMedia' => 'The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).',
 	'version-wikibase' => 'Name of the Wikibase extension collection, used on [[Special:Version]]',
-
 	'wikibase-time-precision-Gannum' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 1 billion of years
 {{Related|Wikibase-time-precision}}',
 	'wikibase-time-precision-Mannum' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 1 million of years
@@ -320,7 +322,6 @@ Parameters:
 {{Related|Wikibase-time-precision}}',
 	'wikibase-time-precision-10annum' => '!!DO NOT TRANSLATE!! Used to present a point in time with the precession of 10 years
 {{Related|Wikibase-time-precision}}',
-
 	'wikibase-time-precision-BCE-Gannum' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 1 billion of years
 {{Related|Wikibase-time-precision}}',
 	'wikibase-time-precision-BCE-Mannum' => '!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 1 million of years
@@ -1262,6 +1263,7 @@ $messages['eo'] = array(
 /** Spanish (español)
  * @author Armando-Martin
  * @author Dalton2
+ * @author Ihojose
  * @author Pegna
  * @author Savh
  * @author Vivaelcelta
@@ -1297,6 +1299,16 @@ $messages['es'] = array(
 	'wikibase-error-ui-link-exists' => 'No se puede vincular a esta página porque otro elemento ya se vincula a ella.',
 	'wikibase-error-ui-session-failure' => 'Tu sesión ha caducado. Inicia la sesión de nuevo.',
 	'wikibase-error-ui-edit-conflict' => 'Hay un conflicto de edición. Por favor, vuelve a cargar y guarda de nuevo.',
+	'wikibase-timedetails-time' => 'Tiempo',
+	'wikibase-timedetails-timezone' => 'Zona horaria',
+	'wikibase-timedetails-calendar' => 'Calendario',
+	'wikibase-timedetails-precision' => 'Precisión',
+	'wikibase-timedetails-before' => 'Antes',
+	'wikibase-timedetails-after' => 'Después',
+	'wikibase-globedetails-longitude' => 'Longitud',
+	'wikibase-globedetails-latitude' => 'Latitud',
+	'wikibase-globedetails-precision' => 'Precisión',
+	'wikibase-globedetails-globe' => 'Globo',
 	'wikibase-replicationnote' => 'Tenga en cuenta que puede tardar varios minutos, hasta que los cambios sean visibles en todas las wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Páginas de Wikipedia con enlaces hacia este elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
@@ -1392,6 +1404,7 @@ $messages['eu'] = array(
  * @author Dalba
  * @author Ebraminio
  * @author Ladsgroup
+ * @author Mahan
  * @author Reza1615
  * @author Rtemis
  * @author ZxxZxxZ
@@ -1434,7 +1447,18 @@ $messages['fa'] = array(
 	'wikibase-quantitydetails-upperbound' => 'حد بالا',
 	'wikibase-quantitydetails-lowerbound' => 'حد پایین',
 	'wikibase-quantitydetails-unit' => 'واحد',
-	'wikibase-replicationnote' => 'لطفا توجه کنید چند دقیقه زمان لازم است تا تغییرات در همهٔ ویکی‌ها قابل مشاهده باشد.',
+	'wikibase-timedetails-time' => 'زمان',
+	'wikibase-timedetails-isotime' => 'مهر زمان آی‌اس‌اُ',
+	'wikibase-timedetails-timezone' => 'منطقهٔ زمان',
+	'wikibase-timedetails-calendar' => 'تقویم',
+	'wikibase-timedetails-precision' => 'وضوح',
+	'wikibase-timedetails-before' => 'قبل از',
+	'wikibase-timedetails-after' => 'پس از',
+	'wikibase-globedetails-longitude' => 'طول جغرافیایی',
+	'wikibase-globedetails-latitude' => 'عرض جغرافیایی',
+	'wikibase-globedetails-precision' => 'وضوح',
+	'wikibase-globedetails-globe' => 'جهان',
+	'wikibase-replicationnote' => 'لطفاً توجه کنید چند دقیقه زمان لازم است تا تغییرات در همهٔ ویکی‌ها قابل مشاهده باشد.',
 	'wikibase-sitelinks-wikipedia' => 'صفحه‌های ویکی‌پدیا که به این آیتم پیوند دارند',
 	'wikibase-sitelinks-sitename-columnheading' => 'زبان',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'وب‌گاه',
@@ -1538,6 +1562,7 @@ $messages['fi'] = array(
  * @author DavidL
  * @author Gomoko
  * @author Jean-Frédéric
+ * @author Jgaignerot
  * @author Ltrlg
  * @author Metroitendo
  * @author NemesisIII
@@ -1725,6 +1750,7 @@ $messages['gsw'] = array(
 
 /** Hebrew (עברית)
  * @author Amire80
+ * @author Yona b
  */
 $messages['he'] = array(
 	'wikibase-lib-desc' => 'הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client',
@@ -1764,6 +1790,17 @@ $messages['he'] = array(
 	'wikibase-quantitydetails-upperbound' => 'גבול עליון',
 	'wikibase-quantitydetails-lowerbound' => 'גבול תחתון',
 	'wikibase-quantitydetails-unit' => 'יחידה',
+	'wikibase-timedetails-time' => 'זמן',
+	'wikibase-timedetails-isotime' => 'חותם זמן של ISO',
+	'wikibase-timedetails-timezone' => 'אזור זמן',
+	'wikibase-timedetails-calendar' => 'לוח שנה',
+	'wikibase-timedetails-precision' => 'דיוק',
+	'wikibase-timedetails-before' => 'לפני',
+	'wikibase-timedetails-after' => 'אחרי',
+	'wikibase-globedetails-longitude' => 'קו אורך',
+	'wikibase-globedetails-latitude' => 'קו־רוחב',
+	'wikibase-globedetails-precision' => 'דיוק',
+	'wikibase-globedetails-globe' => 'כדור',
 	'wikibase-replicationnote' => 'יש לשים לב לכך שייקח מספר דקות עד שהשינויים יוצגו בכל אתרי הוויקי',
 	'wikibase-sitelinks-wikipedia' => 'דפי ויקיפדיה שמקושרים לפריט הזה',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפה',
@@ -2225,6 +2262,9 @@ $messages['ja'] = array(
 	'wikibase-quantitydetails-upperbound' => '上限値',
 	'wikibase-quantitydetails-lowerbound' => '下限値',
 	'wikibase-quantitydetails-unit' => '単位',
+	'wikibase-timedetails-timezone' => 'タイムゾーン',
+	'wikibase-globedetails-longitude' => '経度',
+	'wikibase-globedetails-latitude' => '緯度',
 	'wikibase-replicationnote' => '変更内容をすべてのウィキに反映させるのに時間がかかる場合があることにご注意ください。',
 	'wikibase-sitelinks-wikipedia' => 'この項目にリンクしているウィキペディアのページ',
 	'wikibase-sitelinks-sitename-columnheading' => '言語',
@@ -2330,6 +2370,7 @@ $messages['kk-cyrl'] = array(
 /** Korean (한국어)
  * @author Hym411
  * @author Kwj2772
+ * @author Priviet
  * @author 관인생략
  * @author 아라
  */
@@ -2371,6 +2412,17 @@ $messages['ko'] = array(
 	'wikibase-quantitydetails-upperbound' => '상한',
 	'wikibase-quantitydetails-lowerbound' => '하한',
 	'wikibase-quantitydetails-unit' => '단위',
+	'wikibase-timedetails-time' => '시간',
+	'wikibase-timedetails-isotime' => 'ISO 타임스탬프',
+	'wikibase-timedetails-timezone' => '시간대',
+	'wikibase-timedetails-calendar' => '달력',
+	'wikibase-timedetails-precision' => '정밀도',
+	'wikibase-timedetails-before' => '이전',
+	'wikibase-timedetails-after' => '이후',
+	'wikibase-globedetails-longitude' => '경도',
+	'wikibase-globedetails-latitude' => '위도',
+	'wikibase-globedetails-precision' => '정밀도',
+	'wikibase-globedetails-globe' => '글로브',
 	'wikibase-replicationnote' => '바뀐 내용이 모든 위키에 보이는데 시간이 걸릴 수 있음을 주의하세요.',
 	'wikibase-sitelinks-wikipedia' => '이 항목을 가리키는 위키백과 문서',
 	'wikibase-sitelinks-sitename-columnheading' => '언어',
@@ -2607,8 +2659,8 @@ $messages['mk'] = array(
 	'wikibase-error-unexpected' => 'Се појави неочекувана грешка.',
 	'wikibase-error-save-generic' => 'Наидов на грешка. Не можам да ги зачувам направените промени.',
 	'wikibase-error-remove-generic' => 'Наидов на грешка при отстранувањето, па затоа постапката не е извршена.',
-	'wikibase-error-save-connection' => 'Не можев да ги зачувам промените бидејќи се појави грешка во линијата. Проверете си ја врската со интернет.',
-	'wikibase-error-remove-connection' => 'Не можев да го извршам отстранувањето бидејќи се појави грешка во линијата. Проверете си ја врската со интернет.',
+	'wikibase-error-save-connection' => 'Не можев да ги зачувам промените бидејќи се појави грешка во линијата. Проверете си ја семрежната врска.',
+	'wikibase-error-remove-connection' => 'Не можев да го извршам отстранувањето бидејќи се појави грешка во линијата. Проверете си ја семрежната врска.',
 	'wikibase-error-save-timeout' => 'Се соочуваме со технички потешкотии. Затоа, не можев да ги зачувам вашите промени.',
 	'wikibase-error-remove-timeout' => 'Се соочуваме со технички потешкотии. Затоа, не можев да го извршам отстранувањето.',
 	'wikibase-error-autocomplete-connection' => 'Не можев да го добијам прилогот на мрежното место. Обидете се подоцна.',
@@ -2945,6 +2997,7 @@ $messages['nds-nl'] = array(
 );
 
 /** Dutch (Nederlands)
+ * @author Basvb
  * @author SPQRobin
  * @author Saruman
  * @author Siebrand
@@ -3634,6 +3687,22 @@ $messages['sl'] = array(
 	'version-wikibase' => 'Wikibaza',
 );
 
+/** Albanian (shqip)
+ * @author GretaDoci
+ */
+$messages['sq'] = array(
+	'wikibase-timedetails-time' => 'Koha',
+	'wikibase-timedetails-timezone' => 'Zona kohore:',
+	'wikibase-timedetails-calendar' => 'Kalendari',
+	'wikibase-timedetails-precision' => 'Saktësi',
+	'wikibase-timedetails-before' => 'Para',
+	'wikibase-timedetails-after' => 'Pas',
+	'wikibase-globedetails-longitude' => 'Gjatësia gjeografike',
+	'wikibase-globedetails-latitude' => 'Gjerësia gjeografike',
+	'wikibase-globedetails-precision' => 'Saktësi',
+	'wikibase-globedetails-globe' => 'Globit',
+);
+
 /** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Milicevic01
  * @author TheStefan12345
@@ -3738,6 +3807,17 @@ $messages['sv'] = array(
 	'wikibase-quantitydetails-upperbound' => 'Övre gräns',
 	'wikibase-quantitydetails-lowerbound' => 'Undre gräns',
 	'wikibase-quantitydetails-unit' => 'Enhet',
+	'wikibase-timedetails-time' => 'Tid',
+	'wikibase-timedetails-isotime' => 'ISO-tidsstämpel',
+	'wikibase-timedetails-timezone' => 'Tidszon',
+	'wikibase-timedetails-calendar' => 'Kalender',
+	'wikibase-timedetails-precision' => 'Precision',
+	'wikibase-timedetails-before' => 'Före',
+	'wikibase-timedetails-after' => 'Efter',
+	'wikibase-globedetails-longitude' => 'Longitud',
+	'wikibase-globedetails-latitude' => 'Latitud',
+	'wikibase-globedetails-precision' => 'Precision',
+	'wikibase-globedetails-globe' => 'Glob',
 	'wikibase-replicationnote' => 'Observera att det kan ta flera minuter tills förändringarna är synliga på alla wikier.',
 	'wikibase-sitelinks-wikipedia' => 'Wikipedia-sidor som är länkade till det här objektet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
@@ -4091,6 +4171,14 @@ $messages['yi'] = array(
 	'wikibase-error-ui-link-exists' => 'איר קענט נישט פֿארלינקען אהער ווײַל אן אנדער בלאט לינקט שוין דארטן.',
 	'wikibase-error-ui-session-failure' => 'אייער סעסיע האט אויפגעהערט. זייט אזוי גוט אריינלאגירן נאכאמאל.',
 	'wikibase-error-ui-edit-conflict' => "ס'האט פאסירט א רעדאקטירונג קאנפליקט. זייט אזוי גוט אנלאדן דעם בלאט און אויפהיטן נאכאמאל.",
+	'wikibase-timedetails-time' => 'צײַט',
+	'wikibase-timedetails-timezone' => 'צײַט זאנע',
+	'wikibase-timedetails-calendar' => 'קאלאענדאר',
+	'wikibase-timedetails-before' => 'פאר',
+	'wikibase-timedetails-after' => 'נאך',
+	'wikibase-globedetails-longitude' => 'געאגראַפֿישע לענג',
+	'wikibase-globedetails-latitude' => 'גארטל־ליניע',
+	'wikibase-globedetails-globe' => 'גלאבוס',
 	'wikibase-replicationnote' => 'גיט אכט אז עס קען דויערן עטלעכע מינוטן ביז די ענדערונגען ווערן זעבאר ביי אלע וויקיס.',
 	'wikibase-sitelinks-wikipedia' => 'וויקיפעדיע בלעטער פארבונדן מיט דעם דאטנאביעקט',
 	'wikibase-sitelinks-sitename-columnheading' => 'שפראַך',
