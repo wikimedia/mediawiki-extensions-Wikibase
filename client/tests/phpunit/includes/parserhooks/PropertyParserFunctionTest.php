@@ -17,7 +17,7 @@ use Wikibase\PropertyParserFunction;
  */
 class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 
-	public function getPropertyParserFunction( $parser, $entityId ) {
+	public function getPropertyParserFunction( \Parser $parser, $entityId ) {
 		$entityLookup = new MockRepository();
 		$propertyLabelResolver = new MockPropertyLabelResolver( $parser->getTargetLanguage(), $entityLookup );
 

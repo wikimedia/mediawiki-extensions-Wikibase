@@ -2,13 +2,13 @@
 
 namespace Wikibase;
 
-use MWException;
 use InvalidArgumentException;
+use MWException;
+use Revision;
 use Status;
 use Title;
 use User;
 use WikiPage;
-use Revision;
 
 /**
  * Factory for EntityContent objects.
@@ -322,4 +322,5 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 
 		return $status;
 	}
+
 }
