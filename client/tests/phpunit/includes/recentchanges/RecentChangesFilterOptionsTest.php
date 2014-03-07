@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Test;
 
 use Wikibase\RecentChangesFilterOptions;
@@ -18,6 +19,7 @@ use FormOptions;
  * @author Marius Hoch < hoo@online.de >
  */
 class RecentChangesFilterOptionsTest extends \MediaWikiTestCase {
+
 	/**
 	 * @dataProvider provideShowWikibaseEdits
 	 *
@@ -35,7 +37,7 @@ class RecentChangesFilterOptionsTest extends \MediaWikiTestCase {
 
 		$settings->setSetting( 'showExternalRecentChanges', $showExternalRecentChanges );
 		$opts = new FormOptions();
-		$opts->add( 'hidewikidata', $hideWikibase );
+		$opts->add( 'hidewikibase', $hideWikibase );
 
 		$recentChangesFilterOptions = new RecentChangesFilterOptions( $opts );
 		$this->assertSame( $expected, $recentChangesFilterOptions->showWikibaseEdits() );
@@ -45,8 +47,9 @@ class RecentChangesFilterOptionsTest extends \MediaWikiTestCase {
 
 	public function provideShowWikibaseEdits() {
 		return array(
+			// hidewikibase is false, but showExternalRecentChanges is true
 			array( true, true, false ),
-			// hidewikidata set
+			// hidewikibase set to true
 			array( false, true, true ),
 			// showExternalRecentChanges is false
 			array( false, false, false ),

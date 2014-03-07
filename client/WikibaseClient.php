@@ -81,6 +81,7 @@ call_user_func( function() {
 	$wgHooks['SpecialRecentChangesQuery'][]				= '\Wikibase\ClientHooks::onSpecialRecentChangesQuery';
 	$wgHooks['SpecialRecentChangesFilters'][]			= '\Wikibase\ClientHooks::onSpecialRecentChangesFilters';
 	$wgHooks['GetPreferences'][]						= '\Wikibase\ClientHooks::onGetPreferences';
+	$wgHooks['UserLoadOptions'][] 				= 'Wikibase\ClientHooks::onUserLoadOptions';
 	$wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
 	$wgHooks['BeforePageDisplay'][]             = '\Wikibase\ClientHooks::onBeforePageDisplayAddJsConfig';
 	$wgHooks['ScribuntoExternalLibraries'][]      = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
