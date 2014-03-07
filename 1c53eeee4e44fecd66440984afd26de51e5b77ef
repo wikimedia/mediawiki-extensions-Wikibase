@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_b89b3778",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-07T15:58:59Z",
+      "side": 1,
+      "message": "that way the old preference values will no longer take effect AFAIS. This would probably require us to run the newOptions maint. script for all client wikis (in case we care)",
+      "revId": "1c53eeee4e44fecd66440984afd26de51e5b77ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
