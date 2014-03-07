@@ -41,6 +41,14 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 			array( array( 'm' => array( 'novalue', 42 ), 'q' => array() ) ),
 			array( array( 'm' => array( 'novalue', 42 ), 'q' => array( null ), 'g' => null ) ),
 			array( array( 'm' => array( 'novalue', 42 ), 'q' => array(), 'g' => 42 ) ),
+
+			array( array(
+				'm' => array( 'novalue', 42 ),
+				'q' => array(),
+				'g' => null,
+				'refs' => array(),
+				'rank' => 'not a rank',
+			) ),
 		);
 	}
 
