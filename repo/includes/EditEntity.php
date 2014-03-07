@@ -803,8 +803,9 @@ class EditEntity {
 
 		// Run edit filter hooks
 		$filterStatus = Status::newGood();
+		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $this->newEntity );
 		if ( !wfRunHooks( 'EditFilterMergedContent',
-			array( $context, $this->newEntity, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
+			array( $context, $entityContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
 
 			# Error messages etc. were handled inside the hook.
 			$filterStatus->setResult( false, $filterStatus->getValue() );
