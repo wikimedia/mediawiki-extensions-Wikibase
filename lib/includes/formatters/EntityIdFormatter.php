@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use ValueFormatters\ValueFormatterBase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -13,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class EntityIdFormatter extends ValueFormatterBase {
 
@@ -21,11 +21,10 @@ class EntityIdFormatter extends ValueFormatterBase {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId|EntityIdValue $value The ID to format
+	 * @param EntityId|EntityIdValue $value The Entity ID to format
 	 *
-	 * @return string
 	 * @throws InvalidArgumentException
-	 * @throws OutOfBoundsException
+	 * @return string
 	 */
 	public function format( $value ) {
 		if ( $value instanceof EntityIdValue ) {
@@ -36,7 +35,34 @@ class EntityIdFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId.' );
 		}
 
-		return $value->getSerialization();
+		return $this->formatEntityId( $value, $this->entityIdExists( $value ) );
+	}
+
+	/**
+	 * TODO: Write test!
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 * @param bool $exists
+	 *
+	 * @return string
+	 */
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
+		return $entityId->getPrefixedId();
+	}
+
+	/**
+	 * TODO: Write test!
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return bool Always true in this default implementation.
+	 */
+	protected function entityIdExists( EntityId $entityId ) {
+		return true;
 	}
 
 }
