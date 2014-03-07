@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 0.7 (dev)
+## Version 0.7 (2014-03-07)
 
 #### Additions
 

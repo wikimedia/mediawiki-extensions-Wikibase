@@ -82,3 +82,4 @@ Daniel Kinzler and Jeroen De Dauw.
 ## See also
 
 * [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization)
+* [Wikibase Internal Serialization](https://github.com/wmde/WikibaseInternalSerialization)
