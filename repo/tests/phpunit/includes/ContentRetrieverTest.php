@@ -7,6 +7,7 @@ use Title;
 use Wikibase\ContentRetriever;
 use Wikibase\Item;
 use Wikibase\ItemContent;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -162,20 +163,20 @@ class ContentRetrieverTest extends \MediaWikiTestCase {
 			'Best city in Germany'
 		);
 
-		$content = new ItemContent( $item );
-		$content->save( 'test', null, EDIT_NEW );
-		$title = $content->getTitle();
-		$page = WikiPage::factory( $title );
+		//NOTE: we are assuming here that the item will get stored as a wiki page!
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+
+		$rev = $store->saveEntity( $item, "test", $GLOBALS['wgUser'], EDIT_NEW );
+		$title = $titleLookup->getTitleForId( $rev->getEntity()->getId() );
 
 		$revIds = array();
 
 		foreach( $descriptions as $description ) {
-			$content->getEntity()->setDescription( 'en', $description );
-			$page->doEditContent( $content, 'edit description' );
-			$revIds[] = $page->getLatest();
+			$item->setDescription( 'en', $description );
 
-			/** @var ItemContent $content */
-			$content = Revision::newFromId( $revIds[count( $revIds ) - 1] )->getContent();
+			$rev = $store->saveEntity( $item, "edit description", $GLOBALS['wgUser'], EDIT_UPDATE );
+			$revIds[] = $rev->getRevision();
 		}
 
 		/**

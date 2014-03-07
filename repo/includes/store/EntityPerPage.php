@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use Iterator;
 use Title;
 
@@ -23,6 +24,7 @@ interface EntityPerPage {
 	 * @param EntityId $entityId
 	 * @param int $pageId
 	 *
+	 * @throws InvalidArgumentException
 	 * @return boolean Success indicator
 	 */
 	public function addEntityPage( EntityId $entityId, $pageId );
@@ -35,6 +37,7 @@ interface EntityPerPage {
 	 * @param EntityId $entityId
 	 * @param int $pageId
 	 *
+	 * @throws InvalidArgumentException
 	 * @return boolean Success indicator
 	 */
 	public function deleteEntityPage( EntityId $entityId, $pageId );
