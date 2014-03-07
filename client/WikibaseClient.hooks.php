@@ -598,7 +598,7 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Adds a toggle for showing/hiding Wikidata entries in recent changes
+	 * Adds a toggle for showing/hiding Wikibase entries in recent changes
 	 *
 	 * @param SpecialRecentChanges $special
 	 * @param array &$filters
@@ -609,11 +609,39 @@ final class ClientHooks {
 		$context = $special->getContext();
 
 		if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
+			// backwards compat
 			$showWikidata = $special->getUser()->getOption( 'rcshowwikidata' );
-			$default = $showWikidata ? false : true;
+			$showWikibase = $special->getUser()->getOption( 'rcshowwikibase' );
+
+			$default = ( $showWikibase || $showWikidata ) ? false : true;
+
 			if ( $context->getUser()->getOption( 'usenewrc' ) === 0 ) {
-				$filters['hidewikidata'] = array( 'msg' => 'wikibase-rc-hide-wikidata', 'default' => $default );
+				$filters['hidewikibase'] = array(
+					'msg' => 'wikibase-rc-hide-wikibase',
+					'default' => $default
+				);
 			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Provides backwards compatibility
+	 *
+	 * @since 0.5
+	 *
+	 * @param User $user
+	 * @param &$options $options
+	 *
+	 * @return boolean
+	 */
+	public static function onUserLoadOptions( User $user, array &$options ) {
+		if ( !isset( $options['rcshowwikibase'] ) && isset( $options['rcshowwikidata'] ) ) {
+			$options['rcshowwikibase'] = $options['rcshowwikidata'];
+
+			// backwards compat
+			$user->setOption( 'rcshowwikibase', $options['rcshowwikidata'] );
 		}
 
 		return true;
@@ -628,9 +656,9 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$prefs ) {
-		$prefs['rcshowwikidata'] = array(
+		$prefs['rcshowwikibase'] = array(
 			'type' => 'toggle',
-			'label-message' => 'wikibase-rc-show-wikidata-pref',
+			'label-message' => 'wikibase-rc-show-wikibase-pref',
 			'section' => 'rc/advancedrc',
 		);
 
@@ -714,7 +742,7 @@ final class ClientHooks {
 			$user->getOption( 'usenewrc' ) ) === false ) {
 			// Allow toggling wikibase changes in case the enhanced watchlist is disabled
 			$filters['hideWikibase'] = array(
-				'msg' => 'wikibase-rc-hide-wikidata',
+				'msg' => 'wikibase-rc-hide-wikibase',
 				'default' => !$user->getBoolOption( 'wlshowwikibase' )
 			);
 		}
