@@ -2,11 +2,10 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
-use Wikibase\Lib\FormattingException;
-use Wikibase\Lib\PropertyNotFoundException;
+use DataValues\DataValue;
+use ValueFormatters\FormatterOptions;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\SnakHtmlGenerator;
 
 /**
@@ -19,7 +18,7 @@ use Wikibase\View\SnakHtmlGenerator;
  *
  * @author H. Snater < mediawiki@snater.com >
  * @author Pragunbhutani
- * @author Katie Filbert < aude.wiki@gmail.com>
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ClaimHtmlGenerator {
 
@@ -31,20 +30,20 @@ class ClaimHtmlGenerator {
 	/**
 	 * @since 0.5
 	 *
-	 * @var EntityTitleLookup
+	 * @var EntityIdHtmlLinkFormatter
 	 */
-	protected $entityTitleLookup;
+	protected $entityIdHtmlLinkFormatter;
 
 	/**
 	 * @param SnakHtmlGenerator $snakHtmlGenerator
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter
 	 */
 	public function __construct(
 		SnakHtmlGenerator $snakHtmlGenerator,
-		EntityTitleLookup $entityTitleLookup
+		EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter
 	) {
 		$this->snakHtmlGenerator = $snakHtmlGenerator;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityIdHtmlLinkFormatter = $entityIdHtmlLinkFormatter;
 	}
 
 	/**
@@ -53,16 +52,17 @@ class ClaimHtmlGenerator {
 	 * @since 0.4
 	 *
 	 * @param Claim $claim the claim to render
+	 * @param array $propertyInfo
 	 * @param null|string $editSectionHtml has the html for the edit section
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim( Claim $claim, $propertyLabels, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Claim $claim, $propertyInfo, $editSectionHtml = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$claim->getMainSnak(),
-			$propertyLabels,
+			$propertyInfo,
 			false
 		);
 
@@ -73,7 +73,7 @@ class ClaimHtmlGenerator {
 			$claimHtml = wfTemplate( 'wb-claim',
 				$claim->getGuid(),
 				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $propertyLabels ),
+				$this->getHtmlForQualifiers( $claim->getQualifiers(), $propertyInfo ),
 				$editSectionHtml
 			);
 
@@ -88,6 +88,7 @@ class ClaimHtmlGenerator {
 				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
 			);
 
+			/** @var \Wikibase\Statement $claim */
 			$referenceList = $claim->getReferences();
 			$referencesHeading = wfMessage(
 				'wikibase-ui-pendingquantitycounter-nonpending',
@@ -100,14 +101,14 @@ class ClaimHtmlGenerator {
 
 			$referencesHtml = $this->getHtmlForReferences(
 				$claim->getReferences(),
-				$propertyLabels
+				$propertyInfo
 			);
 
 			$claimHtml = wfTemplate( 'wb-statement',
 				$rankHtml,
 				$claim->getGuid(),
 				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $propertyLabels ),
+				$this->getHtmlForQualifiers( $claim->getQualifiers(), $propertyInfo ),
 				$editSectionHtml,
 				$referencesHeading,
 				$referencesHtml
@@ -122,11 +123,11 @@ class ClaimHtmlGenerator {
 	 * Generates and returns the HTML representing a claim's qualifiers.
 	 *
 	 * @param Snaks $qualifiers
-	 * @param string[] $propertyLabels
+	 * @param array $propertyInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForQualifiers( Snaks $qualifiers, array $propertyLabels ) {
+	protected function getHtmlForQualifiers( Snaks $qualifiers, array $propertyInfo ) {
 		$qualifiersByProperty = new ByPropertyIdArray( $qualifiers );
 		$qualifiersByProperty->buildIndex();
 
@@ -135,7 +136,7 @@ class ClaimHtmlGenerator {
 		foreach( $qualifiersByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
 				$qualifiersByProperty->getByPropertyId( $propertyId ),
-				$propertyLabels
+				$propertyInfo
 			);
 		}
 
@@ -146,15 +147,15 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a ReferenceList object.
 	 *
 	 * @param ReferenceList $referenceList
-	 * @param string[] $propertyLabels
+	 * @param array $propertyInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReferences( ReferenceList $referenceList, array $propertyLabels ) {
+	protected function getHtmlForReferences( ReferenceList $referenceList, array $propertyInfo ) {
 		$referencesHtml = '';
 
 		foreach( $referenceList as $reference ) {
-			$referencesHtml .= $this->getHtmlForReference( $reference, $propertyLabels );
+			$referencesHtml .= $this->getHtmlForReference( $reference, $propertyInfo );
 		}
 
 		return $this->wrapInListview( $referencesHtml );
@@ -172,11 +173,11 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a Reference object.
 	 *
 	 * @param Reference $reference
-	 * @param string[] $propertyLabels
+	 * @param array $propertyInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReference( $reference, array $propertyLabels ) {
+	protected function getHtmlForReference( $reference, array $propertyInfo ) {
 		$referenceSnaksByProperty = new ByPropertyIdArray( $reference->getSnaks() );
 		$referenceSnaksByProperty->buildIndex();
 
@@ -185,7 +186,7 @@ class ClaimHtmlGenerator {
 		foreach( $referenceSnaksByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
 				$referenceSnaksByProperty->getByPropertyId( $propertyId ),
-				$propertyLabels
+				$propertyInfo
 			);
 		}
 
@@ -199,16 +200,16 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a list of snaks.
 	 *
 	 * @param Snak[] $snaks
-	 * @param string[] $propertyLabels
+	 * @param array $propertyInfo
 	 *
 	 * @return string
 	 */
-	protected function getSnaklistviewHtml( $snaks, array $propertyLabels ) {
+	protected function getSnaklistviewHtml( $snaks, array $propertyInfo ) {
 		$snaksHtml = '';
 		$i = 0;
 
 		foreach( $snaks as $snak ) {
-			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, $propertyLabels, ( $i++ === 0 ) );
+			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, $propertyInfo, ( $i++ === 0 ) );
 		}
 
 		return wfTemplate(
