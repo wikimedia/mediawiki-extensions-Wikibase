@@ -16,6 +16,24 @@
       "revId": "dca8869788e918eb448bbf2354427854936283f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_5848b3ce",
+        "filename": "lib/tests/phpunit/store/MockPropertyInfoStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-07T16:21:57Z",
+      "side": 1,
+      "message": "Ahh! this shouldnt be removed!\nIts a Mock not a test ;p",
+      "parentUuid": "4e04eb01_b8f6978a",
+      "revId": "dca8869788e918eb448bbf2354427854936283f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
