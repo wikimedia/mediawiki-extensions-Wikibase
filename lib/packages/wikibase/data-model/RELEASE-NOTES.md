@@ -2,10 +2,15 @@
 
 ## Version 0.7 (dev)
 
-#### Improvements
+#### Additions
 
 * Added TypedSnak value object
 * Added SiteLinkList value object
+* Added Claims::getBestClaims
+* Added Claims::getByRank
+
+#### Improvements
+
 * The PHPUnit bootstrap file now works again on Windows
 * Changed class loading from PSR-0 to PSR-4
 
