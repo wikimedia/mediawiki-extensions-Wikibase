@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_782ecf8a",
+        "filename": "tests/browser/features/performance_test.feature",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-07T14:28:04Z",
+      "side": 1,
+      "message": "Could the Background / Given step be moved to the Scenario Outline, too?",
+      "revId": "a18b23b29e451a556493301ca8c45a6e155bef6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d81f235d",
+        "filename": "tests/browser/features/step_definitions/performance_test_steps.rb",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-07T14:28:04Z",
+      "side": 1,
+      "message": "Use something like data_file_name instead.",
+      "revId": "a18b23b29e451a556493301ca8c45a6e155bef6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
