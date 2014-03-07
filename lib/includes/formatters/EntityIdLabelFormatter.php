@@ -82,11 +82,12 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 * @see EntityIdFormatter::formatEntityId
 	 *
 	 * @param EntityId $entityId
+	 * @param bool $exists
 	 *
 	 * @throws FormattingException
 	 * @return string
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
 		$label = null;
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
@@ -100,7 +101,7 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 		if ( !is_string( $label ) ) {
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
 				case self::FALLBACK_PREFIXED_ID:
-					$label = $entityId->getSerialization();
+					$label = parent::formatEntityId( $entityId, $exists );
 					break;
 				case self::FALLBACK_EMPTY_STRING:
 					$label = '';

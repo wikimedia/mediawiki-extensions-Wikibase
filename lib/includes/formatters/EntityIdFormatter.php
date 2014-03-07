@@ -35,7 +35,19 @@ class EntityIdFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
 		}
 
-		return $this->formatEntityId( $value );
+		return $this->formatEntityId( $value, $this->entityIdExists( $value ) );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 * @param bool $exists
+	 *
+	 * @return string
+	 */
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
+		return $entityId->getSerialization();
 	}
 
 	/**
@@ -43,10 +55,10 @@ class EntityIdFormatter extends ValueFormatterBase {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return bool Always true in this default implementation.
 	 */
-	protected function formatEntityId( EntityId $entityId ) {
-		return $entityId->getSerialization();
+	protected function entityIdExists( EntityId $entityId ) {
+		return true;
 	}
 
 }
