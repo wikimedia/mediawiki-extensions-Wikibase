@@ -3,10 +3,11 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use Html;
-use Title;
+use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\EntityLookup;
+use Wikibase\EntityTitleLookup;
 
 /**
  * Formats entity IDs by generating an html link to the corresponding page title.
@@ -19,25 +20,61 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
-	 * Format an EntityId data value
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
+	 * @var EntityTitleLookup
+	 */
+	protected $titleLookup;
+
+	/**
+	 * @param FormatterOptions $options
+	 * @param EntityLookup $entityLookup
+	 * @param EntityTitleLookup $titleLookup
+	 */
+	public function __construct(
+		FormatterOptions $options,
+		EntityLookup $entityLookup,
+		EntityTitleLookup $titleLookup
+	) {
+		parent::__construct( $options, $entityLookup );
+
+		$this->titleLookup = $titleLookup;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @param bool $exists
 	 *
 	 * @return string
 	 *
-	 * @throws InvalidArgumentException
+	 * @see EntityIdFormatter::formatEntityId
 	 */
-	public function format( $value ) {
-		$value = $this->unwrapEntityId( $value );
+	protected function formatEntityId( EntityId $entityId, $exists ) {
+		$title = parent::formatEntityId( $entityId, $exists );
 
-		$title = parent::format( $value );
+		// TODO: This is expensive.
+		$propertyLink= \Linker::link(
+			$this->titleLookup->getTitleForId( $entityId ),
+			htmlspecialchars( $title ) );
 
-		$attributes = array(
-			'href' => Title::newFromText( $value->getPrefixedId() )->getLocalUrl()
-		);
+		if ( !$exists ) {
+			$html = \Html::element( 'span', array( 'class' => 'wb-entity-undefinedinfo' ),
+				new \Message( 'parentheses', array(
+					new \Message( 'wikibase-deletedentity-' . $entityId->getEntityType() ) ) ) );
+			$propertyLink .= ' ' . $html;
+		}
 
-		$html = Html::element( 'a', $attributes, $title );
-
-		return $html;
+		return $propertyLink;
 	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return bool
+	 *
+	 * @see EntityIdFormatter::entityIdExists
+	 */
+	protected function entityIdExists( EntityId $entityId ) {
+		// TODO: This is expensive.
+		return $this->titleLookup->getTitleForId( $entityId )->exists();
+	}
+
 }

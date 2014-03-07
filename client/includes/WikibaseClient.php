@@ -5,9 +5,9 @@ namespace Wikibase\Client;
 use DataTypes\DataTypeFactory;
 use Language;
 use Site;
+use Sites;
 use SiteSQLStore;
 use SiteStore;
-use Sites;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -18,11 +18,11 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -512,4 +512,5 @@ final class WikibaseClient {
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		return $factory;
 	}
+
 }

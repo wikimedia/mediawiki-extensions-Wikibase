@@ -9,7 +9,9 @@ use IContextSource;
 use OutputPage;
 use FormatJson;
 use User;
+use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -43,6 +45,11 @@ abstract class EntityView extends \ContextSource {
 	 * @var EntityInfoBuilder
 	 */
 	protected $entityRevisionLookup;
+
+	/**
+	 * @var EntityLookup
+	 */
+	protected $entityLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -102,21 +109,23 @@ abstract class EntityView extends \ContextSource {
 	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param string $rightsUrl
 	 * @param string $rightsText
 	 *
+	 * @throws \InvalidArgumentException
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
 	 *
-	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
 		IContextSource $context,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityInfoBuilder $entityInfoBuilder,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
 		LanguageFallbackChain $languageFallbackChain,
@@ -133,6 +142,7 @@ abstract class EntityView extends \ContextSource {
 		$this->snakFormatter = $snakFormatter;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityInfoBuilder = $entityInfoBuilder;
+		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->idParser = $idParser;
 		$this->languageFallbackChain = $languageFallbackChain;
@@ -528,19 +538,23 @@ abstract class EntityView extends \ContextSource {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-			$propertyKey = $propertyId->getSerialization();
-			$propertyLabel = isset( $propertyLabels[$propertyKey] )
-				? $propertyLabels[$propertyKey]
-				: $propertyKey;
-			$propertyLink = \Linker::link(
-				$this->entityTitleLookup->getTitleForId( $propertyId ),
-				htmlspecialchars( $propertyLabel )
-			);
+//			$propertyKey = $propertyId->getSerialization();
+//			$propertyLabel = isset( $propertyLabels[$propertyKey] )
+//				? $propertyLabels[$propertyKey]
+//				: $propertyKey;
+//			$propertyLink = \Linker::link(
+//				$this->entityTitleLookup->getTitleForId( $propertyId ),
+//				htmlspecialchars( $propertyLabel )
+//			);
+			$options = new FormatterOptions();
+			$f = new EntityIdHtmlLinkFormatter( $options, $this->entityLookup, $this->entityTitleLookup );
+			$propertyLink = $f->format( $propertyId );
 
 			$htmlForEditSection = $this->getHtmlForEditSection( '', 'span' ); // TODO: add link to SpecialPage
 
 			$claimHtmlGenerator = new ClaimHtmlGenerator(
 				$this->snakFormatter,
+				$this->entityLookup,
 				$this->entityTitleLookup,
 				$propertyLabels
 			);

@@ -77,22 +77,17 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	}
 
 	/**
-	 * Format an EntityId data value
+	 * @param EntityId $entityId
+	 * @param bool $exists
 	 *
-	 * @since 0.4
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
+	 * @throws FormattingException
 	 * @return string
 	 *
-	 * @throws RuntimeException
-	 * @throws InvalidArgumentException
+	 * @see EntityIdFormatter::formatEntityId
 	 */
-	public function format( $value ) {
-		$value = $this->unwrapEntityId( $value );
-
-		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
-			$label = $this->lookupItemLabel( $value );
+	protected function formatEntityId( EntityId $entityId, $exists ) {
+		if ( $exists && $this->getOption( self::OPT_RESOLVE_ID ) ) {
+			$label = $this->lookupItemLabel( $entityId );
 		} else {
 			$label = false;
 		}
@@ -103,10 +98,10 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 					$label = '';
 					break;
 				case self::FALLBACK_PREFIXED_ID:
-					$label = $value->getPrefixedId();
+					$label = $entityId->getPrefixedId();
 					break;
 				default:
-					throw new FormattingException( 'No label found for ' . $value );
+					throw new FormattingException( 'No label found for ' . $entityId );
 			}
 		}
 
@@ -115,37 +110,16 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	}
 
 	/**
-	 * Unwrap an EntityId value which might be wrapped in an EntityIdValue
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
-	 * @return EntityId
-	 *
-	 * @throws InvalidArgumentException
-	 */
-
-	protected function unwrapEntityId( $value ) {
-		if ( $value instanceof EntityIdValue ) {
-			$value = $value->getEntityId();
-		}
-
-		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
-		}
-
-		return $value;
-	}
-
-	/**
 	 * Lookup a label for an entity
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId
+	 * @param EntityId $entityId
 	 *
 	 * @return string|boolean
 	 */
 	protected function lookupItemLabel( EntityId $entityId ) {
+		// TODO: This is expensive.
 		$entity = $this->entityLookup->getEntity( $entityId );
 
 		if ( $entity === null ) {

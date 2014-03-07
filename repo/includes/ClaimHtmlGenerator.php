@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 use DataValues\DataValue;
+use ValueFormatters\FormatterOptions;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
@@ -30,6 +32,13 @@ class ClaimHtmlGenerator {
 	/**
 	 * @since 0.5
 	 *
+	 * @var EntityLookup
+	 */
+	protected $entityLookup;
+
+	/**
+	 * @since 0.5
+	 *
 	 * @var EntityTitleLookup
 	 */
 	protected $entityTitleLookup;
@@ -46,15 +55,18 @@ class ClaimHtmlGenerator {
 	 * Constructor.
 	 *
 	 * @param SnakFormatter $snakFormatter
+	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param string[] $propertyLabels
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		$propertyLabels = array()
 	) {
 		$this->snakFormatter = $snakFormatter;
+		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->propertyLabels = $propertyLabels;
 	}
@@ -241,10 +253,15 @@ class ClaimHtmlGenerator {
 			$propertyLabel = isset( $this->propertyLabels[$propertyKey] )
 				? $this->propertyLabels[$propertyKey]
 				: $propertyKey;
-			$propertyLink = \Linker::link(
-				$this->entityTitleLookup->getTitleForId( $propertyId ),
-				htmlspecialchars( $propertyLabel )
-			);
+			// TODO: Use EntityIdHtmlLinkFormatter!
+			$options = new FormatterOptions();
+			$f = new EntityIdHtmlLinkFormatter( $options, $this->entityLookup, $this->entityTitleLookup );
+			$propertyLink = $f->format( $propertyId );
+//			$propertyLink = \Linker::link(
+//				$this->entityTitleLookup->getTitleForId( $propertyId ),
+//				htmlspecialchars( $propertyLabel )
+//			);
+//			$propertyLink = 'YY'.$propertyLink;
 		}
 
 		return wfTemplate( 'wb-snak',
