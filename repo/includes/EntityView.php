@@ -2,14 +2,15 @@
 
 namespace Wikibase;
 
-use Html;
-use ParserOutput;
-use Language;
-use IContextSource;
-use OutputPage;
 use FormatJson;
-use User;
+use Html;
+use IContextSource;
+use Language;
+use OutputPage;
+use ParserOutput;
+use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -43,6 +44,11 @@ abstract class EntityView extends \ContextSource {
 	 * @var EntityInfoBuilder
 	 */
 	protected $entityRevisionLookup;
+
+	/**
+	 * @var EntityLookup
+	 */
+	protected $entityLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -102,21 +108,23 @@ abstract class EntityView extends \ContextSource {
 	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param string $rightsUrl
 	 * @param string $rightsText
 	 *
+	 * @throws \InvalidArgumentException
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
 	 *
-	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
 		IContextSource $context,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityInfoBuilder $entityInfoBuilder,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
 		LanguageFallbackChain $languageFallbackChain,
@@ -133,6 +141,7 @@ abstract class EntityView extends \ContextSource {
 		$this->snakFormatter = $snakFormatter;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityInfoBuilder = $entityInfoBuilder;
+		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->idParser = $idParser;
 		$this->languageFallbackChain = $languageFallbackChain;
@@ -517,7 +526,7 @@ abstract class EntityView extends \ContextSource {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 
-		$propertyLabels = $this->getPropertyLabels( $entity, $this->getLanguage()->getCode() );
+		$propertyInfo = $this->getPropertyInfo( $entity, $this->getLanguage()->getCode() );
 
 		/**
 		 * @var string $claimsHtml
@@ -528,21 +537,26 @@ abstract class EntityView extends \ContextSource {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-			$propertyKey = $propertyId->getSerialization();
-			$propertyLabel = isset( $propertyLabels[$propertyKey] )
-				? $propertyLabels[$propertyKey]
-				: $propertyKey;
-			$propertyLink = \Linker::link(
-				$this->entityTitleLookup->getTitleForId( $propertyId ),
-				htmlspecialchars( $propertyLabel )
-			);
+//			$propertyKey = $propertyId->getSerialization();
+//			$propertyLabel = isset( $propertyLabels[$propertyKey] )
+//				? $propertyLabels[$propertyKey]
+//				: $propertyKey;
+//			$propertyLink = \Linker::link(
+//				$this->entityTitleLookup->getTitleForId( $propertyId ),
+//				htmlspecialchars( $propertyLabel )
+//			);
+			// TODO: BAD!
+			$options = new FormatterOptions();
+			$entityIdHtmlLinkFormatter = new EntityIdHtmlLinkFormatter( $options,
+				$this->entityLookup, $this->entityTitleLookup );
+			$propertyLink = $entityIdHtmlLinkFormatter->format( $propertyId );
 
 			$htmlForEditSection = $this->getHtmlForEditSection( '', 'span' ); // TODO: add link to SpecialPage
 
 			$claimHtmlGenerator = new ClaimHtmlGenerator(
 				$this->snakFormatter,
-				$this->entityTitleLookup,
-				$propertyLabels
+				$entityIdHtmlLinkFormatter,
+				$propertyInfo
 			);
 
 			foreach( $claims as $claim ) {
@@ -733,7 +747,7 @@ abstract class EntityView extends \ContextSource {
 	 * @todo: we may also want to have the descriptions, in addition to the labels
 	 * @return array maps property IDs to labels.
 	 */
-	protected function getPropertyLabels( Entity $entity, $langCode ) {
+	protected function getPropertyInfo( Entity $entity, $langCode ) {
 		wfProfileIn( __METHOD__ );
 		//TODO: share cache with PropertyLabelResolver
 		//TODO: ...or share info with getBasicEntityInfo
@@ -747,19 +761,11 @@ abstract class EntityView extends \ContextSource {
 
 		//NOTE: this is a bit hackish,it would be more appropriate to use a TermTable here.
 		$entities = $this->entityInfoBuilder->buildEntityInfo( $propertyIds );
+		$this->entityInfoBuilder->removeMissing( $entities );
 		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
 
-		//TODO: apply language fallback
-		$propertyLabels = array();
-		foreach ( $entities as $id => $entity ) {
-			if ( isset( $entity['labels'][$langCode] ) ) {
-				$label = $entity['labels'][$langCode]['value'];
-				$propertyLabels[$id] = $label;
-			}
-		}
-
 		wfProfileOut( __METHOD__ );
-		return $propertyLabels;
+		return $entities;
 	}
 
 	/**

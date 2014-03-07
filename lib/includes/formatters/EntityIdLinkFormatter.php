@@ -16,19 +16,17 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 class EntityIdLinkFormatter extends EntityIdTitleFormatter {
 
 	/**
-	 * Format an EntityId data value
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
+	 * @param EntityId $entityId
+	 * @param bool $exists
 	 *
 	 * @return string
 	 *
-	 * @throws InvalidArgumentException
+	 * @see EntityIdFormatter::formatEntityId
 	 */
-	public function format( $value ) {
-		$title = parent::format( $value );
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
+		$title = parent::formatEntityId( $entityId, $exists );
 
 		return "[[$title]]";
 	}
 
 }
-
