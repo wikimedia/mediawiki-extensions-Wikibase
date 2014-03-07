@@ -150,7 +150,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 */
 	public function append( $claim ) {
 		if ( !( $claim instanceof Claim ) ) {
-			throw new InvalidArgumentException( '$claim must be a Claim instances' );
+			throw new InvalidArgumentException( '$claim must be a Claim instance' );
 		}
 
 		parent::append( $claim );
@@ -477,4 +477,44 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 		return !$iter->valid();
 	}
 
+	/**
+	 * Returns a new instance only containing the claims with the given rank.
+	 *
+	 * @since 0.7
+	 *
+	 * @param int $rank
+	 *
+	 * @return Claims
+	 */
+	public function getClaimsByRank( $rank ) {
+		$claims = array();
+
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			if ( $claim->getRank() == $rank ) {
+				$claims[] = $claim;
+			}
+		}
+
+		return new self( $claims );
+	}
+
+	/**
+	 * Returns a new instance only containing the best claims (these are the highest
+	 * ranked claims, but never deprecated ones).
+	 *
+	 * @since 0.7
+	 *
+	 * @return Claims
+	 */
+	public function getBestClaims() {
+		$rank = Claim::RANK_TRUTH;
+
+		do {
+			$claims = $this->getClaimsByRank( $rank );
+			$rank--;
+		} while ( $claims->isEmpty() && $rank > Claim::RANK_DEPRECATED );
+
+		return $claims;
+	}
 }

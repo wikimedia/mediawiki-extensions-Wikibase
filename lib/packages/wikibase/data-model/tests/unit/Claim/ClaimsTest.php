@@ -651,4 +651,96 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $claims->isEmpty() );
 	}
 
+	public function provideGetClaimsByRank() {
+		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1->setRank( Claim::RANK_DEPRECATED );
+
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2->setRank( Claim::RANK_PREFERRED );
+
+		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P3" ) ) );
+		$s3->setRank( Claim::RANK_PREFERRED );
+
+		return array(
+			// Emtpy yields empty
+			array(
+				new Claims(),
+				Claim::RANK_NORMAL,
+				new Claims()
+			),
+			// One statement with RANK_PREFERRED, so return it
+			array(
+				new Claims( array( $s2 ) ),
+				Claim::RANK_PREFERRED,
+				new Claims( array( $s2 ) ),
+			),
+			// s2 has RANK_PREFERRED, so doesn't match RANK_TRUTH
+			array(
+				new Claims( array( $s2 ) ),
+				Claim::RANK_TRUTH,
+				new Claims(),
+			),
+			// s2 and s3 have RANK_PREFERRED, so return them
+			array(
+				new Claims( array( $s2, $s1, $s3 ) ),
+				Claim::RANK_PREFERRED,
+				new Claims( array( $s2, $s3 ) ),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetClaimsByRank
+	 */
+	public function testGetClaimsByRank( $input, $rank, $expected ) {
+		$this->assertEquals( $input->getClaimsByRank( $rank ), $expected );
+	}
+
+	public function testGetBestClaimsEmpty() {
+		$claims = new Claims();
+		$this->assertEquals( $claims->getBestClaims(), new Claims() );
+	}
+
+	public function testGetBestClaimsOnlyOne() {
+		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$statement->setRank( Claim::RANK_NORMAL );
+
+		$claims = new Claims( array( $statement ) );
+		$this->assertEquals( $claims->getBestClaims(), $claims );
+	}
+
+	public function testGetBestClaimsNoDeprecated() {
+		$statement = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$statement->setRank( Claim::RANK_DEPRECATED );
+
+		$claims = new Claims( array( $statement ) );
+		$this->assertEquals( $claims->getBestClaims(), new Claims() );
+	}
+
+	public function testGetBestClaimsReturnOne() {
+		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1->setRank( Claim::RANK_DEPRECATED );
+
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2->setRank( Claim::RANK_NORMAL );
+
+		$claims = new Claims( array( $s1, $s2 ) );
+		$expected = new Claims( array( $s2 ) );
+		$this->assertEquals( $claims->getBestClaims(), $expected );
+	}
+
+	public function testGetBestClaimsReturnTwo() {
+		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1->setRank( Claim::RANK_NORMAL );
+
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2->setRank( Claim::RANK_PREFERRED );
+
+		$s3 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P3" ) ) );
+		$s3->setRank( Claim::RANK_PREFERRED );
+
+		$claims = new Claims( array( $s3, $s1, $s2 ) );
+		$expected = new Claims( array( $s2, $s3 ) );
+		$this->assertEquals( $claims->getBestClaims(), $expected );
+	}
 }
