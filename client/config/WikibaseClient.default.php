@@ -179,6 +179,13 @@ return call_user_func( function() {
 		return defined( 'WB_VERSION' );
 	};
 
+	$defaults['repoSiteName'] = function ( SettingsArray $settings ) {
+		// This uses $wgSitename if this wiki is the repo.  Otherwise, set this to
+		// either an i18n message key and the message will be used, if it exists.
+		// If repo site name does not need translation, then set this as a string.
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgSitename'] : 'Wikidata';
+	};
+
 	$defaults['repoUrl'] = function ( SettingsArray $settings ) {
 		// use $wgServer if this wiki is the repo, otherwise default to wikidata.org
 		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? $GLOBALS['wgServer'] : '//www.wikidata.org';
