@@ -1435,6 +1435,8 @@ $messages['et'] = array(
 	'wikibase-property-notfound' => 'Omadust $1 ei leitud.',
 	'wikibase-property-notsupportedyet' => 'Vikibaas ei toeta veel omadusele $1 vastavat omaduse tüüpi.',
 	'wikibase-rc-hide-wikidata' => 'Vikiandmed ($1)',
+	'wikibase-rc-hide-wikidata-hide' => 'peida',
+	'wikibase-rc-hide-wikidata-show' => 'näita',
 	'wikibase-rc-show-wikidata-pref' => 'Näita viimastes muudatustes Vikiandmete muudatusi',
 	'wikibase-rc-wikibase-edit-letter' => 'A',
 	'wikibase-rc-wikibase-edit-title' => 'Vikiandmete muudatus',
@@ -1461,6 +1463,7 @@ $messages['eu'] = array(
 
 /** Persian (فارسی)
  * @author Alireza
+ * @author Armin1392
  * @author Calak
  * @author Ebraminio
  * @author Ladsgroup
@@ -1496,17 +1499,19 @@ $messages['fa'] = array(
 	'wikibase-linkitem-failure' => 'یک خطای ناشناخته در هنگام بارگذاری صفحهٔ پیوند داده‌شده رخ داد.',
 	'wikibase-linkitem-title' => 'پیوند به صفحه',
 	'wikibase-linkitem-linkpage' => 'پیوند با صفحه',
-	'wikibase-linkitem-selectlink' => 'لطفا سایت و صفحه‌ای که می‌خواهید به این صفحه پیوند دهید را انتخاب کنید.',
+	'wikibase-linkitem-selectlink' => 'لطفاً سایت و صفحه‌ای که می‌خواهید به این صفحه پیوند دهید را انتخاب کنید.',
 	'wikibase-linkitem-input-site' => 'زبان:',
 	'wikibase-linkitem-input-page' => 'صفحه:',
 	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] مرتبط است. لطفا تایید کنید که {{PLURAL:$2|صفحهٔ|صفحه‌های}} زیر همان‌هایی {{PLURAL:$2|هست|هستند}} که شما خواهان پیوند دادن به {{PLURAL:$2|آن|آن‌ها}} بودید.',
 	'wikibase-linkitem-confirmitem-button' => 'تأیید',
-	'wikibase-linkitem-not-loggedin-title' => 'باید وارد سیستم شوید.',
+	'wikibase-linkitem-not-loggedin-title' => 'باید وارد سامانه شوید.',
 	'wikibase-linkitem-not-loggedin' => 'شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.',
 	'wikibase-linkitem-success-link' => 'این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 مخزن مرکزی داده‌ها] بیابید.',
 	'wikibase-property-notfound' => 'خصوصیت $1 یافت نشد.',
 	'wikibase-property-notsupportedyet' => 'ویکی‌بیس هنوز نوع خصوصیت برای خصوصیت $1 را پشتیبانی نمی‌کند.',
 	'wikibase-rc-hide-wikidata' => '$1 ویکی‌داده',
+	'wikibase-rc-hide-wikidata-hide' => 'پنهان کردن',
+	'wikibase-rc-hide-wikidata-show' => 'نمایش',
 	'wikibase-rc-show-wikidata-pref' => 'نمایش ویرایش‌های ویکی‌داده در تغییرات اخیر',
 	'wikibase-rc-wikibase-edit-letter' => 'د',
 	'wikibase-rc-wikibase-edit-title' => 'ویرایش ویکی‌داده',
@@ -1570,6 +1575,8 @@ $messages['fi'] = array(
 	'wikibase-property-notfound' => 'Ominaisuutta $1 ei löydy.',
 	'wikibase-property-notsupportedyet' => 'Wikibase ei tue vielä ominaisuustyyppiä ominaisuudelle $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Piilota',
+	'wikibase-rc-hide-wikidata-show' => 'Näytä',
 	'wikibase-rc-show-wikidata-pref' => 'Näytä Wikidata-muokkaukset tuoreissa muutoksissa',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Wikidata-muokkaus',
@@ -1854,6 +1861,8 @@ $messages['he'] = array(
 	'wikibase-property-notfound' => 'המאפיין $1 לא נמצא.',
 	'wikibase-property-notsupportedyet' => 'ההרחבה ויקיביסס עדיין לא תומכת בסוג המאפיין של המאפיין $1.',
 	'wikibase-rc-hide-wikidata' => '$1 ויקינתונים',
+	'wikibase-rc-hide-wikidata-hide' => 'הסתרה',
+	'wikibase-rc-hide-wikidata-show' => 'הצגה',
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות ויקינתונים בשינויים אחרונים',
 	'wikibase-rc-wikibase-edit-letter' => 'נ',
 	'wikibase-rc-wikibase-edit-title' => 'עריכת ויקינתונים',
@@ -2409,6 +2418,7 @@ $messages['ka'] = array(
 	'wikibase-property-notfound' => 'თვისება „$1“ ვერ მოიძებნა.',
 	'wikibase-property-notsupportedyet' => 'ვიკიბაზას ჯერ არ აქვს $1 თვისების ტიპის მხარდაჭერა.',
 	'wikibase-rc-hide-wikidata' => 'ვიკიმონაცემების $1',
+	'wikibase-rc-hide-wikidata-show' => 'ჩვენება',
 	'wikibase-rc-show-wikidata-pref' => 'ბოლო ცვლილებების სიაში ვიკიმონაცემების რედაქტირებების ჩვენება',
 	'wikibase-rc-wikibase-edit-letter' => 'ვ',
 	'wikibase-rc-wikibase-edit-title' => 'ვიკიმონაცემების რედაქტირება',
