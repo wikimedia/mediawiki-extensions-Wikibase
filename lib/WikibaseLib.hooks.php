@@ -255,6 +255,16 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['wikibase.experts.EntityIdInput.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/experts/EntityIdInput.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.experts.EntityIdInput',
+				'wikibase.tests.qunit.testrunner',
+			),
+		);
+
 		$testModules['qunit']['wikibase.parsers.EntityIdParser.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
