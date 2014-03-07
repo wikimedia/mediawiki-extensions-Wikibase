@@ -198,7 +198,7 @@ final class WikibaseClient {
 			EntityIdLabelFormatter::OPT_LANG => $languageCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
+		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup(), null );
 
 		return $labelFormatter;
 	}
@@ -498,6 +498,7 @@ final class WikibaseClient {
 	protected function newSnakFormatterFactory() {
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			null,
 			$this->contentLanguage
 		);
 
@@ -530,6 +531,7 @@ final class WikibaseClient {
 	protected function newValueFormatterFactory() {
 		$builders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			null,
 			$this->contentLanguage
 		);
 
