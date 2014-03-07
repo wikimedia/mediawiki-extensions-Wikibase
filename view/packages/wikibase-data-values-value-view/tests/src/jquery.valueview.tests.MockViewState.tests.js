@@ -3,7 +3,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-( function( $, QUnit, valueview ) {
+( function( QUnit, valueview ) {
 	'use strict';
 
 	var ViewState = valueview.ViewState,
@@ -129,4 +129,4 @@
 		);
 	} );
 
-}( jQuery, QUnit, jQuery.valueview ) );
+}( QUnit, jQuery.valueview ) );

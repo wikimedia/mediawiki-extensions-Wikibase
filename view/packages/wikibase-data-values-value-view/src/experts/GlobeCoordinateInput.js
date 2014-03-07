@@ -5,18 +5,7 @@
 ( function( $, vv, GlobeCoordinate, Formatter ) {
 	'use strict';
 
-	/**
-	 * Globe coordinate formatter
-	 *
-	 * We need this for rawValueCompare because it is synchronous.
-	 *
-	 * @todo Replace this with a call to ValueView::_formatValue
-	 *
-	 * @type {globeCoordinate.Formatter}
-	 */
-	var formatter = new Formatter();
-
-	var PARENT = vv.Expert;
+	var PARENT = vv.experts.StringValue;
 
 	/**
 	 * Valueview expert handling input of globe coordinate values.
@@ -39,21 +28,6 @@
 		},
 
 		/**
-		 * The the input element's node.
-		 * @type {jQuery}
-		 */
-		$input: null,
-
-		/**
-		 * Caches a new value (or null for no value) set by _setRawValue() until draw() displaying
-		 * the new value has been called. The use of this, basically, is a structural improvement
-		 * which allows moving setting the displayed value to the draw() method which is supposed to
-		 * handle all visual manners.
-		 * @type {string|null|false}
-		 */
-		_newValue: null,
-
-		/**
 		 * The preview widget.
 		 * @type {jQuery.ui.preview}
 		 */
@@ -72,17 +46,13 @@
 		$precision: null,
 
 		/**
-		 * @see jQuery.valueview.Expert._init
+		 * @see jQuery.valueview.experts.StringExpert._init
 		 */
 		_init: function() {
 			var self = this;
 
-			this.$input = $( '<input/>', {
-				type: 'text',
-				'class': this.uiBaseClass + '-input valueview-input'
-			} )
-			.appendTo( this.$viewPort )
-			.inputextender( {
+			PARENT.prototype._init.call( this );
+			this.$input.inputextender( {
 				initCallback: function( $extension ) {
 					self._initInputExtender( $extension );
 					// $extension not yet in DOM, so draw() would not update rotators. Call draw
@@ -93,10 +63,9 @@
 					} );
 				},
 				contentAnimationEvents: 'toggleranimation'
-			} )
-			.on( 'eachchange', function( event, oldValue ) {
-				self._viewNotifier.notify( 'change' );
 			} );
+
+			this._initialDraw();
 		},
 
 		/**
@@ -208,9 +177,6 @@
 				inputExtender.destroy();
 			}
 
-			this.$input.off( 'eachchange' );
-
-			this.$input = null;
 			this.$precision = null;
 			this.$precisionContainer = null;
 
@@ -221,7 +187,7 @@
 		 * @see jQuery.valueview.Expert.valueCharacteristics
 		 */
 		valueCharacteristics: function() {
-			if( !this.$precision ) { // happens when used by BifidExpert ...
+			if( !this.$precision ) { // happens when called statically
 				return {};
 			}
 
@@ -239,114 +205,29 @@
 			return options;
 		},
 
-		/**
-		 * @see jQuery.valueview.Expert._getRawValue
-		 *
-		 * @return {string|null}
-		 */
-		_getRawValue: function() {
-			var value = this._newValue !== false ? this._newValue : this.$input.val();
+		_initialDraw: function() {
+			var geoValue = this.viewState().value();
+			if( geoValue ) {
+				var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
 
-			if( $.trim( value ) === '' ) {
-				return null;
+				if( considerInputExtender ) {
+					this.$precision.data( 'listrotator' ).value(
+						roundPrecision( geoValue.getValue().getPrecision() ) );
+				}
 			}
-			return value;
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert._setRawValue
-		 */
-		_setRawValue: function( rawValue ) {
-			if( rawValue instanceof GlobeCoordinate ) {
-				rawValue = $( '<span/>' ).html( this.viewState().getFormattedValue() ).text();
-			}
-			else if( typeof rawValue !== 'string' ) {
-				rawValue = null;
-			}
-			this._newValue = rawValue;
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert.rawValueCompare
-		 */
-		rawValueCompare: function( globeCoordinate1, globeCoordinate2 ) {
-			if( globeCoordinate2 === undefined ) {
-				globeCoordinate2 = this._getRawValue();
-			}
-
-			if( globeCoordinate1 === null && globeCoordinate2 === null ) {
-				return true;
-			}
-
-			if( globeCoordinate1 instanceof GlobeCoordinate ) {
-				globeCoordinate1 = formatter.format( globeCoordinate1 );
-			}
-
-			if( globeCoordinate2 instanceof GlobeCoordinate ) {
-				globeCoordinate2 = formatter.format( globeCoordinate2 );
-			}
-
-			return globeCoordinate1 === globeCoordinate2;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert.draw
 		 */
 		draw: function() {
-			var geoValue = this.viewState().value(),
-				$input = this.$input;
-
-			if( this._viewState.isDisabled() ) {
-				$input.prop( 'disabled', true ).addClass( 'ui-state-disabled' );
-			} else {
-				$input.prop( 'disabled', false ).removeClass( 'ui-state-disabled' );
-			}
-
-			if( this._newValue !== false ) {
-				var newText = this._newValue || '';
-
-				if( $input.val() !== newText ) {
-					$input.val( newText );
-				}
-			}
+			PARENT.prototype.draw.call( this );
 
 			var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
-
-			if( considerInputExtender
-				&& (
-					this._newValue
-					|| this.$precision.data( 'listrotator' ).autoActive()
-				)
-			) {
-				// hacky update of precision, just assume the raw value is the value we have in
-				// the valueview right now.
-				if( geoValue ) {
-					this.$precision.data( 'listrotator' ).value(
-						roundPrecision( geoValue.getValue().getPrecision() ) );
-				}
-			}
-
-			this._newValue = false;
-
-			// Update preview:
 			if( considerInputExtender ) {
-				this.preview.update( $( '<span />').html( this.viewState().getFormattedValue() ).text() );
+				this.preview.update( this.viewState().getTextValue() );
 			}
 		},
-
-		/**
-		 * @see jQuery.valueview.Expert.focus
-		 */
-		focus: function() {
-			this.$input.focusAt( 'end' );
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert.blur
-		 */
-		blur: function() {
-			this.$input.blur();
-		}
 	} );
 
 	/**

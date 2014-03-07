@@ -10,11 +10,7 @@ ValueView introduces the <code>jQuery.valueview</code> widget which may be used 
 
 ### jQuery.valueview.Expert
 
-Experts are widgets that deal with data values. An expert may provide the functionality to display and/or edit a specific data value type or data values suitable for a certain data type. <code>jQuery.valueview.Expert</code> is the base constructor for such experts.
-
-### jQuery.valueview.BifidExpert
-
-<code>jQuery.valueview.BifidExpert</code> is an abstract definition of an expert whose responsibilities are shared by two experts - one expert for edit and one for view mode.
+Experts are widgets that deal with editing data values. An expert provides the functionality to edit a specific data value type or data values suitable for a certain data type. <code>jQuery.valueview.Expert</code> is the base constructor for such experts.
 
 ### jQuery.valueview.ExpertFactory
 
@@ -53,7 +49,7 @@ console.log(
 // false because we now have a dedicated expert registered for the "url" data type.
 ```
 
-The <code>jQuery.valueview.ExpertFactory</code> can now be injected into a new <code>jQuery.valueview</code> which will then be able to present string data values.
+The <code>jQuery.valueview.ExpertFactory</code> can now be injected into a new <code>jQuery.valueview</code> which will then be able to edit string data values.
 
 ```javascript
 var $subject = $( '<div/>' ).appendTo( $( 'body' ).empty() );
@@ -85,6 +81,32 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 
 <code>mediaWiki.ext.valueView</code> may be used to initialize ValueView as MediaWiki extension. Loading <code>mediaWiki.ext.valueView</code> will initialize and fill a <code>jQuery.valueview.ExpertFactory</code> which is issued to <code>jQuery.valueview</code> as default expert provider. Consequently, no custom experts for basic data values and data types need to be registered and <code>jQuery.valueview</code> may be used without passing a custom <code>jQuery.ExpertFactory</code>.
 
+## Architecture
+
+ValueView depends heavily on formatters and parsers. Formatters are used for converting
+dataValues.DataValue instances to DOM elements, and parsers are used for converting
+plain strings to dataValues.DataValue instances.
+
+Experts are only used for editing values. They are constructed when starting edit mode,
+and destroyed after leaving edit mode. Experts have the following lifecycle:
+
+* `\_init()`: Load parsed, formatted and raw (text) values from the ValueView (via ViewState)
+	and initialize DOM
+* Edit loop
+	* (User edits)
+	* Expert calls `viewNotifier.notify( 'change' )` and triggers parsing and formatting
+	* `rawValue()`: Return the current raw (text) value
+	* (optional) `preview.showSpinner()`: Replace preview with a spinner
+	* `draw()`: (Re-)draw non-editable parts of the expert using the (new) parsed and formatted value
+		from the ValueView (via ViewState)
+* `destroy()`: Destroy DOM
+
+Other methods an Expert needs to provide:
+
+* `valueCharacteristics()`
+* `focus()`
+* `blur()`
+
 ## Release notes
 
 ### 0.4 (in development)
@@ -93,6 +115,7 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 * Use ViewState::getFormattedValue for GlobeCoordinate formatting
 * Make some of the animations user definable
 * Use ViewState formatting and parsing in TimeValue
+* Make ValueView responsible for static mode and remove BifidExpert
 
 ### 0.3.3 (2014-02-24)
 

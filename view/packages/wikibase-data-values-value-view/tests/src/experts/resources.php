@@ -28,16 +28,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.experts.QuantityType.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'QuantityType.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.valueview.experts.QuantityType',
-				'jquery.valueview.tests.testExpert',
-			),
-		),
-
 		'jquery.valueview.experts.StringValue.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'StringValue.tests.js',
