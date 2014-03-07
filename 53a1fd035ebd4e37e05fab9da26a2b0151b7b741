@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_d8b283f8",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-07T15:58:42Z",
+      "side": 1,
+      "message": "if I remember correctly an empty array will not give the desired spacing..\nWe want 52°16\u0027N, 30°7\u0027E right? Which has a space!",
+      "revId": "53a1fd035ebd4e37e05fab9da26a2b0151b7b741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
