@@ -486,7 +486,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	 *
 	 * @return Claims
 	 */
-	public function getClaimsByRank( $rank ) {
+	public function getByRank( $rank ) {
 		$claims = array();
 
 		/* @var Claim $claim */
@@ -511,7 +511,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 		$rank = Claim::RANK_TRUTH;
 
 		do {
-			$claims = $this->getClaimsByRank( $rank );
+			$claims = $this->getByRank( $rank );
 			$rank--;
 		} while ( $claims->isEmpty() && $rank > Claim::RANK_DEPRECATED );
 
