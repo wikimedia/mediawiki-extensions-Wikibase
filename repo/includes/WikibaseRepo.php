@@ -13,28 +13,29 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevisionLookup;
-use Wikibase\store\EntityStore;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
-use Wikibase\Store;
-use Wikibase\StoreFactory;
 use Wikibase\SnakFactory;
+use Wikibase\store\EntityStoreWatcher;
+use Wikibase\Store;
+use Wikibase\store\EntityStore;
+use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 
@@ -221,7 +222,10 @@ class WikibaseRepo {
 		if ( $this->propertyDataTypeLookup === null ) {
 			$infoStore = $this->getStore()->getPropertyInfoStore();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoStore, $retrievingLookup );
+			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
+				$infoStore,
+				$retrievingLookup
+			);
 		}
 
 		return $this->propertyDataTypeLookup;
@@ -319,8 +323,9 @@ class WikibaseRepo {
 	public function getLanguageFallbackChainFactory() {
 		if ( $this->languageFallbackChainFactory === null ) {
 			global $wgUseSquid;
-			// The argument is about whether full page output (OutputPage, specifically JS vars in it currently)
-			// is cached for anons, where the only caching mechanism in use now is Squid.
+			// The argument is about whether full page output (OutputPage, specifically JS vars in
+			// it currently) is cached for anons, where the only caching mechanism in use now is
+			// Squid.
 			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory(
 				/* $anonymousPageViewCached = */ $wgUseSquid
 			);
@@ -383,6 +388,7 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			$this->getEntityTitleLookup(),
 			$wgContLang
 		);
 
@@ -417,6 +423,7 @@ class WikibaseRepo {
 
 		$builders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			$this->getEntityTitleLookup(),
 			$wgContLang
 		);
 
@@ -448,6 +455,7 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			$this->getEntityTitleLookup(),
 			$wgContLang
 		);
 
@@ -456,13 +464,18 @@ class WikibaseRepo {
 			$this->getPropertyDataTypeLookup()
 		);
 
-		$valueFormatterBuilders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:wikibase-entityid', $idFormatter );
+		$valueFormatterBuilders->setValueFormatter( SnakFormatter::FORMAT_PLAIN,
+			'VT:wikibase-entityid', $idFormatter );
 
-		$snakFormatterFactory = new OutputFormatSnakFormatterFactory( $snakFormatterBuilders->getSnakFormatterBuildersForFormats() );
-		$valueFormatterFactory = new OutputFormatValueFormatterFactory( $valueFormatterBuilders->getValueFormatterBuildersForFormats() );
+		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
+			$snakFormatterBuilders->getSnakFormatterBuildersForFormats() );
+		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
+			$valueFormatterBuilders->getValueFormatterBuildersForFormats() );
 
-		$snakFormatter = $snakFormatterFactory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, $options );
-		$valueFormatter = $valueFormatterFactory->getValueFormatter( SnakFormatter::FORMAT_PLAIN, $options );
+		$snakFormatter = $snakFormatterFactory->getSnakFormatter(
+			SnakFormatter::FORMAT_PLAIN, $options );
+		$valueFormatter = $valueFormatterFactory->getValueFormatter(
+			SnakFormatter::FORMAT_PLAIN, $options );
 
 		$formatter = new SummaryFormatter(
 			$idFormatter,
@@ -490,4 +503,5 @@ class WikibaseRepo {
 	public function getEntityPermissionChecker() {
 		return $this->getEntityContentFactory();
 	}
+
 }

@@ -2,7 +2,10 @@
 
 namespace Wikibase;
 
+use DataValues\DataValue;
 use InvalidArgumentException;
+use ValueFormatters\FormatterOptions;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
@@ -30,33 +33,35 @@ class ClaimHtmlGenerator {
 	/**
 	 * @since 0.5
 	 *
-	 * @var EntityTitleLookup
+	 * @var EntityIdHtmlLinkFormatter
 	 */
-	protected $entityTitleLookup;
+	protected $entityIdHtmlLinkFormatter;
 
 	/**
+	 * TODO: Doc!
 	 * Array of property labels indexed by serialized property ids
+	 *
 	 * @since 0.5
 	 *
-	 * @var string[]
+	 * @var array[]
 	 */
-	protected $propertyLabels;
+	protected $entityInfo;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param SnakFormatter $snakFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param string[] $propertyLabels
+	 * @param EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter
+	 * @param array[] $entityInfo
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup,
-		$propertyLabels = array()
+		EntityIdHtmlLinkFormatter $entityIdHtmlLinkFormatter,
+		array $entityInfo = array()
 	) {
 		$this->snakFormatter = $snakFormatter;
-		$this->entityTitleLookup = $entityTitleLookup;
-		$this->propertyLabels = $propertyLabels;
+		$this->entityIdHtmlLinkFormatter = $entityIdHtmlLinkFormatter;
+		$this->entityInfo = $entityInfo;
 	}
 
 	/**
@@ -89,6 +94,7 @@ class ClaimHtmlGenerator {
 				wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text()
 			);
 
+			/** @var \Wikibase\Statement $claim */
 			$referenceList = $claim->getReferences();
 			$referencesHeading = wfMessage(
 				'wikibase-ui-pendingquantitycounter-nonpending',
@@ -214,19 +220,16 @@ class ClaimHtmlGenerator {
 	 * @param boolean $showPropertyLink
 	 * @return string
 	 */
-	protected function getSnakHtml( $snak, $showPropertyLink = false ) {
+	protected function getSnakHtml( Snak $snak, $showPropertyLink = false ) {
 		$propertyLink = '';
 
 		if( $showPropertyLink ) {
 			$propertyId = $snak->getPropertyId();
-			$propertyKey = $propertyId->getSerialization();
-			$propertyLabel = isset( $this->propertyLabels[$propertyKey] )
-				? $this->propertyLabels[$propertyKey]
-				: $propertyKey;
-			$propertyLink = \Linker::link(
-				$this->entityTitleLookup->getTitleForId( $propertyId ),
-				htmlspecialchars( $propertyLabel )
-			);
+			$key = $propertyId->getSerialization();
+			// TODO: This should reuse the logic in the formatter
+			$exists = array_key_exists( $key, $this->entityInfo );
+			$propertyLink = $this->entityIdHtmlLinkFormatter->formatEntityId( $propertyId,
+				$exists );
 		}
 
 		$formattedValue = $this->getFormattedSnakValue( $snak );
@@ -251,6 +254,7 @@ class ClaimHtmlGenerator {
 	 */
 	protected function getFormattedSnakValue( $snak ) {
 		try {
+			// TODO: Pass info about the entities used in the snak
 			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
 		} catch ( FormattingException $ex ) {
 			return $this->getInvalidSnakMessage();
@@ -276,4 +280,5 @@ class ClaimHtmlGenerator {
 	private function getPropertyNotFoundMessage() {
 		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
 	}
+
 }
