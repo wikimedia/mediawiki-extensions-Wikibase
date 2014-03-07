@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_a5830f9b",
+        "filename": "client/tests/phpunit/includes/ClientSiteLinkLookupTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-07T21:37:24Z",
+      "side": 1,
+      "message": "Is there a reason to derive from this class? If not, please directly derive from the PHPUnit one",
+      "revId": "d804a95141554cc773ccd90dd7a0746716f4e7e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
