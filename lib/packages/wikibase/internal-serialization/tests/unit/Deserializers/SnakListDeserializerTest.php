@@ -22,7 +22,7 @@ class SnakListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $deserializer;
 
-	public function setUp() {
+	protected function setUp() {
 		$snakDeserializer = new SnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
 
 		$this->deserializer = new SnakListDeserializer( $snakDeserializer );
