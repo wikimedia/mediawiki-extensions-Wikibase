@@ -23,11 +23,10 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.experts.CommonsMediaType',
-				'jquery.valueview.experts.UrlType',
 				'mw.ext.valueView',
 				'wikibase.dataTypes',
 				'wikibase.datamodel',
-				'wikibase.experts.EntityIdValue',
+				'wikibase.experts.EntityIdInput',
 			),
 		),
 
@@ -46,21 +45,6 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 			),
 		),
-
-		'wikibase.experts.EntityIdValue' => $moduleTemplate + array(
-			'scripts' => array(
-				'EntityIdValue.js',
-			),
-			'dependencies' => array(
-				'jquery',
-				'jquery.valueview.Expert',
-				'jquery.valueview.BifidExpert',
-				'jquery.valueview.experts.StaticDom',
-				'wikibase',
-				'wikibase.experts.EntityIdInput',
-			),
-		),
-
 	);
 
 } );
