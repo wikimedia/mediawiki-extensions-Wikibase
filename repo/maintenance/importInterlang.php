@@ -15,6 +15,8 @@
  */
 
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\store\EntityStore;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -26,6 +28,16 @@ class importInterlang extends Maintenance {
 	protected $ignore_errors = false;
 	protected $skip = 0;
 	protected $only = 0;
+
+	/**
+	 * @var User
+	 */
+	protected $user = null;
+
+	/**
+	 * @var EntityStore
+	 */
+	protected $store = null;
 
 	public function __construct() {
 		$this->mDescription = "Import interlanguage links in Wikidata.\n\nThe links may be created by extractInterlang.sql";
@@ -41,10 +53,15 @@ class importInterlang extends Maintenance {
 	}
 
 	public function execute() {
+		global $wgUser;
+
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}
+
+		$this->user = $wgUser;
+		$this->store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$this->verbose = (bool)$this->getOption( 'verbose' );
 		$this->ignore_errors = (bool)$this->getOption( 'ignore-errors' );
@@ -128,17 +145,11 @@ class importInterlang extends Maintenance {
 			$item->addSiteLink( new SimpleSiteLink( $lang . 'wiki',  $name ) );
 		}
 
-		$content = \Wikibase\ItemContent::newFromItem( $item );
-
 		try {
-			$status = $content->save( "imported", null, EDIT_NEW );
+			$this->store->saveEntity( $item, 'imported', $this->user, EDIT_NEW );
 
-			if ( $status->isOK() ) {
-				return true;
-			}
-
-			$this->doPrint( "ERROR: " . strtr( $status->getMessage(), "\n", " " ) );
-		} catch ( MWException $ex ) {
+			return true;
+		} catch ( Exception $ex ) {
 			$this->doPrint( "ERROR: " . strtr( $ex->getMessage(), "\n", " " ) );
 		}
 

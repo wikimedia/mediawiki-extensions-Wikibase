@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -25,6 +26,11 @@ class CreatedBlacklistedItems extends \Maintenance {
 	}
 
 	public function execute() {
+		global $wgUser;
+
+		$user = $wgUser;
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
@@ -35,7 +41,7 @@ class CreatedBlacklistedItems extends \Maintenance {
 		};
 
 		$items = array(
-			0 => 'Off-by-one error',
+			//0 => 'Off-by-one error',
 			1 => 'Universe',
 			2 => 'Earth',
 			3 => 'Life',
@@ -67,8 +73,7 @@ class CreatedBlacklistedItems extends \Maintenance {
 			$item->setLabel( 'en', $name );
 			$item->addSiteLink( new SimpleSiteLink( 'enwiki', $name ) );
 
-			$itemContent = ItemContent::newFromItem( $item );
-			$itemContent->save( 'Import' );
+			$store->saveEntity( $item, 'Import', $user, EDIT_NEW );
 		}
 
 		$report( 'Import completed.' );

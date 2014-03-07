@@ -1,4 +1,5 @@
 <?php
+use Wikibase\store\EntityStore;
 
 /**
  * Maintenance script for importing properties in Wikidata.
@@ -27,6 +28,16 @@ class importProperties extends Maintenance {
 	protected $skip = 0;
 	protected $only = 0;
 
+	/**
+	 * @var User
+	 */
+	protected $user = null;
+
+	/**
+	 * @var EntityStore
+	 */
+	protected $store = null;
+
 	public function __construct() {
 		$this->mDescription = "Import properties in Wikidata.";
 
@@ -41,10 +52,15 @@ class importProperties extends Maintenance {
 	}
 
 	public function execute() {
+		global $wgUser;
+
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->output( "You need to have Wikibase enabled in order to use this maintenance script!\n\n" );
 			exit;
 		}
+
+		$this->user = $wgUser;
+		$this->store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$this->verbose = (bool)$this->getOption( 'verbose' );
 		$this->ignore_errors = (bool)$this->getOption( 'ignore-errors' );
@@ -116,21 +132,16 @@ class importProperties extends Maintenance {
 		$property = \Wikibase\Property::newEmpty();
 
 		foreach ( $data as $lang => $title ) {
-            $label = $title;
+			$label = $title;
 			$property->setLabel( $lang, $label );
-            $property->setDataTypeId( 'wikibase-item' );
+			$property->setDataTypeId( 'wikibase-item' );
 		}
 
-		$content = \Wikibase\PropertyContent::newFromProperty( $property );
 		try {
-			$status = $content->save( "imported", null, EDIT_NEW );
+			$this->store->saveEntity( $property, 'imported', $this->user, EDIT_NEW );
 
-			if ( $status->isOK() ) {
-				return true;
-			}
-
-			$this->doPrint( "ERROR: " . strtr( $status->getMessage(), "\n", " " ) );
-		} catch ( MWException $ex ) {
+			return true;
+		} catch ( Exception $ex ) {
 			$this->doPrint( "ERROR: " . strtr( $ex->getMessage(), "\n", " " ) );
 		}
 
