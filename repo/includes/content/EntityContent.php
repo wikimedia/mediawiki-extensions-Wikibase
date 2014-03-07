@@ -210,6 +210,7 @@ abstract class EntityContent extends AbstractContent {
 
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
+		$entityLookup = new WikiPageEntityLookup();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$idParser = new BasicEntityIdParser();
 
@@ -221,6 +222,7 @@ abstract class EntityContent extends AbstractContent {
 			$snakFormatter,
 			$dataTypeLookup,
 			$entityInfoBuilder,
+			$entityLookup,
 			$entityContentFactory,
 			$idParser,
 			$options
@@ -238,6 +240,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
@@ -249,6 +252,7 @@ abstract class EntityContent extends AbstractContent {
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityInfoBuilder $entityInfoBuilder,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
 		SerializationOptions $options
