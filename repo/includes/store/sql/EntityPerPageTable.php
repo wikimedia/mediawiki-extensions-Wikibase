@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use Iterator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -24,9 +25,18 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @param EntityId $entityId
 	 * @param int $pageId
 	 *
+	 * @throws InvalidArgumentException
 	 * @return boolean Success indicator
 	 */
 	public function addEntityPage( EntityId $entityId, $pageId ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int' );
+		}
+
+		if ( $pageId <= 0 ) {
+			throw new InvalidArgumentException( '$pageId must be greater than 0' );
+		}
+
 		$dbw = wfGetDB( DB_MASTER );
 		$select = $dbw->selectField(
 			'wb_entity_per_page',

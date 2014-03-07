@@ -6,6 +6,7 @@ use TestSites;
 use Wikibase\ItemContent;
 use Wikibase\ItemDeletionUpdate;
 use Wikibase\ItemModificationUpdate;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 
 /**
@@ -49,7 +50,10 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 		TestSites::insertIntoDb();
 		$linkLookup = StoreFactory::getStore()->newSiteLinkCache();
 
-		$itemContent->save( '', null, EDIT_NEW );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$revision = $store->saveEntity( $itemContent->getEntity(), "testing", $GLOBALS['wgUser'], EDIT_NEW );
+		$id = $revision->getEntity()->getId()->getNumericId();
 
 		$update = new ItemModificationUpdate( $itemContent );
 		$update->doUpdate();
@@ -57,7 +61,7 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 		$item = $itemContent->getItem();
 
 		$expected = count( $item->getSiteLinks() );
-		$actual = $linkLookup->countLinks( array( $item->getId()->getNumericId() ) );
+		$actual = $linkLookup->countLinks( array( $id ) );
 
 		$this->assertEquals(
 			$expected,
