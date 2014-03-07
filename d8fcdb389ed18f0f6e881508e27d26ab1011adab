@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_92d61ac6",
+        "filename": "lib/WikibaseLib.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2014-03-07T08:13:06Z",
+      "side": 1,
+      "message": "Why are these messages now marked with \"DO NOT TRANSLATE\"? I guess they are visible to the reader?",
+      "revId": "d8fcdb389ed18f0f6e881508e27d26ab1011adab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
