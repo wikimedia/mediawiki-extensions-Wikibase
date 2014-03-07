@@ -52,6 +52,24 @@
       "revId": "6e433d6a687618feb418db8753d8832b1aed0b6a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_cdaf6777",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-07T12:17:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_ce86c56a",
+      "revId": "6e433d6a687618feb418db8753d8832b1aed0b6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
