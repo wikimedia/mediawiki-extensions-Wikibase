@@ -110,7 +110,7 @@ class FormatSnakValueTest extends \ApiTestCase {
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'@^<a href=".*wiki/Q200000">.*</a>$@' ),
+				'/^<a\b[^>]* href="[^"]*\bQ200000"[^>]*>[^<]*<\/a>.*$/' ),
 
 			//TODO: test HTML output
 		);

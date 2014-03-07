@@ -64,7 +64,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
+		$labelFormatter = new EntityIdLabelFormatter( $options, null, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
 		$formatterFactory = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory();
