@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase;
 
 use Action;
@@ -6,6 +7,7 @@ use ChangesList;
 use FormOptions;
 use IContextSource;
 use JobQueueGroup;
+use Message;
 use MovePageForm;
 use OutputPage;
 use Parser;
@@ -664,6 +666,8 @@ final class ClientHooks {
 	 */
 	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
 		$aCustomVariableIds[] = 'noexternallanglinks';
+		$aCustomVariableIds[] = 'wbreponame';
+
 		return true;
 	}
 
@@ -671,8 +675,22 @@ final class ClientHooks {
 	 * Apply the magic word.
 	 */
 	public static function onParserGetVariableValueSwitch( &$parser, &$cache, &$magicWordId, &$ret ) {
-		if( $magicWordId == 'noexternallanglinks' ) {
+		if ( $magicWordId == 'noexternallanglinks' ) {
 			NoLangLinkHandler::handle( $parser, '*' );
+		} elseif ( $magicWordId == 'wbreponame' ) {
+			// @todo factor out, with tests
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$settings = $wikibaseClient->getSettings();
+			$repoSiteName = $settings->getSetting( 'repoSiteName' );
+
+			$message = new Message( $repoSiteName );
+
+			if ( $message->exists() ) {
+				$lang = $parser->getTargetLanguage();
+				$ret = $message->inLanguage( $lang )->parse();
+			} else {
+				$ret = $repoSiteName;
+			}
 		}
 
 		return true;
