@@ -651,7 +651,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $claims->isEmpty() );
 	}
 
-	public function provideGetClaimsByRank() {
+	public function provideGetByRank() {
 		$s1 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
 		$s1->setRank( Claim::RANK_DEPRECATED );
 
@@ -690,10 +690,10 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideGetClaimsByRank
+	 * @dataProvider provideGetByRank
 	 */
-	public function testGetClaimsByRank( $input, $rank, $expected ) {
-		$this->assertEquals( $input->getClaimsByRank( $rank ), $expected );
+	public function testGetByRank( $input, $rank, $expected ) {
+		$this->assertEquals( $input->getByRank( $rank ), $expected );
 	}
 
 	public function testGetBestClaimsEmpty() {
