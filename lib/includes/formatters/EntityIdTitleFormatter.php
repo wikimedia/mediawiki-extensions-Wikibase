@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -28,32 +27,21 @@ class EntityIdTitleFormatter extends EntityIdFormatter {
 	 * @param EntityTitleLookup $titleLookup
 	 */
 	public function __construct( FormatterOptions $options, EntityTitleLookup $titleLookup ) {
-		parent::__construct( $options );
+		parent::__construct( $options, null );
 
 		$this->titleLookup = $titleLookup;
 	}
 
 	/**
-	 * Format an EntityId data value
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 *
-	 * @throws InvalidArgumentException
+	 * @see EntityIdFormatter::formatEntityId
 	 */
-	public function format( $value ) {
-		if ( $value instanceof EntityIdValue ) {
-			$value = $value->getEntityId();
-		}
-
-		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
-		}
-
-		$title = $this->titleLookup->getTitleForId( $value );
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
+		$title = $this->titleLookup->getTitleForId( $entityId );
 		return $title->getFullText();
 	}
 
 }
-

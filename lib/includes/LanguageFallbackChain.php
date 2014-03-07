@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use \Language;
+use Language;
 
 /**
  * FIXME: this class is not a language fallback chain. It takes and uses a fallback chain.
@@ -17,7 +17,7 @@ class LanguageFallbackChain {
 	/**
 	 * @var LanguageWithConversion[]
 	 */
-	private $chain = array();
+	protected $chain;
 
 	/**
 	 * @param LanguageWithConversion[]
@@ -38,7 +38,7 @@ class LanguageFallbackChain {
 	/**
 	 * Try to fetch the best value in a multilingual data array.
 	 *
-	 * @param string[] $data Multilingual data with language codes as keys
+	 * @param array[] $data Multilingual data with language codes as keys
 	 *
 	 * @return null|array of three items: array(
 	 * 	'value' => finally fetched and translated value
@@ -46,7 +46,7 @@ class LanguageFallbackChain {
 	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no "acceptable" data can be found.
 	 */
-	public function extractPreferredValue( $data ) {
+	public function extractPreferredValue( array $data ) {
 
 		foreach ( $this->chain as $languageWithConversion ) {
 			$fetchCode = $languageWithConversion->getFetchLanguageCode();
@@ -67,7 +67,7 @@ class LanguageFallbackChain {
 	 * Try to fetch the best value in a multilingual data array first.
 	 * If no "acceptable" value exists, return any value known.
 	 *
-	 * @param string[] $data Multilingual data with language codes as keys
+	 * @param array[] $data Multilingual data with language codes as keys
 	 *
 	 * @return null|array of three items: array(
 	 * 	'value' => finally fetched and translated value
@@ -75,7 +75,7 @@ class LanguageFallbackChain {
 	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no data with a valid language code can be found.
 	 */
-	public function extractPreferredValueOrAny( $data ) {
+	public function extractPreferredValueOrAny( array $data ) {
 		$preferred = $this->extractPreferredValue( $data );
 
 		if ( $preferred ) {
@@ -94,4 +94,5 @@ class LanguageFallbackChain {
 
 		return null;
 	}
+
 }
