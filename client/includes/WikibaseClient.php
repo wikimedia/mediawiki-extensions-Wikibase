@@ -6,9 +6,9 @@ use DataTypes\DataTypeFactory;
 use Exception;
 use Language;
 use Site;
+use Sites;
 use SiteSQLStore;
 use SiteStore;
-use Sites;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -20,11 +20,11 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -191,7 +191,7 @@ final class WikibaseClient {
 			EntityIdLabelFormatter::OPT_LANG => $languageCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
+		$labelFormatter = new EntityIdLabelFormatter( $options, null, $this->getEntityLookup() );
 
 		return $labelFormatter;
 	}
@@ -489,6 +489,7 @@ final class WikibaseClient {
 	protected function newSnakFormatterFactory() {
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			null,
 			$this->contentLanguage
 		);
 
@@ -521,6 +522,7 @@ final class WikibaseClient {
 	protected function newValueFormatterFactory() {
 		$builders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			null,
 			$this->contentLanguage
 		);
 
@@ -564,4 +566,5 @@ final class WikibaseClient {
 
 		return $this->langLinkHandler;
 	}
+
 }
