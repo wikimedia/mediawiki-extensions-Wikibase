@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -37,6 +36,11 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	const FALLBACK_NONE = 2;
 
 	/**
+	 * @var array[]
+	 */
+	protected $entityInfo;
+
+	/**
 	 * @var EntityLookup
 	 */
 	protected $entityLookup;
@@ -46,13 +50,19 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @param FormatterOptions $options Supported options: OPT_RESOLVE_ID (boolean),
 	 *        OPT_LABEL_FALLBACK (FALLBACK_XXX)
+	 * @param array[] $entityInfo
 	 * @param EntityLookup $entityLookup
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
+	public function __construct(
+		FormatterOptions $options,
+		$entityInfo,
+		EntityLookup $entityLookup
+	) {
 		parent::__construct( $options );
 
+		$this->entityInfo = $entityInfo;
 		$this->entityLookup = $entityLookup;
 
 		$this->defaultOption( self::OPT_RESOLVE_ID, true );
@@ -77,36 +87,29 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	}
 
 	/**
-	 * Format an EntityId data value
+	 * @param EntityId $entityId
+	 * @param bool $exists
 	 *
-	 * @since 0.4
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
+	 * @throws FormattingException
 	 * @return string
 	 *
-	 * @throws RuntimeException
-	 * @throws InvalidArgumentException
+	 * @see EntityIdFormatter::formatEntityId
 	 */
-	public function format( $value ) {
-		$value = $this->unwrapEntityId( $value );
-
+	public function formatEntityId( EntityId $entityId, $exists = true ) {
 		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
-			$label = $this->lookupItemLabel( $value );
-		} else {
-			$label = false;
+			$label = $this->lookupEntityLabel( $entityId );
 		}
 
-		if ( $label === false ) {
+		if ( !isset( $label ) ) {
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
+				case self::FALLBACK_PREFIXED_ID:
+					$label = parent::formatEntityId( $entityId, $exists );
+					break;
 				case self::FALLBACK_EMPTY_STRING:
 					$label = '';
 					break;
-				case self::FALLBACK_PREFIXED_ID:
-					$label = $value->getPrefixedId();
-					break;
 				default:
-					throw new FormattingException( 'No label found for ' . $value );
+					throw new FormattingException( 'No label found for ' . $entityId );
 			}
 		}
 
@@ -114,26 +117,31 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 		return $label;
 	}
 
-	/**
-	 * Unwrap an EntityId value which might be wrapped in an EntityIdValue
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
-	 * @return EntityId
-	 *
-	 * @throws InvalidArgumentException
-	 */
-
-	protected function unwrapEntityId( $value ) {
-		if ( $value instanceof EntityIdValue ) {
-			$value = $value->getEntityId();
+	protected function entityIdExists( EntityId $entityId ) {
+		if ( is_array( $this->entityInfo ) ) {
+			$id = $entityId->getSerialization();
+			return array_key_exists( $id, $this->entityInfo );
 		}
 
-		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
+		return parent::entityIdExists( $entityId );
+	}
+
+	protected function lookupEntityInfo( EntityId $entityId ) {
+		if ( $this->entityIdExists( $entityId ) ) {
+			$id = $entityId->getSerialization();
+			return $this->entityInfo[$id];
 		}
 
-		return $value;
+		return null;
+	}
+
+	protected function lookupEntityLabels( EntityId $entityId ) {
+		$entityInfo = $this->lookupEntityInfo( $entityId );
+		if ( is_array( $entityInfo ) && array_key_exists( 'labels', $entityInfo ) ) {
+			return $entityInfo['labels'];
+		}
+
+		return null;
 	}
 
 	/**
@@ -143,31 +151,29 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string|boolean
+	 * @return string
 	 */
-	protected function lookupItemLabel( EntityId $entityId ) {
-		$entity = $this->entityLookup->getEntity( $entityId );
-
-		if ( $entity === null ) {
-			return false;
-		}
-
-		/* @var LanguageFallbackChain $languageFallbackChain */
-		if ( $this->options->hasOption( 'languages' ) ) {
-			$languageFallbackChain = $this->getOption( 'languages' );
-
-			$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
-
-			if ( $extractedData === null ) {
-				return false;
+	protected function lookupEntityLabel( EntityId $entityId ) {
+		$labels = $this->lookupEntityLabels( $entityId );
+		if ( is_array( $labels ) ) {
+			if ( $this->options->hasOption( 'languages' ) ) {
+				/* @var LanguageFallbackChain $languageFallbackChain */
+				$languageFallbackChain = $this->getOption( 'languages' );
+				$labelData = $languageFallbackChain->extractPreferredValue( $labels );
 			} else {
-				return $extractedData['value'];
+				$lang = $this->getOption( self::OPT_LANG );
+				if ( isset( $labels[$lang] ) ) {
+					$labelData = $labels[$lang];
+				}
 			}
-		} else {
-			$lang = $this->getOption( self::OPT_LANG );
-			return $entity->getLabel( $lang );
+
+			if ( isset( $labelData ) ) {
+				return $labelData['value'];
+			}
 		}
+
+		// TODO: $this->entityLookup is currently unused
+		return null;
 	}
 
 }
-

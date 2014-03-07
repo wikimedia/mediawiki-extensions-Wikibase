@@ -208,6 +208,7 @@ class PropertyContent extends EntityContent {
 	 * @param SnakFormatter $snakFormatter
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityLookup $entityLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
@@ -219,6 +220,7 @@ class PropertyContent extends EntityContent {
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityInfoBuilder $entityInfoBuilder,
+		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
 		SerializationOptions $options
@@ -236,6 +238,7 @@ class PropertyContent extends EntityContent {
 			$snakFormatter,
 			$dataTypeLookup,
 			$entityInfoBuilder,
+			$entityLookup,
 			$entityTitleLookup,
 			$options,
 			$configBuilder
