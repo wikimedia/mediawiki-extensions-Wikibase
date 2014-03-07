@@ -17,8 +17,6 @@ use Wikibase\Snak;
 /**
  * @covers Wikibase\ReferencedEntitiesFinder
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group EntityLinkFinder

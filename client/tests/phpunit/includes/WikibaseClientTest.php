@@ -8,13 +8,10 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\Client\WikibaseClient
- *
- * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseClient

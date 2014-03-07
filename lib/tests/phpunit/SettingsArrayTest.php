@@ -7,8 +7,6 @@ use Wikibase\SettingsArray;
 /**
  * @covers Wikibase\SettingsArray
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group SettingsArrayTest

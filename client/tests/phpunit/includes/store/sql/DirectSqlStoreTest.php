@@ -10,8 +10,6 @@ use Wikibase\DirectSqlStore;
 /**
  * @covers Wikibase\DirectSqlStore
  *
- * @since 0.4
- *
  * @group Database
  * @group Wikibase
  * @group WikibaseClient

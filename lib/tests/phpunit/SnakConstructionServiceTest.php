@@ -13,8 +13,6 @@ use Wikibase\SnakFactory;
 /**
  * @covers Wikibase\Lib\SnakConstructionService
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group Snak

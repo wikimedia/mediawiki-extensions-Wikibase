@@ -14,8 +14,6 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\Test\MockRepository
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseEntityLookup

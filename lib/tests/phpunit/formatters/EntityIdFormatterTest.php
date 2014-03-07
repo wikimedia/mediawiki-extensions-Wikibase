@@ -11,8 +11,6 @@ use Wikibase\Lib\EntityIdFormatter;
 /**
  * @covers Wikibase\Lib\EntityIdFormatter
  *
- * @since 0.4
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
@@ -30,8 +28,6 @@ class EntityIdFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return array
 	 */
 	public function validProvider() {

@@ -12,8 +12,6 @@ use Wikibase\SnakFactory;
 /**
  * @covers Wikibase\SnakFactory
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseSnak

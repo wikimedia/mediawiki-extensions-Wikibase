@@ -16,8 +16,6 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\Lib\EntityIdLinkFormatter
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group ValueFormatters
  * @group DataValueExtensions

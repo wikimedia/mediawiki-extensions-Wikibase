@@ -14,8 +14,6 @@ use Wikibase\RepoLinker;
 /**
  * @covers Wikibase\ChangeLineFormatter
  *
- * @since 0.5
- *
  * @group WikibaseClient
  * @group Wikibase
  * @group Database

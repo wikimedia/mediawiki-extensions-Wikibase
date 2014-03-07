@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Test;
 
 use MWNamespace;
@@ -6,8 +7,6 @@ use Wikibase\NamespaceChecker;
 
 /**
  * @covers Wikibase\NamespaceChecker
- *
- * @since 0.4
  *
  * @group WikibaseClient
  * @group Wikibase

@@ -11,8 +11,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\TermSearchKeyBuilder
  *
- * @since 0.2
- *
  * @group Wikibase
  * @group WikibaseStore
  * @group WikibaseRepo

@@ -15,8 +15,6 @@ use Wikibase\SnakFactory;
 /**
  * @covers Wikibase\Client\Scribunto\WikibaseLuaEntityBindings
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseScribunto

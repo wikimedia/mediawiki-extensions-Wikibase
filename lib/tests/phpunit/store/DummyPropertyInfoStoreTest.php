@@ -9,8 +9,6 @@ use Wikibase\PropertyInfoStore;
 /**
  * @covers Wikibase\DummyPropertyInfoStore
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibasePropertyInfo

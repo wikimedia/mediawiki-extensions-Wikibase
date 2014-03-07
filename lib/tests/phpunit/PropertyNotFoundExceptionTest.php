@@ -8,8 +8,6 @@ use Wikibase\Lib\PropertyNotFoundException;
 /**
  * @covers Wikibase\Lib\PropertyNotFoundException
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseLib
  *

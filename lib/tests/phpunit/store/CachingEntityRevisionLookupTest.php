@@ -11,8 +11,6 @@ use Wikibase\store\CachingEntityRevisionLookup;
 /**
  * @covers Wikibase\store\CachingEntityRevisionLookup
  *
- * @since 0.5
- *
  * @group WikibaseLib
  * @group WikibaseEntityLookup
  * @group Wikibase

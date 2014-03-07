@@ -11,8 +11,6 @@ use Wikibase\Client\WikibaseClient;
 /**
  * @covers Scribunto_LuaWikibaseEntityLibrary
  *
- * @since 0.5
- *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
  * @group WikibaseClient

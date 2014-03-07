@@ -13,8 +13,6 @@ use Wikibase\EntityRevision;
 /**
  * Base class for testing EntityLookup implementations
  *
- * @since 0.4
- *
  * @group Wikibase
  *
  * @licence GNU GPL v2+

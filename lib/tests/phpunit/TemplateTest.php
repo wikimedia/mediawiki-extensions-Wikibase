@@ -8,8 +8,6 @@ use Wikibase\Template;
 /**
  * @covers Wikibase\Template
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseLib
  *

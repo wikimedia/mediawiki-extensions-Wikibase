@@ -7,8 +7,6 @@ use Wikibase\Utils;
 /**
  * @covers Wikibase\Utils
  *
- * @since 0.1
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseUtils

@@ -12,8 +12,6 @@ use Wikibase\RepoLinker;
 /**
  * @covers Wikibase\Client\MovePageNotice
  *
- * @since 0.4
- *
  * @group WikibaseClient
  * @group Wikibase
  * @group Database

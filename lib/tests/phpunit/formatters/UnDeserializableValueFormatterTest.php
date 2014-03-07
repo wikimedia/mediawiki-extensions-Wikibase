@@ -9,8 +9,6 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
 /**
  * @covers Wikibase\Lib\UnDeserializableValueFormatter
  *
- * @since 0.5
- *
  * @group WikibaseLib
  * @group Wikibase
  *

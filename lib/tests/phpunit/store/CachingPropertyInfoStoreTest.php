@@ -10,8 +10,6 @@ use Wikibase\PropertyInfoStore;
 /**
  * @covers Wikibase\CachingPropertyInfoStore
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibasePropertyInfo

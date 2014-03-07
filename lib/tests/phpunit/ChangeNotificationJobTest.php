@@ -8,8 +8,6 @@ use Wikibase\ChangesTable;
 /**
  * @covers Wikibase\ChangeNotificationJob
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseChange

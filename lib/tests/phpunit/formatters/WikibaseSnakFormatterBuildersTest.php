@@ -21,8 +21,6 @@ use Wikibase\PropertyValueSnak;
 /**
  * @covers Wikibase\Lib\WikibaseSnakFormatterBuilders
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

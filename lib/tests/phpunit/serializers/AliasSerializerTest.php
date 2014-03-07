@@ -9,8 +9,6 @@ use Wikibase\Lib\Serializers\AliasSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\AliasSerializer
  *
- * @since 0.4
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization

@@ -9,8 +9,6 @@ use Wikibase\NamespaceChecker;
 /**
  * @covers Wikibase\Client\Specials\SpecialUnconnectedPages
  *
- * @since 0.4
- *
  * @group WikibaseClient
  * @group SpecialPage
  * @group WikibaseSpecialPage

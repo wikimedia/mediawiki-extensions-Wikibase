@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @covers Wikibase\Client\Hooks\InfoActionHookHandler
  *
- * @since 0.5
- *
  * @group WikibaseClient
  * @group InfoActionHookHandler
  * @group Wikibase

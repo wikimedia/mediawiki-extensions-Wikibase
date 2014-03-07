@@ -8,8 +8,6 @@ use Wikibase\PropertyParserFunction;
 /**
  * @covers Wikibase\PropertyParserFunction
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseClient
  * @group PropertyParserFunctionTest

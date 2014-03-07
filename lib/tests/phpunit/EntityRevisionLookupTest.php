@@ -12,8 +12,6 @@ use Wikibase\EntityRevisionLookup;
 /**
  * Base class for testing EntityRevisionLookup implementations
  *
- * @since 0.5
- *
  * @group Wikibase
  *
  * @licence GNU GPL v2+

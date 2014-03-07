@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
@@ -7,8 +8,6 @@ use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Wikibase\UpdateRepoOnMove
- *
- * @since 0.4
  *
  * @group WikibaseClient
  * @group Test

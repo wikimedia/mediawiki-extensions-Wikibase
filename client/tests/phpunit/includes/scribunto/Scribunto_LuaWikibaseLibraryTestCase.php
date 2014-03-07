@@ -15,8 +15,6 @@ use Wikibase\Client\WikibaseClient;
 /**
  * Base class for Wikibase Scribunto Tests
  *
- * @since 0.5
- *
  * @group WikibaseScribunto
  * @group WikibaseIntegration
  * @group WikibaseClient

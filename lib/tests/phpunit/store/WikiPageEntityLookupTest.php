@@ -11,8 +11,6 @@ use Wikibase\WikiPageEntityLookup;
 /**
  * @covers Wikibase\WikiPageEntityLookup
  *
- * @since 0.3
- *
  * @group Database
  * @group Wikibase
  * @group WikibaseLib

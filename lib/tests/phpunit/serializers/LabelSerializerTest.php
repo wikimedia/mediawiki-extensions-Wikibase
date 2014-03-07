@@ -11,8 +11,6 @@ use Wikibase\Lib\Serializers\MultilingualSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\LabelSerializer
  *
- * @since 0.4
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization

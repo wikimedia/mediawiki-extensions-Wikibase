@@ -7,8 +7,6 @@ use Wikibase\Term;
 /**
  * @covers Wikibase\Term
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseTerm
  * @group WikibaseLib

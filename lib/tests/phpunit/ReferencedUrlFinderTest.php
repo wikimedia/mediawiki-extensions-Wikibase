@@ -15,8 +15,6 @@ use Wikibase\Snak;
 /**
  * @covers Wikibase\ReferencedUrlFinder
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  *

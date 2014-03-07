@@ -8,8 +8,6 @@ use Wikibase\Lib\TermsToClaimsTranslator;
 /**
  * @covers Wikibase\Lib\TermsToClaimsTranslator
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  *

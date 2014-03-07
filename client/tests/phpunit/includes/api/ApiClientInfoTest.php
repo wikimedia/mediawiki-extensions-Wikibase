@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Test;
 
 use Wikibase\SettingsArray;
@@ -6,8 +7,6 @@ use Wikibase\ApiClientInfo;
 
 /**
  * @covers Wikibase\ApiClientInfo
- *
- * @since 0.4
  *
  * @group Database
  * @group API

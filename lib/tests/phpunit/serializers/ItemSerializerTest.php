@@ -12,8 +12,6 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\ItemSerializer
  *
- * @since 0.2
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
@@ -25,8 +23,6 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::getClass
-	 *
-	 * @since 0.2
 	 *
 	 * @return string
 	 */
@@ -45,8 +41,6 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	/**
 	 * @see EntitySerializerBaseTest::getEntityInstance
 	 *
-	 * @since 0.2
-	 *
 	 * @return Item
 	 */
 	protected function getEntityInstance() {
@@ -57,8 +51,6 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::validProvider
-	 *
-	 * @since 0.2
 	 *
 	 * @return array
 	 */

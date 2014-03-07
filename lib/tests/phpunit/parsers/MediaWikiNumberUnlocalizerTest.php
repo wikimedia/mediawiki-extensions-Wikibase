@@ -8,8 +8,6 @@ use Wikibase\Lib\MediaWikiNumberUnlocalizer;
 /**
  * @covers Wikibase\Lib\MediaWikiNumberUnlocalizer
  *
- * @since 0.5
- *
  * @group ValueParsers
  * @group WikibaseLib
  * @group Wikibase

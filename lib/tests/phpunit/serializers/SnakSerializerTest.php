@@ -13,8 +13,6 @@ use Wikibase\PropertyValueSnak;
 /**
  * @covers Wikibase\Lib\Serializers\SnakSerializer
  *
- * @since 0.2
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
@@ -27,8 +25,6 @@ class SnakSerializerTest extends SerializerBaseTest {
 	/**
 	 * @see SerializerBaseTest::getClass
 	 *
-	 * @since 0.2
-	 *
 	 * @return string
 	 */
 	protected function getClass() {
@@ -36,8 +32,6 @@ class SnakSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @return SnakSerializer
 	 */
 	protected function getInstance() {
@@ -61,8 +55,6 @@ class SnakSerializerTest extends SerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::validProvider
-	 *
-	 * @since 0.2
 	 *
 	 * @return array
 	 */

@@ -10,8 +10,6 @@ use Wikibase\Lib\EscapingValueFormatter;
 /**
  * @covers Wikibase\Lib\EscapingValueFormatter
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

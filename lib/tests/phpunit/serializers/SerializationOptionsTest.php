@@ -8,8 +8,6 @@ use Wikibase\LanguageFallbackChainFactory;
 /**
  * @covers Wikibase\Lib\Serializers\SerializationOptions
  *
- * @since 0.2
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization

@@ -8,8 +8,6 @@ use Wikibase\Lib\ClaimGuidValidator;
 /**
  * @covers Wikibase\Lib\ClaimGuidValidator
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  *

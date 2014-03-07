@@ -15,8 +15,6 @@ use Wikibase\Lib\EntityIdFormatter;
 /**
  * @covers Wikibase\Lib\Serializers\SiteLinkSerializer
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseSerialization
  * @group WikibaseSiteLinkSerializer

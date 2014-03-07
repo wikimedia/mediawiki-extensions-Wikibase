@@ -12,8 +12,6 @@ use Wikibase\RevisionData;
 /**
  * @covers Wikibase\ExternalChangeFactory
  *
- * @since 0.5
- *
  * @group WikibaseClient
  * @group Database
  * @group medium

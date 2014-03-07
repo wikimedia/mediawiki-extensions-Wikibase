@@ -8,8 +8,6 @@ use Wikibase\Lib\InMemoryDataTypeLookup;
 /**
  * @covers Wikibase\Lib\InMemoryDataTypeLookup
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group DataTypeLookupTest

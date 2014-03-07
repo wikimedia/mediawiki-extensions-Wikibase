@@ -11,8 +11,6 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 /**
  * Tests for the Wikibase\Serializer implementing classes.
  *
- * @since 0.2
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization

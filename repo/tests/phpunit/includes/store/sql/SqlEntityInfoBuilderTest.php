@@ -12,8 +12,6 @@ use Wikibase\SqlEntityInfoBuilder;
 /**
  * @covers Wikibase\SqlEntityInfoBuilder
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseStore

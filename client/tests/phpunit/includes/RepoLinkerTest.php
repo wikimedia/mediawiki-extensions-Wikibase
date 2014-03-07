@@ -10,8 +10,6 @@ use Wikibase\RepoLinker;
 /**
  * @covers Wikibase\RepoLinker
  *
- * @since 0.4
- *
  * @group WikibaseClient
  * @group RepoLinkerTest
  * @group Wikibase

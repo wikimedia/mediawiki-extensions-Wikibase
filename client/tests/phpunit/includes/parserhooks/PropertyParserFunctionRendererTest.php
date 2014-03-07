@@ -16,8 +16,6 @@ use Wikibase\PropertyValueSnak;
 /**
  * @covers Wikibase\PropertyParserFunctionRenderer
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseClient
  * @group PropertyParserFunctionTest

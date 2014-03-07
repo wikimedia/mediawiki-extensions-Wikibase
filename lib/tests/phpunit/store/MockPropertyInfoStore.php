@@ -9,7 +9,9 @@ use Wikibase\PropertyInfoStore;
 
 /**
  * Class MockPropertyInfoStore is an implementation of PropertyInfoStore based on a local array.
+ *
  * @since 0.4
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */

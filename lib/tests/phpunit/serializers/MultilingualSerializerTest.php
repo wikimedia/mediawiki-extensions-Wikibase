@@ -9,8 +9,6 @@ use Wikibase\Lib\Serializers\MultilingualSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\MultilingualSerializer
  *
- * @since 0.4
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization

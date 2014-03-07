@@ -11,8 +11,6 @@ use Wikibase\Lib\QuantityDetailsFormatter;
 /**
  * @covers Wikibase\Lib\QuantityDetailsFormatter
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group WikibaseLib
  * @group Wikibase

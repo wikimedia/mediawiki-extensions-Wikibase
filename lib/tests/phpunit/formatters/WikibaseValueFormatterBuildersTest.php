@@ -22,8 +22,6 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 /**
  * @covers Wikibase\Lib\WikibaseValueFormatterBuilders
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

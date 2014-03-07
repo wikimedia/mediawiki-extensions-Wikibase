@@ -7,8 +7,6 @@ use Wikibase\LanguageFallbackChainFactory;
 /**
  * @covers Wikibase\LanguageFallbackChain
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseUtils

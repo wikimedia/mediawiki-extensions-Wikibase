@@ -5,8 +5,6 @@ use Wikibase\Test\MockSiteStore;
 /**
  * @covers SitesBuilder
  *
- * @since 0.5
- *
  * @group Wikibase
  *
  * @licence GNU GPL v2+

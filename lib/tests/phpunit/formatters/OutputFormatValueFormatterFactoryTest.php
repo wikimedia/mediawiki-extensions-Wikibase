@@ -9,8 +9,6 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 /**
  * @covers Wikibase\Lib\OutputFormatValueFormatterFactory
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

@@ -15,8 +15,6 @@ use Wikibase\SnakList;
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListSerializer
  *
- * @since 0.2
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
@@ -29,8 +27,6 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	/**
 	 * @see SerializerBaseTest::getClass
 	 *
-	 * @since 0.2
-	 *
 	 * @return string
 	 */
 	protected function getClass() {
@@ -38,8 +34,6 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	}
 
 	/**
-	 * @since 0.2
-	 *
 	 * @return ByPropertyListSerializer
 	 */
 	protected function getInstance() {
@@ -49,8 +43,6 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::validProvider
-	 *
-	 * @since 0.2
 	 *
 	 * @return array
 	 */

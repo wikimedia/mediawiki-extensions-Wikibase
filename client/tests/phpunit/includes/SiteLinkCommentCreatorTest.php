@@ -14,8 +14,6 @@ use Wikibase\SiteLinkCommentCreator;
 /**
  * @covers Wikibase\SiteLinkCommentCreator
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseClient
  *

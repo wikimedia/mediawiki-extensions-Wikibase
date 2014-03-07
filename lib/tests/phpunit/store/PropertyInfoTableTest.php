@@ -9,8 +9,6 @@ use Wikibase\Settings;
 /**
  * @covers Wikibase\PropertyInfoTable
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseStore

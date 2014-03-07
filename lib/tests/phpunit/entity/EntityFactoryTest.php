@@ -6,12 +6,9 @@ use Wikibase\EntityFactory;
 use Wikibase\Entity;
 use Wikibase\Item;
 use Wikibase\Property;
-use Wikibase\Query;
 
 /**
  * @covers Wikibase\EntityFactory
- *
- * @since 0.2
  *
  * @group Wikibase
  * @group WikibaseLib

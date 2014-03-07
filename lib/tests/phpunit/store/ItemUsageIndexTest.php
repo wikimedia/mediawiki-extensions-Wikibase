@@ -12,8 +12,6 @@ use Wikibase\ItemUsageIndex;
 /**
  * @covers Wikibase\ItemUsageIndex
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseStore

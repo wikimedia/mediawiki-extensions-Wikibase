@@ -17,8 +17,6 @@ use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 /**
  * @covers Wikibase\Client\Scribunto\WikibaseLuaBindings
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseScribunto

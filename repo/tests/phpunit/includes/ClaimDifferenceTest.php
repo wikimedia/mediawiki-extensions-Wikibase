@@ -13,8 +13,6 @@ use Wikibase\Statement;
 /**
  * @covers Wikibase\ClaimDifference
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseRepo
  * @group WikibaseClaim

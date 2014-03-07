@@ -13,8 +13,6 @@ use Wikibase\Lib\EntityIdValueParser;
 /**
  * @covers Wikibase\Lib\EntityIdValueParser
  *
- * @since 0.5
- *
  * @group ValueParsers
  * @group WikibaseLib
  * @group Wikibase
@@ -27,7 +25,6 @@ use Wikibase\Lib\EntityIdValueParser;
 class EntityIdValueParserTest extends StringValueParserTest {
 
 	/**
-	 * @since 0.1
 	 * @return ValueParser
 	 */
 	protected function getInstance() {
@@ -38,8 +35,6 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	/**
 	 * @see ValueParserTestBase::newParserOptions
 	 *
-	 * @since 0.4
-	 *
 	 * @return ParserOptions
 	 */
 	protected function newParserOptions() {
@@ -48,8 +43,6 @@ class EntityIdValueParserTest extends StringValueParserTest {
 
 	/**
 	 * @see ValueParserTestBase::parseProvider
-	 *
-	 * @since 0.4
 	 *
 	 * @return array
 	 */
@@ -94,8 +87,6 @@ class EntityIdValueParserTest extends StringValueParserTest {
 
 	/**
 	 * @see ValueParserTestBase::getParserClass
-	 *
-	 * @since 0.4
 	 *
 	 * @return string
 	 */

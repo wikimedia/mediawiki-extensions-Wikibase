@@ -9,8 +9,6 @@ use Wikibase\SiteLink;
 /**
  * @covers Wikibase\SiteLink
  *
- * @since 0.1
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseDataModel

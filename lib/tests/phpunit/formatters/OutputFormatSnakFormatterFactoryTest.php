@@ -9,8 +9,6 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 /**
  * @covers Wikibase\Lib\OutputFormatSnakFormatterFactory
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

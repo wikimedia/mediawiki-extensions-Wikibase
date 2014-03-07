@@ -14,8 +14,6 @@ use Wikibase\Test\MockRepository;
 /**
  * @covers Wikibase\Lib\PropertyInfoDataTypeLookup
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  * @group DataTypeLookupTest

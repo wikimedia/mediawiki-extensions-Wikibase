@@ -8,8 +8,6 @@ use Wikibase\Summary;
 /**
  * @covers Wikibase\Summary
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseSummary
  *

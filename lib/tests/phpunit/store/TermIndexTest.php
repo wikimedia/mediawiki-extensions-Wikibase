@@ -13,8 +13,6 @@ use Wikibase\Term;
 /**
  * Base class for tests for calsses implementing Wikibase\TermIndex.
  *
- * @since 0.1
- *
  * @group Wikibase
  *
  * @licence GNU GPL v2+

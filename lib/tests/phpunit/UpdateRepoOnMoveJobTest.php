@@ -2,14 +2,13 @@
 
 namespace Wikibase\Test;
 
-use Title, User;
+use Title;
+use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\UpdateRepoOnMoveJob;
 
 /**
  * @covers Wikibase\UpdateRepoOnMoveJob
- *
- * @since 0.4
  *
  * @group Wikibase
  * @group WikibaseLib

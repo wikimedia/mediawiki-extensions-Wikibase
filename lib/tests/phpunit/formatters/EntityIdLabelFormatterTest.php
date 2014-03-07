@@ -15,8 +15,6 @@ use Wikibase\LanguageFallbackChainFactory;
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter
  *
- * @since 0.4
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
@@ -45,8 +43,6 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @return array
 	 */
 	public function validProvider() {

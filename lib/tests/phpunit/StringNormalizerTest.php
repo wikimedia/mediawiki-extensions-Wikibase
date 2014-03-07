@@ -7,8 +7,6 @@ use Wikibase\StringNormalizer;
 /**
  * @covers Wikibase\StringNormalizer
  *
- * @since 0.4
- *
  * @group WikibaseLib
  * @group Wikibase
  *

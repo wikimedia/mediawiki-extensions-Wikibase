@@ -7,8 +7,6 @@ use Wikibase\ChunkCache;
 /**
  * @covers Wikibase\ChunkCache
  *
- * @since 0.4
- *
  * @group Wikibase
  * @group WikibaseLib
  *

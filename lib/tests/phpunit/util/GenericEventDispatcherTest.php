@@ -8,8 +8,6 @@ use Wikibase\util\GenericEventDispatcher;
 /**
  * @covers Wikibase\util\GenericEventDispatcher
  *
- * @since 0.5
- *
  * @group Wikibase
  * @group WikibaseLib
  *

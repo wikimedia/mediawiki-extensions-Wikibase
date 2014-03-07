@@ -7,8 +7,6 @@ use Wikibase\HttpAcceptParser;
 /**
  * @covers Wikibase\HttpAcceptParser
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseLib
  *

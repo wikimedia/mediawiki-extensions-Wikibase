@@ -14,8 +14,6 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\Lib\Serializers\DispatchingEntitySerializer
  *
- * @since 0.5
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
@@ -27,8 +25,6 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::getClass
-	 *
-	 * @since 0.5
 	 *
 	 * @return string
 	 */
@@ -48,8 +44,6 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::validProvider
-	 *
-	 * @since 0.5
 	 *
 	 * @return array
 	 */

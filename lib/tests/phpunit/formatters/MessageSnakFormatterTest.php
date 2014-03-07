@@ -11,8 +11,6 @@ use Wikibase\PropertySomeValueSnak;
 /**
  * @covers Wikibase\Lib\MessageSnakFormatter
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

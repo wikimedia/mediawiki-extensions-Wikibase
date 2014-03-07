@@ -8,8 +8,6 @@ use FormOptions;
 /**
  * @covers Wikibase\RecentChangesFilterOptions
  *
- * @since 0.5
- *
  * @group WikibaseClient
  * @group Test
  * @group Wikibase

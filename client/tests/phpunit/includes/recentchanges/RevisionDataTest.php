@@ -7,8 +7,6 @@ use Wikibase\RevisionData;
 /**
  * @covers Wikibase\RevisionData
  *
- * @since 0.5
- *
  * @group WikibaseClient
  * @group Wikibase
  *

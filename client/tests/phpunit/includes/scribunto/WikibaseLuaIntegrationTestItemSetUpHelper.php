@@ -19,8 +19,6 @@ use Wikibase\Client\WikibaseClient;
 /**
  * Helper class for Lua integration tests.
  *
- * @since 0.5
- *
  * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */

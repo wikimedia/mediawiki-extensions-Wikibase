@@ -12,10 +12,7 @@ use Wikibase\ReferencedPagesFinder;
 /**
  * @covers Wikibase\ReferencedPagesFinder
  *
- * @since 0.5
- *
  * @group Database
- *        ^---- This uses Title
  * @group WikibaseClient
  * @group Wikibase
  * @group ReferencedPagesFinder

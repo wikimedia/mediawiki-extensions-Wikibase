@@ -17,15 +17,12 @@ use Wikibase\Item;
 /**
  * @covers Wikibase\ChangeHandler
  *
- * @since 0.1
- *
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseChange
  * @group ChangeHandlerTest
  *
  * @group Database
- *        ^---- needed because we rely on Title objects internally
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

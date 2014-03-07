@@ -15,8 +15,6 @@ use Wikibase\Lib\Serializers\SnakSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\ClaimSerializer
  *
- * @since 0.2
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
@@ -29,8 +27,6 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::getClass
-	 *
-	 * @since 0.2
 	 *
 	 * @return string
 	 */
@@ -48,8 +44,6 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::validProvider
-	 *
-	 * @since 0.2
 	 *
 	 * @return array
 	 */

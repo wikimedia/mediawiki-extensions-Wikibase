@@ -13,8 +13,6 @@ use Wikibase\Reference;
 /**
  * @covers Wikibase\Lib\Serializers\SerializerFactory
  *
- * @since 0.4
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization

@@ -12,8 +12,6 @@ use Wikibase\RepoLinker;
 /**
  * @covers Wikibase\RepoItemLinkGenerator
  *
- * @since 0.4
- *
  * @group WikibaseClient
  * @group RepoItemLinkGenerator
  * @group Wikibase

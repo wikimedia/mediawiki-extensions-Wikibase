@@ -10,8 +10,6 @@ use Wikibase\Property;
 /**
  * @covers Wikibase\Lib\Serializers\PropertySerializer
  *
- * @since 0.3
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization
@@ -23,8 +21,6 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::getClass
-	 *
-	 * @since 0.3
 	 *
 	 * @return string
 	 */
@@ -43,8 +39,6 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 	/**
 	 * @see EntitySerializerBaseTest::getEntityInstance
 	 *
-	 * @since 0.3
-	 *
 	 * @return Property
 	 */
 	protected function getEntityInstance() {
@@ -55,8 +49,6 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 
 	/**
 	 * @see SerializerBaseTest::validProvider
-	 *
-	 * @since 0.3
 	 *
 	 * @return array
 	 */

@@ -11,8 +11,6 @@ use Wikibase\Lib\Serializers\DescriptionSerializer;
 /**
  * @covers Wikibase\Lib\Serializers\DescriptionSerializer
  *
- * @since 0.4
- *
  * @group WikibaseLib
  * @group Wikibase
  * @group WikibaseSerialization

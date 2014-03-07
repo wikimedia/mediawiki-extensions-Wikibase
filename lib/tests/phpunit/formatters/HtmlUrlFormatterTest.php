@@ -10,8 +10,6 @@ use Wikibase\Lib\HtmlUrlFormatter;
 /**
  * @covers Wikibase\Lib\HtmlUrlFormatter
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib

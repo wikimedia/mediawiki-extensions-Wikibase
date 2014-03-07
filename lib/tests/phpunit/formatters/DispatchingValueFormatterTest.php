@@ -12,8 +12,6 @@ use Wikibase\Lib\DispatchingValueFormatter;
 /**
  * @covers Wikibase\Lib\DispatchingValueFormatter
  *
- * @since 0.5
- *
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
