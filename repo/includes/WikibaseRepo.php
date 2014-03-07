@@ -429,6 +429,8 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			null,
+			$this->getEntityTitleLookup(),
 			$wgContLang
 		);
 
@@ -463,6 +465,8 @@ class WikibaseRepo {
 
 		$builders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			null,
+			$this->getEntityTitleLookup(),
 			$wgContLang
 		);
 
@@ -505,6 +509,8 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
+			null,
+			$this->getEntityTitleLookup(),
 			$wgContLang
 		);
 

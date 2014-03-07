@@ -52,9 +52,16 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
+		$entityTitleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return \Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
 		$lang = Language::factory( 'en' );
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
+		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, null, $entityTitleLookup, $lang );
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup );
 	}
 

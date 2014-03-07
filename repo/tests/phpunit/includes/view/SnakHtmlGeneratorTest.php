@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\View\SnakHtmlGenerator;
@@ -27,14 +27,14 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetSnakHtml(
 		$snakFormatter,
-		$entityTitleLookup,
+		$entityIdHtmlLinkFormatter,
 		$propertyLabels,
 		$snak,
 		$patterns
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityIdHtmlLinkFormatter
 		);
 
 		$html = $snakHtmlGenerator->getSnakHtml( $snak, $propertyLabels );
@@ -47,13 +47,13 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function getSnakHtmlProvider() {
 		$snakFormatter = $this->getSnakFormatterMock();
 
-		$entityTitleLookupMock = $this->getEntityTitleLookupMock();
+		$entityIdHtmlLinkFormatter = $this->getEntityIdHtmlLinkFormatterMock();
 
 		$testCases = array();
 
 		$testCases[] = array(
 			$snakFormatter,
-			$entityTitleLookupMock,
+			$entityIdHtmlLinkFormatter,
 			array(),
 			new PropertySomeValueSnak( 42 ),
 			array(
@@ -64,7 +64,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$snakFormatter,
-			$entityTitleLookupMock,
+			$entityIdHtmlLinkFormatter,
 			array(),
 			new PropertySomeValueSnak( 42 ),
 			array(
@@ -75,7 +75,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$snakFormatter,
-			$entityTitleLookupMock,
+			$entityIdHtmlLinkFormatter,
 			array(),
 			new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 			array(
@@ -112,15 +112,14 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityIdHtmlLinkFormatter
 	 */
-	protected function getEntityTitleLookupMock() {
-		$lookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
-		$lookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
+	protected function getEntityIdHtmlLinkFormatterMock() {
+		$formatter = $this->getMockBuilder( 'Wikibase\Lib\EntityIdHtmlLinkFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
 
-		return $lookup;
+		return $formatter;
 	}
 
 }

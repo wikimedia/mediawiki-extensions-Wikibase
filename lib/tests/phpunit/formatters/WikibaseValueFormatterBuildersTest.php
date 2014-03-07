@@ -2,14 +2,15 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataValues\StringValue;
 use DataValues\QuantityValue;
+use DataValues\StringValue;
 use DataValues\TimeValue;
+use EntityRetrievingTermLookup;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
-use ValueFormatters\ValueFormatter;
 use ValueFormatters\TimeFormatter;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -53,7 +54,21 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+		$entityTermLookup = new EntityRetrievingTermLookup( $entityLookup );
+
+		$entityTitleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return \Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
+			} ) );
+
+		return new WikibaseValueFormatterBuilders(
+			$entityLookup,
+			$entityTermLookup,
+			$entityTitleLookup,
+			Language::factory( 'en' )
+		);
 	}
 
 	private function newFormatterOptions( $lang = 'en' ) {
@@ -106,7 +121,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				SnakFormatter::FORMAT_HTML_WIDGET,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@^<a href=".*/wiki/Q5">Label for Q5</a>$@', // compare mock object created in newBuilders()
+				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/', // compare mock object created in newBuilders()
 				'wikibase-item'
 			),
 			'diff <url>' => array(
@@ -492,4 +507,5 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			),
 		);
 	}
+
 }

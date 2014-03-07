@@ -2,15 +2,16 @@
 
 namespace Wikibase\Test;
 
+use EntityRetrievingTermLookup;
 use Language;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\EntityIdLabelFormatter;
 
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter
@@ -152,7 +153,12 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param FormatterOptions $formatterOptions
 	 */
 	public function testParseWithValidArguments( $entityId, $expectedString, FormatterOptions $formatterOptions ) {
-		$formatter = new EntityIdLabelFormatter( $formatterOptions, $this->newEntityLoader() );
+		$entityLookup = $this->newEntityLoader();
+		$formatter = new EntityIdLabelFormatter(
+			$formatterOptions,
+			$entityLookup,
+			new EntityRetrievingTermLookup( $entityLookup )
+		);
 
 		$formattedValue = $formatter->format( $entityId );
 
