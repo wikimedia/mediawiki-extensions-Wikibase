@@ -170,7 +170,7 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider labelListProvider
 	 */
-	public function testGivenNoLabels_getLabelsReturnsEmptyArray( array $labels ) {
+	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
 		$item = $this->itemFromSerialization( array( 'label' => $labels ) );
 
 		$this->assertEquals( $labels, $item->getLabels() );
@@ -190,6 +190,15 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenInvalidLabels_exceptionIsThrown() {
 		$this->expectDeserializationException();
 		$this->deserializer->deserialize( array( 'label' => null ) );
+	}
+
+	/**
+	 * @dataProvider labelListProvider
+	 */
+	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
+		$item = $this->itemFromSerialization( array( 'description' => $descriptions ) );
+
+		$this->assertEquals( $descriptions, $item->getDescriptions() );
 	}
 
 }

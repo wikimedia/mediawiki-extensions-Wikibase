@@ -49,6 +49,7 @@ class ItemDeserializer implements Deserializer {
 		$this->addSiteLinks();
 		$this->addClaims();
 		$this->addLabels();
+		$this->addDescriptions();
 
 		return $this->item;
 	}
@@ -100,11 +101,6 @@ class ItemDeserializer implements Deserializer {
 		return $this->serialization[$key];
 	}
 
-	private function addLabels() {
-		// TODO: try catch once setLabels does validation
-		$this->item->setLabels( $this->getArrayFromKey( 'label' ) );
-	}
-
 	private function assertKeyIsArray( $key ) {
 		if ( !is_array( $this->serialization[$key] ) ) {
 			throw new InvalidAttributeException(
@@ -113,6 +109,16 @@ class ItemDeserializer implements Deserializer {
 				'The ' . $key . ' key should point to an array'
 			);
 		}
+	}
+
+	private function addLabels() {
+		// TODO: try catch once setLabels does validation
+		$this->item->setLabels( $this->getArrayFromKey( 'label' ) );
+	}
+
+	private function addDescriptions() {
+		// TODO: try catch once setDescriptions does validation
+		$this->item->setDescriptions( $this->getArrayFromKey( 'description' ) );
 	}
 
 }
