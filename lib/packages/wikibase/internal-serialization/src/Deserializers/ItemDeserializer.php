@@ -7,8 +7,6 @@ use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\LegacyIdInterpreter;
-use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Snak\Snak;
 
 /**
  * @licence GNU GPL v2+
@@ -16,6 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class ItemDeserializer implements Deserializer {
 
+	private $idDeserializer;
 	private $siteLinkListDeserializer;
 	private $claimDeserializer;
 
@@ -25,7 +24,10 @@ class ItemDeserializer implements Deserializer {
 	private $item;
 	private $serialization;
 
-	public function __construct( Deserializer $siteLinkListDeserializer, Deserializer $claimDeserializer ) {
+	public function __construct( Deserializer $idDeserializer, Deserializer $siteLinkListDeserializer,
+		Deserializer $claimDeserializer ) {
+
+		$this->idDeserializer = $idDeserializer;
 		$this->siteLinkListDeserializer = $siteLinkListDeserializer;
 		$this->claimDeserializer = $claimDeserializer;
 	}
@@ -33,7 +35,7 @@ class ItemDeserializer implements Deserializer {
 	/**
 	 * @param mixed $serialization
 	 *
-	 * @return Snak
+	 * @return Item
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
@@ -53,22 +55,7 @@ class ItemDeserializer implements Deserializer {
 
 	private function setId() {
 		if ( array_key_exists( 'entity', $this->serialization ) ) {
-			$this->item->setId( $this->getDeserializedId( $this->serialization['entity'] ) );
-		}
-	}
-
-	private function getDeserializedId( $idSerialization ) {
-		if ( $idSerialization === null ) {
-			return null;
-		}
-		elseif ( is_string( $idSerialization ) ) {
-			return new ItemId( $idSerialization );
-		}
-		elseif ( is_array( $idSerialization ) && count( $idSerialization ) == 2 ) {
-			return LegacyIdInterpreter::newIdFromTypeAndNumber( $idSerialization[0], $idSerialization[1] );
-		}
-		else {
-			throw new DeserializationException( 'Entity id format not recognized' );
+			$this->item->setId( $this->idDeserializer->deserialize( $this->serialization['entity'] ) );
 		}
 	}
 

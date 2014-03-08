@@ -5,10 +5,12 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\InternalSerialization\Deserializers\ClaimDeserializer;
+use Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\ItemDeserializer;
 use Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
@@ -28,6 +30,8 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
+		$idDeserializer = new EntityIdDeserializer( new BasicEntityIdParser() );
+
 		$linkDeserializer = new SiteLinkListDeserializer();
 
 		$snakDeserializer = new SnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
@@ -37,7 +41,7 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 			new SnakListDeserializer( $snakDeserializer )
 		);
 
-		$this->deserializer = new ItemDeserializer( $linkDeserializer, $claimDeserializer );
+		$this->deserializer = new ItemDeserializer( $idDeserializer, $linkDeserializer, $claimDeserializer );
 	}
 
 	public function invalidSerializationProvider() {
