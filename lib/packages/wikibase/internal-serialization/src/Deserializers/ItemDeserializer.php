@@ -15,6 +15,7 @@ use Wikibase\DataModel\Snak\Snak;
 class ItemDeserializer implements Deserializer {
 
 	private $siteLinkListDeserializer;
+	private $claimDeserializer;
 
 	/**
 	 * @var Item
@@ -22,8 +23,9 @@ class ItemDeserializer implements Deserializer {
 	private $item;
 	private $serialization;
 
-	public function __construct( Deserializer $siteLinkListDeserializer ) {
+	public function __construct( Deserializer $siteLinkListDeserializer, Deserializer $claimDeserializer ) {
 		$this->siteLinkListDeserializer = $siteLinkListDeserializer;
+		$this->claimDeserializer = $claimDeserializer;
 	}
 
 	/**
@@ -41,6 +43,7 @@ class ItemDeserializer implements Deserializer {
 		$this->item = Item::newEmpty();
 
 		$this->addSiteLinks();
+		$this->addClaims();
 
 		return $this->item;
 	}
@@ -57,6 +60,24 @@ class ItemDeserializer implements Deserializer {
 		}
 
 		return array();
+	}
+
+	private function addClaims() {
+		foreach ( $this->getClaimsSerialization() as $claimSerialization ) {
+			$this->item->addClaim( $this->claimDeserializer->deserialize( $claimSerialization ) );
+		}
+	}
+
+	private function getClaimsSerialization() {
+		if ( !array_key_exists( 'claims', $this->serialization ) ) {
+			return array();
+		}
+
+		if ( !is_array( $this->serialization['claims'] ) ) {
+			throw new DeserializationException( 'The claims key should point to an array' );
+		}
+
+		return $this->serialization['claims'];
 	}
 
 }
