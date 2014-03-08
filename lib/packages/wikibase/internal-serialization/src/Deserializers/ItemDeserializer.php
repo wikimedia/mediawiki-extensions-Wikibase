@@ -4,9 +4,8 @@ namespace Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * @licence GNU GPL v2+
@@ -49,6 +48,7 @@ class ItemDeserializer implements Deserializer {
 		$this->setId();
 		$this->addSiteLinks();
 		$this->addClaims();
+		$this->addLabels();
 
 		return $this->item;
 	}
@@ -95,11 +95,34 @@ class ItemDeserializer implements Deserializer {
 			return array();
 		}
 
-		if ( !is_array( $this->serialization['claims'] ) ) {
-			throw new DeserializationException( 'The claims key should point to an array' );
-		}
+		$this->assertKeyIsArray( 'claims' );
 
 		return $this->serialization['claims'];
+	}
+
+	private function addLabels() {
+		// TODO: try catch once setLabels does validation
+		$this->item->setLabels( $this->getLabels() );
+	}
+
+	private function getLabels() {
+		if ( !array_key_exists( 'label', $this->serialization ) ) {
+			return array();
+		}
+
+		$this->assertKeyIsArray( 'label' );
+
+		return $this->serialization['label'];
+	}
+
+	private function assertKeyIsArray( $key ) {
+		if ( !is_array( $this->serialization[$key] ) ) {
+			throw new InvalidAttributeException(
+				$key,
+				$this->serialization[$key],
+				'The ' . $key . ' key should point to an array'
+			);
+		}
 	}
 
 }

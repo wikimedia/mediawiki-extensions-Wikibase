@@ -70,8 +70,12 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testGivenInvalidSerialization_deserializeThrowsException( $serialization ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->expectDeserializationException();
 		$this->deserializer->deserialize( $serialization );
+	}
+
+	private function expectDeserializationException() {
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
 	}
 
 	public function testGivenEmptyArray_emptyItemIsReturned() {
@@ -161,6 +165,31 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 			),
 			$item
 		);
+	}
+
+	/**
+	 * @dataProvider labelListProvider
+	 */
+	public function testGivenNoLabels_getLabelsReturnsEmptyArray( array $labels ) {
+		$item = $this->itemFromSerialization( array( 'label' => $labels ) );
+
+		$this->assertEquals( $labels, $item->getLabels() );
+	}
+
+	public function labelListProvider() {
+		return array(
+			array( array() ),
+
+			array( array(
+				'en' => 'foo',
+				'de' => 'bar',
+			) ),
+		);
+	}
+
+	public function testGivenInvalidLabels_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array( 'label' => null ) );
 	}
 
 }
