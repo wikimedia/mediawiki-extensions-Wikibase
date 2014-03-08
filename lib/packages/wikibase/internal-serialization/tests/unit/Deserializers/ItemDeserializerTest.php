@@ -55,6 +55,10 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 			array( array(
 				'claims' => array( null )
 			) ),
+
+			array( array(
+				'entity' => 42
+			) ),
 		);
 	}
 

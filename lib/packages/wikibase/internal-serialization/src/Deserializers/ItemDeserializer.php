@@ -5,6 +5,8 @@ namespace Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
 
@@ -42,10 +44,32 @@ class ItemDeserializer implements Deserializer {
 		$this->serialization = $serialization;
 		$this->item = Item::newEmpty();
 
+		$this->setId();
 		$this->addSiteLinks();
 		$this->addClaims();
 
 		return $this->item;
+	}
+
+	private function setId() {
+		if ( array_key_exists( 'entity', $this->serialization ) ) {
+			$this->item->setId( $this->getDeserializedId( $this->serialization['entity'] ) );
+		}
+	}
+
+	private function getDeserializedId( $idSerialization ) {
+		if ( $idSerialization === null ) {
+			return null;
+		}
+		elseif ( is_string( $idSerialization ) ) {
+			return new ItemId( $idSerialization );
+		}
+		elseif ( is_array( $idSerialization ) && count( $idSerialization ) == 2 ) {
+			return LegacyIdInterpreter::newIdFromTypeAndNumber( $idSerialization[0], $idSerialization[1] );
+		}
+		else {
+			throw new DeserializationException( 'Entity id format not recognized' );
+		}
 	}
 
 	private function addSiteLinks() {
