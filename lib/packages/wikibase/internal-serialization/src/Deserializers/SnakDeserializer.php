@@ -41,10 +41,10 @@ class SnakDeserializer implements Deserializer {
 				return new PropertySomeValueSnak( $serialization[1] );
 			case 'value':
 				return $this->deserializeValueSnak( $serialization );
+				// @codeCoverageIgnoreStart
+			default:
+				throw new LogicException();
 		}
-
-		// @codeCoverageIgnoreStart
-		throw new LogicException();
 		// @codeCoverageIgnoreEnd
 	}
 
