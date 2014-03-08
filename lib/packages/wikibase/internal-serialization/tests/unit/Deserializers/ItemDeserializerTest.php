@@ -120,20 +120,43 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenStatement_itemHasStatement() {
 		$item = Item::newEmpty();
 
-		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setGuid( 'foo' );
-		$item->addClaim( $statement );
+		$item->addClaim( $this->newStatement() );
 
 		$this->assertDeserialization(
 			array(
 				'claims' => array(
-					array(
-						'm' => array( 'novalue', 42 ),
-						'q' => array(),
-						'g' => 'foo',
-						'rank' => Claim::RANK_NORMAL,
-						'refs' => array()
-					)
+					$this->newStatementSerialization()
+				)
+			),
+			$item
+		);
+	}
+
+	private function newStatement() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'foo' );
+		return $statement;
+	}
+
+	private function newStatementSerialization() {
+		return array(
+			'm' => array( 'novalue', 42 ),
+			'q' => array(),
+			'g' => 'foo',
+			'rank' => Claim::RANK_NORMAL,
+			'refs' => array()
+		);
+	}
+
+	public function testGivenStatementWithLegacyKey_itemHasStatement() {
+		$item = Item::newEmpty();
+
+		$item->addClaim( $this->newStatement() );
+
+		$this->assertDeserialization(
+			array(
+				'statements' => array(
+					$this->newStatementSerialization()
 				)
 			),
 			$item

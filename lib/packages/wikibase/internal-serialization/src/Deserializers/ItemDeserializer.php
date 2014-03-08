@@ -74,8 +74,19 @@ class ItemDeserializer implements Deserializer {
 	}
 
 	private function addClaims() {
+		$this->normalizeLegacyClaimKey();
+
 		foreach ( $this->getClaimsSerialization() as $claimSerialization ) {
 			$this->item->addClaim( $this->claimDeserializer->deserialize( $claimSerialization ) );
+		}
+	}
+
+	private function normalizeLegacyClaimKey() {
+		// Compatibility with DataModel 0.2 and 0.3 ItemObjects.
+		// (statements key got renamed to claims)
+		if ( array_key_exists( 'statements', $this->serialization ) ) {
+			$this->serialization['claims'] = $this->serialization['statements'];
+			unset( $this->serialization['statements'] );
 		}
 	}
 
