@@ -76,7 +76,7 @@ class ItemDeserializer implements Deserializer {
 	private function addClaims() {
 		$this->normalizeLegacyClaimKey();
 
-		foreach ( $this->getClaimsSerialization() as $claimSerialization ) {
+		foreach ( $this->getArrayFromKey( 'claims' ) as $claimSerialization ) {
 			$this->item->addClaim( $this->claimDeserializer->deserialize( $claimSerialization ) );
 		}
 	}
@@ -90,29 +90,19 @@ class ItemDeserializer implements Deserializer {
 		}
 	}
 
-	private function getClaimsSerialization() {
-		if ( !array_key_exists( 'claims', $this->serialization ) ) {
+	private function getArrayFromKey( $key ) {
+		if ( !array_key_exists( $key, $this->serialization ) ) {
 			return array();
 		}
 
-		$this->assertKeyIsArray( 'claims' );
+		$this->assertKeyIsArray( $key );
 
-		return $this->serialization['claims'];
+		return $this->serialization[$key];
 	}
 
 	private function addLabels() {
 		// TODO: try catch once setLabels does validation
-		$this->item->setLabels( $this->getLabels() );
-	}
-
-	private function getLabels() {
-		if ( !array_key_exists( 'label', $this->serialization ) ) {
-			return array();
-		}
-
-		$this->assertKeyIsArray( 'label' );
-
-		return $this->serialization['label'];
+		$this->item->setLabels( $this->getArrayFromKey( 'label' ) );
 	}
 
 	private function assertKeyIsArray( $key ) {
