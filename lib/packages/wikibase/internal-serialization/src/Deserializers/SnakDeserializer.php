@@ -43,9 +43,9 @@ class SnakDeserializer implements Deserializer {
 				return $this->deserializeValueSnak( $serialization );
 		}
 
-		// @CodeCoverageIgnoreStart
+		// @codeCoverageIgnoreStart
 		throw new LogicException();
-		// @CodeCoverageIgnoreEnd
+		// @codeCoverageIgnoreEnd
 	}
 
 	private function deserializeValueSnak( array $serialization ) {
