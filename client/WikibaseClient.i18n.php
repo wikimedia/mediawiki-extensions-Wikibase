@@ -726,6 +726,13 @@ $messages['bs'] = array(
 	'wikibase-property-render-error' => 'Neizvršeno izražavanje osobine $1: $2',
 );
 
+/** буряад (буряад)
+ * @author Elvonudinium
+ */
+$messages['bxr'] = array(
+	'wikibase-dataitem' => 'Мэдээнэй зүйл',
+);
+
 /** Catalan (català)
  * @author Arnaugir
  * @author Edinwiki
@@ -809,9 +816,9 @@ $messages['ce'] = array(
 	'wikibase-comment-sitelink-remove' => 'Юкъарвики-хьажораг дӀаяьккхина: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|1=хийцам|хийцамаш}}', # Fuzzy
 	'wikibase-dataitem' => 'Хаамашан элемент',
-	'wikibase-editlinks' => 'Хьажорагаш нисъяр',
+	'wikibase-editlinks' => 'Хьажоргаш нисъяр',
 	'wikibase-editlinkstitle' => 'Меттанийн юкъара хьажорагаш нисъяр',
-	'wikibase-linkitem-addlinks' => 'ТӀетоха хьажорагаш',
+	'wikibase-linkitem-addlinks' => 'ТӀетоха хьажоргаш',
 	'wikibase-linkitem-alreadylinked' => 'Ахьа кхечу Википедешкара агӀонашах тосуш йолу агӀо [$1 кхузахь] йолуш ю, хӀокхуна $2 тӀе хьажийна. Элементан чохь хӀора Википеди чура ца агӀо бе хуьлийла дац. Дехар до кхин агӀо къастае кхечу Википедеш чура агӀонашах таса.',
 	'wikibase-linkitem-close' => 'ДӀачӀагӀа къамел агӀо карла йоккхуш',
 	'wikibase-linkitem-failure' => 'ХӀара агӀо Викихаамаш чура элементахь тосуш девзаш доцу гӀалат даьлла.',
@@ -1502,7 +1509,7 @@ $messages['fa'] = array(
 	'wikibase-linkitem-selectlink' => 'لطفاً سایت و صفحه‌ای که می‌خواهید به این صفحه پیوند دهید را انتخاب کنید.',
 	'wikibase-linkitem-input-site' => 'زبان:',
 	'wikibase-linkitem-input-page' => 'صفحه:',
-	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] مرتبط است. لطفا تایید کنید که {{PLURAL:$2|صفحهٔ|صفحه‌های}} زیر همان‌هایی {{PLURAL:$2|هست|هستند}} که شما خواهان پیوند دادن به {{PLURAL:$2|آن|آن‌ها}} بودید.',
+	'wikibase-linkitem-confirmitem-text' => 'این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] مرتبط است. لطفاً تأیید کنید که {{PLURAL:$2|صفحهٔ|صفحه‌های}} زیر همان‌هایی {{PLURAL:$2|هست|هستند}} که شما خواهان پیونددادن به {{PLURAL:$2|آن|آن‌ها}} بودید.',
 	'wikibase-linkitem-confirmitem-button' => 'تأیید',
 	'wikibase-linkitem-not-loggedin-title' => 'باید وارد سامانه شوید.',
 	'wikibase-linkitem-not-loggedin' => 'شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.',
@@ -1812,6 +1819,8 @@ $messages['gsw'] = array(
  * @author KartikMistry
  */
 $messages['gu'] = array(
+	'wikibase-rc-hide-wikidata-hide' => 'છુપાવો',
+	'wikibase-rc-hide-wikidata-show' => 'દર્શાવો',
 	'wikibase-rc-wikibase-edit-letter' => 'ડેટા',
 	'wikibase-rc-wikibase-edit-title' => 'વિકિડેટા સંપાદન',
 	'wikibase-unconnectedpages-submit' => 'જાઓ',
@@ -2179,6 +2188,8 @@ $messages['ilo'] = array(
 	'wikibase-property-notfound' => 'Ti $1 a tagikua ket saan a nabirukan.',
 	'wikibase-property-notsupportedyet' => 'Ti Wikibase ket saanna pay a suportaran ti tagikua a kita para iti $1 a tagikua.',
 	'wikibase-rc-hide-wikidata' => '$1 ti Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Ilemmeng',
+	'wikibase-rc-hide-wikidata-show' => 'Ipakita',
 	'wikibase-rc-show-wikidata-pref' => 'Ipakita dagiti Wikidata nga inurnos idiay kinaudi a binalbaliwan',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Urnos ti Wikidata',
@@ -2468,6 +2479,7 @@ $messages['kk-cyrl'] = array(
 	'wikibase-property-notfound' => '$1 сипаты табылмады.',
 	'wikibase-property-notsupportedyet' => 'Уикиқор $1 түріндегі сипаттарды қолдамайды.',
 	'wikibase-rc-hide-wikidata' => 'Уикидеректі $1',
+	'wikibase-rc-hide-wikidata-show' => 'көрсету',
 	'wikibase-rc-show-wikidata-pref' => 'Уикидерек өңдемелерін жуықтағы өзгерістерден көрсету',
 	'wikibase-rc-wikibase-edit-title' => 'Уикидерек өңдемесі',
 	'wikibase-watchlist-show-changes-pref' => 'Уикидерек өңдемелерін бақылау тізіміңізден көрсету',
@@ -3000,6 +3012,13 @@ $messages['ml'] = array(
 	'wikibase-property-render-error' => '$1 എന്ന ഗുണഗണം പ്രദർശനസജ്ജമാക്കൽ പരാജയപ്പെട്ടു: $2',
 );
 
+/** Mongolian (монгол)
+ * @author Elvonudinium
+ */
+$messages['mn'] = array(
+	'wikibase-dataitem' => 'Мэдээны зүйл',
+);
+
 /** Marathi (मराठी)
  * @author V.narsikar
  * @author Ydyashad
@@ -3311,6 +3330,7 @@ $messages['nn'] = array(
 	'tooltip-t-wikibase' => 'Lenkje til tilknytt element',
 	'wikibase-after-page-move' => 'Du kan òg [$1 oppdatera] det tilknytte Wikidata-elementet for å halda språklenkjene på den flytte sida ved like.',
 	'wikibase-after-page-move-queued' => '[$1 Wikidata-elementet] som er knytt til sida vil snart verta automatisk oppdatert.',
+	'wikibase-comment-add' => 'Eit Wikidata-datasett vart oppretta.',
 	'wikibase-comment-remove' => 'Tilknytt Wikidata-element er sletta. Språklenkjer er fjerna.',
 	'wikibase-comment-linked' => 'Eit Wikidata-element har vorte lenkja til sida.',
 	'wikibase-comment-unlink' => 'Lenkinga til sida har vorte fjerna frå Wikidata-elementet. Språklenkjer er fjerna.',
@@ -3340,6 +3360,8 @@ $messages['nn'] = array(
 	'wikibase-property-notfound' => 'Eigenskapen $1 vart ikkje funnen.',
 	'wikibase-property-notsupportedyet' => 'Wikibase stør enno ikkje eigenskapstypen for eigenskapen $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Gøym',
+	'wikibase-rc-hide-wikidata-show' => 'Vis',
 	'wikibase-rc-show-wikidata-pref' => 'Vis Wikidata-endringar i siste endringane',
 	'wikibase-rc-wikibase-edit-letter' => 'd',
 	'wikibase-rc-wikibase-edit-title' => 'Wikidata-endring',
@@ -3545,6 +3567,8 @@ $messages['pt'] = array(
 	'wikibase-property-notfound' => 'Propriedade não encontrada: $1',
 	'wikibase-property-notsupportedyet' => 'A Wikibase não suporta o tipo de propriedade para $1.',
 	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
+	'wikibase-rc-hide-wikidata-hide' => 'Esconder',
+	'wikibase-rc-hide-wikidata-show' => 'Mostrar',
 	'wikibase-rc-show-wikidata-pref' => 'Mostrar as edições no Wikidata nas mudanças recentes',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
 	'wikibase-rc-wikibase-edit-title' => 'Edição de Wikidata',

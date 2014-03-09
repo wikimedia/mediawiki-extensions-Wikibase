@@ -746,7 +746,7 @@ $messages['ce'] = array(
 	'wikibase-diffview-label' => 'билгало',
 	'wikibase-diffview-alias' => 'синоним',
 	'wikibase-diffview-description' => 'цуьнах лаьцна',
-	'wikibase-diffview-link' => 'хьажорагаш',
+	'wikibase-diffview-link' => 'хьажоргаш',
 	'wikibase-error-unexpected' => 'Дагахь доцу гӀалат хилла.',
 	'wikibase-error-save-generic' => 'Ӏалаш ечу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.',
 	'wikibase-error-remove-generic' => 'ДӀайоккхучу хенахь гӀалат даьлла, цундела хьан хийцам чекхбаккха цало.',
@@ -1748,6 +1748,19 @@ $messages['gsw'] = array(
 	'datatypes-type-commonsMedia' => 'Mediedatei uf dr Commons',
 );
 
+/** Gujarati (ગુજરાતી)
+ * @author KartikMistry
+ */
+$messages['gu'] = array(
+	'wikibase-timedetails-time' => 'સમય',
+	'wikibase-timedetails-timezone' => 'સમયવિસ્તાર',
+	'wikibase-timedetails-before' => 'પહેલાં',
+	'wikibase-timedetails-after' => 'પછી',
+	'wikibase-globedetails-longitude' => 'રેખાંશ',
+	'wikibase-globedetails-latitude' => 'અક્ષાંસ',
+	'wikibase-globedetails-globe' => 'ગોળો',
+);
+
 /** Hebrew (עברית)
  * @author Amire80
  * @author Yona b
@@ -2060,6 +2073,17 @@ $messages['ilo'] = array(
 	'wikibase-quantitydetails-upperbound' => 'Akin-ngato a patingga',
 	'wikibase-quantitydetails-lowerbound' => 'Akin-baba a patingga',
 	'wikibase-quantitydetails-unit' => 'Unit',
+	'wikibase-timedetails-time' => 'Oras',
+	'wikibase-timedetails-isotime' => 'petsa ti ISO',
+	'wikibase-timedetails-timezone' => 'Sona ti oras',
+	'wikibase-timedetails-calendar' => 'Kalendario',
+	'wikibase-timedetails-precision' => 'Presision',
+	'wikibase-timedetails-before' => 'Sakbay',
+	'wikibase-timedetails-after' => 'Kalpasan',
+	'wikibase-globedetails-longitude' => 'Longitud',
+	'wikibase-globedetails-latitude' => 'Latitud',
+	'wikibase-globedetails-precision' => 'Presision',
+	'wikibase-globedetails-globe' => 'Globo',
 	'wikibase-replicationnote' => 'Pangngaasi nga ammuem a mabalin nga agpaut ti adu a minutos aginggana dagiti panagbalbaliw ket makita kadagiti amin a wiki',
 	'wikibase-sitelinks-wikipedia' => 'Pampanid ti Wikipedia a naisilpo iti daytoy a banag',
 	'wikibase-sitelinks-sitename-columnheading' => 'Pagsasao',
@@ -2527,6 +2551,9 @@ $messages['lb'] = array(
 	'wikibase-timedetails-time' => 'Zäit',
 	'wikibase-timedetails-timezone' => 'Zäitzon',
 	'wikibase-timedetails-calendar' => 'Kalenner',
+	'wikibase-timedetails-precision' => 'Präzisioun',
+	'wikibase-timedetails-before' => 'Virdrun',
+	'wikibase-timedetails-after' => 'Duerno',
 	'wikibase-globedetails-precision' => 'Präzisioun',
 	'wikibase-globedetails-globe' => 'Globus',
 	'wikibase-replicationnote' => "Denkt w.e.g. dorun datt et e puer Minutten dauere ka bis d'Ännerungen op alle Wikien ze gesi sinn.",
@@ -2759,6 +2786,17 @@ $messages['ml'] = array(
 	'wikibase-quantitydetails-upperbound' => 'ഉയർന്ന പരിധി',
 	'wikibase-quantitydetails-lowerbound' => 'താഴ്ന് പരിധി',
 	'wikibase-quantitydetails-unit' => 'ഏകകം',
+	'wikibase-timedetails-time' => 'സമയം',
+	'wikibase-timedetails-isotime' => 'ഐ.എസ്.ഒ. സമയമുദ്ര',
+	'wikibase-timedetails-timezone' => 'സമയ മേഖല',
+	'wikibase-timedetails-calendar' => 'കാലഗണനാരീതി',
+	'wikibase-timedetails-precision' => 'കൃത്യത',
+	'wikibase-timedetails-before' => 'മുമ്പ്',
+	'wikibase-timedetails-after' => 'ശേഷം',
+	'wikibase-globedetails-longitude' => 'രേഖാംശം',
+	'wikibase-globedetails-latitude' => 'അക്ഷാംശം',
+	'wikibase-globedetails-precision' => 'കൃത്യത',
+	'wikibase-globedetails-globe' => 'ഭൂഗോളം',
 	'wikibase-replicationnote' => 'മാറ്റങ്ങൾ എല്ലാ വിക്കികളിലും പ്രത്യക്ഷപ്പെടാൻ കുറച്ച് മിനിറ്റുകൾ എടുത്തേക്കും എന്നത് പ്രത്യേകം ശ്രദ്ധിക്കുക',
 	'wikibase-sitelinks-wikipedia' => 'ഈ ഇനവുമായി കണ്ണിചേർത്തിരിക്കുന്ന വിക്കിപീഡിയ താളുകൾ',
 	'wikibase-sitelinks-sitename-columnheading' => 'ഭാഷ',
@@ -2910,6 +2948,24 @@ $messages['ms'] = array(
 	'datatypes-type-wikibase-item' => 'Perkara',
 	'datatypes-type-commonsMedia' => 'Fail media Commons',
 	'version-wikibase' => 'Wikibase',
+);
+
+/** Neapolitan (Napulitano)
+ * @author C.R.
+ * @author Chelin
+ */
+$messages['nap'] = array(
+	'wikibase-timedetails-time' => 'Tiempo',
+	'wikibase-timedetails-isotime' => 'Ora e data ISO',
+	'wikibase-timedetails-timezone' => 'Fuso orario',
+	'wikibase-timedetails-calendar' => 'Calannario',
+	'wikibase-timedetails-precision' => 'Precisiona',
+	'wikibase-timedetails-before' => 'Apprimma',
+	'wikibase-timedetails-after' => 'Aroppo',
+	'wikibase-globedetails-longitude' => 'Longitudine',
+	'wikibase-globedetails-latitude' => 'Latitudine',
+	'wikibase-globedetails-precision' => 'Precisiona',
+	'wikibase-globedetails-globe' => 'Globbo',
 );
 
 /** Norwegian Bokmål (norsk bokmål)
@@ -3076,13 +3132,14 @@ $messages['nl'] = array(
 /** Norwegian Nynorsk (norsk nynorsk)
  * @author Jeblad
  * @author Njardarlogar
+ * @author Roarjo
  */
 $messages['nn'] = array(
 	'wikibase-lib-desc' => 'Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane',
-	'wikibase-entity-item' => 'datasett',
+	'wikibase-entity-item' => 'element',
 	'wikibase-entity-property' => 'eigenskap',
 	'wikibase-entity-query' => 'spørjing',
-	'wikibase-deletedentity-item' => 'Sletta datasett',
+	'wikibase-deletedentity-item' => 'Sletta element',
 	'wikibase-deletedentity-property' => 'Sletta eigenskap',
 	'wikibase-deletedentity-query' => 'Sletta spørjing',
 	'wikibase-diffview-reference' => 'kjelde',
@@ -3105,20 +3162,22 @@ $messages['nn'] = array(
 	'wikibase-error-ui-no-external-page' => 'Den oppgjevne artikkelen vart ikkje funnen på den tilhøyrande nettstaden.',
 	'wikibase-error-ui-cant-edit' => 'Du har ikkje lov til å utføre denne handlinga.',
 	'wikibase-error-ui-no-permissions' => 'Du har ikkje tilstrekkelege rettar til å utføre denne handlinga.',
-	'wikibase-error-ui-link-exists' => 'Du kan ikkje lenkja til denne sida av di eit anna datasett alt lenkjer til henne.',
+	'wikibase-error-ui-link-exists' => 'Du kan ikkje lenkja til denne sida av di eit anna element alt lenkjer til henne.',
 	'wikibase-error-ui-session-failure' => 'Arbeidsøkta di er utgjengen. Du lyt logga inn på nytt.',
 	'wikibase-error-ui-edit-conflict' => 'Det er ein endringskonflikt på gang. Lasta sida på nytt og lagra på nytt.',
+	'wikibase-timedetails-before' => 'Før',
+	'wikibase-timedetails-after' => 'Etter',
 	'wikibase-replicationnote' => 'Ver merksam på at det kan ta fleire minutt før endringane vert synlege på alle wikiane.',
-	'wikibase-sitelinks-wikipedia' => 'Wikipedia-sider knytte til datasettet',
+	'wikibase-sitelinks-wikipedia' => 'Wikipedia-sider knytte til elementet',
 	'wikibase-sitelinks-sitename-columnheading' => 'Språk',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kode',
-	'wikibase-sitelinks-link-columnheading' => 'Artikkel som er lenkja til', # Fuzzy
+	'wikibase-sitelinks-link-columnheading' => 'Lenkja side',
 	'wikibase-tooltip-error-details' => 'Detaljar',
 	'wikibase-validator-bad-type' => '$2 i staden for $1',
 	'wikibase-validator-bad-entity-type' => 'Uventa einingstype $1',
 	'wikibase-validator-no-such-entity' => 'fann ikkje $1',
 	'wikibase-validator-bad-value' => 'Ulovleg verdi: $1',
-	'datatypes-type-wikibase-item' => 'Datasett',
+	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Mediefil frå Commons',
 	'version-wikibase' => 'Wikibase',
 );
@@ -3269,8 +3328,10 @@ $messages['ps'] = array(
 /** Portuguese (português)
  * @author Hamilton Abreu
  * @author Helder.wiki
+ * @author Imperadeiro98
  * @author Luckas
  * @author Malafaya
+ * @author SandroHc
  * @author Vitorvicentevalente
  * @author Waldir
  */
@@ -3309,6 +3370,16 @@ $messages['pt'] = array(
 	'wikibase-error-ui-session-failure' => 'A sua sessão expirou. Entre novamente na sua conta.',
 	'wikibase-error-ui-edit-conflict' => 'Conflito de edição. Por favor, recarregue a página e guarde novamente os dados.',
 	'wikibase-quantitydetails-unit' => 'Unidade',
+	'wikibase-timedetails-time' => 'Tempo',
+	'wikibase-timedetails-timezone' => 'Fuso horário',
+	'wikibase-timedetails-calendar' => 'Calendário',
+	'wikibase-timedetails-precision' => 'Precisão',
+	'wikibase-timedetails-before' => 'Antes de',
+	'wikibase-timedetails-after' => 'Depois de',
+	'wikibase-globedetails-longitude' => 'Longitude',
+	'wikibase-globedetails-latitude' => 'Latitude',
+	'wikibase-globedetails-precision' => 'Precisão',
+	'wikibase-globedetails-globe' => 'Globo',
 	'wikibase-replicationnote' => 'Por favor, saiba que pode levar vários minutos até que as mudanças são visíveis em todos as wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Páginas na Wikipédia com ligação a este item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Língua',
@@ -3972,6 +4043,17 @@ $messages['uk'] = array(
 	'wikibase-quantitydetails-upperbound' => 'Верхня межа',
 	'wikibase-quantitydetails-lowerbound' => 'Нижня межа',
 	'wikibase-quantitydetails-unit' => 'Одиниця',
+	'wikibase-timedetails-time' => 'Час',
+	'wikibase-timedetails-isotime' => 'ISO позначка часу',
+	'wikibase-timedetails-timezone' => 'Часовий пояс',
+	'wikibase-timedetails-calendar' => 'Календар',
+	'wikibase-timedetails-precision' => 'Точність',
+	'wikibase-timedetails-before' => 'До',
+	'wikibase-timedetails-after' => 'Після',
+	'wikibase-globedetails-longitude' => 'Довгота',
+	'wikibase-globedetails-latitude' => 'Широта',
+	'wikibase-globedetails-precision' => 'Точність',
+	'wikibase-globedetails-globe' => 'Глобус',
 	'wikibase-replicationnote' => 'Будь ласка, зверніть увагу, що це може зайняти декілька хвилин, поки зміни будуть помітні на всіх вікі.',
 	'wikibase-sitelinks-wikipedia' => 'Список сторінок Вікіпедії, що посилаються на цей елемент',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мова',
@@ -4143,8 +4225,10 @@ $messages['vi'] = array(
 
 /** Volapük (Volapük)
  * @author Iketsi
+ * @author Malafaya
  */
 $messages['vo'] = array(
+	'wikibase-timedetails-time' => 'Tim',
 	'wikibase-sitelinks-sitename-columnheading' => 'Pük',
 	'wikibase-tooltip-error-details' => 'Pats',
 	'version-wikibase' => 'Wikibase',
