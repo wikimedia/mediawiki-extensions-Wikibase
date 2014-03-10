@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
@@ -34,19 +35,14 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
-
-		$this->setMwGlobals( array(
-			'wgArticlePath' => '/wiki/$1'
-		) );
+		$this->setMwGlobals( 'wgArticlePath', '/wiki/$1' );
 	}
 
 	/**
-	 * @param string $propertyType The property data type to use for all properties.
-	 * @param EntityId $entityId   The Id of an entity to use for all entity lookups
-	 *
+	 * @param EntityId $entityId The Id of an entity to use for all entity lookups
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	public function newBuilders( $propertyType, EntityId $entityId ) {
+	private function newWikibaseValueFormatterBuilders( EntityId $entityId ) {
 		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
 		$entity->setId( $entityId );
 		$entity->setLabel( 'en', 'Label for ' . $entityId->getPrefixedId() );
@@ -56,81 +52,77 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
-		$lang = Language::factory( 'en' );
+		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );
+	}
 
-		return new WikibaseValueFormatterBuilders( $entityLookup, $lang );
+	private function newFormatterOptions( $lang = 'en' ) {
+		return new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => $lang,
+		) );
 	}
 
 	/**
 	 * @dataProvider buildDispatchingValueFormatterProvider
 	 * @covers WikibaseValueFormatterBuilders::buildDispatchingValueFormatter
 	 */
-	public function testBuildDispatchingValueFormatter( $format, $options, $snak, $expected, $dataType = null ) {
-		$builders = $this->newBuilders( '-/-', new ItemId( 'Q5' ) );
+	public function testBuildDispatchingValueFormatter( $format, $options, $snak, $expected, $dataTypeId = null ) {
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		$formatter = $builders->buildDispatchingValueFormatter( $factory, $format, $options );
 
-		$text = $formatter->formatValue( $snak, $dataType );
+		$text = $formatter->formatValue( $snak, $dataTypeId );
 		$this->assertRegExp( $expected, $text );
 	}
 
 	public function buildDispatchingValueFormatterProvider() {
-		$options = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => 'en',
-		) );
-
-		$optionsDe = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => 'de',
-		) );
-
 		return array(
 			'plain url' => array(
 				SnakFormatter::FORMAT_PLAIN,
-				$options,
+				$this->newFormatterOptions(),
 				new StringValue( 'http://acme.com/' ),
 				'@^http://acme\\.com/$@'
 			),
 			'wikitext string' => array(
 				SnakFormatter::FORMAT_WIKI,
-				$options,
+				$this->newFormatterOptions(),
 				new StringValue( '{Wikibase}' ),
 				'@^&#123;Wikibase&#125;$@'
 			),
 			'html string' => array(
 				SnakFormatter::FORMAT_HTML,
-				$options,
+				$this->newFormatterOptions(),
 				new StringValue( 'I <3 Wikibase & stuff' ),
 				'@^I &lt;3 Wikibase &amp; stuff$@'
 			),
 			'plain item label (with entity lookup)' => array(
 				SnakFormatter::FORMAT_PLAIN,
-				$options,
+				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Label for Q5$@' // compare mock object created in newBuilders()
 			),
 			'widget item link (with entity lookup)' => array(
 				SnakFormatter::FORMAT_HTML_WIDGET,
-				$options,
+				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^<a href=".*/wiki/Q5">Label for Q5</a>$@', // compare mock object created in newBuilders()
 				'wikibase-item'
 			),
 			'diff <url>' => array(
 				SnakFormatter::FORMAT_HTML_DIFF,
-				$options,
+				$this->newFormatterOptions(),
 				new StringValue( '<http://acme.com/>' ),
 				'@^&lt;http://acme\\.com/&gt;$@'
 			),
 			'localized quantity' => array(
 				SnakFormatter::FORMAT_WIKI,
-				$optionsDe,
+				$this->newFormatterOptions( 'de' ),
 				QuantityValue::newFromNumber( '+123456.789' ),
 				'@^123\\.456,789$@'
 			),
 			'commons link' => array(
 				SnakFormatter::FORMAT_HTML,
-				$options,
+				$this->newFormatterOptions(),
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
@@ -144,36 +136,77 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			->method( 'format' )
 			->will( $this->returnValue( 'MOCK!' ) );
 
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$builders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:string', $mockFormatter );
 		$builders->setValueFormatter( SnakFormatter::FORMAT_PLAIN, 'VT:time', null );
 
-		$options = new FormatterOptions();
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-		$formatter = $builders->buildDispatchingValueFormatter( $factory, SnakFormatter::FORMAT_PLAIN, $options );
+		$formatter = $builders->buildDispatchingValueFormatter(
+			new OutputFormatValueFormatterFactory(
+				$builders->getValueFormatterBuildersForFormats()
+			),
+			SnakFormatter::FORMAT_PLAIN,
+			new FormatterOptions()
+		);
 
-		$this->assertEquals( 'MOCK!', $formatter->format( new StringValue( 'o_O' ) ), 'Formatter override' );
+		$this->assertEquals(
+			'MOCK!',
+			$formatter->format( new StringValue( 'o_O' ) ),
+			'Formatter override'
+		);
 
 		$this->setExpectedException( 'Wikibase\Lib\FormattingException' );
 
-		$timeValue = new TimeValue( '+00000002013-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, 'http://nyan.cat/original.php' );
+		$timeValue = new TimeValue(
+			'+00000002013-01-01T00:00:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php'
+		);
 		$formatter->format( $timeValue ); // expecting a FormattingException
 	}
 
 	public function testSetValueFormatterClass() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
-		$builders->setValueFormatterClass( SnakFormatter::FORMAT_PLAIN, 'VT:wikibase-entityid', 'Wikibase\Lib\EntityIdFormatter' );
-		$builders->setValueFormatterClass( SnakFormatter::FORMAT_PLAIN, 'VT:time', null );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders->setValueFormatterClass(
+			SnakFormatter::FORMAT_PLAIN,
+			'VT:wikibase-entityid',
+			'Wikibase\Lib\EntityIdFormatter'
+		);
+		$builders->setValueFormatterClass(
+			SnakFormatter::FORMAT_PLAIN,
+			'VT:time',
+			null
+		);
 
 		$options = new FormatterOptions();
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-		$formatter = $builders->buildDispatchingValueFormatter( $factory, SnakFormatter::FORMAT_PLAIN, $options );
+		$factory = new OutputFormatValueFormatterFactory(
+			$builders->getValueFormatterBuildersForFormats()
+		);
+		$formatter = $builders->buildDispatchingValueFormatter(
+			$factory,
+			SnakFormatter::FORMAT_PLAIN,
+			$options
+		);
 
-		$this->assertEquals( 'Q5', $formatter->format( new EntityIdValue( new ItemId( "Q5" ) ) ), 'Extra formatter' );
+		$this->assertEquals(
+			'Q5',
+			$formatter->format( new EntityIdValue( new ItemId( "Q5" ) ) ),
+			'Extra formatter'
+		);
 
 		$this->setExpectedException( 'Wikibase\Lib\FormattingException' );
 
-		$timeValue = new TimeValue( '+00000002013-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, 'http://nyan.cat/original.php' );
+		$timeValue = new TimeValue(
+			'+00000002013-01-01T00:00:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php'
+		);
+
 		$formatter->format( $timeValue ); // expecting a FormattingException
 	}
 
@@ -183,19 +216,44 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 			return new EntityIdFormatter( $options );
 		};
 
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
-		$builders->setValueFormatterBuilder( SnakFormatter::FORMAT_PLAIN, 'VT:wikibase-entityid', $builder );
-		$builders->setValueFormatterBuilder( SnakFormatter::FORMAT_PLAIN, 'VT:time', null );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
+		$builders->setValueFormatterBuilder(
+			SnakFormatter::FORMAT_PLAIN,
+			'VT:wikibase-entityid',
+			$builder
+		);
+		$builders->setValueFormatterBuilder(
+			SnakFormatter::FORMAT_PLAIN,
+			'VT:time',
+			null
+		);
 
 		$options = new FormatterOptions();
-		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
-		$formatter = $builders->buildDispatchingValueFormatter( $factory, SnakFormatter::FORMAT_PLAIN, $options );
+		$factory = new OutputFormatValueFormatterFactory(
+			$builders->getValueFormatterBuildersForFormats()
+		);
+		$formatter = $builders->buildDispatchingValueFormatter(
+			$factory,
+			SnakFormatter::FORMAT_PLAIN,
+			$options
+		);
 
-		$this->assertEquals( 'Q5', $formatter->format( new EntityIdValue( new ItemId( "Q5" ) ) ), 'Extra formatter' );
+		$this->assertEquals(
+			'Q5',
+			$formatter->format( new EntityIdValue( new ItemId( "Q5" ) ) ),
+			'Extra formatter'
+		);
 
 		$this->setExpectedException( 'Wikibase\Lib\FormattingException' );
 
-		$timeValue = new TimeValue( '+00000002013-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_SECOND, 'http://nyan.cat/original.php' );
+		$timeValue = new TimeValue(
+			'+00000002013-01-01T00:00:00Z',
+			0,
+			0,
+			0,
+			TimeValue::PRECISION_SECOND,
+			'http://nyan.cat/original.php'
+		);
 		$formatter->format( $timeValue ); // expecting a FormattingException
 	}
 
@@ -203,7 +261,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @covers WikibaseValueFormatterBuilders::getPlainTextFormatters
 	 */
 	public function testGetPlainTextFormatters() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
 
 		// check for all the required types
@@ -233,7 +291,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @covers WikibaseValueFormatterBuilders::getWikiTextFormatters
 	 */
 	public function testGetWikiTextFormatters() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -255,7 +313,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @covers WikibaseValueFormatterBuilders::getHtmlFormatters
 	 */
 	public function testGetHtmlFormatters() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -277,7 +335,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @covers WikibaseValueFormatterBuilders::getWidgetFormatters
 	 */
 	public function testGetWidgetFormatters() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -299,7 +357,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @covers WikibaseValueFormatterBuilders::getDiffFormatters
 	 */
 	public function testGetDiffFormatters() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
 
 		// check for all the required types, that is, the ones supported by the fallback format
@@ -345,9 +403,12 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @covers WikibaseValueFormatterBuilders::makeEscapingFormatters
 	 */
 	public function testMakeEscapingFormatters() {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 
-		$formatters = $builders->makeEscapingFormatters( array( new StringFormatter( new FormatterOptions() ) ), 'htmlspecialchars' );
+		$formatters = $builders->makeEscapingFormatters(
+			array( new StringFormatter( new FormatterOptions() ) ),
+			'htmlspecialchars'
+		);
 
 		$text = $formatters[0]->format( new StringValue( 'I <3 Wikibase' ) );
 		$this->assertEquals( 'I &lt;3 Wikibase', $text );
@@ -357,7 +418,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	 * @dataProvider applyLanguageDefaultsProvider
 	 */
 	public function testApplyLanguageDefaults( FormatterOptions $options, $expectedLanguage, $expectedFallback ) {
-		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
+		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 
 		$builders->applyLanguageDefaults( $options );
 
