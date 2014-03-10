@@ -62,8 +62,8 @@ class MergeItems extends ApiWikibase {
 		 */
 		try{
 			$changeOps = new ChangeOpsMerge(
-				$fromEntityContent,
-				$toEntityContent,
+				$fromEntityContent->getEntity(),
+				$toEntityContent->getEntity(),
 				$ignoreConflicts
 			);
 			$changeOps->apply();

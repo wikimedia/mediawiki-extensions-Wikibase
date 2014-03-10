@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\ChangeOp\ChangeOpAliases;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
 /**
@@ -39,13 +40,13 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityContent $entityContent
+	 * @param Entity $entity
 	 * @param string $language
 	 *
 	 * @return string
 	 */
-	protected function getValue( $entityContent, $language ) {
-		return $entityContent === null ? '' : implode( '|', $entityContent->getEntity()->getAliases( $language ) );
+	protected function getValue( $entity, $language ) {
+		return $entity === null ? '' : implode( '|', $entity->getAliases( $language ) );
 	}
 
 	/**
@@ -53,15 +54,14 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \Wikibase\EntityContent $entityContent
+	 * @param Entity $entity
 	 * @param string $language
 	 * @param string $value
 	 *
 	 * @return Summary
 	 */
-	protected function setValue( $entityContent, $language, $value ) {
+	protected function setValue( $entity, $language, $value ) {
 		$summary = $this->getSummary( 'wbsetaliases' );
-		$entity = $entityContent->getEntity();
 		if ( $value === '' ) {
 			$changeOp = new ChangeOpAliases( $language, $entity->getAliases( $language ), 'remove' );
 		} else {
