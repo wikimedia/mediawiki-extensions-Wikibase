@@ -7,7 +7,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
-use Wikibase\ItemContent;
+use Wikibase\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\SiteLinkCache;
@@ -21,8 +21,8 @@ use Wikibase\Term;
  */
 class ChangeOpsMerge {
 
-	private $fromItemContent;
-	private $toItemContent;
+	private $fromItem;
+	private $toItem;
 	private $fromChangeOps;
 	private $toChangeOps;
 	/** @var array */
@@ -33,22 +33,22 @@ class ChangeOpsMerge {
 	private $sitelinkCache;
 
 	/**
-	 * @param ItemContent $fromItemContent
-	 * @param ItemContent $toItemContent
+	 * @param Item $fromItem
+	 * @param Item $toItem
 	 * @param LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector
 	 * @param SitelinkCache $sitelinkCache
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
 	 */
 	public function __construct(
-		ItemContent $fromItemContent,
-		ItemContent $toItemContent,
+		Item $fromItem,
+		Item $toItem,
 		LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector,
 		SitelinkCache $sitelinkCache,
 		$ignoreConflicts = array()
 	) {
-		$this->fromItemContent = $fromItemContent;
-		$this->toItemContent = $toItemContent;
+		$this->fromItem = $fromItem;
+		$this->toItem = $toItem;
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
@@ -75,8 +75,8 @@ class ChangeOpsMerge {
 
 	public function apply() {
 		$this->generateChangeOps();
-		$this->fromChangeOps->apply( $this->fromItemContent->getItem() );
-		$this->toChangeOps->apply( $this->toItemContent->getItem() );
+		$this->fromChangeOps->apply( $this->fromItem );
+		$this->toChangeOps->apply( $this->toItem );
 		$this->applyConstraintChecks();
 	}
 
@@ -89,8 +89,8 @@ class ChangeOpsMerge {
 	}
 
 	private function generateLabelsChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getLabels() as $langCode => $label ){
-			$toLabel = $this->toItemContent->getItem()->getLabel( $langCode );
+		foreach( $this->fromItem->getLabels() as $langCode => $label ){
+			$toLabel = $this->toItem->getLabel( $langCode );
 			if( $toLabel === false || $toLabel === $label ){
 				$this->fromChangeOps->add( new ChangeOpLabel( $langCode, null ) );
 				$this->toChangeOps->add( new ChangeOpLabel( $langCode, $label ) );
@@ -103,8 +103,8 @@ class ChangeOpsMerge {
 	}
 
 	private function generateDescriptionsChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getDescriptions() as $langCode => $desc ){
-			$toDescription = $this->toItemContent->getItem()->getDescription( $langCode );
+		foreach( $this->fromItem->getDescriptions() as $langCode => $desc ){
+			$toDescription = $this->toItem->getDescription( $langCode );
 			if( $toDescription === false || $toDescription === $desc ){
 				$this->fromChangeOps->add( new ChangeOpDescription( $langCode, null ) );
 				$this->toChangeOps->add( new ChangeOpDescription( $langCode, $desc ) );
@@ -117,16 +117,16 @@ class ChangeOpsMerge {
 	}
 
 	private function generateAliasesChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getAllAliases() as $langCode => $aliases ){
+		foreach( $this->fromItem->getAllAliases() as $langCode => $aliases ){
 			$this->fromChangeOps->add( new ChangeOpAliases( $langCode, $aliases, 'remove' ) );
 			$this->toChangeOps->add( new ChangeOpAliases( $langCode, $aliases, 'add' ) );
 		}
 	}
 
 	private function generateSitelinksChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getSiteLinks() as $simpleSiteLink ){
+		foreach( $this->fromItem->getSiteLinks() as $simpleSiteLink ){
 			$siteId = $simpleSiteLink->getSiteId();
-			if( !$this->toItemContent->getItem()->hasLinkToSite( $siteId ) ){
+			if( !$this->toItem->hasLinkToSite( $siteId ) ){
 				$this->fromChangeOps->add( new ChangeOpSiteLink( $siteId, null ) );
 				$this->toChangeOps->add( new ChangeOpSiteLink( $siteId, $simpleSiteLink->getPageName() ) );
 			} else {
@@ -138,7 +138,7 @@ class ChangeOpsMerge {
 	}
 
 	private function generateClaimsChangeOps() {
-		foreach( $this->fromItemContent->getItem()->getClaims() as $fromClaim ) {
+		foreach( $this->fromItem->getClaims() as $fromClaim ) {
 			$this->fromChangeOps->add( new ChangeOpClaimRemove( $fromClaim->getGuid() ) );
 
 			$toClaim = clone $fromClaim;
@@ -154,7 +154,7 @@ class ChangeOpsMerge {
 			} else {
 				$this->toChangeOps->add( new ChangeOpClaim(
 					$toClaim,
-					new ClaimGuidGenerator( $this->toItemContent->getItem()->getId() )
+					new ClaimGuidGenerator( $this->toItem->getId() )
 				) );
 			}
 		}
@@ -169,7 +169,7 @@ class ChangeOpsMerge {
 	 */
 	private function findEquivalentClaim( $fromStatement ) {
 		/** @var $claim Claim */
-		foreach( $this->toItemContent->getItem()->getClaims() as $claim ) {
+		foreach( $this->toItem->getClaims() as $claim ) {
 			$fromHash = $this->getClaimHash( $fromStatement );
 			$toHash = $this->getClaimHash( $claim );
 			if( $toHash === $fromHash ) {
@@ -220,10 +220,10 @@ class ChangeOpsMerge {
 			$conflictingTerms = array();
 		} else {
 			$conflictingTerms = $this->labelDescriptionDuplicateDetector->getConflictingTerms(
-				$this->toItemContent->getItem()
+				$this->toItem
 			);
 		}
-		$conflictingSitelinks = $this->sitelinkCache->getConflictsForItem( $this->toItemContent->getItem() );
+		$conflictingSitelinks = $this->sitelinkCache->getConflictsForItem( $this->toItem );
 
 		$conflictString = '';
 		if( $conflictingTerms !== array() ) {
@@ -258,7 +258,7 @@ class ChangeOpsMerge {
 	 */
 	private function getConflictStringForTerm( $term ) {
 		$itemId = ItemId::newFromNumber( $term->getEntityId() );
-		if( !$itemId->equals( $this->fromItemContent->getItem()->getId() ) ) {
+		if( !$itemId->equals( $this->fromItem->getId() ) ) {
 			return '(' .
 				$itemId->getSerialization() . ' => ' .
 				$term->getLanguage() . ' => ' .
@@ -293,7 +293,7 @@ class ChangeOpsMerge {
 	 */
 	private function getConflictStringForSitelink( $sitelink ) {
 		$itemId = ItemId::newFromNumber( $sitelink['itemId'] );
-		if( !$itemId->equals( $this->fromItemContent->getItem()->getId() ) ) {
+		if( !$itemId->equals( $this->fromItem->getId() ) ) {
 			return '(' .
 				$itemId->getSerialization() . ' => ' .
 				$sitelink['siteId'] . ' => ' .
