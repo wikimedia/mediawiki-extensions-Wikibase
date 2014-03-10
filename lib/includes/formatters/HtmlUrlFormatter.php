@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use DataValues\IriValue;
 use DataValues\StringValue;
 use Html;
 use InvalidArgumentException;
@@ -37,7 +36,7 @@ class HtmlUrlFormatter implements ValueFormatter {
 	 *
 	 * @since 0.5
 	 *
-	 * @param StringValue|IriValue $value The URL to turn into a link
+	 * @param StringValue $value The URL to turn into a link
 	 *
 	 * @return string
 	 *
