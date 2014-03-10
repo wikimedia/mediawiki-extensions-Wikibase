@@ -20,6 +20,14 @@ local function verifyStringNumNil( val, name )
 	end
 end
 
+-- Claim ranks (Claim::RANK_* in PHP)
+entity.claimRanks = {
+	RANK_TRUTH = 3,
+	RANK_PREFERRED = 2,
+	RANK_NORMAL = 1,
+	RANK_DEPRECATED = 0
+}
+
 -- Create new entity object from given data
 --
 -- @param data
@@ -109,10 +117,14 @@ end
 -- Get the formatted value of the claims with the given property id
 --
 -- @param propertyId
-methodtable.formatPropertyValues = function( entity, propertyId )
+-- @param acceptableRanks
+methodtable.formatPropertyValues = function( entity, propertyId, acceptableRanks )
+	acceptableRanks = acceptableRanks or {}
+
 	local formatted = php.formatPropertyValues(
 		entity.id,
-		propertyId
+		propertyId,
+		acceptableRanks
 	)
 
 	local label = mw.wikibase.label( propertyId )
