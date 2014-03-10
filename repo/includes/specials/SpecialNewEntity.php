@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Status;
 use Wikibase\CopyrightMessageBuilder;
-use Wikibase\EntityContent;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -99,9 +99,9 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
 
 			if ( $this->hasSufficientArguments() ) {
-				$entityContent = $this->createEntityContent();
+				$entity = $this->createEntity();
 
-				$status = $this->modifyEntity( $entityContent );
+				$status = $this->modifyEntity( $entity );
 
 				if ( $status->isGood() ) {
 					$summary = new Summary( 'wbeditentity', 'create' );
@@ -109,7 +109,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$summary->addAutoSummaryArgs( $this->label, $this->description );
 
 					$status = $this->saveEntity(
-						$entityContent,
+						$entity,
 						$summary,
 						$this->getRequest()->getVal( 'token' ),
 						EDIT_NEW
@@ -121,8 +121,9 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 						$out->addHTML( '<div class="error">' );
 						$out->addWikiText( $status->getWikiText() );
 						$out->addHTML( '</div>' );
-					} elseif ( $entityContent !== null ) {
-						$entityUrl = $entityContent->getTitle()->getFullUrl();
+					} elseif ( $entity !== null ) {
+						$title = $this->getEntityTitle( $entity->getId() );
+						$entityUrl = $title->getFullUrl();
 						$this->getOutput()->redirect( $entityUrl );
 					}
 				} else {
@@ -140,6 +141,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		}
 
 		$this->createForm( $this->getLegend(), $this->additionalFormElements() );
+
+		return true;
 	}
 
 	/**
@@ -170,26 +173,26 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @since 0.1
 	 *
-	 * @return EntityContent Created entity content of correct subtype
+	 * @return Entity Created entity content of correct subtype
 	 */
-	abstract protected function createEntityContent();
+	abstract protected function createEntity();
 
 	/**
 	 * Attempt to modify entity
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent &$entity
+	 * @param Entity &$entity
 	 *
 	 * @return Status
 	 */
-	protected function modifyEntity( EntityContent &$entity ) {
+	protected function modifyEntity( Entity &$entity ) {
 		$lang = $this->getLanguage()->getCode();
 		if ( $this->label !== '' ) {
-			$entity->getEntity()->setLabel( $lang, $this->label );
+			$entity->setLabel( $lang, $this->label );
 		}
 		if ( $this->description !== '' ) {
-			$entity->getEntity()->setDescription( $lang, $this->description );
+			$entity->setDescription( $lang, $this->description );
 		}
 		return \Status::newGood();
 	}
