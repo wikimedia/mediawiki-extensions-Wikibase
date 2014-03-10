@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Henning Snater <henning.snater@wikimedia.de>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 10 Mar 2014 13:03:50 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/107554
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
