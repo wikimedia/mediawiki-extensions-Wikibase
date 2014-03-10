@@ -201,4 +201,30 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $descriptions, $item->getDescriptions() );
 	}
 
+	public function testGivenInvalidAliases_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array( 'aliases' => null ) );
+	}
+
+	/**
+	 * @dataProvider aliasesListProvider
+	 */
+	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
+		$item = $this->itemFromSerialization( array( 'aliases' => $aliases ) );
+
+		$this->assertEquals( $aliases, $item->getAllAliases() );
+	}
+
+	public function aliasesListProvider() {
+		return array(
+			array( array() ),
+
+			array( array(
+				'en' => array( 'foo', 'bar' ),
+				'de' => array( 'foo', 'bar', 'baz' ),
+				'nl' => array( 'bah' ),
+			) ),
+		);
+	}
+
 }

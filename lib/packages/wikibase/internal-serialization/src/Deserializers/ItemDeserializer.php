@@ -50,6 +50,7 @@ class ItemDeserializer implements Deserializer {
 		$this->addClaims();
 		$this->addLabels();
 		$this->addDescriptions();
+		$this->addAliases();
 
 		return $this->item;
 	}
@@ -119,6 +120,11 @@ class ItemDeserializer implements Deserializer {
 	private function addDescriptions() {
 		// TODO: try catch once setDescriptions does validation
 		$this->item->setDescriptions( $this->getArrayFromKey( 'description' ) );
+	}
+
+	private function addAliases() {
+		// TODO: try catch once setAllAliases does validation
+		$this->item->setAllAliases( $this->getArrayFromKey( 'aliases' ) );
 	}
 
 }
