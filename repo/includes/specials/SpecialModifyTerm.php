@@ -7,11 +7,10 @@ use InvalidArgumentException;
 use Language;
 use PermissionsError;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\CopyrightMessageBuilder;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Utils;
 
@@ -21,6 +20,7 @@ use Wikibase\Utils;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
@@ -43,16 +43,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	protected $value;
 
 	/**
-	 * @var string
-	 */
-	protected $rightsUrl;
-
-	/**
-	 * @var string
-	 */
-	protected $rightsText;
-
-	/**
 	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
@@ -60,11 +50,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 */
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-
-		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
-		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 	}
 
 	/**
@@ -99,20 +84,14 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::modifyEntity()
+	 * @see SpecialModifyEntity::validateInput()
 	 *
-	 * @since 0.4
-	 *
-	 * @return Summary|bool
+	 * @return bool
 	 */
-	protected function modifyEntity() {
+	protected function validateInput() {
 		$request = $this->getRequest();
 
-		// FIXME: This method is supposed to modify the entity and not alter the output. Do not
-		// paste message directly into the HTML output in this method.
-		if ( $this->entityContent === null || !$this->isValidLanguageCode( $this->language ) || !$request->wasPosted() ) {
-			$this->addCopyrightText();
-
+		if ( !parent::validateInput() ) {
 			return false;
 		}
 
@@ -125,20 +104,35 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 		// to provide removing after posting the full form
 		if ( $request->getVal( 'remove' ) === null && $this->value === '' ) {
+			$id = $this->entityRevision->getEntity()->getId();
+
 			$this->showErrorHTML(
-				// Messages: wikibase-setlabel-warning-remove, wikibase-setdescription-warning-remove,
-				// wikibase-setaliases-warning-remove
+			// Messages: wikibase-setlabel-warning-remove, wikibase-setdescription-warning-remove,
+			// wikibase-setaliases-warning-remove
 				$this->msg(
 					'wikibase-' . strtolower( $this->getName() ) . '-warning-remove',
-					$this->entityContent->getTitle()->getText()
+					$this->getEntityTitle( $id )->getText()
 				)->parse(),
 				'warning'
 			);
 			return false;
 		}
 
+		return true;
+	}
+
+	/**
+	 * @see SpecialModifyEntity::modifyEntity()
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return Summary|bool
+	 */
+	protected function modifyEntity( Entity $entity ) {
 		try {
-			$summary = $this->setValue( $this->entityContent, $this->language, $this->value );
+			$summary = $this->setValue( $entity, $this->language, $this->value );
 		} catch ( ChangeOpException $e ) {
 			$this->showErrorHTML( $e->getMessage() );
 			return false;
@@ -168,21 +162,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @todo could factor this out into a special page form builder and renderer
-	 */
-	protected function addCopyrightText() {
-		$copyrightView = new SpecialPageCopyrightView(
-			new CopyrightMessageBuilder(),
-			$this->rightsUrl,
-			$this->rightsText
-		);
-
-		$html = $copyrightView->getHtml( $this->getLanguage() );
-
-		$this->getOutput()->addHTML( $html );
-	}
-
-	/**
 	 * Checks if the language code is valid.
 	 *
 	 * @since 0.4
@@ -198,14 +177,14 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::getFormElements()
 	 *
-	 * @since 0.4
+	 * @param Entity $entity
 	 *
 	 * @return string
 	 */
-	protected function getFormElements() {
+	protected function getFormElements( Entity $entity = null ) {
 		$this->language = $this->language ? $this->language : $this->getLanguage()->getCode();
 		if ( $this->value === null ) {
-			$this->value = $this->getValue( $this->entityContent, $this->language );
+			$this->value = $this->getValue( $entity, $this->language );
 		}
 		$valueinput = Html::input(
 			'value',
@@ -221,7 +200,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
 		$languageName = Language::fetchLanguageName( $this->language, $this->getLanguage()->getCode() );
 
-		if ( $this->entityContent !== null && $this->language !== null && $languageName !== '' ) {
+		if ( $entity !== null && $this->language !== null && $languageName !== '' ) {
 			return Html::rawElement(
 				'p',
 				array(),
@@ -229,12 +208,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				// wikibase-setaliases-introfull
 				$this->msg(
 					'wikibase-' . strtolower( $this->getName() ) . '-introfull',
-					$this->entityContent->getTitle()->getPrefixedText(),
+					$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
 					$languageName
 				)->parse()
 			)
 			. Html::input( 'language', $this->language, 'hidden' )
-			. Html::input( 'id', $this->entityContent->getEntity()->getId()->getSerialization(), 'hidden' )
+			. Html::input( 'id', $entity->getId()->getSerialization(), 'hidden' )
 			. Html::input( 'remove', 'remove', 'hidden' )
 			. $valueinput;
 		}
@@ -246,7 +225,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 				// wikibase-setaliases-intro
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()
 			)
-			. parent::getFormElements()
+			. parent::getFormElements( $entity )
 			. Html::element(
 				'label',
 				array(
@@ -291,26 +270,26 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * Returning the value of the entity name by the given language
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @param \Wikibase\EntityContent $entityContent
+	 * @param Entity|null $entity
 	 * @param string $language
 	 *
 	 * @return string
 	 */
-	abstract protected function getValue( $entityContent, $language );
+	abstract protected function getValue( $entity, $language );
 
 	/**
 	 * Setting the value of the entity name by the given language
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @param \Wikibase\EntityContent $entityContent
+	 * @param Entity|null $entity
 	 * @param string $language
 	 * @param string $value
 	 *
 	 * @return Summary
 	 */
-	abstract protected function setValue( $entityContent, $language, $value );
+	abstract protected function setValue( $entity, $language, $value );
 
 }
