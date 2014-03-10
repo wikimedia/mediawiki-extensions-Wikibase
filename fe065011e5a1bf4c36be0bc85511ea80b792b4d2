@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_16731015",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-10T13:17:52Z",
+      "side": 1,
+      "message": "This is no longer true: it\u0027s not an EntityRevisionLookup. It\u0027S annoying to have both interfaces, yes. Historical reasons.",
+      "revId": "fe065011e5a1bf4c36be0bc85511ea80b792b4d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_165af084",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-10T13:17:52Z",
+      "side": 1,
+      "message": "This changes he type of the return value: it used to be an EntityLookup, now it\u0027s an EntityRevisionLookup. Since both a re currently implemented by the same class (and actually are the same object), this will currently not fail, but the type declarations are still wrong, and it might fail in the future.",
+      "revId": "fe065011e5a1bf4c36be0bc85511ea80b792b4d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_9666004d",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-10T13:17:52Z",
+      "side": 1,
+      "message": "Probably needs to be changed to accept an EntityRevisionLookup instead of an EntityLookup.",
+      "revId": "fe065011e5a1bf4c36be0bc85511ea80b792b4d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
