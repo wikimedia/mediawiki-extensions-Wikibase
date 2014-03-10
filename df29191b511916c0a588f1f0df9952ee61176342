@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_563d18d9",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T14:16:16Z",
+      "side": 1,
+      "message": "apparently you can\u0027t add the type hint here due to the declaration of ValueFormatter::format()",
+      "revId": "df29191b511916c0a588f1f0df9952ee61176342",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
