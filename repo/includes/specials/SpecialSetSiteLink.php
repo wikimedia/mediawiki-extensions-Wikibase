@@ -3,16 +3,16 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use Revision;
+use OutOfBoundsException;
 use Status;
 use SiteSQLStore;
 use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\CopyrightMessageBuilder;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityContent;
-use Wikibase\ItemContent;
 use Wikibase\Summary;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -89,9 +89,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 
 		// check if id belongs to an item
-		if ( $this->entityContent !== null && !( $this->entityContent instanceof ItemContent ) ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-not-item', $this->entityContent->getEntity()->getId()->getPrefixedId() )->parse() );
-			$this->entityContent = null;
+		if ( $this->entityRevision !== null && !( $this->entityRevision->getEntity() instanceof Item ) ) {
+			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-not-item', $this->entityRevision->getEntity()->getId()->getPrefixedId() )->parse() );
+			$this->entityRevision = null;
 		}
 
 		// site
@@ -121,22 +121,14 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @see SpecialModifyEntity::modifyEntity()
+	 * @see SpecialModifyEntity::validateInput()
 	 *
-	 * @since 0.4
-	 *
-	 * @return Summary|boolean The summary or false
+	 * @return bool
 	 */
-	protected function modifyEntity() {
-		// FIXME: This method is supposed to modify the entity and not alter the output. Do not
-		// paste message directly into the HTML output in this method.
-
+	protected function validateInput() {
 		$request = $this->getRequest();
 
-		// has to be checked before modifying but is no error
-		if ( $this->entityContent === null || !$this->isValidSiteId( $this->site ) || !$request->wasPosted() ) {
-			$this->addCopyrightText();
-
+		if ( !parent::validateInput() ) {
 			return false;
 		}
 
@@ -145,15 +137,26 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->showErrorHTML(
 				$this->msg(
 					'wikibase-setsitelink-warning-remove',
-					$this->entityContent->getTitle()->getText()
+					$this->getEntityTitle( $this->entityRevision->getEntity()->getId() )
 				)->parse(),
 				'warning'
 			);
 			return false;
 		}
 
+		return true;
+	}
+
+	/**
+	 * @see SpecialModifyEntity::modifyEntity()
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return Summary|bool The summary or false
+	 */
+	protected function modifyEntity( Entity $entity ) {
 		try {
-			$status = $this->setSiteLink( $this->entityContent, $this->site, $this->page, $this->badges, $summary );
+			$status = $this->setSiteLink( $this->entityRevision, $this->site, $this->page, $this->badges, $summary );
 		} catch ( ChangeOpException $e ) {
 			$this->showErrorHTML( $e->getMessage() );
 			return false;
@@ -198,16 +201,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::getFormElements()
 	 *
-	 * @since 0.4
+	 * @param Entity $entity
 	 *
 	 * @return string
 	 */
-	protected function getFormElements() {
+	protected function getFormElements( Entity $entity = null ) {
 		if ( $this->page === null ) {
-			$this->page = $this->getSiteLink( $this->entityContent, $this->site );
+			$this->page = $this->getSiteLink( $entity, $this->site );
 		}
 		if ( $this->badges === null ) {
-			$this->badges = $this->getBadges( $this->entityContent, $this->site );
+			$this->badges = $this->getBadges( $entity, $this->site );
 		}
 		$pageinput = Html::input(
 			'page',
@@ -247,18 +250,18 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$site = SiteSQLStore::newInstance()->getSite( $this->site );
 
-		if ( $this->entityContent !== null && $this->site !== null && $site !== null ) {
+		if ( $entity !== null && $this->site !== null && $site !== null ) {
 			return Html::rawElement(
 				'p',
 				array(),
 				$this->msg(
 					'wikibase-setsitelink-introfull',
-					$this->entityContent->getTitle()->getPrefixedText(),
+					$this->getEntityTitle( $entity->getId() )->getPrefixedText(),
 					'[' . $site->getPageUrl( '' ) . ' ' . $this->site . ']'
 				)->parse()
 			)
 			. Html::input( 'site', $this->site, 'hidden' )
-			. Html::input( 'id', $this->entityContent->getEntity()->getId()->getSerialization(), 'hidden' )
+			. Html::input( 'id', $this->entityRevision->getEntity()->getId()->getSerialization(), 'hidden' )
 			. Html::input( 'remove', 'remove', 'hidden' )
 			. $pageinput;
 		}
@@ -268,7 +271,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				array(),
 				$this->msg( 'wikibase-setsitelink-intro' )->parse()
 			)
-			. parent::getFormElements()
+			. parent::getFormElements( $entity )
 			. Html::element(
 				'label',
 				array(
@@ -304,19 +307,21 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $entityContent
+	 * @param Item|null $entity
 	 * @param string $siteId
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string
 	 */
-	protected function getSiteLink( $entityContent, $siteId ) {
-		// FIXME: either the documentation here is wrong, or this check is not needed
-		if ( $entityContent === null ) {
+	protected function getSiteLink( $entity, $siteId ) {
+		if ( $entity === null || !( $entity instanceof Item ) ) {
 			return '';
 		}
 
-		if ( $entityContent->getEntity()->hasLinkToSite( $siteId ) ) {
-			return $entityContent->getEntity()->getSimpleSitelink( $siteId )->getPageName();
+		/* @var Item $entity */
+
+		if ( $entity->hasLinkToSite( $siteId ) ) {
+			return $entity->getSitelink( $siteId )->getPageName();
 		}
 
 		return '';
@@ -327,20 +332,22 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.5
 	 *
-	 * @param EntityContent $entityContent
+	 * @param Item|null $entity
 	 * @param string $siteId
 	 *
+	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
-	protected function getBadges( $entityContent, $siteId ) {
-		// FIXME: either the documentation here is wrong, or this check is not needed
-		if ( $entityContent === null ) {
+	protected function getBadges( $entity, $siteId ) {
+		if ( $entity === null || !( $entity instanceof Item ) ) {
 			return array();
 		}
 
-		if ( $entityContent->getEntity()->hasLinkToSite( $siteId ) ) {
+		/* @var Item $entity */
+
+		if ( $entity->hasLinkToSite( $siteId ) ) {
 			$badges = array();
-			foreach ( $entityContent->getEntity()->getSimpleSitelink( $siteId )->getBadges() as $badge ) {
+			foreach ( $entity->getSitelink( $siteId )->getBadges() as $badge ) {
 				$badges[] = $badge->getPrefixedId();
 			}
 			return $badges;
@@ -362,7 +369,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected function parseBadges( array $badges, Status $status ) {
 		$repo = WikibaseRepo::getDefaultInstance();
 
-		$entityContentFactory = $repo->getEntityContentFactory();
 		$entityIdParser = $repo->getEntityIdParser();
 
 		$badgesObjects = array();
@@ -388,7 +394,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				return false;
 			}
 
-			$itemTitle = $entityContentFactory->getTitleForId( $badgeId, Revision::FOR_THIS_USER );
+			$itemTitle = $this->getEntityTitle( $badgeId );
 
 			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
 				$status->fatal( 'wikibase-setentity-invalid-id' );
@@ -406,7 +412,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityContent $entityContent
+	 * @param Item $entity
 	 * @param string $siteId
 	 * @param string $pageName
 	 * @param string[] $badges
@@ -414,7 +420,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return Status
 	 */
-	protected function setSiteLink( EntityContent $entityContent, $siteId, $pageName, $badges, &$summary ) {
+	protected function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
 		$status = Status::newGood();
 		$site = SiteSQLStore::newInstance()->getSite( $siteId );
 
@@ -423,7 +429,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return $status;
 		}
 
-		$item = $entityContent->getItem();
 		$summary = $this->getSummary( 'wbsetsitelink' );
 
 		if ( $pageName === '' ) {

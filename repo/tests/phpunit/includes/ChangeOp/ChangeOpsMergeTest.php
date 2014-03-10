@@ -6,7 +6,6 @@ use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\ObjectComparer;
-use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -29,8 +28,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public static function provideValidConstruction(){
-		$from = self::getItemContent( 'Q111' );
-		$to = self::getItemContent( 'Q222' );
+		$from = self::getItem( 'Q111' );
+		$to = self::getItem( 'Q222' );
 		return array(
 			array( $from, $to, array() ),
 			array( $from, $to, array( 'label' ) ),
@@ -49,8 +48,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public static function provideInvalidConstruction(){
-		$from = self::getItemContent( 'Q111' );
-		$to = self::getItemContent( 'Q222' );
+		$from = self::getItem( 'Q111' );
+		$to = self::getItem( 'Q222' );
 		return array(
 			array( $from, $to, 'foo' ),
 			array( $from, $to, array( 'foo' ) ),
@@ -59,29 +58,28 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public static function getItemContent( $id, $data = array() ) {
+	public static function getItem( $id, $data = array() ) {
 		$item = new Item( $data );
 		$item->setId( new ItemId( $id ) );
-		$itemContent = new ItemContent( $item );
-		return $itemContent;
+		return $item;
 	}
 
 	/**
 	 * @dataProvider provideData
 	 */
 	public function testCanApply( $fromData, $toData, $expectedFromData, $expectedToData, $ignoreConflicts = array() ) {
-		$from = self::getItemContent( 'Q111', $fromData );
-		$to = self::getItemContent( 'Q222', $toData );
+		$from = self::getItem( 'Q111', $fromData );
+		$to = self::getItem( 'Q222', $toData );
 		$changeOps = new ChangeOpsMerge( $from, $to, $ignoreConflicts );
 
-		$this->assertTrue( $from->getEntity()->equals( new Item( $fromData ) ), 'FromItem was not filled correctly' );
-		$this->assertTrue( $to->getEntity()->equals( new Item( $toData ) ), 'ToItem was not filled correctly' );
+		$this->assertTrue( $from->equals( new Item( $fromData ) ), 'FromItem was not filled correctly' );
+		$this->assertTrue( $to->equals( new Item( $toData ) ), 'ToItem was not filled correctly' );
 
 		$changeOps->apply();
 
 
-		$fromData = $from->getItem()->toArray();
-		$toData = $to->getItem()->toArray();
+		$fromData = $from->toArray();
+		$toData = $to->toArray();
 
 		//Cycle through the old claims and set the guids to null (we no longer know what they should be)
 		$fromClaims = array();
