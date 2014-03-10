@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_b64c5ccc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "Change-Id is generally always the final line, Don\u0027t think it makes a different but if you were to do this in core people would moan ;p",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d62128f8",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "0.5",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f628a4de",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "should be no new line between the comment block and the class start",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b61e9cbc",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "MediaWiki language object. seems a bit pointless!",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_967f20dd",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "could make this private",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_768494d8",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "pointless comment as we have type hints, adds nothing",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_568518d2",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "ValueFormatterBase seems wrong here",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_368a8ce4",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "0.5",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f66f8424",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "urm, these comments are just odd, is this a class comment, a function comment? Its probably not in the right place.. (quite)...",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_d67808f0",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "could be private and can have a TimeValue type hint",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_b6757cf6",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "could be private and can have a TimeValue type hint",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_766b7416",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "could be private and can have a TimeValue type hint",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_565cf881",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "could be private and should probably have phpdoc for $uri param",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_36616c32",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "return string not String",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_f656645e",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-10T13:19:14Z",
+      "side": 1,
+      "message": "could be private? :)",
+      "revId": "007401b28c78a48e459d1038e85eb407dd88ce06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
