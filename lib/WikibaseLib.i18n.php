@@ -755,6 +755,17 @@ $messages['ce'] = array(
 	'wikibase-error-autocomplete-response' => 'Серверо жоп делла: $1',
 	'wikibase-error-ui-no-external-page' => 'Кара цайо оцу сайтан чохь иштта цӀе йолу агӀо.',
 	'wikibase-error-ui-session-failure' => 'Хьан сессин хан чекх ела. Дехар до, юха чувала/яла.',
+	'wikibase-timedetails-time' => 'Хан',
+	'wikibase-timedetails-isotime' => 'Хан билгал яр ISO-форматехь',
+	'wikibase-timedetails-timezone' => 'Сахьтан аса',
+	'wikibase-timedetails-calendar' => 'Календарь',
+	'wikibase-timedetails-precision' => 'Билгала',
+	'wikibase-timedetails-before' => 'Кхачале',
+	'wikibase-timedetails-after' => 'ТӀехьа',
+	'wikibase-globedetails-longitude' => 'Дохалла',
+	'wikibase-globedetails-latitude' => 'Шоралла',
+	'wikibase-globedetails-precision' => 'Билгала',
+	'wikibase-globedetails-globe' => 'Глобус',
 	'wikibase-replicationnote' => 'Дехар до, тидам бар бина хийцам гучу ца болуш маситта минут яла там бу массо вики-проекташкахь.',
 	'wikibase-sitelinks-wikipedia' => 'ХӀокху элементах тесна йолу агӀонаш',
 	'wikibase-sitelinks-sitename-columnheading' => 'Мотт',
@@ -2825,6 +2836,23 @@ $messages['ml'] = array(
 	'datatypes-type-wikibase-item' => 'ഇനം',
 	'datatypes-type-commonsMedia' => 'കോമൺസിൽ നിന്നുള്ള മീഡിയ പ്രമാണം',
 	'version-wikibase' => 'വിക്കിബേസ്',
+);
+
+/** Mongolian (монгол)
+ * @author Mongol
+ */
+$messages['mn'] = array(
+	'wikibase-timedetails-time' => 'Хугацаа',
+	'wikibase-timedetails-isotime' => 'ISO хугацааны тамга',
+	'wikibase-timedetails-timezone' => 'Цагийн бүс',
+	'wikibase-timedetails-calendar' => 'Календарь',
+	'wikibase-timedetails-precision' => 'Нарийвчлал',
+	'wikibase-timedetails-before' => 'Өмнө',
+	'wikibase-timedetails-after' => 'Дараа',
+	'wikibase-globedetails-longitude' => 'Уртраг',
+	'wikibase-globedetails-latitude' => 'Өргөрөг',
+	'wikibase-globedetails-precision' => 'Нарийвчлал',
+	'wikibase-globedetails-globe' => 'Бөмбөрцөг',
 );
 
 /** Marathi (मराठी)
