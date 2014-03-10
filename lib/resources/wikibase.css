@@ -535,6 +535,16 @@ div.wb-claimlistview div.wb-editsection {
 	float: right;
 }
 
+/***** TIME VALUES *****/
+
+.wb-calendar-name {
+	font-style: italic;
+	margin-left: 0.5em;
+	line-height: 1;
+}
+
+/***** /TIME VALUES *****/
+
 /***** EDIT/NEW CLAIM *****/
 
 .wb-claimgrouplistview .wb-new > .wb-addtoolbar {
