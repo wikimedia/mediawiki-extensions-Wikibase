@@ -145,7 +145,9 @@ class PropertyParserFunctionRenderer {
 			return Status::newGood( '' );
 		}
 
-		$claims = $this->getClaimsForProperty( $entity, $propertyLabel );
+		// We only want the best claims over here, so that we only show the most
+		// relevant informmation.
+		$claims = $this->getClaimsForProperty( $entity, $propertyLabel )->getBestClaims();
 
 		if ( $claims->isEmpty() ) {
 			wfProfileOut( __METHOD__ );
