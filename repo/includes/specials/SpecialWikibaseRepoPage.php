@@ -2,15 +2,20 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MWException;
 use RuntimeException;
 use Status;
+use Title;
 use UserInputException;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntity;
-use Wikibase\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\EntityContent;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -29,6 +34,16 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	protected $summaryFormatter;
 
 	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $titleLookup;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.5
@@ -39,8 +54,10 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	public function __construct( $title, $restriction ) {
 		parent::__construct( $title, $restriction );
 
-		// TODO: find a way to inject this
+		//TODO: allow overriding services for testing
 		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
+		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 	}
 
 	/**
@@ -93,17 +110,18 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * Loads the entity content for this entity id.
 	 *
+	 * @since 0.5
+	 *
 	 * @param EntityId $id
 	 *
-	 * @return EntityContent
+	 * @return EntityRevision
 	 *
 	 * @throws UserInputException
 	 */
-	protected function loadEntityContent( EntityId $id ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->getFromId( $id );
+	protected function loadEntity( EntityId $id ) {
+		$entity = $this->entityLookup->getEntityRevision( $id );
 
-		if ( $entityContent === null ) {
+		if ( $entity === null ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
 				array( $id->getSerialization() ),
@@ -111,19 +129,32 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			);
 		}
 
-		return $entityContent;
+		return $entity;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityId $id
+	 *
+	 * @throws MWException
+	 * @return null|Title
+	 */
+	protected function getEntityTitle( EntityId $id ) {
+		return $this->titleLookup->getTitleForId( $id );
 	}
 
 	/**
 	 * Saves the entity content using the given summary.
 	 *
-	 * @param EntityContent $entityContent
+	 * @param Entity $entity
 	 * @param Summary $summary
 	 * @param string $token
+	 * @param int $baseRev the base revision, for conflict detection
 	 *
 	 * @return Status
 	 */
-	protected function saveEntity( EntityContent $entityContent, Summary $summary, $token ) {
+	protected function saveEntity( Entity $entity, Summary $summary, $token, $baseRev = 0 ) {
 		//TODO: allow injection/override!
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
@@ -133,9 +164,9 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			$entityTitleLookup,
 			$entityRevisionLookup,
 			$entityStore,
-			$entityContent->getEntity(), //TODO: refactor special pages to not use EntityContent!
+			$entity,
 			$this->getUser(),
-			false, //XXX: need conflict detection??
+			$baseRev,
 			$this->getContext()
 		);
 

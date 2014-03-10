@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Status;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataTypeSelector;
-use Wikibase\PropertyContent;
-use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -52,28 +52,28 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::createEntityContent
+	 * @see SpecialNewEntity::createEntity
 	 */
-	protected function createEntityContent() {
-		return PropertyContent::newEmpty();
+	protected function createEntity() {
+		return Property::newEmpty();
 	}
 
 	/**
 	 * @see SpecialNewEntity::modifyEntity()
 	 *
-	 * @param EntityContent $propertyContent
+	 * @param Entity $property
 	 *
 	 * @return Status
 	 */
-	protected function modifyEntity( EntityContent &$propertyContent ) {
+	protected function modifyEntity( Entity &$property ) {
 		/**
-		 * @var PropertyContent $propertyContent
+		 * @var Property $property
 		 */
-		$status = parent::modifyEntity( $propertyContent );
+		$status = parent::modifyEntity( $property );
 
 		if ( $this->dataType !== '' ) {
 			if ( $this->dataTypeExists() ) {
-				$propertyContent->getProperty()->setDataTypeId( $this->dataType );
+				$property->setDataTypeId( $this->dataType );
 			}
 			else {
 				$status->fatal( 'wikibase-newproperty-invalid-datatype' );

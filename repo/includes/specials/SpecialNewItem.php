@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Status;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\EntityContent;
-use Wikibase\ItemContent;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * Page for creating new Wikibase items.
@@ -49,23 +49,25 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	/**
-	 * @see SpecialNewEntity::createEntityContent
+	 * @see SpecialNewEntity::createEntity
 	 *
-	 * @return ItemContent
+	 * @return Item
 	 */
-	protected function createEntityContent() {
-		return ItemContent::newEmpty();
+	protected function createEntity() {
+		return Item::newEmpty();
 	}
 
 	/**
 	 * @see SpecialNewEntity::modifyEntity
 	 *
-	 * @param EntityContent $itemContent
+	 * @param Entity $item
 	 *
 	 * @return Status
 	 */
-	protected function modifyEntity( EntityContent &$itemContent ) {
-		$status = parent::modifyEntity( $itemContent );
+	protected function modifyEntity( Entity &$item ) {
+		/* @var Item $item */
+
+		$status = parent::modifyEntity( $item );
 
 		if ( $this->site !== null && $this->page !== null ) {
 			$site = \SiteSQLStore::newInstance()->getSite( $this->site );
@@ -81,8 +83,8 @@ class SpecialNewItem extends SpecialNewEntity {
 				return $status;
 			}
 
-			$link = new SimpleSiteLink( $site->getGlobalId(), $page );
-			$ret = $itemContent->getItem()->addSiteLink( $link );
+			$link = new SiteLink( $site->getGlobalId(), $page );
+			$ret = $item->addSiteLink( $link );
 
 			if ( $ret === false ) {
 				$status->error( 'wikibase-newitem-add-sitelink-failed' );
