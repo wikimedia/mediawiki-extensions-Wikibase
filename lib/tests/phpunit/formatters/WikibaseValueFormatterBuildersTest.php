@@ -9,6 +9,7 @@ use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
+use ValueFormatters\TimeFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -76,6 +77,31 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 	}
 
 	public function buildDispatchingValueFormatterProvider() {
+		$aGregorianDayIn1920 = new TimeValue( '+1920-05-01T00:00:00Z',
+			1 * 60 * 60, 0, 0,
+			TimeValue::PRECISION_DAY,
+			TimeFormatter::CALENDAR_GREGORIAN );
+
+		$aJulianDayIn1920 = new TimeValue( '+1920-05-01T00:00:00Z',
+			1 * 60 * 60, 0, 0,
+			TimeValue::PRECISION_DAY,
+			TimeFormatter::CALENDAR_JULIAN );
+
+		$aMonthIn1920 = new TimeValue( '+1920-05-01T00:00:00Z',
+			1 * 60 * 60, 0, 0,
+			TimeValue::PRECISION_MONTH,
+			TimeFormatter::CALENDAR_GREGORIAN );
+
+		$aGregorianDayIn1520 = new TimeValue( '+1520-05-01T00:00:00Z',
+			1 * 60 * 60, 0, 0,
+			TimeValue::PRECISION_DAY,
+			TimeFormatter::CALENDAR_GREGORIAN );
+
+		$aJulianDayIn1980 = new TimeValue( '+1980-05-01T00:00:00Z',
+			1 * 60 * 60, 0, 0,
+			TimeValue::PRECISION_DAY,
+			TimeFormatter::CALENDAR_JULIAN );
+
 		return array(
 			'plain url' => array(
 				SnakFormatter::FORMAT_PLAIN,
@@ -126,6 +152,36 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				new StringValue( 'Example.jpg' ),
 				'@^<a class="extiw" href="//commons\\.wikimedia\\.org/wiki/File:Example\\.jpg">Example\\.jpg</a>$@',
 				'commonsMedia'
+			),
+			'a gregorian day in 1920' => array(
+				SnakFormatter::FORMAT_HTML,
+				$options,
+				$aGregorianDayIn1920,
+				'/^1 May 1920 <sup class="wb-calendar-name">Gregorian<\/sup>$/'
+			),
+			'a julian day in 1920' => array(
+				SnakFormatter::FORMAT_HTML,
+				$options,
+				$aJulianDayIn1920,
+				'/^1 May 1920 <sup class="wb-calendar-name">Julian<\/sup>$/'
+			),
+			'a month in 1920' => array(
+				SnakFormatter::FORMAT_HTML,
+				$options,
+				$aMonthIn1920,
+				'/^May 1920$/'
+			),
+			'a gregorian day in 1520' => array(
+				SnakFormatter::FORMAT_HTML,
+				$options,
+				$aGregorianDayIn1520,
+				'/^1 May 1520 <sup class="wb-calendar-name">Gregorian<\/sup>$/'
+			),
+			'a julian day in 1980' => array(
+				SnakFormatter::FORMAT_HTML,
+				$options,
+				$aJulianDayIn1980,
+				'/^1 May 1980 <sup class="wb-calendar-name">Julian<\/sup>$/'
 			),
 		);
 	}
