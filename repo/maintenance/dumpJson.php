@@ -78,7 +78,9 @@ class DumpJson extends Maintenance {
 
 		//TODO: allow injection for unit tests
 		$this->entityPerPage = new EntityPerPageTable();
-		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+
+		// Use an uncached EntityRevisionLookup here to avoid memory leaks
+		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
 	}
 
 	/**
