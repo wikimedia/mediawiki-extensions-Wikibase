@@ -19,22 +19,21 @@ use Wikibase\DataModel\Entity\ItemId;
 class EntityPerPageTable implements EntityPerPage {
 
 	/**
-	 * @see EntityPerPage::addEntityContent
+	 * @see EntityPerPage::addEntityPage
 	 *
-	 * @since 0.2
-	 *
-	 * @param EntityContent $entityContent
+	 * @param EntityId $entityId
+	 * @param int $pageId
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function addEntityContent( EntityContent $entityContent ) {
+	public function addEntityPage( EntityId $entityId, $pageId ) {
 		$dbw = wfGetDB( DB_MASTER );
 		$select = $dbw->selectField(
 			'wb_entity_per_page',
 			'epp_page_id',
 			array(
-				'epp_entity_id' => $entityContent->getEntity()->getId()->getNumericId(),
-				'epp_entity_type' => $entityContent->getEntity()->getType()
+				'epp_entity_id' => $entityId->getNumericId(),
+				'epp_entity_type' => $entityId->getEntityType()
 			),
 			__METHOD__
 		);
@@ -45,26 +44,23 @@ class EntityPerPageTable implements EntityPerPage {
 		return $dbw->insert(
 			'wb_entity_per_page',
 			array(
-				'epp_entity_id' => $entityContent->getEntity()->getId()->getNumericId(),
-				'epp_entity_type' => $entityContent->getEntity()->getType(),
-				'epp_page_id' => $entityContent->getTitle()->getArticleID()
+				'epp_entity_id' => $entityId->getNumericId(),
+				'epp_entity_type' => $entityId->getEntityType(),
+				'epp_page_id' => $pageId
 			),
 			__METHOD__
 		);
 	}
 
 	/**
-	 * @see EntityPerPage::deleteEntityContent
+	 * @see EntityPerPage::deleteEntityPage
 	 *
-	 * @since 0.2
-	 *
-	 * @param EntityContent $entityContent
+	 * @param EntityId $entityId
+	 * @param int $pageId
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteEntityContent( EntityContent $entityContent ) {
-		$entityId = $entityContent->getEntity()->getId();
-
+	public function deleteEntityPage( EntityId $entityId, $pageId ) {
 		$this->deleteEntity( $entityId );
 	}
 

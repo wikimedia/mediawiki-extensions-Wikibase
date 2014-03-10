@@ -44,7 +44,10 @@ class EntityDeletionUpdate extends \DataUpdate {
 		$store->getTermIndex()->deleteTermsOfEntity( $entity );
 		$this->doTypeSpecificStuff( $store, $entity );
 
-		$store->newEntityPerPage()->deleteEntityContent( $this->content );
+		$store->newEntityPerPage()->deleteEntityPage(
+			$entity->getId(),
+			$this->content->getTitle()->getArticleID()
+		);
 
 		/**
 		 * Gets called after the deletion of an item has been committed,
