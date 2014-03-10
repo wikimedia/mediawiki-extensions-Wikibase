@@ -241,10 +241,12 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
+	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup() {
-		return $this->getStore()->getEntityLookup();
+	public function getEntityLookup( $uncached = '' ) {
+		return $this->getStore()->getEntityLookup( $uncached );
 	}
 
 	/**
