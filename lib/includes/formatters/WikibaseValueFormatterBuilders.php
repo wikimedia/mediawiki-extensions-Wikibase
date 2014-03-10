@@ -80,6 +80,7 @@ class WikibaseValueFormatterBuilders {
 			'PT:url' => 'Wikibase\Lib\HtmlUrlFormatter',
 			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
 			'PT:wikibase-item' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdHtmlLinkFormatter' ),
+			'VT:time' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newHtmlTimeFormatter' ),
 		),
 
 		// Formatters to use for HTML widgets.
@@ -510,6 +511,19 @@ class WikibaseValueFormatterBuilders {
 	 */
 	protected static function newEntityIdHtmlLinkFormatter( FormatterOptions $options, $builders ) {
 		return new EntityIdHtmlLinkFormatter( $options, $builders->entityLookup );
+	}
+
+	/**
+	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
+	 * Used to inject a formatter into the HtmlTimeFormatter.
+	 *
+	 * @param FormatterOptions $options
+	 * @param WikibaseValueFormatterBuilders $builders
+	 *
+	 * @return HtmlTimeFormatter
+	 */
+	private static function newHtmlTimeFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
+		return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
 	}
 
 	/**
