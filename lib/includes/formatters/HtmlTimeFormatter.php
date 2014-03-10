@@ -18,10 +18,16 @@ use ValueFormatters\ValueFormatterBase;
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
 class HtmlTimeFormatter extends ValueFormatterBase {
+
 	/**
 	 * @var Language
 	 */
 	private $language;
+
+	/**
+	 * @var ValueFormatter
+	 */
+	private $dateTimeFormatter;
 
 	public function __construct( FormatterOptions $options, ValueFormatter $dateTimeFormatter ) {
 		$this->dateTimeFormatter = $dateTimeFormatter;
@@ -88,8 +94,8 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 */
 	private function getCalendarKey( $uri ) {
 		$calendars = array(
-	    TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
-		  TimeFormatter::CALENDAR_JULIAN => 'julian',
+		TimeFormatter::CALENDAR_GREGORIAN => 'gregorian',
+			TimeFormatter::CALENDAR_JULIAN => 'julian',
 		);
 		return $calendars[ $uri ];
 	}
