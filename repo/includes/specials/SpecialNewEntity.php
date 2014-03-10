@@ -4,9 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Status;
-use UserBlockedError;
 use Wikibase\CopyrightMessageBuilder;
-use Wikibase\EditEntity;
 use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -110,7 +108,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$summary->setLanguage( $this->getLanguage()->getCode() );
 					$summary->addAutoSummaryArgs( $this->label, $this->description );
 
-					$status = $this->saveEntity( $entityContent, $summary, $this->getRequest()->getVal( 'token' ) );
+					$status = $this->saveEntity(
+						$entityContent,
+						$summary,
+						$this->getRequest()->getVal( 'token' ),
+						EDIT_NEW
+					);
 
 					$out = $this->getOutput();
 
