@@ -364,10 +364,12 @@ class SqlStore implements Store {
 	 *
 	 * @since 0.4
 	 *
+	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
+	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup() {
-		return $this->getEntityRevisionLookup();
+	public function getEntityLookup( $uncached = '' ) {
+		return $this->getEntityRevisionLookup( $uncached );
 	}
 
 	/**
