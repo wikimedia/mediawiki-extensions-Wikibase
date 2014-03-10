@@ -2,10 +2,13 @@
 
 namespace Wikibase\Api;
 
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use ApiBase;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContent;
 use Wikibase\Utils;
 use Wikibase\ChangeOp\ChangeOpAliases;
@@ -25,18 +28,19 @@ use Wikibase\ChangeOp\ChangeOpAliases;
 class SetAliases extends ModifyEntity {
 
 	/**
-	 * @see  \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-
-		if ( !empty( $params['add'] ) || isset( $params['set'] ) ) {
-			// add and set has a common permission due to the special page SetAliases
-			$permissions[] = 'alias-update';
+		$entity = $entityContent->getEntity();
+		if( $entity instanceof Item ) {
+			$type = 'item';
+		} else if ( $entity instanceof Property ) {
+			$type = 'property';
+		} else {
+			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );
 		}
-		if ( !empty( $params['remove'] ) ) {
-			$permissions[] = 'alias-remove';
-		}
+		$permissions[] = $type . '-term';
 		return $permissions;
 	}
 

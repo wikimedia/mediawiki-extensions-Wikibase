@@ -88,7 +88,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 		// If the user is authorized, display the page, if not, show an error.
 		if ( !$this->userCanExecute( $this->getUser() ) ) {
 			$this->displayRestrictionError();
-			return false;
 		}
 		return true;
 	}

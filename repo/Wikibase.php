@@ -56,22 +56,10 @@ call_user_func( function() {
 
 	// rights
 	// names should be according to other naming scheme
-	$wgGroupPermissions['*']['item-override']		= true;
-	$wgGroupPermissions['*']['item-create']			= true;
-	$wgGroupPermissions['*']['item-remove']			= true;
+	$wgGroupPermissions['*']['item-term']			= true;
+	$wgGroupPermissions['*']['property-term']		= true;
 	$wgGroupPermissions['*']['item-merge']			= true;
-	$wgGroupPermissions['*']['property-override']	= true;
 	$wgGroupPermissions['*']['property-create']		= true;
-	$wgGroupPermissions['*']['property-remove']		= true;
-	$wgGroupPermissions['*']['alias-update']		= true;
-	$wgGroupPermissions['*']['alias-remove']		= true;
-	$wgGroupPermissions['*']['sitelink-remove']		= true;
-	$wgGroupPermissions['*']['sitelink-update']		= true;
-	$wgGroupPermissions['*']['linktitles-update']	= true;
-	$wgGroupPermissions['*']['label-remove']		= true;
-	$wgGroupPermissions['*']['label-update']		= true;
-	$wgGroupPermissions['*']['description-remove']	= true;
-	$wgGroupPermissions['*']['description-update']	= true;
 
 	// i18n
 	$wgExtensionMessagesFiles['Wikibase'] 				= __DIR__ . '/Wikibase.i18n.php';
