@@ -114,16 +114,33 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
+	 * @param Claims $claims
+	 * @param array $acceptableRanks
+	 *
+	 * @return Claims
+	 */
+	protected function filterClaimsByRanks( $claims, array $acceptableRanks ) {
+		$newClaims = new Claims();
+		foreach( $acceptableRanks as $rank ) {
+			foreach( $claims->getByRank( $rank ) as $claim ) {
+				$newClaims->append( $claim );
+			}
+		}
+		return $newClaims;
+	}
+
+	/**
 	 * Render the main Snaks belonging to a Claim (which is identified by a PropertyId).
 	 *
 	 * @since 0.5
 	 *
 	 * @param string $entityId
 	 * @param string $propertyId
+	 * @param array $acceptableRanks
 	 *
 	 * @return string
 	 */
-	public function formatPropertyValues( $entityId, $propertyId ) {
+	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
 		$entityId = new ItemId( $entityId );
 		$propertyId = new PropertyId( $propertyId );
 
@@ -134,6 +151,15 @@ class WikibaseLuaEntityBindings {
 		}
 
 		$claims = $this->getClaimsForProperty( $entity, $propertyId );
+
+		if ( !$acceptableRanks ) {
+			// We only want the best claims over here, so that we only show the most
+			// relevant information.
+			$claims = $claims->getBestClaims();
+		} else {
+			// ... unless the user passed in a table of acceptable ranks
+			$claims = $this->filterClaimsByRanks( $claims, $acceptableRanks );
+		}
 
 		if ( $claims->isEmpty() ) {
 			return '';
