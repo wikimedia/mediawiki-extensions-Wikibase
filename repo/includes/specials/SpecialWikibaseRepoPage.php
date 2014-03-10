@@ -120,10 +120,11 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param EntityContent $entityContent
 	 * @param Summary $summary
 	 * @param string $token
+	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @return Status
 	 */
-	protected function saveEntity( EntityContent $entityContent, Summary $summary, $token ) {
+	protected function saveEntity( EntityContent $entityContent, Summary $summary, $token, $flags = EDIT_UPDATE ) {
 		//TODO: allow injection/override!
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
@@ -141,7 +142,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 
 		$status = $editEntity->attemptSave(
 			$this->summaryFormatter->formatSummary( $summary ),
-			EDIT_UPDATE,
+			$flags,
 			$token
 		);
 
