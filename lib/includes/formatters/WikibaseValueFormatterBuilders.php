@@ -2,7 +2,9 @@
 
 namespace Wikibase\Lib;
 
+use InvalidArgumentException;
 use Language;
+use RuntimeException;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
@@ -95,8 +97,8 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	/**
-	 * @param EntityLookup   $lookup
-	 * @param Language               $defaultLanguage
+	 * @param EntityLookup $lookup
+	 * @param Language $defaultLanguage
 	 */
 	public function __construct(
 		EntityLookup $lookup,
@@ -126,16 +128,16 @@ class WikibaseValueFormatterBuilders {
 	 * @param string $type A data value type (prefixed with `VT:`) or a property data type (prefixed with `PT:`).
 	 * @param null|string $formatterClass
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setValueFormatterClass( $format, $type, $formatterClass = null ) {
 		if ( $formatterClass !== null ) {
 			if ( !is_string( $formatterClass ) ) {
-				throw new \InvalidArgumentException( '$formatterClass must be a non-empty string' );
+				throw new InvalidArgumentException( '$formatterClass must be a non-empty string' );
 			}
 
 			if ( !class_exists( $formatterClass ) ) {
-				throw new \InvalidArgumentException( 'Unknown $formatterClass: ' . $formatterClass );
+				throw new InvalidArgumentException( 'Unknown $formatterClass: ' . $formatterClass );
 			}
 		}
 
@@ -151,16 +153,16 @@ class WikibaseValueFormatterBuilders {
 	 * @param string $type A data value type (prefixed with `VT:`) or a property data type (prefixed with `PT:`).
 	 * @param null|callable $formatterBuilder
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setValueFormatterBuilder( $format, $type, $formatterBuilder = null ) {
 		if ( $formatterBuilder !== null ) {
 			if ( is_string( $formatterBuilder ) ) {
-				throw new \InvalidArgumentException( '$formatterBuilder must not be a string' );
+				throw new InvalidArgumentException( '$formatterBuilder must not be a string' );
 			}
 
 			if ( !is_callable( $formatterBuilder ) ) {
-				throw new \InvalidArgumentException( '$formatterBuilder must be a callable' );
+				throw new InvalidArgumentException( '$formatterBuilder must be a callable' );
 			}
 		}
 
@@ -174,19 +176,19 @@ class WikibaseValueFormatterBuilders {
 	 * @param string $type A data value type (prefixed with `VT:`) or a property data type (prefixed with `PT:`).
 	 * @param string|callable|ValueFormatter|null $spec
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	private function setValueFormatterSpec( $format, $type, $spec ) {
 		if ( !is_string( $format ) || $format === '' ) {
-			throw new \InvalidArgumentException( '$format must be a non-empty string' );
+			throw new InvalidArgumentException( '$format must be a non-empty string' );
 		}
 
 		if ( !is_string( $type ) || $type === '' ) {
-			throw new \InvalidArgumentException( '$type must be a non-empty string' );
+			throw new InvalidArgumentException( '$type must be a non-empty string' );
 		}
 
 		if ( !preg_match( '/^(VT|PT):/', $type ) ) {
-			throw new \InvalidArgumentException( '$type must start with `VT:` (for data value types) or `PT:` (for property data types)' );
+			throw new InvalidArgumentException( '$type must start with `VT:` (for data value types) or `PT:` (for property data types)' );
 		}
 
 		if ( $spec === null ) {
@@ -218,7 +220,7 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @param FormatterOptions $options The options to modify.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @todo  : Sort out how the desired language is specified. We have two language options,
 	 *        each accepting different ways of specifying the language. That's not good.
 	 */
@@ -231,7 +233,7 @@ class WikibaseValueFormatterBuilders {
 
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 		if ( !is_string( $lang ) ) {
-			throw new \InvalidArgumentException( 'The value of OPT_LANG must be a language code. For a fallback chain, use the `languages` option.' );
+			throw new InvalidArgumentException( 'The value of OPT_LANG must be a language code. For a fallback chain, use the `languages` option.' );
 		}
 
 		if ( !$options->hasOption( 'languages' ) ) {
@@ -244,7 +246,7 @@ class WikibaseValueFormatterBuilders {
 		}
 
 		if ( !( $options->getOption( 'languages' ) instanceof LanguageFallbackChain ) ) {
-			throw new \InvalidArgumentException( 'The value of the `languages` option must be an instance of LanguageFallbackChain.' );
+			throw new InvalidArgumentException( 'The value of the `languages` option must be an instance of LanguageFallbackChain.' );
 		}
 	}
 
@@ -256,7 +258,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param string $format
 	 * @param FormatterOptions $options
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 * @return DispatchingValueFormatter
 	 */
 	public function buildDispatchingValueFormatter( OutputFormatValueFormatterFactory $factory, $format, FormatterOptions $options ) {
@@ -277,7 +279,7 @@ class WikibaseValueFormatterBuilders {
 				$formatters = $this->getDiffFormatters( $options );
 				break;
 			default:
-				throw new \InvalidArgumentException( 'Unsupported format: ' . $format );
+				throw new InvalidArgumentException( 'Unsupported format: ' . $format );
 		}
 
 		return new DispatchingValueFormatter( $formatters );
@@ -293,8 +295,11 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getPlainTextFormatters( FormatterOptions $options, array $skip = array() ) {
-		$plainFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_PLAIN, $options, $skip );
-		return $plainFormatters;
+		return $this->buildDefinedFormatters(
+			SnakFormatter::FORMAT_PLAIN,
+			$options,
+			$skip
+		);
 	}
 
 	/**
@@ -309,8 +314,14 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getWikiTextFormatters( FormatterOptions $options, array $skip = array() ) {
-		$wikiFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_WIKI, $options, $skip );
-		$plainFormatters = $this->getPlainTextFormatters( $options, array_merge( $skip, array_keys( $wikiFormatters ) ) );
+		$wikiFormatters = $this->buildDefinedFormatters(
+			SnakFormatter::FORMAT_WIKI,
+			$options,
+			$skip
+		);
+		$plainFormatters = $this->getPlainTextFormatters(
+			$options, array_merge( $skip, array_keys( $wikiFormatters ) )
+		);
 
 		$wikiFormatters = array_merge(
 			$wikiFormatters,
@@ -332,8 +343,15 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getHtmlFormatters( FormatterOptions $options, array $skip = array() ) {
-		$htmlFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML, $options, $skip );
-		$plainFormatters = $this->getPlainTextFormatters( $options, array_merge( $skip, array_keys( $htmlFormatters ) ) );
+		$htmlFormatters = $this->buildDefinedFormatters(
+			SnakFormatter::FORMAT_HTML,
+			$options,
+			$skip
+		);
+		$plainFormatters = $this->getPlainTextFormatters(
+			$options,
+			array_merge( $skip, array_keys( $htmlFormatters ) )
+		);
 
 		$htmlFormatters = array_merge(
 			$htmlFormatters,
@@ -356,8 +374,15 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getWidgetFormatters( FormatterOptions $options, array $skip = array() ) {
-		$widgetFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML_WIDGET, $options, $skip );
-		$htmlFormatters = $this->getHtmlFormatters( $options, array_merge( $skip, array_keys( $widgetFormatters ) ) );
+		$widgetFormatters = $this->buildDefinedFormatters(
+			SnakFormatter::FORMAT_HTML_WIDGET,
+			$options,
+			$skip
+		);
+		$htmlFormatters = $this->getHtmlFormatters(
+			$options,
+			array_merge( $skip, array_keys( $widgetFormatters ) )
+		);
 
 		$widgetFormatters = array_merge(
 			$widgetFormatters,
@@ -380,8 +405,15 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
 	public function getDiffFormatters( FormatterOptions $options, array $skip = array() ) {
-		$diffFormatters = $this->buildDefinedFormatters( SnakFormatter::FORMAT_HTML_DIFF, $options, $skip );
-		$htmlFormatters = $this->getHtmlFormatters( $options, array_merge( $skip, array_keys( $diffFormatters ) ) );
+		$diffFormatters = $this->buildDefinedFormatters(
+			SnakFormatter::FORMAT_HTML_DIFF,
+			$options,
+			$skip
+		);
+		$htmlFormatters = $this->getHtmlFormatters(
+			$options,
+			array_merge( $skip, array_keys( $diffFormatters ) )
+		);
 
 		$diffFormatters = array_merge(
 			$diffFormatters,
@@ -399,9 +431,9 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @param string $format
 	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped (using the 'VT:' prefix for data value types,
-	 *        or the 'PT:' prefix for property data types). Useful when the caller already has
-	 *        formatters for some types.
+	 * @param string[] $skip A list of types to be skipped (using the 'VT:' prefix for data value
+	 *        types, or the 'PT:' prefix for property data types). Useful when the caller already
+	 *        has formatters for some types.
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
@@ -433,7 +465,7 @@ class WikibaseValueFormatterBuilders {
 	 *        or a ValueFormatter object.
 	 * @param FormatterOptions $options
 	 *
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
 	 * @return mixed
 	 */
 	protected function newFromSpec( $spec, FormatterOptions $options ) {
@@ -446,7 +478,9 @@ class WikibaseValueFormatterBuilders {
 		}
 
 		if ( !( $obj instanceof ValueFormatter ) ) {
-			throw new \RuntimeException( 'Formatter does not implement the ValueFormatter interface: ' . get_class( $obj ) );
+			throw new RuntimeException(
+				'Formatter does not implement the ValueFormatter interface: ' . get_class( $obj )
+			);
 		}
 
 		return $obj;
