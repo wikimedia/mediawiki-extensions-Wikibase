@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_7e288d32",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-11T09:11:04Z",
+      "side": 1,
+      "message": "I\u0027m confused - why is this \"wikidata\" again?",
+      "revId": "a8362ec29170e0fc0c416147482be5ddbaefb78e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
