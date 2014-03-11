@@ -65,12 +65,12 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 
 		$html = '';
 		$html .= Html::element( 'h4',
-			array( 'class' => 'wikibase-details wikibase-time-details wikibase-time-rendered' ),
+			array( 'class' => 'wb-details wb-time-details wb-time-rendered' ),
 			$this->timeFormatter->format( $value )
 		);
 
-		$html .= Html::openElement( 'dl',
-			array( 'class' => 'wikibase-details wikibase-time-details' ) );
+		$html .= Html::openElement( 'table',
+			array( 'class' => 'wb-details wb-time-details' ) );
 		$html .= $this->renderLabelValuePair( 'isotime', htmlspecialchars( $value->getTime() ) );
 
 		//TODO: provide "nice" rendering of timezone, calendar, precision, etc.
@@ -84,7 +84,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		$html .= $this->renderLabelValuePair( 'before', htmlspecialchars( $value->getBefore() ) );
 		$html .= $this->renderLabelValuePair( 'after', htmlspecialchars( $value->getAfter() ) );
 
-		$html .= Html::closeElement( 'dl' );
+		$html .= Html::closeElement( 'table' );
 
 		return $html;
 	}
@@ -96,12 +96,14 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML for the label/value pair
 	 */
 	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
-		$html = '';
-		$html .= Html::element( 'dt', array( 'class' => 'wikibase-time-' . $fieldName ),
+		$html = Html::openElement( 'tr' );
+
+		$html .= Html::element( 'th', array( 'class' => 'wb-time-' . $fieldName ),
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'dd', array( 'class' => 'wikibase-time-' . $fieldName ),
+		$html .= Html::element( 'td', array( 'class' => 'wb-time-' . $fieldName ),
 			$valueHtml );
 
+		$html .= Html::closeElement( 'tr' );
 		return $html;
 	}
 
@@ -113,8 +115,8 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	protected function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
-		// Messages: wikibase-timedetails-amount, wikibase-timedetails-upperbound,
-		// wikibase-timedetails-lowerbound, wikibase-timedetails-unit
+		// Messages: wb-timedetails-amount, wb-timedetails-upperbound,
+		// wb-timedetails-lowerbound, wb-timedetails-unit
 		$key = 'wikibase-timedetails-' . strtolower( $fieldName );
 		$msg = wfMessage( $key )->inLanguage( $lang );
 
