@@ -110,9 +110,12 @@ class ClaimHtmlGenerator {
 			);
 
 			$referenceList = $claim->getReferences();
-
 			$referencesHeading = wfMessage(
-				'wikibase-statementview-referencesheading-pendingcountersubject',
+				'wikibase-ui-pendingquantitycounter-nonpending',
+				wfMessage(
+					'wikibase-statementview-referencesheading-pendingcountersubject',
+					count( $referenceList )
+				)->text(),
 				count( $referenceList )
 			)->text();
 
