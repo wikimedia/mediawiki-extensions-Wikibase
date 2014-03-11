@@ -50,7 +50,7 @@ class SerializerFactory {
 	 *
 	 * @todo: injecting the services should be required
 	 */
-	function __construct(
+	public function __construct(
 		SerializationOptions $defaultOptions = null,
 		PropertyDataTypeLookup $dataTypeLookup = null,
 		EntityFactory $entityFactory = null,
