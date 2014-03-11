@@ -122,7 +122,7 @@ HTML;
 	$templates['wb-statement'] =
 <<<HTML
 <div class="wb-statement wb-statementview $1">
-	<div class="wb-statement-rank wb-rankselector ui-state-disabled">$2</div>
+	<div class="wb-statement-rank">$2</div>
 	<div class="wb-claim wb-claim-$3">
 		<div class="wb-claim-mainsnak" dir="auto">
 			$4 <!-- wb-snak (Main Snak) -->
@@ -139,7 +139,9 @@ HTML;
 
 	$templates['wb-rankselector'] =
 <<<HTML
-<span class="ui-icon ui-icon-rankselector $1" title="$2"></span>
+<div class="wb-rankselector ui-state-disabled">
+	<span class="ui-icon ui-icon-rankselector $1" title="$2"></span>
+</div>
 HTML;
 
 	$templates['wb-referenceview'] =
