@@ -27,6 +27,7 @@ use Title;
 use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\WikibaseClient;
 
@@ -242,7 +243,9 @@ final class ClientHooks {
 
 		wfProfileIn( __METHOD__ );
 
-		if ( $rc->getAttribute( 'rc_type' ) == RC_EXTERNAL ) {
+		$type = $rc->getAttribute( 'rc_type' );
+
+		if ( $type == RC_EXTERNAL ) {
 			$wikibaseClient = WikibaseClient::getDefaultInstance();
 			$changeFactory = new ExternalChangeFactory(
 				$wikibaseClient->getSettings()->getSetting( 'repoSiteId' )
@@ -296,36 +299,11 @@ final class ClientHooks {
 	public static function onSpecialWatchlistQuery( array &$conds, array &$tables,
 		array &$join_conds, array &$fields, $opts = array()
 	) {
-		global $wgRequest, $wgUser;
+		$db = wfGetDB( DB_SLAVE );
+		$handler = new SpecialWatchlistQueryHandler( $GLOBALS['wgUser'], $db );
 
-		wfProfileIn( __METHOD__ );
+		$conds = $handler->handleAddWikibaseConditions( $GLOBALS['wgRequest'], $conds, $opts );
 
-		if (
-			// Don't act on activated enhanced watchlist
-			$wgRequest->getBool( 'enhanced', $wgUser->getOption( 'usenewrc' ) ) === false &&
-			// Or in case the user disabled it
-			$opts['hideWikibase'] === 0
-		) {
-			$dbr = wfGetDB( DB_SLAVE );
-
-			$newConds = array();
-			foreach( $conds as $k => $v ) {
-				if ( $v === 'rc_this_oldid=page_latest OR rc_type=3' ) {
-					$where = array(
-						'rc_this_oldid=page_latest',
-						'rc_type' => array( 3, 5 )
-					);
-					$newConds[$k] = $dbr->makeList( $where, LIST_OR );
-				} else {
-					$newConds[$k] = $v;
-				}
-			}
-			$conds = $newConds;
-		} else {
-			$conds[] = 'rc_type != 5';
-		}
-
-		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
