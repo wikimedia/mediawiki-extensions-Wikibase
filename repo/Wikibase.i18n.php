@@ -1455,6 +1455,7 @@ $messages['af'] = array(
  * @author Asaifm
  * @author Aude
  * @author Calak
+ * @author Gagnabil
  * @author Kaganer
  * @author Majid KSA
  * @author Meno25
@@ -1513,6 +1514,8 @@ $messages['ar'] = array(
 	'wikibase-newentity-submit' => 'إنشاء',
 	'wikibase-setdescription-label' => 'الوصف:',
 	'wikibase-restoreold' => 'استرجاع',
+	'right-item-merge' => 'دمج العناصر',
+	'right-property-term' => 'تغيير شروط الملكية (التسميات والأوصاف والأسماء المستعارة)',
 );
 
 /** Aramaic (ܐܪܡܝܐ)
@@ -6715,6 +6718,9 @@ ffirmation ajoutée}}',
 	'content-model-wikibase-item' => 'Élément Wikibase',
 	'content-model-wikibase-property' => 'Propriété de Wikibase',
 	'content-model-wikibase-query' => 'Requête de Wikibase',
+	'right-item-term' => 'Modifier les termes de l’élément (libellés, descriptions, alias)',
+	'right-item-merge' => 'Fusionner les éléments',
+	'right-property-term' => 'Modifier les termes de la propriété (libellés, descriptions, alias)',
 	'right-property-create' => 'Créer des propriétés',
 );
 
@@ -6913,10 +6919,10 @@ $messages['gl'] = array(
 	'wikibase-remove-inprogress' => 'Eliminando...',
 	'wikibase-label-empty' => 'Aínda non hai ningunha etiqueta definida.',
 	'wikibase-label-edit-placeholder' => 'escriba unha etiqueta',
-	'wikibase-label-edit-placeholder-language-aware' => 'escribe unha etiqueta en $1',
+	'wikibase-label-edit-placeholder-language-aware' => 'escriba unha etiqueta en $1',
 	'wikibase-description-empty' => 'Aínda non hai ningunha descrición definida.',
 	'wikibase-description-edit-placeholder' => 'escriba unha descrición',
-	'wikibase-description-edit-placeholder-language-aware' => 'escribe unha descrición en $1',
+	'wikibase-description-edit-placeholder-language-aware' => 'escriba unha descrición en $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'páxina',
 	'wikibase-alias-edit-placeholder' => 'escriba un pseudónimo',
@@ -9425,6 +9431,9 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'content-model-wikibase-item' => 'Elemento Wikibase',
 	'content-model-wikibase-property' => 'Proprietà Wikibase',
 	'content-model-wikibase-query' => 'Interrogazione Wikibase',
+	'right-item-term' => 'Modifica termini elementi (etichette, descrizioni, alias)',
+	'right-item-merge' => 'Unisci elementi',
+	'right-property-term' => 'Modifica termini proprietà (etichette, descrizioni, alias)',
 	'right-property-create' => 'Crea proprietà',
 );
 
@@ -13930,11 +13939,7 @@ Wiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy z
 * zapytanie – niejawna część łańcucha IRI
 * fragment – niejawna część łańcucha IRI',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Plik multimedialny z Commons',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Odwołuje się do plików przechowywanych na Wikimedia Commons. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „File” na Commons, aby odnaleźć pasujące wpisy.
-* schemat – niejawna część łańcucha IRI
-* część hierarchiczna – niejawna część łańcucha IRI
-* zapytanie – niejawna część łańcucha IRI
-* fragment – niejawna część łańcucha IRI', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Odwołuje się do plików przechowywanych na Wikimedia Commons. Podczas wprowadzania będzie przeszukiwana przestrzeń nazw „File” na Commons, aby odnaleźć pasujące wpisy.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Współrzędne geograficzne',
 	'wikibase-listdatatypes-quantity-head' => 'Ilość',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Tekst jednojęzyczny',
@@ -15511,6 +15516,9 @@ $messages['sco'] = array(
 * unit – impleecit pairt o the string that defauts til "1" (mappin til staundairdizin bodie is onclear)
 * upperboond - amoont\'s upper boond
 * lowerboond - amoont\'s lower boond',
+	'right-item-term' => 'Chynge eetem terms (labels, descreeptions, aliases)',
+	'right-item-merge' => 'Merge eetems',
+	'right-property-term' => 'Chynge propertie terms (labels, descreeptions, aliases)',
 );
 
 /** Serbo-Croatian (srpskohrvatski / српскохрватски)
@@ -16595,42 +16603,8 @@ för att ta reda på var den tog vägen.',
 	'content-model-wikibase-item' => 'Wikibase-objekt',
 	'content-model-wikibase-property' => 'Wikibase-egenskap',
 	'content-model-wikibase-query' => 'Wikibase-fråga',
-	'right-item-override' => 'Skriv över objekt',
-	'right-item-create' => 'Skapa objekt',
-	'right-item-remove' => 'Radera objekt',
-	'right-property-override' => 'Skriv över egenskaper',
+	'right-item-merge' => 'Sammanfoga objekt',
 	'right-property-create' => 'Skapa egenskaper',
-	'right-property-remove' => 'Radera egenskaper',
-	'right-alias-remove' => 'Ta bort alias',
-	'right-alias-update' => 'Uppdatera alias',
-	'right-sitelink-remove' => 'Ta bort webbplatslänkar',
-	'right-sitelink-update' => 'Uppdatera webbplatslänkar',
-	'right-linktitles-update' => 'Associera sidor',
-	'right-label-remove' => 'Radera etiketter',
-	'right-label-update' => 'Uppdatera etiketter',
-	'right-description-remove' => 'Radera beskrivningar',
-	'right-description-update' => 'Uppdatera beskrivningar',
-	'action-item-override' => 'skriv över objekt',
-	'action-item-create' => 'skapa objekt',
-	'action-item-remove' => 'radera objekt',
-	'action-property-override' => 'skriv över egenskaper',
-	'action-property-create' => 'skapa egenskaper',
-	'action-property-remove' => 'radera egenskaper',
-	'action-alias-update' => 'uppdatera alias',
-	'action-alias-remove' => 'ta bort alias',
-	'action-sitelink-remove' => 'ta bort webbplatslänkar',
-	'action-sitelink-update' => 'uppdatera webbplatslänkar',
-	'action-linktitles-update' => 'associera sidor',
-	'action-label-remove' => 'radera etiketter',
-	'action-label-update' => 'uppdatera etiketter',
-	'action-description-remove' => 'radera beskrivningar',
-	'action-description-update' => 'uppdatera beskrivningar',
-	'wikibase-time-precision-Gannum' => 'i $1 miljarder år',
-	'wikibase-time-precision-Mannum' => 'i $1 miljoner år',
-	'wikibase-time-precision-annum' => 'i $1 år',
-	'wikibase-time-precision-millennium' => '$1. årtusende',
-	'wikibase-time-precision-century' => '$1. århundrade',
-	'wikibase-time-precision-10annum' => '$1 årtionde',
 );
 
 /** Tamil (தமிழ்)
@@ -18546,36 +18520,10 @@ $messages['zh-hans'] = array(
 	'content-model-wikibase-item' => '维基数据库项',
 	'content-model-wikibase-property' => '维基数据库属性',
 	'content-model-wikibase-query' => '维基数据库查询',
-	'right-item-override' => '覆盖项',
-	'right-item-create' => '创建项',
-	'right-item-remove' => '删除项',
-	'right-property-override' => '覆盖属性',
+	'right-item-term' => '更改项术语（标签、声称、别名）',
+	'right-item-merge' => '合并项',
+	'right-property-term' => '更改属性术语（标签、声称、别名）',
 	'right-property-create' => '创建属性',
-	'right-property-remove' => '删除属性',
-	'right-alias-remove' => '删除别名',
-	'right-alias-update' => '更新别名',
-	'right-sitelink-remove' => '删除网站链接',
-	'right-sitelink-update' => '更新网站链接',
-	'right-linktitles-update' => '关联页面',
-	'right-label-remove' => '清除标签',
-	'right-label-update' => '更新标签',
-	'right-description-remove' => '清除说明',
-	'right-description-update' => '更新说明',
-	'action-item-override' => '覆盖项',
-	'action-item-create' => '创建项',
-	'action-item-remove' => '删除项',
-	'action-property-override' => '覆盖属性',
-	'action-property-create' => '创建属性',
-	'action-property-remove' => '删除属性',
-	'action-alias-update' => '更新别名',
-	'action-alias-remove' => '删除别名',
-	'action-sitelink-remove' => '删除网站链接',
-	'action-sitelink-update' => '更新网站链接',
-	'action-linktitles-update' => '关联页面',
-	'action-label-remove' => '清除标签',
-	'action-label-update' => '更新标签',
-	'action-description-remove' => '清除说明',
-	'action-description-update' => '更新说明',
 );
 
 /** Traditional Chinese (中文（繁體）‎)
@@ -18910,40 +18858,8 @@ $messages['zh-hant'] = array(
 	'content-model-wikibase-item' => 'Wikibase項目',
 	'content-model-wikibase-property' => 'Wikibase屬性',
 	'content-model-wikibase-query' => 'Wikibase查詢',
-	'right-item-override' => '覆寫項',
-	'right-item-create' => '創建項目',
-	'right-item-remove' => '刪除項',
-	'right-property-override' => '覆寫屬性',
+	'right-item-term' => '更改項機能（標籤、說明與別名）',
+	'right-item-merge' => '合併項',
+	'right-property-term' => '更改屬性機能（標籤、說明與別名）',
 	'right-property-create' => '創建屬性',
-	'right-property-remove' => '刪除屬性',
-	'right-alias-remove' => '刪除別名',
-	'right-alias-update' => '更新別名',
-	'right-sitelink-remove' => '刪除站點連結',
-	'right-sitelink-update' => '更新維基項目連結',
-	'right-linktitles-update' => '關聯頁面',
-	'right-label-remove' => '擦除標籤',
-	'right-label-update' => '更新標籤',
-	'right-description-remove' => '擦除說明',
-	'right-description-update' => '更新說明',
-	'action-item-override' => '覆寫項',
-	'action-item-create' => '創建項目',
-	'action-item-remove' => '刪除項',
-	'action-property-override' => '覆寫屬性',
-	'action-property-create' => '創建屬性',
-	'action-property-remove' => '刪除屬性',
-	'action-alias-update' => '更新別名',
-	'action-alias-remove' => '刪除別名',
-	'action-sitelink-remove' => '刪除站點連結',
-	'action-sitelink-update' => '更新網站連結',
-	'action-linktitles-update' => '關聯頁面',
-	'action-label-remove' => '擦除標籤',
-	'action-label-update' => '更新標籤',
-	'action-description-remove' => '擦除說明',
-	'action-description-update' => '更新描述',
-	'wikibase-time-precision-Gannum' => '$1十億年內',
-	'wikibase-time-precision-Mannum' => '$1百萬年內',
-	'wikibase-time-precision-annum' => '$1年內',
-	'wikibase-time-precision-millennium' => '$1千年',
-	'wikibase-time-precision-century' => '$1世紀',
-	'wikibase-time-precision-10annum' => '$1',
 );

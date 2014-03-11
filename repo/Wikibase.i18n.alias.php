@@ -280,6 +280,7 @@ $specialPageAliases['nl'] = array(
 	'SetDescription' => array( 'BeschrijvingInstellen' ),
 	'SetAliases' => array( 'AliassenInstellen' ),
 	'SetSiteLink' => array( 'SitekoppelingInstellen' ),
+	'MergeItems' => array( 'ItemsSamenvoegen' ),
 	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
 	'EntitiesWithoutDescription' => array( 'EntiteitenZonderBeschrijving' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsZonderSitekoppelingen' ),

@@ -370,6 +370,7 @@ $messages['af'] = array(
 
 /** Arabic (العربية)
  * @author Asaifm
+ * @author Gagnabil
  * @author Meno25
  * @author زكريا
  * @author مشعل الحربي
@@ -394,6 +395,16 @@ $messages['ar'] = array(
 	'wikibase-error-remove-connection' => 'وقع خطأ في الاتصال عند الحذف فلم تحفظ تعديلاتك. تحقق من الاتصال بالإنترنت.',
 	'wikibase-error-save-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحفظ.',
 	'wikibase-error-remove-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحذف.',
+	'wikibase-timedetails-time' => 'زمن',
+	'wikibase-timedetails-isotime' => 'الطابع الزمني ISO',
+	'wikibase-timedetails-timezone' => 'المنطقة الزمنية',
+	'wikibase-timedetails-calendar' => 'التقويم',
+	'wikibase-timedetails-precision' => 'الدقة',
+	'wikibase-timedetails-before' => 'قبل',
+	'wikibase-timedetails-after' => 'بعد',
+	'wikibase-globedetails-longitude' => 'خطّ الطول',
+	'wikibase-globedetails-latitude' => 'خطّ العرض',
+	'wikibase-globedetails-precision' => 'الدقة',
 	'wikibase-replicationnote' => 'قد يلزم وقت لتظهر التعديلات في جميع الويكيات.',
 	'wikibase-sitelinks-sitename-columnheading' => 'اللغة',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'الموقع',
@@ -1717,6 +1728,17 @@ $messages['gl'] = array(
 	'wikibase-quantitydetails-upperbound' => 'Límite superior',
 	'wikibase-quantitydetails-lowerbound' => 'Límite inferior',
 	'wikibase-quantitydetails-unit' => 'Unidade',
+	'wikibase-timedetails-time' => 'Hora',
+	'wikibase-timedetails-isotime' => 'Data e hora ISO',
+	'wikibase-timedetails-timezone' => 'Fuso horario',
+	'wikibase-timedetails-calendar' => 'Calendario',
+	'wikibase-timedetails-precision' => 'Precisión',
+	'wikibase-timedetails-before' => 'Antes',
+	'wikibase-timedetails-after' => 'Despois',
+	'wikibase-globedetails-longitude' => 'Lonxitude',
+	'wikibase-globedetails-latitude' => 'Latitude',
+	'wikibase-globedetails-precision' => 'Precisión',
+	'wikibase-globedetails-globe' => 'Globo',
 	'wikibase-replicationnote' => 'Teña en conta que pode levar varios minutos que as modificacións sexan visibles en todos os wikis.',
 	'wikibase-sitelinks-wikipedia' => 'Páxinas da Wikipedia con ligazóns cara a este elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
