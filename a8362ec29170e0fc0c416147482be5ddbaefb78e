@@ -16,6 +16,23 @@
       "revId": "a8362ec29170e0fc0c416147482be5ddbaefb78e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_5eaa7183",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-11T09:33:34Z",
+      "side": 1,
+      "message": "\"Item\" should probably be lower case.",
+      "revId": "a8362ec29170e0fc0c416147482be5ddbaefb78e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
