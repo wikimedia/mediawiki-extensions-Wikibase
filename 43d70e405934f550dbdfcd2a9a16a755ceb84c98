@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_cfe00d96",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-03-11T17:39:29Z",
+      "side": 1,
+      "message": "Please document the new attribute.",
+      "revId": "43d70e405934f550dbdfcd2a9a16a755ceb84c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_4f9bdd1b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-03-11T17:39:29Z",
+      "side": 1,
+      "message": "This needs some adjustment since option() is called within statementview to adjust the list items\u0027 indices.",
+      "revId": "43d70e405934f550dbdfcd2a9a16a755ceb84c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_8fea0572",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-03-11T17:39:29Z",
+      "side": 1,
+      "message": "this._listview.enterNewItem.call( this );",
+      "revId": "43d70e405934f550dbdfcd2a9a16a755ceb84c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
