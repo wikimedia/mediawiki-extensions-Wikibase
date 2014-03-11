@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Language;
 use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
@@ -62,10 +63,19 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 		) );
 		$claim2->setGuid( __METHOD__ . '$' . 2 );
 
+		// A Statement with a lower rank which should not affect the output
+		$claim3 = new Statement( new PropertyValueSnak(
+			$propertyId,
+			new StringValue( 'really' )
+		) );
+		$claim3->setGuid( __METHOD__ . '$' . 3 );
+		$claim3->setRank( Claim::RANK_NORMAL );
+
 		$item = Item::newEmpty();
 		$item->setId( 42 );
 		$item->addClaim( $claim1 );
 		$item->addClaim( $claim2 );
+		$item->addClaim( $claim3 );
 
 		$property = Property::newEmpty();
 		$property->setId( $propertyId );
