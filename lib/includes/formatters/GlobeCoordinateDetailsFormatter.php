@@ -7,6 +7,8 @@ use Html;
 use InvalidArgumentException;
 use Message;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\GeoCoordinateFormatter;
+use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -21,10 +23,22 @@ use ValueFormatters\ValueFormatterBase;
 class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 
 	/**
+	 * @var GlobeCoordinateFormatter
+	 */
+	protected $coordinateFormatter;
+
+	/**
 	 * @param FormatterOptions $options
 	 */
 	public function __construct( FormatterOptions $options ) {
 		parent::__construct( $options );
+
+		if ( !$options->hasOption( GeoCoordinateFormatter::OPT_FORMAT ) ) {
+			//TODO: what'S a good default? Should this be locale dependant? Configurable?
+			$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
+		}
+
+		$this->coordinateFormatter = new GlobeCoordinateFormatter( $options );
 	}
 
 	/**
@@ -44,8 +58,13 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 		}
 
 		$html = '';
-		$html .= Html::openElement( 'dl',
-			array( 'class' => 'wikibase-details wikibase-globe-details' ) );
+		$html .= Html::element( 'h4',
+			array( 'class' => 'wb-details wb-globe-details wb-globe-rendered' ),
+			$this->coordinateFormatter->format( $value )
+		);
+
+		$html .= Html::openElement( 'table',
+			array( 'class' => 'wb-details wb-globe-details' ) );
 
 		//TODO: nicer formatting and localization of numbers.
 		$html .= $this->renderLabelValuePair( 'latitude',
@@ -57,7 +76,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 		$html .= $this->renderLabelValuePair( 'globe',
 			htmlspecialchars( $value->getGlobe() ) );
 
-		$html .= Html::closeElement( 'dl' );
+		$html .= Html::closeElement( 'table' );
 
 		return $html;
 	}
@@ -69,12 +88,14 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML for the label/value pair
 	 */
 	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
-		$html = '';
-		$html .= Html::element( 'dt', array( 'class' => 'wikibase-globe-' . $fieldName ),
+		$html = Html::openElement( 'tr' );
+
+		$html .= Html::element( 'th', array( 'class' => 'wb-globe-' . $fieldName ),
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'dd', array( 'class' => 'wikibase-globe-' . $fieldName ),
+		$html .= Html::element( 'td', array( 'class' => 'wb-globe-' . $fieldName ),
 			$valueHtml );
 
+		$html .= Html::closeElement( 'tr' );
 		return $html;
 	}
 
@@ -86,8 +107,8 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	protected function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
-		// Messages: wikibase-globedetails-amount, wikibase-globedetails-upperbound,
-		// wikibase-globedetails-lowerbound, wikibase-globedetails-unit
+		// Messages: wb-globedetails-amount, wb-globedetails-upperbound,
+		// wb-globedetails-lowerbound, wb-globedetails-unit
 		$key = 'wikibase-globedetails-' . strtolower( $fieldName );
 		$msg = wfMessage( $key )->inLanguage( $lang );
 

@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Message;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -27,13 +28,18 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	protected $decimalFormatter;
 
 	/**
+	 * @var QuantityFormatter
+	 */
+	protected $quantityFormatter;
+
+	/**
 	 * @param FormatterOptions $options
 	 */
 	public function __construct( FormatterOptions $options ) {
 		parent::__construct( $options );
 
-		$this->decimalFormatter = new EscapingValueFormatter( new DecimalFormatter( $options ),
-			'htmlspecialchars' );
+		$this->decimalFormatter = new DecimalFormatter( $options );
+		$this->quantityFormatter = new QuantityFormatter( $this->decimalFormatter, $options );
 	}
 
 	/**
@@ -53,18 +59,23 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 		}
 
 		$html = '';
-		$html .= Html::openElement( 'dl',
-			array( 'class' => 'wikibase-details wikibase-quantity-details' ) );
+		$html .= Html::element( 'h4',
+			array( 'class' => 'wb-details wb-quantity-details wb-quantity-rendered' ),
+			$this->quantityFormatter->format( $value )
+		);
+
+		$html .= Html::openElement( 'table',
+			array( 'class' => 'wb-details wb-quantity-details' ) );
 
 		$html .= $this->renderLabelValuePair( 'amount',
-			$this->decimalFormatter->format( $value->getAmount() ) );
+			htmlspecialchars( $this->decimalFormatter->format( $value->getAmount() ) ) );
 		$html .= $this->renderLabelValuePair( 'upperBound',
-			$this->decimalFormatter->format( $value->getUpperBound() ) );
+			htmlspecialchars( $this->decimalFormatter->format( $value->getUpperBound() ) ) );
 		$html .= $this->renderLabelValuePair( 'lowerBound',
-			$this->decimalFormatter->format( $value->getLowerBound() ) );
+			htmlspecialchars( $this->decimalFormatter->format( $value->getLowerBound() ) ) );
 		$html .= $this->renderLabelValuePair( 'unit', htmlspecialchars( $value->getUnit() ) );
 
-		$html .= Html::closeElement( 'dl' );
+		$html .= Html::closeElement( 'table' );
 
 		return $html;
 	}
@@ -75,13 +86,15 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @return string HTML for the label/value pair
 	 */
-	public function renderLabelValuePair( $fieldName, $valueHtml ) {
-		$html = '';
-		$html .= Html::element( 'dt', array( 'class' => 'wikibase-quantity-' . $fieldName ),
+	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
+		$html = Html::openElement( 'tr' );
+
+		$html .= Html::element( 'th', array( 'class' => 'wb-quantity-' . $fieldName ),
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'dd', array( 'class' => 'wikibase-quantity-' . $fieldName ),
+		$html .= Html::element( 'td', array( 'class' => 'wb-quantity-' . $fieldName ),
 			$valueHtml );
 
+		$html .= Html::closeElement( 'tr' );
 		return $html;
 	}
 
@@ -93,8 +106,8 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	protected function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
-		// Messages: wikibase-quantitydetails-amount, wikibase-quantitydetails-upperbound,
-		// wikibase-quantitydetails-lowerbound, wikibase-quantitydetails-unit
+		// Messages: wb-quantitydetails-amount, wb-quantitydetails-upperbound,
+		// wb-quantitydetails-lowerbound, wb-quantitydetails-unit
 		$key = 'wikibase-quantitydetails-' . strtolower( $fieldName );
 		$msg = wfMessage( $key )->inLanguage( $lang );
 
