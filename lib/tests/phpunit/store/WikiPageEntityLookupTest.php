@@ -35,27 +35,19 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 	}
 
 	protected static function storeTestEntity( Entity $entity ) {
-		//NOTE: We are using EntityContent here, which is not available on the client.
+		global $wgUser;
+
+		//FIXME: We are using WikibaseRepo here, which is not available on the client.
 		//      For now, this test case will only work on the repository.
 
 		if ( !defined( 'WB_VERSION' ) ) {
 			throw new \MWException( "Can't generate test entities in a client database." );
 		}
 
-		// FIXME: this is using repo functionality
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
-		$status = $content->save( "storeTestEntity" );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$revision = $store->saveEntity( $entity, "storeTestEntity", $wgUser );
 
-		if ( !$status->isOK() ) {
-			throw new \MWException( "couldn't create " . $content->getTitle()->getFullText()
-				. ":\n" . $status->getWikiText() );
-		}
-
-		return new EntityRevision(
-			$entity,
-			$content->getWikiPage()->getRevision()->getId(),
-			$content->getWikiPage()->getRevision()->getTimestamp()
-		);
+		return $revision;
 	}
 
 	/**

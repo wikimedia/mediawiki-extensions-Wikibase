@@ -22,33 +22,11 @@ use Wikibase\SnakFactory;
  */
 class SnakFactoryTest extends \MediaWikiTestCase {
 
-	public function setUp() {
-		parent::setUp();
-
-		static $isInitialized = false;
-
-		if ( !class_exists( 'Wikibase\PropertyContent' ) ) {
-			//TODO: once SnakFactory uses a PropertyDataTypeLookup, we can get rid of this
-			$this->markTestSkipped( 'Can\'t test without Wikibase repo, need PropertyContent for fixture.' );
-		}
-
-		if ( !$isInitialized ) {
-			$p1 = Property::newEmpty();
-			$p1->setDataTypeId( 'string' );
-			$p1->setId( 1 );
-
-			$p1content = PropertyContent::newFromProperty( $p1 );
-			$p1content->save( 'testing ' );
-
-			$isInitialized = true;
-		}
-	}
-
 	public static function provideNewSnak() {
 		return array(
 			array( 1, 'somevalue', null, null, 'Wikibase\PropertySomeValueSnak', null, null, 'some value' ),
 			array( 1, 'novalue', null, null, 'Wikibase\PropertyNoValueSnak', null, null, 'no value' ),
-			array( 1, 'value', 'string', 'foo', 'Wikibase\PropertyValueSnak', null, null, 'a value' ),
+			array( 1, 'value', 'string', 'foo', 'Wikibase\PropertyValueSnak', 'DataValues\StringValue', null, 'a value' ),
 			array( 1, 'kittens', null, 'foo', null, null, 'InvalidArgumentException', 'bad snak type' ),
 		);
 	}
@@ -62,7 +40,10 @@ class SnakFactoryTest extends \MediaWikiTestCase {
 		}
 
 		if ( $valueType !== null ) {
-			$dataValue = DataValueFactory::singleton()->newDataValue( $valueType, $snakValue );
+			$dataValueFactory = new DataValueFactory();
+			$dataValueFactory->registerDataValue( $valueType, $expectedValueClass );
+
+			$dataValue = $dataValueFactory->newDataValue( $valueType, $snakValue );
 		} else {
 			$dataValue = null;
 		}

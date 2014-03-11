@@ -23,6 +23,12 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class TermSqlIndexTest extends TermIndexTest {
 
+	public function setUp() {
+		parent::setUp();
+
+		$this->tablesUsed[] = 'wb_terms';
+	}
+
 	public function getTermIndex() {
 		$normalizer = new StringNormalizer();
 		return new TermSqlIndex( $normalizer );
