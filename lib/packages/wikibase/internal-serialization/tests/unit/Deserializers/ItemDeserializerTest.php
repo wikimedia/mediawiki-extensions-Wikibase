@@ -70,8 +70,12 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testGivenInvalidSerialization_deserializeThrowsException( $serialization ) {
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->expectDeserializationException();
 		$this->deserializer->deserialize( $serialization );
+	}
+
+	private function expectDeserializationException() {
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
 	}
 
 	public function testGivenEmptyArray_emptyItemIsReturned() {
@@ -120,23 +124,106 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenStatement_itemHasStatement() {
 		$item = Item::newEmpty();
 
-		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
-		$statement->setGuid( 'foo' );
-		$item->addClaim( $statement );
+		$item->addClaim( $this->newStatement() );
 
 		$this->assertDeserialization(
 			array(
 				'claims' => array(
-					array(
-						'm' => array( 'novalue', 42 ),
-						'q' => array(),
-						'g' => 'foo',
-						'rank' => Claim::RANK_NORMAL,
-						'refs' => array()
-					)
+					$this->newStatementSerialization()
 				)
 			),
 			$item
+		);
+	}
+
+	private function newStatement() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'foo' );
+		return $statement;
+	}
+
+	private function newStatementSerialization() {
+		return array(
+			'm' => array( 'novalue', 42 ),
+			'q' => array(),
+			'g' => 'foo',
+			'rank' => Claim::RANK_NORMAL,
+			'refs' => array()
+		);
+	}
+
+	public function testGivenStatementWithLegacyKey_itemHasStatement() {
+		$item = Item::newEmpty();
+
+		$item->addClaim( $this->newStatement() );
+
+		$this->assertDeserialization(
+			array(
+				'statements' => array(
+					$this->newStatementSerialization()
+				)
+			),
+			$item
+		);
+	}
+
+	/**
+	 * @dataProvider labelListProvider
+	 */
+	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
+		$item = $this->itemFromSerialization( array( 'label' => $labels ) );
+
+		$this->assertEquals( $labels, $item->getLabels() );
+	}
+
+	public function labelListProvider() {
+		return array(
+			array( array() ),
+
+			array( array(
+				'en' => 'foo',
+				'de' => 'bar',
+			) ),
+		);
+	}
+
+	public function testGivenInvalidLabels_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array( 'label' => null ) );
+	}
+
+	/**
+	 * @dataProvider labelListProvider
+	 */
+	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
+		$item = $this->itemFromSerialization( array( 'description' => $descriptions ) );
+
+		$this->assertEquals( $descriptions, $item->getDescriptions() );
+	}
+
+	public function testGivenInvalidAliases_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array( 'aliases' => null ) );
+	}
+
+	/**
+	 * @dataProvider aliasesListProvider
+	 */
+	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
+		$item = $this->itemFromSerialization( array( 'aliases' => $aliases ) );
+
+		$this->assertEquals( $aliases, $item->getAllAliases() );
+	}
+
+	public function aliasesListProvider() {
+		return array(
+			array( array() ),
+
+			array( array(
+				'en' => array( 'foo', 'bar' ),
+				'de' => array( 'foo', 'bar', 'baz' ),
+				'nl' => array( 'bah' ),
+			) ),
 		);
 	}
 

@@ -4,9 +4,8 @@ namespace Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * @licence GNU GPL v2+
@@ -49,6 +48,9 @@ class ItemDeserializer implements Deserializer {
 		$this->setId();
 		$this->addSiteLinks();
 		$this->addClaims();
+		$this->addLabels();
+		$this->addDescriptions();
+		$this->addAliases();
 
 		return $this->item;
 	}
@@ -74,21 +76,55 @@ class ItemDeserializer implements Deserializer {
 	}
 
 	private function addClaims() {
-		foreach ( $this->getClaimsSerialization() as $claimSerialization ) {
+		$this->normalizeLegacyClaimKey();
+
+		foreach ( $this->getArrayFromKey( 'claims' ) as $claimSerialization ) {
 			$this->item->addClaim( $this->claimDeserializer->deserialize( $claimSerialization ) );
 		}
 	}
 
-	private function getClaimsSerialization() {
-		if ( !array_key_exists( 'claims', $this->serialization ) ) {
+	private function normalizeLegacyClaimKey() {
+		// Compatibility with DataModel 0.2 and 0.3 ItemObjects.
+		// (statements key got renamed to claims)
+		if ( array_key_exists( 'statements', $this->serialization ) ) {
+			$this->serialization['claims'] = $this->serialization['statements'];
+			unset( $this->serialization['statements'] );
+		}
+	}
+
+	private function getArrayFromKey( $key ) {
+		if ( !array_key_exists( $key, $this->serialization ) ) {
 			return array();
 		}
 
-		if ( !is_array( $this->serialization['claims'] ) ) {
-			throw new DeserializationException( 'The claims key should point to an array' );
-		}
+		$this->assertKeyIsArray( $key );
 
-		return $this->serialization['claims'];
+		return $this->serialization[$key];
+	}
+
+	private function assertKeyIsArray( $key ) {
+		if ( !is_array( $this->serialization[$key] ) ) {
+			throw new InvalidAttributeException(
+				$key,
+				$this->serialization[$key],
+				'The ' . $key . ' key should point to an array'
+			);
+		}
+	}
+
+	private function addLabels() {
+		// TODO: try catch once setLabels does validation
+		$this->item->setLabels( $this->getArrayFromKey( 'label' ) );
+	}
+
+	private function addDescriptions() {
+		// TODO: try catch once setDescriptions does validation
+		$this->item->setDescriptions( $this->getArrayFromKey( 'description' ) );
+	}
+
+	private function addAliases() {
+		// TODO: try catch once setAllAliases does validation
+		$this->item->setAllAliases( $this->getArrayFromKey( 'aliases' ) );
 	}
 
 }
