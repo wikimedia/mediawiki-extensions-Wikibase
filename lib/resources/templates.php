@@ -146,7 +146,7 @@ HTML;
 <<<HTML
 <div class="wb-referenceview $1">
 	<div class="wb-referenceview-heading"></div>
-	$2<!-- [0,*] wb-snaklistview -->
+	<div class="wb-referenceview-listview">	$2<!-- [0,*] wb-snaklistview --></div>
 </div>
 HTML;
 
