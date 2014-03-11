@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e0177f3_1e4d099c",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-11T11:51:55Z",
+      "side": 1,
+      "message": "I dont think we should block this change on deciding which direction to go with changeops!",
+      "parentUuid": "4e04eb01_f85faa75",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_1869361d",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-02-28T15:52:52Z",
       "side": 1,
       "message": "I think constraint checking should not be a part of \"apply\". ChangeOp should offer a separate function for this. Maybe not even for checking, but for declaring what constraints should apply.",
+      "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_de5e8148",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-11T11:51:55Z",
+      "side": 1,
+      "message": "the issue I see with offering a separate function is that this ALWAYS should be called and needs to be called on both entities at the same time in the same state before saving.",
+      "parentUuid": "4e04eb01_1869361d",
       "revId": "08b7663df9ffce6fe5a2ca44b997018854b79e94",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
