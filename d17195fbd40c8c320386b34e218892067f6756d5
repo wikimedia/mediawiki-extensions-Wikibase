@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_0185aeb1",
+        "filename": "repo/includes/ParserOutputBuilder.php",
+        "patchSetId": 27
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-11T14:02:45Z",
+      "side": 1,
+      "message": "This is wrong: TextInjector carries state (namely, the injection markers). The TextInjector used to set \u0027wikibase-view-chunks\u0027 MUST be the same object that is used by EntityView. Namely, \u0027wikibase-view-chunks\u0027 should contain what EntityView::getPlaceholders returns.",
+      "revId": "d17195fbd40c8c320386b34e218892067f6756d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
