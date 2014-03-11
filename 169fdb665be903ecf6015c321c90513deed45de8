@@ -37,6 +37,41 @@
     },
     {
       "key": {
+        "uuid": "2e0177f3_fe6dbd97",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-11T09:05:57Z",
+      "side": 1,
+      "message": "Yes, please be consistent. We already had some bikeshedding about the name of the PHP function - we can re-open that, but please keep the names consistent.",
+      "parentUuid": "4e04eb01_364bac89",
+      "revId": "169fdb665be903ecf6015c321c90513deed45de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_be6735b4",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-11T09:05:57Z",
+      "side": 1,
+      "message": "Filtering should probably be done by the should probably be done by the CLaims class, then we\u0027d just habe $claims-\u003efilterByRank( $acceptableRanks ) here.",
+      "revId": "169fdb665be903ecf6015c321c90513deed45de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_76bff45c",
         "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
         "patchSetId": 1
