@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e0177f3_01800ef8",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-11T13:49:24Z",
+      "side": 1,
+      "message": "Should this have punctuation?",
+      "revId": "b9aea256ba7a91fffb2c8c52a25a4e18dede2b91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_15623437",
         "filename": "repo/includes/ClaimHtmlGenerator.php",
         "patchSetId": 3
