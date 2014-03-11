@@ -38,6 +38,11 @@ class ContentRetriever {
 	public function getContentForRequest( WebRequest $request, Article $article ) {
 		$revision = $article->getRevisionFetched();
 
+		// check for delete or unavailable revision
+		if ( !$revision ) {
+			return null;
+		}
+
 		if ( $request->getCheck( 'diff' ) ) {
 			$oldId = $revision->getId();
 			$diffValue = $request->getVal( 'diff' );
