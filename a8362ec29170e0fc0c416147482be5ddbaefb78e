@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e0177f3_c4feb4ab",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-11T15:05:49Z",
+      "side": 1,
+      "message": "@daniel do you want me to combine the two patches (removing wikidata references and this one) again?  \n\nplease make up your mind, one patch or two?",
+      "parentUuid": "2e0177f3_7e288d32",
+      "revId": "a8362ec29170e0fc0c416147482be5ddbaefb78e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e0177f3_5eaa7183",
         "filename": "client/WikibaseClient.i18n.php",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-11T09:33:34Z",
       "side": 1,
       "message": "\"Item\" should probably be lower case.",
+      "revId": "a8362ec29170e0fc0c416147482be5ddbaefb78e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_e4189025",
+        "filename": "client/WikibaseClient.i18n.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-11T15:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e0177f3_5eaa7183",
       "revId": "a8362ec29170e0fc0c416147482be5ddbaefb78e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
