@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e0177f3_fac4a096",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-12T11:19:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e0177f3_cfe00d96",
+      "revId": "43d70e405934f550dbdfcd2a9a16a755ceb84c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e0177f3_4f9bdd1b",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2e0177f3_1ae18c29",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-12T11:19:22Z",
+      "side": 1,
+      "message": "As far as I understand the code, the index option is the index of the referenceview itself in the parent listview and has nothing to do with the referenceview\u0027s listview.",
+      "parentUuid": "2e0177f3_4f9bdd1b",
+      "revId": "43d70e405934f550dbdfcd2a9a16a755ceb84c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e0177f3_8fea0572",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-11T17:39:29Z",
       "side": 1,
       "message": "this._listview.enterNewItem.call( this );",
+      "revId": "43d70e405934f550dbdfcd2a9a16a755ceb84c98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_faddc074",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-12T11:19:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e0177f3_8fea0572",
       "revId": "43d70e405934f550dbdfcd2a9a16a755ceb84c98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
