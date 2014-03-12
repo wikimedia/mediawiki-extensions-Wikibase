@@ -2,6 +2,6 @@
 
 set -x
 
-cd tests
+cd lib/TestRunner
 
-phantomjs runTests.phantom.js
+phantomjs runTests.phantom.js ../../tests/runTests.html

@@ -9,11 +9,17 @@
 ( function( phantom, require, console ) {
 	'use strict';
 
-	var URL = './runTests.html',
-		TIMEOUT = 30;
+	var system = require( 'system' );
+
+	if( system.args.length === 1 ) {
+		console.error( 'Path to test runner needs to be specified' );
+		phantom.exit( 1 );
+	}
+
+	var TIMEOUT = 30;
 
 	var page = require( 'webpage' ).create(),
-		TestRunner = require( '../lib/tests/tests.TestRunner.phantom' ).tests.TestRunner.phantom,
+		TestRunner = require( './TestRunner.phantom' ).TestRunner.phantom,
 		testRunner = new TestRunner();
 
 	page.onConsoleMessage = function( msg ) {
@@ -23,7 +29,7 @@
 		}
 	};
 
-	page.open( URL, function( status ) {
+	page.open( system.args[1], function( status ) {
 		if( status !== 'success' ) {
 			console.error( 'Network connection error: ' + status );
 			phantom.exit( 1 );
