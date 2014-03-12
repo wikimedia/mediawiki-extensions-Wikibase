@@ -2,19 +2,19 @@
 
 namespace Wikibase\Test\Dumpers;
 
-use ArrayObject;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\Entity;
 use Wikibase\EntityFactory;
+use Wikibase\EntityIdPager;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\Dumpers\JsonDumpGenerator
@@ -79,7 +79,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		if ( $entity instanceof Item ) {
-			$entity->addSiteLink( new SimpleSiteLink( 'test', 'Foo' ) );
+			$entity->addSiteLink( new SiteLink( 'test', 'Foo' ) );
 		}
 
 		return $entity;
@@ -115,6 +115,58 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * Callback for providing dummy entity lists for the EntityIdPager mock.
+	 *
+	 * @param array $ids
+	 * @param string $entityType
+	 * @param int $limit
+	 * @param int $offset
+	 *
+	 * @return array
+	 */
+	public function listEntities ( array $ids, $entityType, $limit, &$offset = 0 ) {
+		$result = array();
+		$size = count( $ids );
+
+		for ( ; $offset < $size && count( $result ) < $limit; $offset++ ) {
+			/* @var EntityId $id */
+			$id = $ids[ $offset ];
+
+			if ( $entityType !== null && $entityType !== $id->getEntityType() ) {
+				continue;
+			}
+
+			$result[] = $id;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @param array $ids
+	 * @param null $entityType
+	 *
+	 * @return EntityIdPager
+	 */
+	protected function makeIdPager( array $ids, $entityType = null ) {
+		$pager = $this->getMock( 'Wikibase\EntityIdPager' );
+
+		$this_ = $this;
+		$offset = 0;
+
+		$pager->expects( $this->any() )
+			->method( 'fetchIds' )
+			->will( $this->returnCallback(
+				function ( $limit ) use ( $ids, $entityType, &$offset, $this_ ) {
+					$res = $this_->listEntities( $ids, $entityType, $limit, $offset );
+					return $res;
+				}
+			) );
+
+		return $pager;
+	}
+
+	/**
 	 * @dataProvider idProvider
 	 */
 	public function testGenerateDump( array $ids ) {
@@ -136,12 +188,12 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testTypeFilterDump( array $ids, $type, $expectedIds ) {
 		$dumper = $this->newDumpGenerator( $ids );
-		$idList = new ArrayObject( $ids );
+		$pager = $this->makeIdPager( $ids );
 
 		$dumper->setEntityTypeFilter( $type );
 
 		ob_start();
-		$dumper->generateDump( $idList );
+		$dumper->generateDump( $pager );
 		$json = ob_get_clean();
 
 		// check that the resulting json contains all the ids we asked for.
@@ -190,19 +242,18 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider shardingProvider
 	 */
 	public function testSharding( array $ids, $shardingFactor ) {
-		$dumper = $this->newDumpGenerator( $ids );
-		$idList = new ArrayObject( $ids );
-
 		$actualIds = array();
+		$dumper = $this->newDumpGenerator( $ids );
 
 		// Generate and check a dump for each shard,
 		// then combine the results and check again.
 		for ( $shard = 0; $shard < $shardingFactor; $shard++ ) {
+			$pager = $this->makeIdPager( $ids );
 			$dumper->setShardingFilter( $shardingFactor, $shard );
 
 			// Generate the dump and grab the output
 			ob_start();
-			$dumper->generateDump( $idList );
+			$dumper->generateDump( $pager );
 			$json = ob_get_clean();
 
 			// check that the resulting json contains all the ids we asked for.
@@ -318,7 +369,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$dumper = $this->newDumpGenerator( $ids, $missingIds );
-		$idList = new ArrayObject( $ids );
+		$pager = $this->makeIdPager( $ids );
 
 		$exceptionHandler = $this->getMock( 'ExceptionHandler' );
 		$exceptionHandler->expects( $this->exactly( count( $missingIds ) ) )
@@ -327,7 +378,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$dumper->setExceptionHandler( $exceptionHandler );
 
 		ob_start();
-		$dumper->generateDump( $idList );
+		$dumper->generateDump( $pager );
 		$json = ob_get_clean();
 
 		// make sure we get valid json even if there were exceptions.
@@ -344,17 +395,17 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$dumper = $this->newDumpGenerator( $ids );
-		$idList = new ArrayObject( $ids );
+		$pager = $this->makeIdPager( $ids );
 
 		$progressReporter = $this->getMock( 'MessageReporter' );
-		$progressReporter->expects( $this->exactly( ( count( $ids ) / 10 ) +1 ) )
+		$progressReporter->expects( $this->exactly( count( $ids ) / 10 ) )
 			->method( 'reportMessage' );
 
-		$dumper->setProgressInterval( 10 );
+		$dumper->setBatchSize( 10 );
 		$dumper->setProgressReporter( $progressReporter );
 
 		ob_start();
-		$dumper->generateDump( $idList );
+		$dumper->generateDump( $pager );
 		ob_end_clean();
 	}
 }

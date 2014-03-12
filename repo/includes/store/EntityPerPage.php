@@ -3,10 +3,12 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Iterator;
 
 /**
  * Interface to a table that join wiki pages and entities.
+ *
+ * @todo: Combine with the EntityTitleLookup interface?
+ * @todo: At least add a way to get page IDs!
  *
  * @since 0.2
  *
@@ -27,6 +29,20 @@ interface EntityPerPage {
 	 * @return boolean Success indicator
 	 */
 	public function addEntityPage( EntityId $entityId, $pageId );
+
+	/**
+	 * Lists entities of the given type.
+	 *
+	 * @since 0.5
+	 *
+	 * @param null|string $entityType The entity type to look for.
+	 * @param int $limit The maximum number of IDs to return.
+	 * @param EntityId $after Only return entities with IDs greater than this.
+	 *
+	 * @throws InvalidArgumentException
+	 * @return EntityId[]
+	 */
+	public function listEntities( $entityType, $limit, EntityId $after = null );
 
 	/**
 	 * Removes a link between an entity and a page
@@ -102,13 +118,4 @@ interface EntityPerPage {
 	 * @return EntityId[]
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 );
-
-	/**
-	 * Returns an iterator providing an EntityId object for each entity.
-	 *
-	 * @param string $entityType The type of entity to return, or null for any type.
-	 *
-	 * @return Iterator
-	 */
-	public function getEntities( $entityType = null );
 }

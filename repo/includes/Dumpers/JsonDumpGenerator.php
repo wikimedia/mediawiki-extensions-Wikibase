@@ -8,8 +8,8 @@ use MessageReporter;
 use MWException;
 use NullMessageReporter;
 use RethrowingExceptionHandler;
-use Traversable;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityIdPager;
 use Wikibase\EntityLookup;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\StorageException;
@@ -30,9 +30,10 @@ class JsonDumpGenerator {
 	public $jsonFlags = 0;
 
 	/**
-	 * @var int interval at which to output progress messages.
+	 * @var int The max number of entities to process in a single batch.
+	 * Also controls the interval for progress reports.
 	 */
-	public $progressInterval = 100;
+	public $batchSize = 100;
 
 	/**
 	 * @var resource File handle for output
@@ -95,21 +96,31 @@ class JsonDumpGenerator {
 	}
 
 	/**
-	 * Sets the interval for progress reporting
+	 * Sets the batch size for processing. The batch size is used as the limit
+	 * when listing IDs via the EntityIdPager::getNextBatchOfIds() method, and
+	 * also controls the interval of progress reports.
 	 *
-	 * @param int $progressInterval
+	 * @param int $batchSize
+	 *
+	 * @throws \InvalidArgumentException
 	 */
-	public function setProgressInterval( $progressInterval ) {
-		$this->progressInterval = $progressInterval;
+	public function setBatchSize( $batchSize ) {
+		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
+			throw new InvalidArgumentException( '$batchSize must be a positive integer' );
+		}
+
+		$this->batchSize = $batchSize;
 	}
 
 	/**
-	 * Returns the interval for progress reporting
+	 * Returns the batch size.
+	 *
+	 * @see setBatchSize()
 	 *
 	 * @return int
 	 */
-	public function getProgressInterval() {
-		return $this->progressInterval;
+	public function getBatchSize() {
+		return $this->batchSize;
 	}
 
 	/**
@@ -182,24 +193,38 @@ class JsonDumpGenerator {
 	/**
 	 * Generates a JSON dump, writing to the file handle provided to the constructor.
 	 *
-	 * @param Traversable $idStream an Iterator that returns EntityId instances
+	 * @param EntityIdPager $idPager an Iterator that returns EntityId instances
 	 */
-	public function generateDump( Traversable $idStream ) {
+	public function generateDump( EntityIdPager $idPager ) {
 
 		$json = "[\n"; //TODO: make optional
 		$this->writeToDump( $json );
 
-		$i = 0;
-		$wantComma = false;
+		$dumpCount = 0;
 
+		// Iterate over badges of IDs, maintaining the current position of the pager in the $position variable.
+		while ( $ids = $idPager->fetchIds( $this->batchSize ) ) {
+			$this->dumpEntities( $ids, $dumpCount );
+
+			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
+		};
+
+		$json = "\n]\n"; //TODO: make optional
+		$this->writeToDump( $json );
+	}
+
+	/**
+	 * @param array $ids
+	 * @param int &$dumpCount The number of entities already dumped (will be updated).
+	 */
+	protected function dumpEntities( array $ids, &$dumpCount ) {
 		/* @var EntityId $id */
-		foreach ( $idStream as $id ) {
+		foreach ( $ids as $id ) {
 			if ( !$this->idMatchesFilters( $id ) ) {
 				continue;
 			}
 
 			try {
-				$i++;
 				$entity = $this->entityLookup->getEntity( $id );
 
 				if ( !$entity ) {
@@ -209,26 +234,16 @@ class JsonDumpGenerator {
 				$data = $this->entitySerializer->getSerialized( $entity );
 				$json = $this->encode( $data );
 
-				if ( $wantComma ) {
+				if ( $dumpCount > 0 ) {
 					$this->writeToDump( ",\n" );
-					$wantComma = false;
 				}
 
 				$this->writeToDump( $json );
-				$wantComma = true;
+				$dumpCount++;
 			} catch ( StorageException $ex ) {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump '. $id );
 			}
-
-			if ( $this->progressInterval > 0 && ( $i % $this->progressInterval ) === 0 ) {
-				$this->progressReporter->reportMessage( 'Processed ' . $i . ' entities.' );
-			}
 		}
-
-		$this->progressReporter->reportMessage( 'Processed ' . $i . ' entities.' );
-
-		$json = "\n]\n"; //TODO: make optional
-		$this->writeToDump( $json );
 	}
 
 	private function idMatchesFilters( EntityId $id ) {
@@ -237,6 +252,10 @@ class JsonDumpGenerator {
 	}
 
 	private function idMatchesShard( EntityId $id ) {
+		if ( $this->shardingFactor < 2 ) {
+			return true;
+		}
+
 		$hash = sha1( $id->getSerialization() );
 		$n = (int)hexdec( substr( $hash, 0, 8 ) ); // 4 bytes of the hash
 		if( $n < 0 ) {
