@@ -3,8 +3,12 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityFactory;
+use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\Term;
@@ -29,6 +33,29 @@ use Wikibase\Utils;
  * @author Thiemo Mättig < thiemo.maettig@wikimedia.de >
  */
 class SearchEntities extends ApiBase {
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $titleLookup;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	protected $idParser;
+
+	/**
+	 * @param ApiMain $main
+	 * @param string $name
+	 * @param string $prefix
+	 */
+	public function __construct( ApiMain $main, $name, $prefix = '' ) {
+		parent::__construct( $main, $name, $prefix );
+
+		//TODO: provide a mechanism to override the services
+		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+	}
 
 	/**
 	 * Get the entities corresponding to the provided language and term pair.
@@ -116,18 +143,15 @@ class SearchEntities extends ApiBase {
 	 * @return EntityId|null
 	 */
 	private function getExactMatchForEntityId( $term, $entityType ) {
-		// FIXME: Use an EntityIdParser
-		$entityId = \Wikibase\EntityId::newFromPrefixedId( $term );
-		if ( $entityId !== null ) {
-			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-			$page = $entityContentFactory->getWikiPageForId( $entityId );
-			if ( $page->exists() ) {
-				$content = $page->getContent();
-				if ( $content instanceof \Wikibase\EntityContent &&
-					( $entityType === null || $entityType === $content->getEntity()->getType() ) ) {
-					return $entityId;
-				}
+		try {
+			$entityId = $this->idParser->parse( $term );
+			$title = $this->titleLookup->getTitleForId( $entityId );
+
+			if ( $title->exists() && $entityId->getEntityType() === $entityType ) {
+				return $entityId;
 			}
+		} catch ( EntityIdParsingException $ex ) {
+			// never mind, doesn't look like an ID.
 		}
 
 		return null;
@@ -180,7 +204,6 @@ class SearchEntities extends ApiBase {
 	 * @return array[]
 	 */
 	private function getEntries( array $ids, $search, $entityType, $language ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		/**
 		 * @var array[] $entries
 		 */
@@ -189,8 +212,10 @@ class SearchEntities extends ApiBase {
 		foreach ( $ids as $id ) {
 			$key = $id->getSerialization();
 			$entries[ $key ] = array(
+			$title = $this->titleLookup->getTitleForId( $id );
+
 				'id' => $id->getPrefixedId(),
-				'url' => $entityContentFactory->getTitleForId( $id )->getFullUrl()
+				'url' => $title->getFullUrl()
 			);
 		}
 
