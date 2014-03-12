@@ -193,6 +193,17 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['jquery.wikibase.referenceview.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.referenceview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.referenceview',
+				'wikibase.datamodel',
+				'wikibase.store.EntityStore',
+			),
+		);
+
 		$testModules['qunit']['jquery.wikibase.statementview.tests'] = $moduleBase + array(
 				'scripts' => array(
 					'tests/qunit/jquery.wikibase/jquery.wikibase.statementview.RankSelector.tests.js',
