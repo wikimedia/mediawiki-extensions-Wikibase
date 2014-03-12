@@ -2,9 +2,14 @@
 
 namespace Wikibase\Test\IO;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\IO\EntityIdReader;
+use Wikibase\IO\LineReader;
 
 /**
  * @covers Wikibase\IO\EntityIdReader
@@ -25,25 +30,103 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 	protected function openIdReader( $file ) {
 		$path = __DIR__ . '/' . $file;
 		$handle = fopen( $path, 'r' );
-		return new EntityIdReader( $handle );
+		return new EntityIdReader( new LineReader( $handle ), new BasicEntityIdParser() );
 	}
 
-	public function testIteration() {
-		$expected = array(
-			new ItemId( 'Q1' ),
-			new PropertyId( 'P2' ),
-			new ItemId( 'Q3' ),
-			new PropertyId( 'P4' ),
+
+	protected function getIdStrings( array $entityIds ) {
+		$ids = array_map( function ( EntityId $entityId ) {
+			return $entityId->getSerialization();
+		}, $entityIds );
+
+		return $ids;
+	}
+
+	protected function assertEqualIds( array $expected,array $actual, $msg = null ) {
+		$expectedIds = array_values( $this->getIdStrings( $expected ) );
+		$actualIds = array_values( $this->getIdStrings( $actual ) );
+
+		sort( $expectedIds );
+		sort( $actualIds );
+		$this->assertEquals( $expectedIds, $actualIds, $msg );
+	}
+
+	/**
+	 * @dataProvider listEntitiesProvider
+	 */
+	public function testListEntities( $file, $type, $limit, array $expected ) {
+		$reader = $this->openIdReader( $file );
+
+		$actual = $reader->listEntities( $type, $limit );
+
+		$this->assertEqualIds( $expected, $actual );
+	}
+
+	public static function listEntitiesProvider() {
+		$q1 = new ItemId( 'Q1' );
+		$p2 = new PropertyId( 'P2' );
+		$q3 = new ItemId( 'Q3' );
+		$p4 = new PropertyId( 'P4' );
+
+		return array(
+			'all' => array(
+				'EntityIdReaderTest.txt', null, 100, array( $q1, $p2, $q3, $p4 )
+			),
+			'just properties' => array(
+				'EntityIdReaderTest.txt', Property::ENTITY_TYPE, 100, array( $p2, $p4 )
+			),
+			'limit' => array(
+				'EntityIdReaderTest.txt', null, 2, array( $q1, $p2 )
+			),
+			'limit and filter' => array(
+				'EntityIdReaderTest.txt', Item::ENTITY_TYPE, 1, array( $q1 )
+			),
 		);
+	}
+	/**
+	 * @dataProvider listEntitiesProvider_paging
+	 */
+	public function testListEntities_paging( $file, $type, $limit, array $expectedChunks ) {
+		$reader = $this->openIdReader( $file );
 
-		$reader = $this->openIdReader( 'EntityIdReaderTest.txt' );
-		$actual = iterator_to_array( $reader );
-		$reader->dispose();
+		foreach ( $expectedChunks as $expected ) {
+			$actual = $reader->listEntities( $type, $limit, $offset );
 
-		$this->assertEmpty( array_diff( $expected, $actual ), "Different IDs" );
+			$this->assertEqualIds( $expected, $actual );
+		}
 	}
 
-	public function testIterationWithErrors() {
+	public static function listEntitiesProvider_paging() {
+		$q1 = new ItemId( 'Q1' );
+		$p2 = new PropertyId( 'P2' );
+		$q3 = new ItemId( 'Q3' );
+		$p4 = new PropertyId( 'P4' );
+
+		return array(
+			'limit' => array(
+				'EntityIdReaderTest.txt',
+				null,
+				2,
+				array (
+					array( $q1, $p2 ),
+					array( $q3, $p4 ),
+					array(),
+				)
+			),
+			'limit and filter' => array(
+				'EntityIdReaderTest.txt',
+				Item::ENTITY_TYPE,
+				1,
+				array(
+					array( $q1 ),
+					array( $q3 ),
+					array(),
+				)
+			)
+		);
+	}
+
+	public function testErrorHandler() {
 		$expected = array(
 			new ItemId( 'Q23' ),
 			new PropertyId( 'P42' ),
@@ -56,10 +139,10 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 		$reader = $this->openIdReader( 'EntityIdReaderTest.bad.txt' );
 		$reader->setExceptionHandler( $exceptionHandler );
 
-		$actual = iterator_to_array( $reader );
+		$actual = $reader->listEntities( null, 100 );
 		$reader->dispose();
 
-		$this->assertEmpty( array_diff( $expected, $actual ), "Different IDs" );
+		$this->assertEqualIds( $expected, $actual );
 	}
 
 }
