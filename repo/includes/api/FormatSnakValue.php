@@ -41,7 +41,7 @@ class FormatSnakValue extends ApiWikibase {
 	protected function getFormatterFactory() {
 		if ( $this->formatterFactory === null ) {
 
-			$this->formatterFactory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
+			$this->formatterFactory =  WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
 		}
 
 		return $this->formatterFactory;

@@ -7,7 +7,6 @@ use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Profiler;
-use Title;
 use UsageException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
@@ -20,7 +19,6 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakConstructionService;
 use ApiBase;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Lib\ClaimGuidValidator;
 
@@ -82,26 +80,6 @@ class ClaimModificationHelper {
 		$this->entityIdParser = $entityIdParser;
 		$this->claimGuidValidator = $claimGuidValidator;
 		$this->snakValidation = $snakValidation;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @throws UsageException
-	 * @return Title
-	 *
-	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
-	 */
-	public function getEntityTitle( EntityId $entityId ) {
-		$entityTitle = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->throwUsageException( 'No such entity' , 'no-such-entity' );
-		}
-
-		return $entityTitle;
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Api;
 
-use Wikibase\EntityContent;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\ChangeOp\ChangeOpDescription;
 
 /**
@@ -21,10 +21,9 @@ class SetDescription extends ModifyTerm {
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
-	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
 		$summary = $this->createSummary( $params );
-		$entity = $entityContent->getEntity();
 		$language = $params['language'];
 
 		$this->getChangeOp( $params )->apply( $entity, $summary );
