@@ -30,7 +30,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Wikibase\\InternalSerialization\\": "src/"
+			"Wikibase\\InternalSerialization\\": "src/",
+			"Wikibase\\DataModel\\Term\\": "DataModel/"
 		}
 	},
 	"extra": {

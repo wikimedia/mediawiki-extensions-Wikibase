@@ -6,6 +6,8 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Terms;
 
 /**
  * @licence GNU GPL v2+
@@ -16,6 +18,7 @@ class ItemDeserializer implements Deserializer {
 	private $idDeserializer;
 	private $siteLinkListDeserializer;
 	private $claimDeserializer;
+	private $termsDeserializer;
 
 	/**
 	 * @var Item
@@ -24,11 +27,12 @@ class ItemDeserializer implements Deserializer {
 	private $serialization;
 
 	public function __construct( Deserializer $idDeserializer, Deserializer $siteLinkListDeserializer,
-		Deserializer $claimDeserializer ) {
+		Deserializer $claimDeserializer, Deserializer $termsDeserializer ) {
 
 		$this->idDeserializer = $idDeserializer;
 		$this->siteLinkListDeserializer = $siteLinkListDeserializer;
 		$this->claimDeserializer = $claimDeserializer;
+		$this->termsDeserializer = $termsDeserializer;
 	}
 
 	/**
@@ -48,9 +52,7 @@ class ItemDeserializer implements Deserializer {
 		$this->setId();
 		$this->addSiteLinks();
 		$this->addClaims();
-		$this->addLabels();
-		$this->addDescriptions();
-		$this->addAliases();
+		$this->addTerms();
 
 		return $this->item;
 	}
@@ -112,19 +114,26 @@ class ItemDeserializer implements Deserializer {
 		}
 	}
 
-	private function addLabels() {
-		// TODO: try catch once setLabels does validation
-		$this->item->setLabels( $this->getArrayFromKey( 'label' ) );
+	private function addTerms() {
+		$terms = $this->getTerms();
+
+		// TODO: try catch once setters do validation
+		$this->item->setLabels( $terms->getLabels()->toArray() );
+		$this->item->setDescriptions( $terms->getDescriptions()->toArray() );
+		$this->setAliases( $terms->getAliases() );
 	}
 
-	private function addDescriptions() {
-		// TODO: try catch once setDescriptions does validation
-		$this->item->setDescriptions( $this->getArrayFromKey( 'description' ) );
+	/**
+	 * @return Terms
+	 */
+	private function getTerms() {
+		return $this->termsDeserializer->deserialize( $this->serialization );
 	}
 
-	private function addAliases() {
-		// TODO: try catch once setAllAliases does validation
-		$this->item->setAllAliases( $this->getArrayFromKey( 'aliases' ) );
+	private function setAliases( AliasGroupList $aliases ) {
+		foreach ( $aliases->getAliasGroups() as $aliasGroup ) {
+			$this->item->setAliases( $aliasGroup->getLanguageCode(), $aliasGroup->getAliases() );
+		}
 	}
 
 }

@@ -15,6 +15,7 @@ use Wikibase\InternalSerialization\Deserializers\ItemDeserializer;
 use Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\SnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\TermsDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\ItemDeserializer
@@ -32,8 +33,6 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function setUp() {
 		$idDeserializer = new EntityIdDeserializer( new BasicEntityIdParser() );
 
-		$linkDeserializer = new SiteLinkListDeserializer();
-
 		$snakDeserializer = new SnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
 
 		$claimDeserializer = new ClaimDeserializer(
@@ -41,7 +40,12 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 			new SnakListDeserializer( $snakDeserializer )
 		);
 
-		$this->deserializer = new ItemDeserializer( $idDeserializer, $linkDeserializer, $claimDeserializer );
+		$this->deserializer = new ItemDeserializer(
+			$idDeserializer,
+			new SiteLinkListDeserializer(),
+			$claimDeserializer,
+			new TermsDeserializer()
+		);
 	}
 
 	public function invalidSerializationProvider() {
