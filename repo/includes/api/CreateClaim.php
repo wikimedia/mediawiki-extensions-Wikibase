@@ -33,10 +33,9 @@ class CreateClaim extends ModifyClaim {
 		$this->validateParameters( $params );
 
 		$entityId = $this->claimModificationHelper->getEntityIdFromString( $params['entity'] );
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
-		$entity = $entityContent->getEntity();
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		$entity = $entityRevision->getEntity();
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 		if( !$propertyId instanceof PropertyId ){
@@ -60,7 +59,7 @@ class CreateClaim extends ModifyClaim {
 		$claims = new Claims( $entity->getClaims() );
 		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
 
-		$this->saveChanges( $entityContent, $summary );
+		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addClaim( $claim );
 

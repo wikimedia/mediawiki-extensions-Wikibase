@@ -87,26 +87,6 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
-	 * @param EntityId $entityId
-	 *
-	 * @throws UsageException
-	 * @return Title
-	 *
-	 * TODO: this could go into a ApiWikibaseHelper as it is useful for almost all API modules
-	 */
-	public function getEntityTitle( EntityId $entityId ) {
-		$entityTitle = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entityId );
-
-		if ( $entityTitle === null ) {
-			$this->throwUsageException( 'No such entity' , 'no-such-entity' );
-		}
-
-		return $entityTitle;
-	}
-
-	/**
-	 * @since 0.4
-	 *
 	 * @param string $claimGuid
 	 *
 	 * @throws UsageException
