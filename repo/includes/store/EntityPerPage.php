@@ -13,7 +13,7 @@ use Iterator;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-interface EntityPerPage {
+interface EntityPerPage extends EntityIdPager {
 
 	/**
 	 * Adds a new link between an entity and a page
@@ -102,13 +102,4 @@ interface EntityPerPage {
 	 * @return EntityId[]
 	 */
 	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 );
-
-	/**
-	 * Returns an iterator providing an EntityId object for each entity.
-	 *
-	 * @param string $entityType The type of entity to return, or null for any type.
-	 *
-	 * @return Iterator
-	 */
-	public function getEntities( $entityType = null );
 }

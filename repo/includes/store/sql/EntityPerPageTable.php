@@ -13,6 +13,9 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @since 0.2
  *
+ * @todo: make this extend DBAccessBase, so it can be used to access the repo's EPP table
+ * from a client!
+ *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
@@ -230,32 +233,64 @@ class EntityPerPageTable implements EntityPerPage {
 	}
 
 	/**
-	 * Returns an iterator providing an EntityId object for each entity.
+	 * @see EntityIdPager::getNextBatchOfIds
 	 *
-	 * @see EntityPerPage::getEntities
 	 * @param null|string $entityType
+	 * @param int $limit
+	 * @param mixed &$position
 	 *
-	 * @return Iterator
+	 * @throws InvalidArgumentException
+	 * @return EntityId[]
 	 */
-	public function getEntities( $entityType = null ) {
-		//XXX: Would be nice to get the DBR from a load balancer and allow access to foreign wikis.
-		// But since we return a ResultWrapper, we don't know when we can release the connection for re-use.
-
-		if ( $entityType !== null ) {
-			$where = array( 'epp_entity_type' => $entityType );
-		} else {
+	public function getNextBatchOfIds( $entityType, $limit, &$position = null ) {
+		if ( $entityType == null  ) {
 			$where = array();
+		} elseif ( !is_string( $entityType ) ) {
+			throw new InvalidArgumentException( '$entityType must be a string (or null)' );
+		} else {
+			$where = array( 'epp_entity_type' => $entityType );
+		}
+
+		if ( !is_int( $limit ) || $limit < 1 ) {
+			throw new InvalidArgumentException( '$limit must be a positive integer' );
 		}
 
 		$dbr = wfGetDB( DB_SLAVE );
+
+		if ( $position ) {
+			if ( !$position instanceof EntityId ) {
+				throw new InvalidArgumentException( 'Bad $offset, use an offset supplied by an earlier call of getNextBatchOfIds() (or use null).' );
+			}
+
+			/* @var EntityId $position */
+			if ( $entityType === null ) {
+				// Ugly. About time we switch to qualified, string based IDs!
+				$where[] = '( ( epp_entity_type = ' . $dbr->addQuotes( $position->getEntityType() ) .
+						'AND epp_entity_id > ' . $position->getNumericId() . ' ) ' .
+						' OR epp_entity_type > ' . $dbr->addQuotes( $position->getEntityType() ) . ' )';
+			} else {
+				$where[] = 'epp_entity_id > ' . $position->getNumericId();
+			}
+		}
+
 		$rows = $dbr->select(
 			'wb_entity_per_page',
-			array( 'epp_entity_id', 'epp_entity_type' ),
+			array( 'entity_type' => 'epp_entity_type', 'entity_id' => 'epp_entity_id' ),
 			$where,
-			__METHOD__
+			__METHOD__,
+			array(
+				'ORDER BY' => array( 'epp_entity_type', 'epp_entity_id' ),
+				'LIMIT' => $limit
+			)
 		);
 
-		return new DatabaseRowEntityIdIterator( $rows, 'epp_entity_type', 'epp_entity_id' );
+		$ids = self::getEntityIdsFromRows( $rows );
+
+		if ( !empty( $ids ) ) {
+			$position = $ids[ count( $ids ) - 1 ];
+		}
+
+		return $ids;
 	}
 
 }
