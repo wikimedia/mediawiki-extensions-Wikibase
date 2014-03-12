@@ -3,18 +3,18 @@
 namespace Wikibase\Api;
 
 use ApiMain;
-use MWException;
-use Revision;
 use SiteSQLStore;
 use Status;
 use ApiBase;
-use Title;
+use UsageException;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityContent;
-use Wikibase\ItemHandler;
+use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SiteLinkLookup;
+use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 
@@ -41,19 +41,36 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected $siteLinkTargetProvider;
 
 	/**
+	 * @var SiteLinkLookup
+	 */
+	protected $siteLinkLookup;
+
+	/**
 	 * @since 0.5
 	 *
 	 * @var array
 	 */
 	protected $siteLinkGroups;
 
+	/**
+	 * @var string[]
+	 */
+	protected $badgeItems;
+
 	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 
+		//TODO: provide a mechanism to override the services
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+
 		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'siteLinkGroups' );
+
+		$this->siteLinkLookup = StoreFactory::getStore()->newSiteLinkCache();
+
+		$this->badgeItems = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'badgeItems' );
 	}
 
 	/**
@@ -68,9 +85,14 @@ abstract class ModifyEntity extends ApiWikibase {
 
 	/**
 	 * @see ApiWikibase::getRequiredPermissions()
+	 *
+	 * @param Entity $entity
+	 * @param array $params
+	 *
+	 * @return array|\Status
 	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 		$permissions[] = 'edit';
 		return $permissions;
 	}
@@ -82,78 +104,62 @@ abstract class ModifyEntity extends ApiWikibase {
 	 *
 	 * @param array $params
 	 *
-	 * @return EntityContent|null Found existing entity
+	 * @return EntityRevision Found existing entity
 	 */
-	protected function getEntityContentFromApiParams( array $params ) {
+	protected function getEntityRevisionFromApiParams( array $params ) {
 		if ( isset( $params['id'] ) ) {
 			$id = $params['id'];
 			$entityId = $this->getEntityIdFromString( $id );
-			$entityTitle = $this->getTitleFromEntityId( $entityId );
-		}
-		elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$entityTitle = $this->getTitleFromSiteTitleCombination( $params['site'],  $params['title'] );
+		} elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+			$entityId = $this->getEntityIdFromSiteTitleCombination( $params['site'],  $params['title'] );
 		} else {
 			//Things that use this method assume null means we want a new entity
 			return null;
 		}
 
-		/** @var Title $entityTitle */
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : 0;
+		$entityRevision = $this->entityLookup->getEntityRevision( $entityId, $baseRevisionId );
 
-		if ( is_null( $entityContent ) ) {
-			$this->dieUsage( "Can't access item content of " . $entityTitle->getPrefixedDBkey() . ", revision may have been deleted.", 'no-such-entity' );
+		if ( is_null( $entityRevision ) ) {
+			$this->dieUsage( "Can't access entity " . $entityId->getSerialization() . ", revision may have been deleted.", 'no-such-entity' );
 		}
 
-		return $entityContent;
+		return $entityRevision;
 	}
 
 	/**
+	 * Returns an EntityId object based on the given $id,
+	 * or throws a usage exception if the ID is invalid.
+	 *
 	 * @param string $id
+	 *
+	 * @throws UsageException
 	 * @return EntityId
 	 */
-	private function getEntityIdFromString( $id ) {
-		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-		try{
-			return $entityIdParser->parse( $id );
-		} catch( EntityIdParsingException $e ){
-			$this->dieUsage( "Could not parse {$id}, No entity found", 'no-such-entity-id' );
+	protected function getEntityIdFromString( $id ) {
+		try {
+			return $this->idParser->parse( $id );
+		} catch ( EntityIdParsingException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'no-such-entity-id' );
 		}
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 * @return Title
-	 */
-	private function getTitleFromEntityId( EntityId $entityId ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		try{
-			//This could return either null or a MWException (be ready for them both!)
-			$title = $entityContentFactory->getTitleForId( $entityId, Revision::FOR_THIS_USER );
-			if( $title === null ){
-				throw new MWException( "No entity found matching ID " . $entityId->getSerialization() );
-			}
-			return $title;
-		} catch( MWException $e ){
-			$this->dieUsage( "No entity found matching ID " . $entityId->getSerialization(), 'no-such-entity-id' );
-		}
-	}
-
-	/**
+	 * Returns the ID of the entity connected to $title on $site, or
+	 * throws a usage exception if no such entity is found.
+	 *
 	 * @param string $site
 	 * @param string $title
-	 * @return Title
+	 * @return EntityId
 	 */
-	private function getTitleFromSiteTitleCombination( $site, $title ) {
-		$itemHandler = new ItemHandler();
-		$entityTitle = $itemHandler->getTitleFromSiteLink(
-			$site,
-			$this->stringNormalizer->trimToNFC( $title )
-		);
-		if ( is_null( $entityTitle ) ) {
+	protected function getEntityIdFromSiteTitleCombination( $site, $title ) {
+		$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
+
+		if ( $itemId === false ) {
 			$this->dieUsage( 'No entity found matching site link ' . $site . ':' . $title , 'no-such-entity-link' );
 		}
-		return $entityTitle;
+
+		return ItemId::newFromNumber( $itemId );
 	}
 
 	/**
@@ -164,32 +170,25 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return ItemId[]
 	 */
 	protected function parseSiteLinkBadges( array $badgesParams ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$entityContentFactory = $repo->getEntityContentFactory();
-		$entityIdParser = $repo->getEntityIdParser();
-
 		$badges = array();
 
 		foreach ( $badgesParams as $badgeSerialization ) {
 			try {
-				$badgeId = $entityIdParser->parse( $badgeSerialization );
+				$badgeId = $this->idParser->parse( $badgeSerialization );
 			} catch( EntityIdParsingException $e ) {
 				$this->dieUsage( "Badges: could not parse '{$badgeSerialization}', the id is invalid", 'no-such-entity-id' );
+				$badgeId = null;
 			}
 
 			if ( !( $badgeId instanceof ItemId ) ) {
 				$this->dieUsage( "Badges: entity with id '{$badgeSerialization}' is not an item", 'not-item' );
 			}
 
-			$badgeItems = WikibaseRepo::getDefaultInstance()->
-				getSettings()->getSetting( 'badgeItems' );
-
-			if ( !in_array( $badgeId->getPrefixedId(), array_keys( $badgeItems ) ) ) {
+			if ( !in_array( $badgeId->getPrefixedId(), array_keys( $this->badgeItems ) ) ) {
 				$this->dieUsage( "Badges: item '{$badgeSerialization}' is not a badge", 'not-badge' );
 			}
 
-			$itemTitle = $entityContentFactory->getTitleForId( $badgeId, Revision::FOR_THIS_USER );
+			$itemTitle = $this->entityTitleLookup->getTitleForId( $badgeId );
 
 			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
 				$this->dieUsage( "Badges: no item found matching id '{$badgeSerialization}'", 'no-such-entity' );
@@ -207,7 +206,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @since 0.1
 	 *
 	 * @param array $params
-	 * @return EntityContent Newly created entity
+	 * @return Entity Newly created entity
 	 */
 	protected function createEntity( array $params ) {
 		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
@@ -233,12 +232,13 @@ abstract class ModifyEntity extends ApiWikibase {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $entity
+	 * @param Entity $entity
 	 * @param array $params
+	 * @param int $baseRevId
 	 *
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
-	protected abstract function modifyEntity( EntityContent &$entity, array $params );
+	protected abstract function modifyEntity( Entity &$entity, array $params, $baseRevId );
 
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
@@ -252,6 +252,15 @@ abstract class ModifyEntity extends ApiWikibase {
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
 			$this->dieUsage( 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page' , 'param-illegal' );
 		}
+	}
+
+	/**
+	 * @param Entity $entity
+	 */
+	private function assignFreshId( Entity $entity ) {
+		//TODO: factor the ID generator out of EntityContent!
+		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
+		$entityContent->grabFreshId();
 	}
 
 	/**
@@ -269,20 +278,33 @@ abstract class ModifyEntity extends ApiWikibase {
 		$this->validateParameters( $params );
 
 		// Try to find the entity or fail and create it, or die in the process
-		$entityContent = $this->getEntityContentFromApiParams( $params );
-		if ( is_null( $entityContent ) ) {
-			$entityContent = $this->createEntity( $params );
+		$entityRev = $this->getEntityRevisionFromApiParams( $params );
+		if ( is_null( $entityRev ) ) {
+			$entity = $this->createEntity( $params );
+			$entityRevId = 0;
+
+			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
+			if ( $entity->getId() === null ) {
+				$this->assignFreshId( $entity );
+			}
+		} else {
+			$entity = $entityRev->getEntity();
+			$entityRevId = $entityRev->getRevision();
+		}
+
+		if ( $entity->getId() === null ) {
+			throw new \LogicException( 'The Entity should have an ID at this point!' );
 		}
 
 		// At this point only change/edit rights should be checked
-		$status = $this->checkPermissions( $entityContent, $user, $params );
+		$status = $this->checkPermissions( $entity, $user, $params );
 
 		if ( !$status->isOK() ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'You do not have sufficient permissions' , 'permissiondenied' );
 		}
 
-		$summary = $this->modifyEntity( $entityContent, $params );
+		$summary = $this->modifyEntity( $entity, $params, $entityRevId );
 
 		if ( !$summary ) {
 			//XXX: This could rather be used for "silent" failure, i.e. in cases where
@@ -295,24 +317,24 @@ abstract class ModifyEntity extends ApiWikibase {
 			$summary = new Summary( $this->getModuleName() );
 		}
 
-		$this->addFlags( $entityContent->isNew() );
+		$this->addFlags( $entity->getId() === null );
 
 		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
 		//      not added to $this->flags explicitly, the save will fail.
 		$status = $this->attemptSaveEntity(
-			$entityContent,
+			$entity,
 			$summary,
 			$this->flags
 		);
 
-		$this->addToOutput( $entityContent, $status );
+		$this->addToOutput( $entity, $status );
 
 		wfProfileOut( __METHOD__ );
 	}
 
-	protected function addFlags( $entityContentIsNew ) {
+	protected function addFlags( $entityIsNew ) {
 		// if the entity is not up for creation, set the EDIT_UPDATE flags
-		if ( !$entityContentIsNew && ( $this->flags & EDIT_NEW ) === 0 ) {
+		if ( !$entityIsNew && ( $this->flags & EDIT_NEW ) === 0 ) {
 			$this->flags |= EDIT_UPDATE;
 		}
 
@@ -320,8 +342,8 @@ abstract class ModifyEntity extends ApiWikibase {
 		$this->flags |= ( $this->getUser()->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 	}
 
-	protected function addToOutput( EntityContent $entityContent, Status $status ) {
-		$this->getResultBuilder()->addBasicEntityInformation( $entityContent->getEntity()->getId(), 'entity' );
+	protected function addToOutput( Entity $entity, Status $status ) {
+		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), 'entity' );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity' );
 
 		$params = $this->extractRequestParams();

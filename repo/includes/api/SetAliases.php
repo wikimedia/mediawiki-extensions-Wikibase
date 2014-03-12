@@ -7,9 +7,9 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use ApiBase;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityContent;
 use Wikibase\Utils;
 use Wikibase\ChangeOp\ChangeOpAliases;
 
@@ -29,10 +29,15 @@ class SetAliases extends ModifyEntity {
 
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 *
+	 * @param Entity $entity
+	 * @param array $params
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return array|\Status
 	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-		$entity = $entityContent->getEntity();
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 		if( $entity instanceof Item ) {
 			$type = 'item';
 		} else if ( $entity instanceof Property ) {
@@ -65,11 +70,10 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
-	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
 
 		$summary = $this->createSummary( $params );
-		$entity = $entityContent->getEntity();
 		$language = $params['language'];
 
 		/** @var ChangeOp[] $aliasesChangeOps */
