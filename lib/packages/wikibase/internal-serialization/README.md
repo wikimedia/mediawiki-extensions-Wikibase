@@ -45,8 +45,9 @@ via TravisCI, as a TravisCI configuration file is also provided in the root dire
 
 ## Authors
 
-Wikibase DataModel has been written by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw)
-as [Wikimedia Germany](https://wikimedia.de) employee for the [Wikidata project](https://wikidata.org/).
+Wikibase Internal Serialization has been written by [Jeroen De Dauw]
+(https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw), partially as [Wikimedia Germany]
+(https://wikimedia.de) employee for the [Wikidata project](https://wikidata.org/).
 
 ## Release notes
 
