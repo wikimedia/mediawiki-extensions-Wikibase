@@ -2,20 +2,29 @@
 
 namespace Wikibase\Api;
 
+use ApiMain;
+use Exception;
+use LogicException;
 use Message;
 use MessageCache;
-use Revision;
-use Title;
 use User;
 use Status;
 use ApiBase;
-use Wikibase\EntityContent;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityFactory;
+use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityTitleLookup;
+use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StorageException;
+use Wikibase\store\EntityStore;
 use Wikibase\Summary;
-use WikiPage;
+use Wikibase\SummaryFormatter;
 
 /**
  * Base class for API modules
@@ -45,22 +54,87 @@ abstract class ApiWikibase extends \ApiBase {
 	protected static $longErrorContextMessage = false;
 
 	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $entityTitleLookup;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	protected $idParser;
+
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	protected $entityLookup;
+
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	protected $uncachedEntityLookup;
+
+	/**
+	 * @var EntityStore
+	 */
+	protected $entityStore;
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	protected $dataTypeLookup;
+
+	/**
+	 * @var SummaryFormatter
+	 */
+	protected $summaryFormatter;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		//TODO: provide a mechanism to override the services
+		$this->entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+
+		// NOTE: use uncached lookup for write mode!
+		$uncachedFlag = $this->isWriteMode() ? 'uncached' : '';
+		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( $uncachedFlag );
+		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$this->dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
+		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+	}
+
+	/**
+	 * @param Entity $entity
+	 *
+	 * @return bool
+	 */
+	protected function entityExists( Entity $entity ) {
+		$entityId = $entity->getId();
+		$title = $entityId === null ? null : $this->entityTitleLookup->getTitleForId( $entityId );
+		return ( $title !== null && $title->exists() );
+	}
+
+	/**
 	 * @return ResultBuilder
 	 */
 	public function getResultBuilder() {
 		if( !isset( $this->resultBuilder ) ) {
 
-			$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-
 			$serializerFactory = new SerializerFactory(
 				null,
-				WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
+				$this->dataTypeLookup,
 				EntityFactory::singleton()
 			);
 
 			$this->resultBuilder = new ResultBuilder(
 				$this->getResult(),
-				$entityTitleLookup,
+				$this->entityTitleLookup,
 				$serializerFactory
 			);
 		}
@@ -139,28 +213,31 @@ abstract class ApiWikibase extends \ApiBase {
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
-	 * @param EntityContent $entityContent the entityContent to check permissions for
-	 * @param $params array of arguments for the module, describing the operation to be performed
+	 * @param Entity $entity The entity to check permissions for
+	 * @param array $params Arguments for the module, describing the operation to be performed
 	 *
-	 * @return Status the check's result
+	 * @return array A list of permissions
 	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		return array();
 	}
 
 	/**
 	 * Check the rights for the user accessing the module.
 	 *
-	 * @param $entityContent EntityContent the entity to check
+	 * @param $entity Entity the entity to check
 	 * @param $user User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 *
 	 * @return Status the check's result
 	 * @todo: use this also to check for read access in ApiGetEntities, etc
 	 */
-	public function checkPermissions( EntityContent $entityContent, User $user, array $params ) {
-		$permissions = $this->getRequiredPermissions( $entityContent, $params );
+	public function checkPermissions( Entity $entity, User $user, array $params ) {
+		$permissions = $this->getRequiredPermissions( $entity, $params );
 		$status = Status::newGood();
+
+		//TODO: factor permission check logic out of EntityContent
+		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
 
 		foreach ( $permissions as $perm ) {
 			$permStatus = $entityContent->checkPermission( $perm, $user, true );
@@ -175,49 +252,35 @@ abstract class ApiWikibase extends \ApiBase {
 	 *
 	 * Will fail by calling dieUsage() if the revision can not be found or can not be loaded.
 	 *
-	 * @since 0.3
+	 * @since 0.5
 	 *
-	 * @param Title   $title   : the title of the page to load the revision for
-	 * @param bool|int $revId   : the revision to load. If not given, the current revision will be loaded.
-	 * @param int      $audience
-	 * @param User $user
-	 * @param int      $audience: the audience to load this for, see Revision::FOR_XXX constants and
-	 *                          Revision::getContent().
-	 * @param User $user    : the user to consider if $audience == Revision::FOR_THIS_USER
+	 * @param EntityId $entityId : the title of the page to load the revision for
+	 * @param int $revId : the revision to load. If not given, the current revision will be loaded.
 	 *
-	 * @return EntityContent the revision's content.
+	 * @throws \Exception
+	 * @throws \UsageException
+	 * @return EntityRevision
 	 */
-	protected function loadEntityContent(
-		Title $title,
-		$revId = false,
-		$audience = Revision::FOR_PUBLIC,
-		User $user = null
+	protected function loadEntityRevision(
+		EntityId $entityId,
+		$revId = 0
 	) {
-		if ( $revId === null || $revId === false || $revId === 0 ) {
-			$page = WikiPage::factory( $title );
-			$content = $page->getContent( $audience, $user );
-		} else {
-			$revision = Revision::newFromId( $revId );
+		try {
+			$revision = $this->entityLookup->getEntityRevision( $entityId, $revId );
 
 			if ( !$revision ) {
-				$this->dieUsage( "Revision not found: $revId", 'nosuchrevid' );
+				$this->dieUsage( "Can't access item content of "
+						. $entityId->getSerialization()
+						. ", revision may have been deleted.",
+					'cant-load-entity-content' );
 			}
 
-			if ( $revision->getPage() != $title->getArticleID() ) {
-				$this->dieUsage( "Revision $revId does not belong to " .
-					$title->getPrefixedDBkey(), 'nosuchrevid' );
-			}
-
-			$content = $revision->getContent( $audience, $user );
+			return $revision;
+		} catch ( StorageException $ex ) {
+			$this->dieUsage( "Revision $revId not found: " . $ex->getMessage(), 'nosuchrevid' );
 		}
 
-		if ( is_null( $content ) ) {
-			$this->dieUsage( "Can't access item content of " .
-				$title->getPrefixedDBkey() .
-				", revision may have been deleted.", 'cant-load-entity-content' );
-		}
-
-		return $content;
+		throw new Exception( 'can\'t happen' );
 	}
 
 	/**
@@ -458,9 +521,9 @@ abstract class ApiWikibase extends \ApiBase {
 	 * warnings, they will automatically be included in the API call's output (again, via
 	 * handleStatus()).
 	 *
-	 * @param EntityContent $content  The content to save
+	 * @param Entity $entity The entity to save
 	 * @param string|Summary $summary The edit summary
-	 * @param int    $flags           The edit flags (see WikiPage::doEditContent)
+	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
 	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
 	 * @see  EditEntity::attemptSave()
@@ -469,7 +532,12 @@ abstract class ApiWikibase extends \ApiBase {
 	 *        would still need knowledge of the API module to be useful. We'll put it here
 	 *        for now pending further discussion.
 	 */
-	protected function attemptSaveEntity( EntityContent $content, $summary, $flags = 0 ) {
+	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
+		if ( !$this->isWriteMode() ) {
+			// sanity/safety check
+			throw new LogicException( 'attemptSaveEntity() can not be used by API modules that do not return true from isWriteMode()!' );
+		}
+
 		if ( $summary instanceof Summary ) {
 			$summary = $this->formatSummary( $summary );
 		}
@@ -485,15 +553,12 @@ abstract class ApiWikibase extends \ApiBase {
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 
 		//TODO: allow injection/override!
-		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
-		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$editEntity = new EditEntity(
-			$entityTitleLookup,
-			$entityRevisionLookup,
-			$entityStore,
-			$content->getEntity(), //TODO: refactor API modules to not use EntityContent at all!
+			$this->entityTitleLookup,
+			$this->entityLookup,
+			$this->entityStore,
+			$entity,
 			$user,
 			$baseRevisionId,
 			$this->getContext() );
@@ -517,7 +582,7 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	protected function formatSummary( Summary $summary ) {
-		$formatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+		$formatter = $this->summaryFormatter;
 		return $formatter->formatSummary( $summary );
 	}
 

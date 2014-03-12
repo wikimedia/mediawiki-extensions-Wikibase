@@ -92,6 +92,7 @@ class ItemHandler extends EntityHandler {
 	 * Returns false when there is no such pair.
 	 *
 	 * @since 0.1
+	 * @deprecated in 0.5, use SiteLinkLookup::getItemIdForLink instead
 	 *
 	 * @param integer $siteId
 	 * @param string $pageName
@@ -107,6 +108,8 @@ class ItemHandler extends EntityHandler {
 	 * or null if there is no such item.
 	 *
 	 * @since 0.3
+	 * @deprecated in 0.5, use SiteLinkLookup::getItemIdForLink
+	 * with EntityTitleLookup::getTitleForId instead
 	 *
 	 * @param string $siteId
 	 * @param string $pageName

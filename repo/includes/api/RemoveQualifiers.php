@@ -33,10 +33,9 @@ class RemoveQualifiers extends ModifyClaim {
 
 		$claimGuid = $params['claim'];
 		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
-		$entity = $entityContent->getEntity();
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		$entity = $entityRevision->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
@@ -52,7 +51,7 @@ class RemoveQualifiers extends ModifyClaim {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
+		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 
 		wfProfileOut( __METHOD__ );

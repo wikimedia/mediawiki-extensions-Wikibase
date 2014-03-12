@@ -102,15 +102,17 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 
 	private function assertSearchResultHasExpectedDescription( $searchResult, $params, $expectedData ) {
 		foreach( $expectedData['descriptions'] as $description ) {
-		if( $description['language'] == $params['language'] ) {
-			$this->assertEquals( $description['value'], $searchResult['description'] );
+			if( $description['language'] == $params['language'] ) {
+				$this->assertArrayHasKey( 'description', $searchResult );
+				$this->assertEquals( $description['value'], $searchResult['description'] );
+			}
 		}
-	}
 	}
 
 	private function assertSearchResultHasExpectedLabel( $searchResult, $params, $expectedData ) {
 		foreach( $expectedData['labels'] as $description ) {
 			if( $description['language'] == $params['language'] ) {
+				$this->assertArrayHasKey( 'label', $searchResult );
 				$this->assertEquals( $description['value'], $searchResult['label'] );
 			}
 		}

@@ -7,13 +7,16 @@ use InvalidArgumentException;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SiteLinkLookup;
 use Wikibase\Summary;
+use Wikibase\TermIndex;
 
 /**
  * @since 0.5
@@ -27,10 +30,32 @@ use Wikibase\Summary;
 class MergeItems extends ApiWikibase {
 
 	/**
-	 * @see \Wikibase\Api\Api::getRequiredPermissions()
+	 * @var SiteLinkLookup
 	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
+	private $sitelinkCache;
+
+	/**
+	 * @var TermIndex
+	 */
+	protected $termIndex;
+
+	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$this->sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
+		$this->termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+	}
+
+	/**
+	 * @see \Wikibase\Api\Api::getRequiredPermissions()
+	 *
+	 * @param Entity $entity
+	 * @param array $params
+	 *
+	 * @return array|\Status
+	 */
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 		$permissions[] = 'edit';
 		$permissions[] = 'item-merge';
 		return $permissions;
@@ -44,33 +69,35 @@ class MergeItems extends ApiWikibase {
 		$params = $this->extractRequestParams();
 		$this->validateParams( $params );
 
-		$fromEntityContent = $this->getEntityContentFromIdString( $params['fromid'] );
-		$toEntityContent = $this->getEntityContentFromIdString( $params['toid'] );
-		$this->validateEntityContents( $fromEntityContent, $toEntityContent );
+		$fromEntityRevision = $this->getEntityRevisionFromIdString( $params['fromid'] );
+		$toEntityRevision = $this->getEntityRevisionFromIdString( $params['toid'] );
+
+		$fromEntity = $fromEntityRevision->getEntity();
+		$toEntity = $toEntityRevision->getEntity();
+
+		$this->validateEntity( $fromEntity, $toEntity );
 
 		$status = Status::newGood();
-		$status->merge( $this->checkPermissions( $fromEntityContent, $user, $params ) );
-		$status->merge( $this->checkPermissions( $toEntityContent, $user, $params ) );
+		$status->merge( $this->checkPermissions( $fromEntity, $user, $params ) );
+		$status->merge( $this->checkPermissions( $toEntity, $user, $params ) );
 		if( !$status->isGood() ){
 			$this->dieUsage( $status->getMessage(), 'permissiondenied');
 		}
 
 		$ignoreConflicts = $this->getIgnoreConflicts( $params );
-		$sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 
 		/**
-		 * @var ItemContent $fromEntityContent
-		 * @var ItemContent $toEntityContent
+		 * @var Item $fromEntity
+		 * @var Item $toEntity
 		 */
 		try{
 			$changeOps = new ChangeOpsMerge(
-				$fromEntityContent->getEntity(),
-				$toEntityContent->getEntity(),
+				$fromEntity,
+				$toEntity,
 				new LabelDescriptionDuplicateDetector(
-					$termIndex
+					$this->termIndex
 				),
-				$sitelinkCache,
+				$this->sitelinkCache,
 				$ignoreConflicts
 			);
 			$changeOps->apply();
@@ -82,7 +109,7 @@ class MergeItems extends ApiWikibase {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->attemptSaveMerge( $fromEntityContent, $toEntityContent, $params );
+		$this->attemptSaveMerge( $fromEntity, $toEntity, $params );
 	}
 
 	protected function getIgnoreConflicts( $params ) {
@@ -92,18 +119,15 @@ class MergeItems extends ApiWikibase {
 		return array();
 	}
 
-	protected function addEntityToOutput( EntityContent $entityContent, Status $status, $name ) {
-		$this->getResultBuilder()->addBasicEntityInformation( $entityContent->getEntity()->getId(), $name );
+	protected function addEntityToOutput( Entity $entity, Status $status, $name ) {
+		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), $name );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, $name );
 	}
 
-	private function getEntityContentFromIdString( $idString ) {
-		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
+	private function getEntityRevisionFromIdString( $idString ) {
 		try{
-			$entityId = $entityIdParser->parse( $idString );
-			return $entityContentFactory->getFromId( $entityId );
+			$entityId = $this->idParser->parse( $idString );
+			return $this->entityLookup->getEntityRevision( $entityId );
 		}
 		catch ( EntityIdParsingException $e ){
 			$this->dieUsage( 'You must provide valid ids' , 'param-invalid' );
@@ -112,19 +136,19 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @param EntityContent|null $fromEntityContent
-	 * @param EntityContent|null $toEntityContent
+	 * @param Entity|null $fromEntity
+	 * @param Entity|null $toEntity
 	 */
-	private function validateEntityContents( $fromEntityContent, $toEntityContent ) {
-		if( $fromEntityContent === null || $toEntityContent === null ){
+	private function validateEntity( $fromEntity, $toEntity) {
+		if( $fromEntity === null || $toEntity === null ){
 			$this->dieUsage( 'One of more of the ids provided do not exist' , 'no-such-entity-id' );
 		}
 
-		if ( !( $fromEntityContent instanceof ItemContent && $toEntityContent instanceof ItemContent ) ) {
+		if ( !( $fromEntity instanceof Item && $toEntity instanceof Item ) ) {
 			$this->dieUsage( 'One or more of the entities are not items', 'not-item' );
 		}
 
-		if( $toEntityContent->getEntity()->getId()->equals( $fromEntityContent->getEntity()->getId() ) ){
+		if( $toEntity->getId()->equals( $fromEntity->getId() ) ){
 			$this->dieUsage( 'You must provide unique ids' , 'param-invalid' );
 		}
 	}
@@ -152,26 +176,31 @@ class MergeItems extends ApiWikibase {
 		return $summary;
 	}
 
-	private function attemptSaveMerge( ItemContent $fromItemContent, ItemContent $toItemContent, $params ) {
-		$toSummary = $this->getSummary( 'to', $toItemContent->getItem()->getId(), $params );
+	/**
+	 * @param Item $fromItem
+	 * @param Item $toItem
+	 * @param $params
+	 */
+	private function attemptSaveMerge( Item $fromItem, Item $toItem, $params ) {
+		$toSummary = $this->getSummary( 'to', $toItem->getId(), $params );
 
 		$fromStatus = $this->attemptSaveEntity(
-			$fromItemContent,
+			$fromItem,
 			$this->formatSummary( $toSummary )
 		);
 
 		$this->handleSaveStatus( $fromStatus );
-		$this->addEntityToOutput( $fromItemContent, $fromStatus, 'from' );
+		$this->addEntityToOutput( $fromItem, $fromStatus, 'from' );
 
 		if( $fromStatus->isGood() ) {
-			$fromSummary = $this->getSummary( 'from', $fromItemContent->getItem()->getId(), $params );
+			$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $params );
 
 			$toStatus = $this->attemptSaveEntity(
-				$toItemContent,
+				$toItem,
 				$this->formatSummary( $fromSummary )
 			);
 			$this->handleSaveStatus( $toStatus );
-			$this->addEntityToOutput( $toItemContent, $toStatus, 'to' );
+			$this->addEntityToOutput( $toItem, $toStatus, 'to' );
 
 			$this->getResultBuilder()->markSuccess( 1 );
 		} else {
