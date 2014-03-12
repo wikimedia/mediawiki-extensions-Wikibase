@@ -110,6 +110,12 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		if ( $entityRevision !== false ) {
 			if ( $revisionId === 0  && $this->shouldVerifyRevision ) {
 				$revisionId = $this->lookup->getLatestRevisionId( $entityId );
+
+				if ( $revisionId === false ) {
+					// entity no longer exists!
+					$entityRevision = null;
+					$revisionId = 0;
+				}
 			}
 
 			if ( $revisionId !== 0 && $entityRevision->getRevision() !== $revisionId ) {
