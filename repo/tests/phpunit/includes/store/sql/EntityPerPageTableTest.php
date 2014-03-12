@@ -76,7 +76,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->markTestIncomplete( "test me!" );
 	}
 
-	public function testGetEntitiesWithoutTerm( /* $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 */ ) {
+	public function testListEntitiesWithoutTerm( /* $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 */ ) {
 		$this->markTestIncomplete( "test me!" );
 	}
 
@@ -84,39 +84,94 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->markTestIncomplete( "test me!" );
 	}
 
-	/**
-	 * @dataProvider getEntitiesProvider
-	 */
-	public function testGetEntities( $entities, $type, $expected ) {
-		$table = $this->newEntityPerPageTable( $entities );
+	protected function getIdStrings( array $entities ) {
+		$ids = array_map( function ( $entity ) {
+			if ( $entity instanceof Entity ) {
+				$entity = $entity->getId();
+			}
+			return $entity->getSerialization();
+		}, $entities );
 
-		$iterator = $table->getEntities( $type );
-		$actual = iterator_to_array( $iterator );
-
-		$expectedIds = array();
-		foreach( $expected as $entity ) {
-			$expectedIds[] = $entity->getId();
-		}
-		$this->assertArrayEquals( $expectedIds, $actual );
+		return $ids;
 	}
 
-	public static function getEntitiesProvider() {
+	protected function assertEqualIds( array $expected,array $actual, $msg = null ) {
+		$expectedIds = $this->getIdStrings( $expected );
+		$actualIds = $this->getIdStrings( $actual );
+
+		$this->assertArrayEquals( $expectedIds, $actualIds, $msg );
+	}
+
+	/**
+	 * @dataProvider listEntitiesProvider
+	 */
+	public function testListEntities( array $entities, $type, $limit, array $expected ) {
+		$table = $this->newEntityPerPageTable( $entities );
+
+		$actual = $table->getNextBatchOfIds( $type, $limit );
+
+		$this->assertEqualIds( $expected, $actual );
+	}
+
+	public static function listEntitiesProvider() {
 		$property = Property::newEmpty();
 		$item = Item::newEmpty();
 
 		return array(
 			'empty' => array(
-				array(), null, array()
+				array(), null, 100, array()
 			),
 			'some entities' => array(
-				array( $property, $item ), null, array( $property, $item )
+				array( $item, $property ), null, 100, array( $property, $item )
 			),
 			'just properties' => array(
-				array( $property, $item ), Property::ENTITY_TYPE, array( $property )
+				array( $item, $property ), Property::ENTITY_TYPE, 100, array( $property )
 			),
 			'no matches' => array(
-				array( $property ), Item::ENTITY_TYPE, array()
+				array( $property ), Item::ENTITY_TYPE, 100, array()
 			),
+		);
+	}
+	/**
+	 * @dataProvider listEntitiesProvider_paging
+	 */
+	public function testListEntities_paging( array $entities, $type, $limit, array $expectedChunks ) {
+		$table = $this->newEntityPerPageTable( $entities );
+
+		foreach ( $expectedChunks as $expected ) {
+			$actual = $table->getNextBatchOfIds( $type, $limit, $offset );
+
+			$this->assertEqualIds( $expected, $actual );
+		}
+	}
+
+	public static function listEntitiesProvider_paging() {
+		$property = Property::newEmpty();
+		$item = Item::newEmpty();
+		$item2 = Item::newEmpty();
+
+		return array(
+			'limit' => array(
+				// note: "item" sorted before "property".
+				array( $item, $item2, $property ),
+				null,
+				2,
+				array (
+					array( $item, $item2 ),
+					array( $property ),
+					array(),
+				)
+			),
+			'limit and filter' => array(
+				array( $item, $item2, $property ),
+				Item::ENTITY_TYPE,
+				1,
+				array(
+					array( $item ),
+					array( $item2 ),
+					array(),
+				)
+			)
 		);
 	}
 }
