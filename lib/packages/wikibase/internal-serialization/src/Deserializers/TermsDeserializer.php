@@ -30,7 +30,7 @@ class TermsDeserializer implements Deserializer {
 	 */
 	public function deserialize( $serialization ) {
 		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException(  );
+			throw new DeserializationException( 'Term serialization should be an array' );
 		}
 
 		$this->serialization = $serialization;
