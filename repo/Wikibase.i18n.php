@@ -227,7 +227,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-dispatchstats-median'  => 'Median',
 	'wikibase-dispatchstats-average' => 'Average',
 	'special-listdatatypes' => 'List of all datatypes available',
-	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes currently in use on this installation:',
+	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes available on this installation:',
 	'wikibase-history-title-with-label' => 'Revision history of "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Revision history of ($1)',
 	'special-entitieswithoutdescription' => 'Entities without description',
