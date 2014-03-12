@@ -3,10 +3,13 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
@@ -23,6 +26,29 @@ use Wikibase\Repo\WikibaseRepo;
 class GetClaims extends ApiWikibase {
 
 	/**
+	 * @var ClaimGuidValidator
+	 */
+	protected $claimGuidValidator;
+
+	/**
+	 * @var ClaimGuidParser
+	 */
+	protected $claimGuidParser;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $prefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $prefix );
+
+		//TODO: provide a mechanism to override the services
+		$this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
+		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+	}
+
+	/**
 	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
@@ -35,13 +61,9 @@ class GetClaims extends ApiWikibase {
 
 		list( $id, $claimGuid ) = $this->getIdentifiers( $params );
 
-		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-		$entityId = $entityIdParser->parse( $id );
-		$entity = $entityId ? $this->getEntity( $entityId ) : null;
-
-		if ( !$entity ) {
-			$this->dieUsage( "No entity found matching ID $id", 'no-such-entity' );
-		}
+		$entityId = $this->idParser->parse( $id );
+		$entityRevision = $entityId ? $this->loadEntityRevision( $entityId ) : null;
+		$entity = $entityRevision->getEntity();
 
 		if( $params['ungroupedlist'] ) {
 			$this->getResultBuilder()->getOptions()
@@ -73,23 +95,6 @@ class GetClaims extends ApiWikibase {
 			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
 			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
 		) );
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param EntityId $id
-	 *
-	 * @return Entity
-	 */
-	protected function getEntity( EntityId $id ) {
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $id );
-
-		if ( $content === null ) {
-			$this->dieUsage( 'The specified entity does not exist, so it\'s claims cannot be obtained', 'no-such-entity' );
-		}
-
-		return $content->getEntity();
 	}
 
 	/**
@@ -144,7 +149,7 @@ class GetClaims extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		if ( isset( $params['property'] ) ){
-			$parsedProperty = WikibaseRepo::getDefaultInstance()->getEntityIdParser()->parse( $params['property'] );
+			$parsedProperty = $this->idParser->parse( $params['property'] );
 			$matchFilter = $propertyId->equals( $parsedProperty );
 			return $matchFilter;
 		}
@@ -180,15 +185,11 @@ class GetClaims extends ApiWikibase {
 	}
 
 	protected function getEntityIdFromClaimGuid( $claimGuid ) {
-		$claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(); //TODO: inject.
-
-		if ( $claimGuidValidator->validateFormat( $claimGuid ) === false ) {
+		if ( $this->claimGuidValidator->validateFormat( $claimGuid ) === false ) {
 			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
-		$claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
-
-		return $claimGuidParser->parse( $claimGuid )->getEntityId()->getSerialization();
+		return $this->claimGuidParser->parse( $claimGuid )->getEntityId()->getSerialization();
 	}
 
 	/**

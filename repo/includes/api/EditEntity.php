@@ -6,7 +6,6 @@ use ApiBase;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use MWException;
-use Revision;
 use Site;
 use SiteList;
 use Title;
@@ -24,14 +23,12 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityContent;
+use Wikibase\EntityFactory;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Utils;
-use WikiPage;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of site and page title.
@@ -64,25 +61,30 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ApiBase::_construct()
 	 */
-	public function __construct( $mainModule, $moduleName ) {
-		parent::__construct( $mainModule, $moduleName );
+	public function __construct( $mainModule, $moduleName, $prefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $prefix );
 
 		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
-		$this->entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup();
 	}
 
 	/**
 	 * @see \Wikibase\Api\ApiWikibase::getRequiredPermissions()
+	 *
+	 * @param \Wikibase\DataModel\Entity\Entity $entity
+	 * @param array $params
+	 *
+	 * @return array|\Status
 	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-		$exists = $entityContent->getTitle()->exists();
-		if( !$exists ) {
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
+
+		if ( !$this->entityExists( $entity ) ) {
 			$permissions[] = 'createpage';
-			if( $entityContent->getEntity()->getType() === 'property'  ) {
+			if ( $entity->getType() === 'property'  ) {
 				$permissions[] = 'property-create';
 			}
 		}
+
 		return $permissions;
 	}
 
@@ -92,15 +94,14 @@ class EditEntity extends ModifyEntity {
 	protected function createEntity( array $params ) {
 		$type = $params['new'];
 		$this->flags |= EDIT_NEW;
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityFactory = EntityFactory::singleton();
 		try {
-			$entityContent = $entityContentFactory->newFromType( $type );
+			$entity = $entityFactory->newFromArray( $type, array() );
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
-		/** @var $entityContent EntityContent */
-		$entityContent->grabFreshId();
-		return $entityContent;
+
+		return $entity;
 	}
 
 	/**
@@ -126,18 +127,19 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
-	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
 
-		$entity = $entityContent->getEntity();
 		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
-		$this->validateDataProperties( $data, $entityContent );
+		$this->validateDataProperties( $data, $entity, $baseRevId );
+
+		$exists = $this->entityExists( $entity );
 
 		if ( $params['clear'] ) {
-			if( $params['baserevid'] ) {
-				$currentEntityRevision = $this->entityRevisionLookup->getEntityRevision( $entity->getId() );
-				if( !$entityContent->getEntityRevision()->getRevision() === $currentEntityRevision->getRevision() ) {
+			if( $params['baserevid'] && $exists ) {
+				$latestRevision = $this->entityLookup->getLatestRevisionId( $entity->getId() );
+				if( !$baseRevId === $latestRevision ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieUsage(
 						'Tried to clear entity using baserevid of entity not equal to current revision',
@@ -149,7 +151,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		// if we create a new property, make sure we set the datatype
-		if( !$entityContent->getTitle()->exists() && $entity instanceof Property ){
+		if( !$exists && $entity instanceof Property ){
 			if ( !isset( $data['datatype'] ) ) {
 				wfProfileOut( __METHOD__ );
 				$this->dieUsage( 'No datatype given', 'param-illegal' );
@@ -529,18 +531,13 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @since 0.4
 	 *
-	 * @param array $data
-	 * @param EntityContent $entityContent
+	 * @param mixed $data
+	 * @param Entity $entity
+	 * @param int $revId
 	 */
-	protected function validateDataProperties( $data, $entityContent ) {
-		$title = null;
-		$revision = null;
-
-		if ( $entityContent ) {
-			$wikiPage = $entityContent->getWikiPage();
-			$title = $wikiPage->getTitle();
-			$revision = $wikiPage->getTitle();
-		}
+	protected function validateDataProperties( $data, Entity $entity, $revId = 0 ) {
+		$entityId = $entity->getId();
+		$title = $entityId === null ? null : $this->titleLookup->getTitleForId( $entityId );
 
 		$allowedProps = array(
 			// ignored props
@@ -564,16 +561,16 @@ class EditEntity extends ModifyEntity {
 		);
 
 		$this->checkValidJson( $data, $allowedProps );
-		$this->checkEntityId( $data, $entityContent->getEntity()->getId() );
-		$this->checkEntityType( $data, $entityContent );
-		$this->checkPageIdProp( $data, $entityContent );
+		$this->checkEntityId( $data, $entityId );
+		$this->checkEntityType( $data, $entity );
+		$this->checkPageIdProp( $data, $title );
 		$this->checkNamespaceProp( $data, $title );
 		$this->checkTitleProp( $data, $title );
-		$this->checkRevisionProp( $data, $revision );
+		$this->checkRevisionProp( $data, $revId );
 	}
 
 	/**
-	 * @param $data
+	 * @param array $data
 	 * @param array $allowedProps
 	 */
 	protected function checkValidJson( $data, array $allowedProps ) {
@@ -599,12 +596,12 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param $data
-	 * @param WikiPage|mixed(?) $page
+	 * @param array $data
+	 * @param Title|null $title
 	 */
-	protected function checkPageIdProp( $data, $page ) {
+	protected function checkPageIdProp( $data, $title ) {
 		if ( isset( $data['pageid'] )
-			&& ( is_object( $page ) ? $page->getId() !== $data['pageid'] : true ) ) {
+			&& ( is_object( $title ) ? $title->getArticleID() !== $data['pageid'] : true ) ) {
 			$this->dieUsage(
 				'Illegal field used in call, "pageid", must either be correct or not given',
 				'param-illegal'
@@ -613,7 +610,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param $data
+	 * @param array $data
 	 * @param Title|null $title
 	 */
 	protected function checkNamespaceProp( $data, $title ) {
@@ -628,7 +625,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param $data
+	 * @param array $data
 	 * @param Title|null $title
 	 */
 	protected function checkTitleProp( $data, $title ) {
@@ -642,12 +639,12 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param $data
-	 * @param Revision|null $revision
+	 * @param array $data
+	 * @param int|null $revisionId
 	 */
-	protected function checkRevisionProp( $data, $revision ) {
+	protected function checkRevisionProp( $data, $revisionId ) {
 		if ( isset( $data['lastrevid'] )
-			&& ( is_object( $revision ) ? $revision->getId() !== $data['lastrevid'] : true ) ) {
+			&& ( is_int( $revisionId ) ? $revisionId !== $data['lastrevid'] : true ) ) {
 			$this->dieUsage(
 				'Illegal field used in call: "lastrevid", must either be correct or not given',
 				'param-illegal'
@@ -655,10 +652,16 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	private function checkEntityId( $data, EntityId $entityId ) {
+	private function checkEntityId( $data, EntityId $entityId = null ) {
 		if ( isset( $data['id'] ) ) {
-			$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-			$dataId = $entityIdParser->parse( $data['id'] );
+			if ( !$entityId ) {
+				$this->dieUsage(
+					'Illegal field used in call: "id", must not be given when creating a new entity',
+					'param-illegal'
+				);
+			}
+
+			$dataId = $this->idParser->parse( $data['id'] );
 			if( !$entityId->equals( $dataId ) ) {
 				$this->dieUsage(
 					'Invalid field used in call: "id", must match id parameter',
@@ -668,9 +671,9 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	private function checkEntityType( $data, EntityContent $entityContent ) {
+	private function checkEntityType( $data, Entity $entity ) {
 		if ( isset( $data['type'] )
-			&& $entityContent->getEntity()->getType() !== $data['type'] ) {
+			&& $entity->getType() !== $data['type'] ) {
 			$this->dieUsage(
 				'Invalid field used in call: "type", must match type associated with id',
 				'param-invalid'

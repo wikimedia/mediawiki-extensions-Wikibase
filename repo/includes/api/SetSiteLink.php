@@ -4,8 +4,8 @@ namespace Wikibase\Api;
 
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use ApiBase;
-use Wikibase\EntityContent;
-use Wikibase\ItemContent;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -40,32 +40,32 @@ class SetSiteLink extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::getEntityContentFromApiParams
+	 * @see ModifyEntity::getEntityRevisionFromApiParams
 	 */
-	protected function getEntityContentFromApiParams( array $params ) {
-		$entityContent = parent::getEntityContentFromApiParams( $params );
+	protected function getEntityRevisionFromApiParams( array $params ) {
+		$entityRev = parent::getEntityRevisionFromApiParams( $params );
 
 		// If we found anything then check if it is of the correct base class
-		if ( !is_null( $entityContent ) && !( $entityContent instanceof ItemContent ) ) {
+		if ( !is_null( $entityRev ) && !( $entityRev->getEntity() instanceof Item ) ) {
 			$this->dieUsage( 'The content on the found page is not of correct type', 'wrong-class' );
 		}
 
-		return $entityContent;
+		return $entityRev;
 	}
 
 	/**
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
-	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( !( $entityContent instanceof ItemContent ) ) {
+		if ( !( $entity instanceof Item ) ) {
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( "The given entity is not an item", "not-item" );
 		}
 
+		$item = $entity;
 		$summary = $this->createSummary( $params );
-		$item = $entityContent->getItem();
 		$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 
 		if ( $this->shouldRemove( $params ) ) {

@@ -4,9 +4,9 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityContent;
 use Wikibase\Summary;
 use Wikibase\Utils;
 
@@ -45,10 +45,15 @@ abstract class ModifyTerm extends ModifyEntity {
 
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
+	 *
+	 * @param Entity $entity
+	 * @param array $params
+	 *
+	 * @throws \InvalidArgumentException
+	 * @return array|\Status
 	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
-		$entity = $entityContent->getEntity();
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 		if( $entity instanceof Item ) {
 			$type = 'item';
 		} else if ( $entity instanceof Property ) {
