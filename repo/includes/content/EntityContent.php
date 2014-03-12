@@ -627,15 +627,17 @@ abstract class EntityContent extends AbstractContent {
 			$user
 		);
 
-		if( $status->isGood() && isset ( $status->value['new'] ) && $status->value['new'] ) {
-			StoreFactory::getStore()->newEntityPerPage()->addEntityContent( $this );
-		}
-
 		if ( $status->isOK() && !isset ( $status->value['revision'] ) ) {
 			// HACK: No new revision was created (content didn't change). Report the old one.
 			// There *might* be a race condition here, but since $page already loaded the
 			// latest revision, it should still be cached, and should always be the correct one.
 			$status->value['revision'] = $page->getRevision();
+		}
+
+		if( $status->isGood() && isset ( $status->value['new'] ) && $status->value['new'] ) {
+			StoreFactory::getStore()->newEntityPerPage()->addEntityPage(
+				$this->getEntity()->getId(),
+				$page->getTitle()->getArticleID() );
 		}
 
 		$this->baseRevisionForSaving = false;

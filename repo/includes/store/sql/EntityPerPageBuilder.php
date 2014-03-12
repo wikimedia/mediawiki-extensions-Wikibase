@@ -175,13 +175,13 @@ class EntityPerPageBuilder {
 			$entityContent = $this->entityContentFactory->getFromId( $entityId, \Revision::RAW );
 
 			if ( $this->rebuildAll === true ) {
-				$this->entityPerPageTable->deleteEntity( $entityId );
+				$this->entityPerPageTable->deleteEntityPage( $entityId, $entityContent->getTitle()->getArticleID() );
 			}
 
 			if ( $entityContent !== null ) {
-				$this->entityPerPageTable->addEntityContent( $entityContent );
+				$this->entityPerPageTable->addEntityPage( $entityId, $entityContent->getTitle()->getArticleID() );
 			} else {
-				$this->entityPerPageTable->removeEntity( $entityId );
+				$this->entityPerPageTable->deleteEntity( $entityId );
 			}
 
 			$lastPageSeen = $pageRow->page_id;

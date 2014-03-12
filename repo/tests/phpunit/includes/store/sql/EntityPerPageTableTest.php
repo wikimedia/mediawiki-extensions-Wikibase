@@ -51,19 +51,20 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 			if ( !$title || !$title->exists() ) {
 				$content->save( 'test', null, EDIT_NEW );
+				$title = $content->getTitle();
 			}
 
-			$table->addEntityContent( $content );
+			$table->addEntityPage( $content->getEntity()->getId(), $title->getArticleID() );
 		}
 
 		return $table;
 	}
 
-	public function testAddEntityContent( /* EntityContent $entityContent */ ) {
+	public function testAddEntityPage( /* EntityContent $entityContent */ ) {
 		$this->markTestIncomplete( "test me!" );
 	}
 
-	public function testDeleteEntityContent( /* EntityContent $entityContent */ ) {
+	public function testDeleteEntityPage( /* EntityContent $entityContent */ ) {
 		$this->markTestIncomplete( "test me!" );
 	}
 
