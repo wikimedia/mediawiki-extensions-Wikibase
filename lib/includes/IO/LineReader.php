@@ -145,11 +145,35 @@ class LineReader implements Iterator, Disposable {
 	 * @return void Any returned value is ignored.
 	 */
 	public function rewind() {
-		if ( $this->fileHandle ) {
-			fseek( $this->fileHandle, 0 );
-			$this->current = null;
+		$this->setPosition( 0 );
+	}
 
+	/**
+	 * Set the underlying file pointer to the given position (using fseek).
+	 * For use with getPosition().
+	 *
+	 * @param int $offset
+	 */
+	public function setPosition( $offset ) {
+		if ( $this->fileHandle ) {
+			fseek( $this->fileHandle, $offset );
+
+			$this->current = null;
 			$this->next();
+		}
+	}
+
+	/**
+	 * Get the position of the underlying file pointer (using ftell).
+	 * For use with setPosition().
+	 *
+	 * @return int|bool The position of the file pointer, or false upon error.
+	 */
+	public function getPosition() {
+		if ( $this->fileHandle ) {
+			return ftell( $this->fileHandle );
+		} else {
+			return false;
 		}
 	}
 }
