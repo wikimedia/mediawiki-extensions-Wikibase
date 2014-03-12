@@ -1,5 +1,10 @@
 # Wikibase DataModel release notes
 
+## Version 0.7.1 (2014-03-12)
+
+* Removed DataValues Geo, DataValues Time and DataValues Number from the dependency list.
+They where no longer needed.
+
 ## Version 0.7 (2014-03-07)
 
 #### Additions
