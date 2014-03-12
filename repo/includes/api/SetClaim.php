@@ -15,7 +15,7 @@ use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\EntityContent;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Summary;
@@ -48,12 +48,11 @@ class SetClaim extends ModifyClaim {
 		$guid = $this->claimGuidParser->parse( $guid );
 
 		$entityId = $guid->getEntityId();
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle ,$baseRevisionId );
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		$entity = $entityRevision->getEntity();
 
-		$entity = $entityContent->getEntity();
-		$summary = $this->getSummary( $params, $claim, $entityContent );
+		$summary = $this->getSummary( $params, $claim, $entity );
 
 		$changeop = new ChangeOpClaim(
 			$claim,
@@ -66,7 +65,7 @@ class SetClaim extends ModifyClaim {
 			$this->dieUsage( 'Failed to apply changeOp: ' . $exception->getMessage(), 'save-failed' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
+		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addClaim( $claim );
 	}
@@ -74,17 +73,17 @@ class SetClaim extends ModifyClaim {
 	/**
 	 * @param array $params
 	 * @param Claim $claim
-	 * @param EntityContent $entityContent
+	 * @param Entity $entity
 	 * @return Summary
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	protected function getSummary( array $params, Claim $claim, EntityContent $entityContent ){
+	protected function getSummary( array $params, Claim $claim, Entity $entity ){
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 		$summary = $claimSummaryBuilder->buildClaimSummary(
-			new Claims( $entityContent->getEntity()->getClaims() ),
+			new Claims( $entity->getClaims() ),
 			$claim
 		);
 		if ( isset( $params['summary'] ) ) {

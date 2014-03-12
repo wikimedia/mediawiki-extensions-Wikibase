@@ -3,8 +3,12 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityFactory;
+use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\Term;
@@ -27,8 +31,31 @@ use Wikibase\Utils;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig < thiemo.maettig@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class SearchEntities extends ApiBase {
+	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $titleLookup;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	protected $idParser;
+
+	/**
+	 * @param ApiMain $main
+	 * @param string $name
+	 * @param string $prefix
+	 */
+	public function __construct( ApiMain $main, $name, $prefix = '' ) {
+		parent::__construct( $main, $name, $prefix );
+
+		//TODO: provide a mechanism to override the services
+		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+	}
 
 	/**
 	 * Get the entities corresponding to the provided language and term pair.
@@ -86,8 +113,6 @@ class SearchEntities extends ApiBase {
 	private function getSearchEntries( $params ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
 		// Gets exact matches. If there are not enough exact matches, it gets prefixed matches
 		// TODO: This is a work around for the broken code - it should be fixed
 		$limit = $params['limit'] + $params['continue'] + 1;
@@ -98,15 +123,16 @@ class SearchEntities extends ApiBase {
 		$ids = array();
 
 		// Gets exact match for the search term as an id if it can be found
-		$entityId = \Wikibase\EntityId::newFromPrefixedId( $params['search'] );
-		if ( $entityId ) {
-			$page = $entityContentFactory->getWikiPageForId( $entityId );
-			if ( $page->exists() ) {
-				$entityContent = $page->getContent();
-				if ( ( $entityContent instanceof \Wikibase\EntityContent ) && ( $entityContent->getEntity()->getType() === $params['type'] ) ) {
-					$ids[] = $entityId;
-				}
+		try {
+			$entityId = $this->idParser->parse( $params['search'] );
+
+			$title = $this->titleLookup->getTitleForId( $entityId );
+			if ( $title->exists() && $entityId->getEntityType() === $params['type'] ) {
+				$ids[] = $entityId;
 			}
+		} catch ( EntityIdParsingException $ex ) {
+			// never mind, doesn't look like an ID.
+			$entityId = null;
 		}
 
 		// If still space, then merge in exact matches
@@ -134,9 +160,11 @@ class SearchEntities extends ApiBase {
 		foreach ( $ids as $id ) {
 			// FIXME: Change this to the actual ID if the Term class stops returning integers.
 			$numericId = $id->getNumericId();
+			$title = $this->titleLookup->getTitleForId( $id );
+
 			$entries[ $numericId ] = array(
 				'id' => $id->getPrefixedId(),
-				'url' => $entityContentFactory->getTitleForId( $id )->getFullUrl()
+				'url' => $title->getFullUrl()
 			);
 		}
 

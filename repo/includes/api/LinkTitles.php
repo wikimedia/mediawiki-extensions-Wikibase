@@ -2,12 +2,13 @@
 
 namespace Wikibase\Api;
 
-use ApiBase, Status;
+use ApiBase;
+use Status;
 use SiteSQLStore;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\EntityContent;
-use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\Summary;
@@ -44,9 +45,14 @@ class LinkTitles extends ApiWikibase {
 
 	/**
 	 * @see  \Wikibase\Api\ApiWikiBase::getRequiredPermissions()
+	 *
+	 * @param Entity $entity
+	 * @param array $params
+	 *
+	 * @return array|\Status
 	 */
-	protected function getRequiredPermissions( EntityContent $entityContent, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entityContent, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 		$permissions[] = 'edit';
 		return $permissions;
 	}
@@ -78,24 +84,22 @@ class LinkTitles extends ApiWikibase {
 
 		$return = array();
 		$flags = 0;
-		$itemContent = null;
+		$item = null;
 
 		$summary = new Summary( $this->getModuleName() );
 		$summary->addAutoSummaryArgs(
 			$fromSite->getGlobalId() . ':' . $fromPage,
 			$toSite->getGlobalId() . ':' . $toPage );
 
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
 		// Figure out which parts to use and what to create anew
 		if ( !$fromId && !$toId ) {
 			// create new item
-			$itemContent = ItemContent::newEmpty();
+			$item = Item::newEmpty();
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
-			$itemContent->getItem()->addSiteLink( $toLink );
+			$item->addSiteLink( $toLink );
 			$return[] = $toLink;
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
-			$itemContent->getItem()->addSiteLink( $fromLink );
+			$item->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 
 			$flags |= EDIT_NEW;
@@ -103,19 +107,19 @@ class LinkTitles extends ApiWikibase {
 		}
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
-			/** @var ItemContent $itemContent */
-			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $toId ) );
+			/** @var Item $item */
+			$item = $this->entityLookup->getEntity( ItemId::newFromNumber( $toId ) );
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
-			$itemContent->getItem()->addSiteLink( $fromLink );
+			$item->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 			$summary->setAction( 'connect' );
 		}
 		elseif ( $fromId && !$toId ) {
 			// reuse from-site's item
-			/** @var ItemContent $itemContent */
-			$itemContent = $entityContentFactory->getFromId( ItemId::newFromNumber( $fromId ) );
+			/** @var Item $item */
+			$item =$this->entityLookup->getEntity( ItemId::newFromNumber( $fromId ) );
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
-			$itemContent->getItem()->addSiteLink( $toLink );
+			$item->addSiteLink( $toLink );
 			$return[] = $toLink;
 			$summary->setAction( 'connect' );
 		}
@@ -131,8 +135,8 @@ class LinkTitles extends ApiWikibase {
 		}
 
 		$this->getResultBuilder()->addSiteLinks( $return, 'entity' );
-		$status = $this->getAttemptSaveStatus( $itemContent, $summary, $flags );
-		$this->buildResult( $itemContent, $status );
+		$status = $this->getAttemptSaveStatus( $item, $summary, $flags );
+		$this->buildResult( $item, $status );
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -150,29 +154,29 @@ class LinkTitles extends ApiWikibase {
 	}
 
 	/**
-	 * @param ItemContent $itemContent
+	 * @param Item|null $item
 	 * @param Summary $summary
 	 * @param int $flags
 	 * @return Status
 	 */
-	private function getAttemptSaveStatus( ItemContent $itemContent, Summary $summary, $flags ) {
-		if ( $itemContent === null ) {
-			// to not have an ItemContent isn't really bad at this point
+	private function getAttemptSaveStatus( Item $item = null, Summary $summary, $flags ) {
+		if ( $item === null ) {
+			// to not have an Item isn't really bad at this point
 			return Status::newGood( true );
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			return $this->attemptSaveEntity( $itemContent,
+			return $this->attemptSaveEntity( $item,
 				$summary,
 				$flags );
 		}
 	}
 
-	private function buildResult( ItemContent $itemContent, Status $status ) {
-		if ( $itemContent !== null ) {
+	private function buildResult( Item $item = null, Status $status ) {
+		if ( $item !== null ) {
 			$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity' );
 			//FIXME: breaking change, remove forced numeric ids!!!
-			$this->getResultBuilder()->addBasicEntityInformation( $itemContent->getItem()->getId(), 'entity', true );
+			$this->getResultBuilder()->addBasicEntityInformation( $item->getId(), 'entity', true );
 		}
 
 		$this->getResultBuilder()->markSuccess( $status->isOK() );

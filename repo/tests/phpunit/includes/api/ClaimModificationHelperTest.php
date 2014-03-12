@@ -26,14 +26,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 
-	public function testGetEntityTitle() {
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$entityId = $item->getId();
-
-		$claimModificationHelper = $this->getNewInstance();
-		$this->assertInstanceOf( '\Title', $claimModificationHelper->getEntityTitle( $entityId ) );
-	}
-
 	public function testValidGetEntityIdFromString() {
 		$validEntityIdString = 'q55';
 
