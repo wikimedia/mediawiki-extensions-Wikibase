@@ -4,18 +4,18 @@ namespace Wikibase\IO;
 
 use Disposable;
 use ExceptionHandler;
-use Iterator;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\EntityIdPager;
 
 /**
- * EntityIdReader reads entity IDs from a file, one per line.
+ * EntityPerPageIdPager reads entity IDs from a file, one per line.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class EntityIdReader implements Iterator, Disposable {
+class EntityIdReader implements EntityIdPager, Disposable {
 
 	/**
 	 * @var LineReader
@@ -28,33 +28,32 @@ class EntityIdReader implements Iterator, Disposable {
 	protected $exceptionHandler;
 
 	/**
-	 * @var EntityId|null
+	 * @var string|null
 	 */
-	protected $current = null;
+	protected $entityType;
 
 	/**
-	 * @param resource $fileHandle The file to read from.
-	 * @param bool $canClose Whether calling dispose() should close the fine handle.
-	 * @param bool $autoDispose Whether to automatically call dispose() when reaching EOF.
-	 *
-	 * @throws \InvalidArgumentException
+	 * @param LineReader $reader
+	 * @param EntityIdParser $parser
+	 * @param null|string $entityType The desired entity type, or null for any type.
 	 */
-	public function __construct( $fileHandle, $canClose = true, $autoDispose = false ) {
-		$this->reader = new LineReader( $fileHandle, $canClose, $autoDispose );
-		$this->parser = new BasicEntityIdParser(); //FIXME: inject!
+	public function __construct( LineReader $reader, EntityIdParser $parser, $entityType = null ) {
+		$this->reader = $reader;
+		$this->parser = $parser;
+		$this->entityType = $entityType;
 
 		$this->exceptionHandler = new \RethrowingExceptionHandler();
 	}
 
 	/**
-	 * @param \ExceptionHandler $exceptionHandler
+	 * @param ExceptionHandler $exceptionHandler
 	 */
 	public function setExceptionHandler( $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 
 	/**
-	 * @return \ExceptionHandler
+	 * @return ExceptionHandler
 	 */
 	public function getExceptionHandler() {
 		return $this->exceptionHandler;
@@ -85,69 +84,69 @@ class EntityIdReader implements Iterator, Disposable {
 	}
 
 	/**
-	 * Returns the current ID, or, if that has been consumed, finds the next ID on
-	 * the input stream and return it.
+	 * Returns the next ID (or null if there are no more ids).
 	 *
 	 * @return EntityId|null
 	 */
-	protected function fill() {
-		while ( $this->current === null && $this->reader->valid() ) {
-			$line = trim( $this->reader->current() );
+	protected function next() {
+		$id = null;
+
+		while ( $id === null ) {
 			$this->reader->next();
+
+			if ( !$this->reader->valid() ) {
+				break;
+			}
+
+			$line = trim( $this->reader->current() );
 
 			if ( $line === '' ) {
 				continue;
 			}
 
-			$this->current = $this->lineToId( $line );
+			$id = $this->lineToId( $line );
+
+			if ( !$id ) {
+				continue;
+			}
+
+			if ( $this->entityType !== null && $id->getEntityType() !== $this->entityType ) {
+				$id = null;
+				continue;
+			}
 		};
 
-		return $this->current;
-	}
-
-	/**
-	 * Returns the current ID.
-	 *
-	 * @link http://php.net/manual/en/iterator.current.php
-	 * @return EntityId
-	 */
-	public function current() {
-		$id = $this->fill();
 		return $id;
 	}
 
 	/**
-	 * Advance to next ID. Blank lines are skipped.
+	 * Fetches the next batch of IDs. Calling this has the side effect of advancing the
+	 * internal state of the page, typically implemented by some underlying resource
+	 * such as a file pointer or a database connection.
 	 *
-	 * @see LineReader::next()
+	 * @note: After some finite number of calls, this method should eventually return
+	 * an empty list of IDs, indicating that no more IDs are available.
+	 *
+	 * @since 0.5
+	 *
+	 * @param int $limit The maximum number of IDs to return.
+	 *
+	 * @return EntityId[] A list of EntityIds matching the given parameters. Will
+	 * be empty if there are no more entities to list from the given offset.
 	 */
-	public function next() {
-		$this->current = null; // consume current
-		$this->fill();
-	}
+	public function fetchIds( $limit ) {
+		$ids = array();
+		while ( $limit > 0 ) {
+			$id = $this->next();
 
-	/**
-	 * @see LineReader::key()
-	 * @return int
-	 */
-	public function key() {
-		return $this->reader->key();
-	}
+			if ( $id === null ) {
+				break;
+			}
 
-	/**
-	 * @see LineReader::valid()
-	 * @return boolean
-	 */
-	public function valid() {
-		return $this->fill() !== null;
-	}
+			$ids[] = $id;
+			$limit--;
+		}
 
-	/**
-	 * @see LineReader::rewind()
-	 */
-	public function rewind() {
-		$this->current = null;
-		$this->reader->rewind();
+		return $ids;
 	}
-
 }
