@@ -31,11 +31,9 @@ class SetClaimValue extends ModifyClaim {
 
 		$claimGuid = $params['claim'];
 		$entityId = $this->claimGuidParser->parse( $claimGuid )->getEntityId();
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
-		$entity = $entityContent->getEntity();
-
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		$entity = $entityRevision->getEntity();
 
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
@@ -56,7 +54,7 @@ class SetClaimValue extends ModifyClaim {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
+		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addClaim( $claim );
 
