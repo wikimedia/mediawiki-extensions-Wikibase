@@ -16,6 +16,24 @@
       "revId": "53a1fd035ebd4e37e05fab9da26a2b0151b7b741",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_9ac35c0a",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-12T12:21:44Z",
+      "side": 1,
+      "message": "No, we do not want any spaces. On live, I just ran:\n\nnew globeCoordinate.Formatter().format( new globeCoordinate.GlobeCoordinate({latitude: 50.16, longitude: 3.2}) )\n\nand it returned\n\n\"50°9\u002736\"N, 3°12\u00270\"E\"\n\nThat\u0027s also what you get when you use the globecoord expert on live.",
+      "parentUuid": "4e04eb01_d8b283f8",
+      "revId": "53a1fd035ebd4e37e05fab9da26a2b0151b7b741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
