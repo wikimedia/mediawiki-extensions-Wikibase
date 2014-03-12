@@ -4,10 +4,10 @@ namespace Wikibase\IO;
 
 use Disposable;
 use ExceptionHandler;
-use Iterator;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\EntityIdPager;
 
 /**
  * EntityIdReader reads entity IDs from a file, one per line.
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class EntityIdReader implements Iterator, Disposable {
+class EntityIdReader implements EntityIdPager, Disposable {
 
 	/**
 	 * @var LineReader
@@ -33,15 +33,12 @@ class EntityIdReader implements Iterator, Disposable {
 	protected $current = null;
 
 	/**
-	 * @param resource $fileHandle The file to read from.
-	 * @param bool $canClose Whether calling dispose() should close the fine handle.
-	 * @param bool $autoDispose Whether to automatically call dispose() when reaching EOF.
-	 *
-	 * @throws \InvalidArgumentException
+	 * @param LineReader $reader
+	 * @param \Wikibase\DataModel\Entity\EntityIdParser $parser
 	 */
-	public function __construct( $fileHandle, $canClose = true, $autoDispose = false ) {
-		$this->reader = new LineReader( $fileHandle, $canClose, $autoDispose );
-		$this->parser = new BasicEntityIdParser(); //FIXME: inject!
+	public function __construct( LineReader $reader, EntityIdParser $parser ) {
+		$this->reader = $reader;
+		$this->parser = $parser;
 
 		$this->exceptionHandler = new \RethrowingExceptionHandler();
 	}
@@ -85,13 +82,13 @@ class EntityIdReader implements Iterator, Disposable {
 	}
 
 	/**
-	 * Returns the current ID, or, if that has been consumed, finds the next ID on
-	 * the input stream and return it.
+	 * Returns the next ID (or null if there are no more ids).
 	 *
 	 * @return EntityId|null
 	 */
-	protected function fill() {
-		while ( $this->current === null && $this->reader->valid() ) {
+	protected function next() {
+		$id = null;
+		while ( $id === null && $this->reader->valid() ) {
 			$line = trim( $this->reader->current() );
 			$this->reader->next();
 
@@ -99,55 +96,55 @@ class EntityIdReader implements Iterator, Disposable {
 				continue;
 			}
 
-			$this->current = $this->lineToId( $line );
+			$id = $this->lineToId( $line );
 		};
 
-		return $this->current;
-	}
-
-	/**
-	 * Returns the current ID.
-	 *
-	 * @link http://php.net/manual/en/iterator.current.php
-	 * @return EntityId
-	 */
-	public function current() {
-		$id = $this->fill();
 		return $id;
 	}
 
 	/**
-	 * Advance to next ID. Blank lines are skipped.
+	 * Lists the IDs of entities of the given type.
 	 *
-	 * @see LineReader::next()
+	 * This supports paging via the $offset parameter: to get the next batch of IDs,
+	 * call listEntities() again with the $offset provided by the previous call
+	 * to listEntities().
+	 *
+	 * @since 0.5
+	 *
+	 * @param string|null $entityType The type of entity to return, or null for any type.
+	 * @param int $limit The maximum number of IDs to return.
+	 * @param mixed &$offset A position marker representing the position to start listing from;
+	 * Will be updated to represent the position for the next batch of IDs.
+	 * Callers should make no assumptions about the type or content of $offset.
+	 * Use null (the default) to start with the first ID.
+	 *
+	 * @return \Wikibase\EntityId[] A list of EntityIds matching the given parameters. Will
+	 * be empty if there are no more entities to list from the given offset.
 	 */
-	public function next() {
-		$this->current = null; // consume current
-		$this->fill();
-	}
+	public function listEntities( $entityType, $limit, &$offset = null ) {
+		if ( $offset === null ) {
+			$offset = $this->reader->getPosition();
+		}
 
-	/**
-	 * @see LineReader::key()
-	 * @return int
-	 */
-	public function key() {
-		return $this->reader->key();
-	}
+		$this->reader->setPosition( $offset );
 
-	/**
-	 * @see LineReader::valid()
-	 * @return boolean
-	 */
-	public function valid() {
-		return $this->fill() !== null;
-	}
+		$ids = array();
+		while ( $limit > 0 ) {
+			$id = $this->next();
 
-	/**
-	 * @see LineReader::rewind()
-	 */
-	public function rewind() {
-		$this->current = null;
-		$this->reader->rewind();
-	}
+			if ( $id === null ) {
+				break;
+			}
 
+			if ( $entityType !== null && $id->getEntityType() !== $entityType ) {
+				continue;
+			}
+
+			$ids[] = $id;
+			$limit--;
+		}
+
+		$offset = $this->reader->getPosition();
+		return $ids;
+	}
 }
