@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e10333d_da60c5ce",
+        "filename": "client/maintenance/populateInterwiki.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-13T15:19:18Z",
+      "side": 1,
+      "message": "This is adding stuff. Not in the change summary.\n\nAdded more to the patch set than intended?",
+      "revId": "57a7b11133cc152c8eb505a2a0db5d2f164f9a02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
