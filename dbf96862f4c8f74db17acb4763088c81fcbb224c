@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e10333d_baa87175",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-13T15:46:50Z",
+      "side": 1,
+      "message": "looks like typo... otherProjectsLinks",
+      "revId": "dbf96862f4c8f74db17acb4763088c81fcbb224c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e10333d_5a903546",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-13T15:46:50Z",
+      "side": 1,
+      "message": "Sites and the singleton are deprecated.\n\ninstead we can do SiteSQLStore::newInstance()",
+      "revId": "dbf96862f4c8f74db17acb4763088c81fcbb224c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e10333d_7ad9b92b",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-13T15:46:50Z",
+      "side": 1,
+      "message": "typo: otherProjectsLinks",
+      "revId": "dbf96862f4c8f74db17acb4763088c81fcbb224c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_89176156",
         "filename": "client/includes/OtherProjectsSidebarGenerator.php",
         "patchSetId": 2
