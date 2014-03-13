@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_963d708d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T13:12:56Z",
+      "side": 1,
+      "message": "this shouldn\u0027t be done if the title doesn\u0027t exist... we don\u0027t want an empty langlinks section on non existing pages..",
+      "revId": "eef82ab84b192c4efde671918cfada83d78e7bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_9680d04c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T13:12:56Z",
+      "side": 1,
+      "message": "shouldn\u0027t this append rather than overwrite?",
+      "revId": "eef82ab84b192c4efde671918cfada83d78e7bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_5647e822",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T13:12:56Z",
+      "side": 1,
+      "message": "I guess we need b/c over here (support both ids)",
+      "revId": "eef82ab84b192c4efde671918cfada83d78e7bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
