@@ -14,8 +14,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\PropertyContent;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * @covers Wikibase\Api\SetClaimValue
@@ -53,16 +53,15 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @return Entity
 	 */
 	protected function addClaimsAndSave( Entity $entity, EntityId $propertyId ) {
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
-		$content->save( '', null, EDIT_NEW );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$claim = $entity->newClaim( new \Wikibase\PropertyValueSnak( $propertyId, new \DataValues\StringValue( 'o_O' ) ) );
 		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
 		$entity->addClaim( $claim );
 
-		$content->save( '' );
-
-		return $content->getEntity();
+		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		return $entity;
 	}
 
 	/**
@@ -86,9 +85,9 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$argLists = array();
 
 		$property = Property::newFromType( 'commonsMedia' );
-		$content = new PropertyContent( $property );
-		$content->save( '', null, EDIT_NEW );
-		$property = $content->getEntity();
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		foreach( $this->getEntities( $property->getId() ) as $entity ) {
 			/**
@@ -106,9 +105,9 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	public function doTestValidRequest( Entity $entity, $claimGuid, $value, $summary ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$content = $entityContentFactory->getFromId( $entity->getId() );
-		$claimCount = count( $content->getEntity()->getClaims() );
+		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
+		$claimCount = count( $obtainedEntity->getClaims() );
 
 		$params = array(
 			'action' => 'wbsetclaimvalue',
@@ -127,10 +126,10 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( $value, $claim['mainsnak']['datavalue']['value'] );
 
-		$content = $entityContentFactory->getFromId( $entity->getId() );
-		$obtainedEntity = $content->getEntity();
-		$generatedSummary = $content->getWikiPage()->getRevision()->getComment( Revision::RAW );
+		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
 
+		$page = new WikiPage( WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $entity->getId() ) );
+		$generatedSummary = $page->getRevision()->getComment( Revision::RAW );
 		$this->assertEquals( $summary, $generatedSummary, 'Summary mismatch' );
 
 		$claims = new \Wikibase\Claims( $obtainedEntity->getClaims() );
@@ -195,7 +194,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		if ( !$this->entityIdFormatter ) {
 			$options = new FormatterOptions();
 
-			$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+			$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 			$this->entityIdFormatter = new EntityIdLinkFormatter( $options, $titleLookup );
 		}
 

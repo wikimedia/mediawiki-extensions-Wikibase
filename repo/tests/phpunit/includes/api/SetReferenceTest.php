@@ -5,16 +5,16 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\PropertyContent;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\SetReference
@@ -42,14 +42,15 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		self::$propertyIds = array();
 
 		for ( $i = 0; $i < 4; $i++ ) {
-			$propertyContent = PropertyContent::newEmpty();
-			$propertyContent->getProperty()->setDataTypeId( 'string' );
-			$propertyContent->save( 'testing', null, EDIT_NEW );
+			$property = Property::newFromType( 'string' );
+			$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-			self::$propertyIds[] = $propertyContent->getProperty()->getId();
+			self::$propertyIds[] = $property->getId();
 		}
 	}
 
@@ -57,9 +58,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	// semi-blocked by cleanup of GUID handling in claims
 	// can perhaps tseal from RemoveReferencesTest
 	public function testRequests() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		$item = Item::newEmpty();
-		$content = new ItemContent( $item );
-		$content->save( '', null, EDIT_NEW );
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
 		$statement->setGuid( $item->getId()->getPrefixedId() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P' );
@@ -72,7 +74,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$item->addClaim( $statement );
 
-		$content->save( '' );
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		$referenceHash = $reference->getHash();
 
@@ -124,9 +126,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function testRequestWithInvalidProperty() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		$item = Item::newEmpty();
-		$content = new ItemContent( $item );
-		$content->save( '', null, EDIT_NEW );
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Create a statement to act upon:
 		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
@@ -136,7 +139,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$item->addClaim( $statement );
 
-		$content->save( '' );
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		$snak = new PropertySomeValueSnak( new PropertyId( 'P23728525' ) );
 		$reference = new Reference( new SnakList( array( $snak ) ) );
@@ -145,9 +148,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	public function testSettingIndex() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		$item = Item::newEmpty();
-		$content = new ItemContent( $item );
-		$content->save( '', null, EDIT_NEW );
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Create a statement to act upon:
 		$statement = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[0] ) );
@@ -168,7 +172,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$item->addClaim( $statement );
 
-		$content->save( '' );
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		$this->makeValidRequest(
 			$statement->getGuid(),

@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -25,22 +27,24 @@ class EditPageTest extends WikibaseApiTestCase {
 	 * @group API
 	 */
 	function testEditItemDirectly() {
-		$content = \Wikibase\ItemContent::newEmpty(); //@todo: do this with all kinds of entities.
-		$content->getItem()->setLabel( "en", "EditPageTest" );
-		$status = $content->save( "testing", null, EDIT_NEW );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$this->assertTrue( $status->isOK(), $status->getMessage() ); // sanity check
+		$item = Item::newEmpty(); //@todo: do this with all kinds of entities.
+		$item->setLabel( "en", "EditPageTest" );
+		$store->saveEntity( $item, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$content->getItem()->setLabel( "de", "EditPageTest" );
-		$data = $content->getItem()->toArray();
+		$item->setLabel( "de", "EditPageTest" );
+		$data = $item->toArray();
 		$text = json_encode( $data );
+
+		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $item->getId() );
 
 		// try to update the item with valid data via the edit action
 		$this->setExpectedException( 'UsageException' );
 		$this->doApiRequestWithToken(
 			array(
 				'action' => 'edit',
-				'pageid' => $content->getTitle()->getArticleID(),
+				'pageid' => $title->getArticleID(),
 				'text' => $text,
 			)
 		);
@@ -53,8 +57,9 @@ class EditPageTest extends WikibaseApiTestCase {
 	function testEditTextInItemNamespace() {
 		global $wgContentHandlerUseDB;
 
-		$id = new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 1234567 );
-		$page = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
+		$id = new ItemId( "Q1234567" );
+		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $id );
+		$page = new \WikiPage( $title );
 
 		$text = "hallo welt";
 

@@ -4,8 +4,9 @@ namespace Wikibase\Test\Api;
 
 use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\ItemContent;
-use Wikibase\PropertyContent;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\MergeItems
@@ -40,20 +41,20 @@ class MergeItemsTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if( !self::$hasSetup ){
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 			$this->initTestEntities( array( 'Empty', 'Empty2' ) );
 
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$status = $prop->save( 'mergeitemstest', null, EDIT_NEW );
+			$prop = Property::newEmpty();
+			$prop->setDataTypeId( 'string' );
+			$store->saveEntity( $prop, 'mergeitemstest', $GLOBALS['wgUser'], EDIT_NEW );
 
-			$this->assertTrue( $status->isOK(), $status->getWikiText() );
-			self::$thePropertyId = $prop->getEntity()->getId();
+			self::$thePropertyId = $prop->getId();
 
-			$item = ItemContent::newEmpty();
-			$status = $item->save( 'mergeitemstest', null, EDIT_NEW );
+			$item = Item::newEmpty();
+			$store->saveEntity( $item, 'mergeitemstest', $GLOBALS['wgUser'], EDIT_NEW );
 
-			$this->assertTrue( $status->isOK(), $status->getWikiText() );
-			self::$theItemId = $item->getEntity()->getId();
+			self::$theItemId = $item->getId();
 
 			self::$hasSetup = true;
 		}

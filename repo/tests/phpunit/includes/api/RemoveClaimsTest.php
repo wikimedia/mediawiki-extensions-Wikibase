@@ -9,7 +9,6 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\PropertyContent;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -41,8 +40,8 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @return Entity
 	 */
 	protected function addClaimsAndSave( Entity $entity ) {
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
-		$content->save( '', null, EDIT_NEW );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		if ( !isset( self::$propertyId ) ) {
 			self::$propertyId = $this->getNewProperty( 'string' )->getId();
@@ -62,9 +61,9 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			$entity->addClaim( $claim );
 		}
 
-		$content->save( '' );
+		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
-		return $content->getEntity();
+		return $entity;
 	}
 
 	public function entityProvider() {
@@ -98,8 +97,8 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		while ( $claim = array_shift( $claims ) ) {
 			$this->makeTheRequest( array( $claim->getGuid() ) );
 
-			$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-			$obtainedClaims = new Claims( $content->getEntity()->getClaims() );
+			$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
+			$obtainedClaims = new Claims( $entity->getClaims() );
 
 			$this->assertFalse( $obtainedClaims->hasClaimWithGuid( $claim->getGuid() ) );
 
@@ -126,8 +125,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 
 		$this->makeTheRequest( $guids );
 
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
-		$obtainedEntity = $content->getEntity();
+		$obtainedEntity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
 
 		$this->assertFalse( $obtainedEntity->hasClaims() );
 	}
@@ -177,10 +175,11 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 */
 	protected function getNewProperty( $type ) {
 		$property = Property::newFromType( $type );
-		$content = new PropertyContent( $property );
-		$content->save( '', null, EDIT_NEW );
 
-		return $content->getEntity();
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
+
+		return $property;
 	}
 
 }

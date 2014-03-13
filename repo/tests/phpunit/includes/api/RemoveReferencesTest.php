@@ -7,13 +7,13 @@ use UsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Api\RemoveReferences
@@ -76,14 +76,14 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 			$item = Item::newEmpty();
 
 			wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
-			$content = new ItemContent( $item );
-			$content->save( '', null, EDIT_NEW );
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 			$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 			$statement->setGuid( $guidGenerator->newGuid() );
 			$item->addClaim( $statement );
 
-			$content->save( '' );
+			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 			wfRestoreWarnings();
 
 			$references = $statement->getReferences();

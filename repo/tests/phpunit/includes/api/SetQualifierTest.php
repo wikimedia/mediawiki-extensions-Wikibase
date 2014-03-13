@@ -5,9 +5,7 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\ItemContent;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\PropertyContent;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Snak\Snak;
@@ -49,7 +47,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		static $snaks = array();
 
 		if ( !isset( $snaks[$type] ) ) {
-			$prop = PropertyContent::newEmpty();
+			$prop = Property::newEmpty();
 			$propertyId = $this->makeProperty( $prop, 'string' )->getId();
 
 			$snaks[$type] = new $type( $propertyId, $data );
@@ -62,16 +60,18 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	/**
 	 * Creates the given property in the database, if necessary.
 	 *
-	 * @param PropertyContent $content
+	 * @param Property $property
 	 * @param $type
 	 *
 	 * @return Property
 	 */
-	protected function makeProperty( PropertyContent $content, $type ) {
-		$content->getProperty()->setDataTypeId( $type );
-		$status = $content->save( 'testing', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK() );
-		return $content->getProperty();
+	protected function makeProperty( Property $property, $type ) {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$property->setDataTypeId( $type );
+
+		$store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		return $property;
 	}
 
 
@@ -79,12 +79,12 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		static $item = null;
 
 		if ( !$item ) {
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 			$item = Item::newEmpty();
+			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-			$content = new ItemContent( $item );
-			$content->save( '', null, EDIT_NEW );
-
-			$prop = PropertyContent::newEmpty();
+			$prop = Property::newEmpty();
 			$propId = $this->makeProperty( $prop, 'string' )->getId();
 			$claim = new Statement( new PropertyValueSnak( $propId, new StringValue( '^_^' ) ) );
 
@@ -92,7 +92,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$claim->setGuid( $guidGenerator->newGuid() );
 			$item->addClaim( $claim );
 
-			$content->save( '', null, EDIT_UPDATE );
+			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 		}
 
 		return $item;
@@ -164,11 +164,9 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		$this->makeValidRequest( $params );
 
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entityId );
+		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
-		$this->assertInstanceOf( '\Wikibase\EntityContent', $content );
-
-		$claims = new Claims( $content->getEntity()->getClaims() );
+		$claims = new Claims( $entity->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $params['claim'] ) );
 

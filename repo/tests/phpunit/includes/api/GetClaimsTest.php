@@ -44,8 +44,9 @@ class GetClaimsTest extends \ApiTestCase {
 	 */
 	protected function addClaimsAndSave( Entity $entity ) {
 		wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
-		$content->save( '', null, EDIT_NEW );
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		/** @var $claims Claim[] */
 		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( 42 ) );
@@ -58,10 +59,10 @@ class GetClaimsTest extends \ApiTestCase {
 			$entity->addClaim( $claim );
 		}
 
-		$content->save( '' );
+		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 		wfRestoreWarnings();
 
-		return $content->getEntity();
+		return $entity;
 	}
 
 	/**

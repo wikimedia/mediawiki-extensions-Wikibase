@@ -10,16 +10,15 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\PropertyContent;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -52,14 +51,17 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	private function getPropertyIds() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		$propertyIds = array();
 
 		for( $i = 0; $i < 4; $i++ ) {
-			$propertyContent = PropertyContent::newEmpty();
-			$propertyContent->getProperty()->setDataTypeId( 'string' );
-			$propertyContent->save( 'testing', null, EDIT_NEW );
+			$property = Property::newEmpty();
+			$property->setDataTypeId( 'string' );
 
-			$propertyIds[] = $propertyContent->getProperty()->getId();
+			$store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+
+			$propertyIds[] = $property->getId();
 		}
 
 		return $propertyIds;
@@ -117,14 +119,15 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testAddClaim() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		$claims = $this->getClaims();
 
 		/** @var Claim[] $claims */
 		foreach( $claims as $claim ) {
 			$item = Item::newEmpty();
-			$content = new ItemContent( $item );
-			$content->save( 'setclaimtest', null, EDIT_NEW );
-			$itemId = $content->getItem()->getId();
+			$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+			$itemId = $item->getId();
 
 			$guidGenerator = new ClaimGuidGenerator( $itemId );
 			$guid = $guidGenerator->newGuid();
@@ -156,15 +159,16 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function testSetClaimAtIndex() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		// Generate an item with some claims:
 		$item = Item::newEmpty();
 		$claims = new Claims();
 
 		// Initialize item content with empty claims:
 		$item->setClaims( $claims );
-		$content = new ItemContent( $item );
-		$content->save( 'setclaimtest', null, EDIT_NEW );
-		$itemId = $content->getItem()->getId();
+		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$itemId = $item->getId();
 
 		$guidGenerator = new ClaimGuidGenerator( $itemId );
 
@@ -176,8 +180,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		// Add preexisting claims:
 		$item->setClaims( $claims );
-		$content = new ItemContent( $item );
-		$content->save( 'setclaimtest', null, EDIT_UPDATE );
+		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		// Add new claim at index 2:
 		$guid = $guidGenerator->newGuid();
@@ -231,10 +234,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$this->makeValidRequest( $params );
 
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entityId );
-		$this->assertInstanceOf( '\Wikibase\EntityContent', $content );
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
-		$claims = new Claims( $content->getEntity()->getClaims() );
+		$claims = new Claims( $item->getClaims() );
 		$this->assertTrue( $claims->hasClaim( $claim ), "Claims list does not have claim after {$requestLabel}" );
 
 		$savedClaim = $claims->getClaimWithGuid( $claim->getGuid() );
@@ -265,15 +267,16 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @note A hack is  in place in ChangeOpClaim to allow this
 	 */
 	public function testBug58394SpecifiedIndexOutOfBounds() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		// Initialize item content with empty claims:
 		$item = Item::newEmpty();
 		$claims = new Claims();
 		$item->setClaims( $claims );
-		$content = new ItemContent( $item );
-		$content->save( 'setclaimtest', null, EDIT_NEW );
+		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
 
 		// Generate a single claim:
-		$itemId = $content->getItem()->getId();
+		$itemId = $item->getId();
 		$guidGenerator = new ClaimGuidGenerator( $itemId );
 		$preexistingClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[1] ) );
 		$preexistingClaim->setGuid( $guidGenerator->newGuid() );
@@ -281,18 +284,12 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		// Save the single claim
 		$item->setClaims( $claims );
-		$content = new ItemContent( $item );
-		$status = $content->save( 'setclaimtest', null, EDIT_UPDATE );
-
-		// Get the baserevid
-		$statusValue = $status->getValue();
-		/** @var Revision $revision */
-		$revision = $statusValue['revision'];
+		$revision = $store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
 
 		// Add new claim at index 3 using the baserevid and a different property id
 		$newClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[2] ) );
 		$newClaim->setGuid( $guidGenerator->newGuid() );
-		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getId() );
+		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getRevision() );
 	}
 
 }
