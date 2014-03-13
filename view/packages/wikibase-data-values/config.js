@@ -1,18 +1,11 @@
 /**
- * require.js configuration
- * In addition to the test files, the configuration has to feature the source JavaScript files as
- * well in order to be able to specify dependencies.
- * (If, at some point, require.js is used for source files as well, this configuration file should
- * be moved up in the directory hierarchy.)
+ * RequireJS configuration
+ * Basic RequireJS configuration object expanded with the list of test modules.
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-
-/* global tests */
-this.tests = this.tests || {};
-
-tests.config = ( function() {
+this.config = ( function() {
 	'use strict';
 
 	return {
@@ -231,53 +224,48 @@ tests.config = ( function() {
 				'jquery',
 				'qunit'
 			]
-		}
+		},
+		tests: [
+			'tests/lib/util/util.inherit.tests',
+			'tests/lib/globeCoordinate/globeCoordinate.tests',
+			'tests/lib/globeCoordinate/globeCoordinate.Formatter.tests',
+			'tests/lib/globeCoordinate/globeCoordinate.GlobeCoordinate.tests',
+
+			'tests/lib/time/time.Parser.tests',
+			'tests/lib/time/time.Time.knowsPrecision.tests',
+			'tests/lib/time/time.Time.maxPrecision.tests',
+			'tests/lib/time/time.Time.minPrecision.tests',
+			'tests/lib/time/time.Time.newFromIso8601.tests',
+			'tests/lib/time/time.Time.tests',
+			'tests/lib/time/time.Time.validate.tests',
+
+			'tests/src/dataValues.tests',
+
+			'tests/src/values/BoolValue.tests',
+			'tests/src/values/DecimalValue.tests',
+			'tests/src/values/GlobeCoordinateValue.tests',
+			'tests/src/values/MonolingualTextValue.tests',
+			'tests/src/values/MultilingualTextValue.tests',
+			'tests/src/values/StringValue.tests',
+			'tests/src/values/NumberValue.tests',
+			'tests/src/values/TimeValue.tests',
+			'tests/src/values/QuantityValue.tests',
+			'tests/src/values/UnknownValue.tests',
+			'tests/src/values/UnUnserializableValue.tests',
+
+			'tests/src/valueFormatters/valueFormatters.tests',
+			'tests/src/valueFormatters/ValueFormatterFactory.tests',
+
+			'tests/src/valueFormatters/formatters/NullFormatter.tests',
+			'tests/src/valueFormatters/formatters/StringFormatter.tests',
+
+			'tests/src/valueParsers/valueParsers.tests',
+			'tests/src/valueParsers/ValueParserFactory.tests',
+
+			'tests/src/valueParsers/parsers/NullParser.tests',
+			'tests/src/valueParsers/parsers/StringParser.tests',
+			'tests/src/valueParsers/parsers/TimeParser.tests'
+		]
 	};
 
 } )();
-
-/**
- * Array of all QUnit test modules.
- * @type {string[]}
- */
-tests.modules = [
-	'tests/lib/util/util.inherit.tests',
-	'tests/lib/globeCoordinate/globeCoordinate.tests',
-	'tests/lib/globeCoordinate/globeCoordinate.Formatter.tests',
-	'tests/lib/globeCoordinate/globeCoordinate.GlobeCoordinate.tests',
-
-	'tests/lib/time/time.Parser.tests',
-	'tests/lib/time/time.Time.knowsPrecision.tests',
-	'tests/lib/time/time.Time.maxPrecision.tests',
-	'tests/lib/time/time.Time.minPrecision.tests',
-	'tests/lib/time/time.Time.newFromIso8601.tests',
-	'tests/lib/time/time.Time.tests',
-	'tests/lib/time/time.Time.validate.tests',
-
-	'tests/src/dataValues.tests',
-
-	'tests/src/values/BoolValue.tests',
-	'tests/src/values/DecimalValue.tests',
-	'tests/src/values/GlobeCoordinateValue.tests',
-	'tests/src/values/MonolingualTextValue.tests',
-	'tests/src/values/MultilingualTextValue.tests',
-	'tests/src/values/StringValue.tests',
-	'tests/src/values/NumberValue.tests',
-	'tests/src/values/TimeValue.tests',
-	'tests/src/values/QuantityValue.tests',
-	'tests/src/values/UnknownValue.tests',
-	'tests/src/values/UnUnserializableValue.tests',
-
-	'tests/src/valueFormatters/valueFormatters.tests',
-	'tests/src/valueFormatters/ValueFormatterFactory.tests',
-
-	'tests/src/valueFormatters/formatters/NullFormatter.tests',
-	'tests/src/valueFormatters/formatters/StringFormatter.tests',
-
-	'tests/src/valueParsers/valueParsers.tests',
-	'tests/src/valueParsers/ValueParserFactory.tests',
-
-	'tests/src/valueParsers/parsers/NullParser.tests',
-	'tests/src/valueParsers/parsers/StringParser.tests',
-	'tests/src/valueParsers/parsers/TimeParser.tests'
-];

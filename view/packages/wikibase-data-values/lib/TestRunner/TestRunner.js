@@ -1,18 +1,21 @@
 /**
- * Test runner for QUnit tests powered by requireJS.
+ * Test runner for QUnit tests powered by RequireJS.
  * The test runner may be instantiated and started on a plain HTML page. After starting the test
  * runner, an iframe for every test module is created and attached to the DOM one after another as
  * soon as the tests of the currently run test module have finished. The iframe loads the HTML
  * testRunner specified in the config parameters. This concept ensures loading only the dependencies
  * specified for the particular tests.
  *
- * @option {string[]} queue Set of test modules to run as defined via requireJS.
- * @option {string} testRunner The path to the testRunner HTML file that executes QUnit tests.
+ * @option {string[]} queue
+ *         Set of test modules to run as defined via requireJS.
+ *
+ * @option {string} [testRunner]
+ *         The path to the testRunner HTML file that executes QUnit tests.
+ *         Default: location.path
  *
  * Example:
- * testRunner = new tests.TestRunner( {
- *   queue: tests.modules,
- *   testRunner: './testRunner.html'
+ * testRunner = new TestRunner( {
+ *   queue: tests.modules
  * } );
  * testRunner.start();
  *
@@ -20,10 +23,8 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-/* global tests, console */
-this.tests = this.tests || {};
-
-tests.TestRunner = ( function( console ) {
+/* global console */
+this.TestRunner = ( function( console ) {
 	'use strict';
 
 	/**
@@ -37,11 +38,10 @@ tests.TestRunner = ( function( console ) {
 	var TestRunner = function( options ) {
 		if( !options.queue ) {
 			throw new Error( 'No tests specified' );
-		} else if( !options.testRunner ) {
-			throw new Error( 'No HTML test runner specified' );
 		}
 
-		this._options = options;
+		this._options = options || {};
+		this._options.testRunner = this._options.testRunner || location.pathname;
 		this._interval = null;
 		this._iFrames = [];
 	};
