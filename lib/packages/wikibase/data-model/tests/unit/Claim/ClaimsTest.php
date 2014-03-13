@@ -662,7 +662,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$s3->setRank( Claim::RANK_PREFERRED );
 
 		return array(
-			// Emtpy yields empty
+			// Empty yields empty
 			array(
 				new Claims(),
 				Claim::RANK_NORMAL,
@@ -692,7 +692,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetByRank
 	 */
-	public function testGetByRank( $input, $rank, $expected ) {
+	public function testGetByRank( Claims $input, $rank, $expected ) {
 		$this->assertEquals( $input->getByRank( $rank ), $expected );
 	}
 
@@ -728,10 +728,11 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetByRanks
 	 */
-	public function testGetByRanks( $input, $ranks, $expected ) {
+	public function testGetByRanks( Claims $input, $ranks, $expected ) {
 		if ( !is_array( $ranks ) ) {
 			$ranks = array( $ranks );
 		}
+
 		$this->assertEquals( $input->getByRanks( $ranks ), $expected );
 	}
 
