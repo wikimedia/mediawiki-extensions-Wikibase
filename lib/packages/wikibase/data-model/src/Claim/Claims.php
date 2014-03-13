@@ -500,6 +500,25 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	}
 
 	/**
+	 * Returns a new instance only containing the claims with the given ranks.
+	 *
+	 * @since 0.8
+	 *
+	 * @param array $acceptableRanks
+	 *
+	 * @return Claims
+	 */
+	public function getByRanks( array $acceptableRanks ) {
+		$newClaims = new Claims();
+		foreach( $acceptableRanks as $rank ) {
+			foreach( $this->getByRank( $rank ) as $claim ) {
+				$newClaims->append( $claim );
+			}
+		}
+		return $newClaims;
+	}
+
+	/**
 	 * Returns a new instance only containing the best claims (these are the highest
 	 * ranked claims, but never deprecated ones).
 	 *
