@@ -1,8 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 0.7.2 (dev)
-
-#### Additions
+## Version 0.7.2 (2014-03-13)
 
 * Added Claims::getByRanks
 
