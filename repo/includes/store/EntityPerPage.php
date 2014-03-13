@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Iterator;
-use Title;
 
 /**
  * Interface to a table that join wiki pages and entities.

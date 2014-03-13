@@ -4,8 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\DataValueFactory;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Property;
-use Wikibase\PropertyContent;
 use Wikibase\PropertyValueSnak;
 use Wikibase\SnakFactory;
 

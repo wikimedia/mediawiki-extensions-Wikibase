@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Specials\SpecialWikibasePage;
 
 /**

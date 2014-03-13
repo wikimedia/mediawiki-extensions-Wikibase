@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use UserInputException;
-use Wikibase\EditEntity;
 use Wikibase\Summary;
 
 /**

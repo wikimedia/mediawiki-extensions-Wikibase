@@ -134,7 +134,7 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidRenderForEntityIdProvider
-	 * @expectedException Wikibase\Lib\PropertyLabelNotResolvedException
+	 * @expectedException \Wikibase\Lib\PropertyLabelNotResolvedException
 	 */
 	public function testInvalidRenderForEntityId( $name, $message ) {
 		$parserFunction = $this->getDefaultInstance();

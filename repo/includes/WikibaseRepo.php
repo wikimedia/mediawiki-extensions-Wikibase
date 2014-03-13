@@ -15,7 +15,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\store\EntityStore;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;

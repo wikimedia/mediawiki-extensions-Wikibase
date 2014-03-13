@@ -5,7 +5,6 @@ namespace Wikibase;
 use Content;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
-use Diff\ListDiffer;
 use DifferenceEngine;
 use Html;
 use Linker;
