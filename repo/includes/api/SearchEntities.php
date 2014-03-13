@@ -36,15 +36,15 @@ class SearchEntities extends ApiBase {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $language
 	 * @param string $term
 	 * @param string|null $entityType
+	 * @param string $language
 	 * @param int $limit
 	 * @param bool $prefixSearch
 	 *
 	 * @return EntityId[]
 	 */
-	protected function searchEntities( $language, $term, $entityType, $limit, $prefixSearch  ) {
+	protected function searchEntities( $term, $entityType, $language, $limit, $prefixSearch ) {
 		wfProfileIn( __METHOD__ );
 
 		$ids = StoreFactory::getStore()->getTermIndex()->getMatchingIDs(
@@ -81,51 +81,106 @@ class SearchEntities extends ApiBase {
 	 * @since 0.4
 	 *
 	 * @param array $params
+	 *
 	 * @return array[]
 	 */
-	private function getSearchEntries( $params ) {
+	private function getSearchEntries( array $params ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$ids = array();
+		$required = $params['continue'] + $params['limit'] + 1;
 
-		// Gets exact matches. If there are not enough exact matches, it gets prefixed matches
-		// TODO: This is a work around for the broken code - it should be fixed
-		$limit = $params['limit'] + $params['continue'] + 1;
+		$entityId = $this->getExactMatchForEntityId( $params['search'], $params['type'] );
+		if ( $entityId !== null ) {
+			$ids[] = $entityId;
+		}
 
+		$missing = $required - count( $ids );
+		$ids = array_merge( $ids, $this->getRankedMatches( $params['search'], $params['type'],
+			$params['language'], $missing ) );
+		$ids = array_unique( $ids );
+
+		$entries = $this->getEntries( $ids, $params['search'], $params['type'],
+			$params['language'] );
+
+		wfProfileOut( __METHOD__ );
+		return $entries;
+	}
+
+	/**
+	 * Gets exact match for the search term as an EntityId if it can be found.
+	 *
+	 * @param string $term
+	 * @param string $entityType
+	 *
+	 * @return EntityId|null
+	 */
+	private function getExactMatchForEntityId( $term, $entityType ) {
+		// FIXME: Use an EntityIdParser
+		$entityId = \Wikibase\EntityId::newFromPrefixedId( $term );
+		if ( $entityId !== null ) {
+			$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+			$page = $entityContentFactory->getWikiPageForId( $entityId );
+			if ( $page->exists() ) {
+				$content = $page->getContent();
+				if ( $content instanceof \Wikibase\EntityContent &&
+					( $entityType === null || $entityType === $content->getEntity()->getType() ) ) {
+					return $entityId;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Gets exact matches. If there are not enough exact matches, it gets prefixed matches.
+	 *
+	 * @param string $term
+	 * @param string|null $entityType
+	 * @param string $language
+	 * @param int $limit
+	 *
+	 * @return EntityId[]
+	 */
+	private function getRankedMatches( $term, $entityType, $language, $limit ) {
 		/**
 		 * @var EntityId[] $ids
 		 */
 		$ids = array();
 
-		// Gets exact match for the search term as an id if it can be found
-		$entityId = \Wikibase\EntityId::newFromPrefixedId( $params['search'] );
-		if ( $entityId ) {
-			$page = $entityContentFactory->getWikiPageForId( $entityId );
-			if ( $page->exists() ) {
-				$entityContent = $page->getContent();
-				if ( ( $entityContent instanceof \Wikibase\EntityContent ) && ( $entityContent->getEntity()->getType() === $params['type'] ) ) {
-					$ids[] = $entityId;
-				}
-			}
-		}
-
 		// If still space, then merge in exact matches
-		$space = $limit - count( $ids );
-		if ( $space > 0 ) {
-			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $space, false ) );
+		$missing = $limit - count( $ids );
+		if ( $missing > 0 ) {
+			$ids = array_merge( $ids, $this->searchEntities( $term, $entityType, $language,
+				$missing, false ) );
 			$ids = array_unique( $ids );
 		}
 
 		// If still space, then merge in prefix matches
-		$space = $limit - count( $ids );
-		if ( $space > 0 ) {
-			$ids = array_merge( $ids, $this->searchEntities( $params['language'], $params['search'], $params['type'], $space, true ) );
+		$missing = $limit - count( $ids );
+		if ( $missing > 0 ) {
+			$ids = array_merge( $ids, $this->searchEntities( $term, $entityType, $language,
+				$missing, true ) );
 			$ids = array_unique( $ids );
 		}
 
-		// reduce any overflow
+		// Reduce overflow, if any
 		$ids = array_slice( $ids, 0, $limit );
 
+		return $ids;
+	}
+
+	/**
+	 * @param EntityId[] $ids
+	 * @param string $search
+	 * @param string $entityType
+	 * @param string|null $language language code
+	 *
+	 * @return array[]
+	 */
+	private function getEntries( array $ids, $search, $entityType, $language ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		/**
 		 * @var array[] $entries
 		 */
@@ -141,9 +196,10 @@ class SearchEntities extends ApiBase {
 		}
 
 		// Find all the remaining terms for the given entities
-		$terms = StoreFactory::getStore()->getTermIndex()->getTermsOfEntities( $ids, $params['type'], $params['language'] );
+		$terms = StoreFactory::getStore()->getTermIndex()->getTermsOfEntities( $ids, $entityType,
+			$language );
 		// TODO: This needs to be rethought when a different search engine is used
-		$aliasPattern = '/^' . preg_quote( $params['search'], '/' ) . '/i';
+		$aliasPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 
 		foreach ( $terms as $term ) {
 			// FIXME: Change this to the actual ID if the Term class stops returning integers.
@@ -178,13 +234,12 @@ class SearchEntities extends ApiBase {
 
 		$entries = array_values( $entries );
 
-		wfProfileOut( __METHOD__ );
 		return $entries;
 	}
 
 	/**
 	 * @see ApiBase::execute()
-	*/
+	 */
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
