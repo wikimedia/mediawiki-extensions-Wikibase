@@ -4,7 +4,6 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use Language;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\Localizer;
 
 /**

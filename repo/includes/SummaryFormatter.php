@@ -7,7 +7,6 @@ use Exception;
 use InvalidArgumentException;
 use Language;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;

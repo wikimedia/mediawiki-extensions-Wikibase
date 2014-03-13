@@ -8,7 +8,6 @@ use Language;
 use IContextSource;
 use OutputPage;
 use FormatJson;
-use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;

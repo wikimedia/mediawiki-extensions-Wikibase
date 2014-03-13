@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use DataValues\DataValue;
 use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;

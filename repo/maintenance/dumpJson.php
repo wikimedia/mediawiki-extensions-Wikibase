@@ -7,7 +7,6 @@ use ExceptionHandler;
 use Iterator;
 use Maintenance;
 use Traversable;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\IO\EntityIdReader;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Test;
 
 use Language;
-use ValueParsers\ValueParser;
 use Wikibase\Lib\MediaWikiNumberLocalizer;
 use Wikibase\Lib\MediaWikiNumberUnlocalizer;
 

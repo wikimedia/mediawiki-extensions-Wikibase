@@ -13,7 +13,6 @@ use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StoreFactory;
 use Wikibase\Summary;
 
 /**
