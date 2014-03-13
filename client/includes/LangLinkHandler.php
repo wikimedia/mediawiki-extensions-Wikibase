@@ -172,14 +172,13 @@ class LangLinkHandler {
 				return array();
 			}
 
-			$site = $this->getSiteByNavigationId( $code );
+			$siteList = $this->sites->getSites();
 
-			if ( $site === false ) {
-				continue;
+			if ( $siteList->hasNavigationId( $code ) ) {
+				$site = $siteList->getSiteByNavigationId( $code );
+				$wiki = $site->getGlobalId();
+				unset( $repoLinks[$wiki] );
 			}
-
-			$wiki = $site->getGlobalId();
-			unset( $repoLinks[$wiki] );
 		}
 
 		unset( $repoLinks[$this->siteId] ); // remove self-link
@@ -272,38 +271,6 @@ class LangLinkHandler {
 	}
 
 	/**
-	 * Returns a Site object for the given navigational ID (alias inter-language prefix).
-	 *
-	 * @since 0.4
-	 *
-	 * @todo: move this functionality into Sites/SiteList/SiteArray!
-	 *
-	 * @param string $id The navigation ID to find a site for.
-	 *
-	 * @return bool|Site The site with the given navigational ID, or false if not found.
-	 */
-	protected function getSiteByNavigationId( $id ) {
-		wfProfileIn( __METHOD__ );
-
-		//FIXME: this needs to be moved into core, into SiteList resp. SiteArray!
-		if ( $this->sitesByNavigationId === null ) {
-			$this->sitesByNavigationId = array();
-
-			/* @var Site $site */
-			foreach ( $this->sites->getSites() as $site ) {
-				$ids = $site->getNavigationIds();
-
-				foreach ( $ids as $navId ) {
-					$this->sitesByNavigationId[$navId] = $site;
-				}
-			}
-		}
-
-		wfProfileOut( __METHOD__ );
-		return isset( $this->sitesByNavigationId[$id] ) ? $this->sitesByNavigationId[$id] : false;
-	}
-
-	/**
 	 * Converts a list of interwiki links into an associative array that maps
 	 * global site IDs to the respective target pages on the designated wikis.
 	 *
@@ -326,9 +293,10 @@ class LangLinkHandler {
 				$lang = $parts[0];
 				$page = $parts[1];
 
-				$site = $this->getSiteByNavigationId( $lang );
+				$siteList = $this->sites->getSites();
 
-				if ( $site ) {
+				if ( $siteList->hasNavigationId( $lang ) ) {
+					$site = $siteList->getSiteByNavigationId( $lang );
 					$wiki = $site->getGlobalId();
 					$links[$wiki] = $page;
 				} else {
