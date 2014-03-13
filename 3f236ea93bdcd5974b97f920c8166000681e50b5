@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_dc39e1cc",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T18:48:13Z",
+      "side": 1,
+      "message": "these message are supposed to be generic, if you want to make module specific ones, please introduce new message for that module",
+      "revId": "3f236ea93bdcd5974b97f920c8166000681e50b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
