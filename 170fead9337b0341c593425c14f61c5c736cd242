@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_391c6f6a",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T17:11:41Z",
+      "side": 1,
+      "message": "why not just do $wikibaseClient \u003d WikibaseClient::getDefaultInstance(); and use that? Will make these lines shorter and more readable",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d939f3cc",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T17:11:41Z",
+      "side": 1,
+      "message": "this sentence could be reworded, kind of confusing",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_598ba372",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T17:11:41Z",
+      "side": 1,
+      "message": "$badgeObject is misleading IMO... $badgeItemId or so might be more sane",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f93cb7be",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T17:11:41Z",
+      "side": 1,
+      "message": "trailing space",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_799f87ba",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T17:11:41Z",
+      "side": 1,
+      "message": "this is the item description, not its title",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
