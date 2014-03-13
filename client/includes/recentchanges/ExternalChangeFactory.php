@@ -101,7 +101,7 @@ class ExternalChangeFactory {
 		$keys = array( 'type', 'page_id', 'rev_id', 'parent_id', 'object_id' );
 
 		foreach( $keys as $key ) {
-			if ( !in_array( $key, $changeParams ) ) {
+			if ( !array_key_exists( $key, $changeParams ) ) {
 				throw new UnexpectedValueException( "$key key missing in change data" );
 			}
 		}
