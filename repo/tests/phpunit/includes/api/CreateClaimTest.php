@@ -7,8 +7,6 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\ItemContent;
-use Wikibase\PropertyContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -29,15 +27,13 @@ use Wikibase\Repo\WikibaseRepo;
 class CreateClaimTest extends WikibaseApiTestCase {
 
 	protected static function getNewEntityAndProperty() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		$entity = Item::newEmpty();
-		$content = new ItemContent( $entity );
-		$content->save( '', null, EDIT_NEW );
-		$entity = $content->getEntity();
+		$store->saveEntity( $entity, 'test', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$property = Property::newFromType( 'commonsMedia' );
-		$content = new PropertyContent( $property );
-		$content->save( '', null, EDIT_NEW );
-		$property = $content->getEntity();
+		$store->saveEntity( $property, 'test', $GLOBALS['wgUser'], EDIT_NEW );
 
 		return array( $entity, $property );
 	}
@@ -81,9 +77,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
-		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
+		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
 
-		$claims = new Claims( $entityContent->getEntity()->getClaims() );
+		$claims = new Claims( $entity->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $claim['id'] ) );
 	}
@@ -229,9 +225,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			);
 		}
 
-		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
+		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
 
-		$this->assertFalse( $entityContent->getEntity()->hasClaims() );
+		$this->assertFalse( $entity->hasClaims() );
 	}
 
 	public function testMultipleRequests() {
@@ -278,9 +274,9 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$this->assertNotEquals( $firstGuid, $secondGuid );
 
-		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entity->getId() );
+		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
 
-		$claims = new Claims( $entityContent->getEntity()->getClaims() );
+		$claims = new Claims( $entity->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $firstGuid ) );
 		$this->assertTrue( $claims->hasClaimWithGuid( $secondGuid ) );

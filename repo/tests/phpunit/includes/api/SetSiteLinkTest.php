@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -155,22 +155,21 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		parent::setup();
 
 		if ( !isset( self::$hasSetup ) ) {
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 			$this->initTestEntities( array( 'Leipzig', 'Berlin' ) );
 
-			$badge = ItemContent::newEmpty();
-			$status = $badge->save( 'SetSiteLinkTestGA', null, EDIT_NEW );
-			$this->assertTrue( $status->isOK() );
-			self::$gaItemId = $badge->getEntity()->getId();
+			$badge = Item::newEmpty();
+			$store->saveEntity( $badge, 'SetSiteLinkTestGA', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$gaItemId = $badge->getId();
 
-			$badge = ItemContent::newEmpty();
-			$status = $badge->save( 'SetSiteLinkTestFA', null, EDIT_NEW );
-			$this->assertTrue( $status->isOK() );
-			self::$faItemId = $badge->getEntity()->getId();
+			$badge = Item::newEmpty();
+			$store->saveEntity( $badge, 'SetSiteLinkTestFA', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$faItemId = $badge->getId();
 
-			$badge = ItemContent::newEmpty();
-			$status = $badge->save( 'SetSiteLinkTestOther', null, EDIT_NEW );
-			$this->assertTrue( $status->isOK() );
-			self::$otherItemId = $badge->getEntity()->getId();
+			$badge = Item::newEmpty();
+			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$otherItemId = $badge->getId();
 
 			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 				self::$gaItemId->getPrefixedId() => '',

@@ -9,9 +9,9 @@ use ApiMain;
 use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\SnakValidationHelper;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ItemContent;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
@@ -27,7 +27,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetEntityTitle() {
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
+		$item = Item::newFromArray( array( 'entity' => 'q42' ) );
 		$entityId = $item->getId();
 
 		$claimModificationHelper = $this->getNewInstance();
@@ -75,7 +75,7 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetClaimFromEntity() {
 		$claimModificationHelper = $this->getNewInstance();
-		$entity = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
+		$entity = Item::newFromArray( array( 'entity' => 'q42' ) );
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$claim = $entity->newClaim( $snak );
 		$claim->setGuid( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F' );

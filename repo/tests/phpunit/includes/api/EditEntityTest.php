@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
-use Wikibase\ItemContent;
-use Wikibase\PropertyContent;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -31,30 +31,32 @@ class EditEntityTest extends WikibaseApiTestCase {
 		parent::setup();
 
 		if( !isset( self::$hasSetup ) ){
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 			$this->initTestEntities( array( 'Berlin' ) );
 			self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
 
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$this->assertTrue( $prop->save( 'EditEntityTestP56', null, EDIT_NEW )->isOK() );
-			self::$idMap['%P56%'] = $prop->getEntity()->getId()->getSerialization();
+			$prop = Property::newEmpty();
+			$prop->setDataTypeId( 'string' );
+			$store->saveEntity( $prop, 'EditEntityTestP56', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$idMap['%P56%'] = $prop->getId()->getSerialization();
 
-			$prop = PropertyContent::newEmpty();
-			$prop->getEntity()->setDataTypeId( 'string' );
-			$this->assertTrue( $prop->save( 'EditEntityTestP72', null, EDIT_NEW )->isOK() );
-			self::$idMap['%P72%'] = $prop->getEntity()->getId()->getSerialization();
+			$prop = Property::newEmpty();
+			$prop->setDataTypeId( 'string' );
+			$store->saveEntity( $prop, 'EditEntityTestP72', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
 
-			$badge = ItemContent::newEmpty();
-			$this->assertTrue( $badge->save( 'EditEntityTestQ42', null, EDIT_NEW )->isOK() );
-			self::$idMap['%Q42%'] = $badge->getEntity()->getId()->getSerialization();
+			$badge = Item::newEmpty();
+			$store->saveEntity( $badge, 'EditEntityTestQ42', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$idMap['%Q42%'] = $badge->getId()->getSerialization();
 
-			$badge = ItemContent::newEmpty();
-			$this->assertTrue( $badge->save( 'EditEntityTestQ149', null, EDIT_NEW )->isOK() );
-			self::$idMap['%Q149%'] = $badge->getEntity()->getId()->getSerialization();
+			$badge = Item::newEmpty();
+			$store->saveEntity( $badge, 'EditEntityTestQ149', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$idMap['%Q149%'] = $badge->getId()->getSerialization();
 
-			$badge = ItemContent::newEmpty();
-			$this->assertTrue( $badge->save( 'EditEntityTestQ32', null, EDIT_NEW )->isOK() );
-			self::$idMap['%Q32%'] = $badge->getEntity()->getId()->getSerialization();
+			$badge = Item::newEmpty();
+			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
+			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 
 			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
 				self::$idMap['%Q42%'] => '',

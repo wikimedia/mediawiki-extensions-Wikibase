@@ -76,40 +76,40 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 		$foundResult = 0;
 
 		$expectedId = EntityTestHelper::getId( $expected['handle'] );
-		$expectedContent = EntityTestHelper::getEntityData( $expected['handle'] );
+		$expectedData = EntityTestHelper::getEntityData( $expected['handle'] );
 
 		foreach( $searchResults as $searchResult ) {
-			$assertFound = $this->assertSearchResultHasExpected( $searchResult, $params, $expectedId, $expectedContent );
+			$assertFound = $this->assertSearchResultHasExpected( $searchResult, $params, $expectedId, $expectedData );
 			$foundResult = $foundResult + $assertFound;
 		}
 		$this->assertEquals( 1, $foundResult, 'Could not find expected search result in array of results' );
 	}
 
-	private function assertSearchResultHasExpected( $searchResult, $params, $expectedId, $expectedContent  ){
+	private function assertSearchResultHasExpected( $searchResult, $params, $expectedId, $expectedData  ){
 		if( $expectedId === $searchResult['id'] ) {
 			$this->assertEquals( $expectedId, $searchResult['id'] );
 			$this->assertStringEndsWith( $expectedId, $searchResult['url'] );
-			if( array_key_exists( 'descriptions', $expectedContent ) ) {
-				$this->assertSearchResultHasExpectedDescription( $searchResult, $params, $expectedContent );
+			if( array_key_exists( 'descriptions', $expectedData ) ) {
+				$this->assertSearchResultHasExpectedDescription( $searchResult, $params, $expectedData );
 			}
-			if( array_key_exists( 'labels', $expectedContent ) ) {
-				$this->assertSearchResultHasExpectedLabel( $searchResult, $params, $expectedContent );
+			if( array_key_exists( 'labels', $expectedData ) ) {
+				$this->assertSearchResultHasExpectedLabel( $searchResult, $params, $expectedData );
 			}
 			return 1;
 		}
 		return 0;
 	}
 
-	private function assertSearchResultHasExpectedDescription( $searchResult, $params, $expectedContent ) {
-		foreach( $expectedContent['descriptions'] as $description ) {
+	private function assertSearchResultHasExpectedDescription( $searchResult, $params, $expectedData ) {
+		foreach( $expectedData['descriptions'] as $description ) {
 		if( $description['language'] == $params['language'] ) {
 			$this->assertEquals( $description['value'], $searchResult['description'] );
 		}
 	}
 	}
 
-	private function assertSearchResultHasExpectedLabel( $searchResult, $params, $expectedContent ) {
-		foreach( $expectedContent['labels'] as $description ) {
+	private function assertSearchResultHasExpectedLabel( $searchResult, $params, $expectedData ) {
+		foreach( $expectedData['labels'] as $description ) {
 			if( $description['language'] == $params['language'] ) {
 				$this->assertEquals( $description['value'], $searchResult['label'] );
 			}
