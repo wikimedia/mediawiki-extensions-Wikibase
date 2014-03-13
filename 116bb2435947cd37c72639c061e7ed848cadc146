@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_d918d325",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T22:04:54Z",
+      "side": 1,
+      "message": "it\u0027s more than that now",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_99125b00",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T22:04:54Z",
+      "side": 1,
+      "message": "it\u0027s more than that now",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b9fe3faa",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T22:04:54Z",
+      "side": 1,
+      "message": "no need for the \\",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d9f1f3db",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T22:04:54Z",
+      "side": 1,
+      "message": "s/be/by/",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f9f4b7cd",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T22:04:54Z",
+      "side": 1,
+      "message": "indeed...",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
