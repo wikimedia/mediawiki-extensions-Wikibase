@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use Iterator;
-use Title;
 
 /**
  * Interface to a table that join wiki pages and entities.

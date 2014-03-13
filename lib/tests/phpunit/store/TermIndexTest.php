@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Property;
 use Wikibase\Settings;
 use Wikibase\TermIndex;
-use Wikibase\ItemContent;
 use Wikibase\Item;
 use Wikibase\Term;
 

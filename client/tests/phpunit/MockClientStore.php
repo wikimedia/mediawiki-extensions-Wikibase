@@ -1,8 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Test\MockRepository;
-use Wikibase\Test\MockPropertyInfoStore;
+
 use Wikibase\ClientStore;
 use Wikibase\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;

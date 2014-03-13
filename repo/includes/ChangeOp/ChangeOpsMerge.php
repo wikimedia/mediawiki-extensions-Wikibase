@@ -11,7 +11,6 @@ use Wikibase\ItemContent;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\SiteLinkCache;
-use Wikibase\StoreFactory;
 use Wikibase\Term;
 
 /**

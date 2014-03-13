@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase;
+
 use IContextSource;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class representing the disambiguation of a list of WikibaseItems.

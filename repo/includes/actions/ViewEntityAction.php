@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Article;
-use Revision;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

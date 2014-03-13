@@ -3,10 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * @covers Wikibase\ViewEntityAction

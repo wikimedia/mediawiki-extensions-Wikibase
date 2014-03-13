@@ -2,8 +2,6 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataValues\NumberValue;
-use DataValues\StringValue;
 use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;

@@ -18,6 +18,11 @@ require_once $basePath . '/maintenance/Maintenance.php';
 
 class PopulateInterwiki extends Maintenance {
 
+	/**
+	 * @var string
+	 */
+	private $source;
+
 	public function __construct() {
 		$this->mDescription = <<<TEXT
 This script will populate the interwiki table, pulling in interwiki links that are used on Wikipedia
