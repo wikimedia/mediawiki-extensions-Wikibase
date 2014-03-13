@@ -23,14 +23,14 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	/**
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
-	 * @param EntityRevision[] $entities
+	 * @param EntityRevision[] $entityRevisions
 	 *
 	 * @return EntityLookup
 	 */
-	protected function newEntityRevisionLookup( array $entities ) {
+	protected function newEntityRevisionLookup( array $entityRevisions ) {
 		$mock = new MockRepository();
 
-		foreach ( $entities as $rev => $entityRev ) {
+		foreach ( $entityRevisions as $rev => $entityRev ) {
 			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevision() );
 		}
 

@@ -65,6 +65,7 @@ class DispatchingEntitySerializer extends SerializerObject implements Unserializ
 	 *
 	 * @param array $serialization
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Entity
 	 */
 	public function newFromSerialization( array $serialization ) {

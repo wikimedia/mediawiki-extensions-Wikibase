@@ -55,10 +55,10 @@ class EntityRevisionSerializer extends SerializerObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @param EntityRevision $entityContent
-	 * @return array
+	 * @param EntityRevision $entityRevision
 	 *
 	 * @throws InvalidArgumentException If $entityContent is no instance of Content.
+	 * @return array
 	 */
 	public function getSerialized( $entityRevision ) {
 		if( !( $entityRevision instanceof EntityRevision ) ) {

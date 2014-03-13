@@ -1,6 +1,7 @@
 <?php
 namespace Wikibase\Lib;
 use InvalidArgumentException;
+use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -23,7 +24,7 @@ class OutputFormatValueFormatterFactory {
 	 *        three parameters, this OutputFormatSnakFormatterFactory, a format ID, and an FormatOptions object,
 	 *        and return an instance of ValueFormatter suitable for the given output format.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $builders ) {
 		foreach ( $builders as $format => $builder ) {
@@ -46,12 +47,13 @@ class OutputFormatValueFormatterFactory {
 	 * @param string $format Use the SnakFormatter::FORMAT_XXX constants.
 	 * @param FormatterOptions $options
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws RuntimeException
+	 * @throws InvalidArgumentException
 	 * @return ValueFormatter
 	 */
 	public function getValueFormatter( $format, FormatterOptions $options ) {
 		if ( !array_key_exists( $format, $this->builders ) ) {
-			throw new \InvalidArgumentException( "Unsupported format: $format" );
+			throw new InvalidArgumentException( "Unsupported format: $format" );
 		}
 
 		//TODO: cache instances based on an option hash
@@ -60,7 +62,7 @@ class OutputFormatValueFormatterFactory {
 
 
 		if( !( $instance instanceof ValueFormatter ) ) {
-			throw new \RuntimeException( get_class( $instance ) . ' does not implement ValueFormatter' );
+			throw new RuntimeException( get_class( $instance ) . ' does not implement ValueFormatter' );
 		}
 
 		return $instance;

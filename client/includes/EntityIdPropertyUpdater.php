@@ -71,6 +71,7 @@ class EntityIdPropertyUpdater {
 	 * @since 0.4
 	 *
 	 * @param ParserOutput $out
+	 * @param string $propertyName
 	 */
 	protected function unsetProperty( \ParserOutput $out, $propertyName ) {
 		// unset property, if it was set

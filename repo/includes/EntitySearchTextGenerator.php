@@ -31,7 +31,7 @@ class EntitySearchTextGenerator {
 	}
 
 	/**
-	 * @param string[]
+	 * @param string[] $elements
 	 *
 	 * @return string
 	 */

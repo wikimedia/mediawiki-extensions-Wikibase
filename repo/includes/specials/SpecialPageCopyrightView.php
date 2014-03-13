@@ -31,6 +31,7 @@ class SpecialPageCopyrightView {
 	private $rightsText;
 
 	/**
+	 * @param CopyrightMessageBuilder $messageBuilder
 	 * @param string $rightsUrl
 	 * @param string $rightsText
 	 */

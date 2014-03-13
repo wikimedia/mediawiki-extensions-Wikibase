@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\DataValue;
 use Language;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -28,7 +29,7 @@ use Wikibase\SummaryFormatter;
 class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param DataValue $value
+	 * @param EntityIdValue|EntityId $id
 	 *
 	 * @return string
 	 */

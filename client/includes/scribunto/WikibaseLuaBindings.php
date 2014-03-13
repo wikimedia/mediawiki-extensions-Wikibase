@@ -50,6 +50,13 @@ class WikibaseLuaBindings {
 
 	/**
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityLookup $entityLookup
+	 * @param EntityIdFormatter $entityIdFormatter
+	 * @param SiteLinkLookup $siteLinkTable
+	 * @param LanguageFallbackChainFactory $fallbackChainFactory
+	 * @param Language $language
+	 * @param $languageCodes
+	 * @param $siteId
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,

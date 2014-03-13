@@ -63,7 +63,6 @@ class PropertyParserFunction {
 	/**
 	 * Check whether variants are used in this parser run.
 	 *
-	 * @param Parser $parser
 	 * @return bool
 	 */
 	public function isParserUsingVariants() {

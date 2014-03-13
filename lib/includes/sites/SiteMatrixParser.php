@@ -45,6 +45,7 @@ class SiteMatrixParser {
 	/**
 	 * @param string $json
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Site[]
 	 */
 	public function sitesFromJson( $json ) {
@@ -132,7 +133,6 @@ class SiteMatrixParser {
 
 	/**
 	 * @param array $siteData
-	 * @param string $langCode
 	 *
 	 * @return Site
 	 */

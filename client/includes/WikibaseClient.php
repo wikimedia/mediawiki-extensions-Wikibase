@@ -3,6 +3,7 @@
 namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
+use Exception;
 use Language;
 use Site;
 use SiteSQLStore;
@@ -263,8 +264,9 @@ final class WikibaseClient {
 	 * @since 0.1
 	 *
 	 * @param boolean|string $store
-	 * @param string         $reset set to 'reset' to force a fresh instance to be returned.
+	 * @param string $reset set to 'reset' to force a fresh instance to be returned.
 	 *
+	 * @throws Exception
 	 * @return ClientStore
 	 */
 	public function getStore( $store = false, $reset = 'no' ) {
@@ -284,7 +286,7 @@ final class WikibaseClient {
 			if ( $repoDatabase !== null ) {
 				$store = 'DirectSqlStore';
 			} else {
-				throw new \Exception( '$repoDatabase cannot be null' );
+				throw new Exception( '$repoDatabase cannot be null' );
 			}
 		}
 

@@ -62,7 +62,7 @@ class LanguageFallbackChainFactory {
 	 * Get the fallback chain based a single language, and specified fallback level.
 	 *
 	 * @param Language $language
-	 * @param $mode bitfield of self::FALLBACK_*
+	 * @param mixed $mode bitfield of self::FALLBACK_*
 	 *
 	 * @return LanguageFallbackChain
 	 */
@@ -83,8 +83,8 @@ class LanguageFallbackChainFactory {
 	/**
 	 * Get the fallback chain based a single language code, and specified fallback level.
 	 *
-	 * @param string $language
-	 * @param $mode bitfield of self::FALLBACK_*
+	 * @param string $languageCode
+	 * @param mixed $mode bitfield of self::FALLBACK_*
 	 *
 	 * @return LanguageFallbackChain
 	 */
