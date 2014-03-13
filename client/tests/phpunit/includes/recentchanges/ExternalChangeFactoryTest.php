@@ -40,11 +40,15 @@ class ExternalChangeFactoryTest extends MediaWikiTestCase {
 		$externalChange = new ExternalChange( new ItemId( 'Q4' ), $rev, 'update' );
 
 		return array(
-			array( $externalChange, $this->getEditRecentChange() )
+			array( $externalChange, $this->getEditRecentChange( true ), 'bot edit' ),
+			array( $externalChange, $this->getEditRecentChange( false ), 'non bot edit' )
 		);
 	}
 
-	protected function getEditRecentChange() {
+	/**
+	 * @param boolean $bot
+	 */
+	protected function getEditRecentChange( $bot ) {
 		$recentChange = new RecentChange();
 		$recentChange->counter = 2;
 
@@ -58,7 +62,7 @@ class ExternalChangeFactoryTest extends MediaWikiTestCase {
 				'revision_id' => 92,
 				'entity_type' => 'item',
 				'user_text' => 'Cat',
-				'bot' => 0,
+				'bot' => $bot ? 1 : 0,
 				'page_id' => 5,
 				'rev_id' => 92,
 				'parent_id' => 90,
@@ -81,7 +85,7 @@ class ExternalChangeFactoryTest extends MediaWikiTestCase {
 			'rc_title' => 'Canada',
 			'rc_comment' => '',
 			'rc_minor' => 1,
-			'rc_bot' => 0,
+			'rc_bot' => $bot ? 1 : 0,
 			'rc_new' => 0,
 			'rc_cur_id' => 52,
 			'rc_this_oldid' => 114,
