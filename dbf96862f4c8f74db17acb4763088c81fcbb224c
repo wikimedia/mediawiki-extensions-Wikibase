@@ -67,6 +67,23 @@
       "revId": "dbf96862f4c8f74db17acb4763088c81fcbb224c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e10333d_1d21979a",
+        "filename": "client/tests/phpunit/includes/OtherProjectsSidebarGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-13T15:57:28Z",
+      "side": 1,
+      "message": ":)",
+      "revId": "dbf96862f4c8f74db17acb4763088c81fcbb224c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
