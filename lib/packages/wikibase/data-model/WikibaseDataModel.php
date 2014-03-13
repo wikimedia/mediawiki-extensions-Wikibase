@@ -12,7 +12,7 @@ if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 	return 1;
 }
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '0.7.1' );
+define( 'WIKIBASE_DATAMODEL_VERSION', '0.7.2 alpha' );
 
 // Temporary global to migrate away from DataValueFactory::singleton.
 // It should not be used outside this component and should not be used
