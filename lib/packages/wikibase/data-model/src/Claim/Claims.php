@@ -502,7 +502,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 	/**
 	 * Returns a new instance only containing the claims with the given ranks.
 	 *
-	 * @since 0.8
+	 * @since 0.7.2
 	 *
 	 * @param array $acceptableRanks
 	 *
