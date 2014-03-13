@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\ItemContent;
 use Wikibase\ItemDeletionUpdate;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 
 /**
@@ -43,11 +44,13 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 	 * @param ItemContent $itemContent
 	 */
 	public function testDoUpdate( ItemContent $itemContent ) {
-		$itemContent->save( '', null, EDIT_NEW );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$revision = $store->saveEntity( $itemContent->getEntity(), "testing", $GLOBALS['wgUser'], EDIT_NEW );
+		$id = $revision->getEntity()->getId()->getNumericId();
+
 		$update = new ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
-
-		$id = $itemContent->getItem()->getId()->getNumericId();
 
 		$linkLookup = StoreFactory::getStore()->newSiteLinkCache();
 		$this->assertEquals( 0, $linkLookup->countLinks( array( $id ) ) );

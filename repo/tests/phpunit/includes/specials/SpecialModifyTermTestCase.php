@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Test case for modify term special pages
@@ -26,8 +27,11 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		$item->setLabel( 'de', 'foo' );
 		$item->setDescription( 'de', 'foo' );
 		$item->setAliases( 'de', array( 'foo' ) );
+
 		// save the item
-		ItemContent::newFromItem( $item )->save( "testing", null, EDIT_NEW );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
+
 		// return the id
 		return $item->getId()->getSerialization();
 	}

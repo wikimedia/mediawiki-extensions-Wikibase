@@ -2,12 +2,12 @@
 
 namespace Wikibase\Test;
 
-use RuntimeException;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\WikiPageEntityLookup;
 
 /**
@@ -38,21 +38,19 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 				array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'test' => 'five' ),
 			);
 
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 			foreach ( $infos as $info ) {
 				$dataType = $info[ PropertyInfoStore::KEY_DATA_TYPE ];
 				$label = $info[ 'test' ];
 
-				$content = PropertyContent::newEmpty();
-				$content->getProperty()->setDataTypeId( $dataType  );
-				$content->getProperty()->setDescription( 'en', $label );
+				$property = Property::newEmpty();
+				$property->setDataTypeId( $dataType );
+				$property->setDescription( 'en', $label );
 
-				$status = $content->save( "test", null, EDIT_NEW );
+				$revision = $store->saveEntity( $property, "test", $GLOBALS['wgUser'], EDIT_NEW );
 
-				if ( !$status->isOK() ) {
-					throw new RuntimeException( "could not save property: " . $status->getWikiText() );
-				}
-
-				$id = $content->getProperty()->getId()->getSerialization();
+				$id = $revision->getEntity()->getId()->getSerialization();
 				$properties[$id] = $info;
 			}
 		}

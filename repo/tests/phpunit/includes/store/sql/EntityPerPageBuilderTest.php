@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use RuntimeException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\SettingsArray;
 use Wikibase\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
@@ -89,10 +90,12 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 
 		$prefix = get_class( $this ) . '/';
 
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
 		foreach( $labels as $label ) {
-			$itemContent = \Wikibase\ItemContent::newEmpty();
-			$itemContent->getEntity()->setLabel( 'en', $prefix . $label );
-			$itemContent->save( "added an item", $user, EDIT_NEW );
+			$item = Item::newEmpty();
+			$item->setLabel( 'en', $prefix . $label );
+			$store->saveEntity( $item, "added an item", $user, EDIT_NEW );
 		}
 	}
 

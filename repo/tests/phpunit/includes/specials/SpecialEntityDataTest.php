@@ -19,6 +19,7 @@ use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntityData
@@ -42,8 +43,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	protected function saveItem( Item $item ) {
 		//TODO: Same as in EntityDataRequestHandlerTest. Factor out.
 
-		$content = ItemContent::newFromItem( $item );
-		$content->save( "testing", null, EDIT_NEW );
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 	}
 
 	public function getTestItem() {
