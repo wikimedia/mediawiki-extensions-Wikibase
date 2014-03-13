@@ -277,14 +277,14 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-nosuchrevid' => 'Revision with id not found', # Do not translate
 	'wikibase-api-no-such-claim' => 'Could not find such a claim', # Do not translate
 	'wikibase-api-no-such-entity' => 'Could not find such an entity', # Do not translate
-	'wikibase-api-no-such-entity-id' => 'Could not find such an entity id', # Do not translate
+	'wikibase-api-no-such-entity-id' => 'The items could not be merged. The following error occurred: Could not find such an entity id', # Do not translate
 	'wikibase-api-no-such-entity-link' => 'Could not find such an entity link', # Do not translate
 	'wikibase-api-no-such-reference' => 'Could not find such a reference', # Do not translate
 	'wikibase-api-no-such-site' => 'Could not find such a site', # Do not translate
 	'wikibase-api-no-such-sitelink' => 'Could not find such a sitelink', # Do not translate
 	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
 	'wikibase-api-not-a-statement' => 'Not a statement', # Do not translate
-	'wikibase-api-not-an-item' => 'Not an item', # Do not translate
+	'wikibase-api-not-an-item' => 'The items could not be merged. The following error occurred: Not an item', # Do not translate
 	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized', # Do not translate
 	'wikibase-api-not-recognized' => 'Something was not recognized', # Do not translate
 	'wikibase-api-not-recognized-array' => 'An array was expected, but not recognized', # Do not translate
