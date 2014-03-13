@@ -139,8 +139,8 @@ HTML;
 
 	$templates['wb-rankselector'] =
 <<<HTML
-<div class="wb-rankselector ui-state-disabled">
-	<span class="ui-icon ui-icon-rankselector $1" title="$2"></span>
+<div class="wb-rankselector $1">
+	<span class="ui-icon ui-icon-rankselector $2" title="$3"></span>
 </div>
 HTML;
 
