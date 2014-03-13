@@ -29,12 +29,11 @@ class NamespaceChecker {
 	/**
 	 * @since 0.4
 	 *
-	 * @param $excluded[]
-	 * @param $enabled[] - if empty, setting not in use and all namespaces enabled
+	 * @param array $excludedNamespaces
+	 * @param array $enabledNamespaces if empty, setting not in use and all namespaces enabled
 	 */
 	public function __construct( array $excludedNamespaces, array $enabledNamespaces ) {
 		$this->excludedNamespaces = $excludedNamespaces;
-
 		$this->enabledNamespaces = $enabledNamespaces;
 	}
 

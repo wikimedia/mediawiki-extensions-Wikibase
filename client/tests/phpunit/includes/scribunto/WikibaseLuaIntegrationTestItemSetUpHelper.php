@@ -84,7 +84,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	}
 
 	/**
-	 * @param array $label
+	 * @param array $labels
 	 * @param Claim[]|null $claims
 	 * @param array $siteLinks
 	 *

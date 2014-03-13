@@ -72,6 +72,7 @@ class RepoLinker {
 	 *
 	 * @param string $page
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
 	public function getPageUrl( $page ) {
@@ -121,7 +122,7 @@ class RepoLinker {
 	 *
 	 * @since 0.4
 	 *
-	 * @param ExternalChange $externalChange
+	 * @param EntityId $entityId
 	 * @param array $classes
 	 *
 	 * @return string (html)
@@ -195,6 +196,7 @@ class RepoLinker {
 	}
 
 	/**
+	 * @param string $url
 	 * @param array $params
 	 *
 	 * @return string

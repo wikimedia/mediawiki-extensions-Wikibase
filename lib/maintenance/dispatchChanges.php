@@ -678,10 +678,10 @@ class DispatchChanges extends \Maintenance {
 	 * The lock is acquired on the client wiki's master DB.
 	 *
 	 * @param string       $wikiDB The logical database name of the wiki for which to grab a lock.
-	 * @param string|null  $lock  The name of the lock to acquire. If not given, getClientLockName()
+	 * @param string|null  $lockName  The name of the lock to acquire. If not given, getClientLockName()
 	 *                     will be used to generate an appropriate name.
 	 *
-	 * @return String|bool The lock name if the lock was acquired, false otherwise.
+	 * @return string|bool The lock name if the lock was acquired, false otherwise.
 	 */
 	protected function getClientLock( $wikiDB, $lockName = null ) {
 		wfProfileIn( __METHOD__ );

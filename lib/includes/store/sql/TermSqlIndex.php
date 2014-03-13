@@ -1088,7 +1088,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @param $dbr
 	 * @return mixed
 	 */
 	public function supportsWeight() {

@@ -142,7 +142,7 @@ class SiteLinkCommentCreator {
 	 * @param string $siteId
 	 * @param string $messagePrefix
 	 *
-	 * return array|null
+	 * @return array|null
 	 */
 	protected function getChangeParamsForDiffOp( DiffOp $diffOp, $siteId, $messagePrefix ) {
 		$params = array();

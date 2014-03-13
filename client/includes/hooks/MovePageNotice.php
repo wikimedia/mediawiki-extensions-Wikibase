@@ -74,12 +74,14 @@ final class MovePageNotice {
 	 *
 	 * @param Title $oldTitle Title of the page before the move
 	 * @param Title $newTitle Title of the page after the move
+	 *
+	 * @return string|null
 	 */
 	public function getPageMoveNoticeHtml( Title $oldTitle, Title $newTitle ) {
 		$itemLink = $this->getItemUrl( $oldTitle );
 
 		if ( !$itemLink ) {
-			return;
+			return null;
 		}
 
 		$msg = $this->getPageMoveMessage( $newTitle );

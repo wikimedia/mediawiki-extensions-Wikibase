@@ -53,14 +53,14 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 	/**
 	 * @see EntityRevisionLookupTest::newEntityRevisionLookup(newEntityLookup
 	 *
-	 * @param EntityRevision[] $entitieswiki
+	 * @param EntityRevision[] $entityRevisions
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	protected function newEntityRevisionLookup( array $entities ) {
+	protected function newEntityRevisionLookup( array $entityRevisions ) {
 		// make sure all test entities are in the database.
 		/* @var EntityRevision $entityRev */
-		foreach ( $entities as $entityRev ) {
+		foreach ( $entityRevisions as $entityRev ) {
 			$logicalRev = $entityRev->getRevision();
 
 			if ( !isset( self::$testEntities[$logicalRev] ) ) {
