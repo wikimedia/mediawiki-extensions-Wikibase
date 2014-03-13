@@ -19,6 +19,7 @@ class CopyrightMessageBuilder {
 	 *
 	 * @param string $rightsUrl
 	 * @param string $rightsText
+	 * @param Language $language
 	 *
 	 * @return Message
 	 */

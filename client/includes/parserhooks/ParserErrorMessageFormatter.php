@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use Language;
+use Message;
+
 /**
  * Formats a parser error message
  *
@@ -14,15 +17,15 @@ namespace Wikibase;
  */
 class ParserErrorMessageFormatter {
 
-	/* @var \Language $language */
+	/* @var Language $language */
 	protected $language;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Message $message
+	 * @param Language $language
 	 */
-	public function __construct( \Language $language ) {
+	public function __construct( Language $language ) {
 		$this->language = $language;
 	}
 
@@ -32,9 +35,11 @@ class ParserErrorMessageFormatter {
 	 *
 	 * @since 0.4
 	 *
+	 * @param Message $message
+	 *
 	 * @return string
 	 */
-	public function format( \Message $message ) {
+	public function format( Message $message ) {
 		return '';
 	/*	return \Html::rawElement(
 			'span',

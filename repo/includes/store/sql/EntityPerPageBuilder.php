@@ -59,7 +59,8 @@ class EntityPerPageBuilder {
 
 	/**
 	 * @param EntityPerPage $entityPerPageTable
-
+	 * @param EntityContentFactory $entityContentFactory
+	 * @param EntityIdParser $entityIdParser
 	 */
 	public function __construct( EntityPerPage $entityPerPageTable, EntityContentFactory $entityContentFactory,
 		EntityIdParser $entityIdParser ) {

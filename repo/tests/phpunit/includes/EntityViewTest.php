@@ -102,15 +102,16 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 
 	/**
 	 * @param string $entityType
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param \IContextSource $context
+	 * @param IContextSource $context
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityView
 	 */
 	protected function newEntityView( $entityType, EntityInfoBuilder $entityInfoBuilder = null,
-		EntityTitleLookup $entityTitleLookup = null, \IContextSource $context = null,
+		EntityTitleLookup $entityTitleLookup = null, IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
 	) {
 		if ( !is_string( $entityType ) ) {

@@ -26,6 +26,8 @@ class TestValidator implements ValueValidator {
 	}
 
 	/**
+	 * @param mixed $value
+	 *
 	 * @return Result
 	 */
 	public function validate( $value ) {

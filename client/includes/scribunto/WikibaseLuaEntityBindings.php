@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Scribunto;
 
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\EntityLookup;
@@ -78,7 +79,7 @@ class WikibaseLuaEntityBindings {
 	 * is specified by $propertyLabel.
 	 *
 	 * @param Entity $entity The Entity from which to get the clams
-	 * @param string $propertyId A prefixed property ID.
+	 * @param PropertyId $propertyId A prefixed property ID.
 	 *
 	 * @return Claims
 	 */

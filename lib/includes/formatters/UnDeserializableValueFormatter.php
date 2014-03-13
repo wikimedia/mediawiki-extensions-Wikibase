@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use DataValues\DataValue;
 use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
@@ -40,13 +41,14 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param UnDeserializableValue
+	 * @param DataValue $dataValue
 	 *
 	 * @return string
 	 */
 	public function format( $dataValue ) {
 		$langCode = $this->options->getOption( self::OPT_LANG );
 
+		/** @var Message $msg */
 		$msg = $this->options->getOption( self::MESSAGE );
 		$msg = $msg->inLanguage( $langCode );
 

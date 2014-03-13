@@ -69,6 +69,7 @@ class PropertyInfoTableBuilder {
 	 * @since 0.4
 	 *
 	 * @param PropertyInfoTable $table
+	 * @param EntityLookup $entityLookup
 	 */
 	public function __construct( PropertyInfoTable $table, EntityLookup $entityLookup ) {
 		$this->table = $table;

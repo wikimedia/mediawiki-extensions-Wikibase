@@ -957,6 +957,8 @@ final class RepoHooks {
 	 * @param string &$link_t
 	 * @param string &$titleSnippet
 	 * @param SearchResult $result
+	 *
+	 * @return bool
 	 */
 	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
 		$title = $result->getTitle();

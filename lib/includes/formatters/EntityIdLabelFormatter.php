@@ -141,7 +141,7 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId
+	 * @param EntityId $entityId
 	 *
 	 * @return string|boolean
 	 */
