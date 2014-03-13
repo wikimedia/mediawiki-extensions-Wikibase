@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e10333d_3de45ba3",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-13T16:51:50Z",
+      "side": 1,
+      "message": "These are message keys, which only point to a specific message which is defined in repo/Wikibase.i18n.php. Please modify the messages there and leave this unaltered",
+      "revId": "4745604378d5e6b398fc2e1c1beea08c20a95ada",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
