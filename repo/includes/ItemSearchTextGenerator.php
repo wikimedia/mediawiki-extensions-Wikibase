@@ -28,7 +28,7 @@ class ItemSearchTextGenerator {
 	}
 
 	/**
-	 * @param SimpleSiteLink[]
+	 * @param array $siteLinks
 	 *
 	 * @return string
 	 */

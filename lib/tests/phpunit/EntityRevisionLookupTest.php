@@ -30,11 +30,11 @@ abstract class EntityRevisionLookupTest extends EntityLookupTest {
 	}
 
 	/**
-	 * @param EntityRevision[] $entities
+	 * @param EntityRevision[] $entityRevisions
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	protected abstract function newEntityRevisionLookup( array $entities );
+	protected abstract function newEntityRevisionLookup( array $entityRevisions );
 
 	/**
 	 * @param EntityRevision[] $entities

@@ -119,6 +119,7 @@ class ReferencedPagesFinder {
 	/**
 	 * @param Diff $siteLinkDiff
 	 *
+	 * @throws UnexpectedValueException
 	 * @return array
 	 */
 	private function getPagesReferencedInDiff( Diff $siteLinkDiff ) {

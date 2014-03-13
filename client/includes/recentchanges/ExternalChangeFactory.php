@@ -91,7 +91,7 @@ class ExternalChangeFactory {
 	 *
 	 * @throws UnexpectedValueException
 	 *
-	 * return boolean
+	 * @return boolean
 	 */
 	protected function validateChangeData( $changeParams ) {
 		if ( ! is_array( $changeParams ) ) {

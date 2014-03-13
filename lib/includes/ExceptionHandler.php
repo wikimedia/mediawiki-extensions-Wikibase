@@ -74,6 +74,8 @@ class RethrowingExceptionHandler implements ExceptionHandler {
 	 * @param Exception $exception
 	 * @param $errorCode
 	 * @param $explanation
+	 *
+	 * @throws Exception
 	 */
 	public function handleException( Exception $exception, $errorCode, $explanation ) {
 		throw $exception;

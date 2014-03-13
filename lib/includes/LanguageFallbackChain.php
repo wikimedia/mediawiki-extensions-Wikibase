@@ -20,7 +20,7 @@ class LanguageFallbackChain {
 	private $chain = array();
 
 	/**
-	 * @param LanguageWithConversion[]
+	 * @param LanguageWithConversion[] $chain
 	 */
 	public function __construct( array $chain ) {
 		$this->chain = $chain;

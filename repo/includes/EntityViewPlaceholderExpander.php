@@ -69,7 +69,7 @@ class EntityViewPlaceholderExpander {
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
 	 *
-	 * @param Lib\EntityIdParser $idParser
+	 * @param EntityIdParser $idParser
 	 * @param EntityLookup $entityLookup
 	 * @param UserLanguageLookup|null $userLanguageLookup
 	 */

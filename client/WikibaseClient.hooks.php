@@ -741,8 +741,8 @@ final class ClientHooks {
 	 * @param Title $oldTitle
 	 * @param Title $newTitle
 	 * @param User $user
-	 * @param integer $pageid database ID of the page that's been moved
-	 * @param integer $redirid database ID of the created redirect
+	 * @param integer $pageId database ID of the page that's been moved
+	 * @param integer $redirectId database ID of the created redirect
 	 *
 	 * @return bool
 	 */

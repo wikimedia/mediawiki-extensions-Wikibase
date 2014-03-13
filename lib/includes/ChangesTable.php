@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use IORMRow;
 use MWException;
 
 /**
@@ -110,15 +111,15 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	}
 
 	/**
-	 * @see   ORMTable::getWriteValues()
+	 * @see ORMTable::getWriteValues()
 	 *
 	 * @since 0.4
 	 *
-	 * @param ChangeRow $row
+	 * @param ChangeRow|IORMRow $row
 	 *
 	 * @return array
 	 */
-	protected function getWriteValues( \IORMRow $row ) {
+	protected function getWriteValues( IORMRow $row ) {
 		assert( $row instanceof ChangeRow );
 
 		$values = parent::getWriteValues( $row );
