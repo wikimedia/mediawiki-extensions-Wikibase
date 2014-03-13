@@ -123,6 +123,11 @@ $magicWords['pt-br'] = array(
 	'property' => array( 0, 'propriedade' ),
 );
 
+/** Russian (русский) */
+$magicWords['ru'] = array(
+	'property' => array( 0, 'свойство' ),
+);
+
 /** Ukrainian (українська) */
 $magicWords['uk'] = array(
 	'noexternallanglinks' => array( 0, 'беззовнішніхпосилань' ),
