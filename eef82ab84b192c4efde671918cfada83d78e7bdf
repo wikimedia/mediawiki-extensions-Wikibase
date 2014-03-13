@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e10333d_ba6751b4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-13T15:39:57Z",
+      "side": 1,
+      "message": "it\u0027s not a great solution but we use css to hide #p-lang.  without this code, the language portal rendering is skipped, including this hook and then we have no \"add links\" link.\n\nI suppose we could change the javascript somehow to do this another way, to \"add\" the \"other languages\" heading and the link.",
+      "parentUuid": "2e0177f3_963d708d",
+      "revId": "eef82ab84b192c4efde671918cfada83d78e7bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e0177f3_9680d04c",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0e10333d_1a107d03",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-13T15:39:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e0177f3_9680d04c",
+      "revId": "eef82ab84b192c4efde671918cfada83d78e7bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e0177f3_5647e822",
         "filename": "client/resources/wikibase.client.linkitem.init.js",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-13T13:12:56Z",
       "side": 1,
       "message": "I guess we need b/c over here (support both ids)",
+      "revId": "eef82ab84b192c4efde671918cfada83d78e7bdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e10333d_3a0b41db",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-13T15:39:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e0177f3_5647e822",
       "revId": "eef82ab84b192c4efde671918cfada83d78e7bdf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
