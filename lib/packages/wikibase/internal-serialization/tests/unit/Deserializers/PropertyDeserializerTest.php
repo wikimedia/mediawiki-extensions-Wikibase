@@ -4,6 +4,7 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\PropertyDeserializer;
 use Wikibase\InternalSerialization\Deserializers\TermsDeserializer;
@@ -50,6 +51,36 @@ class PropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenValidDataType_dataTypeIsSet() {
 		$property = $this->deserializer->deserialize( array( 'datatype' => 'foo' ) );
 		$this->assertEquals( 'foo', $property->getDataTypeId() );
+	}
+
+	public function testGivenInvalidEntityId_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array(
+			'datatype' => 'foo',
+			'entity' => 'spam spam spam'
+		) );
+	}
+
+	public function testGivenNonPropertyEntityId_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array(
+			'datatype' => 'foo',
+			'entity' => 'q42'
+		) );
+	}
+
+	public function testGivenNoPropertyIdId_noPropertyIdIsSet() {
+		$property = $this->deserializer->deserialize( array( 'datatype' => 'foo' ) );
+		$this->assertEquals( null, $property->getId() );
+	}
+
+	public function testGivenValidPropertyIdId_propertyIdIsSet() {
+		$property = $this->deserializer->deserialize( array(
+			'datatype' => 'foo',
+			'entity' => 'p42'
+		) );
+
+		$this->assertEquals( new PropertyId( 'p42' ), $property->getId() );
 	}
 
 }

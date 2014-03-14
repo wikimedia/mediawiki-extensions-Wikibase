@@ -8,6 +8,7 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @licence GNU GPL v2+
@@ -43,6 +44,8 @@ class PropertyDeserializer implements Deserializer {
 		$this->serialization = $serialization;
 		$this->property = Property::newFromType( $this->getDataTypeId() );
 
+		$this->setPropertyId();
+
 		return $this->property;
 	}
 
@@ -62,6 +65,24 @@ class PropertyDeserializer implements Deserializer {
 		return $this->serialization['datatype'];
 	}
 
+	private function setPropertyId() {
+		if ( array_key_exists( 'entity', $this->serialization ) ) {
+			$this->property->setId( $this->getPropertyId() );
+		}
+	}
 
+	private function getPropertyId() {
+		$id = $this->idDeserializer->deserialize( $this->serialization['entity'] );
+
+		if ( !( $id instanceof PropertyId ) ) {
+			throw new InvalidAttributeException(
+				'entity',
+				$this->serialization['entity'],
+				'Properties should have a property id'
+			);
+		}
+
+		return $id;
+	}
 
 }
