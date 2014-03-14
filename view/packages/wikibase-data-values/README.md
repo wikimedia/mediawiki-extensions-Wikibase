@@ -34,6 +34,8 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 * mw.ext.valueParsers does not register valueParsers.TimeParser anymore
 * mw.ext.valueFormatters does not register valueFormatters.StringFormatter anymore
+* Renamed ValueFormatterFactory to ValueFormatterStore.
+* Renamed ValueParserFactory to ValueParserStore.
 
 #### Bugfixes
 
