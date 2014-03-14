@@ -71,7 +71,7 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	}
 
 	private function calendarNameNeeded( TimeValue $value ) {
-		$date = date_parse( $value->getTime() );
+		$date = date_parse_from_format( 'Y+', $value->getTime() );
 		$year = $date['year'];
 		$calendar = $this->getCalendarKey( $value->getCalendarModel() );
 

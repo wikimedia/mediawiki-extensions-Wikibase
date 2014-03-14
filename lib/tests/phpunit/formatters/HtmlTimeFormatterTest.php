@@ -83,6 +83,14 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 					TimeFormatter::CALENDAR_JULIAN ),
 				new FormatterOptions(),
 				'/^MOCKDATE <sup class="wb-calendar-name">Julian<\/sup>$/'
+			),
+			'2014-10-10' => array(
+				new TimeValue( '+2014-10-10T00:00:00Z',
+					1 * 60 * 60, 0, 0,
+					TimeValue::PRECISION_DAY,
+					TimeFormatter::CALENDAR_GREGORIAN ),
+				new FormatterOptions(),
+				'/^MOCKDATE$/'
 			)
 		);
 	}
