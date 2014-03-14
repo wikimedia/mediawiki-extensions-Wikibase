@@ -51,9 +51,10 @@ class DateTimeParser extends StringValueParser {
 				new ParserOptions()
 			);
 
-			//WTF PHP FAIL: Apparently PHP doesn't like spaces as separators in dates, so replace with a '-'
-			//              See http://de1.php.net/manual/en/datetime.formats.date.php
-			$value = preg_replace( '/\s+/', '-', trim( $value ) );
+			//PHP's DateTime object does not accept spaces as separators between year, month and day,
+			//e.g. dates like 20 12 2012, but we want to support them.
+			//See http://de1.php.net/manual/en/datetime.formats.date.php
+			$value = preg_replace( '/\s+/', '.', trim( $value ) );
 
 			//Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			//TODO try to match and remove BCE etc. before putting the value into the DateTime object to get - dates!
