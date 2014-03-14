@@ -71,8 +71,9 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	}
 
 	private function calendarNameNeeded( TimeValue $value ) {
-		$date = date_parse( $value->getTime() );
-		$year = $date['year'];
+		preg_match( '/^[+-](\d+)-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/',
+			$value->getTime(), $matches );
+		$year = intval( $matches[1] );
 		$calendar = $this->getCalendarKey( $value->getCalendarModel() );
 
 		return $value->getPrecision() > 10
