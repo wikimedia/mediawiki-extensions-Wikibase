@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_8efb2711",
+        "filename": "repo/includes/NamespaceUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:37:20Z",
+      "side": 1,
+      "message": "If the thing is required by this class, then please make it required in the constructor. Optionally pulling in the info is fishy and likely to lead to code rot.",
+      "revId": "b57ff625a62c5befe0590c4f921dde144c6f9c7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_b3be58f9",
         "filename": "repo/includes/NamespaceUtils.php",
         "patchSetId": 1
@@ -47,6 +64,24 @@
       "writtenOn": "2014-03-14T13:28:09Z",
       "side": 1,
       "message": "bool, probably (not sure about boolean vs. bool)",
+      "revId": "b57ff625a62c5befe0590c4f921dde144c6f9c7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d309cc35",
+        "filename": "repo/includes/NamespaceUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:37:20Z",
+      "side": 1,
+      "message": "We mostly use boolean. Either works, lets not nitpick about it :)",
+      "parentUuid": "ee14bf34_7338c09b",
       "revId": "b57ff625a62c5befe0590c4f921dde144c6f9c7c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
