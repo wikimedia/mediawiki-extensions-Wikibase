@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee14bf34_e8261b11",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-14T10:59:12Z",
+      "side": 1,
+      "message": "this needs 0.4.0? O_o\nThis should work with 0.3.0, the one we made yesterday....?",
+      "revId": "e98f21051487e61648b0bcca00454f8e8f260021",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_a8a5c39c",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 1
