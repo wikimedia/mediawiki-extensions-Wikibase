@@ -16,10 +16,7 @@
 
 	mw.hook( 'wikipage.content' ).add( function() {
 		// TODO: Remove global DOM adjustments
-		// remove HTML edit links with links to special pages
-		// for site-links we don't want to remove the table cell representing the edit section
-		$( 'td.wb-editsection' ).empty();
-		// for all other values we remove the whole edit section
+		// remove most HTML edit links with links to special pages
 		$( 'span.wb-editsection, div.wb-editsection' ).remove();
 
 		// remove all infos about empty values which are displayed in non-JS
