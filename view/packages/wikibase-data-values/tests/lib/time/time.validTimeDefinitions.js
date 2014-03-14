@@ -7,12 +7,8 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( define ) {
-'use strict';
-
-var DEPS = ['time', 'time.Time'];
-
-define( DEPS, function( time ) {
+define( ['time/time', 'time/time.Time'], function( time ) {
+	'use strict';
 
 	var Time = time.Time,
 		PRECISION = Time.PRECISION,
@@ -203,5 +199,3 @@ define( DEPS, function( time ) {
 	};
 
 } );
-
-}( define ) );

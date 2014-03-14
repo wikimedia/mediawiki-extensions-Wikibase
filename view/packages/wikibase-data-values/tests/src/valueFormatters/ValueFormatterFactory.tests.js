@@ -2,24 +2,20 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'valueFormatters',
-	'dataValues',
+define( [
+	'valueFormatters/valueFormatters',
+	'dataValues/dataValues',
 	'jquery',
 	'qunit',
-	'valueFormatters.NullFormatter',
-	'valueFormatters.StringFormatter',
-	'valueFormatters.ValueFormatterFactory',
-	'dataValues.NumberValue',
-	'dataValues.StringValue',
-	'dataValues.UnknownValue',
+	'formatters/NullFormatter',
+	'formatters/StringFormatter',
+	'valueFormatters/ValueFormatterFactory',
+	'values/NumberValue',
+	'values/StringValue',
+	'values/UnknownValue',
 	'qunit.parameterize'
-];
-
-define( DEPS, function( vf, dv, $, QUnit ) {
+], function( vf, dv, $, QUnit ) {
+	'use strict';
 
 	var DataTypeMock = function( dataTypeId, DataValue ) {
 		this._dataTypeId = dataTypeId;
@@ -277,5 +273,3 @@ define( DEPS, function( vf, dv, $, QUnit ) {
 		);
 
 } );
-
-}( define ) );

@@ -2,18 +2,14 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'time.Time',
+define( [
+	'time/time.Time',
 	'jquery',
 	'qunit',
-	'time.validTimeDefinitions',
-	'time.Time.validate'
-];
-
-define( DEPS, function( Time, $, QUnit ) {
+	'tests/lib/time/time.validTimeDefinitions',
+	'time/time.Time.validate'
+], function( Time, $, QUnit ) {
+	'use strict';
 
 	var PRECISION = Time.PRECISION,
 		G = Time.CALENDAR.GREGORIAN,
@@ -162,5 +158,3 @@ define( DEPS, function( Time, $, QUnit ) {
 	} );
 
 } );
-
-}( define ) );

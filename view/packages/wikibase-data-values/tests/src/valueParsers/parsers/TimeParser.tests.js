@@ -2,20 +2,16 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < danweetz@web.de >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'valueParsers',
-	'dataValues',
-	'time.Time',
-	'util.inherit',
-	'valueParsers.TimeParser',
-	'valueParsers.tests',
-	'dataValues.TimeValue'
-];
-
-define( DEPS, function( vp, dv, Time, util ) {
+define( [
+	'valueParsers/valueParsers',
+	'dataValues/dataValues',
+	'time/time.Time',
+	'util/util.inherit',
+	'parsers/TimeParser',
+	'tests/src/valueParsers/valueParsers.tests',
+	'values/TimeValue'
+], function( vp, dv, Time, util ) {
+	'use strict';
 
 	var PARENT = vp.tests.ValueParserTest;
 
@@ -52,5 +48,3 @@ define( DEPS, function( vp, dv, Time, util ) {
 	test.runTests( 'valueParsers.TimeParser' );
 
 } );
-
-}( define ) );

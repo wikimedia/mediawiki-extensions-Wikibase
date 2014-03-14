@@ -1,27 +1,36 @@
-<!--
-Main entrance point for running QUnit tests.
--->
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>QUnit tests</title>
+	<link rel="stylesheet" href="../lib/qunit/qunit.css">
 </head>
 <body>
-<script src="./testConfig.js"></script>
-<script src="../lib/tests/tests.TestRunner.js"></script>
+<div id="qunit"></div><div id="qunit-fixture"></div>
+<script src="../config.js"></script>
+<script src="../lib/TestRunner/TestRunner.js"></script>
+<script src="../lib/require/require.js"></script>
 <script>
-( function( window, tests ) {
-	window.onload = function() {
+( function( window, require, TestRunner, config ) {
+	require.config( config );
 
-		var testRunner = new tests.TestRunner( {
-			queue: tests.modules,
-			testRunner: './testRunner.html'
+	if( location.search.split( '=' ).length > 1 ) {
+		require( TestRunner.filterTestModules( config.tests ), function() {
+			QUnit.load();
+			QUnit.start();
 		} );
 
-		testRunner.start();
-	};
-}( window, tests ) );
+	} else {
+		window.onload = function() {
+
+			var testRunner = new TestRunner( {
+				queue: config.tests
+			} );
+
+			testRunner.start();
+		};
+	}
+}( window, require, TestRunner, config ) );
 </script>
 </body>
 </html>

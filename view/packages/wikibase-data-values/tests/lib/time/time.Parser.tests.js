@@ -2,12 +2,14 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-( function( define ) {
-'use strict';
-
-var DEPS = ['time', 'time.validTimeDefinitions', 'jquery', 'qunit', 'time.Parser'];
-
-define( DEPS, function( time, validTimeDefinitions, jquery, QUnit ) {
+define( [
+	'time/time',
+	'tests/lib/time/time.validTimeDefinitions',
+	'jquery',
+	'qunit',
+	'time/time.Parser'
+], function( time, validTimeDefinitions, $, QUnit ) {
+	'use strict';
 
 	QUnit.module( 'time.js: time.Parser' );
 
@@ -45,5 +47,3 @@ define( DEPS, function( time, validTimeDefinitions, jquery, QUnit ) {
 	} );
 
 } );
-
-}( define ) );

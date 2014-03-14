@@ -2,19 +2,15 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-( function( define ) {
-'use strict';
-
-var DEPS = [
-	'valueParsers',
-	'dataValues',
-	'util.inherit',
-	'valueParsers.BoolParser',
-	'valueParsers.tests',
-	'dataValues.BoolValue'
-];
-
-define( DEPS, function( vp, dv, util ) {
+define( [
+	'valueParsers/valueParsers',
+	'dataValues/dataValues',
+	'util/util.inherit',
+	'parsers/BoolParser',
+	'tests/src/valueParsers/valueParsers.tests',
+	'values/BoolValue'
+], function( vp, dv, util ) {
+	'use strict';
 
 	var PARENT = vp.tests.ValueParserTest;
 
@@ -68,5 +64,3 @@ define( DEPS, function( vp, dv, util ) {
 	test.runTests( 'valueParsers.BoolParser' );
 
 } );
-
-}( define ) );

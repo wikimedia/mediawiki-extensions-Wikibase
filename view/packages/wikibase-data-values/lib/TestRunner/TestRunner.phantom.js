@@ -5,12 +5,10 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-/* global tests, exports, console */
-this.tests = this.tests || {};
+/* global exports, console */
+this.TestRunner = this.TestRunner || {};
 
-this.tests.TestRunner = this.tests.TestRunner || {};
-
-this.tests.TestRunner.phantom = ( function( console ) {
+this.TestRunner.phantom = ( function( console ) {
 	'use strict';
 
 	var TestRunner = function() {};
@@ -36,4 +34,4 @@ this.tests.TestRunner.phantom = ( function( console ) {
 
 }( console ) );
 
-exports.tests = this.tests;
+exports.TestRunner = this.TestRunner;
