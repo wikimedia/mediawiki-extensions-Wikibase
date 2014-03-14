@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_ce18ff7c",
+        "filename": "client/includes/hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:48:36Z",
+      "side": 1,
+      "message": "This method contains quite some code. Would be good to split it. For one thing, the $title var is only needed by the first line, so its not nice its in scope for the rest of the code as well",
+      "revId": "8e5cc6d11006631a39cca6c10be6a4f0b913453d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
