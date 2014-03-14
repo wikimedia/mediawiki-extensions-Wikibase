@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_c8ed97b6",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T11:10:34Z",
+      "side": 1,
+      "message": "\u003e the way this works is quite simmlar to how DB result sets work\n\nNot really. A result set does have an inner state. You can\u0027t make a\nwhile ( ( $line \u003d $iterator-\u003enext() ) !\u003d\u003d false )\nan endless loop on accident by omitting an optional parameter.\nIf the user isn\u0027t supposed to care about your $offset (you don\u0027t even tell us if it\u0027s an integer so it\u0027s impossible to use it for something that makes any sense) why do you expose it to the users scope in the first place?",
+      "parentUuid": "ee14bf34_a81263ff",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_e8c4db96",
         "filename": "repo/includes/store/EntityIdPager.php",
         "patchSetId": 4
