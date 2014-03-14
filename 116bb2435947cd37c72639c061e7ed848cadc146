@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee14bf34_08c82fa9",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T09:44:49Z",
+      "side": 1,
+      "message": "Isn\u0027t it strange/dangerous to define a method that\u0027s supposed to be used in loops and the same time make the only thing that can stop the loop (the $offset parameter) optional?",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_d918d325",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 4
@@ -30,6 +47,40 @@
       "writtenOn": "2014-03-13T22:04:54Z",
       "side": 1,
       "message": "it\u0027s more than that now",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_28d3f362",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T09:44:49Z",
+      "side": 1,
+      "message": "This is a strange/bad way to build a loop. It looks like it will never stop. Neither $this-\u003eentityType nor $this-\u003ebatchSize nor $offset ever changes (judging from these lines of code). $offset is not even defined. How does listEntities() know it is supposed to return an empty result at some point? When? Is this kind of an iterator? Why not make it an iterator? Or rename \"listEntities\" to something like \"getNextPage\"? Why have a \"Pager\" in the first place if such a \"hack\" is needed to circumvent it?",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_e8c4db96",
+        "filename": "repo/includes/store/EntityIdPager.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T09:44:49Z",
+      "side": 1,
+      "message": "Isn\u0027t it strange/dangerous to define a method that\u0027s supposed to be used in loops and the same time make the only thing that can stop the loop (the $offset parameter) optional?",
       "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
