@@ -130,8 +130,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'mediawiki.api',
-				'dataTypes',
 				'wikibase',
+				'wikibase.dataTypes'
 			),
 		),
 
@@ -141,7 +141,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'mediawiki.api',
-				'dataTypes',
 				'util.inherit',
 				'valueFormatters.ValueFormatter',
 				'wikibase.formatters.api',
@@ -153,7 +152,6 @@ return call_user_func( function() {
 				'formatters/wikibase.formatters.register.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'dataValues.values',
 				'mw.ext.valueFormatters',
 				'wikibase.ApiBasedValueFormatter',
@@ -167,7 +165,8 @@ return call_user_func( function() {
 				'wikibase.dataTypes/wikibase.dataTypes.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
+				'dataTypes.DataType',
+				'dataTypes.DataTypeStore',
 				'jquery',
 				'mw.config.values.wbDataTypes',
 				'wikibase',
@@ -224,7 +223,6 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase',
 				'mw.ext.dataValues', // DataValues extension
-				'dataTypes', // DataTypes extension
 				'wikibase.dataTypes',
 			)
 		),
@@ -251,6 +249,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization',
 				'wikibase.datamodel',
+				'wikibase.dataTypes',
 			)
 		),
 
