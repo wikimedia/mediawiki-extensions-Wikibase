@@ -6,14 +6,14 @@
 	'use strict';
 
 	/**
-	 * Factory managing ValueParser instances
+	 * Store managing ValueParser instances
 	 * @constructor
 	 * @since 0.1
 	 *
 	 * @param {Function} [DefaultParser] Constructor of a default parser that shall be returned when
 	 *        no parser is registered for a specific purpose.
 	 */
-	var SELF = vp.ValueParserFactory = function VpValueParserFactory( DefaultParser ) {
+	var SELF = vp.ValueParserStore = function VpValueParserStore( DefaultParser ) {
 		this._DefaultParser = DefaultParser || null;
 		this._parsersForDataTypes = {};
 		this._parsersForDataValueTypes = {};

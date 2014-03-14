@@ -126,7 +126,7 @@
 	SELF.TYPE = 'ununserializable';
 
 	// NOTE: we don't have to register this one globally since this one is constructed on demand
-	//  rather than being constructed by some factory or builder.
+	//  rather than being provided by some store or builder.
 	//dv.registerDataValue( SELF );
 
 }( dataValues, util, jQuery ) );

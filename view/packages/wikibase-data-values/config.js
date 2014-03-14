@@ -125,8 +125,8 @@ this.config = ( function() {
 			'valueFormatters/valueFormatters': {
 				exports: 'valueFormatters'
 			},
-			'valueFormatters/ValueFormatterFactory': {
-				exports: 'valueFormatters.ValueFormatterFactory',
+			'valueFormatters/ValueFormatterStore': {
+				exports: 'valueFormatters.ValueFormatterStore',
 				deps: ['valueFormatters/valueFormatters', 'jquery']
 			},
 
@@ -152,8 +152,8 @@ this.config = ( function() {
 			'valueParsers/valueParsers': {
 				exports: 'valueParsers'
 			},
-			'valueParsers/ValueParserFactory': {
-				exports: 'valueParsers.ValueParserFactory',
+			'valueParsers/ValueParserStore': {
+				exports: 'valueParsers.ValueParserStore',
 				deps: ['valueParsers/valueParsers', 'jquery']
 			},
 
@@ -254,13 +254,13 @@ this.config = ( function() {
 			'tests/src/values/UnUnserializableValue.tests',
 
 			'tests/src/valueFormatters/valueFormatters.tests',
-			'tests/src/valueFormatters/ValueFormatterFactory.tests',
+			'tests/src/valueFormatters/ValueFormatterStore.tests',
 
 			'tests/src/valueFormatters/formatters/NullFormatter.tests',
 			'tests/src/valueFormatters/formatters/StringFormatter.tests',
 
 			'tests/src/valueParsers/valueParsers.tests',
-			'tests/src/valueParsers/ValueParserFactory.tests',
+			'tests/src/valueParsers/ValueParserStore.tests',
 
 			'tests/src/valueParsers/parsers/NullParser.tests',
 			'tests/src/valueParsers/parsers/StringParser.tests',

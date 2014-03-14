@@ -70,7 +70,7 @@
 	 */
 	dv.NumberValue.TYPE = 'number';
 
-	// make this data value available in the factory:
+	// make this data value available in the store:
 	dv.registerDataValue( dv.NumberValue );
 
 }( dataValues, util ) );

@@ -15,6 +15,13 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.5.0 (dev)
+
+#### Breaking changes
+
+* Renamed ValueFormatterFactory to ValueFormatterStore.
+* Renamed ValueParserFactory to ValueParserStore.
+
 ### 0.4.1 (dev)
 
 #### Enhancements
