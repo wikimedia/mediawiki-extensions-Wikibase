@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 0.7.3 (dev)
+
+* Deprecated Property::newEmpty
+
 ## Version 0.7.2 (2014-03-13)
 
 * Added Claims::getByRanks
