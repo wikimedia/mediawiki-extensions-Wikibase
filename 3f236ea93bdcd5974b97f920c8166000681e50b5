@@ -16,6 +16,24 @@
       "revId": "3f236ea93bdcd5974b97f920c8166000681e50b5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_08b38f4d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1481
+      },
+      "writtenOn": "2014-03-14T11:27:25Z",
+      "side": 1,
+      "message": "could you explain, how to do that.",
+      "parentUuid": "ee14bf34_dc39e1cc",
+      "revId": "3f236ea93bdcd5974b97f920c8166000681e50b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
