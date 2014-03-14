@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_683a0be6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T11:38:14Z",
+      "side": 1,
+      "message": "It\u0027s being set in start parse and this is an after parse hook, so I think so... might be better to play it safe by checking, though",
+      "parentUuid": "ee14bf34_4d1079ad",
+      "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_2d15459d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 4
@@ -64,6 +82,24 @@
       "writtenOn": "2014-03-14T03:44:14Z",
       "side": 1,
       "message": "fatal error, namespace checker expected as param #2",
+      "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_88355ff6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T11:38:14Z",
+      "side": 1,
+      "message": "that must be unrelated, then... yikes",
+      "parentUuid": "ee14bf34_2d15459d",
       "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
