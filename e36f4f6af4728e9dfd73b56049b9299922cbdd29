@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_056135d0",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T19:57:43Z",
+      "side": 1,
+      "message": "I understand, but, hm, ... can we do this in an other patch?",
+      "parentUuid": "ee14bf34_539b7c1b",
+      "revId": "e36f4f6af4728e9dfd73b56049b9299922cbdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_b38bf8c3",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-14T15:02:14Z",
       "side": 1,
       "message": "Have you check that this actually works as expected? Last time I messed with this code, I got myself thoroughly confused.",
+      "revId": "e36f4f6af4728e9dfd73b56049b9299922cbdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_c2a2133b",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T19:57:43Z",
+      "side": 1,
+      "message": "Here in this file I\u0027m really, really sure everything is wired together how it should be.",
+      "parentUuid": "ee14bf34_b38bf8c3",
       "revId": "e36f4f6af4728e9dfd73b56049b9299922cbdd29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
