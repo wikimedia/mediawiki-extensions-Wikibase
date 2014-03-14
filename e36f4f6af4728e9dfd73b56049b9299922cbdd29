@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_539b7c1b",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-14T15:02:14Z",
+      "side": 1,
+      "message": "EntityId should really be abstract, instantiating it directly is... ewww... But to create the correct instance, we\u0027d need a factory here. Which we don\u0027t want in a value object. So.\n\nEither kill getEntityId, or require an EntityId in the constructor.",
+      "revId": "e36f4f6af4728e9dfd73b56049b9299922cbdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b38bf8c3",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-14T15:02:14Z",
+      "side": 1,
+      "message": "Have you check that this actually works as expected? Last time I messed with this code, I got myself thoroughly confused.",
+      "revId": "e36f4f6af4728e9dfd73b56049b9299922cbdd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
