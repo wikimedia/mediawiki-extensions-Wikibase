@@ -46,13 +46,6 @@ use WikiPage;
  */
 final class RepoHooks {
 
-	private static function isTitleInEntityNamespace( Title $title ) {
-		$entityNamespaces = array_flip( NamespaceUtils::getEntityNamespaces() );
-		$namespace = $title->getNamespace();
-
-		return array_key_exists( $namespace, $entityNamespaces );
-	}
-
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
@@ -1144,7 +1137,10 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
-		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$namespaceUtils = new NamespaceUtils( $settings->getSetting( 'entityNamespaces' ) );
+
+		if ( !$namespaceUtils->isTitleInEntityNamespace( $out->getTitle() ) ) {
 			return true;
 		}
 
