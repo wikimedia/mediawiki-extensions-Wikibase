@@ -16,11 +16,6 @@
 		dv.StringValue.TYPE
 	);
 
-	valueParserProvider.registerDataValueParser(
-		vp.TimeParser,
-		dv.TimeValue.TYPE
-	);
-
 	/**
 	 * Object representing the MediaWiki "ValueParsers" extension.
 	 * @since 0.1
