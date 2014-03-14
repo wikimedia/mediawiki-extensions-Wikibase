@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_ce67dfb3",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-14T16:41:06Z",
+      "side": 1,
+      "message": "php can still only handle 4 digit years.\ngive this a massive year like 12901202013\nthe year element of the date will be 1290\nThis will therefore have incorrect behaviour everywhere :\u003e\nBest way is to just not use the Date / Time stuff within php itself and just get the year using a regex or something",
+      "revId": "261eca6ae14cb343d8c03a1e9c584ee379d0140d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
