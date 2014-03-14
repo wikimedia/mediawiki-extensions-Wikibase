@@ -53,7 +53,7 @@ class DateTimeParser extends StringValueParser {
 
 			//WTF PHP FAIL: Apparently PHP doesn't like spaces as separators in dates, so replace with a '-'
 			//              See http://de1.php.net/manual/en/datetime.formats.date.php
-			$value = preg_replace( '/\s+/', '-', trim( $value ) );
+			$value = preg_replace( '/\s+/', '.', trim( $value ) );
 
 			//Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			//TODO try to match and remove BCE etc. before putting the value into the DateTime object to get - dates!
