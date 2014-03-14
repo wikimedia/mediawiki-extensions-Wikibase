@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_93d9142f",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T14:25:46Z",
+      "side": 1,
+      "message": "Some basic character escaping should be done for $badge. I\u0027m not sure if addslashes() or some other pre-defined PHP function does the job. See http://www.w3.org/TR/CSS21/syndata.html#characters\n\nHere is a very, very basic suggestion that may be sufficent:\n\n$badge \u003d preg_replace( \u0027/\\W+/\u0027, \u0027\u0027, $badge );",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_33e808af",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T14:25:46Z",
+      "side": 1,
+      "message": "Intended?",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_d939f3cc",
         "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
         "patchSetId": 23
@@ -47,6 +81,23 @@
       "writtenOn": "2014-03-13T17:11:41Z",
       "side": 1,
       "message": "$badgeObject is misleading IMO... $badgeItemId or so might be more sane",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d3d66cf6",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T14:25:46Z",
+      "side": 1,
+      "message": "Avoid duplicate code:\n\nif ( !empty( $languageLink[\u0027class\u0027] ) ) {\n\t$languageLink[\u0027class\u0027] .\u003d \u0027 \u0027;\n}\n$languageLink[\u0027class\u0027] .\u003d \"badge-$badge\";\n\nAlso escaping should be done, see my other comment.",
       "revId": "170fead9337b0341c593425c14f61c5c736cd242",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
