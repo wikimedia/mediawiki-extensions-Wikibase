@@ -9,6 +9,8 @@ use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Terms;
 
 /**
  * @licence GNU GPL v2+
@@ -45,6 +47,7 @@ class PropertyDeserializer implements Deserializer {
 		$this->property = Property::newFromType( $this->getDataTypeId() );
 
 		$this->setPropertyId();
+		$this->addTerms();
 
 		return $this->property;
 	}
@@ -71,6 +74,10 @@ class PropertyDeserializer implements Deserializer {
 		}
 	}
 
+	/**
+	 * @return PropertyId
+	 * @throws InvalidAttributeException
+	 */
 	private function getPropertyId() {
 		$id = $this->idDeserializer->deserialize( $this->serialization['entity'] );
 
@@ -83,6 +90,28 @@ class PropertyDeserializer implements Deserializer {
 		}
 
 		return $id;
+	}
+
+	private function addTerms() {
+		$terms = $this->getTerms();
+
+		// TODO: try catch once setters do validation
+		$this->property->setLabels( $terms->getLabels()->toArray() );
+		$this->property->setDescriptions( $terms->getDescriptions()->toArray() );
+		$this->setAliases( $terms->getAliases() );
+	}
+
+	/**
+	 * @return Terms
+	 */
+	private function getTerms() {
+		return $this->termsDeserializer->deserialize( $this->serialization );
+	}
+
+	private function setAliases( AliasGroupList $aliases ) {
+		foreach ( $aliases->getAliasGroups() as $aliasGroup ) {
+			$this->property->setAliases( $aliasGroup->getLanguageCode(), $aliasGroup->getAliases() );
+		}
 	}
 
 }

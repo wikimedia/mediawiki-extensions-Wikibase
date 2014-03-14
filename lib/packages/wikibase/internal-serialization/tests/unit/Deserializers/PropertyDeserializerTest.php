@@ -29,7 +29,7 @@ class PropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGivenNonArraySerialization_deserializeThrowsException() {
+	public function testGivenNonArraySerialization_exceptionIsThrown() {
 		$this->expectDeserializationException();
 		$this->deserializer->deserialize( null );
 	}
@@ -38,12 +38,12 @@ class PropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
 	}
 
-	public function testGivenNoDataType_deserializeThrowsException() {
+	public function testGivenNoDataType_exceptionIsThrown() {
 		$this->expectDeserializationException();
 		$this->deserializer->deserialize( array() );
 	}
 
-	public function testGivenNonStringDataType_deserializeThrowsException() {
+	public function testGivenNonStringDataType_exceptionIsThrown() {
 		$this->expectDeserializationException();
 		$this->deserializer->deserialize( array( 'datatype' => null ) );
 	}
@@ -81,6 +81,75 @@ class PropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		$this->assertEquals( new PropertyId( 'p42' ), $property->getId() );
+	}
+
+	/**
+	 * @dataProvider labelListProvider
+	 */
+	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
+		$property = $this->deserializer->deserialize( array(
+			'datatype' => 'foo',
+			'label' => $labels
+		) );
+
+		$this->assertEquals( $labels, $property->getLabels() );
+	}
+
+	public function labelListProvider() {
+		return array(
+			array( array() ),
+
+			array( array(
+				'en' => 'foo',
+				'de' => 'bar',
+			) ),
+		);
+	}
+
+	public function testGivenInvalidLabels_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array( 'label' => null ) );
+	}
+
+	/**
+	 * @dataProvider labelListProvider
+	 */
+	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
+		$property = $this->deserializer->deserialize( array(
+			'datatype' => 'foo',
+			'description' => $descriptions
+		) );
+
+		$this->assertEquals( $descriptions, $property->getDescriptions() );
+	}
+
+	public function testGivenInvalidAliases_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array( 'aliases' => null ) );
+	}
+
+	/**
+	 * @dataProvider aliasesListProvider
+	 */
+	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
+		$property = $this->deserializer->deserialize( array(
+			'datatype' => 'foo',
+			'aliases' => $aliases
+		) );
+
+		$this->assertEquals( $aliases, $property->getAllAliases() );
+	}
+
+	public function aliasesListProvider() {
+		return array(
+			array( array() ),
+
+			array( array(
+				'en' => array( 'foo', 'bar' ),
+				'de' => array( 'foo', 'bar', 'baz' ),
+				'nl' => array( 'bah' ),
+			) ),
+		);
 	}
 
 }
