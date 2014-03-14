@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_8d1691ab",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-14T03:44:14Z",
+      "side": 1,
+      "message": "maybe this belongs in the WikibaseClient factory instead of here?",
+      "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_6d1b3dd5",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-14T03:44:14Z",
+      "side": 1,
+      "message": "this also? could go in WikibaseClient factory?",
+      "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_4d1079ad",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-14T03:44:14Z",
+      "side": 1,
+      "message": "is there any situation where $parser-\u003egetTitle() will return null or something not a title?\n\nit appears to be set with $parser-\u003esetTitle() and indirectly gets set at the beginning of $parser-\u003eparse().  so it might be safe to assume but not sure enough.",
+      "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_2d15459d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-14T03:44:14Z",
+      "side": 1,
+      "message": "fatal error, namespace checker expected as param #2",
+      "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_0d2a81d7",
+        "filename": "client/includes/parserhooks/NoLangLinkHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-14T03:44:14Z",
+      "side": 1,
+      "message": "isn\u0027t this going to produce a fatal error?",
+      "revId": "4dbae55939196d6ceb0b5bc8ec4aabeaf2b1e5de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
