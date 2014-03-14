@@ -21,8 +21,6 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 * mw.ext.valueParsers does not register valueParsers.TimeParser anymore
 
-### 0.3.2 (???)
-
 #### Bugfixes
 
 * Fixed definitions of ResourceLoader test modules.
