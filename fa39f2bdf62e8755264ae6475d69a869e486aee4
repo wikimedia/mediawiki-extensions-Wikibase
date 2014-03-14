@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_533ffcd3",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:29:44Z",
+      "side": 1,
+      "message": "Please remove this doc. It does not add value, and as it is clearly demonstrating, is prone to get out of date.",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b32f789c",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:29:44Z",
+      "side": 1,
+      "message": "SpecialWatchlistQueryHandler-\u003ehandle\n\nIt is really hard for me to determine the intention here. I need to go look at all kinds of random details that don\u0027t explain themselves just from this code to get a rough idea.\n\nPlease try to clearly define the responsibility of this class, and have the name reflect that.",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f35e1048",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:29:44Z",
+      "side": 1,
+      "message": "how about moving the body of this if part also into its own method?",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_1329849a",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:29:44Z",
+      "side": 1,
+      "message": "This also does not add value, the param already has a type hint",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
