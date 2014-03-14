@@ -20,6 +20,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 #### Breaking changes
 
 * mw.ext.valueParsers does not register valueParsers.TimeParser anymore
+* mw.ext.valueFormatters does not register valueFormatters.StringFormatter anymore
 
 #### Bugfixes
 
