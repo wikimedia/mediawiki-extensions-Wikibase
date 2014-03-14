@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_8e8c473c",
+        "filename": "lib/includes/formatters/HtmlTimeFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-14T17:10:07Z",
+      "side": 1,
+      "message": "/^[+-](\\d+)-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/\n\nshould also work be slightly faster and then use $matches[1]",
+      "revId": "6fc7805c7b53e5a708a99a61f04d71804bedb1f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
