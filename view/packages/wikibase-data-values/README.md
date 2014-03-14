@@ -21,6 +21,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 * Renamed ValueFormatterFactory to ValueFormatterStore.
 * Renamed ValueParserFactory to ValueParserStore.
+* Removed mw.ext.valueFormatters and mw.ext.valueParsers.
 
 ### 0.4.1 (dev)
 
