@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+
+use Title;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -14,6 +16,30 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 final class NamespaceUtils {
+
+	/**
+	 * @var array
+	 */
+	private $entityNamespaces;
+
+	/**
+	 * @param array $entityNamespaces
+	 */
+	public function __construct( array $entityNamespaces ) {
+		$this->entityNamespaces = $entityNamespaces;
+	}
+
+	/**
+	 * @param Title $title
+	 *
+	 * @return boolean
+	 */
+	public function isTitleInEntityNamespace( Title $title ) {
+		$entityNamespaces = array_flip( $this->entityNamespaces );
+		$namespace = $title->getNamespace();
+
+		return array_key_exists( $namespace, $entityNamespaces );
+	}
 
 	/**
 	 * Returns a list of entity content model ids pointing to the ids of the namespaces in which they reside.

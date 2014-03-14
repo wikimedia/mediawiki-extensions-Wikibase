@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Title;
 use Wikibase\NamespaceUtils;
 
 /**
@@ -28,6 +29,37 @@ class NamespaceUtilsTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$this->assertFalse( NamespaceUtils::isEntityNamespace( 720101010 ) );
+	}
+
+	/**
+	 * @dataProvider isTitleInEntityNamespaceProvider
+	 */
+	public function testIsTitleInEntityNamespace( $expected, array $namespaces, Title $title ) {
+		$namespaceUtils = new NamespaceUtils( $namespaces );
+
+		$this->assertEquals( $expected, $namespaceUtils->isTitleInEntityNamespace( $title ) );
+	}
+
+	public function isTitleInEntityNamespaceProvider() {
+		$namespaces = array(
+			'wikibase-item' => 0,
+			'wikibase-property' => 102,
+		);
+
+		$namespaces2 = array(
+			'wikibase-item' => 120,
+			'wikibase-property' => 122
+		);
+
+		return array(
+			array( true, $namespaces, Title::makeTitle( 0, 'Cat' ) ),
+			array( false, $namespaces, Title::makeTitle( 2, 'Cat' ) ),
+			array( true, $namespaces, Title::makeTitle( 102, 'Cat' ) ),
+			array( false, $namespaces2, Title::makeTitle( 0, 'Cat' ) ),
+			array( false, $namespaces2, Title::makeTitle( 2, 'Cat' ) ),
+			array( true, $namespaces2, Title::makeTitle( 120, 'Cat' ) ),
+			array( true, $namespaces2, Title::makeTitle( 122, 'Cat' ) )
+		);
 	}
 
 }
