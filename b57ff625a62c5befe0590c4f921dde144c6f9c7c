@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_933354c0",
+        "filename": "repo/includes/NamespaceUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T13:28:09Z",
+      "side": 1,
+      "message": "@throws",
+      "revId": "b57ff625a62c5befe0590c4f921dde144c6f9c7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b3be58f9",
+        "filename": "repo/includes/NamespaceUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T13:28:09Z",
+      "side": 1,
+      "message": "self::getEntityNamespaces() if you don\u0027t want the static code to be used, deprecate it",
+      "revId": "b57ff625a62c5befe0590c4f921dde144c6f9c7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7338c09b",
+        "filename": "repo/includes/NamespaceUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T13:28:09Z",
+      "side": 1,
+      "message": "bool, probably (not sure about boolean vs. bool)",
+      "revId": "b57ff625a62c5befe0590c4f921dde144c6f9c7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
