@@ -9,14 +9,14 @@ jQuery.valueview = jQuery.valueview || {};
 	'use strict';
 
 	/**
-	 * Factory managing jQuery.valueview.Expert instances
+	 * Store managing jQuery.valueview.Expert instances
 	 * @constructor
 	 * @since 0.1
 	 *
 	 * @param {Function} [DefaultExpert] Constructor of a default expert that shall be returned when
 	 *        no expert is registered for a specific purpose.
 	 */
-	var SELF = $.valueview.ExpertFactory = function ValueviewExpertFactory( DefaultExpert ) {
+	var SELF = $.valueview.ExpertStore = function ValueviewExpertStore( DefaultExpert ) {
 		this._DefaultExpert = DefaultExpert || null;
 		this._expertsForDataValueTypes = {};
 		this._expertsForDataTypes = {};

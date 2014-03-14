@@ -32,10 +32,10 @@ function expertProxy( fnName ) {
  * @extends jQuery.Widget
  * @since 0.1
  *
- * @option {jQuery.valueview.ExpertFactory} expertProvider Used to determine an expert
- *         strategy depending on the data value type or the data type the valueview should handle.
- *         The valueview will be able to handle all data value types and data types the given
- *         provider has experts registered for.
+ * @option {jQuery.valueview.ExpertStore} expertStore Used to determine an expert depending on the
+ *         data value type or the data type the valueview should handle.
+ *         The valueview will be able to handle all data value types and data types the given store
+ *         has experts registered for.
  *
  * @option {valueParsers.valueParserFactory} valueParserProvider Factory providing the
  *         parsers that values may be parsed with.
@@ -130,8 +130,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Expert object responsible for serving the DOM to edit the current value. This is only available
 	 * when in edit mode, otherwise it is null.
-	 * Can also be null if the current value has a has data value type unknown to the expert factory
-	 * given in the "expertProvider" option.
+	 * Can also be null if the current value has a data value type unknown to the expert store given
+	 * in the "expertStore" option.
 	 * @type jQuery.valueview.Expert|null
 	 */
 	_expert: null,
@@ -147,7 +147,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @see jQuery.Widget.options
 	 */
 	options: {
-		expertProvider: null,
+		expertStore: null,
 		valueParserProvider: null,
 		valueFormatterProvider: null,
 		dataTypeId: null,
@@ -212,7 +212,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		PARENT.prototype._setOption.call( this, key, value );
 
 		switch( key ) {
-			case 'expertProvider':
+			case 'expertStore':
 			case 'dataTypeId': // TODO: make this work properly and test
 			case 'dataValueType':
 				this._updateExpertConstructor();
@@ -444,8 +444,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Will update the constructor currently used for creating an expert, if one is needed.
 	 */
 	_updateExpertConstructor: function() {
-		if( !( this.options.expertProvider instanceof $.valueview.ExpertFactory ) ) {
-			throw new Error( 'No ExpertProvider set in valueview\'s "expertProvider" option' );
+		if( !( this.options.expertStore instanceof $.valueview.ExpertStore ) ) {
+			throw new Error( 'No ExpertStore set in valueview\'s "expertStore" option' );
 		}
 
 		var dataValueType = this._determineDataValueType();
@@ -453,7 +453,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		this._expertConstructor = $.valueview.experts.EmptyValue;
 
 		if( dataValueType || this.options.dataTypeId ) {
-			this._expertConstructor = this.options.expertProvider.getExpert(
+			this._expertConstructor = this.options.expertStore.getExpert(
 				dataValueType,
 				this.options.dataTypeId
 			) || $.valueview.experts.UnsupportedValue;

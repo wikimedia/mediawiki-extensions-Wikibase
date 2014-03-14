@@ -10,24 +10,24 @@
 
 	mw.ext = mw.ext || {};
 
-	var expertProvider = new vv.ExpertFactory( vv.experts.UnsupportedValue );
+	var expertStore = new vv.ExpertStore( vv.experts.UnsupportedValue );
 
-	expertProvider.registerDataValueExpert(
+	expertStore.registerDataValueExpert(
 		vv.experts.StringValue,
 		dv.StringValue.TYPE
 	);
 
-	expertProvider.registerDataValueExpert(
+	expertStore.registerDataValueExpert(
 		vv.experts.GlobeCoordinateInput,
 		dv.GlobeCoordinateValue.TYPE
 	);
 
-	expertProvider.registerDataValueExpert(
+	expertStore.registerDataValueExpert(
 		vv.experts.StringValue,
 		dv.QuantityValue.TYPE
 	);
 
-	expertProvider.registerDataValueExpert(
+	expertStore.registerDataValueExpert(
 		vv.experts.TimeInput,
 		dv.TimeValue.TYPE
 	);
@@ -38,19 +38,19 @@
 	 */
 	mw.ext.valueView = new ( function MwExtValueView() {
 		/**
-		 * Expert provider containing all jQuery.valueview experts available in MediaWiki context.
+		 * Expert store containing all jQuery.valueview experts available in MediaWiki context.
 		 * @since 0.1
 		 *
-		 * @type {jQuery.valueview.ExpertFactory}
+		 * @type {jQuery.valueview.ExpertStore}
 		 */
-		this.expertProvider = expertProvider;
+		this.expertStore = expertStore;
 	} )();
 
-	// "expertProvider", "valueParserProvider" and "valueFormatterProvider" are required options of
+	// "expertStore", "valueParserProvider" and "valueFormatterProvider" are required options of
 	// the jQuery.valueview widget.
 	// If valueview is used in MediaWiki context, these option should not be required anymore and
 	// default to the automatically generated providers.
-	vv.prototype.options.expertProvider = expertProvider;
+	vv.prototype.options.expertStore = expertStore;
 	vv.prototype.options.valueParserProvider = mw.ext.valueParsers.valueParserProvider;
 	vv.prototype.options.valueFormatterProvider = mw.ext.valueFormatters.valueFormatterProvider;
 

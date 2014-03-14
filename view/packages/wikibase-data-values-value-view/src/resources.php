@@ -42,9 +42,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.ExpertFactory' => $moduleTemplate + array(
+		'jquery.valueview.ExpertStore' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview.ExpertFactory.js',
+				'jquery.valueview.ExpertStore.js',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -73,7 +73,7 @@ return call_user_func( function() {
 				'jquery',
 				'jquery.ui.widget',
 				'jquery.valueview.ViewState',
-				'jquery.valueview.ExpertFactory',
+				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.EmptyValue',
 				'jquery.valueview.experts.UnsupportedValue',
 				'util.Notifier',
@@ -101,7 +101,7 @@ return call_user_func( function() {
 				'jquery.valueview.experts.GlobeCoordinateInput',
 				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.experts.TimeInput',
-				'jquery.valueview.ExpertFactory',
+				'jquery.valueview.ExpertStore',
 				'mediawiki',
 				'mw.ext.valueFormatters',
 				'mw.ext.valueParsers',
