@@ -80,8 +80,6 @@ final class LibHooks {
 				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
 
-				'tests/qunit/wikibase.dataTypes/wikibase.dataTypes.tests.js',
-
 				'tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.reference.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js',
@@ -242,6 +240,16 @@ final class LibHooks {
 			'dependencies' => array(
 				'wikibase.compileEntityStoreFromMwConfig',
 				'wikibase.tests.qunit.testrunner'
+			),
+		);
+
+		$testModules['qunit']['tests/qunit/wikibase.dataTypes/wikibase.dataTypes.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/wikibase.dataTypes/wikibase.dataTypes.tests.js',
+			),
+			'dependencies' => array(
+				'dataTypes.DataTypeStore',
+				'wikibase.dataTypes',
 			),
 		);
 

@@ -22,7 +22,6 @@ return call_user_func( function() {
 				'wikibase.experts.register.js',
 			),
 			'dependencies' => array(
-				'dataTypes',
 				'jquery.valueview.experts.CommonsMediaType',
 				'jquery.valueview.experts.UrlType',
 				'mw.ext.valueView',
