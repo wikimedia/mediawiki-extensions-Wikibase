@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_65e111fb",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T20:38:53Z",
+      "side": 1,
+      "message": "Much better. But I still have to ask why the variable is part of the method signature if it is of absolutely no use for the user of the class?",
+      "revId": "89b4040db273a26955cb5e6f1f1a7865951f84f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
