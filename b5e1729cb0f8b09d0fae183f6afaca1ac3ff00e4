@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_0e0f1735",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-14T15:41:20Z",
+      "side": 1,
+      "message": "You mean a prerequisite to fixing the bug I hope :)",
+      "revId": "b5e1729cb0f8b09d0fae183f6afaca1ac3ff00e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
