@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_a8fb83b9",
+        "filename": "client/includes/hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T10:34:35Z",
+      "side": 1,
+      "message": "In general it looks strange to not use the omnipresent Html or Xml classes to create the HTML here.\nAt least add htmlspecialchars().",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_c81597eb",
+        "filename": "client/includes/hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T10:34:35Z",
+      "side": 1,
+      "message": "No sanitation at all? No Html class? Not even htmlspecialchars()?",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_68068bd3",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T10:34:35Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be done. It really should be possible to solve the problem you are trying to solve here (in PHP) in the CSS file instead.",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_2859b301",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T10:34:35Z",
+      "side": 1,
+      "message": "Why is a \"style\" module (wikibase.client.css) in an \"js\" array? The \"wikibase.client.nolanglinks\" module below uses \"css\". I\u0027m pretty sure the same should be done here.",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_68b7abd4",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-14T10:34:35Z",
+      "side": 1,
+      "message": "This is obviously personal preference but I find\nsuch a long chain of repeating the same lines of code confusing. ;-)\nWhy not\nif ( condition1\n\t|| condition2\n\t|| condition3 ) {\n\treturn false;\n}",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
