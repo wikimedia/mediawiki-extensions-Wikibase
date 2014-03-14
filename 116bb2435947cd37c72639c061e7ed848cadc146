@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_a8bee3f8",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-14T10:18:49Z",
+      "side": 1,
+      "message": "Good point, will think about it. \n\nHowever, this is nice because i can call listEntities( null, 100, $offset ) without defining $offset first, it will be initialized \"on the fly\". If the caller had to initialize $offset, they would have to know/think about the type of $offset, which they really shouldn\u0027t - the type should be completely opaque. Ok, starting with null isn\u0027t so bad, but still...",
+      "parentUuid": "ee14bf34_08c82fa9",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_d918d325",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 4
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_a81263ff",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-14T10:18:49Z",
+      "side": 1,
+      "message": "This isn\u0027t circumventing it but using the pager as intended, and a pager is essentially an iterator (of lists, of or iterators). $offset is a \"runner\" or \"index\" variable, updated and initialized on the fly by listEntities(). Reference (output) parameters are a bit non-obvious, I agree... I tend to avoid them. But the way this works is quite simmlar to how DB result sets work, and also how iterative parsing/matching often works (using mutable index object for maintaining the current offset/position).\n\nNote that this used to be an iterator (Traversable) previously, but making a \"paging iterator\" in a way that works nicely a) with database queries and b) with an underlying file pointer proved to be rather nasty. So I went for the present interface, which is nice to use, but perhaps not that obvious.\n\nI\u0027ll think about better naming and improve documentation. Maybe I\u0027ll also come up with a more obvious way to stop the loop.",
+      "parentUuid": "ee14bf34_28d3f362",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_e8c4db96",
         "filename": "repo/includes/store/EntityIdPager.php",
         "patchSetId": 4
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_08eb8fdc",
+        "filename": "repo/includes/store/EntityIdPager.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-14T10:18:49Z",
+      "side": 1,
+      "message": "See my comment in EntityIdReader.php.",
+      "parentUuid": "ee14bf34_e8c4db96",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_b9fe3faa",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 4
@@ -98,6 +152,24 @@
       "writtenOn": "2014-03-13T22:04:54Z",
       "side": 1,
       "message": "no need for the \\",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_e8e73b0c",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-14T10:18:49Z",
+      "side": 1,
+      "message": "Yea, silly PhpStorm",
+      "parentUuid": "ee14bf34_b9fe3faa",
       "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +204,24 @@
       "writtenOn": "2014-03-13T22:04:54Z",
       "side": 1,
       "message": "indeed...",
+      "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_48b867e2",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-14T10:18:49Z",
+      "side": 1,
+      "message": "But then we\u0027ll be dumping entities in \"bad\" order: Q1, Q10, Q100, Q101, Q110, Q11, ...",
+      "parentUuid": "ee14bf34_f9f4b7cd",
       "revId": "116bb2435947cd37c72639c061e7ed848cadc146",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
