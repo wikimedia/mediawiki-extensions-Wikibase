@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_edce2d86",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T01:26:35Z",
+      "side": 1,
+      "message": "Agree... please do this at least in the constructor (or create a getter for each), passing this around seems ugly",
+      "parentUuid": "4e04eb01_b3836756",
+      "revId": "369d8ea1d495f580250e25098bc369952ac63280",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_53e9c30e",
         "filename": "repo/includes/api/SetClaim.php",
         "patchSetId": 7
