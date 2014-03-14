@@ -50,8 +50,8 @@ final class RepoHooks {
 		$entityNamespaces = array_flip( NamespaceUtils::getEntityNamespaces() );
 		$namespace = $title->getNamespace();
 
-		return in_array( $namespace, $entityNamespaces );
-    }
+		return array_key_exists( $namespace, $entityNamespaces );
+	}
 
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
