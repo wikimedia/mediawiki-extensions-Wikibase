@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_5387fcdc",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T14:40:43Z",
+      "side": 1,
+      "message": "Sanitizer::escapeClass() does exactly what we want here",
+      "parentUuid": "ee14bf34_93d9142f",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_33e808af",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 23
@@ -81,6 +99,23 @@
       "writtenOn": "2014-03-13T17:11:41Z",
       "side": 1,
       "message": "$badgeObject is misleading IMO... $badgeItemId or so might be more sane",
+      "revId": "170fead9337b0341c593425c14f61c5c736cd242",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_338c88ff",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-14T14:40:43Z",
+      "side": 1,
+      "message": "Sanitizier::escapeClass()",
       "revId": "170fead9337b0341c593425c14f61c5c736cd242",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
