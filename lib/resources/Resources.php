@@ -817,7 +817,6 @@ return call_user_func( function() {
 				'jquery.wikibase.claimlistview',
 				'jquery.wikibase.claimgrouplistview',
 				'jquery.wikibase.toolbarcontroller',
-				'wikibase.templates'
 			)
 		),
 

@@ -76,9 +76,6 @@
 				new wb.ui.AliasesEditTool( this );
 			} );
 
-			// remove all the headings except the site link section headings
-			$( '.wb-section-heading' ).not( '.wb-sitelinks-heading' ).remove();
-
 			// BUILD CLAIMS VIEW:
 			// Note: $.entityview() only works for claims right now, the goal is to use it for more
 			var $claims = $( '.wb-claims' ).first(),
