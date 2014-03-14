@@ -48,7 +48,7 @@
 		 * the new value has been called. The use of this, basically, is a structural improvement
 		 * which allows moving setting the displayed value to the draw() method which is supposed to
 		 * handle all visual manners.
-		 * @type {time.Time|null|false}
+		 * @type {string|null|false}
 		 */
 		_newValue: null,
 
@@ -107,29 +107,13 @@
 					// extension() is available in draw().
 					self.$input.one( 'inputextenderaftertoggle', function( event ) {
 						self.draw();
-						var value = self.rawValue();
-						if( value !== null ) {
-							self.$precision.data( 'listrotator' ).rotate( value.precision() );
-							self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
-						}
 					} );
 				},
 				contentAnimationEvents: 'toggleranimation'
 			} )
-			.timeinput( { mediaWiki: this._options.mediaWiki } )
-			.on( 'timeinputupdate.' + this.uiBaseClass, function( event, value ) {
-				if( self.$input.data( 'inputextender' ).extensionIsActive() ) {
-					self._updateCalendarHint( value );
-					if( value ) {
-						self.$precision.data( 'listrotator' ).rotate( value.precision() );
-						self.$calendar.data( 'listrotator' ).rotate( value.calendar() );
-					}
-					self._updatePreview();
-				}
-				self._newValue = false; // value, not yet handled by draw(), is outdated now
+			.on( 'eachchange', function( event, oldValue ) {
 				self._viewNotifier.notify( 'change' );
 			} );
-
 		},
 
 		/**
@@ -140,7 +124,9 @@
 		 * @param {jQuery} $extension
 		 */
 		_initInputExtender: function( $extension ) {
-			var self = this;
+			var self = this,
+				listrotatorEvents = 'listrotatorauto listrotatorselected'
+					.replace( /(\w+)/g, '$1.' + this.uiBaseClass );
 
 			this.$precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
@@ -161,30 +147,21 @@
 			this.$precision = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precision' )
 			.listrotator( { values: precisionValues.reverse(), deferInit: true } )
-			.on(
-				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
-				function( event, newValue ) {
-					var rawValue = self._getRawValue();
+			.on( listrotatorEvents,	function( event, newPrecisionLevel ) {
+				var currentValue = self.viewState().value();
 
-					if( rawValue === null || newValue === rawValue.precision() ) {
-						// Listrotator has been rotated automatically, the value covering the new
-						// precision has already been generated or the current input is invalid.
+				if( currentValue ) {
+					var currentPrecision = currentValue.getValue().precision();
+
+					if( newPrecisionLevel === currentPrecision ) {
+						// Listrotator has been rotated automatically or the value covering the new
+						// precision has already been generated.
 						return;
 					}
-
-					var overwrite = {};
-
-					if( event.type === 'listrotatorauto' ) {
-						overwrite.precision = undefined;
-					}
-
-					var value = self._updateValue( overwrite );
-
-					if( event.type === 'listrotatorauto' ) {
-						$( this ).data( 'listrotator' ).rotate( value.precision() );
-					}
 				}
-			)
+
+				self._updateValue();
+			} )
 			.appendTo( this.$precisionContainer );
 
 			this.$calendarContainer = $( '<div/>' )
@@ -204,30 +181,21 @@
 			} );
 			this.$calendar = $( '<div/>' )
 			.listrotator( { values: calendarValues, deferInit: true } )
-			.on(
-				'listrotatorauto.' + this.uiBaseClass + ' listrotatorselected.' + this.uiBaseClass,
-				function( event, newValue ) {
-					var rawValue = self._getRawValue();
+			.on( listrotatorEvents,	function( event, newValue ) {
+				var currentValue = self.viewState().value();
 
-					if( rawValue === null || newValue === rawValue.calendar() ) {
-						// Listrotator has been rotated automatically, the value covering the new
-						// precision has already been generated or the current input is invalid.
+				if( currentValue ) {
+					var currentCalendar = currentValue.getValue().calendar();
+
+					if( newValue === currentCalendar ) {
+						// Listrotator has been rotated automatically or the value covering the new
+						// precision has already been generated.
 						return;
 					}
-
-					var overwrite = {};
-
-					if( event.type === 'listrotatorauto' ) {
-						overwrite.calendarname = undefined;
-					}
-
-					var value = self._updateValue( overwrite );
-
-					if( event.type === 'listrotatorauto' ) {
-						$( this ).data( 'listrotator' ).rotate( value.calendar() );
-					}
 				}
-			)
+
+				self._updateValue();
+			} )
 			.appendTo( this.$calendarContainer );
 
 			var $toggler = $( '<a/>' )
@@ -288,11 +256,6 @@
 				this.preview.element.remove();
 			}
 
-			var timeInput = this.$input.data( 'timeinput' );
-			if( timeInput ) {
-				timeInput.destroy();
-			}
-
 			var inputExtender = this.$input.data( 'inputextender' );
 			if( inputExtender ) {
 				// TODO: implement a init/destroy callback for input extender's extension instead,
@@ -306,6 +269,8 @@
 				inputExtender.destroy();
 			}
 
+			this.$input.off( 'eachchange' );
+
 			this.$input = null;
 			this.$precision = null;
 			this.$precisionContainer = null;
@@ -318,31 +283,10 @@
 		/**
 		 * Builds a time.Time object from the widget's current input and advanced adjustments.
 		 *
-		 * @param {Object} [overwrites] Values that should be used instead of the ones picked from
-		 *        the input elements.
 		 * @return {time.Time}
 		 */
-		_updateValue: function( overwrites ) {
-			overwrites = overwrites || {};
-
-			var options = {},
-				precision = ( overwrites.hasOwnProperty( 'precision' ) )
-					? overwrites.precision
-					: this.$precision.data( 'listrotator' ).value(),
-				calendarname = ( overwrites.hasOwnProperty( 'calendarname' ) )
-					? overwrites.calendarname
-					: this.$calendar.data( 'listrotator' ).value(),
-				value = null;
-
-			if( precision !== undefined ) {
-				options.precision = precision;
-			}
-
-			if( calendarname !== undefined ) {
-				options.calendarname = calendarname;
-			}
-
-			value = new Time( this.$input.val(), options );
+		_updateValue: function() {
+			var value = new Time( this.$input.val(), this.valueCharacteristics() );
 
 			this._setRawValue( value );
 			this._updatePreview();
@@ -353,17 +297,33 @@
 		},
 
 		/**
+		 * @see jQuery.valueview.Expert.valueCharacteristics
+		 */
+		valueCharacteristics: function() {
+			var value = this.viewState().value();
+			if( value ) {
+				value = value.getValue();
+			}
+
+			var options = {},
+				precision = this.$precision && this.$precision.data( 'listrotator' ).value(),
+				calendarname = this.$calendar && this.$calendar.data( 'listrotator' ).value();
+
+			options.precision = precision || value && value.precision();
+			options.calendar = calendarname ? this._calendarNameToUri( calendarname ) : ( value && value.calendarURI() );
+
+			return options;
+		},
+
+		_calendarNameToUri: function( calendarname ) {
+			return new Time( { calendarname: calendarname, precision: 0, year: 0 } ).calendarURI();
+		},
+
+		/**
 		 * Updates the preview.
 		 */
 		_updatePreview: function() {
-			var rawValue = this._getRawValue(),
-				options = {};
-
-			if ( this._options.mediaWiki ) {
-				options.format = this._options.mediaWiki.user.options.get( 'date' );
-			}
-
-			this.preview.update( ( rawValue ) ? rawValue.text( options ) : null );
+			this.preview.update( this._viewState.getFormattedValue() );
 		},
 
 		/**
@@ -423,24 +383,29 @@
 		/**
 		 * @see jQuery.valueview.Expert._getRawValue
 		 *
-		 * @return {time.Time|null}
+		 * @return {string|null}
 		 */
 		_getRawValue: function() {
-			return ( this._newValue !== false )
+			return ( ( this._newValue !== false )
 				? this._newValue
-				: this.$input.data( 'timeinput' ).value();
+				: this.$input.val() ) || null;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert._setRawValue
 		 *
-		 * @param {time.Time|null} time
+		 * @param {time.Time|string|null} time
 		 */
-		_setRawValue: function( time ) {
-			if( !( time instanceof Time ) ) {
-				time = null;
+		_setRawValue: function( rawValue ) {
+			// FIXME: The only case in which this is not Time is when you cancel the
+			// edit and then start editing again.
+			if( rawValue instanceof Time ) {
+				rawValue = rawValue.text();
 			}
-			this._newValue = time;
+			else if( typeof rawValue !== 'string' ) {
+				rawValue = null;
+			}
+			this._newValue = rawValue;
 		},
 
 		/**
@@ -455,40 +420,45 @@
 				return true;
 			}
 
-			if( !( time1 instanceof Time ) || !( time2 instanceof Time ) ) {
-				return false;
+			// FIXME: This is fragile, but I think it does the right thing
+			if( time1 instanceof Time ) {
+				time1 = time1.text();
 			}
 
-			return time1.precision() === time2.precision()
-				&& time1.iso8601() === time2.iso8601();
+			if( time2 instanceof Time ) {
+				time2 = time2.text();
+			}
+
+			return time1 === time2;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert.draw
 		 */
 		draw: function() {
-			if( this._viewState.isDisabled() ) {
-				this.$input.data( 'timeinput' ).disable();
-			} else {
-				this.$input.data( 'timeinput' ).enable();
+			var value = this.viewState().value();
+			if( value ) {
+				value = value.getValue();
 			}
 
-			var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
+			this.$input.prop( 'disabled', this._viewState.isDisabled() );
 
 			if( this._newValue !== false ) {
-				this.$input.data( 'timeinput' ).value( this._newValue );
-
-				if( considerInputExtender ) {
-					this._updateCalendarHint( this._newValue );
-					if( this._newValue !== null ) {
-						this.$precision.data( 'listrotator' ).value( this._newValue.precision() );
-						this.$calendar.data( 'listrotator' ).value( this._newValue.calendar() );
-					}
+				if( !this.$input.val() ) {
+					this.$input.val( this._newValue );
 				}
 				this._newValue = false;
 			}
 
+			var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
+
 			if( considerInputExtender ) {
+				this._updateCalendarHint( value );
+				if( value ) {
+					this.$precision.data( 'listrotator' ).rotate( value.precision() );
+					this.$calendar.data( 'listrotator' ).rotate( value.calendar() );
+				}
+
 				this._updatePreview();
 			}
 		},

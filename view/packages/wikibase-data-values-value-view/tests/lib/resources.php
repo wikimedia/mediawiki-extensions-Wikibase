@@ -95,16 +95,6 @@ return call_user_func( function() {
 		),
 
 
-		'jquery.time.timeinput.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.time/jquery.time.timeinput.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.time.timeinput',
-			),
-		),
-
-
 		'jquery.ui.inputextender.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.inputextender.tests.js',
