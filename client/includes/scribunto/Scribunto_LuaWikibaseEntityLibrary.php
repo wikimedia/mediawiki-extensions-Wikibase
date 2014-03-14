@@ -82,18 +82,20 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $entityId
 	 * @param string $propertyId
+	 * @param array $acceptableRanks
 	 *
 	 * @throws ScribuntoException
 	 * @return array
 	 */
-	public function formatPropertyValues( $entityId, $propertyId ) {
+	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks ) {
 		$this->checkType( 'formatPropertyValues', 0, $entityId, 'string' );
 		// Use 1 as index for the property id, as the first parameter comes from
 		// internals of mw.wikibase.entity (an index of 2 might confuse users
 		// as they only gave one parameter themselves)
 		$this->checkType( 'formatPropertyValues', 1, $propertyId, 'string' );
+		$this->checkType( 'formatPropertyValues', 2, $acceptableRanks, 'table' );
 		try {
-			return array( $this->wbLibrary->formatPropertyValues( $entityId, $propertyId ) );
+			return array( $this->wbLibrary->formatPropertyValues( $entityId, $propertyId, $acceptableRanks ) );
 		} catch ( InvalidArgumentException $e ) {
 			throw new ScribuntoException( 'wikibase-error-invalid-entity-id' );
 		}

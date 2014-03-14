@@ -5,6 +5,7 @@ namespace Wikibase\Client\Scribunto\Test;
 use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\SnakFactory;
@@ -54,7 +55,15 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			new StringValue( 'Lua :)' )
 		);
 
-		$testClaim = $this->getTestClaim( $snak );
+		$statement1 = $this->getTestStatement( $snak );
+		$statement1->setRank( Claim::RANK_PREFERRED );
+
+		$snak = $this->getTestSnak(
+			$property->getId(),
+			new StringValue( 'This is clearly superior to the parser function' )
+		);
+		$statement2 = $this->getTestStatement( $snak );
+		$statement2->setRank( Claim::RANK_NORMAL );
 
 		$siteLinks = array( $siteLink );
 		$siteLinks[] = new SiteLink(
@@ -67,7 +76,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			'en' => 'Test all the code paths'
 		);
 
-		$this->createTestItem( $labels, array( $testClaim ), $siteLinks );
+		$this->createTestItem( $labels, array( $statement1, $statement2 ), $siteLinks );
 	}
 
 	/**
@@ -125,13 +134,13 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 
 	/**
 	 * @param Snak $mainSnak
-	 * @return Claim
+	 * @return Statement
 	 */
-	protected function getTestClaim( Snak $mainSnak ) {
-		$claim = new Claim( $mainSnak );
+	protected function getTestStatement( Snak $mainSnak ) {
+		$statement = new Statement( $mainSnak );
 		$guidGen = new V4GuidGenerator();
-		$claim->setGuid( $guidGen->newGuid() );
+		$statement->setGuid( $guidGen->newGuid() );
 
-		return $claim;
+		return $statement;
 	}
 }

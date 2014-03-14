@@ -121,10 +121,11 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @param string $entityId
 	 * @param string $propertyId
+	 * @param array $acceptableRanks
 	 *
 	 * @return string
 	 */
-	public function formatPropertyValues( $entityId, $propertyId ) {
+	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks = null ) {
 		$entityId = new ItemId( $entityId );
 		$propertyId = new PropertyId( $propertyId );
 
@@ -135,6 +136,15 @@ class WikibaseLuaEntityBindings {
 		}
 
 		$claims = $this->getClaimsForProperty( $entity, $propertyId );
+
+		if ( !$acceptableRanks ) {
+			// We only want the best claims over here, so that we only show the most
+			// relevant information.
+			$claims = $claims->getBestClaims();
+		} else {
+			// ... unless the user passed in a table of acceptable ranks
+			$claims = $claims->getByRanks( $acceptableRanks );
+		}
 
 		if ( $claims->isEmpty() ) {
 			return '';

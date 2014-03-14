@@ -67,6 +67,10 @@ local function testFormatPropertyValues( propertyId )
 	return getNewTestItem():formatPropertyValues( propertyId )
 end
 
+local function getClaimRank()
+	return mw.wikibase.entity.claimRanks.RANK_PREFERRED
+end
+
 -- Integration tests
 
 local function integrationTestGetPropertiesCount()
@@ -81,11 +85,11 @@ local function integrationTestGetSitelink( globalSiteId )
 	return mw.wikibase.getEntityObject():getSitelink( globalSiteId )
 end
 
-local function integrationTestFormatPropertyValues()
+local function integrationTestFormatPropertyValues( ranks )
 	local entity = mw.wikibase.getEntityObject()
 	local propertyId = entity:getProperties()[1]
 
-	return mw.wikibase.getEntityObject():formatPropertyValues( propertyId )
+	return mw.wikibase.getEntityObject():formatPropertyValues( propertyId, ranks )
 end
 
 local tests = {
@@ -144,6 +148,9 @@ local tests = {
 	  args = { function() end },
 	  expect = "bad argument #1 to 'formatPropertyValues' (string expected, got function)"
 	},
+	{ name = 'mw.wikibase.entity.claimRanks', func = getClaimRank,
+	  expect = { 2 }
+	},
 
 	-- Integration tests
 
@@ -164,8 +171,16 @@ local tests = {
 	{ name = 'mw.wikibase.entity.getProperties integration', func = integrationTestGetPropertiesCount,
 	  expect = { 1 }
 	},
-	{ name = 'mw.wikibase.entity.formatPropertyValues integration', func = integrationTestFormatPropertyValues,
+	{ name = 'mw.wikibase.entity.formatPropertyValues integration 1', func = integrationTestFormatPropertyValues,
 	  expect = { { label = 'LuaTestProperty', value = 'Lua :)' } }
+	},
+	{ name = 'mw.wikibase.entity.formatPropertyValues integration 2', func = integrationTestFormatPropertyValues,
+	  args = { { mw.wikibase.entity.claimRanks.RANK_PREFERRED, mw.wikibase.entity.claimRanks.RANK_NORMAL } },
+	  expect = { { label = 'LuaTestProperty', value = 'Lua :), This is clearly superior to the parser function' } }
+	},
+	{ name = 'mw.wikibase.entity.formatPropertyValues integration 3', func = integrationTestFormatPropertyValues,
+	  args = { { mw.wikibase.entity.claimRanks.RANK_TRUTH } },
+	  expect = { { label = 'LuaTestProperty', value = '' } }
 	},
 }
 
