@@ -91,13 +91,13 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 		$this->outputRow( array(
 			$this->msg( 'wikibase-dispatchstats-oldest-change' )->text(),
 			$stats->getMinChangeId(),
-			$lang->timeanddate( $stats->getMinChangeTimestamp() ),
+			$lang->timeanddate( $stats->getMinChangeTimestamp(), true ),
 		) );
 
 		$this->outputRow( array(
 			$this->msg( 'wikibase-dispatchstats-newest-change' )->text(),
 			$stats->getMaxChangeId(),
-			$lang->timeanddate( $stats->getMaxChangeTimestamp() ),
+			$lang->timeanddate( $stats->getMaxChangeTimestamp(), true ),
 		) );
 
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ));
