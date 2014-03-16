@@ -58,121 +58,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.parsers.api' => $moduleTemplate + array(
-			'scripts' => array(
-				'parsers/wikibase.parsers.api.js',
-			),
-			'dependencies' => array(
-				'wikibase',
-			),
-		),
-
-		'wikibase.ApiBasedValueParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'parsers/ApiBasedValueParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'valueParsers.ValueParser',
-				'wikibase.parsers.api',
-			),
-		),
-
-		'wikibase.EntityIdParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'parsers/EntityIdParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'valueParsers.ValueParser',
-				'wikibase',
-				'wikibase.datamodel',
-			),
-		),
-
-		'wikibase.GlobeCoordinateParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'parsers/GlobeCoordinateParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueParser',
-			),
-		),
-
-		'wikibase.TimeParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'parsers/TimeParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueParser',
-			),
-		),
-
-		'wikibase.QuantityParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'parsers/QuantityParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueParser',
-			),
-		),
-
-		'wikibase.parsers' => $moduleTemplate + array(
-			'scripts' => array(
-				'parsers/wikibase.parsers.register.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'mw.ext.valueParsers',
-				'wikibase.datamodel',
-				'wikibase.EntityIdParser',
-				'wikibase.GlobeCoordinateParser',
-				'wikibase.QuantityParser',
-				'wikibase.TimeParser',
-			),
-		),
-
-		'wikibase.formatters.api' => $moduleTemplate + array(
-			'scripts' => array(
-				'formatters/wikibase.formatters.api.js',
-			),
-			'dependencies' => array(
-				'mediawiki.api',
-				'dataTypes',
-				'wikibase',
-			),
-		),
-
-		'wikibase.ApiBasedValueFormatter' => $moduleTemplate + array(
-			'scripts' => array(
-				'formatters/ApiBasedValueFormatter.js',
-			),
-			'dependencies' => array(
-				'mediawiki.api',
-				'dataTypes',
-				'util.inherit',
-				'valueFormatters.ValueFormatter',
-				'wikibase.formatters.api',
-			),
-		),
-
-		'wikibase.formatters' => $moduleTemplate + array(
-			'scripts' => array(
-				'formatters/wikibase.formatters.register.js',
-			),
-			'dependencies' => array(
-				'dataTypes',
-				'dataValues.values',
-				'mw.ext.valueFormatters',
-				'wikibase.ApiBasedValueFormatter',
-				'wikibase.datamodel',
-				'wikibase.dataTypes',
-			),
-		),
-
 		'wikibase.dataTypes' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.dataTypes/wikibase.dataTypes.js',
@@ -939,7 +824,9 @@ return call_user_func( function() {
 
 	$modules = array_merge(
 		$modules,
-		include( __DIR__ . '/experts/resources.php' )
+		include( __DIR__ . '/experts/resources.php' ),
+		include( __DIR__ . '/formatters/resources.php' ),
+		include( __DIR__ . '/parsers/resources.php' )
 	);
 
 	if ( defined( 'ULS_VERSION' ) ) {
