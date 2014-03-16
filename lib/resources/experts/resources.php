@@ -19,11 +19,17 @@ return call_user_func( function() {
 
 		'wikibase.experts' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.experts.register.js',
+				'wikibase.experts.js',
 			),
 			'dependencies' => array(
+				'dataValues.values',
+				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.CommonsMediaType',
-				'mw.ext.valueView',
+				'jquery.valueview.experts.GlobeCoordinateInput',
+				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.experts.TimeInput',
+				'jquery.valueview.experts.UnsupportedValue',
+				'wikibase',
 				'wikibase.dataTypes',
 				'wikibase.datamodel',
 				'wikibase.experts.EntityIdInput',
