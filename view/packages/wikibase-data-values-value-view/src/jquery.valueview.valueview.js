@@ -815,7 +815,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {valueFormatters.ValueFormatter}
 	 */
 	_instantiateFormatter: function( additionalFormatterOptions ) {
-		if( !( this.options.valueFormatterStore instanceof vf.ValueFormatterStore ) ) {
+		if( !( this.options.formatterStore instanceof vf.ValueFormatterStore ) ) {
 			throw new Error( 'No value formatter store in valueview\'s options specified' );
 		}
 

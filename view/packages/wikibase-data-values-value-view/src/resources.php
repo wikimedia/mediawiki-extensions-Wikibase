@@ -91,23 +91,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'mw.ext.valueView' => $moduleTemplate + array(
-			'scripts' => array(
-				'mw.ext.valueView.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'jquery.valueview',
-				'jquery.valueview.experts.GlobeCoordinateInput',
-				'jquery.valueview.experts.StringValue',
-				'jquery.valueview.experts.TimeInput',
-				'jquery.valueview.ExpertStore',
-				'mediawiki',
-				'mw.ext.valueFormatters',
-				'mw.ext.valueParsers',
-			),
-		),
-
 	);
 
 	return $resources + include( __DIR__ . '/experts/resources.php' );
