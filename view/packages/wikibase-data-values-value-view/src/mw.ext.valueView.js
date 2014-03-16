@@ -46,12 +46,6 @@
 		this.expertStore = expertStore;
 	} )();
 
-	// "expertStore", "valueParserProvider" and "valueFormatterProvider" are required options of
-	// the jQuery.valueview widget.
-	// If valueview is used in MediaWiki context, these option should not be required anymore and
-	// default to the automatically generated providers.
 	vv.prototype.options.expertStore = expertStore;
-	vv.prototype.options.valueParserProvider = mw.ext.valueParsers.valueParserProvider;
-	vv.prototype.options.valueFormatterProvider = mw.ext.valueFormatters.valueFormatterProvider;
 
 }( mediaWiki, dataValues, jQuery.valueview ) );

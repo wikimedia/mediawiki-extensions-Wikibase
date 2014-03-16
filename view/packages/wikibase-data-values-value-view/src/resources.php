@@ -77,8 +77,8 @@ return call_user_func( function() {
 				'jquery.valueview.experts.EmptyValue',
 				'jquery.valueview.experts.UnsupportedValue',
 				'util.Notifier',
-				'valueFormatters.ValueFormatterFactory',
-				'valueParsers.ValueParserFactory',
+				'valueFormatters.ValueFormatterStore',
+				'valueParsers.ValueParserStore',
 			),
 		),
 

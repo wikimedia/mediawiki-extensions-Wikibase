@@ -37,11 +37,11 @@ function expertProxy( fnName ) {
  *         The valueview will be able to handle all data value types and data types the given store
  *         has experts registered for.
  *
- * @option {valueParsers.valueParserFactory} valueParserProvider Factory providing the
- *         parsers that values may be parsed with.
+ * @option {valueParsers.valueParserStore} parserStore Store providing the parsers values may
+ *         be parsed with.
  *
- * @option {valueFormatters.valueFormatterFactory} valueFormatterProvider Factory
- *         providing the formatters which value may be formatted with.
+ * @option {valueFormatters.valueFormatterStore} formatterStore Store providing the formatters
+ *         values may be formatted with.
  *
  * @option {string|null} [dataTypeId] If set, an expert (jQuery.valueview.Expert), a parser
  *         (valueParsers.ValueParser) and a formatter (valueFormatters.ValueFormatter) will be
@@ -148,8 +148,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	 */
 	options: {
 		expertStore: null,
-		valueParserProvider: null,
-		valueFormatterProvider: null,
+		parserStore: null,
+		formatterStore: null,
 		dataTypeId: null,
 		dataValueType: null,
 		value: null,
@@ -729,11 +729,11 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {valueParsers.ValueParser}
 	 */
 	_instantiateParser: function( additionalParserOptions ) {
-		if( !( this.options.valueParserProvider instanceof vp.ValueParserFactory ) ) {
-			throw new Error( 'No value parser provider in valueview\'s options specified' );
+		if( !( this.options.parserStore instanceof vp.ValueParserStore ) ) {
+			throw new Error( 'No value parser store in valueview\'s options specified' );
 		}
 
-		var Parser = this.options.valueParserProvider.getParser(
+		var Parser = this.options.parserStore.getParser(
 			this._determineDataValueType(),
 			this.options.dataTypeId
 		);
@@ -815,11 +815,11 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @return {valueFormatters.ValueFormatter}
 	 */
 	_instantiateFormatter: function( additionalFormatterOptions ) {
-		if( !( this.options.valueFormatterProvider instanceof vf.ValueFormatterFactory ) ) {
-			throw new Error( 'No value formatter provider in valueview\'s options specified' );
+		if( !( this.options.valueFormatterStore instanceof vf.ValueFormatterStore ) ) {
+			throw new Error( 'No value formatter store in valueview\'s options specified' );
 		}
 
-		var Formatter = this.options.valueFormatterProvider.getFormatter(
+		var Formatter = this.options.formatterStore.getFormatter(
 			this._determineDataValueType(),
 			this.options.dataTypeId
 		);
