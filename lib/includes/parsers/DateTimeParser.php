@@ -28,9 +28,15 @@ class DateTimeParser extends StringValueParser {
 	 */
 	private $monthUnlocaliser;
 
-	public function __construct( ParserOptions $options = null ) {
+	/**
+	 * @var EraParser
+	 */
+	private $eraParser;
+
+	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
 		parent::__construct( $options );
 		$this->monthUnlocaliser = new MonthNameUnlocalizer();
+		$this->eraParser = $eraParser;
 	}
 
 	/**
@@ -50,6 +56,8 @@ class DateTimeParser extends StringValueParser {
 		$largeYear = null;
 
 		try{
+			list( $sign, $value ) = $this->eraParser->parse( $value );
+
 			$value = $this->getValueWithFixedYearLengths(
 				$this->getValueWithFixedSeparators(
 					$this->monthUnlocaliser->unlocalize(
@@ -68,18 +76,16 @@ class DateTimeParser extends StringValueParser {
 			}
 
 			//Parse using the DateTime object (this will allow us to format the date in a nicer way)
-			//TODO try to match and remove BCE etc. before putting the value into the DateTime object to get - dates!
 			$dateTime = new DateTime( $value );
 			if( $largeYear === null ) {
-				$timeString = '+' . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
 			} else {
-				$timeString = '+' . $largeYear . $dateTime->format( '-m-d\TH:i:s\Z' );
+				$timeString = $sign . $largeYear . $dateTime->format( '-m-d\TH:i:s\Z' );
 			}
 
 			//Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
 			$valueParser = new \ValueParsers\TimeParser( $calendarModelParser, $options );
 			return $valueParser->parse( $timeString );
-
 		}
 		catch( Exception $exception ) {
 			throw new ParseException( $exception->getMessage() );
