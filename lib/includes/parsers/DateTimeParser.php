@@ -28,15 +28,21 @@ class DateTimeParser extends StringValueParser {
 	 */
 	private $monthUnlocaliser;
 
+	/**
+	 * @var string 4242 placeholder used while parsing dates with greater than 4 digit years
+	 */
+	private $yearPlaceholder = '4242';
+
 	public function __construct( ParserOptions $options = null ) {
 		parent::__construct( $options );
 		$this->monthUnlocaliser = new MonthNameUnlocalizer();
 	}
 
 	/**
-	 * Parses the provided string and returns the result.
+	 * Parses the provided string
 	 *
-	 * @param string $value
+	 * @param string $value in a format as specified by the PHP DateTime object
+	 *       there are exceptions as we can handel 5+ digit dates
 	 *
 	 * @throws ParseException
 	 * @return TimeValue
@@ -44,6 +50,10 @@ class DateTimeParser extends StringValueParser {
 	protected function stringParse( $value ) {
 		$calendarModelParser = new CalendarModelParser();
 		$options = $this->getOptions();
+
+		//Holder when large years are found
+		$largeYear = null;
+
 		try{
 			$value = $this->getValueWithFixedYearLengths(
 				$this->getValueWithFixedSeparators(
@@ -55,10 +65,21 @@ class DateTimeParser extends StringValueParser {
 				)
 			);
 
+			//PHP's DateTime object also cant handel larger than 4 digit years
+			//e.g. 1 June 202020
+			if( preg_match( '/^(.*[^\d]|)(\d{5,})(.*|)$/', $value, $matches ) ) {
+				$largeYear = $matches[2];
+				$value = $matches[1] . $this->yearPlaceholder . $matches[3];
+			}
+
 			//Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			//TODO try to match and remove BCE etc. before putting the value into the DateTime object to get - dates!
 			$dateTime = new DateTime( $value );
 			$timeString = '+' . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+
+			if( $largeYear !== null ) {
+				$timeString = preg_replace( '/' . $this->yearPlaceholder . '/', $largeYear, $timeString, 1 );
+			}
 
 			//Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
 			$valueParser = new \ValueParsers\TimeParser( $calendarModelParser, $options );
