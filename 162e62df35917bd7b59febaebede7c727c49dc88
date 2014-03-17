@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_903fbcd3",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T20:01:18Z",
+      "side": 1,
+      "message": "in general, we provide specific css per skin (if needed) and not try to include/exclude stuff all in one css file.\n\ngood news, we have a solution, such as:\n\n    \u0027skinStyles\u0027 \u003d\u003e array(                                                                             \n        \u0027monobook\u0027 \u003d\u003e \u0027wikibase.client.css\u0027,                                            \n    ),",
+      "parentUuid": "ee14bf34_b01be0d3",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_2859b301",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 11
