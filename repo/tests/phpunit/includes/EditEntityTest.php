@@ -10,6 +10,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntity;
+use Wikibase\EntityPermissionChecker;
+use Wikibase\EntityTitleLookup;
+use Wikibase\PreSaveChecks;
 
 /**
  * @covers Wikibase\EditEntity
@@ -57,17 +60,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param MockRepository $repo
-	 * @param Entity $entity
-	 * @param User $user
-	 * @param $baseRevId
-	 *
-	 * @return EditEntity
+	 * @return EntityTitleLookup
 	 */
-	protected function makeEditEntity( MockRepository $repo, Entity $entity, User $user = null, $baseRevId = false ) {
-		$context = new \RequestContext();
-		$context->setRequest( new \FauxRequest() );
-
+	protected function newTitleLookupMock() {
 		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
 
 		$titleLookup->expects( $this->any() )
@@ -80,6 +75,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 			->method( 'getNamespaceForType' )
 			->will( $this->returnValue( NS_MAIN ) );
 
+		return $titleLookup;
+	}
+
+	/**
+	 * @return PreSaveChecks
+	 */
+	protected function newPreSaveChecksMock() {
 		$checks = $this->getMockBuilder( 'Wikibase\PreSaveChecks' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -88,11 +90,65 @@ class EditEntityTest extends \MediaWikiTestCase {
 			->method( 'applyPreSaveChecks' )
 			->will( $this->returnValue( Status::newGood() ) );
 
+		return $checks;
+	}
+
+	/**
+	 * @param array|null $permissions
+	 *
+	 * @return EntityPermissionChecker
+	 */
+	protected function newEntityPermissionCheckerMock( $permissions ) {
+		$permissionChecker = $this->getMock( 'Wikibase\EntityPermissionChecker' );
+
+		$checkAction = function ( $user, $action ) use( $permissions ) {
+			if ( $permissions === null ) {
+				return Status::newGood( true );
+			} elseif ( isset( $permissions[$action] ) && $permissions[$action] )  {
+				return Status::newGood( true );
+			} else {
+				return Status::newFatal( 'badaccess-group0' );
+			}
+		};
+
+		$permissionChecker->expects( $this->any() )
+			->method( 'getPermissionStatusForEntity' )
+			->will( $this->returnCallback( $checkAction ) );
+
+		$permissionChecker->expects( $this->any() )
+			->method( 'getPermissionStatusForEntityType' )
+			->will( $this->returnCallback( $checkAction ) );
+
+		$permissionChecker->expects( $this->any() )
+			->method( 'getPermissionStatusForEntityId' )
+			->will( $this->returnCallback( $checkAction ) );
+
+		return $permissionChecker;
+	}
+
+	/**
+	 * @param MockRepository $repo
+	 * @param Entity $entity
+	 * @param User $user
+	 * @param bool $baseRevId
+	 *
+	 * @param null|array $permissions map of actions to bool, indicating which actions are allowed.
+	 *
+	 * @return EditEntity
+	 */
+	protected function makeEditEntity( MockRepository $repo, Entity $entity, User $user = null, $baseRevId = false, $permissions = null ) {
+		$context = new \RequestContext();
+		$context->setRequest( new \FauxRequest() );
+
 		if ( !$user ) {
 			$user = User::newFromName( 'EditEntityTestUser' );
 		}
 
-		$edit = new EditEntity( $titleLookup, $repo, $repo, $entity, $user, $baseRevId, $context );
+		$titleLookup = $this->newTitleLookupMock();
+		$checks = $this->newPreSaveChecksMock();
+		$permissionChecker = $this->newEntityPermissionCheckerMock( $permissions );
+
+		$edit = new EditEntity( $titleLookup, $repo, $repo, $permissionChecker, $entity, $user, $baseRevId, $context );
 		$edit->setPreSafeChecks( $checks );
 
 		return $edit;
@@ -328,26 +384,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 	public function dataCheckEditPermissions() {
 		return array(
-			array( #0: edit and createpage allowed for new item
-				'user',
+			array( #0: edit allowed for new item
 				array( 'read' => true, 'edit' => true, 'createpage' => true ),
 				false,
 				true,
 			),
-			array( #1: edit allowed but createpage not allowed for new item
-				'user',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
-				false,
-				false,
-			),
-			array( #2: edit allowed but createpage not allowed for existing item
-				'user',
-				array( 'read' => true, 'edit' => true, 'createpage' => false ),
-				true,
-				true,
-			),
 			array( #3: edit not allowed for existing item
-				'user',
 				array( 'read' => true, 'edit' => false ),
 				true,
 				false,
@@ -355,26 +397,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function prepareItemForPermissionCheck( MockRepository $repo, $group, $permissions, $create ) {
-		$user = self::getUser( "EditEntityTestUser" );
-
+	protected function prepareItemForPermissionCheck( User $user, MockRepository $repo, $create ) {
 		$item = Item::newEmpty();
 
 		if ( $create ) {
 			$item->setLabel( 'de', 'Test' );
 			$repo->putEntity( $item, 0, 0, $user );
-		}
-
-		if ( !in_array( $group, $user->getEffectiveGroups() ) ) {
-			$user->addGroup( $group );
-		}
-
-		if ( $permissions !== null ) {
-			PermissionsHelper::applyPermissions( array(
-				'*' => $permissions,
-				'user' => $permissions,
-				$group => $permissions,
-			) );
 		}
 
 		return $item;
@@ -383,15 +411,13 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider dataCheckEditPermissions
 	 */
-	public function testCheckEditPermissions( $group, $permissions, $create, $expectedOK ) {
+	public function testCheckEditPermissions( $permissions, $create, $expectedOK ) {
 		$repo = $this->makeMockRepo();
 
-		$item = $this->prepareItemForPermissionCheck( $repo, $group, $permissions, $create );
-		$item->setLabel( 'xx', 'Foo' . '/' . __FUNCTION__ );
-
 		$user = self::getUser( "EditEntityTestUser" );
-		$edit = $this->makeEditEntity( $repo, $item, $user );
+		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
+		$edit = $this->makeEditEntity( $repo, $item, $user, false, $permissions );
 		$edit->checkEditPermissions();
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
@@ -401,16 +427,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider dataCheckEditPermissions
 	 */
-	public function testAttemptSavePermissions( $group, $permissions, $create, $expectedOK ) {
+	public function testAttemptSavePermissions( $permissions, $create, $expectedOK ) {
 		$repo = $this->makeMockRepo();
 
 		$user = self::getUser( "EditEntityTestUser" );
-
-		$item = $this->prepareItemForPermissionCheck( $repo, $group, $permissions, $create );
-		$item->setLabel( 'xx', 'Foo' . '/' . __FUNCTION__ );
+		$item = $this->prepareItemForPermissionCheck( $user, $repo, $create );
 
 		$token = $user->getEditToken();
-		$edit = $this->makeEditEntity( $repo, $item, $user );
+		$edit = $this->makeEditEntity( $repo, $item, $user, false, $permissions );
 
 		$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), $token );
 
