@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_bb8ce13b",
+        "filename": "client/resources/wikibase.client.css",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T20:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_7ba9a9db",
+      "revId": "8cfb061863c2840c05ec2863288c7de1969a7022",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_dbb9d52a",
         "filename": "client/resources/wikibase.client.linkitem.init.js",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-17T20:27:48Z",
       "side": 1,
       "message": "This still confuses me. This new class does not exists, at least not in this patch.",
+      "revId": "8cfb061863c2840c05ec2863288c7de1969a7022",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_db9f9561",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T20:58:46Z",
+      "side": 1,
+      "message": "it\u0027s added in the BaseTemplateAfterPortlet hook handler",
+      "parentUuid": "ee14bf34_dbb9d52a",
       "revId": "8cfb061863c2840c05ec2863288c7de1969a7022",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
