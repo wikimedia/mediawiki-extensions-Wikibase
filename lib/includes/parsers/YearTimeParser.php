@@ -18,18 +18,21 @@ use ValueParsers\StringValueParser;
  */
 class YearTimeParser extends StringValueParser {
 
-	private $BCEregex = '(B\.?C(\.?E)?|Before\s(Christ|Common\sEra))';
-	private $CEregex = '(C\.?E|A\.?D|Common\sEra|Before\sChrist|Anno\sDomini)';
-
 	/**
 	 * @var \ValueParsers\TimeParser
 	 */
-	protected $timeValueTimeParser;
+	private $timeValueTimeParser;
 
 	/**
+	 * @var EraParser
+	 */
+	private $eraParser;
+
+	/**
+	 * @param EraParser $eraParser
 	 * @param ParserOptions $options
 	 */
-	public function __construct( ParserOptions $options = null ) {
+	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
 		if( is_null( $options ) ) {
 			$options = new ParserOptions();
 		}
@@ -39,6 +42,9 @@ class YearTimeParser extends StringValueParser {
 			new CalendarModelParser(),
 			$this->getOptions()
 		);
+
+		//@todo inject me [=
+		$this->eraParser = $eraParser;
 	}
 
 	/**
@@ -50,51 +56,8 @@ class YearTimeParser extends StringValueParser {
 	 * @return TimeValue
 	 */
 	protected function stringParse( $value ) {
-		if( preg_match( '/^[+-]?(\d+)$/', $value, $matches ) ||
-			preg_match( '/^(\d+)\s*(' . $this->CEregex . '|' .  $this->BCEregex . ')$/i', $value, $matches ) )
-		{
-			return $this->getTimeFromYear( $value );
-		}
-		throw new ParseException( 'Failed to parse year: ' . $value );
-	}
-
-	/**
-	 * @param string $year
-	 * @return TimeValue
-	 */
-	private function getTimeFromYear( $year ) {
-		$sign = $this->getSignFromYear( $year );
-		$year = $this->cleanYear( $year );
+		list( $sign, $year ) = $this->eraParser->parse( $value );
 		return $this->timeValueTimeParser->parse( $sign . $year . '-00-00T00:00:00Z' );
-	}
-
-	/**
-	 * @param string $year
-	 * @return string the sign + or -
-	 */
-	private function getSignFromYear( $year ) {
-		$char1 = substr( $year, 0, 1 );
-		if( $char1 === '-' || $char1 === '+' ) {
-			return $char1;
-		}
-		if( preg_match( '/^(\d+)\s*' . $this->BCEregex . '$/i', $year, $matches ) ) {
-			return '-';
-		}
-		return '+';
-	}
-
-	/**
-	 * @param string $year
-	 *
-	 * @return string
-	 */
-	private function cleanYear( $year ) {
-		preg_match(
-			'/^[\+\-]?(\d+)(\s*(' . $this->CEregex . '|' .  $this->BCEregex . '))?$/i',
-			$year,
-			$matches
-		);
-		return $matches[1];
 	}
 
 }
