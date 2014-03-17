@@ -56,7 +56,6 @@ class MergeItems extends ApiWikibase {
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
-		$permissions[] = 'edit';
 		$permissions[] = 'item-merge';
 		return $permissions;
 	}
@@ -299,13 +298,6 @@ class MergeItems extends ApiWikibase {
 	 * @return bool true
 	 */
 	public function isWriteMode() {
-		return true;
-	}
-
-	/**
-	 * @see ApiBase::mustBePosted
-	 */
-	public function mustBePosted() {
 		return true;
 	}
 
