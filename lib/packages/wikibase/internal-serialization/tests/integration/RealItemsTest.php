@@ -4,10 +4,14 @@ namespace Tests\Integration\Wikibase\InternalSerialization;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
+use Diff\ListDiffer;
+use Diff\MapDiffer;
 use SplFileInfo;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\Test\ClaimListAccessTest;
 
 /**
  * @covers Wikibase\InternalSerialization\DeserializerFactory
@@ -63,6 +67,12 @@ class RealItemsTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->deserializer->deserialize( $serialization );
 
 		$expectedItem = Item::newFromArray( $serialization );
+
+		// This fixes alias list consistency by triggering the normalization code.
+		// The old deserialization code (Item::newFromArray() does not do this automatically.
+		// There are some old revisions for which this normalization is needed due to
+		// a long ago fixed bug.
+		$expectedItem->setAllAliases( $expectedItem->getAllAliases() );
 
 		$this->assertTrue(
 			$expectedItem->equals( $item ),
