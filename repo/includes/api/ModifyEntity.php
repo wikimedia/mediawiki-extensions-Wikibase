@@ -84,20 +84,6 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected $flags;
 
 	/**
-	 * @see ApiWikibase::getRequiredPermissions()
-	 *
-	 * @param Entity $entity
-	 * @param array $params
-	 *
-	 * @return array|\Status
-	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
-		$permissions[] = 'edit';
-		return $permissions;
-	}
-
-	/**
 	 * Get the entity using the id, site and title params passed to the api
 	 *
 	 * @since 0.1
@@ -376,13 +362,6 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @see ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
-		return true;
-	}
-
-	/**
-	 * @see ApiBase::mustBePosted
-	 */
-	public function mustBePosted() {
 		return true;
 	}
 
