@@ -22,7 +22,13 @@ abstract class ViewEntityAction extends \ViewAction {
 	protected $languageFallbackChain;
 
 	/**
-	 * Get the language fallback chain for current context.
+	 * @var EntityPermissionChecker
+	 */
+	protected $permissionChecker;
+
+	/**
+	 * Get the language fallback chain.
+	 * Uses the default WikibaseRepo instance to get the service if it was not previously set.
 	 *
 	 * @since 0.4
 	 *
@@ -46,6 +52,29 @@ abstract class ViewEntityAction extends \ViewAction {
 	 */
 	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
 		$this->languageFallbackChain = $chain;
+	}
+
+	/**
+	 * Get permission checker.
+	 * Uses the default WikibaseRepo instance to get the service if it was not previously set.
+	 *
+	 * @return \Wikibase\EntityPermissionChecker
+	 */
+	public function getPermissionChecker() {
+		if ( $this->permissionChecker === null ) {
+			$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
+		}
+
+		return $this->permissionChecker;
+	}
+
+	/**
+	 * Set permission checker.
+	 *
+	 * @param \Wikibase\EntityPermissionChecker $permissionChecker
+	 */
+	public function setPermissionChecker( $permissionChecker ) {
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -146,7 +175,12 @@ abstract class ViewEntityAction extends \ViewAction {
 		// NOTE: page-wide property, independent of user permissions
 		$out->addJsConfigVars( 'wbIsEditView', $editable );
 
-		$editable = ( $editable && $content->userCanEdit( null, false ) );
+		$permissionChecker = $this->getPermissionChecker();
+		$editable &= $permissionChecker->getPermissionStatusForEntity(
+				$this->getUser(),
+				'edit',
+				$content->getEntity(),
+				'quick' );
 
 		// View it!
 		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $this->getContext()->getUser() );
