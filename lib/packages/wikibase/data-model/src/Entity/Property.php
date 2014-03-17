@@ -73,7 +73,7 @@ class Property extends Entity {
 	}
 
 	/**
-	 * @since 0.1
+	 * @deprecated since 0.7.3. Use Property::newFromType
 	 *
 	 * @return Property
 	 */
