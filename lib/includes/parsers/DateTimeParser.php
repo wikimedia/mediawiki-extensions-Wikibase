@@ -29,13 +29,19 @@ class DateTimeParser extends StringValueParser {
 	private $monthUnlocaliser;
 
 	/**
+	 * @var EraParser
+	 */
+	private $eraParser;
+
+	/**
 	 * @var string 4242 placeholder used while parsing dates with greater than 4 digit years
 	 */
 	private $yearPlaceholder = '4242';
 
-	public function __construct( ParserOptions $options = null ) {
+	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
 		parent::__construct( $options );
 		$this->monthUnlocaliser = new MonthNameUnlocalizer();
+		$this->eraParser = $eraParser;
 	}
 
 	/**
@@ -72,10 +78,11 @@ class DateTimeParser extends StringValueParser {
 				$value = $matches[1] . $this->yearPlaceholder . $matches[3];
 			}
 
+			list( $sign, $cleanResult ) = $this->eraParser->parse( $value );
+
 			//Parse using the DateTime object (this will allow us to format the date in a nicer way)
-			//TODO try to match and remove BCE etc. before putting the value into the DateTime object to get - dates!
-			$dateTime = new DateTime( $value );
-			$timeString = '+' . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+			$dateTime = new DateTime( $cleanResult );
+			$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
 
 			if( $largeYear !== null ) {
 				$timeString = preg_replace( '/' . $this->yearPlaceholder . '/', $largeYear, $timeString, 1 );
