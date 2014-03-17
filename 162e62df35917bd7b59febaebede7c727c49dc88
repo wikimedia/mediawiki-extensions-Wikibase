@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b01be0d3",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T19:45:13Z",
+      "side": 1,
+      "message": "Sorry, but what\u0027s the problem with the current CSS you want to solve here? I tried it and can\u0027t see a reason why the colognblue skin needs to be excluded.\n\nOr, if excluding the cologneblue skin is what you want, then yes, this is the proper solution:\n\n.skin-modern .wbc-editpage \u003e a,\n.skin-monobook .wbc-editpage \u003e a,\n.skin-vector .wbc-editpage \u003e a {\n\tpadding-left: 11px;\n\tbackground: no-repeat left center;\n}\n\nIn short, please don\u0027t do CSS jobs in PHP.",
+      "parentUuid": "ee14bf34_cef7df55",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_2859b301",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 11
