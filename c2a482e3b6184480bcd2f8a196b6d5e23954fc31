@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_e7c88079",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T09:43:41Z",
+      "side": 1,
+      "message": "Description is a bit to short to understand what\u0027s going on in this patch.",
+      "revId": "c2a482e3b6184480bcd2f8a196b6d5e23954fc31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
