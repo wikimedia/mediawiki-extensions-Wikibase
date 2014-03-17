@@ -2,7 +2,11 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
+use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
+use SplFileInfo;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
  * @covers Wikibase\InternalSerialization\DeserializerFactory
@@ -18,11 +22,59 @@ class RealItemsTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestDeserializerFactory::newInstance( $this )->newItemDeserializer();
+		$dataValueClasses = array_merge(
+			$GLOBALS['evilDataValueMap'],
+			array(
+				'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+				'monolingualtext' => 'DataValues\MonolingualTextValue',
+				'multilingualtext' => 'DataValues\MultilingualTextValue',
+				'quantity' => 'DataValues\QuantityValue',
+				'time' => 'DataValues\TimeValue',
+				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+			)
+		);
+
+		$factory = new DeserializerFactory(
+			new DataValueDeserializer( $dataValueClasses ),
+			new BasicEntityIdParser()
+		);
+
+		$this->deserializer = $factory->newItemDeserializer();
 	}
 
-	public function testItemDeserialization() {
-		$this->markTestSkipped( 'Find a way to run over real items' );
+	/**
+	 * @dataProvider itemSerializationProvider
+	 */
+	public function testItemDeserialization( $fileName, $serialization ) {
+		$item = $this->deserializer->deserialize( $serialization );
+
+		$this->assertInstanceOf(
+			'Wikibase\DataModel\Entity\Item',
+			$item,
+			$fileName . ' should deserialize to an Item'
+		);
+	}
+
+	public function itemSerializationProvider() {
+		return $this->getItemSerializationsFromDir( __DIR__ . '/../data/items/' );
+	}
+
+	private function getItemSerializationsFromDir( $dir ) {
+		$argumentLists = array();
+
+		/**
+		 * @var SplFileInfo $fileInfo
+		 */
+		foreach ( new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $dir ) ) as $fileInfo ) {
+			if ( $fileInfo->getExtension() === 'json' ) {
+				$argumentLists[] = array(
+					$fileInfo->getFilename(),
+					json_decode( file_get_contents( $fileInfo->getPathname() ), true )
+				);
+			}
+		}
+
+		return $argumentLists;
 	}
 
 }
