@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
+use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\store\EntityStore;
 use Wikibase\EntityTitleLookup;
@@ -481,5 +482,12 @@ class WikibaseRepo {
 			new ReferencedEntitiesFinder(),
 			$langCode
 		);
+	}
+
+	/**
+	 * @return EntityPermissionChecker
+	 */
+	public function getEntityPermissionChecker() {
+		return $this->getEntityContentFactory();
 	}
 }

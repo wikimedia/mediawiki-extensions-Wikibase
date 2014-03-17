@@ -202,8 +202,10 @@ class EditEntity {
 		$this->titleLookup = $titleLookup;
 		$this->entityLookup = $entityLookup;
 		$this->entityStore = $entityStore;
-	}
 
+		//FIXME: inject me!
+		$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
+	}
 
 	/**
 	 * Sets the pre-safe checks to apply
@@ -558,7 +560,10 @@ class EditEntity {
 		wfProfileIn( __METHOD__ );
 
 		foreach ( $this->requiredPermissions as $action ) {
-			$permissionStatus = $this->checkPermission( $action );
+			$permissionStatus = $this->permissionChecker->getPermissionStatusForEntity(
+				$this->user,
+				$action,
+				$this->newEntity );
 
 			$this->status->merge( $permissionStatus );
 
@@ -569,52 +574,6 @@ class EditEntity {
 		}
 
 		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Checks whether the user can perform the given action.
-	 *
-	 * @param string $permission the permission to check
-	 * @param bool $doExpensiveQueries whether to perform expensive checks (default: true). May
-	 *             be set to false for non-critical checks.
-	 *
-	 * @todo: move this to a separate service
-	 *
-	 * @return Status a status object representing the check's result.
-	 */
-	public function checkPermission( $permission, $doExpensiveQueries = true ) {
-		wfProfileIn( __METHOD__ );
-
-		$user = $this->user;
-
-		$title = $this->getTitle();
-		$errors = null;
-
-		if ( !$title ) {
-			$ns = $this->titleLookup->getNamespaceForType( $this->getNewEntity()->getType() );
-			$title = Title::makeTitleSafe( $ns, '/' );
-
-			if ( $permission == 'edit' ) {
-				// when checking for edit rights on an item that doesn't yet exists, check create rights first.
-
-				$errors = $title->getUserPermissionsErrors( 'createpage', $user, $doExpensiveQueries );
-			}
-		}
-
-		if ( empty( $errors ) ) {
-			// only do this if we don't already have errors from an earlier check, to avoid redundant messages
-			$errors = $title->getUserPermissionsErrors( $permission, $user, $doExpensiveQueries );
-		}
-
-		$status = Status::newGood();
-
-		foreach ( $errors as $error ) {
-			call_user_func_array( array( $status, 'error'), $error );
-			$status->setResult( false );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $status;
 	}
 
 	/**
