@@ -2,17 +2,12 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization\Deserializers;
 
-use DataValues\StringValue;
 use Deserializers\Deserializer;
 use Tests\Integration\Wikibase\InternalSerialization\TestDeserializerFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\ItemDeserializer

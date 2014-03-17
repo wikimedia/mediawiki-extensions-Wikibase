@@ -4,14 +4,10 @@ namespace Tests\Integration\Wikibase\InternalSerialization;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
-use Diff\ListDiffer;
-use Diff\MapDiffer;
 use SplFileInfo;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\InternalSerialization\DeserializerFactory;
-use Wikibase\Test\ClaimListAccessTest;
 
 /**
  * @covers Wikibase\InternalSerialization\DeserializerFactory

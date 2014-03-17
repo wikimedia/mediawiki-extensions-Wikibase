@@ -9,7 +9,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\SnakDeserializer

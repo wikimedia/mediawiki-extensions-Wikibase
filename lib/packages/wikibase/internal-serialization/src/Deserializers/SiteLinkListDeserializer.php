@@ -5,7 +5,6 @@ namespace Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
-use Exception;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;

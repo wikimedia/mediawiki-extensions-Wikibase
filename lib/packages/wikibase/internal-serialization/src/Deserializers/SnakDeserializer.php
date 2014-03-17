@@ -5,7 +5,6 @@ namespace Wikibase\InternalSerialization\Deserializers;
 use DataValues\DataValue;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use Exception;
 use LogicException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
