@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b3a2d839",
+        "filename": "client/includes/hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T14:28:11Z",
+      "side": 1,
+      "message": "Done.  using Html::element for the \u0027a\u0027 element which does escaping (although I think not needed in this case since we provide the parameters explicitly in the code)\n\nusing Html::rawElement for span, so we don\u0027t double escape.",
+      "parentUuid": "ee14bf34_a8fb83b9",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_c81597eb",
         "filename": "client/includes/hooks/BaseTemplateAfterPortletHandler.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-14T10:34:35Z",
       "side": 1,
       "message": "No sanitation at all? No Html class? Not even htmlspecialchars()?",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_9367d422",
+        "filename": "client/includes/hooks/BaseTemplateAfterPortletHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T14:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_c81597eb",
       "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_cef7df55",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T14:28:11Z",
+      "side": 1,
+      "message": "I know we can do stuff like:\n\nbody.skin-monobook .wbc-editpage \u003e a,                                                                  \nbody.skin-modern .wbc-editpage \u003e a,                                                                    \nbody.skin-vector .wbc-editpage \u003e a,                                                                    \nbody.skin-monobook .wb-langlinks-link \u003e a,                                                             \nbody.skin-modern .wb-langlinks-link \u003e a,                                                               \nbody.skin-vector .wb-langlinks-link \u003e a {                                                              \n    padding-left: 11px;                                                                                \n    background: no-repeat left center;                                                                 \n}   \n\nbut it\u0027s not very elegant and I think better just to include the css for the relevant skins here.\n\nis there a way to make such css nicer?",
+      "parentUuid": "ee14bf34_68068bd3",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_2859b301",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 11
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_736c4006",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T14:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_2859b301",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_68b7abd4",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 11
@@ -81,6 +153,24 @@
       "writtenOn": "2014-03-14T10:34:35Z",
       "side": 1,
       "message": "This is obviously personal preference but I find\nsuch a long chain of repeating the same lines of code confusing. ;-)\nWhy not\nif ( condition1\n\t|| condition2\n\t|| condition3 ) {\n\treturn false;\n}",
+      "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_6e9693f5",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T14:28:11Z",
+      "side": 1,
+      "message": "I split it up some... more general check if a page has either add or edit links link, and here if it has the widget",
+      "parentUuid": "ee14bf34_68b7abd4",
       "revId": "162e62df35917bd7b59febaebede7c727c49dc88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
