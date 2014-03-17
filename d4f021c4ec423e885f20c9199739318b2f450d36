@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_8de443a5",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T18:13:58Z",
+      "side": 1,
+      "message": "perhaps $this-\u003egetSettings can go inside the if block below? \n\n(also space missing)",
+      "revId": "d4f021c4ec423e885f20c9199739318b2f450d36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_edf4df52",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T18:13:58Z",
+      "side": 1,
+      "message": "$this-\u003egetNamespaceChecker() ?",
+      "revId": "d4f021c4ec423e885f20c9199739318b2f450d36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
