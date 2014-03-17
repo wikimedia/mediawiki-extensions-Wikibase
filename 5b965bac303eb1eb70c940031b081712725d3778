@@ -16,6 +16,24 @@
       "revId": "5b965bac303eb1eb70c940031b081712725d3778",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_50292499",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-17T20:01:25Z",
+      "side": 1,
+      "message": "gerrit is hungry!",
+      "parentUuid": "ee14bf34_108f2cd3",
+      "revId": "5b965bac303eb1eb70c940031b081712725d3778",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
