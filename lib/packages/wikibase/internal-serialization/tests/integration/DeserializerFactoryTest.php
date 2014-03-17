@@ -1,10 +1,8 @@
 <?php
 
-namespace Tests\Integration\Wikibase\InternalSerialization\Deserializers;
+namespace Tests\Integration\Wikibase\InternalSerialization;
 
-use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -25,17 +23,7 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	private $factory;
 
 	protected function setUp() {
-		$dataValueDeserializer = $this->getMock( 'Deserializers\Deserializer' );
-
-		$dataValueDeserializer->expects( $this->any() )
-			->method( 'deserialize' )
-			->with( $this->equalTo( array( 'type' => 'string', 'value' => 'foo' ) ) )
-			->will( $this->returnValue( new StringValue( 'foo' ) ) );
-
-		$this->factory = new DeserializerFactory(
-			$dataValueDeserializer,
-			new BasicEntityIdParser()
-		);
+		$this->factory = TestDeserializerFactory::newInstance( $this );
 	}
 
 	public function testEntityIdDeserializer() {
