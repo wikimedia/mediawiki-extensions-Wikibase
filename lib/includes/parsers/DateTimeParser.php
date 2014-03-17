@@ -42,6 +42,7 @@ class DateTimeParser extends StringValueParser {
 	 * @return TimeValue
 	 */
 	protected function stringParse( $value ) {
+		$value = trim( $value );
 		$calendarModelParser = new CalendarModelParser();
 		$options = $this->getOptions();
 		try{
@@ -54,7 +55,13 @@ class DateTimeParser extends StringValueParser {
 			//PHP's DateTime object does not accept spaces as separators between year, month and day,
 			//e.g. dates like 20 12 2012, but we want to support them.
 			//See http://de1.php.net/manual/en/datetime.formats.date.php
-			$value = preg_replace( '/\s+/', '.', trim( $value ) );
+			$value = preg_replace( '/\s+/', '.', $value );
+
+			//PHP's DateTime object also cant handel smaller than 4 digit years
+			//e.g. instead of 12 it needs 0012 etc.
+			if( preg_match( '/^(.*[^\d])(\d{1,3})$/', $value, $matches ) ) {
+				$value = $matches[1] . str_pad( $matches[2], 4, '0', STR_PAD_LEFT );
+			}
 
 			//Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			//TODO try to match and remove BCE etc. before putting the value into the DateTime object to get - dates!

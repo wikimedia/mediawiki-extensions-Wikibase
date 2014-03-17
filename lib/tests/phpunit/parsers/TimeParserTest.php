@@ -75,7 +75,7 @@ class TimeParserTest extends StringValueParserTest {
 
 			//Wikibase\Lib\DateTimeParser
 			'10/10/10' =>
-				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '+0000000000000010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1 July 2013' =>
 				array( '+0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1 Jul 2013' =>
