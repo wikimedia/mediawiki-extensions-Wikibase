@@ -90,13 +90,6 @@ abstract class ModifyClaim extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::mustBePosted
-	 */
-	public function mustBePosted() {
-		return true;
-	}
-
-	/**
 	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
@@ -111,20 +104,6 @@ abstract class ModifyClaim extends ApiWikibase {
 				array( 'code' => 'invalid-entity-id', 'info' => $this->msg( 'wikibase-api-invalid-entity-id' )->text() ),
 			)
 		);
-	}
-
-	/**
-	 * @see  \Wikibase\Api\ApiWikibase::getRequiredPermissions()
-	 *
-	 * @param Entity $entity
-	 * @param array $params
-	 *
-	 * @return array|\Status
-	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
-		$permissions[] = 'edit';
-		return $permissions;
 	}
 
 	/**
