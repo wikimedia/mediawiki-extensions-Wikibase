@@ -8,6 +8,7 @@ use Deserializers\Exceptions\MissingAttributeException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 
 /**
@@ -132,7 +133,7 @@ class ClaimDeserializer implements Deserializer {
 	}
 
 	private function deserializeReference( $serialization ) {
-		return $this->snakListDeserializer->deserialize( $serialization );
+		return new Reference( $this->snakListDeserializer->deserialize( $serialization ) );
 	}
 
 }

@@ -4,11 +4,11 @@ namespace Tests\Integration\Wikibase\InternalSerialization\Deserializers;
 
 use DataValues\StringValue;
 use Deserializers\Deserializer;
+use Tests\Integration\Wikibase\InternalSerialization\TestDeserializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\SnakDeserializer
@@ -16,7 +16,7 @@ use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
+class SnakRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer
@@ -24,14 +24,7 @@ class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$dataValueDeserializer = $this->getMock( 'Deserializers\Deserializer' );
-
-		$dataValueDeserializer->expects( $this->any() )
-			->method( 'deserialize' )
-			->with( $this->equalTo( array( 'type' => 'string', 'value' => 'foo' ) ) )
-			->will( $this->returnValue( new StringValue( 'foo' ) ) );
-
-		$this->deserializer = new SnakDeserializer( $dataValueDeserializer );
+		$this->deserializer = TestDeserializerFactory::newInstance( $this )->newSnakDeserializer();
 	}
 
 	/**
