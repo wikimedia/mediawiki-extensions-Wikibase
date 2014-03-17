@@ -392,6 +392,11 @@ $.widget( 'valueview.valueview', PARENT, {
 				.done( function( formattedValue ) {
 					self._formattedValue = formattedValue;
 					self.draw();
+				} )
+				.fail( function( message ) {
+					if( message ) {
+						self._renderError( message );
+					}
 				} );
 		}
 	},
@@ -634,26 +639,42 @@ $.widget( 'valueview.valueview', PARENT, {
 						self._formattedValue = formattedValue;
 						self.drawContent();
 					} )
-					.fail( function( error, details ) {
-						if( error !== undefined ) {
-							// TODO: display some message if parsing failed due to bad API connection etc.
+					.fail( function( message ) {
+						if( message ) {
 							self._formattedValue = null;
+							self._renderError( message );
 						}
 					} );
 
 			} )
-			.fail( function( error, details ) {
-				if( error !== undefined ) {
-					// TODO: display some message if parsing failed due to bad API connection etc.
+			.fail( function( message ) {
+				if( message ) {
 					self._value = null;
+					self._renderError( message );
 				}
 			} );
+	},
+
+	/**
+	 * Renders an error message.
+	 *
+	 * @param {string} message HTML error message.
+	 */
+	_renderError: function( message ) {
+		if( this._expert && this._expert.preview ) {
+			this._expert.preview.update( message );
+		}
 	},
 
 	/**
 	 * Parses the current raw value.
 	 *
 	 * @return {jQuery.Promise}
+	 *         Resolved parameters:
+	 *         - {dataValues.DataValue}
+	 *         Rejected parameters:
+	 *         - {string|undefined} HTML error message or "undefined" if the result shall be
+	 *           ignored.
 	 *
 	 * @throws {Error} if the parser result is neither a DataValue instance nor null.
 	 * @triggers afterparse
@@ -713,8 +734,8 @@ $.widget( 'valueview.valueview', PARENT, {
 
 					deferred.resolve( parsedValue );
 				} )
-				.fail( function( error, details ) {
-					deferred.reject( error, details );
+				.fail( function( message ) {
+					deferred.reject( message );
 				} )
 				.always( function() {
 					self._trigger( 'afterparse' );
@@ -752,6 +773,11 @@ $.widget( 'valueview.valueview', PARENT, {
 	 *
 	 * @param {dataValues.DataValue} dataValue
 	 * @return {jQuery.Promise}
+	 *         Resolved parameters:
+	 *         - {string} Formatted DataValue.
+	 *         Rejected parameters:
+	 *         - {string|undefined} HTML error message or "undefined" if the result shall be
+	 *           ignored.
 	 *
 	 * @triggers afterformat
 	 */
@@ -770,8 +796,8 @@ $.widget( 'valueview.valueview', PARENT, {
 					deferred.reject();
 				}
 			} )
-			.fail( function( error, details ) {
-				deferred.reject( error, details );
+			.fail( function( message ) {
+				deferred.reject( message );
 			} )
 			.always( function() {
 				self._trigger( 'afterformat' );
