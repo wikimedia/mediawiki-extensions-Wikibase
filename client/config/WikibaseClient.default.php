@@ -39,6 +39,7 @@ return call_user_func( function() {
 		'allowDataTransclusion' => true,
 		'enableSiteLinkWidget' => true,
 		'propagateChangesToRepo' => true,
+		'otherProjectsLinks' => array(),
 
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
