@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Parsers\Test;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
+use Wikibase\Lib\Parsers\EraParser;
 use Wikibase\Lib\Parsers\MWTimeIsoParser;
 
 /**
@@ -25,7 +26,22 @@ class YearTimeParserTest extends StringValueParserTest {
 	 */
 	protected function getInstance() {
 		$class = $this->getParserClass();
-		return new $class( $this->newParserOptions() );
+		return new $class( $this->getMockEraParser(), $this->newParserOptions() );
+	}
+
+	private function getMockEraParser() {
+		$mock = $this->getMockBuilder( 'Wikibase\Lib\Parsers\EraParser' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'parse' )
+			->with( $this->isType( 'string' ) )
+			->will( $this->returnCallback(
+				function( $value ) {
+					return array( EraParser::CURRENT_ERA, $value ) ;
+				}
+			) );
+		return $mock;
 	}
 
 	/**
@@ -60,52 +76,6 @@ class YearTimeParserTest extends StringValueParserTest {
 				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'000000001' =>
 				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'+1999' =>
-				array( '+0000000000001999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'+1999999' =>
-				array( '+0000000001999999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'-1999' =>
-				array( '-0000000000001999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'-1999999' =>
-				array( '-0000000001999999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'100BC' =>
-				array( '-0000000000000100-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeFormatter::CALENDAR_GREGORIAN ),
-			'100 BC' =>
-				array( '-0000000000000100-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101 BC' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'100BCE' =>
-				array( '-0000000000000100-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeFormatter::CALENDAR_GREGORIAN ),
-			'100 BCE' =>
-				array( '-0000000000000100-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101 BCE' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101 bce' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101 bc' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101 BCe' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101 before Common Era' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101 before Christ' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'101before Christ' =>
-				array( '-0000000000000101-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'102AD' =>
-				array( '+0000000000000102-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'102CE' =>
-				array( '+0000000000000102-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'102 CE' =>
-				array( '+0000000000000102-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'102 C.E' =>
-				array( '+0000000000000102-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'102 A.D' =>
-				array( '+0000000000000102-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'102 Anno Domini' =>
-				array( '+0000000000000102-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
-			'102 Common Era' =>
-				array( '+0000000000000102-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
