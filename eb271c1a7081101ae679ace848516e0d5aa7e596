@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_a769681f",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T10:34:15Z",
+      "side": 1,
+      "message": "Obviously nitpicking, but the original method uses $namespace. I prefer such self explanatory names (even if NS is a common abbreviation in the MW universe).",
+      "revId": "eb271c1a7081101ae679ace848516e0d5aa7e596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_4743acb6",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T10:34:15Z",
+      "side": 1,
+      "message": "Please add the proper\n@see NamespaceChecker::isWikibaseEnabled\nand maybe remove (or move) the description.\n\nAlso, NamespaceChecker::isWikibaseEnabled @throws an exception. Shouldn\u0027t this copied over here?",
+      "revId": "eb271c1a7081101ae679ace848516e0d5aa7e596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_6763503c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T10:34:15Z",
+      "side": 1,
+      "message": "I start getting used to this pattern. Nice. :-)",
+      "revId": "eb271c1a7081101ae679ace848516e0d5aa7e596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
