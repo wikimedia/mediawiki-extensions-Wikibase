@@ -163,10 +163,17 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @return Status
 	 */
 	protected function saveEntity( Entity $entity, Summary $summary, $token, $flags = EDIT_UPDATE, $baseRev = false ) {
+		//TODO: allow injection/override!
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
+		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
+
 		$editEntity = new EditEntity(
 			$this->titleLookup,
 			$this->entityLookup,
 			$this->entityStore,
+			$permissionChecker,
 			$entity,
 			$this->getUser(),
 			$baseRev,
