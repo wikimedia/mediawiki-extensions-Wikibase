@@ -294,16 +294,18 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @param String $handle
 	 */
 	public static function resetTestItem( $handle ) {
-		$item = self::$testItems[ $handle ];
+		if ( isset( self::$testItems[ $handle ] ) ) {
+			$item = self::$testItems[ $handle ];
 
-		// check current data
-		$page = static::getTestItemPage( $handle );
-		if ( $page->getLatest() == $item->revid ) {
-			return; // revid didn't change
+			// check current data
+			$page = static::getTestItemPage( $handle );
+			if ( $page->getLatest() == $item->revid ) {
+				return; // revid didn't change
+			}
+
+			// delete current data
+			$page->doDeleteArticle( "Testing" );
 		}
-
-		// delete current data
-		$page->doDeleteArticle( "Testing" );
 
 		// re-create item
 		$itemData = self::makeTestItemData();
