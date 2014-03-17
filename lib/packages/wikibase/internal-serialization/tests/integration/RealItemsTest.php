@@ -6,6 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use SplFileInfo;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
@@ -45,13 +46,27 @@ class RealItemsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider itemSerializationProvider
 	 */
-	public function testItemDeserialization( $fileName, $serialization ) {
+	public function testDeserializationWorksAndReturnsItem( $fileName, $serialization ) {
 		$item = $this->deserializer->deserialize( $serialization );
 
 		$this->assertInstanceOf(
 			'Wikibase\DataModel\Entity\Item',
 			$item,
 			$fileName . ' should deserialize to an Item'
+		);
+	}
+
+	/**
+	 * @dataProvider itemSerializationProvider
+	 */
+	public function testDeserializationReturnsCorrectItem( $fileName, $serialization ) {
+		$item = $this->deserializer->deserialize( $serialization );
+
+		$expectedItem = Item::newFromArray( $serialization );
+
+		$this->assertTrue(
+			$expectedItem->equals( $item ),
+			$fileName . ' should deserialize into the correct Item'
 		);
 	}
 
