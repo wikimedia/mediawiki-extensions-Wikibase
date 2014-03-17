@@ -28,9 +28,15 @@ class DateTimeParser extends StringValueParser {
 	 */
 	private $monthUnlocaliser;
 
-	public function __construct( ParserOptions $options = null ) {
+	/**
+	 * @var EraParser
+	 */
+	private $eraParser;
+
+	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
 		parent::__construct( $options );
 		$this->monthUnlocaliser = new MonthNameUnlocalizer();
+		$this->eraParser = $eraParser;
 	}
 
 	/**
@@ -67,13 +73,14 @@ class DateTimeParser extends StringValueParser {
 				$largeYear = $matches[2];
 			}
 
+			list( $sign, $cleanResult ) = $this->eraParser->parse( $value );
+
 			//Parse using the DateTime object (this will allow us to format the date in a nicer way)
-			//TODO try to match and remove BCE etc. before putting the value into the DateTime object to get - dates!
-			$dateTime = new DateTime( $value );
+			$dateTime = new DateTime( $cleanResult );
 			if( $largeYear === null ) {
-				$timeString = '+' . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
+				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
 			} else {
-				$timeString = '+' . $largeYear . $dateTime->format( '-m-d\TH:i:s\Z' );
+				$timeString = $sign . $largeYear . $dateTime->format( '-m-d\TH:i:s\Z' );
 			}
 
 			//Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
