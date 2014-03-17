@@ -52,6 +52,8 @@ class DateTimeParserTest extends StringValueParserTest {
 				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10 10 2010' =>
 				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'2010-10-10' =>
+				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10/10/0010' =>
 				array( '+0000000000000010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1 July 2013' =>
@@ -80,6 +82,8 @@ class DateTimeParserTest extends StringValueParserTest {
 			//Less than 4 digit years
 			'10/10/10' =>
 				array( '+0000000000000010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'10-10-100' =>
+				array( '+0000000000000100-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'9 Jan 09' =>
 				array( '+0000000000000009-01-09T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1/1/1' =>
@@ -92,6 +96,18 @@ class DateTimeParserTest extends StringValueParserTest {
 				array( '+0000000000000111-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'4th July 1' =>
 				array( '+0000000000000001-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+
+			//More than 4 digit years
+			'4th July 10000' =>
+				array( '+0000000000010000-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'10/10/22000' =>
+				array( '+0000000000022000-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1-1-33300' =>
+				array( '+0000000000033300-01-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'33300-1-1' =>
+				array( '+0000000000033300-01-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'4th July 7214614279199781' =>
+				array( '+7214614279199781-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 
 		);
 
@@ -114,7 +130,6 @@ class DateTimeParserTest extends StringValueParserTest {
 			'Jann 2014',
 
 			// Not within the scope of this parser
-			'1 July 20000', // The DateTime object cant parse years with more than 4 digits
 			'100BC', // The DateTime object cant parse BC years
 		);
 
