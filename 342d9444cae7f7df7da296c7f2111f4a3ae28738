@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_50eb64db",
+        "filename": "lib/includes/store/EntityPermissionChecker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T19:12:17Z",
+      "side": 1,
+      "message": "Weird, not really useful interface. This doesn\u0027t (and probably can\u0027t) really explain what this actually does. In which case is it acceptable to (for example) show a \"delete\" button to a user that doesn\u0027t have the permission? Or even worse, do the opposite, *not* show a button to a user that does have the permission. If I had to use this interface I would never ever use a parameter that obviously leads to wrong results.\n\nOr:\n\nIf this is supposed to be used for the $doExpensiveQueries parameter in the Title class why don\u0027t you keep that name? $relaxed does have a very different meaning. $doExpensiveQueries is about speed/performance/resources. $relaxed is more like \"I don\u0027t really care for no particular reason\".",
+      "revId": "342d9444cae7f7df7da296c7f2111f4a3ae28738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_50f5a4c6",
+        "filename": "lib/includes/store/EntityPermissionChecker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T19:12:17Z",
+      "side": 1,
+      "message": "Why an empty string and not null?",
+      "revId": "342d9444cae7f7df7da296c7f2111f4a3ae28738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f0f158c9",
+        "filename": "lib/includes/store/EntityPermissionChecker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T19:12:17Z",
+      "side": 1,
+      "message": "Huh?",
+      "revId": "342d9444cae7f7df7da296c7f2111f4a3ae28738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
