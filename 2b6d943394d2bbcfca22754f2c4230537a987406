@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_6159f800",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T23:37:09Z",
+      "side": 1,
+      "message": "I made this idea a pull request but can not use it right now since it is in an other module (and on Github). I will keep this in mind and work on it in an other patch.",
+      "parentUuid": "ee14bf34_87e1c4fd",
+      "revId": "2b6d943394d2bbcfca22754f2c4230537a987406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_e712c000",
         "filename": "lib/includes/store/TermPropertyLabelResolver.php",
         "patchSetId": 8
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_21cf8084",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T23:37:09Z",
+      "side": 1,
+      "message": "Using a short $label as an array key makes the code more readable. But the assigned value? Every debugger should be able to let you inspect the value of $object-\u003egetWhatever().",
+      "parentUuid": "ee14bf34_e712c000",
+      "revId": "2b6d943394d2bbcfca22754f2c4230537a987406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_0716d4f6",
         "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
         "patchSetId": 8
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-17T09:25:55Z",
       "side": 1,
       "message": "Uh, this should still be new PropertyId, I believe. EntityId::newFromPrefixedId should actually be deprecated...",
+      "revId": "2b6d943394d2bbcfca22754f2c4230537a987406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_21f2e0df",
+        "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T23:37:09Z",
+      "side": 1,
+      "message": "Done. This was just an idea but not necessary.",
+      "parentUuid": "ee14bf34_0716d4f6",
       "revId": "2b6d943394d2bbcfca22754f2c4230537a987406",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
