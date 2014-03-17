@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Parsers\Test;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
+use Wikibase\Lib\Parsers\EraParser;
 use Wikibase\Lib\Parsers\MWTimeIsoParser;
 
 /**
@@ -25,7 +26,28 @@ class DateTimeParserTest extends StringValueParserTest {
 	 */
 	protected function getInstance() {
 		$class = $this->getParserClass();
-		return new $class( $this->newParserOptions() );
+		return new $class( $this->getMockEraParser(), $this->newParserOptions() );
+	}
+
+	private function getMockEraParser() {
+		$mock = $this->getMockBuilder( 'Wikibase\Lib\Parsers\EraParser' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'parse' )
+			->with( $this->isType( 'string' ) )
+			->will( $this->returnCallback(
+				function( $value ) {
+					$sign = EraParser::CURRENT_ERA;
+					// Tiny parser that supports a single negative sign only
+					if ( $value[0] === EraParser::BEFORE_CURRENT_ERA ) {
+						$sign = EraParser::BEFORE_CURRENT_ERA;
+						$value = substr( $value, 1 );
+					}
+					return array( $sign, $value ) ;
+				}
+			) );
+		return $mock;
 	}
 
 	/**
@@ -118,6 +140,8 @@ class DateTimeParserTest extends StringValueParserTest {
 				array( '+0000000000033300-01-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'4th July 7214614279199781' =>
 				array( '+7214614279199781-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'-10100-02-29' =>
+				array( '-0000000000010100-03-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//Testing Leap Year stuff
 			'10000-02-29' =>
@@ -147,9 +171,6 @@ class DateTimeParserTest extends StringValueParserTest {
 			'June June June',
 			'111 111 111',
 			'Jann 2014',
-
-			// Not within the scope of this parser
-			'100BC', // The DateTime object cant parse BC years
 		);
 
 		foreach ( $invalid as $value ) {
