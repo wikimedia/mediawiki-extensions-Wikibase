@@ -626,7 +626,15 @@ final class ClientHooks {
 
 		$otherProjectsSidebar = $generator->buildProjectLinkSidebar( $skin->getContext()->getTitle() );
 		if ( count( $otherProjectsSidebar ) !== 0 ) {
-			$bar['wikibase-otherprojects'] = $otherProjectsSidebar;
+			//if there is a language links section, put the other project links before language links
+			if ( array_key_exists( 'LANGUAGES', $bar ) ) {
+				$languageSection = $bar['LANGUAGES'];
+				unset( $bar['LANGUAGES'] );
+				$bar['wikibase-otherprojects'] = $otherProjectsSidebar;
+				$bar['LANGUAGES'] = $languageSection;
+			} else {
+				$bar['wikibase-otherprojects'] = $otherProjectsSidebar;
+			}
 		}
 
 		return true;
