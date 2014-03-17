@@ -568,12 +568,11 @@ abstract class ApiWikibase extends \ApiBase {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 
-		//TODO: allow injection/override!
-
 		$editEntity = new EditEntity(
 			$this->titleLookup,
 			$this->entityLookup,
 			$this->entityStore,
+			$this->permissionChecker,
 			$entity,
 			$user,
 			$baseRevisionId,
