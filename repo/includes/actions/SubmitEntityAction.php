@@ -97,6 +97,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
 		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$entityPermissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
 
 		if ( $newerRevision->getId() == $latestRevision->getId() ) { // restore
 			$summary = $req->getText( 'wpSummary' );
@@ -115,6 +116,7 @@ class SubmitEntityAction extends EditEntityAction {
 					$entityTitleLookup,
 					$entityRevisionLookup,
 					$entityStore,
+					$entityPermissionChecker,
 					$olderContent->getEntity(),
 					$this->getUser(),
 					false,
@@ -142,6 +144,7 @@ class SubmitEntityAction extends EditEntityAction {
 					$entityTitleLookup,
 					$entityRevisionLookup,
 					$entityStore,
+					$entityPermissionChecker,
 					$latestContent->getEntity(),
 					$this->getUser(),
 					$latestRevision->getId(),

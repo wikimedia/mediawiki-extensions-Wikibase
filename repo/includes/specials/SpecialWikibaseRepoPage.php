@@ -129,11 +129,13 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
 		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
 
 		$editEntity = new EditEntity(
 			$entityTitleLookup,
 			$entityRevisionLookup,
 			$entityStore,
+			$permissionChecker,
 			$entityContent->getEntity(), //TODO: refactor special pages to not use EntityContent!
 			$this->getUser(),
 			false, //XXX: need conflict detection??

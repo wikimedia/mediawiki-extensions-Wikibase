@@ -574,6 +574,7 @@ abstract class ApiWikibase extends \ApiBase {
 			$this->titleLookup,
 			$this->entityLookup,
 			$this->entityStore,
+			$this->permissionChecker,
 			$entity,
 			$user,
 			$baseRevisionId,
