@@ -2157,10 +2157,12 @@ $messages['is'] = array(
 	'wikibase-entity-query' => 'fyrirspurn',
 	'wikibase-deletedentity-item' => 'Eyddur hlutur',
 	'wikibase-deletedentity-property' => 'Eyddur eiginleiki',
+	'wikibase-diffview-reference' => 'heimild',
 	'wikibase-diffview-rank' => 'Sætaröðun',
 	'wikibase-diffview-rank-preferred' => 'Æskilegt sæti',
 	'wikibase-diffview-rank-normal' => 'Hefðbundið sæti',
 	'wikibase-diffview-rank-deprecated' => 'Óæskilegt sæti',
+	'wikibase-diffview-qualifier' => 'sérgreinir',
 	'wikibase-diffview-label' => 'merkimiði',
 	'wikibase-diffview-alias' => 'samheiti',
 	'wikibase-diffview-description' => 'lýsing',
@@ -2181,7 +2183,11 @@ $messages['is'] = array(
 	'wikibase-error-ui-link-exists' => 'Þú getur ekki tengt í þessa síðu því annar hlutur tengir nú þegar í hana.',
 	'wikibase-error-ui-session-failure' => 'Setan þín rann út. Vinsamlegast skráðu þig inn aftur.',
 	'wikibase-error-ui-edit-conflict' => 'Breytingarárekstur. Vinsamlegast endurhladdu síðunni og vistaðu aftur.',
+	'wikibase-quantitydetails-amount' => 'Magn',
+	'wikibase-quantitydetails-upperbound' => 'efri mörk',
+	'wikibase-quantitydetails-lowerbound' => 'neðri mörk',
 	'wikibase-quantitydetails-unit' => 'Eining',
+	'wikibase-timedetails-time' => 'Tími',
 	'wikibase-replicationnote' => 'Athugaðu að það tekur nokkrar mínútur þangað til breytingarnar eru sýnilegar á öllum wiki verkefnum.',
 	'wikibase-sitelinks-wikipedia' => 'Wikipedia síður sem tengjast þessum hlut',
 	'wikibase-sitelinks-sitename-columnheading' => 'Tungumál',
@@ -2193,11 +2199,19 @@ $messages['is'] = array(
 	'wikibase-validator-bad-type' => '$2 í staðinn fyrir $1',
 	'wikibase-validator-too-long' => 'Má ekki vera lengri en $1 {{PLURAL:$1|stafur|stafir}}.',
 	'wikibase-validator-too-short' => 'Verður að vera að minnsta kosti $1 {{PLURAL:$1|stafur|stafir}} að lengd',
+	'wikibase-validator-too-high' => 'Utan marka, má ekki vera hærra en $1',
+	'wikibase-validator-too-low' => 'Utan marka, má ekki vera lægra en $1',
 	'wikibase-validator-malformed-value' => 'Gallað inntak: $1',
 	'wikibase-validator-bad-entity-id' => 'Gallað auðkenni: $1',
+	'wikibase-validator-bad-entity-type' => 'Óvænt eininga gerð $1',
 	'wikibase-validator-no-such-entity' => '$1 fannst ekki',
+	'wikibase-validator-no-such-property' => 'Eiginleikinn $1 fannst ekki',
 	'wikibase-validator-bad-value' => 'Ógilt gildi: $1',
 	'wikibase-validator-bad-url' => 'Gölluð vefslóð: $1',
+	'wikibase-validator-bad-url-scheme' => 'Óstudd vefslóðs skema: $1',
+	'wikibase-validator-bad-http-url' => 'Gölluð HTTP vefslóð: $1',
+	'wikibase-validator-bad-mailto-url' => 'Gölluð tölvupósts vefslóð: $1',
+	'wikibase-validator-unknown-unit' => 'Óþekkt eining: $1',
 	'datatypes-type-wikibase-item' => 'Hlutur',
 	'datatypes-type-commonsMedia' => 'Commons margmiðlunarskrá',
 );
@@ -2244,12 +2258,17 @@ $messages['it'] = array(
 	'wikibase-quantitydetails-upperbound' => 'Limite superiore',
 	'wikibase-quantitydetails-lowerbound' => 'Limite inferiore',
 	'wikibase-quantitydetails-unit' => 'Unità',
+	'wikibase-timedetails-time' => 'Data e ora',
+	'wikibase-timedetails-isotime' => 'Timestamp ISO',
 	'wikibase-timedetails-timezone' => 'Fuso orario',
 	'wikibase-timedetails-calendar' => 'Calendario',
 	'wikibase-timedetails-precision' => 'Precisione',
+	'wikibase-timedetails-before' => 'Prima del',
+	'wikibase-timedetails-after' => 'Dopo il',
 	'wikibase-globedetails-longitude' => 'Longitudine',
 	'wikibase-globedetails-latitude' => 'Latitudine',
 	'wikibase-globedetails-precision' => 'Precisione',
+	'wikibase-globedetails-globe' => 'Mondo',
 	'wikibase-replicationnote' => 'Potrebbero essere necessari diversi minuti prima che le modifiche siano visibili su tutti i wiki',
 	'wikibase-sitelinks-wikipedia' => 'Pagine di Wikipedia collegate a questo elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Lingua',
@@ -3230,6 +3249,13 @@ $messages['nn'] = array(
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Mediefil frå Commons',
 	'version-wikibase' => 'Wikibase',
+);
+
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'datatypes-type-wikibase-item' => 'Element',
 );
 
 /** Polish (polski)
