@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Scribunto\Test;
 
-use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
@@ -47,7 +46,6 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			return;
 		}
 
-		TestSites::insertIntoDb();
 		$property = $this->createTestProperty();
 
 		$snak = $this->getTestSnak(
