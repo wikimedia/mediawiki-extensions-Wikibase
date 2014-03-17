@@ -54,17 +54,23 @@ class TimeParser extends StringValueParser {
 	protected function getParsers() {
 		$parsers = array();
 
+		$eraParser = new EraParser( $this->getOptions() );
+		$calenderModelParser = new CalendarModelParser( $this->getOptions() );
+
 		$parsers[] = new YearTimeParser(
-			new EraParser( $this->getOptions() ),
+			$eraParser,
 			$this->getOptions()
 		);
 		$parsers[] = new YearMonthTimeParser( $this->getOptions() );
 		$parsers[] = new \ValueParsers\TimeParser(
-			new CalendarModelParser( $this->getOptions() ),
+			$calenderModelParser,
 			$this->getOptions()
 		);
 		$parsers[] = new MWTimeIsoParser( $this->getOptions() );
-		$parsers[] = new DateTimeParser( $this->getOptions() );
+		$parsers[] = new DateTimeParser(
+			$eraParser,
+			$this->getOptions()
+		);
 
 		return $parsers;
 	}

@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Parsers\Test;
 use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueParsers\Test\StringValueParserTest;
+use Wikibase\Lib\Parsers\EraParser;
 use Wikibase\Lib\Parsers\MWTimeIsoParser;
 
 /**
@@ -25,7 +26,22 @@ class DateTimeParserTest extends StringValueParserTest {
 	 */
 	protected function getInstance() {
 		$class = $this->getParserClass();
-		return new $class( $this->newParserOptions() );
+		return new $class( $this->getMockEraParser(), $this->newParserOptions() );
+	}
+
+	private function getMockEraParser() {
+		$mock = $this->getMockBuilder( 'Wikibase\Lib\Parsers\EraParser' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'parse' )
+			->with( $this->isType( 'string' ) )
+			->will( $this->returnCallback(
+				function( $value ) {
+					return array( EraParser::CURRENT_ERA, $value ) ;
+				}
+			) );
+		return $mock;
 	}
 
 	/**
@@ -138,9 +154,6 @@ class DateTimeParserTest extends StringValueParserTest {
 			'June June June',
 			'111 111 111',
 			'Jann 2014',
-
-			// Not within the scope of this parser
-			'100BC', // The DateTime object cant parse BC years
 		);
 
 		foreach ( $invalid as $value ) {
