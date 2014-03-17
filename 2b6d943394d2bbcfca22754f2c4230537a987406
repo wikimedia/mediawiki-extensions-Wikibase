@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_87e1c4fd",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-17T09:25:55Z",
+      "side": 1,
+      "message": "We are using this hack in several places now. EntityId should have a (deprecated) static factory method doing this, analogous to newFromPrefixedId. That could be used instead of any constructor calls for EntityId, and the class could become abstract.  That would get rid of some inconsistencies, and should make it a lot easier to find and fix places still dealing with \"old style\" IDs.",
+      "revId": "2b6d943394d2bbcfca22754f2c4230537a987406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_e712c000",
+        "filename": "lib/includes/store/TermPropertyLabelResolver.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-17T09:25:55Z",
+      "side": 1,
+      "message": "Having the id in a local variable first makes it easier to debug. Not a big deal, just wondering why you removed that.",
+      "revId": "2b6d943394d2bbcfca22754f2c4230537a987406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_0716d4f6",
+        "filename": "lib/tests/phpunit/store/TermPropertyLabelResolverTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-17T09:25:55Z",
+      "side": 1,
+      "message": "Uh, this should still be new PropertyId, I believe. EntityId::newFromPrefixedId should actually be deprecated...",
+      "revId": "2b6d943394d2bbcfca22754f2c4230537a987406",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
