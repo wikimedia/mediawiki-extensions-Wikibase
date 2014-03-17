@@ -4,7 +4,9 @@ namespace Wikibase;
 
 use MWException;
 use InvalidArgumentException;
+use Status;
 use Title;
+use User;
 use WikiPage;
 use Revision;
 
@@ -16,7 +18,7 @@ use Revision;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityContentFactory implements EntityTitleLookup {
+class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker {
 
 	// TODO: inject this map and allow extensions to somehow extend it
 	protected static $typeMap = array(
@@ -216,4 +218,106 @@ class EntityContentFactory implements EntityTitleLookup {
 		}
 	}
 
+	/**
+	 * @see EntityPermissionChecker::getPermissionStatusForEntityId
+	 *
+	 * @param User $user
+	 * @param string $permission
+	 * @param Title $entityPage
+	 * @param string $relaxed
+	 *
+	 * @return Status a status object representing the check's result.
+	 */
+	protected function getPermissionStatus( User $user, $permission, Title $entityPage, $relaxed = '' ) {
+		wfProfileIn( __METHOD__ );
+
+		$errors = $entityPage->getUserPermissionsErrors( $permission, $user, $relaxed !== 'relaxed' );
+		$status = Status::newGood();
+
+		foreach ( $errors as $error ) {
+			call_user_func_array( array( $status, 'fatal'), $error );
+			$status->setResult( false );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $status;
+	}
+
+	/**
+	 * @see EntityPermissionChecker::getPermissionStatusForEntityId
+	 *
+	 * @param User $user
+	 * @param string $permission
+	 * @param EntityId $entityId
+	 * @param string $relaxed
+	 *
+	 * @return Status a status object representing the check's result.
+	 */
+	public function getPermissionStatusForEntityId( User $user, $permission, EntityId $entityId, $relaxed = '' ) {
+		wfProfileIn( __METHOD__ );
+
+		$title = $this->getTitleForId( $entityId );
+		$status = $this->getPermissionStatus( $user, $permission, $title );
+
+		wfProfileOut( __METHOD__ );
+		return $status;
+	}
+
+	/**
+	 * @see EntityPermissionChecker::getPermissionStatusForEntityType
+	 *
+	 * @param User $user
+	 * @param string $permission
+	 * @param string $type
+	 * @param string $relaxed
+	 *
+	 * @return Status a status object representing the check's result.
+	 */
+	public function getPermissionStatusForEntityType( User $user, $permission, $type, $relaxed = '' ) {
+		wfProfileIn( __METHOD__ );
+
+		$ns = $this->getNamespaceForType( $type );
+		$dummyTitle = Title::makeTitleSafe( $ns, '/' );
+
+		$status = $this->getPermissionStatus( $user, $permission, $dummyTitle );
+
+		wfProfileOut( __METHOD__ );
+		return $status;
+	}
+
+	/**
+	 * @see EntityPermissionChecker::getPermissionStatusForEntity
+	 *
+	 * @note When checking for the 'edit' permission, this will check the 'createpage'
+	 * permission first in case the entity does not yet exist (i.e. if $entity->getId()
+	 * returns null).
+	 *
+	 * @param User $user
+	 * @param string $permission
+	 * @param Entity $entity
+	 * @param string $relaxed
+	 *
+	 * @return Status a status object representing the check's result.
+	 */
+	public function getPermissionStatusForEntity( User $user, $permission, Entity $entity, $relaxed = '' ) {
+		$id = $entity->getId();
+		$status = null;
+
+		if ( !$id ) {
+			$type = $entity->getType();
+
+			if ( $permission === 'edit' ) {
+				// for editing a non-existing page, check the createpage permission
+				$status = $this->getPermissionStatusForEntityType( $user, 'createpage', $type );
+			}
+
+			if ( !$status || $status->isOK() ) {
+				$status = $this->getPermissionStatusForEntityType( $user, $permission, $type );
+			}
+		} else {
+			$status = $this->getPermissionStatusForEntityId( $user, $permission, $id );
+		}
+
+		return $status;
+	}
 }
