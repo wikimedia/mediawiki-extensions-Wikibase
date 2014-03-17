@@ -5,6 +5,9 @@ namespace Tests\Integration\Wikibase\InternalSerialization\Deserializers;
 use DataValues\StringValue;
 use Deserializers\Deserializer;
 use Tests\Integration\Wikibase\InternalSerialization\TestDeserializerFactory;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -25,25 +28,96 @@ class ItemRoundtripTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		// TODO
-		$this->deserializer = TestDeserializerFactory::newInstance( $this )->newSnakDeserializer();
+		$this->deserializer = TestDeserializerFactory::newInstance( $this )->newItemDeserializer();
 	}
 
 	/**
-	 * @dataProvider snakProvider
+	 * @dataProvider itemProvider
 	 */
-	public function testSerializationRoundtripping( Snak $snak ) {
-		$newSnak = $this->deserializer->deserialize( $snak->toArray() );
+	public function testSerializationRoundtripping( Item $item ) {
+		$newItem = $this->deserializer->deserialize( $item->toArray() );
 
-		$this->assertEquals( $snak, $newSnak );
+		$this->assertTrue( $item->equals( $newItem ) );
 	}
 
-	public function snakProvider() {
+	public function itemProvider() {
 		return array(
-			array( new PropertyValueSnak( 42, new StringValue( 'foo' ) ) ),
-			array( new PropertyNoValueSnak( 42 ) ),
-			array( new PropertySomeValueSnak( 42 ) ),
+			array( $this->newSimpleItem() ),
+
+			array( $this->newItemWithSiteLinks() ),
+			array( $this->newItemWithTerms() ),
+			array( $this->newItemWithClaims() ),
+
+			array( $this->newComplexItem() ),
 		);
+	}
+
+	private function newSimpleItem() {
+		return Item::newEmpty();
+	}
+
+	private function newItemWithSiteLinks() {
+		$item = $this->newSimpleItem();
+
+		$this->addSiteLinks( $item );
+
+		return $item;
+	}
+
+	private function addSiteLinks( Item $item ) {
+		$item->addSiteLink( new SiteLink( 'foo', 'bar' ) );
+		$item->addSiteLink( new SiteLink( 'baz', 'bah' ) );
+	}
+
+	private function newItemWithTerms() {
+		$item = $this->newSimpleItem();
+
+		$this->addTerms( $item );
+
+		return $item;
+	}
+
+	private function addTerms( Item $item ) {
+		$item->setLabel( 'en', 'foo' );
+		$item->setLabel( 'de', 'bar' );
+
+		$item->setDescription( 'en', 'foo bar baz' );
+		$item->setDescription( 'nl', 'blah' );
+
+		$item->setAliases( 'en', array( 'foo', 'bar', 'baz' ) );
+		$item->setDescription( 'fr', array( 'spam' ) );
+	}
+
+	private function newItemWithClaims() {
+		$item = $this->newSimpleItem();
+
+		$this->addClaims( $item );
+
+		return $item;
+	}
+
+	private function addClaims( Item $item ) {
+		$claim1 = new Claim( new PropertyNoValueSnak( 1 ) );
+		$claim2 = new Claim( new PropertyNoValueSnak( 2 ) );
+		$claim3 = new Claim( new PropertyNoValueSnak( 3 ) );
+
+		$claim1->setGuid( 'claim 1' );
+		$claim2->setGuid( 'claim 2' );
+		$claim3->setGuid( 'claim 3' );
+
+		$item->addClaim( $claim1 );
+		$item->addClaim( $claim2 );
+		$item->addClaim( $claim3 );
+	}
+
+	private function newComplexItem() {
+		$item = $this->newSimpleItem();
+
+		$this->addSiteLinks( $item );
+		$this->addTerms( $item );
+		$this->addClaims( $item );
+
+		return $item;
 	}
 
 }
