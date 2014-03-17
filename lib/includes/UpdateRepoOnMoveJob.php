@@ -101,6 +101,13 @@ class UpdateRepoOnMoveJob extends \Job {
 	}
 
 	/**
+	 * @return EntityPermissionChecker
+	 */
+	protected function getEntityPermissionChecker() {
+		return WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
+	}
+
+	/**
 	 * Get a Site object for a global id
 	 *
 	 * @param string $globalId
@@ -216,6 +223,7 @@ class UpdateRepoOnMoveJob extends \Job {
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup(),
 			$this->getEntityStore(),
+			$this->getEntityPermissionChecker(),
 			$item,
 			$user,
 			true );
