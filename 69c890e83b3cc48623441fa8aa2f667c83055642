@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_07eed4b1",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T10:17:55Z",
+      "side": 1,
+      "message": "This adds the sanitized content to the array but later compares with the unsanitized.",
+      "revId": "69c890e83b3cc48623441fa8aa2f667c83055642",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_e7eac09b",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 29
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-17T10:17:55Z",
+      "side": 1,
+      "message": "Isn\u0027t it possible to use a native (and probably faster) PHP function like array_intersect() here?\n\nOr replace\n$linkBadges[] \u003d $badge; with $linkBadges[$badge] \u003d true;\nand\nin_array() with isset().",
+      "revId": "69c890e83b3cc48623441fa8aa2f667c83055642",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
