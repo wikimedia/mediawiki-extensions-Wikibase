@@ -6,6 +6,7 @@ use User;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\EntityStore;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Job for updating the repo after a page on the client has been moved.
@@ -37,39 +38,6 @@ class UpdateRepoOnMoveJob extends \Job {
 	 */
 	public function __construct( \Title $title, $params = false, $id = 0 ) {
 		parent::__construct( 'UpdateRepoOnMove', $title, $params, $id );
-	}
-
-	/**
-	 * Creates a UpdateRepoOnMoveJob representing the given move.
-	 *
-	 * @param \Title $oldTitle
-	 * @param \Title $newTitle
-	 * @param EntityId entityId
-	 * @param \User $user User who moved the page
-	 * @param string $globalId Global id of the site from which the is coming
-	 * @param array|bool $params extra job parameters, see Job::__construct (default: false).
-	 *
-	 * @return \Wikibase\UpdateRepoOnMoveJob: the job
-	 */
-	public static function newFromMove( $oldTitle, $newTitle, $entityId, $user, $globalId, $params = false ) {
-		wfProfileIn( __METHOD__ );
-
-		if ( $params === false ) {
-			$params = array();
-		}
-
-		$params['siteId'] = $globalId;
-		$params['entityId'] = $entityId;
-		$params['oldTitle'] = $oldTitle->getPrefixedText();
-		$params['newTitle'] = $newTitle->getPrefixedText();
-		$params['user'] = $user->getName();
-
-		// The Title object isn't really being used but \Job demands it... so we just insert something
-		// A Title belonging to the entity on the repo would be more sane, but it doesn't really matter
-		$job = new self( $newTitle, $params );
-
-		wfProfileOut( __METHOD__ );
-		return $job;
 	}
 
 	/**
@@ -153,20 +121,21 @@ class UpdateRepoOnMoveJob extends \Job {
 	 * Update the siteLink on the repo to reflect the change in the client
 	 *
 	 * @param string $siteId Id of the client the change comes from
-	 * @param EntityId $entityId
+	 * @param string $itemId
 	 * @param string $oldPage
 	 * @param string $newPage
 	 * @param \User $user User who we'll attribute the update to
 	 *
 	 * @return bool Whether something changed
 	 */
-	public function updateSiteLink( $siteId, $entityId, $oldPage, $newPage, $user ) {
+	public function updateSiteLink( $siteId, $itemId, $oldPage, $newPage, $user ) {
 		wfProfileIn( __METHOD__ );
 
-		$item = $this->getEntityRevisionLookup()->getEntity( $entityId );
+		$itemId = new ItemId( $itemId );
+		$item = $this->getEntityRevisionLookup()->getEntity( $itemId );
 		if ( !$item ) {
 			// The entity assigned with the moved page can't be found
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": entity with id " . $entityId->getPrefixedId() . " not found" );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": entity with id " . $itemId->getPrefixedId() . " not found" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
