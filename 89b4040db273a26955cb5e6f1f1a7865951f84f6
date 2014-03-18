@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_9cbd9366",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T10:31:04Z",
+      "side": 1,
+      "message": "Because that way, the state is maintained by the caller, not inside the object. \nOriginally that made sense (believe me!), but now I guess it would be more streight forward to turn the page into a true cursor which maintains it\u0027s own position.",
+      "parentUuid": "ee14bf34_65e111fb",
+      "revId": "89b4040db273a26955cb5e6f1f1a7865951f84f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_ed43bf41",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-17T16:32:33Z",
       "side": 1,
       "message": "the whole block of code here could be it\u0027s own method",
+      "revId": "89b4040db273a26955cb5e6f1f1a7865951f84f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7cb2bf93",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T10:31:04Z",
+      "side": 1,
+      "message": "probably",
+      "parentUuid": "ee14bf34_ed43bf41",
       "revId": "89b4040db273a26955cb5e6f1f1a7865951f84f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
