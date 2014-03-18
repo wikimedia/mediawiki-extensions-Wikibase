@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_86153d9f",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-18T17:22:15Z",
+      "side": 1,
+      "message": "brackets please. !( $params[\u0027entityId\u0027] instanceof ItemId )\n\nElse the exec order is not obvious",
+      "revId": "94d98131617a93ad0a72c55b7bba314619eed7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
