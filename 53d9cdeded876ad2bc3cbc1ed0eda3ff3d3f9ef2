@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_c9534642",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-18T20:00:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_a95ed279",
+      "revId": "53d9cdeded876ad2bc3cbc1ed0eda3ff3d3f9ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_098c9eda",
         "filename": "client/includes/UpdateRepoOnMove.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-18T19:33:04Z",
       "side": 1,
       "message": "getEntityId() may return null (due to race conditions, for instance). IF ti does, it will cause a fatal error. Not good...",
+      "revId": "53d9cdeded876ad2bc3cbc1ed0eda3ff3d3f9ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_a948128d",
+        "filename": "client/includes/UpdateRepoOnMove.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-18T20:00:14Z",
+      "side": 1,
+      "message": "Solved the potential race condition",
+      "parentUuid": "ee14bf34_098c9eda",
       "revId": "53d9cdeded876ad2bc3cbc1ed0eda3ff3d3f9ef2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_894d4e9e",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-18T20:00:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_c9c8e627",
+      "revId": "53d9cdeded876ad2bc3cbc1ed0eda3ff3d3f9ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_69d79ac5",
         "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-18T19:14:42Z",
       "side": 1,
       "message": "why clone? shouldn\u0027t the service be stateless?",
+      "revId": "53d9cdeded876ad2bc3cbc1ed0eda3ff3d3f9ef2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_6962fa07",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-18T20:00:14Z",
+      "side": 1,
+      "message": "No idea why this is needed, as per IRC",
+      "parentUuid": "ee14bf34_69d79ac5",
       "revId": "53d9cdeded876ad2bc3cbc1ed0eda3ff3d3f9ef2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
