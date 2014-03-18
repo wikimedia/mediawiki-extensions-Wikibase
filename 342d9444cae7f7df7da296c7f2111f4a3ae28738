@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_7c719fdc",
+        "filename": "lib/includes/store/EntityPermissionChecker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T10:40:51Z",
+      "side": 1,
+      "message": "\"$doExpensiveQueries\" is indeed about resources. It indicates that the caller should know whether expensive queries should be performed. This means leaking implementation details through the interface.\n\nI prefer the caller indicates the requirements (\"need this to be strict\" vs. \"I don\u0027t care so much\") and leave it to the implementation to decide what to do.\n\nThe intention is indeed that the caller can specify requirements, so the implementation can optimize.",
+      "parentUuid": "ee14bf34_50eb64db",
+      "revId": "342d9444cae7f7df7da296c7f2111f4a3ae28738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_50f5a4c6",
         "filename": "lib/includes/store/EntityPermissionChecker.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_3cac4732",
+        "filename": "lib/includes/store/EntityPermissionChecker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T10:40:51Z",
+      "side": 1,
+      "message": "because that\u0027s the convention for these \"verbose flags\". it could be anything, really.",
+      "parentUuid": "ee14bf34_50f5a4c6",
+      "revId": "342d9444cae7f7df7da296c7f2111f4a3ae28738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_f0f158c9",
         "filename": "lib/includes/store/EntityPermissionChecker.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-17T19:12:17Z",
       "side": 1,
       "message": "Huh?",
+      "revId": "342d9444cae7f7df7da296c7f2111f4a3ae28738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_5c76dbd6",
+        "filename": "lib/includes/store/EntityPermissionChecker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T10:40:51Z",
+      "side": 1,
+      "message": "duh, stupid phpstorm class template.",
+      "parentUuid": "ee14bf34_f0f158c9",
       "revId": "342d9444cae7f7df7da296c7f2111f4a3ae28738",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
