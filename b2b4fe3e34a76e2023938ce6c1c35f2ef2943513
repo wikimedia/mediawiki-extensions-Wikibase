@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_899aee64",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:52:26Z",
+      "side": 1,
+      "message": "why is \"handle\" the verb here, not \"add\"?",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_e9b28ae3",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:52:26Z",
+      "side": 1,
+      "message": "Why is this needed? When does this happen? Please comment.",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_c9b7c6d2",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:52:26Z",
+      "side": 1,
+      "message": "\"makeEditLink\" instead of \"handle\"?",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_29c0822e",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:52:26Z",
+      "side": 1,
+      "message": "why? Returning the output page seems rather odd.",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_09bdbead",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:52:26Z",
+      "side": 1,
+      "message": "I think this can be inlined, no need for a separate function here.",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_c9dea614",
+        "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:52:26Z",
+      "side": 1,
+      "message": "We need the entire class for this one line of adding a config variable? Modularization is fine and dandy, but this seems a bit much - can\u0027t we fold this into another handler?",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
