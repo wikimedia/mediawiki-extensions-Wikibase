@@ -29,32 +29,35 @@ class OutputPageJsConfigBuilder {
 
 	/**
 	 * @param OutputPage $out
-	 * @param EntityId $entityId
 	 * @param string $rightsUrl
 	 * @param string $rightsText
+	 * @param boolean $isExperimental
+	 *
+	 * @return array
 	 */
-	public function build( OutputPage $out, EntityId $entityId, $rightsUrl, $rightsText ) {
+	public function build( OutputPage $out, $rightsUrl, $rightsText, $isExperimental ) {
 		$user = $out->getUser();
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
 
-		$userConfigVars = $this->getUserConfigVars( $entityId, $title, $user );
+		$userConfigVars = $this->getUserConfigVars( $title, $user );
 
 		$copyrightConfig = $this->getCopyrightConfig( $rightsUrl, $rightsText, $lang );
 
 		$configVars = array_merge( $userConfigVars, $copyrightConfig );
 
+		$configVars['wbExperimentalFeatures'] = $isExperimental;
+
 		return $configVars;
 	}
 
 	/**
-	 * @param EntityId $entityId
 	 * @param Title $title
 	 * @param User $user
 	 *
 	 * @return array
 	 */
-	private function getUserConfigVars( EntityId $entityId, Title $title, User $user ) {
+	private function getUserConfigVars( Title $title, User $user ) {
 		$configVars = array();
 
 		// TODO: replace wbUserIsBlocked this with more useful info (which groups would be
