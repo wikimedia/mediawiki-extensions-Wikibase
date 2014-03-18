@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_b3ce45b8",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-18T14:06:10Z",
+      "side": 1,
+      "message": "Why do you assume the last number is always the year? At least it should check there is no other 3+ digit number in the string, e.g. \"912.01.01\".\n\nWhat happens with \"99/12/31\"?  Should be the year 99, shouldn\u0027t it?",
+      "revId": "f51648533be587d0ac1f3229558c138e0d3673de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
