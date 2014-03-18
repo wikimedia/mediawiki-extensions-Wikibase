@@ -32,7 +32,18 @@ class DeserializerFactory {
 	/**
 	 * @return Deserializer
 	 */
-	public function newItemDeserializer() {
+	public function newEntityDeserializer() {
+		// TODO: comparability layer
+		return new LegacyEntityDeserializer(
+			$this->newItemDeserializer(),
+			$this->newPropertyDeserializer()
+		);
+	}
+
+	/**
+	 * @return Deserializer
+	 */
+	private function newItemDeserializer() {
 		return new LegacyItemDeserializer(
 			$this->newEntityIdDeserializer(),
 			$this->newSiteLinkListDeserializer(),
@@ -44,7 +55,7 @@ class DeserializerFactory {
 	/**
 	 * @return Deserializer
 	 */
-	public function newPropertyDeserializer() {
+	private function newPropertyDeserializer() {
 		return new LegacyPropertyDeserializer(
 			$this->newEntityIdDeserializer(),
 			$this->newTermsDeserializer()
@@ -54,38 +65,28 @@ class DeserializerFactory {
 	/**
 	 * @return Deserializer
 	 */
-	public function newEntityDeserializer() {
-		return new LegacyEntityDeserializer(
-			$this->newItemDeserializer(),
-			$this->newPropertyDeserializer()
-		);
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	public function newEntityIdDeserializer() {
+	private function newEntityIdDeserializer() {
 		return new LegacyEntityIdDeserializer( $this->idParser );
 	}
 
 	/**
 	 * @return Deserializer
 	 */
-	public function newTermsDeserializer() {
+	private function newTermsDeserializer() {
 		return new LegacyTermsDeserializer();
 	}
 
 	/**
 	 * @return Deserializer
 	 */
-	public function newSiteLinkListDeserializer() {
+	private function newSiteLinkListDeserializer() {
 		return new LegacySiteLinkListDeserializer();
 	}
 
 	/**
 	 * @return Deserializer
 	 */
-	public function newClaimDeserializer() {
+	private function newClaimDeserializer() {
 		$snakDeserializer = $this->newSnakDeserializer();
 
 		return new LegacyClaimDeserializer(
@@ -97,7 +98,7 @@ class DeserializerFactory {
 	/**
 	 * @return Deserializer
 	 */
-	public function newSnakListDeserializer() {
+	private function newSnakListDeserializer() {
 		return new LegacySnakListDeserializer( $this->newSnakDeserializer() );
 	}
 
@@ -105,6 +106,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newSnakDeserializer() {
+		// TODO: comparability layer
 		return new LegacySnakDeserializer( $this->dataValueDeserializer );
 	}
 
