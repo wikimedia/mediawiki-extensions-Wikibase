@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Title;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -82,7 +83,7 @@ class ItemHandler extends EntityHandler {
 			return null;
 		}
 
-		$entityId = new EntityId( Item::ENTITY_TYPE, $id );
+		$entityId = ItemId::newFromNumber( $id );
 		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entityId );
 	}
 
@@ -119,7 +120,7 @@ class ItemHandler extends EntityHandler {
 			return null;
 		}
 
-		$entityId = new EntityId( Item::ENTITY_TYPE, $id );
+		$entityId = ItemId::newFromNumber( $id );
 		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entityId );
 	}
 
@@ -142,4 +143,3 @@ class ItemHandler extends EntityHandler {
 		return Item::ENTITY_TYPE;
 	}
 }
-

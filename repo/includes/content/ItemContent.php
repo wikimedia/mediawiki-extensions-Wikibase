@@ -13,12 +13,12 @@ use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\ItemSearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Utils;
 use WikiPage;
 
 /**
@@ -169,14 +169,14 @@ class ItemContent extends EntityContent {
 	 * @return \Message
 	 */
 	protected function getConflictMessage( array $conflict ) {
-		$id = new EntityId( Item::ENTITY_TYPE, $conflict['itemId'] );
+		$entityId = ItemId::newFromNumber( $conflict['itemId'] );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		/**
 		 * @var WikiPage $ipsPage
 		 */
-		$conflictingPage = $entityContentFactory->getWikiPageForId( $id );
+		$conflictingPage = $entityContentFactory->getWikiPageForId( $entityId );
 
 		$siteSqlStore = SiteSQLStore::newInstance();
 		$site = $siteSqlStore->getSite( $conflict['siteId'] );
@@ -331,4 +331,5 @@ class ItemContent extends EntityContent {
 			$configBuilder
 		);
 	}
+
 }

@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Diff\Diff;
 use Diff\DiffOpChange;
 use Status;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Item;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
@@ -72,7 +72,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$detector = new LabelDescriptionDuplicateDetector( new MockTermCache() );
 
 		$entity = Item::newEmpty();
-		$entity->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
+		$entity->setId( new ItemId( "Q1" ) );
 
 		$entity->setDescription( $langCode, $description );
 		$entity->setLabel( $langCode, $label );
@@ -113,7 +113,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$detector = new LabelDescriptionDuplicateDetector( $termCache );
 
 		$entity = Item::newEmpty();
-		$entity->setId( new EntityId( Item::ENTITY_TYPE, 1 ) );
+		$entity->setId( new ItemId( "Q1" ) );
 
 		$entity->setDescription( $langCode, $description );
 		$entity->setLabel( $langCode, $label );
