@@ -34,9 +34,50 @@ Get the code of this package, either via git, or some other means. Also get all 
 You can find a list of the dependencies in the "require" section of the composer.json file.
 Then take care of autoloading the classes defined in the src directory.
 
-## Library functionality
+## Library usage
 
-TODO
+Construct an instance of the deserializer or serializer you need via the appropriate factory.
+
+```php
+use Wikibase\InternalSerialization\DeserializerFactory;
+
+$deserializerFactory = new DeserializerFactory( /* ... */ );
+$entityDeserializer = $deserializerFactory->newEntityDeserializer();
+```
+
+The use the deserialize or serialize method.
+
+```php
+$entity = $entityDeserializer->deserialize( $myEntitySerialization );
+```
+
+In case of deserialization, guarding against failures is good practice.
+So it is typically better to use the slightly more verbose try-catch approach.
+
+```php
+try {
+	$entity = $entityDeserializer->deserialize( $myEntitySerialization );
+}
+catch ( DeserializationException $ex ) {
+	// Handling of the exception
+}
+```
+
+## Library structure
+
+The Wikibase DataModel objects can all be serialized to a generic format from which the objects
+can later be reconstructed. This is done via a set of Serializers/Serializer implementing objects.
+These objects turn for instance a Claim object into a data structure containing only primitive
+types and arrays. This data structure can thus be readily fed to json_encode, serialize, or the
+like. The process of reconstructing the objects from such a serialization is provided by
+objects implementing the Deserializers/Deserializer interface.
+
+Serializers can be obtained via an instance of SerializerFactory and deserializers can be obtained
+via an instance of DeserializerFactory. You are not allowed to construct these serializers and
+deserializers directly yourself or to have any kind of knowledge of them (ie type hinting). These
+objects are internal to this serialization and might change name or structure at any time. All you
+are allowed to know when calling $serializerFactory->newEntitySerializer() is that you get back
+an instance of Serializers\Serializer.
 
 ## Tests
 
@@ -65,5 +106,5 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 ## See also
 
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
-* [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization)
+* [Wikibase DataModel Serialization](https://github.com/wmde/WikibaseDataModelSerialization) (For the public serialization format)
 * [Ask Serialization](https://github.com/wmde/AskSerialization)
