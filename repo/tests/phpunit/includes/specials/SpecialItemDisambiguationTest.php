@@ -50,12 +50,12 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		// Array keys are derived from the function parameters
 		$matches = array(
 			'one,en,item,1' => array(
-				array( Item::ENTITY_TYPE, 1 ),
-				array( Item::ENTITY_TYPE, 11 ),
+				new ItemId( 'Q1' ),
+				new ItemId( 'Q11' ),
 			),
 			'eins,de,item,1' => array(
-				array( Item::ENTITY_TYPE, 1 ),
-				array( Item::ENTITY_TYPE, 11 ),
+				new ItemId( 'Q1' ),
+				new ItemId( 'Q11' ),
 			),
 		);
 

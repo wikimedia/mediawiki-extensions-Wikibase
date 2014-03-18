@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Item;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Settings;
 use Wikibase\Term;
 use Wikibase\TermIndex;
@@ -30,8 +30,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$lookup = $this->getTermIndex();
 
 		$item0 = Item::newEmpty();
-		$item0->setId( new ItemId( 'Q10' ) );
-		$id0 = $item0->getId()->getNumericId();
+		$id0 = new ItemId( 'Q10' );
+		$item0->setId( $id0 );
 
 		$item0->setLabel( 'en', 'foobar' );
 		$item0->setLabel( 'de', 'foobar' );
@@ -39,8 +39,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$lookup->saveTermsOfEntity( $item0 );
 
 		$item1 = $item0->copy();
-		$item1->setId( new ItemId( 'Q11' ) );
-		$id1 = $item1->getId()->getNumericId();
+		$id1 = new ItemId( 'Q11' );
+		$item1->setId( $id1 );
 
 		$item1->setLabel( 'nl', 'o_O' );
 		$item1->setDescription( 'en', 'foo bar baz' );
@@ -48,17 +48,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$ids = $lookup->getEntityIdsForLabel( 'foobar' );
 		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
+		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
 		$this->assertArrayEquals( array( $id0, $id1 ), $ids );
 
 		$ids = $lookup->getEntityIdsForLabel( 'baz', 'nl' );
 		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
+		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
 		$this->assertArrayEquals( array( $id0 ), $ids );
 
 		$ids = $lookup->getEntityIdsForLabel( 'o_O', 'nl' );
 		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
+		$this->assertContainsOnlyInstancesOf( '\Wikibase\DataModel\Entity\ItemId', $ids );
 		$this->assertArrayEquals( array( $id1 ), $ids );
 	}
 
@@ -153,7 +153,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		foreach ( $actual as $term ) {
 			$id = $term->getEntityId()->getSerialization();
 
-			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
+			$this->assertContains( $id, array( $id0, $id1 ) );
 
 			$expected = $terms[$id];
 
@@ -229,7 +229,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		foreach ( $actual as $term ) {
 			$id = $term->getEntityId()->getSerialization();
 
-			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
+			$this->assertContains( $id, array( $id0, $id1 ) );
 
 			$expected = $expectedTerms[$id];
 
@@ -249,8 +249,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
 		$item->setAliases( 'fr', array( 'o', '_', 'O' ) );
 
-		$item->setId( new ItemId( 'Q10' ) );
-		$id = $item->getId()->getNumericId();
+		$id = new ItemId( 'Q10' );
+		$item->setId( $id );
 		$lookup->saveTermsOfEntity( $item );
 
 		$this->assertTrue( $lookup->termExists( 'testDeleteTermsForEntity' ) );
@@ -260,9 +260,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertFalse( $lookup->termExists( 'testDeleteTermsForEntity' ) );
 
 		$ids = $lookup->getEntityIdsForLabel( 'abc' );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 
-		$this->assertTrue( !in_array( $id, $ids, true ) );
+		$this->assertNotContains( $id, $ids );
 	}
 
 	public function testSaveTermsOfEntity() {
@@ -474,15 +473,15 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		}
 
 		$k = Term::TYPE_LABEL . '/en/abc';
-		$this->assertTrue( in_array( $k, $term_keys ),
+		$this->assertContains( $k, $term_keys,
 			"expected to find $k in terms for item" );
 
 		$k = Term::TYPE_DESCRIPTION . '/en/testGetTermsOfEntity';
-		$this->assertTrue( in_array( $k, $term_keys ),
+		$this->assertContains( $k, $term_keys,
 			"expected to find $k in terms for item" );
 
 		$k = Term::TYPE_ALIAS . '/fr/_';
-		$this->assertTrue( in_array( $k, $term_keys ),
+		$this->assertContains( $k, $term_keys,
 			"expected to find $k in terms for item" );
 	}
 
