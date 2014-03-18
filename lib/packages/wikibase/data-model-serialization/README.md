@@ -116,3 +116,4 @@ Initial release with these features:
 
 * [Wikibase DataModel](https://github.com/wmde/WikibaseDataModel)
 * [Ask Serialization](https://github.com/wmde/AskSerialization)
+* [Wikibase Internal Serialization](https://github.com/wmde/WikibaseInternalSerialization) (For the "internal" serialization format)
