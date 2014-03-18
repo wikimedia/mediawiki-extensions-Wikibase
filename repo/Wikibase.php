@@ -38,7 +38,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles;
 	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks, $wgContentHandlers;
-	global $wgWBStores, $wgWBRepoSettings, $wgResourceModules, $wgValueParsers;
+	global $wgWBStores, $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -146,6 +146,9 @@ call_user_func( function() {
 	$wgSpecialPageGroups['DispatchStats']				= 'wikibaserepo';
 	$wgSpecialPageGroups['EntityData']					= 'wikibaserepo';
 	$wgSpecialPageGroups['MyLanguageFallbackChain'] 	= 'wikibaserepo';
+
+	// Jobs
+	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][]						= 'Wikibase\RepoHooks::onBeforePageDisplay';
