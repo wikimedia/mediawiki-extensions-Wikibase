@@ -3,12 +3,12 @@
 namespace Wikibase;
 
 use CentralAuthUser;
-use Job;
+use IJobSpecification;
 use JobQueueGroup;
 use RuntimeException;
 use Title;
 use User;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * Provides logic to update the repo after certain changes have been
@@ -47,13 +47,24 @@ abstract class UpdateRepo {
 	protected $title;
 
 	/**
+	 * @var EntityId|null
+	 */
+	private $entityId = false;
+
+	/**
 	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param User $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $title Title in the client that has been changed
 	 */
-	public function __construct( $repoDB, $siteLinkLookup, $user, $siteId, $title ) {
+	public function __construct(
+		$repoDB,
+		SiteLinkLookup $siteLinkLookup,
+		User $user,
+		$siteId,
+		Title $title
+	) {
 		$this->repoDB = $repoDB;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->user = $user;
@@ -67,12 +78,16 @@ abstract class UpdateRepo {
 	 * @return EntityId|null
 	 */
 	public function getEntityId() {
-		return $this->siteLinkLookup->getEntityIdForSiteLink(
-			new SimpleSiteLink(
-				$this->siteId,
-				$this->title->getFullText()
-			)
-		);
+		if ( $this->entityId === false ) {
+			$this->entityId = $this->siteLinkLookup->getEntityIdForSiteLink(
+				new SiteLink(
+					$this->siteId,
+					$this->title->getFullText()
+				)
+			);
+		}
+
+		return $this->entityId;
 	}
 
 	/**
@@ -94,7 +109,6 @@ abstract class UpdateRepo {
 			return false;
 		}
 
-		// XXX: repoDatabase == CentralAuth site id?!!
 		if ( !$caUser->isAttached() || !$caUser->attachedOn( $this->repoDB ) ) {
 			// Either the user account on this wiki or the one on the repo do not exist
 			// or they aren't connected
@@ -131,7 +145,7 @@ abstract class UpdateRepo {
 	/**
 	 * Returns a new job for updating the repo.
 	 *
-	 * @return Job
+	 * @return IJobSpecification
 	 */
 	abstract public function createJob();
 }

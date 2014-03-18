@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\UpdateRepoOnMove;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers Wikibase\UpdateRepoOnMove
@@ -24,33 +23,22 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 	 * @return array
 	 */
 	protected function getFakeMoveData() {
-		static $ret = array();
+		$entityId = new ItemId( 'Q123' );
 
-		if ( !$ret ) {
-			$entityId = new ItemId( 'Q123' );
+		$siteLinkLookupMock = $this->getMock( '\Wikibase\SiteLinkLookup' );
 
-			$siteLinkLookupMock = $this->getMockBuilder( '\Wikibase\SiteLinkLookup' )
-				->disableOriginalConstructor()
-				->getMock();
+		$siteLinkLookupMock->expects( $this->any() )
+			->method( 'getEntityIdForSiteLink' )
+			->will( $this->returnValue( $entityId ) );
 
-			$siteLinkLookupMock->expects( $this->any() )
-				->method( 'getEntityIdForSiteLink' )
-				->will( $this->returnValue( $entityId ) );
-
-			$siteId = WikibaseClient::getDefaultInstance()->getSettings()
-				->getSetting( 'siteGlobalID' );
-
-			$ret = array(
-				'repoDB' => wfWikiID(),
-				'siteLinkLookup' => $siteLinkLookupMock,
-				'user' => \User::newFromName( 'RandomUserWhichDoesntExist' ),
-				'siteId' => $siteId,
-				'oldTitle' => \Title::newFromText( 'ThisOneDoesntExist' ),
-				'newTitle' => \Title::newFromText( 'Bar' )
-			);
-		}
-
-		return $ret;
+		return array(
+			'repoDB' => 'wikidata',
+			'siteLinkLookup' => $siteLinkLookupMock,
+			'user' => \User::newFromName( 'RandomUserWhichDoesntExist' ),
+			'siteId' => 'whatever',
+			'oldTitle' => \Title::newFromText( 'ThisOneDoesntExist' ),
+			'newTitle' => \Title::newFromText( 'Bar' )
+		);
 	}
 
 	/**
@@ -59,16 +47,20 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 	 * @return UpdateRepoOnMove
 	 */
 	protected function getNewLocal() {
-		$moveData = $this->getFakeMoveData();
+		static $updateRepo = null;
 
-		$updateRepo = new UpdateRepoOnMove(
-			$moveData['repoDB'],
-			$moveData['siteLinkLookup'],
-			$moveData['user'],
-			$moveData['siteId'],
-			$moveData['oldTitle'],
-			$moveData['newTitle']
-		);
+		if ( !$updateRepo ) {
+			$moveData = $this->getFakeMoveData();
+
+			$updateRepo = new UpdateRepoOnMove(
+				$moveData['repoDB'],
+				clone $moveData['siteLinkLookup'],
+				$moveData['user'],
+				$moveData['siteId'],
+				$moveData['oldTitle'],
+				$moveData['newTitle']
+			);
+		}
 
 		return $updateRepo;
 	}
@@ -106,9 +98,10 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 	public function testCreateJob() {
 		$updateRepo = $this->getNewLocal();
 		$job = $updateRepo->createJob();
+		$itemId = new ItemId( 'Q123' );
 
 		$moveData = $this->getFakeMoveData();
-		$this->assertInstanceOf( 'Job', $job );
+		$this->assertInstanceOf( 'IJobSpecification', $job );
 		$this->assertEquals( 'UpdateRepoOnMove', $job->getType() );
 
 		$params = $job->getParams();
@@ -116,7 +109,7 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 		$this->assertEquals( $moveData['oldTitle'], $params['oldTitle'] );
 		$this->assertEquals( $moveData['newTitle'], $params['newTitle'] );
 		$this->assertEquals( $moveData['user'], $params['user'] );
-		$this->assertTrue( array_key_exists( 'entityId', $params ) );
+		$this->assertEquals( $itemId->getSerialization(), $params['entityId'] );
 	}
 
 	public function testInjectJob() {
