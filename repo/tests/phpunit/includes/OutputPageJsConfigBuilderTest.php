@@ -30,9 +30,9 @@ class OutputPageJsConfigBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$configVars = $configBuilder->build(
 			$this->getOutputPage( $isBlocked, $canEdit ),
-			new ItemId( 'Q80' ),
 			'https://creativecommons.org',
-			'CC-0'
+			'CC-0',
+			true
 		);
 
 		$expected = array(
@@ -42,7 +42,8 @@ class OutputPageJsConfigBuilderTest extends \PHPUnit_Framework_TestCase {
 				'version' => 'wikibase-1',
 				'messageHtml' => '(wikibase-shortcopyrightwarning: (wikibase-save), (copyrightpage)'
 					. ', <a rel="nofollow" class="external text" href="https://creativecommons.org">CC-0</a>)'
-			)
+			),
+			'wbExperimentalFeatures' => true
 		);
 
 		$this->assertEquals( $expected, $configVars );
