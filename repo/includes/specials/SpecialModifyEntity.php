@@ -4,6 +4,10 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use UserInputException;
+use Wikibase\CopyrightMessageBuilder;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\EntityRevision;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -12,17 +16,32 @@ use Wikibase\Summary;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
+ * @author Daniel Kinzler
  */
 abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	/**
 	 * The entity content to modify.
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @var \Wikibase\EntityContent
+	 * @var EntityRevision
 	 */
-	protected $entityContent;
+	protected $entityRevision;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var string
+	 */
+	protected $rightsUrl;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var string
+	 */
+	protected $rightsText;
 
 	/**
 	 * Constructor.
@@ -34,6 +53,11 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 */
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+
+		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
+		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 	}
 
 	/**
@@ -64,21 +88,30 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$this->showErrorHTML( $error );
 		}
 
-		$summary = $this->modifyEntity();
+		$summary = false;
+		$valid = $this->validateInput();
+		$entity = $this->entityRevision == null ? null : $this->entityRevision->getEntity();
 
-		if ( $summary === false ) {
-			$this->setForm();
+		if ( $valid ) {
+			$summary = $this->modifyEntity( $entity );
 		}
-		else {
-			$status = $this->saveEntity( $this->entityContent, $summary, $this->getRequest()->getVal( 'wpEditToken' ) );
+
+		if ( !$summary ) {
+			$this->setForm( $entity );
+		} else {
+			//TODO: Add conflict detection. All we need to do is to provide the base rev from
+			// $this->entityRevision to the saveEntity() call. But we need to make sure
+			// conflicts are reported in a nice way first. In particular, we'd want to
+			// show the form again.
+			$status = $this->saveEntity( $entity, $summary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
 			if ( !$status->isOK() && $status->getErrorsArray() ) {
 				$errors = $status->getErrorsArray();
 				$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
-				$this->setForm();
+				$this->setForm( $entity );
 			}
 			else {
-				$entityUrl = $this->entityContent->getTitle()->getFullUrl();
+				$entityUrl = $this->getEntityTitle( $entity->getId() )->getFullUrl();
 				$this->getOutput()->redirect( $entityUrl );
 			}
 		}
@@ -105,19 +138,37 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 		$id = $this->parseEntityId( $rawId );
 
-		$this->entityContent = $this->loadEntityContent( $id );
+		$this->entityRevision = $this->loadEntity( $id );
+	}
+
+
+	/**
+	 * @todo could factor this out into a special page form builder and renderer
+	 */
+	protected function addCopyrightText() {
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$this->rightsUrl,
+			$this->rightsText
+		);
+
+		$html = $copyrightView->getHtml( $this->getLanguage() );
+
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
 	 * Building the HTML form for modifying an entity.
 	 *
-	 * @since 0.2
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
 	 */
-	private function setForm() {
+	private function setForm( Entity $entity = null ) {
+		$this->addCopyrightText();
+
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
-		// FIXME: Edit warning should be displayed above the license note like on "New Entity" page.
-		// (Unfortunately, the license note is generated in SpecialModifyTerm::modifyEntity.)
 		if ( $this->getUser()->isAnon() ) {
 			$this->showErrorHTML(
 				$this->msg(
@@ -152,7 +203,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		);
 
 		// Form elements
-		$this->getOutput()->addHTML( $this->getFormElements() );
+		$this->getOutput()->addHTML( $this->getFormElements( $entity ) );
 
 		// Form body
 		$this->getOutput()->addHTML(
@@ -178,14 +229,13 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Returns the form elements.
 	 *
-	 * @since 0.4
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
 	 *
 	 * @return string
 	 */
-	protected function getFormElements() {
-		$id = $this->entityContent ?
-			$this->entityContent->getEntity()->getId()->getSerialization() : '';
-
+	protected function getFormElements( Entity $entity = null ) {
 		return Html::element(
 			'label',
 			array(
@@ -196,7 +246,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		)
 		. Html::input(
 			'id',
-			$id,
+			$entity === null ? '' : $entity->getId(),
 			'text',
 			array(
 				'class' => 'wb-input',
@@ -218,11 +268,34 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Modifies the entity. A return value of false indicates that the edit failed.
+	 * Validates form input.
 	 *
-	 * @since 0.4
+	 * The default implementation just checks whether a target entity was specified via a POST request.
+	 * Subclasses should override this to detect otherwise incomplete or erroneous input.
 	 *
-	 * @return Summary|boolean The summary or false
+	 * @since 0.5
+	 *
+	 * @return bool true if the form input is ok and normal processing should
+	 * continue by calling modifyEntity().
 	 */
-	abstract protected function modifyEntity();
+	protected function validateInput() {
+		$request = $this->getRequest();
+
+		if ( $this->entityRevision === null || !$request->wasPosted() ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Modifies the entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return Summary|bool
+	 */
+	protected abstract function modifyEntity( Entity $entity );
 }

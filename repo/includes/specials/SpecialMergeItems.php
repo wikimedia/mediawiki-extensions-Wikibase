@@ -7,9 +7,9 @@ use UserInputException;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ItemContent;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Summary;
 use Wikibase\DataModel\Entity\EntityId;
 use Status;
@@ -26,16 +26,16 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	/**
 	 * The item content to merge from.
 	 *
-	 * @var ItemContent
+	 * @var EntityRevision
 	 */
-	private $fromItemContent;
+	private $fromItemRevision;
 
 	/**
 	 * The item content to merge to.
 	 *
-	 * @var ItemContent
+	 * @var EntityRevision
 	 */
-	private $toItemContent;
+	private $toItemRevision;
 
 	/**
 	 * The conflicts that should be ignored
@@ -116,8 +116,8 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 		$fromId = $this->parseItemId( $rawFromId );
 		$toId = $this->parseItemId( $rawToId );
 
-		$this->fromItemContent = $this->loadEntityContent( $fromId );
-		$this->toItemContent = $this->loadEntityContent( $toId );
+		$this->fromItemRevision = $this->loadEntity( $fromId );
+		$this->toItemRevision = $this->loadEntity( $toId );
 
 		// Get ignore conflicts
 		$ignoreConflicts = $request->getVal( 'ignoreconflicts', null );
@@ -137,15 +137,15 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	 * @return boolean
 	 */
 	protected function modifyEntity( Status $status ) {
-		if ( $this->fromItemContent === null || $this->toItemContent === null ) {
+		if ( $this->fromItemRevision === null || $this->toItemRevision === null ) {
 			return false;
 		}
 		$sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		try {
 			$changeOps = new ChangeOpsMerge(
-				$this->fromItemContent,
-				$this->toItemContent,
+				$this->fromItemRevision->getEntity(),
+				$this->toItemRevision->getEntity(),
 				new LabelDescriptionDuplicateDetector(
 					$termIndex
 				),
@@ -170,15 +170,15 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	 */
 	protected function saveChanges() {
 		// remove the content from the "from" item
-		$toSummary = $this->getSummary( 'to', $this->toItemContent->getItem()->getId() );
-		$fromStatus = $this->saveEntity( $this->fromItemContent, $toSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
+		$toSummary = $this->getSummary( 'to', $this->toItemRevision->getEntity()->getId() );
+		$fromStatus = $this->saveEntity( $this->fromItemRevision->getEntity(), $toSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
 		if ( !$fromStatus->isOK() ) {
 			$this->showErrorHTML( $fromStatus->getMessage() );
 		} else {
 			// add the content to the "to" item
-			$fromSummary = $this->getSummary( 'from', $this->fromItemContent->getItem()->getId() );
-			$toStatus = $this->saveEntity( $this->toItemContent, $fromSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
+			$fromSummary = $this->getSummary( 'from', $this->fromItemRevision->getEntity()->getId() );
+			$toStatus = $this->saveEntity( $this->toItemRevision->getEntity(), $fromSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
 
 			if ( !$toStatus->isOK() ) {
 				// Bug: 55960
@@ -189,7 +189,8 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 				// Everything went well so redirect to the merged item
 				// TODO: instead of redirecting, we should display a success message containing links to the merged items
 				//       and the changes that were made as well as some instructions to undo the merge.
-				$toEntityUrl = $this->toItemContent->getTitle()->getFullUrl();
+				$title = $this->getEntityTitle( $this->toItemRevision->getEntity()->getId() );
+				$toEntityUrl = $title->getFullUrl();
 				$this->getOutput()->redirect( $toEntityUrl );
 				return true; // no need to create the form now
 			}
