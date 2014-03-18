@@ -501,7 +501,7 @@ This is a generic placeholder message used while a remove is in progress, and re
 	'wikibase-label-empty' => "Placeholder message displayed instead of the item's label in case no label has been specified yet. This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-label|label]].',
-	'wikibase-label-edit-placeholder-language-aware' => 'Like {{msg-mw|Wikibase-label-edit-placeholder}}, but language ($1) aware.',
+	'wikibase-label-edit-placeholder-language-aware' => 'Like {{msg-mw|Wikibase-label-edit-placeholder}}, but language aware. $1 is the autonym of the language.',
 	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[d:Wikidata:Glossary#languageattribute-description|description]].',
@@ -1736,7 +1736,7 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'wikibase-dispatchstats-median' => 'Medianu',
 	'wikibase-dispatchstats-average' => 'Mediu',
 	'special-listdatatypes' => 'Llista de tolos tipos de datos disponibles',
-	'wikibase-listdatatypes-intro' => "Esta ye la llista de tolos tipos de datos que s'usen actualmente nesta instalación:",
+	'wikibase-listdatatypes-intro' => 'Esta ye la llista de tolos tipos de datos disponibles nesta instalación:',
 	'wikibase-history-title-with-label' => 'Historial de revisiones de «$2» ($1)',
 	'wikibase-history-title-without-label' => 'Historial de revisiones de ($1)',
 	'special-entitieswithoutdescription' => 'Entidaes ensin descripción',
@@ -1874,42 +1874,10 @@ Una wiki cliente recibe l'avisu d'un cambiu en {{SITENAME}} en cuanto que'l camb
 	'content-model-wikibase-item' => 'Elementu de Wikibase',
 	'content-model-wikibase-property' => 'Propiedá de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
-	'right-item-override' => 'Sobre-escribir elementos',
-	'right-item-create' => 'Crear elementos',
-	'right-item-remove' => 'Desaniciar elementos',
-	'right-property-override' => 'Sobre-escribir propiedaes',
+	'right-item-term' => 'Camudar los términos del elementu (etiquetes, descripciones, alcuños)',
+	'right-item-merge' => 'Fusionar los elementos',
+	'right-property-term' => 'Camudar los términos de la propiedá (etiquetes, descripciones, alcuños)',
 	'right-property-create' => 'Crear propiedaes',
-	'right-property-remove' => 'Desaniciar propiedaes',
-	'right-alias-remove' => 'Desaniciar alcuños',
-	'right-alias-update' => 'Anovar alcuños',
-	'right-sitelink-remove' => 'Desaniciar enllaces de sitios',
-	'right-sitelink-update' => 'Anovar enllaces de sitios',
-	'right-linktitles-update' => 'Asociar páxines',
-	'right-label-remove' => 'Borrar etiquetes',
-	'right-label-update' => 'Anovar etiquetes',
-	'right-description-remove' => 'Borrar descripciones',
-	'right-description-update' => 'Anovar descripciones',
-	'action-item-override' => 'sobre-escribir elementos',
-	'action-item-create' => 'crear elementos',
-	'action-item-remove' => 'desaniciar elementos',
-	'action-property-override' => 'sobre-escribir propiedaes',
-	'action-property-create' => 'crear propiedaes',
-	'action-property-remove' => 'desaniciar propiedaes',
-	'action-alias-update' => 'anovar alcuños',
-	'action-alias-remove' => 'desaniciar alcuños',
-	'action-sitelink-remove' => 'desaniciar enllaces de sitios',
-	'action-sitelink-update' => 'anovar enllaces de sitios',
-	'action-linktitles-update' => 'asociar páxines',
-	'action-label-remove' => 'borrar etiquetes',
-	'action-label-update' => 'anovar etiquetes',
-	'action-description-remove' => 'borrar descripciones',
-	'action-description-update' => 'anovar descripciones',
-	'wikibase-time-precision-Gannum' => "en $1 miles de millones d'años",
-	'wikibase-time-precision-Mannum' => "en $1 millones d'años",
-	'wikibase-time-precision-annum' => 'en $1 años',
-	'wikibase-time-precision-millennium' => '$1. mileniu',
-	'wikibase-time-precision-century' => '$1. sieglu',
-	'wikibase-time-precision-10annum' => '$1 décaes',
 );
 
 /** Azerbaijani (azərbaycanca)
@@ -7314,7 +7282,7 @@ $messages['he'] = array(
 	'wikibase-remove-inprogress' => 'מתבצעת הסרה...',
 	'wikibase-label-empty' => 'טרם הוגדרה תווית.',
 	'wikibase-label-edit-placeholder' => 'נא להזין תווית',
-	'wikibase-label-edit-placeholder-language-aware' => 'נא להזין תווית ב$1',
+	'wikibase-label-edit-placeholder-language-aware' => 'נא להזין תווית ב{{GRAMMAR:תחילית|$1}}',
 	'wikibase-description-empty' => 'טרם הוגדר תיאור.',
 	'wikibase-description-edit-placeholder' => 'נא להזין תיאור',
 	'wikibase-description-edit-placeholder-language-aware' => 'נא להזין תיאור ב$1',
@@ -14949,6 +14917,7 @@ $messages['roa-tara'] = array(
  * @author Hoo
  * @author Ignatus
  * @author Kaganer
+ * @author NBS
  * @author Okras
  * @author Ole Yves
  * @author Putnik
@@ -15250,10 +15219,10 @@ $messages['ru'] = array(
 	'wikibase-listdatatypes-commonsmedia-body' => 'Ссылка на файлы, хранящиеся на Викискладе. Во время ввода будет производиться поиск по пространству имён «File» на Викискладе.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Глобальные координаты',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Символьное поле данных о географическом положении для определённого небесного тела, задаваемые в виде пары «широта—долгота» в формате «градусы минуты секунды» (°ʹʺ) или в десятичном формате. По умолчанию это «Земля», а затем «WGS84». Добавляет разрешение и диапазон.
-* latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S
-* longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W
-* globe — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является Землёй («http://www.wikidata.org/entity/Q2»)
- * точность — точность координат',
+* latitude — неявно задаваемая первая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом N/S.
+* longituge — неявно задаваемая вторая часть строки координат (float, dms, dm, dd), направление задаётся префиксом или постфиксом E/W.
+* globe — явное задаваемое (?) значение данных, в виде ссылки на небесное тело, которое по умолчанию является Землёй («http://www.wikidata.org/entity/Q2»).
+* precision — точность координат.',
 	'wikibase-listdatatypes-quantity-head' => 'Количество',
 	'wikibase-listdatatypes-quantity-body' => 'Строковое поле для ввода количества, выраженного в некоторых вполне определённых единицах. Конкретные единицы указаны во вводимых значениях данных.
 * amount — неявная часть строки (обработка префикса единицы непонятна)
@@ -17861,7 +17830,7 @@ $messages['yi'] = array(
 	'wikibase-dispatchstats-median' => 'מיטל',
 	'wikibase-dispatchstats-average' => 'דורכשניט',
 	'special-listdatatypes' => 'ליסטע פֿון אלע דאטנטיפן',
-	'wikibase-listdatatypes-intro' => 'דאס איז א ליסטע פון אלע דאטנטיפן אצינד אין ניץ אויף דער דאזיקער אינסטאלאציע.',
+	'wikibase-listdatatypes-intro' => 'דאס איז א ליסטע פון אלע דאטנטיפן וואס זענען פאראן אויף דער דאזיקער אינסטאלאציע.',
 	'wikibase-history-title-with-label' => 'רעוויזיע היסטאריע פֿון "$2" ($1)',
 	'wikibase-history-title-without-label' => 'רעוויזיע היסטאריע פֿון ($1)',
 	'special-entitieswithoutlabel' => 'אביעקטן אָן באצייכענונג',
@@ -17944,13 +17913,6 @@ $messages['yi'] = array(
 	'content-model-wikibase-item' => 'Wikibase-דאטנאביעקט',
 	'content-model-wikibase-property' => 'Wikibase-אייגנשאפֿט',
 	'content-model-wikibase-query' => 'Wikibase-פֿראגע',
-	'right-alias-remove' => 'אראפנעמען אליאסן',
-	'action-alias-update' => 'דערהיינטיקן אליאסן',
-	'action-alias-remove' => 'אראפנעמען אליאסן',
-	'action-label-remove' => 'אויסמעקן באצייכענונגען',
-	'action-label-update' => 'דערהײַנטיקן באצייכענונגען',
-	'action-description-remove' => 'אויסמעקן באשרײַבונגען',
-	'action-description-update' => 'דערהײַנטיקן באשרײַבונגען',
 );
 
 /** Simplified Chinese (中文（简体）‎)

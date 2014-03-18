@@ -137,6 +137,7 @@ $magicWords['uk'] = array(
 $magicWords['vi'] = array(
 	'noexternallanglinks' => array( 0, 'không_liên_kết_ngôn_ngữ_ngoài', 'khôngliênkếtngônngữngoài' ),
 	'property' => array( 0, 'thuộc_tính', 'thuộctính' ),
+	'wbreponame' => array( 0, 'tên_kho_wb', 'tênkhowb' ),
 );
 
 /** Yiddish (ייִדיש) */
