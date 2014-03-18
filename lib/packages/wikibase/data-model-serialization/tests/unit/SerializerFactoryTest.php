@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\DataModel;
 
 use DataValues\Serializers\DataValueSerializer;
+use Serializers\Serializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
@@ -24,54 +25,69 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new SerializerFactory( new DataValueSerializer() );
 	}
 
+	private function assertSerializesWithoutException( Serializer $serializer, $object ) {
+		$serializer->serialize( $object );
+		$this->assertTrue( true, 'No exception occurred during serialization' );
+	}
+
 	public function testNewEntitySerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newEntitySerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newEntitySerializer(),
 			Item::newEmpty()
-		) );
-		$this->assertTrue( $this->buildSerializerFactory()->newEntitySerializer()->isSerializerFor(
-			Property::newEmpty()
-		) );
+		);
+
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newEntitySerializer(),
+			Property::newFromType( 'string' )
+		);
 	}
 
 	public function testNewSiteLinkSerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newSiteLinkSerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newSiteLinkSerializer(),
 			new SiteLink( 'enwiki', 'Nyan Cat' )
-		) );
+		);
 	}
 
 	public function testNewClaimsSerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newClaimsSerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newClaimsSerializer(),
 			new Claims()
-		) );
+		);
 	}
 
 	public function testNewClaimSerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newClaimSerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newClaimSerializer(),
 			new Claim( new PropertyNoValueSnak( 42 ) )
-		) );
+		);
 	}
 
 	public function testNewReferencesSerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newReferencesSerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newReferencesSerializer(),
 			new ReferenceList()
-		) );
+		);
 	}
 
 	public function testNewReferenceSerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newReferenceSerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newReferenceSerializer(),
 			new Reference()
-		) );
+		);
 	}
 
 	public function testNewSnaksSerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newSnaksSerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newSnaksSerializer(),
 			new SnakList( array() )
-		) );
+		);
 	}
 
 	public function testNewSnakSerializer() {
-		$this->assertTrue( $this->buildSerializerFactory()->newSnakSerializer()->isSerializerFor(
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newSnakSerializer(),
 			new PropertyNoValueSnak( 42 )
-		) );
+		);
 	}
 }

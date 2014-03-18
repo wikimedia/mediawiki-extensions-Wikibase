@@ -52,16 +52,6 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 		);
 	}
 
-	public function testIsDeserializerForWithEntityIdParsingException() {
-		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
-		$entityIdParserMock->expects( $this->any() )
-			->method( 'parse' )
-			->will( $this->throwException( new EntityIdParsingException() ) );
-		$entityIdDeserializer = new EntityIdDeserializer( $entityIdParserMock );
-
-		$this->assertFalse( $entityIdDeserializer->isDeserializerFor( 'test' ) );
-	}
-
 	public function testDeserializeWithEntityIdParsingException() {
 		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
 		$entityIdParserMock->expects( $this->any() )

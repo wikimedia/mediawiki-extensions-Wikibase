@@ -26,34 +26,8 @@ class ReferenceListDeserializer implements Deserializer {
 		$this->referenceDeserializer = $referenceDeserializer;
 	}
 
-	/**
-	 * @see Deserializer::isDeserializerFor
-	 *
-	 * @param mixed $serialization
-	 *
-	 * @return boolean
-	 */
-	public function isDeserializerFor( $serialization ) {
-		return $this->isValidSerialization( $serialization );
-	}
-
 	private function isValidSerialization( $serialization ) {
-		if( !is_array( $serialization ) ) {
-			return false;
-		}
-
-		foreach( $serialization as $referenceSerialization ) {
-			if( !$this->isValidReferenceSerialization( $referenceSerialization ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-
-	private function isValidReferenceSerialization( $serialization ) {
-		return $this->referenceDeserializer->isDeserializerFor( $serialization );
+		return is_array( $serialization );
 	}
 
 	/**

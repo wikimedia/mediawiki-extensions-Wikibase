@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
@@ -14,7 +15,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SnakSerializer implements Serializer {
+class SnakSerializer implements DispatchableSerializer {
 
 	/**
 	 * @var Serializer

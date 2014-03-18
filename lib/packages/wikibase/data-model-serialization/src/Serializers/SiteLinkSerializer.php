@@ -2,9 +2,9 @@
 
 namespace Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
-use Serializers\Serializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
@@ -14,7 +14,7 @@ use Wikibase\DataModel\SiteLink;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SiteLinkSerializer implements Serializer {
+class SiteLinkSerializer implements DispatchableSerializer {
 
 	/**
 	 * @see Serializer::isSerializerFor

@@ -32,18 +32,6 @@ class ClaimsDeserializerTest extends DeserializerBaseTest {
 			) ) )
 			->will( $this->returnValue( $claim ) );
 
-		$claimDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array(
-				'mainsnak' => array(
-					'snaktype' => 'novalue',
-					'property' => 'P42'
-				),
-				'type' => 'statement',
-				'rank' => 'normal'
-			) ) )
-			->will( $this->returnValue( true ) );
-
 		return new ClaimsDeserializer( $claimDeserializerMock );
 	}
 

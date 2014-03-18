@@ -28,26 +28,6 @@ class EntityIdDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @see Deserializer::isDeserializerFor
-	 *
-	 * @param mixed $serialization
-	 *
-	 * @return boolean
-	 */
-	public function isDeserializerFor( $serialization ) {
-		if ( !is_string( $serialization ) ) {
-			return false;
-		}
-
-		try {
-			$this->entityIdParser->parse( $serialization );
-			return true;
-		} catch ( EntityIdParsingException $e ) {
-			return false;
-		}
-	}
-
-	/**
 	 * @see Deserializer::deserialize
 	 *
 	 * @param mixed $serialization

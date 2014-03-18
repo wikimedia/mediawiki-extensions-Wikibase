@@ -15,7 +15,8 @@ use Wikibase\DataModel\Snak\SnakList;
 class SnakListDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
-		$snakDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+		$snakDeserializerMock = $this->getMock( 'Deserializers\Deserializer' );
+
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
@@ -23,14 +24,6 @@ class SnakListDeserializerTest extends DeserializerBaseTest {
 					'property' => 'P42'
 			) ) )
 			->will( $this->returnValue( new PropertyNoValueSnak( 42 ) ) );
-
-		$snakDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array(
-					'snaktype' => 'novalue',
-					'property' => 'P42'
-			) ) )
-			->will( $this->returnValue( true ) );
 
 		return new SnakListDeserializer( $snakDeserializerMock );
 	}

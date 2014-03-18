@@ -25,6 +25,9 @@ class PropertySerializer extends EntitySerializer {
 	}
 
 	protected function getSpecificSerialization( Entity $entity ) {
+		/**
+		 * @var Property $entity
+		 */
 		return array(
 			'datatype' => $entity->getDataTypeId()
 		);

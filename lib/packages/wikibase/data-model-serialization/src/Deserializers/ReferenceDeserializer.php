@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Reference;
 
@@ -12,7 +13,7 @@ use Wikibase\DataModel\Reference;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ReferenceDeserializer implements Deserializer {
+class ReferenceDeserializer implements DispatchableDeserializer {
 
 	/**
 	 * @var Deserializer
