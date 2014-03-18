@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_dc2f8b9b",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T10:50:08Z",
+      "side": 1,
+      "message": "Please document what format is expected.\nAlso, \"and returns the result\" is a bit redundant :)",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_1c0d0342",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T10:50:08Z",
+      "side": 1,
+      "message": "Can\u0027t we just extract the year and convert it to int an, replace it by \"2000\" in the date string, and then parse? Less special cases, less confusion...",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
