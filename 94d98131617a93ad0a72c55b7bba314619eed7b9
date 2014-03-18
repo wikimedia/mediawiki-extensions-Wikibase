@@ -16,6 +16,24 @@
       "revId": "94d98131617a93ad0a72c55b7bba314619eed7b9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_466e052c",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-18T17:25:59Z",
+      "side": 1,
+      "message": "... this is a short term fix which will die in a few days...",
+      "parentUuid": "ee14bf34_86153d9f",
+      "revId": "94d98131617a93ad0a72c55b7bba314619eed7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
