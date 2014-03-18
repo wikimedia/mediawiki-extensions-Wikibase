@@ -31,7 +31,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$item0 = Item::newEmpty();
 		$item0->setId( new ItemId( 'Q10' ) );
-		$id0 = $item0->getId()->getNumericId();
+		$id0 = $item0->getId();
 
 		$item0->setLabel( 'en', 'foobar' );
 		$item0->setLabel( 'de', 'foobar' );
@@ -40,7 +40,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$item1 = $item0->copy();
 		$item1->setId( new ItemId( 'Q11' ) );
-		$id1 = $item1->getId()->getNumericId();
+		$id1 = $item1->getId();
 
 		$item1->setLabel( 'nl', 'o_O' );
 		$item1->setDescription( 'en', 'foo bar baz' );
@@ -48,17 +48,14 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$ids = $lookup->getEntityIdsForLabel( 'foobar' );
 		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 		$this->assertArrayEquals( array( $id0, $id1 ), $ids );
 
 		$ids = $lookup->getEntityIdsForLabel( 'baz', 'nl' );
 		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 		$this->assertArrayEquals( array( $id0 ), $ids );
 
 		$ids = $lookup->getEntityIdsForLabel( 'o_O', 'nl' );
 		$this->assertInternalType( 'array', $ids );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 		$this->assertArrayEquals( array( $id1 ), $ids );
 	}
 
@@ -250,7 +247,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$item->setAliases( 'fr', array( 'o', '_', 'O' ) );
 
 		$item->setId( new ItemId( 'Q10' ) );
-		$id = $item->getId()->getNumericId();
+		$id = $item->getId();
 		$lookup->saveTermsOfEntity( $item );
 
 		$this->assertTrue( $lookup->termExists( 'testDeleteTermsForEntity' ) );
@@ -260,7 +257,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertFalse( $lookup->termExists( 'testDeleteTermsForEntity' ) );
 
 		$ids = $lookup->getEntityIdsForLabel( 'abc' );
-		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 
 		$this->assertTrue( !in_array( $id, $ids, true ) );
 	}
