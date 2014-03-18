@@ -14,7 +14,7 @@ use Wikibase\DataModel\SiteLinkList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkListDeserializer implements Deserializer {
+class LegacySiteLinkListDeserializer implements Deserializer {
 
 	/**
 	 * @param mixed $serialization

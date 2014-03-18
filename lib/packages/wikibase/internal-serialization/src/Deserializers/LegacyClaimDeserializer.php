@@ -15,7 +15,7 @@ use Wikibase\DataModel\ReferenceList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimDeserializer implements Deserializer {
+class LegacyClaimDeserializer implements Deserializer {
 
 	private $snakDeserializer;
 	private $snakListDeserializer;

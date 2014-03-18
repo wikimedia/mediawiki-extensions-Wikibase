@@ -18,7 +18,7 @@ use Wikibase\DataModel\Term\Terms;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermsDeserializer implements Deserializer {
+class LegacyTermsDeserializer implements Deserializer {
 
 	private $serialization;
 

@@ -4,15 +4,15 @@ namespace Wikibase\InternalSerialization;
 
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\InternalSerialization\Deserializers\ClaimDeserializer;
-use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
-use Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer;
-use Wikibase\InternalSerialization\Deserializers\ItemDeserializer;
-use Wikibase\InternalSerialization\Deserializers\PropertyDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SnakListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\TermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
  * @since 1.0
@@ -33,7 +33,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newItemDeserializer() {
-		return new ItemDeserializer(
+		return new LegacyItemDeserializer(
 			$this->newEntityIdDeserializer(),
 			$this->newSiteLinkListDeserializer(),
 			$this->newClaimDeserializer(),
@@ -45,7 +45,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newPropertyDeserializer() {
-		return new PropertyDeserializer(
+		return new LegacyPropertyDeserializer(
 			$this->newEntityIdDeserializer(),
 			$this->newTermsDeserializer()
 		);
@@ -55,7 +55,7 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newEntityDeserializer() {
-		return new EntityDeserializer(
+		return new LegacyEntityDeserializer(
 			$this->newItemDeserializer(),
 			$this->newPropertyDeserializer()
 		);
@@ -65,21 +65,21 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newEntityIdDeserializer() {
-		return new EntityIdDeserializer( $this->idParser );
+		return new LegacyEntityIdDeserializer( $this->idParser );
 	}
 
 	/**
 	 * @return Deserializer
 	 */
 	public function newTermsDeserializer() {
-		return new TermsDeserializer();
+		return new LegacyTermsDeserializer();
 	}
 
 	/**
 	 * @return Deserializer
 	 */
 	public function newSiteLinkListDeserializer() {
-		return new SiteLinkListDeserializer();
+		return new LegacySiteLinkListDeserializer();
 	}
 
 	/**
@@ -88,9 +88,9 @@ class DeserializerFactory {
 	public function newClaimDeserializer() {
 		$snakDeserializer = $this->newSnakDeserializer();
 
-		return new ClaimDeserializer(
+		return new LegacyClaimDeserializer(
 			$snakDeserializer,
-			new SnakListDeserializer( $snakDeserializer )
+			new LegacySnakListDeserializer( $snakDeserializer )
 		);
 	}
 
@@ -98,14 +98,14 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newSnakListDeserializer() {
-		return new SnakListDeserializer( $this->newSnakDeserializer() );
+		return new LegacySnakListDeserializer( $this->newSnakDeserializer() );
 	}
 
 	/**
 	 * @return Deserializer
 	 */
 	public function newSnakDeserializer() {
-		return new SnakDeserializer( $this->dataValueDeserializer );
+		return new LegacySnakDeserializer( $this->dataValueDeserializer );
 	}
 
 }

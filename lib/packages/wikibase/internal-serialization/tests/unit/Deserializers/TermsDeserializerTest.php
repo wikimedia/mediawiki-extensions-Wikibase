@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\Description;
 use Wikibase\DataModel\Term\DescriptionList;
 use Wikibase\DataModel\Term\Label;
 use Wikibase\DataModel\Term\LabelList;
-use Wikibase\InternalSerialization\Deserializers\TermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\TermsDeserializer
@@ -25,7 +25,7 @@ class TermsDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$this->deserializer = new TermsDeserializer();
+		$this->deserializer = new LegacyTermsDeserializer();
 	}
 
 	/**

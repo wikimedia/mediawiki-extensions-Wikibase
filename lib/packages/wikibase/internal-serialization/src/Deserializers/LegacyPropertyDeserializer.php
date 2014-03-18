@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\Terms;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyDeserializer implements Deserializer {
+class LegacyPropertyDeserializer implements Deserializer {
 
 	private $idDeserializer;
 	private $termsDeserializer;

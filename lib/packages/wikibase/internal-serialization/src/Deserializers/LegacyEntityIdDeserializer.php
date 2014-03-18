@@ -14,7 +14,7 @@ use Wikibase\DataModel\Internal\LegacyIdInterpreter;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityIdDeserializer implements Deserializer {
+class LegacyEntityIdDeserializer implements Deserializer {
 
 	private $idParser;
 
