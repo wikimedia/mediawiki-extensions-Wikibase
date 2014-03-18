@@ -34,15 +34,14 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider handleProvider
 	 */
-	public function testHandle( array $expected, EntityId $entityId, array $parserConfig,
-		Settings $settings
+	public function testHandle( array $expected, EntityId $entityId, array $cachedConfig,
+		array $parserConfig, Settings $settings, $experimental, $message
 	) {
 		$hookHandler = new OutputPageJsConfigHookHandler(
-			new BasicEntityIdParser(),
 			$this->getEntityContentFactory(),
-			new LanguageFallbackChainFactory(),
 			$this->getParserOutputJsConfigBuilder( $parserConfig ),
-			$settings
+			$settings,
+			array( 'de', 'en', 'es', 'fr' )
 		);
 
 		$title = $this->getTitleForId( $entityId );
@@ -51,13 +50,14 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$context->setTitle( $title );
 
 		$output = $context->getOutput();
-		$output->addJsConfigVars( $parserConfig );
+		$output->addJsConfigVars( $cachedConfig );
 
-		$hookHandler->handle( $output );
+		$hookHandler->handle( $output, $experimental );
 
-		$configVarsAfter = $output->getJsConfigVars();
+		$configVars = $output->getJsConfigVars();
 
-		$this->assertEquals( $expected, array_keys( $configVarsAfter ) );
+		$this->assertEquals( $experimental, $configVars['wbExperimentalFeatures'], 'experimental' );
+		$this->assertEquals( $expected, array_keys( $configVars ), $message );
 	}
 
 	public function handleProvider() {
@@ -72,11 +72,15 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			'wbEntityId',
 			'wbUserIsBlocked',
 			'wbUserCanEdit',
-			'wbCopyright'
+			'wbCopyright',
+			'wbExperimentalFeatures'
 		);
 
 		return array(
-			array( $expected, $entityId, $parserConfig, $settings )
+			array( $expected, $entityId, $parserConfig, $parserConfig,
+				$settings, true, 'config vars with parser cache' ),
+			array( $expected, $entityId, array(), $parserConfig,
+				$settings, true, 'config vars without parser cache' )
 		);
 	}
 
