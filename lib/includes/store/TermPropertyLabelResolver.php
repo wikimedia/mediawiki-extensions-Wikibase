@@ -142,9 +142,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 
 		foreach ( $terms as $term ) {
 			$label = $term->getText();
-			$id = PropertyId::newFromNumber( $term->getEntityId() );
-
-			$propertiesByLabel[$label] = $id;
+			$propertiesByLabel[$label] = $term->getEntityId();
 		}
 
 		wfProfileOut( __METHOD__ );

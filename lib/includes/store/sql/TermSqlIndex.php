@@ -721,14 +721,14 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			arsort( $weights, SORT_NUMERIC );
 
 			if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
-				$ids = array_keys( array_slice( $weights, 0, $options['LIMIT'], true ) );
+				$numericIds = array_keys( array_slice( $weights, 0, $options['LIMIT'], true ) );
 			} else {
-				$ids = array_keys( $weights );
+				$numericIds = array_keys( $weights );
 			}
 		} else {
-			$ids = array();
+			$numericIds = array();
 			foreach ( $obtainedIDs as $obtainedID ) {
-				$ids[] = intval( $obtainedID->term_entity_id );
+				$numericIds[] = intval( $obtainedID->term_entity_id );
 			}
 		}
 
@@ -738,11 +738,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$result = array();
 		$idParser = new BasicEntityIdParser();
 
-		foreach ( $ids as $id ) {
+		foreach ( $numericIds as $numericId ) {
 			// FIXME: this is using the deprecated EntityId constructor and a hack to get the
 			// correct EntityId type that will not work for entity types other then item and property.
-			$id = new EntityId( $entityType, $id );
-			$result[] = $idParser->parse( $id->getSerialization() );
+			$entityId = new EntityId( $entityType, $numericId );
+			$result[] = $idParser->parse( $entityId->getSerialization() );
 		}
 
 		wfProfileOut( __METHOD__ );
