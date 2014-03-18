@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_a9fa5271",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-18T19:15:20Z",
+      "side": 1,
+      "message": "Please only inject what is needed. This object does not need access to all settings, just one.",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_29c0822e",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 19
@@ -98,6 +115,23 @@
       "writtenOn": "2014-03-18T18:52:26Z",
       "side": 1,
       "message": "We need the entire class for this one line of adding a config variable? Modularization is fine and dandy, but this seems a bit much - can\u0027t we fold this into another handler?",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_09dedede",
+        "filename": "client/tests/phpunit/includes/hooks/BeforePageDisplayHandlerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-18T19:15:20Z",
+      "side": 1,
+      "message": "The name goes into the good direction, though it can still be better. I still need to look at the actual code to see what is going on.\n\nIn the argument list, it is not obvious what the test input is, and what the expected values are. $expectedJsModules and $expectedCssModules would help a lot.\n\nThen again, there is no point in having a data provider here. It just makes things a lot less clear.\n\nSimilar concerns with other test methods. Not a critical issue here, we got many worse tests after all, yet something to hold into account for when writing new tests. Perhaps you can do a follow up that cleans up the tests?",
       "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
