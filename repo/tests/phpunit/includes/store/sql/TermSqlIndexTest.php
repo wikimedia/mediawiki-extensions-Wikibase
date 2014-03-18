@@ -4,10 +4,10 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Item;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
 use Wikibase\TermSqlIndex;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\TermSqlIndex
@@ -20,6 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class TermSqlIndexTest extends TermIndexTest {
 
@@ -29,6 +30,9 @@ class TermSqlIndexTest extends TermIndexTest {
 		$this->tablesUsed[] = 'wb_terms';
 	}
 
+	/**
+	 * @return TermSqlIndex
+	 */
 	public function getTermIndex() {
 		$normalizer = new StringNormalizer();
 		return new TermSqlIndex( $normalizer );
@@ -61,9 +65,6 @@ class TermSqlIndexTest extends TermIndexTest {
 			$this->markTestSkipped( "can't test search key if withoutTermSearchKey option is set." );
 		}
 
-		/**
-		 * @var TermSqlIndex $termIndex
-		 */
 		$termIndex = $this->getTermIndex();
 
 		$termIndex->clear();
@@ -102,9 +103,6 @@ class TermSqlIndexTest extends TermIndexTest {
 	 * @param boolean $matches
 	 */
 	public function testGetMatchingTermsWeights( $languageCode, $termText, $searchText, $matches ) {
-		/**
-		 * @var TermSqlIndex $termIndex
-		 */
 		$termIndex = $this->getTermIndex();
 
 		if ( !$termIndex->supportsWeight() ) {
@@ -157,6 +155,72 @@ class TermSqlIndexTest extends TermIndexTest {
 			$expectedResult = array( $item2->getId(), $item3->getId(), $item1->getId() );
 			$this->assertArrayEquals( $expectedResult, $obtainedIDs, true );
 		}
+	}
+
+	/**
+	 * @dataProvider termProvider
+	 * @param $languageCode
+	 * @param $termText
+	 * @param $searchText
+	 * @param boolean $matches
+	 */
+	public function testPrefixSearch( $languageCode, $termText, $searchText, $matches ) {
+		$termIndex = $this->getTermIndex();
+
+		$termIndex->clear();
+
+		$item1 = Item::newEmpty();
+		$item1->setId( 42 );
+
+		$item1->setLabel( $languageCode, $termText );
+
+		$termIndex->saveTermsOfEntity( $item1 );
+
+		$term = new Term();
+		$term->setLanguage( $languageCode );
+		$term->setText( substr( $termText, 0, -1 ) ); //last character stripped
+
+		$options = array(
+			'caseSensitive' => false,
+			'prefixSearch' => true,
+		);
+
+		$obtainedIDs = $termIndex->getMatchingIDs( array( $term ), Item::ENTITY_TYPE, $options );
+
+		$this->assertNotEmpty( $obtainedIDs );
+	}
+
+	/**
+	 * @dataProvider termProvider
+	 * @param $languageCode
+	 * @param $termText
+	 * @param $searchText
+	 * @param boolean $matches
+	 */
+	public function testPrefixSearchQuoting( $languageCode, $termText, $searchText, $matches ) {
+		$termIndex = $this->getTermIndex();
+
+		$termIndex->clear();
+
+		$item1 = Item::newEmpty();
+		$item1->setId( 42 );
+
+		$item1->setLabel( $languageCode, $termText );
+
+		$termIndex->saveTermsOfEntity( $item1 );
+
+		$term = new Term();
+		$term->setLanguage( $languageCode );
+		$term->setText( '%' . $termText ); //must be used as a character and no LIKE placeholder
+
+		$options = array(
+			'caseSensitive' => false,
+			'prefixSearch' => true,
+		);
+
+		$obtainedIDs = $termIndex->getMatchingIDs( array( $term ), Item::ENTITY_TYPE, $options );
+
+		$this->assertEmpty( $obtainedIDs );
 	}
 
 	public static function provideGetSearchKey() {
@@ -217,4 +281,5 @@ class TermSqlIndexTest extends TermIndexTest {
 		$key = $index->getSearchKey( $raw, $lang );
 		$this->assertEquals( $normalized, $key );
 	}
+
 }

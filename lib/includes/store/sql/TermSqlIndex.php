@@ -805,7 +805,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 				}
 
 				if ( $options['prefixSearch'] ) {
-					$fullTerm[] = $textField . ' LIKE ' . $dbr->addQuotes( $text . '%' );
+					$fullTerm[] = $textField . $dbr->buildLike( $text, $dbr->anyString() );
 				}
 				else {
 					$fullTerm[$textField] = $text;
