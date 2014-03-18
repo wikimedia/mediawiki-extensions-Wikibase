@@ -2,14 +2,14 @@
 
 namespace Wikibase\Hook;
 
-use MWException;
 use OutputPage;
 use Title;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\NamespaceUtils;
 use Wikibase\OutputPageJsConfigBuilder;
 use Wikibase\ParserOutputJsConfigBuilder;
@@ -24,19 +24,9 @@ use Wikibase\Settings;
 class OutputPageJsConfigHookHandler {
 
 	/**
-	 * @var EntityIdParser
-	 */
-	protected $idParser;
-
-	/**
 	 * @var EntityContentFactory
 	 */
 	protected $entityContentFactory;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	protected $fallbackChainFactory;
 
 	/**
 	 * @var ParserOutputJsConfigBuilder
@@ -54,81 +44,69 @@ class OutputPageJsConfigHookHandler {
 	protected $outputPageConfigBuilder;
 
 	/**
-	 * @param EntityIdParser $idParser
 	 * @param EntityContentFactory $entityContentFactory
-	 * @param LanguageFallbackChainFactory $fallbackChainFactory
 	 * @param Settings $settings
 	 * @param ParserOutputJsConfigBuilder $configBuilder
+	 * @param array $langCodes
 	 */
 	public function __construct(
-		EntityIdParser $idParser,
 		EntityContentFactory $entityContentFactory,
-		LanguageFallbackChainFactory $fallbackChainFactory,
 		ParserOutputJsConfigBuilder $parserOutputConfigBuilder,
-		Settings $settings
+		Settings $settings,
+		array $langCodes
 	) {
-		$this->idParser = $idParser;
 		$this->entityContentFactory = $entityContentFactory;
-		$this->fallbackChainFactory = $fallbackChainFactory;
 		$this->parserOutputConfigBuilder = $parserOutputConfigBuilder;
 		$this->settings = $settings;
+		$this->langCodes = $langCodes;
 
 		$this->outputPageConfigBuilder = new OutputPageJsConfigBuilder();
 	}
 
 	/**
-	 * @return boolean
+	 * @param OutputPage &$out
+	 * @param boolean $isExperimental
+	 *
+	 * @return OutputPage
 	 */
-	public function handle( OutputPage $out ) {
-		// gets from parser cache, with fallback to generate it
-		$parserOutputConfigVars = $this->getParserOutputConfigVars( $out );
+	public function handle( OutputPage &$out, $isExperimental ) {
+		// gets from parser cache, with fallback to generate it if not cached
+		$parserOutputConfigVars = $this->getParserOutputConfigVars( $out, $isExperimental );
 
-		if ( !$this->hasEntityIdParamInConfig( $parserOutputConfigVars ) ) {
-			// entity might be deleted
-			return true;
-		}
+		$outputConfigVars = $this->buildConfigVars( $out, $isExperimental );
 
-		try {
-			$entityId = $this->idParser->parse( $parserOutputConfigVars['wbEntityId'] );
-		} catch ( EntityIdParsingException $ex ) {
-			wfWarn( 'Invalid entity id in parser output config vars: ' . $ex->getMessage() );
-			$revisionId = $out->getRevisionId();
-
-			try {
-				$entityId = $this->loadEntityIdFromRevisionId( $revisionId );
-			} catch ( MWException $ex ) {
-				wfWarn( $ex->getMessage() );
-				return true;
-			}
-		}
-
-		$configVars = $this->buildConfigVars( $out, $entityId );
-
-		$this->registerConfigVars( $out, $configVars );
+		$this->registerConfigVars( $out, $outputConfigVars );
 
 		return true;
 	}
 
 	/**
 	 * @param OutputPage $out
-	 * @param EntityId $entityId
+	 * @param boolean $isExperimental
 	 *
 	 * @return array
 	 */
-	private function buildConfigVars( OutputPage $out, EntityId $entityId ) {
+	private function buildConfigVars( OutputPage $out, $isExperimental ) {
 		$rightsUrl = $this->settings->get( 'dataRightsUrl' );
 		$rightsText = $this->settings->get( 'dataRightsText' );
 
-		$configVars = $this->outputPageConfigBuilder->build( $out, $entityId, $rightsUrl, $rightsText );
+		$configVars = $this->outputPageConfigBuilder->build(
+			$out,
+			$rightsUrl,
+			$rightsText,
+			$isExperimental
+		);
 
 		return $configVars;
 	}
 
 	/**
-	 * @param OutputPage $out
+	 * @param OutputPage &$out
 	 * @param array $configVars
+	 *
+	 * @return OutputPage
 	 */
-	private function registerConfigVars( OutputPage $out, array $configVars ) {
+	private function registerConfigVars( OutputPage &$out, array $configVars ) {
 		foreach( $configVars as $key => $configVar ) {
 			$out->addJsConfigVars( $key, $configVar );
 		}
@@ -142,9 +120,10 @@ class OutputPageJsConfigHookHandler {
 	private function getParserOutputConfigVars( OutputPage $out ) {
 		$configVars = $out->getJsConfigVars();
 
-		if ( !$this->hasEntityIdParamInConfig( $configVars ) ) {
-			$parserConfigVars = $this->getParserConfigVars( $out );
-			$this->registerConfigVars( $out, $parserConfigVars );
+		// backwards compatibility, in case config is not in parser cache and output page
+		if ( !$this->hasParserConfigVars( $configVars ) ) {
+			$configVars = $this->getParserConfigVars( $out );
+			$out->addJsConfigVars( $configVars );
 			$configVars = $out->getJsConfigVars();
 		}
 
@@ -156,56 +135,55 @@ class OutputPageJsConfigHookHandler {
 	 *
 	 * @return boolean
 	 */
-	private function hasEntityIdParamInConfig( $configVars ) {
+	private function hasParserConfigVars( $configVars ) {
 		return is_array( $configVars ) && array_key_exists( 'wbEntityId', $configVars );
 	}
 
 	/**
 	 * @param OutputPage $out
+	 *
+	 * @return array
 	 */
 	private function getParserConfigVars( OutputPage $out ) {
-		$context = $out->getContext();
-		$langCode = $context->getLanguage()->getCode();
-
 		$revisionId = $out->getRevisionId();
 		$entityContent = $this->entityContentFactory->getFromRevision( $revisionId );
 
-		if ( !$entityContent ) {
-			// entity or revision deleted?
+		if ( $entityContent === null || ! $entityContent instanceof \Wikibase\EntityContent ) {
+			// entity or revision deleted, or non-entity content in entity namespace
 			wfDebugLog( __CLASS__, "No entity content found for revision $revisionId" );
 			return array();
 		}
 
-		$entity = $entityContent->getEntity();
-
-		$fallbackChain = $this->fallbackChainFactory->newFromContextForPageView( $context );
-		$options = $entityContent->makeSerializationOptions( $langCode, $fallbackChain );
-
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-
-		return $this->parserOutputConfigBuilder->build( $entity, $options, $isExperimental );
+		return $this->buildParserConfigVars( $entityContent, $out );
 	}
 
 	/**
-	 * @param int $revisionId
+	 * @param EntityContent $entityContent
+	 * @param OutputPage $out
 	 *
-	 * @throws MWException
-	 * @return EntityId
+	 * @return array
 	 */
-	private function loadEntityIdFromRevisionId( $revisionId ) {
-		$entityContent = $this->entityContentFactory->getFromRevision( $revisionId );
+	private function buildParserConfigVars( EntityContent $entityContent, OutputPage $out ) {
+		$context = $out->getContext();
+		$langCode = $context->getLanguage()->getCode();
 
-		if ( !$entityContent ) {
-			throw new MWException( "No entity content found for $revisionId" );
-		}
+		$options = $this->makeSerializationOptions();
 
-		$entityId = $entityContent->getEntity()->getId();
+		$entity = $entityContent->getEntity();
 
-		if ( !$entityId ) {
-			throw new MWException( 'No entity id found' );
-		}
+		$parserConfigVars = $this->parserOutputConfigBuilder->build(
+			$entity,
+			$options
+		);
 
-		return $entityId;
+		return $parserConfigVars;
+	}
+
+	private function makeSerializationOptions() {
+		$options = new SerializationOptions();
+		$options->setLanguages( $this->langCodes );
+
+		return $options;
 	}
 
 }
