@@ -220,31 +220,20 @@ abstract class EntityView extends \ContextSource {
 	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$claims = '';
+		$head = $this->getHtmlForLabel( $entityRevision->getEntity(), $editable ) .
+			$this->getHtmlForDescription( $entityRevision->getEntity(), $editable );
 
-		if ( $entityRevision->getEntity()->getType() === 'item' ) {
-			$claims = $this->getHtmlForClaims( $entityRevision->getEntity(), $editable );
-		}
+		$body = $this->getHtmlForAliases( $entityRevision->getEntity(), $editable ) .
+			$this->getHtmlForToc() .
+			$this->getHtmlForTermBox( $entityRevision->getEntity(), $editable ) .
+			$this->getHtmlForClaims( $entityRevision->getEntity(), $editable );
 
-		if ( $entityRevision->getEntity()->getId() ) {
-			// Placeholder for a termbox for the present item.
-			// EntityViewPlaceholderExpander must know about the parameters used here.
-			$languageTerms = $this->textInjector->newMarker(
-				'termbox',
-				$entityRevision->getEntity()->getId()->getSerialization()
-			);
-		} else {
-			//NOTE: this should only happen during testing
-			$languageTerms = '';
-		}
+		$foot = '';
 
 		$html = wfTemplate( 'wb-entity-content',
-			$this->getHtmlForLabel( $entityRevision->getEntity(), $editable ),
-			$this->getHtmlForDescription( $entityRevision->getEntity(), $editable ),
-			$this->getHtmlForAliases( $entityRevision->getEntity(), $editable ),
-			$this->getHtmlForToc(),
-			$languageTerms,
-			$claims
+			$head,
+			$body,
+			$foot
 		);
 
 		wfProfileOut( __METHOD__ );
@@ -296,6 +285,25 @@ abstract class EntityView extends \ContextSource {
 	 */
 	protected function getTocSections() {
 		return array();
+	}
+
+	/**
+	 * @param Entity $entity
+	 * @param bool $editable
+	 *
+	 * @return string
+	 */
+	protected function getHtmlForTermBox( Entity $entity, $editable = true ) {
+		if ( $entity->getId() ) {
+			// Placeholder for a termbox for the present item.
+			// EntityViewPlaceholderExpander must know about the parameters used here.
+			return $this->textInjector->newMarker(
+				'termbox',
+				$entity->getId()->getSerialization()
+			);
+		}
+
+		return '';
 	}
 
 	/**

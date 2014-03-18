@@ -36,15 +36,22 @@ class PropertyView extends EntityView {
 		}
 
 		/* @var Property $property */
+		$head = $this->getHtmlForLabel( $property, $editable ) .
+			$this->getHtmlForDescription( $property, $editable ) .
+			$this->getHtmlForDataType( $this->getDataType( $property ) );
 
-		$html = parent::getInnerHtml( $propertyRevision, $editable );
+		$body = $this->getHtmlForAliases( $property, $editable ) .
+			$this->getHtmlForToc() .
+			$this->getHtmlForTermBox( $property, $editable ) .
+			$this->getHtmlForClaims( $property, $editable );
 
-		$html .= $this->getHtmlForDataType(
-			$this->getDataType( $property ),
-			$editable
+		$foot = '';
+
+		$html = wfTemplate( 'wb-entity-content',
+			$head,
+			$body,
+			$foot
 		);
-
-		$html .= $this->getFooterHtml();
 
 		wfProfileOut( __METHOD__ );
 		return $html;

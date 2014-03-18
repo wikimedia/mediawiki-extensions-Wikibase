@@ -28,13 +28,10 @@ HTML;
 
 	$templates['wb-entity-content'] =
 <<<HTML
-$1 <!-- label -->
-$2 <!-- description -->
+$1 <!-- head -->
 <hr class="wb-hr" />
-$3 <!-- aliases -->
-$4 <!-- table of contents -->
-$5 <!-- terms -->
-$6 <!-- claims -->
+$2 <!-- main -->
+$3 <!-- foot -->
 HTML;
 
 	$templates['wb-entity-toc'] =
@@ -344,7 +341,7 @@ HTML;
 <<<HTML
 <div class="wb-datatype wb-value-row">
 	<span class="wb-datatype-label">$1</span>
-	<span class="wb-value">$2</span>
+	<span class="wb-datatype-value">$2</span>
 </div>
 HTML;
 
