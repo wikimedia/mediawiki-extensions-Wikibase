@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_09f25ecd",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:28:38Z",
+      "side": 1,
+      "message": "This name is rather odd... does this handle something called AddWikibaseConditions? It seems to me like it should just be called addWikibaseConditions.",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_c9c34660",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:28:38Z",
+      "side": 1,
+      "message": "\"don\u0027t act\" is misleading. \"Hide wikibase changes if the hideWikibase option is set or the we are using EnhancedRC\".",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_e9a5eab2",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:28:38Z",
+      "side": 1,
+      "message": "This isn\u0027t a getter, I\u0027d prefer \"make\" or \"build\" as a verb here.",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_89b42ee6",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:28:38Z",
+      "side": 1,
+      "message": "Should probably use a provider for different combinations of user settings and request params.",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_09c93e7b",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:28:38Z",
+      "side": 1,
+      "message": "Doesn\u0027t the mock work?",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_a9aff290",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T18:28:38Z",
+      "side": 1,
+      "message": "Uh, we *could* actually check that $conds has been modified correctly? We should really test that the user options and request params are evaluated correctly.",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
