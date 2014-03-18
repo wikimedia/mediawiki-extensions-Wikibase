@@ -7,6 +7,7 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\EntityStore;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\SummaryFormatter;
 
 /**
  * Job for updating the repo after a page on the client has been moved.
@@ -66,6 +67,13 @@ class UpdateRepoOnMoveJob extends \Job {
 	 */
 	protected function getEntityStore() {
 		return WikibaseRepo::getDefaultInstance()->getEntityStore();
+	}
+
+	/**
+	 * @return SummaryFormatter
+	 */
+	protected function getSummaryFormatter() {
+		return WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 	}
 
 	/**
@@ -187,18 +195,13 @@ class UpdateRepoOnMoveJob extends \Job {
 			$this->getEntityStore(),
 			$item,
 			$user,
-			true );
+			true
+		);
 
-		//NOTE: Temporary hack to avoid more dependency mess.
-		//      The Right Thing would be to use a SummaryFormatter.
-		//      This is fixed in a follow-up.
-		$commentArgs = implode( '|', $summary->getCommentArgs() );
-		$autoComment = '/* ' . $summary->getMessageKey()
-			. ':2|' . $summary->getLanguageCode()
-			. '|' . $commentArgs . ' */';
+		$summaryString = $this->getSummaryFormatter()->formatSummary( $summary );
 
 		$status = $editEntity->attemptSave(
-			$autoComment,
+			$summaryString,
 			EDIT_UPDATE,
 			false,
 			// Don't (un)watch any pages here, as the user didn't explicitly kick this off
