@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee14bf34_50debf71",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-18T11:49:49Z",
+      "side": 1,
+      "message": "I\u0027m very sorry, but this is just lazy. I know it works (there can not be a second 4 digit number in a parsed date) but it still is a lazy hack. Such may be done in a test but shouldn\u0027t in production code.",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_dc2f8b9b",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 4
@@ -30,6 +47,58 @@
       "writtenOn": "2014-03-18T10:50:08Z",
       "side": 1,
       "message": "Can\u0027t we just extract the year and convert it to int an, replace it by \"2000\" in the date string, and then parse? Less special cases, less confusion...",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_10bf27f8",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-18T11:49:49Z",
+      "side": 1,
+      "message": "What\u0027s with leap years? What if you replace \"29 February 202020\" with \"29 February 4242\" or \"29 February 2000\"? How do you know the day does have the same meaning in the original and the shorter placeholder year?",
+      "parentUuid": "ee14bf34_1c0d0342",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d0dc0f4e",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-18T11:49:49Z",
+      "side": 1,
+      "message": "To complicated. \u0027/\\d{5,}/\u0027 and $matches[0] is enough to do the same.\n\nBut, please consider an other solution. I remember a similar solution in an other class. It stripped the first digits from 5+ digit years, parsed the remaining 4 digit year and put the additional digits back. Why not do the same?\n\npreg_match( \u0027/(\\d+)\\d{4}/\u0027, ..., PREG_OFFSET_CAPTURE )\n$prefix \u003d $matches[0][0];\n$offset \u003d $matches[0][1];\n$value \u003d substr( ..., 0, $offset ) . substr( ..., $offset + strlen( $prefix ) )\n$timeString \u003d \u0027+\u0027 . $prefix . $dateTime-\u003eformat( ... );\n\nAdd tests for stuff like \"1 May 10999\" and make sure it does not become \"1999-05-01\".",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b054fbca",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-18T11:49:49Z",
+      "side": 1,
+      "message": "str_replace is enough.\n\nAlso, you do not have the guarantee that your placeholder number still is in the string and still looks exactly the same. You don\u0027t really know what DateTime does.",
       "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
