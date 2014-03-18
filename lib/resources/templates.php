@@ -26,15 +26,9 @@ return call_user_func( function() {
 HTML;
 
 
-	$templates['wb-entity-content'] =
+	$templates['wb-entity-header-separator'] =
 <<<HTML
-$1 <!-- label -->
-$2 <!-- description -->
 <hr class="wb-hr" />
-$3 <!-- aliases -->
-$4 <!-- table of contents -->
-$5 <!-- terms -->
-$6 <!-- claims -->
 HTML;
 
 	$templates['wb-entity-toc'] =
@@ -346,7 +340,7 @@ HTML;
 <<<HTML
 <div class="wb-datatype wb-value-row">
 	<span class="wb-datatype-label">$1</span>
-	<span class="wb-value">$2</span>
+	<span class="wb-datatype-value">$2</span>
 </div>
 HTML;
 
