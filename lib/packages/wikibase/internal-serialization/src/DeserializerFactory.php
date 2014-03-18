@@ -5,6 +5,7 @@ namespace Wikibase\InternalSerialization;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\InternalSerialization\Deserializers\ClaimDeserializer;
+use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 use Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\ItemDeserializer;
 use Wikibase\InternalSerialization\Deserializers\PropertyDeserializer;
@@ -47,6 +48,16 @@ class DeserializerFactory {
 		return new PropertyDeserializer(
 			$this->newEntityIdDeserializer(),
 			$this->newTermsDeserializer()
+		);
+	}
+
+	/**
+	 * @return Deserializer
+	 */
+	public function newEntityDeserializer() {
+		return new EntityDeserializer(
+			$this->newItemDeserializer(),
+			$this->newPropertyDeserializer()
 		);
 	}
 
