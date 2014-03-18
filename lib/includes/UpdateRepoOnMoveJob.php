@@ -6,6 +6,7 @@ use User;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\EntityStore;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * Job for updating the repo after a page on the client has been moved.
@@ -258,6 +259,14 @@ class UpdateRepoOnMoveJob extends \Job {
 			wfLogWarning( 'User ' . $params['user'] . " doesn't exist while CentralAuth pretends it does" );
 			wfProfileOut( __METHOD__ );
 			return true;
+		}
+
+		if ( !( $params['entityId'] instanceof ItemId ) ) {
+			// Forward compatibility as this is going to be called with the serialized
+			// item id, instead of a real object.
+			// This is a short term fix to make this work side by side with the new
+			// version of the job.
+			$params['entityId'] = new ItemId( $params['entityId'] );
 		}
 
 		$this->updateSiteLink(
