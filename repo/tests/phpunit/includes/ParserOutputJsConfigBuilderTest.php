@@ -44,20 +44,19 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider buildProvider
 	 */
-	public function testBuild( Entity $entity, $usedEntities, $experimental ) {
+	public function testBuild( Entity $entity, $usedEntities ) {
 		$langCode = 'en';
 		$langCodes = array( 'de', 'en', 'es', 'fr' );
 
 		$configBuilder = $this->getConfigBuilder( $langCode );
 		$options = $this->getSerializationOptions( $langCode, $langCodes );
 
-		$configVars = $configBuilder->build( $entity, $options, $experimental );
+		$configVars = $configBuilder->build( $entity, $options );
 
 		$this->assertInternalType( 'array', $configVars );
 
 		$entityId = $entity->getId()->getSerialization();
 		$this->assertEquals( $entityId, $configVars['wbEntityId'], 'wbEntityId' );
-		$this->assertEquals( $experimental, $configVars['wbExperimentalFeatures'], 'experimental' );
 
 		$usedEntitiesVar = json_decode( $configVars['wbUsedEntities'], true );
 		$this->assertEquals( $usedEntities, $usedEntitiesVar, 'wbUsedEntities' );
