@@ -32,12 +32,17 @@ class EntityIdDeserializer implements Deserializer {
 		if ( is_string( $serialization ) ) {
 			return $this->getParsedId( $serialization );
 		}
-		elseif ( is_array( $serialization ) && count( $serialization ) == 2 ) {
-			return $this->getIdFromLegacyFormat( $serialization[0], $serialization[1] );
+		elseif ( $this->isLegacyFormat( $serialization ) ) {
+			return $this->getIdFromLegacyFormat( $serialization );
 		}
 		else {
 			throw new DeserializationException( 'Entity id format not recognized' );
 		}
+	}
+
+	private function isLegacyFormat( $serialization ) {
+		return is_array( $serialization ) && count( $serialization ) == 2
+			&& array_key_exists( 0, $serialization ) && array_key_exists( 1, $serialization );
 	}
 
 	private function getParsedId( $serialization ) {
@@ -49,9 +54,9 @@ class EntityIdDeserializer implements Deserializer {
 		}
 	}
 
-	private function getIdFromLegacyFormat( $entityType, $numericId ) {
+	private function getIdFromLegacyFormat( array $serialization ) {
 		try {
-			return LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
+			return LegacyIdInterpreter::newIdFromTypeAndNumber( $serialization[0], $serialization[1] );
 		}
 		catch ( InvalidArgumentException $ex ) {
 			throw new DeserializationException( $ex->getMessage(), $ex );
