@@ -63,7 +63,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
-	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\UpdateRepoOnMoveJob';
 
 	// Hooks
 	$wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';

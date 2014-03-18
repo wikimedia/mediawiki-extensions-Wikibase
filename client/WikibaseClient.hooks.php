@@ -829,7 +829,7 @@ final class ClientHooks {
 			return true;
 		}
 
-		$repoDB =$settings->getSetting( 'repoDatabase' );
+		$repoDB = $settings->getSetting( 'repoDatabase' );
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
 		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
 
