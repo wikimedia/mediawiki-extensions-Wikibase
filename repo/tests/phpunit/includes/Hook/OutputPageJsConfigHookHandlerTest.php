@@ -2,13 +2,18 @@
 
 namespace Wikibase\Test;
 
-use OutputPage;
+use DataValues\StringValue;
 use RequestContext;
 use Title;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
+use Wikibase\ItemContent;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\Settings;
@@ -107,7 +112,7 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$configBuilder->expects( $this->any() )
 			->method( 'build' )
 			->will( $this->returnCallback(
-				function() {
+				function() use( $configVars ) {
 					return $configVars;
 				}
 			)
@@ -126,7 +131,7 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$entityContentFactory->expects( $this->any() )
 			->method( 'getFromRevision' )
-			->will( $this->returnCallback( array( $this, 'getEntity' ) ) );
+			->will( $this->returnCallback( array( $this, 'getEntityContent' ) ) );
 
 		$entityContentFactory->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -136,9 +141,9 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return Entity
+	 * @return EntityContent
 	 */
-	public function getEntity() {
+	public function getEntityContent() {
 		$item = Item::newFromArray( array() );
 
 		$itemId = new ItemId( 'Q5881' );
@@ -152,7 +157,9 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$item->addClaim( $claim );
 
-		return $item;
+		$entityContent = new ItemContent( $item );
+
+		return $entityContent;
 	}
 
 }
