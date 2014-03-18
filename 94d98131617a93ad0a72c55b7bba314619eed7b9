@@ -34,6 +34,41 @@
       "revId": "94d98131617a93ad0a72c55b7bba314619eed7b9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_6658e98c",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T17:28:18Z",
+      "side": 1,
+      "message": "That should be documented here, then.",
+      "parentUuid": "ee14bf34_466e052c",
+      "revId": "94d98131617a93ad0a72c55b7bba314619eed7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_e6c3d908",
+        "filename": "lib/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-18T17:28:18Z",
+      "side": 1,
+      "message": "What is going to happen if this throws an exception?",
+      "revId": "94d98131617a93ad0a72c55b7bba314619eed7b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
