@@ -2,13 +2,14 @@
 
 namespace Wikibase;
 
-use MWException;
 use InvalidArgumentException;
+use MWException;
+use Revision;
 use Status;
 use Title;
 use User;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use WikiPage;
-use Revision;
 
 /**
  * Factory for EntityContent objects.
@@ -73,12 +74,11 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return EntityContent[]
 	 */
 	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
-		$entityIds = StoreFactory::getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
+		$entityInfos = StoreFactory::getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
 		$entities = array();
 
-		foreach ( $entityIds as $entityId ) {
-			list( $type, $id ) = $entityId;
-			$entity = self::getFromId( new EntityId( $type, $id ) );
+		foreach ( $entityInfos as $entityInfo ) {
+			$entity = $this->getFromId( $entityInfo[1] );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;
