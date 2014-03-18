@@ -43,7 +43,9 @@ $messages['en'] = array(
 	'wikibase-alias-edit-placeholder' => 'enter an alias',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-claims' => 'Claims',
 	'wikibase-statements' => 'Statements',
+	'wikibase-constraints' => 'Constraints',
 	'wikibase-terms' => 'In other languages',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
@@ -525,7 +527,9 @@ Bubble help message for entering the description of the data set used for a spec
 Parameters:
 * $1 - language name
 {{Related|Wikibase-input-help-message}}',
+	'wikibase-claims' => "Heading for the list of claims giving specific information about the currently viewed entity. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Claim|claim]].",
 	'wikibase-statements' => "Heading for the list of statements giving specific information about the currently viewed item. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Statement|statements]] and [[m:d:Wikidata:Glossary#Item|item]].",
+	'wikibase-constraints' => "Heading for the list of claims defining constraints for the currently viewed property. See also Wikidata's glossary for [[m:d:Wikidata:Glossary#Claims|claims]] and [[m:d:Wikidata:Glossary#Property|property]].",
 	'wikibase-terms' => 'Heading for the table with the labels and descriptions in other languages.
 {{Identical|Otherlanguages}}',
 	'wikibase-sitelinks-add' => "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [[d:Wikidata:Glossary#Sitelink|sitelinks]].",

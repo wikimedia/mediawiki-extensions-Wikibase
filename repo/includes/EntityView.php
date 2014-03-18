@@ -220,32 +220,19 @@ abstract class EntityView extends \ContextSource {
 	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$claims = '';
+		$entity = $entityRevision->getEntity();
 
-		if ( $entityRevision->getEntity()->getType() === 'item' ) {
-			$claims = $this->getHtmlForClaims( $entityRevision->getEntity(), $editable );
-		}
+		$html = '';
 
-		if ( $entityRevision->getEntity()->getId() ) {
-			// Placeholder for a termbox for the present item.
-			// EntityViewPlaceholderExpander must know about the parameters used here.
-			$languageTerms = $this->textInjector->newMarker(
-				'termbox',
-				$entityRevision->getEntity()->getId()->getSerialization()
-			);
-		} else {
-			//NOTE: this should only happen during testing
-			$languageTerms = '';
-		}
+		$html .= $this->getHtmlForLabel( $entity, $editable );
+		$html .= $this->getHtmlForDescription( $entity, $editable );
 
-		$html = wfTemplate( 'wb-entity-content',
-			$this->getHtmlForLabel( $entityRevision->getEntity(), $editable ),
-			$this->getHtmlForDescription( $entityRevision->getEntity(), $editable ),
-			$this->getHtmlForAliases( $entityRevision->getEntity(), $editable ),
-			$this->getHtmlForToc(),
-			$languageTerms,
-			$claims
-		);
+		$html .= wfTemplate( 'wb-entity-header-separator' );
+
+		$html .= $this->getHtmlForAliases( $entity, $editable );
+		$html .= $this->getHtmlForToc();
+		$html .= $this->getHtmlForTermBox( $entity, $editable );
+		$html .= $this->getHtmlForClaims( $entity, $editable );
 
 		wfProfileOut( __METHOD__ );
 		return $html;
@@ -296,6 +283,25 @@ abstract class EntityView extends \ContextSource {
 	 */
 	protected function getTocSections() {
 		return array();
+	}
+
+	/**
+	 * @param Entity $entity
+	 * @param bool $editable
+	 *
+	 * @return string
+	 */
+	protected function getHtmlForTermBox( Entity $entity, $editable = true ) {
+		if ( $entity->getId() ) {
+			// Placeholder for a termbox for the present item.
+			// EntityViewPlaceholderExpander must know about the parameters used here.
+			return $this->textInjector->newMarker(
+				'termbox',
+				$entity->getId()->getSerialization()
+			);
+		}
+
+		return '';
 	}
 
 	/**
@@ -476,6 +482,26 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
+	 * Returns the HTML for the heading of the claims section
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 * @param bool $editable
+	 *
+	 * @return string
+	 */
+	protected function getHtmlForClaimsSectionHeading( Entity $entity, $editable = true ) {
+		$html = wfTemplate(
+			'wb-section-heading',
+			wfMessage( 'wikibase-claims' ),
+			'claims' // ID - TODO: should not be added if output page is not the entity's page
+		);
+
+		return $html;
+	}
+
+	/**
 	 * Builds and returns the HTML representing a WikibaseEntity's claims.
 	 *
 	 * @since 0.2
@@ -488,13 +514,8 @@ abstract class EntityView extends \ContextSource {
 		wfProfileIn( __METHOD__ );
 
 		$claims = $entity->getClaims();
-		$html = '';
 
-		$html .= wfTemplate(
-			'wb-section-heading',
-			wfMessage( 'wikibase-statements' ),
-			'claims' // ID - TODO: should not be added if output page is not the entity's page
-		);
+		$html = $this->getHtmlForClaimsSectionHeading( $entity, $editable );
 
 		// aggregate claims by properties
 		$claimsByProperty = array();
