@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
@@ -15,7 +16,7 @@ use Wikibase\DataModel\SiteLink;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SiteLinkDeserializer implements Deserializer {
+class SiteLinkDeserializer implements DispatchableDeserializer {
 
 	/**
 	 * @var Deserializer

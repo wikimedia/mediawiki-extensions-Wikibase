@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimDeserializer;
 use Wikibase\DataModel\Deserializers\ClaimsDeserializer;
@@ -48,7 +49,7 @@ class DeserializerFactory {
 	/**
 	 * Returns a Deserializer that can deserialize Entity objects.
 	 *
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	public function newEntityDeserializer() {
 		return new DispatchingDeserializer( array(
@@ -78,10 +79,14 @@ class DeserializerFactory {
 	/*
 	 * Returns a Deserializer that can deserialize Claim objects.
 	 *
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	public function newClaimDeserializer() {
-		return new ClaimDeserializer( $this->newSnakDeserializer(), $this->newSnaksDeserializer(), $this->newReferencesDeserializer() );
+		return new ClaimDeserializer(
+			$this->newSnakDeserializer(),
+			$this->newSnaksDeserializer(),
+			$this->newReferencesDeserializer()
+		);
 	}
 
 	/**

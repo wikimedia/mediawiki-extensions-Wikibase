@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 
 /**
  * @licence GNU GPL v2+
@@ -23,7 +24,14 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider deserializableProvider
 	 */
 	public function testIsDeserializerForReturnsTrue( $serializable ) {
-		$this->assertTrue( $this->buildDeserializer()->isDeserializerFor( $serializable ) );
+		$deserializer = $this->buildDeserializer();
+
+		if ( $deserializer instanceof DispatchableDeserializer ) {
+			$this->assertTrue( $deserializer->isDeserializerFor( $serializable ) );
+		}
+		else {
+			$this->assertTrue( true );
+		}
 	}
 
 	/**
@@ -35,7 +43,14 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider nonDeserializableProvider
 	 */
 	public function testIsDeserializerForReturnsFalse( $nonSerializable ) {
-		$this->assertFalse( $this->buildDeserializer()->isDeserializerFor( $nonSerializable ) );
+		$deserializer = $this->buildDeserializer();
+
+		if ( $deserializer instanceof DispatchableDeserializer ) {
+			$this->assertFalse( $deserializer->isDeserializerFor( $nonSerializable ) );
+		}
+		else {
+			$this->assertTrue( true );
+		}
 	}
 
 	/**

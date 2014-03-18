@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Serializer;
 
 /**
@@ -23,7 +24,14 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider serializableProvider
 	 */
 	public function testIsSerializerForReturnsTrue( $serializable ) {
-		$this->assertTrue( $this->buildSerializer()->isSerializerFor( $serializable ) );
+		$serializer = $this->buildSerializer();
+
+		if ( $serializer instanceof DispatchableSerializer ) {
+			$this->assertTrue( $serializer->isSerializerFor( $serializable ) );
+		}
+		else {
+			$this->assertTrue( true );
+		}
 	}
 
 	/**
@@ -35,7 +43,14 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider nonSerializableProvider
 	 */
 	public function testIsSerializerForReturnsFalse( $nonSerializable ) {
-		$this->assertFalse( $this->buildSerializer()->isSerializerFor( $nonSerializable ) );
+		$serializer = $this->buildSerializer();
+
+		if ( $serializer instanceof DispatchableSerializer ) {
+			$this->assertFalse( $serializer->isSerializerFor( $nonSerializable ) );
+		}
+		else {
+			$this->assertTrue( true );
+		}
 	}
 
 	/**

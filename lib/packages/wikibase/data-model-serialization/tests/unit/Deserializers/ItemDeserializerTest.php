@@ -19,14 +19,7 @@ class ItemDeserializerTest extends DeserializerBaseTest {
 		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 
 		$siteLinkDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
-		$siteLinkDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array(
-				'site' => 'enwiki',
-				'title' => 'Nyan Cat',
-				'badges' => array()
-			) ) )
-			->will( $this->returnValue( true ) );
+
 		$siteLinkDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(

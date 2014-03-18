@@ -26,17 +26,6 @@ class ClaimsDeserializer implements Deserializer {
 		$this->claimDeserializer = $claimDeserializer;
 	}
 
-	/**
-	 * @see Deserializer::isDeserializerFor
-	 *
-	 * @param mixed $serialization
-	 *
-	 * @return boolean
-	 */
-	public function isDeserializerFor( $serialization ) {
-		return $this->isValidSerialization( $serialization );
-	}
-
 	private function isValidSerialization( $serialization ) {
 		if( !is_array( $serialization ) ) {
 			return false;
@@ -52,22 +41,7 @@ class ClaimsDeserializer implements Deserializer {
 	}
 
 	private function isValidClaimArraySerialization( $serialization ) {
-		if( !is_array( $serialization ) ) {
-			return false;
-		}
-
-		foreach( $serialization as $claimSerialization ) {
-			if( !$this->isValidClaimSerialization( $claimSerialization ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-
-	private function isValidClaimSerialization( $serialization ) {
-		return $this->claimDeserializer->isDeserializerFor( $serialization );
+		return is_array( $serialization );
 	}
 
 	/**

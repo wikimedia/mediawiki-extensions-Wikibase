@@ -17,6 +17,7 @@ class ReferenceListDeserializerTest extends DeserializerBaseTest {
 
 	public function buildDeserializer() {
 		$referenceDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
+
 		$referenceDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( array(
@@ -24,14 +25,6 @@ class ReferenceListDeserializerTest extends DeserializerBaseTest {
 				'snaks' => array()
 			) ) )
 			->will( $this->returnValue( new Reference() ) );
-
-		$referenceDeserializerMock->expects( $this->any() )
-			->method( 'isDeserializerFor' )
-			->with( $this->equalTo( array(
-				'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-				'snaks' => array()
-			) ) )
-			->will( $this->returnValue( true ) );
 
 		return new ReferenceListDeserializer( $referenceDeserializerMock );
 	}

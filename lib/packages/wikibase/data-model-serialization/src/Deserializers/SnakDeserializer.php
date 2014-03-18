@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
@@ -20,7 +21,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */
-class SnakDeserializer implements Deserializer {
+class SnakDeserializer implements DispatchableDeserializer {
 
 	/**
 	 * @var Deserializer
@@ -49,11 +50,13 @@ class SnakDeserializer implements Deserializer {
 	 * @return boolean
 	 */
 	public function isDeserializerFor( $serialization ) {
-		return $this->hasSnakType( $serialization ) && $this->hasCorrectSnakType( $serialization );
+		return is_array( $serialization )
+			&& $this->hasSnakType( $serialization )
+			&& $this->hasCorrectSnakType( $serialization );
 	}
 
 	private function hasSnakType( $serialization ) {
-		return is_array( $serialization ) && array_key_exists( 'snaktype', $serialization );
+		return array_key_exists( 'snaktype', $serialization );
 	}
 
 	private function hasCorrectSnakType( $serialization ) {
@@ -118,6 +121,10 @@ class SnakDeserializer implements Deserializer {
 	}
 
 	private function assertCanDeserialize( $serialization ) {
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'The snak serialization should be an array' );
+		}
+
 		if ( !$this->hasSnakType( $serialization ) ) {
 			throw new MissingTypeException();
 		}

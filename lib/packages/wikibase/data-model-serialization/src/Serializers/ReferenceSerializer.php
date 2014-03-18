@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
@@ -13,7 +14,7 @@ use Wikibase\DataModel\Reference;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ReferenceSerializer implements Serializer {
+class ReferenceSerializer implements DispatchableSerializer {
 
 	/**
 	 * @var Serializer

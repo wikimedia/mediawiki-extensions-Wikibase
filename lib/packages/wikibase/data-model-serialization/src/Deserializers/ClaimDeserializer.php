@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
@@ -16,7 +17,7 @@ use Wikibase\DataModel\Claim\Statement;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ClaimDeserializer implements Deserializer {
+class ClaimDeserializer implements DispatchableDeserializer {
 
 	private $rankIds = array(
 		'deprecated' => Statement::RANK_DEPRECATED,
@@ -46,7 +47,7 @@ class ClaimDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @see Deserializer::isDeserializerFor
+	 * @see DispatchableDeserializer::isDeserializerFor
 	 *
 	 * @param mixed $serialization
 	 *

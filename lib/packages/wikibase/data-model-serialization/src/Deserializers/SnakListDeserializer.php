@@ -27,50 +27,6 @@ class SnakListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @see Deserializer::isDeserializerFor
-	 *
-	 * @param mixed $serialization
-	 *
-	 * @return boolean
-	 */
-	public function isDeserializerFor( $serialization ) {
-		return $this->isValidSerialization( $serialization );
-	}
-
-	private function isValidSerialization( $serialization ) {
-		if( !is_array( $serialization ) ) {
-			return false;
-		}
-
-		foreach( $serialization as $snaksArray ) {
-			if( !$this->isValidSnakArraySerialization( $snaksArray ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	private function isValidSnakArraySerialization( $serialization ) {
-		if( !is_array( $serialization ) ) {
-			return false;
-		}
-
-		foreach( $serialization as $snakSerialization ) {
-			if( !$this->isValidSnakSerialization( $snakSerialization ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-
-	private function isValidSnakSerialization( $serialization ) {
-		return $this->snakDeserializer->isDeserializerFor( $serialization );
-	}
-
-	/**
 	 * @see Deserializer::deserialize
 	 *
 	 * @param mixed $serialization
@@ -97,8 +53,14 @@ class SnakListDeserializer implements Deserializer {
 	}
 
 	private function assertCanDeserialize( $serialization ) {
-		if ( !$this->isValidSerialization( $serialization ) ) {
-			throw new DeserializationException( 'The serialization is invalid!' );
+		if ( !is_array( $serialization ) ) {
+			throw new DeserializationException( 'The serialization should be an array' );
+		}
+
+		foreach ( $serialization as $snaksOfPropertySerialization ) {
+			if ( !is_array( $snaksOfPropertySerialization ) ) {
+				throw new DeserializationException( 'The snaks per property should be an array' );
+			}
 		}
 	}
 }

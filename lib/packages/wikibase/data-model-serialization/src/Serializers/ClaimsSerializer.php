@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Serializers;
 
+use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
@@ -14,7 +15,7 @@ use Wikibase\DataModel\Claim\Claims;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class ClaimsSerializer implements Serializer {
+class ClaimsSerializer implements DispatchableSerializer {
 
 	/**
 	 * @var Serializer
