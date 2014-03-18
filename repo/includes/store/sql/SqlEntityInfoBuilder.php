@@ -5,6 +5,7 @@ namespace Wikibase;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * Class EntityInfoBuilder implementation relying on database access.
@@ -226,9 +227,9 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function injectTerms( $dbResult, array &$entityInfo ) {
 		foreach ( $dbResult as $row ) {
-			// this is deprecated, but I don't see an alternative.
-			$id = new EntityId( $row->term_entity_type, (int)$row->term_entity_id );
-			$key = $id->getPrefixedId();
+			// FIXME: This must be removed once we got rid of all legacy numeric ids.
+			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+			$key = $entityId->getPrefixedId();
 
 			if ( !isset( $entityInfo[$key] ) ) {
 				continue;

@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use MWException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * Object representing a term.
@@ -195,11 +196,8 @@ class Term {
 		if ( $entityType !== null && array_key_exists( 'entityId', $this->fields ) ) {
 			$numericId = $this->fields['entityId'];
 
-			// FIXME: this is using the deprecated EntityId constructor and a hack to get the
-			// correct EntityId type that will not work for entity types other then item and property.
-			$entityId = new EntityId( $entityType, $numericId );
-			$idParser = new BasicEntityIdParser();
-			return $idParser->parse( $entityId->getSerialization() );
+			// FIXME: This must be removed once we got rid of all legacy numeric ids.
+			return LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
 		}
 
 		return null;

@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Iterator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -168,15 +169,14 @@ class EntityPerPageTable implements EntityPerPage {
 	}
 
 	protected function getEntityIdsFromRows( $rows ) {
-		$entities = array();
-		$idParser = new BasicEntityIdParser();
+		$entityIds = array();
 
 		foreach ( $rows as $row ) {
-			$id = new EntityId( $row->entity_type, (int)$row->entity_id );
-			$entities[] = $idParser->parse( $id->getSerialization() );
+			// FIXME: This must be removed once we got rid of all legacy numeric ids.
+			$entityIds[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->entity_type, (int)$row->entity_id );
 		}
 
-		return $entities;
+		return $entityIds;
 	}
 
 	/**

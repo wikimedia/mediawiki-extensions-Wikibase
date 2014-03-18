@@ -5,6 +5,7 @@ namespace Wikibase;
 use MWException;
 use InvalidArgumentException;
 use Title;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use WikiPage;
 use Revision;
 
@@ -71,12 +72,11 @@ class EntityContentFactory implements EntityTitleLookup {
 	 * @return EntityContent[]
 	 */
 	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
-		$entityIds = StoreFactory::getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
+		$entityInfos = StoreFactory::getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
 		$entities = array();
 
-		foreach ( $entityIds as $entityId ) {
-			list( $type, $id ) = $entityId;
-			$entity = self::getFromId( new EntityId( $type, $id ) );
+		foreach ( $entityInfos as $entityInfo ) {
+			$entity = $this->getFromId( $entityInfo[1] );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;

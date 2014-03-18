@@ -8,6 +8,7 @@ use Iterator;
 use MWException;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * Term lookup cache.
@@ -593,7 +594,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$result = array_map(
 			function( $entity ) {
-				return array( $entity->term_entity_type, intval( $entity->term_entity_id ) );
+				// FIXME: This must be removed once we got rid of all legacy numeric ids.
+				$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $entity->term_entity_type, (int)$entity->term_entity_id );
+				return array( $entity->term_entity_type, $entityId );
 			},
 			iterator_to_array( $entities )
 		);
@@ -736,13 +739,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		// turn numbers into entity ids
 		$result = array();
-		$idParser = new BasicEntityIdParser();
 
 		foreach ( $numericIds as $numericId ) {
-			// FIXME: this is using the deprecated EntityId constructor and a hack to get the
-			// correct EntityId type that will not work for entity types other then item and property.
-			$entityId = new EntityId( $entityType, $numericId );
-			$result[] = $idParser->parse( $entityId->getSerialization() );
+			// FIXME: This must be removed once we got rid of all legacy numeric ids.
+			$result[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
 		}
 
 		wfProfileOut( __METHOD__ );

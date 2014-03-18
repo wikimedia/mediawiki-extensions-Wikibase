@@ -31,7 +31,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$item0 = Item::newEmpty();
 		$item0->setId( new ItemId( 'Q10' ) );
-		$id0 = $item0->getId()->getNumericId();
+		$id0 = $item0->getId();
 
 		$item0->setLabel( 'en', 'foobar' );
 		$item0->setLabel( 'de', 'foobar' );
@@ -40,7 +40,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$item1 = $item0->copy();
 		$item1->setId( new ItemId( 'Q11' ) );
-		$id1 = $item1->getId()->getNumericId();
+		$id1 = $item1->getId();
 
 		$item1->setLabel( 'nl', 'o_O' );
 		$item1->setDescription( 'en', 'foo bar baz' );
