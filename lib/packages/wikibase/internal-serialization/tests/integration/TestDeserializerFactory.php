@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
+use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -27,6 +28,25 @@ class TestDeserializerFactory {
 
 		return new DeserializerFactory(
 			$dataValueDeserializer,
+			new BasicEntityIdParser()
+		);
+	}
+
+	public static function newInstanceWithDataValueSupport() {
+		$dataValueClasses = array_merge(
+			$GLOBALS['evilDataValueMap'],
+			array(
+				'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+				'monolingualtext' => 'DataValues\MonolingualTextValue',
+				'multilingualtext' => 'DataValues\MultilingualTextValue',
+				'quantity' => 'DataValues\QuantityValue',
+				'time' => 'DataValues\TimeValue',
+				'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+			)
+		);
+
+		return new DeserializerFactory(
+			new DataValueDeserializer( $dataValueClasses ),
 			new BasicEntityIdParser()
 		);
 	}

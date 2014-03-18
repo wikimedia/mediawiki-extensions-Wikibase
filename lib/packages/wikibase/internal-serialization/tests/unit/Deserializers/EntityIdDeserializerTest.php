@@ -96,4 +96,20 @@ class EntityIdDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->deserializer->deserialize( array( 'item', 'foobar' ) );
 	}
 
+	public function testGivenArrayWithTwoStringKeys_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array(
+			'foo' => 'item',
+			'baz' => 42,
+		) );
+	}
+
+	public function testGivenArrayWithWrongNumericKeys_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array(
+			42 => 'item',
+			1337 => 42,
+		) );
+	}
+
 }
