@@ -2,13 +2,18 @@
 
 namespace Wikibase\Test;
 
-use OutputPage;
+use DataValues\StringValue;
 use RequestContext;
 use Title;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
+use Wikibase\ItemContent;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\Settings;
@@ -29,15 +34,14 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider handleProvider
 	 */
-	public function testHandle( array $expected, EntityId $entityId, array $parserConfig,
-		Settings $settings
+	public function testHandle( array $expected, EntityId $entityId, array $cachedConfig,
+		array $parserConfig, Settings $settings, $experimental, $message
 	) {
 		$hookHandler = new OutputPageJsConfigHookHandler(
-			new BasicEntityIdParser(),
 			$this->getEntityContentFactory(),
-			new LanguageFallbackChainFactory(),
 			$this->getParserOutputJsConfigBuilder( $parserConfig ),
-			$settings
+			$settings,
+			array( 'de', 'en', 'es', 'fr' )
 		);
 
 		$title = $this->getTitleForId( $entityId );
@@ -46,13 +50,14 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$context->setTitle( $title );
 
 		$output = $context->getOutput();
-		$output->addJsConfigVars( $parserConfig );
+		$output->addJsConfigVars( $cachedConfig );
 
-		$hookHandler->handle( $output );
+		$hookHandler->handle( $output, $experimental );
 
-		$configVarsAfter = $output->getJsConfigVars();
+		$configVars = $output->getJsConfigVars();
 
-		$this->assertEquals( $expected, array_keys( $configVarsAfter ) );
+		$this->assertEquals( $experimental, $configVars['wbExperimentalFeatures'], 'experimental' );
+		$this->assertEquals( $expected, array_keys( $configVars ), $message );
 	}
 
 	public function handleProvider() {
@@ -67,11 +72,15 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			'wbEntityId',
 			'wbUserIsBlocked',
 			'wbUserCanEdit',
-			'wbCopyright'
+			'wbCopyright',
+			'wbExperimentalFeatures'
 		);
 
 		return array(
-			array( $expected, $entityId, $parserConfig, $settings )
+			array( $expected, $entityId, $parserConfig, $parserConfig,
+				$settings, true, 'config vars with parser cache' ),
+			array( $expected, $entityId, array(), $parserConfig,
+				$settings, true, 'config vars without parser cache' )
 		);
 	}
 
@@ -107,7 +116,7 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$configBuilder->expects( $this->any() )
 			->method( 'build' )
 			->will( $this->returnCallback(
-				function() {
+				function() use( $configVars ) {
 					return $configVars;
 				}
 			)
@@ -126,7 +135,7 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$entityContentFactory->expects( $this->any() )
 			->method( 'getFromRevision' )
-			->will( $this->returnCallback( array( $this, 'getEntity' ) ) );
+			->will( $this->returnCallback( array( $this, 'getEntityContent' ) ) );
 
 		$entityContentFactory->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -136,9 +145,9 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return Entity
+	 * @return EntityContent
 	 */
-	public function getEntity() {
+	public function getEntityContent() {
 		$item = Item::newFromArray( array() );
 
 		$itemId = new ItemId( 'Q5881' );
@@ -152,7 +161,9 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$item->addClaim( $claim );
 
-		return $item;
+		$entityContent = new ItemContent( $item );
+
+		return $entityContent;
 	}
 
 }

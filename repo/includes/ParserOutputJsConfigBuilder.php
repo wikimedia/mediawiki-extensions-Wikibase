@@ -77,15 +77,11 @@ class ParserOutputJsConfigBuilder {
 	/**
 	 * @param Entity $entity
 	 * @param SerializationOptions $options
-	 * @param boolean $isExperimental
 	 *
 	 * @return array
 	 */
-	public function build( Entity $entity, SerializationOptions $options, $isExperimental ) {
-		$configVars = array_merge(
-			$this->getEntityVars( $entity, $options ),
-			array( 'wbExperimentalFeatures' => $isExperimental )
-		);
+	public function build( Entity $entity, SerializationOptions $options ) {
+		$configVars = $this->getEntityVars( $entity, $options );
 
 		return $configVars;
 	}
