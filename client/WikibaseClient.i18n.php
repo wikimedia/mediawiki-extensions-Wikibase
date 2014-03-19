@@ -1863,6 +1863,7 @@ $messages['gu'] = array(
  * @author ExampleTomer
  * @author Guycn1
  * @author Guycn2
+ * @author Inkbug
  * @author ערן
  */
 $messages['he'] = array(
@@ -1901,7 +1902,7 @@ $messages['he'] = array(
 	'wikibase-property-notfound' => 'המאפיין $1 לא נמצא.',
 	'wikibase-property-notsupportedyet' => 'ההרחבה ויקיביסס עדיין לא תומכת בסוג המאפיין של המאפיין $1.',
 	'wikibase-rc-hide-wikidata' => '$1 {{WBREPONAME}}',
-	'wikibase-rc-hide-wikidata-hide' => 'הסתרה',
+	'wikibase-rc-hide-wikidata-hide' => 'הסתרת',
 	'wikibase-rc-hide-wikidata-show' => 'הצגה',
 	'wikibase-rc-show-wikidata-pref' => 'הצגת עריכות {{WBREPONAME}} בשינויים אחרונים',
 	'wikibase-rc-wikibase-edit-letter' => 'נ',
@@ -3903,6 +3904,7 @@ $messages['ru'] = array(
 	'wikibase-pageinfo-entity-id' => 'Идентификатор элемента в {{grammar:genitive|{{WBREPONAME}}}}',
 	'wikibase-pageinfo-entity-id-none' => 'отсутствует',
 	'wikibase-property-render-error' => 'Ошибка раскрытия свойства «$1»: $2',
+	'wikibase-otherprojects' => 'Другие проекты',
 );
 
 /** Sicilian (sicilianu)
@@ -4497,6 +4499,7 @@ $messages['uk'] = array(
 	'wikibase-pageinfo-entity-id' => 'Ідентифікатор елемента у {{WBREPONAME}}',
 	'wikibase-pageinfo-entity-id-none' => 'Нема',
 	'wikibase-property-render-error' => 'Не вдалося відобразити властивість $1: $2',
+	'wikibase-otherprojects' => 'Інші проекти',
 );
 
 /** Urdu (اردو)
