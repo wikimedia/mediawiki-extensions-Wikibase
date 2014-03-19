@@ -10,12 +10,12 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\SnakDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer

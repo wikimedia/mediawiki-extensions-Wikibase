@@ -12,12 +12,12 @@ use Wikibase\DataModel\Term\LabelList;
 use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\TermsDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermsDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyTermsDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer

@@ -9,12 +9,12 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacySiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer

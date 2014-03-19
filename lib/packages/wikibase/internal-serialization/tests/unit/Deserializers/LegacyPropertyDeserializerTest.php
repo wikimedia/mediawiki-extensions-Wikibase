@@ -10,12 +10,12 @@ use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\PropertyDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer

@@ -14,12 +14,12 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\ClaimDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer

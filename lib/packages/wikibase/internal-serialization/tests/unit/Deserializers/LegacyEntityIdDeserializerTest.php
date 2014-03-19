@@ -10,12 +10,12 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityIdDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyEntityIdDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer
