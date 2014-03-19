@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_4a2a91d8",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:50:59Z",
+      "side": 1,
+      "message": "prefer to have complete and consistent documentation throughout the class, and be consistent in this regard with mediawiki.\n\nhttps://www.mediawiki.org/wiki/Manual:Coding_conventions/PHP#Comments_and_documentation\n\nalthough \"uncle\" bob has many good advice, we don\u0027t need to agree with all. :)",
+      "parentUuid": "ee14bf34_533ffcd3",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_b32f789c",
         "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-14T15:29:44Z",
       "side": 1,
       "message": "SpecialWatchlistQueryHandler-\u003ehandle\n\nIt is really hard for me to determine the intention here. I need to go look at all kinds of random details that don\u0027t explain themselves just from this code to get a rough idea.\n\nPlease try to clearly define the responsibility of this class, and have the name reflect that.",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_2a6e3d2b",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_b32f789c",
       "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_4a71710a",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_f35e1048",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_1329849a",
         "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-14T15:29:44Z",
       "side": 1,
       "message": "This also does not add value, the param already has a type hint",
+      "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_ca646148",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:50:59Z",
+      "side": 1,
+      "message": "prefer to comment in a consistent manner and think the code looks \"cleaner\" this way.",
+      "parentUuid": "ee14bf34_1329849a",
       "revId": "fa39f2bdf62e8755264ae6475d69a869e486aee4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
