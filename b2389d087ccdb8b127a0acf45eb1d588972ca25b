@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_db9b071a",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T17:42:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_db0b07d8",
+      "revId": "b2389d087ccdb8b127a0acf45eb1d588972ca25b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_bb27335f",
         "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
         "patchSetId": 21
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-19T16:56:42Z",
       "side": 1,
       "message": "The question if this class makes sense depends on how you define \"multiple things\". For example, in BeforePageDisplayHandler both addModuleStyles (CSS) and addModules (JS) are called, but addJsConfigVars (JS) gets it\u0027s own class? I agree with Daniel, this class here doesn\u0027t do a nice split.",
+      "revId": "b2389d087ccdb8b127a0acf45eb1d588972ca25b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_1b929f00",
+        "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T17:42:02Z",
+      "side": 1,
+      "message": "still not convinced, but thinking about it more, this part of the change is not really related to resolving the bug.\n\ni have restored the hook function in WikibaseClient.hooks.php (for now)",
+      "parentUuid": "ee14bf34_bb27335f",
       "revId": "b2389d087ccdb8b127a0acf45eb1d588972ca25b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
