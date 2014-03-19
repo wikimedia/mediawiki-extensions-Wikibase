@@ -66,11 +66,9 @@ class ClaimHtmlGenerator {
 	 */
 	protected function getMainSnakHtml( $formattedValue ) {
 		$mainSnakHtml = wfTemplate( 'wb-snak',
-			'wb-mainsnak',
 			'', // Link to property. NOTE: we don't display this ever (instead, we generate it on
 				// Claim group level) If this was a public function, this should be generated
 				// anyhow since important when displaying a Claim on its own.
-			'', // type selector, JS only
 			( $formattedValue === '' ) ? '&nbsp;' : $formattedValue
 		);
 
@@ -251,10 +249,8 @@ class ClaimHtmlGenerator {
 		}
 
 		return wfTemplate( 'wb-snak',
-			'wb-snakview',
 			// Display property link only once for snaks featuring the same property:
 			$propertyLink,
-			'',
 			( $snak->getType() === 'value' ) ? $this->getFormattedSnakValue( $snak ) : ''
 		);
 	}
