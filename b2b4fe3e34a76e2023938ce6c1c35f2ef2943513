@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_f5437d41",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "\"add\" is okay",
+      "parentUuid": "ee14bf34_899aee64",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_e9b28ae3",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 19
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-18T18:52:26Z",
       "side": 1,
       "message": "Why is this needed? When does this happen? Please comment.",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_3561f5d0",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_e9b28ae3",
       "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_155ef117",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_c9b7c6d2",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_a9fa5271",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 19
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-18T19:15:20Z",
       "side": 1,
       "message": "Please only inject what is needed. This object does not need access to all settings, just one.",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f5b93d2a",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_a9fa5271",
       "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_69855ab1",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "we can:\n\n1) pass $out by reference\n2) do add modules in the static hook method with no tests\n3) do this.\n\nwhat do you prefer?\n\ni prefer option 3",
+      "parentUuid": "ee14bf34_29c0822e",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_09bdbead",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 19
@@ -98,6 +188,24 @@
       "writtenOn": "2014-03-18T18:52:26Z",
       "side": 1,
       "message": "I think this can be inlined, no need for a separate function here.",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f55a5d21",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_09bdbead",
       "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_c9bd8665",
+        "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "then the handler is doing multiple things. I think we want to avoid that, right?",
+      "parentUuid": "ee14bf34_c9dea614",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_09dedede",
         "filename": "client/tests/phpunit/includes/hooks/BeforePageDisplayHandlerTest.php",
         "patchSetId": 19
@@ -132,6 +258,24 @@
       "writtenOn": "2014-03-18T19:15:20Z",
       "side": 1,
       "message": "The name goes into the good direction, though it can still be better. I still need to look at the actual code to see what is going on.\n\nIn the argument list, it is not obvious what the test input is, and what the expected values are. $expectedJsModules and $expectedCssModules would help a lot.\n\nThen again, there is no point in having a data provider here. It just makes things a lot less clear.\n\nSimilar concerns with other test methods. Not a critical issue here, we got many worse tests after all, yet something to hold into account for when writing new tests. Perhaps you can do a follow up that cleans up the tests?",
+      "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_559a29be",
+        "filename": "client/tests/phpunit/includes/hooks/BeforePageDisplayHandlerTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:15:22Z",
+      "side": 1,
+      "message": "made some improvements.  we\u0027ll probably simplify the conditions where the widget is enabled (e.g. eliminate the setting). Then we can also simplify and improve these tests further.",
+      "parentUuid": "ee14bf34_09dedede",
       "revId": "b2b4fe3e34a76e2023938ce6c1c35f2ef2943513",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
