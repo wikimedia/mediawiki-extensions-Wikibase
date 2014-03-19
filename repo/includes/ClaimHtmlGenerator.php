@@ -157,9 +157,7 @@ class ClaimHtmlGenerator {
 			);
 		}
 
-		return wfTemplate( 'wb-listview',
-			$snaklistviewsHtml
-		);
+		return $this->wrapInListview( $snaklistviewsHtml );
 	}
 
 	/**
@@ -175,13 +173,15 @@ class ClaimHtmlGenerator {
 			$referencesHtml .= $this->getHtmlForReference( $reference );
 		}
 
-		if( $referencesHtml !== '' ) {
-			$referencesHtml = wfTemplate( 'wb-listview',
-				$referencesHtml
-			);
-		}
+		return $this->wrapInListview( $referencesHtml );
+	}
 
-		return $referencesHtml;
+	private function wrapInListview( $listviewContent ) {
+		if( $listviewContent !== '' ) {
+			return wfTemplate( 'wb-listview', $listviewContent );
+		} else {
+			return '';
+		}
 	}
 
 	/**
