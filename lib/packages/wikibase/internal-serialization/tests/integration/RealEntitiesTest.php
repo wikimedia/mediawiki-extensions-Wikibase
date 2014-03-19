@@ -26,22 +26,9 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider itemSerializationProvider
+	 * @dataProvider itemLegacySerializationProvider
 	 */
-	public function testGivenItem_DeserializationWorksAndReturnsItem( $fileName, $serialization ) {
-		$item = $this->deserializer->deserialize( $serialization );
-
-		$this->assertInstanceOf(
-			'Wikibase\DataModel\Entity\Item',
-			$item,
-			$fileName . ' should deserialize to an Item'
-		);
-	}
-
-	/**
-	 * @dataProvider itemSerializationProvider
-	 */
-	public function testGivenItem_DeserializationReturnsCorrectItem( $fileName, $serialization ) {
+	public function testGivenLegacyItem_DeserializationReturnsCorrectItem( $fileName, $serialization ) {
 		$item = $this->deserializer->deserialize( $serialization );
 
 		$expectedItem = Item::newFromArray( $serialization );
@@ -54,7 +41,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function itemSerializationProvider() {
+	public function itemLegacySerializationProvider() {
 		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/legacy/' );
 	}
 
@@ -76,14 +63,14 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 		return $argumentLists;
 	}
 
-	public function propertySerializationProvider() {
+	public function propertyLegacySerializationProvider() {
 		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/properties/legacy/' );
 	}
 
 	/**
-	 * @dataProvider propertySerializationProvider
+	 * @dataProvider propertyLegacySerializationProvider
 	 */
-	public function testGivenProperty_DeserializationReturnsCorrectProperty( $fileName, $serialization ) {
+	public function testGivenLegacyProperty_DeserializationReturnsCorrectProperty( $fileName, $serialization ) {
 		$item = $this->deserializer->deserialize( $serialization );
 
 		$expectedProperty = Property::newFromArray( $serialization );
@@ -102,6 +89,22 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 		// There are some old revisions for which this normalization is needed due to
 		// a long ago fixed bug.
 		$entity->setAllAliases( $entity->getAllAliases() );
+	}
+
+	/**
+	 * @dataProvider currentEntitySerializationProvider
+	 */
+	public function testGivenCurrentEntities_DeserializationReturnsCorrectEntity( $fileName, $serialization ) {
+		$entity = $this->deserializer->deserialize( $serialization );
+
+		$expectedEntity = TestFactoryBuilder::newCurrentDeserializerFactory()
+			->newEntityDeserializer()->deserialize( $serialization );
+
+		$this->assertTrue( $entity->equals( $expectedEntity ) );
+	}
+
+	public function currentEntitySerializationProvider() {
+		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/current/' );
 	}
 
 }

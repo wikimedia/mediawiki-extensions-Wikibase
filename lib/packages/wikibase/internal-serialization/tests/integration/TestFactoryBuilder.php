@@ -76,4 +76,11 @@ class TestFactoryBuilder {
 		return new SerializerFactory( new DataValueSerializer() );
 	}
 
+	public static function newCurrentDeserializerFactory() {
+		return new \Wikibase\DataModel\DeserializerFactory(
+			self::newRealDataValueDeserializer(),
+			new BasicEntityIdParser()
+		);
+	}
+
 }
