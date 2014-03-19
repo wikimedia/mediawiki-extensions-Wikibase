@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_15ff11a9",
+        "filename": "lib/tests/phpunit/IO/EntityIdReaderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T07:51:29Z",
+      "side": 1,
+      "message": "if $msg is not used, why have it as a param (even if set to null)\n\nmight be nicer to actually provide a message, though",
+      "revId": "74e180e94b92a8412074ed1e43e4b69c391a9e0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f5fb7db8",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T07:51:29Z",
+      "side": 1,
+      "message": "badges?",
+      "revId": "74e180e94b92a8412074ed1e43e4b69c391a9e0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b52d0544",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T07:51:29Z",
+      "side": 1,
+      "message": "why is this called as a static function?",
+      "revId": "74e180e94b92a8412074ed1e43e4b69c391a9e0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
