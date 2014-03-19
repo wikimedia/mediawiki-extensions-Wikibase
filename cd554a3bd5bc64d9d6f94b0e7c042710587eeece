@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_38f5694d",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:35:20Z",
+      "side": 1,
+      "message": "Seems this class name doesn\u0027t belong here or was changed by mistake.",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_5885bd9e",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:35:20Z",
+      "side": 1,
+      "message": "This confuses me. The change actually switches the \"valid \u003e current \u003e next\" calls to \"next \u003e valid \u003e current\". Doesn\u0027t this change the semantics?\n\nIs this supposed to work similar to feof? In this case \"next \u003e valid\" will fail for the last line.",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_fb4ecb71",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:35:20Z",
+      "side": 1,
+      "message": "Make this \u003d\u003d\u003d 1 please since stuff \u003c 1 is invalid.",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_18362501",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:35:20Z",
+      "side": 1,
+      "message": "Why not abs( $n )?",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f83a51e3",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:35:20Z",
+      "side": 1,
+      "message": "%\u003d",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_3b44434a",
+        "filename": "repo/includes/store/sql/EntityPerPageIdPager.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:35:20Z",
+      "side": 1,
+      "message": "Space.",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
