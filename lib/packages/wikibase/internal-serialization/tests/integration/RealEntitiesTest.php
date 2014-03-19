@@ -2,14 +2,11 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use SplFileInfo;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
  * @covers Wikibase\InternalSerialization\DeserializerFactory

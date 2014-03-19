@@ -2,13 +2,9 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 
 /**
  * @covers Wikibase\InternalSerialization\LegacyDeserializerFactory
@@ -19,7 +15,7 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 class LegacyDeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var DeserializerFactory
+	 * @var LegacyDeserializerFactory
 	 */
 	private $factory;
 

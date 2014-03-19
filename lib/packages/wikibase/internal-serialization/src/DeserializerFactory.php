@@ -5,6 +5,7 @@ namespace Wikibase\InternalSerialization;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\DeserializerFactory as CurrentDeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 
 /**
  * @since 1.0
@@ -12,9 +13,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class DeserializerFactory {
-
-	private $dataValueDeserializer;
-	private $idParser;
 
 	/**
 	 * @var LegacyDeserializerFactory
@@ -27,9 +25,6 @@ class DeserializerFactory {
 	private $currentFactory;
 
 	public function __construct( Deserializer $dataValueDeserializer, EntityIdParser $idParser ) {
-		$this->dataValueDeserializer = $dataValueDeserializer;
-		$this->idParser = $idParser;
-
 		$this->legacyFactory = new LegacyDeserializerFactory( $dataValueDeserializer, $idParser );
 		$this->currentFactory = new CurrentDeserializerFactory( $dataValueDeserializer, $idParser );
 	}
@@ -38,14 +33,10 @@ class DeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newEntityDeserializer() {
-		// TODO
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	public function newSnakDeserializer() {
-		// TODO
+		return new EntityDeserializer(
+			$this->legacyFactory->newEntityDeserializer(),
+			$this->currentFactory->newEntityDeserializer()
+		);
 	}
 
 }
