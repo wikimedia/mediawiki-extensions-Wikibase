@@ -63,6 +63,10 @@ catch ( DeserializationException $ex ) {
 }
 ```
 
+All access to services provided by this library should happen through the
+SerializerFactory and DeserializerFactory. The rest of the code is an implementation
+detail which users should not know about.
+
 ## Library structure
 
 The Wikibase DataModel objects can all be serialized to a generic format from which the objects
@@ -78,6 +82,15 @@ deserializers directly yourself or to have any kind of knowledge of them (ie typ
 objects are internal to this serialization and might change name or structure at any time. All you
 are allowed to know when calling $serializerFactory->newEntitySerializer() is that you get back
 an instance of Serializers\Serializer.
+
+The library contains deserializers that handle the legacy internal serialization format. Those
+can be found in Wikibase\InternalSerialization\Deserializers, and all start with the word "Legacy".
+The remaining deserializers in this namespace are not specific to any format. They detect the one
+that is used and foreward to the appropriate deserializer. These deserializers can thus deal with
+serializations in the old legacy format and those in the new one.
+
+The DeserializationFactory only returns deserializers that can deal with both the legacy and the
+new format.
 
 ## Tests
 
