@@ -3,7 +3,7 @@
 namespace Tests\Integration\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
-use Tests\Integration\Wikibase\InternalSerialization\TestLegacyDeserializerFactory;
+use Tests\Integration\Wikibase\InternalSerialization\TestFactoryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
@@ -23,7 +23,7 @@ class ItemRoundtripTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestLegacyDeserializerFactory::newInstance( $this )->newEntityDeserializer();
+		$this->deserializer = TestFactoryBuilder::newLegacyFactory( $this )->newEntityDeserializer();
 	}
 
 	/**

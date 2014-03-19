@@ -25,7 +25,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestLegacyDeserializerFactory::newInstanceWithDataValueSupport()->newEntityDeserializer();
+		$this->deserializer = TestFactoryBuilder::newLegacyFactoryWithDataValueSupport()->newEntityDeserializer();
 	}
 
 	/**

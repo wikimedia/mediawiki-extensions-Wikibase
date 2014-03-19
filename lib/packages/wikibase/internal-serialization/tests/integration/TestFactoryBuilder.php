@@ -13,13 +13,16 @@ use Wikibase\InternalSerialization\LegacyDeserializerFactory;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TestLegacyDeserializerFactory {
+class TestFactoryBuilder {
 
-	/**
-	 * @param PHPUnit_Framework_TestCase $testCase
-	 * @return DeserializerFactory
-	 */
-	public static function newInstance( PHPUnit_Framework_TestCase $testCase ) {
+	public static function newLegacyFactory( PHPUnit_Framework_TestCase $testCase ) {
+		return new LegacyDeserializerFactory(
+			self::newFakeDataValueDeserializer( $testCase ),
+			new BasicEntityIdParser()
+		);
+	}
+
+	private static function newFakeDataValueDeserializer( PHPUnit_Framework_TestCase $testCase ) {
 		$dataValueDeserializer = $testCase->getMock( 'Deserializers\Deserializer' );
 
 		$dataValueDeserializer->expects( $testCase->any() )
@@ -27,13 +30,24 @@ class TestLegacyDeserializerFactory {
 			->with( $testCase->equalTo( array( 'type' => 'string', 'value' => 'foo' ) ) )
 			->will( $testCase->returnValue( new StringValue( 'foo' ) ) );
 
-		return new LegacyDeserializerFactory(
-			$dataValueDeserializer,
+		return $dataValueDeserializer;
+	}
+
+	public static function newFactory( PHPUnit_Framework_TestCase $testCase ) {
+		return new DeserializerFactory(
+			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()
 		);
 	}
 
-	public static function newInstanceWithDataValueSupport() {
+	public static function newLegacyFactoryWithDataValueSupport() {
+		return new LegacyDeserializerFactory(
+			self::newRealDataValueDeserializer(),
+			new BasicEntityIdParser()
+		);
+	}
+
+	private static function newRealDataValueDeserializer() {
 		$dataValueClasses = array_merge(
 			$GLOBALS['evilDataValueMap'],
 			array(
@@ -46,10 +60,7 @@ class TestLegacyDeserializerFactory {
 			)
 		);
 
-		return new LegacyDeserializerFactory(
-			new DataValueDeserializer( $dataValueClasses ),
-			new BasicEntityIdParser()
-		);
+		return new DataValueDeserializer( $dataValueClasses );
 	}
 
 }

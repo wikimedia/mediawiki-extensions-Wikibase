@@ -4,7 +4,7 @@ namespace Tests\Integration\Wikibase\InternalSerialization\Deserializers;
 
 use DataValues\StringValue;
 use Deserializers\Deserializer;
-use Tests\Integration\Wikibase\InternalSerialization\TestLegacyDeserializerFactory;
+use Tests\Integration\Wikibase\InternalSerialization\TestFactoryBuilder;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -24,7 +24,7 @@ class SnakRoundtripTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestLegacyDeserializerFactory::newInstance( $this )->newSnakDeserializer();
+		$this->deserializer = TestFactoryBuilder::newLegacyFactory( $this )->newSnakDeserializer();
 	}
 
 	/**
