@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_38f209ce",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "From what I see this is completely unused.",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_98d2352b",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "Uh, a \"no cache\" flag! ;-) What about using the same for the other patch?",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_38c9e97b",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "Isn\u0027t this a breaking change (EntityContent is no sub class of Entity) that needs to be at least mentioned somewhere? Hm, are we sure we know and changed all usages?",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_78964151",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "No need for the colons. Just a hint, I\u0027m aware it\u0027s not part of this change. ;-)",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_38a0c999",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an assert ( false )? Would be way less confusing in my opinion.\n\nOr just stick to the default pattern. And try to avoid putting stuff into the try-catch that can\u0027t throw the exception you are expecting.\n\nprotected function loadEntityRevision( ... ) {\n\t$revision \u003d null;\n\ttry {\n\t\t$revision \u003d ...;\n\t} catch ( StorageException $ex ) {\n\t\t$this-\u003edieUsage( ... );\n\t}\n\tif ( !$revision ) { //just do be sure false is fetched\n\t\t$this-\u003edieUsage( ... );\n\t}\n\treturn $revision;\n}\n\nOr:\n\n\tif ( $revision ) {\n\t\treturn $revision;\n\t}\n\t$this-\u003edieUsage( ... );\n\nYour approach is kind of clever but weird.",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b8b179de",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "Prefix for what? Can you please call this $modulePrefix everywhere, in all classes?",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_584dbddf",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "There are a lot more of these in the files touched by this change. Would be nice to clean them all, at least in the files that do have changes anyway.",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_984355b6",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "There are a lot more of these in the files touched by this change. Would be nice to clean them all, at least in the files that do have changes anyway.",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b815f99e",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "Just a question, do we have a style guide for this? is_null or \u003d\u003d\u003d null?",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_9858f58d",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T15:45:14Z",
+      "side": 1,
+      "message": "Isn\u0027t this pointless now, with the change and without being able to use an actual cast? Just rename $entity to $item. It does have an instanceof check above.",
+      "revId": "a222d68a1011f9effe7d1d28bc209e1cb0e93296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
