@@ -59,25 +59,6 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
-	 * Returns the Html for the main Snak.
-	 *
-	 * @param string $formattedValue
-	 * @return string
-	 */
-	protected function getMainSnakHtml( $formattedValue ) {
-		$mainSnakHtml = wfTemplate( 'wb-snak',
-			'wb-mainsnak',
-			'', // Link to property. NOTE: we don't display this ever (instead, we generate it on
-				// Claim group level) If this was a public function, this should be generated
-				// anyhow since important when displaying a Claim on its own.
-			'', // type selector, JS only
-			( $formattedValue === '' ) ? '&nbsp;' : $formattedValue
-		);
-
-		return $mainSnakHtml;
-	}
-
-	/**
 	 * Builds and returns the HTML representing a single WikibaseEntity's claim.
 	 *
 	 * @since 0.4
@@ -90,9 +71,7 @@ class ClaimHtmlGenerator {
 	public function getHtmlForClaim( Claim $claim, $editSectionHtml = null ) {
 		wfProfileIn( __METHOD__ );
 
-		$mainSnakHtml = $this->getMainSnakHtml(
-			$this->getFormattedSnakValue( $claim->getMainSnak() )
-		);
+		$mainSnakHtml = $this->getSnakHtml( $claim->getMainSnak(), false, true );
 
 		$rankHtml = '';
 		$referencesHeading = '';
@@ -219,7 +198,7 @@ class ClaimHtmlGenerator {
 		$i = 0;
 
 		foreach( $snaks as $snak ) {
-			$snaksHtml .= $this->getSnakHtml( $snak, ( $i++ === 0 ) );
+			$snaksHtml .= $this->getSnakHtml( $snak, ( $i++ === 0 ), false );
 		}
 
 		return wfTemplate(
@@ -233,9 +212,11 @@ class ClaimHtmlGenerator {
 	 *
 	 * @param Snak $snak
 	 * @param boolean $showPropertyLink
+	 * @param boolean $showNonValueSnakContents Whether to render snak content for snaks
+	 *																					which are not value snaks
 	 * @return string
 	 */
-	protected function getSnakHtml( $snak, $showPropertyLink = false ) {
+	protected function getSnakHtml( $snak, $showPropertyLink = false, $showNonValueSnakContents = false ) {
 		$propertyLink = '';
 
 		if( $showPropertyLink ) {
@@ -250,12 +231,19 @@ class ClaimHtmlGenerator {
 			);
 		}
 
+		$formattedValue = '';
+		if( $showNonValueSnakContents || $snak->getType() === 'value' ) {
+			$formattedValue = $this->getFormattedSnakValue( $snak );
+		}
+
+		if( $formattedValue === '' ) {
+			$formattedValue = '&nbsp;'
+		}
+
 		return wfTemplate( 'wb-snak',
-			'wb-snakview',
 			// Display property link only once for snaks featuring the same property:
 			$propertyLink,
-			'',
-			( $snak->getType() === 'value' ) ? $this->getFormattedSnakValue( $snak ) : ''
+			$formattedValue
 		);
 	}
 
