@@ -59,7 +59,17 @@ class EntityDeserializer implements Deserializer {
 	}
 
 	private function fromUnknownSerialization() {
-		// TODO
+		try {
+			return $this->legacyDeserializer->deserialize( $this->serialization );
+		}
+		catch ( DeserializationException $ex ) {}
+
+		try {
+			return $this->currentDeserializer->deserialize( $this->serialization );
+		}
+		catch ( DeserializationException $ex ) {}
+
+		throw new DeserializationException( 'The provided serialization is not a valid entity' );
 	}
 
 }
