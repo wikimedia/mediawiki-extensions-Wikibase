@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_db0b07d8",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:56:42Z",
+      "side": 1,
+      "message": "In this case I actually prefer option 1: pass by reference. The reason may be that I coded Java for a few years and passing objects by reference (but only objects) is the only way to do this in Java.\n\nI wonder why this chain of putting the OutputPage object in and out is necessary? I don\u0027t see a strong reason. Just remove all \"return $out;\" and \"$out \u003d\", pass objects by reference and everything should still work.",
+      "revId": "b2389d087ccdb8b127a0acf45eb1d588972ca25b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_bb27335f",
+        "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T16:56:42Z",
+      "side": 1,
+      "message": "The question if this class makes sense depends on how you define \"multiple things\". For example, in BeforePageDisplayHandler both addModuleStyles (CSS) and addModules (JS) are called, but addJsConfigVars (JS) gets it\u0027s own class? I agree with Daniel, this class here doesn\u0027t do a nice split.",
+      "revId": "b2389d087ccdb8b127a0acf45eb1d588972ca25b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
