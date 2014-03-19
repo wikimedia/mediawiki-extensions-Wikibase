@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_75a08d3e",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:17:51Z",
+      "side": 1,
+      "message": "we can:\n1) pass $out by reference\n2) do add modules in the static hook method with no tests\n3) do this.\n\nwhat do you prefer?\n\ni prefer option 3",
+      "parentUuid": "ee14bf34_b569851f",
+      "revId": "f190f70b59194b51379f134846073b5e0017217c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_7563ed3b",
         "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
         "patchSetId": 20
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-19T09:53:41Z",
       "side": 1,
       "message": "Still seems overkill to have a class just for this.",
+      "revId": "f190f70b59194b51379f134846073b5e0017217c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_358215aa",
+        "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:17:51Z",
+      "side": 1,
+      "message": "then the handler is doing multiple things. I think we want to avoid that, right?\n\nsoon as i combine everything, likely someone will tell me to split it up.",
+      "parentUuid": "ee14bf34_7563ed3b",
       "revId": "f190f70b59194b51379f134846073b5e0017217c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
