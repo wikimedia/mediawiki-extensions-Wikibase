@@ -68,6 +68,10 @@ catch ( DeserializationException $ex ) {
 }
 ```
 
+All access to services provided by this library should happen through the
+SerializerFactory and DeserializerFactory. The rest of the code is an implementation
+detail which users should not know about.
+
 ## Library structure
 
 The Wikibase DataModel objects can all be serialized to a generic format from which the objects
