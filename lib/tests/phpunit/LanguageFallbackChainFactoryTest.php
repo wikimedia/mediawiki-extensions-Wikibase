@@ -2,7 +2,10 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use MWException;
+use RequestContext;
+use User;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
@@ -374,6 +377,30 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 					'de',
 				),
 			),
+		);
+	}
+
+	/**
+	 * @dataProvider newFromContextForPageViewProvider
+	 */
+	public function testNewFromContextForPageView( $experimental, $anonymousPageViewCached, $msg ) {
+		$context = new RequestContext();
+		$context->setLanguage( Language::factory( 'es' ) );
+		$user = User::newFromId( 0 );
+		$context->setUser( $user );
+
+		$factory = new LanguageFallbackChainFactory( false, true );
+		$fallbackChain = $factory->newFromContextForPageView( $context );
+
+		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChain', $fallbackChain, $msg );
+	}
+
+	public function newFromContextForPageViewProvider() {
+		return array(
+			array( false, true, 'non-experimental, anon cached page view' ),
+			array( false, false, 'non-experimental, not anon cached page view' ),
+			array( true, true, 'experimental, anon cached page view' ),
+			array( true, false, 'experimental, not anon cached page view' )
 		);
 	}
 }

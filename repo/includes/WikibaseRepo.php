@@ -318,9 +318,11 @@ class WikibaseRepo {
 	public function getLanguageFallbackChainFactory() {
 		if ( $this->languageFallbackChainFactory === null ) {
 			global $wgUseSquid;
+
 			// The argument is about whether full page output (OutputPage, specifically JS vars in it currently)
 			// is cached for anons, where the only caching mechanism in use now is Squid.
 			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory(
+				defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES,
 				/* $anonymousPageViewCached = */ $wgUseSquid
 			);
 		}
