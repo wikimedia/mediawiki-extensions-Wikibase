@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_b569851f",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:53:41Z",
+      "side": 1,
+      "message": "Still wondering about this. Why return the OutputObject? We just want to modify it, no? Is the reason that the OutputPage object can be relaced?",
+      "revId": "f190f70b59194b51379f134846073b5e0017217c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7563ed3b",
+        "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:53:41Z",
+      "side": 1,
+      "message": "Still seems overkill to have a class just for this.",
+      "revId": "f190f70b59194b51379f134846073b5e0017217c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
