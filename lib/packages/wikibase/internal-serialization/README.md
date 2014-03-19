@@ -106,6 +106,7 @@ Initial release with these features:
 * [Wikibase InternalSerialization on Packagist](https://packagist.org/packages/wikibase/internal-serialization)
 * [Wikibase InternalSerialization on TravisCI](https://travis-ci.org/wmde/WikibaseInternalSerialization)
 * [Wikibase InternalSerialization on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/WikibaseInternalSerialization/)
+* [Wikibase InternalSerialization on Ohloh](https://www.ohloh.net/p/WikibaseInternalSerialization)
 
 ## See also
 
