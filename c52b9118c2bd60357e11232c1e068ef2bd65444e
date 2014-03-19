@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b505057f",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:36:48Z",
+      "side": 1,
+      "message": "If you insist. But I think in this context, we just want something to look up titles; the member name should be descriptive of the role and purpose of the object, not the type.",
+      "parentUuid": "ee14bf34_fffb5cb8",
+      "revId": "c52b9118c2bd60357e11232c1e068ef2bd65444e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_1fff30a9",
         "filename": "repo/includes/api/ApiWikibase.php",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_d500796f",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:36:48Z",
+      "side": 1,
+      "message": "It does. EntityRevisionLookup extends EntityLookup.",
+      "parentUuid": "ee14bf34_1fff30a9",
+      "revId": "c52b9118c2bd60357e11232c1e068ef2bd65444e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_9f22204f",
         "filename": "repo/includes/api/ApiWikibase.php",
         "patchSetId": 9
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-18T22:32:11Z",
       "side": 1,
       "message": "what can\u0027t happen?",
+      "revId": "c52b9118c2bd60357e11232c1e068ef2bd65444e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_95fa0172",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:36:48Z",
+      "side": 1,
+      "message": "This line is unreachable, unless dieUsage() returns, which it never should.",
+      "parentUuid": "ee14bf34_9f22204f",
       "revId": "c52b9118c2bd60357e11232c1e068ef2bd65444e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_75ff6d63",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:36:48Z",
+      "side": 1,
+      "message": "bah. PhpStorm puts it in, I keep forgetting to remove it.",
+      "parentUuid": "ee14bf34_dfd77827",
+      "revId": "c52b9118c2bd60357e11232c1e068ef2bd65444e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_dfbe58d1",
         "filename": "repo/includes/content/ItemHandler.php",
         "patchSetId": 9
@@ -115,6 +187,24 @@
       "writtenOn": "2014-03-18T22:32:11Z",
       "side": 1,
       "message": "SieLinkLookup?",
+      "revId": "c52b9118c2bd60357e11232c1e068ef2bd65444e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_55f46983",
+        "filename": "repo/includes/content/ItemHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:36:48Z",
+      "side": 1,
+      "message": "oops :)",
+      "parentUuid": "ee14bf34_dfbe58d1",
       "revId": "c52b9118c2bd60357e11232c1e068ef2bd65444e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
