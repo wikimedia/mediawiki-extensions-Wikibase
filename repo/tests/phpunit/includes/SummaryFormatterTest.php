@@ -119,7 +119,9 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 		$summary->setAction( $action );
 		$summary->setLanguage( $language );
 
-		call_user_func_array( array( $summary, 'addAutoCommentArgs' ), $parts );
+		if ( !empty( $parts ) ) {
+			call_user_func_array( array( $summary, 'addAutoCommentArgs' ), $parts );
+		}
 
 		$formatter = $this->newFormatter();
 		$result = $formatter->formatAutoComment( $summary );
@@ -154,7 +156,9 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 	public function testFormatAutoSummary( array $parts, $expected ) {
 		$summary = new Summary();
 
-		call_user_func_array( array( $summary, 'addAutoSummaryArgs' ), $parts );
+		if ( !empty( $parts ) ) {
+			call_user_func_array( array( $summary, 'addAutoSummaryArgs' ), $parts );
+		}
 
 		$formatter = $this->newFormatter();
 		$result = $formatter->formatAutoSummary( $summary );
@@ -188,8 +192,12 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 	 */
 	public function testToStringArgHandling( array $commentArgs, array $summaryArgs, $expected ) {
 		$summary = new Summary( 'foobar' );
-		call_user_func_array( array( $summary, 'addAutoCommentArgs' ), $commentArgs );
-		call_user_func_array( array( $summary, 'addAutoSummaryArgs' ), $summaryArgs );
+		if ( !empty( $commentArgs ) ) {
+			call_user_func_array( array( $summary, 'addAutoCommentArgs' ), $commentArgs );
+		}
+		if ( !empty( $summaryArgs ) ) {
+			call_user_func_array( array( $summary, 'addAutoSummaryArgs' ), $summaryArgs );
+		}
 
 		$formatter = $this->newFormatter();
 		$this->assertEquals( $expected, $formatter->formatSummary( $summary ) );

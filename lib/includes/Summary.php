@@ -28,9 +28,9 @@ class Summary {
 	protected $actionName;
 
 	/**
-	 * @var Language
+	 * @var string
 	 */
-	protected $language;
+	protected $languageCode;
 
 	/**
 	 * @var array
@@ -61,16 +61,16 @@ class Summary {
 	 *
 	 * @param string $moduleName The module part of the auto comment
 	 * @param string $actionName The action part of the auto comment
-	 * @param string $language   The language to use as the second auto comment argument
+	 * @param string $languageCode The language to use as the second auto comment argument
 	 * @param array $commentArgs The arguments to the auto comment
 	 * @param array $summaryArgs The arguments to the auto summary
 	 */
-	public function __construct( $moduleName = null, $actionName = null, $language = null,
+	public function __construct( $moduleName = null, $actionName = null, $languageCode = null,
 		$commentArgs = array(), $summaryArgs = array()
 	) {
 		$this->moduleName = $moduleName;
 		$this->actionName = $actionName;
-		$this->language = $language === null ? null : (string)$language;
+		$this->languageCode = $languageCode === null ? null : (string)$languageCode;
 		$this->commentArgs = $commentArgs;
 		$this->summaryArgs = $summaryArgs;
 	}
@@ -93,8 +93,8 @@ class Summary {
 	 *
 	 * @param string $lang the language code
 	 */
-	public function setLanguage( $lang = null ) {
-		$this->language = $lang === null ? null : (string)$lang;
+	public function setLanguage( $languageCode = null ) {
+		$this->languageCode = $languageCode === null ? null : (string)$languageCode;
 	}
 
 	/**
@@ -160,7 +160,7 @@ class Summary {
 	 * @return string|null
 	 */
 	public function getLanguageCode() {
-		return $this->language;
+		return $this->languageCode;
 	}
 
 	/**
@@ -185,13 +185,11 @@ class Summary {
 	 *
 	 * @since 0.4
 	 *
-	 * @param mixed [$args,...] Parts to be stringed together
+	 * @param mixed $args,... Parts to be stringed together
 	 */
-	public function addAutoCommentArgs( /*...*/ ) {
-		$args = func_get_args();
-
-		if ( isset( $args[0] ) && is_array( $args[0] ) ) {
-			$args = $args[0];
+	public function addAutoCommentArgs( $args /*...*/ ) {
+		if ( !is_array( $args ) ) {
+			$args = func_get_args();
 		}
 
 		$this->commentArgs = array_merge( $this->commentArgs, $args );
@@ -202,13 +200,11 @@ class Summary {
 	 *
 	 * @since 0.4
 	 *
-	 * @param mixed [$args,...] Parts to be stringed together
+	 * @param mixed $args,... Parts to be stringed together
 	 */
-	public function addAutoSummaryArgs( /*...*/ ) {
-		$args = func_get_args();
-
-		if ( isset( $args[0] ) && is_array( $args[0] ) ) {
-			$args = $args[0];
+	public function addAutoSummaryArgs( $args /*...*/ ) {
+		if ( !is_array( $args ) ) {
+			$args = func_get_args();
 		}
 
 		$this->summaryArgs = array_merge( $this->summaryArgs, $args );
