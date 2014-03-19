@@ -6,7 +6,7 @@ use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer
@@ -22,7 +22,7 @@ class SiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = new SiteLinkListDeserializer();
+		$this->deserializer = new LegacySiteLinkListDeserializer();
 	}
 
 	public function invalidSerializationProvider() {

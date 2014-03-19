@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakListDeserializer implements Deserializer {
+class LegacySnakListDeserializer implements Deserializer {
 
 	/**
 	 * @var Deserializer

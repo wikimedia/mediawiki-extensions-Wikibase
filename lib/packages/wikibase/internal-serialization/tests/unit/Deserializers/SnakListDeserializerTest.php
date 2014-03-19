@@ -6,8 +6,8 @@ use Deserializers\Deserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\SnakListDeserializer
@@ -23,9 +23,9 @@ class SnakListDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$snakDeserializer = new SnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
+		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
 
-		$this->deserializer = new SnakListDeserializer( $snakDeserializer );
+		$this->deserializer = new LegacySnakListDeserializer( $snakDeserializer );
 	}
 
 	public function invalidSerializationProvider() {

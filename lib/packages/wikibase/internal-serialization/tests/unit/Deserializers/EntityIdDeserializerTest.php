@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer
@@ -23,7 +23,7 @@ class EntityIdDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$this->deserializer = new EntityIdDeserializer( new BasicEntityIdParser() );
+		$this->deserializer = new LegacyEntityIdDeserializer( new BasicEntityIdParser() );
 	}
 
 	public function invalidSerializationProvider() {

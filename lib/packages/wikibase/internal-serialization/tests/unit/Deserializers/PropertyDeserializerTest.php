@@ -5,9 +5,9 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer;
-use Wikibase\InternalSerialization\Deserializers\PropertyDeserializer;
-use Wikibase\InternalSerialization\Deserializers\TermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\PropertyDeserializer
@@ -23,9 +23,9 @@ class PropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$this->deserializer = new PropertyDeserializer(
-			new EntityIdDeserializer( new BasicEntityIdParser() ),
-			new TermsDeserializer()
+		$this->deserializer = new LegacyPropertyDeserializer(
+			new LegacyEntityIdDeserializer( new BasicEntityIdParser() ),
+			new LegacyTermsDeserializer()
 		);
 	}
 

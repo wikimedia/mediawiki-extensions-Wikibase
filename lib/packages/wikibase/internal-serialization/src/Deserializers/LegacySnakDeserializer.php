@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakDeserializer implements Deserializer {
+class LegacySnakDeserializer implements Deserializer {
 
 	private $dataValueDeserializer;
 

@@ -7,7 +7,7 @@ use Deserializers\Deserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\SnakDeserializer
@@ -30,7 +30,7 @@ class SnakDeserializerTest extends \PHPUnit_Framework_TestCase {
 			->with( $this->equalTo( array( 'type' => 'string', 'value' => 'foo' ) ) )
 			->will( $this->returnValue( new StringValue( 'foo' ) ) );
 
-		$this->deserializer = new SnakDeserializer( $dataValueDeserializer );
+		$this->deserializer = new LegacySnakDeserializer( $dataValueDeserializer );
 	}
 
 	public function invalidSerializationProvider() {

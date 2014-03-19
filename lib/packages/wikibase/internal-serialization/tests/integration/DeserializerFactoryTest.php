@@ -4,6 +4,7 @@ namespace Tests\Integration\Wikibase\InternalSerialization;
 
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -26,10 +27,10 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->factory = TestDeserializerFactory::newInstance( $this );
 	}
 
-	public function testEntityIdDeserializer() {
+	public function testEntityDeserializer() {
 		$this->assertEquals(
-			new ItemId( 'Q1' ),
-			$this->factory->newEntityIdDeserializer()->deserialize( 'Q1' )
+			Property::newFromType( 'foo' ),
+			$this->factory->newEntityDeserializer()->deserialize( array( 'datatype' => 'foo' ) )
 		);
 	}
 
@@ -37,30 +38,6 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(
 			new PropertyNoValueSnak( 1 ),
 			$this->factory->newSnakDeserializer()->deserialize( array( 'novalue', 1 ) )
-		);
-	}
-
-	public function testClaimDeserializer() {
-		$this->assertEquals(
-			new Claim( new PropertyNoValueSnak( 1 ) ),
-			$this->factory->newClaimDeserializer()->deserialize(
-				array(
-					'm' => array( 'novalue', 1 ),
-					'q' => array(),
-					'g' => null
-				)
-			)
-		);
-	}
-
-	public function testSiteLinkListDeserializer() {
-		$this->assertEquals(
-			new SiteLinkList( array( new SiteLink( 'foo', 'bar' ) ) ),
-			$this->factory->newSiteLinkListDeserializer()->deserialize(
-				array(
-					'foo' => 'bar',
-				)
-			)
 		);
 	}
 

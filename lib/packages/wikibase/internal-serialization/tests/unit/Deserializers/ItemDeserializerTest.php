@@ -9,13 +9,13 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\InternalSerialization\Deserializers\ClaimDeserializer;
-use Wikibase\InternalSerialization\Deserializers\EntityIdDeserializer;
-use Wikibase\InternalSerialization\Deserializers\ItemDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SiteLinkListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SnakListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\TermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\ItemDeserializer
@@ -31,20 +31,20 @@ class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$idDeserializer = new EntityIdDeserializer( new BasicEntityIdParser() );
+		$idDeserializer = new LegacyEntityIdDeserializer( new BasicEntityIdParser() );
 
-		$snakDeserializer = new SnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
+		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
 
-		$claimDeserializer = new ClaimDeserializer(
+		$claimDeserializer = new LegacyClaimDeserializer(
 			$snakDeserializer,
-			new SnakListDeserializer( $snakDeserializer )
+			new LegacySnakListDeserializer( $snakDeserializer )
 		);
 
-		$this->deserializer = new ItemDeserializer(
+		$this->deserializer = new LegacyItemDeserializer(
 			$idDeserializer,
-			new SiteLinkListDeserializer(),
+			new LegacySiteLinkListDeserializer(),
 			$claimDeserializer,
-			new TermsDeserializer()
+			new LegacyTermsDeserializer()
 		);
 	}
 

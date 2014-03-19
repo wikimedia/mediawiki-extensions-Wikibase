@@ -9,9 +9,9 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\InternalSerialization\Deserializers\ClaimDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SnakDeserializer;
-use Wikibase\InternalSerialization\Deserializers\SnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\ClaimDeserializer
@@ -27,10 +27,10 @@ class ClaimDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$snakDeserializer = new SnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
-		$qualifiersDeserializer = new SnakListDeserializer( $snakDeserializer );
+		$snakDeserializer = new LegacySnakDeserializer( $this->getMock( 'Deserializers\Deserializer' ) );
+		$qualifiersDeserializer = new LegacySnakListDeserializer( $snakDeserializer );
 
-		$this->deserializer = new ClaimDeserializer( $snakDeserializer, $qualifiersDeserializer );
+		$this->deserializer = new LegacyClaimDeserializer( $snakDeserializer, $qualifiersDeserializer );
 	}
 
 	public function invalidSerializationProvider() {
