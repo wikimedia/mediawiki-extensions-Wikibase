@@ -228,6 +228,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			'fromid' => EntityTestHelper::getId( 'Empty' ),
 			'toid' => EntityTestHelper::getId( 'Empty2' ),
 			'summary' => 'CustomSummary!',
+			'bot' => false,
 		);
 		if( $ignoreConflicts !== null ){
 			$params['ignoreconflicts'] = $ignoreConflicts;
