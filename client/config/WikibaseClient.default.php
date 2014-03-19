@@ -37,7 +37,6 @@ return call_user_func( function() {
 			'wikibase-property' => 'Property'
 		),
 		'allowDataTransclusion' => true,
-		'enableSiteLinkWidget' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinks' => array(),
 
