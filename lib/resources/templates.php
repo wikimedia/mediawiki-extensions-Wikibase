@@ -111,8 +111,8 @@ HTML;
 		<div class="wb-snak-property" dir="auto">$2</div>
 	</div>
 	<div class="wb-snak-value-container" dir="auto">
-		<div class="wb-snak-typeselector">$3</div>
-		<div class="wb-snak-value">$4</div>
+		<div class="wb-snak-typeselector"></div>
+		<div class="wb-snak-value">$3</div>
 	</div>
 </div>
 HTML;
