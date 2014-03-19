@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_e93de18b",
+        "filename": "lib/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T19:45:04Z",
+      "side": 1,
+      "message": "Not related to this patch, but the call\n\nJSON.stringify( dataValue.toJSON() )\n\nclearly must be outside of the loop. Is this worth an other patch or is this stuff going away anyway?",
+      "revId": "ca1262e24d411bfee9506dcf59f18afad1c391fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
