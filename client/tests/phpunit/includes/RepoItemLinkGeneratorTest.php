@@ -101,7 +101,6 @@ class RepoItemLinkGeneratorTest extends \MediaWikiTestCase {
 			$namespaceChecker,
 			$repoLinker,
 			$entityIdParser,
-			true,
 			'wikipedia'
 		);
 
