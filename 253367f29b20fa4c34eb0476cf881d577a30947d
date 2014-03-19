@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_1524b106",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:48:08Z",
+      "side": 1,
+      "message": "This uses the actually DB implementation, which means that the generated SQL may use syntax specific to some DBMS. Eek. Why can\u0027t we use a mock? No need to even generate valid SQL...",
+      "revId": "253367f29b20fa4c34eb0476cf881d577a30947d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_9510c1ae",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T09:48:08Z",
+      "side": 1,
+      "message": "perhaps use a regex then, to make this more robust against irrelevant changes. Or compress whitespace (and convert case) before comparing.",
+      "revId": "253367f29b20fa4c34eb0476cf881d577a30947d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
