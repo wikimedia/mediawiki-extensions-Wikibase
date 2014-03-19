@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_1a0a9e29",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_09f25ecd",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_c9c34660",
         "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_fa06ca22",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_c9c34660",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_e9a5eab2",
         "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
         "patchSetId": 11
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-18T18:28:38Z",
       "side": 1,
       "message": "This isn\u0027t a getter, I\u0027d prefer \"make\" or \"build\" as a verb here.",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d5fbd90f",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_e9a5eab2",
       "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -98,6 +152,24 @@
       "writtenOn": "2014-03-18T18:28:38Z",
       "side": 1,
       "message": "Uh, we *could* actually check that $conds has been modified correctly? We should really test that the user options and request params are evaluated correctly.",
+      "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7a1bda82",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T05:48:19Z",
+      "side": 1,
+      "message": "gah, i uploaded the patch as WIP (for hoo to review / work on) and then didn\u0027t come back to this.\n\nfixed!",
+      "parentUuid": "ee14bf34_a9aff290",
       "revId": "5d57c07ec567be1fc731615177dee6103cd9bcea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
