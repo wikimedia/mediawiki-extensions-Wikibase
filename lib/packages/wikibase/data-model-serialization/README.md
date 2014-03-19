@@ -102,6 +102,11 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
+### 1.0 (dev)
+
+* Usage of DataModel 0.7.x rather than 0.6.x.
+* Usage of Serialization ~3.1 rather than ~2.1.
+
 ### 0.1 (2014-02-22)
 
 Initial release with these features:
