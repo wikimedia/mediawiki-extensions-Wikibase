@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_69ff91a8",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T20:03:53Z",
+      "side": 1,
+      "message": "The method is called \"wrap\". Therefor I would consider an implementation like\n\nif( $html !\u003d\u003d \u0027\u0027 ) {\n\t$html \u003d wfTemplate( \u0027wb-listview\u0027, $html );\n}\n$return $html;\n\nappropriate. But this is obviously a matter of taste. :-)",
+      "revId": "e95c4184754ff9d5819fa116f331c81e1b258419",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
