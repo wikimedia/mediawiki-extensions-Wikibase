@@ -86,10 +86,10 @@ an instance of Serializers\Serializer.
 The library contains deserializers that handle the legacy internal serialization format. Those
 can be found in Wikibase\InternalSerialization\Deserializers, and all start with the word "Legacy".
 The remaining deserializers in this namespace are not specific to any format. They detect the one
-that is used and foreward to the appropriate deserializer. These deserializers can thus deal with
+that is used and forward to the appropriate deserializer. These deserializers can thus deal with
 serializations in the old legacy format and those in the new one.
 
-The DeserializationFactory only returns deserializers that can deal with both the legacy and the
+The DeserializerFactory only returns deserializers that can deal with both the legacy and the
 new format.
 
 ## Tests

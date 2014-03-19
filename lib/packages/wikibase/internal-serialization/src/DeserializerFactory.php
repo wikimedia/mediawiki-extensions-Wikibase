@@ -8,6 +8,15 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 
 /**
+ * Public interface of the library for constructing deserializers.
+ * Direct access to deserializers is prohibited, users are only allowed to
+ * know about this interface. Also note that the return type of the methods
+ * is "Deserializer". You are also not allowed to know which concrete
+ * implementation is returned.
+ *
+ * The returned deserializers can handle both serializations in the
+ * legacy internal format and in the new one.
+ *
  * @since 1.0
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

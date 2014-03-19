@@ -15,6 +15,10 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
+ * This factory is package private. Outside access is prohibited.
+ *
+ * Factory for constructing deserializers that implement handling for the legacy format.
+ *
  * @since 1.0
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
