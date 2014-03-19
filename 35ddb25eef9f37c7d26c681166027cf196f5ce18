@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_b8105905",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T14:58:52Z",
+      "side": 1,
+      "message": "Isn\u0027t this done? Or does this refer to an other injection?",
+      "revId": "35ddb25eef9f37c7d26c681166027cf196f5ce18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_58fffda7",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T14:58:52Z",
+      "side": 1,
+      "message": "I find it a lot easier to read if every mock for a class is split in it\u0027s own private method. But this is obviously nitpicking and a matter of taste and shouldn\u0027t block the change itself.",
+      "revId": "35ddb25eef9f37c7d26c681166027cf196f5ce18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
