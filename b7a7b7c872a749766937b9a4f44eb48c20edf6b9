@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_29c4f910",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-19T20:43:23Z",
+      "side": 1,
+      "message": "In this case the change replaces the class name \"wb-mainsnak\" with \"wb-snakview\". I\u0027m not sure if it\u0027s a good idea to remove it. \"MainSnak\" is a common term in the code base. Don\u0027t you think it makes sense to have an easy way to distinguish the main snakview from other snakviews? What about class\u003d\"wb-snakview wb-mainsnak\"? I\u0027m aware it\u0027s not really needed. One can simply use longer CSS selectors to do the same. But I think it\u0027s convenient to have it, especially for user CSS.",
+      "revId": "b7a7b7c872a749766937b9a4f44eb48c20edf6b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
