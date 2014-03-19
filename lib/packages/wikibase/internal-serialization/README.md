@@ -95,7 +95,11 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ### 1.0 (dev)
 
-* 
+Initial release with these features:
+
+* Serializers for the main Wikibase DataModel (0.7) objects
+* Deserializers for the main Wikibase DataModel (0.7) objects
+
 
 ## Links
 
