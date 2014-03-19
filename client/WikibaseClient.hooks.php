@@ -503,7 +503,7 @@ final class ClientHooks {
 			// (as that only runs after the element initially appeared).
 			$out->addModules( 'wikibase.client.nolanglinks' );
 
-			if ( $settings->getSetting( 'enableSiteLinkWidget' ) === true && $user->isLoggedIn() === true ) {
+			if ( $user->isLoggedIn() === true ) {
 				// Add the JavaScript which lazy-loads the link item widget
 				// (needed as jquery.wikibase.linkitem has pretty heavy dependencies)
 				$out->addModules( 'wikibase.client.linkitem.init' );
@@ -588,7 +588,6 @@ final class ClientHooks {
 			WikibaseClient::getDefaultInstance()->getNamespaceChecker(),
 			$repoLinker,
 			$entityIdParser,
-			$settings->getSetting( 'enableSiteLinkWidget' ),
 			$siteGroup
 		);
 

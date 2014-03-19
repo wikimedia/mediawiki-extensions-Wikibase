@@ -19,8 +19,6 @@ class RepoItemLinkGenerator {
 
 	protected $entityIdParser;
 
-	protected $enableSiteLinkWidget;
-
 	protected $siteGroup;
 
 	/**
@@ -29,16 +27,14 @@ class RepoItemLinkGenerator {
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param RepoLinker       $repoLinker
 	 * @param EntityIdParser   $entityIdParser
-	 * @param boolean          $enableSiteLinkWidget
 	 * @param string           $siteGroup
 	 */
 	public function __construct( NamespaceChecker $namespaceChecker, RepoLinker $repoLinker,
-		EntityIdParser $entityIdParser, $enableSiteLinkWidget, $siteGroup ) {
+		EntityIdParser $entityIdParser, $siteGroup ) {
 
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
 		$this->entityIdParser = $entityIdParser;
-		$this->enableSiteLinkWidget = $enableSiteLinkWidget;
 		$this->siteGroup = $siteGroup;
 	}
 
@@ -63,7 +59,7 @@ class RepoItemLinkGenerator {
 				// link to the associated item on the repo
 				$editLink = $this->getEditLinksLink( $entityId );
 			} else {
-				if ( $this->enableSiteLinkWidget === true && ! $isAnon ) {
+				if ( !$isAnon ) {
 					$editLink = $this->getAddLinksLink();
 				}
 			}
