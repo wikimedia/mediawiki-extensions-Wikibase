@@ -10,12 +10,12 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\SnakListDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakListDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacySnakListDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer

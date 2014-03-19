@@ -18,12 +18,12 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\ItemDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer
