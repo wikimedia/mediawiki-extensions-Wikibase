@@ -125,7 +125,6 @@ class ClaimHtmlGenerator {
 		// @todo: Use 'wb-claim' or 'wb-statement' template accordingly
 		// @todo: get rid of usage of global wfTemplate function
 		$claimHtml = wfTemplate( 'wb-statement',
-			'', // additional classes
 			$rankHtml,
 			$claim->getGuid(),
 			$mainSnakHtml,

@@ -94,11 +94,11 @@ HTML;
 
 	$templates['wb-claim'] =
 <<<HTML
-<div class="wb-claim wb-claim-$1 $2">
+<div class="wb-claim wb-claim-$1">
 	<div class="wb-claim-mainsnak" dir="auto">
-		$3 <!-- wb-snak (Main Snak) -->
+		$2 <!-- wb-snak (Main Snak) -->
 	</div>
-	<div class="wb-claim-qualifiers">$4</div>
+	<div class="wb-claim-qualifiers">$3</div>
 </div>
 HTML;
 
@@ -121,18 +121,18 @@ HTML;
 	// the non-JS toolbar to attach to. This parameter should be removed.
 	$templates['wb-statement'] =
 <<<HTML
-<div class="wb-statement wb-statementview $1">
-	<div class="wb-statement-rank">$2</div>
-	<div class="wb-claim wb-claim-$3">
+<div class="wb-statement wb-statementview">
+	<div class="wb-statement-rank">$1</div>
+	<div class="wb-claim wb-claim-$2">
 		<div class="wb-claim-mainsnak" dir="auto">
-			$4 <!-- wb-snak (Main Snak) -->
+			$3 <!-- wb-snak (Main Snak) -->
 		</div>
-		<div class="wb-claim-qualifiers wb-statement-qualifiers">$5</div>
+		<div class="wb-claim-qualifiers wb-statement-qualifiers">$4</div>
 	</div>
-	$6 <!-- wikibase-toolbar -->
-	<div class="wb-statement-references-heading">$7</div>
+	$5 <!-- wikibase-toolbar -->
+	<div class="wb-statement-references-heading">$6</div>
 	<div class="wb-statement-references">
-		$8 <!-- [0,*] wb-referenceview -->
+		$7 <!-- [0,*] wb-referenceview -->
 	</div>
 </div>
 HTML;
