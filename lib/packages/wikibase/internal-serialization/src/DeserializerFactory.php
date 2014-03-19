@@ -3,16 +3,9 @@
 namespace Wikibase\InternalSerialization;
 
 use Deserializers\Deserializer;
+use Wikibase\DataModel\DeserializerFactory as CurrentDeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 
 /**
  * @since 1.0
@@ -21,93 +14,29 @@ use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
  */
 class DeserializerFactory {
 
-	private $dataValueDeserializer;
-	private $idParser;
+	/**
+	 * @var LegacyDeserializerFactory
+	 */
+	private $legacyFactory;
+
+	/**
+	 * @var CurrentDeserializerFactory
+	 */
+	private $currentFactory;
 
 	public function __construct( Deserializer $dataValueDeserializer, EntityIdParser $idParser ) {
-		$this->dataValueDeserializer = $dataValueDeserializer;
-		$this->idParser = $idParser;
+		$this->legacyFactory = new LegacyDeserializerFactory( $dataValueDeserializer, $idParser );
+		$this->currentFactory = new CurrentDeserializerFactory( $dataValueDeserializer, $idParser );
 	}
 
 	/**
 	 * @return Deserializer
 	 */
 	public function newEntityDeserializer() {
-		// TODO: comparability layer
-		return new LegacyEntityDeserializer(
-			$this->newItemDeserializer(),
-			$this->newPropertyDeserializer()
+		return new EntityDeserializer(
+			$this->legacyFactory->newEntityDeserializer(),
+			$this->currentFactory->newEntityDeserializer()
 		);
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	private function newItemDeserializer() {
-		return new LegacyItemDeserializer(
-			$this->newEntityIdDeserializer(),
-			$this->newSiteLinkListDeserializer(),
-			$this->newClaimDeserializer(),
-			$this->newTermsDeserializer()
-		);
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	private function newPropertyDeserializer() {
-		return new LegacyPropertyDeserializer(
-			$this->newEntityIdDeserializer(),
-			$this->newTermsDeserializer()
-		);
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	private function newEntityIdDeserializer() {
-		return new LegacyEntityIdDeserializer( $this->idParser );
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	private function newTermsDeserializer() {
-		return new LegacyTermsDeserializer();
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	private function newSiteLinkListDeserializer() {
-		return new LegacySiteLinkListDeserializer();
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	private function newClaimDeserializer() {
-		$snakDeserializer = $this->newSnakDeserializer();
-
-		return new LegacyClaimDeserializer(
-			$snakDeserializer,
-			new LegacySnakListDeserializer( $snakDeserializer )
-		);
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	private function newSnakListDeserializer() {
-		return new LegacySnakListDeserializer( $this->newSnakDeserializer() );
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	public function newSnakDeserializer() {
-		// TODO: comparability layer
-		return new LegacySnakDeserializer( $this->dataValueDeserializer );
 	}
 
 }

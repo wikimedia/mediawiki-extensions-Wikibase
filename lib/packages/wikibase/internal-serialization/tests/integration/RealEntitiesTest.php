@@ -2,14 +2,11 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
 use SplFileInfo;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
  * @covers Wikibase\InternalSerialization\DeserializerFactory
@@ -25,7 +22,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestDeserializerFactory::newInstanceWithDataValueSupport()->newEntityDeserializer();
+		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()->newEntityDeserializer();
 	}
 
 	/**
@@ -58,7 +55,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function itemSerializationProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/' );
+		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/legacy/' );
 	}
 
 	private function getEntitySerializationsFromDir( $dir ) {
@@ -80,7 +77,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function propertySerializationProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/properties/' );
+		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/properties/legacy/' );
 	}
 
 	/**

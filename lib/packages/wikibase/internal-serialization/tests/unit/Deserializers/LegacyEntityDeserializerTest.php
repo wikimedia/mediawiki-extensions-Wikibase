@@ -3,7 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
-use Tests\Integration\Wikibase\InternalSerialization\TestDeserializerFactory;
+use Tests\Integration\Wikibase\InternalSerialization\TestFactoryBuilder;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer
@@ -19,7 +19,7 @@ class LegacyEntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$this->deserializer = TestDeserializerFactory::newInstance( $this )->newEntityDeserializer();
+		$this->deserializer = TestFactoryBuilder::newLegacyDeserializerFactory( $this )->newEntityDeserializer();
 	}
 
 	public function testGivenPropertySerialization_propertyIsReturned() {
