@@ -11,12 +11,12 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
- * @covers Wikibase\InternalSerialization\DeserializerFactory
+ * @covers Wikibase\InternalSerialization\LegacyDeserializerFactory
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class LegacyDeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var DeserializerFactory
@@ -24,7 +24,7 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	private $factory;
 
 	protected function setUp() {
-		$this->factory = TestDeserializerFactory::newInstance( $this );
+		$this->factory = TestLegacyDeserializerFactory::newInstance( $this );
 	}
 
 	public function testEntityDeserializer() {

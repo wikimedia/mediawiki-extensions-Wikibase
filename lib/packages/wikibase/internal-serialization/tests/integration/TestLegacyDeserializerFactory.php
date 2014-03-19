@@ -7,12 +7,13 @@ use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TestDeserializerFactory {
+class TestLegacyDeserializerFactory {
 
 	/**
 	 * @param PHPUnit_Framework_TestCase $testCase
@@ -26,7 +27,7 @@ class TestDeserializerFactory {
 			->with( $testCase->equalTo( array( 'type' => 'string', 'value' => 'foo' ) ) )
 			->will( $testCase->returnValue( new StringValue( 'foo' ) ) );
 
-		return new DeserializerFactory(
+		return new LegacyDeserializerFactory(
 			$dataValueDeserializer,
 			new BasicEntityIdParser()
 		);
@@ -45,7 +46,7 @@ class TestDeserializerFactory {
 			)
 		);
 
-		return new DeserializerFactory(
+		return new LegacyDeserializerFactory(
 			new DataValueDeserializer( $dataValueClasses ),
 			new BasicEntityIdParser()
 		);

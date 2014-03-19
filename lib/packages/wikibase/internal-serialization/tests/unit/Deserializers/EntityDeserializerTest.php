@@ -6,12 +6,12 @@ use Deserializers\Deserializer;
 use Tests\Integration\Wikibase\InternalSerialization\TestLegacyDeserializerFactory;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\EntityDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacyEntityDeserializerTest extends \PHPUnit_Framework_TestCase {
+class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer
