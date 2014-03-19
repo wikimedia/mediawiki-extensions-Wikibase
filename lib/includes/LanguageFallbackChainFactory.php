@@ -54,12 +54,20 @@ class LanguageFallbackChainFactory {
 	public $anonymousPageViewCached;
 
 	/**
-	 * Constructor.
-	 *
-	 * @param $anonymousPageViewCached bool
-	 *          Whether full page outputs are cached for anons, so some fine-grained fallbacks shouldn't be used for them.
+	 * @var bool
 	 */
-	public function __construct( $anonymousPageViewCached = false ) {
+	private $isExperimentalMode;
+
+	/**
+	 * @param bool $isExperimentalMode
+	 * @param bool $anonymousPageViewCached Whether full page outputs are cached for anons, so some
+	 *                                      fine-grained fallbacks shouldn't be used for them.
+	 */
+	public function __construct( $isExperimentalMode = null, $anonymousPageViewCached = false ) {
+		// @fixme fix instantiation of factory in various lib classes
+		$this->isExperimentalMode = is_bool( $isExperimentalMode ) ? $isExperimentalMode
+			: defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+
 		$this->anonymousPageViewCached = $anonymousPageViewCached;
 	}
 
@@ -340,8 +348,7 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromContextForPageView( IContextSource $context ) {
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-
+		if ( $this->isExperimentalMode ) {
 			// The generated chain should yield a cacheable result
 			if ( $this->anonymousPageViewCached && $context->getUser()->isAnon() ) {
 				// Anonymous users share the same Squid cache, which is splitted by URL.
@@ -353,7 +360,7 @@ class LanguageFallbackChainFactory {
 		} else {
 			return $this->newFromLanguage(
 				$context->getLanguage(),
-				LanguageFallbackChainFactory::FALLBACK_SELF
+				self::FALLBACK_SELF
 			);
 		}
 	}
