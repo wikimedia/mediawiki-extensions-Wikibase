@@ -22,7 +22,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestFactoryBuilder::newLegacyFactoryWithDataValueSupport()->newEntityDeserializer();
+		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()->newEntityDeserializer();
 	}
 
 	/**
@@ -55,7 +55,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function itemSerializationProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/' );
+		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/items/legacy/' );
 	}
 
 	private function getEntitySerializationsFromDir( $dir ) {
@@ -77,7 +77,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function propertySerializationProvider() {
-		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/properties/' );
+		return $this->getEntitySerializationsFromDir( __DIR__ . '/../data/properties/legacy/' );
 	}
 
 	/**

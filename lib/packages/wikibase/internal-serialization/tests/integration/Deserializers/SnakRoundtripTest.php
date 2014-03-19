@@ -24,7 +24,7 @@ class SnakRoundtripTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestFactoryBuilder::newLegacyFactory( $this )->newSnakDeserializer();
+		$this->deserializer = TestFactoryBuilder::newLegacyDeserializerFactory( $this )->newSnakDeserializer();
 	}
 
 	/**

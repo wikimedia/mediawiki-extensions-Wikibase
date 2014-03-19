@@ -20,7 +20,7 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	private $factory;
 
 	protected function setUp() {
-		$this->factory = TestFactoryBuilder::newFactory( $this );
+		$this->factory = TestFactoryBuilder::newDeserializerFactory( $this );
 	}
 
 	public function testGetEntityDeserializerReturnsDeserializer() {

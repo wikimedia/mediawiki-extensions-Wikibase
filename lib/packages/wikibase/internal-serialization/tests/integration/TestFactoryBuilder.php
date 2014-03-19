@@ -3,11 +3,13 @@
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\LegacyDeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory;
 
 /**
  * @licence GNU GPL v2+
@@ -15,7 +17,7 @@ use Wikibase\InternalSerialization\LegacyDeserializerFactory;
  */
 class TestFactoryBuilder {
 
-	public static function newLegacyFactory( PHPUnit_Framework_TestCase $testCase ) {
+	public static function newLegacyDeserializerFactory( PHPUnit_Framework_TestCase $testCase ) {
 		return new LegacyDeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()
@@ -33,15 +35,22 @@ class TestFactoryBuilder {
 		return $dataValueDeserializer;
 	}
 
-	public static function newFactory( PHPUnit_Framework_TestCase $testCase ) {
+	public static function newDeserializerFactory( PHPUnit_Framework_TestCase $testCase ) {
 		return new DeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()
 		);
 	}
 
-	public static function newLegacyFactoryWithDataValueSupport() {
+	public static function newLegacyDeserializerFactoryWithDataValueSupport() {
 		return new LegacyDeserializerFactory(
+			self::newRealDataValueDeserializer(),
+			new BasicEntityIdParser()
+		);
+	}
+
+	public static function newDeserializerFactoryWithDataValueSupport() {
+		return new DeserializerFactory(
 			self::newRealDataValueDeserializer(),
 			new BasicEntityIdParser()
 		);
@@ -61,6 +70,10 @@ class TestFactoryBuilder {
 		);
 
 		return new DataValueDeserializer( $dataValueClasses );
+	}
+
+	public static function newSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer() );
 	}
 
 }

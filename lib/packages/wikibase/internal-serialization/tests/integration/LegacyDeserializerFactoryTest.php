@@ -20,7 +20,7 @@ class LegacyDeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 	private $factory;
 
 	protected function setUp() {
-		$this->factory = TestFactoryBuilder::newLegacyFactory( $this );
+		$this->factory = TestFactoryBuilder::newLegacyDeserializerFactory( $this );
 	}
 
 	public function testEntityDeserializer() {

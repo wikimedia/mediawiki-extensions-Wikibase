@@ -19,7 +19,7 @@ class LegacyEntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$this->deserializer = TestFactoryBuilder::newLegacyFactory( $this )->newEntityDeserializer();
+		$this->deserializer = TestFactoryBuilder::newLegacyDeserializerFactory( $this )->newEntityDeserializer();
 	}
 
 	public function testGivenPropertySerialization_propertyIsReturned() {

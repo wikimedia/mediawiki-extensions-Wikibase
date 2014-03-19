@@ -23,7 +23,7 @@ class ItemRoundtripTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	protected function setUp() {
-		$this->deserializer = TestFactoryBuilder::newLegacyFactory( $this )->newEntityDeserializer();
+		$this->deserializer = TestFactoryBuilder::newLegacyDeserializerFactory( $this )->newEntityDeserializer();
 	}
 
 	/**
