@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_f5f13dc9",
+        "filename": "lib/tests/phpunit/IO/EntityIdReaderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T08:42:40Z",
+      "side": 1,
+      "message": "It\u0027s used in the last line, where it is passed to assertEquals. Defaulting to null is consistent with the assertXXX methods of PHPUnit.",
+      "parentUuid": "ee14bf34_15ff11a9",
+      "revId": "74e180e94b92a8412074ed1e43e4b69c391a9e0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_f5fb7db8",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_d5be39d1",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T08:42:40Z",
+      "side": 1,
+      "message": "batches. silly me.",
+      "parentUuid": "ee14bf34_f5fb7db8",
+      "revId": "74e180e94b92a8412074ed1e43e4b69c391a9e0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_b52d0544",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-19T07:51:29Z",
       "side": 1,
       "message": "why is this called as a static function?",
+      "revId": "74e180e94b92a8412074ed1e43e4b69c391a9e0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b5c3c560",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-19T08:42:40Z",
+      "side": 1,
+      "message": "good question...",
+      "parentUuid": "ee14bf34_b52d0544",
       "revId": "74e180e94b92a8412074ed1e43e4b69c391a9e0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
