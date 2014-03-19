@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b5bd0566",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:21:58Z",
+      "side": 1,
+      "message": "gah, i had a mock here before.  suppose misunderstand your comments",
+      "parentUuid": "ee14bf34_1524b106",
+      "revId": "253367f29b20fa4c34eb0476cf881d577a30947d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_9510c1ae",
         "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-19T09:48:08Z",
       "side": 1,
       "message": "perhaps use a regex then, to make this more robust against irrelevant changes. Or compress whitespace (and convert case) before comparing.",
+      "revId": "253367f29b20fa4c34eb0476cf881d577a30947d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_95b20191",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-19T10:21:58Z",
+      "side": 1,
+      "message": "with a mock, might not be needed",
+      "parentUuid": "ee14bf34_9510c1ae",
       "revId": "253367f29b20fa4c34eb0476cf881d577a30947d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
