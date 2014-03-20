@@ -2,8 +2,12 @@
 
 namespace Wikibase;
 
+use FormatJson;
+use Http;
 use Language;
+use MWException;
 use SiteSQLStore;
+use Sites;
 
 /**
  * Utility functions for Wikibase.
@@ -30,14 +34,14 @@ final class Utils {
 		static $languageCodes = null;
 
 		if ( is_null( $languageCodes ) ) {
-			$languageCodes = array_keys( \Language::fetchLanguageNames() );
+			$languageCodes = array_keys( Language::fetchLanguageNames() );
 		}
 
 		return $languageCodes;
 	}
 
 	/**
-	 * @see \Language::fetchLanguageName()
+	 * @see Language::fetchLanguageName()
 	 *
 	 * @since 0.1
 	 *
@@ -48,16 +52,19 @@ final class Utils {
 	 */
 	public static function fetchLanguageName( $languageCode, $inLanguage = null ) {
 		$languageCode = str_replace( '_', '-', $languageCode );
+
 		if ( isset( $inLanguage ) ) {
 			$inLanguage = str_replace( '_', '-', $inLanguage );
-			$languageName = \Language::fetchLanguageName( $languageCode, $inLanguage );
+			$languageName = Language::fetchLanguageName( $languageCode, $inLanguage );
 		}
 		else {
-			$languageName = \Language::fetchLanguageName( $languageCode );
+			$languageName = Language::fetchLanguageName( $languageCode );
 		}
+
 		if ( $languageName == '' ) {
 			$languageName = $languageCode;
 		}
+
 		return $languageName;
 	}
 
@@ -65,13 +72,14 @@ final class Utils {
 	 * Inserts some sites into the sites table, if the sites table is currently empty.
 	 * Called when update.php is run. The initial sites are loaded from https://meta.wikimedia.org.
 	 *
-	 * @param \DatabaseUpdater $updater database updater. Not used. Present to be compatible with DatabaseUpdater::addExtensionUpdate
+	 * @param DatabaseUpdater $updater database updater. Not used. Present to be
+	 *   compatible with DatabaseUpdater::addExtensionUpdate
 	 *
-	 * @throws \MWException if an error occurs.
+	 * @throws MWException if an error occurs.
 	 * @since 0.1
 	 */
 	public static function insertDefaultSites( $updater = null ) {
-		if ( \Sites::singleton()->getSites()->count() > 0 ) {
+		if ( Sites::singleton()->getSites()->count() > 0 ) {
 			return;
 		}
 
@@ -90,7 +98,7 @@ final class Utils {
 	 * @param String|bool      $stripProtocol Causes any leading http or https to be stripped from URLs, forcing
 	 *                         the remote sites to be references in a protocol-relative way.
 	 *
-	 * @throws \MWException if an error occurs.
+	 * @throws MWException if an error occurs.
 	 * @since 0.1
 	 */
 	public static function insertSitesFrom( $url, $stripProtocol = false ) {
@@ -100,19 +108,19 @@ final class Utils {
 		$url .= '?action=sitematrix&format=json';
 
 		//NOTE: the raiseException option needs change Iad3995a6 to be merged, otherwise it is ignored.
-		$json = \Http::get( $url, 'default', array( 'raiseException' => true ) );
+		$json = Http::get( $url, 'default', array( 'raiseException' => true ) );
 
 		if ( !$json ) {
-			throw new \MWException( "Got no data from $url" );
+			throw new MWException( "Got no data from $url" );
 		}
 
-		$languages = \FormatJson::decode(
+		$languages = FormatJson::decode(
 			$json,
 			true
 		);
 
 		if ( !is_array( $languages ) ) {
-			throw new \MWException( "Failed to parse JSON from $url" );
+			throw new MWException( "Failed to parse JSON from $url" );
 		}
 
 		$groupMap = array(
