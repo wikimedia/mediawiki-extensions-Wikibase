@@ -126,7 +126,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 
 		$serialization['type'] = $entity->getType();
 
-		$parts = $this->options->getOption( EntitySerializer::OPT_PARTS, array() );
+		$parts = $this->options->getOption( self::OPT_PARTS, array() );
 
 		foreach ( $parts as $key ) {
 			switch ( $key ) {
