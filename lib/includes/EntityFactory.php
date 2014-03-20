@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+
+use MWContentSerializationException;
 use MWException;
 
 /**
@@ -115,7 +117,7 @@ class EntityFactory {
 	 * @since 0.3
 	 *
 	 * @throws MWException if the given entity type or serialization format is not known.
-	 * @throws \MWContentSerializationException if the given blob was malformed.
+	 * @throws MWContentSerializationException if the given blob was malformed.
 	 *
 	 * @return Entity The new Entity object.
 	 */
@@ -138,7 +140,7 @@ class EntityFactory {
 	 * @return array The deserialized data structure
 	 *
 	 * @throws MWException if an unsupported format is requested
-	 * @throws \MWContentSerializationException If serialization fails.
+	 * @throws MWContentSerializationException If serialization fails.
 	 */
 	public function unserializedData( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
@@ -153,12 +155,13 @@ class EntityFactory {
 				$data = json_decode( $blob, true ); //FIXME: suppress notice on failed serialization!
 				break;
 			default:
-				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				throw new MWException( "serialization format $format is not supported for '
+					. 'Wikibase content model" );
 				break;
 		}
 
 		if ( $data === false || $data === null ) {
-			throw new \MWContentSerializationException( 'failed to deserialize' );
+			throw new MWContentSerializationException( 'failed to deserialize' );
 		}
 
 		if ( is_object( $data ) ) {
@@ -167,7 +170,7 @@ class EntityFactory {
 		}
 
 		if ( !is_array( $data ) ) {
-			throw new \MWContentSerializationException( 'failed to deserialize: not an array.' );
+			throw new MWContentSerializationException( 'failed to deserialize: not an array.' );
 		}
 
 		return $data;
