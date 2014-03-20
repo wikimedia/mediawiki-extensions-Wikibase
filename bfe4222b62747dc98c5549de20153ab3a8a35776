@@ -16,6 +16,24 @@
       "revId": "bfe4222b62747dc98c5549de20153ab3a8a35776",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7499a57f",
+        "filename": "repo/tests/phpunit/includes/PermissionsHelper.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T11:10:02Z",
+      "side": 1,
+      "message": "it\u0027s only used in tests actually. i believe the globals get set somewhere but this is odd.\n\ncan you at least add a @todo",
+      "parentUuid": "ee14bf34_d4aab181",
+      "revId": "bfe4222b62747dc98c5549de20153ab3a8a35776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
