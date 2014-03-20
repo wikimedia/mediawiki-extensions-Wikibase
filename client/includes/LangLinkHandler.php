@@ -79,7 +79,8 @@ class LangLinkHandler {
 	 */
 	public function getEntityLinks( Title $title ) {
 		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the corresponding item on the wikibase repo." );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the '
+			. 'corresponding item on the wikibase repo." );
 
 		$links = array();
 
@@ -87,10 +88,13 @@ class LangLinkHandler {
 		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
 
 		if ( $itemId !== null ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText() . " is " . $itemId->getPrefixedId() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText()
+				. " is " . $itemId->getPrefixedId() );
+
 			$links = $this->siteLinkLookup->getSiteLinksForItem( $itemId );
 		} else {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for " . $title->getFullText() );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": No corresponding item found for "
+				. $title->getFullText() );
 		}
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Found " . count( $links ) . " links." );
@@ -201,7 +205,9 @@ class LangLinkHandler {
 			}
 
 			if ( !in_array( $site->getGroup(), $allowedGroups ) ) {
-				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to other group: ' . $wiki . ' belongs to ' . $site->getGroup() );
+				wfDebugLog( __CLASS__, __FUNCTION__ . ': skipping link to other group: ' . $wiki
+					. ' belongs to ' . $site->getGroup() );
+
 				unset( $repoLinks[$wiki] );
 				continue;
 			}
@@ -430,7 +436,11 @@ class LangLinkHandler {
 	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityIdPropertyUpdater = new EntityIdPropertyUpdater( $this->siteLinkLookup, $this->siteId );
+		$entityIdPropertyUpdater = new EntityIdPropertyUpdater(
+			$this->siteLinkLookup,
+			$this->siteId
+		);
+
 		$entityIdPropertyUpdater->updateItemIdProperty( $out, $title );
 
 		wfProfileOut( __METHOD__ );
