@@ -2,11 +2,11 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use ApiMain;
+use LogicException;
 use SiteSQLStore;
 use Status;
-use ApiBase;
-use UsageException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -57,8 +57,15 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $badgeItems;
 
-	public function __construct( ApiMain $main, $name, $prefix = '' ) {
-		parent::__construct( $main, $name, $prefix );
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		//TODO: provide a mechanism to override the services
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
@@ -119,7 +126,8 @@ abstract class ModifyEntity extends ApiWikibase {
 	 *
 	 * @param string $id
 	 *
-	 * @throws UsageException
+	 * @throws \UsageException
+	 * @throws LogicException
 	 * @return EntityId
 	 */
 	protected function getEntityIdFromString( $id ) {
@@ -128,6 +136,9 @@ abstract class ModifyEntity extends ApiWikibase {
 		} catch ( EntityIdParsingException $ex ) {
 			$this->dieUsage( $ex->getMessage(), 'no-such-entity-id' );
 		}
+
+		// The only reason for this is that ApiBase::dieUsage hides the actual throw
+		throw new LogicException();
 	}
 
 	/**
@@ -279,7 +290,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		if ( $entity->getId() === null ) {
-			throw new \LogicException( 'The Entity should have an ID at this point!' );
+			throw new LogicException( 'The Entity should have an ID at this point!' );
 		}
 
 		// At this point only change/edit rights should be checked

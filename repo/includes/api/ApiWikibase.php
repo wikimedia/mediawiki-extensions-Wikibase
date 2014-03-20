@@ -2,17 +2,17 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use ApiMain;
-use Exception;
 use LogicException;
 use Message;
 use MessageCache;
-use User;
 use Status;
-use ApiBase;
+use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\EditEntity;
 use Wikibase\EntityFactory;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
@@ -20,7 +20,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
@@ -36,7 +35,7 @@ use Wikibase\SummaryFormatter;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
  */
-abstract class ApiWikibase extends \ApiBase {
+abstract class ApiWikibase extends ApiBase {
 
 	private $resultBuilder;
 
@@ -70,11 +69,6 @@ abstract class ApiWikibase extends \ApiBase {
 	protected $entityLookup;
 
 	/**
-	 * @var EntityRevisionLookup
-	 */
-	protected $uncachedEntityLookup;
-
-	/**
 	 * @var EntityStore
 	 */
 	protected $entityStore;
@@ -98,6 +92,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -255,6 +251,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	public function checkPermissions( Entity $entity, User $user, array $params ) {
 		$permissions = $this->getRequiredPermissions( $entity, $params );
+		$permissions = array_unique( $permissions );
 		$status = Status::newGood();
 
 		foreach ( $permissions as $perm ) {
@@ -275,14 +272,11 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param EntityId $entityId : the title of the page to load the revision for
 	 * @param int $revId : the revision to load. If not given, the current revision will be loaded.
 	 *
-	 * @throws \Exception
 	 * @throws \UsageException
+	 * @throws LogicException
 	 * @return EntityRevision
 	 */
-	protected function loadEntityRevision(
-		EntityId $entityId,
-		$revId = 0
-	) {
+	protected function loadEntityRevision( EntityId $entityId, $revId = 0 ) {
 		try {
 			$revision = $this->entityLookup->getEntityRevision( $entityId, $revId );
 
@@ -298,7 +292,8 @@ abstract class ApiWikibase extends \ApiBase {
 			$this->dieUsage( "Revision $revId not found: " . $ex->getMessage(), 'nosuchrevid' );
 		}
 
-		throw new Exception( 'can\'t happen' );
+		// The only reason for this is that ApiBase::dieUsage hides the actual throw
+		throw new LogicException();
 	}
 
 	/**
