@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_a31b7d81",
+        "filename": "lib/includes/parsers/EraParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T21:09:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_a315bd9e",
+      "revId": "8cbbc41739916e3c9a218b9a00a618c48af9a7a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_437b81eb",
         "filename": "lib/includes/parsers/EraParser.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-20T20:49:29Z",
       "side": 1,
       "message": "The \"?\" is not needed, it will just cause an unnecessary \"replace empty string with empty string\".",
+      "revId": "8cbbc41739916e3c9a218b9a00a618c48af9a7a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_c316715a",
+        "filename": "lib/includes/parsers/EraParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T21:09:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_437b81eb",
       "revId": "8cbbc41739916e3c9a218b9a00a618c48af9a7a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
