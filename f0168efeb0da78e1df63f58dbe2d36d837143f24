@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_c887aedb",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T21:05:02Z",
+      "side": 1,
+      "message": "As said in an other comment I would prefer a solution that uses the last 4 digits from the actual year. This should make sure the leap year problem does have the best chance to \"survive\".\n\nTest cases to add:\n* \u002710000-02-29\u0027 \u003d\u003e valid\n* \u002710100-02-29\u0027 \u003d\u003e invalid or March 1\n* \u002710400-02-29\u0027 \u003d\u003e valid",
+      "parentUuid": "ee14bf34_922a09d6",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_dc2f8b9b",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 4
@@ -189,6 +207,24 @@
       "side": 1,
       "message": "DateTime will give me the year as I ask for it in the fromat...\n\u0027Y-m-d\\TH:i:s\\Z\u0027\nthus the year will always be there as exactly \u00274242\u0027\nstr_replace does not have a $limit parameter so I would prefer to use preg_replace here\nI guess another options would be to simply remove the first 4 characters and replace them with our year, that would certainly save a few micro server kittens",
       "parentUuid": "ee14bf34_b054fbca",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_8843f6b5",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T21:05:02Z",
+      "side": 1,
+      "message": "I guess it\u0027s the replace - no matter which - that bugs me. Why put the dummy in the string just to replace it?\n\nif ( $largeYear ) {\n\t$timeString \u003d $largeYear . $dateTime-\u003eformat( \u0027-m-d\\TH:i:s\\Z\u0027 );\n} else {\n\t$timeString \u003d $dateTime-\u003eformat( \u0027Y-m-d\\TH:i:s\\Z\u0027 );\n}\n$timeString \u003d \u0027+\u0027 . $timeString;",
+      "parentUuid": "ee14bf34_127ef9e1",
       "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
