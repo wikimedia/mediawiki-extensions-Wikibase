@@ -9,12 +9,12 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
-use Wikibase\StoreFactory;
 
 /**
  * API module to get the data for one or more Wikibase entities.
@@ -51,8 +51,15 @@ class GetEntities extends ApiWikibase {
 	 */
 	protected $siteLinkGroups;
 
-	public function __construct( ApiMain $main, $name, $prefix = '' ) {
-		parent::__construct( $main, $name, $prefix );
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();

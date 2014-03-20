@@ -39,9 +39,11 @@ class GetClaims extends ApiWikibase {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $prefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $prefix );
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		//TODO: provide a mechanism to override the services
 		$this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();

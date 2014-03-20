@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use InvalidArgumentException;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -11,7 +12,6 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemContent;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SiteLinkLookup;
@@ -39,7 +39,14 @@ class MergeItems extends ApiWikibase {
 	 */
 	protected $termIndex;
 
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$this->sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
