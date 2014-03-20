@@ -157,7 +157,6 @@ class EntityFactory {
 			default:
 				throw new MWException( "serialization format $format is not supported for '
 					. 'Wikibase content model" );
-				break;
 		}
 
 		if ( $data === false || $data === null ) {
