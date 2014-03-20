@@ -3,12 +3,15 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use LogicException;
 use MWException;
 use Site;
 use SiteList;
 use Title;
+use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOpClaim;
@@ -16,11 +19,11 @@ use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpLabel;
-use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOps;
+use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -72,9 +75,13 @@ class EditEntity extends ModifyEntity {
 	private $claimGuidParser;
 
 	/**
-	 * @see ApiBase::_construct()
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $prefix
+	 *
+	 * @see ApiBase::__construct
 	 */
-	public function __construct( $mainModule, $moduleName, $prefix = '' ) {
+	public function __construct( ApiMain $mainModule, $moduleName, $prefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $prefix );
 
 		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
@@ -105,19 +112,27 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiModifyEntity::createEntity()
+	 * @param array $params
+	 *
+	 * @throws UsageException
+	 * @throws LogicException
+	 * @return Entity
+	 *
+	 * @see Wikibase\Api\ModifyEntity::createEntity
 	 */
 	protected function createEntity( array $params ) {
 		$type = $params['new'];
 		$this->flags |= EDIT_NEW;
 		$entityFactory = EntityFactory::singleton();
+
 		try {
-			$entity = $entityFactory->newFromArray( $type, array() );
+			return $entityFactory->newFromArray( $type, array() );
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
 
-		return $entity;
+		// The only reason for this is that ApiBase::dieUsage hides the actual throw
+		throw new LogicException();
 	}
 
 	/**

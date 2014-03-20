@@ -2,12 +2,12 @@
 
 namespace Wikibase\Api;
 
-use ApiMain;
 use ApiBase;
+use ApiMain;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\Summary;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
@@ -43,10 +43,14 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $snakValidation;
 
 	/**
-	 * see ApiBase::__construct()
+	 * @param ApiMain $main
+	 * @param string $name
+	 * @param string $prefix
+	 *
+	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+	public function __construct( ApiMain $main, $name, $prefix = '' ) {
+		parent::__construct( $main, $name, $prefix );
 
 		$this->snakValidation = new SnakValidationHelper(
 			$this,

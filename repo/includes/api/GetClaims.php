@@ -38,7 +38,9 @@ class GetClaims extends ApiWikibase {
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
-	 * @param string $modulePrefix
+	 * @param string $prefix
+	 *
+	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $prefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $prefix );

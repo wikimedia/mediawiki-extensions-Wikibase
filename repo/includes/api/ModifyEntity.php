@@ -57,6 +57,13 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $badgeItems;
 
+	/**
+	 * @param ApiMain $main
+	 * @param string $name
+	 * @param string $prefix
+	 *
+	 * @see ApiBase::__construct
+	 */
 	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 

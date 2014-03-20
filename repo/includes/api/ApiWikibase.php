@@ -36,7 +36,7 @@ use Wikibase\SummaryFormatter;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
  */
-abstract class ApiWikibase extends \ApiBase {
+abstract class ApiWikibase extends ApiBase {
 
 	private $resultBuilder;
 
@@ -70,11 +70,6 @@ abstract class ApiWikibase extends \ApiBase {
 	protected $entityLookup;
 
 	/**
-	 * @var EntityRevisionLookup
-	 */
-	protected $uncachedEntityLookup;
-
-	/**
 	 * @var EntityStore
 	 */
 	protected $entityStore;
@@ -98,6 +93,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -279,10 +276,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @throws \UsageException
 	 * @return EntityRevision
 	 */
-	protected function loadEntityRevision(
-		EntityId $entityId,
-		$revId = 0
-	) {
+	protected function loadEntityRevision( EntityId $entityId, $revId = 0 ) {
 		try {
 			$revision = $this->entityLookup->getEntityRevision( $entityId, $revId );
 
@@ -298,6 +292,7 @@ abstract class ApiWikibase extends \ApiBase {
 			$this->dieUsage( "Revision $revId not found: " . $ex->getMessage(), 'nosuchrevid' );
 		}
 
+		// The only reason for this is that ApiBase::dieUsage hides the actual throw
 		throw new Exception( 'can\'t happen' );
 	}
 

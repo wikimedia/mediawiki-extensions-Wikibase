@@ -45,12 +45,14 @@ class SearchEntities extends ApiBase {
 	protected $idParser;
 
 	/**
-	 * @param ApiMain $main
-	 * @param string $name
-	 * @param string $prefix
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $main, $name, $prefix = '' ) {
-		parent::__construct( $main, $name, $prefix );
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		//TODO: provide a mechanism to override the services
 		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
