@@ -1,8 +1,5 @@
 <?php
 
-namespace Wikibase;
-use Http, FormatJSON, Maintenance, Exception;
-
 /**
  * Maintenance script that populates the interwiki table with list of sites
  * as exists on Wikipedia, so interwiki links render properly.
@@ -12,7 +9,8 @@ use Http, FormatJSON, Maintenance, Exception;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' )
+	: __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
 
@@ -36,21 +34,20 @@ from which the script fetches the interwiki data and uses here to populate this 
 database table.
 TEXT;
 
-		$this->addOption( 'source', 'Source wiki for interwiki table, such as https://en.wikipedia.org/w/api.php', false, true );
-		$this->addOption( 'force', 'Run regardless of whether the database says it has been run already.' );
+		$this->addOption( 'source', 'Source wiki for interwiki table, such as '
+			. 'https://en.wikipedia.org/w/api.php', false, true );
+		$this->addOption( 'force', 'Run regardless of whether the database says it has '
+			. 'been run already.' );
 
 		parent::__construct();
 	}
 
 	public function execute() {
-		if ( !defined( 'WBC_VERSION' ) ) {
-			$this->output( "You need to have WikibaseClient enabled in order to use this maintenance script!\n\n" );
-			exit;
-		}
-
 		$force = $this->getOption( 'force', false );
 		$this->source = $this->getOption( 'source', 'https://en.wikipedia.org/w/api.php' );
+
 		$data = $this->fetchLinks();
+
 		if ( $data === false ) {
 			$this->error( "Error during fetching data." );
 		} else {
@@ -135,5 +132,5 @@ TEXT;
 	}
 }
 
-$maintClass = 'Wikibase\PopulateInterwiki';
+$maintClass = 'PopulateInterwiki';
 require_once( RUN_MAINTENANCE_IF_MAIN );
