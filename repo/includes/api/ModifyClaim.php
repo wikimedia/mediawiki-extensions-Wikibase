@@ -43,7 +43,11 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $snakValidation;
 
 	/**
-	 * see ApiBase::__construct()
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );

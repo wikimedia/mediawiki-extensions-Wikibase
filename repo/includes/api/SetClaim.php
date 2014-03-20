@@ -116,6 +116,8 @@ class SetClaim extends ModifyClaim {
 		} catch( OutOfBoundsException $outOfBoundsException ) {
 			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
 		}
+
+		//TODO
 	}
 
 	/**

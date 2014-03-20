@@ -3,6 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use MWException;
@@ -16,8 +17,8 @@ use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpLabel;
-use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\ChangeOps;
+use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -59,10 +60,14 @@ class EditEntity extends ModifyEntity {
 	protected $entityRevisionLookup;
 
 	/**
-	 * @see ApiBase::_construct()
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
-	public function __construct( $mainModule, $moduleName, $prefix = '' ) {
-		parent::__construct( $mainModule, $moduleName, $prefix );
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
 	}
@@ -89,19 +94,28 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiModifyEntity::createEntity()
+	 * @param array $params
+	 *
+	 * @throws \UsageException
+	 * @throws \LogicException
+	 * @return Entity
+	 *
+	 * @see Wikibase\Api\ModifyEntity::createEntity
 	 */
 	protected function createEntity( array $params ) {
 		$type = $params['new'];
 		$this->flags |= EDIT_NEW;
 		$entityFactory = EntityFactory::singleton();
+
 		try {
 			$entity = $entityFactory->newFromArray( $type, array() );
+			return $entity;
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
 
-		return $entity;
+		// The only reason for this is that ApiBase::dieUsage hides the actual throw
+		throw new \LogicException();
 	}
 
 	/**
