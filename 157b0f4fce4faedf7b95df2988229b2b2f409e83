@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_17d4abeb",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T16:14:20Z",
+      "side": 1,
+      "message": "So I was right with \"either of that must be wrong\". ;-) Thanks for the explanation.",
+      "revId": "157b0f4fce4faedf7b95df2988229b2b2f409e83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_57ca234b",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T16:14:20Z",
+      "side": 1,
+      "message": "\u003e feels like not covering all cases.\n\nIt simply feelt wrong to return early with an \"everything is ok\" if it is not.",
+      "revId": "157b0f4fce4faedf7b95df2988229b2b2f409e83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_37d7aff4",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T16:14:20Z",
+      "side": 1,
+      "message": "\u003e Is that really clearer?\n\nIn my opinion yes since it avoids the repeated variable name. A reader must compare the two to understand what the line does. Obviously a no-brainer in this case since it\u0027s 1 letter - which is an other nitpick by the way. ;-)",
+      "revId": "157b0f4fce4faedf7b95df2988229b2b2f409e83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_17a6eba7",
+        "filename": "repo/includes/store/sql/EntityPerPageIdPager.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T16:14:20Z",
+      "side": 1,
+      "message": "I find these array functions extremely hard to read for two reasons:\n1. Some of the worst function names in PHP, only topped by \"copy\" which is my number one reason to hate Delphi.\n2. In many other languages such functions don\u0027t return values but indexes.\n\nNot a big deal in this case but try to avoid them, please.",
+      "revId": "157b0f4fce4faedf7b95df2988229b2b2f409e83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_5219117d",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T16:14:20Z",
+      "side": 1,
+      "message": "Am I right that the order was undefined before? In my tests this is the only change I can see when playing around with the dumpjson.php script.",
+      "revId": "157b0f4fce4faedf7b95df2988229b2b2f409e83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
