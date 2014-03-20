@@ -1,0 +1,1161 @@
+{
+	"id": "Q1752",
+	"type": "item",
+	"aliases": {
+		"it": [
+			{
+				"language": "it",
+				"value": "Marco Opellio Macrino"
+			}
+		],
+		"es": [
+			{
+				"language": "es",
+				"value": "Marcus Opellius Macrinus"
+			}
+		],
+		"en": [
+			{
+				"language": "en",
+				"value": "Marcus Opellius Severus Macrinus Augustus"
+			}
+		],
+		"ru": [
+			{
+				"language": "ru",
+				"value": "Macrinus"
+			}
+		]
+	},
+	"labels": {
+		"it": {
+			"language": "it",
+			"value": "Macrino"
+		},
+		"en": {
+			"language": "en",
+			"value": "Macrinus"
+		},
+		"fr": {
+			"language": "fr",
+			"value": "Macrin"
+		},
+		"en-ca": {
+			"language": "en-ca",
+			"value": "Macrinus"
+		},
+		"en-gb": {
+			"language": "en-gb",
+			"value": "Macrinus"
+		},
+		"de": {
+			"language": "de",
+			"value": "Macrinus"
+		},
+		"an": {
+			"language": "an",
+			"value": "Macr\u00edn"
+		},
+		"ar": {
+			"language": "ar",
+			"value": "\u0645\u0627\u0643\u0631\u064a\u0646\u0648\u0633"
+		},
+		"be": {
+			"language": "be",
+			"value": "\u041c\u0430\u043a\u0440\u044b\u043d"
+		},
+		"bg": {
+			"language": "bg",
+			"value": "\u041c\u0430\u043a\u0440\u0438\u043d"
+		},
+		"ca": {
+			"language": "ca",
+			"value": "Macr\u00ed"
+		},
+		"cs": {
+			"language": "cs",
+			"value": "Macrinus"
+		},
+		"cy": {
+			"language": "cy",
+			"value": "Macrinus"
+		},
+		"da": {
+			"language": "da",
+			"value": "Macrinus"
+		},
+		"eo": {
+			"language": "eo",
+			"value": "Makrino"
+		},
+		"es": {
+			"language": "es",
+			"value": "Macrino"
+		},
+		"et": {
+			"language": "et",
+			"value": "Macrinus"
+		},
+		"eu": {
+			"language": "eu",
+			"value": "Makrino"
+		},
+		"fa": {
+			"language": "fa",
+			"value": "\u0645\u0627\u06a9\u0631\u06cc\u0646\u0648\u0633"
+		},
+		"fi": {
+			"language": "fi",
+			"value": "Macrinus"
+		},
+		"fy": {
+			"language": "fy",
+			"value": "Makrinus"
+		},
+		"gl": {
+			"language": "gl",
+			"value": "Macrino"
+		},
+		"he": {
+			"language": "he",
+			"value": "\u05de\u05e7\u05e8\u05d9\u05e0\u05d5\u05e1"
+		},
+		"hr": {
+			"language": "hr",
+			"value": "Makrin"
+		},
+		"hu": {
+			"language": "hu",
+			"value": "Marcus Opellius Macrinus r\u00f3mai cs\u00e1sz\u00e1r"
+		},
+		"is": {
+			"language": "is",
+			"value": "Macrinus"
+		},
+		"ja": {
+			"language": "ja",
+			"value": "\u30de\u30af\u30ea\u30cc\u30b9"
+		},
+		"ka": {
+			"language": "ka",
+			"value": "\u10db\u10d0\u10d9\u10e0\u10d8\u10dc\u10e3\u10e1\u10d8"
+		},
+		"ko": {
+			"language": "ko",
+			"value": "\ub9c8\ud06c\ub9ac\ub204\uc2a4"
+		},
+		"la": {
+			"language": "la",
+			"value": "Macrinus"
+		},
+		"lt": {
+			"language": "lt",
+			"value": "Makrinas"
+		},
+		"mk": {
+			"language": "mk",
+			"value": "\u041c\u0430\u043a\u0440\u0438\u043d"
+		},
+		"mr": {
+			"language": "mr",
+			"value": "\u092e\u0945\u0915\u094d\u0930\u093f\u0928\u0938"
+		},
+		"nl": {
+			"language": "nl",
+			"value": "Macrinus"
+		},
+		"pl": {
+			"language": "pl",
+			"value": "Makrynus"
+		},
+		"pt": {
+			"language": "pt",
+			"value": "Macrino"
+		},
+		"pt-br": {
+			"language": "pt-br",
+			"value": "Macrino"
+		},
+		"ro": {
+			"language": "ro",
+			"value": "Macrinus"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u041c\u0430\u043a\u0440\u0438\u043d"
+		},
+		"sh": {
+			"language": "sh",
+			"value": "Makrin"
+		},
+		"sk": {
+			"language": "sk",
+			"value": "Macrinus"
+		},
+		"sr": {
+			"language": "sr",
+			"value": "\u041c\u0430\u043a\u0440\u0438\u043d"
+		},
+		"sv": {
+			"language": "sv",
+			"value": "Macrinus"
+		},
+		"sw": {
+			"language": "sw",
+			"value": "Kaizari Macrinus"
+		},
+		"th": {
+			"language": "th",
+			"value": "\u0e08\u0e31\u0e01\u0e23\u0e1e\u0e23\u0e23\u0e14\u0e34\u0e21\u0e32\u0e04\u0e23\u0e34\u0e19\u0e31\u0e2a"
+		},
+		"tl": {
+			"language": "tl",
+			"value": "Macrinus"
+		},
+		"tr": {
+			"language": "tr",
+			"value": "Macrinus"
+		},
+		"uk": {
+			"language": "uk",
+			"value": "\u041c\u0430\u043a\u0440\u0456\u043d"
+		},
+		"yo": {
+			"language": "yo",
+			"value": "Macrinus"
+		},
+		"zh": {
+			"language": "zh",
+			"value": "\u9a6c\u514b\u91cc\u52aa\u65af"
+		},
+		"oc": {
+			"language": "oc",
+			"value": "Macrin"
+		},
+		"bs": {
+			"language": "bs",
+			"value": "Makrin"
+		},
+		"diq": {
+			"language": "diq",
+			"value": "Macrinus"
+		},
+		"de-ch": {
+			"language": "de-ch",
+			"value": "Macrinus"
+		},
+		"el": {
+			"language": "el",
+			"value": "\u039c\u03b1\u03ba\u03c1\u03af\u03bd\u03bf\u03c2"
+		},
+		"nb": {
+			"language": "nb",
+			"value": "Macrinus"
+		},
+		"vi": {
+			"language": "vi",
+			"value": "Macrinus"
+		},
+		"sco": {
+			"language": "sco",
+			"value": "Macrinus"
+		},
+		"zh-hk": {
+			"language": "zh-hk",
+			"value": "\u99ac\u514b\u91cc\u52aa\u65af"
+		},
+		"zh-cn": {
+			"language": "zh-cn",
+			"value": "\u9a6c\u514b\u91cc\u52aa\u65af"
+		}
+	},
+	"descriptions": {
+		"it": {
+			"language": "it",
+			"value": "imperatore romano"
+		},
+		"fr": {
+			"language": "fr",
+			"value": "Empereur romain qui r\u00e9gna de 217 \u00e0 218"
+		},
+		"es": {
+			"language": "es",
+			"value": "emperador romano"
+		},
+		"de": {
+			"language": "de",
+			"value": "r\u00f6mischer Kaiser vom 11. April 217 bis zum 8. Juni 218"
+		},
+		"en": {
+			"language": "en",
+			"value": "Roman Emperor"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u0440\u0438\u043c\u0441\u043a\u0438\u0439 \u0438\u043c\u043f\u0435\u0440\u0430\u0442\u043e\u0440 \u0441 217 \u043f\u043e 218 \u0433\u043e\u0434"
+		},
+		"pl": {
+			"language": "pl",
+			"value": "cesarz rzymski"
+		}
+	},
+	"claims": {
+		"P21": [
+			{
+				"id": "q1752$39E820C9-4C23-4677-9BAB-EDE6D507B0B1",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P21",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 6581097
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "39f3ce979f9d84a0ebf09abe1702bf22326695e9",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 169514
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					},
+					{
+						"hash": "50f57a3dbac4708ce4ae4a827c0afac7fcdb4a5c",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 11920
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P39": [
+			{
+				"id": "q1752$5C9CCCAC-2B45-4B56-91DF-0E6D6A6A4D8C",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P39",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 842606
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "7eb64cf9621d34c54fd4bd040ed4b61a88c4a1a0",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 328
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P373": [
+			{
+				"id": "q1752$D1B9DF55-E260-473B-8136-3051D7041E4E",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P373",
+					"datatype": "string",
+					"datavalue": {
+						"value": "Macrinus",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "dbe2189e7b0d3953de6f69cc1cc88109a79605a4",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 8449
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P244": [
+			{
+				"id": "q1752$ADE3DCC6-F9B5-4651-B91C-1DC1988484F7",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P244",
+					"datatype": "string",
+					"datavalue": {
+						"value": "nb2010014797",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "004ec6fbee857649acdbdbad4f97b2c8571df97b",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 48183
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P214": [
+			{
+				"id": "q1752$EE6E5803-803F-4832-B5C9-33100CC05DC7",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P214",
+					"datatype": "string",
+					"datavalue": {
+						"value": "89202499",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "004ec6fbee857649acdbdbad4f97b2c8571df97b",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 48183
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P227": [
+			{
+				"id": "q1752$E56380BE-9EFD-495C-979D-DFFCF99C5DFC",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P227",
+					"datatype": "string",
+					"datavalue": {
+						"value": "119072645",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "004ec6fbee857649acdbdbad4f97b2c8571df97b",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 48183
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P570": [
+			{
+				"id": "q1752$0E99F86F-EAD6-4266-90BE-8050F28F10A7",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P570",
+					"datatype": "time",
+					"datavalue": {
+						"value": {
+							"time": "+0000000218-01-01T00:00:00Z",
+							"timezone": 0,
+							"before": 0,
+							"after": 0,
+							"precision": 9,
+							"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+						},
+						"type": "time"
+					}
+				},
+				"type": "statement",
+				"rank": "normal"
+			}
+		],
+		"P31": [
+			{
+				"id": "Q1752$A160ADF9-2016-42AA-840B-915155951C96",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P31",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 5
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "d6e3ab4045fb3f3feea77895bc6b27e663fc878a",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 206855
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P646": [
+			{
+				"id": "Q1752$47D37816-D44D-4564-876D-9315192E02F3",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P646",
+					"datatype": "string",
+					"datavalue": {
+						"value": "/m/055wr",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "b923b0d68beb300866b87ead39f61e63ec30d8af",
+						"snaks": {
+							"P248": [
+								{
+									"snaktype": "value",
+									"property": "P248",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 15241312
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							],
+							"P577": [
+								{
+									"snaktype": "value",
+									"property": "P577",
+									"datatype": "time",
+									"datavalue": {
+										"value": {
+											"time": "+00000002013-10-28T00:00:00Z",
+											"timezone": 0,
+											"before": 0,
+											"after": 0,
+											"precision": 11,
+											"calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+										},
+										"type": "time"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P248",
+							"P577"
+						]
+					}
+				]
+			}
+		],
+		"P40": [
+			{
+				"id": "Q1752$E4A246F0-3E8D-495B-BF07-FC48CE8B0141",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P40",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 46840
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "f70116eac7f49194478b3025330bfd8dcffa3c69",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 8447
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P18": [
+			{
+				"id": "Q1752$BB73F43F-8DCC-4622-BC02-DB0EC486F90E",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P18",
+					"datatype": "commonsMedia",
+					"datavalue": {
+						"value": "Aureus Macrinus-RIC 0079.jpg",
+						"type": "string"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "f70116eac7f49194478b3025330bfd8dcffa3c69",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 8447
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		],
+		"P53": [
+			{
+				"id": "Q1752$4C89569C-EFF6-45BE-85DC-33AA60A5E209",
+				"mainsnak": {
+					"snaktype": "value",
+					"property": "P53",
+					"datatype": "wikibase-item",
+					"datavalue": {
+						"value": {
+							"entity-type": "item",
+							"numeric-id": 321219
+						},
+						"type": "wikibase-entityid"
+					}
+				},
+				"type": "statement",
+				"rank": "normal",
+				"references": [
+					{
+						"hash": "f70116eac7f49194478b3025330bfd8dcffa3c69",
+						"snaks": {
+							"P143": [
+								{
+									"snaktype": "value",
+									"property": "P143",
+									"datatype": "wikibase-item",
+									"datavalue": {
+										"value": {
+											"entity-type": "item",
+											"numeric-id": 8447
+										},
+										"type": "wikibase-entityid"
+									}
+								}
+							]
+						},
+						"snaks-order": [
+							"P143"
+						]
+					}
+				]
+			}
+		]
+	},
+	"sitelinks": {
+		"anwiki": {
+			"site": "anwiki",
+			"title": "Macr\u00edn",
+			"url": "//an.wikipedia.org/wiki/Macr%C3%ADn",
+			"badges": []
+		},
+		"arwiki": {
+			"site": "arwiki",
+			"title": "\u0645\u0627\u0643\u0631\u064a\u0646\u0648\u0633",
+			"url": "//ar.wikipedia.org/wiki/%D9%85%D8%A7%D9%83%D8%B1%D9%8A%D9%86%D9%88%D8%B3",
+			"badges": []
+		},
+		"bewiki": {
+			"site": "bewiki",
+			"title": "\u041c\u0430\u043a\u0440\u044b\u043d",
+			"url": "//be.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BA%D1%80%D1%8B%D0%BD",
+			"badges": []
+		},
+		"bgwiki": {
+			"site": "bgwiki",
+			"title": "\u041c\u0430\u043a\u0440\u0438\u043d",
+			"url": "//bg.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BA%D1%80%D0%B8%D0%BD",
+			"badges": []
+		},
+		"bswiki": {
+			"site": "bswiki",
+			"title": "Makrin",
+			"url": "//bs.wikipedia.org/wiki/Makrin",
+			"badges": []
+		},
+		"cawiki": {
+			"site": "cawiki",
+			"title": "Macr\u00ed",
+			"url": "//ca.wikipedia.org/wiki/Macr%C3%AD",
+			"badges": []
+		},
+		"commonswiki": {
+			"site": "commonswiki",
+			"title": "Macrinus",
+			"url": "//commons.wikimedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"cswiki": {
+			"site": "cswiki",
+			"title": "Macrinus",
+			"url": "//cs.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"cywiki": {
+			"site": "cywiki",
+			"title": "Macrinus",
+			"url": "//cy.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"dawiki": {
+			"site": "dawiki",
+			"title": "Macrinus",
+			"url": "//da.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"dewiki": {
+			"site": "dewiki",
+			"title": "Macrinus",
+			"url": "//de.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"diqwiki": {
+			"site": "diqwiki",
+			"title": "Macrinus",
+			"url": "//diq.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"elwiki": {
+			"site": "elwiki",
+			"title": "\u039c\u03b1\u03ba\u03c1\u03af\u03bd\u03bf\u03c2",
+			"url": "//el.wikipedia.org/wiki/%CE%9C%CE%B1%CE%BA%CF%81%CE%AF%CE%BD%CE%BF%CF%82",
+			"badges": []
+		},
+		"enwiki": {
+			"site": "enwiki",
+			"title": "Macrinus",
+			"url": "//en.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"eowiki": {
+			"site": "eowiki",
+			"title": "Makrino",
+			"url": "//eo.wikipedia.org/wiki/Makrino",
+			"badges": []
+		},
+		"eswiki": {
+			"site": "eswiki",
+			"title": "Macrino",
+			"url": "//es.wikipedia.org/wiki/Macrino",
+			"badges": []
+		},
+		"etwiki": {
+			"site": "etwiki",
+			"title": "Macrinus",
+			"url": "//et.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"euwiki": {
+			"site": "euwiki",
+			"title": "Makrino",
+			"url": "//eu.wikipedia.org/wiki/Makrino",
+			"badges": []
+		},
+		"fawiki": {
+			"site": "fawiki",
+			"title": "\u0645\u0627\u06a9\u0631\u06cc\u0646\u0648\u0633",
+			"url": "//fa.wikipedia.org/wiki/%D9%85%D8%A7%DA%A9%D8%B1%DB%8C%D9%86%D9%88%D8%B3",
+			"badges": []
+		},
+		"fiwiki": {
+			"site": "fiwiki",
+			"title": "Macrinus",
+			"url": "//fi.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"frwiki": {
+			"site": "frwiki",
+			"title": "Macrin",
+			"url": "//fr.wikipedia.org/wiki/Macrin",
+			"badges": []
+		},
+		"fywiki": {
+			"site": "fywiki",
+			"title": "Makrinus",
+			"url": "//fy.wikipedia.org/wiki/Makrinus",
+			"badges": []
+		},
+		"glwiki": {
+			"site": "glwiki",
+			"title": "Macrino",
+			"url": "//gl.wikipedia.org/wiki/Macrino",
+			"badges": []
+		},
+		"hewiki": {
+			"site": "hewiki",
+			"title": "\u05de\u05e7\u05e8\u05d9\u05e0\u05d5\u05e1",
+			"url": "//he.wikipedia.org/wiki/%D7%9E%D7%A7%D7%A8%D7%99%D7%A0%D7%95%D7%A1",
+			"badges": []
+		},
+		"hrwiki": {
+			"site": "hrwiki",
+			"title": "Makrin",
+			"url": "//hr.wikipedia.org/wiki/Makrin",
+			"badges": []
+		},
+		"huwiki": {
+			"site": "huwiki",
+			"title": "Marcus Opellius Macrinus r\u00f3mai cs\u00e1sz\u00e1r",
+			"url": "//hu.wikipedia.org/wiki/Marcus_Opellius_Macrinus_r%C3%B3mai_cs%C3%A1sz%C3%A1r",
+			"badges": []
+		},
+		"iswiki": {
+			"site": "iswiki",
+			"title": "Macrinus",
+			"url": "//is.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"itwiki": {
+			"site": "itwiki",
+			"title": "Macrino",
+			"url": "//it.wikipedia.org/wiki/Macrino",
+			"badges": []
+		},
+		"jawiki": {
+			"site": "jawiki",
+			"title": "\u30de\u30af\u30ea\u30cc\u30b9",
+			"url": "//ja.wikipedia.org/wiki/%E3%83%9E%E3%82%AF%E3%83%AA%E3%83%8C%E3%82%B9",
+			"badges": []
+		},
+		"kawiki": {
+			"site": "kawiki",
+			"title": "\u10db\u10d0\u10d9\u10e0\u10d8\u10dc\u10e3\u10e1\u10d8",
+			"url": "//ka.wikipedia.org/wiki/%E1%83%9B%E1%83%90%E1%83%99%E1%83%A0%E1%83%98%E1%83%9C%E1%83%A3%E1%83%A1%E1%83%98",
+			"badges": []
+		},
+		"kowiki": {
+			"site": "kowiki",
+			"title": "\ub9c8\ud06c\ub9ac\ub204\uc2a4",
+			"url": "//ko.wikipedia.org/wiki/%EB%A7%88%ED%81%AC%EB%A6%AC%EB%88%84%EC%8A%A4",
+			"badges": []
+		},
+		"lawiki": {
+			"site": "lawiki",
+			"title": "Macrinus",
+			"url": "//la.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"ltwiki": {
+			"site": "ltwiki",
+			"title": "Makrinas",
+			"url": "//lt.wikipedia.org/wiki/Makrinas",
+			"badges": []
+		},
+		"mkwiki": {
+			"site": "mkwiki",
+			"title": "\u041c\u0430\u043a\u0440\u0438\u043d",
+			"url": "//mk.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BA%D1%80%D0%B8%D0%BD",
+			"badges": []
+		},
+		"mrwiki": {
+			"site": "mrwiki",
+			"title": "\u092e\u0945\u0915\u094d\u0930\u093f\u0928\u0938",
+			"url": "//mr.wikipedia.org/wiki/%E0%A4%AE%E0%A5%85%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%BF%E0%A4%A8%E0%A4%B8",
+			"badges": []
+		},
+		"nlwiki": {
+			"site": "nlwiki",
+			"title": "Macrinus (keizer)",
+			"url": "//nl.wikipedia.org/wiki/Macrinus_(keizer)",
+			"badges": []
+		},
+		"nowiki": {
+			"site": "nowiki",
+			"title": "Macrinus",
+			"url": "//no.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"ocwiki": {
+			"site": "ocwiki",
+			"title": "Macrin",
+			"url": "//oc.wikipedia.org/wiki/Macrin",
+			"badges": []
+		},
+		"plwiki": {
+			"site": "plwiki",
+			"title": "Makrynus",
+			"url": "//pl.wikipedia.org/wiki/Makrynus",
+			"badges": []
+		},
+		"ptwiki": {
+			"site": "ptwiki",
+			"title": "Macrino",
+			"url": "//pt.wikipedia.org/wiki/Macrino",
+			"badges": []
+		},
+		"rowiki": {
+			"site": "rowiki",
+			"title": "Macrinus",
+			"url": "//ro.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"ruwiki": {
+			"site": "ruwiki",
+			"title": "\u041c\u0430\u043a\u0440\u0438\u043d",
+			"url": "//ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BA%D1%80%D0%B8%D0%BD",
+			"badges": []
+		},
+		"scowiki": {
+			"site": "scowiki",
+			"title": "Macrinus",
+			"url": "//sco.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"shwiki": {
+			"site": "shwiki",
+			"title": "Makrin",
+			"url": "//sh.wikipedia.org/wiki/Makrin",
+			"badges": []
+		},
+		"skwiki": {
+			"site": "skwiki",
+			"title": "Macrinus",
+			"url": "//sk.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"slwiki": {
+			"site": "slwiki",
+			"title": "Makrin",
+			"url": "//sl.wikipedia.org/wiki/Makrin",
+			"badges": []
+		},
+		"srwiki": {
+			"site": "srwiki",
+			"title": "\u041c\u0430\u043a\u0440\u0438\u043d",
+			"url": "//sr.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BA%D1%80%D0%B8%D0%BD",
+			"badges": []
+		},
+		"svwiki": {
+			"site": "svwiki",
+			"title": "Macrinus",
+			"url": "//sv.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"swwiki": {
+			"site": "swwiki",
+			"title": "Kaizari Macrinus",
+			"url": "//sw.wikipedia.org/wiki/Kaizari_Macrinus",
+			"badges": []
+		},
+		"thwiki": {
+			"site": "thwiki",
+			"title": "\u0e08\u0e31\u0e01\u0e23\u0e1e\u0e23\u0e23\u0e14\u0e34\u0e21\u0e32\u0e04\u0e23\u0e34\u0e19\u0e31\u0e2a",
+			"url": "//th.wikipedia.org/wiki/%E0%B8%88%E0%B8%B1%E0%B8%81%E0%B8%A3%E0%B8%9E%E0%B8%A3%E0%B8%A3%E0%B8%94%E0%B8%B4%E0%B8%A1%E0%B8%B2%E0%B8%84%E0%B8%A3%E0%B8%B4%E0%B8%99%E0%B8%B1%E0%B8%AA",
+			"badges": []
+		},
+		"tlwiki": {
+			"site": "tlwiki",
+			"title": "Macrinus",
+			"url": "//tl.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"trwiki": {
+			"site": "trwiki",
+			"title": "Macrinus",
+			"url": "//tr.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"ukwiki": {
+			"site": "ukwiki",
+			"title": "\u041c\u0430\u043a\u0440\u0456\u043d",
+			"url": "//uk.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BA%D1%80%D1%96%D0%BD",
+			"badges": []
+		},
+		"viwiki": {
+			"site": "viwiki",
+			"title": "Macrinus",
+			"url": "//vi.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"yowiki": {
+			"site": "yowiki",
+			"title": "Macrinus",
+			"url": "//yo.wikipedia.org/wiki/Macrinus",
+			"badges": []
+		},
+		"zhwiki": {
+			"site": "zhwiki",
+			"title": "\u9a6c\u514b\u91cc\u52aa\u65af",
+			"url": "//zh.wikipedia.org/wiki/%E9%A9%AC%E5%85%8B%E9%87%8C%E5%8A%AA%E6%96%AF",
+			"badges": []
+		}
+	}
+}

@@ -1,0 +1,851 @@
+{
+	"id": "P6",
+	"type": "property",
+	"aliases": {
+		"en": [
+			{
+				"language": "en",
+				"value": "mayor"
+			},
+			{
+				"language": "en",
+				"value": "president"
+			},
+			{
+				"language": "en",
+				"value": "prime minister"
+			},
+			{
+				"language": "en",
+				"value": "premier"
+			},
+			{
+				"language": "en",
+				"value": "first minister"
+			},
+			{
+				"language": "en",
+				"value": "head of national government"
+			}
+		],
+		"hr": [
+			{
+				"language": "hr",
+				"value": "gradona\u010delnik"
+			}
+		],
+		"el": [
+			{
+				"language": "el",
+				"value": "\u03ba\u03bf\u03b9\u03bd\u03bf\u03c4\u03ac\u03c1\u03c7\u03b7\u03c2"
+			},
+			{
+				"language": "el",
+				"value": "\u03b4\u03ae\u03bc\u03b1\u03c1\u03c7\u03bf\u03c2"
+			},
+			{
+				"language": "el",
+				"value": "\u03c0\u03c1\u03cc\u03b5\u03b4\u03c1\u03bf\u03c2"
+			},
+			{
+				"language": "el",
+				"value": "\u03cd\u03c0\u03b1\u03c4\u03bf\u03c2"
+			},
+			{
+				"language": "el",
+				"value": "\u03c0\u03c1\u03c9\u03b8\u03c5\u03c0\u03bf\u03c5\u03c1\u03b3\u03cc\u03c2"
+			}
+		],
+		"fr": [
+			{
+				"language": "fr",
+				"value": "maire"
+			},
+			{
+				"language": "fr",
+				"value": "bourgmestre"
+			},
+			{
+				"language": "fr",
+				"value": "pr\u00e9sident de commune"
+			},
+			{
+				"language": "fr",
+				"value": "syndic"
+			},
+			{
+				"language": "fr",
+				"value": "pr\u00e9sident du gouvernement"
+			},
+			{
+				"language": "fr",
+				"value": "pr\u00e9sident du Conseil"
+			},
+			{
+				"language": "fr",
+				"value": "Premier ministre"
+			},
+			{
+				"language": "fr",
+				"value": "pr\u00e9sident de la R\u00e9publique"
+			}
+		],
+		"pl": [
+			{
+				"language": "pl",
+				"value": "mer"
+			},
+			{
+				"language": "pl",
+				"value": "prezydent miasta"
+			},
+			{
+				"language": "pl",
+				"value": "szef w\u0142adzy wykonawczej"
+			},
+			{
+				"language": "pl",
+				"value": "starosta"
+			},
+			{
+				"language": "pl",
+				"value": "w\u00f3jt"
+			},
+			{
+				"language": "pl",
+				"value": "prefekt"
+			},
+			{
+				"language": "pl",
+				"value": "gubernator"
+			}
+		],
+		"cs": [
+			{
+				"language": "cs",
+				"value": "starosta"
+			},
+			{
+				"language": "cs",
+				"value": "prim\u00e1tor"
+			},
+			{
+				"language": "cs",
+				"value": "guvern\u00e9r"
+			},
+			{
+				"language": "cs",
+				"value": "premi\u00e9r"
+			},
+			{
+				"language": "cs",
+				"value": "kancl\u00e9\u0159"
+			}
+		],
+		"ilo": [
+			{
+				"language": "ilo",
+				"value": "mayor"
+			},
+			{
+				"language": "ilo",
+				"value": "alkalde"
+			}
+		],
+		"ru": [
+			{
+				"language": "ru",
+				"value": "\u043c\u044d\u0440"
+			},
+			{
+				"language": "ru",
+				"value": "\u0433\u043b\u0430\u0432\u0430 \u043c\u0443\u043d\u0438\u0446\u0438\u043f\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u043e\u0431\u0440\u0430\u0437\u043e\u0432\u0430\u043d\u0438\u044f"
+			},
+			{
+				"language": "ru",
+				"value": "\u0433\u043b\u0430\u0432\u0430 \u043a\u043e\u043c\u043c\u0443\u043d\u044b"
+			},
+			{
+				"language": "ru",
+				"value": "\u0433\u043b\u0430\u0432\u0430 \u043e\u0431\u0449\u0438\u043d\u044b"
+			},
+			{
+				"language": "ru",
+				"value": "\u0431\u0443\u0440\u0433\u043e\u043c\u0438\u0441\u0442\u0440"
+			},
+			{
+				"language": "ru",
+				"value": "\u0433\u0440\u0430\u0434\u043e\u043d\u0430\u0447\u0430\u043b\u044c\u043d\u0438\u043a"
+			},
+			{
+				"language": "ru",
+				"value": "\u0433\u043b\u0430\u0432\u0430 \u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u0438 \u0441\u0430\u043c\u043e\u0443\u043f\u0440\u0430\u0432\u043b\u044f\u0435\u043c\u043e\u0439 \u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u0438"
+			},
+			{
+				"language": "ru",
+				"value": "\u043f\u0440\u0435\u043c\u044c\u0435\u0440-\u043c\u0438\u043d\u0438\u0441\u0442\u0440"
+			},
+			{
+				"language": "ru",
+				"value": "\u0433\u0443\u0431\u0435\u0440\u043d\u0430\u0442\u043e\u0440"
+			},
+			{
+				"language": "ru",
+				"value": "\u043f\u0440\u0435\u0444\u0435\u043a\u0442"
+			},
+			{
+				"language": "ru",
+				"value": "\u043f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442 \u0442\u0435\u0440\u0440\u0438\u0442\u043e\u0440\u0438\u0430\u043b\u044c\u043d\u043e\u0439 \u0435\u0434\u0438\u043d\u0438\u0446\u044b"
+			}
+		],
+		"de": [
+			{
+				"language": "de",
+				"value": "B\u00fcrgermeister"
+			},
+			{
+				"language": "de",
+				"value": "Oberb\u00fcrgermeister"
+			},
+			{
+				"language": "de",
+				"value": "Ratsvorsitzender"
+			},
+			{
+				"language": "de",
+				"value": "Ortsb\u00fcrgermeister"
+			},
+			{
+				"language": "de",
+				"value": "Regierungschef"
+			}
+		],
+		"uk": [
+			{
+				"language": "uk",
+				"value": "\u043c\u0456\u0441\u044c\u043a\u0438\u0439 \u0433\u043e\u043b\u043e\u0432\u0430"
+			},
+			{
+				"language": "uk",
+				"value": "\u043c\u0435\u0440"
+			}
+		],
+		"lv": [
+			{
+				"language": "lv",
+				"value": "m\u0113rs"
+			}
+		],
+		"it": [
+			{
+				"language": "it",
+				"value": "sindaco"
+			},
+			{
+				"language": "it",
+				"value": "presidente"
+			}
+		],
+		"ro": [
+			{
+				"language": "ro",
+				"value": "primar"
+			}
+		],
+		"ja": [
+			{
+				"language": "ja",
+				"value": "\u77e5\u4e8b"
+			},
+			{
+				"language": "ja",
+				"value": "\u5e02\u9577"
+			},
+			{
+				"language": "ja",
+				"value": "\u753a\u9577"
+			},
+			{
+				"language": "ja",
+				"value": "\u6751\u9577"
+			},
+			{
+				"language": "ja",
+				"value": "\u9996\u9577"
+			}
+		],
+		"es": [
+			{
+				"language": "es",
+				"value": "jefe del gobierno municipal"
+			},
+			{
+				"language": "es",
+				"value": "alcalde"
+			},
+			{
+				"language": "es",
+				"value": "jefe de gobierno local"
+			},
+			{
+				"language": "es",
+				"value": "jefe de gobierno municipal"
+			}
+		],
+		"nl": [
+			{
+				"language": "nl",
+				"value": "burgemeester"
+			},
+			{
+				"language": "nl",
+				"value": "regeringsleider"
+			},
+			{
+				"language": "nl",
+				"value": "eerste minister"
+			},
+			{
+				"language": "nl",
+				"value": "gouverneur"
+			},
+			{
+				"language": "nl",
+				"value": "minister-president"
+			}
+		],
+		"be": [
+			{
+				"language": "be",
+				"value": "\u0433\u043b\u0430\u0432\u0430 \u0430\u0434\u043c\u0456\u043d\u0456\u0441\u0442\u0440\u0430\u0446\u044b\u0456"
+			},
+			{
+				"language": "be",
+				"value": "\u0433\u043b\u0430\u0432\u0430 \u043c\u0443\u043d\u0456\u0446\u044b\u043f\u0430\u043b\u044c\u043d\u0430\u0433\u0430 \u045e\u0442\u0432\u0430\u0440\u044d\u043d\u043d\u044f"
+			}
+		],
+		"ca": [
+			{
+				"language": "ca",
+				"value": "batlle"
+			}
+		],
+		"yi": [
+			{
+				"language": "yi",
+				"value": "\u05d1\u05d9\u05e8\u05d2\u05e2\u05e8\u05de\u05d9\u05d9\u05e1\u05d8\u05e2\u05e8"
+			},
+			{
+				"language": "yi",
+				"value": "\u05d2\u05d5\u05d1\u05e2\u05e8\u05e0\u05d0\u05d8\u05d0\u05e8"
+			},
+			{
+				"language": "yi",
+				"value": "\u05e4\u05e8\u05e2\u05d6\u05d9\u05d3\u05e2\u05e0\u05d8"
+			}
+		],
+		"te": [
+			{
+				"language": "te",
+				"value": "\u0c2e\u0c41\u0c16\u0c4d\u0c2f\u0c2e\u0c02\u0c24\u0c4d\u0c30\u0c3f"
+			},
+			{
+				"language": "te",
+				"value": "\u0c2a\u0c4d\u0c30\u0c27\u0c3e\u0c28 \u0c2e\u0c02\u0c24\u0c4d\u0c30\u0c3f"
+			},
+			{
+				"language": "te",
+				"value": "\u0c2e\u0c47\u0c2f\u0c30\u0c4d"
+			}
+		],
+		"hu": [
+			{
+				"language": "hu",
+				"value": "korm\u00e1nyf\u0151"
+			},
+			{
+				"language": "hu",
+				"value": "polg\u00e1rmester"
+			},
+			{
+				"language": "hu",
+				"value": "f\u0151polg\u00e1rmester"
+			}
+		],
+		"vi": [
+			{
+				"language": "vi",
+				"value": "th\u1ecb tr\u01b0\u1edfng"
+			},
+			{
+				"language": "vi",
+				"value": "th\u1ed1ng \u0111\u1ed1c"
+			},
+			{
+				"language": "vi",
+				"value": "th\u1ee7 t\u01b0\u1edbng"
+			},
+			{
+				"language": "vi",
+				"value": "t\u1ed5ng th\u1ed1ng"
+			},
+			{
+				"language": "vi",
+				"value": "ch\u1ee7 t\u1ecbch"
+			}
+		]
+	},
+	"labels": {
+		"en": {
+			"language": "en",
+			"value": "head of government"
+		},
+		"it": {
+			"language": "it",
+			"value": "capo del governo"
+		},
+		"de": {
+			"language": "de",
+			"value": "Leiter eines Regierungs- oder Verwaltungsorgans"
+		},
+		"fr": {
+			"language": "fr",
+			"value": "chef de l'ex\u00e9cutif"
+		},
+		"fi": {
+			"language": "fi",
+			"value": "hallituksen johtaja"
+		},
+		"cs": {
+			"language": "cs",
+			"value": "p\u0159edstavitel"
+		},
+		"zh-hans": {
+			"language": "zh-hans",
+			"value": "\u653f\u5e9c\u9996\u957f"
+		},
+		"hu": {
+			"language": "hu",
+			"value": "korm\u00e1nyzati vagy k\u00f6zigazgat\u00e1si vezet\u0151"
+		},
+		"hr": {
+			"language": "hr",
+			"value": "\u010delnik samouprave"
+		},
+		"es": {
+			"language": "es",
+			"value": "jefe de gobierno"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u0433\u043b\u0430\u0432\u0430 \u043f\u0440\u0430\u0432\u0438\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430"
+		},
+		"nl": {
+			"language": "nl",
+			"value": "bestuurshoofd"
+		},
+		"el": {
+			"language": "el",
+			"value": "\u03b5\u03c0\u03b9\u03ba\u03b5\u03c6\u03b1\u03bb\u03ae\u03c2 \u03b1\u03bd\u03ce\u03c4\u03b1\u03c4\u03bf\u03c5 \u03b4\u03b9\u03bf\u03b9\u03ba\u03b7\u03c4\u03b9\u03ba\u03bf\u03cd \u03bf\u03c1\u03b3\u03ac\u03bd\u03bf\u03c5"
+		},
+		"lmo": {
+			"language": "lmo",
+			"value": "sind\u00e9ch"
+		},
+		"pl": {
+			"language": "pl",
+			"value": "zarz\u0105dzaj\u0105cy"
+		},
+		"sr": {
+			"language": "sr",
+			"value": "\u043f\u0440\u0435\u0434\u0441\u0435\u0434\u043d\u0438\u043a \u0432\u043b\u0430\u0434\u0435"
+		},
+		"ca": {
+			"language": "ca",
+			"value": "cap de govern"
+		},
+		"zh": {
+			"language": "zh",
+			"value": "\u653f\u5e9c\u9996\u957f"
+		},
+		"ilo": {
+			"language": "ilo",
+			"value": "daulo ti lokal a gobierno"
+		},
+		"be": {
+			"language": "be",
+			"value": "\u0433\u043b\u0430\u0432\u0430 \u045e\u0440\u0430\u0434\u0430"
+		},
+		"fa": {
+			"language": "fa",
+			"value": "\u0634\u0647\u0631\u062f\u0627\u0631"
+		},
+		"nb": {
+			"language": "nb",
+			"value": "leder av regjering eller forvaltningsorgan"
+		},
+		"pt-br": {
+			"language": "pt-br",
+			"value": "prefeito"
+		},
+		"ko": {
+			"language": "ko",
+			"value": "\uc815\ubd80 \uc218\ubc18"
+		},
+		"ja": {
+			"language": "ja",
+			"value": "\u5730\u65b9\u884c\u653f\u5e9c\u306e\u9577"
+		},
+		"uk": {
+			"language": "uk",
+			"value": "\u0433\u043e\u043b\u043e\u0432\u0430 \u043c\u0443\u043d\u0456\u0446\u0438\u043f\u0430\u043b\u044c\u043d\u043e\u0457 \u0430\u0434\u043c\u0456\u043d\u0456\u0441\u0442\u0440\u0430\u0446\u0456\u0457"
+		},
+		"lv": {
+			"language": "lv",
+			"value": "vald\u012bbas vad\u012bt\u0101js"
+		},
+		"eo": {
+			"language": "eo",
+			"value": "estro"
+		},
+		"th": {
+			"language": "th",
+			"value": "\u0e2b\u0e31\u0e27\u0e2b\u0e19\u0e49\u0e32\u0e01\u0e32\u0e23\u0e1b\u0e01\u0e04\u0e23\u0e2d\u0e07\u0e2a\u0e48\u0e27\u0e19\u0e17\u0e49\u0e2d\u0e07\u0e16\u0e34\u0e48\u0e19"
+		},
+		"be-tarask": {
+			"language": "be-tarask",
+			"value": "\u043a\u0456\u0440\u0430\u045e\u043d\u0456\u043a \u0430\u0434\u043c\u0456\u043d\u0456\u0441\u0442\u0440\u0430\u0446\u044b\u0456"
+		},
+		"nds": {
+			"language": "nds",
+			"value": "Baas vun de Verwaltung"
+		},
+		"ro": {
+			"language": "ro",
+			"value": "\u0219eful administra\u021biei publice locale"
+		},
+		"vi": {
+			"language": "vi",
+			"value": "ch\u1ee7 t\u1ecbch ch\u00ednh ph\u1ee7"
+		},
+		"id": {
+			"language": "id",
+			"value": "kepala pemerintahan lokal"
+		},
+		"min": {
+			"language": "min",
+			"value": "kapalo pamarintahan satampek"
+		},
+		"ka": {
+			"language": "ka",
+			"value": "\u10d0\u10d3\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10d0\u10ea\u10d8\u10d8\u10e1 \u10db\u10d4\u10d7\u10d0\u10e3\u10e0\u10d8"
+		},
+		"uz": {
+			"language": "uz",
+			"value": "mahalliy hokimiyat boshlig\u02bbi"
+		},
+		"gl": {
+			"language": "gl",
+			"value": "xefe de goberno local"
+		},
+		"pt": {
+			"language": "pt",
+			"value": "chefe do executivo"
+		},
+		"zh-tw": {
+			"language": "zh-tw",
+			"value": "\u653f\u5e9c\u9996\u9577"
+		},
+		"zh-hant": {
+			"language": "zh-hant",
+			"value": "\u653f\u5e9c\u9996\u9577"
+		},
+		"en-gb": {
+			"language": "en-gb",
+			"value": "head of government"
+		},
+		"af": {
+			"language": "af",
+			"value": "hoof van plaaslike regering"
+		},
+		"da": {
+			"language": "da",
+			"value": "leder af forvaltning"
+		},
+		"sv": {
+			"language": "sv",
+			"value": "ledare"
+		},
+		"sco": {
+			"language": "sco",
+			"value": "heid o local govrenment"
+		},
+		"en-ca": {
+			"language": "en-ca",
+			"value": "head of local government"
+		},
+		"sk": {
+			"language": "sk",
+			"value": "predstavite\u013e"
+		},
+		"nds-nl": {
+			"language": "nds-nl",
+			"value": "heufd van lokaal bestuur"
+		},
+		"nn": {
+			"language": "nn",
+			"value": "lokal leiar"
+		},
+		"bn": {
+			"language": "bn",
+			"value": "\u09b8\u09cd\u09a5\u09be\u09a8\u09c0\u09af\u09bc \u09b8\u09b0\u0995\u09be\u09b0\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a7\u09be\u09a8"
+		},
+		"oc": {
+			"language": "oc",
+			"value": "cap de l'executiu"
+		},
+		"mk": {
+			"language": "mk",
+			"value": "\u043d\u0430\u0447\u0430\u043b\u043d\u0438\u043a \u043d\u0430 \u043b\u043e\u043a\u0430\u043b\u043d\u0430\u0442\u0430 \u0443\u043f\u0440\u0430\u0432\u0430"
+		},
+		"tl": {
+			"language": "tl",
+			"value": "punong ng gobyerno"
+		},
+		"gu": {
+			"language": "gu",
+			"value": "\u0ab8\u0ab0\u0a95\u0abe\u0ab0\u0aa8\u0abe \u0ab5\u0aa1\u0abe"
+		},
+		"sl": {
+			"language": "sl",
+			"value": "predsednik Vlade"
+		},
+		"ms": {
+			"language": "ms",
+			"value": "ketua kerajaan"
+		},
+		"ckb": {
+			"language": "ckb",
+			"value": "\u0633\u06d5\u0631\u06c6\u06a9"
+		},
+		"yi": {
+			"language": "yi",
+			"value": "\u05e8\u05e2\u05d2\u05d9\u05e8\u05d5\u05e0\u05d2 \u05d4\u05d5\u05d9\u05e4\u05d8"
+		},
+		"sr-ec": {
+			"language": "sr-ec",
+			"value": "\u043f\u0440\u0435\u0434\u0441\u0435\u0434\u043d\u0438\u043a \u0432\u043b\u0430\u0434\u0435"
+		},
+		"zh-cn": {
+			"language": "zh-cn",
+			"value": "\u653f\u5e9c\u9996\u957f"
+		},
+		"is": {
+			"language": "is",
+			"value": "stj\u00f3rnarlei\u00f0togi"
+		},
+		"mzn": {
+			"language": "mzn",
+			"value": "\u0634\u0647\u0631\u062f\u0627\u0631"
+		},
+		"rm": {
+			"language": "rm",
+			"value": "schef da la regenza"
+		},
+		"et": {
+			"language": "et",
+			"value": "valitsusjuht"
+		},
+		"ta": {
+			"language": "ta",
+			"value": "\u0b85\u0bb0\u0b9a\u0bbf\u0ba9\u0bcd \u0ba4\u0bb2\u0bc8\u0bb5\u0bb0\u0bcd"
+		},
+		"la": {
+			"language": "la",
+			"value": "praefectus"
+		},
+		"tt": {
+			"language": "tt",
+			"value": "\u0445\u04e9\u043a\u04af\u043c\u04d9\u0442 \u0431\u0430\u0448\u043b\u044b\u0433\u044b"
+		},
+		"te": {
+			"language": "te",
+			"value": "\u0c2a\u0c4d\u0c30\u0c2d\u0c41\u0c24\u0c4d\u0c35 \u0c2e\u0c41\u0c16\u0c4d\u0c2f\u0c3e\u0c27\u0c3f\u0c15\u0c3e\u0c30\u0c3f"
+		},
+		"zh-hk": {
+			"language": "zh-hk",
+			"value": "\u653f\u5e9c\u9996\u9577"
+		},
+		"or": {
+			"language": "or",
+			"value": "\u0b38\u0b30\u0b15\u0b3e\u0b30 \u0b2e\u0b41\u0b16\u0b4d\u0b5f"
+		},
+		"he": {
+			"language": "he",
+			"value": "\u05e8\u05d0\u05e9 \u05d4\u05e8\u05e9\u05d5\u05ea \u05d4\u05de\u05d5\u05e9\u05dc\u05ea"
+		},
+		"hi": {
+			"language": "hi",
+			"value": "\u0936\u093e\u0938\u0928\u093e\u0927\u094d\u092f\u0915\u094d\u0937"
+		}
+	},
+	"descriptions": {
+		"en": {
+			"language": "en",
+			"value": "head of the executive power of a town, city, municipality, state, country, or other governmental body"
+		},
+		"hr": {
+			"language": "hr",
+			"value": "glavni upravitelj grada, op\u0107ine ili \u017eupanije"
+		},
+		"fr": {
+			"language": "fr",
+			"value": "personne publique charg\u00e9e du pouvoir ex\u00e9cutif (quel que soit le niveau, y compris national)"
+		},
+		"de": {
+			"language": "de",
+			"value": "Leiter einer \u00f6ffentlichen Einrichtung der Exekutive (ungeachtet der Ebene, einschlie\u00dflich der nationalen)"
+		},
+		"es": {
+			"language": "es",
+			"value": "m\u00e1xima autoridad administrativa y legislativa de un pueblo, ciudad, municipio, pa\u00eds u otros organismos gubernamentales"
+		},
+		"it": {
+			"language": "it",
+			"value": "capo amministrativo di uno Stato, citt\u00e0, comune o municipalit\u00e0"
+		},
+		"he": {
+			"language": "he",
+			"value": "\u05e8\u05d0\u05e9 \u05e2\u05d9\u05e8, \u05e8\u05d0\u05e9 \u05de\u05d5\u05e2\u05e6\u05d4, \u05de\u05d3\u05d9\u05e0\u05d4"
+		},
+		"el": {
+			"language": "el",
+			"value": "\u03ba\u03cd\u03c1\u03b9\u03bf\u03c2 \u03b4\u03b9\u03bf\u03b9\u03ba\u03b7\u03c4\u03ae\u03c2 \u03bc\u03b9\u03b1\u03c2 \u03c7\u03ce\u03c1\u03b1\u03c2, \u03c0\u03cc\u03bb\u03b7\u03c2, \u03ba\u03c9\u03bc\u03cc\u03c0\u03bf\u03bb\u03b7\u03c2, \u03b4\u03ae\u03bc\u03bf\u03c5"
+		},
+		"cs": {
+			"language": "cs",
+			"value": "hlava exekutivy"
+		},
+		"ilo": {
+			"language": "ilo",
+			"value": "kangrunaan nga administrador ti maysa nga ili, siudad wenno munisipalidad"
+		},
+		"pt-br": {
+			"language": "pt-br",
+			"value": "chefe administrativo de uma cidade ou munic\u00edpio"
+		},
+		"lv": {
+			"language": "lv",
+			"value": "pils\u0113tas, pa\u0161vald\u012bbas, \u0161tata, valsts vai cita p\u0101rvaldes org\u0101na izpildvaras vad\u012bt\u0101js"
+		},
+		"ca": {
+			"language": "ca",
+			"value": "cap del govern municipal, estatal, nacional o d'altres organismes de govern"
+		},
+		"fi": {
+			"language": "fi",
+			"value": "Hallinnon johtaja"
+		},
+		"ro": {
+			"language": "ro",
+			"value": "\u0219eful administra\u021biei ora\u0219ului, comunei"
+		},
+		"nl": {
+			"language": "nl",
+			"value": "hoofd van de uitvoerende macht van het bestuursniveau (burgemeester, gouverneur, regeringsleider, ...)"
+		},
+		"id": {
+			"language": "id",
+			"value": "kepala administrasi kota atau kabupaten"
+		},
+		"min": {
+			"language": "min",
+			"value": "kapalo administrasi kota atau kabupaten"
+		},
+		"uz": {
+			"language": "uz",
+			"value": "shahar, shaharcha yoki boshqa turdagi aholi punktining boshlig\u02bbi"
+		},
+		"fa": {
+			"language": "fa",
+			"value": "\u0631\u0626\u06cc\u0633 \u0634\u0647\u0631 \u06cc\u0627 \u0634\u0647\u0631\u0633\u062a\u0627\u0646"
+		},
+		"en-gb": {
+			"language": "en-gb",
+			"value": "chief administrator of a town, city, municipality, country or other governmental body"
+		},
+		"sv": {
+			"language": "sv",
+			"value": "premi\u00e4rminister, borgm\u00e4stare, kommunstyrelsens ordf\u00f6rande och liknande"
+		},
+		"ja": {
+			"language": "ja",
+			"value": "\u5730\u65b9\u884c\u653f\u5e9c\uff08\u5e02\u3001\u753a\u3001\u305d\u306e\u4ed6\u306e\u81ea\u6cbb\u4f53\uff09\u306e\u9996\u9577"
+		},
+		"nb": {
+			"language": "nb",
+			"value": "\u00f8verste sjef for den offentlige forvaltningen av en by, et fylke, et land eller en annen administrativ inndelingsenhet"
+		},
+		"en-ca": {
+			"language": "en-ca",
+			"value": "chief administrator of a town, city, or municipality"
+		},
+		"nds-nl": {
+			"language": "nds-nl",
+			"value": "Bi'jveurbeeld in ne gemeente den b\u00f6rgemeister"
+		},
+		"nn": {
+			"language": "nn",
+			"value": "ordf\u00f8rar, borgarmeister osv."
+		},
+		"da": {
+			"language": "da",
+			"value": "leder af forvaltning i lande og administrative inddelinger af lande (regeringschef, r\u00e5dsformand, borgmester etc.)"
+		},
+		"ru": {
+			"language": "ru",
+			"value": "\u0432\u044b\u0441\u0448\u0435\u0435 \u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043d\u043e\u0435 \u043b\u0438\u0446\u043e, \u0433\u043b\u0430\u0432\u0430 \u0438\u0441\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0433\u043e \u043e\u0440\u0433\u0430\u043d\u0430 \u0433\u043e\u0440\u043e\u0434\u0430, \u043c\u0443\u043d\u0438\u0446\u0438\u043f\u0430\u043b\u0438\u0442\u0435\u0442\u0430, \u0441\u0442\u0440\u0430\u043d\u044b \u0438\u043b\u0438 \u0434\u0440\u0443\u0433\u043e\u0439 \u043f\u0440\u0430\u0432\u0438\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0439 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b"
+		},
+		"gu": {
+			"language": "gu",
+			"value": "\u0a97\u0abe\u0aae, \u0ab6\u0ab9\u0ac7\u0ab0, \u0aa8\u0a97\u0ab0\u0aaa\u0abe\u0ab2\u0abf\u0a95\u0abe, \u0aa6\u0ac7\u0ab6 \u0a85\u0aa5\u0ab5\u0abe \u0a85\u0aa8\u0acd\u0aaf \u0ab8\u0ab0\u0a95\u0abe\u0ab0\u0ac0 \u0a8f\u0a95\u0aae\u0aa8\u0abe \u0ab5\u0aa1\u0abe"
+		},
+		"zh-hant": {
+			"language": "zh-hant",
+			"value": "\u6751\u93ae\u3001\u57ce\u5e02\u3001\u76f4\u8f44\u5340\u3001\u570b\u5bb6\u6216\u5176\u4ed6\u884c\u653f\u5340\u57df\u7684\u6700\u9ad8\u7ba1\u6cbb\u8005"
+		},
+		"zh-hans": {
+			"language": "zh-hans",
+			"value": "\u6751\u9547\u3001\u57ce\u5e02\u3001\u76f4\u8f96\u533a\u3001\u56fd\u5bb6\u6216\u5176\u4ed6\u884c\u653f\u533a\u57df\u7684\u6700\u9ad8\u7ba1\u6cbb\u8005"
+		},
+		"zh": {
+			"language": "zh",
+			"value": "\u6751\u9547\u3001\u57ce\u5e02\u3001\u76f4\u8f96\u533a\u3001\u56fd\u5bb6\u6216\u5176\u4ed6\u884c\u653f\u533a\u57df\u7684\u6700\u9ad8\u7ba1\u6cbb\u8005"
+		},
+		"ko": {
+			"language": "ko",
+			"value": "\ud589\uc815\ubd80, \uc9c0\ubc29\uc790\uce58\ub2e8\uccb4 \ub4f1 \uc815\ubd80 \uae30\uad00\uc758 \uc218\uc7a5"
+		},
+		"hu": {
+			"language": "hu",
+			"value": "\u00e1llamban, v\u00e1rosban, \u00f6nkorm\u00e1nyzatban a v\u00e9grehajt\u00f3 hatalom vezet\u0151je"
+		},
+		"ta": {
+			"language": "ta",
+			"value": "\u0ba8\u0b95\u0bb0\u0bcd, \u0bae\u0bbe\u0ba8\u0b95\u0bb0\u0bcd, \u0bae\u0bbe\u0ba8\u0bbf\u0bb2\u0bae\u0bcd, \u0ba8\u0bbe\u0b9f\u0bc1 \u0b85\u0bb2\u0bcd\u0bb2\u0ba4\u0bc1 \u0b85\u0bb0\u0b9a\u0bbe\u0b99\u0bcd\u0b95 \u0b85\u0bae\u0bc8\u0baa\u0bcd\u0baa\u0bc1 \u0b86\u0b95\u0bbf\u0baf\u0bb5\u0bb1\u0bcd\u0bb1\u0bbf\u0ba9\u0bcd \u0ba8\u0bbf\u0bb0\u0bc1\u0bb5\u0bbe\u0b95 \u0b85\u0ba4\u0bbf\u0b95\u0bbe\u0bb0\u0bae\u0bcd \u0b95\u0bca\u0ba3\u0bcd\u0b9f \u0ba4\u0bb2\u0bc8\u0bb5\u0bb0\u0bcd"
+		},
+		"te": {
+			"language": "te",
+			"value": "\u0c2a\u0c1f\u0c4d\u0c1f\u0c23, \u0c28\u0c17\u0c30, \u0c30\u0c3e\u0c37\u0c4d\u0c1f\u0c4d\u0c30, \u0c26\u0c47\u0c36 \u0c32\u0c47\u0c26\u0c3e \u0c07\u0c24\u0c30 \u0c2a\u0c4d\u0c30\u0c2d\u0c41\u0c24\u0c4d\u0c35 \u0c38\u0c02\u0c38\u0c4d\u0c25 \u0c2f\u0c4a\u0c15\u0c4d\u0c15 \u0c2e\u0c41\u0c16\u0c4d\u0c2f \u0c2a\u0c30\u0c3f\u0c2a\u0c3e\u0c32\u0c28\u0c3e\u0c27\u0c3f\u0c15\u0c3e\u0c30\u0c3f"
+		},
+		"zh-cn": {
+			"language": "zh-cn",
+			"value": "\u6751\u9547\u3001\u57ce\u5e02\u3001\u76f4\u8f96\u533a\u3001\u56fd\u5bb6\u6216\u5176\u4ed6\u884c\u653f\u533a\u57df\u7684\u6700\u9ad8\u7ba1\u6cbb\u8005"
+		},
+		"zh-hk": {
+			"language": "zh-hk",
+			"value": "\u6751\u93ae\u3001\u57ce\u5e02\u3001\u76f4\u8f44\u5340\u3001\u570b\u5bb6\u6216\u5176\u4ed6\u884c\u653f\u5340\u57df\u7684\u6700\u9ad8\u7ba1\u6cbb\u8005"
+		}
+	},
+	"datatype": "wikibase-item"
+}
