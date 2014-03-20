@@ -477,8 +477,9 @@ abstract class ApiWikibase extends \ApiBase {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
-		$bot = isset( $params['bot'] ) ? $params['bot'] : false;
-		$flags |= ( $bot && $user->isAllowed( 'bot' ) ) ? EDIT_FORCE_BOT : 0;
+		if ( isset( $params['bot'] ) && $params['bot'] && $user->isAllowed( 'bot' ) ) {
+			$flags |= EDIT_FORCE_BOT;
+		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
