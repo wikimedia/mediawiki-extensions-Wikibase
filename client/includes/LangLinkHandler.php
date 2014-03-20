@@ -46,11 +46,6 @@ class LangLinkHandler {
 	protected $sites;
 
 	/**
-	 * @var Site[]
-	 */
-	private $sitesByNavigationId = null;
-
-	/**
 	 * @var string
 	 */
 	private $siteGroup;
