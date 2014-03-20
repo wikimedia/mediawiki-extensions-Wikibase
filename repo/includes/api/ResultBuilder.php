@@ -128,21 +128,9 @@ class ResultBuilder {
 	 * @throws InvalidArgumentException
 	 */
 	public function setList( $path, $name, array $values, $tag ){
-		if ( is_string( $path ) ) {
-			$path = array( $path );
-		}
-
-		if ( !is_array( $path ) && $path !== null ) {
-			throw new InvalidArgumentException( '$path must be an array (or null)' );
-		}
-
-		if ( !is_string( $name ) ) {
-			throw new InvalidArgumentException( '$name must be a string' );
-		}
-
-		if ( !is_string( $tag ) ) {
-			throw new InvalidArgumentException( '$tag must be a string' );
-		}
+		$this->checkPathType( $path );
+		$this->checkNameIsString( $name );
+		$this->checkTagIsString( $tag );
 
 		if ( $this->options->shouldIndexTags() ) {
 			$values = array_values( $values );
@@ -171,21 +159,9 @@ class ResultBuilder {
 	 * @throws InvalidArgumentException
 	 */
 	public function setValue( $path, $name, $value ){
-		if ( is_string( $path ) ) {
-			$path = array( $path );
-		}
-
-		if ( !is_array( $path ) && $path !== null ) {
-			throw new InvalidArgumentException( '$path must be an array (or null)' );
-		}
-
-		if ( !is_string( $name ) ) {
-			throw new InvalidArgumentException( '$name must be a string' );
-		}
-
-		if ( is_array( $value ) && isset( $value[0] ) ) {
-			throw new InvalidArgumentException( '$value must not be a list' );
-		}
+		$this->checkPathType( $path );
+		$this->checkNameIsString( $name );
+		$this->checkValueIsNotList( $value );
 
 		$this->getResult()->addValue( $path, $name, $value );
 	}
@@ -211,25 +187,11 @@ class ResultBuilder {
 	 * @throws InvalidArgumentException
 	 */
 	public function appendValue( $path, $key, $value, $tag ){
-		if ( is_string( $path ) ) {
-			$path = array( $path );
-		}
+		$this->checkPathType( $path );
+		$this->checkKeyType( $key );
+		$this->checkTagIsString( $tag );
 
-		if ( !is_array( $path ) && $path !== null ) {
-			throw new InvalidArgumentException( '$path must be an array (or null)' );
-		}
-
-		if ( $key !== null && !is_string( $key ) && !is_int( $key ) ) {
-			throw new InvalidArgumentException( '$key must be a string, int, or null' );
-		}
-
-		if ( !is_string( $tag ) ) {
-			throw new InvalidArgumentException( '$tag must be a string' );
-		}
-
-		if ( is_array( $value ) && isset( $value[0] ) ) {
-			throw new InvalidArgumentException( '$value must not be a list' );
-		}
+		$this->checkValueIsNotList( $value );
 
 		if ( $this->options->shouldIndexTags() ) {
 			$key = null;
@@ -239,6 +201,65 @@ class ResultBuilder {
 
 		if ( $this->getResult()->getIsRawMode() && !is_string( $key ) ) {
 			$this->getResult()->setIndexedTagName_internal( $path, $tag );
+		}
+	}
+
+	/**
+	 * @param array|string|null $path
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function checkPathType( $path ) {
+		if ( is_string( $path ) ) {
+			$path = array( $path );
+		}
+
+		if ( !is_array( $path ) && $path !== null ) {
+			throw new InvalidArgumentException( '$path must be an array (or null)' );
+		}
+	}
+
+	/**
+	 * @param string $name
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function checkNameIsString( $name ) {
+		if ( !is_string( $name ) ) {
+			throw new InvalidArgumentException( '$name must be a string' );
+		}
+	}
+
+	/**
+	 * @param $key int|string|null the key to use when appending, or null for automatic.
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function checkKeyType( $key ) {
+		if ( $key !== null && !is_string( $key ) && !is_int( $key ) ) {
+			throw new InvalidArgumentException( '$key must be a string, int, or null' );
+		}
+	}
+
+	/**
+	 * @param string $tag tag name to use for elements of $values
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function checkTagIsString( $tag ) {
+		if ( !is_string( $tag ) ) {
+			throw new InvalidArgumentException( '$tag must be a string' );
+		}
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function checkValueIsNotList( $value ) {
+		if ( is_array( $value ) && isset( $value[0] ) ) {
+			throw new InvalidArgumentException( '$value must not be a list' );
 		}
 	}
 
