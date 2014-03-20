@@ -57,8 +57,15 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected $badgeItems;
 
-	public function __construct( ApiMain $main, $name, $prefix = '' ) {
-		parent::__construct( $main, $name, $prefix );
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		//TODO: provide a mechanism to override the services
 		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();

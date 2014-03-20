@@ -70,11 +70,6 @@ abstract class ApiWikibase extends \ApiBase {
 	protected $entityLookup;
 
 	/**
-	 * @var EntityRevisionLookup
-	 */
-	protected $uncachedEntityLookup;
-
-	/**
 	 * @var EntityStore
 	 */
 	protected $entityStore;
@@ -98,6 +93,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -255,6 +252,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	public function checkPermissions( Entity $entity, User $user, array $params ) {
 		$permissions = $this->getRequiredPermissions( $entity, $params );
+		$permissions = array_unique( $permissions );
 		$status = Status::newGood();
 
 		foreach ( $permissions as $perm ) {
