@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_e364d4e3",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T21:15:22Z",
+      "side": 1,
+      "message": "Done\nThe typo in the CalendarModelParser class is removed in to next release of Time",
+      "parentUuid": "ee14bf34_43014007",
+      "revId": "687301fecbee469283c8435dfd05b319cd7ad8f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_23064c21",
         "filename": "lib/includes/parsers/TimeParser.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-20T21:10:56Z",
       "side": 1,
       "message": "calendar",
+      "revId": "687301fecbee469283c8435dfd05b319cd7ad8f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_236becb6",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T21:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_23064c21",
       "revId": "687301fecbee469283c8435dfd05b319cd7ad8f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
