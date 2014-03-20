@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_941b1982",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T13:16:00Z",
+      "side": 1,
+      "message": "I think isReadMode should return false.",
+      "revId": "7e8ced1bed0380a4d465f823d93292c5210abedd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b4161d59",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T13:16:00Z",
+      "side": 1,
+      "message": "I think isReadMode should return false.",
+      "revId": "7e8ced1bed0380a4d465f823d93292c5210abedd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d42191ad",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T13:16:00Z",
+      "side": 1,
+      "message": "I think isReadMode should return false.",
+      "revId": "7e8ced1bed0380a4d465f823d93292c5210abedd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f41c957e",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T13:16:00Z",
+      "side": 1,
+      "message": "I think isReadMode should return false.",
+      "revId": "7e8ced1bed0380a4d465f823d93292c5210abedd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
