@@ -255,6 +255,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 */
 	public function checkPermissions( Entity $entity, User $user, array $params ) {
 		$permissions = $this->getRequiredPermissions( $entity, $params );
+		$permissions = array_unique( $permissions );
 		$status = Status::newGood();
 
 		foreach ( $permissions as $perm ) {
