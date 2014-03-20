@@ -481,8 +481,7 @@ abstract class ApiWikibase extends \ApiBase {
 			$flags |= EDIT_FORCE_BOT;
 		}
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$baseRevisionId = $this->evaluateBaseRevisionParam( $params );
 
 		//TODO: allow injection/override!
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
@@ -498,13 +497,7 @@ abstract class ApiWikibase extends \ApiBase {
 			$baseRevisionId,
 			$this->getContext() );
 
-		if ( !$this->needsToken() ) {
-			// false disabled the token check
-			$token = false;
-		} else {
-			// null fails the token check
-			$token = isset( $params['token'] ) ? $params['token'] : null;
-		}
+		$token = $this->evaluateTokenParam( $params );
 
 		$status = $editEntity->attemptSave(
 			$summary,
@@ -514,6 +507,35 @@ abstract class ApiWikibase extends \ApiBase {
 
 		$this->handleSaveStatus( $status );
 		return $status;
+	}
+
+	/**
+	 * @param array $params
+	 *
+	 * @return false|null|string
+	 */
+	protected function evaluateTokenParam( array $params ) {
+		if ( !$this->needsToken() ) {
+			// false disabled the token check
+			$token = false;
+		} else {
+			// null fails the token check
+			$token = isset( $params['token'] ) ? $params['token'] : null;
+		}
+
+		return $token;
+	}
+
+	/**
+	 * @param array $params
+	 *
+	 * @return null|false|int
+	 */
+	protected function evaluateBaseRevisionParam( array $params ) {
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+
+		return $baseRevisionId;
 	}
 
 	protected function formatSummary( Summary $summary ) {
