@@ -35,7 +35,7 @@ class SnakListDeserializer implements Deserializer {
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
-		$this->assertCanDeserialize( $serialization );
+		$this->assertHasGoodFormat( $serialization );
 
 		return $this->getDeserialized( $serialization );
 	}
@@ -52,9 +52,9 @@ class SnakListDeserializer implements Deserializer {
 		return $snakList;
 	}
 
-	private function assertCanDeserialize( $serialization ) {
+	private function assertHasGoodFormat( $serialization ) {
 		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'The serialization should be an array' );
+			throw new DeserializationException( 'The SnakList serialization should be an array' );
 		}
 
 		foreach ( $serialization as $snaksOfPropertySerialization ) {
