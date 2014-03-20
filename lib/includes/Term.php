@@ -67,7 +67,6 @@ class Term {
 					break;
 				default:
 					throw new MWException( 'Invalid term field provided' );
-					break;
 			}
 		}
 	}
