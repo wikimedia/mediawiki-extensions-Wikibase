@@ -2,9 +2,11 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -16,13 +18,13 @@ use Wikibase\DataModel\Snak\SnakList;
 class ReferenceSerializerTest extends SerializerBaseTest {
 
 	public function buildSerializer() {
-		$referenceSerializerMock = $this->getMock( '\Serializers\Serializer' );
-		$referenceSerializerMock->expects( $this->any() )
+		$snakListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new SnakList( array() ) ) )
 			->will( $this->returnValue( array() ) );
 
-		return new ReferenceSerializer( $referenceSerializerMock );
+		return new ReferenceSerializer( $snakListSerializerMock );
 	}
 
 	public function serializableProvider() {
@@ -57,10 +59,41 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 			array(
 				array(
 					'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-					'snaks' => array()
+					'snaks' => array(),
+					'snaks-order' => array()
 				),
 				new Reference()
 			),
+		);
+	}
+
+	public function testSnaksOrderSerialization() {
+		$snakListSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$snakListSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->with( $this->equalTo( new SnakList( array(
+				new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
+				new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
+				new PropertyNoValueSnak( new PropertyId( 'P24' ) )
+			) ) ) )
+			->will( $this->returnValue( array() ) );
+
+		$referenceSerializer = new ReferenceSerializer( $snakListSerializerMock );
+
+		$this->assertEquals(
+			array(
+				'hash' => 'c473c0006ec3e5930a0b3d87406909d4c87dae96',
+				'snaks' => array(),
+				'snaks-order' => array(
+					'P42',
+					'P24'
+				)
+			),
+			$referenceSerializer->serialize( new Reference( new SnakList( array(
+				new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
+				new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
+				new PropertyNoValueSnak( new PropertyId( 'P24' ) )
+			) ) ) )
 		);
 	}
 }
