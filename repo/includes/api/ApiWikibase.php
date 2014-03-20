@@ -2,18 +2,19 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use ApiMain;
 use Exception;
 use LogicException;
 use Message;
 use MessageCache;
+use Status;
 use UsageException;
 use User;
-use Status;
-use ApiBase;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\EditEntity;
 use Wikibase\EntityFactory;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
@@ -21,7 +22,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
@@ -38,7 +38,7 @@ use Wikibase\SummaryFormatter;
  * @author Adam Shorland
  * @author Daniel Kinzler
  */
-abstract class ApiWikibase extends \ApiBase {
+abstract class ApiWikibase extends ApiBase {
 
 	private $resultBuilder;
 
@@ -72,11 +72,6 @@ abstract class ApiWikibase extends \ApiBase {
 	protected $entityLookup;
 
 	/**
-	 * @var EntityRevisionLookup
-	 */
-	protected $uncachedEntityLookup;
-
-	/**
 	 * @var EntityStore
 	 */
 	protected $entityStore;
@@ -100,6 +95,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -281,10 +278,7 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @throws \UsageException
 	 * @return EntityRevision
 	 */
-	protected function loadEntityRevision(
-		EntityId $entityId,
-		$revId = 0
-	) {
+	protected function loadEntityRevision( EntityId $entityId, $revId = 0 ) {
 		try {
 			$revision = $this->entityLookup->getEntityRevision( $entityId, $revId );
 
@@ -680,4 +674,5 @@ abstract class ApiWikibase extends \ApiBase {
 		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
 		return $localizer->getExceptionMessage( $error );
 	}
+
 }

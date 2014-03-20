@@ -2,12 +2,12 @@
 
 namespace Wikibase\Api;
 
-use ApiMain;
 use ApiBase;
+use ApiMain;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\Summary;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
@@ -43,7 +43,11 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $snakValidation;
 
 	/**
-	 * see ApiBase::__construct()
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
@@ -162,4 +166,5 @@ abstract class ModifyClaim extends ApiWikibase {
 			)
 		);
 	}
+
 }

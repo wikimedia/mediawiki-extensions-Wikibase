@@ -40,8 +40,7 @@ class FormatSnakValue extends ApiWikibase {
 	 */
 	protected function getFormatterFactory() {
 		if ( $this->formatterFactory === null ) {
-
-			$this->formatterFactory =  WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
+			$this->formatterFactory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
 		}
 
 		return $this->formatterFactory;
@@ -87,7 +86,7 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
-	 * @throws \LogicException
+	 * @throws LogicException
 	 * @return ValueFormatter
 	 */
 	private function getFormatter() {
@@ -265,4 +264,5 @@ class FormatSnakValue extends ApiWikibase {
 			//TODO: example for the options parameter, once we have something sensible to show there.
 		);
 	}
+
 }
