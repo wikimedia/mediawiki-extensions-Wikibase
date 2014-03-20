@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityFactory;
+use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
@@ -89,6 +90,11 @@ abstract class ApiWikibase extends \ApiBase {
 	protected $summaryFormatter;
 
 	/**
+	 * @var EntityPermissionChecker
+	 */
+	protected $permissionChecker;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -107,6 +113,8 @@ abstract class ApiWikibase extends \ApiBase {
 
 		$this->dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+
+		$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
 	}
 
 	/**
@@ -213,13 +221,26 @@ abstract class ApiWikibase extends \ApiBase {
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
+	 * Per default, this will include the 'read' permission if $this->isReadMode() returns true,
+	 * and the 'edit' permission if $this->isWriteMode() returns true,
+	 *
 	 * @param Entity $entity The entity to check permissions for
 	 * @param array $params Arguments for the module, describing the operation to be performed
 	 *
 	 * @return array A list of permissions
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		return array();
+		$permissions = array();
+
+		if ( $this->isReadMode() ) {
+			$permissions[] = 'read';
+		}
+
+		if ( $this->isWriteMode() ) {
+			$permissions[] = 'edit';
+		}
+
+		return $permissions;
 	}
 
 	/**
@@ -236,11 +257,8 @@ abstract class ApiWikibase extends \ApiBase {
 		$permissions = $this->getRequiredPermissions( $entity, $params );
 		$status = Status::newGood();
 
-		//TODO: factor permission check logic out of EntityContent
-		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
-
 		foreach ( $permissions as $perm ) {
-			$permStatus = $entityContent->checkPermission( $perm, $user, true );
+			$permStatus = $this->permissionChecker->getPermissionStatusForEntity( $user, $perm, $entity );
 			$status->merge( $permStatus );
 		}
 
