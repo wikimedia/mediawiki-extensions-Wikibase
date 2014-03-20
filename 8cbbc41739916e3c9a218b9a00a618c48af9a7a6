@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_a315bd9e",
+        "filename": "lib/includes/parsers/EraParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T20:49:29Z",
+      "side": 1,
+      "message": "\"Before\" again?",
+      "revId": "8cbbc41739916e3c9a218b9a00a618c48af9a7a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_437b81eb",
+        "filename": "lib/includes/parsers/EraParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T20:49:29Z",
+      "side": 1,
+      "message": "The \"?\" is not needed, it will just cause an unnecessary \"replace empty string with empty string\".",
+      "revId": "8cbbc41739916e3c9a218b9a00a618c48af9a7a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
