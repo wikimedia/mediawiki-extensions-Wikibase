@@ -234,7 +234,7 @@ final class Utils {
 			// XXX: there's a race condition here.
 			if ( file_exists( $pidfile ) ) {
 				$pid = file_get_contents( $pidfile );
-				if ( Utils::isPidAlive( $pid ) === true ) {
+				if ( self::isPidAlive( $pid ) === true ) {
 					return false;
 				}
 			}
