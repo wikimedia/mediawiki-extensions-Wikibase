@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_340a0d2a",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T13:37:29Z",
+      "side": 1,
+      "message": "EntityView::getParserOutput uses serialization options from EntityContent (ick, yes)\n\nthere, we have:\n\n    protected function makeSerializationOptions( $langCode, LanguageFallbackChain $fallbackChain ) { \n        $langCodes \u003d Utils::getLanguageCodes() + array( $langCode \u003d\u003e $fallbackChain );                 \n                                                                                                       \n        $options \u003d new SerializationOptions();                                                         \n        $options-\u003esetLanguages( $langCodes );                                                          \n                                                                                                       \n        return $options;                                                                               \n    } \n\nimportant to be consistent. this is how it\u0027s been done, even before these were cached.  I am concerned about causing an issue in the frontend by changing there here and now.\n\nare you sure that the JS does not use these other languages in any way? I am definitely *not* sure about that.\n\nare you also sure that none of the gadgets use those other languages?  I am definitely **not** sure.",
+      "parentUuid": "ee14bf34_d4bd1165",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_54a90120",
         "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-20T12:32:40Z",
       "side": 1,
       "message": "Oh, please don\u0027t use EntityContentFactory any more. Use an EntityLookup or EntityRevisionLookup  instead.",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7462c507",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T13:37:29Z",
+      "side": 1,
+      "message": "can do in follow up",
+      "parentUuid": "ee14bf34_54a90120",
       "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b76a9faf",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T13:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_94b79981",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_5478e1be",
         "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-20T12:32:40Z",
       "side": 1,
       "message": "If all we need is the config vars, this method just only ask for the configVars, not OutputPage.",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d7751394",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T13:37:29Z",
+      "side": 1,
+      "message": "was able to get rid of the method completely",
+      "parentUuid": "ee14bf34_5478e1be",
       "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_1459495d",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T13:37:29Z",
+      "side": 1,
+      "message": "do in follow up, didn\u0027t touch this here.  did change so that we pass revision id as a param",
+      "parentUuid": "ee14bf34_74ac0533",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_f467f520",
         "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
         "patchSetId": 4
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_f435b5f4",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T13:37:29Z",
+      "side": 1,
+      "message": "in follow up",
+      "parentUuid": "ee14bf34_f467f520",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_747be5bd",
         "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
         "patchSetId": 4
@@ -115,6 +223,24 @@
       "writtenOn": "2014-03-20T12:32:40Z",
       "side": 1,
       "message": "If all we need here is the language code, the method should ask for just the language code.",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_976f9bc0",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-20T13:37:29Z",
+      "side": 1,
+      "message": "actually, this is unused.  removed it.",
+      "parentUuid": "ee14bf34_747be5bd",
       "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
