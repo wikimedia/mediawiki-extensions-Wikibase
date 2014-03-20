@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee14bf34_948b1920",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T11:14:32Z",
+      "side": 1,
+      "message": "Isn\u0027t this a breaking change that changes the semantics of some API requests? Not all of them override this method.",
+      "revId": "bfe4222b62747dc98c5549de20153ab3a8a35776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_d4aab181",
         "filename": "repo/tests/phpunit/includes/PermissionsHelper.php",
         "patchSetId": 9
