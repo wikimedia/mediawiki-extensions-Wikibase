@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_347b2ded",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T11:40:04Z",
+      "side": 1,
+      "message": "could be public for separate testing",
+      "revId": "290e4508f098189719fdfc7d5d24fa4bcc7c0698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_147829ec",
+        "filename": "client/includes/hooks/SpecialWatchlistQueryHandler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T11:40:04Z",
+      "side": 1,
+      "message": "could be public for separate testing",
+      "revId": "290e4508f098189719fdfc7d5d24fa4bcc7c0698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_546ea12b",
+        "filename": "client/tests/phpunit/includes/hooks/SpecialWatchlistQueryHandlerTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T11:40:04Z",
+      "side": 1,
+      "message": "What will it return otherwise? Generally, if there is a return on one code path, there should be a return on all code pathes.",
+      "revId": "290e4508f098189719fdfc7d5d24fa4bcc7c0698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
