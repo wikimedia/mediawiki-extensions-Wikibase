@@ -32,10 +32,10 @@ class SetQualifier extends ModifyClaim {
 		$this->validateParameters( $params );
 
 		$entityId = $this->claimGuidParser->parse( $params['claim'] )->getEntityId();
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
-		$entity = $entityContent->getEntity();
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		$entity = $entityRevision->getEntity();
+
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['claim'], $entity );
@@ -52,7 +52,7 @@ class SetQualifier extends ModifyClaim {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
+		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addClaim( $claim );
 

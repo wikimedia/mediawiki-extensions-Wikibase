@@ -33,23 +33,23 @@ class RemoveClaims extends ModifyClaim {
 
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
-		$entityTitle = $this->claimModificationHelper->getEntityTitle( $entityId );
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
+		$entity = $entityRevision->getEntity();
 
-		$this->checkClaims( $entityContent->getEntity(), $params['claim'] );
+		$this->checkClaims( $entity, $params['claim'] );
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $params ) );
 
 		try {
-			$changeOps->apply( $entityContent->getEntity(), $summary );
+			$changeOps->apply( $entity, $summary );
 		} catch ( ChangeOpException $e ) {
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 
-		$this->saveChanges( $entityContent, $summary );
+		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->setList( null, 'claims', $params['claim'], 'claim' );
 
@@ -66,7 +66,6 @@ class RemoveClaims extends ModifyClaim {
 	 * @return EntityId
 	 */
 	protected function getEntityId( array $params ) {
-		$claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 		$entityId = null;
 
 		foreach ( $params['claim'] as $guid ) {
@@ -75,9 +74,9 @@ class RemoveClaims extends ModifyClaim {
 			}
 
 			if ( is_null( $entityId ) ) {
-				$entityId = $claimGuidParser->parse( $guid )->getEntityId();
+				$entityId = $this->claimGuidParser->parse( $guid )->getEntityId();
 			} else {
-				if ( !$claimGuidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
+				if ( !$this->claimGuidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
 					$this->dieUsage( 'All claims must belong to the same entity' , 'invalid-guid' );
 				}
 			}
