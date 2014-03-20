@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_922a09d6",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T17:04:57Z",
+      "side": 1,
+      "message": "As far as I am aware there would be no other way to use the DateTime object...\nA year has to be passed in.\nIf we cant pass in a 5 digit+ year then we must pass in a dummy year that we can change later.\nThis is the same as is currently done in the time formatters where again a 5+ digit year can not be used.",
+      "parentUuid": "ee14bf34_50debf71",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_dc2f8b9b",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-18T10:50:08Z",
       "side": 1,
       "message": "Please document what format is expected.\nAlso, \"and returns the result\" is a bit redundant :)",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7227750e",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T17:04:57Z",
+      "side": 1,
+      "message": "Done in next PS",
+      "parentUuid": "ee14bf34_dc2f8b9b",
       "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_52247107",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T17:04:57Z",
+      "side": 1,
+      "message": "Daniel, I am confused by your comment, thats is basically what we are doing.\nWe are taking the year our and putting in a placeholder year, though instead of 2000 I am using 4242. Then we parse it and put the original year back.\n\nLeap years are indeed a special case that I have not thought about.\nAs 4242 is apparently not a leap year all 29ths of Feb for years with more than 5 digits would be parsed as the 1st of March instead.",
+      "parentUuid": "ee14bf34_10bf27f8",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_d0dc0f4e",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 4
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_3221fdf6",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T17:04:57Z",
+      "side": 1,
+      "message": "Indeed that is what happens in the formatting class currently.\nWe would have exactly the same problem parsing in this way as you have mentioned above with leap years.",
+      "parentUuid": "ee14bf34_d0dc0f4e",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_b054fbca",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 4
@@ -99,6 +171,24 @@
       "writtenOn": "2014-03-18T11:49:49Z",
       "side": 1,
       "message": "str_replace is enough.\n\nAlso, you do not have the guarantee that your placeholder number still is in the string and still looks exactly the same. You don\u0027t really know what DateTime does.",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_127ef9e1",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-20T17:04:57Z",
+      "side": 1,
+      "message": "DateTime will give me the year as I ask for it in the fromat...\n\u0027Y-m-d\\TH:i:s\\Z\u0027\nthus the year will always be there as exactly \u00274242\u0027\nstr_replace does not have a $limit parameter so I would prefer to use preg_replace here\nI guess another options would be to simply remove the first 4 characters and replace them with our year, that would certainly save a few micro server kittens",
+      "parentUuid": "ee14bf34_b054fbca",
       "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
