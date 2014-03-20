@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_5744631c",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T13:56:00Z",
+      "side": 1,
+      "message": "Three of these variables are unused. Looks like a mistake or a merge that got wrong?",
+      "revId": "838e9d1466e12875c77c4b717124ae3444e6b18e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
