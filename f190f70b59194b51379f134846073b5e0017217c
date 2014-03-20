@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_548221aa",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:21:54Z",
+      "side": 1,
+      "message": "Hm? I don\u0027t understand. You only need pass-by-reference if you want to REPLACE the object. In PHP5, you can modify objects that were passed \"normally\" (which is, implicitly, another kind of \"pass by reference\" - using the same semantics as Java for this). \n\nIn PHP4, you needed to pass objects by references if you want to modify them. These days are long gone, luckily.",
+      "parentUuid": "ee14bf34_75a08d3e",
+      "revId": "f190f70b59194b51379f134846073b5e0017217c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_7563ed3b",
         "filename": "client/includes/hooks/BeforePageDisplayJsConfigHandler.php",
         "patchSetId": 20
