@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
-use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
@@ -16,7 +15,7 @@ use Wikibase\DataModel\SiteLink;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SiteLinkDeserializer implements DispatchableDeserializer {
+class SiteLinkDeserializer implements Deserializer {
 
 	/**
 	 * @var Deserializer
@@ -28,19 +27,6 @@ class SiteLinkDeserializer implements DispatchableDeserializer {
 	 */
 	public function __construct( Deserializer $entityIdDeserializer ) {
 		$this->entityIdDeserializer = $entityIdDeserializer;
-	}
-
-	/**
-	 * @see Deserializer::isDeserializerFor
-	 *
-	 * @param mixed $serialization
-	 *
-	 * @return boolean
-	 */
-	public function isDeserializerFor( $serialization ) {
-		return is_array( $serialization ) &&
-			array_key_exists( 'site', $serialization ) &&
-			array_key_exists( 'title', $serialization );
 	}
 
 	/**
