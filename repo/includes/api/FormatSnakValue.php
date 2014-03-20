@@ -40,8 +40,7 @@ class FormatSnakValue extends ApiWikibase {
 	 */
 	protected function getFormatterFactory() {
 		if ( $this->formatterFactory === null ) {
-
-			$this->formatterFactory =  WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
+			$this->formatterFactory = WikibaseRepo::getDefaultInstance()->getValueFormatterFactory();
 		}
 
 		return $this->formatterFactory;
@@ -87,7 +86,7 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
-	 * @throws \LogicException
+	 * @throws LogicException
 	 * @return ValueFormatter
 	 */
 	private function getFormatter() {
@@ -109,6 +108,7 @@ class FormatSnakValue extends ApiWikibase {
 	 *
 	 * @param string $json A JSON-encoded DataValue
 	 *
+	 * @throws LogicException
 	 * @return DataValue
 	 */
 	protected function decodeDataValue( $json ) {
@@ -124,6 +124,9 @@ class FormatSnakValue extends ApiWikibase {
 		} catch ( IllegalValueException $ex ) {
 			$this->dieUsage( $ex->getMessage(), 'baddatavalue' );
 		}
+
+		// The only reason for this is that ApiBase::dieUsage hides the actual throw
+		throw new LogicException();
 	}
 
 	/**
@@ -265,4 +268,5 @@ class FormatSnakValue extends ApiWikibase {
 			//TODO: example for the options parameter, once we have something sensible to show there.
 		);
 	}
+
 }
