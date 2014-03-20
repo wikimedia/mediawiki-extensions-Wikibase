@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_74fe4537",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:13:51Z",
+      "side": 1,
+      "message": "If isWriteMode() returns true, the edit permission needs to be checked, always. if it wasn#t, that was a bug. If an entity is modified, isWriteMode() must return true - this is actually checked by attemptSaveEntity.\n\nSo, this is the Right Thing, and it\u0027s what *should* have happened before, too.",
+      "parentUuid": "ee14bf34_948b1920",
+      "revId": "bfe4222b62747dc98c5549de20153ab3a8a35776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_d4aab181",
         "filename": "repo/tests/phpunit/includes/PermissionsHelper.php",
         "patchSetId": 9
