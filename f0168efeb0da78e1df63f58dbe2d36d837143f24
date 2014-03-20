@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_e3997481",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T21:50:34Z",
+      "side": 1,
+      "message": "I just played around with this and yes, it works. Using the last 4 digits is the same as \"modulo 10000\". 10000 % 400 \u003d 0, 10000 % 100 \u003d 0 and 10000 % 4 \u003d 0. Perfect. There are no edge cases that can fail. In other words, the cycle repeats every 10000 years.",
+      "parentUuid": "ee14bf34_23552cc6",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_dc2f8b9b",
         "filename": "lib/includes/parsers/DateTimeParser.php",
         "patchSetId": 4
@@ -190,6 +208,24 @@
       "side": 1,
       "message": "Indeed that is what happens in the formatting class currently.\nWe would have exactly the same problem parsing in this way as you have mentioned above with leap years.",
       "parentUuid": "ee14bf34_d0dc0f4e",
+      "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_a3a93c7a",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-20T21:50:34Z",
+      "side": 1,
+      "message": "I guess my suggested code is not really better. ;-) Please ignore this \"to complicated\" comment for now. This can easily be refactored later.",
+      "parentUuid": "ee14bf34_3221fdf6",
       "revId": "f0168efeb0da78e1df63f58dbe2d36d837143f24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
