@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_14bf09f8",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T10:24:00Z",
+      "side": 1,
+      "message": "Oops, bad search/replace.",
+      "parentUuid": "ee14bf34_38f5694d",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_5885bd9e",
         "filename": "lib/includes/IO/EntityIdReader.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-19T16:35:20Z",
       "side": 1,
       "message": "This confuses me. The change actually switches the \"valid \u003e current \u003e next\" calls to \"next \u003e valid \u003e current\". Doesn\u0027t this change the semantics?\n\nIs this supposed to work similar to feof? In this case \"next \u003e valid\" will fail for the last line.",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_34c20d89",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T10:24:00Z",
+      "side": 1,
+      "message": "LineReader is an Iterator, and Iterator::valid is defined only after calling next() or rewind(), see \u003chttp://de3.php.net/manual/en/iterator.valid.php\u003e. Valid checks whether the current index is valid, not whether there are more elements - it\u0027s not hasNext().\n\nAnyway - yes, this changes the semantics, the old semantics were broken (well, the relied on rewind being called on the ID iterator, but the pager no longer is an Iterator).",
+      "parentUuid": "ee14bf34_5885bd9e",
       "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b43dfd8c",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T10:24:00Z",
+      "side": 1,
+      "message": "That feels like not covering all cases... But I know what you mean.Something like  assert( $this-\u003eshardingFactor \u003e\u003d 1 ) would be nice :)",
+      "parentUuid": "ee14bf34_fb4ecb71",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_18362501",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-19T16:35:20Z",
       "side": 1,
       "message": "Why not abs( $n )?",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d438719d",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T10:24:00Z",
+      "side": 1,
+      "message": "too easy ;)",
+      "parentUuid": "ee14bf34_18362501",
       "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_f43375be",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T10:24:00Z",
+      "side": 1,
+      "message": "Is that really clearer?",
+      "parentUuid": "ee14bf34_f83a51e3",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_3b44434a",
         "filename": "repo/includes/store/sql/EntityPerPageIdPager.php",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2014-03-19T16:35:20Z",
       "side": 1,
       "message": "Space.",
+      "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_144ee93c",
+        "filename": "repo/includes/store/sql/EntityPerPageIdPager.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T10:24:00Z",
+      "side": 1,
+      "message": "The Final Frontier.",
+      "parentUuid": "ee14bf34_3b44434a",
       "revId": "cd554a3bd5bc64d9d6f94b0e7c042710587eeece",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
