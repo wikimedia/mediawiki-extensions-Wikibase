@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_d4bd1165",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:32:40Z",
+      "side": 1,
+      "message": "So, we now again put labels for all languages in the parser cache for all languages? Why? That\u0027s a lot of useless data...",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_54a90120",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:32:40Z",
+      "side": 1,
+      "message": "Oh, please don\u0027t use EntityContentFactory any more. Use an EntityLookup or EntityRevisionLookup  instead.",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_94b79981",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:32:40Z",
+      "side": 1,
+      "message": "Why?! This is not PHP4!",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_5478e1be",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:32:40Z",
+      "side": 1,
+      "message": "If all we need is the config vars, this method just only ask for the configVars, not OutputPage.",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_74ac0533",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:32:40Z",
+      "side": 1,
+      "message": "Use an EntityLookup or EntityRevisionLookup to get an Entity instead.",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f467f520",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:32:40Z",
+      "side": 1,
+      "message": "Use an Entity or EntityRevision instead of EntityContent",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_747be5bd",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-20T12:32:40Z",
+      "side": 1,
+      "message": "If all we need here is the language code, the method should ask for just the language code.",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
