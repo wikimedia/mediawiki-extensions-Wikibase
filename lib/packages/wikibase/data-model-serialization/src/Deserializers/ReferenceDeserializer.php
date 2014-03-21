@@ -58,13 +58,35 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 
 	private function getDeserialized( array $serialization ) {
 		return new Reference(
-			$this->snaksDeserializer->deserialize( $serialization['snaks'] )
+			$this->deserializeSnaks( $serialization )
 		);
+	}
+
+	private function deserializeSnaks( array $serialization ) {
+		$snaks = $this->snaksDeserializer->deserialize( $serialization['snaks'] );
+
+		if( array_key_exists( 'snaks-order', $serialization ) ) {
+			$this->assertSnaksOrderIsArray( $serialization );
+
+			$snaks->orderByProperty( $serialization['snaks-order'] );
+		}
+
+		return $snaks;
 	}
 
 	private function assertCanDeserialize( $serialization ) {
 		if ( !$this->isValidSerialization( $serialization ) ) {
 			throw new DeserializationException( 'The serialization is invalid!' );
+		}
+	}
+
+	private function assertSnaksOrderIsArray( array $serialization ) {
+		if ( !is_array( $serialization['snaks-order'] ) ) {
+			throw new InvalidAttributeException(
+				'snaks-order',
+				$serialization['snaks-order'],
+				"snaks-order attribute is not a valid array"
+			);
 		}
 	}
 }
