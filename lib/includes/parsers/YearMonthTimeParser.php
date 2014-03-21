@@ -48,7 +48,7 @@ class YearMonthTimeParser extends StringValueParser {
 	 */
 	protected function stringParse( $value ) {
 		//Matches Year and month separated by a separator, \p{L} matches letters outside the ASCII range
-		if( !preg_match( '/^([\d\p{L}]+)[\/\-\s\.\,]([\d\p{L}]+)$/', trim( $value ), $matches ) ) {
+		if( !preg_match( '/^([\d\p{L}]+)\s*[\/\-\s.,]\s*([\d\p{L}]+)$/', trim( $value ), $matches ) ) {
 			throw new ParseException( 'Failed to parse year and month: ' . $value );
 		}
 		list( ,$a, $b ) = $matches;
