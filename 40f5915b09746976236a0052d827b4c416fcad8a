@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b70cd63e",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-21T09:13:54Z",
+      "side": 1,
+      "message": "I was under the impression that we currently didn\u0027t put all languages into the JS vars. Am I confused?\n\nWhat exactly are these languages used for here? The \"main\" entity on the page, or the referenced entities, or both? I think it\u0027s safe to not have all languages for the references entities (that would be a lot of data, potentially). For the \"main\" entity shown on the page, we perhaps should have all languages, for easy access by gadgets, etc. But then we should definitely avoid saving the full serialized for every language version of the page. It would need its own, separate cache key (in the parser cache or object cache).\n\nI\u0027m fine with leaving this for now, if we have tickets for a) not including all languages for referenced entities (if  that isn\u0027t already the case) and b) storing the full serialized entity separately (actually, EntityLookup already does caching... maybe that would actually be sufficient). Please check whether we do.",
+      "parentUuid": "ee14bf34_340a0d2a",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_54a90120",
         "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "can do in follow up",
       "parentUuid": "ee14bf34_54a90120",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_2c175958",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-21T09:13:54Z",
+      "side": 1,
+      "message": "Please submit the follow-up before we merge this. EntityContent and EntityContentFactory have since been largely removed from the codebase, so this is a regression, kind of.",
+      "parentUuid": "ee14bf34_7462c507",
       "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
