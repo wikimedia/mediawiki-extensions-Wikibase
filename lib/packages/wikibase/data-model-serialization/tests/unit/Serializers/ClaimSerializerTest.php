@@ -9,6 +9,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -178,6 +179,9 @@ class ClaimSerializerTest extends SerializerBaseTest {
 						)
 					)
 				),
+				'qualifiers-order' => array(
+					'P42'
+				),
 				'type' => 'statement',
 				'rank' => 'normal'
 			),
@@ -207,5 +211,45 @@ class ClaimSerializerTest extends SerializerBaseTest {
 		);
 
 		return $serializations;
+	}
+
+	public function testQualifiersOrderSerialization() {
+		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$snakSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnValue( array(
+				'snaktype' => 'novalue',
+				'property' => 'P42'
+			) ) );
+
+		$snaksSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$snaksSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->will( $this->returnValue( array() ) );
+
+		$referencesSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$claimSerializer = new ClaimSerializer( $snakSerializerMock, $snaksSerializerMock, $referencesSerializerMock );
+
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim->setQualifiers( new SnakList( array(
+			new PropertyNoValueSnak( 42 ),
+			new PropertySomeValueSnak( 24 ),
+			new PropertyNoValueSnak( 24 )
+		) ) );
+		$this->assertEquals(
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'P42'
+				),
+				'qualifiers' => array(),
+				'qualifiers-order' => array(
+					'P42',
+					'P24'
+				),
+				'type' => 'claim'
+			),
+			$claimSerializer->serialize( $claim )
+		);
 	}
 }
