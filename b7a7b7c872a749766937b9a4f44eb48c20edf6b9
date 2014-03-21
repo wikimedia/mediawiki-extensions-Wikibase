@@ -52,6 +52,24 @@
       "revId": "b7a7b7c872a749766937b9a4f44eb48c20edf6b9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_1706e220",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-21T09:10:03Z",
+      "side": 1,
+      "message": "It is used in the wb-statement and the wb-claim templates.\n\nI realized we might just as well remove the getMainSnakHtml method and use getSnakHtml instead.",
+      "parentUuid": "ee14bf34_8c59c55f",
+      "revId": "b7a7b7c872a749766937b9a4f44eb48c20edf6b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
