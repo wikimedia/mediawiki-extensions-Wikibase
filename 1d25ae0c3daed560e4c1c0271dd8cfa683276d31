@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_6ceb1178",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-21T08:20:12Z",
+      "side": 1,
+      "message": "Tobi did that in order to trigger jenkins *grml*",
+      "parentUuid": "ee14bf34_44def4df",
+      "revId": "1d25ae0c3daed560e4c1c0271dd8cfa683276d31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_84fbec43",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-19T21:09:08Z",
       "side": 1,
       "message": "This is only used as a jQuery slector, right?",
+      "revId": "1d25ae0c3daed560e4c1c0271dd8cfa683276d31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_4cf04d62",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-21T08:20:12Z",
+      "side": 1,
+      "message": "Yeah. Why?",
+      "parentUuid": "ee14bf34_84fbec43",
       "revId": "1d25ae0c3daed560e4c1c0271dd8cfa683276d31",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
