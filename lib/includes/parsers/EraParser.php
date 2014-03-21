@@ -27,11 +27,11 @@ class EraParser extends StringValueParser {
 	/**
 	 * @var string regex snippet matching BEFORE_CURRENT_ERA
 	 */
-	private $BCEregex = '(B\.?C(\.?E)?|Before\s(Christ|Common\sEra))';
+	private $BCEregex = '(B\.?\s*C\.?(\s*E\.?)?|Before\s+(Christ|Common\s+Era))';
 	/**
 	 * @var string regex snippet matching CURRENT_ERA
 	 */
-	private $CEregex = '(C\.?E|A\.?D|Common\sEra|After\sChrist|Anno\sDomini)';
+	private $CEregex = '(C\.?\s*E\.?|A\.?\s*D\.?|Common\s+Era|After\s+Christ|Anno\s+Domini)';
 
 	/**
 	 * Parses the provided string and returns the era
@@ -81,8 +81,9 @@ class EraParser extends StringValueParser {
 			$value = substr( $value, 1 );
 		}
 
-		$value = preg_replace( '/(\s*(' . $this->CEregex . '|' .  $this->BCEregex . '))$/i', '', $value );
+		$value = preg_replace( '/\s*(' . $this->CEregex . '|' .  $this->BCEregex . ')$/i', '', $value );
 
 		return trim( $value );
 	}
+
 }

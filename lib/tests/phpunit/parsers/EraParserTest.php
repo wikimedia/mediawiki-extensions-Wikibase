@@ -39,6 +39,7 @@ class EraParserTest extends StringValueParserTest {
 			array( '100 BC', array( '-', '100' ) ),
 			array( '100 BCE', array( '-', '100' ) ),
 			array( '100 AD', array( '+', '100' ) ),
+			array( '100 A. D.', array( '+', '100' ) ),
 			array( '100 CE', array( '+', '100' ) ),
 			array( '100CE', array( '+', '100' ) ),
 			array( '+100', array( '+', '100' ) ),
@@ -50,6 +51,9 @@ class EraParserTest extends StringValueParserTest {
 			array( '10-10-10 Before Common Era', array( '-', '10-10-10' ) ),
 			array( 'FooBefore Common Era', array( '-', 'Foo' ) ),
 			array( 'Foo Before Common Era', array( '-', 'Foo' ) ),
+			array( '-1 000 000', array( '-', '1 000 000' ) ),
+			array( '1 000 000', array( '+', '1 000 000' ) ),
+			array( '1 000 000 B.C.', array( '-', '1 000 000' ) ),
 		);
 	}
 
@@ -65,4 +69,5 @@ class EraParserTest extends StringValueParserTest {
 			array( '+100 Common Era' ),
 		);
 	}
+
 }

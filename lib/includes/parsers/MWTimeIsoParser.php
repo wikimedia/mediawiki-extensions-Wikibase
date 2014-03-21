@@ -157,9 +157,9 @@ class MWTimeIsoParser extends StringValueParser {
 	 */
 	private function getTimeFromYear( $year, $isBce ) {
 		if( $isBce ) {
-			$sign = '-';
+			$sign = EraParser::BEFORE_CURRENT_ERA;
 		} else {
-			$sign = '+';
+			$sign = EraParser::CURRENT_ERA;
 		}
 		$timeString = $sign . $year . '-00-00T00:00:00Z';
 		return $this->timeValueTimeParser->parse( $timeString );

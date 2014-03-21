@@ -56,6 +56,10 @@ class YearTimeParser extends StringValueParser {
 	 */
 	protected function stringParse( $value ) {
 		list( $sign, $year ) = $this->eraParser->parse( $value );
+		if( $sign === EraParser::BEFORE_CURRENT_ERA ) {
+			// Negative dates can't have a month, assume non-digits are thousands separators
+			$year = preg_replace( '/(?<=\d)[\s,._](?=\d)/', '', $year );
+		}
 		return $this->timeValueTimeParser->parse( $sign . $year . '-00-00T00:00:00Z' );
 	}
 
