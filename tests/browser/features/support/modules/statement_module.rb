@@ -51,6 +51,10 @@ module StatementPage
     @browser.element(css: ".wb-claimlistview:nth-child(#{group_index}) div.listview-item:nth-child(#{claim_index}) div.wb-snak-value a")
   end
 
+  def statement_item_value_link(group_index, claim_index)
+    @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//*[contains(@class, 'valueview')]//a")
+  end
+
   def edit_claim(group_index, claim_index)
     edit_claim_element(group_index, claim_index).click
   end

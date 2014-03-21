@@ -129,3 +129,8 @@ end
 Then /^Statement value of claim (.+) in group (.+) should be the label of item (.+)$/ do |claim_index, group_index, handle|
   on(ItemPage).statement_value_element(group_index, claim_index).text.should == @items[handle]["label"]
 end
+
+Then(/^Statement item value of claim (\d+) in group (\d+) should be what I memorized$/) do |claim_index, group_index|
+	sleep 1 # Wait for the valueview to correctly render the value
+	on(ItemPage).statement_item_value_link(group_index, claim_index).text.should == @memorized
+end
