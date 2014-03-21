@@ -26,7 +26,7 @@ class DateTimeParser extends StringValueParser {
 	/**
 	 * @var MonthNameUnlocalizer
 	 */
-	private $monthUnlocaliser;
+	private $monthUnlocalizer;
 
 	/**
 	 * @var EraParser
@@ -35,7 +35,7 @@ class DateTimeParser extends StringValueParser {
 
 	public function __construct( EraParser $eraParser, ParserOptions $options = null ) {
 		parent::__construct( $options );
-		$this->monthUnlocaliser = new MonthNameUnlocalizer();
+		$this->monthUnlocalizer = new MonthNameUnlocalizer();
 		$this->eraParser = $eraParser;
 	}
 
@@ -60,7 +60,7 @@ class DateTimeParser extends StringValueParser {
 
 			$value = $this->getValueWithFixedYearLengths(
 				$this->getValueWithFixedSeparators(
-					$this->monthUnlocaliser->unlocalize(
+					$this->monthUnlocalizer->unlocalize(
 						trim( $value ),
 						$options->getOption( ValueParser::OPT_LANG ),
 						new ParserOptions()

@@ -8,6 +8,8 @@ use ValueParsers\Test\StringValueParserTest;
 use Wikibase\Lib\Parsers\MWTimeIsoParser;
 
 /**
+ * @covers Wikibase\Lib\Parsers\TimeParser
+ *
  * @group ValueParsers
  * @group WikibaseLib
  * @group Wikibase

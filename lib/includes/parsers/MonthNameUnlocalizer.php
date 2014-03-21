@@ -6,7 +6,7 @@ use Language;
 use ValueParsers\ParserOptions;
 
 /**
- * Class to unlocalize month names using Mediawiki's Language object
+ * Class to unlocalise month names using Mediawiki's Language object
  *
  * @since 0.5
  *

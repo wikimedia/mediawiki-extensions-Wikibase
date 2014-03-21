@@ -51,7 +51,7 @@ class TimeParser extends StringValueParser {
 	/**
 	 * @return  StringValueParser[]
 	 */
-	protected function getParsers() {
+	private function getParsers() {
 		$parsers = array();
 
 		$eraParser = new EraParser( $this->getOptions() );
