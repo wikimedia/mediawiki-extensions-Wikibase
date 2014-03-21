@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b7c5f692",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T09:47:02Z",
+      "side": 1,
+      "message": "we include all languages for wbEntity\n\nwe include just the one language code for wbUsedEntities, with bit ugly TODO to support language fallback.  When we do, we\u0027ll need to bump cache epoch again.",
+      "parentUuid": "ee14bf34_b70cd63e",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_54a90120",
         "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Please submit the follow-up before we merge this. EntityContent and EntityContentFactory have since been largely removed from the codebase, so this is a regression, kind of.",
       "parentUuid": "ee14bf34_7462c507",
+      "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_173ee287",
+        "filename": "repo/includes/Hook/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T09:47:02Z",
+      "side": 1,
+      "message": "what, it\u0027s already been remove from here in master?  not that I can see.\n\nplease make a bug ticket and have lydia put in the sprint.  but please don\u0027t block this patch.",
+      "parentUuid": "ee14bf34_2c175958",
       "revId": "40f5915b09746976236a0052d827b4c416fcad8a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
