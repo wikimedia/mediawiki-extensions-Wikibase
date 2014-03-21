@@ -54,6 +54,9 @@ class EraParserTest extends StringValueParserTest {
 			array( '10-10-10 Before Common Era', array( '-', '10-10-10' ) ),
 			array( 'FooBefore Common Era', array( '-', 'Foo' ) ),
 			array( 'Foo Before Common Era', array( '-', 'Foo' ) ),
+			array( '-1 000 000', array( '-', '1 000 000' ) ),
+			array( '1 000 000', array( '+', '1 000 000' ) ),
+			array( '1 000 000 B.C.', array( '-', '1 000 000' ) ),
 		);
 	}
 
