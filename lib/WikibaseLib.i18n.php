@@ -383,6 +383,9 @@ $messages['ar'] = array(
 	'wikibase-deletedentity-property' => 'خاصية محذوفة',
 	'wikibase-deletedentity-query' => 'طلب محذوف',
 	'wikibase-diffview-reference' => 'مرجع',
+	'wikibase-diffview-rank' => 'الترتيب',
+	'wikibase-diffview-rank-preferred' => 'الترتيب المفضل',
+	'wikibase-diffview-rank-normal' => 'الترتيب القياسي',
 	'wikibase-diffview-qualifier' => 'صفة',
 	'wikibase-diffview-label' => 'علامة',
 	'wikibase-diffview-alias' => 'أسماء أخرى',
@@ -395,6 +398,9 @@ $messages['ar'] = array(
 	'wikibase-error-remove-connection' => 'وقع خطأ في الاتصال عند الحذف فلم تحفظ تعديلاتك. تحقق من الاتصال بالإنترنت.',
 	'wikibase-error-save-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحفظ.',
 	'wikibase-error-remove-timeout' => 'يشهد الموقع صعوبات تقنية حاليا فلم ينفذ الحذف.',
+	'wikibase-error-autocomplete-connection' => 'لم يكن من الممكن البحث في واجهة برمجة التطبيقات الخاصة بالموقع. الرجاء المحاولة مرة أخرى لاحقاَ.',
+	'wikibase-quantitydetails-amount' => 'الكمية',
+	'wikibase-quantitydetails-unit' => 'وحدة',
 	'wikibase-timedetails-time' => 'زمن',
 	'wikibase-timedetails-isotime' => 'الطابع الزمني ISO',
 	'wikibase-timedetails-timezone' => 'المنطقة الزمنية',
@@ -406,10 +412,14 @@ $messages['ar'] = array(
 	'wikibase-globedetails-latitude' => 'خطّ العرض',
 	'wikibase-globedetails-precision' => 'الدقة',
 	'wikibase-replicationnote' => 'قد يلزم وقت لتظهر التعديلات في جميع الويكيات.',
+	'wikibase-sitelinks-wikipedia' => 'صفحات ويكيبيديا المرتبطة بهذا العنصر',
 	'wikibase-sitelinks-sitename-columnheading' => 'اللغة',
 	'wikibase-sitelinks-sitename-columnheading-special' => 'الموقع',
+	'wikibase-sitelinks-link-columnheading' => 'صفحة مرتبطة',
 	'wikibase-tooltip-error-details' => 'التفاصيل',
 	'wikibase-validator-bad-type' => '$2 عوضا عن $1',
+	'wikibase-validator-no-such-entity' => 'لم يتم العثور على $1',
+	'wikibase-validator-no-such-property' => 'الخاصية $1 غير موجودة',
 	'wikibase-validator-unknown-unit' => 'وحدة غير معروفة: $1',
 	'datatypes-type-wikibase-item' => 'عنصر',
 	'version-wikibase' => 'قاعدة ويكي',
@@ -1296,6 +1306,7 @@ $messages['eo'] = array(
 /** Spanish (español)
  * @author Armando-Martin
  * @author Dalton2
+ * @author Fitoschido
  * @author Ihojose
  * @author Pegna
  * @author Savh
@@ -1333,6 +1344,7 @@ $messages['es'] = array(
 	'wikibase-error-ui-session-failure' => 'Tu sesión ha caducado. Inicia la sesión de nuevo.',
 	'wikibase-error-ui-edit-conflict' => 'Hay un conflicto de edición. Por favor, vuelve a cargar y guarda de nuevo.',
 	'wikibase-timedetails-time' => 'Tiempo',
+	'wikibase-timedetails-isotime' => 'Fecha y hora en formato ISO',
 	'wikibase-timedetails-timezone' => 'Zona horaria',
 	'wikibase-timedetails-calendar' => 'Calendario',
 	'wikibase-timedetails-precision' => 'Precisión',
@@ -1343,7 +1355,7 @@ $messages['es'] = array(
 	'wikibase-globedetails-precision' => 'Precisión',
 	'wikibase-globedetails-globe' => 'Globo',
 	'wikibase-replicationnote' => 'Tenga en cuenta que puede tardar varios minutos, hasta que los cambios sean visibles en todas las wikis.',
-	'wikibase-sitelinks-wikipedia' => 'Páginas de Wikipedia con enlaces hacia este elemento',
+	'wikibase-sitelinks-wikipedia' => 'Páginas de Wikipedia enlazadas con este elemento',
 	'wikibase-sitelinks-sitename-columnheading' => 'Idioma',
 	'wikibase-sitelinks-siteid-columnheading' => 'Código',
 	'wikibase-sitelinks-link-columnheading' => 'Artículo enlazado', # Fuzzy

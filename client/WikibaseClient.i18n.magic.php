@@ -96,6 +96,7 @@ $magicWords['min'] = array(
 $magicWords['mk'] = array(
 	'noexternallanglinks' => array( 0, 'безнадворјазврски' ),
 	'property' => array( 0, 'својство' ),
+	'wbreponame' => array( 0, 'вбскладиштеиме' ),
 );
 
 /** Malayalam (മലയാളം) */

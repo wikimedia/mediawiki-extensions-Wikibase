@@ -383,10 +383,21 @@ $messages['ar'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'يتوجب عليك تسجيل الدخول',
 	'wikibase-linkitem-not-loggedin' => 'لاستخدام هذه الميزة لا بد من تسجيل الدخول على هذه الويكي وعلى [$1 مستودع البيانات المركزي].',
 	'wikibase-linkitem-success-link' => 'تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [ $1  مستودعنا المركزي للبيانات].',
+	'wikibase-property-notfound' => 'لم يتم العثور على الخاصية $1.',
+	'wikibase-property-notsupportedyet' => 'قاعدة ويكي لا تدعم نوع الخاصية للخاصية $1 بعد.',
 	'wikibase-rc-hide-wikidata' => '$1 ويكيبيانات', # Fuzzy
+	'wikibase-rc-hide-wikidata-hide' => 'إخفاء',
+	'wikibase-rc-hide-wikidata-show' => 'أظهر',
 	'wikibase-rc-show-wikidata-pref' => 'إظهار تعديلات ويكي بيانات في صفحة أحدث التغييرات', # Fuzzy
 	'wikibase-rc-wikibase-edit-letter' => 'د',
+	'wikibase-rc-wikibase-edit-title' => 'تعديل {{WBREPONAME}}',
+	'wikibase-watchlist-show-changes-pref' => 'إظهار تعديلات {{WBREPONAME}} في قائمة مراقبتك',
+	'wikibase-unconnectedpages-page' => 'بدء قائمة النتائج بالصفحة:',
 	'wikibase-unconnectedpages-submit' => 'اذهب',
+	'wikibase-unconnectedpages-page-warning' => 'لا يمكن استخدام عنوان الصفحة في عملية البحث وسيتم تجاهله.',
+	'wikibase-unconnectedpages-iwdata-label' => 'الصفحات التي تحتوي على وصلات بلغات أخرى فقط',
+	'wikibase-pageinfo-entity-id-none' => 'لا شيء',
+	'wikibase-otherprojects' => 'مشاريع أخرى',
 );
 
 /** Aramaic (ܐܪܡܝܐ)
@@ -1003,9 +1014,9 @@ $messages['cs'] = array(
 $messages['cu'] = array(
 	'wikibase-editlinks' => 'исправи съвѧꙁи',
 	'wikibase-linkitem-input-site' => 'ѩꙁꙑкъ :',
-	'wikibase-rc-hide-wikidata' => '$1 Викисъводъ',
+	'wikibase-rc-hide-wikidata' => '$1 {{WBREPONAME}}',
 	'wikibase-rc-wikibase-edit-letter' => 'в҃с',
-	'wikibase-rc-wikibase-edit-title' => 'Викисъводѣ мѣна',
+	'wikibase-rc-wikibase-edit-title' => '{{grammar:genitive|{{WBREPONAME}}}} мѣна',
 );
 
 /** Welsh (Cymraeg)
@@ -1241,7 +1252,7 @@ $messages['dsb'] = array(
 	'wikibase-property-notsupportedyet' => 'Wikibase hyšći njepóděra kakosćowy typ za kakosć $1.',
 	'wikibase-rc-hide-wikidata' => '{{WBREPONAME}} $1',
 	'wikibase-rc-show-wikidata-pref' => 'Změny {{WBREPONAME}} w aktualnych změnach pokazaś',
-	'wikibase-watchlist-show-changes-pref' => 'Změny Wikidata w twójich wobglědowańkach pokazaś', # Fuzzy
+	'wikibase-watchlist-show-changes-pref' => 'Změny {{WBREPONAME}} w twójich wobglědowańkach pokazaś',
 	'wikibase-error-invalid-entity-id' => 'Zapódany ID jo systemoju njeznaty. Pšosym wužyj płaśiwy entitowy ID.',
 );
 
