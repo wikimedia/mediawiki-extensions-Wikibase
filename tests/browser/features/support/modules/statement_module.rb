@@ -54,6 +54,10 @@ module StatementPage
     @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//textarea[contains(@class, 'valueview-input')]")
   end
 
+  def statement_item_value_link(group_index, claim_index)
+    @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//*[contains(@class, 'valueview-value')]//a")
+  end
+
   def edit_claim(group_index, claim_index)
     edit_claim_element(group_index, claim_index).click
   end

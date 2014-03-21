@@ -104,3 +104,17 @@ Feature: Creating statements
       And Statement save button should be disabled
       And Entity selector input element should be there
       And Statement value input element should not be there
+
+  @ui_only @repo_login
+  Scenario: Select a property, use entity selector
+    Given There are properties with the following handles and datatypes:
+      | itemprop | wikibase-item |
+    When I click the statement add button
+      And I select the property itemprop
+			And I press the q key in the second entity selector input field
+			And I press the ARROWDOWN key in the second entity selector input field
+			And I press the ARROWDOWN key in the second entity selector input field
+			And I press the ENTER key in the second entity selector input field
+			And I memorize the value of the second entity selector input field
+			And I press the ENTER key in the second entity selector input field
+    Then Statement item value of claim 1 in group 1 should be what I memorized

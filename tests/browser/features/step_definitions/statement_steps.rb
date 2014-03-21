@@ -117,3 +117,8 @@ end
 Then /^Statement string value of claim (.+) in group (.+) should be (.+)$/ do |claim_index, group_index, value|
   on(ItemPage).statement_string_value_element(group_index, claim_index).attribute_value("value").should == value
 end
+
+Then(/^Statement item value of claim (\d+) in group (\d+) should be what I memorized$/) do |claim_index, group_index|
+	print @memorized
+	on(ItemPage).statement_item_value_link(group_index, claim_index).text.should == @memorized
+end
