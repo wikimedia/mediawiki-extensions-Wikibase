@@ -88,6 +88,24 @@
       "revId": "b7a7b7c872a749766937b9a4f44eb48c20edf6b9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b26e2429",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-21T13:09:54Z",
+      "side": 1,
+      "message": "I\u0027d prefer to just remove the method, if that can be done without much trouble.",
+      "parentUuid": "ee14bf34_d79aaabc",
+      "revId": "b7a7b7c872a749766937b9a4f44eb48c20edf6b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
