@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Parsers;
 
 use DataValues\TimeValue;
+use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
@@ -22,14 +23,19 @@ class YearTimeParser extends StringValueParser {
 	const FORMAT_NAME = 'year';
 
 	/**
-	 * @var \ValueParsers\TimeParser
-	 */
-	private $timeValueTimeParser;
-
-	/**
 	 * @var EraParser
 	 */
 	private $eraParser;
+
+	/**
+	 * @var Language
+	 */
+	private $lang;
+
+	/**
+	 * @var \ValueParsers\TimeParser
+	 */
+	private $timeValueTimeParser;
 
 	/**
 	 * @param ValueParser $eraParser
@@ -40,6 +46,7 @@ class YearTimeParser extends StringValueParser {
 			$options = new ParserOptions();
 		}
 		parent::__construct( $options );
+		$this->lang = Language::factory( $this->getOptions()->getOption( ValueParser::OPT_LANG ) );
 
 		$this->timeValueTimeParser = new \ValueParsers\TimeParser(
 			new CalendarModelParser(),
@@ -59,6 +66,21 @@ class YearTimeParser extends StringValueParser {
 	 */
 	protected function stringParse( $value ) {
 		list( $sign, $year ) = $this->eraParser->parse( $value );
+
+		// Negative dates usually don't have a month, assume non-digits are thousands separators
+		if( $sign === EraParser::BEFORE_CURRENT_ERA ) {
+			$separatorMap = $this->lang->separatorTransformTable();
+
+			if ( is_array( $separatorMap ) && array_key_exists( ',', $separatorMap ) ) {
+				$separator = $separatorMap[','];
+			} else {
+				$separator = ',';
+			}
+
+			// Always accept ISO (e.g. "1 000 BC") as well as programming style (e.g. "-1_000")
+			$year = preg_replace( '/(?<=\d)[' . preg_quote( $separator, '/' ) . '\s_](?=\d)/', '',
+				$year );
+		}
 
 		if( !preg_match( '/^\d+$/', $year ) ) {
 			throw new ParseException( 'Failed to parse year', $value, self::FORMAT_NAME );
