@@ -38,6 +38,11 @@
 
 			if( !eventData ) {
 				eventData = { handlers:[], prevVal: getValue( $elem ) };
+				$( document ).on( eventNameString, function( event ) {
+					eventData = $.data( $elem[0], eventId );
+					eventData.prevVal = getValue( $elem );
+					$.data( $elem[0], eventId, eventData );
+				} );
 			}
 
 			// Store the handler to be able to determine whether handler has been triggered already
@@ -53,15 +58,14 @@
 				event.type = 'eachchange';
 
 				handleObj.handler.call( this, event, eventData.prevVal );
-
-				eventData.prevVal = getValue( $elem );
-				$.data( this, eventId, eventData );
 			} );
 		},
 
 		remove: function( handleObj ) {
-			$( this ).off( '.' + EVENT_ID + handleObj.namespace );
-			$.removeData( this, EVENT_ID + handleObj.namespace );
+			var eventId = EVENT_ID + handleObj.namespace;
+			$( this ).off( '.' + eventId );
+			$( document ).off( '.' + eventId );
+			$.removeData( this, eventId );
 		},
 
 		trigger: function( event, data ) {
