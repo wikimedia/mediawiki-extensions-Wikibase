@@ -38,7 +38,13 @@ class YearTimeParserTest extends StringValueParserTest {
 			->with( $this->isType( 'string' ) )
 			->will( $this->returnCallback(
 				function( $value ) {
-					return array( EraParser::CURRENT_ERA, $value ) ;
+					$sign = EraParser::CURRENT_ERA;
+					// Tiny parser that supports a single negative sign only
+					if ( $value[0] === EraParser::BEFORE_CURRENT_ERA ) {
+						$sign = EraParser::BEFORE_CURRENT_ERA;
+						$value = substr( $value, 1 );
+					}
+					return array( $sign, $value ) ;
 				}
 			) );
 		return $mock;
@@ -76,6 +82,13 @@ class YearTimeParserTest extends StringValueParserTest {
 				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'000000001' =>
 				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
+			'-1000000' =>
+				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeFormatter::CALENDAR_GREGORIAN ),
+			'-1 000 000' =>
+				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeFormatter::CALENDAR_GREGORIAN ),
+			// Digit grouping in the Indian numbering system
+			'-1.99.999' =>
+				array( '-0000000000199999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 		);
 
 		foreach ( $valid as $value => $expected ) {
@@ -106,6 +119,13 @@ class YearTimeParserTest extends StringValueParserTest {
 			'+100 BC',
 			'+100 BCE',
 			'+100BCE',
+
+			// Invalid thousands separator
+			'-1/000/000',
+
+			// Positive years are unlikely to have thousands separators, it's more likely a date
+			'1 000 000',
+			'1.99.999',
 		);
 
 		foreach ( $invalid as $value ) {
