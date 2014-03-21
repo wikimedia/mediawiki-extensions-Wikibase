@@ -102,7 +102,7 @@ class DateTimeParser extends StringValueParser {
 	 * @return mixed
 	 */
 	private function getValueWithFixedSeparators( $value ) {
-		return preg_replace( '/\s+/', '.', $value );
+		return preg_replace( '/[\s.]+/', '.', $value );
 	}
 
 	/**
