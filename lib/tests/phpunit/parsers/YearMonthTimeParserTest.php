@@ -8,7 +8,7 @@ use ValueParsers\Test\StringValueParserTest;
 use Wikibase\Lib\Parsers\MWTimeIsoParser;
 
 /**
- * @covers \Wikibase\Lib\Parsers\YearMonthTimeParserTest
+ * @covers \Wikibase\Lib\Parsers\YearMonthTimeParser
  *
  * @group ValueParsers
  * @group WikibaseLib

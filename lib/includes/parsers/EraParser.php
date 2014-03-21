@@ -16,9 +16,12 @@ use ValueParsers\StringValueParser;
 class EraParser extends StringValueParser {
 
 	/**
-	 * Constants representing the CE and BCE
+	 * @since 0.5
 	 */
 	const CURRENT_ERA = '+';
+	/**
+	 * @since 0.5
+	 */
 	const BEFORE_CURRENT_ERA = '-';
 
 	/**
@@ -66,6 +69,8 @@ class EraParser extends StringValueParser {
 	}
 
 	/**
+	 * Removes any parse-able Era information from the given string value
+	 *
 	 * @param string $value
 	 *
 	 * @return string

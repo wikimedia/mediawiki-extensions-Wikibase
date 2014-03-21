@@ -43,7 +43,6 @@ class YearTimeParser extends StringValueParser {
 			$this->getOptions()
 		);
 
-		//@todo inject me [=
 		$this->eraParser = $eraParser;
 	}
 
