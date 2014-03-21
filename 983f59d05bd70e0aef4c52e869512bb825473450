@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_37dd6648",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T09:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_574a1a60",
+      "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_374fa670",
         "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
         "patchSetId": 24
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-21T09:33:08Z",
       "side": 1,
       "message": "No need to return $out (or anything).",
+      "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d7ebcad9",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T09:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_374fa670",
       "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_b7e856de",
+        "filename": "client/includes/hooks/BeforePageDisplayHandler.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T09:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_1754a200",
+      "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_d73d0aba",
         "filename": "client/tests/phpunit/includes/hooks/BaseTemplateAfterPortalHandlerTest.php",
         "patchSetId": 24
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-21T09:33:08Z",
       "side": 1,
       "message": "assertNull would be clearer",
+      "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b7f296dd",
+        "filename": "client/tests/phpunit/includes/hooks/BaseTemplateAfterPortalHandlerTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T09:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_d73d0aba",
       "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -98,6 +170,24 @@
       "writtenOn": "2014-03-21T09:33:08Z",
       "side": 1,
       "message": "perhaps add @see assertTag() or something to make it easier to find a reference for the structure of the matcher array.",
+      "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_3707a6cf",
+        "filename": "client/tests/phpunit/includes/hooks/BaseTemplateAfterPortalHandlerTest.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T09:59:38Z",
+      "side": 1,
+      "message": "don\u0027t think it\u0027s necessary.  it\u0027s been in phpunit since 3.4 (or maybe before) and we use it in a number of places (and in core).",
+      "parentUuid": "ee14bf34_b76176d2",
       "revId": "983f59d05bd70e0aef4c52e869512bb825473450",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
