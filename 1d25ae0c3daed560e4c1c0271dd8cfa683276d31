@@ -69,6 +69,24 @@
       "revId": "1d25ae0c3daed560e4c1c0271dd8cfa683276d31",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d7b3ca4a",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-21T09:38:13Z",
+      "side": 1,
+      "message": "Because if it\u0027s actual CSS it may be worth to think about (e.g. compatibility) but as jQuery selectors it\u0027s perfectly fine. Never mind. :-)",
+      "parentUuid": "ee14bf34_4cf04d62",
+      "revId": "1d25ae0c3daed560e4c1c0271dd8cfa683276d31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
