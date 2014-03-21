@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_d80f7732",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-21T15:55:22Z",
+      "side": 1,
+      "message": "This assumes the EraParser always returns a number. But it doesn\u0027t. The old implementation failed with a nice \"Failed to parse year: ...\". The new displays less helpful stuff like \"Malformed time: +...-00-00T00:00:00Z\". My suggestion is to re-add something like\n\n\t\tif ( !preg_match( \u0027/^\\d+$/\u0027, $year ) ) {\n\t\t\tthrow new ParseException( \u0027Failed to parse year: \u0027 . $value );\n\t\t}\n\nabove this line. Possibly add a little test to make sure the exception is the one we want.\n\n\t/**\n\t * @expectedException \\ValueParsers\\ParseException\n\t * @expectedExceptionMessage Failed to parse year: just invalid\n\t */\n\tpublic function testParseExceptionMessage() {\n\t\t$this-\u003egetInstance()-\u003eparse( \u0027just invalid\u0027 );\n\t}",
+      "revId": "588e646506a19c4332c4845ddec9f0435fdfe5d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
