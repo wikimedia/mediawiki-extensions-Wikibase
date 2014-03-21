@@ -6,7 +6,9 @@ use ApiBase;
 use DataValues\DataValue;
 use InvalidArgumentException;
 use LogicException;
+use Message;
 use OutOfBoundsException;
+use Status;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
@@ -19,7 +21,7 @@ use ValueParsers\ValueParser;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ParseValue extends ApiBase {
+class ParseValue extends ApiWikibase {
 
 	/**
 	 * @var null|ValueParserFactory
@@ -84,8 +86,8 @@ class ParseValue extends ApiBase {
 		try {
 			$parseResult = $parser->parse( $value );
 		}
-		catch ( ParseException $parsingError ) {
-			$result['error'] = $parsingError->getMessage();
+		catch ( ParseException $parseError ) {
+			$this->addParseErrorToResult( $result, $parseError );
 			return $result;
 		}
 
@@ -98,6 +100,51 @@ class ParseValue extends ApiBase {
 		}
 
 		return $result;
+	}
+
+	protected function addParseErrorToResult( &$result, ParseException $parseError ) {
+		$result['error'] = get_class( $parseError );
+
+		$status = $this->getExceptionStatus( $parseError );
+
+		$result['error-info'] = $status->getValue();
+
+		$errors = $status->getErrorsByType( 'error' );
+
+		if ( count( $errors ) === 1 ) {
+			list( $messageAsArray ) = $this->compileStatusReport( $errors );
+			$result['error-message'] = $messageAsArray;
+		}
+
+		$result['error-html'] = $status->getHTML( self::$shortErrorContextMessage, self::$longErrorContextMessage );
+	}
+
+	/**
+	 * @param ParseException $parseError
+	 *
+	 * @return Status
+	 */
+	protected function getExceptionStatus( ParseException $parseError ) {
+		$msg = $this->getExceptionMessage( $parseError );
+		$status = Status::newFatal( $msg );
+		$status->setResult( false, $parseError->getMessage() );
+
+		return $status;
+	}
+
+	/**
+	 * @param ParseException $parseError
+	 *
+	 * @return Message
+	 */
+	protected function getExceptionMessage( ParseException $parseError ) {
+		//TODO: get message key and parameters from exception
+		//TODO: use error localizer to construct Message
+		$key = 'wikibase-parse-error';
+		$params = array();
+		$msg = wfMessage( $key )->params( $params );
+
+		return $msg;
 	}
 
 	private function outputResults( array $results ) {
