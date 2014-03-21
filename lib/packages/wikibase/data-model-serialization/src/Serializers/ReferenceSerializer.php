@@ -7,6 +7,7 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @since 0.1
@@ -61,7 +62,21 @@ class ReferenceSerializer implements DispatchableSerializer {
 	private function getSerialized( Reference $reference ) {
 		return array(
 			'hash' => $reference->getHash(),
-			'snaks' => $this->snaksSerializer->serialize( $reference->getSnaks() )
+			'snaks' => $this->snaksSerializer->serialize( $reference->getSnaks() ),
+			'snaks-order' => $this->buildSnaksOrderList( $reference->getSnaks() )
 		);
+	}
+
+	private function buildSnaksOrderList( SnakList $snaks ) {
+		$list = array();
+
+		foreach ( $snaks as $snak ) {
+			$id = $snak->getPropertyId()->getSerialization();
+			if ( !in_array( $id, $list ) ) {
+				$list[] = $id;
+			}
+		}
+
+		return $list;
 	}
 }

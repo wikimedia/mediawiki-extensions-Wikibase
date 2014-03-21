@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -30,7 +31,7 @@ class ReferenceSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		$serialization = $serializerFactory->newReferenceSerializer()->serialize( $reference );
 		$newReference = $deserializerFactory->newReferenceDeserializer()->deserialize( $serialization );
-		$this->assertEquals( $reference, $newReference );
+		$this->assertTrue( $reference->equals( $newReference ) );
 	}
 
 	public function referenceProvider() {
@@ -41,6 +42,13 @@ class ReferenceSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			array(
 				new Reference( new SnakList( array(
 					new PropertyNoValueSnak( 42 )
+				) ) )
+			),
+			array(
+				new Reference( new SnakList( array(
+					new PropertyNoValueSnak( 42 ),
+					new PropertySomeValueSnak( 24 ),
+					new PropertyNoValueSnak( 24 )
 				) ) )
 			),
 		);
