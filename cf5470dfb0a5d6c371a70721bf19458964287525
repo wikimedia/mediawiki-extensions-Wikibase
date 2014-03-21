@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_2c23d955",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T06:16:27Z",
+      "side": 1,
+      "message": "Separators",
+      "revId": "cf5470dfb0a5d6c371a70721bf19458964287525",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_6c29d135",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-21T06:16:27Z",
+      "side": 1,
+      "message": "Separators (might confused someone otherwise\u003d",
+      "revId": "cf5470dfb0a5d6c371a70721bf19458964287525",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
