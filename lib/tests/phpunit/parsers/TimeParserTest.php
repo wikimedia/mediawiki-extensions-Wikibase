@@ -64,6 +64,12 @@ class TimeParserTest extends StringValueParserTest {
 				array( '-0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1CE' =>
 				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1 1999 BC' =>
+				array( '-0000000000011999-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1,000,000 BC' =>
+				array( '-0000000001000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ma , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1,11,111 BC' =>
+				array( '-0000000000111111-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//Wikibase\Lib\YearMonthTimeParser
 			'1 1999' =>
@@ -106,6 +112,12 @@ class TimeParserTest extends StringValueParserTest {
 				array( '-0000000000002013-07-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'-10100-02-29' =>
 				array( '-0000000000010100-03-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'-1.11.111' =>
+				array( '-0000000000000111-11-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1.11.111 BC' =>
+				array( '-0000000000000111-11-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1 11 111 BC' =>
+				array( '-0000000000000111-11-01T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 		);
 
 		foreach ( $valid as $value => $expected ) {

@@ -59,17 +59,21 @@ class TimeParser extends StringValueParser {
 		$eraParser = new EraParser( $this->getOptions() );
 		$calenderModelParser = new CalendarModelParser( $this->getOptions() );
 
-		$parsers[] = new YearTimeParser(
-			$eraParser,
-			$this->getOptions()
-		);
+		// Year-month parser must be first to not parse "May 2014" as "2014-05-01".
 		$parsers[] = new YearMonthTimeParser( $this->getOptions() );
 		$parsers[] = new \ValueParsers\TimeParser(
 			$calenderModelParser,
 			$this->getOptions()
 		);
+		// MediaWiki's parser
 		$parsers[] = new MWTimeIsoParser( $this->getOptions() );
+		// PHP's parser
 		$parsers[] = new DateTimeParser(
+			$eraParser,
+			$this->getOptions()
+		);
+		// Year parser must be last because it accepts some separator characters.
+		$parsers[] = new YearTimeParser(
 			$eraParser,
 			$this->getOptions()
 		);
