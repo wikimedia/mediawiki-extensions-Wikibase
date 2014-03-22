@@ -10,6 +10,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -30,7 +31,7 @@ class ClaimSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		$serialization = $serializerFactory->newClaimSerializer()->serialize( $claim );
 		$newClaim = $deserializerFactory->newClaimDeserializer()->deserialize( $serialization );
-		$this->assertEquals( $claim, $newClaim );
+		$this->assertEquals( $claim->getHash(), $newClaim->getHash() );
 	}
 
 	public function snaksProvider() {
@@ -58,6 +59,14 @@ class ClaimSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim->setQualifiers( new SnakList( array() ) );
+		$claims[] = array( $claim );
+
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim->setQualifiers( new SnakList( array(
+			new PropertySomeValueSnak( 42 ),
+			new PropertyNoValueSnak( 42 ),
+			new PropertySomeValueSnak( 24 )
+		) ) );
 		$claims[] = array( $claim );
 
 		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
