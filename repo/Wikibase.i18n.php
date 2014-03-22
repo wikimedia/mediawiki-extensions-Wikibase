@@ -305,6 +305,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>
 to find out where it went.',
 	'wikibase-noentity-createone' => 'You can also [[$1|create a new one]].',
+	'wikibase-special-mergeitems-error-prefix' => 'The items could not be merged. The following error occurred:',
 
 	// item - summary and autocomment, see docs/summaries.txt
 	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
@@ -1278,6 +1279,7 @@ Right to alter the contents of [[d:Special:MyLanguage/Wikidata:Glossary#Item|ite
 Right to alter the [[d:Wikidata:Glossary#Term|terms]] of [[d:Wikidata:Glossary#Item|items]].',
 	'right-property-create' => '{{doc-right|property-create}}
 Right to create new [[d:Wikidata:Glossary#Property|properties]].',
+	'wikibase-special-mergeitems-error-prefix' => 'Prefix for making Special:MergeItems error messages more informative.',
 );
 
 /** Achinese (Acèh)
