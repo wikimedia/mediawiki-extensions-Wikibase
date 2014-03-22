@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_dbe9ac7c",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-22T14:30:15Z",
+      "side": 1,
+      "message": "this can now be removed as we are extending ApiWikibase",
+      "revId": "7b607c1753402321a51186f0b3d6b3a019c54d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_bbfef833",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-22T14:30:15Z",
+      "side": 1,
+      "message": "0.2 is probably wrong here\nanyway this can now be removed as we are extending ApiWikibase which will do this correctly",
+      "revId": "7b607c1753402321a51186f0b3d6b3a019c54d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
