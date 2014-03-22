@@ -266,13 +266,11 @@ class SearchEntities extends ApiBase {
 		// Actual result set.
 		$entries = array_slice( $entries, $params['continue'], $params['limit'] );
 
-		$allowedParams = $this->getAllowedParams();
 		$nextContinuation = $params['continue'] + $params['limit'];
-		$maxContinuation = $allowedParams['continue'][ApiBase::PARAM_MAX];
 
 		// Only pass search-continue param if there are more results and the maximum continuation
 		// limit is not exceeded.
-		if ( $hits > $nextContinuation && $nextContinuation <= $maxContinuation ) {
+		if ( $hits > $nextContinuation && $nextContinuation <= ApiBase::PARAM_MAX  ) {
 			$this->getResult()->addValue(
 				null,
 				'search-continue',
