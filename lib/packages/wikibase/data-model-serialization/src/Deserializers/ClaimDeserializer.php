@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Deserializers\Exceptions\MissingTypeException;
 use Deserializers\Exceptions\UnsupportedTypeException;
@@ -113,7 +114,15 @@ class ClaimDeserializer implements DispatchableDeserializer {
 			return;
 		}
 
-		$claim->setQualifiers( $this->snaksDeserializer->deserialize( $serialization['qualifiers'] ) );
+		$qualifiers = $this->snaksDeserializer->deserialize( $serialization['qualifiers'] );
+
+		if( array_key_exists( 'qualifiers-order', $serialization ) ) {
+			$this->assertQualifiersOrderIsArray( $serialization );
+
+			$qualifiers->orderByProperty( $serialization['qualifiers-order'] );
+		}
+
+		$claim->setQualifiers( $qualifiers );
 	}
 
 	private function setRankFromSerialization( array &$serialization, Statement $statement ) {
@@ -150,6 +159,16 @@ class ClaimDeserializer implements DispatchableDeserializer {
 		if ( !array_key_exists( $attributeName, $array ) ) {
 			throw new MissingAttributeException(
 				$attributeName
+			);
+		}
+	}
+
+	private function assertQualifiersOrderIsArray( array $serialization ) {
+		if ( !is_array( $serialization['qualifiers-order'] ) ) {
+			throw new InvalidAttributeException(
+				'qualifiers-order',
+				$serialization['qualifiers-order'],
+				'qualifiers-order attribute is not a valid array'
 			);
 		}
 	}
