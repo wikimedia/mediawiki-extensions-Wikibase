@@ -717,7 +717,7 @@ class EditEntity extends ModifyEntity {
 			array( 'code' => 'no-such-site', 'info' => $this->msg( 'wikibase-api-no-such-site' )->text() ),
 			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
 			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
-			array( 'code' => 'no-such-sitelink', 'info' => $this->msg( 'wikibase-api-no-sitelink' )->text() ),
+			array( 'code' => 'no-such-sitelink', 'info' => $this->msg( 'wikibase-api-no-such-sitelink' )->text() ),
 			array( 'code' => 'invalid-json', 'info' => $this->msg( 'wikibase-api-invalid-json' )->text() ),
 			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
 			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),

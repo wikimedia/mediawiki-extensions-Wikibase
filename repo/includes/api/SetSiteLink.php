@@ -141,7 +141,7 @@ class SetSiteLink extends ModifyEntity {
 			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
 			array( 'code' => 'not-recognized-siteid', 'info' => $this->msg( 'wikibase-api-not-recognized-siteid' )->text() ),
 			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
-			array( 'code' => 'no-such-sitelink', 'info' => $this->msg( 'wikibase-api-no-sitelink' )->text() ),
+			array( 'code' => 'no-such-sitelink', 'info' => $this->msg( 'wikibase-api-no-such-sitelink' )->text() ),
 		) );
 	}
 
