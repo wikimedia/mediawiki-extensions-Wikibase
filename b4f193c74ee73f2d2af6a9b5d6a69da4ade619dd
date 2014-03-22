@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_b61ccf19",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-22T17:43:10Z",
+      "side": 1,
+      "message": "I think the change below will make this line fail. Am I wrong?",
+      "revId": "b4f193c74ee73f2d2af6a9b5d6a69da4ade619dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
