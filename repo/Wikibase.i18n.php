@@ -283,8 +283,8 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-no-such-site' => 'Could not find such a site', # Do not translate
 	'wikibase-api-no-such-sitelink' => 'Could not find such a sitelink', # Do not translate
 	'wikibase-api-no-such-statement' => 'Could not find such a statement', # Do not translate
-	'wikibase-api-not-a-statement' => 'Not a statement', # Do not translate
-	'wikibase-api-not-an-item' => 'Not an item', # Do not translate
+	'wikibase-api-not-statement' => 'Not a statement', # Do not translate
+	'wikibase-api-not-item' => 'Not an item', # Do not translate
 	'wikibase-api-not-recognized-siteid' => 'The supplied site identifier was not recognized', # Do not translate
 	'wikibase-api-not-recognized' => 'Something was not recognized', # Do not translate
 	'wikibase-api-not-recognized-array' => 'An array was expected, but not recognized', # Do not translate
@@ -1068,8 +1068,8 @@ See also:
 	'wikibase-api-no-such-site' => '!!DO NOT TRANSLATE!! Could not find such a site, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-sitelink' => 'Could not find such a sitelink, this could be to the user entering the wrong data',
 	'wikibase-api-no-such-statement' => '!!DO NOT TRANSLATE!! Could not find such a statement, this could be to the user entering the wrong data',
-	'wikibase-api-not-a-statement' => '!!DO NOT TRANSLATE!! The passed parameter is Not a statement when a statement is expected',
-	'wikibase-api-not-an-item' => '!!DO NOT TRANSLATE!! The passed parameter is Not an item when an item is expected (the passed parameter may infact be a property)',
+	'wikibase-api-not-statement' => '!!DO NOT TRANSLATE!! The passed parameter is Not a statement when a statement is expected',
+	'wikibase-api-not-item' => '!!DO NOT TRANSLATE!! The passed parameter is Not an item when an item is expected (the passed parameter may infact be a property)',
 	'wikibase-api-not-recognized-siteid' => '!!DO NOT TRANSLATE!! The supplied site identifier was not recognized',
 	'wikibase-api-not-recognized' => '!!DO NOT TRANSLATE!! Something was not recognized (general message)',
 	'wikibase-api-not-recognized-array' => '!!DO NOT TRANSLATE!! An array was expected, but not recognized. The user probably passed the API a malformed parameter',
