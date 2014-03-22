@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_e14cbe45",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-22T22:58:34Z",
+      "side": 1,
+      "message": "this should follow the same format as the other keys.\ni.e.\nwikibase-*\n\nDocumentation also needs to be added for this message!\nSee the QQX section in this file!",
+      "revId": "499feeb3fce3bcb4a4aea98a00272c6c9249a80d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_c15bfafb",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-22T22:58:34Z",
+      "side": 1,
+      "message": "this looks good (once you have change the name of the message key :) )",
+      "revId": "499feeb3fce3bcb4a4aea98a00272c6c9249a80d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
