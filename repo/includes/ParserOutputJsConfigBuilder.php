@@ -94,17 +94,19 @@ class ParserOutputJsConfigBuilder {
 	 * @param Entity $entity
 	 * @param SerializationOptions $options
 	 *
-	 * @throws RuntimeException
+	 * @return array
 	 */
 	protected function getEntityVars( Entity $entity, SerializationOptions $options ) {
 		$entityId = $entity->getId();
 
 		if ( !$entityId ) {
-			throw new RuntimeException( '$entity has no entity id' );
+			$entityId = ''; //XXX: should probably throw an exception
+		} else {
+			$entityId = $entityId->getSerialization();
 		}
 
 		$configVars = array(
-			'wbEntityId' => $entityId->getSerialization(),
+			'wbEntityId' => $entityId,
 			'wbUsedEntities' => FormatJson::encode( $this->getBasicEntityInfo( $entity ) ),
 			'wbEntity' => FormatJson::encode( $this->getSerializedEntity( $entity, $options ) )
 		);
