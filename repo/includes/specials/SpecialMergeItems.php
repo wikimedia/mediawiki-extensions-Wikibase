@@ -88,7 +88,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 
 		if ( $this->modifyEntity( $status ) ) {
 			if ( !$status->isGood() ) {
-				$this->showErrorHTML( $status->getMessage() );
+				$this->showErrorHTML( $this->msg('special-mergeitems-error-prefix')->text() . $status->getMessage() );
 			} elseif ( $this->saveChanges() ) {
 				return true;
 			}

@@ -305,6 +305,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>
 to find out where it went.',
 	'wikibase-noentity-createone' => 'You can also [[$1|create a new one]].',
+	'special-mergeitems-error-prefix' => 'The items could not be merged. The following error occurred:.',
 
 	// item - summary and autocomment, see docs/summaries.txt
 	'wikibase-item-summary-wbsetitem' => 'Created a new item', // legacy
