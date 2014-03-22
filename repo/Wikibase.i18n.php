@@ -7573,6 +7573,7 @@ $messages['he'] = array(
  * @author Pooja 1810
  * @author Siddhartha Ghai
  * @author Vivek Rai
+ * @author Wikiuser13
  */
 $messages['hi'] = array(
 	'wikibase-edit' => 'संपादन',
@@ -7586,7 +7587,7 @@ $messages['hi'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'साइट',
 	'wikibase-sitelink-page-edit-placeholder' => 'पृष्ठ',
 	'wikibase-remove' => 'ह्टाना',
-	'wikibase-propertyedittool-full' => 'दि  ग७यी मूल्यो कि सुचि  पुरई हे!',
+	'wikibase-propertyedittool-full' => 'मानों की सूची पूर्ण है.',
 	'wikibase-entityselector-more' => 'ज़्यादा',
 	'wikibase-itembytitle-lookup-page' => 'प्ण्णा',
 	'wikibase-itembytitle-submit' => 'खोजे',
@@ -10020,10 +10021,12 @@ IP-мекенжайыңыз бұл енгізілімнің түзету тар�
 	'wikibase-item-summary-wbeditentity' => 'Жаңа элемент құрылды',
 	'wikibase-item-summary-wbeditentity-create' => 'also',
 	'wikibase-item-summary-wbeditentity-update' => 'Элемент жаңартылды',
-	'wikibase-item-summary-wbsetlabel-set' => '[$2] деғгейі өзгертілді',
+	'wikibase-item-summary-wbsetlabel-set' => '[$2] деңгейін өзгерті',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] деңгейі алынып тасталды',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] сипаттамасы өзгертілді',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2]  сипаттамасы алынып тасталды',
+	'wikibase-item-summary-wbsetsitelink-add' => '[$2] сайтынан сілтеме қосты',
+	'wikibase-item-summary-wbsetsitelink-remove' => '[$2] сайтынан сілтемені аластады',
 );
 
 /** Korean (한국어)
@@ -12583,7 +12586,7 @@ $messages['nl'] = array(
 	'wikibase-undo-nocontent' => 'De inhoud van versie $2 van pagina $1 kan niet geladen worden',
 	'wikibase-propertyedittool-full' => 'De lijst met waarden is compleet.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Eén waarde|$1 waarden}} nog niet opgeslagen',
-	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|ingang|ingangen}}',
+	'wikibase-propertyedittool-counter-entrieslabel' => '{{PLURAL:$1|item|items}}',
 	'wikibase-sitelinksedittool-full' => "Koppelingen naar pagina's zijn al ingesteld voor alle bekende sites.",
 	'wikibase-disambiguation-title' => 'Disambiguatie voor "$1"',
 	'wb-special-newitem-new-item-notification' => 'Nieuw item $1 aangemaakt en doorverwezen naar de pagina voor dat item. Terug naar $2.',
@@ -12610,7 +12613,7 @@ $messages['nl'] = array(
 	'wikibase-snakview-snaktypeselector-somevalue' => 'onbekende waarde',
 	'wikibase-snakview-snaktypeselector-novalue' => 'geen waarde',
 	'wikibase-shortcopyrightwarning' => 'Door te klikken op "$1" gaat u akkoord met de [[$2|gebruiksvoorwaarden]] en gaat u onherroepelijk akkoord met het vrijgeven van uw bijdrage onder de $3.',
-	'wikibase-copyrighttooltip-acknowledge' => 'Ik accepteer deze voorwaarden voor mijn toekomstige bewerken. Geef dit bericht niet opnieuw weer.',
+	'wikibase-copyrighttooltip-acknowledge' => 'Ik accepteer deze voorwaarden voor mijn toekomstige bewerkingen. Geef dit bericht niet opnieuw weer.',
 	'wikibase-entityselector-more' => 'meer',
 	'wikibase-anonymouseditwarning' => 'Waarschuwing: u bent niet aangemeld.
 Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
