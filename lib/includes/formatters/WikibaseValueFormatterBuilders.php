@@ -7,6 +7,8 @@ use Language;
 use RuntimeException;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\GeoCoordinateFormatter;
+use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityLookup;
@@ -60,7 +62,7 @@ class WikibaseValueFormatterBuilders {
 		// formatters to use for plain text output
 		SnakFormatter::FORMAT_PLAIN => array(
 			'VT:string' => 'ValueFormatters\StringFormatter',
-			'VT:globecoordinate' => 'ValueFormatters\GlobeCoordinateFormatter',
+			'VT:globecoordinate' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newGlobeCoordinateFormatter' ),
 			'VT:quantity' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newQuantityFormatter' ),
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
 			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdFormatter' ),
@@ -541,6 +543,23 @@ class WikibaseValueFormatterBuilders {
 		$localizer = new MediaWikiNumberLocalizer( $language );
 		$decimalFormatter = new DecimalFormatter( $options, $localizer );
 		return new QuantityFormatter( $decimalFormatter, $options );
+	}
+
+	/**
+	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
+	 * Used to compose the GlobeCoordinateFormatter.
+	 *
+	 * @param FormatterOptions $options
+	 * @param WikibaseValueFormatterBuilders $builders
+	 *
+	 * @return GlobeCoordinateFormatter
+	 */
+	protected static function newGlobeCoordinateFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
+		$options = clone $options;
+		$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
+		$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array() );
+		$options->setOption( GeoCoordinateFormatter::OPT_DIRECTIONAL, true );
+		return new GlobeCoordinateFormatter( $options );
 	}
 
 	/**
