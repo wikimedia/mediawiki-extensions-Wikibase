@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_76a99777",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-22T18:01:46Z",
+      "side": 1,
+      "message": "That\u0027s not a value, that\u0027s a key.",
+      "revId": "64516bdf4b7d16fc284ae52e68c46ecfb2fe6dab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
