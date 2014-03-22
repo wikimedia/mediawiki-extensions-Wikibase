@@ -16,6 +16,24 @@
       "revId": "b4f193c74ee73f2d2af6a9b5d6a69da4ade619dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_16c49b67",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-22T17:48:34Z",
+      "side": 1,
+      "message": "will not fail, continue will be defined with the default of null which in this case \u003d\u003d 0\nSame as in core ;p",
+      "parentUuid": "ee14bf34_b61ccf19",
+      "revId": "b4f193c74ee73f2d2af6a9b5d6a69da4ade619dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
