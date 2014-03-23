@@ -145,4 +145,12 @@ class YearTimeParserTest extends StringValueParserTest {
 		return $argLists;
 	}
 
+	/**
+	 * @expectedException \ValueParsers\ParseException
+	 * @expectedExceptionMessage Failed to parse year: just invalid
+	 */
+	public function testParseExceptionMessage() {
+		$this->getInstance()->parse( 'just invalid' );
+	}
+
 }
