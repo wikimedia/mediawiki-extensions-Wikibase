@@ -1098,6 +1098,7 @@ This message tells the user that he can create one and gives a link in $1 to the
 
 Parameters:
 * $1 - link to the special page which is used to create',
+	'wikibase-special-mergeitems-error-prefix' => 'Prefix for making Special:MergeItems error messages more informative.',
 	'wikibase-item-summary-wbsetitem' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
 	'wikibase-item-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
@@ -1279,7 +1280,6 @@ Right to alter the contents of [[d:Special:MyLanguage/Wikidata:Glossary#Item|ite
 Right to alter the [[d:Wikidata:Glossary#Term|terms]] of [[d:Wikidata:Glossary#Item|items]].',
 	'right-property-create' => '{{doc-right|property-create}}
 Right to create new [[d:Wikidata:Glossary#Property|properties]].',
-	'wikibase-special-mergeitems-error-prefix' => 'Prefix for making Special:MergeItems error messages more informative.',
 );
 
 /** Achinese (Acèh)
@@ -4148,6 +4148,8 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-mylanguagefallbackchain-babel' => 'Du kannst sie bearbeiten, indem du <nowiki>{{#babel:}}</nowiki> in {{GENDER:$1|deine}} [[Special:MyPage|Benutzerseite]] einfügst.',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 – $2, konvertiert von $3 – $4',
 	'wikibase-api-no-such-sitelink' => 'Dieser Websitelink konnte nicht gefunden werden',
+	'wikibase-api-not-statement' => 'Keine Aussage',
+	'wikibase-api-not-item' => 'Kein Objekt',
 	'wikibase-self-conflict-patched' => 'Deine Bearbeitung wurde in die aktuellste Version gepatcht und deine eigenen zwischenzeitlichen Änderungen überschrieben.',
 	'wikibase-conflict-patched' => 'Deine Bearbeitung wurde in die aktuellste Version gepatcht.',
 	'wikibase-restoreold' => 'zurücksetzen',
@@ -4155,6 +4157,7 @@ Stattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes 
 	'wikibase-no-direct-editing' => 'Das direkte Bearbeiten im Namensraum $1 wurde deaktiviert.',
 	'wikibase-noentity' => 'Dieser Datensatz ist nicht vorhanden. Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>, um herauszufinden, was mit ihm passiert ist.',
 	'wikibase-noentity-createone' => 'Du kannst auch [[$1|einen neuen erstellen]].',
+	'wikibase-special-mergeitems-error-prefix' => 'Die Objekte konnten nicht zusammengeführt werden. Der folgende Fehler ist aufgetreten:',
 	'wikibase-item-summary-wbsetitem' => 'Ein neues Datenobjekt erstellt',
 	'wikibase-item-summary-wbcreate-new' => 'Ein neues Datenobjekt erstellt',
 	'wikibase-item-summary-wbeditentity' => 'Ein neues Datenelement erstellt',
@@ -6180,6 +6183,8 @@ IP-osoitteesi kirjataan tämän aiheen muokkaushistoriaan.',
 	'wikibase-mylanguagefallbackchain-text' => 'Varakieliketjua käytetään näyttämään aiheiden nimet sinulle seuraavasti.',
 	'wikibase-mylanguagefallbackchain-babel' => 'Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> {{GENDER:$1|sinun}} [[Special:MyPage|käyttäjäsivullesi]].',
 	'wikibase-api-no-such-sitelink' => 'Tällaista sivustolinkkiä ei löytynyt',
+	'wikibase-api-not-statement' => 'Ei ole esitys',
+	'wikibase-api-not-item' => 'Ei ole kohde',
 	'wikibase-restoreold' => 'palauta',
 	'wikibase-restore-summary' => 'Käyttäjän [[Special:Contributions/$2|$2]] tekemän muokkauksen $1 palautus',
 	'wikibase-no-direct-editing' => 'Sivun lähdekoodin muokkaaminen on poistettu käytöstä nimiavaruudessa $1',
@@ -6276,6 +6281,7 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author Gomoko
  * @author Hazard-SJ
  * @author Hello71
+ * @author Immortal
  * @author Jean-Frédéric
  * @author Jitrixis
  * @author Laddo
@@ -6509,6 +6515,7 @@ Votre adresse IP sera enregistrée dans l’historique des modifications de cett
 	'wikibase-noentity' => 'Cet ensemble de données n’existe pas. Vous pouvez
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} consulter les journaux]</span> pour plus d’informations.',
 	'wikibase-noentity-createone' => 'Vous pouvez aussi [[$1|en créer une nouvelle]].',
+	'wikibase-special-mergeitems-error-prefix' => "Impossible de fusionner les éléments. L'erreur suivante s'est produite :",
 	'wikibase-item-summary-wbsetitem' => 'Création d’un nouvel élément',
 	'wikibase-item-summary-wbcreate-new' => 'Création d’un nouvel élément',
 	'wikibase-item-summary-wbeditentity' => 'Nouvel élément créé',
@@ -7461,6 +7468,7 @@ $messages['he'] = array(
 	'wikibase-no-direct-editing' => 'עריכה ישירה כבויה במרחב השם $1',
 	'wikibase-noentity' => 'ערכת הנתונים הזאת אינה קיימת. ניתן <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים]</span> כדי למצוא לאן היא נעלמה.',
 	'wikibase-noentity-createone' => 'אפשר גם [[$1|ליצור אחת חדשה]].',
+	'wikibase-special-mergeitems-error-prefix' => 'לא היה אפשר למזג את הפריטים. אירעה השגיאה הבאה:',
 	'wikibase-item-summary-wbsetitem' => 'נוצר פריט חדש',
 	'wikibase-item-summary-wbcreate-new' => 'נוצר פריט חדש',
 	'wikibase-item-summary-wbeditentity' => 'נוצר פריט חדש',
@@ -7812,7 +7820,7 @@ $messages['hsb'] = array(
 	'wikibase-dispatchstats-large-lag' => '(jara wulki)',
 	'wikibase-dispatchstats-average' => 'Přerězk',
 	'special-listdatatypes' => 'Lisćina wšěch k dispoziciji stejacych datowych typow',
-	'wikibase-listdatatypes-intro' => 'To je lisćina wšěch datowych typow, kotrež so w tutej instalaciji tuchwilu wužiwaja:', # Fuzzy
+	'wikibase-listdatatypes-intro' => 'To je lisćina wšěch datowych typow, kotrež w tutej instalaciji k dispoziciji steja:',
 	'wikibase-history-title-with-label' => 'Wersijowa historija "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Wersijowa historija ($1)',
 	'special-entitieswithoutdescription' => 'Entity bjez wopisanja',
@@ -10724,6 +10732,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'wikibase-restore-summary' => 'Versioun $1 vum [[Special:Contributions/$2|$2]] gouf restauréiert',
 	'wikibase-no-direct-editing' => "D'Direktänneren ass am Nummraum $1 ausgeschalt",
 	'wikibase-noentity-createone' => 'Dir kënnt och [[$1|een Neit uleeën]]',
+	'wikibase-special-mergeitems-error-prefix' => "D'Elementer konnten net zesummegeluecht ginn. Dëse Feeler ass geschitt:",
 	'wikibase-item-summary-wbsetitem' => 'En neit Element gouf ugeluecht',
 	'wikibase-item-summary-wbcreate-new' => 'En neit Element gouf ugeluecht',
 	'wikibase-item-summary-wbeditentity' => 'En neit Element gouf ugeluecht',
@@ -10768,42 +10777,7 @@ Dowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.',
 	'content-model-wikibase-item' => 'Wikibase-Element',
 	'content-model-wikibase-property' => 'Wikibase-Eegeschaft',
 	'content-model-wikibase-query' => 'Wikibase-Ufro',
-	'right-item-override' => 'Elementer iwwerschreiwen',
-	'right-item-create' => 'Elementer uleeën',
-	'right-item-remove' => 'Elementer läschen',
-	'right-property-override' => 'Eegeschaften iwwerschreiwen',
 	'right-property-create' => 'Eegeschaften uleeën',
-	'right-property-remove' => 'Eegeschafte läschen',
-	'right-alias-remove' => 'Aliasen ewechhuelen',
-	'right-alias-update' => 'Aliasen aktualiséieren',
-	'right-sitelink-remove' => 'Linken op Siten ewechhuelen',
-	'right-sitelink-update' => 'Website-Linken aktualiséieren',
-	'right-linktitles-update' => 'Säiten associéieren',
-	'right-label-remove' => 'Etikette läschen',
-	'right-label-update' => 'Etiketten aktualiséieren',
-	'right-description-remove' => 'Beschreiwunge läschen',
-	'right-description-update' => 'Beschreiwungen aktualiséieren',
-	'action-item-override' => 'Elementer iwwerschreiwen',
-	'action-item-create' => 'Elementer uleeën',
-	'action-item-remove' => 'Elementer läschen',
-	'action-property-override' => 'Eegeschaften iwwerschreiwen',
-	'action-property-create' => 'Eegeschaften uleeën',
-	'action-property-remove' => 'Eegeschafte läschen',
-	'action-alias-update' => 'Aliasen aktualiséieren',
-	'action-alias-remove' => 'Aliasen ewechhuelen',
-	'action-sitelink-remove' => 'Website-Linken ewechhuelen',
-	'action-sitelink-update' => 'Website-Linken aktualiséieren',
-	'action-linktitles-update' => 'Säiten associéieren',
-	'action-label-remove' => 'Etikette läschen',
-	'action-label-update' => 'Etiketten aktualiséieren',
-	'action-description-remove' => 'Beschreiwungen läschen',
-	'action-description-update' => 'Beschreiwungen aktualiséieren',
-	'wikibase-time-precision-Gannum' => 'a(n) $1 Milliarde Joren',
-	'wikibase-time-precision-Mannum' => 'a(n) $1 Millioune Joren',
-	'wikibase-time-precision-annum' => 'a(n) $1 Joer',
-	'wikibase-time-precision-millennium' => '$1. Joerdausend',
-	'wikibase-time-precision-century' => '$1. Joerhonnert',
-	'wikibase-time-precision-10annum' => '$1s',
 );
 
 /** لوری (لوری)
@@ -11357,6 +11331,8 @@ $messages['mk'] = array(
 	'wikibase-mylanguagefallbackchain-verbatim-item' => '$1 — $2',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 — $2, претворено од $3 — $4',
 	'wikibase-api-no-such-sitelink' => 'Не пронајдов таква викиврска',
+	'wikibase-api-not-statement' => 'Не претставува исказ',
+	'wikibase-api-not-item' => 'Не претставува предмет',
 	'wikibase-self-conflict-patched' => 'Вашето уредување е прикрпено на последната верзија, презапишувајќи врз некои од вашите меѓувремени промени.',
 	'wikibase-conflict-patched' => 'Вашето уредување е прикрпено на последната верзија.',
 	'wikibase-restoreold' => 'врати',
@@ -11366,6 +11342,7 @@ $messages['mk'] = array(
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате по поврзаните дневници]</span>
 зада дознаете каде отишол',
 	'wikibase-noentity-createone' => 'Можете и да [[$1|создадете нов]].',
+	'wikibase-special-mergeitems-error-prefix' => 'Не можев да ги спојам предметите. Се јави следнава грешка:',
 	'wikibase-item-summary-wbsetitem' => 'Создавање на нов предмет',
 	'wikibase-item-summary-wbcreate-new' => 'Создаден нов предмет',
 	'wikibase-item-summary-wbeditentity' => 'Создавање на нов предмет',
@@ -12561,8 +12538,10 @@ $messages['nl'] = array(
 	'wikibase-remove-inprogress' => 'Bezig met verwijderen...',
 	'wikibase-label-empty' => 'Er is nog geen label ingesteld.',
 	'wikibase-label-edit-placeholder' => 'geef een label op',
+	'wikibase-label-edit-placeholder-language-aware' => 'label invoeren in de taal $1',
 	'wikibase-description-empty' => 'Is is nog geen beschrijving ingesteld.',
 	'wikibase-description-edit-placeholder' => 'geef een beschrijving op',
+	'wikibase-description-edit-placeholder-language-aware' => 'beschrijving invoeren in de taal $1',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'pagina',
 	'wikibase-alias-edit-placeholder' => 'geef een alias op',
@@ -12727,7 +12706,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-dispatchstats-median' => 'Mediaan',
 	'wikibase-dispatchstats-average' => 'Gemiddelde',
 	'special-listdatatypes' => 'Lijst met alle beschikbare gegevenstypen',
-	'wikibase-listdatatypes-intro' => 'Dit is een lijst met alle gegevenstypen die op dit moment in gebruik zijn in deze wiki:', # Fuzzy
+	'wikibase-listdatatypes-intro' => 'Dit is een lijst met alle gegevenstypen die beschikbaar zijn in deze wiki:',
 	'wikibase-history-title-with-label' => '$2 ($1): versiegeschiedenis',
 	'wikibase-history-title-without-label' => '$1: versiegeschiedenis',
 	'special-entitieswithoutdescription' => 'Entiteiten zonder beschrijving',
@@ -12754,6 +12733,8 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-mylanguagefallbackchain-babel' => 'U kunt bewerken voor <nowiki>{{#babel: }}</nowiki> toe te voegen aan {{GENDER:$1|uw}} [[Special:MyPage|gebruikerspagina]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2, omgezet van $3 - $4',
 	'wikibase-api-no-such-sitelink' => 'Een dergelijke sitekoppeling kon niet gevonden worden.',
+	'wikibase-api-not-statement' => 'Geen verklaring',
+	'wikibase-api-not-item' => 'Geen item',
 	'wikibase-self-conflict-patched' => 'Uw bewerking is samengevoegd met de laatste versie, en daarbij zijn enige tussentijdse wijzigingen overschreven.',
 	'wikibase-conflict-patched' => 'Uw bewerking is samengevoegd met de laatste versie.',
 	'wikibase-restoreold' => 'opnieuw instellen',
@@ -12762,6 +12743,7 @@ Uw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.',
 	'wikibase-noentity' => 'Deze gegevensset bestaat niet.
 U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken]</span>.',
 	'wikibase-noentity-createone' => 'U kunt ook [[$1|een nieuwe maken]].',
+	'wikibase-special-mergeitems-error-prefix' => 'De items konden niet samengevoegd worden. De volgende fout is opgetreden:',
 	'wikibase-item-summary-wbsetitem' => 'Nieuw item aangemaakt',
 	'wikibase-item-summary-wbcreate-new' => 'Nieuw item aangemaakt',
 	'wikibase-item-summary-wbeditentity' => 'Nieuw item aangemaakt',
@@ -12826,28 +12808,21 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-property-summary-wbsetaliases-remove' => '{{PLURAL:$1|alias|aliassen}} voor [$2] verwijderd',
 	'wikibase-property-summary-special-create-property' => 'Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'wikibase-listdatatypes-wikibase-item-head' => 'Item',
-	'wikibase-listdatatypes-wikibase-item-body' => 'Koppeling naar andere items van het project. Tijdens de gegevensinvoer wordt de naamruimte "Item" van Wikidata doorzicht op overeenkomende items. Het bestaat uit een enkel invoerveld voor tekst.
-* scheme – impliciet onderdeel van de Iri-tekst
-* hierarchicalpart – impliciet onderdeel van de Iri-tekst
-* query – impliciet onderdeel van de Iri-tekst
-* fragment – impliciet onderdeel van de Iri-tekst', # Fuzzy
+	'wikibase-listdatatypes-wikibase-item-body' => 'Koppeling naar andere items van het project. Tijdens de gegevensinvoer wordt de naamruimte "Item" van Wikidata doorzicht op overeenkomende items. Het bestaat uit een enkel invoerveld voor tekst.',
 	'wikibase-listdatatypes-commonsmedia-head' => 'Commons media',
-	'wikibase-listdatatypes-commonsmedia-body' => 'Koppeling naar bestanden die zijn opgeslagen op Wikimedia Commons. Tijdens de invoer wordt de naamruimte "File" op Commons doorzocht voor overeenkomende bestanden.
-* scheme - impliciet onderdeel van de Iristring
-* hierarchicalpart  - impliciet onderdeel van de Iristring
-* query - impliciet onderdeel van de Iristring
-* fragment - impliciet onderdeel van de Iristring', # Fuzzy
+	'wikibase-listdatatypes-commonsmedia-body' => 'Koppeling naar bestanden die zijn opgeslagen op Wikimedia Commons. Tijdens de invoer wordt de naamruimte "File" op Commons doorzocht voor overeenkomende bestanden.',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Globale coördinaat',
 	'wikibase-listdatatypes-globe-coordinate-body' => 'Letterlijke gegevens voor een geografische positie met de notatie als een paar van breedtegraad en lengtegraad in gms of decimale graden voor het gegeven stellaire lichaam. Standaard is "Aarde" en dan "WGS84". Dit voegt een resolutie en afstand toe.
- * breedtegraad: impliciete eerste deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door het achtervoegsel N/S;
- * lengtegraad: impliciete tweede deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door achtervoegsel E/W;
- * hoogte (optioneel) – expliciete (?) waarde voor de hoogte boven een referentievlak, voor de globe "Aarde" is dat de "WGS84" referentieglobe;
- * globe (optioneel) – expliciete (?) waarde, gegeven als als stellaire lichaam met als standaardwaarde "Aarde" en vervolgens "WGS84".', # Fuzzy
+* breedtegraad: impliciete eerste deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door het achtervoegsel N/S;
+* lengtegraad: impliciete tweede deel (getal met decimalen, dms, dm, dd) van de coördinaattekenreeks, de richting is gegeven door een vastgesteld teken of door achtervoegsel E/W;
+* globe: expliciete (?) waarde, gegeven als als stellaire lichaam met als standaardwaarde "Aarde" "http://www.wikidata.org/entity/Q2";
+* precisie: numerieke precisie van de coördinaat.',
 	'wikibase-listdatatypes-quantity-head' => 'Hoeveelheid',
 	'wikibase-listdatatypes-quantity-body' => 'Letterlijk gegevensveld voor een hoeveelheid die gerelateerd is een aan bepaalde goed gedefinieerde eenheid. De werkelijke eenheid wordt ingevoerd in gegevenswaarden die worden ingevoerd.
 * waarde: impliciet deel van de tekenreeks (toewijzing van eenheidvoorvoegsel is onduidelijk);
-* eenheid: impliciet deel van de tekenreeks (toewijzing van eenheidvoorvoegsel is onduidelijk);
-* nauwkeurigheid (optioneel): expliciete gegevenswaarde, heeft dezelfde eenheid als de waarde.', # Fuzzy
+* eenheid: impliciet deel van de tekenreeks met als standaard waarde "1" (toewijzing van eenheidvoorvoegsel is onduidelijk);
+* bovengrens: bovengrens van de waarde;
+* ondergrens: ondergrens van de waarde.',
 	'wikibase-listdatatypes-monolingual-text-head' => 'Enkeltalige tekst',
 	'wikibase-listdatatypes-monolingual-text-body' => "Letterlijke gegevensveld voor een tekenreeks die niet wordt vertaald in andere talen. Dit type tekst wordt één keer gedefinieerd en en in alle talen herrgebruikt. Typisch gebruik is voor geografische namen geschreven in de lokale taal, ID's, een chemische formule of een Latijnse wetenschappelijke naam.
 * taal: expliciete waarde voor het identificeren van de taal voor het tekstdeel;
@@ -12873,6 +12848,9 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'content-model-wikibase-item' => 'Wikibaseitem',
 	'content-model-wikibase-property' => 'Wikibase-eigenschap',
 	'content-model-wikibase-query' => 'Wikibasezoekopdracht',
+	'right-item-term' => 'Itemwaarden wijzigen (labels, beschrijvingen, aliassen)',
+	'right-item-merge' => 'Items samenvoegen',
+	'right-property-term' => 'Eigenschapswaarden wijzigen (labels, beschrijvingen, aliassen)',
 	'right-property-create' => 'Eigenschappen aanmaken',
 );
 
@@ -15140,6 +15118,8 @@ $messages['ru'] = array(
 	'wikibase-mylanguagefallbackchain-babel' => 'Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 — $2, преобразованные из $3 — $4',
 	'wikibase-api-no-such-sitelink' => 'Не удалось найти такую ссылку на сайт',
+	'wikibase-api-not-statement' => 'Not a statement',
+	'wikibase-api-not-item' => 'Not an item',
 	'wikibase-self-conflict-patched' => 'Ваша правка была помещена в последнюю версию, при этом были перекрыты некоторые из ваших собственных промежуточных изменений.',
 	'wikibase-conflict-patched' => 'Ваша правка было исправлена в последней версии.',
 	'wikibase-restoreold' => 'восстановить',
@@ -15148,6 +15128,7 @@ $messages['ru'] = array(
 	'wikibase-noentity' => 'Такого набора данных не существует. Вы можете
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} поискать соответствующие записи в журналах]</span>, чтобы узнать, где он может быть.',
 	'wikibase-noentity-createone' => 'Вы также можете [[$1|создать его]].',
+	'wikibase-special-mergeitems-error-prefix' => 'Элементы не могут быть объединены. Произошла следующая ошибка:',
 	'wikibase-item-summary-wbsetitem' => 'Новый элемент создан',
 	'wikibase-item-summary-wbcreate-new' => 'Создан новый элемент',
 	'wikibase-item-summary-wbeditentity' => 'Новый элемент создан',
@@ -18091,9 +18072,9 @@ $messages['zh-hans'] = array(
 	'wikibase-modifyentity-id' => 'ID：',
 	'wikibase-modifyterm-language' => '语言：',
 	'special-mergeitems' => '合并两项',
-	'wikibase-mergeitems-intro' => '如果您合并两项、所有标签、描述、别名、站点链接和声明将从一项移动至另一项。',
-	'wikibase-mergeitems-fromid' => '被合并的项ID',
-	'wikibase-mergeitems-toid' => '接受合并的项ID',
+	'wikibase-mergeitems-intro' => '如果你合并两个项，所有标签、说明、别名、网站链接和声明会从一项移动至另一项。',
+	'wikibase-mergeitems-fromid' => '要合并自的ID',
+	'wikibase-mergeitems-toid' => '要合并到的ID',
 	'wikibase-mergeitems-submit' => '合并项',
 	'special-dispatchstats' => '更改发送统计',
 	'wikibase-dispatchstats-intro' => '本页面提供关于发送至客户的更改的统计。当{{SITENAME}}上的更改已经发送至客户wiki并已被客户维基的工作队列处理，客户wiki即知晓该更改。
@@ -18149,6 +18130,8 @@ $messages['zh-hans'] = array(
 	'wikibase-mylanguagefallbackchain-babel' => '你可以通过在{{GENDER:$1|你的}}[[Special:MyPage|用户页面]]放置<nowiki>{{#babel: }}</nowiki>编辑它。',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1 - $2，更改自$3 - $4',
 	'wikibase-api-no-such-sitelink' => '无法找到此类站点链接',
+	'wikibase-api-not-statement' => '不是语句',
+	'wikibase-api-not-item' => '不是项',
 	'wikibase-self-conflict-patched' => '你的编辑已被修补至最后版本，覆盖某些你自己的中间更改。',
 	'wikibase-conflict-patched' => '你的编辑已被修补至最后版本。',
 	'wikibase-restoreold' => '恢复',
@@ -18156,6 +18139,7 @@ $messages['zh-hans'] = array(
 	'wikibase-no-direct-editing' => '名字空间$1禁止直接编辑',
 	'wikibase-noentity' => '本数据集不存在。你可以<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 搜索相关日志]</span>了解其去向。',
 	'wikibase-noentity-createone' => '你也可以[[$1|创建新数据集]]。',
+	'wikibase-special-mergeitems-error-prefix' => '此项不能被合并。已找到如下错误：',
 	'wikibase-item-summary-wbsetitem' => '创建新项',
 	'wikibase-item-summary-wbcreate-new' => '创建新项',
 	'wikibase-item-summary-wbeditentity' => '创建新项',
@@ -18487,6 +18471,8 @@ $messages['zh-hant'] = array(
 	'wikibase-mylanguagefallbackchain-babel' => '您可通過於{{GENDER:$1|您的}}[[Special:MyPage|用戶頁]]加入<nowiki>{{#babel: }}</nowiki>以編輯。',
 	'wikibase-mylanguagefallbackchain-converted-item' => '$1~$2，轉換自$3~$4',
 	'wikibase-api-no-such-sitelink' => '無法找尋此類站點的連接',
+	'wikibase-api-not-statement' => '不是語句',
+	'wikibase-api-not-item' => '不是項',
 	'wikibase-self-conflict-patched' => '您的編輯已成最新版本，覆蓋了您自己中間做的一些更改。',
 	'wikibase-conflict-patched' => '您的編輯已成最新版本。',
 	'wikibase-restoreold' => '恢復',
@@ -18494,6 +18480,7 @@ $messages['zh-hant'] = array(
 	'wikibase-no-direct-editing' => '名字空間$1中已禁用直接編輯',
 	'wikibase-noentity' => '此數據集不存在。您可以<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 搜尋相關日誌]</span>來得知原因。',
 	'wikibase-noentity-createone' => '您也可以[[$1|新創建一個]]。',
+	'wikibase-special-mergeitems-error-prefix' => '此項無法合併。如下錯誤出現：',
 	'wikibase-item-summary-wbsetitem' => '創建新項目',
 	'wikibase-item-summary-wbcreate-new' => '創建一個新項目',
 	'wikibase-item-summary-wbeditentity' => '創建一個新項目',

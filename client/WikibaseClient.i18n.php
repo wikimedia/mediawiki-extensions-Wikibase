@@ -3412,6 +3412,7 @@ $messages['nl'] = array(
 	'wikibase-pageinfo-entity-id' => '{{WBREPONAME}} item-ID',
 	'wikibase-pageinfo-entity-id-none' => 'Geen',
 	'wikibase-property-render-error' => 'Het verwerken van de eigenschap $1 is mislukt: $2',
+	'wikibase-otherprojects' => 'Andere projecten',
 );
 
 /** Norwegian Nynorsk (norsk nynorsk)
