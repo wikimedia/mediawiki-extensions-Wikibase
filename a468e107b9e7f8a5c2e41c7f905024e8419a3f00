@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_618b0ee9",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-23T04:29:08Z",
+      "side": 1,
+      "message": "this is not an entity id object. I would use another variable name",
+      "revId": "a468e107b9e7f8a5c2e41c7f905024e8419a3f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_017c52e1",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-23T04:29:08Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "a468e107b9e7f8a5c2e41c7f905024e8419a3f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
