@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_aab69bd5",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-23T22:41:48Z",
+      "side": 1,
+      "message": "ValueParser is probably the better type hint here",
+      "revId": "7bfa5b34e10aef86b3553335bce3f22f30d5afea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_cab30fe7",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-23T22:41:48Z",
+      "side": 1,
+      "message": "err, already done?",
+      "revId": "7bfa5b34e10aef86b3553335bce3f22f30d5afea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
