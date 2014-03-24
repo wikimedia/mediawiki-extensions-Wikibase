@@ -32,18 +32,22 @@
 			var $claim = null,
 				mainSnak = claim.getMainSnak(),
 				$qualifierValues = null,
+				scrapeType = null,
 				iQualifiers = 0;
 
-			if( mainSnak.getType() === 'value' && isSnakToScrape( mainSnak ) ) {
+			if( isSnakToScrape( mainSnak ) ) {
 				$claim = getClaimNode( claim.getGuid() );
 
+				// Use .text() for quantities in order to avoid double escaping
+				scrapeType = mainSnak.getValue().getType() === 'quantity' ? 'text' : 'html';
+
 				wb.__formattedValues[JSON.stringify( claim.getMainSnak().getValue().toJSON() )]
-					= $claim.children( '.wb-claim-mainsnak' ).find( '.wb-snak-value' ).html();
+					= $claim.children( '.wb-claim-mainsnak' ).find( '.wb-snak-value' )[scrapeType]();
 			}
 
 			$.each( claim.getQualifiers().getGroupedSnakLists(), function( j, snakList ) {
 				snakList.each( function( k, snak ) {
-					if( snak.getType() === 'value' && isSnakToScrape( snak ) ) {
+					if( isSnakToScrape( snak ) ) {
 						$claim = $claim || getClaimNode( claim.getGuid() );
 						$qualifierValues = $qualifierValues || getQualifierValueNodes( $claim );
 
@@ -60,7 +64,7 @@
 
 				$.each( reference.getSnaks().getGroupedSnakLists(), function( j, snakList ) {
 					snakList.each( function( k, snak ) {
-						if( snak.getType() === 'value' && isSnakToScrape( snak ) ) {
+						if( isSnakToScrape( snak ) ) {
 							$referenceValues
 								= $referenceValues || getReferenceValueNodes( reference.getHash() );
 
@@ -82,7 +86,8 @@
 	 * @return {boolean}
 	 */
 	function isSnakToScrape( snak ) {
-		return $.inArray( snak.getValue().getType(), DATA_VALUE_TYPES_TO_SCRAPE ) !== -1;
+		return snak.getType() === 'value' &&
+			$.inArray( snak.getValue().getType(), DATA_VALUE_TYPES_TO_SCRAPE ) !== -1;
 	}
 
 	/**
