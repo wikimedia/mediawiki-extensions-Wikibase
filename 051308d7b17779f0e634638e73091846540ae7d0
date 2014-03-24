@@ -16,6 +16,24 @@
       "revId": "051308d7b17779f0e634638e73091846540ae7d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_758bc8e8",
+        "filename": "tests/browser/features/step_definitions/statement_steps.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-24T10:16:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_182a2b7a",
+      "revId": "051308d7b17779f0e634638e73091846540ae7d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
