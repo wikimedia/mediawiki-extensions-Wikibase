@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_960c22f2",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-24T16:34:19Z",
+      "side": 1,
+      "message": "tweaked this",
+      "parentUuid": "ee14bf34_f6bd9efe",
+      "revId": "46244201b5e8ba493753a79606988bde14e707d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_16c3728d",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-24T16:25:51Z",
       "side": 1,
       "message": "why does this return a status here but not in the other case?",
+      "revId": "46244201b5e8ba493753a79606988bde14e707d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d6297a37",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-24T16:34:19Z",
+      "side": 1,
+      "message": "made it return null. I don\u0027t want to change the below code in this patch",
+      "parentUuid": "ee14bf34_16c3728d",
       "revId": "46244201b5e8ba493753a79606988bde14e707d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
