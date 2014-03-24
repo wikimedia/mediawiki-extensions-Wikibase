@@ -14,7 +14,6 @@ use ValueParsers\ParserOptions;
  * @author Adam Shorland
  *
  * @todo move me to DataValues-time
- * @note this would use Unlocalizer interface but it is incompatible
  */
 class MonthNameUnlocalizer {
 
