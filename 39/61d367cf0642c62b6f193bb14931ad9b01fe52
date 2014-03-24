@@ -1,0 +1,8 @@
+Code-Review+2: Aude <aude.wiki@gmail.com>
+Verified+2: jenkins-bot
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 24 Mar 2014 22:30:52 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/120628
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/mw1.23-wmf19
