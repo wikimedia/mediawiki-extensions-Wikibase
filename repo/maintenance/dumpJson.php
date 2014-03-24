@@ -4,11 +4,13 @@ namespace Wikibase;
 
 use Disposable;
 use ExceptionHandler;
-use Iterator;
 use Maintenance;
+use MWException;
 use Traversable;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\IO\EntityIdReader;
+use Wikibase\IO\LineReader;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
@@ -57,7 +59,8 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'list-file', "A file containing one entity ID per line.", false, true );
 		$this->addOption( 'entity-type', "Only dump this kind of entity, e.g. `item` or `property`.", false, true );
 		$this->addOption( 'sharding-factor', "The number of shards (must be >= 1)", false, true );
-		$this->addOption( 'shard', "The shard to output (must be less than the sharding-factor) ", false, true );
+		$this->addOption( 'shard', "The shard to output (must be less than the sharding-factor)", false, true );
+		$this->addOption( 'batch-size', "The number of entities per processing batch", false, true );
 		$this->addOption( 'output', "Output file (default is stdout). Will be overwritten.", false, true );
 		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
@@ -144,6 +147,7 @@ class DumpJson extends Maintenance {
 		$entityType = $this->getOption( 'entity-type' );
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
+		$batchSize = (int)$this->getOption( 'batch-size', 100 );
 
 		//TODO: Allow injection of an OutputStream for logging
 		$this->openLogFile( $this->getOption( 'log', 'php://stderr' ) );
@@ -185,6 +189,7 @@ class DumpJson extends Maintenance {
 		//      but filtering in the dumper is needed when working from a list file.
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 		$dumper->setEntityTypeFilter( $entityType );
+		$dumper->setBatchSize( $batchSize );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
 		$dumper->generateDump( $idStream );
@@ -198,10 +203,10 @@ class DumpJson extends Maintenance {
 	}
 
 	/**
-	 * @param string|null $entityType
-	 * @param \ExceptionHandler $exceptionReporter
+	 * @param null|string $entityType
+	 * @param ExceptionHandler $exceptionReporter
 	 *
-	 * @return Iterator a stream of EntityId objects
+	 * @return EntityIdPager a stream of EntityId objects
 	 */
 	public function makeIdStream( $entityType = null, ExceptionHandler $exceptionReporter = null ) {
 		$listFile = $this->getOption( 'list-file' );
@@ -209,18 +214,28 @@ class DumpJson extends Maintenance {
 		if ( $listFile !== null ) {
 			$stream = $this->makeIdFileStream( $listFile, $exceptionReporter );
 		} else {
-			$stream = $this->entityPerPage->getEntities( $entityType );
+			$stream = $this->makeIdQueryStream( $entityType );
 		}
 
 		return $stream;
 	}
 
 	/**
-	 * @param $listFile
-	 * @param \ExceptionHandler $exceptionReporter
+	 * @param $entityType
 	 *
-	 * @throws \MWException
-	 * @return Traversable
+	 * @return EntityIdPager
+	 */
+	protected function makeIdQueryStream( $entityType ) {
+		$stream = new EntityPerPageIdPager( $this->entityPerPage, $entityType );
+		return $stream;
+	}
+
+	/**
+	 * @param $listFile
+	 * @param ExceptionHandler $exceptionReporter
+	 *
+	 * @throws MWException
+	 * @return EntityIdPager
 	 */
 	protected function makeIdFileStream( $listFile, ExceptionHandler $exceptionReporter = null ) {
 		$input = fopen( $listFile, 'r' );
@@ -229,7 +244,7 @@ class DumpJson extends Maintenance {
 			throw new \MWException( "Failed to open ID file: $input" );
 		}
 
-		$stream = new EntityIdReader( $input );
+		$stream = new EntityIdReader( new LineReader( $input ), new BasicEntityIdParser() );
 		$stream->setExceptionHandler( $exceptionReporter );
 
 		return $stream;
