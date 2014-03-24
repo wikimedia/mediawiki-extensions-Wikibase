@@ -5,6 +5,7 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use Revision;
+use UsageException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
@@ -150,8 +151,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 				$this->makeRequest( $serializedClaim, $itemId, 1, 'reorder qualifiers' );
 			}
 
-			$claim = new Statement( new PropertyNoValueSnak( self::$propertyIds[1] ) );
-			$claim->setGuid( $guid );
+			$newSnak = new PropertyValueSnak( $claim->getPropertyId(), new StringValue( '\o/' ) );
+			$newClaim = new Statement( $newSnak );
+			$newClaim->setGuid( $guid );
 
 			// Update request
 			$this->makeRequest( $claim, $itemId, 1, 'update request' );
@@ -211,8 +213,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$serializerFactory = new SerializerFactory();
 
 		if( is_a( $claim, '\Wikibase\Claim' ) ) {
-			$unserializer = $serializerFactory->newSerializerForObject( $claim );
-			$serializedClaim = $unserializer->getSerialized( $claim );
+			$serializer = $serializerFactory->newSerializerForObject( $claim );
+			$serializedClaim = $serializer->getSerialized( $claim );
 		} else {
 			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 			$serializedClaim = $claim;
@@ -290,6 +292,48 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$newClaim = $item->newClaim( new PropertyNoValueSnak( self::$propertyIds[2] ) );
 		$newClaim->setGuid( $guidGenerator->newGuid() );
 		$this->makeRequest( $newClaim, $itemId, 2, 'addition request', 3, $revision->getRevision() );
+	}
+
+	public function testBadPropertyError() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$serializerFactory = new SerializerFactory();
+
+		// create property
+		$property = Property::newFromType( 'quantity' );
+		$property = $store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
+
+		// create item
+		$item = Item::newEmpty();
+		$item = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
+
+		// add a claim
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
+		$claim = new Claim( new PropertyNoValueSnak( $property->getId() ) );
+		$claim->setGuid( $guidGenerator->newGuid() );
+
+		$item->addClaim( $claim );
+		$item = $store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE )->getEntity();
+
+		// try to change the main snak's property
+		$badProperty = Property::newFromType( 'string' );
+		$badProperty = $store->saveEntity( $badProperty, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
+
+		$badClaim = new Claim( new PropertyNoValueSnak( $badProperty->getId() ) );
+
+		$serializer = $serializerFactory->newSerializerForObject( $claim );
+		$serializedBadClaim = $serializer->getSerialized( $badClaim );
+
+		$params = array(
+			'action' => 'wbsetclaim',
+			'claim' => \FormatJson::encode( $serializedBadClaim ),
+		);
+
+		try {
+			$this->doApiRequestWithToken( $params );
+			$this->fail( 'Changed main snak property did not raise an error' );
+		} catch ( UsageException $e ) {
+			$this->assertEquals( 'invalid-claim', $e->getCodeString(), 'Changed main snak property' );
+		}
 	}
 
 }

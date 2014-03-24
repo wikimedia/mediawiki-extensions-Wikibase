@@ -4,8 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimGuid;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -14,7 +12,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -97,8 +94,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	public function provideTestApply() {
 		$itemEmpty = Item::newEmpty();
 		$itemEmpty->setId( new ItemId( 'q888' ) );
-		$item777 = self::provideNewItemWithClaim( 777, new PropertyNoValueSnak( 45 ) );
-		$item666 = self::provideNewItemWithClaim( 666, new PropertySomeValueSnak( 44 ) );
+		$item777 = self::makeNewItemWithClaim( 'Q777', new PropertyNoValueSnak( 45 ) );
+		$item666 = self::makeNewItemWithClaim( 'Q666', new PropertySomeValueSnak( 44 ) );
 
 		$item777Claims = $item777->getClaims();
 		$item666Claims = $item666->getClaims();
@@ -200,14 +197,72 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( count( $expected ), $entityClaims->count() );
 	}
 
+	public function provideInvalidApply() {
+		/* @var Claim $claim */
+
+		$snak = new PropertyNoValueSnak( 67573284 );
+		$item = $this->makeNewItemWithClaim( 'Q777', $snak );
+		$claims = $item->getClaims();
+		$claim = reset( $claims );
+		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
+
+		// change main snak to "some value"
+		$newSnak = new PropertySomeValueSnak( 67573284 );
+		$newClaim = clone $claim;
+		$newClaim->setMainSnak( $newSnak );
+
+		// apply change to the wrong item
+		$wrongItem = Item::newEmpty();
+		$wrongItem->setId( new ItemId( "Q888" ) );
+		$args['wrong entity'] = array ( $wrongItem, new ChangeOpClaim(
+			$newClaim,
+			$guidGenerator,
+			$this->getMockGuidValidator(),
+			$this->getMockGuidParser( $item->getId() )
+		) );
+
+		//TODO: once we stop allowing user-generated GUIDs for new claims, test this below.
+		// apply change to an unknown claim
+		/*
+		$wrongClaimId = $item->getId()->getPrefixedId() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
+		$badClaim = clone $newClaim;
+		$badClaim->setGuid( $wrongClaimId );
+		$args['unknown claim'] = array ( $item, new ChangeOpClaim( $badClaim, $guidGenerator ) );
+		*/
+
+		// update an existing claim with wrong main snak property
+		$newSnak = new PropertyNoValueSnak( 23452345 );
+		$newClaim->setMainSnak( $newSnak );
+
+		$changeOp =  new ChangeOpClaim(
+			$newClaim,
+			$guidGenerator,
+			$this->getMockGuidValidator(),
+			$this->getMockGuidParser( $item->getId() )
+		);
+
+		$args['wrong main snak property'] = array ( $item, $changeOp );
+
+		return $args;
+	}
+
+	/**
+	 * @dataProvider provideInvalidApply
+	 */
+	public function testInvalidApply( Entity $item, ChangeOpClaim $changeOp ) {
+		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+
+		$changeOp->apply( $item );
+	}
+
 	/**
 	 * @param integer $itemId
 	 * @param $snak
 	 * @return Item
 	 */
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
+	protected function makeNewItemWithClaim( $itemId, $snak ) {
 		$entity = Item::newEmpty();
-		$entity->setId( ItemId::newFromNumber( $itemId ) );
+		$entity->setId( new ItemId( $itemId ) );
 
 		$claim = $entity->newClaim( $snak );
 		$guidGenerator = new ClaimGuidGenerator( $entity->getId() );

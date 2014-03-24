@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
@@ -35,6 +36,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 			$this->initTestEntities( array( 'Berlin' ) );
 			self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
+
+			$berlinData = EntityTestHelper::getEntityOutput( 'Berlin' );
+			self::$idMap['%BerlinP56%'] = $berlinData['claims']['P56'][0]['id'];
 
 			$prop = Property::newEmpty();
 			$prop->setDataTypeId( 'string' );
@@ -494,12 +498,30 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'no sitelink - cannot change badges' => array( // no sitelink - cannot change badges
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q42%","%Q149%"]}}}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
-			'bad id in serialization' => array( // no entity id given
+			'bad id in serialization' => array(
 				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"Q13244"}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid', 'message' => 'Invalid field used in call: "id", must match id parameter' ) ) ),
-			'bad type in serialization' => array( // no entity id given
+			'bad type in serialization' => array(
 				'p' => array( 'id' => '%Berlin%', 'data' => '{"id":"%Berlin%","type":"foobar"}'),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid', 'message' => 'Invalid field used in call: "type", must match type associated with id' ) ) ),
+			'bad main snak replacement' => array(
+				'p' => array( 'id' => '%Berlin%', 'data' => json_encode( array(
+						'claims' => array(
+							array(
+								'id' => '%BerlinP56%',
+								'mainsnak' => array(
+									'snaktype' => 'value',
+									'property' => 'P72',
+									'datavalue' => array( 'value' => 'anotherstring', 'type' => 'string' ),
+								),
+								'type' => 'statement',
+								'rank' => 'normal' ),
+						),
+					) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'failed-save',
+					'message' => 'uses property P56, can\'t change to P72' ) ) ),
 		);
 	}
 
