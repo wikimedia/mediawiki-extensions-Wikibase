@@ -447,18 +447,15 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 		}
 
-		if ( $badges === null ) {
-			$badgesObjects = array();
-		}
-		else {
-			$badgesObjects = $this->parseBadges( $badges, $status );
+		if ( $badges !== null ) {
+			$badges = $this->parseBadges( $badges, $status );
 		}
 
 		if ( !$status->isGood() ) {
 			return $status;
 		}
 
-		$changeOp = new ChangeOpSiteLink( $siteId, $pageName, $badgesObjects );
+		$changeOp = new ChangeOpSiteLink( $siteId, $pageName, $badges );
 
 		$changeOp->apply( $item, $summary );
 
