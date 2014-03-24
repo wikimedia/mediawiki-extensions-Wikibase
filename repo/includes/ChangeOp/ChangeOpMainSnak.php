@@ -111,7 +111,17 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
 			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
 		}
-		$claims->getClaimWithGuid( $this->claimGuid )->setMainSnak( $this->snak );
+
+		$claim = $claims->getClaimWithGuid( $this->claimGuid );
+		$propertyId = $claim->getMainSnak()->getPropertyId();
+
+		if ( !$propertyId->equals( $this->snak->getPropertyId() ) ) {
+			throw new ChangeOpException( "Claim with GUID $this->claimGuid uses property "
+				. $propertyId->getSerialization() . ", can't change to "
+				. $this->snak->getPropertyId() );
+		}
+
+		$claim->setMainSnak( $this->snak );
 		$this->updateSummary( $summary, null, '', $this->getClaimSummaryArgs( $this->snak ) );
 	}
 
