@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntity;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
@@ -50,6 +51,11 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $entityStore;
 
 	/**
+	 * @var EntityPermissionChecker
+	 */
+	private $entityPermissionChecker;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.5
@@ -65,6 +71,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
 		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
 	}
 
 	/**
@@ -167,6 +174,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			$this->titleLookup,
 			$this->entityLookup,
 			$this->entityStore,
+			$this->permissionChecker,
 			$entity,
 			$this->getUser(),
 			$baseRev,

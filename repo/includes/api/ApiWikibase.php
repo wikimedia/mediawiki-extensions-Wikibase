@@ -569,12 +569,11 @@ abstract class ApiWikibase extends \ApiBase {
 
 		$baseRevisionId = $this->evaluateBaseRevisionParam( $params );
 
-		//TODO: allow injection/override!
-
 		$editEntity = new EditEntity(
 			$this->titleLookup,
 			$this->entityLookup,
 			$this->entityStore,
+			$this->permissionChecker,
 			$entity,
 			$user,
 			$baseRevisionId,
