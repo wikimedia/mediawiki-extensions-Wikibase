@@ -95,47 +95,89 @@ class ChangeOpClaim extends ChangeOpBase {
 		$claims = new Claims( $entityClaims );
 
 		if( !$claims->hasClaimWithGuid( $this->claim->getGuid() ) ) {
-			// Adding a new claim.
-			$this->updateSummary( $summary, 'create' );
-
-			$indexedClaimList = new ByPropertyIdArray( $entityClaims );
-			$indexedClaimList->buildIndex();
-
-			try{
-				$indexedClaimList->addObjectAtIndex( $this->claim, $this->index );
-			}
-			catch( OutOfBoundsException $e ) {
-				if( $this->index < 0 ) {
-					throw new ChangeOpException( 'Can not add claim at given index : '. $this->index );
-				} else {
-					// XXX: hack below to retry adding the object at a new index
-					// If we fail with the user supplied index and the index is greater than 0
-					// presume the user wants to have the index at the end of the list
-					$this->addObjectAtEndOfList( $indexedClaimList );
-				}
-			}
-
+			$newClaimList = $this->addClaim( $claims, $summary );
 		} else {
-			// Altering an existing claim.
-			$this->updateSummary( $summary, 'update' );
-
-			// Replace claim at its current index:
-			$currentIndex = $claims->indexOf( $this->claim );
-			$claims->removeClaimWithGuid( $this->claim->getGuid() );
-			$claims->addClaim( $this->claim, $currentIndex );
-
-			// Move claim to its designated index:
-			$indexedClaimList = new ByPropertyIdArray( $claims );
-			$indexedClaimList->buildIndex();
-
-			$index = !is_null( $this->index ) ? $this->index : $currentIndex;
-			$indexedClaimList->moveObjectToIndex( $this->claim, $index );
+			$newClaimList = $this->setClaim( $claims, $summary );
 		}
 
-		$claims = new Claims( $indexedClaimList->toFlatArray() );
+		$claims = new Claims( $newClaimList );
 		$entity->setClaims( $claims );
 
 		return true;
+	}
+
+	/**
+	 * @param Claims $claims
+	 * @param Summary $summary
+	 *
+	 * @throws ChangeOpException
+	 *
+	 * @return Claim[]
+	 */
+	protected function addClaim( Claims $claims, Summary $summary = null ) {
+		$this->updateSummary( $summary, 'create' );
+
+		$indexedClaimList = new ByPropertyIdArray( (array)$claims );
+		$indexedClaimList->buildIndex();
+
+		try {
+			$indexedClaimList->addObjectAtIndex( $this->claim, $this->index );
+		}
+		catch ( OutOfBoundsException $e ) {
+			if ( $this->index < 0 ) {
+				throw new ChangeOpException( 'Can not add claim at given index: '. $this->index );
+			} else {
+				// XXX: hack below to retry adding the object at a new index
+				// If we fail with the user supplied index and the index is greater than 0
+				// presume the user wants to have the index at the end of the list
+				$this->addObjectAtEndOfList( $indexedClaimList );
+			}
+		}
+
+		return $indexedClaimList->toFlatArray();
+	}
+
+	/**
+	 * @param Claims $claims
+	 * @param Summary $summary
+	 *
+	 * @return Claim[]
+	 */
+	protected function setClaim( Claims $claims, Summary $summary = null ) {
+		$this->updateSummary( $summary, 'update' );
+
+		$claimGuid = $this->claim->getGuid();
+		$oldClaim = $claims->getClaimWithGuid( $claimGuid );
+		$this->checkMainSnakUpdate( $oldClaim );
+
+		if ( $this->index === null ) {
+			$this->index = $claims->indexOf( $this->claim );
+		}
+
+		$claims->removeClaimWithGuid( $claimGuid );
+		return $this->addClaim( $claims );
+	}
+
+	/**
+	 * Checks that the update of the main snak is permissible.
+	 *
+	 * This checks that the main snaks of the old and the new claim
+	 * refer to the same property.
+	 *
+	 * @param Claim $oldClaim
+	 *
+	 * @throws ChangeOpException If the main snak update is illegal.
+	 */
+	protected function checkMainSnakUpdate( Claim $oldClaim ) {
+		$newMainSnak = $this->claim->getMainSnak();
+		$oldPropertyId = $oldClaim->getMainSnak()->getPropertyId();
+
+		if ( !$oldPropertyId->equals( $newMainSnak->getPropertyId() ) ) {
+			$claimGuid = $this->claim->getGuid();
+			throw new ChangeOpException( "Claim with GUID $claimGuid uses property "
+				. $oldPropertyId . ", can't change to "
+				. $newMainSnak->getPropertyId() );
+		}
 	}
 
 	/**
@@ -146,4 +188,5 @@ class ChangeOpClaim extends ChangeOpBase {
 		$newIndex = $indexedClaimList->count() + 1;
 		$indexedClaimList->addObjectAtIndex( $this->claim, $newIndex );
 	}
+
 }
