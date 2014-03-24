@@ -68,11 +68,14 @@ entity:getProperties() -- Returns a table like: { "P123", "P1337" }
 
 === mw.wikibase.entity:formatPropertyValues ===
 <code>entity:formatPropertyValues( propertyId )</code><br>
-Get the formatted value of the claims with the given property id.
+<code>entity:formatPropertyValues( propertyId, acceptableRanks )</code><br>
+Get the formatted value of the claims with the given property id. Per default only the best claims will be returned.
+Alternatively a table with acceptable ranks can be given as second parameter.
 
 An example call might look like this:
 <source lang="lua">
 entity:formatPropertyValues( 'P12' ) -- Returns a table like: { value = "Formatted claim value", label = "Label of the Property" }
+entity:formatPropertyValues( 'P42', { mw.wikibase.entity.claimRanks.RANK_NORMAL } ) -- Returns the normal ranked claims with the property Id 42 (same format as above)
 </source>
 
 === mw.wikibase.entity.create ===
