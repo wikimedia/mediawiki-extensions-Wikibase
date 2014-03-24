@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Term;
 
+// TODO: rename to Fingerprint
 class Terms {
 
 	private $labels;
