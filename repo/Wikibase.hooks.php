@@ -1153,15 +1153,23 @@ final class RepoHooks {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$langCode = $out->getContext()->getLanguage()->getCode();
 
+		$fallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+		$fallbackChain = $fallbackChainFactory->newFromContextForPageView( $out->getContext() );
+
+		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
+
 		$hookHandler = new OutputPageJsConfigHookHandler(
-			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getEntityContentFactory(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getParserOutputJsConfigBuilder( $langCode ),
-			$wikibaseRepo->getSettings()
+			$wikibaseRepo->getSettings(),
+			$langCodes
 		);
 
-		return $hookHandler->handle( $out );
+		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+
+		$out = $hookHandler->handle( $out, $isExperimental );
+
+		return true;
 	}
 
 	/**
