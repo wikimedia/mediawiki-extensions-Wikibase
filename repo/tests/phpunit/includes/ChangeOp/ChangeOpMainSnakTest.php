@@ -8,6 +8,8 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -52,37 +54,40 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		new ChangeOpMainSnak( $claimGuid, $snak, $guidGenerator );
 	}
 
-	public function changeOpProvider() {
+	public function provideChangeOps() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		// add a new claim
+		$item = $this->makeNewItemWithClaim( 'q123', $snak );
 		$newSnak = new PropertyValueSnak( 78462378, new StringValue( 'newSnak' ) );
 		$claimGuid = '';
 		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = $newSnak->getDataValue();
-		$args[] = array ( $item, $changeOp, $expected );
+		$args['add new claim'] = array ( $item, $changeOp, $expected );
 
-		$item = $this->provideNewItemWithClaim( 'q234', $snak );
-		$newSnak = new PropertyValueSnak( 78462378, new StringValue( 'changedSnak' ) );
+		// update an existing claim with a new main snak value
+		$item = $this->makeNewItemWithClaim( 'q234', $snak );
+		$newSnak = new PropertyValueSnak( 2754236, new StringValue( 'changedSnak' ) );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
+
 		$claimGuid = $claim->getGuid();
 		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator( $item->getId() ) );
 		$expected = $newSnak->getDataValue();
-		$args[] = array ( $item, $changeOp, $expected );
+		$args['update claim by guid'] = array ( $item, $changeOp, $expected );
 
 		return $args;
 	}
 
 	/**
-	 * @dataProvider changeOpProvider
+	 * @dataProvider provideChangeOps
 	 *
 	 * @param Entity $item
 	 * @param ChangeOpMainSnak $changeOp
 	 * @param DataValue|null $expected
 	 */
-	public function testApplyAddNewClaim( $item, $changeOp, $expected ) {
+	public function testApply( Entity $item, $changeOp, $expected ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
 		$this->assertNotEmpty( $changeOp->getClaimGuid() );
 		$claims = new Claims( $item->getClaims() );
@@ -93,32 +98,48 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function provideChangeOps() {
+	public function provideInvalidApply() {
 		$snak = new PropertyValueSnak( 67573284, new StringValue( 'test' ) );
 		$newSnak = new PropertyValueSnak( 12651236, new StringValue( 'newww' ) );
-		$item = $this->provideNewItemWithClaim( 'q777', $snak );
+		$item = $this->makeNewItemWithClaim( 'q777', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
 		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
 
-		$args[] = array ( new ChangeOpMainSnak( $claimGuid, $newSnak, $guidGenerator ) );
+		// apply change to the wrong item
+		$wrongItem = Item::newEmpty();
+		$wrongItem->setId( new ItemId( "Q888" ) );
+		$args['wrong entity'] = array ( $wrongItem, new ChangeOpMainSnak( $claimGuid, $newSnak, $guidGenerator ) );
+
+		// apply change to an unknown claim
+		$wrongClaimId = $item->getId()->getPrefixedId() . '$DEADBEEF-DEAD-BEEF-DEAD-BEEFDEADBEEF';
+		$args['unknown claim'] = array ( $item, new ChangeOpMainSnak( $wrongClaimId, $newSnak, $guidGenerator ) );
+
+		// update an existing claim with wrong main snak property
+		$newSnak = new PropertyValueSnak( 78462378, new StringValue( 'changedSnak' ) );
+		$claims = $item->getClaims();
+		$claim = reset( $claims );
+
+		$claimGuid = $claim->getGuid();
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, $guidGenerator );
+		$args['wrong main snak property'] = array ( $item, $changeOp );
 
 		return $args;
 	}
 
 	/**
-	 * @dataProvider provideChangeOps
-	 * @expectedException \Wikibase\ChangeOp\ChangeOpException
+	 * @dataProvider provideInvalidApply
 	 */
-	public function testInvalidApply( ChangeOp $changeOp ) {
-		$wrongItem = ItemContent::newEmpty();
-		$changeOp->apply( $wrongItem->getEntity() );
+	public function testInvalidApply( Entity $item, ChangeOp $changeOp ) {
+		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+
+		$changeOp->apply( $item );
 	}
 
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
-		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim =$entity->newClaim( $snak );
+	protected function makeNewItemWithClaim( $itemId, $snak ) {
+		$entity = Item::newFromArray( array( 'entity' => $itemId ) );
+		$claim = $entity->newClaim( $snak );
 		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
