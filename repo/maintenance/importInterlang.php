@@ -21,7 +21,6 @@ use Wikibase\store\EntityStore;
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
-require_once $basePath . '/includes/Exception.php';
 
 class importInterlang extends Maintenance {
 	protected $verbose = false;
