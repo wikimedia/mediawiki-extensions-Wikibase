@@ -496,9 +496,6 @@ class EditEntity extends ModifyEntity {
 				}
 				/**	 @var $claim Claim  */
 
-				if( array_key_exists( 'id', $claimArray ) ){
-					$opsToReturn[] = new ChangeOpClaimRemove( $claim->getGuid() );
-				}
 				$opsToReturn[] = new ChangeOpClaim( $claim, $guidGenerator, $guidValidator, $guidParser );
 			}
 		}
