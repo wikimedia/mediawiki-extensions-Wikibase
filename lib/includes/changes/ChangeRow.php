@@ -245,7 +245,7 @@ class ChangeRow extends ORMRow implements Change {
 							throw new MWException( "Refusing to serialize PHP object of type "
 								. get_class( $v ) );
 						}
- 					}
+					}
 				);
 			}
 
