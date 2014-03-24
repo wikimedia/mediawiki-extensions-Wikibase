@@ -452,7 +452,7 @@ class EditEntity {
 			return false;
 		}
 
-		if ( $this->getBaseRevisionId() == $this->getLatestRevisionId() ) {
+		if ( is_int( $this->getBaseRevisionId() ) && $this->getBaseRevisionId() == $this->getLatestRevisionId() ) {
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
@@ -471,13 +471,13 @@ class EditEntity {
 	public function fixEditConflict() {
 		$baseRev = $this->getBaseRevision();
 		$latestRev = $this->getLatestRevision();
-		$new = $this->getNewEntity();
+		$newEntity = $this->getNewEntity();
 
 		// calculate patch against base revision
 		// NOTE: will fail if $baseRev or $base are null, which they may be if
 		// this gets called at an inappropriate time. The data flow in this class
 		// should be improved.
-		$patch = $baseRev->getEntity()->getDiff( $new ); // diff from base to new
+		$patch = $baseRev->getEntity()->getDiff( $newEntity ); // diff from base to new
 
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
