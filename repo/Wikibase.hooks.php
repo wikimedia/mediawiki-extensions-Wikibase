@@ -1167,7 +1167,7 @@ final class RepoHooks {
 
 		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
 
-		$out = $hookHandler->handle( $out, $isExperimental );
+		$hookHandler->handle( $out, $isExperimental );
 
 		return true;
 	}
