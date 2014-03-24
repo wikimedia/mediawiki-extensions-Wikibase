@@ -15,6 +15,8 @@ interface ChangeOp {
 	/**
 	 * @since 0.5
 	 *
+	 * @todo: FIXME: It's unclear when this should return false, if ever.
+	 *
 	 * @param Entity $entity
 	 * @param Summary|null $summary
 	 *
