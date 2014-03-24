@@ -501,11 +501,11 @@ $messages['ba'] = array(
  */
 $messages['be'] = array(
 	'wikibase-client-desc' => 'Кліент для пашырэння Wikibase',
-	'wikibase-after-page-move' => "Каб захаваць міжмоўныя спасылкі на перанесеную старонку, вы можаце [$1 абнавіць] злучаны аб'ект у Вікідадзеных.",
-	'wikibase-comment-remove' => "Злучаны аб'ект выдалены з Вікізвестак. Моўныя спасылкі былі выдалены.",
-	'wikibase-comment-linked' => "Аб'ект Вікізвестак быў злучаны з гэтай старонкай.",
-	'wikibase-comment-unlink' => "Гэта старонка была аддзелена ад аб'екта Вікізвестак. Моўныя спасылкі выдалены.",
-	'wikibase-comment-restore' => "Выдаленне злучанага аб'екта Вікізвестак скасавана. Моўныя спасылкі адноўлены.",
+	'wikibase-after-page-move' => "Каб захаваць міжмоўныя спасылкі на перанесеную старонку, вы можаце [$1 абнавіць] злучаны аб'ект у Вікідадзеных.", # Fuzzy
+	'wikibase-comment-remove' => "Злучаны аб'ект выдалены з Вікізвестак. Моўныя спасылкі былі выдалены.", # Fuzzy
+	'wikibase-comment-linked' => "Аб'ект Вікізвестак быў злучаны з гэтай старонкай.", # Fuzzy
+	'wikibase-comment-unlink' => "Гэта старонка была аддзелена ад аб'екта Вікізвестак. Моўныя спасылкі выдалены.", # Fuzzy
+	'wikibase-comment-restore' => "Выдаленне злучанага аб'екта Вікізвестак скасавана. Моўныя спасылкі адноўлены.", # Fuzzy
 	'wikibase-comment-update' => 'Моўныя спасылкі абноўлены.', # Fuzzy
 	'wikibase-comment-sitelink-add' => 'Дададзена моўная спасылка: $1',
 	'wikibase-comment-sitelink-change' => 'Моўная спасылка зменена з $1 на $2',
@@ -527,8 +527,10 @@ $messages['be'] = array(
 	'wikibase-linkitem-not-loggedin-title' => 'Вы павінны ўвайсці ў сітэму',
 	'wikibase-linkitem-not-loggedin' => 'Для карыстання гэтай функцыяй вы павінны ўвайсці ў гэту вікі і [$1 цэнтральны рэпазыторый].',
 	'wikibase-linkitem-success-link' => "Старонкі былі паспяхова злучаны. Новы аб'ект са спасылкамі вы можаце пабачыць у нашым [$1 цэнтральным рэпазыторыі].",
-	'wikibase-rc-hide-wikidata' => '$1 Вікідадзеныя',
-	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізвестак у спісе апошніх змен',
+	'wikibase-rc-hide-wikidata' => '$1 {{WBREPONAME}}',
+	'wikibase-rc-hide-wikidata-hide' => 'Схаваць',
+	'wikibase-rc-hide-wikidata-show' => 'Паказаць',
+	'wikibase-rc-show-wikidata-pref' => 'Паказваць праўкі Вікізвестак у спісе апошніх змен', # Fuzzy
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
@@ -1734,16 +1736,16 @@ $messages['frp'] = array(
  */
 $messages['frr'] = array(
 	'wikibase-client-desc' => 'Wikibase-client',
-	'specialpages-group-wikibaseclient' => 'Wikidata-client',
+	'specialpages-group-wikibaseclient' => '{{WBREPONAME}}-client',
 	'tooltip-t-wikibase' => "Ferwisang tu det objekt uun't dootenarchiif",
-	'wikibase-after-page-move' => 'Dü skulst uk det Wikidata-element [$1 aktualisiare], am spriaklinks faan fersköwen sidjen üüb a leetst stant tu hualen.',
-	'wikibase-after-page-move-queued' => 'Det mä detdiar sidj ferbünjen [$1 Wikidata-objekt] woort bal automaatisk aktualisiaret.',
-	'wikibase-comment-add' => 'En Wikidata-objekt as nei iinracht wurden.',
-	'wikibase-comment-remove' => 'Det ferbünjen Wikidata-objekt as stregen wurden. Spriaklinks san wechnimen wurden.',
-	'wikibase-comment-linked' => 'En Wikidata-objekt as mä detdiar sidj ferbünjen wurden.',
-	'wikibase-comment-unlink' => 'Detdiar sidj as faan en Wikidata-objekt wechnimen wurden. Spriaklinks san stregen wurden.',
-	'wikibase-comment-restore' => 'Det ferbünjen Wikidata-objekt as weder iinsteld wurden. Spriaklinks san weder iinracht wurden.',
-	'wikibase-comment-update' => 'Det Wikidata-objekt as feranert wurden.',
+	'wikibase-after-page-move' => 'Dü skulst uk det {{WBREPONAME}}-element [$1 aktualisiare], am spriaklinks faan fersköwen sidjen üüb a leetst stant tu hualen.',
+	'wikibase-after-page-move-queued' => 'Det mä detdiar sidj ferbünjen [$1 {{WBREPONAME}}-objekt] woort bal automaatisk aktualisiaret.',
+	'wikibase-comment-add' => 'En {{WBREPONAME}}-objekt as nei iinracht wurden.',
+	'wikibase-comment-remove' => 'Det ferbünjen {{WBREPONAME}}-objekt as stregen wurden. Spriaklinks san wechnimen wurden.',
+	'wikibase-comment-linked' => 'En {{WBREPONAME}}-objekt as mä detdiar sidj ferbünjen wurden.',
+	'wikibase-comment-unlink' => 'Detdiar sidj as faan en {{WBREPONAME}}-objekt wechnimen wurden. Spriaklinks san stregen wurden.',
+	'wikibase-comment-restore' => 'Det ferbünjen {{WBREPONAME}}-objekt as weder iinsteld wurden. Spriaklinks san weder iinracht wurden.',
+	'wikibase-comment-update' => 'Det {{WBREPONAME}}-objekt as feranert wurden.',
 	'wikibase-comment-sitelink-add' => 'Spriaklink diartukimen: $1',
 	'wikibase-comment-sitelink-change' => 'Spriaklink $1 feranert tu $2',
 	'wikibase-comment-sitelink-remove' => 'Spriaklink wechnimen: $1',
@@ -1767,11 +1769,13 @@ $messages['frr'] = array(
 	'wikibase-linkitem-success-link' => "A sidjen san ferbünjen wurden. Det objekt mä jo ferwisangen fanjst dü uun't [$1 sentraal archiif].",
 	'wikibase-property-notfound' => 'Det eegenskap „$1“ as ei fünjen wurden.',
 	'wikibase-property-notsupportedyet' => 'Wikibase koon mä di typ faan det eegenskap „$1“ noch ei am.',
-	'wikibase-rc-hide-wikidata' => '$1 Wikidata',
-	'wikibase-rc-show-wikidata-pref' => 'Wise Wikidata-feranrangen uun a „leetst feranrangen“',
+	'wikibase-rc-hide-wikidata' => '$1 {{WBREPONAME}}',
+	'wikibase-rc-hide-wikidata-hide' => 'Fersteeg',
+	'wikibase-rc-hide-wikidata-show' => 'Wise',
+	'wikibase-rc-show-wikidata-pref' => 'Wise {{WBREPONAME}}-feranrangen uun a „leetst feranrangen“',
 	'wikibase-rc-wikibase-edit-letter' => 'D',
-	'wikibase-rc-wikibase-edit-title' => 'Bewerket faan wikidata',
-	'wikibase-watchlist-show-changes-pref' => "Wise Wikidata-feranrangen bi jo sidjen, diar dü uun't uug behual wel.",
+	'wikibase-rc-wikibase-edit-title' => 'Bewerket faan {{WBREPONAME}}',
+	'wikibase-watchlist-show-changes-pref' => "Wise {{WBREPONAME}}-feranrangen bi jo sidjen, diar dü uun't uug behual wel.",
 	'wikibase-error-serialize-error' => 'A dooten küd ei serialisiaret wurd',
 	'wikibase-error-invalid-entity-id' => 'Detdiar käännumer (ID) as ei bekäänd. Brük en ööder ID.',
 	'special-unconnectedpages' => 'Sidjen, diar ei mä objekten ferbünjen san',
@@ -1782,9 +1786,10 @@ $messages['frr'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Di sidjennööm koon för det uffrag ei brükt wurd an woort auergingen.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Bluas sidjen mä ferwisangen tu ööder spriaken',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|ferwisang|ferwisangen}} tu ööder spriaken üüb det sidj)',
-	'wikibase-pageinfo-entity-id' => 'Wikidata-käännumer (ID)',
+	'wikibase-pageinfo-entity-id' => '{{WBREPONAME}}-käännumer (ID)',
 	'wikibase-pageinfo-entity-id-none' => 'Nian',
 	'wikibase-property-render-error' => 'Eegenskap „$1“ küd ei ferwerket wurd: $2',
+	'wikibase-otherprojects' => 'Ööder projekten',
 );
 
 /** Galician (galego)
@@ -4059,6 +4064,14 @@ $messages['sgs'] = array(
 	'wikibase-linkitem-success-link' => 'Poslapē bova poikē sojongtė. Tamsta galat rastō īraša, katram sudietas nūoruodas mūsa [$1 centrėnė doumenū skladuo].',
 	'wikibase-rc-wikibase-edit-title' => 'Vikidatas elemėnta pakeitėms',
 	'wikibase-pageinfo-entity-id-none' => 'Nie',
+);
+
+/** Serbo-Croatian (srpskohrvatski / српскохрватски)
+ * @author Kolega2357
+ */
+$messages['sh'] = array(
+	'wikibase-client-desc' => 'Klijent za proširenje Wikibaza',
+	'specialpages-group-wikibaseclient' => '{{doc-special-group|that=is related to Wikidata clients|like=[[Special:UnconnectedPages]]}}', # Fuzzy
 );
 
 /** Sinhala (සිංහල)
