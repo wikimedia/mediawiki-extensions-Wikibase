@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_bba94f8f",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-24T14:33:09Z",
+      "side": 1,
+      "message": "Daniel thinks that we should pass the exception messages on the user... I think that\u0027s a good idea",
+      "revId": "b6766f6aa66734f92f1c08dfc20aebb7cd9a957e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_9bb0cbf2",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-24T14:33:09Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "b6766f6aa66734f92f1c08dfc20aebb7cd9a957e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7bb3b7fd",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-24T14:33:09Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "b6766f6aa66734f92f1c08dfc20aebb7cd9a957e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
