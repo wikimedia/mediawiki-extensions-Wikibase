@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Hooks;
 use IContextSource;
 use Status;
 use User;
@@ -741,14 +742,16 @@ class EditEntity {
 	}
 
 	/**
-	 * Call EditFilterMergedContent hook
+	 * Call EditFilterMergedContent hook, if handler registered for it
 	 *
 	 * @param string $summary
 	 *
 	 * @todo: move the implementation elsewhere, it depends on WikiPage.
 	 */
 	protected function runEditFilterHooks( $summary ) {
-		//TODO: short out if no handler is registered for EditFilterMergedContent?
+		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
+			return Status::newGood();
+		}
 
 		if ( !$this->isNew() ) {
 			$context = clone $this->context;
