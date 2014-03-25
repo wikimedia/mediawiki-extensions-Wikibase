@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_4f6a647f",
+        "filename": "repo/includes/Hook/MakeGlobalVariablesScriptHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T14:58:01Z",
+      "side": 1,
+      "message": "this *always* generates them, right?",
+      "revId": "53049ff516740407be5c8c3a8b356d0e837492ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
