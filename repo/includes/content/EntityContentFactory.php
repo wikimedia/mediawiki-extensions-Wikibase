@@ -9,6 +9,7 @@ use Title;
 use User;
 use WikiPage;
 use Revision;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Factory for EntityContent objects.
@@ -20,16 +21,23 @@ use Revision;
  */
 class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker {
 
-	// TODO: inject this map and allow extensions to somehow extend it
-	protected static $typeMap = array(
-		Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
-	);
+	/**
+	 * @since 0.5
+	 *
+	 * @var array
+	 */
+	protected $typeMap;
 
+	/**
+	 * @var array
+	 */
 	protected $contentModelIds;
 
 	public function __construct( array $contentModelIds ) {
 		$this->contentModelIds = $contentModelIds;
+
+		// @TODO: inject this
+		$this->typeMap = WikibaseRepo::getDefaultInstance()->getContentMappings();
 	}
 
 	/**
@@ -138,7 +146,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return int
 	 */
 	public function getNamespaceForType( $type ) {
-		return NamespaceUtils::getEntityNamespace( self::$typeMap[$type] );
+		return NamespaceUtils::getEntityNamespace( $this->typeMap[$type] );
 	}
 
 	/**
@@ -188,7 +196,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		/**
 		 * @var EntityHandler $handler
 		 */
-		$handler = \ContentHandler::getForModelID( self::$typeMap[$entity->getType()] );
+		$handler = \ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
 
 		return $handler->newContentFromEntity( $entity );
 	}
