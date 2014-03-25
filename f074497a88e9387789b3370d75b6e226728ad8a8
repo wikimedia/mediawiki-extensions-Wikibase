@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee14bf34_ef293837",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T15:09:25Z",
+      "side": 1,
+      "message": "Is it intended that this \"eats\" the $parseError-getMessage() that probably could have told you something about the actual parse error? Shouldn\u0027t this have the original message as param $1 even if that param is currently not used in the translation?",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_749aa176",
         "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
         "patchSetId": 1
