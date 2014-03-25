@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_af7220e0",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T15:57:43Z",
+      "side": 1,
+      "message": "Hm, ... Makes kind of sense. But wouldn\u0027t this remove useful information if we start using this? And therefor being a regression?\n\nTo bad this can not be tested since the code this patch introduces is not used in this patch.",
+      "parentUuid": "ee14bf34_cf8f9425",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_749aa176",
         "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
         "patchSetId": 1
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "Well, as explained in the comment, this is an unreachable code path. What do you think we should do here?",
       "parentUuid": "ee14bf34_b4871914",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_0f8b4cc5",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T15:57:43Z",
+      "side": 1,
+      "message": "Just throw an empty LogicException() and questions like these shouldn\u0027t occur.",
+      "parentUuid": "ee14bf34_4fc2643a",
       "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
