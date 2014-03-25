@@ -7,7 +7,7 @@
 
 items_under_test = {}
 
-Given(/^Entity (.+) defined in (.+) exists$/) do |pagename, data_file|
+Given /^Entity (.+) defined in (.+) exists$/ do |pagename, data_file|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
 
@@ -19,7 +19,7 @@ Given(/^Entity (.+) defined in (.+) exists$/) do |pagename, data_file|
   items_under_test[pagename] = item_under_test
 end
 
-Then(/^get loading time of (.+)$/) do |pagename|
+When /^I load the huge item (.+)$/ do |pagename|
   on(ItemPage) do |page|
     page.navigate_to items_under_test[pagename]["url"]
     page.wait_for_entity_to_load
