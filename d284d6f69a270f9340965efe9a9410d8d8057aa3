@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_af3a2031",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-25T15:35:06Z",
+      "side": 1,
+      "message": "This should have correct punctuation.",
+      "revId": "d284d6f69a270f9340965efe9a9410d8d8057aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
