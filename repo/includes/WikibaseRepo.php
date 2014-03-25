@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
+use Wikibase\i18n\ExceptionLocalizer;
+use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\EntityIdLinkFormatter;
@@ -97,6 +99,11 @@ class WikibaseRepo {
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
+
+	/**
+	 * @var ExceptionLocalizer
+	 */
+	private $exceptionLocalizer;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -425,6 +432,17 @@ class WikibaseRepo {
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		return $factory;
+	}
+
+	/**
+	 * @return ExceptionLocalizer
+	 */
+	public function getExceptionLocalizer() {
+		if ( !$this->exceptionLocalizer ) {
+			$this->exceptionLocalizer = new WikibaseExceptionLocalizer();
+		}
+
+		return $this->exceptionLocalizer;
 	}
 
 	/**
