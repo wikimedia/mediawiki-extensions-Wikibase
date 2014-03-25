@@ -51,12 +51,12 @@ class JsonDumpGenerator {
 	protected $entityLookup;
 
 	/**
-	 * @var int
+	 * @var int Total number of shards a request should be split into
 	 */
 	protected $shardingFactor = 1;
 
 	/*
-	 * @var int
+	 * @var int Number of the requested shard
 	 */
 	protected $shard = 0;
 
@@ -106,15 +106,13 @@ class JsonDumpGenerator {
 	 */
 	public function setBatchSize( $batchSize ) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
-			throw new InvalidArgumentException( '$batchSize must be a positive integer' );
+			throw new InvalidArgumentException( '$batchSize must be a positive integer.' );
 		}
 
 		$this->batchSize = $batchSize;
 	}
 
 	/**
-	 * Returns the batch size.
-	 *
 	 * @see setBatchSize()
 	 *
 	 * @return int
@@ -154,8 +152,7 @@ class JsonDumpGenerator {
 	/**
 	 * Set the sharding factor and desired shard.
 	 * For instance, to generate four dumps in parallel, use setShardingFilter( 4, 0 )
-	 * for the first dump, setShardingFilter( 4, 1 ) for the second dump,
-	 * etc.
+	 * for the first dump, setShardingFilter( 4, 1 ) for the second dump, etc.
 	 *
 	 * @param int $shardingFactor
 	 * @param int $shard
@@ -164,15 +161,15 @@ class JsonDumpGenerator {
 	 */
 	public function setShardingFilter( $shardingFactor, $shard ) {
 		if ( !is_int( $shardingFactor ) || $shardingFactor < 1 ) {
-			throw new InvalidArgumentException( '$shardingFactor must be an integer > 0' );
+			throw new InvalidArgumentException( '$shardingFactor must be a positive integer.' );
 		}
 
 		if ( !is_int( $shard ) || $shard < 0 ) {
-			throw new InvalidArgumentException( '$shard must be an integer >= 0' );
+			throw new InvalidArgumentException( '$shard must be a non-negative integer.' );
 		}
 
 		if ( $shard >= $shardingFactor ) {
-			throw new InvalidArgumentException( '$shard must be smaller than $shardingFactor' );
+			throw new InvalidArgumentException( '$shard must be smaller than $shardingFactor.' );
 		}
 
 		$this->shardingFactor = $shardingFactor;
@@ -214,21 +211,20 @@ class JsonDumpGenerator {
 	}
 
 	/**
-	 * @param array $ids
+	 * @param EntityId[] $entityIds
 	 * @param int &$dumpCount The number of entities already dumped (will be updated).
 	 */
-	protected function dumpEntities( array $ids, &$dumpCount ) {
-		/* @var EntityId $id */
-		foreach ( $ids as $id ) {
-			if ( !$this->idMatchesFilters( $id ) ) {
+	protected function dumpEntities( array $entityIds, &$dumpCount ) {
+		foreach ( $entityIds as $entityId ) {
+			if ( !$this->idMatchesFilters( $entityId ) ) {
 				continue;
 			}
 
 			try {
-				$entity = $this->entityLookup->getEntity( $id );
+				$entity = $this->entityLookup->getEntity( $entityId );
 
 				if ( !$entity ) {
-					throw new StorageException( 'Entity not found: ' . $id->getSerialization() );
+					throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
 				}
 
 				$data = $this->entitySerializer->getSerialized( $entity );
@@ -241,32 +237,33 @@ class JsonDumpGenerator {
 				$this->writeToDump( $json );
 				$dumpCount++;
 			} catch ( StorageException $ex ) {
-				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump '. $id );
+				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump '. $entityId );
 			}
 		}
 	}
 
-	private function idMatchesFilters( EntityId $id ) {
-		return $this->idMatchesShard( $id )
-			&& $this->idMatchesType( $id );
+	private function idMatchesFilters( EntityId $entityId ) {
+		return $this->idMatchesShard( $entityId )
+			&& $this->idMatchesType( $entityId );
 	}
 
-	private function idMatchesShard( EntityId $id ) {
+	private function idMatchesShard( EntityId $entityId ) {
+		// Shorten out
 		if ( $this->shardingFactor === 1 ) {
 			return true;
 		}
 
-		$hash = sha1( $id->getSerialization() );
-		$n = (int)hexdec( substr( $hash, 0, 8 ) ); // 4 bytes of the hash
-		$n = abs( $n ); // avoid negative numbers on 32 bit systems
+		$hash = sha1( $entityId->getSerialization() );
+		$shard = (int)hexdec( substr( $hash, 0, 8 ) ); // 4 bytes of the hash
+		$shard = abs( $shard ); // avoid negative numbers on 32 bit systems
+		$shard %= $this->shardingFactor; // modulo number of shards
 
-		$n %= $this->shardingFactor; // modulo number of shards
-		return $n === $this->shard;
+		return $shard === $this->shard;
 	}
 
-	private function idMatchesType( EntityId $id ) {
+	private function idMatchesType( EntityId $entityId ) {
 		return $this->entityType === null
-			|| ( $id->getEntityType() === $this->entityType );
+			|| ( $entityId->getEntityType() === $this->entityType );
 	}
 
 	/**
@@ -307,11 +304,12 @@ class JsonDumpGenerator {
 	}
 
 	/**
-	 * Flags to use with json_encode as a bit field, see PHP's JSON_XXX constants.
-	 *
 	 * @return int
+	 *
+	 * @see setJsonFlags
 	 */
 	public function getJsonFlags() {
 		return $this->jsonFlags;
 	}
+
 }
