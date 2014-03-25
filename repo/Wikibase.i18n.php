@@ -296,6 +296,7 @@ A client wiki is notified of a change on {{SITENAME}} once the change has been d
 	'wikibase-api-wrong-class' => 'Wrong class type detected', # Do not translate
 
 	'wikibase-parse-error' => 'Malformed value',
+	'wikibase-unexpected-error' => 'Unexpected error: $1.',
 
 	'wikibase-self-conflict-patched' => 'Your edit was patched into the latest version, overriding some of your own intermediate changes.',
 	'wikibase-conflict-patched' => 'Your edit was patched into the latest version.',
@@ -1083,6 +1084,8 @@ See also:
 	'wikibase-api-permissiondenied' => '!!DO NOT TRANSLATE!! the user making the request does not have the correct permissions or rights to carry out the request',
 	'wikibase-api-wrong-class' => '!!DO NOT TRANSLATE!! The wrong class type has been detected when trying to make the request, this could be and item isntead of a property.',
 	'wikibase-parse-error' => 'Generic error used by the API (in particular, by wbparsevalue) to indicate that some user input was malformed and could not be parsed',
+	'wikibase-unexpected-error' => 'Generic error used by the API to indicate that an unexpected error occurred.
+* $1 - the raw, unlocalized error message',
 	'wikibase-self-conflict-patched' => 'Warning issued when an edit is made based on an old revision, clean patching was not possible, but all intermediate edits where made by the same user, so aggressive patching was applied, overriding earlier changes by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.',
 	'wikibase-conflict-patched' => 'Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.
