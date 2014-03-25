@@ -7,8 +7,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityRevisionLookup;
-use Wikibase\store\EntityStore;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\WikiPageEntityStore;
 use Wikibase\WikiPageEntityLookup;
 
@@ -33,10 +32,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		//NOTE: we want to test integration of WikiPageEntityLookup and WikiPageEntityStore here!
 		$lookup = new WikiPageEntityLookup( false, CACHE_DB );
 
-		$typeMap = array(
-			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
-		);
+		$typeMap = WikibaseRepo::getDefaultInstance()->getContentMappings();
 
 		$store = new WikiPageEntityStore( new EntityContentFactory( $typeMap ) );
 

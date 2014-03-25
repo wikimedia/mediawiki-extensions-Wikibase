@@ -10,6 +10,8 @@ use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
@@ -545,4 +547,21 @@ class WikibaseRepo {
 		return $this->getEntityContentFactory();
 	}
 
+	/**
+	 * Get the mapping of entity types => content models
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function getContentMappings() {
+		$map = array(
+			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
+			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
+		);
+
+		wfRunHooks( 'WikibaseContentMappings', array( &$map ) );
+
+		return $map;
+	}
 }
