@@ -75,7 +75,7 @@ final class RepoHooks {
 	 * @since 0.1
 	 *
 	 * @note: $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this point
-	 *        and should no longer be touched.
+	 *		and should no longer be touched.
 	 *
 	 * @return boolean
 	 * @throws MWException
@@ -415,7 +415,7 @@ final class RepoHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetPreferences
 	 *
 	 * NOTE: Might make sense to put the inner functionality into a well structured Preferences file once this
-	 *       becomes more.
+	 *	   becomes more.
 	 *
 	 * @since 0.1
 	 *
@@ -739,7 +739,7 @@ final class RepoHooks {
 		if( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
-			//       users language so they are cache independent.
+			//	   users language so they are cache independent.
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
@@ -846,9 +846,9 @@ final class RepoHooks {
 	 * namespaces.
 	 *
 	 * @param ApiBase $module The API module being called
-	 * @param User    $user   The user calling the API
+	 * @param User	$user   The user calling the API
 	 * @param array|string|null   $message Output-parameter holding for the message the call should fail with.
-	 *                            This can be a message key or an array as expected by ApiBase::dieUsageMsg().
+	 *							This can be a message key or an array as expected by ApiBase::dieUsageMsg().
 	 *
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
 	 */
@@ -1150,6 +1150,33 @@ final class RepoHooks {
 			return true;
 		}
 
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$hookHandler = new OutputPageJsConfigHookHandler( $settings );
+
+		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+
+		$hookHandler->handle( $out, $isExperimental );
+
+		return true;
+	}
+
+	/**
+	 * Provides fallback for output page js config vars that are stored in parser cache.
+	 *
+	 * In some cases, e.g. stale parser cache contents, variables including wbEntity might be
+	 * missing, so we add them here as a fallback.  This hook is called after
+	 * OutputPage::setRevisionId is called. Revision id is needed to retrieve the correct entity.
+	 *
+	 * @param array $vars
+	 * @param OutputPage $out
+	 *
+	 * @return boolean
+	 */
+	public static function onMakeGlobalVariablesScript( $vars, $out ) {
+		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
+			return true;
+		}
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$langCode = $out->getContext()->getLanguage()->getCode();
 
@@ -1158,16 +1185,13 @@ final class RepoHooks {
 
 		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
 
-		$hookHandler = new OutputPageJsConfigHookHandler(
+		$hookHandler = new MakeGlobalVariablesScriptHandler(
 			$wikibaseRepo->getEntityContentFactory(),
 			$wikibaseRepo->getParserOutputJsConfigBuilder( $langCode ),
-			$wikibaseRepo->getSettings(),
 			$langCodes
 		);
 
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-
-		$hookHandler->handle( $out, $isExperimental );
+		$hookHandler->handle( $out );
 
 		return true;
 	}
