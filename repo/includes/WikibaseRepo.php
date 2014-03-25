@@ -490,4 +490,18 @@ class WikibaseRepo {
 	public function getEntityPermissionChecker() {
 		return $this->getEntityContentFactory();
 	}
+
+	/**
+	 * Get the content models which belong to Wikibase.
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function getContentModels() {
+		return array(
+			CONTENT_MODEL_WIKIBASE_ITEM,
+			CONTENT_MODEL_WIKIBASE_PROPERTY
+		);
+	}
 }
