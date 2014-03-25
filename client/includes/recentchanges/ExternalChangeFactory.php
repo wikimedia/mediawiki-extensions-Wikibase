@@ -192,12 +192,26 @@ class ExternalChangeFactory {
 		//	  Combine all the comments! Up to some max length?
 		if ( array_key_exists( 'composite-comment', $changeParams ) ) {
 			$comment['key'] = 'wikibase-comment-multi';
-			$comment['numparams'] = count( $changeParams['composite-comment'] );
+			$comment['numparams'] = $this->countCompositeComments( $changeParams['composite-comment'] );
 		} elseif ( array_key_exists( 'comment', $changeParams  ) ) {
 			$comment = $this->parseComment( $changeParams['comment'], $changeParams['type'] );
 		}
 
 		return $comment;
+	}
+
+	/**
+	 * normalizes for extra empty comment in rc_params (see bug 45812)
+	 * @fixme: can remove at some point in the future
+	 *
+	 * @param array $comments
+	 *
+	 * @return int
+	 */
+	private function countCompositeComments( $comments ) {
+		$compositeComments = array_filter( $comments );
+
+		return count( $compositeComments );
 	}
 
 }
