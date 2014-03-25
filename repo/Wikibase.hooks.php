@@ -28,6 +28,7 @@ use SpecialSearch;
 use SplFileInfo;
 use Title;
 use User;
+use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
@@ -1150,6 +1151,33 @@ final class RepoHooks {
 			return true;
 		}
 
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$hookHandler = new OutputPageJsConfigHookHandler( $settings );
+
+		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+
+		$hookHandler->handle( $out, $isExperimental );
+
+		return true;
+	}
+
+	/**
+	 * Provides fallback for output page js config vars that are stored in parser cache.
+	 *
+	 * In some cases, e.g. stale parser cache contents, variables including wbEntity might be
+	 * missing, so we add them here as a fallback.  This hook is called after
+	 * OutputPage::setRevisionId is called. Revision id is needed to retrieve the correct entity.
+	 *
+	 * @param array $vars
+	 * @param OutputPage $out
+	 *
+	 * @return boolean
+	 */
+	public static function onMakeGlobalVariablesScript( $vars, $out ) {
+		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
+			return true;
+		}
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$langCode = $out->getContext()->getLanguage()->getCode();
 
@@ -1158,16 +1186,13 @@ final class RepoHooks {
 
 		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
 
-		$hookHandler = new OutputPageJsConfigHookHandler(
+		$hookHandler = new MakeGlobalVariablesScriptHandler(
 			$wikibaseRepo->getEntityContentFactory(),
 			$wikibaseRepo->getParserOutputJsConfigBuilder( $langCode ),
-			$wikibaseRepo->getSettings(),
 			$langCodes
 		);
 
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-
-		$hookHandler->handle( $out, $isExperimental );
+		$hookHandler->handle( $out );
 
 		return true;
 	}
