@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_749aa176",
+        "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-25T11:50:48Z",
+      "side": 1,
+      "message": "I assume this need a copy update and i18n.",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_34a429af",
+        "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-25T11:50:48Z",
+      "side": 1,
+      "message": "I assume this need a copy update and i18n.",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_149fe563",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-25T11:50:48Z",
+      "side": 1,
+      "message": "\"error\" should be lower case, and this string needs punctuation.",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_b4871914",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-25T11:50:48Z",
+      "side": 1,
+      "message": "I assume this need a copy update?",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_547c3d1b",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-25T11:50:48Z",
+      "side": 1,
+      "message": "private? :)",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
