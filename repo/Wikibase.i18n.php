@@ -1098,7 +1098,7 @@ This message tells the user that he can create one and gives a link in $1 to the
 
 Parameters:
 * $1 - link to the special page which is used to create',
-	'wikibase-special-mergeitems-error-prefix' => 'Prefix for making Special:MergeItems error messages more informative.',
+	'wikibase-special-mergeitems-error-prefix' => 'Prefix for making [[Special:MergeItems]] error messages more informative.',
 	'wikibase-item-summary-wbsetitem' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
 	'wikibase-item-summary-wbcreate-new' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is for backwards compatibility for edits already made and in the database with this message.}}',
 	'wikibase-item-summary-wbeditentity' => '{{wikibase summary messages|item|Automatic edit summary generated when creating a new item. This is a legacy message.}}',
@@ -5505,6 +5505,7 @@ Klientvikit teavitatakse muudatusest võrgukohas {{SITENAME}}, kui muudatus on s
 	'wikibase-noentity' => 'Andmestikku pole olemas. Saad
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} otsida seotud logidest]</span>, kuhu see kadus.',
 	'wikibase-noentity-createone' => 'Saad ka [[$1|uue luua]].',
+	'wikibase-special-mergeitems-error-prefix' => 'Üksuseid ei saanud liita. Ilmnes järgmine tõrge:',
 	'wikibase-item-summary-wbsetitem' => 'Loodud uus üksus',
 	'wikibase-item-summary-wbcreate-new' => 'Loodud uus üksus',
 	'wikibase-item-summary-wbeditentity' => 'Loodud uus üksus',
@@ -9583,6 +9584,7 @@ $messages['ja'] = array(
 	'wikibase-no-direct-editing' => '$1 名前空間では直接の編集は無効になっています',
 	'wikibase-noentity' => 'このデータセットは存在しません。<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索し]</span>どこに行ったのか調べることができます。',
 	'wikibase-noentity-createone' => '[[$1|新規作成]]することもできます。',
+	'wikibase-special-mergeitems-error-prefix' => '項目を統合できませんでした。以下のエラーが発生しました:',
 	'wikibase-item-summary-wbsetitem' => '項目を新規作成',
 	'wikibase-item-summary-wbcreate-new' => '項目を新規作成',
 	'wikibase-item-summary-wbeditentity' => '項目を新規作成',

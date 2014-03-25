@@ -1500,6 +1500,8 @@ $messages['et'] = array(
 	'wikibase-unconnectedpages-format-row' => '(leheküljel {{PLURAL:$1|üks keeltevaheline link|$1 keeltevahelist linki}})',
 	'wikibase-pageinfo-entity-id' => 'Vikiandmete üksuse identifikaator', # Fuzzy
 	'wikibase-pageinfo-entity-id-none' => 'Puudub',
+	'wikibase-property-render-error' => 'Omaduse $1 viimistlemine ebaõnnestus: $2',
+	'wikibase-otherprojects' => 'Teised projektid',
 );
 
 /** Basque (euskara)
