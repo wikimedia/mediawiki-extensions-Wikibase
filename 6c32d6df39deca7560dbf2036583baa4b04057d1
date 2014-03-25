@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_cfc2f387",
+        "filename": "client/includes/recentchanges/ExternalChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T16:41:18Z",
+      "side": 1,
+      "message": "If all we need is the count in the end, why construct a new array? Just increment a counter for every \"good\" comment.\n\nAlternatively, use count( array_filter( $comments ) ). array_filter will discard empty entries per default.",
+      "revId": "6c32d6df39deca7560dbf2036583baa4b04057d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
