@@ -6,9 +6,7 @@ use ApiBase;
 use DataValues\DataValue;
 use InvalidArgumentException;
 use LogicException;
-use Message;
 use OutOfBoundsException;
-use Status;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
@@ -20,6 +18,7 @@ use ValueParsers\ValueParser;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ParseValue extends ApiWikibase {
 
@@ -117,34 +116,6 @@ class ParseValue extends ApiWikibase {
 		}
 
 		$result['error-html'] = $status->getHTML( self::$shortErrorContextMessage, self::$longErrorContextMessage );
-	}
-
-	/**
-	 * @param ParseException $parseError
-	 *
-	 * @return Status
-	 */
-	protected function getExceptionStatus( ParseException $parseError ) {
-		$msg = $this->getExceptionMessage( $parseError );
-		$status = Status::newFatal( $msg );
-		$status->setResult( false, $parseError->getMessage() );
-
-		return $status;
-	}
-
-	/**
-	 * @param ParseException $parseError
-	 *
-	 * @return Message
-	 */
-	protected function getExceptionMessage( ParseException $parseError ) {
-		//TODO: get message key and parameters from exception
-		//TODO: use error localizer to construct Message
-		$key = 'wikibase-parse-error';
-		$params = array();
-		$msg = wfMessage( $key )->params( $params );
-
-		return $msg;
 	}
 
 	private function outputResults( array $results ) {

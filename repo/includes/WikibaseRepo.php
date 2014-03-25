@@ -13,6 +13,8 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevisionLookup;
+use Wikibase\i18n\ExceptionLocalizer;
+use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\store\EntityStore;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
@@ -102,6 +104,11 @@ class WikibaseRepo {
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
+
+	/**
+	 * @var ExceptionLocalizer
+	 */
+	private $exceptionLocalizer;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -422,6 +429,17 @@ class WikibaseRepo {
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		return $factory;
+	}
+
+	/**
+	 * @return ExceptionLocalizer
+	 */
+	public function getExceptionLocalizer() {
+		if ( !$this->exceptionLocalizer ) {
+			$this->exceptionLocalizer = new WikibaseExceptionLocalizer();
+		}
+
+		return $this->exceptionLocalizer;
 	}
 
 	/**
