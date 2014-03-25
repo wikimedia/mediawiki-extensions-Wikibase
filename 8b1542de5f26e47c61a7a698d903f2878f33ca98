@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_cfa9d379",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T17:01:01Z",
+      "side": 1,
+      "message": "wait - if base revision ID is false, we want this method to return false. That\u0027s not what this is doing. You want ( $base \u003d\u003d\u003d false || $base \u003d\u003d $latest ), right?",
+      "revId": "8b1542de5f26e47c61a7a698d903f2878f33ca98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
