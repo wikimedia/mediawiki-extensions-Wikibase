@@ -16,6 +16,24 @@
       "revId": "53049ff516740407be5c8c3a8b356d0e837492ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_0ffb4cbb",
+        "filename": "repo/includes/Hook/MakeGlobalVariablesScriptHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-25T15:05:35Z",
+      "side": 1,
+      "message": "ah, the comment is unclear now.  if revision is not there (e.g. special or deleted pages), then it appears to be 0.\n\nI added an extra check for null revision and throw warning in that case.  (shouldn\u0027t happen)",
+      "parentUuid": "ee14bf34_4f6a647f",
+      "revId": "53049ff516740407be5c8c3a8b356d0e837492ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
