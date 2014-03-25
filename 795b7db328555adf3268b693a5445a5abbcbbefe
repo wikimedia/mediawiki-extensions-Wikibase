@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce09bb20_bb7ab3e5",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T21:45:30Z",
+      "side": 1,
+      "message": "Both classes extend ArrayObject, right? So simply calling\n... \u003d new ByPropertyIdArray( $claims );\nshould be fine.\n\nSame problem in the Claims class. Instead of doing a foreach loop it should simply pass the array to the parent constructor. But I guess that\u0027s something for an other patch.",
+      "revId": "795b7db328555adf3268b693a5445a5abbcbbefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
