@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_0ff46c4f",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:49:56Z",
+      "side": 1,
+      "message": "They are not massively expensive (compared e.g. to database queries), and they only happen during edit, so no problem there.\n\nThe Claims vs. Array thin is very ugly. Having ByPropertyIdArray separately makes sense though, since it\u0027s structurally different from Claims.",
+      "parentUuid": "ee14bf34_aa9c5613",
+      "revId": "bc40561cc768d3c5e1db19fde98ad47a15fe8f54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_6ad87ef4",
         "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
         "patchSetId": 2
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_4fd384d7",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:49:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_6ad87ef4",
+      "revId": "bc40561cc768d3c5e1db19fde98ad47a15fe8f54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_4a3ffa20",
         "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
         "patchSetId": 2
@@ -64,6 +100,24 @@
       "writtenOn": "2014-03-24T20:11:20Z",
       "side": 1,
       "message": "Shouldn\u0027t these either both call getSerialization() or both rely on __toString()? Personally I prefer the later.",
+      "revId": "bc40561cc768d3c5e1db19fde98ad47a15fe8f54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_efeb7875",
+        "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:49:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_4a3ffa20",
       "revId": "bc40561cc768d3c5e1db19fde98ad47a15fe8f54",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
