@@ -20,16 +20,18 @@ use Revision;
  */
 class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker {
 
-	// TODO: inject this map and allow extensions to somehow extend it
-	protected static $typeMap = array(
-		Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
-	);
+	/**
+	 * @since 0.5
+	 *
+	 * @var array
+	 */
+	protected $typeMap;
 
-	protected $contentModelIds;
-
-	public function __construct( array $contentModelIds ) {
-		$this->contentModelIds = $contentModelIds;
+	/**
+	 * @param array $typeMap Entity type -> content model mapping
+	 */
+	public function __construct( array $typeMap ) {
+		$this->typeMap = $typeMap;
 	}
 
 	/**
@@ -54,7 +56,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return array An array of string content model IDs.
 	 */
 	public function getEntityContentModels() {
-		return $this->contentModelIds;
+		return $this->typeMap;
 	}
 
 	/**
@@ -138,7 +140,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return int
 	 */
 	public function getNamespaceForType( $type ) {
-		return NamespaceUtils::getEntityNamespace( self::$typeMap[$type] );
+		return NamespaceUtils::getEntityNamespace( $this->typeMap[$type] );
 	}
 
 	/**
@@ -188,7 +190,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		/**
 		 * @var EntityHandler $handler
 		 */
-		$handler = \ContentHandler::getForModelID( self::$typeMap[$entity->getType()] );
+		$handler = \ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
 
 		return $handler->newContentFromEntity( $entity );
 	}

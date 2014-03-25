@@ -58,15 +58,24 @@ class EntityPerPageBuilder {
 	protected $rebuildAll = false;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var array
+	 */
+	protected $contentModels;
+
+	/**
 	 * @param EntityPerPage $entityPerPageTable
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param EntityIdParser $entityIdParser
+	 * @param array $contentModels
 	 */
 	public function __construct( EntityPerPage $entityPerPageTable, EntityContentFactory $entityContentFactory,
-		EntityIdParser $entityIdParser ) {
+		EntityIdParser $entityIdParser, array $contentModels ) {
 		$this->entityPerPageTable = $entityPerPageTable;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->entityIdParser = $entityIdParser;
+		$this->contentModels = $contentModels;
 	}
 
 	/**
@@ -141,10 +150,16 @@ class EntityPerPageBuilder {
 	 * @return array
 	 */
 	protected function getQueryConds( $lastPageSeen ) {
+		global $wgContentHandlerUseDB;
+
 		$conds = array(
 			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
-			'page_id > ' . $lastPageSeen
+			'page_id > ' . (int) $lastPageSeen
 		);
+
+		if ( $wgContentHandlerUseDB ) {
+			$conds['page_content_model'] = $this->contentModels;
+		}
 
 		if ( $this->rebuildAll === false ) {
 			$conds[] = 'epp_page_id IS NULL';
