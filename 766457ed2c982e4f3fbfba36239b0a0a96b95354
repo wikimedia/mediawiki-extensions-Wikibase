@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_6fff67fd",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T16:06:03Z",
+      "side": 1,
+      "message": "I understand what you want to do. But: Look down in this file. There are templates for labels, descriptions, toc, terms and claims. I don\u0027t think it makes sense to remove the placeholders for these sub-templates from the main template.\n\nIf we want to restructure the templates we really should do this in an other patch, please.",
+      "parentUuid": "ee14bf34_ef4ff895",
+      "revId": "766457ed2c982e4f3fbfba36239b0a0a96b95354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_8f8abc1a",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 2
