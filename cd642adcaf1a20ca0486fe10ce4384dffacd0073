@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_af87c013",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T15:37:22Z",
+      "side": 1,
+      "message": "These combined getter/setter things are so confusing. Can we use this._propertyId and this._snakType for all getting purposes, please?\n\nAnd maybe (maybe in an other patch) drop the getter functionality from the two and rename them to updatePropertyId() and updateSnakType() please?",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_4fc94454",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T15:37:22Z",
+      "side": 1,
+      "message": "Is is correct that this replaces a call to .drawVariation() with a call to .draw() in cases .propertyId( ... ) is called as a setter? I see 3 related calls. Search for occurrences of \".propertyId(\" with a value other than undefined.\n\nMay be intended, I\u0027m just not sure.",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_cf33145e",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T15:37:22Z",
+      "side": 1,
+      "message": "As above. I see 1 related call. Search for occurrences of \".snakType(\" with a value other than undefined.",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
