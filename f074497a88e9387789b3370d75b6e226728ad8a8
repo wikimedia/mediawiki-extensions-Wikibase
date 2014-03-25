@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_cf8f9425",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:32:03Z",
+      "side": 1,
+      "message": "No, because the original message is always in English. We do want to include more details information, but we can only start doing this once the DataValue module provides language neutral details in ParseException instances.",
+      "parentUuid": "ee14bf34_ef293837",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_749aa176",
         "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-25T11:50:48Z",
       "side": 1,
       "message": "I assume this need a copy update and i18n.",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_8f999c73",
+        "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:32:03Z",
+      "side": 1,
+      "message": "What? why?",
+      "parentUuid": "ee14bf34_749aa176",
       "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_6fa0888d",
+        "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:32:03Z",
+      "side": 1,
+      "message": "No it doesn\u0027t.",
+      "parentUuid": "ee14bf34_34a429af",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_149fe563",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-03-25T11:50:48Z",
       "side": 1,
       "message": "\"error\" should be lower case, and this string needs punctuation.",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_efda5820",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:32:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14bf34_149fe563",
       "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_4fc2643a",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:32:03Z",
+      "side": 1,
+      "message": "Well, as explained in the comment, this is an unreachable code path. What do you think we should do here?",
+      "parentUuid": "ee14bf34_b4871914",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_547c3d1b",
         "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2014-03-25T11:50:48Z",
       "side": 1,
       "message": "private? :)",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_0fbc6cb0",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:32:03Z",
+      "side": 1,
+      "message": "But but but I tested this?... wtf?",
+      "parentUuid": "ee14bf34_547c3d1b",
       "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
