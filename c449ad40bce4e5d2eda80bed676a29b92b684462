@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_6f688719",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-25T17:19:50Z",
+      "side": 1,
+      "message": "what happened to the tabs? :)",
+      "revId": "c449ad40bce4e5d2eda80bed676a29b92b684462",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
