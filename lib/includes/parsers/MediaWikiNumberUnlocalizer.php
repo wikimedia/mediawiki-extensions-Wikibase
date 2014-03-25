@@ -57,36 +57,31 @@ class MediaWikiNumberUnlocalizer extends BasicUnlocalizer {
 	 * Constructs a regular expression based on Language::digitTransformTable()
 	 * and Language::separatorTransformTable().
 	 *
-	 * @param string $delim the regex delimiter, used for escaping.
+	 * @param string $delimiter The regex delimiter, used for escaping.
 	 *
 	 * @return string regular expression
 	 */
-	public function getNumberRegex( $delim = '/' ) {
+	public function getNumberRegex( $delimiter = '/' ) {
 		$digitMap = $this->language->digitTransformTable();
 		$separatorMap = $this->language->separatorTransformTable();
 
-		if ( empty( $digitMap ) ) {
-			$numerals = '0123456789';
-		} else {
-			$numerals = implode( '', array_keys( $digitMap ) ) // accept canonical numerals
-				. implode( '', array_values( $digitMap ) ); // ...and localized numerals
-		}
+		// Always accept canonical digits and separators
+		$characters = '0123456789,.';
 
-		if ( empty( $separatorMap ) ) {
-			$separators = '.,';
-		} else {
-			$separators = implode( '', array_keys( $separatorMap ) ) // accept canonical separators
-				. implode( '', array_values( $separatorMap ) ); // ...and localized separators
+		// Add localized digits and separators
+		if ( is_array( $digitMap ) ) {
+			$characters .= implode( '', array_values( $digitMap ) );
 		}
-
-		$characters = $numerals . $separators;
+		if ( is_array( $separatorMap ) ) {
+			$characters .= implode( '', array_values( $separatorMap ) );
+		}
 
 		// if any whitespace characters are acceptable, also accept a regular blank.
 		if ( preg_match( '/\s/u', $characters ) ) {
-			$characters = $characters . ' ';
+			$characters .= ' ';
 		}
 
-		return '[-+]?[' . preg_quote( $characters, $delim ) . ']+';
+		return '[-+]?[' . preg_quote( $characters, $delimiter ) . ']+';
 	}
 
 }
