@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_99e56e09",
+        "filename": ".travis.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-25T03:44:38Z",
+      "side": 1,
+      "message": "Two builds that are not needed. We have two builds doing 5.3, just change one to 5.6, and we still cover everything nicely. Except for breakages specific to a PHP version and a DB version, though then we are essentially testing MW. And this is rather unlikely to go wrong. Never seen this happen.",
+      "revId": "15a11fbfbfbc82edc77dce732c887a224bbf4d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
