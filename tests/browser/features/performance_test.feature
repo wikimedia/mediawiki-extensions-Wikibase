@@ -11,8 +11,10 @@ Feature: High performance
     Given Entity Italy defined in data/q38.json exists
 
   Scenario Outline: Loading a huge entity
-    Then get loading time of <page>
+    When I load the huge item <item>
+    Then Label edit button should be there
+      And Javascript UI should be initialized
 
     Examples:
-      | page          |
+      | item          |
       | Italy         |
