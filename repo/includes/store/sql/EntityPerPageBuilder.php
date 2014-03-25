@@ -143,7 +143,11 @@ class EntityPerPageBuilder {
 	protected function getQueryConds( $lastPageSeen ) {
 		$conds = array(
 			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
-			'page_id > ' . $lastPageSeen
+			'page_id > ' . $lastPageSeen,
+			'page_content_model' => array(
+				CONTENT_MODEL_WIKIBASE_ITEM,
+				CONTENT_MODEL_WIKIBASE_PROPERTY
+			),
 		);
 
 		if ( $this->rebuildAll === false ) {
