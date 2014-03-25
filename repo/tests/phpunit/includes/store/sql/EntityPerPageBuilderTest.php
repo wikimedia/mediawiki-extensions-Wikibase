@@ -173,7 +173,8 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$builder = new EntityPerPageBuilder(
 			$this->entityPerPageTable,
 			$this->wikibaseRepo->getEntityContentFactory(),
-			$this->wikibaseRepo->getEntityIdParser()
+			$this->wikibaseRepo->getEntityIdParser(),
+			$this->wikibaseRepo->getContentModelMappings()
 		);
 
 		$builder->setRebuildAll( true );
@@ -199,7 +200,8 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$builder = new EntityPerPageBuilder(
 			$this->entityPerPageTable,
 			$this->wikibaseRepo->getEntityContentFactory(),
-			$this->wikibaseRepo->getEntityIdParser()
+			$this->wikibaseRepo->getEntityIdParser(),
+			$this->wikibaseRepo->getContentModelMappings()
 		);
 
 		$builder->rebuild();
