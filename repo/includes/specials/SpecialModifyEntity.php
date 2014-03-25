@@ -21,8 +21,6 @@ use Wikibase\Summary;
 abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	/**
-	 * The entity content to modify.
-	 *
 	 * @since 0.5
 	 *
 	 * @var EntityRevision
@@ -44,8 +42,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected $rightsText;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
