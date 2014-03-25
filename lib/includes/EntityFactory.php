@@ -24,6 +24,7 @@ class EntityFactory {
 	 * @var array
 	 */
 	protected static $typeMap = array(
+		// @FIXME: Make use of Wikibase.Repo::getContentModelMappings and don't hard code query
 		Item::ENTITY_TYPE => '\Wikibase\Item',
 		Property::ENTITY_TYPE => '\Wikibase\Property',
 
