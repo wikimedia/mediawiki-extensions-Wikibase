@@ -37,7 +37,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @var EntityRevisionLookup
 	 */
-	private $entityLookup;
+	priarvate $entityLookup;
 
 	/**
 	 * @var EntityTitleLookup

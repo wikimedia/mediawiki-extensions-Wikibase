@@ -2,10 +2,13 @@
 
 namespace Wikibase\Api;
 
+use Exception;
+use LogicException;
 use Message;
 use MessageCache;
 use Revision;
 use Title;
+use UsageException;
 use User;
 use Status;
 use ApiBase;
@@ -25,6 +28,7 @@ use WikiPage;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 abstract class ApiWikibase extends \ApiBase {
 
@@ -260,10 +264,29 @@ abstract class ApiWikibase extends \ApiBase {
 	}
 
 	/**
+	 * Handles an Exception that shall terminate the API call with an error.
+	 *
+	 * @see handleStatus()
+	 * @see getExceptionStatus()
+	 * @see getExceptionMessage()
+	 *
+	 * @note This method never returns normally, it always throws an exception.
+	 * @throws UsageException always
+	 */
+	public function dieException( Exception $ex, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
+		$status = $this->getExceptionStatus( $ex );
+		$this->handleStatus( $status, $errorCode, $extradata, $httpRespCode );
+
+		// getExceptionStatus() should always return a fatal status,
+		// and handleStatus() should never return for a fatal status.
+		throw new LogicException( 'ooops!' );
+	}
+
+	/**
 	 * Include messages from a Status object in the API call's output.
 	 *
 	 * If $status->isOK() returns false, this method will terminate via the a call
-	 * to $this->dieUsage().
+	 * to $this->dieUsage(), causing a UsageException to be thrown.
 	 *
 	 * If $status->isOK() returns false, any errors from the $status object will be included
 	 * in the error-section of the API response. Otherwise, any warnings from $status will be
@@ -271,17 +294,19 @@ abstract class ApiWikibase extends \ApiBase {
 	 * is used that includes an HTML representation of the messages as well as a list of message
 	 * keys and parameters, for client side rendering and localization.
 	 *
+	 * @warning This is a temporary solution, pending a similar feature in MediaWiki core,
+	 *          see bug 45843.
+	 *
+	 * @see ApiBase::dieUsage()
+	 *
 	 * @param Status $status The status to report
 	 * @param string  $errorCode The API error code to use in case $status->isOK() returns false
 	 * @param array   $extradata Additional data to include the the error report,
 	 *                if $status->isOK() returns false
 	 * @param int     $httpRespCode the HTTP response code to use in case
-	 *                $status->isOK() returns false.
+	 *                $status->isOK() returns false.+
 	 *
-	 * @warning This is a temporary solution, pending a similar feature in MediaWiki core,
-	 *          see bug 45843.
-	 *
-	 * @see ApiBase::dieUsage()
+	 * @throws UsageException If $status->isOK() returns false.
 	 */
 	public function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
 		wfProfileIn( __METHOD__ );
@@ -543,4 +568,36 @@ abstract class ApiWikibase extends \ApiBase {
 		return $formatter->formatSummary( $summary );
 	}
 
+	/**
+	 * Returns a Status object representing the given exception using a localized message.
+	 *
+	 * @note: The returned Status will always be fatal, that is, $status->isOk() will return false.
+	 *
+	 * @see getExceptionMessage().
+	 *
+	 * @param Exception $error
+	 *
+	 * @return Status
+	 */
+	protected function getExceptionStatus( Exception $error ) {
+		$msg = $this->getExceptionMessage( $error );
+		$status = Status::newFatal( $msg );
+		$status->setResult( false, $error->getMessage() );
+
+		return $status;
+	}
+
+	/**
+	 * Generates a localization Message representing the given exception.
+	 * Knowledge about how to localize different kinds of exceptions is provided by
+	 * an ExceptionLocalizer service.
+	 *
+	 * @param Exception $error
+	 *
+	 * @return Message
+	 */
+	protected function getExceptionMessage( Exception $error ) {
+		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		return $localizer->getExceptionMessage( $error );
+	}
 }
