@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use ReflectionClass;
 use ReflectionMethod;
+use Wikibase\Claims;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
@@ -26,6 +27,22 @@ use Wikibase\DataModel\Snak\Snak;
  * @author H. Snater < mediawiki@snater.com >
  */
 class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
+
+	public function testConstructorFromObject() {
+		$claim1 = new Claim( new PropertyNoValueSnak( 1 ) );
+		$claim1->setGuid( '1' );
+		$claim2 = new Claim( new PropertyNoValueSnak( 2 ) );
+		$claim2->setGuid( '2' );
+
+		$claims = new Claims();
+		$claims->append( $claim1 );
+
+		$byPropertyIdArray = new ByPropertyIdArray( $claims );
+		// "This method cannot be called when the ArrayObject was constructed from an object."
+		$byPropertyIdArray->append( $claim2 );
+
+		$this->assertEquals( 2, $byPropertyIdArray->count() );
+	}
 
 	/**
 	 * Returns an accessible ReflectionMethod of ByPropertyIdArray.
