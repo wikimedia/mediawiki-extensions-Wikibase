@@ -109,6 +109,11 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.4.2 (2014-03-27)
+
+* Use DOM children of the ValueView as formatted value on initialization
+* Don't parse and format a value if it did not change
+
 ### 0.4.1 (2014-03-26)
 
 * Require data-values/javascript 0.4
