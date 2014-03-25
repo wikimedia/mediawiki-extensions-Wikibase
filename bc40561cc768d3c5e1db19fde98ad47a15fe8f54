@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_efb93879",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:52:44Z",
+      "side": 1,
+      "message": "But we need $claims anyway, to do hasClaimWithGuid; We could pass the plain array to addClaim(), but the fact that this would be sufficient is an implementation detail of addClaim().",
+      "parentUuid": "ee14bf34_cabc2a6a",
+      "revId": "bc40561cc768d3c5e1db19fde98ad47a15fe8f54",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_aa9c5613",
         "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
         "patchSetId": 2
