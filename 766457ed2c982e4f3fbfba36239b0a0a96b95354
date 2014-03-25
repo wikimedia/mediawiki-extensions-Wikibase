@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee14bf34_4ffa6441",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-25T15:50:51Z",
+      "side": 1,
+      "message": "The patch description does not really explain this change. Why do you think the possibility to move, for example, the TOC to an other place is not needed any more? Could you please improve the description?",
+      "revId": "766457ed2c982e4f3fbfba36239b0a0a96b95354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_8f8abc1a",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 2
