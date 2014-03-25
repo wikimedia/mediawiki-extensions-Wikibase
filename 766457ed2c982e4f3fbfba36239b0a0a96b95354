@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_ef4ff895",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:58:31Z",
+      "side": 1,
+      "message": "Where do you think I should explain this?\n\nBasically, the old template is overly specific: it assumes it knows what things go into the entity view. But that should be left to the PHP code to decide. So I re-structured the template to just take 3 generic parameters for head/body/footer, and let PHP figure out what goes where.",
+      "parentUuid": "ee14bf34_4ffa6441",
+      "revId": "766457ed2c982e4f3fbfba36239b0a0a96b95354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_8f8abc1a",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-25T15:23:39Z",
       "side": 1,
       "message": "why repeatedly get entity from $entityRevision?",
+      "revId": "766457ed2c982e4f3fbfba36239b0a0a96b95354",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_cf6b14ed",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-25T15:58:31Z",
+      "side": 1,
+      "message": "Because that\u0027s how it was. And it\u0027s cheap. *shrug*",
+      "parentUuid": "ee14bf34_8f8abc1a",
       "revId": "766457ed2c982e4f3fbfba36239b0a0a96b95354",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
