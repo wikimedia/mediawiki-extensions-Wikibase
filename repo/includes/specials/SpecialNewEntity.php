@@ -169,11 +169,11 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Create entity content
+	 * Create entity
 	 *
 	 * @since 0.1
 	 *
-	 * @return Entity Created entity content of correct subtype
+	 * @return Entity Created entity of correct subtype
 	 */
 	abstract protected function createEntity();
 

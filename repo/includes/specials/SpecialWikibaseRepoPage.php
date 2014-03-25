@@ -56,8 +56,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $entityPermissionChecker;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.5
 	 *
 	 * @param string $title The title of the special page
@@ -122,7 +120,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Loads the entity content for this entity id.
+	 * Loads the entity for this entity id.
 	 *
 	 * @since 0.5
 	 *
@@ -159,7 +157,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Saves the entity content using the given summary.
+	 * Saves the entity using the given summary.
 	 *
 	 * @param Entity $entity
 	 * @param Summary $summary
