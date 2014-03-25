@@ -650,7 +650,7 @@ class ChangeHandler {
 			$rcinfo['comment'] = $this->getEditComment( $change );
 
 			if ( isset( $fields['info']['changes'] ) ) {
-				$rcinfo['composite-comment'][] = array();
+				$rcinfo['composite-comment'] = array();
 
 				foreach ( $fields['info']['changes'] as $part ) {
 					$rcinfo['composite-comment'][] = $this->getEditComment( $part );
