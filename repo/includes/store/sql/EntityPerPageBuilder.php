@@ -4,6 +4,7 @@ namespace Wikibase;
 use MessageReporter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Utility class for rebuilding the wb_entity_per_page table.
@@ -143,7 +144,8 @@ class EntityPerPageBuilder {
 	protected function getQueryConds( $lastPageSeen ) {
 		$conds = array(
 			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
-			'page_id > ' . $lastPageSeen
+			'page_id > ' . $lastPageSeen,
+			'page_content_model' => WikibaseRepo::getDefaultInstance()->getContentModels()
 		);
 
 		if ( $this->rebuildAll === false ) {
