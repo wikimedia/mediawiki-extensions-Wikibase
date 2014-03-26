@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce09bb20_017b70be",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-26T08:09:03Z",
+      "side": 1,
+      "message": "Combined getter and setter functionality is used throughout the JS code base and conforms to what jQuery [UI] does. We might talk about doing it differently, but that would be a huge change we would have to discuss thoroughly. I would enter such a discussion with an aversion against accessing private members directly, though :)",
+      "parentUuid": "ee14bf34_af87c013",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_4fc94454",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce09bb20_61534c44",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-26T08:09:03Z",
+      "side": 1,
+      "message": "I think it\u0027s acceptable to do that for the sake of code simplicity. Things generally need to get much simpler here, though :)",
+      "parentUuid": "ee14bf34_4fc94454",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_cf33145e",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-25T15:37:22Z",
       "side": 1,
       "message": "As above. I see 1 related call. Search for occurrences of \".snakType(\" with a value other than undefined.",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce09bb20_4148488c",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-26T08:09:03Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "ee14bf34_cf33145e",
       "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
