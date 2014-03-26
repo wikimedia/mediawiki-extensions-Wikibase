@@ -69,6 +69,24 @@
       "revId": "3b06960c1007c955d9adaf5ecb82c84b4bb640ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce09bb20_0cf4c782",
+        "filename": "tests/browser/features/support/modules/wikibase_api_module.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-26T10:10:32Z",
+      "side": 1,
+      "message": "And how did it work before this change?",
+      "parentUuid": "ce09bb20_4ce3dfd4",
+      "revId": "3b06960c1007c955d9adaf5ecb82c84b4bb640ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
