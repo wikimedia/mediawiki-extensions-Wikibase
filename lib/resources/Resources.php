@@ -795,6 +795,7 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.RepoApiError',
 				'wikibase.templates',
+				'wikibase.utilities',
 				'wikibase.utilities.ClaimGuidGenerator',
 			),
 			'messages' => array(
@@ -814,8 +815,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase',
 				'wikibase.AbstractedRepoApi',
-				'wikibase.templates',
-				'wikibase.utilities'
 			),
 		),
 
