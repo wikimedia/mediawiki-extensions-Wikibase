@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce09bb20_8728b033",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T11:56:00Z",
+      "side": 1,
+      "message": "Confused me first, but it works. An other idea to do the same:\n\ngetSnakHtml( ..., \u0027value\u0027 );\nfunction getSnakHtml( ..., $onlyShowSnakType \u003d null )\nif( $onlyShowSnakType \u003d\u003d\u003d null || $snak-\u003egetType() \u003d\u003d\u003d $onlyShowSnakType )\n\nJust an idea, maybe you like it.",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce09bb20_2759e401",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T11:56:00Z",
+      "side": 1,
+      "message": "Is it ok that the old implementation did /not/ used non-breaking spaces in non-main snaks? Now it always does.",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
