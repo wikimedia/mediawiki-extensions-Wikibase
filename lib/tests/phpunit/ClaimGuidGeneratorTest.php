@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\V4GuidGenerator;
 
 /**
  * @covers Wikibase\Lib\ClaimGuidGenerator
@@ -22,11 +23,11 @@ class ClaimGuidGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider entityIdProvider
 	 */
 	public function testGetGuid( EntityId $id ) {
-		$guidGen = new ClaimGuidGenerator( $id );
+		$guidGen = new ClaimGuidGenerator();
 
-		$this->assertIsGuidForId( $guidGen->newGuid(), $id );
-		$this->assertIsGuidForId( $guidGen->newGuid(), $id );
-		$this->assertIsGuidForId( $guidGen->newGuid(), $id );
+		$this->assertIsGuidForId( $guidGen->newGuid( $id ), $id );
+		$this->assertIsGuidForId( $guidGen->newGuid( $id ), $id );
+		$this->assertIsGuidForId( $guidGen->newGuid( $id ), $id );
 	}
 
 	public function entityIdProvider() {

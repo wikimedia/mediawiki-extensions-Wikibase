@@ -30,9 +30,9 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$validGuidGenerator = new ClaimGuidGenerator( $item->getId() );
-		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
-		$validClaimGuid = $guidGenerator->newGuid();
+		$validGuidGenerator = new ClaimGuidGenerator();
+		$guidGenerator = new ClaimGuidGenerator();
+		$validClaimGuid = $guidGenerator->newGuid( $item->getId( $item->getId() ) );
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
 		$args = array();
@@ -62,7 +62,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->makeNewItemWithClaim( 'q123', $snak );
 		$newSnak = new PropertyValueSnak( 78462378, new StringValue( 'newSnak' ) );
 		$claimGuid = '';
-		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator( $item->getId() ) );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator() );
 		$expected = $newSnak->getDataValue();
 		$args['add new claim'] = array ( $item, $changeOp, $expected );
 
@@ -73,7 +73,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$claim = reset( $claims );
 
 		$claimGuid = $claim->getGuid();
-		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator( $item->getId() ) );
+		$changeOp = new ChangeOpMainSnak( $claimGuid, $newSnak, new ClaimGuidGenerator() );
 		$expected = $newSnak->getDataValue();
 		$args['update claim by guid'] = array ( $item, $changeOp, $expected );
 
@@ -105,7 +105,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
-		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
+		$guidGenerator = new ClaimGuidGenerator();
 
 		// apply change to the wrong item
 		$wrongItem = Item::newEmpty();

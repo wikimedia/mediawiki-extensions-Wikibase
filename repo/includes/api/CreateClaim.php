@@ -48,7 +48,7 @@ class CreateClaim extends ModifyClaim {
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
-		$changeOp = new ChangeOpMainSnak( '', $snak, new ClaimGuidGenerator( $entity->getId() ) );
+		$changeOp = new ChangeOpMainSnak( '', $snak, new ClaimGuidGenerator() );
 
 		try {
 			$changeOp->apply( $entity, $summary );
