@@ -33,6 +33,41 @@
       "revId": "795b7db328555adf3268b693a5445a5abbcbbefe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_e60bf024",
+        "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-26T20:35:35Z",
+      "side": 1,
+      "message": "$this-\u003esnak-\u003egetPropertyId() is done above.  can be reused",
+      "parentUuid": "ae0e4726_c051f466",
+      "revId": "795b7db328555adf3268b693a5445a5abbcbbefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_0636e4e4",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpMainSnakTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-26T20:35:35Z",
+      "side": 1,
+      "message": "don\u0027t think it\u0027s necessary to rename this, but not a big deal :)",
+      "revId": "795b7db328555adf3268b693a5445a5abbcbbefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
