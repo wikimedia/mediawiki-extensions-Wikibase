@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Message;
 use MWException;
 use RuntimeException;
 use Status;
@@ -88,8 +89,10 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			$id = $idParser->parse( $rawId );
 		} catch ( RuntimeException $ex ) {
 			throw new UserInputException(
-				'wikibase-wikibaserepopage-invalid-id',
-				array( $rawId ),
+				new Message(
+					'wikibase-wikibaserepopage-invalid-id',
+					array( $rawId )
+				),
 				'Entity id is not valid'
 			);
 		}
@@ -111,8 +114,10 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$id = $this->parseEntityId( $rawId );
 		if ( !( $id instanceof ItemId ) ) {
 			throw new UserInputException(
-				'wikibase-wikibaserepopage-not-itemid',
-				array( $rawId ),
+				new Message(
+					'wikibase-wikibaserepopage-not-itemid',
+					array( $rawId )
+				),
 				'Entity id does not belong to an item'
 			);
 		}
@@ -135,8 +140,10 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 
 		if ( $entity === null ) {
 			throw new UserInputException(
-				'wikibase-wikibaserepopage-invalid-id',
-				array( $id->getSerialization() ),
+				new Message(
+					'wikibase-wikibaserepopage-invalid-id',
+					array( $id->getSerialization() )
+				),
 				'Entity id is unknown'
 			);
 		}

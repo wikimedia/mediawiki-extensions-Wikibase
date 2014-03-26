@@ -11,40 +11,39 @@
 class MessageException extends Exception {
 
 	/**
-	 * @var string
+	 * @var Message
 	 */
-	protected $key;
+	protected $mwMessage;
 
 	/**
-	 * var array
+	 * @param Message $mwMessage
+	 * @param string $exceptionMsg (optional, default '')
+	 * @param Exception $previous (optional, default null)
 	 */
-	protected $params;
+	public function __construct( Message $mwMessage, $exceptionMsg = '', Exception $previous = null ) {
+		$exceptionMsg = $this->getMessageOrDefault( $mwMessage, $exceptionMsg );
 
-	/**
-	 * @param string $key
-	 * @param array $params
-	 * @param string $message
-	 * @param Exception $previous
-	 */
-	public function __construct( $key, array $params, $message, Exception $previous = null ) {
-		parent::__construct( $message, 0, $previous );
+		parent::__construct( $exceptionMsg, 0, $previous );
 
-		$this->key = $key;
-		$this->params = $params;
+		$this->mwMessage = $mwMessage;
+	}
+
+	public function getMwMessage() {
+		return $this->mwMessage;
 	}
 
 	/**
+	 * @param Message $mwMessage
+	 * @param string $exceptionMsg
+	 *
 	 * @return string
 	 */
-	public function getKey() {
-		return $this->key;
-	}
+	private function getMessageOrDefault( $mwMessage, $exceptionMsg ) {
+		if ( $exceptionMsg === '' ) {
+			$exceptionMsg = $mwMessage->inLanguage( 'en' )->parse();
+		}
 
-	/**
-	 * @return array
-	 */
-	public function getParams() {
-		return $this->params;
+		return $exceptionMsg;
 	}
 
 }

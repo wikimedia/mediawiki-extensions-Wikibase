@@ -80,7 +80,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		try {
 			$this->prepareArguments( $subPage );
 		} catch ( UserInputException $ex ) {
-			$error = $this->msg( $ex->getKey(), $ex->getParams() )->parse();
+			$error = $ex->getMwMessage()->parse();
 			$this->showErrorHTML( $error );
 		}
 
