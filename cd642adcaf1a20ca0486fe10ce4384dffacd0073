@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_7a4e559d",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:40:47Z",
+      "side": 1,
+      "message": "That\u0027s why I\u0027m poking this. Accessing private properties from the inside of a class shouldn\u0027t be hidden behind a public getter (that possibly does more than it\u0027s supposed to do) if it doesn\u0027t really add a benefit.\n\nWhen I call something like $var.html() it\u0027s very obvious that it probably does much more than accessing a private property. But if something like this._snakType really is a private property it is - in my opinion - much more straightforward to just use it.\n\nThat\u0027s what I think.",
+      "parentUuid": "ae0e4726_b76768b4",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_4fc94454",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
         "patchSetId": 3
