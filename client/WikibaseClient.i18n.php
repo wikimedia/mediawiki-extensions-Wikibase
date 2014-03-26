@@ -227,7 +227,8 @@ Parameters:
 Parameters:
 * $1 - the property ID or name
 * $2 - the original error message (this is typically in English and may be rather technical)',
-	'wikibase-otherprojects' => 'Label of the sidebar section containing links to other projects',
+	'wikibase-otherprojects' => 'Label of the sidebar section containing links to other projects.
+{{Identical|Other project}}',
 );
 
 /** Achinese (Acèh)
@@ -1186,7 +1187,7 @@ $messages['de'] = array(
  * @author Filzstift
  */
 $messages['de-ch'] = array(
-	'wikibase-rc-show-wikidata-pref' => 'Wikidata-Bearbeitungen in den «Letzten Änderungen» anzeigen',
+	'wikibase-rc-show-wikidata-pref' => '{{WBREPONAME}}-Bearbeitungen in den «Letzten Änderungen» anzeigen',
 );
 
 /** Zazaki (Zazaki)
@@ -2465,6 +2466,7 @@ $messages['ja'] = array(
 	'wikibase-pageinfo-entity-id' => '{{WBREPONAME}}項目 ID',
 	'wikibase-pageinfo-entity-id-none' => 'なし',
 	'wikibase-property-render-error' => 'プロパティ $1 のレンダリングに失敗しました: $2',
+	'wikibase-otherprojects' => 'その他のプロジェクト',
 );
 
 /** Georgian (ქართული)
@@ -4002,20 +4004,20 @@ $messages['sco'] = array(
 	'wikibase-comment-unlink' => 'This page haes been onlinkit fae {{WBREPONAME}} eetem. Leid links remuived.',
 	'wikibase-comment-restore' => 'Associated {{WBREPONAME}} eetem ondelytit. Leid links restored.',
 	'wikibase-comment-update' => '{{WBREPONAME}} eetem chynged',
-	'wikibase-comment-sitelink-add' => 'Leid link added: $1',
+	'wikibase-comment-sitelink-add' => 'Leid airtin eikit: $1',
 	'wikibase-comment-sitelink-change' => 'Leid link chynged fae $1 til $2',
-	'wikibase-comment-sitelink-remove' => 'Leid link remuived: $1',
+	'wikibase-comment-sitelink-remove' => 'Leid airtin remuived: $1',
 	'wikibase-comment-multi' => '$1 {{PLURAL:$1|chynge|chynges}}',
 	'wikibase-dataitem' => 'Data eitem',
-	'wikibase-editlinks' => 'Eidit links',
-	'wikibase-editlinkstitle' => 'Eidit interleid links',
-	'wikibase-linkitem-addlinks' => 'Add links',
-	'wikibase-linkitem-alreadylinked' => 'The page that ye wanted tae link wi is awreadie attached til aen [$1 eitem] oan the central data reposeeterie, n this links til $2 oan this site. Eitems can yinlie hae yin page per site attached. Please chuise ae different page tae link wi.',
+	'wikibase-editlinks' => 'Eedit airtins',
+	'wikibase-editlinkstitle' => 'Eedit interleid airtins',
+	'wikibase-linkitem-addlinks' => 'Eik airtins',
+	'wikibase-linkitem-alreadylinked' => 'The page that ye wanted tae airt wi is awreadie attached til aen [$1 eetem] oan the central data reposeeterie, n this airtss til $2 oan this steid. Eetems can yinlie hae yin page per steid attached. Please chuise ae different page tae airt wi.',
 	'wikibase-linkitem-close' => 'Claise dialog n relaid page',
-	'wikibase-linkitem-failure' => 'Aen onkent mistak occurred while tryin tae link til the gien page.',
-	'wikibase-linkitem-title' => 'Link wi page',
-	'wikibase-linkitem-linkpage' => 'Link wi page',
-	'wikibase-linkitem-selectlink' => 'Please select ae site n ae page that ye want tae link this page wi.',
+	'wikibase-linkitem-failure' => 'Aen onkent mistak occurred while ettlin tae ait til the gien page.',
+	'wikibase-linkitem-title' => 'Airt wi page',
+	'wikibase-linkitem-linkpage' => 'Airt wi page',
+	'wikibase-linkitem-selectlink' => 'Please select ae steid n ae page that ye want tae airt this page wi.',
 	'wikibase-linkitem-input-site' => 'Leid:',
 	'wikibase-linkitem-input-page' => 'Page:',
 	'wikibase-linkitem-confirmitem-text' => 'The page that ye chose is awreadie associated wi aen [$1 eitem oan or central data reposeeterie]. Please confirm that the {{PLURAL:$2|page|pages}} shawn ablo {{PLURAL:$2|is|ar}} the {{PLURAL:$2|yin|yins}} that ye want tae link this page wi.',

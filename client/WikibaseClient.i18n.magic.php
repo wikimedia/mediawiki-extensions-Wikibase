@@ -150,6 +150,7 @@ $magicWords['yi'] = array(
 $magicWords['zh-hans'] = array(
 	'noexternallanglinks' => array( 0, '无外部语言连接' ),
 	'property' => array( 0, '属性' ),
+	'wbreponame' => array( 0, 'wb报告名' ),
 );
 
 /** Traditional Chinese (中文（繁體）‎) */
