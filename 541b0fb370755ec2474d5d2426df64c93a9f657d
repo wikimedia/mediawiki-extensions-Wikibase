@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae0e4726_ebf179db",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-26T18:39:10Z",
+      "side": 1,
+      "message": "it\u0027s a bit confusing... are we getting the exception message (e.g. $ex-\u003egetMessage() ) as a string? or are we getting a MediaWiki Message object.\n\nlooking at the code, I see the latter but the way the functions are named makes it unclear at a glance.",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_5adef115",
         "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
         "patchSetId": 5
@@ -13,6 +30,24 @@
       "writtenOn": "2014-03-26T14:47:48Z",
       "side": 1,
       "message": "we can try fallback to MessageException (in lib) and then generic",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_6b2d6941",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-26T18:39:10Z",
+      "side": 1,
+      "message": "how about ParseExceptionMessage can extend MessageException or could be used below?",
+      "parentUuid": "ae0e4726_5adef115",
       "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
