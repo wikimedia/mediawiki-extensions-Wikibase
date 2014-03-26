@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce09bb20_2cff8b64",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T10:38:25Z",
+      "side": 1,
+      "message": "My point is, it\u0027s confusing here in this file because it\u0027s used very inconsistently. Sometimes ._propertyId and ._snakType are accessed and set as variables (which is perfectly fine for private members since they are members of /this/ class, right?). Sometimes they are accessed and set using the methods.\n\nCombined getters/setters are ok if they are used consistently in a predictable way. This file here? No, sorry. There are even set and get methods next to the combined getters/setters. So confusing.\n\nSorry for poking at this, I know it\u0027s actually not part of this change and clearly shouldn\u0027t block it.",
+      "parentUuid": "ce09bb20_017b70be",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_4fc94454",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I think it\u0027s acceptable to do that for the sake of code simplicity. Things generally need to get much simpler here, though :)",
       "parentUuid": "ee14bf34_4fc94454",
+      "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce09bb20_ccedafb6",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T10:38:25Z",
+      "side": 1,
+      "message": "Ok then.",
+      "parentUuid": "ce09bb20_61534c44",
       "revId": "cd642adcaf1a20ca0486fe10ce4384dffacd0073",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
