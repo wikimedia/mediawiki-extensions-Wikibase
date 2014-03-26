@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_8b91ddfd",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-26T19:49:41Z",
+      "side": 0,
+      "message": "I don\u0027t think I get this change",
+      "revId": "803d6d5a2a54573ac032efbc0b5f27c3c901864e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
