@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_b7eac803",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-26T12:36:06Z",
+      "side": 1,
+      "message": "This should not be hard oded, but taken from WikibaseRepo. WikibaseRepo will need a new method for this, and needs to figure out where to best get this information from. Hardcoding it there would be fine for now, as a last resort.",
+      "revId": "223172b3c85c58885dfef8f9ba5151ac4d608eab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
