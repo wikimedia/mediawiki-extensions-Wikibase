@@ -8,6 +8,7 @@ use LogicException;
 use SiteSQLStore;
 use Status;
 use UsageException;
+use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -59,6 +60,11 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected $badgeItems;
 
 	/**
+	 * @var string[]
+	 */
+	protected $badgeItems;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -75,10 +81,12 @@ abstract class ModifyEntity extends ApiWikibase {
 		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'siteLinkGroups' );
 
-		$this->siteLinkLookup = StoreFactory::getStore()->newSiteLinkCache();
+		$this->siteLinkLookup = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 
 		$this->badgeItems = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'badgeItems' );
+
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
 	}
 
 	/**
