@@ -528,6 +528,13 @@ $.widget( 'valueview.valueview', PARENT, {
 		this.element.html( this.getFormattedValue() );
 	},
 
+	_setDisabled: function( disabledValue ) {
+		if( this.options.disabled !== disabledValue ) {
+			this.options.disabled = disabledValue;
+			this.draw();
+		}
+	},
+
 	/**
 	 * Marks the valueview disabled and triggers re-drawing it.
 	 * Since the visual state should be managed completely by the draw method, toggling the css
@@ -537,8 +544,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @since 0.1
 	 */
 	disable: function() {
-		this.options.disabled = true;
-		this.draw();
+		this._setDisabled( true );
 	},
 
 	/**
@@ -550,8 +556,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * @since 0.1
 	 */
 	enable: function() {
-		this.options.disabled = false;
-		this.draw();
+		this._setDisabled( false );
 	},
 
 	/**
