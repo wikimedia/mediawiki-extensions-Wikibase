@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce09bb20_0cc6074f",
+        "filename": "tests/browser/features/support/modules/statement_module.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-26T10:08:01Z",
+      "side": 1,
+      "message": "let\u0027s see once the new version is in.",
+      "parentUuid": "ce09bb20_8cb217e3",
+      "revId": "3b06960c1007c955d9adaf5ecb82c84b4bb640ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce09bb20_ac76fb37",
         "filename": "tests/browser/features/support/modules/wikibase_api_module.rb",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-26T10:03:39Z",
       "side": 1,
       "message": "What is that?",
+      "revId": "3b06960c1007c955d9adaf5ecb82c84b4bb640ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce09bb20_4ce3dfd4",
+        "filename": "tests/browser/features/support/modules/wikibase_api_module.rb",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-26T10:08:01Z",
+      "side": 1,
+      "message": "the name of the handle. you can then access items by doing item[\u003chandle_name\u003e]",
+      "parentUuid": "ce09bb20_ac76fb37",
       "revId": "3b06960c1007c955d9adaf5ecb82c84b4bb640ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
