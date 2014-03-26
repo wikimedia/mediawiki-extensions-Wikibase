@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use Title;
+use User;
 
 /**
  * Provides logic to update the repo after page moves in the client.
@@ -13,41 +15,50 @@ namespace Wikibase;
 class UpdateRepoOnMove extends UpdateRepo {
 
 	/**
-	 * @var \Title
+	 * @var Title
 	 */
 	protected $newTitle;
 
 	/**
 	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param \User $user
+	 * @param User $user
 	 * @param string $siteId Global id of the client wiki
-	 * @param \Title $oldTitle
-	 * @param \Title $newTitle
+	 * @param Title $oldTitle
+	 * @param Title $newTitle
 	 */
-	public function __construct( $repoDB, $siteLinkLookup, $user, $siteId, $oldTitle, $newTitle ) {
+	public function __construct(
+		$repoDB,
+		SiteLinkLookup $siteLinkLookup,
+		User $user, $siteId,
+		Title $oldTitle,
+		Title $newTitle
+	) {
 		parent::__construct( $repoDB, $siteLinkLookup, $user, $siteId, $oldTitle );
 		$this->newTitle = $newTitle;
 	}
 
 	/**
-	 * Returns a new job for updating the repo.
+	 * Get the name of the Job that should be run on the repo
 	 *
-	 * @return \Job
+	 * @return string
 	 */
-	public function createJob() {
-		wfProfileIn( __METHOD__ );
+	protected function getJobName() {
+		return 'UpdateRepoOnMove';
+	}
 
-		$job = UpdateRepoOnMoveJob::newFromMove(
-			$this->title,
-			$this->newTitle,
-			$this->getEntityId(),
-			$this->user,
-			$this->siteId
+	/**
+	 * Get the parameters for creating a new JobSpecification
+	 *
+	 * @return array
+	 */
+	protected function getJobParameters() {
+		return array(
+			'siteId' => $this->siteId,
+			'entityId' => $this->getEntityId()->getSerialization(),
+			'oldTitle' => $this->title->getPrefixedText(),
+			'newTitle' => $this->newTitle->getPrefixedText(),
+			'user' => $this->user->getName()
 		);
-
-		wfProfileOut( __METHOD__ );
-
-		return $job;
 	}
 }
