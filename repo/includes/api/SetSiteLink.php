@@ -100,7 +100,7 @@ class SetSiteLink extends ModifyEntity {
 		if ( $this->shouldRemove( $params ) ) {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			wfProfileOut( __METHOD__ );
-			return new ChangeOpSiteLink( $linksite );
+			return $this->changeOpFactory->newRemoveSiteLinkOp( $linksite );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
@@ -127,7 +127,7 @@ class SetSiteLink extends ModifyEntity {
 				: null;
 
 			wfProfileOut( __METHOD__ );
-			return new ChangeOpSiteLink( $linksite, $page, $badges );
+			return $this->changeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
 		}
 	}
 

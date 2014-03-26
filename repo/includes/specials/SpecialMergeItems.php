@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use UserInputException;
 use InvalidArgumentException;
+use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\EntityRevision;
@@ -143,13 +144,9 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 		$sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		try {
-			$changeOps = new ChangeOpsMerge(
+			$changeOps = $this->changeOpFactory->newMergeOps(
 				$this->fromItemRevision->getEntity(),
 				$this->toItemRevision->getEntity(),
-				new LabelDescriptionDuplicateDetector(
-					$termIndex
-				),
-				$sitelinkCache,
 				$this->ignoreConflicts
 			);
 			$changeOps->apply();
