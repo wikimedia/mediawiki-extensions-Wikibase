@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_7d8bef1b",
+        "filename": "lib/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T16:24:40Z",
+      "side": 1,
+      "message": "I just made this code prettier and now it\u0027s removed. ;-)",
+      "revId": "c0fd3fa991f799d8179ba300930a7a5c8419b89e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
