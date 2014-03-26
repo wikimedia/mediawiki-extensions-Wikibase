@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_3a39fd3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "Typo",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_7a641546",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "\"Status\" vs. \"state\"? Maybe ask Aude?\n\nNumber of uses in core and all extensions I have installed:\nSTATUS_: 27 uses\nSTATE_: 60 uses",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_da3fa11f",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "I find \"ok\" a bit misleading. We don\u0027t know if \"everything is ok\". The \"ok\" might become a problem if other states are introduced later and we /really/ need something more close to an \"everything is ok\" state.\n\nMy proposal:\nSTATUS_NONE \u003d 0\nSTATUS_EMPTY \u003d 1\nSTATUS_STUB \u003d 2",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_1ae879ae",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "string?",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_dad321d6",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be better to /not/ store this if it\u0027s 0? I know, being able to distinguish between \"undefined\" and 0 can be valuable. But in the long run there won\u0027t be any \"undefined\" any more. All these 0 then do is to make the table larger and slower.",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_5aef1183",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "Same here. I\u0027m thinking about /not/ storing this if it\u0027s 0.",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_da544159",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "Not required, obviously, ;-) but would be nice to have this in the same order: EMPTY \u003e STUB \u003e OK.",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_fafdc539",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-26T15:20:53Z",
+      "side": 1,
+      "message": "Same here. I\u0027m thinking about /not/ storing this if it\u0027s 0.",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
