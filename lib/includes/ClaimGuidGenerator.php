@@ -10,8 +10,9 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class ClaimGuidGenerator implements GuidGenerator {
+class ClaimGuidGenerator  {
 
 	/**
 	 * @since 0.3
@@ -21,29 +22,28 @@ class ClaimGuidGenerator implements GuidGenerator {
 
 	/**
 	 * @since 0.5
-	 * @var EntityId
+	 *
+	 * @param GuidGenerator $baseGenerator (defaults to new V4GuidGenerator())
 	 */
-	protected $entityId;
+	public function __construct( GuidGenerator $baseGenerator = null ) {
+		if ( $baseGenerator === null ) {
+			$baseGenerator = new V4GuidGenerator();
+		}
 
-	/**
-	 * @param EntityId $entityId
-	 */
-	public function __construct( EntityId $entityId ) {
-		$this->entityId = $entityId;
-		$this->baseGenerator = new V4GuidGenerator();
+		$this->baseGenerator = $baseGenerator;
 	}
 
 	/**
-	 * Generates and returns a GUID.
-	 * @see http://php.net/manual/en/function.com-create-guid.php
-	 * @see GuidGenerator::newGuid
+	 * Generates and returns a GUID for a claim in the given Entity.
 	 *
-	 * @since 0.3
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
-	public function newGuid() {
-		return $this->entityId->getSerialization() . ClaimGuid::SEPARATOR . $this->baseGenerator->newGuid();
+	public function newGuid( EntityId $entityId ) {
+		return $entityId->getSerialization() . ClaimGuid::SEPARATOR . $this->baseGenerator->newGuid();
 	}
 
 }

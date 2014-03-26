@@ -41,7 +41,7 @@ class SetClaimValue extends ModifyClaim {
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
+		$guidGenerator = new ClaimGuidGenerator();
 		$changeOp = new ChangeOpMainSnak(
 			$claimGuid,
 			$snak,

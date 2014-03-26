@@ -30,8 +30,8 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
-		$validClaimGuid = $guidGenerator->newGuid();
+		$guidGenerator = new ClaimGuidGenerator();
+		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
 		$snaks = new SnakList();
 		$snaks[] = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 		$validReference = new Reference( $snaks );

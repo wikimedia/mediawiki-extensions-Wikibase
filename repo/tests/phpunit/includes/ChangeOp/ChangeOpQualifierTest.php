@@ -26,8 +26,8 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
-		$validClaimGuid = $guidGenerator->newGuid();
+		$guidGenerator = new ClaimGuidGenerator();
+		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 		$validSnakHash = $validSnak->getHash();
 
