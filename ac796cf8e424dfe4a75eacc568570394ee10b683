@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_b7fe48aa",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-26T12:59:54Z",
+      "side": 1,
+      "message": "We don\u0027t display the \u0027no value\u0027 / \u0027unknown value\u0027 text in qualifiers and references. The JS UI does not make this differentiation, though.",
+      "parentUuid": "ce09bb20_878c303c",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce09bb20_2759e401",
         "filename": "repo/includes/ClaimHtmlGenerator.php",
         "patchSetId": 6
