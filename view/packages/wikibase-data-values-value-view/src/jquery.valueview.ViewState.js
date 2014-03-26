@@ -70,6 +70,15 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
+		 * Returns the related valueview's current plain text value.
+		 * @see jQuery.valueview.getTextValue
+		 * @since 0.4
+		 */
+		getTextValue: function() {
+			return this._view.getTextValue();
+		},
+
+		/**
 		 * Returns the options or a specific option of the related view. Does not allow to set any
 		 * option.
 		 * @see jQuery.Widget.option

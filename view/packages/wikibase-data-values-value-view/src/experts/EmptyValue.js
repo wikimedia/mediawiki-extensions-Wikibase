@@ -16,7 +16,7 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.EmptyValue = vv.expert( 'EmptyValue', {
+	vv.experts.EmptyValue = vv.expert( 'EmptyValue', PARENT, {
 		/**
 		 * Options.
 		 * @type {Object}
@@ -28,35 +28,22 @@
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert.destroy
+		 * @see jQuery.valueview.Expert._init
 		 */
-		destroy: function() {
-			this.$viewPort.empty();
-			PARENT.prototype.destroy.call( this );
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert._getRawValue
-		 */
-		_getRawValue: function() {
-			return null;
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert._setRawValue
-		 */
-		_setRawValue: function( rawValue ) {
-			// Do nothing, we're always null!
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert.draw
-		 */
-		draw: function() {
+		_init: function() {
 			this.$viewPort.text(
 				this._messageProvider.getMessage( 'valueview-expert-emptyvalue-empty' )
 			);
-		}
+		},
+
+		/**
+		 * @see jQuery.valueview.Expert.rawValue
+		 */
+		rawValue: function() {
+			return null;
+		},
+
+		draw: function() {}
 	} );
 
 }( jQuery.valueview ) );

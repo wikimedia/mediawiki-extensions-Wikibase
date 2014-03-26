@@ -18,17 +18,17 @@
 	);
 
 	expertProvider.registerDataValueExpert(
-		vv.experts.GlobeCoordinateValue,
+		vv.experts.GlobeCoordinateInput,
 		dv.GlobeCoordinateValue.TYPE
 	);
 
 	expertProvider.registerDataValueExpert(
-		vv.experts.QuantityType,
+		vv.experts.StringValue,
 		dv.QuantityValue.TYPE
 	);
 
 	expertProvider.registerDataValueExpert(
-		vv.experts.TimeValue,
+		vv.experts.TimeInput,
 		dv.TimeValue.TYPE
 	);
 

@@ -18,7 +18,7 @@ var PARENT = $.Widget;
  */
 function expertProxy( fnName ) {
 	return function() {
-		if( this._expert ) {
+		if( this._expert && this.isInEditMode() ) {
 			return this._expert[ fnName ].apply( this._expert, arguments );
 		}
 	};
@@ -128,10 +128,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	_isInEditMode: false,
 
 	/**
-	 * Expert object responsible for serving the DOM to display the current value.
-	 * Can be null if the current value has a has data value type unknown to the expert factory
-	 * given in the "expertProvider" option. In this case the valueview will still work but only
-	 * display a message instead of displaying the value and allowing the user to change it.
+	 * Expert object responsible for serving the DOM to edit the current value. This is only available
+	 * when in edit mode, otherwise it is null.
+	 * Can also be null if the current value has a has data value type unknown to the expert factory
+	 * given in the "expertProvider" option.
 	 * @type jQuery.valueview.Expert|null
 	 */
 	_expert: null,
@@ -167,7 +167,6 @@ $.widget( 'valueview.valueview', PARENT, {
 		this.$value = $( '<div/>', {
 			'class': this.widgetBaseClass + '-value'
 		} );
-		this.element.append( this.$value );
 
 		// Set initial value if provided in options:
 		this.value( this.option( 'value' ) || null );
@@ -191,13 +190,8 @@ $.widget( 'valueview.valueview', PARENT, {
 		);
 
 		if( this._expert ) {
-			this._expert.destroy();
-			this._expert = null;
+			this._destroyExpert();
 		}
-
-		// TODO: destroying the expert will leave no plain text of the last value. Once we
-		//  implemented formatters, think about leaving a formatted text here. On the other hand,
-		//  formatting will be assynchronous which would be a problem in this situation.
 
 		return PARENT.prototype.destroy.call( this );
 	},
@@ -221,7 +215,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			case 'expertProvider':
 			case 'dataTypeId': // TODO: make this work properly and test
 			case 'dataValueType':
-				this._updateExpert();
+				this._updateExpertConstructor();
 				break;
 			case 'value':
 				// TODO
@@ -243,6 +237,8 @@ $.widget( 'valueview.valueview', PARENT, {
 		}
 		this._initialValue = this.value();
 		this._isInEditMode = true;
+
+		this.element.html( this.$value );
 
 		this.draw();
 	},
@@ -269,6 +265,11 @@ $.widget( 'valueview.valueview', PARENT, {
 		}
 		this._initialValue = null;
 		this._isInEditMode = false;
+		if( this._expert ) {
+			this._destroyExpert();
+		}
+
+		this.$value.detach();
 
 		this.draw();
 	},
@@ -357,14 +358,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			throw new Error( 'Instance of dataValues.DataValue required for setting a value' );
 		}
 		this._value = value;
-		this._updateExpert(); // New value, new expert might be required!
-
-		// Display value in expert:
-		if( this._expert ) {
-			this._setValueIsOngoing = true;
-			this._expert.rawValue( value ? value.getValue() : null );
-			this._setValueIsOngoing = false;
-		}
+		this._updateExpertConstructor(); // new value, new expert might be needed
 
 		// TODO: trigger validation. Value will still be set independent from whether value is valid
 		//  to ultimately set a value without triggering validation, some kind of ValidatedDataValue,
@@ -397,6 +391,19 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
+	 * Returns the current value formatted as plain text
+	 * @since 0.4
+	 *
+	 * @return {string}
+	 */
+	getTextValue: function() {
+		if( this._textValue === null ) {
+			throw new Error( 'This cannot happen' );
+		}
+		return this._textValue;
+	},
+
+	/**
 	 * Whether there is currently any value in the view. Basically, whether value() returns null.
 	 * @since 0.1
 	 *
@@ -418,29 +425,35 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
+	 * Will update the constructor currently used for creating an expert, if one is needed.
+	 */
+	_updateExpertConstructor: function() {
+		if( !( this.options.expertProvider instanceof $.valueview.ExpertFactory ) ) {
+			throw new Error( 'No ExpertProvider set in valueview\'s "expertProvider" option' );
+		}
+
+		var dataValueType = this._determineDataValueType();
+
+		this._expertConstructor = $.valueview.experts.EmptyValue;
+
+		if( dataValueType || this.options.dataTypeId ) {
+			this._expertConstructor = this.options.expertProvider.getExpert(
+				dataValueType,
+				this.options.dataTypeId
+			) || $.valueview.experts.UnsupportedValue;
+		}
+	},
+
+	/**
 	 * Will update the expert responsible for handling the value type of the current value. If there
 	 * is no value set currently (empty value), the expert will be chosen based on the "dataTypeId"
 	 * or "dataValueType" option of the valueview widget.
 	 * @since 0.1
 	 */
 	_updateExpert: function() {
-		if( !( this.options.expertProvider instanceof $.valueview.ExpertFactory ) ) {
-			throw new Error( 'No ExpertProvider set in valueview\'s "expertProvider" option' );
-		}
-
-		var dataValueType = this._determineDataValueType(),
-			NewExpert = $.valueview.experts.EmptyValue;
-
-		if( dataValueType || this.options.dataTypeId ) {
-			NewExpert = this.options.expertProvider.getExpert(
-				dataValueType,
-				this.options.dataTypeId
-			) || $.valueview.experts.UnsupportedValue;
-		}
-
 		if(
-			this._expert && NewExpert
-			&& this._expert.constructor === NewExpert.prototype.constructor
+			this._expert && this._expertConstructor
+			&& this._expert.constructor === this._expertConstructor.prototype.constructor
 		) {
 			return; // fully compatible expert
 		}
@@ -448,12 +461,11 @@ $.widget( 'valueview.valueview', PARENT, {
 		// Previous expert not suitable for the new task!
 		// Destroy old expert, create new one suitable for value:
 		if( this._expert ) {
-			this._expert.destroy();
-			this._expert = null;
+			this._destroyExpert();
 		}
 
-		if( NewExpert ) {
-			this._expert = new NewExpert(
+		if( this._expertConstructor ) {
+			this._expert = new this._expertConstructor(
 				this.$value,
 				this.viewState(),
 				this.viewNotifier(),
@@ -462,6 +474,11 @@ $.widget( 'valueview.valueview', PARENT, {
 				}
 			);
 		}
+	},
+
+	_destroyExpert: function() {
+		this._expert.destroy();
+		this._expert = null;
 	},
 
 	/**
@@ -473,14 +490,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		// (see jQuery.Widget._setOption)
 		PARENT.prototype.option.call( this, 'disabled', this.isDisabled() );
 
-		if( !this._expert ) {
-			// remove any remains from previous expert
-			this.$value.empty();
-			// TODO: Display message that data value type is unsupported or no expert indicator and
-			//  no value at the same time.
-		} else {
-			this._expert.draw();
-		}
+		this.drawContent();
 
 		// add/remove edit mode ui class:
 		var staticModeClass = this.widgetBaseClass + '-instaticmode',
@@ -491,6 +501,31 @@ $.widget( 'valueview.valueview', PARENT, {
 		} else {
 			this.element.addClass( staticModeClass ).removeClass( editModeClass );
 		}
+	},
+
+	drawContent: function() {
+		var self = this;
+		if( this.isInEditMode() ) {
+			this._updateTextValue().then( function () {
+				if( !self.isInEditMode() ) {
+					// edit mode was left while formatting text value
+					return;
+				}
+
+				self._updateExpert();
+				if( !self._expert ) {
+					// TODO: Display message that data value type is unsupported or no expert indicator and
+					//  no value at the same time.
+				}
+				self._expert.draw();
+			} );
+		} else {
+			this.drawStaticContent();
+		}
+	},
+
+	drawStaticContent: function() {
+		this.element.html( this.getFormattedValue() );
 	},
 
 	/**
@@ -555,8 +590,8 @@ $.widget( 'valueview.valueview', PARENT, {
 //	validatedValue: function() {},
 
 	/**
-	 * Will take the current raw value of the valueview's expert and parse it by taking the value
-	 * parser provided by the expert.
+	 * Will take the current raw value of the valueview's expert and parse and format it
+	 * using the valueParserProvider and valueFormatterProvider.
 	 *
 	 * @since 0.1
 	 */
@@ -569,14 +604,14 @@ $.widget( 'valueview.valueview', PARENT, {
 
 				if( self._value === null ) {
 					self._formattedValue = null;
-					self._expert.draw();
+					self.drawContent();
 					return;
 				}
 
 				self._formatValue( parsedValue )
 					.done( function( formattedValue ) {
 						self._formattedValue = formattedValue;
-						self._expert.draw();
+						self.drawContent();
 					} )
 					.fail( function( error, details ) {
 						if( error !== undefined ) {
@@ -621,7 +656,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			clearTimeout( this._parseTimer );
 		}
 
-		var valueParser = self._instantiateParser( expert.valueCharacteristics() );
+		var valueParser = this._instantiateParser( this.valueCharacteristics() );
 
 		this._parseTimer = setTimeout( function() {
 			self.__lastUpdateValue = rawValue;
@@ -630,8 +665,8 @@ $.widget( 'valueview.valueview', PARENT, {
 			//  for previews out of the experts. The preview should be handled in the same place for
 			//  all value types, could perhaps move into its own widget, listening to valueview
 			//  events.
-			if( expert._currentExpert && expert._currentExpert.preview ) {
-				expert._currentExpert.preview.showSpinner();
+			if( expert && expert.preview ) {
+				expert.preview.showSpinner();
 			}
 
 			valueParser.parse( rawValue )
@@ -647,7 +682,7 @@ $.widget( 'valueview.valueview', PARENT, {
 						deferred.reject();
 					}
 
-					if( expert.rawValueCompare( self.__lastUpdateValue, rawValue ) ) {
+					if( self.__lastUpdateValue === rawValue ) {
 						// this is the response for the latest update! by setting this to undefined, we
 						// will ignore all responses which might come back late.
 						// Another reason for this could be something like "a", "ab", "a", where the
@@ -702,7 +737,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	_formatValue: function( dataValue ) {
 		var self = this,
 			deferred = $.Deferred(),
-			valueFormatter = this._instantiateFormatter( this._expert.valueCharacteristics() ),
+			valueFormatter = this._instantiateFormatter( this.valueCharacteristics() ),
 			dataTypeId = this.options.dataTypeId || null;
 
 		valueFormatter.format( dataValue, dataTypeId, 'text/html' )
@@ -719,6 +754,36 @@ $.widget( 'valueview.valueview', PARENT, {
 			} )
 			.always( function() {
 				self._trigger( 'afterformat' );
+			} );
+
+		return deferred.promise();
+	},
+
+	_updateTextValue: function() {
+		var self = this,
+			deferred = $.Deferred(),
+			valueFormatter = this._instantiateFormatter( this.valueCharacteristics() ),
+			dataTypeId = this.options.dataTypeId || null,
+			dataValue = this._value;
+
+		if( !dataValue ) {
+			self._textValue = '';
+			deferred.resolve();
+			return deferred.promise();
+		}
+
+		valueFormatter.format( dataValue, dataTypeId, 'text/plain' )
+			.done( function( formattedValue, formattedDataValue ) {
+				if( dataValue === formattedDataValue ) {
+					self._textValue = formattedValue;
+					deferred.resolve();
+				} else {
+					// Late response that should be ignored.
+					deferred.reject();
+				}
+			} )
+			.fail( function( error, details ) {
+				deferred.reject( error, details );
 			} );
 
 		return deferred.promise();
@@ -792,9 +857,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				// we have currently. This is not the case when _setValue() sets a new value because
 				// the expert will get that new value's raw value while we already have the parsed
 				// version of the value.
-				var value = self.value(),
-					rawValue = value ? value.getValue() : null,
-					differentValueCharacteristics = false,
+				var differentValueCharacteristics = false,
 					newValueCharacteristics = self._expert.valueCharacteristics(),
 					lastValueCharacteristics = self.__lastValueCharacteristics || {};
 
@@ -808,7 +871,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				}
 
 				var changeDetected
-					= differentValueCharacteristics || !self._expert.rawValueCompare( rawValue );
+					= differentValueCharacteristics || self.getTextValue() !== self._expert.rawValue();
 
 				if( !self._setValueIsOngoing && changeDetected ) {
 					self.__lastValueCharacteristics = newValueCharacteristics;
@@ -817,6 +880,16 @@ $.widget( 'valueview.valueview', PARENT, {
 				}
 			}
 		} );
+	},
+
+	valueCharacteristics: function() {
+		if( this._expert ) {
+			return this._expert.valueCharacteristics();
+		}
+		if( this._expertConstructor ) {
+			return this._expertConstructor.prototype.valueCharacteristics();
+		}
+		return {};
 	}
 } );
 

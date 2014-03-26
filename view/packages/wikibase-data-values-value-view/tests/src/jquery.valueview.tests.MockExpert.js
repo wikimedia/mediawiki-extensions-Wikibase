@@ -34,17 +34,10 @@ jQuery.valueview.tests = jQuery.valueview.tests || {};
 		},
 
 		/**
-		 * @see jQuery.valueview.Expert._getRawValue
+		 * @see jQuery.valueview.Expert.rawValue
 		 */
-		_getRawValue: function() {
+		rawValue: function() {
 			return this._value;
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert._setRawValue
-		 */
-		_setRawValue: function( rawValue ) {
-			this._value = rawValue;
 		},
 
 		/**

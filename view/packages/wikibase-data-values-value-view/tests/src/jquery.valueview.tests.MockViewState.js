@@ -53,6 +53,13 @@ jQuery.valueview.tests.MockViewState = ( function( $, ViewState, util ) {
 		},
 
 		/**
+		 * @see jQuery.valueview.ViewState.getTextValue
+		 */
+		getTextValue: function() {
+			return this._view.getTextValue;
+		},
+
+		/**
 		 * @see jQuery.valueview.ViewState.option
 		 */
 		option: function( key ) {

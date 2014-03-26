@@ -4,7 +4,7 @@
  */
 jQuery.valueview = jQuery.valueview || {};
 
-( function( dv, $, vv, util ) {
+( function( $, vv, util ) {
 	'use strict';
 
 	/**
@@ -190,6 +190,8 @@ jQuery.valueview = jQuery.valueview || {};
 		 * Returns an object with characteristics specified for the value. The object can be used
 		 * as parser options definition.
 		 *
+		 * This method should allow to be called statically, i. e. without a useful `this` context.
+		 *
 		 * TODO: This should actually move out of here together with all the advanced input features
 		 *  of certain experts (time/coordinate).
 		 *
@@ -213,131 +215,17 @@ jQuery.valueview = jQuery.valueview || {};
 		},
 
 		/**
-		 * Will return the value in its most basic form. Basically what DataValue.getValue of the
-		 * expert's related data value type would return. This should be the value in a way, a
-		 * related value parser can process. Can return null if no value is set. Can also return a
-		 * full DataValue object if the expert doesn't know or require the concept of parsing the
-		 * value, so basically, the expert itself will do the job of parsing itself somehow and does
-		 * not require an asynchronous job for doing so.
-		 * If the first parameter is set, then the function will set the value instead of returning
-		 * it. An incompatible value will be recognized as empty (same as null). If the given value
-		 * is different from the current one, "change" will be notified to the change notifier.
-		 *
-		 * @since 0.1
-		 *
-		 * @param {*} [rawValue] If provided, the function will act as setter.
-		 * @return {*|null|jQuery.Promise|undefined} Returns null in case no or non-processable
-		 *         value is set or returns a jQuery.Promise object when setting a value of an expert
-		 *         using an asynchronous API based parser.
-		 *         Returns undefined if used as setter.
-		 *
-		 * TODO: Change this interface to its original state of not returning  promises. Experts
-		 *  should not use parsers, they should just be responsible for delivering raw values which
-		 *  will then be used with a parser by the valueview widget.
-		 */
-		rawValue: function( rawValue ) {
-			var currentRawValue = this._getRawValue();
-
-			if( rawValue === undefined ) { // GETTER:
-				return currentRawValue;
-			}
-
-			// Only change value if different from current value:
-			if( !this.rawValueCompare( currentRawValue, rawValue ) ) { // SETTER:
-				this._setRawValue( rawValue );
-
-				// rawValue might be a unknown value different from null which will end as null
-				// nonetheless. If that is the case or the value was null already, then this is not
-				// a real update.
-				if( currentRawValue !== null || this._getRawValue() !== null ) {
-					var self = this,
-						promise = this.draw();
-
-					if( promise && promise.state ) {
-						// Asynchronous API based parser:
-						return promise.done( function() {
-							self._viewNotifier.notify( 'change', [ self ] );
-						} );
-					} else {
-						// Synchronous JavaScript parser:
-						this._viewNotifier.notify( 'change', [ this ] );
-					}
-				}
-			}
-		},
-
-		/**
-		 * Getter called by rawValue.
-		 * @see jQuery.valueview.Expert.rawValue
+		 * Will return the value as a string.
 		 *
 		 * @since 0.1
 		 * @abstract
 		 *
-		 * @return {*|null} Returns null for an empty value. Otherwise, depending on the expert, any
-		 *         kind of value representing the user's input in its most basic form
+		 * @return {string} Returns the current raw value.
 		 */
-		_getRawValue: util.abstractMember,
+		rawValue: util.abstractMember,
 
 		/**
-		 * Setter called by rawValue. Does not have the responsibility to call draw() for actually
-		 * displaying the value or doing the "change" notify. Should simply make sure that the
-		 * _getRawValue function can return the value set here.
-		 * @see jQuery.valueview.Expert.rawValue
-		 *
-		 * @param {*} rawValue
-		 *
-		 * @since 0.1
-		 * @abstract
-		 */
-		_setRawValue: util.abstractMember,
-
-		/**
-		 * Returns whether two given raw values can be considered equal or whether one given raw
-		 * value is equal to the current one.
-		 *
-		 * NOTE: This should be overwritten by any expert implementation not dealing with basic JS
-		 *       types or with DataValue objects.
-		 *
-		 * @since 0.1
-		 *
-		 * @param {*} value1
-		 * @param {*} [value2] If not provided, this will be the expert's current value.
-		 * @returns boolean
-		 */
-		rawValueCompare: function( value1, value2 ) {
-			value2 = value2 !== undefined ? value2 : this._getRawValue();
-
-			// If expert implementation is dealing with DataValues as raw values, use equal:
-			if( value1 instanceof dv.DataValue ) {
-				return value1.equals( value2 );
-			}
-			// Otherwise, assume we're dealing with basic types. If we're dealing with anything
-			// else, the expert's implementation had to overwrite this!
-			return value1 === value2;
-		},
-
-		/**
-		 * Will set the raw value back to the related valueview value. Both values might be the same
-		 * with the difference that the expert's value might have a change by the user which did not
-		 * yet get parsed into a parser value which would then present the expert's current value in
-		 * the valueview. As long as the expert's value isn't parsed by the valueview, the valueview
-		 * will still return its old value. By calling this function, that current value will be
-		 * displayed again by the expert. This will be done without the expert triggering a change
-		 * of the current raw value to the valueview.
-		 *
-		 * @since 0.1
-		 */
-		resetValue: function() {
-			var value = this._viewState.value();
-			this._setRawValue( value ? value.getValue() : null );
-			this.draw();
-		},
-
-		/**
-		 * Will represent the current value of the valueview. The value is a DataValue of the type
-		 * this Expert can handle, so only this Expert knows how to display it properly. If the
-		 * valueview is in edit mode, this will also draw the user interface components for the user
-		 * to interact (edit) the value.
+		 * Will draw the user interface components for the user to edit the value.
 		 *
 		 * @since 0.1
 		 * @abstract
@@ -359,4 +247,4 @@ jQuery.valueview = jQuery.valueview || {};
 		blur: function() {}
 	};
 
-}( dataValues, jQuery, jQuery.valueview, util ) );
+}( jQuery, jQuery.valueview, util ) );

@@ -30,6 +30,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.valueview.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.valueview.valueview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.valueview',
+			),
+		),
+
 		'jquery.valueview.tests.MockExpert' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.tests.MockExpert.js',

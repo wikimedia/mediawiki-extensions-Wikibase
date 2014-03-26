@@ -5,8 +5,7 @@
 ( function( vv ) {
 	'use strict';
 
-	var PARENT = vv.BifidExpert,
-		editableExpert = vv.experts.SuggestedStringValue;
+	var PARENT = vv.experts.SuggestedStringValue;
 
 	/**
 	 * Valueview expert for adding specialized handling for CommonsMedia data type. Without this
@@ -18,18 +17,10 @@
 	 * @since 0.1
 	 *
 	 * @constructor
-	 * @extends jQuery.valueview.experts.BifidExpert
+	 * @extends jQuery.valueview.experts.SuggestedStringValue
 	 */
 	vv.experts.CommonsMediaType = vv.expert( 'CommonsMediaType', PARENT, {
-		/**
-		 * @see jQuery.valueview.BifidExpert._editableExpert
-		 */
-		_editableExpert: editableExpert,
-
-		/**
-		 * @see jQuery.valueview.BifidExpert._editableExpertOptions
-		 */
-		_editableExpertOptions: {
+		_options: {
 			suggesterOptions: {
 				ajax: {
 					url: location.protocol + '//commons.wikimedia.org/w/api.php',
@@ -40,26 +31,6 @@
 				},
 				replace: [/^File:/, '']
 			}
-		},
-
-		/**
-		 * @see jQuery.valueview.BifidExpert._staticExpert
-		 */
-		_staticExpert: vv.experts.StaticDom,
-
-		/**
-		 * @see jQuery.valueview.BifidExpert._staticExpertOptions
-		 */
-		_staticExpertOptions: {
-			/**
-			 * @param {string|null} currentRawValue
-			 * @param {jQuery.valueview.ViewState} viewState
-			 * @param {jQuery.valueview.MessageProvider} messageProvider
-			 */
-			domBuilder: function( currentRawValue, viewState, messageProvider ) {
-				return viewState.getFormattedValue();
-			},
-			baseExpert: editableExpert
 		}
 	} );
 

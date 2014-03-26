@@ -213,4 +213,38 @@
 		}
 	);
 
+	QUnit.test( 'Setting prevVal', function( assert ) {
+		expect( 4 );
+
+		var $subject = generateInputElement();
+		var expectedPrevVal = 'a';
+
+		$subject
+		.appendTo( document.body )
+		.val( 'a' )
+		.on( 'eachchange', function( event, prevVal ) {
+			assert.equal(
+				prevVal,
+				expectedPrevVal,
+				'prevVal is correct in first handler'
+			);
+		} )
+		.on( 'eachchange', function( event, prevVal ) {
+			assert.equal(
+				prevVal,
+				expectedPrevVal,
+				'prevVal is correct in second handler'
+			);
+		} );
+
+		$subject.val( 'b' );
+		$subject.trigger( 'input' );
+
+		expectedPrevVal = 'b';
+		$subject.val( 'c' );
+		$subject.trigger( 'input' );
+
+		$subject.remove();
+	} );
+
 }( jQuery, QUnit ) );

@@ -23,12 +23,9 @@ return call_user_func( function() {
 				'CommonsMediaType.js',
 			),
 			'dependencies' => array(
-				'mediawiki.util',
-				'jquery',
-				'jquery.valueview.BifidExpert',
 				'jquery.valueview.experts',
-				'jquery.valueview.experts.StaticDom',
 				'jquery.valueview.experts.SuggestedStringValue',
+				'jquery.valueview.Expert',
 			),
 		),
 
@@ -52,13 +49,16 @@ return call_user_func( function() {
 			'scripts' => array(
 				'GlobeCoordinateInput.js',
 			),
+			'styles' => array(
+				'GlobeCoordinateInput.css',
+			),
 			'dependencies' => array(
 				'globeCoordinate.js',
 				'jquery',
-				'jquery.focusAt',
 				'jquery.ui.inputextender',
 				'jquery.ui.preview',
 				'jquery.valueview.experts',
+				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.Expert',
 				'util.MessageProvider',
 			),
@@ -66,45 +66,6 @@ return call_user_func( function() {
 				'valueview-expert-globecoordinateinput-precision',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
-			),
-		),
-
-		'jquery.valueview.experts.GlobeCoordinateValue' => $moduleTemplate + array(
-			'scripts' => array(
-				'GlobeCoordinateValue.js',
-			),
-			'styles' => array(
-				'GlobeCoordinateInput.css',
-			),
-			'dependencies' => array(
-				'globeCoordinate.js',
-				'jquery',
-				'jquery.valueview.experts',
-				'jquery.valueview.Expert',
-				'jquery.valueview.experts.GlobeCoordinateInput',
-				'jquery.valueview.experts.StaticDom',
-				'jquery.valueview.BifidExpert',
-			),
-		),
-
-		'jquery.valueview.experts.QuantityType' => $moduleTemplate + array(
-			'scripts' => array(
-				'QuantityType.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'jquery.valueview.experts',
-				'jquery.valueview.experts.StringValue',
-			),
-		),
-
-		'jquery.valueview.experts.StaticDom' => $moduleTemplate + array(
-			'scripts' => array(
-				'StaticDom.js',
-			),
-			'dependencies' => array(
-				'jquery.valueview.experts',
-				'jquery.valueview.Expert',
 			),
 		),
 
@@ -127,9 +88,11 @@ return call_user_func( function() {
 				'SuggestedStringValue.js',
 			),
 			'dependencies' => array(
+				'jquery.event.special.eachchange',
 				'jquery.ui.suggester',
 				'jquery.valueview.experts',
 				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.Expert',
 			),
 		),
 
@@ -142,7 +105,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-				'jquery.focusAt',
 				'jquery.ui.inputextender',
 				'jquery.ui.listrotator',
 				'jquery.ui.preview',
@@ -164,20 +126,9 @@ return call_user_func( function() {
 				'valueview-expert-timevalue-calendar-julian',
 				'valueview-preview-label',
 				'valueview-preview-novalue',
+				'valueview-expert-timevalue-calendar-gregorian',
+				'valueview-expert-timevalue-calendar-julian',
 			),
-		),
-
-		'jquery.valueview.experts.TimeValue' => $moduleTemplate + array(
-			'scripts' => array(
-				'TimeValue.js',
-			),
-			'dependencies' => array(
-				'jquery',
-				'jquery.valueview.BifidExpert',
-				'jquery.valueview.experts.StaticDom',
-				'jquery.valueview.experts.TimeInput',
-				'jquery.valueview.experts',
-			)
 		),
 
 		'jquery.valueview.experts.UnsupportedValue' => $moduleTemplate + array(
@@ -188,7 +139,6 @@ return call_user_func( function() {
 				'UnsupportedValue.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.valueview.experts',
 				'jquery.valueview.Expert',
 			),
@@ -197,20 +147,6 @@ return call_user_func( function() {
 				'valueview-expert-unsupportedvalue-unsupporteddatavalue',
 			)
 		),
-
-		'jquery.valueview.experts.UrlType' => $moduleTemplate + array(
-			'scripts' => array(
-				'UrlType.js',
-			),
-			'dependencies' => array(
-				'jquery',
-				'jquery.valueview.BifidExpert',
-				'jquery.valueview.experts',
-				'jquery.valueview.experts.StaticDom',
-				'jquery.valueview.experts.StringValue',
-			),
-		),
-
 	);
 
 } );

@@ -30,23 +30,11 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.BifidExpert' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.valueview.BifidExpert.js',
-			),
-			'dependencies' => array(
-				'jquery',
-				'jquery.valueview.Expert',
-				'util.inherit',
-			),
-		),
-
 		'jquery.valueview.Expert' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.Expert.js',
 			),
 			'dependencies' => array(
-				'dataValues.DataValue',
 				'jquery',
 				'util.inherit',
 				'util.MessageProvider',
@@ -110,10 +98,9 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'dataValues.values',
 				'jquery.valueview',
-				'jquery.valueview.experts.GlobeCoordinateValue',
-				'jquery.valueview.experts.QuantityType',
+				'jquery.valueview.experts.GlobeCoordinateInput',
 				'jquery.valueview.experts.StringValue',
-				'jquery.valueview.experts.TimeValue',
+				'jquery.valueview.experts.TimeInput',
 				'jquery.valueview.ExpertFactory',
 				'mediawiki',
 				'mw.ext.valueFormatters',

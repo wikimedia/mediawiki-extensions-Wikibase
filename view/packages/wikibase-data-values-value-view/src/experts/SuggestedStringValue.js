@@ -45,18 +45,6 @@
 				notifier.notify( 'change' ); // here in addition to 'eachchange' from StringValue expert
 				$input.data( 'inputautoexpand' ).expand();
 			} );
-		},
-
-		/**
-		 * @see Query.valueview.experts.StringValue.draw
-		 */
-		draw: function() {
-			PARENT.prototype.draw.call( this );
-
-			// Make sure suggester is closed in non-edit mode:
-			if( !this._viewState.isInEditMode() ) {
-				this.$input.data( 'suggester' ).close();
-			}
 		}
 	} );
 

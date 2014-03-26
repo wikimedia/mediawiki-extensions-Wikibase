@@ -9,7 +9,7 @@
 	var Time = time.Time,
 		timeSettings = time.settings;
 
-	var PARENT = vv.Expert;
+	var PARENT = vv.experts.StringValue;
 
 	/**
 	 * Valueview expert handling input of time values.
@@ -36,21 +36,6 @@
 				'valueview-expert-advancedadjustments': 'advanced adjustments'
 			}
 		},
-
-		/**
-		 * The the input element's node.
-		 * @type {jQuery}
-		 */
-		$input: null,
-
-		/**
-		 * Caches a new value (or null for no value) set by _setRawValue() until draw() displaying
-		 * the new value has been called. The use of this, basically, is a structural improvement
-		 * which allows moving setting the displayed value to the draw() method which is supposed to
-		 * handle all visual manners.
-		 * @type {string|null|false}
-		 */
-		_newValue: null,
 
 		/**
 		 * The preview widget.
@@ -94,12 +79,8 @@
 		_init: function() {
 			var self = this;
 
-			this.$input = $( '<input/>', {
-				type: 'text',
-				'class': this.uiBaseClass + '-input valueview-input'
-			} )
-			.appendTo( this.$viewPort )
-			.inputextender( {
+			PARENT.prototype._init.call( this );
+			this.$input.inputextender( {
 				initCallback: function( $extension ) {
 					self._initInputExtender( $extension );
 					// $extension not yet in DOM, so draw() would not update rotators. Call draw
@@ -110,10 +91,9 @@
 					} );
 				},
 				contentAnimationEvents: 'toggleranimation'
-			} )
-			.on( 'eachchange', function( event, oldValue ) {
-				self._viewNotifier.notify( 'change' );
 			} );
+
+			this._initialDraw();
 		},
 
 		/**
@@ -160,7 +140,7 @@
 					}
 				}
 
-				self._updateValue();
+				self._viewNotifier.notify( 'change' );
 			} )
 			.appendTo( this.$precisionContainer );
 
@@ -194,7 +174,7 @@
 					}
 				}
 
-				self._updateValue();
+				self._viewNotifier.notify( 'change' );
 			} )
 			.appendTo( this.$calendarContainer );
 
@@ -269,9 +249,6 @@
 				inputExtender.destroy();
 			}
 
-			this.$input.off( 'eachchange' );
-
-			this.$input = null;
 			this.$precision = null;
 			this.$precisionContainer = null;
 			this.$calendar = null;
@@ -281,33 +258,17 @@
 		},
 
 		/**
-		 * Builds a time.Time object from the widget's current input and advanced adjustments.
-		 *
-		 * @return {time.Time}
-		 */
-		_updateValue: function() {
-			var value = new Time( this.$input.val(), this.valueCharacteristics() );
-
-			this._setRawValue( value );
-			this._updatePreview();
-			this._updateCalendarHint( value );
-			this._viewNotifier.notify( 'change' );
-
-			return value;
-		},
-
-		/**
 		 * @see jQuery.valueview.Expert.valueCharacteristics
 		 */
 		valueCharacteristics: function() {
-			var value = this.viewState().value();
+			var options = {},
+				precision = this.$precision && this.$precision.data( 'listrotator' ).value(),
+				calendarname = this.$calendar && this.$calendar.data( 'listrotator' ).value(),
+				value = this.viewState() && this.viewState().value();
+
 			if( value ) {
 				value = value.getValue();
 			}
-
-			var options = {},
-				precision = this.$precision && this.$precision.data( 'listrotator' ).value(),
-				calendarname = this.$calendar && this.$calendar.data( 'listrotator' ).value();
 
 			options.precision = precision || value && value.precision();
 			options.calendar = calendarname ? this._calendarNameToUri( calendarname ) : ( value && value.calendarURI() );
@@ -323,7 +284,7 @@
 		 * Updates the preview.
 		 */
 		_updatePreview: function() {
-			this.preview.update( this._viewState.getFormattedValue() );
+			this.preview.update( this.viewState().getFormattedValue() );
 		},
 
 		/**
@@ -366,7 +327,7 @@
 						var listrotator = self.$calendar.data( 'listrotator' );
 
 							listrotator.element.one( 'listrotatorselected', function ( event ) {
-								self._updateValue();
+								self._viewNotifier.notify( 'change' );
 							} );
 
 							self.$calendar.data( 'listrotator' ).rotate( otherCalendar );
@@ -380,101 +341,36 @@
 			}
 		},
 
-		/**
-		 * @see jQuery.valueview.Expert._getRawValue
-		 *
-		 * @return {string|null}
-		 */
-		_getRawValue: function() {
-			return ( ( this._newValue !== false )
-				? this._newValue
-				: this.$input.val() ) || null;
-		},
+		_initialDraw: function() {
+			var value = this.viewState().value();
+			if( value ) {
+				value = value.getValue();
 
-		/**
-		 * @see jQuery.valueview.Expert._setRawValue
-		 *
-		 * @param {time.Time|string|null} time
-		 */
-		_setRawValue: function( rawValue ) {
-			// FIXME: The only case in which this is not Time is when you cancel the
-			// edit and then start editing again.
-			if( rawValue instanceof Time ) {
-				rawValue = rawValue.text();
+				var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
+				if( considerInputExtender ) {
+					this.$precision.data( 'listrotator' ).rotate( value.precision() );
+					this.$calendar.data( 'listrotator' ).rotate( value.calendar() );
+				}
 			}
-			else if( typeof rawValue !== 'string' ) {
-				rawValue = null;
-			}
-			this._newValue = rawValue;
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert.rawValueCompare
-		 */
-		rawValueCompare: function( time1, time2 ) {
-			if( time2 === undefined ) {
-				time2 = this._getRawValue();
-			}
-
-			if( time1 === null && time2 === null ) {
-				return true;
-			}
-
-			// FIXME: This is fragile, but I think it does the right thing
-			if( time1 instanceof Time ) {
-				time1 = time1.text();
-			}
-
-			if( time2 instanceof Time ) {
-				time2 = time2.text();
-			}
-
-			return time1 === time2;
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert.draw
 		 */
 		draw: function() {
+			PARENT.prototype.draw.call( this );
+
 			var value = this.viewState().value();
 			if( value ) {
 				value = value.getValue();
-			}
-
-			this.$input.prop( 'disabled', this._viewState.isDisabled() );
-
-			if( this._newValue !== false ) {
-				if( !this.$input.val() ) {
-					this.$input.val( this._newValue );
-				}
-				this._newValue = false;
 			}
 
 			var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
 
 			if( considerInputExtender ) {
 				this._updateCalendarHint( value );
-				if( value ) {
-					this.$precision.data( 'listrotator' ).rotate( value.precision() );
-					this.$calendar.data( 'listrotator' ).rotate( value.calendar() );
-				}
-
 				this._updatePreview();
 			}
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert.focus
-		 */
-		focus: function() {
-			this.$input.focusAt( 'end' );
-		},
-
-		/**
-		 * @see jQuery.valueview.Expert.blur
-		 */
-		blur: function() {
-			this.$input.blur();
 		}
 	} );
 
