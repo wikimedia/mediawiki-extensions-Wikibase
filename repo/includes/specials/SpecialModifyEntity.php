@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use UserInputException;
+use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
@@ -42,6 +43,13 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected $rightsText;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var ChangeOpFactory
+	 */
+	protected $changeOpFactory;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
@@ -54,6 +62,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
+
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
 	}
 
 	/**

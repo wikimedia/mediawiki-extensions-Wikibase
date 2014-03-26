@@ -63,7 +63,13 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	protected function setValue( $entity, $language, $value ) {
 		$value = $value === '' ? null : $value;
 		$summary = $this->getSummary( 'wbsetdescription' );
-		$changeOp = new ChangeOpDescription( $language, $value );
+
+		if ( $value === null ) {
+			$changeOp = $this->changeOpFactory->newRemoveDescriptionOp( $language );
+		} else {
+			$changeOp = $this->changeOpFactory->newSetDescriptionOp( $language, $value );
+		}
+
 		$changeOp->apply( $entity, $summary );
 
 		return $summary;

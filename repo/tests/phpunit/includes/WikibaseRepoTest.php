@@ -130,6 +130,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\SummaryFormatter', $returnValue );
 	}
 
+	public function testGetChangeOpFactory() {
+		$returnValue = $this->getDefaultInstance()->getChangeOpFactory();
+		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpFactory', $returnValue );
+	}
+
 	/**
 	 * @return WikibaseRepo
 	 */
