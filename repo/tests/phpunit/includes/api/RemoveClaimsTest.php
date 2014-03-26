@@ -56,8 +56,8 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		);
 
 		foreach( $claims as $key => $claim ){
-			$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
-			$claim->setGuid( $guidGenerator->newGuid() );
+			$guidGenerator = new ClaimGuidGenerator();
+			$claim->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
 			$entity->addClaim( $claim );
 		}
 

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\SiteLinkCache;
+use Wikibase\SiteLinkLookup;
 use Wikibase\Term;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -39,15 +39,14 @@ class ChangeOpsMerge {
 	 */
 	private $labelDescriptionDuplicateDetector;
 
-	/**
-	 * @var SitelinkCache
-	 */
-	private $sitelinkCache;
+	/** @var SiteLinkLookup */
+	private $sitelinkLookup;
 
 	/**
 	 * @var ClaimGuidValidator
 	 */
 	private $claimGuidValidator;
+
 	/**
 	 * @var ClaimGuidParser
 	 */
@@ -57,7 +56,7 @@ class ChangeOpsMerge {
 	 * @param Item $fromItem
 	 * @param Item $toItem
 	 * @param LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector
-	 * @param SitelinkCache $sitelinkCache
+	 * @param SiteLinkLookup $sitelinkLookup
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
 	 */
@@ -65,7 +64,7 @@ class ChangeOpsMerge {
 		Item $fromItem,
 		Item $toItem,
 		LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector,
-		SitelinkCache $sitelinkCache,
+		SiteLinkLookup $sitelinkLookup,
 		$ignoreConflicts = array()
 	) {
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
@@ -76,9 +75,9 @@ class ChangeOpsMerge {
 		$this->toChangeOps = new ChangeOps();
 		$this->ignoreConflicts = $ignoreConflicts;
 		$this->labelDescriptionDuplicateDetector = $labelDescriptionDuplicateDetector;
-		$this->sitelinkCache = $sitelinkCache;
+		$this->sitelinkLookup = $sitelinkLookup;
 
-		//@todo inject me
+		//@todo FIXME: inject me
 		$this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
 	}
@@ -180,7 +179,7 @@ class ChangeOpsMerge {
 			} else {
 			$this->toChangeOps->add( new ChangeOpClaim(
 				$toClaim,
-				new ClaimGuidGenerator( $this->toItem->getId() ),
+				new ClaimGuidGenerator(),
 				$this->claimGuidValidator,
 				$this->claimGuidParser
 				) );
@@ -251,7 +250,7 @@ class ChangeOpsMerge {
 				$this->toItem
 			);
 		}
-		$conflictingSitelinks = $this->sitelinkCache->getConflictsForItem( $this->toItem );
+		$conflictingSitelinks = $this->sitelinkLookup->getConflictsForItem( $this->toItem );
 
 		$conflictString = '';
 		if( $conflictingTerms !== array() ) {
