@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_5adef115",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-26T14:47:48Z",
+      "side": 1,
+      "message": "we can try fallback to MessageException (in lib) and then generic",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
