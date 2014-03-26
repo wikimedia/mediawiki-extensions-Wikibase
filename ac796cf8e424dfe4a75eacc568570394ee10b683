@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce09bb20_a7f174ca",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-26T12:00:31Z",
+      "side": 1,
+      "message": "Mhm, it would need to be called something like onlyShowContentForType. Maybe we should ask Daniel.",
+      "parentUuid": "ce09bb20_8728b033",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce09bb20_2759e401",
         "filename": "repo/includes/ClaimHtmlGenerator.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-26T11:56:00Z",
       "side": 1,
       "message": "Is it ok that the old implementation did /not/ used non-breaking spaces in non-main snaks? Now it always does.",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce09bb20_67c35c62",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-26T12:00:31Z",
+      "side": 1,
+      "message": "I don\u0027t know if we need this at all.",
+      "parentUuid": "ce09bb20_2759e401",
       "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
