@@ -25,8 +25,8 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
-		$validClaimGuid = $guidGenerator->newGuid();
+		$guidGenerator = new ClaimGuidGenerator();
+		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
 		$validRank = 1;
 
 		$args = array();

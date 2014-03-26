@@ -324,10 +324,10 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			new StringValue( 'cats!' )
 		);
 
-		$claimGuidGenerator = new ClaimGuidGenerator( $itemId );
+		$claimGuidGenerator = new ClaimGuidGenerator();
 
 		$claim = new Claim( $snak );
-		$claim->setGuid( $claimGuidGenerator->newGuid() );
+		$claim->setGuid( $claimGuidGenerator->newGuid( $itemId ) );
 
 		$entity->addClaim( $claim );
 
