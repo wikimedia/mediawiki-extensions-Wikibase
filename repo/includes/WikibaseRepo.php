@@ -5,6 +5,7 @@ namespace Wikibase\Repo;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use ValueFormatters\FormatterOptions;
+use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -13,6 +14,8 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
+use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\EntityIdLinkFormatter;
@@ -318,6 +321,22 @@ class WikibaseRepo {
 	 */
 	public function getClaimGuidParser() {
 		return new ClaimGuidParser( $this->getEntityIdParser() );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ChangeOpFactory
+	 */
+	public function getChangeOpFactory() {
+		//TODO: cache instance locally
+		return new ChangeOpFactory(
+			new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() ),
+			$this->getStore()->newSiteLinkCache(),
+			new ClaimGuidGenerator(),
+			new ClaimGuidValidator( $this->getEntityIdParser() ),
+			new ClaimGuidParser( $this->getEntityIdParser() )
+		);
 	}
 
 	/**

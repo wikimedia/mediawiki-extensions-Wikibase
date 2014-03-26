@@ -3,9 +3,14 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\ObjectComparer;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -37,16 +42,46 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
+	protected function makeChangeOpsMerge(
+		Item $fromItem,
+		Item $toItem,
+		$ignoreConflicts,
+		$termCalls, $termConflicts,
+		$linkCalls, $linkConflicts
+	) {
+		$duplicateDetector = $this->getMockLabelDescriptionDuplicateDetector( $termCalls, $termConflicts );
+		$linkCache = $this->getMockSitelinkCache( $linkCalls, $linkConflicts );
+
+		$idParser = new BasicEntityIdParser();
+		$changeOpFactory = new ChangeOpFactory(
+			$duplicateDetector,
+			$linkCache,
+			new ClaimGuidGenerator(),
+			new ClaimGuidValidator( $idParser ),
+			new ClaimGuidParser( $idParser )
+		);
+
+		return new ChangeOpsMerge(
+			$fromItem,
+			$toItem,
+			$ignoreConflicts,
+			$duplicateDetector,
+			$linkCache,
+			$changeOpFactory
+		);
+	}
+
 	/**
 	 * @dataProvider provideValidConstruction
 	 */
-	public function testCanConstruct( $from, $to, $ignoreConflicts ) {
-		$changeOps = new ChangeOpsMerge(
+	public function testCanConstruct(
+		$from, $to, $ignoreConflicts ) {
+		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			$this->getMockLabelDescriptionDuplicateDetector( 0 ),
-			$this->getMockSitelinkCache( 0 ),
-			$ignoreConflicts
+			$ignoreConflicts,
+			0, null,
+			0, null
 		);
 		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
@@ -68,12 +103,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidIgnoreConflicts( $from, $to, $ignoreConflicts ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new ChangeOpsMerge(
+		$this->makeChangeOpsMerge(
 			$from,
 			$to,
-			$this->getMockLabelDescriptionDuplicateDetector( 0 ),
-			$this->getMockSitelinkCache( 0 ),
-			$ignoreConflicts
+			$ignoreConflicts,
+			0, null,
+			0, null
 		);
 	}
 
@@ -100,12 +135,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	public function testCanApply( $fromData, $toData, $expectedFromData, $expectedToData, $ignoreConflicts = array() ) {
 		$from = self::getItem( 'Q111', $fromData );
 		$to = self::getItem( 'Q222', $toData );
-		$changeOps = new ChangeOpsMerge(
+		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			$this->getMockLabelDescriptionDuplicateDetector( 1 ),
-			$this->getMockSitelinkCache( 1 ),
-			$ignoreConflicts
+			$ignoreConflicts,
+			1, array(),
+			1, array()
 		);
 
 		$this->assertTrue( $from->equals( new Item( $fromData ) ), 'FromItem was not filled correctly' );
@@ -336,12 +371,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$conflicts = array( $this->getMockTerm( 999, 'imalang', 'imatype', 'foog text' ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
-		$changeOps = new ChangeOpsMerge(
+		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			$this->getMockLabelDescriptionDuplicateDetector( 1, $conflicts ),
-			$this->getMockSitelinkCache( 1 ),
-			array()
+			array(),
+			1, $conflicts,
+			1, array()
 		);
 
 		$this->setExpectedException(
@@ -355,12 +390,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$conflicts = array( $this->getMockTerm( 111, 'imalang', 'imatype', 'foog text' ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
-		$changeOps = new ChangeOpsMerge(
+		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			$this->getMockLabelDescriptionDuplicateDetector( 1, $conflicts ),
-			$this->getMockSitelinkCache( 1 ),
-			array()
+			array(),
+			1, $conflicts,
+			1, array()
 		);
 
 		$changeOps->apply();
@@ -371,12 +406,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$conflicts = array( array( 'itemId' => 8888, 'siteId' => 'eewiki', 'sitePage' => 'imapage' ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
-		$changeOps = new ChangeOpsMerge(
+		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			$this->getMockLabelDescriptionDuplicateDetector( 1 ),
-			$this->getMockSitelinkCache( 1, $conflicts ),
-			array()
+			array(),
+			1, array(),
+			1, $conflicts
 		);
 
 		$this->setExpectedException(
@@ -390,12 +425,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$conflicts = array( array( 'itemId' => 111, 'siteId' => 'eewiki', 'sitePage' => 'imapage' ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
-		$changeOps = new ChangeOpsMerge(
+		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			$this->getMockLabelDescriptionDuplicateDetector( 1 ),
-			$this->getMockSitelinkCache( 1, $conflicts ),
-			array()
+			array(),
+			1, array(),
+			1, $conflicts
 		);
 
 		$changeOps->apply();
