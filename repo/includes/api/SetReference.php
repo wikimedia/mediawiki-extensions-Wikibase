@@ -183,7 +183,7 @@ class SetReference extends ModifyClaim {
 		$hash = isset( $params['reference'] ) ? $params['reference'] : '';
 		$index = isset( $params['index'] ) ? $params['index'] : null;
 
-		return new ChangeOpReference( $claimGuid, $reference, $hash, $index );
+		return $this->changeOpFactory->newSetReferenceOp( $claimGuid, $reference, $hash, $index );
 	}
 
 	/**
