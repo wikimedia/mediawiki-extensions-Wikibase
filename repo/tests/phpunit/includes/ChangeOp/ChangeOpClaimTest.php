@@ -31,8 +31,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		return new Claim( new PropertyNoValueSnak( 7 ) );
 	}
 
-	public function getValidGuidGenerator( ItemId $itemId ) {
-		return new ClaimGuidGenerator( $itemId );
+	public function getValidGuidGenerator() {
+		return new ClaimGuidGenerator();
 	}
 
 	private function getMockGuidValidator() {
@@ -84,7 +84,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'q42' );
 		new ChangeOpClaim(
 			$this->getValidClaim(),
-			$this->getValidGuidGenerator( $itemId),
+			$this->getValidGuidGenerator(),
 			$this->getMockGuidValidator(),
 			$this->getMockGuidParser( $itemId ),
 			$invalidIndex
@@ -168,7 +168,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOpClaim = new ChangeOpClaim(
 			$claim,
-			new ClaimGuidGenerator( $entity->getId() ),
+			new ClaimGuidGenerator(),
 			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(), //@todo mock me!
 			WikibaseRepo::getDefaultInstance()->getClaimGuidParser(), //@todo mock me!
 			$index
@@ -204,7 +204,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->makeNewItemWithClaim( 'Q777', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
-		$guidGenerator = new ClaimGuidGenerator( $item->getId() );
+		$guidGenerator = new ClaimGuidGenerator();
 
 		// change main snak to "some value"
 		$newSnak = new PropertySomeValueSnak( 67573284 );
@@ -265,8 +265,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$entity->setId( new ItemId( $itemId ) );
 
 		$claim = $entity->newClaim( $snak );
-		$guidGenerator = new ClaimGuidGenerator( $entity->getId() );
-		$claim->setGuid( $guidGenerator->newGuid() );
+		$guidGenerator = new ClaimGuidGenerator();
+		$claim->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
 
 		$claims = new Claims();
 		$claims->addClaim( $claim );

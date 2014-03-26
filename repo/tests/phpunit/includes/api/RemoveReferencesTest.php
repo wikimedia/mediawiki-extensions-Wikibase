@@ -79,8 +79,8 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-			$guidGenerator = new ClaimGuidGenerator( $item->getId() );
-			$statement->setGuid( $guidGenerator->newGuid() );
+			$guidGenerator = new ClaimGuidGenerator();
+			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->addClaim( $statement );
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );

@@ -143,8 +143,8 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 			)
 		);
 
-		$claimGuidGenerator = new ClaimGuidGenerator( $entity2->getId() );
-		$claim->setGuid( $claimGuidGenerator->newGuid() );
+		$guidGenerator = new ClaimGuidGenerator();
+		$claim->setGuid( $guidGenerator->newGuid( $entity2->getId() ) );
 
 		$entity2->setLabel( 'en', 'foo' );
 		$entity2->addClaim( $claim );

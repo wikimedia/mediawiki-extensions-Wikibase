@@ -88,8 +88,8 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$propId = $this->makeProperty( $prop, 'string' )->getId();
 			$claim = new Statement( new PropertyValueSnak( $propId, new StringValue( '^_^' ) ) );
 
-			$guidGenerator = new ClaimGuidGenerator( $item->getId() );
-			$claim->setGuid( $guidGenerator->newGuid() );
+			$guidGenerator = new ClaimGuidGenerator();
+			$claim->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->addClaim( $claim );
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
