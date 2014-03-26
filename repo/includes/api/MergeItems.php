@@ -6,17 +6,13 @@ use ApiBase;
 use InvalidArgumentException;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemContent;
-use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SiteLinkLookup;
 use Wikibase\Summary;
-use Wikibase\TermIndex;
 
 /**
  * @since 0.5
@@ -30,20 +26,14 @@ use Wikibase\TermIndex;
 class MergeItems extends ApiWikibase {
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var ChangeOpFactory
 	 */
-	private $sitelinkCache;
-
-	/**
-	 * @var TermIndex
-	 */
-	protected $termIndex;
+	protected $changeOpFactory;
 
 	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$this->sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
-		$this->termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
 	}
 
 	/**
@@ -90,13 +80,9 @@ class MergeItems extends ApiWikibase {
 		 * @var Item $toEntity
 		 */
 		try{
-			$changeOps = new ChangeOpsMerge(
+			$changeOps = $this->changeOpFactory->newMergeOps(
 				$fromEntity,
 				$toEntity,
-				new LabelDescriptionDuplicateDetector(
-					$this->termIndex
-				),
-				$this->sitelinkCache,
 				$ignoreConflicts
 			);
 			$changeOps->apply();

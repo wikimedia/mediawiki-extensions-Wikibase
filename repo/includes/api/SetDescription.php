@@ -51,12 +51,13 @@ class SetDescription extends ModifyTerm {
 		}
 
 		if ( $description === "" ) {
-			wfProfileOut( __METHOD__ );
-			return new ChangeOpDescription( $language, null );
+			$op = $this->changeOpFactory->newRemoveDescriptionOp( $language );
 		} else {
-			wfProfileOut( __METHOD__ );
-			return new ChangeOpDescription( $language, $description );
+			$op = $this->changeOpFactory->newSetDescriptionOp( $language, $description );
 		}
+
+		wfProfileOut( __METHOD__ );
+		return $op;
 	}
 
 	/**
