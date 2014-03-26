@@ -109,13 +109,14 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.4 (in development)
+### 0.4 (2014-03-26)
 
 * Remove trimming from StringValue expert
 * Use ViewState::getFormattedValue for GlobeCoordinate formatting
 * Make some of the animations user definable
 * Use ViewState formatting and parsing in TimeValue
 * Make ValueView responsible for static mode and remove BifidExpert
+* Don't redraw ValueView in {en,dis}able if nothing changed
 
 ### 0.3.3 (2014-02-24)
 
