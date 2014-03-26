@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_2b589134",
+        "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-26T18:22:07Z",
+      "side": 1,
+      "message": "Like below. Oops! and Blarg! aren\u0027t that informative, I think.",
+      "parentUuid": "ee14bf34_8f999c73",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_34a429af",
         "filename": "lib/tests/phpunit/i18n/WikibaseExceptionLocalizerTest.php",
         "patchSetId": 1
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Just throw an empty LogicException() and questions like these shouldn\u0027t occur.",
       "parentUuid": "ee14bf34_4fc2643a",
+      "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_0b3dcdb8",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-26T18:22:07Z",
+      "side": 1,
+      "message": "That would be correct, Thiemo.",
+      "parentUuid": "ee14bf34_0f8b4cc5",
       "revId": "f074497a88e9387789b3370d75b6e226728ad8a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
