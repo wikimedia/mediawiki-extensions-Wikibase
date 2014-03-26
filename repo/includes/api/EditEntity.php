@@ -241,7 +241,7 @@ class EditEntity extends ModifyEntity {
 			$changeOps->add(
 				$this->getClaimsChangeOps(
 					$data['claims'],
-					new ClaimGuidGenerator( $entity->getId() ),
+					new ClaimGuidGenerator(),
 					$this->claimGuidValidator,
 					$this->claimGuidParser
 				)

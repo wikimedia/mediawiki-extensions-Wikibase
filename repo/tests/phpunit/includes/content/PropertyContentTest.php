@@ -53,7 +53,7 @@ class PropertyContentTest extends EntityContentTest {
 		$propertyContent1->getProperty()->setDataTypeId( 'wikibase-item' );
 
 		$status = $propertyContent1->save( 'create property', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), "property creation should work" );
+		$this->assertTrue( $status->isOK(), "property creation should wok" );
 
 		$propertyContent1->getProperty()->setLabel( 'en', $prefix . 'testLabelUniquenessRestriction' );
 

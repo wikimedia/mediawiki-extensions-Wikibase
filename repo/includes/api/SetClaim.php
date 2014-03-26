@@ -78,7 +78,7 @@ class SetClaim extends ModifyClaim {
 
 		$changeop = new ChangeOpClaim(
 			$claim,
-			new ClaimGuidGenerator( $guid->getEntityId() ),
+			new ClaimGuidGenerator(),
 			$this->getClaimGuidValidator(),
 			$this->claimGuidParser,
 			( isset( $params['index'] ) ? $params['index'] : null )
