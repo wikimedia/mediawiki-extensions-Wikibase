@@ -15,6 +15,12 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.4.1 (dev)
+
+#### Enhancements
+
+* Defined parameters of the promises returned by ValueFormatter's and ValueParser's format/parse functions.
+
 ### 0.4.0 (2014-03-24)
 
 #### Breaking changes

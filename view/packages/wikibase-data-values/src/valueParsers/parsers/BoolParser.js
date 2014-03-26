@@ -33,10 +33,7 @@
 				}
 			}
 
-			if( deferred.state() === 'pending' ) {
-				// TODO: Clearly define reject() behaviour / parameters returned by reject()
-				deferred.reject( 'BoolParser: Unable to parse "' + rawValue + '"' );
-			}
+			deferred.reject( 'Unable to parse "' + rawValue + '"' );
 
 			return deferred.promise();
 		}
