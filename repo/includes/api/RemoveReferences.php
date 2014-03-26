@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpReferenceRemove;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Claim\Statement;
@@ -84,7 +83,7 @@ class RemoveReferences extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $referenceHashes as $referenceHash ) {
-			$changeOps[] = new ChangeOpReferenceRemove( $claimGuid, $referenceHash );
+			$changeOps[] = $this->changeOpFactory->newRemoveReferenceOp( $claimGuid, $referenceHash );
 		}
 
 		return $changeOps;

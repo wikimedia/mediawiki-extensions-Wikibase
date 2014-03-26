@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiMain;
 use ApiBase;
+use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
@@ -43,6 +44,11 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $snakValidation;
 
 	/**
+	 * @var ChangeOpFactory
+	 */
+	protected $changeOpFactory;
+
+	/**
 	 * see ApiBase::__construct()
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
@@ -63,6 +69,7 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
 	}
 
 	/**

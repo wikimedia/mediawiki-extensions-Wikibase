@@ -6,21 +6,18 @@ use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use LogicException;
 use OutOfBoundsException;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use FormatJson;
-use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -35,22 +32,12 @@ use Wikibase\Summary;
 class SetClaim extends ModifyClaim {
 
 	/**
-	 * @var ClaimGuidValidator
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
 	 */
-	private $claimGuidValidator;
-
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-	}
-
-	/**
-	 * @return ClaimGuidValidator
-	 */
-	private function getClaimGuidValidator() {
-		if( !isset( $this->claimGuidValidator ) ) {
-			$this->claimGuidValidator = WikibaseRepo::getDefaultInstance()->getClaimGuidValidator();
-		}
-		return $this->claimGuidValidator;
 	}
 
 	/**
@@ -76,11 +63,8 @@ class SetClaim extends ModifyClaim {
 
 		$summary = $this->getSummary( $params, $claim, $entity );
 
-		$changeop = new ChangeOpClaim(
+		$changeop = $this->changeOpFactory->newSetClaimOp(
 			$claim,
-			new ClaimGuidGenerator(),
-			$this->getClaimGuidValidator(),
-			$this->claimGuidParser,
 			( isset( $params['index'] ) ? $params['index'] : null )
 		);
 		try{
@@ -140,6 +124,9 @@ class SetClaim extends ModifyClaim {
 		} catch( OutOfBoundsException $outOfBoundsException ) {
 			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
 		}
+
+		// Note: since dieUsage() never returns, this should be unreachable!
+		throw new LogicException( 'Unreachable code' );
 	}
 
 	/**

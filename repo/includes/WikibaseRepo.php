@@ -13,6 +13,8 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevisionLookup;
+use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\store\EntityStore;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
@@ -309,6 +311,22 @@ class WikibaseRepo {
 	 */
 	public function getClaimGuidParser() {
 		return new ClaimGuidParser( $this->getEntityIdParser() );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ChangeOpFactory
+	 */
+	public function getChangeOpFactory() {
+		//TODO: cache instance locally
+		return new WikibaseChangeOpFactory(
+			new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() ),
+			$this->getStore()->newSiteLinkCache(),
+			new ClaimGuidGenerator(),
+			new ClaimGuidValidator( $this->getEntityIdParser() ),
+			new ClaimGuidParser( $this->getEntityIdParser() )
+		);
 	}
 
 	/**
