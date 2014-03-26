@@ -115,5 +115,5 @@ Then /^Statement name of group (.+) should be the label of (.+)$/ do |group_inde
 end
 
 Then /^Statement string value of claim (.+) in group (.+) should be (.+)$/ do |claim_index, group_index, value|
-  on(ItemPage).statement_string_value_element(group_index, claim_index).attribute_value("value").should == value
+  on(ItemPage).statement_string_value(group_index, claim_index).should == value
 end
