@@ -58,7 +58,7 @@ class YearTimeParser extends StringValueParser {
 	protected function stringParse( $value ) {
 		list( $sign, $year ) = $this->eraParser->parse( $value );
 
-		if( !preg_match( '/\d+/', $year ) ) {
+		if( !preg_match( '/^\d+$/', $year ) ) {
 			throw new ParseException( 'Failed to parse year: ' . $value );
 		}
 
