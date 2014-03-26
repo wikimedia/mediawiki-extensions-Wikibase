@@ -109,6 +109,10 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.4.1 (2014-03-26)
+
+* Require data-values/javascript 0.4
+
 ### 0.4 (2014-03-26)
 
 * Remove trimming from StringValue expert
