@@ -117,9 +117,9 @@ class SetQualifier extends ModifyClaim {
 		$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
 		if ( isset( $params['snakhash'] ) ) {
-			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, $params['snakhash'] );
+			$changeOp = $this->changeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, $params['snakhash'] );
 		} else {
-			$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '' );
+			$changeOp = $this->changeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, '' );
 		}
 
 		return $changeOp;

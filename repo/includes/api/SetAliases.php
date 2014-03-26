@@ -123,16 +123,14 @@ class SetAliases extends ModifyEntity {
 		// Set the list of aliases to a user given one OR add/ remove certain entries
 		if ( isset( $params['set'] ) ) {
 			$changeOps[] =
-				new ChangeOpAliases(
+				$this->changeOpFactory->newSetAliasesOp(
 					$language,
 					array_map(
 						function( $str ) use ( $stringNormalizer ) {
 							return $stringNormalizer->trimToNFC( $str );
 						},
 						$params['set']
-					),
-					'set',
-					$this->createSummary( $params )
+					)
 				);
 		} else {
 			// FIXME: if we have ADD and REMOVE operations in the same call,
@@ -140,31 +138,27 @@ class SetAliases extends ModifyEntity {
 			// This will cause the edit summary to be overwritten by the last ChangeOp beeing applied.
 			if ( !empty( $params['add'] ) ) {
 				$changeOps[] =
-					new ChangeOpAliases(
+					$this->changeOpFactory->newAddAliasesOp(
 						$language,
 						array_map(
 							function( $str ) use ( $stringNormalizer ) {
 								return $stringNormalizer->trimToNFC( $str );
 							},
 							$params['add']
-						),
-						'add',
-						$this->createSummary( $params )
+						)
 					);
 			}
 
 			if ( !empty( $params['remove'] ) ) {
 				$changeOps[] =
-					new ChangeOpAliases(
+					$this->changeOpFactory->newRemoveAliasesOp(
 						$language,
 						array_map(
 							function( $str ) use ( $stringNormalizer ) {
 								return $stringNormalizer->trimToNFC( $str );
 							},
 							$params['remove']
-						),
-						'remove',
-						$this->createSummary( $params )
+						)
 					);
 			}
 		}

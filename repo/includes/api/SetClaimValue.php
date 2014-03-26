@@ -3,9 +3,7 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
@@ -41,11 +39,9 @@ class SetClaimValue extends ModifyClaim {
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$guidGenerator = new ClaimGuidGenerator();
-		$changeOp = new ChangeOpMainSnak(
+		$changeOp = $this->changeOpFactory->newSetMainSnakOp(
 			$claimGuid,
-			$snak,
-			$guidGenerator
+			$snak
 		);
 
 		try {
