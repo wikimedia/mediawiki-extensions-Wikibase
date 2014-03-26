@@ -51,8 +51,11 @@
 		 *
 		 * @param {*} rawValue
 		 *
-		 * @return $.Promise In the resolved callbacks the first parameter will be the parsed
-		 *         DataValue object or null for an empty value.
+		 * @return {jQuery.Promise}
+		 *         Resolved parameters:
+		 *         - {dataValues.DataValue|null} Parsed DataValue object or "null" if empty.
+		 *         Rejected parameters:
+		 *         - {string} HTML error message.
 		 */
 		parse: util.abstractMember
 

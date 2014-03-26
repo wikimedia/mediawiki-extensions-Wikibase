@@ -30,9 +30,7 @@
 				deferred.resolve( new dv.NumberValue( parseInt( rawValue, 10 ) ) );
 			}
 
-			if( deferred.state() === 'pending' ) {
-				deferred.reject( 'InParser: Unable to parse "' + rawValue + '"' );
-			}
+			deferred.reject( 'Unable to parse "' + rawValue + '"' );
 
 			return deferred.promise();
 		}

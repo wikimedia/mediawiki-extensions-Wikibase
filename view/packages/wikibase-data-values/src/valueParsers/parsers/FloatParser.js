@@ -30,9 +30,7 @@
 				deferred.resolve( new dv.NumberValue( parseFloat( rawValue ) ) );
 			}
 
-			if( deferred.state() === 'pending' ) {
-				deferred.reject( 'FloatParser: Unable to parse "' + rawValue + '"' );
-			}
+			deferred.reject( 'Unable to parse "' + rawValue + '"' );
 
 			return deferred.promise();
 		}

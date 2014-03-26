@@ -51,10 +51,12 @@
 		 * @param {string} [dataTypeId]
 		 * @param {string} [outputType] The output's preferred MIME type
 		 *
-		 * @return {$.Promise}
-		 *         Parameters:
+		 * @return {jQuery.Promise}
+		 *         Resolved parameters:
 		 *         - {string|null} Formatted DataValue.
 		 *         - {dataValues.DataValue|null} DataValue object that has been formatted.
+		 *         Rejected parameters:
+		 *         - {string} HTML error message.
 		 */
 		format: util.abstractMember
 
