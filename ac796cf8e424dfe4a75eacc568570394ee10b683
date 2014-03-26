@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_a0c84078",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-26T17:31:33Z",
+      "side": 1,
+      "message": "I guess we want to fix that in the backend html rendering. We /should/ show \"unknown value\" and \"no value\" in the non-JS view too.",
+      "parentUuid": "ae0e4726_b7fe48aa",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce09bb20_2759e401",
         "filename": "repo/includes/ClaimHtmlGenerator.php",
         "patchSetId": 6
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I don\u0027t know if we need this at all.",
       "parentUuid": "ce09bb20_2759e401",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_e0951844",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-26T17:31:33Z",
+      "side": 1,
+      "message": "I\u0027ve no clue why we would want this.. What\u0027s the disadvantage of leaving an empty formatted value an empty string? Why do we want to display a nbsp?",
+      "parentUuid": "ce09bb20_67c35c62",
       "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
