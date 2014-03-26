@@ -5,7 +5,6 @@ namespace Wikibase\Api;
 use ApiBase;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpException;
 
@@ -48,7 +47,9 @@ class CreateClaim extends ModifyClaim {
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
-		$changeOp = new ChangeOpMainSnak( '', $snak, new ClaimGuidGenerator() );
+
+		/* @var ChangeOpMainSnak $changeOp */
+		$changeOp = $this->changeOpFactory->newSetMainSnakOp( '', $snak );
 
 		try {
 			$changeOp->apply( $entity, $summary );
