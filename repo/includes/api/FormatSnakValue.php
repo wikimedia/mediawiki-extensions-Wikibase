@@ -8,6 +8,7 @@ use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
 use LogicException;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
@@ -69,7 +70,11 @@ class FormatSnakValue extends ApiWikibase {
 		$value = $this->decodeDataValue( $params['datavalue'] );
 		$dataTypeId = $this->getDataTypeId( $params );
 
-		$formatter = $this->getFormatter( $value );
+		try {
+			$formatter = $this->getFormatter( $value );
+		} catch ( DataValueMismatchException $ex ) {
+			$this->dieUsage( $ex->getMessage(), 'datavaluemismatch' );
+		}
 
 		if ( $formatter instanceof TypedValueFormatter ) {
 			// use data type id, if we can
@@ -165,7 +170,8 @@ class FormatSnakValue extends ApiWikibase {
 	public function getPossibleErrors() {
 		return array_merge(
 			parent::getPossibleErrors(),
-			array( array( 'code' => 'baddatavalue', 'info' => 'Failed to decode datavalue' ) )
+			array( array( 'code' => 'baddatavalue', 'info' => 'Failed to decode datavalue' ) ),
+			array( array( 'code' => 'datavaluemismatch' => 'info' => 'Data value mismatch' ) )
 		);
 	}
 

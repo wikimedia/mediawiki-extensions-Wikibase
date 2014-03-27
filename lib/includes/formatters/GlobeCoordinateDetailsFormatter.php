@@ -4,8 +4,7 @@ namespace Wikibase\Lib;
 
 use DataValues\GlobeCoordinateValue;
 use Html;
-use InvalidArgumentException;
-use Message;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\GeoCoordinateFormatter;
 use ValueFormatters\GlobeCoordinateFormatter;
@@ -34,7 +33,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 		parent::__construct( $options );
 
 		if ( !$options->hasOption( GeoCoordinateFormatter::OPT_FORMAT ) ) {
-			//TODO: what'S a good default? Should this be locale dependant? Configurable?
+			//TODO: what's a good default? Should this be locale dependant? Configurable?
 			$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
 		}
 
@@ -49,12 +48,16 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @param GlobeCoordinateValue $value The ID to format
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws DataValueMismatchException
 	 * @return string
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof GlobeCoordinateValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an GlobeCoordinateValue.' );
+			throw new DataValueMismatchException(
+				$value->getType(),
+				GlobeCoordinateValue::getType(),
+				'Data value type mismatch. Expected an GlobeCoordinateValue.'
+			);
 		}
 
 		$html = '';
