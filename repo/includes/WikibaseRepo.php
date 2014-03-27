@@ -335,12 +335,15 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
+	 * @param string $entityType
+	 *
 	 * @return ChangeOpFactory
 	 */
-	public function getChangeOpFactory() {
+	public function getChangeOpFactory( $entityType ) {
 		return new ChangeOpFactory(
+			$entityType,
 			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->newSiteLinkCache(),
+			$this->getTermValidatorFactory(),
 			new ClaimGuidGenerator(),
 			$this->getClaimGuidValidator(),
 			$this->getClaimGuidParser(),
@@ -584,7 +587,7 @@ class WikibaseRepo {
 	/**
 	 * @return TermValidatorFactory
 	 */
-	protected function getTermValidatorFactory() {
+	public function getTermValidatorFactory() {
 		$constraints = $this->getSettings()->getSetting( 'multilang-limits' );
 		$maxLength = $constraints['length'];
 

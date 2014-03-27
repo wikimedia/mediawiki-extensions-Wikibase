@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
@@ -15,7 +15,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class LabelUniquenessValidator implements EntityValidator {
+class LabelDescriptionUniquenessValidator implements EntityValidator {
 
 	/**
 	 * @var LabelDescriptionDuplicateDetector
@@ -37,7 +37,7 @@ class LabelUniquenessValidator implements EntityValidator {
 	 * @return Result
 	 */
 	public function validateEntity( Entity $entity ) {
-		$result = $this->duplicateDetector->detectLabelConflictsForEntity( $entity );
+		$result = $this->duplicateDetector->detectLabelDescriptionConflictsForEntity( $entity );
 		return $result;
 	}
 

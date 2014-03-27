@@ -37,6 +37,8 @@ class RemoveReferences extends ModifyClaim {
 		$entity = $entityRevision->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
+		$this->initChangOpFactory( $entity->getType() );
+
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {

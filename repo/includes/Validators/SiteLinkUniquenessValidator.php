@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
