@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_b9a2b239",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-27T13:12:16Z",
+      "side": 1,
+      "message": "Again here I thought our convention was do use short names?\ni..e EntityStoreWatcher instead of \\Wikibase\\store\\EntityStoreWatcher\nI could be wrong?",
+      "revId": "c170fa930c928497486bed9bf473123c94f2e7d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
