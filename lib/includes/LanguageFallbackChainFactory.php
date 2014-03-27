@@ -39,12 +39,12 @@ class LanguageFallbackChainFactory {
 	const FALLBACK_OTHERS = 4;
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	public $languageCache;
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	public $userLanguageCache;
 
@@ -54,10 +54,8 @@ class LanguageFallbackChainFactory {
 	public $anonymousPageViewCached;
 
 	/**
-	 * Constructor.
-	 *
-	 * @param $anonymousPageViewCached bool
-	 *          Whether full page outputs are cached for anons, so some fine-grained fallbacks shouldn't be used for them.
+	 * @param bool $anonymousPageViewCached Whether full page outputs are cached for anons, so some
+	 * fine-grained fallbacks shouldn't be used for them.
 	 */
 	public function __construct( $anonymousPageViewCached = false ) {
 		$this->anonymousPageViewCached = $anonymousPageViewCached;
@@ -67,7 +65,7 @@ class LanguageFallbackChainFactory {
 	 * Get the fallback chain based a single language, and specified fallback level.
 	 *
 	 * @param Language $language
-	 * @param mixed $mode bitfield of self::FALLBACK_*
+	 * @param int $mode Bitfield of self::FALLBACK_*
 	 *
 	 * @return LanguageFallbackChain
 	 */
@@ -89,7 +87,7 @@ class LanguageFallbackChainFactory {
 	 * Get the fallback chain based a single language code, and specified fallback level.
 	 *
 	 * @param string $languageCode
-	 * @param mixed $mode bitfield of self::FALLBACK_*
+	 * @param int $mode Bitfield of self::FALLBACK_*
 	 *
 	 * @return LanguageFallbackChain
 	 */
@@ -113,7 +111,7 @@ class LanguageFallbackChainFactory {
 	 * Build fallback chain array for a given language or validated language code.
 	 *
 	 * @param $language Language object or language code as string
-	 * @param $mode bitfield of self::FALLBACK_*
+	 * @param int $mode Bitfield of self::FALLBACK_*
 	 * @param LanguageFallbackChain[] $chain for recursive calls
 	 * @param array $fetched for recursive calls
 	 *
@@ -136,6 +134,7 @@ class LanguageFallbackChainFactory {
 		}
 
 		if ( $mode & self::FALLBACK_VARIANTS ) {
+			/** @var Language $parentLanguage */
 			$pieces = explode( '-', $languageCode );
 			if ( !in_array( $pieces[0], LanguageConverter::$languagesWithVariants ) ) {
 				$parentLanguage = null;

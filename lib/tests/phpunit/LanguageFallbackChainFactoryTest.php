@@ -18,7 +18,11 @@ use Wikibase\LanguageFallbackChainFactory;
  */
 class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 
-	private function assertChainEquals( $expectedItems, $chain ) {
+	/**
+	 * @param array $expectedItems
+	 * @param \Wikibase\LanguageWithConversion[] $chain
+	 */
+	private function assertChainEquals( array $expectedItems, array $chain ) {
 		$this->assertEquals( count( $expectedItems ), count( $chain ) );
 
 		foreach ( $expectedItems as $i => $expected ) {
@@ -376,4 +380,5 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 			),
 		);
 	}
+
 }

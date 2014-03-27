@@ -163,4 +163,5 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, array(), null ),
 		);
 	}
+
 }

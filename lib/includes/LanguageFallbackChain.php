@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use \Language;
+use Language;
 
 /**
  * FIXME: this class is not a language fallback chain. It takes and uses a fallback chain.
@@ -17,7 +17,7 @@ class LanguageFallbackChain {
 	/**
 	 * @var LanguageWithConversion[]
 	 */
-	private $chain = array();
+	private $chain;
 
 	/**
 	 * @param LanguageWithConversion[] $chain
@@ -46,7 +46,7 @@ class LanguageFallbackChain {
 	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no "acceptable" data can be found.
 	 */
-	public function extractPreferredValue( $data ) {
+	public function extractPreferredValue( array $data ) {
 
 		foreach ( $this->chain as $languageWithConversion ) {
 			$fetchCode = $languageWithConversion->getFetchLanguageCode();
@@ -75,7 +75,7 @@ class LanguageFallbackChain {
 	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no data with a valid language code can be found.
 	 */
-	public function extractPreferredValueOrAny( $data ) {
+	public function extractPreferredValueOrAny( array $data ) {
 		$preferred = $this->extractPreferredValue( $data );
 
 		if ( $preferred ) {
@@ -94,4 +94,5 @@ class LanguageFallbackChain {
 
 		return null;
 	}
+
 }
