@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_c3069923",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-27T09:03:13Z",
+      "side": 1,
+      "message": "Ok, I talked to Henning and Daniel and we agreed that this is just accidental and should go away without a lot of fuss.",
+      "parentUuid": "ae0e4726_23d795c6",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce09bb20_2759e401",
         "filename": "repo/includes/ClaimHtmlGenerator.php",
         "patchSetId": 6
