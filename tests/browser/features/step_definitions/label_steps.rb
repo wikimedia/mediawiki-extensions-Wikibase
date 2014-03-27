@@ -83,6 +83,10 @@ Then /^Label save button should not be there$/ do
   on(ItemPage).save_label_link?.should be_false
 end
 
+Then /^Original label of item (.*) should be displayed$/ do |item_handle|
+  on(ItemPage).entity_label_span.should == @items[item_handle]["label"]
+end
+
 Then /^Original label should be displayed$/ do
   on(ItemPage) do |page|
     page.first_heading.should be_true
