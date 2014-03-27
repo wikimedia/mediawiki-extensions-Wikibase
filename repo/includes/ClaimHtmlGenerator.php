@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
-use Wikibase\Lib\FormattingException;
+use Html;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
@@ -212,27 +212,24 @@ class ClaimHtmlGenerator {
 	 *
 	 * @param Snak $snak
 	 * @param boolean $showPropertyLink
+	 *
 	 * @return string
 	 */
 	protected function getSnakHtml( $snak, $showPropertyLink = false ) {
-		$propertyLink = '';
-
-		if( $showPropertyLink ) {
-			$propertyId = $snak->getPropertyId();
-			$propertyKey = $propertyId->getSerialization();
-			$propertyLabel = isset( $this->propertyLabels[$propertyKey] )
-				? $this->propertyLabels[$propertyKey]
-				: $propertyKey;
-			$propertyLink = \Linker::link(
-				$this->entityTitleLookup->getTitleForId( $propertyId ),
-				htmlspecialchars( $propertyLabel )
-			);
-		}
-
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
-		$formattedValue = $this->getFormattedSnakValue( $snak );
+		try {
+			$formattedValue = $this->snakFormatter->formatSnak( $snak );
+		} catch ( \Exception $ex ) {
+			if ( $ex instanceof ValueFormatters\Exceptions\DataValueMismatchException ) {
+				$snakViewCssClass .= '-datavaluetypemismatch';
+				$formattedValue = $this->getDataValueMismatchMessage( $ex );
+			} else {
+				$snakViewCssClass .= '-formaterror';
+				$formattedValue = $this->formatExceptionError( $ex );
+			}
+		}
 
 		if ( $formattedValue === '' ) {
 			$formattedValue = '&nbsp;';
@@ -240,10 +237,35 @@ class ClaimHtmlGenerator {
 
 		return wfTemplate( 'wb-snak',
 			// Display property link only once for snaks featuring the same property:
-			$propertyLink,
+			$this->getPropertyLink( $snak, $showPropertyLink ),
 			$snakViewCssClass,
 			$formattedValue
 		);
+	}
+
+	/**
+	 * @param Snak $snak
+	 * @param boolean $showPropertyLink
+	 *
+	 * @return string
+	 */
+	private function getPropertyLink( Snak $snak, $showPropertyLink ) {
+		$propertyLink = '';
+
+		if ( $showPropertyLink ) {
+			$propertyId = $snak->getPropertyId();
+			$propertyKey = $propertyId->getSerialization();
+			$propertyLabel = isset( $this->propertyLabels[$propertyKey] )
+				? $this->propertyLabels[$propertyKey]
+				: $propertyKey;
+
+			$propertyLink = \Linker::link(
+				$this->entityTitleLookup->getTitleForId( $propertyId ),
+				htmlspecialchars( $propertyLabel )
+			);
+		}
+
+		return $propertyLink;
 	}
 
 	/**
@@ -267,21 +289,16 @@ class ClaimHtmlGenerator {
 	 * @fixme handle errors more consistently as done in JS UI, and perhaps add
 	 * localised exception messages.
 	 *
-	 * @param Snak $snak
+	 * @param \Exception $ex
+	 *
 	 * @return string
 	 */
-	protected function getFormattedSnakValue( $snak ) {
-		try {
-			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
-			return $this->getInvalidSnakMessage();
-		} catch ( PropertyNotFoundException $ex ) {
+	protected function formatExceptionError( \Exception $ex ) {
+		if ( $ex instanceof Wikibase\Lib\PropertyNotFoundException ) {
 			return $this->getPropertyNotFoundMessage();
-		} catch ( InvalidArgumentException $ex ) {
+		} else {
 			return $this->getInvalidSnakMessage();
 		}
-
-		return $formattedSnak;
 	}
 
 	/**
@@ -296,5 +313,26 @@ class ClaimHtmlGenerator {
 	 */
 	private function getPropertyNotFoundMessage() {
 		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getDataValueMismatchMessage( $ex ) {
+		$details = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch-details' )
+			->params( $ex->getDataValueType(), $ex->getExpectedValueType() )
+			->parse();
+
+		$errorMessage = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch' )->parse();
+
+		$formattedDetailsError = Html::element(
+			'div',
+			array(
+				'class' => 'wb-snakview-variation-valuesnak-datavaluetypemismatch-message'
+			),
+			$details
+		);
+
+		return $errorMessage . $formattedDetailsError;
 	}
 }
