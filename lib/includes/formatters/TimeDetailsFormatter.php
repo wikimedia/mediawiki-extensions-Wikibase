@@ -4,8 +4,8 @@ namespace Wikibase\Lib;
 
 use DataValues\TimeValue;
 use Html;
-use InvalidArgumentException;
 use Message;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
@@ -55,12 +55,16 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @param TimeValue $value The ID to format
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws DataValueMismatchException
 	 * @return string
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an TimeValue.' );
+			throw new DataValueMismatchException(
+				$value->getType(),
+				TimeValue::getType(),
+				'Data value type mismatch. Expected an TimeValue.'
+			);
 		}
 
 		$html = '';
