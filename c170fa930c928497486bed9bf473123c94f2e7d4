@@ -16,6 +16,24 @@
       "revId": "c170fa930c928497486bed9bf473123c94f2e7d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_cf9fd861",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:24:34Z",
+      "side": 1,
+      "message": "Such a convention may exist but I\u0027m not aware of it at the moment. My personal convention is:\n* Always use short names.\n* Long names /can/ be used if a class name is /not/ used in code but in comments only. Like it is here.\n\nReasoning:\n\nWikibaseRepo does not /really/ depend on EntityStoreWatcher. PHP doesn\u0027t care what .getEntityStoreWatcher() returns. The only reason to mention EntityStoreWatcher is to have nice hints in the IDE.\n\nThe benefit of having a single comment that\u0027s a bit longer is a more meaningful \"use\" section.",
+      "parentUuid": "ae0e4726_b9a2b239",
+      "revId": "c170fa930c928497486bed9bf473123c94f2e7d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
