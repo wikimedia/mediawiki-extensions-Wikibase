@@ -102,17 +102,19 @@ HTML;
 </div>
 HTML;
 
+	// TODO: .wb-snakview should not be part of the template; check uses of that class and move them
+	// to .wb-snak
 	$templates['wb-snak'] =
 // This template is not only used for PropertyValueSnak Snaks but also for other Snaks without a
 // value which may display some message in the value node.
 <<<HTML
-<div class="wb-snak $1">
+<div class="wb-snak wb-snakview">
 	<div class="wb-snak-property-container">
-		<div class="wb-snak-property" dir="auto">$2</div>
+		<div class="wb-snak-property" dir="auto">$1</div>
 	</div>
 	<div class="wb-snak-value-container" dir="auto">
-		<div class="wb-snak-typeselector">$3</div>
-		<div class="wb-snak-value">$4</div>
+		<div class="wb-snak-typeselector"></div>
+		<div class="wb-snak-value">$2</div>
 	</div>
 </div>
 HTML;
