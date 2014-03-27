@@ -3,9 +3,9 @@
 namespace Wikibase\Lib;
 
 use DataValues\TimeValue;
-use InvalidArgumentException;
 use Language;
 use Message;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
@@ -49,11 +49,15 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @param TimeValue $value The time to format
 	 *
 	 * @return string
-	 * @throws InvalidArgumentException
+	 * @throws MismatchingDataValueTypeException
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof TimeValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected a TimeValue.' );
+			throw new MismatchingDataValueTypeException(
+				$value->getType(),
+				TimeValue::getType(),
+				'Data value type mismatch. Expected an TimeValue.'
+			);
 		}
 
 		$dateTime = $this->dateTimeFormatter->format( $value );

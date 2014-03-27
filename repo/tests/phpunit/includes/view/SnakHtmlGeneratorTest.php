@@ -3,7 +3,10 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use DataValues\TimeValue;
+use Language;
 use Title;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
@@ -30,18 +33,19 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityTitleLookup,
 		$propertyLabels,
 		$snak,
-		$patterns
+		$cssPattern,
+		$formattedSnak
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			Language::factory( 'qqx' )
 		);
 
 		$html = $snakHtmlGenerator->getSnakHtml( $snak, $propertyLabels );
 
-		foreach( $patterns as $message => $pattern ) {
-			$this->assertRegExp( $pattern, $html, $message );
-		}
+		$this->assertRegExp( $cssPattern, $html, 'has snak value css' );
+		$this->assertContains( $formattedSnak, $html, 'has formatted snak' );
 	}
 
 	public function getSnakHtmlProvider() {
@@ -56,10 +60,8 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$entityTitleLookupMock,
 			array(),
 			new PropertySomeValueSnak( 42 ),
-			array(
-				'snak variation css' => '/wb-snakview-variation-somevalue/',
-				'formatted snak' => '/a snak!/'
-			)
+			'/wb-snakview-variation-somevalue/',
+			'a snak!'
 		);
 
 		$testCases[] = array(
@@ -67,10 +69,8 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$entityTitleLookupMock,
 			array(),
 			new PropertySomeValueSnak( 42 ),
-			array(
-				'snak variation css' => '/wb-snakview-variation-somevalue/',
-				'formatted snak' => '/a snak!/s'
-			)
+			'/wb-snakview-variation-somevalue/',
+			'a snak!'
 		);
 
 		$testCases[] = array(
@@ -78,10 +78,17 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$entityTitleLookupMock,
 			array(),
 			new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
-			array(
-				'snak variation css' => '/wb-snakview-variation-value/',
-				'formatted snak' => '/a snak!/s'
-			)
+			'/wb-snakview-variation-value/',
+			'a snak!'
+		);
+
+		$testCases[] = array(
+			$snakFormatter,
+			$entityTitleLookupMock,
+			array(),
+			new PropertyValueSnak( 51, new StringValue( 'cake!' ) ),
+			'/wb-snakview-variation-valuesnak-datavaluetypemismatch/',
+			'wikibase-snakview-variation-datavaluetypemismatch-details: string, time'
 		);
 
 		return $testCases;
@@ -97,7 +104,25 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
-			->will( $this->returnValue( 'a snak!' ) );
+			->will( $this->returnCallback( function( $snak ) {
+				if ( $snak->getType() === 'value' ) {
+					// mismatching
+					$propertyId = $snak->getPropertyId()->getSerialization();
+
+					if ( $propertyId === 'P51' ) {
+						throw new MismatchingDataValueTypeException(
+							TimeValue::getType(),
+							StringValue::getType(),
+							'Data value type mismatch. Expected a StringValue.'
+						);
+					} else {
+						return 'a snak!';
+					}
+				} else {
+					return 'a snak!';
+				}
+			} )
+		);
 
 		return $snakFormatter;
 	}
