@@ -30,3 +30,7 @@ end
 Then /^ID input field should be there$/ do
   on(SpecialModifyEntityPage).id_input_field?.should be_true
 end
+
+Then /^ID input field should contain ID of item (.+)/ do |item_handle|
+  on(SpecialModifyEntityPage).id_input_field.should == @items[item_handle]['id']
+end
