@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\TimeValue;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use Wikibase\Lib\HtmlTimeFormatter;
