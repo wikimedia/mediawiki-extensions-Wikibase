@@ -16,6 +16,24 @@
       "revId": "15a11fbfbfbc82edc77dce732c887a224bbf4d92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_19851eb2",
+        "filename": ".travis.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-27T13:08:04Z",
+      "side": 1,
+      "message": "will do :) (I was just maintaining what was there before ;p)",
+      "parentUuid": "ee14bf34_99e56e09",
+      "revId": "15a11fbfbfbc82edc77dce732c887a224bbf4d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
