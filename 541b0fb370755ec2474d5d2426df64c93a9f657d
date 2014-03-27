@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae0e4726_40aeffe5",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-27T00:12:09Z",
+      "side": 1,
+      "message": "really?",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_ebf179db",
         "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
         "patchSetId": 5
@@ -48,6 +65,57 @@
       "side": 1,
       "message": "how about ParseExceptionMessage can extend MessageException or could be used below?",
       "parentUuid": "ae0e4726_5adef115",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_00b0073d",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-27T00:12:09Z",
+      "side": 1,
+      "message": "this is a bit unclear to me",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_a086fb68",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-27T00:12:09Z",
+      "side": 1,
+      "message": "how is this related?",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_808bf771",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-27T00:12:09Z",
+      "side": 1,
+      "message": "not convinced this comment is needed\n\nif we want the comment, I would say \"an ExceptionLocalizer\"",
       "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
