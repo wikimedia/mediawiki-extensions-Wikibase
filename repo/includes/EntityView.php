@@ -543,7 +543,8 @@ abstract class EntityView extends \ContextSource {
 
 			$claimsHtml .= wfTemplate( 'wb-claimlistview',
 				$propertyHtml,
-				wfTemplate( 'wb-claimgrouplistview-groupname', $propertyLink ) . $toolbarHtml
+				wfTemplate( 'wb-claimgrouplistview-groupname', $propertyLink ) . $toolbarHtml,
+				$propertyId->getSerialization()
 			);
 
 		}
