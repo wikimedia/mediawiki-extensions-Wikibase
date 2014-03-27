@@ -3,10 +3,6 @@
 namespace Wikibase\Test;
 
 use Language;
-use Title;
-use User;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\OutputPageJsConfigBuilder;
 
 /**
@@ -40,8 +36,10 @@ class OutputPageJsConfigBuilderTest extends \PHPUnit_Framework_TestCase {
 			'wbUserCanEdit' => $canEdit,
 			'wbCopyright' => array(
 				'version' => 'wikibase-1',
-				'messageHtml' => '(wikibase-shortcopyrightwarning: (wikibase-save), (copyrightpage)'
-					. ', <a rel="nofollow" class="external text" href="https://creativecommons.org">CC-0</a>)'
+				'messageHtml' =>
+					'(wikibase-shortcopyrightwarning: (wikibase-save), ' .
+					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
+					', <a rel="nofollow" class="external text" href="https://creativecommons.org">CC-0</a>)'
 			),
 			'wbExperimentalFeatures' => true
 		);
