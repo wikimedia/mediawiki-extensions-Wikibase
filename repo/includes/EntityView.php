@@ -120,7 +120,8 @@ abstract class EntityView extends \ContextSource {
 		// @todo inject in constructor
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			$context->getLanguage()
 		);
 
 		$this->claimHtmlGenerator = new ClaimHtmlGenerator(
