@@ -4,8 +4,8 @@ namespace Wikibase\Lib;
 
 use DataValues\StringValue;
 use Html;
-use InvalidArgumentException;
 use Title;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -42,11 +42,15 @@ class CommonsLinkFormatter implements ValueFormatter {
 	 *
 	 * @return string
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws MismatchingDataValueTypeException
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof StringValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected a StringValue.' );
+			throw new MismatchingDataValueTypeException(
+				$value->getType(),
+				StringValue::getType(),
+				'Data value type mismatch. Expected a StringValue.'
+			);
 		}
 
 		$fileName = $value->getValue();

@@ -25,7 +25,7 @@
 	"require": {
 		"php": ">=5.3.2",
 		"data-values/data-values": "~0.1.0",
-		"data-values/common": "~0.2.0",
+		"data-values/common": "dev-master",
 		"data-values/geo": "~0.1.0",
 		"data-values/number": "~0.3.0",
 		"data-values/time": "~0.5.1",
