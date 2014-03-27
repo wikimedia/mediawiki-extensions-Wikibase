@@ -631,15 +631,21 @@ div.wb-claimlistview div.wb-editsection {
 .wb-snakview-unsupportedsnaktype,
 .wb-snakview-variation-valuesnak-unsupporteddatavalue,
 .wb-snakview-variation-valuesnak-datavaluetypemismatch,
+.wb-snakview-variation-valuesnak-formaterror,
 .wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
 .wb-snakview-variation-somevaluesnak,
-.wb-snakview-variation-novaluesnak {
+.wb-snakview-variation-somevaluesnak-formaterror,
+.wb-snakview-variation-novaluesnak,
+.wb-snakview-variation-novaluesnak-formaterror {
 	color: #565656;
 	font-style: italic;
 	line-height: 1.2;
 }
 
 .wb-snakview-variation-valuesnak-datavaluetypemismatch,
+.wb-snakview-variation-valuesnak-formaterror,
+.wb-snakview-variation-somevaluesnak-formaterror,
+.wb-snakview-variation-novaluesnak-formaterror,
 .wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty {
 	color: red;
 }
