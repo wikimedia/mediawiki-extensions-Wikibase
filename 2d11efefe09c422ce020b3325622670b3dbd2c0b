@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_e0c19384",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-27T00:24:46Z",
+      "side": 1,
+      "message": "\"ok\" seems odd in this context.  when I see \"STATUS_OK\", I immediately think of Status objects.\n\nalso, I think we can have just EMPTY and STUB and not explicitly record \"OK\" in the table. or at least need to be convinced of the rationale for doing this.",
+      "revId": "2d11efefe09c422ce020b3325622670b3dbd2c0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_da3fa11f",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 17
