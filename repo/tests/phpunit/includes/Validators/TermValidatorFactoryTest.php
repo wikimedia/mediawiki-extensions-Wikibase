@@ -8,9 +8,10 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\SiteLinkLookup;
 use Wikibase\TermDuplicateDetector;
 use Wikibase\Validators\TermValidatorFactory;
-use Wikibase\SettingsArray;
 
 /**
  * @covers TermValidatorFactory
@@ -74,6 +75,25 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 		return Result::newSuccess();
 	}
 
+	public function getConflictsForItem( Item $item ) {
+		$conflicts = array();
+
+		foreach ( $item->getSiteLinks() as $link ) {
+			$page = $link->getPageName();
+			$site = $link->getSiteId();
+
+			if ( $page === 'DUPE' ) {
+				$conflicts[] = array(
+					'itemId' => 666,
+					'siteId' => $site,
+					'sitePage' => $page
+				);
+			}
+		}
+
+		return $conflicts;
+	}
+
 	/**
 	 * @return TermDuplicateDetector
 	 */
@@ -94,6 +114,21 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return SiteLinkLookup
+	 */
+	private function getMockSiteLinkLookup() {
+		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\SiteLinkLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$siteLinkLookup->expects( $this->any() )
+			->method( 'getConflictsForItem' )
+			->will( $this->returnCallback( array( $this, 'getConflictsForItem' ) ) );
+
+		return $siteLinkLookup;
+	}
+
+	/**
 	 * @param $maxLength
 	 * @param $languages
 	 *
@@ -102,28 +137,37 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	protected function newFactory( $maxLength, $languages ) {
 		$idParser = new BasicEntityIdParser();
 		$dupeDetector = $this->getMockDupeDetector();
+		$siteLinkLookup = $this->getMockSiteLinkLookup();
 
-		$builders = new TermValidatorFactory( $maxLength, $languages, $idParser, $dupeDetector );
+		$builders = new TermValidatorFactory( $maxLength, $languages, $idParser, $dupeDetector, $siteLinkLookup );
 		return $builders;
 	}
 
 	public function testGetUniquenessValidator() {
 		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
 
-		$validator = $builders->getUniquenessValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getUniquenessValidator(
+			Item::ENTITY_TYPE,
+			TermValidatorFactory::CONSTRAINTS_ALL
+		);
 
-		$this->assertInstanceOf( 'Wikibase\content\EntityValidator', $validator );
+		$this->assertInstanceOf( 'Wikibase\Validators\EntityValidator', $validator );
 
 		$goodEntity = Item::newEmpty();
 		$goodEntity->setLabel( 'en', 'DUPE' );
 		$goodEntity->setDescription( 'en', 'bla' );
+		$goodEntity->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
-		$badEntity = Item::newEmpty();
-		$badEntity->setLabel( 'en', 'DUPE' );
-		$badEntity->setDescription( 'en', 'DUPE' );
+		$labelDupeEntity = Item::newEmpty();
+		$labelDupeEntity->setLabel( 'en', 'DUPE' );
+		$labelDupeEntity->setDescription( 'en', 'DUPE' );
+
+		$linkDupeEntity = Item::newEmpty();
+		$linkDupeEntity->addSiteLink( new SiteLink( 'enwiki', 'DUPE' ) );
 
 		$this->assertTrue( $validator->validateEntity( $goodEntity )->isValid(), 'isValid(good)' );
-		$this->assertFalse( $validator->validateEntity( $badEntity )->isValid(), 'isValid(bad)' );
+		$this->assertFalse( $validator->validateEntity( $labelDupeEntity )->isValid(), 'isValid(bad): label/description' );
+		$this->assertFalse( $validator->validateEntity( $linkDupeEntity )->isValid(), 'isValid(bad): sitelink' );
 	}
 
 	public function testGetLanguageValidator() {

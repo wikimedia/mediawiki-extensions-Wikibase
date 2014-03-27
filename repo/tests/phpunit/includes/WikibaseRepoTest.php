@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -131,7 +132,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetChangeOpFactory() {
-		$returnValue = $this->getDefaultInstance()->getChangeOpFactory();
+		$returnValue = $this->getDefaultInstance()->getChangeOpFactory( Item::ENTITY_TYPE );
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpFactory', $returnValue );
 	}
 

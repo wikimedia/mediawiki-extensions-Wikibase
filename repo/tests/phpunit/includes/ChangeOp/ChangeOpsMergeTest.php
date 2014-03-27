@@ -2,12 +2,14 @@
 
 namespace Wikibase\Test;
 
+use DataValues\IllegalValueException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\ObjectComparer;
@@ -15,6 +17,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\SiteLinkCache;
 use Wikibase\TermDuplicateDetector;
+use Wikibase\Validators\TermValidatorFactory;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -45,26 +48,29 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param null $returnValue
+	 * @param Error[]|null $returnValue
 	 *
 	 * @return TermDuplicateDetector
 	 */
-	private function getTermDuplicateDetector( $returnValue = null ) {
-		if ( $returnValue === null ) {
-			$returnValue = Result::newSuccess();
-		} elseif ( is_array( $returnValue ) ) {
-			$returnValue = Result::newError( $returnValue );
-		}
+	private function getTermDuplicateDetector( $errors = array() ) {
+		$returnErrors = function ( Entity $entity ) use ( $errors ) {
+			$id = $entity->getId()->getSerialization();
+			if ( isset( $errors[ $id ] ) ) {
+				return Result::newError( $errors[ $id ] );
+			} else {
+				return Result::newSuccess();
+			}
+		};
 
 		$mock = $this->getMockBuilder( '\Wikibase\TermDuplicateDetector' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
 			->method( 'detectLabelConflictsForEntity' )
-			->will( $this->returnValue( $returnValue ) );
+			->will( $this->returnCallback( $returnErrors ) );
 		$mock->expects( $this->any() )
 			->method( 'detectLabelDescriptionConflictsForEntity' )
-			->will( $this->returnValue( $returnValue ) );
+			->will( $this->returnCallback( $returnErrors ) );
 		return $mock;
 	}
 
@@ -81,6 +87,15 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
+	/**
+	 * @param Item $fromItem
+	 * @param Item $toItem
+	 * @param $ignoreConflicts
+	 * @param array $termConflicts
+	 * @param array $linkConflicts
+	 *
+	 * @return ChangeOpsMerge
+	 */
 	protected function makeChangeOpsMerge(
 		Item $fromItem,
 		Item $toItem,
@@ -89,12 +104,20 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		array $linkConflicts
 	) {
 		$duplicateDetector = $this->getTermDuplicateDetector( $termConflicts );
-		$linkCache = $this->getMockSitelinkCache( $linkConflicts );
+		$siteLinkLookup = $this->getMockSitelinkCache( $linkConflicts );
+
+		$termValidatorFactory = new TermValidatorFactory(
+			12,
+			array( 'en', 'de', 'ru', 'ja', 'pt', 'pl' ),
+			new BasicEntityIdParser(),
+			$duplicateDetector
+			//FIXME: will need a siteLinkLookup eventually
+		);
 
 		$idParser = new BasicEntityIdParser();
 		$changeOpFactory = new ChangeOpFactory(
-			$duplicateDetector,
-			$linkCache,
+			Item::ENTITY_TYPE,
+			$termValidatorFactory,
 			new ClaimGuidGenerator(),
 			new ClaimGuidValidator( $idParser ),
 			new ClaimGuidParser( $idParser ),
@@ -105,8 +128,10 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			$fromItem,
 			$toItem,
 			$ignoreConflicts,
-			$duplicateDetector,
-			$linkCache,
+			$termValidatorFactory->getUniquenessValidator(
+				Item::ENTITY_TYPE,
+				TermValidatorFactory::CONSTRAINTS_ALL
+			),
 			$changeOpFactory
 		);
 	}
@@ -396,7 +421,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testExceptionThrownWhenLabelDescriptionDuplicatesDetected() {
-		$conflicts = array( Error::newError( 'Foo!', 'label', 'foo', array( 'imatype', 'imalang', 'foog text', 'Q999' ) ) );
+		$conflicts = array( 'Q222' => array( Error::newError( 'Foo!', 'label', 'foo', array( 'imatype', 'imalang', 'foog text', 'Q999' ) ) ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
 		$changeOps = $this->makeChangeOpsMerge(
@@ -408,14 +433,14 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->setExpectedException(
-			'\Wikibase\ChangeOp\ChangeOpException',
-			'Item being merged to has conflicting terms: (Q999 => imalang => imatype => foog text)'
+			'\Wikibase\ChangeOp\ChangeOpValidationException',
+			'Validation failed: Foo!'
 		);
 		$changeOps->apply();
 	}
 
 	public function testExceptionNotThrownWhenLabelDescriptionDuplicatesDetectedOnFromItem() {
-		$conflicts = array( Error::newError( 'Foo!', 'label', 'foo', array( 'imatype', 'imalang', 'foog text', 'Q111' ) ) );
+		$conflicts = array( 'Q111' => array( Error::newError( 'Foo!', 'label', 'foo', array( 'imatype', 'imalang', 'foog text', 'Q999' ) ) ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
 		$changeOps = $this->makeChangeOpsMerge(
@@ -444,7 +469,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException(
 			'\Wikibase\ChangeOp\ChangeOpException',
-			'Item being merged to has conflicting terms: (Q8888 => eewiki => imapage)'
+			'Validation failed: Foo!'
 		);
 		$changeOps->apply();
 	}

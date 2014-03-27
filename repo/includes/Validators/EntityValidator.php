@@ -1,16 +1,18 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 
 /**
- * Validator interface used for pre-save validation in EntityContent.
- * This is essentially a vehicle to introduce knowledge about global state into
- * the context of the save operation, so global constraints can be enforced.
+ * Validator interface for entities. This is used for checking potentially complex constraints.
  *
- * @todo move to Wikibase\Validator namespace
+ * This is essentially a vehicle to introduce knowledge about global state into
+ * the context of the save operation.
+ *
+ * One use case is the pre-save validation in EntityContent, that is, enforcing
+ * hard global constraints.
  *
  * @since 0.5
  *
@@ -20,8 +22,7 @@ use Wikibase\DataModel\Entity\Entity;
 interface EntityValidator {
 
 	/**
-	 * Validate an entity before saving.
-	 * This is intended for enforcing "hard" global constraints.
+	 * Validate an entity.
 	 *
 	 * @since 0.5
 	 *

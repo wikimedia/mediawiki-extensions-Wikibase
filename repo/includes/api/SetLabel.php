@@ -26,7 +26,9 @@ class SetLabel extends ModifyTerm {
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
-		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$changeOp = $this->getChangeOp( $params );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
+
 		$labels = array( $language => ( $entity->getLabel( $language ) !== false ) ? $entity->getLabel( $language ) : "" );
 
 		$this->getResultBuilder()->addLabels( $labels, 'entity' );

@@ -1,10 +1,8 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
-use Message;
 use SiteStore;
-use Status;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
@@ -87,7 +85,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 		$conflictingTitle = $this->entityTitleLookup->getTitleForId( $entityId );
 
 		$site = $this->siteStore->getSite( $conflict['siteId'] );
-		$pageUrl = $site->getPageUrl( $conflict['sitePage'] );
+		$pageUrl = $site === null ? null : $site->getPageUrl( $conflict['sitePage'] );
 
 		return Error::newError(
 			'SiteLink conflict',
