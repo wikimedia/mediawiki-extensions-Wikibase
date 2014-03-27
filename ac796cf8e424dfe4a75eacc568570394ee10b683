@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_23d795c6",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-27T08:23:48Z",
+      "side": 1,
+      "message": "Just to be clear: Not showing unknown value and no value values in snaklistviews is a deliberate decision in the back-end, and not a bug. I guess the JS just never bothered to do the same.\n\nSince we never saw the behavior of the back-end in effect, I wonder if this deliberate decision actually was that well-conceived.\n\nSo, from my point of view, we have to make both implementations do the same, and before that, we should understand what behavior we (i. e. Lydia) actually want.",
+      "parentUuid": "ae0e4726_a0c84078",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce09bb20_2759e401",
         "filename": "repo/includes/ClaimHtmlGenerator.php",
         "patchSetId": 6
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "I\u0027ve no clue why we would want this.. What\u0027s the disadvantage of leaving an empty formatted value an empty string? Why do we want to display a nbsp?",
       "parentUuid": "ce09bb20_67c35c62",
+      "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_e3f75d55",
+        "filename": "repo/includes/ClaimHtmlGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-03-27T08:23:48Z",
+      "side": 1,
+      "message": "I think this is a layout issue. An empty formatted value for a mainsnak breaks the layout, while an empty formatted value for a snak in a snaklistview does no harm (just as a nbsp does no harm).",
+      "parentUuid": "ae0e4726_e0951844",
       "revId": "ac796cf8e424dfe4a75eacc568570394ee10b683",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
