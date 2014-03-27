@@ -309,12 +309,12 @@ final class ClientHooks {
 	 * @param array &$tables
 	 * @param array &$join_conds
 	 * @param array &$fields
-	 * @param array|FormOptions $opts array until MW 1.22, FormOptions since MW 1.23
+	 * @param FormOptions|null $opts
 	 *
 	 * @return bool
 	 */
 	public static function onSpecialWatchlistQuery( array &$conds, array &$tables,
-		array &$join_conds, array &$fields, $opts = array()
+		array &$join_conds, array &$fields, $opts
 	) {
 		$db = wfGetDB( DB_SLAVE );
 		$handler = new SpecialWatchlistQueryHandler( $GLOBALS['wgUser'], $db );
