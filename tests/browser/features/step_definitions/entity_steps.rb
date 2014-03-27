@@ -10,10 +10,22 @@ Given /^I am logged in to the repo$/ do
   visit(RepoLoginPage).login_with(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
 end
 
+Given /^I am not logged in to the repo$/ do
+  visit(RepoLogoutPage)
+end
+
 Given /^I am on an item page$/ do
+  step 'I have an item to test'
+  step 'I am on the page of the item to test'
+end
+
+Given /^I have an item to test$/ do
   item_data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) + '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   @item_under_test = wb_api.wb_create_entity(item_data, "item")
+end
+
+Given /^I am on the page of the item to test$/ do
   on(ItemPage).navigate_to_entity @item_under_test["url"]
 end
 
