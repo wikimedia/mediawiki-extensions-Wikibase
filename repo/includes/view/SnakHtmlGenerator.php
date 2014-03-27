@@ -2,7 +2,9 @@
 
 namespace Wikibase\View;
 
-use InvalidArgumentException;
+use Html;
+use Language;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\FormattingException;
@@ -36,15 +38,22 @@ class SnakHtmlGenerator {
 	protected $entityTitleLookup;
 
 	/**
+	 * @var Language
+	 */
+	protected $language;
+
+	/**
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		Language $language
 	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->language = $language;
 	}
 
 	/**
@@ -60,7 +69,17 @@ class SnakHtmlGenerator {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
-		$formattedValue = $this->getFormattedSnakValue( $snak );
+		try {
+			$formattedValue = $this->snakFormatter->formatSnak( $snak );
+		} catch ( \Exception $ex ) {
+			if ( $ex instanceof MismatchingDataValueTypeException ) {
+				$snakViewCssClass .= '-datavaluetypemismatch';
+				$formattedValue = $this->getMismatchingDataValueTypeExceptionMessage( $ex );
+			} else {
+				$snakViewCssClass .= '-formaterror';
+				$formattedValue = $this->formatExceptionError( $ex );
+			}
+		}
 
 		if ( $formattedValue === '' ) {
 			$formattedValue = '&nbsp;';
@@ -114,21 +133,16 @@ class SnakHtmlGenerator {
 	 * @fixme handle errors more consistently as done in JS UI, and perhaps add
 	 * localised exception messages.
 	 *
-	 * @param Snak $snak
+	 * @param \Exception $ex
+	 *
 	 * @return string
 	 */
-	protected function getFormattedSnakValue( $snak ) {
-		try {
-			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
-			return $this->getInvalidSnakMessage();
-		} catch ( PropertyNotFoundException $ex ) {
+	protected function formatExceptionError( \Exception $ex ) {
+		if ( $ex instanceof Wikibase\Lib\PropertyNotFoundException ) {
 			return $this->getPropertyNotFoundMessage();
-		} catch ( InvalidArgumentException $ex ) {
+		} else {
 			return $this->getInvalidSnakMessage();
 		}
-
-		return $formattedSnak;
 	}
 
 	/**
@@ -143,6 +157,32 @@ class SnakHtmlGenerator {
 	 */
 	private function getPropertyNotFoundMessage() {
 		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
+	}
+
+	/**
+	 * @param MismatchingDataValueTypeException
+	 *
+	 * @return string
+	 */
+	private function getMismatchingDataValueTypeExceptionMessage( MismatchingDataValueTypeException $ex ) {
+		$details = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch-details' )
+			->params( $ex->getDataValueType(), $ex->getExpectedValueType() )
+			->inLanguage( $this->language )
+			->parse();
+
+		$errorMessage = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch' )
+			->inLanguage( $this->language )
+			->parse();
+
+		$formattedDetailsError = Html::element(
+			'div',
+			array(
+				'class' => 'wb-snakview-variation-valuesnak-datavaluetypemismatch-message'
+			),
+			$details
+		);
+
+		return $errorMessage . $formattedDetailsError;
 	}
 
 }
