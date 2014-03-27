@@ -11,12 +11,14 @@
 module URL
   def self.client_url(name)
     url = ENV["WIKIDATA_CLIENT_URL"]
-    "#{url}#{name}"
+    lang = ENV["LANGUAGE_CODE"]
+    "#{url}#{name}?setlang=#{lang}"
   end
 
   def self.repo_url(name)
     url = ENV["WIKIDATA_REPO_URL"]
-    "#{url}#{name}"
+    lang = ENV["LANGUAGE_CODE"]
+    "#{url}#{name}?setlang=#{lang}"
   end
 
   def self.repo_api()
