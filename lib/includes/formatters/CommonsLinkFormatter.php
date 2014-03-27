@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Html;
 use InvalidArgumentException;
 use Title;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -46,7 +47,11 @@ class CommonsLinkFormatter implements ValueFormatter {
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof StringValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected a StringValue.' );
+			throw new DataValueMismatchException(
+				$value->getType(),
+				StringValue::getType(),
+				'Data value type mismatch. Expected a StringValue.'
+			);
 		}
 
 		$fileName = $value->getValue();

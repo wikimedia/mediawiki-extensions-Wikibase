@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Html;
 use InvalidArgumentException;
 use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
@@ -277,6 +278,9 @@ class ClaimHtmlGenerator {
 			return $this->getInvalidSnakMessage();
 		} catch ( PropertyNotFoundException $ex ) {
 			return $this->getPropertyNotFoundMessage();
+		} catch ( DataValueMismatchException $ex ) {
+			// @todo use WikibaseExceptionLocalizer
+			return $this->getDataValueMismatchMessage( $ex );
 		} catch ( InvalidArgumentException $ex ) {
 			return $this->getInvalidSnakMessage();
 		}
@@ -296,5 +300,20 @@ class ClaimHtmlGenerator {
 	 */
 	private function getPropertyNotFoundMessage() {
 		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getDataValueMismatchMessage( $ex ) {
+		$details = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch-details' )
+			->params( $ex->getDataValueType(), $ex->getExpectedValueType() )
+			->parse();
+
+		$errorMessage = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch' )->parse();
+
+		$formattedError = $errorMessage . Html::element( 'div', $details );
+
+		return $formattedError;
 	}
 }
