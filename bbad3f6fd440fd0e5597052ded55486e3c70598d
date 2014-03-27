@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_6348ed8c",
+        "filename": "repo/includes/ChangeOp/WikibaseChangeOpFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-27T09:00:12Z",
+      "side": 1,
+      "message": "no visibility?",
+      "revId": "bbad3f6fd440fd0e5597052ded55486e3c70598d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_e35bdd55",
+        "filename": "repo/includes/ChangeOp/WikibaseChangeOpFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-27T09:00:12Z",
+      "side": 1,
+      "message": "?",
+      "revId": "bbad3f6fd440fd0e5597052ded55486e3c70598d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
