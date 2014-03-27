@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_d98e86d5",
+        "filename": "lib/tests/phpunit/LanguageFallbackChainFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-03-27T13:10:42Z",
+      "side": 1,
+      "message": "would be nice to not have the Fully qualified name here..\nI.e. just have \n@param LanguageWithConversion[] $chain",
+      "revId": "8bc6005b9bc886e055d61ebf75d10850c70e79e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
