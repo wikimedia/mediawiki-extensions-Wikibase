@@ -16,6 +16,23 @@
       "revId": "314469000ac3112727436e0ccd841dc5a635f43d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_6c4d759b",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-27T22:42:17Z",
+      "side": 1,
+      "message": "Where is the changeOpFactory field set?\n\nedit: ok, in the base class... really not obvious, though that is a problem not introduced by this commit",
+      "revId": "314469000ac3112727436e0ccd841dc5a635f43d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
