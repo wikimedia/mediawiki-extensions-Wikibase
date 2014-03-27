@@ -31,8 +31,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		return new Claim( new PropertyNoValueSnak( 7 ) );
 	}
 
-	public function getValidGuidGenerator() {
-		return new ClaimGuidGenerator();
+	public function getValidGuidGenerator( ItemId $itemId ) {
+		return new ClaimGuidGenerator( $itemId );
 	}
 
 	private function getMockGuidValidator() {
@@ -84,7 +84,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'q42' );
 		new ChangeOpClaim(
 			$this->getValidClaim(),
-			$this->getValidGuidGenerator(),
+			$this->getValidGuidGenerator( $itemId),
 			$this->getMockGuidValidator(),
 			$this->getMockGuidParser( $itemId ),
 			$invalidIndex

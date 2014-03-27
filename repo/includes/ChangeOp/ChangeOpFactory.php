@@ -2,16 +2,16 @@
 
 namespace Wikibase\ChangeOp;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
-use InvalidArgumentException;
-use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\SiteLinkLookup;
+use Wikibase\Validators\TermChangeValidationHelper;
 
 /**
  * ChangeOpFactory
@@ -22,9 +22,9 @@ use Wikibase\SiteLinkLookup;
 class ChangeOpFactory {
 
 	/**
-	 * @var LabelDescriptionDuplicateDetector
+	 * @var TermChangeValidationHelper
 	 */
-	protected $labelDescriptionDuplicateDetector;
+	protected $termChangeValidation;
 
 	/**
 	 * @var SiteLinkLookup
@@ -47,21 +47,21 @@ class ChangeOpFactory {
 	protected $guidParser;
 
 	/**
-	 * @param LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector
+	 * @param TermChangeValidationHelper $termChangeValidation
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
 	 */
 	public function __construct(
-		LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector,
+		TermChangeValidationHelper $termChangeValidation,
 		SiteLinkLookup $siteLinkLookup,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser
 	) {
 
-		$this->labelDescriptionDuplicateDetector = $labelDescriptionDuplicateDetector;
+		$this->termChangeValidation = $termChangeValidation;
 		$this->siteLinkLookup = $siteLinkLookup;
 
 		$this->guidGenerator = $guidGenerator;
@@ -77,7 +77,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newAddAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'add' );
+		return new ChangeOpAliases( $language, $aliases, 'add', $this->termChangeValidation );
 	}
 
 	/**
@@ -88,7 +88,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'set' );
+		return new ChangeOpAliases( $language, $aliases, 'set', $this->termChangeValidation );
 	}
 
 	/**
@@ -98,7 +98,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'remove' );
+		return new ChangeOpAliases( $language, $aliases, 'remove', $this->termChangeValidation );
 	}
 
 	/**
@@ -109,7 +109,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetDescriptionOp( $language, $description ) {
-		return new ChangeOpDescription( $language, $description );
+		return new ChangeOpDescription( $language, $description, $this->termChangeValidation );
 	}
 
 	/**
@@ -119,7 +119,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveDescriptionOp( $language ) {
-		return new ChangeOpDescription( $language, null );
+		return new ChangeOpDescription( $language, null, $this->termChangeValidation );
 	}
 
 	/**
@@ -130,7 +130,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetLabelOp( $language, $label ) {
-		return new ChangeOpLabel( $language, $label );
+		return new ChangeOpLabel( $language, $label, $this->termChangeValidation );
 	}
 
 	/**
@@ -140,7 +140,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveLabelOp( $language ) {
-		return new ChangeOpLabel( $language, null );
+		return new ChangeOpLabel( $language, null, $this->termChangeValidation );
 	}
 
 	/**
@@ -254,7 +254,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetReferenceOp( $claimGuid, Reference $reference, $referenceHash, $index = null ) {
-		return new ChangeOpReference( $claimGuid, $reference, $referenceHash );
+		return new ChangeOpReference( $claimGuid, $reference, $referenceHash, $index );
 	}
 
 	/**
@@ -297,7 +297,6 @@ class ChangeOpFactory {
 			$fromItem,
 			$toItem,
 			$ignoreConflicts,
-			$this->labelDescriptionDuplicateDetector,
 			$this->siteLinkLookup,
 			$this
 		);

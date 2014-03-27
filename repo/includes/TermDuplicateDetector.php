@@ -29,39 +29,6 @@ class TermDuplicateDetector {
 	}
 
 	/**
-	 * Finds conflicts with other entities, based on labels.
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return Result. If there are conflicts, $result->isValid() will return false and
-	 *         $result->getErrors() will return a non-empty list of Error objects.
-	 *         Each Error object will have four parameters:
-	 *         list( $type, $language, $text, $entityId )
-	 */
-	public function detectLabelConflictsForEntity( Entity $entity ) {
-		$labels = $entity->getLabels();
-
-		return $this->detectTermConflicts( $labels, null, $entity->getId() );
-	}
-
-	/**
-	 * Finds conflicts with other entities, based on labels and descriptions.
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return Result. If there are conflicts, $result->isValid() will return false and
-	 *         $result->getErrors() will return a non-empty list of Error objects.
-	 *         Each Error object will have four parameters:
-	 *         list( $type, $language, $text, $entityId )
-	 */
-	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
-		$labels = $entity->getLabels();
-		$descriptions = $entity->getDescriptions();
-
-		return $this->detectTermConflicts( $labels, $descriptions, $entity->getId() );
-	}
-
-	/**
 	 * Validates the uniqueness constraints on the combination of label and description given
 	 * for all the languages in $terms. This will apply a different logic for
 	 * Items than for Properties: while the label of a Property must be unique (per language),
@@ -70,47 +37,34 @@ class TermDuplicateDetector {
 	 *
 	 * @since 0.5
 	 *
-	 * @param array|null $labels An associative array of labels,
-	 *        with language codes as the keys.
-	 * @param array|null $descriptions An associative array of descriptions,
-	 *        with language codes as the keys.
-	 * @param EntityId $entityId The Id of the Entity the terms come from. Conflicts
-	 *        with this entity will be considered self-conflicts and ignored.
+	 * @param EntityId $entityId
+	 * @param array $terms An associative array mapping language codes to
+	 *        records. Reach record is an associative array with they keys "label" and
+	 *        "description", providing a label and description for each language.
+	 *        Both the label and the description for a language may be null.
 	 *
-	 * @throws InvalidArgumentException
-	 *
-	 * @return Result. If there are conflicts, $result->isValid() will return false and
-	 *         $result->getErrors() will return a non-empty list of Error objects.
-	 *         Each Error object will have four parameters:
-	 *         list( $type, $language, $text, $entityId )
+	 * @throws InvalidArgumentException if $terms is empty
+	 * @return Result
 	 */
-	public function detectTermConflicts( $labels, $descriptions, EntityId $entityId = null ) {
-		if ( !is_array( $labels ) && !is_null( $labels ) ) {
-			throw new InvalidArgumentException( '$labels must be an array or null' );
+	public function detectTermDuplicates( EntityId $entityId, array $terms ) {
+		if ( empty( $terms ) ) {
+			throw new InvalidArgumentException( '$terms must not be empty' );
 		}
 
-		if ( !is_array( $descriptions ) && !is_null( $descriptions ) ) {
-			throw new InvalidArgumentException( '$descriptions must be an array or null' );
+		//TODO: how to support more entity types here?!
+		if ( $entityId->getEntityType() === Property::ENTITY_TYPE ) {
+			$errorCode = 'label-not-unique-wikibase-property';
+			$termSpecs = $this->buildUniqueLabelSpecs( $terms );
+		} /*else if ( $entityId->getEntityType() === Query::ENTITY_TYPE ) {
+			$errorCode = 'wikibase-error-label-not-unique-wikibase-query';
+			$termSpecs = $this->buildUniqueLabelSpecs( $terms );
+		}*/ else {
+			$errorCode = 'label-not-unique-item';
+			$termSpecs = $this->buildUniqueLabelDescriptionPairSpecs( $terms );
 		}
 
-		if ( empty( $labels ) && empty( $descriptions ) ) {
-			return Result::newSuccess();
-		}
-
-		if ( $descriptions === null ) {
-			$termSpecs = $this->buildLabelConflictSpecs( $labels, $descriptions );
-		} else {
-			$termSpecs = $this->buildLabelDescriptionConflictSpecs( $labels, $descriptions );
-		}
-
-		$conflictingTerms = $this->findConflictingTerms( $termSpecs, $entityId, ... );
-
-		if ( $conflictingTerms ) {
-			$errors = $this->termsToErrors( 'found conflicting terms', $errorCode, $foundTerms );
-			return Result::newError( $errors );
-		} else {
-			return Result::newSuccess();
-		}
+		$result = $this->detectTermConflicts( $entityId, $termSpecs, $errorCode );
+		return $result;
 	}
 
 	/**
@@ -118,31 +72,34 @@ class TermDuplicateDetector {
 	 * of label and description for a given language. This applies only for languages for
 	 * which both label and description are given in $terms.
 	 *
-	 * @param array|null $labels An associative array of labels,
-	 *        with language codes as the keys.
-	 * @param array|null $descriptions An associative array of descriptions,
-	 *        with language codes as the keys.
+	 * @param array $terms An associative array mapping language codes to
+	 *        records. Reach record is an associative array with they keys "label" and
+	 *        "description", providing a label and description for each language.
+	 *        Both the label and the description for a language may be null.
 	 *
 	 * @return array An array suitable for use with TermIndex::getMatchingTermCombination().
 	 */
-	private function buildLabelDescriptionConflictSpecs( array $labels, array $descriptions ) {
+	private function buildUniqueLabelDescriptionPairSpecs( array $terms ) {
 		$termSpecs = array();
 
-		foreach ( $labels as $lang => $label ) {
-			if ( !isset( $descriptions[$lang] ) ) {
-				// If there's no description, there will be no conflict
+		foreach ( $terms as $langCode => $entry ) {
+			if ( !isset( $entry['label'] ) || !$entry['label'] ) {
+				continue;
+			}
+
+			if ( !isset( $entry['description'] ) || !$entry['description'] ) {
 				continue;
 			}
 
 			$label = new Term( array(
-				'termLanguage' => $lang,
-				'termText' => $label,
+				'termLanguage' => $langCode,
+				'termText' => $entry['label'],
 				'termType' => Term::TYPE_LABEL,
 			) );
 
 			$description = new Term( array(
-				'termLanguage' => $lang,
-				'termText' => $descriptions[$lang],
+				'termLanguage' => $langCode,
+				'termText' => $entry['description'],
 				'termType' => Term::TYPE_DESCRIPTION,
 			) );
 
@@ -163,13 +120,17 @@ class TermDuplicateDetector {
 	 *
 	 * @return array An array suitable for use with TermIndex::getMatchingTermCombination().
 	 */
-	private function buildLabelConflictSpecs( array $labels ) {
+	private function buildUniqueLabelSpecs( array $terms ) {
 		$termSpecs = array();
 
-		foreach ( $labels as $lang => $label ) {
+		foreach ( $terms as $langCode => $entry ) {
+			if ( !isset( $entry['label'] ) || !$entry['label'] ) {
+				continue;
+			}
+
 			$label = new Term( array(
-				'termLanguage' => $lang,
-				'termText' => $label,
+				'termLanguage' => $langCode,
+				'termText' => $entry['label'],
 				'termType' => Term::TYPE_LABEL,
 			) );
 
@@ -184,11 +145,11 @@ class TermDuplicateDetector {
 	 * @param array $termSpecs as returned by BuildXxxTermSpecs
 	 * @param string $errorCode
 	 *
-	 * @return Term[]
+	 * @return Result
 	 */
-	private function findConflictingTerms( array $termSpecs, $errorCode ) {
+	private function detectTermConflicts( EntityId $entityId, array $termSpecs, $errorCode ) {
 		if ( empty( $termSpecs ) ) {
-			return array();
+			return Result::newSuccess();
 		}
 
 		// FIXME: Do not run this when running test using MySQL as self joins fail on temporary tables.
@@ -199,14 +160,19 @@ class TermDuplicateDetector {
 			$foundTerms = $this->termFinder->getMatchingTermCombination(
 				$termSpecs,
 				Term::TYPE_LABEL,
-				$entityId->getEntityType()...,
+				$entityId->getEntityType(),
 				$entityId
 			);
 		} else {
 			$foundTerms = array();
 		}
 
-		return $foundTerms;
+		if ( $foundTerms ) {
+			$errors = $this->termsToErrors( 'found conflicting terms', $errorCode, $foundTerms );
+			return Result::newError( $errors );
+		} else {
+			return Result::newSuccess();
+		}
 	}
 
 	/**

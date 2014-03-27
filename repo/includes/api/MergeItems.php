@@ -93,13 +93,14 @@ class MergeItems extends ApiWikibase {
 				$toEntity,
 				$ignoreConflicts
 			);
+			//FIXME: batch first, for efficiency!
 			$changeOps->apply();
 		}
 		catch( InvalidArgumentException $e ) {
 			$this->dieUsage( $e->getMessage(), 'param-invalid' );
 		}
 		catch( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
+			$this->dieUsage( $e->getMessage(), 'failed-save' ); //FIXME: change to modification-failed
 		}
 
 		$this->attemptSaveMerge( $fromEntity, $toEntity, $params );

@@ -3,15 +3,12 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use ValueValidators\Error;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
-use Wikibase\TermDuplicateDetector;
 use Wikibase\SiteLinkLookup;
-use Wikibase\Term;
 
 /**
  * @since 0.5
@@ -31,11 +28,6 @@ class ChangeOpsMerge {
 	 */
 	private $ignoreConflicts;
 
-	/**
-	 * @var TermDuplicateDetector
-	 */
-	private $termDuplicateDetector;
-
 	/** @var SiteLinkLookup */
 	private $sitelinkLookup;
 
@@ -49,7 +41,6 @@ class ChangeOpsMerge {
 	 * @param Item $toItem
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
-	 * @param TermDuplicateDetector $termDuplicateDetector
 	 * @param SiteLinkLookup $sitelinkLookup
 	 * @param ChangeOpFactory $changeOpFactory
 	 */
@@ -57,7 +48,6 @@ class ChangeOpsMerge {
 		Item $fromItem,
 		Item $toItem,
 		$ignoreConflicts,
-		TermDuplicateDetector $termDuplicateDetector,
 		SiteLinkLookup $sitelinkLookup,
 		ChangeOpFactory $changeOpFactory
 	) {
@@ -68,7 +58,6 @@ class ChangeOpsMerge {
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
 		$this->ignoreConflicts = $ignoreConflicts;
-		$this->termDuplicateDetector = $termDuplicateDetector;
 		$this->sitelinkLookup = $sitelinkLookup;
 
 		$this->changeOpFactory = $changeOpFactory;
@@ -98,8 +87,16 @@ class ChangeOpsMerge {
 
 	public function apply() {
 		$this->generateChangeOps();
-		$this->fromChangeOps->apply( $this->fromItem );
-		$this->toChangeOps->apply( $this->toItem );
+
+		// Optimize ChangeOps by batching related changes together.
+		// This should mitigate the performance impact of enforcing
+		// uniqueness constraints on multiple lables or sitelinks.
+		$fromChangeOpsOptimized = $this->fromChangeOps->getBatchedOps();
+		$toChangeOpsOptimized = $this->toChangeOps->getBatchedOps();
+
+		$fromChangeOpsOptimized->apply( $this->fromItem );
+		$toChangeOpsOptimized->apply( $this->toItem );
+
 		$this->applyConstraintChecks();
 	}
 
@@ -234,15 +231,9 @@ class ChangeOpsMerge {
 	 * @throws ChangeOpException
 	 */
 	private function applyConstraintChecks() {
-		$result = $this->termDuplicateDetector->detectTermDuplicates( $this->toItem, $terms );
-		$termConflicts = $result->getErrors();
-
 		$conflictingSitelinks = $this->sitelinkLookup->getConflictsForItem( $this->toItem );
 
 		$conflictString = '';
-		if( $termConflicts !== array() ) {
-			$conflictString .= $this->getConflictStringForErrors( $termConflicts );
-		}
 		if( $conflictingSitelinks !== array() ) {
 			$conflictString .= $this->getConflictStringForSitelinks( $conflictingSitelinks );
 		}
@@ -250,41 +241,6 @@ class ChangeOpsMerge {
 		if( $conflictString !== '' ) {
 			throw new ChangeOpException( 'Item being merged to has conflicting terms: ' . $conflictString );
 		}
-	}
-
-	/**
-	 * @param Error[] $termConflicts
-	 *
-	 * @return string
-	 */
-	private function getConflictStringForErrors( array $termConflicts ) {
-		$conflictString = '';
-		foreach( $termConflicts as $error ) {
-			$conflictString .= $this->getConflictStringForError( $error );
-		}
-		return $conflictString;
-	}
-
-	/**
-	 * @param Error $error
-	 *
-	 * @return string
-	 */
-	private function getConflictStringForError( Error $error ) {
-		//@see TermDuplicateDetector::detectTermDuplicates
-		list( $type, $language, $text, $conflictingEntity ) = $error->getParameters();
-
-		$fromId = $this->fromItem->getId()->getSerialization();
-
-		if( $fromId !== $conflictingEntity ) {
-			return '(' .
-				$conflictingEntity . ' => ' .
-				$language . ' => ' .
-				$type . ' => ' .
-				$text . ') ';
-		}
-
-		return '';
 	}
 
 	/**
