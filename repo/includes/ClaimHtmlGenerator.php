@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
-use Wikibase\Lib\FormattingException;
+use Html;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
