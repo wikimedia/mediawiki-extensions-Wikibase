@@ -114,7 +114,7 @@ HTML;
 	</div>
 	<div class="wb-snak-value-container" dir="auto">
 		<div class="wb-snak-typeselector"></div>
-		<div class="wb-snak-value">$2</div>
+		<div class="wb-snak-value $2">$3</div>
 	</div>
 </div>
 HTML;
