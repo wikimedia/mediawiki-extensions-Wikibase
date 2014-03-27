@@ -16,6 +16,24 @@
       "revId": "8bc6005b9bc886e055d61ebf75d10850c70e79e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_eff177c9",
+        "filename": "lib/tests/phpunit/LanguageFallbackChainFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T23:51:04Z",
+      "side": 1,
+      "message": "Same reasoning as in the other patch: I don\u0027t think it\u0027s useful to clutter the \"use\" section for a single comment.",
+      "parentUuid": "ae0e4726_d98e86d5",
+      "revId": "8bc6005b9bc886e055d61ebf75d10850c70e79e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
