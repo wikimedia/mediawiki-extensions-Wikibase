@@ -169,7 +169,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		} );
 
 		// Set initial value if provided in options:
-		this.value( this.option( 'value' ) || null );
+		this._initValue( this.option( 'value' ) || null );
 
 		if( this.option( 'autoStartEditing' ) && this.isEmpty() ) {
 			// If no data value is represented, offer UI to build one.
@@ -342,6 +342,17 @@ $.widget( 'valueview.valueview', PARENT, {
 		this._setValue( value );
 	},
 
+	_initValue: function( value ) {
+		var formattedValue = this.element.html();
+		if( !formattedValue ) {
+			return this.value( value );
+		} else {
+			this._value = value;
+			this._formattedValue = formattedValue;
+			this._updateExpertConstructor();
+		}
+	},
+
 	/**
 	 * Sets the value internally and triggers the validation process on the new value, will also
 	 * make sure that the new value will be displayed.
@@ -357,6 +368,11 @@ $.widget( 'valueview.valueview', PARENT, {
 		) {
 			throw new Error( 'Instance of dataValues.DataValue required for setting a value' );
 		}
+
+		if( this._value && this._value.toJSON && JSON.stringify( value.toJSON() ) === JSON.stringify( this._value.toJSON() ) ) {
+			return;
+		}
+
 		this._value = value;
 		this._updateExpertConstructor(); // new value, new expert might be needed
 
