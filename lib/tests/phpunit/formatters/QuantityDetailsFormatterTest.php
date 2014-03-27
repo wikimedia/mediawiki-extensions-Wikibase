@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\QuantityDetailsFormatter;
@@ -61,7 +62,10 @@ class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = new QuantityDetailsFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException(
+			'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
+		);
+
 		$formatter->format( $value );
 	}
 }

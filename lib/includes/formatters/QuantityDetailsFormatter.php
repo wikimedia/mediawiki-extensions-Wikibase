@@ -4,9 +4,9 @@ namespace Wikibase\Lib;
 
 use DataValues\QuantityValue;
 use Html;
-use InvalidArgumentException;
 use Message;
 use ValueFormatters\DecimalFormatter;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
@@ -50,12 +50,16 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @param QuantityValue $value The ID to format
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws MismatchingDataValueTypeException
 	 * @return string
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof QuantityValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an QuantityValue.' );
+			throw new MismatchingDataValueTypeException(
+				$value->getType(),
+				QuantityValue::getType(),
+				'Data value type mismatch. Expected an QuantityValue.'
+			);
 		}
 
 		$html = '';

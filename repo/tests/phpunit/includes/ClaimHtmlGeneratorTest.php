@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use Language;
 use Title;
 use Wikibase\Claim;
 use Wikibase\ClaimHtmlGenerator;
@@ -80,7 +81,8 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			Language::factory( 'qqx' )
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(

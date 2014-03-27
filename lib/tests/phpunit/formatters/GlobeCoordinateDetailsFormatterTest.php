@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use DataValues\GlobeCoordinateValue;
 use DataValues\LatLongValue;
 use DataValues\NumberValue;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\GlobeCoordinateDetailsFormatter;
@@ -62,7 +63,10 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = new GlobeCoordinateDetailsFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException(
+			'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
+		);
+
 		$formatter->format( $value );
 	}
 }

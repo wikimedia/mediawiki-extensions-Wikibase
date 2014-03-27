@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Html;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\View\SnakHtmlGenerator;
 

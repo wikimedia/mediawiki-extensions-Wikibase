@@ -5,6 +5,7 @@ namespace Wikibase\Lib;
 use DataValues\StringValue;
 use Html;
 use InvalidArgumentException;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -40,11 +41,15 @@ class HtmlUrlFormatter implements ValueFormatter {
 	 *
 	 * @return string
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws MismatchingDataValueTypeException
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof StringValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected a StringValue.' );
+			throw new MismatchingDataValueTypeException(
+				$value->getType(),
+				StringValue::getType(),
+				'Data value type mismatch. Expected a StringValue.'
+			);
 		}
 
 		$url = $value->getValue();
