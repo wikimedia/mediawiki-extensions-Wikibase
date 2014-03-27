@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_2ca9bd21",
+        "filename": "lib/includes/ClaimGuidGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-27T22:35:50Z",
+      "side": 1,
+      "message": "Why are you allowing optional injection here? Claim GUIDs consist out of an v4 GUID, not any type of guid.\n\nI\u0027m wondering why there is a GuidGenerator interface to begin with - I suspect we actually have no use for it.",
+      "revId": "8b194522b58c6ecd838831cc6022197c4a5ae805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_6c7695d7",
+        "filename": "lib/includes/ClaimGuidGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-27T22:35:50Z",
+      "side": 1,
+      "message": "IIRC the id was put into the constructor as for all use cases at that point these id generators where only needed for one specific entity. This change implies that has changed (which is fine). Can I get an example of where the generator is now used for multiple entity ids?",
+      "revId": "8b194522b58c6ecd838831cc6022197c4a5ae805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_4c7bd1bd",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-27T22:35:50Z",
+      "side": 1,
+      "message": "...",
+      "revId": "8b194522b58c6ecd838831cc6022197c4a5ae805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
