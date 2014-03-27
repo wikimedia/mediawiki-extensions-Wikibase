@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_6f9b2c1c",
+        "filename": "tests/browser/features/set_site_link.feature",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "Be consistent.",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_4fd2a8d6",
+        "filename": "tests/browser/features/step_definitions/set_site_link_steps.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "Either \"set site link special page\" or \"Special:SetSiteLink page\".",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_2fd774c6",
+        "filename": "tests/browser/features/step_definitions/set_site_link_steps.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "Either \"set site link special page\" or \"Special:SetSiteLink page\".",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_cf77d8fc",
+        "filename": "tests/browser/features/step_definitions/set_site_link_steps.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "Is there a convention in (American/British) English if an abbreviation like \"ID\" should be upper or lower case?",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_afea6471",
+        "filename": "tests/browser/features/step_definitions/set_site_link_steps.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "If you base your patch on my refactoring you can reuse the API call there.",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_8f8200cc",
+        "filename": "tests/browser/features/support/pages/set_site_link_page.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "Either \"set site link special page\" or \"Special:SetSiteLink page\".",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_ef23bcfe",
+        "filename": "tests/browser/features/support/pages/set_site_link_page.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "I propose the naming convention \"SpecialSetSiteLinkPage\".",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_8fc8c026",
+        "filename": "tests/browser/features/support/pages/set_site_link_page.rb",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-27T17:45:12Z",
+      "side": 1,
+      "message": "I don\u0027t think the \"set_site_link_\" prefix should be here. Think of these as class properties. They are not global as far as I can tell.",
+      "revId": "4d1559e8c215dc716dab21726dda6c6b020bc2b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
