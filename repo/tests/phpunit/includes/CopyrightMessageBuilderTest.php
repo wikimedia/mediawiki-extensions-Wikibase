@@ -33,7 +33,7 @@ class CopyrightMessageBuilderTest extends \PHPUnit_Framework_TestCase {
 				'wikibase-shortcopyrightwarning',
 				array(
 					'(wikibase-save)',
-					'(copyrightpage)',
+					wfMessage( 'copyrightpage' )->inContentLanguage()->text(),
 					'[https://creativecommons.org Creative Commons Attribution-Share Alike 3.0]'
 				),
 				'https://creativecommons.org',

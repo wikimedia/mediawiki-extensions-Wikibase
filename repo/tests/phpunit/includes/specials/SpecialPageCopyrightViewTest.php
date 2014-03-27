@@ -37,7 +37,9 @@ class SpecialPageCopyrightViewTest extends \PHPUnit_Framework_TestCase {
 	public function getHtmlProvider() {
 		return array(
 			array(
-				'/\(wikibase-shortcopyrightwarning: \(wikibase-save\), \(copyrightpage\)/',
+				'/\(wikibase-shortcopyrightwarning: \(wikibase-save\), ' .
+				preg_quote( wfMessage( 'copyrightpage' )->inContentLanguage()->text(), '/' ) .
+				'/',
 				array(
 					'tag' => 'a',
 					'attributes' => array(
