@@ -7,6 +7,7 @@ use UserInputException;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -58,7 +59,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	public function __construct() {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory( Item::ENTITY_TYPE );
 	}
 
 	/**

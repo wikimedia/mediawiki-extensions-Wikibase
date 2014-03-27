@@ -9,6 +9,7 @@ use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ItemContent;
+use ValueValidators\ValueValidator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOps
@@ -28,13 +29,26 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return ValueValidator
+	 */
+	private function getMockVaidator() {
+		$mock = $this->getMockBuilder( 'ValueValidators\ValueValidator' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return $mock;
+	}
+
+	/**
 	 * @return ChangeOp[]
 	 */
 	public function changeOpProvider() {
+		$validator = $this->getMockVaidator();
+
 		$ops = array();
-		$ops[] = array ( new ChangeOpLabel( 'en', 'myNewLabel' ) );
-		$ops[] = array ( new ChangeOpDescription( 'de', 'myNewDescription' ) );
-		$ops[] = array ( new ChangeOpLabel( 'en', null ) );
+		$ops[] = array ( new ChangeOpLabel( 'en', 'myNewLabel', $validator, $validator ) );
+		$ops[] = array ( new ChangeOpDescription( 'de', 'myNewDescription', $validator, $validator ) );
+		$ops[] = array ( new ChangeOpLabel( 'en', null, $validator, $validator ) );
 
 		return $ops;
 	}
@@ -51,12 +65,14 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpArrayProvider() {
+		$validator = $this->getMockVaidator();
+
 		$ops = array();
 		$ops[] = array (
 					array(
-						new ChangeOpLabel( 'en', 'enLabel' ),
-						new ChangeOpLabel( 'de', 'deLabel' ),
-						new ChangeOpDescription( 'en', 'enDescr' ),
+						new ChangeOpLabel( 'en', 'enLabel', $validator, $validator ),
+						new ChangeOpLabel( 'de', 'deLabel', $validator, $validator ),
+						new ChangeOpDescription( 'en', 'enDescr', $validator, $validator ),
 					)
 				);
 
@@ -75,9 +91,11 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidChangeOpProvider() {
+		$validator = $this->getMockVaidator();
+
 		$ops = array();
 		$ops[] = array ( 1234 );
-		$ops[] = array ( array( new ChangeOpLabel( 'en', 'test' ), 123 ) );
+		$ops[] = array ( array( new ChangeOpLabel( 'en', 'test', $validator, $validator ), 123 ) );
 
 		return $ops;
 	}
@@ -94,12 +112,14 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function changeOpsProvider() {
+		$validator = $this->getMockVaidator();
+
 		$args = array();
 
 		$language = 'en';
 		$changeOps = new ChangeOps();
-		$changeOps->add( new ChangeOpLabel( $language, 'newLabel' ) );
-		$changeOps->add( new ChangeOpDescription( $language, 'newDescription' ) );
+		$changeOps->add( new ChangeOpLabel( $language, 'newLabel', $validator, $validator ) );
+		$changeOps->add( new ChangeOpDescription( $language, 'newDescription', $validator, $validator ) );
 		$args[] = array( $changeOps, $language, 'newLabel', 'newDescription' );
 
 		return $args;
@@ -126,11 +146,13 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \Wikibase\ChangeOp\ChangeOpException
 	 */
 	public function testInvalidApply() {
+		$validator = $this->getMockVaidator();
+
 		$item = ItemContent::newEmpty();
 
 		$changeOps = new ChangeOps();
-		$changeOps->add( new ChangeOpLabel( 'en', 'newLabel' ) );
-		$changeOps->add( new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction' ) );
+		$changeOps->add( new ChangeOpLabel( 'en', 'newLabel', $validator, $validator ) );
+		$changeOps->add( new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction', $validator, $validator ) );
 
 		$changeOps->apply( $item->getEntity() );
 	}

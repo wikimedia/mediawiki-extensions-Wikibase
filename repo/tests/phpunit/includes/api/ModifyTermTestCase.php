@@ -52,6 +52,9 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			array( //7
 				'p' => array( 'language' => 'bat-smg', 'value' => '' ),
 				'e' => array( ) ),
+			array( //8
+				'p' => array( 'language' => 'en', 'value' => "  x\nx  " ),
+				'e' => array( 'value' => array( 'en' => 'x x' ) ) ),
 		);
 	}
 	
@@ -126,11 +129,11 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 
 			// -- Test Exceptions -----------------------------
 			array( //0
-				'p' => array( 'language' => '', 'value' => '' ),
+				'p' => array( 'language' => 'xx', 'value' => 'Foo' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
 			array( //1
 				'p' => array( 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-modify' ) ) ),
 			array( //2
 				'p' => array( 'language' => 'pt', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),

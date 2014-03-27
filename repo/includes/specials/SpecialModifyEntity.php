@@ -43,13 +43,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected $rightsText;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var ChangeOpFactory
-	 */
-	protected $changeOpFactory;
-
-	/**
 	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
@@ -62,8 +55,17 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
+	}
 
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+	/**
+	 * @param string $entityType
+	 *
+	 * @return ChangeOpFactory
+	 */
+	protected function getChangOpFactory( $entityType ) {
+		// @todo: figure out a good way to do this without global state.
+		// Do we want a ChangeOpFactoryFactory?...
+		return WikibaseRepo::getDefaultInstance()->getChangeOpFactory( $entityType );
 	}
 
 	/**

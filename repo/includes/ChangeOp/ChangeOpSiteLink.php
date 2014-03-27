@@ -132,6 +132,9 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		// NOTE: sitelink uniqueness is a hard constraint and is checked on save
+		//       via ItemContent::prepareSave!
+
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}

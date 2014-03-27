@@ -3,15 +3,12 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use ValueValidators\Error;
+use Wikibase\Validators\EntityValidator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
-use Wikibase\TermDuplicateDetector;
-use Wikibase\SiteLinkLookup;
 
 /**
  * @since 0.5
@@ -31,13 +28,8 @@ class ChangeOpsMerge {
 	 */
 	private $ignoreConflicts;
 
-	/**
-	 * @var TermDuplicateDetector
-	 */
-	private $termDuplicateDetector;
-
-	/** @var SiteLinkLookup */
-	private $sitelinkLookup;
+	/** @var EntityValidator */
+	private $uniquenessValidator;
 
 	/**
 	 * @var ChangeOpFactory
@@ -49,16 +41,14 @@ class ChangeOpsMerge {
 	 * @param Item $toItem
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
-	 * @param TermDuplicateDetector $termDuplicateDetector
-	 * @param SiteLinkLookup $sitelinkLookup
+	 * @param EntityValidator $uniquenessValidator
 	 * @param ChangeOpFactory $changeOpFactory
 	 */
 	public function __construct(
 		Item $fromItem,
 		Item $toItem,
 		$ignoreConflicts,
-		TermDuplicateDetector $termDuplicateDetector,
-		SiteLinkLookup $sitelinkLookup,
+		EntityValidator $uniquenessValidator,
 		ChangeOpFactory $changeOpFactory
 	) {
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
@@ -68,8 +58,7 @@ class ChangeOpsMerge {
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
 		$this->ignoreConflicts = $ignoreConflicts;
-		$this->termDuplicateDetector = $termDuplicateDetector;
-		$this->sitelinkLookup = $sitelinkLookup;
+		$this->uniquenessValidator = $uniquenessValidator;
 
 		$this->changeOpFactory = $changeOpFactory;
 	}
@@ -98,9 +87,17 @@ class ChangeOpsMerge {
 
 	public function apply() {
 		$this->generateChangeOps();
-		$this->fromChangeOps->apply( $this->fromItem );
-		$this->toChangeOps->apply( $this->toItem );
-		$this->applyConstraintChecks();
+
+		// @todo: Optimize ChangeOps by batching related changes together.
+		// This should mitigate the performance impact of enforcing
+		// uniqueness constraints on multiple lables or sitelinks.
+		$fromChangeOpsOptimized = $this->fromChangeOps->getBatchedOps();
+		$toChangeOpsOptimized = $this->toChangeOps->getBatchedOps();
+
+		$fromChangeOpsOptimized->apply( $this->fromItem );
+		$toChangeOpsOptimized->apply( $this->toItem );
+
+		$this->applyConstraintChecks( $this->toItem );
 	}
 
 	private function generateChangeOps() {
@@ -232,100 +229,15 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * Throws an exception if it would not be possible to save the second item
+	 * Throws an exception if it would not be possible to save the updated items
 	 * @throws ChangeOpException
 	 */
-	private function applyConstraintChecks() {
-		if ( $this->toItem->getType() === Property::ENTITY_TYPE ) {
-			$result = $this->termDuplicateDetector->detectLabelConflictsForEntity( $this->toItem );
-		} else {
-			$result = $this->termDuplicateDetector->detectLabelDescriptionConflictsForEntity( $this->toItem );
+	private function applyConstraintChecks( Entity $entity ) {
+		$result = $this->uniquenessValidator->validateEntity( $entity );
+
+		if( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
 		}
-
-		$termConflicts = $result->getErrors();
-
-		$conflictingSitelinks = $this->sitelinkLookup->getConflictsForItem( $this->toItem );
-
-		$conflictString = '';
-		if( $termConflicts !== array() ) {
-			$conflictString .= $this->getConflictStringForErrors( $termConflicts );
-		}
-		if( $conflictingSitelinks !== array() ) {
-			$conflictString .= $this->getConflictStringForSitelinks( $conflictingSitelinks );
-		}
-
-		if( $conflictString !== '' ) {
-			throw new ChangeOpException( 'Item being merged to has conflicting terms: ' . $conflictString );
-		}
-	}
-
-	/**
-	 * @param Error[] $termConflicts
-	 *
-	 * @return string
-	 */
-	private function getConflictStringForErrors( array $termConflicts ) {
-		$conflictString = '';
-		foreach( $termConflicts as $error ) {
-			$conflictString .= $this->getConflictStringForError( $error );
-		}
-		return $conflictString;
-	}
-
-	/**
-	 * @param Error $error
-	 *
-	 * @return string
-	 */
-	private function getConflictStringForError( Error $error ) {
-		//@see TermDuplicateDetector::detectTermDuplicates
-		list( $type, $language, $text, $conflictingEntity ) = $error->getParameters();
-
-		$fromId = $this->fromItem->getId()->getSerialization();
-
-		if( $fromId !== $conflictingEntity ) {
-			return '(' .
-				$conflictingEntity . ' => ' .
-				$language . ' => ' .
-				$type . ' => ' .
-				$text . ') ';
-		}
-
-		return '';
-	}
-
-	/**
-	 * @param array $conflictingSitelinks array of arrays each with the keys:
-	 *     - itemId => integer
-	 *     - siteId => string
-	 *     - sitePage => string
-	 * @return string
-	 */
-	private function getConflictStringForSitelinks( $conflictingSitelinks ) {
-		$conflictString = '';
-		foreach( $conflictingSitelinks as $sitelink ) {
-			$conflictString .= $this->getConflictStringForSitelink( $sitelink );
-		}
-		return $conflictString;
-	}
-
-	/**
-	 * @param array $sitelink array with the keys:
-	 *     - itemId => integer
-	 *     - siteId => string
-	 *     - sitePage => string
-	 *
-	 * @return string
-	 */
-	private function getConflictStringForSitelink( $sitelink ) {
-		$itemId = ItemId::newFromNumber( $sitelink['itemId'] );
-		if( !$itemId->equals( $this->fromItem->getId() ) ) {
-			return '(' .
-				$itemId->getSerialization() . ' => ' .
-				$sitelink['siteId'] . ' => ' .
-				$sitelink['sitePage'] . ') ';
-		}
-		return '';
 	}
 
 }

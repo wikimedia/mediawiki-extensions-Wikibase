@@ -61,6 +61,8 @@ class SetClaim extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$this->initChangOpFactory( $entity->getType() );
+
 		$summary = $this->getSummary( $params, $claim, $entity );
 
 		$changeop = $this->changeOpFactory->newSetClaimOp(

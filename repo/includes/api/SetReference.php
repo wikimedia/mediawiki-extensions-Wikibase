@@ -39,6 +39,8 @@ class SetReference extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$this->initChangOpFactory( $entity->getType() );
+
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['statement'], $entity );

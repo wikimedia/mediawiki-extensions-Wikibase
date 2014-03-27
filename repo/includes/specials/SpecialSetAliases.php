@@ -61,11 +61,13 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @return Summary
 	 */
 	protected function setValue( $entity, $language, $value ) {
+		$changeOpFactory = $this->getChangOpFactory( $entity->getType() );
+
 		$summary = $this->getSummary( 'wbsetaliases' );
 		if ( $value === '' ) {
-			$changeOp = $this->changeOpFactory->newRemoveAliasesOp( $language, $entity->getAliases( $language ) );
+			$changeOp = $changeOpFactory->newRemoveAliasesOp( $language, $entity->getAliases( $language ) );
 		} else {
-			$changeOp = $this->changeOpFactory->newSetAliasesOp( $language, explode( '|', $value ) );
+			$changeOp = $changeOpFactory->newSetAliasesOp( $language, explode( '|', $value ) );
 		}
 		$changeOp->apply( $entity, $summary );
 

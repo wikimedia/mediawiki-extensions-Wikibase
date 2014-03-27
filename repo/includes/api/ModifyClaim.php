@@ -9,7 +9,6 @@ use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Base class for modifying claims.
@@ -37,9 +36,11 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $claimGuidParser;
 
 	/**
+	 * @note: call initChangeOpFactory() to initialize.
+	 *
 	 * @var ChangeOpFactory
 	 */
-	protected $changeOpFactory;
+	protected $changeOpFactory = null;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -59,7 +60,26 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+	}
+
+	/**
+	 * @param string $entityType
+	 */
+	protected function initChangOpFactory( $entityType ) {
+		// @todo: figure out a good way to do this without global state.
+		// Do we want a ChangeOpFactoryFactory?...
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory( $entityType );
+	}
+
+	/**
+	 * @param string $entityType
+	 *
+	 * @return ChangeOpFactory
+	 */
+	protected function getChangOpFactory( $entityType ) {
+		// @todo: figure out a good way to do this without global state.
+		// Do we want a ChangeOpFactoryFactory?...
+		return WikibaseRepo::getDefaultInstance()->getChangeOpFactory( $entityType );
 	}
 
 	/**

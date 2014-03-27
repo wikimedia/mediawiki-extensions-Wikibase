@@ -64,10 +64,12 @@ class SpecialSetDescription extends SpecialModifyTerm {
 		$value = $value === '' ? null : $value;
 		$summary = $this->getSummary( 'wbsetdescription' );
 
+		$changeOpFactory = $this->getChangOpFactory( $entity->getType() );
+
 		if ( $value === null ) {
-			$changeOp = $this->changeOpFactory->newRemoveDescriptionOp( $language );
+			$changeOp = $changeOpFactory->newRemoveDescriptionOp( $language );
 		} else {
-			$changeOp = $this->changeOpFactory->newSetDescriptionOp( $language, $value );
+			$changeOp = $changeOpFactory->newSetDescriptionOp( $language, $value );
 		}
 
 		$changeOp->apply( $entity, $summary );

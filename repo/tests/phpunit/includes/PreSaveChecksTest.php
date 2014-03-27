@@ -3,10 +3,12 @@
 namespace Wikibase\Test;
 
 use Status;
+use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\PreSaveChecks;
+use Wikibase\TermDuplicateDetector;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -46,92 +48,114 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 				),
 				array()
 			),
-			'not a language' => array(
-				'Wikibase\DataModel\Entity\Item',
-				null,
-				array(
-					'label' => array( 'narf' => 'xyz' ),
-				),
-				array(
-					'wikibase-validator-not-a-language'
-				)
-			),
-			'label too long' => array(
-				'Wikibase\DataModel\Entity\Item',
+			'duplicate label' => array(
+				'Wikibase\DataModel\Entity\Property',
 				array(
 					'label' => array( 'de' => 'xxx' ),
 				),
 				array(
-					'label' => array( 'de' => str_repeat( 'x', 16 ) ),
+					'label' => array( 'de' => 'DUPE' ),
 				),
 				array(
-					'wikibase-validator-too-long'
+					'wikibase-validator-label-conflict'
 				)
 			),
-			'description too long' => array(
+			'duplicate label/description' => array(
 				'Wikibase\DataModel\Entity\Item',
 				array(
+					'label' => array( 'de' => 'xxx' ),
+					'description' => array( 'de' => 'DUPE' ),
+				),
+				array(
+					'label' => array( 'de' => 'DUPE' ),
+					'description' => array( 'de' => 'DUPE' ),
+				),
+				array(
+					'wikibase-validator-label-conflict'
+				)
+			),
+			'duplicate label/description 2' => array(
+				'Wikibase\DataModel\Entity\Item',
+				array(
+					'label' => array( 'de' => 'DUPE' ),
 					'description' => array( 'de' => 'xxx' ),
 				),
 				array(
-					'description' => array( 'de' => str_repeat( 'x', 16 ) ),
+					'label' => array( 'de' => 'DUPE' ),
+					'description' => array( 'de' => 'DUPE' ),
 				),
 				array(
-					'wikibase-validator-too-long'
+					'wikibase-validator-label-conflict'
 				)
 			),
-			'alias too long' => array(
-				'Wikibase\DataModel\Entity\Property',
-				null,
-				array(
-					'aliases' => array( 'de' => array( str_repeat( 'x', 16 ) ) ),
-				),
-				array(
-					'wikibase-validator-too-long'
-				)
-			),
-			'alias empty' => array(
-				'Wikibase\DataModel\Entity\Property',
-				array(
-					'aliases' => array( 'de' => array( 'xxx' ) ),
-				),
-				array(
-					'aliases' => array( 'de' => array( '' ) ),
-				),
-				array(
-					'wikibase-validator-too-short'
-				)
-			),
-			'lable is proeprty id' => array(
-				'Wikibase\DataModel\Entity\Property',
+			'duplicate label is ok for items' => array(
+				'Wikibase\DataModel\Entity\Item',
 				array(
 					'label' => array( 'de' => 'xxx' ),
 				),
 				array(
-					'label' => array( 'de' => 'P17' ),
+					'label' => array( 'de' => 'DUPE' ),
+				),
+				array()
+			),
+			'duplicate label, but no change' => array(
+				'Wikibase\DataModel\Entity\Property',
+				array(
+					'label' => array( 'de' => 'DUPE' ),
 				),
 				array(
-					'wikibase-validator-label-no-entityid'
-				)
+					'label' => array( 'de' => 'DUPE' ),
+				),
+				array()
 			),
-			//TODO: check for dupes
 		);
 	}
 
+	public function detectLabelConflictsForEntity( Entity $entity ) {
+
+		foreach ( $entity->getLabels() as $label ) {
+			if ( $label === 'DUPE' ) {
+				return Result::newError( array(
+					Error::newError( 'Foo!', 'label', 'label-conflict' )
+				) );
+			}
+		}
+
+		return Result::newSuccess();
+	}
+
+	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
+
+		foreach ( $entity->getLabels() as $lang => $label ) {
+			if ( $label === 'DUPE' ) {
+				$description = $entity->getDescription( $lang );
+
+				if ( $description === 'DUPE' ) {
+					return Result::newError( array(
+						Error::newError( 'Foo!', 'label', 'label-conflict' )
+					) );
+				}
+			}
+		}
+
+		return Result::newSuccess();
+	}
+
+	/**
+	 * @return TermDuplicateDetector
+	 */
 	private function getMockTermDuplicateDetector() {
 		$mock =  $this->getMockBuilder( 'Wikibase\TermDuplicateDetector' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$good = Result::newSuccess();
-
 		$mock->expects( $this->any() )
 			->method( 'detectLabelConflictsForEntity' )
-			->will( $this->returnValue( $good ) );
+			->will( $this->returnCallback( array( $this, 'detectLabelConflictsForEntity' ) ) );
 
 		$mock->expects( $this->any() )
 			->method( 'detectLabelDescriptionConflictsForEntity' )
-			->will( $this->returnValue( $good ) );
+			->will( $this->returnCallback( array( $this, 'detectLabelDescriptionConflictsForEntity' ) ) );
 
 		return $mock;
 	}

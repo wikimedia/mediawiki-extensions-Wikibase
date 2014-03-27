@@ -13,7 +13,7 @@ use RequestContext;
 use Revision;
 use Title;
 use User;
-use Wikibase\content\EntityValidator;
+use Wikibase\Validators\EntityValidator;
 
 /**
  * Base handler class for Wikibase\Entity content classes.

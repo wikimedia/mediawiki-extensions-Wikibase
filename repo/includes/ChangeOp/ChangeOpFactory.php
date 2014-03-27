@@ -2,17 +2,16 @@
 
 namespace Wikibase\ChangeOp;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
-use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\SiteLinkLookup;
-use Wikibase\TermDuplicateDetector;
 use Wikibase\Validators\SnakValidator;
+use Wikibase\Validators\TermValidatorFactory;
 
 /**
  * Factory for ChangeOps.
@@ -23,14 +22,14 @@ use Wikibase\Validators\SnakValidator;
 class ChangeOpFactory {
 
 	/**
-	 * @var TermDuplicateDetector
+	 * @var string
 	 */
-	protected $termDuplicateDetector;
+	protected $entityType;
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var TermValidatorFactory
 	 */
-	protected $siteLinkLookup;
+	protected $termValidatorFactory;
 
 	/**
 	 * @var ClaimGuidGenerator
@@ -53,24 +52,24 @@ class ChangeOpFactory {
 	protected $snakValidator;
 
 	/**
-	 * @param TermDuplicateDetector $termDuplicateDetector
-	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param string $entityType
+	 * @param TermValidatorFactory $termValidatorFactory
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
 	 */
 	public function __construct(
-		TermDuplicateDetector $termDuplicateDetector,
-		SiteLinkLookup $siteLinkLookup,
+		$entityType,
+		TermValidatorFactory $termValidatorFactory,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser,
 		SnakValidator $snakValidator
 	) {
+		$this->entityType = $entityType;
 
-		$this->termDuplicateDetector = $termDuplicateDetector;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->termValidatorFactory = $termValidatorFactory;
 
 		$this->guidGenerator = $guidGenerator;
 		$this->guidValidator = $guidValidator;
@@ -87,7 +86,10 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newAddAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'add' );
+		return new ChangeOpAliases( $language, $aliases, 'add',
+			$this->termValidatorFactory->getAliasValidator( $this->entityType ),
+			$this->termValidatorFactory->getLanguageValidator()
+		);
 	}
 
 	/**
@@ -98,7 +100,10 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'set' );
+		return new ChangeOpAliases( $language, $aliases, 'set',
+			$this->termValidatorFactory->getAliasValidator( $this->entityType ),
+			$this->termValidatorFactory->getLanguageValidator()
+		);
 	}
 
 	/**
@@ -108,7 +113,10 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'remove' );
+		return new ChangeOpAliases( $language, $aliases, 'remove',
+			$this->termValidatorFactory->getAliasValidator( $this->entityType ),
+			$this->termValidatorFactory->getLanguageValidator()
+		);
 	}
 
 	/**
@@ -119,7 +127,10 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetDescriptionOp( $language, $description ) {
-		return new ChangeOpDescription( $language, $description );
+		return new ChangeOpDescription( $language, $description,
+			$this->termValidatorFactory->getDescriptionValidator( $this->entityType ),
+			$this->termValidatorFactory->getLanguageValidator()
+		);
 	}
 
 	/**
@@ -129,7 +140,10 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveDescriptionOp( $language ) {
-		return new ChangeOpDescription( $language, null );
+		return new ChangeOpDescription( $language, null,
+			$this->termValidatorFactory->getDescriptionValidator( $this->entityType ),
+			$this->termValidatorFactory->getLanguageValidator()
+		);
 	}
 
 	/**
@@ -140,7 +154,10 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetLabelOp( $language, $label ) {
-		return new ChangeOpLabel( $language, $label );
+		return new ChangeOpLabel( $language, $label,
+			$this->termValidatorFactory->getLabelValidator( $this->entityType ),
+			$this->termValidatorFactory->getLanguageValidator()
+		);
 	}
 
 	/**
@@ -150,10 +167,15 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveLabelOp( $language ) {
-		return new ChangeOpLabel( $language, null );
+		return new ChangeOpLabel( $language, null,
+			$this->termValidatorFactory->getLabelValidator( $this->entityType ),
+			$this->termValidatorFactory->getLanguageValidator()
+		);
 	}
 
 	/**
+	 * @todo: This should be available for Items only.
+	 *
 	 * @param string $siteId
 	 * @param string $pageName
 	 * @param array|null $badges
@@ -166,6 +188,8 @@ class ChangeOpFactory {
 	}
 
 	/**
+	 * @todo: This should be available for Items only.
+	 *
 	 * @param string $siteId
 	 *
 	 * @throws InvalidArgumentException
@@ -309,8 +333,7 @@ class ChangeOpFactory {
 			$fromItem,
 			$toItem,
 			$ignoreConflicts,
-			$this->termDuplicateDetector,
-			$this->siteLinkLookup,
+			$this->termValidatorFactory->getUniquenessValidator( $this->entityType ),
 			$this
 		);
 	}

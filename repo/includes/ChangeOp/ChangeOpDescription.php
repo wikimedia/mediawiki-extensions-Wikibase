@@ -5,6 +5,7 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
+use ValueValidators\ValueValidator;
 
 /**
  * Class for description change operation
@@ -12,6 +13,7 @@ use Wikibase\Summary;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ChangeOpDescription extends ChangeOpBase {
 
@@ -30,26 +32,53 @@ class ChangeOpDescription extends ChangeOpBase {
 	protected $description;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var ValueValidator
+	 */
+	protected $languageValidator;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var ValueValidator
+	 */
+	protected $termValidator;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $language
 	 * @param string|null $description
 	 *
+	 * @param ValueValidator $termValidator
+	 * @param ValueValidator $languageValidator
+	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $language, $description ) {
+	public function __construct(
+		$language,
+		$description,
+		ValueValidator $termValidator,
+		ValueValidator $languageValidator
+	) {
 		if ( !is_string( $language ) ) {
 			throw new InvalidArgumentException( '$language needs to be a string' );
 		}
 
 		$this->language = $language;
 		$this->description = $description;
+
+		$this->termValidator = $termValidator;
+		$this->languageValidator = $languageValidator;
 	}
 
 	/**
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		$this->validateChange( $entity );
+
 		if ( $this->description === null ) {
 			$this->updateSummary( $summary, 'remove', $this->language, $entity->getDescription( $this->language ) );
 			$entity->removeDescription( $this->language );
@@ -59,5 +88,20 @@ class ChangeOpDescription extends ChangeOpBase {
 			$entity->setDescription( $this->language, $this->description );
 		}
 		return true;
+	}
+
+	/**
+	 * @param Entity $entity
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function validateChange( Entity $entity ) {
+		// check that the language is valid
+		$this->languageValidator->validate( $this->language );
+
+		if ( $this->description !== null ) {
+			// Check that the new label is valid
+			$this->termValidator->validate( $this->description );
+		}
 	}
 }

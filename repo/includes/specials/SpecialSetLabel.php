@@ -64,10 +64,12 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		$value = $value === '' ? null : $value;
 		$summary = $this->getSummary( 'wbsetlabel' );
 
+		$changeOpFactory = $this->getChangOpFactory( $entity->getType() );
+
 		if ( $value === null ) {
-			$changeOp = $this->changeOpFactory->newRemoveLabelOp( $language );
+			$changeOp = $changeOpFactory->newRemoveLabelOp( $language );
 		} else {
-			$changeOp = $this->changeOpFactory->newSetLabelOp( $language, $value );
+			$changeOp = $changeOpFactory->newSetLabelOp( $language, $value );
 		}
 
 		$changeOp->apply( $entity, $summary );

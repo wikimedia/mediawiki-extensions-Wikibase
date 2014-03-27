@@ -36,6 +36,8 @@ class CreateClaim extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$this->initChangOpFactory( $entity->getType() );
+
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 		if( !$propertyId instanceof PropertyId ){
 			$this->dieUsage(

@@ -95,7 +95,7 @@ class SetAliases extends ModifyEntity {
 				$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
 			}
 		} catch ( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
+			$this->dieUsage( 'Attempted modification of the item failed (validation error): ' . $e->getMessage(), 'failed-modify' );
 		}
 
 		$aliases = $entity->getAliases( $language );
@@ -107,6 +107,26 @@ class SetAliases extends ModifyEntity {
 		return $summary;
 	}
 
+	private function cleanTermList( $terms ) {
+		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
+
+		$terms = array_map(
+			function( $str ) use ( $stringNormalizer ) {
+				return $stringNormalizer->trimToNFC( $str );
+			},
+			$terms
+		);
+
+		$terms = array_filter(
+			$terms,
+			function( $str ) {
+				return $str !== '';
+			}
+		);
+
+		return $terms;
+	}
+
 	/**
 	 * @since 0.4
 	 *
@@ -114,8 +134,6 @@ class SetAliases extends ModifyEntity {
 	 * @return ChangeOpAliases
 	 */
 	protected function getChangeOps( array $params ) {
-		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
-
 		wfProfileIn( __METHOD__ );
 		$changeOps = array();
 		$language = $params['language'];
@@ -125,12 +143,7 @@ class SetAliases extends ModifyEntity {
 			$changeOps[] =
 				$this->changeOpFactory->newSetAliasesOp(
 					$language,
-					array_map(
-						function( $str ) use ( $stringNormalizer ) {
-							return $stringNormalizer->trimToNFC( $str );
-						},
-						$params['set']
-					)
+					$this->cleanTermList( $params['set'] )
 				);
 		} else {
 			// FIXME: if we have ADD and REMOVE operations in the same call,
@@ -140,12 +153,7 @@ class SetAliases extends ModifyEntity {
 				$changeOps[] =
 					$this->changeOpFactory->newAddAliasesOp(
 						$language,
-						array_map(
-							function( $str ) use ( $stringNormalizer ) {
-								return $stringNormalizer->trimToNFC( $str );
-							},
-							$params['add']
-						)
+						$this->cleanTermList( $params['add'] )
 					);
 			}
 
@@ -153,12 +161,7 @@ class SetAliases extends ModifyEntity {
 				$changeOps[] =
 					$this->changeOpFactory->newRemoveAliasesOp(
 						$language,
-						array_map(
-							function( $str ) use ( $stringNormalizer ) {
-								return $stringNormalizer->trimToNFC( $str );
-							},
-							$params['remove']
-						)
+						$this->cleanTermList( $params['remove'] )
 					);
 			}
 		}
