@@ -1,10 +1,8 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
-use Message;
 use SiteStore;
-use Status;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;

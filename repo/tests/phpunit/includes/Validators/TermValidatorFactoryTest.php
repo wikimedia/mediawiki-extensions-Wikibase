@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\TermDuplicateDetector;
 use Wikibase\Validators\TermValidatorFactory;
-use Wikibase\SettingsArray;
 
 /**
  * @covers TermValidatorFactory
@@ -112,7 +111,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getUniquenessValidator( Item::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'Wikibase\content\EntityValidator', $validator );
+		$this->assertInstanceOf( 'Wikibase\Validators\EntityValidator', $validator );
 
 		$goodEntity = Item::newEmpty();
 		$goodEntity->setLabel( 'en', 'DUPE' );
