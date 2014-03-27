@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
-use Wikibase\Lib\FormattingException;
+use Html;
+use ValueFormatters\Exceptions\DataValueMismatchException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
@@ -215,6 +215,88 @@ class ClaimHtmlGenerator {
 			'wb-snaklistview',
 			$snaksHtml
 		);
+	}
+
+<<<<<<< HEAD
+=======
+	/**
+	 * Generates the HTML for a single snak.
+	 *
+	 * @todo split this into separate classes with more fine-grained formatting and tests.
+	 *
+	 * @param Snak $snak
+	 * @param boolean $showPropertyLink
+	 *
+	 * @return string
+	 */
+	protected function getSnakHtml( $snak, $showPropertyLink = false ) {
+		$snakViewVariation = $this->getSnakViewVariation( $snak );
+		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
+
+		try {
+			$formattedValue = $this->snakFormatter->formatSnak( $snak );
+		} catch ( \Exception $ex ) {
+			if ( $ex instanceof ValueFormatters\Exceptions\DataValueMismatchException ) {
+				$snakViewCssClass .= '-datavaluetypemismatch';
+				$formattedValue = $this->getDataValueMismatchMessage( $ex );
+			} else {
+				$snakViewCssClass .= '-formaterror';
+				$formattedValue = $this->formatExceptionError( $ex );
+			}
+		}
+
+		if ( $formattedValue === '' ) {
+			$formattedValue = '&nbsp;';
+		}
+
+		return wfTemplate( 'wb-snak',
+			// Display property link only once for snaks featuring the same property:
+			$this->getPropertyLink( $snak, $showPropertyLink ),
+			$snakViewCssClass,
+			$formattedValue
+		);
+	}
+
+	/**
+	 * @param Snak $snak
+	 * @param boolean $showPropertyLink
+	 *
+	 * @return string
+	 */
+	private function getPropertyLink( Snak $snak, $showPropertyLink ) {
+		$propertyLink = '';
+
+		if ( $showPropertyLink ) {
+			$propertyId = $snak->getPropertyId();
+			$propertyKey = $propertyId->getSerialization();
+			$propertyLabel = isset( $this->propertyLabels[$propertyKey] )
+				? $this->propertyLabels[$propertyKey]
+				: $propertyKey;
+
+			$propertyLink = \Linker::link(
+				$this->entityTitleLookup->getTitleForId( $propertyId ),
+				htmlspecialchars( $propertyLabel )
+			);
+		}
+
+		return $propertyLink;
+	}
+
+	/**
+	 * @param Snak $snak
+	 *
+	 * @return string
+	 */
+	private function getSnakViewVariation( Snak $snak ) {
+		if ( $snak instanceof PropertyValueSnak ) {
+			$variation = 'valuesnak';
+		} elseif ( $snak instanceof PropertySomeValueSnak ) {
+			$variation = 'somevaluesnak';
+		} else {
+			$variation = 'novaluesnak';
+		}
+
+		return $variation;
 	}
 
 }

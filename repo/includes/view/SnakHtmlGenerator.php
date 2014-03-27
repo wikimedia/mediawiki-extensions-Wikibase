@@ -3,6 +3,7 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\FormattingException;
@@ -60,7 +61,17 @@ class SnakHtmlGenerator {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
-		$formattedValue = $this->getFormattedSnakValue( $snak );
+		try {
+			$formattedValue = $this->snakFormatter->formatSnak( $snak );
+		} catch ( \Exception $ex ) {
+			if ( $ex instanceof ValueFormatters\Exceptions\DataValueMismatchException ) {
+				$snakViewCssClass .= '-datavaluetypemismatch';
+				$formattedValue = $this->getDataValueMismatchMessage( $ex );
+			} else {
+				$snakViewCssClass .= '-formaterror';
+				$formattedValue = $this->formatExceptionError( $ex );
+			}
+		}
 
 		if ( $formattedValue === '' ) {
 			$formattedValue = '&nbsp;';
@@ -114,21 +125,16 @@ class SnakHtmlGenerator {
 	 * @fixme handle errors more consistently as done in JS UI, and perhaps add
 	 * localised exception messages.
 	 *
-	 * @param Snak $snak
+	 * @param \Exception $ex
+	 *
 	 * @return string
 	 */
-	protected function getFormattedSnakValue( $snak ) {
-		try {
-			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
-			return $this->getInvalidSnakMessage();
-		} catch ( PropertyNotFoundException $ex ) {
+	protected function formatExceptionError( \Exception $ex ) {
+		if ( $ex instanceof Wikibase\Lib\PropertyNotFoundException ) {
 			return $this->getPropertyNotFoundMessage();
-		} catch ( InvalidArgumentException $ex ) {
+		} else {
 			return $this->getInvalidSnakMessage();
 		}
-
-		return $formattedSnak;
 	}
 
 	/**
@@ -143,6 +149,29 @@ class SnakHtmlGenerator {
 	 */
 	private function getPropertyNotFoundMessage() {
 		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
+	}
+
+	/**
+	 * @param MismatchingDataValueTypeException
+	 *
+	 * @return string
+	 */
+	private function getDataValueMismatchMessage( MismatchingDataValueTypeException $ex ) {
+		$details = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch-details' )
+			->params( $ex->getDataValueType(), $ex->getExpectedValueType() )
+			->parse();
+
+		$errorMessage = wfMessage( 'wikibase-snakview-variation-datavaluetypemismatch' )->parse();
+
+		$formattedDetailsError = Html::element(
+			'div',
+			array(
+				'class' => 'wb-snakview-variation-valuesnak-datavaluetypemismatch-message'
+			),
+			$details
+		);
+
+		return $errorMessage . $formattedDetailsError;
 	}
 
 }
