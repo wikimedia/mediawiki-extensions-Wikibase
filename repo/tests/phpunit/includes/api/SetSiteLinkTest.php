@@ -157,7 +157,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		if ( !isset( self::$hasSetup ) ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-			$this->initTestEntities( array( 'Leipzig', 'Berlin' ) );
+			$this->initTestEntities( array( 'StringProp', 'Leipzig', 'Berlin' ) );
 
 			$badge = Item::newEmpty();
 			$store->saveEntity( $badge, 'SetSiteLinkTestGA', $GLOBALS['wgUser'], EDIT_NEW );

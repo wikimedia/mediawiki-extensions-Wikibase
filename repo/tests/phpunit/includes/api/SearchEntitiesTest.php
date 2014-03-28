@@ -24,7 +24,7 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'Berlin', 'London', 'Oslo', 'Episkopi', 'Leipzig', 'Guangzhou' ) );
+			$this->initTestEntities( array( 'StringProp', 'Berlin', 'London', 'Oslo', 'Episkopi', 'Leipzig', 'Guangzhou' ) );
 		}
 		self::$hasSetup = true;
 	}

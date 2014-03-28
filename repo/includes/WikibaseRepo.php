@@ -37,6 +37,7 @@ use Wikibase\SnakFactory;
 use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\Validators\SnakValidator;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -334,8 +335,22 @@ class WikibaseRepo {
 			new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() ),
 			$this->getStore()->newSiteLinkCache(),
 			new ClaimGuidGenerator(),
-			new ClaimGuidValidator( $this->getEntityIdParser() ),
-			new ClaimGuidParser( $this->getEntityIdParser() )
+			$this->getClaimGuidValidator(),
+			$this->getClaimGuidParser(),
+			$this->getSnakValidator()
+		);
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return SnakValidator
+	 */
+	public function getSnakValidator() {
+		//TODO: cache instance locally
+		return new SnakValidator(
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory()
 		);
 	}
 
