@@ -2020,7 +2020,7 @@ $messages['be'] = array(
 	'wikibase-dispatchstats-change-timestamp' => 'Дата/час',
 	'wikibase-dispatchstats-oldest-change' => 'Самыя старыя',
 	'special-listdatatypes' => 'Спіс усіх даступных тыпаў дадзеных',
-	'wikibase-listdatatypes-intro' => 'Гэта спіс усіх тыпаў дадзеных, якія выкарыстоўваюцца зараз у гэтай інсталяцыі:',
+	'wikibase-listdatatypes-intro' => 'Гэта спіс усіх тыпаў дадзеных, якія выкарыстоўваюцца зараз у гэтай інсталяцыі:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Гісторыя версій для «$2» ($1)',
 	'wikibase-history-title-without-label' => 'Гісторыя версій ($1)',
 	'special-entitieswithoutlabel' => 'Спіс сутнасцяў без назваў', # Fuzzy
@@ -2326,35 +2326,7 @@ $messages['be-tarask'] = array(
 	'content-model-wikibase-item' => 'Прадмет у Вікібазе',
 	'content-model-wikibase-property' => 'Уласьцівасьць Wikibase',
 	'content-model-wikibase-query' => 'Запыт Wikibase',
-	'right-item-override' => 'перавызначаць аб’екты', # Fuzzy
-	'right-item-create' => 'ствараць аб’екты',
-	'right-item-remove' => 'выдаляць аб’екты', # Fuzzy
-	'right-property-override' => 'перавызначаць уласьцівасьці', # Fuzzy
 	'right-property-create' => 'ствараць уласьцівасьці',
-	'right-property-remove' => 'выдаляць уласьцівасьці', # Fuzzy
-	'right-alias-remove' => 'выдаляць псэўданімы',
-	'right-sitelink-remove' => 'выдаляць спасылкі',
-	'right-sitelink-update' => 'абнаўляць спасылкі',
-	'right-linktitles-update' => 'абнаўляць старонкі спасылак', # Fuzzy
-	'right-label-remove' => 'выдаляць меткі', # Fuzzy
-	'right-label-update' => 'абнаўляць меткі',
-	'right-description-remove' => 'выдаляць апісаньні', # Fuzzy
-	'right-description-update' => 'абнаўляць апісаньні',
-	'action-item-override' => 'перавызначаць аб’екты', # Fuzzy
-	'action-item-create' => 'ствараць аб’екты',
-	'action-item-remove' => 'выдаляць аб’екты', # Fuzzy
-	'action-property-override' => 'перавызначаць уласьцівасьці', # Fuzzy
-	'action-property-create' => 'ствараць уласьцівасьці',
-	'action-property-remove' => 'выдаляць уласьцівасьці', # Fuzzy
-	'action-alias-update' => 'зьмяняць сынонімы',
-	'action-alias-remove' => 'выдаляць сынонімы',
-	'action-sitelink-remove' => 'выдаляць спасылкі',
-	'action-sitelink-update' => 'зьмяняць спасылкі',
-	'action-linktitles-update' => 'абнаўляць загалоўкі спасылак', # Fuzzy
-	'action-label-remove' => 'выдаляць меткі', # Fuzzy
-	'action-label-update' => 'зьмяняць меткі',
-	'action-description-remove' => 'выдаляць апісаньні', # Fuzzy
-	'action-description-update' => 'зьмяняць апісаньні',
 );
 
 /** Bulgarian (български)
@@ -2887,17 +2859,6 @@ La vostra adreça IP quedarà registrada en l'historial d'edició d'aquest eleme
 	'wikibase-property-summary-wbsetdescription-set' => "S'ha canviat la descripció en [$2]",
 	'wikibase-property-summary-wbsetaliases-add-remove' => "S'han afegit i eliminat {{PLURAL:$1|àlies}} en [$2]",
 	'content-model-wikibase-item' => 'Element de Viquibase',
-	'right-item-override' => 'Sobreescriure elements',
-	'right-item-create' => 'Crear elements',
-	'right-item-remove' => 'Eliminar elements',
-	'right-alias-remove' => 'Eliminar àlies',
-	'right-sitelink-remove' => 'Eliminar enllaços de lloc',
-	'right-sitelink-update' => 'Actualitzar enllaços de lloc',
-	'right-linktitles-update' => "Actualitzar títols d'enllaç", # Fuzzy
-	'right-label-remove' => 'Eliminar etiquetes',
-	'right-label-update' => 'Actualitzar etiquetes',
-	'right-description-remove' => 'Eliminar descripcions',
-	'right-description-update' => 'Actualitzar descripcions',
 );
 
 /** Chechen (нохчийн)
@@ -3561,11 +3522,6 @@ Fe fydd eich cyfeiriad IP yn ymddangos ar hanes golygu'r endid data.",
 	'wikibase-listdatatypes-time-head' => 'Amser',
 	'wikibase-listdatatypes-url-head' => 'URL',
 	'datatypes-type-url' => 'URL',
-	'right-description-update' => 'Diweddaru disgrifiadau',
-	'action-item-override' => 'trosysgrifo eitemau',
-	'action-item-create' => 'creu eitemau',
-	'action-item-remove' => 'dileu eitemau',
-	'action-description-update' => 'diweddaru disgrifiadau',
 );
 
 /** Danish (dansk)
@@ -3757,7 +3713,7 @@ Din IP-adresse vil blive registreret i redigeringshistorikken for denne enhed.',
 	'wikibase-dispatchstats-median' => 'Median',
 	'wikibase-dispatchstats-average' => 'Gennemsnit',
 	'special-listdatatypes' => 'Liste over alle tilgængelige datatyper',
-	'wikibase-listdatatypes-intro' => 'Dette er en liste over alle de datatyper, som i øjeblikket anvendes på denne installation:',
+	'wikibase-listdatatypes-intro' => 'Dette er en liste over alle de datatyper, som i øjeblikket anvendes på denne installation:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Versionshistorik for "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Versionshistorik for $1',
 	'special-entitieswithoutdescription' => 'Entiteter uden beskrivelse',
@@ -3897,42 +3853,7 @@ for at finde ud af, hvad der er sket med det.',
 	'content-model-wikibase-item' => 'Wikibase-emne',
 	'content-model-wikibase-property' => 'Wikibase-egenskab',
 	'content-model-wikibase-query' => 'Wikibase-forespørgsel',
-	'right-item-override' => 'Overskrive emner',
-	'right-item-create' => 'Oprette emner',
-	'right-item-remove' => 'Slette emner',
-	'right-property-override' => 'Overskrive egenskaber',
 	'right-property-create' => 'Oprette egenskaber',
-	'right-property-remove' => 'Slette egenskaber',
-	'right-alias-remove' => 'Fjerne aliasser',
-	'right-alias-update' => 'Opdatere kaldenavne',
-	'right-sitelink-remove' => 'Fjerne webstedshenvisninger',
-	'right-sitelink-update' => 'Opdatere webstedhenvisninger',
-	'right-linktitles-update' => 'Forbinde sider',
-	'right-label-remove' => 'Slette etiketter',
-	'right-label-update' => 'Opdate etiketter',
-	'right-description-remove' => 'Slette beskrivelser',
-	'right-description-update' => 'Opdatere beskrivelser',
-	'action-item-override' => 'overskrive emner',
-	'action-item-create' => 'oprette emner',
-	'action-item-remove' => 'slette emner',
-	'action-property-override' => 'overskrive egenskaber',
-	'action-property-create' => 'oprette egenskaber',
-	'action-property-remove' => 'slette egenskaber',
-	'action-alias-update' => 'opdatere aliasser',
-	'action-alias-remove' => 'fjerne aliasser',
-	'action-sitelink-remove' => 'fjerne webstedshenvisninger',
-	'action-sitelink-update' => 'opdatere webstedshenvisninger',
-	'action-linktitles-update' => 'forbinde sider',
-	'action-label-remove' => 'slette etiketter',
-	'action-label-update' => 'opdatere etiketter',
-	'action-description-remove' => 'slette beskrivelser',
-	'action-description-update' => 'opdatere beskrivelser',
-	'wikibase-time-precision-Gannum' => 'i $1 milliarder år',
-	'wikibase-time-precision-Mannum' => 'i $1 millioner år',
-	'wikibase-time-precision-annum' => 'i $1 år',
-	'wikibase-time-precision-millennium' => '$1. årtusind',
-	'wikibase-time-precision-century' => '$1. århundrede',
-	'wikibase-time-precision-10annum' => '$1. årti',
 );
 
 /** German (Deutsch)
@@ -4510,7 +4431,7 @@ $messages['dsb'] = array(
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Rěc:',
 	'special-listdatatypes' => 'Lisćina wšych k dispoziciji stojecych datowych typow',
-	'wikibase-listdatatypes-intro' => 'To jo lisćina wšych datowych typow, kótarež wužywaju se tuchylu w toś tej instalaciji:',
+	'wikibase-listdatatypes-intro' => 'To jo lisćina wšych datowych typow, kótarež wužywaju se tuchylu w toś tej instalaciji:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Wersijowa historija "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Wersijowa historija ($1)',
 	'special-entitieswithoutlabel' => 'Entity bźez pomjenjenja',
@@ -4582,35 +4503,7 @@ $messages['dsb'] = array(
 	'content-model-wikibase-item' => 'Element z Wikibase',
 	'content-model-wikibase-property' => 'Kakosć Wikibase',
 	'content-model-wikibase-query' => 'Napšašowanje Wikibase',
-	'right-item-override' => 'Elementy pśepisaś',
-	'right-item-create' => 'Elementy napóraś',
-	'right-item-remove' => 'Elementy lašowaś',
-	'right-property-override' => 'Kakosći pśepisaś',
 	'right-property-create' => 'Kakosći napóraś',
-	'right-property-remove' => 'Kakosći lašowaś',
-	'right-alias-remove' => 'Aliase wótpóraś',
-	'right-sitelink-remove' => 'Sedłowe wótkaze wótpóraś',
-	'right-sitelink-update' => 'Sedłowe wótkaze aktualizěrowaś',
-	'right-linktitles-update' => 'Boki zwězaś',
-	'right-label-remove' => 'Pomjenjenja lašowaś',
-	'right-label-update' => 'Pomjenjenja aktualizěrowaś',
-	'right-description-remove' => 'Wopisanja lašowaś',
-	'right-description-update' => 'Wopisanja aktualizěrowaś',
-	'action-item-override' => 'elementy pśepisaś',
-	'action-item-create' => 'elementy napóraś',
-	'action-item-remove' => 'elementy lašowaś',
-	'action-property-override' => 'kakosći pśepisaś',
-	'action-property-create' => 'kakosći napóraś',
-	'action-property-remove' => 'kakosći lašowaś',
-	'action-alias-update' => 'aliase aktualizěrowaś',
-	'action-alias-remove' => 'aliase wótpóraś',
-	'action-sitelink-remove' => 'sedłowe wótkaze wótpóraś',
-	'action-sitelink-update' => 'sedłowe wótkaze aktualizěrowaś',
-	'action-linktitles-update' => 'boki zwězaś',
-	'action-label-remove' => 'pomjenjenja lašowaś',
-	'action-label-update' => 'pomjenjenja aktualizěrowaś',
-	'action-description-remove' => 'wopisanja lašowaś',
-	'action-description-update' => 'wopisanja aktualizěrowaś',
 );
 
 /** Greek (Ελληνικά)
@@ -4783,17 +4676,6 @@ $messages['el'] = array(
 	'wikibase-listdatatypes-url-head' => 'URL',
 	'datatypes-type-url' => 'URL',
 	'content-model-wikibase-query' => 'Ερώτημα Wikibase',
-	'right-label-remove' => 'Αφαιρέσετε ετικέτες', # Fuzzy
-	'right-label-update' => 'Ενημερώστε ετικέτες',
-	'right-description-remove' => 'Αφαιρέστε περιγραφές', # Fuzzy
-	'action-item-create' => 'δημιουργήστε αντικείμενα',
-	'action-item-remove' => 'αφαιρέσετε αντικείμενα', # Fuzzy
-	'action-property-create' => 'δημιουργήσετε ιδιότητες',
-	'action-property-remove' => 'αφαιρέσετε ιδιότητες', # Fuzzy
-	'action-label-remove' => 'αφαιρέσετε ετικέτες', # Fuzzy
-	'action-label-update' => 'ενημερώσετε ετικέτες',
-	'action-description-remove' => 'αφαιρέσετε περιγραφές', # Fuzzy
-	'action-description-update' => 'τροποποιήσετε περιγραφές',
 );
 
 /** Emiliano-Romagnolo (emiliàn e rumagnòl)
@@ -4970,7 +4852,7 @@ Via adreso IP estos konservita en la redakta historio de tiu ĉi aĵo.',
 	'wikibase-dispatchstats-freshest' => 'Plej freŝa',
 	'wikibase-dispatchstats-average' => 'Avaraĝa',
 	'special-listdatatypes' => 'Listo de ĉiuj datumtipoj',
-	'wikibase-listdatatypes-intro' => 'Ĉi tio estas la listo de ĉiuj datumtipoj nune uzataj en ĉi tiu instalaĵo:',
+	'wikibase-listdatatypes-intro' => 'Ĉi tio estas la listo de ĉiuj datumtipoj nune uzataj en ĉi tiu instalaĵo:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Revizia historio de "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Revizia historio de ($1)',
 	'wikibase-entitieswithoutlabel-label-language' => 'Lingvo:',
@@ -6729,7 +6611,7 @@ $messages['frp'] = array(
 	'wikibase-modifyentity-id' => 'Numerô',
 	'wikibase-modifyterm-language' => 'Lengoua',
 	'special-listdatatypes' => 'Lista de tôs los tipos de donâs disponiblos',
-	'wikibase-listdatatypes-intro' => 'O est na lista de tôs los tipos de donâs en cors d’usâjo sur cet’enstalacion :',
+	'wikibase-listdatatypes-intro' => 'O est na lista de tôs los tipos de donâs en cors d’usâjo sur cet’enstalacion :', # Fuzzy
 	'wikibase-history-title-with-label' => 'Historico de les vèrsions de « $2 » ($1)',
 	'wikibase-history-title-without-label' => 'Historico de les vèrsions de ($1)',
 	'special-entitieswithoutlabel' => 'Lista de les entitâts sen lambél', # Fuzzy
@@ -6780,17 +6662,6 @@ $messages['frp'] = array(
 	'content-model-wikibase-item' => 'Piéce de Wikibase',
 	'content-model-wikibase-property' => 'Propriètât de Wikibase',
 	'content-model-wikibase-query' => 'Demanda de Wikibase',
-	'right-item-override' => 'Ècllafar des piéces', # Fuzzy
-	'right-item-create' => 'Fâre des piéces',
-	'right-item-remove' => 'Enlevar des piéces', # Fuzzy
-	'right-alias-remove' => 'Enlevar des aliâs',
-	'right-sitelink-remove' => 'Enlevar des lims de seto',
-	'right-sitelink-update' => 'Betar a jorn des lims de seto',
-	'right-linktitles-update' => 'Betar a jorn des titros de lim', # Fuzzy
-	'right-label-remove' => 'Enlevar des lambéls', # Fuzzy
-	'right-label-update' => 'Betar a jorn des lambéls',
-	'right-description-remove' => 'Enlevar des dèscripcions', # Fuzzy
-	'right-description-update' => 'Betar a jorn des dèscripcions',
 );
 
 /** Northern Frisian (Nordfriisk)
@@ -7607,6 +7478,7 @@ $messages['he'] = array(
 );
 
 /** Hindi (हिन्दी)
+ * @author Goelujjwal
  * @author Pooja 1810
  * @author Siddhartha Ghai
  * @author Vivek Rai
@@ -7626,7 +7498,7 @@ $messages['hi'] = array(
 	'wikibase-remove' => 'ह्टाना',
 	'wikibase-propertyedittool-full' => 'मानों की सूची पूर्ण है.',
 	'wikibase-entityselector-more' => 'ज़्यादा',
-	'wikibase-itembytitle-lookup-page' => 'प्ण्णा',
+	'wikibase-itembytitle-lookup-page' => 'पृष्ठ:',
 	'wikibase-itembytitle-submit' => 'खोजे',
 	'wikibase-itemdisambiguation-submit' => 'खहोजे',
 	'special-newitem' => 'एक नया सामान बानाए',
@@ -8309,7 +8181,7 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'wikibase-dispatchstats-median' => 'Menengah',
 	'wikibase-dispatchstats-average' => 'Rata-rata',
 	'special-listdatatypes' => 'Daftar semua jenis data yang tersedia',
-	'wikibase-listdatatypes-intro' => 'Ini adalah daftar semua jenis data yang dipakai pada instalasi ini:',
+	'wikibase-listdatatypes-intro' => 'Ini adalah daftar semua jenis data yang dipakai pada instalasi ini:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Riwayat revisi "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Riwayat revisi ($1)',
 	'special-entitieswithoutlabel' => 'Entitas tanpa label',
@@ -8406,35 +8278,7 @@ Alamat IP Anda akan tercatat dalam riwayat suntingan $1 ini.', # Fuzzy
 	'content-model-wikibase-item' => 'Item Wikibase',
 	'content-model-wikibase-property' => 'Properti Wikibase',
 	'content-model-wikibase-query' => 'Permintaan Wikibase',
-	'right-item-override' => 'Timpa item', # Fuzzy
-	'right-item-create' => 'Buat item',
-	'right-item-remove' => 'Hapus item', # Fuzzy
-	'right-property-override' => 'Timpa properti', # Fuzzy
 	'right-property-create' => 'Buat properti',
-	'right-property-remove' => 'Hapus properti', # Fuzzy
-	'right-alias-remove' => 'Hapus nama lain',
-	'right-sitelink-remove' => 'Hapus interwiki',
-	'right-sitelink-update' => 'Perbarui interwiki',
-	'right-linktitles-update' => 'Perbarui judul pranala', # Fuzzy
-	'right-label-remove' => 'Hapus label', # Fuzzy
-	'right-label-update' => 'Perbarui label',
-	'right-description-remove' => 'Hapus deskripsi', # Fuzzy
-	'right-description-update' => 'Perbarui deskripsi',
-	'action-item-override' => 'timpa item', # Fuzzy
-	'action-item-create' => 'buat item',
-	'action-item-remove' => 'hapus item', # Fuzzy
-	'action-property-override' => 'timpa properti', # Fuzzy
-	'action-property-create' => 'buat properti',
-	'action-property-remove' => 'hapus properti', # Fuzzy
-	'action-alias-update' => 'perbarui properti',
-	'action-alias-remove' => 'hapus nama lain',
-	'action-sitelink-remove' => 'hapus interwiki',
-	'action-sitelink-update' => 'perbarui interwiki',
-	'action-linktitles-update' => 'perbarui judul pranala', # Fuzzy
-	'action-label-remove' => 'hapus label', # Fuzzy
-	'action-label-update' => 'perbarui label',
-	'action-description-remove' => 'hapus deskripsi', # Fuzzy
-	'action-description-update' => 'perbarui deskripsi',
 );
 
 /** Iloko (Ilokano)
@@ -9856,7 +9700,7 @@ $messages['ka'] = array(
 	'wikibase-dispatchstats-median' => 'საშუალება',
 	'wikibase-dispatchstats-average' => 'საშუალო',
 	'special-listdatatypes' => 'ყველა ხელმისაწვდომი მონაცემთა ტიპების სია',
-	'wikibase-listdatatypes-intro' => 'ეს არის ამ ისტალაციის ყველა ამჟამად გამოყენებადი მონაცემთა ტიპების სია:',
+	'wikibase-listdatatypes-intro' => 'ეს არის ამ ისტალაციის ყველა ამჟამად გამოყენებადი მონაცემთა ტიპების სია:', # Fuzzy
 	'wikibase-history-title-with-label' => 'ცვლილებების ისტორია „$2“-თვის ($1)',
 	'wikibase-history-title-without-label' => '$1 — ცვლილებების ისტორია',
 	'wikibase-entitieswithoutlabel-label-language' => 'ენა:',
@@ -9923,41 +9767,7 @@ $messages['ka'] = array(
 	'content-model-wikibase-item' => 'Wikibase-ის ელემენტი',
 	'content-model-wikibase-property' => 'Wikibase-ის თვისებები',
 	'content-model-wikibase-query' => 'Wikibase-ის მოთხოვნა',
-	'right-item-override' => 'ელემენტების გადაწერა',
-	'right-item-create' => 'ელემენტების შექმნა',
-	'right-item-remove' => 'ელემენტების წაშლა',
-	'right-property-override' => 'თვისებების გადაწერა',
 	'right-property-create' => 'თვისებების შექმნა',
-	'right-property-remove' => 'თვისებების წაშლა',
-	'right-alias-remove' => 'ფსევდონიმების წაშლა',
-	'right-sitelink-remove' => 'საიტის ბმულების წაშლა',
-	'right-sitelink-update' => 'საიტის ბმულების განახლება',
-	'right-linktitles-update' => 'გვერდების დაკავშირება',
-	'right-label-remove' => 'სახელების წაშლა',
-	'right-label-update' => 'სახელების განახლება',
-	'right-description-remove' => 'აღწერების წაშლა',
-	'right-description-update' => 'აღწერების განახლება',
-	'action-item-override' => 'ელემენტების გადაწერა',
-	'action-item-create' => 'ელემენტების შექმნა',
-	'action-item-remove' => 'ელემენტების წაშლა',
-	'action-property-override' => 'თვისებების გადაწერა',
-	'action-property-create' => 'თვისებების შექმნა',
-	'action-property-remove' => 'თვისებების წაშლა',
-	'action-alias-update' => 'ფსევდონიმების განახლება',
-	'action-alias-remove' => 'ფსევდონიმების წაშლა',
-	'action-sitelink-remove' => 'საიტის ბმულების წაშლა',
-	'action-sitelink-update' => 'საიტის ბმულების განახლება',
-	'action-linktitles-update' => 'გვერდების დაკავშირება',
-	'action-label-remove' => 'სახელების წაშლა',
-	'action-label-update' => 'სახელების განახლება',
-	'action-description-remove' => 'აღწერების წაშლა',
-	'action-description-update' => 'აღწერების განახლება',
-	'wikibase-time-precision-Gannum' => '$1 მილიარდ წელიწადში',
-	'wikibase-time-precision-Mannum' => '$1 მილიონ წელიწადში',
-	'wikibase-time-precision-annum' => '$1 წელიწადში',
-	'wikibase-time-precision-millennium' => 'მე-$1 ათასწლეული',
-	'wikibase-time-precision-century' => 'მე-$1 საუკუნე',
-	'wikibase-time-precision-10annum' => '$1 წმ',
 );
 
 /** Kazakh (Cyrillic script) (қазақша (кирил)‎)
@@ -10507,12 +10317,6 @@ $messages['ksh'] = array(
 	'wikibase-listdatatypes-time-head' => 'En Uhrzick',
 	'wikibase-listdatatypes-url-head' => 'en <i lang="en">URL</i>',
 	'datatypes-type-url' => '<i lang="en">URL</i>',
-	'right-item-override' => 'Daatesäz övverschriive', # Fuzzy
-	'right-item-create' => 'Daatesäz aanlääje',
-	'right-item-remove' => 'Daatesäz fott schmiiße', # Fuzzy
-	'right-property-override' => 'Eijeschaffte övverschriive', # Fuzzy
-	'action-item-override' => 'Daatesäz övverschriive', # Fuzzy
-	'action-property-override' => 'Eiejschaffte ze övverschriive', # Fuzzy
 );
 
 /** Kurdish (Latin script) (Kurdî (latînî)‎)
@@ -10852,13 +10656,6 @@ $messages['lrc'] = array(
 	'wikibase-item-summary-clientsitelink-update' => 'بلگه د[$3] تا [$4] جا وه جا بیه',
 	'wikibase-listdatatypes-commonsmedia-head' => 'پرنمون یا رسانه',
 	'wikibase-listdatatypes-time-head' => 'وخت',
-	'right-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
-	'right-sitelink-update' => 'روزآمد کردن هوم پیوندیا سیل جا',
-	'action-sitelink-remove' => 'هوم پیوند سیلجایا نه ورداریت',
-	'action-sitelink-update' => 'روزآمد کردن هوم پیوندیا سیل جا',
-	'wikibase-time-precision-Gannum' => 'د $1 بیلیون سال',
-	'wikibase-time-precision-Mannum' => 'د $1 میلیون سال',
-	'wikibase-time-precision-annum' => 'د سالیا $1',
 );
 
 /** Lithuanian (lietuvių)
@@ -11003,10 +10800,6 @@ $messages['lv'] = array(
 	'wikibase-property-summary-wbsetdescription-set' => 'Izmainīja [$2] aprakstu',
 	'wikibase-property-summary-wbsetdescription-remove' => 'Nodzēsa [$2] aprakstu',
 	'wikibase-listdatatypes-globe-coordinate-head' => 'Ģeogrāfiskās koordinātas',
-	'right-label-remove' => 'Nodzēst nosaukumus', # Fuzzy
-	'right-label-update' => 'Izmainīt nosaukumus',
-	'right-description-remove' => 'Dzēst aprakstus', # Fuzzy
-	'right-description-update' => 'Mainīt aprakstus',
 );
 
 /** Malagasy (Malagasy)
@@ -11965,7 +11758,7 @@ Wiki klien diberitahu akan perubahan pada {{SITENAME}} sebaik sahaja perubahan t
 	'wikibase-dispatchstats-median' => 'Median',
 	'wikibase-dispatchstats-average' => 'Purata',
 	'special-listdatatypes' => 'Senarai semua jenis data yang ada',
-	'wikibase-listdatatypes-intro' => 'Ini ialah senarai semua jenis data yang sedang digunakan dalam pemasangan ini:',
+	'wikibase-listdatatypes-intro' => 'Ini ialah senarai semua jenis data yang sedang digunakan dalam pemasangan ini:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Semakan sejarah "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Sejarah semakan ($1)',
 	'special-entitieswithoutlabel' => 'Entiti tanpa label',
@@ -12103,41 +11896,7 @@ untuk mencari di mana set data itu.',
 	'content-model-wikibase-item' => 'Perkara Wikibase',
 	'content-model-wikibase-property' => 'Sifat Wikibase',
 	'content-model-wikibase-query' => 'Pertanyaan Wikibase',
-	'right-item-override' => 'Mengubah ganti perkara', # Fuzzy
-	'right-item-create' => 'Mencipta perkara',
-	'right-item-remove' => 'Menggugurkan perkara', # Fuzzy
-	'right-property-override' => 'Mengatasi sifat', # Fuzzy
 	'right-property-create' => 'Mewujudkan sifat',
-	'right-property-remove' => 'Menggugurkan sifat', # Fuzzy
-	'right-alias-remove' => 'Membuang alias',
-	'right-sitelink-remove' => 'Membuang pautan tapak',
-	'right-sitelink-update' => 'Mengemaskinikan pautan tapak',
-	'right-linktitles-update' => 'Mengemaskinikan tajuk pautan', # Fuzzy
-	'right-label-remove' => 'Membuang label', # Fuzzy
-	'right-label-update' => 'Mengemaskinikan label',
-	'right-description-remove' => 'Membuang keterangan', # Fuzzy
-	'right-description-update' => 'Mengemaskinikan keterangan',
-	'action-item-override' => 'mengatasi perkara', # Fuzzy
-	'action-item-create' => 'mewujudkan perkara',
-	'action-item-remove' => 'menggugurkan perkara', # Fuzzy
-	'action-property-override' => 'mengatasi sifat', # Fuzzy
-	'action-property-create' => 'mewujudkan sifat',
-	'action-property-remove' => 'menggugurkan sifat', # Fuzzy
-	'action-alias-update' => 'mengemaskinikan alias',
-	'action-alias-remove' => 'menggugurkan alias',
-	'action-sitelink-remove' => 'menggugurkan pautan tapak',
-	'action-sitelink-update' => 'mengemaskinikan pautan tapak',
-	'action-linktitles-update' => 'mengemaskinikan tajuk pautan', # Fuzzy
-	'action-label-remove' => 'menggugurkan label', # Fuzzy
-	'action-label-update' => 'mengemaskinikan label',
-	'action-description-remove' => 'menggugurkan keterangan', # Fuzzy
-	'action-description-update' => 'mengemaskinikan keterangan',
-	'wikibase-time-precision-Gannum' => 'dalam $1 bilion tahun',
-	'wikibase-time-precision-Mannum' => 'dalam $1 juta tahun',
-	'wikibase-time-precision-annum' => 'dalam $1 tahun',
-	'wikibase-time-precision-millennium' => '$1 alaf',
-	'wikibase-time-precision-century' => '$1 abad',
-	'wikibase-time-precision-10annum' => '$1-an',
 );
 
 /** Erzya (эрзянь)
@@ -12356,7 +12115,7 @@ En klientwiki informeres om en endring på {{SITENAME}} straks endringen er blit
 	'wikibase-dispatchstats-median' => 'Median',
 	'wikibase-dispatchstats-average' => 'Gjennomsnitt',
 	'special-listdatatypes' => 'Alle tilgjengelige datatyper',
-	'wikibase-listdatatypes-intro' => 'Dette er en liste av alle tilgjengelige datatyper:',
+	'wikibase-listdatatypes-intro' => 'Dette er en liste av alle tilgjengelige datatyper:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Revisjonshistorikken til «$2» ($1)',
 	'wikibase-history-title-without-label' => 'Revisjonshistorikken til ($1)',
 	'special-entitieswithoutdescription' => 'Elementer uten beskrivelse',
@@ -12502,42 +12261,7 @@ for å finne ut hva som har skjedd.',
 	'content-model-wikibase-item' => 'Wikibase element',
 	'content-model-wikibase-property' => 'Wikibase egenskap',
 	'content-model-wikibase-query' => 'Wikibase spørring',
-	'right-item-override' => 'Overskriv elementer',
-	'right-item-create' => 'Opprette element',
-	'right-item-remove' => 'Fjern elementer',
-	'right-property-override' => 'Overskriv egenskaper',
 	'right-property-create' => 'Oprett egenskaper',
-	'right-property-remove' => 'Slett egenskaper',
-	'right-alias-remove' => 'Fjerne kallenavn',
-	'right-alias-update' => 'Oppdater kallenavn',
-	'right-sitelink-remove' => 'Fjerne nettstedslenker',
-	'right-sitelink-update' => 'Oppdatere nettstedslenker',
-	'right-linktitles-update' => 'Oppdater sider',
-	'right-label-remove' => 'Fjern etiketter',
-	'right-label-update' => 'Oppdatere etiketter',
-	'right-description-remove' => 'Fjern beskrivelser',
-	'right-description-update' => 'Oppdatere beskrivelser',
-	'action-item-override' => 'overskriv elementer',
-	'action-item-create' => 'opprett elementer',
-	'action-item-remove' => 'slett elementer',
-	'action-property-override' => 'overskriv egenskaper',
-	'action-property-create' => 'opprett egenskaper',
-	'action-property-remove' => 'slett egenskaper',
-	'action-alias-update' => 'oppdater kallenavn',
-	'action-alias-remove' => 'fjern kallenavn',
-	'action-sitelink-remove' => 'fjern nettstedlenker',
-	'action-sitelink-update' => 'oppdater nettstedlenker',
-	'action-linktitles-update' => 'tilordn sider',
-	'action-label-remove' => 'slett etiketter',
-	'action-label-update' => 'oppdater etiketter',
-	'action-description-remove' => 'slett beskrivelser',
-	'action-description-update' => 'oppdater beskrivelser',
-	'wikibase-time-precision-Gannum' => 'i $1 milliarder år',
-	'wikibase-time-precision-Mannum' => 'i $1 millioner år',
-	'wikibase-time-precision-annum' => 'i $1 år',
-	'wikibase-time-precision-millennium' => '$1. årtusen',
-	'wikibase-time-precision-century' => '$1. århundre',
-	'wikibase-time-precision-10annum' => '$1-årene',
 );
 
 /** Dutch (Nederlands)
@@ -13469,18 +13193,6 @@ $messages['pa'] = array(
 	'wikibase-item-summary-wbeditentity-update' => 'ਇੱਕ ਮੱਦ ਨਵੀਂ ਕੀਤੀ ਗਈ',
 	'wikibase-item-summary-wbeditentity-override' => 'ਇੱਕ ਮੱਦ ਸਾਫ਼ ਕੀਤੀ ਗਈ',
 	'wikibase-listdatatypes-time-head' => 'ਵਕਤ',
-	'right-item-create' => 'ਮੱਦਾਂ ਬਣਾਓ',
-	'right-item-remove' => 'ਮੱਦਾਂ ਮਿਟਾਓ',
-	'right-label-remove' => 'ਚੇਪੀਆਂ ਮਿਟਾਓ',
-	'right-label-update' => 'ਚੇਪੀਆਂ ਨਵੀਆਂ ਕਰੋ',
-	'right-description-remove' => 'ਵੇਰਵੇ ਮਿਟਾਓ',
-	'right-description-update' => 'ਵੇਰਵੇ ਨਵੇਂ ਕਰੋ',
-	'action-item-create' => 'ਮੱਦਾਂ ਬਣਾਓ',
-	'action-item-remove' => 'ਮੱਦਾਂ ਮਿਟਾਓ',
-	'action-label-remove' => 'ਚੇਪੀਆਂ ਮਿਟਾਓ',
-	'action-label-update' => 'ਚੇਪੀਆਂ ਨਵੀਆਂ ਕਰੋ',
-	'action-description-remove' => 'ਵੇਰਵੇ ਮਿਟਾਓ',
-	'action-description-update' => 'ਵੇਰਵੇ ਨਵੇਂ ਕਰੋ',
 );
 
 /** Polish (polski)
@@ -13960,7 +13672,7 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'wikibase-dispatchstats-median' => 'Mesana',
 	'wikibase-dispatchstats-average' => 'Media',
 	'special-listdatatypes' => 'Lista ëd tute le sòrt ëd dat disponìbij.',
-	'wikibase-listdatatypes-intro' => "Costa a l'é na lista ëd tute le sòrt ëd dat an cors d'usagi an st'istalassion:",
+	'wikibase-listdatatypes-intro' => "Costa a l'é na lista ëd tute le sòrt ëd dat an cors d'usagi an st'istalassion:", # Fuzzy
 	'wikibase-history-title-with-label' => 'Stòria dle revision ëd "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Stòria dle revision ëd ($1)',
 	'special-entitieswithoutdescription' => 'Entità sensa descrission',
@@ -14098,36 +13810,7 @@ Un client ëd wiki a l'é anformà ëd na modìfica su {{SITENAME}} na vira che 
 	'content-model-wikibase-item' => 'Element ëd Wikibase',
 	'content-model-wikibase-property' => 'Propietà ëd Wikibase',
 	'content-model-wikibase-query' => 'Arcesta ëd Wikibase',
-	'right-item-override' => "Dzorascrive j'element",
-	'right-item-create' => "Creé dj'element",
-	'right-item-remove' => "Scancelé j'element",
-	'right-property-override' => 'Dzorascrive le propietà',
 	'right-property-create' => 'Creé dle propietà',
-	'right-property-remove' => 'Scancelé le propietà',
-	'right-alias-remove' => "Gavé dj'alternative",
-	'right-alias-update' => 'Agiorné ij sobrichet',
-	'right-sitelink-remove' => 'Gavé dle liure ëd sit',
-	'right-sitelink-update' => 'Agiorné dle liure ëd sit',
-	'right-linktitles-update' => 'Pàgine associà',
-	'right-label-remove' => 'Scancelé le tichëtte',
-	'right-label-update' => 'Agiorna le tichëtte',
-	'right-description-remove' => 'Scancelé le descrission',
-	'right-description-update' => 'Agiorné dle descrission',
-	'action-item-override' => "dzorascrive dj'element",
-	'action-item-create' => "creé dj'element",
-	'action-item-remove' => "eliminé dj'element",
-	'action-property-override' => 'dzorascrive dle propietà',
-	'action-property-create' => 'creé dle propietà',
-	'action-property-remove' => 'eliminé dle propietà',
-	'action-alias-update' => 'agiorné dij sobrichet',
-	'action-alias-remove' => 'eliminé dij sobrichet',
-	'action-sitelink-remove' => 'eliminé dle liure a dij sit',
-	'action-sitelink-update' => 'agiorné dle liure ëd sit',
-	'action-linktitles-update' => 'assocé dle pàgine',
-	'action-label-remove' => 'scancelé dle tichëtte',
-	'action-label-update' => 'agiorné dle tichëtte',
-	'action-description-remove' => 'scancelé dle descrission',
-	'action-description-update' => 'agiorné dle descrission',
 );
 
 /** Pashto (پښتو)
@@ -14521,7 +14204,7 @@ $messages['pt-br'] = array(
 	'wikibase-dispatchstats-median' => 'Mediana',
 	'wikibase-dispatchstats-average' => 'Média',
 	'special-listdatatypes' => 'Lista de todos os tipos de dados disponíveis',
-	'wikibase-listdatatypes-intro' => 'Listagem com todos os tipos de dados em uso nessa instalação:',
+	'wikibase-listdatatypes-intro' => 'Esta é uma lista de todos os tipos de dados disponíveis nessa instalação:',
 	'wikibase-history-title-with-label' => 'Histórico de revisões de "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Histórico de revisões de ($1)',
 	'special-entitieswithoutlabel' => 'Entidades sem rótulo',
@@ -14600,35 +14283,7 @@ para descobrir o que ocorreu.',
 	'content-model-wikibase-item' => 'Item do Wikibase',
 	'content-model-wikibase-property' => 'Propriedade do Wikibase',
 	'content-model-wikibase-query' => 'Consulta do Wikibase',
-	'right-item-override' => 'Sobrescrever itens',
-	'right-item-create' => 'Criar itens',
-	'right-item-remove' => 'Apagar itens',
-	'right-property-override' => 'Sobrescrever propriedades',
 	'right-property-create' => 'criar propriedades',
-	'right-property-remove' => 'Apagar propriedades',
-	'right-alias-remove' => 'Remover nomes alternativos',
-	'right-sitelink-remove' => 'Remover links de sites',
-	'right-sitelink-update' => 'Atualizar links de sites',
-	'right-linktitles-update' => 'Associar páginas',
-	'right-label-remove' => 'Apagar rótulos',
-	'right-label-update' => 'Atualizar rótulos',
-	'right-description-remove' => 'Apagar descrições',
-	'right-description-update' => 'Atualizar descrições',
-	'action-item-override' => 'sobrescrever itens',
-	'action-item-create' => 'criar itens',
-	'action-item-remove' => 'apagar itens',
-	'action-property-override' => 'sobrescrever propriedades',
-	'action-property-create' => 'criar propriedades',
-	'action-property-remove' => 'apagar propriedades',
-	'action-alias-update' => 'atualizar nomes alternativos',
-	'action-alias-remove' => 'remover nomes alternativos',
-	'action-sitelink-remove' => 'remover links de sites',
-	'action-sitelink-update' => 'atualizar links de sites',
-	'action-linktitles-update' => 'associar páginas',
-	'action-label-remove' => 'apagar rótulos',
-	'action-label-update' => 'atualizar rótulos',
-	'action-description-remove' => 'apagar descrições',
-	'action-description-update' => 'atualizar descrições',
 );
 
 /** Quechua (Runa Simi)
@@ -14795,7 +14450,7 @@ Adresa dumnevoastră IP va fi memorată în istoricul modificărilor al acestei 
 	'wikibase-dispatchstats-median' => 'Median',
 	'wikibase-dispatchstats-average' => 'Medie',
 	'special-listdatatypes' => 'Lista tuturor tipurilor de date disponibile',
-	'wikibase-listdatatypes-intro' => 'Aceasta este o listă cu toate tipurile de date folosite în prezent pe această instalare:',
+	'wikibase-listdatatypes-intro' => 'Aceasta este o listă cu toate tipurile de date folosite în prezent pe această instalare:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Istoricul versiunilor pentru „$2” ($1)',
 	'wikibase-history-title-without-label' => 'Istoricul versiunilor pentru ($1)',
 	'special-entitieswithoutdescription' => 'Entități fără descriere',
@@ -14833,32 +14488,7 @@ Adresa dumnevoastră IP va fi memorată în istoricul modificărilor al acestei 
 	'content-model-wikibase-item' => 'Element Wikibase',
 	'content-model-wikibase-property' => 'Proprietate Wikibase',
 	'content-model-wikibase-query' => 'Interogare Wikibase',
-	'right-item-override' => 'Suprascrie elemente',
-	'right-item-create' => 'Creează elemente',
-	'right-item-remove' => 'Șterge elemente',
-	'right-property-override' => 'Suprascrie proprietăți',
 	'right-property-create' => 'Creează proprietăți',
-	'right-property-remove' => 'Șterge proprietăți',
-	'right-alias-remove' => 'Elimină aliasuri',
-	'right-alias-update' => 'Actualizează aliasuri',
-	'right-linktitles-update' => 'Asociază pagini',
-	'right-label-remove' => 'Șterge etichete',
-	'right-label-update' => 'Actualizează etichete',
-	'right-description-remove' => 'Șterge descrieri',
-	'right-description-update' => 'Actualizează descrieri',
-	'action-item-override' => 'suprascrieți elemente',
-	'action-item-create' => 'creați elemente',
-	'action-item-remove' => 'ștergeți elemente',
-	'action-property-override' => 'suprascrieți proprietăți',
-	'action-property-create' => 'creați proprietăți',
-	'action-property-remove' => 'ștergeți proprietăți',
-	'action-alias-update' => 'actualizați aliasuri',
-	'action-alias-remove' => 'eliminați aliasuri',
-	'action-linktitles-update' => 'asociați pagini',
-	'action-label-remove' => 'ștergeți etichete',
-	'action-label-update' => 'actualizați etichete',
-	'action-description-remove' => 'ștergeți descrieri',
-	'action-description-update' => 'actualizați descrieri',
 );
 
 /** tarandíne (tarandíne)
@@ -15277,6 +14907,8 @@ $messages['ru'] = array(
  * @author John Reid
  */
 $messages['sco'] = array(
+	'wikibase-snakformat-invalid-value' => 'Onvalid value.',
+	'wikibase-snakformat-propertynotfound' => 'Propertie na foond.',
 	'wikibase-wikibaserepopage-not-itemid' => '"$1" isna ae valid item id.',
 	'wikibase-setlabel-submit' => 'Set the label',
 	'wikibase-setdescription-submit' => 'Set descreeption',
@@ -15288,6 +14920,7 @@ $messages['sco'] = array(
 	'wikibase-mergeitems-toid' => 'The id tae merge til',
 	'wikibase-mergeitems-submit' => 'Merge eitems',
 	'wikibase-listdatatypes-intro' => 'This is ae leet o aw datatypes available oan this instawation:',
+	'wikibase-parse-error' => 'Malformed value.',
 	'wikibase-item-summary-wblinktitles-create' => 'Cræftit this eetem fer tae connect pages',
 	'wikibase-item-summary-wblinktitles-connect' => 'Eikit ae leid airtin fer tae connect pages',
 	'wikibase-listdatatypes-wikibase-item-body' => 'airt til ither eetems at the waurk. During entrie the "Eetem" namespace oan Wikidata will be raket fer matchin entries. It conseests o ae single tex entrie field.',
@@ -15438,7 +15071,7 @@ $messages['sh'] = array(
 	'wikibase-modifyentity-id' => 'ID:',
 	'wikibase-modifyterm-language' => 'Jezik:',
 	'special-listdatatypes' => 'Popis svih dostupnih tipova podataka',
-	'wikibase-listdatatypes-intro' => 'Ovo je popis svih tipova podataka trenutno u upotrebi na ovoj instalaciji:',
+	'wikibase-listdatatypes-intro' => 'Ovo je popis svih tipova podataka trenutno u upotrebi na ovoj instalaciji:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Historija izmjena "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Historija izmjena ($1)',
 	'special-entitieswithoutlabel' => 'Popis entiteta bez oznake', # Fuzzy
@@ -15498,18 +15131,6 @@ da otkrijete gdje je nestao.',
 	'content-model-wikibase-item' => 'Wikibazina stavka',
 	'content-model-wikibase-property' => 'Wikibazino polje',
 	'content-model-wikibase-query' => 'Wikibazin upit',
-	'right-item-override' => 'Preskoči stavke', # Fuzzy
-	'right-item-create' => 'Stvori stavke',
-	'right-item-remove' => 'Ukloni stavke', # Fuzzy
-	'right-alias-remove' => 'Ukloni aliase',
-	'right-sitelink-remove' => 'Ukloni linkove sajta',
-	'right-sitelink-update' => 'Ažurirajte linkove sajta',
-	'right-linktitles-update' => 'Ažurirajte naslove linkova', # Fuzzy
-	'right-label-remove' => 'Uklonite oznake', # Fuzzy
-	'right-label-update' => 'Ažurirajte oznake',
-	'right-description-remove' => 'Uklonite opise', # Fuzzy
-	'right-description-update' => 'Ažurirajte opise',
-	'action-alias-remove' => 'uklanjate pseudonime',
 );
 
 /** Sinhala (සිංහල)
@@ -15635,17 +15256,6 @@ $messages['si'] = array(
 	'content-model-wikibase-item' => 'විකිපාදක අයිතමය',
 	'content-model-wikibase-property' => 'විකිපාදක අයිතිය',
 	'content-model-wikibase-query' => 'විකිපාදක ප්‍රශ්නය',
-	'right-item-override' => 'අයිතමයන් ප්‍රතික්ෂේප කරන්න', # Fuzzy
-	'right-item-create' => 'අයිතමයන් තනන්න',
-	'right-item-remove' => 'අයිතමයන් ඉවත් කරන්න', # Fuzzy
-	'right-alias-remove' => 'අන්වර්ථ නාම ඉවත් කරන්න',
-	'right-sitelink-remove' => 'අඩවි සබැඳියන් ඉවත් කරන්න',
-	'right-sitelink-update' => 'අඩවි සබැඳියන් යාවත්කාලීන කරන්න',
-	'right-linktitles-update' => 'සබැඳි ශීර්ෂයන් යාවත්කාලීන කරන්න', # Fuzzy
-	'right-label-remove' => 'ලේබලයන් ඉවත් කරන්න', # Fuzzy
-	'right-label-update' => 'ලේබලයන් යාවත්කාලීන කරන්න',
-	'right-description-remove' => 'විස්තරයන් ඉවත් කරන්න', # Fuzzy
-	'right-description-update' => 'විස්තරයන් යාවත්කාලීන කරන්න',
 );
 
 /** Slovak (slovenčina)
@@ -15920,7 +15530,7 @@ $messages['sr-ec'] = array(
 	'wikibase-dispatchstats-median' => 'Средње',
 	'wikibase-dispatchstats-average' => 'Просечно',
 	'special-listdatatypes' => 'Списак свих доступних врста података',
-	'wikibase-listdatatypes-intro' => 'Ово је списак свих врста података тренутно у употреби на овој инсталацији:',
+	'wikibase-listdatatypes-intro' => 'Ово је списак свих врста података тренутно у употреби на овој инсталацији:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Историја измена за „$2“ ($1)',
 	'wikibase-history-title-without-label' => 'Историја измена за ($1)',
 	'special-entitieswithoutlabel' => 'Субјекти без назива',
@@ -16011,35 +15621,7 @@ $messages['sr-ec'] = array(
 	'content-model-wikibase-item' => 'Ставка Викибазе',
 	'content-model-wikibase-property' => 'Својство Викибазе',
 	'content-model-wikibase-query' => 'Упит Викибазе',
-	'right-item-override' => 'Преклапање ставки',
-	'right-item-create' => 'Прављење ставки',
-	'right-item-remove' => 'Уклањање ставки',
-	'right-property-override' => 'Преклапање својстава',
 	'right-property-create' => 'Прављење својстава',
-	'right-property-remove' => 'Уклањање својстава',
-	'right-alias-remove' => 'Уклањање псеудонима',
-	'right-sitelink-remove' => 'Уклањање веза према сајтовима',
-	'right-sitelink-update' => 'Ажурирање веза према сајтовима',
-	'right-linktitles-update' => 'Повезане странице',
-	'right-label-remove' => 'Уклањање назива',
-	'right-label-update' => 'Ажурирање назива',
-	'right-description-remove' => 'Уклањање описа',
-	'right-description-update' => 'Ажурирање описа',
-	'action-item-override' => 'преклопите ставке',
-	'action-item-create' => 'направите ставке',
-	'action-item-remove' => 'уклоните ставке',
-	'action-property-override' => 'преклопите својства', # Fuzzy
-	'action-property-create' => 'правите својства',
-	'action-property-remove' => 'уклоните својства',
-	'action-alias-update' => 'ажурирате псеудониме',
-	'action-alias-remove' => 'уклањате псеудониме',
-	'action-sitelink-remove' => 'уклањате везе ка сајтовима',
-	'action-sitelink-update' => 'ажурирате везе ка сајтовима',
-	'action-linktitles-update' => 'Повезане странице',
-	'action-label-remove' => 'уклањате називе',
-	'action-label-update' => 'ажурирате називе',
-	'action-description-remove' => 'уклањате описе',
-	'action-description-update' => 'ажурирате описе',
 );
 
 /** Serbian (Latin script) (srpski (latinica)‎)
@@ -17199,7 +16781,7 @@ Na wiki client la xe notificà de un canbiamento su {{SITENAME}} apena chel canb
 	'wikibase-dispatchstats-median' => 'Mezan',
 	'wikibase-dispatchstats-average' => 'Media',
 	'special-listdatatypes' => 'Elenco de tuti i tipi de dati disponibili',
-	'wikibase-listdatatypes-intro' => 'Sto qua xe un elenco de tuti i tipi di dati atualmente in uso su sta instalasion:',
+	'wikibase-listdatatypes-intro' => 'Sto qua xe un elenco de tuti i tipi di dati atualmente in uso su sta instalasion:', # Fuzzy
 	'wikibase-history-title-with-label' => 'Cronologia de "$2" ($1)',
 	'wikibase-history-title-without-label' => 'Cronologia de ($1)',
 	'special-entitieswithoutlabel' => 'Entità sensa eticheta',
@@ -17310,35 +16892,7 @@ Te pol <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 	'content-model-wikibase-item' => 'Elemento Wikibase',
 	'content-model-wikibase-property' => 'Proprietà Wikibase',
 	'content-model-wikibase-query' => 'Interogasion Wikibase',
-	'right-item-override' => 'Sovrascrivi elementi', # Fuzzy
-	'right-item-create' => 'Crea elementi',
-	'right-item-remove' => 'Cava elementi', # Fuzzy
-	'right-property-override' => 'Sovrascrivi proprietà', # Fuzzy
 	'right-property-create' => 'Crea proprietà',
-	'right-property-remove' => 'Cava proprietà', # Fuzzy
-	'right-alias-remove' => 'Cava alias',
-	'right-sitelink-remove' => 'Cavar i colegamenti lenguìsteghi',
-	'right-sitelink-update' => 'Ajornar i colegamenti lenguìsteghi',
-	'right-linktitles-update' => 'Ajornar i titoli dei colegamenti', # Fuzzy
-	'right-label-remove' => 'Cavar le etichete', # Fuzzy
-	'right-label-update' => 'Ajornar le etichete',
-	'right-description-remove' => 'Cavar le descrission', # Fuzzy
-	'right-description-update' => 'Ajornar le descrission',
-	'action-item-override' => 'sorascrivar elementi', # Fuzzy
-	'action-item-create' => 'crear elementi',
-	'action-item-remove' => 'cavar elementi', # Fuzzy
-	'action-property-override' => 'sorascrivar le proprietà', # Fuzzy
-	'action-property-create' => 'crear le proprietà',
-	'action-property-remove' => 'cavar le proprietà', # Fuzzy
-	'action-alias-update' => 'ajornar i alias',
-	'action-alias-remove' => 'cavar i alias',
-	'action-sitelink-remove' => 'cavar i colegamenti lenguìsteghi',
-	'action-sitelink-update' => 'ajornar i colegamenti lenguìsteghi',
-	'action-linktitles-update' => 'ajornar i titoli dei colegamenti', # Fuzzy
-	'action-label-remove' => 'cavar le etichete', # Fuzzy
-	'action-label-update' => 'ajornar le etichete',
-	'action-description-remove' => 'cavar le descrission', # Fuzzy
-	'action-description-update' => 'ajornar le descrission',
 );
 
 /** Vietnamese (Tiếng Việt)

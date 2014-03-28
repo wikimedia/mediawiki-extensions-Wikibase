@@ -2661,6 +2661,7 @@ $messages['lb'] = array(
 
 /** لوری (لوری)
  * @author Bonevarluri
+ * @author Mogoeilor
  */
 $messages['lrc'] = array(
 	'wikibase-error-ui-session-failure' => 'نشستگه شما تموم بیه. لطفن دواره بیایت وامین.',
