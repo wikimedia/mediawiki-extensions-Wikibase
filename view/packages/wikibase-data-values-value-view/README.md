@@ -109,7 +109,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.5.0 (dev)
+### 0.5 (2014-03-28)
 
 * Renamed jQuery.valueView.ExpertFactory to jQuery.valueView.ExpertStore.
 * Renamed jQuery.valueView option "expertProvider" to "expertStore".
