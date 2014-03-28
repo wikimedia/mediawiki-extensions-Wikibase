@@ -120,6 +120,7 @@ Other methods an Expert needs to provide:
 * Updated DataValuesJavaScript dependency to version 0.5.0.
 * Removed setting default formatter provider/store and parser provider/store of jQuery.valueView in mw.ext.valueView since no defaults are provided by DataValuesJavaScript as of version 0.5.0.
 * Removed mw.ext.valueView module.
+* Fixed ValueView to again support setting value to null
 
 ### 0.4.2 (2014-03-27)
 

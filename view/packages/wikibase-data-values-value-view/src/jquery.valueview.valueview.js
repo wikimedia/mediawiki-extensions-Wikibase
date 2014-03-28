@@ -369,7 +369,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			throw new Error( 'Instance of dataValues.DataValue required for setting a value' );
 		}
 
-		if( this._value && this._value.toJSON && JSON.stringify( value.toJSON() ) === JSON.stringify( this._value.toJSON() ) ) {
+		if( this._value && value && JSON.stringify( value.toJSON() ) === JSON.stringify( this._value.toJSON() ) ) {
 			return;
 		}
 
