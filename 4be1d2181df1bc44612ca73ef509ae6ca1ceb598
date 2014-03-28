@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_d86437b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-28T12:43:43Z",
+      "side": 1,
+      "message": "Humans do. And humans care about readability, of both the docs and the code. In this case the readability aspect seems to easily outweigh the downsides of using an extra import.",
+      "revId": "4be1d2181df1bc44612ca73ef509ae6ca1ceb598",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
