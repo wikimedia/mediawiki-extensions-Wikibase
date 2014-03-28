@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_d8be77fa",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-28T12:49:06Z",
+      "side": 1,
+      "message": "please intend all the lines starting with \"And\" for better readability.. see how it was done in the other feature files.",
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_985fdfe8",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-28T12:49:06Z",
+      "side": 1,
+      "message": "After https://gerrit.wikimedia.org/r/#/c/110966/ is merged now, you could do\n\nGiven There are items with the following handles:\n| my_test_item |\n\nThen you could always access it\u0027s data with @items[\"my_test_item\"], e.g. @items[\"my_test_item\"][\"id\"].\n\nYou don\u0027t need to use the @item_under_test anymore and you could have more than one item (not needed here though).",
+      "range": {
+        "startLine": 47,
+        "startChar": 20,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_f867fbb2",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-28T12:49:06Z",
+      "side": 1,
+      "message": "Regarding the above comment, this would then change to:\n\nAnd I enter the ID of the item with the handle \u003cmy_test_item\u003e into the ID input field",
+      "range": {
+        "startLine": 49,
+        "startChar": 10,
+        "endLine": 49,
+        "endChar": 15
+      },
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_9806bfd0",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-28T12:49:06Z",
+      "side": 1,
+      "message": "Would then change to\n\nAnd I navigate to the item with the handle \u003cmy_test_item\u003e",
+      "range": {
+        "startLine": 53,
+        "startChar": 10,
+        "endLine": 53,
+        "endChar": 12
+      },
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_f8fedbaa",
+        "filename": "tests/browser/features/step_definitions/special_set_label.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-28T12:49:06Z",
+      "side": 1,
+      "message": "Regarding my comments in the feature file, this would then be something like:\n\nWhen /^I enter the ID of the item with the handle (.+) into the ID input field$/ do |handle|\n  on(SpecialSetLabelPage).id_input_field \u003d @items[handle][\u0027id\u0027]",
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_f815bbea",
+        "filename": "tests/browser/features/support/pages/special_set_label_page.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-28T12:49:06Z",
+      "side": 1,
+      "message": "I guess that applies to several SpecialPages and stays the same all the time. So to not have this accessor in every page object for all special pages, we could just create a new page object, e.g. special_set_entity or special_set_term, put all common elements into those and just include the new page object here.",
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_d812f700",
+        "filename": "tests/browser/features/support/pages/special_set_label_page.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-03-28T12:49:06Z",
+      "side": 1,
+      "message": "Same here and also for language_input_field.",
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
