@@ -69,6 +69,7 @@ module WikibaseAPI
       items = Hash.new
 
       handles.each do |handle|
+        handle = handle[0]
         data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) +
             '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
         item = wb_create_entity(data, "item")
