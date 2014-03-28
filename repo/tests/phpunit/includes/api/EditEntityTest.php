@@ -34,12 +34,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 		if( !isset( self::$hasSetup ) ){
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-			$this->initTestEntities( array( 'Berlin' ) );
-			self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
-
-			$berlinData = EntityTestHelper::getEntityOutput( 'Berlin' );
-			self::$idMap['%BerlinP56%'] = $berlinData['claims']['P56'][0]['id'];
-
 			$prop = Property::newEmpty();
 			$prop->setDataTypeId( 'string' );
 			$store->saveEntity( $prop, 'EditEntityTestP56', $GLOBALS['wgUser'], EDIT_NEW );
@@ -49,6 +43,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$prop->setDataTypeId( 'string' );
 			$store->saveEntity( $prop, 'EditEntityTestP72', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
+
+			$this->initTestEntities( array( 'Berlin' ), self::$idMap );
+			self::$idMap['%Berlin%'] = EntityTestHelper::getId( 'Berlin' );
+
+			$p56 = self::$idMap['%P56%'];
+			$berlinData = EntityTestHelper::getEntityOutput( 'Berlin' );
+			self::$idMap['%BerlinP56%'] = $berlinData['claims'][$p56][0]['id'];
 
 			$badge = Item::newEmpty();
 			$store->saveEntity( $badge, 'EditEntityTestQ42', $GLOBALS['wgUser'], EDIT_NEW );
@@ -511,7 +512,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'id' => '%BerlinP56%',
 								'mainsnak' => array(
 									'snaktype' => 'value',
-									'property' => 'P72',
+									'property' => '%P72%',
 									'datavalue' => array( 'value' => 'anotherstring', 'type' => 'string' ),
 								),
 								'type' => 'statement',
@@ -521,7 +522,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
 					'code' => 'failed-save',
-					'message' => 'uses property P56, can\'t change to P72' ) ) ),
+					'message' => 'uses property %P56%, can\'t change to %P72%' ) ) ),
 		);
 	}
 
