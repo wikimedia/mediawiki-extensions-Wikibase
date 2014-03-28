@@ -2,16 +2,20 @@
 
 namespace Wikibase\Test\Api;
 
+use DataValues\NumberValue;
 use DataValues\StringValue;
 use FormatJson;
 use Revision;
+use UsageException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -158,6 +162,93 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function getInvalidCases() {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$item = Item::newEmpty();
+		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$q17 = $item->getId();
+
+		$property = Property::newFromType( 'string' );
+		$store->saveEntity( $property, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$p11 = $property->getId();
+
+		$item = Item::newEmpty();
+		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$qx = $item->getId();
+		$store->deleteEntity( $qx, 'setclaimtest', $GLOBALS['wgUser'] );
+
+		$property = Property::newFromType( 'string' );
+		$store->saveEntity( $property, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$px = $property->getId();
+		$store->deleteEntity( $px, 'setclaimtest', $GLOBALS['wgUser'] );
+
+
+		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
+		$badSnak = new PropertyValueSnak( $p11, new StringValue( ' x ' ) );
+		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
+		$obsoleteSnak = new PropertyValueSnak( $px, new StringValue( ' x ' ) );
+
+
+		$guidGenerator = new ClaimGuidGenerator();
+
+		$cases = array();
+
+		$claim = new Claim( $badSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$cases['invalid value in main snak'] = array( $q17, $claim, 'save-failed' );
+
+		$claim = new Claim( $brokenSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$cases['mismatching value in main snak'] = array( $q17, $claim, 'save-failed' );
+
+		$claim = new Claim( $obsoleteSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$cases['obsolete snak using deleted property'] = array( $q17, $claim, 'save-failed' );
+
+		$claim = new Claim( $goodSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $qx ) );
+		$cases['good claim for deleted item'] = array( $qx, $claim, 'cant-load-entity-content' );
+
+
+		$claim = new Claim( $goodSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setQualifiers( new SnakList( array( $badSnak ) ) );
+		$cases['bad snak in qualifiers'] = array( $q17, $claim, 'save-failed' );
+
+		$claim = new Claim( $goodSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setQualifiers( new SnakList( array( $brokenSnak ) ) );
+		$cases['mismatching value in qualifier'] = array( $q17, $claim, 'save-failed' );
+
+
+		$claim = new Statement( $goodSnak );
+		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setReferences( new ReferenceList( array( $reference ) ) );
+		$cases['bad snak in reference'] = array( $q17, $claim, 'save-failed' );
+
+		$claim = new Statement( $goodSnak );
+		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setReferences( new ReferenceList( array( $reference ) ) );
+		$cases['mismatching value in reference'] = array( $q17, $claim, 'save-failed' );
+
+		return $cases;
+	}
+
+	public function testAddInvalidClaim() {
+		$cases = $this->getInvalidCases();
+
+		/** @var Claim $claim */
+		/** @var ItemId $itemId */
+		foreach( $cases as $label => $case ) {
+			list( $itemId, $claim, $error ) = $case;
+
+			$this->makeRequest( $claim, $itemId, 1, $label, null, null, $error );
+		}
+	}
+
 	public function testSetClaimAtIndex() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
@@ -199,6 +290,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @param $requestLabel string a label to identify requests that are made in errors
 	 * @param int|null $index
 	 * @param int|null $baserevid
+	 * @param string $error
 	 */
 	protected function makeRequest(
 		$claim,
@@ -206,7 +298,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claimCount,
 		$requestLabel,
 		$index = null,
-		$baserevid = null
+		$baserevid = null,
+		$error = null
 	) {
 		$serializerFactory = new SerializerFactory();
 
@@ -232,8 +325,63 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$params['baserevid'] = $baserevid;
 		}
 
-		$this->makeValidRequest( $params );
+		$resultArray = $this->assertApiRequest( $params, $error );
 
+		if ( $resultArray ) {
+			$this->assertValidResponse( $resultArray );
+			$this->assertClaimWasSet( $claim, $entityId, $claimCount, $requestLabel );
+		}
+	}
+
+	/**
+	 * @param array $params
+	 * @param string|null $error
+	 *
+	 * @return array|bool
+	 */
+	protected function assertApiRequest( $params, $error ) {
+		$resultArray = false;
+
+		try {
+			list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+
+			if ( $error !== null ) {
+				$this->fail( "Did not cause expected error $error" );
+			}
+		} catch ( UsageException $ex ) {
+			if ( $error ) {
+				$this->assertEquals( $error, $ex->getCodeString(), 'expected error' );
+			} else {
+				$this->fail( "Caused unexpected error!" . $ex );
+			}
+		}
+
+		return $resultArray;
+	}
+
+	protected function assertValidResponse( array $resultArray ) {
+		$this->assertResultSuccess( $resultArray );
+		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
+		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );
+
+		if( isset( $resultArray['claim']['qualifiers'] ) ) {
+			$this->assertArrayHasKey( 'qualifiers-order', $resultArray['claim'], '"qualifiers-order" key is set when returning qualifiers' );
+		}
+	}
+
+	/**
+	 * @param Claim $claim
+	 * @param EntityId $entityId
+	 * @param $claimCount
+	 * @param $requestLabel string a label to identify requests that are made in errors
+	 */
+	protected function assertClaimWasSet(
+		Claim $claim,
+		EntityId $entityId,
+		$claimCount,
+		$requestLabel
+	) {
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
 		$claims = new Claims( $item->getClaims() );
@@ -245,21 +393,6 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 
 		$this->assertEquals( $claimCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
-	}
-
-	protected function makeValidRequest( array $params ) {
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
-
-		$this->assertResultSuccess( $resultArray );
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
-		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
-		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );
-
-		if( isset( $resultArray['claim']['qualifiers'] ) ) {
-			$this->assertArrayHasKey( 'qualifiers-order', $resultArray['claim'], '"qualifiers-order" key is set when returning qualifiers' );
-		}
-
-		return $resultArray;
 	}
 
 	/**

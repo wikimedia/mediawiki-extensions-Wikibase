@@ -12,6 +12,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\SiteLinkLookup;
+use Wikibase\Validators\SnakValidator;
 
 /**
  * WikibaseChangeOpFactory
@@ -47,18 +48,25 @@ class WikibaseChangeOpFactory implements ChangeOpFactory {
 	protected $guidParser;
 
 	/**
+	 * @var SnakValidator
+	 */
+	protected $snakValidator;
+
+	/**
 	 * @param LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
+	 * @param SnakValidator $snakValidator
 	 */
 	public function __construct(
 		LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector,
 		SiteLinkLookup $siteLinkLookup,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
-		ClaimGuidParser $guidParser
+		ClaimGuidParser $guidParser,
+		SnakValidator $snakValidator
 	) {
 
 		$this->labelDescriptionDuplicateDetector = $labelDescriptionDuplicateDetector;
@@ -67,6 +75,8 @@ class WikibaseChangeOpFactory implements ChangeOpFactory {
 		$this->guidGenerator = $guidGenerator;
 		$this->guidValidator = $guidValidator;
 		$this->guidParser = $guidParser;
+
+		$this->snakValidator = $snakValidator;
 	}
 
 	/**
@@ -178,6 +188,7 @@ class WikibaseChangeOpFactory implements ChangeOpFactory {
 			$this->guidGenerator,
 			$this->guidValidator,
 			$this->guidParser,
+			$this->snakValidator,
 			$index
 		);
 	}
@@ -195,6 +206,7 @@ class WikibaseChangeOpFactory implements ChangeOpFactory {
 			$this->guidGenerator,
 			$this->guidValidator,
 			$this->guidParser,
+			$this->snakValidator,
 			$index
 		);
 	}
