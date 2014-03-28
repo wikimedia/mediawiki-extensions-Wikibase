@@ -44,7 +44,7 @@ When /^I enter (.+) as string statement value$/ do |value|
   end
 end
 
-When /^I enter the label of the item with handle (.+) as statement value$/ do |handle|
+When /^I enter the label of item (.+) as statement value$/ do |handle|
   on(ItemPage) do |page|
     page.statement_value_input_field_element.clear
     page.statement_value_input_field = @items[handle]["label"]
@@ -126,6 +126,6 @@ Then /^Statement string value of claim (.+) in group (.+) should be (.+)$/ do |c
   on(ItemPage).statement_string_value(group_index, claim_index).should == value
 end
 
-Then /^Statement value of claim (.+) in group (.+) should be the label of the item with handle (.+)$/ do |claim_index, group_index, handle|
+Then /^Statement value of claim (.+) in group (.+) should be the label of item (.+)$/ do |claim_index, group_index, handle|
   on(ItemPage).statement_value_element(group_index, claim_index).text.should == @items[handle]["label"]
 end

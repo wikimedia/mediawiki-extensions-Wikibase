@@ -17,11 +17,11 @@ Feature: Creating statements of type item
   Scenario Outline: Adding a statement of type item
     Given There are properties with the following handles and datatypes:
       | itemprop | wikibase-item |
-    Given There are items with the following handles:
+    Given I have the following items:
       | item1 |
     When I click the statement add button
       And I select the property itemprop
-      And I enter the label of the item with handle <itemhandle> as statement value
+      And I enter the label of item <item> as statement value
       And I <save>
     Then Statement add button should be there
     And Statement cancel button should not be there
@@ -30,8 +30,8 @@ Feature: Creating statements of type item
     And Statement value input element should not be there
     And Statement edit button for claim 1 in group 1 should be there
     And Statement name of group 1 should be the label of itemprop
-    And Statement value of claim 1 in group 1 should be the label of the item with handle <itemhandle>
+    And Statement value of claim 1 in group 1 should be the label of item <item>
 
   Examples:
-    | itemhandle | save                                                    |
-    | item1      | click the statement save button                         |
+    | item  | save                            |
+    | item1 | click the statement save button |

@@ -23,7 +23,7 @@ Given /^There are properties with the following handles and datatypes:$/ do |pro
   @properties = wb_api.wb_create_properties(props.raw)
 end
 
-Given /^There are items with the following handles:$/ do |handles|
+Given /^I have the following items:$/ do |handles|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   @items = wb_api.wb_create_items(handles.raw)
 end
