@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_de153f42",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T16:52:16Z",
+      "side": 1,
+      "message": "well, it could. the interface allows for it, and we don\u0027t want to guarantee that we don\u0027t. i have improved the documentation now.",
+      "parentUuid": "ae0e4726_40aeffe5",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_ebf179db",
         "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-26T18:39:10Z",
       "side": 1,
       "message": "it\u0027s a bit confusing... are we getting the exception message (e.g. $ex-\u003egetMessage() ) as a string? or are we getting a MediaWiki Message object.\n\nlooking at the code, I see the latter but the way the functions are named makes it unclear at a glance.",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_fe18037c",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T16:52:16Z",
+      "side": 1,
+      "message": "improved the documentation on the interface, hope that helps.",
+      "parentUuid": "ae0e4726_ebf179db",
       "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,42 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_1e0cd73c",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T16:52:16Z",
+      "side": 1,
+      "message": "No, because ParseException is thrown in the DataValue/parser module, which can and should not know about MediaWiki\u0027s localization mechanism, and should not care about localization anyway. MessageException is useful in a context where we are dealing with user interaction.",
+      "parentUuid": "ae0e4726_6b2d6941",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_9e00e705",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T16:52:16Z",
+      "side": 1,
+      "message": "Oh, right - I included it in the if-instanceof chain.",
+      "parentUuid": "ae0e4726_5adef115",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_00b0073d",
         "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
         "patchSetId": 5
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_9e27c7b1",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T16:52:16Z",
+      "side": 1,
+      "message": "It\u0027s not. It was just missing (used in a comment).",
+      "parentUuid": "ae0e4726_a086fb68",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_808bf771",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
@@ -116,6 +206,24 @@
       "writtenOn": "2014-03-27T00:12:09Z",
       "side": 1,
       "message": "not convinced this comment is needed\n\nif we want the comment, I would say \"an ExceptionLocalizer\"",
+      "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_3e367be5",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T16:52:16Z",
+      "side": 1,
+      "message": "right",
+      "parentUuid": "ae0e4726_808bf771",
       "revId": "541b0fb370755ec2474d5d2426df64c93a9f657d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
