@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_5effef62",
+        "filename": "lib/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-28T17:58:21Z",
+      "side": 1,
+      "message": "In I5b3e27cbbfd01ed1b724ec480a5470e741da7f4c it looks like this should be details.error-info instead of details.error.info. I may be wrong. Where does this come from? Please help me understand.",
+      "revId": "574ae537810b15e8dda51933e97a6aa69ee0f2c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_be2f2bf3",
+        "filename": "lib/resources/parsers/ApiBasedValueParser.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-28T17:58:21Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "574ae537810b15e8dda51933e97a6aa69ee0f2c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
