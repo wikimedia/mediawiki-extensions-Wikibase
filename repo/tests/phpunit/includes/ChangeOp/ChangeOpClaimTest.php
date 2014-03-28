@@ -2,17 +2,28 @@
 
 namespace Wikibase\Test;
 
+use DataValues\NumberValue;
+use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpClaim
@@ -24,55 +35,31 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
-	public function getValidClaim() {
-		return new Claim( new PropertyNoValueSnak( 7 ) );
-	}
+	/**
+	 * @var ClaimTestMockProvider
+	 */
+	protected $mockProvider;
 
-	public function getValidGuidGenerator() {
-		return new ClaimGuidGenerator();
-	}
+	/**
+	 * @param null $name
+	 * @param array $data
+	 * @param string $dataName
+	 */
+	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
 
-	private function getMockGuidValidator() {
-		$mock = $this->getMockBuilder( '\Wikibase\Lib\ClaimGuidValidator' )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'validate' )
-			->will( $this->returnValue( true ) );
-		$mock->expects( $this->any() )
-			->method( 'validateFormat' )
-			->will( $this->returnValue( true ) );
-		return $mock;
-	}
-
-	private function getMockGuidParser( ItemId $itemId ) {
-		$mockClaimGuid = $this->getMockBuilder( 'Wikibase\DataModel\Claim\ClaimGuid' )
-			->disableOriginalConstructor()
-			->getMock();
-		$mockClaimGuid->expects( $this->any() )
-			->method( 'getSerialization' )
-			->will( $this->returnValue( 'theValidatorIsMockedSoMeh! :D' ) );
-		$mockClaimGuid->expects( $this->any() )
-			->method( 'getEntityId' )
-			->will( $this->returnValue( $itemId ) );
-
-		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Claim\ClaimGuidParser' )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'parse' )
-			->will( $this->returnValue( $mockClaimGuid ) );
-		return $mock;
+		$this->mockProvider = new ClaimTestMockProvider( $this );
 	}
 
 	public function invalidIndexProvider() {
 		return array(
 			array( 'foo' ),
 			array( array() ),
-			array( $this->getValidClaim() ),
+			array( $this->mockProvider->makeStatement( 'P7' ) ),
 		);
 	}
 
@@ -83,10 +70,11 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	public function testConstructionWithInvalidIndex( $invalidIndex ) {
 		$itemId = new ItemId( 'q42' );
 		new ChangeOpClaim(
-			$this->getValidClaim(),
-			$this->getValidGuidGenerator(),
-			$this->getMockGuidValidator(),
-			$this->getMockGuidParser( $itemId ),
+			$this->mockProvider->makeStatement( 'P7' ),
+			$this->mockProvider->getGuidGenerator(),
+			$this->mockProvider->getMockGuidValidator(),
+			$this->mockProvider->getMockGuidParser( $itemId ),
+			$this->mockProvider->getMockSnakValidator(),
 			$invalidIndex
 		);
 	}
@@ -166,13 +154,16 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 			$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
 		}
 
+		$idParser = new BasicEntityIdParser();
 		$changeOpClaim = new ChangeOpClaim(
 			$claim,
 			new ClaimGuidGenerator(),
-			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(), //@todo mock me!
-			WikibaseRepo::getDefaultInstance()->getClaimGuidParser(), //@todo mock me!
+			new ClaimGuidValidator( $idParser ),
+			new ClaimGuidParser( $idParser ),
+			$this->mockProvider->getMockSnakValidator(),
 			$index
 		);
+
 		$changeOpClaim->apply( $entity );
 
 		if( $expected === false ){
@@ -204,7 +195,6 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->makeNewItemWithClaim( 'Q777', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
-		$guidGenerator = new ClaimGuidGenerator();
 
 		// change main snak to "some value"
 		$newSnak = new PropertySomeValueSnak( 67573284 );
@@ -216,9 +206,10 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$wrongItem->setId( new ItemId( "Q888" ) );
 		$args['wrong entity'] = array ( $wrongItem, new ChangeOpClaim(
 			$newClaim,
-			$guidGenerator,
-			$this->getMockGuidValidator(),
-			$this->getMockGuidParser( $item->getId() )
+			$this->mockProvider->getGuidGenerator(),
+			$this->mockProvider->getMockGuidValidator(),
+			$this->mockProvider->getMockGuidParser( $item->getId() ),
+			$this->mockProvider->getMockSnakValidator()
 		) );
 
 		//TODO: once we stop allowing user-generated GUIDs for new claims, test this below.
@@ -236,9 +227,10 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOp =  new ChangeOpClaim(
 			$newClaim,
-			$guidGenerator,
-			$this->getMockGuidValidator(),
-			$this->getMockGuidParser( $item->getId() )
+			$this->mockProvider->getGuidGenerator(),
+			$this->mockProvider->getMockGuidValidator(),
+			$this->mockProvider->getMockGuidParser( $item->getId() ),
+			$this->mockProvider->getMockSnakValidator()
 		);
 
 		$args['wrong main snak property'] = array ( $item, $changeOp );
@@ -275,4 +267,72 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		return $entity;
 	}
 
+	public function provideApplyInvalid() {
+		$p11 = new PropertyId( 'P11' );
+		$q17 = new ItemId( 'Q17' );
+
+		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
+		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
+		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
+		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
+
+		$guidGenerator = new ClaimGuidGenerator();
+
+		$cases = array();
+
+		$claim = new Claim( $badSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$cases['invalid value in main snak'] = array( $q17, $claim );
+
+		$claim = new Claim( $brokenSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$cases['mismatching value in main snak'] = array( $q17, $claim );
+
+
+		$claim = new Claim( $goodSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setQualifiers( new SnakList( array( $badSnak ) ) );
+		$cases['bad snak in qualifiers'] = array( $q17, $claim );
+
+		$claim = new Claim( $goodSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setQualifiers( new SnakList( array( $brokenSnak ) ) );
+		$cases['mismatching value in qualifier'] = array( $q17, $claim );
+
+
+		$claim = new Statement( $goodSnak );
+		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setReferences( new ReferenceList( array( $reference ) ) );
+		$cases['bad snak in reference'] = array( $q17, $claim );
+
+		$claim = new Statement( $goodSnak );
+		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setReferences( new ReferenceList( array( $reference ) ) );
+		$cases['mismatching value in reference'] = array( $q17, $claim );
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideApplyInvalid
+	 */
+	public function testApplyInvalid( EntityId $entityId, Claim $claim ) {
+		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpValidationException' );
+
+		$changeOpClaim = new ChangeOpClaim(
+			$claim,
+			new ClaimGuidGenerator(),
+			$this->mockProvider->getMockGuidValidator(),
+			$this->mockProvider->getMockGuidParser( $entityId ),
+			$this->mockProvider->getMockSnakValidator(),
+			0
+		);
+
+		$entity = Item::newEmpty();
+		$entity->setId( $entityId );
+
+		$changeOpClaim->apply( $entity );
+	}
 }

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -23,6 +23,22 @@ use Wikibase\Lib\ClaimGuidValidator;
  * @author Adam Shorland
  */
 class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var ClaimTestMockProvider
+	 */
+	protected $mockProvider;
+
+	/**
+	 * @param string|null $name
+	 * @param array $data
+	 * @param string $dataName
+	 */
+	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
+
+		$this->mockProvider = new ClaimTestMockProvider( $this );
+	}
 
 	private function getMockLabelDescriptionDuplicateDetector( $callTimes, $returnValue = array() ) {
 		$mock = $this->getMockBuilder( '\Wikibase\LabelDescriptionDuplicateDetector' )
@@ -58,7 +74,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			$linkCache,
 			new ClaimGuidGenerator(),
 			new ClaimGuidValidator( $idParser ),
-			new ClaimGuidParser( $idParser )
+			new ClaimGuidParser( $idParser ),
+			$this->mockProvider->getMockSnakValidator()
 		);
 
 		return new ChangeOpsMerge(
