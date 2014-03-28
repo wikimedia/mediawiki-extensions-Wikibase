@@ -17,19 +17,6 @@ return call_user_func( function() {
 
 	return array(
 
-		'mw.ext.valueFormatters' => $moduleTemplate + array(
-			'scripts' => array(
-				'mw.ext.valueFormatters.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'mediawiki',
-				'valueFormatters',
-				'valueFormatters.formatters',
-				'valueFormatters.ValueFormatterStore',
-			),
-		),
-
 		'valueFormatters' => $moduleTemplate + array(
 			'scripts' => array(
 				'valueFormatters.js',

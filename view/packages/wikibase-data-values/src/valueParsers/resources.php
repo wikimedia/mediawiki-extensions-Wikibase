@@ -18,19 +18,6 @@ return call_user_func( function() {
 
 	return array(
 
-		'mw.ext.valueParsers' => $moduleTemplate + array(
-			'scripts' => array(
-				'mw.ext.valueParsers.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'mediawiki',
-				'valueParsers',
-				'valueParsers.parsers',
-				'valueParsers.ValueParserStore',
-			),
-		),
-
 		'valueParsers' => $moduleTemplate + array(
 			'scripts' => array(
 				'valueParsers.js',
