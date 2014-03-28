@@ -261,17 +261,22 @@
 		 * @see jQuery.valueview.Expert.valueCharacteristics
 		 */
 		valueCharacteristics: function() {
-			var options = {},
-				precision = this.$precision && this.$precision.data( 'listrotator' ).value(),
-				calendarname = this.$calendar && this.$calendar.data( 'listrotator' ).value(),
+			var options = {}, calendarname,
+				precisionRotator = this.$precision && this.$precision.data( 'listrotator' ),
+				calendarRotator = this.$calendar && this.$calendar.data( 'listrotator' ),
 				value = this.viewState() && this.viewState().value();
 
 			if( value ) {
 				value = value.getValue();
 			}
 
-			options.precision = precision || value && value.precision();
-			options.calendar = calendarname ? this._calendarNameToUri( calendarname ) : ( value && value.calendarURI() );
+			if( precisionRotator && !precisionRotator.autoActive() ) {
+				options.precision = precisionRotator.value() || value && value.precision();
+			}
+			if( calendarRotator && !calendarRotator.autoActive() ) {
+				calendarname = calendarRotator.value(),
+				options.calendar = calendarname ? this._calendarNameToUri( calendarname ) : ( value && value.calendarURI() );
+			}
 
 			return options;
 		},
@@ -370,6 +375,14 @@
 			if( considerInputExtender ) {
 				this._updateCalendarHint( value );
 				this._updatePreview();
+				if( value ) {
+					if( this.$precision.data( 'listrotator' ).autoActive() ) {
+						this.$precision.data( 'listrotator' ).rotate( value.precision() );
+					}
+					if( this.$calendar.data( 'listrotator' ).autoActive() ) {
+						this.$calendar.data( 'listrotator' ).rotate( value.calendar() );
+					}
+				}
 			}
 		}
 	} );
