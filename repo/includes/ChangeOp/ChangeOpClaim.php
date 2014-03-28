@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Summary;
+use Wikibase\Validators\SnakValidator;
 
 /**
  * Class for claim modification operations
@@ -44,6 +45,11 @@ class ChangeOpClaim extends ChangeOpBase {
 	private $guidParser;
 
 	/**
+	 * @var SnakValidator
+	 */
+	private $snakValidator;
+
+	/**
 	 * @var int|null
 	 */
 	private $index;
@@ -53,15 +59,17 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
+	 * @param SnakValidator $snakValidator
 	 * @param int|null $index
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(
 		Claim $claim,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser,
+		SnakValidator $snakValidator,
 		$index = null
 	) {
 		if( !is_null( $index ) && !is_integer( $index ) ) {
@@ -72,6 +80,7 @@ class ChangeOpClaim extends ChangeOpBase {
 		$this->guidGenerator = $guidGenerator;
 		$this->guidValidator = $guidValidator;
 		$this->guidParser = $guidParser;
+		$this->snakValidator = $snakValidator;
 		$this->index = $index;
 	}
 
