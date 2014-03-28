@@ -23,8 +23,6 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 * Renamed ValueParserFactory to ValueParserStore.
 * Removed mw.ext.valueFormatters and mw.ext.valueParsers.
 
-### 0.4.1 (dev)
-
 #### Enhancements
 
 * Defined parameters of the promises returned by ValueFormatter's and ValueParser's format/parse functions.
