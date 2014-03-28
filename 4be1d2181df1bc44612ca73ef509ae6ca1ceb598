@@ -16,6 +16,23 @@
       "revId": "4be1d2181df1bc44612ca73ef509ae6ca1ceb598",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_b8286333",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-28T12:46:45Z",
+      "side": 1,
+      "message": "\u003e a more\tmeaningful \"use\" section.\n\nNot sure what the added value is. Do you actually read through the import section? Hope not... Esp in files such as this it just is a big list of stuff that ones does not have to care about much.",
+      "revId": "4be1d2181df1bc44612ca73ef509ae6ca1ceb598",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
