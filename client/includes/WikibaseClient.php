@@ -5,10 +5,12 @@ namespace Wikibase\Client;
 use DataTypes\DataTypeFactory;
 use Exception;
 use Language;
+use MediaWikiSite;
+use MWException;
 use Site;
+use Sites;
 use SiteSQLStore;
 use SiteStore;
-use Sites;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -20,11 +22,11 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -127,11 +129,13 @@ final class WikibaseClient {
 	 * @param Language      $contentLanguage
 	 * @param SiteStore $siteStore
 	 */
-	public function __construct( SettingsArray $settings, Language $contentLanguage,
+	public function __construct(
+		SettingsArray $settings,
+		Language $contentLanguage,
 		SiteStore $siteStore = null
 	) {
-		$this->contentLanguage = $contentLanguage;
 		$this->settings = $settings;
+		$this->contentLanguage = $contentLanguage;
 		$this->siteStore = $siteStore;
 	}
 
@@ -142,9 +146,12 @@ final class WikibaseClient {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-
 			$urlSchemes = $this->getSettings()->getSetting( 'urlSchemes' );
-			$builders = new WikibaseDataTypeBuilders( $this->getEntityLookup(), $this->getEntityIdParser(), $urlSchemes );
+			$builders = new WikibaseDataTypeBuilders(
+				$this->getEntityLookup(),
+				$this->getEntityIdParser(),
+				$urlSchemes
+			);
 
 			$typeBuilderSpecs = array_intersect_key(
 				$builders->getDataTypeBuilders(),
@@ -276,7 +283,7 @@ final class WikibaseClient {
 	 *
 	 * @since 0.1
 	 *
-	 * @param boolean|string $store
+	 * @param string|bool $store Set to false to get the default store.
 	 * @param string $reset set to 'reset' to force a fresh instance to be returned.
 	 *
 	 * @throws Exception
@@ -289,13 +296,13 @@ final class WikibaseClient {
 			$store = $this->settings->getSetting( 'defaultClientStore' ); // still false per default
 		}
 
-		//NOTE: $repoDatabase is null per default, meaning no direct access to the repo's database.
-		//      If $repoDatabase is false, the local wiki IS the repository.
-		//      Otherwise, $repoDatabase needs to be a logical database name that LBFactory understands.
+		// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's database.
+		// If $repoDatabase is false, the local wiki IS the repository.
+		// Otherwise, $repoDatabase needs to be a logical database name that LBFactory understands.
 		$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 
 		if ( !$store ) {
-			//XXX: this is a rather ugly "magic" default.
+			// XXX: This is a rather ugly "magic" default.
 			if ( $repoDatabase !== null ) {
 				$store = 'DirectSqlStore';
 			} else {
@@ -381,7 +388,7 @@ final class WikibaseClient {
 	 * If the configured site ID is not found in the Sites list, a
 	 * new Site object is constructed from the configured ID.
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return Site
 	 */
 	public function getSite() {
@@ -395,7 +402,7 @@ final class WikibaseClient {
 			if ( !$this->site ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Unable to resolve site ID '{$globalId}'!" );
 
-				$this->site = new \MediaWikiSite();
+				$this->site = new MediaWikiSite();
 				$this->site->setGlobalId( $globalId );
 				$this->site->addLocalId( Site::ID_INTERWIKI, $localId );
 				$this->site->addLocalId( Site::ID_EQUIVALENT, $localId );
@@ -564,4 +571,5 @@ final class WikibaseClient {
 
 		return $this->langLinkHandler;
 	}
+
 }
