@@ -27,7 +27,7 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 class GetEntitiesTest extends WikibaseApiTestCase {
 
 	private static $hasSetup;
-	private static $usedHandles = array( 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' );
+	private static $usedHandles = array( 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' );
 
 	public function setup() {
 		parent::setup();
