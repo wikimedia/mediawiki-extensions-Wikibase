@@ -27,7 +27,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( array( 'Oslo', 'Berlin' ) );
+			$this->initTestEntities( array( 'StringProp', 'Oslo', 'Berlin' ) );
 		}
 		self::$hasSetup = true;
 	}
