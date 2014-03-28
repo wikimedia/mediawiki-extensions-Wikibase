@@ -9,7 +9,7 @@
 
 	mw.ext = mw.ext || {};
 
-	var valueFormatterProvider = new vf.ValueFormatterFactory( vf.NullFormatter );
+	var valueFormatterProvider = new vf.ValueFormatterStore( vf.NullFormatter );
 
 	/**
 	 * Object representing the MediaWiki "ValueFormatters" extension.
@@ -21,7 +21,7 @@
 		 * context.
 		 * @since 0.1
 		 *
-		 * @type {valueFormatters.ValueFormatterFactory}
+		 * @type {valueFormatters.ValueFormatterStore}
 		 */
 		this.valueFormatterProvider = valueFormatterProvider;
 	} )();

@@ -26,7 +26,7 @@ return call_user_func( function() {
 				'mediawiki',
 				'valueFormatters',
 				'valueFormatters.formatters',
-				'valueFormatters.ValueFormatterFactory',
+				'valueFormatters.ValueFormatterStore',
 			),
 		),
 
@@ -47,9 +47,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'valueFormatters.ValueFormatterFactory' => $moduleTemplate + array(
+		'valueFormatters.ValueFormatterStore' => $moduleTemplate + array(
 			'scripts' => array(
-				'ValueFormatterFactory.js',
+				'ValueFormatterStore.js',
 			),
 			'dependencies' => array(
 				'valueFormatters',

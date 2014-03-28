@@ -27,7 +27,7 @@ return call_user_func( function() {
 				'mediawiki',
 				'valueParsers',
 				'valueParsers.parsers',
-				'valueParsers.ValueParserFactory',
+				'valueParsers.ValueParserStore',
 			),
 		),
 
@@ -48,9 +48,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'valueParsers.ValueParserFactory' => $moduleTemplate + array(
+		'valueParsers.ValueParserStore' => $moduleTemplate + array(
 			'scripts' => array(
-				'ValueParserFactory.js',
+				'ValueParserStore.js',
 			),
 			'dependencies' => array(
 				'jquery',

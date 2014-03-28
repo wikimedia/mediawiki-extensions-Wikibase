@@ -9,7 +9,7 @@
 
 	mw.ext = mw.ext || {};
 
-	var valueParserProvider = new vp.ValueParserFactory( vp.NullParser );
+	var valueParserProvider = new vp.ValueParserStore( vp.NullParser );
 
 	valueParserProvider.registerDataValueParser(
 		vp.StringParser,
@@ -25,7 +25,7 @@
 		 * Value parser provider containing all value parsers available in global MediaWiki context.
 		 * @since 0.1
 		 *
-		 * @type {valueParsers.ValueParserFactory}
+		 * @type {valueParsers.ValueParserStore}
 		 */
 		this.valueParserProvider = valueParserProvider;
 	} )();

@@ -6,14 +6,14 @@
 	'use strict';
 
 	/**
-	 * Factory managing ValueFormatter instances
+	 * Store managing ValueFormatter instances
 	 * @constructor
 	 * @since 0.1
 	 *
 	 * @param {Function} [DefaultFormatter] Constructor of a default formatter that shall be
 	 *        returned when no formatter is registered for a specific purpose.
 	 */
-	var SELF = vf.ValueFormatterFactory = function VpValueFormatterFactory( DefaultFormatter ) {
+	var SELF = vf.ValueFormatterStore = function VpValueFormatterStore( DefaultFormatter ) {
 		this._DefaultFormatter = DefaultFormatter || null;
 		this._formattersForDataTypes = {};
 		this._formattersForDataValueTypes = {};
