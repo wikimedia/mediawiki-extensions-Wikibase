@@ -6,25 +6,23 @@ use DataTypes\DataTypeFactory;
 use Exception;
 use Language;
 use Site;
+use Sites;
 use SiteSQLStore;
 use SiteStore;
-use Sites;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EntityLookup;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -127,11 +125,13 @@ final class WikibaseClient {
 	 * @param Language      $contentLanguage
 	 * @param SiteStore $siteStore
 	 */
-	public function __construct( SettingsArray $settings, Language $contentLanguage,
+	public function __construct(
+		SettingsArray $settings,
+		Language $contentLanguage,
 		SiteStore $siteStore = null
 	) {
-		$this->contentLanguage = $contentLanguage;
 		$this->settings = $settings;
+		$this->contentLanguage = $contentLanguage;
 		$this->siteStore = $siteStore;
 	}
 
@@ -160,7 +160,7 @@ final class WikibaseClient {
 	/**
 	 * @since 0.4
 	 *
-	 * @return EntityIdParser
+	 * @return \Wikibase\DataModel\Entity\EntityIdParser
 	 */
 	public function getEntityIdParser() {
 		//TODO: make the ID builders configurable
@@ -197,7 +197,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return EntityLookup
+	 * @return \Wikibase\EntityLookup
 	 */
 	private function getEntityLookup() {
 		return $this->getStore()->getEntityLookup();
@@ -564,4 +564,5 @@ final class WikibaseClient {
 
 		return $this->langLinkHandler;
 	}
+
 }
