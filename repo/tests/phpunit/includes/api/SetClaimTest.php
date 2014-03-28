@@ -5,11 +5,13 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use Revision;
+use UsageException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -158,6 +160,70 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function getInvalidCases() {
+		...store these...
+
+		$p11 = new PropertyId( 'P11' );
+		$q17 = new ItemId( 'Q17' );
+		$q9 = new ItemId( 'Q9' );
+
+		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
+		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
+		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
+		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
+
+		$guidGenerator = new ClaimGuidGenerator();
+
+		$cases = array();
+
+		$claim = new Claim( $badSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$cases['invalid value in main snak'] = array( $q17, $claim );
+
+		$claim = new Claim( $brokenSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$cases['mismatching value in main snak'] = array( $q17, $claim );
+
+
+		$claim = new Claim( $goodSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setQualifiers( new SnakList( array( $badSnak ) ) );
+		$cases['bad claim in qualifiers'] = array( $q9, $claim );
+
+		$claim = new Claim( $goodSnak );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setQualifiers( new SnakList( array( $brokenSnak ) ) );
+		$cases['mismatching value in qualifier'] = array( $q9, $claim );
+
+
+		$claim = new Statement( $goodSnak );
+		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setReferences( new ReferenceList( array( $reference ) ) );
+		$cases['bad claim in reference'] = array( $q9, $claim );
+
+
+		$claim = new Statement( $goodSnak );
+		$reference = new Reference( new SnakList( array( $badSnak ) ) );
+		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
+		$claim->setReferences( new ReferenceList( array( $reference ) ) );
+		$cases['mismatching value in reference'] = array( $q9, $claim );
+
+		return $cases;
+	}
+
+	public function testAddInvalidClaim() {
+		$cases = $this->getInvalidCases();
+
+		/** @var Claim $claim */
+		/** @var ItemId $itemId */
+		foreach( $cases as $case ) {
+			list( $itemId, $claim, $error ) = $case;
+
+			$this->makeRequest( $claim, $itemId, 1, 'invalid update request', null, null, $error );
+		}
+	}
+
 	public function testSetClaimAtIndex() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
@@ -199,6 +265,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @param $requestLabel string a label to identify requests that are made in errors
 	 * @param int|null $index
 	 * @param int|null $baserevid
+	 * @param string $error
 	 */
 	protected function makeRequest(
 		$claim,
@@ -206,7 +273,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claimCount,
 		$requestLabel,
 		$index = null,
-		$baserevid = null
+		$baserevid = null,
+		$error = null
 	) {
 		$serializerFactory = new SerializerFactory();
 
@@ -232,8 +300,61 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$params['baserevid'] = $baserevid;
 		}
 
-		$this->makeValidRequest( $params );
+		$resultArray = $this->assertApiRequest( $params, $error );
 
+		$this->assertValidResponse( $resultArray );
+		$this->assertClaimWasSet( $claim, $entityId, $claimCount, $requestLabel );
+	}
+
+	/**
+	 * @param array $params
+	 * @param string|null $error
+	 *
+	 * @return array|bool
+	 */
+	protected function assertApiRequest( $params, $error ) {
+		$resultArray = false;
+
+		try {
+			list( $resultArray, ) = $this->doApiRequestWithToken( $params );
+
+			if ( $error !== null ) {
+				$this->fail( "Did not cause expected error: $error" );
+			}
+		} catch ( UsageException $ex ) {
+			if ( $error ) {
+				$this->assertEquals( $error, $ex->getCodeString(), 'expected error' );
+			} else {
+				$this->fail( "Caused unexpected error!" . $ex );
+			}
+		}
+
+		return $resultArray;
+	}
+
+	protected function assertValidResponse( array $resultArray ) {
+		$this->assertResultSuccess( $resultArray );
+		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
+		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );
+
+		if( isset( $resultArray['claim']['qualifiers'] ) ) {
+			$this->assertArrayHasKey( 'qualifiers-order', $resultArray['claim'], '"qualifiers-order" key is set when returning qualifiers' );
+		}
+	}
+
+	/**
+	 * @param Claim $claim
+	 * @param EntityId $entityId
+	 * @param $claimCount
+	 * @param $requestLabel string a label to identify requests that are made in errors
+	 */
+	protected function assertClaimWasSet(
+		Claim $claim,
+		EntityId $entityId,
+		$claimCount,
+		$requestLabel
+	) {
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
 		$claims = new Claims( $item->getClaims() );
@@ -245,21 +366,6 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 
 		$this->assertEquals( $claimCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
-	}
-
-	protected function makeValidRequest( array $params ) {
-		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
-
-		$this->assertResultSuccess( $resultArray );
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
-		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
-		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );
-
-		if( isset( $resultArray['claim']['qualifiers'] ) ) {
-			$this->assertArrayHasKey( 'qualifiers-order', $resultArray['claim'], '"qualifiers-order" key is set when returning qualifiers' );
-		}
-
-		return $resultArray;
 	}
 
 	/**
