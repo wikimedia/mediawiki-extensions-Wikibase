@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_3e9afbbd",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T17:03:59Z",
+      "side": 1,
+      "message": "Ok, fine... we\u0027ll want to make this configurable somehow though. \n\nAlso, perhaps make this a map from content model to namespace ID. That info is currently hardcoded in a few places, and should be centralized here.",
+      "range": {
+        "startLine": 501,
+        "startChar": 17,
+        "endLine": 501,
+        "endChar": 33
+      },
+      "revId": "f418850cc8abe05c2dae23cbd8cd37c9072bc7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_9e8b4772",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-28T17:03:59Z",
+      "side": 1,
+      "message": "should be a constructor parameter.",
+      "revId": "f418850cc8abe05c2dae23cbd8cd37c9072bc7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
