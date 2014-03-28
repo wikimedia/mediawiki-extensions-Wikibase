@@ -122,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_b8c3c309",
+        "filename": "tests/browser/features/support/pages/special_set_label_page.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-28T14:07:26Z",
+      "side": 1,
+      "message": "Such a warning is defined in the following classes:\n* SpecialMergeItems\n* SpecialModifyEntity\n* SpecialNewItem\n* SpecialNewProperty\n\nThey should probably all get a page object. But this patch here only needs SpecialModifyEntityPage.",
+      "parentUuid": "ae0e4726_f815bbea",
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_d812f700",
         "filename": "tests/browser/features/support/pages/special_set_label_page.rb",
         "patchSetId": 6
@@ -133,6 +151,24 @@
       "writtenOn": "2014-03-28T12:49:06Z",
       "side": 1,
       "message": "Same here and also for language_input_field.",
+      "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_5815c79b",
+        "filename": "tests/browser/features/support/pages/special_set_label_page.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-28T14:07:26Z",
+      "side": 1,
+      "message": "\u0027wb-modifyentity-id\u0027 is defined in SpecialModifyEntity which is then used in\n* SpecialModifyTerm\n* SpecialSetAliases\n* SpecialSetDescription\n* SpecialSetLabel\n* SpecialSetSiteLink\n\nSo this would require a page object SpecialModifyEntityPage.\n\n\u0027wb-modifyterm-language\u0027 is defined in SpecialModifyTerm which is then used in\n* SpecialSetAliases\n* SpecialSetDescription\n* SpecialSetLabel\n\nSo this would require a page object SpecialModifyTermPage.",
+      "parentUuid": "ae0e4726_d812f700",
       "revId": "33e2418debbfb1dda0734ffeb7bfbc51d6434796",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
