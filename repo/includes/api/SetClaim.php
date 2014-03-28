@@ -49,7 +49,6 @@ class SetClaim extends ModifyClaim {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$claim = $this->getClaimFromParams( $params );
-		$this->snakValidation->validateClaimSnaks( $claim );
 
 		$guid = $claim->getGuid();
 		if( $guid === null ){
