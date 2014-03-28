@@ -75,24 +75,27 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
-	protected function initTestEntities( $handles ) {
-		$activeHandles = EntityTestHelper::getActiveHandles();
-
-		foreach( $activeHandles as $handle => $id ) {
-			if( array_key_exists( $handle, $activeHandles ) ) {
-				$params = EntityTestHelper::getEntityClear( $handle );
-				$params['action'] = 'wbeditentity';
-				$this->doApiRequestWithToken( $params );
-			}
-		}
+	protected function initTestEntities( array $handles, array $idMap = array()) {
+		$ids = EntityTestHelper::getActiveIds();
 
 		foreach( $handles as $handle ) {
 			$params = EntityTestHelper::getEntity( $handle );
 			$params['action'] = 'wbeditentity';
+
+			if ( isset( $ids[$handle] ) ) {
+				$params['id'] = $ids[$handle];
+				$params['clear'] = 'clear';
+				unset( $params['new'] );
+			}
+
+			EntityTestHelper::injectIds( $params, $idMap );
+			EntityTestHelper::injectIds( $params, EntityTestHelper::$defaultPlaceholderValues );
+
 			list($res,,) = $this->doApiRequestWithToken( $params );
 			EntityTestHelper::registerEntity( $handle, $res['entity']['id'], $res['entity'] );
-		}
 
+			$idMap["%$handle%"] = $res['entity']['id'];
+		}
 	}
 
 	/**
