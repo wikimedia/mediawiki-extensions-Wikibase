@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_fecb6373",
+        "filename": "lib/resources/parsers/wikibase.parsers.api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-28T17:32:05Z",
+      "side": 1,
+      "message": "Is it intended to simply pass the full result object as second parameter? I find it a bit confusing that this sometimes returns a string and sometimes an object. Is the plan to get rid of the string result in the future?",
+      "revId": "873c285c647bc8b7cf9d7d531e83deb36e74d9ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_3eeb1bdd",
+        "filename": "lib/resources/parsers/wikibase.parsers.api.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-28T17:32:05Z",
+      "side": 1,
+      "message": "I think this was a mistake. Personally I prefer the variable name \"ex\" for exceptions. But this is used only 11 times in our code base. \"e\" is used 136 times. I think we should stick to this \"standard\".",
+      "revId": "873c285c647bc8b7cf9d7d531e83deb36e74d9ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
