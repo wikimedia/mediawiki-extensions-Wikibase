@@ -783,7 +783,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	_updateTextValue: function() {
 		var self = this,
 			deferred = $.Deferred(),
-			valueFormatter = this._instantiateFormatter( this.valueCharacteristics() ),
+			valueFormatter,
 			dataTypeId = this.options.dataTypeId || null,
 			dataValue = this._value;
 
@@ -792,6 +792,8 @@ $.widget( 'valueview.valueview', PARENT, {
 			deferred.resolve();
 			return deferred.promise();
 		}
+
+		valueFormatter = this._instantiateFormatter( this.valueCharacteristics() );
 
 		valueFormatter.format( dataValue, dataTypeId, 'text/plain' )
 			.done( function( formattedValue, formattedDataValue ) {
