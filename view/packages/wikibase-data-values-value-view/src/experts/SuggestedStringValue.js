@@ -19,7 +19,7 @@
 	 * TODO: Implement this as an "extension" for the StringValue expert. This could be done by
 	 *  adding a system for extensions which get initialized in addition to a specific expert.
 	 *  Those extensions would also require registration, this should probably be done by introducing
-	 *  a more complex format for registering an expert plus extensions to an expert factory.
+	 *  a more complex format for registering an expert plus extensions to an expert store.
 	 */
 	vv.experts.SuggestedStringValue = vv.expert( 'SuggestedStringValue', PARENT, {
 		/**

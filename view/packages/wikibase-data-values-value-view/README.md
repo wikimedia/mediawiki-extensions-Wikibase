@@ -109,6 +109,18 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.5.0 (dev)
+
+* Renamed jQuery.valueView.ExpertFactory to jQuery.valueView.ExpertStore.
+* Renamed jQuery.valueView option "expertProvider" to "expertStore".
+* Renamed jQuery.valueView.ExpertFactory to jQuery.valueView.ExpertStore.
+* Renamed jQuery.valueView option "expertProvider" to "expertStore".
+* Renamed jQuery.valueView option "valueFormatterProvider" to "formatterStore".
+* Renamed jQuery valueView option "valueParserProvider" to "parserStore".
+* Updated DataValuesJavaScript dependency to version 0.5.0.
+* Removed setting default formatter provider/store and parser provider/store of jQuery.valueView in mw.ext.valueView since no defaults are provided by DataValuesJavaScript as of version 0.5.0.
+* Removed mw.ext.valueView module.
+
 ### 0.4.2 (2014-03-27)
 
 * Use DOM children of the ValueView as formatted value on initialization

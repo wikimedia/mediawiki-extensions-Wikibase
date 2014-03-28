@@ -18,13 +18,13 @@ return call_user_func( function() {
 
 	$resources = array(
 
-		'jquery.valueview.ExpertFactory.tests' => $moduleTemplate + array(
+		'jquery.valueview.ExpertStore.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview.ExpertFactory.tests.js',
+				'jquery.valueview.ExpertStore.tests.js',
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'jquery.valueview.ExpertFactory',
+				'jquery.valueview.ExpertStore',
 				'jquery.valueview.tests.MockExpert',
 				'qunit.parameterize',
 			),

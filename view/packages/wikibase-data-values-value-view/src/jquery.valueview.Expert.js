@@ -11,8 +11,8 @@ jQuery.valueview = jQuery.valueview || {};
 	 * Creates a new expert definition as it is required by jQuery.valueview.valueview.
 	 *
 	 * NOTE: Just by defining a new expert here, the expert won't be available in a valueview
-	 *  widget automatically. The expert has to be registered in a jQuery.valueview.ExpertFactory
-	 *  instance which has to be used as expert provider in the valueview widget's options.
+	 *  widget automatically. The expert has to be registered in a jQuery.valueview.ExpertStore
+	 *  instance which has to be used as expert store in the valueview widget's options.
 	 *
 	 * @see jQuery.valueview.Expert
 	 *

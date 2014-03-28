@@ -42,9 +42,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.valueview.ExpertFactory' => $moduleTemplate + array(
+		'jquery.valueview.ExpertStore' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.valueview.ExpertFactory.js',
+				'jquery.valueview.ExpertStore.js',
 			),
 			'dependencies' => array(
 				'jquery',
@@ -73,12 +73,12 @@ return call_user_func( function() {
 				'jquery',
 				'jquery.ui.widget',
 				'jquery.valueview.ViewState',
-				'jquery.valueview.ExpertFactory',
+				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.EmptyValue',
 				'jquery.valueview.experts.UnsupportedValue',
 				'util.Notifier',
-				'valueFormatters.ValueFormatterFactory',
-				'valueParsers.ValueParserFactory',
+				'valueFormatters.ValueFormatterStore',
+				'valueParsers.ValueParserStore',
 			),
 		),
 
@@ -88,23 +88,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-			),
-		),
-
-		'mw.ext.valueView' => $moduleTemplate + array(
-			'scripts' => array(
-				'mw.ext.valueView.js',
-			),
-			'dependencies' => array(
-				'dataValues.values',
-				'jquery.valueview',
-				'jquery.valueview.experts.GlobeCoordinateInput',
-				'jquery.valueview.experts.StringValue',
-				'jquery.valueview.experts.TimeInput',
-				'jquery.valueview.ExpertFactory',
-				'mediawiki',
-				'mw.ext.valueFormatters',
-				'mw.ext.valueParsers',
 			),
 		),
 
