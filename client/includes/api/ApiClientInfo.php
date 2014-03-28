@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use ApiBase;
 use Wikibase\Client\WikibaseClient;
 
@@ -16,6 +17,9 @@ use Wikibase\Client\WikibaseClient;
  */
 class ApiClientInfo extends \ApiQueryBase {
 
+	/**
+	 * @var SettingsArray
+	 */
 	protected $settings;
 
 	/**
@@ -143,7 +147,7 @@ class ApiClientInfo extends \ApiQueryBase {
 	 * @return string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:WikibaseClient#API';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client#API';
 	}
 
 	/**
@@ -154,7 +158,7 @@ class ApiClientInfo extends \ApiQueryBase {
 	 * @return string
 	 */
 	public function getVersion() {
-		return __CLASS__ . ': $Id$';
+		return __CLASS__ . '-' . WBC_VERSION;
 	}
 
 	/**
@@ -165,7 +169,7 @@ class ApiClientInfo extends \ApiQueryBase {
 	 * @return string
 	 */
 	public function getDescription() {
-		return 'Get information about the Wikibase repository';
+		return 'Get information about the Wikibase repository.';
 	}
 
 }
