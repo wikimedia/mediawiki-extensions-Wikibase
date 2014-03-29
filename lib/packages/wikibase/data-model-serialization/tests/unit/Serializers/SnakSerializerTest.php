@@ -55,14 +55,16 @@ class SnakSerializerTest extends SerializerBaseTest {
 			array(
 				array(
 					'snaktype' => 'novalue',
-					'property' => 'P42'
+					'property' => 'P42',
+					'hash' => '5c33520fbfb522444868b4168a35d4b919370018'
 				),
 				new PropertyNoValueSnak( 42 )
 			),
 			array(
 				array(
 					'snaktype' => 'somevalue',
-					'property' => 'P42'
+					'property' => 'P42',
+					'hash' => '1c5c4a30999292cd6592a7a6530322d095fc62d4'
 				),
 				new PropertySomeValueSnak( 42 )
 			),
@@ -70,6 +72,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 				array(
 					'snaktype' => 'value',
 					'property' => 'P42',
+					'hash' => 'f39228cb4e94174c87e966c32b02ad93b3512fce',
 					'datavalue' => array(
 						'type' => 'string',
 						'value' => 'hax'
