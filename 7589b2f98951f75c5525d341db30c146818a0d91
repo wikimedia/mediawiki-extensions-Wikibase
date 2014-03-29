@@ -34,6 +34,24 @@
       "revId": "7589b2f98951f75c5525d341db30c146818a0d91",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_f75a6121",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-29T15:09:06Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the exact message as thrown by the GrumpyJeroenExceptionGenerator",
+      "parentUuid": "ae0e4726_373339f5",
+      "revId": "7589b2f98951f75c5525d341db30c146818a0d91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
