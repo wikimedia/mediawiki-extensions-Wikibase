@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_41270f0e",
+        "filename": "client/includes/api/ApiClientInfo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-03-29T04:27:36Z",
+      "side": 1,
+      "message": "\"fatal error, constant WB_VERSION is defined in repo, you confused human\"",
+      "revId": "7589b2f98951f75c5525d341db30c146818a0d91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
