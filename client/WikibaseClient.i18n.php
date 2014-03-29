@@ -491,6 +491,16 @@ $messages['ast'] = array(
 	'wikibase-otherprojects' => 'Otros proyeutos',
 );
 
+/** Azerbaijani (azərbaycanca)
+ * @author Interfase
+ */
+$messages['az'] = array(
+	'wikibase-dataitem' => 'Verilənlərin elementi',
+	'wikibase-editlinks' => 'Keçidləri redaktə et',
+	'wikibase-editlinkstitle' => 'Dillərarası keçidləri redaktə et',
+	'wikibase-linkitem-addlinks' => 'Keçid əlavə et',
+);
+
 /** Bashkir (башҡортса)
  * @author Comp1089
  */
@@ -617,8 +627,8 @@ $messages['bg'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Потвърждаване',
 	'wikibase-linkitem-not-loggedin-title' => 'Трябва да сте влезли в системата',
 	'wikibase-rc-hide-wikidata' => '$1 на Уикиданни', # Fuzzy
-	'wikibase-rc-hide-wikidata-hide' => 'Скрий',
-	'wikibase-rc-hide-wikidata-show' => 'Покажи',
+	'wikibase-rc-hide-wikidata-hide' => 'Скриване',
+	'wikibase-rc-hide-wikidata-show' => 'Показване',
 	'wikibase-pageinfo-entity-id' => 'ID на обекта в Уикиданни', # Fuzzy
 );
 
@@ -1028,10 +1038,10 @@ $messages['cu'] = array(
  * @author Lloffiwr
  */
 $messages['cy'] = array(
-	'specialpages-group-wikibaseclient' => 'Cleient Wiciddata', # Fuzzy
-	'wikibase-after-page-move' => "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar Wikidata er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.", # Fuzzy
-	'wikibase-comment-linked' => "Cysylltwyd eitem Wikidata â'r dudalen hon.", # Fuzzy
-	'wikibase-comment-update' => 'Newidiwyd yr eitem Wiciddata.', # Fuzzy
+	'specialpages-group-wikibaseclient' => 'Cleient {{WBREPONAME}}',
+	'wikibase-after-page-move' => "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar {{WBREPONAME}} er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
+	'wikibase-comment-linked' => "Cysylltwyd eitem {{WBREPONAME}} â'r dudalen hon.",
+	'wikibase-comment-update' => 'Newidiwyd yr eitem {{WBREPONAME}}.',
 	'wikibase-comment-sitelink-add' => 'Ychwanegwyd y cyswllt rhwng ieithoedd $1',
 	'wikibase-comment-sitelink-change' => 'Newidiwyd y cyswllt rhwng ieithoedd o $1 i $2',
 	'wikibase-comment-sitelink-remove' => 'Tynnwyd cyswllt rhwng ieithoedd i ffwrdd: $1',
@@ -1049,13 +1059,13 @@ $messages['cy'] = array(
 	'wikibase-linkitem-confirmitem-button' => 'Cadarnhaer',
 	'wikibase-linkitem-not-loggedin-title' => 'Rhaid mewngofnodi i barhau',
 	'wikibase-property-notfound' => "Ni ddaethpwyd o hyd i'r nodwedd $1.",
-	'wikibase-rc-hide-wikidata' => '$1 y golygiadau ar Wiciddata', # Fuzzy
-	'wikibase-rc-show-wikidata-pref' => 'Dangos golygiadau i Wiciddata ymhlith y newidiadau diweddar', # Fuzzy
-	'wikibase-watchlist-show-changes-pref' => 'Dangos golygiadau Wiciddata ar eich rhestr wylio', # Fuzzy
+	'wikibase-rc-hide-wikidata' => '$1 y golygiadau ar {{WBREPONAME}}',
+	'wikibase-rc-show-wikidata-pref' => 'Dangos golygiadau i {{WBREPONAME}} ymhlith y newidiadau diweddar',
+	'wikibase-watchlist-show-changes-pref' => 'Dangos golygiadau {{WBREPONAME}} ar eich rhestr wylio',
 	'wikibase-error-invalid-entity-id' => "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
 	'wikibase-unconnectedpages-submit' => 'Gwneler',
 	'wikibase-unconnectedpages-invalid-language' => 'Nid yw "$1" yn gôd iaith dilys',
-	'wikibase-pageinfo-entity-id' => 'ID yr Eitem Wiciddata', # Fuzzy
+	'wikibase-pageinfo-entity-id' => 'ID yr Eitem {{WBREPONAME}}',
 	'wikibase-pageinfo-entity-id-none' => 'Dim',
 );
 
@@ -1268,16 +1278,16 @@ $messages['dsb'] = array(
  */
 $messages['el'] = array(
 	'wikibase-client-desc' => 'Πελάτης για την επέκταση Wikibase',
-	'specialpages-group-wikibaseclient' => 'Πελάτης Wikidata', # Fuzzy
+	'specialpages-group-wikibaseclient' => 'Πελάτης {{WBREPONAME}}',
 	'tooltip-t-wikibase' => 'Σύνδεσμος προς το συνδεδεμένο αντικείμενο δεδομένων',
-	'wikibase-after-page-move' => 'Μπορείτε επίσης να [$1 ενημερώσετε] το σχετικό αντικείμενο Wikidata ώστε να διατηρηθούν οι διαγλωσσικές συνδέσεις στη μετακινούμενη σελίδα.', # Fuzzy
-	'wikibase-after-page-move-queued' => 'Το [$1  αντικείμενο των Wikidata] που σχετίζεται με αυτή τη σελίδα θα ενημερωθεί αυτόματα σύντομα.', # Fuzzy
-	'wikibase-comment-add' => 'Δημιουργήθηκε ένα αντικείμενο των Wikidata.', # Fuzzy
-	'wikibase-comment-remove' => 'Το σχετιζόμενο αντικείμενο των Wikidata διαγράφτηκε. Ο γλωσσικός σύνδεσμος αφαιρέθηκε.', # Fuzzy
-	'wikibase-comment-linked' => 'Ένα αντικείμενο των Wikidata συνδέθηκε με αυτή την σελίδα.', # Fuzzy
-	'wikibase-comment-unlink' => 'Αυτή η σελίδα αποσυνδέθηκε από αντικείμενο των Wikidata. Γλωσσικοί σύνδεσμοι αποσυνδέθηκαν.', # Fuzzy
-	'wikibase-comment-restore' => 'Το σχετιζόμενο αντικείμενο των Wikidata επαναφέρθηκε. Ο γλωσσικός σύνδεσμος αποκαταστάθηκε.', # Fuzzy
-	'wikibase-comment-update' => 'Το αντικείμενο των Wikidata τροποποιήθηκε', # Fuzzy
+	'wikibase-after-page-move' => 'Μπορείτε επίσης να [$1 ενημερώσετε] το σχετικό αντικείμενο {{WBREPONAME}} ώστε να διατηρηθούν οι διαγλωσσικές συνδέσεις στη μετακινούμενη σελίδα.',
+	'wikibase-after-page-move-queued' => 'Το [$1 αντικείμενο {{WBREPONAME}}] που σχετίζεται με αυτή τη σελίδα θα ενημερωθεί αυτόματα σύντομα.',
+	'wikibase-comment-add' => 'Δημιουργήθηκε ένα αντικείμενο {{WBREPONAME}}.',
+	'wikibase-comment-remove' => 'Το σχετιζόμενο αντικείμενο {{WBREPONAME}} διαγράφτηκε. Ο γλωσσικός σύνδεσμος αφαιρέθηκε.',
+	'wikibase-comment-linked' => 'Ένα αντικείμενο {{WBREPONAME}} συνδέθηκε με αυτή την σελίδα.',
+	'wikibase-comment-unlink' => 'Αυτή η σελίδα αποσυνδέθηκε από αντικείμενο {{WBREPONAME}}. Γλωσσικοί σύνδεσμοι αποσυνδέθηκαν.',
+	'wikibase-comment-restore' => 'Το σχετιζόμενο αντικείμενο {{WBREPONAME}}επαναφέρθηκε. Ο γλωσσικός σύνδεσμος αποκαταστάθηκε.',
+	'wikibase-comment-update' => 'Το αντικείμενο {{WBREPONAME}} τροποποιήθηκε',
 	'wikibase-comment-sitelink-add' => 'Γλωσσικός σύνδεσμος προστέθηκε: $1',
 	'wikibase-comment-sitelink-change' => 'Γλωσσικός σύνδεσμος άλλαξε από $1 σε $2',
 	'wikibase-comment-sitelink-remove' => 'Γλωσσικός σύνδεσμος αφαιρέθηκε: $1',
@@ -1301,11 +1311,13 @@ $messages['el'] = array(
 	'wikibase-linkitem-success-link' => 'Οι σελίδες έχουν συνδεθεί με επιτυχία. Μπορείτε να βρείτε το αντικείμενο που περιέχει τους συνδέσεις στο [$1 κεντρικό αποθετήριο δεδομένων].',
 	'wikibase-property-notfound' => 'Η ιδιότητα $1 δεν βρέθηκε.',
 	'wikibase-property-notsupportedyet' => 'Η Wikibase δεν υποστηρίζει ακόμα τον τύπο ιδιότητας $1.',
-	'wikibase-rc-hide-wikidata' => '$1 Wikidata', # Fuzzy
-	'wikibase-rc-show-wikidata-pref' => 'Εμφάνιση των επεξεργασιών στα Wikidata στις πρόσφατες αλλαγές', # Fuzzy
+	'wikibase-rc-hide-wikidata' => '$1 {{WBREPONAME}}',
+	'wikibase-rc-hide-wikidata-hide' => 'Απόκρυψη',
+	'wikibase-rc-hide-wikidata-show' => 'Εμφάνιση',
+	'wikibase-rc-show-wikidata-pref' => 'Εμφάνιση επεξεργασιών {{WBREPONAME} στις πρόσφατες αλλαγές', # Fuzzy
 	'wikibase-rc-wikibase-edit-letter' => 'D',
-	'wikibase-rc-wikibase-edit-title' => 'Επεξεργασία Wikidata', # Fuzzy
-	'wikibase-watchlist-show-changes-pref' => 'Εμφάνιση αλλαγών στα Wikidata στη λίστα παρακολούθησης σας', # Fuzzy
+	'wikibase-rc-wikibase-edit-title' => 'Επεξεργασία {{WBREPONAME}}',
+	'wikibase-watchlist-show-changes-pref' => 'Εμφάνιση αλλαγών {{WBREPONAME}} στη λίστα παρακολούθησης σας',
 	'wikibase-error-serialize-error' => 'Η σειριοποίηση δεδομένων απέτυχε',
 	'wikibase-error-invalid-entity-id' => 'Το κωδικός που θέσατε δεν αναγνωρίστηκε από το σύστημα. Παρακαλούμε χρησιμοποιήστε έναν έγκυρο κωδικό.',
 	'special-unconnectedpages' => 'Οι σελίδες δεν συνδέθηκαν με τα αντικείμενα.',
@@ -1316,9 +1328,10 @@ $messages['el'] = array(
 	'wikibase-unconnectedpages-page-warning' => 'Ο τίτλος της σελίδας δεν μπορούσε να χρησιμοποιηθεί για το ερώτημα και αγνοήθηκε.',
 	'wikibase-unconnectedpages-iwdata-label' => 'Μόνο σελίδες με διαγλωσσικές συνδέσεις',
 	'wikibase-unconnectedpages-format-row' => '($1 {{PLURAL:$1|διαγλωσσικός σύνδεσμος|διαγλωσσικοί σύνδεσμοι}} για τη σελίδα)',
-	'wikibase-pageinfo-entity-id' => 'Κωδικός αντικειμένου των Wikidata', # Fuzzy
+	'wikibase-pageinfo-entity-id' => 'Αναγνωριστικό αντικειμένου {{WBREPONAME}}',
 	'wikibase-pageinfo-entity-id-none' => 'Κανένα',
 	'wikibase-property-render-error' => 'Αποτυχία απόδοσης της ιδιότητας $1: $2',
+	'wikibase-otherprojects' => 'Άλλα εγχειρήματα',
 );
 
 /** British English (British English)
@@ -1534,10 +1547,10 @@ $messages['fa'] = array(
 	'wikibase-after-page-move' => 'شما ممکن است در عین حال بخواهید آیتم وابستهٔ ویکی‌داده را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.', # Fuzzy
 	'wikibase-after-page-move-queued' => '[$1  آیتم {{WBREPONAME}}] مرتبط با این صفحه را به طور خودکار به‌زودی به‌روز خواهد شد.',
 	'wikibase-comment-add' => 'یک مورد {{WBREPONAME}} ایجاد شده‌‌است.',
-	'wikibase-comment-remove' => 'مورد مرتبط {{WBREPONAME}} حذف شد. لینک‌های زبان حذف شد.',
+	'wikibase-comment-remove' => 'آیتم مرتبط {{WBREPONAME}} حذف شد. پیوندهای زبانی حذف شد.',
 	'wikibase-comment-linked' => 'مورد {{WBREPONAME}} در این صفحه مرتبط شده‌است.',
-	'wikibase-comment-unlink' => 'این صفحه تکی از مورد {{WBREPONAME}} مرتبط نشده‌است. لینک‌های زبان حذف شده‌است.',
-	'wikibase-comment-restore' => 'مورد مرتبط {{WBREPONAME}} حذف نشد. لینک‌های زبان برگردانده شد.',
+	'wikibase-comment-unlink' => 'این صفحه تکی از مورد {{WBREPONAME}} مرتبط نشده‌است. پیوندهای زبانی حذف شده‌است.',
+	'wikibase-comment-restore' => 'مورد مرتبط {{WBREPONAME}} حذف نشد. پیوندهای زبانی برگردانده شد.',
 	'wikibase-comment-update' => 'مورد {{WBREPONAME}} تغییر کرد',
 	'wikibase-comment-sitelink-add' => 'پیوند زبان اضافه شده:$1',
 	'wikibase-comment-sitelink-change' => 'پیوند زبان از $1 به $2 تغییر کرده‌است.',
@@ -1548,7 +1561,7 @@ $messages['fa'] = array(
 	'wikibase-editlinkstitle' => 'ویرایش پیوندهای میان‌ویکی',
 	'wikibase-linkitem-addlinks' => 'افزودن پیوند',
 	'wikibase-linkitem-alreadylinked' => 'صفحه‌ای که شما به آن پیوند می‌دهید، از قبل به یک [$1 آیتم] در مخزن مرکزی داده که به $2 در این سایت مریوط می‌شود، متصل است. آیتم‌ها می‌توانند فقط به یک صفحه از وبگاه ارتباط داشته‌باشند. لطفاً از یک صفحه برای پیوند استفاده کنید.',
-	'wikibase-linkitem-close' => 'پنجره را ببند و صفحه را مجدداً بارگذاری کن',
+	'wikibase-linkitem-close' => 'پنجره را ببند و صفحه را دوباره باز کن',
 	'wikibase-linkitem-failure' => 'یک خطای ناشناخته در هنگام بارگذاری صفحهٔ پیوند داده‌شده رخ داد.',
 	'wikibase-linkitem-title' => 'پیوند به صفحه',
 	'wikibase-linkitem-linkpage' => 'پیوند با صفحه',
@@ -2562,7 +2575,7 @@ $messages['kk-cyrl'] = array(
 	'wikibase-linkitem-success-link' => 'Беттер сәтті сілтенді. Сіз [$1 орталық дерек қоймасыңыздан] жаңадан басталған элементердегі қамтылған сілтемелерді таба аласыз.',
 	'wikibase-property-notfound' => '$1 сипаты табылмады.',
 	'wikibase-property-notsupportedyet' => 'Уикиқор $1 түріндегі сипаттарды қолдамайды.',
-	'wikibase-rc-hide-wikidata' => '{{WBREPONAME}} $1',
+	'wikibase-rc-hide-wikidata' => '{{WBREPONAME}}ті $1',
 	'wikibase-rc-hide-wikidata-hide' => 'жасыру',
 	'wikibase-rc-hide-wikidata-show' => 'көрсету',
 	'wikibase-rc-show-wikidata-pref' => '{{WBREPONAME}} өңдемелерін жуықтағы өзгерістерден көрсету',
@@ -2823,9 +2836,12 @@ $messages['lb'] = array(
 
 /** Lezghian (лезги)
  * @author Soul Train
+ * @author Умар
  */
 $messages['lez'] = array(
-	'wikibase-rc-hide-wikidata' => '$1 Викималуматар',
+	'wikibase-rc-hide-wikidata' => '$1 Викималуматар', # Fuzzy
+	'wikibase-rc-hide-wikidata-hide' => 'Чуьнуьхун',
+	'wikibase-rc-hide-wikidata-show' => 'Къалурун',
 );
 
 /** لوری (لوری)
@@ -3548,7 +3564,7 @@ $messages['pl'] = array(
 	'wikibase-linkitem-success-link' => 'Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].',
 	'wikibase-property-notfound' => 'Właściwość $1 nie została znaleziona.',
 	'wikibase-property-notsupportedyet' => 'Wikibase nie obsługuje jeszcze typu właściwość dla właściwości $1.',
-	'wikibase-rc-hide-wikidata' => '$1 Wikidane', # Fuzzy
+	'wikibase-rc-hide-wikidata' => '$1 {{WBREPONAME}}',
 	'wikibase-rc-hide-wikidata-hide' => 'Schowaj',
 	'wikibase-rc-hide-wikidata-show' => 'Pokaż',
 	'wikibase-rc-show-wikidata-pref' => 'Pokazuj edycje w Wikidanych w ostatnich zmianach', # Fuzzy
@@ -3568,6 +3584,7 @@ $messages['pl'] = array(
 	'wikibase-pageinfo-entity-id' => 'Identyfikator elementu Wikidanych', # Fuzzy
 	'wikibase-pageinfo-entity-id-none' => 'brak',
 	'wikibase-property-render-error' => 'Nie można zrenderować właściwości $1: $2',
+	'wikibase-otherprojects' => 'Inne projekty',
 );
 
 /** Piedmontese (Piemontèis)
