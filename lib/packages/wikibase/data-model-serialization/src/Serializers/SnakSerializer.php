@@ -62,7 +62,8 @@ class SnakSerializer implements DispatchableSerializer {
 	private function getSerialized( Snak $snak ) {
 		$serialization = array(
 			'snaktype' => $snak->getType(),
-			'property' => $snak->getPropertyId()->getSerialization()
+			'property' => $snak->getPropertyId()->getSerialization(),
+			'hash' => $snak->getHash()
 		);
 
 		if ( $snak instanceof PropertyValueSnak ) {
