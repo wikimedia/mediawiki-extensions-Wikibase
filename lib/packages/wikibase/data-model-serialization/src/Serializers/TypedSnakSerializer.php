@@ -45,7 +45,7 @@ class TypedSnakSerializer implements Serializer {
 		if ( !is_object( $object ) || !( $object instanceof TypedSnak ) ) {
 			throw new UnsupportedObjectException(
 				$object,
-				'SnakSerializer can only serialize Snak objects'
+				'TypedSnakSerializer can only serialize TypedSnak objects'
 			);
 		}
 	}
