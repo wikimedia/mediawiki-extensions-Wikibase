@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Raimond Spekking <raimond.spekking@gmail.com>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Sun, 30 Mar 2014 12:50:56 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/122111
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
