@@ -45,7 +45,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
-	global $wgWBClientStores, $wgWBClientSettings, $wgRecentChangesFlags;
+	global $wgWBClientStores, $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -63,7 +63,6 @@ call_user_func( function() {
 
 	// i18n
 	$wgMessagesDirs['wikibaseclient']                   = __DIR__ . '/i18n';
-	$wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php';
 	$wgExtensionMessagesFiles['Wikibaseclientalias']	= $dir . 'WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 

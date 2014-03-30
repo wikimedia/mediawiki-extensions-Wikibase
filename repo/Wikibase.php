@@ -36,7 +36,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles;
+	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks, $wgContentHandlers;
 	global $wgWBStores, $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
 
@@ -64,7 +64,6 @@ call_user_func( function() {
 
 	// i18n
 	$wgMessagesDirs['Wikibase']                         = __DIR__ . '/i18n';
-	$wgExtensionMessagesFiles['Wikibase'] 				= __DIR__ . '/Wikibase.i18n.php';
 	$wgExtensionMessagesFiles['WikibaseAlias'] 			= __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';
 

@@ -44,7 +44,7 @@ $GLOBALS['evilDataValueMap'] = array_merge(
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles;
-	global $wgJobClasses, $wgHooks, $wgResourceModules;
+	global $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -61,7 +61,6 @@ call_user_func( function() {
 
 	// i18n
 	$wgMessagesDirs['WikibaseLib']           = __DIR__ . '/i18n';
-	$wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
