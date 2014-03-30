@@ -61,7 +61,6 @@ call_user_func( function() {
 
 	// i18n
 	$wgMessagesDirs['WikibaseLib']           = __DIR__ . '/i18n';
-	$wgExtensionMessagesFiles['WikibaseLib'] = __DIR__ . '/WikibaseLib.i18n.php';
 
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
