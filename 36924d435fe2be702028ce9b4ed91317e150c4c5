@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_39a32b41",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-03-30T20:07:07Z",
+      "side": 1,
+      "message": "use this._normalizeParam here... this will fail if we don\u0027t give an array object as badges (which is totally valid as this is an optional parameter, right?)",
+      "revId": "36924d435fe2be702028ce9b4ed91317e150c4c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
