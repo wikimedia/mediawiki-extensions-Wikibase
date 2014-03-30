@@ -33,6 +33,7 @@ $magicWords['arz'] = array(
 $magicWords['de'] = array(
 	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
 	'property' => array( 0, 'eigenschaft' ),
+	'wbreponame' => array( 0, 'wbrepositoriumsname' ),
 );
 
 /** Zazaki (Zazaki) */

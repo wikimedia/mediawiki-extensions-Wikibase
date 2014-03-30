@@ -3,7 +3,8 @@
         "authors": [
             "Bináris",
             "BáthoryPéter",
-            "Tgr"
+            "Tgr",
+            "JulesWinnfield-hu"
         ]
     },
     "wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
@@ -12,7 +13,7 @@
     "wikibase-comment-linked": "Egy Wikidata elemet kapcsoltak ehhez az oldalhoz.",
     "wikibase-comment-unlink": "Nyelvközi hivatkozások eltávolítása – már nincs összekapcsolva a Wikidata elemmel.",
     "wikibase-comment-restore": "Nyelvközi hivatkozások visszaállítása – a hozzátartozó törölt Wikidata elemet visszaállították.",
-    "wikibase-comment-update": "Nyelvközi hivatkozások frissítése.",
+    "wikibase-comment-update": "A {{WBREPONAME}}-elem megváltozott",
     "wikibase-comment-sitelink-add": "Nyelvközi hivatkozás hozzáadása: $1",
     "wikibase-comment-sitelink-change": "Nyelvközi hivatkozás módosítása (régi: $1, új: $2)",
     "wikibase-comment-sitelink-remove": "Nyelvközi hivatkozás törlése: $1",
@@ -20,7 +21,9 @@
     "wikibase-dataitem": "Kapcsolódó adatok",
     "wikibase-editlinks": "szerkesztés",
     "wikibase-editlinkstitle": "Nyelvközi hivatkozások szerkesztése",
-    "wikibase-rc-hide-wikidata": "Wikidata $1",
+    "wikibase-rc-hide-wikidata": "{{WBREPONAME}}-szerkesztések $1",
+    "wikibase-rc-hide-wikidata-hide": "elrejtése",
+    "wikibase-rc-hide-wikidata-show": "megjelenítése",
     "wikibase-rc-show-wikidata-pref": "Wikidata szerkesztések mutatása a friss változtatásokban",
     "wikibase-rc-wikibase-edit-title": "Wikidata-szerkesztés",
     "wikibase-watchlist-show-changes-pref": "Wikidata-változások mutatása a figyelőlistádon"

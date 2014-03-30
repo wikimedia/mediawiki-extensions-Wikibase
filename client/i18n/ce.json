@@ -8,7 +8,7 @@
     "specialpages-group-wikibaseclient": "Викихаамашан клиент",
     "tooltip-t-wikibase": "Йихкина элементан хьажорг хаамийн репозитори",
     "wikibase-after-page-move": "Викихаамашчохь [$1 карлаяккха] хьой цӀе хийцина агӀона хьажораг.",
-    "wikibase-after-page-move-queued": "ХӀара агӀо чохь йолу [$1 Викихаамаш чур элемент] ша карлаяьккина хила мега.",
+    "wikibase-after-page-move-queued": "ХӀара агӀо чохь йолу [$1 {{grammar:genitive|{{WBREPONAME}}}} чура элемент] ша карлаяьккина хила мега.",
     "wikibase-comment-add": "Викихаамашкахь элемент кхоьллина.",
     "wikibase-comment-linked": "Викихаамашан элемент хӀокху агӀонах тесна.",
     "wikibase-comment-unlink": "ХӀокху агӀонца йихкина {{WBREPONAME}} хьажоргаш дӀаяьхна.",
