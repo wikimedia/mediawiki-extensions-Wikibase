@@ -1,0 +1,18 @@
+{
+    "@metadata": {
+        "authors": [
+            "Chrisportelli"
+        ]
+    },
+    "wikibase-client-desc": "Klijent għall-estensjoni Wikibase",
+    "specialpages-group-wikibaseclient": "Klijent tal-Wikidata",
+    "wikibase-after-page-move-queued": "L-[$1 element ta' Wikidata] assoċjat ma' din il-paġna se jiġi aġġornat awtomatikament dalwaqt.",
+    "wikibase-comment-update": "Ħoloq għal-lingwi aġġornati.",
+    "wikibase-editlinks": "Immodifika l-ħoloq",
+    "wikibase-editlinkstitle": "Immodifika l-ħoloq interlingwi",
+    "wikibase-linkitem-addlinks": "Żid ħoloq",
+    "wikibase-linkitem-not-loggedin-title": "Trid tkun dħalt fil-kont tiegħek",
+    "wikibase-linkitem-not-loggedin": "Sabiex tuża' din il-funzjoni trid tkun dħalt fil-kont tiegħek u fir-[$1 repożitorju tad-data ċentralizzata].",
+    "wikibase-rc-wikibase-edit-title": "Modifika ta' Wikidata",
+    "special-unconnectedpages": "Paġni mhux imwaħħda ma' elementi"
+}

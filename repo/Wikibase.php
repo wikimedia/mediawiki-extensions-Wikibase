@@ -63,6 +63,7 @@ call_user_func( function() {
 	$wgGroupPermissions['*']['property-create']		= true;
 
 	// i18n
+	$wgMessagesDirs['Wikibase']                         = __DIR__ . '/i18n';
 	$wgExtensionMessagesFiles['Wikibase'] 				= __DIR__ . '/Wikibase.i18n.php';
 	$wgExtensionMessagesFiles['WikibaseAlias'] 			= __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] 			= __DIR__ . '/Wikibase.i18n.namespaces.php';

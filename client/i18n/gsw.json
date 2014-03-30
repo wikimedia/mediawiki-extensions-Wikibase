@@ -1,0 +1,12 @@
+{
+    "@metadata": {
+        "authors": [
+            "Als-Holder"
+        ]
+    },
+    "wikibase-client-desc": "Macht e Client fir d Erwyterig Wikibase megli",
+    "wikibase-after-page-move": "Du chasch au s zuegordnet Wikidata-Elemänt [$1 aktualisiere], go Sprochlink vu verschobene Syte verwalte.",
+    "wikibase-editlinks": "Links bearbeite",
+    "wikibase-editlinkstitle": "Sprachibergryfigi Link bearbeite",
+    "wikibase-rc-hide-wikidata": "Wikidata $1"
+}

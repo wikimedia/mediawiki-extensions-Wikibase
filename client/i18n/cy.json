@@ -1,0 +1,36 @@
+{
+    "@metadata": {
+        "authors": [
+            "Lloffiwr"
+        ]
+    },
+    "specialpages-group-wikibaseclient": "Cleient {{WBREPONAME}}",
+    "wikibase-after-page-move": "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar {{WBREPONAME}} er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
+    "wikibase-comment-linked": "Cysylltwyd eitem {{WBREPONAME}} â'r dudalen hon.",
+    "wikibase-comment-update": "Newidiwyd yr eitem {{WBREPONAME}}.",
+    "wikibase-comment-sitelink-add": "Ychwanegwyd y cyswllt rhwng ieithoedd $1",
+    "wikibase-comment-sitelink-change": "Newidiwyd y cyswllt rhwng ieithoedd o $1 i $2",
+    "wikibase-comment-sitelink-remove": "Tynnwyd cyswllt rhwng ieithoedd i ffwrdd: $1",
+    "wikibase-comment-multi": "$1 {{PLURAL:$1|newid}}",
+    "wikibase-dataitem": "Eitem o ddata",
+    "wikibase-editlinks": "Golygu cysylltau",
+    "wikibase-editlinkstitle": "Golygu cysylltau rhyngwici rhwng ieithoedd",
+    "wikibase-linkitem-addlinks": "Ychwanegu cysylltau",
+    "wikibase-linkitem-alreadylinked": "Mae'r dudalen yr ydych am gysylltu â hi eisoes wedi ei chysylltu ag [$1 eitem] ar y cof data canolog, a honno'n cysylltu â'r dudalen $2 ar y wefan hon. Dim ond un dudalen y wici sy'n gallu cael ei chysylltu ag eitem. Dewiswch dudalen arall i gysylltu â hi.",
+    "wikibase-linkitem-close": "Cau'r deialog ac ail-lwytho'r dudalen",
+    "wikibase-linkitem-title": "Cysylltu â thudalen",
+    "wikibase-linkitem-linkpage": "Cysyllter â'r dudalen",
+    "wikibase-linkitem-input-site": "Iaith:",
+    "wikibase-linkitem-input-page": "Tudalen:",
+    "wikibase-linkitem-confirmitem-button": "Cadarnhaer",
+    "wikibase-linkitem-not-loggedin-title": "Rhaid mewngofnodi i barhau",
+    "wikibase-property-notfound": "Ni ddaethpwyd o hyd i'r nodwedd $1.",
+    "wikibase-rc-hide-wikidata": "$1 y golygiadau ar {{WBREPONAME}}",
+    "wikibase-rc-show-wikidata-pref": "Dangos golygiadau i {{WBREPONAME}} ymhlith y newidiadau diweddar",
+    "wikibase-watchlist-show-changes-pref": "Dangos golygiadau {{WBREPONAME}} ar eich rhestr wylio",
+    "wikibase-error-invalid-entity-id": "Mae'r ID a roddwyd yn anhysbys i'r system. Defnyddiwch ID dilys i'r endid data.",
+    "wikibase-unconnectedpages-submit": "Gwneler",
+    "wikibase-unconnectedpages-invalid-language": "Nid yw \"$1\" yn gôd iaith dilys",
+    "wikibase-pageinfo-entity-id": "ID yr Eitem {{WBREPONAME}}",
+    "wikibase-pageinfo-entity-id-none": "Dim"
+}

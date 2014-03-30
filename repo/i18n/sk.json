@@ -1,0 +1,33 @@
+{
+    "@metadata": {
+        "authors": [
+            "KuboF"
+        ]
+    },
+    "wikibase-desc": "Úložisko štruktúrovaných údajov",
+    "wikibase-edit": "upraviť",
+    "wikibase-save": "uložiť",
+    "wikibase-cancel": "zrušiť",
+    "wikibase-add": "pridať",
+    "wikibase-addreference": "pridať zdroj",
+    "wikibase-save-inprogress": "ukladá sa",
+    "wikibase-remove-inprogress": "Odstraňovanie...",
+    "wikibase-label-empty": "Menovka zatiaľ nebola definovaná",
+    "wikibase-label-edit-placeholder": "zadaj menovku",
+    "wikibase-description-empty": "Popis zatiaľ nebol definovaný",
+    "wikibase-description-edit-placeholder": "zadaj popis",
+    "wikibase-sitelink-site-edit-placeholder": "projekt",
+    "wikibase-sitelink-page-edit-placeholder": "článok",
+    "wikibase-alias-edit-placeholder": "zadaj alias",
+    "wikibase-remove": "odstrániť",
+    "wikibase-propertyedittool-full": "Zoznam hodnôt je kompletný.",
+    "wikibase-aliases-label": "Tiež známy ako:",
+    "wikibase-datatype-label": "Typ údaju:",
+    "wikibase-snakview-snaktypeselector-somevalue": "neznáma hodnota",
+    "wikibase-itembytitle-submit": "Hľadať",
+    "wikibase-itembytitle-create": "Tiež môžeš [{{fullurl:Special:NewItem|site=$1&page=$2}} vytvoriť položku].",
+    "wikibase-itemdisambiguation-lookup-language": "Jazyk:",
+    "wikibase-itemdisambiguation-submit": "Hľadať",
+    "wikibase-newproperty-datatype": "Typ údaju:",
+    "special-newitem": "Vytvoriť novú položku"
+}

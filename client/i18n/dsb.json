@@ -1,0 +1,40 @@
+{
+    "@metadata": {
+        "authors": [
+            "Michawiki"
+        ]
+    },
+    "wikibase-client-desc": "Klient za rozšyrjenje Wikibase",
+    "wikibase-after-page-move": "Móžoš teke pśirědowany element {{WBREPONAME}} [$1 aktualizěrowaś], aby mjazyrěcne wótkaze na pśesunjonem boku zarědował.",
+    "wikibase-comment-remove": "Pśirědowany element {{WBREPONAME}} jo wulašowany. Mjazyrěcne wótkaze wótpórane.",
+    "wikibase-comment-linked": "Element {{WBREPONAME}} jo se z toś tym bokom zwězał.",
+    "wikibase-comment-unlink": "Zwisk boka z elementom {{WBREPONAME}} jo se wópórał. Mjazyrěcne wótkaze wótpórane.",
+    "wikibase-comment-restore": "Pśirědowany element {{WBREPONAME}} jo wótnowjony. Mjazyrěcne wótkaze wótnowjone.",
+    "wikibase-comment-update": "Element {{WBREPONAME}} jo se změnił",
+    "wikibase-comment-sitelink-add": "Mjazyrěcny wótkaz pśidany: $1",
+    "wikibase-comment-sitelink-change": "Mjazyrěcny wótkaz změnjony wót $1 do $2",
+    "wikibase-comment-sitelink-remove": "Mjazyrěcny wótkaz wótpórany: $1",
+    "wikibase-comment-multi": "$1 {{PLURAL:$1|změna|změnje|změny|změnow}}",
+    "wikibase-editlinks": "Wótkaze wobźěłaś",
+    "wikibase-editlinkstitle": "Mjazyrěcne wótkaze wobźěłaś",
+    "wikibase-linkitem-addlinks": "Wótkaze pśidaś",
+    "wikibase-linkitem-alreadylinked": "Bok, z kótarymž coš zwězaś, słuša južo k [$1 elementoju] w centralnem datowem repozitoriumje, kótaryž  pokazujo na $2 na toś tom sedle. Elementy mógu jano jaden bok na sedło měś. Pšosym wubjeŕ drugi bok, z kótarymž se zwězujo.",
+    "wikibase-linkitem-close": "Dialog zacyniś a bok znowego zacytaś",
+    "wikibase-linkitem-failure": "Pśi wopyśe z datym bokom zwězaś, jo njeznata zmólka nastała.",
+    "wikibase-linkitem-title": "Z bokom zwězaś",
+    "wikibase-linkitem-linkpage": "Z bokom zwězaś",
+    "wikibase-linkitem-selectlink": "Pšosym wubjeŕ sedło a bok, kótarejž coš z toś tom bokom zwězaś.",
+    "wikibase-linkitem-input-site": "Rěc:",
+    "wikibase-linkitem-input-page": "Bok:",
+    "wikibase-linkitem-confirmitem-text": "Bok, kótaryž sy wubrał, jo južo z [$1 elementom w našom centralnem datowem repozitoriju] zwězany. Pšosym wobkšuś, až {{PLURAL:$2|slědujucy bok|slědujucej boka|slědujuce boki}} {{PLURAL:$2|jo ten, kótaryž|stej tej, kótarejž|su te, kótarež}} coš z toś tym bokom zwězaś.",
+    "wikibase-linkitem-confirmitem-button": "Wobkšuśiś",
+    "wikibase-linkitem-not-loggedin-title": "Musyš pśizjawjony byś",
+    "wikibase-linkitem-not-loggedin": "Musyš w toś tom wikiju a w [$1 centralnem datowem repozitoriumje] pśizjawjony byś, aby toś tu funkciju wužywał.",
+    "wikibase-linkitem-success-link": "Boki su se wuspěšnje zwězali. Móžoš element, kótaryž wopśimujo wótkaze, w našom [$1 centralnem datowem repozitoriumje] namakaś.",
+    "wikibase-property-notfound": "Kakosć $1 njejo se namakała.",
+    "wikibase-property-notsupportedyet": "Wikibase hyšći njepóděra kakosćowy typ za kakosć $1.",
+    "wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+    "wikibase-rc-show-wikidata-pref": "Změny {{WBREPONAME}} w aktualnych změnach pokazaś",
+    "wikibase-watchlist-show-changes-pref": "Změny {{WBREPONAME}} w twójich wobglědowańkach pokazaś",
+    "wikibase-error-invalid-entity-id": "Zapódany ID jo systemoju njeznaty. Pšosym wužyj płaśiwy entitowy ID."
+}

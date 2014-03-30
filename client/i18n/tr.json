@@ -1,0 +1,29 @@
+{
+    "@metadata": {
+        "authors": [
+            "Emperyan",
+            "Rapsar",
+            "Sadrettin"
+        ]
+    },
+    "specialpages-group-wikibaseclient": "Vikiveri istemcisi",
+    "wikibase-after-page-move-queued": "Bu sayfa ile ilişkili [$1 Vikiveri öğesi] kısa bir süre içinde otomatik olarak güncellenecektir.",
+    "wikibase-dataitem": "Veri öğesi",
+    "wikibase-editlinks": "Bağlantıları düzenle",
+    "wikibase-editlinkstitle": "Diğer dillerdeki bağlantıları düzenle",
+    "wikibase-linkitem-addlinks": "Bağlantı ekle",
+    "wikibase-linkitem-title": "Sayfaya bağlantı",
+    "wikibase-linkitem-linkpage": "Sayfaya bağlantı",
+    "wikibase-linkitem-input-site": "Dil:",
+    "wikibase-linkitem-input-page": "Sayfa:",
+    "wikibase-linkitem-not-loggedin-title": "Oturum açmış olmanız gerekiyor",
+    "wikibase-property-notfound": "$1 özellik bulunamadı.",
+    "wikibase-rc-hide-wikidata": "Vikiveri değişikliklerini $1",
+    "wikibase-rc-show-wikidata-pref": "Vikiveri düzenlemelerini son değişikliklerde göster",
+    "wikibase-rc-wikibase-edit-title": "Vikiveri değişikliği",
+    "wikibase-watchlist-show-changes-pref": "İzleme listemde Vikiveri değişikliklerini göster",
+    "special-unconnectedpages": "Öğelerine bağlanmamış sayfalar",
+    "wikibase-unconnectedpages-legend": "Bağlanmamış sayfa seçenekleri",
+    "wikibase-unconnectedpages-submit": "Git",
+    "wikibase-unconnectedpages-iwdata-label": "Sadece dillerarası bağlantıları olan sayfalar"
+}

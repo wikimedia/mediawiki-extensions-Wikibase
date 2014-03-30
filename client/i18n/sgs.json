@@ -1,0 +1,21 @@
+{
+    "@metadata": {
+        "authors": [
+            "Hugo.arg"
+        ]
+    },
+    "wikibase-after-page-move-queued": "[$1 Vikidatas īrašos], sojongts so ton poslapio, tūjaus bus atnaujints autuomatėškā.",
+    "wikibase-dataitem": "Doumenū īrašos",
+    "wikibase-editlinks": "Keistė nūruodas",
+    "wikibase-editlinkstitle": "Keistė terpkalbėnes nūruodas",
+    "wikibase-linkitem-addlinks": "Pridietė nūruodas",
+    "wikibase-linkitem-close": "Ožvertė ton longa ė poslapi perkrautė",
+    "wikibase-linkitem-title": "Sojongtė so poslapio",
+    "wikibase-linkitem-linkpage": "Sojongtė so poslapio",
+    "wikibase-linkitem-selectlink": "Pasėrinkat prašuom svetaine ė poslapi, so katrās nuorat šion poslapi sojongtė.",
+    "wikibase-linkitem-confirmitem-text": "Tamstas pasėrinkts poslapis sojongts so [$1 īrašo mūsa centrėnėm doumenū skladė] jau īr. Ožtvėrtėnkat, prašuom, ku {{PLURAL:$2|poslapis|poslapio|poslapē}}, katrėi išruodītė apačiuo, īr čīstā {{PLURAL:$2|šėts|šėto|šėtėi}}, so katrās ton poslapi sojongtė nuorat.",
+    "wikibase-linkitem-confirmitem-button": "Patvirtėnt",
+    "wikibase-linkitem-success-link": "Poslapē bova poikē sojongtė. Tamsta galat rastō īraša, katram sudietas nūoruodas mūsa [$1 centrėnė doumenū skladuo].",
+    "wikibase-rc-wikibase-edit-title": "Vikidatas elemėnta pakeitėms",
+    "wikibase-pageinfo-entity-id-none": "Nie"
+}

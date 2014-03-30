@@ -1,0 +1,27 @@
+{
+    "@metadata": {
+        "authors": [
+            "Erdemaslancan",
+            "Marmase",
+            "Mirzali"
+        ]
+    },
+    "wikibase-entity-item": "çêki",
+    "wikibase-entity-query": "persen",
+    "wikibase-diffview-reference": "referans",
+    "wikibase-diffview-rank": "rêze",
+    "wikibase-diffview-qualifier": "kalifikator",
+    "wikibase-diffview-label": "etiket",
+    "wikibase-diffview-alias": "nameyê bini",
+    "wikibase-diffview-description": "şınasnayış",
+    "wikibase-diffview-link": "gırey",
+    "wikibase-quantitydetails-amount": "Miqdar",
+    "wikibase-quantitydetails-unit": "Lete",
+    "wikibase-sitelinks-sitename-columnheading": "Zıwan",
+    "wikibase-sitelinks-sitename-columnheading-special": "Sita",
+    "wikibase-sitelinks-siteid-columnheading": "Kod",
+    "wikibase-sitelinks-link-columnheading": "Pela gırebiyayiye",
+    "wikibase-tooltip-error-details": "Teferruati",
+    "datatypes-type-wikibase-item": "Çêki",
+    "version-wikibase": "Wikibase"
+}

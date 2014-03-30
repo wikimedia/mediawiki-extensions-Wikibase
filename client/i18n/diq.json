@@ -1,0 +1,31 @@
+{
+    "@metadata": {
+        "authors": [
+            "Asmen",
+            "Erdemaslancan",
+            "Gorizon",
+            "Marmase",
+            "Mirzali"
+        ]
+    },
+    "specialpages-group-wikibaseclient": "Mışteriyê Wikidata",
+    "wikibase-comment-add": "Yew objey Wikidata vıraziyao.",
+    "wikibase-comment-remove": "Objey Wikidatao elaqedar esterd. Gırey zıwanan dardi we.",
+    "wikibase-comment-linked": "Yew objey Wikidata na pele ra gırê dao.",
+    "wikibase-comment-update": "Madeyê Wikidata vuriya",
+    "wikibase-comment-multi": "$1 {{PLURAL:$1|vurnayış|vurnayışi}}",
+    "wikibase-dataitem": "Leteyé Wikimalumati",
+    "wikibase-editlinks": "Gıreyan bıvurne",
+    "wikibase-linkitem-addlinks": "Gıre cı ke",
+    "wikibase-linkitem-input-site": "Zıwan:",
+    "wikibase-linkitem-input-page": "Pele:",
+    "wikibase-linkitem-confirmitem-button": "Tesdiq",
+    "wikibase-rc-hide-wikidata": "$1 Wikidata",
+    "wikibase-rc-show-wikidata-pref": "Vurnayışanê wikimelumati vurnayışanê peyênan de  bımocne",
+    "wikibase-rc-wikibase-edit-letter": "D",
+    "wikibase-rc-wikibase-edit-title": "Vurnayışê Wikidata",
+    "wikibase-watchlist-show-changes-pref": "Lista xoya seyrkerdışi de vırnayışanê Wikidata bımocne",
+    "wikibase-unconnectedpages-submit": "Şo",
+    "wikibase-pageinfo-entity-id": "Wikidata Obje ID",
+    "wikibase-pageinfo-entity-id-none": "Çıniyo"
+}

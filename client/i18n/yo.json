@@ -1,0 +1,15 @@
+{
+    "@metadata": {
+        "authors": [
+            "Demmy"
+        ]
+    },
+    "specialpages-group-wikibaseclient": "Àlejò wikidata",
+    "wikibase-editlinks": "Àtúnṣe àjápọ̀",
+    "wikibase-editlinkstitle": "Àtúnṣe àwọn àjápọ̀ èdè míràn",
+    "wikibase-linkitem-addlinks": "Àfikún àjápọ̀",
+    "wikibase-linkitem-input-site": "Èdè:",
+    "wikibase-linkitem-input-page": "Ojúewé:",
+    "wikibase-linkitem-confirmitem-button": "Ìfidájú",
+    "wikibase-rc-hide-wikidata": "$1 Wikidata"
+}

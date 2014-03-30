@@ -1,0 +1,16 @@
+{
+    "@metadata": {
+        "authors": [
+            "Waihorace"
+        ]
+    },
+    "wikibase-client-desc": "Wikibase擴展客戶端",
+    "wikibase-after-page-move": "你仲可以[$1 更新]有關嘅維基數據項目，將佢連結去搬咗之後嘅頁面。",
+    "wikibase-editlinks": "修改連結",
+    "wikibase-editlinkstitle": "修改跨語言連結",
+    "wikibase-linkitem-addlinks": "加新連結",
+    "wikibase-linkitem-input-site": "語言:",
+    "wikibase-linkitem-input-page": "頁面：",
+    "wikibase-linkitem-confirmitem-button": "確認",
+    "wikibase-linkitem-not-loggedin-title": "你要登入先"
+}

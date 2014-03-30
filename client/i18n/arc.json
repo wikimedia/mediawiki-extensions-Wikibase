@@ -1,0 +1,18 @@
+{
+    "@metadata": {
+        "authors": [
+            "Basharh"
+        ]
+    },
+    "wikibase-comment-multi": "$1 {{PLURAL:$1|ܫܘܚܠܦܐ|ܫܘܚܠܦ̈ܐ}}",
+    "wikibase-dataitem": "ܡܠܘܐܐ ܕܝܕ̈ܥܬܐ",
+    "wikibase-editlinks": "ܫܚܠܦ ܐܣܘܪ̈ܐ",
+    "wikibase-linkitem-addlinks": "ܐܘܣܦ ܐܣܘܪ̈ܐ",
+    "wikibase-linkitem-input-site": "ܠܫܢܐ:",
+    "wikibase-linkitem-input-page": "ܦܐܬܐ:",
+    "wikibase-linkitem-confirmitem-button": "ܫܪܪ",
+    "wikibase-rc-hide-wikidata": "$1 ܘܝܩܝܓܠܝܬ̈ܐ",
+    "wikibase-rc-wikibase-edit-letter": "ܓ",
+    "wikibase-rc-wikibase-edit-title": "ܫܘܚܠܦܐ ܕܘܝܩܝܓܠܝܬ̈ܐ",
+    "wikibase-unconnectedpages-submit": "ܙܠ"
+}

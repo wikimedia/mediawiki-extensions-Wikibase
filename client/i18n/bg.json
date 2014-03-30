@@ -1,0 +1,28 @@
+{
+    "@metadata": {
+        "authors": [
+            "DCLXVI",
+            "Mitzev",
+            "Spiritia"
+        ]
+    },
+    "wikibase-after-page-move": "Можете да [$1 актуализирате] свързания обект от Уикиданните с цел поддръжка на междуезиковите препратки към преместената страница.",
+    "wikibase-comment-remove": "Асоциираният обект от Уикиданните е изтрит. Междуезиковите препратки са премахнати.",
+    "wikibase-comment-sitelink-add": "Добавена междуезикова препратка: $1",
+    "wikibase-comment-sitelink-change": "Променена междуезикова препратка: от $1 на $2",
+    "wikibase-comment-sitelink-remove": "Премахната междуезикова препратка: $1",
+    "wikibase-editlinks": "Редактиране",
+    "wikibase-editlinkstitle": "Редактиране на междуезиковите препратки",
+    "wikibase-linkitem-addlinks": "Добавяне на препратки",
+    "wikibase-linkitem-failure": "При опита за свързване с дадената страница възникна неизвестна грешка.",
+    "wikibase-linkitem-selectlink": "Изберете сайта и страницата от него, с която искате да свържете тази.",
+    "wikibase-linkitem-input-site": "Език:",
+    "wikibase-linkitem-input-page": "Страница:",
+    "wikibase-linkitem-confirmitem-text": "Избраната страница е вече свързана с [$1 обект от нашето централно хранилище с данни]. Потвърдете, ако страниците, показани по-долу, са онези, които искате да свържете с тази страница.",
+    "wikibase-linkitem-confirmitem-button": "Потвърждаване",
+    "wikibase-linkitem-not-loggedin-title": "Трябва да сте влезли в системата",
+    "wikibase-rc-hide-wikidata": "$1 на Уикиданни",
+    "wikibase-rc-hide-wikidata-hide": "Скриване",
+    "wikibase-rc-hide-wikidata-show": "Показване",
+    "wikibase-pageinfo-entity-id": "ID на обекта в Уикиданни"
+}

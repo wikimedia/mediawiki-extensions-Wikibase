@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "Kolega2357"
+        ]
+    },
+    "wikibase-client-desc": "Klijent za proširenje Wikibaza",
+    "specialpages-group-wikibaseclient": "{{doc-special-group|that=is related to Wikidata clients|like=[[Special:UnconnectedPages]]}}"
+}

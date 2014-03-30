@@ -1,0 +1,15 @@
+{
+    "@metadata": {
+        "authors": [
+            "Ashok modhvadia",
+            "KartikMistry"
+        ]
+    },
+    "wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+    "wikibase-rc-hide-wikidata-hide": "છુપાવો",
+    "wikibase-rc-hide-wikidata-show": "દર્શાવો",
+    "wikibase-rc-wikibase-edit-letter": "ડેટા",
+    "wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} સંપાદન",
+    "wikibase-unconnectedpages-submit": "જાઓ",
+    "wikibase-pageinfo-entity-id-none": "કંઇ નહિં"
+}

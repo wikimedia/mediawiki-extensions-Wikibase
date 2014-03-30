@@ -1,0 +1,21 @@
+{
+    "@metadata": {
+        "authors": [
+            "Milicevic01"
+        ]
+    },
+    "wikibase-client-desc": "Klijent za proširenje Vikibaza",
+    "wikibase-after-page-move-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se uskoro automatski ažurirati.",
+    "wikibase-dataitem": "Stavka na Vikipodacima",
+    "wikibase-editlinks": "Uredi veze",
+    "wikibase-editlinkstitle": "Uređivanje međujezičkih veza",
+    "wikibase-linkitem-addlinks": "Dodaj veze",
+    "wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+    "wikibase-rc-hide-wikidata-hide": "Sakrij",
+    "wikibase-rc-hide-wikidata-show": "Prikaži",
+    "wikibase-rc-show-wikidata-pref": "Prikaži izmene na Vikipodacima u skorašnjim izmenama",
+    "wikibase-rc-wikibase-edit-letter": "d",
+    "wikibase-rc-wikibase-edit-title": "Izmena na Vikipodacima",
+    "special-unconnectedpages": "Stranice koje nisu povezane sa stavkama",
+    "wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima"
+}
