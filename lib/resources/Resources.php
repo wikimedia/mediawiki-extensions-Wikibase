@@ -464,6 +464,7 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js',
+				'wikibase.ui.PropertyEditTool.EditableValue.SiteBadgesInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableDescription.js',
