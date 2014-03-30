@@ -151,9 +151,9 @@
 
 		// Restrict entity page actions if editing is restricted:
 		var editRestriction = mw.config.get( 'wgRestrictionEdit' );
-		if( editRestriction !== null && editRestriction.length === 1 ) {
+		if( !mw.config.get( 'wbUserCanEdit' ) && editRestriction !== null && editRestriction.length === 1 ) {
 			var hasGroup = $.inArray( editRestriction[0], mw.config.get( 'wgUserGroups' ) );
-			if( !hasGroup ) {
+			if( hasGroup === -1 ) {
 				mw.user.getRights( function( rights ) {
 					var hasRight = $.inArray( editRestriction, rights ) !== -1;
 					if( !hasRight ) {
