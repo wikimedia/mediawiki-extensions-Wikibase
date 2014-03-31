@@ -210,6 +210,8 @@ class ClaimHtmlGenerator {
 	/**
 	 * Generates the HTML for a single snak.
 	 *
+	 * @todo split this into separate classes with more fine-grained formatting and tests.
+	 *
 	 * @param Snak $snak
 	 * @param boolean $showPropertyLink
 	 * @return string
