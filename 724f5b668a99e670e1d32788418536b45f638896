@@ -16,6 +16,24 @@
       "revId": "724f5b668a99e670e1d32788418536b45f638896",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_956f93c0",
+        "filename": "repo/includes/api/FormatSnakValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-03-31T19:09:13Z",
+      "side": 1,
+      "message": "It apparently can (I didn\u0027t knew that, thanks for the hint). But this is barely used in MediaWiki code (~20 times in core and ~5 times in Wikibase) and I think we should avoid it. It\u0027s to easy to confuse \"Class|Class\" with \"Namespace\\Class\". PHPStorm also suggests to put @returns in one line but @throws in separate lines.",
+      "parentUuid": "ae0e4726_ffb8ee75",
+      "revId": "724f5b668a99e670e1d32788418536b45f638896",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
