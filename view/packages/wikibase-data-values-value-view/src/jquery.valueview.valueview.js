@@ -350,6 +350,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			this._value = value;
 			this._formattedValue = formattedValue;
 			this._updateExpertConstructor();
+			this.draw();
 		}
 	},
 
