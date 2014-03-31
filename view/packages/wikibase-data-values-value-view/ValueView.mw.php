@@ -11,7 +11,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgResourceModules;
+global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
 $wgExtensionCredits['datavalues'][] = array(
 	'path' => __DIR__,
@@ -25,6 +25,7 @@ $wgExtensionCredits['datavalues'][] = array(
 	'descriptionmsg' => 'valueview-desc',
 );
 
+$wgMessagesDirs['ValueView'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['ValueView'] = __DIR__ . '/ValueView.i18n.php';
 
 /**

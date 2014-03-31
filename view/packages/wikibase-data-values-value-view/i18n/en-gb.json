@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "Shirayuki"
+        ]
+    },
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Handling of \"$1\" data values is not yet supported.",
+    "valueview-preview-novalue": "no valid value recognised"
+}

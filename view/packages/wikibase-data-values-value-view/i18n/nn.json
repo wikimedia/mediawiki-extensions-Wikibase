@@ -1,0 +1,13 @@
+{
+    "@metadata": {
+        "authors": [
+            "Njardarlogar"
+        ]
+    },
+    "valueview-expert-emptyvalue-empty": "tom",
+    "valueview-expert-timeinput-precision": "Presisjon",
+    "valueview-expert-timeinput-calendar": "Kalender:",
+    "valueview-preview-label": "vil visast som:",
+    "valueview-preview-novalue": "ingen gild verdi vart attkjend",
+    "valueview-listrotator-auto": "auto"
+}

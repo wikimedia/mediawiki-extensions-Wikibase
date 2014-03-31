@@ -1,0 +1,7 @@
+{
+    "@metadata": {
+        "authors": []
+    },
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Penanganan \"$1\" nilai data belum didukung.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Penanganan nilai untuk \"$1\" tipe data belum didukung."
+}

@@ -1,0 +1,25 @@
+{
+    "@metadata": {
+        "authors": [
+            "Jopparn",
+            "Tobulos1"
+        ]
+    },
+    "valueview-desc": "UI-komponenter för visning och redigering av datavärden",
+    "valueview-expert-advancedadjustments": "avancerade inställningar",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Hantering av \"$1\"-värden stöds ännu inte.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Hantering av värden för \"$1\"-datatyper stöds ännu inte.",
+    "valueview-expert-emptyvalue-empty": "tom",
+    "valueview-expert-globecoordinateinput-precision": "Precision:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregoriansk",
+    "valueview-expert-timevalue-calendar-julian": "Juliansk",
+    "valueview-expert-timeinput-precision": "Precision:",
+    "valueview-expert-timeinput-calendar": "Kalender:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Gregorianska kalendern)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Julianska kalendern)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; ändra till gregorianska",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; ändra till julianska",
+    "valueview-preview-label": "kommer att visas som:",
+    "valueview-preview-novalue": "inget giltigt värde erkänns",
+    "valueview-listrotator-auto": "automatisk"
+}

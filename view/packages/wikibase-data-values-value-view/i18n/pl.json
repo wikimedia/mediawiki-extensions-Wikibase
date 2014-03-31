@@ -1,0 +1,23 @@
+{
+    "@metadata": {
+        "authors": [
+            "Chrumps",
+            "Ty221",
+            "WTM"
+        ]
+    },
+    "valueview-expert-advancedadjustments": "ustawienia zaawansowane",
+    "valueview-expert-emptyvalue-empty": "pusty",
+    "valueview-expert-globecoordinateinput-precision": "Precyzja:",
+    "valueview-expert-timevalue-calendar-gregorian": "gregoriański",
+    "valueview-expert-timevalue-calendar-julian": "juliański",
+    "valueview-expert-timeinput-precision": "Precyzja:",
+    "valueview-expert-timeinput-calendar": "Kalendarz",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(kalendarz gregoriański)",
+    "valueview-expert-timeinput-calendarhint-julian": "(kalendarz juliański)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; na gregoriański",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; na juliański",
+    "valueview-preview-label": "będzie wyświetlane jako:",
+    "valueview-preview-novalue": "nie rozpoznano prawidłowej wartości",
+    "valueview-listrotator-auto": "auto"
+}

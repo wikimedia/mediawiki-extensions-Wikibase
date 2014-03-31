@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "McDutchie"
+        ]
+    },
+    "valueview-desc": "Componentes de interfacie de usator pro monstrar e modificar valores de datos",
+    "valueview-expert-advancedadjustments": "adjustamentos avantiate",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Le manipulation de valores \"$1\" non es ancora supportate.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Le manipulation de valores pro le typo de datos \"$1\" non es ancora supportate.",
+    "valueview-expert-emptyvalue-empty": "vacue",
+    "valueview-expert-globecoordinateinput-precision": "Precision:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregorian",
+    "valueview-expert-timevalue-calendar-julian": "Julian",
+    "valueview-expert-timeinput-precision": "Precision:",
+    "valueview-expert-timeinput-calendar": "Calendario:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendario gregorian)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Calendario julian)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; cambiar a gregorian",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; cambiar a julian",
+    "valueview-preview-label": "essera monstrate como:",
+    "valueview-preview-novalue": "nulle valor valide recognoscite",
+    "valueview-listrotator-auto": "automatic"
+}

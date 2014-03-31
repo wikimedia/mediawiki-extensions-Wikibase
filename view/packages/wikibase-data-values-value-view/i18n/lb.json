@@ -1,0 +1,21 @@
+{
+    "@metadata": {
+        "authors": [
+            "Robby"
+        ]
+    },
+    "valueview-expert-advancedadjustments": "Erweidert Upassungen",
+    "valueview-expert-emptyvalue-empty": "eidel",
+    "valueview-expert-globecoordinateinput-precision": "Präzisioun:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregorianesch",
+    "valueview-expert-timevalue-calendar-julian": "Julianesch",
+    "valueview-expert-timeinput-precision": "Präzisioun:",
+    "valueview-expert-timeinput-calendar": "Kalenner:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Gregorianesche Kalenner)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Julianesche Kalenner)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; op de gregorianeschen änneren",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; op de julianeschen änneren",
+    "valueview-preview-label": "gëtt gewisen als:",
+    "valueview-preview-novalue": "kee valabele Wäert erkannt",
+    "valueview-listrotator-auto": "auto"
+}

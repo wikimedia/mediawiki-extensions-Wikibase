@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "Toliño"
+        ]
+    },
+    "valueview-desc": "Compoñentes da interface para mostrar e editar valores de datos",
+    "valueview-expert-advancedadjustments": "axustes avanzados",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "A manipulación de valores \"$1\" aínda non está soportada.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "A manipulación de valores para o tipo de datos \"$1\" aínda non está soportada.",
+    "valueview-expert-emptyvalue-empty": "baleiro",
+    "valueview-expert-globecoordinateinput-precision": "Precisión:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
+    "valueview-expert-timevalue-calendar-julian": "Xuliano",
+    "valueview-expert-timeinput-precision": "Precisión:",
+    "valueview-expert-timeinput-calendar": "Calendario:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendario gregoriano)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Calendario xuliano)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; cambiar a gregoriano",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; cambiar a xuliano",
+    "valueview-preview-label": "vaise mostrar así:",
+    "valueview-preview-novalue": "non se recoñeceu ningún valor válido",
+    "valueview-listrotator-auto": "automático"
+}

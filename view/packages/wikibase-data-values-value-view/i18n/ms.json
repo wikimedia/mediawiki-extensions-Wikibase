@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "Anakmalaysia"
+        ]
+    },
+    "valueview-desc": "Komponen-komponen UI untuk memaparkan dan menyunting nilai data",
+    "valueview-expert-advancedadjustments": "penyelarasan lanjutan",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Pengelolaan nilai \"$1\" belum disokong.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Pengelolaan nilai untuk jenis data \"$1\" belum disokong.",
+    "valueview-expert-emptyvalue-empty": "kosong",
+    "valueview-expert-globecoordinateinput-precision": "Kepersisan:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregory",
+    "valueview-expert-timevalue-calendar-julian": "Julius",
+    "valueview-expert-timeinput-precision": "Kepersisan:",
+    "valueview-expert-timeinput-calendar": "Kalendar:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(kalendar Gregory)",
+    "valueview-expert-timeinput-calendarhint-julian": "(kalendar Julius)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; beralih kepada kalendar Gregory",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; beralih kepada kalendar Julius",
+    "valueview-preview-label": "akan dipaparkan sebagai:",
+    "valueview-preview-novalue": "tiada nilai sah yang dikenali",
+    "valueview-listrotator-auto": "auto"
+}
