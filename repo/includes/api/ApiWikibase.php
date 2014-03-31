@@ -2,18 +2,19 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use ApiMain;
 use Exception;
 use LogicException;
 use Message;
 use MessageCache;
+use Status;
 use UsageException;
 use User;
-use Status;
-use ApiBase;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\EditEntity;
 use Wikibase\EntityFactory;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
@@ -21,7 +22,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
@@ -277,8 +277,8 @@ abstract class ApiWikibase extends \ApiBase {
 	 * @param EntityId $entityId : the title of the page to load the revision for
 	 * @param int $revId : the revision to load. If not given, the current revision will be loaded.
 	 *
-	 * @throws \Exception
-	 * @throws \UsageException
+	 * @throws UsageException
+	 * @throws LogicException
 	 * @return EntityRevision
 	 */
 	protected function loadEntityRevision(
@@ -300,7 +300,8 @@ abstract class ApiWikibase extends \ApiBase {
 			$this->dieUsage( "Revision $revId not found: " . $ex->getMessage(), 'nosuchrevid' );
 		}
 
-		throw new Exception( 'can\'t happen' );
+		// The only reason for this is that ApiBase::dieUsage hides the actual UsageException
+		throw new LogicException();
 	}
 
 	/**
