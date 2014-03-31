@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_1516e34d",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-31T17:22:18Z",
+      "side": 1,
+      "message": "getSimpleSiteLinks() is deprecated\n\nuse getSiteLinks instead",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_3530c7e4",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-31T17:22:18Z",
+      "side": 1,
+      "message": "is this used at all? doesn\u0027t look like it",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_b51cd76b",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-03-31T17:22:18Z",
+      "side": 1,
+      "message": "ok?",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
