@@ -19,7 +19,7 @@ Feature: Creating statements of type string
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
-      And I enter the string <value> as statement value
+      And I enter <value> as string statement value
       And I <save>
     Then Statement add button should be there
       And Statement cancel button should not be there
@@ -41,7 +41,7 @@ Feature: Creating statements of type string
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
-      And I enter the string it's a string as statement value
+      And I enter it's a string as string statement value
       And I click the statement save button
       And I reload the page
     Then Statement add button should be there
