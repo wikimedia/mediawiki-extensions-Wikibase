@@ -35,7 +35,10 @@ return call_user_func( function() {
 				'jquery.valueview.valueview.tests.js',
 			),
 			'dependencies' => array(
+				'dataValues.values',
+				'jquery.qunit.completenessTest',
 				'jquery.valueview.valueview',
+				'test.sinonjs',
 				'valueFormatters.formatters',
 				'valueFormatters.ValueFormatterStore',
 				'valueParsers.parsers',
