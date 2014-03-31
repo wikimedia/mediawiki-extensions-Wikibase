@@ -2,10 +2,11 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use ApiMain;
+use LogicException;
 use SiteSQLStore;
 use Status;
-use ApiBase;
 use UsageException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -120,6 +121,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @param string $id
 	 *
 	 * @throws UsageException
+	 * @throws LogicException
 	 * @return EntityId
 	 */
 	protected function getEntityIdFromString( $id ) {
@@ -128,6 +130,9 @@ abstract class ModifyEntity extends ApiWikibase {
 		} catch ( EntityIdParsingException $ex ) {
 			$this->dieUsage( $ex->getMessage(), 'no-such-entity-id' );
 		}
+
+		// The only reason for this is that ApiBase::dieUsage hides the actual UsageException
+		throw new LogicException();
 	}
 
 	/**

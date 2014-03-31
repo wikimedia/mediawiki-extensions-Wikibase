@@ -8,6 +8,7 @@ use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
 use LogicException;
+use UsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
@@ -109,6 +110,8 @@ class FormatSnakValue extends ApiWikibase {
 	 *
 	 * @param string $json A JSON-encoded DataValue
 	 *
+	 * @throws UsageException
+	 * @throws LogicException
 	 * @return DataValue
 	 */
 	protected function decodeDataValue( $json ) {
@@ -124,6 +127,9 @@ class FormatSnakValue extends ApiWikibase {
 		} catch ( IllegalValueException $ex ) {
 			$this->dieUsage( $ex->getMessage(), 'baddatavalue' );
 		}
+
+		// The only reason for this is that ApiBase::dieUsage hides the actual UsageException
+		throw new LogicException();
 	}
 
 	/**
