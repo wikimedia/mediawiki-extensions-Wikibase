@@ -73,7 +73,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityTitleLookup,
 		$propertyLabels,
 		$claim,
-		$pattern
+		$patterns
 	) {
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
 			$snakFormatter,
@@ -81,7 +81,10 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$propertyLabels
 		);
 		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, 'edit' );
-		$this->assertRegExp( $pattern, $html );
+
+		foreach( $patterns as $message => $pattern ) {
+			$this->assertRegExp( $pattern, $html, $message );
+		}
 	}
 
 	public function getHtmlForClaimProvider() {
@@ -96,7 +99,10 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$entityTitleLookupMock,
 			array(),
 			new Claim( new PropertySomeValueSnak( 42 ) ),
-			'/a snak!/'
+			array(
+				'snak variation css' => '/wb-snakview-variation-somevalue/',
+				'formatted snak' => '/a snak!/'
+			)
 		);
 
 		$testCases[] = array(
@@ -109,7 +115,10 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) ),
 				) )
 			),
-			'/a snak!.*a snak!/s'
+			array(
+				'snak variation css' => '/wb-snakview-variation-somevalue/',
+				'formatted snak' => '/a snak!.*a snak!/s'
+			)
 		);
 
 		$testCases[] = array(
@@ -117,13 +126,16 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$entityTitleLookupMock,
 			array(),
 			new Statement(
-				new PropertySomeValueSnak( 42 ),
+				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 				new SnakList(),
 				new ReferenceList( array( new Reference( new SnakList( array (
 					new PropertyValueSnak( 50, new StringValue( 'second snak' ) )
 				) ) ) ) )
 			),
-			'/a snak!.*a snak!/s'
+			array(
+				'snak variation css' => '/wb-snakview-variation-value/',
+				'formatted snak' => '/a snak!.*a snak!/s'
+			)
 		);
 
 		return $testCases;
