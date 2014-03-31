@@ -2,17 +2,18 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use ApiMain;
 use Exception;
 use LogicException;
 use Message;
 use MessageCache;
-use User;
 use Status;
-use ApiBase;
+use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\EditEntity;
 use Wikibase\EntityFactory;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
@@ -20,7 +21,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\EditEntity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
@@ -257,7 +257,7 @@ abstract class ApiWikibase extends \ApiBase {
 		$permissions = $this->getRequiredPermissions( $entity, $params );
 		$status = Status::newGood();
 
-		foreach ( $permissions as $perm ) {
+		foreach ( array_unique( $permissions ) as $perm ) {
 			$permStatus = $this->permissionChecker->getPermissionStatusForEntity( $user, $perm, $entity );
 			$status->merge( $permStatus );
 		}
