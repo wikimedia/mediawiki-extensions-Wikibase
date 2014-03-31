@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_ffb8ee75",
+        "filename": "repo/includes/api/FormatSnakValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-31T14:25:52Z",
+      "side": 1,
+      "message": "AFAIK these two lines can be combined into:\n\n * @throws UsageException|LogicException",
+      "revId": "724f5b668a99e670e1d32788418536b45f638896",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
