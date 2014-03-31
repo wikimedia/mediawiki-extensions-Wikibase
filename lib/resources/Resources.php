@@ -63,6 +63,7 @@ return call_user_func( function() {
 				'parsers/wikibase.parsers.api.js',
 			),
 			'dependencies' => array(
+				'wikibase.RepoApi',
 				'wikibase',
 			),
 		),
@@ -140,7 +141,7 @@ return call_user_func( function() {
 				'formatters/wikibase.formatters.api.js',
 			),
 			'dependencies' => array(
-				'mediawiki.api',
+				'wikibase.RepoApi',
 				'wikibase',
 				'wikibase.dataTypes'
 			),
