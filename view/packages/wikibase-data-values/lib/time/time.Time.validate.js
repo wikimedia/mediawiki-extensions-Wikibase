@@ -71,12 +71,12 @@ time.Time.validate = ( function( Time ) {
 		if( precision >= Time.PRECISION.DAY
 			&& !definition.day
 		) {
-			throw new Error( 'Field "day" required because precision is "DAY' );
+			throw new Error( 'Field "day" required because precision is "DAY"' );
 		}
 		if( precision >= Time.PRECISION.MONTH
 			&& !definition.month
 		) {
-			throw new Error( 'Field "month" required because precision is "MONTH' );
+			throw new Error( 'Field "month" required because precision is "MONTH"' );
 		}
 
 		// year is always required
