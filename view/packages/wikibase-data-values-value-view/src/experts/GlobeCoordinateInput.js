@@ -226,6 +226,11 @@
 			var considerInputExtender = this.$input.data( 'inputextender' ).extensionIsVisible();
 			if( considerInputExtender ) {
 				this.preview.update( this.viewState().getTextValue() );
+				var geoValue = this.viewState().value();
+				if( geoValue && this.$precision.data( 'listrotator' ).autoActive() ) {
+					this.$precision.data( 'listrotator' ).value(
+						roundPrecision( geoValue.getValue().getPrecision() ) );
+				}
 			}
 		},
 	} );

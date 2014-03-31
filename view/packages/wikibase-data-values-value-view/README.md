@@ -109,6 +109,12 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.5.1 (dev)
+
+* Change TimeInput::valueCharacteristics() to not returning precision or calendarmodel if set to auto
+* Change TimeInput::draw() to update the rotators' values if they are in auto mode
+* Change GlobeCoordinateInput::draw() to update the precision rotator value if it is in auto mode
+
 ### 0.5 (2014-03-28)
 
 * Renamed jQuery.valueView.ExpertFactory to jQuery.valueView.ExpertStore.
