@@ -36,6 +36,10 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.valueview.valueview',
+				'valueFormatters.formatters',
+				'valueFormatters.ValueFormatterStore',
+				'valueParsers.parsers',
+				'valueParsers.ValueParserStore'
 			),
 		),
 

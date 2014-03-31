@@ -3,7 +3,7 @@
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  */
 
-( function( vv, QUnit ) {
+( function( vv, vf, vp, QUnit ) {
 	'use strict';
 
 	var $vvElem;
@@ -15,7 +15,11 @@
 		opts = opts || {};
 
 		$vvElem = jQuery( '<div/>' );
-		vvInst = $vvElem.valueview().data( 'valueview' );
+		vvInst = $vvElem.valueview( {
+			expertStore: new vv.ExpertStore(),
+			formatterStore: new vf.ValueFormatterStore( vf.NullFormatter ),
+			parserStore: new vp.ValueParserStore( vp.NullParser )
+		} ).data( 'valueview' );
 
 		if( opts.withExpert ) {
 			vvInst.startEditing();
@@ -50,4 +54,4 @@
 		assert.ok( !vvInst.expert() );
 	} );
 
-} )( jQuery.valueview, QUnit );
+} )( jQuery.valueview, valueFormatters, valueParsers, QUnit );
