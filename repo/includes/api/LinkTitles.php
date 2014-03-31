@@ -3,8 +3,9 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Status;
+use ApiMain;
 use SiteSQLStore;
+use Status;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -36,7 +37,14 @@ class LinkTitles extends ApiWikibase {
 	 */
 	protected $siteLinkGroups;
 
-	public function __construct( $mainModule, $moduleName, $modulePrefix = '' ) {
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 *
+	 * @see ApiBase::__construct
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
 		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
