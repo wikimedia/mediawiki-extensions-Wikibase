@@ -44,7 +44,7 @@ module StatementPage
   end
 
   def statement_string_value(group_index, claim_index)
-    @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//div[contains(@class, 'valueview-instaticmode')]").text
+    @browser.element(xpath: "//div[contains(@class, 'wb-claimlistview')][#{group_index}]//div[contains(@class, 'listview-item')][#{claim_index}]//div[contains(@class, 'valueview')]").text
   end
 
   def statement_value_element(group_index, claim_index)
