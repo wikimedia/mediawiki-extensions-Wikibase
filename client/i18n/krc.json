@@ -32,7 +32,9 @@
     "wikibase-linkitem-not-loggedin-title": "Авторизацияны ётерге керексиз",
     "wikibase-linkitem-not-loggedin": "Бу функцияны хайырландырыр ючюн бу викиде эм [$1 билгилени ара репозиторийинде] авторизация ётерге керексиз.",
     "wikibase-linkitem-success-link": "Бу бет тыйыншлы байламлы этилди. Джибериулени тутхан элементни [$1 билгилени ара репозиторийинде] табаргъа боллукъсуз.",
-    "wikibase-rc-hide-wikidata": "Викибилгилени $1",
+    "wikibase-rc-hide-wikidata": "{{WBREPONAME}}ни $1",
+    "wikibase-rc-hide-wikidata-hide": "джашыр",
+    "wikibase-rc-hide-wikidata-show": "кёргюз",
     "wikibase-rc-show-wikidata-pref": "Викибилгилени тюрлениулерин джангы тюрлениулени тизмесинде кёргюз",
     "wikibase-rc-wikibase-edit-letter": "вб",
     "wikibase-rc-wikibase-edit-title": "Викибилги бла байламлы тюрлениу"

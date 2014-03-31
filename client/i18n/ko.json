@@ -60,5 +60,6 @@
     "wikibase-unconnectedpages-format-row": "(문서에 있는 {{PLURAL:$1|언어 인터위키 링크}} $1개)",
     "wikibase-pageinfo-entity-id": "{{WBREPONAME}} 항목 ID",
     "wikibase-pageinfo-entity-id-none": "없음",
-    "wikibase-property-render-error": "$1 속성 표시 실패: $2"
+    "wikibase-property-render-error": "$1 속성 표시 실패: $2",
+    "wikibase-otherprojects": "다른 프로젝트"
 }

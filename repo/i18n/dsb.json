@@ -135,7 +135,7 @@
     "wikibase-modifyentity-id": "ID:",
     "wikibase-modifyterm-language": "Rěc:",
     "special-listdatatypes": "Lisćina wšych k dispoziciji stojecych datowych typow",
-    "wikibase-listdatatypes-intro": "To jo lisćina wšych datowych typow, kótarež wužywaju se tuchylu w toś tej instalaciji:",
+    "wikibase-listdatatypes-intro": "To jo lisćina wšych datowych typow, kótarež stoje k dispoziciji w toś tej instalaciji:",
     "wikibase-history-title-with-label": "Wersijowa historija \"$2\" ($1)",
     "wikibase-history-title-without-label": "Wersijowa historija ($1)",
     "special-entitieswithoutlabel": "Entity bźez pomjenjenja",
