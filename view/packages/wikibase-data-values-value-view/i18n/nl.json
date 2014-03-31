@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "Siebrand"
+        ]
+    },
+    "valueview-desc": "Gebruikersinterface-elementen voor het weergeven en bewerken van gegevenswaarden",
+    "valueview-expert-advancedadjustments": "geavanceerde aanpassingen",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Het verwerken van waarden van het type \"$1\" wordt nog niet ondersteund.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Het verwerken van waarden van het gegevenstype \"$1\" wordt nog niet ondersteund.",
+    "valueview-expert-emptyvalue-empty": "leeg",
+    "valueview-expert-globecoordinateinput-precision": "Precisie:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregoriaanse",
+    "valueview-expert-timevalue-calendar-julian": "Juliaanse",
+    "valueview-expert-timeinput-precision": "Precisie:",
+    "valueview-expert-timeinput-calendar": "Kalender:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Gregoriaanse kalender)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Juliaanse kalender)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; wijzigen naar Gregoriaans",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; wijzigen naar Juliaans",
+    "valueview-preview-label": "wordt weergegeven als:",
+    "valueview-preview-novalue": "geen geldige waarde herkend",
+    "valueview-listrotator-auto": "automatisch"
+}

@@ -1,0 +1,13 @@
+{
+    "@metadata": {
+        "authors": [
+            "Nikosguard"
+        ]
+    },
+    "valueview-expert-timevalue-calendar-gregorian": "Γρηγοριανό",
+    "valueview-expert-timevalue-calendar-julian": "Ιουλιανό",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Γρηγοριανό ημερολόγιο)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Ιουλιανό ημερολόγιο)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; αλλαγή σε Γρηγοριανό",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; αλλαγή σε Ιουλιανό"
+}

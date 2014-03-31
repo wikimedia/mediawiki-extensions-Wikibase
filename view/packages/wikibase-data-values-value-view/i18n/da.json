@@ -1,0 +1,11 @@
+{
+    "@metadata": {
+        "authors": [
+            "Byrial"
+        ]
+    },
+    "valueview-desc": "Brugergrænsefladekomponenter til at vise og redigere dataværdier",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering af værdier af $1 understøttes ikke endnu.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering af værdier for datatypen $1 understøttes ikke endnu.",
+    "valueview-expert-emptyvalue-empty": "tom"
+}

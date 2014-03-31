@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "Xuacu"
+        ]
+    },
+    "valueview-desc": "Componentes de la interfaz p'amosar y editar valores de datos",
+    "valueview-expert-advancedadjustments": "axustes avanzaos",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Inda nun hai sofitu pa xestionar valores «$1».",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Inda nun hai sofitu pa xestionar valores de datos de tipu «$1».",
+    "valueview-expert-emptyvalue-empty": "balero",
+    "valueview-expert-globecoordinateinput-precision": "Precisión:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregorianu",
+    "valueview-expert-timevalue-calendar-julian": "Xulianu",
+    "valueview-expert-timeinput-precision": "Precisión:",
+    "valueview-expert-timeinput-calendar": "Calendariu:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendariu gregorianu)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Calendariu xulianu)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; cambiar a gregorianu",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; cambiar a xulianu",
+    "valueview-preview-label": "veráse como:",
+    "valueview-preview-novalue": "nun se reconoció dengún valor válidu",
+    "valueview-listrotator-auto": "automáticu"
+}

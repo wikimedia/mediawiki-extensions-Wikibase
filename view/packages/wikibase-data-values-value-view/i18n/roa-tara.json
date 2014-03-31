@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "Joetaras"
+        ]
+    },
+    "valueview-desc": "Combonende UI pe fà vedè e cangià le volre de le date",
+    "valueview-expert-advancedadjustments": "suggereminde avanzate",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "'A gestione de \"$1\" valore non g'è angore mandenute.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "'A gestione de valore pu tipe de date \"$1\" non g'è angore mandenute.",
+    "valueview-expert-emptyvalue-empty": "vacande",
+    "valueview-expert-globecoordinateinput-precision": "Precisione:",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregoriane",
+    "valueview-expert-timevalue-calendar-julian": "Giuliane",
+    "valueview-expert-timeinput-precision": "Precisione:",
+    "valueview-expert-timeinput-calendar": "Calendarije:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendarije gregoriane)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Calendarije giuliane)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; cange a Gregoriane",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; cange a Giuliane",
+    "valueview-preview-label": "avène fatte vedè cumme:",
+    "valueview-preview-novalue": "nisciune valore valore acchiate",
+    "valueview-listrotator-auto": "aute"
+}

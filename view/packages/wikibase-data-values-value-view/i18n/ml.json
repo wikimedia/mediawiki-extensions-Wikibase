@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "Praveenp"
+        ]
+    },
+    "valueview-desc": "ഡേറ്റാ വിലകൾ കാണുന്നതിനും തിരുത്തുന്നതിനുമുള്ള സമ്പർക്കമുഖ ഘടകങ്ങൾ",
+    "valueview-expert-advancedadjustments": "വിപുലമായ ക്രമീകരണങ്ങൾ",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" വിലകളുടെ കൈകാര്യം ഇതുവരെ പിന്തുണച്ചിട്ടില്ല.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" ഡേറ്റാ ഇനത്തിന്റെ വിലകളുടെ കൈകാര്യം ഇതുവരെ പിന്തുണച്ചിട്ടില്ല.",
+    "valueview-expert-emptyvalue-empty": "ശൂന്യം",
+    "valueview-expert-globecoordinateinput-precision": "കൃത്യത:",
+    "valueview-expert-timevalue-calendar-gregorian": "ഗ്രിഗോറിയൻ",
+    "valueview-expert-timevalue-calendar-julian": "ജൂലിയൻ",
+    "valueview-expert-timeinput-precision": "കൃത്യത:",
+    "valueview-expert-timeinput-calendar": "കാലഗണനാരീതി:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(ഗ്രിഗോറിയൻ കലണ്ടർ)",
+    "valueview-expert-timeinput-calendarhint-julian": "(ജൂലിയൻ കലണ്ടർ)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; ഗ്രിഗോറിയനിലേയ്ക്ക് മാറുക",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; ജൂലിയനിലേയ്ക്ക് മാറുക",
+    "valueview-preview-label": "ഇങ്ങനെ കാണപ്പെടും:",
+    "valueview-preview-novalue": "സാധുതയുള്ള വിലകളൊന്നും കണ്ടെത്താനായില്ല",
+    "valueview-listrotator-auto": "സ്വയംപ്രവർത്തനരീതി"
+}

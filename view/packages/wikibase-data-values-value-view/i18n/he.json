@@ -1,0 +1,25 @@
+{
+    "@metadata": {
+        "authors": [
+            "Amire80",
+            "Orsa"
+        ]
+    },
+    "valueview-desc": "רכיבי ממשק להצגה ועריכה של ערכי נתונים",
+    "valueview-expert-advancedadjustments": "כוונונים מתקדמים",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "טיפול בערכים מסוג \"$1\" אינו נתמך עדיין.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "טיפול בערכים מסוג נתונים \"$1\" אינו נתמך עדיין.",
+    "valueview-expert-emptyvalue-empty": "ריק",
+    "valueview-expert-globecoordinateinput-precision": "דיוק:",
+    "valueview-expert-timevalue-calendar-gregorian": "גרגוריאני:",
+    "valueview-expert-timevalue-calendar-julian": "יוליאני",
+    "valueview-expert-timeinput-precision": "דיוק:",
+    "valueview-expert-timeinput-calendar": "לוח שנה:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(לוח שנה גרגוריאני)",
+    "valueview-expert-timeinput-calendarhint-julian": "(לוח שנה יוליאני)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "$larr; לשנות לגרגוריאני",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "$larr; לשנות ליוליאני",
+    "valueview-preview-label": "יוצג בתור:",
+    "valueview-preview-novalue": "לא הוכר שום ערך תקין",
+    "valueview-listrotator-auto": "אוטומטי"
+}

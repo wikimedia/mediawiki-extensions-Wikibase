@@ -1,0 +1,24 @@
+{
+    "@metadata": {
+        "authors": [
+            "Lloffiwr"
+        ]
+    },
+    "valueview-desc": "Elfennau o'r rhyngwyneb sy'n arddangos gwerthoedd data a'u golygu",
+    "valueview-expert-advancedadjustments": "cymhwysiadau uwch",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Nid ydym yn gallu trin gwerthoedd \"$1\" hyd yn hyn.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Nid ydym yn gallu trin gwerthoedd o'r math \"$1\" o ddata hyd yn hyn.",
+    "valueview-expert-emptyvalue-empty": "gwag",
+    "valueview-expert-globecoordinateinput-precision": "Manylder:",
+    "valueview-expert-timevalue-calendar-gregorian": "Calendr Gregori",
+    "valueview-expert-timevalue-calendar-julian": "Calendr Iŵl",
+    "valueview-expert-timeinput-precision": "Manylder:",
+    "valueview-expert-timeinput-calendar": "Calendr:",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendr Gregori)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Calendr Iŵl)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; newid i Galendr Gregori",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; newid i galendr Iŵl",
+    "valueview-preview-label": "caiff ei dangos fel:",
+    "valueview-preview-novalue": "ni adnabuwyd unrhyw werth dilys",
+    "valueview-listrotator-auto": "awto"
+}

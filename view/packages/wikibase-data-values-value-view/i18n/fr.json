@@ -1,0 +1,29 @@
+{
+    "@metadata": {
+        "authors": [
+            "Ayack",
+            "Gomoko",
+            "Hello71",
+            "Metroitendo",
+            "Peter17",
+            "Urhixidur"
+        ]
+    },
+    "valueview-desc": "Composants graphiques pour l’affichage et la modification des données",
+    "valueview-expert-advancedadjustments": "réglages avancés",
+    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "La manipulation des valeurs de données « $1 » n’est pas encore supportée.",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "La gestion des valeurs pour le type de données « $1 » n’est pas encore pris en charge.",
+    "valueview-expert-emptyvalue-empty": "vide",
+    "valueview-expert-globecoordinateinput-precision": "Précision :",
+    "valueview-expert-timevalue-calendar-gregorian": "Grégorien",
+    "valueview-expert-timevalue-calendar-julian": "Julien",
+    "valueview-expert-timeinput-precision": "Précision :",
+    "valueview-expert-timeinput-calendar": "Calendrier :",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendrier grégorien)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Calendrier julien)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; passer en Grégorien",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; passer en Julien",
+    "valueview-preview-label": "affiché comme :",
+    "valueview-preview-novalue": "aucune valeur valide reconnu",
+    "valueview-listrotator-auto": "auto"
+}

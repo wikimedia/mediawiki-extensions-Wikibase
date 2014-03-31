@@ -1,0 +1,20 @@
+{
+    "@metadata": {
+        "authors": [
+            "Cedric31"
+        ]
+    },
+    "valueview-expert-emptyvalue-empty": "void",
+    "valueview-expert-globecoordinateinput-precision": "Precision :",
+    "valueview-expert-timevalue-calendar-gregorian": "Gregorian",
+    "valueview-expert-timevalue-calendar-julian": "Julian",
+    "valueview-expert-timeinput-precision": "Precision :",
+    "valueview-expert-timeinput-calendar": "Calendièr :",
+    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendièr gregorian)",
+    "valueview-expert-timeinput-calendarhint-julian": "(Calendièr julian)",
+    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; passar en Gregorian",
+    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; passar en Julian",
+    "valueview-preview-label": "afichat coma :",
+    "valueview-preview-novalue": "cap de valor valida pas reconeguda",
+    "valueview-listrotator-auto": "auto"
+}

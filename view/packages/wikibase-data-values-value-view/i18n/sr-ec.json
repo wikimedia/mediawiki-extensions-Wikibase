@@ -1,0 +1,12 @@
+{
+    "@metadata": {
+        "authors": [
+            "Milicevic01",
+            "Милан Јелисавчић"
+        ]
+    },
+    "valueview-desc": "УИ компоненте за приказ и уређивање података",
+    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Начин управљања вредностима за „$1“ врсту података још није подржан.",
+    "valueview-expert-emptyvalue-empty": "празно",
+    "valueview-expert-timeinput-calendar": "Календар:"
+}
