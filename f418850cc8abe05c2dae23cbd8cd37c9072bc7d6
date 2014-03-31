@@ -43,6 +43,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_30a695a8",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-03-31T19:43:28Z",
+      "side": 1,
+      "message": "Because we need to be able to add new ones. Query will be the next content model, and it will not be part of Wikibase core, but provided by a separate extension. I\u0027m actually thinking about factoring out the core of Wikibase into a library that provides no concrete Entity types / content models.",
+      "parentUuid": "ae0e4726_feea4304",
+      "revId": "f418850cc8abe05c2dae23cbd8cd37c9072bc7d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_9e8b4772",
         "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
         "patchSetId": 2
