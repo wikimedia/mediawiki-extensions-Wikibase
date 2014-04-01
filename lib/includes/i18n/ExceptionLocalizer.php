@@ -26,7 +26,7 @@ interface ExceptionLocalizer {
 	 *
 	 * @return Message
 	 */
-	function getExceptionMessage( Exception $ex );
+	public function getExceptionMessage( Exception $ex );
 
 	/**
 	 * Whether this localizer can handle the given exception.
@@ -38,6 +38,6 @@ interface ExceptionLocalizer {
 	 *
 	 * @return bool
 	 */
-	function hasExceptionMessage( Exception $ex );
+	public function hasExceptionMessage( Exception $ex );
 
 }
