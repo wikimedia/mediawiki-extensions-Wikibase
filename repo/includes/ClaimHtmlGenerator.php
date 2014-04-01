@@ -7,9 +7,12 @@ use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\View\SnakHtmlGenerator;
 
 /**
  * Base class for generating the HTML for a Claim in Entity View.
+ *
+ * @todo move Statement-specific formatting elsewhere.
  *
  * @since 0.4
  * @licence GNU GPL v2+
@@ -21,11 +24,9 @@ use Wikibase\Lib\SnakFormatter;
 class ClaimHtmlGenerator {
 
 	/**
-	 * @since 0.4
-	 *
-	 * @var SnakFormatter
+	 * @var SnakHtmlGenerator
 	 */
-	protected $snakFormatter;
+	protected $snakHtmlGenerator;
 
 	/**
 	 * @since 0.5
@@ -35,28 +36,15 @@ class ClaimHtmlGenerator {
 	protected $entityTitleLookup;
 
 	/**
-	 * Array of property labels indexed by serialized property ids
-	 * @since 0.5
-	 *
-	 * @var string[]
-	 */
-	protected $propertyLabels;
-
-	/**
-	 * Constructor.
-	 *
-	 * @param SnakFormatter $snakFormatter
+	 * @param SnakHtmlGenerator $snakHtmlGenerator
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param string[] $propertyLabels
 	 */
 	public function __construct(
-		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup,
-		$propertyLabels = array()
+		SnakHtmlGenerator $snakHtmlGenerator,
+		EntityTitleLookup $entityTitleLookup
 	) {
-		$this->snakFormatter = $snakFormatter;
+		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->propertyLabels = $propertyLabels;
 	}
 
 	/**
@@ -69,10 +57,14 @@ class ClaimHtmlGenerator {
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim( Claim $claim, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Claim $claim, $propertyLabels, $editSectionHtml = null ) {
 		wfProfileIn( __METHOD__ );
 
-		$mainSnakHtml = $this->getSnakHtml( $claim->getMainSnak(), false );
+		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
+			$claim->getMainSnak(),
+			$propertyLabels,
+			false
+		);
 
 		$rankHtml = '';
 		$referencesHeading = '';
@@ -99,7 +91,10 @@ class ClaimHtmlGenerator {
 				count( $referenceList )
 			)->text();
 
-			$referencesHtml = $this->getHtmlForReferences( $claim->getReferences() );
+			$referencesHtml = $this->getHtmlForReferences(
+				$claim->getReferences(),
+				$propertyLabels
+			);
 		}
 
 		// @todo: Use 'wb-claim' or 'wb-statement' template accordingly
@@ -108,7 +103,7 @@ class ClaimHtmlGenerator {
 			$rankHtml,
 			$claim->getGuid(),
 			$mainSnakHtml,
-			$this->getHtmlForQualifiers( $claim->getQualifiers() ),
+			$this->getHtmlForQualifiers( $claim->getQualifiers(), $propertyLabels ),
 			$editSectionHtml,
 			$referencesHeading,
 			$referencesHtml
@@ -122,9 +117,11 @@ class ClaimHtmlGenerator {
 	 * Generates and returns the HTML representing a claim's qualifiers.
 	 *
 	 * @param Snaks $qualifiers
+	 * @param string[] $propertyLabels
+	 *
 	 * @return string
 	 */
-	protected function getHtmlForQualifiers( Snaks $qualifiers ) {
+	protected function getHtmlForQualifiers( Snaks $qualifiers, array $propertyLabels ) {
 		$qualifiersByProperty = new ByPropertyIdArray( $qualifiers );
 		$qualifiersByProperty->buildIndex();
 
@@ -132,7 +129,8 @@ class ClaimHtmlGenerator {
 
 		foreach( $qualifiersByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
-				$qualifiersByProperty->getByPropertyId( $propertyId )
+				$qualifiersByProperty->getByPropertyId( $propertyId ),
+				$propertyLabels
 			);
 		}
 
@@ -143,13 +141,15 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a ReferenceList object.
 	 *
 	 * @param ReferenceList $referenceList
+	 * @param string[] $propertyLabels
+	 *
 	 * @return string
 	 */
-	protected function getHtmlForReferences( ReferenceList $referenceList ) {
+	protected function getHtmlForReferences( ReferenceList $referenceList, array $propertyLabels ) {
 		$referencesHtml = '';
 
 		foreach( $referenceList as $reference ) {
-			$referencesHtml .= $this->getHtmlForReference( $reference );
+			$referencesHtml .= $this->getHtmlForReference( $reference, $propertyLabels );
 		}
 
 		return $this->wrapInListview( $referencesHtml );
@@ -167,9 +167,11 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a Reference object.
 	 *
 	 * @param Reference $reference
+	 * @param string[] $propertyLabels
+	 *
 	 * @return string
 	 */
-	protected function getHtmlForReference( $reference ) {
+	protected function getHtmlForReference( $reference, array $propertyLabels ) {
 		$referenceSnaksByProperty = new ByPropertyIdArray( $reference->getSnaks() );
 		$referenceSnaksByProperty->buildIndex();
 
@@ -177,7 +179,8 @@ class ClaimHtmlGenerator {
 
 		foreach( $referenceSnaksByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
-				$referenceSnaksByProperty->getByPropertyId( $propertyId )
+				$referenceSnaksByProperty->getByPropertyId( $propertyId ),
+				$propertyLabels
 			);
 		}
 
@@ -191,14 +194,16 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a list of snaks.
 	 *
 	 * @param Snak[] $snaks
+	 * @param string[] $propertyLabels
+	 *
 	 * @return string
 	 */
-	protected function getSnaklistviewHtml( $snaks ) {
+	protected function getSnaklistviewHtml( $snaks, array $propertyLabels ) {
 		$snaksHtml = '';
 		$i = 0;
 
 		foreach( $snaks as $snak ) {
-			$snaksHtml .= $this->getSnakHtml( $snak, ( $i++ === 0 ) );
+			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, $propertyLabels, ( $i++ === 0 ) );
 		}
 
 		return wfTemplate(
@@ -207,96 +212,4 @@ class ClaimHtmlGenerator {
 		);
 	}
 
-	/**
-	 * Generates the HTML for a single snak.
-	 *
-	 * @todo split this into separate classes with more fine-grained formatting and tests.
-	 *
-	 * @param Snak $snak
-	 * @param boolean $showPropertyLink
-	 * @return string
-	 */
-	protected function getSnakHtml( $snak, $showPropertyLink = false ) {
-		$propertyLink = '';
-
-		if( $showPropertyLink ) {
-			$propertyId = $snak->getPropertyId();
-			$propertyKey = $propertyId->getSerialization();
-			$propertyLabel = isset( $this->propertyLabels[$propertyKey] )
-				? $this->propertyLabels[$propertyKey]
-				: $propertyKey;
-			$propertyLink = \Linker::link(
-				$this->entityTitleLookup->getTitleForId( $propertyId ),
-				htmlspecialchars( $propertyLabel )
-			);
-		}
-
-		$snakViewVariation = $this->getSnakViewVariation( $snak );
-		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
-
-		$formattedValue = $this->getFormattedSnakValue( $snak );
-
-		if ( $formattedValue === '' ) {
-			$formattedValue = '&nbsp;';
-		}
-
-		return wfTemplate( 'wb-snak',
-			// Display property link only once for snaks featuring the same property:
-			$propertyLink,
-			$snakViewCssClass,
-			$formattedValue
-		);
-	}
-
-	/**
-	 * @param Snak $snak
-	 *
-	 * @return string
-	 */
-	private function getSnakViewVariation( Snak $snak ) {
-		if ( $snak instanceof PropertyValueSnak ) {
-			$variation = 'valuesnak';
-		} elseif ( $snak instanceof PropertySomeValueSnak ) {
-			$variation = 'somevaluesnak';
-		} else {
-			$variation = 'novaluesnak';
-		}
-
-		return $variation;
-	}
-
-	/**
-	 * @fixme handle errors more consistently as done in JS UI, and perhaps add
-	 * localised exception messages.
-	 *
-	 * @param Snak $snak
-	 * @return string
-	 */
-	protected function getFormattedSnakValue( $snak ) {
-		try {
-			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
-			return $this->getInvalidSnakMessage();
-		} catch ( PropertyNotFoundException $ex ) {
-			return $this->getPropertyNotFoundMessage();
-		} catch ( InvalidArgumentException $ex ) {
-			return $this->getInvalidSnakMessage();
-		}
-
-		return $formattedSnak;
-	}
-
-	/**
-	 * @return string
-	 */
-	private function getInvalidSnakMessage() {
-		return wfMessage( 'wikibase-snakformat-invalid-value' )->parse();
-	}
-
-	/**
-	 * @return string
-	 */
-	private function getPropertyNotFoundMessage() {
-		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
-	}
 }

@@ -15,9 +15,13 @@ use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\SnakList;
 use Wikibase\Statement;
+use Wikibase\View\SnakHtmlGenerator;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator
+ *
+ * @todo more specific tests for all parts of claim html formatting,
+ * and use mock SnakHtmlGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -71,16 +75,20 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function testGetHtmlForClaim(
 		$snakFormatter,
 		$entityTitleLookup,
-		$propertyLabels,
 		$claim,
 		$patterns
 	) {
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
+		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup,
-			$propertyLabels
+			$entityTitleLookup
 		);
-		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, 'edit' );
+
+		$claimHtmlGenerator = new ClaimHtmlGenerator(
+			$snakHtmlGenerator,
+			$entityTitleLookup
+		);
+
+		$html = $claimHtmlGenerator->getHtmlForClaim( $claim, array(), 'edit' );
 
 		foreach( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
@@ -97,7 +105,6 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$snakFormatter,
 			$entityTitleLookupMock,
-			array(),
 			new Claim( new PropertySomeValueSnak( 42 ) ),
 			array(
 				'snak variation css' => '/wb-snakview-variation-somevalue/',
@@ -108,7 +115,6 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$snakFormatter,
 			$entityTitleLookupMock,
-			array(),
 			new Claim(
 				new PropertySomeValueSnak( 42 ),
 				new SnakList( array(
@@ -124,7 +130,6 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$snakFormatter,
 			$entityTitleLookupMock,
-			array(),
 			new Statement(
 				new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 				new SnakList(),
