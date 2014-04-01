@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_1ab043f0",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T18:44:48Z",
+      "side": 1,
+      "message": "Why is this so different from the implementation in addClaim above? addClaim uses addObjectAtIndex in a try-catch and addObjectAtEndOfList in case of a OutOfBoundsException. In contrast setClaim always adds to the end and then tries to move without catching exceptions.\n\nFrom what I see this doesn\u0027t matter in the end. The result will be the exact same. But:\n* It\u0027s confusing to have these two very different implementations. The only difference should be the removeClaimWithGuid call. Everything else should be the same.\n* With this change the API will throw an OutOfBoundsException where it has thrown a ChangeOpException before. It should be possible to add a test for this.\n\nI\u0027m poking this because this code was never executed before this patch and therefor should be looked at like it is new.",
+      "revId": "795b7db328555adf3268b693a5445a5abbcbbefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_c051f466",
         "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
         "patchSetId": 3
