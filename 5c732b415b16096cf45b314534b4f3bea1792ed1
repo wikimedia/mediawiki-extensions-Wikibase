@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_7a4e1f3e",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T18:29:16Z",
+      "side": 1,
+      "message": "As suggested: Move everything that deals with images and CSS styles to an other patch.",
+      "revId": "5c732b415b16096cf45b314534b4f3bea1792ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_8f955b38",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T18:29:16Z",
+      "side": 1,
+      "message": "An \"idSerialization\" isn\u0027t a think. It should be either an itemId or a serialization. I know this is horribly nitpicking. Sorry. :-)",
+      "revId": "5c732b415b16096cf45b314534b4f3bea1792ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_1a3e0388",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 31
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T18:29:16Z",
+      "side": 1,
+      "message": "Will this override the title that shows the localized language name?\n\nAs suggested: Move everything that deals with labels and title attributes to an other patch.",
+      "revId": "5c732b415b16096cf45b314534b4f3bea1792ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
