@@ -145,7 +145,7 @@ class ClaimHtmlGenerator {
 	 * @return string
 	 */
 	protected function getHtmlForQualifiers( Snaks $qualifiers ) {
-		$qualifiersByProperty = new ByPropertyIdArray( $qualifiers );
+		$qualifiersByProperty = new ByPropertyIdArray( (array)$qualifiers );
 		$qualifiersByProperty->buildIndex();
 
 		$snaklistviewsHtml = '';
@@ -190,7 +190,7 @@ class ClaimHtmlGenerator {
 	 * @return string
 	 */
 	protected function getHtmlForReference( $reference ) {
-		$referenceSnaksByProperty = new ByPropertyIdArray( $reference->getSnaks() );
+		$referenceSnaksByProperty = new ByPropertyIdArray( (array)$reference->getSnaks() );
 		$referenceSnaksByProperty->buildIndex();
 
 		$snaklistviewsHtml = '';
