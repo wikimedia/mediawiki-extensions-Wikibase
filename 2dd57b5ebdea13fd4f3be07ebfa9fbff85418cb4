@@ -51,6 +51,23 @@
       "revId": "2dd57b5ebdea13fd4f3be07ebfa9fbff85418cb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_faffcf60",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T18:52:57Z",
+      "side": 1,
+      "message": "This is what I was talking about in my comment above. If \u0027wbUserCanEdit\u0027 is false the handler will always be triggered. No need to do all the additional stuff above. Possible solution: Move this block (lines 166-170) up (above line 152).",
+      "revId": "2dd57b5ebdea13fd4f3be07ebfa9fbff85418cb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
