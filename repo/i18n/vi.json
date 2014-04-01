@@ -219,6 +219,7 @@
     "wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, chuyển đổi từ $3 – $4",
     "wikibase-api-no-such-sitelink": "Không tìm thấy trang dịch vụ",
     "wikibase-parse-error": "Giá trị hư hỏng.",
+    "wikibase-unexpected-error": "Lỗi bất ngờ: $1.",
     "wikibase-self-conflict-patched": "Sửa đổi của bạn đã được vá vào phiên bản gần đây nhất và ghi đè một số thay đổi ở giữa của bạn.",
     "wikibase-conflict-patched": "Sửa đổi của bạn đã được vá vào phiên bản gần đây nhất.",
     "wikibase-restoreold": "phục hồi",

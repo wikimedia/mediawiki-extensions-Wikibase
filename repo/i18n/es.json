@@ -47,7 +47,7 @@
     "wikibase-terms": "En otros idiomas",
     "wikibase-sitelinks-add": "Agregar un enlace a un enlace de sitio (site-link)",
     "wikibase-sitelinks-empty": "No hay ningún enlace de sitio para este elemento.",
-    "wikibase-sitelinks-input-help-message": "Poner un enlace a una página relacionada con este elemento.",
+    "wikibase-sitelinks-input-help-message": "Definir un enlace hacia una página relacionada con este elemento.",
     "wikibase-remove": "eliminar",
     "wikibase-move-up": "subir",
     "wikibase-move-down": "bajar",
