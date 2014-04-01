@@ -65,14 +65,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		}
 
 		if ( $badges !== null ) {
-			foreach ( $badges as $badge ) {
-				if ( !( $badge instanceof ItemId ) ) {
-					throw new InvalidArgumentException( '$badges need to be an array of ItemIds or null' );
-				}
-				if ( !array_key_exists( $badge->getPrefixedId(), WikibaseRepo::getDefaultInstance()->getSettings()->get( 'badgeItems' ) ) ) {
-					throw new InvalidArgumentException( 'Only items specified in the config can be badges' );
-				}
-			}
+			$this->validateBadges( $badges );
 
 			$badges = $this->removeDuplicateBadges( $badges );
 		}
@@ -80,6 +73,25 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		$this->siteId = $siteId;
 		$this->pageName = $pageName;
 		$this->badges = $badges;
+	}
+
+	/**
+	 * @param array $badges
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function validateBadges( array $badges ) {
+		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->get( 'badgeItems' );
+
+		foreach ( $badges as $badge ) {
+			if ( !( $badge instanceof ItemId ) ) {
+				throw new InvalidArgumentException( '$badge needs to be an ItemId' );
+			}
+
+			if ( !array_key_exists( $badge->getPrefixedId(), $badgeItems ) ) {
+				throw new InvalidArgumentException( 'Only items specified in the config can be badges' );
+			}
+		}
 	}
 
 	/**
