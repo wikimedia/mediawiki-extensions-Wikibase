@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_6868a1f2",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T09:11:07Z",
+      "side": 1,
+      "message": "It may be me who is confused here ;-) but isn\u0027t this switched around? If you know the user can not edit you don\u0027t need to check further. He can not edit anyway.",
+      "revId": "2dd57b5ebdea13fd4f3be07ebfa9fbff85418cb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
