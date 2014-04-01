@@ -105,7 +105,7 @@ class ReferenceDeserializerTest extends DeserializerBaseTest {
 		) ) );
 
 		$serialization = array(
-			'hash' => 'c473c0006ec3e5930a0b3d87406909d4c87dae96',
+			'hash' => '20726a1e99eab73834c0f4a25f3c5c2561993e6e',
 			'snaks' => array(
 				'P24' => array(
 					array(
@@ -131,5 +131,22 @@ class ReferenceDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$this->assertTrue( $reference->equals( $referenceDeserializer->deserialize( $serialization ) ) );
+	}
+
+	/**
+	 * @dataProvider invalidDeserializationProvider
+	 */
+	public function testInvalidSerialization( $serialization ) {
+		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
+		$this->buildDeserializer()->deserialize( $serialization );
+	}
+
+	public function invalidDeserializationProvider() {
+		return array(
+			array(
+				'hash' => 'da',
+				'snaks' => array()
+			),
+		);
 	}
 }

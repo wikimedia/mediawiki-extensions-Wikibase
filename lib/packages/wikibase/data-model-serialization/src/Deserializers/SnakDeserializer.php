@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * @since 0.1
@@ -75,7 +76,11 @@ class SnakDeserializer implements DispatchableDeserializer {
 		$this->assertCanDeserialize( $serialization );
 		$this->requireAttribute( $serialization, 'property' );
 
-		return $this->getDeserialized( $serialization );
+		$snak = $this->getDeserialized( $serialization );
+
+		$this->validateHash( $snak, $serialization );
+
+		return $snak;
 	}
 
 	private function getDeserialized( array $serialization ) {
@@ -140,6 +145,16 @@ class SnakDeserializer implements DispatchableDeserializer {
 			throw new MissingAttributeException(
 				$attributeName
 			);
+		}
+	}
+
+	private function validateHash( Snak $snak, array $serialization ) {
+		if( !array_key_exists( 'hash', $serialization ) ) {
+			return;
+		}
+
+		if( $snak->getHash() !== $serialization['hash'] ) {
+			throw new DeserializationException( 'The snak serialization provides a wrong hash' );
 		}
 	}
 }
