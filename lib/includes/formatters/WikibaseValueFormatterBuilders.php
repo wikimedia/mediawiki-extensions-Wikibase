@@ -556,7 +556,9 @@ class WikibaseValueFormatterBuilders {
 	 */
 	protected static function newGlobeCoordinateFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
 		$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
-		$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array() );
+		$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array(
+			GeoCoordinateFormatter::OPT_SPACE_LATLONG
+		) );
 		$options->setOption( GeoCoordinateFormatter::OPT_DIRECTIONAL, true );
 		return new GlobeCoordinateFormatter( $options );
 	}
