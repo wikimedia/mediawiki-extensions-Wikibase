@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae0e4726_081c8578",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T09:43:28Z",
+      "side": 1,
+      "message": "Maybe order these by number?",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_e810315d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T09:43:28Z",
+      "side": 1,
+      "message": "} elseif ( !$this-\u003egetEntity()-\u003ehasClaims() ) {\n    return self::STATUS_STUB;\n} else {\n    return self::STATUS_NONE;",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_1516e34d",
         "filename": "repo/includes/content/ItemContent.php",
         "patchSetId": 19
@@ -13,6 +47,23 @@
       "writtenOn": "2014-03-31T17:22:18Z",
       "side": 1,
       "message": "getSimpleSiteLinks() is deprecated\n\nuse getSiteLinks instead",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_2bf863e1",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T09:43:28Z",
+      "side": 1,
+      "message": "This looks strange now that this is called \"NONE\". The problem is that this will also reset all meaningful future states.\n\nif ( $status \u003d\u003d\u003d self::STATUS_EMPTY \u0026\u0026 $this-\u003egetItem()-\u003ehasSiteLinks() ) {\n\treturn self::STATUS_STUB;\n} elseif ( $status \u003d\u003d\u003d self::STATUS_STUB \u0026\u0026 $this-\u003egetItem()-\u003ehasSiteLinks() ) {\n\treturn self::STATUS_NONE;\n}",
       "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
