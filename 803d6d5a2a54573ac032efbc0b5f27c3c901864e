@@ -34,6 +34,24 @@
       "revId": "803d6d5a2a54573ac032efbc0b5f27c3c901864e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_ba44b71d",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-01T18:12:56Z",
+      "side": 0,
+      "message": "Yes. The reason is that this code previously implemented setting a claim as removing it and then adding it again. The \"replace\" mode of the ChangeOp wasn\u0027t used. But the \"replace\" operation now performs an additional check (namely, that the main snak\u0027s property doesn\u0027t change).\n\nSo, by not removing the claim here, we make sure that the ChangeOp knows when a claim is updated, and can apply the appropriate checks. Leaving the remove operation in causes the check to be bypassed.",
+      "parentUuid": "ae0e4726_9a94538f",
+      "revId": "803d6d5a2a54573ac032efbc0b5f27c3c901864e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
