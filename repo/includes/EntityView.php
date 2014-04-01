@@ -188,19 +188,21 @@ abstract class EntityView extends ContextSource {
 		// Additionally attaching to window.error would only make sense before any other
 		// JavaScript is parsed.
 		$html .= Html::inlineScript( '
-$( ".wb-entity" ).addClass( "loading" ).after( function() {
-	var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
-	$div.css( "top", $div.height() + "px" );
-	$div.css(
-		"' . ( $lang->isRTL() ? 'right' : 'left' ) . '",
-		( ( $( this ).width() - $div.width() ) / 2 | 0 ) + "px"
-	);
-	return $div;
-} );
-window.setTimeout( function() {
-	$( ".wb-entity" ).removeClass( "loading" );
-	$( ".wb-entity-spinner" ).remove();
-}, 7000 );
+if ( $ ) {
+	$( ".wb-entity" ).addClass( "loading" ).after( function() {
+		var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
+		$div.css( "top", $div.height() + "px" );
+		$div.css(
+			"' . ( $lang->isRTL() ? 'right' : 'left' ) . '",
+			( ( $( this ).width() - $div.width() ) / 2 | 0 ) + "px"
+		);
+		return $div;
+	} );
+	window.setTimeout( function() {
+		$( ".wb-entity" ).removeClass( "loading" );
+		$( ".wb-entity-spinner" ).remove();
+	}, 7000 );
+}
 ' );
 
 		wfProfileOut( __METHOD__ );
