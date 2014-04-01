@@ -256,7 +256,7 @@ abstract class ApiWikibase extends ApiBase {
 		$permissions = $this->getRequiredPermissions( $entity, $params );
 		$status = Status::newGood();
 
-		foreach ( $permissions as $perm ) {
+		foreach ( array_unique( $permissions ) as $perm ) {
 			$permStatus = $this->permissionChecker->getPermissionStatusForEntity( $user, $perm, $entity );
 			$status->merge( $permStatus );
 		}
