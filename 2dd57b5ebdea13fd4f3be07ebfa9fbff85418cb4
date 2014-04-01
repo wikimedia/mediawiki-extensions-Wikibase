@@ -34,6 +34,23 @@
       "revId": "2dd57b5ebdea13fd4f3be07ebfa9fbff85418cb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_b47df019",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-01T14:52:26Z",
+      "side": 1,
+      "message": "not necessarily part of this patch, but find this bit of code slightly confusing and thus difficult to review the patch.\n\nhow does this line actually work?  mw.user.getRights() gives me things like:\n\n\"block\", \"createaccount\", \"delete\", \"bigdelete\", \"deletedhistory\", \"deletedtext\", \"undelete\", \"editinterface\", \"editusercss\", \"edituserjs\", ... and \"edit\"\n\nmw.config.get( \u0027wgRestrictionEdit\u0027 ); gives me \"sysop\" for my protected item, don\u0027t think that is a right and will ever be in getRights()?  \n\nI suppose if this code is to work, then we\u0027d need to check $.inArray( \u0027edit\u0027, rights ) ?   that would fix the issue, right?\n\n\nthen below, there is a check for !mw.config.get( \u0027wbUserCanEdit\u0027 ) which seems odd (to me) to check both there and here.",
+      "revId": "2dd57b5ebdea13fd4f3be07ebfa9fbff85418cb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
