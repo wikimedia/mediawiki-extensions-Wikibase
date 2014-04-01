@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_ee1b9480",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T19:57:18Z",
+      "side": 1,
+      "message": "I dug into the strange behavior of the ArrayObject class and came to the conclusion that this is really scary. The problem is not the constructor but the moveObjectToIndex() call below. It changes the content of the array. If the implementation relies on append() it may fail.\n\nPlease add the same (array) cast as above.",
+      "revId": "73159659d6291fad0c7eb2c5ff9428977a9fb3f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
