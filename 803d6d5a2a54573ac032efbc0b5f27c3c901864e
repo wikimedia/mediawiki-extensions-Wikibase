@@ -16,6 +16,24 @@
       "revId": "803d6d5a2a54573ac032efbc0b5f27c3c901864e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_9a94538f",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T18:07:27Z",
+      "side": 0,
+      "message": "Daniel, can you explain why this was here? As far as I can see this:\n1. always removed the claim and\n2. therefor the code that\u0027s now in your new method ChangeOpClaim::setClaim was never executed. Is this correct?",
+      "parentUuid": "ae0e4726_8b91ddfd",
+      "revId": "803d6d5a2a54573ac032efbc0b5f27c3c901864e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
