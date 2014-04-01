@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_6edae922",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-01T12:03:35Z",
+      "side": 1,
+      "message": "indent...",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 10
+      },
+      "revId": "ac9e445b50874411d704cba45a3988bd9b182c7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_4edf2511",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-01T12:03:35Z",
+      "side": 1,
+      "message": "apparently, we are not using tabs here. for whatever reason. better be consistent.",
+      "revId": "ac9e445b50874411d704cba45a3988bd9b182c7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
