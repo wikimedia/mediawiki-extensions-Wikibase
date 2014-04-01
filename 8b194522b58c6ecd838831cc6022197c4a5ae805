@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_74e8780b",
+        "filename": "lib/includes/ClaimGuidGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-01T14:38:35Z",
+      "side": 1,
+      "message": "Using optional injection because there seems little reason to ever use anything else. We were using static composition before. We could actually just go back to that.\n\nRe needing the interface: the only use is that the ClaimGuidGenerator should not know what implementation of a \"base\" Guid generator it is using. But then, why should that ever change? Don\u0027t care much, really.\n\nThe original purpose was to have a common interface for the real GuidGenerator and the ClaimGuidGenerator. Since the two serve different purposes and have different constraints, they are not interchangeable and should not share an interface.",
+      "parentUuid": "ae0e4726_2ca9bd21",
+      "revId": "8b194522b58c6ecd838831cc6022197c4a5ae805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_6c7695d7",
         "filename": "lib/includes/ClaimGuidGenerator.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_34da0079",
+        "filename": "lib/includes/ClaimGuidGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-01T14:38:35Z",
+      "side": 1,
+      "message": "An example would be the EditEntiy Api module: the same Guid generator would be used for all new claims that get inserted.\n\nThe main reason however is that we had \"new ClaimGuidGenerator( $entity-\u003egetEntity() )\" all over the place, which is ugly, and also forced the entity to actually *have* an ID at the point when we were trying to construct the GuidGenerator (e.g. when constructing a ChangeOp). That, however, is very annoying, since the entity ID may often only be determined later, once the entity has been created.",
+      "parentUuid": "ae0e4726_6c7695d7",
+      "revId": "8b194522b58c6ecd838831cc6022197c4a5ae805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_4c7bd1bd",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-03-27T22:35:50Z",
       "side": 1,
       "message": "...",
+      "revId": "8b194522b58c6ecd838831cc6022197c4a5ae805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_f4d3685f",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-01T14:38:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0e4726_4c7bd1bd",
       "revId": "8b194522b58c6ecd838831cc6022197c4a5ae805",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
