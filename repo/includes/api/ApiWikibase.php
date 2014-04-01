@@ -274,8 +274,8 @@ abstract class ApiWikibase extends ApiBase {
 	 * @param EntityId $entityId : the title of the page to load the revision for
 	 * @param int $revId : the revision to load. If not given, the current revision will be loaded.
 	 *
-	 * @throws \Exception
-	 * @throws \UsageException
+	 * @throws UsageException
+	 * @throws LogicException
 	 * @return EntityRevision
 	 */
 	protected function loadEntityRevision( EntityId $entityId, $revId = 0 ) {
@@ -294,7 +294,7 @@ abstract class ApiWikibase extends ApiBase {
 			$this->dieUsage( "Revision $revId not found: " . $ex->getMessage(), 'nosuchrevid' );
 		}
 
-		throw new Exception( 'can\'t happen' );
+		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
 	}
 
 	/**

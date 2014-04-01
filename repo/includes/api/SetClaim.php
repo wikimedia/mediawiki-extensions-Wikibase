@@ -5,11 +5,13 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
-use InvalidArgumentException;
-use OutOfBoundsException;
 use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use FormatJson;
+use InvalidArgumentException;
+use LogicException;
+use OutOfBoundsException;
+use UsageException;
 use Wikibase\ChangeOp\ChangeOpClaim;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ClaimDiffer;
@@ -118,7 +120,12 @@ class SetClaim extends ModifyClaim {
 
 	/**
 	 * @since 0.4
+	 *
 	 * @param array $params
+	 *
+	 * @throws IllegalValueException
+	 * @throws UsageException
+	 * @throws LogicException
 	 * @return Claim
 	 */
 	protected function getClaimFromParams( array $params ) {
@@ -140,6 +147,8 @@ class SetClaim extends ModifyClaim {
 		} catch( OutOfBoundsException $outOfBoundsException ) {
 			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
 		}
+
+		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
 	}
 
 	/**

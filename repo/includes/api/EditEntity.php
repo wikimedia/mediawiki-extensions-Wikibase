@@ -6,10 +6,12 @@ use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use LogicException;
 use MWException;
 use Site;
 use SiteList;
 use Title;
+use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOpClaim;
@@ -110,7 +112,13 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiModifyEntity::createEntity()
+	 * @param array $params
+	 *
+	 * @throws UsageException
+	 * @throws LogicException
+	 * @return Entity
+	 *
+	 * @see ModifyEntity::createEntity
 	 */
 	protected function createEntity( array $params ) {
 		$type = $params['new'];
@@ -118,12 +126,12 @@ class EditEntity extends ModifyEntity {
 		$entityFactory = EntityFactory::singleton();
 
 		try {
-			$entity = $entityFactory->newFromArray( $type, array() );
+			return $entityFactory->newFromArray( $type, array() );
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
 
-		return $entity;
+		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
 	}
 
 	/**
