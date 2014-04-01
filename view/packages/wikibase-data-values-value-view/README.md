@@ -109,7 +109,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.5.1 (dev)
+### 0.5.1 (2014-04-01)
 
 * Change TimeInput::valueCharacteristics() to not returning precision or calendarmodel if set to auto
 * Change TimeInput::draw() to update the rotators' values if they are in auto mode
