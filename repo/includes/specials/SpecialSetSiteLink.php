@@ -389,7 +389,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()
 					->getSetting( 'badgeItems' );
 
-			if ( !in_array( $badgeId->getPrefixedId(), array_keys( $badgeItems ) ) ) {
+			if ( !array_key_exists( $badgeId->getPrefixedId(), $badgeItems ) ) {
 				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
 				return false;
 			}
