@@ -1,4 +1,7 @@
 <?php
+
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\EntityStore;
 
 /**
@@ -20,7 +23,6 @@ use Wikibase\store\EntityStore;
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
-require_once $basePath . '/includes/Exception.php';
 
 class importProperties extends Maintenance {
 	protected $verbose = false;
@@ -129,7 +131,7 @@ class importProperties extends Maintenance {
 	 * @return bool true if the item was created, false otherwise
 	 */
 	protected function createProperty( $data ) {
-		$property = \Wikibase\Property::newEmpty();
+		$property = Property::newEmpty();
 
 		foreach ( $data as $lang => $title ) {
 			$label = $title;
