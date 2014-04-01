@@ -53,7 +53,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @var EntityPermissionChecker
 	 */
-	private $entityPermissionChecker;
+	private $permissionChecker;
 
 	/**
 	 * @since 0.5
