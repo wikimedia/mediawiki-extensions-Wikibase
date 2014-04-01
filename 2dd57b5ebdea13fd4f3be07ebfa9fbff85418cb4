@@ -16,6 +16,24 @@
       "revId": "2dd57b5ebdea13fd4f3be07ebfa9fbff85418cb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_0e8dadfb",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-01T12:28:17Z",
+      "side": 1,
+      "message": "The switch is done right.\nThe purpose of this block is to serve an adequat error message to users if the page has been protected and they can\u0027t edit it. The wb var is set server side, so if it says the user can edit the page it really can, so there\u0027s no need to run this code.",
+      "parentUuid": "ae0e4726_6868a1f2",
+      "revId": "2dd57b5ebdea13fd4f3be07ebfa9fbff85418cb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
