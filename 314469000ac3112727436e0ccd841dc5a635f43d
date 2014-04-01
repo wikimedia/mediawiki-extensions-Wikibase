@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_34a56001",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-01T14:17:37Z",
+      "side": 1,
+      "message": "avoiding the (transitive) dependencies dragged in by the implementation. and slightly nicer mocking. that\u0027s about it.",
+      "parentUuid": "ae0e4726_8cb20991",
+      "revId": "314469000ac3112727436e0ccd841dc5a635f43d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_6c4d759b",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 2
