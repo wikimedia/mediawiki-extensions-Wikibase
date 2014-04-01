@@ -22,6 +22,24 @@
       "revId": "4932a00f4bf8a27c3267c25a7773c2803aa9e92f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_a8eeb9af",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-01T08:42:26Z",
+      "side": 1,
+      "message": "Sure, why not. Basically shorten my comment a bit and move it inside the exception. Done.",
+      "parentUuid": "ae0e4726_e6a4e706",
+      "revId": "4932a00f4bf8a27c3267c25a7773c2803aa9e92f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
