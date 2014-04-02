@@ -311,7 +311,6 @@
 
 		// remove loading spinner after JavaScript has kicked in
 		$( '.wb-entity' ).removeClass( 'loading' );
-		$( '.wb-entity-spinner' ).remove();
 
 	} );
 
