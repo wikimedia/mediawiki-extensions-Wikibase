@@ -50,7 +50,10 @@ class PropertyView extends EntityView {
 		$html .= $this->getHtmlForAliases( $property, $editable );
 		$html .= $this->getHtmlForToc();
 		$html .= $this->getHtmlForTermBox( $property, $editable );
-		$html .= $this->getHtmlForClaims( $property, $editable );
+
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$html .= $this->getHtmlForClaims( $property, $editable );
+		}
 
 		$footer = $this->msg( 'wikibase-property-footer' );
 
