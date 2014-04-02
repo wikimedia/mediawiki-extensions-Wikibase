@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_823aa431",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-02T15:52:40Z",
+      "side": 1,
+      "message": "yikes :o",
+      "revId": "79d0dbf080de6a87e833aef10b8d07f2242775b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_623d5029",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-02T15:52:40Z",
+      "side": 1,
+      "message": ":o",
+      "revId": "79d0dbf080de6a87e833aef10b8d07f2242775b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
