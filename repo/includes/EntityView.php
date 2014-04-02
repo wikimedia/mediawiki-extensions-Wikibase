@@ -185,14 +185,8 @@ abstract class EntityView extends ContextSource {
 		// the fastest way to show the loading spinner is placing the script right after the
 		// corresponsing html
 		$html .= Html::inlineScript( '
-$( ".wb-entity" ).addClass( "loading" ).after( function() {
-	var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
-	$div.css( "top", $div.height() + "px" );
-	$div.css(
-		"' . ( $lang->isRTL() ? 'right' : 'left' ) . '",
-		( ( $( this ).width() - $div.width() ) / 2 | 0 ) + "px"
-	);
-	return $div;
+$( ".wb-entity" ).addClass( "loading" ).append( function() {
+	return $( "<div/>" ).addClass( "mw-small-spinner wb-entity-spinner" );
 } );
 
 // Remove loading spinner after a couple of seconds in any case. (e.g. some resource
@@ -202,7 +196,6 @@ $( ".wb-entity" ).addClass( "loading" ).after( function() {
 // any sense to attach to window.error here.
 window.setTimeout( function() {
 	$( ".wb-entity" ).removeClass( "loading" );
-	$( ".wb-entity-spinner" ).remove();
 }, 7000 );
 ' );
 
