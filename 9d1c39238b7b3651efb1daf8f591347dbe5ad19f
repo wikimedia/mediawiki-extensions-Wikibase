@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_df051318",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-02T14:45:09Z",
+      "side": 1,
+      "message": "not enough #fail ;)",
+      "revId": "9d1c39238b7b3651efb1daf8f591347dbe5ad19f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_c2fc1c0b",
+        "filename": "repo/includes/ChangeOp/WikibaseChangeOpFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-02T14:45:09Z",
+      "side": 1,
+      "message": "only need SnakValidator here",
+      "revId": "9d1c39238b7b3651efb1daf8f591347dbe5ad19f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_a2ffe8fb",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-02T14:45:09Z",
+      "side": 1,
+      "message": "what\u0027s an invalid GuidGenerator?\n\nhow about getClaimGuidGenerator()",
+      "revId": "9d1c39238b7b3651efb1daf8f591347dbe5ad19f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_8206241f",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-02T14:45:09Z",
+      "side": 1,
+      "message": "i would put this comments on the line above to avoid excessively long lines of code",
+      "revId": "9d1c39238b7b3651efb1daf8f591347dbe5ad19f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_6209d02e",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpClaimTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-02T14:45:09Z",
+      "side": 1,
+      "message": "idem.",
+      "revId": "9d1c39238b7b3651efb1daf8f591347dbe5ad19f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
