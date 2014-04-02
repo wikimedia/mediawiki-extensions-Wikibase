@@ -28,6 +28,7 @@ use StripState;
 use Title;
 use UnexpectedValueException;
 use User;
+use Sanitizer;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayJsConfigHandler;
@@ -50,6 +51,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 final class ClientHooks {
 
@@ -426,6 +428,18 @@ final class ClientHooks {
 				'href' => $itemLink,
 				'id' => 't-wikibase'
 			);
+		}
+
+		$displayBadges = $settings->getSetting( 'displayBadges' );
+		if ( is_array( $displayBadges ) ) {
+			$badgesCss = '';
+			foreach ( $displayBadges as $badge => $icon ) {
+				$badge = Sanitizer::escapeClass( $badge );
+				$icon = Sanitizer::checkCss( $icon );
+				$icon = Sanitizer::cleanUrl( $icon );
+				$badgesCss .= ".badges-$badge { list-style-image: url( '$icon' ); }\n";
+			}
+			$out->addInlineStyle( $badgesCss );
 		}
 
 		return true;
