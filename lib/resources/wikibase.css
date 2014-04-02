@@ -596,7 +596,7 @@ div.wb-claimlistview div.wb-editsection {
 	margin: 0 18em 0 15em;
 }
 
-.wb-claimgrouplistview .wb-new .wb-snak-property-container {
+.wb-claimgrouplistview .wb-claimlistview.wb-new .wb-snak-property-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
