@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_f3e375d2",
+        "filename": "repo/includes/view/SnakHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-02T12:25:32Z",
+      "side": 1,
+      "message": "so, if $showPropertyLink is false, this function just does nothing? Hm... better leave the conditional to the caller.",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 24
+      },
+      "revId": "35ca3d48745b45228cf8dce24f19d7b5321b2bd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_d3e871b1",
+        "filename": "repo/includes/view/SnakHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-02T12:25:32Z",
+      "side": 1,
+      "message": "should be $snak-\u003egetType() . \u0027snak\u0027; \nNot for this patch, but perhaps make a @todo",
+      "range": {
+        "startLine": 115,
+        "startChar": 18,
+        "endLine": 115,
+        "endChar": 38
+      },
+      "revId": "35ca3d48745b45228cf8dce24f19d7b5321b2bd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
