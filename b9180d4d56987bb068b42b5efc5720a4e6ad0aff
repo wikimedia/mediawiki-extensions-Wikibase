@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_533e9cb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2014-04-02T18:21:23Z",
+      "side": 1,
+      "message": "There should be no blank line below this. Otherwise the Bugzilla–Gerrit bot doesn\u0027t report the patch being submitted.",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "b9180d4d56987bb068b42b5efc5720a4e6ad0aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_f342503e",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2014-04-02T18:21:23Z",
+      "side": 1,
+      "message": "I understand you don\u0027t want to use .mw-editsection for that element, but you can use .mw-editsection-like instead (which is a class that provides the exact same styling, but with no \"semantic\" meaning).",
+      "revId": "b9180d4d56987bb068b42b5efc5720a4e6ad0aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
