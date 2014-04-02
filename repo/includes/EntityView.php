@@ -215,15 +215,9 @@ abstract class EntityView extends ContextSource {
 		// JavaScript is parsed.
 		$html .= Html::inlineScript( '
 if ( $ ) {
-	$( ".wikibase-entityview" ).addClass( "loading" ).after( function() {
-		var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
-		$div.css( "top", $div.height() + "px" );
-		$div.css(
-			"' . ( $lang->isRTL() ? 'right' : 'left' ) . '",
-			( ( $( this ).width() - $div.width() ) / 2 | 0 ) + "px"
-		);
-		return $div;
-	} );
+	$( ".wikibase-entityview" ).addClass( "loading" ).append(
+		$( "<div>" ).addClass( "mw-small-spinner wb-entity-spinner" )
+	);
 	window.setTimeout( function() {
 		$( ".wikibase-entityview" ).removeClass( "loading" );
 		$( ".wb-entity-spinner" ).remove();
