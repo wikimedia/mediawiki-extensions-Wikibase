@@ -4,8 +4,6 @@ namespace Wikibase\Client;
 
 use Wikibase\SiteLinkLookup;
 use Wikibase\EntityLookup;
-use Wikibase\DataModel\SiteLink;
-use Title;
 
 /**
  * Provides access to sitelinks on repo.
@@ -45,27 +43,56 @@ class ClientSiteLinkLookup {
 
 	/**
 	 * Finds the corresponding item on the repository and
-	 * returns the item's site links including badges.
+	 * returns all the item's site links.
 	 *
 	 * @since 0.5
 	 *
-	 * @param Title $title
+	 * @param string $title
 	 *
 	 * @return SiteLink[]
 	 */
-	public function getSiteLinks( Title $title ) {
-		$siteLink = new SiteLink( $this->localSiteId, $title->getText() );
-		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
-
-		if ( $itemId === null ) {
-			return array();
-		}
-
-		$item = $this->entityLookup->getEntity( $itemId );
+	public function getSiteLinks( $title ) {
+		$item = $this->getItem( $title );
 		if ( $item === null ) {
 			return array();
 		}
 		return $item->getSiteLinks();
+	}
+
+	/**
+	 * Finds the corresponding item on the repository and
+	 * returns the item's site link for the given site id.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $title
+	 * @param string $siteId
+	 *
+	 * @return SiteLink|null
+	 */
+	public function getSiteLink( $title, $siteId ) {
+		$item = $this->getItem( $title );
+		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
+			return null;
+		}
+		return $item->getSiteLink( $siteId );
+	}
+
+	/**
+	 * Finds the corresponding item on the repository.
+	 *
+	 * @param string $title
+	 *
+	 * @return Item|null
+	 */
+	private function getItem( $title ) {
+		$id = $this->siteLinkLookup->getItemIdForLink( $this->localSiteId, $title );
+
+		if ( $id === null ) {
+			return null;
+		}
+
+		return $this->entityLookup->getEntity( $id );
 	}
 
 }
