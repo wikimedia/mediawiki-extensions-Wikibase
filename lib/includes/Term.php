@@ -185,7 +185,7 @@ class Term {
 
 	/**
 	 * @since 0.2
-	 * @return EntityId|null
+	 * @return string|null
 	 * @see \Wikibase\TermSqlIndex::getMatchingIDs
 	 */
 	public function getEntityId() {
