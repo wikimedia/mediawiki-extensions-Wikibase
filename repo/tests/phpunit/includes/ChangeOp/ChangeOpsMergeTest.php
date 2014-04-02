@@ -333,7 +333,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testExceptionThrownWhenLabelDescriptionDuplicatesDetected() {
-		$conflicts = array( $this->getMockTerm( 999, 'imalang', 'imatype', 'foog text' ) );
+		$conflicts = array( $this->getMockTerm( new ItemId( 'Q999' ), 'imalang', 'imatype', 'foog text' ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
 		$changeOps = new ChangeOpsMerge(
@@ -352,7 +352,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testExceptionNotThrownWhenLabelDescriptionDuplicatesDetectedOnFromItem() {
-		$conflicts = array( $this->getMockTerm( 111, 'imalang', 'imatype', 'foog text' ) );
+		$conflicts = array( $this->getMockTerm( new ItemId( 'Q111' ), 'imalang', 'imatype', 'foog text' ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
 		$changeOps = new ChangeOpsMerge(

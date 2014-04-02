@@ -196,9 +196,7 @@ class Term {
 
 			// FIXME: this is using the deprecated EntityId constructor and a hack to get the
 			// correct EntityId type that will not work for entity types other then item and property.
-			$entityId = new EntityId( $entityType, $numericId );
-			$idParser = new BasicEntityIdParser();
-			return $idParser->parse( $entityId->getSerialization() );
+			return new EntityId( $entityType, $numericId );
 		}
 
 		return null;
