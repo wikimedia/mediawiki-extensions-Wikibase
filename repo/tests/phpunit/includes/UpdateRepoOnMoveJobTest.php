@@ -9,7 +9,7 @@ use Wikibase\UpdateRepoOnMoveJob;
  * @covers Wikibase\UpdateRepoOnMoveJob
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
