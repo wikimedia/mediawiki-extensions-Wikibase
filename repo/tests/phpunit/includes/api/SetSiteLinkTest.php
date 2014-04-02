@@ -172,9 +172,9 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			self::$otherItemId = $badge->getId();
 
 			WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array(
-				self::$gaItemId->getPrefixedId() => '',
-				self::$faItemId->getPrefixedId() => '',
-				'Q99999' => '', // Just in case we have a wrong config
+				self::$gaItemId->getPrefixedId(),
+				self::$faItemId->getPrefixedId(),
+				'Q99999', // Just in case we have a wrong config
 			) );
 		}
 		self::$hasSetup = true;
