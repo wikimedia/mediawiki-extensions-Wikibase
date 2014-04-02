@@ -27,6 +27,7 @@
     "wikibase-alias-edit-placeholder": "別名を入力",
     "wikibase-label-input-help-message": "このデータセットに対する名前を$1で入力してください。",
     "wikibase-description-input-help-message": "短い説明を$1で入力してください。",
+    "wikibase-claims": "主張",
     "wikibase-statements": "文",
     "wikibase-terms": "他の言語",
     "wikibase-sitelinks-add": "サイトリンクへのリンクを追加",

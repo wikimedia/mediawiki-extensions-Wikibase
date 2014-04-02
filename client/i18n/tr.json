@@ -19,6 +19,8 @@
     "wikibase-linkitem-not-loggedin-title": "Oturum açmış olmanız gerekiyor",
     "wikibase-property-notfound": "$1 özellik bulunamadı.",
     "wikibase-rc-hide-wikidata": "Vikiveri değişikliklerini $1",
+    "wikibase-rc-hide-wikidata-hide": "gizle",
+    "wikibase-rc-hide-wikidata-show": "göster",
     "wikibase-rc-show-wikidata-pref": "Vikiveri düzenlemelerini son değişikliklerde göster",
     "wikibase-rc-wikibase-edit-title": "Vikiveri değişikliği",
     "wikibase-watchlist-show-changes-pref": "İzleme listemde Vikiveri değişikliklerini göster",
