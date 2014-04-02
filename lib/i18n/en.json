@@ -53,6 +53,8 @@
     "wikibase-globedetails-latitude": "Latitude",
     "wikibase-globedetails-precision": "Precision",
     "wikibase-globedetails-globe": "Globe",
+    "wikibase-parse-error": "Malformed value.",
+    "wikibase-unexpected-error": "Unexpected error: $1.",
     "wikibase-replicationnote": "Please notice that it can take several minutes until the changes are visible on all wikis.",
     "wikibase-sitelinks-wikipedia": "Wikipedia pages linked to this item",
     "wikibase-sitelinks-sitename-columnheading": "Language",
