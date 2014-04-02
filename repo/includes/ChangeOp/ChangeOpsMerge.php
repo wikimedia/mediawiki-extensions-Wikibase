@@ -284,9 +284,9 @@ class ChangeOpsMerge {
 	 *
 	 * @return string
 	 */
-	private function getConflictStringForTerm( $term ) {
-		$itemId = ItemId::newFromNumber( $term->getEntityId() );
-		if( !$itemId->equals( $this->fromItem->getId() ) ) {
+	private function getConflictStringForTerm( Term $term ) {
+		$itemId = $term->getEntityId();
+		if( !$this->fromItem->getId()->equals( $itemId ) ) {
 			return '(' .
 				$itemId->getSerialization() . ' => ' .
 				$term->getLanguage() . ' => ' .
