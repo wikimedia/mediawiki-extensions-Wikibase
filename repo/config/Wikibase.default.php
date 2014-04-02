@@ -45,7 +45,7 @@ return call_user_func( function() {
 		// Should the page names (titles) be normalized against the external site
 		'normalizeItemByTitlePageNames' => false,
 
-		// items allowed to be used as badges
+		// items allowed to be used as badges; this config expects an array of serialized item ids
 		'badgeItems' => array(),
 
 		// Number of seconds for which data output shall be cached.
