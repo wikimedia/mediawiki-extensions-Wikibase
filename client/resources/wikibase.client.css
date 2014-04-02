@@ -30,3 +30,13 @@
 	background-image: url(images/WBC-Asset-Pencil-Hover.png);
 	color: #0645AD !important;
 }
+
+.badge-good-article {
+	/* @embed */
+	list-style-image: url(images/badge-good-article.png);
+}
+
+.badge-featured-article {
+	/* @embed */
+	list-style-image: url(images/badge-featured-article.png);
+}

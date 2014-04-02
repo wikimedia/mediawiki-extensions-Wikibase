@@ -39,6 +39,13 @@ return call_user_func( function() {
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinks' => array(),
+		// array of badges that should be displayed
+		// If a sitelink has two or more badges listed here, we will use the one that
+		// comes first in the list. The array has to consist of item ids pointing to
+		// a class name, like array( 'Q123' => 'featured-article' ) which will result
+		// in a sitelink having the css class "badge-featured-article". Supported
+		// class names are currently "good-article" and "featured-article".
+		'displayBadges' => array(),
 
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
