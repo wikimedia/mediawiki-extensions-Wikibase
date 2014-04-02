@@ -1011,22 +1011,14 @@ span.wb-itemlink-id { /* item id within a link to an item (especially on special
 /********** PROPERTY PAGE **********/
 
 .wb-propertypage .wb-datatype {
-	float: left;
 	clear: both;
-	margin-left: 10px;
-	margin-bottom: 0.2em;
-	margin-top: 0.5em;
+	margin-bottom: .2em;
+	margin-top: .5em;
 }
 
 .wb-propertypage .wb-datatype-label {
-	float: left;
 	font-weight: bold;
-	margin-right: 1ex;
-}
-
-.wb-propertypage .wb-datatype-value {
-	float: left;
-	font-weight: normal;
+	padding-left: 10px;
 }
 
 /********** /PROPERTY PAGE **********/
