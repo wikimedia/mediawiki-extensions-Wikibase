@@ -69,7 +69,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				if ( !( $badge instanceof ItemId ) ) {
 					throw new InvalidArgumentException( '$badges need to be an array of ItemIds or null' );
 				}
-				if ( !array_key_exists( $badge->getPrefixedId(), WikibaseRepo::getDefaultInstance()->getSettings()->get( 'badgeItems' ) ) ) {
+				if ( !in_array( $badge->getPrefixedId(), WikibaseRepo::getDefaultInstance()->getSettings()->get( 'badgeItems' ) ) ) {
 					throw new InvalidArgumentException( 'Only items specified in the config can be badges' );
 				}
 			}
