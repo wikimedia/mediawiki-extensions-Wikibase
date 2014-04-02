@@ -139,14 +139,24 @@ h2.wb-section-heading {
 }
 
 .wb-entity.loading {
+	position: relative;
+}
+
+.wb-entity.loading > * {
 	opacity: .3;
 }
 
-div.wb-entity-spinner { /* loading spinner positioning (animation is taken from .mw-small-spinner) */
-	height: 100px;
+.wb-entity-spinner { /* loading spinner positioning (animation is taken from .mw-small-spinner) */
+	display: none;
+	left: 50%;
+	margin-left: -10px; /* half of the 20px width of .mw-small-spinner */
+	opacity: 1 !important;
 	position: absolute;
-	width: 100px;
-	z-index: 99;
+	top: 40px;
+}
+
+.loading .wb-entity-spinner {
+	display: block;
 }
 
 .wb-entity-undefinedinfo {
