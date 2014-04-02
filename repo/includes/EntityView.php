@@ -175,11 +175,11 @@ abstract class EntityView extends \ContextSource {
 		// corresponsing html
 		$html .= Html::inlineScript( '
 if ( $ ) {
-	$( ".wb-entity" ).fadeTo( 0, .3 ).after( function() {
+	$( ".wb-entity" ).addClass( "loading" ).after( function() {
 		var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
 		$div.css( "top", $div.height() + "px" );
 		$div.css(
-			( "' . $lang->getDir() . '" === "rtl" ) ? "right" : "left",
+			"' . ( $lang->isRTL() ? 'right' : 'left' ) . '",
 			( ( $( this ).width() - $div.width() ) / 2 | 0 ) + "px"
 		);
 		return $div;
@@ -191,7 +191,7 @@ if ( $ ) {
 	// JavaScript is parsed. Since the JavaScript is loaded in the header, it does not make
 	// any sense to attach to window.error here.
 	window.setTimeout( function() {
-		$( ".wb-entity" ).fadeTo( 0, 1 );
+		$( ".wb-entity" ).removeClass( "loading" );
 		$( ".wb-entity-spinner" ).remove();
 	}, 7000 );
 }
