@@ -338,9 +338,8 @@ HTML;
 
 	$templates['wb-property-datatype'] =
 <<<HTML
-<div class="wb-datatype wb-value-row">
-	<span class="wb-datatype-label">$1</span>
-	<span class="wb-datatype-value">$2</span>
+<div class="wb-datatype">
+	<div class="wb-datatype-value">$1</div>
 </div>
 HTML;
 
