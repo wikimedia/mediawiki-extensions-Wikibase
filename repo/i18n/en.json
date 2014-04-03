@@ -268,8 +268,6 @@
     "wikibase-api-param-illegal": "An illegal set of parameters have been used",
     "wikibase-api-permissiondenied": "You do not have the permissions needed to carry out this action",
     "wikibase-api-wrong-class": "Wrong class type detected",
-    "wikibase-parse-error": "Malformed value.",
-    "wikibase-unexpected-error": "Unexpected error: $1.",
     "wikibase-self-conflict-patched": "Your edit was patched into the latest version, overriding some of your own intermediate changes.",
     "wikibase-conflict-patched": "Your edit was patched into the latest version.",
     "wikibase-restoreold": "restore",
