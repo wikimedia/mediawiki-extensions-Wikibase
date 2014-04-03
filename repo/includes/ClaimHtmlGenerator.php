@@ -74,11 +74,18 @@ class ClaimHtmlGenerator {
 
 		$mainSnakHtml = $this->getSnakHtml( $claim->getMainSnak(), false );
 
-		$rankHtml = '';
-		$referencesHeading = '';
-		$referencesHtml = '';
+		$claimHtml = '';
 
-		if( is_a( $claim, 'Wikibase\Statement' ) ) {
+		if( !is_a( $claim, 'Wikibase\Statement' ) ) {
+
+			$claimHtml = wfTemplate( 'wb-claim',
+				$claim->getGuid(),
+				$mainSnakHtml,
+				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
+				$editSectionHtml
+			);
+
+		} else {
 			$serializedRank = ClaimSerializer::serializeRank( $claim->getRank() );
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
@@ -100,19 +107,17 @@ class ClaimHtmlGenerator {
 			)->text();
 
 			$referencesHtml = $this->getHtmlForReferences( $claim->getReferences() );
-		}
 
-		// @todo: Use 'wb-claim' or 'wb-statement' template accordingly
-		// @todo: get rid of usage of global wfTemplate function
-		$claimHtml = wfTemplate( 'wb-statement',
-			$rankHtml,
-			$claim->getGuid(),
-			$mainSnakHtml,
-			$this->getHtmlForQualifiers( $claim->getQualifiers() ),
-			$editSectionHtml,
-			$referencesHeading,
-			$referencesHtml
-		);
+			$claimHtml = wfTemplate( 'wb-statement',
+				$rankHtml,
+				$claim->getGuid(),
+				$mainSnakHtml,
+				$this->getHtmlForQualifiers( $claim->getQualifiers() ),
+				$editSectionHtml,
+				$referencesHeading,
+				$referencesHtml
+			);
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $claimHtml;
