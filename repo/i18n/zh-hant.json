@@ -223,8 +223,6 @@
     "wikibase-mylanguagefallbackchain-babel": "您可通過於{{GENDER:$1|您的}}[[Special:MyPage|用戶頁]]加入<nowiki>{{#babel: }}</nowiki>以編輯。",
     "wikibase-mylanguagefallbackchain-converted-item": "$1~$2，轉換自$3~$4",
     "wikibase-api-no-such-sitelink": "無法找尋此類站點的連接",
-    "wikibase-parse-error": "值格式不準確。",
-    "wikibase-unexpected-error": "意外錯誤：$1。",
     "wikibase-self-conflict-patched": "您的編輯已成最新版本，覆蓋了您自己中間做的一些更改。",
     "wikibase-conflict-patched": "您的編輯已成最新版本。",
     "wikibase-restoreold": "恢復",

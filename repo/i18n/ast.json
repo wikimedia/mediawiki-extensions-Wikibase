@@ -212,7 +212,6 @@
     "wikibase-mylanguagefallbackchain-babel": "Pue editala poniendo <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|so}} [[Special:MyPage|páxina d'usuariu]].",
     "wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertíu del $3 - $4",
     "wikibase-api-no-such-sitelink": "Nun se pudo alcontrar esi enllaz a un sitiu",
-    "wikibase-parse-error": "Valor mal formáu.",
     "wikibase-self-conflict-patched": "La so edición parcheóse na última versión, sobreescribiendo dalgún de los sos cambios intermedios.",
     "wikibase-conflict-patched": "La so edición parcheóse na última versión.",
     "wikibase-restoreold": "restaurar",

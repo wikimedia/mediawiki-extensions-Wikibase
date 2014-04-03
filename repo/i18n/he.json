@@ -221,8 +221,6 @@
     "wikibase-mylanguagefallbackchain-babel": "ניתן לערוך אותה באמצעות שימוש בקוד <nowiki>{{#babel: }}</nowiki> ב[[Special:MyPage|דף המשתמש]] {{GENDER:$1|שלך}}.",
     "wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, הומר מ־$3 – $4",
     "wikibase-api-no-such-sitelink": "לא נמצא קישור אתר כזה",
-    "wikibase-parse-error": "ערך בלתי־תקין.",
-    "wikibase-unexpected-error": "שגיאה בלתי־צפויה: $1.",
     "wikibase-self-conflict-patched": "העריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה ודרסה כמה ששינויי־הביניים שעשית.",
     "wikibase-conflict-patched": "עריכה שלך נוספה כטלאי על־גבי הגרסה האחרונה.",
     "wikibase-restoreold": "איפוס",

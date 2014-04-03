@@ -4,7 +4,8 @@
             "Geraki",
             "Nikosguard",
             "Protnet",
-            "Xaris333"
+            "Xaris333",
+            "Indoril"
         ]
     },
     "wikibase-desc": "Αποθετήριο δομημένων δεδομένων",
@@ -29,6 +30,7 @@
     "wikibase-label-input-help-message": "Πληκτρολογήστε τον τίτλο γι αυτό το σύνολο δεδομένων στα  $1.",
     "wikibase-description-input-help-message": "Πληκτρολογήστε μια σύντομη περιγραφή στα $1 .",
     "wikibase-statements": "Δηλώσεις",
+    "wikibase-constraints": "Περιορισμοί",
     "wikibase-terms": "Σε άλλες γλώσσες",
     "wikibase-sitelinks-add": "προσθέσετε έναν σύνδεσμο προς μια ιστοσελίδα-σύνδεση",
     "wikibase-sitelinks-empty": "Καμία σύνδεση τοποθεσίας για αυτό το στοιχείο ακόμα.",

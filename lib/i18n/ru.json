@@ -57,6 +57,8 @@
     "wikibase-globedetails-latitude": "Широта",
     "wikibase-globedetails-precision": "Точность",
     "wikibase-globedetails-globe": "Глобус",
+    "wikibase-parse-error": "Некорректное значение.",
+    "wikibase-unexpected-error": "Непредвиденная ошибка: $1.",
     "wikibase-replicationnote": "Пожалуйста, обратите внимание, что может пройти несколько минут, пока изменения станут видны во всех вики-проектах",
     "wikibase-sitelinks-wikipedia": "Страницы Википедии, связанные с этим элементом",
     "wikibase-sitelinks-sitename-columnheading": "Язык",

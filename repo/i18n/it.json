@@ -225,8 +225,6 @@
     "wikibase-mylanguagefallbackchain-babel": "Puoi modificarla inserendo <nowiki>{{#babel: }}</nowiki> nella {{GENDER:$1|tua}} [[Special:MyPage|pagina utente]].",
     "wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertito da $3 - $4",
     "wikibase-api-no-such-sitelink": "Non è possibile trovare un collegamento al sito",
-    "wikibase-parse-error": "Valore malformato.",
-    "wikibase-unexpected-error": "Errore imprevisto: $1.",
     "wikibase-self-conflict-patched": "La tua modifica è stata inserita nell'ultima versione, escludendo alcune delle tue modifiche intermedie.",
     "wikibase-conflict-patched": "La tua modifica è stata inserita nell'ultima versione.",
     "wikibase-restoreold": "ripristina",

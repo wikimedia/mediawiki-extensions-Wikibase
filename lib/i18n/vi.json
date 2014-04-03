@@ -54,6 +54,8 @@
     "wikibase-globedetails-latitude": "Vĩ độ",
     "wikibase-globedetails-precision": "Độ chính xác",
     "wikibase-globedetails-globe": "Địa cầu",
+    "wikibase-parse-error": "Giá trị hư hỏng.",
+    "wikibase-unexpected-error": "Lỗi bất ngờ: $1.",
     "wikibase-replicationnote": "Xin lưu ý, có thể phải chờ vài phút để cho các wiki trình bày được các thay đổi",
     "wikibase-sitelinks-wikipedia": "Trang Wikipedia được liên kết với khoản mục này",
     "wikibase-sitelinks-sitename-columnheading": "Ngôn ngữ",

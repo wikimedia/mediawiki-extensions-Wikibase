@@ -188,6 +188,7 @@ $specialPageAliases['it'] = array(
 	'SetDescription' => array( 'ImpostaDescrizione' ),
 	'SetAliases' => array( 'ImpostaAlias' ),
 	'SetSiteLink' => array( 'ImpostaSitelink' ),
+	'MergeItems' => array( 'UnisciElementi' ),
 	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
 	'EntitiesWithoutDescription' => array( 'EntitàSenzaDescrizione' ),
 	'ItemsWithoutSitelinks' => array( 'ElementiSenzaSitelinks' ),

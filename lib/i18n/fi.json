@@ -46,6 +46,7 @@
     "wikibase-quantitydetails-upperbound": "Yläraja",
     "wikibase-quantitydetails-lowerbound": "Alaraja",
     "wikibase-quantitydetails-unit": "Yksikkö",
+    "wikibase-parse-error": "Virheellinen arvo.",
     "wikibase-replicationnote": "Huomaa, että voi kestää useita minuutteja ennen kuin muutokset näkyvät kaikissa wikeissä.",
     "wikibase-sitelinks-wikipedia": "Tähän kohteeseen linkitetyt Wikipedia-sivut",
     "wikibase-sitelinks-sitename-columnheading": "Kieli",

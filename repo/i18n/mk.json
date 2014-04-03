@@ -216,8 +216,6 @@
     "wikibase-mylanguagefallbackchain-verbatim-item": "$1 — $2",
     "wikibase-mylanguagefallbackchain-converted-item": "$1 — $2, претворено од $3 — $4",
     "wikibase-api-no-such-sitelink": "Не пронајдов таква викиврска",
-    "wikibase-parse-error": "Погрешно срочена вредност.",
-    "wikibase-unexpected-error": "Неочекувана грешка: $1.",
     "wikibase-self-conflict-patched": "Вашето уредување е прикрпено на последната верзија, презапишувајќи врз некои од вашите меѓувремени промени.",
     "wikibase-conflict-patched": "Вашето уредување е прикрпено на последната верзија.",
     "wikibase-restoreold": "врати",

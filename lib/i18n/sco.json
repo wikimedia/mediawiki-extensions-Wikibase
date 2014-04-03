@@ -14,5 +14,7 @@
     "wikibase-globedetails-longitude": "Langitude",
     "wikibase-globedetails-latitude": "Latitude",
     "wikibase-globedetails-precision": "Preceesion",
-    "wikibase-globedetails-globe": "Globe"
+    "wikibase-globedetails-globe": "Globe",
+    "wikibase-parse-error": "Malformed value.",
+    "wikibase-unexpected-error": "Onexpectit mistak: $1."
 }

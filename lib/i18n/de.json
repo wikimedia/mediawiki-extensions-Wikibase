@@ -57,6 +57,8 @@
     "wikibase-globedetails-latitude": "Breitengrad",
     "wikibase-globedetails-precision": "Genauigkeit",
     "wikibase-globedetails-globe": "Globus",
+    "wikibase-parse-error": "Fehlerhafter Wert.",
+    "wikibase-unexpected-error": "Unerwarteter Fehler: $1.",
     "wikibase-replicationnote": "Bitte bedenke, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.",
     "wikibase-sitelinks-wikipedia": "Wikipedia-Seiten zu diesem Objekt",
     "wikibase-sitelinks-sitename-columnheading": "Sprache",

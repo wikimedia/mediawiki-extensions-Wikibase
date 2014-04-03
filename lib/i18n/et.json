@@ -46,6 +46,7 @@
     "wikibase-globedetails-longitude": "Pikkus",
     "wikibase-globedetails-latitude": "Laius",
     "wikibase-globedetails-precision": "Esitustäpsus",
+    "wikibase-parse-error": "Rikutud väärtus.",
     "wikibase-replicationnote": "Palun pane tähele, et võib kuluda mitu minutit, enne kui muudatused on kõigis vikides nähtavad.",
     "wikibase-sitelinks-wikipedia": "Sellele üksusele viitavad Vikipeedia-leheküljed",
     "wikibase-sitelinks-sitename-columnheading": "Keel",

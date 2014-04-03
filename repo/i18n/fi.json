@@ -223,7 +223,6 @@
     "wikibase-mylanguagefallbackchain-text": "Varakieliketjua käytetään näyttämään aiheiden nimet sinulle seuraavasti.",
     "wikibase-mylanguagefallbackchain-babel": "Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> {{GENDER:$1|sinun}} [[Special:MyPage|käyttäjäsivullesi]].",
     "wikibase-api-no-such-sitelink": "Tällaista sivustolinkkiä ei löytynyt",
-    "wikibase-parse-error": "Virheellinen arvo.",
     "wikibase-restoreold": "palauta",
     "wikibase-restore-summary": "Käyttäjän [[Special:Contributions/$2|$2]] tekemän muokkauksen $1 palautus",
     "wikibase-no-direct-editing": "Sivun lähdekoodin muokkaaminen on poistettu käytöstä nimiavaruudessa $1",

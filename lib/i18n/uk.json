@@ -58,6 +58,7 @@
     "wikibase-globedetails-latitude": "Широта",
     "wikibase-globedetails-precision": "Точність",
     "wikibase-globedetails-globe": "Глобус",
+    "wikibase-parse-error": "Неправильний формат значення.",
     "wikibase-replicationnote": "Будь ласка, зверніть увагу, що це може зайняти декілька хвилин, поки зміни будуть помітні на всіх вікі.",
     "wikibase-sitelinks-wikipedia": "Список сторінок Вікіпедії, що посилаються на цей елемент",
     "wikibase-sitelinks-sitename-columnheading": "Мова",

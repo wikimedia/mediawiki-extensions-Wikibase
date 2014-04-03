@@ -53,6 +53,8 @@
     "wikibase-globedetails-latitude": "קו־רוחב",
     "wikibase-globedetails-precision": "דיוק",
     "wikibase-globedetails-globe": "כדור",
+    "wikibase-parse-error": "ערך בלתי־תקין.",
+    "wikibase-unexpected-error": "שגיאה בלתי־צפויה: $1.",
     "wikibase-replicationnote": "יש לשים לב לכך שייקח מספר דקות עד שהשינויים יוצגו בכל אתרי הוויקי",
     "wikibase-sitelinks-wikipedia": "דפי ויקיפדיה שמקושרים לפריט הזה",
     "wikibase-sitelinks-sitename-columnheading": "שפה",

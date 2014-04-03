@@ -232,8 +232,6 @@
     "wikibase-mylanguagefallbackchain-babel": "Du kannst sie bearbeiten, indem du <nowiki>{{#babel:}}</nowiki> in {{GENDER:$1|deine}} [[Special:MyPage|Benutzerseite]] einfügst.",
     "wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, konvertiert von $3 – $4",
     "wikibase-api-no-such-sitelink": "Dieser Websitelink konnte nicht gefunden werden",
-    "wikibase-parse-error": "Fehlerhafter Wert.",
-    "wikibase-unexpected-error": "Unerwarteter Fehler: $1.",
     "wikibase-self-conflict-patched": "Deine Bearbeitung wurde in die aktuellste Version gepatcht und deine eigenen zwischenzeitlichen Änderungen überschrieben.",
     "wikibase-conflict-patched": "Deine Bearbeitung wurde in die aktuellste Version gepatcht.",
     "wikibase-restoreold": "zurücksetzen",

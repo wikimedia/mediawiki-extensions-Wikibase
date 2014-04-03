@@ -54,6 +54,8 @@
     "wikibase-globedetails-longitude": "Długość geograficzna",
     "wikibase-globedetails-latitude": "Szerokość geograficzna",
     "wikibase-globedetails-precision": "Precyzja",
+    "wikibase-parse-error": "Nieprawidłowa wartość.",
+    "wikibase-unexpected-error": "Nieoczekiwany błąd: $1.",
     "wikibase-replicationnote": "Zwróć uwagę, że może upłynąć kilka minut, zanim zmiany staną się widoczne na wszystkich wiki",
     "wikibase-sitelinks-wikipedia": "Strony Wikipedii powiązane z tym elementem",
     "wikibase-sitelinks-sitename-columnheading": "Język",

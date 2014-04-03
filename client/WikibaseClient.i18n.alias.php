@@ -52,6 +52,11 @@ $specialPageAliases['he'] = array(
 	'UnconnectedPages' => array( 'דפים_שלא_מקושרים_לפריטים' ),
 );
 
+/** Italian (italiano) */
+$specialPageAliases['it'] = array(
+	'UnconnectedPages' => array( 'PagineNonConnesse' ),
+);
+
 /** Japanese (日本語) */
 $specialPageAliases['ja'] = array(
 	'UnconnectedPages' => array( '関連付けられていないページ', '関連付けのないページ' ),

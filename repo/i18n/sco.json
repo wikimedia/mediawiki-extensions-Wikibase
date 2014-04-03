@@ -17,8 +17,6 @@
     "wikibase-mergeitems-toid": "The id tae merge til",
     "wikibase-mergeitems-submit": "Merge eitems",
     "wikibase-listdatatypes-intro": "This is ae leet o aw datatypes available oan this instawation:",
-    "wikibase-parse-error": "Malformed value.",
-    "wikibase-unexpected-error": "Onexpectit mistak: $1.",
     "wikibase-special-mergeitems-error-prefix": "The eetems coudna be merged. The follaein mistak occurred:",
     "wikibase-item-summary-wblinktitles-create": "Cræftit this eetem fer tae connect pages",
     "wikibase-item-summary-wblinktitles-connect": "Eikit ae leid airtin fer tae connect pages",

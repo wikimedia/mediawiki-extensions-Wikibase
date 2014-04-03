@@ -61,6 +61,8 @@
     "wikibase-globedetails-latitude": "纬度",
     "wikibase-globedetails-precision": "精度",
     "wikibase-globedetails-globe": "世界各地",
+    "wikibase-parse-error": "值的格式有误。",
+    "wikibase-unexpected-error": "意外错误：$1。",
     "wikibase-replicationnote": "该更改可能需要几分钟才能在所有的维基项目上显示，请谅解。",
     "wikibase-sitelinks-wikipedia": "链接至该项的维基百科页面",
     "wikibase-sitelinks-sitename-columnheading": "语言",

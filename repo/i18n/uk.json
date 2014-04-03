@@ -222,7 +222,6 @@
     "wikibase-mylanguagefallbackchain-babel": "Ви можете змінити ланцюжок, розмістивши блок <nowiki>{{#babel:}}</nowiki> на {{GENDER:$1|своїй|своїй}} [[Special:MyPage|сторінці користувача]].",
     "wikibase-mylanguagefallbackchain-converted-item": "$1-$2 , перетворені з  $3-$4",
     "wikibase-api-no-such-sitelink": "Неможливо знайти таке посилання на сайт",
-    "wikibase-parse-error": "Неправильний формат значення.",
     "wikibase-self-conflict-patched": "Ваша правка була поміщена в останню версію, при цьому були перекриті деякі з ваших власних проміжних змін.",
     "wikibase-conflict-patched": "Ваша правка виправлена в останній версії.",
     "wikibase-restoreold": "відновити",

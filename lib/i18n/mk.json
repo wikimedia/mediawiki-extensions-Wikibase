@@ -52,6 +52,8 @@
     "wikibase-globedetails-latitude": "Геог. ширина",
     "wikibase-globedetails-precision": "Уточнетост:",
     "wikibase-globedetails-globe": "Глобус",
+    "wikibase-parse-error": "Погрешно срочена вредност.",
+    "wikibase-unexpected-error": "Неочекувана грешка: $1.",
     "wikibase-replicationnote": "Имајте предвид дека се потребни неколку минути за промените да станат видливи на сите викија",
     "wikibase-sitelinks-wikipedia": "Страници на Википедија сврзани со предметот",
     "wikibase-sitelinks-sitename-columnheading": "Јазик",
