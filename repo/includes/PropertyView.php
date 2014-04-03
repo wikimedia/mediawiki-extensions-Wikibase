@@ -43,13 +43,14 @@ class PropertyView extends EntityView {
 
 		$html .= $this->getHtmlForLabel( $property, $editable );
 		$html .= $this->getHtmlForDescription( $property, $editable );
-		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		$html .= wfTemplate( 'wb-entity-header-separator' );
 
 		$html .= $this->getHtmlForAliases( $property, $editable );
 		$html .= $this->getHtmlForToc();
 		$html .= $this->getHtmlForTermBox( $property, $editable );
+
+		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$html .= $this->getHtmlForClaims( $property, $editable );
@@ -78,7 +79,7 @@ class PropertyView extends EntityView {
 	protected function getHtmlForClaimsSectionHeading( Entity $entity, $editable = true ) {
 		$html = wfTemplate(
 			'wb-section-heading',
-			wfMessage( 'wikibase-constraints' ),
+			wfMessage( 'wikibase-attributes' )->escaped(),
 			'claims' // ID - TODO: should not be added if output page is not the entity's page
 		);
 
@@ -103,8 +104,11 @@ class PropertyView extends EntityView {
 	protected function getHtmlForDataType( DataType $dataType, $editable = true ) {
 		$lang = $this->getLanguage();
 
-		return wfTemplate( 'wb-property-datatype',
-			wfMessage( 'wikibase-datatype-label' )->text(),
+		return wfTemplate( 'wb-section-heading',
+			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
+			'datatype'
+		)
+		. wfTemplate( 'wb-property-datatype',
 			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) )
 		);
 	}
