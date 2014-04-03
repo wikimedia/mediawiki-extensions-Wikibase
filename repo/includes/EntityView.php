@@ -10,6 +10,7 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\SnakHtmlGenerator;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
@@ -26,13 +27,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  */
 abstract class EntityView extends \ContextSource {
-
-	/**
-	 * @since 0.4
-	 *
-	 * @var SnakFormatter
-	 */
-	protected $snakFormatter;
 
 	/**
 	 * @var EntityInfoBuilder
@@ -63,6 +57,11 @@ abstract class EntityView extends \ContextSource {
 	 * @var ParserOutputJsConfigBuilder
 	 */
 	protected $configBuilder;
+
+	/**
+	 * @var ClaimHtmlGenerator
+	 */
+	protected $claimHtmlGenerator;
 
 	/**
 	 * Maps entity types to the corresponding entity view.
@@ -109,7 +108,6 @@ abstract class EntityView extends \ContextSource {
 		}
 
 		$this->setContext( $context );
-		$this->snakFormatter = $snakFormatter;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -118,6 +116,17 @@ abstract class EntityView extends \ContextSource {
 
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->textInjector = new TextInjector();
+
+		// @todo inject in constructor
+		$snakHtmlGenerator = new SnakHtmlGenerator(
+			$snakFormatter,
+			$entityTitleLookup
+		);
+
+		$this->claimHtmlGenerator = new ClaimHtmlGenerator(
+			$snakHtmlGenerator,
+			$entityTitleLookup
+		);
 	}
 
 	/**
@@ -531,6 +540,7 @@ abstract class EntityView extends \ContextSource {
 		 * @var Claim[] $claims
 		 */
 		$claimsHtml = '';
+
 		foreach( $claimsByProperty as $claims ) {
 			$propertyHtml = '';
 
@@ -546,14 +556,12 @@ abstract class EntityView extends \ContextSource {
 
 			$htmlForEditSection = $this->getHtmlForEditSection( '', 'span' ); // TODO: add link to SpecialPage
 
-			$claimHtmlGenerator = new ClaimHtmlGenerator(
-				$this->snakFormatter,
-				$this->entityTitleLookup,
-				$propertyLabels
-			);
-
 			foreach( $claims as $claim ) {
-				$propertyHtml .= $claimHtmlGenerator->getHtmlForClaim( $claim, $htmlForEditSection );
+				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
+					$claim,
+					$propertyLabels,
+					$htmlForEditSection
+				);
 			}
 
 			$toolbarHtml = wfTemplate( 'wikibase-toolbar',
