@@ -269,8 +269,9 @@ class ResultBuilder {
 	 * @param EntityRevision $entityRevision
 	 * @param SerializationOptions|null $options
 	 * @param array|string $props a list of fields to include, or "all"
+	 * @param array $siteIds A list of site IDs to filter by
 	 */
-	public function addEntityRevision( EntityRevision $entityRevision, SerializationOptions $options = null, $props = 'all' ) {
+	public function addEntityRevision( EntityRevision $entityRevision, SerializationOptions $options = null, $props = 'all', $siteIds = array() ) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
 		$record = array();
@@ -301,6 +302,14 @@ class ResultBuilder {
 			// as in, $entitySerialization = array_intersect_key( $entitySerialization, array_flip( $props ) )
 			$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $serializerOptions );
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
+
+			if( array_key_exists( 'sitelinks',$entitySerialization ) ) {
+				foreach( $entitySerialization['sitelinks'] as $key => $sitelink ) {
+					if( !in_array( $sitelink['site'], $siteIds ) ) {
+						unset( $entitySerialization['sitelinks'][$key] );
+					}
+				}
+			}
 
 			$record = array_merge( $record, $entitySerialization );
 		}
