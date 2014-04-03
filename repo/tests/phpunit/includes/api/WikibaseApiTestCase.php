@@ -8,7 +8,9 @@ use TestSites;
 use TestUser;
 use UsageException;
 use User;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\EntityFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
@@ -75,38 +77,41 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
+	/**
+	 * @param string[] $handles
+	 */
 	protected function initTestEntities( $handles ) {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
 		foreach( $activeHandles as $handle => $id ) {
 			if( array_key_exists( $handle, $activeHandles ) ) {
-				$params = EntityTestHelper::getEntityClear( $handle );
-				$params['action'] = 'wbeditentity';
-				$this->doApiRequestWithToken( $params );
+				$id = EntityTestHelper::parseEntityId( $id );
+
+				$store->deleteEntity( $id, 'reset test entity', $GLOBALS['wgUser'] );
+				EntityTestHelper::unRegisterEntity( $handle );
 			}
 		}
 
 		foreach( $handles as $handle ) {
-			$params = EntityTestHelper::getEntity( $handle );
-			$params['action'] = 'wbeditentity';
-			list($res,,) = $this->doApiRequestWithToken( $params );
-			EntityTestHelper::registerEntity( $handle, $res['entity']['id'], $res['entity'] );
-		}
+			$data = EntityTestHelper::getEntityData( $handle );
 
+			$entity = EntityTestHelper::createEntity( $data );
+			EntityTestHelper::registerEntity( $handle, $entity );
+		}
 	}
+
 
 	/**
 	 * Loads an entity from the database (via an API call).
 	 */
 	protected function loadEntity( $id ) {
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbgetentities',
-				'format' => 'json', // make sure IDs are used as keys.
-				'ids' => $id )
-		);
+		$id = EntityTestHelper::parseEntityid( $id );
 
-		return $res['entities'][$id];
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$entity = $lookup->getEntity( $id );
+
+		return EntityTestHelper::serializeEntity( $entity );
 	}
 
 	/**
@@ -154,43 +159,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @return array array the flat version of $data
 	 */
 	public static function flattenArray( $data, $keyField, $valueField, $multiValue = false, array &$into = null ) {
-		if ( $into === null ) {
-			$into = array();
-		}
-
-		foreach ( $data as $index => $value ) {
-			if ( is_array( $value ) ) {
-				if ( isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
-					// found "deep" entry in the array
-					$k = $value[ $keyField ];
-					$v = $value[ $valueField ];
-				} elseif ( isset( $value[0] ) && !is_array( $value[0] ) && $multiValue ) {
-					// found "flat" multi-value entry in the array
-					$k = $index;
-					$v = $value;
-				} else {
-					// found list, recurse
-					self::flattenArray( $value, $keyField, $valueField, $multiValue, $into );
-					continue;
-				}
-			} else {
-				// found "flat" entry in the array
-				$k = $index;
-				$v = $value;
-			}
-
-			if ( $multiValue ) {
-				if ( is_array( $v ) ) {
-					$into[$k] = empty( $into[$k] ) ? $v : array_merge( $into[$k], $v );
-				} else {
-					$into[$k][] = $v;
-				}
-			} else {
-				$into[$k] = $v;
-			}
-		}
-
-		return $into;
+		return EntityTestHelper::flattenArray( $data, $keyField, $valueField, $multiValue, $into );
 	}
 
 	/**
@@ -255,7 +224,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		if ( isset( $expected['claims'] ) ) {
 			if( ! ( $expectEmptyArrays === false && $expected['claims'] === array() ) ) {
 				$data = self::flattenArray( $actual['claims'], 'mainsnak', 'value', true );
-				$exp = self::flattenArray( $expected['claims'], 'language', 'value', true );
+				$exp = self::flattenArray( $expected['claims'], 'mainsnak', 'value', true );
 				$count = count( $expected['claims'] );
 
 				for( $i = 0; $i < $count; $i++ ) {

@@ -2,7 +2,18 @@
 
 namespace Wikibase\Test\Api;
 
+use LogicException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\EntityId;
+use Wikibase\Lib\ClaimGuidGenerator;
+use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
+use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @licence GNU GPL v2+
@@ -34,15 +45,15 @@ class EntityTestHelper {
 	 */
 	private static $entityData = array(
 		'Empty' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(),
 		),
 		'Empty2' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(),
 		),
 		'Berlin' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(
 				"sitelinks" => array(
 					array( "site" => "dewiki", "title" => "Berlin" ),
@@ -79,7 +90,7 @@ class EntityTestHelper {
 			)
 		),
 		'London' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(
 				"sitelinks" => array(
 					array( "site" => "enwiki", "title" => "London" ),
@@ -116,7 +127,7 @@ class EntityTestHelper {
 			)
 		),
 		'Oslo' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(
 				"sitelinks" => array(
 					array( "site" => "dewiki", "title" => "Oslo" ),
@@ -152,7 +163,7 @@ class EntityTestHelper {
 			)
 		),
 		'Episkopi' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(
 				"sitelinks" => array(
 					array( "site" => "dewiki", "title" => "Episkopi Cantonment" ),
@@ -177,7 +188,7 @@ class EntityTestHelper {
 			)
 		),
 		'Leipzig' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(
 				"labels" => array(
 					array( "language" => "de", "value" => "Leipzig" ),
@@ -189,7 +200,7 @@ class EntityTestHelper {
 			)
 		),
 		'Guangzhou' => array(
-			"new" => "item",
+			"type" => "item",
 			"data" => array(
 				"labels" => array(
 					array( "language" => "de", "value" => "Guangzhou" ),
@@ -211,7 +222,7 @@ class EntityTestHelper {
 	 * @throws OutOfBoundsException
 	 * @return array of entity data
 	 */
-	public static function getEntity( $handle ){
+	public static function getEntityData( $handle ){
 		if( !array_key_exists( $handle, self::$entityData ) ){
 			throw new OutOfBoundsException( "No entity defined with handle {$handle}" );
 		}
@@ -222,34 +233,6 @@ class EntityTestHelper {
 		}
 
 		return $entity;
-	}
-
-	/**
-	 * Get the data to pass to the api to clear the entity with the given handle
-	 * @param $handle string of entity to get data for
-	 * @throws OutOfBoundsException
-	 * @return array|null
-	 */
-	public static function getEntityClear( $handle ){
-		if( !array_key_exists( $handle, self::$activeHandles ) ){
-			throw new OutOfBoundsException( "No entity clear data defined with handle {$handle}" );
-		}
-		$id = self::$activeHandles[ $handle ];
-		self::unRegisterEntity( $handle );
-		return array( 'id' => $id, 'data' => '{}', 'clear' => '' );
-	}
-
-	/**
-	 * Get the data to pass to the api to create the entity with the given handle
-	 * @param $handle
-	 * @return mixed
-	 * @throws OutOfBoundsException
-	 */
-	public static function getEntityData( $handle ){
-		if( !array_key_exists( $handle, self::$entityData ) ){
-			throw new OutOfBoundsException( "No entity defined with handle {$handle}" );
-		}
-		return self::$entityData[ $handle ]['data'];
 	}
 
 	/**
@@ -307,16 +290,42 @@ class EntityTestHelper {
 
 	/**
 	 * Register the entity after it has been created
-	 * @param $handle
-	 * @param $id
+	 * @param string $handle
+	 * @param string $id
 	 * @param null $entity
 	 */
-	public static function registerEntity( $handle, $id, $entity = null) {
+	public static function registerEntityOutput( $handle, $id, $entity = null ) {
 		self::$activeHandles[ $handle ] = $id;
 		self::$activeIds[ $id ] = $handle;
+
 		if( $entity ){
 			self::$entityOutput[ $handle ] = $entity;
 		}
+	}
+
+	/**
+	 * Register the entity after for the given handle
+	 *
+	 * @param string $handle
+	 * @param Entity $entity
+	 */
+	public static function registerEntity( $handle, Entity $entity ) {
+		$id = $entity->getId()->getSerialization();
+
+		$data = self::serializeEntity( $entity );
+
+		self::registerEntityOutput( $handle, $id, $data );
+	}
+
+	/**
+	 * @param Entity $entity
+	 *
+	 * @return array Entity data (external style).
+	 */
+	public static function serializeEntity( Entity $entity ) {
+		$entitySerializer = new DispatchingEntitySerializer( new SerializerFactory() );
+		$data = $entitySerializer->getSerialized( $entity );
+		return $data;
 	}
 
 	/**
@@ -324,7 +333,7 @@ class EntityTestHelper {
 	 * @param $handle
 	 * @throws OutOfBoundsException
 	 */
-	private static function unRegisterEntity( $handle ) {
+	public static function unRegisterEntity( $handle ) {
 		unset( self::$activeIds[ self::$activeHandles[ $handle ] ] );
 		unset( self::$activeHandles[ $handle ] );
 	}
@@ -385,6 +394,245 @@ class EntityTestHelper {
 		} elseif ( is_string( $data ) ) {
 			$data = str_replace( array_keys( $idMap ), array_values( $idMap ), $data );
 		}
+	}
+
+	/**
+	 * @param string $type
+	 * @param array $data entity data (internal style)
+	 *
+	 * @return Entity
+	 */
+	private static function newEntity( $type, $serializedEntity ) {
+		if ( $type === Property::ENTITY_TYPE ) {
+			$entity = Property::newFromArray( $serializedEntity );
+		} else {
+			$entity = Item::newFromArray( $serializedEntity );
+		}
+
+		return $entity;
+	}
+
+	/**
+	 * Creates an entity in the database.
+	 *
+	 * @param array $data as provided by getEntityData()
+	 * @return Entity
+	 */
+	public static function createEntity( $data ) {
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$rawEntityData = $data['data'];
+
+		if ( is_string( $rawEntityData ) ) {
+			$rawEntityData = json_decode( $rawEntityData, true );
+		}
+
+		if ( isset( $rawEntityData['claims'] ) ) {
+			$claims = $rawEntityData['claims'];
+			unset( $rawEntityData['claims'] );
+		} else {
+			$claims = null;
+		}
+
+		$serializedEntity = self::convertToInternalSerialization( $rawEntityData );
+		$entity = self::newEntity( $data['type'], $serializedEntity );
+
+		$store->saveEntity( $entity, 'init test entity', $GLOBALS['wgUser'], EDIT_NEW );
+		$entityId = $entity->getId();
+
+		if ( $claims ) {
+			// If there are claims, inject GUIDs, put claims back into entity data, and save again.
+			$claims = self::injectClaimGuids( $claims, $entityId );
+
+			$rawEntityData['claims'] = $claims;
+			$serializedEntity = self::convertToInternalSerialization( $rawEntityData );
+
+			$entity = self::newEntity( $data['type'], $serializedEntity );
+			$entity->setId( $entityId );
+
+			$entity->getClaims();
+			$store->saveEntity( $entity, 'claims for test entity', $GLOBALS['wgUser'], EDIT_UPDATE );
+		}
+
+		return $entity;
+	}
+
+	/**
+	 * @param array[] $claims
+	 * @param EntityId $entityId
+	 *
+	 * @return array[]
+	 */
+	private static function injectClaimGuids( $claims, EntityId $entityId ) {
+		$generator = new ClaimGuidGenerator( $entityId );
+
+		foreach ( $claims as &$claim ) {
+			$claim['id'] = $generator->newGuid();
+		}
+
+		return $claims;
+	}
+
+	private static function convertToInternalSerialization( array $data ) {
+		$internal = array();
+
+		if ( isset( $data['labels'] ) ) {
+			$internal['label'] = self::flattenArray( $data['labels'], 'language', 'value' );
+		}
+
+		if ( isset( $data['descriptions'] ) ) {
+			$internal['description'] = self::flattenArray( $data['descriptions'], 'language', 'value' );
+		}
+
+		if ( isset( $data['aliases'] ) ) {
+			$internal['aliases'] = self::flattenArray( $data['aliases'], 'language', 'value', true );
+		}
+
+		if ( isset( $data['sitelinks'] ) ) {
+			$internal['links'] = self::flattenArray( $data['sitelinks'], 'site', 'title' );
+		}
+
+		if ( isset( $data['claims'] ) ) {
+			$internal['claims'] = array();
+			foreach ( $data['claims'] as $claim ) {
+				$internal['claims'][] = self::convertClaimSerialization( $claim );
+			};
+		}
+
+		return $internal;
+	}
+
+	/**
+	 * @param array $claim external claim serialization
+	 *
+	 * @return array internal claim serialization
+	 */
+	private static function convertClaimSerialization( array $claim ) {
+		$serialized = array();
+
+		$serialized['m'] = self::convertSnakSerialization( $claim['mainsnak'] );
+
+		$serialized['rank'] = Claim::RANK_NORMAL;
+		if ( isset( $claim['rank'] ) ) {
+			$ranks = array(
+				'deprecated' => Claim::RANK_DEPRECATED,
+				'normal' => Claim::RANK_NORMAL,
+				'preferred' => Claim::RANK_PREFERRED
+			);
+
+			$key = $claim['rank'];
+
+			$serialized['rank'] = $ranks[$key];
+		}
+
+		$serialized['g'] = null;
+		if ( isset( $claim['id'] ) ) {
+			$serialized['g'] = $claim['id'];
+		}
+
+		$serialized['q'] = array();
+		if ( isset( $claim['qualifiers'] ) ) {
+			foreach ( $claim['qualifiers'] as $snak ) {
+				$serialized['qualifiers'][] = self::convertSnakSerialization( $snak );
+			};
+		}
+
+		$serialized['refs'] = array();
+		if ( isset( $claim['references'] ) ) {
+			throw new LogicException( 'Conversion of references is not implemented' );
+		}
+
+		return $serialized;
+	}
+
+	/**
+	 * @param array $snak external snak serialization
+	 *
+	 * @return array internal snak serialization
+	 */
+	private static function convertSnakSerialization( array $snak ) {
+		$serialized = array();
+
+		$serialized[0] = $snak['snaktype'];
+		$serialized[1] = (int)substr( $snak['property'], 1 );
+
+		if ( isset( $snak['datavalue'] ) ) {
+			$serialized[2] = $snak['datavalue']['type'];
+			$serialized[3] = $snak['datavalue']['value'];
+		}
+
+		return $serialized;
+	}
+
+
+	/**
+	 * Utility function for converting an array from "deep" (indexed) to "flat" (keyed) structure.
+	 * Arrays that already use a flat structure are left unchanged.
+	 *
+	 * Arrays with a deep structure are expected to be list of entries that are associative arrays,
+	 * where which entry has at least the fields given by $keyField and $valueField.
+	 *
+	 * Arrays with a flat structure are associative and assign values to meaningful keys.
+	 *
+	 * @param array $data the input array.
+	 * @param string $keyField the name of the field in each entry that shall be used as the key in the flat structure
+	 * @param string $valueField the name of the field in each entry that shall be used as the value in the flat structure
+	 * @param bool $multiValue whether the value in the flat structure shall be an indexed array of values instead of a single value.
+	 * @param array $into optional aggregator.
+	 *
+	 * @return array array the flat version of $data
+	 */
+	public static function flattenArray( $data, $keyField, $valueField, $multiValue = false, array &$into = null ) {
+		if ( $into === null ) {
+			$into = array();
+		}
+
+		foreach ( $data as $index => $value ) {
+			if ( is_array( $value ) ) {
+				if ( isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
+					// found "deep" entry in the array
+					$k = $value[ $keyField ];
+					$v = $value[ $valueField ];
+				} elseif ( isset( $value[0] ) && !is_array( $value[0] ) && $multiValue ) {
+					// found "flat" multi-value entry in the array
+					$k = $index;
+					$v = $value;
+				} else {
+					// found list, recurse
+					self::flattenArray( $value, $keyField, $valueField, $multiValue, $into );
+					continue;
+				}
+			} else {
+				// found "flat" entry in the array
+				$k = $index;
+				$v = $value;
+			}
+
+			if ( $multiValue ) {
+				if ( is_array( $v ) ) {
+					$into[$k] = empty( $into[$k] ) ? $v : array_merge( $into[$k], $v );
+				} else {
+					$into[$k][] = $v;
+				}
+			} else {
+				$into[$k] = $v;
+			}
+		}
+
+		return $into;
+	}
+
+
+	/**
+	 * Loads an entity from the database (via an API call).
+	 */
+	public static function parseEntityId( $id ) {
+		if ( is_string( $id ) ) {
+			$parser = new BasicEntityIdParser();
+			$id = $parser->parse( $id );
+		}
+
+		return $id;
 	}
 
 }
