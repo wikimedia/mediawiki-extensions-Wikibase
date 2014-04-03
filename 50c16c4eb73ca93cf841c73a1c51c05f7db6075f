@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_8b8c3d3c",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-03T16:53:39Z",
+      "side": 1,
+      "message": "Hmm, maybe the initial idea was to display the icons on repo as well. The question is whether we need icons on repo or if it is enough to have the label there.",
+      "parentUuid": "8e23439c_6ac31f62",
+      "revId": "50c16c4eb73ca93cf841c73a1c51c05f7db6075f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_4ab863e2",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 1
