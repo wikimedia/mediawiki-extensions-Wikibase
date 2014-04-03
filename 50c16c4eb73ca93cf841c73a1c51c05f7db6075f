@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_6ac31f62",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-03T10:32:05Z",
+      "side": 1,
+      "message": "Did the code that uses this option changed? When I tested this it needed to be an associative array( $prefixedItemId \u003d\u003e \u0027Label\u0027 ). The values are currently completely unused in the code and should be descriptive labels.",
+      "revId": "50c16c4eb73ca93cf841c73a1c51c05f7db6075f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4ab863e2",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-03T10:32:05Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "50c16c4eb73ca93cf841c73a1c51c05f7db6075f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
