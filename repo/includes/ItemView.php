@@ -30,26 +30,6 @@ class ItemView extends EntityView {
 	}
 
 	/**
-	 * Returns the HTML for the heading of the claims section
-	 *
-	 * @since 0.5
-	 *
-	 * @param Entity $entity
-	 * @param bool $editable
-	 *
-	 * @return string
-	 */
-	protected function getHtmlForClaimsSectionHeading( Entity $entity, $editable = true ) {
-		$html = wfTemplate(
-			'wb-section-heading',
-			wfMessage( 'wikibase-statements' ),
-			'claims' // ID - TODO: should not be added if output page is not the entity's page
-		);
-
-		return $html;
-	}
-
-	/**
 	 * @see EntityView::getTocSections
 	 */
 	protected function getTocSections() {

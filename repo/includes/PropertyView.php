@@ -18,66 +18,46 @@ use Wikibase\Repo\WikibaseRepo;
 class PropertyView extends EntityView {
 
 	/**
-	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
-	 * this does not group all the HTMl within one parent node as one entity.
+	 * @see EntityView::getInnerHtml
 	 *
-	 * @string
-	 *
-	 * @param EntityRevision $entityRevision
+	 * @param EntityRevision $propertyRevision
 	 * @param bool $editable
 	 *
 	 * @throws \InvalidArgumentException
 	 * @return string
 	 */
-	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	public function getInnerHtml( EntityRevision $propertyRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		/* @var Property $property */
-		$property = $entityRevision->getEntity();
+		$property = $propertyRevision->getEntity();
 
 		if ( !( $property instanceof Property ) ) {
 			throw new \InvalidArgumentException( '$propertyRevision must contain a Property' );
 		}
 
+		/* @var Property $property */
+
+		$html = parent::getInnerHtml( $propertyRevision, $editable );
+
+		$html .= $this->getHtmlForDataType(
+			$this->getDataType( $property ),
+			$editable
+		);
+
+		$html .= $this->getFooterHtml();
+
+		wfProfileOut( __METHOD__ );
+		return $html;
+	}
+
+	protected function getFooterHtml() {
 		$html = '';
-
-		$html .= $this->getHtmlForLabel( $property, $editable );
-		$html .= $this->getHtmlForDescription( $property, $editable );
-		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
-
-		$html .= wfTemplate( 'wb-entity-header-separator' );
-
-		$html .= $this->getHtmlForAliases( $property, $editable );
-		$html .= $this->getHtmlForToc();
-		$html .= $this->getHtmlForTermBox( $property, $editable );
-		$html .= $this->getHtmlForClaims( $property, $editable );
 
 		$footer = $this->msg( 'wikibase-property-footer' );
 
 		if ( !$footer->isBlank() ) {
 			$html .= "\n" . $footer->parse();
 		}
-
-		wfProfileOut( __METHOD__ );
-		return $html;
-	}
-
-	/**
-	 * Returns the HTML for the heading of the claims section
-	 *
-	 * @since 0.5
-	 *
-	 * @param Entity $entity
-	 * @param bool $editable
-	 *
-	 * @return string
-	 */
-	protected function getHtmlForClaimsSectionHeading( Entity $entity, $editable = true ) {
-		$html = wfTemplate(
-			'wb-section-heading',
-			wfMessage( 'wikibase-constraints' ),
-			'claims' // ID - TODO: should not be added if output page is not the entity's page
-		);
 
 		return $html;
 	}
