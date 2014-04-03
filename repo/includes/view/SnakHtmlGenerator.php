@@ -3,8 +3,6 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\FormattingException;
