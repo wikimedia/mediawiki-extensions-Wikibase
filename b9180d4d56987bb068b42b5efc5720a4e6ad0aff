@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7f3523f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-03T09:46:54Z",
+      "side": 1,
+      "message": "Oh, that\u0027s the reason! I was wondering why it didn\u0027t show up in Bugzilla. Thanks!",
+      "parentUuid": "ae0e4726_533e9cb6",
+      "revId": "b9180d4d56987bb068b42b5efc5720a4e6ad0aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_f342503e",
         "filename": "lib/resources/wikibase.css",
         "patchSetId": 2
@@ -36,6 +54,24 @@
       "writtenOn": "2014-04-02T18:21:23Z",
       "side": 1,
       "message": "I understand you don\u0027t want to use .mw-editsection for that element, but you can use .mw-editsection-like instead (which is a class that provides the exact same styling, but with no \"semantic\" meaning).",
+      "revId": "b9180d4d56987bb068b42b5efc5720a4e6ad0aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_aa2c9790",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-03T09:46:54Z",
+      "side": 1,
+      "message": "Good idea, didn\u0027t know that. Unfortunately this class also sets font-size, margin, line-height and much more (see shared.css) and uses a way to specific selector (div#content .mw-editsection-like) and therefor is way to limited in it\u0027s use. I tried to use it but that destroyed lots of other toolbars, including the one next to the description and all next to the sitelinks.\n\nWe are going to redesign the UI anyway. I assure you, this hack will go away then.",
+      "parentUuid": "ae0e4726_f342503e",
       "revId": "b9180d4d56987bb068b42b5efc5720a4e6ad0aff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
