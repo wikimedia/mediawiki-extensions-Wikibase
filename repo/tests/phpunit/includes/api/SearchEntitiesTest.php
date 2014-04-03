@@ -76,7 +76,7 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 		$foundResult = 0;
 
 		$expectedId = EntityTestHelper::getId( $expected['handle'] );
-		$expectedData = EntityTestHelper::getEntityData( $expected['handle'] );
+		$expectedData = EntityTestHelper::getEntityOutput( $expected['handle'] );
 
 		foreach( $searchResults as $searchResult ) {
 			$assertFound = $this->assertSearchResultHasExpected( $searchResult, $params, $expectedId, $expectedData );
