@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_6a5f9fe9",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-03T10:21:32Z",
+      "side": 1,
+      "message": "\\? PHPStorm again?",
+      "revId": "12de8727fdee367ae7a211ecf781f6e29da33ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ea6a8f7d",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-03T10:21:32Z",
+      "side": 1,
+      "message": "Uppercase?",
+      "revId": "12de8727fdee367ae7a211ecf781f6e29da33ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
