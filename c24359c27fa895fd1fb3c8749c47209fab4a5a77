@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_3c0b39db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-03T00:25:05Z",
+      "side": 1,
+      "message": "Also not true..",
+      "revId": "c24359c27fa895fd1fb3c8749c47209fab4a5a77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_fc6dc197",
+        "filename": "lib/includes/Term.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-03T00:25:05Z",
+      "side": 1,
+      "message": "no longer true",
+      "revId": "c24359c27fa895fd1fb3c8749c47209fab4a5a77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
