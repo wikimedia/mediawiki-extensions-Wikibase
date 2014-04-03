@@ -534,7 +534,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	public function testLanguageFallback( $handle, $languages, $expectedLabels, $expectedDescriptions ) {
 		$id = EntityTestHelper::getId( $handle );
 
-		list($res,,) = $this->doApiRequest(
+		list( $res,, ) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
 				'languages' => join( '|', $languages ),
@@ -548,4 +548,30 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$this->assertEquals( $expectedDescriptions, $res['entities'][$id]['descriptions'] );
 	}
 
+	public function testSitelinkFilter () {
+		$id = EntityTestHelper::getId( 'Oslo' );
+
+		list( $res,, ) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetentities',
+				'sitefilter' => 'dewiki|enwiki',
+				'format' => 'json', // make sure IDs are used as keys
+				'ids' => $id,
+			)
+		);
+
+		$expectedSitelinks = array(
+			'dewiki' => array(
+				'site' => 'dewiki',
+				'title' => 'Oslo',
+				'badges' => array(),
+			),
+			'enwiki' => array(
+				'site' => 'enwiki',
+				'title' => 'Oslo',
+				'badges' => array(),
+			),
+		);
+		$this->assertEquals( $expectedSitelinks, $res['entities'][$id]['sitelinks'] );
+	}
 }
