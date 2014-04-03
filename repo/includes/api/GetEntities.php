@@ -216,7 +216,8 @@ class GetEntities extends ApiWikibase {
 		wfProfileIn( __METHOD__ );
 		$props = $this->getPropsFromParams( $params );
 		$options = $this->getSerializationOptions( $params, $props );
-		$this->getResultBuilder()->addEntityRevision( $entityRevision, $options, $props );
+		$siteFilterIds = $params['sitefilter'];
+		$this->getResultBuilder()->addEntityRevision( $entityRevision, $options, $props, $siteFilterIds );
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -309,6 +310,11 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false,
 			),
+			'sitefilter' => array(
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_ALLOW_DUPLICATES => true
+			),
 		) );
 	}
 
@@ -344,7 +350,8 @@ class GetEntities extends ApiWikibase {
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
 			),
-			'ungroupedlist' => array( 'Do not group snaks by property id' ),
+			'ungroupedlist' => array( 'Do not group snaks by property id.' ),
+			'sitefilter' => array( 'Filter sitelinks in entities to those with these siteids.' ),
 		) );
 	}
 
@@ -400,6 +407,8 @@ class GetEntities extends ApiWikibase {
 			=> 'Get the item for page "Berlin" on the site "enwiki" after normalizing the title from "berlin"',
 			'api.php?action=wbgetentities&ids=Q42&props=sitelinks&sort&dir=descending'
 			=> 'Get the sitelinks for item Q42 sorted in a descending order"',
+			'api.php?action=wbgetentities&ids=Q42&sitefilter=enwiki'
+			=> 'Get entities with ID Q42 showing only sitelinks from enwiki'
 		);
 	}
 
