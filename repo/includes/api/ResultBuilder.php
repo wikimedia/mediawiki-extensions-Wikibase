@@ -90,7 +90,7 @@ class ResultBuilder {
 	/**
 	 * @return ApiResult
 	 */
-	private function getResult(){
+	private function getResult() {
 		return $this->result;
 	}
 
@@ -104,7 +104,9 @@ class ResultBuilder {
 	public function markSuccess( $success = true ) {
 		$value = intval( $success );
 		if( $value !== 1 && $value !== 0 ){
-			throw new InvalidArgumentException( '$wasSuccess must evaluate to either 1 or 0 when using intval()' );
+			throw new InvalidArgumentException(
+				'$wasSuccess must evaluate to either 1 or 0 when using intval()'
+			);
 		}
 		$this->result->addValue( null, 'success', $value );
 	}
@@ -120,6 +122,8 @@ class ResultBuilder {
 	 * @see ResultBuilder::setValue()
 	 * @see ResultBuilder::appendValue()
 	 *
+	 * @since 0.5
+	 *
 	 * @param $path array|string|null
 	 * @param $name string
 	 * @param $values array
@@ -127,7 +131,7 @@ class ResultBuilder {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function setList( $path, $name, array $values, $tag ){
+	public function setList( $path, $name, array $values, $tag ) {
 		$this->checkPathType( $path );
 		$this->checkNameIsString( $name );
 		$this->checkTagIsString( $tag );
@@ -152,13 +156,15 @@ class ResultBuilder {
 	 * @see ResultBuilder::appendValue()
 	 * @see ApiResult::addValue
 	 *
+	 * @since 0.5
+	 *
 	 * @param $path array|string|null
 	 * @param $name string
 	 * @param $value mixed
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function setValue( $path, $name, $value ){
+	public function setValue( $path, $name, $value ) {
 		$this->checkPathType( $path );
 		$this->checkNameIsString( $name );
 		$this->checkValueIsNotList( $value );
@@ -178,6 +184,8 @@ class ResultBuilder {
 	 * @see ApiResult::addValue
 	 * @see ApiResult::setIndexedTagName_internal
 	 *
+	 * @since 0.5
+	 *
 	 * @param $path array|string|null
 	 * @param $key int|string|null the key to use when appending, or null for automatic.
 	 * May be ignored even if given, based on $this->options->shouldIndexTags().
@@ -186,7 +194,7 @@ class ResultBuilder {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function appendValue( $path, $key, $value, $tag ){
+	public function appendValue( $path, $key, $value, $tag ) {
 		$this->checkPathType( $path );
 		$this->checkKeyType( $key );
 		$this->checkTagIsString( $tag );
@@ -269,6 +277,8 @@ class ResultBuilder {
 	 * @param EntityRevision $entityRevision
 	 * @param SerializationOptions|null $options
 	 * @param array|string $props a list of fields to include, or "all"
+	 *
+	 * @sicne 0.5
 	 */
 	public function addEntityRevision( EntityRevision $entityRevision, SerializationOptions $options = null, $props = 'all' ) {
 		$entity = $entityRevision->getEntity();
@@ -314,6 +324,8 @@ class ResultBuilder {
 	 * @param EntityId $entityId
 	 * @param string|array|null $path
 	 * @param bool $forceNumericId should we force use the numeric id instead of serialization?
+	 *
+	 * @since 0.5
 	 * @todo once linktitles breaking change made remove $forceNumericId
 	 */
 	public function addBasicEntityInformation( EntityId $entityId, $path, $forceNumericId = false ){
@@ -424,7 +436,10 @@ class ResultBuilder {
 
 	/**
 	 * Get serialized claim and add it to result
+	 *
 	 * @param Claim $claim
+	 *
+	 * @since 0.5
 	 */
 	public function addClaim( Claim $claim ) {
 		$serializer = $this->serializerFactory->newClaimSerializer( $this->options );
@@ -439,7 +454,10 @@ class ResultBuilder {
 
 	/**
 	 * Get serialized reference and add it to result
+	 *
 	 * @param Reference $reference
+	 *
+	 * @since 0.5
 	 */
 	public function addReference( Reference $reference ) {
 		$serializer = $this->serializerFactory->newReferenceSerializer( $this->options );
@@ -454,9 +472,12 @@ class ResultBuilder {
 
 	/**
 	 * Add an entry for a missing entity...
+	 *
 	 * @param array $missingDetails array containing key value pair missing details
+	 *
+	 * @since 0.5
 	 */
-	public function addMissingEntity( $missingDetails ){
+	public function addMissingEntity( $missingDetails ) {
 		$this->appendValue(
 			'entities',
 			$this->missingEntityCounter,
@@ -471,8 +492,10 @@ class ResultBuilder {
 	 * @param string $from
 	 * @param string $to
 	 * @param string $name
+	 *
+	 * @since 0.5
 	 */
-	public function addNormalizedTitle( $from, $to, $name = 'n' ){
+	public function addNormalizedTitle( $from, $to, $name = 'n' ) {
 		$this->setValue(
 			'normalized',
 			$name,
@@ -489,6 +512,8 @@ class ResultBuilder {
 	 * If no revision is found the the Status object, this method does nothing.
 	 *
 	 * @see ApiResult::addValue()
+	 *
+	 * @since 0.5
 	 *
 	 * @param Status $status The status to get the revision ID from.
 	 * @param string|null|array $path Where in the result to put the revision id
