@@ -579,16 +579,16 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
 				'jquery.NativeEventHandler',
-				'util.inherit',
-				'jquery.wikibase.entityselector',
-				'wikibase.datamodel',
-				'mediawiki.legacy.shared',
 				'jquery.ui.position',
 				'jquery.ui.TemplatedWidget',
 				'jquery.valueview',
+				'jquery.wikibase.entityselector',
+				'mediawiki.legacy.shared',
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.experts',
 				'wikibase.formatters',
 				'wikibase.parsers',
-				'wikibase.experts',
 				'wikibase.utilities'
 			),
 			'messages' => array(
