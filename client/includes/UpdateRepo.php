@@ -8,7 +8,7 @@ use JobQueueGroup;
 use RuntimeException;
 use Title;
 use User;
-use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SimpleSiteLink;
 use JobSpecification;
 
 /**
@@ -81,7 +81,7 @@ abstract class UpdateRepo {
 	public function getEntityId() {
 		if ( $this->entityId === false ) {
 			$this->entityId = $this->siteLinkLookup->getEntityIdForSiteLink(
-				new SiteLink(
+				new SimpleSiteLink(
 					$this->siteId,
 					$this->title->getFullText()
 				)
