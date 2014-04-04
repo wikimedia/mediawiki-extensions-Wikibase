@@ -3,11 +3,11 @@ These is the readme file for the WikibaseLib extension.
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:WikibaseLib
 Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=lib/README
 
-== About ==
+## About
 
 WikibaseLib holds common code for the Wikibase and WikibaseClient extensions.
 
-=== Feature overview ===
+### Feature overview
 
 * Objects that handle entities and items
 * Objects to represent SiteLinks
