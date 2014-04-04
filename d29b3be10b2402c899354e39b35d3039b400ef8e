@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_4cb198db",
+        "filename": "tests/browser/features/special_set_sitelink.feature",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-04T13:22:46Z",
+      "side": 1,
+      "message": "Be consistent, use Special:SetSiteLink everywhere.",
+      "revId": "d29b3be10b2402c899354e39b35d3039b400ef8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ecbf44a6",
+        "filename": "tests/browser/features/support/pages/special_set_sitelink_page.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-04T13:22:46Z",
+      "side": 1,
+      "message": "Be consistent, use Special:SetSiteLink everywhere.",
+      "revId": "d29b3be10b2402c899354e39b35d3039b400ef8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0cc3a03e",
+        "filename": "tests/browser/features/support/pages/special_set_sitelink_page.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-04T13:22:46Z",
+      "side": 1,
+      "message": "I don\u0027t think the \"set_site_link_\" prefix should be here. Think of these as class properties. They are not global as far as I can tell.",
+      "revId": "d29b3be10b2402c899354e39b35d3039b400ef8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
