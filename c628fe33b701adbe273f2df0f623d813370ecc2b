@@ -34,6 +34,24 @@
       "revId": "c628fe33b701adbe273f2df0f623d813370ecc2b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a77045a4",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-04T15:01:25Z",
+      "side": 1,
+      "message": "Originally, I wanted to test what happens if the user types \"English\" instead of \"en\". It should either fail with an useful message or succeed as expected. If the special pages does none of this we should disable this test for now.",
+      "parentUuid": "8e23439c_874e6971",
+      "revId": "c628fe33b701adbe273f2df0f623d813370ecc2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
