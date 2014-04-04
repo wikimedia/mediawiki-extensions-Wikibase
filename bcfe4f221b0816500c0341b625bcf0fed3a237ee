@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_2c29bc9a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-04T14:40:26Z",
+      "side": 1,
+      "message": "Why? What does that help? Construction of such an object is cheap, unless you want to do it a million times, which we don\u0027t. And if we did, then we\u0027d just not call the factory each iteration. Might make sense for some other services that do caching, though not for this one as far as I can tell.\n\nAlso, this is one of those comments no one will ever get to.",
+      "revId": "bcfe4f221b0816500c0341b625bcf0fed3a237ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ac1cac7d",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ClaimTestHelper.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-04T14:40:26Z",
+      "side": 1,
+      "message": "Looks like you could avoid this inheritance by having a mock builder field",
+      "revId": "bcfe4f221b0816500c0341b625bcf0fed3a237ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
