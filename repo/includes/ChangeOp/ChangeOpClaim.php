@@ -200,6 +200,8 @@ class ChangeOpClaim extends ChangeOpBase {
 	}
 
 	/**
+	 * @since 0.5
+	 *
 	 * @throws ChangeOpException
 	 */
 	protected function validate() {
