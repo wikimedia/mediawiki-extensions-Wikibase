@@ -70,6 +70,7 @@ class SetReference extends ModifyClaim {
 		try {
 			$changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $e ) {
+			//FIXME: specific, localized error message!
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 

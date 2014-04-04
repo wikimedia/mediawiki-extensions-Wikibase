@@ -2,12 +2,16 @@
 
 namespace Wikibase\Test;
 
+use DataValues\NumberValue;
 use DataValues\StringValue;
 use LogicException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -25,8 +29,25 @@ use Wikibase\Lib\ClaimGuidGenerator;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var ClaimTestMockProvider
+	 */
+	protected $mockProvider;
+
+	/**
+	 * @param null $name
+	 * @param array $data
+	 * @param string $dataName
+	 */
+	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
+
+		$this->mockProvider = new ClaimTestMockProvider( $this );
+	}
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
@@ -40,11 +61,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 		$args[] = array( 123, $validReference, $validReferenceHash );
 		$args[] = array( '', $validReference, $validReferenceHash );
-		$args[] = array( '', null, $validReferenceHash );
 		$args[] = array( $validClaimGuid, $validReference, 123 );
-		$args[] = array( $validClaimGuid, 'notAReference', $validReferenceHash );
-		$args[] = array( $validClaimGuid, 'notAReference', '' );
-		$args[] = array( $validClaimGuid, null, '' );
 		$args[] = array( $validClaimGuid, $validReference, $validReferenceHash, 'string' );
 
 		return $args;
@@ -56,7 +73,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $claimGuid, $reference, $referenceHash, $index = null ) {
-		new ChangeOpReference( $claimGuid, $reference, $referenceHash, $index );
+		new ChangeOpReference( $claimGuid, $reference, $referenceHash, $this->mockProvider->getMockSnakValidator(), $index );
 	}
 
 	public function changeOpAddProvider() {
@@ -70,7 +87,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$snaks = new SnakList();
 		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$newReference = new Reference( $snaks );
-		$changeOp = new ChangeOpReference( $claimGuid, $newReference, '' );
+		$changeOp = new ChangeOpReference( $claimGuid, $newReference, '', $this->mockProvider->getMockSnakValidator() );
 		$referenceHash = $newReference->getHash();
 		$args[] = array ( $item, $changeOp, $referenceHash );
 
@@ -122,6 +139,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 			$claimGuid,
 			$newReference,
 			'',
+			$this->mockProvider->getMockSnakValidator(),
 			$newReferenceIndex
 		);
 
@@ -174,7 +192,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$snaks = new SnakList();
 		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
 		$changedReference = new Reference( $snaks );
-		$changeOp = new ChangeOpReference( $claimGuid, $changedReference, $referenceHash );
+		$changeOp = new ChangeOpReference( $claimGuid, $changedReference, $referenceHash, $this->mockProvider->getMockSnakValidator() );
 		$args[] = array ( $item, $changeOp, $changedReference->getHash() );
 
 		// Just change a reference's index:
@@ -198,6 +216,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 			$claim->getGuid(),
 			$references[1],
 			$references[1]->getHash(),
+			$this->mockProvider->getMockSnakValidator(),
 			0
 		);
 		$args[] = array ( $item, $changeOp, $references[1]->getHash() );
@@ -230,5 +249,63 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$entity->setClaims( $claims );
 
 		return $entity;
+	}
+
+
+	public function provideApplyInvalid() {
+		$p11 = new PropertyId( 'P11' );
+		$q17 = new ItemId( 'Q17' );
+
+		$item = Item::newEmpty();
+		$item->setId( $q17 );
+		$claimGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$badGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+
+		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
+		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );
+
+		$claim = new Statement( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) );
+		$claim->setGuid( $claimGuid );
+		$item->addClaim( $claim );
+
+		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
+		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
+		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
+		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
+
+		$goodReference = new Reference( new SnakList( array( $goodSnak ) ) );
+		$badReference = new Reference( new SnakList( array( $badSnak ) ) );
+		$brokenReference = new Reference( new SnakList( array( $brokenSnak ) ) );
+
+		$refHash = $oldReference->getHash();
+		$badRefHash = $badReference->getHash();
+
+		$cases = array();
+		$cases['malformed claim guid'] = array( $item, 'NotAGuid', $goodReference, '' );
+		$cases['unknown claim guid'] = array( $item, $badGuid, $goodReference, $refHash );
+		$cases['unknown reference hash'] = array( $item, $claimGuid, $goodReference, $badRefHash );
+
+		$cases['invalid snak value'] = array( $item, $claimGuid, $badReference, '' );
+		$cases['invalid snak value type'] = array( $item, $claimGuid, $brokenReference, $refHash );
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideApplyInvalid
+	 */
+	public function testApplyInvalid( Entity $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
+		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+
+		$changeOpClaim = new ChangeOpReference(
+			$claimGuid,
+			$reference,
+			$referenceHash,
+			$this->mockProvider->getMockSnakValidator(),
+			$index
+		);
+
+		$entity = $entity->copy();
+		$changeOpClaim->apply( $entity );
 	}
 }

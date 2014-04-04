@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\Snaks;
 use Wikibase\Summary;
+use Wikibase\Validators\SnakValidator;
 
 /**
  * Class for qualifier change operation
@@ -15,6 +16,7 @@ use Wikibase\Summary;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ChangeOpQualifier extends ChangeOpBase {
 
@@ -28,7 +30,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @var Snak|null
+	 * @var Snak
 	 */
 	protected $snak;
 
@@ -40,17 +42,23 @@ class ChangeOpQualifier extends ChangeOpBase {
 	protected $snakHash;
 
 	/**
+	 * @var SnakValidator
+	 */
+	private $snakValidator;
+
+	/**
 	 * Constructs a new qualifier change operation
 	 *
 	 * @since 0.4
 	 *
 	 * @param string $claimGuid
-	 * @param Snak|null $snak
+	 * @param Snak $snak
 	 * @param string $snakHash
+	 * @param SnakValidator $snakValidator
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $snak, $snakHash ) {
+	public function __construct( $claimGuid, Snak $snak, $snakHash, SnakValidator $snakValidator ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
@@ -59,13 +67,10 @@ class ChangeOpQualifier extends ChangeOpBase {
 			throw new InvalidArgumentException( '$snakHash needs to be a string' );
 		}
 
-		if ( !( $snak instanceof Snak ) ) {
-			throw new InvalidArgumentException( '$snak needs to be an instance of Snak' );
-		}
-
 		$this->claimGuid = $claimGuid;
 		$this->snak = $snak;
 		$this->snakHash = $snakHash;
+		$this->snakValidator = $snakValidator;
 	}
 
 	/**
@@ -74,6 +79,8 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 * - the qualifier gets set to $snak when $snakHash and $snak are set
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		$this->validate();
+
 		$claims = new Claims( $entity->getClaims() );
 
 		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
@@ -142,5 +149,18 @@ class ChangeOpQualifier extends ChangeOpBase {
 	protected function getSnakSummaryArgs( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 		return array( array( $propertyId->getPrefixedId() => $snak ) );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function validate() {
+		$result = $this->snakValidator->validate( $this->snak );
+
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
+		}
 	}
 }
