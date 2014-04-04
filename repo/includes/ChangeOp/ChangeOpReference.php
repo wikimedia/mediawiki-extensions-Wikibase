@@ -10,6 +10,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\References;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Summary;
+use Wikibase\Validators\SnakValidator;
 
 /**
  * Class for reference change operation
@@ -17,6 +18,7 @@ use Wikibase\Summary;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ChangeOpReference extends ChangeOpBase {
 
@@ -30,7 +32,7 @@ class ChangeOpReference extends ChangeOpBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @var Reference|null
+	 * @var Reference
 	 */
 	protected $reference;
 
@@ -49,18 +51,24 @@ class ChangeOpReference extends ChangeOpBase {
 	protected $index;
 
 	/**
+	 * @var SnakValidator
+	 */
+	private $snakValidator;
+
+	/**
 	 * Constructs a new reference change operation
 	 *
 	 * @since 0.4
 	 *
 	 * @param string $claimGuid
-	 * @param Reference|null $reference
+	 * @param Reference $reference
 	 * @param string $referenceHash (if empty '' a new reference will be created)
+	 * @param SnakValidator $snakValidator
 	 * @param int|null $index
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $reference, $referenceHash, $index = null ) {
+	public function __construct( $claimGuid, Reference $reference, $referenceHash, SnakValidator $snakValidator, $index = null ) {
 		if ( !is_string( $claimGuid ) || $claimGuid === '' ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string and must not be empty' );
 		}
@@ -81,6 +89,7 @@ class ChangeOpReference extends ChangeOpBase {
 		$this->reference = $reference;
 		$this->referenceHash = $referenceHash;
 		$this->index = $index;
+		$this->snakValidator = $snakValidator;
 	}
 
 	/**
@@ -89,6 +98,8 @@ class ChangeOpReference extends ChangeOpBase {
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		$this->validate();
+
 		$claims = new Claims( $entity->getClaims() );
 
 		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
@@ -176,5 +187,18 @@ class ChangeOpReference extends ChangeOpBase {
 		$propertyId = $snak->getPropertyId();
 
 		return array( array( $propertyId->getPrefixedId() => $snak ) );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function validate() {
+		$result = $this->snakValidator->validateReference( $this->reference );
+
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
+		}
 	}
 }

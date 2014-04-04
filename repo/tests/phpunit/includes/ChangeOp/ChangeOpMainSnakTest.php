@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\DataValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\DataModel\Claim\Claims;
@@ -15,9 +16,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\ItemContent;
-use Wikibase\Lib\ClaimGuidGenerator;
-use InvalidArgumentException;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpMainSnak
@@ -50,16 +48,11 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidArgumentProvider() {
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
-		$validClaimGuid = $this->helper->getGuidGenerator()->newGuid( $item->getId() );
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
 		$args = array();
 		$args[] = array( 123, $validSnak );
-		$args[] = array( 123, null );
-		$args[] = array( $validClaimGuid, 'notASnak' );
-		$args[] = array( '', 'notASnak' );
-		$args[] = array( '', null );
+		$args[] = array( false, $validSnak );
 
 		return $args;
 	}
