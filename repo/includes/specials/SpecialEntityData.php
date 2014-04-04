@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
+use SiteSQLStore;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -94,7 +95,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$this->getPageTitle()->getCanonicalURL() . '/',
 			$repo->getStore()->getEntityLookup(),
 			$titleLookup,
-			$serializerFactory
+			$serializerFactory,
+			SiteSQLStore::newInstance()->getSites()
 		);
 
 		$maxAge = $repo->getSettings()->getSetting( 'dataSquidMaxage' );

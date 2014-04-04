@@ -5,6 +5,7 @@ namespace Wikibase;
 use EasyRdf_Exception;
 use EasyRdf_Format;
 use EasyRdf_Graph;
+use SiteList;
 
 /**
  * RDF serialization for wikibase data model.
@@ -29,20 +30,28 @@ class RdfSerializer {
 	protected $format;
 
 	/**
-	 * @param EasyRdf_Format        $format
-	 * @param string                $baseUri
-	 * @param string                $dataUri
-	 * @param EntityLookup          $entityLookup
+	 * @var SiteList
+	 */
+	protected $sites;
+
+	/**
+	 * @param EasyRdf_Format $format
+	 * @param string $baseUri
+	 * @param string $dataUri
+	 * @param SiteList $sites;
+	 * @param EntityLookup $entityLookup
 	 */
 	public function __construct(
 		EasyRdf_Format $format,
 		$baseUri,
 		$dataUri,
+		SiteList $sites,
 		EntityLookup $entityLookup
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->format = $format;
+		$this->sites = $sites;
 		$this->entityLookup = $entityLookup;
 	}
 
@@ -81,6 +90,7 @@ class RdfSerializer {
 		//TODO: language filter
 
 		$builder = new RdfBuilder(
+			$this->sites,
 			$this->baseUri,
 			$this->dataUri
 		);

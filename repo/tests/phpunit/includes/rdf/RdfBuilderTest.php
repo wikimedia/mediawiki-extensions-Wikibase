@@ -7,6 +7,7 @@ use EasyRdf_Graph;
 use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
+use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Entity;
 use Wikibase\EntityId;
@@ -191,6 +192,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	protected static function newRdfBuilder() {
 		return new RdfBuilder(
+			new SiteList(),
 			self::URI_BASE,
 			self::URI_DATA
 		);

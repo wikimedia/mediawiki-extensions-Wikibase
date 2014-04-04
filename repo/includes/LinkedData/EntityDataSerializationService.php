@@ -14,6 +14,7 @@ use ApiFormatXml;
 use DerivativeContext;
 use DerivativeRequest;
 use RequestContext;
+use SiteList;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -98,8 +99,11 @@ class EntityDataSerializationService {
 	protected $serializerFactory;
 
 	/**
-	 * Constructor.
-	 *
+	 * @var SiteList
+	 */
+	protected $sites;
+
+	/**
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
@@ -114,13 +118,15 @@ class EntityDataSerializationService {
 		$rdfDataURI,
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
-		SerializerFactory $serializerFactory
+		SerializerFactory $serializerFactory,
+		SiteList $sites
 	) {
 		$this->rdfBaseURI = $rdfBaseURI;
 		$this->rdfDataURI = $rdfDataURI;
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
+		$this->sites = $sites;
 	}
 
 	/**
@@ -486,6 +492,7 @@ class EntityDataSerializationService {
 			$rdfFormat,
 			$this->rdfBaseURI,
 			$this->rdfDataURI,
+			$this->sites,
 			$this->entityLookup
 		);
 
