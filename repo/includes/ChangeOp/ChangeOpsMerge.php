@@ -34,7 +34,7 @@ class ChangeOpsMerge {
 	 * @var LabelDescriptionDuplicateDetector
 	 */
 	private $labelDescriptionDuplicateDetector;
-	
+
 	/** @var SiteLinkLookup */
 	private $sitelinkLookup;
 
@@ -83,8 +83,14 @@ class ChangeOpsMerge {
 			throw new InvalidArgumentException( '$ignoreConflicts must be an array' );
 		}
 		foreach( $ignoreConflicts as $ignoreConflict ){
-			if( $ignoreConflict !== 'label' && $ignoreConflict !== 'description' && $ignoreConflict !== 'sitelink' ){
-				throw new InvalidArgumentException( '$ignoreConflicts array can only contain "label", "description" and or "sitelink" values' );
+			if(
+				$ignoreConflict !== 'label' &&
+				$ignoreConflict !== 'description' &&
+				$ignoreConflict !== 'sitelink'
+			) {
+				throw new InvalidArgumentException(
+					'$ignoreConflicts array can only contain "label", "description" and or "sitelink" values'
+				);
 			}
 		}
 	}
@@ -144,7 +150,13 @@ class ChangeOpsMerge {
 			$siteId = $simpleSiteLink->getSiteId();
 			if( !$this->toItem->hasLinkToSite( $siteId ) ){
 				$this->fromChangeOps->add( $this->changeOpFactory->newRemoveSiteLinkOp( $siteId ) );
-				$this->toChangeOps->add( $this->changeOpFactory->newSetSiteLinkOp( $siteId, $simpleSiteLink->getPageName(), $simpleSiteLink->getBadges() ) );
+				$this->toChangeOps->add(
+					$this->changeOpFactory->newSetSiteLinkOp(
+						$siteId,
+						$simpleSiteLink->getPageName(),
+						$simpleSiteLink->getBadges()
+					)
+				);
 			} else {
 				if( !in_array( 'sitelink', $this->ignoreConflicts ) ){
 					throw new ChangeOpException( "Conflicting sitelinks for {$siteId}" );
@@ -174,7 +186,7 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * Finds a claim in the target entity with the same main snak and qualifiers as the given $fromStatement
+	 * Finds a claim in the target entity with the same main snak and qualifiers as $fromStatement
 	 *
 	 * @param Statement $fromStatement
 	 *
