@@ -52,6 +52,24 @@
       "revId": "c628fe33b701adbe273f2df0f623d813370ecc2b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e75d1d1c",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-04-04T15:09:13Z",
+      "side": 1,
+      "message": "Nevertheless the test needs to be changed to check for an existing error message. That\u0027s the expected behavior of the specialpage. And if it does not behave like this it\u0027s a bug and the test should fail.\nIf you don\u0027t want it to fail unless the problem with the special page is fixed, add @skip as tag for the scenario..",
+      "parentUuid": "8e23439c_a77045a4",
+      "revId": "c628fe33b701adbe273f2df0f623d813370ecc2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
