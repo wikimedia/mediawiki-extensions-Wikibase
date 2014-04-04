@@ -93,7 +93,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	protected function addClaim( Entity $entity, Claims $claims, Summary $summary = null ) {
 		//TODO: check for claim uniqueness?
 		$claim = $entity->newClaim( $this->snak );
-		$claim->setGuid( $this->guidGenerator->newGuid() );
+		$claim->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		$claims->addClaim( $claim );
 		$this->updateSummary( $summary, 'create', '', $this->getClaimSummaryArgs( $this->snak ) );
 		$this->claimGuid = $claim->getGuid();
