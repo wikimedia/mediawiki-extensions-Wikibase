@@ -16,6 +16,24 @@
       "revId": "c628fe33b701adbe273f2df0f623d813370ecc2b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c7434142",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-04-04T14:59:33Z",
+      "side": 1,
+      "message": "This should be changed to check for an error message. Similar to the following test..",
+      "parentUuid": "8e23439c_874e6971",
+      "revId": "c628fe33b701adbe273f2df0f623d813370ecc2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
