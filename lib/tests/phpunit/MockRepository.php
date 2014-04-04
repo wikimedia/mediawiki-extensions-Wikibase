@@ -17,7 +17,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\SiteLink;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Property;
 use Wikibase\StorageException;
@@ -225,14 +224,8 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 * @return ItemId|null
 	 */
 	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink ) {
-		if ( $siteLink instanceof SiteLink ) {
-			$globalSiteId = $siteLink->getSite()->getGlobalId();
-			$pageName = $siteLink->getPage();
-		}
-		else {
-			$globalSiteId = $siteLink->getSiteId();
-			$pageName = $siteLink->getPageName();
-		}
+		$globalSiteId = $siteLink->getSiteId();
+		$pageName = $siteLink->getPageName();
 
 		// @todo: fix test data to use titles with underscores, like the site link table does it
 		$title = \Title::newFromText( $pageName );
