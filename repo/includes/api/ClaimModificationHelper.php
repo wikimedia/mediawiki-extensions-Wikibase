@@ -149,6 +149,7 @@ class ClaimModificationHelper {
 		}
 
 		/** @var Snak $snak */
+		//FIXME: remove snak validation logic here, once it is applied consistently by ChangeOps.
 		$this->snakValidation->validateSnak( $snak );
 		return $snak;
 	}

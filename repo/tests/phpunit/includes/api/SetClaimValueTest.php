@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\DataModel\Entity\Property;
@@ -45,6 +46,17 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @var ValueFormatter
 	 */
 	private $propertyValueFormatter = null;
+
+	public function setUp() {
+		parent::setUp();
+
+		static $hasEntities = false;
+
+		if ( !$hasEntities ) {
+			$this->initTestEntities( array( 'StringProp', 'Berlin' ) );
+			$hasEntities = true;
+		}
+	}
 
 	/**
 	 * @param Entity $entity
@@ -144,29 +156,46 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @dataProvider invalidClaimProvider
+	 * @dataProvider invalidRequestProvider
 	 */
-	public function testInvalidClaimGuid( $claimGuid ) {
+	public function testInvalidRequest( $itemHandle, $claimGuid, $snakType, $value, $error ) {
+		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+
+		if ( $claimGuid === null ) {
+			$claims = $item->getClaims();
+
+			/* @var Claim $claim */
+			$claim = reset( $claims );
+			$claimGuid = $claim->getGuid();
+		}
+
+		if ( !is_string( $value ) ) {
+			$value = json_encode( $value );
+		}
+
 		$params = array(
 			'action' => 'wbsetclaimvalue',
 			'claim' => $claimGuid,
-			'snaktype' => 'value',
-			'value' => 'abc',
+			'snaktype' => $snakType,
+			'value' => $value,
 		);
 
 		try {
 			$this->doApiRequestWithToken( $params );
-			$this->fail( 'Invalid claim guid did not raise an error' );
+			$this->fail( 'Invalid request did not raise an error' );
 		} catch ( \UsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
+			$this->assertEquals( $error, $e->getCodeString(),  'Invalid claim guid raised correct error' );
 		}
 	}
 
-	public function invalidClaimProvider() {
+	public function invalidRequestProvider() {
 		return array(
-			array( 'xyz' ),
-			array( 'x$y$z' ),
-			array( 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f' )
+			'bad guid 1' => array( 'Berlin', 'xyz', 'value', 'abc', 'invalid-guid' ),
+			'bad guid 2' => array( 'Berlin', 'x$y$z', 'value', 'abc', 'invalid-guid' ),
+			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'value', 'abc', 'invalid-guid' ),
+			'bad snak type' => array( 'Berlin', null, 'alksdjf', 'abc', 'unknown_snaktype' ),
+			'bad snak value' => array( 'Berlin', null, 'value', '    ', 'invalid-snak' ),
 		);
 	}
 
