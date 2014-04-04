@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_67a90ddc",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-04T15:10:21Z",
+      "side": 1,
+      "message": "It returns sitelinks including badges in opposite to the standard sitelink provider which returns sitelinks without badges. Thus I think it\u0027s worth a mention here.",
+      "parentUuid": "8e23439c_acfb8c10",
+      "revId": "a2ab6a49c559df86a2b6631b854e1b183fa1f3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d1066323",
         "filename": "client/includes/ClientSiteLinkLookup.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-04-04T11:05:57Z",
       "side": 1,
       "message": "Doesn\u0027t this remove a lot of test cases? Why?",
+      "revId": "a2ab6a49c559df86a2b6631b854e1b183fa1f3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_076139d0",
+        "filename": "client/tests/phpunit/includes/ClientSiteLinkLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-04T15:10:21Z",
+      "side": 1,
+      "message": "I don\u0027t really understand. The array will be the same because the data is the same as above.",
+      "parentUuid": "8e23439c_4c219899",
       "revId": "a2ab6a49c559df86a2b6631b854e1b183fa1f3fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
