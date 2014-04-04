@@ -165,10 +165,14 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 
 /********** LABEL **********/
 
+#content .wb-firstHeading {
+	font-size: 100%; /* required since Gerrit Ic5ba836364d04b2c3814777b69b5f47fce25292a */
+}
+
 .wb-firstHeading {
 	border-bottom: 0;
-	margin-bottom: 0;
-	padding-top: 0;
+	margin-bottom: 0; /* FIXME: Should be removed if the Typography refresh is stable */
+	padding-top: 0; /* FIXME: Should be removed if the Typography refresh is stable */
 	clear: both; /* so success bar after new item created won't float heading */
 }
 
@@ -212,6 +216,8 @@ label and its toolbar */
 /* the following lines are used to vertically position the toolbar on the baseline of the heading
 (label) which has a bigger font size */
 .wb-firstHeading .wb-editsection {
+	/* FIXME: Should use the LESS variable @content-font-family */
+	font-family: Arimo, "Liberation Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	line-height: 188%;
 	top: .3em; /* even out margin of label container in view mode */
 }
@@ -228,11 +234,6 @@ label and its toolbar */
 .wb-firstHeading .wikibase-toolbar .wikibase-toolbarlabel /* tooltip */ {
 	font-size: 100%;
 	margin-bottom: 0; /* even out border of label container in view mode */
-}
-
-/* FIXME: Very specific selector to temporary overrule VectorBeta extension */
-#content .wb-firstHeading {
-	font-size: 100%;
 }
 
 /********** /LABEL **********/
