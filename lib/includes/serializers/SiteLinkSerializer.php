@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use SiteStore;
-use Wikibase\SiteLink;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
@@ -74,17 +73,19 @@ class SiteLinkSerializer extends SerializerObject {
 		$setRemoved = in_array( 'sitelinks/removed' , $parts );
 
 		foreach ( $this->sortSiteLinks( $siteLinks ) as $link ) {
+			$siteId = $link->getSiteId();
+			$pageName = $link->getPageName();
+
 			$response = array(
-				'site' => $link->getSiteId(),
-				'title' => $link->getPageName(),
+				'site' => $siteId,
+				'title' => $pageName
 			);
 
 			if ( $includeUrls ) {
-				$site = $this->siteStore->getSite( $link->getSiteId() );
+				$site = $this->siteStore->getSite( $siteId );
 
 				if ( $site !== null ) {
-					$siteLink = new SiteLink( $site, $link->getPageName() );
-					$response['url'] = $siteLink->getUrl();
+					$response['url'] = $site->getPageUrl( $pageName );
 				}
 			}
 
