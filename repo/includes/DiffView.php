@@ -150,9 +150,10 @@ class DiffView extends \ContextSource {
 	 */
 	protected function getDeletedLine( $value, $path ) {
 		if( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
-			$siteLink = new SiteLink( $this->siteStore->getSite( $path[1] ), $value );
+			$url = $this->getPageLink( $path[1], $value );
+
 			return Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-				Html::element( 'a', array( 'href' => $siteLink->getUrl() ), $value )
+				Html::element( 'a', array( 'href' => $url ), $value )
 			);
 		} else {
 			return Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ), $value );
@@ -166,13 +167,27 @@ class DiffView extends \ContextSource {
 	 */
 	protected function getAddedLine( $value, $path ) {
 		if( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ){
-			$siteLink = new SiteLink( $this->siteStore->getSite( $path[1] ), $value );
+			$url = $this->getPageLink( $path[1], $value );
+
 			return Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-				Html::element( 'a', array( 'href' => $siteLink->getUrl() ), $value )
+				Html::element( 'a', array( 'href' => $url ), $value )
 			);
 		} else {
 			return Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ), $value );
 		}
+	}
+
+	/**
+	 * @param string $siteId
+	 * @param string $pageName
+	 *
+	 * @return string
+	 */
+	protected function getPageLink( $siteId, $pageName ) {
+		$site = $this->siteStore->getSite( $siteId );
+        $url = $site->getPageUrl( $pageName );
+
+		return $url;
 	}
 
 	/**
