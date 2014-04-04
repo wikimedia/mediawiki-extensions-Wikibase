@@ -15,7 +15,7 @@ Feature: Creating statements of type string
 
   @repo_login @modify_entity
   Scenario Outline: Adding a statement of type string
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
@@ -37,7 +37,7 @@ Feature: Creating statements of type string
 
   @repo_login @modify_entity
   Scenario: Adding a statement of type string and reload page
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
@@ -55,7 +55,7 @@ Feature: Creating statements of type string
 
   @repo_login @modify_entity
   Scenario: Adding a statement of type string with a too long string
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop

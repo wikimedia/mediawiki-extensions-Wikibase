@@ -48,7 +48,7 @@ Feature: Creating statements
 
   @ui_only @repo_login
   Scenario: Select a property
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
@@ -60,7 +60,7 @@ Feature: Creating statements
 
   @ui_only @repo_login @smoke
   Scenario: Select a property and enter a statement value
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
@@ -73,7 +73,7 @@ Feature: Creating statements
 
   @ui_only @repo_login
   Scenario Outline: Cancel statement after selecting a property
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop
@@ -93,7 +93,7 @@ Feature: Creating statements
 
   @ui_only @repo_login
   Scenario: Select a property, enter a statement value and clear the property
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | stringprop | string |
     When I click the statement add button
       And I select the property stringprop

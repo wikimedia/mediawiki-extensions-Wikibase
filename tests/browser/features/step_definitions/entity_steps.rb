@@ -45,7 +45,7 @@ Given /^I am on the page of item (.*)$/ do |item_handle|
   on(ItemPage).navigate_to_entity @items[item_handle]["url"]
 end
 
-Given /^There are properties with the following handles and datatypes:$/ do |props|
+Given /^I have the following properties with datatype:$/ do |props|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
   @properties = wb_api.wb_create_properties(props.raw)
