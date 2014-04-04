@@ -37,7 +37,7 @@
     "wikibase-error-remove-connection": "删除时发生连接错误，因此您的更改可能未完成。请检查您的网络连接。",
     "wikibase-error-save-timeout": "我们遇到了技术问题，因此无法完成您的保存操作。",
     "wikibase-error-remove-timeout": "我们遇到了技术问题，因此无法完成您的删除操作。",
-    "wikibase-error-autocomplete-connection": "无法查询站点API。请稍后重试。",
+    "wikibase-error-autocomplete-connection": "无法查询网站API。请稍后重试。",
     "wikibase-error-autocomplete-response": "服务器响应：$1",
     "wikibase-error-ui-client-error": "连接客户端页面失败。请稍后重试。",
     "wikibase-error-ui-no-external-page": "在相应维基项目上找不到指定条目。",

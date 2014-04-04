@@ -40,10 +40,12 @@
     "wikibase-rc-hide-wikidata": "$1 Wikipodatki",
     "wikibase-rc-hide-wikidata-hide": "Skrij",
     "wikibase-rc-hide-wikidata-show": "Prikaži",
-    "wikibase-rc-show-wikidata-pref": "Pokaži urejanja v Wikipodatkih v zadnjih spremembah",
+    "wikibase-rc-show-wikidata-pref": "Pokaži urejanja {{GRAMMAR:rodilnik|{{WBREPONAME}}}} v zadnjih spremembah",
+    "wikibase-rc-wikibase-edit-letter": "P",
     "wikibase-rc-wikibase-edit-title": "urejanje v Wikipodatkih",
-    "wikibase-watchlist-show-changes-pref": "Pokaži urejanja v Wikipodatkih v spisku nadzorov",
+    "wikibase-watchlist-show-changes-pref": "Pokaži urejanja {{GRAMMAR:rodilnik|{{WBREPONAME}}}} v spisku nadzorov",
     "wikibase-error-serialize-error": "Serializacija podatkov ni uspela.",
+    "wikibase-error-invalid-entity-id": "Vnesenega ID-ja sistem ne pozna. Prosimo, vnesite veljaven ID entitete.",
     "special-unconnectedpages": "Strani, ki niso povezane z objekti",
     "wikibase-unconnectedpages-legend": "Možnosti za nepovezane strani",
     "wikibase-unconnectedpages-page": "Začni seznam zadetkov s stranjo:",
@@ -54,5 +56,6 @@
     "wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medjezikovna povezava|medjezikovni povezavi|medjezikovne povezave|medjezikovnih povezav}} na strani)",
     "wikibase-pageinfo-entity-id": "ID objekta v Wikipodatkih",
     "wikibase-pageinfo-entity-id-none": "Brez",
+    "wikibase-property-render-error": "Upodobitev lastnosti $1 je spodletela: $2",
     "wikibase-otherprojects": "Drugi projekti"
 }

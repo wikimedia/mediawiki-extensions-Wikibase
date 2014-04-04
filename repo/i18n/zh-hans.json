@@ -232,7 +232,7 @@
     "wikibase-mylanguagefallbackchain-text": "用于为你显示实体标签的语言备选链显示在下面。",
     "wikibase-mylanguagefallbackchain-babel": "你可以通过在{{GENDER:$1|你的}}[[Special:MyPage|用户页面]]放置<nowiki>{{#babel: }}</nowiki>编辑它。",
     "wikibase-mylanguagefallbackchain-converted-item": "$1 - $2，更改自$3 - $4",
-    "wikibase-api-no-such-sitelink": "无法找到此类站点链接",
+    "wikibase-api-no-such-sitelink": "无法找到该网站链接",
     "wikibase-self-conflict-patched": "你的编辑已被修补至最后版本，覆盖某些你自己的中间更改。",
     "wikibase-conflict-patched": "你的编辑已被修补至最后版本。",
     "wikibase-restoreold": "还原",

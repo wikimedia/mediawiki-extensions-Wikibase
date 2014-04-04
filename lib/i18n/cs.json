@@ -56,6 +56,8 @@
     "wikibase-globedetails-latitude": "Zeměpisná šířka",
     "wikibase-globedetails-precision": "Přesnost",
     "wikibase-globedetails-globe": "Glóbus",
+    "wikibase-parse-error": "Chybně formátovaná hodnota.",
+    "wikibase-unexpected-error": "Neočekávaná chyba: $1.",
     "wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to pár minut trvat.",
     "wikibase-sitelinks-wikipedia": "Stránky Wikipedie provázané s touto položkou",
     "wikibase-sitelinks-sitename-columnheading": "Jazyk",
