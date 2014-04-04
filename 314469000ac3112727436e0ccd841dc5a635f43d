@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_701b10d5",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-04T14:26:34Z",
+      "side": 1,
+      "message": "Avoiding these dependencies where?\n\nI highly doubt this actually adds value - this is not Java, we do not need to care about compile time dependencies. Not run across any place where having an interface for such a factory made much sense.",
+      "parentUuid": "ae0e4726_34a56001",
+      "revId": "314469000ac3112727436e0ccd841dc5a635f43d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_6c4d759b",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 2
