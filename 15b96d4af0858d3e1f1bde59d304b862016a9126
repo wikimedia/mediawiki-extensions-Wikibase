@@ -16,6 +16,24 @@
       "revId": "15b96d4af0858d3e1f1bde59d304b862016a9126",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_870669d0",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-04T15:25:06Z",
+      "side": 1,
+      "message": "There are no existing installations using badges as the ui is not even implemented yet. ;-) So it makes no difference if we change the setting but removes redundant information.",
+      "parentUuid": "8e23439c_713f8fd4",
+      "revId": "15b96d4af0858d3e1f1bde59d304b862016a9126",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
