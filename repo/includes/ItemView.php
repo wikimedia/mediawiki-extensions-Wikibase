@@ -2,7 +2,8 @@
 
 namespace Wikibase;
 
-use Sites;
+use SiteSQLStore;
+use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -87,6 +88,8 @@ class ItemView extends EntityView {
 	/**
 	 * Builds and returns the HTML representing a group of a WikibaseEntity's site-links.
 	 *
+	 * @todo: code in this function belongs in its own class!
+	 *
 	 * @since 0.4
 	 *
 	 * @param Item $item the entity to render
@@ -95,26 +98,9 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinkGroup( Item $item, $group, $editable = true ) {
-		$allSiteLinks = $item->getSiteLinks();
+		$siteLinks = $item->getSiteLinks();
 
 		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
-
-		$siteLinks = array(); // site links of the currently handled site group
-
-		foreach( $allSiteLinks as $siteLink ) {
-			// FIXME: depracted method usage
-			$site = Sites::singleton()->getSite( $siteLink->getSiteId() );
-
-			if ( $site === null ) {
-				continue;
-			}
-
-			$link = new SiteLink( $site, $siteLink->getPageName() );
-
-			if ( $site->getGroup() === $group ) {
-				$siteLinks[] = $link;
-			}
-		}
 
 		$html = $thead = $tbody = $tfoot = '';
 
@@ -141,15 +127,12 @@ class ItemView extends EntityView {
 
 		$i = 0;
 
-		// Batch load the sites we need info about during the building of the sitelink list.
-		$sites = Sites::singleton()->getSiteGroup( $group );
-
 		// Sort the sitelinks according to their global id
 		$safetyCopy = $siteLinks; // keep a shallow copy;
 		$sortOk = usort(
 			$siteLinks,
-			function( SiteLink $a, SiteLink $b ) {
-				return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
+			function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+				return strcmp( $a->getSiteId(), $b->getSiteId() );
 			}
 		);
 
@@ -157,33 +140,39 @@ class ItemView extends EntityView {
 			$siteLinks = $safetyCopy;
 		}
 
+		// @todo inject into constructor
+		$sites = SiteSQLStore::newInstance()->getSites();
+
 		// Link to SpecialPage
 		$editLink = $this->getEditUrl( 'SetSiteLink', $item, null );
 
-		/* @var SiteLink $link */
-		foreach( $siteLinks as $link ) {
+		/* @var SimpleSiteLink $link */
+		foreach( $siteLinks as $siteLink ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
-			$site = $link->getSite();
+			$siteId = $siteLink->getSiteId();
+			$pageName = $siteLink->getPageName();
 
-			if ( $site->getDomain() === '' ) {
+			$site = $sites->hasSite( $siteId ) ? $sites->getSite( $siteId ) : null;
+
+			if ( !$site || $site->getDomain() === '' ) {
 				// the link is pointing to an unknown site.
 				// XXX: hide it? make it red? strike it out?
 
 				$tbody .= wfTemplate( 'wb-sitelink-unknown',
 					$alternatingClass,
-					htmlspecialchars( $link->getSite()->getGlobalId() ),
-					htmlspecialchars( $link->getPage() ),
+					htmlspecialchars( $siteId ),
+					htmlspecialchars( $siteLink->getPageName() ),
 					$this->getHtmlForEditSection( $editLink, 'td' )
 				);
 
 			} else {
 				$languageCode = $site->getLanguageCode();
-				$escapedSiteId = htmlspecialchars( $site->getGlobalId() );
+				$escapedSiteId = htmlspecialchars( $siteId );
 				// FIXME: this is a quickfix to allow a custom site-name for groups defined in $wgSpecialSiteLinkGroups instead of showing the language-name
 				if ( in_array( $group, $specialGroups ) ) {
-					$siteNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
-					$siteName = $siteNameMsg->exists() ? $siteNameMsg->parse() : $site->getGlobalId();
+					$siteNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $siteId );
+					$siteName = $siteNameMsg->exists() ? $siteNameMsg->parse() : $siteId;
 				} else {
 					// TODO: get an actual site name rather then just the language
 					$siteName = htmlspecialchars( Utils::fetchLanguageName( $languageCode ) );
@@ -197,8 +186,8 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					$siteName,
 					$escapedSiteId, // displayed site ID
-					htmlspecialchars( $link->getUrl() ),
-					htmlspecialchars( $link->getPage() ),
+					htmlspecialchars( $site->getPageUrl( $pageName ) ),
+					htmlspecialchars( $pageName ),
 					$this->getHtmlForEditSection( $editLink . '/' . $escapedSiteId, 'td' ),
 					$escapedSiteId // ID used in classes
 				);
