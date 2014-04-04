@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_519a5367",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-04T08:15:05Z",
+      "side": 1,
+      "message": "This function is supposed to return safe HTML. \u0027wikibase-propertypage-datatype\u0027 has output type text(). Does wfTemplate santise this? Given that in line 112 the text is sanitised, I fear now, and this may have to be changed to escaped().\n\nSee https://www.mediawiki.org/wiki/Manual:Messages_API for details.",
+      "revId": "88b54ca1bba51afa81e7f80f172b1ea7fb88cd82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
