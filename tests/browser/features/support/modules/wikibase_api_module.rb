@@ -65,13 +65,9 @@ module WikibaseAPI
     end
 
     # creates items by calling wb_create_entity multiple times
-    def wb_create_items(handles)
+    def wb_create_items(items_data)
       items = Hash.new
-
-      handles.each do |handle|
-        handle = handle[0]
-        data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) +
-            '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) + '"}}}'
+      items_data.each do |handle, data|
         item = wb_create_entity(data, "item")
         items[handle] = item
       end

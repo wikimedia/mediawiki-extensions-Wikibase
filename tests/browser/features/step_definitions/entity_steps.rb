@@ -41,6 +41,10 @@ Given /^I am on the page of the item to test$/ do
   on(ItemPage).navigate_to_entity @item_under_test["url"]
 end
 
+Given /^I am on the page of item (.*)$/ do |item_handle|
+  on(ItemPage).navigate_to_entity @items[item_handle]["url"]
+end
+
 Given /^There are properties with the following handles and datatypes:$/ do |props|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
@@ -49,7 +53,12 @@ end
 
 Given /^I have the following items:$/ do |handles|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
-  @items = wb_api.wb_create_items(handles.raw)
+  @items = wb_api.wb_create_items(on(ItemPage).create_item_data(handles))
+end
+
+Given /^I have the following empty items:$/ do |handles|
+  wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  @items = wb_api.wb_create_items(on(ItemPage).create_item_data(handles, true))
 end
 
 Given /^The copyright warning has been dismissed$/ do
