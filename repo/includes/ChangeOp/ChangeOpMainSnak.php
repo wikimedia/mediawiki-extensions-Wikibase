@@ -30,7 +30,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @var Snak|null
+	 * @var Snak
 	 */
 	protected $snak;
 
@@ -45,7 +45,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * @since 0.4
 	 *
 	 * @param string $claimGuid
-	 * @param Snak|null $snak
+	 * @param Snak $snak
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param SnakValidator $snakValidator
 	 *
@@ -53,16 +53,12 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 */
 	public function __construct(
 		$claimGuid,
-		$snak,
+		Snak $snak,
 		ClaimGuidGenerator $guidGenerator,
 		SnakValidator $snakValidator
 	) {
 		if ( !is_string( $claimGuid ) ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string' );
-		}
-
-		if ( !( $snak instanceof Snak ) ) {
-			throw new InvalidArgumentException( '$snak needs to be an instance of Snak' );
 		}
 
 		$this->claimGuid = $claimGuid;
