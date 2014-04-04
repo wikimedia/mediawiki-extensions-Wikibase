@@ -6,6 +6,7 @@ use FauxRequest;
 use FauxResponse;
 use HttpError;
 use OutputPage;
+use SiteList;
 use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -104,7 +105,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			self::URI_DATA,
 			$mockRepo,
 			$titleLookup,
-			$serializerFactory
+			$serializerFactory,
+			new SiteList()
 		);
 
 		$maxAge = 60*60;

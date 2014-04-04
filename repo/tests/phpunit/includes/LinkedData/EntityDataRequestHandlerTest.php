@@ -8,6 +8,7 @@ use FauxResponse;
 use HttpError;
 use OutputPage;
 use RequestContext;
+use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -91,7 +92,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			EntityDataSerializationServiceTest::URI_DATA,
 			$entityLookup,
 			$titleLookup,
-			$serializerFactory
+			$serializerFactory,
+			new SiteList()
 		);
 
 		$service->setFormatWhiteList(
