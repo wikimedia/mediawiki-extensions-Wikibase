@@ -5,17 +5,17 @@ env:
 
 matrix:
   include:
-    - env: DBTYPE=mysql LANG=de; MW=master
+    - env: DBTYPE=mysql LANG=de; MW=master WB=client
       php: 5.3
-    - env: DBTYPE=sqlite LANG=de; MW=master
+    - env: DBTYPE=sqlite LANG=de; MW=master WB=repo
       php: 5.3
-    - env: DBTYPE=sqlite LANG=de; MW=master
+    - env: DBTYPE=sqlite LANG=de; MW=master WB=both
       php: 5.4
-    - env: DBTYPE=sqlite LANG=en; MW=master
+    - env: DBTYPE=sqlite LANG=en; MW=master WB=client
       php: 5.5
-    - env: DBTYPE=sqlite LANG=en; MW=master
+    - env: DBTYPE=sqlite LANG=en; MW=master WB=repo
       php: 5.6
-    - env: DBTYPE=sqlite LANG=en; MW=master
+    - env: DBTYPE=sqlite LANG=en; MW=master WB=both
       php: hhvm
   allow_failures:
     - php: hhvm
