@@ -7,7 +7,7 @@ use EasyRdf_Graph;
 use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
-use Sites;
+use SiteSQLStore;
 
 /**
  * RDF mapping for wikibase data model.
@@ -39,6 +39,11 @@ class RdfBuilder {
 	const CC_URI = 'http://creativecommons.org/ns#';
 
 	const WIKIBASE_STATEMENT_QNAME = 'wikibase:Statement';
+
+	/**
+	 * @var SiteList
+	 */
+	private $sites;
 
 	/**
 	 * Map of qnames to namespace URIs
@@ -74,6 +79,8 @@ class RdfBuilder {
 		$this->graph = $graph;
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
+
+		$this->sites = SiteSQLStore::newInstance()->getSites();
 
 		$this->namespaces = array(
 			self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI,
@@ -321,18 +328,19 @@ class RdfBuilder {
 	public function addSiteLinks( Item $item ) {
 		$entityResource = $this->getEntityResource( $item->getId() );
 
-		foreach ( $item->getSiteLinks() as $link ) {
-			// FIXME: deprecated method usage
-			$link = new SiteLink( Sites::singleton()->getSite( $link->getSiteId() ), $link->getPageName() );
+		foreach ( $item->getSiteLinks() as $siteLink ) {
+			$site = $this->sites->getSite( $siteLink->getSiteId() );
+			$url = $site->getPageUrl( $siteLink->getPageName() );
 
-			$languageCode = $link->getSite()->getLanguageCode();
+			$languageCode = $site->getLanguageCode();
 
 			if ( !$this->isLanguageIncluded( $languageCode ) ) {
 				continue;
 			}
 
 			//XXX: ideally, we'd use https if the target site supports it.
-			$url = wfExpandUrl( $link->getUrl(), PROTO_HTTP );
+			$baseUrl = $site->getPageUrl( $siteLink->getPageName() );
+			$url = wfExpandUrl( $baseUrl, PROTO_HTTP );
 			$pageRecourse = $this->graph->resource( $url );
 
 			$pageRecourse->addResource( 'rdf:type', self::NS_SCHEMA_ORG . ':Article' );
