@@ -15,7 +15,7 @@ Feature: Creating statements of type item
 
   @repo_login @modify_entity
   Scenario Outline: Adding a statement of type item
-    Given There are properties with the following handles and datatypes:
+    Given I have the following properties with datatype:
       | itemprop | wikibase-item |
     Given I have the following items:
       | item1 |
