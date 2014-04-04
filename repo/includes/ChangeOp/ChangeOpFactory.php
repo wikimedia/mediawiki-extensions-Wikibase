@@ -229,7 +229,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetMainSnakOp( $claimGuid, Snak $snak ) {
-		return new ChangeOpMainSnak( $claimGuid, $snak, $this->guidGenerator );
+		return new ChangeOpMainSnak( $claimGuid, $snak, $this->guidGenerator, $this->snakValidator );
 	}
 
 	/**

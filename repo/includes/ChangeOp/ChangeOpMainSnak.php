@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Summary;
+use Wikibase\Validators\SnakValidator;
 
 /**
  * Class for mainsnak change operation
@@ -15,6 +16,7 @@ use Wikibase\Summary;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ChangeOpMainSnak extends ChangeOpBase {
 
@@ -33,6 +35,11 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	protected $snak;
 
 	/**
+	 * @var SnakValidator
+	 */
+	private $snakValidator;
+
+	/**
 	 * Constructs a new mainsnak change operation
 	 *
 	 * @since 0.4
@@ -40,10 +47,16 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * @param string $claimGuid
 	 * @param Snak|null $snak
 	 * @param ClaimGuidGenerator $guidGenerator
+	 * @param SnakValidator $snakValidator
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $claimGuid, $snak, ClaimGuidGenerator $guidGenerator ) {
+	public function __construct(
+		$claimGuid,
+		$snak,
+		ClaimGuidGenerator $guidGenerator,
+		SnakValidator $snakValidator
+	) {
 		if ( !is_string( $claimGuid ) ) {
 			throw new InvalidArgumentException( '$claimGuid needs to be a string' );
 		}
@@ -55,6 +68,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		$this->claimGuid = $claimGuid;
 		$this->snak = $snak;
 		$this->guidGenerator = $guidGenerator;
+		$this->snakValidator = $snakValidator;
 	}
 
 	/**
@@ -70,6 +84,8 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * - the claim's mainsnak gets set to $snak when $claimGuid and $snak are set
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		$this->validate();
+
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( is_null( $this->claimGuid ) || empty( $this->claimGuid ) ) {
@@ -129,23 +145,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @param Claims $claims
-	 * @param Summary $summary
-	 *
-	 * @throws ChangeOpException
-	 */
-	protected function removeClaim( Claims $claims, Summary $summary = null ) {
-		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
-			throw new ChangeOpException( "Entity does not have claim with GUID $this->claimGuid" );
-		}
-		$removedSnak = $claims->getClaimWithGuid( $this->claimGuid )->getMainSnak();
-		$claims->removeClaimWithGuid( $this->claimGuid );
-		$this->updateSummary( $summary, 'remove', '', $this->getClaimSummaryArgs( $removedSnak ) );
-	}
-
-	/**
-	 * @since 0.4
-	 *
 	 * @param Snak $mainSnak
 	 *
 	 * @return array
@@ -153,5 +152,18 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	protected function getClaimSummaryArgs( Snak $mainSnak ) {
 		$propertyId = $mainSnak->getPropertyId();
 		return array( array( $propertyId->getPrefixedId() => $mainSnak ) );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function validate() {
+		$result = $this->snakValidator->validate( $this->snak );
+
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
+		}
 	}
 }
