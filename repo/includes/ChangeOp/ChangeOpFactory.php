@@ -242,7 +242,7 @@ class ChangeOpFactory {
 	 */
 	public function newSetQualifierOp( $claimGuid, Snak $snak, $snakHash ) {
 		//XXX: index??
-		return new ChangeOpQualifier( $claimGuid, $snak, $snakHash );
+		return new ChangeOpQualifier( $claimGuid, $snak, $snakHash, $this->snakValidator );
 	}
 
 	/**
@@ -266,7 +266,7 @@ class ChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetReferenceOp( $claimGuid, Reference $reference, $referenceHash, $index = null ) {
-		return new ChangeOpReference( $claimGuid, $reference, $referenceHash );
+		return new ChangeOpReference( $claimGuid, $reference, $referenceHash, $this->snakValidator );
 	}
 
 	/**
