@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_874e6971",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-04-04T14:53:56Z",
+      "side": 1,
+      "message": "This test is a bit pointless I think. It just checks if the ENGLISH label did not change. I think the behavior of the SpecialPage is also wrong in this case: I guess it should report an error when using an invalid language, shouldn\u0027t it? In that case we should check for the existance of such an error in the test instead of checking the english label..",
+      "revId": "c628fe33b701adbe273f2df0f623d813370ecc2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
