@@ -3,32 +3,32 @@ These are the release notes for the WikibaseLib extension.
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:WikibaseLib
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=lib/RELEASE-NOTES
 
+### Version 0.5 (dev)
 
+* ...
 
-=== Version 0.4 ===
-(dev)
+### Version 0.4 (???)
 
-; Additions
+#### Additions
 
 * Added EntityIdParser
 * Added ReferencedEntitiesFinder
 * Added Unserializer interface
 * Added SerializerFactory
 
-; Changes
+#### Changes
 
 * ClaimObject class and Claim interface changed to Claim class
 * StatementObject class and Statement interface changed to Statement class
 * Moved all Serializer code into Wikibase\Lib\Serializers
 
-; Requirements
+#### Requirements
 
 * If experimental features are enabled, then this will depends on "Ask" extension now. See Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Ask
 * Requires "ValueView" extension now which can be found in the "DataValues" GIT repo.
 
 
-=== Version 0.3 ===
-(???)
+### Version 0.3 (???)
 
 * Introduced EntityId interface
 * Implemented proper serialization in Entity
@@ -43,8 +43,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Added unserialization support to SnakSerializer
 
 
-=== Version 0.2 ===
-(???)
+### Version 0.2 (???)
 
 * Statements are now claims, instead of objects containing a claim
 * Implemented PropertyObject and QueryObject
@@ -53,8 +52,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Added Term interface
 
 
-=== Version 0.1 ===
-(2012-11-01)
+### Version 0.1 (2012-11-01)
 
 Initial release with these features:
 

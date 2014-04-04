@@ -4,8 +4,7 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikiba
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=repo/RELEASE-NOTES
 
 
-=== Version 0.5 ===
-(dev)
+### Version 0.5 (dev)
 
 * WikibaseEntityModificationUpdate hook now only gets fired on modification and not on insertion and
 takes different arguments then it did before.
@@ -13,28 +12,24 @@ takes different arguments then it did before.
 * WikibaseEntityDeletionUpdate hook now gets an EntityContent rather than an EntityDeletionUpdate.
 * The definition of the database fields wb_terms.term_row_id and wb_items_per_site.ips_row_id have been changed to BIGINT for MySQL, to avoid integer overflow on large sites. '''NOTE:''' the column definition is not automatically updated when running update.php. If you expect a large number (hundreds of million) of edits on your wiki, please apply repo/sql/MakeRowIDsBig.sql to your database manually. This is only needed for MySQL (and for PostGres, which however isn't fully supported at the moment).
 
-=== Version 0.4 ===
-(not released)
+### Version 0.4 (???)
 
-; Interface
-
-; API
+#### API
 
 * Dropped support for numeric item ids. They now always need to be prefixed.
 
-; Backend
+#### Backend
 
 * Referenced entities are now added to the pagelinks table and thus show up on places such as Special:WhatLinksHere
 
-=== Version 0.3 ===
-(not released)
+### Version 0.3 (???)
 
-; Interface
+#### Interface
 
 * Added Special:ListDatatypes
 * Added Special:NewProperty
 
-; API
+#### API
 
 * Added wbcreateclaim API module
 * Added wbgetclaims API module
@@ -46,14 +41,13 @@ takes different arguments then it did before.
 * Added wbsetqualifier API module
 * Added wbremovequalifiers API module
 
-; Backend
+#### Backend
 
 * Claims are now included in the output of EntitySerializer, thus are now present in the wbgetentities API module
 * API serializers have been moved to lib and made non-API specific
 * Internal serialization logic for Snak, Claim, Statement and Reference has been implemented in toArray and newFromArray.
 
-=== Version 0.2 ===
-(not released)
+### Version 0.2 (???)
 
 * Added Special:SetLabel
 * Added Special:EntitiesWithoutLabel
@@ -62,8 +56,7 @@ takes different arguments then it did before.
 * Added wb_entity_per_page table
 * Most serialization in the API is done via new API serializers
 
-=== Version 0.1 ===
-(2012-11-01)
+### Version 0.1 (2012-11-01)
 
 Initial release with these features:
 

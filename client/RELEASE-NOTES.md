@@ -3,28 +3,25 @@ These are the release notes for the Wikibase Client extension.
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikibase_Client
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=client/RELEASE-NOTES
 
-=== Version 0.5 ===
+### Version 0.5 (dev)
+
 * Removed enableSiteLinkWidget setting, which was true by default.
 
-=== Version 0.4 ===
-(dev)
+### Version 0.4 (???)
 
 *
 
-=== Version 0.3 ===
-(???)
+### Version 0.3 (???)
 
 * Added suggestion to update item on the repository when moving a page
 
-=== Version 0.2 ===
-(???)
+### Version 0.2 (???)
 
 * Added methods to purge the entity cache and client store
 * Added ExternalChangesList
 * Improved handling of changes
 
-=== Version 0.1 ===
-(2012-11-01)
+### Version 0.1 (2012-11-01)
 
 Initial release with these features:
 
