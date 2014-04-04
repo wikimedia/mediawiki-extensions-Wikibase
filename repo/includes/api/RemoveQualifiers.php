@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpQualifierRemove;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Claim\Claim;
@@ -80,7 +79,7 @@ class RemoveQualifiers extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = new ChangeOpQualifierRemove( $claimGuid, $qualifierHash );
+			$changeOps[] = $this->changeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
 		}
 
 		return $changeOps;

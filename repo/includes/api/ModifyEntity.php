@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SiteLinkLookup;
-use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 
@@ -75,10 +74,12 @@ abstract class ModifyEntity extends ApiWikibase {
 		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'siteLinkGroups' );
 
-		$this->siteLinkLookup = StoreFactory::getStore()->newSiteLinkCache();
+		$this->siteLinkLookup = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 
 		$this->badgeItems = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'badgeItems' );
+
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
 	}
 
 	/**

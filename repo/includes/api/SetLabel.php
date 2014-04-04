@@ -51,12 +51,13 @@ class SetLabel extends ModifyTerm {
 		}
 
 		if ( $label === "" ) {
-			wfProfileOut( __METHOD__ );
-			return new ChangeOpLabel( $language, null );
+			$op = $this->changeOpFactory->newRemoveLabelOp( $language );
 		} else {
-			wfProfileOut( __METHOD__ );
-			return new ChangeOpLabel( $language, $label );
+			$op = $this->changeOpFactory->newSetLabelOp( $language, $label );
 		}
+
+		wfProfileOut( __METHOD__ );
+		return $op;
 	}
 
 	/**
