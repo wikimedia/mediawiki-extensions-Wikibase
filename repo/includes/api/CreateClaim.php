@@ -54,6 +54,8 @@ class CreateClaim extends ModifyClaim {
 		try {
 			$changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $e ) {
+			//FIXME: implement generic localization of exceptions,
+			//       especially ChangeOpValidationException.
 			$this->dieUsage( $e->getMessage(), 'failed-save' );
 		}
 

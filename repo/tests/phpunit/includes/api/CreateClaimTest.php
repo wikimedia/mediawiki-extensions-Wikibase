@@ -180,6 +180,16 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		);
 		$argLists[] = array( 'invalid-snak', $params );
 
+		//10
+		$params = array(
+			'action' => 'wbcreateclaim',
+			'entity' => '-',
+			'snaktype' => 'value',
+			'property' => '-',
+			'value' => '"   "', //blank is invalid
+		);
+		$argLists[] = array( 'invalid-snak-value', $params );
+
 		return $argLists;
 	}
 
