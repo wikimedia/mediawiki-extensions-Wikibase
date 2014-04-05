@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
@@ -47,7 +48,8 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 			self::URI_DATA,
 			$entityLookup,
 			$titleLookup,
-			$serializerFactory
+			$serializerFactory,
+			new SiteList()
 		);
 
 		$service->setFormatWhiteList(

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use SiteList;
 use Wikibase\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\RdfSerializer;
@@ -111,6 +112,7 @@ class RdfSerializerTest extends \MediaWikiTestCase {
 			$format,
 			RdfBuilderTest::URI_BASE,
 			RdfBuilderTest::URI_DATA,
+			new SiteList(),
 			$mockRepo
 		);
 	}
