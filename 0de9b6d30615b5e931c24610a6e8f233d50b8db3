@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_78b88be2",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-05T14:37:21Z",
+      "side": 1,
+      "message": "We have control over how this is instated, so please require the dependency in the constructor rather than using static binding to global state.\n\n... ok, noticed you essentially just moved it.",
+      "revId": "0de9b6d30615b5e931c24610a6e8f233d50b8db3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_58bdcfd0",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-05T14:37:21Z",
+      "side": 1,
+      "message": "$url is not used before it is assigned to again below?",
+      "revId": "0de9b6d30615b5e931c24610a6e8f233d50b8db3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_38d2132d",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-05T14:37:21Z",
+      "side": 1,
+      "message": "This is the second instance in which the old SiteLink was still used because of the getUrl functionality. And the way it is being replaced is not very nice either. Having a service that returns the URL given the site id and the page name would be a lot cleaner. That also removes the knowledge of a \"site store\" from this class, which is nice.",
+      "revId": "0de9b6d30615b5e931c24610a6e8f233d50b8db3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
