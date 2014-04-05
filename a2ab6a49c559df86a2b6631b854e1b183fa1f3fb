@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_2d27730f",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-05T09:48:46Z",
+      "side": 1,
+      "message": "I don\u0027t see a difference in the current implementations of \\Wikibase\\DataModel\\Entity\\Item::getSiteLink and \\Wikibase\\DataModel\\Entity\\Item::getSiteLinks that could explain such a difference. If they return different things that would be an error, in my humble opinion. If they are supposed to return different things this must be documented in \\Wikibase\\DataModel\\Entity\\Item and referenced here with a @see, not by repeating the same description.",
+      "parentUuid": "8e23439c_67a90ddc",
+      "revId": "a2ab6a49c559df86a2b6631b854e1b183fa1f3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d1066323",
         "filename": "client/includes/ClientSiteLinkLookup.php",
         "patchSetId": 1
@@ -48,6 +66,23 @@
       "writtenOn": "2014-04-04T11:05:57Z",
       "side": 1,
       "message": "@returns SiteLink|null",
+      "revId": "a2ab6a49c559df86a2b6631b854e1b183fa1f3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ad1b83d3",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-05T09:48:46Z",
+      "side": 1,
+      "message": "@return Item|null",
       "revId": "a2ab6a49c559df86a2b6631b854e1b183fa1f3fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
