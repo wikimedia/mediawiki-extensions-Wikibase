@@ -16,6 +16,24 @@
       "revId": "507943242df93db64953fbd68834ba7bc6776c44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f815bbea",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-05T14:19:03Z",
+      "side": 1,
+      "message": "perhaps, but I prefer not to get too derailed on the task of removing Wikibase\\SiteLink\n\nsplitting up and cleaning this code is definitely important @todo",
+      "parentUuid": "8e23439c_381c5318",
+      "revId": "507943242df93db64953fbd68834ba7bc6776c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
