@@ -39,7 +39,7 @@
     "wikibase-linkitem-failure": "在链接页面时出现了一个未知的问题。",
     "wikibase-linkitem-title": "链接该页面",
     "wikibase-linkitem-linkpage": "链接该页面",
-    "wikibase-linkitem-selectlink": "请选择你想要和该页面链接的网站和页面。",
+    "wikibase-linkitem-selectlink": "请选择您想要和该页面链接的网站和页面。",
     "wikibase-linkitem-input-site": "语言：",
     "wikibase-linkitem-input-page": "页面：",
     "wikibase-linkitem-confirmitem-text": "您所选的页面已与[$1 中央数据库中的其他项]链接。请确认如下所示的{{PLURAL:$2|页面|页面}}{{PLURAL:$2|是|均是}}您想要与此页{{PLURAL:$2|相连接的|相连接的}}。",
