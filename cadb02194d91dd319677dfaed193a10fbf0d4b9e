@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_8b8b0c20",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T18:52:00Z",
+      "side": 1,
+      "message": "Probability of a user seeing this is high. All you have to do to see this is to click \"undo\". Live example: https://www.wikidata.org/w/index.php?title\u003dQ3555427\u0026action\u003dedit\u0026undoafter\u003d5275791\u0026undo\u003d24215179\n\nI don\u0027t have a good suggestion but agree it should be more descriptive.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ab95a837",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T18:52:00Z",
+      "side": 1,
+      "message": "Probability of a user seeing this is almost zero. From what I see this can only happen if the user \"hacks\" the URL. Live example: https://www.wikidata.org/w/index.php?title\u003dQ3555427\u0026action\u003dedit\u0026undoafter\u003d5275791\u0026undo\u003d5275791\n\nSuggestion: Two different revisions must be specified to undo an edit.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0ba6dca7",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T18:52:00Z",
+      "side": 1,
+      "message": "This is the pop-up on the [?] icon when you edit aliases. It\u0027s actually important to talk about \"so it can be found\". I think \"data set\" should be reworded.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cbb7c4d2",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T18:52:00Z",
+      "side": 1,
+      "message": "I\u0027m not sure if the word \"property\" should be used here. Also what \"custom\" means is unclear at this point in my humble opinion.\n\nSame with the other message above.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8bb1ccde",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T18:52:00Z",
+      "side": 1,
+      "message": "Probability of a user seeing this is very low. See snakview.variations.Value.js \u003e handleDataValueTypeMismatch.\n\nSuggestion: Unexpected conflict between the property type \"$2\" and the value type \"$1\". Try to reload the page.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2bc0782e",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T18:52:00Z",
+      "side": 1,
+      "message": "The messages\n* wikibase-itembytitle-nothing-found\n* wikibase-itembytitle-invalid-site\n* wikibase-itembytitle-description\n\nwere removed in I6d2b083d82107d249c4defb6d0d468d2fc744b01 and can be deleted.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ebb280e3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T18:52:00Z",
+      "side": 1,
+      "message": "An other \"data set\" that should be reworded.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
