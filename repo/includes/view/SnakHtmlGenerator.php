@@ -89,7 +89,7 @@ class SnakHtmlGenerator {
 		$propertyId = $snak->getPropertyId();
 		$propertyKey = $propertyId->getSerialization();
 		$propertyLabel = isset( $propertyLabels[$propertyKey] )
-			? $this->propertyLabels[$propertyKey]
+			? $propertyLabels[$propertyKey]
 			: $propertyKey;
 
 		// @todo use EntityIdHtmlLinkFormatter here
