@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_2bf518b6",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T17:37:34Z",
+      "side": 1,
+      "message": "The implementation here doesn\u0027t say anything about badges.\n\nThe documentation and implementation of Item::getSiteLink doesn\u0027t say anything about badges.\n\nSame problem with getSiteLinks above.\n\nIf an other implementation returns an incomplete SiteLink object this must be documented there, not here.",
+      "revId": "e08a0db6f4ae1f1114cf76f2ef3bee2ae0c1bbdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
