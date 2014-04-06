@@ -16,6 +16,41 @@
       "revId": "e08a0db6f4ae1f1114cf76f2ef3bee2ae0c1bbdf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cb1b44d3",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-06T19:10:28Z",
+      "side": 1,
+      "message": "Agree, when a method returns a SiteLink it is expected it returns the whole SiteLink. Not doing so is odd and should be clearly documented. Though you\u0027d likely be better off making a new object that properly represents the info you are dealing with then.\n\nSecond issue with this comment: it talks about the implementation rather than specifying the contract of the method. This information is something you can put in the class docs of the class implementing the interface in a specific way, though in most cases you can make this clear enough with the class name. Here you do not have a dedicated interface, and just have a class that thus cannot describe itself in such a way. Still, the callers of this method should very likely not even know there is such a thing as a repository application, so having it in the docs here is bad.",
+      "parentUuid": "8e23439c_2bf518b6",
+      "revId": "e08a0db6f4ae1f1114cf76f2ef3bee2ae0c1bbdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0b4a5cc8",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-06T19:10:28Z",
+      "side": 1,
+      "message": "This does not belong in a SiteLinkLookup",
+      "revId": "e08a0db6f4ae1f1114cf76f2ef3bee2ae0c1bbdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
