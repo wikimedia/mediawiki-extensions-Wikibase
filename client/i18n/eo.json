@@ -40,6 +40,8 @@
     "wikibase-property-notfound": "Atributo $1 ne estas trovita.",
     "wikibase-property-notsupportedyet": "Wikibase ankoraŭ ne subtenas atributan specon por atribuo $1.",
     "wikibase-rc-hide-wikidata": "$1 Vikidatumoj",
+    "wikibase-rc-hide-wikidata-hide": "Kaŝi",
+    "wikibase-rc-hide-wikidata-show": "Montri",
     "wikibase-rc-show-wikidata-pref": "Montru Vikidatumajn redaktojn en la lastaj ŝanĝoj",
     "wikibase-rc-wikibase-edit-letter": "D",
     "wikibase-rc-wikibase-edit-title": "Redakto en Vikidatumoj",
@@ -53,5 +55,6 @@
     "wikibase-unconnectedpages-iwdata-label": "Nur paĝon kun interlingva ligiloj",
     "wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlingva ligilo|interlingvaj ligiloj}} en la paĝo)",
     "wikibase-pageinfo-entity-id": "Identigilo de Vikidatuma ero",
-    "wikibase-pageinfo-entity-id-none": "Nenio"
+    "wikibase-pageinfo-entity-id-none": "Nenio",
+    "wikibase-otherprojects": "Aliaj projektoj"
 }

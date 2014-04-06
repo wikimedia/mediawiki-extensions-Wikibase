@@ -62,5 +62,6 @@
     "wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interwikilänk|interwikilänkar}} på sidan)",
     "wikibase-pageinfo-entity-id": "{{WBREPONAME}} objekt-ID",
     "wikibase-pageinfo-entity-id-none": "Ingen",
-    "wikibase-property-render-error": "Misslyckades att rendera egenskapen $1: $2"
+    "wikibase-property-render-error": "Misslyckades att rendera egenskapen $1: $2",
+    "wikibase-otherprojects": "Andra projekt"
 }

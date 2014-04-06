@@ -148,6 +148,10 @@ $specialPageAliases['es'] = array(
 	'ItemDisambiguation' => array( 'DesambiguaciónDeElementos' ),
 	'ListDatatypes' => array( 'ListarTiposDeDatos' ),
 	'SetLabel' => array( 'AsignarEtiqueta' ),
+	'SetDescription' => array( 'DefinirDescripción' ),
+	'SetAliases' => array( 'DefinirAliases' ),
+	'SetSiteLink' => array( 'DefinirEnlaceSitio' ),
+	'MergeItems' => array( 'CombinarElementos' ),
 	'EntitiesWithoutLabel' => array( 'EntidadesSinEtiqueta' ),
 );
 

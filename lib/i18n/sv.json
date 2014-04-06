@@ -55,6 +55,8 @@
     "wikibase-globedetails-latitude": "Latitud",
     "wikibase-globedetails-precision": "Precision",
     "wikibase-globedetails-globe": "Glob",
+    "wikibase-parse-error": "Felformaterat värde.",
+    "wikibase-unexpected-error": "Oväntat fel: $1.",
     "wikibase-replicationnote": "Observera att det kan ta flera minuter tills förändringarna är synliga på alla wikier.",
     "wikibase-sitelinks-wikipedia": "Wikipedia-sidor som är länkade till det här objektet",
     "wikibase-sitelinks-sitename-columnheading": "Språk",
