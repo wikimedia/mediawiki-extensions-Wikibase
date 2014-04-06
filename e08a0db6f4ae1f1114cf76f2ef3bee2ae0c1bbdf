@@ -69,6 +69,24 @@
       "revId": "e08a0db6f4ae1f1114cf76f2ef3bee2ae0c1bbdf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2e5c064e",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-06T19:51:43Z",
+      "side": 1,
+      "message": "This method is the result of reasonable refactoring and should simply be private.",
+      "parentUuid": "8e23439c_4b6e142c",
+      "revId": "e08a0db6f4ae1f1114cf76f2ef3bee2ae0c1bbdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
