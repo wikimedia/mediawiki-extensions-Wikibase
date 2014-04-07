@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_83c52893",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-07T23:02:46Z",
+      "side": 1,
+      "message": "Im fairly sure this comment will mess up IDEs that use these comments and the function comment is no longer directly above the function.\n\nThe @FIXME should just be in the function comment block",
+      "revId": "28b674ac089b4aad3450b4cce78178cc32ca2641",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
