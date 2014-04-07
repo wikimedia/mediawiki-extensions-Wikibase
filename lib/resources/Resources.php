@@ -589,6 +589,7 @@ return call_user_func( function() {
 				'wikibase.formatters',
 				'wikibase.parsers',
 				'wikibase.experts',
+				'wikibase.utilities'
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
