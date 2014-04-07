@@ -45,7 +45,7 @@ class SettingsArray extends \ArrayObject {
 	 * @return mixed
 	 */
 	public function getSetting( $settingName ) {
-		if ( !$this->offsetExists( $settingName ) ) {
+		if ( !$this->offsetExists( $settingName ) && !array_key_exists( $settingName, $this ) ) {
 			throw new OutOfBoundsException( 'Attempt to get non-existing setting "' . $settingName . '"' );
 		}
 
