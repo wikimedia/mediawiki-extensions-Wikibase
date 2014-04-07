@@ -8,7 +8,6 @@ use FormatJson;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
-use Profiler;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -34,6 +33,7 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class ClaimModificationHelper {
 
@@ -61,18 +61,22 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
+	 * @var ApiErrorReporter
 	 * @param SnakConstructionService $snakConstructionService
 	 * @param EntityIdParser $entityIdParser
 	 * @param ClaimGuidValidator $claimGuidValidator
+	 * @param ApiErrorReporter $errorReporter
 	 */
 	public function __construct(
 		SnakConstructionService $snakConstructionService,
 		EntityIdParser $entityIdParser,
-		ClaimGuidValidator $claimGuidValidator
+		ClaimGuidValidator $claimGuidValidator,
+		ApiErrorReporter $errorReporter
 	) {
 		$this->snakConstructionService = $snakConstructionService;
 		$this->entityIdParser = $entityIdParser;
 		$this->claimGuidValidator = $claimGuidValidator;
+		$this->errorReporter = $errorReporter;
 	}
 
 	/**
@@ -100,7 +104,7 @@ class ClaimModificationHelper {
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( !$claims->hasClaimWithGuid( $claimGuid ) ) {
-			$this->throwUsageException( 'Could not find the claim' , 'no-such-claim' );
+			$this->errorReporter->dieError( 'Could not find the claim' , 'no-such-claim' );
 		}
 
 		return $claims->getClaimWithGuid( $claimGuid );
@@ -121,26 +125,21 @@ class ClaimModificationHelper {
 		if ( isset( $params['value'] ) ) {
 			$valueData = FormatJson::decode( $params['value'], true );
 			if ( $valueData === null ) {
-				$this->throwUsageException( 'Could not decode snak value', 'invalid-snak' );
+				$this->errorReporter->dieError( 'Could not decode snak value', 'invalid-snak' );
 			}
 		}
 
 		try {
 			$snak = $this->snakConstructionService->newSnak( $propertyId, $params['snaktype'], $valueData );
 			return $snak;
-		}
-		catch ( IllegalValueException $ex ) {
-			$this->throwUsageException( 'Invalid snak: IllegalValueException', 'invalid-snak' );
-		}
-		catch ( InvalidArgumentException $ex ) {
-			// shouldn't happen, but might.
-			$this->throwUsageException( 'Invalid snak: InvalidArgumentException', 'invalid-snak' );
-		}
-		catch ( OutOfBoundsException $ex ) {
-			$this->throwUsageException( 'Invalid snak: OutOfBoundsException' . $ex->getMessage(), 'invalid-snak' );
-		}
-		catch ( PropertyNotFoundException $ex ) {
-			$this->throwUsageException( 'Invalid snak: PropertyNotFoundException' . $ex->getMessage(), 'invalid-snak' );
+		} catch ( IllegalValueException $ex ) {
+			$this->errorReporter->dieException( $ex, 'invalid-snak' );
+		} catch ( InvalidArgumentException $ex ) {
+			$this->errorReporter->dieException( $ex, 'invalid-snak' );
+		} catch ( OutOfBoundsException $ex ) {
+			$this->errorReporter->dieException( $ex, 'invalid-snak' );
+		} catch ( PropertyNotFoundException $ex ) {
+			$this->errorReporter->dieException( $ex, 'invalid-snak' );
 		}
 
 		throw new LogicException( 'ClaimModificationHelper::throwUsageException did not throw a UsageException.' );
@@ -160,9 +159,10 @@ class ClaimModificationHelper {
 	public function getEntityIdFromString( $entityIdParam ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $entityIdParam );
-		} catch ( EntityIdParsingException $parseException ) {
-			$this->throwUsageException( 'Invalid entity ID: ParseException', 'invalid-entity-id' );
+		} catch ( EntityIdParsingException $ex ) {
+			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
 		}
+
 		/** @var EntityId $entityId */
 		return $entityId;
 	}
@@ -186,17 +186,6 @@ class ClaimModificationHelper {
 	}
 
 	/**
-	 * @param string $message
-	 * @param string $code
-	 *
-	 * @throws UsageException
-	 */
-	private function throwUsageException( $message, $code ) {
-		Profiler::instance()->close();
-		throw new UsageException( $message, $code );
-	}
-
-	/**
 	 * Applies the given ChangeOp to the given Entity.
 	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
 	 *
@@ -207,8 +196,8 @@ class ClaimModificationHelper {
 	public function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
 		try {
 			$changeOp->apply( $entity, $summary );
-		} catch ( ChangeOpException $exception ) {
-			$this->throwUsageException( 'Failed to apply changeOp: ' . $exception->getMessage(), 'modification-failed' );
+		} catch ( ChangeOpException $ex ) {
+			$this->errorReporter->dieException( $ex, 'modification-failed' );
 		}
 	}
 
