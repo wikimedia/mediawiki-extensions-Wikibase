@@ -34,6 +34,12 @@
 				'type': 'text'
 			} )
 			.appendTo( this.$viewPort )
+			.on( 'keydown', function( event ) {
+				// Prevent Enter key from adding a new line character:
+				if( event.keyCode === $.ui.keyCode.ENTER ) {
+					event.preventDefault();
+				}
+			} )
 			.on( 'eachchange', function() {
 				notifier.notify( 'change' );
 			} );
