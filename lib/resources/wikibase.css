@@ -978,6 +978,51 @@ table.wb-sitelinks .wb-sitelinks-link {
 	border-right: none;
 }
 
+/***** BADGES *****/
+
+.wb-sitelinks-badges:hover .wb-badges > div {
+	display: block;
+}
+
+.wb-badges {
+	/* @embed */
+	background-image: url(images/star.png);
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+	display: block;
+	float: left;
+	cursor: pointer;
+}
+
+.wb-badges-empty {
+	/* @embed */
+	background-image: url(images/star-empty.png);
+}
+
+.wb-badges > div {
+	display: none;
+	position: absolute;
+	margin-top: 26px;
+	width: 200px;
+	padding: 5px;
+	background-color: #ffffff;
+	border: 1px solid #CCC;
+	cursor: auto;
+}
+
+.wb-badges li {
+	font-size: 84%;
+	margin: 0.2em 12px 0.2em 0;
+	list-style-type: none;
+	border: 1px solid #CCC;
+	padding: 0 12px 0 7px;
+	line-height: 136%;
+	background-color: #F8F8F8;
+}
+
+/***** /BADGES *****/
+
 /* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
 table.wb-sitelinks .wb-editsection {
 	width: 18em;
