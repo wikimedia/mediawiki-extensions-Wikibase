@@ -17,6 +17,7 @@
 	* Term\Term
 	* Term\TermList
 * Added `Entity::getFingerprint`
+* Added `Entity::setFingerprint`
 
 #### Deprecations
 

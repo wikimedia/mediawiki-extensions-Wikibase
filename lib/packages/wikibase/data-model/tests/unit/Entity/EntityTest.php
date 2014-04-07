@@ -904,11 +904,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getNewEmpty();
 
 		$this->assertEquals(
-			new Fingerprint(
-				new LabelList( array() ),
-				new DescriptionList( array() ),
-				new AliasGroupList( array() )
-			),
+			Fingerprint::newEmpty(),
 			$entity->getFingerprint()
 		);
 	}
@@ -953,6 +949,53 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 			),
 			$entity->getFingerprint()
 		);
+	}
+
+	public function testGivenEmptyFingerprint_noTermsAreSet() {
+		$entity = $this->getNewEmpty();
+
+		$entity->setFingerprint( Fingerprint::newEmpty() );
+
+		$this->assertHasNoTerms( $entity );
+	}
+
+	private function assertHasNoTerms( Entity $entity ) {
+		$this->assertEquals( array(), $entity->getLabels() );
+		$this->assertEquals( array(), $entity->getDescriptions() );
+		$this->assertEquals( array(), $entity->getAllAliases() );
+	}
+
+	public function testGivenEmptyFingerprint_existingTermsAreRemoved() {
+		$entity = $this->getNewEmpty();
+
+		$entity->setLabel( 'en', 'foo' );
+		$entity->setDescription( 'en', 'foo bar' );
+		$entity->setAliases( 'en', array( 'foo', 'bar' ) );
+
+		$entity->setFingerprint( Fingerprint::newEmpty() );
+
+		$this->assertHasNoTerms( $entity );
+	}
+
+	public function testWhenSettingFingerprint_getFingerprintReturnsIt() {
+		$fingerprint = new Fingerprint(
+			new LabelList( array(
+				new Label( 'en', 'foo' ),
+			) ),
+			new DescriptionList( array(
+				new Description( 'en', 'foo bar' )
+			) ),
+			new AliasGroupList( array(
+				new AliasGroup( 'en', array( 'foo', 'bar' ) )
+			) )
+		);
+
+		$entity = $this->getNewEmpty();
+
+		$entity->setFingerprint( $fingerprint );
+		$newFingerprint = $entity->getFingerprint();
+
+		$this->assertEquals( $fingerprint, $newFingerprint );
 	}
 
 }

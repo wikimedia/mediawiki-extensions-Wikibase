@@ -955,4 +955,29 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 		return new AliasGroupList( $groups );
 	}
 
+	/**
+	 * @since 0.7.3
+	 *
+	 * @param Fingerprint $fingerprint
+	 */
+	public function setFingerprint( Fingerprint $fingerprint ) {
+		$this->setLabels( $fingerprint->getLabels()->toTextArray() );
+		$this->setDescriptions( $fingerprint->getDescriptions()->toTextArray() );
+		$this->setAliasGroupList( $fingerprint->getAliases() );
+
+	}
+
+	private function setAliasGroupList( AliasGroupList $list ) {
+		$allAliases = array();
+
+		/**
+		 * @var AliasGroup $aliasGroup
+		 */
+		foreach ( $list as $aliasGroup ) {
+			$allAliases[$aliasGroup->getLanguageCode()] = $aliasGroup->getAliases();
+		}
+
+		$this->setAllAliases( $allAliases );
+	}
+
 }
