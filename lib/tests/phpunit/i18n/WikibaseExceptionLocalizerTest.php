@@ -21,6 +21,7 @@ class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'RuntimeException' => array( new RuntimeException( 'Oops!' ), 'wikibase-unexpected-error', array( 'Oops!' ) ),
 			'ParseException' => array( new ParseException( 'Blarg!' ), 'wikibase-parse-error', array() ),
+			//TODO: test ChangeOpValidationException with Error objects
 		);
 	}
 

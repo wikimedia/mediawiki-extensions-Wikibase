@@ -6,6 +6,8 @@ use Exception;
 use Message;
 use MessageException;
 use ValueParsers\ParseException;
+use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * ExceptionLocalizer implementing localization of some well known types of exceptions
@@ -20,6 +22,15 @@ use ValueParsers\ParseException;
 class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 
 	/**
+	 * @var ValidatorErrorLocalizer
+	 */
+	protected $validatorErrorLocalizer;
+
+	public function __construct() {
+		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer();
+	}
+
+	/**
 	 * @see ExceptionLocalizer::getExceptionMessage()
 	 *
 	 * @param Exception $ex
@@ -31,6 +42,8 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 			return $this->getMessageExceptionMessage( $ex );
 		} elseif ( $ex instanceof ParseException ) {
 			return $this->getParseExceptionMessage( $ex );
+		} elseif ( $ex instanceof ChangeOpValidationException ) {
+			return $this->getChangeOpValidationExceptionMessage( $ex );
 		} else {
 			return $this->getGenericExceptionMessage( $ex );
 		}
@@ -58,6 +71,21 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 		$key = 'wikibase-parse-error';
 		$params = array();
 		$msg = wfMessage( $key )->params( $params );
+
+		return $msg;
+	}
+
+	/**
+	 * @param ChangeOpValidationException $validationError
+	 *
+	 * @return Message
+	 */
+	protected function getChangeOpValidationExceptionMessage( ChangeOpValidationException $validationError ) {
+		$errors = $validationError->getValidationResult()->getErrors();
+
+		//FIXME: change the interface so we can return a list of messages?
+		$error = reset( $errors );
+		$msg = $this->validatorErrorLocalizer->getErrorMessage( $error );
 
 		return $msg;
 	}

@@ -20,6 +20,7 @@ use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
+use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -40,7 +41,20 @@ use Wikibase\SummaryFormatter;
  */
 abstract class ApiWikibase extends ApiBase {
 
-	private $resultBuilder;
+	/**
+	 * @var ResultBuilder
+	 */
+	protected $resultBuilder;
+
+	/**
+	 * @var ApiErrorReporter
+	 */
+	protected $errorReporter;
+
+	/**
+	 * @var ExceptionLocalizer
+	 */
+	protected $exceptionLocalizer;
 
 	/**
 	 * Wrapper message for single errors
@@ -114,6 +128,16 @@ abstract class ApiWikibase extends ApiBase {
 		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
 
 		$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
+		$this->exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+	}
+
+	protected function setupModule() {
+		...sadly, there is no good place to get this called before execute(), it seems...
+		$this->errorReporter = new ApiErrorReporter(
+			$this,
+			$this->getResultBuilder(),
+			$this->exceptionLocalizer
+		);
 	}
 
 	/**
@@ -132,7 +156,6 @@ abstract class ApiWikibase extends ApiBase {
 	 */
 	public function getResultBuilder() {
 		if( !isset( $this->resultBuilder ) ) {
-
 			$serializerFactory = new SerializerFactory(
 				null,
 				$this->dataTypeLookup,
