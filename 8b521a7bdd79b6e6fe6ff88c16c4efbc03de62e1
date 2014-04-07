@@ -16,6 +16,24 @@
       "revId": "8b521a7bdd79b6e6fe6ff88c16c4efbc03de62e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7d0cef3d",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 0,
+      "message": "Because the snaks are now validated by ChangeOpClaim::apply() 20 lines down. That\u0027s the point of this patch ;)",
+      "parentUuid": "8e23439c_dae309d3",
+      "revId": "8b521a7bdd79b6e6fe6ff88c16c4efbc03de62e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

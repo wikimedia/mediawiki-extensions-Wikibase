@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_dd3d438c",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "I didn\u0027t even look what $index does...",
+      "parentUuid": "8e23439c_fab7e5d1",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_daac2987",
         "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
         "patchSetId": 16
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-07T19:47:19Z",
       "side": 1,
       "message": "Backslash?",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7dc50f90",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "bah,phpstorm does this for some reason. will fix.",
+      "parentUuid": "8e23439c_daac2987",
       "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7df2afe0",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "That\u0027s what the else branch below does, no? Do you just dislike the \"creative\" use of an exception for that test? I tend to agree, but won\u0027t touch it here. Also, it\u0027s just a matter of taste \u0026 convention, really. In Python, it\u0027s convention to \"ask for for forgiveness, rather than permission\". In Java, the convention is to check first. Maybe the reason ist that Python exceptions are rather lightweight.",
+      "parentUuid": "8e23439c_7a6e352c",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_bab16dde",
         "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
         "patchSetId": 16
@@ -64,6 +118,24 @@
       "writtenOn": "2014-04-07T19:47:19Z",
       "side": 1,
       "message": "The amount and kind-of-random order of this parameters is starting to look a bit scary. Don\u0027t you agree?",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ba760dd4",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "Well, it\u0027s a factory for several different kinds of objects, so that\u0027s to be expected. The only way around this would be to have individual factory classes for each kind of ChangeOp - then each factory would have fewer dependencies. Or we could bundle services, e.g. all the GuidStuff into a GuidHandlerThingyService.",
+      "parentUuid": "8e23439c_bab16dde",
       "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_5a85b99e",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "Probably. But that\u0027s the way the ValueValidator library defines it.\nCore has a Result class too, btw.",
+      "parentUuid": "8e23439c_9ac6b14d",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_7ac3d53d",
         "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
         "patchSetId": 16
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7a5f5545",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "I\u0027m a bit torn. On a MediaWiki result object it\u0027s an error to try to get errors for a result that is valid. And having the full result object here provides the opportunity to provide additional context for the errors. \n\nThe check is here to make sure we actually have something to report. At least at present, if there are no errors, there\u0027s not much one can do with this exception.",
+      "parentUuid": "8e23439c_7ac3d53d",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_5ac0192f",
         "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
         "patchSetId": 16
@@ -115,6 +223,24 @@
       "writtenOn": "2014-04-07T19:47:19Z",
       "side": 1,
       "message": "Uppercase, please.",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_fa3a45e3",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "allright ;)",
+      "parentUuid": "8e23439c_5ac0192f",
       "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_1d4a9b5f",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "because phpstorm doesn\u0027t know better and I didn\u0027t pay attention :)",
+      "parentUuid": "8e23439c_1a7e21e2",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_1adaa121",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ClaimTestHelper.php",
         "patchSetId": 16
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_bd6f27c0",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ClaimTestHelper.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "Yea, I don\u0027t like the name. A \"provider\" however is something different in my mind, more like a factory or a builder. \"MockServicesForClaimTests\" might be a more descriptive name?...\n\nBut essentially, it acts as a common trait for things that test claims. ClaimTestTrait would be appropriate, I guess. Could even make it an actual trait at some point.",
+      "parentUuid": "8e23439c_1adaa121",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_fadec513",
         "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
         "patchSetId": 16
@@ -183,6 +345,24 @@
       "writtenOn": "2014-04-07T19:47:19Z",
       "side": 1,
       "message": "What\u0027s the benefit of making this a static property? Currently it\u0027s only used a single time in WikibaseApiTestCase::initTestEntities. Wouldn\u0027t things be easier to read if the array is in the same file?",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7dde2f72",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:43:31Z",
+      "side": 1,
+      "message": "No, because it applies to the static array of test entities above. It provides default values for the placeholders used there. Perhaps that could be documented, and the name improved :)",
+      "parentUuid": "8e23439c_fadec513",
       "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
