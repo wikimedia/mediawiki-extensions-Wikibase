@@ -67,11 +67,8 @@ class SetClaim extends ModifyClaim {
 			$claim,
 			( isset( $params['index'] ) ? $params['index'] : null )
 		);
-		try{
-			$changeop->apply( $entity );
-		} catch( ChangeOpException $exception ){
-			$this->dieUsage( 'Failed to apply changeOp: ' . $exception->getMessage(), 'save-failed' );
-		}
+
+		$this->claimModificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
