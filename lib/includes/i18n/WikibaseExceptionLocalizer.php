@@ -6,6 +6,8 @@ use Exception;
 use Message;
 use MessageException;
 use ValueParsers\ParseException;
+use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * ExceptionLocalizer implementing localization of some well known types of exceptions
@@ -18,6 +20,15 @@ use ValueParsers\ParseException;
  * @author Daniel Kinzler
  */
 class WikibaseExceptionLocalizer implements ExceptionLocalizer {
+
+	/**
+	 * @var ValidatorErrorLocalizer
+	 */
+	protected $validatorErrorLocalizer;
+
+	public function __construct() {
+		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer();
+	}
 
 	/**
 	 * @see ExceptionLocalizer::getExceptionMessage()
