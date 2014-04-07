@@ -8,7 +8,8 @@
             "Anja Jentzsch",
             "Daniel Werner",
             "Michał Łazowik",
-            "Adam Shorland"
+            "Adam Shorland",
+			"Bene*"
         ]
     },
     "wikibase-desc": "Structured data repository",
@@ -39,6 +40,9 @@
     "wikibase-sitelinks-add": "add a link to a site-link",
     "wikibase-sitelinks-empty": "No site-link for this item yet.",
     "wikibase-sitelinks-input-help-message": "Set a link to a page related to this item.",
+	"wikibase-badges-label": "Assign a badge",
+	"wikibase-badges-input-help-message": "You may assign a badge to this site link to add information about this specific article. Possible badges include $1.",
+	"wikibase-badges-empty": "No badges defined.",
     "wikibase-remove": "remove",
     "wikibase-move-up": "move up",
     "wikibase-move-down": "move down",

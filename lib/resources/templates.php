@@ -313,11 +313,11 @@ HTML;
 
 	$templates['wb-sitelink'] =
 <<<HTML
-<tr class="wb-sitelinks-$8 $2">
-	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$8" lang="$1" dir="auto">$3</td>
-	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$8">$4</td>
-	<td class="wb-sitelinks-link wb-sitelinks-link-$8" lang="$1"><a href="$5" hreflang="$1" dir="auto">$6</a></td>
-	$7
+<tr class="wb-sitelinks-$9 $2">
+	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$9" lang="$1" dir="auto">$3</td>
+	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$9">$4</td>
+	<td class="wb-sitelinks-link wb-sitelinks-link-$9" lang="$1"><span class="wb-sitelinks-badges">$5</span><span class="wb-sitelinks-page"><a href="$6" hreflang="$1" dir="auto">$7</a></span></td>
+	$8
 </tr>
 HTML;
 
@@ -337,6 +337,26 @@ HTML;
 	<td class="wb-sitelinks-link"></td>
 	<td></td><!-- cell for toolbar -->
 </tr>
+HTML;
+
+	$templates['wb-badges-wrapper'] =
+<<<HTML
+<div class="wb-badges $1">
+	<div class="wb-gridhelper">
+		<span class="wb-badges-label $2">$3</span>
+		$4
+	</div>
+</div>
+HTML;
+
+	$templates['wb-badges'] =
+<<<HTML
+<ul class="wb-badges-container">$1</ul>
+HTML;
+
+	$templates['wb-badge'] =
+<<<HTML
+<li class="wb-badges-badge"><a href="$1" dir="auto">$2</a></li>
 HTML;
 
 	$templates['wb-property-datatype'] =
