@@ -19,6 +19,13 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Description;
+use Wikibase\DataModel\Term\DescriptionList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Label;
+use Wikibase\DataModel\Term\LabelList;
 
 /**
  * Tests for the Wikibase\Entity deriving classes.
@@ -891,6 +898,61 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$newEntity->stub();
 
 		$this->assertEquals( $entity, $newEntity );
+	}
+
+	public function testWhenNoStuffIsSet_getFingerprintReturnsEmptyFingerprint() {
+		$entity = $this->getNewEmpty();
+
+		$this->assertEquals(
+			new Fingerprint(
+				new LabelList( array() ),
+				new DescriptionList( array() ),
+				new AliasGroupList( array() )
+			),
+			$entity->getFingerprint()
+		);
+	}
+
+	public function testWhenLabelsAreSet_getFingerprintReturnsFingerprintWithLabels() {
+		$entity = $this->getNewEmpty();
+
+		$entity->setLabel( 'en', 'foo' );
+		$entity->setLabel( 'de', 'bar' );
+
+		$this->assertEquals(
+			new Fingerprint(
+				new LabelList( array(
+					new Label( 'en', 'foo' ),
+					new Label( 'de', 'bar' ),
+				) ),
+				new DescriptionList( array() ),
+				new AliasGroupList( array() )
+			),
+			$entity->getFingerprint()
+		);
+	}
+
+	public function testWhenTermsAreSet_getFingerprintReturnsFingerprintWithTerms() {
+		$entity = $this->getNewEmpty();
+
+		$entity->setLabel( 'en', 'foo' );
+		$entity->setDescription( 'en', 'foo bar' );
+		$entity->setAliases( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertEquals(
+			new Fingerprint(
+				new LabelList( array(
+					new Label( 'en', 'foo' ),
+				) ),
+				new DescriptionList( array(
+					new Description( 'en', 'foo bar' )
+				) ),
+				new AliasGroupList( array(
+					new AliasGroup( 'en', array( 'foo', 'bar' ) )
+				) )
+			),
+			$entity->getFingerprint()
+		);
 	}
 
 }

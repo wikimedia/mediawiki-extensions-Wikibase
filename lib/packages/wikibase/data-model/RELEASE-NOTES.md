@@ -4,21 +4,23 @@
 
 #### Additions
 
-* Added Term\AbstractTerm
-* Added Term\AliasGroup
-* Added Term\AliasGroupList
-* Added Term\Description
-* Added Term\DescriptionList
-* Added Term\Fingerprint
-* Added Term\FingerprintProvider
-* Added Term\Label
-* Added Term\LabelList
-* Added Term\Term
-* Added Term\TermList
+* Added `Wikibase\DataModel\Term` namespace with these constructs:
+	* Term\AbstractTerm
+	* Term\AliasGroup
+	* Term\AliasGroupList
+	* Term\Description
+	* Term\DescriptionList
+	* Term\Fingerprint
+	* Term\FingerprintProvider
+	* Term\Label
+	* Term\LabelList
+	* Term\Term
+	* Term\TermList
+* Added `Entity::getFingerprint`
 
 #### Deprecations
 
-* Deprecated Property::newEmpty
+* Deprecated `Property::newEmpty`
 
 ## Version 0.7.2 (2014-03-13)
 

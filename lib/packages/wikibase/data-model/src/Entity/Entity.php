@@ -15,6 +15,14 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use Wikibase\DataModel\Internal\ObjectComparer;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Description;
+use Wikibase\DataModel\Term\DescriptionList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\Label;
+use Wikibase\DataModel\Term\LabelList;
 
 /**
  * Represents a single Wikibase entity.
@@ -25,7 +33,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
+abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, FingerprintProvider {
 
 	/**
 	 * @since 0.1
@@ -902,6 +910,49 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable {
 		}
 
 		return $snaks;
+	}
+
+	/**
+	 * @since 0.7.3
+	 *
+	 * @return Fingerprint
+	 */
+	public function getFingerprint() {
+		return new Fingerprint(
+			$this->getLabelList(),
+			$this->getDescriptionList(),
+			$this->getAliasesList()
+		);
+	}
+
+	private function getLabelList() {
+		$labels = array();
+
+		foreach ( $this->getLabels() as $languageCode => $label ) {
+			$labels[] = new Label( $languageCode, $label );
+		}
+
+		return new LabelList( $labels );
+	}
+
+	private function getDescriptionList() {
+		$descriptions = array();
+
+		foreach ( $this->getDescriptions() as $languageCode => $description ) {
+			$descriptions[] = new Description( $languageCode, $description );
+		}
+
+		return new DescriptionList( $descriptions );
+	}
+
+	private function getAliasesList() {
+		$groups = array();
+
+		foreach ( $this->getAllAliases() as $languageCode => $aliases ) {
+			$groups[] = new AliasGroup( $languageCode, $aliases );
+		}
+
+		return new AliasGroupList( $groups );
 	}
 
 }
