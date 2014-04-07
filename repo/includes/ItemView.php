@@ -98,9 +98,24 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinkGroup( Item $item, $group, $editable = true ) {
-		$siteLinks = $item->getSiteLinks();
-
+		// @todo inject into constructor
+		$sites = SiteSQLStore::newInstance()->getSites();
 		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
+
+		$allSiteLinks = $item->getSiteLinks();
+		$siteLinks = array(); // site links of the currently handled site group
+
+		foreach( $allSiteLinks as $siteLink ) {
+			$site = $sites->getSite( $siteLink->getSiteId() );
+
+			if ( $site === null ) {
+				continue;
+			}
+
+			if ( $site->getGroup() === $group ) {
+				$siteLinks[] = $siteLink;
+			}
+		}
 
 		$html = $thead = $tbody = $tfoot = '';
 
@@ -139,9 +154,6 @@ class ItemView extends EntityView {
 		if ( !$sortOk ) {
 			$siteLinks = $safetyCopy;
 		}
-
-		// @todo inject into constructor
-		$sites = SiteSQLStore::newInstance()->getSites();
 
 		// Link to SpecialPage
 		$editLink = $this->getEditUrl( 'SetSiteLink', $item, null );
