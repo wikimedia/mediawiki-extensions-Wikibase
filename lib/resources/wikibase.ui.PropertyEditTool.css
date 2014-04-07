@@ -169,6 +169,16 @@ table.wb-sitelinks .wb-ruler .wb-ruler {
 	position: absolute;
 }
 
+table.wb-sitelinks .wb-sitelinks-link .wb-sitelinks-badges {
+	/* @embed */
+	background-image: url(images/star.png);
+	background-repeat: no-repeat;
+	width: 20px;
+	display: block;
+	float: left;
+	cursor: pointer;
+}
+
 table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-sitename {
 	white-space: normal;
 }

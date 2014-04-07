@@ -5,6 +5,7 @@ namespace Wikibase;
 use SiteSQLStore;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\EntityIdLabelFormatter;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -186,6 +187,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					$siteName,
 					$escapedSiteId, // displayed site ID
+					$this->getHtmlForBadges( $siteLink->getBadges() ),
 					htmlspecialchars( $site->getPageUrl( $pageName ) ),
 					htmlspecialchars( $pageName ),
 					$this->getHtmlForEditSection( $editLink . '/' . $escapedSiteId, 'td' ),
@@ -211,6 +213,24 @@ class ItemView extends EntityView {
 			$tfoot,
 			htmlspecialchars( $groupName )
 		);
+	}
+
+	/**
+	 * Builds and returns the HTML to represent a list of badges.
+	 *
+	 * @param ItemId[] $badges
+	 *
+	 * @return string
+	 */
+	private function getHtmlForBadges( array $badges ) {
+		$html = '';
+
+		/* @var ItemId $badge */
+		foreach ( $badges as $badge ) {
+			// @todo format id and add badge
+		}
+
+		return $html;
 	}
 
 }
