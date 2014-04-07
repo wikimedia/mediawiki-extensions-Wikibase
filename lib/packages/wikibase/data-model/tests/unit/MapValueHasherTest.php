@@ -2,10 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\MapValueHasher;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**

@@ -3,8 +3,6 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;

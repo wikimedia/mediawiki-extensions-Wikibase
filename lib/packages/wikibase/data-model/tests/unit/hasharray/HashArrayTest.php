@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Hashable;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\HashArray;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\DataModel\HashArray

@@ -4,10 +4,10 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
 

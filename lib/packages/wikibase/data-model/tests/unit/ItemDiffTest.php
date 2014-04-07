@@ -5,11 +5,11 @@ namespace Wikibase\Test;
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemDiff;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * @covers Wikibase\DataModel\Entity\ItemDiff
