@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_dafae972",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T20:10:59Z",
+      "side": 1,
+      "message": "Not part of this patch, but what does this mean?",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3a4afdc8",
+        "filename": "repo/includes/ChangeOp/ChangeOpReference.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T20:10:59Z",
+      "side": 1,
+      "message": "Again, not part of this patch. I\u0027m also aware there are many other places where such an $index parameter appears. I think I know what it means. Would be nice to have a short documentation here and in all other similar places.",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ba63ad3a",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T20:10:59Z",
+      "side": 1,
+      "message": "string $name",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_dacd4936",
+        "filename": "repo/tests/phpunit/includes/api/SetReferenceTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T20:10:59Z",
+      "side": 1,
+      "message": "There is a \\PHPUnit_Framework_TestCase::setUpBeforeClass to run things only one time for all tests.",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
