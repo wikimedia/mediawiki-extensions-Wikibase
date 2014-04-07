@@ -6,6 +6,8 @@ use Exception;
 use Message;
 use MessageException;
 use ValueParsers\ParseException;
+use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * ExceptionLocalizer implementing localization of some well known types of exceptions
@@ -14,10 +16,22 @@ use ValueParsers\ParseException;
  * This hardcodes knowledge about different kinds of exceptions. A more generic approach
  * based on a dispatcher can be implemented later if needed.
  *
+ * @todo: Extend the interface to allow multiple messages to be returned, for use
+ *        with chained exceptions, multiple validation errors, etc.
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
 class WikibaseExceptionLocalizer implements ExceptionLocalizer {
+
+	/**
+	 * @var ValidatorErrorLocalizer
+	 */
+	protected $validatorErrorLocalizer;
+
+	public function __construct() {
+		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer();
+	}
 
 	/**
 	 * @see ExceptionLocalizer::getExceptionMessage()
@@ -31,6 +45,8 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 			return $this->getMessageExceptionMessage( $ex );
 		} elseif ( $ex instanceof ParseException ) {
 			return $this->getParseExceptionMessage( $ex );
+		} elseif ( $ex instanceof ChangeOpValidationException ) {
+			return $this->getChangeOpValidationExceptionMessage( $ex );
 		} else {
 			return $this->getGenericExceptionMessage( $ex );
 		}
@@ -63,12 +79,28 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 	}
 
 	/**
+	 * @param ChangeOpValidationException $ex
+	 *
+	 * @return Message
+	 */
+	public function getChangeOpValidationExceptionMessage( ChangeOpValidationException $ex ) {
+		$result = $ex->getValidationResult();
+
+		foreach ( $result->getErrors() as $error ) {
+			$msg = $this->validatorErrorLocalizer->getErrorMessage( $error );
+			return $msg;
+		}
+
+		return wfMessage( 'wikibase-validator-invalid' );
+	}
+
+	/**
 	 * @param Exception $error
 	 *
 	 * @return Message
 	 */
 	protected function getGenericExceptionMessage( Exception $error ) {
-		$key = 'wikibase-unexpected-error';
+		$key = 'wikibase-error-unexpected';
 		$params = array( $error->getMessage() );
 		$msg = wfMessage( $key )->params( $params );
 
