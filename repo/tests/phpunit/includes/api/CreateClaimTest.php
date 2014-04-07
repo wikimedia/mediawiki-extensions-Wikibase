@@ -188,7 +188,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => '-',
 			'value' => '"   "', //blank is invalid
 		);
-		$argLists[] = array( 'invalid-snak-value', $params );
+		$argLists[] = array( 'modification-failed', $params );
 
 		return $argLists;
 	}

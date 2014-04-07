@@ -7,7 +7,7 @@ use UsageException;
 use Wikibase\Api\CreateClaim;
 use ApiMain;
 use Wikibase\Api\ClaimModificationHelper;
-use Wikibase\Api\SnakValidationHelper;
+use Wikibase\Api\ApiErrorReporter;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -81,23 +81,11 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$claimModificationHelper->getClaimFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $entity );
 	}
 
-	private function getNewInstance( $apiMain = null ) {
-		if ($apiMain === null) {
-			$apiMain = new ApiMain();
-		}
-
-		$snakValidation = new SnakValidationHelper(
-			$apiMain,
-			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
-			new ValidatorErrorLocalizer()
-		);
-
+	private function getNewInstance() {
 		$claimModificationHelper = new ClaimModificationHelper(
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
-			$snakValidation
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator()
 		);
 
 		return $claimModificationHelper;

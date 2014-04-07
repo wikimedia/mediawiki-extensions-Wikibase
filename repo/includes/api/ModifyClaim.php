@@ -37,13 +37,6 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $claimGuidParser;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var SnakValidationHelper
-	 */
-	protected $snakValidation;
-
-	/**
 	 * @var ChangeOpFactory
 	 */
 	protected $changeOpFactory;
@@ -58,18 +51,10 @@ abstract class ModifyClaim extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$this->snakValidation = new SnakValidationHelper(
-			$this,
-			WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup(),
-			WikibaseRepo::getDefaultInstance()->getDataTypeFactory(),
-			new ValidatorErrorLocalizer()
-		);
-
 		$this->claimModificationHelper = new ClaimModificationHelper(
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
-			$this->snakValidation
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator()
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
@@ -113,6 +98,7 @@ abstract class ModifyClaim extends ApiWikibase {
 				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
 				array( 'code' => 'invalid-snak', 'info' => $this->msg( 'wikibase-api-invalid-snak' )->text() ),
 				array( 'code' => 'invalid-entity-id', 'info' => $this->msg( 'wikibase-api-invalid-entity-id' )->text() ),
+				array( 'code' => 'modification-failed', 'info' => 'The requested change could not be applied (validation error).' ),
 			)
 		);
 	}

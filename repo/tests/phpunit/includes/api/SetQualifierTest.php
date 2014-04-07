@@ -243,7 +243,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			'bad guid 2' => array( 'Berlin', 'x$y$z', 'StringProp', 'value', 'abc', 'invalid-guid' ),
 			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'StringProp', 'value', 'abc', 'invalid-guid' ),
 			'bad snak type' => array( 'Berlin', null, 'StringProp', 'alksdjf', 'abc', 'unknown_snaktype' ),
-			'bad snak value' => array( 'Berlin', null, 'StringProp', 'value', '"   "', 'invalid-snak-value' ),
+			'bad snak value' => array( 'Berlin', null, 'StringProp', 'value', '"   "', 'modification-failed' ),
 		);
 	}
 

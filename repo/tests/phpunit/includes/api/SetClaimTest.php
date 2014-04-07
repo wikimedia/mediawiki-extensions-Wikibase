@@ -197,15 +197,15 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$claim = new Claim( $badSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['invalid value in main snak'] = array( $q17, $claim, 'save-failed' );
+		$cases['invalid value in main snak'] = array( $q17, $claim, 'modification-failed' );
 
 		$claim = new Claim( $brokenSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['mismatching value in main snak'] = array( $q17, $claim, 'save-failed' );
+		$cases['mismatching value in main snak'] = array( $q17, $claim, 'modification-failed' );
 
 		$claim = new Claim( $obsoleteSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
-		$cases['obsolete snak using deleted property'] = array( $q17, $claim, 'save-failed' );
+		$cases['obsolete snak using deleted property'] = array( $q17, $claim, 'modification-failed' );
 
 		$claim = new Claim( $goodSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $qx ) );
@@ -215,25 +215,25 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$claim = new Claim( $goodSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setQualifiers( new SnakList( array( $badSnak ) ) );
-		$cases['bad snak in qualifiers'] = array( $q17, $claim, 'save-failed' );
+		$cases['bad snak in qualifiers'] = array( $q17, $claim, 'modification-failed' );
 
 		$claim = new Claim( $goodSnak );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setQualifiers( new SnakList( array( $brokenSnak ) ) );
-		$cases['mismatching value in qualifier'] = array( $q17, $claim, 'save-failed' );
+		$cases['mismatching value in qualifier'] = array( $q17, $claim, 'modification-failed' );
 
 
 		$claim = new Statement( $goodSnak );
 		$reference = new Reference( new SnakList( array( $badSnak ) ) );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setReferences( new ReferenceList( array( $reference ) ) );
-		$cases['bad snak in reference'] = array( $q17, $claim, 'save-failed' );
+		$cases['bad snak in reference'] = array( $q17, $claim, 'modification-failed' );
 
 		$claim = new Statement( $goodSnak );
 		$reference = new Reference( new SnakList( array( $badSnak ) ) );
 		$claim->setGuid( $guidGenerator->newGuid( $q17 ) );
 		$claim->setReferences( new ReferenceList( array( $reference ) ) );
-		$cases['mismatching value in reference'] = array( $q17, $claim, 'save-failed' );
+		$cases['mismatching value in reference'] = array( $q17, $claim, 'modification-failed' );
 
 		return $cases;
 	}
