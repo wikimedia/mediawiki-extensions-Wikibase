@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_ba2df043",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-07T14:17:47Z",
+      "side": 1,
+      "message": "missing a bracket\n\n(if we want to put bug number in the first line at all, and not last line of commit message)",
+      "revId": "4e89cdbdefc3f90193873e2dba977aa3b9a5de2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
