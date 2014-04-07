@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_9a391441",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T15:06:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_ba2df043",
+      "revId": "4e89cdbdefc3f90193873e2dba977aa3b9a5de2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_3ae8c0dc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-07T14:25:08Z",
       "side": 1,
       "message": "teh?",
+      "revId": "4e89cdbdefc3f90193873e2dba977aa3b9a5de2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7a3e3828",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T15:06:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_3ae8c0dc",
       "revId": "4e89cdbdefc3f90193873e2dba977aa3b9a5de2f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_1a4d04e1",
+        "filename": "lib/includes/serializers/SnakSerializer.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T15:06:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_5a1c9c18",
+      "revId": "4e89cdbdefc3f90193873e2dba977aa3b9a5de2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_dad78c27",
         "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
         "patchSetId": 15
@@ -64,6 +118,24 @@
       "writtenOn": "2014-04-07T14:24:08Z",
       "side": 1,
       "message": "do we really want the default entity store?\n\ni see it\u0027s done elsewhere in this class, so maybe here/now is not the right time to change but maybe put a @todo or explanation",
+      "revId": "4e89cdbdefc3f90193873e2dba977aa3b9a5de2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_da2f8cf2",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T15:06:50Z",
+      "side": 1,
+      "message": "Yes, we want the default, because the API module we are testing is using the default. Once we can inject the storage into the API module, we can use a mock or fake. Could add a TODO, but where? It\u0027s the same issue for all API tests.",
+      "parentUuid": "8e23439c_dad78c27",
       "revId": "4e89cdbdefc3f90193873e2dba977aa3b9a5de2f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
