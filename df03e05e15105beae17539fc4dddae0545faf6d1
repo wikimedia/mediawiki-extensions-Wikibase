@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_23a094f0",
+        "filename": "lib/includes/LanguageFallbackChainFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-07T22:53:03Z",
+      "side": 1,
+      "message": "should this not be....\n\n$this-\u003eisExperimentalMode \u003d is_bool( $isExperimentalMode ) ? $isExperimentalMode : defined( \u0027WB_EXPERIMENTAL_FEATURES\u0027 ) \u0026\u0026 WB_EXPERIMENTAL_FEATURES;\n\notherwise if we pass in false it will then again check if WB_EXPERIMENTAL_FEATURESa nd what its value is",
+      "revId": "df03e05e15105beae17539fc4dddae0545faf6d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_4d65f9a9",
         "filename": "lib/tests/phpunit/LanguageFallbackChainTest.php",
         "patchSetId": 3
