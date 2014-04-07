@@ -54,7 +54,7 @@
     "wikibase-aliases-label": "या नावानेही ओळखले जाते:",
     "wikibase-aliases-input-help-message": "एखाद्या विशेष नावापेक्षा जास्त  नावांनी हा कलमसंच ओळखला जात असेल तर आपण पर्यायी व समानार्थी नावे टाकू शकता, ज्याने तो इतर नावांनी शोधल्या जाउ शकेल.",
     "wikibase-aliases-empty": "पर्यायांची व्याख्या नाही.",
-    "wikibase-datatype-label": "कलम प्रकार:",
+    "wikibase-propertypage-datatype": "कलम प्रकार",
     "wikibase-statementview-rank-preferred": "आवडलेले पद",
     "wikibase-statementview-rank-normal": "सामान्य पद",
     "wikibase-statementview-rank-deprecated": "नापसंत श्रेणी",

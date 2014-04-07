@@ -37,7 +37,7 @@
     "wikibase-disambiguation-title": "\"$1\" nozīmju atdalīšana",
     "wikibase-aliases-label": "Zināms arī kā:",
     "wikibase-aliases-empty": "Nav norādīti citi nosaukumi.",
-    "wikibase-datatype-label": "Datu tips:",
+    "wikibase-propertypage-datatype": "Datu tips",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|avots|avoti}}",
     "wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Viens avots vēl nav saglabāts|$1 avoti vēl nav saglabāti}}",
     "wikibase-snakview-property-input-placeholder": "īpašība",

@@ -35,6 +35,7 @@
     "wikibase-alias-edit-placeholder": "podaj alternatywną nazwę",
     "wikibase-label-input-help-message": "Podaj tytuł tego zbioru danych w języku: $1.",
     "wikibase-description-input-help-message": "Podaj krótki opis w języku: $1.",
+    "wikibase-claims": "Stwierdzenia",
     "wikibase-statements": "Deklaracje",
     "wikibase-terms": "W innych językach",
     "wikibase-sitelinks-add": "dodaj odnośnik",
@@ -62,7 +63,7 @@
     "wikibase-aliases-label": "Inne nazwy:",
     "wikibase-aliases-input-help-message": "Jeśli ten zbiór danych występuje pod więcej niż jedną nazwą, możesz podać aliasy i synonimy tak, aby mógł być odnaleziony pod nazwami alternatywnymi.",
     "wikibase-aliases-empty": "Nie zdefiniowano aliasów.",
-    "wikibase-datatype-label": "Typ danych:",
+    "wikibase-propertypage-datatype": "Typ danych",
     "wikibase-claimview-snak-tooltip": "Podaj wartość odpowiadającą właściwości o nazwie „$1”. Jeśli nie istnieje żadna wartość dla tej właściwości albo rzeczywista wartość nie jest znana, to zamiast podawania wartości można wybrać alternatywną możliwość klikając na ikonę obok pola wprowadzania wartości.",
     "wikibase-claimview-snak-new-tooltip": "Po określeniu właściwości można podać odpowiadającą jej wartość. Jeśli nie istnieje żadna wartość dla tej właściwości albo rzeczywista wartość nie jest znana, to zamiast podawania wartości można wybrać alternatywną możliwość klikając na ikonę obok pola wprowadzania wartości.",
     "wikibase-statementview-rank-preferred": "Ranga preferowana",
@@ -286,6 +287,8 @@
     "content-model-wikibase-item": "Element Wikibase",
     "content-model-wikibase-property": "właściwość Wikibase",
     "content-model-wikibase-query": "Zapytanie Wikibase",
+    "right-item-term": "Zmiana określeń elementu (etykiet, opisów, aliasów)",
     "right-item-merge": "Połącz elementy",
+    "right-property-term": "Zmiana określeń właściwości (etykiet, opisów, aliasów)",
     "right-property-create": "Tworzenie właściwości"
 }

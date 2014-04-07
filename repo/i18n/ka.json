@@ -48,7 +48,7 @@
     "wikibase-disambiguation-title": "„$1“ მრავალმნიშვნელობა",
     "wikibase-aliases-label": "აგრეთვე ცნობილი როგორც:",
     "wikibase-aliases-empty": "ფსევდონიმები არ არის გარკვეული.",
-    "wikibase-datatype-label": "მონაცემის ტიპი:",
+    "wikibase-propertypage-datatype": "მონაცემის ტიპი",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|წყარო|წყარო}}",
     "wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|ერთი წყარო|$1 წყარო}} ჯერ არ შენახულა",
     "wikibase-snakview-property-input-placeholder": "თვისება",

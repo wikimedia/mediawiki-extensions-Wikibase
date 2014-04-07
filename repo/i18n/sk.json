@@ -22,7 +22,7 @@
     "wikibase-remove": "odstrániť",
     "wikibase-propertyedittool-full": "Zoznam hodnôt je kompletný.",
     "wikibase-aliases-label": "Tiež známy ako:",
-    "wikibase-datatype-label": "Typ údaju:",
+    "wikibase-propertypage-datatype": "Typ údaju",
     "wikibase-snakview-snaktypeselector-somevalue": "neznáma hodnota",
     "wikibase-itembytitle-submit": "Hľadať",
     "wikibase-itembytitle-create": "Tiež môžeš [{{fullurl:Special:NewItem|site=$1&page=$2}} vytvoriť položku].",

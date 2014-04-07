@@ -30,7 +30,7 @@
     "wikibase-undo-revision-error": "Annullamende fallite",
     "wikibase-disambiguation-title": "Disambbiguazzione pe \"$1\"",
     "wikibase-aliases-label": "Pure canusciute cumme:",
-    "wikibase-datatype-label": "Tipe de date:",
+    "wikibase-propertypage-datatype": "Tipe de date",
     "wikibase-snakview-property-input-placeholder": "probbietà",
     "wikibase-snakview-choosesnaktype": "Scacchie 'nu tipe de valore.",
     "wikibase-snakview-variations-somevalue-label": "valore scanusciute",
@@ -53,8 +53,5 @@
     "special-setlabel": "'Mboste 'n'etichette",
     "wikibase-setlabel-label": "Etichette:",
     "wikibase-setlabel-submit": "'Mboste l'etichette",
-    "special-setdescription": "'Mboste 'na descrizione",
-    "wikibase-time-precision-Mannum": "jndr'à $1 milione de anne",
-    "wikibase-time-precision-century": "$1. sechele",
-    "wikibase-time-precision-10annum": "$1"
+    "special-setdescription": "'Mboste 'na descrizione"
 }

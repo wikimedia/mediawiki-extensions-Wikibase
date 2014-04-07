@@ -51,7 +51,7 @@
     "wikibase-aliases-label": "אויך באקאנט ווי:",
     "wikibase-aliases-input-help-message": "אז דער דאטנזאץ איז באוואוסט מיט מער ווי איין באשטימטן נאמען, קענט איר איינגעבן אליאסן און סינאנימען, כדי מען זאל קענען טרעפן זי מיט אירע אלטערנאטיווע נעמען.",
     "wikibase-aliases-empty": "קיין אליאסן נישט דעפֿינירט.",
-    "wikibase-datatype-label": "דאטן טיפ:",
+    "wikibase-propertypage-datatype": "דאטן טיפ",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|מקור|מקורות}}",
     "wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|איין מקור|$1 מקורות}} נאך נישט אפגעהיטן",
     "wikibase-snakview-property-input-placeholder": "אייגנשאפֿט",

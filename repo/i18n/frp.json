@@ -38,7 +38,7 @@
     "wb-special-newitem-new-item-notification": "Un novél èlèment $1 fêt et pués redirigiê vers la sina pâge. Retôrn a $2.",
     "wikibase-aliases-label": "Asse-ben cognu coment :",
     "wikibase-aliases-empty": "Gins d’aliâs dèfeni.",
-    "wikibase-datatype-label": "Tipo de donâs :",
+    "wikibase-propertypage-datatype": "Tipo de donâs",
     "wikibase-snakview-property-input-placeholder": "propriètât",
     "wikibase-restrictionedit-tooltip-message": "Ceta pâge est protègiêye, lo changement est pas ôtorisâ.",
     "wikibase-blockeduser-tooltip-message": "Vos éte blocâ en changement.",

@@ -53,6 +53,7 @@
     "wikibase-globedetails-precision": "Precisión",
     "wikibase-globedetails-globe": "Globu",
     "wikibase-parse-error": "Valor mal formáu.",
+    "wikibase-unexpected-error": "Error inesperáu: $1.",
     "wikibase-replicationnote": "Tenga en cuenta que puen pasar dellos minutos fasta que los cambeos se vean en toles wikis",
     "wikibase-sitelinks-wikipedia": "Páxines de Wikipedia enllazaes con esti elementu",
     "wikibase-sitelinks-sitename-columnheading": "Llingua",

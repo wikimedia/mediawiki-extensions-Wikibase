@@ -51,7 +51,7 @@
     "wikibase-aliases-label": "Druga imena:",
     "wikibase-aliases-input-help-message": "Će je ta nabor podatkov poznan pod več kot enim imenom, lahko vnesete še druga imena, pod katerimi ga bo mogoče najti.",
     "wikibase-aliases-empty": "Podano ni nobeno drugo ime.",
-    "wikibase-datatype-label": "Vrsta podatkov:",
+    "wikibase-propertypage-datatype": "Vrsta podatkov",
     "wikibase-claimview-snak-tooltip": "Vnesite vrednost, ki ustreza lastnosti »$1«. Če lastnost nima označene vrednosti ali dejanska vrednost ni znana, lahko s klikom ikone ob polju za vnos vrednosti izberete možnost določitve prirejene vrednosti.",
     "wikibase-claimview-snak-new-tooltip": "Potem, ko ste določili lastnost, lahko vnesete ustrezno vrednost. Če lastnost nima določene vrednosti ali dejanska vrednost ni znana, lahko s klikom ikone ob polju za vnos vrednosti določite prirejeno vrednost.",
     "wikibase-statementview-rank-preferred": "Želeno mesto",

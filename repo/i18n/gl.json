@@ -53,7 +53,7 @@
     "wikibase-aliases-label": "Tamén coñecido como:",
     "wikibase-aliases-input-help-message": "En caso de que exista máis dun nome para denominar este conxunto de datos, pode escribir pseudónimos e sinónimos, de xeito que se poida atopar a partir destes nomes alternativos.",
     "wikibase-aliases-empty": "Non hai ningún pseudónimo definido.",
-    "wikibase-datatype-label": "Tipo de datos:",
+    "wikibase-propertypage-datatype": "Tipo de datos",
     "wikibase-claimview-snak-tooltip": "Insira un valor correspondente á propiedade chamada \"$1\". Se a propiedade non ten ningún valor designado ou non se coñece o valor real, pode elixir a alternativa de especificar un valor personalizado premendo na icona que está ao carón da caixa de entrada.",
     "wikibase-claimview-snak-new-tooltip": "Despois de especificar unha propiedade pode inserir o valor correspondente. Se a propiedade non ten ningún valor designado ou non se coñece o valor real, pode elixir a alternativa de especificar un valor personalizado premendo na icona que está ao carón da caixa de entrada.",
     "wikibase-statementview-rank-preferred": "Rango privilexiado",

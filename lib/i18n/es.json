@@ -51,6 +51,7 @@
     "wikibase-globedetails-latitude": "Latitud",
     "wikibase-globedetails-precision": "Precisión",
     "wikibase-globedetails-globe": "Globo",
+    "wikibase-unexpected-error": "Error inesperado: $1.",
     "wikibase-replicationnote": "Tenga en cuenta que puede tardar varios minutos, hasta que los cambios sean visibles en todas las wikis.",
     "wikibase-sitelinks-wikipedia": "Páginas de Wikipedia enlazadas con este elemento",
     "wikibase-sitelinks-sitename-columnheading": "Idioma",

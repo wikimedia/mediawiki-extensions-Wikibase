@@ -55,7 +55,7 @@
     "wikibase-aliases-label": "Também conhecido como:",
     "wikibase-aliases-input-help-message": "Se esse conjunto de dados é conhecido por mais de um nome específico, você pode inserir nomes alternativos e sinônimos; dessa forma, ele poderá ser encontrado por seus outros nomes.",
     "wikibase-aliases-empty": "Não há nomes alternativos definidos.",
-    "wikibase-datatype-label": "Tipo de dados:",
+    "wikibase-propertypage-datatype": "Tipo de dados",
     "wikibase-claimview-snak-tooltip": "Insira um valor correspondente à propriedade \"$1\". Se a propriedade não possui valor designado ou o atual valor não for conhecido você pode, alternativamente, especificar um valor personalizado clicando no ícone próximo à caixa de entrada de valores.",
     "wikibase-claimview-snak-new-tooltip": "Depois de especificar uma propriedade, você pode inserir um valor relacionado. Se a propriedade não possui valor designado ou o valor atual não for conhecido você pode, alternativamente, especificar um valor personalizado clicando no ícone próximo à caixa de entrada de valores.",
     "wikibase-statementview-rank-preferred": "Classificação prefererida",

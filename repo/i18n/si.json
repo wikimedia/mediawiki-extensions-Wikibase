@@ -35,7 +35,7 @@
     "wikibase-disambiguation-title": "\"$1\" සඳහා අනේකාර්ථය",
     "wikibase-aliases-label": "මෙසේද ගම්‍ය වේ:",
     "wikibase-aliases-empty": "අන්වර්ථ නාම කිසිවක් අර්ථ දක්වා නොමැත.",
-    "wikibase-datatype-label": "දත්ත වර්ගය:",
+    "wikibase-propertypage-datatype": "දත්ත වර්ගය",
     "wikibase-snakview-property-input-placeholder": "ගුණාංගය",
     "wikibase-restrictionedit-tooltip-message": "මෙම පිටුව ආරක්ෂණය කර ඇත. සංස්කරණයට ඉඩ නොදේ.",
     "wikibase-blockeduser-tooltip-message": "ඔබව සංස්කරණ කිරීමෙන් වලක්වා ඇත.",

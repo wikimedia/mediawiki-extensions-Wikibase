@@ -44,7 +44,7 @@
     "wikibase-disambiguation-title": "Gwahaniaethu ystyron \"$1\"",
     "wikibase-aliases-label": "Arallenwau:",
     "wikibase-aliases-empty": "Nid oes arallenwau i hwn eto.",
-    "wikibase-datatype-label": "Math y data:",
+    "wikibase-propertypage-datatype": "Math y data",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ffynhonnell}}",
     "wikibase-snakview-property-input-placeholder": "nodwedd",
     "wikibase-snakview-choosesnaktype": "Dewiswch fath y gwerth.",

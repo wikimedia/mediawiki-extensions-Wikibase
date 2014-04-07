@@ -44,7 +44,7 @@
     "wikibase-aliases-label": "Такође познато и као:",
     "wikibase-aliases-input-help-message": "Ако је овај скуп података познат под више од једним именом, можете уписати псеудониме и синониме, како би ставка била пронађена и под алтернативним именима.",
     "wikibase-aliases-empty": "Ниједан псеудоним није дефинисан.",
-    "wikibase-datatype-label": "Врста податка:",
+    "wikibase-propertypage-datatype": "Врста податка",
     "wikibase-claimview-snak-new-tooltip": "После навођења својства можете унети одговарајућу вредност. Ако својство нема одређену вредност или тачна вредност није позната, уместо навођења прилагођене вредности можете изабрати алтернативне вредности кликом на икону поред поља за унос вредности.",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|извор|извора}}",
     "wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Један извор|$1 извора}} није {{PLURAL:$1|сачуван|сачувано}}",

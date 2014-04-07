@@ -19,7 +19,7 @@
     "wikibase-sitelink-page-edit-placeholder": "பக்கம்",
     "wikibase-remove": "நீக்கு",
     "wikibase-disambiguation-title": "\"$1\" க்கான பக்க நெறிப்படுத்தல்",
-    "wikibase-datatype-label": "தரவு வகை:",
+    "wikibase-propertypage-datatype": "தரவு வகை",
     "wikibase-restrictionedit-tooltip-message": "இந்தப் பக்கம் காக்கப்பட்டுள்ளது. தொகுப்பது அனுமதிக்கப்படவில்லை.",
     "wikibase-blockeduser-tooltip-message": "நீங்கள் தொகுப்பதிலிருந்து தடுக்கப்பட்டுள்ளீர்கள்.",
     "special-itembytitle": "தலைப்பு வாரியாக உருப்படி",
@@ -39,7 +39,5 @@
     "wikibase-item-summary-wbsetitem": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது",
     "wikibase-item-summary-wbeditentity": "ஒரு புதிய உருப்படி உருவாக்கப்பட்டது",
     "wikibase-item-summary-wbsetdescription-set": "[$2] விளக்கம் மாற்றப்பட்டது",
-    "wikibase-item-summary-wbsetdescription-remove": "[$2] விளக்கம் நீக்கப்பட்டது",
-    "right-item-create": "ஓர் உருப்படியை உருவாக்கு",
-    "right-item-remove": "ஓர் உருப்படியை நீக்கு"
+    "wikibase-item-summary-wbsetdescription-remove": "[$2] விளக்கம் நீக்கப்பட்டது"
 }

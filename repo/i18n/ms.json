@@ -50,7 +50,7 @@
     "wikibase-aliases-label": "Juga dikenali sebagai:",
     "wikibase-aliases-input-help-message": "Jika set data ini dikenali dengan lebih daripada satu nama, anda boleh menaipkan nama lain dan sinonim supaya ia boleh dicari dengan nama-nama alternatifnya.",
     "wikibase-aliases-empty": "Tiada nama lain diberikan.",
-    "wikibase-datatype-label": "Jenis data:",
+    "wikibase-propertypage-datatype": "Jenis data",
     "wikibase-claimview-snak-tooltip": "Isikan nilai yang berkenaan dengan sifat yang bernama \"$1\". Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
     "wikibase-claimview-snak-new-tooltip": "Setelah menyatakan sifat, anda boleh mengisikan nilai yang berkenaan. Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|sumber|sumber-sumber}}",

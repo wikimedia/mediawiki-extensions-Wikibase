@@ -48,7 +48,7 @@
     "wikibase-aliases-label": "Más néven:",
     "wikibase-aliases-input-help-message": "Ha ennek a fogalomnak több különböző elnevezése is van, itt megadhatod a további neveket és szinonimákat, hogy azokra keresve is meg lehessen találni.",
     "wikibase-aliases-empty": "Nincs más név megadva.",
-    "wikibase-datatype-label": "Adattípus:",
+    "wikibase-propertypage-datatype": "Adattípus",
     "wikibase-claimview-snak-tooltip": "Adj meg egy értéket a(z) „$1” tulajdonsághoz. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.",
     "wikibase-claimview-snak-new-tooltip": "Miután kiválasztottál egy tulajdonságot, megadhatod a hozzátartozó értéket. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.",
     "wikibase-snakview-property-input-placeholder": "tulajdonság",

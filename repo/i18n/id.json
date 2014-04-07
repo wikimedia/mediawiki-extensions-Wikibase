@@ -51,7 +51,7 @@
     "wikibase-aliases-label": "Nama lain:",
     "wikibase-aliases-input-help-message": "Jika data ini dikenal dengan lebih dari satu nama tertentu, Anda dapat memasukkan nama lain dan sinonimnya, sehingga dapat ditemukan dengan menggunakan nama-nama alternatif.",
     "wikibase-aliases-empty": "Nama lain belum ditentukan",
-    "wikibase-datatype-label": "Jenis data:",
+    "wikibase-propertypage-datatype": "Jenis data",
     "wikibase-claimview-snak-tooltip": "Masukkan nilai yang sesuai dengan properti bernama \"$1\". Jika properti tidak memiliki nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, alternatif Anda dapat menentukan nilai kustom dengan mengklik ikon di sebelah kotak input.",
     "wikibase-claimview-snak-new-tooltip": "Setelah menentukan properti Anda dapat memasukkan nilai yang sesuai. Jika properti tidak memiliki nilai yang ditentukan atau nilai sebenarnya tidak diketahui, alternatif Anda dapat menentukan nilai kustom dengan mengklik ikon di sebelah kotak input.",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|sumber}}",

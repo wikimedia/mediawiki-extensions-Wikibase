@@ -52,7 +52,7 @@
     "wikibase-aliases-label": "Ammo pay a kas:",
     "wikibase-aliases-input-help-message": "No ti agasmang ti datos ket naamammoan ti adadu ngem maysa a naisangsangayan a nagan, mabalinmo ti agikabil kadagiti sabali a nagan wenno sinonimo, tapno mabirukan babaen kadagiti sabsabali a naganna.",
     "wikibase-aliases-empty": "Awan dagiti sabali a nagan a naipalawag.",
-    "wikibase-datatype-label": "Kita ti datos:",
+    "wikibase-propertypage-datatype": "Kita ti datos",
     "wikibase-claimview-snak-tooltip": "Mangikabil ti maysa a pateg a kapadpada ti tagikua nga agnagan ti \"$1\". No ti maysa a tagikua ket awan ti nainaganan a pategna wenno di ammo ti agpayso a pateg, mabalinmo ti agpili ti sabali a pananginagan ti naidumduma a pateg babaen ti panagpindut ti ikono a testo idiay kaariping a pagikabilan a kahon ti pateg.",
     "wikibase-claimview-snak-new-tooltip": "Kalpasan ti panaginagan ti maysa a tagikua mabalinmon ti agikabil ti maysa a kapadpadana a pateg. No ti maysa a tagikua ket awan ti nainaganan a pategna wenno di ammo ti agpayso a pateg, mabalinmo ti agpili ti sabali a pananginagan ti naidumduma a pateg babaen ti panagpindut ti ikono a testo idiay kaariping a pagikabilan a kahon ti pateg.",
     "wikibase-statementview-rank-preferred": "Kinaykayat a ranggo",

@@ -67,7 +67,7 @@
     "wikibase-aliases-label": "Ook bekend als:",
     "wikibase-aliases-input-help-message": "Als deze gegevensset bekend is onder meer dan één bepaalde naam, dan kunt u aliassen en synoniemen opgeven, zodat die ook gevonden kan worden onder alternatieve namen.",
     "wikibase-aliases-empty": "Er zijn geen aliassen ingesteld.",
-    "wikibase-datatype-label": "Gegevenstype:",
+    "wikibase-propertypage-datatype": "Gegevenstype",
     "wikibase-claimview-snak-tooltip": "Voer een waarde in die overeenkomt met de eigenschap \"$1\". Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het pictogram naast het invoerveld voor de waarde te klikken.",
     "wikibase-claimview-snak-new-tooltip": "Nadat u een eigenschap hebt opgegeven kunt u een bijbehorende waarde opgeven. Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief kiezen door een aangepaste waarde op te geven door op het pictogram naast het invoerveld voor de waarde te klikken.",
     "wikibase-statementview-rank-preferred": "Voorkeursrang",

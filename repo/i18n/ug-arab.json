@@ -9,7 +9,7 @@
     "wikibase-sitelink-site-edit-placeholder": "site",
     "wikibase-sitelink-page-edit-placeholder": "ماقالىلەر",
     "wikibase-remove": "چىقىرىۋەت",
-    "wikibase-datatype-label": "سانلىق-مەلۇمات تىپى:",
+    "wikibase-propertypage-datatype": "سانلىق-مەلۇمات تىپى",
     "wikibase-itemlink-id-wrapper": "($1)",
     "wikibase-itembytitle-lookup-site": "تور بېكەت:",
     "wikibase-itembytitle-lookup-page": "بەت:",

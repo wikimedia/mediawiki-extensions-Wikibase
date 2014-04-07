@@ -28,7 +28,7 @@
     "wikibase-disambiguation-title": "ڕوونکردنەوە بۆ «$1»",
     "wikibase-aliases-label": "ھەروەھا ناسراوە بە:",
     "wikibase-aliases-empty": "نازناوێک دیاری نەکراوە.",
-    "wikibase-datatype-label": "جۆری دراوە:",
+    "wikibase-propertypage-datatype": "جۆری دراوە",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|سەرچاوە}}",
     "wikibase-statementview-referencesheading-pendingcountertooltip": "ھێشتا {{PLURAL:$1|یەک سەرچاوە|$1 سەرچاوە}} پاشەکەوت نەکراوە",
     "wikibase-snakview-property-input-placeholder": "تایبەتمەندی",
@@ -117,6 +117,5 @@
     "wikibase-listdatatypes-wikibase-item-head": "بەند",
     "wikibase-listdatatypes-multilingual-text-head": "دەقی فرەزمانی",
     "wikibase-listdatatypes-string-head": "زنجیرەنووسە",
-    "wikibase-listdatatypes-time-head": "کات",
-    "right-label-update": "سەرناوەکان نوێ بکەوە"
+    "wikibase-listdatatypes-time-head": "کات"
 }

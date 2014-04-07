@@ -46,7 +46,7 @@
     "wb-special-newitem-new-item-notification": "Neit Element $1 ugeluecht a virugeleet op seng Säit. Zréck op $2.",
     "wikibase-aliases-label": "Och bekannt als:",
     "wikibase-aliases-empty": "Keen Alias definéiert:",
-    "wikibase-datatype-label": "Datentyp:",
+    "wikibase-propertypage-datatype": "Datentyp",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Quell|Quellen}}",
     "wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Eng Quell|$1 Quellen}} goufen nach net gespäichert",
     "wikibase-snakview-property-input-placeholder": "Eegeschaft",

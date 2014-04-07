@@ -39,7 +39,7 @@
     "wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|бір мән|$1 мәндер}} сақталмады",
     "wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|енгізілім|енгізілім}}",
     "wikibase-disambiguation-title": "\"$1\" үшін айрық бет",
-    "wikibase-datatype-label": "Дерек түрі:",
+    "wikibase-propertypage-datatype": "Дерек түрі",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|қайнар|қайнар}}",
     "wikibase-snakview-variations-somevalue-label": "белгісіз мән",
     "wikibase-snakview-variations-novalue-label": "мән жоқ",

@@ -44,7 +44,7 @@
     "wikibase-propertyedittool-full": "قائمة القيم اكتملت",
     "wikibase-aliases-label": "تعرف أيضا باسم:",
     "wikibase-aliases-empty": "لم يتم تعريف أي كنية.",
-    "wikibase-datatype-label": "نوع البيانات:",
+    "wikibase-propertypage-datatype": "نوع البيانات",
     "wikibase-statementview-rank-preferred": "الترتيب المفضل",
     "wikibase-snakview-property-input-placeholder": "خاصية",
     "wikibase-snakview-variations-somevalue-label": "قيمة مجهولة",

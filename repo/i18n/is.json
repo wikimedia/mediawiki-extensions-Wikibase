@@ -51,7 +51,7 @@
     "wikibase-aliases-label": "Einnig þekkt sem:",
     "wikibase-aliases-input-help-message": "Ef þetta gagnasett er þekkt undir nokkrum nöfnum, þá getur þú sett inn samnefni og samheiti svo hægt sé að finna þau undir samnefninu.",
     "wikibase-aliases-empty": "Engin samnefni tilgreind.",
-    "wikibase-datatype-label": "Gagnagerð:",
+    "wikibase-propertypage-datatype": "Gagnagerð",
     "wikibase-claimview-snak-tooltip": "Sláðu inn gildi sem samsvarar eiginleikanum  „$1\". Ef eiginleikinn hefur ekkert gildi eða að gildið sé ekki þekkt, þá mátt þú velja að tilgreina sérstakt gildi með því að ýta á merkið hliðiná reitnum þar sem gildið er slegið inn.",
     "wikibase-claimview-snak-new-tooltip": "Eftir að hafa tilgreint eiginleika getur þú slegið inn samsvarandi gildi. Ef eiginleikinn hefur ekkert gildi eða að gildið sé ekki þekkt, þá mátt þú velja að tilgreina sérstakt gildi með því að ýta á merkið hliðiná reitnum þar sem gildið er slegið inn.",
     "wikibase-statementview-rank-preferred": "Æskilegt sæti",

@@ -49,7 +49,7 @@
     "wikibase-aliases-label": "Tež znaty jako:",
     "wikibase-aliases-input-help-message": "Jeli tuta datowa sadźba je pod wjacorymi mjenami znata, móžeš aliasy a synonymy zapodać, zo by da so pod swojimi alternatiwnymi mjenami namakać.",
     "wikibase-aliases-empty": "Njejsu so žane aliasy definowali.",
-    "wikibase-datatype-label": "Datowy typ:",
+    "wikibase-propertypage-datatype": "Datowy typ",
     "wikibase-claimview-snak-tooltip": "Zapodaj hódnotu po kajkosći z mjenom \"$1\". Jeli kajkosć nima wěstu hódnotu abo tuchwilna hódnota znata njeje, móžeš alternatiwu wubrać, zo by swójsku hódnotu podał, kliknjo na symbol pódla zapodawanskeho kašćika za hódnoty.",
     "wikibase-claimview-snak-new-tooltip": "Po podawanju kajkosće móžeš wotpowědnu hódnotu zapodać. Jeli kajkosć nima wěstu hódnotu abo tuchwilna hódnota znata njeje, móžeš alternatiwu wubrać, zo by swójsku hódnotu podał, kliknjo na symbol pódla zapodawanskeho kašćika za hódnoty.",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|žórło|žórle|žórła}}",

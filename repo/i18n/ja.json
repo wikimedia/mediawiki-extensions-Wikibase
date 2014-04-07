@@ -55,7 +55,7 @@
     "wikibase-aliases-label": "別名:",
     "wikibase-aliases-input-help-message": "このデータセットが複数の名前で知られている場合、別名 (や類義語) として入力することもできます。入力することで、その別名でたどり着けるようになります。",
     "wikibase-aliases-empty": "別名は定義されていません。",
-    "wikibase-datatype-label": "データの型:",
+    "wikibase-propertypage-datatype": "データの型",
     "wikibase-claimview-snak-tooltip": "「$1」という名前のプロパティに対する値を入力します。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。",
     "wikibase-claimview-snak-new-tooltip": "プロパティを指定したら、それに対応する値を入力できます。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。",
     "wikibase-statementview-referencesheading-pendingcountersubject": "個の{{PLURAL:$1|情報源}}",

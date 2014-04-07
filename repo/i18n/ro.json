@@ -48,7 +48,7 @@
     "wb-special-newitem-new-item-notification": "Noul element $1 a fost creat și redirecționat către pagina sa. Revenire la $2.",
     "wikibase-aliases-label": "Cunoscut și ca:",
     "wikibase-aliases-empty": "Niciun alias definit.",
-    "wikibase-datatype-label": "Tip de date:",
+    "wikibase-propertypage-datatype": "Tip de date",
     "wikibase-statementview-rank-preferred": "Rang preferat",
     "wikibase-statementview-rank-normal": "Rang normal",
     "wikibase-statementview-rank-deprecated": "Rang perimat",

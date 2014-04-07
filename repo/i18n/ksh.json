@@ -26,7 +26,7 @@
     "wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|Endraach|Endrääsch|Endraach}}",
     "wikibase-sitelinksedittool-full": "För alle bikannte ẞaijts sin ald Lenks enjedraare.",
     "wikibase-aliases-label": "Och bekannd als:",
-    "wikibase-datatype-label": "Daate-Zoot:",
+    "wikibase-propertypage-datatype": "Daate-Zoot",
     "wikibase-snakview-property-input-placeholder": "Eijeschaff",
     "wikibase-snakview-variations-somevalue-label": "ene onbekannte Wäät",
     "wikibase-snakview-variations-novalue-label": "keine Wäät",

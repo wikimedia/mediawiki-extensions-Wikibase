@@ -55,7 +55,7 @@
     "wikibase-aliases-label": "Kromnomita:",
     "wikibase-aliases-input-help-message": "Se ĉi tiu datumaro estas konata per pli ol unu nomo, vi povas enigi kromnomojn kaj sinonimojn, tiel ke ĝi povu esti trovata per ties alternativaj nomoj.",
     "wikibase-aliases-empty": "Neniu kromnomo difinita",
-    "wikibase-datatype-label": "Datumtipo",
+    "wikibase-propertypage-datatype": "Datumtipo",
     "wikibase-statementview-rank-preferred": "Preferata rango",
     "wikibase-statementview-rank-normal": "Normala rango",
     "wikibase-statementview-rank-deprecated": "Malpreferata rango",

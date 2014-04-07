@@ -5,7 +5,6 @@
         ]
     },
     "wikibase-claims": "Claims",
-    "wikibase-constraints": "Constraints",
     "wikibase-snakformat-invalid-value": "Onvalid value.",
     "wikibase-snakformat-propertynotfound": "Propertie na foond.",
     "wikibase-wikibaserepopage-not-itemid": "\"$1\" isna ae valid item id.",

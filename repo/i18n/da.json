@@ -58,7 +58,7 @@
     "wikibase-aliases-label": "Også kendt som:",
     "wikibase-aliases-input-help-message": "Hvis dette datasæt er kendt under mere end ét bestemt navn, kan du angive alias og synonymer, så det kan findes ved de alternative navne.",
     "wikibase-aliases-empty": "Ingen aliasser defineret.",
-    "wikibase-datatype-label": "Datatype:",
+    "wikibase-propertypage-datatype": "Datatype",
     "wikibase-claimview-snak-tooltip": "Angiv en værdi der svarer til egenskaben med navnet \"$1\". Hvis egenskaben ikke har en udpeget værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi-inputboksen.",
     "wikibase-claimview-snak-new-tooltip": "Efter angivelse af en egenskab, kan du angive en tilsvarende værdi. Hvis egenskaben ikke har en faktisk værdi eller den faktiske værdi ikke er kendt, kan du vælge et alternativ til at angive en brugerdefineret værdi ved at klikke på ikonet ud for værdi-inputboksen.",
     "wikibase-statementview-rank-preferred": "Foretrukne rang",

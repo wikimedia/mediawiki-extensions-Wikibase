@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Tgr"
+            "Tgr",
+            "JulesWinnfield-hu"
         ]
     },
     "wikibase-lib-desc": "A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza",
@@ -23,6 +24,7 @@
     "wikibase-error-ui-link-exists": "Nem kapcsolhatod a fogalmat ehhez a laphoz, mert egy másik fogalom már hozzá van kapcsolva.",
     "wikibase-error-ui-session-failure": "Lejárt a munkameneted. Kérlek, jelentkezz be újra.",
     "wikibase-error-ui-edit-conflict": "Szerkesztési ütközés történt. Kérlek, töltsd újra a lapot, és mentsd el újra.",
+    "wikibase-sitelinks-wikipedia": "Kapcsolt Wikipédia-lapok",
     "wikibase-sitelinks-sitename-columnheading": "Nyelv",
     "wikibase-sitelinks-siteid-columnheading": "Kód",
     "wikibase-sitelinks-link-columnheading": "Kapcsolt szócikk",

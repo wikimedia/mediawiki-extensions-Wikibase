@@ -56,7 +56,7 @@
     "wikibase-aliases-label": "다른 이름:",
     "wikibase-aliases-input-help-message": "이 데이터 집합이 하나 이상의 특정 이름으로 알려져 있다면 별칭과 동의명을 입력할 수 있기 때문에 그 대체 이름으로 찾을 수 있습니다.",
     "wikibase-aliases-empty": "별칭이 정의되지 않았습니다.",
-    "wikibase-datatype-label": "데이터 유형:",
+    "wikibase-propertypage-datatype": "데이터 유형",
     "wikibase-claimview-snak-tooltip": "\"$1\"라는 이름의 속성에 해당하는 값을 입력하세요. 속성이 지정한 값이 없거나 실제 값이 알려져 있지 않으면 값 입력 상자 옆에 있는 아이콘을 클릭하여 사용자 정의 값을 지정하는 대체 값을 선택할 수 있습니다.",
     "wikibase-claimview-snak-new-tooltip": "속성을 지정하고 나서 해당하는 값을 입력할 수 있습니다.속성이 지정한 값이 없거나 실제 값이 알려져 있지 않으면 값 입력 상자 옆에 있는 아이콘을 클릭하여 사용자 정의 값을 지정하는 대체 값을 선택할 수 있습니다.",
     "wikibase-statementview-rank-preferred": "선호하는 등급",

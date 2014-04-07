@@ -23,7 +23,7 @@
     "wikibase-remove": "премахване",
     "wikibase-restore-title": "Възстановяване на стара версия на \"$1\"",
     "wikibase-aliases-label": "Среща се и като:",
-    "wikibase-datatype-label": "Тип на данните:",
+    "wikibase-propertypage-datatype": "Тип на данните",
     "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|източник|източници}}",
     "wikibase-snakview-property-input-placeholder": "свойство",
     "wikibase-snakview-variations-somevalue-label": "неразпозната стойност",
@@ -53,10 +53,5 @@
     "special-itemswithoutsitelinks": "Обекти без междуезикови препратки",
     "content-model-wikibase-item": "Обект в Уикиданни",
     "content-model-wikibase-property": "Свойство в Уикиданни",
-    "content-model-wikibase-query": "Заявка към Уикиданни",
-    "right-item-override": "Презаписване на обекти",
-    "right-item-create": "Създаване на обекти",
-    "right-item-remove": "Премахване на обекти",
-    "right-description-remove": "Премахване на описанията",
-    "right-description-update": "Обновяване на описанията"
+    "content-model-wikibase-query": "Заявка към Уикиданни"
 }
