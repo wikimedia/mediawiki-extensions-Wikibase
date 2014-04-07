@@ -149,10 +149,10 @@
 			} );
 		} );
 
-		if ( !mw.config.get( 'wbUserCanEdit' ) ) {
-			$( wb ).triggerHandler( 'restrictEntityPageActions' );
-		} else if ( mw.config.get( 'wbUserIsBlocked' ) ) {
+		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
 			$( wb ).triggerHandler( 'blockEntityPageActions' );
+		} else if ( !mw.config.get( 'wbUserCanEdit' ) ) {
+			$( wb ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
 		if( !mw.config.get( 'wbIsEditView' ) ) {
