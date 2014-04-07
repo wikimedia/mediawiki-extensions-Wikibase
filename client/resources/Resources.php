@@ -13,7 +13,10 @@ return call_user_func( function() {
 			'skinStyles' => array(
 				'modern' => 'wikibase.client.css',
 				'monobook' => 'wikibase.client.css',
-				'vector' => 'wikibase.client.css',
+				'vector' => array(
+					'wikibase.client.css',
+					'wikibase.client.vector.css'
+				)
 			),
 		),
 		'wikibase.client.nolanglinks' => $moduleTemplate + array(
