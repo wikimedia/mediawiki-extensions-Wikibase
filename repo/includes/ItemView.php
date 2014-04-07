@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\EntityIdLabelFormatter;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -200,6 +201,7 @@ class ItemView extends EntityView {
 					$alternatingClass,
 					$siteName,
 					$escapedSiteId, // displayed site ID
+					$this->getHtmlForBadges( $siteLink, $editLink ),
 					htmlspecialchars( $site->getPageUrl( $pageName ) ),
 					htmlspecialchars( $pageName ),
 					$this->getHtmlForEditSection( $editLink . '/' . $escapedSiteId, 'td' ),
@@ -225,6 +227,47 @@ class ItemView extends EntityView {
 			$tfoot,
 			htmlspecialchars( $groupName )
 		);
+	}
+
+	/**
+	 * Builds and returns the HTML to represent a list of badges.
+	 *
+	 * @param SimpleSiteLink $siteLink
+	 * @param string $editLink
+	 *
+	 * @return string
+	 */
+	private function getHtmlForBadges( SimpleSiteLink $siteLink, $editLink ) {
+		wfProfileIn( __METHOD__ );
+
+		$badges = $siteLink->getBadges();
+
+		if ( empty( $badges ) ) {
+			$html = wfTemplate( 'wb-badges-wrapper',
+				'wb-badges-empty',
+				'wb-value-empty',
+				wfMessage( 'wikibase-badges-empty' )->text(),
+				$this->getHtmlForEditSection( $editLink, 'span', 'add' )
+			);
+		} else {
+			$badgesHtml = '';
+			/* @var ItemId $badge */
+			foreach ( $badges as $badge ) {
+				// @todo format id and add badge
+				$badgesHtml .= wfTemplate( 'wb-badge', $badge->getSerialization(), $badge->getSerialization() );
+			}
+			$badgesList = wfTemplate( 'wb-badges', $badgesHtml );
+
+			$html = wfTemplate( 'wb-badges-wrapper',
+				'',
+				'',
+				wfMessage( 'wikibase-badges-label' )->text(),
+				$badgesList . $this->getHtmlForEditSection( $editLink )
+			);
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $html;
 	}
 
 }
