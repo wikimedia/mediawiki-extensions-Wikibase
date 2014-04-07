@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_3df5574d",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:48:36Z",
+      "side": 1,
+      "message": "It asks the question why we can\u0027t specify an index when setting a Qualifier.",
+      "parentUuid": "8e23439c_dafae972",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_3a4afdc8",
         "filename": "repo/includes/ChangeOp/ChangeOpReference.php",
         "patchSetId": 6
@@ -64,6 +82,24 @@
       "writtenOn": "2014-04-07T20:10:59Z",
       "side": 1,
       "message": "There is a \\PHPUnit_Framework_TestCase::setUpBeforeClass to run things only one time for all tests.",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7d82afaa",
+        "filename": "repo/tests/phpunit/includes/api/SetReferenceTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-07T20:48:36Z",
+      "side": 1,
+      "message": "But that would run before the fake database layer is installed, so we would write into the live database.",
+      "parentUuid": "8e23439c_dacd4936",
       "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
