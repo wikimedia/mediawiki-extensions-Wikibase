@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_157a751f",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-07T17:07:41Z",
+      "side": 1,
+      "message": "Suggestion (plurals omitted for readability): X changes could not be saved because some values have changed while you were editing.",
+      "parentUuid": "8e23439c_8b8b0c20",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_ab95a837",
         "filename": "repo/i18n/en.json",
         "patchSetId": 2
@@ -36,6 +54,41 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_f576d938",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-07T17:07:41Z",
+      "side": 1,
+      "message": "Suggestion sounds good to me. Maybe the consequence of the current action should be mention after this.",
+      "parentUuid": "8e23439c_ab95a837",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_759ac967",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-07T17:07:41Z",
+      "side": 1,
+      "message": "\"The page cannot be deleted.\" This message is missing punctuation in any case.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_0ba6dca7",
         "filename": "repo/i18n/en.json",
         "patchSetId": 2
@@ -47,6 +100,24 @@
       "writtenOn": "2014-04-06T18:52:00Z",
       "side": 1,
       "message": "This is the pop-up on the [?] icon when you edit aliases. It\u0027s actually important to talk about \"so it can be found\". I think \"data set\" should be reworded.",
+      "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_359c515f",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-07T17:07:41Z",
+      "side": 1,
+      "message": "Suggestion: To make this dataset easier to find, you can enter aliases and synonyms.",
+      "parentUuid": "8e23439c_0ba6dca7",
       "revId": "cadb02194d91dd319677dfaed193a10fbf0d4b9e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
