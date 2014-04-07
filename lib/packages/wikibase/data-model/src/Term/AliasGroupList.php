@@ -21,7 +21,7 @@ use Traversable;
  */
 class AliasGroupList implements Countable, IteratorAggregate {
 
-	private $groups;
+	private $groups = array();
 
 	/**
 	 * @param AliasGroup[] $aliasGroups
