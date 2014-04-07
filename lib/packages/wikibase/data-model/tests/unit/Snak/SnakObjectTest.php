@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Snak;
 
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakObject;

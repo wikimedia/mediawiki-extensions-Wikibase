@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Snak;
 
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;

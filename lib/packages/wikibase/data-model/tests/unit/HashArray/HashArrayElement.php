@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\HashArray;
 
 class HashArrayElement implements \Hashable {
 
