@@ -11,6 +11,7 @@ use Wikibase\Api\ApiErrorReporter;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -82,10 +83,19 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getNewInstance() {
+		$api = new ApiMain();
+
+		$errorReporter = new ApiErrorReporter(
+			$api,
+			new WikibaseExceptionLocalizer(),
+			$api->getLanguage()
+		);
+
 		$claimModificationHelper = new ClaimModificationHelper(
 			WikibaseRepo::getDefaultInstance()->getSnakConstructionService(),
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator()
+			WikibaseRepo::getDefaultInstance()->getClaimGuidValidator(),
+			$errorReporter
 		);
 
 		return $claimModificationHelper;
