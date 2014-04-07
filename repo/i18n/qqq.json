@@ -5,6 +5,7 @@
 			"Adam Shorland",
 			"Amire80",
 			"Aude",
+			"Bene*",
 			"Beta16",
 			"Daniel Werner",
 			"DavidL",
@@ -15,6 +16,8 @@
 			"Kghbln",
 			"Lokal Profil",
 			"Ltrlg",
+			"Mar(c)",
+			"Matěj Suchánek",
 			"McDutchie",
 			"Metalhead64",
 			"Minh Nguyen",
@@ -29,9 +32,7 @@
 			"Siebrand",
 			"Stryn",
 			"ZxxZxxZ",
-			"아라",
-			"Matěj Suchánek",
-			"Mar(c)"
+			"아라"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -62,6 +63,9 @@
 	"wikibase-sitelinks-add": "Add a sitelink to a language specific page on the cluster. See also Wikidata's glossary for [[d:Wikidata:Glossary#Sitelink|sitelinks]].",
 	"wikibase-sitelinks-empty": "There are no site links for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|sitelinks]] and [[d:Wikidata:Glossary#sitelinks-title|title]].",
 	"wikibase-sitelinks-input-help-message": "[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]\nBubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[d:Wikidata:Glossary#sitelinks|site links]] and [[d:Wikidata:Glossary#sitelinks-title|title]].\n\nParameters:\n* $1 - (Unused) language name\n{{Related|Wikibase-input-help-message}}",
+	"wikibase-badges-label": "Label for list of badges, displayed on top of the list. Badges contain information about a site link.",
+	"wikibase-badges-input-help-message": "Bubble help message for entering the badges of a site link.\n\nParameters:\n* $1 - Comma-separated list of all available badges",
+	"wikibase-badges-empty": "Placeholder message when now aliases for this site link have been difined.",
 	"wikibase-remove": "[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]\nThis is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.",
 	"wikibase-move-up": "Label of a link to move a list item one step up within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.\n\nSee also:\n* {{msg-mw|Wikibase-move-down}}\n{{Identical|Move up}}",
 	"wikibase-move-down": "Label of a link to move a list item one step down within an ordered list. The label should be a rather generic expression since it is used for lists featuring various content.\n\nSee also:\n* {{msg-mw|Wikibase-move-up}}\n{{Identical|Move down}}",
