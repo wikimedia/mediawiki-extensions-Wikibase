@@ -43,8 +43,7 @@ $GLOBALS['evilDataValueMap'] = array_merge(
 );
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgExtensionMessagesFiles;
-	global $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
+	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
