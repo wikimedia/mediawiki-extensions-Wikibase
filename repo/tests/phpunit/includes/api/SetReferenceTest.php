@@ -150,7 +150,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$snak = new PropertySomeValueSnak( new PropertyId( 'P23728525' ) );
 		$reference = new Reference( new SnakList( array( $snak ) ) );
 
-		$this->makeInvalidRequest( $statement->getGuid(), null, $reference, 'invalid-snak-value' );
+		$this->makeInvalidRequest( $statement->getGuid(), null, $reference, 'modification-failed' );
 	}
 
 	public function testSettingIndex() {
@@ -387,9 +387,8 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			'bad guid 1' => array( 'Berlin', 'xyz', 'good', '', 'invalid-guid' ),
 			'bad guid 2' => array( 'Berlin', 'x$y$z', 'good', '',  'invalid-guid' ),
 			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'good', '', 'invalid-guid' ),
-			'bad snak value' => array( 'Berlin', null, '    ', '', 'invalid-snak-value' ),
+			'bad snak value' => array( 'Berlin', null, '    ', '', 'modification-failed' ),
 		);
 	}
-
 
 }
