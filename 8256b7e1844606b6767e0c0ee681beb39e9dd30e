@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7a6e352c",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T20:05:10Z",
+      "side": 1,
+      "message": "Not part of this patch, but shouldn\u0027t this be removed? If the given index is -1 or null I would assume it defaults to something meaningful (e.g. the end of the list) and not fail.",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_bab16dde",
         "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
         "patchSetId": 16
