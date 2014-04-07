@@ -7,7 +7,6 @@ use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\ChangeOp\ChangeOpReference;
-use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
@@ -66,13 +65,7 @@ class SetReference extends ModifyClaim {
 		);
 
 		$changeOp = $this->getChangeOp( $newReference );
-
-		try {
-			$changeOp->apply( $entity, $summary );
-		} catch ( ChangeOpException $e ) {
-			//FIXME: specific, localized error message!
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
-		}
+		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
@@ -127,6 +120,8 @@ class SetReference extends ModifyClaim {
 	 * @param array $rawSnaks array of snaks
 	 * @param array $snakOrder array of property ids the snaks are supposed to be ordered by.
 	 *
+	 * @todo: Factor deserialization out of the API class.
+	 *
 	 * @return SnakList
 	 */
 	protected function getSnaks( array $rawSnaks, array $snakOrder = array() ) {
@@ -148,7 +143,6 @@ class SetReference extends ModifyClaim {
 					}
 
 					$snak = $snakUnserializer->newFromSerialization( $rawSnak );
-					$this->snakValidation->validateSnak( $snak );
 					$snaks[] = $snak;
 				}
 			}

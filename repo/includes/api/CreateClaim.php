@@ -51,13 +51,7 @@ class CreateClaim extends ModifyClaim {
 		/* @var ChangeOpMainSnak $changeOp */
 		$changeOp = $this->changeOpFactory->newSetMainSnakOp( '', $snak );
 
-		try {
-			$changeOp->apply( $entity, $summary );
-		} catch ( ChangeOpException $e ) {
-			//FIXME: implement generic localization of exceptions,
-			//       especially ChangeOpValidationException.
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
-		}
+		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$claims = new Claims( $entity->getClaims() );
 		$claim = $claims->getClaimWithGuid( $changeOp->getClaimGuid() );
