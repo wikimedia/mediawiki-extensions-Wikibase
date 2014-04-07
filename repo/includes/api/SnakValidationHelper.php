@@ -17,6 +17,8 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  *
  * @since 0.4
  *
+ * @deprecated: Rework this into a generic ApiErrorReporter.
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

@@ -45,12 +45,7 @@ class SetQualifier extends ModifyClaim {
 		}
 
 		$changeOp = $this->getChangeOp();
-
-		try {
-			$changeOp->apply( $entity, $summary );
-		} catch ( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
-		}
+		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
 		$this->saveChanges( $entity, $summary );
 		$this->getResultBuilder()->markSuccess();
