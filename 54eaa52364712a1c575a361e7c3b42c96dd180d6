@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_3a8c3ddb",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T20:20:02Z",
+      "side": 0,
+      "message": "Was it a mistake that the old code sometimes said \u0027failed-save\u0027 and sometimes \u0027save-failed\u0027? Did you checked if you replaced all?",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

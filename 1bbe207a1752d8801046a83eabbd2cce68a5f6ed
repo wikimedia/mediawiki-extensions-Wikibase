@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_7afbd544",
+        "filename": "repo/includes/api/ClaimModificationHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T20:20:02Z",
+      "side": 1,
+      "message": "\"thow\"? ;-) It also can\u0027t hurt to be a bit more specific.\n\nthrow new LogicException( \u0027ClaimModificationHelper::throwUsageException did not throw a UsageException.\u0027 );\n\nI just learned from Christopher that you don\u0027t use \"an\" in front of a \"u\" thats spelled like \"you\". :-)",
+      "revId": "1bbe207a1752d8801046a83eabbd2cce68a5f6ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
