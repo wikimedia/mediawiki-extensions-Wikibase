@@ -2,6 +2,22 @@
 
 ## Version 0.7.3 (dev)
 
+#### Additions
+
+* Added Term\AbstractTerm
+* Added Term\AliasGroup
+* Added Term\AliasGroupList
+* Added Term\Description
+* Added Term\DescriptionList
+* Added Term\Fingerprint
+* Added Term\FingerprintProvider
+* Added Term\Label
+* Added Term\LabelList
+* Added Term\Term
+* Added Term\TermList
+
+#### Deprecations
+
 * Deprecated Property::newEmpty
 
 ## Version 0.7.2 (2014-03-13)
