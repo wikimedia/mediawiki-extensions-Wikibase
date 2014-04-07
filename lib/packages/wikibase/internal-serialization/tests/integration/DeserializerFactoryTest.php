@@ -2,8 +2,6 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**

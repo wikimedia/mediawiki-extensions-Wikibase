@@ -7,7 +7,6 @@ use Serializers\Serializer;
 use Tests\Integration\Wikibase\InternalSerialization\TestFactoryBuilder;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
 
 /**

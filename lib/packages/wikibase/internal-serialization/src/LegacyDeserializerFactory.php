@@ -12,7 +12,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 
 /**
  * This factory is package private. Outside access is prohibited.
@@ -76,7 +76,7 @@ class LegacyDeserializerFactory {
 	 * @return Deserializer
 	 */
 	private function newTermsDeserializer() {
-		return new LegacyTermsDeserializer();
+		return new LegacyFingerprintDeserializer();
 	}
 
 	/**

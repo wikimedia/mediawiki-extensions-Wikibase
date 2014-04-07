@@ -12,13 +12,13 @@ use Wikibase\DataModel\Term\Description;
 use Wikibase\DataModel\Term\DescriptionList;
 use Wikibase\DataModel\Term\Label;
 use Wikibase\DataModel\Term\LabelList;
-use Wikibase\DataModel\Term\Terms;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacyTermsDeserializer implements Deserializer {
+class LegacyFingerprintDeserializer implements Deserializer {
 
 	private $serialization;
 
@@ -35,7 +35,7 @@ class LegacyTermsDeserializer implements Deserializer {
 
 		$this->serialization = $serialization;
 
-		return new Terms( $this->getLabels(), $this->getDescriptions(), $this->getAliases() );
+		return new Fingerprint( $this->getLabels(), $this->getDescriptions(), $this->getAliases() );
 	}
 
 	private function getLabels() {

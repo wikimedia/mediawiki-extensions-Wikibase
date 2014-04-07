@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer
@@ -25,7 +25,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function setUp() {
 		$this->deserializer = new LegacyPropertyDeserializer(
 			new LegacyEntityIdDeserializer( new BasicEntityIdParser() ),
-			new LegacyTermsDeserializer()
+			new LegacyFingerprintDeserializer()
 		);
 	}
 
