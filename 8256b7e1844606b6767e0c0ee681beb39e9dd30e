@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_fab7e5d1",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "An actual explanation what this is and what null means would be nice. However, I\u0027m aware this is not part of this patch. ;-)",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_daac2987",
+        "filename": "repo/includes/ChangeOp/ChangeOpClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "Backslash?",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_bab16dde",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "The amount and kind-of-random order of this parameters is starting to look a bit scary. Don\u0027t you agree?",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9ac6b14d",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "Really? This is a thing? And it\u0027s not an interface? Hm, ... shouldn\u0027t this be called ValidationResult or something like that?",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7ac3d53d",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "Why not? I can imagine cases where I want to construct an Exception from a Result object even if that result is valid. Why do you want to disallow this? I mean, I think this should not be checked here in this constructor. This adds a dependency that feels a bit strange. Just pass the array of Errors.",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_5ac0192f",
+        "filename": "repo/includes/ChangeOp/ChangeOpValidationException.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "Uppercase, please.",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3abd5dae",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsMergeTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "Doesn\u0027t look like this line is really needed. Hit Ctrl+Alt+O.",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1adaa121",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ClaimTestHelper.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "Not a problem, just a question out of curiosity: Isn\u0027t this more like a \"Provider\"? \"Helper\" sounds like a word that should be avoided.",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_fadec513",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 1,
+      "message": "What\u0027s the benefit of making this a static property? Currently it\u0027s only used a single time in WikibaseApiTestCase::initTestEntities. Wouldn\u0027t things be easier to read if the array is in the same file?",
+      "revId": "8256b7e1844606b6767e0c0ee681beb39e9dd30e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

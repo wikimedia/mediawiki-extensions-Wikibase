@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_dae309d3",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-07T19:47:19Z",
+      "side": 0,
+      "message": "To bad it\u0027s impossible to add comments to deletions. ;-) So I have to ask: Can you quickly explain why this was here and why it is not needed any more?",
+      "revId": "8b521a7bdd79b6e6fe6ff88c16c4efbc03de62e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
