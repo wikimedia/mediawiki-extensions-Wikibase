@@ -35,4 +35,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Message', $message );
 	}
 
+	public function testGetErrorStatus() {
+		$this->fail( 'test me!' );
+	}
 }
