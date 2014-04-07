@@ -522,8 +522,26 @@ class EditEntityTest extends WikibaseApiTestCase {
 					) ) ),
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
-					'code' => 'failed-save',
+					'code' => 'modification-failed',
 					'message' => 'uses property %P56%, can\'t change to %P72%' ) ) ),
+			'invalid main snak' => array(
+				'p' => array( 'id' => '%Berlin%', 'data' => json_encode( array(
+					'claims' => array(
+						array(
+							'id' => '%BerlinP56%',
+							'mainsnak' => array(
+								'snaktype' => 'value',
+								'property' => '%P56%',
+								'datavalue' => array( 'value' => '   ', 'type' => 'string' ),
+							),
+							'type' => 'statement',
+							'rank' => 'normal' ),
+					),
+				) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'modification-failed',
+					'message' => 'Negative pattern matched' ) ) ),
 		);
 	}
 

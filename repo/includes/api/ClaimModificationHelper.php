@@ -5,9 +5,12 @@ namespace Wikibase\Api;
 use DataValues\IllegalValueException;
 use FormatJson;
 use InvalidArgumentException;
+use LogicException;
 use OutOfBoundsException;
 use Profiler;
 use UsageException;
+use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
@@ -58,28 +61,18 @@ class ClaimModificationHelper {
 	/**
 	 * @since 0.4
 	 *
-	 * @var SnakValidationHelper
-	 */
-	protected $snakValidation;
-
-	/**
-	 * @since 0.4
-	 *
 	 * @param SnakConstructionService $snakConstructionService
 	 * @param EntityIdParser $entityIdParser
 	 * @param ClaimGuidValidator $claimGuidValidator
-	 * @param SnakValidationHelper $snakValidation
 	 */
 	public function __construct(
 		SnakConstructionService $snakConstructionService,
 		EntityIdParser $entityIdParser,
-		ClaimGuidValidator $claimGuidValidator,
-		SnakValidationHelper $snakValidation
+		ClaimGuidValidator $claimGuidValidator
 	) {
 		$this->snakConstructionService = $snakConstructionService;
 		$this->entityIdParser = $entityIdParser;
 		$this->claimGuidValidator = $claimGuidValidator;
-		$this->snakValidation = $snakValidation;
 	}
 
 	/**
@@ -133,6 +126,7 @@ class ClaimModificationHelper {
 
 		try {
 			$snak = $this->snakConstructionService->newSnak( $propertyId, $params['snaktype'], $valueData );
+			return $snak;
 		}
 		catch ( IllegalValueException $ex ) {
 			$this->throwUsageException( 'Invalid snak: IllegalValueException', 'invalid-snak' );
@@ -148,10 +142,7 @@ class ClaimModificationHelper {
 			$this->throwUsageException( 'Invalid snak: PropertyNotFoundException' . $ex->getMessage(), 'invalid-snak' );
 		}
 
-		/** @var Snak $snak */
-		//FIXME: remove snak validation logic here, once it is applied consistently by ChangeOps.
-		$this->snakValidation->validateSnak( $snak );
-		return $snak;
+		throw new LogicException( 'throwUsageException() didn\'t thow an exception.' );
 	}
 
 	/**
@@ -204,4 +195,19 @@ class ClaimModificationHelper {
 		throw new UsageException( $message, $code );
 	}
 
+	/**
+	 * Applies the given ChangeOp to the given Entity.
+	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
+	 *
+	 * @param ChangeOp $changeOp
+	 * @param Entity $entity
+	 * @param Summary $summary The summary object to update with information about the change.
+	 */
+	public function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch( ChangeOpException $exception ){
+			$this->throwUsageException( 'Failed to apply changeOp: ' . $exception->getMessage(), 'modification-failed' );
+		}
+	}
 }
