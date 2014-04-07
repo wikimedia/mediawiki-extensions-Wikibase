@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\HashArray;
 
 use Wikibase\DataModel\HashArray;
 
@@ -14,7 +14,6 @@ use Wikibase\DataModel\HashArray;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-
 class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 
 	public function constructorProvider() {
@@ -27,7 +26,7 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 	}
 
 	public function getInstanceClass() {
-		return '\Wikibase\Test\HashArrayWithoutDuplicates';
+		return '\Wikibase\Test\HashArray\HashArrayWithoutDuplicates';
 	}
 
 	public function elementInstancesProvider() {

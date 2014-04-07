@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Entity;
 
 use DataValues\StringValue;
 use Diff\Diff;
