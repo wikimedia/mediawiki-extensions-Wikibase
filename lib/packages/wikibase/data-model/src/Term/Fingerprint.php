@@ -3,12 +3,25 @@
 namespace Wikibase\DataModel\Term;
 
 /**
+ * Immutable value object.
+ *
  * @since 0.7.3
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class Fingerprint {
+
+	/**
+	 * @return Fingerprint
+	 */
+	public static function newEmpty() {
+		return new self(
+			new LabelList( array() ),
+			new DescriptionList( array() ),
+			new AliasGroupList( array() )
+		);
+	}
 
 	private $labels;
 	private $descriptions;
