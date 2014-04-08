@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_04023bbe",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-08T16:20:14Z",
+      "side": 1,
+      "message": "Why did you changed this code? What was wrong with getEntityIdForSiteLink? newFromNumber is \"discouraged\" (I really think we should deprecated it, not sure why it isn\u0027t). No new usages should be introduced if not necesarry.",
+      "revId": "ef274f5eb5d3522292c266569645d976b392b77a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
