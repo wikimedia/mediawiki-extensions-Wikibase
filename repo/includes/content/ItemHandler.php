@@ -79,25 +79,24 @@ class ItemHandler extends EntityHandler {
 	public function getContentFromSiteLink( $siteId, $pageName ) {
 		$id = $this->getIdForSiteLink( $siteId, $pageName );
 
-		if ( $id === false ) {
+		if ( $id === null ) {
 			return null;
 		}
 
-		$entityId = ItemId::newFromNumber( $id );
-		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $entityId );
+		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $id );
 	}
 
 	/**
 	 * Get the item id for a site and page pair.
-	 * Returns false when there is no such pair.
+	 * Returns null when there is no such pair.
 	 *
 	 * @since 0.1
-	 * @deprecated in 0.5, use SieLinkLookup::getItemIdForLink instead
+	 * @deprecated in 0.5, use SiteLinkLookup::getItemIdForLink instead
 	 *
-	 * @param integer $siteId
+	 * @param string $siteId
 	 * @param string $pageName
 	 *
-	 * @return false|integer
+	 * @return ItemId|null
 	 */
 	public function getIdForSiteLink( $siteId, $pageName ) {
 		return StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $pageName );
@@ -119,12 +118,11 @@ class ItemHandler extends EntityHandler {
 	public function getTitleFromSiteLink( $siteId, $pageName ) {
 		$id = $this->getIdForSiteLink( $siteId, $pageName );
 
-		if ( $id === false ) {
+		if ( $id === null ) {
 			return null;
 		}
 
-		$entityId = ItemId::newFromNumber( $id );
-		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $entityId );
+		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $id );
 	}
 
 	/**

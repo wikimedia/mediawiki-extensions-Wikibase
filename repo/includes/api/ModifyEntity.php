@@ -153,11 +153,11 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected function getEntityIdFromSiteTitleCombination( $site, $title ) {
 		$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
 
-		if ( $itemId === false ) {
+		if ( $itemId === null ) {
 			$this->dieUsage( 'No entity found matching site link ' . $site . ':' . $title , 'no-such-entity-link' );
 		}
 
-		return ItemId::newFromNumber( $itemId );
+		return $itemId;
 	}
 
 	/**
