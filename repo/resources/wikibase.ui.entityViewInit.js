@@ -81,17 +81,22 @@
 			// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
 			// be initialized:
 			var toolbarControllerConfig = {
-				addtoolbar: ['claimgrouplistview', 'claimlistview', 'claim-qualifiers-snak', 'references', 'referenceview-snakview'],
-				edittoolbar: ['statementview', 'referenceview'],
-				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove']
+				addtoolbar: [
+					'claimgrouplistview',
+					'claimlistview',
+					'claim-qualifiers-snak',
+					'references',
+					'referenceview-snakview'
+				],
+				edittoolbar: ['claimview', 'referenceview'],
+				removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove'],
+				movetoolbar: [
+					'claimlistview-claimview',
+					'claim-qualifiers-snak',
+					'statementview-referenceview',
+					'referenceview-snakview'
+				]
 			};
-
-			toolbarControllerConfig.movetoolbar = [
-				'claimlistview-claimview',
-				'claim-qualifiers-snak',
-				'statementview-referenceview',
-				'referenceview-snakview'
-			];
 
 			// TODO: Initialize toolbarcontroller on entity node when initializing entityview on
 			// the entity node (see FIXME below).
