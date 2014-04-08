@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_0e913f4a",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-08T03:30:49Z",
+      "side": 1,
+      "message": "$siteId instead of $site? to be more clear that this is not a Site object",
+      "revId": "b75cc105928bb46a586f21281f11ce4728dacf71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ee95e336",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-08T03:30:49Z",
+      "side": 1,
+      "message": "I see you just moved this line, but I think this doesn\u0027t work for titles in non-main NS.  ought to be fixed",
+      "revId": "b75cc105928bb46a586f21281f11ce4728dacf71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8e9c2f61",
+        "filename": "client/tests/phpunit/includes/ClientSiteLinkLookupTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-08T03:30:49Z",
+      "side": 1,
+      "message": "can we add test case that covers a title in non-main NS?",
+      "revId": "b75cc105928bb46a586f21281f11ce4728dacf71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
