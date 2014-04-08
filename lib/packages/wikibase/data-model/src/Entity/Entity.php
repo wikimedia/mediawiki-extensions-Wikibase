@@ -244,12 +244,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string $langCode
+	 * @param string $languageCode
 	 * @param string $value
+	 *
 	 * @return string
 	 */
-	public function setLabel( $langCode, $value ) {
-		$this->data['label'][$langCode] = $value;
+	public function setLabel( $languageCode, $value ) {
+		$this->data['label'][$languageCode] = $value;
 		return $value;
 	}
 
@@ -258,12 +259,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string $langCode
+	 * @param string $languageCode
 	 * @param string $value
+	 *
 	 * @return string
 	 */
-	public function setDescription( $langCode, $value ) {
-		$this->data['description'][$langCode] = $value;
+	public function setDescription( $languageCode, $value ) {
+		$this->data['description'][$languageCode] = $value;
 		return $value;
 	}
 
@@ -272,10 +274,10 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string|array $languages note that an empty array removes labels for no languages while a null pointer removes all
+	 * @param string|string[] $languageCodes Note that an empty array removes labels for no languages while a null pointer removes all
 	 */
-	public function removeLabel( $languages = array() ) {
-		$this->removeMultilangTexts( 'label', (array)$languages );
+	public function removeLabel( $languageCodes = array() ) {
+		$this->removeMultilangTexts( 'label', (array)$languageCodes );
 	}
 
 	/**
@@ -283,10 +285,10 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string|array $languages note that an empty array removes descriptions for no languages while a null pointer removes all
+	 * @param string|string[] $languageCodes Note that an empty array removes descriptions for no languages while a null pointer removes all
 	 */
-	public function removeDescription( $languages = array() ) {
-		$this->removeMultilangTexts( 'description', (array)$languages );
+	public function removeDescription( $languageCodes = array() ) {
+		$this->removeMultilangTexts( 'description', (array)$languageCodes );
 	}
 
 	/**
@@ -295,15 +297,15 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * @since 0.1
 	 *
 	 * @param string $fieldKey
-	 * @param array|null $languages
+	 * @param string[]|null languageCodes
 	 */
-	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
-		if ( is_null( $languages ) ) {
+	protected function removeMultilangTexts( $fieldKey, array $languageCodes = null ) {
+		if ( is_null( $languageCodes ) ) {
 			$this->data[$fieldKey] = array();
 		}
 		else {
-			foreach ( $languages as $lang ) {
-				unset( $this->data[$fieldKey][$lang] );
+			foreach ( $languageCodes as $languageCode ) {
+				unset( $this->data[$fieldKey][$languageCode] );
 			}
 		}
 	}
@@ -314,9 +316,9 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param $languageCode
+	 * @param string $languageCode
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function getAliases( $languageCode ) {
 		return array_key_exists( $languageCode, $this->data['aliases'] ) ?
@@ -330,15 +332,15 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param array|null $languages
+	 * @param string[]|null $languageCodes
 	 *
-	 * @return array
+	 * @return string[]
 	 */
-	public function getAllAliases( array $languages = null ) {
+	public function getAllAliases( array $languageCodes = null ) {
 		$textList = $this->data['aliases'];
 
-		if ( !is_null( $languages ) ) {
-			$textList = array_intersect_key( $textList, array_flip( $languages ) );
+		if ( !is_null( $languageCodes ) ) {
+			$textList = array_intersect_key( $textList, array_flip( $languageCodes ) );
 		}
 
 		$textList = array_map(
@@ -355,8 +357,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param $languageCode
-	 * @param array $aliases
+	 * @param string $languageCode
+	 * @param string[] $aliases
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
 		$aliases = array_diff( $aliases, array( '' ) );
@@ -374,8 +376,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param $languageCode
-	 * @param array $aliases
+	 * @param string $languageCode
+	 * @param string[] $aliases
 	 */
 	public function addAliases( $languageCode, array $aliases ) {
 		$this->setAliases(
@@ -393,8 +395,8 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param $languageCode
-	 * @param array $aliases
+	 * @param string $languageCode
+	 * @param string[] $aliases
 	 */
 	public function removeAliases( $languageCode, array $aliases ) {
 		$this->setAliases(
@@ -411,12 +413,12 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param array|null $languages note that an empty array gives descriptions for no languages whil a null pointer gives all
+	 * @param string[]|null $languageCodes Note that an empty array gives descriptions for no languages while a null pointer gives all
 	 *
-	 * @return array found descriptions in given languages
+	 * @return string[] Found descriptions in given languages
 	 */
-	public function getDescriptions( array $languages = null ) {
-		return $this->getMultilangTexts( 'description', $languages );
+	public function getDescriptions( array $languageCodes = null ) {
+		return $this->getMultilangTexts( 'description', $languageCodes );
 	}
 
 	/**
@@ -424,12 +426,12 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
+	 * @param string[]|null $languageCodes Note that an empty array gives labels for no languages while a null pointer gives all
 	 *
-	 * @return array found labels in given languages
+	 * @return string[] Found labels in given languages
 	 */
-	public function getLabels( array $languages = null ) {
-		return $this->getMultilangTexts( 'label', $languages );
+	public function getLabels( array $languageCodes = null ) {
+		return $this->getMultilangTexts( 'label', $languageCodes );
 	}
 
 	/**
@@ -438,13 +440,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string $langCode
+	 * @param string $languageCode
 	 *
 	 * @return string|bool
 	 */
-	public function getDescription( $langCode ) {
-		return array_key_exists( $langCode, $this->data['description'] )
-			? $this->data['description'][$langCode] : false;
+	public function getDescription( $languageCode ) {
+		return array_key_exists( $languageCode, $this->data['description'] )
+			? $this->data['description'][$languageCode] : false;
 	}
 
 	/**
@@ -453,13 +455,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
-	 * @param string $langCode
+	 * @param string $languageCode
 	 *
 	 * @return string|bool
 	 */
-	public function getLabel( $langCode ) {
-		return array_key_exists( $langCode, $this->data['label'] )
-			? $this->data['label'][$langCode] : false;
+	public function getLabel( $languageCode ) {
+		return array_key_exists( $languageCode, $this->data['label'] )
+			? $this->data['label'][$languageCode] : false;
 	}
 
 	/**
@@ -468,15 +470,15 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * @since 0.1
 	 *
 	 * @param string $fieldKey
-	 * @param array|null $languages
+	 * @param string[]|null $languageCodes
 	 *
-	 * @return array
+	 * @return string[]
 	 */
-	protected function getMultilangTexts( $fieldKey, array $languages = null ) {
+	protected function getMultilangTexts( $fieldKey, array $languageCodes = null ) {
 		$textList = $this->data[$fieldKey];
 
-		if ( !is_null( $languages ) ) {
-			$textList = array_intersect_key( $textList, array_flip( $languages ) );
+		if ( !is_null( $languageCodes ) ) {
+			$textList = array_intersect_key( $textList, array_flip( $languageCodes ) );
 		}
 
 		return $textList;
@@ -488,7 +490,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * and migrating or removing elements after changes to the structure are made.
 	 * Should typically be called before using any of the other methods.
 	 *
-	 * @param bool|bool $wipeExisting Unconditionally wipe out all data
+	 * @param bool $wipeExisting Unconditionally wipe out all data
 	 *
 	 * @since 0.1
 	 */
@@ -731,7 +733,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @param Claim[] $claims
 	 *
-	 * @return array
+	 * @return Claim[]
 	 */
 	protected function getStubbedClaims( array $claims ) {
 		if ( $this->claims !== null ) {
@@ -756,7 +758,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @since 0.2
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasClaims() {
 		if ( $this->claims === null ) {
@@ -816,7 +818,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 *
 	 * @param Entity $entity
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	protected function entityToDiffArray( Entity $entity ) {
 		$array = array();
