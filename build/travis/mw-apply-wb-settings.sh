@@ -9,6 +9,7 @@ function apply_client_settings {
   echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
   echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
   echo 'require_once __DIR__ . "/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
+  echo '$wgWBClientSettings["siteGlobalID"] = "enwiki";' >> LocalSettings.php
 }
 
 function apply_repo_settings {
