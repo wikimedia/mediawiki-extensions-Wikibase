@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Claim;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\References;
 use Wikibase\DataModel\Snak\Snak;
