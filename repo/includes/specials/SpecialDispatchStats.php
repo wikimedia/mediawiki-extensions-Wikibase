@@ -54,7 +54,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 				? wfMessage( 'wikibase-dispatchstats-large-lag' )->text()
 				: $lang->formatDuration( $state->chd_lag, array( 'days', 'hours', 'minutes' ) ),
 			isset( $state->chd_touched )
-				? $lang->timeanddate( $state->chd_touched )
+				? $lang->timeanddate( $state->chd_touched, true )
 				: '-',
 		) );
 	}
