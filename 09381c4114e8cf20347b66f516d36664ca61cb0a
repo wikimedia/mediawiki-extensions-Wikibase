@@ -16,6 +16,24 @@
       "revId": "09381c4114e8cf20347b66f516d36664ca61cb0a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_faa59ab2",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-08T18:52:10Z",
+      "side": 1,
+      "message": "No, this isn\u0027t actually a mistake. In PHP, when comparing objects you have to use \u003d\u003d because \u003d\u003d\u003d compares not only if the data is the same but also if the variables are referencing exactly the same object ie. instanc. See also http://www.php.net/manual/en/language.oop5.object-comparison.php",
+      "parentUuid": "8e23439c_9ae6a612",
+      "revId": "09381c4114e8cf20347b66f516d36664ca61cb0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
