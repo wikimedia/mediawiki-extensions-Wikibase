@@ -348,7 +348,6 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
-				'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js',

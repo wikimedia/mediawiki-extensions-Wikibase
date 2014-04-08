@@ -8,7 +8,6 @@
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js
-./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js
 ./lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js
