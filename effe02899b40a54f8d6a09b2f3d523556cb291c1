@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_151dc778",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-08T20:16:05Z",
+      "side": 1,
+      "message": "That\u0027s why I asked you to submit the code first. The first example should result in class\u003d\"badge-Q101 wb-badge-featuredarticle\", the second example should result in class\u003d\"badge-Q102\".",
+      "parentUuid": "8e23439c_75275b0e",
+      "revId": "effe02899b40a54f8d6a09b2f3d523556cb291c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_f5536b41",
         "filename": "docs/options.wiki",
         "patchSetId": 2
