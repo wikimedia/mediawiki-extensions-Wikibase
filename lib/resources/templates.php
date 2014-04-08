@@ -88,11 +88,14 @@ HTML;
 
 	$templates['wb-claim'] =
 <<<HTML
-<div class="wb-claim wb-claim-$1">
-	<div class="wb-claim-mainsnak" dir="auto">
-		$2 <!-- wb-snak (Main Snak) -->
+<div class="wb-claimview">
+	<div class="wb-claim wb-claim-$1">
+		<div class="wb-claim-mainsnak" dir="auto">
+			$2 <!-- wb-snak (Main Snak) -->
+		</div>
+		<div class="wb-claim-qualifiers">$3</div>
 	</div>
-	<div class="wb-claim-qualifiers">$3</div>
+	$4 <!-- wikibase-toolbar -->
 </div>
 HTML;
 
