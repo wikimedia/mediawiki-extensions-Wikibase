@@ -242,7 +242,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Sets the value for the label in a certain value.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string $langCode
 	 * @param string $value
@@ -256,7 +256,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Sets the value for the description in a certain value.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string $langCode
 	 * @param string $value
@@ -270,7 +270,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Removes the labels in the specified languages.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string|array $languages note that an empty array removes labels for no languages while a null pointer removes all
 	 */
@@ -281,7 +281,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Removes the descriptions in the specified languages.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string|array $languages note that an empty array removes descriptions for no languages while a null pointer removes all
 	 */
@@ -312,7 +312,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * Returns the aliases for the item in the language with the specified code.
 	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param $languageCode
 	 *
@@ -328,7 +328,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * The result is an array with language codes pointing to an array of aliases in the language they specify.
 	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param array|null $languages
 	 *
@@ -353,7 +353,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * Sets the aliases for the item in the language with the specified code.
 	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param $languageCode
 	 * @param array $aliases
@@ -372,7 +372,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
 	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param $languageCode
 	 * @param array $aliases
@@ -391,7 +391,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * Removed the provided aliases from the aliases list of the item in the language with the specified code.
 	 * TODO: decide on how to deal with duplicates, it is assumed all duplicates should be removed
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param $languageCode
 	 * @param array $aliases
@@ -409,7 +409,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Returns the descriptions of the entity in the provided languages.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param array|null $languages note that an empty array gives descriptions for no languages whil a null pointer gives all
 	 *
@@ -422,7 +422,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Returns the labels of the entity in the provided languages.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
 	 *
@@ -436,7 +436,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * Returns the description of the entity in the language with the provided code,
 	 * or false in cases there is none in this language.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string $langCode
 	 *
@@ -451,7 +451,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * Returns the label of the entity in the language with the provided code,
 	 * or false in cases there is none in this language.
 	 *
-	 * @since 0.1
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string $langCode
 	 *
@@ -506,6 +506,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * language codes pointing to the label in that language.
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string[] $labels
 	 */
@@ -519,6 +520,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * language codes pointing to the description in that language.
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param string[] $descriptions
 	 */
@@ -533,6 +535,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * in that language.
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.7.3 - use getFingerprint and setFingerprint
 	 *
 	 * @param array[] $aliasLists
 	 */

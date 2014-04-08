@@ -22,6 +22,23 @@
 #### Deprecations
 
 * Deprecated `Property::newEmpty`
+* Deprecated old fingerprint related methods in Entity:
+    * setLabel
+    * setDescription
+    * removeLabel
+    * removeDescription
+    * getAliases
+    * getAllAliases
+    * setAliases
+    * addAliases
+    * removeAliases
+    * getDescriptions
+    * getLabels
+    * getDescription
+    * getLabel
+    * setLabels
+    * setDescriptions
+    * setAllAliases
 
 ## Version 0.7.2 (2014-03-13)
 
