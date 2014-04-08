@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_75275b0e",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-08T20:12:02Z",
+      "side": 1,
+      "message": "I don\u0027t understand the second example. If we do not want to display Q102, we just do not put it into the config.",
+      "revId": "effe02899b40a54f8d6a09b2f3d523556cb291c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f5536b41",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-08T20:12:02Z",
+      "side": 1,
+      "message": "See other comment",
+      "revId": "effe02899b40a54f8d6a09b2f3d523556cb291c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
