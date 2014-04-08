@@ -241,8 +241,15 @@ class ClaimDifferenceVisualizer {
 		}
 		try {
 			return $this->snakDetailsFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
-			return '?'; // XXX: or include the error message?
+		} catch ( \Exception $ex ) {
+			// @fixme maybe there is a way we can render something more useful
+			// we are getting multiple types of exceptions and should handle
+			// consistent (and shared code) with what we do in SnakHtmlGenerator.
+			$messageText = wfMessage( 'wikibase-snakformat-invalid-value' )
+				->inLanguage( $this->langCode )
+				->parse();
+
+			return $messageText;
 		}
 	}
 
@@ -317,7 +324,7 @@ class ClaimDifferenceVisualizer {
 		try {
 			$headerText .= wfMessage( 'colon-separator' )->inLanguage( $this->langCode )->escaped()
 				. $this->snakBreadCrumbFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
+		} catch ( \Exception $ex ) {
 			// just ignore it
 		}
 
