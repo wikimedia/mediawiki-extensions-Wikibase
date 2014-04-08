@@ -5,7 +5,6 @@
 #### Additions
 
 * Added `Wikibase\DataModel\Term` namespace with these constructs:
-	* Term\AbstractTerm
 	* Term\AliasGroup
 	* Term\AliasGroupList
 	* Term\Description

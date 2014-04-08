@@ -8,10 +8,9 @@ namespace Wikibase\DataModel\Term;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Label extends AbstractTerm {
+class Label extends Term {
 
 	public function __construct( $languageCode, $text ) {
-		// TODO: validity checks
 		parent::__construct( $languageCode, $text );
 	}
 
