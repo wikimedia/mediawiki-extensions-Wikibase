@@ -9,15 +9,15 @@ use Wikibase\DataModel\Term\Description;
 use Wikibase\DataModel\Term\DescriptionList;
 use Wikibase\DataModel\Term\Label;
 use Wikibase\DataModel\Term\LabelList;
-use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacyTermsDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var Deserializer
@@ -25,7 +25,7 @@ class LegacyTermsDeserializerTest extends \PHPUnit_Framework_TestCase {
 	private $deserializer;
 
 	public function setUp() {
-		$this->deserializer = new LegacyTermsDeserializer();
+		$this->deserializer = new LegacyFingerprintDeserializer();
 	}
 
 	/**

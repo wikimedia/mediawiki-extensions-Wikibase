@@ -6,8 +6,9 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Terms;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @licence GNU GPL v2+
@@ -115,23 +116,26 @@ class LegacyItemDeserializer implements Deserializer {
 	}
 
 	private function addTerms() {
-		$terms = $this->getTerms();
+		$terms = $this->getFingerprint();
 
 		// TODO: try catch once setters do validation
-		$this->item->setLabels( $terms->getLabels()->toArray() );
-		$this->item->setDescriptions( $terms->getDescriptions()->toArray() );
+		$this->item->setLabels( $terms->getLabels()->toTextArray() );
+		$this->item->setDescriptions( $terms->getDescriptions()->toTextArray() );
 		$this->setAliases( $terms->getAliases() );
 	}
 
 	/**
-	 * @return Terms
+	 * @return Fingerprint
 	 */
-	private function getTerms() {
+	private function getFingerprint() {
 		return $this->termsDeserializer->deserialize( $this->serialization );
 	}
 
 	private function setAliases( AliasGroupList $aliases ) {
-		foreach ( $aliases->getAliasGroups() as $aliasGroup ) {
+		/**
+		 * @var AliasGroup $aliasGroup
+		 */
+		foreach ( $aliases as $aliasGroup ) {
 			$this->item->setAliases( $aliasGroup->getLanguageCode(), $aliasGroup->getAliases() );
 		}
 	}

@@ -8,8 +8,9 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Terms;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @licence GNU GPL v2+
@@ -92,23 +93,26 @@ class LegacyPropertyDeserializer implements Deserializer {
 	}
 
 	private function addTerms() {
-		$terms = $this->getTerms();
+		$terms = $this->getFingerprint();
 
 		// TODO: try catch once setters do validation
-		$this->property->setLabels( $terms->getLabels()->toArray() );
-		$this->property->setDescriptions( $terms->getDescriptions()->toArray() );
+		$this->property->setLabels( $terms->getLabels()->toTextArray() );
+		$this->property->setDescriptions( $terms->getDescriptions()->toTextArray() );
 		$this->setAliases( $terms->getAliases() );
 	}
 
 	/**
-	 * @return Terms
+	 * @return Fingerprint
 	 */
-	private function getTerms() {
+	private function getFingerprint() {
 		return $this->termsDeserializer->deserialize( $this->serialization );
 	}
 
 	private function setAliases( AliasGroupList $aliases ) {
-		foreach ( $aliases->getAliasGroups() as $aliasGroup ) {
+		/**
+		 * @var AliasGroup $aliasGroup
+		 */
+		foreach ( $aliases as $aliasGroup ) {
 			$this->property->setAliases( $aliasGroup->getLanguageCode(), $aliasGroup->getAliases() );
 		}
 	}

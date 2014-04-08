@@ -15,7 +15,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyTermsDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer
@@ -44,7 +44,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 			$idDeserializer,
 			new LegacySiteLinkListDeserializer(),
 			$claimDeserializer,
-			new LegacyTermsDeserializer()
+			new LegacyFingerprintDeserializer()
 		);
 	}
 
