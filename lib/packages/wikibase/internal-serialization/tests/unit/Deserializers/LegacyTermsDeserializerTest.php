@@ -32,9 +32,9 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider labelListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labelSerialization, $expected ) {
-		$terms = $this->deserializer->deserialize( array( 'label' => $labelSerialization ) );
+		$fingerprint = $this->deserializer->deserialize( array( 'label' => $labelSerialization ) );
 
-		$this->assertEquals( $expected, $terms->getLabels() );
+		$this->assertEquals( $expected, $fingerprint->getLabels() );
 	}
 
 	public function labelListProvider() {
@@ -75,9 +75,9 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider descriptionListProvider
 	 */
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptionSerialization, $expected ) {
-		$terms = $this->deserializer->deserialize( array( 'description' => $descriptionSerialization ) );
+		$fingerprint = $this->deserializer->deserialize( array( 'description' => $descriptionSerialization ) );
 
-		$this->assertEquals( $expected, $terms->getDescriptions() );
+		$this->assertEquals( $expected, $fingerprint->getDescriptions() );
 	}
 
 	public function descriptionListProvider() {
@@ -109,9 +109,9 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider aliasesListProvider
 	 */
 	public function testGivenAliases_getAliasesReturnsThem( array $aliasesSerialization, $expected ) {
-		$terms = $this->deserializer->deserialize( array( 'aliases' => $aliasesSerialization ) );
+		$fingerprint = $this->deserializer->deserialize( array( 'aliases' => $aliasesSerialization ) );
 
-		$this->assertEquals( $expected, $terms->getAliases() );
+		$this->assertEquals( $expected, $fingerprint->getAliases() );
 	}
 
 	public function aliasesListProvider() {

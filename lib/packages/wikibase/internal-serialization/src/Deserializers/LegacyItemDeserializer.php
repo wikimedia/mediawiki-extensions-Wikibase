@@ -19,7 +19,7 @@ class LegacyItemDeserializer implements Deserializer {
 	private $idDeserializer;
 	private $siteLinkListDeserializer;
 	private $claimDeserializer;
-	private $termsDeserializer;
+	private $fingerprintDeserializer;
 
 	/**
 	 * @var Item
@@ -28,12 +28,12 @@ class LegacyItemDeserializer implements Deserializer {
 	private $serialization;
 
 	public function __construct( Deserializer $idDeserializer, Deserializer $siteLinkListDeserializer,
-		Deserializer $claimDeserializer, Deserializer $termsDeserializer ) {
+		Deserializer $claimDeserializer, Deserializer $fingerprintDeserializer ) {
 
 		$this->idDeserializer = $idDeserializer;
 		$this->siteLinkListDeserializer = $siteLinkListDeserializer;
 		$this->claimDeserializer = $claimDeserializer;
-		$this->termsDeserializer = $termsDeserializer;
+		$this->fingerprintDeserializer = $fingerprintDeserializer;
 	}
 
 	/**
@@ -123,7 +123,7 @@ class LegacyItemDeserializer implements Deserializer {
 	 * @return Fingerprint
 	 */
 	private function getFingerprint() {
-		return $this->termsDeserializer->deserialize( $this->serialization );
+		return $this->fingerprintDeserializer->deserialize( $this->serialization );
 	}
 
 }

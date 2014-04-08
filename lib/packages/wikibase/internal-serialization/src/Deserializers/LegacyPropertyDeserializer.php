@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 class LegacyPropertyDeserializer implements Deserializer {
 
 	private $idDeserializer;
-	private $termsDeserializer;
+	private $fingerprintDeserializer;
 
 	/**
 	 * @var Property
@@ -27,9 +27,9 @@ class LegacyPropertyDeserializer implements Deserializer {
 	private $property;
 	private $serialization;
 
-	public function __construct( Deserializer $idDeserializer, Deserializer $termsDeserializer ) {
+	public function __construct( Deserializer $idDeserializer, Deserializer $fingerprintDeserializer ) {
 		$this->idDeserializer = $idDeserializer;
-		$this->termsDeserializer = $termsDeserializer;
+		$this->fingerprintDeserializer = $fingerprintDeserializer;
 	}
 
 	/**
@@ -100,7 +100,7 @@ class LegacyPropertyDeserializer implements Deserializer {
 	 * @return Fingerprint
 	 */
 	private function getFingerprint() {
-		return $this->termsDeserializer->deserialize( $this->serialization );
+		return $this->fingerprintDeserializer->deserialize( $this->serialization );
 	}
 
 }
