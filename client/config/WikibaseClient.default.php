@@ -39,12 +39,9 @@ return call_user_func( function() {
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinks' => array(),
-		// array of badges that should be displayed
-		// If a sitelink has two or more badges listed here, we will use the one that
-		// comes first in the list. The array has to consist of item ids pointing to
-		// a class name, like array( 'Q123' => 'wb-badge-featuredarticle' ) Supported
-		// names are currently "wb-badge-goodarticle" and "wb-badge-featuredarticle".
-		'displayBadges' => array(),
+		// List of additional CSS class names for site links that have badges, e.g.
+		// array( 'Q101' => 'wb-badge-featuredarticle' ).
+		'badgeClassNames' => array(),
 
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
