@@ -35,6 +35,7 @@
     "wikibase-description-input-help-message": "採用$1輸入簡要說明。",
     "wikibase-claims": "權利",
     "wikibase-statements": "聲明",
+    "wikibase-attributes": "屬性",
     "wikibase-terms": "其他語言",
     "wikibase-sitelinks-add": "添加指向特定站點頁面的鏈接",
     "wikibase-sitelinks-empty": "尚無此項目的項目鏈接。",

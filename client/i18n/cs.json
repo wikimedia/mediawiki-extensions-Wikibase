@@ -3,7 +3,8 @@
         "authors": [
             "JAn Dudík",
             "Littledogboy",
-            "Mormegil"
+            "Mormegil",
+            "Matěj Suchánek"
         ]
     },
     "wikibase-client-desc": "Klient pro rozšíření Wikibase",
@@ -25,7 +26,7 @@
     "wikibase-editlinks": "Upravit odkazy",
     "wikibase-editlinkstitle": "Editovat mezijazykové odkazy",
     "wikibase-linkitem-addlinks": "Přidat odkazy",
-    "wikibase-linkitem-alreadylinked": "Stránka, na kterou chcete odkázat, je již použita u [$1 položky] v ústředním úložišti, která odkazuje na $2 na tomto serveru. Položky smí mít pouze pro každý server jen jeden odkaz. Prosím, zvolte jinou stránku.",
+    "wikibase-linkitem-alreadylinked": "Stránka, kterou chcete propojit, je již v ústředním úložišti propojená s [$1 položkou], která odkazuje na $2 na tomto serveru. Položky smí mít pro každý server jen jeden odkaz. Prosím, zvolte jinou stránku.",
     "wikibase-linkitem-close": "Zavřít dialog a obnovit stránku",
     "wikibase-linkitem-failure": "Došlo k neznámé chybě při pokusu o odkaz na danou stránku.",
     "wikibase-linkitem-title": "Propojit se stránkou",
@@ -33,11 +34,11 @@
     "wikibase-linkitem-selectlink": "Prosím vyberte jazyk a stránku, kterou chcete propojit s touto stránkou.",
     "wikibase-linkitem-input-site": "Jazyk:",
     "wikibase-linkitem-input-page": "Stránka:",
-    "wikibase-linkitem-confirmitem-text": "Na zvolenou stránku již odkazuje [$1 položka v našem ústředním úložišti]. Potvrďte, že níže {{PLURAL:$2|zobrazená stránka je ta, se kterou|zobrazené stránky jsou ty, se kterými}} chcete tuto stránku provázat.",
+    "wikibase-linkitem-confirmitem-text": "Na zvolenou stránku již odkazuje [$1 položka v našem ústředním úložišti]. Potvrďte, že níže {{PLURAL:$2|zobrazená stránka je ta, se kterou|zobrazené stránky jsou ty, se kterými}} chcete tuto stránku propojit.",
     "wikibase-linkitem-confirmitem-button": "Potvrdit",
     "wikibase-linkitem-not-loggedin-title": "Musíte být přihlášen",
     "wikibase-linkitem-not-loggedin": "Je třeba být přihlášen na této wiki a [$1  Wikidatech], chcete-li použít tuto funkci.",
-    "wikibase-linkitem-success-link": "Stránky byly úspěšně spojeny. Byla založena položka obsahující tyto odkazy v [$1  centrálním datovém úložišti].",
+    "wikibase-linkitem-success-link": "Stránky byly úspěšně propojeny. V [$1 centrálním datovém úložišti] byla založena položka obsahující tyto odkazy.",
     "wikibase-property-notfound": "Vlastnost $1 nebyla nalezena.",
     "wikibase-property-notsupportedyet": "Wikibase zatím nepodporuje typ vlastnosti $1.",
     "wikibase-rc-hide-wikidata": "$1 {{grammar:4sg|{{WBREPONAME}}}}",

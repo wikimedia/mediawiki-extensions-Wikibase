@@ -5,7 +5,8 @@
             "Shirayuki",
             "Tgr",
             "Vivaelcelta",
-            "Zolo"
+            "Zolo",
+            "JulesWinnfield-hu"
         ]
     },
     "wikibase-desc": "Strukturált adattár",
@@ -51,6 +52,7 @@
     "wikibase-propertypage-datatype": "Adattípus",
     "wikibase-claimview-snak-tooltip": "Adj meg egy értéket a(z) „$1” tulajdonsághoz. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.",
     "wikibase-claimview-snak-new-tooltip": "Miután kiválasztottál egy tulajdonságot, megadhatod a hozzátartozó értéket. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.",
+    "wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|forrás|forrás}}",
     "wikibase-snakview-property-input-placeholder": "tulajdonság",
     "wikibase-snakview-unsupportedsnaktype": "„$1” típusú snak. Az ilyen snakokat jelenleg még nem támogatjuk.",
     "wikibase-snakview-choosesnaktype": "Válassz egy értéktípust.",

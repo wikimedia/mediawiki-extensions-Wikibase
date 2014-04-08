@@ -33,6 +33,7 @@
     "wikibase-description-input-help-message": "Ange en kort beskrivning på $1.",
     "wikibase-claims": "Påståenden",
     "wikibase-statements": "Uttalanden",
+    "wikibase-attributes": "Egenskaper",
     "wikibase-terms": "På andra språk",
     "wikibase-sitelinks-add": "lägg till en länk till en webbplatssida",
     "wikibase-sitelinks-empty": "Inga webbplatssidor länkade till det här objektet ännu.",
@@ -312,6 +313,8 @@
     "content-model-wikibase-item": "Wikibase-objekt",
     "content-model-wikibase-property": "Wikibase-egenskap",
     "content-model-wikibase-query": "Wikibase-fråga",
+    "right-item-term": "Ändra termerna för objekt (etiketter, beskrivningar, alias)",
     "right-item-merge": "Sammanfoga objekt",
+    "right-property-term": "Ändra termerna för egenskaper (etiketter, beskrivningar, alias)",
     "right-property-create": "Skapa egenskaper"
 }

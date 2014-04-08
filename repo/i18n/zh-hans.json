@@ -43,6 +43,7 @@
     "wikibase-description-input-help-message": "请用$1输入一个简短的说明。",
     "wikibase-claims": "权利",
     "wikibase-statements": "声明",
+    "wikibase-attributes": "属性",
     "wikibase-terms": "其他语言",
     "wikibase-sitelinks-add": "请添加至网站链接的链接",
     "wikibase-sitelinks-empty": "还没有该项的网站链接。",

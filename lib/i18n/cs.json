@@ -5,7 +5,8 @@
             "JAn Dudík",
             "Littledogboy",
             "Mormegil",
-            "Vks"
+            "Vks",
+            "Matěj Suchánek"
         ]
     },
     "wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Klient Wikibase",
@@ -58,7 +59,7 @@
     "wikibase-globedetails-globe": "Glóbus",
     "wikibase-parse-error": "Chybně formátovaná hodnota.",
     "wikibase-unexpected-error": "Neočekávaná chyba: $1.",
-    "wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to pár minut trvat.",
+    "wikibase-replicationnote": "Vezměte prosím na vědomí, že než se změny projeví na všech wiki, může to trvat pár minut.",
     "wikibase-sitelinks-wikipedia": "Stránky Wikipedie provázané s touto položkou",
     "wikibase-sitelinks-sitename-columnheading": "Jazyk",
     "wikibase-sitelinks-sitename-columnheading-special": "Projekt",
