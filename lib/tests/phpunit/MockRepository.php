@@ -192,14 +192,14 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 
 	/**
 	 * Returns the id of the item that is equivalent to the
-	 * provided page, or false if there is none.
+	 * provided page, or null if there is none.
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
-	 * @return integer|boolean
+	 * @return ItemId|null
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
 		// We store page titles with spaces instead of underscores
@@ -208,9 +208,9 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 		$key = "$globalSiteId:$pageTitle";
 
 		if ( isset( $this->itemByLink[$key] ) ) {
-			return $this->itemByLink[$key];
+			return ItemId::newFromNumber( $this->itemByLink[$key] );
 		} else {
-			return false;
+			return null;
 		}
 	}
 
@@ -231,8 +231,7 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 		$title = \Title::newFromText( $pageName );
 		$pageTitle = $title->getDBkey();
 
-		$numericItemId = $this->getItemIdForLink( $globalSiteId, $pageTitle );
-		return is_int( $numericItemId ) ? new ItemId( 'Q' . $numericItemId ) : null;
+		return $this->getItemIdForLink( $globalSiteId, $pageTitle );
 	}
 
 	/**

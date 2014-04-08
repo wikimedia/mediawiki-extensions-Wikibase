@@ -53,19 +53,17 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param integer|null $entityId
+	 * @param ItemId|null $itemId
 	 * @return SiteLinkCache
 	 */
-	public function getSiteLinkCacheMock( $entityId = null ) {
+	public function getSiteLinkCacheMock( $itemId = null ) {
 		$siteLinkCacheMock = $this->getMockBuilder( '\Wikibase\SiteLinkCache' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		if ( !is_null( $entityId ) ) {
-			$siteLinkCacheMock->expects( $this->any() )
-				->method( 'getItemIdForLink' )
-				->will( $this->returnValue( $entityId ) );
-		}
+		$siteLinkCacheMock->expects( $this->any() )
+			->method( 'getItemIdForLink' )
+				->will( $this->returnValue( $itemId ) );
 
 		return $siteLinkCacheMock;
 	}
@@ -76,7 +74,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),
-			$this->getSiteLinkCacheMock( 123 ),
+			$this->getSiteLinkCacheMock( new ItemId( 'Q123' ) ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
 		);
@@ -98,7 +96,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		$itemByTitleHelper = new ItemByTitleHelper(
 		// Two values should be added: The normalization and the failure to find an entity
 			$this->getResultBuilderMock( 1 ),
-			$this->getSiteLinkCacheMock( false ),
+			$this->getSiteLinkCacheMock( null ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
 		);
@@ -212,7 +210,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$itemByTitleHelper = new ItemByTitleHelper(
 			$this->getResultBuilderMock(),
-			$this->getSiteLinkCacheMock( 123 ),
+			$this->getSiteLinkCacheMock( new ItemId( 'Q123' ) ),
 			$this->getSiteStoreMock(),
 			new StringNormalizer()
 		);
