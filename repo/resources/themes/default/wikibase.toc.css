@@ -37,7 +37,7 @@
 	border-right: 0;
 }
 
-/* FIXME: Should be removed if the Typography refresh is stable */
+/* FIXME: Very specific selector to temporary overrule VectorBeta extension */
 #content .wb-entity #toc {
 	margin-top: 1.8em;
 }
