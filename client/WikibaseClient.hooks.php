@@ -35,6 +35,8 @@ use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -50,6 +52,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 final class ClientHooks {
 
@@ -402,6 +405,50 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Add badges to the language links.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$languageLink
+	 * @param Title $languageLinkTitle
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+		wfProfileIn( __METHOD__ );
+
+		global $wgLang;
+
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
+		$localSiteId = $settings->getSetting( 'siteGlobalID' );
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		$clientSiteLinkLookup = new ClientSiteLinkLookup( $localSiteId, $siteLinkLookup, $entityLookup );
+		$sites = SiteSQLStore::newInstance()->getSites();
+		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
+
+		if ( !is_array( $badgeClassNames ) ) {
+			$badgeClassNames = array();
+		}
+
+		$languageLinkBadgeDisplay = new LanguageLinkBadgeDisplay(
+			$clientSiteLinkLookup,
+			$entityLookup,
+			$sites,
+			$badgeClassNames,
+			$wgLang->getCode()
+		);
+
+		$languageLinkBadgeDisplay->assignBadges( $title, $languageLinkTitle, $languageLink );
+
+		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
 	 * Add Wikibase item link in toolbox
 	 *
 	 * @since 0.4
@@ -409,7 +456,7 @@ final class ClientHooks {
 	 * @param QuickTemplate &$sk
 	 * @param array &$toolbox
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onBaseTemplateToolbox( QuickTemplate &$sk, &$toolbox ) {
 		$prefixedId = $sk->getSkin()->getOutput()->getProperty( 'wikibase_item' );
