@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7061a9cf",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-08T20:30:52Z",
+      "side": 1,
+      "message": "This is exactly what will happen if you do not enter any value for Q102 here. ;-)",
+      "parentUuid": "8e23439c_151dc778",
+      "revId": "effe02899b40a54f8d6a09b2f3d523556cb291c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_f5536b41",
         "filename": "docs/options.wiki",
         "patchSetId": 2
