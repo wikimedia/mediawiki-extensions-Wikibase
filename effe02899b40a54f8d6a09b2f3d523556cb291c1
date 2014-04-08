@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_50522d6b",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-08T21:48:59Z",
+      "side": 1,
+      "message": "Oh. It seems we have two different ideas how this should work then. If you want to have class\u003d\"badge-Q102\" always in the generated HTML by default then it\u0027s already possible to make these \"visible\" by simply adding CSS to the local MediaWiki:...css files. In other words: This setting is not needed to make the badges \"visible\". Therefor it should be named \"badgeClassNames\".",
+      "parentUuid": "8e23439c_7061a9cf",
+      "revId": "effe02899b40a54f8d6a09b2f3d523556cb291c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_f5536b41",
         "filename": "docs/options.wiki",
         "patchSetId": 2
