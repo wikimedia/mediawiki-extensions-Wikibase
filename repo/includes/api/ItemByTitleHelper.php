@@ -126,18 +126,14 @@ class ItemByTitleHelper {
 		$id = $this->siteLinkCache->getItemIdForLink( $siteId, $title );
 
 		// Try harder by requesting normalization on the external site.
-		if ( $id === false && $normalize === true ) {
+		if ( $id === null && $normalize === true ) {
 			$siteObj = $this->siteStore->getSite( $siteId );
 			//XXX: this passes the normalized title back into $title by reference...
 			$this->normalizeTitle( $title, $siteObj );
 			$id = $this->siteLinkCache->getItemIdForLink( $siteObj->getGlobalId(), $title );
 		}
 
-		if ( $id === false ) {
-			return null;
-		} else {
-			return ItemId::newFromNumber( $id );
-		}
+		return $id;
 	}
 
 	/**
