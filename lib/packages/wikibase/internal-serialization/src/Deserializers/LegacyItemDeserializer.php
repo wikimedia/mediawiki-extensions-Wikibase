@@ -6,8 +6,6 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**

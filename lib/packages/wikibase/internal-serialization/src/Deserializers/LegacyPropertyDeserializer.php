@@ -8,8 +8,6 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**

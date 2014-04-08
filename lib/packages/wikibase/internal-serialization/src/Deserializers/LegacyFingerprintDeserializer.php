@@ -10,9 +10,9 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Description;
 use Wikibase\DataModel\Term\DescriptionList;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Label;
 use Wikibase\DataModel\Term\LabelList;
-use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @licence GNU GPL v2+
