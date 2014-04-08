@@ -34,6 +34,24 @@
       "revId": "09381c4114e8cf20347b66f516d36664ca61cb0a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_302d718c",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-08T20:24:31Z",
+      "side": 1,
+      "message": "Oh, I see. Thanks for explaining, I missed that. Then call ...-\u003eequals( ... ) please. The \u003d\u003d is \"magical\" and unpredictable and should be avoided.",
+      "parentUuid": "8e23439c_faa59ab2",
+      "revId": "09381c4114e8cf20347b66f516d36664ca61cb0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
