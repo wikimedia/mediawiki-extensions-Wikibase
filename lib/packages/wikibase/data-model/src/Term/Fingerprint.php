@@ -3,8 +3,6 @@
 namespace Wikibase\DataModel\Term;
 
 /**
- * Immutable value object.
- *
  * @since 0.7.3
  *
  * @licence GNU GPL v2+
@@ -52,6 +50,13 @@ class Fingerprint {
 	 */
 	public function getAliases() {
 		return $this->aliases;
+	}
+
+	/**
+	 * @param Label $label
+	 */
+	public function setLabel( Label $label ) {
+		$this->labels = $this->labels->getWithTerm( $label );
 	}
 
 }

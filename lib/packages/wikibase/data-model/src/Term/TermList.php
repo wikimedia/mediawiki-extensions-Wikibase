@@ -86,4 +86,15 @@ class TermList implements Countable, IteratorAggregate {
 		return $this->terms[$languageCode];
 	}
 
+	/**
+	 * @param Term $term
+	 *
+	 * @return TermList
+	 */
+	public function getWithTerm( Term $term ) {
+		$terms = $this->terms;
+		$terms[] = $term;
+		return new static( $terms );
+	}
+
 }
