@@ -149,6 +149,20 @@
 			} );
 		} );
 
+		// Restrict entity page actions if editing is restricted:
+		var editRestriction = mw.config.get( 'wgRestrictionEdit' );
+		if( editRestriction !== null && editRestriction.length === 1 ) {
+			var hasGroup = $.inArray( editRestriction[0], mw.config.get( 'wgUserGroups' ) );
+			if( !hasGroup ) {
+				mw.user.getRights( function( rights ) {
+					var hasRight = $.inArray( editRestriction, rights ) !== -1;
+					if( !hasRight ) {
+						$( wb ).triggerHandler( 'restrictEntityPageActions' );
+					}
+				} );
+			}
+		}
+
 		if ( !mw.config.get( 'wbUserCanEdit' ) ) {
 			$( wb ).triggerHandler( 'restrictEntityPageActions' );
 		} else if ( mw.config.get( 'wbUserIsBlocked' ) ) {
