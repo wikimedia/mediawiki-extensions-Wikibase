@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_9ae6a612",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-08T18:49:00Z",
+      "side": 1,
+      "message": "This does look like a mistake. Always use three \u003d\u003d\u003d.",
+      "revId": "09381c4114e8cf20347b66f516d36664ca61cb0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
