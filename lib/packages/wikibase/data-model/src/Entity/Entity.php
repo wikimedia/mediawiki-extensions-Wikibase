@@ -921,7 +921,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 		return new Fingerprint(
 			$this->getLabelList(),
 			$this->getDescriptionList(),
-			$this->getAliasesList()
+			$this->getAliasGroupList()
 		);
 	}
 
@@ -945,7 +945,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 		return new DescriptionList( $descriptions );
 	}
 
-	private function getAliasesList() {
+	private function getAliasGroupList() {
 		$groups = array();
 
 		foreach ( $this->getAllAliases() as $languageCode => $aliases ) {
