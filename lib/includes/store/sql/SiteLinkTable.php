@@ -237,7 +237,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
-	 * @return integer|boolean
+	 * @return ItemId|null
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
 		// We store page titles with spaces instead of underscores
@@ -255,7 +255,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		);
 
 		$this->releaseConnection( $db );
-		return $result === false ? false : (int)$result->ips_item_id;
+		return $result === false ? null : ItemId::newFromNumber( (int)$result->ips_item_id );
 	}
 
 	/**
@@ -271,9 +271,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		$siteId = $siteLink->getSiteId();
 		$pageName = $siteLink->getPageName();
 
-		$numericItemId = $this->getItemIdForLink( $siteId, $pageName );
-
-		return is_int( $numericItemId ) ? ItemId::newFromNumber( $numericItemId ) : null;
+		return $this->getItemIdForLink( $siteId, $pageName );
 	}
 
 	/**
