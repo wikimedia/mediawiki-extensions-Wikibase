@@ -9,8 +9,6 @@ use OutOfBoundsException;
 use Traversable;
 
 /**
- * List of terms. Immutable.
- *
  * If multiple terms with the same language code are provided, only the last one will be retained.
  *
  * @since 0.7.3
@@ -86,15 +84,8 @@ class TermList implements Countable, IteratorAggregate {
 		return $this->terms[$languageCode];
 	}
 
-	/**
-	 * @param Term $term
-	 *
-	 * @return TermList
-	 */
-	public function getWithTerm( Term $term ) {
-		$terms = $this->terms;
-		$terms[] = $term;
-		return new static( $terms );
+	protected function setTerm( Term $term ) {
+		$this->terms[$term->getLanguageCode()] = $term;
 	}
 
 }

@@ -120,17 +120,4 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list->getByLanguage( 'en' );
 	}
 
-	public function testGivenTermForNewLanguage_getWithTermReturnsListWithTerm() {
-		$enTerm = new Label( 'en', 'foo' );
-		$deTerm = new Label( 'de', 'bar' );
-
-		$list = new TermList( array( $enTerm ) );
-		$expectedList = new TermList( array( $enTerm, $deTerm ) );
-
-		$actualList = $list->getWithTerm( $deTerm );
-
-		$this->assertEquals( $expectedList, $actualList );
-		$this->assertCount( 1, $list );
-	}
-
 }

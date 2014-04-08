@@ -52,11 +52,4 @@ class Fingerprint {
 		return $this->aliases;
 	}
 
-	/**
-	 * @param Label $label
-	 */
-	public function setLabel( Label $label ) {
-		$this->labels = $this->labels->getWithTerm( $label );
-	}
-
 }
