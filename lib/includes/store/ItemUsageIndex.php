@@ -153,11 +153,10 @@ class ItemUsageIndex {
 		foreach ( $pages as $page ) {
 			$id = $this->siteLinks->getItemIdForLink( $this->clientSite->getGlobalId(), $page );
 
-			if ( $id !== false ) {
-				//Note: we are using the numeric ID as the key here to make sure each item only
-				//      shows up once. If we had other entity types too, we'd need to use the
-				//      prefixed ID.
-				$entities[$id] = ItemId::newFromNumber( $id );
+			if ( $id !== null ) {
+				//Note: we are using the ID as the key here to make sure each item only
+				//      shows up once.
+				$entities[$id->getSerialization()] = $id;
 			}
 		}
 
