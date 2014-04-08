@@ -47,7 +47,7 @@ class LegacyPropertyDeserializer implements Deserializer {
 		$this->property = Property::newFromType( $this->getDataTypeId() );
 
 		$this->setPropertyId();
-		$this->addTerms();
+		$this->addFingerprint();
 
 		return $this->property;
 	}
@@ -92,13 +92,8 @@ class LegacyPropertyDeserializer implements Deserializer {
 		return $id;
 	}
 
-	private function addTerms() {
-		$terms = $this->getFingerprint();
-
-		// TODO: try catch once setters do validation
-		$this->property->setLabels( $terms->getLabels()->toTextArray() );
-		$this->property->setDescriptions( $terms->getDescriptions()->toTextArray() );
-		$this->setAliases( $terms->getAliases() );
+	private function addFingerprint() {
+		$this->property->setFingerprint( $this->getFingerprint() );
 	}
 
 	/**
@@ -106,15 +101,6 @@ class LegacyPropertyDeserializer implements Deserializer {
 	 */
 	private function getFingerprint() {
 		return $this->termsDeserializer->deserialize( $this->serialization );
-	}
-
-	private function setAliases( AliasGroupList $aliases ) {
-		/**
-		 * @var AliasGroup $aliasGroup
-		 */
-		foreach ( $aliases as $aliasGroup ) {
-			$this->property->setAliases( $aliasGroup->getLanguageCode(), $aliasGroup->getAliases() );
-		}
 	}
 
 }

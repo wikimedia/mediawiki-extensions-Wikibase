@@ -53,7 +53,7 @@ class LegacyItemDeserializer implements Deserializer {
 		$this->setId();
 		$this->addSiteLinks();
 		$this->addClaims();
-		$this->addTerms();
+		$this->addFingerprint();
 
 		return $this->item;
 	}
@@ -115,13 +115,8 @@ class LegacyItemDeserializer implements Deserializer {
 		}
 	}
 
-	private function addTerms() {
-		$terms = $this->getFingerprint();
-
-		// TODO: try catch once setters do validation
-		$this->item->setLabels( $terms->getLabels()->toTextArray() );
-		$this->item->setDescriptions( $terms->getDescriptions()->toTextArray() );
-		$this->setAliases( $terms->getAliases() );
+	private function addFingerprint() {
+		$this->item->setFingerprint( $this->getFingerprint() );
 	}
 
 	/**
@@ -129,15 +124,6 @@ class LegacyItemDeserializer implements Deserializer {
 	 */
 	private function getFingerprint() {
 		return $this->termsDeserializer->deserialize( $this->serialization );
-	}
-
-	private function setAliases( AliasGroupList $aliases ) {
-		/**
-		 * @var AliasGroup $aliasGroup
-		 */
-		foreach ( $aliases as $aliasGroup ) {
-			$this->item->setAliases( $aliasGroup->getLanguageCode(), $aliasGroup->getAliases() );
-		}
 	}
 
 }
