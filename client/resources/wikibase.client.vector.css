@@ -1,0 +1,5 @@
+div.after-portlet-lang:after {
+	content: '';
+	clear: both;
+	display: block;
+}
