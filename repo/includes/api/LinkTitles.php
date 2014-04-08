@@ -102,7 +102,7 @@ class LinkTitles extends ApiWikibase {
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
 			/** @var Item $item */
-			$item = $this->entityLookup->getEntity( ItemId::newFromNumber( $toId ) );
+			$item = $this->entityLookup->getEntity( $toId );
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
 			$return[] = $fromLink;
@@ -111,7 +111,7 @@ class LinkTitles extends ApiWikibase {
 		elseif ( $fromId && !$toId ) {
 			// reuse from-site's item
 			/** @var Item $item */
-			$item =$this->entityLookup->getEntity( ItemId::newFromNumber( $fromId ) );
+			$item =$this->entityLookup->getEntity( $fromId );
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );
 			$return[] = $toLink;

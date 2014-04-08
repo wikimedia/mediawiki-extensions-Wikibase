@@ -150,21 +150,21 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->repo->putEntity( $item );
 		$itemId = $item->getId();
 
-		$this->assertEquals( $itemId->getNumericId(), $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
-		$this->assertEquals( false, $this->repo->getItemIdForLink( 'xywiki', 'Foo' ) );
+		$this->assertEquals( $itemId, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
+		$this->assertEquals( null, $this->repo->getItemIdForLink( 'xywiki', 'Foo' ) );
 
 		// test lookup after item modification
 		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ), 'set' );
 		$this->repo->putEntity( $item );
 
-		$this->assertEquals( false, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
-		$this->assertEquals( $itemId->getNumericId(), $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
+		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
+		$this->assertEquals( $itemId, $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
 
 		// test lookup after item deletion
 		$this->repo->removeEntity( $itemId );
 
-		$this->assertEquals( false, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
-		$this->assertEquals( false, $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
+		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
+		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Bar' ) );
 	}
 
 	public static function provideGetConflictsForItem() {
