@@ -5,6 +5,7 @@ namespace Wikibase\Validators;
 use Message;
 use Status;
 use ValueValidators\Error;
+use ValueValidators\Result;
 
 /**
  * Class ValidatorErrorLocalizer
@@ -15,16 +16,15 @@ use ValueValidators\Error;
 class ValidatorErrorLocalizer {
 
 	/**
-	 * Returns a Status representing the given errors.
-	 * This can be used for reporting validation failures.
+	 * Returns a Status representing the given validation result.
 	 *
-	 * @param Error[] $errors
+	 * @param Result $result
 	 * @return Status
 	 */
-	public function getErrorStatus( array $errors ) {
+	public function getResultStatus( Result $result ) {
 		$status = Status::newGood();
 
-		foreach ( $errors as $error ) {
+		foreach ( $result->getErrors() as $error ) {
 			$msg = $this->getErrorMessage( $error );
 			$status->fatal( $msg );
 		}

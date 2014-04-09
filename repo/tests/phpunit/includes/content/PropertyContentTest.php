@@ -37,6 +37,10 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	public function testLabelUniquenessRestriction() {
+		if ( wfGetDB( DB_MASTER )->getType() === 'mysql' ) {
+			$this->markTestSkipped( 'Can\'t test uniqueness restriction on MySQL' );
+		}
+
 		StoreFactory::getStore()->getTermIndex()->clear();
 		$prefix = get_class( $this ) . '/';
 
@@ -59,7 +63,7 @@ class PropertyContentTest extends EntityContentTest {
 
 		$status = $propertyContent1->save( 'save property' );
 		$this->assertFalse( $status->isOK(), "saving a property with duplicate label+lang should not work" );
-		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-wikibase-property' ) );
+		$this->assertTrue( $status->hasMessage( 'wikibase-validator-label-conflict' ) );
 	}
 
 	public function testLabelEntityIdRestriction() {
