@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Term;
 
+use Comparable;
 use InvalidArgumentException;
 
 /**
@@ -12,7 +13,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Term {
+class Term implements Comparable {
 
 	private $languageCode;
 	private $text;
@@ -48,6 +49,19 @@ class Term {
 	 */
 	public function getText() {
 		return $this->text;
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		return $target instanceof Term
+			&& $this->text === $target->getText()
+			&& $this->languageCode === $target->getLanguageCode();
 	}
 
 }
