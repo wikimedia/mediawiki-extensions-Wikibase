@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_8ef2e1cb",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T15:36:21Z",
+      "side": 1,
+      "message": "Would it be too hard to inject this into the constructor now?",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6ebf85ce",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T15:36:21Z",
+      "side": 1,
+      "message": "At least make a TODO comment here for handlign the namespace mapping in a simmilar way.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6e29c535",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T15:36:21Z",
+      "side": 1,
+      "message": "The hook name is a bit obscure. \"WikibaseEntityTypeMapping\" or \"WikibaseContentModelMapping\" would be better.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ce19f928",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T15:36:21Z",
+      "side": 1,
+      "message": "The constructor already takes a list of model IDs. Just change that to take the mapping. There are not many places that construct a EntityContentFactory.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4edde946",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T15:36:21Z",
+      "side": 1,
+      "message": "should say whether this is a list, or a map, or what.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_eeeb95d9",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T15:36:21Z",
+      "side": 1,
+      "message": "The namespace mapping and the content model mapping should be handled consistently, ideally in the same place.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6ed8a558",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T15:36:21Z",
+      "side": 1,
+      "message": "This field only exists $wgContentHandlerUseDB is true. On many Wikimedia wikis, it does not exist and would cause an SQL error.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
