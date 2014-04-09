@@ -107,7 +107,12 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			 */
 			foreach ( $entity->getClaims() as $claim ) {
 				$value = new StringValue( 'Kittens.png' );
-				$argLists[] = array( $entity, $claim->getGuid(), $value->getArrayValue(), $this->getExpectedSummary( $claim, $value ) );
+				$argLists[] = array(
+					'entity' => $entity,
+					'claimGuid' => $claim->getGuid(),
+					'value' => $value->getArrayValue(),
+					'expectedSummary' => $this->getExpectedSummary( $claim, $value )
+				);
 			}
 		}
 
@@ -116,7 +121,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function doTestValidRequest( Entity $entity, $claimGuid, $value, $summary ) {
+	public function doTestValidRequest( Entity $entity, $claimGuid, $value, $expectedSummary ) {
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
 		$claimCount = count( $obtainedEntity->getClaims() );
@@ -142,7 +147,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 
 		$page = new WikiPage( WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $entity->getId() ) );
 		$generatedSummary = $page->getRevision()->getComment( Revision::RAW );
-		$this->assertEquals( $summary, $generatedSummary, 'Summary mismatch' );
+		$this->assertEquals( $expectedSummary, $generatedSummary, 'Summary mismatch' );
 
 		$claims = new \Wikibase\Claims( $obtainedEntity->getClaims() );
 
