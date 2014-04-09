@@ -31,14 +31,24 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	 * @var string[]
 	 */
 	private static $dayPlaceholders = array(
-		/** default as regex */ 'j',
+		/** default as regex */ 'j\.?',
+		'gl' => 'j \d\e',
+		'pt' => 'j \d\e',
+		'pt-br' => 'j "de"',
 	);
 
 	/**
 	 * @var string[]
 	 */
 	private static $monthPlaceholders = array(
-		/** default as regex */ '[FM]',
+		/** default as regex */ '([FM]|xg)',
+		'cs' => 'n.',
+		'eo' => 'M.',
+		'fi' => 'F"ta"',
+		'fit' => 'F"ta"',
+		'gl' => 'F \d\e',
+		'pt' => 'F \d\e',
+		'pt-br' => 'F "de"',
 	);
 
 	/**
