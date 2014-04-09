@@ -41,7 +41,39 @@ class MockTermIndex implements TermIndex {
 	 * @throws Exception always
 	 */
 	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
-		throw new Exception( 'not implemented by mock class ' );
+		/**
+		 * @var Term[] $termPair
+		 * @var Term[] $matchingTerms
+		 */
+		foreach ( $terms as $termPair ) {
+			$matchingTerms = array();
+
+			/** @var EntityId $id */
+			$id = null;
+
+			foreach ( $termPair as $term ) {
+				foreach ( $this->terms as $storedTerm ) {
+					if ( $term->getText() === $storedTerm->getText()
+						&& $term->getLanguage() === $storedTerm->getLanguage()
+						&& $term->getType() === $storedTerm->getType() ) {
+
+						if ( $id === null ) {
+							$id = $term->getEntityId();
+							$matchingTerms[] = $storedTerm;
+						}
+						elseif ( $id->equals( $term->getEntityId() ) ) {
+							$matchingTerms[] = $storedTerm;
+						}
+					}
+				}
+			}
+
+			if ( count( $matchingTerms ) === count( $termPair ) ) {
+				return $matchingTerms;
+			}
+		}
+
+		return array();
 	}
 
 	/**

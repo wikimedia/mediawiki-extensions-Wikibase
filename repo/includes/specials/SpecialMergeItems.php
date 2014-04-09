@@ -10,7 +10,7 @@ use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\TermDuplicateDetector;
 use Wikibase\Summary;
 use Wikibase\DataModel\Entity\EntityId;
 use Status;

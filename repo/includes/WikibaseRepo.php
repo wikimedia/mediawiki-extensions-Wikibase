@@ -14,9 +14,8 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
-use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
@@ -28,6 +27,7 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\Lib\WikibaseTermValidatorBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
@@ -37,6 +37,9 @@ use Wikibase\SnakFactory;
 use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\Validators\TermChangeValidationHelper;
+use Wikibase\TermDuplicateDetector;
+use Wikibase\Utils;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -329,9 +332,8 @@ class WikibaseRepo {
 	 * @return ChangeOpFactory
 	 */
 	public function getChangeOpFactory() {
-		//TODO: cache instance locally
 		return new ChangeOpFactory(
-			new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() ),
+			$this->getTermChangeValidationHelper(),
 			$this->getStore()->newSiteLinkCache(),
 			new ClaimGuidGenerator(),
 			new ClaimGuidValidator( $this->getEntityIdParser() ),
@@ -545,4 +547,25 @@ class WikibaseRepo {
 		return $this->getEntityContentFactory();
 	}
 
+	/**
+	 * @return TermChangeValidationHelper
+	 */
+	protected function getTermChangeValidationHelper() {
+		$validatorBuilders = $this->getTermValidatorBuilders();
+
+		return new TermChangeValidationHelper(
+			$validatorBuilders->buildLanguageValidator(),
+			$validatorBuilders->buildLabelValidator(),
+			$validatorBuilders->buildDescriptionValidator(),
+			$validatorBuilders->buildAliasValidator(),
+			new TermDuplicateDetector( $this->getStore()->getTermIndex() )
+		);
+	}
+
+	/**
+	 * @return WikibaseTermValidatorBuilders
+	 */
+	protected function getTermValidatorBuilders() {
+		return new WikibaseTermValidatorBuilders( $this->getSettings(), Utils::getLanguageCodes() );
+	}
 }
