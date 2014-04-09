@@ -16,6 +16,24 @@
       "revId": "984be522d1380eaa02e4ee0a96efafdf02f56679",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a8335509",
+        "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T12:09:51Z",
+      "side": 0,
+      "message": "There is actually a separate ChangeOpClaimRemove class. removeClaim() wasn\u0027t ever used, or at least not for a long time. Nothing calls it, it\u0027s just dead wood.",
+      "parentUuid": "8e23439c_08b249e1",
+      "revId": "984be522d1380eaa02e4ee0a96efafdf02f56679",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
