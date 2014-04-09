@@ -39,14 +39,14 @@ interface SiteLinkLookup {
 
 	/**
 	 * Returns the id of the item that is equivalent to the
-	 * provided page, or false if there is none.
+	 * provided page, or null if there is none.
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $globalSiteId
 	 * @param string $pageTitle
 	 *
-	 * @return integer|boolean
+	 * @return ItemId|null
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle );
 

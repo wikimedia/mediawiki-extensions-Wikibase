@@ -86,7 +86,7 @@ class LinkTitles extends ApiWikibase {
 			$toSite->getGlobalId() . ':' . $toPage );
 
 		// Figure out which parts to use and what to create anew
-		if ( !$fromId && !$toId ) {
+		if ( $fromId === null && $toId === null ) {
 			// create new item
 			$item = Item::newEmpty();
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
@@ -99,25 +99,26 @@ class LinkTitles extends ApiWikibase {
 			$flags |= EDIT_NEW;
 			$summary->setAction( 'create' ); //FIXME: i18n
 		}
-		elseif ( !$fromId && $toId ) {
+		elseif ( $fromId === null && $toId !== null ) {
 			// reuse to-site's item
 			/** @var Item $item */
-			$item = $this->entityLookup->getEntity( ItemId::newFromNumber( $toId ) );
+			$item = $this->entityLookup->getEntity( $toId );
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
 			$return[] = $fromLink;
 			$summary->setAction( 'connect' );
 		}
-		elseif ( $fromId && !$toId ) {
+		elseif ( $fromId !== null && $toId === null ) {
 			// reuse from-site's item
 			/** @var Item $item */
-			$item =$this->entityLookup->getEntity( ItemId::newFromNumber( $fromId ) );
+			$item = $this->entityLookup->getEntity( $fromId );
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );
 			$return[] = $toLink;
 			$summary->setAction( 'connect' );
 		}
-		elseif ( $fromId === $toId ) {
+		// we can be sure that $fromId and $toId are not null here
+		elseif ( $fromId->equals( $toId ) ) {
 			// no-op
 			wfProfileOut( __METHOD__ );
 			$this->dieUsage( 'Common item detected, sitelinks are both on the same item', 'common-item' );
