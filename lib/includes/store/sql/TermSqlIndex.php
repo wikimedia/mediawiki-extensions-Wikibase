@@ -946,7 +946,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 				$combinationConds[] = '(' . implode( ' OR ', $exclusionConds ) . ')';
 			}
 
-			$conditions[] = implode( ' AND ', $combinationConds );
+			$conditions[] = '(' . implode( ' AND ', $combinationConds ) . ')';
 		}
 
 		$tables = array();

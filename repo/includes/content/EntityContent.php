@@ -14,6 +14,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use ValueValidators\Result;
 use Wikibase\content\EntityValidator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -629,18 +630,19 @@ abstract class EntityContent extends AbstractContent {
 		$validators = $handler->getOnSaveValidators();
 
 		$entity = $this->getEntity();
-		$status = Status::newGood();
+		$result = Result::newSuccess();
 
 		/* @var EntityValidator $validator */
 		foreach ( $validators as $validator ) {
-			$status = $validator->validateEntity( $entity );
+			$result = $validator->validateEntity( $entity );
 
-			if ( !$status->isOK() ) {
+			if ( !$result->isValid() ) {
 				break;
 			}
 		}
 
-		return $status;
+		$localizer = WikibaseRepo::getDefaultInstance()->getValidatorErrorLocalizer();
+		return $localizer->getResultStatus( $result );
 	}
 
 	/**

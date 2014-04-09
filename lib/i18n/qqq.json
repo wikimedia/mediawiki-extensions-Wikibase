@@ -88,6 +88,7 @@
 	"wikibase-validator-bad-http-url": "Input validation error shown when the value is an HTTP or HTTPS URL.\n\nParameters:\n* $1 - the malformed URL\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-bad-mailto-url": "Input validation error shown when the value is an invalid \"mailto\" URL.\n\nParameters:\n* $1 - the malformed URL\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-unknown-unit": "Input validation error when the value has an unknown unit.\n\nParameters:\n* $1 - the unknown unit\n{{Related|Wikibase-validator}}",
+    "wikibase-validator-not-allowed": "Input validation error when the value is not in the list of known values.\n\nParameters:\n* $1 - the illegal value\n{{Related|Wikibase-validator}}",
 	"datatypes-type-wikibase-item": "The name of a data type for items in Wikibase.\n{{Identical|Item}}",
 	"datatypes-type-commonsMedia": "The name of a data type for media files on Wikimedia Commons (proper name, capitalised in English; first letter capitalised anyway in this message and relatives).",
 	"version-wikibase": "Name of the Wikibase extension collection, used on [[Special:Version]]",

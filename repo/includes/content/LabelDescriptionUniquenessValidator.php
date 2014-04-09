@@ -15,7 +15,7 @@ use Wikibase\TermDuplicateDetector;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class LabelUniquenessValidator implements EntityValidator {
+class LabelDescriptionUniquenessValidator implements EntityValidator {
 
 	/**
 	 * @var TermDuplicateDetector
@@ -37,7 +37,7 @@ class LabelUniquenessValidator implements EntityValidator {
 	 * @return Result
 	 */
 	public function validateEntity( Entity $entity ) {
-		$result = $this->duplicateDetector->detectLabelConflictsForEntity( $entity );
+		$result = $this->duplicateDetector->detectLabelDescriptionConflictsForEntity( $entity );
 		return $result;
 	}
 
