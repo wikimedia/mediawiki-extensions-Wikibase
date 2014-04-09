@@ -103,7 +103,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
 
-	public static function provideValidConstruction(){
+	public static function provideValidConstruction() {
 		$from = self::getItem( 'Q111' );
 		$to = self::getItem( 'Q222' );
 		return array(
@@ -129,7 +129,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public static function provideInvalidConstruction(){
+	public static function provideInvalidConstruction() {
 		$from = self::getItem( 'Q111' );
 		$to = self::getItem( 'Q222' );
 		return array(

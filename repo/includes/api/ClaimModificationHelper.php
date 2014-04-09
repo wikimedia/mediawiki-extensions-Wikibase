@@ -142,7 +142,7 @@ class ClaimModificationHelper {
 			$this->throwUsageException( 'Invalid snak: PropertyNotFoundException' . $ex->getMessage(), 'invalid-snak' );
 		}
 
-		throw new LogicException( 'throwUsageException() didn\'t thow an exception.' );
+		throw new LogicException( 'ClaimModificationHelper::throwUsageException did not throw a UsageException.' );
 	}
 
 	/**
@@ -206,7 +206,7 @@ class ClaimModificationHelper {
 	public function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
 		try {
 			$changeOp->apply( $entity, $summary );
-		} catch( ChangeOpException $exception ){
+		} catch ( ChangeOpException $exception ) {
 			$this->throwUsageException( 'Failed to apply changeOp: ' . $exception->getMessage(), 'modification-failed' );
 		}
 	}
