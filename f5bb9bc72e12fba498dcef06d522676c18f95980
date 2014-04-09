@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_029b406b",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-09T20:29:25Z",
+      "side": 1,
+      "message": "Line break.",
+      "revId": "f5bb9bc72e12fba498dcef06d522676c18f95980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_42b818c3",
+        "filename": "repo/includes/content/OnSaveValidator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-09T20:29:25Z",
+      "side": 1,
+      "message": "Actually, when I look at this interface this is nothing more than an EntityValidator interface. \"OnSave\" doesn\u0027t make much sense here.",
+      "revId": "f5bb9bc72e12fba498dcef06d522676c18f95980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
