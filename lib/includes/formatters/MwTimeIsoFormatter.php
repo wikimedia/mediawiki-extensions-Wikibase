@@ -122,7 +122,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 
 		if( $precision < TimeValue::PRECISION_MONTH ) {
 			// Remove month placeholder:
-			$dateFormat = preg_replace( '/((x\w{1})?(F|n)|m)/', '', $dateFormat );
+			$dateFormat = preg_replace( '/((x\w{1})?(F|n|M)|m)/', '', $dateFormat );
 		}
 		return trim( $dateFormat );
 	}
