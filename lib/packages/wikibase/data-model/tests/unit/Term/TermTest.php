@@ -43,4 +43,15 @@ class TermTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testEquality() {
+		$term = new Term( 'foo', 'bar' );
+
+		$this->assertTrue( $term->equals( $term ) );
+		$this->assertTrue( $term->equals( clone $term ) );
+
+		$this->assertFalse( $term->equals( new Term( 'foo', 'spam' ) ) );
+		$this->assertFalse( $term->equals( new Term( 'spam', 'bar' ) ) );
+		$this->assertFalse( $term->equals( new Term( 'spam', 'spam' ) ) );
+	}
+
 }
