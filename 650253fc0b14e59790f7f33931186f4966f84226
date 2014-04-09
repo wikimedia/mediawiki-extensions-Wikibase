@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_7dba991f",
+        "filename": "repo/includes/EntityContentDiffView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-09T22:02:53Z",
+      "side": 1,
+      "message": ".",
+      "revId": "650253fc0b14e59790f7f33931186f4966f84226",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_5d87dd66",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-09T22:02:53Z",
+      "side": 1,
+      "message": ".",
+      "revId": "650253fc0b14e59790f7f33931186f4966f84226",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_fd85895b",
+        "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-09T22:02:53Z",
+      "side": 1,
+      "message": ".",
+      "revId": "650253fc0b14e59790f7f33931186f4966f84226",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
