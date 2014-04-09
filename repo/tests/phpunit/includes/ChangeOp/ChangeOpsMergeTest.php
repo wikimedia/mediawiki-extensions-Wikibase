@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
@@ -40,12 +41,21 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$this->mockProvider = new ClaimTestMockProvider( $this );
 	}
 
-	private function getMockLabelDescriptionDuplicateDetector( $callTimes, $returnValue = array() ) {
-		$mock = $this->getMockBuilder( '\Wikibase\LabelDescriptionDuplicateDetector' )
+	private function getTermDuplicateDetector( $callTimes, $returnValue = null ) {
+		if ( $returnValue === null ) {
+			$returnValue = Result::newSuccess();
+		} elseif ( is_array( $returnValue ) ) {
+			$returnValue = Result::newError( $returnValue );
+		}
+
+		$mock = $this->getMockBuilder( '\Wikibase\TermDuplicateDetector' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->exactly( $callTimes ) )
-			->method( 'getConflictingTerms' )
+			->method( 'detectLabelConflictsForEntity' )
+			->will( $this->returnValue( $returnValue ) );
+		$mock->expects( $this->exactly( $callTimes ) )
+			->method( 'detectLabelDescriptionConflictsForEntity' )
 			->will( $this->returnValue( $returnValue ) );
 		return $mock;
 	}
@@ -65,7 +75,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$termCalls, $termConflicts,
 		$linkCalls, $linkConflicts
 	) {
-		$duplicateDetector = $this->getMockLabelDescriptionDuplicateDetector( $termCalls, $termConflicts );
+		$duplicateDetector = $this->getTermDuplicateDetector( $termCalls, $termConflicts );
 		$linkCache = $this->getMockSitelinkCache( $linkCalls, $linkConflicts );
 
 		$idParser = new BasicEntityIdParser();
