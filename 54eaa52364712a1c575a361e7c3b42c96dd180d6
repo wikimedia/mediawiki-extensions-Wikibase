@@ -34,6 +34,24 @@
       "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4624b307",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-09T09:01:44Z",
+      "side": 0,
+      "message": "I checked. The only typo was in SetClaim and it is fixed with this patch.",
+      "parentUuid": "8e23439c_ddb2e391",
+      "revId": "54eaa52364712a1c575a361e7c3b42c96dd180d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
