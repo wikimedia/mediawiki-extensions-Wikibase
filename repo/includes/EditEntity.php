@@ -819,7 +819,8 @@ class EditEntity {
 		if ( !$this->preSaveChecks ) {
 			// eek, global state
 			$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
-			$this->preSaveChecks = new PreSaveChecks( $termIndex );
+			$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+			$this->preSaveChecks = new PreSaveChecks( $termIndex, $idParser );
 		}
 
 		return $this->preSaveChecks;
