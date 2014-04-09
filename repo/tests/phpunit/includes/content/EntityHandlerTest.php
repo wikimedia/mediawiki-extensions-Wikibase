@@ -26,18 +26,16 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
-	abstract public function getModelId();
-
 	abstract public function getClassName();
+
+	abstract public function getModelId();
 
 	/**
 	 * Returns instances of the EntityHandler deriving class.
 	 * @return array
 	 */
 	public function instanceProvider() {
-		$class = $this->getClassName();
 		return array(
-			array( new $class ),
 			array( $this->getHandler() ),
 		);
 	}

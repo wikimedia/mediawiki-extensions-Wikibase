@@ -183,13 +183,10 @@ call_user_func( function() {
 	$wgHooks['OutputPageBeforeHTML'][]				= 'Wikibase\RepoHooks::onOutputPageBeforeHTML';
 	$wgHooks['OutputPageBeforeHTML'][]				= 'Wikibase\RepoHooks::onOutputPageBeforeHtmlRegisterConfig';
 	$wgHooks['MakeGlobalVariablesScript'][]			= 'Wikibase\RepoHooks::onMakeGlobalVariablesScript';
+	$wgHooks['ContentHandlerForModelID'][]			= 'Wikibase\RepoHooks::onContentHandlerForModelID';
 
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
-
-	// register hooks and handlers
-	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] 		= '\Wikibase\ItemHandler';
-	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] 	= '\Wikibase\PropertyHandler';
 
 	$wgWBStores = array();
 

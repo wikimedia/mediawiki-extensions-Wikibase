@@ -84,13 +84,6 @@ class PropertyContentTest extends EntityContentTest {
 
 		$status = $propertyContent->save( 'save property' );
 		$this->assertTrue( $status->isOK(), "saving a property with a valid item id as label should work" );
-
-		// save a property with a valid property id as label
-		$propertyContent->getProperty()->setLabel( 'nl', 'P23' );
-
-		$status = $propertyContent->save( 'save property' );
-		$this->assertFalse( $status->isOK(), "saving a proeprty with a valid property id as label should not work" );
-		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-no-entityid' ) );
 	}
 
 	/**

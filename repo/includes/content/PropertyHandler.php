@@ -34,8 +34,11 @@ class PropertyHandler extends EntityHandler {
 		return '\Wikibase\ItemContentDiffView';
 	}
 
-	public function __construct() {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY );
+	/**
+	 * @param PreSaveValidator[] $preSaveValidators
+	 */
+	public function __construct( $preSaveValidators ) {
+		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY, $preSaveValidators );
 	}
 
 	/**

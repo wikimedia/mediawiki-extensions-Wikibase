@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Repo\Specials;
+use ContentHandler;
 use Html;
 use Site;
 use Wikibase\ItemHandler;
@@ -60,7 +61,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				$siteId .= 'wiki';
 			}
 
-			$itemHandler = new ItemHandler();
+			/* @var ItemHandler $itemHandler */
+			$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
 			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
 
 			$normalizeItemByTitlePageNames = WikibaseRepo::getDefaultInstance()->
