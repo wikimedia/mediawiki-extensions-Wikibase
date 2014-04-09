@@ -6,6 +6,7 @@ use DataValues\TimeValue;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Utils;
 
 /**
  * @covers ValueFormatters\TimeFormatter
@@ -268,7 +269,12 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 		$argLists = array();
 
 		foreach ( $tests as $expected => $args ) {
-			$argLists[] = array( $expected, $args[0], $args[1] );
+			$argLists[] = array( $expected, $args[0], $args[1], 'en' );
+		}
+
+		//Different language tests at YEAR precision
+		foreach( Utils::getLanguageCodes() as $languageCode ) {
+			$argLists[] = array( '3333', '+00000003333-01-01T00:00:00Z', TimeValue::PRECISION_YEAR, $languageCode );
 		}
 
 		return $argLists;
@@ -280,9 +286,43 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expected
 	 * @param string $extendedIsoString
 	 * @param integer $precision
+	 * @param string $langCode
 	 */
-	public function testFormatDate( $expected, $extendedIsoString, $precision ) {
-		$langCode = 'en';
+	public function testFormatDate( $expected, $extendedIsoString, $precision, $langCode = 'en' ) {
+		//TODO remove this skip section once $brokenLanguages can be empty! BUG 63723
+		$brokenLanguages = array(
+			'ab', 'als', 'anp', 'ar', 'arq', 'arz', 'as', 'av', 'azb',
+			'ba', 'bar', 'bcc', 'be', 'be-tarask', 'be-x-old', 'bh', 'bho', 'bn', 'bo', 'bpy', 'bqi', 'bxr',
+			'cdo', 'ce', 'ckb', 'crh', 'crh-latn', 'crh-cyrl', 'cs', 'cu', 'cv',
+			'da', 'de', 'de-at', 'de-ch', 'de-formal', 'dsb', 'dz',
+			'el', 'eo', 'et',
+			'fa', 'fi', 'fit', 'fiu-vro', 'fo', 'frr', 'fur',
+			'gan', 'gan-hans', 'gan-hant', 'gl', 'glk', 'grc', 'gsw', 'gu',
+			'he', 'hi', 'hr', 'hrx', 'hsb', 'hu', 'hy',
+			'ii', 'inh', 'is',
+			'ja', 'jut',
+			'kaa', 'kk', 'kk-arab', 'kk-cyrl', 'kk-latn', 'kk-cn', 'kk-kz', 'kk-tr', 'kl', 'km', 'kn',
+			'ko', 'ko-kp', 'koi', 'krc', 'ks', 'ks-arab', 'ks-deva', 'ksh', 'ku-arab', 'kv',
+			'la', 'lb', 'lbe', 'lez', 'liv', 'lo', 'lzh',
+			'mai', 'mhr', 'mr', 'mrj', 'mwl', 'my', 'myv', 'mzn',
+			'nan', 'nb', 'nds', 'ne', 'new', 'nn', 'no',
+			'oc', 'or', 'os',
+			'pa', 'pdc', 'pdt', 'pfl', 'pi', 'pnt', 'pt', 'pt-br',
+			'ru', 'rue',
+			'sa', 'sah', 'sk', 'sl', 'sli', 'sr', 'sr-ec', 'sr-el', 'stq',
+			'tcy', 'tg', 'tg-cyrl', 'th', 'tyv',
+			'udm', 'uk', 'uz',
+			'vep', 'vi', 'vmf', 'vo', 'vot', 'vro',
+			'wuu',
+			'xal',
+			'yi', 'yue',
+			'za', 'za', 'zh', 'zh-classical', 'zh-cn', 'zh-hans', 'zh-hant', 'zh-hk', 'zh-min-nan', 'zh-mo',
+			'zh-my', 'zh-sg', 'zh-tw', 'zh-yue'
+		);
+		if( in_array( $langCode, $brokenLanguages ) ) {
+			$this->markTestSkipped( "Test for lang {$langCode} currently broken: Bug 63723" );
+		}
+
 		$options = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $langCode
 		) );
