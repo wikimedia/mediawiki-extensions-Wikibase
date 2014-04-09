@@ -3,6 +3,9 @@
 namespace Wikibase;
 
 use Status;
+use ValueValidators\Result;
+use ValueValidators\ValueValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Encapsulates programmatic checks to perform before checking an item.
@@ -14,63 +17,102 @@ use Status;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
 class PreSaveChecks {
 
-	/**
-	 * @var TermIndex
-	 */
-	private $termIndex;
-
-	public function __construct( TermIndex $termIndex ) {
-		$this->termIndex = $termIndex;
+	public function __construct(
+		TermDuplicateDetector $duplicateDetector,
+		ValueValidator $labelValidator,
+		ValueValidator $descriptionValidator,
+		ValueValidator $aliasValidator,
+		ValidatorErrorLocalizer $validatorErrorLocalizer
+	) {
+		$this->duplicateDetector = $duplicateDetector;
+		$this->labelValidator = $labelValidator;
+		$this->descriptionValidator = $descriptionValidator;
+		$this->aliasValidator = $aliasValidator;
+		$this->validatorErrorLocalizer = $validatorErrorLocalizer;
 	}
 
 	/**
 	 * Implements pre-safe checks.
+	 *
+	 * @note: This is a preliminary implementation. This entire class will be redundant
+	 * once validation is done in ChangeOps.
 	 *
 	 * @param Entity $entity
 	 * @param EntityDiff $entityDiff
 	 *
 	 * @return Status
 	 */
-	public function applyPreSaveChecks( Entity $entity, EntityDiff $entityDiff = null ) {
+	public function applyPreSaveChecks( Entity $entity, EntityDiff $entityDiff ) {
+		$labelDiff = $entityDiff->getLabelsDiff();
+		$descriptionDiff = $entityDiff->getDescriptionsDiff();
+		$aliasDiff = $entityDiff->getAliasesDiff();
+
+		$result = Result::newSuccess();
+
+		if ( count( $labelDiff->getAdditions() )
+			|| count( $descriptionDiff->getAdditions() ) ) {
+
+			if ( $entity->getType() === Property::ENTITY_TYPE ) {
+				$result = $this->duplicateDetector->detectLabelConflictsForEntity( $entity );
+			} else {
+				$result = $this->duplicateDetector->detectLabelDescriptionConflictsForEntity( $entity );
+			}
+		}
+
+		if ( !$result->isValid() ) {
+			return $this->resultToStatus( $result );
+		}
+
+		foreach ( $labelDiff as $lang => $op ) {
+			$label = $entity->getLabel( $lang );
+			$result = $this->labelValidator->validate( $label );
+
+			if ( !$result->isValid() ) {
+				return $this->resultToStatus( $result );
+			}
+		}
+
+		foreach ( $descriptionDiff as $lang => $op ) {
+			$description = $entity->getDescription( $lang );
+			$result = $this->descriptionValidator->validate( $description );
+
+			if ( !$result->isValid() ) {
+				return $this->resultToStatus( $result );
+			}
+		}
+
+		foreach ( $aliasDiff as $lang => $op ) {
+			$aliases = $entity->getAliases( $lang );
+
+			foreach ( $aliases as $alias ) {
+				$result = $this->aliasValidator->validate( $alias );
+
+				if ( !$result->isValid() ) {
+					return $this->resultToStatus( $result );
+				}
+			}
+		}
+
+		return Status::newGood();
+	}
+
+	private function resultToStatus( Result $result ) {
+		if ( $result->isValid() ) {
+			return Status::newGood();
+		}
+
 		$status = Status::newGood();
+		$status->setResult( false );
 
-		$multilangViolationDetector = new MultiLangConstraintDetector();
-		$multilangViolationDetector->addConstraintChecks(
-			$entity,
-			$status,
-			$entityDiff
-			//TODO: pass the limits from a constructor param
-		);
-
-		$dbw = wfGetDB( DB_MASTER );
-
-		// FIXME: Do not run this when running test using MySQL as self joins fail on temporary tables.
-		if ( !defined( 'MW_PHPUNIT_TEST' )
-			|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
-			|| $dbw->getType() !== 'mysql' ) {
-
-			// The below looks for all conflicts and then removes the ones not
-			// caused by the edit. This can be improved by only looking for
-			// those conflicts that can be caused by the edit.
-
-			$termViolationDetector = new LabelDescriptionDuplicateDetector(
-				$this->termIndex
-			);
-
-			$termViolationDetector->addLabelDescriptionConflicts(
-				$entity,
-				$status,
-				$entityDiff === null ? null : $entityDiff->getLabelsDiff(),
-				$entityDiff === null ? null : $entityDiff->getDescriptionsDiff()
-			);
+		foreach ( $result->getErrors() as $error ) {
+			$message = $this->validatorErrorLocalizer->getErrorMessage( $error );
+			$status->error( $message );
 		}
 
 		return $status;
 	}
-
 }

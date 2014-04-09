@@ -38,10 +38,71 @@ class MockTermIndex implements TermIndex {
 	}
 
 	/**
-	 * @throws Exception always
+	 * @see TermCombinationMatchFinder::getMatchingTermCombination
 	 */
 	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, EntityId $excludeId = null ) {
-		throw new Exception( 'not implemented by mock class ' );
+		/**
+		 * @var Term[] $termPair
+		 * @var Term[] $matchingTerms
+		 */
+		foreach ( $terms as $termCombo ) {
+			$matchesPerEntity = null;
+
+			/** @var Term $term */
+			foreach ( $termCombo as $term ) {
+				$matchesPerEntityForTerm = $this->findMatchesPerEntity(
+					$term->getText(),
+					$term->getLanguage(),
+					$term->getType(),
+					$entityType,
+					$excludeId
+				);
+
+				if ( $matchesPerEntity === null ) {
+					$matchesPerEntity = $matchesPerEntityForTerm;
+				} else {
+					$matchesPerEntity = array_intersect_key( $matchesPerEntity, $matchesPerEntityForTerm );
+				}
+			}
+
+			if ( !empty( $matchesPerEntity ) ) {
+				return reset( $matchesPerEntity );
+			}
+		}
+
+		return array();
+	}
+
+	private function findMatchesPerEntity( $text, $language, $termType = null, $entityType = null, EntityId $excludeId = null ) {
+		$matchingTerms = array();
+
+		foreach ( $this->terms as $storedTerm ) {
+
+			if ( $text !== $storedTerm->getText() ) {
+				continue;
+			}
+
+			if ( $language !== $storedTerm->getLanguage() ) {
+				continue;
+			}
+
+			if ( $entityType && $entityType !== $storedTerm->getEntityType() ) {
+				continue;
+			}
+
+			if ( $termType && $termType !== $storedTerm->getType() ) {
+				continue;
+			}
+
+			if ( $excludeId !== null && $storedTerm->getEntityId()->equals( $excludeId ) ) {
+				continue;
+			}
+
+			$id = $storedTerm->getEntityId()->getSerialization();
+			$matchingTerms[$id][] = $storedTerm;
+		}
+
+		return $matchingTerms;
 	}
 
 	/**
