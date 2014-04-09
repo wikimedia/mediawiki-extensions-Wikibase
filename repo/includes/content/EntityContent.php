@@ -5,7 +5,6 @@ namespace Wikibase;
 use AbstractContent;
 use Content;
 use IContextSource;
-use Language;
 use MWException;
 use ParserOptions;
 use ParserOutput;
@@ -15,7 +14,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\content\EntityValidator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
@@ -585,6 +584,20 @@ abstract class EntityContent extends AbstractContent {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ': encountered late edit conflict: '
 					. 'current revision changed after regular conflict check.' );
 				$status->fatal('edit-conflict');
+				return $status;
+			}
+		}
+
+		// apply pre-save validators
+		$entity = $this->getEntity();
+		$validators = $this->getOnSaveValidators();
+
+		/* @var EntityValidator $validator */
+		foreach ( $validators as $validator ) {
+			$status = $validator->validate( $entity );
+
+			if ( !$status->isOK() ) {
+				break;
 			}
 		}
 
@@ -593,75 +606,12 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Adds errors to the status if there are labels that already exist
-	 * for another entity of this type in the same language.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Status $status
+	 * @return EntityValidator[]
 	 */
-	final protected function addLabelUniquenessConflicts( Status $status ) {
-		$labels = array();
-
-		$entity = $this->getEntity();
-
-		foreach ( $entity->getLabels() as $langCode => $labelText ) {
-			$label = new Term( array(
-				'termLanguage' => $langCode,
-				'termText' => $labelText,
-			) );
-
-			$labels[] = $label;
-		}
-
-		$foundLabels = StoreFactory::getStore()->getTermIndex()->getMatchingTerms(
-			$labels,
-			Term::TYPE_LABEL,
-			$entity->getType()
-		);
-
-		/**
-		 * @var Term $foundLabel
-		 */
-		foreach ( $foundLabels as $foundLabel ) {
-			$foundId = $foundLabel->getEntityId();
-
-			if ( !$entity->getId()->equals( $foundId ) ) {
-				// Messages: wikibase-error-label-not-unique-wikibase-property,
-				// wikibase-error-label-not-unique-wikibase-query
-				$status->fatal(
-					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
-					$foundLabel->getText(),
-					$foundLabel->getLanguage(),
-					$foundId !== null ? $foundId : ''
-				);
-			}
-		}
-	}
-
-	/**
-	 * Adds errors to the status if there are labels that represent a valid entity id.
-	 *
-	 * @since 0.5
-	 *
-	 * @param Status $status
-	 * @param string $forbiddenEntityType entity type that should lead to a conflict
-	 */
-	final protected function addLabelEntityIdConflicts( Status $status, $forbiddenEntityType ) {
-		$entity = $this->getEntity();
-		$entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-
-		foreach ( $entity->getLabels() as $labelText ) {
-			try {
-				$entityId = $entityIdParser->parse( $labelText );
-				if ( $entityId->getEntityType() === $forbiddenEntityType ) {
-					$status->fatal( 'wikibase-error-label-no-entityid' );
-				}
-			}
-			catch ( EntityIdParsingException $parseException ) {
-				// All fine, the parsing did not work, so there is no entity id :)
-			}
-		}
+	protected function getOnSaveValidators() {
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
+		return $handler->getOnSaveValidators();
 	}
 
 	/**

@@ -9,6 +9,7 @@ use MWException;
 use Revision;
 use Title;
 use RequestContext;
+use Wikibase\content\EntityValidator;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
@@ -23,6 +24,26 @@ use RequestContext;
 abstract class EntityHandler extends ContentHandler {
 
 	/**
+	 * @var EntityValidator[]
+	 */
+	protected $preSaveValidators;
+
+	/**
+	 * @param string $modelId
+	 * @param EntityValidator[] $preSaveValidators
+	 */
+	public function __construct( $modelId, $preSaveValidators ) {
+		$formats = array(
+			CONTENT_FORMAT_JSON,
+			CONTENT_FORMAT_SERIALIZED
+		);
+
+		parent::__construct( $modelId, $formats );
+
+		$this->preSaveValidators = $preSaveValidators;
+	}
+
+	/**
 	 * Returns the name of the EntityContent deriving class.
 	 *
 	 * @since 0.3
@@ -31,13 +52,11 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	abstract protected function getContentClass();
 
-	public function __construct( $modelId ) {
-		$formats = array(
-			CONTENT_FORMAT_JSON,
-			CONTENT_FORMAT_SERIALIZED
-		);
-
-		parent::__construct( $modelId, $formats );
+	/**
+	 * @return EntityValidator[]
+	 */
+	public function getOnSaveValidators() {
+		return $this->preSaveValidators;
 	}
 
 	/**
