@@ -28,6 +28,20 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	protected $language;
 
 	/**
+	 * @var string[]
+	 */
+	private static $dayPlaceholders = array(
+		/** default as regex */ 'j',
+	);
+
+	/**
+	 * @var string[]
+	 */
+	private static $monthPlaceholders = array(
+		/** default as regex */ '[FM]',
+	);
+
+	/**
 	 * @param FormatterOptions $options
 	 */
 	public function __construct( FormatterOptions $options ) {
@@ -114,17 +128,50 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 			'date',
 			$this->language->getDefaultDateFormat()
 		);
+		$langCode = $this->language->getCode();
 
 		if( $precision < TimeValue::PRECISION_DAY ) {
 			// Remove day placeholder:
-			$dateFormat = preg_replace( '/((x\w{1})?(j|t)|d)/', '', $dateFormat );
+			$dayPlaceholder = $this->getDayPlaceholder( $langCode );
+			if( $dayPlaceholder !== null ) {
+				$dateFormat = str_replace( $dayPlaceholder, '', $dateFormat );
+			} else {
+				$dateFormat = preg_replace( '/' . self::$dayPlaceholders[0] . '/', '', $dateFormat );
+			}
 		}
 
 		if( $precision < TimeValue::PRECISION_MONTH ) {
 			// Remove month placeholder:
-			$dateFormat = preg_replace( '/((x\w{1})?(F|n|M)|m)/', '', $dateFormat );
+			$monthPlaceholder = $this->getMonthPlaceholder( $langCode );
+			if( $monthPlaceholder !== null ) {
+				$dateFormat = str_replace( $monthPlaceholder, '', $dateFormat );
+			} else {
+				$dateFormat = preg_replace( '/' . self::$monthPlaceholders[0] . '/', '', $dateFormat );
+			}
 		}
 		return trim( $dateFormat );
+	}
+
+	/**
+	 * @param string $langCode
+	 * @return string|null
+	 */
+	private function getDayPlaceholder( $langCode ) {
+		if( array_key_exists( $langCode, self::$dayPlaceholders ) ) {
+			return self::$dayPlaceholders[ $langCode ];
+		}
+		return null;
+	}
+
+	/**
+	 * @param string $langCode
+	 * @return string|null
+	 */
+	private function getMonthPlaceholder( $langCode ) {
+		if( array_key_exists( $langCode, self::$monthPlaceholders ) ) {
+			return self::$monthPlaceholders[ $langCode ];
+		}
+		return null;
 	}
 
 	/**
