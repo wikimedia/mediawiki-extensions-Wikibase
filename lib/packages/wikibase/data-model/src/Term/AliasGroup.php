@@ -3,6 +3,8 @@
 namespace Wikibase\DataModel\Term;
 
 /**
+ * Immutable value object.
+ *
  * @since 0.7.3
  *
  * @licence GNU GPL v2+
