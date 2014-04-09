@@ -5,6 +5,8 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use FormatJson;
 use UsageException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\Item;
@@ -44,13 +46,17 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		self::$propertyIds = array();
+		if ( !self::$propertyIds ) {
+			self::$propertyIds = array();
 
-		for ( $i = 0; $i < 4; $i++ ) {
-			$property = Property::newFromType( 'string' );
-			$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
+			for ( $i = 0; $i < 4; $i++ ) {
+				$property = Property::newFromType( 'string' );
+				$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-			self::$propertyIds[] = $property->getId();
+				self::$propertyIds[] = $property->getId();
+			}
+
+			$this->initTestEntities( array( 'StringProp', 'Berlin' ) );
 		}
 	}
 
@@ -304,40 +310,6 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @dataProvider invalidClaimProvider
-	 */
-	public function testInvalidClaimGuid( $claimGuid, $snakHash, $refHash, $expectedError ) {
-		$params = array(
-			'action' => 'wbsetreference',
-			'statement' => $claimGuid,
-			'snaks' => $snakHash,
-			'reference' => $refHash,
-		);
-
-		try {
-			$this->doApiRequestWithToken( $params );
-			$this->fail( "Exception with code $expectedError expected" );
-		} catch ( UsageException $e ) {
-			$this->assertEquals( $expectedError, $e->getCodeString(), 'Error code' );
-		}
-	}
-
-	public function invalidClaimProvider() {
-		$invalidId = new PropertyId( 'P347894353458984658' );
-
-		$snak = new PropertyValueSnak( $invalidId, new StringValue( 'abc') );
-		$snakHash = $snak->getHash();
-
-		$reference = new PropertyValueSnak( $invalidId, new StringValue( 'def' ) );
-		$refHash = $reference->getHash();
-
-		return array(
-			array( 'xyz', $snakHash, $refHash, 'invalid-guid' ),
-			array( 'x$y$z', $snakHash, $refHash, 'invalid-guid' )
-		);
-	}
-
-	/**
 	 * Currently tests bad calender model
 	 * @todo test more bad serializations...
 	 */
@@ -368,5 +340,56 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		);
 		$this->doApiRequestWithToken( $params );
 	}
+
+
+	/**
+	 * @dataProvider invalidRequestProvider
+	 */
+	public function testInvalidRequest( $itemHandle, $claimGuid, $referenceValue, $referenceHash, $error ) {
+		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+
+		if ( $claimGuid === null ) {
+			$claims = $item->getClaims();
+
+			/* @var Claim $claim */
+			$claim = reset( $claims );
+			$claimGuid = $claim->getGuid();
+		}
+
+		$prop = new PropertyId( EntityTestHelper::getId( 'StringProp' ) );
+		$snak = new PropertyValueSnak( $prop, new StringValue( $referenceValue ) );
+		$reference = new Reference( new SnakList( array( $snak ) ) );
+
+		$serializedReference = $this->serializeReference( $reference );
+
+		$params = array(
+			'action' => 'wbsetreference',
+			'statement' => $claimGuid,
+			'snaks' => FormatJson::encode( $serializedReference['snaks'] ),
+			'snaks-order' => FormatJson::encode( $serializedReference['snaks-order'] ),
+		);
+
+		if ( $referenceHash ) {
+			$params['reference'] = $referenceHash;
+		}
+
+		try {
+			$this->doApiRequestWithToken( $params );
+			$this->fail( 'Invalid request did not raise an error' );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $error, $e->getCodeString(),  'Invalid claim guid raised correct error' );
+		}
+	}
+
+	public function invalidRequestProvider() {
+		return array(
+			'bad guid 1' => array( 'Berlin', 'xyz', 'good', '', 'invalid-guid' ),
+			'bad guid 2' => array( 'Berlin', 'x$y$z', 'good', '',  'invalid-guid' ),
+			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'good', '', 'invalid-guid' ),
+			'bad snak value' => array( 'Berlin', null, '    ', '', 'invalid-snak-value' ),
+		);
+	}
+
 
 }

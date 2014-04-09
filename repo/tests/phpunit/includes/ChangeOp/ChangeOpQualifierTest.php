@@ -2,12 +2,20 @@
 
 namespace Wikibase\Test;
 
+use DataValues\NumberValue;
 use DataValues\StringValue;
 use Wikibase\ChangeOp\ChangeOpQualifier;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\Item;
 use Wikibase\ItemContent;
 use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -21,8 +29,25 @@ use Wikibase\Lib\ClaimGuidGenerator;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var ClaimTestMockProvider
+	 */
+	protected $mockProvider;
+
+	/**
+	 * @param null $name
+	 * @param array $data
+	 * @param string $dataName
+	 */
+	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+		parent::__construct( $name, $data, $dataName );
+
+		$this->mockProvider = new ClaimTestMockProvider( $this );
+	}
 
 	public function invalidArgumentProvider() {
 		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
@@ -34,10 +59,6 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 		$args[] = array( 123, $validSnak, $validSnakHash );
 		$args[] = array( '', $validSnak, $validSnakHash );
-		$args[] = array( 123, null, $validSnakHash );
-		$args[] = array( $validClaimGuid, 'notASnak', $validSnakHash );
-		$args[] = array( $validClaimGuid, 'notASnak', '' );
-		$args[] = array( $validClaimGuid, null, '' );
 		$args[] = array( $validClaimGuid, $validSnak, 123 );
 
 		return $args;
@@ -49,7 +70,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testInvalidConstruct( $claimGuid, $snak, $snakHash ) {
-		new ChangeOpQualifier( $claimGuid, $snak, $snakHash );
+		new ChangeOpQualifier( $claimGuid, $snak, $snakHash, $this->mockProvider->getMockSnakValidator() );
 	}
 
 	public function changeOpAddProvider() {
@@ -61,7 +82,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '' );
+		$changeOp = new ChangeOpQualifier( $claimGuid, $newQualifier, '', $this->mockProvider->getMockSnakValidator() );
 		$snakHash = $newQualifier->getHash();
 		$args[] = array ( $item, $changeOp, $snakHash );
 
@@ -100,7 +121,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$item->setClaims( new Claims( $claims ) );
 		$snakHash = $newQualifier->getHash();
 		$changedQualifier = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $claimGuid, $changedQualifier, $snakHash );
+		$changeOp = new ChangeOpQualifier( $claimGuid, $changedQualifier, $snakHash, $this->mockProvider->getMockSnakValidator() );
 		$args[] = array ( $item, $changeOp, $changedQualifier->getHash() );
 
 		return $args;
@@ -130,5 +151,56 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$claims->addClaim( $claim );
 		$entity->setClaims( $claims );
 		return $entity;
+	}
+
+	public function provideApplyInvalid() {
+		$p11 = new PropertyId( 'P11' );
+		$q17 = new ItemId( 'Q17' );
+
+		$item = Item::newEmpty();
+		$item->setId( $q17 );
+		$claimGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$badGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+
+		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
+
+		$claim = new Statement( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) );
+		$claim->setGuid( $claimGuid );
+		$item->addClaim( $claim );
+
+		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
+		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
+		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
+		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
+
+		$snakHash = $oldSnak->getHash();
+		$badSnakHash = $badSnak->getHash();
+
+		$cases = array();
+		$cases['malformed claim guid'] = array( $item, 'NotAGuid', $goodSnak, '' );
+		$cases['unknown claim guid'] = array( $item, $badGuid, $goodSnak, $snakHash );
+		$cases['unknown snak hash'] = array( $item, $claimGuid, $goodSnak, $badSnakHash );
+
+		$cases['invalid snak value'] = array( $item, $claimGuid, $badSnak, '' );
+		$cases['invalid snak value type'] = array( $item, $claimGuid, $brokenSnak, $snakHash );
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideApplyInvalid
+	 */
+	public function testApplyInvalid( Entity $entity, $claimGuid, Snak $snak, $snakHash = '' ) {
+		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+
+		$changeOpClaim = new ChangeOpQualifier(
+			$claimGuid,
+			$snak,
+			$snakHash,
+			$this->mockProvider->getMockSnakValidator()
+		);
+
+		$entity = $entity->copy();
+		$changeOpClaim->apply( $entity );
 	}
 }

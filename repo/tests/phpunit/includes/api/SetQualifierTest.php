@@ -5,6 +5,7 @@ namespace Wikibase\Test\Api;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\WikibaseRepo;
@@ -34,6 +35,17 @@ use UsageException;
  * @author Marius Hoch < hoo@online.de >
  */
 class SetQualifierTest extends WikibaseApiTestCase {
+
+	public function setUp() {
+		parent::setUp();
+
+		static $hasEntities = false;
+
+		if ( !$hasEntities ) {
+			$this->initTestEntities( array( 'StringProp', 'Berlin' ) );
+			$hasEntities = true;
+		}
+	}
 
 	/**
 	 * Creates a Snak of the given type with the given data.
@@ -189,29 +201,49 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @dataProvider invalidClaimProvider
+	 * @dataProvider invalidRequestProvider
 	 */
-	public function testInvalidClaimGuid( $claimGuid ) {
+	public function testInvalidRequest( $itemHandle, $claimGuid, $propertyHande, $snakType, $value, $error ) {
+		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
+
+		$propertyId = EntityTestHelper::getId( $propertyHande );
+
+		if ( $claimGuid === null ) {
+			$claims = $item->getClaims();
+
+			/* @var Claim $claim */
+			$claim = reset( $claims );
+			$claimGuid = $claim->getGuid();
+		}
+
+		if ( !is_string( $value ) ) {
+			$value = json_encode( $value );
+		}
+
 		$params = array(
 			'action' => 'wbsetqualifier',
 			'claim' => $claimGuid,
-			'property' => 7,
-			'snaktype' => 'value',
-			'value' => 'abc',
+			'property' => $propertyId,
+			'snaktype' => $snakType,
+			'value' => $value,
 		);
 
 		try {
 			$this->doApiRequestWithToken( $params );
-			$this->fail( 'Invalid claim guid did not throw an error' );
-		} catch ( UsageException $e ) {
-			$this->assertEquals( 'invalid-guid', $e->getCodeString(),  'Invalid claim guid raised correct error' );
+			$this->fail( 'Invalid request did not raise an error' );
+		} catch ( \UsageException $e ) {
+			$this->assertEquals( $error, $e->getCodeString(),  'Invalid claim guid raised correct error' );
 		}
 	}
 
-	public function invalidClaimProvider() {
+	public function invalidRequestProvider() {
 		return array(
-			array( 'xyz' ),
-			array( 'x$y$z' )
+			'bad guid 1' => array( 'Berlin', 'xyz', 'StringProp', 'value', 'abc', 'invalid-guid' ),
+			'bad guid 2' => array( 'Berlin', 'x$y$z', 'StringProp', 'value', 'abc', 'invalid-guid' ),
+			'bad guid 3' => array( 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'StringProp', 'value', 'abc', 'invalid-guid' ),
+			'bad snak type' => array( 'Berlin', null, 'StringProp', 'alksdjf', 'abc', 'unknown_snaktype' ),
+			'bad snak value' => array( 'Berlin', null, 'StringProp', 'value', '"   "', 'invalid-snak-value' ),
 		);
 	}
 
