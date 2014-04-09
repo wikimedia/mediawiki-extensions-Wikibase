@@ -32,6 +32,16 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	 */
 	private static $dayPlaceholders = array(
 		/** default as regex */ 'j',
+		'de' => 'j.',
+		'de-at' => 'j.',
+		'de-ch' => 'j.',
+		'de-formal' => 'j.',
+		'pt' => 'j \d\e',
+		'pt-br' => 'j "de"',
+		'sk' => 'j.',
+		'sl' => 'j.',
+		'sli' => 'j.',
+		'sr' => 'j.',
 	);
 
 	/**
@@ -39,6 +49,8 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	 */
 	private static $monthPlaceholders = array(
 		/** default as regex */ '[FM]',
+		'pt' => 'F \d\e',
+		'pt-br' => 'F "de"',
 	);
 
 	/**
