@@ -40,7 +40,7 @@ class ItemRoundtripTest extends \PHPUnit_Framework_TestCase {
 			array( $this->newSimpleItem() ),
 
 			array( $this->newItemWithSiteLinks() ),
-			array( $this->newItemWithTerms() ),
+			array( $this->newItemWithFingerprint() ),
 			array( $this->newItemWithClaims() ),
 
 			array( $this->newComplexItem() ),
@@ -64,15 +64,15 @@ class ItemRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SiteLink( 'baz', 'bah' ) );
 	}
 
-	private function newItemWithTerms() {
+	private function newItemWithFingerprint() {
 		$item = $this->newSimpleItem();
 
-		$this->addTerms( $item );
+		$this->addFingerprint( $item );
 
 		return $item;
 	}
 
-	private function addTerms( Item $item ) {
+	private function addFingerprint( Item $item ) {
 		$item->setLabel( 'en', 'foo' );
 		$item->setLabel( 'de', 'bar' );
 
@@ -109,7 +109,7 @@ class ItemRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->newSimpleItem();
 
 		$this->addSiteLinks( $item );
-		$this->addTerms( $item );
+		$this->addFingerprint( $item );
 		$this->addClaims( $item );
 
 		return $item;

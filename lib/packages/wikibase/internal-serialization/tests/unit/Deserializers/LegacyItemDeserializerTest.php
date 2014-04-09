@@ -11,11 +11,11 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\InternalSerialization\Deserializers\LegacyClaimDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
-use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer

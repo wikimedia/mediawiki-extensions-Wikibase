@@ -8,8 +8,6 @@ use Deserializers\Exceptions\InvalidAttributeException;
 use Deserializers\Exceptions\MissingAttributeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -19,7 +17,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 class LegacyPropertyDeserializer implements Deserializer {
 
 	private $idDeserializer;
-	private $termsDeserializer;
+	private $fingerprintDeserializer;
 
 	/**
 	 * @var Property
@@ -27,9 +25,9 @@ class LegacyPropertyDeserializer implements Deserializer {
 	private $property;
 	private $serialization;
 
-	public function __construct( Deserializer $idDeserializer, Deserializer $termsDeserializer ) {
+	public function __construct( Deserializer $idDeserializer, Deserializer $fingerprintDeserializer ) {
 		$this->idDeserializer = $idDeserializer;
-		$this->termsDeserializer = $termsDeserializer;
+		$this->fingerprintDeserializer = $fingerprintDeserializer;
 	}
 
 	/**
@@ -47,7 +45,7 @@ class LegacyPropertyDeserializer implements Deserializer {
 		$this->property = Property::newFromType( $this->getDataTypeId() );
 
 		$this->setPropertyId();
-		$this->addTerms();
+		$this->addFingerprint();
 
 		return $this->property;
 	}
@@ -92,29 +90,15 @@ class LegacyPropertyDeserializer implements Deserializer {
 		return $id;
 	}
 
-	private function addTerms() {
-		$terms = $this->getFingerprint();
-
-		// TODO: try catch once setters do validation
-		$this->property->setLabels( $terms->getLabels()->toTextArray() );
-		$this->property->setDescriptions( $terms->getDescriptions()->toTextArray() );
-		$this->setAliases( $terms->getAliases() );
+	private function addFingerprint() {
+		$this->property->setFingerprint( $this->getFingerprint() );
 	}
 
 	/**
 	 * @return Fingerprint
 	 */
 	private function getFingerprint() {
-		return $this->termsDeserializer->deserialize( $this->serialization );
-	}
-
-	private function setAliases( AliasGroupList $aliases ) {
-		/**
-		 * @var AliasGroup $aliasGroup
-		 */
-		foreach ( $aliases as $aliasGroup ) {
-			$this->property->setAliases( $aliasGroup->getLanguageCode(), $aliasGroup->getAliases() );
-		}
+		return $this->fingerprintDeserializer->deserialize( $this->serialization );
 	}
 
 }
