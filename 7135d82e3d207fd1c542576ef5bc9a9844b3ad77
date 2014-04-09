@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_0b1c8378",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-09T14:49:58Z",
+      "side": 1,
+      "message": "if ( $hasSiteLinks ) {\n  // if else be here\n}\n\nThen you do not do the check twice, and this is likely more readable",
+      "revId": "7135d82e3d207fd1c542576ef5bc9a9844b3ad77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_eb10275d",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-09T14:49:58Z",
+      "side": 1,
+      "message": "if you do not stuff this all on one line, it will likely be more readable",
+      "revId": "7135d82e3d207fd1c542576ef5bc9a9844b3ad77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ab0a2f27",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-09T14:49:58Z",
+      "side": 1,
+      "message": "comment on the line above makes this easier to read",
+      "revId": "7135d82e3d207fd1c542576ef5bc9a9844b3ad77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cb0d6b43",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-09T14:49:58Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "7135d82e3d207fd1c542576ef5bc9a9844b3ad77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
