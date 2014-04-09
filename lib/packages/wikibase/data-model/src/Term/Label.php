@@ -10,8 +10,4 @@ namespace Wikibase\DataModel\Term;
  */
 class Label extends Term {
 
-	public function __construct( $languageCode, $text ) {
-		parent::__construct( $languageCode, $text );
-	}
-
 }
