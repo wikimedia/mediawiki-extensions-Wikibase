@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_c648c38e",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpMainSnakTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-04-09T09:40:56Z",
+      "side": 1,
+      "message": "Missing use statement it seems..",
+      "revId": "52dd86d8549ebf92dbfb9b16b5352484aecd4343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
