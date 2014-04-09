@@ -22,4 +22,12 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $aliases, $group->getAliases() );
 	}
 
+	public function testIsEmpty() {
+		$emptyGroup = new AliasGroup( 'en', array() );
+		$this->assertTrue( $emptyGroup->isEmpty() );
+
+		$filledGroup = new AliasGroup( 'en', array( 'foo' ) );
+		$this->assertFalse( $filledGroup->isEmpty() );
+	}
+
 }

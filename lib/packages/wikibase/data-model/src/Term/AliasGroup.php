@@ -38,4 +38,11 @@ class AliasGroup {
 		return $this->aliases;
 	}
 
+	/**
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return empty( $this->aliases );
+	}
+
 }

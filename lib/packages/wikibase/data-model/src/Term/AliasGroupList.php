@@ -12,6 +12,8 @@ use Traversable;
  * Only one group per language code. If multiple groups with the same language code
  * are provided, only the last one will be retained.
  *
+ * Empty groups are not stored.
+ *
  * @since 0.7.3
  *
  * @licence GNU GPL v2+
@@ -31,7 +33,9 @@ class AliasGroupList implements Countable, IteratorAggregate {
 				throw new InvalidArgumentException( 'AliasGroupList can only contain AliasGroup instances' );
 			}
 
-			$this->groups[$aliasGroup->getLanguageCode()] = $aliasGroup;
+			if ( !$aliasGroup->isEmpty() ) {
+				$this->groups[$aliasGroup->getLanguageCode()] = $aliasGroup;
+			}
 		}
 	}
 
