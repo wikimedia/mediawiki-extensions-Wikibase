@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Term;
 
+use Comparable;
+
 /**
  * Immutable value object.
  *
@@ -10,7 +12,7 @@ namespace Wikibase\DataModel\Term;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class AliasGroup {
+class AliasGroup implements Comparable {
 
 	private $languageCode;
 	private $aliases;
@@ -43,6 +45,23 @@ class AliasGroup {
 	 */
 	public function isEmpty() {
 		return empty( $this->aliases );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		return $target instanceof AliasGroup
+			&& $this->languageCode === $target->getLanguageCode()
+			&& $this->arraysAreEqual( $this->aliases, $target->getAliases() );
+	}
+
+	private function arraysAreEqual( array $a, array $b ) {
+		return array_diff( $a, $b ) === array();
 	}
 
 }

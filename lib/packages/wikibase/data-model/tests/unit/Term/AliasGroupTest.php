@@ -30,4 +30,15 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $filledGroup->isEmpty() );
 	}
 
+	public function testEquality() {
+		$group = new AliasGroup( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertTrue( $group->equals( $group ) );
+		$this->assertTrue( $group->equals( clone $group ) );
+
+		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'foo' ) ) ) );
+		$this->assertFalse( $group->equals( new AliasGroup( 'de', array( 'foo' ) ) ) );
+		$this->assertFalse( $group->equals( new AliasGroup( 'de', array() ) ) );
+	}
+
 }
