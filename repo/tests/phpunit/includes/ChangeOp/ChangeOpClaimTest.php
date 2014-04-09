@@ -45,7 +45,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	protected $mockProvider;
 
 	/**
-	 * @param null $name
+	 * @param string|null $name
 	 * @param array $data
 	 * @param string $dataName
 	 */
@@ -150,7 +150,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	 * @param int|null $index
 	 */
 	public function testApply( $entity, $claim, $expected, $index = null ) {
-		if( $expected === false ){
+		if ( $expected === false ) {
 			$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
 		}
 
@@ -166,7 +166,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOpClaim->apply( $entity );
 
-		if( $expected === false ){
+		if ( $expected === false ) {
 			$this->fail( 'Failed to throw a ChangeOpException' );
 		}
 
@@ -174,7 +174,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$entityClaimHashSet = array_flip( $entityClaims->getHashes() );
 		$i = 0;
 
-		foreach( $expected as $expectedClaim ){
+		foreach ( $expected as $expectedClaim ) {
 			$guid = $expectedClaim->getGuid();
 			$hash = $expectedClaim->getHash();
 
@@ -335,4 +335,5 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOpClaim->apply( $entity );
 	}
+
 }

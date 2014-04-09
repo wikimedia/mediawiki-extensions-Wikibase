@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpQualifier;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
@@ -17,7 +18,6 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Item;
 use Wikibase\ItemContent;
-use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -39,7 +39,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	protected $mockProvider;
 
 	/**
-	 * @param null $name
+	 * @param string|null $name
 	 * @param array $data
 	 * @param string $dataName
 	 */
@@ -203,4 +203,5 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$entity = $entity->copy();
 		$changeOpClaim->apply( $entity );
 	}
+
 }

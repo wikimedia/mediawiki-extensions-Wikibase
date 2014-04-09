@@ -37,7 +37,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	protected $mockProvider;
 
 	/**
-	 * @param null $name
+	 * @param string|null $name
 	 * @param array $data
 	 * @param string $dataName
 	 */
@@ -203,4 +203,5 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 			return new PropertyValueSnak( $propertyId, $value );
 		}
 	}
+
 }

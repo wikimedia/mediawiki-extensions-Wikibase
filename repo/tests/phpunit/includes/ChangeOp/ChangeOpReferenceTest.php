@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
-use LogicException;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
@@ -17,7 +17,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\ItemContent;
-use InvalidArgumentException;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -39,7 +38,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	protected $mockProvider;
 
 	/**
-	 * @param null $name
+	 * @param string|null $name
 	 * @param array $data
 	 * @param string $dataName
 	 */
@@ -155,8 +154,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 * @param ChangeOpReference $changeOp
 	 * @param Reference $newReference
 	 * @param int $expectedIndex
-	 *
-	 * @throws \LogicException
 	 */
 	public function testApplyAddNewReferenceWithIndex(
 		$item,
@@ -308,4 +305,5 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$entity = $entity->copy();
 		$changeOpClaim->apply( $entity );
 	}
+
 }

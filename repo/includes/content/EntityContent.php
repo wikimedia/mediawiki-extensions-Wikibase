@@ -5,7 +5,6 @@ namespace Wikibase;
 use AbstractContent;
 use Content;
 use IContextSource;
-use Language;
 use MWException;
 use ParserOptions;
 use ParserOutput;
@@ -15,9 +14,9 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -126,7 +125,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isNew() {
 		return is_null( $this->getEntity()->getId() );
@@ -156,8 +155,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @since 0.1
 	 *
 	 * @param Title $title
-	 * @param null $revId
-	 * @param null|ParserOptions $options
+	 * @param int|null $revId Unused.
+	 * @param ParserOptions|null $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
@@ -189,7 +188,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @since 0.5
 	 *
-	 * @param \IContextSource|null $context
+	 * @param IContextSource|null $context
 	 * @param ParserOptions|null $options
 	 * @param LanguageFallbackChain|null $uiLanguageFallbackChain
 	 *
@@ -369,11 +368,9 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Returns native representation of the data. Interpretation depends on the data model used,
-	 * as given by getDataModel().
+	 * @see Content::getNativeData
 	 *
-	 * @return mixed the native representation of the content. Could be a string, a nested array
-	 *		 structure, an object, a binary blob... anything, really.
+	 * @return array
 	 */
 	public function getNativeData() {
 		return $this->getEntity()->toArray();
@@ -428,9 +425,10 @@ abstract class EntityContent extends AbstractContent {
 	 * Returns true if this content is countable as a "real" wiki page, provided
 	 * that it's also in a countable location (e.g. a current revision in the main namespace).
 	 *
-	 * @param boolean $hasLinks: if it is known whether this content contains links, provide this
+	 * @param bool $hasLinks: if it is known whether this content contains links, provide this
 	 *        information here, to avoid redundant parsing to find out.
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	public function isCountable( $hasLinks = null ) {
 		return !$this->getEntity()->isEmpty();
@@ -439,7 +437,7 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
 		return $this->getEntity()->isEmpty();
@@ -465,7 +463,7 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * Assigns a fresh ID to this entity.
 	 *
-	 * @throws \MWException if this entity already has an ID assigned, or something goes wrong while
+	 * @throws MWException if this entity already has an ID assigned, or something goes wrong while
 	 *         generating a new ID.
 	 * @return int The new ID
 	 */
@@ -507,7 +505,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param string     $summary
 	 * @param null|User  $user
-	 * @param integer    $flags flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
+	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
 	 *
 	 * @param int|bool   $baseRevId
 	 *
@@ -515,7 +513,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @todo: move logic into WikiPageEntityStore and make this method a deprecated adapter.
 	 *
-	 * @return \Status Success indicator, like the one returned by WikiPage::doEditContent().
+	 * @return Status Success indicator, like the one returned by WikiPage::doEditContent().
 	 */
 	public function save(
 		$summary = '',
@@ -591,7 +589,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @param int      $baseRevId
 	 * @param User     $user
 	 *
-	 * @return \Status
+	 * @return Status
 	 */
 	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
 		wfProfileIn( __METHOD__ );

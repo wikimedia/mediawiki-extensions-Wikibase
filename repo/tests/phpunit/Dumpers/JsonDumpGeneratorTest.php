@@ -53,7 +53,6 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	protected function makeEntities( array $ids ) {
 		$entities = array();
 
-		/* @var EntityId $id */
 		foreach ( $ids as $id ) {
 			$entity = $this->makeEntity( $id );
 
@@ -87,7 +86,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param EntityId[] $ids
-	 * @param array $missingIds
+	 * @param EntityId[] $missingIds
 	 *
 	 * @return JsonDumpGenerator
 	 */
@@ -117,7 +116,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Callback for providing dummy entity lists for the EntityIdPager mock.
 	 *
-	 * @param array $ids
+	 * @param EntityId[] $ids
 	 * @param string $entityType
 	 * @param int $limit
 	 * @param int $offset
@@ -129,7 +128,6 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$size = count( $ids );
 
 		for ( ; $offset < $size && count( $result ) < $limit; $offset++ ) {
-			/* @var EntityId $id */
 			$id = $ids[ $offset ];
 
 			if ( $entityType !== null && $entityType !== $id->getEntityType() ) {
@@ -143,8 +141,8 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param array $ids
-	 * @param null $entityType
+	 * @param EntityId[] $ids
+	 * @param string|null $entityType
 	 *
 	 * @return EntityIdPager
 	 */
@@ -408,4 +406,5 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$dumper->generateDump( $pager );
 		ob_end_clean();
 	}
+
 }

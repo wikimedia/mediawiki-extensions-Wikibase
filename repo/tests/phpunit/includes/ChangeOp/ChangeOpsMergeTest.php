@@ -91,8 +91,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideValidConstruction
 	 */
-	public function testCanConstruct(
-		$from, $to, $ignoreConflicts ) {
+	public function testCanConstruct( $from, $to, $ignoreConflicts ) {
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
@@ -103,7 +102,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
 
-	public static function provideValidConstruction(){
+	public static function provideValidConstruction() {
 		$from = self::getItem( 'Q111' );
 		$to = self::getItem( 'Q222' );
 		return array(
@@ -129,7 +128,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public static function provideInvalidConstruction(){
+	public static function provideInvalidConstruction() {
 		$from = self::getItem( 'Q111' );
 		$to = self::getItem( 'Q222' );
 		return array(
@@ -140,6 +139,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @param string $id
+	 * @param array $data
+	 *
+	 * @return Item
+	 */
 	public static function getItem( $id, $data = array() ) {
 		$item = new Item( $data );
 		$item->setId( new ItemId( $id ) );
