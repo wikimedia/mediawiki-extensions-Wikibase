@@ -41,6 +41,12 @@ class EntityTestHelper {
 			"new" => "item",
 			"data" => array(),
 		),
+		'StringProp' => array(
+			"new" => "property",
+			"data" => array(
+				'datatype' => 'string'
+			),
+		),
 		'Berlin' => array(
 			"new" => "item",
 			"data" => array(
@@ -70,7 +76,7 @@ class EntityTestHelper {
 				"claims" => array(
 					array( 'mainsnak' => array(
 						'snaktype' => 'value',
-						'property' => 'P56',
+						'property' => '%StringProp%',
 						'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ),
 					),
 					'type' => 'statement',
@@ -206,6 +212,15 @@ class EntityTestHelper {
 	);
 
 	/**
+	 * Provides default values for the placeholders used in $entityData.
+	 *
+	 * @var array An associative array mapping placeholders to default values.
+	 */
+	public static $defaultPlaceholderValues = array(
+		'%StringProp%' => 'P56'
+	);
+
+	/**
 	 * Get the entity with the given handle
 	 * @param $handle string of entity to get data for
 	 * @throws OutOfBoundsException
@@ -330,12 +345,17 @@ class EntityTestHelper {
 	}
 
 	/**
-	 * Returns an array of currently activated handles
-	 * @return array of currently active handles
+	 * @return string[] List of currently active (registered) handles, using IDs as keys.
 	 */
-	public static function getActiveHandles(){
-		$usedHandles = self::$activeHandles;
-		return $usedHandles;
+	public static function getActiveHandles() {
+		return self::$activeHandles;
+	}
+
+	/**
+	 * @return string[] List of currently active (registered) IDs, using handles as keys.
+	 */
+	public static function getActiveIds() {
+		return self::$activeIds;
 	}
 
 	/**

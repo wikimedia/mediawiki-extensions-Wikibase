@@ -104,8 +104,14 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	 */
 	public function newFromSerialization( array $serialization ) {
 		// TODO: inject id parser
+		$propertyId = EntityId::newFromPrefixedId( $serialization['property'] );
+
+		if ( !$propertyId ) {
+			throw new InvalidArgumentException( "Invalid property ID: " . $serialization['property'] );
+		}
+
 		$constructorArguments = array(
-			EntityId::newFromPrefixedId( $serialization['property'] ),
+			$propertyId,
 		);
 
 		if ( array_key_exists( 'datavalue', $serialization ) ) {
