@@ -517,19 +517,6 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
-	 * Used to inject a formatter into the HtmlTimeFormatter.
-	 *
-	 * @param FormatterOptions $options
-	 * @param WikibaseValueFormatterBuilders $builders
-	 *
-	 * @return HtmlTimeFormatter
-	 */
-	private static function newHtmlTimeFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
-		return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
-	}
-
-	/**
-	 * Builder callback for use in WikibaseValueFormatterBuilders::$valueFormatterSpecs.
 	 * Used to compose the QuantityFormatter.
 	 *
 	 * @param FormatterOptions $options
