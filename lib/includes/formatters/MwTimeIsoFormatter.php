@@ -89,19 +89,41 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 			$timestamp
 		);
 
+		// we do not handle parsing arabic, farsi, etc. digits (bug 63732)
+		$normalisedDate = $this->normaliseDigits( $localisedDate );
+
 		//If we cant reliably fix the year return the full timestamp,
 		//  this should never happen as sprintfDate should always return a 4 digit year
-		if( substr_count( $localisedDate, $matches[4] ) !== 1 ) {
+		if( !$this->canFormatYear( $normalisedDate, $matches ) ) {
 			return $extendedIsoTimestamp;
 		}
 
-		$localisedDate = str_replace(
+		$formattedDate = str_replace(
 			$matches[4],
 			$this->formatYear( $matches[2], $precision, $isBCE ),
-			$localisedDate
+			$normalisedDate
 		);
 
-		return $localisedDate;
+		return $formattedDate;
+	}
+
+	/**
+	 * @param string $date
+	 *
+	 * @return string
+	 */
+	private function normaliseDigits( $date ) {
+		return $this->language->parseFormattedNumber( $date );
+	}
+
+	/**
+	 * @param string $date
+	 * @param array $matches
+	 *
+	 * @return boolean
+	 */
+	private function canFormatYear( $date, $matches ) {
+		return substr_count( $date, $matches[4] ) === 1;
 	}
 
 	/**
