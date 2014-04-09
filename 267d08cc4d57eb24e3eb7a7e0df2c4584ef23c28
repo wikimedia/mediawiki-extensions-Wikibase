@@ -16,6 +16,24 @@
       "revId": "267d08cc4d57eb24e3eb7a7e0df2c4584ef23c28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1c1deb66",
+        "filename": "client/tests/phpunit/includes/ClientSiteLinkLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-09T18:20:34Z",
+      "side": 0,
+      "message": "I think removing duplicate data is worthier than needing less dependencies here. Furthermore, we can depend, maybe we even should depend on the implementation of Item because it is something we depend on anyway. We do not have to check that Item serializes SiteLinks correctly in this test because this is done in other tests. So a dependency on Item does not matter imho.",
+      "parentUuid": "8e23439c_b18500a2",
+      "revId": "267d08cc4d57eb24e3eb7a7e0df2c4584ef23c28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
