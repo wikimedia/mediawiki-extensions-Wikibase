@@ -22,4 +22,53 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $aliases, $group->getAliases() );
 	}
 
+	public function testIsEmpty() {
+		$emptyGroup = new AliasGroup( 'en', array() );
+		$this->assertTrue( $emptyGroup->isEmpty() );
+
+		$filledGroup = new AliasGroup( 'en', array( 'foo' ) );
+		$this->assertFalse( $filledGroup->isEmpty() );
+	}
+
+	public function testEquality() {
+		$group = new AliasGroup( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertTrue( $group->equals( $group ) );
+		$this->assertTrue( $group->equals( clone $group ) );
+
+		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'foo' ) ) ) );
+		$this->assertFalse( $group->equals( new AliasGroup( 'de', array( 'foo' ) ) ) );
+		$this->assertFalse( $group->equals( new AliasGroup( 'de', array() ) ) );
+	}
+
+	public function testDuplicatesAreRemoved() {
+		$group = new AliasGroup( 'en', array( 'foo', 'bar', 'spam', 'spam', 'spam', 'foo' ) );
+
+		$expectedGroup = new AliasGroup( 'en', array( 'foo', 'bar', 'spam' ) );
+
+		$this->assertEquals( $expectedGroup, $group );
+	}
+
+	public function testIsCountable() {
+		$this->assertCount( 0, new AliasGroup( 'en', array() ) );
+		$this->assertCount( 1, new AliasGroup( 'en', array( 'foo' ) ) );
+		$this->assertCount( 2, new AliasGroup( 'en', array( 'foo', 'bar' ) ) );
+	}
+
+	public function testGivenEmptyStringAlias_aliasIsRemoved() {
+		$group = new AliasGroup( 'en', array( 'foo', '', 'bar', '  ' ) );
+
+		$expectedGroup = new AliasGroup( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertEquals( $expectedGroup, $group );
+	}
+
+	public function testAliasesAreTrimmed() {
+		$group = new AliasGroup( 'en', array( ' foo', 'bar ', '   baz   ' ) );
+
+		$expectedGroup = new AliasGroup( 'en', array( 'foo', 'bar', 'baz' ) );
+
+		$this->assertEquals( $expectedGroup, $group );
+	}
+
 }

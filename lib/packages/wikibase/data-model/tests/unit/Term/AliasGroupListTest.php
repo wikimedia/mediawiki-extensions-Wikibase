@@ -83,7 +83,7 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenSetLanguageCode_getByLanguageReturnsGroup() {
-		$enGroup = new AliasGroup( 'en', array() );
+		$enGroup = new AliasGroup( 'en', array( 'foo' ) );
 
 		$list = new AliasGroupList( array(
 			new AliasGroup( 'de', array() ),
@@ -146,6 +146,36 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$list->removeByLanguage( 'en' );
 
 		$this->assertEquals( new AliasGroupList( array() ), $list );
+	}
+
+	public function testGivenEmptyGroups_constructorRemovesThem() {
+		$enGroup = new AliasGroup( 'en', array( 'foo' ) );
+
+		$list = new AliasGroupList( array(
+			new AliasGroup( 'de', array() ),
+			$enGroup,
+			new AliasGroup( 'en', array() ),
+			new AliasGroup( 'nl', array() ),
+		) );
+
+		$expectedList = new AliasGroupList( array(
+			$enGroup,
+		) );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenEmptyGroup_setGroupIsNoOp() {
+		$list = new AliasGroupList( array(
+			new AliasGroup( 'en', array( 'foo' ) ),
+		) );
+
+		$expectedList = clone $list;
+
+		$list->setGroup( new AliasGroup( 'en', array() ) );
+		$list->setGroup( new AliasGroup( 'de', array() ) );
+
+		$this->assertEquals( $expectedList, $list );
 	}
 
 }
