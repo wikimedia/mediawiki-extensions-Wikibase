@@ -135,7 +135,7 @@ class ItemContent extends EntityContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @todo: move this logic to EditEntity (or PreSaveChecks or...)
+	 * @todo: move this logic to EditEntity (or ChangeOpSitelink, though this is a hard constraint)
 	 *
 	 * @param Status $status
 	 * @param \DatabaseBase|null $db The database object to use (optional).

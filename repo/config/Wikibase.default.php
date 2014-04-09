@@ -35,12 +35,10 @@ return call_user_func( function() {
 
 		'entityNamespaces' => array(),
 
-		// These are used for multilanguage strings that should have a soft length constraint
+		// Define constraints for multilingual terms (such as labels, descriptions and aliases).
 		'multilang-limits' => array(
-			'length' => 250,
+			'length' => 250, // length constraint
 		),
-
-		'multilang-truncate-length' => 32,
 
 		// Should the page names (titles) be normalized against the external site
 		'normalizeItemByTitlePageNames' => false,
