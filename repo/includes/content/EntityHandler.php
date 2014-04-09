@@ -131,8 +131,8 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @param $blob
-	 * @param null $format
+	 * @param string $blob
+	 * @param string|null $format
 	 * @return mixed
 	 *
 	 * @throws MWException
