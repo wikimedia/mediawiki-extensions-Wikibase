@@ -5,6 +5,8 @@ namespace Wikibase\content;
 use Message;
 use SiteStore;
 use Status;
+use ValueValidators\Error;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityTitleLookup;
@@ -51,42 +53,46 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 *
 	 * @param Entity $entity
 	 *
-	 * @return Status
+	 * @return Result
 	 */
 	public function validateEntity( Entity $entity ) {
 		wfProfileIn( __METHOD__ );
-		$status = Status::newGood();
+		$result = Result::newSuccess();
 		$dbw = wfGetDB( DB_MASTER );
 
 		$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $dbw );
 
 		foreach ( $conflicts as $conflict ) {
-			$msg = $this->getConflictMessage( $conflict );
+			$error = $this->getConflictError( $conflict );
 
-			$status->fatal( $msg );
+			$result = Result::newError( array_merge(
+				$result->getErrors(),
+				array( $error )
+			) );
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $status;
+		return $result;
 	}
 
 	/**
 	 * Get Message for a conflict
 	 *
-	 * @param array $conflict
+	 * @param array $conflict A record as returned by SiteLinkLookup::getConflictsForItem()
 	 *
-	 * @return \Message
+	 * @return Error
 	 */
-	protected function getConflictMessage( array $conflict ) {
+	protected function getConflictError( array $conflict ) {
 		$entityId = ItemId::newFromNumber( $conflict['itemId'] );
 		$conflictingTitle = $this->entityTitleLookup->getTitleForId( $entityId );
 
 		$site = $this->siteStore->getSite( $conflict['siteId'] );
 		$pageUrl = $site->getPageUrl( $conflict['sitePage'] );
 
-		// $pageUrl shouldn't be a raw param (it's causing the link not to be parsed)
-		return new Message(
-			'wikibase-error-sitelink-already-used',
+		return Error::newError(
+			'SiteLink conflict',
+			'sitelink',
+			'sitelink-already-used',
 			array(
 				$pageUrl,
 				$conflict['sitePage'],

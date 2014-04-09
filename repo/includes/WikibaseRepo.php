@@ -14,9 +14,8 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
-use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
@@ -30,6 +29,7 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\PreSaveChecks;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -37,7 +37,11 @@ use Wikibase\SnakFactory;
 use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\TermDuplicateDetector;
+use Wikibase\Utils;
 use Wikibase\Validators\SnakValidator;
+use Wikibase\Validators\TermValidatorFactory;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -331,7 +335,7 @@ class WikibaseRepo {
 	 */
 	public function getChangeOpFactory() {
 		return new ChangeOpFactory(
-			new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() ),
+			$this->getTermDuplicateDetector(),
 			$this->getStore()->newSiteLinkCache(),
 			new ClaimGuidGenerator(),
 			$this->getClaimGuidValidator(),
@@ -562,4 +566,45 @@ class WikibaseRepo {
 		return $this->getEntityContentFactory();
 	}
 
+	/**
+	 * @note: this is a temporary facility, for use until all checks have been moved into CHangeOps.
+	 * @return PreSaveChecks
+	 */
+	public function getPreSaveChecks() {
+		return new PreSaveChecks(
+			$this->getTermValidatorFactory(),
+			$this->getValidatorErrorLocalizer()
+		);
+	}
+
+	/**
+	 * @return TermValidatorFactory
+	 */
+	protected function getTermValidatorFactory() {
+		$constraints = $this->getSettings()->getSetting( 'multilang-limits' );
+		$maxLength = $constraints['length'];
+
+		$languages = Utils::getLanguageCodes();
+
+		return new TermValidatorFactory(
+			$maxLength,
+			$languages,
+			$this->getEntityIdParser(),
+			$this->getTermDuplicateDetector()
+		);
+	}
+
+	/**
+	 * @return ValidatorErrorLocalizer
+	 */
+	public function getValidatorErrorLocalizer() {
+		return new ValidatorErrorLocalizer();
+	}
+
+	/**
+	 * @return TermDuplicateDetector
+	 */
+	public function getTermDuplicateDetector() {
+		return new TermDuplicateDetector( $this->getStore()->getTermIndex() );
+	}
 }
