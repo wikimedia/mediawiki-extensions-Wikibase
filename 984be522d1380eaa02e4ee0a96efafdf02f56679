@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_a80a3527",
+        "filename": "repo/tests/phpunit/includes/api/EntityTestHelper.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-09T12:18:15Z",
+      "side": 1,
+      "message": "return self::$activeIds; maybe? Wait, why does no test fail because of this mistake?",
+      "revId": "984be522d1380eaa02e4ee0a96efafdf02f56679",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
