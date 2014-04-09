@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntity;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityTitleLookup;
-use Wikibase\PreSaveChecks;
 
 /**
  * @covers Wikibase\EditEntity
@@ -79,21 +78,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return PreSaveChecks
-	 */
-	protected function newPreSaveChecksMock() {
-		$checks = $this->getMockBuilder( 'Wikibase\PreSaveChecks' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$checks->expects( $this->any() )
-			->method( 'applyPreSaveChecks' )
-			->will( $this->returnValue( Status::newGood() ) );
-
-		return $checks;
-	}
-
-	/**
 	 * @param array|null $permissions
 	 *
 	 * @return EntityPermissionChecker
@@ -145,11 +129,9 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		$titleLookup = $this->newTitleLookupMock();
-		$checks = $this->newPreSaveChecksMock();
 		$permissionChecker = $this->newEntityPermissionCheckerMock( $permissions );
 
 		$edit = new EditEntity( $titleLookup, $repo, $repo, $permissionChecker, $entity, $user, $baseRevId, $context );
-		$edit->setPreSafeChecks( $checks );
 
 		return $edit;
 	}

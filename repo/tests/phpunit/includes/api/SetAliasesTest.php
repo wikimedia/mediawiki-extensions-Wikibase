@@ -76,6 +76,9 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //12
 				'p' => array( 'language' => 'en', 'remove' => 'ohi' ),
 				'e' => array(  ) ),
+			array( //13
+				'p' => array( 'language' => 'en', 'set' => "  Foo\nBar  " ),
+				'e' => array( 'value' => array( 'en' => array( 'Foo Bar' ) ) ) ),
 		);
 	}
 
@@ -140,7 +143,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 
 			// -- Test Exceptions -----------------------------
 			array( //0
-				'p' => array( 'language' => '', 'add' => '' ),
+				'p' => array( 'language' => 'xx', 'add' => 'Foo' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
 			array( //1
 				'p' => array( 'language' => 'nl', 'set' => TermTestHelper::makeOverlyLongString() ),
@@ -162,7 +165,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
 			array( //7
 				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal', 'message' => 'Either provide the item "id" or pairs' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-illegal' ) ) ),
 		);
 	}
 
