@@ -120,4 +120,46 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list->getByLanguage( 'en' );
 	}
 
+	public function testHasTermForLanguage() {
+		$list = new TermList( array(
+			new Label( 'en', 'foo' ),
+			new Label( 'de', 'bar' ),
+		) );
+
+		$this->assertTrue( $list->hasTermForLanguage( 'en' ) );
+		$this->assertTrue( $list->hasTermForLanguage( 'de' ) );
+
+		$this->assertFalse( $list->hasTermForLanguage( 'nl' ) );
+		$this->assertFalse( $list->hasTermForLanguage( 'fr' ) );
+
+		$this->assertFalse( $list->hasTermForLanguage( 'EN' ) );
+		$this->assertFalse( $list->hasTermForLanguage( ' de ' ) );
+	}
+
+	public function testGivenNotSetLanguageCode_removeByLanguageThrowsException() {
+		$list = new TermList( array(
+			new Label( 'en', 'foo' ),
+			new Label( 'de', 'bar' ),
+		) );
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$list->removeByLanguage( 'nl' );
+	}
+
+	public function testGivenSetLanguageCode_removeByLanguageRemovesIt() {
+		$deTerm = new Label( 'de', 'bar' );
+
+		$list = new TermList( array(
+			new Label( 'en', 'foo' ),
+			$deTerm,
+		) );
+
+		$list->removeByLanguage( 'en' );
+
+		$this->assertEquals(
+			array( 'de' => $deTerm ),
+			iterator_to_array( $list )
+		);
+	}
+
 }

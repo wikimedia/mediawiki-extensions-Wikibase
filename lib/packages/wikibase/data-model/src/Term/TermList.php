@@ -71,9 +71,7 @@ class TermList implements Countable, IteratorAggregate {
 	 * @throws OutOfBoundsException
 	 */
 	public function getByLanguage( $languageCode ) {
-		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode should be a string' );
-		}
+		$this->assertIsLanguageCode( $languageCode );
 
 		if ( !array_key_exists( $languageCode, $this->terms ) ) {
 			throw new OutOfBoundsException(
@@ -82,6 +80,27 @@ class TermList implements Countable, IteratorAggregate {
 		}
 
 		return $this->terms[$languageCode];
+	}
+
+	public function removeByLanguage( $languageCode ) {
+		$this->assertIsLanguageCode( $languageCode );
+
+		if ( !array_key_exists( $languageCode, $this->terms ) ) {
+			throw new OutOfBoundsException( "There is no term with language code '$languageCode'" );
+		}
+
+		unset( $this->terms[$languageCode] );
+	}
+
+	public function hasTermForLanguage( $languageCode ) {
+		$this->assertIsLanguageCode( $languageCode );
+		return array_key_exists( $languageCode, $this->terms );
+	}
+
+	protected function assertIsLanguageCode( $languageCode ) {
+		if ( !is_string( $languageCode ) ) {
+			throw new InvalidArgumentException( '$languageCode should be a string' );
+		}
 	}
 
 	protected function setTerm( Term $term ) {
