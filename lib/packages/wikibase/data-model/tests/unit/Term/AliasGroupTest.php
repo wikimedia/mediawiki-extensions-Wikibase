@@ -49,4 +49,10 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedGroup, $group );
 	}
 
+	public function testIsCountable() {
+		$this->assertCount( 0, new AliasGroup( 'en', array() ) );
+		$this->assertCount( 1, new AliasGroup( 'en', array( 'foo' ) ) );
+		$this->assertCount( 2, new AliasGroup( 'en', array( 'foo', 'bar' ) ) );
+	}
+
 }

@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Term;
 
 use Comparable;
+use Countable;
 
 /**
  * Immutable value object.
@@ -12,7 +13,7 @@ use Comparable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class AliasGroup implements Comparable {
+class AliasGroup implements Comparable, Countable {
 
 	private $languageCode;
 	private $aliases;
@@ -62,6 +63,14 @@ class AliasGroup implements Comparable {
 
 	private function arraysAreEqual( array $a, array $b ) {
 		return array_diff( $a, $b ) === array();
+	}
+
+	/**
+	 * @see Countable::count
+	 * @return int
+	 */
+	public function count() {
+		return count( $this->aliases );
 	}
 
 }
