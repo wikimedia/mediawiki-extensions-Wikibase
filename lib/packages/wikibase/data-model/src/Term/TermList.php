@@ -84,11 +84,6 @@ class TermList implements Countable, IteratorAggregate {
 
 	public function removeByLanguage( $languageCode ) {
 		$this->assertIsLanguageCode( $languageCode );
-
-		if ( !array_key_exists( $languageCode, $this->terms ) ) {
-			throw new OutOfBoundsException( "There is no term with language code '$languageCode'" );
-		}
-
 		unset( $this->terms[$languageCode] );
 	}
 
