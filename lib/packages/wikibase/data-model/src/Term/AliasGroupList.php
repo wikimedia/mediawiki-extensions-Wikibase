@@ -33,9 +33,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 				throw new InvalidArgumentException( 'AliasGroupList can only contain AliasGroup instances' );
 			}
 
-			if ( !$aliasGroup->isEmpty() ) {
-				$this->groups[$aliasGroup->getLanguageCode()] = $aliasGroup;
-			}
+			$this->setGroup( $aliasGroup );
 		}
 	}
 
@@ -90,7 +88,9 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	public function setGroup( AliasGroup $group ) {
-		$this->groups[$group->getLanguageCode()] = $group;
+		if ( !$group->isEmpty() ) {
+			$this->groups[$group->getLanguageCode()] = $group;
+		}
 	}
 
 }

@@ -165,4 +165,17 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedList, $list );
 	}
 
+	public function testGivenEmptyGroup_setGroupIsNoOp() {
+		$list = new AliasGroupList( array(
+			new AliasGroup( 'en', array( 'foo' ) ),
+		) );
+
+		$expectedList = clone $list;
+
+		$list->setGroup( new AliasGroup( 'en', array() ) );
+		$list->setGroup( new AliasGroup( 'de', array() ) );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
 }
