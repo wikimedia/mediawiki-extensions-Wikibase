@@ -156,7 +156,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @since 0.1
 	 *
 	 * @param Title $title
-	 * @param null $revId
+	 * @param int $revId Unused.
 	 * @param null|ParserOptions $options
 	 * @param bool $generateHtml
 	 *

@@ -42,12 +42,10 @@ class ChangeRowTest extends \ORMRowTest {
 	protected $allowedChangeKeys;
 
 	/**
-	 * Constructs a new ChangeRowTest.
-	 *
 	 * Subclasses may want to add entries to $this->allowedInfoKeys and $this->allowedChangeKeys,
 	 * as appropriate.
 	 *
-	 * @param null   $name
+	 * @param string|null $name
 	 * @param array  $data
 	 * @param string $dataName
 	 */

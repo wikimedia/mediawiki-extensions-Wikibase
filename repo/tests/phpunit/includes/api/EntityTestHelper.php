@@ -241,7 +241,9 @@ class EntityTestHelper {
 
 	/**
 	 * Get the data to pass to the api to clear the entity with the given handle
-	 * @param $handle string of entity to get data for
+	 *
+	 * @param string $handle String handle of entity to get data for
+	 *
 	 * @throws OutOfBoundsException
 	 * @return array|null
 	 */
@@ -256,7 +258,9 @@ class EntityTestHelper {
 
 	/**
 	 * Get the data to pass to the api to create the entity with the given handle
-	 * @param $handle
+	 *
+	 * @param string $handle
+	 *
 	 * @return mixed
 	 * @throws OutOfBoundsException
 	 */
@@ -322,9 +326,10 @@ class EntityTestHelper {
 
 	/**
 	 * Register the entity after it has been created
-	 * @param $handle
-	 * @param $id
-	 * @param null $entity
+	 *
+	 * @param string $handle
+	 * @param string $id
+	 * @param array $entity
 	 */
 	public static function registerEntity( $handle, $id, $entity = null) {
 		self::$activeHandles[ $handle ] = $id;
@@ -336,7 +341,8 @@ class EntityTestHelper {
 
 	/**
 	 * Unregister the entity after it has been cleared
-	 * @param $handle
+	 *
+	 * @param string $handle
 	 * @throws OutOfBoundsException
 	 */
 	private static function unRegisterEntity( $handle ) {

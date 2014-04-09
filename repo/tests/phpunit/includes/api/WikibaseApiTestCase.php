@@ -119,7 +119,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param $exception array details of the exception to expect (type,code,message)
 	 */
 	public function doTestQueryExceptions( $params, $exception ) {
-		try{
+		try {
 			if( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ) {
 				$this->doApiRequest( $params );
 			} else {
@@ -127,14 +127,14 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 			$this->fail( "Failed to throw UsageException" );
 
-		} catch( UsageException $e ){
+		} catch( UsageException $e ) {
 			if( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
 			if( array_key_exists( 'code', $exception ) ) {
 				$this->assertEquals( $exception['code'], $e->getCodeString() );
 			}
-			if( array_key_exists( 'message', $exception ) ){
+			if( array_key_exists( 'message', $exception ) ) {
 				$this->assertContains( $exception['message'], $e->getMessage() );
 			}
 		}
