@@ -14,9 +14,8 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
-use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
@@ -28,6 +27,7 @@ use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\Lib\WikibaseTermValidatorBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
@@ -38,6 +38,8 @@ use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\Validators\SnakValidator;
+use Wikibase\TermDuplicateDetector;
+use Wikibase\Utils;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -331,7 +333,7 @@ class WikibaseRepo {
 	 */
 	public function getChangeOpFactory() {
 		return new ChangeOpFactory(
-			new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() ),
+			$this->getTermChangeValidationHelper(),
 			$this->getStore()->newSiteLinkCache(),
 			new ClaimGuidGenerator(),
 			$this->getClaimGuidValidator(),
@@ -561,5 +563,4 @@ class WikibaseRepo {
 	public function getEntityPermissionChecker() {
 		return $this->getEntityContentFactory();
 	}
-
 }

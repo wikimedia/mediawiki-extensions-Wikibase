@@ -3,12 +3,13 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Error;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\TermDuplicateDetector;
 use Wikibase\SiteLinkLookup;
 use Wikibase\Term;
 
@@ -31,9 +32,9 @@ class ChangeOpsMerge {
 	private $ignoreConflicts;
 
 	/**
-	 * @var LabelDescriptionDuplicateDetector
+	 * @var TermDuplicateDetector
 	 */
-	private $labelDescriptionDuplicateDetector;
+	private $termDuplicateDetector;
 
 	/** @var SiteLinkLookup */
 	private $sitelinkLookup;
@@ -48,7 +49,7 @@ class ChangeOpsMerge {
 	 * @param Item $toItem
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
-	 * @param LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector
+	 * @param TermDuplicateDetector $termDuplicateDetector
 	 * @param SiteLinkLookup $sitelinkLookup
 	 * @param ChangeOpFactory $changeOpFactory
 	 */
@@ -56,7 +57,7 @@ class ChangeOpsMerge {
 		Item $fromItem,
 		Item $toItem,
 		$ignoreConflicts,
-		LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector,
+		TermDuplicateDetector $termDuplicateDetector,
 		SiteLinkLookup $sitelinkLookup,
 		ChangeOpFactory $changeOpFactory
 	) {
@@ -67,7 +68,7 @@ class ChangeOpsMerge {
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
 		$this->ignoreConflicts = $ignoreConflicts;
-		$this->labelDescriptionDuplicateDetector = $labelDescriptionDuplicateDetector;
+		$this->termDuplicateDetector = $termDuplicateDetector;
 		$this->sitelinkLookup = $sitelinkLookup;
 
 		$this->changeOpFactory = $changeOpFactory;
@@ -235,26 +236,14 @@ class ChangeOpsMerge {
 	 * @throws ChangeOpException
 	 */
 	private function applyConstraintChecks() {
-		// Whether the labelDescriptionDuplicateDetector being used is real or has been mocked
-		$detectorReal = get_class( $this->labelDescriptionDuplicateDetector ) == 'Wikibase\LabelDescriptionDuplicateDetector';
+		$result = $this->termDuplicateDetector->detectTermDuplicates( $this->toItem, $terms );
+		$termConflicts = $result->getErrors();
 
-		if ( defined( 'MW_PHPUNIT_TEST' ) && $detectorReal ) {
-			// @FIXME: This is a bad hack and should die!
-			// Skip the check for conflicting terms if this is being run in a unit test
-			// and the LabelDescriptionDuplicateDetector hasn't been mocked, because:
-			//  a) MySQL will choke on the self join on a temp table
-			//  b) we generally don't care about such conflicts while testing
-			$conflictingTerms = array();
-		} else {
-			$conflictingTerms = $this->labelDescriptionDuplicateDetector->getConflictingTerms(
-				$this->toItem
-			);
-		}
 		$conflictingSitelinks = $this->sitelinkLookup->getConflictsForItem( $this->toItem );
 
 		$conflictString = '';
-		if( $conflictingTerms !== array() ) {
-			$conflictString .= $this->getConflictStringForTerms( $conflictingTerms );
+		if( $termConflicts !== array() ) {
+			$conflictString .= $this->getConflictStringForErrors( $termConflicts );
 		}
 		if( $conflictingSitelinks !== array() ) {
 			$conflictString .= $this->getConflictStringForSitelinks( $conflictingSitelinks );
@@ -266,38 +255,37 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * @param Term[] $conflictingTerms
+	 * @param Error[] $termConflicts
 	 *
 	 * @return string
 	 */
-	private function getConflictStringForTerms( $conflictingTerms ) {
+	private function getConflictStringForErrors( array $termConflicts ) {
 		$conflictString = '';
-		foreach( $conflictingTerms as $term ) {
-			$conflictString .= $this->getConflictStringForTerm( $term );
+		foreach( $termConflicts as $error ) {
+			$conflictString .= $this->getConflictStringForError( $error );
 		}
 		return $conflictString;
 	}
 
 	/**
-	 * @param Term $term
+	 * @param Error $error
 	 *
 	 * @return string
 	 */
-	private function getConflictStringForTerm( Term $term ) {
-		$itemId = $term->getEntityId();
-		if( !$this->fromItem->getId()->equals( $itemId ) ) {
-			if( $itemId instanceof ItemId ) {
-				$termItemIdentity = $itemId->getSerialization();
-			} else {
-				$termItemIdentity = $itemId; // as this can sometimes be null
-			}
+	private function getConflictStringForError( Error $error ) {
+		//@see TermDuplicateDetector::detectTermDuplicates
+		list( $type, $language, $text, $conflictingEntity ) = $error->getParameters();
 
+		$fromId = $this->fromItem->getId()->getSerialization();
+
+		if( $fromId !== $conflictingEntity ) {
 			return '(' .
-				$termItemIdentity . ' => ' .
-				$term->getLanguage() . ' => ' .
-				$term->getType() . ' => ' .
-				$term->getText() . ') ';
+				$conflictingEntity . ' => ' .
+				$language . ' => ' .
+				$type . ' => ' .
+				$text . ') ';
 		}
+
 		return '';
 	}
 
