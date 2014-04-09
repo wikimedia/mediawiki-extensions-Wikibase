@@ -313,4 +313,42 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $isoFormatter->formatDate( $extendedIsoString, $precision ) );
 	}
 
+	/**
+	 * @dataProvider formatProvider
+	 */
+	public function testFormat( $expected, $timeValue, $langCode ) {
+		$options = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => $langCode
+		) );
+
+		$isoFormatter = new MwTimeIsoFormatter( $options );
+		$formattedValue = $isoFormatter->format( $timeValue );
+
+		$this->assertEquals( $expected, $formattedValue );
+	}
+
+	public function formatProvider() {
+		$timeValues = $this->getTimeValues();
+
+		$cases = array();
+
+		foreach( $timeValues as $expected => $timeValue ) {
+			$cases[] = array( $expected, $timeValue, 'de' );
+		}
+
+		return $cases;
+	}
+
+	// @todo reuse more date format provider values
+	private function getTimeValues() {
+		return array(
+			 '1941' => new TimeValue(
+				'+00000001941-01-01T00:00:00Z',
+				0, 0, 0,
+				9,
+				'http://www.wikidata.org/entity/Q1985727'
+			)
+		);
+	}
+
 }
