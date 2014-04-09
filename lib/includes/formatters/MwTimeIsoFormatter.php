@@ -31,14 +31,95 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	 * @var string[]
 	 */
 	private static $dayPlaceholders = array(
-		/** default as regex */ 'j',
+		/** default as regex */ 'j\.?',
+		'cdo' => 'j "hô̤" (l)',
+		'ckb' => 'I AM OVERRIDDEN IN THE CONSTRUCTOR [=',
+		'cu' => 'j числа,',
+		'fur' => 'j "di"',
+		'gan' => '月j日 (l)',
+		'gan-hans' => '月j日 (l)',
+		'gan-hant' => '月j日 (l)',
+		'gl' => 'j \d\e',
+		'ii' => '月j日 (l)',
+		'ja' => '月j日 (D)',
+		'kk-latn' => ' j', // This space is required as the format is string(11) "Y "j." xg j"
+		'km' => 'I AM OVERRIDDEN IN THE CONSTRUCTOR [=',
+		'ko' => 'j일 (D)',
+		'ko-kp' => 'j일 (D)',
+		'ku-arab' => 'I AM OVERRIDDEN IN THE CONSTRUCTOR [=',
+		'mwl' => 'j \d\e',
+		'nan' => 'j-"ji̍t" (l)',
+		'pt' => 'j \d\e',
+		'pt-br' => 'j "de"',
+		'uz' => 'j-',
+		'vi' => '"ngày" j "tháng"',
+		'vo' => 'j"id"',
+		'vot' => 'j.',
+		'wuu' => '月j日 (l)',
+		'yue' => '月j號 (l)',
+		'za' => '月j日 (l)',
+		'zh' => '月j日 (l)',
+		'zh-cn' => '月j日 (l)',
+		'zh-hans' => '月j日 (l)',
+		'zh-hant' => '月j日 (l)',
+		'zh-hk' => '月j日 (l)',
+		'zh-min-nan' => '月j日 (l)',
+		'zh-mo' => '月j日 (l)',
+		'zh-my' => '月j日 (l)',
+		'zh-sg' => '月j日 (l)',
+		'zh-tw' => '月j日 (l)',
+		'zh-yue' => '月j日 (l)',
 	);
 
 	/**
 	 * @var string[]
 	 */
 	private static $monthPlaceholders = array(
-		/** default as regex */ '[FM]',
+		/** default as regex */ '([FM]|xg)',
+		'cdo' => 'n "nguŏk"',
+		'crh' => '"s." xg',
+		'crh-cyrl' => '"с." xg',
+		'crh-latn' => '"s." xg',
+		'cs' => 'n.',
+		'eo' => 'M.',
+		'fi' => 'F"ta"',
+		'fit' => 'F"ta"',
+		'gan' => '年n',
+		'gan-hans' => '年n',
+		'gan-hant' => '年n',
+		'gl' => 'F \d\e',
+		'ii' => '年n',
+		'ja' => '年n',
+		'ko' => 'M월',
+		'ko-kp' => 'M월',
+		'kk' => '"ж." xg',
+		'kk-arab' => 'I AM OVERRIDDEN IN THE CONSTRUCTOR [=',
+		'kk-cyrl' => '"ж." xg',
+		'kk-cn' => '"ج." xg',
+		'kk-kz' => '"ж." xg',
+		'kk-latn' => '"j." xg',
+		'km' => 'I AM OVERRIDDEN IN THE CONSTRUCTOR [=',
+		'mwl' => 'F \d\e',
+		'nan' => 'n-"goe̍h" ',
+		'oc' => 'F "de"',
+		'pt' => 'F \d\e',
+		'pt-br' => 'F "de"',
+		'vi' => 'n "năm"',
+		'vot' => 'F"ta"',
+		'wuu' => '年n',
+		'yue' => '年n',
+		'za' => '年n',
+		'zh' => '年n',
+		'zh-cn' => '年n',
+		'zh-hans' => '年n',
+		'zh-hant' => '年n',
+		'zh-hk' => '年n',
+		'zh-min-nan' => '年n',
+		'zh-mo' => '年n',
+		'zh-my' => '年n',
+		'zh-sg' => '年n',
+		'zh-tw' => '年n',
+		'zh-yue' => '年n',
 	);
 
 	/**
@@ -52,6 +133,23 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 		$this->language = Language::factory(
 			$this->options->getOption( ValueFormatter::OPT_LANG )
 		);
+
+		// Expressions for placeholders
+		self::$dayPlaceholders[ 'ku-arab' ] = 'j' . chr(219) . chr(140);
+		self::$dayPlaceholders[ 'ckb' ] = 'j' . chr(219) . chr(140);
+		self::$dayPlaceholders[ 'km' ] =
+			'l ' .
+			chr(225) . chr(158) . chr(145) .
+			chr(225) . chr(158) . chr(184) .
+			'd';
+		self::$monthPlaceholders[ 'kk-arab' ] = '"' . chr(216) . chr(172) . '." xg';
+		self::$monthPlaceholders[ 'km' ] =
+			'F ' .
+			chr(225) . chr(158) . chr(134) .
+			chr(225) . chr(159) . chr(146) .
+			chr(225) . chr(158) . chr(147) .
+			chr(225) . chr(158) . chr(182) .
+			chr(225) . chr(159) . chr(134);
 	}
 
 	/**
@@ -171,7 +269,10 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 				$dateFormat = preg_replace( '/' . self::$monthPlaceholders[0] . '/', '', $dateFormat );
 			}
 		}
-		return trim( $dateFormat );
+
+		// Trim any odd space chars
+		$dateFormat = trim( $dateFormat,  chr(32) . chr(128) . chr(143) .  chr(226) );
+		return $dateFormat;
 	}
 
 	/**
