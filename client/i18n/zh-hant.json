@@ -53,7 +53,7 @@
     "wikibase-rc-show-wikidata-pref": "在最近更改中顯示{{WBREPONAME}}的編輯",
     "wikibase-rc-wikibase-edit-letter": "編",
     "wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}編輯",
-    "wikibase-watchlist-show-changes-pref": "於監視列表中顯示{{WBREPONAME}}之編輯",
+    "wikibase-watchlist-show-changes-pref": "在我的監視列表中顯示維基數據編輯",
     "wikibase-error-serialize-error": "無法序列化資料",
     "wikibase-error-invalid-entity-id": "系統無法辨認你輸入的ID。請使用一個有效的ID。",
     "special-unconnectedpages": "未連接到任一項目的頁面",

@@ -19,7 +19,8 @@
             "Shirayuki",
             "The Anonymouse",
             "Vivaelcelta",
-            "Zolo"
+            "Zolo",
+            "Chocolate con galleta"
         ]
     },
     "wikibase-desc": "Repositorio de datos estructurados",
@@ -44,6 +45,7 @@
     "wikibase-label-input-help-message": "Introducir el título de este conjunto de datos en  $1.",
     "wikibase-description-input-help-message": "Introducir una breve descripción en  $1.",
     "wikibase-statements": "Declaraciones",
+    "wikibase-attributes": "Atributos",
     "wikibase-terms": "En otros idiomas",
     "wikibase-sitelinks-add": "Agregar un enlace a un enlace de sitio (site-link)",
     "wikibase-sitelinks-empty": "No hay ningún enlace de sitio para este elemento.",

@@ -48,6 +48,11 @@ $magicWords['eo'] = array(
 	'property' => array( 0, 'eco' ),
 );
 
+/** Spanish (español) */
+$magicWords['es'] = array(
+	'noexternallanglinks' => array( 0, 'nointerwikis' ),
+);
+
 /** Estonian (eesti) */
 $magicWords['et'] = array(
 	'noexternallanglinks' => array( 0, 'välistekeelelinkideta' ),
@@ -122,6 +127,7 @@ $magicWords['pt'] = array(
 
 /** Brazilian Portuguese (português do Brasil) */
 $magicWords['pt-br'] = array(
+	'noexternallanglinks' => array( 0, 'naointerwikis' ),
 	'property' => array( 0, 'propriedade' ),
 );
 

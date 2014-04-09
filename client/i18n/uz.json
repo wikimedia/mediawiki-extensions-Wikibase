@@ -16,7 +16,9 @@
     "wikibase-linkitem-input-site": "Til:",
     "wikibase-linkitem-confirmitem-text": "Siz tanlagan sahifa [$1 markazlashtirilgan maʼlumotlar repozitoriyimizning bandi] bilan bogʻlandi. Iltimos, quyida koʻrsatilgan sahifalar orasida ushbu sahifaga bogʻlanishi keraklari borligini tasdiqlang.",
     "wikibase-linkitem-success-link": "Sahifalar bogʻlandi. Bogʻlamalar toʻplami saqlanadigan bandni [$1 markazlashtirilgan maʼlumot repozitoriyimizda] topishingiz mumkin.",
-    "wikibase-rc-hide-wikidata": "Vikimaʼlumotlarga oid tahrirlarni $1",
+    "wikibase-rc-hide-wikidata": "{{WBREPONAME}}ga oid tahrirlarni $1",
+    "wikibase-rc-hide-wikidata-hide": "yashir",
+    "wikibase-rc-hide-wikidata-show": "koʻrsat",
     "wikibase-rc-show-wikidata-pref": "Yangi oʻzgarishlar roʻyxatida Vikimaʼlumotlarga oid tahrirlarni koʻrsatish",
     "wikibase-rc-wikibase-edit-title": "Vikimaʼlumotlarga oid tahrir",
     "wikibase-watchlist-show-changes-pref": "Vikimaʼlumotlarga oid tahrirlar kuzatuv roʻyxatimda koʻrsatilsin"

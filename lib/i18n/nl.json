@@ -56,7 +56,7 @@
     "wikibase-globedetails-latitude": "Breedtegraad",
     "wikibase-globedetails-precision": "Precisie",
     "wikibase-globedetails-globe": "Globe",
-    "wikibase-unexpected-error": "Onverwachte fout:  $1",
+    "wikibase-unexpected-error": "Onverwachte fout:  $1.",
     "wikibase-replicationnote": "Het kan een aantal minuten duren voor alle wijzigingen op alle wiki's zichtbaar zijn",
     "wikibase-sitelinks-wikipedia": "Pagina's op Wikipedia die gekoppeld zijn aan dit item",
     "wikibase-sitelinks-sitename-columnheading": "Taal",
