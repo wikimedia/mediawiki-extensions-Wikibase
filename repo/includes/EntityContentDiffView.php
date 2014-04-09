@@ -7,6 +7,7 @@ use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use DifferenceEngine;
 use Html;
+use IContextSource;
 use Linker;
 use ParserOptions;
 use ParserOutput;
@@ -54,7 +55,7 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * @see DifferenceEngine::__construct
 	 *
-	 * @param null $context
+	 * @param IContextSource $context
 	 * @param int $old
 	 * @param int $new
 	 * @param int $rcid

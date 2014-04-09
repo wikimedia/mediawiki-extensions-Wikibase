@@ -79,7 +79,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
 		foreach( $activeHandles as $handle => $id ) {
-			// TODO: Skip requests for handles that are reused anyway in the second loop below
 			$params = EntityTestHelper::getEntityClear( $handle );
 			$params['action'] = 'wbeditentity';
 			$this->doApiRequestWithToken( $params );
@@ -92,7 +91,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			EntityTestHelper::injectIds( $params, $idMap );
 			EntityTestHelper::injectIds( $params, EntityTestHelper::$defaultPlaceholderValues );
 
-			list($res,,) = $this->doApiRequestWithToken( $params );
+			list( $res, , ) = $this->doApiRequestWithToken( $params );
 			EntityTestHelper::registerEntity( $handle, $res['entity']['id'], $res['entity'] );
 
 			$idMap["%$handle%"] = $res['entity']['id'];
@@ -103,7 +102,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * Loads an entity from the database (via an API call).
 	 */
 	protected function loadEntity( $id ) {
-		list($res,,) = $this->doApiRequest(
+		list( $res, , ) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
 				'format' => 'json', // make sure IDs are used as keys.
@@ -119,7 +118,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param $exception array details of the exception to expect (type,code,message)
 	 */
 	public function doTestQueryExceptions( $params, $exception ) {
-		try{
+		try {
 			if( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ) {
 				$this->doApiRequest( $params );
 			} else {
@@ -127,14 +126,14 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 			$this->fail( "Failed to throw UsageException" );
 
-		} catch( UsageException $e ){
+		} catch( UsageException $e ) {
 			if( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
 			if( array_key_exists( 'code', $exception ) ) {
 				$this->assertEquals( $exception['code'], $e->getCodeString() );
 			}
-			if( array_key_exists( 'message', $exception ) ){
+			if( array_key_exists( 'message', $exception ) ) {
 				$this->assertContains( $exception['message'], $e->getMessage() );
 			}
 		}
