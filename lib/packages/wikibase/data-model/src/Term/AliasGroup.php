@@ -25,10 +25,17 @@ class AliasGroup implements Comparable, Countable {
 	public function __construct( $languageCode, array $aliases ) {
 		$this->languageCode = $languageCode;
 
-		$this->aliases = array_values( array_filter(
-			array_unique( $aliases ),
-			array( $this, 'isAlias' )
-		) );
+		$this->aliases = array_values(
+			array_filter(
+				array_unique(
+					array_map(
+						'trim',
+						$aliases
+					)
+				),
+				array( $this, 'isAlias' )
+			)
+		);
 	}
 
 	private function isAlias( $string ) {
