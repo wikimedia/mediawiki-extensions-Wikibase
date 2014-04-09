@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_0886c967",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T14:35:27Z",
+      "side": 1,
+      "message": "they are in descending order :)",
+      "parentUuid": "ae0e4726_081c8578",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_e810315d",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 19
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_c8de9170",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T14:35:27Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "ae0e4726_1516e34d",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_2bf863e1",
         "filename": "repo/includes/content/ItemContent.php",
         "patchSetId": 19
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_e8e14d2a",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T14:35:27Z",
+      "side": 1,
+      "message": "good point, will do.",
+      "parentUuid": "ae0e4726_2bf863e1",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_3530c7e4",
         "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
         "patchSetId": 19
@@ -81,6 +135,24 @@
       "writtenOn": "2014-03-31T17:22:18Z",
       "side": 1,
       "message": "is this used at all? doesn\u0027t look like it",
+      "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_28f865e1",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-09T14:35:27Z",
+      "side": 1,
+      "message": "Looks like dataPageProperties got renamed, and then duplicated during merge. will remove it.",
+      "parentUuid": "ae0e4726_3530c7e4",
       "revId": "1fd15aca4a89a7f917d879b0bbe0a5f97a3004df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
