@@ -33,13 +33,11 @@ class AliasGroup implements Comparable, Countable {
 						$aliases
 					)
 				),
-				array( $this, 'isAlias' )
+				function( $string ) {
+					return $string !== '';
+				}
 			)
 		);
-	}
-
-	private function isAlias( $string ) {
-		return $string !== '';
 	}
 
 	/**
