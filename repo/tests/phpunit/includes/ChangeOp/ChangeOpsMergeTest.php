@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use ValueValidators\Error;
+use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
@@ -40,12 +42,21 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$this->mockProvider = new ClaimTestMockProvider( $this );
 	}
 
-	private function getMockLabelDescriptionDuplicateDetector( $callTimes, $returnValue = array() ) {
-		$mock = $this->getMockBuilder( '\Wikibase\LabelDescriptionDuplicateDetector' )
+	private function getTermDuplicateDetector( $callTimes, $returnValue = null ) {
+		if ( $returnValue === null ) {
+			$returnValue = Result::newSuccess();
+		} elseif ( is_array( $returnValue ) ) {
+			$returnValue = Result::newError( $returnValue );
+		}
+
+		$mock = $this->getMockBuilder( '\Wikibase\TermDuplicateDetector' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->exactly( $callTimes ) )
-			->method( 'getConflictingTerms' )
+			->method( 'detectLabelConflictsForEntity' )
+			->will( $this->returnValue( $returnValue ) );
+		$mock->expects( $this->exactly( $callTimes ) )
+			->method( 'detectLabelDescriptionConflictsForEntity' )
 			->will( $this->returnValue( $returnValue ) );
 		return $mock;
 	}
@@ -65,7 +76,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$termCalls, $termConflicts,
 		$linkCalls, $linkConflicts
 	) {
-		$duplicateDetector = $this->getMockLabelDescriptionDuplicateDetector( $termCalls, $termConflicts );
+		$duplicateDetector = $this->getTermDuplicateDetector( $termCalls, $termConflicts );
 		$linkCache = $this->getMockSitelinkCache( $linkCalls, $linkConflicts );
 
 		$idParser = new BasicEntityIdParser();
@@ -372,25 +383,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		return $testCases;
 	}
 
-	private function getMockTerm( $entityId, $language, $type, $text ) {
-		$mock = $this->getMock( '\Wikibase\Term' );
-		$mock->expects( $this->once() )
-			->method( 'getEntityId' )
-			->will( $this->returnValue( $entityId ) );
-		$mock->expects( $this->any() )
-			->method( 'getLanguage' )
-			->will( $this->returnValue( $language ) );
-		$mock->expects( $this->any() )
-			->method( 'getType' )
-			->will( $this->returnValue( $type ) );
-		$mock->expects( $this->any() )
-			->method( 'getText' )
-			->will( $this->returnValue( $text ) );
-		return $mock;
-	}
-
 	public function testExceptionThrownWhenLabelDescriptionDuplicatesDetected() {
-		$conflicts = array( $this->getMockTerm( new ItemId( 'Q999' ), 'imalang', 'imatype', 'foog text' ) );
+		$conflicts = array( Error::newError( 'Foo!', 'label', 'foo', array( 'imatype', 'imalang', 'foog text', 'Q999' ) ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
 		$changeOps = $this->makeChangeOpsMerge(
@@ -409,7 +403,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testExceptionNotThrownWhenLabelDescriptionDuplicatesDetectedOnFromItem() {
-		$conflicts = array( $this->getMockTerm( new ItemId( 'Q111' ), 'imalang', 'imatype', 'foog text' ) );
+		$conflicts = array( Error::newError( 'Foo!', 'label', 'foo', array( 'imatype', 'imalang', 'foog text', 'Q111' ) ) );
 		$from = self::getItem( 'Q111', array() );
 		$to = self::getItem( 'Q222', array() );
 		$changeOps = $this->makeChangeOpsMerge(

@@ -2,10 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Status;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\PreSaveChecks;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\TermValidatorFactory;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * @covers Wikibase\PreSaveChecks
@@ -20,55 +23,86 @@ use Wikibase\Repo\WikibaseRepo;
 class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 
 	public function providePreSaveChecks() {
-		//TODO: use mock checks and/or inject settings.
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$limits = $settings->getSetting( 'multilang-limits' );
-		$maxLength = $limits['length'];
 
 		return array(
-			array(
+			'empty' => array(
 				'Wikibase\DataModel\Entity\Item',
+				null,
 				array(),
-				array(),
-				false
+				array()
 			),
-			array(
+			'unchanged bad data' => array(
+				'Wikibase\DataModel\Entity\Item',
+				array(
+					'label' => array(
+						'de' => str_repeat( 'x', 16 )
+					),
+				),
+				array(
+					'label' => array(
+						'de' => str_repeat( 'x', 16 ),
+						'en' => 'foo'
+					),
+				),
+				array()
+			),
+			'not a language' => array(
+				'Wikibase\DataModel\Entity\Item',
+				null,
+				array(
+					'label' => array( 'narf' => 'xyz' ),
+				),
+				array(
+					'wikibase-validator-not-a-language'
+				)
+			),
+			'label too long' => array(
 				'Wikibase\DataModel\Entity\Item',
 				array(
 					'label' => array( 'de' => 'xxx' ),
 				),
 				array(
-					'label' => array( 'de' => str_repeat( 'x', $maxLength + 1 ) ),
+					'label' => array( 'de' => str_repeat( 'x', 16 ) ),
 				),
 				array(
-					'wikibase-error-constraint-violation-label'
+					'wikibase-validator-too-long'
 				)
 			),
-			array(
+			'description too long' => array(
 				'Wikibase\DataModel\Entity\Item',
 				array(
 					'description' => array( 'de' => 'xxx' ),
 				),
 				array(
-					'description' => array( 'de' => str_repeat( 'x', $maxLength + 1 ) ),
+					'description' => array( 'de' => str_repeat( 'x', 16 ) ),
 				),
 				array(
-					'wikibase-error-constraint-violation-description'
+					'wikibase-validator-too-long'
 				)
 			),
-			array(
+			'alias too long' => array(
+				'Wikibase\DataModel\Entity\Property',
+				null,
+				array(
+					'aliases' => array( 'de' => array( str_repeat( 'x', 16 ) ) ),
+				),
+				array(
+					'wikibase-validator-too-long'
+				)
+			),
+			'alias empty' => array(
 				'Wikibase\DataModel\Entity\Property',
 				array(
 					'aliases' => array( 'de' => array( 'xxx' ) ),
 				),
 				array(
-					'aliases' => array( 'de' => array( str_repeat( 'x', $maxLength + 1 ) ) ),
+					'aliases' => array( 'de' => array( '' ) ),
 				),
 				array(
-					'wikibase-error-constraint-violation-aliases'
+					'wikibase-validator-too-short'
 				)
 			),
-			array(
+			'lable is proeprty id' => array(
 				'Wikibase\DataModel\Entity\Property',
 				array(
 					'label' => array( 'de' => 'xxx' ),
@@ -77,41 +111,79 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 					'label' => array( 'de' => 'P17' ),
 				),
 				array(
-					'wikibase-error-label-no-entityid'
+					'wikibase-validator-label-no-entityid'
 				)
 			),
+			//TODO: check for dupes
 		);
+	}
+
+	private function getMockTermDuplicateDetector() {
+		$mock =  $this->getMockBuilder( 'Wikibase\TermDuplicateDetector' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$good = Result::newSuccess();
+
+		$mock->expects( $this->any() )
+			->method( 'detectLabelConflictsForEntity' )
+			->will( $this->returnValue( $good ) );
+
+		$mock->expects( $this->any() )
+			->method( 'detectLabelDescriptionConflictsForEntity' )
+			->will( $this->returnValue( $good ) );
+
+		return $mock;
 	}
 
 	/**
 	 * @dataProvider providePreSaveChecks
 	 *
-	 * @param $oldData
-	 * @param $newData
-	 * @param $errors
+	 * @param array $oldData
+	 * @param array $newData
+	 * @param string[] $expectedErrors
 	 */
-	public function testApplyPreSaveChecks( $class, $oldData, $newData, $errors ) {
-		//TODO: mock the MultiLangConstraintDetector used by PreSaveChecks
-		//TODO: mock the LabelDescriptionDuplicateDetector used by PreSaveChecks
+	public function testApplyPreSaveChecks( $class, $oldData, $newData, $expectedErrors ) {
+		//TODO: check dupe detection against mock dupe detector!
+		$dupeDetector = $this->getMockTermDuplicateDetector();
 
-		$termIndex = $this->getMock( 'Wikibase\TermIndex' );
 		$idParser = new BasicEntityIdParser();
-		$checks = new PreSaveChecks( $termIndex, $idParser );
+		$maxLength = 12;
+		$languages = array( 'en', 'de' );
+
+		$validatorFactory = new TermValidatorFactory( $maxLength, $languages, $idParser );
+		$errorLocalizer = new ValidatorErrorLocalizer();
+
+		$checks = new PreSaveChecks(
+			$dupeDetector,
+			$validatorFactory,
+			$errorLocalizer
+		);
 
 		/* @var Entity $oldEntity */
 		/* @var Entity $newEntity */
-		$oldEntity = $class::newFromArray( $oldData );
+		$oldEntity = $oldData == null ? null : $class::newFromArray( $oldData );
 		$newEntity = $class::newFromArray( $newData );
-		$diff = $oldEntity->getDiff( $newEntity );
+		$diff = $oldEntity == null ? null : $oldEntity->getDiff( $newEntity );
 
 		$status = $checks->applyPreSaveChecks( $newEntity, $diff );
 
-		if ( !$errors ) {
-			$this->assertTrue( $status->isOK(), 'No errors expected, got ' . $status->getWikiText() );
-		} else {
-			foreach ( $errors as $error ) {
-				$this->assertTrue( $status->hasMessage( $error ), 'Expected error ' . $error );
-			}
+		$this->assertEquals( empty( $expectedErrors ), $status->isOK(), 'isOK()' );
+
+		if ( $expectedErrors ) {
+			$this->assertErrors( $expectedErrors, $status );
+		}
+	}
+
+	private function assertErrors( array $expectedErrors, Status $status ) {
+		$statusErrors = array();
+		foreach ( $status->getErrorsArray() as $row ) {
+			$key = array_shift( $row );
+			$statusErrors[$key] = $row;
+		}
+
+		foreach ( $expectedErrors as $error ) {
+			$this->assertArrayHasKey( $error, $statusErrors, 'Expected error ' . $error );
 		}
 	}
 
