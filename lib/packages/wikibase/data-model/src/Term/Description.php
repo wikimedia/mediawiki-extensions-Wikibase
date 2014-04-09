@@ -10,8 +10,4 @@ namespace Wikibase\DataModel\Term;
  */
 class Description extends Term {
 
-	public function __construct( $languageCode, $text ) {
-		parent::__construct( $languageCode, $text );
-	}
-
 }
