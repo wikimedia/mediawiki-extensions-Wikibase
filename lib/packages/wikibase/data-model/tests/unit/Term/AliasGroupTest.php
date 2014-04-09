@@ -55,4 +55,15 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertCount( 2, new AliasGroup( 'en', array( 'foo', 'bar' ) ) );
 	}
 
+	public function testGivenEmptyStringAlias_aliasIsRemoved() {
+		$group = new AliasGroup( 'en', array( 'foo', '', 'bar' ) );
+
+		$expectedGroup = new AliasGroup( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertEquals( $expectedGroup, $group );
+	}
+
+	// TODO: allow whitespace only strings?
+	// TODO: trim?
+
 }
