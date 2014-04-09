@@ -8,10 +8,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
 use InvalidArgumentException;
-use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\SiteLinkLookup;
+use Wikibase\TermDuplicateDetector;
 use Wikibase\Validators\SnakValidator;
 
 /**
@@ -23,9 +23,9 @@ use Wikibase\Validators\SnakValidator;
 class ChangeOpFactory {
 
 	/**
-	 * @var LabelDescriptionDuplicateDetector
+	 * @var TermDuplicateDetector
 	 */
-	protected $labelDescriptionDuplicateDetector;
+	protected $termDuplicateDetector;
 
 	/**
 	 * @var SiteLinkLookup
@@ -53,7 +53,7 @@ class ChangeOpFactory {
 	protected $snakValidator;
 
 	/**
-	 * @param LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector
+	 * @param TermDuplicateDetector $termDuplicateDetector
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
@@ -61,7 +61,7 @@ class ChangeOpFactory {
 	 * @param SnakValidator $snakValidator
 	 */
 	public function __construct(
-		LabelDescriptionDuplicateDetector $labelDescriptionDuplicateDetector,
+		TermDuplicateDetector $termDuplicateDetector,
 		SiteLinkLookup $siteLinkLookup,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
@@ -69,7 +69,7 @@ class ChangeOpFactory {
 		SnakValidator $snakValidator
 	) {
 
-		$this->labelDescriptionDuplicateDetector = $labelDescriptionDuplicateDetector;
+		$this->termDuplicateDetector = $termDuplicateDetector;
 		$this->siteLinkLookup = $siteLinkLookup;
 
 		$this->guidGenerator = $guidGenerator;
@@ -309,7 +309,7 @@ class ChangeOpFactory {
 			$fromItem,
 			$toItem,
 			$ignoreConflicts,
-			$this->labelDescriptionDuplicateDetector,
+			$this->termDuplicateDetector,
 			$this->siteLinkLookup,
 			$this
 		);

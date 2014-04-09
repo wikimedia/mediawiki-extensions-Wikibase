@@ -2,7 +2,10 @@
 
 namespace Wikibase\Validators;
 
+use Message;
+use Status;
 use ValueValidators\Error;
+use ValueValidators\Result;
 
 /**
  * Class ValidatorErrorLocalizer
@@ -12,6 +15,32 @@ use ValueValidators\Error;
  */
 class ValidatorErrorLocalizer {
 
+	/**
+	 * @param Result $result
+	 *
+	 * @return Status
+	 */
+	public function getResultStatus( Result $result ) {
+		if ( $result->isValid() ) {
+			return Status::newGood();
+		}
+
+		$status = Status::newGood();
+		$status->setResult( false );
+
+		foreach ( $result->getErrors() as $error ) {
+			$message = $this->getErrorMessage( $error );
+			$status->error( $message );
+		}
+
+		return $status;
+	}
+
+	/**
+	 * @param Error $error
+	 *
+	 * @return Message
+	 */
 	public function getErrorMessage( Error $error ) {
 		// Messages:
 		// wikibase-validator-bad-type, wikibase-validator-too-long, wikibase-validator-too-short,

@@ -37,6 +37,10 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	public function testLabelUniquenessRestriction() {
+		if ( wfGetDB( DB_MASTER )->getType() === 'mysql' ) {
+			$this->markTestSkipped( 'Can\'t test uniqueness restriction on MySQL' );
+		}
+
 		StoreFactory::getStore()->getTermIndex()->clear();
 		$prefix = get_class( $this ) . '/';
 

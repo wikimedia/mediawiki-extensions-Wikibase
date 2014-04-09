@@ -1276,7 +1276,7 @@ final class RepoHooks {
 		//       but don't check again that labels aren't be IDs.
 		$validators = array(
 			new LabelUniquenessValidator(
-				$repo->getStore()->getTermIndex()
+				$repo->getTermDuplicateDetector()
 			)
 		);
 
