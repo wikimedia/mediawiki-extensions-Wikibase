@@ -9,8 +9,6 @@ use OutOfBoundsException;
 use Traversable;
 
 /**
- * List of alias groups. Immutable.
- *
  * Only one group per language code. If multiple groups with the same language code
  * are provided, only the last one will be retained.
  *
@@ -54,16 +52,14 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	/**
-	 * @param $languageCode
+	 * @param string $languageCode
 	 *
 	 * @return AliasGroup
 	 * @throws InvalidArgumentException
 	 * @throws OutOfBoundsException
 	 */
 	public function getByLanguage( $languageCode ) {
-		if ( !is_string( $languageCode ) ) {
-			throw new InvalidArgumentException( '$languageCode should be a string' );
-		}
+		$this->assertIsLanguageCode( $languageCode );
 
 		if ( !array_key_exists( $languageCode, $this->groups ) ) {
 			throw new OutOfBoundsException(
@@ -72,6 +68,25 @@ class AliasGroupList implements Countable, IteratorAggregate {
 		}
 
 		return $this->groups[$languageCode];
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @throws InvalidArgumentException
+	 */
+	public function removeByLanguage( $languageCode ) {
+		$this->assertIsLanguageCode( $languageCode );
+		unset( $this->groups[$languageCode] );
+	}
+
+	private function assertIsLanguageCode( $languageCode ) {
+		if ( !is_string( $languageCode ) ) {
+			throw new InvalidArgumentException( '$languageCode should be a string' );
+		}
+	}
+
+	public function setGroup( AliasGroup $group ) {
+		$this->groups[$group->getLanguageCode()] = $group;
 	}
 
 }

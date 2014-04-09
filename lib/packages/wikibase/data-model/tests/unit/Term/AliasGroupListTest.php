@@ -6,7 +6,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
- * @covers Wikibase\DataModel\Term\AliasGroup
+ * @covers Wikibase\DataModel\Term\AliasGroupList
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -106,6 +106,46 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'OutOfBoundsException' );
 		$list->getByLanguage( 'en' );
+	}
+
+	public function testGivenGroupForNewLanguage_setGroupAddsGroup() {
+		$enGroup = new AliasGroup( 'en', array( 'foo', 'bar' ) );
+		$deGroup = new AliasGroup( 'de', array( 'baz', 'bah' ) );
+
+		$list = new AliasGroupList( array( $enGroup ) );
+		$expectedList = new AliasGroupList( array( $enGroup, $deGroup ) );
+
+		$list->setGroup( $deGroup );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenLabelForExistingLanguage_setLabelReplacesLabel() {
+		$enGroup = new AliasGroup( 'en', array( 'foo', 'bar' ) );
+		$newEnGroup = new AliasGroup( 'en', array( 'foo', 'bar', 'bah' ) );
+
+		$list = new AliasGroupList( array( $enGroup ) );
+		$expectedList = new AliasGroupList( array( $newEnGroup ) );
+
+		$list->setGroup( $newEnGroup );
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenNotSetLanguage_removeByLanguageIsNoOp() {
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) );
+		$originalList = clone $list;
+
+		$list->removeByLanguage( 'de' );
+
+		$this->assertEquals( $originalList, $list );
+	}
+
+	public function testGivenSetLanguage_removeByLanguageRemovesIt() {
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo', 'bar' ) ) ) );
+
+		$list->removeByLanguage( 'en' );
+
+		$this->assertEquals( new AliasGroupList( array() ), $list );
 	}
 
 }
