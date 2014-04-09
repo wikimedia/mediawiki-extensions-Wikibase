@@ -93,4 +93,19 @@ class PropertyContentTest extends EntityContentTest {
 		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-no-entityid' ) );
 	}
 
+	/**
+	 * Injects a property data type into the generic entity data array.
+	 *
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	protected function prepareEntityData( array $data ) {
+
+		if ( !isset( $data['datatype'] ) ) {
+			$data['datatype'] = 'string';
+		}
+
+		return $data;
+	}
 }

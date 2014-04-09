@@ -32,6 +32,14 @@ use WikiPage;
 class ItemContent extends EntityContent {
 
 	/**
+	 * For use in the wb-status page property to indicate that the entity is a "linkstub",
+	 * that is, it contains sitelinks, but no claims.
+	 *
+	 * @see getEntityStatus()
+	 */
+	const STATUS_LINKSTUB = 60;
+
+	/**
 	 * @since 0.1
 	 * @var Item
 	 */
@@ -332,4 +340,43 @@ class ItemContent extends EntityContent {
 		);
 	}
 
+	/**
+	 * @see EntityContent::getEntityPageProperties
+	 *
+	 * Records the number of sitelinks in the 'wb-sitelinks' key.
+	 *
+	 * @return array A map from property names to property values.
+	 */
+	public function getEntityPageProperties() {
+		$item = $this->getItem();
+
+		return array_merge(
+			parent::getEntityPageProperties(),
+			array(
+				'wb-sitelinks' => count( $item->getSiteLinks() ),
+			)
+		);
+	}
+
+	/**
+	 * @see EntityContent::getEntityStatus()
+	 *
+	 * An item is considered a stub if it has terms but no statements or sitelinks.
+	 * If an item has sitelinks but no statements, it is considered a "linkstub".
+	 * If an item has statements, it's not empty nor a stub.
+	 *
+	 * @return int
+	 */
+	public function getEntityStatus() {
+		$status = parent::getEntityStatus();
+		$hasSiteLinks = $this->getItem()->hasSiteLinks();
+
+		if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
+			$status = self::STATUS_LINKSTUB;
+		} else if ( $status === self::STATUS_STUB && $hasSiteLinks ) {
+			$status = self::STATUS_LINKSTUB;
+		}
+
+		return $status;
+	}
 }

@@ -174,4 +174,58 @@ class ItemContentTest extends EntityContentTest {
 		);
 	}
 
+	public function providePageProperties() {
+		$cases = parent::providePageProperties();
+
+		$cases['sitelinks'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) ) ),
+			array( 'wb-claims' => 0, 'wb-sitelinks' => 1 )
+		);
+
+		return $cases;
+	}
+
+	public function provideGetEntityStatus() {
+		$cases = parent::provideGetEntityStatus();
+
+		$links = array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) );
+
+		$cases['linkstub'] = array(
+			array( 'links' => $links ),
+			ItemContent::STATUS_LINKSTUB
+		);
+
+		$cases['linkstub with terms'] = array(
+			array(
+				'label' => array( 'en' => 'Foo' ),
+				'links' => $links
+			),
+			ItemContent::STATUS_LINKSTUB
+		);
+
+		$cases['statements and links'] = $cases['claims']; // from parent::provideGetEntityStatus();
+		$cases['statements and links'][0]['links'] = $links;
+
+		return $cases;
+	}
+
+	public function provideGetEntityPageProperties() {
+		$cases = parent::provideGetEntityPageProperties();
+
+		// expect wb-sitelinks => 0 for all inherited cases
+		foreach ( $cases as &$case ) {
+			$case[1]['wb-sitelinks'] = 0;
+		}
+
+		$cases['sitelinks'] = array(
+			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) ) ),
+			array(
+				'wb-claims' => 0,
+				'wb-sitelinks' => 1,
+				'wb-status' => ItemContent::STATUS_LINKSTUB,
+			)
+		);
+
+		return $cases;
+	}
 }
