@@ -26,4 +26,8 @@ class DescriptionList extends TermList {
 		parent::__construct( $descriptions );
 	}
 
+	public function setDescription( Description $description ) {
+		$this->setTerm( $description );
+	}
+
 }
