@@ -31,7 +31,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	protected $claimTestHelper;
 
 	/**
-	 * @param null $name
+	 * @param string $name
 	 * @param array $data
 	 * @param string $dataName
 	 */

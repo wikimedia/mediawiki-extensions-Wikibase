@@ -39,7 +39,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	protected $helper;
 
 	/**
-	 * @param null $name
+	 * @param string $name
 	 * @param array $data
 	 * @param string $dataName
 	 */
