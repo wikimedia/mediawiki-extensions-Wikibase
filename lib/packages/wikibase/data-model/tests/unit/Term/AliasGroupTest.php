@@ -41,4 +41,12 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $group->equals( new AliasGroup( 'de', array() ) ) );
 	}
 
+	public function testDuplicatesAreRemoved() {
+		$group = new AliasGroup( 'en', array( 'foo', 'bar', 'spam', 'spam', 'spam', 'foo' ) );
+
+		$expectedGroup = new AliasGroup( 'en', array( 'foo', 'bar', 'spam' ) );
+
+		$this->assertEquals( $expectedGroup, $group );
+	}
+
 }

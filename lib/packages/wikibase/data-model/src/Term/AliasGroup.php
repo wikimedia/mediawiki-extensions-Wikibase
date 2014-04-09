@@ -23,7 +23,7 @@ class AliasGroup implements Comparable {
 	 */
 	public function __construct( $languageCode, array $aliases ) {
 		$this->languageCode = $languageCode;
-		$this->aliases = $aliases;
+		$this->aliases = array_unique( $aliases );
 	}
 
 	/**
