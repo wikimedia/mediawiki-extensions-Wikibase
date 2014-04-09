@@ -274,7 +274,17 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		//Different language tests at YEAR precision
 		foreach( Utils::getLanguageCodes() as $languageCode ) {
-			$argLists[] = array( '3333', '+00000003333-01-01T00:00:00Z', TimeValue::PRECISION_YEAR, $languageCode );
+			$expected = '3333';
+			if( in_array( $languageCode, array( 'sr', 'sr-ec', 'sr-el' ) ) ) {
+				$expected = '3333.';
+			}
+
+			$argLists[] = array(
+				$expected,
+				'+00000003333-01-01T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+				$languageCode
+			);
 		}
 
 		return $argLists;
@@ -294,8 +304,7 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 			'ab', 'als', 'anp', 'ar', 'arq', 'arz', 'as', 'av', 'azb',
 			'ba', 'bar', 'bcc', 'be', 'be-tarask', 'be-x-old', 'bh', 'bho', 'bn', 'bo', 'bpy', 'bqi', 'bxr',
 			'cdo', 'ce', 'ckb', 'crh', 'crh-latn', 'crh-cyrl', 'cs', 'cu', 'cv',
-			'da', 'de', 'de-at', 'de-ch', 'de-formal', 'dsb', 'dz',
-			'el', 'eo', 'et',
+			'da', 'dsb', 'dz',
 			'fa', 'fi', 'fit', 'fiu-vro', 'fo', 'frr', 'fur',
 			'gan', 'gan-hans', 'gan-hant', 'gl', 'glk', 'grc', 'gsw', 'gu',
 			'he', 'hi', 'hr', 'hrx', 'hsb', 'hu', 'hy',
@@ -305,17 +314,15 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 			'ko', 'ko-kp', 'koi', 'krc', 'ks', 'ks-arab', 'ks-deva', 'ksh', 'ku-arab', 'kv',
 			'la', 'lb', 'lbe', 'lez', 'liv', 'lo', 'lzh',
 			'mai', 'mhr', 'mr', 'mrj', 'mwl', 'my', 'myv', 'mzn',
-			'nan', 'nb', 'nds', 'ne', 'new', 'nn', 'no',
+			'nan', 'nb', 'nds', 'ne', 'new',
 			'oc', 'or', 'os',
-			'pa', 'pdc', 'pdt', 'pfl', 'pi', 'pnt', 'pt', 'pt-br',
-			'ru', 'rue',
-			'sa', 'sah', 'sk', 'sl', 'sli', 'sr', 'sr-ec', 'sr-el', 'stq',
+			'pa', 'pdc', 'pdt', 'pfl', 'pi', 'pnt',
+			'sa', 'stq',
 			'tcy', 'tg', 'tg-cyrl', 'th', 'tyv',
 			'udm', 'uk', 'uz',
 			'vep', 'vi', 'vmf', 'vo', 'vot', 'vro',
 			'wuu',
-			'xal',
-			'yi', 'yue',
+			'yue',
 			'za', 'za', 'zh', 'zh-classical', 'zh-cn', 'zh-hans', 'zh-hant', 'zh-hk', 'zh-min-nan', 'zh-mo',
 			'zh-my', 'zh-sg', 'zh-tw', 'zh-yue'
 		);
