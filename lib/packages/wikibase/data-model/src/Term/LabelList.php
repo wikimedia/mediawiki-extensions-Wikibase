@@ -26,4 +26,8 @@ class LabelList extends TermList {
 		parent::__construct( $labels );
 	}
 
+	public function setLabel( Label $label ) {
+		$this->setTerm( $label );
+	}
+
 }

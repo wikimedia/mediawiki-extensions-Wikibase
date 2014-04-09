@@ -28,4 +28,27 @@ class LabelListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $descriptions, iterator_to_array( $list ) );
 	}
 
+	public function testGivenTermForNewLanguage_setLabelAddsLabel() {
+		$enLabel = new Label( 'en', 'foo' );
+		$deLabel = new Label( 'de', 'bar' );
+
+		$list = new LabelList( array( $enLabel ) );
+		$expectedList = new LabelList( array( $enLabel, $deLabel ) );
+
+		$list->setLabel( $deLabel );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenLabelForExistingLanguage_setLabelReplacesLabel() {
+		$enLabel = new Label( 'en', 'foo' );
+		$newEnLabel = new Label( 'en', 'bar' );
+
+		$list = new LabelList( array( $enLabel ) );
+		$expectedList = new LabelList( array( $newEnLabel ) );
+
+		$list->setLabel( $newEnLabel );
+		$this->assertEquals( $expectedList, $list );
+	}
+
 }

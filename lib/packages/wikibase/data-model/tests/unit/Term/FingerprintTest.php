@@ -3,6 +3,8 @@
 namespace Wikibase\DataModel\Term\Test;
 
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Label;
+use Wikibase\DataModel\Term\LabelList;
 
 /**
  * @covers Wikibase\DataModel\Term\Fingerprint
@@ -12,21 +14,27 @@ use Wikibase\DataModel\Term\Fingerprint;
  */
 class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
+	private $labels;
+	private $descriptions;
+	private $aliases;
+
+	public function setUp() {
+		$this->labels = $this->getMockBuilder( 'Wikibase\DataModel\Term\LabelList' )
+			->disableOriginalConstructor()->getMock();
+
+		$this->descriptions = $this->getMockBuilder( 'Wikibase\DataModel\Term\DescriptionList' )
+			->disableOriginalConstructor()->getMock();
+
+		$this->aliases = $this->getMockBuilder( 'Wikibase\DataModel\Term\AliasGroupList' )
+			->disableOriginalConstructor()->getMock();
+	}
+
 	public function testConstructorSetsValues() {
-		$labels = $this->getMockBuilder( 'Wikibase\DataModel\Term\LabelList' )
-			->disableOriginalConstructor()->getMock();
+		$fingerprint = new Fingerprint( $this->labels, $this->descriptions, $this->aliases );
 
-		$descriptions = $this->getMockBuilder( 'Wikibase\DataModel\Term\DescriptionList' )
-			->disableOriginalConstructor()->getMock();
-
-		$aliases = $this->getMockBuilder( 'Wikibase\DataModel\Term\AliasGroupList' )
-			->disableOriginalConstructor()->getMock();
-
-		$fingerprint = new Fingerprint( $labels, $descriptions, $aliases );
-
-		$this->assertEquals( $labels, $fingerprint->getLabels() );
-		$this->assertEquals( $descriptions, $fingerprint->getDescriptions() );
-		$this->assertEquals( $aliases, $fingerprint->getAliases() );
+		$this->assertEquals( $this->labels, $fingerprint->getLabels() );
+		$this->assertEquals( $this->descriptions, $fingerprint->getDescriptions() );
+		$this->assertEquals( $this->aliases, $fingerprint->getAliases() );
 	}
 
 }
