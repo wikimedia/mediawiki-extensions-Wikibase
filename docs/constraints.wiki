@@ -1,0 +1,94 @@
+This document describes how, when and where constraints on Wikibase
+Entities are enforced and defined.
+
+
+== Local Constraints ==
+
+Local constraints (aka input constraints) are constraints imposed
+locally on Entities or parts of Entities. They are checked only upon
+''direct modification'' of ''that part'' of the Entity, and are not
+enforced for (parts of) Entities already in the database.
+
+Furthermore, (local) input constraints can impose constraints on
+modifications, that is, constraints that take into account an Entitie's
+''previous state'' (such as ''main snak continuity'' below).
+
+'''NOTE''': it shall be possible to modify any part of an Entity even
+if some other part of that Entity is violating a local constraint.
+This allows local constraints to be added or tightened without
+rendering existing entities invalid; more importantly, it allows
+partially corrupt entities to be handled by the system, e.g. for manual
+repair.
+
+'''NOTE''': checking a local constraint may require knowledge of
+the current state of the database; however, violating such a
+constraint does not violate the integrity of the database. For
+instance, data values that reference other entities should be checked
+to be referencing an ''existing'' entity, but it is not a violation of
+data integrity if an entity contains a "broken" reference.
+
+Local constraints are enforced by the respective ChangeOps. Snak
+validation is largely based on the validators provided by the DataType
+objects which are constructed in WikibaseDataTypeBuilders, while the
+validators for terms come fro the TermValidatorFactory.
+
+Examples of local constraints include:
+* Data value validity (referencing only existing Items, range checks, no empty strings, valid unicode, etc).
+* Snak integrity (referencing an existing Property, using the correct data value type).
+* Main snak continuity: A Claim's main Snak can not be changed to a Snak about a different Property than the current main Snak.
+* Property labels must not be valid (well formed) Property IDs. NOTE: for technical reasons, this may be implements as a global constraint, even though this is not necessary.
+
+
+== Global Constraints ==
+
+Global constraints are constraints that require knowledge of the entire
+Entity and possible the state of the database in order to be enforced.
+There are "hard" and "non-hard" global constraints; for ''hard'' global
+constraints, see the next section below.
+
+Non-hard global constraints are enforced on most save operations
+(notable exceptions are things like import or undelete). They
+are triggered by the EditEntity controller and currently
+encapsulated in the PreSaveChecks class, though that may change
+without notice.
+
+'''NOTE''': Checks on non-hard global constraints can be optimized to
+consider only the parts of an Entity changed by the edit at hand; that
+is, they may be based on the diff between the Entity's old and new
+state. This means that it may or may not be possile to edit an entity
+that violates a (non-hard) global constraint in a part that was not
+presently edited.
+
+TBD: canonical location defining such constraints, mechanism for
+registering new constraints.
+
+Currently, the following (non-hard) global constraints are defined:
+* If an Item has a label and a description for a given language, no other Item may have that same combination for the same language.
+* Term (fingerprint) validity (labels are not too long, language codes are known, etc). NOTE: this is really a local constraint and will be moved!
+
+
+== Hard Constraints ==
+
+Hard constraints are global constraints that are required by the data
+model. Violating a hard constraint means breaking the integrity of the
+database and may render the entire system unusable.
+
+Hard constraints are enforced on ''every'' save of an Entity. They are
+checked during the database transaction that modifies the page table.
+The method EntityContent::getOnSaveValidators() supplies the validators
+to use for validating hard constraints.
+
+'''NOTE:''' hard constraints must always consider the full Entity, and
+compare it to the actual current state of the dta model, as stored in
+the database.
+
+TBD: canonical location defining such constraints, mechanism for
+registering new constraints.
+
+Currently, the following hard global constraints are enforced for the
+standard entity types:
+
+* The lables of Properties (but not Items) must be unique per language.
+* Site links are unique, that is, only one Item can contain a given sitelink.
+* Any Item can only contain one SiteLink for any given site.
+
