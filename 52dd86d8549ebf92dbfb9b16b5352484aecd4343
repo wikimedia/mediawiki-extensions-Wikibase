@@ -16,6 +16,24 @@
       "revId": "52dd86d8549ebf92dbfb9b16b5352484aecd4343",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_48df2111",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpMainSnakTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-09T10:48:20Z",
+      "side": 1,
+      "message": "No, why? This class is in the same directory a.k.a. namespace.",
+      "parentUuid": "8e23439c_c648c38e",
+      "revId": "52dd86d8549ebf92dbfb9b16b5352484aecd4343",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

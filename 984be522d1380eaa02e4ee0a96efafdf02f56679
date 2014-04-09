@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_08b249e1",
+        "filename": "repo/includes/ChangeOp/ChangeOpMainSnak.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-09T10:48:20Z",
+      "side": 0,
+      "message": "I was referring to this removed method. Never mind, I just remembered this is a result of the refactoring of how a \"change\" works (it doesn\u0027t edit, it deletes and re-adds).",
+      "revId": "984be522d1380eaa02e4ee0a96efafdf02f56679",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
