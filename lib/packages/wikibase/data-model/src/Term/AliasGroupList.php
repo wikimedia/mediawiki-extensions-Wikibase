@@ -87,8 +87,17 @@ class AliasGroupList implements Countable, IteratorAggregate {
 		}
 	}
 
+	/**
+	 * If the group is empty, it will not be stored.
+	 * In case the language of that group had an associated group, that group will be removed.
+	 *
+	 * @param AliasGroup $group
+	 */
 	public function setGroup( AliasGroup $group ) {
-		if ( !$group->isEmpty() ) {
+		if ( $group->isEmpty() ) {
+			unset( $this->groups[$group->getLanguageCode()] );
+		}
+		else {
 			$this->groups[$group->getLanguageCode()] = $group;
 		}
 	}
