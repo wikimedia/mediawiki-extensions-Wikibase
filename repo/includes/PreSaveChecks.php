@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 use Status;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * Encapsulates programmatic checks to perform before checking an item.
@@ -24,8 +26,9 @@ class PreSaveChecks {
 	 */
 	private $termIndex;
 
-	public function __construct( TermIndex $termIndex ) {
+	public function __construct( TermIndex $termIndex, EntityIdParser $entityIdParser ) {
 		$this->termIndex = $termIndex;
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -70,7 +73,35 @@ class PreSaveChecks {
 			);
 		}
 
+		if ( $entity->getType() === Property::ENTITY_TYPE ) {
+			$this->addLabelEntityIdConflicts( $entity, $status, Property::ENTITY_TYPE );
+		}
+
 		return $status;
+	}
+
+	/**
+	 * Adds errors to the status if there are labels that represent a valid entity id.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 * @param Status $status
+	 * @param string $forbiddenEntityType entity type that should lead to a conflict
+	 */
+	protected function addLabelEntityIdConflicts( Entity $entity, Status $status, $forbiddenEntityType ) {
+
+		foreach ( $entity->getLabels() as $labelText ) {
+			try {
+				$entityId = $this->entityIdParser->parse( $labelText );
+				if ( $entityId->getEntityType() === $forbiddenEntityType ) {
+					// The label is a valid ID - we don't like that!
+					$status->fatal( 'wikibase-error-label-no-entityid' );
+				}
+			} catch ( EntityIdParsingException $parseException ) {
+				// All fine, the parsing did not work, so there is no entity id :)
+			}
+		}
 	}
 
 }

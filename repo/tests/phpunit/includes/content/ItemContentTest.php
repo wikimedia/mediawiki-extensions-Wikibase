@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use MediaWikiSite;
 use SiteSQLStore;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;

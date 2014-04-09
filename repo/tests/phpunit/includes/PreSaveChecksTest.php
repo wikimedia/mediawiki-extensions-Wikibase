@@ -2,7 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\PreSaveChecks;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -26,11 +27,13 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
+				'Wikibase\DataModel\Entity\Item',
 				array(),
 				array(),
 				false
 			),
 			array(
+				'Wikibase\DataModel\Entity\Item',
 				array(
 					'label' => array( 'de' => 'xxx' ),
 				),
@@ -42,6 +45,7 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 			array(
+				'Wikibase\DataModel\Entity\Item',
 				array(
 					'description' => array( 'de' => 'xxx' ),
 				),
@@ -53,6 +57,7 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 			array(
+				'Wikibase\DataModel\Entity\Property',
 				array(
 					'aliases' => array( 'de' => array( 'xxx' ) ),
 				),
@@ -61,6 +66,18 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 				),
 				array(
 					'wikibase-error-constraint-violation-aliases'
+				)
+			),
+			array(
+				'Wikibase\DataModel\Entity\Property',
+				array(
+					'label' => array( 'de' => 'xxx' ),
+				),
+				array(
+					'label' => array( 'de' => 'P17' ),
+				),
+				array(
+					'wikibase-error-label-no-entityid'
 				)
 			),
 		);
@@ -73,15 +90,18 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 	 * @param $newData
 	 * @param $errors
 	 */
-	public function testApplyPreSaveChecks( $oldData, $newData, $errors ) {
+	public function testApplyPreSaveChecks( $class, $oldData, $newData, $errors ) {
 		//TODO: mock the MultiLangConstraintDetector used by PreSaveChecks
 		//TODO: mock the LabelDescriptionDuplicateDetector used by PreSaveChecks
 
 		$termIndex = $this->getMock( 'Wikibase\TermIndex' );
-		$checks = new PreSaveChecks( $termIndex );
+		$idParser = new BasicEntityIdParser();
+		$checks = new PreSaveChecks( $termIndex, $idParser );
 
-		$oldEntity = Item::newFromArray( $oldData );
-		$newEntity = Item::newFromArray( $newData );
+		/* @var Entity $oldEntity */
+		/* @var Entity $newEntity */
+		$oldEntity = $class::newFromArray( $oldData );
+		$newEntity = $class::newFromArray( $newData );
 		$diff = $oldEntity->getDiff( $newEntity );
 
 		$status = $checks->applyPreSaveChecks( $newEntity, $diff );

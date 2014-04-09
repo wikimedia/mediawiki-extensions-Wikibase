@@ -22,12 +22,15 @@ use RecursiveIteratorIterator;
 use RequestContext;
 use Revision;
 use SearchResult;
+use SiteSQLStore;
 use Skin;
 use SkinTemplate;
 use SpecialSearch;
 use SplFileInfo;
 use Title;
 use User;
+use Wikibase\content\SiteLinkUniquenessValidator;
+use Wikibase\content\LabelUniquenessValidator;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
@@ -1223,5 +1226,60 @@ final class RepoHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Handler for the ContentHandlerForModelID hook, implemented to create EntityHandler
+	 * instances that have knowledge of the necessary services.
+	 *
+	 * @param string $modelId
+	 * @param ContentHandler|null $handler
+	 *
+	 * @return bool
+	 */
+	public static function onContentHandlerForModelID( $modelId, &$handler ) {
+		switch ( $modelId ) {
+			case CONTENT_MODEL_WIKIBASE_ITEM:
+				$handler = self::newItemHandler();
+				return false;
+
+			case CONTENT_MODEL_WIKIBASE_PROPERTY:
+				$handler = self::newPropertyHandler();
+				return false;
+
+			default:
+				return true;
+		}
+	}
+
+	private static function newItemHandler() {
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		// NOTE: This is only for hard constraints.
+		//       So, check the item's site links, but don't check label/description uniqueness.
+		$validators = array(
+			new SiteLinkUniquenessValidator(
+				$repo->getEntityTitleLookup(),
+				$repo->getStore()->newSiteLinkCache(),
+				SiteSQLStore::newInstance()
+			)
+		);
+
+		return new ItemHandler( $validators );
+	}
+
+	private static function newPropertyHandler() {
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		// NOTE: This is only for hard constraints.
+		//       Check that the property's labels are unique (per language),
+		//       but don't check again that labels aren't be IDs.
+		$validators = array(
+			new LabelUniquenessValidator(
+				$repo->getStore()->getTermIndex()
+			)
+		);
+
+		return new PropertyHandler( $validators );
 	}
 }

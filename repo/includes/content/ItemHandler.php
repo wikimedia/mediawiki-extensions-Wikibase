@@ -27,8 +27,11 @@ class ItemHandler extends EntityHandler {
 		return '\Wikibase\ItemContent';
 	}
 
-	public function __construct() {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
+	/**
+	 * @param PreSaveValidator[] $preSaveValidators
+	 */
+	public function __construct( $preSaveValidators ) {
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $preSaveValidators );
 	}
 
 	/**
