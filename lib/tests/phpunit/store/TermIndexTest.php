@@ -420,7 +420,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			&& wfGetDB( DB_MASTER )->getType() === 'mysql'
 			&& get_class( $lookup ) === 'Wikibase\TermSqlIndex' ) {
 			// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
-			$this->assertTrue( true );
+			$this->markTestSkipped( 'Can\'t test self-joins on MySQL' );
 			return;
 		}
 

@@ -57,6 +57,9 @@ abstract class EntityHandler extends ContentHandler {
 	abstract protected function getContentClass();
 
 	/**
+	 * Returns a set of validators for enforcing hard constraints on the content
+	 * before saving. For soft constraints, see the TermValidatorFactory.
+	 *
 	 * @return EntityValidator[]
 	 */
 	public function getOnSaveValidators() {
