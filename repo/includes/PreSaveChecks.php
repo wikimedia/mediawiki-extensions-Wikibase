@@ -2,37 +2,43 @@
 
 namespace Wikibase;
 
+use Diff\DiffOp\Diff\Diff;
 use Status;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
+use ValueValidators\ValueValidator;
+use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\content\EntityValidator;
+use Wikibase\Validators\TermValidatorFactory;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Encapsulates programmatic checks to perform before checking an item.
  *
- * @todo This was factored out of EditEntity as a quick and dirty measure.
- * The process of enforcing constraints on this level should be re-thought and
- * properly refactored.
+ * @todo: Factor ChangeValidation into ChangeOps.
  *
  * @since 0.5
  *
  * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
 class PreSaveChecks {
 
 	/**
-	 * @var TermIndex
+	 * @param TermValidatorFactory $termValidatorFactory
+	 * @param ValidatorErrorLocalizer $validatorErrorLocalizer
 	 */
-	private $termIndex;
-
-	public function __construct( TermIndex $termIndex, EntityIdParser $entityIdParser ) {
-		$this->termIndex = $termIndex;
-		$this->entityIdParser = $entityIdParser;
+	public function __construct(
+		TermValidatorFactory $termValidatorFactory,
+		ValidatorErrorLocalizer $validatorErrorLocalizer
+	) {
+		$this->termValidatorFactory = $termValidatorFactory;
+		$this->validatorErrorLocalizer = $validatorErrorLocalizer;
 	}
 
 	/**
 	 * Implements pre-safe checks.
+	 *
+	 * @note: This is a preliminary implementation. This entire class will be redundant
+	 * once validation is done in ChangeOps.
 	 *
 	 * @param Entity $entity
 	 * @param EntityDiff $entityDiff
@@ -40,68 +46,103 @@ class PreSaveChecks {
 	 * @return Status
 	 */
 	public function applyPreSaveChecks( Entity $entity, EntityDiff $entityDiff = null ) {
-		$status = Status::newGood();
-
-		$multilangViolationDetector = new MultiLangConstraintDetector();
-		$multilangViolationDetector->addConstraintChecks(
-			$entity,
-			$status,
-			$entityDiff
-			//TODO: pass the limits from a constructor param
-		);
-
-		$dbw = wfGetDB( DB_MASTER );
-
-		// FIXME: Do not run this when running test using MySQL as self joins fail on temporary tables.
-		if ( !defined( 'MW_PHPUNIT_TEST' )
-			|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
-			|| $dbw->getType() !== 'mysql' ) {
-
-			// The below looks for all conflicts and then removes the ones not
-			// caused by the edit. This can be improved by only looking for
-			// those conflicts that can be caused by the edit.
-
-			$termViolationDetector = new LabelDescriptionDuplicateDetector(
-				$this->termIndex
-			);
-
-			$termViolationDetector->addLabelDescriptionConflicts(
-				$entity,
-				$status,
-				$entityDiff === null ? null : $entityDiff->getLabelsDiff(),
-				$entityDiff === null ? null : $entityDiff->getDescriptionsDiff()
-			);
+		if ( $entityDiff ) {
+			$labelLanguagesToCheck = $this->getLanguagesToCheck( $entityDiff->getLabelsDiff() );
+			$descriptionLanguagesToCheck = $this->getLanguagesToCheck( $entityDiff->getDescriptionsDiff() );
+			$aliasLanguagesToCheck = $this->getLanguagesToCheck( $entityDiff->getAliasesDiff() );
+		} else {
+			$labelLanguagesToCheck = array_keys( $entity->getLabels() );
+			$descriptionLanguagesToCheck = array_keys( $entity->getDescriptions() );
+			$aliasLanguagesToCheck = array_keys( $entity->getAllAliases() );
 		}
 
-		if ( $entity->getType() === Property::ENTITY_TYPE ) {
-			$this->addLabelEntityIdConflicts( $entity, $status, Property::ENTITY_TYPE );
+		$entityType = $entity->getType();
+
+		$status = Status::newGood();
+
+		try {
+			$languageValidator = $this->termValidatorFactory->getLanguageValidator();
+
+			$this->checkStringsRecursive( $labelLanguagesToCheck, $languageValidator );
+			$this->checkStringsRecursive( $descriptionLanguagesToCheck, $languageValidator );
+			$this->checkStringsRecursive( $aliasLanguagesToCheck, $languageValidator );
+
+			$this->checkStringsRecursive(
+				$entity->getLabels( $labelLanguagesToCheck ),
+				$this->termValidatorFactory->getLabelValidator( $entityType )
+			);
+
+			$this->checkStringsRecursive(
+				$entity->getDescriptions( $descriptionLanguagesToCheck ),
+				$this->termValidatorFactory->getDescriptionValidator( $entityType )
+			);
+
+			$this->checkStringsRecursive(
+				$entity->getAllAliases( $aliasLanguagesToCheck ),
+				$this->termValidatorFactory->getAliasValidator( $entityType )
+			);
+
+			$uniquenessValidator = $this->termValidatorFactory->getUniquenessValidator( $entityType );
+			$this->checkEntityConstraint( $entity, $uniquenessValidator );
+		} catch ( ChangeOpValidationException $ex ) {
+			// NOTE: We use a ChangeOpValidationException here, since we plan
+			// to move the validation into the ChangeOps anyway.
+			$status = $this->validatorErrorLocalizer->getResultStatus( $ex->getValidationResult() );
 		}
 
 		return $status;
 	}
 
 	/**
-	 * Adds errors to the status if there are labels that represent a valid entity id.
-	 *
-	 * @since 0.5
-	 *
 	 * @param Entity $entity
-	 * @param Status $status
-	 * @param string $forbiddenEntityType entity type that should lead to a conflict
+	 * @param EntityValidator $validator
+	 *
+	 * @throws ChangeOpValidationException
 	 */
-	protected function addLabelEntityIdConflicts( Entity $entity, Status $status, $forbiddenEntityType ) {
+	private function checkEntityConstraint( Entity $entity, EntityValidator $validator ) {
+		$result = $validator->validateEntity( $entity );
 
-		foreach ( $entity->getLabels() as $labelText ) {
-			try {
-				$entityId = $this->entityIdParser->parse( $labelText );
-				if ( $entityId->getEntityType() === $forbiddenEntityType ) {
-					// The label is a valid ID - we don't like that!
-					$status->fatal( 'wikibase-error-label-no-entityid' );
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
+		}
+	}
+
+	/**
+	 * Checks a list of terms using the given validator.
+	 * If the entries in the list are arrays, the check is performed recursively.
+	 *
+	 * @param string[]|array $terms
+	 * @param ValueValidator $validator
+	 *
+	 * @throws ChangeOpValidationException
+	 */
+	private function checkStringsRecursive( array $terms, ValueValidator $validator ) {
+		foreach ( $terms as $term ) {
+			if ( is_array( $term ) ) {
+				// check recursively
+				$this->checkStringsRecursive( $term, $validator );
+			} else {
+				$result = $validator->validate( $term );
+
+				if ( !$result->isValid() ) {
+					throw new ChangeOpValidationException( $result );
 				}
-			} catch ( EntityIdParsingException $parseException ) {
-				// All fine, the parsing did not work, so there is no entity id :)
 			}
 		}
 	}
 
+	/**
+	 * Gets the keys of all additions and other changes in the diff.
+	 * Removals are ignored.
+	 *
+	 * @param Diff $diff
+	 *
+	 * @return string[]|int[]
+	 */
+	private function getLanguagesToCheck( Diff $diff ) {
+		return array_unique( array_diff(
+			array_keys( $diff->getOperations() ),
+			array_keys( $diff->getRemovals() )
+		) );
+	}
 }
