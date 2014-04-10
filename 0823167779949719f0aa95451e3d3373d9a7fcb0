@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_79ff46a8",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-10T14:48:10Z",
+      "side": 1,
+      "message": "eww bad comment",
+      "revId": "0823167779949719f0aa95451e3d3373d9a7fcb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_59fc8ab1",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-10T14:48:10Z",
+      "side": 1,
+      "message": "eww bad comment",
+      "revId": "0823167779949719f0aa95451e3d3373d9a7fcb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9919022a",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-10T14:48:10Z",
+      "side": 1,
+      "message": "missing space in braces",
+      "revId": "0823167779949719f0aa95451e3d3373d9a7fcb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b91cbe19",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-10T14:48:10Z",
+      "side": 1,
+      "message": "missing spaces in braces",
+      "revId": "0823167779949719f0aa95451e3d3373d9a7fcb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
