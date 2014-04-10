@@ -17,12 +17,10 @@ use Wikibase\DataModel\Internal\ObjectComparer;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Description;
-use Wikibase\DataModel\Term\DescriptionList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\DataModel\Term\Label;
-use Wikibase\DataModel\Term\LabelList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Represents a single Wikibase entity.
@@ -934,20 +932,20 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 		$labels = array();
 
 		foreach ( $this->getLabels() as $languageCode => $label ) {
-			$labels[] = new Label( $languageCode, $label );
+			$labels[] = new Term( $languageCode, $label );
 		}
 
-		return new LabelList( $labels );
+		return new TermList( $labels );
 	}
 
 	private function getDescriptionList() {
 		$descriptions = array();
 
 		foreach ( $this->getDescriptions() as $languageCode => $description ) {
-			$descriptions[] = new Description( $languageCode, $description );
+			$descriptions[] = new Term( $languageCode, $description );
 		}
 
-		return new DescriptionList( $descriptions );
+		return new TermList( $descriptions );
 	}
 
 	private function getAliasGroupList() {

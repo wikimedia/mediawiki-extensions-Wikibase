@@ -7,12 +7,8 @@
 * Added `Wikibase\DataModel\Term` namespace with these constructs:
 	* Term\AliasGroup
 	* Term\AliasGroupList
-	* Term\Description
-	* Term\DescriptionList
 	* Term\Fingerprint
 	* Term\FingerprintProvider
-	* Term\Label
-	* Term\LabelList
 	* Term\Term
 	* Term\TermList
 * Added `Entity::getFingerprint`

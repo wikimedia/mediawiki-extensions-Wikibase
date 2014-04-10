@@ -15,8 +15,8 @@ class Fingerprint {
 	 */
 	public static function newEmpty() {
 		return new self(
-			new LabelList( array() ),
-			new DescriptionList( array() ),
+			new TermList( array() ),
+			new TermList( array() ),
 			new AliasGroupList( array() )
 		);
 	}
@@ -25,21 +25,21 @@ class Fingerprint {
 	private $descriptions;
 	private $aliases;
 
-	public function __construct( LabelList $labels, DescriptionList $descriptions, AliasGroupList $aliases ) {
+	public function __construct( TermList $labels, TermList $descriptions, AliasGroupList $aliases ) {
 		$this->labels = $labels;
 		$this->descriptions = $descriptions;
 		$this->aliases = $aliases;
 	}
 
 	/**
-	 * @return LabelList
+	 * @return TermList
 	 */
 	public function getLabels() {
 		return $this->labels;
 	}
 
 	/**
-	 * @return DescriptionList
+	 * @return TermList
 	 */
 	public function getDescriptions() {
 		return $this->descriptions;

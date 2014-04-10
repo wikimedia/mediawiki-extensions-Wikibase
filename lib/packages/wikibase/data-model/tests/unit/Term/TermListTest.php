@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Term\Test;
 
-use Wikibase\DataModel\Term\Label;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
@@ -26,8 +26,8 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	private function getTwoTerms() {
 		return array(
-			'en' => new Label( 'en', 'foo' ),
-			'de' => new Label( 'de', 'bar' ),
+			'en' => new Term( 'en', 'foo' ),
+			'de' => new Term( 'de', 'bar' ),
 		);
 	}
 
@@ -41,23 +41,23 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenTermsWithTheSameLanguage_onlyTheLastOnesAreRetained() {
 		$array = array(
-			new Label( 'en', 'foo' ),
-			new Label( 'en', 'bar' ),
+			new Term( 'en', 'foo' ),
+			new Term( 'en', 'bar' ),
 
-			new Label( 'de', 'baz' ),
+			new Term( 'de', 'baz' ),
 
-			new Label( 'nl', 'bah' ),
-			new Label( 'nl', 'blah' ),
-			new Label( 'nl', 'spam' ),
+			new Term( 'nl', 'bah' ),
+			new Term( 'nl', 'blah' ),
+			new Term( 'nl', 'spam' ),
 		);
 
 		$list = new TermList( $array );
 
 		$this->assertEquals(
 			array(
-				'en' => new Label( 'en', 'bar' ),
-				'de' => new Label( 'de', 'baz' ),
-				'nl' => new Label( 'nl', 'spam' ),
+				'en' => new Term( 'en', 'bar' ),
+				'de' => new Term( 'de', 'baz' ),
+				'nl' => new Term( 'nl', 'spam' ),
 			),
 			iterator_to_array( $list )
 		);
@@ -70,8 +70,8 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenTerms_toTextArrayReturnsTermsInFormat() {
 		$list = new TermList( array(
-			new Label( 'en', 'foo' ),
-			new Label( 'de', 'bar' ),
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
 		) );
 
 		$this->assertEquals(
@@ -85,22 +85,22 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCanIterateOverList() {
 		$list = new TermList( array(
-			new Label( 'en', 'foo' ),
+			new Term( 'en', 'foo' ),
 		) );
 
 		foreach ( $list as $key => $term ) {
 			$this->assertEquals( 'en', $key );
-			$this->assertEquals( new Label( 'en', 'foo' ), $term );
+			$this->assertEquals( new Term( 'en', 'foo' ), $term );
 		}
 	}
 
 	public function testGivenSetLanguageCode_getByLanguageReturnsGroup() {
-		$enTerm = new Label( 'en', 'a' );
+		$enTerm = new Term( 'en', 'a' );
 
 		$list = new TermList( array(
-			new Label( 'de', 'b' ),
+			new Term( 'de', 'b' ),
 			$enTerm,
-			new Label( 'nl', 'c' ),
+			new Term( 'nl', 'c' ),
 		) );
 
 		$this->assertEquals( $enTerm, $list->getByLanguage( 'en' ) );
@@ -122,8 +122,8 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testHasTermForLanguage() {
 		$list = new TermList( array(
-			new Label( 'en', 'foo' ),
-			new Label( 'de', 'bar' ),
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
 		) );
 
 		$this->assertTrue( $list->hasTermForLanguage( 'en' ) );
@@ -138,8 +138,8 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNotSetLanguageCode_removeByLanguageDoesNoOp() {
 		$list = new TermList( array(
-			new Label( 'en', 'foo' ),
-			new Label( 'de', 'bar' ),
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
 		) );
 
 		$list->removeByLanguage( 'nl' );
@@ -148,10 +148,10 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenSetLanguageCode_removeByLanguageRemovesIt() {
-		$deTerm = new Label( 'de', 'bar' );
+		$deTerm = new Term( 'de', 'bar' );
 
 		$list = new TermList( array(
-			new Label( 'en', 'foo' ),
+			new Term( 'en', 'foo' ),
 			$deTerm,
 		) );
 
@@ -161,6 +161,29 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 			array( 'de' => $deTerm ),
 			iterator_to_array( $list )
 		);
+	}
+
+	public function testGivenTermForNewLanguage_setTermAddsTerm() {
+		$enTerm = new Term( 'en', 'foo' );
+		$deTerm = new Term( 'de', 'bar' );
+
+		$list = new TermList( array( $enTerm ) );
+		$expectedList = new TermList( array( $enTerm, $deTerm ) );
+
+		$list->setTerm( $deTerm );
+
+		$this->assertEquals( $expectedList, $list );
+	}
+
+	public function testGivenTermForExistingLanguage_setTermReplacesTerm() {
+		$enTerm = new Term( 'en', 'foo' );
+		$newEnTerm = new Term( 'en', 'bar' );
+
+		$list = new TermList( array( $enTerm ) );
+		$expectedList = new TermList( array( $newEnTerm ) );
+
+		$list->setTerm( $newEnTerm );
+		$this->assertEquals( $expectedList, $list );
 	}
 
 }
