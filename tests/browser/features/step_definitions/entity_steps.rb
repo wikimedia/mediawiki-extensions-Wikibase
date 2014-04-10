@@ -34,6 +34,7 @@ end
 Given /^I have an item with label "(.*)" and description "(.*)"$/ do |label,description|
   item_data = '{"labels":{"en":{"language":"en","value":"' + label + '"}},"descriptions":{"en":{"language":"en","value":"' + description + '"}}}'
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
   @item_under_test = wb_api.wb_create_entity(item_data, "item")
 end
 
@@ -53,11 +54,13 @@ end
 
 Given /^I have the following items:$/ do |handles|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
   @items = wb_api.wb_create_items(on(ItemPage).create_item_data(handles))
 end
 
 Given /^I have the following empty items:$/ do |handles|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
+  wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
   @items = wb_api.wb_create_items(on(ItemPage).create_item_data(handles, true))
 end
 
