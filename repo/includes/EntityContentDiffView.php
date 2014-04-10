@@ -7,6 +7,7 @@ use Diff\Comparer\ComparableComparer;
 use Diff\OrderedListDiffer;
 use DifferenceEngine;
 use Html;
+use IContextSource;
 use Linker;
 use ParserOptions;
 use ParserOutput;
@@ -54,7 +55,7 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * @see DifferenceEngine::__construct
 	 *
-	 * @param null $context
+	 * @param IContextSource|null $context
 	 * @param int $old
 	 * @param int $new
 	 * @param int $rcid
@@ -91,9 +92,9 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * @see DifferenceEngine::addHeader
 	 *
-	 * @param $diff
-	 * @param $otitle
-	 * @param $ntitle
+	 * @param string $diff
+	 * @param string $otitle
+	 * @param string $ntitle
 	 * @param string $multi
 	 * @param string $notice
 	 *
@@ -110,6 +111,7 @@ abstract class EntityContentDiffView extends DifferenceEngine {
 	 * @param $rev Revision
 	 * @param $complete String: 'complete' to get the header wrapped depending
 	 *        the visibility of the revision and a link to edit the page.
+	 *
 	 * @return String HTML fragment
 	 */
 	protected function getRevisionHeader( Revision $rev, $complete = '' ) {

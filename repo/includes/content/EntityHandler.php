@@ -4,11 +4,15 @@ namespace Wikibase;
 
 use Content;
 use ContentHandler;
+use IContextSource;
+use Language;
 use MWContentSerializationException;
 use MWException;
+use ParserOptions;
+use RequestContext;
 use Revision;
 use Title;
-use RequestContext;
+use User;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
@@ -100,8 +104,8 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @param \Content $content
-	 * @param null|string $format
+	 * @param Content $content
+	 * @param string|null $format
 	 *
 	 * @throws MWException
 	 * @return string
@@ -131,12 +135,12 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @param $blob
-	 * @param null $format
-	 * @return mixed
+	 * @param string $blob
+	 * @param string|null $format
 	 *
 	 * @throws MWException
-	 * @throws \MWContentSerializationException
+	 * @throws MWContentSerializationException
+	 * @return mixed
 	 */
 	protected function unserializedData( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
@@ -179,7 +183,8 @@ abstract class EntityHandler extends ContentHandler {
 	 * This implementation returns true if and only if the given title's namespace
 	 * is the same as the one returned by $this->getEntityNamespace().
 	 *
-	 * @param \Title $title
+	 * @param Title $title
+	 *
 	 * @return bool true if $title represents a page in the appropriate entity namespace.
 	 */
 	public function canBeUsedOn( Title $title ) {
@@ -217,7 +222,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param Title        $title the page to determine the language for.
 	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
 	 *
-	 * @return \Language the page's language
+	 * @return Language The page's language
 	 */
 	public function getPageViewLanguage( Title $title, Content $content = null ) {
 		global $wgLang;
@@ -239,7 +244,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param Title        $title the page to determine the language for.
 	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
 	 *
-	 * @return \Language the page's language
+	 * @return Language The page's language
 	 */
 	public function getPageLanguage( Title $title, Content $content = null ) {
 		global $wgContLang;

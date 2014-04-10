@@ -78,21 +78,20 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	protected function initTestEntities( array $handles, array $idMap = array() ) {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
-		foreach( $activeHandles as $handle => $id ) {
-			// TODO: Skip requests for handles that are reused anyway in the second loop below
+		foreach ( $activeHandles as $handle => $id ) {
 			$params = EntityTestHelper::getEntityClear( $handle );
 			$params['action'] = 'wbeditentity';
 			$this->doApiRequestWithToken( $params );
 		}
 
-		foreach( $handles as $handle ) {
+		foreach ( $handles as $handle ) {
 			$params = EntityTestHelper::getEntity( $handle );
 			$params['action'] = 'wbeditentity';
 
 			EntityTestHelper::injectIds( $params, $idMap );
 			EntityTestHelper::injectIds( $params, EntityTestHelper::$defaultPlaceholderValues );
 
-			list($res,,) = $this->doApiRequestWithToken( $params );
+			list( $res, , ) = $this->doApiRequestWithToken( $params );
 			EntityTestHelper::registerEntity( $handle, $res['entity']['id'], $res['entity'] );
 
 			$idMap["%$handle%"] = $res['entity']['id'];
@@ -103,7 +102,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * Loads an entity from the database (via an API call).
 	 */
 	protected function loadEntity( $id ) {
-		list($res,,) = $this->doApiRequest(
+		list( $res, , ) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
 				'format' => 'json', // make sure IDs are used as keys.
@@ -119,22 +118,22 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param $exception array details of the exception to expect (type,code,message)
 	 */
 	public function doTestQueryExceptions( $params, $exception ) {
-		try{
-			if( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ) {
+		try {
+			if ( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ) {
 				$this->doApiRequest( $params );
 			} else {
 				$this->doApiRequestWithToken( $params );
 			}
 			$this->fail( "Failed to throw UsageException" );
 
-		} catch( UsageException $e ){
-			if( array_key_exists( 'type', $exception ) ) {
+		} catch( UsageException $e ) {
+			if ( array_key_exists( 'type', $exception ) ) {
 				$this->assertInstanceOf( $exception['type'], $e );
 			}
-			if( array_key_exists( 'code', $exception ) ) {
+			if ( array_key_exists( 'code', $exception ) ) {
 				$this->assertEquals( $exception['code'], $e->getCodeString() );
 			}
-			if( array_key_exists( 'message', $exception ) ){
+			if ( array_key_exists( 'message', $exception ) ) {
 				$this->assertContains( $exception['message'], $e->getMessage() );
 			}
 		}
@@ -217,7 +216,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['labels'] ) ) {
-			if( ! ( $expectEmptyArrays === false && $expected['labels'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['labels'] === array() ) ) {
 				$data = self::flattenArray( $actual['labels'], 'language', 'value' );
 				$exp = self::flattenArray( $expected['labels'], 'language', 'value' );
 
@@ -227,7 +226,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['descriptions'] ) ) {
-			if( ! ( $expectEmptyArrays === false && $expected['descriptions'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['descriptions'] === array() ) ) {
 				$data = self::flattenArray( $actual['descriptions'], 'language', 'value' );
 				$exp = self::flattenArray( $expected['descriptions'], 'language', 'value' );
 
@@ -237,7 +236,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			if( ! ( $expectEmptyArrays === false && $expected['sitelinks'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['sitelinks'] === array() ) ) {
 				$data = self::flattenArray( $actual['sitelinks'], 'site', 'title' );
 				$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
 
@@ -247,7 +246,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['aliases'] ) ) {
-			if( ! ( $expectEmptyArrays === false && $expected['aliases'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['aliases'] === array() ) ) {
 				$data = self::flattenArray( $actual['aliases'], 'language', 'value', true );
 				$exp = self::flattenArray( $expected['aliases'], 'language', 'value', true );
 
@@ -257,17 +256,17 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['claims'] ) ) {
-			if( ! ( $expectEmptyArrays === false && $expected['claims'] === array() ) ) {
+			if ( !( $expectEmptyArrays === false && $expected['claims'] === array() ) ) {
 				$data = self::flattenArray( $actual['claims'], 'mainsnak', 'value', true );
 				$exp = self::flattenArray( $expected['claims'], 'language', 'value', true );
 				$count = count( $expected['claims'] );
 
-				for( $i = 0; $i < $count; $i++ ) {
+				for ( $i = 0; $i < $count; $i++ ) {
 					$this->assertArrayHasKey( $i, $data['id'] );
 					$this->assertGreaterThanOrEqual( 39, strlen( $data['id'][$i] ) );
 				}
 				//unset stuff we dont actually want to compare
-				if( isset( $exp['id'] ) ) {
+				if ( isset( $exp['id'] ) ) {
 					$this->assertArrayHasKey( 'id', $data );
 				}
 				unset( $exp['id'] );
@@ -364,4 +363,5 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$comment = $rev->getComment();
 		$this->assertRegExp( $regex, $comment );
 	}
+
 }

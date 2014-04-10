@@ -2,6 +2,7 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use DataValues\IllegalValueException;
 use FormatJson;
 use InvalidArgumentException;
@@ -19,11 +20,10 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakConstructionService;
-use ApiBase;
 use Wikibase\Summary;
-use Wikibase\Lib\ClaimGuidValidator;
 
 /**
  * Helper class for modifying claims
@@ -113,6 +113,7 @@ class ClaimModificationHelper {
 	 * @param PropertyId $propertyId
 	 *
 	 * @throws UsageException
+	 * @throws LogicException
 	 * @return Snak
 	 */
 	public function getSnakInstance( $params, PropertyId $propertyId ) {
@@ -142,7 +143,7 @@ class ClaimModificationHelper {
 			$this->throwUsageException( 'Invalid snak: PropertyNotFoundException' . $ex->getMessage(), 'invalid-snak' );
 		}
 
-		throw new LogicException( 'throwUsageException() didn\'t thow an exception.' );
+		throw new LogicException( 'ClaimModificationHelper::throwUsageException did not throw a UsageException.' );
 	}
 
 	/**
@@ -185,8 +186,8 @@ class ClaimModificationHelper {
 	}
 
 	/**
-	 * @param $message
-	 * @param $code
+	 * @param string $message
+	 * @param string $code
 	 *
 	 * @throws UsageException
 	 */
@@ -206,8 +207,9 @@ class ClaimModificationHelper {
 	public function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
 		try {
 			$changeOp->apply( $entity, $summary );
-		} catch( ChangeOpException $exception ){
+		} catch ( ChangeOpException $exception ) {
 			$this->throwUsageException( 'Failed to apply changeOp: ' . $exception->getMessage(), 'modification-failed' );
 		}
 	}
+
 }
