@@ -6,7 +6,7 @@
 #
 # page object for the Special:ModifyEntity page
 
-class SpecialModifyEntityPage
+module SpecialModifyEntityPage
   include PageObject
 
   p(:anonymous_edit_warning, class: "warning")
