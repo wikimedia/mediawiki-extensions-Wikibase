@@ -34,6 +34,24 @@
       "revId": "267d08cc4d57eb24e3eb7a7e0df2c4584ef23c28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9e96884e",
+        "filename": "client/tests/phpunit/includes/ClientSiteLinkLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-10T12:44:42Z",
+      "side": 0,
+      "message": "For test cases, I would prefer explicit, redundant data over relying on things that get generated. Unless it\u0027s really hard to maintain the explicit data by hand.",
+      "parentUuid": "8e23439c_1c1deb66",
+      "revId": "267d08cc4d57eb24e3eb7a7e0df2c4584ef23c28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
