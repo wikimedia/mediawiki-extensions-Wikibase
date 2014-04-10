@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_9eca0849",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T13:00:42Z",
+      "side": 1,
+      "message": "Upper case namespace names please. PSR-0/4",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7ed72cf3",
+        "filename": "repo/includes/content/LabelUniquenessValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T13:00:42Z",
+      "side": 1,
+      "message": "Upper case namespace names please. PSR-0/4",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_becdc464",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T13:00:42Z",
+      "side": 1,
+      "message": "Upper case namespace names please. PSR-0/4",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3eb3f4e9",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T13:00:42Z",
+      "side": 1,
+      "message": "why is this all public?",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1eb838c2",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T13:00:42Z",
+      "side": 1,
+      "message": "our data providers follow the format fooBarProvider",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9ec3283d",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T13:00:42Z",
+      "side": 1,
+      "message": "If it needs to be an Entity, please type hint in the signature",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_dee880b1",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T13:00:42Z",
+      "side": 1,
+      "message": "This test case is very hard to understand. You actually just have one test, which states it tests a specific method. To then figure out what it does....",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
