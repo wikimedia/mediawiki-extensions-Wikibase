@@ -178,7 +178,7 @@ class ChangeOpsMerge {
 			}
 
 			if( $toMergeToClaim ) {
-				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim->getGuid() );
+				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim );
 			} else {
 				$this->toChangeOps->add( $this->changeOpFactory->newSetClaimOp( $toClaim ) );
 			}
@@ -214,17 +214,19 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * @param Statement $statement statement to take references from
-	 * @param string $claimGuid claim guid to add the references to
+	 * @param Statement $fromStatement statement to take references from
+	 * @param Statement $toStatement statement to add references to
 	 */
-	private function generateReferencesChangeOps( Statement $statement, $claimGuid ) {
+	private function generateReferencesChangeOps( Statement $fromStatement, Statement $toStatement ) {
 		/** @var $reference Reference */
-		foreach ( $statement->getReferences() as $reference ) {
-			$this->toChangeOps->add( $this->changeOpFactory->newSetReferenceOp(
-				$claimGuid,
-				$reference,
-				''
-			) );
+		foreach ( $fromStatement->getReferences() as $reference ) {
+			if ( !$toStatement->getReferences()->hasReferenceHash( $reference->getHash() ) ) {
+				$this->toChangeOps->add( $this->changeOpFactory->newSetReferenceOp(
+					$toStatement->getGuid(),
+					$reference,
+					''
+				) );
+			}
 		}
 	}
 
