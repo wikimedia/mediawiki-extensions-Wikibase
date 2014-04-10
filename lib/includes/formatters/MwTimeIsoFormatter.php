@@ -92,10 +92,17 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 		// we do not handle parsing arabic, farsi, etc. digits (bug 63732)
 		$normalisedDate = $this->normaliseDigits( $localisedDate );
 
-		//If we cant reliably fix the year return the full timestamp,
-		//  this should never happen as sprintfDate should always return a 4 digit year
 		if( !$this->canFormatYear( $normalisedDate, $matches ) ) {
-			return $extendedIsoTimestamp;
+			if( $this->language->getCode() !== 'en' ) {
+				//If something went wrong with this language then fallback to english formatting?
+				$enOptions = clone $this->options;
+				$enOptions->setOption( ValueFormatter::OPT_LANG, 'en' );
+				$mwTimeIsoFormatter = new MwTimeIsoFormatter( $enOptions );
+				return $mwTimeIsoFormatter->formatDate( $extendedIsoTimestamp, $precision );
+			} else {
+				//If we cant reliably fix the year return the full timestamp as a final fallback
+				return $extendedIsoTimestamp;
+			}
 		}
 
 		$formattedDate = str_replace(
