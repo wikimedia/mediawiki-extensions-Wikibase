@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_3429d336",
+        "filename": "tests/browser/features/special_set_label.feature",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-10T16:17:52Z",
+      "side": 1,
+      "message": "Huh?",
+      "revId": "93e4dd8fe616732756d179f30311ce6d2f53a253",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
