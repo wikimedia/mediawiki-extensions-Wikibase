@@ -51,6 +51,9 @@ GEM
       watir-webdriver (>= 0.6.8)
     page_navigation (0.9)
       data_magic (>= 0.14)
+    parallel (1.0.0)
+    parallel_tests (0.16.10)
+      parallel
     require_all (1.3.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -78,4 +81,5 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   mediawiki_selenium
+  parallel_tests
   require_all
