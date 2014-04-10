@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_d485ff5b",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-10T16:13:53Z",
+      "side": 1,
+      "message": "But the directory is called \"content\". I don\u0027t want to change that in this patch.",
+      "parentUuid": "8e23439c_9eca0849",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_7ed72cf3",
         "filename": "repo/includes/content/LabelUniquenessValidator.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-10T13:00:42Z",
       "side": 1,
       "message": "Upper case namespace names please. PSR-0/4",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_94978793",
+        "filename": "repo/includes/content/LabelUniquenessValidator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-10T16:13:53Z",
+      "side": 1,
+      "message": "What to do about the directory name?",
+      "parentUuid": "8e23439c_7ed72cf3",
       "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7494eb8d",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-10T16:13:53Z",
+      "side": 1,
+      "message": "Because PHP complains if I try to use a non-public method as a callback from another class.",
+      "parentUuid": "8e23439c_3eb3f4e9",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_1eb838c2",
         "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
         "patchSetId": 4
@@ -81,6 +135,24 @@
       "writtenOn": "2014-04-10T13:00:42Z",
       "side": 1,
       "message": "our data providers follow the format fooBarProvider",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_34ee7320",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-10T16:13:53Z",
+      "side": 1,
+      "message": "but that doesn\u0027t follow the convention of \"put a verb first\" :)",
+      "parentUuid": "8e23439c_1eb838c2",
       "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -115,6 +187,24 @@
       "writtenOn": "2014-04-10T13:00:42Z",
       "side": 1,
       "message": "This test case is very hard to understand. You actually just have one test, which states it tests a specific method. To then figure out what it does....",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_14da5778",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-10T16:13:53Z",
+      "side": 1,
+      "message": "It does only test a single method. The way it asserts the outcome is slighty non-trivial. Could split it into two tests I guess, but I find that annoying in its own way.",
+      "parentUuid": "8e23439c_dee880b1",
       "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
