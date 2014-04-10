@@ -37,6 +37,40 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_de9ac065",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T12:56:21Z",
+      "side": 1,
+      "message": "This comment seems to cover all lines below up till the profile one. How about putting this into its own method?",
+      "revId": "f5bb9bc72e12fba498dcef06d522676c18f95980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9e9c4861",
+        "filename": "repo/includes/content/LabelUniquenessValidator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-10T12:56:21Z",
+      "side": 1,
+      "message": "What is Property specific about this? I don\u0027t see anything property specific in the code here. And if it where property specific, I\u0027d expect that to be reflected in the class name",
+      "revId": "f5bb9bc72e12fba498dcef06d522676c18f95980",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_42b818c3",
         "filename": "repo/includes/content/OnSaveValidator.php",
         "patchSetId": 2
