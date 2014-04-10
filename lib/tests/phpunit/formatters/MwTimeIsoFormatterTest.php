@@ -275,22 +275,8 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 		// Different language tests at YEAR precision
 		$languageCodes = Utils::getLanguageCodes();
 		foreach( $languageCodes as $languageCode ) {
-			$expected = '3333';
-			if( in_array( $languageCode, array( 'sr', 'sr-ec', 'sr-el', 'hr' ) ) ) {
-				$expected = '3333.';
-			}
-			if( in_array( $languageCode, array( 'nan', 'zh-min-nan' ) ) ) {
-				$expected = '3333-"' . chr(49) . chr(195) . chr(174); // Is this right?
-			}
-			if( $languageCode === 'cdo' ) {
-				$expected = '3333 "' . chr(49) . chr(48) . chr(48) . chr(195) . chr(168) . '112'; // Is this right?
-			}
-			if( in_array( $languageCode, array( 'ko', 'ko-kp' ) ) ) {
-				$expected = '3333년'; // Is this right?
-			}
-
 			$argLists[] = array(
-				$expected,
+				'3333',
 				'+00000003333-01-01T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 				$languageCode

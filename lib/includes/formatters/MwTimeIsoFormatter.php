@@ -261,13 +261,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 		}
 
 		if( $precision < TimeValue::PRECISION_MONTH ) {
-			// Remove month placeholder:
-			$monthPlaceholder = $this->getMonthPlaceholder( $langCode );
-			if( $monthPlaceholder !== null ) {
-				$dateFormat = str_replace( $monthPlaceholder, '', $dateFormat );
-			} else {
-				$dateFormat = preg_replace( '/' . self::$monthPlaceholders[0] . '/', '', $dateFormat );
-			}
+			return 'Y';
 		}
 
 		// Trim any odd space chars
