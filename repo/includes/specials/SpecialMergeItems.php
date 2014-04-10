@@ -6,11 +6,9 @@ use Html;
 use UserInputException;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpFactory;
-use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Summary;
 use Wikibase\DataModel\Entity\EntityId;
 use Status;
@@ -46,12 +44,21 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	private $ignoreConflicts;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var ChangeOpFactory
+	 */
+	protected $changeOpFactory;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.5
 	 */
 	public function __construct() {
 		parent::__construct( 'MergeItems', 'item-merge' );
+
+		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
 	}
 
 	/**
@@ -141,8 +148,6 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 		if ( $this->fromItemRevision === null || $this->toItemRevision === null ) {
 			return false;
 		}
-		$sitelinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		try {
 			$changeOps = $this->changeOpFactory->newMergeOps(
 				$this->fromItemRevision->getEntity(),
