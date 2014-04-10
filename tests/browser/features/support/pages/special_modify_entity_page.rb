@@ -9,10 +9,8 @@
 class SpecialModifyEntityPage
   include PageObject
 
-  page_url URL.repo_url("Special:ModifyEntity")
-
-  p(:anonymous_edit_warning, :class => 'warning')
-  p(:error_message, :class => 'error')
-  text_field(:id_input_field, :id => 'wb-modifyentity-id')
+  p(:anonymous_edit_warning, class: "warning")
+  p(:error_message, class: "error")
+  text_field(:id_input_field, id: "wb-modifyentity-id")
 
 end

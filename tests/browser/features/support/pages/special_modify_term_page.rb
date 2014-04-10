@@ -9,9 +9,7 @@
 class SpecialModifyTermPage < SpecialModifyEntityPage
   include PageObject
 
-  page_url URL.repo_url("Special:ModifyTerm")
-
-  text_field(:language_input_field, :id => 'wb-modifyterm-language')
-  text_field(:term_input_field, :id => 'wb-modifyterm-value')
+  text_field(:language_input_field, id: "wb-modifyterm-language")
+  text_field(:term_input_field, id: "wb-modifyterm-value")
 
 end
