@@ -136,6 +136,7 @@ class Statement extends Claim {
 	 * Constructs a new Statement from an array in the same format as Claim::toArray returns.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.7.3
 	 *
 	 * @param array $data
 	 *

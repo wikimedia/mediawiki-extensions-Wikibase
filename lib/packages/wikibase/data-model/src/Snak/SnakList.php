@@ -192,6 +192,7 @@ class SnakList extends HashArray implements Snaks {
 	 * Factory for constructing a SnakList from its array representation.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.7.3
 	 *
 	 * @param array $data
 	 *

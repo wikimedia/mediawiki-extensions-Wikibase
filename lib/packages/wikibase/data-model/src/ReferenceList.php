@@ -194,6 +194,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	 * Factory for constructing a ReferenceList from its array representation.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.7.3
 	 *
 	 * @param array $data
 	 *

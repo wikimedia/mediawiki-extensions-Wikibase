@@ -34,6 +34,10 @@
     * setLabels
     * setDescriptions
     * setAllAliases
+* Deprecated `SnakList::newFromArray`
+* Deprecated `Statement::newFromArray`
+* Deprecated `Claim::newFromArray`
+* Deprecated `ReferenceList::newFromArray`
 
 ## Version 0.7.2 (2014-03-13)
 
