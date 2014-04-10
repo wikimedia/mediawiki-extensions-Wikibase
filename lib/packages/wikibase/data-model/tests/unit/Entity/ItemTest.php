@@ -8,17 +8,19 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityDiff;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -93,6 +95,9 @@ class ItemTest extends EntityTest {
 			) )
 		);
 
+		/**
+		 * @var Claim $claim
+		 */
 		foreach ( $claims as $i => $claim ) {
 			$claim->setGuid( "ItemTest\$claim-$i" );
 		}
@@ -111,34 +116,6 @@ class ItemTest extends EntityTest {
 		return Item::newEmpty();
 	}
 
-	/**
-	 * @see   EntityTest::getNewFromArray
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return Entity
-	 */
-	protected function getNewFromArray( array $data ) {
-		return Item::newFromArray( $data );
-	}
-
-	public function testConstructor() {
-		$instance = new Item( array() );
-
-		$this->assertInstanceOf( 'Wikibase\Item', $instance );
-	}
-
-	public function testToArray() {
-		/**
-		 * @var Item $item
-		 */
-		foreach ( TestItems::getItems() as $item ) {
-			$this->assertInternalType( 'array', $item->toArray() );
-		}
-	}
-
 	public function testGetId() {
 		/**
 		 * @var Item $item
@@ -153,28 +130,6 @@ class ItemTest extends EntityTest {
 			$item->setId( 42 );
 			$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
 		}
-	}
-
-	public function testIsEmpty() {
-		parent::testIsEmpty();
-
-		$item = Item::newEmpty();
-		$item->addSiteLink( new SiteLink( 'enwiki', 'Foobar' ) );
-
-		$this->assertFalse( $item->isEmpty() );
-	}
-
-	public function testClear() {
-		parent::testClear(); //NOTE: we must test the Item implementation of the functionality already tested for Entity.
-
-		$item = $this->getNewEmpty();
-
-		$item->addSiteLink( new SiteLink( "enwiki", "Foozzle" ) );
-
-		$item->clear();
-
-		$this->assertEmpty( $item->getSiteLinks(), "sitelinks" );
-		$this->assertTrue( $item->isEmpty() );
 	}
 
 	public function itemProvider() {
@@ -219,7 +174,7 @@ class ItemTest extends EntityTest {
 		$entity1 = $this->getNewEmpty();
 		$entity1->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'page'   => new DiffOpAdd( 'Berlin' )
@@ -253,7 +208,7 @@ class ItemTest extends EntityTest {
 			)
 		);
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'badges' => new Diff( array(
@@ -279,7 +234,7 @@ class ItemTest extends EntityTest {
 			)
 		);
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'page'   => new DiffOpAdd( 'Berlin' ),
@@ -298,7 +253,7 @@ class ItemTest extends EntityTest {
 		$entity0->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
 		$entity1 = $this->getNewEmpty();
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'page'   => new DiffOpRemove( 'Berlin' ),
@@ -332,7 +287,7 @@ class ItemTest extends EntityTest {
 			)
 		);
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'badges' => new Diff( array(
@@ -359,7 +314,7 @@ class ItemTest extends EntityTest {
 		);
 		$entity1 = $this->getNewEmpty();
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'name'   => new DiffOpRemove( 'Berlin' ),
@@ -398,7 +353,7 @@ class ItemTest extends EntityTest {
 			)
 		);
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'name'   => new DiffOpChange( 'Berlin', 'Foobar' ),
@@ -433,7 +388,7 @@ class ItemTest extends EntityTest {
 			)
 		);
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'badges' => new Diff( array(
@@ -471,7 +426,7 @@ class ItemTest extends EntityTest {
 			)
 		);
 
-		$expected = new EntityDiff( array(
+		$expected = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
 					'name'   => new DiffOpChange( 'Berlin', 'Foobar' ),
@@ -490,6 +445,31 @@ class ItemTest extends EntityTest {
 
 	public function patchProvider() {
 		$argLists = parent::patchProvider();
+
+		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim1 = new Claim( new PropertySomeValueSnak( 42 ) );
+		$claim2 = new Claim( new PropertyValueSnak( 42, new StringValue( 'ohi' ) ) );
+		$claim3 = new Claim( new PropertyNoValueSnak( 1 ) );
+
+		$claim0->setGuid( 'claim0' );
+		$claim1->setGuid( 'claim1' );
+		$claim2->setGuid( 'claim2' );
+		$claim3->setGuid( 'claim3' );
+
+		$source = $this->getNewEmpty();
+		$source->addClaim( $claim0 );
+		$source->addClaim( $claim1 );
+		$patch = new ItemDiff( array( 'claim' => new Diff( array(
+				'claim0' => new DiffOpRemove( $claim0 ),
+				'claim2' => new DiffOpAdd( $claim2 ),
+				'claim3' => new DiffOpAdd( $claim3 )
+			), false ) ) );
+		$expected = $this->getNewEmpty();
+		$expected->addClaim( $claim1 );
+		$expected->addClaim( $claim2 );
+		$expected->addClaim( $claim3 );
+
+		$argLists[] = array( $source, $patch, $expected );
 
 		// Addition of a sitelink
 		$source = $this->getNewEmpty();
@@ -518,15 +498,15 @@ class ItemTest extends EntityTest {
 
 
 		// Retaining of a sitelink
-		$source = clone $expected;
-		$patch = new ItemDiff();
-		$expected = clone $source;
-
-		$argLists[] = array( $source, $patch, $expected );
+		$argLists[] = array(
+			$this->newItemWithSiteLinks(),
+			new ItemDiff(),
+			$this->newItemWithSiteLinks()
+		);
 
 
 		// Modification of a sitelink
-		$source = clone $expected;
+		$source = unserialize( serialize( $expected ) );
 		$patch = new ItemDiff( array(
 			'links' => new Diff( array(
 				'enwiki' => new Diff( array(
@@ -534,7 +514,7 @@ class ItemTest extends EntityTest {
 					'badges' => new Diff( array(
 						new DiffOpRemove( 'Q42' ),
 						new DiffOpAdd( 'Q149' )
-					), false ),
+						), false ),
 				), true ),
 			), true )
 		) );
@@ -569,6 +549,20 @@ class ItemTest extends EntityTest {
 		$argLists[] = array( $source, $patch, $expected );
 
 		return $argLists;
+	}
+
+	private function newItemWithSiteLinks() {
+		$item = Item::newEmpty();
+
+		$item->setSiteLinkList( new SiteLinkList( array(
+			new SiteLink( 'enwiki', 'Foo' ),
+			new SiteLink( 'dewiki', 'Bar', new ItemIdSet( array(
+				new ItemId( 'Q1337' ),
+				new ItemId( 'Q133742' ),
+			) ) ),
+		) ) );
+
+		return $item;
 	}
 
 	public function testGetSiteLinkWithNonSetSiteId() {
@@ -646,7 +640,7 @@ class ItemTest extends EntityTest {
 		}
 
 		$this->assertInternalType( 'array', $item->getSiteLinks() );
-		$this->assertEquals( $siteLinks, $item->getSiteLinks() );
+		$this->assertEquals( $siteLinks, array_values( $item->getSiteLinks() ) );
 	}
 
 	public function simpleSiteLinksProvider() {
@@ -698,6 +692,25 @@ class ItemTest extends EntityTest {
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Statement', $statement );
 		$this->assertEquals( $snak, $statement->getMainSnak() );
+	}
+
+	public function testSetClaims() {
+		$entity = $this->getNewEmpty();
+		$this->assertCount( 0, $entity->getClaims(), "initially, no claims" );
+
+		$claims = array(
+			$claim0 = new Claim( new PropertyNoValueSnak( 42 ) ),
+			$claim1 = new Claim( new PropertySomeValueSnak( 42 ) ),
+		);
+
+		$claims[0]->setGuid( 'TEST$NVS42' );
+		$claims[1]->setGuid( 'TEST$SVS42' );
+
+		$entity->setClaims( new Claims( $claims ) );
+		$this->assertSameSize( $claims, $entity->getClaims(), "added some claims" );
+
+		$entity->setClaims( new Claims() );
+		$this->assertCount( 0, $entity->getClaims(), "should be empty again" );
 	}
 
 }

@@ -37,20 +37,7 @@ class PropertyTest extends EntityTest {
 	 * @return Property
 	 */
 	protected function getNewEmpty() {
-		return Property::newEmpty();
-	}
-
-	/**
-	 * @see   EntityTest::getNewFromArray
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return Entity
-	 */
-	protected function getNewFromArray( array $data ) {
-		return Property::newFromArray( $data );
+		return Property::newFromType( 'string' );
 	}
 
 	public function testNewFromType() {
@@ -82,15 +69,6 @@ class PropertyTest extends EntityTest {
 	public function testWhenIdSetWithEntityId_GetIdReturnsPropertyId() {
 		$property = Property::newFromType( 'string' );
 		$property->setId( new PropertyId( 'P42' ) );
-
-		$this->assertHasCorrectIdType( $property );
-	}
-
-	public function testWhenIdSetViaLegacyFormat_GetIdReturnsPropertyId() {
-		$property = Property::newFromArray( array(
-			'datatype' => 'string',
-			'entity' => array( 'property', 42 ),
-		) );
 
 		$this->assertHasCorrectIdType( $property );
 	}

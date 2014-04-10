@@ -122,14 +122,4 @@ abstract class SnakObjectTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $id, $omnomnom->getPropertyId() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testNewFromArray( Snak $snak ) {
-		$data = $snak->toArray();
-		$actual = SnakObject::newFromArray( $data );
-
-		$this->assertEquals( $snak, $actual );
-	}
-
 }

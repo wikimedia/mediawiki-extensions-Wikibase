@@ -438,6 +438,9 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 		$hashSet = array_flip( $hashes );
 
+		/**
+		 * @var Claim $claim
+		 */
 		foreach ( $claims as $claim ) {
 			$hash = $claim->getHash();
 			$this->assertArrayHasKey( $hash, $hashSet );

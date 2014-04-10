@@ -117,66 +117,6 @@ class Statement extends Claim {
 	}
 
 	/**
-	 * @see Claim::toArray
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	public function toArray() {
-		$data = parent::toArray();
-
-		$data['rank'] = $this->rank;
-		$data['refs'] = $this->references->toArray();
-
-		return $data;
-	}
-
-	/**
-	 * Constructs a new Statement from an array in the same format as Claim::toArray returns.
-	 *
-	 * @since 0.3
-	 * @deprecated since 0.7.3
-	 *
-	 * @param array $data
-	 *
-	 * @return Statement
-	 */
-	public static function newFromArray( array $data ) {
-		$rank = $data['rank'];
-		unset( $data['rank'] );
-
-		/**
-		 * @var Statement $statement
-		 */
-		$statement = parent::newFromArray( $data );
-
-		$statement->setRank( $rank );
-		$statement->setReferences( ReferenceList::newFromArray( $data['refs'] ) );
-
-		return $statement;
-	}
-
-	/**
-	 * @see Serializable::unserialize
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $serialization
-	 *
-	 * @return Statement
-	 */
-	public function unserialize( $serialization ) {
-		$instance = static::newFromArray( json_decode( $serialization, true ) );
-
-		$this->setMainSnak( $instance->getMainSnak() );
-		$this->setQualifiers( $instance->getQualifiers() );
-		$this->setGuid( $instance->getGuid() );
-		$this->setRank( $instance->getRank() );
-		$this->setReferences( $instance->getReferences() );
-	}
-
-	/**
 	 * @see Claim::getAllSnaks.
 	 *
 	 * In addition to the Snaks returned by Claim::getAllSnaks(), this also includes all

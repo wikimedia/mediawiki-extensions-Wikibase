@@ -81,31 +81,6 @@ class PropertyValueSnak extends SnakObject {
 	}
 
 	/**
-	 * @see Snak::toArray
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	public function toArray() {
-		$data = parent::toArray();
-
-		// Since we use getArrayValue() and getType() directly instead of
-		// the generic toArray() method, we need to handle the special case
-		// of "bad" values separately, to restore the original type info.
-		if ( $this->dataValue instanceof UnDeserializableValue ) {
-			$type = $this->dataValue->getTargetType();
-		} else {
-			$type = $this->dataValue->getType();
-		}
-
-		$data[] = $type;
-		$data[] = $this->dataValue->getArrayValue();
-
-		return $data;
-	}
-
-	/**
 	 * @see Snak::getType
 	 *
 	 * @since 0.2

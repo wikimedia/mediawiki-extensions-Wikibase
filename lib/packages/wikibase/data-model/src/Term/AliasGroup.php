@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Term;
 
 use Comparable;
 use Countable;
+use InvalidArgumentException;
 
 /**
  * Ordered set of aliases. Immutable value object.
@@ -23,9 +24,17 @@ class AliasGroup implements Comparable, Countable {
 	/**
 	 * @param string $languageCode
 	 * @param string[] $aliases
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $languageCode, array $aliases ) {
 		$this->languageCode = $languageCode;
+
+		foreach ( $aliases as $alias ) {
+			if ( !is_string( $alias ) ) {
+				throw new InvalidArgumentException( 'All elements in $aliases need to be strings' );
+			}
+		}
 
 		$this->aliases = array_values(
 			array_filter(

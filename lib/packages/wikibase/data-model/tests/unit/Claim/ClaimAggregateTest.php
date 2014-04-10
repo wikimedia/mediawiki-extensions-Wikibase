@@ -37,10 +37,13 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 
 		$aggregates = array();
 
-		$aggregates[] = Property::newEmpty();
+		$aggregates[] = Property::newFromType( 'string' );
 
 		$argLists = array();
 
+		/**
+		 * @var Claim $claim
+		 */
 		foreach ( $claims as $i => $claim ) {
 			$claim->setGuid( "ClaimListAccessTest\$claim-$i" );
 		}

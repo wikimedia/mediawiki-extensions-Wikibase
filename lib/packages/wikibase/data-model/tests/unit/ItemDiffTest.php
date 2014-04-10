@@ -26,7 +26,6 @@ use Wikibase\DataModel\SiteLink;
  * @author Michał Łazowik
  */
 class ItemDiffTest extends EntityDiffOldTest {
-	//TODO: make the new EntityDiffTest also run for Items.
 
 	public static function provideApplyData() {
 		$originalTests = parent::generateApplyData( Item::ENTITY_TYPE );
@@ -61,7 +60,6 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-
 		$tests[] = array( $a, $b );
 
 		// add badges
@@ -76,7 +74,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = $a->copy();
+		$b = Item::newEmpty();
 		$b->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -103,7 +101,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = $a->copy();
+		$b = Item::newEmpty();
 		$b->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -127,7 +125,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = $a->copy();
+		$b = Item::newEmpty();
 		$b->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -180,7 +178,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 			)
 		);
 
-		$b = $a->copy();
+		$b = Item::newEmpty();
 		$b->addSiteLink(
 			new SiteLink(
 				'enwiki',
@@ -203,19 +201,20 @@ class ItemDiffTest extends EntityDiffOldTest {
 	public function testApply( Entity $a, Entity $b ) {
 		parent::testApply( $a, $b );
 
-		$a->patch( $a->getDiff( $b ) );
-
 		/**
 		 * @var Item $a
 		 * @var Item $b
 		 */
 
-		$this->assertEquals( $a->getLabels(), $b->getLabels() );
-		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
-		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
+		$siteLinks = array_merge(
+			$a->getSiteLinks(),
+			$b->getSiteLinks()
+		);
 
-		$siteLinks = $a->getSiteLinks() + $b->getSiteLinks();
-		foreach ($siteLinks as $siteLink) {
+		/**
+		 * @var SiteLink $siteLink
+		 */
+		foreach ( $siteLinks as $siteLink ) {
 			$aLink = $a->getSiteLink( $siteLink->getSiteId() );
 			$bLink = $a->getSiteLink( $siteLink->getSiteId() );
 

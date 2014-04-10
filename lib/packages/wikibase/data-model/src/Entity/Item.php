@@ -2,12 +2,22 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Diff\Patcher\Patcher;
+use DataValues\Deserializers\DataValueDeserializer;
+use Diff\Comparer\CallbackComparer;
+use Diff\DiffOp\Diff\Diff;
+use Diff\Patcher\ListPatcher;
+use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 
 /**
  * Represents a single Wikibase item.
@@ -17,111 +27,92 @@ use Wikibase\DataModel\Snak\Snak;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Michał Łazowik
  */
 class Item extends Entity {
 
 	const ENTITY_TYPE = 'item';
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var SiteLink[]|null
+	 * @var SiteLinkList
 	 */
-	protected $siteLinks = null;
+	private $siteLinks;
+
+	/**
+	 * @var Statement[]
+	 */
+	private $statements;
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param ItemId|null $id
+	 * @param Fingerprint $fingerprint
+	 * @param SiteLinkList $links
+	 * @param Statement[] $statements
+	 */
+	public function __construct( ItemId $id = null, Fingerprint $fingerprint, SiteLinkList $links, array $statements ) {
+		$this->id = $id;
+		$this->fingerprint = $fingerprint;
+		$this->siteLinks = $links;
+		$this->statements = $statements;
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @return SiteLinkList
+	 */
+	public function getSiteLinkList() {
+		return $this->siteLinks;
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param SiteLinkList $siteLinks
+	 */
+	public function setSiteLinkList( SiteLinkList $siteLinks ) {
+		$this->siteLinks = $siteLinks;
+	}
 
 	/**
 	 * Adds a site link to the list of site links.
 	 * If there already is a site link with the site id of the provided site link,
 	 * then that one will be overridden by the provided one.
 	 *
+	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.6
 	 *
 	 * @param SiteLink $siteLink
 	 */
 	public function addSiteLink( SiteLink $siteLink ) {
-		$this->unstubSiteLinks();
-		$this->siteLinks[ $siteLink->getSiteId() ] = $siteLink;
-	}
-
-	/**
-	 * @since 0.4
-	 * @deprecated since 0.6, use addSiteLink instead
-	 */
-	public function addSimpleSiteLink( SiteLink $siteLink ) {
-		$this->addSiteLink( $siteLink );
+		$this->siteLinks->add( $siteLink );
 	}
 
 	/**
 	 * Removes the sitelink with specified site ID if the Item has such a sitelink.
-	 * A page name can be provided to have removal only happen when it matches what is set.
-	 * A boolean is returned indicating if a link got removed or not.
 	 *
+	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.1
 	 *
 	 * @param string $siteId the target site's id
-	 * @param bool|string $pageName he target page's name (in normalized form)
-	 *
-	 * @return bool Success indicator
 	 */
-	public function removeSiteLink( $siteId, $pageName = false ) {
-		$this->unstubSiteLinks();
-
-		if ( $pageName !== false ) {
-			$success = array_key_exists( $siteId, $this->siteLinks ) && $this->siteLinks[ $siteId ]->getPageName() === $pageName;
-		}
-		else {
-			$success = array_key_exists( $siteId, $this->siteLinks );
-		}
-
-		if ( $success ) {
-			unset( $this->siteLinks[ $siteId ] );
-		}
-
-		return $success;
+	public function removeSiteLink( $siteId ) {
+		$this->siteLinks->removeLinkWithSiteId( $siteId );
 	}
 
 	/**
+	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.6
 	 *
 	 * @return SiteLink[]
 	 */
 	public function getSiteLinks() {
-		$this->unstubSiteLinks();
-
-		$links = array();
-
-		foreach ( $this->siteLinks as $link ) {
-			$links[] = $link;
-		}
-
-		return $links;
+		return iterator_to_array( $this->siteLinks );
 	}
 
 	/**
-	 * @since 0.4
-	 * @deprecated since 0.6, use getSiteLinks instead
-	 *
-	 * @return SiteLink[]
-	 */
-	public function getSimpleSiteLinks() {
-		return $this->getSiteLinks();
-	}
-
-	/**
-	 * @since 0.4
-	 * @deprecated since 0.6, use getSiteLink instead
-	 *
-	 * @param string $siteId
-	 *
-	 * @return SiteLink
-	 * @throws OutOfBoundsException
-	 */
-	public function getSimpleSiteLink( $siteId ) {
-		return $this->getSiteLink( $siteId );
-	}
-
-	/**
+	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.6
 	 *
 	 * @param string $siteId
@@ -130,16 +121,11 @@ class Item extends Entity {
 	 * @throws OutOfBoundsException
 	 */
 	public function getSiteLink( $siteId ) {
-		$this->unstubSiteLinks();
-
-		if ( !array_key_exists( $siteId, $this->siteLinks ) ) {
-			throw new OutOfBoundsException( "There is no site link with site id $siteId" );
-		}
-
-		return $this->siteLinks[ $siteId ];
+		return $this->siteLinks->getBySiteId( $siteId );
 	}
 
 	/**
+	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.4
 	 *
 	 * @param string $siteId
@@ -147,116 +133,17 @@ class Item extends Entity {
 	 * @return bool
 	 */
 	public function hasLinkToSite( $siteId ) {
-		$this->unstubSiteLinks();
-		return array_key_exists( $siteId, $this->siteLinks );
+		return $this->siteLinks->hasLinkWithSiteId( $siteId );
 	}
 
 	/**
-	 * Unstubs sitelinks from the unserialized data.
-	 *
-	 * @since 0.5
-	 */
-	protected function unstubSiteLinks() {
-		if ( $this->siteLinks === null ) {
-			$this->siteLinks = array();
-
-			foreach ( $this->data['links'] as $siteId => $linkSerialization ) {
-				$this->siteLinks[$siteId] = SiteLink::newFromArray( $siteId, $linkSerialization );
-			}
-		}
-	}
-
-	/**
-	 * Returns the SiteLinks as stubs.
-	 *
-	 * @since 0.5
-	 *
-	 * @return array
-	 */
-	protected function getStubbedSiteLinks() {
-		if ( is_string( reset( $this->data['links'] ) ) ) {
-			// legacy serialization
-			$this->unstubSiteLinks();
-		}
-
-		if ( $this->siteLinks !== null ) {
-			$siteLinks = array();
-
-			foreach ( $this->siteLinks as $siteId => $siteLink ) {
-				$siteLinks[$siteId] = $siteLink->toArray();
-			}
-		} else {
-			$siteLinks = $this->data['links'];
-		}
-
-		return $siteLinks;
-	}
-
-	/**
+	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.5
 	 *
 	 * @return bool
 	 */
-	 public function hasSiteLinks() {
-		if ( $this->siteLinks === null ) {
-			return $this->data['links'] !== array();
-		} else {
-			return !empty( $this->siteLinks );
-		}
-	 }
-
-	/**
-	 * @see Entity::isEmpty
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isEmpty() {
-		return parent::isEmpty()
-			&& !$this->hasSiteLinks();
-	}
-
-	/**
-	 * @see Entity::stub
-	 *
-	 * @since 0.5
-	 */
-	public function stub() {
-		parent::stub();
-		$this->data['links'] = $this->getStubbedSiteLinks();
-	}
-
-	/**
-	 * @see Entity::cleanStructure
-	 *
-	 * @since 0.1
-	 *
-	 * @param boolean $wipeExisting
-	 */
-	protected function cleanStructure( $wipeExisting = false ) {
-		parent::cleanStructure( $wipeExisting );
-
-		foreach ( array( 'links' ) as $field ) {
-			if (  $wipeExisting || !array_key_exists( $field, $this->data ) ) {
-				$this->data[$field] = array();
-			}
-		}
-
-		$this->siteLinks = null;
-	}
-
-	/**
-	 * @see Entity::newFromArray
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return Item
-	 */
-	public static function newFromArray( array $data ) {
-		return new static( $data );
+	public function hasSiteLinks() {
+		return !empty( $this->siteLinks );
 	}
 
 	/**
@@ -265,7 +152,12 @@ class Item extends Entity {
 	 * @return Item
 	 */
 	public static function newEmpty() {
-		return self::newFromArray( array() );
+		return new self(
+			null,
+			Fingerprint::newEmpty(),
+			new SiteLinkList( array() ),
+			array()
+		);
 	}
 
 	/**
@@ -293,25 +185,37 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Entity::entityToDiffArray
-	 *
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
+	 * @see Entity::getDiffArray
 	 *
 	 * @return array
-	 * @throws InvalidArgumentException
 	 */
-	protected function entityToDiffArray( Entity $entity ) {
-		if ( !( $entity instanceof Item ) ) {
-			throw new InvalidArgumentException( 'ItemDiffer only accepts Item objects' );
-		}
+	protected function getDiffArray() {
+		$array = parent::getDiffArray();
 
-		$array = parent::entityToDiffArray( $entity );
-
-		$array['links'] = $entity->getStubbedSiteLinks();
+		$array['links'] = $this->getLinksInDiffFormat();
 
 		return $array;
+	}
+
+	private function getLinksInDiffFormat() {
+		$links = array();
+
+		/**
+		 * @var SiteLink $siteLink
+		 */
+		foreach ( $this->siteLinks as $siteLink ) {
+			$links[$siteLink->getSiteId()] = array(
+				'name' => $siteLink->getPageName(),
+				'badges' => array_map(
+					function( ItemId $id ) {
+						return $id->getSerialization();
+					},
+					$siteLink->getBadges()
+				)
+			);
+		}
+
+		return $links;
 	}
 
 	/**
@@ -320,24 +224,59 @@ class Item extends Entity {
 	 * @since 0.4
 	 *
 	 * @param EntityDiff $patch
-	 * @param Patcher $patcher
 	 */
-	protected function patchSpecificFields( EntityDiff $patch, Patcher $patcher ) {
+	protected function patchSpecificFields( EntityDiff $patch ) {
 		if ( $patch instanceof ItemDiff ) {
-			$siteLinksDiff = $patch->getSiteLinkDiff();
+			if ( !$patch->getSiteLinkDiff()->isEmpty() ) {
+				$this->patchSiteLinks( $patch->getSiteLinkDiff() );
+			}
 
-			if ( !$siteLinksDiff->isEmpty() ) {
-				$links = $this->getStubbedSiteLinks();
-				$links = $patcher->patch( $links, $siteLinksDiff );
+			$this->patchClaims( $patch );
+		}
+	}
 
-				$this->siteLinks = array();
-				foreach ( $links as $siteId => $linkSerialization ) {
-					if ( array_key_exists( 'name', $linkSerialization ) ) {
-						$this->siteLinks[$siteId] = SiteLink::newFromArray( $siteId, $linkSerialization );
-					}
-				}
+	private function patchSiteLinks( Diff $siteLinksDiff ) {
+		$patcher = new MapPatcher( false, new ListPatcher() );
+
+		$links = $this->getLinksInDiffFormat();
+		$links = $patcher->patch( $links, $siteLinksDiff );
+
+		$this->siteLinks = new SiteLinkList();
+
+		foreach ( $links as $siteId => $linkData ) {
+			if ( array_key_exists( 'name', $linkData ) ) {
+				$this->siteLinks->add( new SiteLink(
+					$siteId,
+					$linkData['name'],
+					array_map(
+						function( $idSerialization ) {
+							return new ItemId( $idSerialization );
+						},
+						$linkData['badges']
+					)
+				) );
 			}
 		}
+	}
+
+	private function patchClaims( EntityDiff $patch ) {
+		$patcher = new MapPatcher();
+
+		$patcher->setValueComparer( new CallbackComparer(
+			function( Claim $firstClaim, Claim $secondClaim ) {
+				return $firstClaim->equals( $secondClaim );
+			}
+		) );
+
+		$claims = array();
+
+		foreach ( $this->getClaims() as $claim ) {
+			$claims[$claim->getGuid()] = $claim;
+		}
+
+		$claims = $patcher->patch( $claims, $patch->getClaimsDiff() );
+
+		$this->setClaims( new Claims( $claims ) );
 	}
 
 	/**
@@ -349,6 +288,97 @@ class Item extends Entity {
 	 */
 	protected function idFromSerialization( $idSerialization ) {
 		return new ItemId( $idSerialization );
+	}
+
+	/**
+	 * @see ClaimListAccess::addClaim
+	 *
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addClaim( Claim $claim ) {
+		if ( $claim->getGuid() === null ) {
+			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
+		}
+
+		// TODO: ensure guid is valid for entity
+
+		$this->statements[] = $claim;
+	}
+
+	/**
+	 * @see ClaimAggregate::getClaims
+	 *
+	 * @since 0.3
+	 *
+	 * @return Claim[]
+	 */
+	public function getClaims() {
+		return $this->statements;
+	}
+
+	/**
+	 * TODO: change to take Claim[]
+	 *
+	 * @since 0.4
+	 *
+	 * @param Claims $claims
+	 */
+	public function setClaims( Claims $claims ) {
+		$this->statements = iterator_to_array( $claims );
+	}
+
+	/**
+	 * Convenience function to check if the entity contains any claims.
+	 *
+	 * On top of being a convenience function, this implementation allows for doing
+	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
+	 *
+	 * @since 0.2
+	 *
+	 * @return bool
+	 */
+	public function hasClaims() {
+		return !empty( $this->statements );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * Two items are considered equal if they are of the same
+	 * type and have the same value. The value does not include
+	 * the id, so entities with the same value but different id
+	 * are considered equal.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $that
+	 *
+	 * @return boolean
+	 */
+	public function equals( $that ) {
+		if ( !( $that instanceof self ) ) {
+			return false;
+		}
+
+		if ( $that === $this ) {
+			return true;
+		}
+
+		/**
+		 * @var $that Item
+		 */
+		return $this->fingerprint->equals( $that->fingerprint )
+			&& $this->siteLinks->equals( $that->siteLinks )
+			&& $this->statementsEqual( $that->statements );
+	}
+
+	private function statementsEqual( array $statements ) {
+		$list = new Claims( $this->statements );
+		return $list->equals( new Claims( $statements ) );
 	}
 
 }

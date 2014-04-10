@@ -146,19 +146,6 @@ class StatementTest extends ClaimTest {
 		);
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testToArrayRoundrip( Claim $claim ) {
-		$data = $claim->toArray();
-
-		$this->assertInternalType( 'array', $data );
-
-		$copy = Statement::newFromArray( $data );
-
-		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
-	}
-
 	public function testGetHash() {
 		$claim0 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim0->setGuid( 'claim0' );

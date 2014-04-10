@@ -145,4 +145,16 @@ class AliasGroupList implements Countable, IteratorAggregate {
 			&& $this->groups[$group->getLanguageCode()]->equals( $group );
 	}
 
+	/**
+	 * @since 1.0
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return boolean
+	 */
+	public function hasGroupForLanguage( $languageCode ) {
+		$this->assertIsLanguageCode( $languageCode );
+		return array_key_exists( $languageCode, $this->groups );
+	}
+
 }

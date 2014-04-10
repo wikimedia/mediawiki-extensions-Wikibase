@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel\Test;
 
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 
@@ -155,7 +157,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenTheSameSet_equalsReturnsTrue( array $links ) {
 		$list = new SiteLinkList( $links );
 		$this->assertTrue( $list->equals( $list ) );
-		$this->assertTrue( $list->equals( clone $list ) );
+		$this->assertTrue( $list->equals( unserialize( serialize( $list ) ) ) );
 	}
 
 	public function testGivenNonSiteLinkList_equalsReturnsFalse() {
@@ -190,6 +192,51 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		$this->assertTrue( $listOne->equals( $listTwo ) );
+	}
+
+	public function testGivenNonSiteId_removeSiteWithIdThrowsException() {
+		$list = new SiteLinkList();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$list->removeLinkWithSiteId( array() );
+	}
+
+	public function testGivenKnownId_removeSiteWithIdRemovesIt() {
+		$list = new SiteLinkList( array(
+			new SiteLink( 'foo', 'spam' ),
+			new SiteLink( 'bar', 'hax' ),
+		) );
+
+		$list->removeLinkWithSiteId( 'foo' );
+
+		$this->assertFalse( $list->hasLinkWithSiteId( 'foo' ) );
+		$this->assertTrue( $list->hasLinkWithSiteId( 'bar' ) );
+	}
+
+	public function testGivenUnknownId_removeSiteWithIdDoesNoOp() {
+		$list = new SiteLinkList( array(
+			new SiteLink( 'foo', 'spam' ),
+			new SiteLink( 'bar', 'hax' ),
+		) );
+
+		$expected = clone $list;
+
+		$list->removeLinkWithSiteId( 'baz' );
+
+		$this->assertTrue( $expected->equals( $list ) );
+	}
+
+	public function testDifferentInstancesWithSameBadgesAreEqual() {
+		$list = new SiteLinkList( array(
+			new SiteLink( 'foo', 'spam', new ItemIdSet( array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q1337' )
+			) ) ),
+		) );
+
+		$otherInstance = unserialize( serialize( $list ) );
+
+		$this->assertTrue( $list->equals( $otherInstance ) );
 	}
 
 }
