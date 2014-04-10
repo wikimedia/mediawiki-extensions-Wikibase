@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Diff\Diff;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use ReflectionClass;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;

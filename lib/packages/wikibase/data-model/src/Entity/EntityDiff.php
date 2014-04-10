@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Diff\Diff;
+use Diff\DiffOp\Diff\Diff;
 
 /**
  * Represents a diff between two Wikibase\Entity instances.

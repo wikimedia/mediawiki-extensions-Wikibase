@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Diff\Patcher;
+use Diff\Patcher\Patcher;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Statement;

@@ -3,12 +3,12 @@
 namespace Wikibase\DataModel\Claim;
 
 use ArrayObject;
-use Diff\Diff;
-use Diff\Differ;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
-use Diff\MapDiffer;
+use Diff\DiffOp\Diff\Diff;
+use Diff\Differ\Differ;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
+use Diff\Differ\MapDiffer;
 use Hashable;
 use InvalidArgumentException;
 use Wikibase\DataModel\ByPropertyIdArray;

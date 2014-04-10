@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
-use Diff\Diff;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemDiff;

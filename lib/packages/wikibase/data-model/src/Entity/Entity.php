@@ -3,10 +3,10 @@
 namespace Wikibase\DataModel\Entity;
 
 use Diff\Comparer\CallbackComparer;
-use Diff\Differ;
-use Diff\MapDiffer;
-use Diff\MapPatcher;
-use Diff\Patcher;
+use Diff\Differ\Differ;
+use Diff\Differ\MapDiffer;
+use Diff\Patcher\MapPatcher;
+use Diff\Patcher\Patcher;
 use InvalidArgumentException;
 use RuntimeException;
 use Wikibase\DataModel\Claim\Claim;
