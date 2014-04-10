@@ -6,8 +6,9 @@
 #
 # page object for the Special:SetLabel page
 
-class SpecialSetLabelPage < SpecialModifyTermPage
+class SpecialSetLabelPage
   include PageObject
+  include SpecialModifyTermModule
 
   page_url URL.repo_url("Special:SetLabel")
 

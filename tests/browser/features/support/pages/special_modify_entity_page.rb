@@ -8,9 +8,5 @@
 
 class SpecialModifyEntityPage
   include PageObject
-
-  p(:anonymous_edit_warning, class: "warning")
-  p(:error_message, class: "error")
-  text_field(:id_input_field, id: "wb-modifyentity-id")
-
+  include SpecialModifyEntityModule
 end
