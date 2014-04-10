@@ -69,7 +69,7 @@ class TermList implements Countable, IteratorAggregate {
 	}
 
 	/**
-	 * @param $languageCode
+	 * @param string $languageCode
 	 *
 	 * @return AliasGroup
 	 * @throws InvalidArgumentException
