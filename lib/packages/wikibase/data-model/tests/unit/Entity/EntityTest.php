@@ -21,11 +21,9 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Description;
-use Wikibase\DataModel\Term\DescriptionList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Label;
-use Wikibase\DataModel\Term\LabelList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Tests for the Wikibase\Entity deriving classes.
@@ -917,11 +915,11 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			new Fingerprint(
-				new LabelList( array(
-					new Label( 'en', 'foo' ),
-					new Label( 'de', 'bar' ),
+				new TermList( array(
+					new Term( 'en', 'foo' ),
+					new Term( 'de', 'bar' ),
 				) ),
-				new DescriptionList( array() ),
+				new TermList( array() ),
 				new AliasGroupList( array() )
 			),
 			$entity->getFingerprint()
@@ -937,11 +935,11 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			new Fingerprint(
-				new LabelList( array(
-					new Label( 'en', 'foo' ),
+				new TermList( array(
+					new Term( 'en', 'foo' ),
 				) ),
-				new DescriptionList( array(
-					new Description( 'en', 'foo bar' )
+				new TermList( array(
+					new Term( 'en', 'foo bar' )
 				) ),
 				new AliasGroupList( array(
 					new AliasGroup( 'en', array( 'foo', 'bar' ) )
@@ -979,11 +977,11 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 	public function testWhenSettingFingerprint_getFingerprintReturnsIt() {
 		$fingerprint = new Fingerprint(
-			new LabelList( array(
-				new Label( 'en', 'foo' ),
+			new TermList( array(
+				new Term( 'en', 'foo' ),
 			) ),
-			new DescriptionList( array(
-				new Description( 'en', 'foo bar' )
+			new TermList( array(
+				new Term( 'en', 'foo bar' )
 			) ),
 			new AliasGroupList( array(
 				new AliasGroup( 'en', array( 'foo', 'bar' ) )

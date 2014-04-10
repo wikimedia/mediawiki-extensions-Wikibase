@@ -25,9 +25,14 @@ class TermList implements Countable, IteratorAggregate {
 
 	/**
 	 * @param Term[] $terms
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $terms ) {
 		foreach ( $terms as $term ) {
+			if ( !( $term instanceof Term ) ) {
+				throw new InvalidArgumentException( 'TermList can only contain instances of Term' );
+			}
+
 			$this->terms[$term->getLanguageCode()] = $term;
 		}
 	}
@@ -98,7 +103,7 @@ class TermList implements Countable, IteratorAggregate {
 		}
 	}
 
-	protected function setTerm( Term $term ) {
+	public function setTerm( Term $term ) {
 		$this->terms[$term->getLanguageCode()] = $term;
 	}
 

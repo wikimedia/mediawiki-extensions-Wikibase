@@ -3,8 +3,6 @@
 namespace Wikibase\DataModel\Term\Test;
 
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Label;
-use Wikibase\DataModel\Term\LabelList;
 
 /**
  * @covers Wikibase\DataModel\Term\Fingerprint
@@ -19,10 +17,10 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	private $aliases;
 
 	public function setUp() {
-		$this->labels = $this->getMockBuilder( 'Wikibase\DataModel\Term\LabelList' )
+		$this->labels = $this->getMockBuilder( 'Wikibase\DataModel\Term\TermList' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->descriptions = $this->getMockBuilder( 'Wikibase\DataModel\Term\DescriptionList' )
+		$this->descriptions = $this->getMockBuilder( 'Wikibase\DataModel\Term\TermList' )
 			->disableOriginalConstructor()->getMock();
 
 		$this->aliases = $this->getMockBuilder( 'Wikibase\DataModel\Term\AliasGroupList' )
