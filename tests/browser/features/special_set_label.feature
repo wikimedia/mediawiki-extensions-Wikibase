@@ -8,7 +8,7 @@
 @wikidata.beta.wmflabs.org @special_pages
 Feature: Special:SetLabel page
 
-  @ui_only
+  @ui_only @
   Scenario: Special:SetLabel page has all required elements
     Given I am on the Special:SetLabel page
     Then ID input field should be there
@@ -39,6 +39,7 @@ Feature: Special:SetLabel page
       And I am on the page of item item1
     Then Something should be displayed as label
 
+  @smoke
   Scenario: Edit an existing label
     Given I have the following items:
         | item1 |
