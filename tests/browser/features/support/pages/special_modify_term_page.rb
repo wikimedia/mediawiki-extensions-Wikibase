@@ -6,10 +6,8 @@
 #
 # page object for the Special:ModifyTerm page
 
-class SpecialModifyTermPage < SpecialModifyEntityPage
+class SpecialModifyTermPage
   include PageObject
-
-  text_field(:language_input_field, id: "wb-modifyterm-language")
-  text_field(:term_input_field, id: "wb-modifyterm-value")
-
+  include SpecialModifyTermModule
+  include SpecialModifyEntityModule
 end
