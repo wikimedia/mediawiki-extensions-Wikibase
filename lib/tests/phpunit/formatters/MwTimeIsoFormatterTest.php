@@ -295,15 +295,6 @@ class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $langCode
 	 */
 	public function testFormatDate( $expected, $extendedIsoString, $precision, $langCode = 'en' ) {
-		// TODO remove this skip section once $brokenLanguages can be empty! BUG 63723
-		$brokenLanguages = array(
-			// The below return raw timestamps
-			'lzh', 'th', 'zh-classical',
-		);
-		if( in_array( $langCode, $brokenLanguages ) ) {
-			$this->markTestSkipped( "Test for lang {$langCode} currently broken: Bug 63723" );
-		}
-
 		$options = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $langCode
 		) );
