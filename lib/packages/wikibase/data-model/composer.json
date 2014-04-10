@@ -22,7 +22,7 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"diff/diff": "~1.0@dev",
+		"diff/diff": "~1.0",
 		"data-values/data-values": "~0.1.0",
 		"data-values/serialization": ">=0.1,<2.0"
 	},
