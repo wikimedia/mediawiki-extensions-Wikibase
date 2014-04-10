@@ -8,7 +8,7 @@
 @wikidata.beta.wmflabs.org @special_pages
 Feature: Special:SetLabel page
 
-  @ui_only @
+  @ui_only
   Scenario: Special:SetLabel page has all required elements
     Given I am on the Special:SetLabel page
     Then ID input field should be there
