@@ -4,7 +4,7 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use Language;
-use ValueFormatters\Localizer;
+use ValueFormatters\NumberLocalizer;
 
 /**
  * Localizes a numeric string using MediaWiki's Language class.
@@ -14,7 +14,7 @@ use ValueFormatters\Localizer;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MediaWikiNumberLocalizer implements Localizer {
+class MediaWikiNumberLocalizer implements NumberLocalizer {
 
 	/**
 	 * @var Language
