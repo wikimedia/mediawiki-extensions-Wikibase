@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 use Language;
-use ValueParsers\BasicUnlocalizer;
+use ValueParsers\BasicNumberUnlocalizer;
 
 /**
  * MediaWikiNumberUnlocalizer
@@ -12,7 +12,7 @@ use ValueParsers\BasicUnlocalizer;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class MediaWikiNumberUnlocalizer extends BasicUnlocalizer {
+class MediaWikiNumberUnlocalizer extends BasicNumberUnlocalizer {
 
 	protected static $unlocalizerMap = array(
 		"\xe2\x88\x92" => '-', // convert minus (U+2212) to hyphen
