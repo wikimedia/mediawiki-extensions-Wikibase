@@ -44,12 +44,7 @@ class EntityIdValueParser extends StringValueParser {
 	 * @throws ParseException
 	 */
 	protected function stringParse( $value ) {
-		try {
-			return $this->parser->parse( $value );
-		}
-		catch ( EntityIdParsingException $ex ) {
-			throw new ParseException( $ex->getMessage(), 0, $ex );
-		}
+		return $this->parser->parse( $value );
 	}
 
 }
