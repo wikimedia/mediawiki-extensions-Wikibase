@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_0786a4ac",
+        "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-11T00:30:21Z",
+      "side": 1,
+      "message": "It\u0027s not a typical method - we do not call it ourselves directly.\n\nAlso, we have been following this naming forever and I\u0027ve not heard anyone complain. We can have a discussion on if we should change this is you really think that is worth our time.",
+      "parentUuid": "8e23439c_34ee7320",
+      "revId": "39316bb81e2645279608b6989f0320a9b1906c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_9ec3283d",
         "filename": "repo/tests/phpunit/includes/content/SiteLinkUniquenessValidatorTest.php",
         "patchSetId": 4
