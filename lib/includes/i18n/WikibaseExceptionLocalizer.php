@@ -71,9 +71,20 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 	 * @return Message
 	 */
 	protected function getParseExceptionMessage( ParseException $parseError ) {
-		$key = 'wikibase-parse-error';
+		$baseKey = 'wikibase-parse-error';
 		$params = array();
-		$msg = wfMessage( $key )->params( $params );
+
+		$expectedFormat = $parseError->getExpectedFormat();
+		if( $expectedFormat !== null ) {
+			$msg = new Message( $baseKey . '-' . $expectedFormat, $params );
+			if( !$msg->exists() ) {
+				$msg = null;
+			}
+		}
+
+		if( $msg === null ) {
+			$msg = new Message( $baseKey, $params );
+		}
 
 		return $msg;
 	}
