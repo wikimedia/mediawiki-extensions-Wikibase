@@ -22,17 +22,11 @@ class PropertyDeserializer extends EntityDeserializer {
 	}
 
 	protected function getPartiallyDeserialized( array $serialization ) {
-		$property = Property::newEmpty();
-
-		$this->setDataTypeFromSerialization( $serialization, $property );
+		$this->requireAttribute( $serialization, 'datatype' );
+		$this->assertAttributeInternalType( $serialization, 'datatype', 'string' );
+		$property = Property::newFromType( $serialization['datatype'] );
 
 		return $property;
 	}
 
-	private function setDataTypeFromSerialization( array $serialization, Property $property ) {
-		$this->requireAttribute( $serialization, 'datatype' );
-		$this->assertAttributeInternalType( $serialization, 'datatype', 'string' );
-
-		$property->setDataTypeId( $serialization['datatype'] );
-	}
 }
