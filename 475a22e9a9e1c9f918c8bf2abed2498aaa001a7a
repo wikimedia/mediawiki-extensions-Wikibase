@@ -16,6 +16,24 @@
       "revId": "475a22e9a9e1c9f918c8bf2abed2498aaa001a7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6d43f967",
+        "filename": "repo/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-11T13:03:18Z",
+      "side": 1,
+      "message": "we can, although intend for this code to be temporary and gone soon",
+      "parentUuid": "8e23439c_ad3911f1",
+      "revId": "475a22e9a9e1c9f918c8bf2abed2498aaa001a7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
