@@ -132,21 +132,15 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 	 * @return string dateFormat to be used by sprintfDate
 	 */
 	private function getDateFormat( $precision ) {
-		$dateFormat = $this->language->getDateFormatString(
-			'date',
-			$this->language->getDefaultDateFormat()
-		);
+		if( $precision < TimeValue::PRECISION_MONTH ) {
+			return 'Y';
+		}
 
 		if( $precision < TimeValue::PRECISION_DAY ) {
-			// Remove day placeholder:
-			$dateFormat = preg_replace( '/((x\w{1})?(j|t)|d)/', '', $dateFormat );
+			return 'F Y';
 		}
 
-		if( $precision < TimeValue::PRECISION_MONTH ) {
-			// Remove month placeholder:
-			$dateFormat = preg_replace( '/((x\w{1})?(F|n|M)|m)/', '', $dateFormat );
-		}
-		return trim( $dateFormat );
+		return 'j F Y';
 	}
 
 	/**
