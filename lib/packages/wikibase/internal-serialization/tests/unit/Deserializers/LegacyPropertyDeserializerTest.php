@@ -84,7 +84,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider labelListProvider
+	 * @dataProvider TermListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
 		$property = $this->deserializer->deserialize( array(
@@ -95,7 +95,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $labels, $property->getLabels() );
 	}
 
-	public function labelListProvider() {
+	public function TermListProvider() {
 		return array(
 			array( array() ),
 
@@ -112,7 +112,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider labelListProvider
+	 * @dataProvider TermListProvider
 	 */
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
 		$property = $this->deserializer->deserialize( array(

@@ -172,7 +172,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider labelListProvider
+	 * @dataProvider TermListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
 		$item = $this->itemFromSerialization( array( 'label' => $labels ) );
@@ -180,7 +180,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $labels, $item->getLabels() );
 	}
 
-	public function labelListProvider() {
+	public function TermListProvider() {
 		return array(
 			array( array() ),
 
@@ -197,7 +197,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider labelListProvider
+	 * @dataProvider TermListProvider
 	 */
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
 		$item = $this->itemFromSerialization( array( 'description' => $descriptions ) );

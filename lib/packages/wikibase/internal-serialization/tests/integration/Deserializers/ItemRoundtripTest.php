@@ -8,6 +8,10 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\ItemDeserializer
@@ -73,14 +77,16 @@ class ItemRoundtripTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function addFingerprint( Item $item ) {
-		$item->setLabel( 'en', 'foo' );
-		$item->setLabel( 'de', 'bar' );
+		$fingerprint = $item->getFingerprint();
 
-		$item->setDescription( 'en', 'foo bar baz' );
-		$item->setDescription( 'nl', 'blah' );
+		$fingerprint->getLabels()->setTerm( new Term( 'en', 'foo' ) );
+		$fingerprint->getLabels()->setTerm( new Term( 'de', 'bar' ) );
 
-		$item->setAliases( 'en', array( 'foo', 'bar', 'baz' ) );
-		$item->setDescription( 'fr', array( 'spam' ) );
+		$fingerprint->getDescriptions()->setTerm( new Term( 'en', 'foo bar baz' ) );
+		$fingerprint->getDescriptions()->setTerm( new Term( 'nl', 'blah' ) );
+
+		$fingerprint->getAliases()->setGroup( new AliasGroup( 'en', array( 'foo', 'bar', 'baz' ) ) );
+		$fingerprint->getAliases()->setGroup( new AliasGroup( 'fr', array( 'spam' ) ) );
 	}
 
 	private function newItemWithClaims() {
