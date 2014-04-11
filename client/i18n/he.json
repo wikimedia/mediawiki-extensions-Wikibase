@@ -48,7 +48,7 @@
     "wikibase-rc-hide-wikidata-show": "הצגת",
     "wikibase-rc-show-wikidata-pref": "הצגת עריכות {{WBREPONAME}} בשינויים אחרונים",
     "wikibase-rc-wikibase-edit-letter": "נ",
-    "wikibase-rc-wikibase-edit-title": "עריכת {{WBREPONAME}}",
+    "wikibase-rc-wikibase-edit-title": "עריכה ב{{WBREPONAME}}",
     "wikibase-watchlist-show-changes-pref": "הצגת עריכות שנעשו ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} ברשימת המעקב",
     "wikibase-error-serialize-error": "כשל בהכנת נתונים לשמירה",
     "wikibase-error-invalid-entity-id": "המזהה שהוזן אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.",

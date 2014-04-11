@@ -6,7 +6,7 @@
             "Mirzali"
         ]
     },
-    "wikibase-entity-item": "obje",
+    "wikibase-entity-item": "unsur",
     "wikibase-entity-query": "persen",
     "wikibase-diffview-reference": "referans",
     "wikibase-diffview-rank": "rêze",
@@ -22,6 +22,6 @@
     "wikibase-sitelinks-siteid-columnheading": "Kod",
     "wikibase-sitelinks-link-columnheading": "Pela gırebiyayiye",
     "wikibase-tooltip-error-details": "Teferruati",
-    "datatypes-type-wikibase-item": "Obje",
+    "datatypes-type-wikibase-item": "Unsur",
     "version-wikibase": "Wikibase"
 }

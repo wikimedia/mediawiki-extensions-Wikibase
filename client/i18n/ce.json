@@ -14,7 +14,7 @@
     "wikibase-comment-unlink": "ХӀокху агӀонца йихкина {{WBREPONAME}} хьажоргаш дӀаяьхна.",
     "wikibase-comment-update": "Викихаамашан элемент хийцина",
     "wikibase-comment-sitelink-add": "Юкъарвики-хьажораг тӀетоьхна: $1",
-    "wikibase-comment-sitelink-change": "Юкъарвики-хьажораг хийцина $1 оцу $2",
+    "wikibase-comment-sitelink-change": "Юкъарвики-хьажораг хийцина $1 → $2",
     "wikibase-comment-sitelink-remove": "Юкъарвики-хьажораг дӀаяьккхина: $1",
     "wikibase-comment-multi": "$1 {{PLURAL:$1|1=хийцам|хийцамаш}}",
     "wikibase-dataitem": "Хаамашан элемент",
