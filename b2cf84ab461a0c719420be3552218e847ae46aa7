@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_05157940",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-04-11T18:28:06Z",
+      "side": 1,
+      "message": "This would never be reached since the method would always return in the previous if when $precision \u003c TimeValue::PRECISION_DAY.",
+      "revId": "b2cf84ab461a0c719420be3552218e847ae46aa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
