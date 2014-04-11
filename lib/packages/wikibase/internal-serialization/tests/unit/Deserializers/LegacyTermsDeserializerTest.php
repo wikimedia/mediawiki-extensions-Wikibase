@@ -5,10 +5,8 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Description;
-use Wikibase\DataModel\Term\DescriptionList;
-use Wikibase\DataModel\Term\Label;
-use Wikibase\DataModel\Term\LabelList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 
 /**
@@ -29,7 +27,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider labelListProvider
+	 * @dataProvider TermListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labelSerialization, $expected ) {
 		$fingerprint = $this->deserializer->deserialize( array( 'label' => $labelSerialization ) );
@@ -37,11 +35,11 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $fingerprint->getLabels() );
 	}
 
-	public function labelListProvider() {
+	public function TermListProvider() {
 		return array(
 			array(
 				array(),
-				new LabelList( array() )
+				new TermList( array() )
 			),
 
 			array(
@@ -49,9 +47,9 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 					'en' => 'foo',
 					'de' => 'bar',
 				),
-				new LabelList( array(
-					new Label( 'en', 'foo' ),
-					new Label( 'de', 'bar' ),
+				new TermList( array(
+					new Term( 'en', 'foo' ),
+					new Term( 'de', 'bar' ),
 				) )
 			),
 		);
@@ -84,7 +82,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array(),
-				new DescriptionList( array() )
+				new TermList( array() )
 			),
 
 			array(
@@ -92,9 +90,9 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 					'en' => 'foo',
 					'de' => 'bar',
 				),
-				new DescriptionList( array(
-					new Description( 'en', 'foo' ),
-					new Description( 'de', 'bar' ),
+				new TermList( array(
+					new Term( 'en', 'foo' ),
+					new Term( 'de', 'bar' ),
 				) )
 			),
 		);

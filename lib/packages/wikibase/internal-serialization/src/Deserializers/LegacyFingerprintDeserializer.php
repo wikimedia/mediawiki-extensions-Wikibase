@@ -5,14 +5,13 @@ namespace Wikibase\InternalSerialization\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\Description;
-use Wikibase\DataModel\Term\DescriptionList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Label;
-use Wikibase\DataModel\Term\LabelList;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * @licence GNU GPL v2+
@@ -35,27 +34,35 @@ class LegacyFingerprintDeserializer implements Deserializer {
 
 		$this->serialization = $serialization;
 
-		return new Fingerprint( $this->getLabels(), $this->getDescriptions(), $this->getAliases() );
+		try {
+			return new Fingerprint( $this->getLabels(), $this->getDescriptions(), $this->getAliases() );
+		}
+		catch ( InvalidArgumentException $ex ) {
+			throw new DeserializationException(
+				'Could not deserialize fingerprint: ' . $ex->getMessage(),
+				$ex
+			);
+		}
 	}
 
 	private function getLabels() {
 		$labels = array();
 
 		foreach ( $this->getArrayFromKey( 'label' ) as $langCode => $text ) {
-			$labels[] = new Label( $langCode, $text );
+			$labels[] = new Term( $langCode, $text );
 		}
 
-		return new LabelList( $labels );
+		return new TermList( $labels );
 	}
 
 	private function getDescriptions() {
 		$descriptions = array();
 
 		foreach ( $this->getArrayFromKey( 'description' ) as $langCode => $text ) {
-			$descriptions[] = new Description( $langCode, $text );
+			$descriptions[] = new Term( $langCode, $text );
 		}
 
-		return new DescriptionList( $descriptions );
+		return new TermList( $descriptions );
 	}
 
 	private function getAliases() {
