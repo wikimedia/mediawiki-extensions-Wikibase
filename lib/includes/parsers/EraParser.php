@@ -15,6 +15,8 @@ use ValueParsers\StringValueParser;
  */
 class EraParser extends StringValueParser {
 
+	const FORMAT_NAME = 'era';
+
 	/**
 	 * @since 0.5
 	 */
@@ -54,7 +56,11 @@ class EraParser extends StringValueParser {
 		}
 
 		if( isset( $eraFromSign ) && isset( $eraFromString ) ) {
-			throw new ParseException( 'Parsed two eras from the same string' );
+			throw new ParseException(
+				'Parsed two eras from the same string',
+				$value,
+				self::FORMAT_NAME
+			);
 		}
 
 		$cleanValue = $this->cleanValue( $value );

@@ -20,6 +20,8 @@ use ValueParsers\StringValueParser;
  */
 class TimeParser extends StringValueParser {
 
+	const FORMAT_NAME = 'time';
+
 	public function __construct( ParserOptions $options = null ) {
 		if( is_null( $options ) ) {
 			$options = new ParserOptions();
@@ -45,7 +47,7 @@ class TimeParser extends StringValueParser {
 			}
 		}
 
-		throw new ParseException( 'The format of the time could not be determined. Parsing failed.' );
+		throw new ParseException( 'The format of the time could not be determined.', $value, self::FORMAT_NAME );
 	}
 
 	/**
