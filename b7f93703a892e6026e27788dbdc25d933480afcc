@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_f0eff980",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-11T10:24:01Z",
+      "side": 1,
+      "message": "This should be done in the LanguageLinkBadgeDisplay class.",
+      "revId": "b7f93703a892e6026e27788dbdc25d933480afcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_90fe8534",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-11T10:24:01Z",
+      "side": 1,
+      "message": "$languageCode please. We are currently trying to stick to a bit longer, a bit more specific naming scheme.",
+      "revId": "b7f93703a892e6026e27788dbdc25d933480afcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_10b95578",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-11T10:24:01Z",
+      "side": 1,
+      "message": "I think it\u0027s better to compare the serializations instead of constructing an object just to compare it. Also the comparison is hidden in in_array which is scary.",
+      "revId": "b7f93703a892e6026e27788dbdc25d933480afcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
