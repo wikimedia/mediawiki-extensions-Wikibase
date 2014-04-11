@@ -217,7 +217,7 @@ label and its toolbar */
 (label) which has a bigger font size */
 .wb-firstHeading .wb-editsection {
 	/* FIXME: Should use the LESS variable @content-font-family */
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: sans-serif;
 	line-height: 188%;
 	top: .3em; /* even out margin of label container in view mode */
 }
