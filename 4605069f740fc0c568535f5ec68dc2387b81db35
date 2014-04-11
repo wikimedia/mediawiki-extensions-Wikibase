@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_85d189d2",
+        "filename": "repo/tests/phpunit/includes/view/SnakHtmlGeneratorTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-04-11T19:28:59Z",
+      "side": 1,
+      "message": "Still needed?",
+      "revId": "4605069f740fc0c568535f5ec68dc2387b81db35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a5cec52f",
+        "filename": "repo/tests/phpunit/includes/view/SnakHtmlGeneratorTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-04-11T19:28:59Z",
+      "side": 1,
+      "message": "This is not needed anymore, right?",
+      "revId": "4605069f740fc0c568535f5ec68dc2387b81db35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
