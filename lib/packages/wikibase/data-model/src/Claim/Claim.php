@@ -189,6 +189,7 @@ class Claim implements \Hashable, \Serializable {
 	 * Constructs a new Claim from an array in the same format as Claim::toArray returns.
 	 *
 	 * @since 0.3
+	 * @deprecated since 0.7.3
 	 *
 	 * @param array $data
 	 *
