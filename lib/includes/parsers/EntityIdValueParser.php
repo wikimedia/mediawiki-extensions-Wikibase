@@ -20,6 +20,8 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  */
 class EntityIdValueParser extends StringValueParser {
 
+	const FORMAT_NAME = 'entity-id';
+
 	/**
 	 * @var EntityIdParser
 	 */
@@ -48,7 +50,7 @@ class EntityIdValueParser extends StringValueParser {
 			return $this->parser->parse( $value );
 		}
 		catch ( EntityIdParsingException $ex ) {
-			throw new ParseException( $ex->getMessage(), 0, $ex );
+			throw new ParseException( $ex->getMessage(), $value, self::FORMAT_NAME );
 		}
 	}
 

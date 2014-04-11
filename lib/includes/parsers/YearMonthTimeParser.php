@@ -21,6 +21,8 @@ use ValueParsers\ValueParser;
  */
 class YearMonthTimeParser extends StringValueParser {
 
+	const FORMAT_NAME = 'yearmonth';
+
 	/**
 	 * @var Language
 	 */
@@ -49,9 +51,9 @@ class YearMonthTimeParser extends StringValueParser {
 	protected function stringParse( $value ) {
 		//Matches Year and month separated by a separator, \p{L} matches letters outside the ASCII range
 		if( !preg_match( '/^([\d\p{L}]+)\s*[\/\-\s.,]\s*([\d\p{L}]+)$/', trim( $value ), $matches ) ) {
-			throw new ParseException( 'Failed to parse year and month: ' . $value );
+			throw new ParseException( 'Failed to parse year and month', $value, self::FORMAT_NAME );
 		}
-		list( ,$a, $b ) = $matches;
+		list( , $a, $b ) = $matches;
 
 		$aIsInt = preg_match( '/^\d+$/', $a );
 		$bIsInt = preg_match( '/^\d+$/', $b );
@@ -78,7 +80,7 @@ class YearMonthTimeParser extends StringValueParser {
 			}
 		}
 
-		throw new ParseException( 'Failed to parse year and month: ' . $value );
+		throw new ParseException( 'Failed to parse year and month', $value, self::FORMAT_NAME );
 	}
 
 	/**
