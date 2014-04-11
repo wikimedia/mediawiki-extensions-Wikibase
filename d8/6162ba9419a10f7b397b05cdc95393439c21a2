@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Bartosz Dziewoński <matma.rex@gmail.com>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 11 Apr 2014 22:28:29 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/125520
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
