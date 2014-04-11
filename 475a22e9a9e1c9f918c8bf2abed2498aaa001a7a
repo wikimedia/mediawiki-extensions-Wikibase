@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_ad3911f1",
+        "filename": "repo/includes/ClaimDifferenceVisualizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-11T13:01:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we `use` that?",
+      "revId": "475a22e9a9e1c9f918c8bf2abed2498aaa001a7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
