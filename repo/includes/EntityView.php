@@ -572,7 +572,8 @@ abstract class EntityView extends \ContextSource {
 
 			$claimsHtml .= wfTemplate( 'wb-claimlistview',
 				$propertyHtml,
-				wfTemplate( 'wb-claimgrouplistview-groupname', $propertyLink ) . $toolbarHtml
+				wfTemplate( 'wb-claimgrouplistview-groupname', $propertyLink ) . $toolbarHtml,
+				$propertyId->getSerialization()
 			);
 
 		}
@@ -580,7 +581,7 @@ abstract class EntityView extends \ContextSource {
 		$claimgrouplistviewHtml = wfTemplate( 'wb-claimgrouplistview', $claimsHtml, '' );
 
 		// TODO: Add link to SpecialPage that allows adding a new claim.
-		$html = $html . wfTemplate( 'wb-claimlistview', $claimgrouplistviewHtml, '' );
+		$html = $html . wfTemplate( 'wb-claimlistview', $claimgrouplistviewHtml, '', '' );
 
 		wfProfileOut( __METHOD__ );
 		return $html;

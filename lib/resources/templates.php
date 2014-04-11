@@ -79,7 +79,7 @@ HTML;
 	$templates['wb-claimlistview'] =
 <<<HTML
 <div class="wb-claimlistview">
-	<div class="wb-claims">
+	<div class="wb-claims" id="$3">
 		$1 <!-- [0,*] wb-claim|wb-statement -->
 	</div>
 	$2 <!-- [0,*] wb-toolbar -->
