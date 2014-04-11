@@ -20,7 +20,12 @@ use Wikibase\Utils;
  * @author H. Snater < mediawiki@snater.com >
  * @author Adam Shorland
  */
-class MwTimeIsoFormatterTest extends \PHPUnit_Framework_TestCase {
+class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
+
+	protected function setUp() {
+		parent::setUp();
+		$this->stashMwGlobals( 'wgHooks' );
+	}
 
 	/**
 	 * Returns an array of test parameters.
