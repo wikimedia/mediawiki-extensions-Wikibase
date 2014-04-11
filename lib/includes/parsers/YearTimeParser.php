@@ -19,6 +19,8 @@ use ValueParsers\ValueParser;
  */
 class YearTimeParser extends StringValueParser {
 
+	const FORMAT_NAME = 'year';
+
 	/**
 	 * @var \ValueParsers\TimeParser
 	 */
@@ -59,7 +61,7 @@ class YearTimeParser extends StringValueParser {
 		list( $sign, $year ) = $this->eraParser->parse( $value );
 
 		if( !preg_match( '/^\d+$/', $year ) ) {
-			throw new ParseException( 'Failed to parse year: ' . $value );
+			throw new ParseException( 'Failed to parse year', $value, self::FORMAT_NAME );
 		}
 
 		return $this->timeValueTimeParser->parse( $sign . $year . '-00-00T00:00:00Z' );
