@@ -1,19 +1,18 @@
 # Wikibase DataModel
 
-PHP implementation of the
-[Wikibase](https://www.mediawiki.org/wiki/Wikibase)
-[Data Model](https://meta.wikimedia.org/wiki/Wikidata/Data_model).
-This implementation depends on a number of standalone PHP libraries (see below),
-though does not depend on either MediaWiki or the Wikibase Repo/Client software.
-
 [![Build Status](https://secure.travis-ci.org/wmde/WikibaseDataModel.png?branch=master)](http://travis-ci.org/wmde/WikibaseDataModel)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/badges/quality-score.png?s=6e63826e875923969a3b5f9bbd03f79839b835a5)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/)
 [![Code Coverage](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/badges/coverage.png?s=a48a587bb3fd2705cbe3137e8361fc7c3408a9af)](https://scrutinizer-ci.com/g/wmde/WikibaseDataModel/)
 [![Dependency Status](https://www.versioneye.com/php/wikibase:data-model/badge.png)](https://www.versioneye.com/php/wikibase:data-model)
-
-On Packagist:
 [![Latest Stable Version](https://poser.pugx.org/wikibase/data-model/version.png)](https://packagist.org/packages/wikibase/data-model)
 [![Download count](https://poser.pugx.org/wikibase/data-model/d/total.png)](https://packagist.org/packages/wikibase/data-model)
+
+**Wikibase DataModel** is the canonical PHP implementation of the
+[Data Model](https://meta.wikimedia.org/wiki/Wikidata/Data_model)
+at the heart of the [Wikibase software](http://wikiba.se/).
+
+It is primarily used by the Wikibase MediaWiki extensions, though
+has no dependencies whatsoever on these or on MediaWiki itself.
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
