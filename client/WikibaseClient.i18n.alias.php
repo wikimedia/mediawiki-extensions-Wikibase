@@ -94,7 +94,7 @@ $specialPageAliases['vi'] = array(
 
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = array(
-	'UnconnectedPages' => array( '未连接页面', '无连接页面', '无站点连接' ),
+	'UnconnectedPages' => array( '未链接页面', '丢失链接页面' ),
 );
 
 /** Traditional Chinese (中文（繁體）‎) */

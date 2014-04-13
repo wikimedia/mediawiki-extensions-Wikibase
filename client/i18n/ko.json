@@ -16,7 +16,7 @@
     "wikibase-comment-remove": "연결한 {{WBREPONAME}} 항목을 삭제했습니다. 언어 링크를 제거했습니다.",
     "wikibase-comment-linked": "{{WBREPONAME}} 항목을 이 문서에 연결했습니다.",
     "wikibase-comment-unlink": "이 문서는 {{WBREPONAME}} 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다.",
-    "wikibase-comment-restore": "연결한 {{WBREPONAME}} 항목을 복구했습니다. 언어 링크를 복구했습니다.",
+    "wikibase-comment-restore": "연결한 {{WBREPONAME}} 항목을 삭제 취소했습니다. 언어 링크를 복구했습니다.",
     "wikibase-comment-update": "{{WBREPONAME}} 항목을 바꿈",
     "wikibase-comment-sitelink-add": "언어 링크가 추가됨: $1",
     "wikibase-comment-sitelink-change": "언어 링크를 $1에서 $2로 바꿈",

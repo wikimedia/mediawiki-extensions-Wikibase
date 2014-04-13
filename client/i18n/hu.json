@@ -4,15 +4,16 @@
             "Bináris",
             "BáthoryPéter",
             "Tgr",
-            "JulesWinnfield-hu"
+            "JulesWinnfield-hu",
+            "Tacsipacsi"
         ]
     },
     "wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
-    "wikibase-after-page-move": "Ha azt akarod, hogy a nyelvközi hivatkozások megmaradjanak, [$1 frissítsd] a kapcsolt Wikidata elemet is.",
-    "wikibase-comment-remove": "Nyelvközi hivatkozások eltávolítása – a kapcsolt Wikidata elemet törölték.",
-    "wikibase-comment-linked": "Egy Wikidata elemet kapcsoltak ehhez az oldalhoz.",
-    "wikibase-comment-unlink": "Nyelvközi hivatkozások eltávolítása – már nincs összekapcsolva a Wikidata elemmel.",
-    "wikibase-comment-restore": "Nyelvközi hivatkozások visszaállítása – a hozzátartozó törölt Wikidata elemet visszaállították.",
+    "wikibase-after-page-move": "Ha azt akarod, hogy a nyelvközi hivatkozások megmaradjanak, [$1 frissítsd] a kapcsolt {{WBREPONAME}} elemet is.",
+    "wikibase-comment-remove": "Nyelvközi hivatkozások eltávolítása – a kapcsolt {{WBREPONAME}} elemet törölték.",
+    "wikibase-comment-linked": "Egy {{WBREPONAME}} elemet kapcsoltak ehhez az oldalhoz.",
+    "wikibase-comment-unlink": "Nyelvközi hivatkozások eltávolítása – már nincs összekapcsolva a {{WBREPONAME}} elemmel.",
+    "wikibase-comment-restore": "Nyelvközi hivatkozások visszaállítása – a hozzátartozó törölt {{WBREPONAME}} elemet visszaállították.",
     "wikibase-comment-update": "A {{WBREPONAME}}-elem megváltozott",
     "wikibase-comment-sitelink-add": "Nyelvközi hivatkozás hozzáadása: $1",
     "wikibase-comment-sitelink-change": "Nyelvközi hivatkozás módosítása (régi: $1, új: $2)",
@@ -24,7 +25,7 @@
     "wikibase-rc-hide-wikidata": "{{WBREPONAME}}-szerkesztések $1",
     "wikibase-rc-hide-wikidata-hide": "elrejtése",
     "wikibase-rc-hide-wikidata-show": "megjelenítése",
-    "wikibase-rc-show-wikidata-pref": "Wikidata szerkesztések mutatása a friss változtatásokban",
-    "wikibase-rc-wikibase-edit-title": "Wikidata-szerkesztés",
-    "wikibase-watchlist-show-changes-pref": "Wikidata-változások mutatása a figyelőlistádon"
+    "wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} szerkesztések mutatása a friss változtatásokban",
+    "wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-szerkesztés",
+    "wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}-változások mutatása a figyelőlistádon"
 }

@@ -2,7 +2,8 @@
     "@metadata": {
         "authors": [
             "Tgr",
-            "JulesWinnfield-hu"
+            "JulesWinnfield-hu",
+            "Tacsipacsi"
         ]
     },
     "wikibase-lib-desc": "A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza",
@@ -15,7 +16,7 @@
     "wikibase-error-remove-connection": "Kapcsolódási hiba lépett fel a törlés közben, ezért a változtatásaidat nem sikerült befejezni. Ellenőrizd az internetkapcsolatodat.",
     "wikibase-error-save-timeout": "Műszaki problémáink vannak, ezért a mentést nem sikerült befejezni.",
     "wikibase-error-remove-timeout": "Műszaki problémáink vannak, ezért a törlést nem sikerült befejezni.",
-    "wikibase-error-autocomplete-connection": "Nem sikerült lekérdezni a Wikipédia API-t. Kérlek, próbálkozz újra később.",
+    "wikibase-error-autocomplete-connection": "Nem sikerült lekérdezni a oldal-API-t. Kérlek, próbálkozz újra később.",
     "wikibase-error-autocomplete-response": "A szerver válasza: $1",
     "wikibase-error-ui-client-error": "Nem sikerült kapcsolódni a kliens laphoz. Kérlek, próbáld meg újra később.",
     "wikibase-error-ui-no-external-page": "A megadott cikk nem található a megadott wikin.",
@@ -27,7 +28,7 @@
     "wikibase-sitelinks-wikipedia": "Kapcsolt Wikipédia-lapok",
     "wikibase-sitelinks-sitename-columnheading": "Nyelv",
     "wikibase-sitelinks-siteid-columnheading": "Kód",
-    "wikibase-sitelinks-link-columnheading": "Kapcsolt szócikk",
+    "wikibase-sitelinks-link-columnheading": "Kapcsolt oldal",
     "wikibase-tooltip-error-details": "Részletek",
     "datatypes-type-wikibase-item": "Tétel",
     "datatypes-type-commonsMedia": "Commons médiafájl"
