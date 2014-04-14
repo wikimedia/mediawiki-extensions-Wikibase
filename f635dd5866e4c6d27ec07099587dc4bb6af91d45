@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_d533a808",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T19:27:38Z",
+      "side": 1,
+      "message": "Currently only badges that are in the badgeClassNames array are rendered with their description/title. I don\u0027t think this restriction is necessary. All you need to know to render a description/title is the ItemId of the badge. You don\u0027t need the options array to render the titles.\n\nCheck the title/description for all badges (no matter if they have a class name or not) and render either the first or the last (I think it should be the last).\n\nRender all class names and let the CSS decide which one is more important.",
+      "revId": "f635dd5866e4c6d27ec07099587dc4bb6af91d45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
