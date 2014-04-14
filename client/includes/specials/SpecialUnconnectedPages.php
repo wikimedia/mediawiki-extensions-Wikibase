@@ -27,7 +27,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 *
 	 * @var string
 	 */
-	protected $startPage = '';
+	private $startPage = '';
 
 	/**
 	 * The startPage as a title to start search at
@@ -36,7 +36,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 *
 	 * @var Title
 	 */
-	protected $startTitle = null;
+	private $startTitle = null;
 
 	/**
 	 * The namespaceChecker
@@ -45,7 +45,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 *
 	 * @var NamespaceChecker
 	 */
-	protected $namespaceChecker = null;
+	private $namespaceChecker = null;
 
 	/**
 	 * If the search should only include pages with iw-links
@@ -54,7 +54,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 *
 	 * @var string
 	 */
-	protected $iwData = '';
+	private $iwData = '';
 
 	public function __construct() {
 		parent::__construct( 'UnconnectedPages' );

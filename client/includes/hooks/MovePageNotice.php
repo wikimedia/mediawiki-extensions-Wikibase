@@ -23,17 +23,17 @@ final class MovePageNotice {
 	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinkLookup;
+	private $siteLinkLookup;
 
 	/**
 	 * @var string
 	 */
-	protected $siteId;
+	private $siteId;
 
 	/**
 	 * @var RepoLinker
 	 */
-	protected $repoLinker;
+	private $repoLinker;
 
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
@@ -54,7 +54,7 @@ final class MovePageNotice {
 	 *
 	 * @return string|null
 	 */
-	protected function getItemUrl( Title $title ) {
+	private function getItemUrl( Title $title ) {
 		$entityId = $this->siteLinkLookup->getEntityIdForSiteLink(
 			new SimpleSiteLink(
 				$this->siteId,
@@ -98,7 +98,7 @@ final class MovePageNotice {
 		return $html;
 	}
 
-	protected function getPageMoveMessage( Title $newTitle ) {
+	private function getPageMoveMessage( Title $newTitle ) {
 		if ( isset( $newTitle->wikibasePushedMoveToRepo ) ) {
 			// We're going to update the item using the repo job queue \o/
 			return 'wikibase-after-page-move-queued';

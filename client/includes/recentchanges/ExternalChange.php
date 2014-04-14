@@ -15,17 +15,17 @@ class ExternalChange {
 	/**
 	 * @var EntityId
 	 */
-	protected $entityId;
+	private $entityId;
 
 	/**
 	 * @var RevisionData
 	 */
-	protected $rev;
+	private $rev;
 
 	/**
 	 * @var string
 	 */
-	protected $changeType;
+	private $changeType;
 
 	/**
 	 * @param EntityId $entityId

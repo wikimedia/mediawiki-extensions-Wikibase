@@ -13,13 +13,13 @@ namespace Wikibase;
  */
 class InterwikiSorter {
 
-	protected $sortOrders;
+	private $sortOrders;
 
-	protected $sort;
+	private $sort;
 
-	protected $sortPrepend;
+	private $sortPrepend;
 
-	protected $sortOrder;
+	private $sortOrder;
 
 	/**
 	 * @since 0.4
@@ -73,14 +73,12 @@ class InterwikiSorter {
 	/**
 	 * usort() callback function, compares the links on the basis of $sortOrder
 	 *
-	 * @since 0.1
-	 *
 	 * @param mixed $a
 	 * @param mixed $b
 	 *
 	 * @return integer
 	 */
-	protected function compareLinks( $a, $b ) {
+	private function compareLinks( $a, $b ) {
 		$a = $a[0];
 		$b = $b[0];
 
@@ -96,8 +94,6 @@ class InterwikiSorter {
 	/**
 	 * Build sort order to be used by compareLinks().
 	 *
-	 * @since 0.1
-	 *
 	 * @param string $sort
 	 * @param array $sortOrders []
 	 * @param array $sortPrepend []
@@ -105,7 +101,7 @@ class InterwikiSorter {
 	 * @throws \MWException
 	 * @return array
 	 */
-	protected function buildSortOrder( $sort, array $sortOrders, array $sortPrepend ) {
+	private function buildSortOrder( $sort, array $sortOrders, array $sortPrepend ) {
 		if ( !array_key_exists( 'alphabetic', $sortOrders ) ) {
 			throw new \MWException( 'alphabetic interwiki sorting order is missing from Wikibase Client settings.' );
 		}

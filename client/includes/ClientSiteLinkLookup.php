@@ -19,17 +19,17 @@ class ClientSiteLinkLookup {
 	/**
 	 * @var string
 	 */
-	protected $localSiteId;
+	private $localSiteId;
 
 	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinkLookup;
+	private $siteLinkLookup;
 
 	/**
 	 * @var EntityLookup
 	 */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/**
 	 * @param string $localSiteId global id of the client wiki

@@ -17,7 +17,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 	/**
 	 * @var Title
 	 */
-	protected $newTitle;
+	private $newTitle;
 
 	/**
 	 * @param string $repoDB Database name of the repo

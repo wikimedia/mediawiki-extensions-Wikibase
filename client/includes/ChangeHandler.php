@@ -70,33 +70,33 @@ class ChangeHandler {
 	/**
 	 * @var PageUpdater $updater
 	 */
-	protected $updater;
+	private $updater;
 
 
 	/**
 	 * @var EntityLookup $entityLookup
 	 */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/**
 	 * @var Site $site
 	 */
-	protected $site;
+	private $site;
 
 	/**
 	 * @var string
 	 */
-	protected $siteId;
+	private $siteId;
 
 	/**
 	 * @var NamespaceChecker $namespaceChecker
 	 */
-	protected $namespaceChecker;
+	private $namespaceChecker;
 
 	/**
 	 * @var bool
 	 */
-	protected $checkPageExistence = true;
+	private $checkPageExistence = true;
 
 	public function __construct( PageUpdater $updater = null,
 			EntityLookup $entityLookup = null,
@@ -611,7 +611,7 @@ class ChangeHandler {
 	 *
 	 * @return string
 	 */
-	protected static function getChangeIdForLog( Change $change ) {
+	private static function getChangeIdForLog( Change $change ) {
 		$fields = $change->getFields(); //@todo: add getFields() to the interface, or provide getters!
 
 		if ( isset( $fields['info']['change-ids'] ) ) {
@@ -633,7 +633,7 @@ class ChangeHandler {
 	 * @return array|boolean an array of RC attributes,
 	 *         or false if the change does not provide edit meta data
 	 */
-	protected function getRCAttributes( EntityChange $change ) {
+	private function getRCAttributes( EntityChange $change ) {
 		wfProfileIn( __METHOD__ );
 
 		$rcinfo = $change->getMetadata();

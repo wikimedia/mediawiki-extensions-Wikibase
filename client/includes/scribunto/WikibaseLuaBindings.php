@@ -25,28 +25,28 @@ use Language;
 class WikibaseLuaBindings {
 
 	/* @var EntityIdParser */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/* @var EntityLookup */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/* @var EntityIdFormatter */
-	protected $entityIdFormatter;
+	private $entityIdFormatter;
 
 	/* @var SiteLinkLookup */
-	protected $siteLinkTable;
+	private $siteLinkTable;
 
 	/* @var LanguageFallbackChainFactory */
-	protected $fallbackChainFactory;
+	private $fallbackChainFactory;
 
 	/* @var Language */
-	protected $language;
+	private $language;
 
 	/* @var string[] */
-	protected $languageCodes;
+	private $languageCodes;
 
 	/* @var string */
-	protected $siteId;
+	private $siteId;
 
 	/**
 	 * @param EntityIdParser $entityIdParser

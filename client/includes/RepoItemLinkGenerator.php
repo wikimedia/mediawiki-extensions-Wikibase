@@ -13,13 +13,13 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  */
 class RepoItemLinkGenerator {
 
-	protected $namespacesChecker;
+	private $namespacesChecker;
 
-	protected $repoLinker;
+	private $repoLinker;
 
-	protected $entityIdParser;
+	private $entityIdParser;
 
-	protected $siteGroup;
+	private $siteGroup;
 
 	/**
 	 * @since 0.4
@@ -69,15 +69,13 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param Title $title
 	 * @param string $action
 	 * @param mixed $noExternalLangLinks
 	 *
 	 * @return boolean
 	 */
-	protected function canHaveLink( Title $title, $action, $noExternalLangLinks ) {
+	private function canHaveLink( Title $title, $action, $noExternalLangLinks ) {
 		if ( $action !== 'view' ) {
 			return false;
 		}
@@ -93,13 +91,11 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param mixed
 	 *
 	 * @return boolean
 	 */
-	protected function isSuppressed( $noExternalLangLinks ) {
+	private function isSuppressed( $noExternalLangLinks ) {
 		if ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) ) {
 			return false;
 		}
@@ -108,13 +104,11 @@ class RepoItemLinkGenerator {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param EntityId
 	 *
 	 * @return array
 	 */
-	protected function getEditLinksLink( EntityId $entityId ) {
+	private function getEditLinksLink( EntityId $entityId ) {
 		$fragment = '#sitelinks-' . htmlspecialchars( $this->siteGroup, ENT_QUOTES );
 
 		$link = array(
@@ -131,11 +125,9 @@ class RepoItemLinkGenerator {
 	/**
 	 * Used by the LinkItem js widget
 	 *
-	 * @since 0.4
-	 *
 	 * @return array
 	 */
-	protected function getAddLinksLink() {
+	private function getAddLinksLink() {
 		$link = array(
 			'action' => 'add',
 			'text' => '',

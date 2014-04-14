@@ -13,13 +13,13 @@ use InvalidArgumentException;
  */
 class RepoLinker {
 
-	protected $baseUrl;
+	private $baseUrl;
 
-	protected $articlePath;
+	private $articlePath;
 
-	protected $scriptPath;
+	private $scriptPath;
 
-	protected $namespaces;
+	private $namespaces;
 
 	/**
 	 * @since 0.4
@@ -87,13 +87,11 @@ class RepoLinker {
 	/**
 	 * Encode a page title
 	 *
-	 * @since 0.4
-	 *
 	 * @param string $page
 	 *
 	 * @return string
 	 */
-	protected function encodePage( $page ) {
+	private function encodePage( $page ) {
 		return wfUrlencode( str_replace( ' ', '_', $page ) );
 	}
 

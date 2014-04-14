@@ -25,9 +25,10 @@ abstract class UpdateRepo {
 	/**
 	 * @var string
 	 */
-	protected $repoDB;
+	private $repoDB;
 
 	/**
+	 * @since 0.4
 	 * @var User
 	 */
 	protected $user;
@@ -35,14 +36,16 @@ abstract class UpdateRepo {
 	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinkLookup;
+	private $siteLinkLookup;
 
 	/**
+	 * @since 0.4
 	 * @var string
 	 */
 	protected $siteId;
 
 	/**
+	 * @since 0.4
 	 * @var Title
 	 */
 	protected $title;

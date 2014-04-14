@@ -18,7 +18,7 @@ use Message;
 class ParserErrorMessageFormatter {
 
 	/* @var Language $language */
-	protected $language;
+	private $language;
 
 	/**
 	 * @since 0.4

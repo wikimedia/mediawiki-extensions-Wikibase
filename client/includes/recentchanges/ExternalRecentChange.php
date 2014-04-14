@@ -30,7 +30,7 @@ class ExternalRecentChange {
 	 * @param array @attribs
 	 * @param \Title $title
 	 */
-	protected function buildAttributes( $attribs, $title ) {
+	private function buildAttributes( $attribs, $title ) {
 		$metadata = $attribs['wikibase-repo-change'];
 
 		$isBot = false;

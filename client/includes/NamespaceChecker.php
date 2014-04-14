@@ -19,12 +19,12 @@ class NamespaceChecker {
 	/**
 	 * @var array
 	 */
-	protected $excludedNamespaces;
+	private $excludedNamespaces;
 
 	/**
 	 * @var array
 	 */
-	protected $enabledNamespaces;
+	private $enabledNamespaces;
 
 	/**
 	 * @since 0.4
@@ -64,13 +64,11 @@ class NamespaceChecker {
 	 * Check if the namespace is excluded by settings for having wikibase links, etc.
 	 * based on the 'excludeNamespaces' setting.
 	 *
-	 * @since 0.4
-	 *
 	 * @param int $namespace
 	 *
 	 * @return bool
 	 */
-	protected function isExcluded( $namespace ) {
+	private function isExcluded( $namespace ) {
 		return in_array( $namespace, $this->excludedNamespaces );
 	}
 
@@ -80,13 +78,11 @@ class NamespaceChecker {
 	 * Note: If no list of enabled namespaces is configured, all namespaces are considered
 	 * to be enabled for Wikibase.
 	 *
-	 * @since 0.4
-	 *
 	 * @param int $namespace
 	 *
 	 * @return bool
 	 */
-	protected function isEnabled( $namespace ) {
+	private function isEnabled( $namespace ) {
 		return empty( $this->enabledNamespaces )
 			|| in_array( $namespace, $this->enabledNamespaces );
 	}

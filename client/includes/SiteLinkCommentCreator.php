@@ -19,7 +19,7 @@ class SiteLinkCommentCreator {
 	/**
 	 * @var string
 	 */
-	protected $siteId;
+	private $siteId;
 
 	/**
 	 * @param string $siteId
@@ -61,7 +61,7 @@ class SiteLinkCommentCreator {
 	 *
 	 * @return array|null
 	 */
-	protected function getSiteLinkComment( $action, Diff $siteLinkDiff ) {
+	private function getSiteLinkComment( $action, Diff $siteLinkDiff ) {
 		if ( $siteLinkDiff->isEmpty() ) {
 			return null;
 		}
@@ -109,7 +109,7 @@ class SiteLinkCommentCreator {
 	 *
 	 * @return array|null
 	 */
-	protected function getSiteLinkChangeParams( array $diffs ) {
+	private function getSiteLinkChangeParams( array $diffs ) {
 		$messagePrefix = 'wikibase-comment-sitelink-';
 		/* Messages used:
 			wikibase-comment-sitelink-add wikibase-comment-sitelink-change wikibase-comment-sitelink-remove
@@ -144,7 +144,7 @@ class SiteLinkCommentCreator {
 	 *
 	 * @return array|null
 	 */
-	protected function getChangeParamsForDiffOp( DiffOp $diffOp, $siteId, $messagePrefix ) {
+	private function getChangeParamsForDiffOp( DiffOp $diffOp, $siteId, $messagePrefix ) {
 		$params = array();
 
 		if ( $diffOp instanceof \Diff\DiffOpAdd ) {
@@ -189,7 +189,7 @@ class SiteLinkCommentCreator {
 	 *
 	 * @return array|null
 	 */
-	protected function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId ) {
+	private function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId ) {
 		$params = array();
 
 		if ( in_array( $action, array( 'remove', 'restore' ) ) ) {
