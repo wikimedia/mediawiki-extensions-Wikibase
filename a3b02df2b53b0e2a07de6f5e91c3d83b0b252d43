@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_b5bb8cb9",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:48:05Z",
+      "side": 1,
+      "message": "I remember naming this \u0027badgeClassNames\u0027. Did this changed?",
+      "revId": "a3b02df2b53b0e2a07de6f5e91c3d83b0b252d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f5c10435",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:48:05Z",
+      "side": 1,
+      "message": "This creates a loop in a loop in a loop. One of the reasons why the array in the options is an associative array was to be able to avoid this.",
+      "revId": "a3b02df2b53b0e2a07de6f5e91c3d83b0b252d43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
