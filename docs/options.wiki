@@ -49,6 +49,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
 ;dataRightsUrl: Url to link to license for data contents. Defaults to $wgRightsUrl setting.
 ;dataRightsText: Text for data license link. Defaults to $wgRightsText setting.
+;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item ids pointing to empty strings (reserved for future use), e.g. <code>array( 'Q123' => '' )</code>.
 
 === Expert Settings ===
 ;defaultStore: The storage engine to use for storing entities. Default: 'sqlstore'. The is currently no alternative.
