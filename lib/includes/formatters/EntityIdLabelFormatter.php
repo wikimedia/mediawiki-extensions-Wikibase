@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
+use OutOfBoundsException;
 use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
@@ -91,13 +92,17 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	public function format( $value ) {
 		$value = $this->unwrapEntityId( $value );
 
+		$label = null;
+
 		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
-			$label = $this->lookupItemLabel( $value );
-		} else {
-			$label = false;
+			try {
+				$label = $this->lookupItemLabel( $value );
+			} catch ( OutOfBoundsException $ex ) {
+				/* Use fallbacks below */
+			}
 		}
 
-		if ( $label === false ) {
+		if ( !is_string( $label ) ) {
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
 				case self::FALLBACK_EMPTY_STRING:
 					$label = '';
@@ -143,13 +148,14 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string|boolean
+	 * @throws OutOfBoundsException If an entity with that ID does not exist.
+	 * @return string|bool False if no label was found in the language or language fallback chain.
 	 */
 	protected function lookupItemLabel( EntityId $entityId ) {
 		$entity = $this->entityLookup->getEntity( $entityId );
 
 		if ( $entity === null ) {
-			return false;
+			throw new OutOfBoundsException( "An Entity with the id $entityId does not exist" );
 		}
 
 		/* @var LanguageFallbackChain $languageFallbackChain */
@@ -170,4 +176,3 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	}
 
 }
-
