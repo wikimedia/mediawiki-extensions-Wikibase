@@ -11,6 +11,6 @@ Then /^Language input field should be there$/ do
   on(SpecialModifyTermPage).language_input_field?.should be_true
 end
 
-When /^I enter (.*) into the language input field$/ do |language_code|
+When /^I enter (.+) into the language input field$/ do |language_code|
   on(SpecialModifyTermPage).language_input_field = language_code
 end
