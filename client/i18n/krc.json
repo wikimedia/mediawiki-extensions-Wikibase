@@ -37,5 +37,6 @@
     "wikibase-rc-hide-wikidata-show": "кёргюз",
     "wikibase-rc-show-wikidata-pref": "Викибилгилени тюрлениулерин джангы тюрлениулени тизмесинде кёргюз",
     "wikibase-rc-wikibase-edit-letter": "вб",
-    "wikibase-rc-wikibase-edit-title": "Викибилги бла байламлы тюрлениу"
+    "wikibase-rc-wikibase-edit-title": "Викибилги бла байламлы тюрлениу",
+    "wikibase-watchlist-show-changes-pref": "{{WBREPONAME}}'деги тюрлениулени кёздеги тизмеде кёргюз"
 }

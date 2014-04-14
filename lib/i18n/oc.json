@@ -4,5 +4,6 @@
             "Cedric31"
         ]
     },
+    "wikibase-unexpected-error": "Error inesperada : $1.",
     "datatypes-type-wikibase-item": "Element"
 }

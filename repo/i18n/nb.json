@@ -195,7 +195,7 @@
     "special-entitieswithoutdescription": "Elementer uten beskrivelse",
     "wikibase-entitieswithoutdescription-legend": "Hent liste over elementer uten beskrivelse",
     "special-entitieswithoutlabel": "Entiteter uten etikett",
-    "wikibase-entitieswithoutlabel-legend": "Alternativ for å hente entiterer uten etikett",
+    "wikibase-entitieswithoutlabel-legend": "Hent en liste over entiteter uten etikett",
     "wikibase-entitieswithoutlabel-label-language": "Språk:",
     "wikibase-entitieswithoutlabel-label-type": "Type:",
     "wikibase-entitieswithoutlabel-label-alltypes": "alle",

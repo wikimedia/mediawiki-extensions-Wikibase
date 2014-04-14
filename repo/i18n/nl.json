@@ -41,6 +41,7 @@
     "wikibase-label-input-help-message": "Geef de naam van deze gegevensset in in $1.",
     "wikibase-description-input-help-message": "Geef een korte beschrijving in in $1.",
     "wikibase-statements": "Verklaringen",
+    "wikibase-attributes": "Eigenschappen",
     "wikibase-terms": "In andere talen",
     "wikibase-sitelinks-add": "koppeling toevoegen naar een sitepagina",
     "wikibase-sitelinks-empty": "Er zijn nog geen sitepagina's voor dit item.",
