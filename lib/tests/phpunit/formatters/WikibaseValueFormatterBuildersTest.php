@@ -106,7 +106,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				SnakFormatter::FORMAT_HTML_WIDGET,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@^<a href=".*/wiki/Q5">Label for Q5</a>$@', // compare mock object created in newBuilders()
+				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/', // compare mock object created in newBuilders()
 				'wikibase-item'
 			),
 			'diff <url>' => array(
