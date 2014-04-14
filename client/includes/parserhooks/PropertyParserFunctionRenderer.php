@@ -25,19 +25,19 @@ use Wikibase\Lib\SnakFormatter;
 class PropertyParserFunctionRenderer {
 
 	/* @var Language */
-	protected $language;
+	private $language;
 
 	/* @var EntityLookup */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/* @var PropertyLabelResolver */
-	protected $propertyLabelResolver;
+	private $propertyLabelResolver;
 
 	/* @var ParserErrorMessageFormatter */
-	protected $errorFormatter;
+	private $errorFormatter;
 
 	/* @var SnakFormatter */
-	protected $snaksFormatter;
+	private $snaksFormatter;
 
 	/**
 	 * @param Language                   $language

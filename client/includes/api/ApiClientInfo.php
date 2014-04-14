@@ -20,7 +20,7 @@ class ApiClientInfo extends \ApiQueryBase {
 	/**
 	 * @var SettingsArray
 	 */
-	protected $settings;
+	private $settings;
 
 	/**
 	 * @since 0.4

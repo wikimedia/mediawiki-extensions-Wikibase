@@ -12,7 +12,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class RecentChangesFilterOptions {
 
-	protected $opts;
+	private $opts;
 
 	public function __construct( \FormOptions $opts ) {
 		$this->opts = $opts;
@@ -25,7 +25,7 @@ class RecentChangesFilterOptions {
 	 *
 	 * @return bool
 	 */
-	protected function isDisabled() {
+	private function isDisabled() {
 		$rcSetting = WikibaseClient::getDefaultInstance()->getSettings()
 			->getSetting( 'showExternalRecentChanges' );
 
@@ -44,7 +44,7 @@ class RecentChangesFilterOptions {
 	 *
 	 * @return bool
 	 */
-	protected function hideWikibase() {
+	private function hideWikibase() {
 		// @TODO: Remve naming inconsistency (hideWikibase <> hideWikidata)
 		if ( isset( $this->opts['hidewikidata'] ) && $this->opts['hidewikidata'] === true ) {
 			return true;
@@ -61,7 +61,7 @@ class RecentChangesFilterOptions {
 	 *
 	 * @return bool
 	 */
-	protected function isEnhancedChanges() {
+	private function isEnhancedChanges() {
 		// @todo evil globals, though the recent changes and watchlist query hooks
 		// so nor provide access to context
 		global $wgRequest, $wgUser;

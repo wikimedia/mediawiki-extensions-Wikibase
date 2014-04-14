@@ -24,16 +24,16 @@ use Language;
 class WikibaseLuaEntityBindings {
 
 	/* @var EntityLookup */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/* @var Language */
-	protected $language;
+	private $language;
 
 	/* @var string */
-	protected $siteId;
+	private $siteId;
 
 	/* @var SnakFormatter */
-	protected $snakFormatter;
+	private $snakFormatter;
 
 	/* @var Entity[] */
 	private $entities = array();

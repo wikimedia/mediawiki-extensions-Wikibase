@@ -23,27 +23,27 @@ class LangLinkHandler {
 	/**
 	 * @var string
 	 */
-	protected $siteId;
+	private $siteId;
 
 	/**
 	 * @var array
 	 */
-	protected $namespaces;
+	private $namespaces;
 
 	/**
 	 * @var array
 	 */
-	protected $excludeNamespaces;
+	private $excludeNamespaces;
 
 	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinkLookup;
+	private $siteLinkLookup;
 
 	/**
 	 * @var SiteStore
 	 */
-	protected $sites;
+	private $sites;
 
 	/**
 	 * @var string
@@ -268,14 +268,12 @@ class LangLinkHandler {
 	 * Converts a list of interwiki links into an associative array that maps
 	 * global site IDs to the respective target pages on the designated wikis.
 	 *
-	 * @since 0.4
-	 *
 	 * @param array $flatLinks
 	 *
 	 * @return array An associative array, using site IDs for keys
 	 *           and the target pages on the respective wiki as the associated value.
 	 */
-	protected function localLinksToArray( array $flatLinks ) {
+	private function localLinksToArray( array $flatLinks ) {
 		wfProfileIn( __METHOD__ );
 
 		$links = array();
@@ -307,14 +305,12 @@ class LangLinkHandler {
 	 * Converts a list of SiteLink objects into an associative array that maps
 	 * global site IDs to the respective target pages on the designated wikis.
 	 *
-	 * @since 0.4
-	 *
 	 * @param SimpleSiteLink[] $repoLinks
 	 *
 	 * @return array An associative array, using site IDs for keys
 	 *         and the target pages on the respective wiki as the associated value.
 	 */
-	protected function repoLinksToArray( array $repoLinks ) {
+	private function repoLinksToArray( array $repoLinks ) {
 		wfProfileIn( __METHOD__ );
 
 		$links = array();

@@ -53,28 +53,24 @@ final class WikibaseClient {
 	public $propertyDataTypeLookup;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var SettingsArray
 	 */
-	protected $settings;
+	private $settings;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var Language
 	 */
-	protected $contentLanguage;
+	private $contentLanguage;
 
 	/**
 	 * @var DataTypeFactory
 	 */
-	protected $dataTypeFactory = null;
+	private $dataTypeFactory = null;
 
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
-	protected $languageFallbackChainFactory = null;
+	private $languageFallbackChainFactory = null;
 
 	/**
 	 * @var ClientStore[]
@@ -353,11 +349,9 @@ final class WikibaseClient {
 	 * Returns a new instance constructed from global settings.
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
-	 * @since 0.4
-	 *
 	 * @return WikibaseClient
 	 */
-	protected static function newInstance() {
+	private static function newInstance() {
 		global $wgContLang;
 
 		return new self( Settings::singleton(), $wgContLang );
@@ -443,7 +437,7 @@ final class WikibaseClient {
 	 *
 	 * @return string
 	 */
-	protected function newSiteGroup() {
+	private function newSiteGroup() {
 		$siteGroup = $this->settings->getSetting( 'siteGroup' );
 
 		if ( !$siteGroup ) {
@@ -495,7 +489,7 @@ final class WikibaseClient {
 	/**
 	 * @return OutputFormatSnakFormatterFactory
 	 */
-	protected function newSnakFormatterFactory() {
+	private function newSnakFormatterFactory() {
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
 			$this->contentLanguage
@@ -527,7 +521,7 @@ final class WikibaseClient {
 	/**
 	 * @return OutputFormatValueFormatterFactory
 	 */
-	protected function newValueFormatterFactory() {
+	private function newValueFormatterFactory() {
 		$builders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
 			$this->contentLanguage

@@ -18,7 +18,7 @@ class ExternalChangeFactory {
 	/**
 	 * @var string
 	 */
-	protected $repoSiteId;
+	private $repoSiteId;
 
 	/**
 	 * @param string $repoSiteId
@@ -51,7 +51,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return RevisionData
 	 */
-	protected function newRevisionData( RecentChange $recentChange, array $changeParams ) {
+	private function newRevisionData( RecentChange $recentChange, array $changeParams ) {
 		$repoId = isset( $changeParams['site_id'] )
 			? $changeParams['site_id'] : $this->repoSiteId;
 
@@ -72,7 +72,7 @@ class ExternalChangeFactory {
 	 * @return array
 	 * @throws UnexpectedValueException
 	 */
-	protected function extractChangeData( RecentChange $recentChange ) {
+	private function extractChangeData( RecentChange $recentChange ) {
 		$params = unserialize( $recentChange->getAttribute( 'rc_params' ) );
 
 		if ( !is_array( $params ) || !array_key_exists( 'wikibase-repo-change', $params ) ) {
@@ -93,7 +93,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return boolean
 	 */
-	protected function validateChangeData( $changeParams ) {
+	private function validateChangeData( $changeParams ) {
 		if ( ! is_array( $changeParams ) ) {
 			throw new UnexpectedValueException( 'Invalid Wikibase change' );
 		}
@@ -115,7 +115,7 @@ class ExternalChangeFactory {
 	 * @return string
 	 * @throws UnexpectedValueException
 	 */
-	protected function extractChangeType( $type ) {
+	private function extractChangeType( $type ) {
 		if ( !is_string( $type ) ) {
 			throw new UnexpectedValueException( '$type must be a string.' );
 		}
@@ -138,7 +138,7 @@ class ExternalChangeFactory {
 	 * @return ItemId
 	 * @throws UnexpectedValueException
 	 */
-	protected function extractItemId( $prefixedId ) {
+	private function extractItemId( $prefixedId ) {
 		try {
 			return new ItemId( $prefixedId );
 		} catch ( InvalidArgumentException $ex ) {
@@ -154,7 +154,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return string
 	 */
-	protected function parseComment( $comment, $type ) {
+	private function parseComment( $comment, $type ) {
 		$newComment = array(
 			'key' => 'wikibase-comment-update'
 		);
@@ -183,7 +183,7 @@ class ExternalChangeFactory {
 	 *
 	 * @return string
 	 */
-	protected function extractComment( $changeParams ) {
+	private function extractComment( $changeParams ) {
 		$comment = array(
 			'key' => 'wikibase-comment-update'
 		);

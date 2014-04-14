@@ -21,17 +21,17 @@ class ChangeLineFormatter {
 	/**
 	 * @var User
 	 */
-	protected $user;
+	private $user;
 
 	/**
 	 * @var Language
 	 */
-	protected $lang;
+	private $lang;
 
 	/**
 	 * @var RepoLinker
 	 */
-	protected $repoLinker;
+	private $repoLinker;
 
 	/**
 	 * @param User $user
@@ -79,7 +79,7 @@ class ChangeLineFormatter {
 	/**
 	 * @return string
 	 */
-	protected function changeSeparator() {
+	private function changeSeparator() {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
 	}
 
@@ -88,7 +88,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatTimestamp( $timestamp ) {
+	private function formatTimestamp( $timestamp ) {
 		return wfMessage( 'semicolon-separator' )->text()
 			. '<span class="mw-changeslist-date">'
 			. $this->lang->userTime( $timestamp, $this->user )
@@ -100,7 +100,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatUserLinks( $userName ) {
+	private function formatUserLinks( $userName ) {
 		$links = $this->buildUserLinks( $userName );
 
 		if ( User::isIP( $userName ) ) {
@@ -117,7 +117,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatIpUserLinks( array $links ) {
+	private function formatIpUserLinks( array $links ) {
 		$userlinks = $links['contribs'];
 
 		$userlinks .= wfMessage( 'word-separator' )->plain()
@@ -135,7 +135,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatRegisteredUserLinks( array $links ) {
+	private function formatRegisteredUserLinks( array $links ) {
 		$userlinks = $links['user'];
 
 		$usertools = array(
@@ -158,7 +158,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatEntityLink( $entityId ) {
+	private function formatEntityLink( $entityId ) {
 		$entityLink = $this->repoLinker->buildEntityLink( $entityId );
 
 		return wfMessage( 'word-separator' )->plain()
@@ -168,7 +168,7 @@ class ChangeLineFormatter {
 	/**
 	 * @return string
 	 */
-	protected function formatDeletionLogLink() {
+	private function formatDeletionLogLink() {
 		$logLink = $this->repoLinker->formatLink(
 			$this->repoLinker->getPageUrl( 'Special:Log/delete' ),
 			wfMessage( 'dellogpage' )->text()
@@ -184,7 +184,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatDiffHist( EntityId $entityId, RevisionData $rev, $count ) {
+	private function formatDiffHist( EntityId $entityId, RevisionData $rev, $count ) {
 		$diffLink = $this->buildDiffLink( $entityId, $rev, $count );
 		$historyLink = $this->buildHistoryLink( $entityId, $rev );
 
@@ -200,7 +200,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function buildDiffLink( EntityId $entityId, RevisionData $rev, $count ) {
+	private function buildDiffLink( EntityId $entityId, RevisionData $rev, $count ) {
 		$params = array(
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),
@@ -226,7 +226,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function buildHistoryLink( EntityId $entityId, RevisionData $rev ) {
+	private function buildHistoryLink( EntityId $entityId, RevisionData $rev ) {
 		$titleText = $this->repoLinker->getEntityTitle( $entityId );
 
 		$params = array(
@@ -251,7 +251,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function buildUserLink( $userName ) {
+	private function buildUserLink( $userName ) {
 		return $this->repoLinker->formatLink(
 			// @todo: localise this once namespaces are localised on the repo
 			$this->repoLinker->getPageUrl( "User:$userName" ),
@@ -268,7 +268,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function buildUserContribsLink( $userName, $text = null ) {
+	private function buildUserContribsLink( $userName, $text = null ) {
 		// @todo: know how the repo is localised. it's english now
 		// for namespaces and special pages
 		$link = $this->repoLinker->getPageUrl( "Special:Contributions/$userName" );
@@ -285,7 +285,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function buildUserTalkLink( $userName ) {
+	private function buildUserTalkLink( $userName ) {
 		// @todo: localize this once we can localize namespaces on the repo
 		$link = $this->repoLinker->getPageUrl( "User_talk:$userName" );
 		$text = wfMessage( 'talkpagelinktext' )->text();
@@ -300,7 +300,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string[]
 	 */
-	protected function buildUserLinks( $userName ) {
+	private function buildUserLinks( $userName ) {
 		$links = array();
 
 		$links['usertalk'] = $this->buildUserTalkLink( $userName );
@@ -320,7 +320,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string
 	 */
-	protected function formatComment( array $comment ) {
+	private function formatComment( array $comment ) {
 		$commentMsg = wfMessage( $comment['key'] );
 
 		if ( isset( $comment['numparams'] ) ) {

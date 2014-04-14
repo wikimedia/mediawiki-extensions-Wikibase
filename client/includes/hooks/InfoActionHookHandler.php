@@ -21,22 +21,22 @@ class InfoActionHookHandler {
 	/**
 	 * @var NamespaceChecker
 	 */
-	protected $namespaceChecker;
+	private $namespaceChecker;
 
 	/**
 	 * @var RepoLinker
 	 */
-	protected $repoLinker;
+	private $repoLinker;
 
 	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinkLookup;
+	private $siteLinkLookup;
 
 	/**
 	 * @var string
 	 */
-	protected $siteId;
+	private $siteId;
 
 	public function __construct( NamespaceChecker $namespaceChecker, RepoLinker $repoLinker,
 		SiteLinkLookup $siteLinkLookup, $siteId ) {

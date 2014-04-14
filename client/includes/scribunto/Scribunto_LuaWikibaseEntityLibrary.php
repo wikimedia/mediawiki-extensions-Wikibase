@@ -17,7 +17,7 @@ use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
 class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
 	/* @var WikibaseLuaEntityBindings */
-	protected $wbLibrary;
+	private $wbLibrary;
 
 	/**
 	 * Constructor for wrapper class, initialize member object holding implementation

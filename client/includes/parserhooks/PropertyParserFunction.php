@@ -28,22 +28,22 @@ class PropertyParserFunction {
 	/**
 	 * @var Parser
 	 */
-	protected $parser;
+	private $parser;
 
 	/**
 	 * @var EntityId
 	 */
-	protected $entityId;
+	private $entityId;
 
 	/**
 	 * @var EntityLookup
 	 */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/**
 	 * @var PropertyLabelResolver
 	 */
-	protected $propertyLabelResolver;
+	private $propertyLabelResolver;
 
 	/**
 	 * @param Parser $parser
