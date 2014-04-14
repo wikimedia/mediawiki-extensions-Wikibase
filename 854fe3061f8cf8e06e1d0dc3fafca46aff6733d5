@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_b22e029f",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "\"no further\".\n\"provided\".",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b514ac45",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "These are two different messages:\n* \"wikibase-error-unexpected\": \"An unexpected error occurred.\",\n* \"wikibase-unexpected-error\": \"Unexpected error: $1.\",\n\nSince this code uses a parameter the old message was probably right.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d53048e7",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Language|string",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1565a0dd",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be $errorCode then?",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9571b0a9",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "An other set of these odd methods that hide the actual exception? Hm, I guess you don\u0027t want to change that in this patch, right?\n\nFor future refactoring: I suggest to change all these methods that throw exceptions to return the exceptions instead (getUsageException and similar).",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_758a946f",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Yea. Currently it\u0027s a bit strange to have a Status object with a $statusCode, an $errorCode ($code) and a $httpStatusCode. Makes this method hard to use.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b5e6ec3d",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Brackets are language specific. Use wfMessage( \u0027parentheses\u0027 ) please or rethink this part (it mixes a translated with an untranslated string).",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d5ff28a6",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "$name, $html and $params are not used.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_955bf0fc",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "An array of errors that is made of messages?",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f5422410",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Single letter variables are ok in shorts methods but should be avoided in signatures. What about $data?",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_555558c4",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Space.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b5638ca6",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Inconsistent use of space. This keeps confusing me. What\u0027s our standard, \"if(\" or \"if (\"? Personally I strongly support the space.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_550c38f0",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Null check not needed, if ( !empty( ... ) ) is enough.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f517c4f1",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T18:32:41Z",
+      "side": 1,
+      "message": "Huh, why? This doesn\u0027t do anything and can simply be removed. Except for the @deprecated tag. If that\u0027s the reason this is here it\u0027s ok. :-)",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
