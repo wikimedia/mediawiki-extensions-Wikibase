@@ -7,6 +7,7 @@ use ApiEditPage;
 use Content;
 use ContentHandler;
 use DatabaseUpdater;
+use DummyLinker;
 use HistoryPager;
 use Html;
 use Language;
@@ -29,8 +30,8 @@ use SpecialSearch;
 use SplFileInfo;
 use Title;
 use User;
-use Wikibase\content\SiteLinkUniquenessValidator;
 use Wikibase\content\LabelUniquenessValidator;
+use Wikibase\content\SiteLinkUniquenessValidator;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
@@ -65,7 +66,8 @@ final class RepoHooks {
 	 *
 	 * @param OutputPage $out
 	 * @param Skin $skin
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		$out->addModules( 'wikibase.ui.entitysearch' );
@@ -81,8 +83,8 @@ final class RepoHooks {
 	 * @note: $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this point
 	 *        and should no longer be touched.
 	 *
-	 * @return boolean
 	 * @throws MWException
+	 * @return bool
 	 */
 	public static function onSetupAfterCache() {
 		wfProfileIn( __METHOD__ );
@@ -117,7 +119,7 @@ final class RepoHooks {
 	 *
 	 * @param DatabaseUpdater $updater
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
@@ -171,7 +173,7 @@ final class RepoHooks {
 	 *
 	 * @param array &$files
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
@@ -201,10 +203,10 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $ns Namespace ID
-	 * @param boolean $movable
+	 * @param int $ns Namespace ID
+	 * @param bool $movable
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
 		wfProfileIn( __METHOD__ );
@@ -223,12 +225,12 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param weirdStuffButProbably|WikiPage $article
+	 * @param WikiPage $article A WikiPage object as of MediaWiki 1.19, an Article one before.
 	 * @param Revision $revision
-	 * @param integer $baseID
+	 * @param int $baseID
 	 * @param User $user
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
 		wfProfileIn( __METHOD__ );
@@ -279,13 +281,13 @@ final class RepoHooks {
 	 * @param WikiPage $wikiPage
 	 * @param User $user
 	 * @param string $reason
-	 * @param integer $id
+	 * @param int $id
 	 * @param Content $content
 	 * @param LogEntryBase $logEntry
 	 *
 	 * @throws MWException
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
 		Content $content = null, LogEntryBase $logEntry = null
@@ -469,7 +471,7 @@ final class RepoHooks {
 	 * @param string &$s
 	 * @param array &$classes
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onPageHistoryLineEnding( HistoryPager $history, &$row, &$s, array &$classes  ) {
 		wfProfileIn( __METHOD__ );
@@ -509,7 +511,7 @@ final class RepoHooks {
 	 * @param SkinTemplate $sktemplate
 	 * @param array $links
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onPageTabs( SkinTemplate &$sktemplate, array &$links ) {
 		wfProfileIn( __METHOD__ );
@@ -562,9 +564,9 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param callable $reportMessage // takes a string param and echos it
+	 * @param callable $reportMessage Takes a string parameter and echos it.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
 		wfProfileIn( __METHOD__ );
@@ -590,7 +592,7 @@ final class RepoHooks {
 	 * @param array &$groups
 	 * @param bool &$moveOther
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onSpecialPage_reorderPages( &$groups, &$moveOther ) {
 		$groups = array_merge( array( 'wikibaserepo' => null ), $groups );
@@ -605,7 +607,7 @@ final class RepoHooks {
 	 *
 	 * @param callable $reportMessage // takes a string param and echos it
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
 		wfProfileIn( __METHOD__ );
@@ -704,7 +706,7 @@ final class RepoHooks {
 	 * This is only handling special pages right now and gets disabled in normal pages.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
 	 *
-	 * @param \DummyLinker $skin
+	 * @param DummyLinker $skin
 	 * @param Title $target
 	 * @param string $html
 	 * @param array $customAttribs
@@ -905,16 +907,16 @@ final class RepoHooks {
 	 *
 	 * @param SpecialSearch $searchPage
 	 * @param SearchResult $result
-	 * @param $terms
-	 * @param &$link
-	 * @param &$redirect
-	 * @param &$section
-	 * @param &$extract,
-	 * @param &$score
-	 * @param &$size
-	 * @param &$date
-	 * @param &$related
-	 * @param &$html
+	 * @param array $terms
+	 * @param string &$link
+	 * @param string &$redirect
+	 * @param string &$section
+	 * @param string &$extract
+	 * @param string &$score
+	 * @param string &$size
+	 * @param string &$date
+	 * @param string &$related
+	 * @param string &$html
 	 *
 	 * @return bool
 	 */
@@ -988,7 +990,7 @@ final class RepoHooks {
 	 * @param Title $title
 	 * @param array $types The types of protection available
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
 		if ( !NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
@@ -1040,9 +1042,9 @@ final class RepoHooks {
 	 * @param string $auto the autocomment unformatted
 	 * @param string $post the string after the autocomment
 	 * @param Title $title use for further information
-	 * @param boolean $local shall links be generated locally or globally
+	 * @param bool $local shall links be generated locally or globally
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onFormat( $data, &$comment, $pre, $auto, $post, $title, $local ) {
 		global $wgLang, $wgTitle;
@@ -1056,10 +1058,10 @@ final class RepoHooks {
 			return true;
 		}
 
-		if ( preg_match( '/^([\-a-z]+?)\s*(:\s*(.*?))?\s*$/', $auto, $matches ) ) {
+		if ( preg_match( '/^([a-z-]+)\s*(?::\s*(.*?))?\s*$/', $auto, $matches ) ) {
 
 			// turn the args to the message into an array
-			$args = ( 3 < count( $matches ) ) ? explode( '|', $matches[3] ) : array();
+			$args = isset( $matches[2] ) ? explode( '|', $matches[2] ) : array();
 
 			// look up the message
 			$msg = wfMessage( $root . '-summary-' . $matches[1] );
@@ -1147,7 +1149,7 @@ final class RepoHooks {
 	 * @param OutputPage $out
 	 * @param string &$html
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
 		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
@@ -1174,7 +1176,7 @@ final class RepoHooks {
 	 * @param array $vars
 	 * @param OutputPage $out
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onMakeGlobalVariablesScript( $vars, $out ) {
 		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
@@ -1210,14 +1212,14 @@ final class RepoHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onContentModelCanBeUsedOn ( $contentModel, Title $title, &$ok ) {
-		$namespace2entityModels = array_flip( NamespaceUtils::getEntityNamespaces() );
+	public static function onContentModelCanBeUsedOn( $contentModel, Title $title, &$ok ) {
+		$entityModels = array_flip( NamespaceUtils::getEntityNamespaces() );
 		$ns = $title->getNamespace();
 
 		// If the namespace is an entity namespace, the content model
 		// must be the model assigned to that namespace.
-		if ( isset( $namespace2entityModels[$ns] ) ) {
-			$nsModel = $namespace2entityModels[$ns];
+		if ( isset( $entityModels[$ns] ) ) {
+			$nsModel = $entityModels[$ns];
 
 			if ( $nsModel !== $contentModel ) {
 				$ok = false;
@@ -1282,4 +1284,5 @@ final class RepoHooks {
 
 		return new PropertyHandler( $validators );
 	}
+
 }
