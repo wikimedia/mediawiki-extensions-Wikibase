@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use MediaWikiSite;
 use SiteSQLStore;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
@@ -49,14 +48,16 @@ class ItemContentTest extends EntityContentTest {
 	 * @dataProvider siteLinkConflictProvider
 	 */
 	public function testSiteLinkConflict( SimpleSiteLink $siteLink, $expected ) {
-		$content = ItemContent::newEmpty();
+		/** @var ItemContent $content */
+		$content = $this->newEmpty();
 		$content->getItem()->addSiteLink( $siteLink );
 
 		$status = $content->save( 'add item', null, EDIT_NEW );
 
 		$this->assertTrue( $status->isOK(), 'item creation succeeded' );
 
-		$content1 = ItemContent::newEmpty();
+		/** @var ItemContent $content1 */
+		$content1 = $this->newEmpty();
 		$content1->getItem()->addSiteLink( $siteLink );
 
 		$status = $content1->save( 'add item', null, EDIT_NEW );
@@ -165,6 +166,7 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	public function getTextForSearchIndexProvider() {
+		/** @var ItemContent $itemContent */
 		$itemContent = $this->newEmpty();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
 		$itemContent->getEntity()->addSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
@@ -229,4 +231,5 @@ class ItemContentTest extends EntityContentTest {
 
 		return $cases;
 	}
+
 }
