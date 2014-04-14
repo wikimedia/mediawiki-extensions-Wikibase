@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_f2311aeb",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-14T16:36:12Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "468fcc2f94708c7572fea6b90bd270641e4d7982",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
