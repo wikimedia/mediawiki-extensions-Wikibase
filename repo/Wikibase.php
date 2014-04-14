@@ -112,6 +112,7 @@ call_user_func( function() {
 	$wgAPIModules['wbmergeitems']						= 'Wikibase\Api\MergeItems';
 	$wgAPIModules['wbformatvalue']						= 'Wikibase\Api\FormatSnakValue';
 	$wgAPIModules['wbparsevalue']						= 'Wikibase\Api\ParseValue';
+	$wgAPIModules['wbavailablebadges']					= 'Wikibase\Api\AvailableBadges';
 
 	// Special page registration
 	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';
