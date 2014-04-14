@@ -6,7 +6,9 @@ use Comparable;
 use Countable;
 
 /**
- * Immutable value object.
+ * Ordered set of aliases. Immutable value object.
+ *
+ * Duplicates and whitespace only values are removed. Values are trimmed.
  *
  * @since 0.7.3
  *
