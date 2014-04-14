@@ -6,7 +6,6 @@ use DataValues\TimeValue;
 use Language;
 use Message;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\TimeIsoFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -19,7 +18,7 @@ use ValueFormatters\ValueFormatterBase;
  *
  * @todo move me to DataValues-time
  */
-class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter {
+class MwTimeIsoFormatter extends ValueFormatterBase {
 
 	/**
 	 * MediaWiki language object.
@@ -50,10 +49,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase implements TimeIsoFormatter 
 		);
 	}
 
-	/**
-	 * @see TimeIsoFormatter::formatDate
-	 */
-	public function formatDate( $extendedIsoTimestamp, $precision ) {
+	private function formatDate( $extendedIsoTimestamp, $precision ) {
 		/**
 		 * $matches for +00000002013-07-16T01:02:03Z
 		 * [0] => +00000002013-07-16T00:00:00Z
