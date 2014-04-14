@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_6cdd3117",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-14T12:37:47Z",
+      "side": 1,
+      "message": "\"undoing the creation\" is still weird. Another suggestion:\n\n The page cannot be deleted using undo.",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2ce739e1",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-14T12:37:47Z",
+      "side": 1,
+      "message": "Sure, change it to \"Changed an item\".",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ecc82153",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-14T12:37:47Z",
+      "side": 1,
+      "message": "See above: Changed a property",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_acd229ff",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-14T12:37:47Z",
+      "side": 1,
+      "message": "I agree. Use this:\n\n Literal data for a geographical position given as a latitude-lon\ngitude pair in gms or decimal degrees for the given stellar body. [... More information].\n\nSame for messages below.",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
