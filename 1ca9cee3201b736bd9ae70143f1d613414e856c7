@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_e9d7e8f0",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T14:48:03Z",
+      "side": 1,
+      "message": "Respect? ;-) Something wrong with $httpResponseCode? You just saved 4 characters in a 12 character variable name. Not a reason to block this but I don\u0027t like such variable names, sorry.\n\n\u003e \u003e I suggest [...] to return the exceptions instead\n\u003e Wouldn\u0027t that cause the exception to contain the wrong stack trace\n\nI tried and the stack trace is actually 1 line smaller when you do \"throw getFoo()\" instead of \"throwFoo()\".\n\n\u003e in terms of flow control, \"throw\" is of course more clear.\n\nI think Jeroen already started to call these thing throwFoo().\n\n\u003e I can still be convinced of a better approach.\n\nYes, we should continue talking about this. But as I said, not in this patch please.",
+      "revId": "1ca9cee3201b736bd9ae70143f1d613414e856c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c9d2ec00",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T14:48:03Z",
+      "side": 1,
+      "message": "$description is English but $text looks like it\u0027s localized, isn\u0027t it? Looks like it is coming from a wfMessage() call. Am I wrong?",
+      "revId": "1ca9cee3201b736bd9ae70143f1d613414e856c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a901f072",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T14:48:03Z",
+      "side": 1,
+      "message": "Still confusing. Please either use foreach ( $errors as $error ) or foreach ( $messages as $message ).",
+      "revId": "1ca9cee3201b736bd9ae70143f1d613414e856c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
