@@ -34,6 +34,24 @@
       "revId": "f635dd5866e4c6d27ec07099587dc4bb6af91d45",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3663ff0b",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T13:28:40Z",
+      "side": 1,
+      "message": "I agree with Bene on the general approach: add classes and title only for the badge items present in the config. However, I suggest to use the item\u0027s label, not the description (this is actually the intended use case for titles; descriptions are just for disambiguation). If multiple badges apply, they should be joined using Language::commaList or Language::semicolonList.",
+      "parentUuid": "8e23439c_7b872567",
+      "revId": "f635dd5866e4c6d27ec07099587dc4bb6af91d45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
