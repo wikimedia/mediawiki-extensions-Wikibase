@@ -34,6 +34,24 @@
       "revId": "05408dd73c7a6595b3958429eb8bcb4065a6265b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2c9a8e75",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T16:33:25Z",
+      "side": 1,
+      "message": "I actually find it harder to read and less obvious now :)",
+      "parentUuid": "8e23439c_098104a4",
+      "revId": "05408dd73c7a6595b3958429eb8bcb4065a6265b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
