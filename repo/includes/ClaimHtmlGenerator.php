@@ -49,17 +49,17 @@ class ClaimHtmlGenerator {
 	 * @since 0.4
 	 *
 	 * @param Claim $claim the claim to render
-	 * @param array[] $propertyInfo
+	 * @param array[] $entityInfo
 	 * @param null|string $editSectionHtml has the html for the edit section
 	 *
 	 * @return string
 	 */
-	public function getHtmlForClaim( Claim $claim, array $propertyInfo, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Claim $claim, array $entityInfo, $editSectionHtml = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$claim->getMainSnak(),
-			$propertyInfo,
+			$entityInfo,
 			false
 		);
 
@@ -67,7 +67,7 @@ class ClaimHtmlGenerator {
 			$claimHtml = wfTemplate( 'wb-claim',
 				$claim->getGuid(),
 				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $propertyInfo ),
+				$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
 				$editSectionHtml
 			);
 		} else {
@@ -94,14 +94,14 @@ class ClaimHtmlGenerator {
 
 			$referencesHtml = $this->getHtmlForReferences(
 				$claim->getReferences(),
-				$propertyInfo
+				$entityInfo
 			);
 
 			$claimHtml = wfTemplate( 'wb-statement',
 				$rankHtml,
 				$claim->getGuid(),
 				$mainSnakHtml,
-				$this->getHtmlForQualifiers( $claim->getQualifiers(), $propertyInfo ),
+				$this->getHtmlForQualifiers( $claim->getQualifiers(), $entityInfo ),
 				$editSectionHtml,
 				$referencesHeading,
 				$referencesHtml
@@ -116,11 +116,11 @@ class ClaimHtmlGenerator {
 	 * Generates and returns the HTML representing a claim's qualifiers.
 	 *
 	 * @param Snaks $qualifiers
-	 * @param array[] $propertyInfo
+	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForQualifiers( Snaks $qualifiers, array $propertyInfo ) {
+	protected function getHtmlForQualifiers( Snaks $qualifiers, array $entityInfo ) {
 		$qualifiersByProperty = new ByPropertyIdArray( $qualifiers );
 		$qualifiersByProperty->buildIndex();
 
@@ -129,7 +129,7 @@ class ClaimHtmlGenerator {
 		foreach( $qualifiersByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
 				$qualifiersByProperty->getByPropertyId( $propertyId ),
-				$propertyInfo
+				$entityInfo
 			);
 		}
 
@@ -140,15 +140,15 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a ReferenceList object.
 	 *
 	 * @param ReferenceList $referenceList
-	 * @param array[] $propertyInfo
+	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReferences( ReferenceList $referenceList, array $propertyInfo ) {
+	protected function getHtmlForReferences( ReferenceList $referenceList, array $entityInfo ) {
 		$referencesHtml = '';
 
 		foreach( $referenceList as $reference ) {
-			$referencesHtml .= $this->getHtmlForReference( $reference, $propertyInfo );
+			$referencesHtml .= $this->getHtmlForReference( $reference, $entityInfo );
 		}
 
 		return $this->wrapInListview( $referencesHtml );
@@ -166,11 +166,11 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a Reference object.
 	 *
 	 * @param Reference $reference
-	 * @param array[] $propertyInfo
+	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForReference( $reference, array $propertyInfo ) {
+	protected function getHtmlForReference( $reference, array $entityInfo ) {
 		$referenceSnaksByProperty = new ByPropertyIdArray( $reference->getSnaks() );
 		$referenceSnaksByProperty->buildIndex();
 
@@ -179,7 +179,7 @@ class ClaimHtmlGenerator {
 		foreach( $referenceSnaksByProperty->getPropertyIds() as $propertyId ) {
 			$snaklistviewsHtml .= $this->getSnaklistviewHtml(
 				$referenceSnaksByProperty->getByPropertyId( $propertyId ),
-				$propertyInfo
+				$entityInfo
 			);
 		}
 
@@ -193,16 +193,16 @@ class ClaimHtmlGenerator {
 	 * Generates the HTML for a list of snaks.
 	 *
 	 * @param Snak[] $snaks
-	 * @param array[] $propertyInfo
+	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	protected function getSnaklistviewHtml( $snaks, array $propertyInfo ) {
+	protected function getSnaklistviewHtml( $snaks, array $entityInfo ) {
 		$snaksHtml = '';
 		$i = 0;
 
 		foreach( $snaks as $snak ) {
-			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, $propertyInfo, ( $i++ === 0 ) );
+			$snaksHtml .= $this->snakHtmlGenerator->getSnakHtml( $snak, $entityInfo, ( $i++ === 0 ) );
 		}
 
 		return wfTemplate(

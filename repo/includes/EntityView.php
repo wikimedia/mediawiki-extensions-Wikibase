@@ -535,7 +535,7 @@ abstract class EntityView extends ContextSource {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 
-		$propertyInfo = $this->getPropertyInfo( $entity, $this->getLanguage()->getCode() );
+		$entityInfo = $this->getEntityInfo( $entity, $this->getLanguage()->getCode() );
 
 		/**
 		 * @var string $claimsHtml
@@ -549,9 +549,9 @@ abstract class EntityView extends ContextSource {
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
 			$key = $propertyId->getSerialization();
 			$propertyLabel = $key;
-			if ( isset( $propertyInfo[$key] ) && !empty( $propertyInfo[$key]['labels'] ) ) {
-				$propertyInfoLabel = reset( $propertyInfo[$key]['labels'] );
-				$propertyLabel = $propertyInfoLabel['value'];
+			if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
+				$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
+				$propertyLabel = $entityInfoLabel['value'];
 			}
 
 			$propertyLink = \Linker::link(
@@ -564,7 +564,7 @@ abstract class EntityView extends ContextSource {
 			foreach( $claims as $claim ) {
 				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 					$claim,
-					$propertyInfo,
+					$entityInfo,
 					$htmlForEditSection
 				);
 			}
@@ -652,7 +652,7 @@ abstract class EntityView extends ContextSource {
 	 * @todo: We may also want to have the descriptions, in addition to the labels
 	 * @return array[] Property info array that maps property IDs to labels.
 	 */
-	protected function getPropertyInfo( Entity $entity, $languageCode ) {
+	protected function getEntityInfo( Entity $entity, $languageCode ) {
 		wfProfileIn( __METHOD__ );
 		// TODO: Share cache with PropertyLabelResolver
 		// TODO: ... or share info with getBasicEntityInfo.
