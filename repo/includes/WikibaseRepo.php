@@ -15,8 +15,8 @@ use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
@@ -429,7 +429,8 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
-			$wgContLang
+			$wgContLang,
+			$this->getEntityTitleLookup()
 		);
 
 		$builders = new WikibaseSnakFormatterBuilders(
@@ -463,7 +464,8 @@ class WikibaseRepo {
 
 		$builders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
-			$wgContLang
+			$wgContLang,
+			$this->getEntityTitleLookup()
 		);
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
@@ -505,7 +507,8 @@ class WikibaseRepo {
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
-			$wgContLang
+			$wgContLang,
+			$this->getEntityTitleLookup()
 		);
 
 		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(

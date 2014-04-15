@@ -12,6 +12,7 @@ use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\EntityLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 
@@ -34,6 +35,11 @@ class WikibaseValueFormatterBuilders {
 	 * @var Language
 	 */
 	protected $defaultLanguage;
+
+	/**
+	 * @var EntityTitleLookup|null
+	 */
+	protected $entityTitleLookup;
 
 	/**
 	 * This determines which value is formatted how by providing a formatter mapping
@@ -102,13 +108,16 @@ class WikibaseValueFormatterBuilders {
 	/**
 	 * @param EntityLookup $lookup
 	 * @param Language $defaultLanguage
+	 * @param EntityTitleLookup|null $entityTitleLookup
 	 */
 	public function __construct(
 		EntityLookup $lookup,
-		Language $defaultLanguage
+		Language $defaultLanguage,
+		EntityTitleLookup $entityTitleLookup = null
 	) {
 		$this->entityLookup = $lookup;
 		$this->defaultLanguage = $defaultLanguage;
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -498,7 +507,10 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return EntityIdLabelFormatter
 	 */
-	protected static function newEntityIdFormatter( FormatterOptions $options, $builders ) {
+	protected static function newEntityIdFormatter(
+		FormatterOptions $options,
+		WikibaseValueFormatterBuilders $builders
+	) {
 		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
 	}
 
@@ -511,8 +523,15 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return EntityIdHtmlLinkFormatter
 	 */
-	protected static function newEntityIdHtmlLinkFormatter( FormatterOptions $options, $builders ) {
-		return new EntityIdHtmlLinkFormatter( $options, $builders->entityLookup );
+	protected static function newEntityIdHtmlLinkFormatter(
+		FormatterOptions $options,
+		WikibaseValueFormatterBuilders $builders
+	) {
+		return new EntityIdHtmlLinkFormatter(
+			$options,
+			$builders->entityLookup,
+			$builders->entityTitleLookup
+		);
 	}
 
 	/**
@@ -524,7 +543,10 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return HtmlTimeFormatter
 	 */
-	private static function newHtmlTimeFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
+	private static function newHtmlTimeFormatter(
+		FormatterOptions $options,
+		WikibaseValueFormatterBuilders $builders
+	) {
 		return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
 	}
 
@@ -537,7 +559,10 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return QuantityFormatter
 	 */
-	protected static function newQuantityFormatter( FormatterOptions $options, $builders ) {
+	protected static function newQuantityFormatter(
+		FormatterOptions $options,
+		WikibaseValueFormatterBuilders $builders
+	) {
 		//TODO: use a builder for this DecimalFormatter
 		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
 		$localizer = new MediaWikiNumberLocalizer( $language );
@@ -554,7 +579,10 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return GlobeCoordinateFormatter
 	 */
-	protected static function newGlobeCoordinateFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
+	protected static function newGlobeCoordinateFormatter(
+		FormatterOptions $options,
+		WikibaseValueFormatterBuilders $builders
+	) {
 		$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
 		$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array(
 			GeoCoordinateFormatter::OPT_SPACE_LATLONG
@@ -582,4 +610,5 @@ class WikibaseValueFormatterBuilders {
 
 		return $escapingFormatters;
 	}
+
 }
