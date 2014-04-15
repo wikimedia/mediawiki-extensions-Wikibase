@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_366f7f91",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T12:38:34Z",
+      "side": 1,
+      "message": "Really? Why?",
+      "revId": "d83de60c8068775a6e59e90c85a4c2bb7cee011f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_36a09f8c",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T12:38:34Z",
+      "side": 1,
+      "message": "This preg_quote is missing the \u0027/\u0027 parameter.\n\nAlso this regex is missing the ^anchors$.",
+      "revId": "d83de60c8068775a6e59e90c85a4c2bb7cee011f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
