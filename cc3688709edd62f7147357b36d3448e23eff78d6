@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_d6572b28",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T13:33:34Z",
+      "side": 1,
+      "message": "I know but as I said I really, really want to touch this in following patches. When I start fixing multiple bugs in one patch I will again get stuck in a giant patch I can\u0027t handle any more.",
+      "parentUuid": "8e23439c_569f9b06",
+      "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d68a8bbf",
         "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_561afb7e",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T13:33:34Z",
+      "side": 1,
+      "message": "This is how all wikitext links and all our properties are rendered currently, with the page name in the title. This simply does the same for linked items.\n\nAgain, we can change this but I really, really don\u0027t want to do this in a giant all-in-one patch.",
+      "parentUuid": "8e23439c_d68a8bbf",
+      "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_b6b94f7a",
         "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-04-15T13:19:16Z",
       "side": 1,
       "message": "The name of this option is not very indicative... how about OPT_FETCH_LABEL?",
+      "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f60a2728",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T13:33:34Z",
+      "side": 1,
+      "message": "Sorry, I will not change this at this point. I did not invented this name, it was like this. Again, I can change this in a follow-up but please don\u0027t force me to touch everything in a all-in-one patch.",
+      "parentUuid": "8e23439c_b6b94f7a",
       "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
