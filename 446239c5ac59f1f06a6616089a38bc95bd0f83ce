@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_13f0158d",
+        "filename": "repo/includes/api/AvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-15T09:31:34Z",
+      "side": 1,
+      "message": "Even thought its really simple the module should have examples! :)",
+      "revId": "446239c5ac59f1f06a6616089a38bc95bd0f83ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f3eeb9b0",
+        "filename": "repo/includes/api/AvailableBadges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-15T09:31:34Z",
+      "side": 1,
+      "message": "I dont think this is needed as you extend ApiWikibase!",
+      "revId": "446239c5ac59f1f06a6616089a38bc95bd0f83ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
