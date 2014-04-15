@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_569f9b06",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T13:19:16Z",
+      "side": 1,
+      "message": "AAHHH! Ugh... this never actually worked for entities not in the main namespace!\nYou\u0027ll have to use an EntityTitleLookup.",
+      "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d68a8bbf",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T13:19:16Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have the entity\u0027s description here, if possible. Should use the same mechanism as labels.",
+      "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b6b94f7a",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T13:19:16Z",
+      "side": 1,
+      "message": "The name of this option is not very indicative... how about OPT_FETCH_LABEL?",
+      "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_76b3b796",
+        "filename": "lib/includes/formatters/EntityIdLabelFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T13:19:16Z",
+      "side": 1,
+      "message": "bad option name, see EntityIdHtmlLinkFormatter.php",
+      "revId": "cc3688709edd62f7147357b36d3448e23eff78d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
