@@ -38,7 +38,8 @@ class TimeParser extends StringValueParser {
 	protected function stringParse( $value ) {
 		foreach ( $this->getParsers() as $parser ) {
 			try {
-				return $parser->parse( $value );
+				$parsedValue = $parser->parse( $value );
+				return $parsedValue;
 			}
 			catch ( ParseException $parseException ) {
 				continue;
