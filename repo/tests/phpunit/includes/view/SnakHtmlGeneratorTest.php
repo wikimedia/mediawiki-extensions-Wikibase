@@ -28,7 +28,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSnakHtml(
 		$snakFormatter,
 		$entityTitleLookup,
-		$propertyLabels,
+		$propertyInfo,
 		$snak,
 		$patterns
 	) {
@@ -37,7 +37,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$entityTitleLookup
 		);
 
-		$html = $snakHtmlGenerator->getSnakHtml( $snak, $propertyLabels );
+		$html = $snakHtmlGenerator->getSnakHtml( $snak, $propertyInfo );
 
 		foreach( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );

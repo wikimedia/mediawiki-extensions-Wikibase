@@ -2,14 +2,16 @@
 
 namespace Wikibase;
 
+use ContextSource;
 use Html;
-use ParserOutput;
-use Language;
 use IContextSource;
+use InvalidArgumentException;
+use Language;
+use ParserOutput;
+use SpecialPageFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\SnakHtmlGenerator;
 
 /**
@@ -26,7 +28,7 @@ use Wikibase\View\SnakHtmlGenerator;
  * @author Daniel Werner
  * @author Daniel Kinzler
  */
-abstract class EntityView extends \ContextSource {
+abstract class EntityView extends ContextSource {
 
 	/**
 	 * @var EntityInfoBuilder
@@ -90,7 +92,7 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		IContextSource $context,
@@ -103,7 +105,7 @@ abstract class EntityView extends \ContextSource {
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
-			throw new \InvalidArgumentException( '$snakFormatter is expected to return text/html, not '
+			throw new InvalidArgumentException( '$snakFormatter is expected to return text/html, not '
 					. $snakFormatter->getFormat() );
 		}
 
@@ -533,7 +535,7 @@ abstract class EntityView extends \ContextSource {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 
-		$propertyLabels = $this->getPropertyLabels( $entity, $this->getLanguage()->getCode() );
+		$propertyInfo = $this->getPropertyInfo( $entity, $this->getLanguage()->getCode() );
 
 		/**
 		 * @var string $claimsHtml
@@ -545,10 +547,13 @@ abstract class EntityView extends \ContextSource {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
-			$propertyKey = $propertyId->getSerialization();
-			$propertyLabel = isset( $propertyLabels[$propertyKey] )
-				? $propertyLabels[$propertyKey]
-				: $propertyKey;
+			$key = $propertyId->getSerialization();
+			$propertyLabel = $key;
+			if ( isset( $propertyInfo[$key] ) && !empty( $propertyInfo[$key]['labels'] ) ) {
+				$propertyInfoLabel = reset( $propertyInfo[$key]['labels'] );
+				$propertyLabel = $propertyInfoLabel['value'];
+			}
+
 			$propertyLink = \Linker::link(
 				$this->entityTitleLookup->getTitleForId( $propertyId ),
 				htmlspecialchars( $propertyLabel )
@@ -559,7 +564,7 @@ abstract class EntityView extends \ContextSource {
 			foreach( $claims as $claim ) {
 				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 					$claim,
-					$propertyLabels,
+					$propertyInfo,
 					$htmlForEditSection
 				);
 			}
@@ -615,12 +620,12 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param string  $specialpagename
 	 * @param Entity  $entity
-	 * @param \Language $lang|null
+	 * @param Language $language|null
 	 *
 	 * @return string
 	 */
-	protected function getEditUrl( $specialpagename, Entity $entity, Language $lang = null ) {
-		$specialpage = \SpecialPageFactory::getPage( $specialpagename );
+	protected function getEditUrl( $specialpagename, Entity $entity, Language $language = null ) {
+		$specialpage = SpecialPageFactory::getPage( $specialpagename );
 
 		if ( $specialpage === null ) {
 			return ''; //XXX: this should throw an exception?!
@@ -632,8 +637,8 @@ abstract class EntityView extends \ContextSource {
 			$subpage = ''; // can't skip this, that would confuse the order of parameters!
 		}
 
-		if ( $lang !== null ) {
-			$subpage .= '/' . $lang->getCode();
+		if ( $language !== null ) {
+			$subpage .= '/' . $language->getCode();
 		}
 		return $specialpage->getPageTitle( $subpage )->getLocalURL();
 	}
@@ -642,38 +647,30 @@ abstract class EntityView extends \ContextSource {
 	 * Fetches labels for all properties used as properties in snaks in the given entity.
 	 *
 	 * @param Entity $entity
-	 * @param string $langCode the language code of the labels to fetch.
+	 * @param string $languageCode the language code of the labels to fetch.
 	 *
-	 * @todo: we may also want to have the descriptions, in addition to the labels
-	 * @return array maps property IDs to labels.
+	 * @todo: We may also want to have the descriptions, in addition to the labels
+	 * @return array[] Property info array that maps property IDs to labels.
 	 */
-	protected function getPropertyLabels( Entity $entity, $langCode ) {
+	protected function getPropertyInfo( Entity $entity, $languageCode ) {
 		wfProfileIn( __METHOD__ );
-		//TODO: share cache with PropertyLabelResolver
-		//TODO: ...or share info with getBasicEntityInfo
+		// TODO: Share cache with PropertyLabelResolver
+		// TODO: ... or share info with getBasicEntityInfo.
 
-		//TODO: make a finder just for properties, so we don't have to filter
+		// TODO: Make a finder just for properties, so we don't have to filter.
 		$refFinder = new ReferencedEntitiesFinder();
 		$entityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
 		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
 			return $id->getEntityType() === Property::ENTITY_TYPE;
 		} );
 
-		//NOTE: this is a bit hackish,it would be more appropriate to use a TermTable here.
-		$entities = $this->entityInfoBuilder->buildEntityInfo( $propertyIds );
-		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $langCode ) );
-
-		//TODO: apply language fallback
-		$propertyLabels = array();
-		foreach ( $entities as $id => $entity ) {
-			if ( isset( $entity['labels'][$langCode] ) ) {
-				$label = $entity['labels'][$langCode]['value'];
-				$propertyLabels[$id] = $label;
-			}
-		}
+		// NOTE: This is a bit hackish, it would be more appropriate to use a TermTable here.
+		$entityInfo = $this->entityInfoBuilder->buildEntityInfo( $propertyIds );
+		$this->entityInfoBuilder->removeMissing( $entityInfo );
+		$this->entityInfoBuilder->addTerms( $entityInfo, array( 'label', 'description' ), array( $languageCode ) );
 
 		wfProfileOut( __METHOD__ );
-		return $propertyLabels;
+		return $entityInfo;
 	}
 
 }
