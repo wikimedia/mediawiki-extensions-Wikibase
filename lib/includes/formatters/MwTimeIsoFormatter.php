@@ -51,11 +51,11 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 
 	private function formatDate( $extendedIsoTimestamp, $precision ) {
 		/**
-		 * $matches for +00000002013-07-16T01:02:03Z
-		 * [0] => +00000002013-07-16T00:00:00Z
+		 * $matches for +0000000000002013-07-16T01:02:03Z
+		 * [0] => +0000000000002013-07-16T00:00:00Z
 		 * [1] => +
-		 * [2] => 00000002013
-		 * [3] => 0000000
+		 * [2] => 0000000000002013
+		 * [3] => 000000000000
 		 * [4] => 2013
 		 * [5] => 07
 		 * [6] => 16
@@ -63,7 +63,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		 * [8] => 02
 		 * [9] => 03
 		 */
-		$regexSuccess = preg_match( '/^(\+|\-)((\d{0,7})?(\d{4}))-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/',
+		$regexSuccess = preg_match( '/^(\+|\-)((\d{0,12})?(\d{4}))-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/',
 			$extendedIsoTimestamp, $matches );
 
 		if( !$regexSuccess || intval( $matches[2] ) === 0 ) {
