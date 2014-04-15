@@ -52,6 +52,24 @@
       "revId": "f635dd5866e4c6d27ec07099587dc4bb6af91d45",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_aceb3e76",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-04-15T17:17:46Z",
+      "side": 1,
+      "message": "I don\u0027t think it makes sense to add multiple titles as we can only display one icon at once. Agree that we should use labels as title.",
+      "parentUuid": "8e23439c_3663ff0b",
+      "revId": "f635dd5866e4c6d27ec07099587dc4bb6af91d45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
