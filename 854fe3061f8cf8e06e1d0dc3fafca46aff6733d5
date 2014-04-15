@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_5658bbfc",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_b22e029f",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_b514ac45",
         "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-14T18:32:41Z",
       "side": 1,
       "message": "These are two different messages:\n* \"wikibase-error-unexpected\": \"An unexpected error occurred.\",\n* \"wikibase-unexpected-error\": \"Unexpected error: $1.\",\n\nSince this code uses a parameter the old message was probably right.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d3a17d37",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "I now unified them, so we use wikibase-error-unexpected everywhere.",
+      "parentUuid": "8e23439c_b514ac45",
       "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_d6484bd1",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Done. Also more consistent with ApiBase::dieUsage().",
+      "parentUuid": "8e23439c_1565a0dd",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_9571b0a9",
         "filename": "repo/includes/api/ApiErrorReporter.php",
         "patchSetId": 5
@@ -81,6 +135,24 @@
       "writtenOn": "2014-04-14T18:32:41Z",
       "side": 1,
       "message": "An other set of these odd methods that hide the actual exception? Hm, I guess you don\u0027t want to change that in this patch, right?\n\nFor future refactoring: I suggest to change all these methods that throw exceptions to return the exceptions instead (getUsageException and similar).",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_56267b64",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that cause the exception to contain the wrong stack trace (the one for the location where they were created, not the one where they were thrown)?\n\nI\u0027m a bit torn about the naming here. Semantically, we want these methods to terminate the request (\"die\"). We don\u0027t care how. But in terms of flow control, \"throw\" is of course more clear. \n\nI decided to go for an interface very similar to ApiBase::dieUsage() to allow for an easy transition, but I can still be convinced of a better approach.",
+      "parentUuid": "8e23439c_9571b0a9",
       "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_96dbf353",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Well, parameters are $code and $httpStatusCode, which again is borrowed verbatim from ApiBase::dieUsage(), for consistency.\n\nThe fact that we can derive *another* error code from the Status object makes things a bit confusing, I agree.",
+      "parentUuid": "8e23439c_758a946f",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_b5e6ec3d",
         "filename": "repo/includes/api/ApiErrorReporter.php",
         "patchSetId": 5
@@ -115,6 +205,24 @@
       "writtenOn": "2014-04-14T18:32:41Z",
       "side": 1,
       "message": "Brackets are language specific. Use wfMessage( \u0027parentheses\u0027 ) please or rethink this part (it mixes a translated with an untranslated string).",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_56e55b05",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "The error description is always english (see the call to forceMessageLanguage above). Localized messages are handled separately by addMessageToExtraData().",
+      "parentUuid": "8e23439c_b5e6ec3d",
       "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_b6b38fe7",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_d5ff28a6",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_955bf0fc",
         "filename": "repo/includes/api/ApiErrorReporter.php",
         "patchSetId": 5
@@ -149,6 +275,24 @@
       "writtenOn": "2014-04-14T18:32:41Z",
       "side": 1,
       "message": "An array of errors that is made of messages?",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_36c77f4c",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Yes. Don\u0027t blame me, that\u0027s what Status::getErrorsArray() returns.",
+      "parentUuid": "8e23439c_955bf0fc",
       "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_b6da6f1f",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "I stole the code below and didn\u0027t want to change it :P\nI\u0027ll call it $messageSpec or some such.",
+      "parentUuid": "8e23439c_f5422410",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_555558c4",
         "filename": "repo/includes/api/ApiErrorReporter.php",
         "patchSetId": 5
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_36ce5f60",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "no!",
+      "parentUuid": "8e23439c_555558c4",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_b5638ca6",
         "filename": "repo/includes/api/ApiErrorReporter.php",
         "patchSetId": 5
@@ -200,6 +380,24 @@
       "writtenOn": "2014-04-14T18:32:41Z",
       "side": 1,
       "message": "Inconsistent use of space. This keeps confusing me. What\u0027s our standard, \"if(\" or \"if (\"? Personally I strongly support the space.",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f6d7c7f0",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Yea, so do I. This code has been patched together and copied and split and modified... Who knows how that happened :)",
+      "parentUuid": "8e23439c_b5638ca6",
       "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -234,6 +432,24 @@
       "writtenOn": "2014-04-14T18:32:41Z",
       "side": 1,
       "message": "Huh, why? This doesn\u0027t do anything and can simply be removed. Except for the @deprecated tag. If that\u0027s the reason this is here it\u0027s ok. :-)",
+      "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b6302f54",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T12:49:48Z",
+      "side": 1,
+      "message": "Yes, it\u0027s here for the  @deprecated :)",
+      "parentUuid": "8e23439c_f517c4f1",
       "revId": "854fe3061f8cf8e06e1d0dc3fafca46aff6733d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
