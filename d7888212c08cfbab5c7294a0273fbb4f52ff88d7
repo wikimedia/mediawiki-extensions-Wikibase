@@ -34,6 +34,24 @@
       "revId": "d7888212c08cfbab5c7294a0273fbb4f52ff88d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f67b47e9",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T15:00:53Z",
+      "side": 1,
+      "message": "I think it should be possible to refactor this in a way the internal logic can be reused in a clean way without allocating new single-use-objects over and over again.\n\nHowever, this comment should not block this patch. Can be refactored later.",
+      "parentUuid": "8e23439c_16f123da",
+      "revId": "d7888212c08cfbab5c7294a0273fbb4f52ff88d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
