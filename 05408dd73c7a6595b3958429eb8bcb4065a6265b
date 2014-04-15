@@ -16,6 +16,24 @@
       "revId": "05408dd73c7a6595b3958429eb8bcb4065a6265b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_098104a4",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T15:18:42Z",
+      "side": 1,
+      "message": "Sorry, but it\u0027s obvious. I can explain if you want. The characters I removed made the regex unnecessary complex and harder to read.\n\nAlso no test broke.",
+      "parentUuid": "8e23439c_49149ca0",
+      "revId": "05408dd73c7a6595b3958429eb8bcb4065a6265b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
