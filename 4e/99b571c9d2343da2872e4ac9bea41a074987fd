@@ -1,0 +1,8 @@
+Verified+1: jenkins-bot
+Code-Review+2: Addshore <addshorewiki@gmail.com>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: Addshore <addshorewiki@gmail.com>
+Submitted-at: Tue, 15 Apr 2014 16:00:05 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/124830
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
