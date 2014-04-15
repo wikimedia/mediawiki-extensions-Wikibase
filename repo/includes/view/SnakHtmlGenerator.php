@@ -51,12 +51,12 @@ class SnakHtmlGenerator {
 	 * Generates the HTML for a single snak.
 	 *
 	 * @param Snak $snak
-	 * @param array[] $propertyInfo
+	 * @param array[] $entityInfo
 	 * @param bool $showPropertyLink
 	 *
 	 * @return string
 	 */
-	public function getSnakHtml( Snak $snak, array $propertyInfo, $showPropertyLink = false ) {
+	public function getSnakHtml( Snak $snak, array $entityInfo, $showPropertyLink = false ) {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
@@ -67,7 +67,7 @@ class SnakHtmlGenerator {
 		}
 
 		$propertyLink = $showPropertyLink ?
-			$this->makePropertyLink( $snak, $propertyInfo, $showPropertyLink ) : '';
+			$this->makePropertyLink( $snak, $entityInfo, $showPropertyLink ) : '';
 
 		$html = wfTemplate( 'wb-snak',
 			// Display property link only once for snaks featuring the same property:
@@ -81,17 +81,17 @@ class SnakHtmlGenerator {
 
 	/**
 	 * @param Snak $snak
-	 * @param array[] $propertyInfo
+	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	private function makePropertyLink( Snak $snak, array $propertyInfo ) {
+	private function makePropertyLink( Snak $snak, array $entityInfo ) {
 		$propertyId = $snak->getPropertyId();
 		$key = $propertyId->getSerialization();
 		$propertyLabel = $key;
-		if ( isset( $propertyInfo[$key] ) && !empty( $propertyInfo[$key]['labels'] ) ) {
-			$propertyInfoLabel = reset( $propertyInfo[$key]['labels'] );
-			$propertyLabel = $propertyInfoLabel['value'];
+		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
+			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
+			$propertyLabel = $entityInfoLabel['value'];
 		}
 
 		// @todo use EntityIdHtmlLinkFormatter here
