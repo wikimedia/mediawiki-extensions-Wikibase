@@ -78,32 +78,6 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @see Content::prepareSave
-	 *
-	 * @since 0.1
-	 *
-	 * @param WikiPage $page
-	 * @param int      $flags
-	 * @param int      $baseRevId
-	 * @param User     $user
-	 *
-	 * @return Status
-	 */
-	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
-		wfProfileIn( __METHOD__ );
-		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
-
-		if ( $status->isOK() ) {
-			// first test for label entity id conflicts as this is the faster check
-			$this->addLabelEntityIdConflicts( $status, Property::ENTITY_TYPE );
-			$this->addLabelUniquenessConflicts( $status );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $status;
-	}
-
-	/**
 	 * Gets the property that makes up this property content.
 	 *
 	 * @since 0.1
