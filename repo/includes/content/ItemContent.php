@@ -276,14 +276,14 @@ class ItemContent extends EntityContent {
 	 * @param bool               $recursive
 	 * @param null|ParserOutput  $parserOutput
 	 *
-	 * @return \Title of DataUpdate
+	 * @return DataUpdate[]
 	 */
 	public function getSecondaryDataUpdates( Title $title, Content $old = null,
 		$recursive = false, ParserOutput $parserOutput = null ) {
 
 		return array_merge(
 			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
-			array( new ItemModificationUpdate( $this, $old ) )
+			array( new ItemModificationUpdate( $this ) )
 		);
 	}
 

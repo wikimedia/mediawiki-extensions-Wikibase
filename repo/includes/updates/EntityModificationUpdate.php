@@ -21,23 +21,14 @@ class EntityModificationUpdate extends \DataUpdate {
 	protected $newContent;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var null|EntityContent
-	 */
-	protected $oldContent;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
 	 * @param EntityContent $newContent
-	 * @param EntityContent|null $oldContent
 	 */
-	public function __construct( EntityContent $newContent, EntityContent $oldContent = null ) {
+	public function __construct( EntityContent $newContent ) {
 		$this->newContent = $newContent;
-		$this->oldContent = $oldContent;
 	}
 
 	/**
@@ -49,7 +40,7 @@ class EntityModificationUpdate extends \DataUpdate {
 		wfProfileIn( __METHOD__ );
 
 		$this->updateRepoStore();
-		$this->fireHooks();
+		$this->fireHook();
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -74,32 +65,7 @@ class EntityModificationUpdate extends \DataUpdate {
 		// Override to add behavior.
 	}
 
-	protected function fireHooks() {
-		if ( $this->isInsertionUpdate() ) {
-			$this->firstInsertionHook();
-		}
-		else {
-			$this->fireModificationHook();
-		}
-	}
-
-	protected function isInsertionUpdate() {
-		return $this->oldContent === null;
-	}
-
-	protected function firstInsertionHook() {
-		/**
-		 * Gets called after the structured save of an item has been committed,
-		 * allowing for extensions to do additional storage/indexing.
-		 *
-		 * @since 0.5
-		 *
-		 * @param EntityContent $entityContent
-		 */
-		wfRunHooks( 'WikibaseEntityInsertionUpdate', array( $this->newContent ) );
-	}
-
-	protected function fireModificationHook() {
+	protected function fireHook() {
 		/**
 		 * Gets called after the structured save of an item has been committed,
 		 * allowing for extensions to do additional storage/indexing.
@@ -107,9 +73,8 @@ class EntityModificationUpdate extends \DataUpdate {
 		 * @since 0.5
 		 *
 		 * @param EntityContent $newEntityContent
-		 * @param EntityContent $oldEntityContent
 		 */
-		wfRunHooks( 'WikibaseEntityModificationUpdate', array( $this->newContent, $this->oldContent ) );
+		wfRunHooks( 'WikibaseEntityModificationUpdate', array( $this->newContent ) );
 	}
 
 }
