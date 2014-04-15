@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_965e53eb",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-15T12:11:52Z",
+      "side": 1,
+      "message": "Looks a bit like overkill to construct a second object. Why not simply change the local options and call $this-\u003eformat again?",
+      "revId": "d7888212c08cfbab5c7294a0273fbb4f52ff88d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
