@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_56755bc7",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T13:24:46Z",
+      "side": 1,
+      "message": "Don\u0027t just use the first label, get the label in the appropriate language. We\u0027ll need a function for that if we want to apply fallback.",
+      "revId": "abffb5b5453340ab0a40d282035925b692cf873a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f68587a0",
+        "filename": "repo/includes/view/SnakHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-15T13:24:46Z",
+      "side": 1,
+      "message": "Perhaps just use an appropriate Formatter?",
+      "revId": "abffb5b5453340ab0a40d282035925b692cf873a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
