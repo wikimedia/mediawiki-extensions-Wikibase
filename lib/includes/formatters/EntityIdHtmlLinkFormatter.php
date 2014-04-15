@@ -2,8 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use InvalidArgumentException;
 use Html;
+use InvalidArgumentException;
+use OutOfBoundsException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -30,14 +31,28 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	public function format( $value ) {
 		$value = $this->unwrapEntityId( $value );
 
-		$title = parent::format( $value );
-
+		$title = Title::newFromText( $value->getPrefixedId() );
 		$attributes = array(
-			'href' => Title::newFromText( $value->getPrefixedId() )->getLocalUrl()
+			'title' => $title->getPrefixedText(),
+			'href' => $title->getLocalURL()
 		);
 
-		$html = Html::element( 'a', $attributes, $title );
+		$label = $value->getPrefixedId();
+
+		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
+			try {
+				$itemLabel = $this->lookupItemLabel( $value );
+				if ( is_string( $itemLabel ) ) {
+					$label = $itemLabel;
+				}
+			} catch ( OutOfBoundsException $ex ) {
+				$attributes['class'] = 'new';
+			}
+		}
+
+		$html = Html::element( 'a', $attributes, $label );
 
 		return $html;
 	}
+
 }
