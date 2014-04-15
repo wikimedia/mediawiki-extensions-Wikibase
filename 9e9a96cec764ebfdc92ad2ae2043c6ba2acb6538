@@ -16,6 +16,24 @@
       "revId": "9e9a96cec764ebfdc92ad2ae2043c6ba2acb6538",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_961ad3ce",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-15T12:47:12Z",
+      "side": 0,
+      "message": "We are now testing the format method which takes a TimeValue which can not be constructed with the value \u0027foobar\u0027.",
+      "parentUuid": "8e23439c_163fe321",
+      "revId": "9e9a96cec764ebfdc92ad2ae2043c6ba2acb6538",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
