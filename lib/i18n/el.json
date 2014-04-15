@@ -47,7 +47,6 @@
     "wikibase-globedetails-latitude": "Γεωγραφικό πλάτος",
     "wikibase-globedetails-precision": "Ακρίβεια",
     "wikibase-parse-error": "Ακατάλληλη τιμή.",
-    "wikibase-unexpected-error": "Μη αναμενόμενο σφάλμα: $1.",
     "wikibase-replicationnote": "Παρακαλώ να λάβετε υπόψη ότι έως ότου οι αλλαγές γίνουν ορατές σε όλα τα wiki μπορεί να περάσουν μερικά λεπτά.",
     "wikibase-sitelinks-wikipedia": "Σελίδες της Βικιπαίδειας που συνδέονται με αυτό το αντικείμενο",
     "wikibase-sitelinks-sitename-columnheading": "Γλώσσα",
