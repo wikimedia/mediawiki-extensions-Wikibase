@@ -18,20 +18,22 @@ class EraParser extends StringValueParser {
 	/**
 	 * @since 0.5
 	 */
-	const CURRENT_ERA = '+';
+	const BEFORE_CURRENT_ERA = '-';
+
 	/**
 	 * @since 0.5
 	 */
-	const BEFORE_CURRENT_ERA = '-';
+	const CURRENT_ERA = '+';
 
 	/**
 	 * @var string regex snippet matching BEFORE_CURRENT_ERA
 	 */
-	private $BCEregex = '(B\.?C(\.?E)?|Before\s(Christ|Common\sEra))';
+	private $BCEregex = '(B\.?\s*C\.?(\s*E\.?)?|Before\s+(Christ|Common\s+Era))';
+
 	/**
 	 * @var string regex snippet matching CURRENT_ERA
 	 */
-	private $CEregex = '(C\.?E|A\.?D|Common\sEra|After\sChrist|Anno\sDomini)';
+	private $CEregex = '(C\.?\s*E\.?|A\.?\s*D\.?|Common\s+Era|After\s+Christ|Anno\s+Domini)';
 
 	/**
 	 * Parses the provided string and returns the era
@@ -42,15 +44,16 @@ class EraParser extends StringValueParser {
 	 * @return array( 0 => parsed era constant, 1 => $value with no era data )
 	 */
 	protected function stringParse( $value ) {
+		$value = trim( $value );
+
 		$char1 = substr( $value, 0, 1 );
-		if( $char1 === self::CURRENT_ERA || $char1 === self::BEFORE_CURRENT_ERA ) {
+		if( $char1 === self::BEFORE_CURRENT_ERA || $char1 === self::CURRENT_ERA ) {
 			$eraFromSign = $char1;
 		}
-		if( preg_match( '/' . $this->CEregex . '$/i', $value, $matches ) ) {
-			$eraFromString = self::CURRENT_ERA;
-		}
-		if( preg_match( '/' . $this->BCEregex . '$/i', $value, $matches ) ) {
+		if( preg_match( '/' . $this->BCEregex . '$/i', $value ) ) {
 			$eraFromString = self::BEFORE_CURRENT_ERA;
+		} elseif( preg_match( '/' . $this->CEregex . '$/i', $value ) ) {
+			$eraFromString = self::CURRENT_ERA;
 		}
 
 		if( isset( $eraFromSign ) && isset( $eraFromString ) ) {
@@ -64,7 +67,7 @@ class EraParser extends StringValueParser {
 		if( isset( $eraFromSign ) ) {
 			return array( $eraFromSign, $cleanValue );
 		}
-		//Default to CE
+		// Default to CE
 		return array( self::CURRENT_ERA, $cleanValue );
 	}
 
@@ -77,13 +80,12 @@ class EraParser extends StringValueParser {
 	 */
 	private function cleanValue( $value ) {
 		$char1 = substr( $value, 0, 1 );
-		if( $char1 === self::CURRENT_ERA || $char1 === self::BEFORE_CURRENT_ERA ) {
+		if( $char1 === self::BEFORE_CURRENT_ERA || $char1 === self::CURRENT_ERA ) {
 			$value = substr( $value, 1 );
 		}
 
-		$value = preg_replace( '/\s*(' . $this->CEregex . '|' .  $this->BCEregex . ')$/i', '', $value );
-
-		return trim( $value );
+		return preg_replace( '/\s*(' . $this->BCEregex . '|' .  $this->CEregex . ')$/i', '',
+			$value );
 	}
 
 }
