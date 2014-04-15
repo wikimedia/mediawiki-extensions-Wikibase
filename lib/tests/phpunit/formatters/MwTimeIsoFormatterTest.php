@@ -3,6 +3,7 @@
 namespace ValueFormatters\Test;
 
 use DataValues\TimeValue;
+use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\MwTimeIsoFormatter;
@@ -37,7 +38,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 	 *
 	 * @return array
 	 */
-	public function formatDateProvider() {
+	public function formatProvider() {
 		$tests = array(
 			//+ dates
 			'16 August 2013' => array(
@@ -270,35 +271,35 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'-0-01-01T01:01:01Z',
 				TimeValue::PRECISION_Ga,
 			),
-			'foobar' => array(
-				'foobar',
-				TimeValue::PRECISION_Ga,
-			),
 		);
 
 		$argLists = array();
 
 		foreach ( $tests as $expected => $args ) {
-			$argLists[] = array( $expected, $args[0], $args[1], 'en' );
+			$timeValue = new TimeValue( $args[0], 0, 0, 0, $args[1], TimeFormatter::CALENDAR_GREGORIAN );
+			$argLists[] = array( $expected, $timeValue, 'en' );
 		}
 
 		//Different language tests at YEAR precision
 		foreach( Utils::getLanguageCodes() as $languageCode ) {
-			$argLists[] = array( '3333', '+00000003333-01-01T00:00:00Z', TimeValue::PRECISION_YEAR, $languageCode );
+			$argLists[] = array(
+				'3333',
+				new TimeValue( '+00000003333-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, TimeFormatter::CALENDAR_GREGORIAN ),
+				$languageCode
+			);
 		}
 
 		return $argLists;
 	}
 
 	/**
-	 * @dataProvider formatDateProvider
+	 * @dataProvider formatProvider
 	 *
 	 * @param string $expected
-	 * @param string $extendedIsoString
-	 * @param integer $precision
+	 * @param TimeValue $timeValue
 	 * @param string $langCode
 	 */
-	public function testFormatDate( $expected, $extendedIsoString, $precision, $langCode = 'en' ) {
+	public function testFormat( $expected, TimeValue $timeValue, $langCode = 'en' ) {
 		//TODO remove this skip section once $brokenLanguages can be empty! BUG 63723
 		if( in_array( $langCode, array( 'lzh', 'zh-classical' ) ) ) {
 			$this->markTestSkipped( "Test for lang {$langCode} currently broken: Bug 63723" );
@@ -310,45 +311,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 
 		$isoFormatter = new MwTimeIsoFormatter( $options );
 
-		$this->assertEquals( $expected, $isoFormatter->formatDate( $extendedIsoString, $precision ) );
-	}
-
-	/**
-	 * @dataProvider formatProvider
-	 */
-	public function testFormat( $expected, $timeValue, $langCode ) {
-		$options = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => $langCode
-		) );
-
-		$isoFormatter = new MwTimeIsoFormatter( $options );
-		$formattedValue = $isoFormatter->format( $timeValue );
-
-		$this->assertEquals( $expected, $formattedValue );
-	}
-
-	public function formatProvider() {
-		$timeValues = $this->getTimeValues();
-
-		$cases = array();
-
-		foreach( $timeValues as $expected => $timeValue ) {
-			$cases[] = array( $expected, $timeValue, 'de' );
-		}
-
-		return $cases;
-	}
-
-	// @todo reuse more date format provider values
-	private function getTimeValues() {
-		return array(
-			 '1941' => new TimeValue(
-				'+00000001941-01-01T00:00:00Z',
-				0, 0, 0,
-				9,
-				'http://www.wikidata.org/entity/Q1985727'
-			)
-		);
+		$this->assertEquals( $expected, $isoFormatter->format( $timeValue ) );
 	}
 
 }
