@@ -284,7 +284,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 		foreach( Utils::getLanguageCodes() as $languageCode ) {
 			$argLists[] = array(
 				'3333',
-				new TimeValue( '+00000003333-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, TimeFormatter::CALENDAR_GREGORIAN ),
+				new TimeValue( '+0000000000003333-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, TimeFormatter::CALENDAR_GREGORIAN ),
 				$languageCode
 			);
 		}
