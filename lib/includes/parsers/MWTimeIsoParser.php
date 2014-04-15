@@ -60,7 +60,7 @@ class MWTimeIsoParser extends StringValueParser {
 	protected $lang;
 
 	/**
-	 * @var \ValueParsers\TimeParser
+	 * @var TimeParser
 	 */
 	protected $timeValueTimeParser;
 
@@ -75,7 +75,7 @@ class MWTimeIsoParser extends StringValueParser {
 		parent::__construct( $options );
 		$this->lang = Language::factory( $this->getOptions()->getOption( ValueParser::OPT_LANG ) );
 
-		$this->timeValueTimeParser = new \ValueParsers\TimeParser(
+		$this->timeValueTimeParser = new TimeParser(
 			new CalendarModelParser(),
 			$this->getOptions()
 		);
@@ -157,9 +157,9 @@ class MWTimeIsoParser extends StringValueParser {
 	 */
 	private function getTimeFromYear( $year, $isBce ) {
 		if( $isBce ) {
-			$sign = '-';
+			$sign = EraParser::BEFORE_CURRENT_ERA;
 		} else {
-			$sign = '+';
+			$sign = EraParser::CURRENT_ERA;
 		}
 		$timeString = $sign . $year . '-00-00T00:00:00Z';
 		return $this->timeValueTimeParser->parse( $timeString );
