@@ -19,10 +19,9 @@ class ItemModificationUpdate extends EntityModificationUpdate {
 	 * @since 0.1
 	 *
 	 * @param ItemContent $newContent
-	 * @param null|ItemContent $oldContent
 	 */
-	public function __construct( ItemContent $newContent, ItemContent $oldContent = null ) {
-		parent::__construct( $newContent, $oldContent );
+	public function __construct( ItemContent $newContent ) {
+		parent::__construct( $newContent );
 	}
 
 	/**

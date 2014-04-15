@@ -55,6 +55,12 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 		$revision = $store->saveEntity( $itemContent->getEntity(), "testing", $GLOBALS['wgUser'], EDIT_NEW );
 		$id = $revision->getEntity()->getId()->getNumericId();
 
+		$this->stashMwGlobals( 'wgHooks' );
+		$hookCalled = false;
+		$GLOBALS['wgHooks']['WikibaseEntityModificationUpdate'][] = function () use ( &$hookCalled ) {
+			$hookCalled = true;
+		};
+
 		$update = new ItemModificationUpdate( $itemContent );
 		$update->doUpdate();
 
@@ -66,6 +72,11 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 		$this->assertEquals(
 			$expected,
 			$actual
+		);
+
+		$this->assertTrue(
+			$hookCalled,
+			'Assert hook WikibaseEntityModificationUpdate was called'
 		);
 
 		// TODO: verify terms
