@@ -6,7 +6,10 @@ use DataValues\TimeValue;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\FormatterOptions;
+use ValueParsers\ParserOptions;
+use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Lib\Parsers\TimeParser;
 use Wikibase\Utils;
 
 /**
@@ -44,18 +47,22 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			'16 August 2013' => array(
 				'+2013-08-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'16 July 2013' => array(
 				'+00000002013-07-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'14 January 1' => array(
 				'+00000000001-01-14T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'1 January 10000' => array(
 				'+00000010000-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'July 2013' => array(
 				'+00000002013-07-16T00:00:00Z',
@@ -155,18 +162,22 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			'16 August 2013 BCE' => array(
 				'-2013-08-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'16 July 2013 BCE' => array(
 				'-00000002013-07-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'14 January 1 BCE' => array(
 				'-00000000001-01-14T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'1 January 10000 BCE' => array(
 				'-00000010000-01-01T00:00:00Z',
 				TimeValue::PRECISION_DAY,
+				true
 			),
 			'July 2013 BCE' => array(
 				'-00000002013-07-16T00:00:00Z',
@@ -277,14 +288,20 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 
 		foreach ( $tests as $expected => $args ) {
 			$timeValue = new TimeValue( $args[0], 0, 0, 0, $args[1], TimeFormatter::CALENDAR_GREGORIAN );
-			$argLists[] = array( $expected, $timeValue, 'en' );
+			$argLists[] = array( $expected, $timeValue );
 		}
 
 		//Different language tests at YEAR precision
 		foreach( Utils::getLanguageCodes() as $languageCode ) {
 			$argLists[] = array(
 				'3333',
-				new TimeValue( '+0000000000003333-01-01T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, TimeFormatter::CALENDAR_GREGORIAN ),
+				new TimeValue(
+					'+0000000000003333-01-01T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_YEAR,
+					TimeFormatter::CALENDAR_GREGORIAN
+				),
+				false,
 				$languageCode
 			);
 		}
@@ -297,9 +314,10 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 	 *
 	 * @param string $expected
 	 * @param TimeValue $timeValue
+	 * @param bool $roundtrip
 	 * @param string $langCode
 	 */
-	public function testFormat( $expected, TimeValue $timeValue, $langCode = 'en' ) {
+	public function testFormat( $expected, TimeValue $timeValue, $roundtrip = false, $langCode = 'en' ) {
 		//TODO remove this skip section once $brokenLanguages can be empty! BUG 63723
 		if( in_array( $langCode, array( 'lzh', 'zh-classical' ) ) ) {
 			$this->markTestSkipped( "Test for lang {$langCode} currently broken: Bug 63723" );
@@ -311,7 +329,37 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 
 		$isoFormatter = new MwTimeIsoFormatter( $options );
 
-		$this->assertEquals( $expected, $isoFormatter->format( $timeValue ) );
+		$formattedTime = $isoFormatter->format( $timeValue );
+		$this->assertEquals( $expected, $formattedTime );
+		if( $roundtrip ) {
+			$this->assertCanRoundTrip( $formattedTime, $timeValue, $langCode );
+		}
+	}
+
+	private function assertCanRoundTrip( $formattedTime, TimeValue $timeValue, $langCode ) {
+		$options = new ParserOptions( array(
+			ValueParser::OPT_LANG => $langCode,
+			\ValueParsers\TimeParser::OPT_PRECISION => $timeValue->getPrecision(),
+			\ValueParsers\TimeParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
+		) );
+
+		$timeParser = new TimeParser( $options );
+		$parsedTimeValue = $timeParser->parse( $formattedTime );
+
+		/**
+		 * TODO: all of the below can be removed once TimeValue has an equals method
+		 */
+		$parsedTime = $parsedTimeValue->getTime();
+		$expectedTime = $timeValue->getTime();
+		$this->assertRegExp(
+			'/^' . preg_quote( substr( $expectedTime, 0, 1 ), '/' ) . '0*' . preg_quote( substr( $expectedTime, 1 ), '/' ) . '$/',
+			$parsedTime
+		);
+		$this->assertEquals( $timeValue->getBefore(), $parsedTimeValue->getBefore() );
+		$this->assertEquals( $timeValue->getAfter(), $parsedTimeValue->getAfter() );
+		$this->assertEquals( $timeValue->getPrecision(), $parsedTimeValue->getPrecision() );
+		$this->assertEquals( $timeValue->getTimezone(), $parsedTimeValue->getTimezone() );
+		$this->assertEquals( $timeValue->getCalendarModel(), $parsedTimeValue->getCalendarModel() );
 	}
 
 }
