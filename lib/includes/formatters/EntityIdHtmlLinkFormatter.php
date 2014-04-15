@@ -39,7 +39,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 		$label = $value->getPrefixedId();
 
-		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
+		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
 			try {
 				$itemLabel = $this->lookupItemLabel( $value );
 				if ( is_string( $itemLabel ) ) {

@@ -125,7 +125,7 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$options = new FormatterOptions();
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
-		$options->setOption( EntityIdLabelFormatter::OPT_RESOLVE_ID, false );
+		$options->setOption( EntityIdLabelFormatter::OPT_LOOKUP_LABEL, false );
 
 		$argLists[] = array( new EntityIdValue( new ItemId( 'Q42' ) ), 'Q42', $options );
 

@@ -26,12 +26,12 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	/**
 	 * Whether we should try to find the label of the entity
 	 */
-	const OPT_RESOLVE_ID = 'resolveEntityId';
+	const OPT_LOOKUP_LABEL = 'lookup';
 
 	/**
 	 * What we should do if we can't find the label.
 	 */
-	const OPT_LABEL_FALLBACK = 'labelFallback';
+	const OPT_LABEL_FALLBACK = 'fallback';
 
 	const FALLBACK_PREFIXED_ID = 0;
 	const FALLBACK_EMPTY_STRING = 1;
@@ -45,18 +45,18 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	/**
 	 * @since 0.4
 	 *
-	 * @param FormatterOptions $options Supported options: OPT_RESOLVE_ID (boolean),
+	 * @param FormatterOptions $options Supported options: OPT_LOOKUP_LABEL (boolean),
 	 *        OPT_LABEL_FALLBACK (FALLBACK_XXX)
 	 * @param EntityLookup $entityLookup
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
 		parent::__construct( $options );
 
 		$this->entityLookup = $entityLookup;
 
-		$this->defaultOption( self::OPT_RESOLVE_ID, true );
+		$this->defaultOption( self::OPT_LOOKUP_LABEL, true );
 		$this->defaultOption( self::OPT_LABEL_FALLBACK, self::FALLBACK_PREFIXED_ID );
 
 		$fallbackOptionIsValid = in_array(
@@ -72,8 +72,8 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 			throw new InvalidArgumentException( 'Bad value for OPT_LABEL_FALLBACK option' );
 		}
 
-		if ( !is_bool( $this->getOption( self::OPT_RESOLVE_ID ) ) ) {
-			throw new InvalidArgumentException( 'Bad value for OPT_RESOLVE_ID option: must be a boolean' );
+		if ( !is_bool( $this->getOption( self::OPT_LOOKUP_LABEL ) ) ) {
+			throw new InvalidArgumentException( 'Bad value for OPT_LOOKUP_LABEL option: must be a boolean' );
 		}
 	}
 
@@ -94,7 +94,7 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 
 		$label = null;
 
-		if ( $this->getOption( self::OPT_RESOLVE_ID ) ) {
+		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
 			try {
 				$label = $this->lookupItemLabel( $value );
 			} catch ( OutOfBoundsException $ex ) {
