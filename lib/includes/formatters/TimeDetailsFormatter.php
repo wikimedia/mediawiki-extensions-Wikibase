@@ -22,7 +22,7 @@ use ValueFormatters\ValueFormatterBase;
 class TimeDetailsFormatter extends ValueFormatterBase {
 
 	/**
-	 * @var MwTimeIsoFormatter
+	 * @var TimeFormatter
 	 */
 	protected $isoTimeFormatter;
 
@@ -40,7 +40,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		if ( $options->hasOption( TimeFormatter::OPT_TIME_ISO_FORMATTER ) ) {
 			$this->isoTimeFormatter = $options->getOption( TimeFormatter::OPT_TIME_ISO_FORMATTER );
 		} else {
-			$this->isoTimeFormatter = new MwTimeIsoFormatter( $options );
+			$this->isoTimeFormatter = new TimeFormatter( $options );
 			$options->setOption( TimeFormatter::OPT_TIME_ISO_FORMATTER, $this->isoTimeFormatter );
 		}
 

@@ -8,7 +8,7 @@ use ValueFormatters\ValueFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
-use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Lib\TimeFormatter;
 use Wikibase\Lib\Parsers\TimeParser;
 use Wikibase\Utils;
 
@@ -327,7 +327,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$isoFormatter = new MwTimeIsoFormatter( $options );
+		$isoFormatter = new TimeFormatter( $options );
 
 		$formattedTime = $isoFormatter->format( $timeValue );
 		$this->assertEquals( $expected, $formattedTime );
