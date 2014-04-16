@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_562d5040",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-16T14:45:18Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be optional.",
+      "revId": "6454af2e8230c577a8fe25bf096a4f9992840947",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1627d860",
+        "filename": "lib/includes/formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-16T14:45:18Z",
+      "side": 1,
+      "message": "This is just wrong, we should never ever do that.",
+      "revId": "6454af2e8230c577a8fe25bf096a4f9992840947",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
