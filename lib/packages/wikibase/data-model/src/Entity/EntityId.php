@@ -145,14 +145,16 @@ class EntityId implements Comparable, Serializable {
 	}
 
 	/**
-	 * Constructs an EntityId object from a serialization.
-	 * This only works for ids of entity types defined in Wikibase DataModel.
+	 * Constructs an EntityId object from a serialization (prefixed id).
+	 * This only works for ids of entity types defined in BasicEntityIdParser::getBuilders.
 	 *
 	 * @deprecated since 0.5, use an EntityIdParser
 	 *
 	 * @param string $prefixedId
 	 *
 	 * @return EntityId|null
+	 *
+	 * @see BasicEntityIdParser::getBuilders
 	 */
 	public static function newFromPrefixedId( $prefixedId ) {
 		$idParser = new BasicEntityIdParser();
