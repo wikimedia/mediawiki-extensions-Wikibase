@@ -2,14 +2,14 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataValues\StringValue;
 use DataValues\QuantityValue;
+use DataValues\StringValue;
 use DataValues\TimeValue;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
-use ValueFormatters\ValueFormatter;
 use ValueFormatters\TimeFormatter;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;

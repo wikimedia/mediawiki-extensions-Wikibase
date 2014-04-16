@@ -6,18 +6,42 @@ use Html;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Title;
+use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\EntityLookup;
+use Wikibase\EntityTitleLookup;
 
 /**
- * Formats entity IDs by generating an html link to the corresponding page title.
+ * Formats entity IDs by generating an HTML link to the corresponding page title.
  *
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Adrian Lang
+ * @author Thiemo Mättig
  */
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
+
+	/**
+	 * @var EntityTitleLookup|null
+	 */
+	protected $entityTitleLookup;
+
+	/**
+	 * @param FormatterOptions $options
+	 * @param EntityLookup $entityLookup
+	 * @param EntityTitleLookup|null $entityTitleLookup
+	 */
+	public function __construct(
+		FormatterOptions $options,
+		EntityLookup $entityLookup,
+		EntityTitleLookup $entityTitleLookup = null
+	) {
+		parent::__construct( $options, $entityLookup );
+
+		$this->entityTitleLookup = $entityTitleLookup;
+	}
 
 	/**
 	 * Format an EntityId data value
@@ -31,7 +55,11 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	public function format( $value ) {
 		$value = $this->unwrapEntityId( $value );
 
-		$title = Title::newFromText( $value->getPrefixedId() );
+		if ( isset( $this->entityTitleLookup ) ) {
+			$title = $this->entityTitleLookup->getTitleForId( $value );
+		} else {
+			$title = Title::newFromText( $value->getPrefixedId() );
+		}
 		$attributes = array(
 			'title' => $title->getPrefixedText(),
 			'href' => $title->getLocalURL()
