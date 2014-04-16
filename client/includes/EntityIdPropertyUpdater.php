@@ -58,9 +58,9 @@ class EntityIdPropertyUpdater {
 			// unset property, if it was set
 			$this->unsetProperty( $out, 'wikibase_item' );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . 'Trying to set wikibase_item property for '
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Trying to set wikibase_item property for '
 				. $siteLink->getSiteId() . ':' . $siteLink->getPageName()
-				. ' but $itemId is not an EntityId object.' );
+				. " but $itemId is not an EntityId object." );
 		}
 	}
 
