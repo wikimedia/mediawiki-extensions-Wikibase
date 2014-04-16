@@ -185,6 +185,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.util.highlightMatchingCharacters' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.util/jquery.util.highlightMatchingCharacters.js',
+			),
+			'dependencies' => array(
+				'jquery',
+			),
+		),
+
 		'jquery.util.getscrollbarwidth' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.util/jquery.util.getscrollbarwidth.js',

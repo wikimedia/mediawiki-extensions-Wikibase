@@ -159,6 +159,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.util.highlightMatchingCharacters.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.util/jquery.util.highlightMatchingCharacters.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.util.highlightMatchingCharacters',
+			),
+		),
+
 
 		'util.MessageProvider.tests' => $moduleTemplate + array(
 			'scripts' => array(
