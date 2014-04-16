@@ -48,11 +48,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @see \ArrayObject::__construct
 	 */
 	public function __construct( $input = null ) {
-		if ( is_array( $input ) ) {
-			parent::__construct( $input );
-		} elseif ( $input !== null ) {
-			parent::__construct( (array)$input );
-		}
+		parent::__construct( (array)$input );
 	}
 
 	/**
