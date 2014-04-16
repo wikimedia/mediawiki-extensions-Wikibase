@@ -9,15 +9,15 @@
 module EntitySelectorPage
   include PageObject
   # entity selector widget UI elements
-  ul(:entity_selector_list, class: "ui-entityselector-list")
-  a(:first_entity_selector_link, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a")
+  ul(:entity_selector_list, css: ".ui-entityselector-list:not(.wikibase-entitysearch-list)")
+  a(:first_entity_selector_link, css: ".ui-entityselector-list:not(.wikibase-entitysearch-list) li a")
   span(:first_entity_selector_label, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-label')]")
   span(:first_entity_selector_description, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-description')]")
   text_field(:entity_selector_input, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'ui-entityselector-input')]", index: 0)
   text_field(:entity_selector_input2, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'ui-entityselector-input')]", index: 1)
 
-  ul(:entity_selector_list, class: "ui-entityselector-list")
-  a(:first_entity_selector_link, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a")
+  #ul(:entity_selector_list, class: "ui-entityselector-list")
+  #a(:first_entity_selector_link, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a")
   #span(:first_entity_selector_label, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-label')]")
   #span(:first_entity_selector_description, xpath: "//ul[contains(@class, 'ui-entityselector-list')]/li/a/span/span[contains(@class, 'ui-entityselector-description')]")
   #text_field(:entity_selector_input2, xpath: "//div[contains(@class, 'wb-claimlistview')]//input[contains(@class, 'ui-entityselector-input')]", index: 1)
