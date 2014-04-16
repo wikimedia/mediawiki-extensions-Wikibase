@@ -961,7 +961,10 @@ class DispatchChanges extends \Maintenance {
 		$ok = $qgroup->push( $job );
 		wfProfileOut( __METHOD__ . '#push' );
 
-		if ( !$ok ) {
+		// backwards compat for MW 1.23, strict comparison.
+		// in MW 1.24, check is not needed, as job queue failures are
+		// handled with exceptions and $ok is no longer returned.
+		if ( $ok === false ) {
 			wfProfileOut( __METHOD__ );
 			throw new \MWException( "Failed to push to job queue for $wikiDB" );
 		}

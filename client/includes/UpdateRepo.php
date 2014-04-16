@@ -135,7 +135,11 @@ abstract class UpdateRepo {
 		$ok = $jobQueueGroup->push( $job );
 		wfProfileOut( __METHOD__ . '#push' );
 
-		if ( !$ok ) {
+		// backwards compat for MW 1.23, check for false return
+		// in MW 1.24, $ok is not returned as JobQueueGroup throws
+		// exceptions instead. The following check is not needed
+		// and can be removed when we do not support 1.23 anymore.
+		if ( $ok === false ) {
 			wfProfileOut( __METHOD__ );
 			throw new RuntimeException( "Failed to push job to job queue" );
 		}
