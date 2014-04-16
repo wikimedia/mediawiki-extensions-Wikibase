@@ -966,8 +966,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	public function setFingerprint( Fingerprint $fingerprint ) {
 		$this->setLabels( $fingerprint->getLabels()->toTextArray() );
 		$this->setDescriptions( $fingerprint->getDescriptions()->toTextArray() );
-		$this->setAliasGroupList( $fingerprint->getAliases() );
-
+		$this->setAliasGroupList( $fingerprint->getAliasGroups() );
 	}
 
 	private function setAliasGroupList( AliasGroupList $list ) {
