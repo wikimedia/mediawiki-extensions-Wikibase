@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_f6c9fcae",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-16T14:29:52Z",
+      "side": 1,
+      "message": "Punctuation missing.",
+      "revId": "1ca9cee3201b736bd9ae70143f1d613414e856c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b6c3848b",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-16T14:29:52Z",
+      "side": 1,
+      "message": "Punctuation missing.",
+      "revId": "1ca9cee3201b736bd9ae70143f1d613414e856c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_e9d7e8f0",
         "filename": "repo/includes/api/ApiErrorReporter.php",
         "patchSetId": 8
