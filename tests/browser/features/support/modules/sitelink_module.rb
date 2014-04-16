@@ -18,11 +18,11 @@ module SitelinkPage
   span(:sitelink_counter, class: "wb-ui-propertyedittool-counter")
   text_field(:site_id_input_field, xpath: "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//td[contains(@class, 'wb-sitelinks-sitename')]/input")
   text_field(:page_input_field, xpath: "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//td[contains(@class, 'wb-sitelinks-link')]/input[not(@disabled)]")
-  text_field(:page_input_field_disabled, xpath: "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//td[contains(@class, 'wb-sitelinks-link')]/input[contains(@disabled, 'disabled')]")
+  text_field(:page_input_field_disabled, xpath: "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//td[contains(@class, 'wb-sitelinks-link')]/input[@disabled]")
   ul(:site_id_dropdown, xpath: "//ul[contains(@class, 'wikibase-siteselector-list')]")
   li(:site_id_dropdown_first_element, xpath: "//ul[contains(@class, 'wikibase-siteselector-list')]/li")
-  ul(:page_name_dropdown, xpath: "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']")
-  li(:page_name_dropdown_first_element, xpath: "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all ui-suggester-list']/li")
+  ul(:page_name_dropdown, css: "ul.ui-suggester-list:not(.ui-entityselector-list):not(.wikibase-siteselector-list)")
+  li(:page_name_dropdown_first_element, css: "ul.ui-suggester-list:not(.ui-entityselector-list):not(.wikibase-siteselector-list) li")
   element(:sitelink_sort_language, :th, xpath: "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//th[contains(@class, 'wb-sitelinks-sitename')]")
   element(:sitelink_sort_code, :th, xpath: "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//th[contains(@class, 'wb-sitelinks-siteid')]")
   element(:sitelink_sort_link, :th, xpath: "//table[contains(@data-wb-sitelinks-group, 'wikipedia')]//th[contains(@class, 'wb-sitelinks-link')]")
@@ -76,8 +76,7 @@ module SitelinkPage
       self.site_id_input_field = sitelink[0]
       self.page_input_field_element.when_visible
       self.page_input_field = sitelink[1]
-      # remove additional characters sometimes suggested by the suggester
-      self.page_input_field_element.send_keys :delete
+      wait_for_api_callback
       save_sitelink_link
       wait_for_api_callback
     end

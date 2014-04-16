@@ -8,9 +8,43 @@
 ( function( $, mw ) {
 	'use strict';
 
-	$( document ).ready( function() {
+	$.widget( 'wikibase.entitysearch', $.wikibase.entityselector, {
+
+		/**
+		 *@see jQuery.ui.entityselector._createMenuItemFromSuggestion
+		 */
+		_createMenuItemFromSuggestion: function( suggestion ) {
+			var $label = this._createLabelFromSuggestion( suggestion ),
+				value = suggestion.label || suggestion.id;
+
+			return new $.wikibase.entityselector.Item( $label, value, suggestion );
+		},
+
+		/**
+		 * @see jQuery.ui.entityselector._createMenuItemFromSuggestion
+		 */
+		_initMenu: function( ooMenu ) {
+			$.wikibase.entityselector.prototype._initMenu.apply( this, arguments );
+
+			ooMenu.element.addClass( 'wikibase-entitysearch-list' );
+
+			$( ooMenu )
+			.off( 'selected' )
+			.on( 'selected.entitysearch', function( event, item ) {
+				if( /^key/.test( event.originalEvent.type ) ) {
+					location.href = item.getEntityStub().url;
+				}
+			} );
+
+			return ooMenu;
+		}
+
+	} );
+
+	mw.hook( 'wikipage.content' ).add( function() {
 		var $form = $( '#searchform ' ),
-			$input = $( '#searchInput' );
+			$input = $( '#searchInput' ),
+			$hiddenInput = $( '<input type="hidden" name="search"/>' );
 
 		/**
 		 * Updates the suggestion list special item that triggers a full-text search.
@@ -23,13 +57,32 @@
 		/**
 		 * Removes the native search box suggestion list.
 		 *
-		 * @param {Object} input Search box node
+		 * @param {HTMLElement} input Search box node
 		 */
 		function removeSuggestionContext( input ) {
 			// Native fetch() updates/re-sets the data attribute with the suggestion context.
 			$.data( input, 'suggestionsContext' ).config.fetch = function() {};
 			$.removeData( input, 'suggestionsContext' );
 		}
+
+		var $searchContaining = $( ''
+			+ '<div class="suggestions-special">'
+			+ '<div class="special-label">' + mw.msg( 'searchsuggest-containing' ) + '</div>'
+			+ '<div class="special-query"></div>'
+			+ '</div>'
+		);
+
+		var $searchMenu = $( '<ul/>' ).ooMenu( {
+			customItems: [
+				new $.ui.ooMenu.CustomItem( $searchContaining, null, function() {
+					$form.submit();
+				}, 'wb-entitysearch-suggestions' )
+			]
+		} );
+
+		$input
+		.removeAttr( 'name' )
+		.after( $hiddenInput );
 
 		$input
 		.one( 'focus', function( event ) {
@@ -47,24 +100,9 @@
 				} );
 			}
 		} )
-		.entityselector( {
+		.entitysearch( {
 			url: mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ) + '/api.php',
-			emulateSearchBox: true,
-			customListItem: {
-				content: $( '<div>' )
-					.addClass( 'suggestions-special' )
-					.append(
-						$( '<div>' )
-							.addClass( 'special-label' )
-							.text( mw.msg( 'searchsuggest-containing' ) ),
-						$( '<div>' )
-							.addClass( 'special-query' )
-				),
-				action: function( event, entityselector ) {
-					$form.submit();
-				},
-				cssClass: 'wb-entitysearch-suggestions'
-			},
+			menu: $searchMenu.data( 'ooMenu' ),
 			position: $.extend(
 				{},
 				$.wikibase.entityselector.prototype.options.position,
@@ -75,7 +113,11 @@
 			updateSuggestionSpecial();
 		} )
 		.on( 'eachchange', function( event, oldVal ) {
+			$hiddenInput.val( '' );
 			updateSuggestionSpecial();
+		} )
+		.on( 'entityselectorselected', function( event, entityId ) {
+			$hiddenInput.val( entityId );
 		} );
 
 		// TODO: Re-evaluate entity selector input (e.g. hitting "Go" after having hit "Search"
