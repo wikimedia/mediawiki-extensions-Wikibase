@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_b6cdc48a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-16T14:53:58Z",
+      "side": 1,
+      "message": "Can you substantiate that thought by updating qqq for the key with details?",
+      "revId": "54053b3030e31dcfdf6e5c614efca5d946e7d939",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
