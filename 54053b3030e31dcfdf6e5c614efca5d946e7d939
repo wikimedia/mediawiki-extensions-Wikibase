@@ -16,6 +16,24 @@
       "revId": "54053b3030e31dcfdf6e5c614efca5d946e7d939",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_583576a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-16T20:17:45Z",
+      "side": 1,
+      "message": "I checked. It\u0027s a very generic message to be used in different places in both translated and untranslated form (e.g. in the API). A dot at the end would be wrong if it\u0027s in brackets or brackets are appended. We have many similar messages that don\u0027t end with a dot.",
+      "parentUuid": "8e23439c_b6cdc48a",
+      "revId": "54053b3030e31dcfdf6e5c614efca5d946e7d939",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
