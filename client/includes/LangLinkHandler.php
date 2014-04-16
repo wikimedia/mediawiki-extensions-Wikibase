@@ -79,8 +79,8 @@ class LangLinkHandler {
 	 */
 	public function getEntityLinks( Title $title ) {
 		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the '
-			. 'corresponding item on the wikibase repo." );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking for sitelinks defined by the "
+			. "corresponding item on the wikibase repo." );
 
 		$links = array();
 
