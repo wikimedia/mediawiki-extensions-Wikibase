@@ -16,6 +16,24 @@
       "revId": "f20ac05c68950fc1b55b26e3ccc4217c89cf08a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_28fcb36d",
+        "filename": "client/includes/EntityIdPropertyUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-16T09:32:42Z",
+      "side": 1,
+      "message": "I was under the impression this is the case. Although it probably makes no sense – usually it\u0027s just null here.",
+      "parentUuid": "8e23439c_48decf15",
+      "revId": "f20ac05c68950fc1b55b26e3ccc4217c89cf08a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
