@@ -1,9 +1,9 @@
 {
-    "@metadata": {
-        "authors": [
-            "Felicilijonas",
-            "Shirayuki"
-        ]
-    },
-    "wikibase-error-serialize-error": "Failed to serialise data"
+	"@metadata": {
+		"authors": [
+			"Felicilijonas",
+			"Shirayuki"
+		]
+	},
+	"wikibase-error-serialize-error": "Failed to serialise data"
 }

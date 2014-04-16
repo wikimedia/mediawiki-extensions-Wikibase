@@ -1,12 +1,12 @@
 {
-    "@metadata": {
-        "authors": [
-            "Milicevic01"
-        ]
-    },
-    "wikibase-cancel": "otkaži",
-    "wikibase-propertypage-datatype": "Tip podatka",
-    "wikibase-itemdisambiguation-lookup-language": "Jezik:",
-    "wikibase-setdescription-submit": "Dodaj opis",
-    "wikibase-modifyterm-language": "Jezik:"
+	"@metadata": {
+		"authors": [
+			"Milicevic01"
+		]
+	},
+	"wikibase-cancel": "otkaži",
+	"wikibase-propertypage-datatype": "Tip podatka",
+	"wikibase-itemdisambiguation-lookup-language": "Jezik:",
+	"wikibase-setdescription-submit": "Dodaj opis",
+	"wikibase-modifyterm-language": "Jezik:"
 }

@@ -1,18 +1,18 @@
 {
-    "@metadata": {
-        "authors": [
-            "Bonevarluri"
-        ]
-    },
-    "wikibase-comment-sitelink-add": "هوم پیوند زون اضاف بیه:$1",
-    "wikibase-comment-sitelink-change": "هوم پیوند زون د $1 تا $2 آلشت بی",
-    "wikibase-comment-sitelink-remove": "هوم پیوند زون ورداشته بیه:$1",
-    "wikibase-linkitem-selectlink": "لطفن یه گل سیلجا و بلگه که شما میهایت د ای بلگه هوم پیوند با انتخاو بکید.",
-    "wikibase-linkitem-input-site": "زون:",
-    "wikibase-linkitem-not-loggedin-title": "شما با بیایت وامین",
-    "wikibase-rc-show-wikidata-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
-    "wikibase-watchlist-show-changes-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
-    "wikibase-unconnectedpages-page": "نوم گه نتیجه نه وا بلگه شرو کو",
-    "wikibase-unconnectedpages-submit": "رو",
-    "wikibase-unconnectedpages-invalid-language": "\"$1\" کد زون معتوری نئ."
+	"@metadata": {
+		"authors": [
+			"Bonevarluri"
+		]
+	},
+	"wikibase-comment-sitelink-add": "هوم پیوند زون اضاف بیه:$1",
+	"wikibase-comment-sitelink-change": "هوم پیوند زون د $1 تا $2 آلشت بی",
+	"wikibase-comment-sitelink-remove": "هوم پیوند زون ورداشته بیه:$1",
+	"wikibase-linkitem-selectlink": "لطفن یه گل سیلجا و بلگه که شما میهایت د ای بلگه هوم پیوند با انتخاو بکید.",
+	"wikibase-linkitem-input-site": "زون:",
+	"wikibase-linkitem-not-loggedin-title": "شما با بیایت وامین",
+	"wikibase-rc-show-wikidata-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
+	"wikibase-watchlist-show-changes-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
+	"wikibase-unconnectedpages-page": "نوم گه نتیجه نه وا بلگه شرو کو",
+	"wikibase-unconnectedpages-submit": "رو",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" کد زون معتوری نئ."
 }

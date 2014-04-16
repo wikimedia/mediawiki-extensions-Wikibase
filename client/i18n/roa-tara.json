@@ -1,24 +1,24 @@
 {
-    "@metadata": {
-        "authors": [
-            "Joetaras"
-        ]
-    },
-    "wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
-    "specialpages-group-wikibaseclient": "cliende de Uicchidata",
-    "tooltip-t-wikibase": "Appuende a 'a vôsce de l'archivije date collegate",
-    "wikibase-comment-update": "Vôsce de Uicchidata cangiate",
-    "wikibase-comment-sitelink-add": "Collegamende d'a lènghe aggiunde: $1",
-    "wikibase-comment-sitelink-remove": "Collegamende d'a lènghe luate: $1",
-    "wikibase-editlinks": "Cange le collegaminde",
-    "wikibase-linkitem-addlinks": "Aggiunge le collegaminde",
-    "wikibase-linkitem-title": "Collegate cu 'a pàgene",
-    "wikibase-linkitem-linkpage": "Collegate cu 'a pàgene",
-    "wikibase-linkitem-input-site": "Lènghe:",
-    "wikibase-linkitem-input-page": "Pàgene:",
-    "wikibase-linkitem-confirmitem-button": "Conferme",
-    "wikibase-linkitem-not-loggedin-title": "Tu è abbesògne de trasè",
-    "wikibase-unconnectedpages-submit": "Véje",
-    "wikibase-unconnectedpages-invalid-language": "\"$1\" non g'è 'nu codece de lènghe valide.",
-    "wikibase-pageinfo-entity-id-none": "Ninde"
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
+	"specialpages-group-wikibaseclient": "cliende de Uicchidata",
+	"tooltip-t-wikibase": "Appuende a 'a vôsce de l'archivije date collegate",
+	"wikibase-comment-update": "Vôsce de Uicchidata cangiate",
+	"wikibase-comment-sitelink-add": "Collegamende d'a lènghe aggiunde: $1",
+	"wikibase-comment-sitelink-remove": "Collegamende d'a lènghe luate: $1",
+	"wikibase-editlinks": "Cange le collegaminde",
+	"wikibase-linkitem-addlinks": "Aggiunge le collegaminde",
+	"wikibase-linkitem-title": "Collegate cu 'a pàgene",
+	"wikibase-linkitem-linkpage": "Collegate cu 'a pàgene",
+	"wikibase-linkitem-input-site": "Lènghe:",
+	"wikibase-linkitem-input-page": "Pàgene:",
+	"wikibase-linkitem-confirmitem-button": "Conferme",
+	"wikibase-linkitem-not-loggedin-title": "Tu è abbesògne de trasè",
+	"wikibase-unconnectedpages-submit": "Véje",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" non g'è 'nu codece de lènghe valide.",
+	"wikibase-pageinfo-entity-id-none": "Ninde"
 }

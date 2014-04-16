@@ -1,12 +1,12 @@
 {
-    "@metadata": {
-        "authors": [
-            "ОйЛ"
-        ]
-    },
-    "wikibase-editlinks": "исправи съвѧꙁи",
-    "wikibase-linkitem-input-site": "ѩꙁꙑкъ :",
-    "wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-    "wikibase-rc-wikibase-edit-letter": "в҃с",
-    "wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} мѣна"
+	"@metadata": {
+		"authors": [
+			"ОйЛ"
+		]
+	},
+	"wikibase-editlinks": "исправи съвѧꙁи",
+	"wikibase-linkitem-input-site": "ѩꙁꙑкъ :",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-letter": "в҃с",
+	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} мѣна"
 }

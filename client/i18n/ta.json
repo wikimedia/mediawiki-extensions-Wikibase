@@ -1,11 +1,11 @@
 {
-    "@metadata": {
-        "authors": [
-            "Shanmugamp7",
-            "மதனாஹரன்"
-        ]
-    },
-    "wikibase-editlinks": "இணைப்புக்களைத் தொகு",
-    "wikibase-rc-hide-wikidata": "$1 விக்கித்தரவு",
-    "wikibase-rc-show-wikidata-pref": "விக்கித்தரவு தொகுப்புகளை அண்மைய மாற்றங்களில் காண்பி"
+	"@metadata": {
+		"authors": [
+			"Shanmugamp7",
+			"மதனாஹரன்"
+		]
+	},
+	"wikibase-editlinks": "இணைப்புக்களைத் தொகு",
+	"wikibase-rc-hide-wikidata": "$1 விக்கித்தரவு",
+	"wikibase-rc-show-wikidata-pref": "விக்கித்தரவு தொகுப்புகளை அண்மைய மாற்றங்களில் காண்பி"
 }

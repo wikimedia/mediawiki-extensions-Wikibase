@@ -1,20 +1,20 @@
 {
-    "@metadata": {
-        "authors": [
-            "Fohanno",
-            "Fulup",
-            "VIGNERON",
-            "Y-M D"
-        ]
-    },
-    "wikibase-comment-multi": "$1 {{PLURAL:$1|kemm|kemm}}",
-    "wikibase-editlinks": "Kemmañ al liammoù",
-    "wikibase-editlinkstitle": "Kemmañ al liammoù etreyezhel",
-    "wikibase-linkitem-addlinks": "Ouzhpennañ liammoù",
-    "wikibase-linkitem-input-site": "Yezh :",
-    "wikibase-linkitem-input-page": "Pajenn :",
-    "wikibase-linkitem-confirmitem-button": "Kadarnaat",
-    "wikibase-rc-wikibase-edit-letter": "R",
-    "wikibase-rc-wikibase-edit-title": "Ur c'hemm eus Wikiroadennoù",
-    "special-unconnectedpages": "Pajennoù n’int ket liammet gant elfennoù"
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Fulup",
+			"VIGNERON",
+			"Y-M D"
+		]
+	},
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|kemm|kemm}}",
+	"wikibase-editlinks": "Kemmañ al liammoù",
+	"wikibase-editlinkstitle": "Kemmañ al liammoù etreyezhel",
+	"wikibase-linkitem-addlinks": "Ouzhpennañ liammoù",
+	"wikibase-linkitem-input-site": "Yezh :",
+	"wikibase-linkitem-input-page": "Pajenn :",
+	"wikibase-linkitem-confirmitem-button": "Kadarnaat",
+	"wikibase-rc-wikibase-edit-letter": "R",
+	"wikibase-rc-wikibase-edit-title": "Ur c'hemm eus Wikiroadennoù",
+	"special-unconnectedpages": "Pajennoù n’int ket liammet gant elfennoù"
 }

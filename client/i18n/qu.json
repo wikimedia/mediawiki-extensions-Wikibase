@@ -1,22 +1,22 @@
 {
-    "@metadata": {
-        "authors": [
-            "AlimanRuna"
-        ]
-    },
-    "wikibase-after-page-move": "T'inkisqa Wikidata qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
-    "wikibase-editlinks": "T'inkikunata llamk'apuy",
-    "wikibase-editlinkstitle": "Wikipura t'inkikunata llamk'apuy",
-    "wikibase-linkitem-addlinks": "T'inkikunata yapay",
-    "wikibase-linkitem-close": "Rimanakuyta wichq'ay p'anqata musuqmanta chaqnaspa",
-    "wikibase-linkitem-title": "P'anqawan t'inkiy",
-    "wikibase-linkitem-linkpage": "P'anqawan t'inkiy",
-    "wikibase-linkitem-selectlink": "Ama hina kaspa, llika tiyayta p'anqatapas akllay kay p'anqawan t'inkinanpaq.",
-    "wikibase-linkitem-input-site": "Rimay:",
-    "wikibase-linkitem-input-page": "P'anqa:",
-    "wikibase-linkitem-confirmitem-text": "Akllasqayki p'anqaqa [$1 chawpi willañiqintinpi huk qallawawan] t'inkisqañam. Ama hina kaspa, takyachiy, kay qatiq {{PLURAL:$2|p'anqata|p'anqakunata}} chiqapta kayllapi {{PLURAL:$2|p'anqawan|p'anqakunawan}} t'inkiyta munanki, chayta.",
-    "wikibase-linkitem-confirmitem-button": "Takyachiy",
-    "wikibase-linkitem-not-loggedin-title": "Yaykunaykim tiyan",
-    "wikibase-linkitem-not-loggedin": "Kay wikipi [$1 chawpi willa hallch'apipas] yaykunaykim tiyan kayta ruranaykipaq.",
-    "wikibase-linkitem-success-link": "P'anqakunaqa aypalla t'inkinakusqañam. T'inkikunayuq kaq qallawata [$1 chawpi willañiqintinpim] tariyta atinki."
+	"@metadata": {
+		"authors": [
+			"AlimanRuna"
+		]
+	},
+	"wikibase-after-page-move": "T'inkisqa Wikidata qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
+	"wikibase-editlinks": "T'inkikunata llamk'apuy",
+	"wikibase-editlinkstitle": "Wikipura t'inkikunata llamk'apuy",
+	"wikibase-linkitem-addlinks": "T'inkikunata yapay",
+	"wikibase-linkitem-close": "Rimanakuyta wichq'ay p'anqata musuqmanta chaqnaspa",
+	"wikibase-linkitem-title": "P'anqawan t'inkiy",
+	"wikibase-linkitem-linkpage": "P'anqawan t'inkiy",
+	"wikibase-linkitem-selectlink": "Ama hina kaspa, llika tiyayta p'anqatapas akllay kay p'anqawan t'inkinanpaq.",
+	"wikibase-linkitem-input-site": "Rimay:",
+	"wikibase-linkitem-input-page": "P'anqa:",
+	"wikibase-linkitem-confirmitem-text": "Akllasqayki p'anqaqa [$1 chawpi willañiqintinpi huk qallawawan] t'inkisqañam. Ama hina kaspa, takyachiy, kay qatiq {{PLURAL:$2|p'anqata|p'anqakunata}} chiqapta kayllapi {{PLURAL:$2|p'anqawan|p'anqakunawan}} t'inkiyta munanki, chayta.",
+	"wikibase-linkitem-confirmitem-button": "Takyachiy",
+	"wikibase-linkitem-not-loggedin-title": "Yaykunaykim tiyan",
+	"wikibase-linkitem-not-loggedin": "Kay wikipi [$1 chawpi willa hallch'apipas] yaykunaykim tiyan kayta ruranaykipaq.",
+	"wikibase-linkitem-success-link": "P'anqakunaqa aypalla t'inkinakusqañam. T'inkikunayuq kaq qallawata [$1 chawpi willañiqintinpim] tariyta atinki."
 }

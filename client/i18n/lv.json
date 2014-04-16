@@ -1,32 +1,32 @@
 {
-    "@metadata": {
-        "authors": [
-            "Edgars2007",
-            "Papuass"
-        ]
-    },
-    "wikibase-comment-sitelink-add": "Valodas saite pievienota: $1",
-    "wikibase-comment-sitelink-change": "Valodas saite mainīta no $1 uz $2",
-    "wikibase-comment-sitelink-remove": "Valodas saite noņemta: $1",
-    "wikibase-comment-multi": "$1 {{PLURAL:$1|izmaiņa|izmaiņas}}",
-    "wikibase-dataitem": "Datu ieraksts",
-    "wikibase-editlinks": "Labot saites",
-    "wikibase-editlinkstitle": "Labot starpvalodu saites",
-    "wikibase-linkitem-addlinks": "Pievienot saites",
-    "wikibase-linkitem-close": "Aizvērt dialoga logu un pārlādēt lapu",
-    "wikibase-linkitem-title": "Sasaistīt ar lapu",
-    "wikibase-linkitem-linkpage": "Sasaistīt ar lapu",
-    "wikibase-linkitem-input-site": "Valoda:",
-    "wikibase-linkitem-input-page": "Lapa:",
-    "wikibase-linkitem-confirmitem-button": "Apstiprināt",
-    "wikibase-linkitem-not-loggedin-title": "Jums ir jāpieslēdzas",
-    "wikibase-rc-hide-wikidata": "$1 Wikidata",
-    "wikibase-rc-show-wikidata-pref": "Rādīt labojumos Vikidatos pēdējās izmaiņās",
-    "wikibase-rc-wikibase-edit-letter": "D",
-    "wikibase-rc-wikibase-edit-title": "Labojums Vikidatos",
-    "wikibase-watchlist-show-changes-pref": "Rādīt labojumus Vikidatos uzraugāmo lapu sarakstā",
-    "wikibase-unconnectedpages-invalid-language": "\"$1\" nav derīgs valodas kods.",
-    "wikibase-unconnectedpages-iwdata-label": "Tikai lapas ar starpvalodu saitēm",
-    "wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saite|starpvalodu saites}} šajā lapā)",
-    "wikibase-pageinfo-entity-id": "Wikidata ieraksta ID"
+	"@metadata": {
+		"authors": [
+			"Edgars2007",
+			"Papuass"
+		]
+	},
+	"wikibase-comment-sitelink-add": "Valodas saite pievienota: $1",
+	"wikibase-comment-sitelink-change": "Valodas saite mainīta no $1 uz $2",
+	"wikibase-comment-sitelink-remove": "Valodas saite noņemta: $1",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmaiņa|izmaiņas}}",
+	"wikibase-dataitem": "Datu ieraksts",
+	"wikibase-editlinks": "Labot saites",
+	"wikibase-editlinkstitle": "Labot starpvalodu saites",
+	"wikibase-linkitem-addlinks": "Pievienot saites",
+	"wikibase-linkitem-close": "Aizvērt dialoga logu un pārlādēt lapu",
+	"wikibase-linkitem-title": "Sasaistīt ar lapu",
+	"wikibase-linkitem-linkpage": "Sasaistīt ar lapu",
+	"wikibase-linkitem-input-site": "Valoda:",
+	"wikibase-linkitem-input-page": "Lapa:",
+	"wikibase-linkitem-confirmitem-button": "Apstiprināt",
+	"wikibase-linkitem-not-loggedin-title": "Jums ir jāpieslēdzas",
+	"wikibase-rc-hide-wikidata": "$1 Wikidata",
+	"wikibase-rc-show-wikidata-pref": "Rādīt labojumos Vikidatos pēdējās izmaiņās",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Labojums Vikidatos",
+	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus Vikidatos uzraugāmo lapu sarakstā",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" nav derīgs valodas kods.",
+	"wikibase-unconnectedpages-iwdata-label": "Tikai lapas ar starpvalodu saitēm",
+	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saite|starpvalodu saites}} šajā lapā)",
+	"wikibase-pageinfo-entity-id": "Wikidata ieraksta ID"
 }

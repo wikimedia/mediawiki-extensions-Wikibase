@@ -1,12 +1,12 @@
 {
-    "@metadata": {
-        "authors": [
-            "Autokrator",
-            "UV"
-        ]
-    },
-    "wikibase-editlinks": "Nexus recensere",
-    "wikibase-editlinkstitle": "Nexus inter linguas recensere",
-    "wikibase-rc-hide-wikidata": "$1 Vicidata",
-    "wikibase-rc-wikibase-edit-title": "Recensio apud Wikidata"
+	"@metadata": {
+		"authors": [
+			"Autokrator",
+			"UV"
+		]
+	},
+	"wikibase-editlinks": "Nexus recensere",
+	"wikibase-editlinkstitle": "Nexus inter linguas recensere",
+	"wikibase-rc-hide-wikidata": "$1 Vicidata",
+	"wikibase-rc-wikibase-edit-title": "Recensio apud Wikidata"
 }

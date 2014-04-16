@@ -1,11 +1,11 @@
 {
-    "@metadata": {
-        "authors": [
-            "Kazu89"
-        ]
-    },
-    "wikibase-editlinks": "Modifitgar colliaziuns",
-    "wikibase-linkitem-addlinks": "Agiunscher colliaziuns",
-    "wikibase-linkitem-input-site": "Lingua:",
-    "wikibase-linkitem-input-page": "Pagina"
+	"@metadata": {
+		"authors": [
+			"Kazu89"
+		]
+	},
+	"wikibase-editlinks": "Modifitgar colliaziuns",
+	"wikibase-linkitem-addlinks": "Agiunscher colliaziuns",
+	"wikibase-linkitem-input-site": "Lingua:",
+	"wikibase-linkitem-input-page": "Pagina"
 }

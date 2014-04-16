@@ -1,30 +1,30 @@
 {
-    "@metadata": {
-        "authors": [
-            "Ilnur efende",
-            "Умар"
-        ]
-    },
-    "tooltip-t-wikibase": "Үзара бәйләнгән мәгълүматләр репозиториясе элементларына сылтама",
-    "wikibase-dataitem": "Мәгълүмат элементы",
-    "wikibase-editlinks": "Сылтамалар өстәү",
-    "wikibase-editlinkstitle": "Башка телләргә сылтамалар өстәү",
-    "wikibase-linkitem-addlinks": "Сылтамалар өстәү",
-    "wikibase-linkitem-title": "Бит белән бәйләү",
-    "wikibase-linkitem-linkpage": "Бит белән бәйләү",
-    "wikibase-linkitem-selectlink": "Монда сылтарга теләгән сайтны яки битне сайлагызчы.",
-    "wikibase-linkitem-input-site": "Тел:",
-    "wikibase-linkitem-input-page": "Бит:",
-    "wikibase-linkitem-confirmitem-button": "Раслау",
-    "wikibase-linkitem-not-loggedin-title": "Сез теркәлергә тиешсез",
-    "wikibase-property-notfound": "$1 табылмады",
-    "wikibase-rc-hide-wikidata": "Wikidata-ны $1",
-    "wikibase-rc-hide-wikidata-hide": "яшер",
-    "wikibase-rc-hide-wikidata-show": "күрсәт",
-    "wikibase-rc-wikibase-edit-letter": "в",
-    "wikibase-rc-wikibase-edit-title": "Викимәгълүмат үзгәртелгән",
-    "wikibase-watchlist-show-changes-pref": "Викимәгълүматлардагы үзгәртүләрне күзәтү исемлегендә күрсәтү.",
-    "wikibase-unconnectedpages-submit": "Куллану",
-    "wikibase-unconnectedpages-invalid-language": "\"$1\" - дөрес булмаган тел коды.",
-    "wikibase-pageinfo-entity-id-none": "Юк"
+	"@metadata": {
+		"authors": [
+			"Ilnur efende",
+			"Умар"
+		]
+	},
+	"tooltip-t-wikibase": "Үзара бәйләнгән мәгълүматләр репозиториясе элементларына сылтама",
+	"wikibase-dataitem": "Мәгълүмат элементы",
+	"wikibase-editlinks": "Сылтамалар өстәү",
+	"wikibase-editlinkstitle": "Башка телләргә сылтамалар өстәү",
+	"wikibase-linkitem-addlinks": "Сылтамалар өстәү",
+	"wikibase-linkitem-title": "Бит белән бәйләү",
+	"wikibase-linkitem-linkpage": "Бит белән бәйләү",
+	"wikibase-linkitem-selectlink": "Монда сылтарга теләгән сайтны яки битне сайлагызчы.",
+	"wikibase-linkitem-input-site": "Тел:",
+	"wikibase-linkitem-input-page": "Бит:",
+	"wikibase-linkitem-confirmitem-button": "Раслау",
+	"wikibase-linkitem-not-loggedin-title": "Сез теркәлергә тиешсез",
+	"wikibase-property-notfound": "$1 табылмады",
+	"wikibase-rc-hide-wikidata": "Wikidata-ны $1",
+	"wikibase-rc-hide-wikidata-hide": "яшер",
+	"wikibase-rc-hide-wikidata-show": "күрсәт",
+	"wikibase-rc-wikibase-edit-letter": "в",
+	"wikibase-rc-wikibase-edit-title": "Викимәгълүмат үзгәртелгән",
+	"wikibase-watchlist-show-changes-pref": "Викимәгълүматлардагы үзгәртүләрне күзәтү исемлегендә күрсәтү.",
+	"wikibase-unconnectedpages-submit": "Куллану",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" - дөрес булмаган тел коды.",
+	"wikibase-pageinfo-entity-id-none": "Юк"
 }

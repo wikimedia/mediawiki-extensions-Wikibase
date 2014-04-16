@@ -1,34 +1,34 @@
 {
-    "@metadata": {
-        "authors": [
-            "Asmen",
-            "Erdemaslancan",
-            "Gorizon",
-            "Marmase",
-            "Mirzali"
-        ]
-    },
-    "specialpages-group-wikibaseclient": "Mışteriyê Wikidata",
-    "wikibase-comment-add": "Yew objey Wikidata vıraziyao.",
-    "wikibase-comment-remove": "Objey Wikidatao elaqedar esterd. Gırey zıwanan dardi we.",
-    "wikibase-comment-linked": "Yew objey Wikidata na pele ra gırê dao.",
-    "wikibase-comment-update": "{{WBREPONAME}} made vuriya",
-    "wikibase-comment-multi": "$1 {{PLURAL:$1|vurnayış|vurnayışi}}",
-    "wikibase-dataitem": "Leteyé Wikimalumati",
-    "wikibase-editlinks": "Gıreyan bıvurne",
-    "wikibase-linkitem-addlinks": "Gıre cı ke",
-    "wikibase-linkitem-input-site": "Zıwan:",
-    "wikibase-linkitem-input-page": "Pele:",
-    "wikibase-linkitem-confirmitem-button": "Tesdiq",
-    "wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
-    "wikibase-rc-hide-wikidata-hide": "Bınımne",
-    "wikibase-rc-hide-wikidata-show": "Bımocne",
-    "wikibase-rc-show-wikidata-pref": "Vurnayışanê {{WBREPONAME}} vurnayışanê peyênan de  bımocne",
-    "wikibase-rc-wikibase-edit-letter": "D",
-    "wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} vurnayış",
-    "wikibase-watchlist-show-changes-pref": "Lista xoya seyrkerdışi de vırnayışanê Wikidata bımocne",
-    "wikibase-unconnectedpages-submit": "Şo",
-    "wikibase-pageinfo-entity-id": "{{WBREPONAME}} naskerdışê obcey",
-    "wikibase-pageinfo-entity-id-none": "Çıniyo",
-    "wikibase-otherprojects": "Proceyê bini"
+	"@metadata": {
+		"authors": [
+			"Asmen",
+			"Erdemaslancan",
+			"Gorizon",
+			"Marmase",
+			"Mirzali"
+		]
+	},
+	"specialpages-group-wikibaseclient": "Mışteriyê Wikidata",
+	"wikibase-comment-add": "Yew objey Wikidata vıraziyao.",
+	"wikibase-comment-remove": "Objey Wikidatao elaqedar esterd. Gırey zıwanan dardi we.",
+	"wikibase-comment-linked": "Yew objey Wikidata na pele ra gırê dao.",
+	"wikibase-comment-update": "{{WBREPONAME}} made vuriya",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|vurnayış|vurnayışi}}",
+	"wikibase-dataitem": "Leteyé Wikimalumati",
+	"wikibase-editlinks": "Gıreyan bıvurne",
+	"wikibase-linkitem-addlinks": "Gıre cı ke",
+	"wikibase-linkitem-input-site": "Zıwan:",
+	"wikibase-linkitem-input-page": "Pele:",
+	"wikibase-linkitem-confirmitem-button": "Tesdiq",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "Bınımne",
+	"wikibase-rc-hide-wikidata-show": "Bımocne",
+	"wikibase-rc-show-wikidata-pref": "Vurnayışanê {{WBREPONAME}} vurnayışanê peyênan de  bımocne",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} vurnayış",
+	"wikibase-watchlist-show-changes-pref": "Lista xoya seyrkerdışi de vırnayışanê Wikidata bımocne",
+	"wikibase-unconnectedpages-submit": "Şo",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} naskerdışê obcey",
+	"wikibase-pageinfo-entity-id-none": "Çıniyo",
+	"wikibase-otherprojects": "Proceyê bini"
 }

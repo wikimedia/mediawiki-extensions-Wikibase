@@ -1,12 +1,12 @@
 {
-    "@metadata": {
-        "authors": [
-            "Interfase",
-            "Wertuose"
-        ]
-    },
-    "wikibase-dataitem": "Verilənlərin elementi",
-    "wikibase-editlinks": "Keçidlərin redaktəsi",
-    "wikibase-editlinkstitle": "Dillərarası keçidləri redaktə et",
-    "wikibase-linkitem-addlinks": "Keçid əlavə et"
+	"@metadata": {
+		"authors": [
+			"Interfase",
+			"Wertuose"
+		]
+	},
+	"wikibase-dataitem": "Verilənlərin elementi",
+	"wikibase-editlinks": "Keçidlərin redaktəsi",
+	"wikibase-editlinkstitle": "Dillərarası keçidləri redaktə et",
+	"wikibase-linkitem-addlinks": "Keçid əlavə et"
 }

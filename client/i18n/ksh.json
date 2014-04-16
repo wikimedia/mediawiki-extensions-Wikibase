@@ -1,34 +1,34 @@
 {
-    "@metadata": {
-        "authors": [
-            "Purodha"
-        ]
-    },
-    "wikibase-client-desc": "Mäd en Aanwendong vun däm Projrammzohsaz „Wikibase“ müjjelesch.",
-    "wikibase-after-page-move": "Mer kann och dä zohjehüüreje Wikidata-Endraach [$1 aanpaße], öm de Lengks op Schprooche vun ömjenannte Sigge aschuur ze hallde.",
-    "wikibase-comment-remove": "Dä verbonge Wikidata-Endraach wood fottjeschmeße. Alle Lengks op ander Schprooche woodte fottjenumme.",
-    "wikibase-comment-linked": "Ene Wikidata-Endraach wood met heh dä Sigg verbonge.",
-    "wikibase-comment-unlink": "Heh di Sigg wood uß däm verbonge Wikidata-Endraach jenumme. Alle Lengks op ander Schprooche woodte fottjenumme.",
-    "wikibase-comment-restore": "Dä verbonge Wikidata-Endraach wood wider zerök jehollt. Alle Lengks op ander Schprooche woodte wider enejrescht.",
-    "wikibase-comment-update": "De Lengks op ander Schprooche sin aanjepaß woode.",
-    "wikibase-comment-sitelink-add": "Dä Lengk $1 ob en ander Schprooch es derbei jedonn woode.",
-    "wikibase-comment-sitelink-change": "Dä Lengk $1 ob en ander Schprooch es op $2 verändert woode.",
-    "wikibase-comment-sitelink-remove": "Dä Lengk $1 ob en ander Schprooch es eruß jenomme woode.",
-    "wikibase-comment-multi": "{{PLURAL:$1|Ein Änderong|$1 Änderonge|Kein Änderong}}",
-    "wikibase-editlinks": "Lengks ändere",
-    "wikibase-editlinkstitle": "Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße",
-    "wikibase-linkitem-addlinks": "Lengks derbei donn",
-    "wikibase-linkitem-alreadylinked": "Di Sigg, di De verlenke wells, es ald med enem [$1 Endraach] en zäntraale Daatebeschtand verbonge, un dä es ald met $2 heh em Wiki verbonge, Mer kann bloß ein esu en Verbendong pro Endraach han. Dröm söhk Der en ander Sigg uß för heh die Sigg dermet ze verbenge,",
-    "wikibase-linkitem-close": "Finster zohmaache un Sigg neu laade",
-    "wikibase-linkitem-failure": "Ene onbikannte Fähler es beim Verlengke op di aanjejovve Sigg opjetrodde.",
-    "wikibase-linkitem-title": "Lengk met en ander Sigg",
-    "wikibase-linkitem-linkpage": "Lohß Jonn!",
-    "wikibase-linkitem-selectlink": "Donn en Wäbßait un en Sigg ußsöhkre, woh De heh di Sigg met verlengk han wells.",
-    "wikibase-linkitem-input-site": "De Schprooch:",
-    "wikibase-linkitem-input-page": "Sigg:",
-    "wikibase-linkitem-confirmitem-button": "Lohß jonn!",
-    "wikibase-linkitem-not-loggedin-title": "Do moß enjelogg sin",
-    "wikibase-rc-hide-wikidata": "$1 Wikidata",
-    "wikibase-rc-show-wikidata-pref": "Donn Änderonge aan Wikidata en de „{{int:recentchanges}}“ zeije",
-    "wikibase-unconnectedpages-format-row": "(Mer {{PLURAL:$1|han eine Lenk|han $1 Lenks|hann_er kein Lenks}} op ander Schprooche en dä Sigg)"
+	"@metadata": {
+		"authors": [
+			"Purodha"
+		]
+	},
+	"wikibase-client-desc": "Mäd en Aanwendong vun däm Projrammzohsaz „Wikibase“ müjjelesch.",
+	"wikibase-after-page-move": "Mer kann och dä zohjehüüreje Wikidata-Endraach [$1 aanpaße], öm de Lengks op Schprooche vun ömjenannte Sigge aschuur ze hallde.",
+	"wikibase-comment-remove": "Dä verbonge Wikidata-Endraach wood fottjeschmeße. Alle Lengks op ander Schprooche woodte fottjenumme.",
+	"wikibase-comment-linked": "Ene Wikidata-Endraach wood met heh dä Sigg verbonge.",
+	"wikibase-comment-unlink": "Heh di Sigg wood uß däm verbonge Wikidata-Endraach jenumme. Alle Lengks op ander Schprooche woodte fottjenumme.",
+	"wikibase-comment-restore": "Dä verbonge Wikidata-Endraach wood wider zerök jehollt. Alle Lengks op ander Schprooche woodte wider enejrescht.",
+	"wikibase-comment-update": "De Lengks op ander Schprooche sin aanjepaß woode.",
+	"wikibase-comment-sitelink-add": "Dä Lengk $1 ob en ander Schprooch es derbei jedonn woode.",
+	"wikibase-comment-sitelink-change": "Dä Lengk $1 ob en ander Schprooch es op $2 verändert woode.",
+	"wikibase-comment-sitelink-remove": "Dä Lengk $1 ob en ander Schprooch es eruß jenomme woode.",
+	"wikibase-comment-multi": "{{PLURAL:$1|Ein Änderong|$1 Änderonge|Kein Änderong}}",
+	"wikibase-editlinks": "Lengks ändere",
+	"wikibase-editlinkstitle": "Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße",
+	"wikibase-linkitem-addlinks": "Lengks derbei donn",
+	"wikibase-linkitem-alreadylinked": "Di Sigg, di De verlenke wells, es ald med enem [$1 Endraach] en zäntraale Daatebeschtand verbonge, un dä es ald met $2 heh em Wiki verbonge, Mer kann bloß ein esu en Verbendong pro Endraach han. Dröm söhk Der en ander Sigg uß för heh die Sigg dermet ze verbenge,",
+	"wikibase-linkitem-close": "Finster zohmaache un Sigg neu laade",
+	"wikibase-linkitem-failure": "Ene onbikannte Fähler es beim Verlengke op di aanjejovve Sigg opjetrodde.",
+	"wikibase-linkitem-title": "Lengk met en ander Sigg",
+	"wikibase-linkitem-linkpage": "Lohß Jonn!",
+	"wikibase-linkitem-selectlink": "Donn en Wäbßait un en Sigg ußsöhkre, woh De heh di Sigg met verlengk han wells.",
+	"wikibase-linkitem-input-site": "De Schprooch:",
+	"wikibase-linkitem-input-page": "Sigg:",
+	"wikibase-linkitem-confirmitem-button": "Lohß jonn!",
+	"wikibase-linkitem-not-loggedin-title": "Do moß enjelogg sin",
+	"wikibase-rc-hide-wikidata": "$1 Wikidata",
+	"wikibase-rc-show-wikidata-pref": "Donn Änderonge aan Wikidata en de „{{int:recentchanges}}“ zeije",
+	"wikibase-unconnectedpages-format-row": "(Mer {{PLURAL:$1|han eine Lenk|han $1 Lenks|hann_er kein Lenks}} op ander Schprooche en dä Sigg)"
 }

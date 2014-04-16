@@ -1,10 +1,10 @@
 {
-    "@metadata": {
-        "authors": [
-            "AnakngAraw"
-        ]
-    },
-    "wikibase-client-desc": "Kliyente para sa dugtong na Wikibase",
-    "wikibase-editlinks": "Baguhin ang mga kawing",
-    "wikibase-editlinkstitle": "Baguhin ang mga kawing na para sa interwika"
+	"@metadata": {
+		"authors": [
+			"AnakngAraw"
+		]
+	},
+	"wikibase-client-desc": "Kliyente para sa dugtong na Wikibase",
+	"wikibase-editlinks": "Baguhin ang mga kawing",
+	"wikibase-editlinkstitle": "Baguhin ang mga kawing na para sa interwika"
 }

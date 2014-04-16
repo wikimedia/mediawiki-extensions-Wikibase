@@ -1,11 +1,11 @@
 {
-    "@metadata": {
-        "authors": [
-            "Vadgt",
-            "Xelgen"
-        ]
-    },
-    "wikibase-editlinks": "Փոխել հղումները",
-    "wikibase-linkitem-addlinks": "Ստեղծել հղումը",
-    "wikibase-rc-wikibase-edit-title": "Վիքիշտեմարանի խմբագրում"
+	"@metadata": {
+		"authors": [
+			"Vadgt",
+			"Xelgen"
+		]
+	},
+	"wikibase-editlinks": "Փոխել հղումները",
+	"wikibase-linkitem-addlinks": "Ստեղծել հղումը",
+	"wikibase-rc-wikibase-edit-title": "Վիքիշտեմարանի խմբագրում"
 }
