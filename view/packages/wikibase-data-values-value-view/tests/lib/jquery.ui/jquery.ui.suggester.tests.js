@@ -2,214 +2,168 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-
 ( function( $, QUnit ) {
 	'use strict';
 
+	var defaultSource = [
+		'a',
+		'ab',
+		'abc',
+		'd',
+		'EFG'
+	];
+
 	/**
-	 * Factory for creating a jquery.ui.suggester widget suitable for testing.
+	 * Factory creating a jQuery.ui.suggester widget suitable for testing.
 	 *
 	 * @param {Object} [options]
-	 *        default: { source: [ 'a', 'ab', 'abc', 'd' ], maxItems: 4 }
 	 */
 	var newTestSuggester = function( options ) {
-		options = options || {
-			maxItems: 4 // will be used in test 'automatic height adjustment'
-		};
-		if ( !options.source ) {
-			options.source = [
-				'a',
-				'ab',
-				'abc',
-				'd',
-				'EFG'
-			];
-		}
+		options = $.extend( {
+			source: defaultSource
+		}, options || {} );
 
-		// element needs to be in the DOM for setting text selection range
-		var $input = $( '<input/>' ).addClass( 'test_suggester').appendTo( 'body' ).suggester( options );
+		return $( '<input/>' )
+			.addClass( 'test_suggester')
+			.appendTo( 'body' )
+			.suggester( options );
+	};
 
-		/**
-		 * Shorthand function to reopen the menu by searching for a string that will produce at
-		 * least one suggestion.
-		 *
-		 * @param {String} [search]
-		 *        default: 'a'
-		 */
-		$input.data( 'suggester' ).reopenMenu = function( search ) {
-			search = search || 'a';
-			this.close();
-			this.search( search );
-		};
-
-		return $input;
+	/**
+	 * @return {ui.ooMenu}
+	 */
+	var createCustomMenu = function() {
+		var $menu = $( '<ul/>' ).ooMenu( {
+			customItems: [
+				new $.ui.ooMenu.CustomItem( 'custom item' )
+			]
+		} );
+		return $menu.data( 'ooMenu' );
 	};
 
 	QUnit.module( 'jquery.ui.suggester', {
 		teardown: function() {
-			$( '.test_suggester' ).remove();
+			var $suggester = $( '.test_suggester' ),
+				suggester = $suggester.data( 'suggester' );
+			if( suggester ) {
+				suggester.destroy();
+			}
+			$suggester.remove();
 		}
 	} );
 
-	QUnit.test( 'basic tests', function( assert ) {
-		var $input = newTestSuggester();
-		var suggester = $input.data( 'suggester' );
+	QUnit.test( 'Create', function( assert ) {
+		var $suggester = newTestSuggester();
 
-		$input.on( 'suggesterresponse', function( event, items ) {
-			assert.deepEqual(
-				items,
-				['ab', 'abc'],
-				'Fired response event passing result set.'
+		assert.ok(
+			$suggester.data( 'suggester' ) instanceof $.ui.suggester,
+			'Instantiated suggester.'
+		);
+	} );
+
+	QUnit.test( '"menu" option', 2, function( assert ) {
+		var customMenu = createCustomMenu();
+
+		var $suggester = newTestSuggester( {
+			menu: customMenu
+		} );
+
+		var suggester = $suggester.data( 'suggester' );
+
+		QUnit.stop();
+
+		$suggester
+		.one( 'suggesteropen', function() {
+			assert.equal(
+				suggester.options.menu,
+				customMenu
 			);
+
+			QUnit.start();
 		} );
-		$input.val( 'a' );
-		suggester._success( ['a', ['ab', 'abc']] );
-		$input.off( 'suggesterresponse' );
 
-		assert.equal(
-			$input.val(),
-			'ab',
-			'Replaced input element\'s value with first result (remaining part of the string is highlighted).'
-		);
+		$suggester.val( 'a' );
+		suggester.search();
 
-		suggester.close();
+		customMenu = createCustomMenu();
 
-		$input.val( 'a' );
-		suggester.search( 'a' ); // trigger opening menu
+		suggester.option( 'menu', customMenu );
 
-		assert.equal(
-			suggester.menu.element.find( 'a' ).children( 'b' ).length,
-			3,
-			'Highlighted matching characters within the suggestions.'
-		);
+		QUnit.stop();
 
-		var fullHeight = suggester.menu.element.height(); // height of all found items
-		suggester.options.maxItems = 2;
-		suggester.search( 'a' );
+		$suggester
+		.one( 'suggesteropen', function() {
+			assert.equal(
+				suggester.options.menu,
+				customMenu
+			);
 
-		assert.ok(
-			fullHeight > suggester.menu.element.height(),
-			'Suggestion menu gets resized.'
-		);
+			QUnit.start();
+		} );
 
-		suggester.destroy();
-		$input.remove();
-
+		suggester.search();
 	} );
 
-	QUnit.test( 'automatic height adjustment', function( assert ) {
-		var $input = newTestSuggester();
-		var suggester = $input.data( 'suggester' );
+	QUnit.test( 'search() gathering suggestions from an array', 1, function( assert ) {
+		var $suggester = newTestSuggester(),
+			suggester = $suggester.data( 'suggester' );
 
-		var additionalResults = [
-			'a1',
-			'a2',
-			'a3'
-		];
+		$suggester.val( 'a' );
 
-		suggester.search( 'a' );
+		QUnit.stop();
 
-		var initHeight = suggester.menu.element.height();
-		suggester.options.source.push( additionalResults[0] );
-		suggester.reopenMenu();
-
-		// testing (MAX_ITEMS - 1)++
-		assert.ok(
-			suggester.menu.element.height() > initHeight,
-			'height changed after adding another item to result set'
-		);
-
-		// adding one more item (MAX_ITEMS + 1) first, since there might be side effects adding the scrollbar
-		suggester.options.source.push( additionalResults[1] );
-		suggester.reopenMenu();
-		initHeight = suggester.menu.element.height();
-
-		suggester.options.source.push( additionalResults[2] );
-		suggester.reopenMenu();
-
-		// testing (MAX_ITEMS + 1)++
-		assert.equal(
-			suggester.menu.element.height(),
-			initHeight,
-			'height unchanged after adding more than maximum items'
-		);
-
-		suggester.destroy();
-		$input.remove();
-
+		suggester.search()
+		.done( function( suggestions ) {
+			assert.equal(
+				suggestions.length,
+				3,
+				'Gathered suggestions from array.'
+			);
+		} )
+		.fail( function() {
+			assert.ok(
+				false,
+				'Failed gathering suggestions from array.'
+			);
+		} )
+		.always( function() {
+			QUnit.start();
+		} );
 	} );
 
-	QUnit.test( 'Custom list item', function( assert ) {
-		var $input = newTestSuggester( {
-				customListItem: { content: 'plain text' }
+	QUnit.test( 'search() gathering suggestions from a function', 1, function( assert ) {
+		var $suggester = newTestSuggester( {
+				source: function( term ) {
+					var deferred = new $.Deferred();
+					return deferred.resolve( [
+						'suggestion 1',
+						'suggestion 2'
+					] ).promise();
+				}
 			} ),
-			suggester = $input.data( 'suggester' ),
-			check = false;
+			suggester = $suggester.data( 'suggester' );
 
-		suggester.search( 'd' );
+		$suggester.val( 'a' );
 
-		assert.equal(
-			suggester.menu.element.children( '.ui-menu-item' ).length,
-			2,
-			'Appended custom list item.'
-		);
+		QUnit.stop();
 
-		assert.equal(
-			suggester.menu.element.children( '.ui-menu-item' ).last().children( 'a' ).text(),
-			'plain text',
-			'Set plain text on custom list item.'
-		);
-
-		suggester.customListItem( {
-			content: $( '<span/>' ).text( 'jQuery node' ),
-			action: function( suggester ) {
-				check = true;
-			}
+		suggester.search()
+		.done( function( suggestions ) {
+			assert.equal(
+				suggestions.length,
+				2,
+				'Gathered suggestions from function.'
+			);
+		} )
+		.fail( function() {
+			assert.ok(
+				false,
+				'Failed gathering suggestions from array.'
+			);
+		} )
+		.always( function() {
+			QUnit.start();
 		} );
-
-		suggester.search( 'a' );
-
-		assert.equal(
-			suggester.menu.element.find( '.ui-menu-item a span' ).length,
-			1,
-			'Attached jQuery node as custom list item.'
-		);
-
-		suggester.menu.element.find( '.ui-menu-item a' ).last().mouseenter();
-		suggester.menu.element.find( '.ui-menu-item a' ).last().click();
-
-		assert.ok(
-			check,
-			'Issued custom list item action via click event.'
-		);
-
-		check = false;
-
-		suggester.search( 'a' );
-
-		assert.equal(
-			suggester.menu.element.find( '.ui-menu-item a span' ).length,
-			1,
-			'Attached jQuery node as custom list item.'
-		);
-
-		var keydownEvent = $.Event( 'keydown' );
-
-		// move up to select custom list item which is the last one in the list
-		keydownEvent.keyCode = $.ui.keyCode.UP;
-		suggester.element.trigger( keydownEvent );
-
-		// simulate hitting enter key
-		keydownEvent.keyCode = $.ui.keyCode.ENTER;
-		suggester.element.trigger( keydownEvent );
-
-		assert.ok(
-			check,
-			'Issued custom list item action via keydown event.'
-		);
-
-		suggester.destroy();
-		$input.remove();
 	} );
 
 }( jQuery, QUnit ) );

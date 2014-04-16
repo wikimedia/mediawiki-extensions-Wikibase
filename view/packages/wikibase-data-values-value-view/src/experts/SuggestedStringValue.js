@@ -23,7 +23,7 @@
 	 */
 	vv.experts.SuggestedStringValue = vv.expert( 'SuggestedStringValue', PARENT, {
 		/**
-		 * @see Query.valueview.experts.StringValue._init
+		 * @see jQuery.valueview.experts.StringValue._init
 		 */
 		_init: function() {
 			PARENT.prototype._init.call( this );
@@ -31,8 +31,7 @@
 			var notifier = this._viewNotifier,
 				$input = this.$input;
 
-			// Initialize Commons Media suggestion dropdown on top of string input field:
-			$input.suggester( this._options.suggesterOptions );
+			$input.suggester();
 
 			// Since we're using the input auto expand, we have to update the position of the
 			// dropdown whenever the input box expands vertically:
@@ -41,7 +40,7 @@
 				$input.data( 'suggester' ).repositionMenu();
 			} );
 
-			$input.on( 'suggesterresponse suggesterclose', function( event, response ) {
+			$input.on( 'suggesterchange', function( event, response ) {
 				notifier.notify( 'change' ); // here in addition to 'eachchange' from StringValue expert
 				$input.data( 'inputautoexpand' ).expand();
 			} );

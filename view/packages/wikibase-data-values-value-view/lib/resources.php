@@ -168,11 +168,20 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-				'jquery.autocompletestring',
-				'jquery.ui.autocomplete',
+				'jquery.ui.ooMenu',
 				'jquery.ui.widget',
-				'jquery.util.adaptlettercase',
-				'jquery.util.getscrollbarwidth',
+			),
+		),
+
+		'jquery.ui.suggestCommons' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.suggestCommons.js',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+				'jquery.util.highlightMatchingCharacters',
 			),
 		),
 

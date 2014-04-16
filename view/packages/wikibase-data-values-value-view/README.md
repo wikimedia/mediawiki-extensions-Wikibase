@@ -109,6 +109,14 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6 (dev)
+
+* Re-created jQuery.ui.suggester widget removing dependencies on jQuery.ui.autocomplete and jQuery.ui.menu
+* Implemented jQuery.util.highlightMatchingCharacters
+* Implemented jQuery.ui.ooMenu
+* Implemented jQuery.ui.suggestCommons
+* Removed CommonsMediaType expert dependency on SuggestedStringValue expert.
+
 ### 0.5.2 (dev)
 
 #### Bugfixes

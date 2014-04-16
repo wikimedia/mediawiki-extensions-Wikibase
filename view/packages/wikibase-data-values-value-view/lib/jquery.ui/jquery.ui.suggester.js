@@ -1,565 +1,607 @@
 /**
- * Suggester widget enhancing jquery.ui.autocomplete
+ * jQuery.ui.suggester enhances an input box by retrieving a list of suggestions that are displayed
+ * in a list below the input box.
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- * jquery.ui.suggester adds a few enhancements to jquery.ui.autocomplete, e.g. adding a scrollbar
- * when a certain number of items is listed in the suggestion list, highlighting matching characters
- * in the suggestions and dealing with language direction.
- * Specifying 'ajax.url' and 'ajax.params' parameters will trigger using a custom function to
- * handle the server response (_request()). Alternatively, an array may be passed as
- * source or a completely custom function - both is covered by native jquery.ui.autocomplete
- * functionality.
- * See jquery.ui.autocomplete for further documentation - just listing additional options here.
- *
  * @example $( 'input' ).suggester( { source: ['a', 'b', 'c'] } );
- * @desc Creates a simple auto-completion input element passing an array as result set.
+ * @desc Creates a simple suggester using an array as result set.
  *
  * @example $( 'input' ).suggester( {
- *   ajax: {
- *     url: <url>,
- *     params: { <additional parameters> }
+ *   source: function( term ) {
+ *     var deferred = $.Deferred();
+ *
+ *     $.ajax( {
+ *       url: location.protocol + '//commons.wikimedia.org/w/api.php',
+ *       dataType: 'jsonp',
+ *       data: {
+ *         search: term,
+ *         action: 'opensearch',
+ *         namespace: 6
+ *       },
+ *       timeout: 8000
+ *     } )
+ *     .done( function( response ) {
+ *       deferred.resolve( response[1], response[0] );
+ *     } )
+ *     .fail( function( jqXHR, textStatus ) {
+ *       deferred.reject( textStatus );
+ *     } );
+ *
+ *     return deferred.promise();
  *   }
  * } );
  * @desc Creates an auto-completion input element fetching suggestions via AJAX.
  *
- * @option maxItems {Number|null} (optional) If the number of suggestions is higher than maxItems,
- *         the suggestion list will be made scrollable. Setting maxItems to null will automatically
- *         resize the suggestion list's height.
- *         Default value: 10
+ * @option {string[]|Function} source
+ *         An array of strings that shall be used to provide suggestions. Alternatively, a function
+ *         may be provided:
+ *         Parameters:
+ *         - {string} Search term
+ *         Expected return values:
+ *         - {Object} jQuery promise
+ *           Resolved parameters:
+ *           - {string[]} Suggestions
+ *           - {string} (optional) Search term corresponding to the suggestions. This allows
+ *             checking whether the response belongs to the most current request.
+ *           Rejected parameters:
+ *           - {string} Plain text or HTML error message.
  *
- * @option ajax.url {String} (optional) URL to fetch suggestions from (if these shall be queried
- *         via AJAX)
- *         Default value: null
+ * @option {number} [delay]
+ *         Delay in milliseconds of the request querying for suggestions.
+ *         Default: 300
  *
- * @option ajax.params {Object} (optional) Additional AJAX parameters (if suggestions shall be
- *         retrieved via AJAX)
- *         Default value: {}
+ * @option {jQuery.ui.ooMenu} [menu]
+ *         A pre-initialized menu instance featuring one or more custom list item may be provided.
+ *         This should be the preferred way to define custom items.
+ *         Default: null (no default menu)
  *
- * @option ajax.timeout {Number} (optional) AJAX timeout in milliseconds.
- *         Default value: 8000
+ * @option {Object} [position]
+ *         Object to be evaluated by jQuery.ui.position to set the suggestion list's position. In
+ *         RTL context, the specified value is flipped automatically.
+ *         Default: (position suggestion list's top left corner at input box's bottom left corner)
  *
- * @option adaptLetterCase {String|Boolean} (optional) Defines whether to adjust the letter case
- *         according to the suggestion list's first value whenever the suggestion list is filled.
- *         Possible values: false, 'first', 'all'
- *         Default value: false
+ * @event open
+ *        Triggered when the list of suggestions is opened.
+ *        - {jQuery.Event}
  *
- * @option replace {Array} (optional) Array containing a regular expression and a replacement
- *         pattern (e.g. [/^File:/, '']) that is applied to each result returned by the API.
- *         Default value: null (no replacing)
+ * @event close
+ *        Triggered when the list of suggestions is closed.
+ *        - {jQuery.Event}
  *
- * @option customListItem {Object|Boolean} (optional) A custom item appended to the suggestion list.
- *         Default value: false (no custom list item)
- *         Example:
- *           {
- *             content: 'custom item label',
- *             action: function( event, suggester ) {
- *               console.log( suggester.element.val() );
- *               suggester.close();
- *             }
- *           }
- * @option customListItem.content {jQuery|String} The content of the additional list item. The
- *         content will be wrapped in a link node inside a list node (<li><a>content</a></li>).
- *         For custom styling, the css class 'ui-suggester-custom' is assigned to the <li/> node.
- * @option customListItem.action {Function} The action to perform when selecting the additional
- *         list item.
- *         Parameters: (1) {jQuery.Event} Event that has triggered the custom action
- *                     (2) {$.ui.suggester} Reference to the suggester widget
- * @option customListItem.cssClass {String} (optional) Additional css class(es) to assign to the custom
- *         item's <li/> node.
+ * @event change
+ *        Triggered when the suggester's value has changed.
+ *        - {jQuery.Event}
  *
- * @event response Triggered when the API call returned successful.
- *        (1) {jQuery.Event}
- *        (2) {Array} List of retrieved items.
- *
- * @event error Triggered when the API call was not successful.
- *        (1) {jQuery.Event}
- *        (2) {String} Error text status.
- *        (3) {Object} Detailed error information.
- *
- * @dependency jquery.autocompletestring
- * @dependency jquery.ui.autocomplete
- * @dependency jquery.util.adaptlettercase
- * @dependency jquery.util.getscrollbarwidth
+ * @dependency jQuery.ui.ooMenu
+ * @dependency jQuery.ui.position
  */
 ( function( $ ) {
 	'use strict';
 
-	$.widget( 'ui.suggester', $.ui.autocomplete, {
+	$.widget( 'ui.suggester', {
 
 		/**
-		 * Additional options
-		 * @type {Object}
+		 * @see jQuery.Widget.options
 		 */
 		options: {
-			maxItems: 10,
-			ajax: {
-				url: null,
-				params: {},
-				timeout: 8000
-			},
-			adaptLetterCase: false,
-			replace: null,
-			customListItem: false
+			source: null,
+			delay: 300,
+			menu: null,
+			position: {
+				my: 'left top',
+				at: 'left bottom',
+				collision: 'none'
+			}
 		},
 
 		/**
-		 * Caching the last pressed key's code
-		 * @type {Number}
+		 * Counter for the number of pending requests.
+		 * @type {number}
 		 */
-		_lastKeyDown: null,
+		_pending: null,
 
 		/**
-		 * @see ui.autocomplete._create
+		 * Current search term.
+		 * @type {string}
+		 */
+		_term: null,
+
+		/**
+		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
 			var self = this;
 
-			if ( this.options.source === null ) {
-				this.options.source = this._request;
-			}
-
-			$.ui.autocomplete.prototype._create.call( this );
-
-			if ( $.isArray( this.options.source ) ) {
-				this.source = this._filterArray;
-			}
-
-			// Get rid of autocomplete's native blur handling resetting the input (causing the
-			// auto-completed string to be dropped).
-			this.menu.option( 'blur', null );
-
-			/**
-			 * @see ui.menu.refresh
-			 */
-			this.menu.refresh = function() {
-				self._trigger( 'refreshmenu' );
-				$.ui.menu.prototype.refresh.call( this );
-			};
+			this._pending = 0;
+			this._term = this.element.val();
 
 			this.element
 			.addClass( 'ui-suggester-input' )
-			.on( this.widgetName + 'open.' + this.widgetName, function( event ) {
-				self._updateDirection();
-				self._highlightMatchingCharacters();
-			} )
-			.on( this.widgetName + 'refreshmenu.' + this.widgetName, function( event ) {
-				if ( self.options.customListItem ) {
-					self._renderCustomListItem( self.options.customListItem );
-				}
-			} )
-			.on( 'keydown.' + this.widgetName, function( event ) {
-				if ( event.keyCode === $.ui.keyCode.ENTER ) {
-					if ( self.menu.active ) {
-						var item = self.menu.active.data( 'item.autocomplete' );
-						if ( item && item.isCustom && item.customAction ) {
-							// Custom actions are supposed to be suggester-specific. If, for some
-							// reason, they should interact with external components, the action(s)
-							// may trigger custom events.
-							item.customAction( event, self );
-							return;
-						}
-					}
-				}
-				self._lastKeyDown = event.keyCode;
-			} );
-
-			this.menu.element.addClass( 'ui-suggester-list' );
-
-			// Extend menu's selected method to be able to trigger custom item's action.
-			var fnNativeMenuSelected = this.menu.option( 'selected' );
-			this.menu.option( 'selected', function( event, ui ) {
-				var item = ui.item.data( 'item.autocomplete' );
-				if ( !item.isCustom ) {
-					fnNativeMenuSelected( event, ui );
-				} else if ( $.isFunction( item.customAction ) ) {
-					item.customAction( event, self );
+			.on( 'blur.' + this.widgetName, function() {
+				if( !self.options.menu.element.is( ':focus' ) ) {
+					self._close();
 				}
 			} );
 
-			// since results list does not reposition automatically on resize, just close it
-			// (one resize event handler is enough for all widgets)
-			$( window )
-			.off( '.' + this.widgetName )
-			.on( 'resize.' + this.widgetName, function( event ) {
-				$( ':' + self.widgetBaseClass ).each( function( i, node ) {
-					$( node ).data( self.widgetName ).close( {} );
-				} );
-			} );
+			if( !( this.options.menu instanceof $.ui.ooMenu ) ) {
+				var $menu = $( '<ul/>' ).ooMenu();
+				this.options.menu = $menu.data( 'ooMenu' );
+			}
+
+			this.options.menu = this._initMenu( this.options.menu );
+
+			this._attachInputEventHandlers();
+			this._attachWindowEventHandlers();
 		},
 
 		/**
-		 * @see ui.autocomplete.destroy
+		 * @see jQuery.Widget.destroy
 		 */
 		destroy: function() {
-			// about to remove the last suggester instance on the page
+			var menu = this.option( 'menu' );
+			menu.destroy();
+			menu.element.remove();
+			this.option( 'menu', null );
+
+			// About to remove the last suggester instance on the page:
 			if ( $( ':' + this.widgetBaseClass ).length === 1 ) {
-				$( window ).off( '.' + this.widgetName );
+				$( window ).off( '.' + this.widgetBaseClass );
 			}
-			this.element.off( '.' + this.widgetName );
+
 			this.element.removeClass( 'ui-suggester-input' );
-			$.ui.autocomplete.prototype.destroy.call( this );
+			this.element.removeClass( 'ui-suggester-loading' );
+			this.element.removeClass( 'ui-suggester-error' );
+
+			$.Widget.prototype.destroy.call( this );
 		},
 
 		/**
-		 * Disables the suggester.
+		 * @see jQuery.Widget._setOption
 		 */
-		disable: function() {
-			this.close();
-			this.element.prop( 'disabled', true ).addClass( 'ui-state-disabled' );
+		_setOption: function( key, value ) {
+			if( key === 'menu' ) {
+				this.options.menu.destroy();
+				this.options.menu.element.remove();
+			}
+
+			$.Widget.prototype._setOption.apply( this, arguments );
+
+			if( key === 'menu' && value instanceof $.ui.ooMenu ) {
+				this.options.menu = this._initMenu( value );
+			}
+
+			if( key === 'disabled' ) {
+				if( value ) {
+					this._close();
+				}
+				this.element.prop( 'disabled', value );
+			}
 		},
 
 		/**
-		 * Enables the suggester.
-		 */
-		enable: function() {
-			this.element.prop( 'disabled', false ).addClass( 'ui-state-disabled' );
-		},
-
-		/**
-		 * Filters an array passed as suggestion source.
+		 * Renders the menu and attaches the menu's event handlers.
 		 *
-		 * @param {Object} request
-		 * @param {Function} response
+		 * @param {jQuery.ui.ooMenu} ooMenu
+		 * @return {jQuery.ui.ooMenu}
 		 */
-		_filterArray: function( request, response ) {
-			var resultSet = $.ui.autocomplete.filter( this.options.source, request.term ),
-				firstLabel = resultSet[0];
+		_initMenu: function( ooMenu ) {
+			var self = this;
 
-			if( $.isPlainObject( resultSet[0] ) ) {
-				firstLabel = resultSet[0].label;
-			}
+			ooMenu.element
+			.addClass( 'ui-suggester-list' )
+			.hide()
+			.appendTo( 'body' );
 
-			if ( resultSet.length && this.options.adaptLetterCase ) {
-				this.term = $.util.adaptLetterCase( this.term,
-					firstLabel,
-					this.options.adaptLetterCase
-				);
-				this.element.val( this.term );
-			}
+			$( ooMenu )
+			.on( 'blur.suggester', function() {
+				self.element.val( self._term );
+			} )
+			.on( 'selected.suggester', function( event, item ) {
+				if( item instanceof $.ui.ooMenu.Item && !( item instanceof $.ui.ooMenu.CustomItem ) ) {
+					self._term = item.getValue();
+					self.element.val( item.getValue() );
+					self._close();
+					self._trigger( 'change' );
+				}
+			} );
 
-			response( resultSet );
-
-			if( this._lastKeyDown !== $.ui.keyCode.BACKSPACE ) {
-				this.element.autocompletestring( request.term, firstLabel );
-			}
+			return ooMenu;
 		},
 
 		/**
-		 * Performs the AJAX request.
-		 *
-		 * @param request {Object} Contains request parameters
-		 * @param suggest {Function} Callback putting results into auto-complete menu
+		 * Attaches input event handlers to the input element.
 		 */
-		_request: function( request, suggest ) {
-			$.ajax( {
-				url: this.options.ajax.url,
-				dataType: 'jsonp',
-				data:  $.extend( {}, this.options.ajax.params, { 'search': request.term } ),
-				timeout: this.options.ajax.timeout,
-				success: $.proxy( this._success, this ),
-				error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
-					suggest();
-					this.element.focus();
-					this._trigger( 'error', $.Event(), [textStatus, errorThrown] );
-				}, this )
+		_attachInputEventHandlers: function() {
+			var self = this,
+				suppressKeyPress = false;
+
+			this.element
+			.on( 'keydown.suggester', function( event ) {
+				var isDisabled = self.element.hasClass( 'ui-state-disabled' );
+
+				if( isDisabled || self.element.prop( 'readOnly' ) ) {
+					return;
+				}
+
+				self.element.removeClass( 'ui-suggester-error' );
+
+				suppressKeyPress = false;
+
+				var keyCode = $.ui.keyCode;
+
+				switch( event.keyCode ) {
+					case keyCode.UP:
+						self._keyMove( 'previous', event );
+						break;
+
+					case keyCode.DOWN:
+						self._keyMove( 'next', event );
+						break;
+
+					case keyCode.ENTER:
+					case keyCode.NUMPAD_ENTER:
+						if( self.options.menu.getActiveItem() ) {
+							// Prevent form submission and select currently active item.
+							event.preventDefault();
+							event.stopPropagation();
+							suppressKeyPress = true;
+							self.options.menu.select( event );
+						}
+						break;
+
+					case keyCode.TAB:
+						if( !self.options.menu.getActiveItem() ) {
+							return;
+						}
+						self.options.menu.select( event );
+						break;
+
+					case keyCode.ESCAPE:
+						self.element.val( self._term );
+						self._close();
+						break;
+
+					default:
+						clearTimeout( self.__searching );
+						self.__searching = setTimeout( function() {
+							// Only search if the value has changed:
+							if( self._term !== self.element.val() ) {
+								self._selectedItem = null;
+								self.search( event )
+								.done( function() {
+									self._trigger( 'change' );
+								} );
+							}
+						}, self.options.delay );
+						break;
+				}
+
+				self._trigger( 'change' );
+			} )
+			.on( 'keypress.suggester', function( event ) {
+				if( suppressKeyPress ) {
+					suppressKeyPress = false;
+					event.preventDefault();
+				}
 			} );
 		},
 
 		/**
-		 * @see jquery.ui.autocomplete.__response
+		 * Attaches event listeners to the "window" object.
 		 */
-		__response: function( content ) {
-			$.ui.autocomplete.prototype.__response.call( this, content );
-			// There is no content but the menu should be visible if there is a custom list item:
-			if ( !this.options.disabled && ( !content || !content.length ) && this.customListItem ) {
-				this._suggest( [] );
-				this._trigger( 'open' );
-			}
-		},
+		_attachWindowEventHandlers: function() {
+			var self = this;
 
-		/**
-		 * Handles the response when the API call returns successfully.
-		 *
-		 * @param {Object} response
-		 */
-		_success: function( response ) {
-			var suggest = this._response();
-			if ( response[0] === this.element.val() ) {
-
-				var self = this;
-				if ( this.options.replace !== null ) {
-					$.each( response[1], function( i, value ) {
-						response[1][i] = value.replace( self.options.replace[0], self.options.replace[1] );
-					} );
-				}
-
-				// auto-complete input box text (because of the API call lag, this is
-				// avoided when hitting backspace, since the value would be reset too slow)
-				if ( this._lastKeyDown !== $.ui.keyCode.BACKSPACE && response[1].length > 0 ) {
-					var incomplete = response[0],
-						complete = response[1][0];
-
-					if ( this.options.adaptLetterCase ) {
-						this.term = incomplete = $.util.adaptlettercase(
-							incomplete,
-							complete,
-							this.options.adaptLetterCase
-						);
-					}
-
-					this.element.autocompletestring( incomplete, complete );
-				}
-
-				suggest( response[1] ); // pass array of returned values to callback
-
-				this._trigger( 'response', $.Event(), [response[1]] );
-			} else {
-				// suggest nothing when the response does not match with the current input value
-				// informing autocomplete that there is one less pending request
-				suggest();
-			}
-		},
-
-		/**
-		 * @see ui.autocomplete._suggest
-		 */
-		_suggest: function( items ) {
-			$.ui.autocomplete.prototype._suggest.call( this, items );
-			// In $.ui.autocomplete, _resizeMenu() is called before positioning the menu. However,
-			// resizing the menu width has to be performed after positioning since the width shall
-			// be constrained by the browser viewport width.
-			this._scaleMenu();
-		},
-
-		/**
-		 * Scales the menu's height to the height of maximum list items and takes care of the menu
-		 * width not reaching out of the browser viewport.
-		 */
-		_scaleMenu: function() {
-			this._resetMenuStyle();
-			var $menu = this.menu.element;
-
-			if ( this.options.maxItems ) {
-				if ( $menu.children().length > this.options.maxItems ) {
-					var fixedHeight = 0;
-					for ( var i = 0; i < this.options.maxItems; i++ ) {
-						fixedHeight += $( $menu.children()[i] ).height();
-					}
-					$menu.width( $menu.width() + $.util.getscrollbarwidth() );
-					$menu.height( fixedHeight );
-					$menu.css( 'overflowY', 'scroll' );
-				}
-			}
-
-			$menu.css(
-				'minWidth',
-				this.element.outerWidth( true ) - ( $menu.outerWidth( true ) - $menu.width() ) + 'px'
-			);
-
-			$menu.width( $menu.outerWidth( true ) );
-
-			// menu reaches out of the browser viewport
-			if ( $menu.offset().left + $menu.outerWidth( true ) > $( window ).width() ) {
-				// force maximum menu width
-				$menu.width(
-					$( window ).width()
-						- $menu.offset().left
-						- ( $menu.outerWidth( true ) - $menu.width() )
-						- 20 // safe space
-				);
-			}
-		},
-
-		/**
-		 * Renders a custom list item and appends it to the suggestion list.
-		 * @see ui.autocomplete._renderItem
-		 *
-		 * @param {Object} customListItem Custom list item definition (see option description)
-		 * @return {jQuery} The new list item
-		 */
-		_renderCustomListItem: function( customListItem ) {
-			var content = customListItem.content,
-				$li = $( '<li/>' )
-					.addClass( 'ui-suggester-custom' )
-					.data( 'item.autocomplete', {
-						isCustom: true,
-						customAction: customListItem.action,
-						// internal autocomplete logic needs a value (e.g. for activating)
-						value: this.term
-					} ),
-				$a = $( '<a/>' ).appendTo( $li );
-
-			if ( customListItem.cssClass ) {
-				$li.addClass( customListItem.cssClass );
-			}
-
-			if ( typeof content === 'string' ) {
-				$a.text( content );
-			} else if ( content instanceof $ ) {
-				$a.append( content );
-			} else {
-				throw new Error( 'suggester: Custom list item is invalid.' );
-			}
-
-			if ( this.menu.element.children( '.ui-suggester-custom' ).length > 0 ) {
-				// TODO: This is entity selector "more" button specific. There should be a method
-				// to specify a position where to add the custom list item.
-				return this.menu.element.children( '.ui-suggester-custom' ).first().before( $li );
-			} else {
-				return $li.appendTo( this.menu.element );
-			}
-		},
-
-		/**
-		 * Sets (updates) or gets the custom list item.
-		 *
-		 * @param {Object} [customListItem] Custom list item (omit to get the current custom list
-		 *        item in the form of a jQuery node). For the object structure of this parameter see
-		 *        the customListItem option description.
-		 * @return {jQuery|String|Boolean} The custom list item's content or false if none is
-		 *         defined
-		 */
-		customListItem: function( customListItem ) {
-			if ( customListItem === undefined ) {
-				if ( !this.options.customListItem ) {
-					return false;
-				}
-				var $a = this.menu.element.children( '.ui-suggester-custom a' );
-				if ( typeof this.options.customListItem === 'string' ) {
-					return $a.text();
-				} else {
-					return $a.children();
-				}
-			} else {
-				this.options.customListItem = customListItem;
-				this.menu.refresh();
-				return this.customListItem();
-			}
-		},
-
-		/**
-		 * Resets the menu css styles.
-		 */
-		_resetMenuStyle: function() {
-			this.menu.element
-			.css( 'minWidth', 'auto' )
-			.width( 'auto' )
-			.height( 'auto' )
-			.css( 'overflowY', 'ellipsis' );
-		},
-
-		/**
-		 * Calculates the menu height (including all menu items - even those out of the viewport).
-		 *
-		 * @return {Number} menu height
-		 */
-		_getMenuHeight: function() {
-			this._resetMenuStyle();
-			var height = 0;
-			this.menu.element.children( 'li' ).each( function( i ) {
-				height += $( this ).height();
-			} );
-			return height;
-		},
-
-		/**
-		 * Makes autocomplete results list stretch from the right side of the input box in rtl.
-		 */
-		_updateDirection: function() {
-			if (
-				this.element.attr( 'dir' ) === 'rtl' ||
-					(
-						this.element.attr( 'dir' ) === undefined
-						&& document.documentElement.dir === 'rtl'
-					)
-				) {
-				this.options.position.my = 'right top';
-				this.options.position.at = 'right bottom';
-
-				if( this.options.position.offset ) {
-					this.options.position.offset = flipHorizontalOffset(
-						this.options.position.offset
-					);
-				}
-
-				this.menu.element.position( $.extend( {
-					of: this.element
-				}, this.options.position ) );
-
-				// to display rtl and ltr correctly
-				// sometimes a rtl wiki can have ltr page names, etc. (try ".gov")
-				this.menu.element.children().attr( {
-					'dir': 'auto'
+			$( window )
+			.off( '.' + this.widgetBaseClass )
+			.on( 'resize.' + this.widgetBaseClass, function() {
+				$( ':' + self.widgetBaseClass ).each( function( i, node ) {
+					var suggester = $( node ).data( self.widgetName );
+					suggester.repositionMenu();
+					suggester.options.menu.scale();
 				} );
+			} )
+			.on( 'click.' + this.widgetBaseClass, function( event ) {
+				var $target = $( event.target );
+				$( ':' + self.widgetBaseClass ).each( function( i, node ) {
+					var suggester = $( node ).data( self.widgetName );
+					// Close suggester if not clicked on suggester or corresponding list:
+					if(
+						$target.closest( suggester.element ).length === 0
+						&& $target.closest( suggester.options.menu.element ).length === 0
+					) {
+						suggester._close();
+					}
+				} );
+			} );
+		},
+
+		/**
+		 * Handles moving through the list of suggestions using arrow keys.
+		 *
+		 * @param {string} direction (either "previous" or "next")
+		 * @param {jQuery.Event} event
+		 */
+		_keyMove: function( direction, event ) {
+			// Prevent moving cursor to beginning/end of the text field in some browsers:
+			event.preventDefault();
+
+			if( !this.options.menu.element.is( ':visible' ) ) {
+				clearTimeout( this.__searching );
+				this._cache = {};
+				this.search( event );
+				return;
+			}
+
+			var allItems = $.merge( [], this.options.menu.option( 'items' ) );
+			$.merge( allItems, this.options.menu.option( 'customItems' ) );
+
+			if( allItems.length > 0 ) {
+				this._move( direction, this.options.menu.getActiveItem(), allItems );
 			}
 		},
 
 		/**
-		 * Highlights matching characters in the result list.
+		 * Shifts the suggestions menu focus by one item.
+		 *
+		 * @param {string} direction
+		 * @param {jQuery.ui.ooMenu.Item} activeItem
+		 * @param {jQuery.ui.ooMenu.Item[]} allItems
 		 */
-		_highlightMatchingCharacters: function() {
-			var term = ( this.term ) ? this.term : '',
-				escapedTerm = $.ui.autocomplete.escapeRegex( term ),
-				regExp = new RegExp(
-					'((?:(?!' + escapedTerm +').)*?)(' + escapedTerm + ')(.*)', ''
-				);
+		_move: function( direction, activeItem, allItems ) {
+			var self = this,
+				isFirst = activeItem === allItems[0],
+				isLast = activeItem === allItems[allItems.length - 1];
 
-			this.menu.element.children( '.ui-menu-item' ).each( function() {
-				if ( !$( this ).data( 'item.autocomplete' ).isCustom ) {
-					var $itemLink = $( this ).find( 'a' );
+			if( isFirst && direction === 'previous' || isLast && direction === 'next' ) {
+				this._moveOffEdge( direction );
+			} else {
+				$( this.options.menu ).one( 'focus.suggester', function( event, item ) {
+					var isCustomMenuItem = item instanceof $.ui.ooMenu.CustomItem;
 
-					// only replace if suggestions actually starts with the current input
-					if ( $itemLink.text().indexOf( term ) === 0 ) {
-						var matches = $itemLink.text().match( regExp );
-
-						$itemLink
-						.text( matches[1] )
-						.append( $( '<b/>' ).text( matches[2] ) )
-						.append( document.createTextNode( matches[3] ) );
+					if( item instanceof $.ui.ooMenu.Item && !isCustomMenuItem ) {
+						self.element.val( item.getValue() );
+					} else if( isCustomMenuItem ) {
+						self.element.val( self._term );
 					}
+					self._trigger( 'change' );
+				} );
+				this.options.menu[direction]();
+			}
+		},
+
+		/**
+		 * Handler called when the suggestion menu focus is to be shifted off the end of the list.
+		 *
+		 * @param {string} direction
+		 */
+		_moveOffEdge: function( direction ) {
+			this.element.val( this._term );
+			this.options.menu.deactivate();
+		},
+
+		/**
+		 * Performs a search on the current input.
+		 *
+		 * @param {jQuery.Event} event The original event that triggered the search.
+		 * @return {jQuery.Promise}
+		 *         Resolved parameters:
+		 *         - {string[]}
+		 *         Rejected parameters:
+		 *         - {string}
+		 */
+		search: function( event ) {
+			var self = this,
+				deferred = $.Deferred();
+
+			this._term = this.element.val();
+
+			if( this._term.length < 1 ) {
+				this._close();
+				return deferred.resolve( [], this._term ).promise();
+			}
+
+			this.element.addClass( 'ui-suggester-loading' );
+			this._pending++;
+
+			return this._getSuggestions( this._term )
+			.done( function( suggestions, requestTerm ) {
+				if( typeof requestTerm === 'string' && requestTerm !== self._term ) {
+					// Skip request since it does not correspond to the current search term.
+					return;
+				}
+				self._updateMenu( suggestions, requestTerm );
+			} )
+			.fail( function( message ) {
+				self.element.addClass( 'ui-suggester-error' );
+				// TODO: Display error message.
+			} )
+			.always( function() {
+				if( --self._pending === 0 ) {
+					self.element.removeClass( 'ui-suggester-loading' );
 				}
 			} );
 		},
 
 		/**
-		 * Sets/gets the plain input box value.
+		 * Updates the menu.
 		 *
-		 * @param {String} [value] Value to be set
-		 * @return {String} value Current/new value
+		 * @param {string[]} suggestions
+		 * @param {string} requestTerm
 		 */
-		value: function( value ) {
-			if ( value !== undefined ) {
-				this.element.val( value );
-			}
-			return this.element.val();
+		_updateMenu: function( suggestions, requestTerm ) {
+			this._updateMenuItems( suggestions, requestTerm );
+			this._updateMenuVisibility();
 		},
 
 		/**
-		 * Resets/updates the menu position.
+		 * Updates the suggestion menu with the received suggestions.
+		 *
+		 * @param {string[]} suggestions
+		 * @param {string} requestTerm
+		 */
+		_updateMenuItems: function( suggestions, requestTerm ) {
+			var menuItems = [];
+
+			for( var i = 0; i < suggestions.length; i++ ) {
+				menuItems.push( this._createMenuItemFromSuggestion( suggestions[i], requestTerm ) );
+			}
+
+			this.options.menu.option( 'items', menuItems );
+		},
+
+		/**
+		 * Updates the menu's visibility.
+		 */
+		_updateMenuVisibility: function() {
+			if( !this.options.menu.hasVisibleItems( true ) ) {
+				this._close();
+			} else {
+				this._open();
+				this.repositionMenu();
+			}
+		},
+
+		/**
+		 * Instantiates a menu item instance from a suggestion.
+		 *
+		 * @param {string} suggestion
+		 * @param {string} requestTerm
+		 * @return {jQuery.ui.ooMenu.Item}
+		 */
+		_createMenuItemFromSuggestion: function( suggestion, requestTerm ) {
+			return new $.ui.ooMenu.Item( suggestion );
+		},
+
+		/**
+		 * Retrieves the suggestions for a specific search term.
+		 *
+		 * @param {string} term
+		 * @return {jQuery.Promise}
+		 *         Resolved parameters:
+		 *         - {string[]}
+		 *         Rejected parameters:
+		 *         - {string}
+		 */
+		_getSuggestions: function( term ) {
+			return ( $.isArray( this.options.source ) )
+				? this._getSuggestionsFromArray( term, this.options.source )
+				: this.options.source( term );
+		},
+
+		/**
+		 * Filters an array using a specific search term.
+		 *
+		 * @param {string} term
+		 * @param {string[]} source
+		 * @return {jQuery.Promise}
+		 *         Resolved parameters:
+		 *         - {string[]}
+		 *         Rejected parameters:
+		 *         - {string}
+		 */
+		_getSuggestionsFromArray: function( term, source ) {
+			var deferred = $.Deferred();
+
+			var matcher = new RegExp( this._escapeRegex( term ), 'i' );
+
+			deferred.resolve( $.grep( source, function( item ) {
+				return matcher.test( item );
+			} ), term );
+
+			return deferred.promise();
+		},
+
+		/**
+		 * Escapes a string to be used in a regular expression.
+		 *
+		 * @param {string} value
+		 * @return {string}
+		 */
+		_escapeRegex: function( value ) {
+			return value.replace( /[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&' );
+		},
+
+		/**
+		 * Shows the suggester menu.
+		 */
+		_open: function() {
+			if( this.options.menu.element.is( ':visible' ) ) {
+				return;
+			}
+
+			this.options.menu.element.show();
+			this.repositionMenu();
+
+			this._trigger( 'open' );
+		},
+
+		/**
+		 * Hides the suggester menu.
+		 */
+		_close: function() {
+			this.options.menu.deactivate();
+			this.options.menu.element.hide();
+
+			this._trigger( 'close' );
+		},
+
+		/**
+		 * Aligns the menu to the input element.
 		 */
 		repositionMenu: function() {
-			this.menu.element.position( $.extend( {
+			var isRtl = this.element.attr( 'dir' ) === 'rtl'
+				|| ( this.element.attr( 'dir' ) === undefined
+					&& document.documentElement.dir === 'rtl' );
+
+			var position = $.extend( {}, this.options.position );
+
+			if( isRtl ) {
+				position = flipPosition( position );
+			}
+
+			this.options.menu.element.position( $.extend( {
 				of: this.element
-			}, this.options.position ) );
+			}, position ) );
+
+			this.options.menu.scale();
 		}
 
 	} );
 
 	/**
-	 * Flips the horizontal offset of a offset specified as string to be used as offset parameter
-	 * for jQuery.ui.position (1.8)
+	 * Flips a complete position specification to be used by jQuery.ui.position (1.8).
 	 *
-	 * @param {string} offset
-	 * @return {string}
+	 * @param {Object} position
+	 * @return {Object}
 	 */
-	function flipHorizontalOffset( offset ) {
-		var offsets = offset.split( ' ' ),
-			hOffset = parseInt( offsets[0], 10 );
+	function flipPosition( position ) {
+		function flipOrientation( orientation ) {
+			if( /right/i.match( orientation ) ) {
+				return orientation.replace( /right/i, 'left' );
+			} else {
+				return orientation.replace( /left/i, 'right' );
+			}
+		}
 
-		hOffset = ( hOffset <= 0 ) ? Math.abs( hOffset ) : hOffset * -1;
-		return hOffset + ' ' + offsets[1];
+		function flipHorizontalOffset( offset ) {
+			var offsets = offset.split( ' ' ),
+				hOffset = parseInt( offsets[0], 10 );
+
+			hOffset = ( hOffset <= 0 ) ? Math.abs( hOffset ) : hOffset * -1;
+			return hOffset + ' ' + offsets[1];
+		}
+
+		position.my = flipOrientation( position.my );
+		position.at = flipOrientation( position.at );
+
+		if( position.offset ) {
+			position.offset = flipHorizontalOffset( position.offset );
+		}
+
+		return position;
 	}
 
 } )( jQuery );

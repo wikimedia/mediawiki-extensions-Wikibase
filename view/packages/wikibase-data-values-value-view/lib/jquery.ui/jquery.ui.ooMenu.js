@@ -153,11 +153,13 @@ $.widget( 'ui.ooMenu', {
 
 		var $item = $( '<li/>' )
 			.addClass( 'ui-ooMenu-item' )
-			.attr( 'tabindex', -1 )
 			.attr( 'dir', 'auto' )
 			.data( 'ui-ooMenu-item', item )
 			.append(
-				$( '<a/>' ).attr( 'href', item.getLink() ).html( label )
+				$( '<a/>' )
+				.attr( 'href', item.getLink() )
+				.attr( 'tabindex', -1 )
+				.html( label )
 			);
 
 		if( item instanceof $.ui.ooMenu.CustomItem ) {
@@ -189,7 +191,7 @@ $.widget( 'ui.ooMenu', {
 	 * @return {boolean}
 	 */
 	hasVisibleItems: function( includeCustomItems ) {
-		if( this.options.items.length > 0 ) {
+		if( this.options.items.length ) {
 			return true;
 		}
 
@@ -251,7 +253,7 @@ $.widget( 'ui.ooMenu', {
 	 */
 	getActiveItem: function() {
 		var $item = this.element.children( '.ui-state-hover' );
-		return $item.length === 0 ? null : $item.data( 'ui-ooMenu-item' );
+		return !$item.length ? null : $item.data( 'ui-ooMenu-item' );
 	},
 
 	/**
@@ -279,10 +281,11 @@ $.widget( 'ui.ooMenu', {
 		var offset = $item.offset().top - this.element.offset().top,
 			scroll = this.element.scrollTop(),
 			elementHeight = this.element.height();
-			if( offset < 0 ) {
-			this.element.scrollTop( scroll + offset);
+
+		if( offset < 0 ) {
+			this.element.scrollTop( scroll + offset );
 		} else if( offset >= elementHeight ) {
-			this.element.scrollTop( scroll + offset - elementHeight + $item.height());
+			this.element.scrollTop( scroll + offset - elementHeight + $item.height() );
 		}
 
 		$item.addClass( 'ui-state-hover' );
@@ -319,13 +322,13 @@ $.widget( 'ui.ooMenu', {
 	 * @param {jQuery} $edge
 	 */
 	_move: function( direction, $edge ) {
-		if( this.element.children().length === 0 ) {
+		if( !this.element.children().length ) {
 			return;
 		}
 
 		var $active = this.element.children( '.ui-state-hover' );
 
-		if( $active.length === 0 ) {
+		if( !$active.length ) {
 			this.activate( $edge );
 			return;
 		}
@@ -345,7 +348,7 @@ $.widget( 'ui.ooMenu', {
 	select: function( event ) {
 		var $item = this.element.children( '.ui-state-hover' );
 
-		var item = $item.length === 0 ? null : $item.data( 'ui-ooMenu-item' );
+		var item = !$item.length ? null : $item.data( 'ui-ooMenu-item' );
 
 		if( item instanceof $.ui.ooMenu.CustomItem ) {
 			var action = item.getAction();
@@ -379,7 +382,7 @@ var Item = function( label, value, link ) {
 	}
 
 	this._label = label;
-	this._value = value || ( label instanceof $ ? label.text() : label );
+	this._value = value || ( label instanceof jQuery ? label.text() : label );
 	this._link = link || null;
 };
 
