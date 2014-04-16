@@ -81,8 +81,9 @@ class EraParser extends StringValueParser {
 			$value = substr( $value, 1 );
 		}
 
-		$value = preg_replace( '/(\s*(' . $this->CEregex . '|' .  $this->BCEregex . '))$/i', '', $value );
+		$value = preg_replace( '/\s*(' . $this->CEregex . '|' .  $this->BCEregex . ')$/i', '', $value );
 
 		return trim( $value );
 	}
+
 }
