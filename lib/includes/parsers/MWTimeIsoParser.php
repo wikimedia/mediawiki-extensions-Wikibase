@@ -25,6 +25,8 @@ use ValueParsers\ValueParser;
  */
 class MWTimeIsoParser extends StringValueParser {
 
+	const FORMAT_NAME = 'mw-time-iso';
+
 	/**
 	 * @var array message keys showing the number of 0s that need to be appended to years when
 	 *      parsed with the given message keys
@@ -95,7 +97,7 @@ class MWTimeIsoParser extends StringValueParser {
 			return $reconverted;
 		}
 
-		throw new ParseException( 'Failed to parse MwTimeIso' );
+		throw new ParseException( 'Failed to parse', $value, self::FORMAT_NAME );
 	}
 
 	/**

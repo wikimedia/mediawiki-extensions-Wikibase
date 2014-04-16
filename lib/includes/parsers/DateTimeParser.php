@@ -23,6 +23,8 @@ use ValueParsers\ValueParser;
  */
 class DateTimeParser extends StringValueParser {
 
+	const FORMAT_NAME = 'datetime';
+
 	/**
 	 * @var MonthNameUnlocalizer
 	 */
@@ -49,6 +51,8 @@ class DateTimeParser extends StringValueParser {
 	 * @return TimeValue
 	 */
 	protected function stringParse( $value ) {
+		$rawValue = $value;
+
 		$calendarModelParser = new CalendarModelParser();
 		$options = $this->getOptions();
 
@@ -88,7 +92,7 @@ class DateTimeParser extends StringValueParser {
 			return $valueParser->parse( $timeString );
 		}
 		catch( Exception $exception ) {
-			throw new ParseException( $exception->getMessage() );
+			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );
 		}
 	}
 
