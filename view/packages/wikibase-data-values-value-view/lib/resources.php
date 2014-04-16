@@ -131,6 +131,21 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.ooMenu' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.ooMenu.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.ooMenu.css',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.ui.widget',
+				'jquery.util.getscrollbarwidth',
+				'util.inherit',
+			),
+		),
+
 		'jquery.ui.preview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.preview.js',
