@@ -49,6 +49,16 @@ class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 				$options,
 				'@<a .*href="//commons.wikimedia.org/wiki/File:Example%2Bplus.jpg".*>.*Example\+plus.jpg.*</a>@'
 			),
+			array(
+				new StringValue( '[[File:Invalid_title.mid]]' ),
+				$options,
+				'@^\[\[File:Invalid_title.mid\]\]$@'
+			),
+			array(
+				new StringValue( '' ),
+				$options,
+				'@^$@'
+			),
 		);
 	}
 
@@ -74,4 +84,5 @@ class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$formatter->format( $value );
 	}
+
 }
