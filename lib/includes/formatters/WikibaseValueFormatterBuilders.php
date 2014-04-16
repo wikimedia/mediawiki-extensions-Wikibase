@@ -525,7 +525,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return HtmlTimeFormatter
 	 */
 	private static function newHtmlTimeFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
-		return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
+		return new HtmlTimeFormatter( $options, new TimeFormatter( $options ) );
 	}
 
 	/**

@@ -1,19 +1,18 @@
 <?php
 
-namespace ValueFormatters\Test;
+namespace Wikibase\Lib\Test;
 
 use DataValues\TimeValue;
-use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
-use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Lib\TimeFormatter;
 use Wikibase\Lib\Parsers\TimeParser;
 use Wikibase\Utils;
 
 /**
- * @covers ValueFormatters\TimeFormatter
+ * @covers Wikibase\Lib\TimeFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -24,7 +23,7 @@ use Wikibase\Utils;
  * @author H. Snater < mediawiki@snater.com >
  * @author Adam Shorland
  */
-class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
+class TimeFormatterTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -287,7 +286,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 		$argLists = array();
 
 		foreach ( $tests as $expected => $args ) {
-			$timeValue = new TimeValue( $args[0], 0, 0, 0, $args[1], TimeFormatter::CALENDAR_GREGORIAN );
+			$timeValue = new TimeValue( $args[0], 0, 0, 0, $args[1], \ValueFormatters\TimeFormatter::CALENDAR_GREGORIAN );
 			$argLists[] = array( $expected, $timeValue );
 		}
 
@@ -299,7 +298,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 					'+0000000000003333-01-01T00:00:00Z',
 					0, 0, 0,
 					TimeValue::PRECISION_YEAR,
-					TimeFormatter::CALENDAR_GREGORIAN
+					\ValueFormatters\TimeFormatter::CALENDAR_GREGORIAN
 				),
 				false,
 				$languageCode
@@ -327,7 +326,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			ValueFormatter::OPT_LANG => $langCode
 		) );
 
-		$isoFormatter = new MwTimeIsoFormatter( $options );
+		$isoFormatter = new TimeFormatter( $options );
 
 		$formattedTime = $isoFormatter->format( $timeValue );
 		$this->assertEquals( $expected, $formattedTime );
