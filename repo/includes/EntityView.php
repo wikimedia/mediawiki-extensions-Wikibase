@@ -535,7 +535,7 @@ abstract class EntityView extends ContextSource {
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
 
-		$propertyInfo = $this->getPropertyInfo( $entity, $this->getLanguage()->getCode() );
+		$entityInfo = $this->getEntityInfo( $entity, $this->getLanguage()->getCode() );
 
 		/**
 		 * @var string $claimsHtml
@@ -549,9 +549,9 @@ abstract class EntityView extends ContextSource {
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
 			$key = $propertyId->getSerialization();
 			$propertyLabel = $key;
-			if ( isset( $propertyInfo[$key] ) && !empty( $propertyInfo[$key]['labels'] ) ) {
-				$propertyInfoLabel = reset( $propertyInfo[$key]['labels'] );
-				$propertyLabel = $propertyInfoLabel['value'];
+			if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
+				$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
+				$propertyLabel = $entityInfoLabel['value'];
 			}
 
 			$propertyLink = \Linker::link(
@@ -564,7 +564,7 @@ abstract class EntityView extends ContextSource {
 			foreach( $claims as $claim ) {
 				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 					$claim,
-					$propertyInfo,
+					$entityInfo,
 					$htmlForEditSection
 				);
 			}
@@ -644,15 +644,15 @@ abstract class EntityView extends ContextSource {
 	}
 
 	/**
-	 * Fetches labels for all properties used as properties in snaks in the given entity.
+	 * Fetches labels and descriptions for all entities used as properties in snaks in the given
+	 * entity.
 	 *
 	 * @param Entity $entity
 	 * @param string $languageCode the language code of the labels to fetch.
 	 *
-	 * @todo: We may also want to have the descriptions, in addition to the labels
-	 * @return array[] Property info array that maps property IDs to labels.
+	 * @return array[] Entity info array that maps property IDs to labels and descriptions.
 	 */
-	protected function getPropertyInfo( Entity $entity, $languageCode ) {
+	protected function getEntityInfo( Entity $entity, $languageCode ) {
 		wfProfileIn( __METHOD__ );
 		// TODO: Share cache with PropertyLabelResolver
 		// TODO: ... or share info with getBasicEntityInfo.
@@ -667,7 +667,11 @@ abstract class EntityView extends ContextSource {
 		// NOTE: This is a bit hackish, it would be more appropriate to use a TermTable here.
 		$entityInfo = $this->entityInfoBuilder->buildEntityInfo( $propertyIds );
 		$this->entityInfoBuilder->removeMissing( $entityInfo );
-		$this->entityInfoBuilder->addTerms( $entityInfo, array( 'label', 'description' ), array( $languageCode ) );
+		$this->entityInfoBuilder->addTerms(
+			$entityInfo,
+			array( 'label', 'description' ),
+			array( $languageCode )
+		);
 
 		wfProfileOut( __METHOD__ );
 		return $entityInfo;
