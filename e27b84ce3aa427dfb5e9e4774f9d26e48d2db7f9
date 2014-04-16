@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_d8c74649",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-16T20:59:27Z",
+      "side": 1,
+      "message": "unrelated, does not belong as part of this patch",
+      "revId": "e27b84ce3aa427dfb5e9e4774f9d26e48d2db7f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b8c24a37",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-16T20:59:27Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "e27b84ce3aa427dfb5e9e4774f9d26e48d2db7f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f8b0c2d9",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-16T20:59:27Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "e27b84ce3aa427dfb5e9e4774f9d26e48d2db7f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_98c1ce35",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-16T20:59:27Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "e27b84ce3aa427dfb5e9e4774f9d26e48d2db7f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_78bcb2b1",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-16T20:59:27Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "e27b84ce3aa427dfb5e9e4774f9d26e48d2db7f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
