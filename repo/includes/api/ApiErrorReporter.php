@@ -128,7 +128,7 @@ class ApiErrorReporter {
 	 */
 	public function dieStatus( Status $status, $errorCode, $httpRespCode = 0, $extradata = array() ) {
 		if ( $status->isOK() ) {
-			throw new \InvalidArgumentException( 'called dieStatus() with a non-fatal Status!' );
+			throw new InvalidArgumentException( 'called dieStatus() with a non-fatal Status!' );
 		}
 
 		$this->addStatusToExtraData( $status, $extradata );
@@ -254,14 +254,13 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode
 	 * @param null|array $extradata
 	 *
-	 * @throws \LogicException
+	 * @throws LogicException
 	 */
 	protected function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
 		$this->apiModule->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 
 		throw new LogicException( 'UsageException not thrown' );
 	}
-
 
 	/**
 	 * Add the given message to the $extradata array, for use in an error report.
@@ -301,10 +300,10 @@ class ApiErrorReporter {
 	 * @throws InvalidArgumentException
 	 */
 	protected function addStatusToExtraData( Status $status, &$extradata ) {
-		$errors = $status->getErrorsArray();
-		$errors = $this->convertToMessageList( $errors );
+		$messageSpecs = $status->getErrorsArray();
+		$messages = $this->convertToMessageList( $messageSpecs );
 
-		foreach ( $errors as $message ) {
+		foreach ( $messages as $message ) {
 			$this->addMessageToExtraData( $message, $extradata );
 		}
 	}
@@ -331,17 +330,17 @@ class ApiErrorReporter {
 	 * This provides support for message lists coming from Status::getErrorsByType() as well as
 	 * Title::getUserPermissionsErrors() etc.
 	 *
-	 * @param $errors array a list of errors, as returned by Status::getErrorsByType()
+	 * @param $messageSpecs array a list of errors, as returned by Status::getErrorsByType()
 	 *        or Title::getUserPermissionsErrors()
 	 *
 	 * @return array a result structure containing the messages from $errors as well as what
 	 *         was already present in the $messages parameter.
 	 */
-	protected function convertMessagesToResult( array $errors ) {
-		$messages = array();
+	protected function convertMessagesToResult( array $messageSpecs ) {
+		$result = array();
 		$res = $this->apiModule->getResult();
 
-		foreach ( $errors as $message ) {
+		foreach ( $messageSpecs as $message ) {
 			$type = null;
 
 			if ( !( $message instanceof Message ) ) {
@@ -362,11 +361,11 @@ class ApiErrorReporter {
 				$res->setElement( $row, 'type', $type );
 			}
 
-			$messages[] = $row;
+			$result[] = $row;
 		}
 
-		$res->setIndexedTagName( $messages, 'message' );
-		return $messages;
+		$res->setIndexedTagName( $result, 'message' );
+		return $result;
 	}
 
 	/**
@@ -375,16 +374,16 @@ class ApiErrorReporter {
 	 *
 	 * @see convertToMessage()
 	 *
-	 * @param $errors array a list of errors, as returned by Status::getErrorsByType()
+	 * @param $messageSpecs array a list of errors, as returned by Status::getErrorsByType()
 	 *        or Title::getUserPermissionsErrors().
 	 *
 	 * @return array a result structure containing the messages from $errors as well as what
 	 *         was already present in the $messages parameter.
 	 */
-	protected function convertToMessageList( array $errors ) {
+	protected function convertToMessageList( array $messageSpecs ) {
 		$messages = array();
 
-		foreach ( $errors as $message ) {
+		foreach ( $messageSpecs as $message ) {
 			if ( !( $message instanceof Message ) ) {
 				$message = $this->convertToMessage( $message );
 			}
