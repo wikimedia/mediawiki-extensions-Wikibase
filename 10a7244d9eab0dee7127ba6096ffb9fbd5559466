@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_48900f46",
+        "filename": "lib/tests/phpunit/parsers/EraParserTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-04-16T09:16:50Z",
+      "side": 1,
+      "message": "We should probably have a few more tests:\n\n100 B.     C.\n100 Common    Era",
+      "revId": "10a7244d9eab0dee7127ba6096ffb9fbd5559466",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
