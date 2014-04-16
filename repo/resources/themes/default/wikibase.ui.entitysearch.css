@@ -1,17 +1,21 @@
 /**
- * Styles for the entity selector search box replacement.
- *
- * @since 0.4
- *
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
 
-.ui-entityselector-list .wb-entitysearch-suggestions {
-	border-top: 1px solid #C9C9C9;
+.wikibase-entitysearch-list .wb-entitysearch-suggestions {
+	background-color: #FFFFFF;
+	border-top-style: solid;
 }
 
-.ui-entityselector-list .wb-entitysearch-suggestions .suggestions-special {
+.wikibase-entitysearch-list .wb-entitysearch-suggestions.ui-state-hover {
+	background-color: #4C59A6;
+	border-top-style: solid;
+	color: #FFFFFF;
+}
+
+
+.wikibase-entitysearch-list .wb-entitysearch-suggestions .suggestions-special {
 	background-color: transparent;
 	border: 0;
 	display: block;
@@ -19,13 +23,13 @@
 	padding: 0;
 }
 
-.ui-entityselector-list .wb-entitysearch-suggestions .special-query {
+.wikibase-entitysearch-list .wb-entitysearch-suggestions .special-query {
 	overflow: hidden;
 	-o-text-overflow: ellipsis; /* Opera 9 to 10 */
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.ui-entityselector-list .wb-entitysearch-suggestions .ui-state-hover div {
+.wikibase-entitysearch-list .wb-entitysearch-suggestions.ui-state-hover div {
 	color: #FFF;
 }
