@@ -135,10 +135,12 @@ abstract class UpdateRepo {
 		$job = $this->createJob();
 
 		wfProfileIn( __METHOD__ . '#push' );
-		$ok = $jobQueueGroup->push( $job );
+		// FIXME: MediaWiki 1.24+ does not return false any more but throws exceptions instead.
+		// The check can be removed when we do not support 1.23 anymore.
+		$mw123Result = $jobQueueGroup->push( $job );
 		wfProfileOut( __METHOD__ . '#push' );
 
-		if ( !$ok ) {
+		if ( $mw123Result === false ) {
 			wfProfileOut( __METHOD__ );
 			throw new RuntimeException( "Failed to push job to job queue" );
 		}

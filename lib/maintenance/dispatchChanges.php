@@ -958,10 +958,12 @@ class DispatchChanges extends \Maintenance {
 		wfProfileOut( __METHOD__ . '#job' );
 
 		wfProfileIn( __METHOD__ . '#push' );
-		$ok = $qgroup->push( $job );
+		// FIXME: MediaWiki 1.24+ does not return false any more but throws exceptions instead.
+		// The check can be removed when we do not support 1.23 anymore.
+		$mw123Result = $qgroup->push( $job );
 		wfProfileOut( __METHOD__ . '#push' );
 
-		if ( !$ok ) {
+		if ( $mw123Result === false ) {
 			wfProfileOut( __METHOD__ );
 			throw new \MWException( "Failed to push to job queue for $wikiDB" );
 		}
