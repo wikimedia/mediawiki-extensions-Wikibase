@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_16bd98d1",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-16T14:51:10Z",
+      "side": 1,
+      "message": "Please don\u0027t use arrays as message keys. It looks like a cool way to do fallbacks, but it\u0027s horribly broken. Just try both keys here.",
+      "revId": "070c10c712e26ceb04074d4e41c70ddddcb62c6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
