@@ -70,6 +70,24 @@
       "revId": "f635dd5866e4c6d27ec07099587dc4bb6af91d45",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b669448a",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-16T14:40:41Z",
+      "side": 1,
+      "message": "Why can we only display one icon at once? With a bot of JS, we can certainly show more. Or we might set other attributes using CSS (bold, color, whatever). Also, even if we only show one (the most relevant) icon, listing additional badges in the title makes sense to me.",
+      "parentUuid": "8e23439c_aceb3e76",
+      "revId": "f635dd5866e4c6d27ec07099587dc4bb6af91d45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
