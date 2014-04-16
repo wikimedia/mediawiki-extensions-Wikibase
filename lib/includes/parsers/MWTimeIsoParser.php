@@ -13,7 +13,7 @@ use ValueParsers\StringValueParser;
 use ValueParsers\ValueParser;
 
 /**
- * Class to parse values that can be formatted by MWTimeIsoFormatter
+ * Class to parse values that can be formatted by TimeFormatter
  * This includes parsing of localized values
  *
  * @since 0.5
@@ -114,7 +114,7 @@ class MWTimeIsoParser extends StringValueParser {
 				$msg = new Message( $msgKey );
 				//FIXME: Use the language passed in options!
 				//The only reason we are not currently doing this is due to the formatting not currently Localizing
-				//See the fix me in: MwTimeIsoFormatter::getMessage
+				//See the fix me in: TimeFormatter::getMessage
 				//$msg->inLanguage( $this->lang ); // todo check other translations?
 				$msg->inLanguage( 'en' );
 				$msgText = $msg->text();

@@ -64,7 +64,7 @@ class WikibaseValueFormatterBuilders {
 			'VT:string' => 'ValueFormatters\StringFormatter',
 			'VT:globecoordinate' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newGlobeCoordinateFormatter' ),
 			'VT:quantity' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newQuantityFormatter' ),
-			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
+			'VT:time' => 'Wikibase\Lib\TimeFormatter',
 			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdFormatter' ),
 			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter'
 		),
@@ -525,7 +525,7 @@ class WikibaseValueFormatterBuilders {
 	 * @return HtmlTimeFormatter
 	 */
 	private static function newHtmlTimeFormatter( FormatterOptions $options, WikibaseValueFormatterBuilders $builders ) {
-		return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
+		return new HtmlTimeFormatter( $options, new TimeFormatter( $options ) );
 	}
 
 	/**

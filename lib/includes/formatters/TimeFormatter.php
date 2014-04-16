@@ -18,7 +18,7 @@ use ValueFormatters\ValueFormatterBase;
  *
  * @todo move me to DataValues-time
  */
-class MwTimeIsoFormatter extends ValueFormatterBase {
+class TimeFormatter extends ValueFormatterBase {
 
 	/**
 	 * MediaWiki language object.
@@ -63,8 +63,11 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		 * [8] => 02
 		 * [9] => 03
 		 */
-		$regexSuccess = preg_match( '/^(\+|\-)((\d{0,12})?(\d{4}))-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/',
-			$extendedIsoTimestamp, $matches );
+		$regexSuccess = preg_match(
+			'/^(\+|\-)((\d{0,12})?(\d{4}))-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/',
+			$extendedIsoTimestamp,
+			$matches
+		);
 
 		if( !$regexSuccess || intval( $matches[2] ) === 0 ) {
 			return $extendedIsoTimestamp;
