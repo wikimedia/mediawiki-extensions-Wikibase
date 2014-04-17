@@ -2,7 +2,23 @@
 
 namespace Wikibase\Test\Api;
 
+use DataValues\StringValue;
 use OutOfBoundsException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
+use Wikibase\EntityRevision;
 
 /**
  * @licence GNU GPL v2+
@@ -12,26 +28,30 @@ use OutOfBoundsException;
  */
 class EntityTestHelper {
 
-	//@todo allow data to be defined dynamically in tests
-	//this way this class need not contain data but only a way to
-	//manage it for the tests
-
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * @var string[] List of currently active handles and their current ids
 	 */
 	private static $activeHandles = array();
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * @var string[] List of currently active ids and their current handles
 	 */
 	private static $activeIds;
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * @var array[] Handles and any registered default output data
 	 */
 	private static $entityOutput = array();
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * @var array[] Set of pre defined entity data for use in tests
 	 */
 	private static $entityData = array(
@@ -81,8 +101,8 @@ class EntityTestHelper {
 						'property' => '%StringProp%',
 						'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ),
 					),
-					'type' => 'statement',
-					'rank' => 'normal' )
+						'type' => 'statement',
+						'rank' => 'normal' )
 				),
 			)
 		),
@@ -223,6 +243,13 @@ class EntityTestHelper {
 	);
 
 	/**
+	 * @var Entity[] filled by EntityTestHelper::fillTestEntities
+	 */
+	private static $testEntities = array();
+
+	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Get the entity with the given handle
 	 *
 	 * @param string $handle String handle of entity to get data for
@@ -244,6 +271,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Get the data to pass to the api to clear the entity with the given handle
 	 *
 	 * @param string $handle String handle of entity to get data for
@@ -261,6 +290,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Get the data to pass to the api to create the entity with the given handle
 	 *
 	 * @param string $handle
@@ -276,6 +307,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Get the data of the entity with the given handle we received after creation
 	 *
 	 * @param string $handle
@@ -333,6 +366,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Register the entity after it has been created
 	 *
 	 * @param string $handle
@@ -348,6 +383,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Unregister the entity after it has been cleared
 	 *
 	 * @param string $handle
@@ -359,6 +396,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * @return string[] List of currently active (registered) handles, using IDs as keys.
 	 */
 	public static function getActiveHandles() {
@@ -366,6 +405,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * @return string[] List of currently active (registered) IDs, using handles as keys.
 	 */
 	public static function getActiveIds() {
@@ -373,6 +414,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Return the id for the entity with the given handle
 	 *
 	 * @param string $handle String handle of entity to get data for
@@ -388,6 +431,8 @@ class EntityTestHelper {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * @param $id string of entityid
 	 * @return null|string id of current handle (if active)
 	 */
@@ -421,6 +466,241 @@ class EntityTestHelper {
 		} elseif ( is_string( $data ) ) {
 			$data = str_replace( array_keys( $idMap ), array_values( $idMap ), $data );
 		}
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityId|string $entityId
+	 *
+	 * @return null|Entity
+	 */
+	public static function getTestEntity( $entityId ) {
+		self::fillTestEntitiesIfEmpty();
+
+		if( $entityId instanceof EntityId ) {
+			$key = $entityId->getSerialization();
+		} else {
+			$key = $entityId;
+		}
+
+		if( array_key_exists( $key, self::$testEntities ) ) {
+			return self::$testEntities[ $key ];
+		} else {
+			return null;
+			// FIXME? Should this throw an exception?
+			// throw new StorageException( 'Thrown by: ' . __CLASS__ . __METHOD__ );
+		}
+	}
+
+	/**
+	 * Fills self::$testEntities with data (only if it is empty)
+	 */
+	private static function fillTestEntitiesIfEmpty() {
+		if( self::$testEntities === array() ) {
+			self::fillTestEntities();
+		}
+	}
+
+	/**
+	 * Fills self::$testEntities with data
+	 */
+	private static function fillTestEntities() {
+		$entities = array();
+
+		$entities['Q1'] = Item::newEmpty();
+		$entities['Q1']->setId( ItemId::newFromNumber( 1 ) );
+
+		$entities['Q2'] = Item::newEmpty();
+		$entities['Q2']->setId( ItemId::newFromNumber( 2 ) );
+
+		$entities['P1'] = Property::newFromType( 'string' );
+		$entities['P1']->setId( PropertyId::newFromNumber( 1 ) );
+
+		$entities['Q3'] = Item::newEmpty();
+		$entities['Q3']->setId( ItemId::newFromNumber( 3 ) );
+		$entities['Q3']->setFingerprint(
+			new Fingerprint(
+				new TermList(
+					array(
+						new Term( 'de', 'Berlin' ),
+						new Term( 'en', 'Berlin' ),
+						new Term( 'nb', 'Berlin' ),
+						new Term( 'nn', 'Berlin' ),
+					)
+				),
+				new TermList(
+					array(
+						new Term( 'de', 'Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.' ),
+						new Term( 'en', 'Capital city and a federated state of the Federal Republic of Germany.' ),
+						new Term( 'nb', 'Hovedsted og delstat og i Forbundsrepublikken Tyskland.' ),
+						new Term( 'nn', 'Hovudstad og delstat i Forbundsrepublikken Tyskland.' ),
+					)
+				),
+				new AliasGroupList(
+					array(
+						new AliasGroup( 'de', array( 'Dickes B' ) ),
+						new AliasGroup( 'en', array( 'Dickes B' ) ),
+						new AliasGroup( 'nl', array( 'Dickes B' ) ),
+					)
+				)
+			)
+		);
+		$entities['Q3']->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
+		$entities['Q3']->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
+		$entities['Q3']->addSiteLink( new SiteLink( 'nlwiki', 'Berlin' ) );
+		$entities['Q3']->addSiteLink( new SiteLink( 'nnwiki', 'Berlin' ) );
+		$claim = new Claim (
+			new PropertyValueSnak(
+				PropertyId::newFromNumber( 1 ),
+				new StringValue( 'imastring1' )
+			)
+		);
+		$claim->setGuid( 'Q3$E9DC0EA4-D0A0-429B-8F4D-048F2B5C9F73' );
+		$entities['Q3']->addClaim( $claim );
+
+		$entities['Q4'] = Item::newEmpty();
+		$entities['Q4']->setId( ItemId::newFromNumber( 4 ) );
+		$entities['Q4']->setFingerprint(
+			new Fingerprint(
+				new TermList(
+					array(
+						new Term( 'de', 'London' ),
+						new Term( 'en', 'London' ),
+						new Term( 'nb', 'London' ),
+						new Term( 'nn', 'London' ),
+					)
+				),
+				new TermList(
+					array(
+						new Term( 'de', 'Hauptstadt Englands und des Vereinigten Königreiches.' ),
+						new Term( 'en', 'Capital city of England and the United Kingdom.' ),
+						new Term( 'nb', 'Hovedsted i England og Storbritannia.' ),
+						new Term( 'nn', 'Hovudstad i England og Storbritannia.' ),
+					)
+				),
+				new AliasGroupList(
+					array(
+						new AliasGroup( 'de', array( 'City of London', 'Greater London' ) ),
+						new AliasGroup( 'en', array( 'City of London', 'Greater London' ) ),
+						new AliasGroup( 'nl', array( 'City of London', 'Greater London' ) ),
+					)
+				)
+			)
+		);
+		$entities['Q4']->addSiteLink( new SiteLink( 'dewiki', 'London' ) );
+		$entities['Q4']->addSiteLink( new SiteLink( 'enwiki', 'London' ) );
+		$entities['Q4']->addSiteLink( new SiteLink( 'nlwiki', 'London' ) );
+		$entities['Q4']->addSiteLink( new SiteLink( 'nnwiki', 'London' ) );
+
+		$entities['Q5'] = Item::newEmpty();
+		$entities['Q5']->setId( ItemId::newFromNumber( 5 ) );
+		$entities['Q5']->setFingerprint(
+			new Fingerprint(
+				new TermList(
+					array(
+						new Term( 'de', 'Oslo' ),
+						new Term( 'en', 'Oslo' ),
+						new Term( 'nb', 'Oslo' ),
+						new Term( 'nn', 'Oslo' ),
+					)
+				),
+				new TermList(
+					array(
+						new Term( 'de', 'Hauptstadt der Norwegen.' ),
+						new Term( 'en', 'Capital city in Norway.' ),
+						new Term( 'nb', 'Hovedsted i Norge.' ),
+						new Term( 'nn', 'Hovudstad i Noreg.' ),
+					)
+				),
+				new AliasGroupList(
+					array(
+						new AliasGroup( 'nb', array( 'Christiania', 'Kristiania' ) ),
+						new AliasGroup( 'nn', array( 'Christiania', 'Kristiania' ) ),
+						new AliasGroup( 'de', array( 'Oslo City' ) ),
+						new AliasGroup( 'en', array( 'Oslo City' ) ),
+						new AliasGroup( 'nl', array( 'Oslo City' ) ),
+					)
+				)
+			)
+		);
+		$entities['Q5']->addSiteLink( new SiteLink( 'dewiki', 'Oslo' ) );
+		$entities['Q5']->addSiteLink( new SiteLink( 'enwiki', 'Oslo' ) );
+		$entities['Q5']->addSiteLink( new SiteLink( 'nlwiki', 'Oslo' ) );
+		$entities['Q5']->addSiteLink( new SiteLink( 'nnwiki', 'Oslo' ) );
+
+		$entities['Q6'] = Item::newEmpty();
+		$entities['Q6']->setId( ItemId::newFromNumber( 6 ) );
+		$entities['Q6']->setFingerprint(
+			new Fingerprint(
+				new TermList(
+					array(
+						new Term( 'de', 'Episkopi Cantonment' ),
+						new Term( 'en', 'Episkopi Cantonment' ),
+						new Term( 'nl', 'Episkopi Cantonment' ),
+					)
+				),
+				new TermList(
+					array(
+						new Term( 'de', 'Sitz der Verwaltung der Mittelmeerinsel Zypern.' ),
+						new Term( 'en', 'The capital of Akrotiri and Dhekelia.' ),
+						new Term( 'nl', 'Het bestuurlijke centrum van Akrotiri en Dhekelia.' ),
+					)
+				),
+				new AliasGroupList(
+					array(
+						new AliasGroup( 'de', array( 'Episkopi' ) ),
+						new AliasGroup( 'en', array( 'Episkopi' ) ),
+						new AliasGroup( 'nl', array( 'Episkopi' ) ),
+					)
+				)
+			)
+		);
+		$entities['Q6']->addSiteLink( new SiteLink( 'dewiki', 'Episkopi Cantonment' ) );
+		$entities['Q6']->addSiteLink( new SiteLink( 'enwiki', 'Episkopi Cantonment' ) );
+		$entities['Q6']->addSiteLink( new SiteLink( 'nlwiki', 'Episkopi Cantonment' ) );
+
+		$entities['Q7'] = Item::newEmpty();
+		$entities['Q7']->setId( ItemId::newFromNumber( 7 ) );
+		$entities['Q7']->setFingerprint(
+			new Fingerprint(
+				new TermList(
+					array(
+						new Term( 'de', 'Leipzig' ),
+					)
+				),
+				new TermList(
+					array(
+						new Term( 'de', 'Stadt in Sachsen.' ),
+						new Term( 'en', 'City in Saxony.' ),
+					)
+				),
+				new AliasGroupList( array() )
+			)
+		);
+
+		$entities['Q8'] = Item::newEmpty();
+		$entities['Q8']->setId( ItemId::newFromNumber( 8 ) );
+		$entities['Q8']->setFingerprint(
+			new Fingerprint(
+				new TermList(
+					array(
+						new Term( 'de', 'Guangzhou' ),
+						new Term( 'yue', "廣州" ),
+						new Term( 'zh-cn', "广州市" ),
+					)
+				),
+				new TermList(
+					array(
+						new Term( 'en', 'Capital of Guangdong.' ),
+						new Term( 'zh-hk', "廣東的省會。" ),
+					)
+				),
+				new AliasGroupList( array() )
+			)
+		);
+
+		self::$testEntities = $entities;
 	}
 
 }
