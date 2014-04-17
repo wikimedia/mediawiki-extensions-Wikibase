@@ -21,6 +21,7 @@ use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
+use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -52,18 +53,9 @@ abstract class ApiWikibase extends ApiBase {
 	protected $errorReporter;
 
 	/**
-	 * Wrapper message for single errors
-	 *
-	 * @var bool|string
+	 * @var ExceptionLocalizer
 	 */
-	protected static $shortErrorContextMessage = false;
-
-	/**
-	 * Wrapper message for multiple errors
-	 *
-	 * @var bool|string
-	 */
-	protected static $longErrorContextMessage = false;
+	protected $exceptionLocalizer;
 
 	/**
 	 * @var EntityTitleLookup
@@ -124,9 +116,11 @@ abstract class ApiWikibase extends ApiBase {
 
 		$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
 
+		$this->exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+
 		$this->errorReporter = new ApiErrorReporter(
 			$this,
-			WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
+			$this->exceptionLocalizer,
 			$this->getContext()->getLanguage()
 		);
 	}
@@ -495,25 +489,11 @@ abstract class ApiWikibase extends ApiBase {
 	 * @return Status
 	 */
 	protected function getExceptionStatus( Exception $error ) {
-		$msg = $this->getExceptionMessage( $error );
+		$msg = $this->exceptionLocalizer->getExceptionMessage( $error );
 		$status = Status::newFatal( $msg );
 		$status->setResult( false, $error->getMessage() );
 
 		return $status;
-	}
-
-	/**
-	 * Generates a localization Message representing the given exception.
-	 * Knowledge about how to localize different kinds of exceptions is provided by
-	 * an ExceptionLocalizer service.
-	 *
-	 * @param Exception $error
-	 *
-	 * @return Message
-	 */
-	protected function getExceptionMessage( Exception $error ) {
-		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
-		return $localizer->getExceptionMessage( $error );
 	}
 
 	/**

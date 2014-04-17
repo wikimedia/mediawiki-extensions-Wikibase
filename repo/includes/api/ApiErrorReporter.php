@@ -131,7 +131,7 @@ class ApiErrorReporter {
 			throw new InvalidArgumentException( 'called dieStatus() with a non-fatal Status!' );
 		}
 
-		$this->addStatusToExtraData( $status, $extradata );
+		$this->addStatusToResult( $status, $extradata );
 
 		//XXX: when to prefer $statusCode over $errorCode?
 		list( $statusCode, $description ) = $this->apiModule->getErrorFromStatus( $status );
@@ -197,7 +197,7 @@ class ApiErrorReporter {
 	public function dieMessage( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
 		$description = $this->forceMessageLanguage( $message, 'en' )->useDatabase( false )->plain();
 
-		$this->addMessageToExtraData( $message, $extradata );
+		$this->addMessageToResult( $message, $extradata );
 
 		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
 
@@ -228,7 +228,7 @@ class ApiErrorReporter {
 		$message = wfMessage( $messageKey );
 
 		if ( $message->exists() ) {
-			$this->addMessageToExtraData( $message, $extradata );
+			$this->addMessageToResult( $message, $extradata );
 
 			$text = $this->forceMessageLanguage( $message, 'en' )->useDatabase( false )->plain();
 
@@ -263,19 +263,19 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Add the given message to the $extradata array, for use in an error report.
+	 * Add the given message to the $data array, for use in an error report.
 	 *
 	 * @param Message $message
-	 * @param array|null &$extradata
+	 * @param array|null &$data
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function addMessageToExtraData( Message $message, &$extradata ) {
-		if ( $extradata === null ) {
-			$extradata = array();
+	public function addMessageToResult( Message $message, &$data ) {
+		if ( $data === null ) {
+			$data = array();
 		}
 
-		if ( !is_array( $extradata ) ) {
+		if ( !is_array( $data ) ) {
 			throw new InvalidArgumentException( '$extradata must be an array' );
 		}
 
@@ -283,28 +283,28 @@ class ApiErrorReporter {
 
 		$res = $this->apiModule->getResult();
 
-		$messageList = isset( $extradata['messages'] ) ? $extradata['messages'] : array();
+		$messageList = isset( $data['messages'] ) ? $data['messages'] : array();
 		$res->setIndexedTagName( $messageList, 'message' );
 
 		$messageList[] = $messageData;
-		$res->setElement( $extradata, 'messages', $messageList, ApiResult::OVERRIDE );
+		$res->setElement( $data, 'messages', $messageList, ApiResult::OVERRIDE );
 	}
 
 	/**
-	 * Add the messages from the given Status object to the $extradata array,
+	 * Add the messages from the given Status object to the $data array,
 	 * for use in an error report.
 	 *
 	 * @param Status $status
-	 * @param array|null &$extradata
+	 * @param array|null &$data
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function addStatusToExtraData( Status $status, &$extradata ) {
+	public function addStatusToResult( Status $status, &$data ) {
 		$messageSpecs = $status->getErrorsArray();
 		$messages = $this->convertToMessageList( $messageSpecs );
 
 		foreach ( $messages as $message ) {
-			$this->addMessageToExtraData( $message, $extradata );
+			$this->addMessageToResult( $message, $data );
 		}
 	}
 
