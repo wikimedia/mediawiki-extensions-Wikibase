@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_b36f088f",
+        "filename": "repo/includes/api/ParseValue.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-17T09:19:02Z",
+      "side": 1,
+      "message": "You removed this method a few days later in Ibb169101bd75e4244ba7cae404ccaf49b9b3171d.",
+      "revId": "7cc91cf2558b7cd893d6d2793ce89b1f006d54b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
