@@ -92,7 +92,7 @@ class Fingerprint {
 	/**
 	 * @return AliasGroupList
 	 */
-	public function getAliases() {
+	public function getAliasGroups() {
 		return $this->aliasGroups;
 	}
 
