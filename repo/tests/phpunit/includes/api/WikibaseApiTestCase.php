@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Api;
 
 use ApiTestCase;
+use DataValues\StringValue;
 use Revision;
 use TestSites;
 use TestUser;
