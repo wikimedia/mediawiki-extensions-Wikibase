@@ -6,9 +6,6 @@ use ApiBase;
 use ApiMain;
 use Exception;
 use LogicException;
-use Message;
-use MessageCache;
-use Profiler;
 use Status;
 use UsageException;
 use User;
@@ -43,51 +40,71 @@ use Wikibase\SummaryFormatter;
 abstract class ApiWikibase extends ApiBase {
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var ResultBuilder
 	 */
 	protected $resultBuilder;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var ApiErrorReporter
 	 */
 	protected $errorReporter;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var ExceptionLocalizer
 	 */
 	protected $exceptionLocalizer;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var EntityTitleLookup
 	 */
 	protected $titleLookup;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var EntityIdParser
 	 */
 	protected $idParser;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var EntityRevisionLookup
 	 */
 	protected $entityLookup;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var EntityStore
 	 */
 	protected $entityStore;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var PropertyDataTypeLookup
 	 */
 	protected $dataTypeLookup;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var SummaryFormatter
 	 */
 	protected $summaryFormatter;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @var EntityPermissionChecker
 	 */
 	protected $permissionChecker;
@@ -102,7 +119,6 @@ abstract class ApiWikibase extends ApiBase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		//TODO: provide a mechanism to override the services
 		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
@@ -123,6 +139,25 @@ abstract class ApiWikibase extends ApiBase {
 			$this->exceptionLocalizer,
 			$this->getContext()->getLanguage()
 		);
+	}
+
+	/**
+	 * Used to override services when testing
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityStore $entityStore
+	 */
+	public function overrideServices(
+		$entityTitleLookup,
+		$entityRevisionLookup,
+		$entityStore
+	) {
+		$this->titleLookup = $entityTitleLookup;
+		$this->entityLookup = $entityRevisionLookup;
+		$this->entityStore = $entityStore;
 	}
 
 	/**
