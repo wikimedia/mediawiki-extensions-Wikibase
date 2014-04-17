@@ -14,7 +14,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 	private $labels;
 	private $descriptions;
-	private $aliases;
+	private $aliasGroups;
 
 	public function setUp() {
 		$this->labels = $this->getMockBuilder( 'Wikibase\DataModel\Term\TermList' )
@@ -23,16 +23,16 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->descriptions = $this->getMockBuilder( 'Wikibase\DataModel\Term\TermList' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->aliases = $this->getMockBuilder( 'Wikibase\DataModel\Term\AliasGroupList' )
+		$this->aliasGroups = $this->getMockBuilder( 'Wikibase\DataModel\Term\AliasGroupList' )
 			->disableOriginalConstructor()->getMock();
 	}
 
 	public function testConstructorSetsValues() {
-		$fingerprint = new Fingerprint( $this->labels, $this->descriptions, $this->aliases );
+		$fingerprint = new Fingerprint( $this->labels, $this->descriptions, $this->aliasGroups );
 
 		$this->assertEquals( $this->labels, $fingerprint->getLabels() );
 		$this->assertEquals( $this->descriptions, $fingerprint->getDescriptions() );
-		$this->assertEquals( $this->aliases, $fingerprint->getAliases() );
+		$this->assertEquals( $this->aliasGroups, $fingerprint->getAliasGroups() );
 	}
 
 }
