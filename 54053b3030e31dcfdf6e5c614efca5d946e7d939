@@ -52,6 +52,24 @@
       "revId": "54053b3030e31dcfdf6e5c614efca5d946e7d939",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_93af6cde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-17T11:32:13Z",
+      "side": 1,
+      "message": "I\u0027m sure you don\u0027t need me to explain this. ;-) It\u0027s a fallback that\u0027s displayed if a validator doesn\u0027t provide a message. But they should provide messages. Ideally this message will never be seen.\n\nLet\u0027s put it that way: I assure you, I\u0027m a fan of punctuation. I will always fix it if I\u0027m sure it\u0027s missing. :-)",
+      "parentUuid": "8e23439c_d04cbaa1",
+      "revId": "54053b3030e31dcfdf6e5c614efca5d946e7d939",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
