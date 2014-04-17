@@ -5,13 +5,18 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use SiteSQLStore;
+use SiteStore;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SiteLinkCache;
+use Wikibase\store\EntityStore;
 use Wikibase\StoreFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
@@ -32,12 +37,12 @@ class GetEntities extends ApiWikibase {
 	/**
 	 * @var StringNormalizer
 	 */
-	protected $stringNormalizer;
+	private $stringNormalizer;
 
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
-	protected $languageFallbackChainFactory;
+	private $languageFallbackChainFactory;
 
 	/**
 	 * @var SiteLinkTargetProvider
@@ -45,11 +50,14 @@ class GetEntities extends ApiWikibase {
 	private $siteLinkTargetProvider;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var array
 	 */
-	protected $siteLinkGroups;
+	private $siteLinkGroups;
+
+	/**
+	 * @var SiteLinkCache
+	 */
+	private $siteLinkCache;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -66,6 +74,29 @@ class GetEntities extends ApiWikibase {
 		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
 		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+	}
+
+	/**
+	 * @see ApiWikibase::overrideService
+	 *
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityStore $entityStore
+	 * @param SiteLinkCache $siteLinkCache
+	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 */
+	public function overrideServices(
+		$entityTitleLookup,
+		$entityRevisionLookup,
+		$entityStore,
+		$siteLinkCache,
+		$siteLinkTargetProvider
+	) {
+		$this->titleLookup = $entityTitleLookup;
+		$this->entityLookup = $entityRevisionLookup;
+		$this->entityStore = $entityStore;
+		$this->siteLinkCache = $siteLinkCache;
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 	}
 
 	/**
@@ -150,12 +181,10 @@ class GetEntities extends ApiWikibase {
 	 * @return ItemByTitleHelper
 	 */
 	private function getItemByTitleHelper() {
-		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
-		$siteStore = SiteSQLStore::newInstance();
 		return new ItemByTitleHelper(
 			$this->getResultBuilder(),
-			$siteLinkCache,
-			$siteStore,
+			$this->siteLinkCache,
+			SiteSQLStore::newInstance(),
 			$this->stringNormalizer
 		);
 	}
