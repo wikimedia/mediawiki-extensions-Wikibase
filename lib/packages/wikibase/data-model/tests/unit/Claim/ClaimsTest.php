@@ -61,7 +61,7 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		return $claim;
 	}
 
-	public function testConstructorFromObject() {
+	public function testArrayObjectNotConstructedFromObject() {
 		$claim1 = $this->makeClaim( new PropertyNoValueSnak( 1 ) );
 		$claim2 = $this->makeClaim( new PropertyNoValueSnak( 2 ) );
 
@@ -69,10 +69,11 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$byPropertyIdArray->append( $claim1 );
 
 		$claims = new Claims( $byPropertyIdArray );
-		// "This method cannot be called when the ArrayObject was constructed from an object."
+		// According to the documentation append() "cannot be called when the ArrayObject was
+		// constructed from an object." This test makes sure it was not constructed from an object.
 		$claims->append( $claim2 );
 
-		$this->assertEquals( 2, $claims->count() );
+		$this->assertCount( 2, $claims );
 	}
 
 	/**

@@ -28,7 +28,7 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
-	public function testConstructorFromObject() {
+	public function testArrayObjectNotConstructedFromObject() {
 		$claim1 = new Claim( new PropertyNoValueSnak( 1 ) );
 		$claim1->setGuid( '1' );
 		$claim2 = new Claim( new PropertyNoValueSnak( 2 ) );
@@ -38,10 +38,11 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$claims->append( $claim1 );
 
 		$byPropertyIdArray = new ByPropertyIdArray( $claims );
-		// "This method cannot be called when the ArrayObject was constructed from an object."
+		// According to the documentation append() "cannot be called when the ArrayObject was
+		// constructed from an object." This test makes sure it was not constructed from an object.
 		$byPropertyIdArray->append( $claim2 );
 
-		$this->assertEquals( 2, $byPropertyIdArray->count() );
+		$this->assertCount( 2, $byPropertyIdArray );
 	}
 
 	/**
