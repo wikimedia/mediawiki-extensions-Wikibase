@@ -8,9 +8,20 @@ use ApiTestCase;
 use FauxRequest;
 use MediaWikiTestCase;
 use RequestContext;
+use Site;
+use SiteList;
 use TestSites;
 use TestUser;
+use Title;
 use UsageException;
+use Wikibase\Api\SiteLinkTargetProvider;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
+use Wikibase\EntityTitleLookup;
+use Wikibase\SiteLinkCache;
+use Wikibase\store\EntityStore;
 
 /**
  * This class can be used instead of the Mediawiki Api TestCase.
@@ -26,22 +37,18 @@ abstract class IndependentWikibaseApiTestCase extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		static $isSetup = false;
-
-		ApiTestCase::$users['wbeditor'] = new TestUser(
+		$testUser = new TestUser(
 			'Apitesteditor',
 			'Api Test Editor',
 			'api_test_editor@example.com',
 			array( 'wbeditor' )
 		);
 
-		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->user );
+		$this->setMwGlobals( 'wgUser', $testUser->user );
 
-		if ( !$isSetup ) {
-			//TODO remove me once everything that needs this is overridden
-			TestSites::insertIntoDb();
-			$isSetup = true;
-		}
+		//TODO remove me once everything that needs this is overridden
+		TestSites::insertIntoDb();
+
 	}
 
 	/**
@@ -108,5 +115,130 @@ abstract class IndependentWikibaseApiTestCase extends MediaWikiTestCase {
 	 * @return string Class name for the module being tested
 	 */
 	abstract protected function getModuleClass();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	protected function getMockEntityRevisionLookup() {
+		$mock = $this->getMockBuilder( '\Wikibase\EntityRevisionLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getEntityRevision' )
+			->will( $this->returnCallback( function( EntityId $entityId, $revisionId = 0 ) {
+				$entity = EntityTestHelper::getTestEntity( $entityId );
+				if( $entity === null ) {
+					return null;
+				}
+				return new EntityRevision( $entity );
+			} ) );
+		return $mock;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityTitleLookup
+	 */
+	protected function getMockEntityTitleLookup() {
+		$mock = $this->getMockBuilder( '\Wikibase\EntityTitleLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnValue( $this->getMockTitle() ) );
+		return $mock;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return Title
+	 */
+	protected function getMockTitle() {
+		$mock = $this->getMockBuilder( 'Title' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getArticleID' )
+			->will( $this->returnValue( 1 ) );
+		$mock->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( 0 ) );
+		$mock->expects( $this->any() )
+			->method( 'getPrefixedText' )
+			->will( $this->returnValue( 'mockPrefixedTitle' ) );
+		return $mock;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return SiteLinkCache
+	 */
+	protected function getMockSiteLinkCache() {
+		$mock = $this->getMockBuilder( '\Wikibase\SiteLinkCache' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getItemIdForLink' )
+			->will( $this->returnCallback(
+				function( $globalSiteId, $pageTitle ) {
+					switch ( $pageTitle ) {
+						case 'Berlin':
+							return ItemId::newFromNumber( 3 );
+						case 'London':
+							return ItemId::newFromNumber( 4 );
+						case 'Oslo':
+							return ItemId::newFromNumber( 5 );
+						case 'Episkopi Cantonment':
+							return ItemId::newFromNumber( 6 );
+					}
+					return null;
+				}
+			) );
+		return $mock;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityStore
+	 */
+	protected function getMockEntityStore() {
+		$mock = $this->getMockBuilder( '\Wikibase\store\EntityStore' )
+			->disableOriginalConstructor()
+			->getMock();
+		return $mock;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return SiteLinkTargetProvider
+	 */
+	protected function getMockSiteLinkTargetProvider() {
+		$mock = $this->getMockBuilder( '\Wikibase\Api\SiteLinkTargetProvider' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( $this->any() )
+			->method( 'getSiteList' )
+			->will( $this->returnCallback(
+				function( $groups ) {
+					$siteList = new SiteList();
+					$allSites = TestSites::getSites();
+					/** @var Site $site */
+					foreach ( $allSites as $site ) {
+						if ( in_array( $site->getGroup(), $groups ) ) {
+							$siteList->append( $site );
+						}
+					}
+					return $siteList;
+				}
+			) );
+		return $mock;
+	}
 
 }
