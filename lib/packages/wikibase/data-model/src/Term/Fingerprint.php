@@ -23,12 +23,12 @@ class Fingerprint {
 
 	private $labels;
 	private $descriptions;
-	private $aliases;
+	private $aliasGroups;
 
-	public function __construct( TermList $labels, TermList $descriptions, AliasGroupList $aliases ) {
+	public function __construct( TermList $labels, TermList $descriptions, AliasGroupList $aliasGroups ) {
 		$this->labels = $labels;
 		$this->descriptions = $descriptions;
-		$this->aliases = $aliases;
+		$this->aliasGroups = $aliasGroups;
 	}
 
 	/**
@@ -48,8 +48,8 @@ class Fingerprint {
 	/**
 	 * @return AliasGroupList
 	 */
-	public function getAliases() {
-		return $this->aliases;
+	public function getAliasGroups() {
+		return $this->aliasGroups;
 	}
 
 }
