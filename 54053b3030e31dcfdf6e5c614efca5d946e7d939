@@ -34,6 +34,24 @@
       "revId": "54053b3030e31dcfdf6e5c614efca5d946e7d939",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d04cbaa1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-04-17T07:40:52Z",
+      "side": 1,
+      "message": "If there are different use cases for this message, the message should have a unique key for each use.",
+      "parentUuid": "8e23439c_583576a2",
+      "revId": "54053b3030e31dcfdf6e5c614efca5d946e7d939",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
