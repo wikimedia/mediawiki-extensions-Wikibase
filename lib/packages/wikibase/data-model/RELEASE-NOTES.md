@@ -1,5 +1,19 @@
 # Wikibase DataModel release notes
 
+## Version 0.7.4 (dev)
+
+#### Additions
+
+* `Fingerprint::getLabel`
+* `Fingerprint::setLabel`
+* `Fingerprint::removeLabel`
+* `Fingerprint::getDescription`
+* `Fingerprint::setDescription`
+* `Fingerprint::removeDescription`
+* `Fingerprint::getAliasGroup`
+* `Fingerprint::setAliasGroup`
+* `Fingerprint::removeAliasGroup`
+
 ## Version 0.7.3 (2014-04-11)
 
 #### Additions
