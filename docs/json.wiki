@@ -206,7 +206,7 @@ Site links are given as records for each site identifier. Each such record conta
 }
 </syntaxhighlight>
 
-A Claim consists of a main value (or main Snak) and a number of qualifier Snaks. A Statement is a Claim that also contains a (possibly empty) list of source references.
+A Claim consists of a main value (or main Snak) and a number of qualifier Snaks. A Statement is a Claim that also contains a (possibly empty) list of references.
 A claim is always associated with a Property (semantically, the Claim is ''about'' the Property), and there can be multiple Claims about the same Property in a single Entity.
 This is represented by a map structure that uses Property IDs as keys, and maps them to lists of Claim records.
 
@@ -217,7 +217,7 @@ A Claim record uses the following fields:
 * '''''mainsnak''''': If the claim has the type ''value'', it has a ''mainsnak'' field that contains the Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the property the Claim is associated with. That is, if a value claim is provided for property P17, its main Snak will specify P17 as the property the value is assigned to.
 * '''rank''': Ihe rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either ''preferred'', ''normal'' or ''deprecated''.
 * '''qualifiers''': Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See [[#Qualifiers|Qualifiers]] below.
-* '''''references''''': If the Claim's type is ''statement'', there may be a list of source references, given as a list of reference records. See [[#References|References]] below.
+* '''''references''''': If the Claim's type is ''statement'', there may be a list of references, given as a list of reference records. See [[#References|References]] below.
 
 === Snaks ===
 
@@ -468,7 +468,7 @@ resulting in a map which associates property IDs with one list of snaks each.
 }
 </syntaxhighlight>
 
-References provide provenance/authority information for individual claims. Each source reference
+References provide provenance/authority information for individual claims. Each reference
 is a set of Snaks structured in a similar way to how qualifiers are represented: Snaks about the same
 property are grouped together in a list and made accessible by putting all these lists into a map,
 using the property IDs as keys.
