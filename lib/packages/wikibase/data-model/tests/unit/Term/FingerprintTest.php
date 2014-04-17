@@ -69,7 +69,6 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $this->labels, $fingerprint->getLabels() );
 		$this->assertEquals( $this->descriptions, $fingerprint->getDescriptions() );
-
 		$this->assertEquals( $this->aliasGroups, $fingerprint->getAliasGroups() );
 	}
 
