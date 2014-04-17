@@ -50,19 +50,13 @@ class Fingerprint {
 	 * @param Term $label
 	 */
 	public function setLabel( Term $label ) {
-		$this->descriptions->setTerm( $label );
+		$this->labels->setTerm( $label );
 	}
 
 	/**
-	 * @param string|Term $languageCode
+	 * @param string $languageCode
 	 */
 	public function removeLabel( $languageCode ) {
-		if ( $languageCode instanceof Term ) {
-			/** @var Term $term */
-			$term = $languageCode;
-			$languageCode = $term->getLanguageCode();
-		}
-
 		$this->labels->removeByLanguage( $languageCode );
 	}
 
@@ -89,15 +83,9 @@ class Fingerprint {
 	}
 
 	/**
-	 * @param string|Term $languageCode
+	 * @param string $languageCode
 	 */
 	public function removeDescription( $languageCode ) {
-		if ( $languageCode instanceof Term ) {
-			/** @var Term $term */
-			$term = $languageCode;
-			$languageCode = $term->getLanguageCode();
-		}
-
 		$this->descriptions->removeByLanguage( $languageCode );
 	}
 
@@ -124,15 +112,9 @@ class Fingerprint {
 	}
 
 	/**
-	 * @param string|AliasGroup $languageCode
+	 * @param string $languageCode
 	 */
 	public function removeAliasGroup( $languageCode ) {
-		if ( $languageCode instanceof AliasGroup ) {
-			/** @var AliasGroup $aliasGroup */
-			$aliasGroup = $languageCode;
-			$languageCode = $aliasGroup->getLanguageCode();
-		}
-
 		$this->aliasGroups->removeByLanguage( $languageCode );
 	}
 
