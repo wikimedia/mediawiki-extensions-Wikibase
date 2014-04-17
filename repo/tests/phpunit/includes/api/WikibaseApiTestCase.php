@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Api;
 
 use ApiTestCase;
+use DataValues\StringValue;
 use Revision;
 use TestSites;
 use TestUser;
@@ -75,6 +76,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		return $this->doApiRequest( $params, $session, false, $user );
 	}
 
+	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 */
 	protected function initTestEntities( array $handles, array $idMap = array() ) {
 		$activeHandles = EntityTestHelper::getActiveHandles();
 
@@ -99,6 +103,8 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 *
 	 * Loads an entity from the database (via an API call).
 	 */
 	protected function loadEntity( $id ) {
@@ -113,6 +119,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	}
 
 	/**
+	 * @deprecated Please override the services in the API and use getTestEntity instead
+	 * @see doTestQueryExceptions in NewWikibaeApiTestCase
+	 *
 	 * Do the test for exceptions from Api queries.
 	 * @param $params array of params for the api query
 	 * @param $exception array details of the exception to expect (type,code,message)

@@ -5,6 +5,7 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use SiteSQLStore;
+use SiteStore;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
@@ -54,6 +55,21 @@ class GetEntities extends ApiWikibase {
 	private $siteLinkGroups;
 
 	/**
+	 * @var ItemByTitleHelper
+	 */
+	private $itemByTitleHelper;
+
+	/**
+	 * @var SiteLinkCache
+	 */
+	private $siteLinkCache;
+
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -62,12 +78,17 @@ class GetEntities extends ApiWikibase {
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
-		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
-		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
+		$this->siteStore = SiteSQLStore::newInstance();
+
+		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( $this->siteStore );
+
+		$this->languageFallbackChainFactory =
+			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+		$this->siteLinkGroups =
+			WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
 	}
 
 	/**
@@ -163,7 +184,8 @@ class GetEntities extends ApiWikibase {
 		$ids = array();
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$itemByTitleHelper = $this->getItemByTitleHelper();
-			list( $ids, $missingItems ) =  $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
+			list( $ids, $missingItems ) =
+				$itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
 			$this->addMissingItemsToResult( $missingItems );
 		}
 		return $ids;
@@ -173,20 +195,21 @@ class GetEntities extends ApiWikibase {
 	 * @return ItemByTitleHelper
 	 */
 	private function getItemByTitleHelper() {
-		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
-		$siteStore = SiteSQLStore::newInstance();
-		return new ItemByTitleHelper(
-			$this->getResultBuilder(),
-			$siteLinkCache,
-			$siteStore,
-			$this->stringNormalizer
-		);
+		if( !isset( $this->itemByTitleHelper ) ) {
+			$this->itemByTitleHelper = new ItemByTitleHelper(
+				$this->getResultBuilder(),
+				$this->siteLinkCache,
+				$this->siteStore,
+				$this->stringNormalizer
+			);
+		}
+		return $this->itemByTitleHelper;
 	}
 
 	/**
 	 * @param array $missingItems Array of arrays, Each internal array has a key 'site' and 'title'
 	 */
-	private function addMissingItemsToResult( $missingItems ){
+	private function addMissingItemsToResult( $missingItems ) {
 		foreach( $missingItems as $missingItem ) {
 			$this->getResultBuilder()->addMissingEntity( $missingItem );
 		}

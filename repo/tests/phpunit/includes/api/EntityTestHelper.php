@@ -471,6 +471,22 @@ class EntityTestHelper {
 	/**
 	 * @since 0.5
 	 *
+	 * @param EntityId $entityId
+	 * @param int $revisionId
+	 *
+	 * @return null|EntityRevision
+	 */
+	public static function getEntityRevision( EntityId $entityId, $revisionId = 0 ) {
+		$entity = self::getTestEntity( $entityId );
+		if( $entity === null ) {
+			return null;
+		}
+		return new EntityRevision( $entity );
+	}
+
+	/**
+	 * @since 0.5
+	 *
 	 * @param EntityId|string $entityId
 	 *
 	 * @return null|Entity
