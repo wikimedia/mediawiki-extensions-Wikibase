@@ -28,7 +28,7 @@
 	"wikibase-cancel": "取消",
 	"wikibase-add": "添加",
 	"wikibase-addqualifier": "添加限定符",
-	"wikibase-addreference": "添加来源",
+	"wikibase-addreference": "加入来源",
 	"wikibase-save-inprogress": "正在保存…",
 	"wikibase-remove-inprogress": "正在删除…",
 	"wikibase-label-empty": "标签尚未定义",

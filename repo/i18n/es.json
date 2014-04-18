@@ -20,7 +20,8 @@
 			"The Anonymouse",
 			"Vivaelcelta",
 			"Zolo",
-			"Chocolate con galleta"
+			"Chocolate con galleta",
+			"아라"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -30,7 +31,7 @@
 	"wikibase-cancel": "cancelar",
 	"wikibase-add": "añadir",
 	"wikibase-addqualifier": "añadir un calificativo",
-	"wikibase-addreference": "añadir una fuente",
+	"wikibase-addreference": "añadir referencia",
 	"wikibase-save-inprogress": "Guardando...",
 	"wikibase-remove-inprogress": "Eliminando...",
 	"wikibase-label-empty": "No se ha definido ninguna etiqueta todavía.",
@@ -74,8 +75,8 @@
 	"wikibase-aliases-empty": "No hay alias definidos.",
 	"wikibase-propertypage-datatype": "Tipo de dato",
 	"wikibase-claimview-snak-tooltip": "Ingresa un valor correspondiente a la propiedad \"$1\". Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir una alternativa y especificar un valor personalizado haciendo clic en el icono junto a la caja de entrada del valor.",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|fuente|fuentes}}",
-	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|Una fuente|$1 fuentes}} aún no se guardó",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referencia|referencias}}",
+	"wikibase-statementview-referencesheading-pendingcountertooltip": "Aún no se guarda{{PLURAL:$1| una referencia|n $1 referencias}}",
 	"wikibase-snakview-property-input-placeholder": "propiedad",
 	"wikibase-snakview-choosesnaktype": "Elige un tipo de valor.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "El valor no cumple con la definición de la propiedad.",
