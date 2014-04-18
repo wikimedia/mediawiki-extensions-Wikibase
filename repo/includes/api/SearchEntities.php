@@ -12,6 +12,7 @@ use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\Term;
+use Wikibase\TermIndex;
 use Wikibase\Utils;
 
 /**
@@ -31,18 +32,24 @@ use Wikibase\Utils;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig < thiemo.maettig@wikimedia.de >
+ * @author Adam Shorland
  */
 class SearchEntities extends ApiBase {
 
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $titleLookup;
+	private $titleLookup;
 
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $idParser;
+	private $idParser;
+
+	/**
+	 * @var TermIndex
+	 */
+	private $termIndex;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -54,9 +61,23 @@ class SearchEntities extends ApiBase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		//TODO: provide a mechanism to override the services
 		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$this->termIndex = StoreFactory::getStore()->getTermIndex();
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param TermIndex $termIndex
+	 */
+	public function overrideServices(
+		$entityTitleLookup,
+		$termIndex
+	) {
+		$this->titleLookup = $entityTitleLookup;
+		$this->termIndex = $termIndex;
 	}
 
 	/**
@@ -76,7 +97,7 @@ class SearchEntities extends ApiBase {
 	protected function searchEntities( $term, $entityType, $language, $limit, $prefixSearch ) {
 		wfProfileIn( __METHOD__ );
 
-		$ids = StoreFactory::getStore()->getTermIndex()->getMatchingIDs(
+		$ids = $this->termIndex->getMatchingIDs(
 			array(
 				new \Wikibase\Term( array(
 					'termType' 		=> \Wikibase\Term::TYPE_LABEL,
@@ -221,7 +242,7 @@ class SearchEntities extends ApiBase {
 		}
 
 		// Find all the remaining terms for the given entities
-		$terms = StoreFactory::getStore()->getTermIndex()->getTermsOfEntities( $ids, $entityType,
+		$terms = $this->termIndex->getTermsOfEntities( $ids, $entityType,
 			$language );
 		// TODO: This needs to be rethought when a different search engine is used
 		$aliasPattern = '/^' . preg_quote( $search, '/' ) . '/i';
@@ -385,9 +406,12 @@ class SearchEntities extends ApiBase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsearchentities&search=abc&language=en' => 'Search for "abc" in English language, with defaults for type and limit',
-			'api.php?action=wbsearchentities&search=abc&language=en&limit=50' => 'Search for "abc" in English language with a limit of 50',
-			'api.php?action=wbsearchentities&search=alphabet&language=en&type=property' => 'Search for "alphabet" in English language for type property',
+			'api.php?action=wbsearchentities&search=abc&language=en' =>
+				'Search for "abc" in English language, with defaults for type and limit',
+			'api.php?action=wbsearchentities&search=abc&language=en&limit=50' =>
+				'Search for "abc" in English language with a limit of 50',
+			'api.php?action=wbsearchentities&search=alphabet&language=en&type=property' =>
+				'Search for "alphabet" in English language for type property',
 		);
 	}
 
