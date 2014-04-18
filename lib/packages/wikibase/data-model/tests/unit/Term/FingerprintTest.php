@@ -83,6 +83,14 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $term, $this->fingerprint->getLabel( 'en' ) );
 	}
 
+	public function testRemoveLabel() {
+		$labels = new TermList( array(
+			new Term( 'de', 'delabel' ),
+		) );
+		$this->fingerprint->removeLabel( 'en' );
+		$this->assertEquals( $labels, $this->fingerprint->getLabels() );
+	}
+
 	/**
 	 * @expectedException OutOfBoundsException
 	 */
@@ -102,6 +110,14 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $description, $this->fingerprint->getDescription( 'en' ) );
 	}
 
+	public function testRemoveDescription() {
+		$descriptions = new TermList( array(
+			new Term( 'de', 'dedescription' ),
+		) );
+		$this->fingerprint->removeDescription( 'en' );
+		$this->assertEquals( $descriptions, $this->fingerprint->getDescriptions() );
+	}
+
 	/**
 	 * @expectedException OutOfBoundsException
 	 */
@@ -119,6 +135,14 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$aliasGroup = new AliasGroup( 'en', array( 'changed' ) );
 		$this->fingerprint->setAliasGroup( $aliasGroup );
 		$this->assertEquals( $aliasGroup, $this->fingerprint->getAliasGroup( 'en' ) );
+	}
+
+	public function testRemoveAliasGroup() {
+		$aliasGroups = new AliasGroupList( array(
+			new AliasGroup( 'de', array( 'dealias' ) ),
+		) );
+		$this->fingerprint->removeAliasGroup( 'en' );
+		$this->assertEquals( $aliasGroups, $this->fingerprint->getAliases() );
 	}
 
 	/**

@@ -4,15 +4,16 @@
 
 #### Additions
 
-* `Fingerprint::getLabel`
-* `Fingerprint::setLabel`
-* `Fingerprint::removeLabel`
-* `Fingerprint::getDescription`
-* `Fingerprint::setDescription`
-* `Fingerprint::removeDescription`
-* `Fingerprint::getAliasGroup`
-* `Fingerprint::setAliasGroup`
-* `Fingerprint::removeAliasGroup`
+* Added methods to `Fingerprint`:
+	* `getLabel`
+	* `setLabel`
+	* `removeLabel`
+	* `getDescription`
+	* `setDescription`
+	* `removeDescription`
+	* `getAliasGroup`
+	* `setAliasGroup`
+	* `removeAliasGroup`
 
 ## Version 0.7.3 (2014-04-11)
 
