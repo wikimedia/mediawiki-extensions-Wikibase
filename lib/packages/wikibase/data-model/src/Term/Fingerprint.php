@@ -7,6 +7,7 @@ namespace Wikibase\DataModel\Term;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class Fingerprint {
 
