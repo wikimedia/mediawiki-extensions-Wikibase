@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel;
 
 use ArrayIterator;
+use Comparable;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
@@ -10,7 +11,7 @@ use OutOfBoundsException;
 use Traversable;
 
 /**
- * Immutable collection of SiteLink objects.
+ * Immutable unordered collection of SiteLink objects.
  * SiteLink objects can be accessed by site id.
  * Only one SiteLink per site id can exist in the collection.
  *
@@ -19,7 +20,7 @@ use Traversable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkList implements IteratorAggregate, Countable {
+class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 
 	private $siteLinks = array();
 
@@ -27,7 +28,7 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	 * @param SiteLink[] $siteLinks
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $siteLinks ) {
+	public function __construct( array $siteLinks = array() ) {
 		foreach ( $siteLinks as $siteLink ) {
 			if ( !( $siteLink instanceof SiteLink ) ) {
 				throw new InvalidArgumentException( 'SiteLinkList only accepts SiteLink objects' );
@@ -79,6 +80,23 @@ class SiteLinkList implements IteratorAggregate, Countable {
 		}
 
 		return $this->siteLinks[$siteId];
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.7.4
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( !( $target instanceof self ) ) {
+			return false;
+		}
+
+		return $this->siteLinks == $target->siteLinks;
 	}
 
 }
