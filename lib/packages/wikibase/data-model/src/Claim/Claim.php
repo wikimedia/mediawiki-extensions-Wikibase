@@ -285,9 +285,13 @@ class Claim implements Hashable, Serializable, Comparable {
 			return false;
 		}
 
+		return $this->claimFieldsEqual( $target );
+	}
+
+	protected function claimFieldsEqual( Claim $target ) {
 		return $this->guid === $target->getGuid()
-			&& $this->mainSnak->equals( $target->getMainSnak() )
-			&& $this->qualifiers->equals( $target->getQualifiers() );
+		&& $this->mainSnak->equals( $target->getMainSnak() )
+		&& $this->qualifiers->equals( $target->getQualifiers() );
 	}
 
 }
