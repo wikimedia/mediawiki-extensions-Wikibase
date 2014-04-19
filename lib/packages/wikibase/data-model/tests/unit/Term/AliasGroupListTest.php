@@ -182,4 +182,71 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedList, $list );
 	}
 
+	public function testEmptyListEqualsEmptyList() {
+		$list = new AliasGroupList( array() );
+		$this->assertTrue( $list->equals( new AliasGroupList( array() ) ) );
+	}
+
+	public function testFilledListEqualsItself() {
+		$list = new AliasGroupList( array(
+			new AliasGroup( 'en', array( 'foo' ) ),
+			new AliasGroup( 'de', array( 'bar' ) ),
+		) );
+
+		$this->assertTrue( $list->equals( $list ) );
+		$this->assertTrue( $list->equals( clone $list ) );
+	}
+
+	public function testDifferentListsDoNotEqual() {
+		$list = new AliasGroupList( array(
+			new AliasGroup( 'en', array( 'foo' ) ),
+			new AliasGroup( 'de', array( 'bar' ) ),
+		) );
+
+		$this->assertFalse( $list->equals( new AliasGroupList( array() ) ) );
+
+		$this->assertFalse( $list->equals(
+			new AliasGroupList( array(
+				new AliasGroup( 'en', array( 'foo' ) ),
+				new AliasGroup( 'de', array( 'bar' ) ),
+				new AliasGroup( 'nl', array( 'baz' ) ),
+			) )
+		) );
+	}
+
+	public function testGivenNonAliasGroupList_equalsReturnsFalse() {
+		$list = new AliasGroupList( array() );
+		$this->assertFalse( $list->equals( null ) );
+		$this->assertFalse( $list->equals( new \stdClass() ) );
+	}
+
+	public function testGivenListsThatOnlyDifferInOrder_equalsReturnsTrue() {
+		$list = new AliasGroupList( array(
+			new AliasGroup( 'en', array( 'foo' ) ),
+			new AliasGroup( 'de', array( 'bar' ) ),
+		) );
+
+		$this->assertTrue( $list->equals(
+			new AliasGroupList( array(
+				new AliasGroup( 'de', array( 'bar' ) ),
+				new AliasGroup( 'en', array( 'foo' ) ),
+			) )
+		) );
+	}
+
+	public function testGivenNonSetLanguageGroup_hasAliasGroupReturnsFalse() {
+		$list = new AliasGroupList( array() );
+		$this->assertFalse( $list->hasAliasGroup( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+	}
+
+	public function testGivenMismatchingGroup_hasAliasGroupReturnsFalse() {
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'cats' ) ) ) );
+		$this->assertFalse( $list->hasAliasGroup( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+	}
+
+	public function testGivenMatchingGroup_hasAliasGroupReturnsTrue() {
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+		$this->assertTrue( $list->hasAliasGroup( new AliasGroup( 'en', array( 'kittens' ) ) ) );
+	}
+
 }
