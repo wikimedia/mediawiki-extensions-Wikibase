@@ -281,7 +281,7 @@ class Claim implements Hashable, Serializable, Comparable {
 	 * @return boolean
 	 */
 	public function equals( $target ) {
-		if ( !( $target instanceof self ) ) {
+		if ( !( $target instanceof self ) || $target instanceof Statement ) {
 			return false;
 		}
 
