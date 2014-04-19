@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 
@@ -357,6 +358,23 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 				new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ) ),
 			),
 		);
+	}
+
+	public function testCanConstructWithItemIdSet() {
+		$badgesArray = array(
+			new ItemId( 'Q36' ),
+			new ItemId( 'Q149' ),
+		);
+		$badges = new ItemIdSet( $badgesArray );
+
+		$siteLink = new SiteLink( 'foo', 'bar', $badges );
+
+		$this->assertEquals( $badgesArray, $siteLink->getBadges() );
+	}
+
+	public function testGivenNonItemIdCollectionForBadges_constructorThrowsException() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new SiteLink( 'foo', 'bar', 42 );
 	}
 
 }
