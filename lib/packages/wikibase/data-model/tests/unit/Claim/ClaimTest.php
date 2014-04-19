@@ -207,4 +207,64 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertGreaterThanOrEqual( count( $claim->getQualifiers() ) +1, count( $snaks ), "At least one snak per Qualifier" );
 	}
+
+	public function testGivenNonClaim_equalsReturnsFalse() {
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+
+		$this->assertFalse( $claim->equals( null ) );
+		$this->assertFalse( $claim->equals( 42 ) );
+		$this->assertFalse( $claim->equals( new \stdClass() ) );
+	}
+
+	public function testGivenSameClaim_equalsReturnsTrue() {
+		$claim = new Claim(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) )
+		);
+
+		$claim->setGuid( 'kittens' );
+
+		$this->assertTrue( $claim->equals( $claim ) );
+		$this->assertTrue( $claim->equals( clone $claim ) );
+	}
+
+	public function testGivenClaimWithDifferentProperty_equalsReturnsFalse() {
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$this->assertFalse( $claim->equals( new Claim( new PropertyNoValueSnak( 43 ) ) ) );
+	}
+
+	public function testGivenClaimWithDifferentSnakType_equalsReturnsFalse() {
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$this->assertFalse( $claim->equals( new Claim( new PropertySomeValueSnak( 42 ) ) ) );
+	}
+
+	public function testGivenClaimWithDifferentQualifiers_equalsReturnsFalse() {
+		$claim = new Claim(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) )
+		);
+
+		$differentClaim = new Claim(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array(
+				new PropertyNoValueSnak( 32202 ),
+			) )
+		);
+
+		$this->assertFalse( $claim->equals( $differentClaim ) );
+	}
+
+	public function testGivenClaimWithDifferentGuids_equalsReturnsFalse() {
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+
+		$differentClaim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$differentClaim->setGuid( 'kittens' );
+
+		$this->assertFalse( $claim->equals( $differentClaim ) );
+	}
+
 }
