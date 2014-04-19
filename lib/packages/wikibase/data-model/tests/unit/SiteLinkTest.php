@@ -180,13 +180,6 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 			new PropertyId( 'P3' )
 		) );
 
-		// duplicates
-		$argLists[] = array( array(
-			new ItemId( 'Q42' ),
-			new ItemId( 'q149' ),
-			new ItemId( 'q42' )
-		) );
-
 		return $argLists;
 	}
 
@@ -316,6 +309,54 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 
 		return $argLists;
+	}
+
+	/**
+	 * @dataProvider linkProvider
+	 */
+	public function testSelfComparisonReturnsTrue( SiteLink $link ) {
+		$this->assertTrue( $link->equals( $link ) );
+
+		$linkCopy = unserialize( serialize( $link ) );
+		$this->assertTrue( $link->equals( $linkCopy ) );
+		$this->assertTrue( $linkCopy->equals( $link ) );
+	}
+
+	public function linkProvider() {
+		return array(
+			array( new SiteLink( 'foo', 'Bar' ) ),
+			array( new SiteLink( 'foo', 'Bar', array( new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ) ) ),
+			array( new SiteLink( 'foo', 'foo' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider nonEqualityProvider
+	 */
+	public function testGivenNonEqualLinks_equalsReturnsFalse( SiteLink $linkOne, SiteLink $linkTwo ) {
+		$this->assertFalse( $linkOne->equals( $linkTwo ) );
+		$this->assertFalse( $linkTwo->equals( $linkOne ) );
+	}
+
+	public function nonEqualityProvider() {
+		return array(
+			array(
+				new SiteLink( 'foo', 'bar' ),
+				new SiteLink( 'foo', 'Bar' ),
+			),
+			array(
+				new SiteLink( 'foo', 'bar' ),
+				new SiteLink( 'Foo', 'bar' ),
+			),
+			array(
+				new SiteLink( 'foo', 'bar' ),
+				new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ) ) ),
+			),
+			array(
+				new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ) ) ),
+				new SiteLink( 'foo', 'bar', array( new ItemId( 'Q42' ), new ItemId( 'Q9001' ) ) ),
+			),
+		);
 	}
 
 }
