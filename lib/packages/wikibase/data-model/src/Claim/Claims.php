@@ -558,12 +558,17 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 		}
 
 		foreach ( $this as $claim ) {
-			if ( !$target->hasClaim( $claim ) ) {
+			if ( !$target->hasExactClaim( $claim ) ) {
 				return false;
 			}
 		}
 
 		return true;
+	}
+
+	private function hasExactClaim( Claim $claim ) {
+		return $this->hasClaim( $claim )
+			&& $this->getClaimWithGuid( $claim->getGuid() )->equals( $claim );
 	}
 
 }

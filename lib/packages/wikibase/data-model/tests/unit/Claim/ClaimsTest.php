@@ -821,4 +821,17 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $list->equals( $otherList ) );
 	}
 
+	public function testGivenDifferentClaimWithSameGuid_equalsReturnsFalse() {
+		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim->setGuid( 'kittens' );
+
+		$newClaim = new Claim( new PropertyNoValueSnak( 1337 ) );
+		$newClaim->setGuid( 'kittens' );
+
+		$list = new Claims( array( $claim ) );
+		$newList = new Claims( array( $newClaim ) );
+
+		$this->assertFalse( $list->equals( $newList ) );
+	}
+
 }
