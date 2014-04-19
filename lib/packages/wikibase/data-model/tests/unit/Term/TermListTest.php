@@ -186,4 +186,71 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedList, $list );
 	}
 
+	public function testEmptyListEqualsEmptyList() {
+		$list = new TermList( array() );
+		$this->assertTrue( $list->equals( new TermList( array() ) ) );
+	}
+
+	public function testFilledListEqualsItself() {
+		$list = new TermList( array(
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
+		) );
+
+		$this->assertTrue( $list->equals( $list ) );
+		$this->assertTrue( $list->equals( clone $list ) );
+	}
+
+	public function testDifferentListsDoNotEqual() {
+		$list = new TermList( array(
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
+		) );
+
+		$this->assertFalse( $list->equals( new TermList( array() ) ) );
+
+		$this->assertFalse( $list->equals(
+			new TermList( array(
+				new Term( 'en', 'foo' ),
+				new Term( 'de', 'bar' ),
+				new Term( 'nl', 'baz' ),
+			) )
+		) );
+	}
+
+	public function testGivenNonTermList_equalsReturnsFalse() {
+		$list = new TermList( array() );
+		$this->assertFalse( $list->equals( null ) );
+		$this->assertFalse( $list->equals( new \stdClass() ) );
+	}
+
+	public function testGivenListsThatOnlyDifferInOrder_equalsReturnsTrue() {
+		$list = new TermList( array(
+			new Term( 'en', 'foo' ),
+			new Term( 'de', 'bar' ),
+		) );
+
+		$this->assertTrue( $list->equals(
+			new TermList( array(
+				new Term( 'de', 'bar' ),
+				new Term( 'en', 'foo' ),
+			) )
+		) );
+	}
+
+	public function testGivenNonSetLanguageTerm_hasTermReturnsFalse() {
+		$list = new TermList( array() );
+		$this->assertFalse( $list->hasTerm( new Term( 'en', 'kittens' ) ) );
+	}
+
+	public function testGivenMismatchingTerm_hasTermReturnsFalse() {
+		$list = new TermList( array( new Term( 'en', 'cats' ) ) );
+		$this->assertFalse( $list->hasTerm( new Term( 'en', 'kittens' ) ) );
+	}
+
+	public function testGivenMatchingTerm_hasTermReturnsTrue() {
+		$list = new TermList( array( new Term( 'en', 'kittens' ) ) );
+		$this->assertTrue( $list->hasTerm( new Term( 'en', 'kittens' ) ) );
+	}
+
 }
