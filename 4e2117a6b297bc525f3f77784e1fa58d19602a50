@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_7cd37430",
+        "filename": "repo/tests/phpunit/includes/api/IntegrationApiTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-19T01:30:05Z",
+      "side": 1,
+      "message": "Guess this is meant to be a data provider? Then it should be apiRequestProvider",
+      "revId": "4e2117a6b297bc525f3f77784e1fa58d19602a50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
