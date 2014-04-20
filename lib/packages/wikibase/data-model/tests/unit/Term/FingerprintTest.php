@@ -153,4 +153,96 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->fingerprint->getAliasGroup( 'en' );
 	}
 
+	/**
+	 * @dataProvider fingerprintProvider
+	 */
+	public function testFingerprintsEqualThemselves( Fingerprint $fingerprint ) {
+		$this->assertTrue( $fingerprint->equals( $fingerprint ) );
+		$this->assertTrue( $fingerprint->equals( clone $fingerprint ) );
+	}
+
+	public function fingerprintProvider() {
+		return array(
+			array(
+				Fingerprint::newEmpty()
+			),
+			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				)
+			),
+			array(
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new AliasGroupList( array() )
+				)
+			),
+			array(
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array() ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ) ),
+					new TermList( array( new Term( 'de', 'baz' ) ) ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider differentFingerprintsProvider
+	 */
+	public function testDifferentFingerprintsDoNotEqual( Fingerprint $one, Fingerprint $two ) {
+		$this->assertFalse( $one->equals( $two ) );
+	}
+
+	public function differentFingerprintsProvider() {
+		return array(
+			array(
+				Fingerprint::newEmpty(),
+				new Fingerprint(
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				)
+			),
+			array(
+				Fingerprint::newEmpty(),
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new AliasGroupList( array() )
+				)
+			),
+			array(
+				Fingerprint::newEmpty(),
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array() ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ) ),
+					new TermList( array( new Term( 'de', 'HAX' ) ) ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				),
+				new Fingerprint(
+					new TermList( array( new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ) ),
+					new TermList( array( new Term( 'de', 'baz' ) ) ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+		);
+	}
+
 }
