@@ -17,6 +17,7 @@
 	"wikibase-diffview-alias": "лақаптар",
 	"wikibase-diffview-description": "сипаттамасы",
 	"wikibase-diffview-link": "сілтемелер",
+	"wikibase-error-unexpected": "Күтпеген қате шықты: $1",
 	"wikibase-error-ui-edit-conflict": "Осында өңдеу қақтығысы. Қайта жүктеңіз және қайтадан сақтаңыз.",
 	"wikibase-sitelinks-wikipedia": "Бұл элементке Уикипедия беттері сілтенген",
 	"wikibase-sitelinks-sitename-columnheading": "Тіл",

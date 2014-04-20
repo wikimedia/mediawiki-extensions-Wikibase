@@ -5,7 +5,8 @@
 			"Kwj2772",
 			"Priviet",
 			"관인생략",
-			"아라"
+			"아라",
+			"Namoroka"
 		]
 	},
 	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",
@@ -25,7 +26,7 @@
 	"wikibase-diffview-alias": "별칭",
 	"wikibase-diffview-description": "설명",
 	"wikibase-diffview-link": "링크",
-	"wikibase-error-unexpected": "예기치 않은 오류가 발생했습니다.",
+	"wikibase-error-unexpected": "예기치 않은 오류가 발생했습니다: $1.",
 	"wikibase-error-save-generic": "저장을 수행하는 동안 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다.",
 	"wikibase-error-remove-generic": "삭제를 수행하는 동안 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다.",
 	"wikibase-error-save-connection": "저장을 수행하는 동안 연결 오류가 발생했기 때문에 바뀜을 완료할 수 없습니다. 인터넷 연결을 확인하세요.",

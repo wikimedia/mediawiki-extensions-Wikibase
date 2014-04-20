@@ -46,6 +46,7 @@
 	"wikibase-sitelinks-link-columnheading": "Verlinkt Säit",
 	"wikibase-tooltip-error-details": "Detailer",
 	"wikibase-undeserializable-value": "De Wäert ass net valabel a kann net gewise ginn.",
+	"wikibase-validator-invalid": "Net valabele Wäert",
 	"wikibase-validator-bad-type": "$2 amplaz vu(n) $1",
 	"wikibase-validator-no-such-entity": "$1 net fonnt",
 	"wikibase-validator-no-such-property": "Eegeschaft $1 net fonnt",
