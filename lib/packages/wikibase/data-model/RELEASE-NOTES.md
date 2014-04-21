@@ -4,6 +4,15 @@
 
 #### Additions
 
+* Made these classes implement `Comparable`:
+	* `TermList` 
+	* `AliasGroupList`
+	* `Fingerprint`
+	* `SiteLink`
+	* `SiteLinkList`
+	* `Claim`
+	* `Claims`
+	* `Statement`
 * Added methods to `Fingerprint`:
 	* `getLabel`
 	* `setLabel`
@@ -14,6 +23,7 @@
 	* `getAliasGroup`
 	* `setAliasGroup`
 	* `removeAliasGroup`
+* Added `ItemIdSet`
 
 ## Version 0.7.3 (2014-04-11)
 
