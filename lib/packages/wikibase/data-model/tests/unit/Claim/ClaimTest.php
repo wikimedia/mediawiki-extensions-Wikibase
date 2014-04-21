@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -205,6 +206,11 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	public function testGetAllSnaks( Claim $claim ) {
 		$snaks = $claim->getAllSnaks();
 
-		$this->assertGreaterThanOrEqual( count( $claim->getQualifiers() ) +1, count( $snaks ), "At least one snak per Qualifier" );
+		$this->assertGreaterThanOrEqual(
+			count( $claim->getQualifiers() ) + 1,
+			count( $snaks ),
+			"At least one snak per Qualifier"
+		);
 	}
+
 }
