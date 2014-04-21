@@ -25,7 +25,7 @@ class IntegrationApiTest extends ApiTestCase {
 		TestSites::insertIntoDb();
 	}
 
-	public function provideApiRequests() {
+	public function apiRequestProvider() {
 		return array(
 			'wbgetentities-id' => array(
 				array(
@@ -63,7 +63,7 @@ class IntegrationApiTest extends ApiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideApiRequests
+	 * @dataProvider apiRequestProvider
 	 */
 	public function testApiModuleResult( $params, $expected ) {
 		list( $result ) = $this->doApiRequest( $params );
