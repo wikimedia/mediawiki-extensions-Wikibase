@@ -142,7 +142,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 */
 	public function hasAliasGroup( AliasGroup $group ) {
 		return array_key_exists( $group->getLanguageCode(), $this->groups )
-		&& $this->groups[$group->getLanguageCode()]->equals( $group );
+			&& $this->groups[$group->getLanguageCode()]->equals( $group );
 	}
 
 }
