@@ -15,8 +15,6 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 
 /**
- * This factory is package private. Outside access is prohibited.
- *
  * Factory for constructing deserializers that implement handling for the legacy format.
  *
  * @since 1.0
