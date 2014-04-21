@@ -212,6 +212,19 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $list->equals(
 			new TermList( array(
 				new Term( 'en', 'foo' ),
+			) )
+		) );
+
+		$this->assertFalse( $list->equals(
+			new TermList( array(
+				new Term( 'en', 'foo' ),
+				new Term( 'de', 'HAX' ),
+			) )
+		) );
+
+		$this->assertFalse( $list->equals(
+			new TermList( array(
+				new Term( 'en', 'foo' ),
 				new Term( 'de', 'bar' ),
 				new Term( 'nl', 'baz' ),
 			) )
