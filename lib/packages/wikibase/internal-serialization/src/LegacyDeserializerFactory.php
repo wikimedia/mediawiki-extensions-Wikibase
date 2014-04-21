@@ -89,7 +89,7 @@ class LegacyDeserializerFactory {
 	/**
 	 * @return Deserializer
 	 */
-	private function newClaimDeserializer() {
+	public function newClaimDeserializer() {
 		$snakDeserializer = $this->newSnakDeserializer();
 
 		return new LegacyClaimDeserializer(
