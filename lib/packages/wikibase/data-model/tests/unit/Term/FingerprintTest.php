@@ -142,7 +142,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 			new AliasGroup( 'de', array( 'dealias' ) ),
 		) );
 		$this->fingerprint->removeAliasGroup( 'en' );
-		$this->assertEquals( $aliasGroups, $this->fingerprint->getAliases() );
+		$this->assertEquals( $aliasGroups, $this->fingerprint->getAliasGroups() );
 	}
 
 	/**
