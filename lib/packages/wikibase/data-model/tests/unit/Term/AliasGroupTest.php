@@ -30,15 +30,32 @@ class AliasGroupTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $filledGroup->isEmpty() );
 	}
 
-	public function testEquality() {
+	public function testGroupEqualsItself() {
 		$group = new AliasGroup( 'en', array( 'foo', 'bar' ) );
 
 		$this->assertTrue( $group->equals( $group ) );
 		$this->assertTrue( $group->equals( clone $group ) );
+	}
+
+	public function testGroupDoesNotEqualOnesWithMoreOrFewerValues() {
+		$group = new AliasGroup( 'en', array( 'foo', 'bar' ) );
 
 		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'foo' ) ) ) );
-		$this->assertFalse( $group->equals( new AliasGroup( 'de', array( 'foo' ) ) ) );
+		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'foo', 'bar', 'baz' ) ) ) );
+	}
+
+	public function testGroupDoesNotEqualWhenLanguageMismatches() {
+		$group = new AliasGroup( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertFalse( $group->equals( new AliasGroup( 'de', array( 'foo', 'bar' ) ) ) );
 		$this->assertFalse( $group->equals( new AliasGroup( 'de', array() ) ) );
+	}
+
+	public function testGroupDoesNotEqualWhenOrderIsDifferent() {
+		$group = new AliasGroup( 'en', array( 'foo', 'bar', 'baz' ) );
+
+		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'foo', 'baz', 'bar' ) ) ) );
+		$this->assertFalse( $group->equals( new AliasGroup( 'en', array( 'baz', 'bar', 'foo' ) ) ) );
 	}
 
 	public function testDuplicatesAreRemoved() {
