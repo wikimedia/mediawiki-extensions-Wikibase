@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
@@ -187,4 +188,87 @@ class StatementTest extends ClaimTest {
 
 		$this->assertGreaterThanOrEqual( $c, count( $snaks ), "At least one snak per Qualifier and Reference" );
 	}
+
+	public function testGivenNonStatement_equalsReturnsFalse() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+
+		$this->assertFalse( $statement->equals( null ) );
+		$this->assertFalse( $statement->equals( 42 ) );
+		$this->assertFalse( $statement->equals( new \stdClass() ) );
+	}
+
+	public function testGivenSameStatement_equalsReturnsTrue() {
+		$statement = new Statement(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) ),
+			new ReferenceList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) )
+		);
+
+		$statement->setGuid( 'kittens' );
+
+		$this->assertTrue( $statement->equals( $statement ) );
+		$this->assertTrue( $statement->equals( clone $statement ) );
+	}
+
+	public function testGivenStatementWithDifferentProperty_equalsReturnsFalse() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$this->assertFalse( $statement->equals( new Statement( new PropertyNoValueSnak( 43 ) ) ) );
+	}
+
+	public function testGivenStatementWithDifferentSnakType_equalsReturnsFalse() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$this->assertFalse( $statement->equals( new Statement( new PropertySomeValueSnak( 42 ) ) ) );
+	}
+
+	public function testStatementClaimWithDifferentQualifiers_equalsReturnsFalse() {
+		$statement = new Statement(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) )
+		);
+
+		$differentStatement = new Statement(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array(
+				new PropertyNoValueSnak( 32202 ),
+			) )
+		);
+
+		$this->assertFalse( $statement->equals( $differentStatement ) );
+	}
+
+	public function testGivenStatementWithDifferentGuids_equalsReturnsFalse() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+
+		$differentStatement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$differentStatement->setGuid( 'kittens' );
+
+		$this->assertFalse( $statement->equals( $differentStatement ) );
+	}
+
+	public function testStatementClaimWithDifferentReferences_equalsReturnsFalse() {
+		$statement = new Statement(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array() ),
+			new ReferenceList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) )
+		);
+
+		$differentStatement = new Statement(
+			new PropertyNoValueSnak( 42 ),
+			new SnakList( array() ),
+			new ReferenceList( array(
+				new PropertyNoValueSnak( 32202 ),
+			) )
+		);
+
+		$this->assertFalse( $statement->equals( $differentStatement ) );
+	}
+
 }

@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Claim;
 
 use ArrayObject;
+use Comparable;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Differ\Differ;
 use Diff\DiffOp\DiffOpAdd;
@@ -26,8 +27,9 @@ use Wikibase\DataModel\Snak\Snak;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author H. Snater < mediawiki@snater.com >
  */
-class Claims extends ArrayObject implements ClaimListAccess, Hashable {
+class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparable {
 
 	/**
 	 * @see GenericArrayObject::__construct
@@ -536,4 +538,37 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable {
 
 		return $claims;
 	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.7.4
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( !( $target instanceof self ) ) {
+			return false;
+		}
+
+		if ( $this->count() !== $target->count() ) {
+			return false;
+		}
+
+		foreach ( $this as $claim ) {
+			if ( !$target->hasExactClaim( $claim ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private function hasExactClaim( Claim $claim ) {
+		return $this->hasClaim( $claim )
+			&& $this->getClaimWithGuid( $claim->getGuid() )->equals( $claim );
+	}
+
 }

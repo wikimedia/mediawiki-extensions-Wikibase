@@ -9,6 +9,7 @@ use OutOfBoundsException;
 use Traversable;
 
 /**
+ * Unordered list of AliasGroup objects.
  * Only one group per language code. If multiple groups with the same language code
  * are provided, only the last one will be retained.
  *
@@ -21,6 +22,9 @@ use Traversable;
  */
 class AliasGroupList implements Countable, IteratorAggregate {
 
+	/**
+	 * @var AliasGroup[]
+	 */
 	private $groups = array();
 
 	/**
@@ -100,6 +104,45 @@ class AliasGroupList implements Countable, IteratorAggregate {
 		else {
 			$this->groups[$group->getLanguageCode()] = $group;
 		}
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.7.4
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( !( $target instanceof self ) ) {
+			return false;
+		}
+
+		if ( $this->count() !== $target->count() ) {
+			return false;
+		}
+
+		foreach ( $this->groups as $group ) {
+			if ( !$target->hasAliasGroup( $group ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @param AliasGroup $group
+	 *
+	 * @return boolean
+	 */
+	public function hasAliasGroup( AliasGroup $group ) {
+		return array_key_exists( $group->getLanguageCode(), $this->groups )
+		&& $this->groups[$group->getLanguageCode()]->equals( $group );
 	}
 
 }

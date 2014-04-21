@@ -194,4 +194,23 @@ class Statement extends Claim {
 
 		return $snaks;
 	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.7.4
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( !( $target instanceof self ) ) {
+			return false;
+		}
+
+		return $this->claimFieldsEqual( $target )
+			&& $this->references->equals( $target->getReferences() );
+	}
+
 }

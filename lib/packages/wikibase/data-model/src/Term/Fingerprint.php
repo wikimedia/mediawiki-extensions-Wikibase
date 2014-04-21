@@ -2,13 +2,16 @@
 
 namespace Wikibase\DataModel\Term;
 
+use Comparable;
+
 /**
  * @since 0.7.3
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
-class Fingerprint {
+class Fingerprint implements Comparable {
 
 	/**
 	 * @return Fingerprint
@@ -116,6 +119,25 @@ class Fingerprint {
 	 */
 	public function removeAliasGroup( $languageCode ) {
 		$this->aliasGroups->removeByLanguage( $languageCode );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.7.4
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( !( $target instanceof self ) ) {
+			return false;
+		}
+
+		return $this->descriptions->equals( $target->getDescriptions() )
+			&& $this->labels->equals( $target->getLabels() )
+			&& $this->aliasGroups->equals( $target->getAliases() );
 	}
 
 }

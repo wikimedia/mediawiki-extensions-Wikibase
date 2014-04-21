@@ -2,11 +2,16 @@
 
 namespace Wikibase\DataModel;
 
+use Comparable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdSet;
 
 /**
- * Value object representing a link to another site.
+ * Immutable value object representing a link to a page on another site.
+ *
+ * A set of badges, represented as ItemId objects, acts as flags
+ * describing attributes of the linked to page.
  *
  * @since 0.4
  *
@@ -14,20 +19,20 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Michał Łazowik
  */
-class SiteLink {
+class SiteLink implements Comparable {
 
 	protected $siteId;
 	protected $pageName;
 
 	/**
-	 * @var ItemId[]
+	 * @var ItemIdSet
 	 */
 	protected $badges;
 
 	/**
 	 * @param string $siteId
 	 * @param string $pageName
-	 * @param ItemId[] $badges
+	 * @param ItemIdSet|ItemId[] $badges
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -40,32 +45,20 @@ class SiteLink {
 			throw new InvalidArgumentException( '$pageName needs to be a string' );
 		}
 
-		$this->assertBadgesAreValid( $badges );
-
 		$this->siteId = $siteId;
 		$this->pageName = $pageName;
-		$this->badges = array_values( $badges );
+		$this->setBadges( $badges );
 	}
 
-	/**
-	 * @param ItemId[] $badges
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	protected function assertBadgesAreValid( $badges ) {
-		if ( !is_array( $badges ) ) {
-			throw new InvalidArgumentException( '$badges needs to be an array' );
+	private function setBadges( $badges ) {
+		if ( is_array( $badges ) ) {
+			$badges = new ItemIdSet( $badges );
+		}
+		elseif ( !( $badges instanceof ItemIdSet ) ) {
+			throw new InvalidArgumentException( '$badges needs to be ItemIdSet or ItemId[]' );
 		}
 
-		foreach( $badges as $badge ) {
-			if ( !( $badge instanceof ItemId ) ) {
-				throw new InvalidArgumentException( 'Each element in $badges needs to be an ItemId' );
-			}
-		}
-
-		if ( count( $badges ) !== count( array_unique( $badges ) ) ) {
-			throw new InvalidArgumentException( '$badges array cannot contain duplicates' );
-		}
+		$this->badges = $badges;
 	}
 
 	/**
@@ -94,7 +87,7 @@ class SiteLink {
 	 * @return ItemId[]
 	 */
 	public function getBadges() {
-		return $this->badges;
+		return array_values( iterator_to_array( $this->badges ) );
 	}
 
 	/**
@@ -176,6 +169,25 @@ class SiteLink {
 		}
 
 		return $badges;
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.7.4
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( !( $target instanceof self ) ) {
+			return false;
+		}
+
+		return $this->siteId === $target->siteId
+			&& $this->pageName === $target->pageName
+			&& $this->badges->equals( $target->badges );
 	}
 
 }

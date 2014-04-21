@@ -2,7 +2,10 @@
 
 namespace Wikibase\DataModel\Claim;
 
+use Comparable;
+use Hashable;
 use InvalidArgumentException;
+use Serializable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -18,7 +21,7 @@ use Wikibase\DataModel\Snak\Snaks;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Claim implements \Hashable, \Serializable {
+class Claim implements Hashable, Serializable, Comparable {
 
 	/**
 	 * Rank enum. Higher values are more preferred.
@@ -267,4 +270,28 @@ class Claim implements \Hashable, \Serializable {
 
 		return $snaks;
 	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.7.4
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( !( $target instanceof self ) || $target instanceof Statement ) {
+			return false;
+		}
+
+		return $this->claimFieldsEqual( $target );
+	}
+
+	protected function claimFieldsEqual( Claim $target ) {
+		return $this->guid === $target->getGuid()
+		&& $this->mainSnak->equals( $target->getMainSnak() )
+		&& $this->qualifiers->equals( $target->getQualifiers() );
+	}
+
 }

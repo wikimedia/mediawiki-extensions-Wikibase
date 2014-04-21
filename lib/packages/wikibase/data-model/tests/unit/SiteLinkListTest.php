@@ -149,4 +149,47 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $link, $list->getBySiteId( 'first' ) );
 	}
 
+	/**
+	 * @dataProvider siteLinkArrayProvider
+	 */
+	public function testGivenTheSameSet_equalsReturnsTrue( array $links ) {
+		$list = new SiteLinkList( $links );
+		$this->assertTrue( $list->equals( $list ) );
+		$this->assertTrue( $list->equals( clone $list ) );
+	}
+
+	public function testGivenNonSiteLinkList_equalsReturnsFalse() {
+		$set = new SiteLinkList();
+		$this->assertFalse( $set->equals( null ) );
+		$this->assertFalse( $set->equals( new \stdClass() ) );
+	}
+
+	public function testGivenDifferentList_equalsReturnsFalse() {
+		$listOne = new SiteLinkList( array(
+			new SiteLink( 'foo', 'spam' ),
+			new SiteLink( 'bar', 'hax' ),
+		) );
+
+		$listTwo = new SiteLinkList( array(
+			new SiteLink( 'foo', 'spam' ),
+			new SiteLink( 'bar', 'HAX' ),
+		) );
+
+		$this->assertFalse( $listOne->equals( $listTwo ) );
+	}
+
+	public function testGivenSetWithDifferentOrder_equalsReturnsTrue() {
+		$listOne = new SiteLinkList( array(
+			new SiteLink( 'foo', 'spam' ),
+			new SiteLink( 'bar', 'hax' ),
+		) );
+
+		$listTwo = new SiteLinkList( array(
+			new SiteLink( 'bar', 'hax' ),
+			new SiteLink( 'foo', 'spam' ),
+		) );
+
+		$this->assertTrue( $listOne->equals( $listTwo ) );
+	}
+
 }
