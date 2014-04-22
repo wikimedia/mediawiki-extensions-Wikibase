@@ -22,6 +22,8 @@ interface EntityTitleLookup {
 	 * If the entity does not exist, this method will return either null,
 	 * or a Title object referring to a page that does not exist.
 	 *
+	 * @todo change this to return a TitleValue
+	 *
 	 * @since 0.4
 	 *
 	 * @param EntityId $id
