@@ -2,14 +2,11 @@
 
 namespace Wikibase\content;
 
-use Message;
-use SiteStore;
-use Status;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityTitleLookup;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\SiteLinkLookup;
 
 /**
@@ -23,29 +20,15 @@ use Wikibase\SiteLinkLookup;
 class SiteLinkUniquenessValidator implements EntityValidator {
 
 	/**
-	 * @var SiteStore
-	 */
-	protected $siteStore;
-
-	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinkLookup;
+	private $siteLinkLookup;
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	protected $entityTitleLookup;
-
-	/**
-	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param SiteStore $siteStore
 	 */
-	function __construct( EntityTitleLookup $entityTitleLookup, SiteLinkLookup $siteLinkLookup, SiteStore $siteStore ) {
-		$this->entityTitleLookup = $entityTitleLookup;
+	function __construct( SiteLinkLookup $siteLinkLookup ) {
 		$this->siteLinkLookup = $siteLinkLookup;
-		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -84,20 +67,14 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 */
 	protected function getConflictError( array $conflict ) {
 		$entityId = ItemId::newFromNumber( $conflict['itemId'] );
-		$conflictingTitle = $this->entityTitleLookup->getTitleForId( $entityId );
-
-		$site = $this->siteStore->getSite( $conflict['siteId'] );
-		$pageUrl = $site->getPageUrl( $conflict['sitePage'] );
 
 		return Error::newError(
 			'SiteLink conflict',
 			'sitelink',
-			'sitelink-already-used',
+			'sitelink-conflict',
 			array(
-				$pageUrl,
-				$conflict['sitePage'],
-				$conflictingTitle->getFullText(),
-				$conflict['siteId'],
+				new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),
+				$entityId,
 			)
 		);
 	}

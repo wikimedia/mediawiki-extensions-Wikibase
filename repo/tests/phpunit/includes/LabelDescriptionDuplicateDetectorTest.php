@@ -68,10 +68,9 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'label',
 			'label-conflict',
 			array(
-				'label',
-				'en',
 				'item label',
-				'Q42'
+				'en',
+				new ItemId( 'Q42' )
 			)
 		);
 
@@ -175,10 +174,9 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'label',
 			'label-with-description-conflict',
 			array(
-				'label',
-				'en',
 				'item label',
-				'Q42'
+				'en',
+				new ItemId( 'Q42' )
 			)
 		);
 

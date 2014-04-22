@@ -5,6 +5,7 @@ namespace Wikibase\i18n;
 use Exception;
 use Message;
 use MessageException;
+use ValueFormatters\ValueFormatter;
 use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -29,8 +30,12 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 	 */
 	protected $validatorErrorLocalizer;
 
-	public function __construct() {
-		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer();
+	/**
+	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters
+	 *        as wikitext. Typically some kind of dispatcher.
+	 */
+	public function __construct( ValueFormatter $paramFormatter ) {
+		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer( $paramFormatter );
 	}
 
 	/**
