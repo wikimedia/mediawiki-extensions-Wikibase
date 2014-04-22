@@ -1,13 +1,14 @@
 <?php
 namespace Wikibase\Lib;
-use RuntimeException;
 
 /**
  * FormattingException
  *
+ * @deprecated use \ValueFormatters\FormattingException
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class FormattingException extends RuntimeException {
+class FormattingException extends \ValueFormatters\FormattingException {
 
 }

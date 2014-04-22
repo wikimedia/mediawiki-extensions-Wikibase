@@ -229,10 +229,9 @@ class LabelDescriptionDuplicateDetector {
 				$term->getType(),
 				$errorCode,
 				array(
-					$term->getType(),
-					$term->getLanguage(),
 					$term->getText(),
-					$term->getEntityId()->getSerialization()
+					$term->getLanguage(),
+					$term->getEntityId()
 				) );
 		}
 

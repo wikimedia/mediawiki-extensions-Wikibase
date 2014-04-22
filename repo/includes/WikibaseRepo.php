@@ -4,7 +4,9 @@ namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use SiteSQLStore;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -13,10 +15,12 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
+use Wikibase\i18n\MessageParameterFormatter;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
+use Wikibase\Lib\DispatchingValueFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -426,19 +430,24 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return OutputFormatSnakFormatterFactory
+	 * @return WikibaseValueFormatterBuilders
 	 */
-	protected function newSnakFormatterFactory() {
+	protected function getValueFormatterBuilders() {
 		global $wgContLang;
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
+		return new WikibaseValueFormatterBuilders(
 			$this->getEntityLookup(),
 			$wgContLang,
 			$this->getEntityTitleLookup()
 		);
+	}
 
+	/**
+	 * @return OutputFormatSnakFormatterFactory
+	 */
+	protected function newSnakFormatterFactory() {
 		$builders = new WikibaseSnakFormatterBuilders(
-			$valueFormatterBuilders,
+			$this->getValueFormatterBuilders(),
 			$this->getPropertyDataTypeLookup()
 		);
 
@@ -464,13 +473,7 @@ class WikibaseRepo {
 	 * @return OutputFormatValueFormatterFactory
 	 */
 	protected function newValueFormatterFactory() {
-		global $wgContLang;
-
-		$builders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
-			$wgContLang,
-			$this->getEntityTitleLookup()
-		);
+		$builders = $this->getValueFormatterBuilders();
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
 		return $factory;
@@ -481,7 +484,9 @@ class WikibaseRepo {
 	 */
 	public function getExceptionLocalizer() {
 		if ( !$this->exceptionLocalizer ) {
-			$this->exceptionLocalizer = new WikibaseExceptionLocalizer();
+			$this->exceptionLocalizer = new WikibaseExceptionLocalizer(
+				$this->getMessageParameterFormatter()
+			);
 		}
 
 		return $this->exceptionLocalizer;
@@ -509,11 +514,7 @@ class WikibaseRepo {
 		$options = new FormatterOptions();
 		$idFormatter = new EntityIdLinkFormatter( $options, $this->getEntityContentFactory() );
 
-		$valueFormatterBuilders = new WikibaseValueFormatterBuilders(
-			$this->getEntityLookup(),
-			$wgContLang,
-			$this->getEntityTitleLookup()
-		);
+		$valueFormatterBuilders = $this->getValueFormatterBuilders();
 
 		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
@@ -601,7 +602,7 @@ class WikibaseRepo {
 	 * @return ValidatorErrorLocalizer
 	 */
 	public function getValidatorErrorLocalizer() {
-		return new ValidatorErrorLocalizer();
+		return new ValidatorErrorLocalizer( $this->getMessageParameterFormatter() );
 	}
 
 	/**
@@ -609,5 +610,34 @@ class WikibaseRepo {
 	 */
 	public function getLabelDescriptionDuplicateDetector() {
 		return new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() );
+	}
+
+	/**
+	 * @return SiteSQLStore
+	 */
+	protected function getSitesTable() {
+		return SiteSQLStore::newInstance();
+	}
+
+	/**
+	 * Returns a ValueFormatter suitable for converting message parameters to strings.
+	 * The formatter is most likely implemented to dispatch to different formatters internally,
+	 * based on the type of the parameter.
+	 *
+	 * @return ValueFormatter
+	 */
+	protected function getMessageParameterFormatter() {
+		global $wgLang;
+
+		$formatterOptions = new FormatterOptions();
+		$valueFormatteBuilders = $this->getValueFormatterBuilders();
+		$wikitextValueFormatters = $valueFormatteBuilders->getWidgetFormatters( $formatterOptions );
+
+		return new MessageParameterFormatter(
+			new DispatchingValueFormatter( $wikitextValueFormatters ),
+			$this->getEntityTitleLookup(),
+			$wgLang,
+			$this->getSitesTable()
+		);
 	}
 }
