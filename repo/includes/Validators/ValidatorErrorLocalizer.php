@@ -4,6 +4,8 @@ namespace Wikibase\Validators;
 
 use Message;
 use Status;
+use ValueFormatters\FormattingException;
+use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;
 
@@ -14,6 +16,20 @@ use ValueValidators\Result;
  * @author Daniel Kinzler
  */
 class ValidatorErrorLocalizer {
+
+	/**
+	 * @var ValueFormatter
+	 */
+	protected $paramFormatter;
+
+	/**
+	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters.
+	 *        Typically some kind of dispatcher. If not provided, naive formatting will be used,
+	 *        which will fail on non-primitive parameters.
+	 */
+	function __construct( ValueFormatter $paramFormatter = null ) {
+		$this->paramFormatter = $paramFormatter;
+	}
 
 	/**
 	 * Returns a Status representing the given validation result.
@@ -53,7 +69,18 @@ class ValidatorErrorLocalizer {
 		$key = 'wikibase-validator-' . $error->getCode();
 		$params = $error->getParameters();
 
-		//TODO: look for non-string in $params and run them through an appropriate formatter
+		foreach ( $params as &$param ) {
+			if ( $this->paramFormatter === null ) {
+				//naive mode, will fail for objects and arrays!
+				$param = "$param";
+			} elseif ( !is_string( $param ) ) {
+				try {
+					$param = $this->paramFormatter->format( $param );
+				} catch ( FormattingException $e ) {
+					$param = "$param";
+				}
+			}
+		}
 
 		return wfMessage( $key, $params );
 	}

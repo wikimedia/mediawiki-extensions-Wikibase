@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\EntityTitleLookup;
 use Wikibase\SiteLinkLookup;
 
 /**
@@ -54,19 +53,6 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getMockTitleLookup() {
-		$termIndex = $this->getMock( 'Wikibase\EntityTitleLookup' );
-
-		$termIndex->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
-
-		return $termIndex;
-	}
-
-	/**
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
@@ -75,19 +61,6 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 		$termIndex->expects( $this->any() )
 			->method( 'getConflictsForItem' )
 			->will( $this->returnCallback( array( $this, 'getConflictsForItem' ) ) );
-
-		return $termIndex;
-	}
-
-	/**
-	 * @return SiteLinkLookup
-	 */
-	private function getMockSiteStore() {
-		$termIndex = $this->getMock( '\SiteStore' );
-
-		$termIndex->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnCallback( array( $this, 'getSite' ) ) );
 
 		return $termIndex;
 	}
@@ -118,11 +91,9 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @param Entity $entity
 	 */
 	public function testValidateEntity( Entity $entity ) {
-		$titleLookup = $this->getMockTitleLookup();
 		$siteLinkLookup = $this->getMockSiteLinkLookup();
-		$siteStore = $this->getMockSiteStore();
 
-		$validator = new SiteLinkUniquenessValidator( $titleLookup, $siteLinkLookup, $siteStore );
+		$validator = new SiteLinkUniquenessValidator( $siteLinkLookup );
 
 		$result = $validator->validateEntity( $entity );
 
@@ -136,11 +107,9 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $error
 	 */
 	public function testValidateEntity_failure( Entity $entity, $error ) {
-		$titleLookup = $this->getMockTitleLookup();
 		$siteLinkLookup = $this->getMockSiteLinkLookup();
-		$siteStore = $this->getMockSiteStore();
 
-		$validator = new SiteLinkUniquenessValidator( $titleLookup, $siteLinkLookup, $siteStore );
+		$validator = new SiteLinkUniquenessValidator( $siteLinkLookup );
 
 		$result = $validator->validateEntity( $entity );
 

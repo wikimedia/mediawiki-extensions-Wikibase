@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Validators;
 
 use Status;
+use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -20,22 +21,56 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  */
 class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return ValueFormatter
+	 */
+	private function getMockFormatter() {
+		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$mock->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnCallback(
+				function ( $param ) {
+					if ( is_array( $param ) ) {
+						$param = implode( '|', $param );
+					} else {
+						$param = "$param";
+					}
+
+					return $param;
+				}
+			) );
+
+		return $mock;
+	}
+
 	public static function provideGetErrorMessage() {
 		return array(
-			array( Error::newError( 'Bla bla' ) ),
-			array( Error::newError( 'Bla bla', null, 'test', array( 'thingy' ) ) ),
+			'simple' => array(
+				Error::newError( 'Bla bla' ),
+				array()
+			),
+			'with params' => array(
+				Error::newError(
+					'Bla bla',
+					null,
+					'test',
+					array( 'thingy', array( 'a', 'b', 'c' ) )
+				),
+				array( 'thingy', 'a|b|c' )
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider provideGetErrorMessage()
 	 */
-	public function testGetErrorMessage( $error ) {
-		$localizer = new ValidatorErrorLocalizer();
+	public function testGetErrorMessage( $error, $params ) {
+		$localizer = new ValidatorErrorLocalizer( $this->getMockFormatter() );
 		$message = $localizer->getErrorMessage( $error );
 
 		//TODO: check that messages for actual error codes exist
 		$this->assertInstanceOf( 'Message', $message );
+		$this->assertEquals( $params, $message->getParams() );
 	}
 
 	public static function provideGetResultStatus() {
@@ -54,7 +89,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideGetResultStatus()
 	 */
 	public function testGetResultStatus( Result $result ) {
-		$localizer = new ValidatorErrorLocalizer();
+		$localizer = new ValidatorErrorLocalizer( $this->getMockFormatter() );
 		$status = $localizer->getResultStatus( $result );
 
 		$this->assertInstanceOf( 'Status', $status );

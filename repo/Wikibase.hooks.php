@@ -1256,9 +1256,7 @@ final class RepoHooks {
 		//       So, check the item's site links, but don't check label/description uniqueness.
 		$validators = array(
 			new SiteLinkUniquenessValidator(
-				$repo->getEntityTitleLookup(),
-				$repo->getStore()->newSiteLinkCache(),
-				SiteSQLStore::newInstance()
+				$repo->getStore()->newSiteLinkCache()
 			)
 		);
 
