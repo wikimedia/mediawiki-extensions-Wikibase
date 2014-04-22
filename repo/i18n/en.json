@@ -82,8 +82,6 @@
     "wikibase-snakview-variations-somevalue-label": "unknown value",
     "wikibase-snakview-variations-novalue-label": "no value",
     "wikibase-snakview-snaktypeselector-value": "custom value",
-    "wikibase-snakview-snaktypeselector-somevalue": "unknown value",
-    "wikibase-snakview-snaktypeselector-novalue": "no value",
     "wikibase-snakformat-invalid-value": "Invalid value.",
     "wikibase-snakformat-propertynotfound": "Property not found.",
     "wikibase-shortcopyrightwarning": "By clicking \"$1\", you agree to the [[$2|terms of use]], and you irrevocably agree to release your contribution under the $3.",
