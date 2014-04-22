@@ -137,17 +137,4 @@ module EntityPage
     @browser.execute_script(cookie)
   end
 
-  def create_item_data(handles, empty = false)
-    items_data = Hash.new
-    handles.raw.each do |handle|
-      handle = handle[0]
-      label = empty ? '' : generate_random_string(8)
-      description = empty ? '' : generate_random_string(20)
-      data = '{"labels":{"en":{"language":"en","value":"' + label +
-          '"}},"descriptions":{"en":{"language":"en","value":"' + description + '"}}}'
-      items_data[handle] = data
-    end
-
-    items_data
-  end
 end

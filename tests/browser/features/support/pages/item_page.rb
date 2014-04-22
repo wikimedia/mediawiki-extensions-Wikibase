@@ -28,4 +28,18 @@ class ItemPage
     @@item_url
   end
 
+  def create_item_data(handles, empty = false)
+    item_data = Hash.new
+    handles.raw.each do |handle|
+      handle = handle[0]
+      label = empty ? '' : generate_random_string(8)
+      description = empty ? '' : generate_random_string(20)
+      data = '{"labels":{"en":{"language":"en","value":"' + label +
+          '"}},"descriptions":{"en":{"language":"en","value":"' + description + '"}}}'
+      item_data[handle] = data
+    end
+
+    item_data
+  end
+
 end

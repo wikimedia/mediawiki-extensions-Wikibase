@@ -49,7 +49,7 @@ end
 Given /^I have the following properties with datatype:$/ do |props|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   wb_api.login(ENV["WB_REPO_USERNAME"], ENV["WB_REPO_PASSWORD"])
-  @properties = wb_api.wb_create_properties(props.raw)
+  @properties = wb_api.wb_create_properties(on(PropertyPage).create_property_data(props))
 end
 
 Given /^I have the following items:$/ do |handles|

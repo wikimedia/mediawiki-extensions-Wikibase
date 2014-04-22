@@ -48,15 +48,9 @@ module WikibaseAPI
     end
 
     # creates new properties by calling wb_create_entity multiple times
-    def wb_create_properties(props)
+    def wb_create_properties(property_data)
       properties = Hash.new
-
-      props.each do |prop|
-        handle = prop[0]
-        type = prop[1]
-        data = '{"labels":{"en":{"language":"en","value":"' + generate_random_string(8) +
-            '"}},"descriptions":{"en":{"language":"en","value":"' + generate_random_string(20) +
-            '"}},"datatype":"' + type + '"}'
+      property_data.each do |handle, data|
         property = wb_create_entity(data, "property")
         properties[handle] = property
       end
@@ -65,9 +59,9 @@ module WikibaseAPI
     end
 
     # creates items by calling wb_create_entity multiple times
-    def wb_create_items(items_data)
+    def wb_create_items(item_data)
       items = Hash.new
-      items_data.each do |handle, data|
+      item_data.each do |handle, data|
         item = wb_create_entity(data, "item")
         items[handle] = item
       end
