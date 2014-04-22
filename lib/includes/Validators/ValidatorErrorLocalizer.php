@@ -4,6 +4,8 @@ namespace Wikibase\Validators;
 
 use Message;
 use Status;
+use ValueFormatters\FormattingException;
+use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;
 
@@ -14,6 +16,20 @@ use ValueValidators\Result;
  * @author Daniel Kinzler
  */
 class ValidatorErrorLocalizer {
+
+	/**
+	 * @var ValueFormatter Formatter for generating wikitext for message parameters.
+	 */
+	protected $paramFormatter;
+
+	/**
+	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters.
+	 *        MUST return wikitext. This is typically some kind of dispatcher. If not provided,
+	 *        naive formatting will be used, which will fail on non-primitive parameters.
+	 */
+	function __construct( ValueFormatter $paramFormatter = null ) {
+		$this->paramFormatter = $paramFormatter;
+	}
 
 	/**
 	 * Returns a Status representing the given validation result.
@@ -53,8 +69,30 @@ class ValidatorErrorLocalizer {
 		$key = 'wikibase-validator-' . $error->getCode();
 		$params = $error->getParameters();
 
-		//TODO: look for non-string in $params and run them through an appropriate formatter
+		foreach ( $params as &$param ) {
+			if ( !is_string( $param ) ) {
+				$param = $this->paramToString( $param );
+			}
+		}
 
-		return wfMessage( $key, $params );
+		return wfMessage( $key )->params( $params );
+	}
+
+	/**
+	 * @param mixed $param
+	 *
+	 * @return string wikitext
+	 */
+	private function paramToString( $param ) {
+		if ( $this->paramFormatter ) {
+			try {
+				return $this->paramFormatter->format( $param );
+			} catch ( FormattingException $e ) {
+				// ok, never mind, use naive version below.
+				wfWarn( __METHOD__ . ': Formatting of message parameter fialed: ' . $e->getMessage() );
+			}
+		}
+
+		return wfEscapeWikiText( strval( $param ) );
 	}
 }
