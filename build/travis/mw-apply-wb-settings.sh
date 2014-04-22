@@ -27,6 +27,7 @@ function apply_common_settings {
   echo '$wgLanguageCode = "'$LANG'";' >> LocalSettings.php
   echo '$wgDebugLogFile = "mw-debug.log";' >> LocalSettings.php
   echo "define( 'WB_EXPERIMENTAL_FEATURES', 1 );" >> LocalSettings.php
+  echo 'require_once __DIR__ . "/extensions/Scribunto/Scribunto.php";' >> LocalSettings.php
 }
 
 apply_common_settings
