@@ -46,7 +46,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$siteLinkTable->expects( $this->any() )
 			->method( 'getItemIdForLink' )
 			->will( $this->returnCallback( function( $siteId, $page ) {
-					return ( $page === 'Rome' ) ? 33 : false;
+					return ( $page === 'Rome' ) ? new ItemId( 'Q33' ) : false;
 				} )
 			);
 

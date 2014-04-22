@@ -179,13 +179,11 @@ class WikibaseLuaBindings {
 	 * @return string|null $id
 	 */
 	public function getEntityId( $pageTitle = null ) {
-		$numericId = $this->siteLinkTable->getItemIdForLink( $this->siteId, $pageTitle );
+		$id = $this->siteLinkTable->getItemIdForLink( $this->siteId, $pageTitle );
 
-		if ( ! is_int( $numericId ) ) {
+		if ( !$id ) {
 			return null;
 		}
-
-		$id = ItemId::newFromNumber( $numericId );
 
 		return $this->entityIdFormatter->format( $id );
 	}
