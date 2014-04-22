@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_a56d4f97",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:57:20Z",
+      "side": 1,
+      "message": "I just saw this will change in DataValues Number 0.4: https://github.com/DataValues/Number/pull/4/files Hurray!",
+      "parentUuid": "8e23439c_6a4ca643",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_eafaf6d8",
         "filename": "lib/includes/i18n/MessageParameterFormatter.php",
         "patchSetId": 1
