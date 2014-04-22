@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Status;
+use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -137,6 +138,26 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return ValueFormatter
+	 */
+	private function getMockFormatter() {
+		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$mock->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnCallback(
+				function ( $param ) {
+					if ( is_object( $param ) ) {
+						$param = get_class( $param );
+					}
+
+					return "$param";
+				}
+			) );
+
+		return $mock;
+	}
+
+	/**
 	 * @dataProvider providePreSaveChecks
 	 *
 	 * @param array $oldData
@@ -152,7 +173,7 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 		$languages = array( 'en', 'de' );
 
 		$validatorFactory = new TermValidatorFactory( $maxLength, $languages, $idParser, $dupeDetector );
-		$errorLocalizer = new ValidatorErrorLocalizer();
+		$errorLocalizer = new ValidatorErrorLocalizer( $this->getMockFormatter() );
 
 		$checks = new PreSaveChecks(
 			$validatorFactory,

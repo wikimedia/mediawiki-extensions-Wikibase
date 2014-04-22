@@ -3,10 +3,12 @@
 namespace Wikibase\Test;
 use Exception;
 use RuntimeException;
+use ValueFormatters\ValueFormatter;
 use ValueParsers\ParseException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\i18n\WikibaseExceptionLocalizer;
 
 /**
@@ -26,8 +28,8 @@ class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 			Error::newError( 'Eeek!', null, 'too-long', array( 8 ) ),
 		) );
 		$result2 = Result::newError( array(
-			Error::newError( 'Eeek!', null, 'too-long', array( 8 ) ),
-			Error::newError( 'Foo!', null, 'too-short', array( 8 ) ),
+			Error::newError( 'Eeek!', null, 'too-long', array( array( 'eekwiki', 'Eek' ) ) ),
+			Error::newError( 'Foo!', null, 'too-short', array( array( 'foowiki', 'Foo' ) ) ),
 		) );
 
 		return array(
@@ -35,16 +37,38 @@ class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 			'ParseException' => array( new ParseException( 'Blarg!' ), 'wikibase-parse-error', array() ),
 
 			'ChangeOpValidationException(0)' => array( new ChangeOpValidationException( $result0 ), 'wikibase-validator-invalid', array() ),
-			'ChangeOpValidationException(1)' => array( new ChangeOpValidationException( $result1 ), 'wikibase-validator-too-long', array( 8 ) ),
-			'ChangeOpValidationException(2)' => array( new ChangeOpValidationException( $result2 ), 'wikibase-validator-too-long', array( 8 ) ),
+			'ChangeOpValidationException(1)' => array( new ChangeOpValidationException( $result1 ), 'wikibase-validator-too-long', array( '8' ) ),
+			'ChangeOpValidationException(2)' => array( new ChangeOpValidationException( $result2 ), 'wikibase-validator-too-long', array( 'eekwiki|Eek' ) ),
 		);
+	}
+
+	/**
+	 * @return ValueFormatter
+	 */
+	private function getMockFormatter() {
+		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$mock->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnCallback(
+				function ( $param ) {
+					if ( is_array( $param ) ) {
+						$param = implode( '|', $param );
+					} else {
+						$param = "$param";
+					}
+
+					return $param;
+				}
+			) );
+
+		return $mock;
 	}
 
 	/**
 	 * @dataProvider provideGetExceptionMessage
 	 */
 	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
-		$localizer = new WikibaseExceptionLocalizer();
+		$localizer = new WikibaseExceptionLocalizer( $this->getMockFormatter() );
 
 		$this->assertTrue( $localizer->hasExceptionMessage( $ex ) );
 
