@@ -2,6 +2,142 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_6a4ca643",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "This way to generic interface name keeps confusing me over and over again. Not even the \"use ValueFormatters\\Localizer\" line above tells this is for numbers only.\n\nBut that\u0027s not part of this change.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_eafaf6d8",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "Please use the same order as in the constructor. Easier to read.\n\nAnd is there a reason the properties are not private?\n\nSame for the protected methods below.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e5d10759",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "I\u0027m just curious, is there a good practice how to order such parameters?",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0af652f6",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "Space.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4a2b2a2f",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "formatObject returns a string but formatArray (a.k.a. formatValueList) returns an array? Maybe move the commaList call into the method?",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0a3c128d",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "I think strval() is cleaner. If somebody doesn\u0027t truly understand the magic of such quotes they look like accidental leftovers.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_aa6d1e97",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "$key please. Yes, I know. ;-)",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ea0e76e7",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_6a57062a",
         "filename": "repo/i18n/en.json",
         "patchSetId": 1
@@ -13,6 +149,75 @@
       "writtenOn": "2014-04-22T19:26:41Z",
       "side": 1,
       "message": "Translations for this message key are broken if this is merged. You should change the message key.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c5e3ab30",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "@Siebrand: Out of curiosity, is there a way to mark message keys as deprecated?",
+      "parentUuid": "8e23439c_6a57062a",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e556a708",
+        "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "It seems you assume the ValueFormatter used in the context of this class will return Wikitext. But most ValueFormatter implementations we have in the code base return HTML. Is this a problem?",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8a314203",
+        "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "Switch these if() around.\n\nif ( !is_string( $param ) ) {\n\tif ( $this-\u003eparamFormatter !\u003d\u003d null ) {\n\t\t...\n\t} else {\n\t\t$param \u003d strval( $param );\n\t}\n}\n\nOtherwise all strings will go through an unnecessary string cast.\n\nAnd as before, please use strval().",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_85bb7322",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-22T19:49:29Z",
+      "side": 1,
+      "message": "The naming convention here confuses me. Some methods are called \"new...\" but others that also return new instances are called \"get...\".",
       "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
