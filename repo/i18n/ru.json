@@ -14,7 +14,8 @@
 			"Shirayuki",
 			"Zolo",
 			"Александр Сигачёв",
-			"Умар"
+			"Умар",
+			"Meshkov.a"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -24,7 +25,7 @@
 	"wikibase-cancel": "отменить",
 	"wikibase-add": "добавить",
 	"wikibase-addqualifier": "квалификатор",
-	"wikibase-addreference": "добавить источник",
+	"wikibase-addreference": "добавить сноску",
 	"wikibase-save-inprogress": "Сохранение…",
 	"wikibase-remove-inprogress": "Удаление…",
 	"wikibase-label-empty": "Метка (название) отсутствует.",

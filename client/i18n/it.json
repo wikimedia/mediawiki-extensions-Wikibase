@@ -7,7 +7,8 @@
 			"Gloria sah",
 			"Maria victoria",
 			"Raoli",
-			"Sannita"
+			"Sannita",
+			"Nemo bis"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
@@ -25,7 +26,7 @@
 	"wikibase-comment-sitelink-change": "Collegamento linguistico modificato da $1 a $2",
 	"wikibase-comment-sitelink-remove": "Collegamento linguistico rimosso: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|modifica|modifiche}}",
-	"wikibase-dataitem": "Elemento dati",
+	"wikibase-dataitem": "Dati sull'elemento",
 	"wikibase-editlinks": "Modifica link",
 	"wikibase-editlinkstitle": "Modifica collegamenti interlinguistici",
 	"wikibase-linkitem-addlinks": "Aggiungi link",
