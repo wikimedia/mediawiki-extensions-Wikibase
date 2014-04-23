@@ -171,12 +171,7 @@ class EditEntity extends ModifyEntity {
 
 		$changeOps = $this->getChangeOps( $data, $entity );
 
-		try {
-			$changeOps->apply( $entity );
-		} catch ( ChangeOpException $e ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Change could not be applied to entity: ' . $e->getMessage(), 'modification-failed' );
-		}
+		$this->applyChangeOp( $changeOps, $entity );
 
 		$this->buildResult( $entity );
 		$summary = $this->getSummary( $params );

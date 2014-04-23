@@ -70,7 +70,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 			$changeOp = $this->changeOpFactory->newSetLabelOp( $language, $value );
 		}
 
-		$changeOp->apply( $entity, $summary );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		return $summary;
 	}

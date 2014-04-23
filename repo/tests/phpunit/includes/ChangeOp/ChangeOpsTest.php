@@ -2,13 +2,20 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use InvalidArgumentException;
+use ValueValidators\Error;
+use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\ChangeOpAliases;
+use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ItemContent;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOps
@@ -114,8 +121,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expectedDescription
 	 */
 	public function testApply( $changeOps, $language, $expectedLabel, $expectedDescription ) {
-		$item = ItemContent::newEmpty();
-		$entity = $item->getEntity();
+		$entity = Item::newEmpty();
 
 		$changeOps->apply( $entity );
 		$this->assertEquals( $expectedLabel, $entity->getLabel( $language ) );
@@ -126,13 +132,38 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \Wikibase\ChangeOp\ChangeOpException
 	 */
 	public function testInvalidApply() {
-		$item = ItemContent::newEmpty();
+		$item = Item::newEmpty();
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( new ChangeOpLabel( 'en', 'newLabel' ) );
 		$changeOps->add( new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction' ) );
 
-		$changeOps->apply( $item->getEntity() );
+		$changeOps->apply( $item );
+	}
+
+	public function testValidate() {
+		$item = Item::newEmpty();
+
+		$guid = 'guid';
+		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), new StringValue( 'INVALID' ) );
+		$guidGenerator = new ClaimGuidGenerator();
+
+		$error = Error::newError( 'Testing', 'test', 'test-error', array() );
+		$result = Result::newError( array( $error ) );
+
+		$snakValidator = $this->getMockBuilder( 'Wikibase\Validators\SnakValidator' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$snakValidator->expects( $this->any() )
+			->method( 'validate' )
+			->will( $this->returnValue( $result ) );
+
+		$changeOps = new ChangeOps();
+		$changeOps->add( new ChangeOpMainSnak( $guid, $snak, $guidGenerator, $snakValidator ) );
+
+		$result = $changeOps->validate( $item );
+		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
 
 }
