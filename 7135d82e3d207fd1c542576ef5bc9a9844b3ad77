@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_bea0bd32",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-23T14:53:47Z",
+      "side": 1,
+      "message": "Wait, isn\u0027t this wrong? Now there is no difference between items with and without title/description if they have a site link.\n\nBased on the descriptions of the states this needs to be a bit field now.\n\nI honestly think my original suggestion (see patch set 19) was better.",
+      "revId": "7135d82e3d207fd1c542576ef5bc9a9844b3ad77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_eb10275d",
         "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
         "patchSetId": 20
