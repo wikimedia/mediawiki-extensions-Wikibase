@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_13cfaa5c",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:22:10Z",
+      "side": 1,
+      "message": "You can do this in a much simpler fashion (also happens to be more efficient)\n\nforeach ( $keys as $key )\n  $msg \u003d \n  if ( $msg-\u003eexists )\n    return $msg\n\nreturn null",
+      "revId": "0f1a5711f71fff0cd8934f9875507d9baebb2601",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
