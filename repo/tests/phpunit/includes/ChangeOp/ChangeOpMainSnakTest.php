@@ -10,12 +10,14 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpMainSnak
@@ -202,6 +204,45 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		} else {
 			return new PropertyValueSnak( $propertyId, $value );
 		}
+	}
+
+	public function validateProvider() {
+		$p11 = new PropertyId( 'P11' );
+		$q17 = new ItemId( 'Q17' );
+
+		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
+		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
+		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
+
+		$guidGenerator = new ClaimGuidGenerator();
+
+		$cases = array();
+
+		$guid = $guidGenerator->newGuid( $q17 );
+		$cases['bad snak value'] = array( $q17, $guid, $badSnak );
+
+		$guid = $guidGenerator->newGuid( $q17 );
+		$cases['broken snak'] = array( $q17, $guid, $brokenSnak );
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider validateProvider
+	 */
+	public function testValidate( EntityId $entityId, $claimGuid, Snak $snak ) {
+		$changeOpMainSnak = new ChangeOpMainSnak(
+			$claimGuid,
+			$snak,
+			new ClaimGuidGenerator(),
+			$this->mockProvider->getMockSnakValidator()
+		);
+
+		$entity = Item::newEmpty();
+		$entity->setId( $entityId );
+
+		$result = $changeOpMainSnak->validate( $entity );
+		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
 
 }

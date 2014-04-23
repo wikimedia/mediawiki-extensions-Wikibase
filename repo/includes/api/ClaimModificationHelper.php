@@ -11,6 +11,7 @@ use OutOfBoundsException;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
@@ -195,6 +196,12 @@ class ClaimModificationHelper {
 	 */
 	public function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
 		try {
+			$result = $changeOp->validate( $entity );
+
+			if ( !$result->isValid() ) {
+				throw new ChangeOpValidationException( $result );
+			}
+
 			$changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $ex ) {
 			$this->errorReporter->dieException( $ex, 'modification-failed' );

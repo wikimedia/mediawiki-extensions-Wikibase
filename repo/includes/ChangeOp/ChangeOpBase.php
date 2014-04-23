@@ -4,6 +4,8 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
+use ValueValidators\Result;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
 /**
@@ -52,5 +54,22 @@ abstract class ChangeOpBase implements ChangeOp {
 		if ( !$result->isValid() ) {
 			throw new ChangeOpValidationException( $result );
 		}
+	}
+
+	/**
+	 * @see ChangeOp::validate()
+	 *
+	 * This default implementation always returns Result::newSuccess().
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws ChangeOpException
+	 *
+	 * @return Result
+	 */
+	public function validate( Entity $entity ) {
+		return Result::newSuccess();
 	}
 }
