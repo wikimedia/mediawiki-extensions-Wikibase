@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_992abb29",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T15:52:41Z",
+      "side": 1,
+      "message": "// one less line, and more obvious:\n\n  $msg \u003d null;\n  $expectedFormat \u003d $parseError-\u003egetExpectedFormat();\n  \n  if( $expectedFormat !\u003d\u003d null ) {\n    $msg \u003d new Message( \u0027wikibase-parse-error-\u0027 . $expectedFormat );\n    \n    if ( !$msg-\u003eexists() ) {\n      $msg \u003d null;\n    }\n  }\n  \n  if ( $msg \u003d\u003d\u003d null ) {\n    $msg \u003d new Message( \u0027wikibase-parse-error\u0027 );\n  }",
+      "revId": "6198ab9d72604d614f34278c1397a897a98344d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
