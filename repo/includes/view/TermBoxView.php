@@ -5,6 +5,7 @@ namespace Wikibase;
 use Language;
 use SpecialPage;
 use Title;
+use Wikibase\View\SectionEditLinkGenerator;
 
 /**
  * Generates HTML for displaying the term box, that is, the box

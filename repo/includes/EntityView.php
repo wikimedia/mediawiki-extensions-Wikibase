@@ -6,12 +6,11 @@ use ContextSource;
 use Html;
 use IContextSource;
 use InvalidArgumentException;
-use Language;
 use ParserOutput;
-use SpecialPageFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\View\SectionEditLinkGenerator;
 use Wikibase\View\SnakHtmlGenerator;
 
 /**
@@ -407,7 +406,7 @@ window.setTimeout( function() {
 		$lang = $this->getLanguage();
 
 		$label = $entity->getLabel( $lang->getCode() );
-		$editUrl = $this->getEditUrl( 'SetLabel', $entity, $lang );
+		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetLabel', $entity, $lang );
 		$prefixedId = $this->getFormattedIdForEntity( $entity );
 
 		$html = wfTemplate( 'wb-label',
@@ -438,7 +437,7 @@ window.setTimeout( function() {
 
 		$lang = $this->getLanguage();
 		$description = $entity->getDescription( $lang->getCode() );
-		$editUrl = $this->getEditUrl( 'SetDescription', $entity, $lang );
+		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetDescription', $entity, $lang );
 
 		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
@@ -467,7 +466,7 @@ window.setTimeout( function() {
 		$lang = $this->getLanguage();
 
 		$aliases = $entity->getAliases( $lang->getCode() );
-		$editUrl = $this->getEditUrl( 'SetAliases', $entity, $lang );
+		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetAliases', $entity, $lang );
 
 		if ( empty( $aliases ) ) {
 			$html = wfTemplate( 'wb-aliases-wrapper',
@@ -609,41 +608,11 @@ window.setTimeout( function() {
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForEditSection( $url, $tag = 'span', $action = 'edit', $enabled = true ) {
+	private function getHtmlForEditSection( $url, $tag = 'span', $action = 'edit', $enabled = true ) {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = $this->getContext()->msg( $key );
 
 		return $this->sectionEditLinkGenerator->getHtmlForEditSection( $url, $msg, $tag, $enabled );
-	}
-
-	/**
-	 * Returns the url of the editlink.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string  $specialpagename
-	 * @param Entity  $entity
-	 * @param Language $language|null
-	 *
-	 * @return string
-	 */
-	protected function getEditUrl( $specialpagename, Entity $entity, Language $language = null ) {
-		$specialpage = SpecialPageFactory::getPage( $specialpagename );
-
-		if ( $specialpage === null ) {
-			return ''; //XXX: this should throw an exception?!
-		}
-
-		if ( $entity->getId() ) {
-			$subpage = $this->getFormattedIdForEntity( $entity );
-		} else {
-			$subpage = ''; // can't skip this, that would confuse the order of parameters!
-		}
-
-		if ( $language !== null ) {
-			$subpage .= '/' . $language->getCode();
-		}
-		return $specialpage->getPageTitle( $subpage )->getLocalURL();
 	}
 
 	/**
