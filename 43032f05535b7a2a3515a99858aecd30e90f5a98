@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_d0ba481e",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-23T09:18:39Z",
+      "side": 1,
+      "message": "Please use tabs to be at least consistent in one file.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_90d61053",
+        "filename": "lib/includes/Validators/NotEntityIdValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-23T09:18:39Z",
+      "side": 1,
+      "message": "Guessing from the name I expected this class to validate the actual type of the value, not what it looks like (i. e. the format). Maybe NotEntityIdFormatValidator or something else would be clearer.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b0bc6c02",
+        "filename": "lib/tests/phpunit/Validators/InArrayValidatorTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-23T09:18:39Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f0454419",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-23T09:18:39Z",
+      "side": 1,
+      "message": "Tabs, again.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_706134a3",
+        "filename": "repo/includes/content/SiteLinkUniquenessValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-23T09:18:39Z",
+      "side": 1,
+      "message": "Does this in fact completely remove the localized error message? If so, why?",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
