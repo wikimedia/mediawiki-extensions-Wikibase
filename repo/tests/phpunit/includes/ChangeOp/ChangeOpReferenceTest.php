@@ -248,7 +248,6 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		return $entity;
 	}
 
-
 	public function provideApplyInvalid() {
 		$p11 = new PropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
@@ -268,22 +267,16 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
 		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
-		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
 
 		$goodReference = new Reference( new SnakList( array( $goodSnak ) ) );
-		$badReference = new Reference( new SnakList( array( $badSnak ) ) );
-		$brokenReference = new Reference( new SnakList( array( $brokenSnak ) ) );
 
 		$refHash = $oldReference->getHash();
-		$badRefHash = $badReference->getHash();
+		$badRefHash = sha1( 'baosdfhasdfj' );
 
 		$cases = array();
 		$cases['malformed claim guid'] = array( $item, 'NotAGuid', $goodReference, '' );
 		$cases['unknown claim guid'] = array( $item, $badGuid, $goodReference, $refHash );
 		$cases['unknown reference hash'] = array( $item, $claimGuid, $goodReference, $badRefHash );
-
-		$cases['invalid snak value'] = array( $item, $claimGuid, $badReference, '' );
-		$cases['invalid snak value type'] = array( $item, $claimGuid, $brokenReference, $refHash );
 
 		return $cases;
 	}
@@ -294,7 +287,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	public function testApplyInvalid( Entity $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
 		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
 
-		$changeOpClaim = new ChangeOpReference(
+		$changeOpReference = new ChangeOpReference(
 			$claimGuid,
 			$reference,
 			$referenceHash,
@@ -303,7 +296,55 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$entity = $entity->copy();
-		$changeOpClaim->apply( $entity );
+		$changeOpReference->apply( $entity );
+	}
+
+	public function provideValidate() {
+		$p11 = new PropertyId( 'P11' );
+		$q17 = new ItemId( 'Q17' );
+
+		$item = Item::newEmpty();
+		$item->setId( $q17 );
+		$claimGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+
+		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old reference" ) );
+		$oldReference = new Reference( new SnakList( array( $oldSnak ) ) );
+
+		$claim = new Statement( new PropertyNoValueSnak( $p11 ), new SnakList( array( $oldSnak ) ) );
+		$claim->setGuid( $claimGuid );
+		$item->addClaim( $claim );
+
+		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
+		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
+		$brokenSnak = new PropertyValueSnak( $p11, new NumberValue( 23 ) );
+
+		$badReference = new Reference( new SnakList( array( $badSnak ) ) );
+		$brokenReference = new Reference( new SnakList( array( $brokenSnak ) ) );
+
+		$refHash = $oldReference->getHash();
+
+		$cases = array();
+		$cases['invalid snak value'] = array( $item, $claimGuid, $badReference, '' );
+		$cases['invalid snak value type'] = array( $item, $claimGuid, $brokenReference, $refHash );
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideValidate
+	 */
+	public function testValidate( Entity $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
+		$changeOpReference = new ChangeOpReference(
+			$claimGuid,
+			$reference,
+			$referenceHash,
+			$this->mockProvider->getMockSnakValidator(),
+			$index
+		);
+
+		$entity = $entity->copy();
+		$result = $changeOpReference->validate( $entity );
+		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
 
 }

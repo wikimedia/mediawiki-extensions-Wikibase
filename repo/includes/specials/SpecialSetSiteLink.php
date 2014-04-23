@@ -7,8 +7,10 @@ use OutOfBoundsException;
 use Status;
 use SiteSQLStore;
 use ValueParsers\ParseException;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -457,8 +459,28 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$changeOp = $this->changeOpFactory->newSetSiteLinkOp( $siteId, $pageName, $badges );
 
-		$changeOp->apply( $item, $summary );
+		$this->applyChangeOp( $changeOp, $item, $summary );
 
 		return $status;
+	}
+
+	/**
+	 * Applies the given ChangeOp to the given Entity.
+	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
+	 *
+	 * @param ChangeOp $changeOp
+	 * @param Entity $entity
+	 * @param Summary $summary The summary object to update with information about the change.
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+		$result = $changeOp->validate( $entity );
+
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
+		}
+
+		$changeOp->apply( $entity, $summary );
 	}
 }

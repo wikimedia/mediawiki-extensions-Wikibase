@@ -540,8 +540,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				) ) ),
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
-					'code' => 'modification-failed',
-					'message' => 'Negative pattern matched' ) ) ),
+					'code' => 'modification-failed' ) ) ),
 		);
 	}
 

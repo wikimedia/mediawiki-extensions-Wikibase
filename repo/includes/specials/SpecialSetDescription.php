@@ -70,7 +70,7 @@ class SpecialSetDescription extends SpecialModifyTerm {
 			$changeOp = $this->changeOpFactory->newSetDescriptionOp( $language, $value );
 		}
 
-		$changeOp->apply( $entity, $summary );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		return $summary;
 	}

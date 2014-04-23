@@ -8,6 +8,9 @@ use LogicException;
 use SiteSQLStore;
 use Status;
 use UsageException;
+use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -494,6 +497,28 @@ abstract class ModifyEntity extends ApiWikibase {
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
 		);
+	}
+
+	/**
+	 * Applies the given ChangeOp to the given Entity.
+	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
+	 *
+	 * @param ChangeOp $changeOp
+	 * @param Entity $entity
+	 * @param Summary $summary The summary object to update with information about the change.
+	 */
+	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+		try {
+			$result = $changeOp->validate( $entity );
+
+			if ( !$result->isValid() ) {
+				throw new ChangeOpValidationException( $result );
+			}
+
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $ex ) {
+			$this->errorReporter->dieException( $ex, 'modification-failed' );
+		}
 	}
 
 }

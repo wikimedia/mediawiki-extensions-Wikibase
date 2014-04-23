@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
@@ -98,8 +99,6 @@ class ChangeOpReference extends ChangeOpBase {
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		$this->validate();
-
 		$claims = new Claims( $entity->getClaims() );
 
 		if( !$claims->hasClaimWithGuid( $this->claimGuid ) ) {
@@ -190,15 +189,17 @@ class ChangeOpReference extends ChangeOpBase {
 	}
 
 	/**
+	 * @see ChangeOp::validate()
+	 *
 	 * @since 0.5
 	 *
+	 * @param Entity $entity
+	 *
 	 * @throws ChangeOpException
+	 *
+	 * @return Result
 	 */
-	protected function validate() {
-		$result = $this->snakValidator->validateReference( $this->reference );
-
-		if ( !$result->isValid() ) {
-			throw new ChangeOpValidationException( $result );
-		}
+	public function validate( Entity $entity ) {
+		return $this->snakValidator->validateReference( $this->reference );
 	}
 }

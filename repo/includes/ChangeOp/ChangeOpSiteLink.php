@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -184,5 +185,21 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @see ChangeOp::validate()
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws ChangeOpException
+	 *
+	 * @return Result
+	 */
+	public function validate( Entity $entity ) {
+		//TODO: move validation logic from apply() here.
+		return parent::validate( $entity );
 	}
 }

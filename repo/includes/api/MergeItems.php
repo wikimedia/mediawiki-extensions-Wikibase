@@ -93,6 +93,8 @@ class MergeItems extends ApiWikibase {
 				$toEntity,
 				$ignoreConflicts
 			);
+
+			//XXX: need a validate() step here?
 			$changeOps->apply();
 		}
 		catch( InvalidArgumentException $e ) {

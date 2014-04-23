@@ -6,8 +6,10 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use PermissionsError;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -135,7 +137,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		try {
 			$summary = $this->setValue( $entity, $this->language, $this->value );
 		} catch ( ChangeOpException $e ) {
-			$this->showErrorHTML( $e->getMessage() );
+			//TODO: use ExceptionLocalizer
+			$this->showErrorHTML( htmlspecialchars( $e->getMessage() ) );
 			return false;
 		}
 
@@ -292,5 +295,25 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @return Summary
 	 */
 	abstract protected function setValue( $entity, $language, $value );
+
+	/**
+	 * Applies the given ChangeOp to the given Entity.
+	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
+	 *
+	 * @param ChangeOp $changeOp
+	 * @param Entity $entity
+	 * @param Summary $summary The summary object to update with information about the change.
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+		$result = $changeOp->validate( $entity );
+
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
+		}
+
+		$changeOp->apply( $entity, $summary );
+	}
 
 }
