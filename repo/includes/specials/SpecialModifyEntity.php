@@ -4,7 +4,10 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use UserInputException;
+use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
@@ -304,4 +307,26 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @return Summary|bool
 	 */
 	protected abstract function modifyEntity( Entity $entity );
+
+	/**
+	 * Applies the given ChangeOp to the given Entity.
+	 * If validation fails, a ChangeOpValidationException is thrown.
+	 *
+	 * @since 0.5
+	 *
+	 * @param ChangeOp $changeOp
+	 * @param Entity $entity
+	 * @param Summary $summary The summary object to update with information about the change.
+	 *
+	 * @throws ChangeOpException
+	 */
+	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+		$result = $changeOp->validate( $entity );
+
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
+		}
+
+		$changeOp->apply( $entity, $summary );
+	}
 }
