@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_90fdf006",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "Copy\u0026paste of outdated comment. Kill it :)",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f00d443a",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "This is a counter, not an index, so by convention, it should be called $c. But bah, who cares.",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b0134c5c",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "wouldn\u0027t it be nice if this was an exception....",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7002540e",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "*sigh* this really needs to go into DatabaseBase, we have this copied to like 5 places :\\",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1038c0ce",
+        "filename": "repo/maintenance/rebuildItemsPerSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "Having an option to read this from a file would be nice. But not required right now.",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9024d0ae",
+        "filename": "repo/maintenance/rebuildItemsPerSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "Maybe give this a little breathing room (blank lines) and a comment, so it\u0027s easier to find the spot where the actual work is being done ;)",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_501ab86f",
+        "filename": "repo/maintenance/rebuildItemsPerSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "Should that really be a logged maintenance script that is run only one (unless fo5rced)?",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_5051980f",
+        "filename": "repo/tests/phpunit/includes/store/sql/ItemsPerSiteBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-23T08:39:30Z",
+      "side": 1,
+      "message": "This is a rather nice test class :)",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
