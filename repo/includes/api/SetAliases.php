@@ -100,23 +100,20 @@ class SetAliases extends ModifyEntity {
 		/** @var ChangeOp[] $aliasesChangeOps */
 		$aliasesChangeOps = $this->getChangeOps( $params );
 
-		try{
-			if ( count( $aliasesChangeOps ) == 1 ) {
-				$aliasesChangeOps[0]->apply( $entity, $summary );
-			} else {
-				$changeOps = new ChangeOps();
-				$changeOps->add( $aliasesChangeOps );
-				$changeOps->apply( $entity );
+		if ( count( $aliasesChangeOps ) == 1 ) {
+			$this->applyChangeOp( $aliasesChangeOps[0], $entity, $summary );
+		} else {
+			$changeOps = new ChangeOps();
+			$changeOps->add( $aliasesChangeOps );
 
-				// Set the action to 'set' in case we add and remove aliases in a single edit
-				$summary->setAction( 'set' );
-				$summary->setLanguage( $language );
+			$this->applyChangeOp( $changeOps, $entity );
 
-				// Get the full list of current aliases
-				$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
-			}
-		} catch ( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
+			// Set the action to 'set' in case we add and remove aliases in a single edit
+			$summary->setAction( 'set' );
+			$summary->setLanguage( $language );
+
+			// Get the full list of current aliases
+			$summary->addAutoSummaryArgs( $entity->getAliases( $language ) );
 		}
 
 		$aliases = $entity->getAliases( $language );

@@ -82,7 +82,7 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedAliases, $entity->getAliases( 'en' ) );
 	}
 
-	public function invalidChangeOpAliasProvider() {
+	public function validateProvider() {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
@@ -97,16 +97,15 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidChangeOpAliasProvider
+	 * @dataProvider validateProvider
 	 *
-	 * @param ChangeOp $changeOpDescription
+	 * @param ChangeOp $changeOp
 	 */
-	public function testApplyInvalid( ChangeOp $changeOpDescription ) {
+	public function testValidate( ChangeOp $changeOp ) {
 		$entity = Item::newEmpty();
-		$entity->setLabel( 'fr', 'DUPE' );
 
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
-		$changeOpDescription->apply( $entity );
+		$result = $changeOp->validate( $entity );
+		$this->assertFalse( $result->isValid() );
 	}
 
 	public function testApplyWithInvalidAction() {

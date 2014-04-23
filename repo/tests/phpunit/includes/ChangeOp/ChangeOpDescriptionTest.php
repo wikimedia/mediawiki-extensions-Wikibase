@@ -64,7 +64,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedDescription, $entity->getDescription( 'en' ) );
 	}
 
-	public function invalidChangeOpDescriptionProvider() {
+	public function validateProvider() {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
@@ -78,15 +78,15 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidChangeOpDescriptionProvider
+	 * @dataProvider validateProvider
 	 *
-	 * @param ChangeOp $changeOpDescription
+	 * @param ChangeOp $changeOp
 	 */
-	public function testApplyInvalid( ChangeOp $changeOpDescription ) {
+	public function testValidate( ChangeOp $changeOp ) {
 		$entity = $this->provideNewEntity();
 
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpValidationException' );
-		$changeOpDescription->apply( $entity );
+		$result = $changeOp->validate( $entity );
+		$this->assertFalse( $result->isValid() );
 	}
 
 	/**

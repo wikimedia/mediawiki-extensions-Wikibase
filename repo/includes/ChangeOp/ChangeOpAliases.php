@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -84,6 +85,8 @@ class ChangeOpAliases extends ChangeOpBase {
 	 * Applies the change to the fingerprint
 	 *
 	 * @param Fingerprint $fingerprint
+	 *
+	 * @throws ChangeOpException
 	 */
 	private function updateFingerprint( Fingerprint $fingerprint ) {
 		try {
@@ -109,8 +112,6 @@ class ChangeOpAliases extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		$this->validateChange( $entity );
-
 		$fingerprint = $entity->getFingerprint();
 
 		$this->updateFingerprint( $fingerprint );
@@ -121,26 +122,42 @@ class ChangeOpAliases extends ChangeOpBase {
 	}
 
 	/**
+	 * Validates this ChangeOp
+	 *
+	 * @see ChangeOp::validate()
+	 *
+	 * @since 0.5
+	 *
 	 * @param Entity $entity
 	 *
 	 * @throws ChangeOpException
+	 * @return Result
 	 */
-	protected function validateChange( Entity $entity ) {
+	public function validate( Entity $entity ) {
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
 
-		// check that the language is valid (note that it is fine to remove bad languages)
-		$this->applyValueValidator( $languageValidator, $this->language );
+		// check that the language is valid
+		$result = $languageValidator->validate( $this->language );
+
+		if ( !$result->isValid() ) {
+			return $result;
+		}
 
 		if ( $this->action === 'set' || $this->action === '' || $this->action === 'add' ) {
 			// Check that the new aliases are valid
 			foreach ( $this->aliases as $alias ) {
-				$this->applyValueValidator( $termValidator, $alias );
+				$result = $termValidator->validate( $alias );
+
+				if ( !$result->isValid() ) {
+					return $result;
+				}
 			}
 		} elseif ( $this->action !== 'remove' )  {
 			throw new ChangeOpException( 'Bad action: ' . $this->action );
 		}
 
 		//XXX: Do we want to check the updated fingerprint, as we do for labels and descriptions?
+		return Result::newSuccess();
 	}
 }

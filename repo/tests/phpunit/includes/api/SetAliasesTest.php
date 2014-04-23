@@ -147,7 +147,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
 			array( //1
 				'p' => array( 'language' => 'nl', 'set' => TermTestHelper::makeOverlyLongString() ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'modification-failed' ) ) ),
 			array( //2
 				'p' => array( 'language' => 'pt', 'remove' => 'normalValue' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),

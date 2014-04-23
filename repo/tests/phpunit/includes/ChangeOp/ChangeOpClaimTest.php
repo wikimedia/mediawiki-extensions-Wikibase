@@ -267,7 +267,7 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		return $entity;
 	}
 
-	public function provideApplyInvalid() {
+	public function validateProvider() {
 		$p11 = new PropertyId( 'P11' );
 		$q17 = new ItemId( 'Q17' );
 
@@ -316,11 +316,9 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideApplyInvalid
+	 * @dataProvider validateProvider
 	 */
-	public function testApplyInvalid( EntityId $entityId, Claim $claim ) {
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpValidationException' );
-
+	public function testValidate( EntityId $entityId, Claim $claim ) {
 		$changeOpClaim = new ChangeOpClaim(
 			$claim,
 			new ClaimGuidGenerator(),
@@ -333,7 +331,8 @@ class ChangeOpClaimTest extends \PHPUnit_Framework_TestCase {
 		$entity = Item::newEmpty();
 		$entity->setId( $entityId );
 
-		$changeOpClaim->apply( $entity );
+		$result = $changeOpClaim->validate( $entity );
+		$this->assertFalse( $result->isValid(), 'isValid()' );
 	}
 
 }
