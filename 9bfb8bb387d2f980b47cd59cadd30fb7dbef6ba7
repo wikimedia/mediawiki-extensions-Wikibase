@@ -209,6 +209,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_854b73cc",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-23T10:15:53Z",
+      "side": 1,
+      "message": "@Siebrand: It was just renamed in the depending patch, see https://gerrit.wikimedia.org/r/#/c/124800/12/repo/i18n/en.json",
+      "parentUuid": "8e23439c_c5e3ab30",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_e556a708",
         "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
         "patchSetId": 1
