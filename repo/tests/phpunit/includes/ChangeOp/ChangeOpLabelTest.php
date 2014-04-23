@@ -64,7 +64,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedLabel, $entity->getLabel( 'en' ) );
 	}
 
-	public function invalidChangeOpLabelProvider() {
+	public function validateProvider() {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
@@ -78,15 +78,15 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider invalidChangeOpLabelProvider
+	 * @dataProvider validateProvider
 	 *
-	 * @param ChangeOp $changeOpLabel
+	 * @param ChangeOp $changeOp
 	 */
-	public function testApplyInvalid( ChangeOp $changeOpLabel ) {
+	public function testValidate( ChangeOp $changeOp ) {
 		$entity = $this->provideNewEntity();
 
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpValidationException' );
-		$changeOpLabel->apply( $entity );
+		$result = $changeOp->validate( $entity );
+		$this->assertFalse( $result->isValid() );
 	}
 
 	/**

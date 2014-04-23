@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -82,8 +83,6 @@ class ChangeOpDescription extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		$this->validateChange( $entity );
-
 		$fingerprint = $entity->getFingerprint();
 		$exists = $fingerprint->getDescriptions()->hasTermForLanguage( $this->language );
 
@@ -107,23 +106,32 @@ class ChangeOpDescription extends ChangeOpBase {
 		return true;
 	}
 
-
 	/**
+	 * Validates this ChangeOp
+	 *
+	 * @see ChangeOp::validate()
+	 *
+	 * @since 0.5
+	 *
 	 * @param Entity $entity
 	 *
-	 * @throws ChangeOpException
+	 * @return Result
 	 */
-	protected function validateChange( Entity $entity ) {
+	public function validate( Entity $entity ) {
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getDescriptionValidator( $entity->getType() );
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
-		// check that the language is valid (note that it is fine to remove bad languages)
-		$this->applyValueValidator( $languageValidator, $this->language );
+		// check that the language is valid
+		$result = $languageValidator->validate( $this->language );
 
-		if ( $this->description !== null ) {
+		if ( $result->isValid() && $this->description !== null ) {
 			// Check that the new description is valid
-			$this->applyValueValidator( $termValidator, $this->description );
+			$result = $termValidator->validate( $this->description );
+		}
+
+		if ( !$result->isValid() ) {
+			return $result;
 		}
 
 		// Check if the new fingerprint of the entity is valid (e.g. if the combination
@@ -137,8 +145,6 @@ class ChangeOpDescription extends ChangeOpBase {
 			array( $this->language )
 		);
 
-		if ( !$result->isValid() ) {
-			throw new ChangeOpValidationException( $result );
-		}
+		return $result;
 	}
 }

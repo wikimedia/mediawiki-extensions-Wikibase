@@ -66,7 +66,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		} else {
 			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $language, explode( '|', $value ) );
 		}
-		$changeOp->apply( $entity, $summary );
+
+		$this->applyChangeOp( $changeOp, $entity, $summary );
 
 		return $summary;
 	}

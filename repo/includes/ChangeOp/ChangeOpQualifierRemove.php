@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
@@ -99,6 +100,22 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 	protected function getSnakSummaryArgs( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
 		return array( array( $propertyId->getPrefixedId() => $snak ) );
+	}
+
+	/**
+	 * @see ChangeOp::validate()
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws ChangeOpException
+	 *
+	 * @return Result
+	 */
+	public function validate( Entity $entity ) {
+		//TODO: move validation logic from apply() here.
+		return parent::validate( $entity );
 	}
 
 }

@@ -94,7 +94,7 @@ class MergeItems extends ApiWikibase {
 				$toEntity,
 				$ignoreConflicts
 			);
-			//FIXME: batch first, for efficiency!
+
 			$changeOps->apply();
 		}
 		catch( InvalidArgumentException $e ) {

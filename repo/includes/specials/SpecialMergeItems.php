@@ -155,12 +155,14 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 				$this->toItemRevision->getEntity(),
 				$this->ignoreConflicts
 			);
+
+			//XXX: need a validate() step here?
 			$changeOps->apply();
 		} catch( InvalidArgumentException $e ) {
-			// caution, this does not return a message key but a hardcoded message
+			// FIXME: caution, this does not return a message key but a hardcoded message
 			$status->fatal( $e->getMessage() );
 		} catch( ChangeOpException $e ) {
-			// caution, this does not return a message key but a hardcoded message
+			// FIXME: caution, this does not return a message key but a hardcoded message
 			$status->fatal( $e->getMessage() );
 		}
 		return true;
