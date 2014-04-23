@@ -30,7 +30,8 @@ class ReferencedEntitiesFinder {
 
 		foreach ( $snaks as $snak ) {
 			// all of the Snak's properties are referenced entities, add them:
-			$foundEntities[] = $snak->getPropertyId();
+			$propertyId = $snak->getPropertyId();
+			$foundEntities[ $propertyId->getSerialization() ] = $propertyId;
 
 			// PropertyValueSnaks might have a value referencing an Entity, find those as well:
 			if( $snak instanceof PropertyValueSnak ) {
@@ -46,7 +47,7 @@ class ReferencedEntitiesFinder {
 			}
 		}
 
-		return array_unique( $foundEntities );
+		return $foundEntities;
 	}
 
 	/**
@@ -61,8 +62,9 @@ class ReferencedEntitiesFinder {
 		switch( $dataValue->getType() ) {
 			case 'wikibase-entityid':
 				if( $dataValue instanceof EntityIdValue ) {
+					$entityId = $dataValue->getEntityId();
 					return array(
-						$dataValue->getEntityId() );
+						$entityId->getSerialization() => $entityId );
 				}
 				break;
 
