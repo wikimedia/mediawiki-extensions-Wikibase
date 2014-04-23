@@ -4,6 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -89,8 +90,6 @@ class ChangeOpLabel extends ChangeOpBase {
 	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		$this->validateChange( $entity );
-
 		$fingerprint = $entity->getFingerprint();
 
 		if ( $this->label === null ) {
@@ -116,21 +115,31 @@ class ChangeOpLabel extends ChangeOpBase {
 	}
 
 	/**
+	 * Validates this ChangeOp
+	 *
+	 * @see ChangeOp::validate()
+	 *
+	 * @since 0.5
+	 *
 	 * @param Entity $entity
 	 *
-	 * @throws ChangeOpException
+	 * @return Result
 	 */
-	protected function validateChange( Entity $entity ) {
+	public function validate( Entity $entity ) {
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
-		// check that the language is valid (note that it is fine to remove bad languages)
-		$this->applyValueValidator( $languageValidator, $this->language );
+		// check that the language is valid
+		$result = $languageValidator->validate( $this->language );
 
-		if ( $this->label !== null ) {
+		if ( $result->isValid() && $this->label !== null ) {
 			// Check that the new label is valid
-			$this->applyValueValidator( $termValidator, $this->label );
+			$result = $termValidator->validate( $this->label );
+		}
+
+		if ( !$result->isValid() ) {
+			return $result;
 		}
 
 		// Check if the new fingerprint of the entity is valid (e.g. if the label is unique)
@@ -143,8 +152,6 @@ class ChangeOpLabel extends ChangeOpBase {
 			array( $this->language )
 		);
 
-		if ( !$result->isValid() ) {
-			throw new ChangeOpValidationException( $result );
-		}
+		return $result;
 	}
 }

@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
@@ -13,7 +14,7 @@ use Wikibase\Summary;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOps {
+class ChangeOps implements ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -86,4 +87,29 @@ class ChangeOps {
 		return true;
 	}
 
+	/**
+	 * @see ChangeOp::validate()
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws ChangeOpException
+	 *
+	 * @return Result
+	 */
+	public function validate( Entity $entity ) {
+		$result = Result::newSuccess();
+
+		foreach ( $this->ops as $op ) {
+			$result = $op->validate( $entity );
+
+			if ( !$result->isValid() ) {
+				// XXX: alternatively, we could collect all the errors.
+				break;
+			}
+		}
+
+		return $result;
+	}
 }

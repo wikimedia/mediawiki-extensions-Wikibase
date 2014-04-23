@@ -120,11 +120,18 @@ class ChangeOpsMerge {
 	}
 
 	public function apply() {
+		// NOTE: we don't want to validate the ChangeOps individualy, since they represent
+		// data already present and saved on the system. Also, validating each would be
+		// potentially expensive.
+
 		$this->generateChangeOps();
 
 		$this->fromChangeOps->apply( $this->fromItem );
 		$this->toChangeOps->apply( $this->toItem );
 
+		//NOTE: we apply constraint checks on the modified items, but no
+		//      validation of individual change ops, since we are merging
+		//      two valid items.
 		$this->applyConstraintChecks( $this->toItem, $this->fromItem->getId() );
 	}
 
