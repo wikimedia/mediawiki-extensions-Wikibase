@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use Html;
-use InvalidArgumentException;
 use OutOfBoundsException;
 use Title;
 use ValueFormatters\FormatterOptions;
@@ -44,32 +43,28 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	}
 
 	/**
-	 * Format an EntityId data value
+	 * @see EntityIdFormatter::formatEntityId
 	 *
-	 * @param EntityId|EntityIdValue $value The value to format
+	 * @param EntityId $entityId
 	 *
 	 * @return string
-	 *
-	 * @throws InvalidArgumentException
 	 */
-	public function format( $value ) {
-		$value = $this->unwrapEntityId( $value );
-
+	protected function formatEntityId( EntityId $entityId ) {
 		if ( isset( $this->entityTitleLookup ) ) {
-			$title = $this->entityTitleLookup->getTitleForId( $value );
+			$title = $this->entityTitleLookup->getTitleForId( $entityId );
 		} else {
-			$title = Title::newFromText( $value->getPrefixedId() );
+			$title = Title::newFromText( $entityId->getPrefixedId() );
 		}
 		$attributes = array(
 			'title' => $title->getPrefixedText(),
 			'href' => $title->getLocalURL()
 		);
 
-		$label = $value->getPrefixedId();
+		$label = $entityId->getPrefixedId();
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
 			try {
-				$itemLabel = $this->lookupItemLabel( $value );
+				$itemLabel = $this->lookupEntityLabel( $entityId );
 				if ( is_string( $itemLabel ) ) {
 					$label = $itemLabel;
 				}
