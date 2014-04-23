@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_f341ceac",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "nope",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f3f2ee95",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "entity?",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_93317a59",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "$groups is not in the doc list, also kissing array type hint",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d3eb729f",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "Is this item really needed? Does the list of site links not suffice?",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_530e4292",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "Why is $editable optional? Looks like there is not a single caller that makes use of that",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d34a52c8",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "nope",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3313c6ba",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "This method is way to big. Though that seems to have not been affected by this change.",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b31eb6bc",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-04-23T11:30:01Z",
+      "side": 1,
+      "message": "Having some kind of very simple test for this code would be nice. Even if it\u0027s just something that executes the code without doing assertions - at least than a whole class of errors will get found.",
+      "revId": "12340c0e628c12bf53f9ede742a95c3017d4c114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
