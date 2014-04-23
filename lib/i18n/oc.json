@@ -5,6 +5,8 @@
 		]
 	},
 	"wikibase-error-unexpected": "Una error imprevista s'es producha : $1",
+	"wikibase-snakview-snaktypeselector-somevalue": "valor desconeguda",
+	"wikibase-snakview-snaktypeselector-novalue": "pas cap de valor",
 	"wikibase-validator-invalid": "Valor invalida",
 	"datatypes-type-wikibase-item": "Element"
 }

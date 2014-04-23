@@ -72,8 +72,6 @@
 	"wikibase-snakview-variations-somevalue-label": "непозната вредност",
 	"wikibase-snakview-variations-novalue-label": "нема вредност",
 	"wikibase-snakview-snaktypeselector-value": "прилагодена вредност",
-	"wikibase-snakview-snaktypeselector-somevalue": "непозната вредност",
-	"wikibase-snakview-snaktypeselector-novalue": "нема вредност",
 	"wikibase-snakformat-invalid-value": "Неважечка вредност.",
 	"wikibase-snakformat-propertynotfound": "Не го пронајдов својството.",
 	"wikibase-shortcopyrightwarning": "Стискајќи на „$1“, се согласувате со [[$2|условите на употреба]] и неотповикливо се согласувате вашите придонеси да се нудат под $3.",

@@ -76,8 +76,6 @@
 	"wikibase-snakview-variations-somevalue-label": "ukendt værdi",
 	"wikibase-snakview-variations-novalue-label": "ingen værdi",
 	"wikibase-snakview-snaktypeselector-value": "brugerdefineret værdi",
-	"wikibase-snakview-snaktypeselector-somevalue": "ukendt værdi",
-	"wikibase-snakview-snaktypeselector-novalue": "ingen værdi",
 	"wikibase-shortcopyrightwarning": "Ved at klikke på \"$1\", accepterer du [[$2|brugervilkårene]], og du accepterer uigenkaldeligt at frigive dit bidrag under $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Jeg accepterer disse vilkår for mine fremtidige redigeringer. Vis ikke denne meddelelse igen.",
 	"wikibase-entityselector-more": "mere",

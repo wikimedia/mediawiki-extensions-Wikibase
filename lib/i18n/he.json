@@ -60,6 +60,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "אתר",
 	"wikibase-sitelinks-siteid-columnheading": "קוד",
 	"wikibase-sitelinks-link-columnheading": "דף מקושר",
+	"wikibase-snakview-snaktypeselector-somevalue": "ערך בלתי־ידוע",
+	"wikibase-snakview-snaktypeselector-novalue": "אין ערך",
 	"wikibase-tooltip-error-details": "פרטים",
 	"wikibase-undeserializable-value": "הערך אינו תקין ואינו יכול להיות מוצג.",
 	"wikibase-validator-invalid": "ערך בלתי־תקין",

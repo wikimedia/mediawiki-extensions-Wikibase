@@ -24,6 +24,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Сайт",
 	"wikibase-sitelinks-siteid-columnheading": "Код",
 	"wikibase-sitelinks-link-columnheading": "Сілтенген бет",
+	"wikibase-snakview-snaktypeselector-somevalue": "белгісіз мән",
+	"wikibase-snakview-snaktypeselector-novalue": "мән жоқ",
 	"wikibase-tooltip-error-details": "Бөлшектер",
 	"wikibase-validator-bad-entity-id": "Көріксіз ID: $1",
 	"wikibase-validator-no-such-entity": "$1 табылмады",

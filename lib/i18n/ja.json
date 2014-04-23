@@ -48,6 +48,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "サイト",
 	"wikibase-sitelinks-siteid-columnheading": "コード",
 	"wikibase-sitelinks-link-columnheading": "リンクされているページ",
+	"wikibase-snakview-snaktypeselector-somevalue": "不明な値",
+	"wikibase-snakview-snaktypeselector-novalue": "値なし",
 	"wikibase-tooltip-error-details": "詳細",
 	"wikibase-undeserializable-value": "値が無効であるため表示できません。",
 	"wikibase-validator-bad-type": "$1 ではなく $2",

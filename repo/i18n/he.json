@@ -78,8 +78,6 @@
 	"wikibase-snakview-variations-somevalue-label": "ערך בלתי־ידוע",
 	"wikibase-snakview-variations-novalue-label": "אין ערך",
 	"wikibase-snakview-snaktypeselector-value": "ערך מותאם אישית",
-	"wikibase-snakview-snaktypeselector-somevalue": "ערך בלתי־ידוע",
-	"wikibase-snakview-snaktypeselector-novalue": "אין ערך",
 	"wikibase-snakformat-invalid-value": "ערך בלתי־תקין.",
 	"wikibase-snakformat-propertynotfound": "המאפיין לא נמצא.",
 	"wikibase-shortcopyrightwarning": "בלחיצה על \"$1\" היא הסכמה ל[[$2|תנאי השימוש]] ולשחרור של תרומתך לפי $3.",

@@ -76,8 +76,6 @@
 	"wikibase-snakview-variations-somevalue-label": "giá trị không xác định",
 	"wikibase-snakview-variations-novalue-label": "vô giá trị",
 	"wikibase-snakview-snaktypeselector-value": "giá trị tùy biến",
-	"wikibase-snakview-snaktypeselector-somevalue": "giá trị không xác định",
-	"wikibase-snakview-snaktypeselector-novalue": "vô giá trị",
 	"wikibase-snakformat-invalid-value": "Giá trị không hợp lệ.",
 	"wikibase-snakformat-propertynotfound": "Không tìm thấy thuộc tính.",
 	"wikibase-shortcopyrightwarning": "Với việc bấm nút “$1”, bạn chấp nhận [[$2|các điều khoản sử dụng]], và bạn đồng ý phát hành, một cách không thể hủy bỏ, đóng góp của mình theo $3.",

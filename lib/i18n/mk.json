@@ -59,6 +59,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Вики",
 	"wikibase-sitelinks-siteid-columnheading": "Код",
 	"wikibase-sitelinks-link-columnheading": "Сврзана страница",
+	"wikibase-snakview-snaktypeselector-somevalue": "непозната вредност",
+	"wikibase-snakview-snaktypeselector-novalue": "нема вредност",
 	"wikibase-tooltip-error-details": "Подробно",
 	"wikibase-undeserializable-value": "Вредноста е неважечка и затоа не може да се прикаже.",
 	"wikibase-validator-invalid": "Неважечка вредност",

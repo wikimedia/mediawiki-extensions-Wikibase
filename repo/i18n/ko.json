@@ -73,8 +73,6 @@
 	"wikibase-snakview-variations-somevalue-label": "알 수 없는 값",
 	"wikibase-snakview-variations-novalue-label": "값 없음",
 	"wikibase-snakview-snaktypeselector-value": "사용자 정의 값",
-	"wikibase-snakview-snaktypeselector-somevalue": "알 수 없는 값",
-	"wikibase-snakview-snaktypeselector-novalue": "값 없음",
 	"wikibase-snakformat-invalid-value": "잘못된 값입니다.",
 	"wikibase-snakformat-propertynotfound": "속성을 찾을 수 없습니다.",
 	"wikibase-shortcopyrightwarning": "\"$1\"을 클릭하면 [[$2|이용 약관]]에 동의하고 영구히 $3에 따라 기여를 공개하는 데 동의합니다.",

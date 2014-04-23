@@ -61,6 +61,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Dịch vụ",
 	"wikibase-sitelinks-siteid-columnheading": "Mã",
 	"wikibase-sitelinks-link-columnheading": "Trang liên kết",
+	"wikibase-snakview-snaktypeselector-somevalue": "giá trị không xác định",
+	"wikibase-snakview-snaktypeselector-novalue": "vô giá trị",
 	"wikibase-tooltip-error-details": "Chi tiết",
 	"wikibase-undeserializable-value": "Không thể hiển thị giá trị vì nó không hợp lệ.",
 	"wikibase-validator-invalid": "Giá trị không hợp lệ",

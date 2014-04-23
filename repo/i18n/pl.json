@@ -11,7 +11,8 @@
 			"Rzuwig",
 			"Vivaelcelta",
 			"WTM",
-			"Wizardist"
+			"Wizardist",
+			"Alan ffm"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -21,7 +22,7 @@
 	"wikibase-cancel": "anuluj",
 	"wikibase-add": "dodaj",
 	"wikibase-addqualifier": "dodaj kwalifikator",
-	"wikibase-addreference": "dodaj źródło",
+	"wikibase-addreference": "dodaj przypis",
 	"wikibase-save-inprogress": "Zapisywanie...",
 	"wikibase-remove-inprogress": "Usuwanie...",
 	"wikibase-label-empty": "Etykieta nie została jeszcze podana",
@@ -79,8 +80,6 @@
 	"wikibase-snakview-variations-somevalue-label": "nieznana wartość",
 	"wikibase-snakview-variations-novalue-label": "bez wartości",
 	"wikibase-snakview-snaktypeselector-value": "własna wartość",
-	"wikibase-snakview-snaktypeselector-somevalue": "nieznana wartość",
-	"wikibase-snakview-snaktypeselector-novalue": "bez wartości",
 	"wikibase-snakformat-invalid-value": "Nieprawidłowa wartość.",
 	"wikibase-snakformat-propertynotfound": "Właściwość nie została znaleziona.",
 	"wikibase-shortcopyrightwarning": "Klikając „$1”, zgadzasz się na [[$2|warunki użytkowania]] oraz wyrażasz nieodwołalną zgodę na udostępnianie Twojego wkładu na warunkach $3.",

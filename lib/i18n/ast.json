@@ -59,6 +59,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Sitiu",
 	"wikibase-sitelinks-siteid-columnheading": "Códigu",
 	"wikibase-sitelinks-link-columnheading": "Páxina enllazada",
+	"wikibase-snakview-snaktypeselector-somevalue": "valor desconocíu",
+	"wikibase-snakview-snaktypeselector-novalue": "ensin valor",
 	"wikibase-tooltip-error-details": "Detalles",
 	"wikibase-undeserializable-value": "El valor ye inválidu y nun se pue amosar.",
 	"wikibase-validator-invalid": "Valor inválidu",

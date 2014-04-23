@@ -57,8 +57,6 @@
 	"wikibase-snakview-variations-somevalue-label": "অজানা মান",
 	"wikibase-snakview-variations-novalue-label": "মান নেই",
 	"wikibase-snakview-snaktypeselector-value": "স্বনির্ধারিত মান",
-	"wikibase-snakview-snaktypeselector-somevalue": "অজানা মান",
-	"wikibase-snakview-snaktypeselector-novalue": "মান নেই",
 	"wikibase-shortcopyrightwarning": "\"$1\"-এ ক্লিক করার মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।",
 	"wikibase-copyrighttooltip-acknowledge": "আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।",
 	"wikibase-entityselector-more": "আরও",

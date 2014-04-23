@@ -6,7 +6,8 @@
 			"Littledogboy",
 			"Mormegil",
 			"Vks",
-			"Matěj Suchánek"
+			"Matěj Suchánek",
+			"DobyvatelCZ"
 		]
 	},
 	"wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Klient Wikibase",
@@ -64,6 +65,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Projekt",
 	"wikibase-sitelinks-siteid-columnheading": "Kód",
 	"wikibase-sitelinks-link-columnheading": "Propojená stránka",
+	"wikibase-snakview-snaktypeselector-somevalue": "neznámá hodnota",
+	"wikibase-snakview-snaktypeselector-novalue": "žádná hodnota",
 	"wikibase-tooltip-error-details": "Podrobnosti",
 	"wikibase-undeserializable-value": "Hodnota je neplatná a nelze ji zobrazit.",
 	"wikibase-validator-invalid": "Neplatná hodnota",

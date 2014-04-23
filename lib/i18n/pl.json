@@ -65,6 +65,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Witryna",
 	"wikibase-sitelinks-siteid-columnheading": "Kod",
 	"wikibase-sitelinks-link-columnheading": "Powiązana strona",
+	"wikibase-snakview-snaktypeselector-somevalue": "nieznana wartość",
+	"wikibase-snakview-snaktypeselector-novalue": "bez wartości",
 	"wikibase-tooltip-error-details": "Szczegóły",
 	"wikibase-undeserializable-value": "Wartość jest nieprawidłowa i nie może zostać wyświetlona.",
 	"wikibase-validator-invalid": "Nieprawidłowa wartość",

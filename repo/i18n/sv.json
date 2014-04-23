@@ -77,8 +77,6 @@
 	"wikibase-snakview-variations-somevalue-label": "okänt värde",
 	"wikibase-snakview-variations-novalue-label": "inget värde",
 	"wikibase-snakview-snaktypeselector-value": "anpassat värde",
-	"wikibase-snakview-snaktypeselector-somevalue": "okänt värde",
-	"wikibase-snakview-snaktypeselector-novalue": "inget värde",
 	"wikibase-snakformat-invalid-value": "Ogiltigt värde.",
 	"wikibase-snakformat-propertynotfound": "Egenskapen hittades inte.",
 	"wikibase-shortcopyrightwarning": "Genom att klicka på \"$1\" samtycker du med [[$2|användarvillkoren]] och samtycker oåterkalleligen att släppa ditt bidrag under $3.",

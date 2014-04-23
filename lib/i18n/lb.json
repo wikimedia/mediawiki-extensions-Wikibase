@@ -44,6 +44,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Site",
 	"wikibase-sitelinks-siteid-columnheading": "Code",
 	"wikibase-sitelinks-link-columnheading": "Verlinkt Säit",
+	"wikibase-snakview-snaktypeselector-somevalue": "onbekannte Wäert",
+	"wikibase-snakview-snaktypeselector-novalue": "kee Wäert",
 	"wikibase-tooltip-error-details": "Detailer",
 	"wikibase-undeserializable-value": "De Wäert ass net valabel a kann net gewise ginn.",
 	"wikibase-validator-invalid": "Net valabele Wäert",

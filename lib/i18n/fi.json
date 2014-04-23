@@ -53,6 +53,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Sivusto",
 	"wikibase-sitelinks-siteid-columnheading": "Koodi",
 	"wikibase-sitelinks-link-columnheading": "Linkitetty sivu",
+	"wikibase-snakview-snaktypeselector-somevalue": "tuntematon arvo",
+	"wikibase-snakview-snaktypeselector-novalue": "ei arvoa",
 	"wikibase-tooltip-error-details": "Tiedot",
 	"wikibase-undeserializable-value": "Arvo on virheellinen, eikä sitä voida näyttää.",
 	"wikibase-validator-invalid": "Virheellinen arvo",

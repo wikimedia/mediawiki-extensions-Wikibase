@@ -8,7 +8,8 @@
 			"Malafaya",
 			"SandroHc",
 			"Vitorvicentevalente",
-			"Waldir"
+			"Waldir",
+			"Sarilho1"
 		]
 	},
 	"wikibase-lib-desc": "Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client",
@@ -61,6 +62,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Sítio",
 	"wikibase-sitelinks-siteid-columnheading": "Código",
 	"wikibase-sitelinks-link-columnheading": "Página associada",
+	"wikibase-snakview-snaktypeselector-somevalue": "valor desconhecido",
+	"wikibase-snakview-snaktypeselector-novalue": "sem valor",
 	"wikibase-tooltip-error-details": "Detalhes",
 	"wikibase-undeserializable-value": "Este valor é inválido e não pode ser exibido.",
 	"wikibase-validator-invalid": "Valor inválido",

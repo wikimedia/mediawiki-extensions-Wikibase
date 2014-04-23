@@ -69,8 +69,6 @@
 	"wikibase-snakview-variations-somevalue-label": "不明な値",
 	"wikibase-snakview-variations-novalue-label": "値なし",
 	"wikibase-snakview-snaktypeselector-value": "カスタム値",
-	"wikibase-snakview-snaktypeselector-somevalue": "不明な値",
-	"wikibase-snakview-snaktypeselector-novalue": "値なし",
 	"wikibase-snakformat-propertynotfound": "プロパティが見つかりません。",
 	"wikibase-shortcopyrightwarning": "「$1」をクリックすることで、あなたは[[$2|利用規約]]に同意し、自分の投稿内容を$3のもとで公開することに撤回不可能な形で同意することになります。",
 	"wikibase-copyrighttooltip-acknowledge": "今後の編集についてこれらの規約に同意します。次回からこのメッセージを表示しないでください。",

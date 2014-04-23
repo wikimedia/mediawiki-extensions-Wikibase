@@ -89,8 +89,6 @@
 	"wikibase-snakview-variations-somevalue-label": "Unbekannter Wert",
 	"wikibase-snakview-variations-novalue-label": "Kein Wert",
 	"wikibase-snakview-snaktypeselector-value": "Benutzerdefinierter Wert",
-	"wikibase-snakview-snaktypeselector-somevalue": "Unbekannter Wert",
-	"wikibase-snakview-snaktypeselector-novalue": "Kein Wert",
 	"wikibase-snakformat-invalid-value": "Ungültiger Wert.",
 	"wikibase-snakformat-propertynotfound": "Eigenschaft nicht gefunden.",
 	"wikibase-shortcopyrightwarning": "Durch Klicken auf „$1“ stimmst du den [[$2|Nutzungsbedingungen]] und unwiderruflich der Veröffentlichung deines Beitrags unter der $3 zu.",

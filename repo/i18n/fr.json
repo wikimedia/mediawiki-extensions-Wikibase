@@ -97,8 +97,6 @@
 	"wikibase-snakview-variations-somevalue-label": "valeur inconnue",
 	"wikibase-snakview-variations-novalue-label": "aucune valeur",
 	"wikibase-snakview-snaktypeselector-value": "valeur personnalisée",
-	"wikibase-snakview-snaktypeselector-somevalue": "valeur inconnue",
-	"wikibase-snakview-snaktypeselector-novalue": "aucune valeur",
 	"wikibase-snakformat-invalid-value": "Valeur non valide.",
 	"wikibase-snakformat-propertynotfound": "Propriété non trouvée.",
 	"wikibase-shortcopyrightwarning": "En cliquant sur « $1 » , vous acceptez les [[$2|conditions d'utilisation]] et acceptez acceptez de placer irrévocablement votre contribution sous $3.",

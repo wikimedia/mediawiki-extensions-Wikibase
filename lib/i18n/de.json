@@ -64,6 +64,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Website",
 	"wikibase-sitelinks-siteid-columnheading": "Code",
 	"wikibase-sitelinks-link-columnheading": "Verlinkte Seite",
+	"wikibase-snakview-snaktypeselector-somevalue": "Unbekannter Wert",
+	"wikibase-snakview-snaktypeselector-novalue": "Kein Wert",
 	"wikibase-tooltip-error-details": "Einzelheiten",
 	"wikibase-undeserializable-value": "Der Wert ist ungültig und kann nicht angezeigt werden.",
 	"wikibase-validator-invalid": "Ungültiger Wert",

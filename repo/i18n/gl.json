@@ -71,8 +71,6 @@
 	"wikibase-snakview-variations-somevalue-label": "valor descoñecido",
 	"wikibase-snakview-variations-novalue-label": "sen valor",
 	"wikibase-snakview-snaktypeselector-value": "valor personalizado",
-	"wikibase-snakview-snaktypeselector-somevalue": "valor descoñecido",
-	"wikibase-snakview-snaktypeselector-novalue": "sen valor",
 	"wikibase-shortcopyrightwarning": "Ao premer en \"$1\", acepta os [[$2|termos de uso]] e acepta liberar irrevogablemente as súas achegas baixo a $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estes termos para as miñas futuras edicións. Non quero ver a mensaxe de novo.",
 	"wikibase-entityselector-more": "máis",

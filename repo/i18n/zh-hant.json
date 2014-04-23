@@ -80,8 +80,6 @@
 	"wikibase-snakview-variations-somevalue-label": "未知值",
 	"wikibase-snakview-variations-novalue-label": "無值",
 	"wikibase-snakview-snaktypeselector-value": "自定值",
-	"wikibase-snakview-snaktypeselector-somevalue": "未知值",
-	"wikibase-snakview-snaktypeselector-novalue": "無值",
 	"wikibase-snakformat-invalid-value": "不準確值。",
 	"wikibase-snakformat-propertynotfound": "屬性未找到。",
 	"wikibase-shortcopyrightwarning": "點擊「$1」表示閣下接受[[$2|使用條款]]，並不可撤銷地接受以$3發布您的貢獻。",

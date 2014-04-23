@@ -68,6 +68,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "网站",
 	"wikibase-sitelinks-siteid-columnheading": "代码",
 	"wikibase-sitelinks-link-columnheading": "链接的页面",
+	"wikibase-snakview-snaktypeselector-somevalue": "未知值",
+	"wikibase-snakview-snaktypeselector-novalue": "无值",
 	"wikibase-tooltip-error-details": "详情",
 	"wikibase-undeserializable-value": "这个值无效以及无法显示。",
 	"wikibase-validator-invalid": "无效值",

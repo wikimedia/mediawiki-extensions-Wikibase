@@ -37,6 +37,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "সাইট",
 	"wikibase-sitelinks-siteid-columnheading": "কোড",
 	"wikibase-sitelinks-link-columnheading": "সংযুক্ত পাতা",
+	"wikibase-snakview-snaktypeselector-somevalue": "অজানা মান",
+	"wikibase-snakview-snaktypeselector-novalue": "মান নেই",
 	"wikibase-tooltip-error-details": "বিস্তারিত",
 	"wikibase-undeserializable-value": "মানটি অবৈধ ও প্রদর্শন করা যাবে না।",
 	"wikibase-validator-bad-type": "$1 এর পরিবর্তে $2",
