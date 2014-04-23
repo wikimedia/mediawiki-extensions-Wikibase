@@ -16,6 +16,24 @@
       "revId": "6198ab9d72604d614f34278c1397a897a98344d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6493b252",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-04-23T18:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_992abb29",
+      "revId": "6198ab9d72604d614f34278c1397a897a98344d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
