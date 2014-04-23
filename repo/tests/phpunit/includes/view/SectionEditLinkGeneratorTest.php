@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\SectionEditLinkGenerator;
+use Wikibase\View\SectionEditLinkGenerator;
 
 /**
  * @covers Wikibase\SectionEditLinkGenerator
