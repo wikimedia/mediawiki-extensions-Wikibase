@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use ValueFormatters\ValueFormatterBase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -13,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class EntityIdFormatter extends ValueFormatterBase {
 
@@ -21,11 +21,10 @@ class EntityIdFormatter extends ValueFormatterBase {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId|EntityIdValue $value The ID to format
+	 * @param EntityId|EntityIdValue $value
 	 *
-	 * @return string
 	 * @throws InvalidArgumentException
-	 * @throws OutOfBoundsException
+	 * @return string
 	 */
 	public function format( $value ) {
 		if ( $value instanceof EntityIdValue ) {
@@ -33,10 +32,21 @@ class EntityIdFormatter extends ValueFormatterBase {
 		}
 
 		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId.' );
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
 		}
 
-		return $value->getSerialization();
+		return $this->formatEntityId( $value );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	protected function formatEntityId( EntityId $entityId ) {
+		return $entityId->getSerialization();
 	}
 
 }
