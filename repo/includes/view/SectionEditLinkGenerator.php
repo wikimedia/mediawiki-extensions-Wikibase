@@ -1,8 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\View;
 
+use Language;
 use Message;
+use SpecialPageFactory;
+use Wikibase\Entity;
 
 /**
  * Generates HTML for a section edit link
@@ -15,7 +18,6 @@ use Message;
  * @author Daniel Kinzler
  */
 class SectionEditLinkGenerator {
-
 
 	/**
 	 * Returns a toolbar with an edit link for a single statement. Equivalent to edit toolbar in JavaScript but with
@@ -59,4 +61,24 @@ class SectionEditLinkGenerator {
 		wfProfileOut( __METHOD__ );
 		return $html;
 	}
+
+	public function getEditUrl( $specialpagename, Entity $entity, Language $language = null ) {
+		$specialpage = SpecialPageFactory::getPage( $specialpagename );
+
+		if ( $specialpage === null ) {
+			return ''; //XXX: this should throw an exception?!
+		}
+
+		if ( $entity->getId() ) {
+			$subpage = $entity->getId()->getPrefixedId();
+		} else {
+			$subpage = ''; // can't skip this, that would confuse the order of parameters!
+		}
+
+		if ( $language !== null ) {
+			$subpage .= '/' . $language->getCode();
+		}
+		return $specialpage->getPageTitle( $subpage )->getLocalURL();
+	}
+
 }
