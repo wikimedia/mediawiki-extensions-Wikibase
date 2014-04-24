@@ -7,7 +7,9 @@ use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\ChangeOp\ChangeOpReference;
+use Wikibase\ChangeOp\ItemChangeOpFactory;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -38,6 +40,8 @@ class SetReference extends ModifyClaim {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
+
+		$this->initChangOpFactory( $entity->getType(), Item::ENTITY_TYPE );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
@@ -178,7 +182,10 @@ class SetReference extends ModifyClaim {
 		$hash = isset( $params['reference'] ) ? $params['reference'] : '';
 		$index = isset( $params['index'] ) ? $params['index'] : null;
 
-		return $this->changeOpFactory->newSetReferenceOp( $claimGuid, $reference, $hash, $index );
+		/* @var ItemChangeOpFactory $changeOpFactory */
+		$changeOpFactory = $this->changeOpFactory;
+
+		return $changeOpFactory->newSetReferenceOp( $claimGuid, $reference, $hash, $index );
 	}
 
 	/**

@@ -3,18 +3,11 @@
 namespace Wikibase\Test;
 
 use ValueValidators\Error;
-use ValueValidators\Result;
-use Wikibase\ChangeOp\ChangeOpFactory;
 use Wikibase\ChangeOp\ChangeOpsMerge;
-use Wikibase\DataModel\Claim\ClaimGuidParser;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\ChangeOp\ItemChangeOpFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\ObjectComparer;
-use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\SiteLinkCache;
-use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -29,7 +22,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
 class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var ClaimTestMockProvider
+	 * @var ChangeOpTestMockProvider
 	 */
 	protected $mockProvider;
 
@@ -41,46 +34,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
-		$this->mockProvider = new ClaimTestMockProvider( $this );
+		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
-
-	/**
-	 * @param null $returnValue
-	 *
-	 * @return LabelDescriptionDuplicateDetector
-	 */
-	private function getLabelDescriptionDuplicateDetector( $returnValue = null ) {
-		if ( $returnValue === null ) {
-			$returnValue = Result::newSuccess();
-		} elseif ( is_array( $returnValue ) ) {
-			$returnValue = Result::newError( $returnValue );
-		}
-
-		$mock = $this->getMockBuilder( '\Wikibase\LabelDescriptionDuplicateDetector' )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'detectLabelConflictsForEntity' )
-			->will( $this->returnValue( $returnValue ) );
-		$mock->expects( $this->any() )
-			->method( 'detectLabelDescriptionConflictsForEntity' )
-			->will( $this->returnValue( $returnValue ) );
-		return $mock;
-	}
-
-	/**
-	 * @param array $returnValue
-	 *
-	 * @return SiteLinkCache
-	 */
-	private function getMockSitelinkCache( $returnValue = array() ) {
-		$mock = $this->getMock( '\Wikibase\SiteLinkCache' );
-		$mock->expects( $this->any() )
-			->method( 'getConflictsForItem' )
-			->will( $this->returnValue( $returnValue ) );
-		return $mock;
-	}
-
 	protected function makeChangeOpsMerge(
 		Item $fromItem,
 		Item $toItem,
@@ -88,16 +43,15 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		array $termConflicts,
 		array $linkConflicts
 	) {
-		$duplicateDetector = $this->getLabelDescriptionDuplicateDetector( $termConflicts );
-		$linkCache = $this->getMockSitelinkCache( $linkConflicts );
+		$duplicateDetector = $this->mockProvider->getMockLabelDescriptionDuplicateDetector( $termConflicts );
+		$linkCache = $this->mockProvider->getMockSitelinkCache( $linkConflicts );
 
-		$idParser = new BasicEntityIdParser();
-		$changeOpFactory = new ChangeOpFactory(
+		$changeOpFactory =  new ItemChangeOpFactory(
 			$duplicateDetector,
 			$linkCache,
-			new ClaimGuidGenerator(),
-			new ClaimGuidValidator( $idParser ),
-			new ClaimGuidParser( $idParser ),
+			$this->mockProvider->getMockGuidGenerator(),
+			$this->mockProvider->getMockGuidValidator(),
+			$this->mockProvider->getMockGuidParser( $toItem->getId() ),
 			$this->mockProvider->getMockSnakValidator()
 		);
 
