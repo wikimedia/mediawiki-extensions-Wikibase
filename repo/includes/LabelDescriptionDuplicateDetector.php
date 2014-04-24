@@ -86,7 +86,7 @@ class LabelDescriptionDuplicateDetector {
 	 *         The error code will be either 'label-conflict' or 'label-with-description-conflict',
 	 *         depending on whether descriptions where given.
 	 */
-	protected function detectTermConflicts( $labels, $descriptions, EntityId $entityId = null ) {
+	public function detectTermConflicts( $labels, $descriptions, EntityId $entityId = null ) {
 		if ( !is_array( $labels ) ) {
 			throw new InvalidArgumentException( '$labels must be an array' );
 		}

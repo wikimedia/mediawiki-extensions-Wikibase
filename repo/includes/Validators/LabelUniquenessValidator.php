@@ -18,7 +18,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class LabelUniquenessValidator implements EntityValidator {
+class LabelUniquenessValidator implements EntityValidator, FingerprintValidator {
 
 	/**
 	 * @var LabelDescriptionDuplicateDetector
@@ -42,6 +42,28 @@ class LabelUniquenessValidator implements EntityValidator {
 	public function validateEntity( Entity $entity ) {
 		$result = $this->duplicateDetector->detectLabelConflictsForEntity( $entity );
 		return $result;
+	}
+
+	/**
+	 * @see FingerprintValidator::validateFingerprint()
+	 *
+	 * @since 0.5
+	 *
+	 * @param Fingerprint $fingerprint
+	 * @param EntityId|null $entityId
+	 * @param array|null $languageCodes
+	 *
+	 * @return Result
+	 */
+	public function validateFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $languageCodes = null ) {
+		$labels = array_map(
+			function( Term $term ) {
+				return $term->getText();
+			},
+			iterator_to_array( $fingerprint->getLabels()->getIterator() )
+		);
+
+		return $this->duplicateDetector->detectTermConflicts( $labels, null, $entityId );
 	}
 
 }
