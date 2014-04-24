@@ -26,7 +26,6 @@ $wgExtensionCredits['datavalues'][] = array(
 );
 
 $wgMessagesDirs['ValueView'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['ValueView'] = __DIR__ . '/ValueView.i18n.php';
 
 /**
  * Register QUnit test cases.
