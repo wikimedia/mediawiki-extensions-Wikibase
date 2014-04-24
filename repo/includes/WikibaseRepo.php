@@ -33,7 +33,6 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
-use Wikibase\PreSaveChecks;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -46,6 +45,7 @@ use Wikibase\Utils;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Validators\EntityConstraintProvider;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -339,12 +339,12 @@ class WikibaseRepo {
 	 */
 	public function getChangeOpFactoryProvider() {
 		return new ChangeOpFactoryProvider(
-			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->newSiteLinkCache(),
+			$this->getEntityConstraintProvider(),
 			new ClaimGuidGenerator(),
 			$this->getClaimGuidValidator(),
 			$this->getClaimGuidParser(),
-			$this->getSnakValidator()
+			$this->getSnakValidator(),
+			$this->getTermValidatorFactory()
 		);
 	}
 
@@ -571,17 +571,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @note: this is a temporary facility, for use until all checks have been moved into CHangeOps.
-	 * @return PreSaveChecks
-	 */
-	public function getPreSaveChecks() {
-		return new PreSaveChecks(
-			$this->getTermValidatorFactory(),
-			$this->getValidatorErrorLocalizer()
-		);
-	}
-
-	/**
 	 * @return TermValidatorFactory
 	 */
 	protected function getTermValidatorFactory() {
@@ -594,7 +583,18 @@ class WikibaseRepo {
 			$maxLength,
 			$languages,
 			$this->getEntityIdParser(),
-			$this->getLabelDescriptionDuplicateDetector()
+			$this->getLabelDescriptionDuplicateDetector(),
+			$this->getStore()->newSiteLinkCache()
+		);
+	}
+
+	/**
+	 * @return EntityConstraintProvider
+	 */
+	public function getEntityConstraintProvider() {
+		return new EntityConstraintProvider(
+			$this->getLabelDescriptionDuplicateDetector(),
+			$this->getStore()->newSiteLinkCache()
 		);
 	}
 

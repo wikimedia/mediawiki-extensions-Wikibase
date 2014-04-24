@@ -3,12 +3,11 @@
 namespace Wikibase\ChangeOp;
 
 use Wikibase\DataModel\Claim\ClaimGuidParser;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
+use Wikibase\Validators\TermValidatorFactory;
 
 /**
  * Provider for ChangeOpFactories.
@@ -21,14 +20,9 @@ use Wikibase\Validators\SnakValidator;
 class ChangeOpFactoryProvider {
 
 	/**
-	 * @var LabelDescriptionDuplicateDetector
+	 * @var EntityConstraintProvider
 	 */
-	private $termDuplicateDetector;
-
-	/**
-	 * @var SiteLinkLookup
-	 */
-	private $siteLinkLookup;
+	private $constraintProvider;
 
 	/**
 	 * @var ClaimGuidGenerator
@@ -51,37 +45,43 @@ class ChangeOpFactoryProvider {
 	private $snakValidator;
 
 	/**
-	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
-	 * @param SiteLinkLookup $siteLinkLookup
+	 * @var TermValidatorFactory
+	 */
+	private $termValidatorFactory;
+
+	/**
+	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
+	 * @param TermValidatorFactory $termValidatorFactory
 	 */
 	public function __construct(
-		LabelDescriptionDuplicateDetector $termDuplicateDetector,
-		SiteLinkLookup $siteLinkLookup,
+		EntityConstraintProvider $constraintProvider,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser,
-		SnakValidator $snakValidator
+		SnakValidator $snakValidator,
+		TermValidatorFactory $termValidatorFactory
 	) {
-		$this->termDuplicateDetector = $termDuplicateDetector;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->constraintProvider = $constraintProvider;
 
 		$this->guidGenerator = $guidGenerator;
 		$this->guidValidator = $guidValidator;
 		$this->guidParser = $guidParser;
 
 		$this->snakValidator = $snakValidator;
+		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
 	/**
 	 * @return FingerprintChangeOpFactory
 	 */
 	public function getFingerprintChangeOpFactory() {
-		//@todo: inject validators
-		return new FingerprintChangeOpFactory();
+		return new FingerprintChangeOpFactory(
+			$this->termValidatorFactory
+		);
 	}
 
 	/**
@@ -107,7 +107,7 @@ class ChangeOpFactoryProvider {
 	 * @return SiteLinkChangeOpFactory
 	 */
 	public function getSiteLinkChangeOpFactory() {
-		//@todo: inject validators
+		//@todo: inject validators instead of hardcoding checks in the ChangeOp.
 		return new SiteLinkChangeOpFactory();
 	}
 
@@ -116,8 +116,7 @@ class ChangeOpFactoryProvider {
 	 */
 	public function getMergeChangeOpFactory() {
 		return new MergeChangeOpsFactory(
-			$this->termDuplicateDetector,
-			$this->siteLinkLookup,
+			$this->constraintProvider,
 			$this
 		);
 	}

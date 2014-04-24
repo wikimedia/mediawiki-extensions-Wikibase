@@ -35,14 +35,22 @@ class LabelDescriptionDuplicateDetector {
 	 * @since 0.5
 	 *
 	 * @param Entity $entity
+	 * @param EntityId $ignoreConflictsWith Another ID to ignore conflicts with.
+	 *        Useful when merging entities.
 	 *
 	 * @return Result. If there are conflicts, $result->isValid() will return false and
 	 *         $result->getErrors() will return a non-empty list of Error objects.
 	 */
-	public function detectLabelConflictsForEntity( Entity $entity ) {
+	public function detectLabelConflictsForEntity( Entity $entity, EntityId $ignoreConflictsWith = null ) {
 		$labels = $entity->getLabels();
 
-		return $this->detectTermConflicts( $labels, null, $entity->getId() );
+		$ignore = array( $entity->getId() );
+
+		if ( $ignoreConflictsWith ) {
+			$ignore[] = $ignoreConflictsWith;
+		}
+
+		return $this->detectTermConflicts( $labels, null, $ignore );
 	}
 
 	/**
@@ -52,15 +60,23 @@ class LabelDescriptionDuplicateDetector {
 	 * @since 0.5
 	 *
 	 * @param Entity $entity
+	 * @param EntityId $ignoreConflictsWith Another ID to ignore conflicts with.
+	 *        Useful when merging entities.
 	 *
 	 * @return Result. If there are conflicts, $result->isValid() will return false and
 	 *         $result->getErrors() will return a non-empty list of Error objects.
 	 */
-	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
+	public function detectLabelDescriptionConflictsForEntity( Entity $entity, EntityId $ignoreConflictsWith = null ) {
 		$labels = $entity->getLabels();
 		$descriptions = $entity->getDescriptions();
 
-		return $this->detectTermConflicts( $labels, $descriptions, $entity->getId() );
+		$ignore = array( $entity->getId() );
+
+		if ( $ignoreConflictsWith ) {
+			$ignore[] = $ignoreConflictsWith;
+		}
+
+		return $this->detectTermConflicts( $labels, $descriptions, $ignore );
 	}
 
 	/**
@@ -76,8 +92,9 @@ class LabelDescriptionDuplicateDetector {
 	 *        with language codes as the keys.
 	 * @param array|null $descriptions An associative array of descriptions,
 	 *        with language codes as the keys.
-	 * @param EntityId $entityId The Id of the Entity the terms come from. Conflicts
-	 *        with this entity will be considered self-conflicts and ignored.
+	 * @param EntityId[]|null $ignoreConflicts Ids of entities to ignore conflicts with.
+	 *        This would typically contain the ID of the entity the terms are defined on,
+	 *        and perhaps an additional entity during a merge.
 	 *
 	 * @throws InvalidArgumentException
 	 *
@@ -85,8 +102,10 @@ class LabelDescriptionDuplicateDetector {
 	 *         $result->getErrors() will return a non-empty list of Error objects.
 	 *         The error code will be either 'label-conflict' or 'label-with-description-conflict',
 	 *         depending on whether descriptions where given.
+	 *
+	 * @todo Accept Term[] and/or TermList objects for $labels and $descriptions
 	 */
-	protected function detectTermConflicts( $labels, $descriptions, EntityId $entityId = null ) {
+	public function detectTermConflicts( $labels, $descriptions, array $ignoreConflicts = null ) {
 		if ( !is_array( $labels ) ) {
 			throw new InvalidArgumentException( '$labels must be an array' );
 		}
@@ -107,7 +126,7 @@ class LabelDescriptionDuplicateDetector {
 			$errorCode = 'label-with-description-conflict';
 		}
 
-		$conflictingTerms = $this->findConflictingTerms( $termSpecs, $entityId );
+		$conflictingTerms = $this->findConflictingTerms( $termSpecs, $ignoreConflicts );
 
 		if ( $conflictingTerms ) {
 			$errors = $this->termsToErrors( 'found conflicting terms', $errorCode, $conflictingTerms );
@@ -185,14 +204,19 @@ class LabelDescriptionDuplicateDetector {
 
 	/**
 	 * @param array $termSpecs as returned by buildXxxTermSpecs
-	 * @param EntityId $entityId
+	 * @param EntityId[]|null $ignoreConflicts Ids of entities to ignore conflicts with.
+	 *        This would typically contain the ID of the entity the terms are defined on,
+	 *        and perhaps an additional entity during a merge.
 	 *
 	 * @return Term[]
 	 */
-	private function findConflictingTerms( array $termSpecs, EntityId $entityId = null ) {
+	private function findConflictingTerms( array $termSpecs, array $ignoreConflicts = null ) {
 		if ( empty( $termSpecs ) ) {
 			return array();
 		}
+
+		// ugly hack
+		$entityId = ( empty( $ignoreConflicts ) ? null : reset( $ignoreConflicts ) );
 
 		// FIXME: Do not run this when running test using MySQL as self joins fail on temporary tables.
 		if ( !defined( 'MW_PHPUNIT_TEST' )
@@ -209,7 +233,27 @@ class LabelDescriptionDuplicateDetector {
 			$foundTerms = array();
 		}
 
+		$foundTerms = $this->filterTerms( $foundTerms, $ignoreConflicts );
 		return $foundTerms;
+	}
+
+	private function filterTerms( $terms, $ignoreEntities ) {
+		$ignoreIds = array_map(
+			function ( EntityId $id ) {
+				return $id->getSerialization();
+			},
+			$ignoreEntities
+		);
+
+		$terms = array_filter(
+			$terms,
+			function ( Term $term ) use ( $ignoreIds ) {
+				$id = $term->getEntityId()->getSerialization();
+				return !in_array( $id, $ignoreIds );
+			}
+		);
+
+		return $terms;
 	}
 
 	/**

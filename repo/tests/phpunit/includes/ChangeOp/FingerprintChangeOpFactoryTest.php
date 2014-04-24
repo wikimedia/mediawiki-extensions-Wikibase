@@ -19,7 +19,11 @@ class FingerprintChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return FingerprintChangeOpFactory
 	 */
 	protected function newChangeOpFactory() {
-		return new FingerprintChangeOpFactory();
+		$mockProvider = new ChangeOpTestMockProvider( $this );
+
+		return new FingerprintChangeOpFactory(
+			$mockProvider->getMockTermValidatorFactory()
+		);
 	}
 
 	public function testNewAddAliasesOp() {

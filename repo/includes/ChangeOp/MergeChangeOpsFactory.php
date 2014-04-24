@@ -4,8 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Validators\EntityConstraintProvider;
 
 /**
  * Factory for ChangeOps that merge Items.
@@ -16,27 +15,19 @@ use Wikibase\SiteLinkLookup;
 class MergeChangeOpsFactory {
 
 	/**
-	 * @var LabelDescriptionDuplicateDetector
+	 * @var EntityConstraintProvider
 	 */
-	private $termDuplicateDetector;
+	private $constraintProvider;
 
 	/**
-	 * @var SiteLinkLookup
-	 */
-	private $siteLinkLookup;
-
-	/**
-	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
-	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ChangeOpFactoryProvider $factoryProvider
 	 */
 	public function __construct(
-		LabelDescriptionDuplicateDetector $termDuplicateDetector,
-		SiteLinkLookup $siteLinkLookup,
+		EntityConstraintProvider $constraintProvider,
 		ChangeOpFactoryProvider $factoryProvider
 	) {
-		$this->termDuplicateDetector = $termDuplicateDetector;
-		$this->siteLinkLookup = $siteLinkLookup;
+		$this->constraintProvider = $constraintProvider;
 		$this->factoryProvider = $factoryProvider;
 	}
 
@@ -61,8 +52,7 @@ class MergeChangeOpsFactory {
 			$fromItem,
 			$toItem,
 			$ignoreConflicts,
-			$this->termDuplicateDetector,
-			$this->siteLinkLookup,
+			$this->constraintProvider,
 			$this->factoryProvider
 		);
 	}

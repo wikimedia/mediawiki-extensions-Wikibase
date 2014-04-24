@@ -6,9 +6,10 @@ use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Validators\EntityConstraintProvider;
 
 /**
- * @covers Wikibase\ChangeOp\MergeChangeOpFactory
+ * @covers Wikibase\ChangeOp\MergeChangeOpsFactory
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MergeChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
+class MergeChangeOpsFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return MergeChangeOpsFactory
@@ -27,18 +28,22 @@ class MergeChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$toItemId = new ItemId( 'Q3' );
 
-		$changeOpFactoryProvider =  new ChangeOpFactoryProvider(
+		$constraintProvider = new EntityConstraintProvider(
 			$mockProvider->getMockLabelDescriptionDuplicateDetector(),
-			$mockProvider->getMockSitelinkCache(),
+			$mockProvider->getMockSitelinkCache()
+		);
+
+		$changeOpFactoryProvider =  new ChangeOpFactoryProvider(
+			$constraintProvider,
 			$mockProvider->getMockGuidGenerator(),
 			$mockProvider->getMockGuidValidator(),
 			$mockProvider->getMockGuidParser( $toItemId ),
-			$mockProvider->getMockSnakValidator()
+			$mockProvider->getMockSnakValidator(),
+			$mockProvider->getMockTermValidatorFactory()
 		);
 
 		return new MergeChangeOpsFactory(
-			$mockProvider->getMockLabelDescriptionDuplicateDetector(),
-			$mockProvider->getMockSitelinkCache(),
+			$constraintProvider,
 			$changeOpFactoryProvider
 		);
 	}
