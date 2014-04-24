@@ -55,7 +55,16 @@ abstract class EntityContent extends AbstractContent {
 	const STATUS_STUB = 100;
 
 	/**
+	 * For use in the wb-status page property to indicate that the entity does contain values
+	 * (e.g. claims or sitelinks) but does not have any labels, descriptions or aliases.
+	 *
+	 * @see getEntityStatus()
+	 */
+	const STATUS_UNTITLED = 150;
+
+	/**
 	 * For use in the wb-status page property to indicate that the entity is empty.
+	 *
 	 * @see getEntityStatus()
 	 */
 	const STATUS_EMPTY = 200;
@@ -704,10 +713,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		$entity = $this->getEntity();
-
 		$properties = array(
-			'wb-claims' => count( $entity->getClaims() ),
+			'wb-claims' => count( $this->getEntity()->getClaims() ),
 		);
 
 		$status = $this->getEntityStatus();
@@ -725,15 +732,18 @@ abstract class EntityContent extends AbstractContent {
 	 * Used by getEntityPageProperties().
 	 *
 	 * @see getEntityPageProperties()
-	 * @see STATUS_NONE
-	 * @see STATUS_EMPTY
-	 * @see STATUS_STUB
+	 * @see EntityContent::STATUS_NONE
+	 * @see EntityContent::STATUS_STUB
+	 * @see EntityContent::STATUS_UNTITLED
+	 * @see EntityContent::STATUS_EMPTY
 	 *
 	 * @return int
 	 */
 	public function getEntityStatus() {
 		if ( $this->isEmpty() ) {
 			return self::STATUS_EMPTY;
+		} elseif ( $this->getEntity()->getFingerprint()->isEmpty() ) {
+			return self::STATUS_UNTITLED;
 		} elseif ( !$this->getEntity()->hasClaims() ) {
 			return self::STATUS_STUB;
 		} else {
