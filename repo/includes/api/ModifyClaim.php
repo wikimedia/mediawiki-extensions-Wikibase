@@ -5,11 +5,11 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Base class for modifying claims.
@@ -37,9 +37,18 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $claimGuidParser;
 
 	/**
+	 * @note: call initChangeOpFactory() to initialize.
+	 * @todo: make this private, child classes should use getChangeOpFactory().
+	 * That means passing around $entityType a lot. Left for later.
+	 *
 	 * @var ChangeOpFactory
 	 */
-	protected $changeOpFactory;
+	protected $changeOpFactory = null;
+
+	/**
+	 * @var ChangeOpFactoryProvider
+	 */
+	private $changeOpFactoryProvider;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -59,7 +68,49 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		$this->changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+	}
+
+	/**
+	 * @todo: use getChangeOpFactory() everywhere instead of accessing $this->changeOpFactory.
+	 * That means passing around $entityType a lot, which needs some refactoring.
+	 *
+	 * @param string $entityType
+	 * @param string|null $expectedType The expected entity type. Supplying this allows us to make
+	 *        assumptions about the ChangeOpFactory returned: giving Item::ENTITY_TYPE here allows
+	 *        us to expect an instance of ItemChangeOpFactory to be returned.
+	 *
+	 * @throws \RuntimeException
+	 * @return ChangeOpFactory
+	 */
+	protected function initChangOpFactory( $entityType, $expectedType = null ) {
+		if ( $expectedType !== null && $expectedType !== $entityType ) {
+			$this->dieError( "Expected entity of type $expectedType, got $entityType", 'not-' . $expectedType );
+		}
+
+		if ( $this->changeOpFactory !== null ) {
+			throw new \RuntimeException( 'initChangOpFactory() should only be called once.' );
+		}
+
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getChangeOpFactory( $entityType );
+
+		return $this->changeOpFactory;
+	}
+
+	/**
+	 * Get an appropriate factory for ChangeOps to operate on the given type of entity.
+	 *
+	 * @param string $entityType The actual entity type
+	 * @param string|null $expectedType The expected entity type. Supplying this allows us to make
+	 *        assumptions about the ChangeOpFactory returned: giving Item::ENTITY_TYPE here allows
+	 *        us to expect an instance of ItemChangeOpFactory to be returned.
+	 *
+	 * @return ChangeOpFactory
+	 */
+	protected function getChangOpFactory( $entityType, $expectedType = null ) {
+		$this->initChangOpFactory( $entityType, $expectedType );
+
+		return $this->changeOpFactory;
 	}
 
 	/**

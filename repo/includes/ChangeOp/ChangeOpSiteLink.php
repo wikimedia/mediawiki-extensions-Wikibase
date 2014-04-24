@@ -51,7 +51,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName = null, $badges = null ) {
+	public function __construct( $siteId, $pageName, $badges = null ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
