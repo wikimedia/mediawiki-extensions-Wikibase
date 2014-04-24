@@ -47,8 +47,8 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 			'ClientStoreMock' => '\Wikibase\Test\MockClientStore'
 		);
 
-		// Reset the store instance to make sure our Mock is really being used
-		$wikibaseClient->getStore( false, 'reset' );
+		// Reset the default instance to make sure our Mock is really being used
+		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	/**
@@ -91,8 +91,8 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 
 		$wikibaseClient->getSettings()->setSetting( 'defaultClientStore', self::$oldDefaultClientStore );
 		$wgWBClientStores = self::$oldWgWBClientStores;
-		// Reset the store instance, to make sure our Mock wont be used in other tests
-		$wikibaseClient->getStore( false, 'reset' );
+		// Reset the default instance, to make sure our Mock wont be used in other tests
+		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	/**

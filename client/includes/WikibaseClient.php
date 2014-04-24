@@ -363,12 +363,14 @@ final class WikibaseClient {
 	 *
 	 * @since 0.4
 	 *
+	 * @param string $reset Flag: Pass "reset" to reset the default instance
+	 *
 	 * @return WikibaseClient
 	 */
-	public static function getDefaultInstance() {
+	public static function getDefaultInstance( $reset = 'noreset' ) {
 		static $instance = null;
 
-		if ( $instance === null ) {
+		if ( $instance === null || $reset === 'reset' ) {
 			$instance = self::newInstance();
 		}
 
