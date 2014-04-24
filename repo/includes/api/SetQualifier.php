@@ -36,6 +36,8 @@ class SetQualifier extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
+
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['claim'], $entity );

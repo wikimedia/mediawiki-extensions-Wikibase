@@ -35,6 +35,8 @@ class RemoveClaims extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
+
 		$this->checkClaims( $entity, $params['claim'] );
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 

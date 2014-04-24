@@ -26,7 +26,9 @@ class SetLabel extends ModifyTerm {
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
-		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$changeOp = $this->getChangeOp( $params );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
+
 		$labels = array( $language => ( $entity->getLabel( $language ) !== false ) ? $entity->getLabel( $language ) : "" );
 
 		$this->getResultBuilder()->addLabels( $labels, 'entity' );
@@ -50,10 +52,12 @@ class SetLabel extends ModifyTerm {
 			$label = $this->stringNormalizer->trimToNFC( $params['value'] );
 		}
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getFingerprintChangeOpFactory( $this->entityType );
+
 		if ( $label === "" ) {
-			$op = $this->changeOpFactory->newRemoveLabelOp( $language );
+			$op = $changeOpFactory->newRemoveLabelOp( $language );
 		} else {
-			$op = $this->changeOpFactory->newSetLabelOp( $language, $label );
+			$op = $changeOpFactory->newSetLabelOp( $language, $label );
 		}
 
 		wfProfileOut( __METHOD__ );

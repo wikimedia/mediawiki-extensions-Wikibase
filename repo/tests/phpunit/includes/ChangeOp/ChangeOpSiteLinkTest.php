@@ -86,7 +86,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		// deleting sitelink
 		$args[] = array(
 			clone $item,
-			new ChangeOpSiteLink( 'dewiki' ),
+			new ChangeOpSiteLink( 'dewiki', null ),
 			array( $plSiteLink )
 		);
 

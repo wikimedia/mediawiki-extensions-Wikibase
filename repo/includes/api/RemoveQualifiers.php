@@ -37,6 +37,8 @@ class RemoveQualifiers extends ModifyClaim {
 		$entity = $entityRevision->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
+
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
 		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $claim );

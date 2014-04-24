@@ -3,15 +3,16 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use UserInputException;
 use InvalidArgumentException;
-use Wikibase\ChangeOp\ChangeOpFactory;
+use Status;
+use UserInputException;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\DataModel\Entity\EntityId;
-use Status;
 
 /**
  * Special page for merging one item to another.
@@ -46,7 +47,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	/**
 	 * @since 0.5
 	 *
-	 * @var ChangeOpFactory
+	 * @var SiteLinkChangeOpFactory
 	 */
 	protected $changeOpFactory;
 
@@ -58,7 +59,8 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	public function __construct() {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		$factoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->changeOpFactory = $factoryProvider->getMergeChangeOpFactory( Item::ENTITY_TYPE );
 	}
 
 	/**

@@ -7,7 +7,9 @@ use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\ChangeOp\ChangeOpReference;
+use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -56,6 +58,8 @@ class SetReference extends ModifyClaim {
 		} else {
 			$snaksOrder = array();
 		}
+
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getStatementChangeOpFactory( $entity->getType() );
 
 		$newReference = new Reference(
 			$this->getSnaks(
