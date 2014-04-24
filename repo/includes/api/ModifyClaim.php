@@ -5,11 +5,11 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Base class for modifying claims.
@@ -37,9 +37,16 @@ abstract class ModifyClaim extends ApiWikibase {
 	protected $claimGuidParser;
 
 	/**
+	 * @note: call initChangeOpFactory() to initialize.
+	 *
 	 * @var ChangeOpFactory
 	 */
-	protected $changeOpFactory;
+	protected $changeOpFactory = null;
+
+	/**
+	 * @var ChangeOpFactoryProvider
+	 */
+	protected $changeOpFactoryProvider;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -59,7 +66,26 @@ abstract class ModifyClaim extends ApiWikibase {
 		);
 
 		$this->claimGuidParser = WikibaseRepo::getDefaultInstance()->getClaimGuidParser();
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		$this->changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+	}
+
+	/**
+	 * @param string $entityType
+	 * @param string|null $expectedType If given and different from $entityType, a usageException
+	 *        is raised, terminating the request.
+	 *
+	 * @return ChangeOpFactory
+	 */
+	protected function initChangOpFactory( $entityType, $expectedType = null ) {
+		if ( $expectedType !== null && $expectedType !== $entityType ) {
+			$this->dieError( "Expected entity of type $expectedType, got $entityType", 'not-' . $expectedType );
+		}
+
+		if ( $this->changeOpFactory === null ) {
+			$this->changeOpFactory = $this->changeOpFactoryProvider->getChangeOpFactory( $entityType );
+		}
+
+		return $this->changeOpFactory;
 	}
 
 	/**

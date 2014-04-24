@@ -26,7 +26,9 @@ class SetDescription extends ModifyTerm {
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
-		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$changeOp = $this->getChangeOp( $params );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
+
 		$descriptions = array( $language => ( $entity->getDescription( $language ) !== false ) ? $entity->getDescription( $language ) : "" );
 
 		$this->getResultBuilder()->addDescriptions( $descriptions, 'entity' );
