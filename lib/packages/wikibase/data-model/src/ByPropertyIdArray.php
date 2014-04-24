@@ -43,9 +43,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 class ByPropertyIdArray extends \ArrayObject {
 
 	/**
-	 * @param array|object $input
-	 *
 	 * @see \ArrayObject::__construct
+	 *
+	 * @param array|object $input
 	 */
 	public function __construct( $input = null ) {
 		parent::__construct( (array)$input );
