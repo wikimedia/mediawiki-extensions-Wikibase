@@ -78,7 +78,6 @@ class ExternalChangeFactoryTest extends MediaWikiTestCase {
 		$attribs = array(
 			'rc_id' => 315,
 			'rc_timestamp' => '20130819111741',
-			'rc_cur_time' => '20130819111741',
 			'rc_user' => 0,
 			'rc_user_text' => 'Cat',
 			'rc_namespace' => 0,

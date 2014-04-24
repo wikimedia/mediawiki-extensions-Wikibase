@@ -64,7 +64,6 @@ class ExternalRecentChange {
 			'rc_cur_id' => $title->getArticleID(),
 			'rc_comment' => '',
 			'rc_timestamp' => $time,
-			'rc_cur_time' => $time,
 			'rc_log_action' => '',
 			'rc_source' => 'wb'
 		);
