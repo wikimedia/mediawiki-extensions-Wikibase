@@ -23,6 +23,7 @@
 	* `getAliasGroup`
 	* `setAliasGroup`
 	* `removeAliasGroup`
+	* `isEmpty`
 * Added `ItemIdSet`
 
 ## Version 0.7.3 (2014-04-11)
