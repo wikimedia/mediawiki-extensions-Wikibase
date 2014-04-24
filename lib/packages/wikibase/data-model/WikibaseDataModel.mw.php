@@ -21,8 +21,6 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'author' => array(
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
 	),
-	'url' => 'https://github.com/wmde/WikibaseDataModel',
-	'descriptionmsg' => 'wikibasedatamodel-desc'
+	'url' => 'https://github.com/wmde/WikibaseDataModel'
 );
 
-$GLOBALS['wgMessagesDirs']['WikibaseDataModel'] = __DIR__ . '/i18n';

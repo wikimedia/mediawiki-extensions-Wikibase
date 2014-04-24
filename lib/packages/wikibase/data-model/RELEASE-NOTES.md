@@ -37,6 +37,11 @@
 * `Entity::stub` (to be removed in 1.0)
 * `Fingerprint::getAliases (in favour of `Fingerprint::getAliasGroups`)
 
+#### Removals
+
+* This library no longer uses the MediaWiki i18n system when MediaWiki is loaded.
+No description will be shown as part of its entry on Special:Version.
+
 ## Version 0.7.3 (2014-04-11)
 
 #### Additions
