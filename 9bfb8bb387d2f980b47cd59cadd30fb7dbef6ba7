@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_e56fb924",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "no.",
+      "parentUuid": "8e23439c_e5d10759",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_0af652f6",
         "filename": "lib/includes/i18n/MessageParameterFormatter.php",
         "patchSetId": 1
@@ -100,6 +118,24 @@
       "writtenOn": "2014-04-22T19:49:29Z",
       "side": 1,
       "message": "Space.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c5783df0",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_0af652f6",
       "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -123,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_455c2d82",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_4a2b2a2f",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_0a3c128d",
         "filename": "lib/includes/i18n/MessageParameterFormatter.php",
         "patchSetId": 1
@@ -134,6 +188,24 @@
       "writtenOn": "2014-04-22T19:49:29Z",
       "side": 1,
       "message": "I think strval() is cleaner. If somebody doesn\u0027t truly understand the magic of such quotes they look like accidental leftovers.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_656ba916",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_0a3c128d",
       "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -157,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_25613132",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_aa6d1e97",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_ea0e76e7",
         "filename": "lib/includes/i18n/MessageParameterFormatter.php",
         "patchSetId": 1
@@ -168,6 +258,24 @@
       "writtenOn": "2014-04-22T19:49:29Z",
       "side": 1,
       "message": "As above.",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_055ab584",
+        "filename": "lib/includes/i18n/MessageParameterFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_ea0e76e7",
       "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -245,6 +353,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_25d011cb",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_6a57062a",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_e556a708",
         "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
         "patchSetId": 1
@@ -256,6 +382,24 @@
       "writtenOn": "2014-04-22T19:49:29Z",
       "side": 1,
       "message": "It seems you assume the ValueFormatter used in the context of this class will return Wikitext. But most ValueFormatter implementations we have in the code base return HTML. Is this a problem?",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e5f21996",
+        "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Most formatters really return plain text, it\u0027s jkust that the ones returning HTML are the \"interesting\" ones :) update the documentation.\n\nBut you are right, this is a design flaw: formatters that return different things should not share an interface. Hm. Ok, sold. See bug 64366.",
+      "parentUuid": "8e23439c_e556a708",
       "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -279,6 +423,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_6584c9d8",
+        "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_8a314203",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_85bb7322",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 1
@@ -290,6 +452,24 @@
       "writtenOn": "2014-04-22T19:49:29Z",
       "side": 1,
       "message": "The naming convention here confuses me. Some methods are called \"new...\" but others that also return new instances are called \"get...\".",
+      "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_85db6524",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T15:14:23Z",
+      "side": 1,
+      "message": "\"getX\" means get me an instance, new or cached, whatever. these are public. Some \"getX\" methods will lazily create an instance and cache it - those frequently call a protected or even private \"newX\" method that does the actual instantiation.\n\nEssentially, newX *guarantees* a new instance, while getX just gets you some instance. newX should generally not be public.",
+      "parentUuid": "8e23439c_85bb7322",
       "revId": "9bfb8bb387d2f980b47cd59cadd30fb7dbef6ba7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
