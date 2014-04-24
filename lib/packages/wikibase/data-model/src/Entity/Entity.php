@@ -560,6 +560,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Clears the structure.
 	 *
+	 * @deprecated since 0.7.4
 	 * @since 0.1
 	 */
 	public function clear() {
@@ -569,6 +570,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	/**
 	 * Returns if the entity is empty.
 	 *
+	 * @deprecated since 0.7.4
 	 * @since 0.1
 	 *
 	 * @return boolean
@@ -645,6 +647,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, \Serializable, Fin
 	 * Stubs the entity as far as possible.
 	 * This is useful when one wants to conserve memory.
 	 *
+	 * @deprecated since 0.7.4
 	 * @since 0.2
 	 */
 	public function stub() {

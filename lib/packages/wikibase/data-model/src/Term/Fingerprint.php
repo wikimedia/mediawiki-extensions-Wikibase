@@ -35,6 +35,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.3
+	 *
 	 * @return TermList
 	 */
 	public function getLabels() {
@@ -42,6 +44,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param string $languageCode
 	 * @return Term
 	 */
@@ -50,6 +54,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param Term $label
 	 */
 	public function setLabel( Term $label ) {
@@ -57,6 +63,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param string $languageCode
 	 */
 	public function removeLabel( $languageCode ) {
@@ -64,6 +72,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.3
+	 *
 	 * @return TermList
 	 */
 	public function getDescriptions() {
@@ -71,6 +81,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param string $languageCode
 	 * @return Term
 	 */
@@ -79,6 +91,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param Term $description
 	 */
 	public function setDescription( Term $description ) {
@@ -86,6 +100,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param string $languageCode
 	 */
 	public function removeDescription( $languageCode ) {
@@ -93,6 +109,9 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.3
+	 * @deprecated since 0.7.4 - use getAliasGroups instead
+	 *
 	 * @return AliasGroupList
 	 */
 	public function getAliasGroups() {
@@ -100,6 +119,17 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
+	 * @return AliasGroupList
+	 */
+	public function getAliasGroups() {
+		return $this->aliasGroups;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
 	 * @param string $languageCode
 	 * @return AliasGroup
 	 */
@@ -108,6 +138,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param AliasGroup $aliasGroup
 	 */
 	public function setAliasGroup( AliasGroup $aliasGroup ) {
@@ -115,6 +147,8 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.7.4
+	 *
 	 * @param string $languageCode
 	 */
 	public function removeAliasGroup( $languageCode ) {
@@ -138,6 +172,44 @@ class Fingerprint implements Comparable {
 		return $this->descriptions->equals( $target->getDescriptions() )
 			&& $this->labels->equals( $target->getLabels() )
 			&& $this->aliasGroups->equals( $target->getAliasGroups() );
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return $this->labels->count() === 0
+			&& $this->descriptions->count() === 0
+			&& $this->aliasGroups->count() === 0;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @param TermList $labels
+	 */
+	public function setLabels( TermList $labels ) {
+		$this->labels = $labels;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @param TermList $descriptions
+	 */
+	public function setDescriptions( TermList $descriptions ) {
+		$this->descriptions = $descriptions;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @param AliasGroupList $groups
+	 */
+	public function setAliasGroups( AliasGroupList $groups ) {
+		$this->aliasGroups = $groups;
 	}
 
 }

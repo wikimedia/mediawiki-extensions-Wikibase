@@ -215,6 +215,18 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'en', 'foo' ), new Term( 'de', 'bar' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				),
+				new Fingerprint(
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				)
+			),
+			array(
 				Fingerprint::newEmpty(),
 				new Fingerprint(
 					new TermList( array() ),
@@ -243,6 +255,92 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 		);
+	}
+
+	public function testEmptyFingerprintIsEmpty() {
+		$this->assertTrue( Fingerprint::newEmpty()->isEmpty() );
+	}
+
+	/**
+	 * @dataProvider nonEmptyFingerprintProvider
+	 */
+	public function testNonEmptyFingerprintIsNotEmpty( Fingerprint $nonEmptyFingerprint ) {
+		$this->assertFalse( $nonEmptyFingerprint->isEmpty() );
+	}
+
+	public function nonEmptyFingerprintProvider() {
+		return array(
+			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				)
+			),
+
+			array(
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new AliasGroupList( array() )
+				)
+			),
+
+			array(
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array() ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+
+			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ) ),
+					new TermList( array( new Term( 'de', 'baz' ) ) ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+		);
+	}
+
+	public function testSetLabels() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( new Term( 'en', 'foo' ) );
+
+		$labels = new TermList( array(
+			new Term( 'de', 'bar' )
+		) );
+
+		$fingerprint->setLabels( $labels );
+
+		$this->assertEquals( $labels, $fingerprint->getLabels() );
+	}
+
+	public function testSetDescriptions() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setDescription( new Term( 'en', 'foo' ) );
+
+		$descriptions = new TermList( array(
+			new Term( 'de', 'bar' )
+		) );
+
+		$fingerprint->setDescriptions( $descriptions );
+
+		$this->assertEquals( $descriptions, $fingerprint->getDescriptions() );
+	}
+
+	public function testSetAliasGroups() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setAliasGroup( new AliasGroup( 'en', array( 'foo' ) ) );
+
+		$groups = new AliasGroupList( array(
+			new AliasGroup( 'de', array( 'bar' ) )
+		) );
+
+		$fingerprint->setAliasGroups( $groups );
+
+		$this->assertEquals( $groups, $fingerprint->getAliasGroups() );
 	}
 
 }
