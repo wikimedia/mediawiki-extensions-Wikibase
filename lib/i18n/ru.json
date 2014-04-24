@@ -64,7 +64,7 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Сайт",
 	"wikibase-sitelinks-siteid-columnheading": "Код",
 	"wikibase-sitelinks-link-columnheading": "Связанная страница",
-	"wikibase-snakview-snaktypeselector-somevalue": "значение неизвестно",
+	"wikibase-snakview-snaktypeselector-somevalue": "неизвестное значение",
 	"wikibase-snakview-snaktypeselector-novalue": "значение не задано",
 	"wikibase-tooltip-error-details": "Подробности",
 	"wikibase-undeserializable-value": "Значение является недопустимым и не может быть отображено.",

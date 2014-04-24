@@ -66,7 +66,7 @@
 	"wikibase-sitelinks-siteid-columnheading": "Kód",
 	"wikibase-sitelinks-link-columnheading": "Propojená stránka",
 	"wikibase-snakview-snaktypeselector-somevalue": "neznámá hodnota",
-	"wikibase-snakview-snaktypeselector-novalue": "žádná hodnota",
+	"wikibase-snakview-snaktypeselector-novalue": "bez hodnoty",
 	"wikibase-tooltip-error-details": "Podrobnosti",
 	"wikibase-undeserializable-value": "Hodnota je neplatná a nelze ji zobrazit.",
 	"wikibase-validator-invalid": "Neplatná hodnota",
