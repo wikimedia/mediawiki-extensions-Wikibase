@@ -3,10 +3,13 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating claims.
@@ -19,6 +22,23 @@ use Wikibase\ChangeOp\ChangeOpException;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class CreateClaim extends ModifyClaim {
+
+	/**
+	 * @var ClaimChangeOpFactory
+	 */
+	protected $claimChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -49,7 +69,7 @@ class CreateClaim extends ModifyClaim {
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		/* @var ChangeOpMainSnak $changeOp */
-		$changeOp = $this->changeOpFactory->newSetMainSnakOp( '', $snak );
+		$changeOp = $this->claimChangeOpFactory->newSetMainSnakOp( '', $snak );
 
 		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 

@@ -3,14 +3,17 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\ChangeOp\ChangeOpReference;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -22,6 +25,23 @@ use Wikibase\Lib\Serializers\SerializerFactory;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetReference extends ModifyClaim {
+
+	/**
+	 * @var StatementChangeOpFactory
+	 */
+	protected $statementChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -178,7 +198,7 @@ class SetReference extends ModifyClaim {
 		$hash = isset( $params['reference'] ) ? $params['reference'] : '';
 		$index = isset( $params['index'] ) ? $params['index'] : null;
 
-		return $this->changeOpFactory->newSetReferenceOp( $claimGuid, $reference, $hash, $index );
+		return $this->statementChangeOpFactory->newSetReferenceOp( $claimGuid, $reference, $hash, $index );
 	}
 
 	/**

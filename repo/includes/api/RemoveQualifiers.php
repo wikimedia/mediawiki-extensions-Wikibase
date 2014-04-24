@@ -3,10 +3,13 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing qualifiers from a claim.
@@ -18,6 +21,23 @@ use Wikibase\DataModel\Claim\Claim;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class RemoveQualifiers extends ModifyClaim {
+
+	/**
+	 * @var ClaimChangeOpFactory
+	 */
+	protected $claimChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -79,7 +99,7 @@ class RemoveQualifiers extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = $this->changeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
+			$changeOps[] = $this->claimChangeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
 		}
 
 		return $changeOps;

@@ -2,10 +2,13 @@
 
 namespace Wikibase\Api;
 
-use Wikibase\ChangeOp\ChangeOpSiteLink;
 use ApiBase;
+use ApiMain;
+use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -22,6 +25,23 @@ use Wikibase\DataModel\Entity\Item;
  * @author Adam Shorland
  */
 class SetSiteLink extends ModifyEntity {
+
+	/**
+	 * @var SiteLinkChangeOpFactory
+	 */
+	protected $siteLinkChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+	}
 
 	/**
 	 * @since 0.5
@@ -100,7 +120,7 @@ class SetSiteLink extends ModifyEntity {
 		if ( $this->shouldRemove( $params ) ) {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			wfProfileOut( __METHOD__ );
-			return $this->changeOpFactory->newRemoveSiteLinkOp( $linksite );
+			return $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $linksite );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
@@ -127,7 +147,7 @@ class SetSiteLink extends ModifyEntity {
 				: null;
 
 			wfProfileOut( __METHOD__ );
-			return $this->changeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
+			return $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
 		}
 	}
 

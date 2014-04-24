@@ -3,10 +3,13 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOps;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -18,6 +21,23 @@ use Wikibase\DataModel\Claim\Statement;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class RemoveReferences extends ModifyClaim {
+
+	/**
+	 * @var StatementChangeOpFactory
+	 */
+	protected $statementChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -83,7 +103,7 @@ class RemoveReferences extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $referenceHashes as $referenceHash ) {
-			$changeOps[] = $this->changeOpFactory->newRemoveReferenceOp( $claimGuid, $referenceHash );
+			$changeOps[] = $this->statementChangeOpFactory->newRemoveReferenceOp( $claimGuid, $referenceHash );
 		}
 
 		return $changeOps;

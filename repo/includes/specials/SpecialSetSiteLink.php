@@ -4,17 +4,17 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use OutOfBoundsException;
-use Status;
 use SiteSQLStore;
+use Status;
 use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Summary;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -63,6 +63,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected $rightsText;
 
 	/**
+	 * @var SiteLinkChangeOpFactory
+	 */
+	protected $siteLinkChangeOpFactory;
+
+	/**
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -72,6 +77,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 	}
 
 	/**
@@ -455,7 +463,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return $status;
 		}
 
-		$changeOp = $this->changeOpFactory->newSetSiteLinkOp( $siteId, $pageName, $badges );
+		$changeOp = $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $siteId, $pageName, $badges );
 
 		$changeOp->apply( $item, $summary );
 

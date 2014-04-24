@@ -3,12 +3,15 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing claims.
@@ -20,6 +23,23 @@ use Wikibase\ChangeOp\ChangeOpException;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class RemoveClaims extends ModifyClaim {
+
+	/**
+	 * @var ClaimChangeOpFactory
+	 */
+	protected $claimChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -116,7 +136,7 @@ class RemoveClaims extends ModifyClaim {
 		$changeOps = array();
 
 		foreach ( $params['claim'] as $guid ) {
-			$changeOps[] = $this->changeOpFactory->newRemoveClaimOp( $guid );
+			$changeOps[] = $this->claimChangeOpFactory->newRemoveClaimOp( $guid );
 		}
 
 		return $changeOps;
