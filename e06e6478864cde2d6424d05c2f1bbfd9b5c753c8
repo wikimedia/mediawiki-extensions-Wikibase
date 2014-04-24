@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_0ae644e3",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T12:51:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_90fdf006",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_f00d443a",
         "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-23T08:39:30Z",
       "side": 1,
       "message": "This is a counter, not an index, so by convention, it should be called $c. But bah, who cares.",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4a079c85",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T12:51:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_f00d443a",
       "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_aad4f0ed",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T12:51:42Z",
+      "side": 1,
+      "message": "Yes, but out of scope",
+      "parentUuid": "8e23439c_b0134c5c",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_7002540e",
         "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-04-23T08:39:30Z",
       "side": 1,
       "message": "*sigh* this really needs to go into DatabaseBase, we have this copied to like 5 places :\\",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_aaebd09f",
+        "filename": "repo/includes/store/sql/ItemsPerSiteBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T12:51:42Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8e23439c_7002540e",
       "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_0a3c042c",
+        "filename": "repo/maintenance/rebuildItemsPerSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T12:51:42Z",
+      "side": 1,
+      "message": "Can do in a follow-up, if needed",
+      "parentUuid": "8e23439c_1038c0ce",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_9024d0ae",
         "filename": "repo/maintenance/rebuildItemsPerSite.php",
         "patchSetId": 1
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_4a1d5cc6",
+        "filename": "repo/maintenance/rebuildItemsPerSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T12:51:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_9024d0ae",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_501ab86f",
         "filename": "repo/maintenance/rebuildItemsPerSite.php",
         "patchSetId": 1
@@ -115,6 +223,24 @@
       "writtenOn": "2014-04-23T08:39:30Z",
       "side": 1,
       "message": "Should that really be a logged maintenance script that is run only one (unless fo5rced)?",
+      "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2a37c04b",
+        "filename": "repo/maintenance/rebuildItemsPerSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T12:51:42Z",
+      "side": 1,
+      "message": "Right... a \"normal\" maint. script sounds saner... done",
+      "parentUuid": "8e23439c_501ab86f",
       "revId": "e06e6478864cde2d6424d05c2f1bbfd9b5c753c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
