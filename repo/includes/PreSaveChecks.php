@@ -4,16 +4,16 @@ namespace Wikibase;
 
 use Diff\DiffOp\Diff\Diff;
 use Status;
-use ValueValidators\ValueValidator;
 use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\content\EntityValidator;
+use Wikibase\Test\TermValidatorFactoryTest;
+use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Encapsulates programmatic checks to perform before checking an item.
  *
- * @todo: Factor ChangeValidation into ChangeOps.
+ * @todo: Factor uniqueness checks into ChangeOps. Needs batching!
  *
  * @since 0.5
  *
@@ -35,10 +35,13 @@ class PreSaveChecks {
 	}
 
 	/**
-	 * Implements pre-safe checks.
+	 * Implements pre-safe checks. Currently, this enforces that the combination of label
+	 * and description of an item in a given language is unique for that language.
 	 *
-	 * @note: This is a preliminary implementation. This entire class will be redundant
-	 * once validation is done in ChangeOps.
+	 * @note: "local" validation of labels, descriptions and aliases is done in the respective
+	 *        ChangeOps.
+	 * @note: uniqueness of sitelinks and property labels are hard constraints and are enforced
+	 *        via EntityContent::prepareEdit.
 	 *
 	 * @param Entity $entity
 	 * @param EntityDiff $entityDiff
@@ -49,11 +52,9 @@ class PreSaveChecks {
 		if ( $entityDiff ) {
 			$labelLanguagesToCheck = $this->getLanguagesToCheck( $entityDiff->getLabelsDiff() );
 			$descriptionLanguagesToCheck = $this->getLanguagesToCheck( $entityDiff->getDescriptionsDiff() );
-			$aliasLanguagesToCheck = $this->getLanguagesToCheck( $entityDiff->getAliasesDiff() );
 		} else {
 			$labelLanguagesToCheck = array_keys( $entity->getLabels() );
 			$descriptionLanguagesToCheck = array_keys( $entity->getDescriptions() );
-			$aliasLanguagesToCheck = array_keys( $entity->getAllAliases() );
 		}
 
 		$entityType = $entity->getType();
@@ -61,29 +62,14 @@ class PreSaveChecks {
 		$status = Status::newGood();
 
 		try {
-			$languageValidator = $this->termValidatorFactory->getLanguageValidator();
+			if ( !empty( $labelLanguagesToCheck ) || !empty( $descriptionLanguagesToCheck ) ) {
+				$uniquenessValidator = $this->termValidatorFactory->getUniquenessValidator(
+					$entityType,
+					TermValidatorFactory::CONSTRAINTS_NON_HARD
+				);
 
-			$this->checkStringsRecursive( $labelLanguagesToCheck, $languageValidator );
-			$this->checkStringsRecursive( $descriptionLanguagesToCheck, $languageValidator );
-			$this->checkStringsRecursive( $aliasLanguagesToCheck, $languageValidator );
-
-			$this->checkStringsRecursive(
-				$entity->getLabels( $labelLanguagesToCheck ),
-				$this->termValidatorFactory->getLabelValidator( $entityType )
-			);
-
-			$this->checkStringsRecursive(
-				$entity->getDescriptions( $descriptionLanguagesToCheck ),
-				$this->termValidatorFactory->getDescriptionValidator( $entityType )
-			);
-
-			$this->checkStringsRecursive(
-				$entity->getAllAliases( $aliasLanguagesToCheck ),
-				$this->termValidatorFactory->getAliasValidator( $entityType )
-			);
-
-			$uniquenessValidator = $this->termValidatorFactory->getUniquenessValidator( $entityType );
-			$this->checkEntityConstraint( $entity, $uniquenessValidator );
+				$this->checkEntityConstraint( $entity, $uniquenessValidator );
+			}
 		} catch ( ChangeOpValidationException $ex ) {
 			// NOTE: We use a ChangeOpValidationException here, since we plan
 			// to move the validation into the ChangeOps anyway.
@@ -104,30 +90,6 @@ class PreSaveChecks {
 
 		if ( !$result->isValid() ) {
 			throw new ChangeOpValidationException( $result );
-		}
-	}
-
-	/**
-	 * Checks a list of terms using the given validator.
-	 * If the entries in the list are arrays, the check is performed recursively.
-	 *
-	 * @param string[]|array $terms
-	 * @param ValueValidator $validator
-	 *
-	 * @throws ChangeOpValidationException
-	 */
-	private function checkStringsRecursive( array $terms, ValueValidator $validator ) {
-		foreach ( $terms as $term ) {
-			if ( is_array( $term ) ) {
-				// check recursively
-				$this->checkStringsRecursive( $term, $validator );
-			} else {
-				$result = $validator->validate( $term );
-
-				if ( !$result->isValid() ) {
-					throw new ChangeOpValidationException( $result );
-				}
-			}
 		}
 	}
 
