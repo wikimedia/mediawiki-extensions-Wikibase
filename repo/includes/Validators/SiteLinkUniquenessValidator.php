@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\SiteLinkLookup;
@@ -32,20 +33,28 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	}
 
 	/**
-	 * @see OnSaveValidator::validate()
+	 * @see EntityValidator::validate()
 	 *
 	 * @param Entity $entity
+	 * @param EntityId $ignoreConflictsWith
 	 *
 	 * @return Result
 	 */
-	public function validateEntity( Entity $entity ) {
+	public function validateEntity( Entity $entity, EntityId $ignoreConflictsWith = null ) {
 		wfProfileIn( __METHOD__ );
 		$result = Result::newSuccess();
 		$dbw = wfGetDB( DB_MASTER );
 
 		$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $dbw );
 
+		/* @var ItemId $ignoreConflictsWith */
 		foreach ( $conflicts as $conflict ) {
+			if ( $ignoreConflictsWith && $conflict['itemId']
+				=== $ignoreConflictsWith->getNumericId() ) {
+
+				continue;
+			}
+
 			$error = $this->getConflictError( $conflict );
 
 			$result = Result::newError( array_merge(

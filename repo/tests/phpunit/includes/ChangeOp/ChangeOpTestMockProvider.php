@@ -10,22 +10,31 @@ use DataValues\StringValue;
 use OutOfBoundsException;
 use PHPUnit_Framework_MockObject_MockBuilder;
 use PHPUnit_Framework_TestCase;
+use SiteStore;
+use ValueValidators\Error;
 use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\EntityTitleLookup;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\SiteLinkCache;
+use Wikibase\Validators\CompositeFingerprintValidator;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataValueValidator;
+use Wikibase\Validators\LabelDescriptionUniquenessValidator;
 use Wikibase\Validators\RegexValidator;
 use Wikibase\Validators\SnakValidator;
+use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\TypeValidator;
 
 /**
@@ -197,6 +206,31 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
+	 * Returns a mock validator. The term and the language "INVALID" is considered to be
+	 * invalid.
+	 *
+	 * @return ValueValidator
+	 */
+	public function getMockTermValidator() {
+		$mock = $this->getMockBuilder( 'ValueValidators\ValueValidator' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'validate' )
+			->will( PHPUnit_Framework_TestCase::returnCallback( function( $text ) {
+				if ( $text === 'INVALID' ) {
+					$error = Error::newError( 'Invalid', '', 'test-invalid' );
+					return Result::newError( array( $error ) );
+				} else {
+					return Result::newSuccess();
+				}
+			} ) );
+
+		return $mock;
+	}
+
+	/**
 	 * Returns a mock ClaimGuidParser that will return the same ClaimGuid for
 	 * all input strings.
 	 *
@@ -224,29 +258,167 @@ class ChangeOpTestMockProvider {
 		return $mock;
 	}
 
+	public function detectLabelConflictsForEntity( Entity $entity ) {
+		foreach ( $entity->getLabels() as $lang => $label ) {
+			if ( $label === 'DUPE' ) {
+				return Result::newError( array(
+					Error::newError(
+						'found conflicting terms',
+						'label',
+						'label-conflict',
+						array(
+							'label',
+							$lang,
+							$label,
+							'P666'
+						)
+					)
+				) );
+			}
+		}
+
+		return Result::newSuccess();
+	}
+
+	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
+		foreach ( $entity->getLabels() as $lang => $label ) {
+			$description = $entity->getDescription( $lang );
+
+			if ( $description === null ) {
+				continue;
+			}
+
+			if ( $label === 'DUPE' && $description === 'DUPE' ) {
+				return Result::newError( array(
+					Error::newError(
+						'found conflicting terms',
+						'label',
+						'label-with-description-conflict',
+						array(
+							'label',
+							$lang,
+							$label,
+							'Q666'
+						)
+					)
+				) );
+			}
+		}
+
+		return Result::newSuccess();
+	}
+
+	public function detectTermConflicts( $labels, $descriptions ) {
+		$code = ( ( $descriptions === null ) ? 'label-conflict' : 'label-with-description-conflict' );
+
+		foreach ( $labels as $lang => $label ) {
+
+			if ( $descriptions !== null
+				&& ( !isset( $descriptions[$lang] )
+					|| $descriptions[$lang] !== 'DUPE' ) ) {
+
+				continue;
+			}
+
+			if ( $label === 'DUPE' ) {
+				return Result::newError( array(
+					Error::newError(
+						'found conflicting terms',
+						'label',
+						$code,
+						array(
+							'label',
+							$lang,
+							$label,
+							'P666'
+						)
+					)
+				) );
+			}
+		}
+
+		return Result::newSuccess();
+	}
 
 	/**
-	 * @param null $returnValue
+	 * Returns a duplicate detector that will, consider the string "DUPE" to be a duplicate,
+	 * unless a specific $returnValue is given.
+	 *
+	 * @param null|Result|Error[] $returnValue
 	 *
 	 * @return LabelDescriptionDuplicateDetector
 	 */
 	public function getMockLabelDescriptionDuplicateDetector( $returnValue = null ) {
-		if ( $returnValue === null ) {
-			$returnValue = Result::newSuccess();
-		} elseif ( is_array( $returnValue ) ) {
-			$returnValue = Result::newError( $returnValue );
+		if ( is_array( $returnValue ) ) {
+			if ( empty( $returnValue ) ) {
+				$returnValue = Result::newSuccess();
+			} else {
+				$returnValue = Result::newError( $returnValue );
+			}
 		}
 
-		$mock = $this->getMockBuilder( '\Wikibase\LabelDescriptionDuplicateDetector' )
+		if ( $returnValue instanceof Result ) {
+			$detectLabelConflictsForEntity = function() use ( $returnValue ) {
+				return $returnValue;
+			};
+
+			$detectLabelDescriptionConflictsForEntity = $detectLabelConflictsForEntity;
+			$detectTermConflicts = $detectLabelConflictsForEntity;
+		} else {
+			$detectLabelConflictsForEntity = array( $this, 'detectLabelConflictsForEntity' );
+			$detectLabelDescriptionConflictsForEntity = array( $this, 'detectLabelDescriptionConflictsForEntity' );
+			$detectTermConflicts = array( $this, 'detectTermConflicts' );
+		}
+
+		$dupeDetector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( PHPUnit_Framework_TestCase::any() )
+
+		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'detectLabelConflictsForEntity' )
-			->will( PHPUnit_Framework_TestCase::returnValue( $returnValue ) );
-		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->will( PHPUnit_Framework_TestCase::returnCallback( $detectLabelConflictsForEntity ) );
+
+		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'detectLabelDescriptionConflictsForEntity' )
-			->will( PHPUnit_Framework_TestCase::returnValue( $returnValue ) );
-		return $mock;
+			->will( PHPUnit_Framework_TestCase::returnCallback( $detectLabelDescriptionConflictsForEntity ) );
+
+		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'detectTermConflicts' )
+			->will( PHPUnit_Framework_TestCase::returnCallback( $detectTermConflicts ) );
+
+		return $dupeDetector;
+	}
+
+	/**
+	 * @see SiteLinkLookup::getConflictsForItem
+	 *
+	 * The items in the return array are arrays with the following elements:
+	 * - integer itemId
+	 * - string siteId
+	 * - string sitePage
+	 *
+	 * @param Item $item
+	 *
+	 * @return array
+	 */
+	public function getSiteLinkConflictsForItem( Item $item ) {
+		$conflicts = array();
+
+		foreach ( $item->getSiteLinks() as $link ) {
+			$page = $link->getPageName();
+			$site = $link->getSiteId();
+
+			if ( $page === 'DUPE' ) {
+				//NOTE: some tests may rely on these exact values!
+				$conflicts[] = array(
+					'itemId' => 666,
+					'siteId' => $site,
+					'sitePage' => $page
+				);
+			}
+		}
+
+		return $conflicts;
 	}
 
 	/**
@@ -254,11 +426,19 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @return SiteLinkCache
 	 */
-	public function getMockSitelinkCache( $returnValue = array() ) {
+	public function getMockSitelinkCache( $returnValue = null ) {
+		if ( is_array( $returnValue ) ) {
+			$getConflictsForItem = function() use ( $returnValue ) {
+				return $returnValue;
+			};
+		} else {
+			$getConflictsForItem = array( $this, 'getSiteLinkConflictsForItem' );
+		}
+
 		$mock = $this->getMock( '\Wikibase\SiteLinkCache' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getConflictsForItem' )
-			->will( PHPUnit_Framework_TestCase::returnValue( $returnValue ) );
+			->will( PHPUnit_Framework_TestCase::returnCallback( $getConflictsForItem ) );
 		return $mock;
 	}
 
@@ -267,5 +447,130 @@ class ChangeOpTestMockProvider {
 	 */
 	public function getMockGuidGenerator() {
 		return new ClaimGuidGenerator();
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	/*public function getMockTitleLookup() {
+		$mock = $this->getMock( '\Wikibase\EntityTitleLookup' );
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getTitleForId' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				function ( EntityId $id ) {
+					$name = $id->getEntityType() . ':' . $id->getPrefixedId();
+					return Title::makeTitle( NS_MAIN, $name );
+				}
+			) );
+
+		return $mock;
+	}*/
+
+	/**
+	 * @param array $sites
+	 *
+	 * @return SiteStore
+	 */
+	/*public function getMockSiteStore( array $sites = null ) {
+
+		if ( $sites === null ) {
+			$sites = array(
+				'enwiki' => 'http://en.wikipedia.org/wiki/$1',
+				'dewiki' => 'http://de.wikipedia.org/wiki/$1',
+			);
+		}
+
+		$mock = $this->getMock( '\SiteStore' );
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getSite' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				function ( $siteId ) use ( $sites ) {
+					if ( !isset( $sites[$siteId] ) ) {
+						return null;
+					}
+
+					$url = $sites[$siteId];
+					$group = preg_replace( '!^https?://\w{1,5}\.|\.(org|com|net|de)/.*$!', '', $url );
+
+					$site = new Site();
+					$site->setGlobalId( $siteId );
+					$site->setLinkPath( $url );
+					$site->setGroup( $group );
+
+					return $site;
+				}
+			) );
+
+		return $mock;
+	}*/
+
+	/**
+	 * Returns a mock fingerprint validator. If $entityType is Item::ENTITY_TYPE,
+	 * the validator will detect an error for any fingerprint that contains the string "DUPE"
+	 * for both the description and the label for a given language.
+	 *
+	 * For other entity types, the validator will consider any fingerprint valid.
+	 *
+	 * @see getMockLabelDescriptionDuplicateDetector()
+	 *
+	 * @param $entityType
+	 *
+	 * @return LabelDescriptionUniquenessValidator|CompositeFingerprintValidator
+	 */
+	public function getMockFingerprintValidator( $entityType ) {
+		switch ( $entityType ) {
+			case Item::ENTITY_TYPE:
+				return new LabelDescriptionUniquenessValidator( $this->getMockLabelDescriptionDuplicateDetector() );
+
+			default:
+				return new CompositeFingerprintValidator( array() );
+		}
+	}
+
+	/**
+	 * Returns a TermValidatorFactory that provides mock validators.
+	 * The validators consider the string "INVALID" to be invalid, and "DUPE" to be duplicates.
+	 *
+	 * @see getMockTermValidator()
+	 * @see getMockFingerprintValidator()
+	 *
+	 * @return TermValidatorFactory
+	 */
+	public function getMockTermValidatorFactory() {
+		$mock = $this->getMockBuilder( 'Wikibase\Validators\TermValidatorFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getFingerprintValidator' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				array( $this, 'getMockFingerprintValidator' )
+			) );
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getLanguageValidator' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				array( $this, 'getMockTermValidator' )
+			) );
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getLabelValidator' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				array( $this, 'getMockTermValidator' )
+			) );
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getDescriptionValidator' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				array( $this, 'getMockTermValidator' )
+			) );
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getAliasValidator' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				array( $this, 'getMockTermValidator' )
+			) );
+
+		return $mock;
 	}
 }
