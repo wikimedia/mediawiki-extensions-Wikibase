@@ -12,6 +12,7 @@ use PHPUnit_Framework_MockObject_MockBuilder;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\Error;
 use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
@@ -25,8 +26,10 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\SiteLinkCache;
+use Wikibase\Validators\CompositeFingerprintValidator;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataValueValidator;
+use Wikibase\Validators\LabelDescriptionUniquenessValidator;
 use Wikibase\Validators\RegexValidator;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
@@ -195,6 +198,31 @@ class ChangeOpTestMockProvider {
 				}
 
 				return $types[$id];
+			} ) );
+
+		return $mock;
+	}
+
+	/**
+	 * Returns a mock validator. The term and the language "INVALID" is considered to be
+	 * invalid.
+	 *
+	 * @return ValueValidator
+	 */
+	public function getMockTermValidator() {
+		$mock = $this->getMockBuilder( 'ValueValidators\ValueValidator' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'validate' )
+			->will( PHPUnit_Framework_TestCase::returnCallback( function( $text ) {
+				if ( $text === 'INVALID' ) {
+					$error = Error::newError( 'Invalid', '', 'test-invalid' );
+					return Result::newError( array( $error ) );
+				} else {
+					return Result::newSuccess();
+				}
 			} ) );
 
 		return $mock;
@@ -420,6 +448,29 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
+	 * Returns a mock fingerprint validator. If $entityType is Item::ENTITY_TYPE,
+	 * the validator will detect an error for any fingerprint that contains the string "DUPE"
+	 * for both the description and the label for a given language.
+	 *
+	 * For other entity types, the validator will consider any fingerprint valid.
+	 *
+	 * @see getMockLabelDescriptionDuplicateDetector()
+	 *
+	 * @param $entityType
+	 *
+	 * @return LabelDescriptionUniquenessValidator|CompositeFingerprintValidator
+	 */
+	public function getMockFingerprintValidator( $entityType ) {
+		switch ( $entityType ) {
+			case Item::ENTITY_TYPE:
+				return new LabelDescriptionUniquenessValidator( $this->getMockLabelDescriptionDuplicateDetector() );
+
+			default:
+				return new CompositeFingerprintValidator( array() );
+		}
+	}
+
+	/**
 	 * Returns a TermValidatorFactory that provides mock validators.
 	 * The validators consider the string "INVALID" to be invalid, and "DUPE" to be duplicates.
 	 *
@@ -432,6 +483,12 @@ class ChangeOpTestMockProvider {
 		$mock = $this->getMockBuilder( 'Wikibase\Validators\TermValidatorFactory' )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getFingerprintValidator' )
+			->will( PHPUnit_Framework_TestCase::returnCallback(
+				array( $this, 'getMockFingerprintValidator' )
+			) );
 
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getLanguageValidator' )

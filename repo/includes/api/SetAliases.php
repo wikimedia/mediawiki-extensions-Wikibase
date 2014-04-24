@@ -128,6 +128,26 @@ class SetAliases extends ModifyEntity {
 		return $summary;
 	}
 
+	private function normalizeAliases( $aliases ) {
+		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
+
+		$aliases = array_map(
+			function( $str ) use ( $stringNormalizer ) {
+				return $stringNormalizer->trimToNFC( $str );
+			},
+			$aliases
+		);
+
+		$aliases = array_filter(
+			$aliases,
+			function( $str ) {
+				return $str !== '';
+			}
+		);
+
+		return $aliases;
+	}
+
 	/**
 	 * @since 0.4
 	 *
@@ -135,8 +155,6 @@ class SetAliases extends ModifyEntity {
 	 * @return ChangeOpAliases
 	 */
 	protected function getChangeOps( array $params ) {
-		$stringNormalizer = $this->stringNormalizer; // hack for PHP fail.
-
 		wfProfileIn( __METHOD__ );
 		$changeOps = array();
 		$language = $params['language'];
@@ -146,12 +164,7 @@ class SetAliases extends ModifyEntity {
 			$changeOps[] =
 				$this->termChangeOpFactory->newSetAliasesOp(
 					$language,
-					array_map(
-						function( $str ) use ( $stringNormalizer ) {
-							return $stringNormalizer->trimToNFC( $str );
-						},
-						$params['set']
-					)
+					$this->normalizeAliases( $params['set'] )
 				);
 		} else {
 			// FIXME: if we have ADD and REMOVE operations in the same call,
@@ -161,12 +174,7 @@ class SetAliases extends ModifyEntity {
 				$changeOps[] =
 					$this->termChangeOpFactory->newAddAliasesOp(
 						$language,
-						array_map(
-							function( $str ) use ( $stringNormalizer ) {
-								return $stringNormalizer->trimToNFC( $str );
-							},
-							$params['add']
-						)
+						$this->normalizeAliases( $params['add'] )
 					);
 			}
 
@@ -174,12 +182,7 @@ class SetAliases extends ModifyEntity {
 				$changeOps[] =
 					$this->termChangeOpFactory->newRemoveAliasesOp(
 						$language,
-						array_map(
-							function( $str ) use ( $stringNormalizer ) {
-								return $stringNormalizer->trimToNFC( $str );
-							},
-							$params['remove']
-						)
+						$this->normalizeAliases( $params['remove'] )
 					);
 			}
 		}
