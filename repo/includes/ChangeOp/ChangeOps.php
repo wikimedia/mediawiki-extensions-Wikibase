@@ -13,7 +13,7 @@ use Wikibase\Summary;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOps {
+class ChangeOps implements ChangeOp {
 
 	/**
 	 * @since 0.4
@@ -88,4 +88,22 @@ class ChangeOps {
 		return true;
 	}
 
+	/**
+	 * Returns a ChangeOps instance representing the same changes as this ChangeOps,
+	 * possibly combined into batches for more efficient validation and application.
+	 *
+	 * @note: The global order of ChangeOps may be different in the batched ChangeOps.
+	 *        However, ChangeOps of the same type will remain in the same order
+	 *        relative to each other.
+	 * @note: Currently, this just returns $this
+	 * @todo: implement batching at least for labels and descriptions, perhaps also sitelinks.
+	 * @todo: test me
+	 *
+	 * @since 0.5
+	 *
+	 * @return $this
+	 */
+	public function getBatchedOps() {
+		return $this;
+	}
 }

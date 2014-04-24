@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\ValueValidator;
 use Wikibase\Summary;
 
 /**
@@ -33,6 +34,23 @@ abstract class ChangeOpBase implements ChangeOp {
 			$summary->setAction( $action );
 			$summary->setLanguage( $language );
 			$summary->addAutoSummaryArgs( $args );
+		}
+	}
+
+	/**
+	 * Applies the given validator and throws a ChangeOpValidationException if
+	 * the validation result isn't "valid".
+	 *
+	 * @param ValueValidator $validator
+	 * @param mixed $value
+	 *
+	 * @throws ChangeOpValidationException
+	 */
+	protected function applyValidator( ValueValidator $validator, $value ) {
+		$result = $validator->validate( $value );
+
+		if ( !$result->isValid() ) {
+			throw new ChangeOpValidationException( $result );
 		}
 	}
 }

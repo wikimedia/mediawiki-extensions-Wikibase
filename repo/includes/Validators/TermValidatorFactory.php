@@ -3,11 +3,11 @@
 namespace Wikibase\Validators;
 
 use ValueValidators\ValueValidator;
-use Wikibase\content\LabelDescriptionUniquenessValidator;
-use Wikibase\content\LabelUniquenessValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SiteLinkLookup;
 
 
 /**
@@ -19,6 +19,22 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * @author Daniel Kinzler
  */
 class TermValidatorFactory {
+
+	/**
+	 * Bit mask representing all uniqueness constraints.
+	 */
+	const CONSTRAINTS_ALL = 0xFFFF;
+
+	/**
+	 * Bit mask representing hard uniqueness constraints, to be enforced rigorously on every save.
+	 */
+	const CONSTRAINTS_HARD = 0x0001;
+
+	/**
+	 * Bit mask representing non-hard uniqueness constraints, to be enforced using a "best effort"
+	 * approach.
+	 */
+	const CONSTRAINTS_NON_HARD = 0xFFFE;
 
 	/**
 	 * @var int
@@ -40,6 +56,7 @@ class TermValidatorFactory {
 	 * @param string[] $languages A list of valid language codes
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
+	 * @param SiteLinkLookup $siteLinkLookup
 	 *
 	 * @throws \InvalidArgumentException
 	 */
@@ -47,7 +64,8 @@ class TermValidatorFactory {
 		$maxLength,
 		array $languages,
 		EntityIdParser $idParser,
-		LabelDescriptionDuplicateDetector $termDuplicateDetector
+		LabelDescriptionDuplicateDetector $termDuplicateDetector,
+		SiteLinkLookup $siteLinkLookup
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
 			throw new \InvalidArgumentException( '$maxLength must be a positive integer.' );
@@ -57,6 +75,7 @@ class TermValidatorFactory {
 		$this->languages = $languages;
 		$this->idParser = $idParser;
 		$this->termDuplicateDetector = $termDuplicateDetector;
+		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
 	/**
@@ -64,17 +83,40 @@ class TermValidatorFactory {
 	 * This is intended for checking "soft constraints". For hard constraints,
 	 * see EntityContent::getOnSaveValidators().
 	 *
+	 * @todo: this should go into a separate interface.
+	 *
 	 * @param string $entityType
+	 *
+	 * @param int $level The desired constraint level, see the CONSTRAINT_XXX constants.
 	 *
 	 * @return EntityValidator
 	 */
-	public function getUniquenessValidator( $entityType ) {
+	public function getUniquenessValidator( $entityType, $level ) {
+		$validators = array();
+
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 		if ( $entityType === Property::ENTITY_TYPE ) {
-			return new LabelUniquenessValidator( $this->termDuplicateDetector );
-		} else {
-			return new LabelDescriptionUniquenessValidator( $this->termDuplicateDetector );
+			if ( $level & self::CONSTRAINTS_HARD ) {
+				$validators[] = new LabelUniquenessValidator( $this->termDuplicateDetector );
+			}
 		}
+
+		if ( $entityType === Item::ENTITY_TYPE ) {
+			if ( $level & self::CONSTRAINTS_NON_HARD ) {
+				//FIXME: the TitleLookup and the SiteSQLStore will go away I2240d6e0ce
+				$validators[] = new SiteLinkUniquenessValidator(
+					WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+					$this->siteLinkLookup,
+					\SiteSQLStore::newInstance()
+				);
+			}
+
+			if ( $level & self::CONSTRAINTS_NON_HARD ) {
+				$validators[] = new LabelDescriptionUniquenessValidator( $this->termDuplicateDetector );
+			}
+		}
+
+		return new CompositeEntityValidator( $validators );
 	}
 
 	/**
