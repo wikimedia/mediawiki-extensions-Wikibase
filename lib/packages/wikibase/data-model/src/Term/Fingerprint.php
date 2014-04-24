@@ -110,10 +110,20 @@ class Fingerprint implements Comparable {
 
 	/**
 	 * @since 0.7.3
+	 * @deprecated since 0.7.4 - use getAliasGroups instead
 	 *
 	 * @return AliasGroupList
 	 */
 	public function getAliases() {
+		return $this->aliasGroups;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @return AliasGroupList
+	 */
+	public function getAliasGroups() {
 		return $this->aliasGroups;
 	}
 
@@ -173,6 +183,33 @@ class Fingerprint implements Comparable {
 		return $this->labels->count() === 0
 			&& $this->descriptions->count() === 0
 			&& $this->aliasGroups->count() === 0;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @param TermList $labels
+	 */
+	public function setLabels( TermList $labels ) {
+		$this->labels = $labels;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @param TermList $descriptions
+	 */
+	public function setDescriptions( TermList $descriptions ) {
+		$this->descriptions = $descriptions;
+	}
+
+	/**
+	 * @since 0.7.4
+	 *
+	 * @param AliasGroupList $groups
+	 */
+	public function setAliasGroups( AliasGroupList $groups ) {
+		$this->aliasGroups = $groups;
 	}
 
 }
