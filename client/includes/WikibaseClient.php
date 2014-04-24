@@ -48,11 +48,6 @@ use Wikibase\StringNormalizer;
 final class WikibaseClient {
 
 	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	public $propertyDataTypeLookup;
-
-	/**
 	 * @var SettingsArray
 	 */
 	private $settings;
@@ -212,13 +207,9 @@ final class WikibaseClient {
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getPropertyDataTypeLookup() {
-		if ( $this->propertyDataTypeLookup === null ) {
-			$infoStore = $this->getStore()->getPropertyInfoStore();
-			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup( $infoStore, $retrievingLookup );
-		}
-
-		return $this->propertyDataTypeLookup;
+		$infoStore = $this->getStore()->getPropertyInfoStore();
+		$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+		return new PropertyInfoDataTypeLookup( $infoStore, $retrievingLookup );
 	}
 
 	/**
