@@ -11,7 +11,7 @@ use Wikibase\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
- * @covers Wikibase\LabelDescriptionDuplicateDetectorTest
+ * @covers Wikibase\LabelDescriptionDuplicateDetector
  *
  * @group Wikibase
  * @group WikibaseRepo

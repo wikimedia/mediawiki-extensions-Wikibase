@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
