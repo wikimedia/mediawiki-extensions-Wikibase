@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo;
 
-use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use SiteSQLStore;
 use ValueFormatters\FormatterOptions;
@@ -33,7 +32,6 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
-use Wikibase\PreSaveChecks;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -46,6 +44,7 @@ use Wikibase\Utils;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
+use Wikibase\Validators\EntityConstraintProvider;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -571,17 +570,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @note: this is a temporary facility, for use until all checks have been moved into CHangeOps.
-	 * @return PreSaveChecks
-	 */
-	public function getPreSaveChecks() {
-		return new PreSaveChecks(
-			$this->getTermValidatorFactory(),
-			$this->getValidatorErrorLocalizer()
-		);
-	}
-
-	/**
 	 * @return TermValidatorFactory
 	 */
 	protected function getTermValidatorFactory() {
@@ -591,6 +579,26 @@ class WikibaseRepo {
 		$languages = Utils::getLanguageCodes();
 
 		return new TermValidatorFactory(
+			$maxLength,
+			$languages,
+			$this->getEntityIdParser(),
+			$this->getLabelDescriptionDuplicateDetector(),
+			$this->getEntityTitleLookup(),
+			$this->getStore()->newSiteLinkCache(),
+			$this->getSitesTable()
+		);
+	}
+
+	/**
+	 * @return EntityConstraintProvider
+	 */
+	public function getEntityConstraintProvider() {
+		$constraints = $this->getSettings()->getSetting( 'multilang-limits' );
+		$maxLength = $constraints['length'];
+
+		$languages = Utils::getLanguageCodes();
+
+		return new EntityConstraintProvider(
 			$maxLength,
 			$languages,
 			$this->getEntityIdParser(),

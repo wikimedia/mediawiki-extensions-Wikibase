@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Validators;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\content\LabelDescriptionUniquenessValidator;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Validators\LabelUniquenessValidator;
 
 /**
- * @covers Wikibase\content\LabelDescriptionUniquenessValidator
+ * @covers Wikibase\Validators\LabelUniquenessValidator
  *
  * @group Database
  * @group Wikibase
@@ -21,27 +21,21 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
+class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 
-	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
+	public function detectLabelConflictsForEntity( Entity $entity ) {
 		foreach ( $entity->getLabels() as $lang => $label ) {
-			$description = $entity->getDescription( $lang );
-
-			if ( $description === null ) {
-				continue;
-			}
-
-			if ( $label === 'DUPE' && $description === 'DUPE' ) {
+			if ( $label === 'DUPE' ) {
 				return Result::newError( array(
 					Error::newError(
 						'found conflicting terms',
 						'label',
-						'label-with-description-conflict',
+						'label-conflict',
 						array(
 							'label',
 							$lang,
 							$label,
-							'Q666'
+							'P666'
 						)
 					)
 				) );
@@ -60,34 +54,30 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 			->getMock();
 
 		$dupeDetector->expects( $this->any() )
-			->method( 'detectLabelDescriptionConflictsForEntity' )
-			->will( $this->returnCallback( array( $this, 'detectLabelDescriptionConflictsForEntity' ) ) );
+			->method( 'detectLabelConflictsForEntity' )
+			->will( $this->returnCallback( array( $this, 'detectLabelConflictsForEntity' ) ) );
 
 		return $dupeDetector;
 	}
 
 	public function validEntityProvider() {
-		$goodEntity1 = Item::newEmpty();
-		$goodEntity1->setLabel( 'de', 'DUPE' );
-		$goodEntity1->setId( new ItemId( 'Q5' ) );
-
-		$goodEntity2 = $goodEntity1->copy();
-		$goodEntity2->setDescription( 'de', 'Foo' );
+		$goodEntity = Property::newFromType( 'string' );
+		$goodEntity->setLabel( 'de', 'Foo' );
+		$goodEntity->setDescription( 'de', 'DUPE' );
+		$goodEntity->setId( new PropertyId( 'P5' ) );
 
 		return array(
-			array( $goodEntity1 ),
-			array( $goodEntity2 ),
+			array( $goodEntity ),
 		);
 	}
 
 	public function invalidEntityProvider() {
-		$badEntity = Item::newEmpty();
+		$badEntity = Property::newFromType( 'string' );
 		$badEntity->setLabel( 'de', 'DUPE' );
-		$badEntity->setDescription( 'de', 'DUPE' );
-		$badEntity->setId( new ItemId( 'Q7' ) );
+		$badEntity->setId( new PropertyId( 'P7' ) );
 
 		return array(
-			array( $badEntity, 'label-with-description-conflict' ),
+			array( $badEntity, 'label-conflict' ),
 		);
 	}
 
@@ -98,7 +88,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	 */
 	public function testValidateEntity( Entity $entity ) {
 		$dupeDetector = $this->getMockDupeDetector();
-		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
+		$validator = new LabelUniquenessValidator( $dupeDetector );
 
 		$result = $validator->validateEntity( $entity );
 
@@ -113,7 +103,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	 */
 	public function testValidateEntity_failure( Entity $entity, $error ) {
 		$dupeDetector = $this->getMockDupeDetector();
-		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
+		$validator = new LabelUniquenessValidator( $dupeDetector );
 
 		$result = $validator->validateEntity( $entity );
 
