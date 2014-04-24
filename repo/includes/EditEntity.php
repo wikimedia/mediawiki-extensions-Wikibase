@@ -39,11 +39,6 @@ class EditEntity {
 	protected $entityStore;
 
 	/**
-	 * @var PreSaveChecks
-	 */
-	protected $preSaveChecks = null;
-
-	/**
 	 * The modified entity we are trying to save
 	 *
 	 * @var Entity
@@ -207,16 +202,6 @@ class EditEntity {
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 	}
-
-	/**
-	 * Sets the pre-safe checks to apply
-	 *
-	 * @param PreSaveChecks $preSaveChecks
-	 */
-	public function setPreSafeChecks( PreSaveChecks $preSaveChecks ) {
-		$this->preSaveChecks = $preSaveChecks;
-	}
-
 
 	/**
 	 * Returns the new entity object to be saved. May be different from the entity supplied
@@ -798,30 +783,7 @@ class EditEntity {
 		$baseRev = $this->getBaseRevision();
 		$base = $baseRev === null ? null : $baseRev->getEntity();
 
-		$checks = $this->getPreSaveChecks();
-		if ( $checks ) {
-			//XXX: havn't we calculated this diff already?
-			$entityDiff = $base === null ? null : $entity->getDiff( $base );
-
-			$status = $checks->applyPreSaveChecks( $entity, $entityDiff );
-			$this->status->merge( $status );
-		}
-
 		return $this->status;
-	}
-
-	/**
-	 * @return PreSaveChecks
-	 */
-	protected function getPreSaveChecks() {
-		// XXX: the pre-save checks were ripped out as a quick & dirty measure.
-		// The logic for enforcing constraints is pending a redesign.
-		if ( !$this->preSaveChecks ) {
-			// eek, global state
-			$this->preSaveChecks = WikibaseRepo::getDefaultInstance()->getPreSaveChecks();
-		}
-
-		return $this->preSaveChecks;
 	}
 
 	/**

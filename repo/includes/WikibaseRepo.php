@@ -36,7 +36,6 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
-use Wikibase\PreSaveChecks;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -576,17 +575,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @note: this is a temporary facility, for use until all checks have been moved into CHangeOps.
-	 * @return PreSaveChecks
-	 */
-	public function getPreSaveChecks() {
-		return new PreSaveChecks(
-			$this->getTermValidatorFactory(),
-			$this->getValidatorErrorLocalizer()
-		);
-	}
-
-	/**
 	 * @return TermValidatorFactory
 	 */
 	protected function getTermValidatorFactory() {
@@ -599,7 +587,8 @@ class WikibaseRepo {
 			$maxLength,
 			$languages,
 			$this->getEntityIdParser(),
-			$this->getLabelDescriptionDuplicateDetector()
+			$this->getLabelDescriptionDuplicateDetector(),
+			$this->getStore()->newSiteLinkCache()
 		);
 	}
 

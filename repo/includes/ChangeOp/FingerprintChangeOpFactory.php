@@ -3,14 +3,27 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Validators\TermValidatorFactory;
 
 /**
- * Factory for ChangeOps.
+ * Factory for ChangeOps that apply to an entity Fingerprint.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
 class FingerprintChangeOpFactory {
+
+	/**
+	 * @var TermValidatorFactory
+	 */
+	private $termValidatorFactory;
+
+	/**
+	 * @param TermValidatorFactory $termValidatorFactory
+	 */
+	public function __construct( TermValidatorFactory $termValidatorFactory ) {
+		$this->termValidatorFactory = $termValidatorFactory;
+	}
 
 	/**
 	 * @param string $language
@@ -20,7 +33,7 @@ class FingerprintChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newAddAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'add' );
+		return new ChangeOpAliases( $language, $aliases, 'add', $this->termValidatorFactory );
 	}
 
 	/**
@@ -31,7 +44,7 @@ class FingerprintChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'set' );
+		return new ChangeOpAliases( $language, $aliases, 'set', $this->termValidatorFactory );
 	}
 
 	/**
@@ -41,7 +54,7 @@ class FingerprintChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'remove' );
+		return new ChangeOpAliases( $language, $aliases, 'remove', $this->termValidatorFactory );
 	}
 
 	/**
@@ -52,7 +65,7 @@ class FingerprintChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetDescriptionOp( $language, $description ) {
-		return new ChangeOpDescription( $language, $description );
+		return new ChangeOpDescription( $language, $description, $this->termValidatorFactory );
 	}
 
 	/**
@@ -62,7 +75,7 @@ class FingerprintChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveDescriptionOp( $language ) {
-		return new ChangeOpDescription( $language, null );
+		return new ChangeOpDescription( $language, null, $this->termValidatorFactory );
 	}
 
 	/**
@@ -73,7 +86,7 @@ class FingerprintChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newSetLabelOp( $language, $label ) {
-		return new ChangeOpLabel( $language, $label );
+		return new ChangeOpLabel( $language, $label, $this->termValidatorFactory );
 	}
 
 	/**
@@ -83,7 +96,7 @@ class FingerprintChangeOpFactory {
 	 * @return ChangeOp
 	 */
 	public function newRemoveLabelOp( $language ) {
-		return new ChangeOpLabel( $language, null );
+		return new ChangeOpLabel( $language, null, $this->termValidatorFactory );
 	}
 
 }
