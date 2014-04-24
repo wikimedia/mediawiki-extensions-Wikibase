@@ -250,14 +250,11 @@ class ItemContent extends EntityContent {
 			return array();
 		}
 
-		$item = $this->getItem();
+		$properties = parent::getEntityPageProperties();
 
-		return array_merge(
-			parent::getEntityPageProperties(),
-			array(
-				'wb-sitelinks' => $item->getSiteLinkList()->count(),
-			)
-		);
+		$properties['wb-sitelinks'] = count( $this->getItem()->getSiteLinks() );
+
+		return $properties;
 	}
 
 	/**
@@ -275,11 +272,8 @@ class ItemContent extends EntityContent {
 	 */
 	public function getEntityStatus() {
 		$status = parent::getEntityStatus();
-		$hasSiteLinks = $this->getItem()->hasSiteLinks();
 
-		if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
-			$status = self::STATUS_LINKSTUB;
-		} else if ( $status === self::STATUS_STUB && $hasSiteLinks ) {
+		if ( $status === self::STATUS_STUB && $this->getItem()->hasSiteLinks() ) {
 			$status = self::STATUS_LINKSTUB;
 		}
 

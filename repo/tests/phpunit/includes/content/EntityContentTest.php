@@ -10,14 +10,14 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityDiff;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\WikibaseRepo;
@@ -202,6 +202,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$claim->setGuid( '$testing$' );
 		$contentWithClaim->getEntity()->addClaim( $claim );
 
+		$contentWithLabelAndClaim = $this->newEmpty();
+		$contentWithLabelAndClaim->getEntity()->setLabel( 'de', 'xyz' );
+		$contentWithLabelAndClaim->getEntity()->addClaim( $claim );
+
 		return array(
 			'empty' => array(
 				$this->newEmpty(),
@@ -213,6 +217,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 			),
 			'claims' => array(
 				$contentWithClaim,
+				EntityContent::STATUS_UNTITLED
+			),
+			'claims with terms' => array(
+				$contentWithLabelAndClaim,
 				EntityContent::STATUS_NONE
 			),
 		);
@@ -528,4 +536,5 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 			$this->assertNotNull( $content->getRedirectTarget() );
 		}
 	}
+
 }

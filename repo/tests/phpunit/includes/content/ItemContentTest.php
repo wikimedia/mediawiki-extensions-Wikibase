@@ -105,7 +105,7 @@ class ItemContentTest extends EntityContentTest {
 
 		$cases['linkstub'] = array(
 			$contentLinkStub,
-			ItemContent::STATUS_LINKSTUB
+			ItemContent::STATUS_UNTITLED
 		);
 
 		$linksAndTerms = $contentLinkStub->copy();
@@ -173,6 +173,18 @@ class ItemContentTest extends EntityContentTest {
 
 		$cases['sitelinks'] = array(
 			$this->getItemContentWithSiteLink(),
+			array(
+				'wb-claims' => 0,
+				'wb-sitelinks' => 1,
+				'wb-status' => ItemContent::STATUS_UNTITLED,
+			)
+		);
+
+		$cases['sitelinks with terms'] = array(
+			array(
+				'label' => array( 'en' => 'Foo' ),
+				'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) )
+			),
 			array(
 				'wb-claims' => 0,
 				'wb-sitelinks' => 1,
