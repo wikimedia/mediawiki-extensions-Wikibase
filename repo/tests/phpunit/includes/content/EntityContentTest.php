@@ -274,6 +274,10 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 			),
 			'claims' => array(
 				array( 'claims' => array( $claim ) ),
+				EntityContent::STATUS_UNTITLED
+			),
+			'claims with terms' => array(
+				array( 'label' => array( 'de' => $label ), 'claims' => array( $claim ) ),
 				EntityContent::STATUS_NONE
 			),
 		);
