@@ -23,18 +23,16 @@ use RecursiveIteratorIterator;
 use RequestContext;
 use Revision;
 use SearchResult;
-use SiteSQLStore;
 use Skin;
 use SkinTemplate;
 use SpecialSearch;
 use SplFileInfo;
 use Title;
 use User;
-use Wikibase\content\LabelUniquenessValidator;
-use Wikibase\content\SiteLinkUniquenessValidator;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\TermValidatorFactory;
 use WikiPage;
 
 /**
@@ -1251,31 +1249,16 @@ final class RepoHooks {
 
 	private static function newItemHandler() {
 		$repo = WikibaseRepo::getDefaultInstance();
+		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
 
-		// NOTE: This is only for hard constraints.
-		//       So, check the item's site links, but don't check label/description uniqueness.
-		$validators = array(
-			new SiteLinkUniquenessValidator(
-				$repo->getStore()->newSiteLinkCache()
-			)
-		);
-
-		return new ItemHandler( $validators );
+		return new ItemHandler( array( $validator ) );
 	}
 
 	private static function newPropertyHandler() {
 		$repo = WikibaseRepo::getDefaultInstance();
+		$validator = $repo->getEntityConstraintProvider()->getConstraints( Property::ENTITY_TYPE );
 
-		// NOTE: This is only for hard constraints.
-		//       Check that the property's labels are unique (per language),
-		//       but don't check again that labels aren't be IDs.
-		$validators = array(
-			new LabelUniquenessValidator(
-				$repo->getLabelDescriptionDuplicateDetector()
-			)
-		);
-
-		return new PropertyHandler( $validators );
+		return new PropertyHandler( array( $validator ) );
 	}
 
 }

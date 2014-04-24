@@ -43,31 +43,20 @@ Examples of local constraints include:
 
 Global constraints are constraints that require knowledge of the entire
 Entity and possible the state of the database in order to be enforced.
-There are "hard" and "non-hard" global constraints; for ''hard'' global
-constraints, see the next section below.
 
-Non-hard global constraints are enforced on most save operations
-(notable exceptions are things like import or undelete). They
-are triggered by the EditEntity controller and currently
-encapsulated in the PreSaveChecks class, though that may change
-without notice.
-
-'''NOTE''': Checks on non-hard global constraints can be optimized to
-consider only the parts of an Entity changed by the edit at hand; that
-is, they may be based on the diff between the Entity's old and new
-state. This means that it may or may not be possile to edit an entity
-that violates a (non-hard) global constraint in a part that was not
-presently edited.
+Global constraints are enforced by ChangeOps, just like local
+constraints. They apply to newly entered data, not to data already
+present in the database.
 
 TBD: canonical location defining such constraints, mechanism for
 registering new constraints.
 
 Currently, the following (non-hard) global constraints are defined:
 * If an Item has a label and a description for a given language, no other Item may have that same combination for the same language.
-* Term (fingerprint) validity (labels are not too long, language codes are known, etc). NOTE: this is really a local constraint and will be moved!
+* Term (fingerprint) validity (labels are not too long, language codes are known, etc).
 
 
-== Hard Constraints ==
+== Hard GLobal Constraints ==
 
 Hard constraints are global constraints that are required by the data
 model. Violating a hard constraint means breaking the integrity of the

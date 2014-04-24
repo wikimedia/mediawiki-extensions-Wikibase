@@ -85,10 +85,12 @@ class ChangeOpSiteLink extends ChangeOpBase {
 
 		foreach ( $badges as $badge ) {
 			if ( !( $badge instanceof ItemId ) ) {
+				//FIXME: proper validation exception!
 				throw new InvalidArgumentException( '$badge needs to be an ItemId' );
 			}
 
 			if ( !array_key_exists( $badge->getPrefixedId(), $badgeItems ) ) {
+				//FIXME: proper validation exception!
 				throw new InvalidArgumentException( 'Only items specified in the config can be badges' );
 			}
 		}
@@ -132,6 +134,11 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
+		// NOTE: sitelink uniqueness is a hard constraint and is checked on save
+		//       via ItemContent::prepareSave!
+
+		//FIXME: validate the site ID (and check that the page exists??!)
+
 		if ( !( $entity instanceof Item ) ) {
 			throw new InvalidArgumentException( 'ChangeOpSiteLink can only be applied to Item instances' );
 		}
@@ -151,6 +158,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				if ( $entity->hasLinkToSite( $this->siteId ) ) {
 					$pageName = $entity->getSiteLink( $this->siteId )->getPageName();
 				} else {
+					//FIXME: proper validation exception!
 					throw new InvalidArgumentException( 'The sitelink does not exist' );
 				}
 			} else {
