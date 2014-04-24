@@ -2,10 +2,13 @@
 
 namespace Wikibase\Validators;
 
+use InvalidArgumentException;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\SiteLinkLookup;
 
 
 /**
@@ -21,23 +24,24 @@ class TermValidatorFactory {
 	/**
 	 * @var int
 	 */
-	protected $maxLength;
+	private $maxLength;
 
 	/**
 	 * @var string[]
 	 */
-	protected $languages;
+	private $languages;
 
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $idParser;
+	private $idParser;
 
 	/**
 	 * @param int $maxLength The maximum length of terms.
 	 * @param string[] $languages A list of valid language codes
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
+	 * @param SiteLinkLookup $siteLinkLookup
 	 *
 	 * @throws \InvalidArgumentException
 	 */
@@ -45,7 +49,8 @@ class TermValidatorFactory {
 		$maxLength,
 		array $languages,
 		EntityIdParser $idParser,
-		LabelDescriptionDuplicateDetector $termDuplicateDetector
+		LabelDescriptionDuplicateDetector $termDuplicateDetector,
+		SiteLinkLookup $siteLinkLookup
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
 			throw new \InvalidArgumentException( '$maxLength must be a positive integer.' );
@@ -55,23 +60,31 @@ class TermValidatorFactory {
 		$this->languages = $languages;
 		$this->idParser = $idParser;
 		$this->termDuplicateDetector = $termDuplicateDetector;
+		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
 	/**
-	 * Returns a validator for checking global uniqueness constraints.
-	 * This is intended for checking "soft constraints". For hard constraints,
-	 * see EntityContent::getOnSaveValidators().
+	 * Returns a validator for checking an (updated) fingerprint.
+	 * May be used to apply global uniqueness checks.
+	 *
+	 * @note The fingerprint validator provided here is intended to apply
+	 *       checks in ADDITION to the ones performed by the validators
+	 *       returned by the getLabelValidator() etc functions below.
 	 *
 	 * @param string $entityType
 	 *
-	 * @return EntityValidator
+	 * @throws InvalidArgumentException
+	 * @return FingerprintValidator
 	 */
-	public function getUniquenessValidator( $entityType ) {
+	public function getFingerprintValidator( $entityType ) {
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
-		if ( $entityType === Property::ENTITY_TYPE ) {
-			return new LabelUniquenessValidator( $this->termDuplicateDetector );
-		} else {
-			return new LabelDescriptionUniquenessValidator( $this->termDuplicateDetector );
+
+		switch ( $entityType ) {
+			case Item::ENTITY_TYPE:
+				return new LabelDescriptionUniquenessValidator( $this->termDuplicateDetector );
+
+			default:
+				return new CompositeFingerprintValidator( array() );
 		}
 	}
 

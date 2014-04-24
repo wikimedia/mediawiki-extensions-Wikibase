@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -23,7 +24,7 @@ use Wikibase\Validators\UniquenessViolation;
  */
 class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase {
 
-	public function provideLabelConflictsForEntity() {
+	private function getWorld() {
 		$world = array();
 
 		$world[] = new Term( array(
@@ -35,6 +36,14 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		) );
 
 		$world[] = new Term( array(
+			'termType' => Term::TYPE_DESCRIPTION,
+			'termLanguage' => 'en',
+			'entityId' => 42,
+			'entityType' => Item::ENTITY_TYPE,
+			'termText' => 'item description',
+		) );
+
+		$world[] = new Term( array(
 			'termType' => Term::TYPE_LABEL,
 			'termLanguage' => 'en',
 			'entityId' => 17,
@@ -42,28 +51,34 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'termText' => 'property label',
 		) );
 
-		$empty = Item::newEmpty();
-		$empty->setId( new ItemId( 'Q23' ) );
+		return $world;
+	}
 
-		$differentLabel = Item::newEmpty();
-		$differentLabel->setId( new ItemId( 'Q23' ) );
-		$differentLabel->setLabel( 'en', 'another item label' );
+	private function makeItem( $id, $lang = null, $label = null, $description = null ) {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( $id ) );
 
-		$differentLanguage = Item::newEmpty();
-		$differentLanguage->setId( new ItemId( 'Q23' ) );
-		$differentLanguage->setLabel( 'fr', 'item label' );
+		if ( $label !== null ) {
+			$item->setLabel( $lang, $label );
+		}
 
-		$differentType = Item::newEmpty();
-		$differentType->setId( new ItemId( 'Q23' ) );
-		$differentType->setLabel( 'en', 'property label' );
+		if ( $description !== null ) {
+			$item->setDescription( $lang, $description );
+		}
 
-		$conflict = Item::newEmpty();
-		$conflict->setId( new ItemId( 'Q23' ) );
-		$conflict->setLabel( 'en', 'item label' );
+		return $item;
+	}
 
-		$sameId = Item::newEmpty();
-		$sameId->setId( new ItemId( 'Q42' ) );
-		$sameId->setLabel( 'en', 'item label' );
+	public function provideLabelConflictsForEntity() {
+		$world = $this->getWorld();
+
+		$empty = $this->makeItem( 'Q23' );
+		$differentLabel = $this->makeItem( 'Q23', 'en', 'another item label' );
+		$differentLanguage = $this->makeItem( 'Q23', 'fr', 'item label' );
+		$differentType = $this->makeItem( 'Q23', 'en', 'property label' );
+
+		$conflict = $this->makeItem( 'Q23', 'en', 'item label' );
+		$sameId = $this->makeItem( 'Q42', 'en', 'item label' );
 
 		$error = new UniquenessViolation(
 			new ItemId( 'Q42' ),
@@ -102,63 +117,16 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 	}
 
 	public function provideLabelDescriptionConflictsForEntity() {
-		$world = array();
+		$world = $this->getWorld();
 
-		$world[] = new Term( array(
-			'termType' => Term::TYPE_LABEL,
-			'termLanguage' => 'en',
-			'entityId' => 42,
-			'entityType' => Item::ENTITY_TYPE,
-			'termText' => 'item label',
-		) );
+		$empty = $this->makeItem( 'Q23' );
+		$noDescription = $this->makeItem( 'Q23', 'en', 'item label' );
+		$differentLabel = $this->makeItem( 'Q23', 'en', 'another item label', 'item description' );
+		$differentDescription = $this->makeItem( 'Q23', 'en', 'item label', 'another item description' );
+		$differentLanguage = $this->makeItem( 'Q23', 'fr', 'item label', 'item description' );
 
-		$world[] = new Term( array(
-			'termType' => Term::TYPE_DESCRIPTION,
-			'termLanguage' => 'en',
-			'entityId' => 42,
-			'entityType' => Item::ENTITY_TYPE,
-			'termText' => 'item description',
-		) );
-
-		$world[] = new Term( array(
-			'termType' => Term::TYPE_LABEL,
-			'termLanguage' => 'en',
-			'entityId' => 17,
-			'entityType' => Property::ENTITY_TYPE,
-			'termText' => 'property label',
-		) );
-
-		$empty = Item::newEmpty();
-		$empty->setId( new ItemId( 'Q23' ) );
-
-		$noDescription = Item::newEmpty();
-		$noDescription->setId( new ItemId( 'Q23' ) );
-		$noDescription->setLabel( 'en', 'property label' );
-
-		$differentLabel = Item::newEmpty();
-		$differentLabel->setId( new ItemId( 'Q23' ) );
-		$differentLabel->setLabel( 'en', 'another item label' );
-		$differentLabel->setDescription( 'en', 'item description' );
-
-		$differentDescription = Item::newEmpty();
-		$differentDescription->setId( new ItemId( 'Q23' ) );
-		$differentDescription->setLabel( 'en', 'item label' );
-		$differentDescription->setDescription( 'en', 'another item description' );
-
-		$differentLanguage = Item::newEmpty();
-		$differentLanguage->setId( new ItemId( 'Q23' ) );
-		$differentLanguage->setLabel( 'fr', 'item label' );
-		$differentLanguage->setDescription( 'fr', 'item description' );
-
-		$conflict = Item::newEmpty();
-		$conflict->setId( new ItemId( 'Q23' ) );
-		$conflict->setLabel( 'en', 'item label' );
-		$conflict->setDescription( 'en', 'item description' );
-
-		$sameId = Item::newEmpty();
-		$sameId->setId( new ItemId( 'Q42' ) );
-		$sameId->setLabel( 'en', 'item label' );
-		$sameId->setDescription( 'en', 'item description' );
+		$conflict = $this->makeItem( 'Q23', 'en', 'item label', 'item description' );
+		$sameId = $this->makeItem( 'Q42', 'en', 'item label', 'item description' );
 
 		$error = new UniquenessViolation(
 			new ItemId( 'Q42' ),
@@ -193,6 +161,94 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$detector = new LabelDescriptionDuplicateDetector( new MockTermIndex( $world ) );
 
 		$result = $detector->detectLabelDescriptionConflictsForEntity( $entity );
+
+		$this->assertResult( $result, $expectedErrors );
+	}
+
+
+	public function provideDetectTermConflicts() {
+		$world = $this->getWorld();
+
+		$labelError = new UniquenessViolation(
+			new ItemId( 'Q42' ),
+			'Conflicting term!',
+			'label-conflict',
+			array(
+				'item label',
+				'en',
+				new ItemId( 'Q42' )
+			)
+		);
+
+		$descriptionError = new UniquenessViolation(
+			new ItemId( 'Q42' ),
+			'Conflicting term!',
+			'label-with-description-conflict',
+			array(
+				'item label',
+				'en',
+				new ItemId( 'Q42' )
+			)
+		);
+
+		return array(
+			'no label conflict' => array(
+				$world,
+				array( 'en' => 'foo' ),
+				null,
+				null,
+				array()
+			),
+
+			'label conflict' => array(
+				$world,
+				array( 'en' => 'item label' ),
+				null,
+				null,
+				array( $labelError )
+			),
+
+			'ignored label conflict' => array(
+				$world,
+				array( 'en' => 'item label' ),
+				null,
+				new ItemId( 'Q42' ),
+				array()
+			),
+
+			'no label/description conflict' => array(
+				$world,
+				array( 'en' => 'item label' ),
+				array(),
+				null,
+				array()
+			),
+
+			'label/description conflict' => array(
+				$world,
+				array( 'en' => 'item label' ),
+				array( 'en' => 'item description' ),
+				null,
+				array( $descriptionError )
+			),
+
+			'ignored label/description conflict' => array(
+				$world,
+				array( 'en' => 'item label' ),
+				array( 'en' => 'item description' ),
+				new ItemId( 'Q42' ),
+				array()
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideDetectTermConflicts
+	 */
+	public function testDetectTermConflicts( $world, $labels, $descriptions, $ignore, $expectedErrors ) {
+		$detector = new LabelDescriptionDuplicateDetector( new MockTermIndex( $world ) );
+
+		$result = $detector->detectTermConflicts( $labels, $descriptions, $ignore );
 
 		$this->assertResult( $result, $expectedErrors );
 	}

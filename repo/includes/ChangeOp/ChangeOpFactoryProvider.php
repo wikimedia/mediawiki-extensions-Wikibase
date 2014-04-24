@@ -7,6 +7,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
+use Wikibase\Validators\TermValidatorFactory;
 
 /**
  * Provider for ChangeOpFactories.
@@ -44,18 +45,25 @@ class ChangeOpFactoryProvider {
 	private $snakValidator;
 
 	/**
+	 * @var TermValidatorFactory
+	 */
+	private $termValidatorFactory;
+
+	/**
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ClaimGuidGenerator $guidGenerator
 	 * @param ClaimGuidValidator $guidValidator
 	 * @param ClaimGuidParser $guidParser
 	 * @param SnakValidator $snakValidator
+	 * @param TermValidatorFactory $termValidatorFactory
 	 */
 	public function __construct(
 		EntityConstraintProvider $constraintProvider,
 		ClaimGuidGenerator $guidGenerator,
 		ClaimGuidValidator $guidValidator,
 		ClaimGuidParser $guidParser,
-		SnakValidator $snakValidator
+		SnakValidator $snakValidator,
+		TermValidatorFactory $termValidatorFactory
 	) {
 		$this->constraintProvider = $constraintProvider;
 
@@ -64,14 +72,16 @@ class ChangeOpFactoryProvider {
 		$this->guidParser = $guidParser;
 
 		$this->snakValidator = $snakValidator;
+		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
 	/**
 	 * @return FingerprintChangeOpFactory
 	 */
 	public function getFingerprintChangeOpFactory() {
-		//@todo: inject validators
-		return new FingerprintChangeOpFactory();
+		return new FingerprintChangeOpFactory(
+			$this->termValidatorFactory
+		);
 	}
 
 	/**

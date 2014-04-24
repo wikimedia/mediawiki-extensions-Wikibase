@@ -2,15 +2,14 @@
 
 namespace Wikibase\Test;
 
-use ValueValidators\Error;
-use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Validators\TermValidatorFactory;
-use Wikibase\SettingsArray;
 
 /**
  * @covers TermValidatorFactory
@@ -24,75 +23,6 @@ use Wikibase\SettingsArray;
  */
 class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	public function detectLabelConflictsForEntity( Entity $entity ) {
-		foreach ( $entity->getLabels() as $lang => $label ) {
-			if ( $label === 'DUPE' ) {
-				return Result::newError( array(
-					Error::newError(
-						'found conflicting terms',
-						'label',
-						'label-conflict',
-						array(
-							'label',
-							$lang,
-							$label,
-							'P666'
-						)
-					)
-				) );
-			}
-		}
-
-		return Result::newSuccess();
-	}
-
-	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
-		foreach ( $entity->getLabels() as $lang => $label ) {
-			$description = $entity->getDescription( $lang );
-
-			if ( $description === null ) {
-				continue;
-			}
-
-			if ( $label === 'DUPE' && $description === 'DUPE' ) {
-				return Result::newError( array(
-					Error::newError(
-						'found conflicting terms',
-						'label',
-						'label-with-description-conflict',
-						array(
-							'label',
-							$lang,
-							$label,
-							'Q666'
-						)
-					)
-				) );
-			}
-		}
-
-		return Result::newSuccess();
-	}
-
-	/**
-	 * @return LabelDescriptionDuplicateDetector
-	 */
-	private function getMockDupeDetector() {
-		$dupeDetector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$dupeDetector->expects( $this->any() )
-			->method( 'detectLabelConflictsForEntity' )
-			->will( $this->returnCallback( array( $this, 'detectLabelConflictsForEntity' ) ) );
-
-		$dupeDetector->expects( $this->any() )
-			->method( 'detectLabelDescriptionConflictsForEntity' )
-			->will( $this->returnCallback( array( $this, 'detectLabelDescriptionConflictsForEntity' ) ) );
-
-		return $dupeDetector;
-	}
-
 	/**
 	 * @param $maxLength
 	 * @param $languages
@@ -101,29 +31,44 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	 */
 	protected function newFactory( $maxLength, $languages ) {
 		$idParser = new BasicEntityIdParser();
-		$dupeDetector = $this->getMockDupeDetector();
 
-		$builders = new TermValidatorFactory( $maxLength, $languages, $idParser, $dupeDetector );
+		$mockProvider = new ChangeOpTestMockProvider( $this );
+		$dupeDetector = $mockProvider->getMockLabelDescriptionDuplicateDetector();
+		$siteLinkLookup = $mockProvider->getMockSitelinkCache();
+
+		$builders = new TermValidatorFactory( $maxLength, $languages, $idParser, $dupeDetector, $siteLinkLookup );
 		return $builders;
 	}
 
 	public function testGetUniquenessValidator() {
 		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
 
-		$validator = $builders->getUniquenessValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'Wikibase\Validators\EntityValidator', $validator );
+		$this->assertInstanceOf( 'Wikibase\Validators\FingerprintValidator', $validator );
 
-		$goodEntity = Item::newEmpty();
-		$goodEntity->setLabel( 'en', 'DUPE' );
-		$goodEntity->setDescription( 'en', 'bla' );
+		$goodFingerprint = new Fingerprint(
+			new TermList( array(
+				new Term( 'en', 'DUPE' ),
+			) ),
+			new TermList( array(
+				new Term( 'en', 'bla' ),
+			) ),
+			new AliasGroupList( array() )
+		);
 
-		$badEntity = Item::newEmpty();
-		$badEntity->setLabel( 'en', 'DUPE' );
-		$badEntity->setDescription( 'en', 'DUPE' );
+		$labelDupeFingerprint = new Fingerprint(
+			new TermList( array(
+				new Term( 'en', 'DUPE' ),
+			) ),
+			new TermList( array(
+				new Term( 'en', 'DUPE' ),
+			) ),
+			new AliasGroupList( array() )
+		);
 
-		$this->assertTrue( $validator->validateEntity( $goodEntity )->isValid(), 'isValid(good)' );
-		$this->assertFalse( $validator->validateEntity( $badEntity )->isValid(), 'isValid(bad)' );
+		$this->assertTrue( $validator->validateFingerprint( $goodFingerprint )->isValid(), 'isValid(good)' );
+		$this->assertFalse( $validator->validateFingerprint( $labelDupeFingerprint )->isValid(), 'isValid(bad): label/description' );
 	}
 
 	public function testGetLanguageValidator() {
