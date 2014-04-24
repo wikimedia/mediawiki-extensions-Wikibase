@@ -257,4 +257,51 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testEmptyFingerprintIsEmpty() {
+		$this->assertTrue( Fingerprint::newEmpty()->isEmpty() );
+	}
+
+	/**
+	 * @dataProvider nonEmptyFingerprintProvider
+	 */
+	public function testNonEmptyFingerprintIsNotEmpty( Fingerprint $nonEmptyFingerprint ) {
+		$this->assertFalse( $nonEmptyFingerprint->isEmpty() );
+	}
+
+	public function nonEmptyFingerprintProvider() {
+		return array(
+			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				)
+			),
+
+			array(
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array( new Term( 'en', 'foo' ) ) ),
+					new AliasGroupList( array() )
+				)
+			),
+
+			array(
+				new Fingerprint(
+					new TermList( array() ),
+					new TermList( array() ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+
+			array(
+				new Fingerprint(
+					new TermList( array( new Term( 'nl', 'bar' ), new Term( 'fr', 'le' ) ) ),
+					new TermList( array( new Term( 'de', 'baz' ) ) ),
+					new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) )
+				)
+			),
+		);
+	}
+
 }
