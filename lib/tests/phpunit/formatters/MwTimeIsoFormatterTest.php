@@ -318,11 +318,6 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 	 * @param string $langCode
 	 */
 	public function testFormat( $expected, TimeValue $timeValue, $roundtrip = false, $langCode = 'en' ) {
-		//TODO remove this skip section once $brokenLanguages can be empty! BUG 63723
-		if( in_array( $langCode, array( 'lzh', 'zh-classical' ) ) ) {
-			$this->markTestSkipped( "Test for lang {$langCode} currently broken: Bug 63723" );
-		}
-
 		$options = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => $langCode
 		) );
