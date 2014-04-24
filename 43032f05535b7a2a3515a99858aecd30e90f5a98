@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_6ab498cf",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "not-allowed is used when a value is not matching a fixed whitelist of values (a very specific error triggered by InArrayValidator). bad-value is triggered when we encounter a corrupt serialization of a DataValue. They are very different. Will try to clarify.",
+      "parentUuid": "8e23439c_a51b0f1f",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d0ba481e",
         "filename": "lib/i18n/qqq.json",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-23T09:18:39Z",
       "side": 1,
       "message": "Please use tabs to be at least consistent in one file.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8aba54b4",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_d0ba481e",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_ca416cad",
+        "filename": "lib/includes/Validators/InArrayValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "no, too much magic.",
+      "parentUuid": "8e23439c_a598af7b",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_90d61053",
         "filename": "lib/includes/Validators/NotEntityIdValidator.php",
         "patchSetId": 12
@@ -81,6 +135,24 @@
       "writtenOn": "2014-04-23T09:18:39Z",
       "side": 1,
       "message": "Guessing from the name I expected this class to validate the actual type of the value, not what it looks like (i. e. the format). Maybe NotEntityIdFormatValidator or something else would be clearer.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_70c5b463",
+        "filename": "lib/includes/Validators/NotEntityIdValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "The current name sucks and all the alternatives also suck :)",
+      "parentUuid": "8e23439c_90d61053",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_2acb4022",
+        "filename": "lib/includes/Validators/NotEntityIdValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "*shrug*",
+      "parentUuid": "8e23439c_65a4d79e",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_a5cc2f66",
         "filename": "lib/includes/Validators/StringLengthValidator.php",
         "patchSetId": 12
@@ -132,6 +222,24 @@
       "writtenOn": "2014-04-23T10:15:49Z",
       "side": 1,
       "message": "This is a bit odd.\n\nIf maxLength is 10 then a 32 char value will not be truncated but a 33 char value will be truncated to 10.\n\nIf maxLength is 100 then a 33 char string will get dots appended without being truncated.\n\nI guess you meant:\n\n$maxLength \u003d min( 32, $this-\u003emaxLength );\nif ( $length \u003e $maxLength ) {\n\treturn substr( $value, 0, $maxLength - 3 ) . \u0027...\u0027;\n}",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0ad084ca",
+        "filename": "lib/includes/Validators/StringLengthValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "No. The cut-off limit is completely unrelated to the maximum length allowed. The cut-off length is a practical constraint for log messages. The error here is actually just that I wanted this below:\n\n  $value \u003d substr( $value, 0, 29 ) . \u0027...\u0027;\n\n$this-\u003emaxLength should not play into this at all.",
+      "parentUuid": "8e23439c_a5cc2f66",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +263,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_4af1dc64",
+        "filename": "lib/tests/phpunit/Validators/InArrayValidatorTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "innnnn!",
+      "parentUuid": "8e23439c_b0bc6c02",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_f0454419",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 12
@@ -166,6 +292,24 @@
       "writtenOn": "2014-04-23T09:18:39Z",
       "side": 1,
       "message": "Tabs, again.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_eaff882f",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_f0454419",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_ea8668bd",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactory.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "thinking about it...",
+      "parentUuid": "8e23439c_058643e0",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_e59ea709",
         "filename": "repo/includes/PreSaveChecks.php",
         "patchSetId": 12
@@ -200,6 +362,24 @@
       "writtenOn": "2014-04-23T10:15:49Z",
       "side": 1,
       "message": "if !\u003d\u003d null?",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6aba586e",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "Pointless for objects.",
+      "parentUuid": "8e23439c_e59ea709",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +403,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_2ab0e087",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "yea, I didn\u0027t plan to use it for language code when I wrote it. will fix.",
+      "parentUuid": "8e23439c_c5d96bf9",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_658a97c1",
         "filename": "repo/includes/PreSaveChecks.php",
         "patchSetId": 12
@@ -240,6 +438,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_eaad482f",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "no - this applies a specific kind of check to the entity, it doesn\u0027t check an entity overall.",
+      "parentUuid": "8e23439c_658a97c1",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_45679b4a",
         "filename": "repo/includes/PreSaveChecks.php",
         "patchSetId": 12
@@ -251,6 +467,24 @@
       "writtenOn": "2014-04-23T10:15:49Z",
       "side": 1,
       "message": "Naming, see above.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_aaa3d03e",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_45679b4a",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +525,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_8aa01433",
+        "filename": "repo/includes/TermDuplicateDetector.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "well, technically, one is a type check, and one is a value check. But whatever :)",
+      "parentUuid": "8e23439c_f0d0a423",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_b09d8c6b",
         "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
         "patchSetId": 12
@@ -302,6 +554,24 @@
       "writtenOn": "2014-04-23T10:15:49Z",
       "side": 1,
       "message": "Moving this file from lib to repo could possibly it\u0027s own little insta-merge patch.",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6a6938f5",
+        "filename": "repo/includes/Validators/ValidatorErrorLocalizer.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "yea, probably.",
+      "parentUuid": "8e23439c_b09d8c6b",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +595,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_ca604cfe",
+        "filename": "repo/includes/content/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "It\u0027s an adapter that maps the \"validator\" interface to a specific method of the duplicate detector. It allows me to represent the specific kind of dupe detection I want as a validator, and pass it around. That\u0027s all.\n\nBut don\u0027t worry, I\u0027ll drop this eventually. The current interface forces validation of *all* labels and descriptions if *any* is changed. That\u0027s annoying.",
+      "parentUuid": "8e23439c_10a1e090",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_706134a3",
         "filename": "repo/includes/content/SiteLinkUniquenessValidator.php",
         "patchSetId": 12
@@ -336,6 +624,24 @@
       "writtenOn": "2014-04-23T09:18:39Z",
       "side": 1,
       "message": "Does this in fact completely remove the localized error message? If so, why?",
+      "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ca272cc4",
+        "filename": "repo/includes/content/SiteLinkUniquenessValidator.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-24T13:35:26Z",
+      "side": 1,
+      "message": "Because the localization should be done in or close to the presentation layer. Doing that in the business logic is wrong conceptually, and possibly forces us to drag in extra knowledge / dependencies.\n\nThe localization is still done, but further up the stack, when the error gets reported.",
+      "parentUuid": "8e23439c_706134a3",
       "revId": "43032f05535b7a2a3515a99858aecd30e90f5a98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
