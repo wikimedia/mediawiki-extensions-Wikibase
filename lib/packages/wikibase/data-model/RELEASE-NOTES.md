@@ -17,14 +17,25 @@
 	* `getLabel`
 	* `setLabel`
 	* `removeLabel`
+	* `setLabels`
 	* `getDescription`
 	* `setDescription`
 	* `removeDescription`
+	* `setDescriptions`
 	* `getAliasGroup`
 	* `setAliasGroup`
 	* `removeAliasGroup`
+	* `setAliasGroups`
+	* `getAliasGroups`
 	* `isEmpty`
 * Added `ItemIdSet`
+
+#### Deprecations
+
+* `Entity::clear` (to be removed in 1.0)
+* `Entity::isEmpty` (to be removed in 1.0)
+* `Entity::stub` (to be removed in 1.0)
+* `Fingerprint::getAliases (in favour of `Fingerprint::getAliasGroups`)
 
 ## Version 0.7.3 (2014-04-11)
 

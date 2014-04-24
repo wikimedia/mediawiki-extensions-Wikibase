@@ -304,4 +304,43 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testSetLabels() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( new Term( 'en', 'foo' ) );
+
+		$labels = new TermList( array(
+			new Term( 'de', 'bar' )
+		) );
+
+		$fingerprint->setLabels( $labels );
+
+		$this->assertEquals( $labels, $fingerprint->getLabels() );
+	}
+
+	public function testSetDescriptions() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setDescription( new Term( 'en', 'foo' ) );
+
+		$descriptions = new TermList( array(
+			new Term( 'de', 'bar' )
+		) );
+
+		$fingerprint->setDescriptions( $descriptions );
+
+		$this->assertEquals( $descriptions, $fingerprint->getDescriptions() );
+	}
+
+	public function testSetAliasGroups() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setAliasGroup( new AliasGroup( 'en', array( 'foo' ) ) );
+
+		$groups = new AliasGroupList( array(
+			new AliasGroup( 'de', array( 'bar' ) )
+		) );
+
+		$fingerprint->setAliasGroups( $groups );
+
+		$this->assertEquals( $groups, $fingerprint->getAliasGroups() );
+	}
+
 }
