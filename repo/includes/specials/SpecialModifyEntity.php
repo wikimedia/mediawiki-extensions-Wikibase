@@ -43,8 +43,6 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected $rightsText;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var ChangeOpFactory
 	 */
 	protected $changeOpFactory;
@@ -63,7 +61,20 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		$this->changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+	}
+
+	/**
+	 * @param string $entityType
+	 *
+	 * @return ChangeOpFactory
+	 */
+	protected function initChangOpFactory( $entityType ) {
+		if ( $this->changeOpFactory === null ) {
+			$this->changeOpFactory = $this->changeOpFactoryProvider->getChangeOpFactory( $entityType );
+		}
+
+		return $this->changeOpFactory;
 	}
 
 	/**
