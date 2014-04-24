@@ -111,7 +111,7 @@ They where no longer needed.
 #### Removals
 
 * Removed PropertySnak interface
-* Claims::getObjectType removed
+* Removed Claims::getObjectType
 
 ## Version 0.6 (2013-12-23)
 
