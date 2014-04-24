@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_566bc515",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T20:16:23Z",
+      "side": 1,
+      "message": "This class is in lib, so yes",
+      "parentUuid": "8e23439c_8ef2e1cb",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_6ebf85ce",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-09T15:36:21Z",
       "side": 1,
       "message": "At least make a TODO comment here for handlign the namespace mapping in a simmilar way.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_56f18564",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T20:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_6ebf85ce",
       "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_76c5a10c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T20:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_6e29c535",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_ce19f928",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-04-09T15:36:21Z",
       "side": 1,
       "message": "The constructor already takes a list of model IDs. Just change that to take the mapping. There are not many places that construct a EntityContentFactory.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1642ed62",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T20:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_ce19f928",
       "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_767fe1dd",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T20:16:23Z",
+      "side": 1,
+      "message": "mh?",
+      "parentUuid": "8e23439c_eeeb95d9",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_6ed8a558",
         "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
         "patchSetId": 6
@@ -115,6 +205,24 @@
       "writtenOn": "2014-04-09T15:36:21Z",
       "side": 1,
       "message": "This field only exists $wgContentHandlerUseDB is true. On many Wikimedia wikis, it does not exist and would cause an SQL error.",
+      "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d628f5de",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-04-24T20:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_6ed8a558",
       "revId": "8404696d9f5c7275bb4f816ee9325a1921854b39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
