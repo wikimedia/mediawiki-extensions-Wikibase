@@ -2,10 +2,12 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
-use InvalidArgumentException;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpAliases
@@ -16,8 +18,15 @@ use InvalidArgumentException;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel Kinzler
  */
 class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
+
+
+	private function getTermValidatorFactory() {
+		$mockProvider = new ChangeOpTestMockProvider( $this );
+		return $mockProvider->getMockTermValidatorFactory();
+	}
 
 	public function invalidConstructorProvider() {
 		$args = array();
@@ -36,10 +45,16 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $action
 	 */
 	public function testInvalidConstruct( $language, $aliases, $action ) {
-		new ChangeOpAliases( $language, $aliases, $action );
+		// "INVALID" is invalid
+		$validatorFactory = $this->getTermValidatorFactory();
+
+		new ChangeOpAliases( $language, $aliases, $action, $validatorFactory );
 	}
 
 	public function changeOpAliasesProvider() {
+		// "INVALID" is invalid
+		$validatorFactory = $this->getTermValidatorFactory();
+
 		$enAliases = array( 'en-alias1', 'en-alias2', 'en-alias3' );
 		$existingEnAliases = array ( 'en-existingAlias1', 'en-existingAlias2' );
 		$item = ItemContent::newEmpty();
@@ -47,10 +62,10 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 		$entity->setAliases( 'en', $existingEnAliases );
 
 		$args = array();
-		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $enAliases, 'add' ), array_merge( $existingEnAliases, $enAliases ) );
-		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $enAliases, 'set' ), $enAliases );
-		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $enAliases, '' ), $enAliases );
-		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $existingEnAliases, 'remove' ), array() );
+		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $enAliases, 'add', $validatorFactory ), array_merge( $existingEnAliases, $enAliases ) );
+		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $enAliases, 'set', $validatorFactory ), $enAliases );
+		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $enAliases, '', $validatorFactory ), $enAliases );
+		$args[] = array ( clone $entity, new ChangeOpAliases( 'en', $existingEnAliases, 'remove', $validatorFactory ), array() );
 
 		return $args;
 	}
@@ -67,13 +82,40 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedAliases, $entity->getAliases( 'en' ) );
 	}
 
+	public function invalidChangeOpAliasProvider() {
+		// "INVALID" is invalid
+		$validatorFactory = $this->getTermValidatorFactory();
+
+		$args = array();
+		$args['set invalid alias'] = array ( new ChangeOpAliases( 'fr', array( 'INVALID' ), 'set', $validatorFactory ) );
+		$args['add invalid alias'] = array ( new ChangeOpAliases( 'fr', array( 'INVALID' ), 'add', $validatorFactory ) );
+		$args['set invalid language'] = array ( new ChangeOpAliases( 'INVALID', array( 'valid' ), 'set', $validatorFactory ) );
+		$args['add invalid language'] = array ( new ChangeOpAliases( 'INVALID', array( 'valid' ), 'add', $validatorFactory ) );
+		$args['remove invalid language'] = array ( new ChangeOpAliases( 'INVALID', array( 'valid' ), 'remove', $validatorFactory ) );
+
+		return $args;
+	}
+
 	/**
-	 * @expectedException \Wikibase\ChangeOp\ChangeOpException
+	 * @dataProvider invalidChangeOpAliasProvider
+	 *
+	 * @param ChangeOp $changeOpDescription
 	 */
+	public function testApplyInvalid( ChangeOp $changeOpDescription ) {
+		$entity = Item::newEmpty();
+		$entity->setLabel( 'fr', 'DUPE' );
+
+		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+		$changeOpDescription->apply( $entity );
+	}
+
 	public function testApplyWithInvalidAction() {
-		$item = ItemContent::newEmpty();
-		$entity = $item->getEntity();
-		$changeOpAliases = new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction' );
+		$entity = Item::newEmpty();
+		$validatorFactory = $this->getTermValidatorFactory();
+
+		$changeOpAliases = new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction', $validatorFactory );
+
+		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
 		$changeOpAliases->apply( $entity );
 	}
 
