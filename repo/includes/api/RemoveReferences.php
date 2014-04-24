@@ -6,7 +6,9 @@ use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ItemChangeOpFactory;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Item;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -36,6 +38,8 @@ class RemoveReferences extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+
+		$this->initChangOpFactory( $entity->getType(), Item::ENTITY_TYPE );
 
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
@@ -82,8 +86,11 @@ class RemoveReferences extends ModifyClaim {
 	protected function getChangeOps( $claimGuid, array $referenceHashes ) {
 		$changeOps = array();
 
+		/* @var ItemChangeOpFactory $changeOpFactory */
+		$changeOpFactory = $this->changeOpFactory;
+
 		foreach ( $referenceHashes as $referenceHash ) {
-			$changeOps[] = $this->changeOpFactory->newRemoveReferenceOp( $claimGuid, $referenceHash );
+			$changeOps[] = $changeOpFactory->newRemoveReferenceOp( $claimGuid, $referenceHash );
 		}
 
 		return $changeOps;

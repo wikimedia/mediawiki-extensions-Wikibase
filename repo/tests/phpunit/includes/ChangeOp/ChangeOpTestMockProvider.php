@@ -10,15 +10,18 @@ use DataValues\StringValue;
 use OutOfBoundsException;
 use PHPUnit_Framework_MockObject_MockBuilder;
 use PHPUnit_Framework_TestCase;
+use ValueValidators\Result;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\SiteLinkCache;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataValueValidator;
 use Wikibase\Validators\RegexValidator;
@@ -32,7 +35,7 @@ use Wikibase\Validators\TypeValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ClaimTestMockProvider {
+class ChangeOpTestMockProvider {
 
 	/**
 	 * @var
@@ -221,4 +224,48 @@ class ClaimTestMockProvider {
 		return $mock;
 	}
 
+
+	/**
+	 * @param null $returnValue
+	 *
+	 * @return LabelDescriptionDuplicateDetector
+	 */
+	public function getMockLabelDescriptionDuplicateDetector( $returnValue = null ) {
+		if ( $returnValue === null ) {
+			$returnValue = Result::newSuccess();
+		} elseif ( is_array( $returnValue ) ) {
+			$returnValue = Result::newError( $returnValue );
+		}
+
+		$mock = $this->getMockBuilder( '\Wikibase\LabelDescriptionDuplicateDetector' )
+			->disableOriginalConstructor()
+			->getMock();
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'detectLabelConflictsForEntity' )
+			->will( PHPUnit_Framework_TestCase::returnValue( $returnValue ) );
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'detectLabelDescriptionConflictsForEntity' )
+			->will( PHPUnit_Framework_TestCase::returnValue( $returnValue ) );
+		return $mock;
+	}
+
+	/**
+	 * @param array $returnValue
+	 *
+	 * @return SiteLinkCache
+	 */
+	public function getMockSitelinkCache( $returnValue = array() ) {
+		$mock = $this->getMock( '\Wikibase\SiteLinkCache' );
+		$mock->expects( PHPUnit_Framework_TestCase::any() )
+			->method( 'getConflictsForItem' )
+			->will( PHPUnit_Framework_TestCase::returnValue( $returnValue ) );
+		return $mock;
+	}
+
+	/**
+	 * @return ClaimGuidGenerator
+	 */
+	public function getMockGuidGenerator() {
+		return new ClaimGuidGenerator();
+	}
 }

@@ -5,7 +5,7 @@ namespace Wikibase\Repo;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use ValueFormatters\FormatterOptions;
-use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -327,10 +327,10 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return ChangeOpFactory
+	 * @return ChangeOpFactoryProvider
 	 */
-	public function getChangeOpFactory() {
-		return new ChangeOpFactory(
+	public function getChangeOpFactoryProvider() {
+		return new ChangeOpFactoryProvider(
 			new LabelDescriptionDuplicateDetector( $this->getStore()->getTermIndex() ),
 			$this->getStore()->newSiteLinkCache(),
 			new ClaimGuidGenerator(),

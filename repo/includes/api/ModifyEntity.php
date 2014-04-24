@@ -8,6 +8,10 @@ use LogicException;
 use SiteSQLStore;
 use Status;
 use UsageException;
+use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -58,6 +62,20 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected $badgeItems;
 
 	/**
+	 * @note: call initChangeOpFactory() to initialize.
+	 * @todo: make this private, child classes should use getChangeOpFactory().
+	 * That means passing around $entityType a lot. Left for later.
+	 *
+	 * @var ChangeOpFactory
+	 */
+	protected $changeOpFactory = null;
+
+	/**
+	 * @var ChangeOpFactoryProvider
+	 */
+	private $changeOpFactoryProvider;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -67,19 +85,59 @@ abstract class ModifyEntity extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		$repo = WikibaseRepo::getDefaultInstance();
+
 		//TODO: provide a mechanism to override the services
-		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		$this->stringNormalizer = $repo->getStringNormalizer();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
 
-		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkGroups = $repo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkLookup = $repo->getStore()->newSiteLinkCache();
+		$this->badgeItems = $repo->getSettings()->getSetting( 'badgeItems' );
 
-		$this->siteLinkLookup = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
+		$this->changeOpFactoryProvider = $repo->getChangeOpFactoryProvider();
+	}
 
-		$this->badgeItems = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'badgeItems' );
+	/**
+	 * @todo: use getChangeOpFactory() everywhere instead of accessing $this->changeOpFactory.
+	 * That means passing around $entityType a lot, which needs some refactoring.
+	 *
+	 * @param string $entityType
+	 * @param string|null $expectedType The expected entity type. Supplying this allows us to make
+	 *        assumptions about the ChangeOpFactory returned: giving Item::ENTITY_TYPE here allows
+	 *        us to expect an instance of ItemChangeOpFactory to be returned.
+	 *
+	 * @throws \RuntimeException
+	 * @return ChangeOpFactory
+	 */
+	protected function initChangOpFactory( $entityType, $expectedType = null ) {
+		if ( $expectedType !== null && $expectedType !== $entityType ) {
+			$this->dieError( "Expected entity of type $expectedType, got $entityType", 'not-' . $expectedType );
+		}
 
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		if ( $this->changeOpFactory !== null ) {
+			throw new \RuntimeException( 'initChangOpFactory() should only be called once.' );
+		}
+
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getChangeOpFactory( $entityType );
+
+		return $this->changeOpFactory;
+	}
+
+	/**
+	 * Get an appropriate factory for ChangeOps to operate on the given type of entity.
+	 *
+	 * @param string $entityType The actual entity type
+	 * @param string|null $expectedType The expected entity type. Supplying this allows us to make
+	 *        assumptions about the ChangeOpFactory returned: giving Item::ENTITY_TYPE here allows
+	 *        us to expect an instance of ItemChangeOpFactory to be returned.
+	 *
+	 * @return ChangeOpFactory
+	 */
+	protected function getChangOpFactory( $entityType, $expectedType = null ) {
+		$this->initChangOpFactory( $entityType, $expectedType );
+
+		return $this->changeOpFactory;
 	}
 
 	/**
@@ -239,6 +297,23 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected abstract function modifyEntity( Entity &$entity, array $params, $baseRevId );
 
 	/**
+	 * Applies the given ChangeOp to the given Entity.
+	 *
+	 * @param ChangeOp $changeOp
+	 * @param Entity $entity
+	 * @param Summary $summary The Summary to record details about the change in.
+	 *
+	 * @throws UsageException If the ChangeOp failed to apply (usually due to a validation error).
+	 */
+	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $ex ) {
+			$this->dieUsage( 'Attempted modification of the item failed (validation error): ' . $ex->getMessage(), 'failed-modify' );
+		}
+	}
+
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
 	 * @since 0.1
@@ -293,6 +368,8 @@ abstract class ModifyEntity extends ApiWikibase {
 		if ( $entity->getId() === null ) {
 			throw new \LogicException( 'The Entity should have an ID at this point!' );
 		}
+
+		$this->initChangOpFactory( $entity->getType() );
 
 		// At this point only change/edit rights should be checked
 		$status = $this->checkPermissions( $entity, $user, $params );
