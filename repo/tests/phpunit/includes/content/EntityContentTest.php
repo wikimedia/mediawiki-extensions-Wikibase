@@ -260,7 +260,6 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	}
 
 	public function provideGetEntityStatus() {
-		$label = array( 'language' => 'de', 'value' => 'xyz' );
 		$claim = array( 'm' => array( 'novalue', 83, ), 'q' => array(), 'g' => '$testing$' );
 
 		return array(
@@ -269,11 +268,15 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 				EntityContent::STATUS_EMPTY
 			),
 			'labels' => array(
-				array( 'label' => array( 'de' => $label ) ),
+				array( 'label' => array( 'de' => 'xyz' ) ),
 				EntityContent::STATUS_STUB
 			),
 			'claims' => array(
 				array( 'claims' => array( $claim ) ),
+				EntityContent::STATUS_UNTITLED
+			),
+			'claims with terms' => array(
+				array( 'label' => array( 'de' => 'xyz' ), 'claims' => array( $claim ) ),
 				EntityContent::STATUS_NONE
 			),
 		);
@@ -290,7 +293,6 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	}
 
 	public function provideGetEntityPageProperties() {
-		$label = array( 'language' => 'de', 'value' => 'xyz' );
 		$claim = array( 'm' => array( 'novalue', 11 ), 'q' => array(), 'g' => 'P11x' );
 
 		return array(
@@ -303,7 +305,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 			),
 
 			'labels' => array(
-				array( 'label' => array( 'de' => $label ) ),
+				array( 'label' => array( 'de' => 'xyz' ) ),
 				array(
 					'wb-status' => EntityContent::STATUS_STUB,
 					'wb-claims' => 0,
@@ -313,6 +315,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 			'claims' => array(
 				array( 'claims' => array( 'P11a' => $claim ) ),
 				array(
+					'wb-status' => EntityContent::STATUS_UNTITLED,
 					'wb-claims' => 1,
 				)
 			),
