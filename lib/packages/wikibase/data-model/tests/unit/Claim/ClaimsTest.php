@@ -8,6 +8,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use ReflectionClass;
+use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
@@ -58,6 +59,21 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$claim->setGuid( $guid );
 
 		return $claim;
+	}
+
+	public function testArrayObjectNotConstructedFromObject() {
+		$claim1 = $this->makeClaim( new PropertyNoValueSnak( 1 ) );
+		$claim2 = $this->makeClaim( new PropertyNoValueSnak( 2 ) );
+
+		$byPropertyIdArray = new ByPropertyIdArray();
+		$byPropertyIdArray->append( $claim1 );
+
+		$claims = new Claims( $byPropertyIdArray );
+		// According to the documentation append() "cannot be called when the ArrayObject was
+		// constructed from an object." This test makes sure it was not constructed from an object.
+		$claims->append( $claim2 );
+
+		$this->assertCount( 2, $claims );
 	}
 
 	/**
@@ -783,7 +799,6 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$expected = new Claims( array( $s2, $s3 ) );
 		$this->assertEquals( $claims->getBestClaims(), $expected );
 	}
-
 
 	public function testEmptyListEqualsEmptyList() {
 		$list = new Claims( array() );

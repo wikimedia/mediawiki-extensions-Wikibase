@@ -43,6 +43,15 @@ use Wikibase\DataModel\Entity\PropertyId;
 class ByPropertyIdArray extends \ArrayObject {
 
 	/**
+	 * @see \ArrayObject::__construct
+	 *
+	 * @param array|object $input
+	 */
+	public function __construct( $input = null ) {
+		parent::__construct( (array)$input );
+	}
+
+	/**
 	 * @since 0.2
 	 *
 	 * @var null|object[][]
