@@ -4,6 +4,9 @@ namespace Wikibase\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
@@ -15,7 +18,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class LabelDescriptionUniquenessValidator implements EntityValidator {
+class LabelDescriptionUniquenessValidator implements EntityValidator, FingerprintValidator {
 
 	/**
 	 * @var LabelDescriptionDuplicateDetector
@@ -39,6 +42,33 @@ class LabelDescriptionUniquenessValidator implements EntityValidator {
 	public function validateEntity( Entity $entity ) {
 		$result = $this->duplicateDetector->detectLabelDescriptionConflictsForEntity( $entity );
 		return $result;
+	}
+
+	/**
+	 * @see FingerprintValidator::validateFingerprint()
+	 *
+	 * @since 0.5
+	 *
+	 * @param Fingerprint $fingerprint
+	 * @param EntityId|null $entityId Context for uniqueness checks: conflicts with this entity
+	 *        are ignored.
+	 * @param array|null $languages If given, the validation may be limited to the given languages;
+	 *        This is intended for optimization for the common case of only a single language changing.
+	 *
+	 * @return Result
+	 */
+	public function validateFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $languages = null ) {
+		$labels = array_map(
+			function( Term $term ) { return $term->getText(); },
+			iterator_to_array( $fingerprint->getLabels()->getIterator() )
+		);
+
+		$descriptions = array_map(
+			function( Term $term ) { return $term->getText(); },
+			iterator_to_array( $fingerprint->getDescriptions()->getIterator() )
+		);
+
+		return $this->duplicateDetector->detectTermConflicts( $labels, $descriptions, $entityId );
 	}
 
 }
