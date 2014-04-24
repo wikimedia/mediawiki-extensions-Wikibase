@@ -212,7 +212,6 @@ class ChangeLineFormatterTest extends MediaWikiTestCase {
 		$attribs = array(
 			'rc_id' => 315,
 			'rc_timestamp' => '20130819111741',
-			'rc_cur_time' => '20130819111741',
 			'rc_user' => 0,
 			'rc_user_text' => 'Cat',
 			'rc_namespace' => 0,
@@ -341,7 +340,6 @@ class ChangeLineFormatterTest extends MediaWikiTestCase {
 		$attribs = array(
 			'rc_id' => 316,
 			'rc_timestamp' => '20130820151835',
-			'rc_cur_time' => '20130820151835',
 			'rc_user' => 0,
 			'rc_user_text' => 'Cat',
 			'rc_namespace' => 0,
