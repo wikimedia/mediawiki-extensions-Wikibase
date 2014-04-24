@@ -26,4 +26,3 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 );
 
 $GLOBALS['wgMessagesDirs']['WikibaseDataModel'] = __DIR__ . '/i18n';
-$GLOBALS['wgExtensionMessagesFiles']['WikibaseDataModel'] = __DIR__ . '/WikibaseDataModel.i18n.php';
