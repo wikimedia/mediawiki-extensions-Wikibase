@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 0.7.4 (dev)
+## Version 0.7.4 (2014-04-24)
 
 #### Additions
 
@@ -35,7 +35,7 @@
 * `Entity::clear` (to be removed in 1.0)
 * `Entity::isEmpty` (to be removed in 1.0)
 * `Entity::stub` (to be removed in 1.0)
-* `Fingerprint::getAliases (in favour of `Fingerprint::getAliasGroups`)
+* `Fingerprint::getAliases` (in favour of `Fingerprint::getAliasGroups`)
 
 #### Removals
 
