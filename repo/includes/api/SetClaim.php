@@ -61,9 +61,11 @@ class SetClaim extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
+
 		$summary = $this->getSummary( $params, $claim, $entity );
 
-		$changeop = $this->changeOpFactory->newSetClaimOp(
+		$changeop = $changeOpFactory->newSetClaimOp(
 			$claim,
 			( isset( $params['index'] ) ? $params['index'] : null )
 		);

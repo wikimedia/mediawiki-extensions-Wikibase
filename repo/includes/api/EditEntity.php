@@ -15,7 +15,6 @@ use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -105,7 +104,6 @@ class EditEntity extends ModifyEntity {
 
 		try {
 			return $entityFactory->newFromArray( $type, array() );
-			return $entity;
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
@@ -251,6 +249,8 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "List of labels must be an array", 'not-recognized-array' );
 		}
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getFingerprintChangeOpFactory( $this->entityType );
+
 		foreach ( $labels as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
 
@@ -258,10 +258,10 @@ class EditEntity extends ModifyEntity {
 			$newLabel = $this->stringNormalizer->trimToNFC( $arg['value'] );
 
 			if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
-				$labelChangeOps[] = $this->changeOpFactory->newRemoveLabelOp( $language );
+				$labelChangeOps[] = $changeOpFactory->newRemoveLabelOp( $language );
 			}
 			else {
-				$labelChangeOps[] = $this->changeOpFactory->newSetLabelOp( $language, $newLabel );
+				$labelChangeOps[] = $changeOpFactory->newSetLabelOp( $language, $newLabel );
 			}
 		}
 
@@ -280,6 +280,8 @@ class EditEntity extends ModifyEntity {
 			$this->dieUsage( "List of descriptions must be an array", 'not-recognized-array' );
 		}
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getFingerprintChangeOpFactory( $this->entityType );
+
 		foreach ( $descriptions as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
 
@@ -287,10 +289,10 @@ class EditEntity extends ModifyEntity {
 			$newDescription = $this->stringNormalizer->trimToNFC( $arg['value'] );
 
 			if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
-				$descriptionChangeOps[] = $this->changeOpFactory->newRemoveDescriptionOp( $language );
+				$descriptionChangeOps[] = $changeOpFactory->newRemoveDescriptionOp( $language );
 			}
 			else {
-				$descriptionChangeOps[] = $this->changeOpFactory->newSetDescriptionOp( $language, $newDescription );
+				$descriptionChangeOps[] = $changeOpFactory->newSetDescriptionOp( $language, $newDescription );
 			}
 		}
 
@@ -336,6 +338,8 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	protected function getIndexedAliasesChangeOps( array $indexedAliases ) {
+		$changeOpFactory = $this->changeOpFactoryProvider->getFingerprintChangeOpFactory( $this->entityType );
+
 		$aliasesChangeOps = array();
 		foreach ( $indexedAliases as $langCode => $args ) {
 			$aliasesToSet = array();
@@ -348,16 +352,16 @@ class EditEntity extends ModifyEntity {
 				$language = $arg['language'];
 
 				if ( array_key_exists( 'remove', $arg ) ) {
-					$aliasesChangeOps[] = $this->changeOpFactory->newRemoveAliasesOp( $language, $alias );
+					$aliasesChangeOps[] = $changeOpFactory->newRemoveAliasesOp( $language, $alias );
 				} elseif ( array_key_exists( 'add', $arg ) ) {
-					$aliasesChangeOps[] = $this->changeOpFactory->newAddAliasesOp( $language, $alias );
+					$aliasesChangeOps[] = $changeOpFactory->newAddAliasesOp( $language, $alias );
 				}  else {
 					$aliasesToSet[] = $alias[0];
 				}
 			}
 
 			if ( $aliasesToSet !== array() ) {
-				$aliasesChangeOps[] = $this->changeOpFactory->newSetAliasesOp( $language, $aliasesToSet );
+				$aliasesChangeOps[] = $changeOpFactory->newSetAliasesOp( $language, $aliasesToSet );
 			}
 		}
 
@@ -372,12 +376,14 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return ChangeOp[]
 	 */
-	protected function getSitelinksChangeOps( $siteLinks, Entity $entity ) {
+	protected function getSiteLinksChangeOps( $siteLinks, Entity $entity ) {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
 			$this->dieUsage( "List of sitelinks must be an array", 'not-recognized-array' );
 		}
+
+		$changeOpFactory = $this->changeOpFactoryProvider->getSiteLinkChangeOpFactory( $this->entityType );
 
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
@@ -397,7 +403,7 @@ class EditEntity extends ModifyEntity {
 			/** @var Site $linkSite */
 
 			if ( $shouldRemove ) {
-				$siteLinksChangeOps[] = $this->changeOpFactory->newRemoveSiteLinkOp( $globalSiteId );
+				$siteLinksChangeOps[] = $changeOpFactory->newRemoveSiteLinkOp( $globalSiteId );
 			} else {
 				$badges = ( isset( $arg['badges'] ) )
 					? $this->parseSiteLinkBadges( $arg['badges'] )
@@ -419,7 +425,7 @@ class EditEntity extends ModifyEntity {
 					}
 				}
 
-				$siteLinksChangeOps[] = $this->changeOpFactory->newSetSiteLinkOp( $globalSiteId, $linkPage, $badges );
+				$siteLinksChangeOps[] = $changeOpFactory->newSetSiteLinkOp( $globalSiteId, $linkPage, $badges );
 			}
 		}
 
@@ -465,6 +471,8 @@ class EditEntity extends ModifyEntity {
 		$serializerFactory = new SerializerFactory();
 		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $this->entityType );
+
 		foreach ( $claims as $claimArray ) {
 			if( !array_key_exists( 'remove', $claimArray ) ){
 
@@ -478,7 +486,7 @@ class EditEntity extends ModifyEntity {
 				}
 				/**	 @var $claim Claim  */
 
-				$opsToReturn[] = $this->changeOpFactory->newSetClaimOp( $claim );
+				$opsToReturn[] = $changeOpFactory->newSetClaimOp( $claim );
 			}
 		}
 		return $opsToReturn;
@@ -492,11 +500,13 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getRemoveClaimsChangeOps( $claims ) {
+		$changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $this->entityType );
+
 		$opsToReturn = array();
 		foreach ( $claims as $claimArray ) {
 			if( array_key_exists( 'remove', $claimArray ) ){
 				if( array_key_exists( 'id', $claimArray ) ){
-					$opsToReturn[] = $this->changeOpFactory->newRemoveClaimOp( $claimArray['id'] );
+					$opsToReturn[] = $changeOpFactory->newRemoveClaimOp( $claimArray['id'] );
 				} else {
 					$this->dieUsage( 'Cannot remove a claim with no GUID', 'invalid-claim' );
 				}

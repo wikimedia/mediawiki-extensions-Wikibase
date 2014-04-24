@@ -26,7 +26,9 @@ class SetDescription extends ModifyTerm {
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
-		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$changeOp = $this->getChangeOp( $params );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
+
 		$descriptions = array( $language => ( $entity->getDescription( $language ) !== false ) ? $entity->getDescription( $language ) : "" );
 
 		$this->getResultBuilder()->addDescriptions( $descriptions, 'entity' );
@@ -50,10 +52,12 @@ class SetDescription extends ModifyTerm {
 			$description = $this->stringNormalizer->trimToNFC( $params['value'] );
 		}
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getFingerprintChangeOpFactory( $this->entityType );
+
 		if ( $description === "" ) {
-			$op = $this->changeOpFactory->newRemoveDescriptionOp( $language );
+			$op = $changeOpFactory->newRemoveDescriptionOp( $language );
 		} else {
-			$op = $this->changeOpFactory->newSetDescriptionOp( $language, $description );
+			$op = $changeOpFactory->newSetDescriptionOp( $language, $description );
 		}
 
 		wfProfileOut( __METHOD__ );

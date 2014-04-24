@@ -51,7 +51,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $siteId, $pageName = null, $badges = null ) {
+	public function __construct( $siteId, $pageName, $badges = null ) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId needs to be a string' );
 		}
@@ -81,7 +81,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @throws InvalidArgumentException
 	 */
 	private function validateBadges( array $badges ) {
-		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->get( 'badgeItems' );
+		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
 
 		foreach ( $badges as $badge ) {
 			if ( !( $badge instanceof ItemId ) ) {
