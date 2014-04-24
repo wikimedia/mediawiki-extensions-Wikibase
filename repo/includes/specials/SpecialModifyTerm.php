@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Language;
 use PermissionsError;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -44,6 +44,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	protected $value;
 
 	/**
+	 * @var FingerprintChangeOpFactory
+	 */
+	protected $termChangeOpFactory;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $title The title of the special page
@@ -51,6 +56,9 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 */
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 	}
 
 	/**

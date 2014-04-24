@@ -2,14 +2,18 @@
 
 namespace Wikibase\Api;
 
+use ApiMain;
 use InvalidArgumentException;
+use SiteSQLStore;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use ApiBase;
+use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 use Wikibase\ChangeOp\ChangeOpAliases;
 
@@ -26,6 +30,23 @@ use Wikibase\ChangeOp\ChangeOpAliases;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetAliases extends ModifyEntity {
+
+	/**
+	 * @var FingerprintChangeOpFactory
+	 */
+	protected $termChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
+	}
 
 	/**
 	 * @see \Wikibase\Api\ModifyEntity::getRequiredPermissions()
@@ -123,7 +144,7 @@ class SetAliases extends ModifyEntity {
 		// Set the list of aliases to a user given one OR add/ remove certain entries
 		if ( isset( $params['set'] ) ) {
 			$changeOps[] =
-				$this->changeOpFactory->newSetAliasesOp(
+				$this->termChangeOpFactory->newSetAliasesOp(
 					$language,
 					array_map(
 						function( $str ) use ( $stringNormalizer ) {
@@ -138,7 +159,7 @@ class SetAliases extends ModifyEntity {
 			// This will cause the edit summary to be overwritten by the last ChangeOp beeing applied.
 			if ( !empty( $params['add'] ) ) {
 				$changeOps[] =
-					$this->changeOpFactory->newAddAliasesOp(
+					$this->termChangeOpFactory->newAddAliasesOp(
 						$language,
 						array_map(
 							function( $str ) use ( $stringNormalizer ) {
@@ -151,7 +172,7 @@ class SetAliases extends ModifyEntity {
 
 			if ( !empty( $params['remove'] ) ) {
 				$changeOps[] =
-					$this->changeOpFactory->newRemoveAliasesOp(
+					$this->termChangeOpFactory->newRemoveAliasesOp(
 						$language,
 						array_map(
 							function( $str ) use ( $stringNormalizer ) {
