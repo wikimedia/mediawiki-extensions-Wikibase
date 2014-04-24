@@ -455,7 +455,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			return $status;
 		}
 
-		$changeOp = $this->changeOpFactory->newSetSiteLinkOp( $siteId, $pageName, $badges );
+		$changeOpFactory = $this->getChangOpFactory( $item->getType() );
+
+		$changeOp = $changeOpFactory->newSetSiteLinkOp( $siteId, $pageName, $badges );
 
 		$changeOp->apply( $item, $summary );
 

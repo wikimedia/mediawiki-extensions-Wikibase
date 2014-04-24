@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use ApiBase;
+use Wikibase\ChangeOp\ItemChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 
@@ -96,11 +97,14 @@ class SetSiteLink extends ModifyEntity {
 	 * @return ChangeOpSiteLink
 	 */
 	protected function getChangeOp( array $params ) {
+		/* @var ItemChangeOpFactory $changeOpFactory */
+		$changeOpFactory = $this->changeOpFactory;
+
 		wfProfileIn( __METHOD__ );
 		if ( $this->shouldRemove( $params ) ) {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			wfProfileOut( __METHOD__ );
-			return $this->changeOpFactory->newRemoveSiteLinkOp( $linksite );
+			return $changeOpFactory->newRemoveSiteLinkOp( $linksite );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
 			$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
@@ -127,7 +131,7 @@ class SetSiteLink extends ModifyEntity {
 				: null;
 
 			wfProfileOut( __METHOD__ );
-			return $this->changeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
+			return $changeOpFactory->newSetSiteLinkOp( $linksite, $page, $badges );
 		}
 	}
 
