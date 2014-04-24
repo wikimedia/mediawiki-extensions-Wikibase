@@ -2,8 +2,11 @@
 
 namespace Wikibase\Api;
 
+use ApiMain;
+use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\ChangeOp\ChangeOpLabel;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to set the label for a Wikibase entity.
@@ -19,6 +22,23 @@ use Wikibase\ChangeOp\ChangeOpLabel;
 class SetLabel extends ModifyTerm {
 
 	/**
+	 * @var FingerprintChangeOpFactory
+	 */
+	protected $termChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
+	}
+
+	/**
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
@@ -26,7 +46,9 @@ class SetLabel extends ModifyTerm {
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
-		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$changeOp = $this->getChangeOp( $params );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
+
 		$labels = array( $language => ( $entity->getLabel( $language ) !== false ) ? $entity->getLabel( $language ) : "" );
 
 		$this->getResultBuilder()->addLabels( $labels, 'entity' );
@@ -51,9 +73,9 @@ class SetLabel extends ModifyTerm {
 		}
 
 		if ( $label === "" ) {
-			$op = $this->changeOpFactory->newRemoveLabelOp( $language );
+			$op = $this->termChangeOpFactory->newRemoveLabelOp( $language );
 		} else {
-			$op = $this->changeOpFactory->newSetLabelOp( $language, $label );
+			$op = $this->termChangeOpFactory->newSetLabelOp( $language, $label );
 		}
 
 		wfProfileOut( __METHOD__ );

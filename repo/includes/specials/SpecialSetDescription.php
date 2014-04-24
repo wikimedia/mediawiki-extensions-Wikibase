@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
@@ -65,9 +64,9 @@ class SpecialSetDescription extends SpecialModifyTerm {
 		$summary = $this->getSummary( 'wbsetdescription' );
 
 		if ( $value === null ) {
-			$changeOp = $this->changeOpFactory->newRemoveDescriptionOp( $language );
+			$changeOp = $this->termChangeOpFactory->newRemoveDescriptionOp( $language );
 		} else {
-			$changeOp = $this->changeOpFactory->newSetDescriptionOp( $language, $value );
+			$changeOp = $this->termChangeOpFactory->newSetDescriptionOp( $language, $value );
 		}
 
 		$changeOp->apply( $entity, $summary );

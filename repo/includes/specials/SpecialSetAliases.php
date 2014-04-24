@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
@@ -63,9 +62,9 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	protected function setValue( $entity, $language, $value ) {
 		$summary = $this->getSummary( 'wbsetaliases' );
 		if ( $value === '' ) {
-			$changeOp = $this->changeOpFactory->newRemoveAliasesOp( $language, $entity->getAliases( $language ) );
+			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $language, $entity->getAliases( $language ) );
 		} else {
-			$changeOp = $this->changeOpFactory->newSetAliasesOp( $language, explode( '|', $value ) );
+			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $language, explode( '|', $value ) );
 		}
 		$changeOp->apply( $entity, $summary );
 

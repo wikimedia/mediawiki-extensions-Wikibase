@@ -7,7 +7,7 @@ use ApiMain;
 use InvalidArgumentException;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpFactory;
+use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
@@ -27,7 +27,7 @@ use Wikibase\Summary;
 class MergeItems extends ApiWikibase {
 
 	/**
-	 * @var ChangeOpFactory
+	 * @var SiteLinkChangeOpFactory
 	 */
 	protected $changeOpFactory;
 
@@ -41,7 +41,8 @@ class MergeItems extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		$factoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->changeOpFactory = $factoryProvider->getMergeChangeOpFactory();
 	}
 
 	/**
@@ -93,13 +94,14 @@ class MergeItems extends ApiWikibase {
 				$toEntity,
 				$ignoreConflicts
 			);
+			//FIXME: batch first, for efficiency!
 			$changeOps->apply();
 		}
 		catch( InvalidArgumentException $e ) {
 			$this->dieUsage( $e->getMessage(), 'param-invalid' );
 		}
 		catch( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
+			$this->dieUsage( $e->getMessage(), 'failed-save' ); //FIXME: change to modification-failed
 		}
 
 		$this->attemptSaveMerge( $fromEntity, $toEntity, $params );

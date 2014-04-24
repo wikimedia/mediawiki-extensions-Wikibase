@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 
@@ -65,9 +64,9 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		$summary = $this->getSummary( 'wbsetlabel' );
 
 		if ( $value === null ) {
-			$changeOp = $this->changeOpFactory->newRemoveLabelOp( $language );
+			$changeOp = $this->termChangeOpFactory->newRemoveLabelOp( $language );
 		} else {
-			$changeOp = $this->changeOpFactory->newSetLabelOp( $language, $value );
+			$changeOp = $this->termChangeOpFactory->newSetLabelOp( $language, $value );
 		}
 
 		$changeOp->apply( $entity, $summary );

@@ -8,6 +8,9 @@ use LogicException;
 use SiteSQLStore;
 use Status;
 use UsageException;
+use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -67,19 +70,15 @@ abstract class ModifyEntity extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
+		$repo = WikibaseRepo::getDefaultInstance();
+
 		//TODO: provide a mechanism to override the services
-		$this->stringNormalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+		$this->stringNormalizer = $repo->getStringNormalizer();
 		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
 
-		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'siteLinkGroups' );
-
-		$this->siteLinkLookup = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
-
-		$this->badgeItems = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'badgeItems' );
-
-		$this->changeOpFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactory();
+		$this->siteLinkGroups = $repo->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->siteLinkLookup = $repo->getStore()->newSiteLinkCache();
+		$this->badgeItems = $repo->getSettings()->getSetting( 'badgeItems' );
 	}
 
 	/**
@@ -237,6 +236,23 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
 	protected abstract function modifyEntity( Entity &$entity, array $params, $baseRevId );
+
+	/**
+	 * Applies the given ChangeOp to the given Entity.
+	 *
+	 * @param ChangeOp $changeOp
+	 * @param Entity $entity
+	 * @param Summary $summary The Summary to record details about the change in.
+	 *
+	 * @throws UsageException If the ChangeOp failed to apply (usually due to a validation error).
+	 */
+	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+		try {
+			$changeOp->apply( $entity, $summary );
+		} catch ( ChangeOpException $ex ) {
+			$this->dieUsage( 'Attempted modification of the item failed (validation error): ' . $ex->getMessage(), 'failed-modify' );
+		}
+	}
 
 	/**
 	 * Make sure the required parameters are provided and that they are valid.

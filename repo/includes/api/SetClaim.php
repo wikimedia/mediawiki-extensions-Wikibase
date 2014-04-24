@@ -12,13 +12,14 @@ use FormatJson;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use UsageException;
-use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
@@ -33,12 +34,20 @@ use Wikibase\Summary;
 class SetClaim extends ModifyClaim {
 
 	/**
+	 * @var ClaimChangeOpFactory
+	 */
+	protected $claimChangeOpFactory;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
 	}
 
 	/**
@@ -63,7 +72,7 @@ class SetClaim extends ModifyClaim {
 
 		$summary = $this->getSummary( $params, $claim, $entity );
 
-		$changeop = $this->changeOpFactory->newSetClaimOp(
+		$changeop = $this->claimChangeOpFactory->newSetClaimOp(
 			$claim,
 			( isset( $params['index'] ) ? $params['index'] : null )
 		);

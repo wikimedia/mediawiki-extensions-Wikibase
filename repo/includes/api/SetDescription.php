@@ -2,8 +2,11 @@
 
 namespace Wikibase\Api;
 
+use ApiMain;
+use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\ChangeOp\ChangeOpDescription;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for the language attributes for a Wikibase entity.
@@ -19,6 +22,23 @@ use Wikibase\ChangeOp\ChangeOpDescription;
 class SetDescription extends ModifyTerm {
 
 	/**
+	 * @var FingerprintChangeOpFactory
+	 */
+	protected $termChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
+	}
+
+	/**
 	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
@@ -26,7 +46,9 @@ class SetDescription extends ModifyTerm {
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
-		$this->getChangeOp( $params )->apply( $entity, $summary );
+		$changeOp = $this->getChangeOp( $params );
+		$this->applyChangeOp( $changeOp, $entity, $summary );
+
 		$descriptions = array( $language => ( $entity->getDescription( $language ) !== false ) ? $entity->getDescription( $language ) : "" );
 
 		$this->getResultBuilder()->addDescriptions( $descriptions, 'entity' );
@@ -51,9 +73,9 @@ class SetDescription extends ModifyTerm {
 		}
 
 		if ( $description === "" ) {
-			$op = $this->changeOpFactory->newRemoveDescriptionOp( $language );
+			$op = $this->termChangeOpFactory->newRemoveDescriptionOp( $language );
 		} else {
-			$op = $this->changeOpFactory->newSetDescriptionOp( $language, $description );
+			$op = $this->termChangeOpFactory->newSetDescriptionOp( $language, $description );
 		}
 
 		wfProfileOut( __METHOD__ );

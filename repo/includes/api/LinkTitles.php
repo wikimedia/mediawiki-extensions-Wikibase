@@ -85,6 +85,8 @@ class LinkTitles extends ApiWikibase {
 			$fromSite->getGlobalId() . ':' . $fromPage,
 			$toSite->getGlobalId() . ':' . $toPage );
 
+		//FIXME: use ChangeOps for consistency!
+
 		// Figure out which parts to use and what to create anew
 		if ( $fromId === null && $toId === null ) {
 			// create new item
@@ -97,7 +99,7 @@ class LinkTitles extends ApiWikibase {
 			$return[] = $fromLink;
 
 			$flags |= EDIT_NEW;
-			$summary->setAction( 'create' ); //FIXME: i18n
+			$summary->setAction( 'create' );
 		}
 		elseif ( $fromId === null && $toId !== null ) {
 			// reuse to-site's item

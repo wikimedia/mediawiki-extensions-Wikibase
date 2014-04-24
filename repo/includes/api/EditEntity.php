@@ -15,7 +15,9 @@ use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\ChangeOpSiteLink;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
+use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -24,6 +26,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Utils;
 
@@ -56,6 +59,21 @@ class EditEntity extends ModifyEntity {
 	protected $entityRevisionLookup;
 
 	/**
+	 * @var FingerprintChangeOpFactory
+	 */
+	protected $termChangeOpFactory;
+
+	/**
+	 * @var ClaimChangeOpFactory
+	 */
+	protected $claimChangeOpFactory;
+
+	/**
+	 * @var SiteLinkChangeOpFactory
+	 */
+	protected $siteLinkChangeOpFactory;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -66,6 +84,12 @@ class EditEntity extends ModifyEntity {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$this->validLanguageCodes = array_flip( Utils::getLanguageCodes() );
+
+		$repo = WikibaseRepo::getDefaultInstance();
+		$changeOpFactoryProvider = $repo->getChangeOpFactoryProvider();
+		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 	}
 
 	/**
@@ -105,7 +129,6 @@ class EditEntity extends ModifyEntity {
 
 		try {
 			return $entityFactory->newFromArray( $type, array() );
-			return $entity;
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
@@ -258,10 +281,10 @@ class EditEntity extends ModifyEntity {
 			$newLabel = $this->stringNormalizer->trimToNFC( $arg['value'] );
 
 			if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
-				$labelChangeOps[] = $this->changeOpFactory->newRemoveLabelOp( $language );
+				$labelChangeOps[] = $this->termChangeOpFactory->newRemoveLabelOp( $language );
 			}
 			else {
-				$labelChangeOps[] = $this->changeOpFactory->newSetLabelOp( $language, $newLabel );
+				$labelChangeOps[] = $this->termChangeOpFactory->newSetLabelOp( $language, $newLabel );
 			}
 		}
 
@@ -287,10 +310,10 @@ class EditEntity extends ModifyEntity {
 			$newDescription = $this->stringNormalizer->trimToNFC( $arg['value'] );
 
 			if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
-				$descriptionChangeOps[] = $this->changeOpFactory->newRemoveDescriptionOp( $language );
+				$descriptionChangeOps[] = $this->termChangeOpFactory->newRemoveDescriptionOp( $language );
 			}
 			else {
-				$descriptionChangeOps[] = $this->changeOpFactory->newSetDescriptionOp( $language, $newDescription );
+				$descriptionChangeOps[] = $this->termChangeOpFactory->newSetDescriptionOp( $language, $newDescription );
 			}
 		}
 
@@ -348,16 +371,16 @@ class EditEntity extends ModifyEntity {
 				$language = $arg['language'];
 
 				if ( array_key_exists( 'remove', $arg ) ) {
-					$aliasesChangeOps[] = $this->changeOpFactory->newRemoveAliasesOp( $language, $alias );
+					$aliasesChangeOps[] = $this->termChangeOpFactory->newRemoveAliasesOp( $language, $alias );
 				} elseif ( array_key_exists( 'add', $arg ) ) {
-					$aliasesChangeOps[] = $this->changeOpFactory->newAddAliasesOp( $language, $alias );
+					$aliasesChangeOps[] = $this->termChangeOpFactory->newAddAliasesOp( $language, $alias );
 				}  else {
 					$aliasesToSet[] = $alias[0];
 				}
 			}
 
 			if ( $aliasesToSet !== array() ) {
-				$aliasesChangeOps[] = $this->changeOpFactory->newSetAliasesOp( $language, $aliasesToSet );
+				$aliasesChangeOps[] = $this->termChangeOpFactory->newSetAliasesOp( $language, $aliasesToSet );
 			}
 		}
 
@@ -372,7 +395,7 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return ChangeOp[]
 	 */
-	protected function getSitelinksChangeOps( $siteLinks, Entity $entity ) {
+	protected function getSiteLinksChangeOps( $siteLinks, Entity $entity ) {
 		$siteLinksChangeOps = array();
 
 		if ( !is_array( $siteLinks ) ) {
@@ -397,7 +420,7 @@ class EditEntity extends ModifyEntity {
 			/** @var Site $linkSite */
 
 			if ( $shouldRemove ) {
-				$siteLinksChangeOps[] = $this->changeOpFactory->newRemoveSiteLinkOp( $globalSiteId );
+				$siteLinksChangeOps[] = $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $globalSiteId );
 			} else {
 				$badges = ( isset( $arg['badges'] ) )
 					? $this->parseSiteLinkBadges( $arg['badges'] )
@@ -419,7 +442,7 @@ class EditEntity extends ModifyEntity {
 					}
 				}
 
-				$siteLinksChangeOps[] = $this->changeOpFactory->newSetSiteLinkOp( $globalSiteId, $linkPage, $badges );
+				$siteLinksChangeOps[] = $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $globalSiteId, $linkPage, $badges );
 			}
 		}
 
@@ -478,7 +501,7 @@ class EditEntity extends ModifyEntity {
 				}
 				/**	 @var $claim Claim  */
 
-				$opsToReturn[] = $this->changeOpFactory->newSetClaimOp( $claim );
+				$opsToReturn[] = $this->claimChangeOpFactory->newSetClaimOp( $claim );
 			}
 		}
 		return $opsToReturn;
@@ -496,7 +519,7 @@ class EditEntity extends ModifyEntity {
 		foreach ( $claims as $claimArray ) {
 			if( array_key_exists( 'remove', $claimArray ) ){
 				if( array_key_exists( 'id', $claimArray ) ){
-					$opsToReturn[] = $this->changeOpFactory->newRemoveClaimOp( $claimArray['id'] );
+					$opsToReturn[] = $this->claimChangeOpFactory->newRemoveClaimOp( $claimArray['id'] );
 				} else {
 					$this->dieUsage( 'Cannot remove a claim with no GUID', 'invalid-claim' );
 				}
