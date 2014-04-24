@@ -33,13 +33,15 @@ class SetClaimValue extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
+
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
 		$snak = $this->claimModificationHelper->getSnakInstance( $params, $claim->getMainSnak()->getPropertyId() );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$changeOp = $this->changeOpFactory->newSetMainSnakOp(
+		$changeOp = $changeOpFactory->newSetMainSnakOp(
 			$claimGuid,
 			$snak
 		);

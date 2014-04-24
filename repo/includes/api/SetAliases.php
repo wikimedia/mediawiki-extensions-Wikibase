@@ -120,10 +120,12 @@ class SetAliases extends ModifyEntity {
 		$changeOps = array();
 		$language = $params['language'];
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getFingerprintChangeOpFactory( $this->entityType );
+
 		// Set the list of aliases to a user given one OR add/ remove certain entries
 		if ( isset( $params['set'] ) ) {
 			$changeOps[] =
-				$this->changeOpFactory->newSetAliasesOp(
+				$changeOpFactory->newSetAliasesOp(
 					$language,
 					array_map(
 						function( $str ) use ( $stringNormalizer ) {
@@ -138,7 +140,7 @@ class SetAliases extends ModifyEntity {
 			// This will cause the edit summary to be overwritten by the last ChangeOp beeing applied.
 			if ( !empty( $params['add'] ) ) {
 				$changeOps[] =
-					$this->changeOpFactory->newAddAliasesOp(
+					$changeOpFactory->newAddAliasesOp(
 						$language,
 						array_map(
 							function( $str ) use ( $stringNormalizer ) {
@@ -151,7 +153,7 @@ class SetAliases extends ModifyEntity {
 
 			if ( !empty( $params['remove'] ) ) {
 				$changeOps[] =
-					$this->changeOpFactory->newRemoveAliasesOp(
+					$changeOpFactory->newRemoveAliasesOp(
 						$language,
 						array_map(
 							function( $str ) use ( $stringNormalizer ) {

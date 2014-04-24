@@ -36,6 +36,8 @@ class CreateClaim extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 
+		$changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
+
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 		if( !$propertyId instanceof PropertyId ){
 			$this->dieUsage(
@@ -49,7 +51,7 @@ class CreateClaim extends ModifyClaim {
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
 		/* @var ChangeOpMainSnak $changeOp */
-		$changeOp = $this->changeOpFactory->newSetMainSnakOp( '', $snak );
+		$changeOp = $changeOpFactory->newSetMainSnakOp( '', $snak );
 
 		$this->claimModificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 

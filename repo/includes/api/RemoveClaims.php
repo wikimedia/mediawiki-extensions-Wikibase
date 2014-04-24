@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -22,6 +23,13 @@ use Wikibase\ChangeOp\ChangeOpException;
 class RemoveClaims extends ModifyClaim {
 
 	/**
+	 * @var ClaimChangeOpFactory|null
+	 *
+	 * @note Initialized in execute()
+	 */
+	private $changeOpFactory = null;
+
+	/**
 	 * @see \ApiBase::execute
 	 *
 	 * @since 0.3
@@ -34,6 +42,8 @@ class RemoveClaims extends ModifyClaim {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
+
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
 
 		$this->checkClaims( $entity, $params['claim'] );
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );

@@ -3,10 +3,10 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\ChangeOp\ChangeOpQualifier;
-use Wikibase\ChangeOp\ChangeOpException;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -19,6 +19,13 @@ use Wikibase\ChangeOp\ChangeOpException;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetQualifier extends ModifyClaim {
+
+	/**
+	 * @var ClaimChangeOpFactory|null
+	 *
+	 * @note Initialized in execute()
+	 */
+	private $changeOpFactory = null;
 
 	/**
 	 * @see ApiBase::execute
@@ -35,6 +42,8 @@ class SetQualifier extends ModifyClaim {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
+
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 

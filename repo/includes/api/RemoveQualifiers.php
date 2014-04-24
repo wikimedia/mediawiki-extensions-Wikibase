@@ -6,6 +6,7 @@ use ApiBase;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
 
 /**
@@ -18,6 +19,13 @@ use Wikibase\DataModel\Claim\Claim;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class RemoveQualifiers extends ModifyClaim {
+
+	/**
+	 * @var ClaimChangeOpFactory|null
+	 *
+	 * @note Initialized in execute()
+	 */
+	private $changeOpFactory = null;
 
 	/**
 	 * @see \ApiBase::execute
@@ -36,6 +44,8 @@ class RemoveQualifiers extends ModifyClaim {
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRevisionId );
 		$entity = $entityRevision->getEntity();
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
+
+		$this->changeOpFactory = $this->changeOpFactoryProvider->getClaimChangeOpFactory( $entity->getType() );
 
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
