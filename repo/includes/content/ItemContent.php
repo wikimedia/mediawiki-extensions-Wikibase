@@ -3,13 +3,9 @@
 namespace Wikibase;
 
 use Content;
-use DatabaseBase;
 use DataUpdate;
 use IContextSource;
-use Message;
 use ParserOutput;
-use SiteSQLStore;
-use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -18,7 +14,6 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\ItemSearchTextGenerator;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -277,14 +272,12 @@ class ItemContent extends EntityContent {
 	 */
 	public function getEntityStatus() {
 		$status = parent::getEntityStatus();
-		$hasSiteLinks = $this->getItem()->hasSiteLinks();
 
-		if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
-			$status = self::STATUS_LINKSTUB;
-		} else if ( $status === self::STATUS_STUB && $hasSiteLinks ) {
+		if ( $status === self::STATUS_STUB && $this->getItem()->hasSiteLinks() ) {
 			$status = self::STATUS_LINKSTUB;
 		}
 
 		return $status;
 	}
+
 }

@@ -195,7 +195,7 @@ class ItemContentTest extends EntityContentTest {
 
 		$cases['linkstub'] = array(
 			array( 'links' => $links ),
-			ItemContent::STATUS_LINKSTUB
+			ItemContent::STATUS_UNTITLED
 		);
 
 		$cases['linkstub with terms'] = array(
