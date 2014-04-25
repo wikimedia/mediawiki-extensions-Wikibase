@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_cc8d0130",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "Great, thanks.",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cc4bc161",
+        "filename": "lib/includes/Validators/NotEntityIdValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "Same order as in the constructor please. Wow, that\u0027s an painfull nitpick, isn\u0027t it? ;-)",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ac50850e",
+        "filename": "lib/includes/Validators/NotEntityIdValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "$errorCode please?",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4c3fb1b1",
+        "filename": "lib/includes/Validators/StringLengthValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "Typo.",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8c938951",
+        "filename": "lib/includes/Validators/StringLengthValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "Makes much more sense now. :-)",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cc72a1ab",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "Still misses the space. ;-)",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6c6dcdc6",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "Please replace with\n\n$result \u003d $uniquenessValidator-\u003evalidateEntity( $entity );\nif ( !$result-\u003eisValid() ) {\n\nMaybe you wanted to replace the private method with something else that also throws that exception. But I checked the following patches and this bit of code never changes. It still looks like the exception is pointless.",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_675726ce",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-25T14:25:16Z",
+      "side": 1,
+      "message": "There is no specific kind of \"constraint check\" here. Both the validator and the Entity are parameters. It\u0027s really just a simple \"validateThisEntityWithThatValidator\" call. Which makes the method pretty pointless if you think about it. It\u0027s used one time only. It throws an exception that\u0027s catched immediately. Please inline it.",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
