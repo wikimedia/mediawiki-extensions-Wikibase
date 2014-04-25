@@ -2,13 +2,13 @@
 
 namespace Wikibase\Test\Api;
 
+use ApiMain;
 use DataValues\StringValue;
 use UsageException;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Api\CreateClaim;
-use ApiMain;
-use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\ApiErrorReporter;
+use Wikibase\Api\ClaimModificationHelper;
+use Wikibase\Api\CreateClaim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -93,11 +93,9 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 				function ( $param ) {
 					if ( is_object( $param ) ) {
 						$param = get_class( $param );
-					} else {
-						$param = "$param";
 					}
 
-					return $param;
+					return wfEscapeWikiText( strval( $param ) );
 				}
 			) );
 
