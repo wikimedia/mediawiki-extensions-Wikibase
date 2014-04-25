@@ -11,7 +11,7 @@ use OutOfBoundsException;
 use Traversable;
 
 /**
- * Immutable unordered collection of SiteLink objects.
+ * Unordered collection of SiteLink objects.
  * SiteLink objects can be accessed by site id.
  * Only one SiteLink per site id can exist in the collection.
  *
@@ -34,11 +34,18 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 				throw new InvalidArgumentException( 'SiteLinkList only accepts SiteLink objects' );
 			}
 
-			$this->addSiteLink( $siteLink );
+			$this->add( $siteLink );
 		}
 	}
 
-	private function addSiteLink( SiteLink $link ) {
+	/**
+	 * @since 1.0
+	 *
+	 * @param SiteLink $link
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function add( SiteLink $link ) {
 		if ( array_key_exists( $link->getSiteId(), $this->siteLinks ) ) {
 			throw new InvalidArgumentException( 'Duplicate site id: ' . $link->getSiteId() );
 		}
@@ -71,15 +78,27 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function getBySiteId( $siteId ) {
-		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId should be a string' );
-		}
-
-		if ( !array_key_exists( $siteId, $this->siteLinks ) ) {
+		if ( !$this->hasLinkWithSiteId( $siteId ) ) {
 			throw new OutOfBoundsException( 'No SiteLink with site id: ' . $siteId  );
 		}
 
 		return $this->siteLinks[$siteId];
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param string $siteId
+	 *
+	 * @return boolean
+	 * @throws InvalidArgumentException
+	 */
+	public function hasLinkWithSiteId( $siteId ) {
+		if ( !is_string( $siteId ) ) {
+			throw new InvalidArgumentException( '$siteId should be a string' );
+		}
+
+		return array_key_exists( $siteId, $this->siteLinks );
 	}
 
 	/**
@@ -97,6 +116,29 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 		}
 
 		return $this->siteLinks == $target->siteLinks;
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return empty( $this->siteLinks );
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param string $siteId
+	 * @throws InvalidArgumentException
+	 */
+	public function removeLinkWithSiteId( $siteId ) {
+		if ( !is_string( $siteId ) ) {
+			throw new InvalidArgumentException( '$siteId should be a string' );
+		}
+
+		unset( $this->siteLinks[$siteId] );
 	}
 
 }

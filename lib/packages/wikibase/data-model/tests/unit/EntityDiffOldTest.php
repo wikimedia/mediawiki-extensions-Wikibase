@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Diff\Patcher\MapPatcher;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -25,7 +26,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 				$entity = Item::newEmpty();
 				break;
 			case Property::ENTITY_TYPE:
-				$entity = Property::newEmpty();
+				$entity = Property::newFromType( 'string' );
 				break;
 			default:
 				throw new \RuntimeException( "unknown entity type: $entityType" );
@@ -51,8 +52,8 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$a->setLabel( 'en', 'Test' );
 		$a->setLabel( 'de', 'Test' );
 
-		$b = $a->copy();
-		$b->removeLabel( array( 'en' ) );
+		$b = self::newEntity( $entityType );
+		$b->setLabel( 'de', 'Test' );
 
 		$tests[] = array( $a, $b );
 
@@ -78,7 +79,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		$a->setDescription( 'de', 'Test' );
 
 		$b = $a->copy();
-		$b->removeDescription( array( 'en' ) );
+		$b->removeDescription( 'en' );
 
 		$tests[] = array( $a, $b );
 
@@ -135,10 +136,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( Entity $a, Entity $b ) {
 		$a->patch( $a->getDiff( $b ) );
-
-		$this->assertEquals( $a->getLabels(), $b->getLabels() );
-		$this->assertEquals( $a->getDescriptions(), $b->getDescriptions() );
-		$this->assertEquals( $a->getAllAliases(), $b->getAllAliases() );
+		$this->assertTrue( $a->getFingerprint()->equals( $b->getFingerprint() ) );
 	}
 
 	public static function provideConflictDetection() {
@@ -146,7 +144,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 		// #0: adding a label where there was none before
 		$base = self::newEntity( Item::ENTITY_TYPE );
-		$current = $base;
+		$current = $base->copy();
 
 		$new = $base->copy();
 		$new->setLabel( 'en', 'TEST' );
@@ -209,17 +207,16 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideConflictDetection
 	 */
 	public function testConflictDetection( Entity $base, Entity $current, Entity $new, $expectedConflicts ) {
-		$patch = $base->getDiff( $new ); // diff from base to new
+		$patch = $base->getDiff( $new );
 
-		$patchedCurrent = clone $current;
+		$patchedCurrent = $current->copy();
 		$patchedCurrent->patch( $patch );
+
 		$cleanPatch = $base->getDiff( $patchedCurrent );
 
 		$conflicts = $patch->count() - $cleanPatch->count();
 
 		$this->assertEquals( $expectedConflicts, $conflicts, "check number of conflicts detected" );
 	}
-
-
 
 }

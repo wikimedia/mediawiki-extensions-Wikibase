@@ -75,19 +75,4 @@ interface Snaks extends \Traversable, \ArrayAccess, \Countable, \Serializable, \
 	 */
 	public function getSnak( $snakHash );
 
-	/**
-	 * Returns an array representing the snaks.
-	 * Roundtrips with SnakList::newFromArray
-	 *
-	 * This method can be used for serialization when passing the array to for
-	 * instance json_encode which created behavior similar to
-	 * @see Serializable::serialize but different in that it uses the
-	 * snak type identifier rather then it's class name.
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function toArray();
-
 }

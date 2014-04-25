@@ -161,19 +161,6 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'Serialization roundtrip should not affect hash' );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testToArrayRoundrip( Claim $claim ) {
-		$data = $claim->toArray();
-
-		$this->assertInternalType( 'array', $data );
-
-		$copy = Claim::newFromArray( $data );
-
-		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
-	}
-
 	public function testGetHashStability() {
 		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim0->setGuid( 'claim0' );

@@ -54,16 +54,6 @@ interface References extends \Traversable, \Countable, \Serializable, \Comparabl
 	public function removeReference( Reference $reference );
 
 	/**
-	 * Returns an array representing the references.
-	 * Roundtrips with ReferenceList::newFromArray
-	 *
-	 * @since 0.3
-	 *
-	 * @return array
-	 */
-	public function toArray();
-
-	/**
 	 * Removes duplicates bases on hash value.
 	 *
 	 * @since 0.3
