@@ -2,7 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"ArnoLagrange",
-			"KuboF"
+			"KuboF",
+			"Amire80",
+			"Tlustulimu"
 		]
 	},
 	"wikibase-lib-desc": "Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo",
@@ -36,7 +38,7 @@
 	"wikibase-error-ui-session-failure": "Via sesio ĉesis. bonvolu denove ensaluti.",
 	"wikibase-error-ui-edit-conflict": "Estas redaktokonflikto. Bonvolu reŝargi kaj konservi denove.",
 	"wikibase-quantitydetails-upperbound": "Supra limo",
-	"wikibase-quantitydetails-lowerbound": "Suba limo",
+	"wikibase-quantitydetails-lowerbound": "Malsupra limo",
 	"wikibase-quantitydetails-unit": "Unuo",
 	"wikibase-timedetails-time": "Tempo",
 	"wikibase-timedetails-isotime": "Tempomarko laŭ ISO",
@@ -52,6 +54,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Lingvo",
 	"wikibase-sitelinks-siteid-columnheading": "Kodo",
 	"wikibase-sitelinks-link-columnheading": "Ligata paĝo",
+	"wikibase-snakview-snaktypeselector-somevalue": "nekonata valoro",
+	"wikibase-snakview-snaktypeselector-novalue": "sen valoro",
 	"wikibase-tooltip-error-details": "Detaloj",
 	"wikibase-validator-bad-type": "$2 anstataŭ $1",
 	"wikibase-validator-no-such-entity": "$1 ne trovita",
