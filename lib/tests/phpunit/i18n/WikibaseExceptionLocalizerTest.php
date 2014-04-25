@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Exception;
 use RuntimeException;
 use ValueFormatters\ValueFormatter;
@@ -53,11 +54,9 @@ class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 				function ( $param ) {
 					if ( is_array( $param ) ) {
 						$param = implode( '|', $param );
-					} else {
-						$param = "$param";
 					}
 
-					return $param;
+					return strval( $param );
 				}
 			) );
 

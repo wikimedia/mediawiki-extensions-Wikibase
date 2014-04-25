@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Validators;
 
-use Status;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -32,11 +31,9 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 				function ( $param ) {
 					if ( is_array( $param ) ) {
 						$param = implode( '|', $param );
-					} else {
-						$param = "$param";
 					}
 
-					return $param;
+					return strval( $param );
 				}
 			) );
 

@@ -7,6 +7,7 @@ use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\PreSaveChecks;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -24,7 +25,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 
 	public function providePreSaveChecks() {
-
 		return array(
 			'empty' => array(
 				'Wikibase\DataModel\Entity\Item',
@@ -150,7 +150,7 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 						$param = get_class( $param );
 					}
 
-					return wfEscapeWikiText( strval( $param ) );
+					return strval( $param );
 				}
 			) );
 
@@ -160,6 +160,7 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider providePreSaveChecks
 	 *
+	 * @param string $class
 	 * @param array $oldData
 	 * @param array $newData
 	 * @param string[] $expectedErrors
@@ -180,8 +181,9 @@ class PreSaveChecksTest extends \PHPUnit_Framework_TestCase {
 			$errorLocalizer
 		);
 
-		/* @var Entity $oldEntity */
-		/* @var Entity $newEntity */
+		/** @var Item $class */
+		/** @var Entity $oldEntity */
+		/** @var Entity $newEntity */
 		$oldEntity = $oldData == null ? null : $class::newFromArray( $oldData );
 		$newEntity = $class::newFromArray( $newData );
 		$diff = $oldEntity == null ? null : $oldEntity->getDiff( $newEntity );
