@@ -29,11 +29,13 @@ dependency on `wikibase/data-model` to your project's `composer.json` file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
 Wikibase DataModel 1.0:
 
-    {
-        "require": {
-            "wikibase/data-model": "1.0.*"
-        }
+```js
+{
+    "require": {
+        "wikibase/data-model": "1.0.*"
     }
+}
+```
 
 ### Manual
 
