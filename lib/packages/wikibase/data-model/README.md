@@ -46,7 +46,7 @@ The "autoload" section of this file specifies how to load the resources provide 
 ## Library contents
 
 This library contains domain objects that implement the concepts part of the
-[Wikibase DataModel](https://meta.wikimedia.org/wiki/Wikidata/Data_model).
+[Wikibase DataModel](https://www.mediawiki.org/wiki/Wikibase/DataModel).
 This mainly includes simple value objects, though also contains core domain
 logic either bound to such objects or encapsulated as service objects.
 
@@ -68,7 +68,7 @@ Contributions where also made by [several other people]
 
 ### Concept
 
-The initial [conceptual specification](https://meta.wikimedia.org/wiki/Wikidata/Data_model)
+The initial [conceptual specification](https://www.mediawiki.org/wiki/Wikibase/DataModel)
 for the DataModel was created by [Markus Krötzsch](http://korrekt.org/)
 and [Denny Vrandečić](http://simia.net/wiki/Denny), with minor contributions by
 Daniel Kinzler and Jeroen De Dauw.
