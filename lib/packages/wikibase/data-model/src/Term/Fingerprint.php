@@ -171,7 +171,7 @@ class Fingerprint implements Comparable {
 
 		return $this->descriptions->equals( $target->getDescriptions() )
 			&& $this->labels->equals( $target->getLabels() )
-			&& $this->aliasGroups->equals( $target->getAliases() );
+			&& $this->aliasGroups->equals( $target->getAliasGroups() );
 	}
 
 	/**

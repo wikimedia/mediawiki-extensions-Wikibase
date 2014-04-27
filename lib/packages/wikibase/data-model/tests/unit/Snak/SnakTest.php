@@ -118,24 +118,4 @@ class SnakTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $snak->equals( new PropertyNoValueSnak( $id43 ) ) );
 	}
 
-	/**
-	 * @dataProvider snakProvider
-	 * @param Snak $snak
-	 */
-	public function testToArrayRoundtrip( Snak $snak ) {
-		$serialization = serialize( $snak->toArray() );
-		$array = $snak->toArray();
-
-		$this->assertInternalType( 'array', $array, 'toArray should return array' );
-
-		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
-			$copy = SnakObject::newFromArray( $data );
-
-			$this->assertInstanceOf( '\Wikibase\Snak', $copy, 'newFromArray should return object implementing Snak' );
-			$this->assertEquals( $snak->getHash(), $copy->getHash(), 'newFromArray should return object with same Hash used previously' );
-
-			$this->assertTrue( $snak->equals( $copy ), 'getArray newFromArray roundtrip should work' );
-		}
-	}
-
 }

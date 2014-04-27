@@ -69,7 +69,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $this->labels, $fingerprint->getLabels() );
 		$this->assertEquals( $this->descriptions, $fingerprint->getDescriptions() );
-		$this->assertEquals( $this->aliasGroups, $fingerprint->getAliases() );
+		$this->assertEquals( $this->aliasGroups, $fingerprint->getAliasGroups() );
 	}
 
 	public function testGetLabel() {
@@ -142,7 +142,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 			new AliasGroup( 'de', array( 'dealias' ) ),
 		) );
 		$this->fingerprint->removeAliasGroup( 'en' );
-		$this->assertEquals( $aliasGroups, $this->fingerprint->getAliases() );
+		$this->assertEquals( $aliasGroups, $this->fingerprint->getAliasGroups() );
 	}
 
 	/**

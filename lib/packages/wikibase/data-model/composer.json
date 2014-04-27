@@ -23,9 +23,9 @@
 	"require": {
 		"php": ">=5.3.0",
 		"diff/diff": "~1.0",
-		"data-values/data-values": "~0.1.0",
-		"data-values/serialization": ">=0.1,<2.0"
+		"data-values/data-values": "~0.1.0"
 	},
+	"minimum-stability": "dev",
 	"autoload": {
 		"files" : [
 			"WikibaseDataModel.php"
@@ -36,7 +36,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "0.7.x-dev"
+			"dev-master": "1.0.x-dev"
 		}
 	}
 }

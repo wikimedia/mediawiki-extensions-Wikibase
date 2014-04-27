@@ -51,47 +51,4 @@ class PropertyValueSnakTest extends SnakObjectTest {
 		$this->assertTrue( $dataValue->equals( $omnomnom->getDataValue() ) );
 	}
 
-	public function newFromPropertyValueProvider() {
-		$argLists = array();
-
-		$property = Property::newFromType( 'wikibase-item' );
-		$property->setId( 852645 );
-
-		$argLists[] = array( clone $property, new ItemId( 'Q42' ) );
-		$argLists[] = array( clone $property, new ItemId( 'Q9001' ) );
-
-		$property->setId( 852642 );
-
-		$argLists[] = array( clone $property, new ItemId( 'Q9001' ) );
-
-		$property->setDataTypeId( 'commonsMedia' );
-
-		$argLists[] = array( clone $property, new StringValue( 'https://commons.wikimedia.org/wiki/Wikidata' ) );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider toArrayProvider
-	 */
-	public function testToArray( PropertyValueSnak $snak, array $expected ) {
-		$actual = $snak->toArray();
-
-		$this->assertEquals( $expected, $actual );
-	}
-
-	public static function toArrayProvider() {
-		$q1 = new PropertyId( 'P1' );
-
-		return array(
-			'string-value' => array(
-				new PropertyValueSnak( $q1, new StringValue( 'boo' ) ),
-				array( 'value', $q1->getNumericId(), 'string', 'boo' )
-			),
-			'bad-value' => array(
-				new PropertyValueSnak( $q1, new UnDeserializableValue( 77, 'string', 'not a string' ) ),
-				array( 'value', $q1->getNumericId(), 'string', 77 )
-			),
-		);
-	}
 }

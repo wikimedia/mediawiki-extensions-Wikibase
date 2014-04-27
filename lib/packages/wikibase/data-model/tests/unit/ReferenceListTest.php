@@ -163,25 +163,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $references
-	 */
-	public function testToArrayRoundtrip( ReferenceList $references ) {
-		$serialization = serialize( $references->toArray() );
-		$array = $references->toArray();
-
-		$this->assertInternalType( 'array', $array, 'toArray should return array' );
-
-		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
-			$copy = ReferenceList::newFromArray( $data );
-
-			$this->assertInstanceOf( '\Wikibase\References', $copy, 'newFromArray should return object implementing Snak' );
-
-			$this->assertTrue( $references->equals( $copy ), 'getArray newFromArray roundtrip should work' );
-		}
-	}
-
-	/**
-	 * @dataProvider instanceProvider
 	 *
 	 * @param ReferenceList $array
 	 */
@@ -205,7 +186,7 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	 * @param ReferenceList $array
 	 */
 	public function testGetHashValueIsTheSameForClone( ReferenceList $array ) {
-		$copy = ReferenceList::newFromArray( $array->toArray() );
+		$copy = unserialize( serialize( $array ) );
 		$this->assertEquals( $array->getValueHash(), $copy->getValueHash() );
 	}
 

@@ -1,5 +1,54 @@
 # Wikibase DataModel release notes
 
+## Version 1.0 (dev)
+
+#### Breaking changes
+
+Changes in the `Entity` hierarchy:
+
+* Changed the constructor signature of `Item`
+* Changed the constructor signature of `Property`
+* Removed `Entity::setClaims` (`Item::setClaims` has been retained)
+* Removed `Entity::clear`
+* Removed `Entity::isEmpty`
+* Removed `Entity::stub`
+* Removed `Property::newEmpty`
+* `Entity::removeLabel` no longer accepts an array of language codes
+* `Entity::removeDescription` no longer accepts an array of language codes
+* `Entity` no longer implements `Serializable`
+* Protected method `Entity::patchSpecificFields` no longer has a second parameter
+
+Removal of `toArray` and `newFromArray`:
+
+* Removed `Entity::toArray`, `Item::newFromArray` and `Property::newFromArray`
+* Removed `Claim::toArray` and `Statement::toArray`
+* Removed `Claim::newFromArray` and `Statement::newFromArray`
+* Removed `ReferenceList::toArray` and `ReferenceList::newFromArray`
+* Removed `toArray` from the `References` interface
+* Removed `SiteLink::toArray` and `SiteLink::newFromArray`
+* Removed `toArray` from the `Snak` and `Snaks` interfaces
+* Removed `PropertyValueSnak::toArray`
+* Removed `SnakList::toArray` and `SnakList::newFromArray`
+* Removed `SnakObject::toArray` and `SnakObject::newFromArray`
+* Removed `SnakObject::newFromType`
+
+Other changes:
+
+* `Claim` and `Statement` no longer implement `Serializable`
+* `SiteLinkList` is now mutable
+* Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
+* `Item::removeSiteLink` no longer takes an optional second parameter and no longer returns a boolean
+
+#### Additions
+
+* Added `AliasGroupList::hasGroupForLanguage`
+* Added `SiteLinkList::add`
+* Added `SiteLinkList::removeLinkWithSiteId`
+* Added `SiteLinkList::isEmpty`
+* Added `SiteLinkList::removeLinkWithSiteId`
+* Added `Item::getSiteLinkList`
+* Added `Item::setSiteLinkList`
+
 ## Version 0.7.4 (2014-04-24)
 
 #### Additions

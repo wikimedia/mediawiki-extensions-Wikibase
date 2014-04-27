@@ -79,11 +79,7 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNonAliasGroups_constructorThrowsException() {
 		$this->setExpectedException( 'InvalidArgumentException' );
-
-		$term = $this->getMockBuilder( 'Wikibase\DataModel\Term\Term' )
-			->disableOriginalConstructor()->getMock();
-
-		new AliasGroupList( array( $term ) );
+		new AliasGroupList( array( null ) );
 	}
 
 	public function testGivenSetLanguageCode_getByLanguageReturnsGroup() {

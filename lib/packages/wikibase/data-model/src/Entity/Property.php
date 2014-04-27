@@ -2,8 +2,10 @@
 
 namespace Wikibase\DataModel\Entity;
 
+use DataValues\Deserializers\DataValueDeserializer;
 use InvalidArgumentException;
-use RuntimeException;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
  * Represents a single Wikibase property.
@@ -19,6 +21,24 @@ class Property extends Entity {
 	const ENTITY_TYPE = 'property';
 
 	/**
+	 * @var string
+	 */
+	private $dataTypeId;
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param PropertyId|null $id
+	 * @param Fingerprint $fingerprint
+	 * @param string $dataTypeId
+	 */
+	public function __construct( PropertyId $id = null, Fingerprint $fingerprint, $dataTypeId ) {
+		$this->id = $id;
+		$this->fingerprint = $fingerprint;
+		$this->setDataTypeId( $dataTypeId );
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $dataTypeId
@@ -30,22 +50,16 @@ class Property extends Entity {
 			throw new InvalidArgumentException( '$dataTypeId needs to be a string' );
 		}
 
-		$this->data['datatype'] = $dataTypeId;
+		$this->dataTypeId = $dataTypeId;
 	}
 
 	/**
 	 * @since 0.4
 	 *
 	 * @return string
-	 * @throws RuntimeException
 	 */
 	public function getDataTypeId() {
-		if ( array_key_exists( 'datatype', $this->data ) ) {
-			assert( is_string( $this->data['datatype'] ) );
-			return $this->data['datatype'];
-		}
-
-		throw new RuntimeException( 'Cannot obtain the properties DataType as it has not been set' );
+		return $this->dataTypeId;
 	}
 
 	/**
@@ -56,29 +70,7 @@ class Property extends Entity {
 	 * @return string
 	 */
 	public function getType() {
-		return Property::ENTITY_TYPE;
-	}
-
-	/**
-	 * @see Entity::newFromArray
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return Property
-	 */
-	public static function newFromArray( array $data ) {
-		return new static( $data );
-	}
-
-	/**
-	 * @deprecated since 0.7.3. Use Property::newFromType
-	 *
-	 * @return Property
-	 */
-	public static function newEmpty() {
-		return self::newFromArray( array() );
+		return self::ENTITY_TYPE;
 	}
 
 	/**
@@ -89,7 +81,11 @@ class Property extends Entity {
 	 * @return Property
 	 */
 	public static function newFromType( $dataTypeId ) {
-		return self::newFromArray( array( 'datatype' => $dataTypeId ) );
+		return new self(
+			null,
+			Fingerprint::newEmpty(),
+			$dataTypeId
+		);
 	}
 
 	/**
@@ -101,6 +97,37 @@ class Property extends Entity {
 	 */
 	protected function idFromSerialization( $idSerialization ) {
 		return new PropertyId( $idSerialization );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * Two items are considered equal if they are of the same
+	 * type and have the same value. The value does not include
+	 * the id, so entities with the same value but different id
+	 * are considered equal.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $that
+	 *
+	 * @return boolean
+	 */
+	public function equals( $that ) {
+		if ( $that === $this ) {
+			return true;
+		}
+
+		if ( !( $that instanceof self ) ) {
+			return false;
+		}
+
+		/**
+		 * @var $that Property
+		 */
+		return ( $this->id === null && $that->id === null || $this->id->equals( $that->id ) )
+			&& $this->fingerprint->equals( $that->fingerprint )
+			&& $this->dataTypeId == $that->dataTypeId;
 	}
 
 }
