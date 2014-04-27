@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
-use LogicException;
 
 /**
  * @since 0.5
@@ -14,9 +13,9 @@ use LogicException;
 class DispatchingEntityIdParser implements EntityIdParser {
 
 	/**
-	 * @var callback[]
+	 * @var callable[]
 	 */
-	protected $idBuilders;
+	private $idBuilders;
 
 	/**
 	 * Takes an array in which each key is a preg_match pattern.
@@ -25,7 +24,7 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	 * that takes as only required argument the id serialization
 	 * (string) and returns an EntityId instance.
 	 *
-	 * @param callback[] $idBuilders
+	 * @param callable[] $idBuilders
 	 */
 	public function __construct( array $idBuilders ) {
 		$this->idBuilders = $idBuilders;
@@ -35,7 +34,6 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	 * @param string $idSerialization
 	 *
 	 * @throws EntityIdParsingException
-	 * @throws LogicException
 	 * @return EntityId
 	 */
 	public function parse( $idSerialization ) {
@@ -47,11 +45,7 @@ class DispatchingEntityIdParser implements EntityIdParser {
 			}
 		}
 
-		$this->throwInvalidId( $idSerialization );
-
-		throw new LogicException(
-			'DispatchingEntityIdParser::throwInvalidId did not throw an EntityIdParsingException'
-		);
+		throw $this->newInvalidIdException( $idSerialization );
 	}
 
 	/**
@@ -59,40 +53,35 @@ class DispatchingEntityIdParser implements EntityIdParser {
 	 *
 	 * @throws EntityIdParsingException
 	 */
-	protected function assertIdIsString( $idSerialization ) {
+	private function assertIdIsString( $idSerialization ) {
 		if ( !is_string( $idSerialization ) ) {
 			throw new EntityIdParsingException( 'Entity id serializations need to be strings' );
 		}
 	}
 
 	/**
-	 * @param callback $idBuilder
+	 * @param callable $idBuilder
 	 * @param string $idSerialization
 	 *
 	 * @throws EntityIdParsingException
-	 * @throws LogicException
 	 * @return EntityId
 	 */
-	protected function buildId( $idBuilder, $idSerialization ) {
+	private function buildId( $idBuilder, $idSerialization ) {
 		try {
 			return call_user_func( $idBuilder, $idSerialization );
 		}
 		catch ( InvalidArgumentException $ex ) {
-			$this->throwInvalidId( $idSerialization );
+			throw $this->newInvalidIdException( $idSerialization );
 		}
-
-		throw new LogicException(
-			'DispatchingEntityIdParser::throwInvalidId did not throw an EntityIdParsingException'
-		);
 	}
 
 	/**
 	 * @param string $idSerialization
 	 *
-	 * @throws EntityIdParsingException
+	 * @return EntityIdParsingException
 	 */
-	protected function throwInvalidId( $idSerialization ) {
-		throw new EntityIdParsingException(
+	private function newInvalidIdException( $idSerialization ) {
+		return new EntityIdParsingException(
 			'The provided id serialization "' . $idSerialization . '" is not valid'
 		);
 	}
