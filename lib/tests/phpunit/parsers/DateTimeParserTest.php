@@ -175,6 +175,14 @@ class DateTimeParserTest extends StringValueParserTest {
 			'June June June',
 			'111 111 111',
 			'Jann 2014',
+			'1980x',
+			'1980s', // supported by MWTimeIsoParser
+			'1980ss',
+			'1980er',
+			'1980UTC', // we don't support year + timezone here
+			'1980America/New_York',
+			'1980 America/New_York',
+			'1980+3',
 		);
 
 		foreach ( $invalid as $value ) {
