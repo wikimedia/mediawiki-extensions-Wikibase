@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_a42411ae",
+        "filename": "lib/includes/Validators/NotEntityIdValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_cc4bc161",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_ac50850e",
         "filename": "lib/includes/Validators/NotEntityIdValidator.php",
         "patchSetId": 16
@@ -47,6 +65,24 @@
       "writtenOn": "2014-04-25T14:25:16Z",
       "side": 1,
       "message": "$errorCode please?",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_84291587",
+        "filename": "lib/includes/Validators/NotEntityIdValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_ac50850e",
       "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_641a7970",
+        "filename": "lib/includes/Validators/StringLengthValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_4c3fb1b1",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_8c938951",
         "filename": "lib/includes/Validators/StringLengthValidator.php",
         "patchSetId": 16
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_441f7d5e",
+        "filename": "lib/includes/Validators/StringLengthValidator.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "yay!",
+      "parentUuid": "8e23439c_8c938951",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_cc72a1ab",
         "filename": "repo/includes/PreSaveChecks.php",
         "patchSetId": 16
@@ -98,6 +170,24 @@
       "writtenOn": "2014-04-25T14:25:16Z",
       "side": 1,
       "message": "Still misses the space. ;-)",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e416894d",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_cc72a1ab",
       "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +222,24 @@
       "writtenOn": "2014-04-28T13:03:02Z",
       "side": 1,
       "message": "See below.",
+      "parentUuid": "8e23439c_6c6dcdc6",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c904c81c",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "I think having if ( !$result-\u003eisValid() ) {return ... } all over the place means more (redundant) lines, and is less readable (more exit points). That\u0027s actually what I had before. The exception is only used locally, yes, but it makes the code a lot more obvious, I think.",
       "parentUuid": "8e23439c_6c6dcdc6",
       "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -174,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_29121c64",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "I extracted this to make the top method more readable. Think of this as giving a name to a block of code. Instead of writing a comment about a block, move it to a function in order to give it a name. I\u0027m trying to move closer to the idea of Literate Programming :)",
+      "parentUuid": "8e23439c_675726ce",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_c97f28a5",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 16
@@ -185,6 +311,24 @@
       "writtenOn": "2014-04-28T13:03:02Z",
       "side": 1,
       "message": "This looks pointless. Do you have plans with this?",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_44089d2a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T13:27:28Z",
+      "side": 1,
+      "message": "\"regular\" code should not know how to construct such a localizer. Ideally, \"regular\" code should call \"new\" only on value objects. So, everything else needs a factory function. It gives the \"framework\" control over instantiation and lets us change construction and injection later without touching business logic.",
+      "parentUuid": "8e23439c_c97f28a5",
       "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
