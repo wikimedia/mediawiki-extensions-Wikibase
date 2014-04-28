@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_e297963b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-28T21:54:20Z",
+      "side": 1,
+      "message": "foctories?",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a29d1e5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-28T21:54:20Z",
+      "side": 1,
+      "message": "entitiy?",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_621026f8",
         "filename": "repo/includes/api/CreateClaim.php",
         "patchSetId": 8
