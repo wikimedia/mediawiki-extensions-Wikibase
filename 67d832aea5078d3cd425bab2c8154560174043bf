@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_3104c280",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T19:14:12Z",
+      "side": 1,
+      "message": "Self-reference. ;-) I927209e293e5bf05240705686cab040468a6b445",
+      "revId": "67d832aea5078d3cd425bab2c8154560174043bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_71d6baf7",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T19:14:12Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "67d832aea5078d3cd425bab2c8154560174043bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_116b0617",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T19:14:12Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused. Doesn\u0027t this reintroduce the exact same bug that we just fixed in the library?",
+      "revId": "67d832aea5078d3cd425bab2c8154560174043bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
