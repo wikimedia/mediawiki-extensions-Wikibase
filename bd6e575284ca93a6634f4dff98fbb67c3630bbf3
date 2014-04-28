@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_09b2c046",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-04-28T09:24:33Z",
+      "side": 1,
+      "message": "Why do you use a function here?",
+      "revId": "bd6e575284ca93a6634f4dff98fbb67c3630bbf3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
