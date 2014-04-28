@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_0e1d23c7",
+        "filename": "docs/constraints.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T17:45:55Z",
+      "side": 1,
+      "message": "By removing the file? Not important, just wondering.",
+      "parentUuid": "8e23439c_4483fd56",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_c91e08be",
         "filename": "repo/includes/ChangeOp/ChangeOpFactoryProvider.php",
         "patchSetId": 3
@@ -262,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_ee8667df",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T17:45:55Z",
+      "side": 1,
+      "message": "Oh, right, \"abstract class\". Sure.",
+      "parentUuid": "8e23439c_842fd539",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_49d0b8cb",
         "filename": "repo/includes/api/ModifyClaim.php",
         "patchSetId": 3
@@ -431,6 +467,24 @@
       "side": 1,
       "message": "API code is never supposed to call apply() directly. \napplyChangeOp does two things in addition to apply(): it validates the ChangeOp, and it handles any ChangeOpException. In the future, it could also check any permissions needed.\n\nI agree that it would be nice to make this more clear, but I really don\u0027t know what I could call such a function other than, well, applyChangeOp(). Oh, I could call it runChangeOp or doChangeOp, or... but would that help?",
       "parentUuid": "8e23439c_69993421",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_eeb1c78d",
+        "filename": "repo/includes/api/SetDescription.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T17:45:55Z",
+      "side": 1,
+      "message": "... I\u0027m thinking for a while now and can\u0027t find a better name. :-( But I know that such a design is very problematic. Other coders can\u0027t know they are supposed to do it this way, they will just call ...-\u003eapply( ... ).",
+      "parentUuid": "8e23439c_645cb982",
       "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
