@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_dd0d9fec",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T23:53:40Z",
+      "side": 1,
+      "message": "Now this parser refuses to parse:\n* \"1\". Ok.\n* \"1+\". Ok.\n* \"1 June\". Ok.\n* \"198001 June\". Hm. This can be parsed as a valid date, 1980-06-01, but probably shouldn\u0027t. Ok, screw it.\n* \"19991231\". Oh, that\u0027s a real problem. This is actually in the ISO standard.\n\nSuggestion: /^\\d{1,7}(\\+\\d*|\\D*)$/",
+      "revId": "d825d689c6d2babeb49e39b1094351803a37b3b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
