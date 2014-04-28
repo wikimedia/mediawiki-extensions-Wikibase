@@ -121,6 +121,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_a9506c37",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T13:03:02Z",
+      "side": 1,
+      "message": "See below.",
+      "parentUuid": "8e23439c_6c6dcdc6",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_675726ce",
         "filename": "repo/includes/PreSaveChecks.php",
         "patchSetId": 16
@@ -132,6 +150,41 @@
       "writtenOn": "2014-04-25T14:25:16Z",
       "side": 1,
       "message": "There is no specific kind of \"constraint check\" here. Both the validator and the Entity are parameters. It\u0027s really just a simple \"validateThisEntityWithThatValidator\" call. Which makes the method pretty pointless if you think about it. It\u0027s used one time only. It throws an exception that\u0027s catched immediately. Please inline it.",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6946d481",
+        "filename": "repo/includes/PreSaveChecks.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T13:03:02Z",
+      "side": 1,
+      "message": "Here is the deal: This is all private. It can easily be refactored in following patches. So let\u0027s merge this as it is and I will do a follow-up at the end of the chain of patches. Ok?",
+      "parentUuid": "8e23439c_675726ce",
+      "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c97f28a5",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T13:03:02Z",
+      "side": 1,
+      "message": "This looks pointless. Do you have plans with this?",
       "revId": "165ba1d41a6e5207e122599c9f19cb2d4b8c6102",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
