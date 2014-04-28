@@ -818,9 +818,7 @@ class EditEntity {
 		// The logic for enforcing constraints is pending a redesign.
 		if ( !$this->preSaveChecks ) {
 			// eek, global state
-			$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
-			$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-			$this->preSaveChecks = new PreSaveChecks( $termIndex, $idParser );
+			$this->preSaveChecks = WikibaseRepo::getDefaultInstance()->getPreSaveChecks();
 		}
 
 		return $this->preSaveChecks;

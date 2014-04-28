@@ -108,7 +108,7 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 		$badEntity->addSiteLink( new SiteLink( 'testwiki', 'DUPE' ) );
 
 		return array(
-			array( $badEntity, 'wikibase-error-sitelink-already-used' ),
+			array( $badEntity, 'sitelink-already-used' ),
 		);
 	}
 
@@ -124,9 +124,9 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = new SiteLinkUniquenessValidator( $titleLookup, $siteLinkLookup, $siteStore );
 
-		$status = $validator->validateEntity( $entity );
+		$result = $validator->validateEntity( $entity );
 
-		$this->assertTrue( $status->isOK(), 'isOK' );
+		$this->assertTrue( $result->isValid(), 'isValid' );
 	}
 
 	/**
@@ -142,12 +142,12 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = new SiteLinkUniquenessValidator( $titleLookup, $siteLinkLookup, $siteStore );
 
-		$status = $validator->validateEntity( $entity );
+		$result = $validator->validateEntity( $entity );
 
-		$this->assertFalse( $status->isOK(), 'isOK' );
+		$this->assertFalse( $result->isValid(), 'isValid' );
 
-		$errors = $status->getErrorsArray();
-		$this->assertEquals( $error, $errors[0][0] );
+		$errors = $result->getErrors();
+		$this->assertEquals( $error, $errors[0]->getCode() );
 	}
 
 }
