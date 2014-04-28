@@ -83,11 +83,11 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 			'55. millennium' =>
 				array( '+0000000000055000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10. century' =>
-				array( '+0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '+0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'12. century' =>
-				array( '+0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '+0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10s' =>
-				array( '+0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '+0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'12s' =>
 				array( '+0000000000000012-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 
@@ -129,11 +129,11 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 			'55. millennium BCE' =>
 				array( '-0000000000055000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10. century BCE' =>
-				array( '-0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'12. century BCE' =>
-				array( '-0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10s BCE' =>
-				array( '-0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'12s BCE' =>
 				array( '-0000000000000012-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			// also parse BC
@@ -142,11 +142,11 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 			'55. millennium BC' =>
 				array( '-0000000000055000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10. century BC' =>
-				array( '-0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_ka , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000000000001000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'12. century BC' =>
-				array( '-0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_100a , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000000000001200-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10s BC' =>
-				array( '-0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
+				array( '-0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'12s BC' =>
 				array( '-0000000000000012-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 		);
