@@ -21,6 +21,10 @@ class ParseValueTest extends WikibaseApiTestCase {
 	private static $hasSetup;
 
 	public function setUp() {
+		$this->mergeMwGlobalArrayValue(
+			'wgValueParsers',
+			array( 'decimal' => 'ValueParsers\DecimalParser' )
+		);
 		parent::setUp();
 	}
 

@@ -84,12 +84,8 @@ call_user_func( function() {
 	};
 
 	$wgValueParsers['time'] = 'Wikibase\Lib\Parsers\TimeParser';
-	$wgValueParsers['bool'] = 'ValueParsers\BoolParser';
-	$wgValueParsers['float'] = 'ValueParsers\FloatParser';
 	$wgValueParsers['globecoordinate'] = 'ValueParsers\GlobeCoordinateParser';
-	$wgValueParsers['int'] = 'ValueParsers\IntParser';
 	$wgValueParsers['null'] = 'ValueParsers\NullParser';
-	$wgValueParsers['decimal'] = 'ValueParsers\DecimalParser';
 
 	// API module registration
 	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';
