@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_913b96c3",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T18:06:43Z",
+      "side": 1,
+      "message": "getContentModelMappings, please.",
+      "revId": "02b8e1e839cc963daf46f52a4354a7f9b2dee98f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
