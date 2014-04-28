@@ -175,6 +175,9 @@ class DateTimeParserTest extends StringValueParserTest {
 			'June June June',
 			'111 111 111',
 			'Jann 2014',
+			'1980x',
+			'1980s', // supported by MWTimeIsoParser
+			'1980ss'
 		);
 
 		foreach ( $invalid as $value ) {
