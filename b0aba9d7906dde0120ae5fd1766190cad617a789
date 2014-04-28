@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_e23b1634",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T22:24:28Z",
+      "side": 1,
+      "message": "You don\u0027t know if the translation of the message \u0027wikibase-time-precision-10annum\u0027 always ends with a single non-digit character. In German it\u0027s \"1980er\".\n\nThe \"problem\" is that PHP\u0027s DateTime parser thinks \"s\" is a valid time zone. Time zones aren\u0027t necessary 1 character. To make this right you need to block all time zones in the timezonedb including really interesting stuff like \"1980+3\".\n\nhttp://php.net/manual/en/timezones.php\n\nI don\u0027t think we should do this.\n\nSuggestion: Add a special case to MWTimeIsoParser. If all \"unlocalizations\" fail it should try with a hard-coded /^(\\d+)s$/i regexp.",
+      "revId": "b0aba9d7906dde0120ae5fd1766190cad617a789",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
