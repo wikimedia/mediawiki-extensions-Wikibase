@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_292c5cf1",
+        "filename": "docs/constraints.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "Gerrit highlights some whitespace in red here. Please remove.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c91e08be",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactoryProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "LOL. Love this comment.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_69cb7421",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactoryProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "Private please. All of them.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_498af8e4",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "Empty line, remove.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6985b4d2",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "Empty line, remove.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_29733c15",
+        "filename": "repo/includes/ChangeOp/ItemChangeOpFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "Typo.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_896b7015",
+        "filename": "repo/includes/ChangeOp/ItemChangeOpFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "This line is good but the second parameter in ChangeOpSiteLink shouldn\u0027t be optional.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0957605c",
+        "filename": "repo/includes/ChangeOp/ItemChangeOpFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "This is not used. Why is it here? For future use? Please add a short description and a TODO then.\n\nI\u0027m aware this code is a bit older and not new in this patch. However, ... ;-)",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a9c50c0f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "Looks like a mistake. It\u0027s not used outside. Should probably be private.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_89ca501c",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "Make these all private please.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_49d0b8cb",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "If I call this two times with two different $entityType the second call will return a factory with the wrong type. Needs at least an if and an exception to catch this.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_29d9fcf7",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "As before. A second call with an other $entityType will return a wrong factory.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_09abe01a",
+        "filename": "repo/includes/api/RemoveReferences.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "You are aware that this method is weird? Two parameters that are supposed to be identical?\n\nSuggestion #1: Switch the parameters to\n$this-\u003einitChangOpFactory( Item::ENTITY_TYPE, $entity-\u003egetType() )\nand call them\n* $entityType and\n* $requestedEntityType\n\n$entityType is used to create the factory. It must be this type and therefor is a constant. $requestedEntityType is only used for the check.\n\nSuggestion #2: Rename to\n$this-\u003einitItemChangeOpFactory( $entity-\u003egetType() )\nIt\u0027s only used with Items currently.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_89f13068",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "The old code did not filtered empty aliases. Intended? Now it\u0027s impossible to remove empty aliases if they made it into the database somehow. :-(",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_69993421",
+        "filename": "repo/includes/api/SetDescription.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "This is a bit weird. How should I know when I\u0027m supposed to call apply() indirectly via this method and when I\u0027m allowed to call apply() directly?\n\nSuggestion: Rename applyChangeOp() to something that clearly explains the difference to a simple apply() call.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_89bff05b",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "See RemoveReferences.php.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_896ed0fc",
+        "filename": "repo/includes/specials/SpecialModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T12:52:26Z",
+      "side": 1,
+      "message": "As before. Second call with an other type will be wrong.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
