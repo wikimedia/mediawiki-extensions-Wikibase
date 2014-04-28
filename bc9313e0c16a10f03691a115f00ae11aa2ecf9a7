@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_621026f8",
+        "filename": "repo/includes/api/CreateClaim.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "This property does not exist. Triggers a warning when it\u0027s used below. I assume this should be a simple $changeOpFactory.",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a2e99ee2",
+        "filename": "repo/includes/api/RemoveClaims.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "This property does not exist. Triggers a warning when it\u0027s used below. I assume this should be a simple $changeOpFactory.",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_82f462ba",
+        "filename": "repo/includes/api/RemoveQualifiers.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "This property does not exist. Triggers a warning when it\u0027s used below. I assume this should be a simple $changeOpFactory.",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_62ef06e5",
+        "filename": "repo/includes/api/RemoveReferences.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "This property does not exist. Triggers a warning when it\u0027s used below. I assume this should be a simple $changeOpFactory.",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_42c2ca5e",
+        "filename": "repo/includes/api/SetQualifier.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "This property does not exist. Triggers a warning when it\u0027s used below. I assume this should be a simple $changeOpFactory.",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_22ac6e9c",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "Please optimize (Ctrl+Alt+O).",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e2baf6d8",
+        "filename": "repo/includes/api/SetReference.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "This property does not exist. Triggers a warning when it\u0027s used below. I assume this should be a simple $changeOpFactory.",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_82a222a2",
+        "filename": "repo/includes/api/SetSiteLink.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "Please optimize (Ctrl+Alt+O).",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_22934e5c",
+        "filename": "repo/includes/specials/SpecialModifyTerm.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T21:51:17Z",
+      "side": 1,
+      "message": "Please optimize (Ctrl+Alt+O).",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
