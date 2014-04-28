@@ -79,6 +79,10 @@ class DateTimeParser extends StringValueParser {
 				$largeYear = $matches[2];
 			}
 
+			if ( preg_match( '/^\d{1,7}(\+\d*|\D*)$/', $value, $matches ) ) {
+				throw new ParseException( $value . ' is not a valid date' );
+			}
+
 			// Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			$dateTime = new DateTime( $value );
 			if( $largeYear === null ) {
