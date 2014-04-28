@@ -10,6 +10,7 @@ use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
 use ValueParsers\ParserOptions;
 use ValueParsers\StringValueParser;
+use ValueParsers\TimeParser;
 use ValueParsers\ValueParser;
 
 /**
@@ -29,7 +30,7 @@ class MWTimeIsoParser extends StringValueParser {
 
 	/**
 	 * @var array message keys showing the number of 0s that need to be appended to years when
-	 *      parsed with the given message keys
+	 *	  parsed with the given message keys
 	 */
 	private static $precisionMsgKeys = array(
 		9 => array(
@@ -111,8 +112,8 @@ class MWTimeIsoParser extends StringValueParser {
 	 * @return TimeValue|bool
 	 */
 	private function reconvertOutputString( $value ) {
-		foreach( self::$precisionMsgKeys as $repeat0Char => $msgKeys ) {
-			foreach( $msgKeys as $msgKey ) {
+		foreach( self::$precisionMsgKeys as $msgKeysGroup ) {
+			foreach( $msgKeysGroup as $msgKey ) {
 				$msg = new Message( $msgKey );
 				//FIXME: Use the language passed in options!
 				//The only reason we are not currently doing this is due to the formatting not currently Localizing
@@ -120,28 +121,18 @@ class MWTimeIsoParser extends StringValueParser {
 				//$msg->inLanguage( $this->lang ); // todo check other translations?
 				$msg->inLanguage( 'en' );
 				$msgText = $msg->text();
-				$isBceMsg = strstr( $msgKey, '-BCE-' );
 
 				list( $start, $end ) = explode( '$1' , $msgText , 2 );
 				if( preg_match( '/^\s*' . preg_quote( $start ) . '(.+?)' . preg_quote( $end ) . '\s*$/i', $value, $matches ) ) {
 					list( , $number ) = $matches;
-					$number = $this->lang->parseFormattedNumber( $number );
-
-					return $this->getTimeFromYear(
-						$number . str_repeat( '0', $repeat0Char ),
-						$isBceMsg
-					);
+					return $this->parseNumber( $number, $msgKey );
 				}
+
 				// If the msg string ends with BCE also check for BC
 				if( substr_compare( $end, 'BCE', - 3, 3 ) === 0 ) {
 					if( preg_match( '/^\s*' . preg_quote( $start ) . '(.+?)' . preg_quote( substr( $end, 0, -1 ) ) . '\s*$/i', $value, $matches ) ) {
 						list( , $number ) = $matches;
-						$number = $this->lang->parseFormattedNumber( $number );
-
-						return $this->getTimeFromYear(
-							$number . str_repeat( '0', $repeat0Char ),
-							$isBceMsg
-						);
+						return $this->parseNumber( $number, $msgKey );
 					}
 
 				}
@@ -149,6 +140,34 @@ class MWTimeIsoParser extends StringValueParser {
 
 		}
 		return false;
+	}
+
+	/**
+	 * @param string $number
+	 * @param string $msgKey
+	 *
+	 * @return TimeValue
+	 */
+	private function parseNumber( $number, $msgKey ) {
+		$number = $this->lang->parseFormattedNumber( $number );
+		$paddedZeros = $this->determinePaddedZeros( $msgKey );
+		$year = $number . str_repeat( '0', $paddedZeros );
+
+		$precision = $this->determinePrecision( $year );
+		$this->setPrecision( $precision );
+
+		$isBceMsg = $this->isBceMsg( $msgKey );
+
+		return $this->getTimeFromYear( $year, $isBceMsg );
+	}
+
+	/**
+	 * @param string $msgKey
+	 *
+	 * @return boolean
+	 */
+	private function isBceMsg( $msgKey ) {
+		return strstr( $msgKey, '-BCE-' );
 	}
 
 	/**
@@ -163,8 +182,52 @@ class MWTimeIsoParser extends StringValueParser {
 		} else {
 			$sign = EraParser::CURRENT_ERA;
 		}
+
 		$timeString = $sign . $year . '-00-00T00:00:00Z';
+
 		return $this->timeValueTimeParser->parse( $timeString );
+	}
+
+	/**
+	 * @param string $year
+	 *
+	 * @return int
+	 */
+	private function determinePrecision( $year ) {
+		$rightZeros = strlen( $year ) - strlen( rtrim( $year, '0' ) );
+		$precision = TimeValue::PRECISION_YEAR - $rightZeros;
+
+		if( $precision < TimeValue::PRECISION_Ga ) {
+			$precision = TimeValue::PRECISION_Ga;
+		}
+
+		return $precision;
+	}
+
+	/**
+	 * @param int $precision
+	 */
+	private function setPrecision( $precision ) {
+		$this->timeValueTimeParser->getOptions()->setOption(
+			TimeParser::OPT_PRECISION,
+			$precision
+		);
+	}
+
+	/**
+	 * @param string $precisionMsgKey
+	 *
+	 * @return int
+	 * @throws ParseException
+	 */
+	private function determinePaddedZeros( $precisionMsgKey ) {
+		foreach( self::$precisionMsgKeys as $key => $values ) {
+			if ( in_array( $precisionMsgKey, $values ) ) {
+				return $key;
+			}
+		}
+
+		throw new ParseException( 'Unknown $precisionMsgKey: ' . $precisionMsgKey );
 	}
 
 }
