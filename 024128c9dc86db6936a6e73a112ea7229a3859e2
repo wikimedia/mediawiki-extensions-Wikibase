@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_8ec49345",
+        "filename": "lib/includes/parsers/MWTimeIsoParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-28T17:16:17Z",
+      "side": 1,
+      "message": "This are basically two nested loops (in_array is a loop), nested in two other loops (the two in reconvertOutputString above). Luckily the arrays are all very small. However, I think this can very easily be avoided by simply passing the $repeat0Char variable from the old code to the parseNumber function as a third parameter.",
+      "revId": "024128c9dc86db6936a6e73a112ea7229a3859e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
