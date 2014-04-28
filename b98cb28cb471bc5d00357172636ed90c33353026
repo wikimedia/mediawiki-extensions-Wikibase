@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_4483fd56",
+        "filename": "docs/constraints.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_292c5cf1",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_c91e08be",
         "filename": "repo/includes/ChangeOp/ChangeOpFactoryProvider.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_049985c6",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactoryProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_69cb7421",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_498af8e4",
         "filename": "repo/includes/ChangeOp/ChangeOps.php",
         "patchSetId": 3
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_647ef968",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_498af8e4",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_6985b4d2",
         "filename": "repo/includes/ChangeOp/ChangeOps.php",
         "patchSetId": 3
@@ -81,6 +135,24 @@
       "writtenOn": "2014-04-28T12:52:26Z",
       "side": 1,
       "message": "Empty line, remove.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_848d9587",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_6985b4d2",
       "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +244,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_842fd539",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "No. Most are used by subclasses. Changing that is not in scope.",
+      "parentUuid": "8e23439c_89ca501c",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_49d0b8cb",
         "filename": "repo/includes/api/ModifyClaim.php",
         "patchSetId": 3
@@ -183,6 +273,24 @@
       "writtenOn": "2014-04-28T12:52:26Z",
       "side": 1,
       "message": "If I call this two times with two different $entityType the second call will return a factory with the wrong type. Needs at least an if and an exception to catch this.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_64ccb9c0",
+        "filename": "repo/includes/api/ModifyClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Right... this sucks anyway, it\u0027s essentially a B/C hack to avoid havinh to touch a lot of old code.",
+      "parentUuid": "8e23439c_49d0b8cb",
       "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -206,6 +314,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_44253d55",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Yes, true. This is an initializer. It should only be called once. Will add a check.",
+      "parentUuid": "8e23439c_29d9fcf7",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_09abe01a",
         "filename": "repo/includes/api/RemoveReferences.php",
         "patchSetId": 3
@@ -217,6 +343,24 @@
       "writtenOn": "2014-04-28T12:52:26Z",
       "side": 1,
       "message": "You are aware that this method is weird? Two parameters that are supposed to be identical?\n\nSuggestion #1: Switch the parameters to\n$this-\u003einitChangOpFactory( Item::ENTITY_TYPE, $entity-\u003egetType() )\nand call them\n* $entityType and\n* $requestedEntityType\n\n$entityType is used to create the factory. It must be this type and therefor is a constant. $requestedEntityType is only used for the check.\n\nSuggestion #2: Rename to\n$this-\u003einitItemChangeOpFactory( $entity-\u003egetType() )\nIt\u0027s only used with Items currently.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_44af7d78",
+        "filename": "repo/includes/api/RemoveReferences.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Yes, it\u0027s weird. It should die. But since we don\u0027t know the concrete entity type everywhere we need to factory, that would need quite a bit of refactoring.\n\nThe idea behind the $expectedType thing is that if you know that the entity is required to be an Item, you can expect this method to initialize an return an ItemChangeOpFactory, so you can use it for creating item-specific ChangeOps.\n\nThis is not just used for items right now. SetQualifier, for instance, can be used with a Claim on a Property, not an item.",
+      "parentUuid": "8e23439c_09abe01a",
       "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -240,6 +384,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_6437194b",
+        "filename": "repo/includes/api/SetAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "Unrelated change, removing.",
+      "parentUuid": "8e23439c_89f13068",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_69993421",
         "filename": "repo/includes/api/SetDescription.php",
         "patchSetId": 3
@@ -251,6 +413,24 @@
       "writtenOn": "2014-04-28T12:52:26Z",
       "side": 1,
       "message": "This is a bit weird. How should I know when I\u0027m supposed to call apply() indirectly via this method and when I\u0027m allowed to call apply() directly?\n\nSuggestion: Rename applyChangeOp() to something that clearly explains the difference to a simple apply() call.",
+      "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_645cb982",
+        "filename": "repo/includes/api/SetDescription.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-28T14:48:58Z",
+      "side": 1,
+      "message": "API code is never supposed to call apply() directly. \napplyChangeOp does two things in addition to apply(): it validates the ChangeOp, and it handles any ChangeOpException. In the future, it could also check any permissions needed.\n\nI agree that it would be nice to make this more clear, but I really don\u0027t know what I could call such a function other than, well, applyChangeOp(). Oh, I could call it runChangeOp or doChangeOp, or... but would that help?",
+      "parentUuid": "8e23439c_69993421",
       "revId": "b98cb28cb471bc5d00357172636ed90c33353026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
