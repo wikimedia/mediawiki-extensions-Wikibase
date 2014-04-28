@@ -1,9 +1,9 @@
 <?php
 
-use Wikibase\Client\WikibaseClient;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -41,7 +41,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$this->wbLibrary = new WikibaseLuaEntityBindings(
 			$snakFormatter,
 			$wikibaseClient->getStore()->getEntityLookup(),
-			$wikibaseClient->getSettings()->get( 'siteGlobalID' ),
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
 			$wgContLang
 		);
 

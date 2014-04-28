@@ -2,19 +2,19 @@
 
 namespace Wikibase\Client\Scribunto\Test;
 
-use Wikibase\DataModel\Entity\Item;
+use DataValues\DataValue;
+use DataValues\StringValue;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
-use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\SnakFactory;
-use DataValues\DataValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use DataValues\StringValue;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\V4GuidGenerator;
+use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * Helper class for Lua integration tests.
@@ -37,7 +37,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 */
 	public function setUp() {
 		$siteLink = new SiteLink(
-			WikibaseClient::getDefaultInstance()->getSettings()->get( 'siteGlobalID' ),
+			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' ),
 			'WikibaseClientLuaTest'
 		);
 
@@ -141,4 +141,5 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 
 		return $statement;
 	}
+
 }

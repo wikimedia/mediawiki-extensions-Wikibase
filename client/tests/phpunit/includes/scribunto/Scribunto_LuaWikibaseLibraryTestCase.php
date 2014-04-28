@@ -8,8 +8,8 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 	return;
 }
 
-use Title;
 use Language;
+use Title;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -39,7 +39,7 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		self::$oldDefaultClientStore = $wikibaseClient->getSettings()->get( 'defaultClientStore' );
+		self::$oldDefaultClientStore = $wikibaseClient->getSettings()->getSetting( 'defaultClientStore' );
 		$wikibaseClient->getSettings()->setSetting( 'defaultClientStore', 'ClientStoreMock' );
 
 		self::$oldWgWBClientStores = $wgWBClientStores;
@@ -101,4 +101,5 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 	protected function getTestTitle() {
 		return Title::newFromText( 'WikibaseClientLuaTest' );
 	}
+
 }

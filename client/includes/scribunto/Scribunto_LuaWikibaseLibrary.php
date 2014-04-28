@@ -1,9 +1,9 @@
 <?php
 
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Utils;
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Utils;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -41,7 +41,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getLanguageFallbackChainFactory(),
 			$language,
 			Utils::getLanguageCodes(),
-			$wikibaseClient->getSettings()->get( 'siteGlobalID' )
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 
 		parent::__construct( $engine );
@@ -113,4 +113,5 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getGlobalSiteId() {
 		return array( $this->wbLibrary->getGlobalSiteId() );
 	}
+
 }
