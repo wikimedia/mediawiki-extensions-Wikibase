@@ -19,11 +19,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 class NotEntityIdValidator implements ValueValidator {
 
 	/**
-	 * @var array|null List of entity types that are to be forbidden by this validator.
-	 */
-	protected $forbiddenTypes;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	protected $idParser;
@@ -31,27 +26,32 @@ class NotEntityIdValidator implements ValueValidator {
 	/**
 	 * @var string
 	 */
-	protected $code;
+	protected $errorCode;
+
+	/**
+	 * @var array|null List of entity types that are to be forbidden by this validator.
+	 */
+	protected $forbiddenTypes;
 
 	/**
 	 * @param EntityIdParser $idParser The parser to use for testing whether a string is an entity ID.
-	 * @param string $code The error code to use when this validator fails.
+	 * @param string $errorCode The error code to use when this validator fails.
 	 * @param null|array $forbiddenTypes A list of entity types who's IDs should be considered
 	 *        invalid values. If null, all valid entity IDs are considered invaliud input.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $idParser, $code, $forbiddenTypes = null ) {
+	public function __construct( EntityIdParser $idParser, $errorCode, $forbiddenTypes = null ) {
 		if ( !is_null( $forbiddenTypes ) && !is_array( $forbiddenTypes ) ) {
 			throw new InvalidArgumentException( '$forbiddenTypes must be an array' );
 		}
 
-		if ( !is_string( $code ) ) {
+		if ( !is_string( $errorCode ) ) {
 			throw new InvalidArgumentException( '$code must be a string' );
 		}
 
 		$this->idParser = $idParser;
-		$this->code = $code;
+		$this->errorCode = $errorCode;
 		$this->forbiddenTypes = $forbiddenTypes;
 	}
 
@@ -72,8 +72,13 @@ class NotEntityIdValidator implements ValueValidator {
 			if ( $this->forbiddenTypes === null
 				|| in_array( $entityId->getEntityType(), $this->forbiddenTypes )
 			) {
-				// The label is a valid ID - we don't like that!
-				$error = Error::newError( 'Looks like an Entity ID: ' . $value, null, $this->code, array( $value ) );
+				// The label looks like a valid ID - we don't like that!
+				$error = Error::newError(
+					'Looks like an Entity ID: ' . $value,
+					null,
+					$this->errorCode,
+					array( $value )
+				);
 				$result = Result::newError( array( $error ) );
 			}
 		} catch ( EntityIdParsingException $parseException ) {
@@ -91,4 +96,5 @@ class NotEntityIdValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }

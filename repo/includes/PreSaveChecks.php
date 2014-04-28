@@ -5,7 +5,6 @@ namespace Wikibase;
 use Diff\DiffOp\Diff\Diff;
 use Status;
 use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\Test\TermValidatorFactoryTest;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -67,8 +66,11 @@ class PreSaveChecks {
 					$entityType,
 					TermValidatorFactory::CONSTRAINTS_NON_HARD
 				);
+				$result = $uniquenessValidator->validateEntity( $entity );
 
-				$this->checkEntityConstraint( $entity, $uniquenessValidator );
+				if ( !$result->isValid() ) {
+					throw new ChangeOpValidationException( $result );
+				}
 			}
 		} catch ( ChangeOpValidationException $ex ) {
 			// NOTE: We use a ChangeOpValidationException here, since we plan
@@ -77,20 +79,6 @@ class PreSaveChecks {
 		}
 
 		return $status;
-	}
-
-	/**
-	 * @param Entity $entity
-	 * @param EntityValidator $validator
-	 *
-	 * @throws ChangeOpValidationException
-	 */
-	private function checkEntityConstraint( Entity $entity, EntityValidator $validator ) {
-		$result = $validator->validateEntity( $entity );
-
-		if ( !$result->isValid() ) {
-			throw new ChangeOpValidationException( $result );
-		}
 	}
 
 	/**
@@ -107,4 +95,5 @@ class PreSaveChecks {
 			array_keys( $diff->getRemovals() )
 		) );
 	}
+
 }
