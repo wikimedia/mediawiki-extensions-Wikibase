@@ -50,8 +50,8 @@
 	"wikibase-validator-bad-entity-id": "ত্রুটিপূর্ণভাবে গঠিত আইডি: $1",
 	"wikibase-validator-bad-entity-type": "$1 অপ্রত্যাশিত ভুক্তির ধরণ",
 	"wikibase-validator-no-such-entity": "$1 খুঁজে পাওয়া যায়নি",
-	"wikibase-validator-bad-value": "অবৈধ মান: $1",
 	"wikibase-validator-unknown-unit": "অজানা একক: $1",
+	"wikibase-validator-not-allowed": "অবৈধ মান: $1",
 	"datatypes-type-wikibase-item": "আইটেম",
 	"datatypes-type-commonsMedia": "কমন্স মিডিয়া ফাইল",
 	"version-wikibase": "উইকিবেজ"

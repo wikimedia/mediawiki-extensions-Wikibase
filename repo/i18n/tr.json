@@ -3,7 +3,8 @@
 		"authors": [
 			"Emperyan",
 			"Incelemeelemani",
-			"Rapsar"
+			"Rapsar",
+			"Marmase"
 		]
 	},
 	"wikibase-edit": "değiştir",
@@ -15,6 +16,7 @@
 	"wikibase-description-edit-placeholder": "açıklama girin",
 	"wikibase-sitelink-page-edit-placeholder": "madde",
 	"wikibase-description-input-help-message": "$1 dilinde kısa bir açıklama girin",
+	"wikibase-statements": "İfadeler",
 	"wikibase-sitelinks-input-help-message": "Bu ögeyle ilgili olan bir sayfanın bağlantsını ekle.",
 	"wikibase-remove": "kaldır",
 	"wikibase-aliases-label": "Şu şekilde de bilinir:",

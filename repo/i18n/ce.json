@@ -41,7 +41,6 @@
 	"wikibase-shortcopyrightwarning": "Кнопка «$1» тӀетаӀярца, ахьа гойту хьой [[$2|лелаяран хьолан]] реза хилар, кхин хьан къинхьегам юхаберзо йиш йоцуш хьокху $3 хьолаца массарна лело бакъо ло ахь.",
 	"wikibase-copyrighttooltip-acknowledge": "Аса тӀелоцу хӀара хьал. Кхий ма гайта хӀара хаам.",
 	"wikibase-entityselector-more": "кхин",
-	"wikibase-error-sitelink-already-used": "Хьажораг оцу [$1 $2] сайтан тӀе хӀинцале лелош ю хӀокху [[$3]] элементо.",
 	"special-itembytitle": "Элементаш коьртамогӀомца",
 	"wikibase-itembytitle-lookup-fieldset": "Лаха элемент сайтаца а коьртамгӀанца а",
 	"wikibase-itembytitle-lookup-site": "Сайт:",

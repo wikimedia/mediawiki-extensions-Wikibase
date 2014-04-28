@@ -47,6 +47,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Vefsíða",
 	"wikibase-sitelinks-siteid-columnheading": "Kóði",
 	"wikibase-sitelinks-link-columnheading": "Tengd síða",
+	"wikibase-snakview-snaktypeselector-somevalue": "óþekkt gildi",
+	"wikibase-snakview-snaktypeselector-novalue": "ekkert gildi",
 	"wikibase-tooltip-error-details": "Nánar",
 	"wikibase-undeserializable-value": "Gildið er ógilt og ekki er hægt að birta það.",
 	"wikibase-validator-bad-type": "$2 í staðinn fyrir $1",
@@ -59,12 +61,12 @@
 	"wikibase-validator-bad-entity-type": "Óvænt eininga gerð $1",
 	"wikibase-validator-no-such-entity": "$1 fannst ekki",
 	"wikibase-validator-no-such-property": "Eiginleikinn $1 fannst ekki",
-	"wikibase-validator-bad-value": "Ógilt gildi: $1",
 	"wikibase-validator-bad-url": "Gölluð vefslóð: $1",
 	"wikibase-validator-bad-url-scheme": "Óstudd vefslóðs skema: $1",
 	"wikibase-validator-bad-http-url": "Gölluð HTTP vefslóð: $1",
 	"wikibase-validator-bad-mailto-url": "Gölluð tölvupósts vefslóð: $1",
 	"wikibase-validator-unknown-unit": "Óþekkt eining: $1",
+	"wikibase-validator-not-allowed": "Ógilt gildi: $1",
 	"datatypes-type-wikibase-item": "Hlutur",
 	"datatypes-type-commonsMedia": "Commons margmiðlunarskrá"
 }

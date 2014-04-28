@@ -59,8 +59,8 @@
 	"wikibase-tooltip-error-details": "Detaloj",
 	"wikibase-validator-bad-type": "$2 anstataŭ $1",
 	"wikibase-validator-no-such-entity": "$1 ne trovita",
-	"wikibase-validator-bad-value": "Malvalida valoro: $1",
 	"wikibase-validator-unknown-unit": "Nekonata unuo: $1",
+	"wikibase-validator-not-allowed": "Malvalida valoro: $1",
 	"datatypes-type-wikibase-item": "Ero",
 	"datatypes-type-commonsMedia": "Multrimeda dosiero en Komunejo",
 	"version-wikibase": "Vikibazo"

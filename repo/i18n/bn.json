@@ -63,7 +63,6 @@
 	"wikibase-anonymouseditwarning": "সতর্কতা: আপনি লগ ইন করেননি।\nএই পাতার সম্পাদনার ইতিহাসে আপনার আইপি ঠিকানা সংরক্ষিত হবে।",
 	"wikibase-restrictionedit-tooltip-message": "এই পাতাটি সুরক্ষিত আছে। সম্পাদনার অনুমতি নেই।",
 	"wikibase-blockeduser-tooltip-message": "আপনার সম্পাদনা করার অনুমতি নেই কারণ আপনার ব্যবহারকারী নাম অথবা আইপি ঠিকানা ব্লক করা হয়েছে।",
-	"wikibase-error-sitelink-already-used": "অন্য আইটেম [[$3]]-এ ইতিমধ্যেই অন্তর্ভুক্ত সাইট লিংক [$1 $2] ব্যবহৃত হয়েছে।",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" কোন বৈধ আইটেম আইডি নয়।",
 	"wikibase-wikibaserepopage-invalid-langcode": "ভাষা শনাক্তকারী \"$1\" অজানা। সিস্টেমের জন্য পরিচিত এমন একটি ভাষা শনাক্তকারী ব্যবহার করুন, যেমন \"bn\"।",
 	"wikibase-wikibaserepopage-invalid-id": "আইডি \"$1\" সিস্টেমে অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।",

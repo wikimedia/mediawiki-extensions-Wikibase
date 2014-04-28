@@ -40,6 +40,8 @@
 	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
 	"wikibase-sitelinks-siteid-columnheading": "Kod",
 	"wikibase-sitelinks-link-columnheading": "Halaman terpaut",
+	"wikibase-snakview-snaktypeselector-somevalue": "nilai tidak diketahui",
+	"wikibase-snakview-snaktypeselector-novalue": "tiada nilai",
 	"wikibase-tooltip-error-details": "Butiran",
 	"wikibase-validator-bad-type": "$2, bukan $1",
 	"wikibase-validator-too-long": "Mesti tidak melebihi $1 aksara",
@@ -49,8 +51,8 @@
 	"wikibase-validator-bad-entity-type": "Jenis entiti $1 tidak dijangka",
 	"wikibase-validator-no-such-entity": "$1 tidak dijumpai",
 	"wikibase-validator-no-such-property": "Sifat $1 tidak dijumpai",
-	"wikibase-validator-bad-value": "Nilai tak sah: $1",
 	"wikibase-validator-bad-value-type": "Jenis nilai $1 tidak elok, $2 diharapkan",
+	"wikibase-validator-not-allowed": "Nilai tak sah: $1",
 	"datatypes-type-wikibase-item": "Perkara",
 	"datatypes-type-commonsMedia": "Fail media Commons",
 	"version-wikibase": "Wikibase"

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Minisarm",
-			"Stelistcristi"
+			"Stelistcristi",
+			"Rsocol"
 		]
 	},
 	"wikibase-lib-desc": "Grupează funcționalități comune pentru extensiile Wikibase și Client Wikibase",
@@ -43,6 +44,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "Site",
 	"wikibase-sitelinks-siteid-columnheading": "Cod",
 	"wikibase-sitelinks-link-columnheading": "Pagină legată",
+	"wikibase-snakview-snaktypeselector-somevalue": "valoare necunoscută",
+	"wikibase-snakview-snaktypeselector-novalue": "nici o valoare",
 	"wikibase-tooltip-error-details": "Detalii",
 	"wikibase-undeserializable-value": "Valoarea nu este validă și nu poate fi afișată.",
 	"wikibase-validator-bad-type": "$2 în loc de $1",
@@ -55,13 +58,13 @@
 	"wikibase-validator-bad-entity-type": "Tip de entitate $1 neașteptat",
 	"wikibase-validator-no-such-entity": "$1 negăsit",
 	"wikibase-validator-no-such-property": "Proprietatea $1 nu a fost găsită",
-	"wikibase-validator-bad-value": "Valoare interzisă: $1",
 	"wikibase-validator-bad-value-type": "Tip de valoare $1 greșită; se aștepta $2",
 	"wikibase-validator-bad-url": "URL incorect: $1",
 	"wikibase-validator-bad-url-scheme": "Schemă de URL neacceptată: $1",
 	"wikibase-validator-bad-http-url": "URL HTTP incorect: $1",
 	"wikibase-validator-bad-mailto-url": "URL mailto incorect: $1",
 	"wikibase-validator-unknown-unit": "Unitate necunoscută: $1",
+	"wikibase-validator-not-allowed": "Valoare interzisă: $1",
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-commonsMedia": "Fișier multimedia de la Commons",
 	"version-wikibase": "Wikibase"

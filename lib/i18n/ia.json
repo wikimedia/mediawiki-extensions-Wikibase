@@ -59,7 +59,7 @@
 	"wikibase-validator-bad-entity-type": "Typo de entitate incorrecte: $1",
 	"wikibase-validator-no-such-entity": "$1 non trovate",
 	"wikibase-validator-no-such-property": "Proprietate $1 non trovate",
-	"wikibase-validator-bad-value": "Valor invalide: $1",
 	"wikibase-validator-bad-value-type": "Typo de valor $1 incorrecte; expectava $2",
-	"wikibase-validator-bad-url": "URL mal formate: $1"
+	"wikibase-validator-bad-url": "URL mal formate: $1",
+	"wikibase-validator-not-allowed": "Valor non valide: $1"
 }

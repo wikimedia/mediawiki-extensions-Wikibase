@@ -10,7 +10,8 @@
 			"Mahan",
 			"Reza1615",
 			"Rtemis",
-			"ZxxZxxZ"
+			"ZxxZxxZ",
+			"Pouyana"
 		]
 	},
 	"wikibase-lib-desc": "نگهداری قابلیت‌های اساسی برای ویکی‌بیس و افزونه‌های کارخواه ویکی‌بیس",
@@ -67,6 +68,8 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "وب‌گاه",
 	"wikibase-sitelinks-siteid-columnheading": "کد",
 	"wikibase-sitelinks-link-columnheading": "صفحهٔ پیوندداده‌شده",
+	"wikibase-snakview-snaktypeselector-somevalue": "مقدار ناشناخته",
+	"wikibase-snakview-snaktypeselector-novalue": "بدون مقدار",
 	"wikibase-tooltip-error-details": "جزئیات",
 	"wikibase-undeserializable-value": "این مقدار معتبر نیست و قابل نمایش نیست.",
 	"wikibase-validator-bad-type": "$2 به جای $1",
@@ -79,13 +82,13 @@
 	"wikibase-validator-bad-entity-type": "نوع ورودی غیرمنتظره  $1",
 	"wikibase-validator-no-such-entity": "$1 یافت نشد",
 	"wikibase-validator-no-such-property": "خصوصیت $1 یافت نشد",
-	"wikibase-validator-bad-value": "مقدار نامجاز: $1",
 	"wikibase-validator-bad-value-type": "نوع دادۀ غلط $1 برای $2",
 	"wikibase-validator-bad-url": "یوآرال ناقص: $1",
 	"wikibase-validator-bad-url-scheme": "یوآرال پوشش داده نشده: $1",
 	"wikibase-validator-bad-http-url": "یوآرال HTTP ناقص: $1",
 	"wikibase-validator-bad-mailto-url": "یوآرال رایانامۀ ناقص: $1",
 	"wikibase-validator-unknown-unit": "واحد ناشناخته: $1",
+	"wikibase-validator-not-allowed": "مقدار نامجاز: $1",
 	"datatypes-type-wikibase-item": "آیتم",
 	"datatypes-type-commonsMedia": "پرونده‌های ویکی‌انبار",
 	"version-wikibase": "ویکی‌بیس"

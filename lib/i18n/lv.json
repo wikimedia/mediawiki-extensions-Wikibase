@@ -24,7 +24,7 @@
 	"wikibase-sitelinks-link-columnheading": "Saistītā lapa",
 	"wikibase-snakview-snaktypeselector-somevalue": "nezināma vērtība",
 	"wikibase-snakview-snaktypeselector-novalue": "nav vērtības",
-	"wikibase-validator-bad-value": "Neatļauta vērtība: $1",
+	"wikibase-validator-not-allowed": "Neatļauta vērtība: $1",
 	"datatypes-type-wikibase-item": "Ieraksts",
 	"datatypes-type-commonsMedia": "Commons multivides fails"
 }
