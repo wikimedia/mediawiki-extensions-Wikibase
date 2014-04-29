@@ -32,28 +32,36 @@ class MWTimeIsoParser extends StringValueParser {
 	 *      parsed with the given message keys
 	 */
 	private static $precisionMsgKeys = array(
-		9 => array(
+		TimeValue::PRECISION_Ga => array(
 			'wikibase-time-precision-Gannum',
 			'wikibase-time-precision-BCE-Gannum',
 		),
-		6 => array(
+		TimeValue::PRECISION_Ma => array(
 			'wikibase-time-precision-Mannum',
 			'wikibase-time-precision-BCE-Mannum',
 		),
-		3 => array(
+		TimeValue::PRECISION_ka => array(
 			'wikibase-time-precision-millennium',
 			'wikibase-time-precision-BCE-millennium',
 		),
-		2 => array(
+		TimeValue::PRECISION_100a => array(
 			'wikibase-time-precision-century',
 			'wikibase-time-precision-BCE-century',
 		),
-		0 => array(
+		TimeValue::PRECISION_10a => array(
 			'wikibase-time-precision-annum',
 			'wikibase-time-precision-BCE-annum',
 			'wikibase-time-precision-10annum',
 			'wikibase-time-precision-BCE-10annum',
 		),
+	);
+
+	private static $paddedZeros = array(
+		TimeValue::PRECISION_Ga => 9,
+		TimeValue::PRECISION_Ma => 6,
+		TimeValue::PRECISION_ka => 3,
+		TimeValue::PRECISION_100a => 2,
+		TimeValue::PRECISION_10a => 0
 	);
 
 	/**
@@ -111,7 +119,7 @@ class MWTimeIsoParser extends StringValueParser {
 	 * @return TimeValue|bool
 	 */
 	private function reconvertOutputString( $value ) {
-		foreach( self::$precisionMsgKeys as $repeat0Char => $msgKeysGroup ) {
+		foreach( self::$precisionMsgKeys as $precision => $msgKeysGroup ) {
 			foreach( $msgKeysGroup as $msgKey ) {
 				$msg = new Message( $msgKey );
 				//FIXME: Use the language passed in options!
@@ -125,14 +133,14 @@ class MWTimeIsoParser extends StringValueParser {
 				list( $start, $end ) = explode( '$1' , $msgText , 2 );
 				if( preg_match( '/^\s*' . preg_quote( $start ) . '(.+?)' . preg_quote( $end ) . '\s*$/i', $value, $matches ) ) {
 					list( , $number ) = $matches;
-					return $this->parseNumber( $number, $repeat0Char, $isBceMsg );
+					return $this->parseNumber( $number, $precision, $isBceMsg );
 				}
 
 				// If the msg string ends with BCE also check for BC
 				if( substr_compare( $end, 'BCE', - 3, 3 ) === 0 ) {
 					if( preg_match( '/^\s*' . preg_quote( $start ) . '(.+?)' . preg_quote( substr( $end, 0, -1 ) ) . '\s*$/i', $value, $matches ) ) {
 						list( , $number ) = $matches;
-						return $this->parseNumber( $number, $repeat0Char, $isBceMsg );
+						return $this->parseNumber( $number, $precision, $isBceMsg );
 					}
 
 				}
@@ -144,16 +152,15 @@ class MWTimeIsoParser extends StringValueParser {
 
 	/**
 	 * @param string $number
-	 * @param int $repeat0Char
+	 * @param int $precision
 	 * @param boolean $isBceMsg
 	 *
 	 * @return TimeValue
 	 */
-	private function parseNumber( $number, $repeat0Char, $isBceMsg ) {
+	private function parseNumber( $number, $precision, $isBceMsg ) {
 		$number = $this->lang->parseFormattedNumber( $number );
-		$year = $number . str_repeat( '0', $repeat0Char );
+		$year = $number . str_repeat( '0', self::$paddedZeros[$precision] );
 
-		$precision = $this->determinePrecision( $year );
 		$this->setPrecision( $precision );
 
 		return $this->getTimeFromYear( $year, $isBceMsg );
@@ -184,22 +191,6 @@ class MWTimeIsoParser extends StringValueParser {
 		$timeString = $sign . $year . '-00-00T00:00:00Z';
 
 		return $this->timeValueTimeParser->parse( $timeString );
-	}
-
-	/**
-	 * @param string $year
-	 *
-	 * @return int
-	 */
-	private function determinePrecision( $year ) {
-		$rightZeros = strlen( $year ) - strlen( rtrim( $year, '0' ) );
-		$precision = TimeValue::PRECISION_YEAR - $rightZeros;
-
-		if( $precision < TimeValue::PRECISION_Ga ) {
-			$precision = TimeValue::PRECISION_Ga;
-		}
-
-		return $precision;
 	}
 
 	/**
