@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_f5fcef6e",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-29T13:47:27Z",
+      "side": 1,
+      "message": "Hm, there\u0027s just the one validator for language, why use a CompositeValidator? Just makes it harder to read. And it\u0027s unlikely we\u0027ll ever need another validator for that.",
+      "revId": "4bf53743d97a56aba24ac8414ba4a654cb46da85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
