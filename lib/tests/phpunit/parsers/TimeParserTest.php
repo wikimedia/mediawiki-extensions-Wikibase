@@ -52,6 +52,8 @@ class TimeParserTest extends StringValueParserTest {
 				array( '+0000000000002000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'2010' =>
 				array( '+0000000000002010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1980 ' =>
+				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1' =>
 				array( '+0000000000000001-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
 			'-1000000001' =>
@@ -66,6 +68,10 @@ class TimeParserTest extends StringValueParserTest {
 			//Wikibase\Lib\YearMonthTimeParser
 			'1 1999' =>
 				array( '+0000000000001999-01-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeFormatter::CALENDAR_GREGORIAN ),
+			'March 1999' =>
+				array( '+0000000000001999-03-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1999 March' =>
+				array( '+0000000000001999-03-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_MONTH , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//ValueParsers\TimeParser
 			'+0000000000000000-01-01T00:00:00Z (Gregorian)' =>
@@ -120,7 +126,10 @@ class TimeParserTest extends StringValueParserTest {
 			'111 111 111',
 			'Jann 2014',
 			'1980x',
-			'1980ss'
+			'1980ss',
+			'1980UTC',
+			'1980 America/New_York',
+			'1980America/New_York'
 		);
 
 		foreach ( $invalid as $value ) {
