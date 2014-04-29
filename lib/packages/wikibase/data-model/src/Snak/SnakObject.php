@@ -2,9 +2,6 @@
 
 namespace Wikibase\DataModel\Snak;
 
-use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\UnDeserializableValue;
-use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;

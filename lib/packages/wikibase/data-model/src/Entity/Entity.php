@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use DataValues\Serializers\DataValueSerializer;
 use Diff\Differ\Differ;
 use Diff\Differ\MapDiffer;
 use Diff\Patcher\MapPatcher;
@@ -18,7 +17,6 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\InternalSerialization\SerializerFactory;
 
 /**
  * Represents a single Wikibase entity.

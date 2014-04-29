@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use Diff\Comparer\CallbackComparer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\ListPatcher;
@@ -16,8 +15,6 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\InternalSerialization\DeserializerFactory;
-use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 
 /**
  * Represents a single Wikibase item.

@@ -2,10 +2,8 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use DataValues\Deserializers\DataValueDeserializer;
 use InvalidArgumentException;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
  * Represents a single Wikibase property.
