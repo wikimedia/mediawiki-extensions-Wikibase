@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_388dbe85",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-29T14:47:34Z",
+      "side": 1,
+      "message": "Duplicate.",
+      "revId": "825128472210be54e491d6093eb020ec8b5d2c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1880c249",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-29T14:47:34Z",
+      "side": 1,
+      "message": "Trimming should be a feature. I know that at least one of the parsers does this. This one should too.",
+      "revId": "825128472210be54e491d6093eb020ec8b5d2c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
