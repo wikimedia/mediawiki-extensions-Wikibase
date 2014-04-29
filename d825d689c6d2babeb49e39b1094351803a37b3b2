@@ -16,6 +16,24 @@
       "revId": "d825d689c6d2babeb49e39b1094351803a37b3b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_bdc9c35f",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-04-29T00:23:49Z",
+      "side": 1,
+      "message": "for 19991231, how do we know the user wants 1999 December 31? versus the year 19991231? agree, they probably want the former but then we have handling above for years larger than 4 digits.\n\nfor \"198001 June\", without throwing the exception and treating as invalid, we get (maybe not so bad):\n\n+0000000000198001-06-01T00:00:00Z\n\ninstead of\n\n+0000000000001980-06-01T00:00:00Z\n\nI\u0027m not sure about trying to support everything here and think we\u0027re better off being a little bit more restrictive instead of guessing what the user wants in these edge cases.",
+      "parentUuid": "8e23439c_dd0d9fec",
+      "revId": "d825d689c6d2babeb49e39b1094351803a37b3b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
