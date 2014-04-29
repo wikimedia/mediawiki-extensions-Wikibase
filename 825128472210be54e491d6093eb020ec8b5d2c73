@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_f83bc633",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-29T15:40:10Z",
+      "side": 1,
+      "message": "I missed the space, sorry.",
+      "parentUuid": "8e23439c_388dbe85",
+      "revId": "825128472210be54e491d6093eb020ec8b5d2c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_1880c249",
         "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
         "patchSetId": 3
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "Should this block the change for more test cases? Guess if we want trimming as a feature this should be done in another changeset.",
       "parentUuid": "8e23439c_1880c249",
+      "revId": "825128472210be54e491d6093eb020ec8b5d2c73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d846cac5",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-29T15:40:10Z",
+      "side": 1,
+      "message": "My bad, I just realized this is the wrong parser. In the context of this parser all single years should fail, no matter if they end with a space or not.",
+      "parentUuid": "8e23439c_38f49eed",
       "revId": "825128472210be54e491d6093eb020ec8b5d2c73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
