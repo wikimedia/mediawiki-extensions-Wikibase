@@ -105,12 +105,12 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @since 0.4
 	 * @see   EntityLookup::hasEntity
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 *
 	 * @return bool
 	 * @throws StorageException
 	 */
-	public function hasEntity( EntityID $entityId ) {
+	public function hasEntity( EntityId $entityId ) {
 		$row = $this->loadPageRow( $entityId );
 
 		return ( $row !== null );
@@ -121,11 +121,11 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @since 0.5
 	 *
-	 * @param EntityID $entityId
+	 * @param EntityId $entityId
 	 *
 	 * @return int|false
 	 */
-	public function getLatestRevisionId( EntityID $entityId ) {
+	public function getLatestRevisionId( EntityId $entityId ) {
 		$row = $this->loadPageRow( $entityId );
 
 		return $row === null ? false : $row->page_latest;
@@ -157,14 +157,14 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityID $entityId The entity to query the DB for.
+	 * @param EntityId $entityId The entity to query the DB for.
 	 * @param int $revision The desired revision id, 0 means "current".
 	 * @param boolean $connType DB_READ or DB_MASTER
 	 *
 	 * @throws \DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	protected function selectRevisionRow( EntityID $entityId, $revision = 0, $connType = DB_READ ) {
+	protected function selectRevisionRow( EntityId $entityId, $revision = 0, $connType = DB_READ ) {
 		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
 
@@ -263,13 +263,13 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityID $entityId The entity to query the DB for.
+	 * @param EntityId $entityId The entity to query the DB for.
 	 * @param boolean $connType DB_READ or DB_MASTER
 	 *
 	 * @throws \DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	protected function selectPageRow( EntityID $entityId, $connType = DB_READ ) {
+	protected function selectPageRow( EntityId $entityId, $connType = DB_READ ) {
 		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
 
