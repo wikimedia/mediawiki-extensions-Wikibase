@@ -4,12 +4,14 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataValues\TimeValue;
+use Wikibase\Utils;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityLookup;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
 use Wikibase\Validators\EntityExistsValidator;
+use Wikibase\Validators\MembershipValidator;
 use Wikibase\Validators\NumberRangeValidator;
 use Wikibase\Validators\NumberValidator;
 use Wikibase\Validators\RegexValidator;
@@ -79,7 +81,7 @@ class WikibaseDataTypeBuilders {
 		);
 
 		$experimental = array(
-			// 'monolingual-text' => array( $this, 'buildMonolingualTextType' ),
+			'monolingual-text' => array( $this, 'buildMonolingualTextType' ),
 			// 'multilingual-text' => array( $this, 'buildMultilingualTextType' ),
 		);
 
@@ -132,6 +134,35 @@ class WikibaseDataTypeBuilders {
 		);
 
 		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+	}
+
+	public function buildMonolingualTextType( $id ) {
+		$validators = array();
+
+		$validators[] = new TypeValidator( 'string' );
+		//TODO: validate UTF8 (here and elsewhere)
+		$validators[] = new StringLengthValidator( 1, 400, 'mb_strlen' );
+		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
+
+		$textValidator = new DataFieldValidator(
+			'text',
+			new CompositeValidator( $validators, true ) //Note: each validator is fatal
+		);
+
+		$validators = array();
+		$validators[] = new MembershipValidator( Utils::getLanguageCodes() );
+
+		$languageValidator = new DataFieldValidator(
+			'language',
+			new CompositeValidator( $validators, true )
+		);
+
+		$topValidator = new CompositeValidator(
+			array( $textValidator, $languageValidator ),
+			true
+		);
+
+		return new DataType( $id, 'monolingual-text', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	public function buildTimeType( $id ) {
