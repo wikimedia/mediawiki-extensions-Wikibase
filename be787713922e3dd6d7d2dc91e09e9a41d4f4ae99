@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_352387b6",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-29T14:23:08Z",
+      "side": 1,
+      "message": "We might actually also doe this when $title-\u003egetText() \u003d\u003d\u003d \u0027\u0027, which can happen for things like \"#foo\".",
+      "revId": "be787713922e3dd6d7d2dc91e09e9a41d4f4ae99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_955b7b56",
+        "filename": "lib/includes/formatters/CommonsLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-29T14:23:08Z",
+      "side": 1,
+      "message": "The return value is requirede to be HTML, so this needs to be escaped with htmlspecialchars. Makign an invalid title that contains evil JS shouldn\u0027t be hard :P",
+      "revId": "be787713922e3dd6d7d2dc91e09e9a41d4f4ae99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
