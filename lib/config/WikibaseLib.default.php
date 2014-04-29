@@ -98,13 +98,13 @@ return call_user_func( function() {
 		),
 
 		'dataTypes' => array(
-			'wikibase-item',
 			'commonsMedia',
+			'globe-coordinate',
+			'quantity',
 			'string',
 			'time',
-			'globe-coordinate',
 			'url',
-			'quantity'
+			'wikibase-item',
 		),
 
 		// URL schemes allowed for values of the URL type.

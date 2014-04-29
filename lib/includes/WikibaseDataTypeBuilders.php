@@ -69,13 +69,13 @@ class WikibaseDataTypeBuilders {
 		//     be used for the UI, and the factory should simply know all data types always.
 
 		$types = array(
-			'wikibase-item' => array( $this, 'buildItemType' ),
 			'commonsMedia' => array( $this, 'buildMediaType' ),
+			'globe-coordinate' => array( $this, 'buildCoordinateType' ),
+			'quantity'=> array( $this, 'buildQuantityType' ),
 			'string' => array( $this, 'buildStringType' ),
 			'time' => array( $this, 'buildTimeType' ),
-			'globe-coordinate' => array( $this, 'buildCoordinateType' ),
 			'url' => array( $this, 'buildUrlType' ),
-			'quantity'=> array( $this, 'buildQuantityType' )
+			'wikibase-item' => array( $this, 'buildItemType' ),
 		);
 
 		$experimental = array(
