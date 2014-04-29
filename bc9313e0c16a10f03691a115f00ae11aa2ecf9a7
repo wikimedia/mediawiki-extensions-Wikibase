@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_ddb11ff5",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactoryProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-29T00:06:23Z",
+      "side": 1,
+      "message": "Isn\u0027t both allowed?",
+      "parentUuid": "8e23439c_42b64ad9",
+      "revId": "bc9313e0c16a10f03691a115f00ae11aa2ecf9a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_621026f8",
         "filename": "repo/includes/api/CreateClaim.php",
         "patchSetId": 8
