@@ -16,6 +16,24 @@
       "revId": "8f53bb896dc420f39ac20262ae8d2f94f4cf38f4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3a924e4f",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-29T23:38:31Z",
+      "side": 1,
+      "message": "Maybe the comment is a bit to harsh. The point is: Negative years are mostly not known down to the month. Eclipses? Sure. But most other events 1000 or more years B.C. (when you start to use separators), e.g. the day an ancient king died? Most of the time we don\u0027t even know the exact year.",
+      "parentUuid": "8e23439c_f5e62faa",
+      "revId": "8f53bb896dc420f39ac20262ae8d2f94f4cf38f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
