@@ -134,6 +134,8 @@ class DateTimeParserTest extends StringValueParserTest {
 				array( '+0000000000000111-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'4th July 1' =>
 				array( '+0000000000000001-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
+			'4th July 1 ' =>
+				array( '+0000000000000001-07-04T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//More than 4 digit years
 			'4th July 10000' =>
@@ -177,8 +179,7 @@ class DateTimeParserTest extends StringValueParserTest {
 			'Jann 2014',
 			'1980x',
 			'1980s', // supported by MWTimeIsoParser
-			'1980s ',
-			'1980 ',
+			'1980',
 			'1980ss',
 			'1980er',
 			'1980UTC', // we don't support year + timezone here
@@ -186,6 +187,9 @@ class DateTimeParserTest extends StringValueParserTest {
 			'1980 America/New_York',
 			'1980+3',
 			'1980+x'
+			'x',
+			'zz',
+			'America/New_York'
 		);
 
 		foreach ( $invalid as $value ) {
