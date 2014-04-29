@@ -135,6 +135,14 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpFactory', $returnValue );
 	}
 
+	public function testGetContentModelMappings() {
+		$array = $this->getDefaultInstance()->getContentModelMappings();
+		foreach( $array as $entityType => $contentModel ) {
+			$this->assertTrue( is_scalar( $entityType ) );
+			$this->assertTrue( is_scalar( $contentModel ) );
+		}
+	}
+
 	/**
 	 * @return WikibaseRepo
 	 */

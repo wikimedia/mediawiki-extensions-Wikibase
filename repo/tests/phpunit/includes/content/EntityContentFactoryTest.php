@@ -5,9 +5,9 @@ namespace Wikibase\Test;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContentFactory;
-use Wikibase\Item;
-use Wikibase\Property;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\EntityContentFactory
@@ -41,9 +41,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$argLists = array();
 
 		$argLists[] = array( array() );
-		$argLists[] = array( array( 0 ) );
-		$argLists[] = array( array( 42, 1337, 9001 ) );
-		$argLists[] = array( array( 0, 1, 2, 3, 4, 5, 6, 7 ) );
+		$argLists[] = array( array( 'Foo' => 'Bar' ) );
+		$argLists[] = array( WikibaseRepo::getDefaultInstance()->getContentModelMappings() );
 
 		return $argLists;
 	}
@@ -60,7 +59,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 	protected function newFactory() {
 		return new EntityContentFactory(
-			array( 42, 1337, 9001 )
+			WikibaseRepo::getDefaultInstance()->getContentModelMappings()
 		);
 	}
 
