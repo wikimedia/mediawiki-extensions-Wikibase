@@ -4,7 +4,6 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use RuntimeException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -78,25 +77,19 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	}
 
 	/**
-	 * Format an EntityId data value
+	 * @see EntityIdFormatter::formatEntityId
 	 *
-	 * @since 0.4
+	 * @param EntityId $entityId
 	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
+	 * @throws FormattingException
 	 * @return string
-	 *
-	 * @throws RuntimeException
-	 * @throws InvalidArgumentException
 	 */
-	public function format( $value ) {
-		$value = $this->unwrapEntityId( $value );
-
+	protected function formatEntityId( EntityId $entityId ) {
 		$label = null;
 
 		if ( $this->getOption( self::OPT_LOOKUP_LABEL ) ) {
 			try {
-				$label = $this->lookupItemLabel( $value );
+				$label = $this->lookupEntityLabel( $entityId );
 			} catch ( OutOfBoundsException $ex ) {
 				/* Use fallbacks below */
 			}
@@ -104,41 +97,19 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 
 		if ( !is_string( $label ) ) {
 			switch ( $this->getOption( self::OPT_LABEL_FALLBACK ) ) {
+				case self::FALLBACK_PREFIXED_ID:
+					$label = $entityId->getPrefixedId();
+					break;
 				case self::FALLBACK_EMPTY_STRING:
 					$label = '';
 					break;
-				case self::FALLBACK_PREFIXED_ID:
-					$label = $value->getPrefixedId();
-					break;
 				default:
-					throw new FormattingException( 'No label found for ' . $value );
+					throw new FormattingException( 'No label found for ' . $entityId );
 			}
 		}
 
 		assert( is_string( $label ) );
 		return $label;
-	}
-
-	/**
-	 * Unwrap an EntityId value which might be wrapped in an EntityIdValue
-	 *
-	 * @param EntityId|EntityIdValue $value The value to format
-	 *
-	 * @return EntityId
-	 *
-	 * @throws InvalidArgumentException
-	 */
-
-	protected function unwrapEntityId( $value ) {
-		if ( $value instanceof EntityIdValue ) {
-			$value = $value->getEntityId();
-		}
-
-		if ( !( $value instanceof EntityId ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected an EntityId or EntityIdValue.' );
-		}
-
-		return $value;
 	}
 
 	/**
@@ -151,7 +122,7 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 * @throws OutOfBoundsException If an entity with that ID does not exist.
 	 * @return string|bool False if no label was found in the language or language fallback chain.
 	 */
-	protected function lookupItemLabel( EntityId $entityId ) {
+	protected function lookupEntityLabel( EntityId $entityId ) {
 		$entity = $this->entityLookup->getEntity( $entityId );
 
 		if ( $entity === null ) {
