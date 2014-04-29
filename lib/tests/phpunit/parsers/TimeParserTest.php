@@ -80,6 +80,8 @@ class TimeParserTest extends StringValueParserTest {
 				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
 			'13,000 million years ago' =>
 				array( '-0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1980s' =>
+				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//Wikibase\Lib\DateTimeParser
 			'10/10/10' =>
@@ -117,6 +119,8 @@ class TimeParserTest extends StringValueParserTest {
 			'June June June',
 			'111 111 111',
 			'Jann 2014',
+			'1980x',
+			'1980ss'
 		);
 
 		foreach ( $invalid as $value ) {

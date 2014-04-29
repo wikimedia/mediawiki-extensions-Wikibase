@@ -149,6 +149,8 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 				array( '-0000000000000010-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),
 			'12s BC' =>
 				array( '-0000000000000012-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_YEAR , TimeFormatter::CALENDAR_GREGORIAN ),
+			'1980s' =>
+				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN )
 		);
 
 		foreach ( $valid as $value => $expected ) {
@@ -174,6 +176,8 @@ class MWTimeIsoParserTest extends StringValueParserTest {
 			'1 June 2013',
 			'June 2013',
 			'2000',
+			'1980x',
+			'1980ss',
 		);
 
 		foreach ( $invalid as $value ) {
