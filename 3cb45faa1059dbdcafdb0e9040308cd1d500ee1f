@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_98461253",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-29T14:35:25Z",
+      "side": 1,
+      "message": "please log this: wgDebugLog( __METHOD__, ...)",
+      "revId": "3cb45faa1059dbdcafdb0e9040308cd1d500ee1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
