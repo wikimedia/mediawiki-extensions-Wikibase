@@ -72,6 +72,8 @@ class DateTimeParser extends StringValueParser {
 				)
 			);
 
+			$value = trim( $value );
+
 			// PHP's DateTime object also can't handle larger than 4 digit years,
 			// e.g. 1 June 202020
 			if( preg_match( '/^(.*\D)?(\d{5,})(.*)$/', $value, $matches ) ) {
@@ -79,9 +81,7 @@ class DateTimeParser extends StringValueParser {
 				$largeYear = $matches[2];
 			}
 
-			if ( preg_match( '/^\d{1,7}(\+\d*|\D*)$/', $value, $matches ) ) {
-				throw new ParseException( $value . ' is not a valid date' );
-			}
+			$this->validateDateTimeInput( $value );
 
 			// Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			$dateTime = new DateTime( $value );
@@ -97,6 +97,24 @@ class DateTimeParser extends StringValueParser {
 		}
 		catch( Exception $exception ) {
 			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );
+		}
+	}
+
+	/**
+	 * @param string $value
+	 *
+	 * @throws ParseException
+	 */
+	private function validateDateTimeInput( $value ) {
+		// we don't support input of non-digits only, such as 'x'.
+		if ( !preg_match( '/\d/', $value ) ) {
+			throw new ParseException( $value . ' is not a valid date.' );
+		}
+
+		// @todo i18n support for these exceptions
+		// we don't support dates in format of year + timezone
+		if ( preg_match( '/^\d{1,7}(\+\d*|\D*)$/', $value ) ) {
+			throw new ParseException( $value . ' is not a valid date.' );
 		}
 	}
 

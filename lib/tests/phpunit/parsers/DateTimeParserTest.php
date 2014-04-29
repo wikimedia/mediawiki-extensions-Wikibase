@@ -183,6 +183,10 @@ class DateTimeParserTest extends StringValueParserTest {
 			'1980America/New_York',
 			'1980 America/New_York',
 			'1980+3',
+			'1980+x',
+			'x',
+			'zz',
+			'America/New_York'
 		);
 
 		foreach ( $invalid as $value ) {
