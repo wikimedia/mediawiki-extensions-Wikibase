@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_952ffb84",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-29T12:30:31Z",
+      "side": 1,
+      "message": "Sure, \"12345678\" becomes a year because the year parser is applied before. But in the context of this parser \"12345678\" is a valid ISO date and should not be blocked, please.\n\nAs I said, blocking \"123456foo\" here is fine for me. Let\u0027s please start with \\d{1,7}. This should fix all the cases you want to fix for now.",
+      "revId": "a1345f9a06b69f242d721f7ad0638bfe9abadfc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
