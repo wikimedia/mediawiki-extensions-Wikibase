@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_1fbae1b5",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-04-30T11:07:15Z",
+      "side": 1,
+      "message": "Please make this a string flag, or use a separate function. Seeing getDefaultInstance( true ) somewhere is uninformative - I\u0027ll have no idea what \"true\" means.",
+      "revId": "56a7752d41643c8fd9a7294d3a9edc6ddeeb53a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
