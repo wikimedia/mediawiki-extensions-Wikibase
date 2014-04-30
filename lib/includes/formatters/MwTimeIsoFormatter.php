@@ -79,7 +79,12 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			STR_PAD_LEFT
 		);
 
+		if ( $precision <= TimeValue::PRECISION_YEAR ) {
+			$fourDigitYearTimestamp = $this->normaliseMwTimestampInput( $fourDigitYearTimestamp );
+		}
+
 		$timestamp = wfTimestamp( TS_MW, $fourDigitYearTimestamp );
+
 		$localisedDate = $this->language->sprintfDate(
 			$this->getDateFormat( $precision ),
 			$timestamp
@@ -101,6 +106,31 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		);
 
 		return $formattedDate;
+	}
+
+	/**
+	 * Normalize so that MWTimestamp, which does new DateTime( $timestamp ),
+	 * can handle timestamp strings with '00' for month and/or '00' for day.
+	 * We 'round' it to '01' and '01' for formatting purposes.
+	 *
+	 * Without this, '+00000001995-00-00T00:00:00Z' gets becomes '1994-11-30 00:00:00'
+	 * in the DateTime object.  Then '1994' != '1995' comparison in $this->canFormatYear()
+	 * fails and a timestamp is returned on failure. (see bug: 64659)
+	 *
+	 * @param string $fourDigitYearTimestamp
+	 *
+	 * @return string
+	 */
+	private function normaliseMwTimestampInput( $fourDigitYearTimestamp ) {
+		if ( substr( $fourDigitYearTimestamp, 5, 2 ) === '00' ) {
+			$fourDigitYearTimestamp = substr_replace( $fourDigitYearTimestamp, '01', 5, 2 );
+		}
+
+		if ( substr( $fourDigitYearTimestamp, 8, 2 ) === '00' ) {
+			$fourDigitYearTimestamp = substr_replace( $fourDigitYearTimestamp, '01', 8, 2 );
+		}
+
+		return $fourDigitYearTimestamp;
 	}
 
 	/**
