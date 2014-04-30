@@ -72,6 +72,18 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'+00000002013-07-16T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
+			'1995' => array(
+				'+00000001995-00-00T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'1996' => array(
+				'+00000001996-01-00T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'1997' => array(
+				'+00000001997-00-01T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
 			'13' => array(
 				'+00000000013-07-16T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
