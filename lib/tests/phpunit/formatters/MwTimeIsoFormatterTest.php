@@ -3,9 +3,9 @@
 namespace ValueFormatters\Test;
 
 use DataValues\TimeValue;
+use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
@@ -43,7 +43,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 	 */
 	public function formatProvider() {
 		$tests = array(
-			//+ dates
+			// Positive dates
 			'16 August 2013' => array(
 				'+2013-08-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
@@ -72,18 +72,6 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'+00000002013-07-16T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			'1995' => array(
-				'+00000001995-00-00T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-			),
-			'1996' => array(
-				'+00000001996-01-00T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-			),
-			'1997' => array(
-				'+00000001997-00-01T00:00:00Z',
-				TimeValue::PRECISION_YEAR,
-			),
 			'13' => array(
 				'+00000000013-07-16T00:00:00Z',
 				TimeValue::PRECISION_YEAR,
@@ -96,7 +84,8 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'+12342222013-07-16T00:10:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			//stepping through precisions
+
+			// Positive dates, stepping through precisions
 			'12345678910s' => array(
 				'+12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10a,
@@ -170,7 +159,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				TimeValue::PRECISION_Ga,
 			),
 
-			//- dates
+			// Negative dates
 			'16 August 2013 BCE' => array(
 				'-2013-08-16T00:00:00Z',
 				TimeValue::PRECISION_DAY,
@@ -211,7 +200,8 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'-12342222013-07-16T00:10:00Z',
 				TimeValue::PRECISION_YEAR,
 			),
-			//stepping through precisions
+
+			// Negative dates, stepping through precisions
 			'12345678910s BCE' => array(
 				'-12345678912-01-01T01:01:01Z',
 				TimeValue::PRECISION_10a,
@@ -285,6 +275,42 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				TimeValue::PRECISION_Ga,
 			),
 
+			// Day and/or month is zero
+			'1995' => array(
+				'+00000001995-00-00T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'1996' => array(
+				'+00000001996-01-00T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'1997' => array(
+				'+00000001997-00-01T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'July 2013' => array(
+				'+00000002013-07-00T00:00:00Z',
+				TimeValue::PRECISION_MONTH,
+			),
+			'+00000002013-07-00T00:00:00Z' => array(
+				'+00000002013-07-00T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+			),
+			'+10000000000-00-00T00:00:00Z' => array(
+				'+10000000000-00-00T00:00:00Z',
+				TimeValue::PRECISION_DAY,
+			),
+
+			// Integer overflow
+			'2147483648' => array(
+				'+2147483648-00-00T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+			'9999999999999999' => array(
+				'+9999999999999999-00-00T00:00:00Z',
+				TimeValue::PRECISION_YEAR,
+			),
+
 			// Stuff we dont want to format so must return it :<
 			'-00000000000-01-01T01:01:01Z' => array(
 				'-00000000000-01-01T01:01:01Z',
@@ -305,6 +331,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 
 		//Different language tests at YEAR precision
 		foreach( Utils::getLanguageCodes() as $languageCode ) {
+break;
 			$argLists[] = array(
 				'3333',
 				new TimeValue(
@@ -327,11 +354,11 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 	 * @param string $expected
 	 * @param TimeValue $timeValue
 	 * @param bool $roundtrip
-	 * @param string $langCode
+	 * @param string $languageCode
 	 */
-	public function testFormat( $expected, TimeValue $timeValue, $roundtrip = false, $langCode = 'en' ) {
+	public function testFormat( $expected, TimeValue $timeValue, $roundtrip = false, $languageCode = 'en' ) {
 		$options = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => $langCode
+			ValueFormatter::OPT_LANG => $languageCode
 		) );
 
 		$isoFormatter = new MwTimeIsoFormatter( $options );
@@ -339,13 +366,13 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 		$formattedTime = $isoFormatter->format( $timeValue );
 		$this->assertEquals( $expected, $formattedTime );
 		if( $roundtrip ) {
-			$this->assertCanRoundTrip( $formattedTime, $timeValue, $langCode );
+			$this->assertCanRoundTrip( $formattedTime, $timeValue, $languageCode );
 		}
 	}
 
-	private function assertCanRoundTrip( $formattedTime, TimeValue $timeValue, $langCode ) {
+	private function assertCanRoundTrip( $formattedTime, TimeValue $timeValue, $languageCode ) {
 		$options = new ParserOptions( array(
-			ValueParser::OPT_LANG => $langCode,
+			ValueParser::OPT_LANG => $languageCode,
 			\ValueParsers\TimeParser::OPT_PRECISION => $timeValue->getPrecision(),
 			\ValueParsers\TimeParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
 		) );
