@@ -4,5 +4,6 @@
 			"VASANTH S.N."
 		]
 	},
-	"wikibase-error-unexpected": "ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ:$1."
+	"wikibase-error-unexpected": "ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ:$1.",
+	"wikibase-validator-bad-value": "ದತ್ತಾಂಶದ ಮೌಲ್ಯ ಕೆಟ್ಟುಹೋದ: $1"
 }
