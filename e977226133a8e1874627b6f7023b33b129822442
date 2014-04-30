@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_707462fb",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-04-30T19:07:55Z",
+      "side": 1,
+      "message": "I just had the same problem when working on queries today and came to the conclusion that the \u002700\u0027 \u003d\u003e \u002701\u0027 replacements should always be done, not depending on the precision. I will post a follow up.",
+      "revId": "e977226133a8e1874627b6f7023b33b129822442",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
