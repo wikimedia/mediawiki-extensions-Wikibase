@@ -71,19 +71,8 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		}
 		$isBCE = ( $matches[1] === '-' );
 
-		// Positive 4-digit year allows using Language object.
-		$fourDigitYearTimestamp = str_pad(
-			substr( $extendedIsoTimestamp, strlen( $matches[1] . $matches[3] ) ),
-			20, // This is the length of 2013-07-16T00:00:00Z
-			'0',
-			STR_PAD_LEFT
-		);
-
-		if ( $precision <= TimeValue::PRECISION_YEAR ) {
-			$fourDigitYearTimestamp = $this->normaliseMwTimestampInput( $fourDigitYearTimestamp );
-		}
-
-		$timestamp = wfTimestamp( TS_MW, $fourDigitYearTimestamp );
+		$short = substr( $extendedIsoTimestamp, strlen( $matches[1] . $matches[3] ) );
+		$timestamp = $this->getTimestamp( $short );
 
 		$localisedDate = $this->language->sprintfDate(
 			$this->getDateFormat( $precision ),
@@ -113,24 +102,31 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * can handle timestamp strings with '00' for month and/or '00' for day.
 	 * We 'round' it to '01' and '01' for formatting purposes.
 	 *
-	 * Without this, '+00000001995-00-00T00:00:00Z' gets becomes '1994-11-30 00:00:00'
-	 * in the DateTime object.  Then '1994' != '1995' comparison in $this->canFormatYear()
+	 * Without this, '+00000001995-00-00T00:00:00Z' becomes '1994-11-30 00:00:00'
+	 * in the DateTime object. Then '1994' != '1995' comparison in $this->canFormatYear()
 	 * fails and a timestamp is returned on failure. (see bug: 64659)
 	 *
 	 * @param string $fourDigitYearTimestamp
 	 *
-	 * @return string
+	 * @return int
 	 */
-	private function normaliseMwTimestampInput( $fourDigitYearTimestamp ) {
-		if ( substr( $fourDigitYearTimestamp, 5, 2 ) === '00' ) {
-			$fourDigitYearTimestamp = substr_replace( $fourDigitYearTimestamp, '01', 5, 2 );
+	private function getTimestamp( $fourDigitYearTimestamp ) {
+		// Positive 4-digit year allows using Language object.
+		$fourDigitYearTimestamp = str_pad(
+			$fourDigitYearTimestamp,
+			20, // This is the length of 2013-07-16T00:00:00Z
+			'0',
+			STR_PAD_LEFT
+		);
+
+		if ( substr( $fourDigitYearTimestamp, -12, 2 ) === '00' ) {
+			$fourDigitYearTimestamp = substr_replace( $fourDigitYearTimestamp, '01', -12, 2 );
+		}
+		if ( substr( $fourDigitYearTimestamp, -15, 2 ) === '00' ) {
+			$fourDigitYearTimestamp = substr_replace( $fourDigitYearTimestamp, '01', -15, 2 );
 		}
 
-		if ( substr( $fourDigitYearTimestamp, 8, 2 ) === '00' ) {
-			$fourDigitYearTimestamp = substr_replace( $fourDigitYearTimestamp, '01', 8, 2 );
-		}
-
-		return $fourDigitYearTimestamp;
+		return wfTimestamp( TS_MW, $fourDigitYearTimestamp );
 	}
 
 	/**

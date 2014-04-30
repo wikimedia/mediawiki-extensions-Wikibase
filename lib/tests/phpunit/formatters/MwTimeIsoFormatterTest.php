@@ -3,9 +3,9 @@
 namespace ValueFormatters\Test;
 
 use DataValues\TimeValue;
+use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
@@ -327,11 +327,11 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 	 * @param string $expected
 	 * @param TimeValue $timeValue
 	 * @param bool $roundtrip
-	 * @param string $langCode
+	 * @param string $languageCode
 	 */
-	public function testFormat( $expected, TimeValue $timeValue, $roundtrip = false, $langCode = 'en' ) {
+	public function testFormat( $expected, TimeValue $timeValue, $roundtrip = false, $languageCode = 'en' ) {
 		$options = new FormatterOptions( array(
-			ValueFormatter::OPT_LANG => $langCode
+			ValueFormatter::OPT_LANG => $languageCode
 		) );
 
 		$isoFormatter = new MwTimeIsoFormatter( $options );
@@ -339,13 +339,13 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 		$formattedTime = $isoFormatter->format( $timeValue );
 		$this->assertEquals( $expected, $formattedTime );
 		if( $roundtrip ) {
-			$this->assertCanRoundTrip( $formattedTime, $timeValue, $langCode );
+			$this->assertCanRoundTrip( $formattedTime, $timeValue, $languageCode );
 		}
 	}
 
-	private function assertCanRoundTrip( $formattedTime, TimeValue $timeValue, $langCode ) {
+	private function assertCanRoundTrip( $formattedTime, TimeValue $timeValue, $languageCode ) {
 		$options = new ParserOptions( array(
-			ValueParser::OPT_LANG => $langCode,
+			ValueParser::OPT_LANG => $languageCode,
 			\ValueParsers\TimeParser::OPT_PRECISION => $timeValue->getPrecision(),
 			\ValueParsers\TimeParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
 		) );
