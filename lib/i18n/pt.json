@@ -45,6 +45,7 @@
 	"wikibase-error-ui-link-exists": "Não pode realizar a ligação a esta página porque já existe outro item com ligação para a mesma.",
 	"wikibase-error-ui-session-failure": "A sua sessão expirou. Entre novamente na sua conta.",
 	"wikibase-error-ui-edit-conflict": "Conflito de edição. Por favor, recarregue a página e guarde novamente os dados.",
+	"wikibase-quantitydetails-amount": "Quantia",
 	"wikibase-quantitydetails-unit": "Unidade",
 	"wikibase-timedetails-time": "Tempo",
 	"wikibase-timedetails-timezone": "Fuso horário",

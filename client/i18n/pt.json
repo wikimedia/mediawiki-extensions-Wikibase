@@ -55,10 +55,12 @@
 	"wikibase-rc-wikibase-edit-title": "Edição {{WBREPONAME}}",
 	"wikibase-watchlist-show-changes-pref": "Mostra as edições {{WBREPONAME}} na sua lista de vigiados",
 	"special-unconnectedpages": "Páginas não ligadas a itens",
+	"wikibase-unconnectedpages-page": "Começar a lista de resultados com a página:",
 	"wikibase-unconnectedpages-submit": "Ir",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" não é um código de idioma válido.",
 	"wikibase-unconnectedpages-iwdata-label": "Apenas páginas com ligações interlínguas",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|ligação interlínguas|ligações interlínguas}} na página)",
 	"wikibase-pageinfo-entity-id": "ID do item {{WBREPONAME}}",
-	"wikibase-pageinfo-entity-id-none": "Nenhuma"
+	"wikibase-pageinfo-entity-id-none": "Nenhuma",
+	"wikibase-otherprojects": "Outros projectos"
 }
