@@ -38,6 +38,7 @@ Other changes:
 * `SiteLinkList` is now mutable
 * Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
 * `Item::removeSiteLink` no longer takes an optional second parameter and no longer returns a boolean
+* Removed Fingerprint::getAliases
 
 #### Additions
 
