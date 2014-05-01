@@ -124,6 +124,12 @@
 		_isExtended: false,
 
 		/**
+		 * Whether the input extender is visible
+		 * @type {boolean}
+		 */
+		_extensionIsVisible: false,
+
+		/**
 		 * Caches the timeout when the actual input extender animation should kick in.
 		 * @type {Object}
 		 */
@@ -184,7 +190,7 @@
 				this.element.on( 'eachchange', function( event, oldValue ) {
 					if( self.element.val() === '' ) {
 						self.hideExtension();
-					} else if ( oldValue === '' ) {
+					} else {
 						self.showExtension();
 					}
 				} );
@@ -289,7 +295,7 @@
 			if( !this.$extension ) {
 				return false;
 			}
-			return this.$extension.is( ':visible' );
+			return this._extensionIsVisible;
 		},
 
 		/**
@@ -343,6 +349,7 @@
 
 		_drawExtensionExpansion: function( callback ) {
 			var self = this;
+			this._extensionIsVisible = true;
 
 			// When blurring the browser viewport and an re-focusing, Chrome is firing the "focus"
 			// event twice. jQuery fadeIn sets the opacity to 0 for the first fadeIn but does not
@@ -371,6 +378,7 @@
 
 		_drawExtensionRemoval: function( callback ) {
 			var self = this;
+			this._extensionIsVisible = false;
 
 			this.$extension.stop( true ).animateWithEvent(
 				'extensionremoval',
