@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_d97fde61",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-01T11:37:04Z",
+      "side": 1,
+      "message": "hah :)",
+      "parentUuid": "8e23439c_79b1ea40",
+      "revId": "dfb91bfffc13b3497fcca09ac5219a88f5b7e2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_99b6063b",
         "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-01T11:32:15Z",
       "side": 1,
       "message": "This is a duplicate and should be removed",
+      "revId": "dfb91bfffc13b3497fcca09ac5219a88f5b7e2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_19f1d6fe",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-01T11:37:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_99b6063b",
       "revId": "dfb91bfffc13b3497fcca09ac5219a88f5b7e2d4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
