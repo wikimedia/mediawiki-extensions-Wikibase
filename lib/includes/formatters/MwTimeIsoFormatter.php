@@ -79,10 +79,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			STR_PAD_LEFT
 		);
 
-		if ( $precision <= TimeValue::PRECISION_YEAR ) {
-			$fourDigitYearTimestamp = $this->normaliseMwTimestampInput( $fourDigitYearTimestamp );
-		}
-
+		$fourDigitYearTimestamp = $this->normaliseMwTimestampInput( $fourDigitYearTimestamp );
 		$timestamp = wfTimestamp( TS_MW, $fourDigitYearTimestamp );
 
 		$localisedDate = $this->language->sprintfDate(
