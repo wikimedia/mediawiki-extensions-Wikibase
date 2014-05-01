@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_7998cac2",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-05-01T11:35:09Z",
+      "side": 0,
+      "message": "This test case should remain!",
+      "revId": "8f830b481c61c3608c4e74dc84452959f2dfc331",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
