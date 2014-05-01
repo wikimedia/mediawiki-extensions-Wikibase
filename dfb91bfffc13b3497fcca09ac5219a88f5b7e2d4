@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_79b1ea40",
+        "filename": "lib/includes/parsers/DateTimeParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-05-01T11:32:15Z",
+      "side": 1,
+      "message": "I believe the conventions say we use spaces here",
+      "revId": "dfb91bfffc13b3497fcca09ac5219a88f5b7e2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_99b6063b",
+        "filename": "lib/tests/phpunit/parsers/DateTimeParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-05-01T11:32:15Z",
+      "side": 1,
+      "message": "This is a duplicate and should be removed",
+      "revId": "dfb91bfffc13b3497fcca09ac5219a88f5b7e2d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
