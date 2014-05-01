@@ -3,14 +3,16 @@
 namespace Wikibase\Test\Snak;
 
 use DataValues\StringValue;
-use DataValues\UnDeserializableValue;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * @covers Wikibase\DataModel\Snak\PropertyValueSnak
+ * @uses DataValues\StringValue
+ * @uses Wikibase\DataModel\Entity\EntityId
+ * @uses Wikibase\DataModel\Entity\PropertyId
+ * @uses Wikibase\DataModel\Snak\SnakObject
+ * @uses DataValues\DataValueObject
  *
  * @group Wikibase
  * @group WikibaseDataModel
