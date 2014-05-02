@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_3297044d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:26:20Z",
+      "side": 1,
+      "message": "please put the bug number \"Bug: 62643\" on the last line, just above Change-Id, so that bugzilla gets linked and scrumbugz updated",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_321a641c",
         "filename": "docs/constraints.wiki",
         "patchSetId": 11
