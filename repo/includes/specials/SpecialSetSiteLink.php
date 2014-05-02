@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use OutOfBoundsException;
 use Status;
-use SiteSQLStore;
 use Wikibase\BadgesParser;
 use Wikibase\BadgesParsingException;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -22,7 +21,6 @@ use Wikibase\Repo\WikibaseRepo;
  * Special page for setting the sitepage of a Wikibase entity.
  *
  * @todo put more handling into ChangeOpSiteLink
- * @todo use WikibaseExceptionLocalizer for error handling
  *
  * @since 0.4
  * @licence GNU GPL v2+
@@ -78,23 +76,31 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $badgesParser;
 
 	/**
+	 * SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @since 0.4
 	 */
 	public function __construct() {
 		parent::__construct( 'SetSiteLink' );
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$repo = WikibaseRepo::getDefaultInstance();
+		$settings = $repo->getSettings();
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 
-		$this->exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$this->exceptionLocalizer = $repo->getExceptionLocalizer();
 
 		// @todo inject this!
 		$this->badgesParser = new BadgesParser(
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
+			$repo->getEntityIdParser(),
 			$settings->getSetting( 'badgeItems' )
 		);
+
+		$this->siteStore = $repo->getSitesTable();
 	}
 
 	/**
@@ -218,7 +224,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isValidSiteId( $siteId ) {
-		return $siteId !== null && SiteSQLStore::newInstance()->getSite( $siteId ) !== null;
+		return $siteId !== null && $this->siteStore->getSite( $siteId ) !== null;
 	}
 
 	/**
@@ -274,7 +280,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			);
 		}
 
-		$site = SiteSQLStore::newInstance()->getSite( $this->site );
+		$site = $this->siteStore->getSite( $this->site );
 
 		if ( $entity !== null && $this->site !== null && $site !== null ) {
 			return Html::rawElement(
@@ -397,7 +403,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	protected function setSiteLink( Item $item, $siteId, $pageName, $badgeIds, &$summary ) {
 		$status = Status::newGood();
-		$site = SiteSQLStore::newInstance()->getSite( $siteId );
+		$site = $this->siteStore->getSite( $siteId );
 
 		if ( $site === null ) {
 			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );
