@@ -3,7 +3,9 @@
 namespace Wikibase\Api;
 
 use ApiBase;
-use Wikibase\ChangeOp\ChangeOpException;
+use ApiMain;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.
@@ -15,6 +17,23 @@ use Wikibase\ChangeOp\ChangeOpException;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetClaimValue extends ModifyClaim {
+
+	/**
+	 * @var ClaimChangeOpFactory
+	 */
+	protected $claimChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+	}
 
 	/**
 	 * @see \ApiBase::execute
@@ -39,7 +58,7 @@ class SetClaimValue extends ModifyClaim {
 
 		$summary = $this->claimModificationHelper->createSummary( $params, $this );
 
-		$changeOp = $this->changeOpFactory->newSetMainSnakOp(
+		$changeOp = $this->claimChangeOpFactory->newSetMainSnakOp(
 			$claimGuid,
 			$snak
 		);

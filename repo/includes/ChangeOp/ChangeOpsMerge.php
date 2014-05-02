@@ -40,9 +40,9 @@ class ChangeOpsMerge {
 	private $sitelinkLookup;
 
 	/**
-	 * @var ChangeOpFactory
+	 * @var ChangeOpFactoryProvider
 	 */
-	private $changeOpFactory;
+	private $changeOpFactoryProvider;
 
 	/**
 	 * @param Item $fromItem
@@ -51,7 +51,11 @@ class ChangeOpsMerge {
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
 	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
 	 * @param SiteLinkLookup $sitelinkLookup
-	 * @param ChangeOpFactory $changeOpFactory
+	 * @param ChangeOpFactoryProvider $changeOpFactoryProvider
+	 *
+	 * @todo: Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
+	 *        need a MergeChangeOpsSequenceBuilder or some such. This will allow us
+	 *        to merge different kinds of entities nicely, too.
 	 */
 	public function __construct(
 		Item $fromItem,
@@ -59,7 +63,7 @@ class ChangeOpsMerge {
 		$ignoreConflicts,
 		LabelDescriptionDuplicateDetector $termDuplicateDetector,
 		SiteLinkLookup $sitelinkLookup,
-		ChangeOpFactory $changeOpFactory
+		ChangeOpFactoryProvider $changeOpFactoryProvider
 	) {
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
 
@@ -71,7 +75,7 @@ class ChangeOpsMerge {
 		$this->termDuplicateDetector = $termDuplicateDetector;
 		$this->sitelinkLookup = $sitelinkLookup;
 
-		$this->changeOpFactory = $changeOpFactory;
+		$this->changeOpFactoryProvider = $changeOpFactoryProvider;
 	}
 
 	/**
@@ -96,6 +100,34 @@ class ChangeOpsMerge {
 		}
 	}
 
+	/**
+	 * @return FingerprintChangeOpFactory
+	 */
+	private function getFingerprintChangeOpFactory() {
+		return $this->changeOpFactoryProvider->getFingerprintChangeOpFactory();
+	}
+
+	/**
+	 * @return ClaimChangeOpFactory
+	 */
+	private function getClaimChangeOpFactory() {
+		return $this->changeOpFactoryProvider->getClaimChangeOpFactory();
+	}
+
+	/**
+	 * @return StatementChangeOpFactory
+	 */
+	private function getStatementChangeOpFactory() {
+		return $this->changeOpFactoryProvider->getStatementChangeOpFactory();
+	}
+
+	/**
+	 * @return SiteLinkChangeOpFactory
+	 */
+	private function getSiteLinkChangeOpFactory() {
+		return $this->changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+	}
+
 	public function apply() {
 		$this->generateChangeOps();
 		$this->fromChangeOps->apply( $this->fromItem );
@@ -115,8 +147,8 @@ class ChangeOpsMerge {
 		foreach( $this->fromItem->getLabels() as $langCode => $label ){
 			$toLabel = $this->toItem->getLabel( $langCode );
 			if( $toLabel === false || $toLabel === $label ){
-				$this->fromChangeOps->add( $this->changeOpFactory->newRemoveLabelOp( $langCode ) );
-				$this->toChangeOps->add( $this->changeOpFactory->newSetLabelOp( $langCode, $label ) );
+				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveLabelOp( $langCode ) );
+				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetLabelOp( $langCode, $label ) );
 			} else {
 				if( !in_array( 'label', $this->ignoreConflicts ) ){
 					throw new ChangeOpException( "Conflicting labels for language {$langCode}" );
@@ -129,8 +161,8 @@ class ChangeOpsMerge {
 		foreach( $this->fromItem->getDescriptions() as $langCode => $desc ){
 			$toDescription = $this->toItem->getDescription( $langCode );
 			if( $toDescription === false || $toDescription === $desc ){
-				$this->fromChangeOps->add( $this->changeOpFactory->newRemoveDescriptionOp( $langCode ) );
-				$this->toChangeOps->add( $this->changeOpFactory->newSetDescriptionOp( $langCode, $desc ) );
+				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveDescriptionOp( $langCode ) );
+				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetDescriptionOp( $langCode, $desc ) );
 			} else {
 				if( !in_array( 'description', $this->ignoreConflicts ) ){
 					throw new ChangeOpException( "Conflicting descriptions for language {$langCode}" );
@@ -141,8 +173,8 @@ class ChangeOpsMerge {
 
 	private function generateAliasesChangeOps() {
 		foreach( $this->fromItem->getAllAliases() as $langCode => $aliases ){
-			$this->fromChangeOps->add( $this->changeOpFactory->newRemoveAliasesOp( $langCode, $aliases ) );
-			$this->toChangeOps->add( $this->changeOpFactory->newAddAliasesOp( $langCode, $aliases, 'add' ) );
+			$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveAliasesOp( $langCode, $aliases ) );
+			$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newAddAliasesOp( $langCode, $aliases, 'add' ) );
 		}
 	}
 
@@ -150,9 +182,9 @@ class ChangeOpsMerge {
 		foreach( $this->fromItem->getSiteLinks() as $simpleSiteLink ){
 			$siteId = $simpleSiteLink->getSiteId();
 			if( !$this->toItem->hasLinkToSite( $siteId ) ){
-				$this->fromChangeOps->add( $this->changeOpFactory->newRemoveSiteLinkOp( $siteId ) );
+				$this->fromChangeOps->add( $this->getSiteLinkChangeOpFactory()->newRemoveSiteLinkOp( $siteId ) );
 				$this->toChangeOps->add(
-					$this->changeOpFactory->newSetSiteLinkOp(
+					$this->getSiteLinkChangeOpFactory()->newSetSiteLinkOp(
 						$siteId,
 						$simpleSiteLink->getPageName(),
 						$simpleSiteLink->getBadges()
@@ -168,7 +200,7 @@ class ChangeOpsMerge {
 
 	private function generateClaimsChangeOps() {
 		foreach( $this->fromItem->getClaims() as $fromClaim ) {
-			$this->fromChangeOps->add( $this->changeOpFactory->newRemoveClaimOp( $fromClaim->getGuid() ) );
+			$this->fromChangeOps->add( $this->getClaimChangeOpFactory()->newRemoveClaimOp( $fromClaim->getGuid() ) );
 
 			$toClaim = clone $fromClaim;
 			$toClaim->setGuid( null );
@@ -181,7 +213,7 @@ class ChangeOpsMerge {
 			if( $toMergeToClaim ) {
 				$this->generateReferencesChangeOps( $toClaim, $toMergeToClaim );
 			} else {
-				$this->toChangeOps->add( $this->changeOpFactory->newSetClaimOp( $toClaim ) );
+				$this->toChangeOps->add( $this->getClaimChangeOpFactory()->newSetClaimOp( $toClaim ) );
 			}
 		}
 	}
@@ -222,7 +254,7 @@ class ChangeOpsMerge {
 		/** @var $reference Reference */
 		foreach ( $fromStatement->getReferences() as $reference ) {
 			if ( !$toStatement->getReferences()->hasReferenceHash( $reference->getHash() ) ) {
-				$this->toChangeOps->add( $this->changeOpFactory->newSetReferenceOp(
+				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetReferenceOp(
 					$toStatement->getGuid(),
 					$reference,
 					''

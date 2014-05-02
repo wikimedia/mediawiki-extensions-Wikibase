@@ -3,10 +3,12 @@
 namespace Wikibase\Api;
 
 use ApiBase;
+use ApiMain;
+use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\ChangeOp\ChangeOpQualifier;
-use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -19,6 +21,23 @@ use Wikibase\ChangeOp\ChangeOpException;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class SetQualifier extends ModifyClaim {
+
+	/**
+	 * @var ClaimChangeOpFactory
+	 */
+	protected $claimChangeOpFactory;
+
+	/**
+	 * @param ApiMain $mainModule
+	 * @param string $moduleName
+	 * @param string $modulePrefix
+	 */
+	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
+		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$this->claimChangeOpFactory = $changeOpFactoryProvider->getClaimChangeOpFactory();
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -112,9 +131,9 @@ class SetQualifier extends ModifyClaim {
 		$newQualifier = $this->claimModificationHelper->getSnakInstance( $params, $propertyId );
 
 		if ( isset( $params['snakhash'] ) ) {
-			$changeOp = $this->changeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, $params['snakhash'] );
+			$changeOp = $this->claimChangeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, $params['snakhash'] );
 		} else {
-			$changeOp = $this->changeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, '' );
+			$changeOp = $this->claimChangeOpFactory->newSetQualifierOp( $claimGuid, $newQualifier, '' );
 		}
 
 		return $changeOp;

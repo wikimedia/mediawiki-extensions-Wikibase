@@ -24,7 +24,6 @@ class ChangeOps {
 
 	/**
 	 * @since 0.4
-	 *
 	 */
 	public function __construct() {
 		$this->ops = array();
@@ -78,15 +77,10 @@ class ChangeOps {
 	 *
 	 * @throws ChangeOpException
 	 * @return bool
-	 *
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		try {
-			foreach ( $this->ops as $op ) {
-				$op->apply( $entity, $summary );
-			}
-		} catch ( ChangeOpException $e ) {
-			throw new ChangeOpException( 'Exception while applying changes: ' . $e->getMessage() );
+		foreach ( $this->ops as $op ) {
+			$op->apply( $entity, $summary );
 		}
 
 		return true;

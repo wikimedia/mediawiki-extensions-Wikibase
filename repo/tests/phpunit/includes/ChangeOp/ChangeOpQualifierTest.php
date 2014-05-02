@@ -34,7 +34,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
 class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var ClaimTestMockProvider
+	 * @var ChangeOpTestMockProvider
 	 */
 	protected $mockProvider;
 
@@ -46,7 +46,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
-		$this->mockProvider = new ClaimTestMockProvider( $this );
+		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
 	public function invalidArgumentProvider() {
