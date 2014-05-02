@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_321a641c",
+        "filename": "docs/constraints.wiki",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "Global",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f20f4cd6",
+        "filename": "docs/constraints.wiki",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "Constraint? \n\ndefines",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b2dd5449",
+        "filename": "repo/includes/ChangeOp/ChangeOpFactoryProvider.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "hardcoding",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_92e018f8",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "labels",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_12f408b8",
+        "filename": "repo/includes/Validators/CompositeEntityValidator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d2c1f059",
+        "filename": "repo/includes/Validators/CompositeFingerprintValidator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_92b7f8f1",
+        "filename": "repo/includes/Validators/EntityConstraintProvider.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "why is this not explicitly public?",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_72ba1cdb",
+        "filename": "repo/includes/Validators/EntityConstraintProvider.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": ":(",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_12cbe875",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-02T10:24:00Z",
+      "side": 1,
+      "message": "public",
+      "revId": "eb61a5a65acbdabf03245a8ef3f624e9a4d6589d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
