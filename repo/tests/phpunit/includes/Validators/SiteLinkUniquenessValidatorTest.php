@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Validators;
 
 use Site;
 use Title;
-use Wikibase\content\SiteLinkUniquenessValidator;
+use Wikibase\Validators\SiteLinkUniquenessValidator;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -13,7 +13,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\SiteLinkLookup;
 
 /**
- * @covers Wikibase\content\SiteLinkUniquenessValidator
+ * @covers Wikibase\Validators\SiteLinkUniquenessValidator
  *
  * @group Database
  * @group Wikibase

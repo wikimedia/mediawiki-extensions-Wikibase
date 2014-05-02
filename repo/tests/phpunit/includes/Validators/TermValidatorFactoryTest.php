@@ -112,7 +112,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getUniquenessValidator( Item::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'Wikibase\content\EntityValidator', $validator );
+		$this->assertInstanceOf( 'Wikibase\Validators\EntityValidator', $validator );
 
 		$goodEntity = Item::newEmpty();
 		$goodEntity->setLabel( 'en', 'DUPE' );

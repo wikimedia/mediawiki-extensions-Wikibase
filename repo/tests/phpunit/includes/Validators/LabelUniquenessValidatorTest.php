@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Validators;
 
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\content\LabelUniquenessValidator;
+use Wikibase\Validators\LabelUniquenessValidator;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
- * @covers Wikibase\content\LabelUniquenessValidator
+ * @covers Wikibase\Validators\LabelUniquenessValidator
  *
  * @group Database
  * @group Wikibase

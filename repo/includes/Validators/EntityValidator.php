@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\content;
+namespace Wikibase\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
@@ -9,8 +9,6 @@ use Wikibase\DataModel\Entity\Entity;
  * Validator interface used for pre-save validation in EntityContent.
  * This is essentially a vehicle to introduce knowledge about global state into
  * the context of the save operation, so global constraints can be enforced.
- *
- * @todo move to Wikibase\Validator namespace
  *
  * @since 0.5
  *
