@@ -6,7 +6,8 @@
 			"Kghbln",
 			"Metalhead64",
 			"Se4598",
-			"TMg"
+			"TMg",
+			"Sebastian Wallroth"
 		]
 	},
 	"wikibase-lib-desc": "Stellt dem Repositorium strukturierter Daten Funktionen bereit",
@@ -59,7 +60,7 @@
 	"wikibase-globedetails-globe": "Globus",
 	"wikibase-parse-error": "Fehlerhafter Wert.",
 	"wikibase-parse-error-coordinate": "Der Koordinatenwert ist ungültig.",
-	"wikibase-parse-error-entity-id": "Die Objektkennung ist ungültig.",
+	"wikibase-parse-error-entity-id": "Die Objekt-ID ist ungültig.",
 	"wikibase-parse-error-quantity": "Der Mengenwert ist ungültig.",
 	"wikibase-parse-error-time": "Der Zeitwert ist ungültig.",
 	"wikibase-replicationnote": "Bitte bedenke, dass es einige Minuten dauern kann, bis die Änderungen auf allen Wikis sichtbar sind.",

@@ -21,7 +21,7 @@
 	"wikibase-description-empty": "Ниједан опис није још дефинисан",
 	"wikibase-description-edit-placeholder": "унесите опис",
 	"wikibase-sitelink-site-edit-placeholder": "сајт",
-	"wikibase-sitelink-page-edit-placeholder": "чланак",
+	"wikibase-sitelink-page-edit-placeholder": "страница",
 	"wikibase-alias-edit-placeholder": "унесите псеудоним",
 	"wikibase-label-input-help-message": "Унесите назив овог скупа података на језику $1.",
 	"wikibase-description-input-help-message": "Унесите кратак опис на $1 језику.",
