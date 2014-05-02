@@ -77,6 +77,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	private $badgeItems;
 
 	/**
+	 * SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -90,6 +95,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		// @todo inject the dependencies
 		$this->entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+		$this->siteStore = SiteSQLStore::newInstance();
 	}
 
 	/**
@@ -213,7 +219,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isValidSiteId( $siteId ) {
-		return $siteId !== null && SiteSQLStore::newInstance()->getSite( $siteId ) !== null;
+		return $siteId !== null && $this->siteStore->getSite( $siteId ) !== null;
 	}
 
 	/**
@@ -266,7 +272,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			);
 		}
 
-		$site = SiteSQLStore::newInstance()->getSite( $this->site );
+		$site = $this->siteStore->getSite( $this->site );
 
 		if ( $entity !== null && $this->site !== null && $site !== null ) {
 			return Html::rawElement(
@@ -451,7 +457,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	protected function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
 		$status = Status::newGood();
-		$site = SiteSQLStore::newInstance()->getSite( $siteId );
+		$site = $this->siteStore->getSite( $siteId );
 
 		if ( $site === null ) {
 			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );
