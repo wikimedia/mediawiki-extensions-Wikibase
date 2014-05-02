@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_f2b98cc1",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-02T11:09:12Z",
+      "side": 1,
+      "message": "Please use WikibaseRepo::getDefaultInstance()-\u003egetSitesTable(). getSitesTable() should be updated to always return the same instance. Creating new instances of SiteSQLStore means we will need to fetch the entire site list from memcached over and over.",
+      "revId": "5fa8b003cf78120e6c67efc264c1031794edb9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
