@@ -109,16 +109,6 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
-	 * @since 0.7.3
-	 * @deprecated since 0.7.4 - use getAliasGroups instead
-	 *
-	 * @return AliasGroupList
-	 */
-	public function getAliases() {
-		return $this->aliasGroups;
-	}
-
-	/**
 	 * @since 0.7.4
 	 *
 	 * @return AliasGroupList
