@@ -24,7 +24,7 @@ use TestSites;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class SpecialSetSitelinkTest extends SpecialPageTestBase {
+class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	/**
 	 * @var array
