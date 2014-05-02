@@ -11,6 +11,7 @@ use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Summary;
@@ -18,6 +19,9 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
+ *
+ * @todo put more handling into ChangeOpSiteLink
+ * @todo use WikibaseExceptionLocalizer for error handling
  *
  * @since 0.4
  * @licence GNU GPL v2+
@@ -63,6 +67,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected $rightsText;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
+	 * @var array
+	 */
+	private $badgeItems;
+
+	/**
 	 * @since 0.4
 	 */
 	public function __construct() {
@@ -72,6 +86,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
+
+		// @todo inject the dependencies
+		$this->entityIdParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 	}
 
 	/**
@@ -367,44 +385,55 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return ItemId[]|boolean
 	 */
 	protected function parseBadges( array $badges, Status $status ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$entityIdParser = $repo->getEntityIdParser();
-
 		$badgesObjects = array();
 
 		foreach ( $badges as $badge ) {
-			try {
-				$badgeId = $entityIdParser->parse( $badge );
-			} catch( ParseException $e ) {
-				$status->fatal( 'wikibase-setentity-invalid-id' );
+			$badgeId = $this->extractBadgeId( $badge, $status );
+
+			if ( $badgeId ) {
+				$badgesObjects[] = $badgeId;
+			} else {
 				return false;
 			}
-
-			if ( !( $badgeId instanceof ItemId ) ) {
-				$status->fatal( 'wikibase-setsitelink-not-item', $badgeId->getPrefixedId() );
-				return false;
-			}
-
-			$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()
-					->getSetting( 'badgeItems' );
-
-			if ( !array_key_exists( $badgeId->getPrefixedId(), $badgeItems ) ) {
-				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
-				return false;
-			}
-
-			$itemTitle = $this->getEntityTitle( $badgeId );
-
-			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
-				$status->fatal( 'wikibase-setentity-invalid-id' );
-				return false;
-			}
-
-			$badgesObjects[] = $badgeId;
 		}
 
 		return $badgesObjects;
+	}
+
+	/**
+	 * @param string $badge
+	 * @param Status $status
+	 *
+	 * @return ItemId|boolean
+	 */
+	private function extractBadgeId( $badge, Status $status ) {
+		try {
+			$badgeId = $this->entityIdParser->parse( $badge );
+		} catch( EntityIdParsingException $e ) {
+			$status->fatal( 'wikibase-wikibaserepopage-invalid-id', $badge );
+			return false;
+		}
+
+		if ( !( $badgeId instanceof ItemId ) ) {
+			$status->fatal( 'wikibase-setsitelink-not-item', $badgeId->getSerialization() );
+			return false;
+		}
+
+		$prefixedId = $badgeId->getSerialization();
+
+		if ( !array_key_exists( $prefixedId, $this->badgeItems ) ) {
+			$status->fatal( 'wikibase-setsitelink-not-badge', $prefixedId );
+			return false;
+		}
+
+		$itemTitle = $this->getEntityTitle( $badgeId );
+
+		if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
+			$status->fatal( 'wikibase-wikibaserepopage-invalid-id', $prefixedId );
+			return false;
+		}
+
+		return $badgeId;
 	}
 
 	/**
