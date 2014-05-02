@@ -11,7 +11,9 @@
          stopOnIncomplete="false"
          stopOnSkipped="false"
          strict="true"
-         verbose="true">
+         verbose="true"
+         printerFile="vendor/whatthejeff/nyancat-phpunit-resultprinter/src/NyanCat/PHPUnit/ResultPrinter.php"
+         printerClass="NyanCat\PHPUnit\ResultPrinter">
     <testsuites>
         <testsuite name="WikibaseDataModel">
             <directory>tests</directory>
