@@ -3,21 +3,23 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use ValueValidators\Error;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
-use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Validators\UniquenessViolation;
 
 /**
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class ChangeOpsMerge {
 
@@ -31,13 +33,8 @@ class ChangeOpsMerge {
 	 */
 	private $ignoreConflicts;
 
-	/**
-	 * @var LabelDescriptionDuplicateDetector
-	 */
-	private $termDuplicateDetector;
-
-	/** @var SiteLinkLookup */
-	private $sitelinkLookup;
+	/** @var EntityConstraintProvider */
+	private $constraintProvider;
 
 	/**
 	 * @var ChangeOpFactoryProvider
@@ -48,9 +45,8 @@ class ChangeOpsMerge {
 	 * @param Item $fromItem
 	 * @param Item $toItem
 	 * @param array $ignoreConflicts list of elements to ignore conflicts for
-	 *   can only contain 'label' and or 'description' and or 'sitelink'
-	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
-	 * @param SiteLinkLookup $sitelinkLookup
+	 *        can only contain 'label' and or 'description' and or 'sitelink'
+	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ChangeOpFactoryProvider $changeOpFactoryProvider
 	 *
 	 * @todo: Injecting ChangeOpFactoryProvider is an Abomination Unto Nuggan, we'll
@@ -61,8 +57,7 @@ class ChangeOpsMerge {
 		Item $fromItem,
 		Item $toItem,
 		$ignoreConflicts,
-		LabelDescriptionDuplicateDetector $termDuplicateDetector,
-		SiteLinkLookup $sitelinkLookup,
+		EntityConstraintProvider $constraintProvider,
 		ChangeOpFactoryProvider $changeOpFactoryProvider
 	) {
 		$this->assertValidIgnoreConflictValues( $ignoreConflicts );
@@ -72,8 +67,7 @@ class ChangeOpsMerge {
 		$this->fromChangeOps = new ChangeOps();
 		$this->toChangeOps = new ChangeOps();
 		$this->ignoreConflicts = $ignoreConflicts;
-		$this->termDuplicateDetector = $termDuplicateDetector;
-		$this->sitelinkLookup = $sitelinkLookup;
+		$this->constraintProvider = $constraintProvider;
 
 		$this->changeOpFactoryProvider = $changeOpFactoryProvider;
 	}
@@ -130,9 +124,11 @@ class ChangeOpsMerge {
 
 	public function apply() {
 		$this->generateChangeOps();
+
 		$this->fromChangeOps->apply( $this->fromItem );
 		$this->toChangeOps->apply( $this->toItem );
-		$this->applyConstraintChecks();
+
+		$this->applyConstraintChecks( $this->toItem, $this->fromItem->getId() );
 	}
 
 	private function generateChangeOps() {
@@ -264,100 +260,44 @@ class ChangeOpsMerge {
 	}
 
 	/**
-	 * Throws an exception if it would not be possible to save the second item
+	 * Throws an exception if it would not be possible to save the updated items
 	 * @throws ChangeOpException
 	 */
-	private function applyConstraintChecks() {
-		if ( $this->toItem->getType() === Property::ENTITY_TYPE ) {
-			$result = $this->termDuplicateDetector->detectLabelConflictsForEntity( $this->toItem );
-		} else {
-			$result = $this->termDuplicateDetector->detectLabelDescriptionConflictsForEntity( $this->toItem );
-		}
+	private function applyConstraintChecks( Entity $entity, EntityId $fromId ) {
+		$constraintValidator = $this->constraintProvider->getConstraints( $entity->getType() );
 
-		$termConflicts = $result->getErrors();
+		$result = $constraintValidator->validateEntity( $entity );
+		$errors = $result->getErrors();
 
-		$conflictingSitelinks = $this->sitelinkLookup->getConflictsForItem( $this->toItem );
+		$errors = $this->filterConflictsWithFromItem( $errors, $fromId );
 
-		$conflictString = '';
-		if( $termConflicts !== array() ) {
-			$conflictString .= $this->getConflictStringForErrors( $termConflicts );
-		}
-		if( $conflictingSitelinks !== array() ) {
-			$conflictString .= $this->getConflictStringForSitelinks( $conflictingSitelinks );
-		}
-
-		if( $conflictString !== '' ) {
-			throw new ChangeOpException( 'Item being merged to has conflicting terms: ' . $conflictString );
+		if( !empty( $errors ) ) {
+			$result = Result::newError( $errors );
+			throw new ChangeOpValidationException( $result );
 		}
 	}
 
 	/**
-	 * @param Error[] $termConflicts
+	 * Strip any conflicts with the given $fromId from the array of Error objects
 	 *
-	 * @return string
-	 */
-	private function getConflictStringForErrors( array $termConflicts ) {
-		$conflictString = '';
-		foreach( $termConflicts as $error ) {
-			$conflictString .= $this->getConflictStringForError( $error );
-		}
-		return $conflictString;
-	}
-
-	/**
-	 * @param Error $error
+	 * @param Error[] $errors
+	 * @param EntityId $fromId
 	 *
-	 * @return string
+	 * @return EntityId[]
 	 */
-	private function getConflictStringForError( Error $error ) {
-		//@see LabelDescriptionDuplicateDetector::detectTermDuplicates
-		list( $type, $language, $text, $conflictingEntity ) = $error->getParameters();
+	private function filterConflictsWithFromItem( $errors, EntityId $fromId ) {
+		$filtered = array();
 
-		$fromId = $this->fromItem->getId()->getSerialization();
+		foreach ( $errors as $error ) {
+			if ( $error instanceof UniquenessViolation
+				&& $fromId->equals( $error->getConflictingEntity() )
+			) {
+				continue;
+			}
 
-		if( $fromId !== $conflictingEntity ) {
-			return '(' .
-				$conflictingEntity . ' => ' .
-				$language . ' => ' .
-				$type . ' => ' .
-				$text . ') ';
+			$filtered[] = $error;
 		}
 
-		return '';
+		return $filtered;
 	}
-
-	/**
-	 * @param array $conflictingSitelinks array of arrays each with the keys:
-	 *     - itemId => integer
-	 *     - siteId => string
-	 *     - sitePage => string
-	 * @return string
-	 */
-	private function getConflictStringForSitelinks( $conflictingSitelinks ) {
-		$conflictString = '';
-		foreach( $conflictingSitelinks as $sitelink ) {
-			$conflictString .= $this->getConflictStringForSitelink( $sitelink );
-		}
-		return $conflictString;
-	}
-
-	/**
-	 * @param array $sitelink array with the keys:
-	 *     - itemId => integer
-	 *     - siteId => string
-	 *     - sitePage => string
-	 *
-	 * @return string
-	 */
-	private function getConflictStringForSitelink( $sitelink ) {
-		$itemId = ItemId::newFromNumber( $sitelink['itemId'] );
-		if( !$itemId->equals( $this->fromItem->getId() ) ) {
-			return '(' .
-				$itemId->getSerialization() . ' => ' .
-				$sitelink['siteId'] . ' => ' .
-				$sitelink['sitePage'] . ') ';
-		}
-		return '';
-	}
-
 }

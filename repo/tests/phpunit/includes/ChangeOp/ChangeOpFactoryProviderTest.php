@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Validators\EntityConstraintProvider;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpFactoryProvider
@@ -39,13 +40,18 @@ class ChangeOpFactoryProviderTest extends \PHPUnit_Framework_TestCase {
 	protected function newChangeOpFactoryProvider() {
 		$entityId = new ItemId( 'Q2' );
 
-		return new ChangeOpFactoryProvider(
+		$constraintProvider = new EntityConstraintProvider(
 			$this->mockProvider->getMockLabelDescriptionDuplicateDetector(),
-			$this->mockProvider->getMockSitelinkCache(),
+			$this->mockProvider->getMockSitelinkCache()
+		);
+
+		return new ChangeOpFactoryProvider(
+			$constraintProvider,
 			$this->mockProvider->getMockGuidGenerator(),
 			$this->mockProvider->getMockGuidValidator(),
 			$this->mockProvider->getMockGuidParser( $entityId ),
-			$this->mockProvider->getMockSnakValidator()
+			$this->mockProvider->getMockSnakValidator(),
+			$this->mockProvider->getMockTermValidatorFactory()
 		);
 	}
 

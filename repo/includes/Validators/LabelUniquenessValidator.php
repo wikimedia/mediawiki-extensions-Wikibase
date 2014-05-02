@@ -4,6 +4,9 @@ namespace Wikibase\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
@@ -30,7 +33,7 @@ class LabelUniquenessValidator implements EntityValidator {
 	}
 
 	/**
-	 * @see OnSaveValidator::validate()
+	 * @see EntityValidator::validate()
 	 *
 	 * @param Entity $entity
 	 *
