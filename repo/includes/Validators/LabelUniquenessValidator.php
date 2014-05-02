@@ -4,6 +4,9 @@ namespace Wikibase\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
 
 /**
@@ -30,14 +33,15 @@ class LabelUniquenessValidator implements EntityValidator {
 	}
 
 	/**
-	 * @see OnSaveValidator::validate()
+	 * @see EntityValidator::validate()
 	 *
 	 * @param Entity $entity
+	 * @param EntityId $ignoreConflictsWith
 	 *
 	 * @return Result
 	 */
-	public function validateEntity( Entity $entity ) {
-		$result = $this->duplicateDetector->detectLabelConflictsForEntity( $entity );
+	public function validateEntity( Entity $entity, EntityId $ignoreConflictsWith = null ) {
+		$result = $this->duplicateDetector->detectLabelConflictsForEntity( $entity, $ignoreConflictsWith );
 		return $result;
 	}
 
