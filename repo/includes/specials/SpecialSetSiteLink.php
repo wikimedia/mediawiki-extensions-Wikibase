@@ -4,20 +4,24 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use OutOfBoundsException;
-use SiteSQLStore;
 use Status;
-use ValueParsers\ParseException;
+use Wikibase\Badge\BadgesParser;
+use Wikibase\Badge\BadgeException;
+use Wikibase\Badge\BadgeValidator;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Localisation\WikibaseRepoExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
+ *
+ * @todo put more handling into ChangeOpSiteLink
  *
  * @since 0.4
  * @licence GNU GPL v2+
@@ -68,18 +72,48 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected $siteLinkChangeOpFactory;
 
 	/**
+	 * @var WikibaseRepoExceptionLocalizer
+	 */
+	protected $exceptionLocalizer;
+
+	/**
+	 * @var BadgesParser
+	 */
+	private $badgesParser;
+
+	/**
+	 * SiteStore
+	 */
+	private $siteStore;
+
+	/**
+	 * @fixme inject the dependencies
+	 *
 	 * @since 0.4
 	 */
 	public function __construct() {
 		parent::__construct( 'SetSiteLink' );
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$repo = WikibaseRepo::getDefaultInstance();
+		$settings = $repo->getSettings();
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
+		$changeOpFactoryProvider = $repo->getChangeOpFactoryProvider();
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+
+		$this->exceptionLocalizer = $repo->getExceptionLocalizer();
+
+		// @todo inject this stuff!
+		$badgeValidator = new BadgeValidator(
+			$repo->getEntityLookup(),
+			$settings->getSetting( 'badgeItems' )
+		);
+
+		$this->badgesParser = new BadgesParser( $repo->getEntityIdParser(), $badgeValidator );
+
+		$this->siteStore = $repo->getSitesTable();
 	}
 
 	/**
@@ -165,9 +199,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected function modifyEntity( Entity $entity ) {
 		try {
 			$status = $this->setSiteLink( $entity, $this->site, $this->page, $this->badges, $summary );
-		} catch ( ChangeOpException $e ) {
-			$this->showErrorHTML( $e->getMessage() );
-			return false;
+		} catch ( ChangeOpException $ex ) {
+			$message = $this->exceptionLocalizer->getExceptionMessage( $ex );
+			$status->fatal( $message );
 		}
 
 		if ( !$status->isGood() ) {
@@ -203,15 +237,18 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isValidSiteId( $siteId ) {
-		return $siteId !== null && SiteSQLStore::newInstance()->getSite( $siteId ) !== null;
+		return $siteId !== null && $this->siteStore->getSite( $siteId ) !== null;
 	}
 
 	/**
 	 * @see SpecialModifyEntity::getFormElements()
 	 *
+	 * @fixme handle OutOfBoundsException thrown by getSiteLink
+	 *
 	 * @param Entity $entity
 	 *
 	 * @return string
+	 * @throws OutOfBoundsException
 	 */
 	protected function getFormElements( Entity $entity = null ) {
 		if ( $this->page === null ) {
@@ -256,7 +293,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			);
 		}
 
-		$site = SiteSQLStore::newInstance()->getSite( $this->site );
+		$site = $this->siteStore->getSite( $this->site );
 
 		if ( $entity !== null && $this->site !== null && $site !== null ) {
 			return Html::rawElement(
@@ -365,57 +402,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * Validates badges from params and turns them into an array of ItemIds.
-	 *
-	 * @since 0.5
-	 *
-	 * @param string[] $badges
-	 * @param Status $status
-	 *
-	 * @return ItemId[]|boolean
-	 */
-	protected function parseBadges( array $badges, Status $status ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$entityIdParser = $repo->getEntityIdParser();
-
-		$badgesObjects = array();
-
-		foreach ( $badges as $badge ) {
-			try {
-				$badgeId = $entityIdParser->parse( $badge );
-			} catch( ParseException $e ) {
-				$status->fatal( 'wikibase-setentity-invalid-id' );
-				return false;
-			}
-
-			if ( !( $badgeId instanceof ItemId ) ) {
-				$status->fatal( 'wikibase-setsitelink-not-item', $badgeId->getPrefixedId() );
-				return false;
-			}
-
-			$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()
-					->getSetting( 'badgeItems' );
-
-			if ( !array_key_exists( $badgeId->getPrefixedId(), $badgeItems ) ) {
-				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
-				return false;
-			}
-
-			$itemTitle = $this->getEntityTitle( $badgeId );
-
-			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
-				$status->fatal( 'wikibase-setentity-invalid-id' );
-				return false;
-			}
-
-			$badgesObjects[] = $badgeId;
-		}
-
-		return $badgesObjects;
-	}
-
-	/**
 	 * Setting the sitepage of the entity.
 	 *
 	 * @since 0.4
@@ -428,9 +414,9 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return Status
 	 */
-	protected function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
+	protected function setSiteLink( Item $item, $siteId, $pageName, $badgeIds, &$summary ) {
 		$status = Status::newGood();
-		$site = SiteSQLStore::newInstance()->getSite( $siteId );
+		$site = $this->siteStore->getSite( $siteId );
 
 		if ( $site === null ) {
 			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );
@@ -455,8 +441,13 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 		}
 
-		if ( $badges !== null ) {
-			$badges = $this->parseBadges( $badges, $status );
+		if ( $badgeIds !== null ) {
+			try {
+				$badges = $this->badgesParser->parse( $badgeIds );
+			} catch ( BadgeException $ex ) {
+				$message = $this->exceptionLocalizer->getExceptionMessage( $ex );
+				$status->fatal( $message );
+			}
 		}
 
 		if ( !$status->isGood() ) {

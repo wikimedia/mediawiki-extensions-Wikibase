@@ -18,7 +18,6 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\i18n\MessageParameterFormatter;
-use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -37,6 +36,7 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\PreSaveChecks;
 use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Repo\Localisation\WikibaseRepoExceptionLocalizer;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -118,6 +118,11 @@ class WikibaseRepo {
 	 * @var ExceptionLocalizer
 	 */
 	private $exceptionLocalizer;
+
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -482,7 +487,7 @@ class WikibaseRepo {
 	 */
 	public function getExceptionLocalizer() {
 		if ( !$this->exceptionLocalizer ) {
-			$this->exceptionLocalizer = new WikibaseExceptionLocalizer(
+			$this->exceptionLocalizer = new WikibaseRepoExceptionLocalizer(
 				$this->getMessageParameterFormatter()
 			);
 		}
@@ -613,8 +618,12 @@ class WikibaseRepo {
 	/**
 	 * @return SiteSQLStore
 	 */
-	protected function getSitesTable() {
-		return SiteSQLStore::newInstance();
+	public function getSitesTable() {
+		if ( !$this->siteStore ) {
+			$this->siteStore = SiteSQLStore::newInstance();
+		}
+
+		return $this->siteStore;
 	}
 
 	/**
