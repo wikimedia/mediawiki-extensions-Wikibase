@@ -32,7 +32,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	}
 
 	/**
-	 * @see OnSaveValidator::validate()
+	 * @see EntityValidator::validate()
 	 *
 	 * @param Entity $entity
 	 *
@@ -40,18 +40,20 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 */
 	public function validateEntity( Entity $entity ) {
 		wfProfileIn( __METHOD__ );
-		$result = Result::newSuccess();
 		$dbw = wfGetDB( DB_MASTER );
 
 		$conflicts = $this->siteLinkLookup->getConflictsForItem( $entity, $dbw );
+		$errors = array();
 
+		/* @var ItemId $ignoreConflictsWith */
 		foreach ( $conflicts as $conflict ) {
-			$error = $this->getConflictError( $conflict );
+			$errors[] = $this->getConflictError( $conflict );
+		}
 
-			$result = Result::newError( array_merge(
-				$result->getErrors(),
-				array( $error )
-			) );
+		if ( empty( $errors ) ) {
+			$result = Result::newSuccess();
+		} else {
+			$result = Result::newError( $errors );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -68,9 +70,9 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	protected function getConflictError( array $conflict ) {
 		$entityId = ItemId::newFromNumber( $conflict['itemId'] );
 
-		return Error::newError(
+		return new UniquenessViolation(
+			$entityId,
 			'SiteLink conflict',
-			'sitelink',
 			'sitelink-conflict',
 			array(
 				new SiteLink( $conflict['siteId'], $conflict['sitePage'] ),

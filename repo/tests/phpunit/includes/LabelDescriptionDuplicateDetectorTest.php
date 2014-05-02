@@ -3,15 +3,17 @@
 namespace Wikibase\Test;
 
 use ValueValidators\Error;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Validators\UniquenessViolation;
 
 /**
- * @covers Wikibase\LabelDescriptionDuplicateDetectorTest
+ * @covers Wikibase\LabelDescriptionDuplicateDetector
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -63,9 +65,9 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$sameId->setId( new ItemId( 'Q42' ) );
 		$sameId->setLabel( 'en', 'item label' );
 
-		$error = Error::newError(
+		$error = new UniquenessViolation(
+			new ItemId( 'Q42' ),
 			'Conflicting term!',
-			'label',
 			'label-conflict',
 			array(
 				'item label',
@@ -96,18 +98,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 		$result = $detector->detectLabelConflictsForEntity( $entity );
 
-		$this->assertEquals( empty( $expectedErrors ), $result->isValid(), 'isValid()' );
-		$errors = $result->getErrors();
-
-		$this->assertEquals( count( $expectedErrors ), count( $errors ), 'Number of errors:' );
-
-		foreach ( $expectedErrors as $i => $expectedError ) {
-			$error = $errors[$i];
-
-			$this->assertEquals( $expectedError->getProperty(), $error->getProperty(), 'Error property:' );
-			$this->assertEquals( $expectedError->getCode(), $error->getCode(), 'Error code:' );
-			$this->assertEquals( $expectedError->getParameters(), $error->getParameters(), 'Error parameters:' );
-		}
+		$this->assertResult( $result, $expectedErrors );
 	}
 
 	public function provideLabelDescriptionConflictsForEntity() {
@@ -169,9 +160,9 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		$sameId->setLabel( 'en', 'item label' );
 		$sameId->setDescription( 'en', 'item description' );
 
-		$error = Error::newError(
+		$error = new UniquenessViolation(
+			new ItemId( 'Q42' ),
 			'Conflicting term!',
-			'label',
 			'label-with-description-conflict',
 			array(
 				'item label',
@@ -203,6 +194,14 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 		$result = $detector->detectLabelDescriptionConflictsForEntity( $entity );
 
+		$this->assertResult( $result, $expectedErrors );
+	}
+
+	/**
+	 * @param Result $result
+	 * @param Error[] $expectedErrors
+	 */
+	protected function assertResult( Result $result, $expectedErrors ) {
 		$this->assertEquals( empty( $expectedErrors ), $result->isValid(), 'isValid()' );
 		$errors = $result->getErrors();
 
@@ -211,9 +210,11 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 		foreach ( $expectedErrors as $i => $expectedError ) {
 			$error = $errors[$i];
 
-			$this->assertEquals( $expectedError->getProperty(), $error->getProperty(), 'Error property:' );
 			$this->assertEquals( $expectedError->getCode(), $error->getCode(), 'Error code:' );
 			$this->assertEquals( $expectedError->getParameters(), $error->getParameters(), 'Error parameters:' );
+
+			$this->assertInstanceOf( 'Wikibase\Validators\UniquenessViolation', $error );
+			$this->assertEquals( $expectedError->getConflictingEntity(), $error->getConflictingEntity() );
 		}
 	}
 

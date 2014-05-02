@@ -45,6 +45,7 @@ use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Utils;
+use Wikibase\Validators\EntityConstraintProvider;
 use Wikibase\Validators\SnakValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -337,12 +338,12 @@ class WikibaseRepo {
 	 */
 	public function getChangeOpFactoryProvider() {
 		return new ChangeOpFactoryProvider(
-			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->newSiteLinkCache(),
+			$this->getEntityConstraintProvider(),
 			new ClaimGuidGenerator(),
 			$this->getClaimGuidValidator(),
 			$this->getClaimGuidParser(),
-			$this->getSnakValidator()
+			$this->getSnakValidator(),
+			$this->getTermValidatorFactory()
 		);
 	}
 
@@ -593,6 +594,16 @@ class WikibaseRepo {
 			$languages,
 			$this->getEntityIdParser(),
 			$this->getLabelDescriptionDuplicateDetector()
+		);
+	}
+
+	/**
+	 * @return EntityConstraintProvider
+	 */
+	public function getEntityConstraintProvider() {
+		return new EntityConstraintProvider(
+			$this->getLabelDescriptionDuplicateDetector(),
+			$this->getStore()->newSiteLinkCache()
 		);
 	}
 
