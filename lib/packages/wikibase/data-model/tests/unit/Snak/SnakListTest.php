@@ -12,6 +12,16 @@ use Wikibase\Test\HashArray\HashArrayTest;
 
 /**
  * @covers Wikibase\DataModel\Snak\SnakList
+ * @uses DataValues\StringValue
+ * @uses Wikibase\DataModel\Entity\PropertyId
+ * @uses Wikibase\DataModel\Snak\PropertyNoValueSnak
+ * @uses Wikibase\DataModel\Snak\PropertyValueSnak
+ * @uses Wikibase\DataModel\Snak\Snak
+ * @uses Wikibase\DataModel\Snak\SnakList
+ * @uses Wikibase\DataModel\HashArray
+ * @uses Wikibase\DataModel\Snak\SnakObject
+ * @uses Wikibase\DataModel\MapValueHasher
+ * @uses Wikibase\DataModel\Entity\EntityId
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

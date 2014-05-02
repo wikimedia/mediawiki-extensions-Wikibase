@@ -7,6 +7,7 @@ use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\DataModel\Term\TermList
+ * @uses Wikibase\DataModel\Term\Term
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

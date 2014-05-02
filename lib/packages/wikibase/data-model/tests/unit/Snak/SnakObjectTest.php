@@ -3,11 +3,8 @@
 namespace Wikibase\Test\Snak;
 
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\SnakObject;
 
 /**
- * @covers Wikibase\DataModel\Snak\SnakObject
- *
  * @group Wikibase
  * @group WikibaseDataModel
  * @group WikibaseSnak
