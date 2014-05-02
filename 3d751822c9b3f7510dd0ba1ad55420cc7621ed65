@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_b2df940f",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-02T11:16:25Z",
+      "side": 1,
+      "message": "Hm, should really just return a Status object, with ItemId[] as the status value. I know, not subject of this patch - just saying.",
+      "revId": "3d751822c9b3f7510dd0ba1ad55420cc7621ed65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_92e258ce",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-02T11:16:25Z",
+      "side": 1,
+      "message": "Why not just check the status?",
+      "revId": "3d751822c9b3f7510dd0ba1ad55420cc7621ed65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_72e57cd5",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-02T11:16:25Z",
+      "side": 1,
+      "message": "Should just return a status object, with the ItemId as the status value.",
+      "revId": "3d751822c9b3f7510dd0ba1ad55420cc7621ed65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_52d040fa",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-02T11:16:25Z",
+      "side": 1,
+      "message": "We check against a list of known good item IDs here. Seems like the checks above (pasing, checkin type) are not needed at all.",
+      "revId": "3d751822c9b3f7510dd0ba1ad55420cc7621ed65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_32cb844f",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-02T11:16:25Z",
+      "side": 1,
+      "message": "To check whether an item exists, use EntityLookup::hasEntity. Avoid using Title objects. But anyway, as per the above: we already checked against a whitelist. So what\u0027S the point of this?",
+      "revId": "3d751822c9b3f7510dd0ba1ad55420cc7621ed65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
