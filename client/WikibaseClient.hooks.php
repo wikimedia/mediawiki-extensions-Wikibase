@@ -10,6 +10,7 @@ use IContextSource;
 use JobQueueGroup;
 use Message;
 use MovePageForm;
+use MWException;
 use OutputPage;
 use Parser;
 use ParserOutput;
@@ -30,7 +31,6 @@ use UnexpectedValueException;
 use User;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
-use Wikibase\Client\Hooks\BeforePageDisplayJsConfigHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
@@ -826,10 +826,13 @@ final class ClientHooks {
 
 			// To be able to find out about this in the SpecialMovepageAfterMove hook
 			$newTitle->wikibasePushedMoveToRepo = true;
-		} catch( RuntimeException $e ) {
+		} catch( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
+			wfLogWarning( $e->getMessage() );
+		} catch( RuntimeException $e ) {
+			// B/C for MediaWiki 1.23
 			wfLogWarning( $e->getMessage() );
 		}
 
