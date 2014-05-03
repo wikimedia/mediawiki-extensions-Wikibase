@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_4c6c1f99",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-03T08:34:58Z",
+      "side": 1,
+      "message": "Why does a method that\u0027s called \"getConstraints\" (note the \"s\") return a single validator that is then wrapped in an array()? Wouldn\u0027t make getValidators() make more sense here?",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2c67a3b5",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-03T08:34:58Z",
+      "side": 1,
+      "message": "This looks odd. Why not use both Item objects as parameters? Maybe there is a reason, just wondering.",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cc070fcc",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-03T08:34:58Z",
+      "side": 1,
+      "message": "In my opinion both parameters should be of type Entity.",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ec040bcb",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-03T08:34:58Z",
+      "side": 1,
+      "message": "Why public?\n\n$ignoreConflicts sounds like a bool, $ignoreConflictsWith is better.",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6cf8fbbf",
+        "filename": "repo/includes/Validators/CompositeEntityValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-03T08:34:58Z",
+      "side": 1,
+      "message": "Again. Personally I would either expect \"Entity $entity, Entity $ignoreConflictsWith\" or \"Entity $entity, EntityId[] $ignoreConflictsWith\".",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
