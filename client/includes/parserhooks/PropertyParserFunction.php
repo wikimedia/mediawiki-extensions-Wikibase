@@ -118,7 +118,7 @@ class PropertyParserFunction {
 			$this->entityLookup, $this->propertyLabelResolver,
 			$errorFormatter, $snaksFormatter );
 
-		wfProfileIn( __METHOD__ );
+		wfProfileOut( __METHOD__ );
 		return $instance;
 	}
 
