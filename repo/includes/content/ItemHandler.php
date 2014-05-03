@@ -110,7 +110,7 @@ class ItemHandler extends EntityHandler {
 	 * or null if there is no such item.
 	 *
 	 * @since 0.3
-	 * @deprecated in 0.5, use SieLinkLookup::getItemIdForLink
+	 * @deprecated in 0.5, use SiteLinkLookup::getItemIdForLink
 	 * with EntityTitleLookup::getTitleForId instead
 	 *
 	 * @param string $siteId

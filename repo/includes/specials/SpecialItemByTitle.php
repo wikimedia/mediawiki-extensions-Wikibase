@@ -45,7 +45,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 		$itemContent = null;
 
-		// If ther are enough data, then try to lookup the item content
+		// If there are enough data, then try to lookup the item content
 		if ( isset( $site ) && isset( $page ) ) {
 			// Try to get a item content
 			$siteId = $this->stringNormalizer->trimToNFC( $site ); // no stripping of underscores here!

@@ -74,7 +74,7 @@ interface SiteLinkLookup {
 	 * - itemId (unprefixed)
 	 *
 	 * Note: if the conditions are not very selective the result set can be very big.
-	 * Thus the caller is responsible for not executing to expensive queries in it's context.
+	 * Thus the caller is responsible for not executing too expensive queries in its context.
 	 *
 	 * @since 0.3
 	 *
