@@ -81,7 +81,7 @@
 	"wikibase-itemdisambiguation-submit": "Претрага",
 	"wikibase-itemdisambiguation-nothing-found": "Жао нам је, ниједна ставка са тим насловом није пронађена.",
 	"wikibase-itemdisambiguation-create": "Можете [{{fullurl:Special:NewItem|label=$1}} направити ставку].",
-	"wikibase-itemdisambiguation-invalid-langcode": "Жао нам је, језички идентификатор који сте унели је непознат систему. Молимо да користите важећи идентификатор као што је \"sr\".",
+	"wikibase-itemdisambiguation-invalid-langcode": "Жао нам је, језички идентификатор који сте унели је непознат систему. Молимо да користите важећи идентификатор као што је „sr“.",
 	"special-newproperty": "Креирање новог својства",
 	"wikibase-newproperty-fieldset": "Прављење новог својства",
 	"wikibase-newproperty-datatype": "Врста податка:",
