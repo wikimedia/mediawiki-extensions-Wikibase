@@ -10,6 +10,7 @@ use Title;
 use User;
 use Wikibase\DataModel\SimpleSiteLink;
 use JobSpecification;
+use MWException;
 
 /**
  * Provides logic to update the repo after certain changes have been
