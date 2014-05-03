@@ -6,7 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Status;
 use ValueValidators\ValueValidator;
 use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\content\EntityValidator;
+use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\TermValidatorFactory;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 

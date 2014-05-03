@@ -3,9 +3,6 @@
 namespace Wikibase\Validators;
 
 use ValueValidators\ValueValidator;
-use Wikibase\content\EntityValidator;
-use Wikibase\content\LabelDescriptionUniquenessValidator;
-use Wikibase\content\LabelUniquenessValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
