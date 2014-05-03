@@ -10,6 +10,7 @@ use Title;
 use User;
 use Wikibase\DataModel\SimpleSiteLink;
 use JobSpecification;
+use MWException;
 
 /**
  * Provides logic to update the repo after certain changes have been
@@ -135,7 +136,11 @@ abstract class UpdateRepo {
 		$job = $this->createJob();
 
 		wfProfileIn( __METHOD__ . '#push' );
-		$result = $jobQueueGroup->push( $job );
+		try {
+			$result = $jobQueueGroup->push( $job );
+		} catch ( MWException $e ) {
+			throw new RuntimeException( 'Failed to push job to job queue: ' . $e->getMessage() );
+		}
 		wfProfileOut( __METHOD__ . '#push' );
 
 		// MediaWiki 1.24+ throws exceptions on error instead of returning false,
