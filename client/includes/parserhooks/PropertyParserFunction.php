@@ -140,19 +140,8 @@ class PropertyParserFunction {
 		}
 
 		if ( !$status->isGood() ) {
-			// stuff the error messages into the ParserOutput, so we can render them later somewhere
-			$errors = $this->parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
-
-			if ( $errors === null ) {
-				$errors = array();
-			}
-
-			//XXX: if Status sucked less, we'd could get an array of Message objects
-			$errors[] = $status->getWikiText();
-
-			$this->parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
-
-			return '';
+			$errorFormatter = new ParserErrorMessageFormatter( $language );
+			return $errorFormatter->format( $status->getMessage() );
 		}
 
 		return $status->getValue();

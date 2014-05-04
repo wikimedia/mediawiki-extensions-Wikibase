@@ -40,13 +40,7 @@ class ParserErrorMessageFormatter {
 	 * @return string
 	 */
 	public function format( Message $message ) {
-		return '';
-	/*	return \Html::rawElement(
-			'span',
-			array( 'class' => 'error' ),
-            $message->inLanguage( $this->language )->text()
-		);
-	*/
+		return '<p class="error wikibase-error">' . $message->parse() . '</p>';
 	}
 
 }
