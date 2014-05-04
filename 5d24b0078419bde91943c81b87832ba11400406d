@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_1c79b6c2",
+        "filename": "repo/includes/api/AvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-04T19:21:09Z",
+      "side": 1,
+      "message": "does this really need to extend ApiWikibase? It doesn\u0027t seem to use any of it\u0027s functionality. Maybe ApiBase is enough?",
+      "revId": "5d24b0078419bde91943c81b87832ba11400406d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_5c73aee4",
+        "filename": "repo/includes/api/AvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-04T19:21:09Z",
+      "side": 1,
+      "message": "this should be set in a constructor",
+      "revId": "5d24b0078419bde91943c81b87832ba11400406d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3c7eb2ad",
+        "filename": "repo/includes/api/AvailableBadges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-04T19:21:09Z",
+      "side": 1,
+      "message": "maybe say \"item badges\" or so to make this more obvious?",
+      "revId": "5d24b0078419bde91943c81b87832ba11400406d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7c70aad8",
+        "filename": "repo/tests/phpunit/includes/api/AvailableBadgesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-04T19:21:09Z",
+      "side": 1,
+      "message": "why not just setUp?",
+      "revId": "5d24b0078419bde91943c81b87832ba11400406d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9c6dc603",
+        "filename": "repo/tests/phpunit/includes/api/AvailableBadgesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-04T19:21:09Z",
+      "side": 1,
+      "message": "this should be undone after the test",
+      "revId": "5d24b0078419bde91943c81b87832ba11400406d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
