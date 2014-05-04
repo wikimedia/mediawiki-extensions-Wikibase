@@ -26,4 +26,5 @@ cp -r $originalDirectory Wikibase
 cd Wikibase
 
 composer self-update
+composer require 'phpunit/phpunit=3.7.*' --prefer-source
 composer install --prefer-source
