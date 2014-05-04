@@ -33,9 +33,6 @@ class PropertyParserFunctionRenderer {
 	/* @var PropertyLabelResolver */
 	private $propertyLabelResolver;
 
-	/* @var ParserErrorMessageFormatter */
-	private $errorFormatter;
-
 	/* @var SnakFormatter */
 	private $snaksFormatter;
 
@@ -43,16 +40,14 @@ class PropertyParserFunctionRenderer {
 	 * @param Language                   $language
 	 * @param EntityLookup                $entityLookup
 	 * @param PropertyLabelResolver       $propertyLabelResolver
-	 * @param ParserErrorMessageFormatter $errorFormatter
 	 * @param SnakFormatter           $snaksFormatter
 	 */
 	public function __construct( Language $language,
 		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
-		ParserErrorMessageFormatter $errorFormatter, SnakFormatter $snaksFormatter ) {
+		SnakFormatter $snaksFormatter ) {
 		$this->language = $language;
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
-		$this->errorFormatter = $errorFormatter;
 		$this->snaksFormatter = $snaksFormatter;
 	}
 
