@@ -100,7 +100,6 @@ class PropertyParserFunction {
 		wfProfileIn( __METHOD__ );
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$errorFormatter = new ParserErrorMessageFormatter( $language );
 
 		$languageFallbackChainFactory = $wikibaseClient->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $language,
@@ -116,7 +115,7 @@ class PropertyParserFunction {
 
 		$instance = new PropertyParserFunctionRenderer( $language,
 			$this->entityLookup, $this->propertyLabelResolver,
-			$errorFormatter, $snaksFormatter );
+			$snaksFormatter );
 
 		wfProfileOut( __METHOD__ );
 		return $instance;
@@ -140,19 +139,8 @@ class PropertyParserFunction {
 		}
 
 		if ( !$status->isGood() ) {
-			// stuff the error messages into the ParserOutput, so we can render them later somewhere
-			$errors = $this->parser->getOutput()->getExtensionData( 'wikibase-property-render-errors' );
-
-			if ( $errors === null ) {
-				$errors = array();
-			}
-
-			//XXX: if Status sucked less, we'd could get an array of Message objects
-			$errors[] = $status->getWikiText();
-
-			$this->parser->getOutput()->setExtensionData( 'wikibase-property-render-errors', $errors );
-
-			return '';
+			$error = $status->getMessage()->inLanguage( $language )->text();
+			return '<p class="error wikibase-error">' . $error . '</p>';
 		}
 
 		return $status->getValue();

@@ -9,7 +9,6 @@ use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
-use Wikibase\ParserErrorMessageFormatter;
 use Wikibase\Property;
 use Wikibase\PropertyParserFunctionRenderer;
 use Wikibase\PropertyValueSnak;
@@ -28,7 +27,6 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getDefaultInstance() {
 		$targetLanguage = Language::factory( 'en' );
-		$errorFormatter = new ParserErrorMessageFormatter( $targetLanguage );
 		$mockRepo = $this->newMockRepository();
 		$mockResolver = new MockPropertyLabelResolver( $targetLanguage->getCode(), $mockRepo );
 
@@ -41,7 +39,6 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 			$targetLanguage,
 			$mockRepo,
 			$mockResolver,
-			$errorFormatter,
 			$formatter
 		);
 	}
