@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Entity;
 use DataValues\DataValue;
 use DataValues\DataValueObject;
 use DataValues\IllegalValueException;
-use Wikibase\DataModel\Internal\LegacyIdInterpreter;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * @since 0.5
