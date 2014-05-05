@@ -653,8 +653,8 @@ abstract class EntityContent extends AbstractContent {
 
 		$itemRevision = new EntityRevision(
 			$this->getEntity(),
-			$pageRevision === null ? 0 : $entityPage->getId(),
-			$pageRevision === null ? '' : $entityPage->getTimestamp()
+			$pageRevision === null ? 0 : $pageRevision->getId(),
+			$pageRevision === null ? '' : $pageRevision->getTimestamp()
 		);
 
 		return $itemRevision;
