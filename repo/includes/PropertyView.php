@@ -48,7 +48,7 @@ class PropertyView extends EntityView {
 
 		$html .= $this->getHtmlForAliases( $property, $editable );
 		$html .= $this->getHtmlForToc();
-		$html .= $this->getHtmlForTermBox( $property, $editable );
+		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
 
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
