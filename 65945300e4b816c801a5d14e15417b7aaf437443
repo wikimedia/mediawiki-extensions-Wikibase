@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_03c6ea9c",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-05-05T21:11:25Z",
+      "side": 1,
+      "message": "wouldn\u0027t this also be tidier to leave the precision on its own line?",
+      "revId": "65945300e4b816c801a5d14e15417b7aaf437443",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
