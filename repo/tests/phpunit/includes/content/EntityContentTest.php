@@ -381,4 +381,33 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		}
 	}
 
+	public function getEntityRevisionProvider() {
+		return array(
+			array( 5 ),
+			array( null )
+		);
+	}
+
+	/**
+	 * @dataProvider getEntityRevisionProvider
+	 */
+	public function testGetEntityRevision( $revId ) {
+		$content = $this->newEmpty();
+
+		$id = $content->grabFreshId();
+		$entity = $content->getEntity();
+		$entity->setId( $id );
+
+		$result = $content->getEntityRevision( $revId );
+
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $result );
+		$this->assertSame( $entity, $result->getEntity() );
+
+		if ( $revId ) {
+			$this->assertSame( $revId, $result->getRevision() );
+		} else {
+			$this->assertType( 'int', $result->getRevision() );
+		}
+	}
+
 }

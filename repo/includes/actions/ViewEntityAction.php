@@ -93,7 +93,7 @@ abstract class ViewEntityAction extends \ViewAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @return \Article
+	 * @return Article
 	 */
 	protected function getArticle() {
 		return $this->page;
@@ -117,8 +117,6 @@ abstract class ViewEntityAction extends \ViewAction {
 		if ( is_null( $content ) ) {
 			$this->displayMissingEntity();
 		} else {
-			$this->getArticle()->getRevisionFetched();
-
 			$this->displayEntityContent( $content );
 		}
 	}
