@@ -303,7 +303,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 
 		foreach ( $tests as $expected => $args ) {
 			$timeValue = new TimeValue( $args[0], 0, 0, 0, $args[1], TimeFormatter::CALENDAR_GREGORIAN );
-			$argLists[] = array( $expected, $timeValue );
+			$argLists[] = array( $expected, $timeValue, !empty( $args[2] ) );
 		}
 
 		// Different languages at year precision
