@@ -510,27 +510,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	}
 
 	/**
-	 * Parses the claim GUID and returns the prefixed entity ID it contains.
-	 *
-	 * @since 0.3
-	 * @deprecated since 0.4
-	 *
-	 * @param string $claimKey
-	 *
-	 * @return string
-	 * @throws InvalidArgumentException
-	 */
-	public static function getIdFromClaimGuid( $claimKey ) {
-		$keyParts = explode( '$', $claimKey );
-
-		if ( count( $keyParts ) !== 2 ) {
-			throw new InvalidArgumentException( 'A claim key should have a single $ in it' );
-		}
-
-		return $keyParts[0];
-	}
-
-	/**
 	 * Returns a list of all Snaks on this Entity. This includes at least the main snaks of
 	 * Claims, the snaks from Claim qualifiers, and the snaks from Statement References.
 	 *
