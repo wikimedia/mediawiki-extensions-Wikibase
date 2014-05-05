@@ -16,6 +16,24 @@
       "revId": "65945300e4b816c801a5d14e15417b7aaf437443",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c39c726f",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-05T21:24:56Z",
+      "side": 1,
+      "message": "I did this on purpose. The two values (time string and precision) go together. There can\u0027t be a formatter test without precision. These two are actually the primary key candidate here. But since PHP doesn\u0027t allow to use arrays as array keys ;-) I ended with this approach.",
+      "parentUuid": "8e23439c_03c6ea9c",
+      "revId": "65945300e4b816c801a5d14e15417b7aaf437443",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
