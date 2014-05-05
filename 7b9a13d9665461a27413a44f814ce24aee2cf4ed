@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_c3e7d2d1",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-05T22:24:39Z",
+      "side": 1,
+      "message": "Don\u0027t change ItemHandler in this patch, please. ;-)\n\nMy problem is still the same. Personally, I would not expect to get a validator from a method that\u0027s called getConstraints. What\u0027s wrong with EntityValidatorProvider and getValidator?",
+      "parentUuid": "8e23439c_f2506162",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_2c67a3b5",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 1
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_e34beeca",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-05T22:24:39Z",
+      "side": 1,
+      "message": "Because see other comments. ;-)",
+      "parentUuid": "8e23439c_52cf152c",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_ec040bcb",
         "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
         "patchSetId": 1
@@ -171,6 +207,41 @@
       "side": 1,
       "message": "Again: why, exactly? We don\u0027t need it. Can you think of a reasonable implementation of this interface that would require two fully loaded Entities?",
       "parentUuid": "8e23439c_6cf8fbbf",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_03282adb",
+        "filename": "repo/includes/Validators/CompositeEntityValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-05T22:24:39Z",
+      "side": 1,
+      "message": "Since when does the presence of the class name \"Entity\" imply that it is fully loaded? Sorry, that\u0027s not the point here, just wondering.\n\nIt just doesn\u0027t make a lot of sense to ignore a \"conflict between an Entity and an EntityId\". I understand that you are using this as a filter. Maybe it\u0027s just the name and not the actual interface.\n\n$ignoreConflictsWith reveals a bit of the implementation the user of these methods shouldn\u0027t care about. $ignoreConflictsWith \u003d \"if you found a conflict, ignore it if the id is equal to the one I gave you\". Suggestions:\n* $dontCompareWithEntity\n* $dontCompareWith\n* $excludeEntityFromComparisons\n* $excludeEntity",
+      "parentUuid": "8e23439c_f2df41d9",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e3508e62",
+        "filename": "repo/includes/Validators/SiteLinkUniquenessValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-05T22:24:39Z",
+      "side": 1,
+      "message": "Strange wrap.",
       "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
