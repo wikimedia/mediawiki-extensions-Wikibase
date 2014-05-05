@@ -132,9 +132,9 @@ class EntityViewPlaceholderExpander {
 			$html = $this->expandPlaceholder( $name, $args );
 			return $html;
 		} catch ( MWException $ex ) {
-			wfWarn( "Expansion of $name failed: " . $ex );
+			wfWarn( "Expansion of $name failed: " . $ex->getMessage() );
 		} catch ( RuntimeException $ex ) {
-			wfWarn( "Expansion of $name failed: " . $ex );
+			wfWarn( "Expansion of $name failed: " . $ex->getMessage() );
 		}
 
 		return false;
@@ -143,21 +143,19 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * Returns an argument from a list, first checking whether it is present and has the correct type.
 	 *
-	 * @param array $args the argument list
-	 * @param int $index the index of the desired argument
-	 * @param string $type the desired type of the argument
-	 * @param string $message the message to use if the argument is missing or has the wrong type
+	 * @param string $entityId
 	 *
-	 * @return mixed
+	 * @return EntityId
 	 * @throws \InvalidArgumentException If the argument is missing or has the wrong type
 	 */
-	protected function extractArgument( $args, $index, $type, $message ) {
-		// this should be the entity id, as per the call to $injector->newMarker() in getInnerHtml
-		if ( !isset( $args[$index] ) || gettype( $args[$index] ) !== $type ) {
-			throw new \InvalidArgumentException( $message );
+	private function getEntityIdFromString( $entityId ) {
+		if ( !is_string( $entityId ) ) {
+			throw new \InvalidArgumentException(
+				'The first argument must be an entity ID encoded as a string'
+			);
 		}
 
-		return $args[$index];
+		return $this->idParser->parse( $entityId );
 	}
 
 	/**
@@ -175,14 +173,11 @@ class EntityViewPlaceholderExpander {
 
 		switch ( $name ) {
 			case 'termbox':
-				$entityId = $this->extractArgument(
-					$args,
-					0,
-					'string',
-					'The first argument must be an entity ID encoded as a string' );
-
-				$entityId = $this->idParser->parse( $entityId );
-				return $this->renderTermBox( $entityId );
+				$entityId = $this->getEntityIdFromString( $args[0] );
+				return $this->renderTermBox(
+					$entityId,
+					isset( $args[1] ) ? $args[1] : null
+				);
 
 			case 'termbox-toc':
 				return $this->renderTermBoxTocEntry();
@@ -218,19 +213,21 @@ class EntityViewPlaceholderExpander {
 	 * Generates HTML of the term box, to be injected into the entity page.
 	 *
 	 * @param Entityid $entityId
+	 * @param int|null $entityRevision
 	 *
 	 * @throws \InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function renderTermBox( EntityId $entityId ) {
+	public function renderTermBox( EntityId $entityId, $entityRevision ) {
 		$languages = $this->getExtraUserLanguages();
 
 		if ( !$languages ) {
 			return '';
 		}
 
+		$entityRevision = is_int( $entityRevision ) ? $entityRevision : 0;
 		// we may want to cache this...
-		$entity = $this->entityLookup->getEntity( $entityId );
+		$entity = $this->entityLookup->getEntity( $entityId, $entityRevision );
 
 		if ( !$entity ) {
 			return '';
