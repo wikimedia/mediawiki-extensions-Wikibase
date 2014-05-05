@@ -7,7 +7,8 @@
 			"Ihojose",
 			"Pegna",
 			"Savh",
-			"Vivaelcelta"
+			"Vivaelcelta",
+			"Mcervera"
 		]
 	},
 	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
@@ -62,6 +63,7 @@
 	"wikibase-validator-invalid": "Valor no válido",
 	"wikibase-validator-no-such-entity": "No se encontró \"$1\"",
 	"wikibase-validator-no-such-property": "No se encontró la propiedad $1",
+	"wikibase-validator-bad-value": "Valor corrupto: $1",
 	"wikibase-validator-not-allowed": "Valor ilegal: $1",
 	"datatypes-type-wikibase-item": "Elemento",
 	"datatypes-type-commonsMedia": "Archivo multimedia de Commons",

@@ -195,7 +195,7 @@
 	"wikibase-property-summary-wbeditentity-override": "Преиначено својство",
 	"wikibase-property-summary-wbsetlabel-set": "Измењен [$2] назив",
 	"wikibase-property-summary-wbsetlabel-remove": "Уклоњен [$2] назив",
-	"wikibase-property-summary-wbsetdescription-set": "Уклоњен [$2] опис",
+	"wikibase-property-summary-wbsetdescription-set": "Измењен [$2] опис",
 	"wikibase-property-summary-wbsetdescription-remove": "Уклоњен [$2] опис",
 	"wikibase-property-summary-wbsetaliases-set": "Постављено [$2] {{PLURAL:$1|псеудоним|псеудонима}}",
 	"wikibase-property-summary-wbsetaliases-add-remove": "Додато и уклоњено [$2] {{PLURAL:$1|псеудоним|псеудонима}}",
