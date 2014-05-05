@@ -12,10 +12,10 @@ use RequestContext;
 use Status;
 use Title;
 use User;
+use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
-use Wikibase\Validators\EntityValidator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
@@ -156,7 +156,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @since 0.1
 	 *
 	 * @param Title $title
-	 * @param int|null $revId Unused.
+	 * @param int|null $revId
 	 * @param ParserOptions|null $options
 	 * @param bool $generateHtml
 	 *
@@ -169,7 +169,7 @@ abstract class EntityContent extends AbstractContent {
 		$editable = !$options? true : $options->getEditSection();
 
 		// generate HTML
-		$output = $entityView->getParserOutput( $this->getEntityRevision(), $editable, $generateHtml );
+		$output = $entityView->getParserOutput( $this->getEntityRevision( $revId ), $editable, $generateHtml );
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
@@ -645,19 +645,34 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
+	 * @param int|null $revId Revision id to get a EntityRevision object for.
+	 *		If omitted, the latest revision will be used.
+	 *
 	 * @return EntityRevision
 	 */
-	public function getEntityRevision() {
-		$entityPage = $this->getWikiPage();
-		$pageRevision = !$entityPage ? null : $entityPage->getRevision();
+	public function getEntityRevision( $revId = null ) {
+		if ( intval( $revId ) > 0 ) {
+			$pageRevision = Revision::newFromId( $revId );
+		} else {
+			$pageRevision = $this->getLatestRevision();
+			$revId = $pageRevision === null ? 0 : $pageRevision->getId();
+		}
 
 		$itemRevision = new EntityRevision(
 			$this->getEntity(),
-			$pageRevision === null ? 0 : $pageRevision->getId(),
+			intval( $revId ),
 			$pageRevision === null ? '' : $pageRevision->getTimestamp()
 		);
 
 		return $itemRevision;
+	}
+
+	/**
+	 * @return Revision|null
+	 */
+	private function getLatestRevision() {
+		$entityPage = $this->getWikiPage();
+		return $entityPage ? $entityPage->getRevision() : null;
 	}
 
 	/**

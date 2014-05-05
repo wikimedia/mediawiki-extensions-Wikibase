@@ -8,6 +8,7 @@ use ParserOptions;
 use RequestContext;
 use Title;
 use Wikibase\EntityContent;
+use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 
@@ -379,6 +380,38 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		} elseif ( $content ) {
 			$this->assertEquals( $view->getLanguage()->getCode(), $context->getLanguage()->getCode() );
 		}
+	}
+
+	/**
+	 * @param int|null $revId
+	 *
+	 * @return EntityRevision
+	 */
+	private function testGetEntityRevisionCommon( $revId = null ) {
+		$content = $this->newEmpty();
+
+		$id = $content->grabFreshId();
+		$entity = $content->getEntity();
+		$entity->setId( $id );
+
+		$result = $content->getEntityRevision( $revId );
+
+		$this->assertInstanceOf( '\Wikibase\EntityRevision', $result );
+		$this->assertSame( $entity, $result->getEntity() );
+
+		return $result;
+	}
+
+	public function testGetEntityRevisionById() {
+		$result = $this->testGetEntityRevisionCommon( 5 );
+
+		$this->assertSame( 5, $result->getRevision() );
+	}
+
+	public function testGetEntityRevisionLatest() {
+		$result = $this->testGetEntityRevisionCommon();
+
+		$this->assertType( 'int', $result->getRevision() );
 	}
 
 }
