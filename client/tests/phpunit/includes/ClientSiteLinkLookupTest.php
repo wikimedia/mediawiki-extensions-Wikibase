@@ -32,7 +32,7 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 					'badges' => array( 'Q4', 'Q123' )
 				),
 				'srwiki' => 'Foo sr',
-				'nlwiki' => 'Talk:Foo nl',
+				'nlwiki' => 'ThisIsANamespace:Foo nl',
 				'dewiktionary' => 'Foo de word',
 				'enwiktionary' => 'Foo en word',
 			)
@@ -77,7 +77,7 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array( $sitelinks, 'dewiki', Title::newFromText( 'Foo de' ), 'from dewiki title' ),
 			array( $sitelinks, 'enwiktionary', Title::newFromText( 'Foo en word' ), 'from enwiktionary title' ),
-			array( $sitelinks, 'nlwiki', Title::newFromText( 'Talk:Foo nl' ), 'from nlwiki non-main namespace title' ),
+			array( $sitelinks, 'nlwiki', Title::newFromText( 'ThisIsANamespace:Foo nl' ), 'from nlwiki non-main namespace title' ),
 			array( array(), 'enwiki', Title::newFromText( 'Bar en' ), 'from nonexisting title' ),
 			array( array(), 'barwiki', Title::newFromText( 'Foo bar' ), 'from nonexisting site' ),
 		);
@@ -102,7 +102,7 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array( $item->getSiteLink( 'enwiki' ), 'dewiki', Title::newFromText( 'Foo de' ), 'enwiki', 'enwiki from dewiki title' ),
 			array( $item->getSiteLink( 'dewiktionary' ), 'enwiktionary', Title::newFromText( 'Foo en word' ), 'dewiktionary', 'dewiktionary from enwiktionary title' ),
-			array( $item->getSiteLink( 'enwiki' ), 'nlwiki', Title::newFromText( 'Talk:Foo nl' ), 'enwiki', 'enwiki from nlwiki non-main namespace title' ),
+			array( $item->getSiteLink( 'enwiki' ), 'nlwiki', Title::newFromText( 'ThisIsANamespace:Foo nl' ), 'enwiki', 'enwiki from nlwiki non-main namespace title' ),
 			array( $item->getSiteLink( 'nlwiki' ), 'enwiki', Title::newFromText( 'Foo en' ), 'nlwiki', 'non-main namespace nlwiki from enwiki title' ),
 			array( null, 'enwiki', Title::newFromText( 'Bar en' ), 'dewiki', 'from nonexisting title' ),
 			array( null, 'barwiki', Title::newFromText( 'Foo bar' ), 'enwiki', 'from nonexisting site' ),

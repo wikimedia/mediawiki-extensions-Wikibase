@@ -87,7 +87,10 @@ class ClientSiteLinkLookup {
 	 * @return Item|null
 	 */
 	private function getItem( Title $title ) {
-		$itemId = $this->siteLinkLookup->getItemIdForLink( $this->localSiteId, $title->getPrefixedText() );
+		$itemId = $this->siteLinkLookup->getItemIdForLink(
+			$this->localSiteId,
+			$title->getPrefixedText()
+		);
 
 		if ( $itemId === null ) {
 			return null;
