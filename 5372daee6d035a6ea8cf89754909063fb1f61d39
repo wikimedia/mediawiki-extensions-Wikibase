@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_52e6f5ab",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-05T09:42:41Z",
+      "side": 1,
+      "message": "@note using $siteStore from $repo causes issues with tests. To use the same instance from $repo, we need more proper injection of the dependencies.\n\nFor this special page, I don\u0027t think it\u0027s such a huge problem to do this way (at least for now).  it\u0027s at least one instance used on this special page vs. several.",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
