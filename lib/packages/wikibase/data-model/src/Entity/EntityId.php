@@ -144,27 +144,4 @@ class EntityId implements Comparable, Serializable {
 		self::__construct( $entityType, $serialization );
 	}
 
-	/**
-	 * Constructs an EntityId object from a serialization (prefixed id).
-	 * This only works for ids of entity types defined in BasicEntityIdParser::getBuilders.
-	 *
-	 * @deprecated since 0.5, use an EntityIdParser
-	 *
-	 * @param string $prefixedId
-	 *
-	 * @return EntityId|null
-	 *
-	 * @see BasicEntityIdParser::getBuilders
-	 */
-	public static function newFromPrefixedId( $prefixedId ) {
-		$idParser = new BasicEntityIdParser();
-
-		try {
-			return $idParser->parse( $prefixedId );
-		}
-		catch ( EntityIdParsingException $parseException ) {
-			return null;
-		}
-	}
-
 }
