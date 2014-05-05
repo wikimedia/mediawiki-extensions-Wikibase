@@ -437,7 +437,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Tests Entity::newClaim and Entity::getIdFromClaimGuid
+	 * Tests Entity::newClaim
 	 *
 	 * @dataProvider instanceProvider
 	 *
@@ -459,10 +459,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$guid = $claim->getGuid();
 
 		$this->assertInternalType( 'string', $guid );
-
-		$prefixedEntityId = Entity::getIdFromClaimGuid( $guid );
-
-		$this->assertEquals( 'q42', $prefixedEntityId );
 	}
 
 	public function diffProvider() {

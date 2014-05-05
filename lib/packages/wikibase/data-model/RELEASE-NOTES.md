@@ -13,6 +13,7 @@ Changes in the `Entity` hierarchy:
 * Removed `Entity::isEmpty`
 * Removed `Entity::stub`
 * Removed `Property::newEmpty`
+* Removed `Entity::getIdFromClaimGuid`
 * `Entity::removeLabel` no longer accepts an array of language codes
 * `Entity::removeDescription` no longer accepts an array of language codes
 * `Entity` no longer implements `Serializable`
