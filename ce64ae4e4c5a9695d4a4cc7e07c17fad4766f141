@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_327499fa",
+        "filename": "client/includes/parserhooks/ParserErrorMessageFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-05T09:19:30Z",
+      "side": 1,
+      "message": "Please document whether this returns wikitext, html or plain text (and make sure the callers handle the value accordingly).",
+      "revId": "ce64ae4e4c5a9695d4a4cc7e07c17fad4766f141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_728691e1",
+        "filename": "client/includes/parserhooks/ParserErrorMessageFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-05T09:19:30Z",
+      "side": 1,
+      "message": "parse() returns raw HTML, while PropertyParserFunction::render is defined to return wikitext. Please use text() instead.",
+      "revId": "ce64ae4e4c5a9695d4a4cc7e07c17fad4766f141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
