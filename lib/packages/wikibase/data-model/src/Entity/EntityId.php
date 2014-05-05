@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Entity;
 use Comparable;
 use InvalidArgumentException;
 use Serializable;
-use Wikibase\DataModel\Internal\LegacyIdInterpreter;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * @since 0.5
@@ -19,7 +19,6 @@ class EntityId implements Comparable, Serializable {
 	protected $serialization;
 
 	/**
-	 * @deprecated
 	 * Construct a derivative such as ItemId or PropertyId directly.
 	 * In the long term this class is meant to become abstract.
 	 *
@@ -35,7 +34,7 @@ class EntityId implements Comparable, Serializable {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $entityType, $idSerialization ) {
+	protected function __construct( $entityType, $idSerialization ) {
 		$this->setEntityType( $entityType );
 		$this->setIdSerialization( $idSerialization );
 	}

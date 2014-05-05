@@ -445,7 +445,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testNewClaim( Entity $entity ) {
 		if ( $entity->getId() === null ) {
-			$entity->setId( new EntityId( $entity->getType(), 50 ) );
+			$entity->setId( 50 );
 		}
 
 		$snak = new PropertyNoValueSnak( 42 );

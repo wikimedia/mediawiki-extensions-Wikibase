@@ -40,6 +40,7 @@ Other changes:
 * `Item::removeSiteLink` no longer takes an optional second parameter and no longer returns a boolean
 * Removed `Fingerprint::getAliases`
 * Removed `EntityId::newFromPrefixedId`
+* The constructor of `EntityId` is no longer public
 
 #### Additions
 
@@ -50,6 +51,7 @@ Other changes:
 * Added `SiteLinkList::removeLinkWithSiteId`
 * Added `Item::getSiteLinkList`
 * Added `Item::setSiteLinkList`
+* Added `LegacyIdInterpreter`
 
 ## Version 0.7.4 (2014-04-24)
 

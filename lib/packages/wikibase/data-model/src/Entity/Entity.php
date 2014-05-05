@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimAggregate;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Internal\LegacyIdInterpreter;
+use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
