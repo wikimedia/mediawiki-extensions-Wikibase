@@ -32,7 +32,7 @@ Removal of `toArray` and `newFromArray`:
 * Removed `SnakObject::toArray` and `SnakObject::newFromArray`
 * Removed `SnakObject::newFromType`
 
-Other changes:
+Other breaking changes:
 
 * `Claim` and `Statement` no longer implement `Serializable`
 * `SiteLinkList` is now mutable
