@@ -140,17 +140,6 @@ class ApiClientInfo extends \ApiQueryBase {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls
-	 *
-	 * @since 0.4
-	 *
-	 * @return string
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client#API';
-	}
-
-	/**
 	 * @see ApiBase::getVersion
 	 *
 	 * @since 0.4
