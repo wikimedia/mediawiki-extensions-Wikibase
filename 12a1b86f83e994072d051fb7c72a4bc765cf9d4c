@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_075b8f89",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T19:24:01Z",
+      "side": 1,
+      "message": "please add type hints to avoid mixups.",
+      "revId": "12a1b86f83e994072d051fb7c72a4bc765cf9d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_70f494ee",
         "filename": "repo/includes/api/GetEntities.php",
         "patchSetId": 6
@@ -13,6 +30,24 @@
       "writtenOn": "2014-04-23T09:02:41Z",
       "side": 1,
       "message": "So we don\u0027t want to mock this?",
+      "revId": "12a1b86f83e994072d051fb7c72a4bc765cf9d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_47cce737",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T19:24:01Z",
+      "side": 1,
+      "message": "Actually, we definitly do.",
+      "parentUuid": "8e23439c_70f494ee",
       "revId": "12a1b86f83e994072d051fb7c72a4bc765cf9d4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
