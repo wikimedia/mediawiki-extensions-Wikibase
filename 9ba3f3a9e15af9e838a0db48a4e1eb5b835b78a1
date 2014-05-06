@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_540ffa8c",
+        "filename": "client/includes/scribunto/WikibaseLuaEntityBindings.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "please do.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_14af4228",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "I do not quite see why we need this at all, see my comment about error handling in PropertyValueSnakFormatter.php. Most of the functionality will have to be somewhere, but having it in a separate formatter seems odd.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3460fe2c",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "This will always return HTML. That\u0027s not right. The output format needs to depend on $this-\u003eformat. One way to do this in a generic way would be to have a messageToString method that will call plain() or text() or parse() depending on the value of $this-\u003eformat.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1474e2f9",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "That\u0027s too narrow; there are three HTML formats: HTML, HTML_WIDGET and HTML_DIFF. You could match the format string - it\u0027s a MIME type, so if it\u0027s HTML, it will start with \"text/html\". In that case though, we should document/guarantee the fact that the format ID will be a MIME type.\n\nPlease have these use cases on your mental checklist:\n* rendering as static HTML in the EntityView\n* HTML in Diff output\n* Wikitext returned by the parser function / Lua \n\nThere may be more, but these are the most important ones.\n\nNote: Using a parse()ed message in wikitext will lead to double-escaping of HTML links in the messages).",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_5486dae0",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "Please always document whether a string contains raw text, wikitext or HTML. Getting this right in the documentation, both for return values and parameters, is vital for avoiding XSS vectors.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_748316d1",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "I\u0027m confused. getParsedErrorMessage() uses Message::parser() which returns HTML. But formatPlain() is not supposed to return HTML, is it?",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_142d02ee",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "document what the format of the string is. raw? wikitext? html?",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d422eafa",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "parse() returns HTML!",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f46e0629",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "eeek!",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_949472ec",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "this should work with {{#iferror}}, right? so it needs to use class\u003d\"error\", if I understand correctly.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_54e37a9b",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "Returning null to indicate an error is so PHP4 :) Why not just keep the handling of PropertyNotFoundException as it was?",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f48286a7",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "If the value type mismatches, we could (and probably should) still render the value.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_54b13a8b",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "The error handling seems to be inconsistent and somewhat confusing. If the property doesn\u0027t exist, we log and ignore, but if the value type mismatches, we throw and rely on external handling? Why?\n\nIt seems to me like this formatter should be resilient against most exceptions; they should be caught, logged, and included in the return value. If possible, in *addition* to the rendered value (if the property isn\u0027t found, we still render the value - so why not if the type mismatches)? We\u0027ll need an ExceptionLocalizer for generating the output, btw.\n\nThere should be a formatter option for including resp. suppressing errors in the formatter output. You could even have an option value that tells the formatter to just throw any exception.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_746d5600",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "eek, internal tabs!",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f4fba641",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "Tabs should only be used before the first non-whitespace char, elsewhere it will break alignment.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_147e22ad",
+        "filename": "repo/includes/view/SnakHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "I think this entire thing could be folded into SnakFormatter... or at least, it should do little more than wrap the output of the formatter in a template .",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f47846c0",
+        "filename": "repo/includes/view/SnakHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:32:10Z",
+      "side": 1,
+      "message": "Always document the format if it\u0027s not raw data. It\u0027S HTML in this case, it seems...",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
