@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Title;
 
 /**
  * Deletion update to handle deletion of Wikibase items.
@@ -19,8 +20,8 @@ class ItemDeletionUpdate extends EntityDeletionUpdate {
 	 *
 	 * @param ItemContent $newContent
 	 */
-	public function __construct( ItemContent $newContent ) {
-		$this->content = $newContent;
+	public function __construct( ItemContent $newContent, Title $title ) {
+		parent::__construct( $newContent, $title );
 	}
 
 	/**

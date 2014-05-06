@@ -80,12 +80,14 @@ abstract class EntityContent extends AbstractContent {
 	 * @since 0.1
 	 * @deprecated use EntityTitleLookup instead
 	 *
+	 * @deprecated since 0.5, use EntityTitleLookup:.getTitleForId instead.
+	 *
 	 * @return Title|bool
 	 */
 	public function getTitle() {
 		$id = $this->getEntity()->getId();
 
-		if ( $id === null ) {
+		if ( !$id ) {
 			return false;
 		}
 

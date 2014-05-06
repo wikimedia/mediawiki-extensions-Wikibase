@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use MWException;
-use InvalidArgumentException;
 use OutOfBoundsException;
 use Status;
 use Title;
@@ -18,6 +17,7 @@ use WikiPage;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker {
 
@@ -81,7 +81,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 
 		foreach ( $entityIds as $entityId ) {
 			list( $type, $id ) = $entityId;
-			$entity = self::getFromId( new EntityId( $type, $id ) );
+			$entity = $this->getFromId( new EntityId( $type, $id ) );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;
@@ -110,7 +110,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @return EntityContent|null
 	 */
-	public function getFromId( EntityId $id, $audience = Revision::FOR_PUBLIC ) {
+	private function getFromId( EntityId $id, $audience = Revision::FOR_PUBLIC ) {
 		// TODO: since we already did the trouble of getting a WikiPage here,
 		// we probably want to keep a copy of it in the Content object.
 		$title = $this->getTitleForId( $id );
@@ -205,31 +205,6 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		$handler = \ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
 
 		return $handler->newContentFromEntity( $entity );
-	}
-
-	/**
-	 * Constructs a new EntityContent from a given type.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $type
-	 *
-	 * @return EntityContent
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function newFromType( $type ) {
-		if ( !is_string( $type ) ) {
-			throw new InvalidArgumentException( '$type needs to be a string' );
-		}
-
-		if ( $type === Item::ENTITY_TYPE ) {
-			return ItemContent::newEmpty();
-		} elseif ( $type === Property::ENTITY_TYPE ) {
-			return PropertyContent::newEmpty();
-		} else {
-			throw new InvalidArgumentException( 'unknown entity type $type' );
-		}
 	}
 
 	/**

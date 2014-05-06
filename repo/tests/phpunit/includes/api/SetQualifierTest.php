@@ -93,18 +93,19 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		if ( !$item ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-			$item = Item::newEmpty();
-			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+			$newItem = Item::newEmpty();
+			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 			$prop = Property::newEmpty();
 			$propId = $this->makeProperty( $prop, 'string' )->getId();
 			$claim = new Statement( new PropertyValueSnak( $propId, new StringValue( '^_^' ) ) );
 
 			$guidGenerator = new ClaimGuidGenerator();
-			$claim->setGuid( $guidGenerator->newGuid( $item->getId() ) );
-			$item->addClaim( $claim );
+			$claim->setGuid( $guidGenerator->newGuid( $newItem->getId() ) );
+			$newItem->addClaim( $claim );
 
-			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+			$item = $newItem;
 		}
 
 		return $item;

@@ -344,39 +344,44 @@ final class RepoHooks {
 
 		// Bail out if we are not looking at an entity
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
+			wfProfileOut( __METHOD__ );
 			return true;
 		}
 
 		$revId = $title->getLatestRevID();
-		$content = $entityContentFactory->getFromRevision( $revId );
+		$revision = Revision::newFromId( $revId );
+		$content = $revision ? $revision->getContent() : null;
 
-		if ( $content ) {
-			//XXX: EntityContent::save() also does this. Why are we doing this twice?
-			StoreFactory::getStore()->newEntityPerPage()->addEntityPage(
-				$content->getEntity()->getId(),
-				$title->getArticleID()
-			);
-
-			$entity = $content->getEntity();
-
-			$rev = Revision::newFromId( $revId );
-
-			$userId = $rev->getUser();
-			$change = EntityChange::newFromUpdate( EntityChange::RESTORE, null, $entity, array(
-				// TODO: Use timestamp of log entry, but needs core change.
-				// This hook is called before the log entry is created.
-				'revision_id' => $revId,
-				'user_id' => $userId,
-				'object_id' => $entity->getId()->getPrefixedId(),
-				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
-			) );
-
-			$user = User::newFromId( $userId );
-			$change->setMetadataFromUser( $user );
-
-			$changeNotifier = new ChangeNotifier();
-			$changeNotifier->handleChange( $change );
+		if ( !$content instanceof EntityContent ) {
+			wfProfileOut( __METHOD__ );
+			return true;
 		}
+
+		$entity = $content->getEntity();
+
+		//XXX: EntityContent::save() also does this. Why are we doing this twice?
+		StoreFactory::getStore()->newEntityPerPage()->addEntityPage(
+			$entity->getId(),
+			$title->getArticleID()
+		);
+
+		$rev = Revision::newFromId( $revId );
+
+		$userId = $rev->getUser();
+		$change = EntityChange::newFromUpdate( EntityChange::RESTORE, null, $entity, array(
+			// TODO: Use timestamp of log entry, but needs core change.
+			// This hook is called before the log entry is created.
+			'revision_id' => $revId,
+			'user_id' => $userId,
+			'object_id' => $entity->getId()->getPrefixedId(),
+			'time' => wfTimestamp( TS_MW, wfTimestampNow() )
+		) );
+
+		$user = User::newFromId( $userId );
+		$change->setMetadataFromUser( $user );
+
+		$changeNotifier = new ChangeNotifier();
+		$changeNotifier->handleChange( $change );
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -1189,7 +1194,7 @@ final class RepoHooks {
 		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
 
 		$hookHandler = new MakeGlobalVariablesScriptHandler(
-			$wikibaseRepo->getEntityContentFactory(),
+			$wikibaseRepo->getEntityRevisionLookup(),
 			$wikibaseRepo->getParserOutputJsConfigBuilder( $langCode ),
 			$langCodes
 		);

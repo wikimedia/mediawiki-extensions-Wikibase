@@ -750,7 +750,7 @@ class EditEntity {
 
 		// Run edit filter hooks
 		$filterStatus = Status::newGood();
-		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $this->newEntity );
+		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newContentFromEntity( $this->newEntity );
 		if ( !wfRunHooks( 'EditFilterMergedContent',
 			array( $context, $entityContent, &$filterStatus, $summary, $this->getUser(), false ) ) ) {
 
