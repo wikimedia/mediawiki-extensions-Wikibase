@@ -18,7 +18,7 @@ use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
-use Wikibase\i18n\ExceptionLocalizer;
+use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Repo\WikibaseRepo;

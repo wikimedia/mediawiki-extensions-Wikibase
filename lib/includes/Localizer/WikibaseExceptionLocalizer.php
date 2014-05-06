@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\i18n;
+namespace Wikibase\Lib\Localizer;
 
 use Exception;
 use Message;
