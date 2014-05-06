@@ -638,16 +638,22 @@ div.wb-claimlistview div.wb-editsection {
 .wb-snakview-variation-valuesnak-datavaluetypemismatch,
 .wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty,
 .wb-snakview-variation-somevaluesnak,
-.wb-snakview-variation-novaluesnak {
+.wb-snakview-variation-novaluesnak,
+.wb-valuesnak-error-datavaluetypemismatch {
 	color: #565656;
 	font-style: italic;
 	line-height: 1.2;
 }
 
+
+
 .wb-snakview-variation-valuesnak-datavaluetypemismatch,
+.wb-valuesnak-error-datavaluetypemismatch,
 .wb-snakview-variation-valuesnak-nonewvaluefordeletedproperty {
 	color: red;
 }
+
+div.wb-valuesnak-error-datavaluetypemismatch-message,
 .wb-snakview-variation-valuesnak-datavaluetypemismatch-message div {
 	font-size: 84%;
 	margin-top: 0.4em;

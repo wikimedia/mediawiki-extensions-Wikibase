@@ -18,6 +18,7 @@ use ValueValidators\Result;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -222,24 +223,27 @@ abstract class EntityContent extends AbstractContent {
 			$context->setLanguage( $langCode );
 		}
 
+		$repo = WikibaseRepo::getDefaultInstance();
+
 		// apply language fallback chain ----
 		if ( !$uiLanguageFallbackChain ) {
-			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+			$factory = $repo->getLanguageFallbackChainFactory();
 			$uiLanguageFallbackChain = $factory->newFromContextForPageView( $context );
 		}
 
 		$formatterOptions->setOption( 'languages', $uiLanguageFallbackChain );
 
 		// get all the necessary services ----
-		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
+		$snakFormatter = $repo->getSnakFormatterFactory()
 			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
 
-		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$dataTypeLookup = $repo->getPropertyDataTypeLookup();
+		$entityInfoBuilder = $repo->getStore()->getEntityInfoBuilder();
+		$entityContentFactory = $repo->getEntityContentFactory();
 		$idParser = new BasicEntityIdParser();
 
 		$options = $this->makeSerializationOptions( $langCode, $uiLanguageFallbackChain );
+		$exceptionLocalizer = $repo->getExceptionLocalizer();
 
 		// construct the instance ----
 		$entityView = $this->newEntityView(
@@ -249,7 +253,8 @@ abstract class EntityContent extends AbstractContent {
 			$entityInfoBuilder,
 			$entityContentFactory,
 			$idParser,
-			$options
+			$options,
+			$exceptionLocalizer
 		);
 
 		return $entityView;
@@ -267,6 +272,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
+	 * @param ExceptionLocalizer $exceptionLocalizer
 	 *
 	 * @return EntityView
 	 */
@@ -277,7 +283,8 @@ abstract class EntityContent extends AbstractContent {
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
-		SerializationOptions $options
+		SerializationOptions $options,
+		ExceptionLocalizer $exceptionLocalizer
 	);
 
 	/**

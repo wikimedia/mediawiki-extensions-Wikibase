@@ -14,6 +14,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -227,7 +228,8 @@ class ItemContent extends EntityContent {
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
-		SerializationOptions $options
+		SerializationOptions $options,
+		ExceptionLocalizer $exceptionLocalizer
 	) {
 		$configBuilder = new ParserOutputJsConfigBuilder(
 			$entityInfoBuilder,
@@ -244,7 +246,8 @@ class ItemContent extends EntityContent {
 			$entityInfoBuilder,
 			$entityTitleLookup,
 			$options,
-			$configBuilder
+			$configBuilder,
+			$exceptionLocalizer
 		);
 	}
 

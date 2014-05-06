@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use DataTypes\DataType;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Language;
@@ -38,10 +39,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	public function newBuilders( $propertyType, EntityId $entityId ) {
-		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
-		$typeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( $propertyType ) );
+		$typeLookup = $this->getPropertyDataTypeLookup( $propertyType );
 
 		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
 		$entity->setId( $entityId );
@@ -52,10 +50,16 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );
 
+		$dataTypeFactory = $this->getDataTypeFactory( $propertyType );
+
 		$lang = Language::factory( 'en' );
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
-		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup );
+		return new WikibaseSnakFormatterBuilders(
+			$valueFormatterBuilders,
+			$typeLookup,
+			$dataTypeFactory
+		);
 	}
 
 	/**
@@ -100,6 +104,24 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $text );
 	}
 
+	/**
+	 * @dataProvider buildDispatchingSnakFormatterWithBadValueProvider
+	 * @covers WikibaseSnakFormatterBuilders::buildDispatchingSnakFormatter
+	 */
+	public function testBuildDispatchingSnakFormatterWithBadValue( $format, $options, $type, $snak ) {
+		$builders = $this->newBuilders( $type, new ItemId( 'Q5' ) );
+		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+
+		$formatter = $builders->buildDispatchingSnakFormatter(
+			$factory,
+			$format,
+			$options
+		);
+
+		$this->setExpectedException( 'ValueFormatters\Exceptions\MismatchingDataValueTypeException' );
+		$formatter->formatSnak( $snak );
+	}
+
 	public function buildDispatchingSnakFormatterProvider() {
 		$options = new FormatterOptions( array(
 			ValueFormatter::OPT_LANG => 'en',
@@ -107,9 +129,6 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 		$msg = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
 		$noValueMsg = $msg->inLanguage( 'en' )->text();
-
-		$msg = wfMessage( 'wikibase-undeserializable-value' );
-		$badValueMsg = $msg->inLanguage( 'en' )->text();
 
 		return array(
 			'plain url' => array(
@@ -146,17 +165,52 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				'url',
 				new PropertyValueSnak( 7, new StringValue( 'http://acme.com/' ) ),
 				'<a rel="nofollow" class="external free" href="http://acme.com/">http://acme.com/</a>'
-			),
+			)
+		);
+	}
+
+	public function buildDispatchingSnakFormatterWithBadValueProvider() {
+		$options = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => 'en',
+		) );
+
+		return array(
 			'bad value' => array(
 				SnakFormatter::FORMAT_PLAIN,
 				$options,
 				'globecoordinate',
 				new PropertyValueSnak( 7,
 					new UnDeserializableValue( 'cookie', 'globecoordinate', 'cannot understand!' )
-				),
-				$badValueMsg
+				)
 			)
 		);
+	}
+
+	private function getPropertyDataTypeLookup( $propertyType ) {
+		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$typeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( $propertyType ) );
+
+		return $typeLookup;
+	}
+
+	private function getDataTypeFactory( $propertyType ) {
+		$dataTypeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
+
+		$dataTypeFactory->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnCallback( function( $propertyType ) {
+					switch( $propertyType ) {
+						case 'wikibase-item':
+							return new DataType( $propertyType, 'wikibase-entityid', array() );
+						default:
+							return new DataType( $propertyType, 'string', array() );
+					}
+				} )
+			);
+
+		return $dataTypeFactory;
 	}
 
 }

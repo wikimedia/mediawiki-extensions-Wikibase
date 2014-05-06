@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use Language;
 use ParserOutput;
 use SpecialPageFactory;
+use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
@@ -89,6 +90,9 @@ abstract class EntityView extends ContextSource {
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param SerializationOptions $options
+	 * @param ParserOutputJsConfigBuilder $configBuilder
+	 * @param ExceptionLocalizer $exceptionLocalizer
 	 *
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
 	 *
@@ -101,7 +105,8 @@ abstract class EntityView extends ContextSource {
 		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		SerializationOptions $options,
-		ParserOutputJsConfigBuilder $configBuilder
+		ParserOutputJsConfigBuilder $configBuilder,
+		ExceptionLocalizer $exceptionLocalizer
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -122,7 +127,8 @@ abstract class EntityView extends ContextSource {
 		// @todo inject in constructor
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			$exceptionLocalizer
 		);
 
 		$this->claimHtmlGenerator = new ClaimHtmlGenerator(

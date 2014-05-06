@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use DataTypes\DataType;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DispatchingValueFormatter;
@@ -36,8 +37,9 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
 		$valueFormatter = new DispatchingValueFormatter( array() );
+		$dataTypeFactory = $this->getDataTypeFactory();
 
-		new PropertyValueSnakFormatter( $format, $valueFormatter, $typeLookup );
+		new PropertyValueSnakFormatter( $format, $valueFormatter, $typeLookup, $dataTypeFactory );
 	}
 
 	public function constructorErrorsProvider() {
@@ -62,7 +64,8 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = new PropertyValueSnakFormatter(
 			SnakFormatter::FORMAT_PLAIN,
 			new DispatchingValueFormatter( $formatters ),
-			$typeLookup
+			$typeLookup,
+			$this->getDataTypeFactory()
 		);
 
 		$this->assertEquals( $expected, $formatter->formatSnak( $snak ) );
@@ -108,7 +111,13 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		$formatter = new PropertyValueSnakFormatter( 'test', new DispatchingValueFormatter( array() ), $typeLookup );
+		$formatter = new PropertyValueSnakFormatter(
+			'test',
+			new DispatchingValueFormatter( array() ),
+			$typeLookup,
+			$this->getDataTypeFactory()
+		);
+
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
@@ -120,13 +129,39 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		$formatter = new PropertyValueSnakFormatter( 'test', new DispatchingValueFormatter( array() ), $typeLookup );
+		$formatter = new PropertyValueSnakFormatter(
+			'test',
+			new DispatchingValueFormatter( array() ),
+			$typeLookup,
+			$this->getDataTypeFactory()
+		);
 
 		$snak = new PropertyValueSnak( new PropertyId( "P23" ), new StringValue( 'test' ) );
 		$this->assertTrue( $formatter->canFormatSnak( $snak ), $snak->getType() );
 
 		$snak = new PropertySomeValueSnak( new PropertyId( "P24" ) );
 		$this->assertFalse( $formatter->canFormatSnak( $snak ), $snak->getType() );
+	}
+
+	private function getDataTypeFactory() {
+		$dataTypeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
+
+		$dataTypeFactory->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnCallback( function( $propertyType ) {
+					switch( $propertyType ) {
+						case 'commonsMedia':
+							return new DataType( $propertyType, 'string', array() );
+						case 'someStuff':
+							return new DataType( $propertyType, 'string', array() );
+						default:
+							echo "$propertyType\n";
+							return '';
+					}
+				} )
+			);
+
+		return $dataTypeFactory;
 	}
 
 }
