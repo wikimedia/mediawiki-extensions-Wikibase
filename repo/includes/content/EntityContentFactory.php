@@ -61,6 +61,24 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	}
 
 	/**
+	 * Returns the content model for the given entity type
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $type
+	 *
+	 * @throws \OutOfBoundsException
+	 * @return string
+	 */
+	public function getEntityContentModel( $type ) {
+		if ( !isset( $this->typeMap[ $type ] ) ) {
+			throw new \OutOfBoundsException();
+		}
+
+		return $this->typeMap[ $type ];
+	}
+
+	/**
 	 * Get the items corresponding to the provided language and label pair.
 	 * A description can also be provided, in which case only the item with
 	 * that description will be returned (as only element in the array).
@@ -81,7 +99,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 
 		foreach ( $entityIds as $entityId ) {
 			list( $type, $id ) = $entityId;
-			$entity = self::getFromId( new EntityId( $type, $id ) );
+			$entity = $this->getFromId( new EntityId( $type, $id ) );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;
@@ -110,7 +128,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @return EntityContent|null
 	 */
-	public function getFromId( EntityId $id, $audience = Revision::FOR_PUBLIC ) {
+	private function getFromId( EntityId $id, $audience = Revision::FOR_PUBLIC ) {
 		// TODO: since we already did the trouble of getting a WikiPage here,
 		// we probably want to keep a copy of it in the Content object.
 		$title = $this->getTitleForId( $id );
@@ -205,31 +223,6 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		$handler = \ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
 
 		return $handler->newContentFromEntity( $entity );
-	}
-
-	/**
-	 * Constructs a new EntityContent from a given type.
-	 *
-	 * @since 0.4
-	 *
-	 * @param string $type
-	 *
-	 * @return EntityContent
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function newFromType( $type ) {
-		if ( !is_string( $type ) ) {
-			throw new InvalidArgumentException( '$type needs to be a string' );
-		}
-
-		if ( $type === Item::ENTITY_TYPE ) {
-			return ItemContent::newEmpty();
-		} elseif ( $type === Property::ENTITY_TYPE ) {
-			return PropertyContent::newEmpty();
-		} else {
-			throw new InvalidArgumentException( 'unknown entity type $type' );
-		}
 	}
 
 	/**
