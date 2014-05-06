@@ -16,6 +16,24 @@
       "revId": "1ed7394c7acac435eb2079c00c685a16dcc80c33",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0f9debb3",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T11:44:19Z",
+      "side": 0,
+      "message": "$contentRetriever-\u003egetContentForRequest already does the exact same thing (calls Article::getRevisionFetched). Also such smallish hacks should always have a comment on them.",
+      "parentUuid": "8e23439c_14d062f9",
+      "revId": "1ed7394c7acac435eb2079c00c685a16dcc80c33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

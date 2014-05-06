@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_cf5c9320",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T11:44:19Z",
+      "side": 1,
+      "message": "Yes, relying on toString is a bad habit",
+      "parentUuid": "8e23439c_5447fa7b",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d4a78aa2",
         "filename": "repo/includes/EntityViewPlaceholderExpander.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2014-05-06T10:05:20Z",
       "side": 1,
       "message": "This is not true any more.",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2f6c27ca",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T11:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_d4a78aa2",
       "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_0f672be7",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T11:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_b4a2ce90",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_14c9825d",
         "filename": "repo/includes/EntityViewPlaceholderExpander.php",
         "patchSetId": 2
@@ -82,6 +136,24 @@
       "writtenOn": "2014-05-06T10:05:20Z",
       "side": 1,
       "message": "Isn\u0027t a default \"$entityRevision \u003d null\" missing here?",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4fa883d7",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T11:44:19Z",
+      "side": 1,
+      "message": "Not missing (as the only caller will always pass both parameters), but also doesn\u0027t hurt. Done",
+      "parentUuid": "8e23439c_14c9825d",
       "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_afb6f736",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T11:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_b4b9aec2",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d4d54aea",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 2
@@ -116,6 +206,24 @@
       "writtenOn": "2014-05-06T10:05:20Z",
       "side": 1,
       "message": "Personally I find the way this if() is constructed a bit weird. Suggestion:\n\nif ( intval( $revId ) \u003e 0 ) {\n} else {\n}\n\nNo Exception needed.",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_af8dd780",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T11:44:19Z",
+      "side": 1,
+      "message": "I prefer to keep it the way it is, silently mangling everything into int seems a little wrong to me (although PHP is fine with that...)",
+      "parentUuid": "8e23439c_d4d54aea",
       "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
