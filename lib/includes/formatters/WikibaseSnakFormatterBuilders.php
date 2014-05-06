@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use DataTypes\DataTypeFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
@@ -28,16 +29,24 @@ class WikibaseSnakFormatterBuilders {
 	protected $propertyDataTypeLookup;
 
 	/**
+	 * @var DataTypeFactory
+	 */
+	protected $dataTypeFactory;
+
+	/**
 	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
 			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter'
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param DataTypeFactory $dataTypeFactory
 	 */
 	public function __construct(
 		WikibaseValueFormatterBuilders $valueFormatterBuilders,
-		PropertyDataTypeLookup $propertyDataTypeLookup
+		PropertyDataTypeLookup $propertyDataTypeLookup,
+		DataTypeFactory $dataTypeFactory
 	) {
 		$this->valueFormatterBuilders = $valueFormatterBuilders;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->dataTypeFactory = $dataTypeFactory;
 	}
 
 	/**
@@ -76,12 +85,18 @@ class WikibaseSnakFormatterBuilders {
 
 		$factory = new OutputFormatValueFormatterFactory( $this->valueFormatterBuilders->getValueFormatterBuildersForFormats() );
 		$valueFormatter = $this->valueFormatterBuilders->buildDispatchingValueFormatter( $factory, $format, $options );
-		$valueSnakFormatter = new PropertyValueSnakFormatter( $format, $valueFormatter, $this->propertyDataTypeLookup );
+
+		$valueSnakFormatter = new PropertyValueSnakFormatter(
+			$format,
+			$valueFormatter,
+			$this->propertyDataTypeLookup,
+			$this->dataTypeFactory
+		);
 
 		$formatters = array(
 			'novalue' => $noValueSnakFormatter,
 			'somevalue' => $someValueSnakFormatter,
-			'value' => $valueSnakFormatter,
+			'value' => $valueSnakFormatter
 		);
 
 		return new DispatchingSnakFormatter( $format, $formatters );

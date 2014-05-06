@@ -24,6 +24,7 @@ use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
+use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -169,7 +170,8 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			$entityInfoBuilder,
 			$entityTitleLookup,
 			$options,
-			$configBuilder
+			$configBuilder,
+			$this->getExceptionLocalizer()
 		);
 
 		return $entityView;
@@ -178,13 +180,13 @@ abstract class EntityViewTest extends MediaWikiTestCase {
     private function getSerializationOptions( $langCode, $langCodes,
 		LanguageFallbackChain $fallbackChain
 	 ) {
-        $langCodes = $langCodes + array( $langCode => $fallbackChain );
+		$langCodes = $langCodes + array( $langCode => $fallbackChain );
 
-        $options = new SerializationOptions();
-        $options->setLanguages( $langCodes );
+		$options = new SerializationOptions();
+		$options->setLanguages( $langCodes );
 
-        return $options;
-    }
+		return $options;
+	}
 
 	protected function getMockRepo() {
 		if ( !isset( self::$mockRepo ) ) {
@@ -204,6 +206,19 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 		}
 
 		return self::$mockRepo;
+	}
+
+	/**
+	 * @return ExceptionLocalizer
+	 */
+	protected function getExceptionLocalizer() {
+		$messageParamFormatter = $this->getMockBuilder( 'Wikibase\i18n\MessageParameterFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$exceptionLocalizer = new WikibaseExceptionLocalizer( $messageParamFormatter );
+
+		return $exceptionLocalizer;
 	}
 
 	/**

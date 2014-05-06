@@ -108,7 +108,11 @@ class WikibaseLuaEntityBindings {
 		$strings = array();
 
 		foreach ( $snaks as $snak ) {
-			$strings[] = $this->snakFormatter->formatSnak( $snak );
+			try {
+				$strings[] = $this->snakFormatter->formatSnak( $snak );
+			} catch ( \Exception $ex ) {
+				// todo
+			}
 		}
 
 		return $strings;

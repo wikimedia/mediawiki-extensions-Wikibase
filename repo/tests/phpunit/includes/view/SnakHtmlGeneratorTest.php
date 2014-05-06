@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityTitleLookup;
+use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -34,7 +35,8 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			$this->getExceptionLocalizer()
 		);
 
 		$html = $snakHtmlGenerator->getSnakHtml( $snak, $entityInfo );
@@ -121,6 +123,19 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
 
 		return $lookup;
+	}
+
+	/**
+	 * @return ExceptionLocalizer
+	 */
+	protected function getExceptionLocalizer() {
+		$messageParamFormatter = $this->getMockBuilder( 'Wikibase\i18n\MessageParameterFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$exceptionLocalizer = new WikibaseExceptionLocalizer( $messageParamFormatter );
+
+		return $exceptionLocalizer;
 	}
 
 }

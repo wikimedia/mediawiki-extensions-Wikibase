@@ -46,10 +46,10 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			return;
 		}
 
-		$property = $this->createTestProperty();
+		$stringProperty = $this->createTestProperty( 'string' );
 
 		$snak = $this->getTestSnak(
-			$property->getId(),
+			$stringProperty->getId(),
 			new StringValue( 'Lua :)' )
 		);
 
@@ -57,9 +57,10 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 		$statement1->setRank( Claim::RANK_PREFERRED );
 
 		$snak = $this->getTestSnak(
-			$property->getId(),
+			$stringProperty->getId(),
 			new StringValue( 'This is clearly superior to the parser function' )
 		);
+
 		$statement2 = $this->getTestStatement( $snak );
 		$statement2->setRank( Claim::RANK_NORMAL );
 
@@ -80,9 +81,9 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	/**
 	 * @return Property
 	 */
-	protected function createTestProperty() {
+	protected function createTestProperty( $dataTypeId ) {
 		$property = Property::newEmpty();
-		$property->setDataTypeId( 'wikibase-item' );
+		$property->setDataTypeId( $dataTypeId );
 		$property->setLabel( 'de', 'LuaTestProperty' );
 
 		$this->mockRepository->putEntity( $property );
