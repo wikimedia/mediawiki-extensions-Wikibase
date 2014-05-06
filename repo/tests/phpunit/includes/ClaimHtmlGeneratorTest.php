@@ -8,6 +8,7 @@ use Wikibase\Claim;
 use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityTitleLookup;
+use Wikibase\i18n\WikibaseExceptionLocalizer;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
@@ -80,7 +81,8 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$entityTitleLookup,
+			$this->getExceptionLocalizer()
 		);
 
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
@@ -144,6 +146,19 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $testCases;
+	}
+
+	/**
+	 * @return ExceptionLocalizer
+	 */
+	protected function getExceptionLocalizer() {
+		$messageParamFormatter = $this->getMockBuilder( 'Wikibase\i18n\MessageParameterFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$exceptionLocalizer = new WikibaseExceptionLocalizer( $messageParamFormatter );
+
+		return $exceptionLocalizer;
 	}
 
 }

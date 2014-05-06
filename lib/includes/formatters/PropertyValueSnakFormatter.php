@@ -1,7 +1,10 @@
 <?php
 namespace Wikibase\Lib;
+
 use DataValues\DataValue;
+use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
 
@@ -30,14 +33,22 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	private $typeLookup;
 
 	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
+	/**
 	 * @param string $format The name of this formatter's output format.
-	 *        Use the FORMAT_XXX constants defined in OutputFormatSnakFormatterFactory.
+	 *		Use the FORMAT_XXX constants defined in OutputFormatSnakFormatterFactory.
 	 * @param DispatchingValueFormatter $valueFormatter
 	 * @param PropertyDataTypeLookup $typeLookup
+	 * @param DataTypeFactory $dataTypeFactory
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $format, DispatchingValueFormatter $valueFormatter, PropertyDataTypeLookup $typeLookup) {
+	public function __construct( $format, DispatchingValueFormatter $valueFormatter,
+		PropertyDataTypeLookup $typeLookup, DataTypeFactory $dataTypeFactory
+	) {
 		if ( !is_string( $format ) ) {
 			throw new InvalidArgumentException( '$format must be a string' );
 		}
@@ -45,6 +56,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		$this->format = $format;
 		$this->valueFormatter = $valueFormatter;
 		$this->typeLookup = $typeLookup;
+		$this->dataTypeFactory = $dataTypeFactory;
 	}
 
 	/**
@@ -54,6 +66,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @param Snak $snak
 	 *
 	 * @throws \InvalidArgumentException
+	 * @throws MismatchingDataValueTypeException
 	 * @return string
 	 */
 	public function formatSnak( Snak $snak ) {
@@ -61,17 +74,51 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 			throw new InvalidArgumentException( "Not a PropertyValueSnak: " . get_class( $snak ) );
 		}
 
+		$propertyType = $this->getPropertyType( $snak );
+		$dataValue = $snak->getDataValue();
+
+		if ( $propertyType !== null ) {
+			$this->checkDataValueTypeMismatch( $dataValue, $propertyType );
+		}
+
+		$text = $this->formatValue( $dataValue, $propertyType );
+		return $text;
+	}
+
+	/**
+	 * @param DataValue $dataValue
+	 * @param string $propertyType
+	 *
+	 * @throws MismatchingDataValueTypeException
+	 */
+	private function checkDataValueTypeMismatch( $dataValue, $propertyType ) {
+		$dataType = $this->dataTypeFactory->getType( $propertyType );
+		$dataTypeValueType = $dataType->getDataValueType();
+		$dataValueType = $dataValue->getType();
+
+		if ( $dataTypeValueType !== $dataValueType ) {
+			throw new MismatchingDataValueTypeException( $dataValueType, $dataTypeValueType );
+		}
+	}
+
+	/**
+	 * @param Snak $snak
+	 *
+	 * @return string|null
+	 */
+	private function getPropertyType( Snak $snak ) {
 		try {
-			/* @var PropertyValueSnak $snak */
-			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+			$propertyId = $snak->getPropertyId();
+			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $propertyId );
 		} catch ( PropertyNotFoundException $ex ) {
-			// If the property has been removed, we should still be able to render the snak value, so don't fail here.
-			wfDebugLog( __CLASS__, __FUNCTION__ . ': Can\'t look up data type for property ' . $snak->getPropertyId()->getPrefixedId() );
+			// If the property has been removed, we should still be able to render the snak
+			// value, so don't fail here.
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Can\'t look up data type for property '
+				. $snak->getPropertyId()->getPrefixedId() );
 			$propertyType = null;
 		}
 
-		$text = $this->formatValue( $snak->getDataValue(), $propertyType );
-		return $text;
+		return $propertyType;
 	}
 
 	/**
@@ -82,7 +129,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @see TypedValueFormatter::formatValue.
 	 *
 	 * @param DataValue $value
-	 * @param string    $dataTypeId
+	 * @param string $dataTypeId
 	 *
 	 * @throws FormattingException
 	 * @return string

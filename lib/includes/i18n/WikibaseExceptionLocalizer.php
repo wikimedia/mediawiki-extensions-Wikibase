@@ -8,6 +8,7 @@ use MessageException;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
@@ -18,7 +19,7 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * based on a dispatcher can be implemented later if needed.
  *
  * @todo: Extend the interface to allow multiple messages to be returned, for use
- *        with chained exceptions, multiple validation errors, etc.
+ *		with chained exceptions, multiple validation errors, etc.
  *
  * @license GPL 2+
  * @author Daniel Kinzler
@@ -31,11 +32,17 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 	protected $validatorErrorLocalizer;
 
 	/**
-	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters
-	 *        as wikitext. Typically some kind of dispatcher.
+	 * var string
 	 */
-	public function __construct( ValueFormatter $paramFormatter ) {
+	protected $format;
+
+	/**
+	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters
+	 *		as wikitext. Typically some kind of dispatcher.
+	 */
+	public function __construct( ValueFormatter $paramFormatter, $format = 'plain' ) {
 		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer( $paramFormatter );
+		$this->format = $format;
 	}
 
 	/**
@@ -52,9 +59,27 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 			return $this->getParseExceptionMessage( $ex );
 		} elseif ( $ex instanceof ChangeOpValidationException ) {
 			return $this->getChangeOpValidationExceptionMessage( $ex );
+		} elseif ( $ex instanceof PropertyNotFoundException ) {
+			return $this->getPropertyNotFoundExceptionExceptionMessage( $ex );
+		} elseif ( $ex instanceof Wikibase\Lib\FormattingException ) {
+			return $this->getFormattingExceptionMessage( $ex );
 		} else {
 			return $this->getGenericExceptionMessage( $ex );
 		}
+	}
+
+	/**
+	 * @return Message
+	 */
+	private function getFormattingExceptionMessage() {
+		return wfMessage( 'wikibase-error-formatting' );
+	}
+
+	/**
+	 * @return Message
+	 */
+	private function getPropertyNotFoundExceptionMessage() {
+		return wfMessage( 'wikibase-error-propertynotfound' );
 	}
 
 	/**
@@ -136,7 +161,7 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 	 * @param Exception $ex
 	 *
 	 * @return bool Always true, since WikibaseExceptionLocalizer is able to provide
-	 *         a Message for any kind of exception.
+	 *		 a Message for any kind of exception.
 	 */
 	public function hasExceptionMessage( Exception $ex ) {
 		return true;

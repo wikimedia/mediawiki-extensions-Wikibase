@@ -3,10 +3,13 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityTitleLookup;
+use Wikibase\i18n\ExceptionLocalizer;
 use Wikibase\Lib\FormattingException;
 use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\Lib\MismatchingSnakValueFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -36,15 +39,23 @@ class SnakHtmlGenerator {
 	protected $entityTitleLookup;
 
 	/**
+	 * @var ExceptionLocalizer
+	 */
+	protected $exceptionLocalizer;
+
+	/**
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param ExceptionLocalizer $exceptionLoc
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		ExceptionLocalizer $exceptionLocalizer
 	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->exceptionLocalizer = $exceptionLocalizer;
 	}
 
 	/**
@@ -60,7 +71,17 @@ class SnakHtmlGenerator {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
-		$formattedValue = $this->getFormattedSnakValue( $snak );
+		try {
+			$formattedValue = $this->snakFormatter->formatSnak( $snak );
+		} catch ( \Exception $ex ) {
+			if ( $ex instanceof MismatchingDataValueTypeException ) {
+				$snakViewCssClass .= '-datavaluetypemismatch';
+				$formattedValue = $this->formatDataValueMismatchError( $ex );
+			} else {
+				$snakViewCssClass .= '-formaterror';
+				$formattedValue = $this->formatExceptionError( $ex );
+			}
+		}
 
 		if ( $formattedValue === '' ) {
 			$formattedValue = '&nbsp;';
@@ -113,38 +134,29 @@ class SnakHtmlGenerator {
 	}
 
 	/**
-	 * @fixme handle errors more consistently as done in JS UI, and perhaps add
-	 * localised exception messages.
+	 * @param MismatchingDataValueTypeException $ex
 	 *
-	 * @param Snak $snak
 	 * @return string
 	 */
-	protected function getFormattedSnakValue( $snak ) {
-		try {
-			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
-			return $this->getInvalidSnakMessage();
-		} catch ( PropertyNotFoundException $ex ) {
-			return $this->getPropertyNotFoundMessage();
-		} catch ( InvalidArgumentException $ex ) {
-			return $this->getInvalidSnakMessage();
-		}
+	protected function formatDataValueMismatchError( MismatchingDataValueTypeException $ex ) {
+		$mismatchingSnakValueFormatter = new MismatchingSnakValueFormatter(
+				SnakFormatter::FORMAT_HTML
+			);
 
-		return $formattedSnak;
+		return $mismatchingSnakValueFormatter->format(
+			$ex->getExpectedValueType(),
+			$ex->getDataValueType()
+		);
 	}
 
 	/**
+	 * @param \Exception $ex
+	 *
 	 * @return string
 	 */
-	private function getInvalidSnakMessage() {
-		return wfMessage( 'wikibase-snakformat-invalid-value' )->parse();
-	}
-
-	/**
-	 * @return string
-	 */
-	private function getPropertyNotFoundMessage() {
-		return wfMessage ( 'wikibase-snakformat-propertynotfound' )->parse();
+	protected function formatExceptionError( \Exception $ex ) {
+		$message = $this->exceptionLocalizer->getMessage( $ex );
+		return $message->parse();
 	}
 
 }

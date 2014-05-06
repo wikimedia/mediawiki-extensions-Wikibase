@@ -446,7 +446,8 @@ class WikibaseRepo {
 	protected function newSnakFormatterFactory() {
 		$builders = new WikibaseSnakFormatterBuilders(
 			$this->getValueFormatterBuilders(),
-			$this->getPropertyDataTypeLookup()
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory()
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
@@ -516,7 +517,8 @@ class WikibaseRepo {
 
 		$snakFormatterBuilders = new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
-			$this->getPropertyDataTypeLookup()
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory()
 		);
 
 		$valueFormatterBuilders->setValueFormatter(
