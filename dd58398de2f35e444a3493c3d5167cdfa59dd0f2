@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_5447fa7b",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T10:38:29Z",
+      "side": 1,
+      "message": "I think __toString actually contains the class name, too. We generally try to avoid \"magic\" __toString.",
+      "parentUuid": "8e23439c_f49cc660",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d4a78aa2",
         "filename": "repo/includes/EntityViewPlaceholderExpander.php",
         "patchSetId": 2
