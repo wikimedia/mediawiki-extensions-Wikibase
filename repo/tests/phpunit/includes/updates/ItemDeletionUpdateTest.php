@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use TestSites;
 use Wikibase\ItemContent;
 use Wikibase\ItemDeletionUpdate;
 use Wikibase\Repo\WikibaseRepo;
@@ -22,6 +23,12 @@ use Wikibase\StoreFactory;
  */
 class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 	//@todo: make this a baseclass to use with all types of entities.
+
+	public function setUp() {
+		parent::setUp();
+
+		TestSites::insertIntoDb();
+	}
 
 	public function testConstruct() {
 		$update = new ItemDeletionUpdate( ItemContent::newEmpty() );
