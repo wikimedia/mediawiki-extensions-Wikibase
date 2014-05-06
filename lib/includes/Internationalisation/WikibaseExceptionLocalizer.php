@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\i18n;
+namespace Wikibase\Internationalisation;
 
 use Exception;
 use Message;
