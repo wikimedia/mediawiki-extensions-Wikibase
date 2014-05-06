@@ -188,14 +188,15 @@ class EntityPerPageBuilder {
 				continue;
 			}
 
-			$entityContent = $this->entityContentFactory->getFromId( $entityId, \Revision::RAW );
+			$entityTitle = $this->entityContentFactory->getTitleForId( $entityId );
 
-			if ( $this->rebuildAll === true ) {
-				$this->entityPerPageTable->deleteEntityPage( $entityId, $entityContent->getTitle()->getArticleID() );
-			}
+			if ( $entityTitle !== null && $entityTitle->exists() ) {
 
-			if ( $entityContent !== null ) {
-				$this->entityPerPageTable->addEntityPage( $entityId, $entityContent->getTitle()->getArticleID() );
+				if ( $this->rebuildAll === true ) {
+					$this->entityPerPageTable->deleteEntity( $entityId );
+				}
+
+				$this->entityPerPageTable->addEntityPage( $entityId, $entityTitle->getArticleID() );
 			} else {
 				$this->entityPerPageTable->deleteEntity( $entityId );
 			}

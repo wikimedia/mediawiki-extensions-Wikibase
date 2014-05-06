@@ -2,12 +2,10 @@
 
 namespace Wikibase\Test;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\EntityContentFactory
@@ -78,54 +76,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$ns = $factory->getNamespaceForType( $id->getEntityType() );
 
 		$this->assertGreaterThanOrEqual( 0, $ns, 'namespace' );
-	}
-
-	public function testGetWikiPageForId() {
-		$entityId = new ItemId( 'q42' );
-
-		$factory = $this->newFactory();
-
-		$expectedTitle = $factory->getTitleForId( $entityId );
-
-		$wikiPage = $factory->getWikiPageForId( $entityId );
-
-		$this->assertEquals( $expectedTitle, $wikiPage->getTitle() );
-	}
-
-	public function entityTypesProvider() {
-		$argLists = array();
-
-		$argLists[] = array( Item::ENTITY_TYPE );
-		$argLists[] = array( Property::ENTITY_TYPE );
-
-		return $argLists;
-	}
-
-	public function invalidEntityTypesProvider() {
-		$argLists = array();
-
-		$argLists[] = array( 42 );
-		$argLists[] = array( 'foo' );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider entityTypesProvider
-	 */
-	public function testNewFromType( $type ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->newFromType( $type );
-		$this->assertEquals( $type, $entityContent->getEntity()->getType() );
-	}
-
-	/**
-	 * @dataProvider invalidEntityTypesProvider
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testInvalidNewFromType( $type ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->newFromType( $type );
 	}
 
 	public function provideGetPermissionStatusForEntity() {

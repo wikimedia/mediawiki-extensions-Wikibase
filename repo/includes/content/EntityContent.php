@@ -85,6 +85,12 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
+	 * @since 0.5
+	 * @var Title|bool
+	 */
+	protected $title = false;
+
+	/**
 	 * @since 0.1
 	 * @var WikiPage|bool
 	 */
@@ -100,9 +106,11 @@ abstract class EntityContent extends AbstractContent {
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
 			if ( !$this->isNew() ) {
-				$this->wikiPage = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId(
+				$title = $this->wikiPage = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId(
 					$this->getEntity()->getId()
 				);
+
+				$this->wikiPage = new WikiPage( $title );
 			}
 		}
 
@@ -110,15 +118,20 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Returns the Title for the item or false if there is none.
+	 * Returns the Title for the item
 	 *
 	 * @since 0.1
 	 *
 	 * @return Title|bool
 	 */
 	public function getTitle() {
-		$wikiPage = $this->getWikiPage();
-		return $wikiPage === false ? false : $wikiPage->getTitle();
+		if ( $this->title === false ) {
+			$this->title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId(
+				$this->getEntity()->getId()
+			);
+		}
+
+		return $this->title;
 	}
 
 	/**

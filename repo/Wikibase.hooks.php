@@ -349,16 +349,16 @@ final class RepoHooks {
 		}
 
 		$revId = $title->getLatestRevID();
-		$content = $entityContentFactory->getFromRevision( $revId );
+		$content = $entityContentFactory->getContentFromRevision( $revId ); ...FIXME...
 
 		if ( $content ) {
+			$entity = $content->getEntity();
+
 			//XXX: EntityContent::save() also does this. Why are we doing this twice?
 			StoreFactory::getStore()->newEntityPerPage()->addEntityPage(
-				$content->getEntity()->getId(),
+				$entity->getId(),
 				$title->getArticleID()
 			);
-
-			$entity = $content->getEntity();
 
 			$rev = Revision::newFromId( $revId );
 

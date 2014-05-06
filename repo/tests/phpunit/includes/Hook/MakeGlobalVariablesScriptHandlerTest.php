@@ -109,7 +109,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$entityContentFactory->expects( $this->any() )
-			->method( 'getFromRevision' )
+			->method( 'getContentFromRevision' )
 			->will( $this->returnCallback( array( $this, 'getEntityContent' ) ) );
 
 		$entityContentFactory->expects( $this->any() )

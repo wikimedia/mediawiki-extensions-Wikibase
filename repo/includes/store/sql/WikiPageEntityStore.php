@@ -68,7 +68,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws PermissionsError
 	 */
 	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
-		$content = $this->contentFactory->newFromEntity( $entity );
+		$content = $this->contentFactory->newContentFromEntity( $entity );
 
 		//TODO: move the logic from EntityContent::save here!
 		$status = $content->save( $summary, $user, $flags, $baseRevId );

@@ -63,7 +63,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 			/* @var ItemHandler $itemHandler */
 			$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
+			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName ); ...FIXME...
 
 			$normalizeItemByTitlePageNames = WikibaseRepo::getDefaultInstance()->
 				getSettings()->getSetting( 'normalizeItemByTitlePageNames' );
@@ -74,7 +74,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
 					$pageName = $siteObj->normalizePageName( $page );
-					$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
+					$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName ); ...FIXME...
 				}
 			}
 

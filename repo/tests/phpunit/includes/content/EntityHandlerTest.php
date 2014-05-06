@@ -176,7 +176,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	protected function fakeRevision( Entity $entity, $id = 0 ) {
-		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
+		$content = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newContentFromEntity( $entity );
 
 		$revision = new Revision( array(
 			'id' => $id,
