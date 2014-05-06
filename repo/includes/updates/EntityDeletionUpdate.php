@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Title;
 
 /**
  * Deletion update to handle deletion of Wikibase entities.
@@ -17,7 +18,12 @@ class EntityDeletionUpdate extends \DataUpdate {
 	 *
 	 * @var EntityContent
 	 */
-	protected $content;
+	private $content;
+
+	/**
+	 * @var Title
+	 */
+	private $title;
 
 	/**
 	 * Constructor.
@@ -25,9 +31,11 @@ class EntityDeletionUpdate extends \DataUpdate {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $content
+	 * @param Title $title
 	 */
-	public function __construct( EntityContent $content ) {
+	public function __construct( EntityContent $content, Title $title ) {
 		$this->content = $content;
+		$this->title = $title;
 	}
 
 	/**
@@ -46,7 +54,7 @@ class EntityDeletionUpdate extends \DataUpdate {
 
 		$store->newEntityPerPage()->deleteEntityPage(
 			$entity->getId(),
-			$this->content->getTitle()->getArticleID()
+			$this->title->getArticleID()
 		);
 
 		/**

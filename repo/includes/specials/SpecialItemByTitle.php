@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase\Repo\Specials;
-use ContentHandler;
 use Html;
 use Site;
-use Wikibase\ItemHandler;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -61,9 +60,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				$siteId .= 'wiki';
 			}
 
-			/* @var ItemHandler $itemHandler */
-			$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
+			$itemContent = $this->getContentFromSiteLink( $siteId, $pageName );
 
 			$normalizeItemByTitlePageNames = WikibaseRepo::getDefaultInstance()->
 				getSettings()->getSetting( 'normalizeItemByTitlePageNames' );
@@ -74,7 +71,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
 					$pageName = $siteObj->normalizePageName( $page );
-					$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
+					$itemContent = $this->getContentFromSiteLink( $siteId, $pageName );
 				}
 			}
 
@@ -189,4 +186,40 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 	}
 
+	/**
+	 * Helper function for fetching an EntityContent object for a sitelink.
+	 * Preliminary, will be removed once we no longer need EntityContent objects here.
+	 *
+	 * @param $siteId
+	 * @param $pageName
+	 *
+	 * @return \Wikibase\EntityContent|null
+	 */
+	private function getContentFromSiteLink( $siteId, $pageName ) {
+		$id = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $pageName );
+
+		if ( !$id ) {
+			return null;
+		}
+
+		return $this->loadContent( $id );
+	}
+
+	/**
+	 * Helper function for fetching an EntityContent object.
+	 * Preliminary, will be removed once we no longer need EntityContent objects here.
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return \Wikibase\EntityContent|null
+	 */
+	private function loadContent( EntityId $id ) {
+		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $id );
+
+		if ( !$entity ) {
+			return null;
+		}
+
+		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
+	}
 }

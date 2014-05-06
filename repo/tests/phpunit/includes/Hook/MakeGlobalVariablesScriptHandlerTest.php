@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EntityContent;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\ItemContent;
 use Wikibase\LanguageFallbackChainFactory;

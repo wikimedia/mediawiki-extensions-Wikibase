@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * @covers Wikibase\ViewEntityAction
@@ -58,8 +59,8 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	public function testShow404() {
 		$id = new ItemId( 'q1122334455' );
-		$page = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId( $id );
-		$action = $this->createAction( "view", $page );
+		$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $id );
+		$action = $this->createAction( "view", new WikiPage( $title ) );
 
 		/* @var \FauxResponse $response */
 		$response = $action->getRequest()->response();

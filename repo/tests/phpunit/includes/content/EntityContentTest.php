@@ -174,26 +174,26 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		$this->assertTrue( $status->isGood(), 'create, status is good' );
 
 		// change
-		$prev_id = $entityContent->getWikiPage()->getLatest();
+		$prev_id = $entityContent->getTitle()->getLatestRevID();
 		$entityContent->getEntity()->setLabel( 'en', $prefix . "Second" );
 		$status = $entityContent->save( 'modify item', null, EDIT_UPDATE );
 		$this->assertTrue( $status->isOK(), 'change, status ok' );
 		$this->assertTrue( $status->isGood(), 'change, status good' );
-		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
+		$this->assertNotEquals( $prev_id, $entityContent->getTitle()->getLatestRevID(), "revision ID should change on edit" );
 
 		// change again
-		$prev_id = $entityContent->getWikiPage()->getLatest();
+		$prev_id = $entityContent->getTitle()->getLatestRevID();
 		$entityContent->getEntity()->setLabel( 'en', $prefix . "Third" );
 		$status = $entityContent->save( 'modify item again', null, EDIT_UPDATE );
 		$this->assertTrue( $status->isOK(), 'change again, status ok' );
 		$this->assertTrue( $status->isGood(), 'change again, status good' );
-		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
+		$this->assertNotEquals( $prev_id, $entityContent->getTitle()->getLatestRevID(), "revision ID should change on edit" );
 
 		// save unchanged
-		$prev_id = $entityContent->getWikiPage()->getLatest();
+		$prev_id = $entityContent->getTitle()->getLatestRevID();
 		$status = $entityContent->save( 'save unmodified', null, EDIT_UPDATE );
 		$this->assertTrue( $status->isOK(), 'save unchanged, save failed, status ok' );
-		$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
+		$this->assertEquals( $prev_id, $entityContent->getTitle()->getLatestRevID(), "revision ID should stay the same if no change was made" );
 	}
 
 	/**
