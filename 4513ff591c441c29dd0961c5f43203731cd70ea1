@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_550ff48c",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-06T17:30:05Z",
+      "side": 1,
+      "message": "intval( null )?\n\nDo we really need to accept null to begin with?",
+      "revId": "4513ff591c441c29dd0961c5f43203731cd70ea1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b51d28c3",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-06T17:30:05Z",
+      "side": 1,
+      "message": "Please extract this into its own method - then you also won\u0027t need those comments.",
+      "revId": "4513ff591c441c29dd0961c5f43203731cd70ea1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1574dcf9",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-06T17:30:05Z",
+      "side": 1,
+      "message": "You are indeed testing two different cases. You can avoid complexity by having two dedicated method for those. (And in those don\u0027t duplicate stuff if they have things that overlap, factor that out to additional methods)",
+      "revId": "4513ff591c441c29dd0961c5f43203731cd70ea1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
