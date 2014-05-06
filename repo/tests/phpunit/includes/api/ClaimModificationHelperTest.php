@@ -12,7 +12,7 @@ use Wikibase\Api\CreateClaim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\i18n\WikibaseExceptionLocalizer;
+use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

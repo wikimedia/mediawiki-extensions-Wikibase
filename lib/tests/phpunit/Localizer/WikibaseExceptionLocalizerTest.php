@@ -10,10 +10,10 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\i18n\WikibaseExceptionLocalizer;
+use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
 
 /**
- * @covers Wikibase\i18n\WikibaseExceptionLocalizer
+ * @covers Wikibase\Lib\Localizer\WikibaseExceptionLocalizer
  *
  * @group Wikibase
  * @group WikibaseLib
