@@ -3,17 +3,11 @@
 namespace Wikibase\Hook;
 
 use OutputPage;
-use Title;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityContent;
+use Revision;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityContentFactory;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\NamespaceUtils;
-use Wikibase\OutputPageJsConfigBuilder;
 use Wikibase\ParserOutputJsConfigBuilder;
-use Wikibase\Settings;
 
 /**
  * @since 0.5
@@ -93,7 +87,8 @@ class MakeGlobalVariablesScriptHandler {
 	 * @return array
 	 */
 	private function getParserConfigVars( $revisionId ) {
-		$entityContent = $this->entityContentFactory->getFromRevision( $revisionId );
+		$revision = Revision::newFromId( $revisionId );
+		$entityContent = $revision ? $revision->getContent() : null;
 
 		if ( $entityContent === null || ! $entityContent instanceof \Wikibase\EntityContent ) {
 			// entity or revision deleted, or non-entity content in entity namespace
@@ -101,18 +96,16 @@ class MakeGlobalVariablesScriptHandler {
 			return array();
 		}
 
-		return $this->buildParserConfigVars( $entityContent );
+		return $this->buildParserConfigVars( $entityContent->getEntity() );
 	}
 
 	/**
-	 * @param EntityContent $entityContent
+	 * @param Entity $entity
 	 *
 	 * @return array
 	 */
-	private function buildParserConfigVars( EntityContent $entityContent ) {
+	private function buildParserConfigVars( Entity $entity ) {
 		$options = $this->makeSerializationOptions();
-
-		$entity = $entityContent->getEntity();
 
 		$parserConfigVars = $this->parserOutputConfigBuilder->build(
 			$entity,

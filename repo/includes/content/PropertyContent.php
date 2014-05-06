@@ -138,7 +138,7 @@ class PropertyContent extends EntityContent {
 		return array_merge(
 			parent::getDeletionUpdates( $page, $parserOutput ),
 			array(
-				new EntityDeletionUpdate( $this ),
+				new EntityDeletionUpdate( $this, $page->getTitle() ),
 				new PropertyInfoDeletion( $this->getProperty()->getId(), $infoStore ),
 			)
 		);

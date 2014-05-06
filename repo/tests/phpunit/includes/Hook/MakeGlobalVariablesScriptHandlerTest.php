@@ -6,7 +6,7 @@ use DataValues\StringValue;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,7 +14,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\ItemContent;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
 
 /**
@@ -109,7 +108,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$entityContentFactory->expects( $this->any() )
-			->method( 'getFromRevision' )
+			->method( 'getContentFromRevision' )
 			->will( $this->returnCallback( array( $this, 'getEntityContent' ) ) );
 
 		$entityContentFactory->expects( $this->any() )
@@ -120,7 +119,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityContent
+	 * @return Entity
 	 */
 	public function getEntityContent() {
 		$item = Item::newFromArray( array() );
@@ -136,9 +135,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$item->addClaim( $claim );
 
-		$entityContent = new ItemContent( $item );
-
-		return $entityContent;
+		return $item;
 	}
 
 }

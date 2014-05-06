@@ -272,9 +272,10 @@ abstract class ModifyEntity extends ApiWikibase {
 	 * @param Entity $entity
 	 */
 	private function assignFreshId( Entity $entity ) {
-		//TODO: factor the ID generator out of EntityContent!
-		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
-		$entityContent->grabFreshId();
+		$idGenerator = WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator();
+		$contentType = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getEntityContentModel( $entity->getType() );
+		$id = $idGenerator->getNewId( $contentType );
+		$entity->setId( $id );
 	}
 
 	/**

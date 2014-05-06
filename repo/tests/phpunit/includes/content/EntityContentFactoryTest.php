@@ -92,42 +92,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedTitle, $wikiPage->getTitle() );
 	}
 
-	public function entityTypesProvider() {
-		$argLists = array();
-
-		$argLists[] = array( Item::ENTITY_TYPE );
-		$argLists[] = array( Property::ENTITY_TYPE );
-
-		return $argLists;
-	}
-
-	public function invalidEntityTypesProvider() {
-		$argLists = array();
-
-		$argLists[] = array( 42 );
-		$argLists[] = array( 'foo' );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider entityTypesProvider
-	 */
-	public function testNewFromType( $type ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->newFromType( $type );
-		$this->assertEquals( $type, $entityContent->getEntity()->getType() );
-	}
-
-	/**
-	 * @dataProvider invalidEntityTypesProvider
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testInvalidNewFromType( $type ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$entityContent = $entityContentFactory->newFromType( $type );
-	}
-
 	public function provideGetPermissionStatusForEntity() {
 		return array(
 			'read allowed for non-existing entity' => array(

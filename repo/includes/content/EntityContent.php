@@ -97,12 +97,11 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return WikiPage|bool
 	 */
-	public function getWikiPage() {
+	private function getWikiPage() {
 		if ( $this->wikiPage === false ) {
-			if ( !$this->isNew() ) {
-				$this->wikiPage = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getWikiPageForId(
-					$this->getEntity()->getId()
-				);
+			$title = $this->getTitle();
+			if ( $title ) {
+				$this->wikiPage = new WikiPage( $title );
 			}
 		}
 
@@ -114,11 +113,19 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @since 0.1
 	 *
+	 * @deprecated since 0.5, use EntityTitleLookup:.getTitleForId instead.
+	 *
 	 * @return Title|bool
 	 */
 	public function getTitle() {
-		$wikiPage = $this->getWikiPage();
-		return $wikiPage === false ? false : $wikiPage->getTitle();
+		$id = $this->getEntity()->getId();
+
+		if ( !$id ) {
+			return false;
+		}
+
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		return $lookup->getTitleForId( $id );
 	}
 
 	/**
