@@ -245,6 +245,24 @@
       "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_35fc786c",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-06T17:20:28Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll simplify this. Done",
+      "parentUuid": "8e23439c_8f2b3b2e",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
