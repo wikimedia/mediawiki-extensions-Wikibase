@@ -227,6 +227,24 @@
       "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8f2b3b2e",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T13:57:39Z",
+      "side": 1,
+      "message": "Revision::newFromId() actually does just that. If the Revision class is fine with using intval() on revision numbers, why should this code care about the validity of revision numbers more than the Revision class does?\n\nMy main concern is that this if() is hard to read. I expect it to do two things: If the new parameter contains a valid revision number (which is perfectly expressed with intval( $revId ) \u003e 0), then use it. Else fall back to the original behavior of the method.\n\nIf you really want to do a type check ( $revId !\u003d\u003d null \u0026\u0026 !is_int( $revId ) ) it should be above the rest of the code.",
+      "parentUuid": "8e23439c_af8dd780",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
