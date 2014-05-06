@@ -42,6 +42,8 @@ Other breaking changes:
 * Removed `Fingerprint::getAliases`
 * Removed `EntityId::newFromPrefixedId`
 * The constructor of `EntityId` is no longer public
+* `Claims::getDiff` no longer takes a second optional parameter
+* `Claims::getDiff` now throws an `UnexpectedValueException` rather than an `InvalidArgumentException`
 
 #### Additions
 
@@ -53,6 +55,7 @@ Other breaking changes:
 * Added `Item::getSiteLinkList`
 * Added `Item::setSiteLinkList`
 * Added `LegacyIdInterpreter`
+* Added `ClaimListDiffer`
 
 ## Version 0.7.4 (2014-04-24)
 
