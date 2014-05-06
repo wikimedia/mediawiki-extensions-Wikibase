@@ -120,9 +120,10 @@ class Property extends Entity {
 			return false;
 		}
 
-		/**
-		 * @var $that Property
-		 */
+		return $this->fieldsEqual( $that );
+	}
+
+	private function fieldsEqual( Property $that ) {
 		return ( $this->id === null && $that->id === null || $this->id->equals( $that->id ) )
 			&& $this->fingerprint->equals( $that->fingerprint )
 			&& $this->dataTypeId == $that->dataTypeId;
