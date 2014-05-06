@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_14d062f9",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T10:05:20Z",
+      "side": 0,
+      "message": "Are you sure you really want this to be removed? This was here to trigger the fetchContentObject() method once. Without this there may be nothing to display.",
+      "revId": "1ed7394c7acac435eb2079c00c685a16dcc80c33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

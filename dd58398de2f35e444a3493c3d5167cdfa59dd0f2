@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_f49cc660",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T10:05:20Z",
+      "side": 1,
+      "message": "Doesn\u0027t this happen automatically?",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d4a78aa2",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T10:05:20Z",
+      "side": 1,
+      "message": "This is not true any more.",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b4a2ce90",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T10:05:20Z",
+      "side": 1,
+      "message": "This is not true any more.",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_14c9825d",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T10:05:20Z",
+      "side": 1,
+      "message": "Isn\u0027t a default \"$entityRevision \u003d null\" missing here?",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b4b9aec2",
+        "filename": "repo/includes/EntityViewPlaceholderExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T10:05:20Z",
+      "side": 1,
+      "message": "I would not do this here. Move this line into the getEntity() method if it\u0027s not there. Or, even simpler, do intval( $entityRevision ). Done.",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d4d54aea",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-06T10:05:20Z",
+      "side": 1,
+      "message": "Personally I find the way this if() is constructed a bit weird. Suggestion:\n\nif ( intval( $revId ) \u003e 0 ) {\n} else {\n}\n\nNo Exception needed.",
+      "revId": "dd58398de2f35e444a3493c3d5167cdfa59dd0f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
