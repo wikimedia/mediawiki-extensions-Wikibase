@@ -84,6 +84,7 @@
 	"wikibase-validator-bad-entity-type": "Neočekávaný typ entity: $1",
 	"wikibase-validator-no-such-entity": "$1 nenalezeno",
 	"wikibase-validator-no-such-property": "Vlastnost $1 nenalezena",
+	"wikibase-validator-bad-value": "Datový obsah je poškozen: $1",
 	"wikibase-validator-bad-value-type": "Chybný typ hodnoty $1, očekáváno $2",
 	"wikibase-validator-bad-url": "URL má nesprávný tvar: $1",
 	"wikibase-validator-bad-url-scheme": "Nepodporovaný formát URL: $1",
