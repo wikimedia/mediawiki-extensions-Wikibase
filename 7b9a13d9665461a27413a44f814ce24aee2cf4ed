@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_f43a86be",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T07:27:57Z",
+      "side": 1,
+      "message": "\"validator\" is the kind of thing, \"constraints\" is the thing\u0027s purpose. Mentioning the kind (class) in the name is redundant, mentioning the purpose is more informative.",
+      "parentUuid": "8e23439c_c3e7d2d1",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_2c67a3b5",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 1
@@ -231,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_34559efc",
+        "filename": "repo/includes/Validators/CompositeEntityValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T07:27:57Z",
+      "side": 1,
+      "message": "Entity is a value object. If you require it as an argument, it has to be loaded. Lazy loading is one thing that can\u0027t really be done nicely with the Value/Service approach.\n\n\"validate entity, ignoring conflicts with the entities with the following ID\" is the intent; Now let\u0027s find a good name to convey this :)\n\nIt would be nice to pass a generic filter interface instead of an entity; That doesn\u0027t allow for doing the ignoring directly in an SQL query, but then - it complicates the query, and the benefit is very small (we can just skip a handful of item ids programmatically without any performance impact).\n\nI\u0027ll poke at that.",
+      "parentUuid": "8e23439c_03282adb",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_e3508e62",
         "filename": "repo/includes/Validators/SiteLinkUniquenessValidator.php",
         "patchSetId": 1
@@ -242,6 +278,24 @@
       "writtenOn": "2014-05-05T22:24:39Z",
       "side": 1,
       "message": "Strange wrap.",
+      "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b412ce56",
+        "filename": "repo/includes/Validators/SiteLinkUniquenessValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-06T07:27:57Z",
+      "side": 1,
+      "message": "Because the operator is on the new line? I find that a lot easier to read. Consider\n\n  bla bla bla bla bla\n      AND bla bla\n      AND bla bla bla bla bla\n\nvs\n\n  bla bla bla bla bla AND\n      bla bla AND\n      bla bla bla bla bla",
+      "parentUuid": "8e23439c_e3508e62",
       "revId": "7b9a13d9665461a27413a44f814ce24aee2cf4ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
