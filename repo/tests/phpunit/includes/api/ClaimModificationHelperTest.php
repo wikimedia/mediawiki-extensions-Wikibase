@@ -12,7 +12,7 @@ use Wikibase\Api\CreateClaim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Internationalisation\WikibaseExceptionLocalizer;
+use Wikibase\Repo\Internationalisation\WikibaseRepoExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -107,7 +107,7 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$errorReporter = new ApiErrorReporter(
 			$api,
-			new WikibaseExceptionLocalizer( $this->getMockFormatter() ),
+			new WikibaseRepoExceptionLocalizer( $this->getMockFormatter() ),
 			$api->getLanguage()
 		);
 

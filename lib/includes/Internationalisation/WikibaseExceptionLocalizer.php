@@ -5,10 +5,7 @@ namespace Wikibase\Lib\Internationalisation;
 use Exception;
 use Message;
 use MessageException;
-use ValueFormatters\ValueFormatter;
 use ValueParsers\ParseException;
-use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * ExceptionLocalizer implementing localization of some well known types of exceptions
@@ -26,19 +23,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
 class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 
 	/**
-	 * @var ValidatorErrorLocalizer
-	 */
-	protected $validatorErrorLocalizer;
-
-	/**
-	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters
-	 *        as wikitext. Typically some kind of dispatcher.
-	 */
-	public function __construct( ValueFormatter $paramFormatter ) {
-		$this->validatorErrorLocalizer = new ValidatorErrorLocalizer( $paramFormatter );
-	}
-
-	/**
 	 * @see ExceptionLocalizer::getExceptionMessage()
 	 *
 	 * @param Exception $ex
@@ -50,8 +34,6 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 			return $this->getMessageExceptionMessage( $ex );
 		} elseif ( $ex instanceof ParseException ) {
 			return $this->getParseExceptionMessage( $ex );
-		} elseif ( $ex instanceof ChangeOpValidationException ) {
-			return $this->getChangeOpValidationExceptionMessage( $ex );
 		} else {
 			return $this->getGenericExceptionMessage( $ex );
 		}
@@ -99,22 +81,6 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 		}
 
 		return $msg;
-	}
-
-	/**
-	 * @param ChangeOpValidationException $ex
-	 *
-	 * @return Message
-	 */
-	public function getChangeOpValidationExceptionMessage( ChangeOpValidationException $ex ) {
-		$result = $ex->getValidationResult();
-
-		foreach ( $result->getErrors() as $error ) {
-			$msg = $this->validatorErrorLocalizer->getErrorMessage( $error );
-			return $msg;
-		}
-
-		return wfMessage( 'wikibase-validator-invalid' );
 	}
 
 	/**
