@@ -207,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_eccab2a1",
+        "filename": "repo/includes/Validators/FingerprintValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T15:25:26Z",
+      "side": 1,
+      "message": "it\u0027s more mess and technical debt to sort later. think we are much better off to avoid that.",
+      "parentUuid": "8e23439c_f12ccdf3",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d127910b",
         "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
         "patchSetId": 15
