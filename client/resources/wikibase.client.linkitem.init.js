@@ -59,8 +59,7 @@
 			return;
 		}
 
-		// @note .wbc-editpage is deprecated
-		$( '.wbc-editpage, .wb-langlinks-add' ).eq( 0 )
+		$( '.wb-langlinks-edit, .wb-langlinks-add' ).eq( 0 )
 		.empty()
 		.append(
 			$( '<a>' )
