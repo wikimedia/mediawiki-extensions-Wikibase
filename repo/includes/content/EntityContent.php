@@ -462,30 +462,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Assigns a fresh ID to this entity.
-	 *
-	 * @throws MWException if this entity already has an ID assigned, or something goes wrong while
-	 *         generating a new ID.
-	 * @return int The new ID
-	 */
-	public function grabFreshId() {
-		if ( !$this->isNew() ) {
-			throw new MWException( "This entity already has an ID!" );
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		$idGenerator = StoreFactory::getStore()->newIdGenerator();
-
-		$id = $idGenerator->getNewId( $this->getContentHandler()->getModelID() );
-
-		$this->getEntity()->setId( $id );
-
-		wfProfileOut( __METHOD__ );
-		return $id;
-	}
-
-	/**
 	 * Saves this item.
 	 * If this item does not exist yet, it will be created (ie a new ID will be determined and a new
 	 * page in the data NS created).
@@ -526,7 +502,7 @@ abstract class EntityContent extends AbstractContent {
 
 		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
 			if ( $this->isNew() ) {
-				$this->grabFreshId();
+				// ok
 			} elseif ( $this->getTitle()->exists() ) {
 				wfProfileOut( __METHOD__ );
 				return Status::newFatal( 'edit-already-exists' );
