@@ -16,6 +16,24 @@
       "revId": "74918eefe2a9d1e5613ef550cf8bcc93eadac4b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4c0766cd",
+        "filename": "repo/includes/ChangeOp/ChangeOpQualifierRemove.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:37:27Z",
+      "side": 1,
+      "message": "The base class may decide to do something there at some point. For a \"chained\" method like this, it\u0027s best to *always* call the parent method, even if it\u0027S pointless at the moment. We shouldn\u0027t know or care. We just call it, and it can decide what to do.",
+      "parentUuid": "8e23439c_acc03a7f",
+      "revId": "74918eefe2a9d1e5613ef550cf8bcc93eadac4b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
