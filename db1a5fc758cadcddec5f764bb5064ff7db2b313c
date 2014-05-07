@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_6cc10258",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "Kept that from the old code. I don\u0027t care much either way.",
+      "parentUuid": "8e23439c_b1a1b5a0",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_718f9d2f",
         "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
         "patchSetId": 15
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_2cb78af3",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "Yea, it\u0027s pointless at the moment, but easy to forget if we add a constraint based on aliases.",
+      "parentUuid": "8e23439c_718f9d2f",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_718e7d2c",
         "filename": "repo/includes/ChangeOp/ChangeOpBase.php",
         "patchSetId": 15
@@ -64,6 +100,24 @@
       "writtenOn": "2014-05-07T15:18:03Z",
       "side": 1,
       "message": "Doesn\u0027t this need brackets? !( $var instanceof Class ) Or was this a Java-only requirement?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cccff680",
+        "filename": "repo/includes/ChangeOp/ChangeOpBase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "In Java yes, in PHP no. I guess it\u0027s prudent to use the brackets, but that requirement annoyed me in Java so much, I\u0027m happy that it works like this :)",
+      "parentUuid": "8e23439c_718e7d2c",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -98,6 +152,24 @@
       "writtenOn": "2014-05-07T15:18:03Z",
       "side": 1,
       "message": "More straightforward way with no exception:\n\nif ( $fingerprint-\u003egetDescriptions()-\u003ehasTermForLanguage( $this-\u003elanguage ) ) {\n} else {\n}",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6ca8e289",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "will do.",
+      "parentUuid": "8e23439c_d1c3113b",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -149,6 +221,24 @@
       "writtenOn": "2014-05-07T15:18:03Z",
       "side": 1,
       "message": "What\u0027s the meaning of the EntityId and the list of language codes here? Why is this needed to validate a Fingerprint?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cc96d64e",
+        "filename": "repo/includes/Validators/CompositeFingerprintValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "The are needed for optimizing the potentially expensive validation of global constraints. I\u0027ll add documentation.",
+      "parentUuid": "8e23439c_7119ddda",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -225,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_aca15aa0",
+        "filename": "repo/includes/Validators/FingerprintValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "I agree for ValueValidator itself, but not for Result and Error. These are not bound to ValueValidator or DataValue at all, and I don\u0027t see any reason they should be specific to these.",
+      "parentUuid": "8e23439c_eccab2a1",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_d127910b",
         "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
         "patchSetId": 15
@@ -236,6 +344,24 @@
       "writtenOn": "2014-05-07T15:18:03Z",
       "side": 1,
       "message": "Move this documentation fo the interface and use a simple @see here.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8c9c5e6e",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "will do.",
+      "parentUuid": "8e23439c_d127910b",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -270,6 +396,24 @@
       "writtenOn": "2014-05-07T15:18:03Z",
       "side": 1,
       "message": "Unfold please.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_6c8fc22f",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "bah :)",
+      "parentUuid": "8e23439c_518381d0",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -327,6 +471,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_2c854a0b",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpAliasesTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "yes, indeed",
+      "parentUuid": "8e23439c_b179b5f3",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_71679d4a",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpAliasesTest.php",
         "patchSetId": 15
@@ -338,6 +500,24 @@
       "writtenOn": "2014-05-07T15:18:03Z",
       "side": 1,
       "message": "Just wondering, is there a reason you don\u0027t like the @expectedException annotation?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4c91a648",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpAliasesTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "Because it\u0027s less explicit and less flexible. I tend to miss it when reading test cases. A matter of taste I guess.",
+      "parentUuid": "8e23439c_71679d4a",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -361,6 +541,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_0c972e3e",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpTestMockProvider.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "Yes, well. I wanted the method names to be consistent. I guess they should not contain \"Mock\" at all...",
+      "parentUuid": "8e23439c_d1555153",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_91da39e8",
         "filename": "repo/tests/phpunit/includes/LabelDescriptionDuplicateDetectorTest.php",
         "patchSetId": 15
@@ -372,6 +570,24 @@
       "writtenOn": "2014-05-07T15:18:03Z",
       "side": 1,
       "message": "The whole world in about 20 lines. ;-)",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cc9c9661",
+        "filename": "repo/tests/phpunit/includes/LabelDescriptionDuplicateDetectorTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T15:59:02Z",
+      "side": 1,
+      "message": "I guess I should rename this to \"universe\" to be precise :)\n\n\"a universe is a class that contains (as elements) all the entities one wishes to consider in a given situation\"\nhttps://en.wikipedia.org/wiki/Universe_%28mathematics%29",
+      "parentUuid": "8e23439c_91da39e8",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
