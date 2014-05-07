@@ -1,7 +1,33 @@
 <?php
 
+/*
+ * Welcome to the inside of Wikibase,              <>
+ * the software that powers                   /\        /\
+ * Wikidata and other                       <{  }>    <{  }>
+ * structured data websites.        <>   /\   \/   /\   \/   /\   <>
+ *                                     //  \\    //  \\    //  \\
+ * It is Free Software.              <{{    }}><{{    }}><{{    }}>
+ *                                /\   \\  //    \\  //    \\  //   /\
+ *                              <{  }>   ><        \/        ><   <{  }>
+ *                                \/   //  \\              //  \\   \/
+ *                            <>     <{{    }}>     +--------------------------+
+ *                                /\   \\  //       |                          |
+ *                              <{  }>   ><        /|  W  I  K  I  B  A  S  E  |
+ *                                \/   //  \\    // |                          |
+ * We are                            <{{    }}><{{  +--------------------------+
+ * looking for people                  \\  //    \\  //    \\  //
+ * like you to join us in           <>   \/   /\   \/   /\   \/   <>
+ * developing it further. Find              <{  }>    <{  }>
+ * out more at http://wikiba.se               \/        \/
+ * and join the open data revolution.              <>
+ */
+
 /**
  * Entry point for the WikibaseLib extension.
+ *
+ * @see README.md
+ * @see https://www.mediawiki.org/wiki/Extension:WikibaseLib
+ * @licence GNU GPL v2+
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
