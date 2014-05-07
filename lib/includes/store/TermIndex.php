@@ -21,7 +21,6 @@ interface TermIndex extends TermCombinationMatchFinder {
 	 *
 	 * @param string $label
 	 * @param string|null $languageCode
-	 * @param string|null $description
 	 * @param string|null $entityType
 	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
@@ -29,7 +28,7 @@ interface TermIndex extends TermCombinationMatchFinder {
 	 *
 	 * TODO: update to use Term and EntityId interfaces
 	 */
-	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false );
+	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null, $fuzzySearch = false );
 
 	/**
 	 * Saves the terms of the provided entity in the term cache.

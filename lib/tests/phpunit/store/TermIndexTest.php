@@ -60,27 +60,6 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $ids );
 		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 		$this->assertArrayEquals( array( $id1 ), $ids );
-
-		// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
-		if ( !defined( 'MW_PHPUNIT_TEST' )
-			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
-			|| get_class( $lookup ) !== 'Wikibase\TermSqlIndex' ) {
-
-			$ids = $lookup->getEntityIdsForLabel( 'foobar', 'en', 'foo bar baz' );
-			$this->assertInternalType( 'array', $ids );
-			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-			$this->assertArrayEquals( array( $id1 ), $ids );
-
-			$ids = $lookup->getEntityIdsForLabel( 'foobar', null, 'foo bar baz' );
-			$this->assertInternalType( 'array', $ids );
-			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-			$this->assertArrayEquals( array( $id1 ), $ids );
-
-			$ids = $lookup->getEntityIdsForLabel( 'foobar', 'nl', 'foo bar baz' );
-			$this->assertInternalType( 'array', $ids );
-			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
-			$this->assertArrayEquals( array(), $ids );
-		}
 	}
 
 	public function testTermExists() {

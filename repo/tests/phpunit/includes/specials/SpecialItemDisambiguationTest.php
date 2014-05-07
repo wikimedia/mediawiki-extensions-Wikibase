@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 
 /**
@@ -22,8 +25,35 @@ use Wikibase\Repo\Specials\SpecialItemDisambiguation;
  */
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockTitleLookup() {
+		$mock = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$mock->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback(
+				function ( EntityId $id ) {
+					return Title::makeTitle( NS_MAIN, $id->getSerialization() );
+				}
+			) );
+
+		return $mock;
+	}
+
 	protected function newSpecialPage() {
-		return new SpecialItemDisambiguation();
+		$terms = array();
+
+		$repo = new MockRepository();
+		$page = new SpecialItemDisambiguation();
+
+		$page->initServices(
+			$this->getMockTermIndex(),
+			$repo,
+			$this->getMockTitleLookup()
+		);
+
+		return $page;
 	}
 
 	public function testExecute() {
