@@ -8,8 +8,8 @@ use OutOfBoundsException;
 use Status;
 use Title;
 use User;
-use WikiPage;
 use Revision;
+use WikiPage;
 
 /**
  * Factory for EntityContent objects.
@@ -99,6 +99,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.2
 	 *
+	 * @deprecated use EntityLookup instead.
+	 *
 	 * @param EntityId $id
 	 *
 	 * @param integer $audience: one of:
@@ -111,7 +113,9 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	public function getFromId( EntityId $id, $audience = Revision::FOR_PUBLIC ) {
 		// TODO: since we already did the trouble of getting a WikiPage here,
 		// we probably want to keep a copy of it in the Content object.
-		return $this->getWikiPageForId( $id )->getContent( $audience );
+		$title = $this->getTitleForId( $id );
+		$page = new WikiPage( $title );
+		return $page->getContent( $audience );
 	}
 
 	/**
@@ -162,19 +166,6 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		}
 
 		return $this->typeMap[$type];
-	}
-
-	/**
-	 * Returns the WikiPage object for the item with provided id.
-	 *
-	 * @since 0.3
-	 *
-	 * @param EntityId
-	 *
-	 * @return WikiPage
-	 */
-	public function getWikiPageForId( EntityId $id ) {
-		return new WikiPage( $this->getTitleForId( $id ) );
 	}
 
 	/**

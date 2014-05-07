@@ -80,18 +80,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertGreaterThanOrEqual( 0, $ns, 'namespace' );
 	}
 
-	public function testGetWikiPageForId() {
-		$entityId = new ItemId( 'q42' );
-
-		$factory = $this->newFactory();
-
-		$expectedTitle = $factory->getTitleForId( $entityId );
-
-		$wikiPage = $factory->getWikiPageForId( $entityId );
-
-		$this->assertEquals( $expectedTitle, $wikiPage->getTitle() );
-	}
-
 	public function entityTypesProvider() {
 		$argLists = array();
 
