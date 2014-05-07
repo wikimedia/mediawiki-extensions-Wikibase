@@ -4,9 +4,16 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Language;
-use Wikibase\Item;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityLookup;
+use Wikibase\EntityTitleLookup;
 use Wikibase\ItemDisambiguation;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\TermIndex;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -16,8 +23,29 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SpecialItemDisambiguation extends SpecialItemResolver {
+
+	/**
+	 * @var TermIndex
+	 */
+	private $termIndex;
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $entityTitleLookup;
+
+	/**
+	 * @var int
+	 */
+	private $limit;
 
 	/**
 	 * Constructor.
@@ -29,6 +57,33 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	public function __construct() {
 		// args $name, $restriction, $listed
 		parent::__construct( 'ItemDisambiguation', '', true );
+
+		$this->initServices(
+			WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex(),
+			WikibaseRepo::getDefaultInstance()->getEntityLookup(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+		);
+
+		//@todo: make this configurable
+		$this->limit = 100;
+	}
+
+	/**
+	 * Set service objects to use. Unit tests may call this to substitute mock
+	 * services.
+	 *
+	 * @param TermIndex $termIndex
+	 * @param EntityLookup $entityLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 */
+	public function initServices(
+		TermIndex $termIndex,
+		EntityLookup $entityLookup,
+		EntityTitleLookup $entityTitleLookup
+	) {
+		$this->termIndex = $termIndex;
+		$this->entityLookup = $entityLookup;
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -61,37 +116,17 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 
 		// Display the result set
 		if ( isset( $language ) && isset( $label ) && $label !== '' ) {
-			// TODO: should search over aliases as well, not just labels
-			$itemContents = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromLabel(
+			$items = $this->findLabelUsage(
 				$language,
-				$label,
-				null,
-				Item::ENTITY_TYPE,
-				true
+				$label
 			);
 
-			if ( 0 < count( $itemContents ) ) {
+			//@todo: show a message if count( $items ) > $this->limit.
+			if ( 0 < count( $items ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
-				$this->displayDisambiguationPage( $itemContents, $language );
+				$this->displayDisambiguationPage( $items, $language );
 			} else {
-				// No results found
-				if ( ( Language::isValidBuiltInCode( $language ) && ( Language::fetchLanguageName( $language ) !== "" ) ) ) {
-					// No valid language code
-					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
-
-					if ( $language === $this->getLanguage()->getCode() ) {
-						$this->getOutput()->addWikiMsg(
-							'wikibase-itemdisambiguation-search',
-							urlencode( $label )
-						);
-						$this->getOutput()->addWikiMsg(
-							'wikibase-itemdisambiguation-create',
-							urlencode( $label )
-						);
-					}
-				} else {
-					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-invalid-langcode' );
-				}
+				$this->showNothingFound( $language, $label );
 			}
 		}
 
@@ -99,16 +134,59 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	}
 
 	/**
+	 * Shows information, assuming no results were found.
+	 *
+	 * @param $language
+	 * @param $label
+	 */
+	private function showNothingFound( $language, $label ) {
+		// No results found
+		if ( ( Language::isValidBuiltInCode( $language ) && ( Language::fetchLanguageName( $language ) !== "" ) ) ) {
+			$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
+
+			if ( $language === $this->getLanguage()->getCode() ) {
+				$this->getOutput()->addWikiMsg(
+					'wikibase-itemdisambiguation-search',
+					urlencode( $label )
+				);
+				$this->getOutput()->addWikiMsg(
+					'wikibase-itemdisambiguation-create',
+					urlencode( $label )
+				);
+			}
+		} else {
+			// No valid language code
+			$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-invalid-langcode' );
+		}
+	}
+
+	/**
 	 * Display disambiguation page.
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $items
+	 * @param Item[] $items
 	 * @param string $langCode
 	 */
-	protected function displayDisambiguationPage( array /* of ItemContent */ $items, $langCode ) {
-		$disambiguationList = new ItemDisambiguation( $items, $langCode, $this->getContext() );
-		$disambiguationList->display();
+	protected function displayDisambiguationPage( array /* of Item */ $items, $langCode ) {
+		$formatterOptions = new FormatterOptions( array(
+			ValueFormatter::OPT_LANG => $this->getLanguage()->getCode()
+		) );
+
+		$linkFormatter = new EntityIdHtmlLinkFormatter(
+			$formatterOptions,
+			$this->entityLookup,
+			$this->entityTitleLookup
+		);
+
+		$disambiguationList = new ItemDisambiguation(
+			$langCode,
+			$this->getContext()->getLanguage()->getCode(),
+			$linkFormatter
+		);
+
+		$html = $disambiguationList->getHTML( $items );
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
@@ -184,4 +262,40 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		);
 	}
 
+	/**
+	 * Finds items that use the given label in the given language.
+	 *
+	 * @todo: Make this use an EntityInfoBuilder or similar instead of loading full entities.
+	 * @todo: Should search over aliases as well, not just labels! Needs smart display though...
+	 *
+	 * @param string $language
+	 * @param string $label
+	 *
+	 * @return Item[]
+	 */
+	private function findLabelUsage( $language, $label ) {
+		$terms = $this->termIndex->getEntityIdsForLabel( $label, $language, Item::ENTITY_TYPE, true );
+		$entities = array();
+
+		$count = 0;
+
+		foreach ( $terms as $termRow ) {
+			list( , $numericId ) = $termRow;
+			$itemId = ItemId::newFromNumber( (int)$numericId );
+
+			$entity = $this->entityLookup->getEntity( $itemId );
+
+			if ( $entity !== null ) {
+				$entities[] = $entity;
+			}
+
+			$count++;
+
+			if ( $count >= $this->limit ) {
+				break;
+			}
+		}
+
+		return $entities;
+	}
 }
