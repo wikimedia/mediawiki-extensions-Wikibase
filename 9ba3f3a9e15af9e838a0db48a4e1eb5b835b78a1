@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_56549729",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T11:44:35Z",
+      "side": 1,
+      "message": "then where to put it?  \n\nin PropertyValueSnakFormatter? I think that would be quite odd.",
+      "parentUuid": "8e23439c_14af4228",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_3460fe2c",
         "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
         "patchSetId": 3
@@ -172,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_3647db7d",
+        "filename": "lib/includes/formatters/MismatchingSnakValueFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T11:44:35Z",
+      "side": 1,
+      "message": "so, details html error for parser function?  seems wrong to me.",
+      "parentUuid": "8e23439c_949472ec",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_54e37a9b",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 3
@@ -189,6 +225,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_dae9f310",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T11:44:35Z",
+      "side": 1,
+      "message": "what about it different here? other than moving it?",
+      "parentUuid": "8e23439c_54e37a9b",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_f48286a7",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 3
@@ -200,6 +254,24 @@
       "writtenOn": "2014-05-06T10:32:10Z",
       "side": 1,
       "message": "If the value type mismatches, we could (and probably should) still render the value.",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_bae4f736",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T11:44:35Z",
+      "side": 1,
+      "message": "instead of or in addition to an error message?",
+      "parentUuid": "8e23439c_f48286a7",
       "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +329,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_344a3e84",
+        "filename": "lib/includes/i18n/WikibaseExceptionLocalizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T11:44:35Z",
+      "side": 1,
+      "message": "eek, internal spaces!",
+      "parentUuid": "8e23439c_f4fba641",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_147e22ad",
         "filename": "repo/includes/view/SnakHtmlGenerator.php",
         "patchSetId": 3
@@ -268,6 +358,24 @@
       "writtenOn": "2014-05-06T10:32:10Z",
       "side": 1,
       "message": "I think this entire thing could be folded into SnakFormatter... or at least, it should do little more than wrap the output of the formatter in a template .",
+      "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7638b3eb",
+        "filename": "repo/includes/view/SnakHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T11:44:35Z",
+      "side": 1,
+      "message": "so handle css classes in SnakFormatter?  suppose we could do that to some extent but I think not completely.",
+      "parentUuid": "8e23439c_147e22ad",
       "revId": "9ba3f3a9e15af9e838a0db48a4e1eb5b835b78a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
