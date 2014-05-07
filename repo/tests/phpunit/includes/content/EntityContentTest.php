@@ -6,12 +6,15 @@ use IContextSource;
 use MediaWikiTestCase;
 use ParserOptions;
 use RequestContext;
+use Revision;
+use Status;
 use Title;
 use User;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
 
 /**
@@ -73,6 +76,12 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	protected abstract function getContentClass();
 
 	/**
+	 * Convenience wrapper offering the legacy Status based interface for saving
+	 * EntityContent
+	 *
+	 * @todo: rewrite the tests using this
+	 * @deprecated: there should be no need to save an EntityContent object in order to test it.
+	 *
 	 * @param EntityContent $content
 	 * @param string $summary
 	 * @param User $user
@@ -88,12 +97,22 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		$flags = 0,
 		$baseRevId = false
 	) {
-
-		if ( ( $flags & EDIT_NEW ) === EDIT_NEW && $content->getEntity()->getId() === null ) {
-			$this->entityStore->assignFreshId( $content->getEntity() );
+		if ( $user === null ) {
+			$user = $GLOBALS['wgUser'];
 		}
 
-		return $content->save( $summary, $user, $flags, $baseRevId );
+		try {
+			$rev = $this->entityStore->saveEntity( $content->getEntity(), $summary, $user, $flags, $baseRevId );
+			$status = Status::newGood( Revision::newFromId( $rev->getRevision() ) );
+		} catch ( StorageException $ex ) {
+			$status = $ex->getStatus();
+
+			if ( !$status ) {
+				$status = Status::newFatal( 'boohoo' );
+			}
+		}
+
+		return $status;
 	}
 
 	/**
@@ -134,99 +153,6 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		return array(
 			array( $entityContent, '/^cake$/' )
 		);
-	}
-
-	public function testSaveFlags() {
-		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
-
-		$entityContent = $this->newEmpty();
-		$prefix = get_class( $this ) . '/';
-
-		// try to create without flags
-		$entityContent->getEntity()->setLabel( 'en', $prefix . 'one' );
-		$status = $this->saveContent( $entityContent, 'create item' );
-		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue(
-			$status->hasMessage( 'edit-gone-missing' ),
-			'try to create without flags, edit gone missing'
-		);
-
-		// try to create with EDIT_UPDATE flag
-		$entityContent->getEntity()->setLabel( 'en', $prefix . 'two' );
-		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_UPDATE );
-		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue(
-			$status->hasMessage( 'edit-gone-missing' ),
-			'edit gone missing, try to create with EDIT_UPDATE'
-		);
-
-		// try to create with EDIT_NEW flag
-		$entityContent->getEntity()->setLabel( 'en', $prefix . 'three' );
-		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_NEW );
-		$this->assertTrue(
-			$status->isOK(),
-			'create with EDIT_NEW flag for ' .
-			$entityContent->getEntity()->getId()->getPrefixedId()
-		);
-
-		// ok, the item exists now in the database.
-
-		// try to save with EDIT_NEW flag
-		$entityContent->getEntity()->setLabel( 'en', $prefix . 'four' );
-		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_NEW );
-		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue(
-			$status->hasMessage( 'edit-already-exists' ),
-			'try to save with EDIT_NEW flag, edit already exists'
-		);
-
-		// try to save with EDIT_UPDATE flag
-		$entityContent->getEntity()->setLabel( 'en', $prefix . 'five' );
-		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_UPDATE );
-		$this->assertTrue(
-			$status->isOK(),
-			'try to save with EDIT_UPDATE flag, save failed'
-		);
-
-		// try to save without flags
-		$entityContent->getEntity()->setLabel( 'en', $prefix . 'six' );
-		$status = $this->saveContent( $entityContent, 'create item' );
-		$this->assertTrue( $status->isOK(), 'try to save without flags, save failed' );
-	}
-
-	public function testRepeatedSave() {
-		\Wikibase\StoreFactory::getStore()->getTermIndex()->clear();
-
-		$entityContent = $this->newEmpty();
-		$prefix = get_class( $this ) . '/';
-
-		// create
-		$entityContent->getEntity()->setLabel( 'en', $prefix . "First" );
-		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), 'create, save failed, status ok' );
-		$this->assertTrue( $status->isGood(), 'create, status is good' );
-
-		// change
-		$prev_id = $entityContent->getWikiPage()->getLatest();
-		$entityContent->getEntity()->setLabel( 'en', $prefix . "Second" );
-		$status = $this->saveContent( $entityContent, 'modify item', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'change, status ok' );
-		$this->assertTrue( $status->isGood(), 'change, status good' );
-		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
-
-		// change again
-		$prev_id = $entityContent->getWikiPage()->getLatest();
-		$entityContent->getEntity()->setLabel( 'en', $prefix . "Third" );
-		$status = $this->saveContent( $entityContent, 'modify item again', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'change again, status ok' );
-		$this->assertTrue( $status->isGood(), 'change again, status good' );
-		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
-
-		// save unchanged
-		$prev_id = $entityContent->getWikiPage()->getLatest();
-		$status = $this->saveContent( $entityContent, 'save unmodified', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'save unchanged, save failed, status ok' );
-		$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
 	}
 
 	/**
