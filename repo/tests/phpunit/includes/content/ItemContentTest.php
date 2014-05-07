@@ -52,7 +52,7 @@ class ItemContentTest extends EntityContentTest {
 		$content = $this->newEmpty();
 		$content->getItem()->addSiteLink( $siteLink );
 
-		$status = $content->save( 'add item', null, EDIT_NEW );
+		$status = $this->saveContent( $content, 'add item', null, EDIT_NEW );
 
 		$this->assertTrue( $status->isOK(), 'item creation succeeded' );
 
@@ -60,7 +60,7 @@ class ItemContentTest extends EntityContentTest {
 		$content1 = $this->newEmpty();
 		$content1->getItem()->addSiteLink( $siteLink );
 
-		$status = $content1->save( 'add item', null, EDIT_NEW );
+		$status = $this->saveContent( $content1, 'add item', null, EDIT_NEW );
 
 		$this->assertFalse( $status->isOK(), "saving an item with a site link conflict should fail" );
 
