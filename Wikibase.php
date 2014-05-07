@@ -1,19 +1,33 @@
 <?php
 
+/*
+ * Welcome to the inside of Wikibase,              <>
+ * the software that powers                   /\        /\
+ * Wikidata and other                       <{  }>    <{  }>
+ * structured data websites.        <>   /\   \/   /\   \/   /\   <>
+ *                                     //  \\    //  \\    //  \\
+ * It is Free Software.              <{{    }}><{{    }}><{{    }}>
+ *                                /\   \\  //    \\  //    \\  //   /\
+ *                              <{  }>   ><        \/        ><   <{  }>
+ *                                \/   //  \\              //  \\   \/
+ *                            <>     <{{    }}>     +--------------------------+
+ *                                /\   \\  //       |                          |
+ *                              <{  }>   ><        /|  W  I  K  I  B  A  S  E  |
+ *                                \/   //  \\    // |                          |
+ * We are                            <{{    }}><{{  +--------------------------+
+ * looking for people                  \\  //    \\  //    \\  //
+ * like you to join us in           <>   \/   /\   \/   /\   \/   <>
+ * developing it further. Find              <{  }>    <{  }>
+ * out more at http://wikiba.se               \/        \/
+ * and join the open data revolution.              <>
+ */
+
 /**
- * TESTING entry point. DO NOT USE FOR REAL SETUPS!
+ * Testing entry point. Do not use for production setups!
  *
- * This entry point is meant to facilitate development and testing.
- * THIS IS NOT the entry point you want to use in production.
- * For production setups, inclusion of the entry points of
- * the extensions you want to load according to their respective
- * installation instructions is recommended. See the INSTALL
- * and README file for more information.
- *
+ * @see README.md
+ * @see http://wikiba.se
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
- * @author Adam Shorland
  */
 
 //TODO: Use a different file for jenkins, use this for a standard repo+client setup.
