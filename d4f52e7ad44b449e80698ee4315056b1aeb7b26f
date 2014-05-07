@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_11fce96b",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 0,
+      "message": "Delete all the things! \\o/",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

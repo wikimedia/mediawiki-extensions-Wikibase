@@ -2,6 +2,176 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_b1789526",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "I just realized this should be \"ChangeOps\" with an \"s\". Not in this patch, please. ;-) Maybe in an other one. How much does it hurt to do move namespaces around?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b1a1b5a0",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "According to the docs and code above an empty action is not valid.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_718f9d2f",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Not at the moment in my opinion. Having this as a comment is fine.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_718e7d2c",
+        "filename": "repo/includes/ChangeOp/ChangeOpBase.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Doesn\u0027t this need brackets? !( $var instanceof Class ) Or was this a Java-only requirement?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_91b919c3",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "As below.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d1c3113b",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "More straightforward way with no exception:\n\nif ( $fingerprint-\u003egetDescriptions()-\u003ehasTermForLanguage( $this-\u003elanguage ) ) {\n} else {\n}",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b1d535eb",
+        "filename": "repo/includes/ChangeOp/ChangeOpLabel.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Use hasTermForLanguage, see other comments.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_91d0f9f8",
+        "filename": "repo/includes/ChangeOp/ChangeOpLabel.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Use hasTermForLanguage, see other comments.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7119ddda",
+        "filename": "repo/includes/Validators/CompositeFingerprintValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "What\u0027s the meaning of the EntityId and the list of language codes here? Why is this needed to validate a Fingerprint?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9146b9c1",
+        "filename": "repo/includes/Validators/CompositeFingerprintValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Rename to $languageCodes, please.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_71043dc9",
         "filename": "repo/includes/Validators/FingerprintValidator.php",
         "patchSetId": 15
@@ -13,6 +183,177 @@
       "writtenOn": "2014-05-07T12:55:49Z",
       "side": 1,
       "message": "I don\u0027t think we should be misusing ValueValidator implementations for things that are not DataValues.  Doing so only causes a mess.\n\nI realize they accept any parameter and one formats it, but that seems ugly and not nice.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f12ccdf3",
+        "filename": "repo/includes/Validators/FingerprintValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "I think the Error and Result classes are very generic and could possibly be moved to a more generic namespace. This should not block this patch.",
+      "parentUuid": "8e23439c_71043dc9",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d127910b",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Move this documentation fo the interface and use a simple @see here.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_911d99c3",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Unfold please.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_518381d0",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Unfold please.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b122d5f9",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Move this documentation fo the interface and use a simple @see here.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7180bdc4",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Unfold please.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b179b5f3",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpAliasesTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Why is this comment here? Is this what the Mock does?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_71679d4a",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpAliasesTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "Just wondering, is there a reason you don\u0027t like the @expectedException annotation?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d1555153",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpTestMockProvider.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "This is not really a Mock if it uses the actual classes, isn\u0027t it?",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_91da39e8",
+        "filename": "repo/tests/phpunit/includes/LabelDescriptionDuplicateDetectorTest.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:18:03Z",
+      "side": 1,
+      "message": "The whole world in about 20 lines. ;-)",
       "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
