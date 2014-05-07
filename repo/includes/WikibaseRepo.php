@@ -628,8 +628,8 @@ class WikibaseRepo {
 		global $wgLang;
 
 		$formatterOptions = new FormatterOptions();
-		$valueFormatteBuilders = $this->getValueFormatterBuilders();
-		$valueFormatters = $valueFormatteBuilders->getWikiTextFormatters( $formatterOptions );
+		$valueFormatterBuilders = $this->getValueFormatterBuilders();
+		$valueFormatters = $valueFormatterBuilders->getWikiTextFormatters( $formatterOptions );
 
 		return new MessageParameterFormatter(
 			new DispatchingValueFormatter( $valueFormatters ),
