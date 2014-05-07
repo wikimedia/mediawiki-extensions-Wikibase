@@ -240,13 +240,6 @@ class UpdateRepoOnMoveJob extends \Job {
 			return true;
 		}
 
-		if ( $params['entityId'] instanceof ItemId ) {
-			// Backward compatibility switch.
-			// This is a short term fix to make this work side by side with the old
-			// version of the job.
-			$params['entityId'] = $params['entityId']->getSerialization();
-		}
-
 		$this->updateSiteLink(
 			$params['siteId'],
 			$params['entityId'],
