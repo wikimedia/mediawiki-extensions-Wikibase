@@ -35,6 +35,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\NaiveEntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\PreSaveChecks;
 use Wikibase\ReferencedEntitiesFinder;
@@ -206,7 +207,8 @@ class WikibaseRepo {
 	 * @return \Wikibase\EntityTitleLookup
 	 */
 	public function getEntityTitleLookup() {
-		return $this->getEntityContentFactory();
+		$namespaceMap = $this->getSettings()->getSetting( 'entityNamespaces' );
+		return new NaiveEntityTitleLookup( $namespaceMap );
 	}
 
 	/**
