@@ -60,37 +60,6 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	}
 
 	/**
-	 * Get the items corresponding to the provided language and label pair.
-	 * A description can also be provided, in which case only the item with
-	 * that description will be returned (as only element in the array).
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $language
-	 * @param string $label
-	 * @param string|null $description
-	 * @param string|null $entityType
-	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
-	 *
-	 * @return EntityContent[]
-	 */
-	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
-		$entityIds = StoreFactory::getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
-		$entities = array();
-
-		foreach ( $entityIds as $entityId ) {
-			list( $type, $id ) = $entityId;
-			$entity = self::getFromId( new EntityId( $type, $id ) );
-
-			if ( $entity !== null ) {
-				$entities[] = $entity;
-			}
-		}
-
-		return $entities;
-	}
-
-	/**
 	 * Get the entity content for the entity with the provided id
 	 * if it's available to the specified audience.
 	 * If the specified audience does not have the ability to view this

@@ -530,13 +530,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	 *
 	 * @param string $label
 	 * @param string|null $languageCode
-	 * @param string|null $description
 	 * @param string|null $entityType
 	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
 	 * @return array of array( entity type, entity id )
 	 */
-	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false ) {
+	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null, $fuzzySearch = false ) {
 		wfProfileIn( __METHOD__ );
 
 		$fuzzySearch = false; // TODO switched off for now until we have a solution for limiting the results
@@ -559,25 +558,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		if ( !is_null( $entityType ) ) {
 			$conds['terms0.term_entity_type'] = $entityType;
-		}
-
-		if ( !is_null( $description ) ) {
-			$conds['terms1.term_text'] = $description;
-			$conds['terms1.term_type'] = Term::TYPE_DESCRIPTION;
-
-			if ( !is_null( $languageCode ) ) {
-				$conds['terms1.term_language'] = $languageCode;
-			}
-
-			$tables['terms1'] = $this->tableName;
-
-			$joinConds['terms1'] = array(
-				'LEFT OUTER JOIN',
-				array(
-					'terms0.term_entity_id=terms1.term_entity_id',
-					'terms0.term_entity_type=terms1.term_entity_type',
-				)
-			);
 		}
 
 		$entities = $db->select(
