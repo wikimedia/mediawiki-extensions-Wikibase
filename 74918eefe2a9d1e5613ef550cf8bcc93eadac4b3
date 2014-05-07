@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_acc03a7f",
+        "filename": "repo/includes/ChangeOp/ChangeOpQualifierRemove.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-07T15:34:10Z",
+      "side": 1,
+      "message": "Currently this doesn\u0027t do anything. Is this here because of the TODO? Then it\u0027s fine.\n\nSame for some other files.",
+      "revId": "74918eefe2a9d1e5613ef550cf8bcc93eadac4b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
