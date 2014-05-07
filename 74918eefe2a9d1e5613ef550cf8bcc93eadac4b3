@@ -52,6 +52,24 @@
       "revId": "74918eefe2a9d1e5613ef550cf8bcc93eadac4b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_59c2875e",
+        "filename": "repo/includes/ChangeOp/ChangeOpQualifierRemove.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-07T20:03:40Z",
+      "side": 1,
+      "message": "Ah. Then, yes: it\u0027s just here as a reminder.",
+      "parentUuid": "8e23439c_4c352641",
+      "revId": "74918eefe2a9d1e5613ef550cf8bcc93eadac4b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
