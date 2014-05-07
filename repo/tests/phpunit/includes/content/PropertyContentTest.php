@@ -49,19 +49,19 @@ class PropertyContentTest extends EntityContentTest {
 		$propertyContent->getProperty()->setLabel( 'de', $prefix . 'testLabelUniquenessRestriction' );
 		$propertyContent->getProperty()->setDataTypeId( 'wikibase-item' );
 
-		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
+		$status = $this->saveContent( $propertyContent, 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );
 
 		$propertyContent1 = PropertyContent::newEmpty();
 		$propertyContent1->getProperty()->setLabel( 'nl', $prefix . 'testLabelUniquenessRestriction' );
 		$propertyContent1->getProperty()->setDataTypeId( 'wikibase-item' );
 
-		$status = $propertyContent1->save( 'create property', null, EDIT_NEW );
+		$status = $this->saveContent( $propertyContent1, 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should wok" );
 
 		$propertyContent1->getProperty()->setLabel( 'en', $prefix . 'testLabelUniquenessRestriction' );
 
-		$status = $propertyContent1->save( 'save property' );
+		$status = $this->saveContent( $propertyContent1, 'save property' );
 		$this->assertFalse( $status->isOK(), "saving a property with duplicate label+lang should not work" );
 
 		$errors = $status->getErrorsArray(); // Status::hasMessage is broken, see I52a468bc33f!
@@ -76,19 +76,19 @@ class PropertyContentTest extends EntityContentTest {
 		$propertyContent->getProperty()->setLabel( 'en', $prefix . 'testLabelEntityIdRestriction' );
 		$propertyContent->getProperty()->setDataTypeId( 'wikibase-item' );
 
-		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
+		$status = $this->saveContent( $propertyContent, 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );
 
 		// save a property
 		$propertyContent->getProperty()->setLabel( 'de', $prefix . 'testLabelEntityIdRestriction' );
 
-		$status = $propertyContent->save( 'save property' );
+		$status = $this->saveContent( $propertyContent, 'save property' );
 		$this->assertTrue( $status->isOK(), "saving a property should work" );
 
 		// save a property with a valid item id as label
 		$propertyContent->getProperty()->setLabel( 'fr', 'Q42' );
 
-		$status = $propertyContent->save( 'save property' );
+		$status = $this->saveContent( $propertyContent, 'save property' );
 		$this->assertTrue( $status->isOK(), "saving a property with a valid item id as label should work" );
 	}
 
