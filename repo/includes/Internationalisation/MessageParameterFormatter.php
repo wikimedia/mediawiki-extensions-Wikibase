@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Internationalisation;
+namespace Wikibase\Repo\Internationalisation;
 
 use DataValues\DataValue;
 use Language;
