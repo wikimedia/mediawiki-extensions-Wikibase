@@ -7,10 +7,13 @@ use MediaWikiTestCase;
 use ParserOptions;
 use RequestContext;
 use Title;
+use User;
 use Wikibase\EntityContent;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\store\EntityStore;
 
 /**
  * @covers Wikibase\EntityContent
@@ -28,6 +31,11 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	protected $permissions;
 	protected $old_user;
 
+	/**
+	 * @var EntityStore
+	 */
+	protected $entityStore;
+
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
 
@@ -37,6 +45,8 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		$this->old_user = $wgUser;
 
 		\TestSites::insertIntoDb();
+
+		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 	}
 
 	function tearDown() {
@@ -62,6 +72,30 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	 * @return string
 	 */
 	protected abstract function getContentClass();
+
+	/**
+	 * @param EntityContent $content
+	 * @param string $summary
+	 * @param User $user
+	 * @param int $flags
+	 * @param bool $baseRevId
+	 *
+	 * @return \Status
+	 */
+	protected function saveContent(
+		EntityContent $content,
+		$summary = '',
+		User $user = null,
+		$flags = 0,
+		$baseRevId = false
+	) {
+
+		if ( ( $flags & EDIT_NEW ) === EDIT_NEW && $content->getEntity()->getId() === null ) {
+			$this->entityStore->assignFreshId( $content->getEntity() );
+		}
+
+		return $content->save( $summary, $user, $flags, $baseRevId );
+	}
 
 	/**
 	 * @param array $data
@@ -111,7 +145,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		// try to create without flags
 		$entityContent->getEntity()->setLabel( 'en', $prefix . 'one' );
-		$status = $entityContent->save( 'create item' );
+		$status = $this->saveContent( $entityContent, 'create item' );
 		$this->assertFalse( $status->isOK(), "save should have failed" );
 		$this->assertTrue(
 			$status->hasMessage( 'edit-gone-missing' ),
@@ -120,7 +154,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		// try to create with EDIT_UPDATE flag
 		$entityContent->getEntity()->setLabel( 'en', $prefix . 'two' );
-		$status = $entityContent->save( 'create item', null, EDIT_UPDATE );
+		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_UPDATE );
 		$this->assertFalse( $status->isOK(), "save should have failed" );
 		$this->assertTrue(
 			$status->hasMessage( 'edit-gone-missing' ),
@@ -129,7 +163,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		// try to create with EDIT_NEW flag
 		$entityContent->getEntity()->setLabel( 'en', $prefix . 'three' );
-		$status = $entityContent->save( 'create item', null, EDIT_NEW );
+		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_NEW );
 		$this->assertTrue(
 			$status->isOK(),
 			'create with EDIT_NEW flag for ' .
@@ -140,7 +174,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		// try to save with EDIT_NEW flag
 		$entityContent->getEntity()->setLabel( 'en', $prefix . 'four' );
-		$status = $entityContent->save( 'create item', null, EDIT_NEW );
+		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_NEW );
 		$this->assertFalse( $status->isOK(), "save should have failed" );
 		$this->assertTrue(
 			$status->hasMessage( 'edit-already-exists' ),
@@ -149,7 +183,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		// try to save with EDIT_UPDATE flag
 		$entityContent->getEntity()->setLabel( 'en', $prefix . 'five' );
-		$status = $entityContent->save( 'create item', null, EDIT_UPDATE );
+		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_UPDATE );
 		$this->assertTrue(
 			$status->isOK(),
 			'try to save with EDIT_UPDATE flag, save failed'
@@ -157,7 +191,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		// try to save without flags
 		$entityContent->getEntity()->setLabel( 'en', $prefix . 'six' );
-		$status = $entityContent->save( 'create item' );
+		$status = $this->saveContent( $entityContent, 'create item' );
 		$this->assertTrue( $status->isOK(), 'try to save without flags, save failed' );
 	}
 
@@ -169,14 +203,14 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		// create
 		$entityContent->getEntity()->setLabel( 'en', $prefix . "First" );
-		$status = $entityContent->save( 'create item', null, EDIT_NEW );
+		$status = $this->saveContent( $entityContent, 'create item', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), 'create, save failed, status ok' );
 		$this->assertTrue( $status->isGood(), 'create, status is good' );
 
 		// change
 		$prev_id = $entityContent->getWikiPage()->getLatest();
 		$entityContent->getEntity()->setLabel( 'en', $prefix . "Second" );
-		$status = $entityContent->save( 'modify item', null, EDIT_UPDATE );
+		$status = $this->saveContent( $entityContent, 'modify item', null, EDIT_UPDATE );
 		$this->assertTrue( $status->isOK(), 'change, status ok' );
 		$this->assertTrue( $status->isGood(), 'change, status good' );
 		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
@@ -184,14 +218,14 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		// change again
 		$prev_id = $entityContent->getWikiPage()->getLatest();
 		$entityContent->getEntity()->setLabel( 'en', $prefix . "Third" );
-		$status = $entityContent->save( 'modify item again', null, EDIT_UPDATE );
+		$status = $this->saveContent( $entityContent, 'modify item again', null, EDIT_UPDATE );
 		$this->assertTrue( $status->isOK(), 'change again, status ok' );
 		$this->assertTrue( $status->isGood(), 'change again, status good' );
 		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
 
 		// save unchanged
 		$prev_id = $entityContent->getWikiPage()->getLatest();
-		$status = $entityContent->save( 'save unmodified', null, EDIT_UPDATE );
+		$status = $this->saveContent( $entityContent, 'save unmodified', null, EDIT_UPDATE );
 		$this->assertTrue( $status->isOK(), 'save unchanged, save failed, status ok' );
 		$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
 	}
@@ -211,8 +245,9 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	public function testGetParserOutput() {
 		$content = $this->newEmpty();
 
-		$id = $content->grabFreshId();
-		$content->getEntity()->setId( $id );
+		//@todo: Use a fake ID, no need to hit the database once we
+		//       got rid of the rest of the storage logic.
+		$this->entityStore->assignFreshId( $content->getEntity() );
 
 		$title = Title::newFromText( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );

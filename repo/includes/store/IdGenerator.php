@@ -13,13 +13,13 @@ namespace Wikibase;
 interface IdGenerator {
 
 	/**
-	 *
-	 *
 	 * @since 0.1
+	 *
+	 * @todo: Change this to return an EntityId
 	 *
 	 * @param string $type
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function getNewId( $type );
 
