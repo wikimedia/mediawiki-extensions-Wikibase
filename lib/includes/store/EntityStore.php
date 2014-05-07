@@ -23,6 +23,15 @@ use Wikibase\StorageException;
 interface EntityStore {
 
 	/**
+	 * Assigns a fresh ID to the given entity.
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws StorageException
+	 */
+	public function assignFreshId( Entity $entity );
+
+	/**
 	 * Saves the given Entity to some underlying storage mechanism.
 	 *
 	 * @param Entity $entity the entity to save.

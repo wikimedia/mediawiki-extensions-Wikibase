@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Hooks;
 use IContextSource;
+use MWException;
 use Status;
 use User;
 use Wikibase\Repo\WikibaseRepo;

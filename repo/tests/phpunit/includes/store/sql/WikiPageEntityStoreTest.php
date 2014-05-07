@@ -6,7 +6,10 @@ use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SqlIdGenerator;
+use Wikibase\store\EntityStore;
 use Wikibase\store\WikiPageEntityStore;
 use Wikibase\WikiPageEntityLookup;
 
@@ -33,7 +36,10 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$typeMap = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
 
-		$store = new WikiPageEntityStore( new EntityContentFactory( $typeMap ) );
+		$store = new WikiPageEntityStore(
+			new EntityContentFactory( $typeMap ),
+			new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ) )
+		);
 
 		return array( $store, $lookup );
 	}
