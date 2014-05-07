@@ -108,7 +108,7 @@ class MockTermIndex implements TermIndex {
 	/**
 	 * @throws Exception always
 	 */
-	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false ) {
+	public function getEntityIdsForLabel( $label, $languageCode = null, $entityType = null, $fuzzySearch = false ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 
