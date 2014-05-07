@@ -13,14 +13,14 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityId;
 use Wikibase\EntityTitleLookup;
-use Wikibase\Lib\Internationalisation\MessageParameterFormatter;
+use Wikibase\Repo\Internationalisation\MessageParameterFormatter;
 
 /**
  * @property mixed getMockValueFormatter
- * @covers Wikibase\Lib\Internationalisation\MessageParameterFormatter
+ * @covers Wikibase\Repo\Internationalisation\MessageParameterFormatter
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

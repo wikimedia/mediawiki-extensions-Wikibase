@@ -18,7 +18,7 @@ use Wikibase\EntityContentFactory;
 use Wikibase\EntityLookup;
 use Wikibase\Lib\Internationalisation\ExceptionLocalizer;
 use Wikibase\Lib\Internationalisation\MessageParameterFormatter;
-use Wikibase\Lib\Internationalisation\WikibaseExceptionLocalizer;
+use Wikibase\Lib\Internationalisation\WikibaseRepoExceptionLocalizer;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
@@ -482,7 +482,7 @@ class WikibaseRepo {
 	 */
 	public function getExceptionLocalizer() {
 		if ( !$this->exceptionLocalizer ) {
-			$this->exceptionLocalizer = new WikibaseExceptionLocalizer(
+			$this->exceptionLocalizer = new WikibaseRepoExceptionLocalizer(
 				$this->getMessageParameterFormatter()
 			);
 		}
