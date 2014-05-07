@@ -235,13 +235,6 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls()
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#' . $this->getModuleName();
-	}
-
-	/**
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *

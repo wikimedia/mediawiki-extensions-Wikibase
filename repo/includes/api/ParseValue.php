@@ -214,13 +214,6 @@ class ParseValue extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getHelpUrls()
-	 */
-	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbparsevalue';
-	}
-
-	/**
 	 * @see ApiBase::getVersion
 	 *
 	 * @since 0.1
