@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_71043dc9",
+        "filename": "repo/includes/Validators/FingerprintValidator.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-07T12:55:49Z",
+      "side": 1,
+      "message": "I don\u0027t think we should be misusing ValueValidator implementations for things that are not DataValues.  Doing so only causes a mess.\n\nI realize they accept any parameter and one formats it, but that seems ugly and not nice.",
+      "revId": "db1a5fc758cadcddec5f764bb5064ff7db2b313c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
