@@ -5,15 +5,20 @@ namespace Wikibase\store;
 use MWException;
 use PermissionsError;
 use Revision;
+use Status;
 use Title;
 use User;
 use Wikibase\Entity;
+use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
+use Wikibase\EntityPerPage;
+use Wikibase\EntityPerPageTable;
 use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\StorageException;
 use Wikibase\util\GenericEventDispatcher;
+use WikiPage;
 
 /**
  * EntityStore implementation based on WikiPage.
@@ -38,12 +43,24 @@ class WikiPageEntityStore implements EntityStore {
 	protected $idGenerator;
 
 	/**
-	 * @param EntityContentFactory $contentFactory
-	 * @param \Wikibase\IdGenerator $idGenerator
+	 * @var EntityPerPage
 	 */
-	public function __construct( EntityContentFactory $contentFactory, IdGenerator $idGenerator ) {
+	protected $entityPerPage;
+
+	/**
+	 * @param EntityContentFactory $contentFactory
+	 * @param IdGenerator $idGenerator
+	 * @param EntityPerPageTable $entityPerPage
+	 */
+	public function __construct(
+		EntityContentFactory $contentFactory,
+		IdGenerator $idGenerator,
+		EntityPerPage $entityPerPage
+	) {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
+		$this->entityPerPage = $entityPerPage;
+
 		$this->dispatcher = new GenericEventDispatcher( 'Wikibase\store\EntityStoreWatcher' );
 	}
 
@@ -81,6 +98,26 @@ class WikiPageEntityStore implements EntityStore {
 	}
 
 	/**
+	 * Returns the WikiPage object for the item with provided entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @throws StorageException
+	 * @return WikiPage
+	 */
+	public function getWikiPageForEntity( EntityId $entityId ) {
+		$title = $this->getTitleForEntity( $entityId );
+
+		if ( !$title ) {
+			throw new StorageException( 'Entity could not be mapped to a page title!' );
+		}
+
+		return new WikiPage( $title );
+	}
+
+	/**
 	 * Saves the given Entity to a wiki page via a WikiPage object.
 	 *
 	 * @param Entity $entity the entity to save.
@@ -99,18 +136,13 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws PermissionsError
 	 */
 	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
-		if ( ( $flags & EDIT_NEW ) === EDIT_NEW
-			&& ( $entity->getId() === null )
-		) {
-			$this->assignFreshId( $entity );
-		}
+		wfProfileIn( __METHOD__ );
 
 		$content = $this->contentFactory->newFromEntity( $entity );
-
-		//TODO: move the logic from EntityContent::save here!
-		$status = $content->save( $summary, $user, $flags, $baseRevId );
+		$status = $this->saveEntity_internal( $content, $summary, $user, $flags, $baseRevId );
 
 		if ( !$status->isOK() ) {
+			wfProfileOut( __METHOD__ );
 			throw new StorageException( $status );
 		}
 
@@ -118,13 +150,113 @@ class WikiPageEntityStore implements EntityStore {
 		$value = $status->getValue();
 
 		/* @var Revision $revision */
-		$revision = $value['revision']; //NOTE: EntityContent makes sure this is always set.
+		$revision = $value['revision'];
 
 		$rev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
 
 		$this->dispatcher->dispatch( 'entityUpdated', $rev );
 
+		wfProfileOut( __METHOD__ );
 		return $rev;
+	}
+
+
+	/**
+	 * Saves this item.
+	 * If this item does not exist yet, it will be created (ie a new ID will be determined and a new
+	 * page in the data NS created).
+	 *
+	 * @note: if the item does not have an ID yet (i.e. it was not yet created in the database),
+	 *        save() will fail with a edit-gone-missing message unless the EDIT_NEW bit is set in
+	 *        $flags.
+	 *
+	 * @note: if the save is triggered by any kind of user interaction, consider using
+	 *        EditEntity::attemptSave(), which automatically handles edit conflicts, permission
+	 *        checks, etc.
+	 *
+	 * @note: this method should not be overloaded, and should not be extended to save additional
+	 *        information to the database. Such things should be done in a way that will also be
+	 *        triggered when the save is performed by calling WikiPage::doEditContent.
+	 *
+	 * @since 0.1
+	 *
+	 * @param EntityContent $entityContent the entity to save.
+	 * @param string     $summary
+	 * @param null|User  $user
+	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
+	 *
+	 * @param int|bool   $baseRevId
+	 *
+	 * @see WikiPage::doEditContent
+	 *
+	 * @todo: move logic into WikiPageEntityStore and make this method a deprecated adapter.
+	 *
+	 * @return Status Success indicator, like the one returned by WikiPage::doEditContent().
+	 */
+	private function saveEntity_internal(
+		EntityContent $entityContent,
+		$summary = '',
+		User $user = null,
+		$flags = 0,
+		$baseRevId = false
+	) {
+		wfProfileIn( __METHOD__ );
+
+		$entity = $entityContent->getEntity();
+
+		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
+			if ( $entity->getId() === null ) {
+				$this->assignFreshId( $entity );
+			} else{
+				$title = $this->contentFactory->getTitleForId( $entity->getId() );
+				if ( $title->exists() ) {
+					wfProfileOut( __METHOD__ );
+					return Status::newFatal( 'edit-already-exists' );
+				}
+			}
+		} else {
+			if ( $entity->getId() === null ) {
+				wfProfileOut( __METHOD__ );
+				return Status::newFatal( 'edit-gone-missing' );
+			}
+		}
+
+		// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clearPreparedEdit
+		//       may cause the old content to be loaded from the database again. This may be
+		//       necessary, because EntityContent is mutable, so the cached object might have changed.
+		//
+		//       The relevant test case is ItemContentTest::testRepeatedSave
+		//
+		//       TODO: might be able to further optimize handling of prepared edit in WikiPage.
+
+		$page = $this->getWikiPageForEntity( $entity->getId() );
+		$page->clear();
+		$page->clearPreparedEdit();
+
+		$status = $page->doEditContent(
+			$entityContent,
+			$summary,
+			$flags | EDIT_AUTOSUMMARY,
+			$baseRevId,
+			$user
+		);
+
+		if ( $status->isOK() && !isset ( $status->value['revision'] ) ) {
+			// HACK: No new revision was created (content didn't change). Report the old one.
+			// There *might* be a race condition here, but since $page already loaded the
+			// latest revision, it should still be cached, and should always be the correct one.
+			$status->value['revision'] = $page->getRevision();
+		}
+
+		//TODO: move this to EntityModificationUpdate. Somehow tell it whether the entity was newly created.
+		if( $status->isGood() && isset ( $status->value['new'] ) && $status->value['new'] ) {
+			$this->entityPerPage->addEntityPage(
+				$entity->getId(),
+				$page->getTitle()->getArticleID() );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $status;
 	}
 
 	/**
@@ -134,8 +266,9 @@ class WikiPageEntityStore implements EntityStore {
 	 *
 	 * @return Title|null
 	 */
-	public function getTitleForId( EntityId $entityId ) {
-		return $this->contentFactory->getTitleForId( $entityId );
+	public function getTitleForEntity( EntityId $entityId ) {
+		$title = $this->contentFactory->getTitleForId( $entityId );
+		return $title;
 	}
 
 	/**
@@ -148,9 +281,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws StorageException
 	 */
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
-		$title = $this->getTitleForId( $entityId );
-
-		$page = new \WikiPage( $title );
+		$page = $this->getWikiPageForEntity( $entityId );
 		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
 
 		if ( !$ok ) {
@@ -214,7 +345,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @note keep in sync with logic in EditPage
 	 */
 	public function updateWatchlist( User $user, EntityId $id, $watch ) {
-		$title = $this->getTitleForId( $id );
+		$title = $this->getTitleForEntity( $id );
 
 		if ( $user->isLoggedIn() && $title && ( $watch != $user->isWatched( $title ) ) ) {
 			$fname = __METHOD__;
@@ -244,7 +375,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return bool
 	 */
 	public function isWatching( User $user, EntityId $id ) {
-		$title = $this->getTitleForId( $id );
+		$title = $this->getTitleForEntity( $id );
 		return ( $title && $user->isWatched( $title ) );
 	}
 }
