@@ -2,13 +2,17 @@
 
 namespace Wikibase\Test;
 
+use Revision;
+use Status;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityPerPageTable;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
+use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
 use Wikibase\store\WikiPageEntityStore;
 use Wikibase\WikiPageEntityLookup;
@@ -31,6 +35,9 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	 * @return array array( EntityStore, EntityLookup )
 	 */
 	protected function createStoreAndLookup() {
+		// make sure the term index is empty to avoid conlficts.
+		WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->clear();
+
 		//NOTE: we want to test integration of WikiPageEntityLookup and WikiPageEntityStore here!
 		$lookup = new WikiPageEntityLookup( false, CACHE_DB );
 
@@ -38,7 +45,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory( $typeMap ),
-			new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ) )
+			new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ) ),
+			new EntityPerPageTable()
 		);
 
 		return array( $store, $lookup );
@@ -205,4 +213,152 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$store->updateWatchlist( $user, $itemId, false );
 		$this->assertFalse( $store->isWatching( $user, $itemId ) );
 	}
+
+	protected function newEntity() {
+		$item = Item::newEmpty();
+		return $item;
+	}
+
+	/**
+	 * Convenience wrapper offering the legacy Status based interface for saving
+	 * Entities.
+	 *
+	 * @todo: rewrite the tests using this
+	 *
+	 * @param WikiPageEntityStore $store
+	 * @param Entity $entity
+	 * @param string $summary
+	 * @param User $user
+	 * @param int $flags
+	 * @param bool $baseRevId
+	 *
+	 * @return \Status
+	 */
+	protected function saveEntity(
+		WikiPageEntityStore $store,
+		Entity $entity,
+		$summary = '',
+		User $user = null,
+		$flags = 0,
+		$baseRevId = false
+	) {
+		if ( $user === null ) {
+			$user = $GLOBALS['wgUser'];
+		}
+
+		try {
+			$rev = $store->saveEntity( $entity, $summary, $user, $flags, $baseRevId );
+			$status = Status::newGood( Revision::newFromId( $rev->getRevision() ) );
+		} catch ( StorageException $ex ) {
+			$status = $ex->getStatus();
+
+			if ( !$status ) {
+				$status = Status::newFatal( 'boohoo' );
+			}
+		}
+
+		return $status;
+	}
+
+	public function testSaveFlags() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+
+		$entity = $this->newEntity();
+		$prefix = get_class( $this ) . '/';
+
+		// try to create without flags
+		$entity->setLabel( 'en', $prefix . 'one' );
+		$status = $this->saveEntity( $store, $entity, 'create item' );
+		$this->assertFalse( $status->isOK(), "save should have failed" );
+		$this->assertTrue(
+			$status->hasMessage( 'edit-gone-missing' ),
+			'try to create without flags, edit gone missing'
+		);
+
+		// try to create with EDIT_UPDATE flag
+		$entity->setLabel( 'en', $prefix . 'two' );
+		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_UPDATE );
+		$this->assertFalse( $status->isOK(), "save should have failed" );
+		$this->assertTrue(
+			$status->hasMessage( 'edit-gone-missing' ),
+			'edit gone missing, try to create with EDIT_UPDATE'
+		);
+
+		// try to create with EDIT_NEW flag
+		$entity->setLabel( 'en', $prefix . 'three' );
+		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
+		$this->assertTrue(
+			$status->isOK(),
+			'create with EDIT_NEW flag for ' .
+			$entity->getId()->getPrefixedId()
+		);
+
+		// ok, the item exists now in the database.
+
+		// try to save with EDIT_NEW flag
+		$entity->setLabel( 'en', $prefix . 'four' );
+		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
+		$this->assertFalse( $status->isOK(), "save should have failed" );
+		$this->assertTrue(
+			$status->hasMessage( 'edit-already-exists' ),
+			'try to save with EDIT_NEW flag, edit already exists'
+		);
+
+		// try to save with EDIT_UPDATE flag
+		$entity->setLabel( 'en', $prefix . 'five' );
+		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_UPDATE );
+		$this->assertTrue(
+			$status->isOK(),
+			'try to save with EDIT_UPDATE flag, save failed'
+		);
+
+		// try to save without flags
+		$entity->setLabel( 'en', $prefix . 'six' );
+		$status = $this->saveEntity( $store, $entity, 'create item' );
+		$this->assertTrue( $status->isOK(), 'try to save without flags, save failed' );
+	}
+
+	public function testRepeatedSave() {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+
+		$entity = $this->newEntity();
+		$prefix = get_class( $this ) . '/';
+
+		// create
+		$entity->setLabel( 'en', $prefix . "First" );
+		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), 'create, save failed, status ok' );
+		$this->assertTrue( $status->isGood(), 'create, status is good' );
+
+		// change
+		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
+		$entity->setLabel( 'en', $prefix . "Second" );
+		$status = $this->saveEntity( $store, $entity, 'modify item', null, EDIT_UPDATE );
+		$this->assertTrue( $status->isOK(), 'change, status ok' );
+		$this->assertTrue( $status->isGood(), 'change, status good' );
+
+		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
+		$this->assertNotEquals( $prev_id, $rev_id, "revision ID should change on edit" );
+
+		// change again
+		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
+		$entity->setLabel( 'en', $prefix . "Third" );
+		$status = $this->saveEntity( $store, $entity, 'modify item again', null, EDIT_UPDATE );
+		$this->assertTrue( $status->isOK(), 'change again, status ok' );
+		$this->assertTrue( $status->isGood(), 'change again, status good' );
+
+		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
+		$this->assertNotEquals( $prev_id, $rev_id, "revision ID should change on edit" );
+
+		// save unchanged
+		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
+		$status = $this->saveEntity( $store, $entity, 'save unmodified', null, EDIT_UPDATE );
+		$this->assertTrue( $status->isOK(), 'save unchanged, save failed, status ok' );
+
+		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
+		$this->assertEquals( $prev_id, $rev_id, "revision ID should stay the same if no change was made" );
+	}
+
 }
