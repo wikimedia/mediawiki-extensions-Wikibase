@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use MWException;
 use InvalidArgumentException;
+use OutOfBoundsException;
 use Status;
 use Title;
 use User;
@@ -137,10 +138,30 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @param int $type
 	 *
+	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return int
 	 */
 	public function getNamespaceForType( $type ) {
-		return NamespaceUtils::getEntityNamespace( $this->typeMap[$type] );
+		$model = $this->getContentModelForType( $type );
+		return NamespaceUtils::getEntityNamespace( $model );
+	}
+
+	/**
+	 * Determines what content model is suitable for the given type of entities.
+	 *
+	 * @since 0.5
+	 *
+	 * @param int $type
+	 *
+	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
+	 * @return int
+	 */
+	public function getContentModelForType( $type ) {
+		if ( !isset( $this->typeMap[$type] ) ) {
+			throw new OutOfBoundsException( 'No content model defined for entity type ' . $type );
+		}
+
+		return $this->typeMap[$type];
 	}
 
 	/**

@@ -281,8 +281,7 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 */
 	public function putEntity( Entity $entity, $revision = 0, $timestamp = 0, $user = null ) {
 		if ( $entity->getId() === null ) {
-			//NOTE: assign ID to original object, not clone
-			$entity->setId( $this->maxId +1 );
+			$this->assignFreshId( $entity );
 		}
 
 		$oldEntity = $this->getEntity( $entity->getId() );
@@ -856,5 +855,19 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 */
 	public function isWatching( User $user, EntityId $id ) {
 		return isset( $this->watchlist[ $user->getName() ][ $id->getSerialization() ] );
+	}
+
+	/**
+	 * @see EntityStore::assignFreshId()
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws StorageException
+	 */
+	public function assignFreshId( Entity $entity ) {
+		//TODO: Find a canonical way to generate an EntityId from the maxId number.
+		//XXX: Using setId() with an integer argument is deprecated!
+		$this->maxId++;
+		$entity->setId( $this->maxId );
 	}
 }
