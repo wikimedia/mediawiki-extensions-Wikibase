@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_1f9f4f08",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-08T05:46:26Z",
+      "side": 1,
+      "message": "why is ValueValidator needed for aliases?",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ff8373ac",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-08T05:46:26Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
