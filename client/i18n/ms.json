@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Anakmalaysia"
+			"Anakmalaysia",
+			"Aurora"
 		]
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
@@ -42,7 +43,7 @@
 	"wikibase-watchlist-show-changes-pref": "Paparkan suntingan Wikidata dalam senarai pantau anda",
 	"wikibase-error-serialize-error": "Data gagal disirikan",
 	"wikibase-error-invalid-entity-id": "ID yang diberikan itu tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.",
-	"special-unconnectedpages": "Halaman yang tidak bersambung dengan perkara",
+	"special-unconnectedpages": "Laman yang tidak bersambung dengan perkara",
 	"wikibase-unconnectedpages-legend": "Pilihan untuk halaman tak tersambung",
 	"wikibase-unconnectedpages-page": "Mulakan senarai hasil dengan halaman:",
 	"wikibase-unconnectedpages-submit": "Pergi",

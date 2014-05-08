@@ -49,7 +49,7 @@
 	"wikibase-rc-hide-wikidata-show": "Pokaż",
 	"wikibase-rc-show-wikidata-pref": "Pokazuj edycje w {{grammar:MS.lp|{{WBREPONAME}}}} w ostatnich zmianach",
 	"wikibase-rc-wikibase-edit-letter": "d",
-	"wikibase-rc-wikibase-edit-title": "Edycja w {{grammar:MS.lp|{{WBREPONAME}}}}",
+	"wikibase-rc-wikibase-edit-title": "Edycja w Wikidanych",
 	"wikibase-watchlist-show-changes-pref": "Pokazuj edycje w {{grammar:MS.lp|{{WBREPONAME}}}} na liście obserwowanych",
 	"wikibase-error-serialize-error": "Nieudana serializacja danych.",
 	"wikibase-error-invalid-entity-id": "Wprowadzony identyfikator jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.",
