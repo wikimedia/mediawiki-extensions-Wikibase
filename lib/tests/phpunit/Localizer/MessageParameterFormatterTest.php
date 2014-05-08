@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+
 use DataValues\DataValue;
 use DataValues\DecimalValue;
 use Language;
@@ -12,11 +13,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityId;
 use Wikibase\EntityTitleLookup;
-use Wikibase\i18n\MessageParameterFormatter;
+use Wikibase\Lib\Localizer\MessageParameterFormatter;
 
 /**
  * @property mixed getMockValueFormatter
- * @covers Wikibase\i18n\MessageParameterFormatter
+ * @covers Wikibase\Lib\Localizer\MessageParameterFormatter
  *
  * @group Wikibase
  * @group WikibaseLib
