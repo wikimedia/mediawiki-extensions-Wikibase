@@ -5,13 +5,9 @@ namespace Wikibase\DataModel\Claim;
 use ArrayObject;
 use Comparable;
 use Diff\DiffOp\Diff\Diff;
-use Diff\Differ\Differ;
-use Diff\DiffOp\DiffOpAdd;
-use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
-use Diff\Differ\MapDiffer;
 use Hashable;
 use InvalidArgumentException;
+use UnexpectedValueException;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
@@ -407,48 +403,13 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * @since 0.4
 	 *
 	 * @param Claims $claims
-	 * @param Differ|null $differ for building a diff of two GUID-to-hash maps.
 	 *
 	 * @return Diff
-	 * @throws InvalidArgumentException
+	 * @throws UnexpectedValueException
 	 */
-	public function getDiff( Claims $claims, Differ $differ = null ) {
-		if ( $differ === null ) {
-			$differ = new MapDiffer();
-		}
-
-		$sourceHashes = $this->getHashes();
-		$targetHashes = $claims->getHashes();
-
-		$diff = new Diff( array(), true );
-
-		foreach ( $differ->doDiff( $sourceHashes, $targetHashes ) as $guid => $diffOp ) {
-			if ( $diffOp instanceof DiffOpChange ) {
-				$oldClaim = $this->getClaimWithGuid( $guid );
-				$newClaim = $claims->getClaimWithGuid( $guid );
-
-				assert( $oldClaim instanceof Claim );
-				assert( $newClaim instanceof Claim );
-				assert( $oldClaim->getGuid() === $newClaim->getGuid() );
-
-				$diff[$guid] = new DiffOpChange( $oldClaim, $newClaim );
-			}
-			elseif ( $diffOp instanceof DiffOpAdd ) {
-				$claim = $claims->getClaimWithGuid( $guid );
-				assert( $claim instanceof Claim );
-				$diff[$guid] = new DiffOpAdd( $claim );
-			}
-			elseif ( $diffOp instanceof DiffOpRemove ) {
-				$claim = $this->getClaimWithGuid( $guid );
-				assert( $claim instanceof Claim );
-				$diff[$guid] = new DiffOpRemove( $claim );
-			}
-			else {
-				throw new InvalidArgumentException( 'Invalid DiffOp type cannot be handled' );
-			}
-		}
-
-		return $diff;
+	public function getDiff( Claims $claims ) {
+		$differ = new ClaimListDiffer();
+		return $differ->getDiff( $this, $claims );
 	}
 
 	/**
