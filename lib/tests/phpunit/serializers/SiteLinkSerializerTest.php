@@ -9,8 +9,6 @@ use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use ValueFormatters\FormatterOptions;
-use Wikibase\Lib\EntityIdFormatter;
 
 /**
  * @covers Wikibase\Lib\Serializers\SiteLinkSerializer
@@ -105,11 +103,6 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$siteStore = SiteSQLStore::newInstance();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 		$siteLinkSerializer->getSerialized( $sitelinks );
-	}
-
-	protected function getIdFormatter() {
-		$formatterOptions = new FormatterOptions();
-		return new EntityIdFormatter( $formatterOptions );
 	}
 
 	/**

@@ -3,12 +3,10 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\PropertyValueSnak;
@@ -184,12 +182,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 	}
 
 	protected function getFormattedIdForEntity( Entity $entity ) {
-		return $this->getIdFormatter()->format( $entity->getId() );
-	}
-
-	protected function getIdFormatter() {
-		$formatterOptions = new FormatterOptions();
-		return new EntityIdFormatter( $formatterOptions );
+		return $entity->getId()->getSerialization();
 	}
 
 }
