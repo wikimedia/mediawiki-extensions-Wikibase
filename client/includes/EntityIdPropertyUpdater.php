@@ -52,8 +52,7 @@ class EntityIdPropertyUpdater {
 		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
 
 		if ( $itemId instanceof EntityId ) {
-			$idFormatter = WikibaseClient::getDefaultInstance()->getEntityIdFormatter();
-			$out->setProperty( 'wikibase_item', $idFormatter->format( $itemId ) );
+			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
 		} else {
 			// unset property, if it was set
 			$this->unsetProperty( $out, 'wikibase_item' );

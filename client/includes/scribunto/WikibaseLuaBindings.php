@@ -30,9 +30,6 @@ class WikibaseLuaBindings {
 	/* @var EntityLookup */
 	private $entityLookup;
 
-	/* @var EntityIdFormatter */
-	private $entityIdFormatter;
-
 	/* @var SiteLinkLookup */
 	private $siteLinkTable;
 
@@ -51,7 +48,6 @@ class WikibaseLuaBindings {
 	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
-	 * @param EntityIdFormatter $entityIdFormatter
 	 * @param SiteLinkLookup $siteLinkTable
 	 * @param LanguageFallbackChainFactory $fallbackChainFactory
 	 * @param Language $language
@@ -61,7 +57,6 @@ class WikibaseLuaBindings {
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
-		EntityIdFormatter $entityIdFormatter,
 		SiteLinkLookup $siteLinkTable,
 		LanguageFallbackChainFactory $fallbackChainFactory,
 		Language $language,
@@ -70,7 +65,6 @@ class WikibaseLuaBindings {
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
-		$this->entityIdFormatter = $entityIdFormatter;
 		$this->siteLinkTable = $siteLinkTable;
 		$this->fallbackChainFactory = $fallbackChainFactory;
 		$this->language = $language;
@@ -185,7 +179,7 @@ class WikibaseLuaBindings {
 			return null;
 		}
 
-		return $this->entityIdFormatter->format( $id );
+		return $id->getSerialization();
 	}
 
 	/**

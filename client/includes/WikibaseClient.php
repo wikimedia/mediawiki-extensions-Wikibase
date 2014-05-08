@@ -173,18 +173,6 @@ final class WikibaseClient {
 	/**
 	 * @since 0.4
 	 *
-	 * @deprecated use EntityId::getSerialization() for the canonical representation, or
-	 * go via getValueFormatterFactory() to get a fancy formatter for EntityIds.
-	 *
-	 * @return EntityIdFormatter
-	 */
-	public function getEntityIdFormatter() {
-		return new EntityIdFormatter( new FormatterOptions() );
-	}
-
-	/**
-	 * @since 0.4
-	 *
 	 * @param string $languageCode
 	 *
 	 * @return EntityIdLabelFormatter
