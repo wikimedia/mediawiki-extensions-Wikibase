@@ -4,27 +4,23 @@
 	float: right;
 }
 
-.wbc-editpage,
 .wb-langlinks-link {
 	list-style: none none;
 	text-align: right;
 	padding-right: .5em !important;
 }
 
-.wbc-editpage > a,
 .wb-langlinks-link > a {
 	padding-left: 11px;
 	background: no-repeat left center;
 }
 
-.wbc-editpage > a:link, .wbc-editpage > a:visited,
 .wb-langlinks-link > a:link, .wb-langlinks-link > a:visited {
 	/* @embed */
 	background-image: url(images/WBC-Asset-Pencil.png);
 	color: #797979 !important;
 }
 
-.wbc-editpage > a:hover,
 .wb-langlinks-link > a:hover {
 	/* @embed */
 	background-image: url(images/WBC-Asset-Pencil-Hover.png);
