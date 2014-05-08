@@ -242,7 +242,7 @@ window.setTimeout( function() {
 
 		$html .= $this->getHtmlForAliases( $entity, $editable );
 		$html .= $this->getHtmlForToc();
-		$html .= $this->getHtmlForTermBox( $entity, $editable );
+		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
 		$html .= $this->getHtmlForClaims( $entity, $editable );
 
 		wfProfileOut( __METHOD__ );
@@ -297,18 +297,19 @@ window.setTimeout( function() {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityRevision $entityRevision
 	 * @param bool $editable
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForTermBox( Entity $entity, $editable = true ) {
-		if ( $entity->getId() ) {
+	protected function getHtmlForTermBox( EntityRevision $entityRevision, $editable = true ) {
+		if ( $entityRevision->getEntity()->getId() ) {
 			// Placeholder for a termbox for the present item.
 			// EntityViewPlaceholderExpander must know about the parameters used here.
 			return $this->textInjector->newMarker(
 				'termbox',
-				$entity->getId()->getSerialization()
+				$entityRevision->getEntity()->getId()->getSerialization(),
+				$entityRevision->getRevision()
 			);
 		}
 
