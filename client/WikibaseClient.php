@@ -111,6 +111,8 @@ call_user_func( function() {
 	$wgHooks['InfoAction'][] 								= '\Wikibase\ClientHooks::onInfoAction';
 	$wgHooks['TitleMoveComplete'][]          = '\Wikibase\ClientHooks::onTitleMoveComplete';
 	$wgHooks['BaseTemplateAfterPortlet'][] = '\Wikibase\ClientHooks::onBaseTemplateAfterPortlet';
+	$wgHooks['GetBetaFeaturePreferences'][] = '\Wikibase\ClientHooks::onGetBetaFeaturePreferences';
+	$wgHooks['SidebarBeforeOutput'][] = '\Wikibase\ClientHooks::onSidebarBeforeOutput';
 
 	// extension hooks
 	$wgHooks['WikibaseDeleteData'][]			= '\Wikibase\ClientHooks::onWikibaseDeleteData';
