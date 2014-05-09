@@ -257,6 +257,10 @@ class EntityPerPageTable implements EntityPerPage {
 
 		$dbr = wfGetDB( DB_SLAVE );
 
+		//NOTE: needs to be id/type, not type/id, according to the definition of the relevant
+		//      index in wikibase.sql: wb_entity_per_page (epp_entity_id, epp_entity_type);
+		$oderBy = array( 'epp_entity_id', 'epp_entity_type' );
+
 		if ( $after ) {
 			if ( $entityType === null ) {
 				// Ugly. About time we switch to qualified, string based IDs!
@@ -265,6 +269,10 @@ class EntityPerPageTable implements EntityPerPage {
 						' OR epp_entity_type > ' . $dbr->addQuotes( $after->getEntityType() ) . ' )';
 			} else {
 				$where[] = 'epp_entity_id > ' . $after->getNumericId();
+
+				// NOTE: If the type is fixed, don't use the type in the order;
+				// before changing this, check index usage.
+				$oderBy = array( 'epp_entity_id' );
 			}
 		}
 
@@ -274,7 +282,7 @@ class EntityPerPageTable implements EntityPerPage {
 			$where,
 			__METHOD__,
 			array(
-				'ORDER BY' => array( 'epp_entity_type', 'epp_entity_id' ),
+				'ORDER BY' => $oderBy,
 				'LIMIT' => $limit
 			)
 		);
