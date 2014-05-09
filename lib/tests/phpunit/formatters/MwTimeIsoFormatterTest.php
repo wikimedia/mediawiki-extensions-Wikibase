@@ -3,17 +3,16 @@
 namespace ValueFormatters\Test;
 
 use DataValues\TimeValue;
+use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
 use Wikibase\Lib\Parsers\TimeParser;
-use Wikibase\Utils;
 
 /**
- * @covers ValueFormatters\TimeFormatter
+ * @covers Wikibase\Lib\MwTimeIsoFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -307,8 +306,14 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			$argLists[] = array( $expected, $timeValue );
 		}
 
-		//Different language tests at YEAR precision
-		foreach( Utils::getLanguageCodes() as $languageCode ) {
+		// Different languages at year precision
+		$languageCodes = array(
+			'ar', //replaces all numbers and separators
+			'bo', //replaces only numbers
+			'de', //switches separators
+			'or', //replaces all numbers and separators
+		);
+		foreach( $languageCodes as $languageCode ) {
 			$argLists[] = array(
 				'3333',
 				new TimeValue(
