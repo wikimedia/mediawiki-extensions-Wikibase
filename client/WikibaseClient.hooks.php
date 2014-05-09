@@ -36,6 +36,7 @@ use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -579,13 +580,23 @@ final class ClientHooks {
 	 */
 	public static function onSkinBuildSidebar( Skin $skin, &$bar ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$sitesStore = WikibaseClient::getDefaultInstance()->getSiteStore();
 
-		$siteIdsToOutput = $settings->getSetting( 'otherProjectsLinks' );
 		if (
-			!$settings->getSetting( 'otherProjectsLinksBeta' ) && !$settings->getSetting( 'otherProjectsLinksByDefault' ) ||
-			count( $siteIdsToOutput ) === 0
+			!$settings->getSetting( 'otherProjectsLinksBeta' ) &&
+			!$settings->getSetting( 'otherProjectsLinksByDefault' )
 		) {
 			return true;
+		}
+
+		$siteIdsToOutput = $settings->getSetting( 'otherProjectsLinks' );
+		if ( count( $siteIdsToOutput ) === 0 ) {
+			$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $sitesStore, $settings->getSetting( 'siteGlobalID' ) );
+			$currentSite = $sitesStore->getSite( $settings->getSetting( 'siteLinkGroups' ) );
+			$sitesToOutput = $otherProjectsSitesProvider->getOtherProjectsSites( $currentSite );
+			foreach( $sitesToOutput as $site ) {
+				$siteIdsToOutput[] = $site->getGlobalId();
+			}
 		}
 
 		$generator = new OtherProjectsSidebarGenerator(
