@@ -39,10 +39,13 @@
 	"wikibase-property-notfound": "$1 אייגנשאפט נישט געטראפן",
 	"wikibase-property-notsupportedyet": "וויקיבאזע שטיצט נאך נישט אייגנשאפט טיפ פאר $1 אייגנשאפט.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "באַהאַלטן",
+	"wikibase-rc-hide-wikidata-show": "ווײַזן",
 	"wikibase-rc-show-wikidata-pref": "ווייזן {{WBREPONAME}}־רעדאקטירונגען אין לעצטע ענדערונגען",
 	"wikibase-rc-wikibase-edit-letter": "ד",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}־רעדאקטירונג",
 	"wikibase-watchlist-show-changes-pref": "ווייזן {{WBREPONAME}}־רעדאקטירונגען אין אייער אויפפאסונג־ליסטע",
+	"wikibase-error-invalid-entity-id": "דער אײַנגעגעבענער ID \"$1\" איז אומבאוואוסט צו דער סיסטעם. זײַט אזוי גוט ניצט א גילטיקן אידענטיפיצירער.",
 	"special-unconnectedpages": "בלעטער נישט פארבונדן מיט אביעקטן",
 	"wikibase-unconnectedpages-legend": "מעגלעכקייטן פאר אומפארבונדענע בלעטער",
 	"wikibase-unconnectedpages-page": "אנהייבן רעזולטאט ליסטע מיט בלאט:",
@@ -51,5 +54,6 @@
 	"wikibase-unconnectedpages-iwdata-label": "נאר בלעטער מיט אינטערשפראך לינקען",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|אינטערשפראך לינק|אינטערשפראך לינקען}} אויפן בלאט)",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}־אביעקט ID",
-	"wikibase-pageinfo-entity-id-none": "קיין"
+	"wikibase-pageinfo-entity-id-none": "קיין",
+	"wikibase-otherprojects": "אנדערע פראיעקטן"
 }

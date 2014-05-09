@@ -12,7 +12,8 @@
 			"Paxt",
 			"Utar",
 			"Vks",
-			"Vogone"
+			"Vogone",
+			"Matěj Grabovský"
 		]
 	},
 	"wikibase-desc": "Strukturované úložiště dat",
@@ -187,7 +188,7 @@
 	"wikibase-dispatchstats-pos": "Pozice",
 	"wikibase-dispatchstats-lag-num": "Čekajících",
 	"wikibase-dispatchstats-lag-time": "Zpoždění",
-	"wikibase-dispatchstats-touched": "Poslední styk",
+	"wikibase-dispatchstats-touched": "Poslední návštěva",
 	"wikibase-dispatchstats-large-lag": "(velmi vysoké)",
 	"wikibase-dispatchstats-freshest": "Nejčerstvější",
 	"wikibase-dispatchstats-stalest": "Nejzastaralejší",

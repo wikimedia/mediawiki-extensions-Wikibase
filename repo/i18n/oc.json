@@ -73,7 +73,7 @@
 	"wikibase-restrictionedit-tooltip-message": "Aquesta pagina es protegida. L'edicion es pas autorizada.",
 	"wikibase-blockeduser-tooltip-message": "Sètz pas autorizat a modificar, perque vòstre nom d'utilizaire o adreça IP es estat blocat.",
 	"wikibase-warning-constraint-violation-length": "Una contrencha de longor es desenclavada pel còde de lenga « $1 ».",
-	"wikibase-validator-label-conflict": "Una autra proprietat ($3) a ja un libellat « $1 » associat al còde de lenga $2.",
+	"wikibase-validator-label-conflict": "La proprietat $3 a ja un libellat « $1 » associat al còde de lenga $2.",
 	"wikibase-wikibaserepopage-invalid-id": "L’ID « $1 » es desconegut del sistèma. Utilizatz un ID d’entitat valid.",
 	"special-itembytitle": "Element per títol",
 	"wikibase-itembytitle-lookup-fieldset": "Recercar dels elements per site e per títol",

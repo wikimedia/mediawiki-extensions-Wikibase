@@ -11,6 +11,7 @@
 	"wikibase-cancel": "otkaži",
 	"wikibase-add": "dodaj",
 	"wikibase-addqualifier": "dodaj kvalifikator",
+	"wikibase-addreference": "dodaj izvor",
 	"wikibase-save-inprogress": "Čuvanje...",
 	"wikibase-remove-inprogress": "Uklanjanje...",
 	"wikibase-label-empty": "Nijedan naziv nije još definisan",
