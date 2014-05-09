@@ -12,6 +12,7 @@ use Site;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -605,4 +606,19 @@ final class WikibaseClient {
 		return $this->clientSiteLinkLookup;
 	}
 
+	/**
+	 * @since 0.5
+	 *
+	 * @return OtherProjectsSidebarGenerator
+	 */
+	public function getOtherProjectsSidebarGenerator() {
+		$settings = $this->getSettings();
+
+		return new OtherProjectsSidebarGenerator(
+			$settings->getSetting( 'siteGlobalID' ),
+			$this->getStore()->getSiteLinkTable(),
+			$this->getSiteStore(),
+			$settings->getSetting( 'otherProjectsLinks' )
+		);
+	}
 }
