@@ -387,7 +387,7 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	 *
 	 * @return EntityRevision
 	 */
-	private function testGetEntityRevisionCommon( $revId = null ) {
+	public function testGetEntityRevisionCommon( $revId = null ) {
 		$content = $this->newEmpty();
 
 		$id = $content->grabFreshId();
