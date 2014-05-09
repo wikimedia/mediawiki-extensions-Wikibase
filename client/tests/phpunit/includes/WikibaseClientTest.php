@@ -166,6 +166,12 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\ClientSiteLinkLookup', $returnValue );
 	}
 
+	public function testGetOtherProjectsSidebarGeneratorReturnType() {
+		$this->getDefaultInstance()->getSettings()->setSetting( 'otherProjectsLinks', array( 'my_wiki' ) );
+		$returnValue = $this->getDefaultInstance()->getOtherProjectsSidebarGenerator();
+		$this->assertInstanceOf( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator', $returnValue );
+	}
+
 	public function testGetDefaultInstance() {
 		$this->assertSame(
 			WikibaseClient::getDefaultInstance(),
