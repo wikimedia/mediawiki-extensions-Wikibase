@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_933473f9",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "right, will do!",
+      "parentUuid": "8e23439c_bda18038",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_3db69086",
         "filename": "lib/includes/store/EntityStore.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-08T23:07:31Z",
       "side": 1,
       "message": "Is \"fresh\" a common term for what this does? MySQL calls this auto increment, right? Other DBMS call this \"get next from sequence\".\n\n\"getNextFreeId\" is a possible suggestion. Not sure if it\u0027s better.",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d379cbf3",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "Until now, we have been using \"grabFreshid\". The new name is consistent with that. getNextFreeId is good too.",
+      "parentUuid": "8e23439c_3db69086",
       "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7320b7a8",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8e23439c_9d66c425",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_7d6be8ee",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-05-08T23:07:31Z",
       "side": 1,
       "message": "You should either remove this line or remove all backslashes from all \\MWException below.",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_96fa210c",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_7d6be8ee",
       "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_130f433d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "It\u0027s done before calling this method - or saving will fail later. \nThis method is moved into EntityStore by the a follow-up patch, which will make the logic clear again.",
+      "parentUuid": "8e23439c_a021539f",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_5d702cd9",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2014-05-08T23:07:31Z",
       "side": 1,
       "message": "Backslash.",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b3052f19",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_5d702cd9",
       "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_f30ba72c",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_1d7ab4b9",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_bd80608f",
         "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
         "patchSetId": 1
@@ -132,6 +258,24 @@
       "writtenOn": "2014-05-08T23:07:31Z",
       "side": 1,
       "message": "Not true.",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d308ab32",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-09T09:26:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_bd80608f",
       "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
