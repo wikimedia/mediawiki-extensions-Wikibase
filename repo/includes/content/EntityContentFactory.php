@@ -91,29 +91,6 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	}
 
 	/**
-	 * Get the entity content for the entity with the provided id
-	 * if it's available to the specified audience.
-	 * If the specified audience does not have the ability to view this
-	 * revision, if there is no such item, null will be returned.
-	 *
-	 * @since 0.2
-	 *
-	 * @param EntityId $id
-	 *
-	 * @param integer $audience: one of:
-	 *      Revision::FOR_PUBLIC       to be displayed to all users
-	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
-	 *      Revision::RAW              get the text regardless of permissions
-	 *
-	 * @return EntityContent|null
-	 */
-	public function getFromId( EntityId $id, $audience = Revision::FOR_PUBLIC ) {
-		// TODO: since we already did the trouble of getting a WikiPage here,
-		// we probably want to keep a copy of it in the Content object.
-		return $this->getWikiPageForId( $id )->getContent( $audience );
-	}
-
-	/**
 	 * Returns the Title object for the item with provided id.
 	 *
 	 * @since 0.3

@@ -5,6 +5,7 @@ namespace Wikibase\Repo;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use SiteSQLStore;
+use SiteStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
@@ -611,9 +612,9 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return SiteSQLStore
+	 * @return SiteStore
 	 */
-	protected function getSitesTable() {
+	public function getSiteStore() {
 		return SiteSQLStore::newInstance();
 	}
 
@@ -634,7 +635,7 @@ class WikibaseRepo {
 		return new MessageParameterFormatter(
 			new DispatchingValueFormatter( $valueFormatters ),
 			$this->getEntityTitleLookup(),
-			$this->getSitesTable(),
+			$this->getSiteStore(),
 			$wgLang
 		);
 	}

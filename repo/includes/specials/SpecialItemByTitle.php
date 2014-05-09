@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Repo\Specials;
-use ContentHandler;
 use Html;
 use Site;
 use Wikibase\ItemHandler;
@@ -27,6 +26,14 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	public function __construct() {
 		// args $name, $restriction, $listed
 		parent::__construct( 'ItemByTitle', '', true );
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$this->normalizeItemByTitlePageNames = $settings->getSetting( 'normalizeItemByTitlePageNames' );
+		$this->groups = $settings->getSetting( 'siteLinkGroups' );
+
+		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$this->sites = WikibaseRepo::getDefaultInstance()->getSiteStore();
+		$this->siteLinkLookup = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 	}
 
 	/**
@@ -51,7 +58,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			$siteId = $this->stringNormalizer->trimToNFC( $site ); // no stripping of underscores here!
 			$pageName = $this->stringNormalizer->trimToNFC( $page );
 
-			if ( !\Sites::singleton()->getSite( $siteId ) ) {
+			if ( !$this->sites->getSite( $siteId ) ) {
 				// HACK: If the site ID isn't known, add "wiki" to it; this allows the wikipedia
 				// subdomains to be used to refer to wikipedias, instead of requiring their
 				// full global id to be used.
@@ -62,25 +69,22 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			}
 
 			/* @var ItemHandler $itemHandler */
-			$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
-
-			$normalizeItemByTitlePageNames = WikibaseRepo::getDefaultInstance()->
-				getSettings()->getSetting( 'normalizeItemByTitlePageNames' );
+			$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
 
 			// Do we have an item content, and if not can we try harder?
-			if ( $itemContent === null && $normalizeItemByTitlePageNames === true ) {
+			if ( $itemId === null && $this->normalizeItemByTitlePageNames === true ) {
 				// Try harder by requesting normalization on the external site
-				$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
+				$siteObj = $this->sites->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
 					$pageName = $siteObj->normalizePageName( $page );
-					$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
+					$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
 				}
 			}
 
 			// Redirect to the item page if we found its content
-			if ( $itemContent !== null ) {
-				$itemUrl = $itemContent->getTitle()->getFullUrl();
+			if ( $itemId !== null ) {
+				$title = $this->titleLookup->getTitleForId( $itemId );
+				$itemUrl = $title->getFullUrl();
 				$this->getOutput()->redirect( $itemUrl );
 				return;
 			}
@@ -100,13 +104,9 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 */
 	protected function switchForm( $siteId, $page ) {
 
-		$groups = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'siteLinkGroups' );
-		$sites = \SiteSQLStore::newInstance()->getSites();
-
-		if ( $sites->hasSite( $siteId ) ) {
-			$site = $sites->getSite( $siteId );
-			$siteExists = in_array( $site->getGroup(), $groups );
+		if ( $this->sites->getSites()->hasSite( $siteId ) ) {
+			$site = $this->sites->getSite( $siteId );
+			$siteExists = in_array( $site->getGroup(), $this->groups );
 		} else {
 			$siteExists = false;
 		}
@@ -188,5 +188,4 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		}
 
 	}
-
 }
