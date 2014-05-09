@@ -69,66 +69,6 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * Get the item corresponding to the provided site and title pair,
-	 * or null if there is no such item.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $siteId
-	 * @param string $pageName
-	 *
-	 * @return ItemContent|null
-	 */
-	public function getContentFromSiteLink( $siteId, $pageName ) {
-		$id = $this->getIdForSiteLink( $siteId, $pageName );
-
-		if ( $id === null ) {
-			return null;
-		}
-
-		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getFromId( $id );
-	}
-
-	/**
-	 * Get the item id for a site and page pair.
-	 * Returns null when there is no such pair.
-	 *
-	 * @since 0.1
-	 * @deprecated in 0.5, use SiteLinkLookup::getItemIdForLink instead
-	 *
-	 * @param string $siteId
-	 * @param string $pageName
-	 *
-	 * @return ItemId|null
-	 */
-	public function getIdForSiteLink( $siteId, $pageName ) {
-		return StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $pageName );
-	}
-
-	/**
-	 * Get the title of the item corresponding to the provided site and title pair,
-	 * or null if there is no such item.
-	 *
-	 * @since 0.3
-	 * @deprecated in 0.5, use SiteLinkLookup::getItemIdForLink
-	 * with EntityTitleLookup::getTitleForId instead
-	 *
-	 * @param string $siteId
-	 * @param string $pageName
-	 *
-	 * @return Title|null
-	 */
-	public function getTitleFromSiteLink( $siteId, $pageName ) {
-		$id = $this->getIdForSiteLink( $siteId, $pageName );
-
-		if ( $id === null ) {
-			return null;
-		}
-
-		return WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $id );
-	}
-
-	/**
 	 * @see EntityHandler::getSpecialPageForCreation
 	 * @since 0.2
 	 *
