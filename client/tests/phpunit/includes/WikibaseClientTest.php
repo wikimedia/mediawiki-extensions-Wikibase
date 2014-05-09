@@ -9,7 +9,6 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 
 /**
@@ -169,6 +168,19 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetClientSiteLinkLookupReturnType() {
 		$returnValue = $this->getDefaultInstance()->getClientSiteLinkLookup();
 		$this->assertInstanceOf( 'Wikibase\Client\ClientSiteLinkLookup', $returnValue );
+	}
+
+	public function testGetOtherProjectsSidebarGeneratorReturnType() {
+		$settings = $this->getDefaultInstance()->getSettings();
+
+		$otherProjectsLinks = $settings->getSetting( 'otherProjectsLinks' );
+
+		$settings->setSetting( 'otherProjectsLinks', array( 'my_wiki' ) );
+
+		$returnValue = $this->getDefaultInstance()->getOtherProjectsSidebarGenerator();
+		$this->assertInstanceOf( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator', $returnValue );
+
+		$settings->setSetting( 'otherProjectsLinks', $otherProjectsLinks );
 	}
 
 	public function testGetDefaultInstance() {
