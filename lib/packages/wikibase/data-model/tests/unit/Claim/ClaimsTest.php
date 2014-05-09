@@ -803,6 +803,18 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $claims->getBestClaims(), $expected );
 	}
 
+	public function testGetBestClaimsReturnsTruthRanks() {
+		$s1 = new Claim( new PropertyNoValueSnak( new PropertyId( "P1" ) ) );
+		$s1->setGuid( 'kittens' );
+
+		$s2 = $this->makeStatement( new PropertyNoValueSnak( new PropertyId( "P2" ) ) );
+		$s2->setRank( Claim::RANK_NORMAL );
+
+		$claims = new Claims( array( $s1, $s2 ) );
+		$expected = new Claims( array( $s1 ) );
+		$this->assertEquals( $claims->getBestClaims(), $expected );
+	}
+
 	public function testEmptyListEqualsEmptyList() {
 		$list = new Claims( array() );
 		$this->assertTrue( $list->equals( clone $list ) );
