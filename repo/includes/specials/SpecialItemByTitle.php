@@ -1,11 +1,13 @@
 <?php
 
 namespace Wikibase\Repo\Specials;
-use ContentHandler;
 use Html;
 use Site;
+use SiteStore;
+use Wikibase\EntityTitleLookup;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SiteLinkLookup;
 
 /**
  * Enables accessing items by providing the identifier of a site and the title
@@ -14,8 +16,36 @@ use Wikibase\Repo\WikibaseRepo;
  * @since 0.1
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SpecialItemByTitle extends SpecialItemResolver {
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $titleLookup;
+
+	/**
+	 * @var SiteStore
+	 */
+	private $sites;
+
+	/**
+	 * @var SiteLinkLookup
+	 */
+	private $siteLinkLookup;
+
+	/**
+	 * @var bool
+	 */
+	private $normalizeItemByTitlePageNames;
+
+	/**
+	 * site link groups
+	 *
+	 * @var string[]
+	 */
+	private $groups;
 
 	/**
 	 * Constructor.
@@ -27,6 +57,52 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	public function __construct() {
 		// args $name, $restriction, $listed
 		parent::__construct( 'ItemByTitle', '', true );
+
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+
+		$this->initSettings(
+			$settings->getSetting( 'normalizeItemByTitlePageNames' ),
+			$settings->getSetting( 'siteLinkGroups' )
+		);
+
+		$this->initServices(
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup(),
+			WikibaseRepo::getDefaultInstance()->getSiteStore(),
+			WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache()
+		);
+	}
+
+	/**
+	 * Initialize essential settings for this special page.
+	 * may be used by unit tests to override global settings.
+	 *
+	 * @param $normalizeItemByTitlePageNames
+	 * @param $siteLinkGroups
+	 */
+	public function initSettings(
+		$normalizeItemByTitlePageNames,
+		$siteLinkGroups
+	) {
+		$this->normalizeItemByTitlePageNames = $normalizeItemByTitlePageNames;
+		$this->groups = $siteLinkGroups;
+	}
+
+	/**
+	 * Initialize the services used be this special page.
+	 * May be used to inject mock services for testing.
+	 *
+	 * @param EntityTitleLookup $titleLookup
+	 * @param SiteStore $siteStore
+	 * @param SiteLinkLookup $siteLinkLookup
+	 */
+	public function initServices(
+		EntityTitleLookup $titleLookup,
+		SiteStore $siteStore,
+		SiteLinkLookup $siteLinkLookup
+	) {
+		$this->titleLookup = $titleLookup;
+		$this->sites = $siteStore;
+		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
 	/**
@@ -51,7 +127,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			$siteId = $this->stringNormalizer->trimToNFC( $site ); // no stripping of underscores here!
 			$pageName = $this->stringNormalizer->trimToNFC( $page );
 
-			if ( !\Sites::singleton()->getSite( $siteId ) ) {
+			if ( !$this->sites->getSite( $siteId ) ) {
 				// HACK: If the site ID isn't known, add "wiki" to it; this allows the wikipedia
 				// subdomains to be used to refer to wikipedias, instead of requiring their
 				// full global id to be used.
@@ -62,25 +138,22 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			}
 
 			/* @var ItemHandler $itemHandler */
-			$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-			$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
-
-			$normalizeItemByTitlePageNames = WikibaseRepo::getDefaultInstance()->
-				getSettings()->getSetting( 'normalizeItemByTitlePageNames' );
+			$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
 
 			// Do we have an item content, and if not can we try harder?
-			if ( $itemContent === null && $normalizeItemByTitlePageNames === true ) {
+			if ( $itemId === null && $this->normalizeItemByTitlePageNames === true ) {
 				// Try harder by requesting normalization on the external site
-				$siteObj = \SiteSQLStore::newInstance()->getSite( $siteId );
+				$siteObj = $this->sites->getSite( $siteId );
 				if ( $siteObj instanceof Site ) {
 					$pageName = $siteObj->normalizePageName( $page );
-					$itemContent = $itemHandler->getContentFromSiteLink( $siteId, $pageName );
+					$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
 				}
 			}
 
 			// Redirect to the item page if we found its content
-			if ( $itemContent !== null ) {
-				$itemUrl = $itemContent->getTitle()->getFullUrl();
+			if ( $itemId !== null ) {
+				$title = $this->titleLookup->getTitleForId( $itemId );
+				$itemUrl = $title->getFullUrl();
 				$this->getOutput()->redirect( $itemUrl );
 				return;
 			}
@@ -100,13 +173,9 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 */
 	protected function switchForm( $siteId, $page ) {
 
-		$groups = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'siteLinkGroups' );
-		$sites = \SiteSQLStore::newInstance()->getSites();
-
-		if ( $sites->hasSite( $siteId ) ) {
-			$site = $sites->getSite( $siteId );
-			$siteExists = in_array( $site->getGroup(), $groups );
+		if ( $this->sites->getSites()->hasSite( $siteId ) ) {
+			$site = $this->sites->getSite( $siteId );
+			$siteExists = in_array( $site->getGroup(), $this->groups );
 		} else {
 			$siteExists = false;
 		}
@@ -188,5 +257,4 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		}
 
 	}
-
 }
