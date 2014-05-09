@@ -39,6 +39,8 @@ return call_user_func( function() {
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinks' => array(),
+		'otherProjectsLinksByDefault' => false,
+		'otherProjectsLinksBeta' => false,
 		// List of additional CSS class names for site links that have badges, e.g.
 		// array( 'Q101' => 'wb-badge-featuredarticle' ).
 		'badgeClassNames' => array(),
