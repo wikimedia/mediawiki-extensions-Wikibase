@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_9e4d8f78",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-10T14:32:25Z",
+      "side": 1,
+      "message": "Please split this into a separate function",
+      "revId": "142bb337e8c842d543e00013fe5d0f9e71f38a1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_be484b67",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-10T14:32:25Z",
+      "side": 1,
+      "message": "We have to go deeper!",
+      "revId": "142bb337e8c842d543e00013fe5d0f9e71f38a1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
