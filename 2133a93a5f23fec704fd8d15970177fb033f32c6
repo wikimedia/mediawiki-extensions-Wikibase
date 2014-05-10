@@ -195,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_d9768101",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-10T18:56:13Z",
+      "side": 1,
+      "message": "I kept this case as a placeholder; in the follow-up patch, this code is moved to EntityStore, and the old behavior of grabbing an ID in the isNew() case is restored. I can change this, but it\u0027s pointless, since this code is removed by the follow up...",
+      "parentUuid": "8e23439c_c21fafb9",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_5d702cd9",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 1
