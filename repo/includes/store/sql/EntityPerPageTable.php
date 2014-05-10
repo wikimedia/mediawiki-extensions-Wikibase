@@ -265,9 +265,10 @@ class EntityPerPageTable implements EntityPerPage {
 		if ( $after ) {
 			if ( $entityType === null ) {
 				// Ugly. About time we switch to qualified, string based IDs!
-				$where[] = '( ( epp_entity_type = ' . $dbr->addQuotes( $after->getEntityType() ) .
-						'AND epp_entity_id > ' . $after->getNumericId() . ' ) ' .
-						' OR epp_entity_type > ' . $dbr->addQuotes( $after->getEntityType() ) . ' )';
+				// NOTE: this must be consistent with the sort order, see above!
+				$where[] = '( ( epp_entity_type > ' . $dbr->addQuotes( $after->getEntityType() ) .
+						'AND epp_entity_id = ' . $after->getNumericId() . ' ) ' .
+						' OR epp_entity_id > ' . $after->getNumericId() . ' )';
 			} else {
 				$where[] = 'epp_entity_id > ' . $after->getNumericId();
 			}
