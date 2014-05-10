@@ -1277,4 +1277,55 @@ final class RepoHooks {
 		return new PropertyHandler( $validators );
 	}
 
+	/**
+	 * Helper for onAPIQuerySiteInfoStatisticsInfo
+	 * @param object $row
+	 * @return array
+	 */
+	private static function formatDispatchRow( $row ) {
+		$data = array(
+			'pending' => $row->chd_pending,
+			'lag' => $row->chd_lag,
+		);
+		if ( isset( $row->chd_site ) ) {
+			$data['site'] = $row->chd_site;
+		}
+		if ( isset( $row->chd_seen ) ) {
+			$data['position'] = $row->chd_seen;
+		}
+		if ( isset( $row->chd_touched ) ) {
+			$data['touched'] = $row->chd_touched;
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Adds DispatchStats info to the API
+	 * @param array $data
+	 * @return bool
+	 */
+	public static function onAPIQuerySiteInfoStatisticsInfo( array &$data ) {
+		$stats = new DispatchStats();
+		$stats->load();
+		if ( $stats->hasStats() ) {
+			$data['dispatch'] = array(
+				'oldest' => array(
+					'id' => $stats->getMinChangeId(),
+					'timestamp' => $stats->getMinChangeTimestamp(),
+				),
+				'newest' => array(
+					'id' => $stats->getMaxChangeId(),
+					'timestamp' => $stats->getMaxChangeTimestamp(),
+				),
+				'freshest' => self::formatDispatchRow( $stats->getFreshest() ),
+				'median' => self::formatDispatchRow( $stats->getMedian() ),
+				'stalest' => self::formatDispatchRow( $stats->getStalest() ),
+				'average' => self::formatDispatchRow( $stats->getAverage() ),
+			);
+		}
+
+		return true;
+	}
+
 }
