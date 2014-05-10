@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_c21fafb9",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-10T15:26:41Z",
+      "side": 1,
+      "message": "Oh, ... wait, ... I\u0027m afraid you confused something then. If this \"is done before calling this method\" then isNew() can never return true. If it does there is something wrong and this should throw an exception. It should not just go ahead if the ID is missing.\n\nSuggestion:\n\nif ( $this-\u003eisNew() ) {\n\treturn Status::newFatal( \u0027edit-gone-missing\u0027 );\n} elseif ( ( $flags \u0026 EDIT_NEW ) \u003d\u003d EDIT_NEW \u0026\u0026 $this-\u003egetTitle()-\u003eexists() ) {\n\treturn Status::newFatal( \u0027edit-already-exists\u0027 );\n}",
+      "parentUuid": "8e23439c_130f433d",
+      "revId": "2133a93a5f23fec704fd8d15970177fb033f32c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_5d702cd9",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 1
