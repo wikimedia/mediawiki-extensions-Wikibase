@@ -106,7 +106,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$expectedIds = $this->getIdStrings( $expected );
 		$actualIds = $this->getIdStrings( $actual );
 
-		$this->assertArrayEquals( $expectedIds, $actualIds, $msg );
+		$this->assertArrayEquals( $expectedIds, $actualIds, false );
 	}
 
 	/**
