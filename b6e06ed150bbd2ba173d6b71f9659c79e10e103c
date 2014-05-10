@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_4db2af49",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-05-10T13:48:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_2d39b3cb",
+      "revId": "b6e06ed150bbd2ba173d6b71f9659c79e10e103c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_0d46f754",
         "filename": "client/i18n/en.json",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-10T08:48:47Z",
       "side": 1,
       "message": "The description needs improvement. It reads a bit wonky.",
+      "revId": "b6e06ed150bbd2ba173d6b71f9659c79e10e103c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f3227cfb",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-05-10T13:48:57Z",
+      "side": 1,
+      "message": "Improved with Lydia\u0027s help.",
+      "parentUuid": "8e23439c_0d46f754",
       "revId": "b6e06ed150bbd2ba173d6b71f9659c79e10e103c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
