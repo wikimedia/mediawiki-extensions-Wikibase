@@ -4,10 +4,13 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use SiteSQLStore;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
+use Wikibase\EntityLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
@@ -45,6 +48,21 @@ class SearchEntities extends ApiBase {
 	protected $idParser;
 
 	/**
+	 * @var SiteLinkTargetProvider
+	 */
+	private $siteLinkTargetProvider;
+
+	/**
+	 * @var array
+	 */
+	private $siteLinkGroups;
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -57,6 +75,9 @@ class SearchEntities extends ApiBase {
 		//TODO: provide a mechanism to override the services
 		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$this->siteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
+		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 	}
 
 	/**
@@ -129,8 +150,13 @@ class SearchEntities extends ApiBase {
 			$params['language'], $missing ) );
 		$ids = array_unique( $ids );
 
-		$entries = $this->getEntries( $ids, $params['search'], $params['type'],
-			$params['language'] );
+		$entries = $this->getEntries(
+			$ids,
+			$params['search'],
+			$params['type'],
+			$params['language'],
+			$params['sites']
+		);
 
 		wfProfileOut( __METHOD__ );
 		return $entries;
@@ -202,10 +228,11 @@ class SearchEntities extends ApiBase {
 	 * @param string $search
 	 * @param string $entityType
 	 * @param string|null $language language code
+	 * @param string|null $sites
 	 *
 	 * @return array[]
 	 */
-	private function getEntries( array $ids, $search, $entityType, $language ) {
+	private function getEntries( array $ids, $search, $entityType, $language, $sites ) {
 		/**
 		 * @var array[] $entries
 		 */
@@ -218,6 +245,21 @@ class SearchEntities extends ApiBase {
 				'id' => $id->getPrefixedId(),
 				'url' => $title->getFullUrl()
 			);
+
+			if( !empty( $sites ) ) {
+				$item = $this->entityLookup->getEntity( $id );
+				if( $item instanceof Item ) {
+					$pickedSiteLinks = array();
+					foreach( $sites as $site ) {
+						if( $item->hasLinkToSite( $site ) ) {
+							$pickedSiteLinks[$site] = $item->getSiteLink( $site )->getPageName();
+						}
+					}
+					$entries[ $key ]['sitelinks'] = $pickedSiteLinks;
+					$this->getResult()->setIndexedTagName( $entries[ $key ]['sitelinks'], 'sitelinks' );
+				}
+			}
+
 		}
 
 		// Find all the remaining terms for the given entities
@@ -326,6 +368,7 @@ class SearchEntities extends ApiBase {
 	 * @see \ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
+		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 		return array(
 			'search' => array(
 				ApiBase::PARAM_TYPE => 'string',
@@ -334,6 +377,11 @@ class SearchEntities extends ApiBase {
 			'language' => array(
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
+			),
+			'sites' => array(
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_ALLOW_DUPLICATES => true
 			),
 			'type' => array(
 				ApiBase::PARAM_TYPE => EntityFactory::singleton()->getEntityTypes(),
@@ -359,6 +407,7 @@ class SearchEntities extends ApiBase {
 			'search' => 'Search for this text.',
 			'language' => 'Search in this language.',
 			'type' => 'Search for this type of entity.',
+			'sites' => 'Return sitelinks for these sites (separated by |). If sitelink for a requested site is missing, it will not be present in the output.',
 			'limit' => 'Maximal number of results',
 			'continue' => 'Offset where to continue a search',
 		);
@@ -385,9 +434,14 @@ class SearchEntities extends ApiBase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsearchentities&search=abc&language=en' => 'Search for "abc" in English language, with defaults for type and limit',
-			'api.php?action=wbsearchentities&search=abc&language=en&limit=50' => 'Search for "abc" in English language with a limit of 50',
-			'api.php?action=wbsearchentities&search=alphabet&language=en&type=property' => 'Search for "alphabet" in English language for type property',
+			'api.php?action=wbsearchentities&search=abc&language=en'
+			=> 'Search for "abc" in English language, with defaults for type and limit',
+			'api.php?action=wbsearchentities&search=abc&language=en&limit=50'
+			=> 'Search for "abc" in English language with a limit of 50',
+			'api.php?action=wbsearchentities&search=alphabet&language=en&type=property'
+			=> 'Search for "alphabet" in English language for type property',
+			'api.php?action=wbsearchentities&search=abc&language=en&sites=enwiki' =>
+				'Search for "abc" in English language, with defaults for type and limit. Include sitelink to enwiki if present'
 		);
 	}
 
