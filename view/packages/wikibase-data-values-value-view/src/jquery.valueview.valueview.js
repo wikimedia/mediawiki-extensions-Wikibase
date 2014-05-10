@@ -495,6 +495,7 @@ $.widget( 'valueview.valueview', PARENT, {
 					mediaWiki: this.options.mediaWiki
 				}
 			);
+			this._expert.init();
 		}
 	},
 

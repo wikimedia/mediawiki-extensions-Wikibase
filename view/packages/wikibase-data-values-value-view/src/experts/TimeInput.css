@@ -6,36 +6,3 @@
 .valueview-expert-TimeInput-input {
 	width: 100%;
 }
-
-.ui-inputextender-extension .valueview-expert-TimeInput-advancedtoggler {
-	border: none;
-	background: none;
-	margin-top: 0.5em;
-	padding-top: 0.5em;
-	border-top: 1px dashed #CCC;
-	width: 100%;
-}
-
-.ui-inputextender-extension .valueview-expert-TimeInput-calendarhint {
-	margin-top: 0;
-}
-
-.ui-inputextender-extension .valueview-expert-TimeInput-calendarhint-message {
-	margin-right: 0.5em;
-}
-
-.ui-inputextender-extension .valueview-expert-TimeInput-calendarhint-switch {
-	border: none;
-	background: none;
-}
-
-/* TODO: Move general preview styles to a more generic place */
-.ui-inputextender-extension .ui-preview {
-	margin-top: 0;
-	width: 100%;
-}
-.ui-inputextender-extension .ui-preview-value {
-	margin-top: 0.2em;
-	font-size: 150%;
-	font-weight: bold;
-}

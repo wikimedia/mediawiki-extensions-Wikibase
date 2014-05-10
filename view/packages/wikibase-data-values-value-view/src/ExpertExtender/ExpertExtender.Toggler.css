@@ -1,0 +1,8 @@
+.ui-inputextender-extension .valueview-expertextender-advancedtoggler {
+	border: none;
+	background: none;
+	margin-top: 0.5em;
+	padding-top: 0.5em;
+	border-top: 1px dashed #CCC;
+	width: 100%;
+}
