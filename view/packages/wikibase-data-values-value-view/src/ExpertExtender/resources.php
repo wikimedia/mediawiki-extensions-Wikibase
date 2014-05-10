@@ -56,6 +56,22 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.ExpertExtender.LanguageSelector' => $moduleTemplate + array(
+			'scripts' => array(
+				'ExpertExtender.LanguageSelector.js',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.uls',
+				'jquery.ui.suggester',
+				'jquery.valueview.ExpertExtender',
+			),
+			'messages' => array(
+				'valueview-expertextender-languageselector-languagetemplate',
+				'valueview-expertextender-languageselector-label',
+			)
+		),
+
 		'jquery.valueview.ExpertExtender.Listrotator' => $moduleTemplate + array(
 			'scripts' => array(
 				'ExpertExtender.Listrotator.js',

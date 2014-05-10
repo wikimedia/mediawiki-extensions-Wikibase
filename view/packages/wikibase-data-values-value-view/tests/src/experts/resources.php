@@ -28,6 +28,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.MonolingualText.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'MonolingualText.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.experts.MonolingualText',
+				'jquery.valueview.tests.testExpert',
+			),
+		),
+
 		'jquery.valueview.experts.StringValue.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'StringValue.tests.js',

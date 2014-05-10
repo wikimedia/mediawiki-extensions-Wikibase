@@ -20,6 +20,8 @@
     "valueview-expertextender-calendarhint-julian": "(Julian calendar)",
     "valueview-expertextender-calendarhint-switch-gregorian": "&rarr; change to Gregorian",
     "valueview-expertextender-calendarhint-switch-julian": "&rarr; change to Julian",
+    "valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+    "valueview-expertextender-languageselector-label": "Language: ",
     "valueview-preview-label": "will be displayed as:",
     "valueview-preview-novalue": "no valid value recognized",
     "valueview-listrotator-auto": "auto"
