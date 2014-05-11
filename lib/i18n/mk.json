@@ -35,7 +35,7 @@
 	"wikibase-error-ui-cant-edit": "Не сте овластени да ја извршите оваа постапка.",
 	"wikibase-error-ui-no-permissions": "Ги немате потребните права за да го извршите ова дејство.",
 	"wikibase-error-ui-link-exists": "Не можете да ставите врска за оваа страница бидејќи веќе има друг предмет што води до неа.",
-	"wikibase-error-ui-session-failure": "Сесијата истече. Најавете се повторно.",
+	"wikibase-error-ui-session-failure": "Седницата истече. Најавете се повторно.",
 	"wikibase-error-ui-edit-conflict": "Се јави спротиставеност во уредувањата. Превчитајте и зачувајте повторно.",
 	"wikibase-quantitydetails-amount": "Износ",
 	"wikibase-quantitydetails-upperbound": "Горна граница",

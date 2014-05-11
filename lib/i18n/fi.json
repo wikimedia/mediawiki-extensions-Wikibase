@@ -6,7 +6,8 @@
 			"Nedergard",
 			"Nike",
 			"Stryn",
-			"VezonThunder"
+			"VezonThunder",
+			"Pxos"
 		]
 	},
 	"wikibase-lib-desc": "Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta",
@@ -38,7 +39,7 @@
 	"wikibase-error-ui-client-error": "Yhteys asiakassivuun epäonnistui. Yritä myöhemmin uudelleen.",
 	"wikibase-error-ui-no-external-page": "Määritettyä artikkelia ei löytynyt vastaavalta sivustolta.",
 	"wikibase-error-ui-cant-edit": "Sinulla ei ole oikeutta suorittaa tätä toimintoa.",
-	"wikibase-error-ui-no-permissions": "Sinulla ei ole tämän toiminnon suorittamiseen vaadittavia oikeuksia.",
+	"wikibase-error-ui-no-permissions": "Sinulla ei ole sellaisia käyttöoikeuksia, joita tarvitaan tämän toimenpiteen suorittamiseen.",
 	"wikibase-error-ui-link-exists": "Et voi lisätä linkkiä tähän sivuun, koska toisessa kohteessa on jo sama linkki.",
 	"wikibase-error-ui-session-failure": "Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.",
 	"wikibase-error-ui-edit-conflict": "Tapahtui muokkausristiriita. Päivitä sivu ja tallenna uudelleen.",
