@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_ff8fda76",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-11T16:08:13Z",
+      "side": 1,
+      "message": "s/should/will/ ?!",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9ff6a6f5",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-11T16:08:13Z",
+      "side": 1,
+      "message": "setId says \"The support for setting an integer here is deprecated since 0.5.\"\nThis at very least needs a fixme",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7f586afd",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-11T16:08:13Z",
+      "side": 1,
+      "message": "I don\u0027t fell like this error really is adequate",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9f0a26d4",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-11T16:08:13Z",
+      "side": 1,
+      "message": "So fix it :P",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
