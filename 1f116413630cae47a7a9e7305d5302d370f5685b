@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_557a2dba",
+        "filename": "lib/includes/store/EntityStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-12T12:15:24Z",
+      "side": 1,
+      "message": "\"should\", as this is a spec of the contract of the interface, not a description of an implementation. I could use \"shall\", I guess.",
+      "parentUuid": "8e23439c_ff8fda76",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_9ff6a6f5",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-11T16:08:13Z",
       "side": 1,
       "message": "setId says \"The support for setting an integer here is deprecated since 0.5.\"\nThis at very least needs a fixme",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3577b1d1",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-12T12:15:24Z",
+      "side": 1,
+      "message": "Yes, indeed - and I remember writing such a FIXME. I wonder where that went.",
+      "parentUuid": "8e23439c_9ff6a6f5",
       "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_f5801990",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-12T12:15:24Z",
+      "side": 1,
+      "message": "You are right. Once this code moved to EntityStore, this will become clear again. See Ia99a5f2929185",
+      "parentUuid": "8e23439c_7f586afd",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_9f0a26d4",
         "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2014-05-11T16:08:13Z",
       "side": 1,
       "message": "So fix it :P",
+      "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d54d1da0",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-12T12:15:24Z",
+      "side": 1,
+      "message": "But how? The IdGenerator currently generates integers. It\u0027s not clear to me where the logic mapping integers to EntityIds should reside. I suppose we will need an EntityIdFactory or some such. Anyway, that\u0027s not in scope of this patch.",
+      "parentUuid": "8e23439c_9f0a26d4",
       "revId": "1f116413630cae47a7a9e7305d5302d370f5685b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
