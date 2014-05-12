@@ -115,15 +115,8 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * @param int $index
 	 */
 	protected function insertClaimAtIndex( Claim $claim, $index ) {
-		$claimsToShift = array();
-		$i = 0;
-
 		// Determine the claims to shift and remove them from the array:
-		foreach( $this as $object ) {
-			if( $i++ >= $index ) {
-				$claimsToShift[] = $object;
-			}
-		}
+		$claimsToShift = array_slice( (array)$this, $index );
 
 		foreach( $claimsToShift as $object ) {
 			$this->offsetUnset( $this->getClaimKey( $object ) );
