@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_69c1cd82",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-13T19:17:46Z",
+      "side": 1,
+      "message": "It may not look like it, but it\u0027s wikitext. The message is passed through parse(), so it will be sanitized, \"evil\" html will not work.",
+      "parentUuid": "8e23439c_c9846161",
+      "revId": "754b6f5b995e8a58642d1043590ca617b46499cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_a9b24546",
         "filename": "lib/includes/formatters/MonolingualHtmlFormatter.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_2933d5c1",
+        "filename": "lib/includes/formatters/MonolingualHtmlFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-13T19:17:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_a9b24546",
+      "revId": "754b6f5b995e8a58642d1043590ca617b46499cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_2986356b",
         "filename": "lib/includes/formatters/MonolingualTextFormatter.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-05-13T19:11:20Z",
       "side": 1,
       "message": "This is nearly identical to the parent\u0027s constructor. A constructor probably shouldn\u0027t set member variables which the parent constructor is supposed to handle, that is hard to maintain and understand.",
+      "revId": "754b6f5b995e8a58642d1043590ca617b46499cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0938199a",
+        "filename": "lib/includes/formatters/MonolingualTextFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-13T19:17:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_2986356b",
       "revId": "754b6f5b995e8a58642d1043590ca617b46499cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
