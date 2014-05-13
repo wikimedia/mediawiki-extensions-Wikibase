@@ -223,12 +223,13 @@ class ChangeOpsMerge {
 	 *
 	 * @param Statement $fromStatement
 	 *
-	 * @return Claim|bool Claim to merge reference into or false
+	 * @return Claim|false Claim to merge reference into or false
 	 */
 	private function findEquivalentClaim( $fromStatement ) {
+		$fromHash = $this->getClaimHash( $fromStatement );
+
 		/** @var $claim Claim */
 		foreach( $this->toItem->getClaims() as $claim ) {
-			$fromHash = $this->getClaimHash( $fromStatement );
 			$toHash = $this->getClaimHash( $claim );
 			if( $toHash === $fromHash ) {
 				return $claim;
