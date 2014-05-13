@@ -13,6 +13,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -49,10 +50,10 @@ class GetClaimsTest extends \ApiTestCase {
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		/** @var $claims Claim[] */
-		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( 42 ) );
-		$claims[1] = $entity->newClaim( new PropertyNoValueSnak( 1 ) );
-		$claims[2] = $entity->newClaim( new PropertySomeValueSnak( 42 ) );
-		$claims[3] = $entity->newClaim( new PropertyValueSnak( 9001, new StringValue( 'o_O' ) ) );
+		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
+		$claims[1] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P1' ) ) );
+		$claims[2] = $entity->newClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) );
+		$claims[3] = $entity->newClaim( new PropertyValueSnak( new PropertyId( 'P9001' ), new StringValue( 'o_O' ) ) );
 
 		foreach( $claims as $key => $claim ){
 			$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
@@ -69,14 +70,20 @@ class GetClaimsTest extends \ApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getNewEntities() {
-		$property = Property::newEmpty();
+		static $entities = null;
 
-		$property->setDataTypeId( 'string' );
+		if ( $entities === null ) {
+			$property = Property::newEmpty();
 
-		return array(
-			$this->addClaimsAndSave( Item::newEmpty() ),
-			$this->addClaimsAndSave( $property ),
-		);
+			$property->setDataTypeId( 'string' );
+
+			$entities = array(
+				$this->addClaimsAndSave( Item::newEmpty() ),
+				$this->addClaimsAndSave( $property ),
+			);
+		}
+
+		return $entities;
 	}
 
 	public function validRequestProvider() {
@@ -128,20 +135,14 @@ class GetClaimsTest extends \ApiTestCase {
 		return $argLists;
 	}
 
-	public function testValidRequests() {
-		foreach ( $this->validRequestProvider() as $argList ) {
-			list( $params, $claims, $groupedByProperty ) = $argList;
-
-			$this->doTestValidRequest( $params, $claims, $groupedByProperty );
-		}
-	}
-
 	/**
+	 * @dataProvider validRequestProvider
+	 *
 	 * @param string[] $params
 	 * @param Claims|Claim[] $claims
 	 * @param bool $groupedByProperty
 	 */
-	public function doTestValidRequest( array $params, $claims, $groupedByProperty ) {
+	public function testValidRequest( array $params, $claims, $groupedByProperty ) {
 		if ( is_array( $claims ) ) {
 			$claims = new Claims( $claims );
 		}
@@ -183,6 +184,33 @@ class GetClaimsTest extends \ApiTestCase {
 		return array(
 			array( 'xyz' ),
 			array( 'x$y$z' )
+		);
+	}
+
+	/**
+	 * @dataProvider getInvalidIdsProvider
+	 */
+	public function testGetInvalidIds( $entity, $property ) {
+		$params = array(
+			'action' => 'wbgetclaims',
+			'entity' => $entity,
+			'property' => $property,
+		);
+
+		try {
+			$this->doApiRequest( $params );
+			$this->fail( 'Invalid entity id did not throw an error' );
+		} catch ( UsageException $e ) {
+			$this->assertEquals( 'param-invalid', $e->getCodeString(), 'Invalid entity id raised correct error' );
+		}
+	}
+
+	public function getInvalidIdsProvider() {
+		$entities = $this->getNewEntities();
+
+		return array(
+			array( $entities[0]->getId()->getSerialization(), 'nopeNopeNope' ),
+			array( 'whatTheFuck', 'P42' ),
 		);
 	}
 }
