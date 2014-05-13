@@ -72,7 +72,8 @@ class WikibaseValueFormatterBuilders {
 			'VT:quantity' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newQuantityFormatter' ),
 			'VT:time' => 'Wikibase\Lib\MwTimeIsoFormatter',
 			'VT:wikibase-entityid' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdFormatter' ),
-			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter'
+			'VT:bad' => 'Wikibase\Lib\UnDeserializableValueFormatter',
+			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualTextFormatter',
 		),
 
 		// Formatters to use for wiki text output.
@@ -80,6 +81,7 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_WIKI => array(
 			'PT:url' => 'ValueFormatters\StringFormatter', // no escaping!
 			//'PT:wikibase-item' => 'Wikibase\Lib\LocalItemLinkFormatter', // TODO
+			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualHtmlFormatter',
 		),
 
 		// Formatters to use for HTML display.
@@ -89,6 +91,7 @@ class WikibaseValueFormatterBuilders {
 			'PT:commonsMedia' => 'Wikibase\Lib\CommonsLinkFormatter',
 			'PT:wikibase-item' =>  array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newEntityIdHtmlLinkFormatter' ),
 			'VT:time' => array( 'Wikibase\Lib\WikibaseValueFormatterBuilders', 'newHtmlTimeFormatter' ),
+			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualHtmlFormatter',
 		),
 
 		// Formatters to use for HTML widgets.

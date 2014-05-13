@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
@@ -154,7 +155,25 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 					TimeValue::PRECISION_DAY,
 					TimeFormatter::CALENDAR_JULIAN ),
 				'/^1 May 1980 <sup class="wb-calendar-name">Julian<\/sup>$/'
-			)
+			),
+			'text in english' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions( 'en' ),
+				new MonolingualTextValue( 'en', 'Hello World' ),
+				'/^Hello World$/'
+			),
+			'text in german' => array(
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions( 'en' ),
+				new MonolingualTextValue( 'de', 'Hallo Welt' ),
+				'/^<span lang="de".*?>Hallo Welt<\/span>.*\((German|Deutsch)\).*$/'
+			),
+			'text in spanish' => array(
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions( 'de' ),
+				new MonolingualTextValue( 'es', 'Ola' ),
+				'/^<span lang="es".*?>Ola<\/span>.*\((Spanisch|español)\).*$/u'
+			),
 		);
 	}
 
