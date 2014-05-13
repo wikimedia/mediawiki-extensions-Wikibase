@@ -47,7 +47,10 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 	 * @param ItemContent $itemContent
 	 */
 	public function testDoUpdate( ItemContent $itemContent ) {
-		TestSites::insertIntoDb();
+		$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+		$sitesTable->clear();
+		$sitesTable->saveSites( TestSites::getSites() );
+
 		$linkLookup = StoreFactory::getStore()->newSiteLinkCache();
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();

@@ -5,7 +5,6 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use LogicException;
-use SiteSQLStore;
 use Status;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
@@ -73,7 +72,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		//TODO: provide a mechanism to override the services
 		$this->stringNormalizer = $repo->getStringNormalizer();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( $repo->getSiteStore() );
 
 		$this->siteLinkGroups = $repo->getSettings()->getSetting( 'siteLinkGroups' );
 		$this->siteLinkLookup = $repo->getStore()->newSiteLinkCache();

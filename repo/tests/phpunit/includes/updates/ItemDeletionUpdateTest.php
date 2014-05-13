@@ -27,7 +27,9 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		TestSites::insertIntoDb();
+		$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+		$sitesTable->clear();
+		$sitesTable->saveSites( TestSites::getSites() );
 	}
 
 	public function testConstruct() {

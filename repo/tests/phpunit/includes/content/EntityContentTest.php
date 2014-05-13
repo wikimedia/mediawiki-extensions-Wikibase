@@ -6,16 +6,11 @@ use IContextSource;
 use MediaWikiTestCase;
 use ParserOptions;
 use RequestContext;
-use Revision;
-use Status;
 use Title;
-use User;
 use Wikibase\EntityContent;
-use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
 
 /**
@@ -46,8 +41,6 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 
 		$this->permissions = $wgGroupPermissions;
 		$this->old_user = $wgUser;
-
-		\TestSites::insertIntoDb();
 
 		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 	}

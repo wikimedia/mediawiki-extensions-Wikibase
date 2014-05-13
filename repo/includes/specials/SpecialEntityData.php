@@ -96,7 +96,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$repo->getStore()->getEntityLookup(),
 			$titleLookup,
 			$serializerFactory,
-			SiteSQLStore::newInstance()->getSites()
+			$repo->getSiteStore()->getSites()
 		);
 
 		$maxAge = $repo->getSettings()->getSetting( 'dataSquidMaxage' );

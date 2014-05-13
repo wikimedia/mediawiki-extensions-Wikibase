@@ -84,7 +84,9 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		parent::setUp();
 
 		if ( !self::$badgeId ) {
-			TestSites::insertIntoDb();
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
 
 			$this->createItems();
 

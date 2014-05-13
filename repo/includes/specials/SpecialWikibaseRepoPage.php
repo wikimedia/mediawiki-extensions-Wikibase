@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use MWException;
 use RuntimeException;
+use SiteStore;
 use Status;
 use Title;
 use UserInputException;
@@ -56,6 +57,11 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $permissionChecker;
 
 	/**
+	 * @var SiteStore
+	 */
+	protected $siteStore;
+
+	/**
 	 * @since 0.5
 	 *
 	 * @param string $title The title of the special page
@@ -63,13 +69,15 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 */
 	public function __construct( $title, $restriction ) {
 		parent::__construct( $title, $restriction );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		//TODO: allow overriding services for testing
-		$this->summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
-		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' );
-		$this->titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$this->permissionChecker = WikibaseRepo::getDefaultInstance()->getEntityPermissionChecker();
+		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
+		$this->entityLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
+		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
+		$this->entityStore = $wikibaseRepo->getEntityStore();
+		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
+		$this->siteStore = $wikibaseRepo->getSiteStore();
 	}
 
 	/**

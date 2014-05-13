@@ -7,7 +7,6 @@ use Http;
 use Language;
 use MWException;
 use SiteSQLStore;
-use Sites;
 
 /**
  * Utility functions for Wikibase.
@@ -79,7 +78,7 @@ final class Utils {
 	 * @since 0.1
 	 */
 	public static function insertDefaultSites( $updater = null ) {
-		if ( Sites::singleton()->getSites()->count() > 0 ) {
+		if ( SiteSQLStore::newInstance()->getSites()->count() > 0 ) {
 			return;
 		}
 

@@ -1,7 +1,11 @@
 <?php
 
 namespace Wikibase;
-use ResourceLoaderModule, ResourceLoaderContext, MediaWikiSite, Site;
+use ResourceLoaderModule;
+use ResourceLoaderContext;
+use MediaWikiSite;
+use Site;
+use SiteSQLStore;
 
 /**
  *
@@ -34,7 +38,7 @@ class SitesModule extends ResourceLoaderModule {
 		/**
 		 * @var MediaWikiSite $site
 		 */
-		foreach ( \SiteSQLStore::newInstance()->getSites() as $site ) {
+		foreach ( SiteSQLStore::newInstance()->getSites() as $site ) {
 			$group = $site->getGroup();
 
 			if ( $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $group, $groups ) ) {

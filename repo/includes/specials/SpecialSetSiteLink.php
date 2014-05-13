@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use OutOfBoundsException;
-use SiteSQLStore;
 use Status;
 use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -203,7 +202,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function isValidSiteId( $siteId ) {
-		return $siteId !== null && SiteSQLStore::newInstance()->getSite( $siteId ) !== null;
+		return $siteId !== null && $this->siteStore->getSite( $siteId ) !== null;
 	}
 
 	/**
@@ -256,7 +255,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			);
 		}
 
-		$site = SiteSQLStore::newInstance()->getSite( $this->site );
+		$site = $this->siteStore->getSite( $this->site );
 
 		if ( $entity !== null && $this->site !== null && $site !== null ) {
 			return Html::rawElement(
@@ -430,7 +429,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	protected function setSiteLink( Item $item, $siteId, $pageName, $badges, &$summary ) {
 		$status = Status::newGood();
-		$site = SiteSQLStore::newInstance()->getSite( $siteId );
+		$site = $this->siteStore->getSite( $siteId );
 
 		if ( $site === null ) {
 			$status->fatal( 'wikibase-setsitelink-invalid-site', $siteId );

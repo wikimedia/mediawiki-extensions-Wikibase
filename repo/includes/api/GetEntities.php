@@ -64,7 +64,7 @@ class GetEntities extends ApiWikibase {
 
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( SiteSQLStore::newInstance() );
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( $wikibaseRepo->getSiteStore() );
 		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
 	}
 
@@ -151,7 +151,7 @@ class GetEntities extends ApiWikibase {
 	 */
 	private function getItemByTitleHelper() {
 		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
-		$siteStore = SiteSQLStore::newInstance();
+		$siteStore = WikibaseRepo::getDefaultInstance()->getSiteStore();
 		return new ItemByTitleHelper(
 			$this->getResultBuilder(),
 			$siteLinkCache,

@@ -233,7 +233,7 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newItemSerializer( SerializationOptions $options ) {
-		return new ItemSerializer( $this->newClaimSerializer( $options ), $options, $this->entityFactory, $this->siteStore );
+		return new ItemSerializer( $this->newClaimSerializer( $options ), $this->siteStore, $options, $this->entityFactory );
 	}
 
 	/**

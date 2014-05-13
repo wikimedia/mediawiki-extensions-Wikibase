@@ -9,7 +9,6 @@ use IContextSource;
 use Linker;
 use MWException;
 use Page;
-use SiteSQLStore;
 use Status;
 use Revision;
 use ValueFormatters\FormatterOptions;
@@ -67,7 +66,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$labelFormatter = new EntityIdLabelFormatter( $options, WikibaseRepo::getDefaultInstance()->getEntityLookup() );
 		$this->propertyNameFormatter = new EscapingValueFormatter( $labelFormatter, 'htmlspecialchars' );
 
-		$formatterFactory = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$formatterFactory = $wikibaseRepo->getSnakFormatterFactory();
 		$this->detailedSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_DIFF, $options );
 		$this->terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
@@ -75,7 +75,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->detailedSnakFormatter, $this->terseSnakFormatter, $langCode ),
-			SiteSQLStore::newInstance()
+			$wikibaseRepo->getSiteStore()
 		);
 
 	}
