@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_a9700508",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "where is this used?",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_1f9f4f08",
         "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
         "patchSetId": 16
@@ -19,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_d4207898",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "how about $this-\u003eapplyValidator",
+      "parentUuid": "8e23439c_1f9f4f08",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_ff8373ac",
         "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
         "patchSetId": 16
@@ -30,6 +65,109 @@
       "writtenOn": "2014-05-08T05:46:26Z",
       "side": 1,
       "message": "idem",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_943200ee",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "applyValidator is less confusing.  why should we be concerned here about the details of validator implementation? (e.g. fact that we \u003cs\u003eabuse\u003c/s\u003e use ValueValidator)",
+      "parentUuid": "8e23439c_ff8373ac",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3449ec6a",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "huh, label?",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_742f6486",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "applyValidator",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f4525415",
+        "filename": "repo/includes/ChangeOp/FingerprintChangeOpFactory.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "why no explicit visibility?",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b463bcd9",
+        "filename": "repo/tests/phpunit/includes/Validators/CompositeFingerprintValidatorTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "how is this using Database?",
+      "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_745d241a",
+        "filename": "repo/tests/phpunit/includes/Validators/CompositeFingerprintValidatorTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-13T20:26:50Z",
+      "side": 1,
+      "message": "WikibaseContent?",
       "revId": "d9d6d32b94cb34795463a5c33ead9a8e6072ed01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
