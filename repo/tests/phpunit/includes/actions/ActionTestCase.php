@@ -356,8 +356,8 @@ class ActionTestCase extends MediaWikiTestCase {
 	 */
 	public static function getTestItemPage( $handle ) {
 		$item = self::getTestItem( $handle );
-		$content = ItemContent::newFromItem( $item );
-		$title = $content->getTitle();
+		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $item->getId() );
+
 		$page = WikiPage::factory( $title );
 		return $page;
 	}

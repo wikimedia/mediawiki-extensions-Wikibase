@@ -44,32 +44,6 @@ class ItemContentTest extends EntityContentTest {
 		return '\Wikibase\ItemContent';
 	}
 
-	/**
-	 * @dataProvider siteLinkConflictProvider
-	 */
-	public function testSiteLinkConflict( SimpleSiteLink $siteLink, $expected ) {
-		/** @var ItemContent $content */
-		$content = $this->newEmpty();
-		$content->getItem()->addSiteLink( $siteLink );
-
-		$status = $this->saveContent( $content, 'add item', null, EDIT_NEW );
-
-		$this->assertTrue( $status->isOK(), 'item creation succeeded' );
-
-		/** @var ItemContent $content1 */
-		$content1 = $this->newEmpty();
-		$content1->getItem()->addSiteLink( $siteLink );
-
-		$status = $this->saveContent( $content1, 'add item', null, EDIT_NEW );
-
-		$this->assertFalse( $status->isOK(), "saving an item with a site link conflict should fail" );
-
-		$html = $status->getHTML();
-		$expected = preg_replace( '(\$1)', $content->getTitle()->getFullText(), $html );
-
-		$this->assertEquals( $expected, $status->getHTML() );
-	}
-
 	public function siteLinkConflictProvider() {
 		$prefix = get_class( $this ) . '/';
 
