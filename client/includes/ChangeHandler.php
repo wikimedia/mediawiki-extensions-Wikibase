@@ -5,7 +5,6 @@ namespace Wikibase;
 use MWException;
 use Site;
 use SiteList;
-use Sites;
 use Title;
 use Wikibase\Client\WikibaseClient;
 
@@ -109,7 +108,7 @@ class ChangeHandler {
 		$settings = $wikibaseClient->getSettings();
 
 		if ( $sites === null ) {
-			$sites = Sites::singleton()->getSites();
+			$sites = $wikibaseClient->getSiteStore()->getSites();
 		}
 
 		$this->sites = $sites;

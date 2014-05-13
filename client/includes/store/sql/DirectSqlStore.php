@@ -137,14 +137,12 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * Returns the site object representing the local wiki.
 	 *
-	 * @return null|\Site
+	 * @return Site
 	 */
 	private function getSite() {
 		// @FIXME: inject the site
 		if ( $this->site === null ) {
-			$this->site = \Sites::singleton()->getSite(
-				WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
-			);
+			$this->site = WikibaseClient::getDefaultInstance()->getSite();
 		}
 
 		return $this->site;

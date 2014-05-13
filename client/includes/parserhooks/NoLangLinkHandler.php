@@ -44,7 +44,7 @@ class NoLangLinkHandler {
 			$settings->getSetting( 'siteGlobalID' ),
 			$namespaceChecker,
 			$wikibaseClient->getStore()->getSiteLinkTable(),
-			\Sites::singleton(),
+			$wikibaseClient->getSiteStore(),
 			$wikibaseClient->getLangLinkSiteGroup()
 		);
 

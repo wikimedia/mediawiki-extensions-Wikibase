@@ -70,7 +70,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		$status = parent::modifyEntity( $item );
 
 		if ( $this->site !== null && $this->page !== null ) {
-			$site = \SiteSQLStore::newInstance()->getSite( $this->site );
+			$site = $this->siteStore->getSite( $this->site );
 
 			if ( $site === null ) {
 				$status->error( 'wikibase-newitem-not-recognized-siteid' );

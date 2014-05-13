@@ -121,6 +121,11 @@ class WikibaseRepo {
 	private $exceptionLocalizer;
 
 	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
+
+	/**
 	 * Returns the default instance constructed using newInstance().
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
@@ -615,7 +620,11 @@ class WikibaseRepo {
 	 * @return SiteStore
 	 */
 	public function getSiteStore() {
-		return SiteSQLStore::newInstance();
+		if ( !$this->siteStore ) {
+			$this->siteStore = SiteSQLStore::newInstance();
+		}
+
+		return $this->siteStore;
 	}
 
 	/**

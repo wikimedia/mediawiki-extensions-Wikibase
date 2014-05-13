@@ -5,7 +5,6 @@ namespace Wikibase;
 use ResourceLoaderModule;
 use ResourceLoaderContext;
 use MediaWikiSite;
-use SiteSQLStore;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -31,11 +30,10 @@ class SiteModule extends ResourceLoaderModule {
 	public function getScript( ResourceLoaderContext $context ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
 		/**
 		 * @var MediaWikiSite $site
 		 */
-		$site = SiteSQLStore::newInstance()->getSite( $siteId );
+		$site = $wikibaseClient->getSite();
 
 		$currentSite = array();
 		if ( $site ) {

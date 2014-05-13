@@ -8,6 +8,7 @@ use Wikibase\NamespaceUtils;
 use WikiPage;
 use Title;
 use TestSites;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\EditEntityAction
@@ -37,7 +38,9 @@ class EditEntityActionTest extends ActionTestCase {
 
 		static $hasTitles = false;
 		if ( !$hasTitles ) {
-			TestSites::insertIntoDb();
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
 			$hasTitles = true;
 		}
 

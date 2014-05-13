@@ -56,7 +56,9 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		static $hasSites = false;
 
 		if ( !$hasSites ) {
-			\TestSites::insertIntoDb();
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
 			$hasSites = true;
 		}
 

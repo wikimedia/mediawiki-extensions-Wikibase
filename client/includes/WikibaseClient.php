@@ -8,7 +8,6 @@ use Language;
 use MediaWikiSite;
 use MWException;
 use Site;
-use Sites;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
@@ -19,7 +18,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityLookup;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -371,7 +369,7 @@ final class WikibaseClient {
 	 * This is taken from the siteGlobalID setting, which defaults
 	 * to the wiki's database name.
 	 *
-	 * If the configured site ID is not found in the Sites list, a
+	 * If the configured site ID is not found in the sites table, a
 	 * new Site object is constructed from the configured ID.
 	 *
 	 * @throws MWException
@@ -382,8 +380,7 @@ final class WikibaseClient {
 			$globalId = $this->settings->getSetting( 'siteGlobalID' );
 			$localId = $this->settings->getSetting( 'siteLocalID' );
 
-			$sites = Sites::singleton();
-			$this->site = $sites->getSite( $globalId );
+			$this->site = $this->getSiteStore()->getSite( $globalId );
 
 			if ( !$this->site ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": Unable to resolve site ID '{$globalId}'!" );
@@ -433,10 +430,7 @@ final class WikibaseClient {
 		if ( !$siteGroup ) {
 			$siteId = $this->settings->getSetting( 'siteGlobalID' );
 
-			$siteStore = $this->siteStore !== null
-				? $this->siteStore : SiteSQLStore::newInstance();
-
-			$site = $siteStore->getSite( $siteId );
+			$site = $this->getSiteStore()->getSite( $siteId );
 
 			if ( !$site ) {
 				wfWarn( 'Cannot find site ' . $siteId . ' in sites table' );
@@ -550,7 +544,7 @@ final class WikibaseClient {
 				$settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
-				Sites::singleton(),
+				$this->getSiteStore(),
 				$this->getLangLinkSiteGroup()
 			);
 		}
@@ -558,4 +552,16 @@ final class WikibaseClient {
 		return $this->langLinkHandler;
 	}
 
+	/**
+	 * @since 0.5
+	 *
+	 * @return SiteStore
+	 */
+	public function getSiteStore() {
+		if ( !$this->siteStore ) {
+			$this->siteStore = SiteSQLStore::newInstance();
+		}
+
+		return $this->siteStore;
+	}
 }

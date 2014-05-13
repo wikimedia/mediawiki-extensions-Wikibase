@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use SiteSQLStore;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\ItemSerializer;
@@ -35,7 +36,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	 */
 	protected function getInstance() {
 		$class = $this->getClass();
-		return new $class( new ClaimSerializer( new SnakSerializer() ) );
+		return new $class( new ClaimSerializer( new SnakSerializer() ), SiteSQLStore::newInstance() );
 	}
 
 	/**

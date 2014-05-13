@@ -21,8 +21,6 @@ use RecursiveIteratorIterator;
 use RuntimeException;
 use SpecialWatchlist;
 use SplFileInfo;
-use Sites;
-use SiteSQLStore;
 use Skin;
 use SpecialRecentChanges;
 use StripState;
@@ -368,7 +366,7 @@ final class ClientHooks {
 			$settings->getSetting( 'siteGlobalID' ),
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getStore()->getSiteLinkTable(),
-			Sites::singleton(),
+			$wikibaseClient->getSiteStore(),
 			$wikibaseClient->getLangLinkSiteGroup()
 		);
 
@@ -587,7 +585,7 @@ final class ClientHooks {
 		$generator = new OtherProjectsSidebarGenerator(
 			$settings->getSetting( 'siteGlobalID' ),
 			WikibaseClient::getDefaultInstance()->getStore()->getSiteLinkTable(),
-			SiteSQLStore::newInstance(),
+			WikibaseClient::getDefaultInstance()->getSiteStore(),
 			$siteIdsToOutput
 		);
 

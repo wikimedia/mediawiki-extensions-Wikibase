@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 
-use MediaWikiSite;
-use SiteSQLStore;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
@@ -27,14 +25,6 @@ class ItemContentTest extends EntityContentTest {
 
 	public function setUp() {
 		parent::setUp();
-
-		$site = new MediaWikiSite();
-		$site->setGlobalId( 'nlwiki' );
-		$site->setPath( MediaWikiSite::PATH_PAGE, "https://nl.wikipedia.org/wiki/$1" );
-
-		$sitesTable = SiteSQLStore::newInstance();
-		$sitesTable->clear();
-		$sitesTable->saveSites( array( $site ) );
 	}
 
 	/**
@@ -42,19 +32,6 @@ class ItemContentTest extends EntityContentTest {
 	 */
 	protected function getContentClass() {
 		return '\Wikibase\ItemContent';
-	}
-
-	public function siteLinkConflictProvider() {
-		$prefix = get_class( $this ) . '/';
-
-		$siteLink = new SimpleSiteLink( 'nlwiki', $prefix . 'Pelecanus' );
-
-		return array(
-			array(
-				$siteLink,
-				'Site link [https://nl.wikipedia.org/wiki/Pelecanus Pelecanus] already used by item [[$1]].'
-			)
-		);
 	}
 
 	public function provideEquals() {

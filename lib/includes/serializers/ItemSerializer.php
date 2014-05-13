@@ -2,7 +2,6 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use SiteSQLStore;
 use SiteStore;
 use Wikibase\Entity;
 use Wikibase\EntityFactory;
@@ -36,19 +35,21 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 	 * @since 0.4
 	 *
 	 * @param ClaimSerializer $claimSerializer
-	 * @param SerializationOptions $options
-	 * @param EntityFactory $entityFactory
 	 * @param SiteStore $siteStore
+	 * @param SerializationOptions|null $options
+	 * @param EntityFactory|null $entityFactory
 	 *
 	 * @todo: make $entityFactory required
 	 * @todo: make $siteStore required (resp. inject a SiteLinkSerializer instead)
 	 */
-	public function __construct( ClaimSerializer $claimSerializer, SerializationOptions $options = null, EntityFactory $entityFactory = null, SiteStore $siteStore = null ) {
-		if ( $siteStore === null ) {
-			$this->siteStore = SiteSQLStore::newInstance();
-		} else {
-			$this->siteStore = $siteStore;
-		}
+	public function __construct(
+		ClaimSerializer $claimSerializer,
+		SiteStore $siteStore,
+		SerializationOptions $options = null,
+		EntityFactory $entityFactory = null
+	) {
+		$this->siteStore = $siteStore;
+
 		parent::__construct( $claimSerializer, $options, $entityFactory );
 	}
 
