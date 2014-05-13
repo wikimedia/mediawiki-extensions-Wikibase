@@ -77,46 +77,6 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	protected abstract function getContentClass();
 
 	/**
-	 * Convenience wrapper offering the legacy Status based interface for saving
-	 * EntityContent
-	 *
-	 * @todo: rewrite the tests using this
-	 * @deprecated: there should be no need to save an EntityContent object in order to test it.
-	 *
-	 * @param EntityContent $content
-	 * @param string $summary
-	 * @param User $user
-	 * @param int $flags
-	 * @param bool $baseRevId
-	 *
-	 * @return \Status
-	 */
-	protected function saveContent(
-		EntityContent $content,
-		$summary = '',
-		User $user = null,
-		$flags = 0,
-		$baseRevId = false
-	) {
-		if ( $user === null ) {
-			$user = $GLOBALS['wgUser'];
-		}
-
-		try {
-			$rev = $this->entityStore->saveEntity( $content->getEntity(), $summary, $user, $flags, $baseRevId );
-			$status = Status::newGood( Revision::newFromId( $rev->getRevision() ) );
-		} catch ( StorageException $ex ) {
-			$status = $ex->getStatus();
-
-			if ( !$status ) {
-				$status = Status::newFatal( 'boohoo' );
-			}
-		}
-
-		return $status;
-	}
-
-	/**
 	 * @param array $data
 	 *
 	 * @return EntityContent

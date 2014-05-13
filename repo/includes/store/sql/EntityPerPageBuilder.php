@@ -66,14 +66,15 @@ class EntityPerPageBuilder {
 
 	/**
 	 * @param EntityPerPage $entityPerPageTable
-	 * @param EntityContentFactory $entityContentFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param array $contentModels
 	 */
-	public function __construct( EntityPerPage $entityPerPageTable, EntityContentFactory $entityContentFactory,
-		EntityIdParser $entityIdParser, array $contentModels ) {
+	public function __construct(
+		EntityPerPage $entityPerPageTable,
+		EntityIdParser $entityIdParser,
+		array $contentModels
+	) {
 		$this->entityPerPageTable = $entityPerPageTable;
-		$this->entityContentFactory = $entityContentFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->contentModels = $contentModels;
 	}
@@ -188,18 +189,11 @@ class EntityPerPageBuilder {
 				continue;
 			}
 
-			$entityContent = $this->entityContentFactory->getFromId( $entityId, \Revision::RAW );
-
 			if ( $this->rebuildAll === true ) {
-				$this->entityPerPageTable->deleteEntityPage( $entityId, $entityContent->getTitle()->getArticleID() );
-			}
-
-			if ( $entityContent !== null ) {
-				$this->entityPerPageTable->addEntityPage( $entityId, $entityContent->getTitle()->getArticleID() );
-			} else {
 				$this->entityPerPageTable->deleteEntity( $entityId );
 			}
 
+			$this->entityPerPageTable->addEntityPage( $entityId, (int)$pageRow->page_id );
 			$lastPageSeen = $pageRow->page_id;
 		}
 
