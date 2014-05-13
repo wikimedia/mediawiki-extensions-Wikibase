@@ -74,34 +74,10 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @since 0.1
-	 * @var WikiPage|bool
-	 */
-	protected $wikiPage = false;
-
-	/**
-	 * Returns the WikiPage for the item or false if there is none.
-	 *
-	 * @since 0.1
-	 * @deprecated will be moved to WikiPageEntityStore
-	 *
-	 * @return WikiPage|bool
-	 */
-	public function getWikiPage() {
-		if ( $this->wikiPage === false ) {
-			if ( !$this->isNew() ) {
-				$this->wikiPage = new WikiPage( $this->getTitle() );
-			}
-		}
-
-		return $this->wikiPage;
-	}
-
-	/**
 	 * Returns the Title for the item or false if there is none.
 	 *
 	 * @since 0.1
-	 * @deprecated use EntityTitleLookup
+	 * @deprecated use EntityTitleLookup instead
 	 *
 	 * @return Title|bool
 	 */
@@ -163,8 +139,14 @@ abstract class EntityContent extends AbstractContent {
 		$entityView = $this->getEntityView( null, $options, null );
 		$editable = !$options? true : $options->getEditSection();
 
+		if ( $revId === null || $revId === 0 ) {
+			$revId = $title->getLatestRevID();
+		}
+
+		$revision = new EntityRevision( $this->getEntity(), $revId );
+
 		// generate HTML
-		$output = $entityView->getParserOutput( $this->getEntityRevision( $revId ), $editable, $generateHtml );
+		$output = $entityView->getParserOutput( $revision, $editable, $generateHtml );
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
@@ -542,16 +524,6 @@ abstract class EntityContent extends AbstractContent {
 		);
 
 		return $itemRevision;
-	}
-
-	/**
-	 * @deprecated will be moved to WikiPageEntityStore
-	 *
-	 * @return Revision|null
-	 */
-	private function getLatestRevision() {
-		$entityPage = $this->getWikiPage();
-		return $entityPage ? $entityPage->getRevision() : null;
 	}
 
 	/**
