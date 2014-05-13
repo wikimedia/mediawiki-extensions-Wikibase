@@ -41,7 +41,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	protected function makeChangeOpsMerge(
 		Item $fromItem,
 		Item $toItem,
-		$ignoreConflicts = array()
+		array $ignoreConflicts = array()
 	) {
 		$duplicateDetector = $this->mockProvider->getMockLabelDescriptionDuplicateDetector();
 		$linkCache = $this->mockProvider->getMockSitelinkCache();
@@ -72,7 +72,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideValidConstruction
 	 */
-	public function testCanConstruct( $from, $to, $ignoreConflicts ) {
+	public function testCanConstruct( Item $from, Item $to, array $ignoreConflicts ) {
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
@@ -96,7 +96,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideInvalidConstruction
 	 */
-	public function testInvalidIgnoreConflicts( $from, $to, $ignoreConflicts ) {
+	public function testInvalidIgnoreConflicts( Item $from, Item $to, array $ignoreConflicts ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$this->makeChangeOpsMerge(
 			$from,
@@ -109,10 +109,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$from = self::getItem( 'Q111' );
 		$to = self::getItem( 'Q222' );
 		return array(
-			array( $from, $to, 'foo' ),
 			array( $from, $to, array( 'foo' ) ),
 			array( $from, $to, array( 'label', 'foo' ) ),
-			array( $from, $to, null ),
 		);
 	}
 
@@ -122,7 +120,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return Item
 	 */
-	public static function getItem( $id, $data = array() ) {
+	public static function getItem( $id, array $data = array() ) {
 		$item = new Item( $data );
 		$item->setId( new ItemId( $id ) );
 		return $item;
@@ -131,7 +129,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testCanApply( $fromData, $toData, $expectedFromData, $expectedToData, $ignoreConflicts = array() ) {
+	public function testCanApply( array $fromData, array $toData, $expectedFromData, $expectedToData, array $ignoreConflicts = array() ) {
 		$from = self::getItem( 'Q111', $fromData );
 		$to = self::getItem( 'Q222', $toData );
 		$changeOps = $this->makeChangeOpsMerge(
