@@ -11,6 +11,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityId;
 use Wikibase\EntityRevision;
+use Wikibase\IdGenerator;
 use Wikibase\StorageException;
 use Wikibase\util\GenericEventDispatcher;
 
@@ -32,11 +33,41 @@ class WikiPageEntityStore implements EntityStore {
 	protected $contentFactory;
 
 	/**
-	 * @param EntityContentFactory $contentFactory
+	 * @var IdGenerator
 	 */
-	public function __construct( EntityContentFactory $contentFactory ) {
+	protected $idGenerator;
+
+	/**
+	 * @param EntityContentFactory $contentFactory
+	 * @param \Wikibase\IdGenerator $idGenerator
+	 */
+	public function __construct( EntityContentFactory $contentFactory, IdGenerator $idGenerator ) {
 		$this->contentFactory = $contentFactory;
+		$this->idGenerator = $idGenerator;
 		$this->dispatcher = new GenericEventDispatcher( 'Wikibase\store\EntityStoreWatcher' );
+	}
+
+	/**
+	 * @see EntityStore::assignFreshId()
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws StorageException
+	 */
+	public function assignFreshId( Entity $entity ) {
+		if ( $entity->getId() !== null ) {
+			throw new StorageException( "This entity already has an ID!" );
+		}
+
+		wfProfileIn( __METHOD__ );
+
+		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
+		$id = $this->idGenerator->getNewId( $contentModelId );
+
+		//FIXME: this relies on setId() accepting numeric IDs!
+		$entity->setId( $id );
+
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
@@ -68,6 +99,12 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws PermissionsError
 	 */
 	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
+		if ( ( $flags & EDIT_NEW ) === EDIT_NEW
+			&& ( $entity->getId() === null )
+		) {
+			$this->assignFreshId( $entity );
+		}
+
 		$content = $this->contentFactory->newFromEntity( $entity );
 
 		//TODO: move the logic from EntityContent::save here!

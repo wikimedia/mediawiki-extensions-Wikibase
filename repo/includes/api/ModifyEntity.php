@@ -10,7 +10,6 @@ use Status;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -269,15 +268,6 @@ abstract class ModifyEntity extends ApiWikibase {
 	}
 
 	/**
-	 * @param Entity $entity
-	 */
-	private function assignFreshId( Entity $entity ) {
-		//TODO: factor the ID generator out of EntityContent!
-		$entityContent = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->newFromEntity( $entity );
-		$entityContent->grabFreshId();
-	}
-
-	/**
 	 * @see ApiBase::execute()
 	 *
 	 * @since 0.1
@@ -299,7 +289,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
 			if ( $entity->getId() === null ) {
-				$this->assignFreshId( $entity );
+				$this->entityStore->assignFreshId( $entity );
 			}
 		} else {
 			$entity = $entityRev->getEntity();

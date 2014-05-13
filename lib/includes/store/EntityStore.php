@@ -23,6 +23,23 @@ use Wikibase\StorageException;
 interface EntityStore {
 
 	/**
+	 * Assigns a fresh ID to the given entity.
+	 *
+	 * @note The new ID is "consumed" after this method returns, and will not be
+	 * assigned to another other entity. The next available ID for each kind of
+	 * entity is considered part of the persistent state of the Wikibase
+	 * installation.
+	 *
+	 * @note calling this method on an Entity that already has an ID, and specifically
+	 * calling this method twice on the same entity, shall result in an exception.
+	 *
+	 * @param Entity $entity
+	 *
+	 * @throws StorageException
+	 */
+	public function assignFreshId( Entity $entity );
+
+	/**
 	 * Saves the given Entity to some underlying storage mechanism.
 	 *
 	 * @param Entity $entity the entity to save.
