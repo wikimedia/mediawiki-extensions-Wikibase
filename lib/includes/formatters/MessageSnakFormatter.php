@@ -1,5 +1,8 @@
 <?php
+
 namespace Wikibase\Lib;
+
+use InvalidArgumentException;
 use Message;
 use Wikibase\Snak;
 
@@ -37,11 +40,11 @@ class MessageSnakFormatter implements SnakFormatter {
 	 */
 	function __construct( $snakType, Message $message, $format ) {
 		if ( !is_string( $snakType ) ) {
-			throw new \InvalidArgumentException( '$snakType must be a string' );
+			throw new InvalidArgumentException( '$snakType must be a string' );
 		}
 
 		if ( !is_string( $format ) ) {
-			throw new \InvalidArgumentException( '$format must be a string' );
+			throw new InvalidArgumentException( '$format must be a string' );
 		}
 
 		$this->format  = $format;
@@ -72,7 +75,8 @@ class MessageSnakFormatter implements SnakFormatter {
 	 */
 	public function formatSnak( Snak $snak ) {
 		if ( $this->format === SnakFormatter::FORMAT_HTML
-			|| $this->format === SnakFormatter::FORMAT_HTML_WIDGET ) {
+			|| $this->format === SnakFormatter::FORMAT_HTML_WIDGET
+		) {
 			$text = $this->message->parse();
 		} else {
 			$text = $this->message->text();
@@ -93,4 +97,5 @@ class MessageSnakFormatter implements SnakFormatter {
 	public function canFormatSnak( Snak $snak ) {
 		return $snak->getType() === $this->snakType;
 	}
+
 }

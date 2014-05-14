@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\CommonsLinkFormatter;
 
 /**
- * @covers Wikibase\Lib\CommonsLinkFormatter
+ * @covers CommonsLinkFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -20,7 +20,7 @@ use Wikibase\Lib\CommonsLinkFormatter;
  */
 class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 
-	public function urlFormatProvider() {
+	public function commonsLinkFormatProvider() {
 		$options = new FormatterOptions();
 
 		return array(
@@ -68,9 +68,9 @@ class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider urlFormatProvider
+	 * @dataProvider commonsLinkFormatProvider
 	 *
-	 * @covers CommonsLinkFormatter::format()
+	 * @covers CommonsLinkFormatter::format
 	 */
 	public function testFormat( $value, $options, $pattern ) {
 		$formatter = new CommonsLinkFormatter( $options );
@@ -80,7 +80,7 @@ class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers CommonsLinkFormatter::format()
+	 * @covers CommonsLinkFormatter::format
 	 */
 	public function testFormatError() {
 		$formatter = new CommonsLinkFormatter( new FormatterOptions() );

@@ -20,7 +20,7 @@ use Wikibase\Formatters\MonolingualTextFormatter;
 class MonolingualTextFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider urlFormatProvider
+	 * @dataProvider monolingualTextFormatProvider
 	 *
 	 * @covers MonolingualTextFormatter::format
 	 */
@@ -31,7 +31,7 @@ class MonolingualTextFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertRegExp( $pattern, $text );
 	}
 
-	public function urlFormatProvider() {
+	public function monolingualTextFormatProvider() {
 		$options = new FormatterOptions();
 
 		return array(

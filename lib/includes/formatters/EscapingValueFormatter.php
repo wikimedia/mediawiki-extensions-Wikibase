@@ -1,5 +1,8 @@
 <?php
+
 namespace Wikibase\Lib;
+
+use InvalidArgumentException;
 use ValueFormatters\ValueFormatter;
 
 /**
@@ -23,7 +26,7 @@ class EscapingValueFormatter implements ValueFormatter {
 
 	function __construct( ValueFormatter $formatter, $escapeCallback ) {
 		if ( !is_callable( $escapeCallback ) ) {
-			throw new \InvalidArgumentException( '$escapeCallback must be callable' );
+			throw new InvalidArgumentException( '$escapeCallback must be callable' );
 		}
 
 		$this->formatter = $formatter;
@@ -44,4 +47,5 @@ class EscapingValueFormatter implements ValueFormatter {
 		$escaped = call_user_func( $this->escapeCallback, $text );
 		return $escaped;
 	}
+
 }

@@ -21,7 +21,7 @@ use Wikibase\Formatters\MonolingualHtmlFormatter;
 class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider urlFormatProvider
+	 * @dataProvider monolingualHtmlFormatProvider
 	 *
 	 * @covers MonolingualHtmlFormatter::format
 	 */
@@ -37,7 +37,7 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function urlFormatProvider() {
+	public function monolingualHtmlFormatProvider() {
 		$options = new FormatterOptions();
 		$options->setOption( ValueFormatter::OPT_LANG, 'en' );
 
