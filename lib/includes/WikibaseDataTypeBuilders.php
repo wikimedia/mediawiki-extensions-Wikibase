@@ -4,9 +4,10 @@ namespace Wikibase\Lib;
 
 use DataTypes\DataType;
 use DataValues\TimeValue;
-use Wikibase\Utils;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityLookup;
+use Wikibase\Utils;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
 use Wikibase\Validators\DataValueValidator;
@@ -33,17 +34,17 @@ class WikibaseDataTypeBuilders {
 	/**
 	 * @var EntityLookup
 	 */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/**
 	 * @var EntityIdParser
 	 */
-	protected $entityIdParser;
+	private $entityIdParser;
 
 	/**
 	 * @var array
 	 */
-	protected $urlSchemes;
+	private $urlSchemes;
 
 	/**
 	 * @param EntityLookup   $lookup
@@ -92,6 +93,11 @@ class WikibaseDataTypeBuilders {
 		return $types;
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'wikibase-item'
+	 *
+	 * @return DataType
+	 */
 	public function buildItemType( $id ) {
 		$validators = array();
 
@@ -102,7 +108,13 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'wikibase-entityid', $validators );
 	}
 
-	protected function getCommonStringValidators( $maxLength = 400  ) {
+	/**
+	 * @param int $maxLength Defaults to 400 characters. This was an arbitrary decision when it
+	 * turned out that 255 was to short for descriptions.
+	 *
+	 * @return ValueValidator[]
+	 */
+	private function getCommonStringValidators( $maxLength = 400  ) {
 		$validators = array();
 
 		$validators[] = new TypeValidator( 'string' );
@@ -113,7 +125,14 @@ class WikibaseDataTypeBuilders {
 		return $validators;
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'commonsMedia'
+	 *
+	 * @return DataType
+	 */
 	public function buildMediaType( $id ) {
+		// oi_archive_name is max 255 bytes, which include a timestamp and an exclamation mark,
+		// so restrict file name to 240 bytes (see UploadBase::getTitle).
 		$validators = $this->getCommonStringValidators( 240 );
 
 		$validators[] = new RegexValidator( '@[#/:\\\\]@u', true ); // no nasty chars
@@ -129,6 +148,11 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'string'
+	 *
+	 * @return DataType
+	 */
 	public function buildStringType( $id ) {
 		$validators = $this->getCommonStringValidators();
 
@@ -139,6 +163,11 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'monolingual-text'
+	 *
+	 * @return DataType
+	 */
 	public function buildMonolingualTextType( $id ) {
 		$textValidator = new DataFieldValidator(
 			'text',
@@ -161,12 +190,18 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'monolingual-text', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'time'
+	 *
+	 * @return DataType
+	 */
 	public function buildTimeType( $id ) {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
 
 		// calendar model field
 		$calendarIdValidators = array();
+		// Expected to be a short IRI, see TimeFormatter and TimeParser.
 		$calendarIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
 		//TODO: enforce well known calendar models from config
 
@@ -208,12 +243,18 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'time', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'globe-coordinate'
+	 *
+	 * @return DataType
+	 */
 	public function buildCoordinateType( $id ) {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
 
 		// calendar model field
 		$globeIdValidators = array();
+		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
 		$globeIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
 		//TODO: enforce well known reference globes from config
 
@@ -236,6 +277,14 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'globecoordinate', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
+	/**
+	 * @param string[] $urlSchemes List of URL schemes, e.g. 'http'
+	 * @param int $maxLength Defaults to 500 characters. Even if URLs are unlimited in theory they
+	 * should be limited to about 2000. About 500 is a reasonable compromise.
+	 * @see http://stackoverflow.com/a/417184
+	 *
+	 * @return CompositeValidator
+	 */
 	public function buildUrlValidator( $urlSchemes, $maxLength = 500 ) {
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
@@ -247,8 +296,13 @@ class WikibaseDataTypeBuilders {
 		return new CompositeValidator( $validators, true ); //Note: each validator is fatal
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'url'
+	 *
+	 * @return DataType
+	 */
 	public function buildUrlType( $id ) {
-		$urlValidator = $this->buildUrlValidator( $this->urlSchemes, 500 );
+		$urlValidator = $this->buildUrlValidator( $this->urlSchemes );
 
 		$topValidator = new DataValueValidator( //Note: validate the DataValue's native value.
 			$urlValidator
@@ -257,6 +311,11 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'string', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
+	/**
+	 * @param string $id Data type ID, e.g. 'quantity'
+	 *
+	 * @return DataType
+	 */
 	public function buildQuantityType( $id ) {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
