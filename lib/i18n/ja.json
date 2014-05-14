@@ -71,5 +71,6 @@
 	"wikibase-validator-not-allowed": "値の誤り: $1",
 	"datatypes-type-wikibase-item": "項目",
 	"datatypes-type-commonsMedia": "コモンズのメディアファイル",
-	"version-wikibase": "ウィキベース"
+	"version-wikibase": "ウィキベース",
+	"wikibase-monolingual-text": "<span lang=\"$2\" class=\"wb-monolingual-text-value\">$1</span> <span class=\"wb-monolingual-text-language-name\">($3)</span>"
 }
