@@ -23,16 +23,16 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 			throw new \InvalidArgumentException( '$value must be a MonolingualTextValue' );
 		}
 
-		$userLang = $this->getOption( ValueFormatter::OPT_LANG );
+		$userLanguage = $this->getOption( ValueFormatter::OPT_LANG );
 
 		$text = $value->getText();
-		$textLang = $value->getLanguageCode();
-		$textLangName = Utils::fetchLanguageName( $textLang, $userLang );
+		$languageCode = $value->getLanguageCode();
+		$languageName = Utils::fetchLanguageName( $languageCode, $userLanguage );
 
 		$msg = wfMessage( 'wikibase-monolingual-text' )->params(
 			wfEscapeWikiText( $text ),
-			wfEscapeWikiText( $textLang ),
-			wfEscapeWikiText( $textLangName ) );
+			wfEscapeWikiText( $languageCode ),
+			wfEscapeWikiText( $languageName ) );
 		return $msg->parse();
 	}
 
