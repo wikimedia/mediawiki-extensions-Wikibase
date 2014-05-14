@@ -1,7 +1,11 @@
-# Wikibase.git
+- - -
+Introduction to Wikibase
+====================
 
-[![Build Status](https://secure.travis-ci.org/wikimedia/mediawiki-extensions-Wikibase.png?branch=master)](http://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/badges/quality-score.png?s=857e6982ca67c05cd28ce53ba6d42e7e20b89325)](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/)
+[Travis Build Status](http://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase/):
+![Build Status](https://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase.svg)
+[Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/):
+![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/badges/quality-score.png)
 
 The Wikibase.git package is part of the [Wikibase software](http://wikiba.se/) and consists of
 three interconnected extensions:
