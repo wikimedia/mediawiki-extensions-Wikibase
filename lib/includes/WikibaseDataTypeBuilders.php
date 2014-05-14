@@ -102,12 +102,20 @@ class WikibaseDataTypeBuilders {
 		return new DataType( $id, 'wikibase-entityid', $validators );
 	}
 
-	public function buildMediaType( $id ) {
+	protected function getCommonStringValidators( $maxLength = 400  ) {
 		$validators = array();
 
 		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new StringLengthValidator( 1, 240 ); // Note: 240 is hardcoded in UploadBase
+		//TODO: validate UTF8 (here and elsewhere)
+		$validators[] = new StringLengthValidator( 1, $maxLength, 'mb_strlen' );
 		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
+
+		return $validators;
+	}
+
+	public function buildMediaType( $id ) {
+		$validators = $this->getCommonStringValidators( 240 );
+
 		$validators[] = new RegexValidator( '@[#/:\\\\]@u', true ); // no nasty chars
 		$validators[] = new RegexValidator( '@\..+@u', false ); // must contain a file extension
 		//TODO: add a validator that checks the rules that MediaWiki imposes on filenames for uploads.
@@ -122,12 +130,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	public function buildStringType( $id ) {
-		$validators = array();
-
-		$validators[] = new TypeValidator( 'string' );
-		//TODO: validate UTF8 (here and elsewhere)
-		$validators[] = new StringLengthValidator( 1, 400, 'mb_strlen' );
-		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
+		$validators = $this->getCommonStringValidators();
 
 		$topValidator = new DataValueValidator( //Note: validate the DataValue's native value.
 			new CompositeValidator( $validators, true ) //Note: each validator is fatal
@@ -137,24 +140,17 @@ class WikibaseDataTypeBuilders {
 	}
 
 	public function buildMonolingualTextType( $id ) {
-		$validators = array();
-
-		$validators[] = new TypeValidator( 'string' );
-		//TODO: validate UTF8 (here and elsewhere)
-		$validators[] = new StringLengthValidator( 1, 400, 'mb_strlen' );
-		$validators[] = new RegexValidator( '/^\s|[\r\n\t]|\s$/', true ); // no leading/trailing whitespace, no line breaks.
-
 		$textValidator = new DataFieldValidator(
 			'text',
-			new CompositeValidator( $validators, true ) //Note: each validator is fatal
+			new CompositeValidator(
+				$this->getCommonStringValidators(),
+				true //Note: each validator is fatal
+			)
 		);
-
-		$validators = array();
-		$validators[] = new MembershipValidator( Utils::getLanguageCodes() );
 
 		$languageValidator = new DataFieldValidator(
 			'language',
-			new CompositeValidator( $validators, true )
+			new MembershipValidator( Utils::getLanguageCodes() )
 		);
 
 		$topValidator = new CompositeValidator(
