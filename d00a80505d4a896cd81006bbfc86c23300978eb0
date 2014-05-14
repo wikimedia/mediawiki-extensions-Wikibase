@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_7a0f4a3c",
+        "filename": "lib/tests/phpunit/formatters/MonolingualHtmlFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T20:15:55Z",
+      "side": 1,
+      "message": "* I think the space in \u0027\u003cscript \u0027 is a mistake.\n* I think both ^ and $ anchors are mistakes.\n\nAddressed in a follow-up, see I543f70df54f2384841f8e0f0c5cc8ce1ba2aa723.",
+      "revId": "d00a80505d4a896cd81006bbfc86c23300978eb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
