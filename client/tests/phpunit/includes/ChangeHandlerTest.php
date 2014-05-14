@@ -168,16 +168,6 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		return $change;
 	}
 
-	/*
-	public static function makeSiteLink( $siteId, $page ) {
-		$site = \Sites::singleton()->getSite( $siteId );
-
-		$link = new SiteLink( $site, $page );
-
-		return $link;
-	}
-	*/
-
 	public static function makeDiff( $type, $before, $after ) {
 		$differ = new \Diff\MapDiffer( true );
 

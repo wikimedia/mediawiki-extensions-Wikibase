@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use SiteSQLStore;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -98,9 +97,12 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinkGroup( Item $item, $group, $editable = true ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		// @todo inject into constructor
-		$sites = SiteSQLStore::newInstance()->getSites();
-		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
+		$sites = $wikibaseRepo->getSiteStore()->getSites();
+
+		$specialGroups = $wikibaseRepo->getSettings()->getSetting( "specialSiteLinkGroups" );
 
 		$allSiteLinks = $item->getSiteLinks();
 		$siteLinks = array(); // site links of the currently handled site group

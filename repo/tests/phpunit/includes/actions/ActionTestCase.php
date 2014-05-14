@@ -14,10 +14,7 @@ use OutputPage;
 use RequestContext;
 use Title;
 use User;
-use Wikibase\Entity;
-use Wikibase\EntityRevision;
 use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use TestSites;
@@ -45,7 +42,9 @@ class ActionTestCase extends MediaWikiTestCase {
 
 		static $setUp = false;
 		if ( !$setUp ) {
-			TestSites::insertIntoDb();
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
 			$setUp = true;
 		}
 

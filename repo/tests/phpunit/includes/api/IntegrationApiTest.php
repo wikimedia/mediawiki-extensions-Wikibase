@@ -4,6 +4,7 @@ namespace Wikibase\Test\Api;
 
 use ApiTestCase;
 use TestSites;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * This class holds simple integration tests for Wikibase API modules
@@ -22,7 +23,9 @@ class IntegrationApiTest extends ApiTestCase {
 
 	public function setUp() {
 		parent::setUp();
-		TestSites::insertIntoDb();
+		$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+		$sitesTable->clear();
+		$sitesTable->saveSites( TestSites::getSites() );
 	}
 
 	public function apiRequestProvider() {

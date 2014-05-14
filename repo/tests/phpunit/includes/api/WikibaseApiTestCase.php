@@ -9,6 +9,7 @@ use TestUser;
 use UsageException;
 use User;
 use Wikibase\EntityFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
@@ -38,7 +39,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->user );
 
 		if ( !$isSetup ) {
-			TestSites::insertIntoDb();
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
 
 			$this->login();
 

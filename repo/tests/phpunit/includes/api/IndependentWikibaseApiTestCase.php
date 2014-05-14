@@ -11,6 +11,7 @@ use RequestContext;
 use TestSites;
 use TestUser;
 use UsageException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * This class can be used instead of the Mediawiki Api TestCase.
@@ -39,7 +40,9 @@ abstract class IndependentWikibaseApiTestCase extends MediaWikiTestCase {
 
 		if ( !$isSetup ) {
 			//TODO remove me once everything that needs this is overridden
-			TestSites::insertIntoDb();
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
 			$isSetup = true;
 		}
 	}

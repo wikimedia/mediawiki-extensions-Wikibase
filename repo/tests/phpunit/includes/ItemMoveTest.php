@@ -10,6 +10,7 @@ use Wikibase\NamespaceUtils;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use WikitextContent;
+use TestSites;
 
 /**
  * Tests prevention of moving pages in and out of the data NS.
@@ -56,7 +57,9 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		static $hasSites = false;
 
 		if ( !$hasSites ) {
-			\TestSites::insertIntoDb();
+			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
+			$sitesTable->clear();
+			$sitesTable->saveSites( TestSites::getSites() );
 			$hasSites = true;
 		}
 
