@@ -112,9 +112,8 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
-
 	/**
-	 * @covers MessageSnakFormatter::canFormatSnak()
+	 * @covers PropertyValueSnakFormatter::canFormatSnak
 	 */
 	public function testCanFormatSnak() {
 		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );

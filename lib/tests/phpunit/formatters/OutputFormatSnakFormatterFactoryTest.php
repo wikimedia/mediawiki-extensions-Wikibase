@@ -7,7 +7,7 @@ use ValueFormatters\StringFormatter;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 
 /**
- * @covers Wikibase\Lib\OutputFormatSnakFormatterFactory
+ * @covers OutputFormatSnakFormatterFactory
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -62,7 +62,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getSnakFormatterProvider
-	 * @covers SnakFormatterFactory::formatSnak()
+	 * @covers OutputFormatSnakFormatterFactory::getSnakFormatter
 	 */
 	public function testGetSnakFormatter( $builders, $format ) {
 		$factory = new OutputFormatSnakFormatterFactory( $builders );
@@ -90,4 +90,5 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 			),
 		);
 	}
+
 }
