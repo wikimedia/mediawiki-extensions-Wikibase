@@ -25,11 +25,16 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @covers MonolingualHtmlFormatter::format
 	 */
-	public function testFormat( $value, $options, $pattern ) {
+	public function testFormat( $value, $options, $pattern, $not = '' ) {
 		$formatter = new MonolingualHtmlFormatter( $options );
 
 		$text = $formatter->format( $value );
-		$this->assertRegExp( $pattern, $text );
+
+		if ( $not === 'not' ) {
+			$this->assertNotRegExp( $pattern, $text );
+		} else {
+			$this->assertRegExp( $pattern, $text );
+		}
 	}
 
 	public function urlFormatProvider() {
@@ -37,10 +42,25 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 		$options->setOption( ValueFormatter::OPT_LANG, 'en' );
 
 		return array(
-			array(
+			'formatting' => array(
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
 				$options,
 				'@^<span lang="de".*?>Hallo Welt<\/span>.*\((German|Deutsch)\).*$@'
+			),
+			'html/wikitext escaping' => array(
+				new MonolingualTextValue( 'de', '[[Hallo&Welt]]' ),
+				$options,
+				'@^<span .*?>(\[\[|&#91;&#91;)Hallo(&amp;|&#38;)Welt(\]\]|&#93;&#93;)<\/span>.*$@'
+			),
+			'evil html' => array(
+				new MonolingualTextValue(
+					'" onclick="alert(\'gotcha!\')"',
+					'Hallo<script>alert(\'gotcha!\')</script>Welt'
+						.'<a href="javascript:alert(\'gotcha!\')">evil</a>'
+				),
+				$options,
+				'@^<script |(<span |lang="" )onclick="alert|<a $@',
+				'not'
 			),
 		);
 	}

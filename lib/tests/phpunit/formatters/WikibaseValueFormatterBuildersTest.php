@@ -172,7 +172,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 				SnakFormatter::FORMAT_WIKI,
 				$this->newFormatterOptions( 'de' ),
 				new MonolingualTextValue( 'es', 'Ola' ),
-				'/^<span lang="es".*?>Ola<\/span>.*\((Spanisch|español)\).*$/u'
+				'/^Ola$/u'
 			),
 		);
 	}

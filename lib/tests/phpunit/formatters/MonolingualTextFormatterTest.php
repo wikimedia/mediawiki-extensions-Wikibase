@@ -40,6 +40,11 @@ class MonolingualTextFormatterTest extends \PHPUnit_Framework_TestCase {
 				$options,
 				'@^Hallo Welt$@'
 			),
+			array(
+				new MonolingualTextValue( 'de', 'Hallo&Welt' ),
+				$options,
+				'@^Hallo&Welt$@'
+			),
 		);
 	}
 
