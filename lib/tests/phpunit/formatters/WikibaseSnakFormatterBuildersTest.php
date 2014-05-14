@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use DataTypes\DataType;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Language;
@@ -43,6 +44,20 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( $propertyType ) );
 
+		$typeMap = array(
+			'url' => 'string',
+			'string' => 'string',
+			'wikibase-item' => 'wikibase-entityid',
+			'globecoordinate' => 'globecoordinate',
+		);
+
+		$typeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
+		$typeFactory->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnCallback( function ( $id ) use ( $typeMap ) {
+				return new DataType( $id, $typeMap[$id], array() );
+			} ) );
+
 		$entity = EntityFactory::singleton()->newEmpty( $entityId->getEntityType() );
 		$entity->setId( $entityId );
 		$entity->setLabel( 'en', 'Label for ' . $entityId->getPrefixedId() );
@@ -55,7 +70,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$lang = Language::factory( 'en' );
 
 		$valueFormatterBuilders = new WikibaseValueFormatterBuilders( $entityLookup, $lang );
-		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup );
+		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
 	}
 
 	/**
@@ -146,15 +161,6 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 				'url',
 				new PropertyValueSnak( 7, new StringValue( 'http://acme.com/' ) ),
 				'<a rel="nofollow" class="external free" href="http://acme.com/">http://acme.com/</a>'
-			),
-			'bad value' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$options,
-				'globecoordinate',
-				new PropertyValueSnak( 7,
-					new UnDeserializableValue( 'cookie', 'globecoordinate', 'cannot understand!' )
-				),
-				$badValueMsg
 			)
 		);
 	}
