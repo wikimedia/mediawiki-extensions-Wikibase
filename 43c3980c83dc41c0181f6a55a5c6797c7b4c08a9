@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_5046ad55",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:06:14Z",
+      "side": 1,
+      "message": "Currently it\u0027s an $importer.",
+      "revId": "43c3980c83dc41c0181f6a55a5c6797c7b4c08a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_502fcd85",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:06:14Z",
+      "side": 1,
+      "message": "Looks like this can be called many times with different $revisionInfo arrays. Suggestion:\n\n\t\tif ( isset( $revisionInfo[\u0027model\u0027] ) ) {\n\t\t\t$entityContentFactory \u003d WikibaseRepo::getDefaultInstance()-\u003egetEntityContentFactory();\n\t\t\tif ( $entityContentFactory-\u003eisEntityContentModel( $revisionInfo[\u0027model\u0027] ) ) {\n\t\t\t\tthrow new MWException( \u0027To avoid ID conflicts the import of Wikibase entities is currently not supported.\u0027 );\n\t\t\t}\n\t\t}",
+      "revId": "43c3980c83dc41c0181f6a55a5c6797c7b4c08a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_75251bbc",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:06:14Z",
+      "side": 1,
+      "message": "\u0027To avoid ID conflicts the import of Wikibase entities is currently not supported.\u0027",
+      "revId": "43c3980c83dc41c0181f6a55a5c6797c7b4c08a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
