@@ -116,11 +116,6 @@ Other methods an Expert needs to provide:
 * Implemented jQuery.ui.ooMenu
 * Implemented jQuery.ui.suggestCommons
 * Removed CommonsMediaType expert dependency on SuggestedStringValue expert.
-
-### 0.5.2 (dev)
-
-#### Bugfixes
-
 * Prevent enter-key from adding newline character in String expert
 
 ### 0.5.1 (2014-04-01)
