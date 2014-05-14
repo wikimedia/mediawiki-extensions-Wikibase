@@ -1,7 +1,7 @@
-These are the release notes for the WikibaseLib extension.
+# WikibaseLib Release Notes
 
-Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:WikibaseLib
-Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=lib/RELEASE-NOTES
+* Extension page on [MediaWiki.org](https://www.mediawiki.org/wiki/Extension:WikibaseLib)
+* Latest version of the [RELEASE-NOTES](https://git.wikimedia.org/markdown/mediawiki%2Fextensions%2FWikibase.git/HEAD/lib%2FRELEASE-NOTES.md/)
 
 ### Version 0.5 (dev)
 

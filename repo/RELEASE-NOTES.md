@@ -1,8 +1,7 @@
-These are the release notes for the Wikibase extension.
+# Wikibase Repo Release Notes
 
-Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikibase
-Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=repo/RELEASE-NOTES
-
+* Extension page on [MediaWiki.org](https://www.mediawiki.org/wiki/Extension:Wikibase)
+* Latest version of the [RELEASE-NOTES](https://git.wikimedia.org/markdown/mediawiki%2Fextensions%2FWikibase.git/HEAD/repo%2FRELEASE-NOTES.md/)
 
 ### Version 0.5 (dev)
 
