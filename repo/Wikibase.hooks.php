@@ -1328,4 +1328,25 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Called by Import.php. Implemented to prevent the import of entities.
+	 *
+	 * @param object $reader unclear, see Bug 64657
+	 * @param array $pageInfo
+	 * @param array $revisionInfo
+	 *
+	 * @throws MWException
+	 * @return bool
+	 */
+	public static function onImportHandleRevisionXMLTag( $reader, $pageInfo, $revisionInfo ) {
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+y
+		if ( isset( $revisionInfo['model'] ) && $entityContentFactory->isEntityContentModel( $revisionInfo['model'] ) ) {
+			// Skip entities.
+			// XXX: This is rather rough.
+			throw new MWException( 'To avoid ID conflicts, import of Wikibase entities is not allowed.' );
+		}
+
+		return true;
+	}
 }
