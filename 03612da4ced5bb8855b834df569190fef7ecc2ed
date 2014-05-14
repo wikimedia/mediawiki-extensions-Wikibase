@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_c13c3591",
+        "filename": "lib/includes/formatters/MonolingualHtmlFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-05-14T06:56:04Z",
+      "side": 1,
+      "message": "How does escaping work here exactly? It seems to me like there is none happening at all, but I guess I might have overlooked something.",
+      "revId": "03612da4ced5bb8855b834df569190fef7ecc2ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a1413910",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-05-14T06:56:04Z",
+      "side": 1,
+      "message": "Is using the HTML really the right thing to do for wiki text? Are there any general guidelines for what the wiki text formatting should provide? Also, is there any need for escaping / quoting / sanitizing?",
+      "revId": "03612da4ced5bb8855b834df569190fef7ecc2ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_81463d25",
+        "filename": "lib/tests/phpunit/formatters/MonolingualHtmlFormatterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-05-14T06:56:04Z",
+      "side": 1,
+      "message": "Please add a test with injections.",
+      "revId": "03612da4ced5bb8855b834df569190fef7ecc2ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_61432116",
+        "filename": "lib/tests/phpunit/formatters/MonolingualTextFormatterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-05-14T06:56:04Z",
+      "side": 1,
+      "message": "Please add a test making sure that HTML-like content gets through unescaped.",
+      "revId": "03612da4ced5bb8855b834df569190fef7ecc2ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
