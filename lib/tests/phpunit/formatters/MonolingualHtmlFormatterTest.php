@@ -59,7 +59,7 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 						.'<a href="javascript:alert(\'gotcha!\')">evil</a>'
 				),
 				$options,
-				'@^<script |(<span |lang="" )onclick="alert|<a $@',
+				'@ onclick="alert|<script|<a @',
 				'not'
 			),
 		);
