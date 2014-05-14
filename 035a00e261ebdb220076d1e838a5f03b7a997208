@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_9099e5ca",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:30:20Z",
+      "side": 1,
+      "message": "This message already exists in repo and is still used in snakview.variations.Value.js:\n\n\"wikibase-snakview-variation-datavaluetypemismatch-details\": \"The value\u0027s data value type \\\"$1\\\" does not match the property\u0027s data type\u0027s data value type \\\"$2\\\".\",\n\nWould be strange to have two that mean the same. Please try to use the same message in both places.",
+      "revId": "035a00e261ebdb220076d1e838a5f03b7a997208",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_103395c1",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:30:20Z",
+      "side": 1,
+      "message": "Same here, I think.\n\n\"wikibase-snakview-variation-nonewvaluefordeletedproperty\": \"It is not possible to define a new value for a deleted property.\",",
+      "revId": "035a00e261ebdb220076d1e838a5f03b7a997208",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b05861fe",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:30:20Z",
+      "side": 1,
+      "message": "There are no constants in this class (any more). As far as I can tell they are in SnakFormatter now.",
+      "revId": "035a00e261ebdb220076d1e838a5f03b7a997208",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f05ed9eb",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:30:20Z",
+      "side": 1,
+      "message": "PHP\u0027s String::startsWidth is called strncmp:\n\nif ( strncmp( $this-\u003eformat, SnakFormatter::FORMAT_HTML, strlen( SnakFormatter::FORMAT_HTML ) ) \u003d\u003d\u003d 0 )\n\nNot sure if it\u0027s worth it.",
+      "revId": "035a00e261ebdb220076d1e838a5f03b7a997208",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_50158de8",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T21:30:20Z",
+      "side": 1,
+      "message": "Why is this line here? Looks like a copy \u0026 paste accident.",
+      "revId": "035a00e261ebdb220076d1e838a5f03b7a997208",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
