@@ -2,10 +2,10 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( vv ) {
+( function( $, vv ) {
 	'use strict';
 
-	var PARENT = vv.experts.SuggestedStringValue;
+	var PARENT = vv.experts.StringValue;
 
 	/**
 	 * Valueview expert for adding specialized handling for CommonsMedia data type. Without this
@@ -20,18 +20,29 @@
 	 * @extends jQuery.valueview.experts.SuggestedStringValue
 	 */
 	vv.experts.CommonsMediaType = vv.expert( 'CommonsMediaType', PARENT, {
-		_options: {
-			suggesterOptions: {
-				ajax: {
-					url: location.protocol + '//commons.wikimedia.org/w/api.php',
-					params: {
-						action: 'opensearch',
-						namespace: 6
-					}
-				},
-				replace: [/^File:/, '']
-			}
+		/**
+		 * @see jQuery.valueview.experts.StringValue._init
+		 */
+		_init: function() {
+			PARENT.prototype._init.call( this );
+
+			var notifier = this._viewNotifier,
+				$input = this.$input;
+
+			$input.suggestCommons();
+
+			// Using the inputautoexpand plugin, the position of the dropdown needs to be updated
+			// whenever the input box expands vertically:
+			$input
+			.on( 'eachchange', function( event, oldValue ) {
+				// TODO/OPTIMIZE: Only reposition when necessary, i.e. when expanding vertically
+				$input.data( 'suggestCommons' ).repositionMenu();
+			} )
+			.on( 'suggestcommonschange', function( event, response ) {
+				notifier.notify( 'change' );
+				$input.data( 'inputautoexpand' ).expand();
+			} );
 		}
 	} );
 
-}( jQuery.valueview ) );
+}( jQuery, jQuery.valueview ) );

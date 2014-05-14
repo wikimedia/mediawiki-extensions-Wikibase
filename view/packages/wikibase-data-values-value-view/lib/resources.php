@@ -131,6 +131,21 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.ooMenu' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.ooMenu.js',
+			),
+			'styles' => array(
+				'jquery.ui/jquery.ui.ooMenu.css',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.ui.widget',
+				'jquery.util.getscrollbarwidth',
+				'util.inherit',
+			),
+		),
+
 		'jquery.ui.preview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.preview.js',
@@ -153,11 +168,20 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
-				'jquery.autocompletestring',
-				'jquery.ui.autocomplete',
+				'jquery.ui.ooMenu',
 				'jquery.ui.widget',
-				'jquery.util.adaptlettercase',
-				'jquery.util.getscrollbarwidth',
+			),
+		),
+
+		'jquery.ui.suggestCommons' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.suggestCommons.js',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+				'jquery.util.highlightMatchingCharacters',
 			),
 		),
 
@@ -179,6 +203,15 @@ return call_user_func( function() {
 		'jquery.util.adaptlettercase' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.util/jquery.util.adaptlettercase.js',
+			),
+			'dependencies' => array(
+				'jquery',
+			),
+		),
+
+		'jquery.util.highlightMatchingCharacters' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.util/jquery.util.highlightMatchingCharacters.js',
 			),
 			'dependencies' => array(
 				'jquery',

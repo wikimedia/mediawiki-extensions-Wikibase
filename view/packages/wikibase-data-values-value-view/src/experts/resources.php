@@ -23,8 +23,10 @@ return call_user_func( function() {
 				'CommonsMediaType.js',
 			),
 			'dependencies' => array(
+				'jquery.event.special.eachchange',
+				'jquery.ui.suggestCommons',
 				'jquery.valueview.experts',
-				'jquery.valueview.experts.SuggestedStringValue',
+				'jquery.valueview.experts.StringValue',
 				'jquery.valueview.Expert',
 			),
 		),

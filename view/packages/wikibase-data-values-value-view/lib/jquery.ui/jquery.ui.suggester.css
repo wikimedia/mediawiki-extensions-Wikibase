@@ -24,11 +24,11 @@
 	position: absolute;
 }
 
-.ui-suggester-list .ui-menu-item a {
+.ui-suggester-list .ui-ooMenu-item a {
 	padding: 0 0.2em;
 }
 
-.ui-suggester-list .ui-menu-item a.ui-state-hover,
-.ui-suggester-list .ui-menu-item a.ui-state-active {
+.ui-suggester-list .ui-ooMenu-item a.ui-state-hover,
+.ui-suggester-list .ui-ooMenu-item a.ui-state-active {
 	margin: 0;
 }
