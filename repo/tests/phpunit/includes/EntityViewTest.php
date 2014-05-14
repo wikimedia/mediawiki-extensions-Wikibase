@@ -2,44 +2,41 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
 use MediaWikiTestCase;
-use OutputPage;
 use RequestContext;
 use Title;
-use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
-use Wikibase\Claim;
-use Wikibase\CopyrightMessageBuilder;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Entity;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityRevision;
-use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
-use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
-use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Snak;
 use Wikibase\Utils;
 
 /**
@@ -112,7 +109,7 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 	 */
 	protected function newEntityView( $entityType, EntityInfoBuilder $entityInfoBuilder = null,
 		EntityTitleLookup $entityTitleLookup = null, IContextSource $context = null,
-		LanguageFallbackChain $languageFallbackChain = null
+		LanguageFallbackChain $languageFallbackChain = null, PropertyDataTypeLookup $dataTypeLookup = null
 	) {
 		if ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string!' );
@@ -140,11 +137,23 @@ abstract class EntityViewTest extends MediaWikiTestCase {
 			$entityTitleLookup = $this->getEntityTitleLookupMock();
 		}
 
-		$idParser = $this->newEntityIdParser();
+		if ( !$dataTypeLookup ) {
+			$dataTypeLookup = $mockRepo;
+		}
 
+		$appContext = WikibaseRepo::getDefaultInstance();
+
+		$idParser = $this->newEntityIdParser();
 		$formatterOptions = new FormatterOptions();
-		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
-			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
+		$builders = new WikibaseSnakFormatterBuilders(
+			$appContext->getValueFormatterBuilders(),
+			$dataTypeLookup,
+			$appContext->getDataTypeFactory()
+		);
+
+		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+		$snakFormatter = $factory->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
 
 		$configBuilder = new ParserOutputJsConfigBuilder(
 			$entityInfoBuilder,
