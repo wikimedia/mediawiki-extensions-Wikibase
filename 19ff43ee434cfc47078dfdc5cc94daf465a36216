@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_a4d2675b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Inconsistent use of \"an\" with the messages for labels and descriptions",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e4373faa",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "This sounds weird. Adding a link to a site-link?",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_04335bc1",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Should have a verb?",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_6cdd3117",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
@@ -13,6 +64,160 @@
       "writtenOn": "2014-04-14T12:37:47Z",
       "side": 1,
       "message": "\"undoing the creation\" is still weird. Another suggestion:\n\n The page cannot be deleted using undo.",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_84464b25",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Suggestion by Siebrand sounds good to me.",
+      "parentUuid": "8e23439c_6cdd3117",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_445033d9",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Can we remove alias and synonym?",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_646a0f80",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Can we find something better for data namespace here?",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_84f40bcd",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "This is one of the two messages that many people do not understand. (And for good reason...)\nCan we just say something like \"foo is too long in language bar\"?",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_24fbf7bb",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Really need to find a better wording for this one.",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0428fb30",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Also need to make this one clearer.",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e42cdf47",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Needs to be more understandable too.",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c421e34c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "That is the second message that many people do not understand. We need to tell them that one link can only be in one item and that they need to remove it from the other item first before they can add it here. Or that they need to merge the items.",
+      "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_64956f42",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 176
+      },
+      "writtenOn": "2014-05-14T13:56:22Z",
+      "side": 1,
+      "message": "Compare to wikibase-itemdisambiguation-invalid-langcode",
       "revId": "19ff43ee434cfc47078dfdc5cc94daf465a36216",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
