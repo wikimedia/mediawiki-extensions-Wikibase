@@ -481,7 +481,8 @@ final class WikibaseClient {
 
 		$builders = new WikibaseSnakFormatterBuilders(
 			$valueFormatterBuilders,
-			$this->getPropertyDataTypeLookup()
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory()
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
