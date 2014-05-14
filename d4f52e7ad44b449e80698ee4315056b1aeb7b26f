@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_50234d00",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "Error[]",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_104ef59b",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "filterConflictsWithEntity( $errors, EntityId $entityId )",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b043c166",
+        "filename": "repo/includes/Validators/EntityConstraintProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "Just to let you know: I still wonder if this is a good design or not. Naming the method \u0027getValidator\u0027 and the class \u0027EntityValidatorProvider\u0027 would also make sense - but conflict with the EntityValidator interface. \u0027getValidations\u0027 and \u0027EntityValidationsProvider\u0027 would not be better than the current names.\n\nSo it\u0027s ok for me. It makes sense in a way.",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_50510d64",
+        "filename": "repo/includes/Validators/EntityValidator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "Does not compute. Is there a \"to\" missing?",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2b150241",
+        "filename": "repo/includes/Validators/LabelUniquenessValidator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "That\u0027s a mistake, isn\u0027t it?",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_70fac941",
+        "filename": "repo/includes/Validators/UniquenessViolation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "In Error::newError all parameters are optional. I suggest to make all parameters except the first optional here.",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3058d158",
+        "filename": "repo/includes/Validators/UniquenessViolation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "Probably rename both to ...EntityId, see below.",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9061e503",
+        "filename": "repo/includes/Validators/UniquenessViolation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "Doesn\u0027t this return an EntityId?",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_cb1b2e72",
+        "filename": "repo/tests/phpunit/includes/Validators/UniquenessViolationTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T22:25:13Z",
+      "side": 1,
+      "message": "No, it doesn\u0027t. ;-)",
+      "revId": "d4f52e7ad44b449e80698ee4315056b1aeb7b26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
