@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_44239300",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T14:45:44Z",
+      "side": 1,
+      "message": "This line is still strange, but whatever, not part of this patch. :-(",
+      "revId": "fab1194e549fa8f8c41d03b4f94c94fd5044cd86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_64268f13",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-14T14:45:44Z",
+      "side": 1,
+      "message": "With this change the \u0027applyChangeOp\u0027 methods make a lot more sense. In the previous change all \u0027applyChangeOp\u0027 did was catching exceptions. Now it validates. Shouldn\u0027t it be renamed then? \u0027validateAndApplyChangeOp\u0027 or something like that? Is this worth the trouble? Maybe in a follow-up?",
+      "revId": "fab1194e549fa8f8c41d03b4f94c94fd5044cd86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
