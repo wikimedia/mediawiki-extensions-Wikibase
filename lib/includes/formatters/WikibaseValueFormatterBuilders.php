@@ -81,7 +81,7 @@ class WikibaseValueFormatterBuilders {
 		SnakFormatter::FORMAT_WIKI => array(
 			'PT:url' => 'ValueFormatters\StringFormatter', // no escaping!
 			//'PT:wikibase-item' => 'Wikibase\Lib\LocalItemLinkFormatter', // TODO
-			'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualHtmlFormatter',
+			//'VT:monolingualtext' => 'Wikibase\Formatters\MonolingualWikitextFormatter', // TODO
 		),
 
 		// Formatters to use for HTML display.
