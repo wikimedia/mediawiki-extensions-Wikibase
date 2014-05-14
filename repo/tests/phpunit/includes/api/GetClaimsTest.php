@@ -13,6 +13,7 @@ use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -49,10 +50,10 @@ class GetClaimsTest extends \ApiTestCase {
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 		/** @var $claims Claim[] */
-		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( 42 ) );
-		$claims[1] = $entity->newClaim( new PropertyNoValueSnak( 1 ) );
-		$claims[2] = $entity->newClaim( new PropertySomeValueSnak( 42 ) );
-		$claims[3] = $entity->newClaim( new PropertyValueSnak( 9001, new StringValue( 'o_O' ) ) );
+		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
+		$claims[1] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P404' ) ) );
+		$claims[2] = $entity->newClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) );
+		$claims[3] = $entity->newClaim( new PropertyValueSnak( new PropertyId( 'P9001' ), new StringValue( 'o_O' ) ) );
 
 		foreach( $claims as $key => $claim ){
 			$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
@@ -183,6 +184,37 @@ class GetClaimsTest extends \ApiTestCase {
 		return array(
 			array( 'xyz' ),
 			array( 'x$y$z' )
+		);
+	}
+
+	/**
+	 * @dataProvider getInvalidIdsProvider
+	 */
+	public function testGetInvalidIds( $entity, $property ) {
+		if ( !$entity ) {
+			$item = Item::newEmpty();
+			$this->addClaimsAndSave( $item );
+			$entity = $item->getId()->getSerialization();
+		}
+
+		$params = array(
+			'action' => 'wbgetclaims',
+			'entity' => $entity,
+			'property' => $property,
+		);
+
+		try {
+			$this->doApiRequest( $params );
+			$this->fail( 'Invalid entity id did not throw an error' );
+		} catch ( UsageException $e ) {
+			$this->assertEquals( 'param-invalid', $e->getCodeString(), 'Invalid entity id raised correct error' );
+		}
+	}
+
+	public function getInvalidIdsProvider() {
+		return array(
+			array( null, 'nopeNopeNope' ),
+			array( 'whatTheFuck', 'P42' ),
 		);
 	}
 }

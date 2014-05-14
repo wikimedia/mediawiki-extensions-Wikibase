@@ -4,6 +4,7 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
@@ -63,7 +64,12 @@ class GetClaims extends ApiWikibase {
 
 		list( $id, $claimGuid ) = $this->getIdentifiers( $params );
 
-		$entityId = $this->idParser->parse( $id );
+		try {
+			$entityId = $this->idParser->parse( $id );
+		} catch ( EntityIdParsingException $e ) {
+			$this->dieException( $e, 'param-invalid' );
+		}
+
 		$entityRevision = $entityId ? $this->loadEntityRevision( $entityId ) : null;
 		$entity = $entityRevision->getEntity();
 
@@ -151,7 +157,12 @@ class GetClaims extends ApiWikibase {
 		$params = $this->extractRequestParams();
 
 		if ( isset( $params['property'] ) ){
-			$parsedProperty = $this->idParser->parse( $params['property'] );
+			try {
+				$parsedProperty = $this->idParser->parse( $params['property'] );
+			} catch ( EntityIdParsingException $e ) {
+				$this->dieException( $e, 'param-invalid' );
+			}
+
 			$matchFilter = $propertyId->equals( $parsedProperty );
 			return $matchFilter;
 		}
