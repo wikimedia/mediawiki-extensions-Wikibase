@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_a4414710",
+        "filename": "lib/tests/phpunit/serializers/ItemSerializerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-14T13:32:40Z",
+      "side": 1,
+      "message": "perhaps we should just use a mock here.",
+      "revId": "316df3b8c46899b1ccfac0aecafa56b4922eb533",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
