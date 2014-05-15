@@ -53,11 +53,15 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 	 *
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId|null $entityId
-	 * @param array|null $languageCodes
+	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
-	public function validateFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $languageCodes = null ) {
+	public function validateFingerprint(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		array $languageCodes = null
+	) {
 		$labels = array_map(
 			function( Term $term ) {
 				return $term->getText();

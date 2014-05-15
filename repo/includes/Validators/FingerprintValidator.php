@@ -26,11 +26,16 @@ interface FingerprintValidator {
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId|null $entityId Context for uniqueness checks: conflicts with this entity
 	 *        are ignored.
-	 * @param string[]|null $languageCodes If given, the validation may be limited to the given languages;
-	 *        This is intended for optimization for the common case of only a single language changing.
+	 * @param string[]|null $languageCodes If given, the validation may be limited to the given
+	 *        languages. This is intended for optimization for the common case of only a single
+	 *        language changing.
 	 *
 	 * @return Result
 	 */
-	public function validateFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $languageCodes = null );
+	public function validateFingerprint(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		array $languageCodes = null
+	);
 
 }
