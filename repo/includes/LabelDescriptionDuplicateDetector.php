@@ -9,6 +9,8 @@ use Wikibase\Validators\UniquenessViolation;
 /**
  * Detector of label/description uniqueness constraint violations.
  *
+ * @todo: Fold this into TermCombinationMatchFinder resp. TermIndex
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -26,41 +28,6 @@ class LabelDescriptionDuplicateDetector {
 	 */
 	public function __construct( TermCombinationMatchFinder $termFinder ) {
 		$this->termFinder = $termFinder;
-	}
-
-	/**
-	 * Report errors about other entities of the same type using the same label
-	 * in the same language.
-	 *
-	 * @since 0.5
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return Result. If there are conflicts, $result->isValid() will return false and
-	 *         $result->getErrors() will return a non-empty list of Error objects.
-	 */
-	public function detectLabelConflictsForEntity( Entity $entity ) {
-		$labels = $entity->getLabels();
-
-		return $this->detectTermConflicts( $labels, null, $entity->getId() );
-	}
-
-	/**
-	 * Report errors about other entities of the same type using the same combination
-	 * of label and description, in the same language.
-	 *
-	 * @since 0.5
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return Result. If there are conflicts, $result->isValid() will return false and
-	 *         $result->getErrors() will return a non-empty list of Error objects.
-	 */
-	public function detectLabelDescriptionConflictsForEntity( Entity $entity ) {
-		$labels = $entity->getLabels();
-		$descriptions = $entity->getDescriptions();
-
-		return $this->detectTermConflicts( $labels, $descriptions, $entity->getId() );
 	}
 
 	/**

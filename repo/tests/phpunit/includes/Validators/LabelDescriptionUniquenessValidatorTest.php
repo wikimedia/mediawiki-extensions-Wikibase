@@ -3,8 +3,10 @@
 namespace Wikibase\Test\Validators;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -35,21 +37,41 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	}
 
 	public function validFingerprintProvider() {
-		$goodFingerprint1 = new Fingerprint(
-			new TermList( array( new Term( 'de', 'DUPE' ) ) ),
-			new TermList( array() ),
-			new AliasGroupList( array() )
-		);
-
-		$goodFingerprint2 = new Fingerprint(
-			new TermList( array() ),
-			new TermList( array( new Term( 'de', 'Foo' ) ) ),
-			new AliasGroupList( array() )
-		);
-
 		return array(
-			array( $goodFingerprint1 ),
-			array( $goodFingerprint2 ),
+			'no description' => array(
+				new Fingerprint(
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				)
+			),
+			'non-dupe description' => array(
+				new Fingerprint(
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( array( new Term( 'de', 'Foo' ) ) ),
+					new AliasGroupList( array() )
+				)
+			),
+
+			'self conflict' => array(
+				// the mock considers "DUPE" a dupe with P666
+				new Fingerprint(
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new AliasGroupList( array() )
+				),
+				new PropertyId( 'P666' ) // ignore conflicts with P666
+			),
+			'ignored conflict' => array(
+				// the mock considers "DUPE" a dupe with P666
+				new Fingerprint(
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new AliasGroupList( array() )
+				),
+				null,
+				array( 'en' ) // only consider conflicts in english
+			),
 		);
 	}
 
@@ -71,6 +93,11 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 		$i = 1;
 		foreach ( $this->validFingerprintProvider() as $name => $fingerprintCase ) {
+			// if the case has a non-null entityId or languageCodes param, skip it
+			if ( isset( $fingerprintCase[1] ) || isset( $fingerprintCase[2] ) ) {
+				continue;
+			}
+
 			$id = new ItemId( 'Q' . $i++ );
 			$cases[$name] = $this->fingerprintCaseToEntityCase( $fingerprintCase, $id );
 		}
@@ -96,12 +123,18 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	 * @dataProvider validFingerprintProvider
 	 *
 	 * @param Fingerprint $fingerprint
+	 * @param EntityId $entityId
+	 * @param array $languageCodes
 	 */
-	public function testValidateFingerprint( Fingerprint $fingerprint ) {
+	public function testValidateFingerprint(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		array $languageCodes = null
+	) {
 		$dupeDetector = $this->getMockDupeDetector();
 		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
 
-		$result = $validator->validateFingerprint( $fingerprint );
+		$result = $validator->validateFingerprint( $fingerprint, $entityId, $languageCodes );
 
 		$this->assertTrue( $result->isValid(), 'isValid' );
 	}
