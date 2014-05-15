@@ -194,12 +194,7 @@ class EditEntity extends ModifyEntity {
 
 		$changeOps = $this->getChangeOps( $data, $entity );
 
-		try {
-			$changeOps->apply( $entity );
-		} catch ( ChangeOpException $e ) {
-			wfProfileOut( __METHOD__ );
-			$this->dieUsage( 'Change could not be applied to entity: ' . $e->getMessage(), 'modification-failed' );
-		}
+		$this->applyChangeOp( $changeOps, $entity );
 
 		$this->buildResult( $entity );
 		$summary = $this->getSummary( $params );
@@ -232,6 +227,9 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function getChangeOps( array $data, Entity $entity ) {
 		$changeOps = new ChangeOps();
+
+		//FIXME: Use a ChangeOpBuilder so we can batch fingerprint ops etc,
+		//       for more efficient validation!
 
 		if ( array_key_exists( 'labels', $data ) ) {
 			$changeOps->add( $this->getLabelChangeOps( $data['labels'] ) );

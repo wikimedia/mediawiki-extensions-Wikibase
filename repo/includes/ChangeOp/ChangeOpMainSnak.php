@@ -3,6 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
+use ValueValidators\Result;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\Snak;
@@ -80,8 +81,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * - the claim's mainsnak gets set to $snak when $claimGuid and $snak are set
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		$this->validate();
-
 		$claims = new Claims( $entity->getClaims() );
 
 		if ( is_null( $this->claimGuid ) || empty( $this->claimGuid ) ) {
@@ -151,15 +150,17 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	}
 
 	/**
+	 * @see ChangeOp::validate()
+	 *
 	 * @since 0.5
 	 *
+	 * @param Entity $entity
+	 *
 	 * @throws ChangeOpException
+	 *
+	 * @return Result
 	 */
-	protected function validate() {
-		$result = $this->snakValidator->validate( $this->snak );
-
-		if ( !$result->isValid() ) {
-			throw new ChangeOpValidationException( $result );
-		}
+	public function validate( Entity $entity ) {
+		return $this->snakValidator->validate( $this->snak );
 	}
 }

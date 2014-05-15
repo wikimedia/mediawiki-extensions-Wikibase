@@ -9,6 +9,7 @@ use Status;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -237,18 +238,27 @@ abstract class ModifyEntity extends ApiWikibase {
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.
+	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
+	 *
+	 * @since 0.5
 	 *
 	 * @param ChangeOp $changeOp
 	 * @param Entity $entity
-	 * @param Summary $summary The Summary to record details about the change in.
+	 * @param Summary $summary The summary object to update with information about the change.
 	 *
-	 * @throws UsageException If the ChangeOp failed to apply (usually due to a validation error).
+	 * @throws UsageException
 	 */
 	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
 		try {
+			$result = $changeOp->validate( $entity );
+
+			if ( !$result->isValid() ) {
+				throw new ChangeOpValidationException( $result );
+			}
+
 			$changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $ex ) {
-			$this->dieUsage( 'Attempted modification of the item failed (validation error): ' . $ex->getMessage(), 'failed-modify' );
+			$this->errorReporter->dieException( $ex, 'modification-failed' );
 		}
 	}
 

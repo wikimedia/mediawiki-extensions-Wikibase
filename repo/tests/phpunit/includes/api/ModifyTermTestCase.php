@@ -133,7 +133,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_language' ) ) ),
 			array( //1
 				'p' => array( 'language' => 'nl', 'value' => TermTestHelper::makeOverlyLongString() ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-modify' ) ) ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'modification-failed' ) ) ),
 			array( //2
 				'p' => array( 'language' => 'pt', 'value' => 'normalValue' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),

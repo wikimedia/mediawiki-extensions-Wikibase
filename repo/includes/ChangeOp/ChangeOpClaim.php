@@ -4,6 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use ValueValidators\Result;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
@@ -88,8 +89,6 @@ class ChangeOpClaim extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		$this->validate();
-
 		if( $this->claim->getGuid() === null ){
 			$this->claim->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		}
@@ -200,16 +199,18 @@ class ChangeOpClaim extends ChangeOpBase {
 	}
 
 	/**
+	 * @see ChangeOp::validate()
+	 *
 	 * @since 0.5
 	 *
+	 * @param Entity $entity
+	 *
 	 * @throws ChangeOpException
+	 *
+	 * @return Result
 	 */
-	protected function validate() {
-		$result = $this->snakValidator->validateClaimSnaks( $this->claim );
-
-		if ( !$result->isValid() ) {
-			throw new ChangeOpValidationException( $result );
-		}
+	public function validate( Entity $entity ) {
+		return $this->snakValidator->validateClaimSnaks( $this->claim );
 	}
 
 }
