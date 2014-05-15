@@ -26,77 +26,77 @@ class FingerprintChangeOpFactory {
 	}
 
 	/**
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string[] $aliases
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newAddAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'add', $this->termValidatorFactory );
+	public function newAddAliasesOp( $languageCode, array $aliases ) {
+		return new ChangeOpAliases( $languageCode, $aliases, 'add', $this->termValidatorFactory );
 	}
 
 	/**
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string[] $aliases
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'set', $this->termValidatorFactory );
+	public function newSetAliasesOp( $languageCode, array $aliases ) {
+		return new ChangeOpAliases( $languageCode, $aliases, 'set', $this->termValidatorFactory );
 	}
 
 	/**
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string[] $aliases
 	 *
 	 * @return ChangeOp
 	 */
-	public function newRemoveAliasesOp( $language, array $aliases ) {
-		return new ChangeOpAliases( $language, $aliases, 'remove', $this->termValidatorFactory );
+	public function newRemoveAliasesOp( $languageCode, array $aliases ) {
+		return new ChangeOpAliases( $languageCode, $aliases, 'remove', $this->termValidatorFactory );
 	}
 
 	/**
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string $description
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetDescriptionOp( $language, $description ) {
-		return new ChangeOpDescription( $language, $description, $this->termValidatorFactory );
+	public function newSetDescriptionOp( $languageCode, $description ) {
+		return new ChangeOpDescription( $languageCode, $description, $this->termValidatorFactory );
 	}
 
 	/**
-	 * @param string $language
+	 * @param string $languageCode
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newRemoveDescriptionOp( $language ) {
-		return new ChangeOpDescription( $language, null, $this->termValidatorFactory );
+	public function newRemoveDescriptionOp( $languageCode ) {
+		return new ChangeOpDescription( $languageCode, null, $this->termValidatorFactory );
 	}
 
 	/**
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string $label
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newSetLabelOp( $language, $label ) {
-		return new ChangeOpLabel( $language, $label, $this->termValidatorFactory );
+	public function newSetLabelOp( $languageCode, $label ) {
+		return new ChangeOpLabel( $languageCode, $label, $this->termValidatorFactory );
 	}
 
 	/**
-	 * @param string $language
+	 * @param string $languageCode
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newRemoveLabelOp( $language ) {
-		return new ChangeOpLabel( $language, null, $this->termValidatorFactory );
+	public function newRemoveLabelOp( $languageCode ) {
+		return new ChangeOpLabel( $languageCode, null, $this->termValidatorFactory );
 	}
 
 }
