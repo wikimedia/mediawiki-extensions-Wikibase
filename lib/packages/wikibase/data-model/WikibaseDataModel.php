@@ -66,3 +66,6 @@ class_alias( 'Wikibase\DataModel\Snak\Snaks', 'Wikibase\Snaks' );
 class_alias( 'Wikibase\DataModel\Entity\ItemDiff', 'Wikibase\ItemDiff' );
 class_alias( 'Wikibase\DataModel\Entity\EntityDiff', 'Wikibase\EntityDiff' );
 class_alias( 'Wikibase\DataModel\SiteLink', 'Wikibase\DataModel\SimpleSiteLink' );
+
+// Aliases introduced in 1.0
+class_alias( 'Wikibase\DataModel\LegacyIdInterpreter', 'Wikibase\DataModel\Internal\LegacyIdInterpreter' );
