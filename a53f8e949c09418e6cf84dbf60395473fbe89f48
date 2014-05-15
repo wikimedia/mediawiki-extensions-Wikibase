@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_958b44c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "what\u0027s a peroperty? ;)",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_55bdac62",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "determin?",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_35b23093",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "determiend?",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_353fd0d5",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "blank line between namespace and use",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_357110de",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "wow, a lot of code and nested if blocks!\n\nshould be factored out.",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_f57a78b8",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "not convinced it\u0027s much use and help to have these warnings.",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_5596ccf4",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "so much code for mock PropertyDataTypeLookup! this should all go in a separate method (getMockPropertyDataTypeLookup or such)",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_359b501d",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-15T15:16:43Z",
+      "side": 1,
+      "message": "this could also go in own method",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
