@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_b8eab503",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-15T15:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e20cf91_958b44c4",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_55bdac62",
         "filename": "lib/i18n/en.json",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_98e7f93b",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-15T15:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e20cf91_55bdac62",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_35b23093",
         "filename": "lib/i18n/qqq.json",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2014-05-15T15:16:43Z",
       "side": 1,
       "message": "determiend?",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_58d96182",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-15T15:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e20cf91_35b23093",
       "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_b8463553",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-15T15:49:36Z",
+      "side": 1,
+      "message": "not easily done, would need to return a Status object or some such. Will try.",
+      "parentUuid": "6e20cf91_357110de",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_f57a78b8",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 5
@@ -98,6 +170,24 @@
       "writtenOn": "2014-05-15T15:16:43Z",
       "side": 1,
       "message": "not convinced it\u0027s much use and help to have these warnings.",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_98437943",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-15T15:49:36Z",
+      "side": 1,
+      "message": "They make test cases fail in case we screw up our ocde. That\u0027s why they should be here.",
+      "parentUuid": "6e20cf91_f57a78b8",
       "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_18fc09d5",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-15T15:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e20cf91_5596ccf4",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_359b501d",
         "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
         "patchSetId": 5
@@ -132,6 +240,24 @@
       "writtenOn": "2014-05-15T15:16:43Z",
       "side": 1,
       "message": "this could also go in own method",
+      "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_f8e02d27",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-15T15:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e20cf91_359b501d",
       "revId": "a53f8e949c09418e6cf84dbf60395473fbe89f48",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
