@@ -11,6 +11,7 @@ use Status;
 use UsageException;
 use ValueParsers\ParseException;
 use Wikibase\Api\ApiErrorReporter;
+use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -133,7 +134,7 @@ class ApiErrorReporterTest extends MediaWikiTestCase {
 	 */
 	public function testDieException( $exception, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
 		$api = new ApiMain();
-		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
@@ -185,7 +186,7 @@ class ApiErrorReporterTest extends MediaWikiTestCase {
 	 */
 	public function testDieMessage( Message $message, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
 		$api = new ApiMain();
-		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
@@ -242,7 +243,7 @@ class ApiErrorReporterTest extends MediaWikiTestCase {
 	 */
 	public function testDieStatus( Status $status, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
 		$api = new ApiMain();
-		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
@@ -289,7 +290,7 @@ class ApiErrorReporterTest extends MediaWikiTestCase {
 	 */
 	public function testDieError( $description, $code, $httpStatusCode, $extradata, $infoPattern, $expectedDataFields ) {
 		$api = new ApiMain();
-		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		try {
@@ -324,7 +325,7 @@ class ApiErrorReporterTest extends MediaWikiTestCase {
 	 */
 	public function testReportStatusWarnings( Status $status, $expectedDataFields ) {
 		$api = new ApiMain();
-		$localizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
+		$localizer = $this->getExceptionLocalizer();
 		$reporter = new ApiErrorReporter( $api, $localizer, Language::factory( 'de' ) );
 
 		$reporter->reportStatusWarnings( $status );
@@ -335,6 +336,17 @@ class ApiErrorReporterTest extends MediaWikiTestCase {
 			$path = explode( '/', $path );
 			$this->assertValueAtPath( $value, $path, $result );
 		}
+	}
+
+	/**
+	 * @return ExceptionLocalizer
+	 */
+	private function getExceptionLocalizer() {
+		$paramFormatter = $this->getMockBuilder( 'Wikibase\Lib\Localizer\MessageParameterFormatter' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return new WikibaseExceptionLocalizer( $paramFormatter );
 	}
 }
 
