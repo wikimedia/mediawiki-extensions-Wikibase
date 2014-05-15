@@ -118,7 +118,7 @@ class ItemsPerSiteBuilder {
 
 			$ok = $this->siteLinkTable->saveLinksOfItem( $item );
 			if ( !$ok ) {
-				$this->report( 'Savings sitelinks for Item ' . $item->getId()->getSerialization() . ' failed' );
+				$this->report( 'Saving sitelinks for Item ' . $item->getId()->getSerialization() . ' failed' );
 			}
 
 			$c++;
