@@ -16,6 +16,24 @@
       "revId": "e62baa44925a1d239de8367cb71912f1f6ca1dce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a82355ff",
+        "filename": "tests/browser/features/special_set_sitelink.feature",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-05-15T11:57:55Z",
+      "side": 1,
+      "message": "There will be no sitelink in the list because the item is created freshly just for this scenario in the given step.",
+      "parentUuid": "8e23439c_f3978e49",
+      "revId": "e62baa44925a1d239de8367cb71912f1f6ca1dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
