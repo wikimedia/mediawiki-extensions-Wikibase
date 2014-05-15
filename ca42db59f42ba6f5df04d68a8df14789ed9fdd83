@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_7bed3722",
+        "filename": "repo/includes/ChangeOp/ChangeOpLabel.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-15T17:25:29Z",
+      "side": 1,
+      "message": "This (it\u0027s used 5 times in 3 classes) is very problematic. \u0027update\u0027 obviously changes the original object. \u0027getFingerprint\u0027 doesn\u0027t say if it returns a reference or a clone. Without looking at the implementation one must assume it returns a reference. When it was introduced in version 0.7.3 it returned a new instance. Since version 1.0 it returns a reference (which is correct in my opinion).\n\nWhich means \u0027validate\u0027 changes the entity.\n\nThis is wrong in terms of design but of no practical relevance. If the validation succeeds the object will be updated anyway. If the validation fails the operation is stopped anyway.\n\nSuggestion: Change \u0027updateFingerprint\u0027 to \u0027getUpdatedFingerprint\u0027.",
+      "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_b8a51546",
+        "filename": "repo/includes/ChangeOp/ChangeOpLabel.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-15T17:25:29Z",
+      "side": 1,
+      "message": "Note: Seems this information is currently completely unused. Should be fixed in a following patch.",
+      "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_9b437343",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-15T17:25:29Z",
+      "side": 1,
+      "message": "Why not use the two public methods above? What\u0027s wrong with them? If find it weird to have all three in the public interface of this class. I suggest to @deprecate the two above. Maybe in a follow-up.",
+      "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
