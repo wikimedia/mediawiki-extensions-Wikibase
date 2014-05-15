@@ -40,8 +40,10 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 	 * @return Result
 	 */
 	public function validateEntity( Entity $entity ) {
-		$result = $this->duplicateDetector->detectLabelDescriptionConflictsForEntity( $entity );
-		return $result;
+		$labels = $entity->getLabels();
+		$descriptions = $entity->getDescriptions();
+
+		return $this->duplicateDetector->detectTermConflicts( $labels, $descriptions, $entity->getId() );
 	}
 
 	/**
@@ -69,6 +71,19 @@ class LabelDescriptionUniquenessValidator implements EntityValidator, Fingerprin
 			},
 			iterator_to_array( $fingerprint->getDescriptions()->getIterator() )
 		);
+
+		if ( $languageCodes !== null ) {
+			$labels = array_intersect_key( $labels, array_flip( $languageCodes ) );
+			$descriptions = array_intersect_key( $descriptions, array_flip( $languageCodes ) );
+		}
+
+		// no need to check labels in languages in which we don't have a description
+		$labels = array_intersect_key( $labels, $descriptions );
+
+		// nothing to do
+		if ( empty( $labels ) ) {
+			return Result::newSuccess();
+		}
 
 		return $this->duplicateDetector->detectTermConflicts( $labels, $descriptions, $entityId );
 	}

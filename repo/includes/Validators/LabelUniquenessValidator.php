@@ -40,8 +40,9 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 	 * @return Result
 	 */
 	public function validateEntity( Entity $entity ) {
-		$result = $this->duplicateDetector->detectLabelConflictsForEntity( $entity );
-		return $result;
+		$labels = $entity->getLabels();
+
+		return $this->duplicateDetector->detectTermConflicts( $labels, null, $entity->getId() );
 	}
 
 	/**
@@ -62,6 +63,15 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 			},
 			iterator_to_array( $fingerprint->getLabels()->getIterator() )
 		);
+
+		if ( $languageCodes !== null ) {
+			$labels = array_intersect_key( $labels, array_flip( $languageCodes ) );
+		}
+
+		// nothing to do
+		if ( empty( $labels ) ) {
+			return Result::newSuccess();
+		}
 
 		return $this->duplicateDetector->detectTermConflicts( $labels, null, $entityId );
 	}
