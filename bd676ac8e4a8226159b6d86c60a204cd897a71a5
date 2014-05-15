@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_7e49a569",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-15T19:02:59Z",
+      "side": 0,
+      "message": "Note to reviewers: The action is not part of the Entity, Fingerprint or Aliases. As long as the action is not executed it doesn\u0027t matter if it\u0027s valid or not. Therefor it\u0027s checked in the apply call above.",
+      "revId": "bd676ac8e4a8226159b6d86c60a204cd897a71a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
