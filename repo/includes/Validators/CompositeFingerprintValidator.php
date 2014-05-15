@@ -41,7 +41,11 @@ class CompositeFingerprintValidator implements FingerprintValidator {
 	 *
 	 * @return Result
 	 */
-	public function validateFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $languageCodes = null ) {
+	public function validateFingerprint(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		array $languageCodes = null
+	) {
 		foreach ( $this->validators as $validator ) {
 			$result = $validator->validateFingerprint( $fingerprint, $entityId, $languageCodes );
 
