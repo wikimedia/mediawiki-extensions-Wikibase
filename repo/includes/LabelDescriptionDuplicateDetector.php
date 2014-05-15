@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use ValueValidators\Error;
 use ValueValidators\Result;
+use Wikibase\Validators\UniquenessViolation;
 
 /**
  * Detector of label/description uniqueness constraint violations.
@@ -224,9 +224,9 @@ class LabelDescriptionDuplicateDetector {
 
 		/* @var Term $term */
 		foreach ( $terms as $term ) {
-			$errors[] = Error::newError(
+			$errors[] = new UniquenessViolation(
+				$term->getEntityId(),
 				$message,
-				$term->getType(),
 				$errorCode,
 				array(
 					$term->getText(),

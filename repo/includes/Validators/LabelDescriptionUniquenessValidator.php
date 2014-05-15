@@ -25,12 +25,12 @@ class LabelDescriptionUniquenessValidator implements EntityValidator {
 	/**
 	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
 	 */
-	function __construct( LabelDescriptionDuplicateDetector $duplicateDetector ) {
+	public function __construct( LabelDescriptionDuplicateDetector $duplicateDetector ) {
 		$this->duplicateDetector = $duplicateDetector;
 	}
 
 	/**
-	 * @see OnSaveValidator::validate()
+	 * @see EntityValidator::validate()
 	 *
 	 * @param Entity $entity
 	 *

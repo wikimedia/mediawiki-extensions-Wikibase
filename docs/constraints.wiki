@@ -75,8 +75,8 @@ database and may render the entire system unusable.
 
 Hard constraints are enforced on ''every'' save of an Entity. They are
 checked during the database transaction that modifies the page table.
-The method EntityContent::getOnSaveValidators() supplies the validators
-to use for validating hard constraints.
+The class EntityConstraintProvider defines the validators to use for
+validating hard constraints for different types of entities.
 
 '''NOTE:''' hard constraints must always consider the full Entity, and
 compare it to the actual current state of the dta model, as stored in

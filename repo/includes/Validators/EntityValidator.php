@@ -6,9 +6,10 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 
 /**
- * Validator interface used for pre-save validation in EntityContent.
- * This is essentially a vehicle to introduce knowledge about global state into
- * the context of the save operation, so global constraints can be enforced.
+ * Validator interface used for validating Entities in a global context.
+ * This is used to represent global constraints.
+ *
+ * @see EntityConstraintProivder
  *
  * @since 0.5
  *
@@ -23,9 +24,10 @@ interface EntityValidator {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param Entity $entity The entity to validate
 	 *
-	 * @return Result
+	 * @return Result The validation result. Errors in the Result object
+	 *         will typically be instances of UniquenessViolation.
 	 */
 	public function validateEntity( Entity $entity );
 
