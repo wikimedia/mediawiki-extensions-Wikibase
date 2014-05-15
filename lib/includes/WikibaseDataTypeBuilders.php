@@ -252,7 +252,6 @@ class WikibaseDataTypeBuilders {
 		$validators = array();
 		$validators[] = new TypeValidator( 'array' );
 
-		// calendar model field
 		$globeIdValidators = array();
 		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
 		$globeIdValidators[] = $urlValidator = $this->buildUrlValidator( array( 'http', 'https' ), 255 );
@@ -265,7 +264,7 @@ class WikibaseDataTypeBuilders {
 			new CompositeValidator( $precisionValidators, true )
 		);
 
-		$validators[] = new DataFieldValidator( 'globe', // Note: validate the 'calendarmodel' field
+		$validators[] = new DataFieldValidator( 'globe', // Note: validate the 'globe' field
 			new CompositeValidator( $globeIdValidators, true ) //Note: each validator is fatal
 		);
 
