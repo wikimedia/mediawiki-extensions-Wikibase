@@ -145,7 +145,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		 */
 		$handler = \ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
 
-		return $handler->newContentFromEntity( $entity );
+		return $handler->makeEntityContent( $entity );
 	}
 
 	/**
