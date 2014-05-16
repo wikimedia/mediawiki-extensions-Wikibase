@@ -5,6 +5,9 @@ namespace Wikibase;
 use Content;
 use DataUpdate;
 use IContextSource;
+use InvalidArgumentException;
+use LogicException;
+use MWException;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -21,6 +24,7 @@ use WikiPage;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ItemContent extends EntityContent {
 
@@ -39,6 +43,12 @@ class ItemContent extends EntityContent {
 	protected $item;
 
 	/**
+	 * @since 0.5
+	 * @var Title
+	 */
+	protected $redirectTarget;
+
+	/**
 	 * Do not use to construct new stuff from outside of this class,
 	 * use the static newFoobar methods.
 	 *
@@ -48,11 +58,35 @@ class ItemContent extends EntityContent {
 	 * @since 0.1
 	 *
 	 * @param Item $item
+	 * @param Title $redirectTarget
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Item $item ) {
+	public function __construct( Item $item = null, Title $redirectTarget = null ) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
+		if ( $item === null && $redirectTarget === null ) {
+			throw new InvalidArgumentException(
+				'Either $item or $redirectTargetId must be provided' );
+		}
+
+		if ( $item !== null && $redirectTarget !== null ) {
+			throw new InvalidArgumentException(
+				'Only one of $item or $redirectTargetId can be provided' );
+		}
+
+		if ( $redirectTarget !== null
+			&& $redirectTarget->getContentModel() !== CONTENT_MODEL_WIKIBASE_ITEM
+		) {
+			if ( $redirectTarget->exists() ) {
+				throw new InvalidArgumentException(
+					'$redirectTarget must ref to a page with content model '
+					. CONTENT_MODEL_WIKIBASE_ITEM );
+			}
+		}
+
 		$this->item = $item;
+		$this->redirectTarget = $redirectTarget;
 	}
 
 	/**
@@ -69,6 +103,19 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * Create a new ItemContent object representing a redirect to the given item ID.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Title $redirectTarget
+	 *
+	 * @return ItemContent
+	 */
+	public static function newRedirect( Title $redirectTarget ) {
+		return new static( null, $redirectTarget );
+	}
+
+	/**
 	 * Create a new ItemContent object from the provided Item data.
 	 *
 	 * @since 0.1
@@ -82,13 +129,34 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
+	 * @see Content::getRedirectTarget
+	 *
+	 * @return null|Title
+	 */
+	public function getRedirectTarget() {
+		return $this->redirectTarget;
+	}
+
+	/**
 	 * Returns the Item that makes up this ItemContent.
 	 *
 	 * @since 0.1
 	 *
+	 * @throws LogicException
+	 * @throws MWException
 	 * @return Item
 	 */
 	public function getItem() {
+		$redirect = $this->getRedirectTarget();
+
+		if ( $redirect ) {
+			throw new MWException( 'Unresolved redirect to [[' . $redirect->getFullText() . ']]' );
+		}
+
+		if ( !$this->item ) {
+			throw new LogicException( 'Nother redirect nor item found in ItemContent!' );
+		}
+
 		return $this->item;
 	}
 
@@ -111,7 +179,7 @@ class ItemContent extends EntityContent {
 	 * @return Item
 	 */
 	public function getEntity() {
-		return $this->item;
+		return $this->getItem();
 	}
 
 	/**
@@ -156,10 +224,18 @@ class ItemContent extends EntityContent {
 	 * @see EntityContent::getTextForSearchIndex()
 	 */
 	public function getTextForSearchIndex() {
-		$item = $this->getEntity();
+		if ( $this->isRedirect() ) {
+			return '';
+		}
+
+		wfProfileIn( __METHOD__ );
+		$item = $this->getItem();
 
 		$searchTextGenerator = new ItemSearchTextGenerator();
-		return $searchTextGenerator->generate( $item );
+		$text = $searchTextGenerator->generate( $item );
+
+		wfProfileOut( __METHOD__ );
+		return $text;
 	}
 
 	/**
@@ -213,6 +289,10 @@ class ItemContent extends EntityContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
+		if ( $this->isRedirect() ) {
+			return array();
+		}
+
 		$item = $this->getItem();
 
 		return array_merge(
@@ -229,6 +309,10 @@ class ItemContent extends EntityContent {
 	 * An item is considered a stub if it has terms but no statements or sitelinks.
 	 * If an item has sitelinks but no statements, it is considered a "linkstub".
 	 * If an item has statements, it's not empty nor a stub.
+	 *
+	 * @see STATUS_LINKSTUB
+	 *
+	 * @note Will fail of this ItemContent is a redirect.
 	 *
 	 * @return int
 	 */
