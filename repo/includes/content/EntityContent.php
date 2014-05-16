@@ -3,8 +3,10 @@
 namespace Wikibase;
 
 use AbstractContent;
+use Article;
 use Content;
 use IContextSource;
+use MWException;
 use ParserOptions;
 use ParserOutput;
 use RequestContext;
@@ -66,6 +68,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::isValid()
 	 */
 	public function isValid() {
+		if ( $this->isRedirect() ) {
+			return true;
+		}
+
 		if ( is_null( $this->getEntity()->getId() ) ) {
 			return false;
 		}
@@ -84,6 +90,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @return Title|bool
 	 */
 	public function getTitle() {
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
 		$id = $this->getEntity()->getId();
 
 		if ( !$id ) {
@@ -127,7 +137,52 @@ abstract class EntityContent extends AbstractContent {
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null,
 		$generateHtml = true
 	) {
-		$entityView = $this->getEntityView( null, $options, null );
+		if ( $this->isRedirect() ) {
+			return $this->getParserOutputForRedirect( $this->getRedirectTarget(), $generateHtml );
+		} else {
+			return $this->getParserOutputFromEntityView( $title, $revId, $options, $generateHtml );
+		}
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @note Will fail if this EntityContent does not represent a redirect.
+	 *
+	 * @param Title $target
+	 * @param $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	protected function getParserOutputForRedirect( Title $target, $generateHtml ) {
+		$output = new ParserOutput();
+
+		// Make sure to include the redirect link in pagelinks
+		$output->addLink( $target );
+		if ( $generateHtml ) {
+			$chain = $this->getRedirectChain();
+			$html = Article::getRedirectHeaderHtml( $target->getPageLanguage(), $chain, false );
+			$output->setText( $html );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @note Will fail if this EntityContent represents a redirect.
+	 *
+	 * @param Title $title
+	 * @param null $revId
+	 * @param ParserOptions $options
+	 * @param bool $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	protected function getParserOutputFromEntityView( Title $title, $revId = null,
+		ParserOptions $options = null, $generateHtml = true
+	) {
 		$editable = !$options? true : $options->getEditSection();
 
 		if ( $revId === null || $revId === 0 ) {
@@ -137,6 +192,7 @@ abstract class EntityContent extends AbstractContent {
 		$revision = new EntityRevision( $this->getEntity(), $revId );
 
 		// generate HTML
+		$entityView = $this->getEntityView( null, $options, null );
 		$output = $entityView->getParserOutput( $revision, $editable, $generateHtml );
 
 		// Since the output depends on the user language, we must make sure
@@ -253,6 +309,10 @@ abstract class EntityContent extends AbstractContent {
 	 *         search index.
 	 */
 	public function getTextForSearchIndex() {
+		if ( $this->isRedirect() ) {
+			return '';
+		}
+
 		wfProfileIn( __METHOD__ );
 
 		$entity = $this->getEntity();
@@ -265,10 +325,26 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
+	 * @return string Returns the string representation of the redirect
+	 * represented by this EntityContent (if any).
+	 */
+	protected function getRedirectText() {
+		if ( $this->isRedirect() ) {
+			return '#REDIRECT [[' . $this->getRedirectTarget()->getFullText() . ']]';
+		} else {
+			return '';
+		}
+	}
+
+	/**
 	 * @return String a string representing the content in a way useful for content filtering as
 	 *         performed by extensions like AbuseFilter.
 	 */
 	public function getTextForFilters() {
+		if ( $this->isRedirect() ) {
+			return $this->getRedirectText();
+		}
+
 		wfProfileIn( __METHOD__ );
 
 		//XXX: $ignore contains knowledge about the Entity's internal representation.
@@ -333,7 +409,13 @@ abstract class EntityContent extends AbstractContent {
 	 * @return String the summary text
 	 */
 	public function getTextForSummary( $maxlength = 250 ) {
-		return $this->getEntity()->getDescription( $GLOBALS['wgLang']->getCode() );
+		if ( $this->isRedirect() ) {
+			return $this->getRedirectText();
+		} else {
+			$lang = $GLOBALS['wgLang']->getCode();
+			$text = $this->getEntity()->getLabel( $lang );;
+			return substr( $text, 0, $maxlength );
+		}
 	}
 
 	/**
@@ -378,6 +460,15 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
+		$thisRedirect = $this->getRedirectTarget();
+		$thatRedirect = $that->getRedirectTarget();
+
+		if ( $thisRedirect !== null ) {
+			return $thisRedirect->equals( $thatRedirect );
+		} elseif ( $thatRedirect !== null ) {
+			return false;
+		}
+
 		$thisEntity = $this->getEntity();
 		$thatEntity = $that->getEntity();
 
@@ -385,7 +476,7 @@ abstract class EntityContent extends AbstractContent {
 		$thatId = $thatEntity->getId();
 
 		if ( $thisId !== null && $thatId !== null
-			&& !$thisEntity->getId()->equals( $thatId )
+			&& !$thisId->equals( $thatId )
 		) {
 			return false;
 		}
@@ -403,6 +494,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @return bool
 	 */
 	public function isCountable( $hasLinks = null ) {
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
 		return !$this->getEntity()->isEmpty();
 	}
 
@@ -412,6 +507,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @return bool
 	 */
 	public function isEmpty() {
+		if ( $this->isRedirect() ) {
+			return false;
+		}
+
 		return $this->getEntity()->isEmpty();
 	}
 
@@ -423,6 +522,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @return ItemContent
 	 */
 	public function copy() {
+		if ( $this->isRedirect() ) {
+			return static::newRedirect( $this->getRedirectTarget() );
+		}
+
 		$array = array();
 
 		foreach ( $this->getEntity()->toArray() as $key => $value ) {
@@ -473,8 +576,14 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * Apply all EntityValidators registered for on-save validation.
+	 *
+	 * @return Status
 	 */
 	protected function applyOnSaveValidators() {
+		if ( $this->isRedirect() ) {
+			return Result::newSuccess();
+		}
+
 		/* @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$validators = $handler->getOnSaveValidators();
@@ -538,6 +647,10 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
+		if ( $this->isRedirect() ) {
+			return array();
+		}
+
 		$entity = $this->getEntity();
 
 		$properties = array(
@@ -558,6 +671,8 @@ abstract class EntityContent extends AbstractContent {
 	 * e.g. STATUS_EMPTY or STATUS_NONE.
 	 * Used by getEntityPageProperties().
 	 *
+	 * @note Will fail of this ItemContent is a redirect.
+	 *
 	 * @see getEntityPageProperties()
 	 * @see STATUS_NONE
 	 * @see STATUS_EMPTY
@@ -565,7 +680,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return int
 	 */
-	public function getEntityStatus() {
+	protected function getEntityStatus() {
 		if ( $this->isEmpty() ) {
 			return self::STATUS_EMPTY;
 		} elseif ( !$this->getEntity()->hasClaims() ) {
@@ -574,4 +689,5 @@ abstract class EntityContent extends AbstractContent {
 			return self::STATUS_NONE;
 		}
 	}
+
 }
