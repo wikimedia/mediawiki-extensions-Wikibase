@@ -89,7 +89,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$newerContent = $newerRevision->getContent();
 		$latestContent = $latestRevision->getContent();
 
-		$diff = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+		$diff = $newerContent->getDiff( $olderContent->getEntity() );
 		$edit = false;
 		$token = $this->getRequest()->getText( 'wpEditToken' );
 
@@ -125,10 +125,9 @@ class SubmitEntityAction extends EditEntityAction {
 				$status = $edit->attemptSave( $summary, 0, $token );
 			}
 		} else { // undo
-			$entity = $latestContent->getEntity()->copy();
-			$latestContent->getEntity()->patch( $diff );;
+			$patchedContent = $latestContent->getPatched( $diff );;
 
-			if ( $latestContent->getEntity()->getDiff( $entity )->isEmpty() ) {
+			if ( $patchedContent->getDiff( $latestContent )->isEmpty() ) {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
@@ -145,7 +144,7 @@ class SubmitEntityAction extends EditEntityAction {
 					$entityRevisionLookup,
 					$entityStore,
 					$entityPermissionChecker,
-					$latestContent->getEntity(),
+					$patchedContent->getEntity(),
 					$this->getUser(),
 					$latestRevision->getId(),
 					$this->getContext() );

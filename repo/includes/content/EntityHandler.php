@@ -24,6 +24,7 @@ use Wikibase\Validators\EntityValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class EntityHandler extends ContentHandler {
 
@@ -80,6 +81,30 @@ abstract class EntityHandler extends ContentHandler {
 	public function makeEmptyContent() {
 		$contentClass = $this->getContentClass();
 		return $contentClass::newEmpty();
+	}
+
+	/**
+	 * @see ContentHandler::makeRedirectContent
+	 *
+	 * Will return a new EntityContent representing a redirect to the given title,
+	 * or null if the Content class does not support redirects (that is, if it does
+	 * not have a static newRedirect() function).
+	 *
+	 * @since 0.5
+	 *
+	 * @param \Title $title
+	 * @param string $text
+	 *
+	 * @return EntityContent
+	 */
+	public function makeRedirectContent( Title $title, $text = '' ) {
+		$contentClass = $this->getContentClass();
+
+		if ( method_exists( $contentClass, 'newRedirect' ) ) {
+			return $contentClass::newRedirect( $title );
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -141,8 +166,13 @@ abstract class EntityHandler extends ContentHandler {
 			throw new \InvalidArgumentException( '$content mist be an instance of EntityContent' );
 		}
 
-		$data = $content->getEntity()->toArray();
-		return $this->contentCodec->encodeBlob( $data, $format );
+		if ( $content->isRedirect() ) {
+			$data = $this->contentCodec->redirectTitleToArray( $content->getRedirectTarget() );
+			return $this->contentCodec->encodeBlob( $data, $format );
+		} else {
+			$data = $content->getEntity()->toArray();
+			return $this->contentCodec->encodeBlob( $data, $format );
+		}
 	}
 
 	/**
@@ -159,20 +189,37 @@ abstract class EntityHandler extends ContentHandler {
 	public function unserializeContent( $blob, $format = null ) {
 		$data = $this->contentCodec->decodeBlob( $blob, $format );
 
-		$entityContent = $this->newContentFromArray( $data );
-		return $entityContent;
+		if ( $this->contentCodec->isRedirectData( $data ) ) {
+			$redirect = $this->contentCodec->extractRedirectTarget( $data );
+			return $this->makeRedirectContent( $redirect );
+		} else {
+			$entity = $this->newEntityFromArray( $data );
+			return $this->newContent( $entity );
+		}
 	}
 
+	/**
+	 * Creates a new EntityContent object wrapping the given Entity object.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity An Entity object. The type of $entity must match
+	 * the kind concrete subclass of EntityContent that this handler supports.
+	 *
+	 * @throws InvalidArgumentException If $entity has the wrong type.
+	 * @return EntityContent
+	 */
+	protected abstract function newContent( Entity $entity );
 
 	/**
 	 * Calls the static function newFromArray() on the content class,
-	 * to create a new EntityContent object based on the array data.
+	 * to create a new Entity based on the array data.
 	 *
 	 * @param array $data
 	 *
 	 * @return EntityContent
 	 */
-	protected function newContentFromArray( array $data ) {
+	private function newEntityFromArray( array $data ) {
 		$contentClass = $this->getContentClass();
 		return $contentClass::newFromArray( $data );
 	}
@@ -317,22 +364,25 @@ abstract class EntityHandler extends ContentHandler {
 			return $olderContent;
 		}
 
+		// FIXME: handle diff/patch for redirects, see bug 65585.
+		if ( $newerContent->isRedirect() || $olderContent->isRedirect() ) {
+			return false;
+		}
+
 		// diff from new to base
-		$patch = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+		$patch = $newerContent->getDiff( $olderContent );
 
 		// apply the patch( new -> old ) to the current revision.
-		$patchedCurrent = $latestContent->getEntity()->copy();
-		$patchedCurrent->patch( $patch );
+		$patchedCurrent = $latestContent->getPatched( $patch );
 
 		// detect conflicts against current revision
-		$cleanPatch = $latestContent->getEntity()->getDiff( $patchedCurrent );
+		$cleanPatch = $latestContent->getDiff( $patchedCurrent );
 		$conflicts = $patch->count() - $cleanPatch->count();
 
 		if ( $conflicts > 0 ) {
 			return false;
 		} else {
-			$undo = $this->makeEntityContent( $patchedCurrent );
-			return $undo;
+			return $patchedCurrent;
 		}
 	}
 

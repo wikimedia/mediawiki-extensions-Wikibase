@@ -2,11 +2,21 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use MediaWikiTestCase;
 use ParserOptions;
 use RequestContext;
 use Title;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -295,5 +305,183 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 			$this->assertEquals( $view->getLanguage()->getCode(), $context->getLanguage()->getCode() );
 		}
 	}
+
+
+	public function diffProvider() {
+		$argLists = array();
+
+		$emptyDiff = new EntityDiff();
+
+		$content0 = $this->newEmpty();
+		$entity0 = $content0->getEntity();
+
+		$content1 = $this->newEmpty();
+		$entity1 = $content1->getEntity();
+
+		$expected = new EntityDiff();
+
+		$argLists[] = array( $content0, $content1, $expected );
+
+		$content0 = $this->newEmpty();
+		$entity0 = $content0->getEntity();
+		$entity0->addAliases( 'nl', array( 'bah' ) );
+		$entity0->addAliases( 'de', array( 'bah' ) );
+
+		$content1 = $this->newEmpty();
+		$entity1 = $content1->getEntity();
+		$entity1->addAliases( 'en', array( 'foo', 'bar' ) );
+		$entity1->addAliases( 'nl', array( 'bah', 'baz' ) );
+
+		$entity1->setDescription( 'en', 'onoez' );
+
+		$expected = new EntityDiff( array(
+			'aliases' => new Diff( array(
+					'en' => new Diff( array(
+							new DiffOpAdd( 'foo' ),
+							new DiffOpAdd( 'bar' ),
+						), false ),
+					'de' => new Diff( array(
+							new DiffOpRemove( 'bah' ),
+						), false ),
+					'nl' => new Diff( array(
+							new DiffOpAdd( 'baz' ),
+						), false )
+				) ),
+			'description' => new Diff( array(
+					'en' => new DiffOpAdd( 'onoez' ),
+				) ),
+		) );
+
+		$argLists[] = array( $content0, $content1, $expected );
+
+		$content0 = $content1->copy();
+		$content1 = $content1->copy();
+		$expected = clone $emptyDiff;
+
+		$argLists[] = array( $content0, $content1, $expected );
+
+		$content0 = $this->newEmpty();
+		$entity0 = $content0->getEntity();
+
+		$content1 = $this->newEmpty();
+		$entity1 = $content1->getEntity();
+		$entity1->setLabel( 'en', 'onoez' );
+
+		$expected = new EntityDiff( array(
+			'label' => new Diff( array(
+					'en' => new DiffOpAdd( 'onoez' ),
+				) ),
+		) );
+
+		$argLists[] = array( $content0, $content1, $expected );
+
+		//TODO: test redirects once we support diffs for them!
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider diffProvider
+	 *
+	 * @param EntityContent $content0
+	 * @param EntityContent $content1
+	 * @param Diff $expected
+	 */
+	public function testDiffEntities( EntityContent $content0, EntityContent $content1, Diff $expected ) {
+		$actual = $content0->getDiff( $content1 );
+
+		$this->assertInstanceOf( '\Wikibase\EntityDiff', $actual );
+		$this->assertEquals( count( $expected ), count( $actual ) );
+
+		// TODO: equality check
+		// (simple serialize does not work, since the order is not relevant, and not only on the top level)
+	}
+
+	public function patchProvider() {
+		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim1 = new Claim( new PropertySomeValueSnak( 42 ) );
+		$claim2 = new Claim( new PropertyValueSnak( 42, new StringValue( 'ohi' ) ) );
+		$claim3 = new Claim( new PropertyNoValueSnak( 1 ) );
+
+		$claim0->setGuid( 'claim0' );
+		$claim1->setGuid( 'claim1' );
+		$claim2->setGuid( 'claim2' );
+		$claim3->setGuid( 'claim3' );
+
+		$argLists = array();
+
+
+		$source = $this->newEmpty();
+		$patch = new EntityDiff();
+		$expected = $source->copy();
+
+		$argLists[] = array( $source, $patch, $expected );
+
+
+		$source = $this->newEmpty();
+		$sourceEntity = $source->getEntity();
+		$sourceEntity->setLabel( 'en', 'foo' );
+		$sourceEntity->setLabel( 'nl', 'bar' );
+		$sourceEntity->setDescription( 'de', 'foobar' );
+		$sourceEntity->setAliases( 'en', array( 'baz', 'bah' ) );
+		$sourceEntity->addClaim( $claim1 );
+
+		$patch = new EntityDiff();
+		$expected = clone $source;
+
+		$argLists[] = array( $source, $patch, $expected );
+
+
+		$source = clone $source;
+
+		$patch = new EntityDiff( array(
+			'description' => new Diff( array(
+					'de' => new DiffOpChange( 'foobar', 'onoez' ),
+					'en' => new DiffOpAdd( 'foobar' ),
+				), true ),
+		) );
+
+		$expected = $source->copy();
+		$expectedEntity = $expected->getEntity();
+		$expectedEntity->setDescription( 'de', 'onoez' );
+		$expectedEntity->setDescription( 'en', 'foobar' );
+
+		$argLists[] = array( $source, $patch, $expected );
+
+
+		$source = $this->newEmpty();
+		$sourceEntity = $source->getEntity();
+		$sourceEntity->addClaim( $claim0 );
+		$sourceEntity->addClaim( $claim1 );
+		$patch = new EntityDiff( array( 'claim' => new Diff( array(
+				'claim0' => new DiffOpRemove( $claim0 ),
+				'claim2' => new DiffOpAdd( $claim2 ),
+				'claim3' => new DiffOpAdd( $claim3 )
+			), false ) ) );
+
+		$expected = $this->newEmpty();
+		$expectedEntity = $expected->getEntity();
+		$expectedEntity->addClaim( $claim1 );
+		$expectedEntity->addClaim( $claim2 );
+		$expectedEntity->addClaim( $claim3 );
+
+		$argLists[] = array( $source, $patch, $expected );
+
+		//TODO: test redirects once we support diffs for them!
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider patchProvider
+	 *
+	 * @param EntityContent $source
+	 * @param Diff $patch
+	 * @param EntityContent $expected
+	 */
+	public function testGetPatched( EntityContent $source, Diff $patch, EntityContent $expected ) {
+		$patched = $source->getPatched( $patch );
+		$this->assertTrue( $expected->equals( $patched ) );
+	}
+
+	//TODO: test getUndoContent
 
 }
