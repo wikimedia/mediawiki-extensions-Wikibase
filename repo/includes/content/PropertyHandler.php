@@ -61,6 +61,24 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
+	 * @see EntityHandler::newContent
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $property An Property object
+	 *
+	 * @throws InvalidArgumentException
+	 * @return PropertyContent
+	 */
+	protected function newContent( Entity $property ) {
+		if ( ! $property instanceof Property ) {
+			throw new \InvalidArgumentException( '$property must be an instance of Property' );
+		}
+
+		return PropertyContent::newFromProperty( $property );
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getActionOverrides() {
