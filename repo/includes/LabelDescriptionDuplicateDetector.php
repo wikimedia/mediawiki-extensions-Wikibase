@@ -72,9 +72,9 @@ class LabelDescriptionDuplicateDetector {
 	 *
 	 * @since 0.5
 	 *
-	 * @param array $labels An associative array of labels,
+	 * @param string[] $labels An associative array of labels,
 	 *        with language codes as the keys.
-	 * @param array|null $descriptions An associative array of descriptions,
+	 * @param string[]|null $descriptions An associative array of descriptions,
 	 *        with language codes as the keys.
 	 * @param EntityId $entityId The Id of the Entity the terms come from. Conflicts
 	 *        with this entity will be considered self-conflicts and ignored.
@@ -86,7 +86,7 @@ class LabelDescriptionDuplicateDetector {
 	 *         The error code will be either 'label-conflict' or 'label-with-description-conflict',
 	 *         depending on whether descriptions where given.
 	 */
-	public function detectTermConflicts( $labels, $descriptions, EntityId $entityId = null ) {
+	public function detectTermConflicts( array $labels, $descriptions, EntityId $entityId = null ) {
 		if ( !is_array( $labels ) ) {
 			throw new InvalidArgumentException( '$labels must be an array' );
 		}
@@ -100,7 +100,7 @@ class LabelDescriptionDuplicateDetector {
 		}
 
 		if ( $descriptions === null ) {
-			$termSpecs = $this->buildLabelConflictSpecs( $labels, $descriptions );
+			$termSpecs = $this->buildLabelConflictSpecs( $labels );
 			$errorCode = 'label-conflict';
 		} else {
 			$termSpecs = $this->buildLabelDescriptionConflictSpecs( $labels, $descriptions );
@@ -122,31 +122,31 @@ class LabelDescriptionDuplicateDetector {
 	 * of label and description for a given language. This applies only for languages for
 	 * which both label and description are given in $terms.
 	 *
-	 * @param array|null $labels An associative array of labels,
+	 * @param string[] $labels An associative array of labels,
 	 *        with language codes as the keys.
-	 * @param array|null $descriptions An associative array of descriptions,
+	 * @param string[] $descriptions An associative array of descriptions,
 	 *        with language codes as the keys.
 	 *
-	 * @return array An array suitable for use with TermIndex::getMatchingTermCombination().
+	 * @return array[] An array suitable for use with TermIndex::getMatchingTermCombination().
 	 */
 	private function buildLabelDescriptionConflictSpecs( array $labels, array $descriptions ) {
 		$termSpecs = array();
 
-		foreach ( $labels as $lang => $label ) {
-			if ( !isset( $descriptions[$lang] ) ) {
+		foreach ( $labels as $languageCode => $label ) {
+			if ( !isset( $descriptions[$languageCode] ) ) {
 				// If there's no description, there will be no conflict
 				continue;
 			}
 
 			$label = new Term( array(
-				'termLanguage' => $lang,
+				'termLanguage' => $languageCode,
 				'termText' => $label,
 				'termType' => Term::TYPE_LABEL,
 			) );
 
 			$description = new Term( array(
-				'termLanguage' => $lang,
-				'termText' => $descriptions[$lang],
+				'termLanguage' => $languageCode,
+				'termText' => $descriptions[$languageCode],
 				'termType' => Term::TYPE_DESCRIPTION,
 			) );
 
@@ -160,19 +160,17 @@ class LabelDescriptionDuplicateDetector {
 	 * Builds a term spec array suitable for finding entities with any of the given labels
 	 * for a given language.
 	 *
-	 * @param array $labels An associative array mapping language codes to
-	 *        records. Reach record is an associative array with they keys "label" and
-	 *        "description", providing a label and description for each language.
-	 *        Both the label and the description for a language may be null.
+	 * @param string[] $labels An associative array of labels,
+	 *        with language codes as the keys.
 	 *
-	 * @return array An array suitable for use with TermIndex::getMatchingTermCombination().
+	 * @return array[] An array suitable for use with TermIndex::getMatchingTermCombination().
 	 */
 	private function buildLabelConflictSpecs( array $labels ) {
 		$termSpecs = array();
 
-		foreach ( $labels as $lang => $label ) {
+		foreach ( $labels as $languageCode => $label ) {
 			$label = new Term( array(
-				'termLanguage' => $lang,
+				'termLanguage' => $languageCode,
 				'termText' => $label,
 				'termType' => Term::TYPE_LABEL,
 			) );
@@ -184,7 +182,7 @@ class LabelDescriptionDuplicateDetector {
 	}
 
 	/**
-	 * @param array $termSpecs as returned by buildXxxTermSpecs
+	 * @param array[] $termSpecs as returned by $this->build...ConflictSpecs()
 	 * @param EntityId $entityId
 	 *
 	 * @return Term[]
@@ -197,8 +195,8 @@ class LabelDescriptionDuplicateDetector {
 		// FIXME: Do not run this when running test using MySQL as self joins fail on temporary tables.
 		if ( !defined( 'MW_PHPUNIT_TEST' )
 			|| !( $this->termFinder instanceof TermSqlIndex )
-			|| wfGetDB( DB_MASTER )->getType() !== 'mysql' ) {
-
+			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
+		) {
 			$foundTerms = $this->termFinder->getMatchingTermCombination(
 				$termSpecs,
 				Term::TYPE_LABEL,
@@ -213,7 +211,7 @@ class LabelDescriptionDuplicateDetector {
 	}
 
 	/**
-	 * @param string $message Plain text message (english)
+	 * @param string $message Plain text message (English)
 	 * @param string $errorCode Error code (for later localization)
 	 * @param Term[] $terms The conflicting terms.
 	 *
@@ -231,8 +229,9 @@ class LabelDescriptionDuplicateDetector {
 				array(
 					$term->getText(),
 					$term->getLanguage(),
-					$term->getEntityId()
-				) );
+					$term->getEntityId(),
+				)
+			);
 		}
 
 		return $errors;
