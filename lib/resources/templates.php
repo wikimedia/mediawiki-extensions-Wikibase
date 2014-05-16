@@ -120,7 +120,7 @@ HTML;
 	// the non-JS toolbar to attach to. This parameter should be removed.
 	$templates['wb-statement'] =
 <<<HTML
-<div class="wb-statement wb-statementview">
+<div class="wb-statement wb-statementview wb-claimview">
 	<div class="wb-statement-rank">$1</div>
 	<div class="wb-claim wb-claim-$2">
 		<div class="wb-claim-mainsnak" dir="auto">
