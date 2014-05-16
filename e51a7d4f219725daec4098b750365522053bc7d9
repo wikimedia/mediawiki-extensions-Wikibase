@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_9eb23ce3",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-16T10:50:30Z",
+      "side": 1,
+      "message": "Do the flip only once, please.",
+      "revId": "e51a7d4f219725daec4098b750365522053bc7d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_bebcd8b2",
+        "filename": "repo/includes/Validators/LabelDescriptionUniquenessValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-16T10:50:30Z",
+      "side": 1,
+      "message": "This optimization is already done in LabelDescriptionDuplicateDetector::buildLabelDescriptionConflictSpecs, isn\u0027t it?\n\nI don\u0027t think this assumption should be made here. From the perspective of this class it\u0027s not wrong to \"detect term conflicts\" for descriptions that don\u0027t have a label.",
+      "revId": "e51a7d4f219725daec4098b750365522053bc7d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

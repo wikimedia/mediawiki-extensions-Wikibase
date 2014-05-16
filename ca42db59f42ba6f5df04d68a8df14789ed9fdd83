@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_1e9f4c57",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-16T10:50:30Z",
+      "side": 0,
+      "message": "As requested in\nhttps://gerrit.wikimedia.org/r/#/c/124835/18/repo/includes/LabelDescriptionDuplicateDetector.php\nThanks!",
+      "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
