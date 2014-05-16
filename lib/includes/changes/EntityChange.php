@@ -260,7 +260,7 @@ class EntityChange extends DiffChange {
 	 *
 	 * @return EntityChange
 	 */
-	protected static function newForEntity( $action, EntityId $entityId, array $fields = null ) {
+	public static function newForEntity( $action, EntityId $entityId, array $fields = null ) {
 		//FIXME: use factory based on $entity->getType()
 		if ( $entityId->getEntityType() === Item::ENTITY_TYPE ) {
 			$class = '\Wikibase\ItemChange';
@@ -329,6 +329,51 @@ class EntityChange extends DiffChange {
 		$instance->setEntity( $theEntity );
 
 		return $instance;
+	}
+
+	/**
+	 * Creates an EntityChange from EntityContent objects.
+	 *
+	 * @see newFromUpdate()
+	 *
+	 * @since 0.5
+	 *
+	 * @todo Handle redirects more nicely
+	 *
+	 * @param string      $action The action name
+	 * @param EntityContent|null $oldContent
+	 * @param EntityContent|null $newContent
+	 * @param array|null  $fields additional fields to set
+	 *
+	 * @return static|null
+	 * @throws MWException
+	 */
+	public static function newFromContentUpdate( $action, EntityContent $oldContent = null, EntityContent $newContent = null, array $fields = null ) {
+		// Handle the special case of the EntityContent being turned into a redirect,
+		// or back from a redirect into an entity.
+		if ( ( $oldContent === null || $oldContent->isRedirect() )
+			&& ( $newContent === null || $newContent->isRedirect() ) ) {
+			// nothing to do.
+			//FIXME: Notify the client about the creation of redirects too!
+			return null;
+		} elseif ( $oldContent !== null && $oldContent->isRedirect() ) {
+			//XXX: Really use RESTORE?
+			$action = EntityChange::RESTORE;
+			$oldContent = null;
+		} elseif ( $newContent !== null && $newContent->isRedirect() ) {
+			//FIXME: Fake! Use REDIRECT once the client understands that!
+			$action = EntityChange::REMOVE;
+			$newContent = null;
+		}
+
+		$oldEntity = $oldContent === null ? null : $oldContent->getEntity();
+		$newEntity = $newContent === null ? null : $newContent->getEntity();
+
+		if ( $oldEntity === null && $newEntity === null ) {
+			return null;
+		}
+
+		return self::newFromUpdate( $action, $oldEntity, $newEntity, $fields );
 	}
 
 	/**
