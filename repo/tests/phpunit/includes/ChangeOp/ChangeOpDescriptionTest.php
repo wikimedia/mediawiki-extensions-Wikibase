@@ -69,10 +69,11 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$args = array();
-		$args['invalid description'] = array ( new ChangeOpDescription( 'fr', 'INVALID', $validatorFactory ) );
-		$args['duplicate description'] = array ( new ChangeOpDescription( 'fr', 'DUPE', $validatorFactory ) );
-		$args['invalid language'] = array ( new ChangeOpDescription( 'INVALID', 'valid', $validatorFactory ) );
-		$args['set bad language to null'] = array ( new ChangeOpDescription( 'INVALID', null, $validatorFactory ), 'INVALID' );
+		$args['valid description'] = array ( new ChangeOpDescription( 'fr', 'valid', $validatorFactory ), true );
+		$args['invalid description'] = array ( new ChangeOpDescription( 'fr', 'INVALID', $validatorFactory ), false );
+		$args['duplicate description'] = array ( new ChangeOpDescription( 'fr', 'DUPE', $validatorFactory ), false );
+		$args['invalid language'] = array ( new ChangeOpDescription( 'INVALID', 'valid', $validatorFactory ), false );
+		$args['set bad language to null'] = array ( new ChangeOpDescription( 'INVALID', null, $validatorFactory ), false );
 
 		return $args;
 	}
@@ -81,12 +82,18 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validateProvider
 	 *
 	 * @param ChangeOp $changeOp
+	 * @param bool $valid
 	 */
-	public function testValidate( ChangeOp $changeOp ) {
+	public function testValidate( ChangeOp $changeOp, $valid ) {
 		$entity = $this->provideNewEntity();
 
+		$oldLabels = $entity->getDescriptions();
+
 		$result = $changeOp->validate( $entity );
-		$this->assertFalse( $result->isValid() );
+		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
+
+		// labels should not have changed during validation
+		$this->assertEquals( $oldLabels, $entity->getDescriptions(), 'Descriptions modified by validation!' );
 	}
 
 	/**
