@@ -22,6 +22,7 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Validators\EntityValidator;
 use WikiPage;
 
 /**
@@ -499,31 +500,6 @@ abstract class EntityContent extends AbstractContent {
 
 		$localizer = WikibaseRepo::getDefaultInstance()->getValidatorErrorLocalizer();
 		return $localizer->getResultStatus( $result );
-	}
-
-	/**
-	 * @deprecated will be moved to WikiPageEntityStore
-	 *
-	 * @param int|null $revId Revision id to get a EntityRevision object for.
-	 *		If omitted, the latest revision will be used.
-	 *
-	 * @return EntityRevision
-	 */
-	public function getEntityRevision( $revId = null ) {
-		if ( intval( $revId ) > 0 ) {
-			$pageRevision = Revision::newFromId( $revId );
-		} else {
-			$pageRevision = $this->getLatestRevision();
-			$revId = $pageRevision === null ? 0 : $pageRevision->getId();
-		}
-
-		$itemRevision = new EntityRevision(
-			$this->getEntity(),
-			intval( $revId ),
-			$pageRevision === null ? '' : $pageRevision->getTimestamp()
-		);
-
-		return $itemRevision;
 	}
 
 	/**
