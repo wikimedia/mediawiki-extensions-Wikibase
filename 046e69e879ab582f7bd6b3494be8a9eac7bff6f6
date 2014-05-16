@@ -108,6 +108,40 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_01336df4",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-16T14:06:34Z",
+      "side": 1,
+      "message": "looks like we warn in both cases.",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_a149596c",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-16T14:06:34Z",
+      "side": 1,
+      "message": "I still don\u0027t think this is needed.  It\u0027s too noisy with development warnings on.\n\nwhat kind of screw up do we expect? if i remove the wfWarns and tamper with the code in this function, tests still fail.\n\nplease remove them.",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_9b15b343",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 6
@@ -143,6 +177,23 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_41fcc5d5",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-16T14:06:34Z",
+      "side": 1,
+      "message": "i would add a specific css class for wikibase error\n\ne.g. \u0027error wb-error\u0027 or maybe \u0027error wb-error wb-format-error\u0027 so it\u0027s easier to do further specific styling and is possible for users to hide them if they wish.",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_9b5a5321",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 6
@@ -172,6 +223,24 @@
       "side": 1,
       "message": "so, what do you suggest instead?",
       "parentUuid": "6e20cf91_9b5a5321",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_c1b9f52a",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-16T14:06:34Z",
+      "side": 1,
+      "message": "no parenthesis please.  they don\u0027t add much value at all, make it more difficult to style the way we want (e.g. in entity view), and in some cases such as RTL can be problematic and make formatting worse.\n\nwe can handle further formatting in the css, such as:\n\ndiv.wb-snak-value span.error {\n color: red;\n display: block;\n font-style: italic;\n font-size: 100%;\n}\n\nthat causes the warning to be displayed below the value, in consistent font style and size as we do currently.\n\nif we want to deviate more from that, then it should be done as part of the UI redesign.\n\nwithout any of the above css, .error displays in #cc0000 shade of red which I suppose is ok for any places we don\u0027t explicitly style.",
+      "parentUuid": "6e20cf91_0a7b87be",
       "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
