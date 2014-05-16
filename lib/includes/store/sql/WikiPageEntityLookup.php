@@ -3,6 +3,8 @@
 namespace Wikibase\Lib\Store;
 
 use DBQueryError;
+use LogicException;
+use MWContentSerializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,6 +13,7 @@ use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
+use Wikibase\UnresolvedRedirectException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -95,12 +98,21 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		$row = $this->loadRevisionRow( $entityId, $revision );
 
+		/* @var EntityRevision $entityRev */
+		/* @var EntityId $redirect */
+
 		if ( $row ) {
-			$entityRev = $this->loadEntity( $entityId->getEntityType(), $row );
+			list( $entityRev, $redirect ) = $this->loadEntity( $entityId->getEntityType(), $row );
+
+			if ( $redirect ) {
+				// TODO: Optionally follow redirects. Doesn't make sense if a revision is given.
+				wfProfileOut( __METHOD__ );
+				throw new UnresolvedRedirectException( $redirect );
+			}
 
 			if ( !$entityRev ) {
 				// This only happens when there is a problem with the external store.
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId );
+				wfLogWarning( __METHOD__ . ": Entity not loaded for " . $entityId );
 			}
 		} else {
 			// No such revision
@@ -354,10 +366,13 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
 	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
 	 *
-	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
-	 *        should contain the relevant fields from the revision and/or text table.
 	 * @param String $entityType The entity type ID, determines what kind of object is constructed
 	 *        from the blob in the database.
+	 *
+	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
+	 *        should contain the relevant fields from the revision and/or text table.
+	 *
+	 * @throws MWContentSerializationException
 	 *
 	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
 	 * with either $entityRev or $redirect or both being null (but not both being non-null).
@@ -380,32 +395,32 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		}
 
 		$format = $row->rev_content_format;
-		$entity = $this->unserializeEntity( $entityType, $blob, $format );
-		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
-			. $entity->getId() );
+		$entity = $this->contentCodec->decodeEntity( $blob, $format );
 
-		wfProfileOut( __METHOD__ );
-		return $entityRev;
-	}
+		if ( $entity ) {
+			$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
-	/**
-	 * @see ContentHandler::unserializeContent
-	 *
-	 * @since 0.5
-	 *
-	 * @param $entityType
-	 * @param string $blob
-	 * @param null|string $format
-	 *
-	 * @return Entity|null
-	 */
-	private function unserializeEntity( $entityType, $blob, $format = null ) {
-		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
-		$entity = $this->entityFactory->newFromArray( $entityType, $data );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
+				. $entity->getId()->getSerialization() );
 
-		return $entity;
+			wfProfileOut( __METHOD__ );
+			return array( $entityRev, null );
+		} else {
+			$redirect = $this->contentCodec->decodeRedirect( $blob, $format );
+
+			if ( !$redirect ) {
+				throw new MWContentSerializationException(
+					'The serialized data contains neither an Entity nor an EntityRedirect!'
+				);
+			}
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Found redirect to entity: "
+				. $redirect->getTargetId()->getSerialization() );
+
+			wfProfileOut( __METHOD__ );
+			return array( null, $redirect );
+		}
 	}
 
 }
