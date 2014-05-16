@@ -4,12 +4,15 @@ namespace Wikibase\Lib\Store;
 
 use DBQueryError;
 use Deserializers\Exceptions\DeserializationException;
+use LogicException;
+use MWContentSerializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
+use Wikibase\UnresolvedRedirectException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -86,12 +89,21 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		$row = $this->loadRevisionRow( $entityId, $revision );
 
+		/* @var EntityRevision $entityRev */
+		/* @var EntityId $redirect */
+
 		if ( $row ) {
-			$entityRev = $this->loadEntity( $row );
+			list( $entityRev, $redirect ) = $this->loadEntity( $row );
+
+			if ( $redirect ) {
+				// TODO: Optionally follow redirects. Doesn't make sense if a revision is given.
+				wfProfileOut( __METHOD__ );
+				throw new UnresolvedRedirectException( $redirect );
+			}
 
 			if ( !$entityRev ) {
 				// This only happens when there is a problem with the external store.
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId );
+				wfLogWarning( __METHOD__ . ": Entity not loaded for " . $entityId );
 			}
 		} else {
 			// No such revision
@@ -348,7 +360,10 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
-	 * @return EntityRevision
+	 * @throws MWContentSerializationException
+	 *
+	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
+	 * with either $entityRev or $redirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row ) {
 		wfProfileIn( __METHOD__ );
@@ -368,30 +383,32 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		}
 
 		$format = $row->rev_content_format;
-		$entity = $this->unserializeEntity( $blob, $format );
-		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
-			. $entity->getId() );
-
-		wfProfileOut( __METHOD__ );
-		return $entityRev;
-	}
-
-	/**
-	 * @see ContentHandler::unserializeContent
-	 *
-	 * @since 0.5
-	 *
-	 * @param string $blob
-	 * @param null|string $format
-	 *
-	 * @return Entity|null
-	 * @throws StorageException
-	 */
-	private function unserializeEntity( $blob, $format = null ) {
 		$entity = $this->contentCodec->decodeEntity( $blob, $format );
-		return $entity;
+
+		if ( $entity ) {
+			$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
+				. $entity->getId()->getSerialization() );
+
+			wfProfileOut( __METHOD__ );
+			return array( $entityRev, null );
+		} else {
+			$redirect = $this->contentCodec->decodeRedirect( $blob, $format );
+
+			if ( !$redirect ) {
+				throw new MWContentSerializationException(
+					'The serialized data contains neither an Entity nor an EntityRedirect!'
+				);
+			}
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Found redirect to entity: "
+				. $redirect->getTargetId()->getSerialization() );
+
+			wfProfileOut( __METHOD__ );
+			return array( null, $redirect );
+		}
 	}
 
 }

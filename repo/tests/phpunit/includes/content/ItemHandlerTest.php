@@ -3,10 +3,14 @@
 namespace Wikibase\Test;
 
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Entity;
+use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * @covers Wikibase\ItemHandler
@@ -19,6 +23,7 @@ use Wikibase\ItemContent;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class ItemHandlerTest extends EntityHandlerTest {
 
@@ -54,24 +59,76 @@ class ItemHandlerTest extends EntityHandlerTest {
 		return $contents;
 	}
 
-	public function testGetTitleForId() {
-		$handler = $this->getHandler();
-		$id = new ItemId( 'Q123' );
+	public function provideGetUndoContent() {
+		$cases = parent::provideGetUndoContent();
 
-		$title = $handler->getTitleForId( $id );
-		$this->assertEquals( $id->getSerialization(), $title->getText() );
+		$e1 = $this->newEntity();
+		$e1->setLabel( 'en', 'Foo' );
+		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 11 );
+
+		$e2 = $this->newRedirectContent( $e1->getId(), new ItemId( 'Q112' ) );
+		$r2 = $this->fakeRevision( $e2, 12 );
+
+		$e3 = $this->newRedirectContent( $e1->getId(), new ItemId( 'Q113' ) );
+		$r3 = $this->fakeRevision( $e3, 13 );
+
+		$e4 = $this->newEntity();
+		$e4->setLabel( 'en', 'Bar' );
+		$r4 = $this->fakeRevision( $this->newEntityContent( $e4 ), 14 );
+
+		$cases[] = array( $r2, $r2, $r1, $this->newEntityContent( $e1 ), "undo redirect" );
+		$cases[] = array( $r3, $r3, $r2, $e2, "undo redirect change" );
+		$cases[] = array( $r3, $r2, $r1, null, "undo redirect conflict" );
+		$cases[] = array( $r4, $r4, $r3, $e3, "redo redirect" );
+
+		return $cases;
 	}
 
-	public function testGetIdForTitle() {
-		$handler = $this->getHandler();
-		$title = Title::makeTitle( $handler->getEntityNamespace(), 'Q123' );
+	/**
+	 * @param Entity $entity
+	 *
+	 * @return EntityContent
+	 */
+	protected function newEntityContent( Entity $entity = null ) {
+		if ( !$entity ) {
+			$entity = Item::newEmpty();
+			$entity->setId( new ItemId( 'Q42' ) );
+		}
 
-		$id = $handler->getIdForTitle( $title );
-		$this->assertEquals( $title->getText(), $id->getSerialization() );
+		return $this->getHandler()->makeEntityContent( $entity );
 	}
 
-	protected function newEntity() {
-		return Item::newEmpty();
+	public function testMakeEntityRedirectContent() {
+		$q2 = new ItemId( 'Q2' );
+		$q3 = new ItemId( 'Q3' );
+		$redirect = new EntityRedirect( $q2, $q3 );
+
+		$handler = $this->getHandler();
+		$target = $handler->getTitleForId( $q3 );
+		$content = $handler->makeEntityRedirectContent( $redirect );
+
+		$this->assertEquals( $redirect, $content->getEntityRedirect() );
+		$this->assertEquals( $target->getFullText(), $content->getRedirectTarget()->getFullText() );
+
+		// getEntity() should fail
+		$this->setExpectedException( 'MWException' );
+		$content->getEntity();
+	}
+
+	public function entityIdProvider() {
+		return array(
+			array( 'Q7' ),
+		);
+	}
+
+	protected function newEntity( EntityId $id = null ) {
+		if ( !$id ) {
+			$id = new ItemId( 'Q7' );
+		}
+
+		$item = Item::newEmpty();
+		$item->setId( $id );
+		return $item;
 	}
 
 }

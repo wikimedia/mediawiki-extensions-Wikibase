@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyContent;
 
 /**
@@ -26,28 +28,28 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	/**
+	 * @return EntityId
+	 */
+	protected function getDummyId() {
+		return new PropertyId( 'P100' );
+	}
+
+	/**
 	 * @see EntityContentTest::newEmpty
 	 */
-	protected function newEmpty() {
-		$content = PropertyContent::newEmpty();
+	protected function newEmpty( EntityId $id = null ) {
+		$content = parent::newEmpty( $id );
 		$content->getProperty()->setDataTypeId( 'string' );
 
 		return $content;
 	}
 
-	/**
-	 * Injects a property data type into the generic entity data array.
-	 *
-	 * @param array $data
-	 *
-	 * @return array
-	 */
-	protected function prepareEntityData( array $data ) {
+	public function provideGetEntityId() {
+		$p11 = new PropertyId( 'P11' );
 
-		if ( !isset( $data['datatype'] ) ) {
-			$data['datatype'] = 'string';
-		}
-
-		return $data;
+		return array(
+			'property id' => array( $this->newEmpty( $p11 ), $p11 ),
+		);
 	}
+
 }
