@@ -123,7 +123,7 @@ class ChangeOpDescription extends ChangeOpBase {
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 		// check that the language is valid
-		$result = $languageValidator->validate( $this->language );
+		$result = clone $languageValidator->validate( $this->language );
 
 		if ( $result->isValid() && $this->description !== null ) {
 			// Check that the new description is valid
