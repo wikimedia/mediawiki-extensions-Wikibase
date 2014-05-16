@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_41584535",
+        "filename": "lib/resources/wikibase.utilities/wikibase.utilities.GuidGenerator.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-16T13:46:41Z",
+      "side": 1,
+      "message": "I don\u0027t think we should drop IE8 support. Please replace with\nvar character \u003d template.charAt( i );",
+      "revId": "258ad5892ba1439f21542112906e6a2724761f08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
