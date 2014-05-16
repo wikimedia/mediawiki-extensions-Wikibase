@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_6a531b44",
+        "filename": "repo/includes/ChangeOp/ChangeOpLabel.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T08:07:53Z",
+      "side": 1,
+      "message": "the behavior of getFingerprint() changed indeed, making this wrong. will follow up.",
+      "parentUuid": "6e20cf91_7bed3722",
+      "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_b8a51546",
         "filename": "repo/includes/ChangeOp/ChangeOpLabel.php",
         "patchSetId": 18
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_8a4e779a",
+        "filename": "repo/includes/ChangeOp/ChangeOpLabel.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T08:07:53Z",
+      "side": 1,
+      "message": "working on it.",
+      "parentUuid": "6e20cf91_b8a51546",
+      "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_9b437343",
         "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
         "patchSetId": 18
@@ -47,6 +83,24 @@
       "writtenOn": "2014-05-15T17:25:29Z",
       "side": 1,
       "message": "Why not use the two public methods above? What\u0027s wrong with them? If find it weird to have all three in the public interface of this class. I suggest to @deprecate the two above. Maybe in a follow-up.",
+      "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_4a485f8c",
+        "filename": "repo/includes/LabelDescriptionDuplicateDetector.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T08:07:53Z",
+      "side": 1,
+      "message": "working on it.",
+      "parentUuid": "6e20cf91_9b437343",
       "revId": "ca42db59f42ba6f5df04d68a8df14789ed9fdd83",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
