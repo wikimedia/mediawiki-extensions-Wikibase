@@ -71,10 +71,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $id ) {
-		return Title::newFromText(
-			$id->getSerialization(),
-			$this->getNamespaceForType( $id->getEntityType() )
-		);
+		$handler = $this->getContentHandlerForType( $id->getEntityType() );
+		return $handler->getTitleForId( $id );
 	}
 
 	/**
@@ -88,8 +86,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return int
 	 */
 	public function getNamespaceForType( $type ) {
-		$model = $this->getContentModelForType( $type );
-		return NamespaceUtils::getEntityNamespace( $model );
+		$handler = $this->getContentHandlerForType( $type );
+		return $handler->getEntityNamespace();
 	}
 
 	/**
@@ -97,7 +95,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.5
 	 *
-	 * @param int $type
+	 * @param int $type An Entity type identifier.
 	 *
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return int
@@ -108,6 +106,21 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		}
 
 		return $this->typeMap[$type];
+	}
+
+	/**
+	 * Returns the content handler for the given type of entities.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $type An Entity type identifier.
+	 *
+	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
+	 * @return EntityHandler
+	 */
+	public function getContentHandlerForType( $type ) {
+		$model = $this->getContentModelForType( $type );
+		return ContentHandler::getForModelID( $model );
 	}
 
 	/**
@@ -146,7 +159,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		 */
 		$handler = ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
 
-		return $handler->newContentFromEntity( $entity );
+		return $handler->makeEntityContent( $entity );
 	}
 
 	/**
