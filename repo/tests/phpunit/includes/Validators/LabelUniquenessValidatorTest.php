@@ -3,12 +3,14 @@
 namespace Wikibase\Test\Validators;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\EntityId;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Test\ChangeOpTestMockProvider;
 use Wikibase\Validators\LabelUniquenessValidator;
@@ -35,14 +37,33 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function validFingerprintProvider() {
-		$goodFingerprint1 = new Fingerprint(
-			new TermList( array( new Term( 'de', 'Foo' ) ) ),
-			new TermList( array() ),
-			new AliasGroupList( array() )
-		);
-
 		return array(
-			array( $goodFingerprint1 ),
+			'no conflict' => array(
+				new Fingerprint(
+					new TermList( array( new Term( 'de', 'Foo' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				),
+			),
+			'self conflict' => array(
+				// the mock considers "DUPE" a dupe with P666
+				new Fingerprint(
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				),
+				new PropertyId( 'P666' ) // ignore conflicts with P666
+			),
+			'ignored conflict' => array(
+				// the mock considers "DUPE" a dupe with P666
+				new Fingerprint(
+					new TermList( array( new Term( 'de', 'DUPE' ) ) ),
+					new TermList( array() ),
+					new AliasGroupList( array() )
+				),
+				null,
+				array( 'en' ) // only consider conflicts in english
+			),
 		);
 	}
 
@@ -64,6 +85,11 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		$i = 1;
 		foreach ( $this->validFingerprintProvider() as $name => $fingerprintCase ) {
+			// if the case has a non-null entityId or languageCodes param, skip it
+			if ( isset( $fingerprintCase[1] ) || isset( $fingerprintCase[2] ) ) {
+				continue;
+			}
+
 			$id = new PropertyId( 'P' . $i++ );
 			$cases[$name] = $this->fingerprintCaseToEntityCase( $fingerprintCase, $id );
 		}
@@ -113,12 +139,18 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validFingerprintProvider
 	 *
 	 * @param Fingerprint $fingerprint
+	 * @param EntityId|null $entityId
+	 * @param string[]|null $languageCodes
 	 */
-	public function testValidateFingerprint( Fingerprint $fingerprint ) {
+	public function testValidateFingerprint(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		$languageCodes = null
+	) {
 		$dupeDetector = $this->getMockDupeDetector();
 		$validator = new LabelUniquenessValidator( $dupeDetector );
 
-		$result = $validator->validateFingerprint( $fingerprint );
+		$result = $validator->validateFingerprint( $fingerprint, $entityId, $languageCodes );
 
 		$this->assertTrue( $result->isValid(), 'isValid' );
 	}

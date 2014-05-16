@@ -306,8 +306,14 @@ class ChangeOpTestMockProvider {
 		return Result::newSuccess();
 	}
 
-	public function detectTermConflicts( $labels, $descriptions ) {
+	public function detectTermConflicts( $labels, $descriptions, EntityId $entityId = null ) {
 		$code = ( ( $descriptions === null ) ? 'label-conflict' : 'label-with-description-conflict' );
+
+		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
+			// simulated conflicts always conflict with P666, so if these are
+			// ignored as self-conflicts, we don't need to check any labels.
+			$labels = array();
+		}
 
 		foreach ( $labels as $lang => $label ) {
 
@@ -360,25 +366,14 @@ class ChangeOpTestMockProvider {
 				return $returnValue;
 			};
 
-			$detectLabelDescriptionConflictsForEntity = $detectLabelConflictsForEntity;
 			$detectTermConflicts = $detectLabelConflictsForEntity;
 		} else {
-			$detectLabelConflictsForEntity = array( $this, 'detectLabelConflictsForEntity' );
-			$detectLabelDescriptionConflictsForEntity = array( $this, 'detectLabelDescriptionConflictsForEntity' );
 			$detectTermConflicts = array( $this, 'detectTermConflicts' );
 		}
 
 		$dupeDetector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
 			->disableOriginalConstructor()
 			->getMock();
-
-		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
-			->method( 'detectLabelConflictsForEntity' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( $detectLabelConflictsForEntity ) );
-
-		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
-			->method( 'detectLabelDescriptionConflictsForEntity' )
-			->will( PHPUnit_Framework_TestCase::returnCallback( $detectLabelDescriptionConflictsForEntity ) );
 
 		$dupeDetector->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'detectTermConflicts' )
