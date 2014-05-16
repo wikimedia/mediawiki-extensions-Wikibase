@@ -44,10 +44,15 @@ class ChangeNotifier {
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
 	 *
-	 * @return EntityChange
+	 * @return EntityChange|null
 	 */
 	public function notifyOnPageDeleted( EntityContent $content, User $user, $timestamp ) {
 		wfProfileIn( __METHOD__ );
+
+		if ( $content->isRedirect() ) {
+			// TODO: notify the client about changes to redirects!
+			return null;
+		}
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
 
@@ -67,13 +72,18 @@ class ChangeNotifier {
 	 *
 	 * @param Revision $revision
 	 *
-	 * @return EntityChange
+	 * @return EntityChange|null
 	 */
 	public function notifyOnPageUndeleted( Revision $revision ) {
 		wfProfileIn( __METHOD__ );
 
 		/* @var EntityChange $content */
 		$content = $revision->getContent();
+		if ( $content->isRedirect() ) {
+			// TODO: notify the client about changes to redirects!
+			return null;
+		}
+
 		$entity = $content->getEntity();
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $entity );
@@ -98,13 +108,20 @@ class ChangeNotifier {
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
 	 *
-	 * @return EntityChange
+	 * @return EntityChange|null
 	 */
 	public function notifyOnPageCreated( Revision $revision ) {
 		wfProfileIn( __METHOD__ );
 
 		/* @var EntityContent $newContent */
 		$newContent = $revision->getContent();
+
+		if ( $newContent->isRedirect() ) {
+			// Clients currently don't care about redirected being created.
+			// TODO: notify the client about changes to redirects!
+			return null;
+		}
+
 		$newEntity = $newContent->getEntity();
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $newEntity );
@@ -128,7 +145,7 @@ class ChangeNotifier {
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
 	 *
-	 * @return EntityChange
+	 * @return EntityChange|null
 	 */
 	public function notifyOnPageModified( Revision $current, Revision $parent ) {
 		wfProfileIn( __METHOD__ );
@@ -139,13 +156,16 @@ class ChangeNotifier {
 
 		/* @var EntityContent $newContent */
 		$newContent = $current->getContent();
-		$newEntity = $newContent->getEntity();
 
 		/* @var EntityContent $oldContent */
 		$oldContent = $parent->getContent();
-		$oldEntity = $oldContent->getEntity();
 
-		$change = $this->changeFactory->newFromUpdate( EntityChange::UPDATE, $oldEntity, $newEntity );
+		$change = $this->getChangeForModification( $oldContent, $newContent );
+
+		if ( !$change ) {
+			// nothing to do
+			return null;
+		}
 
 		$change->setRevisionInfo( $current );
 
@@ -154,6 +174,53 @@ class ChangeNotifier {
 
 		wfProfileOut( __METHOD__ );
 		return $change;
+	}
+
+	/**
+	 * Returns a EntityChange based on the old and new content object, taking
+	 * redirects into consideration.
+	 *
+	 * @todo: Notify the client about changes to redirects explicitly.
+	 *
+	 * @param EntityContent $oldContent
+	 * @param EntityContent $newContent
+	 *
+	 * @return EntityChange|null
+	 */
+	private function getChangeForModification( EntityContent $oldContent, EntityContent $newContent ) {
+		$newEntity = null;
+		$oldEntity = null;
+
+		if ( $newContent->isRedirect() ) {
+			if ( $oldContent->isRedirect() ) {
+				// Noting to do, since the new content is a redirect, and the
+				// old content was a redirect too (or the page was just created).
+				$action = null;
+			} else {
+				// An entity page was turned into a redirect. Currently handled like a deletion.
+				// Note that we already know that $oldContent exists and isn't a redirect.
+				$action = EntityChange::REMOVE;
+				$oldEntity = $oldContent->getEntity();
+			}
+		} else { // !$newContent->isRedirect()
+			$newEntity = $newContent->getEntity();
+
+			if ( $oldContent->isRedirect() ) {
+				// A redirect page was turned (back) into an entity
+				$action = EntityChange::RESTORE;
+			} else {
+				// An entity page was updated
+				$action = EntityChange::UPDATE;
+				$oldEntity = $oldContent->getEntity();
+			}
+		}
+
+		if ( $action === null ) {
+			return null;
+		} else {
+			$change = $this->changeFactory->newFromUpdate( $action, $oldEntity, $newEntity );
+			return $change;
+		}
 	}
 
 }

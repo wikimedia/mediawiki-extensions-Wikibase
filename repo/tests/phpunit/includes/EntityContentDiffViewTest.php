@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DerivativeContext;
 use Language;
 use RequestContext;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContentDiffView;
 use Wikibase\Item;
 use Wikibase\ItemContent;
@@ -28,12 +29,17 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 	}
 
 	public function itemProvider() {
+		$empty = Item::newEmpty();
+		$empty->setId( new ItemId( 'Q1' ) );
+
 		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q11' ) );
 		$item->setDescription( 'en', 'ohi there' );
 		$item->setLabel( 'de', 'o_O' );
 		$item->addAliases( 'nl', array( 'foo', 'bar' ) );
 
 		$item2 = $item->copy();
+		$item->setId( new ItemId( 'Q12' ) );
 		$item2->setAliases( 'nl', array( 'daaaah' ) );
 		$item2->setLabel( 'en', 'O_o' );
 		$item2->removeDescription( 'en' );
@@ -70,10 +76,10 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 		);
 
 		return array(
-			'empty' => array( Item::newEmpty(), Item::newEmpty(), array( 'empty' => '/^$/', ) ),
+			'empty' => array( $empty, $empty, array( 'empty' => '/^$/', ) ),
 			'same' => array( $item, $item, array( 'empty' => '/^$/', ) ),
-			'from emtpy' => array( Item::newEmpty(), $item, $insTags ),
-			'to empty' => array( $item, Item::newEmpty(), $delTags ),
+			'from emtpy' => array( $empty, $item, $insTags ),
+			'to empty' => array( $item, $empty, $delTags ),
 			'changed' => array( $item, $item2, $changeTags ),
 		);
 	}
