@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyContent;
@@ -69,8 +70,20 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		$this->assertEquals( $title->getText(), $id->getSerialization() );
 	}
 
-	protected function newEntity() {
-		return Property::newFromType( 'string' );
+	protected function newEntity( EntityId $id = null ) {
+		if ( !$id ) {
+			$id = new PropertyId( 'P7' );
+		}
+
+		$property = Property::newFromType( 'string' );
+		$property->setId( $id );
+		return $property;
+	}
+
+	public function entityIdProvider() {
+		return array(
+			array( 'P7' )
+		);
 	}
 
 }

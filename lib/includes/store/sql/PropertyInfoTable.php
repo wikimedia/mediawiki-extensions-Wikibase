@@ -8,6 +8,7 @@ use DBError;
 use HashBagOStuff;
 use InvalidArgumentException;
 use ObservableMessageReporter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -48,6 +49,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
+		$contentCodec = new EntityContentDataCodec( new BasicEntityIdParser(), $entityFactory );
 	 * @see PropertyInfoStore::getPropertyInfo
 	 *
 	 * @param PropertyId $propertyId
