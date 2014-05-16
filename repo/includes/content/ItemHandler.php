@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DataUpdate;
 use Title;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Updates\DataUpdateClosure;
@@ -112,7 +113,7 @@ class ItemHandler extends EntityHandler {
 
 		$updates[] = new DataUpdateClosure(
 			array( $this->siteLinkStore, 'deleteLinksOfItem' ),
-			$content->getEntity()->getId()
+			$content->getEntityId()
 		);
 
 		return array_merge(
@@ -136,15 +137,44 @@ class ItemHandler extends EntityHandler {
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
-		$updates[] = new DataUpdateClosure(
-			array( $this->siteLinkStore, 'saveLinksOfItem' ),
-			$content->getEntity()
-		);
+		if ( $content->isRedirect() ) {
+			$updates[] = new DataUpdateClosure(
+				array( $this->siteLinkStore, 'deleteLinksOfItem' ),
+				$content->getEntityId()
+			);
+		} else {
+			$updates[] = new DataUpdateClosure(
+				array( $this->siteLinkStore, 'saveLinksOfItem' ),
+				$content->getEntity()
+			);
+		}
 
 		return array_merge(
 			$updates,
 			parent::getEntityModificationUpdates( $content, $title )
 		);
+	}
+
+	/**
+	 * @see EntityHandler::makeEmptyEntity()
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityContent
+	 */
+	public function makeEmptyEntity() {
+		return Item::newEmpty();
+	}
+
+	/**
+	 * @see EntityContent::makeEntityId
+	 *
+	 * @param string $id
+	 *
+	 * @return EntityId
+	 */
+	public function makeEntityId( $id ) {
+		return new ItemId( $id );
 	}
 
 }
