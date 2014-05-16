@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DataUpdate;
 use Title;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
@@ -62,6 +63,24 @@ class PropertyHandler extends EntityHandler {
 		);
 
 		$this->infoStore = $infoStore;
+	}
+
+	/**
+	 * @see EntityHandler::newContent
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $property An Property object
+	 *
+	 * @throws InvalidArgumentException
+	 * @return PropertyContent
+	 */
+	protected function newContent( Entity $property ) {
+		if ( ! $property instanceof Property ) {
+			throw new \InvalidArgumentException( '$property must be an instance of Property' );
+		}
+
+		return PropertyContent::newFromProperty( $property );
 	}
 
 	/**
@@ -154,6 +173,28 @@ class PropertyHandler extends EntityHandler {
 			$updates,
 			parent::getEntityModificationUpdates( $content, $title )
 		);
+	}
+
+	/**
+	 * @see EntityHandler::makeEmptyEntity()
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityContent
+	 */
+	public function makeEmptyEntity() {
+		return Property::newEmpty();
+	}
+
+	/**
+	 * @see EntityContent::makeEntityId
+	 *
+	 * @param string $id
+	 *
+	 * @return EntityId
+	 */
+	public function makeEntityId( $id ) {
+		return new PropertyId( $id );
 	}
 
 }
