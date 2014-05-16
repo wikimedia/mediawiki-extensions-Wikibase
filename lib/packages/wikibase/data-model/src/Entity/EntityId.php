@@ -80,7 +80,7 @@ class EntityId implements Comparable, Serializable {
 
 	/**
 	 * Returns the id serialization.
-	 * @deprecated Use @see getSerialization instead.
+	 * @deprecated Use getSerialization instead.
 	 * (soft depreaction, this alias will stay untill it is no longer used)
 	 *
 	 * @return string
