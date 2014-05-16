@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyContent;
 
 /**
@@ -50,4 +51,14 @@ class PropertyContentTest extends EntityContentTest {
 
 		return $data;
 	}
+
+	public function provideGetEntityId() {
+		$p11 = new PropertyId( 'P11' );
+
+		return array(
+			'no id' => array( $this->newEmpty(), null ),
+			'with id' => array( $this->newFromArray( array( 'entity' => 'P11' ) ), $p11 ),
+		);
+	}
+
 }
