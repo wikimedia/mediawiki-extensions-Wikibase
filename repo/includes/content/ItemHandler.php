@@ -60,6 +60,24 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
+	 * @see EntityHandler::newContent
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $item An Item object
+	 *
+	 * @throws InvalidArgumentException
+	 * @return ItemContent
+	 */
+	protected function newContent( Entity $item ) {
+		if ( ! $item instanceof Item ) {
+			throw new \InvalidArgumentException( '$item must be an instance of Item' );
+		}
+
+		return ItemContent::newFromItem( $item );
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getActionOverrides() {
