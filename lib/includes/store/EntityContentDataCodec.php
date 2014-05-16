@@ -4,6 +4,8 @@ namespace Wikibase\Store;
 
 use InvalidArgumentException;
 use MWContentSerializationException;
+use Title;
+use Wikibase\EntityId;
 
 /**
  * A codec for use by EntityContent resp EntityHandler subclasses for the
@@ -127,4 +129,66 @@ class EntityContentDataCodec {
 		return $data;
 	}
 
+	/**
+	 * @param Title $target
+	 *
+	 * @return array
+	 */
+	public function redirectTitleToArray( Title $target ) {
+		$id = $this->titleToId( $target );
+		return array(
+			'redirect' => $id->getSerialization()
+		);
+	}
+
+	/**
+	 * @param array $data An array representation of an EntityContent object.
+	 *
+	 * @return Title|null The page title of the redirect target, or null
+	 * if $data does not represent a redirect.
+	 */
+	public function extractRedirectTarget( array $data ) {
+		$id = $this->extractRedirectId( $data );
+		return $id === null ? null : $this->idToTitle( $id );
+	}
+
+	/**
+	 * @param array $data An array representation of an EntityContent object.
+	 *
+	 * @return EntityId|null The entity ID of the redirect target,
+	 * or null if $data does not represent a redirect.
+	 */
+	public function extractRedirectId( array $data ) {
+		return isset( $data['redirect'] ) ? $data['redirect'] : null;
+	}
+
+	/**
+	 * @param array $data An array representation of an EntityContent object.
+	 *
+	 * @return bool Whether $data represents a redirect.
+	 */
+	public function isRedirectData( array $data ) {
+		return isset( $data['redirect'] );
+	}
+
+	/**
+	 * @param Title $target
+	 *
+	 * @return EntityId
+	 */
+	protected function titleToId( Title $target ) {
+		//FIXME: factor this mapping into EntityTitleLookup or a separate interface
+		$id = $this->entityIdParser->parse( $target->getText() );
+		return $id;
+	}
+
+	/**
+	 * @param EntityId $id
+	 *
+	 * @return Title $target
+	 */
+	protected function idToTitle( EntityId $id ) {
+		$title = $this->titleLookup->getTitleForId( $id );
+		return $title;
+	}
 }
