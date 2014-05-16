@@ -10,6 +10,7 @@ use DatabaseUpdater;
 use DummyLinker;
 use HistoryPager;
 use Html;
+use InvalidArgumentException;
 use Language;
 use Linker;
 use LogEntryBase;
@@ -221,37 +222,99 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
-			/**
-			 * @var $newEntity Entity
-			 */
-			$newEntity = $article->getContent()->getEntity();
-
-			// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
-			// May be redundant in some cases. Take care not to cause infinite regress.
-			$entityRev = new EntityRevision( $newEntity, $revision->getId(), $revision->getTimestamp() );
-			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+			/* @var EntityContent $newContent */
+			$newContent = $article->getContent( Revision::RAW );
 
 			$parent = is_null( $revision->getParentId() )
 				? null : Revision::newFromId( $revision->getParentId() );
 
-			$change = EntityChange::newFromUpdate(
-				$parent ? EntityChange::UPDATE : EntityChange::ADD,
-				$parent ? $parent->getContent()->getEntity() : null,
-				$newEntity
-			);
+			$oldContent = $parent ? $parent->getContent( Revision::RAW ) : null;
 
-			$change->setFields( array(
-				'revision_id' => $revision->getId(),
-				'user_id' => $user->getId(),
-				'object_id' => $newEntity->getId()->getPrefixedId(),
-				'time' => $revision->getTimestamp(),
-			) );
+			$oldEntity = null;
+			$newEntity = null;
 
-			WikibaseRepo::getDefaultInstance()->newChangeNotifier()->handleChange( $change );
+			// TODO: Notify the client about changes to redirects explicitly!
+			if ( $newContent->isRedirect() ) {
+				if ( $oldContent === null || $oldContent->isRedirect() ) {
+					// Noting to do, since the new content is a redirect, and the
+					// old content was a redirect too (or the page was just created).
+					$action = null;
+				} else {
+					// An entity page was turned into a redirect. Currently handled like a deletion.
+					// Note that we already know that $oldContent exists and isn't a redirect.
+					$action = EntityChange::REMOVE;
+					$oldEntity = $oldContent->getEntity();
+				}
+			} else { // !$newContent->isRedirect()
+				if ( $oldContent === null ) {
+					// A new entity page was added
+					$action = EntityChange::ADD;
+				} elseif ( $oldContent->isRedirect() ) {
+					// A redirect page was turned (back) into an entity
+					$action = EntityChange::RESTORE;
+				} else {
+					// An entity page was updated
+					$action = EntityChange::UPDATE;
+					$oldEntity = $oldContent->getEntity();
+				}
+
+				$newEntity = $newContent->getEntity();
+			}
+
+			if ( $action !== null ) {
+				self::notifyClientWikisOnUpdate( $action, $oldEntity, $newEntity, $revision, $user );
+			}
+
+			if ( $newEntity ) {
+				// The new revision is not a redirect
+				self::notifyEntityStoreWatcherOnUpdate( $revision );
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	/**
+	 * @param string $action EntityChange::XXX constant
+	 * @param Entity|null $oldEntity
+	 * @param Entity|null $newEntity
+	 * @param Revision $revision
+	 * @param User $user
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private static function notifyClientWikisOnUpdate( $action, $oldEntity, $newEntity, Revision $revision, User $user ) {
+		if ( $newEntity ) {
+			$objectId = $newEntity->getId()->getPrefixedId();
+		} elseif ( $oldEntity ) {
+			$objectId = $oldEntity->getId()->getPrefixedId();
+		} else {
+			throw new InvalidArgumentException( 'At least one of $newEntity or $oldEntity must be given!' );
+		}
+
+		$change = EntityChange::newFromUpdate( $action, $oldEntity, $newEntity );
+
+		$change->setFields( array(
+			'revision_id' => $revision->getId(),
+			'user_id' => $user->getId(),
+			'object_id' => $objectId,
+			'time' => $revision->getTimestamp(),
+		) );
+
+		WikibaseRepo::getDefaultInstance()->newChangeNotifier()->handleChange( $change );
+	}
+
+	/**
+	 * @param Revision $revision
+	 */
+	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
+		$entity = $revision->getContent()->getEntity();
+
+		// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
+		// May be redundant in some cases. Take care not to cause infinite regress.
+		$entityRev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
+		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
 	}
 
 	/**
@@ -284,26 +347,27 @@ final class RepoHooks {
 			return true;
 		}
 
-		/**
-		 * @var EntityContent $content
-		 * @var Entity $entity
-		 */
-		$entity = $content->getEntity();
+		//TODO: notify the client over the deletion of a redirect!
+		if ( !$content->isRedirect() ) {
 
-		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
-		// May be redundant in some cases. Take care not to cause infinite regress.
-		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $entity->getId() );
+			/* @var EntityContent $content */
+			$entity = $content->getEntity();
 
-		$change = EntityChange::newFromUpdate( EntityChange::REMOVE, $entity, null, array(
-			'revision_id' => 0, // there's no current revision
-			'user_id' => $user->getId(),
-			'object_id' => $entity->getId()->getPrefixedId(),
-			'time' => $logEntry->getTimestamp(),
-		) );
+			// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
+			// May be redundant in some cases. Take care not to cause infinite regress.
+			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $entity->getId() );
 
-		$change->setMetadataFromUser( $user );
+			$change = EntityChange::newFromUpdate( EntityChange::REMOVE, $entity, null, array(
+				'revision_id' => 0, // there's no current revision
+				'user_id' => $user->getId(),
+				'object_id' => $entity->getId()->getPrefixedId(),
+				'time' => $logEntry->getTimestamp(),
+			) );
 
-		WikibaseRepo::getDefaultInstance()->newChangeNotifier()->handleChange( $change );
+			$change->setMetadataFromUser( $user );
+
+			WikibaseRepo::getDefaultInstance()->newChangeNotifier()->handleChange( $change );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -335,7 +399,8 @@ final class RepoHooks {
 		$revision = Revision::newFromId( $revId );
 		$content = $revision ? $revision->getContent() : null;
 
-		if ( !$content instanceof EntityContent ) {
+		//TODO: notify the cleint when a redirect is undeleted!
+		if ( !$content instanceof EntityContent || $content->isRedirect() ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
@@ -655,20 +720,21 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
-			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
+			// We only add the classes, if there is an actual item and not just an empty Page in the right namespace.
+			// XXX: Let's hope the page isn't re-loaded from the database.
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
 
 			/* @var EntityContent $entityContent */
 
-			if( $entityContent !== null ) {
+			if( $entityContent !== null && !$entityContent->isRedirect() ) {
 				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
-				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getEntity()->getType() );
+				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getContentHandler()->getEntityType() );
 
 				// add class to body so it's clear this is a wb item:
 				$bodyAttrs['class'] .= " wb-entitypage wb-{$entityType}page";
 				// add another class with the ID of the item:
-				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntity()->getId()->getPrefixedId()}";
+				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntityId()->getPrefixedId()}";
 
 				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
 					$bodyAttrs['class'] .= ' wb-diffpage';
