@@ -11,6 +11,7 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityContentDiff;
 use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -89,6 +90,19 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	protected function newEmpty() {
 		$class = $this->getContentClass();
 		return $class::newEmpty();
+	}
+
+	/**
+	 * @param EntityId $target
+	 *
+	 * @return EntityContent
+	 */
+	protected function newRedirect( EntityId $target ) {
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$title = $titleLookup->getTitleForId( $target );
+
+		$class = $this->getContentClass();
+		return $class::newRedirect( $title );
 	}
 
 	/**
@@ -367,10 +381,69 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 	 * @param EntityContentDiff $patch
 	 * @param EntityContent $expected
 	 */
-	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected ) {
+	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected = null ) {
+		if ( $expected === null ) {
+			$this->setExpectedException( 'Diff\Patcher\PatcherException' );
+		}
+
 		$actual = $base->getPatchedCopy( $patch );
 
-		$this->assertTrue( $expected->equals( $actual ), 'equals()' );
+		if ( $expected !== null ) {
+			$this->assertTrue( $expected->equals( $actual ), 'equals()' );
+		}
+	}
+
+	public function copyProvider() {
+		$empty = $this->newEmpty();
+		$labels = $this->newEmpty();
+
+		$labels->getEntity()->setLabel( 'en', 'Foo' );
+
+		return array(
+			'empty' => array( $empty ),
+			'labels' => array( $labels ),
+		);
+	}
+
+	/**
+	 * @dataProvider copyProvider
+	 * @param EntityContent $content
+	 */
+	public function testCopy( EntityContent $content ) {
+		$copy = $content->copy();
+		$this->assertNotSame( $content, $copy, 'Copy must not be the same instance.' );
+		$this->assertTrue( $content->equals( $copy ), 'Copy must be equal to the original.' );
+		$this->assertSame( get_class( $content ), get_class( $copy ), 'Copy must have the same type.' );
+		$this->assertEquals( $content->getNativeData(), $copy->getNativeData(), 'Copy must have the same data.' );
+	}
+
+
+	public function equalsProvider() {
+		$empty = $this->newEmpty();
+
+		$labels1 = $this->newEmpty();
+		$labels1->getEntity()->setLabel( 'en', 'Foo' );
+
+		$labels2 = $this->newEmpty();
+		$labels2->getEntity()->setLabel( 'de', 'Foo' );
+
+		return array(
+			'empty' => array( $empty, $empty, true ),
+			'same labels' => array( $labels1, $labels1, true ),
+			'different labels' => array( $labels1, $labels2, false ),
+		);
+	}
+
+	/**
+	 * @dataProvider equalsProvider
+	 */
+	public function testEquals( EntityContent $a, EntityContent $b, $equals ) {
+
+		$actual = $a->equals( $b );
+		$this->assertEquals( $equals, $actual );
+
+		$actual = $b->equals( $a );
+		$this->assertEquals( $equals, $actual );
 	}
 
 }

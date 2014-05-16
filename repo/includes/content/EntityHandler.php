@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Content;
 use ContentHandler;
+use Diff\Patcher\PatcherException;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -13,6 +14,7 @@ use RequestContext;
 use Revision;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Store\EntityContentDataCodec;
 use Wikibase\Validators\EntityValidator;
 
@@ -24,6 +26,7 @@ use Wikibase\Validators\EntityValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class EntityHandler extends ContentHandler {
 
@@ -94,6 +97,30 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * @see ContentHandler::makeRedirectContent
+	 *
+	 * Will return a new EntityContent representing a redirect to the given title,
+	 * or null if the Content class does not support redirects (that is, if it does
+	 * not have a static newRedirect() function).
+	 *
+	 * @since 0.5
+	 *
+	 * @param \Title $title
+	 * @param string $text
+	 *
+	 * @return EntityContent|null
+	 */
+	public function makeRedirectContent( Title $title, $text = '' ) {
+		$contentClass = $this->getContentClass();
+
+		if ( method_exists( $contentClass, 'newRedirect' ) ) {
+			return $contentClass::newRedirect( $title );
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * @see ContentHandler::makeParserOptions
 	 *
 	 * @since 0.5
@@ -152,8 +179,15 @@ abstract class EntityHandler extends ContentHandler {
 			throw new \InvalidArgumentException( '$content mist be an instance of EntityContent' );
 		}
 
-		$data = $content->getEntity()->toArray();
-		return $this->contentCodec->encodeBlob( $data, $format );
+		if ( $content->isRedirect() ) {
+			$target = $content->getRedirectTarget();
+			$targetId = $this->getIdForTitle( $target );
+			$data = $this->contentCodec->redirectIdToArray( $targetId );
+			return $this->contentCodec->encodeBlob( $data, $format );
+		} else {
+			$data = $content->getEntity()->toArray();
+			return $this->contentCodec->encodeBlob( $data, $format );
+		}
 	}
 
 	/**
@@ -170,20 +204,65 @@ abstract class EntityHandler extends ContentHandler {
 	public function unserializeContent( $blob, $format = null ) {
 		$data = $this->contentCodec->decodeBlob( $blob, $format );
 
-		$entityContent = $this->newContentFromArray( $data );
-		return $entityContent;
+		if ( $this->contentCodec->isRedirectData( $data ) ) {
+			$targetId = $this->contentCodec->extractRedirectId( $data );
+			$redirect = $this->getTitleForId( $targetId );
+			return $this->makeRedirectContent( $redirect );
+		} else {
+			$entityContent = $this->newEntityFromArray( $data );
+			return $entityContent;
+		}
 	}
 
+	/**
+	 * @since 0.5
+	 *
+	 * @param Title $target
+	 *
+	 * @return EntityId
+	 */
+	protected function getIdForTitle( Title $target ) {
+		//FIXME: inject an EntityTitleLookup!
+		$parser = new BasicEntityIdParser();
+		$id = $parser->parse( $target->getText() );
+		return $id;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return Title $target
+	 */
+	protected function getTitleForId( EntityId $id ) {
+		//FIXME: inject an EntityTitleLookup!
+		$title = Title::makeTitle( $this->getEntityNamespace(), $id->getSerialization() );
+		return $title;
+	}
+
+	/**
+	 * Creates a new EntityContent object wrapping the given Entity object.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Entity $entity An Entity object. The type of $entity must match
+	 * the kind concrete subclass of EntityContent that this handler supports.
+	 *
+	 * @throws InvalidArgumentException If $entity has the wrong type.
+	 * @return EntityContent
+	 */
+	protected abstract function newContent( Entity $entity );
 
 	/**
 	 * Calls the static function newFromArray() on the content class,
-	 * to create a new EntityContent object based on the array data.
+	 * to create a new Entity based on the array data.
 	 *
 	 * @param array $data
 	 *
 	 * @return EntityContent
 	 */
-	protected function newContentFromArray( array $data ) {
+	private function newEntityFromArray( array $data ) {
 		$contentClass = $this->getContentClass();
 		return $contentClass::newFromArray( $data );
 	}
@@ -287,20 +366,6 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Constructs a new EntityContent from an Entity.
-	 *
-	 * @since 0.3
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return EntityContent
-	 */
-	public function newContentFromEntity( Entity $entity ) {
-		$contentClass = $this->getContentClass();
-		return new $contentClass( $entity );
-	}
-
-	/**
 	 * @see ContentHandler::getUndoContent
 	 *
 	 * @since 0.4
@@ -331,8 +396,12 @@ abstract class EntityHandler extends ContentHandler {
 		// diff from new to base
 		$patch = $newerContent->getDiff( $olderContent );
 
-		// apply the patch( new -> old ) to the current revision.
-		$patchedCurrent = $latestContent->getPatchedCopy( $patch );
+		try {
+			// apply the patch( new -> old ) to the current revision.
+			$patchedCurrent = $latestContent->getPatchedCopy( $patch );
+		} catch ( PatcherException $ex ) {
+			return false;
+		}
 
 		// detect conflicts against current revision
 		$cleanPatch = $latestContent->getDiff( $patchedCurrent );
