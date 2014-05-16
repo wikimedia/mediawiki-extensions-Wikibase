@@ -136,7 +136,7 @@ class ChangeOpDescription extends ChangeOpBase {
 
 		// Check if the new fingerprint of the entity is valid (e.g. if the combination
 		// of label and description  is still unique)
-		$fingerprint = $entity->getFingerprint();
+		$fingerprint = clone $entity->getFingerprint();
 		$this->updateFingerprint( $fingerprint );
 
 		$result = $fingerprintValidator->validateFingerprint(

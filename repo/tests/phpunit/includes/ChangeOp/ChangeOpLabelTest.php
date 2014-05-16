@@ -69,10 +69,11 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$validatorFactory = $this->getTermValidatorFactory();
 
 		$args = array();
-		$args['invalid label'] = array ( new ChangeOpLabel( 'fr', 'INVALID', $validatorFactory ) );
-		$args['duplicate label'] = array ( new ChangeOpLabel( 'fr', 'DUPE', $validatorFactory ) );
-		$args['invalid language'] = array ( new ChangeOpLabel( 'INVALID', 'valid', $validatorFactory ) );
-		$args['set bad language to null'] = array ( new ChangeOpLabel( 'INVALID', null, $validatorFactory ) );
+		$args['valid label'] = array ( new ChangeOpLabel( 'fr', 'valid', $validatorFactory ), true );
+		$args['invalid label'] = array ( new ChangeOpLabel( 'fr', 'INVALID', $validatorFactory ), false );
+		$args['duplicate label'] = array ( new ChangeOpLabel( 'fr', 'DUPE', $validatorFactory ), false );
+		$args['invalid language'] = array ( new ChangeOpLabel( 'INVALID', 'valid', $validatorFactory ), false );
+		$args['set bad language to null'] = array ( new ChangeOpLabel( 'INVALID', null, $validatorFactory ), false );
 
 		return $args;
 	}
@@ -81,12 +82,18 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validateProvider
 	 *
 	 * @param ChangeOp $changeOp
+	 * @param bool $valid
 	 */
-	public function testValidate( ChangeOp $changeOp ) {
+	public function testValidate( ChangeOp $changeOp, $valid ) {
 		$entity = $this->provideNewEntity();
 
+		$oldLabels = $entity->getLabels();
+
 		$result = $changeOp->validate( $entity );
-		$this->assertFalse( $result->isValid() );
+		$this->assertEquals( $valid, $result->isValid(), 'isValid()' );
+
+		// labels should not have changed during validation
+		$this->assertEquals( $oldLabels, $entity->getLabels(), 'Labels modified by validation!' );
 	}
 
 	/**
