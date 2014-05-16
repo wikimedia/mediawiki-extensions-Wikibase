@@ -2,17 +2,11 @@
 
 namespace Wikibase;
 
-use Content;
-use DataUpdate;
 use IContextSource;
-use ParserOutput;
-use Title;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -116,6 +110,25 @@ class PropertyContent extends EntityContent {
 	 */
 	public function getEntity() {
 		return $this->property;
+	}
+
+	/**
+	 * Checks if this PropertyContent is valid for saving.
+	 *
+	 * Returns false if the entity does not have a DataType set.
+	 *
+	 * @see Content::isValid()
+	 */
+	public function isValid() {
+		if ( !parent::isValid() ) {
+			return false;
+		}
+
+		if ( is_null( $this->getEntity()->getDataTypeId() ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

@@ -48,6 +48,8 @@ interface TermIndex extends TermCombinationMatchFinder {
 	 *
 	 * @param EntityId $entityId
 	 *
+	 * @todo FIXME should take an EntityId, not an entity.
+	 *
 	 * @return boolean Success indicator
 	 */
 	public function deleteTermsOfEntity( EntityId $entityId );

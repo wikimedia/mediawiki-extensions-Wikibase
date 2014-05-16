@@ -5,10 +5,12 @@ namespace Wikibase;
 use Content;
 use ContentHandler;
 use DataUpdate;
+use Diff\Patcher\PatcherException;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
 use MWContentSerializationException;
+use MWException;
 use ParserOptions;
 use RequestContext;
 use Revision;
@@ -16,6 +18,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
 
@@ -27,6 +30,7 @@ use Wikibase\Validators\EntityValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class EntityHandler extends ContentHandler {
 
@@ -112,35 +116,55 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityContent
 	 */
 	public function makeEmptyContent() {
+		//FIXME: some kinds of entities cannot be empty (e.g. Properties requite a data type to be set).
 		$contentClass = $this->getContentClass();
 		return $contentClass::newEmpty();
 	}
 
 	/**
-	 * @see ContentHandler::makeRedirectContent
-	 *
-	 * Will return a new EntityContent representing a redirect to the given title,
+	 * Will return a new EntityContent representing the given EntityRedirect,
 	 * or null if the Content class does not support redirects (that is, if it does
 	 * not have a static newRedirect() function).
 	 *
+	 * @see makeRedirectContent()
+	 *
 	 * @since 0.5
 	 *
-	 * @param \Title $title
-	 * @param string $text
+	 * @param EntityRedirect $redirect
 	 *
 	 * @return EntityContent|null
 	 */
-	public function makeRedirectContent( Title $title, $text = '' ) {
+	public function makeEntityRedirectContent( EntityRedirect $redirect ) {
 		$contentClass = $this->getContentClass();
 
 		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
-			// For now, we only support redirects in experimental mode.E
+			// For now, we only support redirects in experimental mode.
 			return null;
 		} elseif ( method_exists( $contentClass, 'newRedirect' ) ) {
-			return $contentClass::newRedirect( $title );
+			$title = $this->getTitleForId( $redirect->getTargetId() );
+			return $contentClass::newRedirect( $redirect, $title );
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @see ContentHandler::makeRedirectContent
+	 *
+	 * @warn Always throws an MWException, since an EntityRedirects needs to know it's own
+	 * ID in addition to the target ID. We have no way to guess that in makeRedirectContent().
+	 * Use makeEntityRedirectContent() instead.
+	 *
+	 * @see makeEntityRedirectContent()
+	 *
+	 * @param Title $title
+	 * @param string $text
+	 *
+	 * @throws MWException Always.
+	 * @return EntityContent|null
+	 */
+	public function makeRedirectContent( Title $title, $text = '' ) {
+		throw new MWException( 'EntityContent does not support plain title based redirects. Use makeEntityRedirectContent() instead.' );
 	}
 
 	/**
@@ -202,8 +226,13 @@ abstract class EntityHandler extends ContentHandler {
 			throw new \InvalidArgumentException( '$content mist be an instance of EntityContent' );
 		}
 
-		$data = $content->getEntity()->toArray();
-		return $this->contentCodec->encodeEntityContentData( $data, $format );
+		if ( $content->isRedirect() ) {
+			$redirect = $content->getEntityRedirect();
+			return $this->contentCodec->encodeRedirect( $redirect, $format );
+		} else {
+			$entity = $content->getEntity();
+			return $this->contentCodec->encodeEntity( $entity, $format );
+		}
 	}
 
 	/**
@@ -218,14 +247,29 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
+		$entity = $this->contentCodec->decodeEntity( $blob, $format );
 
-		$entityContent = $this->newContentFromArray( $data );
-		return $entityContent;
+		if ( !$entity ) {
+			// Must be a redirect then
+			$redirect = $this->contentCodec->decodeRedirect( $blob, $format );
+
+			if ( $redirect === null ) {
+				throw new MWContentSerializationException(
+					'The serialized data contains nither an Entity nor an EntityRedirect!'
+				);
+			}
+
+			return $this->makeEntityRedirectContent( $redirect );
+		} else {
+			$entityContent = $this->makeEntityContent( $entity );
+			return $entityContent;
+		}
 	}
 
 	/**
 	 * Returns the ID of the entity contained by the page of the given title.
+	 *
+	 * @warn This should not really be needed and may just go away!
 	 *
 	 * @since 0.5
 	 *
@@ -243,7 +287,10 @@ abstract class EntityHandler extends ContentHandler {
 	/**
 	 * Returns the appropriate page Title for the given EntityId.
 	 *
+	 * @warn This should not really be needed and may just go away!
+	 *
 	 * @since 0.5
+	 *
 	 * @see EntityTitleLookup::getTitleForId
 	 *
 	 * @param EntityId $id
@@ -260,19 +307,6 @@ abstract class EntityHandler extends ContentHandler {
 		//FIXME: inject an EntityTitleLookup!
 		$title = Title::makeTitle( $this->getEntityNamespace(), $id->getSerialization() );
 		return $title;
-	}
-
-	/**
-	 * Calls the static function newFromArray() on the content class,
-	 * to create a new EntityContent object based on the array data.
-	 *
-	 * @param array $data
-	 *
-	 * @return EntityContent
-	 */
-	protected function newContentFromArray( array $data ) {
-		$contentClass = $this->getContentClass();
-		return $contentClass::newFromArray( $data );
 	}
 
 	/**
@@ -374,20 +408,6 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Constructs a new EntityContent from an Entity.
-	 *
-	 * @since 0.3
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return EntityContent
-	 */
-	public function newContentFromEntity( Entity $entity ) {
-		$contentClass = $this->getContentClass();
-		return new $contentClass( $entity );
-	}
-
-	/**
 	 * @see ContentHandler::getUndoContent
 	 *
 	 * @since 0.4
@@ -418,8 +438,12 @@ abstract class EntityHandler extends ContentHandler {
 		// diff from new to base
 		$patch = $newerContent->getDiff( $olderContent );
 
-		// apply the patch( new -> old ) to the current revision.
-		$patchedCurrent = $latestContent->getPatchedCopy( $patch );
+		try {
+			// apply the patch( new -> old ) to the current revision.
+			$patchedCurrent = $latestContent->getPatchedCopy( $patch );
+		} catch ( PatcherException $ex ) {
+			return false;
+		}
 
 		// detect conflicts against current revision
 		$cleanPatch = $latestContent->getDiff( $patchedCurrent );
@@ -454,6 +478,13 @@ abstract class EntityHandler extends ContentHandler {
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
+		$entityId = $content->getEntityId();
+
+		//FIXME: we should not need this!
+		if ( $entityId === null ) {
+			$entityId = $this->getIdForTitle( $title );
+		}
+
 		// Call the WikibaseEntityDeletionUpdate hook.
 		// Do this before doing any well-known updates.
 		$updates[] = new DataUpdateClosure(
@@ -464,13 +495,13 @@ abstract class EntityHandler extends ContentHandler {
 		// Unregister the entity from the terms table.
 		$updates[] = new DataUpdateClosure(
 			array( $this->termIndex, 'deleteTermsOfEntity' ),
-			$content->getEntity()
+			$entityId
 		);
 
 		// Unregister the entity from the EntityPerPage table.
 		$updates[] = new DataUpdateClosure(
 			array( $this->entityPerPage, 'deleteEntityPage' ),
-			$content->getEntity()->getId(),
+			$entityId,
 			$title->getArticleID()
 		);
 
@@ -492,21 +523,37 @@ abstract class EntityHandler extends ContentHandler {
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
+		$entityId = $content->getEntityId();
+
+		//FIXME: we should not need this!
+		if ( $entityId === null ) {
+			$entityId = $this->getIdForTitle( $title );
+		}
+
 		// Register the entity in the EntityPerPage table.
 		// @todo: Only do this if the entity is new.
 		// Note that $title->exists() will already return true at this point
 		// even if we are just now creating the entity.
+		// @todo: if this is a redirect, record redirect target
 		$updates[] = new DataUpdateClosure(
 			array( $this->entityPerPage, 'addEntityPage' ),
-			$content->getEntity()->getId(),
+			$entityId,
 			$title->getArticleID()
 		);
 
-		// Register the entity in the terms table.
-		$updates[] = new DataUpdateClosure(
-			array( $this->termIndex, 'saveTermsOfEntity' ),
-			$content->getEntity()
-		);
+		if ( $content->isRedirect() ) {
+			// Remove the entity from the terms table since it's now a redirect.
+			$updates[] = new DataUpdateClosure(
+				array( $this->termIndex, 'deleteTermsOfEntity' ),
+				$entityId
+			);
+		} else {
+			// Register the entity in the terms table.
+			$updates[] = new DataUpdateClosure(
+				array( $this->termIndex, 'saveTermsOfEntity' ),
+				$content->getEntity()
+			);
+		}
 
 		// Call the WikibaseEntityModificationUpdate hook.
 		// Do this after doing all well-known updates.
