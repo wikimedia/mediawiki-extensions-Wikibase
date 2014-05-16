@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DataUpdate;
 use Title;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Updates\DataUpdateClosure;
@@ -145,6 +146,28 @@ class ItemHandler extends EntityHandler {
 			$updates,
 			parent::getEntityModificationUpdates( $content, $title )
 		);
+	}
+
+	/**
+	 * @see EntityHandler::makeEmptyEntity()
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityContent
+	 */
+	public function makeEmptyEntity() {
+		return Item::newEmpty();
+	}
+
+	/**
+	 * @see EntityContent::makeEntityId
+	 *
+	 * @param string $id
+	 *
+	 * @return EntityId
+	 */
+	public function makeEntityId( $id ) {
+		return new ItemId( $id );
 	}
 
 }
