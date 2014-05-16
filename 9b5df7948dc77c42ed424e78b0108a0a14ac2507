@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_3effa864",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T11:09:57Z",
+      "side": 1,
+      "message": "duh. sorry. \nin my version of DataModel, getFingerprint still returns a clone, so I didn\u0027t notice.",
+      "parentUuid": "6e20cf91_be761838",
+      "revId": "9b5df7948dc77c42ed424e78b0108a0a14ac2507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_7e908046",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpDescriptionTest.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_deed54b6",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpDescriptionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T11:09:57Z",
+      "side": 1,
+      "message": "No, because getDescriptions returns an actual array.",
+      "parentUuid": "6e20cf91_7e908046",
+      "revId": "9b5df7948dc77c42ed424e78b0108a0a14ac2507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_5e95c434",
         "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpLabelTest.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-05-16T10:33:27Z",
       "side": 1,
       "message": "This line needs clone. Else you are comparing the changed object with the same changed object. ;-)",
+      "revId": "9b5df7948dc77c42ed424e78b0108a0a14ac2507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_beea989a",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpLabelTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T11:09:57Z",
+      "side": 1,
+      "message": "no, it\u0027s an array.",
+      "parentUuid": "6e20cf91_5e95c434",
       "revId": "9b5df7948dc77c42ed424e78b0108a0a14ac2507",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
