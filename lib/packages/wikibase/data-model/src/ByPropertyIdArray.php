@@ -185,9 +185,7 @@ class ByPropertyIdArray extends \ArrayObject {
 
 		foreach( $this->byId as $serializedPropertyId => $objects ) {
 			if( $serializedPropertyId === $propertyId->getSerialization() ) {
-				for( $index = 0; $index < count( $objects ); $index++ ) {
-					$propertyIndices[] = $index + $i;
-				}
+				$propertyIndices = range( $i, $i + count( $objects ) - 1 );
 				break;
 			} else {
 				$i += count( $objects );

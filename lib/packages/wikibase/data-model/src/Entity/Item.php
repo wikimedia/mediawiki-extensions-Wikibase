@@ -165,7 +165,7 @@ class Item extends Entity {
 	 * @return string
 	 */
 	public function getType() {
-		return Item::ENTITY_TYPE;
+		return self::ENTITY_TYPE;
 	}
 
 	/**
