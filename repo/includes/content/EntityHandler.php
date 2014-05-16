@@ -5,6 +5,7 @@ namespace Wikibase;
 use Content;
 use ContentHandler;
 use DataUpdate;
+use Diff\Patcher\PatcherException;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -27,6 +28,7 @@ use Wikibase\Validators\EntityValidator;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class EntityHandler extends ContentHandler {
 
@@ -202,8 +204,15 @@ abstract class EntityHandler extends ContentHandler {
 			throw new \InvalidArgumentException( '$content mist be an instance of EntityContent' );
 		}
 
-		$data = $content->getEntity()->toArray();
-		return $this->contentCodec->encodeEntityContentData( $data, $format );
+		if ( $content->isRedirect() ) {
+			$target = $content->getRedirectTarget();
+			$targetId = $this->getIdForTitle( $target );
+			$data = $this->contentCodec->redirectIdToArray( $targetId );
+			return $this->contentCodec->encodeBlob( $data, $format );
+		} else {
+			$data = $content->getEntity()->toArray();
+			return $this->contentCodec->encodeBlob( $data, $format );
+		}
 	}
 
 	/**
@@ -220,8 +229,14 @@ abstract class EntityHandler extends ContentHandler {
 	public function unserializeContent( $blob, $format = null ) {
 		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
 
-		$entityContent = $this->newContentFromArray( $data );
-		return $entityContent;
+		if ( $this->contentCodec->isRedirectData( $data ) ) {
+			$targetId = $this->contentCodec->extractRedirectId( $data );
+			$redirect = $this->getTitleForId( $targetId );
+			return $this->makeRedirectContent( $redirect );
+		} else {
+			$entityContent = $this->newEntityFromArray( $data );
+			return $entityContent;
+		}
 	}
 
 	/**
@@ -374,20 +389,6 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Constructs a new EntityContent from an Entity.
-	 *
-	 * @since 0.3
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return EntityContent
-	 */
-	public function newContentFromEntity( Entity $entity ) {
-		$contentClass = $this->getContentClass();
-		return new $contentClass( $entity );
-	}
-
-	/**
 	 * @see ContentHandler::getUndoContent
 	 *
 	 * @since 0.4
@@ -418,8 +419,12 @@ abstract class EntityHandler extends ContentHandler {
 		// diff from new to base
 		$patch = $newerContent->getDiff( $olderContent );
 
-		// apply the patch( new -> old ) to the current revision.
-		$patchedCurrent = $latestContent->getPatchedCopy( $patch );
+		try {
+			// apply the patch( new -> old ) to the current revision.
+			$patchedCurrent = $latestContent->getPatchedCopy( $patch );
+		} catch ( PatcherException $ex ) {
+			return false;
+		}
 
 		// detect conflicts against current revision
 		$cleanPatch = $latestContent->getDiff( $patchedCurrent );
