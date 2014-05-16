@@ -10,6 +10,7 @@ use DatabaseUpdater;
 use DummyLinker;
 use HistoryPager;
 use Html;
+use InvalidArgumentException;
 use Language;
 use Linker;
 use LogEntryBase;
@@ -640,20 +641,21 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
-			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
+			// We only add the classes, if there is an actual item and not just an empty Page in the right namespace.
+			// XXX: Let's hope the page isn't re-loaded from the database.
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
 
 			/* @var EntityContent $entityContent */
 
-			if( $entityContent !== null ) {
+			if( $entityContent !== null && !$entityContent->isRedirect() ) {
 				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
 				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getEntity()->getType() );
 
 				// add class to body so it's clear this is a wb item:
 				$bodyAttrs['class'] .= " wb-entitypage wb-{$entityType}page";
 				// add another class with the ID of the item:
-				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntity()->getId()->getPrefixedId()}";
+				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntityId()->getPrefixedId()}";
 
 				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
 					$bodyAttrs['class'] .= ' wb-diffpage';
@@ -1270,7 +1272,7 @@ final class RepoHooks {
 			$data['position'] = $row->chd_seen;
 		}
 		if ( isset( $row->chd_touched ) ) {
-			$data['touched'] = wfTimestamp( TS_ISO_8601, $row->chd_touched );
+			$data['touched'] = $row->chd_touched;
 		}
 
 		return $data;
