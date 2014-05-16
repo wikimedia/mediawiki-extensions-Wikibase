@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
 use MWContentSerializationException;
+use Wikibase\EntityId;
 
 /**
  * A codec for use by EntityContent resp EntityHandler subclasses for the
@@ -130,6 +131,36 @@ class EntityContentDataCodec {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * @param EntityId $target
+	 *
+	 * @return array
+	 */
+	public function redirectIdToArray( EntityId $target ) {
+		return array(
+			'redirect' => $target->getSerialization()
+		);
+	}
+
+	/**
+	 * @param array $data An array representation of an EntityContent object.
+	 *
+	 * @return EntityId|null The entity ID of the redirect target,
+	 * or null if $data does not represent a redirect.
+	 */
+	public function extractRedirectId( array $data ) {
+		return isset( $data['redirect'] ) ? $data['redirect'] : null;
+	}
+
+	/**
+	 * @param array $data An array representation of an EntityContent object.
+	 *
+	 * @return bool Whether $data represents a redirect.
+	 */
+	public function isRedirectData( array $data ) {
+		return isset( $data['redirect'] );
 	}
 
 }
