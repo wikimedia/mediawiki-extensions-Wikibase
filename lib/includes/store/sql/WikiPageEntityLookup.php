@@ -3,13 +3,14 @@
 namespace Wikibase\Lib\Store;
 
 use DBQueryError;
-use Deserializers\Exceptions\DeserializationException;
+use MWContentSerializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
+use Wikibase\UnresolvedRedirectException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -86,12 +87,21 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		$row = $this->loadRevisionRow( $entityId, $revision );
 
+		/* @var EntityRevision $entityRev */
+		/* @var EntityId $redirect */
+
 		if ( $row ) {
-			$entityRev = $this->loadEntity( $row );
+			list( $entityRev, $redirect ) = $this->loadEntity( $row );
+
+			if ( $redirect !== null ) {
+				// TODO: Optionally follow redirects. Doesn't make sense if a revision is given.
+				wfProfileOut( __METHOD__ );
+				throw new UnresolvedRedirectException( $redirect );
+			}
 
 			if ( !$entityRev ) {
 				// This only happens when there is a problem with the external store.
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId );
+				wfLogWarning( __METHOD__ . ": Entity not loaded for " . $entityId );
 			}
 		} else {
 			// No such revision
@@ -279,7 +289,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
-	 * @param boolean $connType DB_READ or DB_MASTER
+	 * @param int $connType DB_READ or DB_MASTER
 	 *
 	 * @throws \DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
@@ -342,15 +352,56 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	/**
 	 * Construct an EntityRevision object from a database row from the revision and text tables.
 	 *
+	 * @see loadEntityBlob()
+	 *
+	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
+	 *        should contain the relevant fields from the revision and/or text table.
+	 *
+	 * @throws MWContentSerializationException
+	 *
+	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
+	 * with either $entityRev or $redirect or both being null (but not both being non-null).
+	 */
+	private function loadEntity( $row ) {
+		wfProfileIn( __METHOD__ );
+
+		$blob = $this->loadEntityBlob( $row );
+		$entity = $this->contentCodec->decodeEntity( $blob, $row->rev_content_format );
+
+		if ( $entity ) {
+			$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
+
+			$result = array( $entityRev, null );
+		} else {
+			$redirect = $this->contentCodec->decodeRedirect( $blob, $row->rev_content_format );
+
+			if ( !$redirect ) {
+				throw new MWContentSerializationException(
+					'The serialized data contains neither an Entity nor an EntityRedirect!'
+				);
+			}
+
+			$result = array( null, $redirect );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $result;
+	}
+
+	/**
+	 * Loads a blob based on a database row from the revision and text tables.
+	 *
 	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
 	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
 	 *
 	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
-	 * @return EntityRevision
+	 * @throws MWContentSerializationException
+	 *
+	 * @return string The blob
 	 */
-	private function loadEntity( $row ) {
+	private function loadEntityBlob( $row ) {
 		wfProfileIn( __METHOD__ );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": calling getRevisionText() on rev " . $row->rev_id );
@@ -360,38 +411,17 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		//      and old_text fields. But be aware.
 		$blob = \Revision::getRevisionText( $row, 'old_', $this->wiki );
 
+		wfProfileOut( __METHOD__ );
+
 		if ( $blob === false ) {
-			// oops. something went wrong.
 			wfWarn( "Unable to load raw content blob for rev " . $row->rev_id );
-			wfProfileOut( __METHOD__ );
-			return null;
+
+			throw new MWContentSerializationException(
+				"Unable to load raw content blob for rev " . $row->rev_id
+			);
 		}
 
-		$format = $row->rev_content_format;
-		$entity = $this->unserializeEntity( $blob, $format );
-		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
-
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
-			. $entity->getId() );
-
-		wfProfileOut( __METHOD__ );
-		return $entityRev;
-	}
-
-	/**
-	 * @see ContentHandler::unserializeContent
-	 *
-	 * @since 0.5
-	 *
-	 * @param string $blob
-	 * @param null|string $format
-	 *
-	 * @return Entity|null
-	 * @throws StorageException
-	 */
-	private function unserializeEntity( $blob, $format = null ) {
-		$entity = $this->contentCodec->decodeEntity( $blob, $format );
-		return $entity;
+		return $blob;
 	}
 
 }
