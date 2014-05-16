@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -73,7 +74,10 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 	}
 
 	private function getEntityContentCodec() {
-		return new EntityContentDataCodec();
+		return new EntityContentDataCodec(
+			new BasicEntityIdParser(),
+			$this->getEntityFactory()
+		);
 	}
 
 	private function getEntityFactory() {
