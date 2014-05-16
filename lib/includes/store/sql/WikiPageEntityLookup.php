@@ -95,12 +95,21 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		$row = $this->loadRevisionRow( $entityId, $revision );
 
+		/* @var EntityRevision $entityRev */
+		/* @var EntityId $redirect */
+
 		if ( $row ) {
-			$entityRev = $this->loadEntity( $entityId->getEntityType(), $row );
+			list( $entityRev, $redirect ) = $this->loadEntity( $entityId->getEntityType(), $row );
+
+			if ( $redirect ) {
+				// TODO: Optionally follow redirects. Doesn't make sense if a revision is given.
+				wfProfileOut( __METHOD__ );
+				throw new UnresolvedRedirectException( $redirect );
+			}
 
 			if ( !$entityRev ) {
 				// This only happens when there is a problem with the external store.
-				wfDebugLog( __CLASS__, __FUNCTION__ . ": Entity not loaded for " . $entityId );
+				wfLogWarning( __METHOD__ . ": Entity not loaded for " . $entityId );
 			}
 		} else {
 			// No such revision
@@ -380,14 +389,27 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		}
 
 		$format = $row->rev_content_format;
-		$entity = $this->unserializeEntity( $entityType, $blob, $format );
-		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
-			. $entity->getId() );
+		/* @var Entity $entity */
+		/* @var EntityId $redirect */
+		list( $entity, $redirect ) = $this->unserializeEntity( $entityType, $blob, $format );
 
-		wfProfileOut( __METHOD__ );
-		return $entityRev;
+		if ( $redirect ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Found redirect to entity: "
+				. $redirect->getSerialization() );
+
+			wfProfileOut( __METHOD__ );
+			return array( null, $redirect );
+		} else {
+			$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
+
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
+				. $entity->getId()->getSerialization() );
+
+			wfProfileOut( __METHOD__ );
+			return array( $entityRev, null );
+		}
+
 	}
 
 	/**
@@ -399,13 +421,19 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @param string $blob
 	 * @param null|string $format
 	 *
-	 * @return Entity|null
+	 * @return array list( Entity|null $entity, EntityId|null $redirect ),
+	 * with either $entity or $redirect being null.
 	 */
 	private function unserializeEntity( $entityType, $blob, $format = null ) {
 		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
-		$entity = $this->entityFactory->newFromArray( $entityType, $data );
 
-		return $entity;
+		if ( $this->contentCodec->isRedirectData( $data ) ) {
+			$redirect = $this->contentCodec->extractRedirectId( $data );
+			return array( null, $redirect );
+		} else {
+			$entity = $this->entityFactory->newFromArray( $entityType, $data );
+			return array( $entity, null );
+		}
 	}
 
 }
