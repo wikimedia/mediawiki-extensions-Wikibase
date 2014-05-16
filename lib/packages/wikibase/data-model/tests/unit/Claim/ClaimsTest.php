@@ -7,6 +7,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use InvalidArgumentException;
 use ReflectionClass;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
@@ -313,6 +314,14 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 		$claims[] = $claim2;
 
 		$this->assertCount( 2, $claims );
+	}
+
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testAppendWithNonClaimFails() {
+		$claims = new Claims();
+		$claims->append( 'bad' );
 	}
 
 	public function testOffsetSet() {

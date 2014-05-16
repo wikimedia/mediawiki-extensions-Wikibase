@@ -7,6 +7,7 @@ use Comparable;
 use Diff\DiffOp\Diff\Diff;
 use Hashable;
 use InvalidArgumentException;
+use Traversable;
 use UnexpectedValueException;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -40,12 +41,12 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 		parent::__construct( array() );
 
 		if ( $input !== null ) {
-			if ( !is_array( $input) && !( $input instanceof \Traversable ) ) {
+			if ( !is_array( $input ) && !( $input instanceof Traversable ) ) {
 				throw new InvalidArgumentException( '$input must be traversable' );
 			}
 
 			foreach ( $input as $claim ) {
-				$this->append( $claim );
+				$this[] = $claim;
 			}
 		}
 	}
@@ -99,10 +100,10 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * @throws InvalidArgumentException
 	 */
 	public function addClaim( Claim $claim, $index = null ) {
-		if( !is_null( $index ) && !is_integer( $index ) ) {
+		if ( !is_null( $index ) && !is_integer( $index ) ) {
 			throw new InvalidArgumentException( 'Index needs to be null or an integer value' );
 		} else if ( is_null( $index ) || $index >= count( $this ) ) {
-			$this->append( $claim );
+			$this[] = $claim;
 		} else {
 			$this->insertClaimAtIndex( $claim, $index );
 		}
@@ -118,33 +119,16 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 		// Determine the claims to shift and remove them from the array:
 		$claimsToShift = array_slice( (array)$this, $index );
 
-		foreach( $claimsToShift as $object ) {
+		foreach ( $claimsToShift as $object ) {
 			$this->offsetUnset( $this->getClaimKey( $object ) );
 		}
 
 		// Append the new claim and re-append the previously removed claims:
-		$this->append( $claim );
+		$this[] = $claim;
 
-		foreach( $claimsToShift as $object ) {
-			$this->append( $object );
+		foreach ( $claimsToShift as $object ) {
+			$this[] = $object;
 		}
-	}
-
-	/**
-	 * @see ArrayAccess::append
-	 *
-	 * @since 0.5
-	 *
-	 * @param Claim $claim
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function append( $claim ) {
-		if ( !( $claim instanceof Claim ) ) {
-			throw new InvalidArgumentException( '$claim must be a Claim instance' );
-		}
-
-		parent::append( $claim );
 	}
 
 	/**
@@ -183,8 +167,8 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 		/**
 		 * @var Claim $claimObject
 		 */
-		foreach( $this as $claimObject ) {
-			if( $claimObject->getGuid() === $guid ) {
+		foreach ( $this as $claimObject ) {
+			if ( $claimObject->getGuid() === $guid ) {
 				return $index;
 			}
 			$index++;
@@ -294,7 +278,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * @throws InvalidArgumentException
 	 */
 	public function offsetSet( $guid, $claim ) {
-		if ( !is_object( $claim ) || !( $claim instanceof Claim ) ) {
+		if ( !( $claim instanceof Claim ) ) {
 			throw new InvalidArgumentException( 'Expected a Claim instance' );
 		}
 
@@ -348,10 +332,10 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 		$claimsByProp->buildIndex();
 
 		if ( !( in_array( $propertyId, $claimsByProp->getPropertyIds() ) ) ) {
-			return new Claims();
+			return new self();
 		}
 
-		return new Claims( $claimsByProp->getByPropertyId( $propertyId ) );
+		return new self( $claimsByProp->getByPropertyId( $propertyId ) );
 	}
 
 	/**
@@ -443,16 +427,16 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * @return Claims
 	 */
 	public function getByRank( $rank ) {
-		$claims = array();
+		$claims = new self();
 
 		/* @var Claim $claim */
 		foreach ( $this as $claim ) {
-			if ( $claim->getRank() == $rank ) {
+			if ( $claim->getRank() === $rank ) {
 				$claims[] = $claim;
 			}
 		}
 
-		return new self( $claims );
+		return $claims;
 	}
 
 	/**
@@ -460,18 +444,22 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 *
 	 * @since 0.7.2
 	 *
-	 * @param array $acceptableRanks
+	 * @param int[] $ranks
 	 *
 	 * @return Claims
 	 */
-	public function getByRanks( array $acceptableRanks ) {
-		$newClaims = new Claims();
-		foreach( $acceptableRanks as $rank ) {
-			foreach( $this->getByRank( $rank ) as $claim ) {
-				$newClaims->append( $claim );
+	public function getByRanks( array $ranks ) {
+		$ranks = array_flip( $ranks );
+		$claims = new self();
+
+		/* @var Claim $claim */
+		foreach ( $this as $claim ) {
+			if ( isset( $ranks[$claim->getRank()] ) ) {
+				$claims[] = $claim;
 			}
 		}
-		return $newClaims;
+
+		return $claims;
 	}
 
 	/**
