@@ -104,7 +104,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
