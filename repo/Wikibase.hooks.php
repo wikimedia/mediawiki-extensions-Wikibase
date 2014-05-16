@@ -229,28 +229,34 @@ final class RepoHooks {
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
 			/**
-			 * @var $newEntity Entity
+			 * @var $newContent EntityContent
 			 */
-			$newEntity = $article->getContent()->getEntity();
+			$newContent = $article->getContent();
 
-			// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
-			// May be redundant in some cases. Take care not to cause infinite regress.
-			$entityRev = new EntityRevision( $newEntity, $revision->getId(), $revision->getTimestamp() );
-			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+			if ( $newContent->isRedirect() ) {
+				//FIXME: The StoreWatcher should know about redirects!
+				WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $newContent->getEntityId() );
+			} else {
+				// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
+				// May be redundant in some cases. Take care not to cause infinite regress.
+				$newEntity = $newContent->getEntity();
+				$entityRev = new EntityRevision( $newEntity, $revision->getId(), $revision->getTimestamp() );
+				WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+			}
 
 			$parent = is_null( $revision->getParentId() )
 				? null : Revision::newFromId( $revision->getParentId() );
 
-			$change = EntityChange::newFromUpdate(
+			$change = EntityChange::newFromContentUpdate(
 				$parent ? EntityChange::UPDATE : EntityChange::ADD,
-				$parent ? $parent->getContent()->getEntity() : null,
-				$newEntity
+				$parent ? $parent->getContent() : null,
+				$newContent
 			);
 
 			$change->setFields( array(
 				'revision_id' => $revision->getId(),
 				'user_id' => $user->getId(),
-				'object_id' => $newEntity->getId()->getPrefixedId(),
+				'object_id' => $newContent->getEntityId()->getPrefixedId(),
 				'time' => $revision->getTimestamp(),
 			) );
 
@@ -291,20 +297,16 @@ final class RepoHooks {
 			return true;
 		}
 
-		/**
-		 * @var EntityContent $content
-		 * @var Entity $entity
-		 */
-		$entity = $content->getEntity();
+		/* @var EntityContent $content */
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.
-		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $entity->getId() );
+		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
 
-		$change = EntityChange::newFromUpdate( EntityChange::REMOVE, $entity, null, array(
+		$change = EntityChange::newFromContentUpdate( EntityChange::REMOVE, $content, null, array(
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $content->getEntityId()->getPrefixedId(),
 			'time' => $logEntry->getTimestamp(),
 		) );
 
@@ -347,23 +349,21 @@ final class RepoHooks {
 			return true;
 		}
 
-		$entity = $content->getEntity();
-
 		//XXX: EntityContent::save() also does this. Why are we doing this twice?
 		WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage()->addEntityPage(
-			$entity->getId(),
+			$content->getEntityId(),
 			$title->getArticleID()
 		);
 
 		$rev = Revision::newFromId( $revId );
 
 		$userId = $rev->getUser();
-		$change = EntityChange::newFromUpdate( EntityChange::RESTORE, null, $entity, array(
+		$change = EntityChange::newFromContentUpdate( EntityChange::RESTORE, null, $content, array(
 			// TODO: Use timestamp of log entry, but needs core change.
 			// This hook is called before the log entry is created.
 			'revision_id' => $revId,
 			'user_id' => $userId,
-			'object_id' => $entity->getId()->getPrefixedId(),
+			'object_id' => $content->getEntityId()->getPrefixedId(),
 			'time' => wfTimestamp( TS_MW, wfTimestampNow() )
 		) );
 
@@ -663,19 +663,21 @@ final class RepoHooks {
 
 		if ( $entityContentFactory->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
+
+			//FIXME: use EntityLookup! At least file a bug!!
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
 
 			/* @var EntityContent $entityContent */
 
-			if( $entityContent !== null ) {
+			if( $entityContent !== null && !$entityContent->isRedirect() ) {
 				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
-				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getEntity()->getType() );
+				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getContentHandler()->getEntityType() );
 
 				// add class to body so it's clear this is a wb item:
 				$bodyAttrs['class'] .= " wb-entitypage wb-{$entityType}page";
 				// add another class with the ID of the item:
-				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntity()->getId()->getPrefixedId()}";
+				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntityId()->getPrefixedId()}";
 
 				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
 					$bodyAttrs['class'] .= ' wb-diffpage';
@@ -767,6 +769,9 @@ final class RepoHooks {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
+
+		//FIXME: Resolve redirect!
+		//FIXME: Use TermIndex, don't load Entity! At least file a bug for this! Ugh!
 
 		/* @var EntityContent $content */
 		$entity = $content->getEntity();
@@ -920,6 +925,9 @@ final class RepoHooks {
 		$model = $result->getTitle()->getContentModel();
 
 		if ( $entityContentFactory->isEntityContentModel( $model ) ) {
+			//FIXME: handle redirect!
+			//FIXME: use TermIndex!!! At least file a bug! Ugh...
+
 			$lang = $searchPage->getLanguage();
 			$page = WikiPage::factory( $result->getTitle() );
 
