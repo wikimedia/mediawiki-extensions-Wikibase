@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_6a6c3b06",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T08:03:13Z",
+      "side": 1,
+      "message": "Discussed this with Thiemo. I was originally using the existing message (see earlier patch sets) and then realized I\u0027d have to move it to lib. But afaik we should move only en and qqq, meaning the message would have to be re-translated anyway. An the \"property not found\" message was overly specific (assuming the property got deleted) and did not include the property\u0027s id.\n\nSo I decided moving them isn\u0027t worth the pain, and created new messages.\n\nAs far as I know, the i18n team discourages message re-use anyway, since we often want to adjust messages to the context in which they are shown.",
+      "parentUuid": "6e20cf91_894e899a",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_1859a901",
         "filename": "lib/i18n/en.json",
         "patchSetId": 6
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_4a717fdc",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T08:03:13Z",
+      "side": 1,
+      "message": "These are shown in parantecies. Having a period there looked odd. I can add it back if you want.",
+      "parentUuid": "6e20cf91_a9814594",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_9b15b343",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 6
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_2a7643d6",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T08:03:13Z",
+      "side": 1,
+      "message": "a typo ;)",
+      "parentUuid": "6e20cf91_9b15b343",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_9b5a5321",
         "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
         "patchSetId": 6
@@ -100,6 +154,24 @@
       "writtenOn": "2014-05-15T21:34:43Z",
       "side": 1,
       "message": "the formatting is ugly and inconsistent with how we display errors on the item page.",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_0a7b87be",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-16T08:03:13Z",
+      "side": 1,
+      "message": "so, what do you suggest instead?",
+      "parentUuid": "6e20cf91_9b5a5321",
       "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
