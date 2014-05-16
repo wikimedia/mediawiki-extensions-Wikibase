@@ -112,6 +112,25 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
+	 * Checks if this PropertyContent is valid for saving.
+	 *
+	 * Returns false if the entity does not have a DataType set.
+	 *
+	 * @see Content::isValid()
+	 */
+	public function isValid() {
+		if ( !parent::isValid() ) {
+			return false;
+		}
+
+		if ( is_null( $this->getEntity()->getDataTypeId() ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Instantiates an EntityView.
 	 *
 	 * @see getEntityView()
