@@ -169,7 +169,7 @@
 	"wikibase-setsitelink-intro": "该表格允许您设置实体的网站链接。您需要提供实体的ID（如Q23）、网站ID（如“zhwiki”）和要设置的网站链接。",
 	"wikibase-setsitelink-site": "网站ID：",
 	"wikibase-setsitelink-label": "网站链接：",
-	"wikibase-setsitelink-badges": "徽章：",
+	"wikibase-setsitelink-badges": "星章：",
 	"wikibase-setsitelink-submit": "设置网站链接",
 	"wikibase-setsitelink-warning-remove": "您确实想要删除[[$1]]的网站链接吗？",
 	"wikibase-setsitelink-invalid-site": "网站ID“$1”未知。请使用现存的网站ID，例如“zhwiki”。",
