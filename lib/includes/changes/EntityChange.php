@@ -332,6 +332,49 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
+	 * Creates an EntityChange from EntityContent objects.
+	 *
+	 * @see newFromUpdate()
+	 *
+	 * @since 0.5
+	 *
+	 * @todo Handle redirects more nicely
+	 *
+	 * @param string      $action The action name
+	 * @param EntityContent|null $oldContent
+	 * @param EntityContent|null $newContent
+	 * @param array|null  $fields additional fields to set
+	 *
+	 * @return static|null
+	 * @throws MWException
+	 */
+	public static function newFromContentUpdate( $action, EntityContent $oldContent = null, EntityContent $newContent = null, array $fields = null ) {
+		$oldEntity = null;
+		$newEntity = null;
+
+		// Handle the special case of the EntityContent being turned into a redirect,
+		// or back from a redirect into an entity.
+		if ( $action === EntityChange::UPDATE ) {
+
+			if ( ( $oldContent === null || $oldContent->isRedirect() )
+				&& ( $newContent === null || $newContent->isRedirect() ) ) {
+				// nothing to do.
+				return null;
+			} elseif ( $oldContent !== null && $oldContent->isRedirect() ) {
+				//XXX: Really use RESTORE?
+				$action = EntityChange::RESTORE;
+				$oldContent = null;
+			} elseif ( $newContent !== null && $newContent->isRedirect() ) {
+				//FIXME: Fake! Use REDIRECT once the client understands that!
+				$action = EntityChange::REMOVE;
+				$oldContent = null;
+			}
+		}
+
+		return self::newFromUpdate( $action, $oldEntity, $newEntity, $fields );
+	}
+
+	/**
 	 * Returns a human readable string representation of the change. Useful for logging and debugging.
 	 *
 	 * @since 0.4
