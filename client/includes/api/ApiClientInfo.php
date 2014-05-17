@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use ApiBase;
 use ApiQuery;
+use ApiQueryBase;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -16,7 +17,7 @@ use Wikibase\Client\WikibaseClient;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ApiClientInfo extends \ApiQueryBase {
+class ApiClientInfo extends ApiQueryBase {
 
 	/**
 	 * @var SettingsArray
@@ -154,7 +155,7 @@ class ApiClientInfo extends \ApiQueryBase {
 	/**
 	 * @see ApiBase::getDescription
 	 *
-	 * @since 0.4i
+	 * @since 0.4
 	 *
 	 * @return string
 	 */
