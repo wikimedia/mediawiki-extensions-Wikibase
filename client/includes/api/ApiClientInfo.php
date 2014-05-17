@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use ApiBase;
+use ApiQuery;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -25,10 +26,10 @@ class ApiClientInfo extends \ApiQueryBase {
 	/**
 	 * @since 0.4
 	 *
-	 * @param ApiBase $api
+	 * @param ApiQuery $api
 	 * @param string $moduleName
 	 */
-	public function __construct( $api, $moduleName ) {
+	public function __construct( ApiQuery $api, $moduleName ) {
 		parent::__construct( $api, $moduleName, 'wb' );
 
 		// @todo inject this instead of using singleton here
