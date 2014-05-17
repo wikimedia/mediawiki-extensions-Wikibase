@@ -244,6 +244,23 @@
       "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_6310e1ad",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-17T20:10:48Z",
+      "side": 1,
+      "message": "I think this error / \"warning\" formatting should be factored out into an ErrorFormatter or such class.\n\nwe need the similar handling for UnDeserializableValue formatting (bug 65441) which should be done the same way, using same code to the extent possible.",
+      "revId": "046e69e879ab582f7bd6b3494be8a9eac7bff6f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
