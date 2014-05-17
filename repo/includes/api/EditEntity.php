@@ -808,8 +808,8 @@ class EditEntity extends ModifyEntity {
 			// Setting stuff
 			'api.php?action=wbeditentity&id=Q42&data={"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
 			=> 'Sets sitelink for nowiki, overwriting it if it already exists',
-			'api.php?action=wbeditentity&id=Q42&data={"descriptions":{"no":{"language":"no","value":"no-Description-Here"}}}'
-			=> 'Sets description for no, overwriting it if it already exists',
+			'api.php?action=wbeditentity&id=Q42&data={"descriptions":{"nb":{"language":"nb","value":"nb-Description-Here"}}}'
+			=> 'Sets description for nb, overwriting it if it already exists',
 			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"mainsnak":{"snaktype":"value","property":"P56","datavalue":{"value":"ExampleString","type":"string"}},"type":"statement","rank":"normal"}]}'
 			=> 'Creates a new claim on the item for the property P56 and a value of "ExampleString"',
 			'api.php?action=wbeditentity&id=Q42&data={"claims":[{"id":"Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F","remove":""},{"id":"Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X","remove":""}]}'
