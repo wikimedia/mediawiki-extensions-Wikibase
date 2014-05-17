@@ -2,7 +2,12 @@
 
 namespace Wikibase\Test;
 
+use ApiMain;
+use ApiTestContext;
 use ApiQuery;
+use FauxRequest;
+use MediaWikiTestCase;
+use User;
 use Wikibase\SettingsArray;
 use Wikibase\ApiClientInfo;
 
@@ -20,23 +25,29 @@ use Wikibase\ApiClientInfo;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ApiClientInfoTest extends \MediaWikiTestCase {
+class ApiClientInfoTest extends MediaWikiTestCase {
 
 	protected $apiContext;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->apiContext = new \ApiTestContext();
+		$this->apiContext = new ApiTestContext();
 	}
 
+	/**
+	 * @param array $params
+	 * @param SettingsArray $settings
+	 *
+	 * @return ApiClientInfo
+	 */
 	public function getApiModule( array $params, SettingsArray $settings ) {
-		$request = new \FauxRequest( $params, true );
+		$request = new FauxRequest( $params, true );
 
-		$user = \User::newFromName( 'zombie' );
+		$user = User::newFromName( 'zombie' );
 
 		$context = $this->apiContext->newTestContext( $request, $user );
-		$apiMain = new \ApiMain( $context, true );
+		$apiMain = new ApiMain( $context, true );
 		$apiQuery = new ApiQuery( $apiMain, 'wikibase' );
 
 		$apiModule = new ApiClientInfo( $apiQuery, 'query' );
