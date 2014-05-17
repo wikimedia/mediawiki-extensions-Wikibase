@@ -84,6 +84,7 @@
 	"wikibase-error-constraint-violation-label": "Hai {{PLURAL:$1|una violación de restricción|violaciones de restricción}} pa {{PLURAL:$1|la etiqueta|les etiquetes}} \"$3\" {{PLURAL:$1|nel códigu|nos códigos}} de llingua \"$2\".",
 	"wikibase-error-constraint-violation-description": "Hai {{PLURAL:$1|una violación de restricción|violaciones de restricción}} pa {{PLURAL:$1|la descripción|les descripciones}} \"$3\" {{PLURAL:$1|nel códigu|nos códigos}} de llingua \"$2\".",
 	"wikibase-error-constraint-violation-aliases": "Hai {{PLURAL:$1|una violación de restricción|violaciones de restricción}} pa {{PLURAL:$1|un alcuñu|los alcuños}} \"$3\" {{PLURAL:$1|nel códigu|nos códigos}} de llingua \"$2\".",
+	"wikibase-validator-sitelink-conflict": "L'elementu $2 yá usa l'enllaz al sitiu $1.",
 	"wikibase-validator-label-conflict": "La propiedá $3 yá tien la etiqueta «$1» asociada col códigu de llingua $2.",
 	"wikibase-validator-label-with-description-conflict": "L'elementu $3 yá tien la etiqueta «$1» asociada col códigu de llingua $2, usando'l mesmu testu descriptivu.",
 	"wikibase-validator-label-no-entityid": "La etiqueta nun pue ser una id d'entidá válida.",
