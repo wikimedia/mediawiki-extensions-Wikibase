@@ -17,6 +17,7 @@
 	"wikibase-remove-inprogress": "אוועקנעמען אין גאנג…",
 	"wikibase-label-empty": "קיין באצייכענונג נאך נישט דעפֿינירט",
 	"wikibase-label-edit-placeholder": "אריינגעבן באצייכענונג",
+	"wikibase-label-edit-placeholder-language-aware": "אײַנגעבן באצייכענונג אויף $1",
 	"wikibase-description-empty": "קיין שילדערונג נאך נישט דעפֿינירט",
 	"wikibase-description-edit-placeholder": "ארײַנגעבן באשרײַבונג",
 	"wikibase-description-edit-placeholder-language-aware": "אײַנגעבן שילדערונג אין $1",

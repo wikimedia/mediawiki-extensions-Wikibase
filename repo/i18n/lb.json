@@ -57,6 +57,7 @@
 	"wikibase-snakview-variations-somevalue-label": "onbekannte Wäert",
 	"wikibase-snakview-variations-novalue-label": "kee Wäert",
 	"wikibase-snakview-snaktypeselector-value": "personaliséierte Wäert",
+	"wikibase-snakformat-propertynotfound": "D'Eegeschaft gouf net fonnt.",
 	"wikibase-copyrighttooltip-acknowledge": "Ech akzeptéieren dës Bedingunge fir meng zukünfteg Ännerungen. Dëse Message net nach eng Kéier weisen.",
 	"wikibase-entityselector-more": "méi",
 	"wikibase-anonymouseditwarning": "Opgepasst: Dir sidd net ageloggt.\nDowéinst gëtt Är IP Adress am Historique vun dëser Eenheet gespäichert.",
@@ -217,5 +218,6 @@
 	"content-model-wikibase-item": "Wikibase-Element",
 	"content-model-wikibase-property": "Wikibase-Eegeschaft",
 	"content-model-wikibase-query": "Wikibase-Ufro",
+	"right-item-merge": "Elementer zesummeleeën",
 	"right-property-create": "Eegeschaften uleeën"
 }
