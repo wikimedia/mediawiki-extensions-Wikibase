@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use ApiQuery;
 use Wikibase\SettingsArray;
 use Wikibase\ApiClientInfo;
 
@@ -36,8 +37,9 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 
 		$context = $this->apiContext->newTestContext( $request, $user );
 		$apiMain = new \ApiMain( $context, true );
+		$apiQuery = new ApiQuery( $apiMain, 'wikibase' );
 
-		$apiModule = new ApiClientInfo( $apiMain, 'query' );
+		$apiModule = new ApiClientInfo( $apiQuery, 'query' );
 		$apiModule->setSettings( $settings );
 
 		return $apiModule;
