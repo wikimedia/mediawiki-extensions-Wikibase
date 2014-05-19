@@ -16,6 +16,24 @@
       "revId": "4fe5894445afea44fadae4212f047fdc8d08fa8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_d72c0e92",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-19T13:21:53Z",
+      "side": 1,
+      "message": "I think I explained this in the first patch set, see https://gerrit.wikimedia.org/r/#/c/133523/1/repo/includes/ChangeOp/ChangeOpAliases.php\n\nIt\u0027s pretty simple: The action is an implementation detail of this change op and not part of the constraint.\n\nThe action is still checked in the apply() call above. No need to implement the same check twice.\n\nOh, I just realized it should not throw a ChangeOpException in this case. I will change that and probably split this in two patches.",
+      "parentUuid": "6e20cf91_0ca399a9",
+      "revId": "4fe5894445afea44fadae4212f047fdc8d08fa8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
