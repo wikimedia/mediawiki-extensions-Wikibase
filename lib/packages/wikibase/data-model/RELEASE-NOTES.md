@@ -58,7 +58,8 @@ Other breaking changes:
 * Added `Item::setSiteLinkList`
 * Added `LegacyIdInterpreter`
 * Added `ClaimListDiffer`
-* Added `TermList::addTermText`
+* Added `TermList::setTextForLanguage`
+* Added `AliasGroupList::setTextForLanguage`
 
 #### Improvements
 

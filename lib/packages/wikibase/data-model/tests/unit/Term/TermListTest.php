@@ -270,7 +270,7 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenValidArgs_setTermTextSetsTerm() {
 		$list = new TermList();
 
-		$list->setTermText( 'en', 'kittens' );
+		$list->setTextForLanguage( 'en', 'kittens' );
 
 		$this->assertTrue( $list->getByLanguage( 'en' )->equals( new Term( 'en', 'kittens' ) ) );
 	}
@@ -279,14 +279,14 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$list = new TermList();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->setTermText( null, 'kittens' );
+		$list->setTextForLanguage( null, 'kittens' );
 	}
 
 	public function testGivenInvalidTermText_setTermTextThrowsException() {
 		$list = new TermList();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$list->setTermText( 'en', null );
+		$list->setTextForLanguage( 'en', null );
 	}
 
 }

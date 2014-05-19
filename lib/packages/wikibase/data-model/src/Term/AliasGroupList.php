@@ -163,7 +163,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 * @param string $languageCode
 	 * @param string[] $aliases
 	 */
-	public function setGroupTexts( $languageCode, array $aliases ) {
+	public function setAliasesForLanguage( $languageCode, array $aliases ) {
 		$this->setGroup( new AliasGroup( $languageCode, $aliases ) );
 	}
 

@@ -115,7 +115,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	 * @param string $languageCode
 	 * @param string $termText
 	 */
-	public function setTermText( $languageCode, $termText ) {
+	public function setTextForLanguage( $languageCode, $termText ) {
 		$this->setTerm( new Term( $languageCode, $termText ) );
 	}
 
