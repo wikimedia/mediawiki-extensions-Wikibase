@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_0ca399a9",
+        "filename": "repo/includes/ChangeOp/ChangeOpAliases.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-19T10:19:49Z",
+      "side": 1,
+      "message": "This no longer fails on a bad action. But the action parameter should be validated too, no?",
+      "revId": "4fe5894445afea44fadae4212f047fdc8d08fa8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
