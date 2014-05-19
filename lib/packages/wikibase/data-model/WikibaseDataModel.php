@@ -32,10 +32,8 @@ if ( defined( 'MEDIAWIKI' ) ) {
 
 // Aliasing of classes that got renamed.
 // For more details, see Aliases.php.
-class_alias( 'Wikibase\DataModel\Entity\Item', 'Wikibase\ItemObject' );
-class_alias( 'Wikibase\DataModel\Reference', 'Wikibase\ReferenceObject' );
-class_alias( 'Wikibase\DataModel\Claim\Claim', 'Wikibase\ClaimObject' );
-class_alias( 'Wikibase\DataModel\Claim\Statement', 'Wikibase\StatementObject' );
+
+// Aliases introduced in 0.5
 class_alias( 'Wikibase\DataModel\Entity\EntityId', 'Wikibase\EntityId' );
 
 // Aliases introduced in 0.6

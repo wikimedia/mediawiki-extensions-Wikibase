@@ -25,10 +25,6 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 			},
 			array(
 				'Wikibase\EntityId',
-				'Wikibase\ItemObject',
-				'Wikibase\ReferenceObject',
-				'Wikibase\StatementObject',
-				'Wikibase\ClaimObject',
 
 				'Wikibase\Reference',
 				'Wikibase\ReferenceList',
