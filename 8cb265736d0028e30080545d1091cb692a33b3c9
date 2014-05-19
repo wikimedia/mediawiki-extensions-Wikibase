@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_42cf1583",
+        "filename": "repo/includes/api/AvailableBadges.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-19T23:19:57Z",
+      "side": 1,
+      "message": "We no longer really use this. The inline help from api.php should be enough... just remove this function",
+      "revId": "8cb265736d0028e30080545d1091cb692a33b3c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
