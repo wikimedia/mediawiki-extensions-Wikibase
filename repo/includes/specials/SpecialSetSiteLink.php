@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use OutOfBoundsException;
 use Status;
-use ValueParsers\ParseException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
@@ -14,6 +13,7 @@ use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -385,7 +385,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		foreach ( $badges as $badge ) {
 			try {
 				$badgeId = $entityIdParser->parse( $badge );
-			} catch( ParseException $e ) {
+			} catch( EntityIdParsingException $e ) {
 				$status->fatal( 'wikibase-setentity-invalid-id' );
 				return false;
 			}
