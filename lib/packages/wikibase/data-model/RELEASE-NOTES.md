@@ -44,6 +44,8 @@ Other breaking changes:
 * The constructor of `EntityId` is no longer public
 * `Claims::getDiff` no longer takes a second optional parameter
 * `Claims::getDiff` now throws an `UnexpectedValueException` rather than an `InvalidArgumentException`
+* Removed these class aliases deprecated since 0.4:
+`ItemObject`, `ReferenceObject`, `ClaimObject`, `StatementObject`
 
 #### Additions
 
