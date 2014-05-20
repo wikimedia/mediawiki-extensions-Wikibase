@@ -8,6 +8,7 @@ use Status;
 use Title;
 use User;
 use Revision;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
