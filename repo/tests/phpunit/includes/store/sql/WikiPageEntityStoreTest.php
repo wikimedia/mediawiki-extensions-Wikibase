@@ -39,7 +39,10 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->clear();
 
 		//NOTE: we want to test integration of WikiPageEntityLookup and WikiPageEntityStore here!
-		$lookup = new WikiPageEntityLookup( false, CACHE_DB );
+		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+
+		$lookup = new WikiPageEntityLookup( $contentCodec, $entityFactory, false, CACHE_DB );
 
 		$typeMap = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
 
@@ -361,4 +364,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $prev_id, $rev_id, "revision ID should stay the same if no change was made" );
 	}
 
+	//FIXME: test deletion
+	//FIXME: test edit updates
+	//FIXME: test deletion updates
 }

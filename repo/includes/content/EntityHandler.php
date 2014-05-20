@@ -5,19 +5,19 @@ namespace Wikibase;
 use Content;
 use ContentHandler;
 use IContextSource;
+use InvalidArgumentException;
 use Language;
 use MWContentSerializationException;
-use MWException;
 use ParserOptions;
 use RequestContext;
 use Revision;
 use Title;
 use User;
+use Wikibase\Store\EntityContentDataCodec;
 use Wikibase\Validators\EntityValidator;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
- * TODO: interface for enforcing singleton
  *
  * @since 0.1
  *
@@ -33,17 +33,21 @@ abstract class EntityHandler extends ContentHandler {
 	protected $preSaveValidators;
 
 	/**
+	 * @var \Wikibase\Store\EntityContentDataCodec
+	 */
+	protected $contentCodec;
+
+	/**
 	 * @param string $modelId
+	 * @param \Wikibase\Store\EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 */
-	public function __construct( $modelId, $preSaveValidators ) {
-		$formats = array(
-			CONTENT_FORMAT_JSON,
-			CONTENT_FORMAT_SERIALIZED
-		);
+	public function __construct( $modelId, EntityContentDataCodec $contentCodec, $preSaveValidators ) {
+		$formats = $contentCodec->getSupportedFormats();
 
 		parent::__construct( $modelId, $formats );
 
+		$this->contentCodec = $contentCodec;
 		$this->preSaveValidators = $preSaveValidators;
 	}
 
@@ -133,70 +137,55 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	public function getDefaultFormat() {
-		return EntityFactory::singleton()->getDefaultFormat();
+		return $this->contentCodec->getDefaultFormat();
 	}
 
 	/**
 	 * @param Content $content
 	 * @param string|null $format
 	 *
-	 * @throws MWException
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
 	public function serializeContent( Content $content, $format = null ) {
-
-		if ( is_null( $format ) ) {
-			$format = $this->getDefaultFormat();
+		if ( ! $content instanceof EntityContent ) {
+			throw new \InvalidArgumentException( '$content mist be an instance of EntityContent' );
 		}
 
-		//FIXME: assert $content is a WikibaseContent instance
-		$data = $content->getNativeData();
-
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$blob = serialize( $data );
-				break;
-			case CONTENT_FORMAT_JSON:
-				$blob = json_encode( $data );
-				break;
-			default:
-				throw new MWException( "serialization format $format is not supported for "
-					. "Wikibase content model" );
-		}
-
-		return $blob;
+		$data = $content->getEntity()->toArray();
+		return $this->contentCodec->encodeEntityContentData( $data, $format );
 	}
 
 	/**
-	 * @param string $blob
-	 * @param string|null $format
+	 * @see ContentHandler::unserializeContent
 	 *
-	 * @throws MWException
-	 * @throws MWContentSerializationException
-	 * @return mixed
+	 * @since 0.1
+	 *
+	 * @param string $blob
+	 * @param null|string $format
+	 *
+	 * @throws \MWContentSerializationException
+	 * @return EntityContent
 	 */
-	protected function unserializedData( $blob, $format = null ) {
-		if ( is_null( $format ) ) {
-			$format = $this->getDefaultFormat();
-		}
+	public function unserializeContent( $blob, $format = null ) {
+		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
 
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$data = unserialize( $blob ); //FIXME: suppress notice on failed serialization!
-				break;
-			case CONTENT_FORMAT_JSON:
-				$data = json_decode( $blob, true ); //FIXME: suppress notice on failed serialization!
-				break;
-			default:
-				throw new MWException( "serialization format $format is not supported "
-					. "for Wikibase content model" );
-		}
+		$entityContent = $this->newContentFromArray( $data );
+		return $entityContent;
+	}
 
-		if ( $data === false || $data === null ) {
-			throw new MWContentSerializationException( 'failed to deserialize' );
-		}
 
-		return $data;
+	/**
+	 * Calls the static function newFromArray() on the content class,
+	 * to create a new EntityContent object based on the array data.
+	 *
+	 * @param array $data
+	 *
+	 * @return EntityContent
+	 */
+	protected function newContentFromArray( array $data ) {
+		$contentClass = $this->getContentClass();
+		return $contentClass::newFromArray( $data );
 	}
 
 	/**
