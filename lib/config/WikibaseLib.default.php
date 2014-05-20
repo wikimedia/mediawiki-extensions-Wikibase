@@ -19,9 +19,6 @@ return call_user_func( function() {
 
 	$defaults = array(
 
-		// alternative: application/vnd.php.serialized
-		'serializationFormat' => CONTENT_FORMAT_JSON,
-
 		// whether changes get recorded to wb_changes
 		'useChangesTable' => true,
 
