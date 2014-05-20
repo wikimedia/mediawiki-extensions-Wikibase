@@ -58,6 +58,12 @@ Other breaking changes:
 * Added `Item::setSiteLinkList`
 * Added `LegacyIdInterpreter`
 * Added `ClaimListDiffer`
+* Added `TermList::setTextForLanguage`
+* Added `AliasGroupList::setAliasesForLanguage`
+
+#### Improvements
+
+* An empty `TermList` can now be constructed with no constructor arguments
 
 ## Version 0.7.4 (2014-04-24)
 

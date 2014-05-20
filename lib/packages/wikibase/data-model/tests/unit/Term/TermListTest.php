@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\TermList;
 class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNoTerms_sizeIsZero() {
-		$list = new TermList( array() );
+		$list = new TermList();
 		$this->assertCount( 0, $list );
 	}
 
@@ -265,6 +265,28 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenMatchingTerm_hasTermReturnsTrue() {
 		$list = new TermList( array( new Term( 'en', 'kittens' ) ) );
 		$this->assertTrue( $list->hasTerm( new Term( 'en', 'kittens' ) ) );
+	}
+
+	public function testGivenValidArgs_setTermTextSetsTerm() {
+		$list = new TermList();
+
+		$list->setTextForLanguage( 'en', 'kittens' );
+
+		$this->assertTrue( $list->getByLanguage( 'en' )->equals( new Term( 'en', 'kittens' ) ) );
+	}
+
+	public function testGivenInvalidLanguageCode_setTermTextThrowsException() {
+		$list = new TermList();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$list->setTextForLanguage( null, 'kittens' );
+	}
+
+	public function testGivenInvalidTermText_setTermTextThrowsException() {
+		$list = new TermList();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$list->setTextForLanguage( 'en', null );
 	}
 
 }

@@ -31,7 +31,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 * @param AliasGroup[] $aliasGroups
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $aliasGroups ) {
+	public function __construct( array $aliasGroups = array() ) {
 		foreach ( $aliasGroups as $aliasGroup ) {
 			if ( !( $aliasGroup instanceof AliasGroup ) ) {
 				throw new InvalidArgumentException( 'AliasGroupList can only contain AliasGroup instances' );
@@ -155,6 +155,16 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	public function hasGroupForLanguage( $languageCode ) {
 		$this->assertIsLanguageCode( $languageCode );
 		return array_key_exists( $languageCode, $this->groups );
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param string $languageCode
+	 * @param string[] $aliases
+	 */
+	public function setAliasesForLanguage( $languageCode, array $aliases ) {
+		$this->setGroup( new AliasGroup( $languageCode, $aliases ) );
 	}
 
 }
