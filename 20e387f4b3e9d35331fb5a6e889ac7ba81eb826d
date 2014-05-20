@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_201651f7",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-20T10:28:43Z",
+      "side": 1,
+      "message": "It seems messages that start with \"wikibase-setentity-...\" don\u0027t exist.",
+      "revId": "20e387f4b3e9d35331fb5a6e889ac7ba81eb826d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_40194d26",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-20T10:28:43Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "20e387f4b3e9d35331fb5a6e889ac7ba81eb826d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
