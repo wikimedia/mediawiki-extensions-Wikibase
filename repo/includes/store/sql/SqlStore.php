@@ -15,6 +15,7 @@ use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
@@ -79,7 +80,27 @@ class SqlStore implements Store {
 	 */
 	private $cacheDuration;
 
-	public function __construct() {
+	/**
+	 * @var EntityContentDataCodec
+	 */
+	private $contentCodec;
+
+	/**
+	 * @var EntityFactory
+	 */
+	private $entityFactory;
+
+	/**
+	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityFactory $entityFactory
+	 */
+	public function __construct(
+		EntityContentDataCodec $contentCodec,
+		EntityFactory $entityFactory
+	) {
+		$this->contentCodec = $contentCodec;
+		$this->entityFactory = $entityFactory;
+
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
@@ -450,7 +471,7 @@ class SqlStore implements Store {
 		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$lookup = $rawLookup = new WikiPageEntityLookup( false );
+		$lookup = $rawLookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityFactory, false );
 
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.

@@ -7,6 +7,7 @@ use ObjectCache;
 use Site;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
 
@@ -83,12 +84,31 @@ class DirectSqlStore implements ClientStore {
 	private $cacheDuration;
 
 	/**
+	 * @var EntityContentDataCodec
+	 */
+	private $contentCodec;
+
+	/**
+	 * @var EntityFactory
+	 */
+	private $entityFactory;
+
+	/**
+	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityFactory $entityFactory
 	 * @param Language $wikiLanguage
 	 * @param string    $repoWiki the symbolic database name of the repo wiki
 	 */
-	public function __construct( Language $wikiLanguage, $repoWiki ) {
+	public function __construct(
+		EntityContentDataCodec $contentCodec,
+		EntityFactory $entityFactory,
+		Language $wikiLanguage,
+		$repoWiki
+	) {
 		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
+		$this->contentCodec = $contentCodec;
+		$this->entityFactory = $entityFactory;
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -199,7 +219,7 @@ class DirectSqlStore implements ClientStore {
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$lookup = new WikiPageEntityLookup( $this->repoWiki );
+		$lookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityFactory, $this->repoWiki );
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		// We need to verify the revision ID against the database to avoid stale data.
