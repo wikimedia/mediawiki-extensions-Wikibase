@@ -15,6 +15,7 @@ use Wikibase\ClientStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DirectSqlStore;
 use Wikibase\EntityLookup;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
@@ -71,9 +72,9 @@ final class WikibaseClient {
 	private $languageFallbackChainFactory = null;
 
 	/**
-	 * @var ClientStore[]
+	 * @var ClientStore
 	 */
-	private $storeInstances = array();
+	private $store= array();
 
 	/**
 	 * @var StringNormalizer
@@ -274,43 +275,36 @@ final class WikibaseClient {
 	 * @return ClientStore
 	 */
 	public function getStore( $store = false, $reset = 'no' ) {
-		global $wgWBClientStores; //XXX: still using a global here
-
-		if ( $store === false || !array_key_exists( $store, $wgWBClientStores ) ) {
-			$store = $this->settings->getSetting( 'defaultClientStore' ); // still false per default
-		}
-
 		// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's database.
 		// If $repoDatabase is false, the local wiki IS the repository.
 		// Otherwise, $repoDatabase needs to be a logical database name that LBFactory understands.
 		$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 
-		if ( !$store ) {
-			// XXX: This is a rather ugly "magic" default.
-			if ( $repoDatabase !== null ) {
-				$store = 'DirectSqlStore';
-			} else {
-				throw new Exception( '$repoDatabase cannot be null' );
-			}
+		if ( !$this->store ) {
+			$this->store = new DirectSqlStore(
+				$this->getContentLanguage(),
+				$repoDatabase
+			);
 		}
 
-		$class = $wgWBClientStores[$store];
+		return $this->store;
+	}
 
-		if ( $reset !== true && $reset !== 'reset'
-			&& isset( $this->storeInstances[$store] ) ) {
-
-			return $this->storeInstances[$store];
+	/**
+	 * Overrides the default store to be used in the client app context.
+	 * This is intended for use by test cases.
+	 *
+	 * @param ClientStore|null $store
+	 *
+	 * @throws \LogicException If MW_PHPUNIT_TEST is not defined, to avoid this
+	 * method being abused in production code.
+	 */
+	public function overrideStore( ClientStore $store = null ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new \LogicException( 'Overriding the store instance is only supported in test mode' );
 		}
 
-		$instance = new $class(
-			$this->getContentLanguage(),
-			$repoDatabase
-		);
-
-		assert( $instance instanceof ClientStore );
-
-		$this->storeInstances[$store] = $instance;
-		return $instance;
+		$this->store = $store;
 	}
 
 	/**
