@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_f64943d4",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-20T16:43:42Z",
+      "side": 1,
+      "message": "public",
+      "revId": "c2e1522258da4d5b0b7c415e6573aee60416ce17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_9610cfae",
+        "filename": "lib/includes/serializers/EntityContentDataCodec.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-20T16:43:42Z",
+      "side": 1,
+      "message": "really?",
+      "revId": "c2e1522258da4d5b0b7c415e6573aee60416ce17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
