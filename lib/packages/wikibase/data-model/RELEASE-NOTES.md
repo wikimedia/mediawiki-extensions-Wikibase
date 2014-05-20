@@ -59,7 +59,7 @@ Other breaking changes:
 * Added `LegacyIdInterpreter`
 * Added `ClaimListDiffer`
 * Added `TermList::setTextForLanguage`
-* Added `AliasGroupList::setTextForLanguage`
+* Added `AliasGroupList::setAliasesForLanguage`
 
 #### Improvements
 
