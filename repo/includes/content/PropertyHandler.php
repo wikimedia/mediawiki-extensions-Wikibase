@@ -2,6 +2,9 @@
 
 namespace Wikibase;
 
+use Wikibase\Store\EntityContentDataCodec;
+use Wikibase\Validators\EntityValidator;
+
 /**
  * Content handler for Wikibase items.
  *
@@ -24,10 +27,11 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
-	 * @param PreSaveValidator[] $preSaveValidators
+	 * @param \Wikibase\Store\EntityContentDataCodec $contentCodec
+	 * @param EntityValidator[] $preSaveValidators
 	 */
-	public function __construct( $preSaveValidators ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY, $preSaveValidators );
+	public function __construct( EntityContentDataCodec $contentCodec, $preSaveValidators ) {
+		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY, $contentCodec, $preSaveValidators );
 	}
 
 	/**
@@ -40,21 +44,6 @@ class PropertyHandler extends EntityHandler {
 			'edit' => '\Wikibase\EditPropertyAction',
 			'submit' => '\Wikibase\SubmitPropertyAction',
 		);
-	}
-
-	/**
-	 * @see ContentHandler::unserializeContent
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $blob
-	 * @param null|string $format
-	 *
-	 * @return PropertyContent
-	 */
-	public function unserializeContent( $blob, $format = null ) {
-		$entity = EntityFactory::singleton()->newFromBlob( Property::ENTITY_TYPE, $blob, $format );
-		return PropertyContent::newFromProperty( $entity );
 	}
 
 	/**
