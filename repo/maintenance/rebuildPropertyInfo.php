@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use LoggedUpdateMaintenance;
+use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -44,7 +45,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$entityLookup = new WikiPageEntityLookup( false );
+		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
 		$builder->setReporter( $reporter );
