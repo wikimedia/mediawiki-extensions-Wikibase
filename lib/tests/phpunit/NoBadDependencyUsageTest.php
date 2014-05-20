@@ -16,13 +16,13 @@ class NoBadDependencyUsageTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNoRepoUsageInLib() {
 		// Increasing this allowance is forbidden
-		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 3 );
+		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 2 );
 		$this->assertStringNotInLib( 'Wikibase\\Repo\\', 3 );
 	}
 
 	public function testNoClientUsageInLib() {
 		// Increasing this allowance is forbidden
-		$this->assertStringNotInLib( 'WikibaseClient' . '::', 2 );
+		$this->assertStringNotInLib( 'WikibaseClient' . '::', 1 );
 		$this->assertStringNotInLib( 'Wikibase\\Client\\', 2 );
 	}
 
@@ -76,7 +76,10 @@ class NoBadDependencyUsageTest extends \PHPUnit_Framework_TestCase {
 		 */
 		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
 			if ( $fileInfo->isFile() && substr( $fileInfo->getFilename(), -4 ) === '.php' ) {
-				if ( stripos( file_get_contents( $fileInfo->getPathname() ), $string ) !== false ) {
+				$text = file_get_contents( $fileInfo->getPathname() );
+				$text = preg_replace( '@/\*.*\*/@s', '', $text );
+
+				if ( stripos( $text, $string ) !== false ) {
 					$count++;
 				}
 			}
