@@ -6,6 +6,7 @@ use DatabaseUpdater;
 use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\CachingEntityRevisionLookup;
 
 /**
@@ -83,8 +84,8 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$wikiPageEntityLookup = new WikiPageEntityLookup( false );
-		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
+		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
+		$cachingEntityLookup = new CachingEntityRevisionLookup( $entityLookup, new \HashBagOStuff() );
 
 		$builder = new PropertyInfoTableBuilder( $table, $cachingEntityLookup );
 		$builder->setReporter( $reporter );
