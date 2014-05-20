@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Language;
 use MediaWikiSite;
 use Site;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DirectSqlStore;
 
 /**
@@ -25,7 +26,10 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$site->setGlobalId( 'dummy' );
 		$lang = Language::factory( 'en' );
 
-		$store = new DirectSqlStore( $lang, 'DirectStoreSqlTestDummyRepoId');
+		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
+		$entityFactory = WikibaseClient::getDefaultInstance()->getEntityFactory();
+
+		$store = new DirectSqlStore( $contentCodec, $entityFactory, $lang, 'DirectStoreSqlTestDummyRepoId');
 		$store->setSite( $site ); //TODO: inject via constructor once that is possible
 
 		return $store;

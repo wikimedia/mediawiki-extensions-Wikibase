@@ -3,22 +3,15 @@
 namespace Wikibase;
 
 use Content;
-use DatabaseBase;
 use DataUpdate;
 use IContextSource;
-use Message;
 use ParserOutput;
-use SiteSQLStore;
-use Status;
 use Title;
-use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\ItemSearchTextGenerator;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -97,17 +90,6 @@ class ItemContent extends EntityContent {
 	 */
 	public function getItem() {
 		return $this->item;
-	}
-
-	/**
-	 * Sets the Item that makes up this ItemContent.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Item $item
-	 */
-	public function setItem( Item $item ) {
-		$this->item = $item;
 	}
 
 	/**
