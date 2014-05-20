@@ -187,7 +187,7 @@ class WikibaseDataTypeBuilders {
 			true
 		);
 
-		return new DataType( $id, 'monolingual-text', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		return new DataType( $id, 'monolingualtext', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	/**
