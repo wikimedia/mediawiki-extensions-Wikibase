@@ -86,7 +86,7 @@ call_user_func( function() {
 	$wgValueParsers['time'] = 'Wikibase\Lib\Parsers\TimeParser';
 	$wgValueParsers['globecoordinate'] = 'ValueParsers\GlobeCoordinateParser';
 	$wgValueParsers['null'] = 'ValueParsers\NullParser';
-	$wgValueParsers['monolingual-text'] = 'Wikibase\Parsers\MonolingualTextParser';
+	$wgValueParsers['monolingualtext'] = 'Wikibase\Parsers\MonolingualTextParser';
 
 	// API module registration
 	$wgAPIModules['wbgetentities'] 						= 'Wikibase\Api\GetEntities';

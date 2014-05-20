@@ -30,7 +30,7 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 		$languageCode = $value->getLanguageCode();
 		$languageName = Utils::fetchLanguageName( $languageCode, $userLanguage );
 
-		$msg = wfMessage( 'wikibase-monolingual-text' )->params(
+		$msg = wfMessage( 'wikibase-monolingualtext' )->params(
 			wfEscapeWikiText( $text ),
 			wfEscapeWikiText( $languageCode ),
 			wfEscapeWikiText( $languageName ) );
