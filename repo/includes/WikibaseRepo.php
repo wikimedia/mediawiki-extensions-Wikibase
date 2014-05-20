@@ -40,7 +40,8 @@ use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
-use Wikibase\StoreFactory;
+use Wikibase\SqlStore;
+use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\LabelDescriptionDuplicateDetector;
@@ -124,6 +125,11 @@ class WikibaseRepo {
 	 * @var SiteStore
 	 */
 	private $siteStore;
+
+	/**
+	 * @var Store
+	 */
+	private $store;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -412,11 +418,14 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
-	 * @return \Wikibase\Store
+	 * @return Store
 	 */
 	public function getStore() {
-		//TODO: inject this, get rid of global store instance(s)
-		return StoreFactory::getStore();
+		if ( !$this->store ) {
+			$this->store = new SqlStore();
+		}
+
+		return $this->store;
 	}
 
 	/**
