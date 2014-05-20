@@ -5,6 +5,7 @@ namespace Wikibase;
 use DBQueryError;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Store\EntityContentDataCodec;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -24,11 +25,29 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	protected $idParser;
 
 	/**
-	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
-	 *
+	 * @var \Wikibase\Store\EntityContentDataCodec
 	 */
-	public function __construct( $wiki = false ) {
+	private $contentCodec;
+
+	/**
+	 * @var EntityFactory
+	 */
+	private $entityFactory;
+
+	/**
+	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityFactory $entityFactory
+	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
+	 */
+	public function __construct(
+		EntityContentDataCodec $contentCodec,
+		EntityFactory $entityFactory,
+		$wiki = false
+	) {
 		parent::__construct( $wiki );
+
+		$this->contentCodec = $contentCodec;
+		$this->entityFactory = $entityFactory;
 
 		// TODO: migrate table away from using a numeric field so we no longer need this!
 		$this->idParser = new BasicEntityIdParser();
@@ -335,9 +354,10 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @param String $entityType The entity type ID, determines what kind of object is constructed
 	 *        from the blob in the database.
 	 *
-	 * @return EntityRevision|null
+	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
+	 * with either $entityRev or $redirect or both being null (but not both being non-null).
 	 */
-	protected function loadEntity( $entityType, $row ) {
+	private function loadEntity( $entityType, $row ) {
 		wfProfileIn( __METHOD__ );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": calling getRevisionText() on rev " . $row->rev_id );
@@ -355,7 +375,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		}
 
 		$format = $row->rev_content_format;
-		$entity = EntityFactory::singleton()->newFromBlob( $entityType, $blob, $format );
+		$entity = $this->unserializeEntity( $entityType, $blob, $format );
 		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
@@ -364,4 +384,23 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		wfProfileOut( __METHOD__ );
 		return $entityRev;
 	}
+
+	/**
+	 * @see ContentHandler::unserializeContent
+	 *
+	 * @since 0.5
+	 *
+	 * @param $entityType
+	 * @param string $blob
+	 * @param null|string $format
+	 *
+	 * @return Entity|null
+	 */
+	private function unserializeEntity( $entityType, $blob, $format = null ) {
+		$data = $this->contentCodec->decodeBlob( $blob, $format );
+		$entity = $this->entityFactory->newFromArray( $entityType, $data );
+
+		return $entity;
+	}
+
 }

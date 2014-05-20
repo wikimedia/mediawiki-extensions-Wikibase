@@ -66,7 +66,7 @@ class DumpJson extends Maintenance {
 	}
 
 	public function initServices() {
-		$entityFactory = new EntityFactory(); // this should come from WikibaseRepo, really
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$serializerOptions = new SerializationOptions();
 
 		$serializerFactory = new SerializerFactory(
@@ -78,7 +78,7 @@ class DumpJson extends Maintenance {
 		$this->entitySerializer = new DispatchingEntitySerializer( $serializerFactory, $serializerOptions );
 
 		//TODO: allow injection for unit tests
-		$this->entityPerPage = new EntityPerPageTable();
+		$this->entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
 
 		// Use an uncached EntityRevisionLookup here to avoid memory leaks
 		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlStore;
 use Wikibase\Store;
 
@@ -21,7 +22,12 @@ use Wikibase\Store;
 class StoreTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = array( new SqlStore() );
+		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+
+		$instances = array(
+			new SqlStore( $contentCodec, $entityFactory )
+		);
 
 		return array( $instances );
 	}

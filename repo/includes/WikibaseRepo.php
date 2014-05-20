@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityFactory;
 use Wikibase\EntityLookup;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
@@ -38,10 +39,12 @@ use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Store\EntityContentDataCodec;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
-use Wikibase\StoreFactory;
+use Wikibase\SqlStore;
+use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\Utils;
@@ -124,6 +127,11 @@ class WikibaseRepo {
 	 * @var SiteStore
 	 */
 	private $siteStore;
+
+	/**
+	 * @var Store
+	 */
+	private $store;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -412,11 +420,17 @@ class WikibaseRepo {
 	/**
 	 * @since 0.4
 	 *
-	 * @return \Wikibase\Store
+	 * @return Store
 	 */
 	public function getStore() {
-		//TODO: inject this, get rid of global store instance(s)
-		return StoreFactory::getStore();
+		if ( !$this->store ) {
+			$this->store = new SqlStore(
+				$this->getEntityContentDataCodec(),
+				$this->getEntityFactory()
+			);
+		}
+
+		return $this->store;
 	}
 
 	/**
@@ -668,5 +682,26 @@ class WikibaseRepo {
 		wfRunHooks( 'WikibaseContentModelMapping', array( &$map ) );
 
 		return $map;
+	}
+
+	/**
+	 * @return EntityFactory
+	 */
+	public function getEntityFactory() {
+		$entityClasses = array(
+			Item::ENTITY_TYPE => '\Wikibase\Item',
+			Property::ENTITY_TYPE => '\Wikibase\Property',
+		);
+
+		//TODO: provide a hook or registry for adding more.
+
+		return new EntityFactory( $entityClasses );
+	}
+
+	/**
+	 * @return EntityContentDataCodec
+	 */
+	public function getEntityContentDataCodec() {
+		return new EntityContentDataCodec();
 	}
 }

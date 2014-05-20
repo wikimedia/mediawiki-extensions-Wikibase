@@ -3,9 +3,13 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\EntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\EntityContentDataCodec;
 use Wikibase\WikiPageEntityLookup;
 
 /**
@@ -69,7 +73,10 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 			}
 		}
 
-		return new WikiPageEntityLookup( false );
+		return new WikiPageEntityLookup(
+			$this->getEntityContentCodec(),
+			$this->getEntityFactory(),
+			false );
 	}
 
 	protected function resolveLogicalRevision( $revision ) {
@@ -80,4 +87,14 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 		return $revision;
 	}
 
+	private function getEntityContentCodec() {
+		return new EntityContentDataCodec();
+	}
+
+	private function getEntityFactory() {
+		return new EntityFactory( array(
+			Item::ENTITY_TYPE => '\Wikibase\Item',
+			Property::ENTITY_TYPE => '\Wikibase\Property',
+		) );
+	}
 }
