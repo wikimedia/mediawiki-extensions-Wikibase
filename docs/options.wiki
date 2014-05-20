@@ -29,7 +29,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
           );
 </poem>
 :'''Warning:''' do not change this if you already have Wikibase entities in your database, since they may become unreadable!
-;serializationFormat: the internal serialization format used to store entities in the database. Must be either <code>CONTENT_FORMAT_JSON</code> or <code>CONTENT_FORMAT_SERIALIZED</code>, default is <code>CONTENT_FORMAT_JSON</code>. '''Warning:''' do not change this if you already have Wikibase entities in your database, since they will become unreadable!
 ;useChangesTable: Whether to record changes in the database, so they can be pushed to clients. Boolean, defaults to <code>true</code>. May be set to false in situations where there are no clients to notify, to preserve space. '''Note''' that if this is true, the <code>pruneChanges.php</code> script should be run periodically to remove old changes from the database table.
 ;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
 ;changeHandlers: Array mapping change type IDs to handler classes. May be used by extensions to register additional change classes.
