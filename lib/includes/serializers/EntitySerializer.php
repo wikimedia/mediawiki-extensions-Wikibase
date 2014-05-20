@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Entity;
 use Wikibase\EntityFactory;
 
@@ -78,7 +80,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 	 *
 	 * @todo: make $entityFactory required
 	 */
-	public function __construct( ClaimSerializer $claimSerializer, SerializationOptions $options = null, EntityFactory $entityFactory = null ) {
+	public function __construct( ClaimSerializer $claimSerializer, SerializationOptions $options, EntityFactory $entityFactory ) {
 		if ( $options === null ) {
 			$options = new SerializationOptions();
 		}
@@ -100,7 +102,15 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 		parent::__construct( $options );
 
 		if ( $entityFactory === null ) {
-			$this->entityFactory = new EntityFactory();
+			// FIXME: This is bad. We need to require the EntityFactory to be provided (bug 66020).
+			// That requires refactoring of all calls to the constructor of SerializerFactory,
+			// which currently allows all parameters to be null.
+			$this->entityFactory = new EntityFactory(
+				array(
+					Item::ENTITY_TYPE => '\Wikibase\Item',
+					Property::ENTITY_TYPE => '\Wikibase\Property',
+				)
+			);
 		} else {
 			$this->entityFactory = $entityFactory;
 		}
