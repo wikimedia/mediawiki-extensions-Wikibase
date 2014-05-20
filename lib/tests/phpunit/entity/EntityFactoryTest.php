@@ -55,9 +55,6 @@ class EntityFactoryTest extends EntityTestCase {
 		return array(
 			array( Item::ENTITY_TYPE, '\Wikibase\Item' ),
 			array( Property::ENTITY_TYPE, '\Wikibase\Property' ),
-
-			// TODO
-			//array( Query::ENTITY_TYPE, '\Wikibase\Query' ),
 		);
 	}
 
@@ -111,46 +108,4 @@ class EntityFactoryTest extends EntityTestCase {
 		return $tests;
 	}
 
-	/**
-	 * @dataProvider provideNewFromBlob
-	 */
-	public function testNewFromBlob( $type, $blob, $format, $data, $class ) {
-		$entity = EntityFactory::singleton()->newFromBlob( $type, $blob, $format );
-
-		$this->assertInstanceOf( $class, $entity );
-		$this->assertEntityStructureEquals( $data, $entity );
-	}
-
-	/**
-	 * @param Entity|array $expected
-	 * @param Entity|array $actual
-	 * @param String|null  $message
-	 */
-	protected function assertEntityStructureEquals( $expected, $actual, $message = null ) {
-		if ( $expected instanceof Entity ) {
-			$expected = $expected->toArray();
-		}
-
-		if ( $actual instanceof Entity ) {
-			$actual = $actual->toArray();
-		}
-
-		$keys = array_unique( array_merge(
-			array_keys( $expected ),
-			array_keys( $actual ) ) );
-
-		foreach ( $keys as $k ) {
-			if ( empty( $expected[ $k ] ) ) {
-				if ( !empty( $actual[ $k ] ) ) {
-					$this->fail( "$k should be empty; $message" );
-				}
-			} else {
-				if ( empty( $actual[ $k ] ) ) {
-					$this->fail( "$k should not be empty; $message" );
-				}
-
-				$this->assertArrayEquals( $expected[ $k ], $actual[ $k ], false, true );
-			}
-		}
-	}
 }

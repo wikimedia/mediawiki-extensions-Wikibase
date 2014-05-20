@@ -6,6 +6,7 @@ use DatabaseUpdater;
 use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Store\EntityContentDataCodec;
 use Wikibase\store\CachingEntityRevisionLookup;
 
 /**
@@ -83,7 +84,9 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$wikiPageEntityLookup = new WikiPageEntityLookup( false );
+		$contentCodec = new EntityContentDataCodec();
+		$entityFactory = new EntityFactory( array( Property::ENTITY_TYPE => '\Wikibase\Property' ) );
+		$wikiPageEntityLookup = new WikiPageEntityLookup( $contentCodec, $entityFactory, false );
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 
 		$builder = new PropertyInfoTableBuilder( $table, $cachingEntityLookup );

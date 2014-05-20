@@ -95,17 +95,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Returns if the item has an ID set or not.
-	 *
-	 * @since 0.1
-	 *
-	 * @return bool
-	 */
-	public function isNew() {
-		return is_null( $this->getEntity()->getId() );
-	}
-
-	/**
 	 * Returns the entity contained by this entity content.
 	 * Deriving classes typically have a more specific get method as
 	 * for greater clarity and type hinting.
@@ -392,8 +381,11 @@ abstract class EntityContent extends AbstractContent {
 		$thisEntity = $this->getEntity();
 		$thatEntity = $that->getEntity();
 
-		if ( !$this->isNew() && !$that->isNew()
-			&& !$thisEntity->getId()->equals( $thatEntity->getId() )
+		$thisId = $thisEntity->getId();
+		$thatId = $thatEntity->getId();
+
+		if ( $thisId !== null && $thatId !== null
+			&& !$thisEntity->getId()->equals( $thatId )
 		) {
 			return false;
 		}
