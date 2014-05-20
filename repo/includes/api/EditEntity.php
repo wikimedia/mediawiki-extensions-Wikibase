@@ -13,7 +13,6 @@ use SiteList;
 use Title;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
@@ -128,7 +127,7 @@ class EditEntity extends ModifyEntity {
 		$entityFactory = EntityFactory::singleton();
 
 		try {
-			return $entityFactory->newFromArray( $type, array() );
+			return $entityFactory->newEmpty( $type );
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}

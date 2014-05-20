@@ -39,7 +39,10 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->clear();
 
 		//NOTE: we want to test integration of WikiPageEntityLookup and WikiPageEntityStore here!
-		$lookup = new WikiPageEntityLookup( false, CACHE_DB );
+		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
+		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+
+		$lookup = new WikiPageEntityLookup( $contentCodec, $entityFactory, false, CACHE_DB );
 
 		$typeMap = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
 
