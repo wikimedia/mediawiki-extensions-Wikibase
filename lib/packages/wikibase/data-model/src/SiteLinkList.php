@@ -74,6 +74,8 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 
 	/**
 	 * @param string $siteId
+	 *
+	 * @return SiteLink
 	 * @throws OutOfBoundsException
 	 * @throws InvalidArgumentException
 	 */
