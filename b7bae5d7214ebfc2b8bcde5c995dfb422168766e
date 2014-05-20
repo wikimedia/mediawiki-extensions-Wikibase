@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_bbc3b460",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-20T13:38:32Z",
+      "side": 1,
+      "message": "it looks like the message got renamed to wikibase-wikibaserepopage-invalid-id and then there is wikibase-wikibaserepopage-not-itemid which might be better.\n\nthough, suppose \"not a badge\" also works. curious why to use this message here?",
+      "revId": "b7bae5d7214ebfc2b8bcde5c995dfb422168766e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_5b99407f",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-20T13:38:32Z",
+      "side": 1,
+      "message": "the message is a bit confusing in this case, but suppose it\u0027s adequate.",
+      "revId": "b7bae5d7214ebfc2b8bcde5c995dfb422168766e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
