@@ -2,10 +2,17 @@
 
 namespace Wikibase\DataModel\Claim;
 
+use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Snak\Snaks;
 
 /**
+ * Ordered, non-unique, collection of Claim objects.
+ * Provides various filter operations though does not do any indexing by default.
+ *
  * @since 1.0
  *
  * @licence GNU GPL v2+
@@ -19,10 +26,19 @@ class ClaimList implements \IteratorAggregate {
 	private $claims;
 
 	/**
-	 * @param Claim[] $claims
+	 * @param Claim[]|Traversable $claims
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $claims = array() ) {
-		$this->claims = array_values( $claims );
+	public function __construct( $claims = array() ) {
+		if ( $claims instanceof Traversable ) {
+			$claims = iterator_to_array( $claims );
+		}
+
+		if ( !is_array( $claims ) ) {
+			throw new InvalidArgumentException( '$claims should be an array' );
+		}
+
+		$this->claims = $claims;
 	}
 
 	/**
@@ -46,6 +62,9 @@ class ClaimList implements \IteratorAggregate {
 	}
 
 	/**
+	 * Returns the property ids used by the claims.
+	 * The keys of the returned array hold the serializations of the property ids.
+	 *
 	 * @return PropertyId[]
 	 */
 	public function getPropertyIds() {
@@ -55,17 +74,31 @@ class ClaimList implements \IteratorAggregate {
 			$propertyIds[$claim->getPropertyId()->getSerialization()] = $claim->getPropertyId();
 		}
 
-		return array_values( $propertyIds );
+		return $propertyIds;
 	}
 
 	private function addClaims( Claims $claims ) {
 		foreach ( $claims as $claim ) {
-			$this->addClaim( $claim );
+			$this->addClaimObject( $claim );
 		}
 	}
 
-	private function addClaim( Claim $claim ) {
+	public function addClaimObject( Claim $claim ) {
 		$this->claims[] = $claim;
+	}
+
+	/**
+	 * @param Snak $mainSnak
+	 * @param Snak[]|Snaks|null $qualifiers
+	 * @param string|null $guid
+	 */
+	public function addClaim( Snak $mainSnak, $qualifiers = null, $guid = null ) {
+		$qualifiers = is_array( $qualifiers ) ? new SnakList( $qualifiers ) : $qualifiers;
+
+		$claim = new Claim( $mainSnak, $qualifiers );
+		$claim->setGuid( $guid );
+
+		$this->addClaimObject( $claim );
 	}
 
 	/**

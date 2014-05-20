@@ -3,21 +3,22 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpAdd;
-use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimList;
-use Wikibase\DataModel\Claim\ClaimListDiffer;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @covers Wikibase\DataModel\Claim\ClaimListDiffer
- * @uses Wikibase\DataModel\Claim\Claims
  * @uses Wikibase\DataModel\Claim\Claim
+ * @uses Wikibase\DataModel\Claim\ClaimList
+ * @uses Wikibase\DataModel\Snak\SnakList
+ * @uses Wikibase\DataModel\Snak\PropertyValueSnak
+ * @uses Wikibase\DataModel\Entity\PropertyId
+ * @uses DataValues\StringValue
+ * @uses InvalidArgumentException
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -50,12 +51,14 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function propertyIdArray() {
-		return array_map(
-			function( $number ) {
-				return PropertyId::newFromNumber( $number );
-			},
-			func_get_args()
-		);
+		$properties = array();
+
+		foreach ( func_get_args() as $number ) {
+			$p = PropertyId::newFromNumber( $number );
+			$properties[$p->getSerialization()] = $p;
+		}
+
+		return $properties;
 	}
 
 	private function getStubClaim( $propertyId, $guid, $rank = Claim::RANK_NORMAL ) {
@@ -102,15 +105,15 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		$this->assertEquals(
-			new ClaimList( array(
+			array(
 				$this->getStubClaim( 1, 'one', Claim::RANK_PREFERRED ),
 				$this->getStubClaim( 1, 'three', Claim::RANK_PREFERRED ),
 
 				$this->getStubClaim( 3, 'six', Claim::RANK_NORMAL ),
 
 				$this->getStubClaim( 4, 'eight', Claim::RANK_TRUTH ),
-			) ),
-			$list->getBestClaims()
+			),
+			$list->getBestClaims()->toArray()
 		);
 	}
 
@@ -124,21 +127,126 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		$this->assertEquals(
-			new ClaimList( array(
+			array(
 				$this->getClaimWithSnak( 1, 'foo' ),
 				$this->getClaimWithSnak( 2, 'foo' ),
 				$this->getClaimWithSnak( 2, 'bar' ),
 				$this->getClaimWithSnak( 1, 'bar' ),
-			) ),
-			$list->getWithUniqueMainSnaks()
+			),
+			array_values( $list->getWithUniqueMainSnaks()->toArray() )
 		);
 	}
 
 	private function getClaimWithSnak( $propertyId, $stringValue ) {
-		$snak = new PropertyValueSnak( $propertyId, new StringValue( $stringValue ) );
+		$snak = $this->newSnak( $propertyId, $stringValue );
 		$claim = new Claim( $snak );
 		$claim->setGuid( sha1( $snak->getHash() ) );
 		return $claim;
+	}
+
+	private function newSnak( $propertyId, $stringValue ) {
+		return new PropertyValueSnak( $propertyId, new StringValue( $stringValue ) );
+	}
+
+	public function testAddClaimWithOnlyMainSnak() {
+		$list = new ClaimList();
+
+		$list->addClaim( $this->newSnak( 42, 'foo' ) );
+
+		$this->assertEquals(
+			new ClaimList( array(
+				new Claim( $this->newSnak( 42, 'foo' ) )
+			) ),
+			$list
+		);
+	}
+
+	public function testAddClaimWithQualifiersAsSnakArray() {
+		$list = new ClaimList();
+
+		$list->addClaim(
+			$this->newSnak( 42, 'foo' ),
+			array(
+				$this->newSnak( 1, 'bar' )
+			)
+		);
+
+		$this->assertEquals(
+			new ClaimList( array(
+				new Claim(
+					$this->newSnak( 42, 'foo' ),
+					new SnakList( array(
+						$this->newSnak( 1, 'bar' )
+					) )
+				)
+			) ),
+			$list
+		);
+	}
+
+	public function testAddClaimWithQualifiersAsSnakList() {
+		$list = new ClaimList();
+		$snakList = new SnakList( array(
+			$this->newSnak( 1, 'bar' )
+		) );
+
+		$list->addClaim(
+			$this->newSnak( 42, 'foo' ),
+			$snakList
+		);
+
+		$this->assertEquals(
+			new ClaimList( array(
+				new Claim(
+					$this->newSnak( 42, 'foo' ),
+					$snakList
+				)
+			) ),
+			$list
+		);
+	}
+
+	public function testAddClaimWithGuid() {
+		$list = new ClaimList();
+
+		$list->addClaim(
+			$this->newSnak( 42, 'foo' ),
+			null,
+			'kittens'
+		);
+
+		$claim = new Claim(
+			$this->newSnak( 42, 'foo' ),
+			null
+		);
+
+		$claim->setGuid( 'kittens' );
+
+		$this->assertEquals(
+			new ClaimList( array( $claim ) ),
+			$list
+		);
+	}
+
+	public function testCanConstructWithClaimsObject() {
+		$claimArray = array(
+			$this->getClaimWithSnak( 1, 'foo' ),
+			$this->getClaimWithSnak( 2, 'bar' ),
+		);
+
+		$claimsObject = new Claims( $claimArray );
+
+		$list = new ClaimList( $claimsObject );
+
+		$this->assertEquals(
+			$claimArray,
+			array_values( $list->toArray() )
+		);
+	}
+
+	public function testGivenNonTraversable_constructorThrowsException() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new ClaimList( null );
 	}
 
 }
