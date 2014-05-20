@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\EntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -37,6 +38,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Settings;
@@ -423,7 +425,10 @@ class WikibaseRepo {
 	 */
 	public function getStore() {
 		if ( !$this->store ) {
-			$this->store = new SqlStore();
+			$this->store = new SqlStore(
+				$this->getEntityContentDataCodec(),
+				$this->getEntityFactory()
+			);
 		}
 
 		return $this->store;
@@ -685,5 +690,26 @@ class WikibaseRepo {
 		wfRunHooks( 'WikibaseContentModelMapping', array( &$map ) );
 
 		return $map;
+	}
+
+	/**
+	 * @return EntityFactory
+	 */
+	public function getEntityFactory() {
+		$entityClasses = array(
+			Item::ENTITY_TYPE => '\Wikibase\Item',
+			Property::ENTITY_TYPE => '\Wikibase\Property',
+		);
+
+		//TODO: provide a hook or registry for adding more.
+
+		return new EntityFactory( $entityClasses );
+	}
+
+	/**
+	 * @return EntityContentDataCodec
+	 */
+	public function getEntityContentDataCodec() {
+		return new EntityContentDataCodec();
 	}
 }

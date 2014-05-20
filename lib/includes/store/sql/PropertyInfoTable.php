@@ -10,6 +10,7 @@ use InvalidArgumentException;
 use ObservableMessageReporter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
@@ -87,8 +88,10 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$wikiPageEntityLookup = new WikiPageEntityLookup( false );
-		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new HashBagOStuff() );
+		$contentCodec = new EntityContentDataCodec();
+		$entityFactory = new EntityFactory( array( Property::ENTITY_TYPE => '\Wikibase\Property' ) );
+		$wikiPageEntityLookup = new WikiPageEntityLookup( $contentCodec, $entityFactory, false );
+		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 
 		$builder = new PropertyInfoTableBuilder( $table, $cachingEntityLookup );
 		$builder->setReporter( $reporter );

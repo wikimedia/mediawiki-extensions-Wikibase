@@ -127,7 +127,7 @@ class EditEntity extends ModifyEntity {
 		$entityFactory = EntityFactory::singleton();
 
 		try {
-			return $entityFactory->newFromArray( $type, array() );
+			return $entityFactory->newEmpty( $type );
 		} catch ( InvalidArgumentException $e ) {
 			$this->dieUsage( "No such entity type: '$type'", 'no-such-entity-type' );
 		}
