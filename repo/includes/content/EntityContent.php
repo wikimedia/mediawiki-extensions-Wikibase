@@ -11,7 +11,6 @@ use RequestContext;
 use Status;
 use Title;
 use User;
-use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
@@ -93,17 +92,6 @@ abstract class EntityContent extends AbstractContent {
 
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		return $lookup->getTitleForId( $id );
-	}
-
-	/**
-	 * Returns if the item has an ID set or not.
-	 *
-	 * @since 0.1
-	 *
-	 * @return bool
-	 */
-	public function isNew() {
-		return is_null( $this->getEntity()->getId() );
 	}
 
 	/**
@@ -393,8 +381,11 @@ abstract class EntityContent extends AbstractContent {
 		$thisEntity = $this->getEntity();
 		$thatEntity = $that->getEntity();
 
-		if ( !$this->isNew() && !$that->isNew()
-			&& !$thisEntity->getId()->equals( $thatEntity->getId() )
+		$thisId = $thisEntity->getId();
+		$thatId = $thatEntity->getId();
+
+		if ( $thisId !== null && $thatId !== null
+			&& !$thisEntity->getId()->equals( $thatId )
 		) {
 			return false;
 		}

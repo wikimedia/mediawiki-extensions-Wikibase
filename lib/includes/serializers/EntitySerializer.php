@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Entity;
 use Wikibase\EntityFactory;
 
@@ -100,7 +102,12 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 		parent::__construct( $options );
 
 		if ( $entityFactory === null ) {
-			$this->entityFactory = new EntityFactory();
+			$this->entityFactory = new EntityFactory(
+				array(
+					Item::ENTITY_TYPE => '\Wikibase\Item',
+					Property::ENTITY_TYPE => '\Wikibase\Property',
+				)
+			);
 		} else {
 			$this->entityFactory = $entityFactory;
 		}
