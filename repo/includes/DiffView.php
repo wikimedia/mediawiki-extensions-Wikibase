@@ -2,8 +2,12 @@
 
 namespace Wikibase;
 
-use Diff\Diff;
-use Diff\DiffOp;
+use ContextSource;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use Html;
 use IContextSource;
 use MWException;
@@ -19,32 +23,35 @@ use SiteStore;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
+ * @author Thiemo Mättig
  */
-class DiffView extends \ContextSource {
+class DiffView extends ContextSource {
 
-	/** @var SiteStore */
-	public $siteStore;
+	/**
+	 * @var SiteStore
+	 */
+	private $siteStore;
 
 	/**
 	 * @since 0.1
 	 *
-	 * @var array
+	 * @var string[]
 	 */
-	protected $path;
+	private $path;
 
 	/**
 	 * @since 0.1
 	 *
 	 * @var Diff
 	 */
-	protected $diff;
+	private $diff;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $path
+	 * @param string[] $path
 	 * @param Diff $diff
 	 * @param SiteStore $siteStore
 	 * @param IContextSource|null $contextSource
@@ -76,13 +83,13 @@ class DiffView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $path
+	 * @param string[] $path
 	 * @param DiffOp $op
 	 *
 	 * @return string
 	 * @throws MWException
 	 */
-	protected function generateOpHtml( array $path, DiffOp $op ) {
+	private function generateOpHtml( array $path, DiffOp $op ) {
 		if ( $op->isAtomic() ) {
 			$html = $this->generateDiffHeaderHtml( implode( ' / ', $path ) );
 
@@ -90,10 +97,13 @@ class DiffView extends \ContextSource {
 
 			//FIXME: complex objects as values?
 			if ( $op->getType() === 'add' ) {
+				/** @var DiffOpAdd $op */
 				$html .= $this->generateChangeOpHtml( null, $op->getNewValue(), $path );
 			} elseif ( $op->getType() === 'remove' ) {
+				/** @var DiffOpRemove $op */
 				$html .= $this->generateChangeOpHtml( $op->getOldValue(), null, $path );
 			} elseif ( $op->getType() === 'change' ) {
+				/** @var DiffOpChange $op */
 				$html .= $this->generateChangeOpHtml( $op->getOldValue(), $op->getNewValue(), $path );
 			} else {
 				throw new MWException( 'Invalid diffOp type' );
@@ -118,21 +128,21 @@ class DiffView extends \ContextSource {
 	 *
 	 * @param string|null $oldValue
 	 * @param string|null $newValue
-	 * @param array $path
+	 * @param string[] $path
 	 *
 	 * @return string
 	 */
-	protected function generateChangeOpHtml( $oldValue, $newValue, $path ) {
+	private function generateChangeOpHtml( $oldValue, $newValue, array $path ) {
 		//TODO: use WordLevelDiff!
 		$html = Html::openElement( 'tr' );
-		if( $oldValue !== null ){
+		if ( $oldValue !== null ) {
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 				Html::rawElement( 'div', array(), $this->getDeletedLine( $oldValue, $path ) ) );
 		}
-		if( $newValue !== null ){
-			if( $oldValue === null ){
-				$html .= Html::rawElement( 'td', array( 'colspan'=>'2' ), '&nbsp;' );
+		if ( $newValue !== null ) {
+			if ( $oldValue === null ) {
+				$html .= Html::rawElement( 'td', array( 'colspan' => '2' ), '&nbsp;' );
 			}
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
@@ -145,15 +155,13 @@ class DiffView extends \ContextSource {
 
 	/**
 	 * @param string $value
-	 * @param array $path
+	 * @param string[] $path
 	 * @return string
 	 */
-	protected function getDeletedLine( $value, $path ) {
-		if( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
-			$url = $this->getPageLink( $path[1], $value );
-
+	private function getDeletedLine( $value, array $path ) {
+		if ( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
 			return Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-				Html::element( 'a', array( 'href' => $url ), $value )
+				$this->getSiteLinkElement( $path[1], $value )
 			);
 		} else {
 			return Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ), $value );
@@ -162,15 +170,13 @@ class DiffView extends \ContextSource {
 
 	/**
 	 * @param string $value
-	 * @param array $path
+	 * @param string[] $path
 	 * @return string
 	 */
-	protected function getAddedLine( $value, $path ) {
-		if( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ){
-			$url = $this->getPageLink( $path[1], $value );
-
+	private function getAddedLine( $value, array $path ) {
+		if ( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
 			return Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-				Html::element( 'a', array( 'href' => $url ), $value )
+				$this->getSiteLinkElement( $path[1], $value )
 			);
 		} else {
 			return Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ), $value );
@@ -183,11 +189,14 @@ class DiffView extends \ContextSource {
 	 *
 	 * @return string
 	 */
-	protected function getPageLink( $siteId, $pageName ) {
+	private function getSiteLinkElement( $siteId, $pageName ) {
 		$site = $this->siteStore->getSite( $siteId );
-        $url = $site->getPageUrl( $pageName );
 
-		return $url;
+		return Html::element( 'a', array(
+			'href' => $site->getPageUrl( $pageName ),
+			'hreflang' => $site->getLanguageCode(),
+			'dir' => 'auto',
+		), $pageName );
 	}
 
 	/**
@@ -199,12 +208,13 @@ class DiffView extends \ContextSource {
 	 *
 	 * @return string
 	 */
-	protected function generateDiffHeaderHtml( $name ) {
+	private function generateDiffHeaderHtml( $name ) {
 		$html = Html::openElement( 'tr' );
-		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
-		$html .= Html::element( 'td', array( 'colspan'=>'2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::element( 'td', array( 'colspan' => '2', 'class' => 'diff-lineno' ), $name );
+		$html .= Html::element( 'td', array( 'colspan' => '2', 'class' => 'diff-lineno' ), $name );
 		$html .= Html::closeElement( 'tr' );
 
 		return $html;
 	}
+
 }
