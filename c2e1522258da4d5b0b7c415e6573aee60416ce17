@@ -33,6 +33,23 @@
       "revId": "c2e1522258da4d5b0b7c415e6573aee60416ce17",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_1624bf06",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-20T16:44:48Z",
+      "side": 1,
+      "message": "EntityContentDataCode",
+      "revId": "c2e1522258da4d5b0b7c415e6573aee60416ce17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
