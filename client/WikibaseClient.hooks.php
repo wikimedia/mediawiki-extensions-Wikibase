@@ -19,10 +19,10 @@ use RecentChange;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
-use SpecialWatchlist;
-use SplFileInfo;
 use Skin;
 use SpecialRecentChanges;
+use SpecialWatchlist;
+use SplFileInfo;
 use StripState;
 use Title;
 use UnexpectedValueException;
@@ -30,9 +30,9 @@ use User;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -102,9 +102,8 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$store = WikibaseClient::getDefaultInstance()->getStore();
-		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
-		$reportMessage( "Deleting data from the " . $stores[get_class( $store )] . " store..." );
+		$reportMessage( "Deleting data from the " . get_class( $store ) . " store..." );
 
 		$store->clear();
 
@@ -137,8 +136,7 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$store = WikibaseClient::getDefaultInstance()->getStore();
-		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
-		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )]
+		$reportMessage( "Rebuilding all data in the " . get_class( $store )
 			. " store on the client..." );
 		$store->rebuild();
 		$changes = ChangesTable::singleton();
