@@ -52,7 +52,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item ids pointing to empty strings (reserved for future use), e.g. <code>array( 'Q123' => '' )</code>.
 
 === Expert Settings ===
-;defaultStore: The storage engine to use for storing entities. Default: 'sqlstore'. The is currently no alternative.
 ;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities. '''Note:''' this may change in the future to allow separate blacklists for different kinds of entities.
 ;withoutTermSearchKey: Allow the terms table to work without the term_search_key field, for sites that can not easily roll out schema changes on large tables. This means that all searches will use exact matching (depending on the database's collation). Default: <code>false</code>. This is only needed for compatibility with old database layouts.
 ;withoutTermWeight: Allow the terms table to work without the term_weight field, for sites that can not easily roll out schema changes on large tables. This means that all searches will return the results in an undefined order (depending on how the database works). Default: <code>false</code>. This is only needed for compatibility with old database layouts.
@@ -100,7 +99,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 === Expert Settings ===
 ;injectRecentChanges: whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
 ;showExternalRecentChanges: whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki. In contrast to <code>injectRecentChanges</code>, this setting just removes the changes from the user interface. The default is <code>false</code>. This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
-;defaultClientStore: The storage engine to use for storing information on the client side. Default: <code>null</code>. Possible values:
 :;<code>'DirectSqlStore'</code>: Access the repo's database directly to fetch entity data etc.
 :;<code>'CachingSqlStore'</code>: No direct access to the repo's database. Use cache information received from change notifications. '''Warning:''' dies is currently dysfunctional.
 :;<code>null</code>: Automatic, use <code>'DirectSqlStore'</code> if <code>repoDatabase</code> is set, <code>'CachingSqlStore'</code> if not.

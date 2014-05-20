@@ -8,6 +8,7 @@ use Status;
 use Title;
 use User;
 use Revision;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -76,7 +77,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return EntityContent[]
 	 */
 	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
-		$entityIds = StoreFactory::getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
+		$entityIds = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
 		$entities = array();
 
 		foreach ( $entityIds as $entityId ) {
