@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_c0343d49",
+        "filename": "lib/includes/parsers/MonolingualTextParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-05-20T11:36:55Z",
+      "side": 1,
+      "message": "FORMAT_NAME is not needed without exceptions using it. Also, I would prefer a dash since the DataValue\u0027s type is written with a dash.",
+      "revId": "efd275d86f622b1c6edeaee0845801901d00f165",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_40f14d91",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-05-20T11:36:55Z",
+      "side": 1,
+      "message": "I can\u0027t believe this was merged. Do you do any manual verification at all?",
+      "revId": "efd275d86f622b1c6edeaee0845801901d00f165",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
