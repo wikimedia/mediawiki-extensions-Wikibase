@@ -16,6 +16,40 @@
       "revId": "7299c20c81e1e81853e1c6ae8f3e56da4a74d44b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_16ff1fa9",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-20T16:00:13Z",
+      "side": 1,
+      "message": "PropertyContent only?",
+      "revId": "7299c20c81e1e81853e1c6ae8f3e56da4a74d44b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_d6288734",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-20T16:00:13Z",
+      "side": 1,
+      "message": "Entity? not EntityContent?",
+      "revId": "7299c20c81e1e81853e1c6ae8f3e56da4a74d44b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
