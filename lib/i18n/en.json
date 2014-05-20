@@ -102,5 +102,5 @@
     "wikibase-time-precision-BCE-millennium": "$1. millennium BCE",
     "wikibase-time-precision-BCE-century": "$1. century BCE",
     "wikibase-time-precision-BCE-10annum": "$1s BCE",
-    "wikibase-monolingual-text": "<span lang=\"$2\" class=\"wb-monolingual-text-value\">$1</span> <span class=\"wb-monolingual-text-language-name\">($3)</span>"
+    "wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\">($3)</span>"
 }

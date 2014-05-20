@@ -82,8 +82,8 @@ class WikibaseDataTypeBuilders {
 		);
 
 		$experimental = array(
-			'monolingual-text' => array( $this, 'buildMonolingualTextType' ),
-			// 'multilingual-text' => array( $this, 'buildMultilingualTextType' ),
+			'monolingualtext' => array( $this, 'buildMonolingualTextType' ),
+			// 'multilingualtext' => array( $this, 'buildMultilingualTextType' ),
 		);
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
@@ -164,7 +164,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'monolingual-text'
+	 * @param string $id Data type ID, e.g. 'monolingualtext'
 	 *
 	 * @return DataType
 	 */
@@ -187,7 +187,7 @@ class WikibaseDataTypeBuilders {
 			true
 		);
 
-		return new DataType( $id, 'monolingual-text', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
+		return new DataType( $id, 'monolingualtext', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
 
 	/**
