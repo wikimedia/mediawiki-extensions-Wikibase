@@ -93,17 +93,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Sets the Item that makes up this ItemContent.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Item $item
-	 */
-	public function setItem( Item $item ) {
-		$this->item = $item;
-	}
-
-	/**
 	 * Returns a new empty ItemContent.
 	 *
 	 * @since 0.1
