@@ -45,7 +45,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
-	global $wgWBClientStores, $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
+	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 
 
 	$wgExtensionCredits['wikibase'][] = array(
@@ -105,9 +105,6 @@ call_user_func( function() {
 
 	// Resource loader modules
 	$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
-
-	$wgWBClientStores = array();
-	$wgWBClientStores['DirectSqlStore'] = 'Wikibase\DirectSqlStore';
 
 	$wgWBClientSettings = array_merge(
 		require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),
