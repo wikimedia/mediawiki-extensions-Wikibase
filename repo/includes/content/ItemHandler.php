@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
-use Title;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
+use InvalidArgumentException;
+use Wikibase\Store\EntityContentDataCodec;
+use Wikibase\Validators\EntityValidator;
 
 /**
  * Content handler for Wikibase items.
@@ -28,10 +28,11 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @param PreSaveValidator[] $preSaveValidators
+	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityValidator[] $preSaveValidators
 	 */
-	public function __construct( $preSaveValidators ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $preSaveValidators );
+	public function __construct( EntityContentDataCodec $contentCodec, $preSaveValidators ) {
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $contentCodec, $preSaveValidators );
 	}
 
 	/**
@@ -44,17 +45,6 @@ class ItemHandler extends EntityHandler {
 			'edit' => '\Wikibase\EditItemAction',
 			'submit' => '\Wikibase\SubmitItemAction',
 		);
-	}
-
-	/**
-	 * @param string $blob
-	 * @param null|string $format
-	 *
-	 * @return ItemContent
-	 */
-	public function unserializeContent( $blob, $format = null ) {
-		$entity = EntityFactory::singleton()->newFromBlob( Item::ENTITY_TYPE, $blob, $format );
-		return ItemContent::newFromItem( $entity );
 	}
 
 	/**
