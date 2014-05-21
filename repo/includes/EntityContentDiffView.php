@@ -29,7 +29,7 @@ use WikiPage;
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityContentDiffView extends DifferenceEngine {
+class EntityContentDiffView extends DifferenceEngine {
 
 	/**
 	 * @var EntityDiffVisualizer

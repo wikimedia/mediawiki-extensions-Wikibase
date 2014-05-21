@@ -58,17 +58,6 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @see ContentHandler::getDiffEngineClass
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	protected function getDiffEngineClass() {
-		return '\Wikibase\ItemContentDiffView';
-	}
-
-	/**
 	 * @see EntityHandler::getSpecialPageForCreation
 	 * @since 0.2
 	 *

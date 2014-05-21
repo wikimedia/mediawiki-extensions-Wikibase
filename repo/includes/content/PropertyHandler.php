@@ -24,17 +24,6 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
-	 * @see ContentHandler::getDiffEngineClass
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	protected function getDiffEngineClass() {
-		return '\Wikibase\ItemContentDiffView';
-	}
-
-	/**
 	 * @param PreSaveValidator[] $preSaveValidators
 	 */
 	public function __construct( $preSaveValidators ) {

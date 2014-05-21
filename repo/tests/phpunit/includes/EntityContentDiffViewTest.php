@@ -3,12 +3,12 @@
 namespace Wikibase\Test;
 
 use RequestContext;
-use Wikibase\ItemContentDiffView;
+use Wikibase\EntityContentDiffView;
 use Wikibase\Item;
 use Wikibase\ItemContent;
 
 /**
- * @covers Wikibase\ItemContentDiffView
+ * @covers Wikibase\EntityContentDiffView
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -16,12 +16,12 @@ use Wikibase\ItemContent;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemDiffViewTest extends \MediaWikiTestCase {
+class EntityContentDiffViewTest extends \MediaWikiTestCase {
 
 	//@todo: make this a baseclass to use with all types of entities.
 
 	public function testConstructor() {
-		new ItemContentDiffView( RequestContext::getMain() );
+		new EntityContentDiffView( RequestContext::getMain() );
 		$this->assertTrue( true );
 	}
 
@@ -47,7 +47,7 @@ class ItemDiffViewTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGenerateContentDiffBody( Item $item0, Item $item1 ) {
-		$diffView = new ItemContentDiffView( RequestContext::getMain() );
+		$diffView = new EntityContentDiffView( RequestContext::getMain() );
 		$this->assertInternalType(
 			'string',
 			$diffView->generateContentDiffBody(

@@ -57,6 +57,17 @@ abstract class EntityHandler extends ContentHandler {
 	abstract protected function getContentClass();
 
 	/**
+	 * @see ContentHandler::getDiffEngineClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	protected function getDiffEngineClass() {
+		return '\Wikibase\EntityContentDiffView';
+	}
+
+	/**
 	 * Returns a set of validators for enforcing hard constraints on the content
 	 * before saving. For soft constraints, see the TermValidatorFactory.
 	 *
