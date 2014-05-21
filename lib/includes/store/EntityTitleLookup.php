@@ -13,6 +13,7 @@ use Title;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 interface EntityTitleLookup {
 
@@ -32,6 +33,16 @@ interface EntityTitleLookup {
 	 * @return Title|null
 	 */
 	public function getTitleForId( EntityId $id );
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param Title $title
+	 *
+	 * @throws InvalidArgumentException
+	 * @return EntityId
+	 */
+	public function getIdForTitle( Title $title );
 
 	/**
 	 * Determines what namespace is suitable for the given type of entities.
