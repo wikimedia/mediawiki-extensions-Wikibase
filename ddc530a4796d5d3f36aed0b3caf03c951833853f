@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_687b07ec",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-21T11:43:16Z",
+      "side": 1,
+      "message": "This will actually kill the servers. SiteSQLStore::newInstance()-\u003egetSites() will cause the full site list to be loaded from memcached and deserialized. Doing that once for every language link on every page view is going to cause a LOT of load. Use $wikibaseClient-\u003egetSiteStore()-\u003egetSites() instead, so we are hitting the same site store instance always, and use the cached list of sites.",
+      "revId": "ddc530a4796d5d3f36aed0b3caf03c951833853f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
