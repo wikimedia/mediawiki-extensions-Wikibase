@@ -115,7 +115,7 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 
 	private function ignoreErrors() {
 		return $this->options->getOption( self::OPT_ON_ERROR )
-		=== self::ON_ERROR_IGNORE;
+			=== self::ON_ERROR_IGNORE;
 	}
 
 	/**
@@ -135,91 +135,100 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 			throw new InvalidArgumentException( "Not a PropertyValueSnak: " . get_class( $snak ) );
 		}
 
+		$propertyType = null;
 		$value = $snak->getDataValue();
 
-		list( $propertyType, $warning, $value ) = $this->getEffectivePropertyDataType( $snak, $value );
+		try {
+			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $propertyType );
 
-		// Format the actual value, unless getEffectivePropertyDataType force the value to be null.
-		if ( $value ) {
-			$text = $this->formatValue( $value, $propertyType );
-		} else {
-			$text = '';
-		}
-
-		if ( $warning && !$this->ignoreErrors() ) {
-			if ( $value ) {
-				$text .= ' ';
+			$warning = $this->checkForWarning( $value, $expectedDataValueType );
+		} catch ( PropertyNotFoundException $ex ) {
+			if ( $this->failOnErrors() ) {
+				throw $ex;
 			}
 
-			$text .= $this->formatWarning( $warning );
+			$warning = new Message(
+				'wikibase-snakformatter-property-not-found',
+				array( $snak->getPropertyId()->getSerialization() )
+			);
+		}
+
+		if ( isset( $warning ) && !$this->ignoreErrors() ) {
+			$text = $this->formatValueWithWarning( $value, $warning );
+		} else {
+			$text = $this->formatValue( $value, $propertyType );
 		}
 
 		return $text;
 	}
 
 	/**
-	 * Determines the effective data type. The effective data type will be null
-	 * if the property could not be found, or the value's actual type mismatches
-	 * the data values type. Any warning is included in the return value.
-	 * This method may also override the value object to actually format -
-	 * in particular, it may set $value to null, to suppress rendering.
-	 *
-	 * @param PropertyValueSnak $snak
 	 * @param DataValue $value
+	 * @param Message $warning
+	 *
+	 * @return string
+	 */
+	private function formatValueWithWarning( DataValue $value, Message $warning ) {
+		$text = $this->formatValue( $value );
+
+		if ( $text !== '' ) {
+			$text .= ' ';
+		}
+
+		$text .= $this->formatWarning( $warning );
+
+		return $text;
+	}
+
+	/**
+	 * @param DataValue $value
+	 *
+	 * @return boolean
+	 */
+	private function isUnDeserializableValue( DataValue $value ) {
+		return $value->getType() === UnDeserializableValue::getType();
+	}
+
+	/**
+	 * @param DataValue $value
+	 * @param string $expectedDataValueType
 	 *
 	 * @throws PropertyNotFoundException
 	 * @throws MismatchingDataValueTypeException
-	 * @return array list( $propertyType, $warning, $value )
+	 * @return Message|null
 	 */
-	private function getEffectivePropertyDataType( PropertyValueSnak $snak, DataValue $value ) {
+	private function checkForWarning( DataValue $value, $expectedDataValueType ) {
 		$warning = null;
-		$expectedDataValueType = null;
 
-		// Find out the expected type for the value
-		try {
-			/* @var PropertyValueSnak $snak */
-			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $propertyType );
-		} catch ( PropertyNotFoundException $ex ) {
+		if ( $this->isUnDeserializableValue( $value ) ) {
 			if ( $this->failOnErrors() ) {
-				throw $ex;
+				throw new MismatchingDataValueTypeException(
+					$expectedDataValueType,
+					$value->getType(),
+					'Encountered undeserializable value'
+				);
 			}
 
-			$warning = wfMessage( 'wikibase-snakformatter-property-not-found',
-				$snak->getPropertyId()->getSerialization() );
+			$warning = new Message( 'wikibase-undeserializable-value' );
+		} elseif ( $expectedDataValueType !== $value->getType() ) {
+			if ( $this->failOnErrors() ) {
+				throw new MismatchingDataValueTypeException(
+					$expectedDataValueType,
+					$value->getType(),
+					'The DataValue\'s type mismatches the property\'s DataType.'
+				);
+			}
 
-			$propertyType = null;
+			$warning = new Message(
+				'wikibase-snakformatter-valuetype-mismatch',
+				array( $value->getType(), $expectedDataValueType )
+			);
 		}
 
-		// Check that the value actually has the expected type.
-		if ( $expectedDataValueType !== null && $expectedDataValueType !== $value->getType() ) {
-			if ( $this->failOnErrors() ) {
-				throw new MismatchingDataValueTypeException( $expectedDataValueType, $value->getType() );
-			}
-
-			if ( $value->getType() === UnDeserializableValue::getType() ) {
-				// Special case: mismatch just because the value could not be unserialized.
-				// Don't try to actually render the UnDeserializable value.
-				// This bypasses UnDeserializableValueFormatter.
-				$value = null;
-
-				$warning = new Message( 'wikibase-undeserializable-value' );
-			} else {
-				if ( $this->failOnErrors() ) {
-					throw new MismatchingDataValueTypeException( $expectedDataValueType, $value->getType() );
-				}
-
-				$warning = new Message( 'wikibase-snakformatter-valuetype-mismatch' );
-				$warning->params( $value->getType(), $expectedDataValueType );
-			}
-
-			// Don't use property data type based formatting, since our value
-			// has a type not compatible to that data type.
-			$propertyType = null;
-		}
-
-		return array( $propertyType, $warning, $value );
+		return $warning;
 	}
+
 
 	/**
 	 * @param Message $warning
@@ -271,13 +280,19 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 * @see TypedValueFormatter::formatValue.
 	 *
 	 * @param DataValue $value
-	 * @param string    $dataTypeId
+	 * @param string $dataTypeId
 	 *
 	 * @throws FormattingException
 	 * @return string
 	 */
 	public function formatValue( DataValue $value, $dataTypeId = null ) {
-		return $this->valueFormatter->formatValue( $value, $dataTypeId );
+		if ( !$this->isUnDeserializableValue( $value ) ) {
+			$text = $this->valueFormatter->formatValue( $value, $dataTypeId );
+		} else {
+			$text = '';
+		}
+
+		return $text;
 	}
 
 	/**
