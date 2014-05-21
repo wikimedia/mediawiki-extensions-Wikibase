@@ -74,30 +74,15 @@ return call_user_func( function() {
 		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
 			'class' => 'DataTypes\DataTypesModule',
 			'datatypefactory' => function() {
-				// TODO: extreme uglynes here! Get rid of this method!
+				// TODO: relative uglynes here! Get rid of this method!
 				if ( defined( 'WB_VERSION' ) ) { // repo mode
-					$repo = WikibaseRepo::getDefaultInstance();
-					$entityIdParser = $repo->getEntityIdParser();
-					$entityLookup = $repo->getEntityLookup();
+					$wikibase = WikibaseRepo::getDefaultInstance();
 				} elseif ( defined( 'WBC_VERSION' ) ) { // client mode
-					$client = WikibaseClient::getDefaultInstance();
-					$entityIdParser = $client->getEntityIdParser();
-					$entityLookup = $client->getStore()->getEntityLookup();
+					$wikibase = WikibaseClient::getDefaultInstance();
 				} else {
 					throw new \RuntimeException( "Neither repo nor client found!" );
 				}
-
-				$settings = Settings::singleton();
-
-				$urlSchemes = $settings->getSetting( 'urlSchemes' );
-				$builders = new WikibaseDataTypeBuilders( $entityLookup, $entityIdParser, $urlSchemes );
-
-				$typeBuilderSpecs = array_intersect_key(
-					$builders->getDataTypeBuilders(),
-					array_flip( $settings->getSetting( 'dataTypes' ) )
-				);
-
-				return new DataTypeFactory( $typeBuilderSpecs );
+				return $wikibase->getDataTypeFactory();
 			},
 			'datatypesconfigvarname' => 'wbDataTypes',
 		),
