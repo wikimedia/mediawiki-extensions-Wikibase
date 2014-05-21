@@ -80,6 +80,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.MonolingualTextParser' => $moduleTemplate + array(
+			'scripts' => array(
+				'MonolingualTextParser.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.ApiBasedValueParser',
+			),
+		),
+
 		'wikibase.parsers' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.parsers.js',
@@ -93,6 +103,7 @@ return call_user_func( function() {
 				'wikibase.GlobeCoordinateParser',
 				'wikibase.QuantityParser',
 				'wikibase.TimeParser',
+				'wikibase.MonolingualTextParser',
 			),
 		),
 
