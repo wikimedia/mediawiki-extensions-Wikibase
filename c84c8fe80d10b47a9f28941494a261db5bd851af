@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b423e0ff",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "The difference between these two languageCodes is vague. A short explanation would be really helpful.",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_3a1c596a",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "It\u0027s possible to get this from the FormatterOptions using\n\n$this-\u003euserLangCode \u003d $linkFormatter-\u003egetOption( ValueFormatter::OPT_LANG );\n\nThis way you can save this somewhat confusing duplicate language parameter.",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_54c80c25",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "This is kept from the old code and currently not true any more, see below.",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_148cd4fe",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "The old check also compared $userLabel !\u003d\u003d $searchLabel. This is removed as far as I can tell. I would like it more if we could keep that. Yes, it\u0027s a bit of \"magic\" but it\u0027s useful.",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_9706a622",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "Property is missing in the header of the class.",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_5a003504",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "This is an odd comparison, but well, not part of this patch.",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_da0b2525",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "I think we called this $numericId in most other places, but well, not important here.",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b709a236",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:49:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a \u003e\u003d ?",
+      "revId": "c84c8fe80d10b47a9f28941494a261db5bd851af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
