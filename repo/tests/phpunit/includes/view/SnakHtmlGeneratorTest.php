@@ -30,7 +30,8 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$entityTitleLookup,
 		$entityInfo,
 		$snak,
-		$patterns
+		$patterns,
+		$notPatterns
 	) {
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
@@ -41,6 +42,10 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		foreach( $patterns as $message => $pattern ) {
 			$this->assertRegExp( $pattern, $html, $message );
+		}
+
+		foreach( $notPatterns as $message => $pattern ) {
+			$this->assertNotRegExp( $pattern, $html, $message );
 		}
 	}
 
@@ -59,6 +64,9 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'snak variation css' => '/wb-snakview-variation-somevalue/',
 				'formatted snak' => '/a snak!/'
+			),
+			array(
+				'no value view div' => '/valueview/'
 			)
 		);
 
@@ -70,6 +78,9 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'snak variation css' => '/wb-snakview-variation-somevalue/',
 				'formatted snak' => '/a snak!/s'
+			),
+			array(
+				'no value view div' => '/valueview/'
 			)
 		);
 
@@ -80,8 +91,10 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			new PropertyValueSnak( 50, new StringValue( 'chocolate!' ) ),
 			array(
 				'snak variation css' => '/wb-snakview-variation-value/',
-				'formatted snak' => '/a snak!/s'
-			)
+				'formatted snak' => '/a snak!/s',
+				'value view div' => '/valueview/'
+			),
+			array()
 		);
 
 		return $testCases;

@@ -59,12 +59,7 @@ class SnakHtmlGenerator {
 	public function getSnakHtml( Snak $snak, array $entityInfo, $showPropertyLink = false ) {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
-
-		$formattedValue = $this->getFormattedSnakValue( $snak );
-
-		if ( $formattedValue === '' ) {
-			$formattedValue = '&nbsp;';
-		}
+		$valueView = $this->getValueView( $snak );
 
 		$propertyLink = $showPropertyLink ?
 			$this->makePropertyLink( $snak, $entityInfo, $showPropertyLink ) : '';
@@ -73,7 +68,7 @@ class SnakHtmlGenerator {
 			// Display property link only once for snaks featuring the same property:
 			$propertyLink,
 			$snakViewCssClass,
-			$formattedValue
+			$valueView
 		);
 
 		return $html;
@@ -110,6 +105,25 @@ class SnakHtmlGenerator {
 	 */
 	private function getSnakViewVariation( Snak $snak ) {
 		return $snak->getType() . 'snak';
+	}
+
+	/**
+	 * @param Snak $snak
+	 *
+	 * @return string
+	 */
+	private function getValueView( Snak $snak ) {
+		$formattedValue = $this->getFormattedSnakValue( $snak );
+
+		if ( $formattedValue === '' ) {
+			$formattedValue = '&nbsp;';
+		}
+
+		if ( $snak->getType() === 'value' ) {
+			return wfTemplate( 'wb-valueview', $formattedValue );
+		}
+
+		return $formattedValue;
 	}
 
 	/**
