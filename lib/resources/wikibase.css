@@ -517,6 +517,13 @@ div.wb-snak .wb-snak-value-container {
 	margin-left: 16px;
 }
 
+div .wb-snak-value span.error.wb-format-error {
+	display: block;
+	color: red;
+	font-size: inherit;
+	font-style: italic;
+}
+
 /* Link to add claim to section */
 .wb-claimlistview > .wb-addtoolbar {
 	min-height: 3em;
