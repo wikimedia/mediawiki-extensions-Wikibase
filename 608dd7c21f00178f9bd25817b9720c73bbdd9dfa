@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_d4253cbe",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T20:23:19Z",
+      "side": 1,
+      "message": "Why not !\u003d\u003d null?",
+      "revId": "608dd7c21f00178f9bd25817b9720c73bbdd9dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_f4283898",
+        "filename": "lib/resources/jquery.wikibase/toolbar/toolbar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T20:23:19Z",
+      "side": 1,
+      "message": "A more simple fix would be\n\n$.each( this._items || [], function( i, item ) {\n\nbut I\u0027m not sure if this is allowed in our style guides.",
+      "revId": "608dd7c21f00178f9bd25817b9720c73bbdd9dfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
