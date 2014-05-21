@@ -10,6 +10,8 @@ use Title;
 use User;
 use Revision;
 use WikiPage;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
  * Factory for EntityContent objects.
@@ -18,6 +20,7 @@ use WikiPage;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Michał Łazowik
  */
 class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker {
 
@@ -133,6 +136,30 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 			$id->getSerialization(),
 			$this->getNamespaceForType( $id->getEntityType() )
 		);
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param Title $title
+	 *
+	 * @throws InvalidArgumentException
+	 * @return EntityId
+	 */
+	public function getIdForTitle( Title $title ) {
+		$entityIdParser = new BasicEntityIdParser;
+
+		try {
+			$entityId = $entityIdParser->parse( $title->getText() );
+		} catch ( EntityIdParsingException $parseException ) {
+			throw new InvalidArgumentException( $title->getPrefixedText() . ' is not an entity' );
+		}
+
+		if ( $this->getNamespaceForType( $entityId->getEntityType() ) !== $title->getNamespace() ) {
+			throw new InvalidArgumentException( $title->getPrefixedText() . ' is not an entity' );
+		}
+
+		return $entityId;
 	}
 
 	/**

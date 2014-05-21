@@ -3,8 +3,12 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
+use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContentFactory;
+use Wikibase\NamespaceUtils;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -23,6 +27,7 @@ use Wikibase\DataModel\Entity\Property;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 class EntityContentFactoryTest extends \MediaWikiTestCase {
 
@@ -69,6 +74,62 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$title = $factory->getTitleForId( new ItemId( 'Q42' ) );
 
 		$this->assertEquals( 'Q42', $title->getText() );
+	}
+
+	public function entityTitleProvider() {
+		$argLists = array();
+
+		$argLists[] = array(
+			Title::newFromText(
+				"Q42",
+				NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM )
+			),
+			new ItemId( 'Q42' )
+		);
+
+		$argLists[] = array(
+			Title::newFromText(
+				"P13",
+				NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_PROPERTY )
+			),
+			new PropertyId( 'P13' )
+		);
+
+		return $argLists;
+	}
+
+	public function invalidEntityTitleProvider() {
+		$argLists = array();
+
+		$argLists[] = array( Title::newFromText( "Nyan", NS_SPECIAL ) );
+		$argLists[] = array( Title::newFromText( "Poland", NS_MAIN ) );
+		$argLists[] = array( Title::newFromText( "Q1337", NS_USER ) );
+		$argLists[] = array( Title::newFromText(
+			"P2",
+			NamespaceUtils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM )
+		) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider entityTitleProvider
+	 */
+	public function testGetIdForTitle( Title $title, EntityId $expectedId ) {
+		$factory = $this->newFactory();
+
+		$actualId = $factory->getIdForTitle( $title );
+
+		$this->assertEquals( $expectedId, $actualId );
+	}
+
+	/**
+	 * @dataProvider invalidEntityTitleProvider
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testInvalidGetIdForTitle( Title $title ) {
+		$factory = $this->newFactory();
+		$actualId = $factory->getIdForTitle( $title );
 	}
 
 	public function testGetNamespaceForType() {
