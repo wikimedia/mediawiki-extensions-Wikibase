@@ -34,7 +34,7 @@ class MergeChangeOpsFactory {
 	/**
 	 * @param Item $fromItem
 	 * @param Item $toItem
-	 * @param array $ignoreConflicts list of elements to ignore conflicts for
+	 * @param string[] $ignoreConflicts list of elements to ignore conflicts for
 	 *   can only contain 'label' and or 'description' and or 'sitelink'
 	 *
 	 * @throws InvalidArgumentException
@@ -56,4 +56,5 @@ class MergeChangeOpsFactory {
 			$this->factoryProvider
 		);
 	}
+
 }
