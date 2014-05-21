@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e20cf91_4df29dce",
+        "filename": "lib/includes/parsers/MonolingualTextParser.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-05-21T06:48:32Z",
+      "side": 1,
+      "message": "It\u0027s the other way round. The DataValue\u0027s type is written without a dash.",
+      "parentUuid": "6e20cf91_c0343d49",
+      "revId": "efd275d86f622b1c6edeaee0845801901d00f165",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e20cf91_40f14d91",
         "filename": "repo/Wikibase.php",
         "patchSetId": 1
