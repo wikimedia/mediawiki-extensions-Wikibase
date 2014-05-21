@@ -71,14 +71,27 @@ class WikibaseDataTypeBuilders {
 		//     the dataTypes setting. On the other hand, perhaps that setting should only
 		//     be used for the UI, and the factory should simply know all data types always.
 
+		/**
+		 * Data types to data value types mapping (also see wgDataTypes in DataTypes.php):
+		 * commonsMedia     => string (camel case, FIXME maybe?)
+		 * globe-coordinate => globecoordinate (FIXME!)
+		 * quantity         => quantity
+		 * string           => string
+		 * time             => time
+		 * url              => string
+		 * wikibase-item    => wikibase-entityid
+		 * monolingualtext  => monolingualtext
+		 * multilingualtext => multilingualtext
+		 */
+
 		$types = array(
-			'commonsMedia' => array( $this, 'buildMediaType' ),
+			'commonsMedia'     => array( $this, 'buildMediaType' ),
 			'globe-coordinate' => array( $this, 'buildCoordinateType' ),
-			'quantity'=> array( $this, 'buildQuantityType' ),
-			'string' => array( $this, 'buildStringType' ),
-			'time' => array( $this, 'buildTimeType' ),
-			'url' => array( $this, 'buildUrlType' ),
-			'wikibase-item' => array( $this, 'buildItemType' ),
+			'quantity'         => array( $this, 'buildQuantityType' ),
+			'string'           => array( $this, 'buildStringType' ),
+			'time'             => array( $this, 'buildTimeType' ),
+			'url'              => array( $this, 'buildUrlType' ),
+			'wikibase-item'    => array( $this, 'buildItemType' ),
 		);
 
 		$experimental = array(
