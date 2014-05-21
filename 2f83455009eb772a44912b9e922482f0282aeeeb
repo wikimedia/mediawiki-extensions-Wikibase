@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_33a0e4f0",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-05-21T13:29:14Z",
+      "side": 1,
+      "message": "missing comma.",
+      "revId": "2f83455009eb772a44912b9e922482f0282aeeeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_735e5c19",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-05-21T13:29:14Z",
+      "side": 1,
+      "message": "missing comma.",
+      "revId": "2f83455009eb772a44912b9e922482f0282aeeeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
