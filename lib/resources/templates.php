@@ -116,6 +116,13 @@ HTML;
 </div>
 HTML;
 
+	$templates['wb-value'] =
+<<<HTML
+<div class="wb-value" aria-disabled="false">
+  $1
+</div>
+HTML;
+
 	// TODO: This template should be split up and make use of the wb-claim template. $4 is used for
 	// the non-JS toolbar to attach to. This parameter should be removed.
 	$templates['wb-statement'] =
