@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use MWException;
+use OutOfBoundsException;
 use Title;
 
 /**
@@ -13,6 +14,7 @@ use Title;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 interface EntityTitleLookup {
 
@@ -34,12 +36,25 @@ interface EntityTitleLookup {
 	public function getTitleForId( EntityId $id );
 
 	/**
+	 * Returns the EntityId for a given Title or null if the Title does not
+	 * represent an Entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Title $title
+	 *
+	 * @return EntityId|null
+	 */
+	public function getIdForTitle( Title $title );
+
+	/**
 	 * Determines what namespace is suitable for the given type of entities.
 	 *
 	 * @since 0.5
 	 *
 	 * @param string $type the entity type to look up, as returned by Entity::getType()
 	 *
+	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return int the namespace ID for this type
 	 */
 	public function getNamespaceForType( $type );
