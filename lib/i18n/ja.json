@@ -72,5 +72,5 @@
 	"datatypes-type-wikibase-item": "項目",
 	"datatypes-type-commonsMedia": "コモンズのメディアファイル",
 	"version-wikibase": "ウィキベース",
-	"wikibase-monolingual-text": "<span lang=\"$2\" class=\"wb-monolingual-text-value\">$1</span> <span class=\"wb-monolingual-text-language-name\">($3)</span>"
+	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\">($3)</span>"
 }
