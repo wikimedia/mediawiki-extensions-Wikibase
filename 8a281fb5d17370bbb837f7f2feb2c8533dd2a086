@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_8e5f8b44",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-21T17:40:20Z",
+      "side": 1,
+      "message": "why introduce a new exception when there is one in valueformatters for this?\n\nit\u0027s a case where we are actually dealing with DataValues and think it\u0027s ok to use ValueFormatters component here",
+      "revId": "8a281fb5d17370bbb837f7f2feb2c8533dd2a086",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_0e549b29",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-21T17:40:20Z",
+      "side": 1,
+      "message": "what\u0027s a renderer?",
+      "revId": "8a281fb5d17370bbb837f7f2feb2c8533dd2a086",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_ee483f8e",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-21T17:40:20Z",
+      "side": 1,
+      "message": "how about new Message(), since i see $lang is applied in formatting",
+      "revId": "8a281fb5d17370bbb837f7f2feb2c8533dd2a086",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_ce4d839d",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-21T17:40:20Z",
+      "side": 1,
+      "message": "new Message()",
+      "revId": "8a281fb5d17370bbb837f7f2feb2c8533dd2a086",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
