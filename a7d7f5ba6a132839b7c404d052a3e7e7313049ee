@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_fa9941c9",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-21T22:04:52Z",
+      "side": 1,
+      "message": "huh, thanks :)",
+      "parentUuid": "4e1dcb5b_da39e5cc",
+      "revId": "a7d7f5ba6a132839b7c404d052a3e7e7313049ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_5a75d591",
         "filename": "repo/includes/updates/EntityDeletionUpdate.php",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2014-05-21T22:00:25Z",
       "side": 1,
       "message": "What\u0027s the benefit if $this-\u003econtent still exists? Is this a preparation to reduce the numbers this is used?",
+      "revId": "a7d7f5ba6a132839b7c404d052a3e7e7313049ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_5a8b9572",
+        "filename": "repo/includes/updates/EntityDeletionUpdate.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-21T22:04:52Z",
+      "side": 1,
+      "message": "EntityContent::getTitle() will go away. I\u0027m phasing out all usages. Should have marked it as deprecated, I guess :)",
+      "parentUuid": "4e1dcb5b_5a75d591",
       "revId": "a7d7f5ba6a132839b7c404d052a3e7e7313049ee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
