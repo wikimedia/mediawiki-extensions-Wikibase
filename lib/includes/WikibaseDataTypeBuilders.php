@@ -182,10 +182,10 @@ class WikibaseDataTypeBuilders {
 			new MembershipValidator( Utils::getLanguageCodes() )
 		);
 
-		$topValidator = new CompositeValidator(
+		$topValidator = new DataValueValidator( new CompositeValidator(
 			array( $textValidator, $languageValidator ),
 			true
-		);
+		) );
 
 		return new DataType( $id, 'monolingualtext', array( new TypeValidator( 'DataValues\DataValue' ), $topValidator ) );
 	}
