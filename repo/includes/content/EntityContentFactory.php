@@ -4,10 +4,12 @@ namespace Wikibase;
 
 use MWException;
 use OutOfBoundsException;
+use Revision;
 use Status;
 use Title;
 use User;
-use Revision;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use WikiPage;
 
 /**
@@ -18,6 +20,7 @@ use WikiPage;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Michał Łazowik
  */
 class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker {
 
@@ -88,9 +91,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	}
 
 	/**
-	 * Returns the Title object for the item with provided id.
-	 *
-	 * @since 0.3
+	 * @see EntityTitleLookup::getTitleForId
 	 *
 	 * @param EntityId $id
 	 *
@@ -105,13 +106,34 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	}
 
 	/**
-	 * Determines what namespace is suitable for the given type of entities.
+	 * @see EntityTitleLookup::getIdForTitle
 	 *
-	 * @since 0.5
+	 * @param Title $title
+	 *
+	 * @return EntityId|null
+	 */
+	public function getIdForTitle( Title $title ) {
+		$entityIdParser = new BasicEntityIdParser;
+
+		try {
+			$entityId = $entityIdParser->parse( $title->getText() );
+		} catch ( EntityIdParsingException $ex ) {
+			return null;
+		}
+
+		if ( $this->getNamespaceForType( $entityId->getEntityType() ) !== $title->getNamespace() ) {
+			return null;
+		}
+
+		return $entityId;
+	}
+
+	/**
+	 * @see EntityTitleLookup::getNamespaceForType
 	 *
 	 * @param int $type
 	 *
-	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
+	 * @throws OutOfBoundsException
 	 * @return int
 	 */
 	public function getNamespaceForType( $type ) {
@@ -149,7 +171,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return EntityContent|null
 	 */
 	public function getFromRevision( $revisionId ) {
-		$revision = \Revision::newFromId( intval( $revisionId ) );
+		$revision = Revision::newFromId( intval( $revisionId ) );
 
 		if ( $revision === null ) {
 			return null;
@@ -280,4 +302,5 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 
 		return $status;
 	}
+
 }
