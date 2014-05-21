@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e1dcb5b_97f46652",
+        "filename": "lib/includes/store/EntityTitleLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:23:23Z",
+      "side": 1,
+      "message": "I wonder why we used the pretty ambiguous shortcut \"Id\" in the other method. Sure, both should use the same wording so it\u0027s ok for now.",
+      "revId": "b394d1536c68af9461f44ee90eb6344b31005ea9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_d781bea5",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:23:23Z",
+      "side": 1,
+      "message": "What if I use this for the page [[User:Q1]]? It will return \"Q1\" then, right? This would be wrong, don\u0027t you think?",
+      "revId": "b394d1536c68af9461f44ee90eb6344b31005ea9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_37e352d6",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 1
@@ -13,6 +47,41 @@
       "writtenOn": "2014-05-21T20:40:56Z",
       "side": 1,
       "message": "Not sure if that\u0027s the right exception.",
+      "revId": "b394d1536c68af9461f44ee90eb6344b31005ea9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_17a0563d",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:23:23Z",
+      "side": 1,
+      "message": "Hm, I guess not, because the error is not about an invalid argument.",
+      "parentUuid": "4e1dcb5b_37e352d6",
+      "revId": "b394d1536c68af9461f44ee90eb6344b31005ea9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b78e42d4",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-21T21:23:23Z",
+      "side": 1,
+      "message": "Please add\nTitle::newFromText( \"Q1\", NS_USER )",
       "revId": "b394d1536c68af9461f44ee90eb6344b31005ea9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
