@@ -236,7 +236,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 				$formatters,
 				PropertyValueSnakFormatter::ON_ERROR_FAIL,
 				null,
-				'Wikibase\DataTypeMismatchException'
+				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
 			),
 
 			'VT mismatching PT, fail' => array(
@@ -247,7 +247,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 				$formatters,
 				PropertyValueSnakFormatter::ON_ERROR_FAIL,
 				null,
-				'Wikibase\DataTypeMismatchException'
+				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
 			),
 
 			'property not found, fail' => array(
