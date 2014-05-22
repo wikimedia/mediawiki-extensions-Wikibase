@@ -115,6 +115,10 @@ final class WikibaseClient {
 	 */
 	private $namespaceChecker = null;
 
+	/**
+	 * @var ClientSiteLinkLookup
+	 */
+	private $clientSiteLinkLookup = null;
 
 	/**
 	 * @since 0.4
@@ -519,7 +523,6 @@ final class WikibaseClient {
 	 * @return NamespaceChecker
 	 */
 	public function getNamespaceChecker() {
-
 		if ( !$this->namespaceChecker ) {
 			$settings = $this->getSettings();
 
@@ -536,7 +539,6 @@ final class WikibaseClient {
 	 * @return LangLinkHandler
 	 */
 	public function getLangLinkHandler() {
-
 		if ( !$this->langLinkHandler ) {
 			$settings = $this->getSettings();
 
@@ -564,4 +566,24 @@ final class WikibaseClient {
 
 		return $this->siteStore;
 	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ClientSiteLinkLookup
+	 */
+	public function getClientSiteLinkLookup() {
+		if ( !$this->clientSiteLinkLookup ) {
+			$settings = $this->getSettings();
+
+			$this->clientSiteLinkLookup = new ClientSiteLinkLookup(
+				$settings->getSetting( 'siteGlobalID' ),
+				$this->getEntityLookup(),
+				$this->getStore()->getSiteLinkLookup()
+			);
+		}
+
+		return $this->clientSiteLinkLookup;
+	}
+
 }
