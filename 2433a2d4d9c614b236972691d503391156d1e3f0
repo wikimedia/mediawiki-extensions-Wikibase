@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_a3816494",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-22T13:46:42Z",
+      "side": 1,
+      "message": "why not just let the original exception bubble up?",
+      "revId": "2433a2d4d9c614b236972691d503391156d1e3f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_234d549c",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-22T13:46:42Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be nicer to return null in this case? We don\u0027t have a good way otherwise to check whether a title refers to an entity page.",
+      "revId": "2433a2d4d9c614b236972691d503391156d1e3f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
