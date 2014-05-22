@@ -15,10 +15,9 @@ use Wikibase\DataModel\Entity\EntityId;
 class ClaimGuidGenerator  {
 
 	/**
-	 * @since 0.3
-	 * @var GuidGenerator
+	 * @var V4GuidGenerator
 	 */
-	protected $baseGenerator;
+	private $baseGenerator;
 
 	/**
 	 * @since 0.5

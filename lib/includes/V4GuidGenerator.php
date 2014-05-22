@@ -10,7 +10,7 @@ namespace Wikibase\Lib;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class V4GuidGenerator implements GuidGenerator {
+class V4GuidGenerator {
 
 	/**
 	 * Generates and returns a GUID.
