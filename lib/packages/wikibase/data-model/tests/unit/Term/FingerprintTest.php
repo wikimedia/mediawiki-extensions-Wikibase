@@ -84,7 +84,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetLabel() {
 		$term = new Term( 'en', 'changed' );
-		$this->fingerprint->setLabel( $term );
+		$this->fingerprint->setLabel( 'en', 'changed' );
 		$this->assertEquals( $term, $this->fingerprint->getLabel( 'en' ) );
 	}
 
@@ -111,7 +111,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetDescription() {
 		$description = new Term( 'en', 'changed' );
-		$this->fingerprint->setDescription( $description );
+		$this->fingerprint->setDescription( 'en', 'changed' );
 		$this->assertEquals( $description, $this->fingerprint->getDescription( 'en' ) );
 	}
 
@@ -138,7 +138,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetAliasGroup() {
 		$aliasGroup = new AliasGroup( 'en', array( 'changed' ) );
-		$this->fingerprint->setAliasGroup( $aliasGroup );
+		$this->fingerprint->setAliasGroup( 'en', array( 'changed' ) );
 		$this->assertEquals( $aliasGroup, $this->fingerprint->getAliasGroup( 'en' ) );
 	}
 
@@ -311,7 +311,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetLabels() {
 		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setLabel( new Term( 'en', 'foo' ) );
+		$fingerprint->setLabel( 'en', 'foo' );
 
 		$labels = new TermList( array(
 			new Term( 'de', 'bar' )
@@ -324,7 +324,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetDescriptions() {
 		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setDescription( new Term( 'en', 'foo' ) );
+		$fingerprint->setDescription( 'en', 'foo' );
 
 		$descriptions = new TermList( array(
 			new Term( 'de', 'bar' )
@@ -337,7 +337,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetAliasGroups() {
 		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setAliasGroup( new AliasGroup( 'en', array( 'foo' ) ) );
+		$fingerprint->setAliasGroup( 'en', array( 'foo' ) );
 
 		$groups = new AliasGroupList( array(
 			new AliasGroup( 'de', array( 'bar' ) )

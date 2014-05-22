@@ -18,6 +18,7 @@ Changes in the `Entity` hierarchy:
 * `Entity::removeDescription` no longer accepts an array of language codes
 * `Entity` no longer implements `Serializable`
 * Protected method `Entity::patchSpecificFields` no longer has a second parameter
+* `Entity::getFingerprint` is now returned by reference
 
 Removal of `toArray` and `newFromArray`:
 
@@ -46,6 +47,7 @@ Other breaking changes:
 * `Claims::getDiff` now throws an `UnexpectedValueException` rather than an `InvalidArgumentException`
 * Removed these class aliases deprecated since 0.4:
 `ItemObject`, `ReferenceObject`, `ClaimObject`, `StatementObject`
+* Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
 
 #### Additions
 

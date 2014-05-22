@@ -2,24 +2,16 @@
 
 namespace Wikibase\Test\Entity;
 
-use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDiff;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Internal\ObjectComparer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -291,7 +283,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getNewEmpty();
 		$aliases =  array( 'a', 'b' );
 
-		$entity->getFingerprint()->setAliasGroup( new AliasGroup( 'en', $aliases ) );
+		$entity->getFingerprint()->setAliasGroup( 'en', $aliases );
 
 		$this->assertEquals(
 			$aliases,
@@ -398,15 +390,14 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 	public function testCopyRetainsLabels() {
 		$item = Item::newEmpty();
 
-		$item->getFingerprint()->setLabel( new Term( 'en', 'foo' ) );
-		$item->getFingerprint()->setLabel( new Term( 'de', 'bar' ) );
+		$item->getFingerprint()->setLabel( 'en', 'foo' );
+		$item->getFingerprint()->setLabel( 'de', 'bar' );
 
 		$newItem = unserialize( serialize( $item ) );
 
 		$this->assertTrue( $newItem->getFingerprint()->getLabels()->hasTermForLanguage( 'en' ) );
 		$this->assertTrue( $newItem->getFingerprint()->getLabels()->hasTermForLanguage( 'de' ) );
 	}
-
 
 	/**
 	 * @dataProvider instanceProvider

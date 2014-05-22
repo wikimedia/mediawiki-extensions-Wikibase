@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Term;
 
 use Comparable;
+use InvalidArgumentException;
 
 /**
  * @since 0.7.3
@@ -54,12 +55,15 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
-	 * @since 0.7.4
+	 * @since 1.0
 	 *
-	 * @param Term $label
+	 * @param string $languageCode
+	 * @param string $labelText
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function setLabel( Term $label ) {
-		$this->labels->setTerm( $label );
+	public function setLabel( $languageCode, $labelText ) {
+		$this->labels->setTerm( new Term( $languageCode, $labelText ) );
 	}
 
 	/**
@@ -91,12 +95,15 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
-	 * @since 0.7.4
+	 * @since 1.0
 	 *
-	 * @param Term $description
+	 * @param string $languageCode
+	 * @param string $descriptionText
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function setDescription( Term $description ) {
-		$this->descriptions->setTerm( $description );
+	public function setDescription( $languageCode, $descriptionText ) {
+		$this->descriptions->setTerm( new Term( $languageCode, $descriptionText ) );
 	}
 
 	/**
@@ -128,12 +135,15 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
-	 * @since 0.7.4
+	 * @since 1.0
 	 *
-	 * @param AliasGroup $aliasGroup
+	 * @param string $languageCode
+	 * @param string[] $aliases
+	 *
+	 * @throws InvalidArgumentException
 	 */
-	public function setAliasGroup( AliasGroup $aliasGroup ) {
-		$this->aliasGroups->setGroup( $aliasGroup );
+	public function setAliasGroup( $languageCode, array $aliases ) {
+		$this->aliasGroups->setGroup( new AliasGroup( $languageCode, $aliases ) );
 	}
 
 	/**
