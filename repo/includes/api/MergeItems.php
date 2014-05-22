@@ -70,6 +70,10 @@ class MergeItems extends ApiWikibase {
 		$fromEntityRevision = $this->getEntityRevisionFromIdString( $params['fromid'] );
 		$toEntityRevision = $this->getEntityRevisionFromIdString( $params['toid'] );
 
+		if ( !$fromEntityRevision || !$toEntityRevision ) {
+			$this->dieError( 'Item not found for ID.', 'no-such-entity' );
+		}
+
 		$fromEntity = $fromEntityRevision->getEntity();
 		$toEntity = $toEntityRevision->getEntity();
 
@@ -131,14 +135,10 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @param Entity|null $fromEntity
-	 * @param Entity|null $toEntity
+	 * @param Entity $fromEntity
+	 * @param Entity $toEntity
 	 */
 	private function validateEntity( $fromEntity, $toEntity) {
-		if( $fromEntity === null || $toEntity === null ){
-			$this->dieUsage( 'One of more of the ids provided do not exist' , 'no-such-entity-id' );
-		}
-
 		if ( !( $fromEntity instanceof Item && $toEntity instanceof Item ) ) {
 			$this->dieUsage( 'One or more of the entities are not items', 'not-item' );
 		}
