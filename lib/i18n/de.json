@@ -94,5 +94,7 @@
 	"wikibase-validator-not-allowed": "Ungültiger Wert: $1",
 	"datatypes-type-wikibase-item": "Datenobjekt",
 	"datatypes-type-commonsMedia": "Mediendatei auf Commons",
-	"version-wikibase": "Wikibase-Erweiterungen"
+	"version-wikibase": "Wikibase-Erweiterungen",
+	"wikibase-snakformatter-valuetype-mismatch": "Der Wertetyp „$1“ stimmt nicht mit dem Eigenschaftstyp „$2“ überein.",
+	"wikibase-snakformatter-property-not-found": "Die Eigenschaft $1 wurde nicht gefunden. Der zu verwendende Datentyp konnte nicht bestimmt werden."
 }
