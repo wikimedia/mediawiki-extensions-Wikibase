@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_29d3f562",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-22T17:05:32Z",
+      "side": 1,
+      "message": "This causes a database query for every language link on every page view. That\u0027s quite bad, and also pointless: the  query is used to find out which item to load for the page title. The same item, over and over. Even though the item datat itself is (hopefully) cached, just querying the item id from the database over and over is too expensive.\n\nFind a way to cache the knowledge of which entity id is bound to the page. There could be local caching introduced in the ClientSiteLinkLookup class (and the ClientSiteLinkLookup should then be cached in the WikibaseClient instance). You could also try to find a hook that would allow you to process all the links at once, instead setting up a whole fresh network of service objects for every link.",
+      "revId": "846f40caadf57db65d6d6666c30d6fd6f6799a89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
