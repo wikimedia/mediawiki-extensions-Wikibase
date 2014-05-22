@@ -70,6 +70,10 @@ class MergeItems extends ApiWikibase {
 		$fromEntityRevision = $this->getEntityRevisionFromIdString( $params['fromid'] );
 		$toEntityRevision = $this->getEntityRevisionFromIdString( $params['toid'] );
 
+		if ( !$fromEntityRevision || !$toEntityRevision ) {
+			$this->dieUsage( 'Item not found.', 'no-such-entity' );
+		}
+
 		$fromEntity = $fromEntityRevision->getEntity();
 		$toEntity = $toEntityRevision->getEntity();
 
