@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_280ad324",
+        "filename": "tests/browser/features/statements_item.feature",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-05-22T07:17:53Z",
+      "side": 1,
+      "message": "Just from looking at the code, this will break when there is no item with a label that contains \"q\".",
+      "revId": "dd14c5342f8c285d3e2b082b1bd06a4c64fded95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_c818ff7c",
+        "filename": "tests/browser/features/statements_item.feature",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-05-22T07:17:53Z",
+      "side": 1,
+      "message": "For this to work you\u0027ll have to make sure that there are even TWO items that have a \"q\" in their label.",
+      "revId": "dd14c5342f8c285d3e2b082b1bd06a4c64fded95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_bd098336",
+        "filename": "tests/browser/features/step_definitions/entity_selector_steps.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-05-22T07:17:53Z",
+      "side": 1,
+      "message": "why sleep here?",
+      "revId": "dd14c5342f8c285d3e2b082b1bd06a4c64fded95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_88fb2711",
+        "filename": "tests/browser/features/step_definitions/statement_steps.rb",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-05-22T07:17:53Z",
+      "side": 1,
+      "message": "sleep is not nice. you can do something like statement_item_value_link.when_visible - this will wait for the element and by default times out after 5 sec.",
+      "revId": "dd14c5342f8c285d3e2b082b1bd06a4c64fded95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
