@@ -320,7 +320,7 @@
     "wikibase-item-summary-wbremovequalifiers-remove": "Removed {{PLURAL:$1|qualifier|qualifiers}}",
     "wikibase-item-summary-wbremovereferences-remove": "Removed {{PLURAL:$3|reference|references}} from claim",
     "wikibase-item-summary-wbmergeitems-from": "Merged item from \"$3\"",
-    "wikibase-item-summary-wbmergeitems-to": "Merged item in to \"$3\"",
+    "wikibase-item-summary-wbmergeitems-to": "Merged item into \"$3\"",
     "wikibase-property-summary-wbcreate-new": "Created a new property",
     "wikibase-property-summary-wbeditentity-create": "Created a new property",
     "wikibase-property-summary-wbeditentity-update": "Updated a property",
