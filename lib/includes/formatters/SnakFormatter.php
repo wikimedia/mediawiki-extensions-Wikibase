@@ -1,5 +1,6 @@
 <?php
 namespace Wikibase\Lib;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Snak;
 
 /**
@@ -11,6 +12,11 @@ use Wikibase\Snak;
  * @author Daniel Kinzler
  */
 interface SnakFormatter {
+
+	/**
+	 * Options key for controlling the output language.
+	 */
+	const OPT_LANG = ValueFormatter::OPT_LANG;
 
 	const FORMAT_PLAIN = 'text/plain';
 	const FORMAT_WIKI = 'text/x-wiki';
