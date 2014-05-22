@@ -16,6 +16,24 @@
       "revId": "846f40caadf57db65d6d6666c30d6fd6f6799a89",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_09995980",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-05-22T17:56:40Z",
+      "side": 1,
+      "message": "You mentioned the idea of using another hook. The problem is that Wikibase inserts the links by actually abiding wikitext, eg. [[en:foobar]], to the page which then gets parsed again by MediaWiki itself again. This behavior is quite bad in my opinion but that\u0027s the way it is implemented atm. So we either need to change the core parser to accept badges in this syntax or we change the way sitelinks are added to the pages. None of this problems can be fixed very easily however.",
+      "parentUuid": "4e1dcb5b_29d3f562",
+      "revId": "846f40caadf57db65d6d6666c30d6fd6f6799a89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
