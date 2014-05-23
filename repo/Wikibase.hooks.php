@@ -32,7 +32,6 @@ use User;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\TermValidatorFactory;
 use WikiPage;
 
 /**

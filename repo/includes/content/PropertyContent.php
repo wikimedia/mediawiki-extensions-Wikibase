@@ -6,15 +6,12 @@ use Content;
 use DataUpdate;
 use IContextSource;
 use ParserOutput;
-use Status;
 use Title;
-use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Utils;
 use WikiPage;
 
 /**

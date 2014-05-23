@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Specials;
 
 use HttpError;
-use SiteSQLStore;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;

@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Html;
 use Diff;
+use Html;
 
 /**
  * Class for generating diff rows for a given set of old and new values.

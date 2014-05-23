@@ -7,9 +7,9 @@ use Language;
 use Revision;
 use Title;
 use Wikibase\Entity;
+use Wikibase\EntityContent;
 use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
-use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

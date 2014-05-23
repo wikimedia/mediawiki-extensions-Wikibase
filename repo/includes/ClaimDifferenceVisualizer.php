@@ -1,11 +1,11 @@
 <?php
 namespace Wikibase;
 
+use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\ListDiffer;
-use Diff\Diff;
 use InvalidArgumentException;
 use Message;
 use RuntimeException;

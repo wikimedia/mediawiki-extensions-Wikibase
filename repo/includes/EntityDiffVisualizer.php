@@ -2,13 +2,13 @@
 
 namespace Wikibase;
 
-use IContextSource;
-use MWException;
 use Diff\Diff;
 use Diff\DiffOp;
-use Diff\DiffOpChange;
 use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
+use IContextSource;
+use MWException;
 use SiteStore;
 
 /**
