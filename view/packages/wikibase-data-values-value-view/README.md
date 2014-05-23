@@ -117,6 +117,7 @@ Other methods an Expert needs to provide:
 * Implemented jQuery.ui.suggestCommons
 * Removed CommonsMediaType expert dependency on SuggestedStringValue expert.
 * Prevent enter-key from adding newline character in String expert
+* Fixed bug 64658 which caused the inputextender widget being invisible
 
 ### 0.5.1 (2014-04-01)
 
