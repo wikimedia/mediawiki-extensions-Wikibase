@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_4f850e5a",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-23T11:31:27Z",
+      "side": 1,
+      "message": "Please do not use dieUsage(), use dieError(), dieException() or dieStatus().\ndieError() is a drop-in replacement for dieUsage() which supports automatic localization based on the error code.",
+      "revId": "68ac2bc27193cf67f4e3161e405ca125eb3d8002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_6f1c4a6b",
         "filename": "repo/includes/api/MergeItems.php",
         "patchSetId": 1
