@@ -36,6 +36,42 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_4abdfcd0",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-23T15:29:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_4f850e5a",
+      "revId": "68ac2bc27193cf67f4e3161e405ca125eb3d8002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_6ab8b8e2",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-23T15:29:50Z",
+      "side": 1,
+      "message": "The error happens if the entity is deleted or does not exist.\n\nimho, \"Could not find such an entity id\" is more confusing than \"Could not find such an entity\". (since no such entity is the actual issue)\n\nI did change \"\u0027Item not found.\" to \"\u0027Item not found for ID.\" to be more clear.",
+      "parentUuid": "4e1dcb5b_4f218e99",
+      "revId": "68ac2bc27193cf67f4e3161e405ca125eb3d8002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_6f1c4a6b",
         "filename": "repo/includes/api/MergeItems.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-05-23T10:20:37Z",
       "side": 1,
       "message": "Whoups, typo.",
+      "revId": "68ac2bc27193cf67f4e3161e405ca125eb3d8002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_2ad2c02c",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-23T15:29:50Z",
+      "side": 1,
+      "message": "cleaned this up",
+      "parentUuid": "4e1dcb5b_6f1c4a6b",
       "revId": "68ac2bc27193cf67f4e3161e405ca125eb3d8002",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
