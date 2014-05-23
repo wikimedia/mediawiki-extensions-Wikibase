@@ -103,8 +103,8 @@ class HttpAcceptNegotiator {
 	 * - if both $accepted and $supported contain a `/`, and $accepted ends with `/*`,
 	 *   they match if the part before the first `/` is equal.
 	 *
-	 * @param $accepted   An accepted value (may contain wildcards)
-	 * @param $supported  A supported value.
+	 * @param string $accepted An accepted value (may contain wildcards)
+	 * @param string  $supported A supported value.
 	 *
 	 * @return bool Whether the given supported value matches the given accepted value.
 	 */
