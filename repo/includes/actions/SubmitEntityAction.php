@@ -89,7 +89,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$newerContent = $newerRevision->getContent();
 		$latestContent = $latestRevision->getContent();
 
-		$diff = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+		$diff = $newerContent->getDiff( $olderContent );
 		$edit = false;
 		$token = $this->getRequest()->getText( 'wpEditToken' );
 
@@ -126,7 +126,7 @@ class SubmitEntityAction extends EditEntityAction {
 			}
 		} else { // undo
 			$entity = $latestContent->getEntity()->copy();
-			$latestContent->getEntity()->patch( $diff );;
+			$latestContent = $latestContent->getPatchedCopy( $diff );
 
 			if ( $latestContent->getEntity()->getDiff( $entity )->isEmpty() ) {
 				$status = Status::newGood();
