@@ -579,8 +579,8 @@ final class WikibaseClient {
 
 			$this->clientSiteLinkLookup = new ClientSiteLinkLookup(
 				$settings->getSetting( 'siteGlobalID' ),
-				$this->getEntityLookup(),
-				$this->getStore()->getSiteLinkLookup()
+				$this->getStore()->getSiteLinkTable(),
+				$this->getEntityLookup()
 			);
 		}
 

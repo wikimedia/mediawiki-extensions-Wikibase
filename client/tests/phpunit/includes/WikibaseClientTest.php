@@ -161,6 +161,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
 	}
 
+	public function testGetClientSiteLinkLookupReturnType() {
+		$returnValue = $this->getDefaultInstance()->getClientSiteLinkLookup();
+		$this->assertInstanceOf( 'Wikibase\Client\ClientSiteLinkLookup', $returnValue );
+	}
+
 	public function testGetDefaultInstance() {
 		$this->assertSame(
 			WikibaseClient::getDefaultInstance(),
