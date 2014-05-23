@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
-use DataValues\UnDeserializableValue;
 use DataValues\DataValue;
 use DataValues\StringValue;
+use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;

@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
-use Html;
 use Diff\Diff;
 use Diff\DiffOp;
+use Html;
 use IContextSource;
 use MWException;
 use SiteStore;

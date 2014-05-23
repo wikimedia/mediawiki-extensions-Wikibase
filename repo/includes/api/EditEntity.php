@@ -13,7 +13,6 @@ use SiteList;
 use Title;
 use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;

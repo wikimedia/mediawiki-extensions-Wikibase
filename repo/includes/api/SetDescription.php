@@ -3,9 +3,9 @@
 namespace Wikibase\Api;
 
 use ApiMain;
+use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityIdPager;
-use Wikibase\ItemsPerSiteBuilder;
 use Wikibase\EntityLookup;
+use Wikibase\ItemsPerSiteBuilder;
 use Wikibase\SiteLinkTable;
 
 /**

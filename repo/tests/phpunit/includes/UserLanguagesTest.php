@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use User;
-use Wikibase\UserLanguageLookup;
 
 /**
  * @covers Wikibase\UserLanguages

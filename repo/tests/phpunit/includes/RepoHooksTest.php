@@ -2,7 +2,6 @@
 
 namespace Wikibase\Tests;
 
-use ImportStreamSource;
 use Wikibase\RepoHooks;
 use WikiImporter;
 

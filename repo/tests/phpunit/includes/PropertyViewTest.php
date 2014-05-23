@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
-use Wikibase\Claim;
 use Wikibase\Property;
 
 /**

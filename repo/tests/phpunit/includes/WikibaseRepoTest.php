@@ -2,7 +2,6 @@
 
 namespace Wikibase\Tests\Repo;
 
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

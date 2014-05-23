@@ -5,11 +5,11 @@ namespace Wikibase;
 use Hooks;
 use IContextSource;
 use Status;
+use Title;
 use User;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\EntityStore;
 use WikiPage;
-use Title;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing

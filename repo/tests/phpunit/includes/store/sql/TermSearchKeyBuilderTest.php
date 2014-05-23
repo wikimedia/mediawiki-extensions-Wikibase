@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use Wikibase\Item;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StoreFactory;
 use Wikibase\Term;
 use Wikibase\TermSearchKeyBuilder;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\TermSearchKeyBuilder

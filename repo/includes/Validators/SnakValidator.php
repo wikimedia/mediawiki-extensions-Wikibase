@@ -3,8 +3,8 @@
 namespace Wikibase\Validators;
 
 use DataTypes\DataTypeFactory;
-use DataValues\UnDeserializableValue;
 use DataValues\DataValue;
+use DataValues\UnDeserializableValue;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;

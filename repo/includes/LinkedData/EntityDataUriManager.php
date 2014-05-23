@@ -1,9 +1,9 @@
 <?php
 namespace Wikibase\LinkedData;
 
+use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityTitleLookup;
-use Title;
 
 /**
  * Manages URIs for the linked data interface

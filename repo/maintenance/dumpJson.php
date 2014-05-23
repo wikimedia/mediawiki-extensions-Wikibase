@@ -6,7 +6,6 @@ use Disposable;
 use ExceptionHandler;
 use Maintenance;
 use MWException;
-use Traversable;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\IO\EntityIdReader;

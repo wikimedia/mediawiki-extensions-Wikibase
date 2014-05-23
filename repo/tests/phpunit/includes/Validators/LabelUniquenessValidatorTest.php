@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Validators;
 
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroupList;
