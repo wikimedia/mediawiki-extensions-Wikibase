@@ -464,7 +464,12 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 
 	/**
 	 * Returns a new instance only containing the best claims (these are the highest
-	 * ranked claims, but never deprecated ones).
+	 * ranked claims, but never deprecated ones). This implementation ignores the properties
+	 * so you probably want to call Claims::getClaimsForProperty first or use
+	 * ClaimList::getBestClaims instead.
+	 *
+	 * @see Claims::getClaimsForProperty
+	 * @see ClaimList::getBestClaims
 	 *
 	 * @since 0.7
 	 *
