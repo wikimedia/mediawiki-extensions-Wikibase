@@ -16,6 +16,24 @@
       "revId": "25d32d33f817a8021c720b46a63777591fbd2785",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_8f69e61f",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-23T13:57:09Z",
+      "side": 1,
+      "message": "Yes, we want negative caching to work.\nBtw, the fact that isset() returns false if the value is null is one of my pet peves about php. what the hell were they thinking.",
+      "parentUuid": "4e1dcb5b_9491f9fd",
+      "revId": "25d32d33f817a8021c720b46a63777591fbd2785",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
