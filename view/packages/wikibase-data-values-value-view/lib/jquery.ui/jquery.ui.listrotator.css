@@ -66,7 +66,7 @@
 	font-size: 84%;
 	padding: 0;
 	position: absolute;
-	z-index: 1;
+	z-index: 3; /* needed for MonoBook, inputextender is 1 below */
 }
 
 .ui-listrotator-menu .ui-menu-item {
