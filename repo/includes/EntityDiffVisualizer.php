@@ -10,6 +10,7 @@ use Diff\DiffOpRemove;
 use IContextSource;
 use MWException;
 use SiteStore;
+use Wikibase\Repo\Content\EntityContentDiff;
 
 /**
  * Class for generating views of EntityDiff objects.
@@ -19,6 +20,7 @@ use SiteStore;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Daniel kinzler
  */
 class EntityDiffVisualizer {
 
@@ -70,6 +72,22 @@ class EntityDiffVisualizer {
 	}
 
 	/**
+	 * Generates and returns an HTML visualization of the provided EntityContentDiff.
+	 *
+	 * @since 0.5
+	 *
+	 * @param \Wikibase\Repo\Content\EntityContentDiff $diff
+	 *
+	 * @return string
+	 */
+	public function visualizeEntityContentDiff( EntityContentDiff $diff ) {
+		$html = '';
+		$html .= $this->visualizeRedirectDiff( $diff->getRedirectDiff() );
+		$html .= $this->visualizeEntityDiff( $diff->getEntityDiff() );
+		return $html;
+	}
+
+	/**
 	 * Generates and returns an HTML visualization of the provided EntityDiff.
 	 *
 	 * @since 0.4
@@ -78,7 +96,11 @@ class EntityDiffVisualizer {
 	 *
 	 * @return string
 	 */
-	public function visualizeDiff( EntityDiff $diff ) {
+	protected function visualizeEntityDiff( EntityDiff $diff ) {
+		if ( $diff->isEmpty() ) {
+			return '';
+		}
+
 		$html = '';
 
 		$termDiffVisualizer = new DiffView(
@@ -103,7 +125,7 @@ class EntityDiffVisualizer {
 
 		// FIXME: this does not belong here as it is specific to items
 		if ( $diff instanceof ItemDiff ) {
-			$termDiffVisualizer = new DiffView(
+			$linkDiffVisualizer = new DiffView(
 				array(),
 				new Diff(
 					array (
@@ -115,9 +137,37 @@ class EntityDiffVisualizer {
 				$this->context
 			);
 
-			$html .= $termDiffVisualizer->getHtml();
+			$html .= $linkDiffVisualizer->getHtml();
 		}
 
+		return $html;
+	}
+
+
+	/**
+	 * Generates and returns an HTML visualization of the provided redirect Diff.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Diff $diff
+	 *
+	 * @return string
+	 */
+	protected function visualizeRedirectDiff( Diff $diff ) {
+		if ( $diff->isEmpty() ) {
+			return '';
+		}
+
+		//TODO: localize path (keys in the diff array)
+
+		$linkDiffVisualizer = new DiffView(
+			array(),
+			$diff,
+			$this->siteStore,
+			$this->context
+		);
+
+		$html = $linkDiffVisualizer->getHtml();
 		return $html;
 	}
 
