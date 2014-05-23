@@ -2,13 +2,13 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
-use InvalidArgumentException;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink

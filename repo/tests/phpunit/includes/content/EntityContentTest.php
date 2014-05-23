@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use IContextSource;
-use MediaWikiTestCase;
 use ParserOptions;
 use RequestContext;
 use Title;
@@ -24,7 +23,7 @@ use Wikibase\store\EntityStore;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class EntityContentTest extends MediaWikiTestCase {
+abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	protected $permissions;
 	protected $old_user;

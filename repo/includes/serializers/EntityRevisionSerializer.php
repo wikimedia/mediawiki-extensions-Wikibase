@@ -6,11 +6,11 @@ use InvalidArgumentException;
 use Wikibase\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
-use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\Serializers\SerializerObject;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Serializers\SerializerObject;
 
 /**
  * Serializer for some information related to Content. This is not a full Content serialization,

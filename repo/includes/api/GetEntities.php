@@ -4,7 +4,6 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use SiteSQLStore;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;

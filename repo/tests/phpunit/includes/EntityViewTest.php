@@ -2,17 +2,14 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
-use MediaWikiTestCase;
-use OutputPage;
 use RequestContext;
 use Title;
-use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Claim;
-use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -21,15 +18,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityRevision;
-use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\ParserOutputJsConfigBuilder;
@@ -56,7 +49,7 @@ use Wikibase\Utils;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
-abstract class EntityViewTest extends MediaWikiTestCase {
+abstract class EntityViewTest extends \MediaWikiTestCase {
 
 	protected static $mockRepo;
 

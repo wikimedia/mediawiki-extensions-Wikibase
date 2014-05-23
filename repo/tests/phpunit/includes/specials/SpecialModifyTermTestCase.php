@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

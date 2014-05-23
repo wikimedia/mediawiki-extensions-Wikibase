@@ -4,12 +4,8 @@ namespace Wikibase\Test\Api;
 
 use ApiBase;
 use ApiMain;
-use ApiTestCase;
 use FauxRequest;
-use MediaWikiTestCase;
 use RequestContext;
-use TestSites;
-use TestUser;
 use UsageException;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -22,14 +18,14 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @author Adam Shorland
  */
-abstract class IndependentWikibaseApiTestCase extends MediaWikiTestCase {
+abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 
 	protected function setUp() {
 		parent::setUp();
 
 		static $isSetup = false;
 
-		ApiTestCase::$users['wbeditor'] = new TestUser(
+		\ApiTestCase::$users['wbeditor'] = new \TestUser(
 			'Apitesteditor',
 			'Api Test Editor',
 			'api_test_editor@example.com',
@@ -42,7 +38,7 @@ abstract class IndependentWikibaseApiTestCase extends MediaWikiTestCase {
 			//TODO remove me once everything that needs this is overridden
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
+			$sitesTable->saveSites( \TestSites::getSites() );
 			$isSetup = true;
 		}
 	}

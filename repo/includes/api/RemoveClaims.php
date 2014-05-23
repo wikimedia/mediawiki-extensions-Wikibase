@@ -5,12 +5,12 @@ namespace Wikibase\Api;
 use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\ChangeOp\ChangeOps;
-use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

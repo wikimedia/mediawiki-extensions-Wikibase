@@ -8,7 +8,6 @@ use Article;
 use Exception;
 use FauxRequest;
 use Language;
-use MediaWikiTestCase;
 use MWException;
 use OutputPage;
 use RequestContext;
@@ -17,7 +16,6 @@ use User;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
-use TestSites;
 
 /**
  * @licence GNU GPL v2+
@@ -25,7 +23,7 @@ use TestSites;
  *
  * @todo: move this to core (except the test item stuff of course)
  */
-class ActionTestCase extends MediaWikiTestCase {
+class ActionTestCase extends \MediaWikiTestCase {
 
 	protected $permissionsChanged = false;
 
@@ -44,7 +42,7 @@ class ActionTestCase extends MediaWikiTestCase {
 		if ( !$setUp ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
+			$sitesTable->saveSites( \TestSites::getSites() );
 			$setUp = true;
 		}
 
@@ -179,7 +177,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * Calls the desired action using a fake web request.
 	 * This calls the show() method on the target action.
 	 *
-	 * @param String|\Action $action the action to call; may be an action name or class name
+	 * @param String|Action $action the action to call; may be an action name or class name
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool       $post posted?
@@ -205,7 +203,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	/**
 	 * Returns a token
 	 *
-	 * @param \Title $title the page to return the token for
+	 * @param Title $title the page to return the token for
 	 * @param String $for the action to return the token for, e.g. 'edit'.
 	 *
 	 * @return String the token

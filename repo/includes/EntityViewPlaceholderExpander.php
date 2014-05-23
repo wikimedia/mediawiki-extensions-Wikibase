@@ -2,12 +2,12 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use Language;
 use MWException;
 use RuntimeException;
 use Title;
 use User;
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**

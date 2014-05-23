@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityFactory;
 use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\LinkedData\EntityDataRequestHandler;

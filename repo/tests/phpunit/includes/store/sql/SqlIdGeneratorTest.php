@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\IdGenerator;
-use Wikibase\StoreFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 
 /**
  * @covers Wikibase\SqlIdGenerator

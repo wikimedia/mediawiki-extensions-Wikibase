@@ -2,10 +2,6 @@
 
 namespace Wikibase;
 
-use Title;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\WikibaseRepo;
-
 /**
  * Content handler for Wikibase items.
  *

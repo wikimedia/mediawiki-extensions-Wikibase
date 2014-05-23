@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityViewPlaceholderExpander;
 use Wikibase\Item;
 
-
 /**
  * @covers Wikibase\EntityViewPlaceholderExpander
  *

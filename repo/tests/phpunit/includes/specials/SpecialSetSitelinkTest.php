@@ -2,12 +2,11 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Repo\Specials\SpecialSetSiteLink;
+use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\ItemContent;
+use Wikibase\Repo\Specials\SpecialSetSiteLink;
 use Wikibase\Repo\WikibaseRepo;
-use TestSites;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialSetSiteLink
