@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_74ef7d83",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T08:35:34Z",
+      "side": 1,
+      "message": "I think a \"parsing\" exception would be confusing. The parser is used as a tool here and should not be part of the contract of this method, in my opinion.",
+      "parentUuid": "4e1dcb5b_a3816494",
+      "revId": "2433a2d4d9c614b236972691d503391156d1e3f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_234d549c",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "OK, that sounds better. But then also in case of EntityIdParsingException null shuould be returned, right?",
       "parentUuid": "4e1dcb5b_234d549c",
+      "revId": "2433a2d4d9c614b236972691d503391156d1e3f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b4dd15e4",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T08:35:34Z",
+      "side": 1,
+      "message": "I agree. Returning null in both cases sounds good to me.",
+      "parentUuid": "4e1dcb5b_1eebcadc",
       "revId": "2433a2d4d9c614b236972691d503391156d1e3f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
