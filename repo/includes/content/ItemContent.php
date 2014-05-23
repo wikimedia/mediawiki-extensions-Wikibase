@@ -145,7 +145,7 @@ class ItemContent extends EntityContent {
 	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
 		return array_merge(
 			parent::getDeletionUpdates( $page, $parserOutput ),
-			array( new ItemDeletionUpdate( $this ) )
+			array( new ItemDeletionUpdate( $this, $page->getTitle() ) )
 		);
 	}
 

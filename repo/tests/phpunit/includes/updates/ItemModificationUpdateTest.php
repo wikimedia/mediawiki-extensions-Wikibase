@@ -51,9 +51,10 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 		$sitesTable->clear();
 		$sitesTable->saveSites( TestSites::getSites() );
 
-		$linkLookup = StoreFactory::getStore()->newSiteLinkCache();
 
+		$linkLookup = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 
 		$revision = $store->saveEntity( $itemContent->getEntity(), "testing", $GLOBALS['wgUser'], EDIT_NEW );
 		$id = $revision->getEntity()->getId()->getNumericId();
@@ -84,7 +85,9 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 
 		// TODO: verify terms
 
-		$update = new ItemDeletionUpdate( $itemContent );
+		$title = $titleLookup->getTitleForId( $itemContent->getEntity()->getId() );
+
+		$update = new ItemDeletionUpdate( $itemContent, $title );
 		$update->doUpdate();
 	}
 
