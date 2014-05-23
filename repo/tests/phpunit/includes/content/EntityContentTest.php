@@ -2,11 +2,16 @@
 
 namespace Wikibase\Test;
 
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use MediaWikiTestCase;
 use ParserOptions;
 use RequestContext;
 use Title;
+use Wikibase\DataModel\Entity\EntityContentDiff;
+use Wikibase\DataModel\Entity\EntityDiff;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -294,6 +299,55 @@ abstract class EntityContentTest extends MediaWikiTestCase {
 		} elseif ( $content ) {
 			$this->assertEquals( $view->getLanguage()->getCode(), $context->getLanguage()->getCode() );
 		}
+	}
+
+	public function diffProvider() {
+		$empty = $this->newEmpty();
+
+		$spam = $this->newEmpty();
+		$spam->getEntity()->setLabel( 'en', 'Spam' );
+
+		$ham = $this->newEmpty();
+		$ham->getEntity()->setLabel( 'en', 'Ham' );
+
+		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
+		$spamToHamDiff = new EntityDiff( array(
+			'label' => array( 'en' => $spamToHam ),
+		) );
+
+		return array(
+			'empty' => array( $empty, $empty, new EntityContentDiff() ),
+			'same' => array( $ham, $ham, new EntityContentDiff() ),
+			'spam to ham' => array( $spam, $ham, new EntityContentDiff( $spamToHamDiff ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider diffProvider
+	 *
+	 * @param EntityContent $a
+	 * @param EntityContent $b
+	 * @param EntityContentDiff $expected
+	 */
+	public function testGetDiff( EntityContent $a, EntityContent $b, EntityContentDiff $expected ) {
+		$actual = $a->getDiff( $b );
+
+		$this->assertArrayEquals( $expected->getOperations(), $actual->getOperations(), true );
+	}
+
+	/**
+	 * @dataProvider diffProvider
+	 *
+	 * @param EntityContent $a
+	 * @param EntityContent $b
+	 * @param EntityContentDiff $expected
+	 */
+	public function testGetPatchedCopy( EntityContent $a, EntityContentDiff $patch, EntityContent $expected ) {
+		$actual = $a->getDiff( $b );
+
+		..
+
+		$this->assertArrayEquals( $expected->getOperations(), $actual->getOperations(), true );
 	}
 
 }
