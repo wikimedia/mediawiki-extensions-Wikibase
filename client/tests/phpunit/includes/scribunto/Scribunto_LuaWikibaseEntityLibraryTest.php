@@ -2,10 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
-use Title;
-use Scribunto_LuaWikibaseEntityLibrary;
 use Scribunto;
+use Scribunto_LuaWikibaseEntityLibrary;
+use Title;
+use Wikibase\Client\Scribunto\Test\Scribunto_LuaWikibaseLibraryTestCase;
 use Wikibase\Client\WikibaseClient;
 
 /**

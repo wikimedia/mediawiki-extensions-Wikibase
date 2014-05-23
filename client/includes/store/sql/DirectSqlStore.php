@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use Language;
-use Site;
 use ObjectCache;
+use Site;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\store\CachingEntityRevisionLookup;
 

@@ -1,9 +1,9 @@
 <?php
 namespace Wikibase\Test;
 
-use Wikibase\RecentChangesFilterOptions;
-use Wikibase\Client\WikibaseClient;
 use FormOptions;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\RecentChangesFilterOptions;
 
 /**
  * @covers Wikibase\RecentChangesFilterOptions

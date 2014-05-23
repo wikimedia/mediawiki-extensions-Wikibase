@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use RecentChange;
 use MediaWikiTestCase;
+use RecentChange;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ExternalChange;
 use Wikibase\ExternalChangeFactory;

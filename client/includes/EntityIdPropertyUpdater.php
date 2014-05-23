@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use ParserOutput;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 
 /**

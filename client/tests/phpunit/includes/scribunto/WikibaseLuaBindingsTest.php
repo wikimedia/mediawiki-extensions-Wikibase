@@ -3,16 +3,14 @@
 namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
-use Wikibase\Test\MockRepository;
-use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityLookup;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\Client\Scribunto\WikibaseLuaBindings;
+use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Client\Scribunto\WikibaseLuaBindings

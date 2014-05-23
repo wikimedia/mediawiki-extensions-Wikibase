@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\ClientStore;
-use Wikibase\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
+use Wikibase\SiteLinkLookup;
 
 /**
  * (Incomplete) ClientStore mock

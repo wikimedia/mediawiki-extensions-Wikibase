@@ -19,10 +19,10 @@ use RecentChange;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
-use SpecialWatchlist;
-use SplFileInfo;
 use Skin;
 use SpecialRecentChanges;
+use SpecialWatchlist;
+use SplFileInfo;
 use StripState;
 use Title;
 use UnexpectedValueException;
@@ -30,9 +30,9 @@ use User;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
-use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\WikibaseClient;
 
 /**

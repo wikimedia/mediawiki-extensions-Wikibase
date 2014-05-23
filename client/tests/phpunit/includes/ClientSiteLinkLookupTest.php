@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Title;
 use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\DataModel\Entity\Item;
-use Title;
 
 /**
  * @covers Wikibase\Client\ClientSiteLinkLookup

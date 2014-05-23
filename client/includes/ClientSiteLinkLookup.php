@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client;
 
-use Wikibase\SiteLinkLookup;
-use Wikibase\EntityLookup;
 use Title;
+use Wikibase\EntityLookup;
+use Wikibase\SiteLinkLookup;
 
 /**
  * Provides access to sitelinks on repo.

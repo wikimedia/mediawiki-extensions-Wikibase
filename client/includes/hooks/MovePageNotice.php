@@ -4,9 +4,9 @@ namespace Wikibase\Client;
 
 use Html;
 use Title;
-use Wikibase\SiteLinkLookup;
-use Wikibase\RepoLinker;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\RepoLinker;
+use Wikibase\SiteLinkLookup;
 
 /**
  * Adds a notice about the Wikibase Item belonging to the current page
