@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_9491f9fd",
+        "filename": "client/includes/ClientSiteLinkLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T08:58:07Z",
+      "side": 1,
+      "message": "This will do the lookup again if the previous call set it null. Simple solution:\nif ( !array_key_exists( $prefixedText, $this-\u003ecachedItems ) ) {",
+      "revId": "25d32d33f817a8021c720b46a63777591fbd2785",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
