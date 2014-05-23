@@ -329,21 +329,19 @@ abstract class EntityHandler extends ContentHandler {
 		}
 
 		// diff from new to base
-		$patch = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+		$patch = $newerContent->getDiff( $olderContent );
 
 		// apply the patch( new -> old ) to the current revision.
-		$patchedCurrent = $latestContent->getEntity()->copy();
-		$patchedCurrent->patch( $patch );
+		$patchedCurrent = $latestContent->getPatchedCopy( $patch );
 
 		// detect conflicts against current revision
-		$cleanPatch = $latestContent->getEntity()->getDiff( $patchedCurrent );
+		$cleanPatch = $latestContent->getDiff( $patchedCurrent );
 		$conflicts = $patch->count() - $cleanPatch->count();
 
 		if ( $conflicts > 0 ) {
 			return false;
 		} else {
-			$undo = $this->makeEntityContent( $patchedCurrent );
-			return $undo;
+			return $patchedCurrent;
 		}
 	}
 
