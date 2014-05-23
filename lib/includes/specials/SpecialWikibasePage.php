@@ -93,19 +93,6 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	}
 
 	/**
-	 * Adds the "copyright info message" to the HTML output.
-	 */
-	protected function showCopyrightMessage() {
-		$this->getOutput()->addHTML(
-			Html::rawElement(
-				'div',
-				array(),
-				Utils::getCopyrightMessage()->parse()
-			)
-		);
-	}
-
-	/**
 	 * Checks if user is blocked, and if he is blocked throws a UserBlocked.
 	 *
 	 * @throws UserBlockedError
