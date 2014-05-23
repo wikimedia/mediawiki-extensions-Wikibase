@@ -141,6 +141,7 @@ class SpecialWatchlistQueryHandler {
 
 	/**
 	 * @param WebRequest $request
+	 * @return boolean
 	 */
 	private function isEnhancedChangesEnabled( WebRequest $request ) {
 		return $request->getBool( 'enhanced', $this->user->getOption( 'usenewrc' ) ) === true;
