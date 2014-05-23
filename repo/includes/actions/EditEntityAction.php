@@ -292,15 +292,14 @@ abstract class EditEntityAction extends ViewEntityAction {
 		);
 
 		// diff from newer to older
-		$diff = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+		$diff = $newerContent->getDiff( $olderContent );
 
 		if ( $newerRevision->getId() == $latestRevision->getId() ) {
 			// if the revision to undo is the latest revision, then there can be no conflicts
 			$appDiff = $diff;
 		} else {
-			$patchedCurrent = clone $latestContent->getEntity();
-			$patchedCurrent->patch( $diff );
-			$appDiff = $latestContent->getEntity()->getDiff( $patchedCurrent );
+			$patchedCurrent = $latestContent->getPatchedCopy( $diff );
+			$appDiff = $latestContent->getDiff( $patchedCurrent );
 		}
 
 		if ( !$restore ) {
