@@ -172,15 +172,15 @@ local tests = {
 	  expect = { 1 }
 	},
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration 1', func = integrationTestFormatPropertyValues,
-	  expect = { { label = 'LuaTestProperty', value = 'Lua :)' } }
+	  expect = { { label = 'LuaTestStringProperty', value = 'Lua :)' } }
 	},
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration 2', func = integrationTestFormatPropertyValues,
 	  args = { { mw.wikibase.entity.claimRanks.RANK_PREFERRED, mw.wikibase.entity.claimRanks.RANK_NORMAL } },
-	  expect = { { label = 'LuaTestProperty', value = 'Lua :), This is clearly superior to the parser function' } }
+	  expect = { { label = 'LuaTestStringProperty', value = 'Lua :), This is clearly superior to the parser function' } }
 	},
 	{ name = 'mw.wikibase.entity.formatPropertyValues integration 3', func = integrationTestFormatPropertyValues,
 	  args = { { mw.wikibase.entity.claimRanks.RANK_TRUTH } },
-	  expect = { { label = 'LuaTestProperty', value = '' } }
+	  expect = { { label = 'LuaTestStringProperty', value = '' } }
 	},
 }
 
