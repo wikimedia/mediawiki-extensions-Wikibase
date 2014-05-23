@@ -5,11 +5,11 @@ namespace Wikibase;
 use CentralAuthUser;
 use IJobSpecification;
 use JobQueueGroup;
+use JobSpecification;
 use RuntimeException;
 use Title;
 use User;
 use Wikibase\DataModel\SimpleSiteLink;
-use JobSpecification;
 
 /**
  * Provides logic to update the repo after certain changes have been

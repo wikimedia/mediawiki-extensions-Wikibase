@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\EntityChange;
 use Wikibase\EntityDiff;
-use Wikibase\ItemUsageIndex;
 use Wikibase\Item;
+use Wikibase\ItemUsageIndex;
 
 /**
  * @covers Wikibase\ChangeHandler

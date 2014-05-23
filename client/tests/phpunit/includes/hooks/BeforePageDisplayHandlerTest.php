@@ -2,14 +2,9 @@
 
 namespace Wikibase\Test;
 
-use FauxRequest;
-use OutputPage;
 use RequestContext;
 use Skin;
 use SkinVector;
-use Title;
-use Wikibase\NamespaceChecker;
-use Wikibase\SettingsArray;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 
 /**

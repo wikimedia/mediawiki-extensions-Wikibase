@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use ParserOutput;
-use SiteStore;
 use Site;
+use SiteStore;
 use Title;
 use Wikibase\DataModel\SimpleSiteLink;
 
