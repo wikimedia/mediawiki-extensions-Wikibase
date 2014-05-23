@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_2fc6524f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T13:01:47Z",
+      "side": 1,
+      "message": "If you fix the if() below it would be nice to fix this too.",
+      "revId": "342e67bc5c59649a4285cf72bf96aa59b33779d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_cfa59e9c",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T13:01:47Z",
+      "side": 1,
+      "message": "Now wfProfileOut is not called but was called before. Is this a problem? There is an other, older if() above that does exactly the same.",
+      "revId": "342e67bc5c59649a4285cf72bf96aa59b33779d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
