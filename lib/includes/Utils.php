@@ -68,24 +68,6 @@ final class Utils {
 	}
 
 	/**
-	 * Inserts some sites into the sites table, if the sites table is currently empty.
-	 * Called when update.php is run. The initial sites are loaded from https://meta.wikimedia.org.
-	 *
-	 * @param DatabaseUpdater $updater database updater. Not used. Present to be
-	 *   compatible with DatabaseUpdater::addExtensionUpdate
-	 *
-	 * @throws MWException if an error occurs.
-	 * @since 0.1
-	 */
-	public static function insertDefaultSites( $updater = null ) {
-		if ( SiteSQLStore::newInstance()->getSites()->count() > 0 ) {
-			return;
-		}
-
-		self::insertSitesFrom( 'https://meta.wikimedia.org/w/api.php' );
-	}
-
-	/**
 	 * Inserts sites from another wiki into the sites table. The other wiki must run the
 	 * WikiMatrix extension. Existing entries in the sites table are not modified.
 	 *
