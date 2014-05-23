@@ -17,8 +17,8 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\SiteLinkLookup;
 use Wikibase\Property;
+use Wikibase\SiteLinkLookup;
 use Wikibase\StorageException;
 use Wikibase\store\EntityStore;
 

@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\SiteLinkTable;
 use Wikibase\Item;
+use Wikibase\SiteLinkTable;
 
 /**
  * @covers Wikibase\SiteLinkTable

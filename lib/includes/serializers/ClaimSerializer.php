@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\Claim;
 use Wikibase\ReferenceList;
 use Wikibase\Snak;
 use Wikibase\SnakList;
 use Wikibase\Statement;
-use Wikibase\Claim;
 
 /**
  * Serializer for Claim objects.

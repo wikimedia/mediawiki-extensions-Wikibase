@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Serializers;
 
-use Traversable;
 use InvalidArgumentException;
+use Traversable;
 use Wikibase\ByPropertyIdArray;
 
 /**

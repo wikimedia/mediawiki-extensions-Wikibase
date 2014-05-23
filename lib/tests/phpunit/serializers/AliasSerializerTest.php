@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\AliasSerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
  * @covers Wikibase\Lib\Serializers\AliasSerializer

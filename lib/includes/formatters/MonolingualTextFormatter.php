@@ -4,7 +4,6 @@ namespace Wikibase\Formatters;
 
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
-use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 
 /**

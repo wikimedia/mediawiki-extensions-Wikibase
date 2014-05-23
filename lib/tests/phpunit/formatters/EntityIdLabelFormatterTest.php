@@ -8,9 +8,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\EntityIdLabelFormatter;
 
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter

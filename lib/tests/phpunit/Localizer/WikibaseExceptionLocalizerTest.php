@@ -9,7 +9,6 @@ use ValueParsers\ParseException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
 
 /**

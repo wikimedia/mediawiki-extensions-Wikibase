@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\EntityIdTitleFormatter;
 use Wikibase\Item;
+use Wikibase\Lib\EntityIdTitleFormatter;
 use Wikibase\Property;
 
 /**

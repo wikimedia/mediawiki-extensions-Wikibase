@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use MWException;
 use Wikibase\LanguageWithConversion;
-use Language;
 
 /**
  * @covers Wikibase\LanguageWithConversion

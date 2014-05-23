@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Specials;
 
-use SpecialPage;
 use Html;
+use SpecialPage;
 use UserBlockedError;
 use Wikibase\StringNormalizer;
 

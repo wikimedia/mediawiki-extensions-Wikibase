@@ -1,10 +1,7 @@
 <?php
 
-use DataTypes\DataTypeFactory;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Settings;
 
 /**
  * File for Wikibase resourceloader modules.

@@ -4,7 +4,6 @@ namespace Wikibase\Test\Validators;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Validators\NotEntityIdValidator;
-use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * @covers \Wikibase\Validators\NotEntityIdValidator

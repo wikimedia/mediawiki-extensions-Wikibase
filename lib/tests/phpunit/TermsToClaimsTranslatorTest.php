@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Term;
 use Wikibase\Lib\TermsToClaimsTranslator;
+use Wikibase\Term;
 
 /**
  * @covers Wikibase\Lib\TermsToClaimsTranslator

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\TemplateRegistry;
 use Wikibase\Template;
+use Wikibase\TemplateRegistry;
 
 /**
  * @covers Wikibase\Template

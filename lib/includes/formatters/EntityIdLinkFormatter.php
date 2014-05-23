@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 
 /**
  * Formats entity IDs by generating a wiki link to the corresponding page title.

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityFactory;
 use Wikibase\Entity;
+use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\Property;
 

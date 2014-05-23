@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityChange;
 use Wikibase\Entity;
+use Wikibase\EntityChange;
 
 /**
  * @covers Wikibase\EntityChange

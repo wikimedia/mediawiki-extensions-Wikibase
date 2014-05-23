@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\EntityLookup;
 use Wikibase\LanguageFallbackChain;
 
