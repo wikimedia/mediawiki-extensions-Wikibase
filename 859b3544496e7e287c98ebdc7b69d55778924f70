@@ -33,6 +33,24 @@
       "revId": "859b3544496e7e287c98ebdc7b69d55778924f70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_86e42ca5",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T21:50:15Z",
+      "side": 1,
+      "message": "The reason for this check is in the tests. Without it the title \"User:Q1\" would return the EntityId \"Q1\".",
+      "parentUuid": "4e1dcb5b_e6dd20e3",
+      "revId": "859b3544496e7e287c98ebdc7b69d55778924f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
