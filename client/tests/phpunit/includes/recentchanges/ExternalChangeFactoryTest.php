@@ -47,6 +47,7 @@ class ExternalChangeFactoryTest extends MediaWikiTestCase {
 
 	/**
 	 * @param boolean $bot
+	 * @return RecentChange
 	 */
 	protected function getEditRecentChange( $bot ) {
 		$recentChange = new RecentChange();
