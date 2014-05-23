@@ -15,6 +15,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityContentDiff;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -391,6 +392,31 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		return $thisEntity->equals( $thatEntity );
+	}
+
+	/**
+	 * Returns a diff between this EntityContent and $other.
+	 *
+	 * @param EntityContent $other
+	 *
+	 * @return EntityContentDiff
+	 */
+	public function getDiff( EntityContent $other ) {
+		$entityDiff = $this->getEntity()->getDiff( $other->getEntity() );
+		return new EntityContentDiff( $entityDiff );
+	}
+
+	/**
+	 * Returns a patched copy of this Content object
+	 *
+	 * @param EntityContentDiff $patch
+	 *
+	 * @return EntityContent
+	 */
+	public function getPatchedCopy( EntityContentDiff $patch ) {
+		$patched = $this->copy();
+		$patched->getEntity()->patch( $patch->getEntityDiff() );
+		return $patched;
 	}
 
 	/**
