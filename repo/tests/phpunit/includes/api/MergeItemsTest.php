@@ -369,6 +369,17 @@ class MergeItemsTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
+	public function testMergeNonExistingItem() {
+		$params = array(
+			'action' => 'wbmergeitems',
+			'fromid' => 'Q60457977',
+			'toid' => 'Q60457978'
+		);
+
+		$expectedException = array( 'type' => 'UsageException', 'code' => 'no-such-entity' );
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
 	/**
 	 * Applies self::$idMap to all data in the given data structure, recursively.
 	 *
