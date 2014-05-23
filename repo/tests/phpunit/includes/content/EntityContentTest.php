@@ -2,10 +2,14 @@
 
 namespace Wikibase\Test;
 
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpChange;
 use IContextSource;
 use ParserOptions;
 use RequestContext;
 use Title;
+use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\DataModel\Entity\EntityDiff;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -293,6 +297,79 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		} elseif ( $content ) {
 			$this->assertEquals( $view->getLanguage()->getCode(), $context->getLanguage()->getCode() );
 		}
+	}
+
+	public function diffProvider() {
+		$empty = $this->newEmpty();
+
+		$spam = $this->newEmpty();
+		$spam->getEntity()->setLabel( 'en', 'Spam' );
+
+		$ham = $this->newEmpty();
+		$ham->getEntity()->setLabel( 'en', 'Ham' );
+
+		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
+		$spamToHamDiff = new EntityDiff( array(
+			'label' => new Diff( array( 'en' => $spamToHam ) ),
+		) );
+
+		return array(
+			'empty' => array( $empty, $empty, new EntityContentDiff( new EntityDiff(), new Diff() ) ),
+			'same' => array( $ham, $ham, new EntityContentDiff(  new EntityDiff(), new Diff()  ) ),
+			'spam to ham' => array( $spam, $ham, new EntityContentDiff( $spamToHamDiff, new Diff() ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider diffProvider
+	 *
+	 * @param EntityContent $a
+	 * @param EntityContent $b
+	 * @param EntityContentDiff $expected
+	 */
+	public function testGetDiff( EntityContent $a, EntityContent $b, EntityContentDiff $expected ) {
+		$actual = $a->getDiff( $b );
+
+		$expectedOps = $expected->getOperations();
+		$actualOps = $actual->getOperations();
+
+		// HACK: ItemDiff always sets this, even if it's empty. Ignore.
+		if ( isset( $actualOps['claim'] ) && $actualOps['claim']->isEmpty() ) {
+			unset( $actualOps['claim'] );
+		}
+
+		$this->assertArrayEquals( $expectedOps, $actualOps, true );
+	}
+
+	public function patchedCopyProvider() {
+		$spam = $this->newEmpty();
+		$spam->getEntity()->setLabel( 'en', 'Spam' );
+
+		$ham = $this->newEmpty();
+		$ham->getEntity()->setLabel( 'en', 'Ham' );
+
+		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
+		$spamToHamDiff = new EntityDiff( array(
+			'label' => new Diff( array( 'en' => $spamToHam ) ),
+		) );
+
+		return array(
+			'empty' => array( $spam, new EntityContentDiff( new EntityDiff(), new Diff() ), $spam ),
+			'spam to ham' => array( $spam, new EntityContentDiff( $spamToHamDiff, new Diff() ), $ham ),
+		);
+	}
+
+	/**
+	 * @dataProvider patchedCopyProvider
+	 *
+	 * @param EntityContent $base
+	 * @param EntityContentDiff $patch
+	 * @param EntityContent $expected
+	 */
+	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected ) {
+		$actual = $base->getPatchedCopy( $patch );
+
+		$this->assertTrue( $expected->equals( $actual ), 'equals()' );
 	}
 
 }
