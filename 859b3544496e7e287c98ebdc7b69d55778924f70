@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_c6c34409",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-23T21:47:32Z",
+      "side": 1,
+      "message": "new BasicEntityIdParser();\n\nThough that is still wrong, the entity id parser instance depends on config. The entry point should fetch it from repo factory. \n\nWhy are you putting this into EntityContentFactory? There is no EntityContent being constructed in this method.",
+      "revId": "859b3544496e7e287c98ebdc7b69d55778924f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_e6dd20e3",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-23T21:47:32Z",
+      "side": 1,
+      "message": "I see what this if check does, though does the intended user actually really need this? The code can be simplified if this is just a nice to have.",
+      "revId": "859b3544496e7e287c98ebdc7b69d55778924f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
