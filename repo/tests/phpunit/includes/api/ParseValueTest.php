@@ -18,8 +18,6 @@ namespace Wikibase\Test\Api;
  */
 class ParseValueTest extends WikibaseApiTestCase {
 
-	private static $hasSetup;
-
 	public function setUp() {
 		$this->mergeMwGlobalArrayValue(
 			'wgValueParsers',
