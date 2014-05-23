@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_c54d7d41",
+        "filename": "lib/includes/store/EntityTitleLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-23T17:21:09Z",
+      "side": 1,
+      "message": "ugh. This thing is for looking up entity titles. It\u0027s not for looking up entity ids or namespaces. The later being the worse offender, though that code rot already took place.",
+      "revId": "25cdc65eb4cedda832940fa2157165ccdc0ccdff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
