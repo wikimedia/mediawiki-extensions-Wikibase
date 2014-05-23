@@ -1194,7 +1194,7 @@ final class RepoHooks {
 		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
 
 		$hookHandler = new MakeGlobalVariablesScriptHandler(
-			$wikibaseRepo->getEntityRevisionLookup(),
+			$wikibaseRepo->getEntityContentFactory(),
 			$wikibaseRepo->getParserOutputJsConfigBuilder( $langCode ),
 			$langCodes
 		);
