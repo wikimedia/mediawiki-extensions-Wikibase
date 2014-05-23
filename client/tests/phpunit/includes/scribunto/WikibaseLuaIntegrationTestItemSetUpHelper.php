@@ -46,22 +46,32 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			return;
 		}
 
-		$property = $this->createTestProperty();
+		$itemProperty = $this->createTestProperty( 'wikibase-item', 'LuaTestItemProperty' );
+		$stringProperty = $this->createTestProperty( 'string', 'LuaTestStringProperty' );
 
-		$snak = $this->getTestSnak(
-			$property->getId(),
+		$mismatchSnak = $this->getTestSnak(
+			$itemProperty->getId(),
+			new StringValue( 'Lua mismatch' )
+		);
+
+		$statement1 = $this->getTestStatement( $mismatchSnak );
+		$statement1->setRank( CLAIM::RANK_PREFERRED );
+
+		$stringSnak = $this->getTestSnak(
+			$stringProperty->getId(),
 			new StringValue( 'Lua :)' )
 		);
 
-		$statement1 = $this->getTestStatement( $snak );
-		$statement1->setRank( Claim::RANK_PREFERRED );
+		$statement2 = $this->getTestStatement( $stringSnak );
+		$statement2->setRank( Claim::RANK_PREFERRED );
 
-		$snak = $this->getTestSnak(
-			$property->getId(),
+		$stringSnak2 = $this->getTestSnak(
+			$stringProperty->getId(),
 			new StringValue( 'This is clearly superior to the parser function' )
 		);
-		$statement2 = $this->getTestStatement( $snak );
-		$statement2->setRank( Claim::RANK_NORMAL );
+
+		$statement3 = $this->getTestStatement( $stringSnak2 );
+		$statement3->setRank( Claim::RANK_NORMAL );
 
 		$siteLinks = array( $siteLink );
 		$siteLinks[] = new SiteLink(
@@ -74,16 +84,16 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			'en' => 'Test all the code paths'
 		);
 
-		$this->createTestItem( $labels, array( $statement1, $statement2 ), $siteLinks );
+		$this->createTestItem( $labels, array( $statement1, $statement2, $statement3 ), $siteLinks );
 	}
 
 	/**
 	 * @return Property
 	 */
-	protected function createTestProperty() {
+	protected function createTestProperty( $dataTypeId, $label ) {
 		$property = Property::newEmpty();
-		$property->setDataTypeId( 'wikibase-item' );
-		$property->setLabel( 'de', 'LuaTestProperty' );
+		$property->setDataTypeId( $dataTypeId );
+		$property->setLabel( 'de', $label );
 
 		$this->mockRepository->putEntity( $property );
 
