@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use Language;
 use Parser;
 use ParserOptions;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\PropertyParserFunction;
 
 /**

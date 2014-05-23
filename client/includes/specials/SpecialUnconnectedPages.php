@@ -7,9 +7,9 @@ use Html;
 use Linker;
 use MWException;
 use Title;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
 use Wikibase\NamespaceChecker;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * List client pages that is not connected to repository items.

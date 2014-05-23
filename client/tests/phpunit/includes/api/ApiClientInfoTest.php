@@ -3,13 +3,13 @@
 namespace Wikibase\Test;
 
 use ApiMain;
-use ApiTestContext;
 use ApiQuery;
+use ApiTestContext;
 use FauxRequest;
 use MediaWikiTestCase;
 use User;
-use Wikibase\SettingsArray;
 use Wikibase\ApiClientInfo;
+use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\ApiClientInfo

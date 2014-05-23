@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use ChangesList;
 use Language;
+use MediaWikiTestCase;
 use RecentChange;
 use RequestContext;
-use MediaWikiTestCase;
 use Wikibase\ChangeLineFormatter;
 use Wikibase\ExternalChangeFactory;
 use Wikibase\RepoLinker;

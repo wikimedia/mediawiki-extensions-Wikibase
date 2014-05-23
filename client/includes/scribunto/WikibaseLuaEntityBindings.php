@@ -2,15 +2,15 @@
 
 namespace Wikibase\Client\Scribunto;
 
-use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\SnakFormatter;
+use Language;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\EntityLookup;
-use Wikibase\Entity;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Language;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Entity;
+use Wikibase\EntityLookup;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension

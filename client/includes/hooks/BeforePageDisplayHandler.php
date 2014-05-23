@@ -2,13 +2,11 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Action;
 use OutputPage;
 use Skin;
 use Title;
 use User;
 use Wikibase\NamespaceChecker;
-use Wikibase\SettingsArray;
 
 /**
  * @since 0.5

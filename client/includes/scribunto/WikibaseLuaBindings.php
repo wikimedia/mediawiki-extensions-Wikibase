@@ -2,16 +2,14 @@
 
 namespace Wikibase\Client\Scribunto;
 
+use Language;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Entity;
+use Wikibase\EntityLookup;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Lib\EntityIdFormatter;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\SiteLinkLookup;
-use Wikibase\EntityLookup;
-use Wikibase\Entity;
-use Language;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension

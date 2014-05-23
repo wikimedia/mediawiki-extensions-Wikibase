@@ -3,14 +3,14 @@
 namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
-use Wikibase\Test\MockRepository;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
-use Wikibase\EntityLookup;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Claim\Claim;
+use Wikibase\EntityLookup;
 use Wikibase\SnakFactory;
+use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Client\Scribunto\WikibaseLuaEntityBindings
