@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_ef7a9ae6",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T14:10:20Z",
+      "side": 1,
+      "message": "Whoops. Not an array any more. Also a space missing.",
+      "revId": "feba492f73e85d503b6926093711f3aa6baa3973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_cf4ebec4",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T14:10:20Z",
+      "side": 1,
+      "message": "Badly named parameter, it doesn\u0027t contain a store.",
+      "revId": "feba492f73e85d503b6926093711f3aa6baa3973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_6fcd6a34",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T14:10:20Z",
+      "side": 1,
+      "message": "Unused now.",
+      "revId": "feba492f73e85d503b6926093711f3aa6baa3973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
