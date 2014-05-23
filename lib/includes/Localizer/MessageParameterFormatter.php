@@ -6,7 +6,7 @@ use DataValues\DataValue;
 use Language;
 use SiteStore;
 use ValueFormatters\FormattingException;
-use ValueFormatters\Localizer;
+use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
@@ -43,7 +43,7 @@ class MessageParameterFormatter implements ValueFormatter {
 	private $language;
 
 	/**
-	 * @var Localizer
+	 * @var NumberLocalizer
 	 */
 	private $valueLocalizer;
 
