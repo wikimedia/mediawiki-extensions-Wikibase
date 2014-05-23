@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_4f218e99",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T10:20:37Z",
+      "side": 1,
+      "message": "Wouldn\u0027t the message\n$this-\u003edieUsage( \u0027One of more of the ids provided do not exist\u0027 , \u0027no-such-e\nntity-id\u0027 );\nfrom below be more appropriate? Since this is not about an \"entity\". The params contain entity ids, right?\n\nWithout the typo in the message, obviously. ;-)",
+      "revId": "68ac2bc27193cf67f4e3161e405ca125eb3d8002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_6f1c4a6b",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-23T10:20:37Z",
+      "side": 1,
+      "message": "Whoups, typo.",
+      "revId": "68ac2bc27193cf67f4e3161e405ca125eb3d8002",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
