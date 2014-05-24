@@ -57,5 +57,6 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|a silpo ti pagsasao|a silsilpo ti pagsasao}} iti daytoy a panid)",
 	"wikibase-pageinfo-entity-id": "ID ti Banag ti {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Awan",
-	"wikibase-property-render-error": "Napaay a nangipaay ti tagikua ti $1:$2"
+	"wikibase-property-render-error": "Napaay a nangipaay ti tagikua ti $1:$2",
+	"wikibase-otherprojects": "Dagiti sabsabali a gandat"
 }

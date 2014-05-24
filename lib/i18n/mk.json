@@ -88,5 +88,7 @@
 	"wikibase-validator-not-allowed": "Недопуштена вредност: $1",
 	"datatypes-type-wikibase-item": "Предмет",
 	"datatypes-type-commonsMedia": "Податотека од Ризницата",
-	"version-wikibase": "Викибаза"
+	"version-wikibase": "Викибаза",
+	"wikibase-snakformatter-valuetype-mismatch": "Типит на вредноста („$1“) не одговара на типот на својството („$2“).",
+	"wikibase-snakformatter-property-not-found": "Не го најдов својството $1. Не можам да го одредам податочниот тип што треба да се користи."
 }

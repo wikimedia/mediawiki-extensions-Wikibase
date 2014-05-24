@@ -91,5 +91,7 @@
 	"wikibase-validator-not-allowed": "Otillåtet värde: $1",
 	"datatypes-type-wikibase-item": "Objekt",
 	"datatypes-type-commonsMedia": "Mediefil från Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-snakformatter-valuetype-mismatch": "Värdets typ \"$1\" stämmer inte med egenskapens typ \"$2\".",
+	"wikibase-snakformatter-property-not-found": "Egenskap $1 hittades inte, kan inte avgöra vilken datatyp som ska användas."
 }

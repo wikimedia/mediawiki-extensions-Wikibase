@@ -5,6 +5,7 @@
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Vikibaza",
+	"specialpages-group-wikibaseclient": "Klijent Vikipodataka",
 	"wikibase-after-page-move-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se uskoro automatski ažurirati.",
 	"wikibase-dataitem": "Stavka na Vikipodacima",
 	"wikibase-editlinks": "Uredi veze",

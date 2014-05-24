@@ -97,5 +97,7 @@
 	"wikibase-validator-not-allowed": "非法值：$1",
 	"datatypes-type-wikibase-item": "项",
 	"datatypes-type-commonsMedia": "共享资源媒体文件",
-	"version-wikibase": "维基数据库"
+	"version-wikibase": "维基数据库",
+	"wikibase-snakformatter-valuetype-mismatch": "值类型“$1”不匹配属性类型“$2”。",
+	"wikibase-snakformatter-property-not-found": "未找到属性$1，无法决定要使用的数据类型。"
 }

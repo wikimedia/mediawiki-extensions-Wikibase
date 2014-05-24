@@ -80,5 +80,7 @@
 	"wikibase-validator-not-allowed": "Lubamatu väärtus: $1",
 	"datatypes-type-wikibase-item": "Üksus",
 	"datatypes-type-commonsMedia": "Commonsi meediafail",
-	"version-wikibase": "Vikibaas"
+	"version-wikibase": "Vikibaas",
+	"wikibase-snakformatter-valuetype-mismatch": "Väärtuse tüüp \"$1\" ei vasta omaduse tüübile \"$2\".",
+	"wikibase-snakformatter-property-not-found": "Omadust $1 ei leitud. Kasutatavat andmetüüpi ei õnnestu määrata."
 }

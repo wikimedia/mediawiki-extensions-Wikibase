@@ -74,5 +74,6 @@
 	"wikibase-validator-unknown-unit": "Unidade desconhecida: $1",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-commonsMedia": "Ficheiro de média do Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-snakformatter-property-not-found": "Propriedade $1 não encontrada, não é possível determinar o tipo de dados a usar."
 }
