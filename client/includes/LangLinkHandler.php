@@ -26,14 +26,9 @@ class LangLinkHandler {
 	private $siteId;
 
 	/**
-	 * @var array
+	 * @var NamespaceChecker
 	 */
-	private $namespaces;
-
-	/**
-	 * @var array
-	 */
-	private $excludeNamespaces;
+	private $namespaceChecker;
 
 	/**
 	 * @var SiteLinkLookup
@@ -59,8 +54,13 @@ class LangLinkHandler {
 	 * @param SiteStore $sites A site definition lookup service
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
-	public function __construct( $siteId, NamespaceChecker $namespaceChecker,
-			SiteLinkLookup $siteLinkLookup, SiteStore $sites, $siteGroup ) {
+	public function __construct(
+		$siteId,
+		NamespaceChecker $namespaceChecker,
+		SiteLinkLookup $siteLinkLookup,
+		SiteStore $sites,
+		$siteGroup
+	) {
 		$this->siteId = $siteId;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -114,7 +114,7 @@ class LangLinkHandler {
 	 * @param Title $title
 	 * @param ParserOutput $out
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function useRepoLinks( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
@@ -148,12 +148,12 @@ class LangLinkHandler {
 	 * @since 0.1
 	 *
 	 * @param ParserOutput $out
-	 * @param array $repoLinks An array that uses global site IDs as keys.
+	 * @param SimpleSiteLink[] $repoLinks An array that uses global site IDs as keys.
 	 *
-	 * @return array A filtered copy of $repoLinks, with any inappropriate
+	 * @return SimpleSiteLink[] A filtered copy of $repoLinks, with any inappropriate
 	 *         entries removed.
 	 */
-	public function suppressRepoLinks( ParserOutput $out, $repoLinks ) {
+	public function suppressRepoLinks( ParserOutput $out, array $repoLinks ) {
 		wfProfileIn( __METHOD__ );
 
 		$nel = $this->getNoExternalLangLinks( $out );
@@ -185,10 +185,10 @@ class LangLinkHandler {
 	 *
 	 * @since  0.4
 	 *
-	 * @param array $repoLinks An array that uses global site IDs as keys.
-	 * @param array $allowedGroups A list of allowed site groups
+	 * @param SimpleSiteLink[] $repoLinks An array that uses global site IDs as keys.
+	 * @param string[] $allowedGroups A list of allowed site groups
 	 *
-	 * @return array A filtered copy of $repoLinks, retaining only the links
+	 * @return SimpleSiteLink[] A filtered copy of $repoLinks, retaining only the links
 	 *         pointing to a site in an allowed group.
 	 */
 	public function filterRepoLinksByGroup( array $repoLinks, array $allowedGroups ) {
@@ -223,7 +223,7 @@ class LangLinkHandler {
 	 * @since 0.4
 	 *
 	 * @param ParserOutput $out
-	 * @param $langs[]
+	 * @param string[] $langs
 	 */
 	public function excludeRepoLangLinks( ParserOutput $out, array $langs ) {
 		$nel = array_merge( $this->getNoExternalLangLinks( $out ), $langs );
@@ -236,7 +236,7 @@ class LangLinkHandler {
 	 *
 	 * @param ParserOutput $out
 	 *
-	 * @return Array A list of language codes, identifying which repository links to ignore.
+	 * @return string[] A list of language codes, identifying which repository links to ignore.
 	 *         Empty if {{#noexternallanglinks}} was not used on the page.
 	 */
 	public function getNoExternalLangLinks( ParserOutput $out ) {
@@ -256,7 +256,7 @@ class LangLinkHandler {
 	 * @since 0.4
 	 *
 	 * @param ParserOutput $out
-	 * @param array $noexternallanglinks a list of languages to suppress
+	 * @param string[] $noexternallanglinks a list of languages to suppress
 	 */
 	public function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
 		wfProfileIn( __METHOD__ );
@@ -268,9 +268,9 @@ class LangLinkHandler {
 	 * Converts a list of interwiki links into an associative array that maps
 	 * global site IDs to the respective target pages on the designated wikis.
 	 *
-	 * @param array $flatLinks
+	 * @param string[] $flatLinks
 	 *
-	 * @return array An associative array, using site IDs for keys
+	 * @return string[] An associative array, using site IDs for keys
 	 *           and the target pages on the respective wiki as the associated value.
 	 */
 	private function localLinksToArray( array $flatLinks ) {
@@ -307,7 +307,7 @@ class LangLinkHandler {
 	 *
 	 * @param SimpleSiteLink[] $repoLinks
 	 *
-	 * @return array An associative array, using site IDs for keys
+	 * @return string[] An associative array, using site IDs for keys
 	 *         and the target pages on the respective wiki as the associated value.
 	 */
 	private function repoLinksToArray( array $repoLinks ) {
@@ -340,7 +340,7 @@ class LangLinkHandler {
 	 * @param Title $title The page's title
 	 * @param ParserOutput $out   Parsed representation of the page
 	 *
-	 * @return \Wikibase\SiteLink[] An associative array, using site IDs for keys
+	 * @return SimpleSiteLink[] An associative array, using site IDs for keys
 	 *         and the target pages in the respective languages as the associated value.
 	 */
 	public function getEffectiveRepoLinks( Title $title, ParserOutput $out ) {

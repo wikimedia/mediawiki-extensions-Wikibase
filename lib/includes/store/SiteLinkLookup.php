@@ -102,7 +102,7 @@ interface SiteLinkLookup {
 	 *
 	 * @param SimpleSiteLink $siteLink
 	 *
-	 * return ItemId|null
+	 * @return ItemId|null
 	 */
 	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink );
 

@@ -13,12 +13,24 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  */
 class RepoItemLinkGenerator {
 
-	private $namespacesChecker;
+	/**
+	 * @var NamespaceChecker
+	 */
+	private $namespaceChecker;
 
+	/**
+	 * @var RepoLinker
+	 */
 	private $repoLinker;
 
+	/**
+	 * @var EntityIdParser
+	 */
 	private $entityIdParser;
 
+	/**
+	 * @var string
+	 */
 	private $siteGroup;
 
 	/**
@@ -29,9 +41,12 @@ class RepoItemLinkGenerator {
 	 * @param EntityIdParser   $entityIdParser
 	 * @param string           $siteGroup
 	 */
-	public function __construct( NamespaceChecker $namespaceChecker, RepoLinker $repoLinker,
-		EntityIdParser $entityIdParser, $siteGroup ) {
-
+	public function __construct(
+		NamespaceChecker $namespaceChecker,
+		RepoLinker $repoLinker,
+		EntityIdParser $entityIdParser,
+		$siteGroup
+	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
 		$this->entityIdParser = $entityIdParser;
@@ -43,11 +58,11 @@ class RepoItemLinkGenerator {
 	 *
 	 * @param Title $title
 	 * @param string $action
-	 * @param boolean $isAnon
+	 * @param bool $isAnon
 	 * @param array|null $noExternalLangLinks
 	 * @param string|null $prefixedId
 	 *
-	 * @return array|null
+	 * @return string[]|null
 	 */
 	public function getLink( Title $title, $action, $isAnon, $noExternalLangLinks, $prefixedId ) {
 		$editLink = null;
@@ -73,15 +88,16 @@ class RepoItemLinkGenerator {
 	 * @param string $action
 	 * @param mixed $noExternalLangLinks
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function canHaveLink( Title $title, $action, $noExternalLangLinks ) {
 		if ( $action !== 'view' ) {
 			return false;
 		}
 
-		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) && $title->exists() ) {
-
+		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() )
+			&& $title->exists()
+		) {
 			if ( ! $this->isSuppressed( $noExternalLangLinks ) ) {
 				return true;
 			}
@@ -93,7 +109,7 @@ class RepoItemLinkGenerator {
 	/**
 	 * @param mixed
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isSuppressed( $noExternalLangLinks ) {
 		if ( $noExternalLangLinks === null || !in_array( '*', $noExternalLangLinks ) ) {
@@ -106,7 +122,7 @@ class RepoItemLinkGenerator {
 	/**
 	 * @param EntityId
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getEditLinksLink( EntityId $entityId ) {
 		$fragment = '#sitelinks-' . htmlspecialchars( $this->siteGroup, ENT_QUOTES );
@@ -125,7 +141,7 @@ class RepoItemLinkGenerator {
 	/**
 	 * Used by the LinkItem js widget
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getAddLinksLink() {
 		$link = array(
