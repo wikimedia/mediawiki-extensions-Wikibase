@@ -274,7 +274,7 @@
 				options.precision = precisionRotator.value() || value && value.precision();
 			}
 			if( calendarRotator && !calendarRotator.autoActive() ) {
-				calendarname = calendarRotator.value(),
+				calendarname = calendarRotator.value();
 				options.calendar = calendarname ? this._calendarNameToUri( calendarname ) : ( value && value.calendarURI() );
 			}
 
