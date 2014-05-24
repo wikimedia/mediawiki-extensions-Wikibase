@@ -39,7 +39,7 @@ class ExternalChange {
 	}
 
 	/**
-	 * return EntityId
+	 * @return EntityId
 	 */
 	public function getEntityId() {
 		return $this->entityId;
