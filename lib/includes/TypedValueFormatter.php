@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use DataValues\DataValue;
+use ValueFormatters\FormattingException;
 
 /**
  * Provides a string representation for a DataValue given its associated DataType.

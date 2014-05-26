@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 use DataValues\DataValue;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
@@ -132,4 +133,5 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 
 		return $formatter;
 	}
+
 }
