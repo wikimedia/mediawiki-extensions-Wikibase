@@ -17,8 +17,7 @@ util.MessageProvider = ( function() {
 	 *                   passed to the message getter.
 	 *                 - {Function} messageGetter
 	 *                   Function to retrieve a message from. The function receives the message key
-	 *                   as first argument and and array containing the message parameters as second
-	 *                   argument.
+	 *                   as first argument and a variable number of arguments as message parameters.
 	 *                 - {string} prefix
 	 *                   String the message key should be prefixed with when querying the message
 	 *                   getter function.
@@ -55,7 +54,7 @@ util.MessageProvider = ( function() {
 				if( o.prefix ) {
 					key = o.prefix + key;
 				}
-				message = o.messageGetter( key, params );
+				message = o.messageGetter.apply( null, [ key ].concat( params ) );
 			}
 
 			if( !message && o.defaultMessages && o.defaultMessages[key] ) {

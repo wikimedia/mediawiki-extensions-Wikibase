@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( QUnit, util ) {
+( function( QUnit, util, sinon ) {
 	'use strict';
 
 	var messages = {
@@ -91,4 +91,18 @@
 		);
 	} );
 
-}( QUnit, util ) );
+	QUnit.test( 'correctly passes additional params', function( assert ) {
+		var messageGetter = sinon.spy();
+		var messageProvider = new util.MessageProvider( {
+			messageGetter: messageGetter
+		} );
+
+		messageProvider.getMessage( 'id', [ 'param one' ] );
+		messageProvider.getMessage( 'id', [ 'param one', 'param two' ] );
+
+		sinon.assert.calledTwice( messageGetter );
+		assert.ok( messageGetter.firstCall.calledWithExactly( 'id', 'param one' ) );
+		assert.ok( messageGetter.secondCall.calledWithExactly( 'id', 'param one', 'param two' ) );
+	} );
+
+}( QUnit, util, sinon ) );

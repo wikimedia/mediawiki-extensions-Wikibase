@@ -183,6 +183,7 @@ return call_user_func( function() {
 				'util/util.MessageProvider.tests.js',
 			),
 			'dependencies' => array(
+				'test.sinonjs',
 				'util.MessageProvider',
 			),
 		),

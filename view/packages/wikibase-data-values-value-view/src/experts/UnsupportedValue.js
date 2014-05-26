@@ -50,7 +50,7 @@
 				unsupportedIndicator = this.viewState().option( 'dataTypeId' );
 				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatatype',
-					unsupportedIndicator
+					[ unsupportedIndicator ]
 				);
 				// NOTE: Of course, this also implies that the data value type is unsupported but
 				//  the message is actually more detailed than that.
@@ -60,7 +60,7 @@
 					: this.viewState().option( 'dataValueType');
 				unsupportedMsg = this._messageProvider.getMessage(
 					'valueview-expert-unsupportedvalue-unsupporteddatavalue',
-					dataValueType
+					[ dataValueType ]
 				);
 			} else {
 				// Empty value set in view, but not even ability to display that as a value.
