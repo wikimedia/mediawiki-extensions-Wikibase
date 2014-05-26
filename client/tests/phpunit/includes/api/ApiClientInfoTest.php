@@ -4,9 +4,7 @@ namespace Wikibase\Test;
 
 use ApiMain;
 use ApiQuery;
-use ApiTestContext;
 use FauxRequest;
-use MediaWikiTestCase;
 use User;
 use Wikibase\ApiClientInfo;
 use Wikibase\SettingsArray;
@@ -25,14 +23,17 @@ use Wikibase\SettingsArray;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ApiClientInfoTest extends MediaWikiTestCase {
+class ApiClientInfoTest extends \MediaWikiTestCase {
 
+	/**
+	 * @var \ApiTestContext
+	 */
 	protected $apiContext;
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->apiContext = new ApiTestContext();
+		$this->apiContext = new \ApiTestContext();
 	}
 
 	/**

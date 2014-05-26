@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use ContentHandler;
 use MWException;
 use OutOfBoundsException;
 use Revision;
@@ -121,7 +122,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return EntityContent|null
 	 */
 	public function getFromRevision( $revisionId ) {
-		$revision = \Revision::newFromId( intval( $revisionId ) );
+		$revision = Revision::newFromId( intval( $revisionId ) );
 
 		if ( $revision === null ) {
 			return null;
@@ -143,7 +144,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 		/**
 		 * @var EntityHandler $handler
 		 */
-		$handler = \ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
+		$handler = ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
 
 		return $handler->newContentFromEntity( $entity );
 	}
@@ -252,4 +253,5 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 
 		return $status;
 	}
+
 }

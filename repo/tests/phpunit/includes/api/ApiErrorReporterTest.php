@@ -5,12 +5,12 @@ namespace Wikibase\Test;
 use ApiMain;
 use DataValues\IllegalValueException;
 use Language;
-use MediaWikiTestCase;
 use Message;
 use Status;
 use UsageException;
 use ValueParsers\ParseException;
 use Wikibase\Api\ApiErrorReporter;
+use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
 
 /**
@@ -23,7 +23,7 @@ use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ApiErrorReporterTest extends MediaWikiTestCase {
+class ApiErrorReporterTest extends \MediaWikiTestCase {
 
 	protected function assertUsageException( $info, $code, $httpStatusCode, $expectedDataFields, UsageException $ex ) {
 		$messageArray = $ex->getMessageArray();
@@ -347,5 +347,5 @@ class ApiErrorReporterTest extends MediaWikiTestCase {
 
 		return new WikibaseExceptionLocalizer( $paramFormatter );
 	}
-}
 
+}
