@@ -51,6 +51,23 @@
       "revId": "859b3544496e7e287c98ebdc7b69d55778924f70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b0163359",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentFactoryTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-26T14:14:13Z",
+      "side": 1,
+      "message": "what about items in the Item: namespace?  can the tests also cover that case?",
+      "revId": "859b3544496e7e287c98ebdc7b69d55778924f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
