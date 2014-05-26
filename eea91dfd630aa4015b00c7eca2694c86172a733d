@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_edb85876",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-26T09:43:55Z",
+      "side": 1,
+      "message": "The outer brackets are not necessary. I guess thats more a matter of taste. I tend to left them out.",
+      "revId": "eea91dfd630aa4015b00c7eca2694c86172a733d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_6dac4833",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-26T09:43:55Z",
+      "side": 1,
+      "message": "I would have expected these two new tests right after the two existing \"remove\" tests ... Oh, wait. I see what you did. Ok.",
+      "revId": "eea91dfd630aa4015b00c7eca2694c86172a733d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
