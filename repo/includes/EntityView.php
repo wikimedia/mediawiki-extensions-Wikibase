@@ -89,6 +89,8 @@ abstract class EntityView extends ContextSource {
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param SerializationOptions $options
+	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 *
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
 	 *

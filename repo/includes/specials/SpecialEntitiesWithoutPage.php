@@ -57,12 +57,13 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->prepareArguments( $subPage );
-
 		$this->setForm();
 
 		if ( $this->language !== '' ) {
 			$this->showQuery();
 		}
+
+		return true;
 	}
 
 	/**

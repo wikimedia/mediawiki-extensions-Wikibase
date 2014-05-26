@@ -35,7 +35,7 @@ class ParserOutputJsConfigBuilder {
 	protected $entityTitleLookup;
 
 	/**
-	 * @var new ReferencedEntitiesFinder
+	 * @var ReferencedEntitiesFinder
 	 */
 	protected $refFinder;
 

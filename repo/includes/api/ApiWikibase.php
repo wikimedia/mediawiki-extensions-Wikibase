@@ -404,6 +404,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @param string|Summary $summary The edit summary
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
+	 * @throws LogicException if not in write mode
 	 * @return Status the status of the save operation, as returned by EditEntity::attemptSave()
 	 * @see  EditEntity::attemptSave()
 	 *
@@ -544,4 +545,5 @@ abstract class ApiWikibase extends ApiBase {
 	protected function dieException( Exception $exception, $code, $httpStatusCode = 0, $extradata = array() ) {
 		$this->errorReporter->dieException( $exception, $code, $httpStatusCode, $extradata );
 	}
+
 }

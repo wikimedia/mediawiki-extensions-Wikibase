@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Title;
 
 /**
@@ -14,11 +15,10 @@ use Title;
 class ItemDeletionUpdate extends EntityDeletionUpdate {
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param ItemContent $newContent
+	 * @param Title $title
 	 */
 	public function __construct( ItemContent $newContent, Title $title ) {
 		parent::__construct( $newContent, $title );
