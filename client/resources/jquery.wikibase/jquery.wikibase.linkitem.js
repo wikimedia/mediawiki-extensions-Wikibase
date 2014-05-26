@@ -501,7 +501,7 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Creates a table row for a site link.
 	 *
-	 * @param {wikibase.Site} site
+	 * @param {wb.Site} site
 	 * @param {object} entitySitelinks
 	 *
 	 * @return {jQuery}

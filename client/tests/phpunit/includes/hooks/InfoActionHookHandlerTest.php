@@ -73,6 +73,9 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param bool $enabled
+	 * @param ItemId $entityId
+	 *
 	 * @return InfoActionHookHandler
 	 */
 	private function newHookHandler( $enabled, $entityId ) {

@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use FormOptions;
+use User;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 
 /**
@@ -21,7 +22,11 @@ class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider addWikibaseConditionsProvider
 	 */
-	public function testAddWikibaseConditions( $expected, $conds, $enhanced, $hideWikibase,
+	public function testAddWikibaseConditions(
+		array $expected,
+		array $conds,
+		$enhanced,
+		$hideWikibase,
 		$message
 	) {
 		$user = $this->getUser( $enhanced );
@@ -52,7 +57,9 @@ class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param boolean $enhanced
+	 * @param bool $enhanced
+	 *
+	 * @return User
 	 */
 	private function getUser( $enhanced ) {
 		$user = $this->getMockBuilder( 'User' )
@@ -84,8 +91,10 @@ class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 						return '(rc_this_oldid=page_latest) OR rc_type IN (3,5)';
 					}
 				}
+				return '';
 			} ) );
 
 		return $database;
 	}
+
 }
