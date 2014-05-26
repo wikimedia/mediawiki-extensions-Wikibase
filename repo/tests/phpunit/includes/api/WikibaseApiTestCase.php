@@ -303,10 +303,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 	/**
 	 * Asserts the existence of some path in the result, represented by any additional parameters.
+	 *
 	 * @param array $response
-	 * @param param string $path1 first path element (optional)
-	 * @param param string $path2 second path element (optional)
-	 * @param param $ ...
+	 * @param string [$path,...] path elements (optional)
 	 */
 	public function assertResultHasKeyInPath( $response ) {
 		$path = func_get_args();

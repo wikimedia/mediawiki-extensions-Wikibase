@@ -27,9 +27,10 @@
 		// Hackety hack hack...
 		// On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
 		$( '#wb-itembytitle-form1' ).submit( function() {
-			var langID = String( $( '#wb-itembytitle-sitename' ).val().replace(/.*\(|\).*/gi,'') );
+			var $input = $( '#wb-itembytitle-sitename' );
+			var langID = String( $input.val().replace(/.*\(|\).*/gi,'') );
 			if ( wb._siteList[langID].getId() !== undefined ) {
-				$( '#wb-itembytitle-sitename' ).val( wb._siteList[langID].getId() );
+				$input.val( wb._siteList[langID].getId() );
 			}
 		});
 	} );

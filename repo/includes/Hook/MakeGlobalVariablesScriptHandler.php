@@ -28,7 +28,7 @@ class MakeGlobalVariablesScriptHandler {
 
 	/**
 	 * @param EntityContentFactory $entityContentFactory
-	 * @param ParserOutputJsConfigBuilder $configBuilder
+	 * @param ParserOutputJsConfigBuilder $parserOutputConfigBuilder
 	 * @param array $langCodes
 	 */
 	public function __construct(

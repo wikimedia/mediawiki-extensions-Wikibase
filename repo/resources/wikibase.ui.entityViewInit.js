@@ -29,8 +29,9 @@
 		mw.hook( 'wikibase.domready' ).fire();
 
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
-		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
-			var labelEditTool = new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] ),
+		var $firstHeading = $( '.wb-firstHeading' );
+		if ( $firstHeading.length ) { // Special pages do not have a custom wb heading
+			var labelEditTool = new wb.ui.LabelEditTool( $firstHeading[0] ),
 				editableLabel = labelEditTool.getValues( true )[0], // [0] will always be set
 				fn = function( event, origin ) {
 					// Limit the global stopItemPageEditMode event to that element

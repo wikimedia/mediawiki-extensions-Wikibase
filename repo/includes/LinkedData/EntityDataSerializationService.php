@@ -107,9 +107,9 @@ class EntityDataSerializationService {
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
-	 *
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
+	 * @param SiteList $sites
 	 *
 	 * @since    0.4
 	 */
@@ -582,4 +582,5 @@ class EntityDataSerializationService {
 
 		return $data;
 	}
+
 }

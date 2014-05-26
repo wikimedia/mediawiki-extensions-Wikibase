@@ -85,10 +85,10 @@ class OutputPageJsConfigBuilder {
 	}
 
 	/**
-	 * @param CopyrightMessage $copyrightMessage
-	 * @param string $langCode
-	 *
 	 * @param Message $copyrightMessage
+	 * @param Language $language
+	 *
+	 * @return array[]
 	 */
 	private function getCopyrightVar( $copyrightMessage, $language ) {
 		// non-translated message

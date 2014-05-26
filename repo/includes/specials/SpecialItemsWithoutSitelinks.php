@@ -24,7 +24,7 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 *
 	 * @param string $subPage
-	 * @return boolean
+	 * @return bool
 	 */
 	public function execute( $subPage ) {
 		if ( !parent::execute( $subPage ) ) {
@@ -32,6 +32,7 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 		}
 
 		$this->showQuery();
+		return true;
 	}
 
 	/**
