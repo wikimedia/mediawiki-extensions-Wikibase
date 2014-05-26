@@ -2,7 +2,6 @@
 
 namespace Wikibase\Tests;
 
-use ImportStreamSource;
 use Wikibase\RepoHooks;
 use WikiImporter;
 
@@ -18,6 +17,63 @@ use WikiImporter;
  * @author Daniel Kinzler
  */
 class RepoHooksTest extends \MediaWikiTestCase {
+
+	private function getTitleMock() {
+		$title = $this->getMockBuilder( 'Title' )
+			->disableOriginalConstructor()
+			->getMock();
+		$title->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( 120 ) );
+		return $title;
+	}
+
+	private function getContextSourceMock() {
+		$language = $this->getMockBuilder( 'Language' )
+			->disableOriginalConstructor()
+			->getMock();
+		$language->expects( $this->any() )
+			->method( 'getCode' )
+			->will( $this->returnValue( 'en' ) );
+
+		$user = $this->getMockBuilder( 'User' )
+			->disableOriginalConstructor()
+			->getMock();
+		$user->expects( $this->any() )
+			->method( 'isAnon' )
+			->will( $this->returnValue( true ) );
+
+		$contextSource = $this->getMockBuilder( 'ContextSource' )
+			->disableOriginalConstructor()
+			->getMock();
+		$contextSource->expects( $this->any() )
+			->method( 'getLanguage' )
+			->will( $this->returnValue( $language ) );
+		$contextSource->expects( $this->any() )
+			->method( 'getUser' )
+			->will( $this->returnValue( $user ) );
+		return $contextSource;
+	}
+
+	private function getOutputPageMock() {
+		$outputPage = $this->getMockBuilder( 'OutputPage' )
+			->disableOriginalConstructor()
+			->getMock();
+		$outputPage->expects( $this->any() )
+			->method( 'getTitle' )
+			->will( $this->returnValue( $this->getTitleMock() ) );
+		$outputPage->expects( $this->any() )
+			->method( 'getContext' )
+			->will( $this->returnValue( $this->getContextSourceMock() ) );
+		return $outputPage;
+	}
+
+	public function testOnMakeGlobalVariablesScript() {
+		$outputPage = $this->getOutputPageMock();
+		RepoHooks::onMakeGlobalVariablesScript( array(), $outputPage );
+
+		$this->assertTrue( true );
+	}
 
 	public function revisionInfoProvider() {
 		return array(
@@ -56,13 +112,13 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 		$source->expects( $this->any() )
 			->method( 'atEnd' )
-			->will( $this->returnCallback( function () use ( $atEnd ) {
+			->will( $this->returnCallback( function() use ( $atEnd ) {
 				return $atEnd->atEnd;
 			} ) );
 
 		$source->expects( $this->any() )
 			->method( 'readChunk' )
-			->will( $this->returnCallback( function () use ( $atEnd, $xml ) {
+			->will( $this->returnCallback( function() use ( $atEnd, $xml ) {
 				$atEnd->atEnd = true;
 				return $xml;
 			} ) );
@@ -129,7 +185,7 @@ XML
 		$source = $this->getMockImportStream( $xml );
 		$importer = new WikiImporter( $source );
 
-		$importer->setNoticeCallback( function () {
+		$importer->setNoticeCallback( function() {
 			// Do nothing for now. Could collect and compare notices.
 		} );
 
