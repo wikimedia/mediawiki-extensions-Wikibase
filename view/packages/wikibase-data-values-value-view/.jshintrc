@@ -28,11 +28,13 @@
 
 	// Globals
 	"predef": [
+		"CompletenessTest",
 		"dataValues",
 		"globeCoordinate",
 		"jQuery",
 		"mediaWiki",
 		"QUnit",
+		"sinon",
 		"time",
 		"util",
 		"valueFormatters",
