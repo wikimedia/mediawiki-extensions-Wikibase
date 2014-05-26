@@ -3,14 +3,9 @@
 namespace Wikibase;
 
 use FormatJson;
-use Language;
-use Message;
-use RuntimeException;
-use Title;
-use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory;
 
 /**
  * @since 0.5
@@ -40,7 +35,7 @@ class ParserOutputJsConfigBuilder {
 	protected $entityTitleLookup;
 
 	/**
-	 * @var new ReferencedEntitiesFinder
+	 * @var ReferencedEntitiesFinder
 	 */
 	protected $refFinder;
 

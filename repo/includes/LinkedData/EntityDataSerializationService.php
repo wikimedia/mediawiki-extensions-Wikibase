@@ -2,19 +2,19 @@
 
 namespace Wikibase\LinkedData;
 
+use ApiFormatBase;
+use ApiFormatXml;
+use ApiMain;
+use ApiResult;
+use DerivativeContext;
+use DerivativeRequest;
+use EasyRdf_Format;
+use MWException;
+use RequestContext;
+use SiteList;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\EntityLookup;
 use Wikibase\EntityRevision;
-use MWException;
-use EasyRdf_Format;
-use ApiFormatBase;
-use ApiMain;
-use ApiResult;
-use ApiFormatXml;
-use DerivativeContext;
-use DerivativeRequest;
-use RequestContext;
-use SiteList;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -107,9 +107,9 @@ class EntityDataSerializationService {
 	 * @param string $rdfBaseURI
 	 * @param string $rdfDataURI
 	 * @param EntityLookup $entityLookup
-	 *
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
+	 * @param SiteList $sites
 	 *
 	 * @since    0.4
 	 */
@@ -582,4 +582,5 @@ class EntityDataSerializationService {
 
 		return $data;
 	}
+
 }

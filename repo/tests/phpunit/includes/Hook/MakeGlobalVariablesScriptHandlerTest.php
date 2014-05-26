@@ -10,11 +10,12 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\EntityContent;
+use Wikibase\EntityContentFactory;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\ItemContent;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
 
 /**
@@ -81,9 +82,11 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param array $configVars
+	 *
 	 * @return ParserOutputJsConfigBuilder
 	 */
-	private function getParserOutputJsConfigBuilder( $configVars ) {
+	private function getParserOutputJsConfigBuilder( array $configVars ) {
 		$configBuilder = $this->getMockBuilder( 'Wikibase\ParserOutputJsConfigBuilder' )
 			->disableOriginalConstructor()
 			->getMock();

@@ -419,7 +419,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Item $entity
+	 * @param Item $item
 	 * @param string $siteId
 	 * @param string $pageName
 	 * @param string[] $badges
