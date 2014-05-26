@@ -42,7 +42,7 @@
 		 * Returns a new Entity with the given data given to the constructor, or an empty Entity
 		 * if first parameter is omitted.
 		 *
-		 * @param {Object} data
+		 * @param {object} [data] (optional)
 		 * @return wb.Entity
 		 */
 		function newEntity( data ) {
