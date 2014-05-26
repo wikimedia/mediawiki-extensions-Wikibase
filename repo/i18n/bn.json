@@ -28,6 +28,7 @@
 	"wikibase-label-input-help-message": "$1 ভাষায় এই ডাটা সেটের শিরোনাম লিখুন।",
 	"wikibase-description-input-help-message": "$1 ভাষায় একটি সংক্ষিপ্ত বিবরণ লিখুন।",
 	"wikibase-statements": "বিবৃতিসমূহ",
+	"wikibase-attributes": "বিশেষণ",
 	"wikibase-terms": "অন্য ভাষায়",
 	"wikibase-sitelinks-add": "সাইট লিঙ্কে একটি লিঙ্ক যোগ করুন",
 	"wikibase-sitelinks-empty": "এখনও এই আইটেমটির কোন সাইট লিঙ্ক নেই।",
@@ -57,6 +58,7 @@
 	"wikibase-snakview-variations-somevalue-label": "অজানা মান",
 	"wikibase-snakview-variations-novalue-label": "মান নেই",
 	"wikibase-snakview-snaktypeselector-value": "স্বনির্ধারিত মান",
+	"wikibase-snakformat-invalid-value": "অকার্যকর মান।",
 	"wikibase-shortcopyrightwarning": "\"$1\"-এ ক্লিক করার মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।",
 	"wikibase-copyrighttooltip-acknowledge": "আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।",
 	"wikibase-entityselector-more": "আরও",
@@ -182,7 +184,8 @@
 	"wikibase-listdatatypes-commonsmedia-head": "কমন্স মিডিয়া",
 	"wikibase-listdatatypes-globe-coordinate-head": "ভৌগলিক স্থানাংক",
 	"wikibase-listdatatypes-quantity-head": "পরিমাণ",
-	"wikibase-listdatatypes-multilingual-text-head": "বহুভাষিক টেক্সট",
+	"wikibase-listdatatypes-monolingualtext-head": "বহুভাষিক টেক্সট",
+	"wikibase-listdatatypes-multilingualtext-head": "বহুভাষিক টেক্সট",
 	"wikibase-listdatatypes-string-head": "স্ট্রিং",
 	"wikibase-listdatatypes-time-head": "সময়",
 	"wikibase-listdatatypes-url-head": "ইউআরএল",
@@ -190,5 +193,6 @@
 	"content-model-wikibase-item": "উইকিভিত্তিক আইটেম",
 	"content-model-wikibase-property": "উইকিবেজ বৈশিষ্ট্য",
 	"content-model-wikibase-query": "উইকিবেজ কোয়েরি",
+	"right-item-merge": "আইটেম একত্রীকারক",
 	"right-property-create": "বৈশিষ্ট্য তৈরি"
 }

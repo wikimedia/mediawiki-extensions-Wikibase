@@ -12,12 +12,13 @@
 			"Xiaomingyan",
 			"Yfdyh000",
 			"Zhuyifei1999",
-			"乌拉跨氪"
+			"乌拉跨氪",
+			"Mywood"
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
 	"specialpages-group-wikibaseclient": "{{WBREPONAME}}客户端",
-	"tooltip-t-wikibase": "链接至被连接的数据存储库项",
+	"tooltip-t-wikibase": "查看连接的数据存储库项",
 	"wikibase-after-page-move": "您也可以[$1 更新]相关{{WBREPONAME}}项以维护被移动页面的语言链接。",
 	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}}项]及其相关页面将很快自动更新。",
 	"wikibase-comment-add": "已创建一个{{WBREPONAME}}的项。",
