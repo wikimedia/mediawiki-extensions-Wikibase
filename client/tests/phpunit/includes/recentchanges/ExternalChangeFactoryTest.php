@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use MediaWikiTestCase;
 use RecentChange;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ExternalChange;
@@ -20,7 +19,7 @@ use Wikibase\RevisionData;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ExternalChangeFactoryTest extends MediaWikiTestCase {
+class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider newFromRecentChangeProvider
