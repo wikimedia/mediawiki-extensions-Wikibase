@@ -276,9 +276,10 @@ class EditEntity extends ModifyEntity {
 			$this->validateMultilangArgs( $arg, $langCode );
 
 			$language = $arg['language'];
-			$newLabel = $this->stringNormalizer->trimToNFC( $arg['value'] );
+			$newLabel = ( array_key_exists( 'remove', $arg ) ? '' :
+				$this->stringNormalizer->trimToNFC( $arg['value'] ) );
 
-			if ( array_key_exists( 'remove', $arg ) || $newLabel === "" ) {
+			if ( $newLabel === "" ) {
 				$labelChangeOps[] = $this->termChangeOpFactory->newRemoveLabelOp( $language );
 			}
 			else {
@@ -305,9 +306,10 @@ class EditEntity extends ModifyEntity {
 			$this->validateMultilangArgs( $arg, $langCode );
 
 			$language = $arg['language'];
-			$newDescription = $this->stringNormalizer->trimToNFC( $arg['value'] );
+			$newDescription = ( array_key_exists( 'remove', $arg ) ? '' :
+				$this->stringNormalizer->trimToNFC( $arg['value'] ) );
 
-			if ( array_key_exists( 'remove', $arg ) || $newDescription === "" ) {
+			if ( $newDescription === "" ) {
 				$descriptionChangeOps[] = $this->termChangeOpFactory->newRemoveDescriptionOp( $language );
 			}
 			else {
@@ -847,7 +849,7 @@ class EditEntity extends ModifyEntity {
 				"unknown language: {$arg['language']}",
 				'not-recognized-language' );
 		}
-		if ( !is_string( $arg['value'] ) ) {
+		if ( !array_key_exists( 'remove', $arg ) && !is_string( $arg['value'] ) ) {
 			$this->dieUsage(
 				"A string was expected, but not found in the json for the langCode {$langCode} and argument 'value'" ,
 				'not-recognized-string' );
