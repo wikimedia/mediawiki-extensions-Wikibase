@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use Exception;
 use InvalidArgumentException;
 use Language;
+use MWException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
@@ -108,7 +109,7 @@ class SummaryFormatter {
 	 *
 	 * @param Summary $summary
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 *
 	 * @return string The auto summary arguments comma-separated
 	 */
@@ -264,7 +265,9 @@ class SummaryFormatter {
 	 *
 	 * @see Summary::USE_ALL
 	 */
-	public function formatSummary( Summary $summary, $length = SUMMARY_MAX_LENGTH,
+	public function formatSummary(
+		Summary $summary,
+		$length = SUMMARY_MAX_LENGTH,
 		$format = Summary::USE_ALL
 	) {
 		$userSummary = $summary->getUserSummary();
