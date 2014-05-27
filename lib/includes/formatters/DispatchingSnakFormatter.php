@@ -1,6 +1,9 @@
 <?php
+
 namespace Wikibase\Lib;
+
 use InvalidArgumentException;
+use ValueFormatters\FormattingException;
 use Wikibase\Snak;
 
 /**
@@ -116,4 +119,5 @@ class DispatchingSnakFormatter implements SnakFormatter {
 	public function canFormatSnak( Snak $snak ) {
 		return array_key_exists( $snak->getType(), $this->formatters );
 	}
+
 }
