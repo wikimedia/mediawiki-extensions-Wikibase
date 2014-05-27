@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_613d6fb8",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestItemSetUpHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-27T01:03:13Z",
+      "side": 1,
+      "message": "agree and when we add more test cases, this could be split up.",
+      "parentUuid": "4e1dcb5b_8538a59c",
+      "revId": "05b8827eb8a25c1ce7a8b74c2973015b7f72cd7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_c5be9dfa",
         "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestItemSetUpHelper.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-23T17:19:13Z",
       "side": 1,
       "message": "missing param doc.",
+      "revId": "05b8827eb8a25c1ce7a8b74c2973015b7f72cd7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_413a73c1",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaIntegrationTestItemSetUpHelper.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-27T01:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_c5be9dfa",
       "revId": "05b8827eb8a25c1ce7a8b74c2973015b7f72cd7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
