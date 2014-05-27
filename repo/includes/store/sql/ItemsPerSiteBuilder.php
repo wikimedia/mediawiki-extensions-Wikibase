@@ -2,9 +2,6 @@
 namespace Wikibase;
 
 use MessageReporter;
-use Wikibase\SiteLinkTable;
-use Wikibase\EntityIdPager;
-use Wikibase\EntityLookup;
 
 /**
  * Utility class for rebuilding the wb_items_per_site table.

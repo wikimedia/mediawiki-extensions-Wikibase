@@ -10,9 +10,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\PropertyValueSnak;
+use Wikibase\RepoHooks;
 use Wikibase\Snak;
 use Wikibase\Summary;
-use Wikibase\RepoHooks;
 use Wikibase\SummaryFormatter;
 
 /**

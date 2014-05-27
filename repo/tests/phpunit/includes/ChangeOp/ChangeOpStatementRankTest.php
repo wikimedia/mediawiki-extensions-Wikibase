@@ -3,13 +3,13 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
-use InvalidArgumentException;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpStatementRank

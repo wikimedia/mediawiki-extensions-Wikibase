@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use RuntimeException;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\SettingsArray;
 use Wikibase\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\EntityPerPageBuilder

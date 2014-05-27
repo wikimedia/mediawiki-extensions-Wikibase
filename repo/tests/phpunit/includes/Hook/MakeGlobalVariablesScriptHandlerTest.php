@@ -6,15 +6,13 @@ use DataValues\StringValue;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\ItemContent;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
 
 /**

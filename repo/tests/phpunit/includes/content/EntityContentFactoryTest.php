@@ -2,12 +2,11 @@
 
 namespace Wikibase\Test;
 
-use InvalidArgumentException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\EntityContentFactory

@@ -7,8 +7,8 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Term;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Term;
 use Wikibase\Validators\UniquenessViolation;
 
 /**

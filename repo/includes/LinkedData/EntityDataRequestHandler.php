@@ -2,6 +2,11 @@
 
 namespace Wikibase\LinkedData;
 
+use HttpError;
+use OutputPage;
+use SquidUpdate;
+use WebRequest;
+use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -9,11 +14,6 @@ use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\HttpAcceptNegotiator;
 use Wikibase\HttpAcceptParser;
-use WebRequest;
-use WebResponse;
-use OutputPage;
-use HttpError;
-use SquidUpdate;
 use Wikibase\StorageException;
 
 /**

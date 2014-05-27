@@ -4,11 +4,10 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\ChangeOp\ChangeOpMainSnak;
-use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

@@ -3,7 +3,6 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use OutOfBoundsException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
