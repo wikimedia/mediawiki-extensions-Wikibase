@@ -15,6 +15,12 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.5.1 (dev)
+
+#### Bugfixes
+
+* Don't limit precisions of globe coordinates in the UI (allows display of values with a non predefined precision)
+
 ### 0.5.0 (2014-03-28)
 
 #### Breaking changes
