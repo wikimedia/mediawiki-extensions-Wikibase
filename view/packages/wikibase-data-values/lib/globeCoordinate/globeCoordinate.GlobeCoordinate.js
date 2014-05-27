@@ -31,10 +31,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 			throw new Error( 'No proper globe coordinate definition given' );
 		}
 
-		if( gcDef.precision && !isValidPrecision( gcDef.precision ) ) {
-			throw new Error( 'No valid precision given' );
-		}
-
 		this._latitude = gcDef.latitude;
 		this._longitude = gcDef.longitude;
 		this._precision = gcDef.precision;
@@ -154,24 +150,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 		}
 
 	};
-
-	/**
-	 * Checks if a specific precision is defined in the predefined constant.
-	 *
-	 * @param {number} precision
-	 * @return {boolean}
-	 */
-	function isValidPrecision( precision ) {
-		var precisions = globeCoordinate.GlobeCoordinate.PRECISIONS;
-
-		for( var i in precisions ) {
-			if( Math.abs( precision - precisions[i] ) < 0.0000001 ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 	/**
 	 * Precisions a globe coordinate may feature.
