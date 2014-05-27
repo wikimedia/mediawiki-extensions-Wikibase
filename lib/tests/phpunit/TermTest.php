@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 use Wikibase\Term;
 

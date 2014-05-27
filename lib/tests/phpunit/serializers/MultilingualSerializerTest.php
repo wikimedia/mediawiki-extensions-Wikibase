@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\MultilingualSerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
  * @covers Wikibase\Lib\Serializers\MultilingualSerializer

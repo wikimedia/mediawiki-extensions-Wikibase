@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use HashBagOStuff;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\CachingPropertyInfoStore;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoStore;
 
 /**

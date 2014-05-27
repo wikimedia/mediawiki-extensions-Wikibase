@@ -4,13 +4,13 @@ namespace Wikibase\Test;
 
 use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\SnakList;
 use Wikibase\Statement;
-use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
  * @covers Wikibase\Lib\Serializers\ClaimSerializer

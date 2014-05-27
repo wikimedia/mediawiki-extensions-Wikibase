@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase;
-use ResourceLoaderModule, ResourceLoaderContext;
+use ResourceLoaderContext;
+use ResourceLoaderModule;
 
 /**
  * JavaScript variables needed to access the repo independent from the current

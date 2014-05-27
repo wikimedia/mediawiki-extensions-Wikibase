@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\V4GuidGenerator;
 
 /**
  * @covers Wikibase\Lib\ClaimGuidGenerator

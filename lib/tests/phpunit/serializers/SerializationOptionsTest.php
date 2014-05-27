@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
  * @covers Wikibase\Lib\Serializers\SerializationOptions

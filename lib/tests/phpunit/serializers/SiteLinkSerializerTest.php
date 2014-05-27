@@ -4,11 +4,11 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use SiteSQLStore;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\Serializers\EntitySerializer;
-use Wikibase\Lib\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Lib\Serializers\EntitySerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SiteLinkSerializer;
 
 /**
  * @covers Wikibase\Lib\Serializers\SiteLinkSerializer

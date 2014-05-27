@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\EntityRevisionLookup;
 use Wikibase\EntityRevision;
+use Wikibase\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\WikiPageEntityLookup;
 

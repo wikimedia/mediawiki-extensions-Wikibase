@@ -2,16 +2,16 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\ClaimsSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
-use Wikibase\Claim;
 use Wikibase\Statement;
-use Wikibase\Lib\Serializers\ClaimSerializer;
 
 /**
  * @covers Wikibase\Lib\Serializers\ClaimsSerializer

@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\LabelSerializer;
 use Wikibase\Lib\Serializers\MultilingualSerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
  * @covers Wikibase\Lib\Serializers\LabelSerializer

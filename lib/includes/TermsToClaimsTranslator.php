@@ -2,12 +2,12 @@
 
 namespace Wikibase\Lib;
 
-use InvalidArgumentException;
-use Wikibase\Term;
-use Wikibase\Claim;
-use Wikibase\PropertyValueSnak;
 use DataValues\MonolingualTextValue;
 use DataValues\MultilingualTextValue;
+use InvalidArgumentException;
+use Wikibase\Claim;
+use Wikibase\PropertyValueSnak;
+use Wikibase\Term;
 
 /**
  * Can turn Term objects into Claims.

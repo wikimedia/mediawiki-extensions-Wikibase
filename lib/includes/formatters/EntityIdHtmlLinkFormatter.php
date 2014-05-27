@@ -7,7 +7,6 @@ use OutOfBoundsException;
 use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\EntityLookup;
 use Wikibase\EntityTitleLookup;
 

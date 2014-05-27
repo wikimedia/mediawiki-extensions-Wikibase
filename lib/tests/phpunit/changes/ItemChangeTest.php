@@ -5,10 +5,10 @@ namespace Wikibase\Test;
 use Diff\Diff;
 use Diff\DiffOpChange;
 use Exception;
+use Wikibase\Entity;
 use Wikibase\EntityChange;
 use Wikibase\Item;
 use Wikibase\ItemChange;
-use Wikibase\Entity;
 use Wikibase\ItemDiff;
 
 /**

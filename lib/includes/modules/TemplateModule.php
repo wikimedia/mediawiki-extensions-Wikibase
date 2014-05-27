@@ -1,7 +1,8 @@
 <?php
 
 namespace Wikibase;
-use ResourceLoaderFileModule, ResourceLoaderContext;
+use ResourceLoaderContext;
+use ResourceLoaderFileModule;
 
 /**
  * Injects templates into JavaScript.

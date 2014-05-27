@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Wikibase\DataModel\Entity\EntityIdValue;
 use DataValues\DataValue;
+use Wikibase\DataModel\Entity\EntityIdValue;
 
 /**
  * Finds linked entities given a list of entities or a list of claims.

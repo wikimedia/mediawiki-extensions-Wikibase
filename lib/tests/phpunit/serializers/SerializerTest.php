@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\Lib\Serializers\ByPropertyListSerializer;
 use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**

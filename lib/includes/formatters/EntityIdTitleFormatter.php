@@ -4,7 +4,6 @@ namespace Wikibase\Lib;
 
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\EntityTitleLookup;
 
 /**

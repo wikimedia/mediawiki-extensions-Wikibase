@@ -7,8 +7,8 @@ use DateTime;
 use Exception;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\ParseException;
-use ValueParsers\StringValueParser;
 use ValueParsers\ParserOptions;
+use ValueParsers\StringValueParser;
 use ValueParsers\ValueParser;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase;
-use \MWException;
-use \Language;
+use Language;
+use MWException;
 
 /**
  * Object representing either a verbatim language or a converted language.

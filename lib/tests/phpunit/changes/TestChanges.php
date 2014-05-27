@@ -9,10 +9,10 @@ use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\EntityChange;
 use Wikibase\DiffChange;
+use Wikibase\Entity;
+use Wikibase\EntityChange;
+use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 

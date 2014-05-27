@@ -7,8 +7,8 @@ use Wikibase\Claim;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
 use Wikibase\Lib\ClaimGuidGenerator;
-use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\EntitySerializer;
+use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\PropertyValueSnak;
 
 /**

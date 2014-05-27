@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityRevision;
 use Wikibase\EntityLookup;
+use Wikibase\EntityRevision;
 use Wikibase\store\CachingEntityRevisionLookup;
 
 /**

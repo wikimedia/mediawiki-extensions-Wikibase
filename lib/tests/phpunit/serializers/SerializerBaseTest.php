@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Comparable;
 use Hashable;
-use Wikibase\Lib\Serializers\SerializerObject;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerObject;
 use Wikibase\Lib\Serializers\Unserializer;
 
 /**
