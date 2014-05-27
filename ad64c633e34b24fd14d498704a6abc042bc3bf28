@@ -103,6 +103,24 @@
       "revId": "ad64c633e34b24fd14d498704a6abc042bc3bf28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_38bd65ae",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-27T16:10:34Z",
+      "side": 1,
+      "message": "for this purpose, how about something like:\n\n$context \u003d new DerivativeContext( RequestContext::getMain() );   \n$ns \u003d NamespaceUtils::getEntityNamespace( \u0027wikibase-property\u0027 );                            \n$context-\u003esetTitle( Title::makeTitle( $ns, \u0027P3000\u0027 ) );\n$outputPage \u003d new OutputPage( $context );\n\nalthough it\u0027s nice to have stubs and mocks, I think not doing that here is ok and is more simple.",
+      "parentUuid": "4e1dcb5b_38fc45b1",
+      "revId": "ad64c633e34b24fd14d498704a6abc042bc3bf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
