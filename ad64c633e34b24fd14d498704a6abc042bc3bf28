@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_983d99bb",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-27T15:33:43Z",
+      "side": 1,
+      "message": "Well, this is a stub, not a mock",
+      "revId": "ad64c633e34b24fd14d498704a6abc042bc3bf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_3844454a",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-27T15:33:43Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "ad64c633e34b24fd14d498704a6abc042bc3bf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_187189a7",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-27T15:33:43Z",
+      "side": 1,
+      "message": "and here",
+      "revId": "ad64c633e34b24fd14d498704a6abc042bc3bf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_18a069f0",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-27T15:33:43Z",
+      "side": 1,
+      "message": "Stubs that return stubs that return stubs is a testing anti-pattern. This code is hard to understand it is very brittle (it is tightly bound to the implementation, which is what stubbing is supposed to get rid of).",
+      "revId": "ad64c633e34b24fd14d498704a6abc042bc3bf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
