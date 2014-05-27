@@ -40,7 +40,7 @@ class LegacySiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
 			array( array( 'foo' => array( 'badges' => array() ) ) ),
 
 			array( array( 'foo' => array( 'name' => 'baz', 'badges' => array( 42 ) ) ) ),
-			array( array( 'foo' => array( 'name' => 'baz', 'badges' => array( 'Q42', 'Q42' ) ) ) ),
+			array( array( 'foo' => array( 'name' => 'baz', 'badges' => array( new ItemId( 'Q42' ), 'Q42' ) ) ) ),
 		);
 	}
 
