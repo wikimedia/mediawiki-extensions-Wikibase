@@ -53,7 +53,7 @@
 	"wikibase-rc-hide-wikidata-show": "Показати",
 	"wikibase-rc-show-wikidata-pref": "Показати зміни {{WBREPONAME}} у списку нових редагувань",
 	"wikibase-rc-wikibase-edit-letter": "Р",
-	"wikibase-rc-wikibase-edit-title": "Редагування {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Редагування {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-watchlist-show-changes-pref": "Показувати редагування {{WBREPONAME}} у Вашому списку спостереження",
 	"wikibase-error-serialize-error": "Не вдалося серіалізувати дані.",
 	"wikibase-error-invalid-entity-id": "Введений ідентифікатор не відомий системі. Будь ласка, введіть коректний ідентифікатор сутності.",
