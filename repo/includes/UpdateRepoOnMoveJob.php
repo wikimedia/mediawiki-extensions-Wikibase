@@ -2,10 +2,14 @@
 
 namespace Wikibase;
 
+use Job;
+use OutOfBoundsException;
 use Site;
+use Title;
 use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\store\EntityStore;
 
@@ -20,7 +24,7 @@ use Wikibase\store\EntityStore;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnMoveJob extends \Job {
+class UpdateRepoOnMoveJob extends Job {
 
 	/**
 	 * Constructs a UpdateRepoOnMoveJob propagating a page move to the repo
@@ -33,11 +37,11 @@ class UpdateRepoOnMoveJob extends \Job {
 	 *
 	 * @see Job::factory.
 	 *
-	 * @param \Title $title Ignored
+	 * @param Title $title Ignored
 	 * @param array|bool $params
 	 * @param integer $id
 	 */
-	public function __construct( \Title $title, $params = false, $id = 0 ) {
+	public function __construct( Title $title, $params = false, $id = 0 ) {
 		parent::__construct( 'UpdateRepoOnMove', $title, $params, $id );
 	}
 
@@ -106,7 +110,7 @@ class UpdateRepoOnMoveJob extends \Job {
 	protected function getSimpleSiteLink( $item, $globalId ) {
 		try {
 			return $item->getSiteLink( $globalId );
-		} catch( \OutOfBoundsException $e ) {
+		} catch( OutOfBoundsException $e ) {
 			return null;
 		}
 	}
@@ -139,7 +143,7 @@ class UpdateRepoOnMoveJob extends \Job {
 	 * @param string $itemId
 	 * @param string $oldPage
 	 * @param string $newPage
-	 * @param \User $user User who we'll attribute the update to
+	 * @param User $user User who we'll attribute the update to
 	 *
 	 * @return bool Whether something changed
 	 */
@@ -231,7 +235,7 @@ class UpdateRepoOnMoveJob extends \Job {
 		wfProfileIn( __METHOD__ );
 		$params = $this->getParams();
 
-		$user = \User::newFromName( $params['user'] );
+		$user = User::newFromName( $params['user'] );
 		if ( !$user || !$user->isLoggedIn() ) {
 			// This should never happen as we check with CentralAuth
 			// that the user actually does exist
@@ -251,4 +255,5 @@ class UpdateRepoOnMoveJob extends \Job {
 		wfProfileOut( __METHOD__ );
 		return true;
 	}
+
 }
