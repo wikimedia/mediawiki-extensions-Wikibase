@@ -847,9 +847,9 @@ class EditEntity {
 			return false;
 		}
 
-		$text = $this->status->getMessage();
+		$text = $this->status->getHTML();
 
-		$out->addHTML( \Html::element( 'div', array( 'class' => 'error' ), $text ) );
+		$out->addHTML( \Html::rawElement( 'div', array( 'class' => 'error' ), $text ) );
 
 		wfProfileOut( __METHOD__ );
 		return true;
