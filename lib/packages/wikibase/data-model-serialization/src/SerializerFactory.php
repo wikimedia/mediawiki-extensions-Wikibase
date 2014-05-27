@@ -27,7 +27,7 @@ class SerializerFactory {
 	/**
 	 * @var Serializer
 	 */
-	protected $dataValueSerializer;
+	private $dataValueSerializer;
 
 	/**
 	 * @param Serializer $dataValueSerializer serializer for DataValue objects

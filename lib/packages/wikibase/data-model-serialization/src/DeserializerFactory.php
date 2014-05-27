@@ -30,7 +30,7 @@ class DeserializerFactory {
 	/**
 	 * @var Deserializer
 	 */
-	protected $dataValueDeserializer;
+	private $dataValueDeserializer;
 
 	/**
 	 * @var EntityIdParser
