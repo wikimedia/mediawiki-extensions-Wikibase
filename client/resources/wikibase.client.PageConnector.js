@@ -112,7 +112,7 @@ $.extend( wb.PageConnector.prototype, {
 	 *
 	 * @param {object} apiResult
 	 *
-	 * @return {Object} Entity as returned by the API
+	 * @return {object|undefined} Entity as returned by the API
 	 */
 	_extractEntity: function( apiResult ) {
 		for ( var i in apiResult.entities ) {

@@ -14,7 +14,7 @@ use Html;
 class BaseTemplateAfterPortletHandler {
 
 	/**
-	 * @param BaseTemplate $skinTemplate
+	 * @param BaseTemplate $baseTemplate
 	 * @param string $name
 	 *
 	 * @return string|null

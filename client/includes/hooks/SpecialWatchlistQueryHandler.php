@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use DatabaseBase;
+use FormOptions;
 use User;
 use WebRequest;
 
@@ -92,7 +93,9 @@ class SpecialWatchlistQueryHandler {
 	}
 
 	/**
-	 * @return boolean
+	 * @param string $cond
+	 *
+	 * @return bool
 	 */
 	private function isRcTypeLogCondition( $cond ) {
 		return $cond === $this->getRcTypeLogCondition();
@@ -141,7 +144,8 @@ class SpecialWatchlistQueryHandler {
 
 	/**
 	 * @param WebRequest $request
-	 * @return boolean
+	 *
+	 * @return bool
 	 */
 	private function isEnhancedChangesEnabled( WebRequest $request ) {
 		return $request->getBool( 'enhanced', $this->user->getOption( 'usenewrc' ) ) === true;

@@ -40,6 +40,8 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 	);
 
 	/**
+	 * @param string $localSiteId
+	 *
 	 * @return ClientSiteLinkLookup
 	 */
 	private function getClientSiteLinkLookup( $localSiteId ) {
