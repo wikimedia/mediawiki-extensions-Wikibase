@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Title;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\ItemContent;
 
@@ -49,6 +51,22 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$contents[] = array( $content );
 
 		return $contents;
+	}
+
+	public function testGetTitleForId() {
+		$handler = $this->getHandler();
+		$id = new ItemId( 'Q123' );
+
+		$title = $handler->getTitleForId( $id );
+		$this->assertEquals( $id->getSerialization(), $title->getText() );
+	}
+
+	public function testGetIdForTitle() {
+		$handler = $this->getHandler();
+		$title = Title::makeTitle( $handler->getEntityNamespace(), 'Q123' );
+
+		$id = $handler->getIdForTitle( $title );
+		$this->assertEquals( $title->getText(), $id->getSerialization() );
 	}
 
 }

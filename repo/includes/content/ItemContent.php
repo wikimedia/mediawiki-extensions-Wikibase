@@ -115,44 +115,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see Content::getDeletionUpdates
-	 *
-	 * @param \WikiPage $page
-	 * @param null|\ParserOutput $parserOutput
-	 *
-	 * @since 0.1
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
-		return array_merge(
-			parent::getDeletionUpdates( $page, $parserOutput ),
-			array( new ItemDeletionUpdate( $this, $page->getTitle() ) )
-		);
-	}
-
-	/**
-	 * @see ContentHandler::getSecondaryDataUpdates
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title              $title
-	 * @param Content|null       $old
-	 * @param bool               $recursive
-	 * @param null|ParserOutput  $parserOutput
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getSecondaryDataUpdates( Title $title, Content $old = null,
-		$recursive = false, ParserOutput $parserOutput = null ) {
-
-		return array_merge(
-			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
-			array( new ItemModificationUpdate( $this ) )
-		);
-	}
-
-	/**
 	 * @see EntityContent::getTextForSearchIndex()
 	 */
 	public function getTextForSearchIndex() {

@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Title;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyContent;
 
 /**
@@ -48,6 +50,22 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		$contents[] = array( $content );
 
 		return $contents;
+	}
+
+	public function testGetTitleForId() {
+		$handler = $this->getHandler();
+		$id = new PropertyId( 'P123' );
+
+		$title = $handler->getTitleForId( $id );
+		$this->assertEquals( $id->getSerialization(), $title->getText() );
+	}
+
+	public function testGetIdForTitle() {
+		$handler = $this->getHandler();
+		$title = Title::makeTitle( $handler->getEntityNamespace(), 'P123' );
+
+		$id = $handler->getIdForTitle( $title );
+		$this->assertEquals( $title->getText(), $id->getSerialization() );
 	}
 
 }
