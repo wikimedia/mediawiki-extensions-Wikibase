@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use Language;
 use MWException;
 
@@ -71,7 +72,8 @@ class LanguageWithConversion {
 	 * @param $language Language|string: Language (code) for this object
 	 * @param $sourceLanguage null|Language|string:
 	 *          Source language (code) if this is a converted language, or null
-	 * @throws \MWException
+	 *
+	 * @throws MWException
 	 * @return LanguageWithConversion
 	 */
 	public static function factory( $language, $sourceLanguage = null ) {
@@ -257,4 +259,5 @@ class LanguageWithConversion {
 			$this->translatePool = array();
 		}
 	}
+
 }
