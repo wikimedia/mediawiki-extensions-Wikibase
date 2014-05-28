@@ -8,7 +8,6 @@ use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StoreFactory;
 use Wikibase\Summary;
 
 /**
@@ -70,7 +69,7 @@ class LinkTitles extends ApiWikibase {
 		$toPage = $toSite->normalizePageName( $params['totitle'] );
 		$this->validatePage( $toPage, 'to' );
 
-		$siteLinkCache = StoreFactory::getStore()->newSiteLinkCache();
+		$siteLinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 		$fromId = $siteLinkCache->getItemIdForLink( $fromSite->getGlobalId(), $fromPage );
 		$toId = $siteLinkCache->getItemIdForLink( $toSite->getGlobalId(), $toPage );
 

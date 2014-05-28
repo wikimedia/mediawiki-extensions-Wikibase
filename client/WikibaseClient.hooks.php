@@ -104,9 +104,8 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$store = WikibaseClient::getDefaultInstance()->getStore();
-		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
-		$reportMessage( "Deleting data from the " . $stores[get_class( $store )] . " store..." );
+		$reportMessage( "Deleting data from the " . get_class( $store ) . " store..." );
 
 		$store->clear();
 
@@ -139,8 +138,7 @@ final class ClientHooks {
 		wfProfileIn( __METHOD__ );
 
 		$store = WikibaseClient::getDefaultInstance()->getStore();
-		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
-		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )]
+		$reportMessage( "Rebuilding all data in the " . get_class( $store )
 			. " store on the client..." );
 		$store->rebuild();
 
