@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_7f473c23",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:00:44Z",
+      "side": 1,
+      "message": "No. Wikibase\\Repo\\Content;",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_5f44801c",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:00:44Z",
+      "side": 1,
+      "message": "Useless and incorrect docs",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_3f51c4dd",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:00:44Z",
+      "side": 1,
+      "message": "Why are these optional?",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_ff5a2cf8",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:00:44Z",
+      "side": 1,
+      "message": "This is rather odd - you have the operations in here and in fields. Is there are reason for extending Diff? If not, just drop that part.",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
