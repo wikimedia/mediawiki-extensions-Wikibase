@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+
+use InvalidArgumentException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -8,44 +10,34 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.1
  *
+ * @deprecated Use WikibaseRepo::getDefaultInstance()->getStore() instead
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StoreFactory {
 
 	/**
-	 * Returns an instance of the default store, or an alternate store
-	 * if so specified with the $store argument.
+	 * Returns the default store instance from WikibaseRepo::getDefaultInstance()->getStore().
 	 *
-	 * @since 0.1
+	 * @deprecated Use WikibaseRepo::getDefaultInstance()->getStore() instead.
 	 *
-	 * @param boolean|string $store
-	 * @param string         $reset set to 'reset' to force a fresh instance to be returned.
+	 * @param string|bool $storeName Must be false, 'sqlstore', or omitted.
+	 * @param string $reset Must be 'no' or omitted.
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Store
 	 */
-	public static function getStore( $store = false, $reset = 'no' ) {
-		global $wgWBStores;
-		static $instances = array();
-		$defaultStore = WikibaseRepo::getDefaultInstance()->
-			getSettings()->getSetting( 'defaultStore' );
-
-		$store = $store === false || !array_key_exists( $store, $wgWBStores ) ?
-				$defaultStore : $store;
-
-		if ( $reset !== true && $reset !== 'reset'
-			&& isset( $instances[$store] ) ) {
-
-			return $instances[$store];
+	public static function getStore( $storeName = false, $reset = 'no' ) {
+		if ( $storeName !== false && $storeName !== 'sqlstore' ) {
+			throw new InvalidArgumentException( 'Unknown store name: ' . $storeName );
 		}
 
-		$class = $wgWBStores[$store];
-		$instance = new $class();
+		if ( $reset !== 'no' ) {
+			throw new InvalidArgumentException( 'Resetting the store instance is no longer supported' );
+		}
 
-		assert( $instance instanceof Store );
-
-		$instances[$store] = $instance;
-		return $instance;
+		return WikibaseRepo::getDefaultInstance()->getStore();
 	}
 
 }
