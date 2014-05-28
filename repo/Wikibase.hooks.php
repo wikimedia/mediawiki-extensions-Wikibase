@@ -1243,16 +1243,22 @@ final class RepoHooks {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
 		$codec = $repo->getEntityContentDataCodec();
+		$entityPerPage = $repo->getStore()->newEntityPerPage();
+		$termIndex = $repo->getStore()->getTermIndex();
+		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
 
-		return new ItemHandler( $codec, array( $validator ) );
+		return new ItemHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $siteLinkStore );
 	}
 
 	private static function newPropertyHandler() {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$validator = $repo->getEntityConstraintProvider()->getConstraints( Property::ENTITY_TYPE );
 		$codec = $repo->getEntityContentDataCodec();
+		$entityPerPage = $repo->getStore()->newEntityPerPage();
+		$termIndex = $repo->getStore()->getTermIndex();
+		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
 
-		return new PropertyHandler( $codec, array( $validator ) );
+		return new PropertyHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $propertyInfoStore );
 	}
 
 	/**
