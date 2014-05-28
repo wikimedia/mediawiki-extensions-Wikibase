@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_7f361ce6",
+        "filename": "lib/RELEASE-NOTES",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Typo.",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_df4e5072",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Double negation is not something we should not avoid.",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_3f5e6418",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "The fields can\u0027t store an Entity. Suggestion: getEntityIdFieldsForEntity.",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_bf54b4ca",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Can\u0027t you just call $this-\u003egetEntityIdFields() here? Why is the slight difference between the two even needed?",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_1f4e083d",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Why do you need the type here but not in the other method above? It looks like this field will be completely unused in queries.",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_1f5ba827",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Wait, that\u0027s not the same. The old code used the type from the entity, the new uses the type from the entityId.",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_bf3dd48c",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Whoops?",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_df38909d",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 1150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you know the type?",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_df0650d1",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "What about adding an explicit (bool) cast (or boolval) to make this type safe?",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_7f6e1c95",
+        "filename": "repo/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "Property is not in the class.\n\nAlso: Can you add a (bool) cast (or boolval) and make the property bool?",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_7ff5fcc6",
+        "filename": "repo/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T14:08:42Z",
+      "side": 1,
+      "message": "If you fixed the comma, why not fix the \"be\"? ;-)",
+      "revId": "688fec7ef0fa5ce6a740f6bd9cf2287f61d77b4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
