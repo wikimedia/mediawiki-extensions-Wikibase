@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_1ffcc8b0",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T14:05:46Z",
+      "side": 1,
+      "message": "eeek!",
+      "parentUuid": "4e1dcb5b_7f473c23",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_5f44801c",
         "filename": "repo/includes/content/EntityContentDiff.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-28T14:00:44Z",
       "side": 1,
       "message": "Useless and incorrect docs",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_5ff240e0",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T14:05:46Z",
+      "side": 1,
+      "message": "Incorrect how? You think this should be Diff|null etc? Doesn\u0027t doxygen do that automatically?",
+      "parentUuid": "4e1dcb5b_5f44801c",
       "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_5f6b6082",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T14:05:46Z",
+      "side": 1,
+      "message": "They are nullable, not really optional.",
+      "parentUuid": "4e1dcb5b_3f51c4dd",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_ff5a2cf8",
         "filename": "repo/includes/content/EntityContentDiff.php",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2014-05-28T14:00:44Z",
       "side": 1,
       "message": "This is rather odd - you have the operations in here and in fields. Is there are reason for extending Diff? If not, just drop that part.",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_9f10d805",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T14:05:46Z",
+      "side": 1,
+      "message": "This was intended as a B/C measure, so this can be used as a drop-in replacement for EntityDiff. But perhaps it\u0027s not really needed, i\u0027ll have another look.",
+      "parentUuid": "4e1dcb5b_ff5a2cf8",
       "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
