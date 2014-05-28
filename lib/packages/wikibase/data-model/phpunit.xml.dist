@@ -10,7 +10,7 @@
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         strict="true"
+         strict="false"
          verbose="true"
          printerFile="vendor/whatthejeff/nyancat-phpunit-resultprinter/src/NyanCat/PHPUnit/ResultPrinter.php"
          printerClass="NyanCat\PHPUnit\ResultPrinter">
