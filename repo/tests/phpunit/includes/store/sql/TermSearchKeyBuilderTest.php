@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StoreFactory;
 use Wikibase\Term;
 use Wikibase\TermSearchKeyBuilder;
+use Wikibase\TermSqlIndex;
 
 /**
  * @covers Wikibase\TermSearchKeyBuilder
@@ -57,7 +57,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 		// save term
 		/* @var TermSqlIndex $termCache */
-		$termCache = StoreFactory::getStore( 'sqlstore' )->getTermIndex();
+		$termCache = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$termCache->clear();
 		$termCache->saveTermsOfEntity( $item );
 

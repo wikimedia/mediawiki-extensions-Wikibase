@@ -9,7 +9,6 @@ use Revision;
 use Status;
 use Title;
 use User;
-use WikiPage;
 
 /**
  * Factory for EntityContent objects.

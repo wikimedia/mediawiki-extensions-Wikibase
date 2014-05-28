@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityFactory;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StoreFactory;
 use Wikibase\Term;
 use Wikibase\Utils;
 
@@ -76,7 +75,7 @@ class SearchEntities extends ApiBase {
 	protected function searchEntities( $term, $entityType, $language, $limit, $prefixSearch ) {
 		wfProfileIn( __METHOD__ );
 
-		$ids = StoreFactory::getStore()->getTermIndex()->getMatchingIDs(
+		$ids = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getMatchingIDs(
 			array(
 				new \Wikibase\Term( array(
 					'termType' 		=> \Wikibase\Term::TYPE_LABEL,
@@ -221,7 +220,7 @@ class SearchEntities extends ApiBase {
 		}
 
 		// Find all the remaining terms for the given entities
-		$terms = StoreFactory::getStore()->getTermIndex()->getTermsOfEntities( $ids, $entityType,
+		$terms = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->getTermsOfEntities( $ids, $entityType,
 			$language );
 		// TODO: This needs to be rethought when a different search engine is used
 		$aliasPattern = '/^' . preg_quote( $search, '/' ) . '/i';

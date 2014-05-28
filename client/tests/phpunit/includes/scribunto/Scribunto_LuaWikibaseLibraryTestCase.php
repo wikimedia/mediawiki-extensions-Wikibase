@@ -11,6 +11,8 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 use Language;
 use Title;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\ClientStore;
+use Wikibase\Test\MockClientStore;
 
 /**
  * Base class for Wikibase Scribunto Tests
@@ -22,30 +24,24 @@ use Wikibase\Client\WikibaseClient;
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
+ * @author Daniel Kinzler
  */
 class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase {
 
-	/* @var mixed */
-	private static $oldDefaultClientStore = null;
-
-	/* @var array */
-	private static $oldWgWBClientStores = null;
+	/* @var ClientStore */
+	private $oldStore = null;
 
 	/**
 	 * Makes sure WikibaseClient uses our ClientStore mock
 	 */
 	private static function doMock() {
-		global $wgWBClientStores;
-
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$store = $wikibaseClient->getStore();
 
-		self::$oldDefaultClientStore = $wikibaseClient->getSettings()->getSetting( 'defaultClientStore' );
-		$wikibaseClient->getSettings()->setSetting( 'defaultClientStore', 'ClientStoreMock' );
-
-		self::$oldWgWBClientStores = $wgWBClientStores;
-		$wgWBClientStores = array(
-			'ClientStoreMock' => '\Wikibase\Test\MockClientStore'
-		);
+		if ( ! $store instanceof MockClientStore ) {
+			$store = new MockClientStore();
+			$wikibaseClient->overrideStore( $store );
+		}
 
 		// Reset the default instance to make sure our Mock is really being used
 		WikibaseClient::getDefaultInstance( 'reset' );
@@ -55,6 +51,8 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 	 * Set up stuff we need to have in place even before Scribunto does its stuff
 	 *
 	 * @param string $className
+	 *
+	 * @return \PHPUnit_Framework_TestSuite
 	 */
 	public static function suite( $className ) {
 		self::doMock();
@@ -73,6 +71,7 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 		self::doMock();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
 		$this->assertInstanceOf(
 			'Wikibase\Test\MockRepository',
 			$wikibaseClient->getStore()->getEntityLookup(),
@@ -84,15 +83,12 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 	}
 
 	public function tearDown() {
-		global $wgWBClientStores;
 		parent::tearDown();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$wikibaseClient->getSettings()->setSetting( 'defaultClientStore', self::$oldDefaultClientStore );
-		$wgWBClientStores = self::$oldWgWBClientStores;
-		// Reset the default instance, to make sure our Mock wont be used in other tests
-		WikibaseClient::getDefaultInstance( 'reset' );
+		if ( $this->oldStore ) {
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$wikibaseClient->overrideStore( $this->oldStore );
+		}
 	}
 
 	/**
