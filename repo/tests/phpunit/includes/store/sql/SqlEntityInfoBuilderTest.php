@@ -240,6 +240,8 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 		$builder->addTerms( $entityInfo, $types, $languages );
 
+		$this->assertSameSize( $expected, $entityInfo );
+
 		foreach ( $expected as $id => $expectedRecord ) {
 			$this->assertArrayHasKey( $id, $entityInfo );
 			$actualRecord = $entityInfo[$id];
@@ -279,6 +281,8 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 		$builder = $this->newEntityInfoBuilder();
 
 		$builder->addDataTypes( $entityInfo );
+
+		$this->assertSameSize( $expected, $entityInfo );
 
 		foreach ( $expected as $id => $expectedRecord ) {
 			$this->assertArrayHasKey( $id, $entityInfo );
