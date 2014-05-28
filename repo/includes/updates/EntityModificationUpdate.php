@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Represents an update to the structured storage for a single Entity.
@@ -47,7 +46,7 @@ class EntityModificationUpdate extends \DataUpdate {
 	}
 
 	protected function updateRepoStore() {
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
+		$store = StoreFactory::getStore();
 		$entity = $this->newContent->getEntity();
 
 		$store->getTermIndex()->saveTermsOfEntity( $entity );

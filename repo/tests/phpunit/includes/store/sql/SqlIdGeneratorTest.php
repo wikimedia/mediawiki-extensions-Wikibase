@@ -25,7 +25,7 @@ class SqlIdGeneratorTest extends \MediaWikiTestCase {
 		/**
 		 * @var IdGenerator $clone
 		 */
-		$generator = WikibaseRepo::getDefaultInstance()->getStore()->newIdGenerator();
+		$generator = StoreFactory::getStore( 'sqlstore' )->newIdGenerator();
 		$idBlacklist = WikibaseRepo::getDefaultInstance()->
 			getSettings()->getSetting( 'idBlacklist' );
 

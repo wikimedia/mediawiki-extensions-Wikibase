@@ -148,9 +148,16 @@ final class RepoHooks {
 			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
 		}
 
-		/* @var SqlStore $store */
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
-		$store->doSchemaUpdate( $updater );
+		$defaultStore = WikibaseRepo::getDefaultInstance()->
+			getSettings()->getSetting( 'defaultStore' );
+
+		if ( $defaultStore === 'sqlstore' ) {
+			/**
+			 * @var SQLStore $store
+			 */
+			$store = StoreFactory::getStore( 'sqlstore' );
+			$store->doSchemaUpdate( $updater );
+		}
 
 		return true;
 	}
@@ -352,7 +359,7 @@ final class RepoHooks {
 		$entity = $content->getEntity();
 
 		//XXX: EntityContent::save() also does this. Why are we doing this twice?
-		WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage()->addEntityPage(
+		StoreFactory::getStore()->newEntityPerPage()->addEntityPage(
 			$entity->getId(),
 			$title->getArticleID()
 		);
@@ -566,9 +573,10 @@ final class RepoHooks {
 	public static function onWikibaseRebuildData( $reportMessage ) {
 		wfProfileIn( __METHOD__ );
 
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
+		$store = StoreFactory::getStore();
+		$stores = array_flip( $GLOBALS['wgWBStores'] );
 
-		$reportMessage( 'Starting rebuild of the Wikibase repository ' . get_class( $store ) . ' store...' );
+		$reportMessage( 'Starting rebuild of the Wikibase repository ' . $stores[get_class( $store )] . ' store...' );
 
 		$store->rebuild();
 
@@ -635,9 +643,10 @@ final class RepoHooks {
 
 		$reportMessage( "done!\n" );
 
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
+		$store = StoreFactory::getStore();
+		$stores = array_flip( $GLOBALS['wgWBStores'] );
 
-		$reportMessage( 'Deleting data from the ' . get_class( $store ) . ' store...' );
+		$reportMessage( 'Deleting data from the ' . $stores[get_class( $store )] . ' store...' );
 
 		$store->clear();
 

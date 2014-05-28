@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 
 /**
  * Page for listing entities without label.
@@ -41,7 +41,7 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		$entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
+		$entityPerPage = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
 		return $entityPerPage->getItemsWithoutSitelinks( null, $limit, $offset );
 	}
 
