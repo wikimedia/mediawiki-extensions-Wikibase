@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_1fd4c8eb",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "This change currently breaks repo/maintenance/dumpJson.php, as far as I can tell.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_7fc61c50",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "Property is not part of the class.\n\nWhy not call it entityTypeToClassMap?",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_ff00ec6e",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "This map is now in at least 2 places instead of 1. Should be only 1. I\u0027m afraid duplicating this will cause trouble the moment we are trying to introduce queries, for example.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_1feba8a1",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "Why is this needed? Shouldn\u0027t this be a setting or something?",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_82b3df4b",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "What about encodeArray to have the possibility to add other methods that en/decode other stuff later?",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_0287cf67",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "What about decodeArray to have the possibility to add other methods that en/decode other stuff later?",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_c21c376d",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "Seems this depends on the implementation of the format and therefor should be inside of the switch cases above.\n\nSuggestion: Make this a single $data \u003d\u003d\u003d null check and add\nif ( $data \u003d\u003d\u003d false ) $data \u003d null;\nto the unserialize case above.\n\nOr even simpler check for !is_array since this is in the contract of the method anyway.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_c2531719",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "The changes in this file seem unrelated to the rest of the patch. If that\u0027s true then please try to move it to an other patch.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_82363fe3",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "Strange concatenation here ...",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_623323f4",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "... and here.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_a2213b9c",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-28T16:18:33Z",
+      "side": 1,
+      "message": "Are you trying to strip comments with this? Then it needs to be at least /\\/\\*.*?\\*\\//g . But even that\u0027s not failproof at all.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
