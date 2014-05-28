@@ -5,10 +5,10 @@ namespace Wikibase;
 use ContentHandler;
 use MWException;
 use OutOfBoundsException;
+use Revision;
 use Status;
 use Title;
 use User;
-use Revision;
 use WikiPage;
 
 /**
