@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_783d12b8",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "oh, thanks for catching that!",
+      "parentUuid": "4e1dcb5b_1fd4c8eb",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_7fc61c50",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-28T16:18:33Z",
       "side": 1,
       "message": "Property is not part of the class.\n\nWhy not call it entityTypeToClassMap?",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_583a56c1",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "ok, will do.",
+      "parentUuid": "4e1dcb5b_7fc61c50",
       "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_b853aa19",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "Well, at least it *can* be change at all now, before, it was just hard coded.\nWe could get rid of this simply by requiring $entityFactory to be provided. We should do that. But fixing that is beyond the scope of this patch.",
+      "parentUuid": "4e1dcb5b_ff00ec6e",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_1feba8a1",
         "filename": "lib/includes/store/EntityContentDataCodec.php",
         "patchSetId": 13
@@ -64,6 +118,24 @@
       "writtenOn": "2014-05-28T16:18:33Z",
       "side": 1,
       "message": "Why is this needed? Shouldn\u0027t this be a setting or something?",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_986fcec0",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "No. It used to be a setting, but that\u0027s just pointless. If you ever change that setting, you make your database unusable. I do not see any reason to use anything but JSON.",
+      "parentUuid": "4e1dcb5b_1feba8a1",
       "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_385e7a18",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "\"other stuff\" like what? The purpose of this class is specifically to encode and decode the data structure that represents an EntityContent, nothing else.",
+      "parentUuid": "4e1dcb5b_82b3df4b",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_0287cf67",
         "filename": "lib/includes/store/EntityContentDataCodec.php",
         "patchSetId": 13
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_78b3d24c",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "see above.",
+      "parentUuid": "4e1dcb5b_0287cf67",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_c21c376d",
         "filename": "lib/includes/store/EntityContentDataCodec.php",
         "patchSetId": 13
@@ -115,6 +223,24 @@
       "writtenOn": "2014-05-28T16:18:33Z",
       "side": 1,
       "message": "Seems this depends on the implementation of the format and therefor should be inside of the switch cases above.\n\nSuggestion: Make this a single $data \u003d\u003d\u003d null check and add\nif ( $data \u003d\u003d\u003d false ) $data \u003d null;\nto the unserialize case above.\n\nOr even simpler check for !is_array since this is in the contract of the method anyway.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_38bd5a17",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "I\u0027ll just change it to !is_array().",
+      "parentUuid": "4e1dcb5b_c21c376d",
       "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_f886c269",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "Yea, no idea, didn\u0027t touch that :)",
+      "parentUuid": "4e1dcb5b_623323f4",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_a2213b9c",
         "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
         "patchSetId": 13
@@ -183,6 +327,24 @@
       "writtenOn": "2014-05-28T16:18:33Z",
       "side": 1,
       "message": "Are you trying to strip comments with this? Then it needs to be at least /\\/\\*.*?\\*\\//g . But even that\u0027s not failproof at all.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_98858e5d",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T18:50:42Z",
+      "side": 1,
+      "message": "Eek, yea, i missed the delimiters! \nIt doesn\u0027t need to be 100% safe I think.\nBut without this, any mention of any WIkibaseRepo or WikibaseClient in a comment will trigger an alert. Which is silly when you want to tell people to use WIkibaseRepo or WikibaseClient in a @deprecated hint.",
+      "parentUuid": "4e1dcb5b_a2213b9c",
       "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
