@@ -119,58 +119,6 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @see Content::getDeletionUpdates
-	 *
-	 * @param \WikiPage $page
-	 * @param null|\ParserOutput $parserOutput
-	 *
-	 * @since 0.1
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
-		//XXX: access to services should be done via the ContentHandler.
-		$infoStore = WikibaseRepo::getDefaultInstance()->getStore()->getPropertyInfoStore();
-
-		return array_merge(
-			parent::getDeletionUpdates( $page, $parserOutput ),
-			array(
-				new EntityDeletionUpdate( $this, $page->getTitle() ),
-				new PropertyInfoDeletion( $this->getProperty()->getId(), $infoStore ),
-			)
-		);
-	}
-
-	/**
-	 * @see ContentHandler::getSecondaryDataUpdates
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title $title
-	 * @param Content|null $old
-	 * @param boolean $recursive
-	 *
-	 * @param null|ParserOutput $parserOutput
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getSecondaryDataUpdates( Title $title, Content $old = null,
-		$recursive = false, ParserOutput $parserOutput = null ) {
-
-		//XXX: access to services should be done via the ContentHandler.
-		$infoStore = WikibaseRepo::getDefaultInstance()->getStore()->getPropertyInfoStore();
-
-		return array_merge(
-			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
-			array(
-				new EntityModificationUpdate( $this ),
-				new PropertyInfoUpdate( $this->getProperty(), $infoStore ),
-			)
-		);
-	}
-
-
-	/**
 	 * Instantiates an EntityView.
 	 *
 	 * @see getEntityView()
