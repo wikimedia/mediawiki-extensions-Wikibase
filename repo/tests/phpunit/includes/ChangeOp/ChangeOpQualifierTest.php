@@ -98,7 +98,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApplyAddNewQualifier( $item, $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = new Claims( $item->getClaims() );
+		$claims = $item->getClaims();
 		/** @var Claim $claim */
 		$claim = reset( $claims );
 		$qualifiers = $claim->getQualifiers();
@@ -136,7 +136,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApplySetQualifier( $item, $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = new Claims( $item->getClaims() );
+		$claims = $item->getClaims();
 		/** @var Claim $claim */
 		$claim = reset( $claims );
 		$qualifiers = $claim->getQualifiers();

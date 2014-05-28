@@ -69,7 +69,7 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApplyRemoveQualifier( $item, $changeOp, $snakHash ) {
 		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
-		$claims = new Claims( $item->getClaims() );
+		$claims = $item->getClaims();
 		/** @var Claim $claim */
 		$claim = reset( $claims );
 		$qualifiers = $claim->getQualifiers();
