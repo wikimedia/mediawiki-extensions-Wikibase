@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Content;
 use ContentHandler;
+use DataUpdate;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -13,7 +14,9 @@ use RequestContext;
 use Revision;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
 
 /**
@@ -38,17 +41,37 @@ abstract class EntityHandler extends ContentHandler {
 	protected $contentCodec;
 
 	/**
+	 * @var EntityPerPage
+	 */
+	private $entityPerPage;
+
+	/**
+	 * @var TermIndex
+	 */
+	private $termIndex;
+
+	/**
 	 * @param string $modelId
+	 * @param EntityPerPage $entityPerPage
+	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 */
-	public function __construct( $modelId, EntityContentDataCodec $contentCodec, $preSaveValidators ) {
+	public function __construct(
+		$modelId,
+		EntityPerPage $entityPerPage,
+		TermIndex $termIndex,
+		EntityContentDataCodec $contentCodec,
+		array $preSaveValidators
+	) {
 		$formats = $contentCodec->getSupportedFormats();
 
 		parent::__construct( $modelId, $formats );
 
 		$this->contentCodec = $contentCodec;
 		$this->preSaveValidators = $preSaveValidators;
+		$this->entityPerPage = $entityPerPage;
+		$this->termIndex = $termIndex;
 	}
 
 	/**
@@ -91,6 +114,33 @@ abstract class EntityHandler extends ContentHandler {
 	public function makeEmptyContent() {
 		$contentClass = $this->getContentClass();
 		return $contentClass::newEmpty();
+	}
+
+	/**
+	 * @see ContentHandler::makeRedirectContent
+	 *
+	 * Will return a new EntityContent representing a redirect to the given title,
+	 * or null if the Content class does not support redirects (that is, if it does
+	 * not have a static newRedirect() function).
+	 *
+	 * @since 0.5
+	 *
+	 * @param \Title $title
+	 * @param string $text
+	 *
+	 * @return EntityContent|null
+	 */
+	public function makeRedirectContent( Title $title, $text = '' ) {
+		$contentClass = $this->getContentClass();
+
+		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
+			// For now, we only support redirects in experimental mode.E
+			return null;
+		} elseif ( method_exists( $contentClass, 'newRedirect' ) ) {
+			return $contentClass::newRedirect( $title );
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -174,6 +224,43 @@ abstract class EntityHandler extends ContentHandler {
 		return $entityContent;
 	}
 
+	/**
+	 * Returns the ID of the entity contained by the page of the given title.
+	 *
+	 * @since 0.5
+	 *
+	 * @param Title $target
+	 *
+	 * @return EntityId
+	 */
+	public function getIdForTitle( Title $target ) {
+		//FIXME: inject an EntityTitleLookup!
+		$parser = new BasicEntityIdParser();
+		$id = $parser->parse( $target->getText() );
+		return $id;
+	}
+
+	/**
+	 * Returns the appropriate page Title for the given EntityId.
+	 *
+	 * @since 0.5
+	 * @see EntityTitleLookup::getTitleForId
+	 *
+	 * @param EntityId $id
+	 *
+	 * @throws \InvalidArgumentException if $id refers to an entity of the wrong type.
+	 * @return Title $target
+	 */
+	public function getTitleForId( EntityId $id ) {
+		if ( $id->getEntityType() !== $this->getEntityType() ) {
+			throw new InvalidArgumentException( 'The given ID does not refer to an entity of type '
+				. $id->getEntityType() );
+		}
+
+		//FIXME: inject an EntityTitleLookup!
+		$title = Title::makeTitle( $this->getEntityNamespace(), $id->getSerialization() );
+		return $title;
+	}
 
 	/**
 	 * Calls the static function newFromArray() on the content class,
@@ -351,4 +438,85 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	abstract public function getEntityType();
+
+	/**
+	 * Returns deletion updates for the given EntityContent.
+	 *
+	 * @see Content::getDeletionUpdates
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityContent $content
+	 * @param Title $title
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
+		$updates = array();
+
+		// Call the WikibaseEntityDeletionUpdate hook.
+		// Do this before doing any well-known updates.
+		$updates[] = new DataUpdateClosure(
+			'wfRunHooks',
+			'WikibaseEntityDeletionUpdate',
+			array( $content, $title ) );
+
+		// Unregister the entity from the terms table.
+		$updates[] = new DataUpdateClosure(
+			array( $this->termIndex, 'deleteTermsOfEntity' ),
+			$content->getEntity()
+		);
+
+		// Unregister the entity from the EntityPerPage table.
+		$updates[] = new DataUpdateClosure(
+			array( $this->entityPerPage, 'deleteEntityPage' ),
+			$content->getEntity()->getId(),
+			$title->getArticleID()
+		);
+
+		return $updates;
+	}
+
+	/**
+	 * Returns modification updates for the given EntityContent.
+	 *
+	 * @see Content::getSecondaryDataUpdates
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityContent $content
+	 * @param Title $title
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
+		$updates = array();
+
+		// Register the entity in the EntityPerPage table.
+		// @todo: Only do this if the entity is new.
+		// Note that $title->exists() will already return true at this point
+		// even if we are just now creating the entity.
+		$updates[] = new DataUpdateClosure(
+			array( $this->entityPerPage, 'addEntityPage' ),
+			$content->getEntity()->getId(),
+			$title->getArticleID()
+		);
+
+		// Register the entity in the terms table.
+		$updates[] = new DataUpdateClosure(
+			array( $this->termIndex, 'saveTermsOfEntity' ),
+			$content->getEntity()
+		);
+
+		// Call the WikibaseEntityModificationUpdate hook.
+		// Do this after doing all well-known updates.
+		$updates[] = new DataUpdateClosure(
+			'wfRunHooks',
+			'WikibaseEntityModificationUpdate',
+			array( $content, $title )
+		);
+
+		return $updates;
+	}
+
 }
