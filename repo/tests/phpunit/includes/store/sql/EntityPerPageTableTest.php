@@ -67,30 +67,6 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		return $table;
 	}
 
-	public function testAddEntityPage( /* EntityContent $entityContent */ ) {
-		$this->markTestIncomplete( "test me!" );
-	}
-
-	public function testDeleteEntityPage( /* EntityContent $entityContent */ ) {
-		$this->markTestIncomplete( "test me!" );
-	}
-
-	public function testClear() {
-		$this->markTestIncomplete( "test me!" );
-	}
-
-	public function testRebuild() {
-		$this->markTestIncomplete( "test me!" );
-	}
-
-	public function testListEntitiesWithoutTerm( /* $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 */ ) {
-		$this->markTestIncomplete( "test me!" );
-	}
-
-	public function testGetItemsWithoutSitelinks( /* $siteId = null, $limit = 50, $offset = 0 */ ) {
-		$this->markTestIncomplete( "test me!" );
-	}
-
 	protected function getIdStrings( array $entities ) {
 		$ids = array_map( function ( $entity ) {
 			if ( $entity instanceof Entity ) {
