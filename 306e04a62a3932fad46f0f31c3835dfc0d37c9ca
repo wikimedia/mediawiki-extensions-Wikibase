@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_d82d4643",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-28T19:17:33Z",
+      "side": 1,
+      "message": "it may be pointless to return a true here for this hook (and in the beta features hook below) but normally hook handlers do that.\n\nPerhaps we want to return something here? or otherwise, if you think it\u0027s better not to, then do same below and remove it?",
+      "revId": "306e04a62a3932fad46f0f31c3835dfc0d37c9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_78f512c7",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-28T19:17:33Z",
+      "side": 1,
+      "message": "$wgExtensionAssetsPath does not work here if Wikibase installed in a non-standard location, like we do on WMF sites.\n\nhttps://github.com/wikimedia/mediawiki-extensions-Wikidata/blob/master/README.md\n\nit\u0027s a bit ugly but we found a way that works to give correct path in the (client/resources/)Resources.php files\n\nalso, some sort of test for this would be nice, although i realize this is a bit more difficult to test.",
+      "revId": "306e04a62a3932fad46f0f31c3835dfc0d37c9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_58f256e0",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-05-28T19:17:33Z",
+      "side": 1,
+      "message": "I think we want \u0027Adds a\u0027 instead of \u0027Adds an\u0027.\n\nand don\u0027t hardcode \u0027Wikidata\u0027.  we now have the {{WBREPONAME}} magic word which probably is ok to use here.",
+      "revId": "306e04a62a3932fad46f0f31c3835dfc0d37c9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
