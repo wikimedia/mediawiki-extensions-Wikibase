@@ -103,7 +103,7 @@ class SubmitEntityAction extends EditEntityAction {
 			$summary = $req->getText( 'wpSummary' );
 
 			if ( $summary === '' ) {
-				$summary = $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision );
+				$summary = $this->makeRestoreSummary( $olderRevision );
 			}
 
 			if ( $diff->isEmpty() ) {
@@ -135,7 +135,7 @@ class SubmitEntityAction extends EditEntityAction {
 				$summary = $req->getText( 'wpSummary' );
 
 				if ( $summary === '' ) {
-					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
+					$summary = $this->makeUndoSummary( $newerRevision );
 				}
 
 				//NOTE: use latest revision as base revision - we are saving patched content
