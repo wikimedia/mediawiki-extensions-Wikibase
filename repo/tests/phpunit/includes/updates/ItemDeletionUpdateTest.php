@@ -7,7 +7,6 @@ use Title;
 use Wikibase\ItemContent;
 use Wikibase\ItemDeletionUpdate;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StoreFactory;
 
 /**
  * @covers Wikibase\ItemDeletionUpdate
@@ -64,7 +63,7 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 		$update = new ItemDeletionUpdate( $itemContent, $title );
 		$update->doUpdate();
 
-		$linkLookup = StoreFactory::getStore()->newSiteLinkCache();
+		$linkLookup = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
 		$this->assertEquals( 0, $linkLookup->countLinks( array( $id ) ) );
 	}
 

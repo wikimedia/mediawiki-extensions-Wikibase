@@ -64,8 +64,8 @@ if ( !defined( 'WBL_VERSION' ) ) {
 
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
-	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks, $wgContentHandlers;
-	global $wgWBStores, $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
+	global $wgAPIModules, $wgSpecialPages, $wgSpecialPageGroups, $wgHooks;
+	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -214,10 +214,6 @@ call_user_func( function() {
 
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge( $wgResourceModules, include( __DIR__ . "/resources/Resources.php" ) );
-
-	$wgWBStores = array();
-
-	$wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
 	$wgWBRepoSettings = array_merge(
 		require( __DIR__ . '/../lib/config/WikibaseLib.default.php' ),

@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use LoggedUpdateMaintenance;
+use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -43,7 +44,7 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 			array( $this, 'report' )
 		);
 
-		$table = StoreFactory::getStore( 'sqlstore' )->getTermIndex();
+		$table = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$builder = new TermSearchKeyBuilder( $table );
 		$builder->setReporter( $reporter );
 
