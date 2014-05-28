@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use IContextSource;
-use \Language;
+use Language;
 use SpecialPage;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;

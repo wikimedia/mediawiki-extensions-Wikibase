@@ -6,7 +6,6 @@ use Language;
 use SpecialPage;
 use Title;
 
-
 /**
  * Generates HTML for displaying the term box, that is, the box
  * of labels and descriptions for additional languages a user understands.

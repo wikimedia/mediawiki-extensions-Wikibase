@@ -4,12 +4,12 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;

@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 use DataTypes\DataType;
-use MWException;
 use Html;
+use MWException;
 
 /**
  * DataType selector UI element.

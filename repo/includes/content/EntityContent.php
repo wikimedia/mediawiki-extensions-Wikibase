@@ -11,7 +11,6 @@ use RequestContext;
 use Status;
 use Title;
 use User;
-use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;

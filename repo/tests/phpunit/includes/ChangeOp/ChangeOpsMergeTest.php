@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use ValueValidators\Error;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\Item;

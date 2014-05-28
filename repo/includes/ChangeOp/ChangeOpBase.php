@@ -3,8 +3,8 @@
 namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
-use ValueValidators\ValueValidator;
 use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Summary;
 

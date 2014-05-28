@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test\Validators;
 
-use Wikibase\Validators\UniquenessViolation;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Validators\UniquenessViolation;
 
 /**
  * @covers Wikibase\Validators\UniquenessViolation

@@ -2,20 +2,18 @@
 
 namespace Wikibase\Api;
 
+use ApiBase;
 use ApiMain;
 use InvalidArgumentException;
-use SiteSQLStore;
 use Wikibase\ChangeOp\ChangeOp;
-use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
-use ApiBase;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
-use Wikibase\ChangeOp\ChangeOpAliases;
 
 /**
  * API module to set the aliases for a Wikibase entity.

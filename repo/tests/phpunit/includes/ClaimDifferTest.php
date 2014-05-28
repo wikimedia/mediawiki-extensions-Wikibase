@@ -3,14 +3,14 @@
 namespace Wikibase\Test;
 
 use Diff\Comparer\ComparableComparer;
-use Diff\OrderedListDiffer;
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
+use Diff\OrderedListDiffer;
+use Wikibase\Claim;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimDifference;
-use Wikibase\Claim;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\ReferenceList;
 use Wikibase\SnakList;

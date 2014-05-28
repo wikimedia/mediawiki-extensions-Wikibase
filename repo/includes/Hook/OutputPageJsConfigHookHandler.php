@@ -3,16 +3,7 @@
 namespace Wikibase\Hook;
 
 use OutputPage;
-use Title;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\NamespaceUtils;
 use Wikibase\OutputPageJsConfigBuilder;
-use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\Settings;
 
 /**

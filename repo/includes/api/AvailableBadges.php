@@ -2,8 +2,8 @@
 
 namespace Wikibase\Api;
 
-use Wikibase\Repo\WikibaseRepo;
 use ApiBase;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to query available badge items.

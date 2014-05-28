@@ -3,12 +3,12 @@
 namespace Wikibase\Test;
 
 use MWException;
+use TestSites;
+use Title;
 use User;
 use Wikibase\NamespaceUtils;
-use WikiPage;
-use Title;
-use TestSites;
 use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * @covers Wikibase\EditEntityAction

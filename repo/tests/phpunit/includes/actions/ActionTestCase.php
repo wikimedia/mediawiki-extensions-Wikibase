@@ -12,12 +12,12 @@ use MediaWikiTestCase;
 use MWException;
 use OutputPage;
 use RequestContext;
+use TestSites;
 use Title;
 use User;
 use Wikibase\Item;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
-use TestSites;
 
 /**
  * @licence GNU GPL v2+
