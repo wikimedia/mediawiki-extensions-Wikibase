@@ -144,6 +144,8 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 
 		$expected = array_merge( $base, $extra );
 
+		$this->assertGreaterThanOrEqual( 4, count( $options->getOptions() ) );
+
 		foreach ( $expected as $key => $value ) {
 			if ( $value === null ) {
 				$this->assertFalse( $options->hasOption( $key ) );
@@ -175,6 +177,8 @@ class SerializationOptionsTest extends \MediaWikiTestCase {
 		$options->merge( new SerializationOptions( $extra ) );
 
 		$expected = array_merge( $base, $extra );
+
+		$this->assertGreaterThanOrEqual( 4, count( $options->getOptions() ) );
 
 		foreach ( $expected as $key => $value ) {
 			if ( $value === null ) {
