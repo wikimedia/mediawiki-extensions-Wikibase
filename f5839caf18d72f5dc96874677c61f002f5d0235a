@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_9fb458e6",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T14:28:53Z",
+      "side": 1,
+      "message": "I thought there was going to be, but I think you are right, there currently isn\u0027t.",
+      "parentUuid": "4e1dcb5b_7febbcdb",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_ff5a2cf8",
         "filename": "repo/includes/content/EntityContentDiff.php",
         "patchSetId": 8
@@ -189,6 +207,24 @@
       "writtenOn": "2014-05-28T14:18:38Z",
       "side": 1,
       "message": "Using dedicated methods results in simpler code than when trying to stuff all cases into one. Having an if statement in a test is very suspicious, so when you feel the need to write one, reconsider your approach.",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_5f96c050",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentDiffTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T14:28:53Z",
+      "side": 1,
+      "message": "you want testConstructionWithEntityDiff and testConstructionWithRedirectDiff? as well as testConstructionWithBothKindsOfDiffs?",
+      "parentUuid": "4e1dcb5b_1ff288cd",
       "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
