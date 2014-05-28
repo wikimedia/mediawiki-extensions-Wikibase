@@ -15,6 +15,8 @@ return call_user_func( function() {
 	global $wgSquidMaxage;
 
 	$defaults = array(
+		'defaultStore' => 'sqlstore',
+
 		'idBlacklist' => array(
 			1,
 			23,

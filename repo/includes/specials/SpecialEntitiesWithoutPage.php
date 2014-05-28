@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 use Wikibase\Utils;
 use XmlSelect;
 
@@ -185,7 +185,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		$entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
+		$entityPerPage = StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
 		return $entityPerPage->getEntitiesWithoutTerm( $this->getTermType(), $this->language, $this->type, $limit, $offset );
 	}
 

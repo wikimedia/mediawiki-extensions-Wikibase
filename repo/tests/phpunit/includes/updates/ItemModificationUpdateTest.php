@@ -7,6 +7,7 @@ use Wikibase\ItemContent;
 use Wikibase\ItemDeletionUpdate;
 use Wikibase\ItemModificationUpdate;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 
 /**
  * @covers Wikibase\ItemModificationUpdate
