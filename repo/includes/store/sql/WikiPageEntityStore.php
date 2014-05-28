@@ -248,12 +248,6 @@ class WikiPageEntityStore implements EntityStore {
 			$status->value['revision'] = $page->getRevision();
 		}
 
-		//TODO: move this to EntityModificationUpdate. Somehow tell it whether the entity was newly created.
-		if( $status->isGood() && isset ( $status->value['new'] ) && $status->value['new'] ) {
-			$this->entityPerPage->addEntityPage(
-				$entity->getId(),
-				$page->getTitle()->getArticleID() );
-		}
 
 		wfProfileOut( __METHOD__ );
 		return $status;

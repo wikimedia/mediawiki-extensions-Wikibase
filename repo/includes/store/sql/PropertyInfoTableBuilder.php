@@ -254,8 +254,15 @@ class PropertyInfoTableBuilder {
 			);
 		}
 
-		$update = new PropertyInfoUpdate( $property, $this->propertyInfoTable );
-		$update->doUpdate();
+		//FIXME: Needs to be in sync with what PropertyHandler::getEntityModificationUpdates does!
+		$info = array(
+			PropertyInfoStore::KEY_DATA_TYPE => $property->getDataTypeId()
+		);
+
+		$this->propertyInfoTable->setPropertyInfo(
+			$property->getId(),
+			$info
+		);
 	}
 
 	/**
