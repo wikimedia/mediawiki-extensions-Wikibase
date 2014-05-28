@@ -82,7 +82,7 @@
 	"wikibase-item-summary-wbsetsitelink-add": "ХӀокхуна [$2] тӀетоьхна хьажораг",
 	"wikibase-item-summary-wbsetsitelink-set": "Хийцина хьажораг → [$2]",
 	"wikibase-item-summary-wbsetsitelink-remove": "ТӀера [$2] хьажораг дӀаяьккхина",
-	"wikibase-item-summary-wblinktitles-connect": "ТӀетоьхна кхуьнца йолу агӀонийн тӀе меттанийн хьажорагаш",
+	"wikibase-item-summary-wblinktitles-connect": "ТӀетоьхна кхуьнца йолу агӀонийн тӀе меттанийн хьажоргаш",
 	"wikibase-item-summary-wbcreateclaim-value": "{{PLURAL:$1|1=Кхоьллина дехар|Кхоьллина дехар}}",
 	"wikibase-item-summary-wbcreateclaim-novalue": "{{PLURAL:$1|1=Кхоьллина дехар|Кхоьллина дехарш}}",
 	"wikibase-item-summary-wbcreateclaim": "{{PLURAL:$1|1=Кхоьллина дехар|Кхоьллина дехарш}}",
