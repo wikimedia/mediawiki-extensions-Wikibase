@@ -69,12 +69,14 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $claims
 	 */
 	public function testAllOfTheStuff( ClaimAggregate $aggregate, array $claims ) {
-		$obtainedClaims = new Claims( $aggregate->getClaims() );
-		$this->assertInstanceOf( '\Wikibase\Claims', $obtainedClaims );
+		$obtainedClaims = $aggregate->getClaims();
+
+		$this->assertInternalType( 'array', $obtainedClaims );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\DataModel\Claim\Claim', $obtainedClaims );
 
 		// Below code tests if the Claims in the ClaimAggregate indeed do not get modified.
 
-		$unmodifiedClaims = clone $obtainedClaims;
+		$unmodifiedClaims = $obtainedClaims;
 
 		$qualifiers = new SnakList( array( new PropertyValueSnak(
 			new PropertyId( 'P10' ),
@@ -89,19 +91,21 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		foreach ( $claims as $claim ) {
-			$obtainedClaims->addClaim( $claim );
+			$obtainedClaims[] = $claim;
 		}
 
-		$freshlyObtained = new Claims( $aggregate->getClaims() );
+		$freshlyObtained = $aggregate->getClaims();
 
 		$this->assertEquals(
-			iterator_to_array( $unmodifiedClaims ),
-			iterator_to_array( $freshlyObtained ),
+			$unmodifiedClaims,
+			$freshlyObtained,
 			'Was able to modify statements via ClaimAggregate::getClaims'
 		);
 
+		$unmodifiedClaimsLookup = new Claims( $unmodifiedClaims );
+
 		foreach ( $freshlyObtained as $obtainedClaim ) {
-			$this->assertTrue( $unmodifiedClaims->hasClaim( $obtainedClaim ) );
+			$this->assertTrue( $unmodifiedClaimsLookup->hasClaim( $obtainedClaim ) );
 		}
 	}
 
