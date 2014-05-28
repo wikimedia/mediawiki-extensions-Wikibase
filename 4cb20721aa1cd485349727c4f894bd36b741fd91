@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_62cfa383",
+        "filename": "lib/tests/phpunit/serializers/SerializationOptionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-28T16:40:58Z",
+      "side": 1,
+      "message": "$options-\u003egetOptions() returns an array, so this should probably be count( $options-\u003egetOptions() )",
+      "revId": "4cb20721aa1cd485349727c4f894bd36b741fd91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_42cca78c",
+        "filename": "lib/tests/phpunit/serializers/SerializationOptionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-28T16:40:58Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "4cb20721aa1cd485349727c4f894bd36b741fd91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
