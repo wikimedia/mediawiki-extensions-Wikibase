@@ -70,11 +70,13 @@ class ClaimAggregateTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAllOfTheStuff( ClaimAggregate $aggregate, array $claims ) {
 		$obtainedClaims = $aggregate->getClaims();
+
 		$this->assertInternalType( 'array', $obtainedClaims );
+		$this->assertContainsOnlyInstancesOf( 'Wikibase\DataModel\Claim\Claim', $obtainedClaims );
 
 		// Below code tests if the Claims in the ClaimAggregate indeed do not get modified.
 
-		$unmodifiedClaims = clone $obtainedClaims;
+		$unmodifiedClaims = $obtainedClaims;
 
 		$qualifiers = new SnakList( array( new PropertyValueSnak(
 			new PropertyId( 'P10' ),
