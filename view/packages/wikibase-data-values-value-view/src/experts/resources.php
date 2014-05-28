@@ -69,6 +69,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'valueview-expert-globecoordinateinput-precision',
+				'valueview-expert-globecoordinateinput-customprecision',
 			),
 		),
 

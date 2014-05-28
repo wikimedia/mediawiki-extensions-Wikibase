@@ -339,23 +339,27 @@
 			.appendTo( $( 'body' ) ).hide();
 
 			$.each( this.options.values, function( i, v ) {
-				self.$menu.append(
-					$( '<li/>' )
-					.append(
-						$( '<a/>' )
-						.attr( 'href', 'javascript:void(0);')
-						.text( v.label )
-						.on( 'click', function( event ) {
-							event.stopPropagation();
-							self._trigger( 'selected', null, [ self.value( v.value ) ] );
-							self.$menu.hide();
-						} )
-					)
-					.data( 'value', v.value )
-				);
+				self._addMenuItem( v );
 			} );
 
 			this.$menu.menu();
+		},
+
+		_addMenuItem: function( item ) {
+			var self = this;
+			return $( '<li/>' )
+				.append(
+					$( '<a/>' )
+					.attr( 'href', 'javascript:void(0);')
+					.text( item.label )
+					.on( 'click', function( event ) {
+						event.stopPropagation();
+						self._trigger( 'selected', null, [ self.value( item.value ) ] );
+						self.$menu.hide();
+					} )
+				)
+				.data( 'value', item.value )
+				.appendTo( this.$menu );
 		},
 
 		/**

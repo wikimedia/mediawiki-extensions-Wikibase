@@ -2,7 +2,7 @@
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( $, vv, GlobeCoordinate, Formatter ) {
+( function( $, vv, Formatter ) {
 	'use strict';
 
 	var PARENT = vv.experts.StringValue;
@@ -38,7 +38,15 @@
 			},
 			function(){
 				var value = self.viewState().value();
-				return value && roundPrecision( value.getValue().getPrecision() );
+				if( !value ) {
+					return value;
+				}
+				value = value.getValue().getPrecision();
+				return getPrecisionSetting( value ) || {
+					custom: true,
+					value: value,
+					label: self._messageProvider.getMessage('valueview-expert-globecoordinateinput-customprecision', [ Formatter.PRECISIONTEXT( value ) ] )
+				};
 			}
 		);
 
@@ -89,7 +97,7 @@
 			}
 
 			var options = {},
-				precision = getPrecisionSetting( this.precisionRotator.getValue() );
+				precision = this.precisionRotator.getValue();
 
 			if( precision !== null ) {
 				options.precision = precision;
@@ -111,43 +119,29 @@
 	/**
 	 * Rounds a given precision for being able to use it as internal "constant".
 	 *
-	 * TODO: Calculated numbers used for the precision (e.g. 1/60) may result in different values
-	 *  in front- and back-end. Either use dedicated float numbers in front- and back-end or
-	 *  integrate the rounding in GlobeCoordinate.
-	 *
 	 * @since 0.1
 	 *
 	 * @param {number} precision
 	 * @return {number}
 	 */
 	function roundPrecision( precision ) {
-		var precisions = GlobeCoordinate.PRECISIONS,
-			highestPrecision = precisions[precisions.length - 1],
-			multiplier = 1;
-
-		// To make sure that not too much digits are cut off for the "constant" precisions to be
-		// distinctive, we round with a multiplier that rounds the most precise precision to a
-		// number greater than 1:
-		while( highestPrecision * multiplier < 1 ) {
-			multiplier *= 10;
-		}
-
-		return Math.round( precision * multiplier ) / multiplier;
+		return Number( precision.toPrecision(4) );
 	}
 
 	/**
-	 * Returns the original precision level for a rounded precision.
+	 * Returns the original precision level for an unrounded precision.
 	 *
 	 * @since 0.1
 	 *
-	 * @param {number} roundedPrecision
+	 * @param {number} precision
 	 * @return {number|null}
 	 */
-	function getPrecisionSetting( roundedPrecision ) {
+	function getPrecisionSetting( precision ) {
 		var rounded,
-			actualPrecision = null;
+			actualPrecision = null,
+			roundedPrecision = roundPrecision( precision );
 
-		$.each( GlobeCoordinate.PRECISIONS, function( i, precision ) {
+		$.each( PRECISIONS, function( i, precision ) {
 			rounded = roundPrecision( precision );
 			if( rounded === roundedPrecision ) {
 				actualPrecision = precision;
@@ -160,7 +154,7 @@
 
 	function getPrecisionValues() {
 		var precisionValues = [];
-		$.each( GlobeCoordinate.PRECISIONS, function( i, precision ) {
+		$.each( PRECISIONS, function( i, precision ) {
 			var label = Formatter.PRECISIONTEXT( precision );
 			precisionValues.unshift( {
 				value: roundPrecision( precision ),
@@ -170,4 +164,20 @@
 		return precisionValues;
 	}
 
-}( jQuery, jQuery.valueview, globeCoordinate.GlobeCoordinate, globeCoordinate.Formatter ) );
+	var PRECISIONS = [
+		10,
+		1,
+		0.1,
+		1 / 60,
+		0.01,
+		0.001,
+		1 / 3600,
+		0.0001,
+		1 / 36000,
+		0.00001,
+		1 / 360000,
+		0.000001,
+		1 / 3600000
+	];
+
+}( jQuery, jQuery.valueview, globeCoordinate.Formatter ) );
