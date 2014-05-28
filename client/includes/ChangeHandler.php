@@ -465,6 +465,7 @@ class ChangeHandler {
 		$changes = $this->coalesceChanges( $changes );
 
 		if ( !wfRunHooks( 'WikibaseHandleChanges', array( $changes ) ) ) {
+			wfProfileOut( __METHOD__ );
 			return;
 		}
 
