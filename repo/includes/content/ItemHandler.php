@@ -2,9 +2,12 @@
 
 namespace Wikibase;
 
-use InvalidArgumentException;
+use DataUpdate;
+use Title;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
+
 /**
  * Content handler for Wikibase items.
  *
@@ -14,6 +17,11 @@ use Wikibase\Validators\EntityValidator;
  * @author Daniel Kinzler
  */
 class ItemHandler extends EntityHandler {
+
+	/**
+	 * @var SiteLinkCache
+	 */
+	private $siteLinkStore;
 
 	/**
 	 * @see EntityHandler::getContentClass
@@ -27,11 +35,28 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
+	 * @param EntityPerPage $entityPerPage
+	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
+	 * @param SiteLinkCache $siteLinkStore
 	 */
-	public function __construct( EntityContentDataCodec $contentCodec, $preSaveValidators ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $contentCodec, $preSaveValidators );
+	public function __construct(
+		EntityPerPage $entityPerPage,
+		TermIndex $termIndex,
+		EntityContentDataCodec $contentCodec,
+		array $preSaveValidators,
+		SiteLinkCache $siteLinkStore
+	) {
+		parent::__construct(
+			CONTENT_MODEL_WIKIBASE_ITEM,
+			$entityPerPage,
+			$termIndex,
+			$contentCodec,
+			$preSaveValidators
+		);
+
+		$this->siteLinkStore = $siteLinkStore;
 	}
 
 	/**
@@ -63,5 +88,57 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getEntityType() {
 		return Item::ENTITY_TYPE;
+	}
+
+	/**
+	 * Returns deletion updates for the given EntityContent.
+	 *
+	 * @see EntityHandler::getEntityDeletionUpdates
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityContent $content
+	 * @param Title $title
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
+		$updates = array();
+
+		$updates[] = new DataUpdateClosure(
+			array( $this->siteLinkStore, 'deleteLinksOfItem' ),
+			$content->getEntity()->getId()
+		);
+
+		return array_merge(
+			parent::getEntityDeletionUpdates( $content, $title ),
+			$updates
+		);
+	}
+
+	/**
+	 * Returns modification updates for the given EntityContent.
+	 *
+	 * @see EntityHandler::getEntityModificationUpdates
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityContent $content
+	 * @param Title $title
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
+		$updates = array();
+
+		$updates[] = new DataUpdateClosure(
+			array( $this->siteLinkStore, 'saveLinksOfItem' ),
+			$content->getEntity()
+		);
+
+		return array_merge(
+			$updates,
+			parent::getEntityModificationUpdates( $content, $title )
+		);
 	}
 }

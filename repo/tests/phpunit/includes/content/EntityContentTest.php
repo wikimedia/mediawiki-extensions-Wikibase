@@ -15,6 +15,8 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
+use WikiPage;
+use WikitextContent;
 
 /**
  * @covers Wikibase\EntityContent
@@ -372,4 +374,45 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertTrue( $expected->equals( $actual ), 'equals()' );
 	}
 
+	protected function getExistingPageTitle( EntityContent $content ) {
+		// NOTE: needs database access
+		$this->entityStore->assignFreshId( $content->getEntity() );
+		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$title = $titleLookup->getTitleForId( $content->getEntity()->getId() );
+
+		if ( !$title->exists() ) {
+			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store->saveEntity( $content->getEntity(), 'test', $GLOBALS['wgUser'] );
+		}
+
+		return $title;
+	}
+
+	public function testGetSecondaryDataUpdates() {
+		$empty = $this->newEmpty();
+		$title = $this->getExistingPageTitle( $empty );
+
+		// NOTE: $title->exists() must be true.
+		$updates = $empty->getSecondaryDataUpdates( $title );
+
+		$this->assertDataUpdates( $updates );
+	}
+
+	public function testGetDeletionUpdates() {
+		$empty = $this->newEmpty();
+		$title = $this->getExistingPageTitle( $empty );
+
+		$updates = $empty->getDeletionUpdates( new WikiPage( $title ) );
+
+		$this->assertDataUpdates( $updates );
+	}
+
+	protected function assertDataUpdates( $updates ) {
+
+		$this->assertInternalType( 'array', $updates );
+
+		foreach ( $updates as $update ) {
+			$this->assertInstanceOf( 'DataUpdate', $update );
+		}
+	}
 }

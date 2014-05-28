@@ -5,6 +5,7 @@ namespace Wikibase;
 use AbstractContent;
 use Content;
 use Diff\DiffOp\Diff\Diff;
+use DataUpdate;
 use IContextSource;
 use ParserOptions;
 use ParserOutput;
@@ -106,6 +107,54 @@ abstract class EntityContent extends AbstractContent {
 	 * @return Entity
 	 */
 	abstract public function getEntity();
+
+	/**
+	 * @see Content::getDeletionUpdates
+	 * @see EntityHandler::getEntityDeletionUpdates
+	 *
+	 * @param \WikiPage $page
+	 * @param null|\ParserOutput $parserOutput
+	 *
+	 * @since 0.1
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
+		$updates = $handler->getEntityDeletionUpdates( $this, $page->getTitle() );
+
+		return array_merge(
+			parent::getDeletionUpdates( $page, $parserOutput ),
+			$updates
+		);
+	}
+
+	/**
+	 * @see Content::getSecondaryDataUpdates
+	 * @see EntityHandler::getEntityModificationUpdates
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title              $title
+	 * @param Content|null       $old
+	 * @param bool               $recursive
+	 * @param null|ParserOutput  $parserOutput
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getSecondaryDataUpdates( Title $title, Content $old = null,
+		$recursive = false, ParserOutput $parserOutput = null ) {
+
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
+		$updates = $handler->getEntityModificationUpdates( $this, $title );
+
+		return array_merge(
+			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
+			$updates
+		);
+	}
 
 	/**
 	 * Returns a ParserOutput object containing the HTML.
