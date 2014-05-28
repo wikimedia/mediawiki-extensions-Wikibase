@@ -220,6 +220,8 @@ class WikiPageEntityStore implements EntityStore {
 			}
 		}
 
+		$entityContent->setBaseRevIdForSaving( $baseRevId );
+
 		// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clearPreparedEdit
 		//       may cause the old content to be loaded from the database again. This may be
 		//       necessary, because EntityContent is mutable, so the cached object might have changed.
@@ -253,6 +255,8 @@ class WikiPageEntityStore implements EntityStore {
 				$entity->getId(),
 				$page->getTitle()->getArticleID() );
 		}
+
+		$entityContent->setBaseRevIdForSaving( false );
 
 		wfProfileOut( __METHOD__ );
 		return $status;
