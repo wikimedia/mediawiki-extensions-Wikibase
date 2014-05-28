@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_7f997c7f",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:35:42Z",
+      "side": 1,
+      "message": "Mock and stub are well established terminology. Using the one instead of the other is misleading. We do not need to repeat the mistake of the PHPUnit API, or continue down that path as we have so far.\n\nThis change can be merged without changing it; it is just a distinction to hold in mind.\n\n\u003e Maybe that should be called getDouble()\n\nUsing the general term is not more clear, and in this case merely transforms the misdirection, since \"double\" is not the same as \"test double\".",
+      "parentUuid": "4e1dcb5b_b8105505",
+      "revId": "ad64c633e34b24fd14d498704a6abc042bc3bf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_3844454a",
         "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
         "patchSetId": 1
