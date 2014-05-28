@@ -356,8 +356,15 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 		}
 	}
 
-	protected $guidCounter = 0;
+	public function testParserOutputLinksForNoClaims() {
+		$entityRevision = $this->newEntityRevisionForClaims( array() );
+		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
 
+		$out = $entityView->getParserOutput( $entityRevision, true, false );
+		$this->assertEquals( array(), $out->getLinks() );
+	}
+
+	protected $guidCounter = 0;
 
 	protected function makeItem( $id, $claims = array() ) {
 		if ( is_string( $id ) ) {
@@ -416,10 +423,6 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 
 		$q23 = new ItemId( 'Q23' );
 		$q24 = new ItemId( 'Q24' );
-
-		$argLists["empty"] = array(
-			array(),
-			array() );
 
 		$argLists["PropertyNoValueSnak"] = array(
 			array( $this->makeClaim( new PropertyNoValueSnak( $p44 ) ) ),
