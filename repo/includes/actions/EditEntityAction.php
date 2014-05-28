@@ -328,8 +328,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$this->displayUndoDiff( $appDiff );
 
-		$autoSummary = $restore ? $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision )
-								: $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
+		$autoSummary = $restore ? $this->makeRestoreSummary( $olderRevision )
+								: $this->makeUndoSummary( $newerRevision );
 
 		$this->showConfirmationForm( $autoSummary );
 	}
@@ -361,12 +361,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @since 0.1
 	 *
 	 * @param Revision $olderRevision
-	 * @param Revision $newerRevision
-	 * @param Revision $latestRevision
 	 *
 	 * @return String
 	 */
-	public function makeRestoreSummary( Revision $olderRevision, Revision $newerRevision, Revision $latestRevision ) {
+	protected function makeRestoreSummary( Revision $olderRevision ) {
 		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
 			'wikibase-restore-summary',
 			$olderRevision->getId(),
@@ -381,13 +379,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Revision $olderRevision
 	 * @param Revision $newerRevision
-	 * @param Revision $latestRevision
 	 *
 	 * @return String
 	 */
-	public function makeUndoSummary( Revision $olderRevision, Revision $newerRevision, Revision $latestRevision ) {
+	protected function makeUndoSummary( Revision $newerRevision ) {
 		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
 			'undo-summary',
 			$newerRevision->getId(),
