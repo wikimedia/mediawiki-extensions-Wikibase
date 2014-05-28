@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_3fa9c478",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-05-28T14:35:08Z",
+      "side": 1,
+      "message": "Support for redirects is added to EntityContent in a later patch. For now, EntityContentDiff supports redirects, but EntityContent doesn\u0027t.",
+      "parentUuid": "4e1dcb5b_3fa304aa",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_7f473c23",
         "filename": "repo/includes/content/EntityContentDiff.php",
         "patchSetId": 8
