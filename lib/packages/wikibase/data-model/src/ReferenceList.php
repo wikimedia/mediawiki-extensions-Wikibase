@@ -49,7 +49,7 @@ class ReferenceList extends HashableObjectStorage implements References {
 	 * @param Reference $reference
 	 * @param int $index
 	 */
-	protected function insertReferenceAtIndex( Reference $reference, $index ) {
+	private function insertReferenceAtIndex( Reference $reference, $index ) {
 		$referencesToShift = array();
 		$i = 0;
 

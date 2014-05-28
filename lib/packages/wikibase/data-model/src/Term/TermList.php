@@ -99,7 +99,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 		return array_key_exists( $languageCode, $this->terms );
 	}
 
-	protected function assertIsLanguageCode( $languageCode ) {
+	private function assertIsLanguageCode( $languageCode ) {
 		if ( !is_string( $languageCode ) ) {
 			throw new InvalidArgumentException( '$languageCode should be a string' );
 		}
