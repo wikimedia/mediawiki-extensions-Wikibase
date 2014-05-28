@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_bfe154fd",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:18:38Z",
+      "side": 1,
+      "message": "Yes, null should be in there as well. Anyway, moot point here, docs are pointless, please remove.",
+      "parentUuid": "4e1dcb5b_5ff240e0",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_3f51c4dd",
         "filename": "repo/includes/content/EntityContentDiff.php",
         "patchSetId": 8
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_7febbcdb",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:18:38Z",
+      "side": 1,
+      "message": "Why can they not simply be required? Is there code that actually needs this nullability?",
+      "parentUuid": "4e1dcb5b_5f6b6082",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_ff5a2cf8",
         "filename": "repo/includes/content/EntityContentDiff.php",
         "patchSetId": 8
@@ -136,6 +172,23 @@
       "side": 1,
       "message": "This was intended as a B/C measure, so this can be used as a drop-in replacement for EntityDiff. But perhaps it\u0027s not really needed, i\u0027ll have another look.",
       "parentUuid": "4e1dcb5b_ff5a2cf8",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_1ff288cd",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentDiffTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-05-28T14:18:38Z",
+      "side": 1,
+      "message": "Using dedicated methods results in simpler code than when trying to stuff all cases into one. Having an if statement in a test is very suspicious, so when you feel the need to write one, reconsider your approach.",
       "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
