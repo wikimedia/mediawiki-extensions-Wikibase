@@ -82,6 +82,10 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $r2->getRevision(), $r2actual->getRevision(), 'revid' );
 		$this->assertEquals( $r2->getTimestamp(), $r2actual->getTimestamp(), 'timestamp' );
 		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
+
+		// check that the term index got updated (via a DataUpdate).
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity()' );
 	}
 
 	public function provideSaveEntityError() {
@@ -357,7 +361,31 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $prev_id, $rev_id, "revision ID should stay the same if no change was made" );
 	}
 
-	//FIXME: test deletion
-	//FIXME: test edit updates
-	//FIXME: test deletion updates
+	public function testDeleteEntity() {
+		/* @var EntityStore $store */
+		/* @var EntityRevisionLookup $lookup */
+		list( $store, $lookup ) = $this->createStoreAndLookup();
+		$user = $GLOBALS['wgUser'];
+
+		// create one
+		$one = new Item( array( 'label' => array( 'en' => 'one' ) ) );
+
+		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
+		$oneId = $r1->getEntity()->getId();
+
+		// sanity check
+		$this->assertNotNull( $lookup->getEntityRevision( $oneId ) );
+
+		// delete one
+		$store->deleteEntity( $oneId, 'testing', $user );
+
+		// check that it's gone
+		$this->assertFalse( $lookup->hasEntity( $oneId ), 'hasEntity()' );
+		$this->assertNull( $lookup->getEntity( $oneId ), 'getEntityRevision()' );
+
+		// check that the term index got updated (via a DataUpdate).
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
+	}
+
 }

@@ -2,7 +2,10 @@
 
 namespace Wikibase;
 
+use DataUpdate;
+use Title;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
 
 /**
@@ -12,8 +15,14 @@ use Wikibase\Validators\EntityValidator;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class PropertyHandler extends EntityHandler {
+
+	/**
+	 * @var PropertyInfoStore
+	 */
+	private $infoStore;
 
 	/**
 	 * @see EntityHandler::getContentClass
@@ -27,11 +36,28 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
+	 * @param EntityPerPage $entityPerPage
+	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
+	 * @param PropertyInfoStore $infoStore
 	 */
-	public function __construct( EntityContentDataCodec $contentCodec, $preSaveValidators ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY, $contentCodec, $preSaveValidators );
+	public function __construct(
+		EntityPerPage $entityPerPage,
+		TermIndex $termIndex,
+		EntityContentDataCodec $contentCodec,
+		$preSaveValidators,
+		PropertyInfoStore $infoStore
+	) {
+		parent::__construct(
+			CONTENT_MODEL_WIKIBASE_PROPERTY,
+			$entityPerPage,
+			$termIndex,
+			$contentCodec,
+			$preSaveValidators
+		);
+
+		$this->infoStore = $infoStore;
 	}
 
 	/**
@@ -64,5 +90,66 @@ class PropertyHandler extends EntityHandler {
 	public function getEntityType() {
 		return Property::ENTITY_TYPE;
 	}
+
+
+	/**
+	 * Returns deletion updates for the given EntityContent.
+	 *
+	 * @see EntityHandler::getEntityDeletionUpdates
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityContent $content
+	 * @param Title $title
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
+		$updates = array();
+
+		$updates[] = new DataUpdateClosure(
+			array( $this->infoStore, 'removePropertyInfo' ),
+			$content->getEntity()->getId()
+		);
+
+		return array_merge(
+			parent::getEntityModificationUpdates( $content, $title ),
+			$updates
+		);
+	}
+
+	/**
+	 * Returns modification updates for the given EntityContent.
+	 *
+	 * @see EntityHandler::getEntityModificationUpdates
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityContent $content
+	 * @param Title $title
+	 *
+	 * @return DataUpdate[]
+	 */
+	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
+		$updates = array();
+
+		//XXX: Where to encode the knowledge about how to extract an info array from a Property object?
+		//     Should we have a PropertyInfo class? Or can we put this into the Property class?
+		$info = array(
+			PropertyInfoStore::KEY_DATA_TYPE => $content->getProperty()->getDataTypeId()
+		);
+
+		$updates[] = new DataUpdateClosure(
+			array( $this->infoStore, 'setPropertyInfo' ),
+			$content->getEntity()->getId(),
+			$info
+		);
+
+		return array_merge(
+			$updates,
+			parent::getEntityModificationUpdates( $content, $title )
+		);
+	}
+
 }
 
