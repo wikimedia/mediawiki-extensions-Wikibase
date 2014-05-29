@@ -15,6 +15,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\V4GuidGenerator;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
+use Wikibase\Test\MockRepository;
 
 /**
  * Helper class for Lua integration tests.
