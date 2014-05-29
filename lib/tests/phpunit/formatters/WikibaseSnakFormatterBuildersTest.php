@@ -122,9 +122,6 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$msg = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
 		$noValueMsg = $msg->inLanguage( 'en' )->text();
 
-		$msg = wfMessage( 'wikibase-undeserializable-value' );
-		$badValueMsg = $msg->inLanguage( 'en' )->text();
-
 		return array(
 			'plain url' => array(
 				SnakFormatter::FORMAT_PLAIN,
