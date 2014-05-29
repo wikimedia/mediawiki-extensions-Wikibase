@@ -30,7 +30,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	protected function newEntityRevisionLookup( array $entityRevisions ) {
 		$mock = new MockRepository();
 
-		foreach ( $entityRevisions as $rev => $entityRev ) {
+		foreach ( $entityRevisions as $entityRev ) {
 			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevision() );
 		}
 

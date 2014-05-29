@@ -91,7 +91,7 @@ class AliasSerializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidGetSerialized( $aliases ) {
 		$aliasSerializer = new AliasSerializer();
-		$serializedAliases = $aliasSerializer->getSerialized( $aliases );
+		$aliasSerializer->getSerialized( $aliases );
 	}
 
 	/**

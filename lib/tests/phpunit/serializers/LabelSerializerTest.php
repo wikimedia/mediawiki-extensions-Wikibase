@@ -206,7 +206,7 @@ class LabelSerializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidGetSerialized( $labels ) {
 		$labelSerializer = new LabelSerializer();
-		$serializedLabels = $labelSerializer->getSerialized( $labels );
+		$labelSerializer->getSerialized( $labels );
 	}
 
 	/**

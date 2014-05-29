@@ -206,7 +206,7 @@ class DescriptionSerializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidGetSerialized( $descriptions ) {
 		$descriptionSerializer = new DescriptionSerializer();
-		$serializedDescriptions = $descriptionSerializer->getSerialized( $descriptions );
+		$descriptionSerializer->getSerialized( $descriptions );
 	}
 
 	/**
