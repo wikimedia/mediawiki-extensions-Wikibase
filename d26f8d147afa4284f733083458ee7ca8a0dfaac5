@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b37aa41d",
+        "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-29T16:13:13Z",
+      "side": 0,
+      "message": "Why do you remove these?",
+      "revId": "d26f8d147afa4284f733083458ee7ca8a0dfaac5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
