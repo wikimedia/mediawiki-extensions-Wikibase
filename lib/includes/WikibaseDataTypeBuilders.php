@@ -6,7 +6,7 @@ use DataTypes\DataType;
 use DataValues\TimeValue;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Utils;
 use Wikibase\Validators\CompositeValidator;
 use Wikibase\Validators\DataFieldValidator;
@@ -31,14 +31,7 @@ use Wikibase\Validators\UrlValidator;
  */
 class WikibaseDataTypeBuilders {
 
-	/**
-	 * @var EntityLookup
-	 */
 	private $entityLookup;
-
-	/**
-	 * @var EntityIdParser
-	 */
 	private $entityIdParser;
 
 	/**
@@ -46,11 +39,6 @@ class WikibaseDataTypeBuilders {
 	 */
 	private $urlSchemes;
 
-	/**
-	 * @param EntityLookup   $lookup
-	 * @param EntityIdParser $idParser
-	 * @param array          $urlSchemes
-	 */
 	public function __construct(
 		EntityLookup $lookup,
 		EntityIdParser $idParser,

@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
@@ -71,10 +71,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	/**
 	 * Set service objects to use. Unit tests may call this to substitute mock
 	 * services.
-	 *
-	 * @param TermIndex $termIndex
-	 * @param EntityLookup $entityLookup
-	 * @param EntityTitleLookup $entityTitleLookup
 	 */
 	public function initServices(
 		TermIndex $termIndex,

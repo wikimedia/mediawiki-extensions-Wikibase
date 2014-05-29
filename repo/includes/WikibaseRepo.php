@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
@@ -199,7 +199,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\store\EntityStoreWatcher
+	 * @return \Wikibase\Lib\Store\EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher() {
 		return $this->getStore()->getEntityStoreWatcher();
@@ -219,7 +219,7 @@ class WikibaseRepo {
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
-	 * @return \Wikibase\EntityRevisionLookup
+	 * @return \Wikibase\Lib\Store\EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup( $uncached = '' ) {
 		return $this->getStore()->getEntityRevisionLookup( $uncached );
@@ -228,7 +228,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\store\EntityStore
+	 * @return \Wikibase\Lib\Store\EntityStore
 	 */
 	public function getEntityStore() {
 		return $this->getStore()->getEntityStore();

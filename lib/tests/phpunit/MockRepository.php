@@ -5,22 +5,22 @@ namespace Wikibase\Test;
 use DatabaseBase;
 use Status;
 use User;
-use Wikibase\Claims;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Entity;
-use Wikibase\EntityId;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityRevision;
-use Wikibase\EntityRevisionLookup;
-use Wikibase\Item;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\SiteLinkLookup;
 use Wikibase\StorageException;
-use Wikibase\store\EntityStore;
+use Wikibase\Lib\Store\EntityStore;
 
 /**
  * Mock repository for use in tests.
@@ -219,11 +219,11 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 *
 	 * @since 0.4
 	 *
-	 * @param SimpleSiteLink $siteLink
+	 * @param SiteLink $siteLink
 	 *
 	 * @return ItemId|null
 	 */
-	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink ) {
+	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
 		$globalSiteId = $siteLink->getSiteId();
 		$pageName = $siteLink->getPageName();
 
@@ -425,14 +425,14 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 * Returns true if the link matches the given conditions.
 	 *
 	 * @param Item     $item
-	 * @param SimpleSiteLink $link
+	 * @param SiteLink $link
 	 * @param array              $itemIds
 	 * @param array              $siteIds
 	 * @param array              $pageNames
 	 *
 	 * @return bool
 	 */
-	protected function linkMatches( Item $item, SimpleSiteLink $link,
+	protected function linkMatches( Item $item, SiteLink $link,
 		array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
 
 		if ( !empty( $itemIds ) ) {
@@ -497,7 +497,7 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 *
 	 * @param ItemId $itemId
 	 *
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 */
 	public function getSiteLinksForItem( ItemId $itemId ) {
 		$entity = $this->getEntity( $itemId );

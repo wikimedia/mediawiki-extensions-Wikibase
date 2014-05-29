@@ -6,7 +6,9 @@ use Language;
 use ObjectCache;
 use Site;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
  * Implementation of the client store interface using direct access to the repository's

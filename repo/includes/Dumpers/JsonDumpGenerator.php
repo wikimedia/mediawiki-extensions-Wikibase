@@ -10,7 +10,7 @@ use NullMessageReporter;
 use RethrowingExceptionHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityIdPager;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\StorageException;
 

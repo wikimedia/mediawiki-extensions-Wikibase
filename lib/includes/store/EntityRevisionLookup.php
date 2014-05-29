@@ -1,6 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
+
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityRevision;
 
 /**
  * Contains methods for interaction with an entity store.
@@ -36,4 +39,5 @@ interface EntityRevisionLookup extends EntityLookup {
 	 * @return int|false
 	 */
 	public function getLatestRevisionId( EntityId $entityId );
+
 }

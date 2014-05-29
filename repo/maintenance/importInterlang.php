@@ -16,7 +16,7 @@
 
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\store\EntityStore;
+use Wikibase\Lib\Store\EntityStore;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 

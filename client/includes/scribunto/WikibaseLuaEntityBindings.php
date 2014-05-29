@@ -8,9 +8,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Entity;
-use Wikibase\EntityLookup;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension

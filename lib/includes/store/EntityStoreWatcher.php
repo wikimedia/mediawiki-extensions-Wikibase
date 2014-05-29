@@ -1,8 +1,8 @@
 <?php
 
-namespace Wikibase\store;
+namespace Wikibase\Lib\Store;
 
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 
 /**
@@ -15,13 +15,7 @@ use Wikibase\EntityRevision;
  */
 interface EntityStoreWatcher {
 
-	/**
-	 * @param EntityRevision $entityRevision
-	 */
 	public function entityUpdated( EntityRevision $entityRevision );
-
-	/**
-	 * @param EntityId $entityId
-	 */
 	public function entityDeleted( EntityId $entityId );
+
 }

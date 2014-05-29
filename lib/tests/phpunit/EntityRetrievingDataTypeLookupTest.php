@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Test\MockRepository;
 
 /**

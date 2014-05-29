@@ -46,7 +46,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		return array(
 			array( 'getItemUsageIndex', 'Wikibase\ItemUsageIndex' ),
 			array( 'getSiteLinkTable', 'Wikibase\SiteLinkTable' ),
-			array( 'getEntityLookup', 'Wikibase\EntityLookup' ),
+			array( 'getEntityLookup', 'Wikibase\Lib\Store\EntityLookup' ),
 			array( 'getTermIndex', 'Wikibase\TermIndex' ),
 			array( 'getPropertyLabelResolver', 'Wikibase\PropertyLabelResolver' ),
 			array( 'newChangesTable', 'Wikibase\ChangesTable' ),

@@ -7,7 +7,7 @@ use OutOfBoundsException;
 use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityTitleLookup;
 
 /**
@@ -26,11 +26,6 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 */
 	protected $entityTitleLookup;
 
-	/**
-	 * @param FormatterOptions $options
-	 * @param EntityLookup $entityLookup
-	 * @param EntityTitleLookup|null $entityTitleLookup
-	 */
 	public function __construct(
 		FormatterOptions $options,
 		EntityLookup $entityLookup,

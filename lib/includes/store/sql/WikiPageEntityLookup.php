@@ -1,10 +1,15 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use DBQueryError;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\EntityFactory;
+use Wikibase\EntityRevision;
+use Wikibase\StorageException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable

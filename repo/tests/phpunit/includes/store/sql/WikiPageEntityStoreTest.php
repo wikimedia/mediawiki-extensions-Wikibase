@@ -9,16 +9,16 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityPerPageTable;
-use Wikibase\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
 use Wikibase\StorageException;
-use Wikibase\store\EntityStore;
-use Wikibase\store\WikiPageEntityStore;
-use Wikibase\WikiPageEntityLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\WikiPageEntityStore;
+use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
- * @covers Wikibase\store\WikiPageEntityStore
+ * @covers Wikibase\Lib\Store\WikiPageEntityStore
  *
  * @group Database
  * @group Wikibase
