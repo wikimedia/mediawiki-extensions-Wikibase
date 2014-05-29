@@ -13,7 +13,7 @@ use MWException;
 use RequestContext;
 use SiteList;
 use Wikibase\Api\ResultBuilder;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -111,7 +111,7 @@ class EntityDataSerializationService {
 	 * @param SerializerFactory $serializerFactory
 	 * @param SiteList $sites
 	 *
-	 * @since    0.4
+	 * @since 0.4
 	 */
 	public function __construct(
 		$rdfBaseURI,

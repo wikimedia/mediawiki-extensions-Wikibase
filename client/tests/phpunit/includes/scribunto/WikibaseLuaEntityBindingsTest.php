@@ -8,7 +8,7 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockRepository;
 
@@ -71,7 +71,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookupMock( Entity $entity = null ) {
-		$entityLookup = $this->getMock( 'Wikibase\EntityLookup' );
+		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 
 		$entityLookup->expects( $this->any() )->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );

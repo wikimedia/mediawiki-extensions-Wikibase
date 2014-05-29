@@ -1,12 +1,11 @@
 <?php
 
-namespace Wikibase\store;
+namespace Wikibase\Lib\Store;
 
 use BagOStuff;
-use Wikibase\Entity;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
-use Wikibase\EntityRevisionLookup;
 
 /**
  * Implementation of EntityLookup that caches the obtained entities in memory.
@@ -55,7 +54,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param string $cacheKeyPrefix The key prefix to use for constructing cache keys.
 	 *         Defaults to "wbentity". There should be no reason to change this.
 	 *
-	 * @return \Wikibase\store\CachingEntityRevisionLookup
+	 * @return \Wikibase\Lib\Store\CachingEntityRevisionLookup
 	 */
 	public function __construct( EntityRevisionLookup $lookup, BagOStuff $cache, $cacheDuration = 3600, $cacheKeyPrefix = "wbentity" ) {
 		$this->lookup = $lookup;

@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use MessageReporter;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Utility class for rebuilding the wb_items_per_site table.
@@ -14,40 +15,20 @@ use MessageReporter;
  */
 class ItemsPerSiteBuilder {
 
-	/**
-	 * @since 0.5
-	 *
-	 * @var SiteLinkTable $siteLinkTable
-	 */
-	protected $siteLinkTable;
+	private $siteLinkTable;
+	private $entityLookup;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var EntityLookup $entityLookup
-	 */
-	protected $entityLookup;
-
-	/**
-	 * @since 0.5
-	 *
 	 * @var MessageReporter $reporter
 	 */
-	protected $reporter;
+	private $reporter;
 
 	/**
 	 * The batch size, giving the number of rows to be updated in each database transaction.
-	 *
-	 * @since 0.5
-	 *
 	 * @var int
 	 */
-	protected $batchSize = 100;
+	private $batchSize = 100;
 
-	/**
-	 * @param SiteLinkTable $siteLinkTable
-	 * @param EntityLookup $entityLookup
-	 */
 	public function __construct( SiteLinkTable $siteLinkTable, EntityLookup $entityLookup ) {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->entityLookup = $entityLookup;

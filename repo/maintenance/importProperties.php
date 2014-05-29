@@ -2,7 +2,7 @@
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\store\EntityStore;
+use Wikibase\Lib\Store\EntityStore;
 
 /**
  * Maintenance script for importing properties in Wikidata.

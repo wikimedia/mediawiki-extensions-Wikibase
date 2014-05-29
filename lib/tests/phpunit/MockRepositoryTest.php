@@ -6,10 +6,10 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Entity;
-use Wikibase\Item;
-use Wikibase\Property;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\Test\MockRepository
@@ -144,7 +144,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 	public function testGetItemIdForLink() {
 		$item = new Item( array() );
-		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		// test item lookup
 		$this->repo->putEntity( $item );
@@ -154,7 +154,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( null, $this->repo->getItemIdForLink( 'xywiki', 'Foo' ) );
 
 		// test lookup after item modification
-		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ), 'set' );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Bar' ), 'set' );
 		$this->repo->putEntity( $item );
 
 		$this->assertEquals( null, $this->repo->getItemIdForLink( 'enwiki', 'Foo' ) );
@@ -172,36 +172,36 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// #0: same link ---------
 		$a = new Item( array( 'entity' => 'Q1' ) );
-		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
-		$a->addSiteLink( new SimpleSiteLink( 'dewiki', 'Foo' ) );
+		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$a->addSiteLink( new SiteLink( 'dewiki', 'Foo' ) );
 
 		$b = new Item( array( 'entity' => 'Q2' ) );
-		$b->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
-		$b->addSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
+		$b->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$b->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array( array( 'enwiki', 'Foo', 1 ) ) );
 
 		// #1: same site ---------
 		$a = new Item( array( 'entity' => 'Q1' ) );
-		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		$b = new Item( array( 'entity' => 'Q2' ) );
-		$b->addSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ) );
+		$b->addSiteLink( new SiteLink( 'enwiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #2: same page ---------
 		$a = new Item( array( 'entity' => 'Q1' ) );
-		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		$b = new Item( array( 'entity' => 'Q2' ) );
-		$b->addSiteLink( new SimpleSiteLink( 'dewiki', 'Foo' ) );
+		$b->addSiteLink( new SiteLink( 'dewiki', 'Foo' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #3: same item ---------
 		$a = new Item( array( 'entity' => 'Q1' ) );
-		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		$cases[] = array( $a, $a, array() );
 
@@ -222,12 +222,12 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		$a = new Item( array( 'entity' => 'Q1' ) );
-		$a->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
-		$a->addSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
+		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$a->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
 
 		$b = new Item( array( 'entity' => 'Q2' ) );
-		$b->addSiteLink( new SimpleSiteLink( 'enwiki', 'Bar' ) );
-		$b->addSiteLink( new SimpleSiteLink( 'dewiki', 'Xoo' ) );
+		$b->addSiteLink( new SiteLink( 'enwiki', 'Bar' ) );
+		$b->addSiteLink( new SiteLink( 'dewiki', 'Xoo' ) );
 
 		$items = array( $a, $b );
 
@@ -445,16 +445,16 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public function testGetSiteLinksForItem() {
 		$one = new Item( array( 'entity' => 'Q1' ) );
 
-		$one->addSiteLink( new SimpleSiteLink( 'dewiki', 'Xoo' ) );
-		$one->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
+		$one->addSiteLink( new SiteLink( 'dewiki', 'Xoo' ) );
+		$one->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		$this->repo->putEntity( $one );
 
 		// check link retrieval
 		$this->assertEquals(
 			array(
-				new SimpleSiteLink( 'dewiki', 'Xoo' ),
-				new SimpleSiteLink( 'enwiki', 'Foo' ),
+				new SiteLink( 'dewiki', 'Xoo' ),
+				new SiteLink( 'enwiki', 'Foo' ),
 			),
 			$this->repo->getSiteLinksForItem( $one->getId() )
 		);

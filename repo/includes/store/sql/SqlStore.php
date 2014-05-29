@@ -8,12 +8,15 @@ use DBQueryError;
 use MWException;
 use ObjectCache;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\WikiPageEntityLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\store\CachingEntityRevisionLookup;
-use Wikibase\store\DispatchingEntityStoreWatcher;
-use Wikibase\store\EntityStore;
-use Wikibase\store\EntityStoreWatcher;
-use Wikibase\store\WikiPageEntityStore;
+use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\DispatchingEntityStoreWatcher;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\WikiPageEntityStore;
 
 /**
  * Implementation of the store interface using an SQL backend via MediaWiki's

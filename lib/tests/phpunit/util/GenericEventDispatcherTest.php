@@ -19,8 +19,8 @@ class GenericEventDispatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testRegisterWatcher_failure() {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
-		$watcher = $this->getMock( 'Wikibase\store\EntityStoreWatcher' );
-		$dispatcher = new GenericEventDispatcher( 'Wikibase\store\FooBar' );
+		$watcher = $this->getMock( 'Wikibase\Lib\Store\EntityStoreWatcher' );
+		$dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\FooBar' );
 
 		// should fail because $watcher doesn't implement FooBar
 		$dispatcher->registerWatcher( $watcher );
@@ -29,12 +29,12 @@ class GenericEventDispatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testDispatch() {
 		$q12 = new ItemId( 'Q12' );
 
-		$watcher = $this->getMock( 'Wikibase\store\EntityStoreWatcher' );
+		$watcher = $this->getMock( 'Wikibase\Lib\Store\EntityStoreWatcher' );
 		$watcher->expects( $this->once() )
 			->method( 'entityDeleted' )
 			->with( $this->equalTo( $q12 ) );
 
-		$dispatcher = new GenericEventDispatcher( 'Wikibase\store\EntityStoreWatcher' );
+		$dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\EntityStoreWatcher' );
 
 		// check register & dispatch
 		$handle = $dispatcher->registerWatcher( $watcher );

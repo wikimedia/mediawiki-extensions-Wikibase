@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Renderer of the {{#property}} parser function.
@@ -24,24 +25,11 @@ use Wikibase\Lib\SnakFormatter;
  */
 class PropertyParserFunctionRenderer {
 
-	/* @var Language */
 	private $language;
-
-	/* @var EntityLookup */
 	private $entityLookup;
-
-	/* @var PropertyLabelResolver */
 	private $propertyLabelResolver;
-
-	/* @var SnakFormatter */
 	private $snaksFormatter;
 
-	/**
-	 * @param Language                   $language
-	 * @param EntityLookup                $entityLookup
-	 * @param PropertyLabelResolver       $propertyLabelResolver
-	 * @param SnakFormatter           $snaksFormatter
-	 */
 	public function __construct( Language $language,
 		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
 		SnakFormatter $snaksFormatter ) {

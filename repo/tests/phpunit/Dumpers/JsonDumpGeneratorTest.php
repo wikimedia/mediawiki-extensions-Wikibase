@@ -97,7 +97,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$entities = $this->makeEntities( $ids );
 
-		$entityLookup = $this->getMock( 'Wikibase\EntityLookup' );
+		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnCallback( function ( EntityId $id ) use ( $entities, $missingIds ) {

@@ -6,7 +6,7 @@ use Title;
 use Language;
 use SiteList;
 use Sanitizer;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\ClientSiteLinkLookup;
 

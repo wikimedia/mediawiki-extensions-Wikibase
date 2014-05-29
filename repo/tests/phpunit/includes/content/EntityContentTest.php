@@ -10,7 +10,7 @@ use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\store\EntityStore;
+use Wikibase\Lib\Store\EntityStore;
 
 /**
  * @covers Wikibase\EntityContent

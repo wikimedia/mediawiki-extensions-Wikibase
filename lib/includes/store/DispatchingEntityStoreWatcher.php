@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\store;
+namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
@@ -17,7 +17,7 @@ use Wikibase\util\GenericEventDispatcher;
 class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements EntityStoreWatcher {
 
 	public function __construct() {
-		parent::__construct( 'Wikibase\store\EntityStoreWatcher' );
+		parent::__construct( 'Wikibase\Lib\Store\EntityStoreWatcher' );
 	}
 
 	/**

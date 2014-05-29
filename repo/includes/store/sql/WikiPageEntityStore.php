@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\store;
+namespace Wikibase\Lib\Store;
 
 use MWException;
 use PermissionsError;
@@ -60,7 +60,7 @@ class WikiPageEntityStore implements EntityStore {
 		$this->idGenerator = $idGenerator;
 		$this->entityPerPage = $entityPerPage;
 
-		$this->dispatcher = new GenericEventDispatcher( 'Wikibase\store\EntityStoreWatcher' );
+		$this->dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\EntityStoreWatcher' );
 	}
 
 	/**

@@ -5,7 +5,7 @@ namespace Wikibase;
 use DatabaseBase;
 use MWException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * Represents a lookup database table for sitelinks.
@@ -50,12 +50,12 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	}
 
 	/**
-	 * @param SimpleSiteLink $a
-	 * @param SimpleSiteLink $b
+	 * @param SiteLink $a
+	 * @param SiteLink $b
 	 *
 	 * @return int
 	 */
-	public function compareSiteLinks( SimpleSiteLink $a, SimpleSiteLink $b ) {
+	public function compareSiteLinks( SiteLink $a, SiteLink $b ) {
 		$siteComp = strcmp( $a->getSiteId(), $b->getSiteId() );
 
 		if ( $siteComp !== 0 ) {
@@ -126,7 +126,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @since 0.5
 	 *
 	 * @param Item $item
-	 * @param SimpleSiteLink[] $links
+	 * @param SiteLink[] $links
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return boolean Success indicator
@@ -167,7 +167,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @since 0.5
 	 *
 	 * @param Item $item
-	 * @param SimpleSiteLink[] $links
+	 * @param SiteLink[] $links
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return boolean Success indicator
@@ -263,11 +263,11 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 *
 	 * @since 0.4
 	 *
-	 * @param SimpleSiteLink $siteLink
+	 * @param SiteLink $siteLink
 	 *
 	 * @return ItemId|null
 	 */
-	public function getEntityIdForSiteLink( SimpleSiteLink $siteLink ) {
+	public function getEntityIdForSiteLink( SiteLink $siteLink ) {
 		$siteId = $siteLink->getSiteId();
 		$pageName = $siteLink->getPageName();
 
@@ -411,7 +411,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	/**
 	 * @see SiteLinkLookup::getLinks
 	 *
-	 * @note: SimpleSiteLink objects returned from this method will not contain badges!
+	 * @note: SiteLink objects returned from this method will not contain badges!
 	 *
 	 * @since 0.3
 	 *
@@ -468,13 +468,13 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 *
 	 * Get array of SiteLink for an item or returns empty array if no site links
 	 *
-	 * @note: SimpleSiteLink objects returned from this method will not contain badges!
+	 * @note: SiteLink objects returned from this method will not contain badges!
 	 *
 	 * @since 0.4
 	 *
 	 * @param ItemId $itemId
 	 *
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 */
 	public function getSiteLinksForItem( ItemId $itemId ) {
 		$numericId = $itemId->getNumericId();
@@ -495,7 +495,7 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 		$siteLinks = array();
 
 		foreach( $rows as $row ) {
-			$siteLinks[] = new SimpleSiteLink( $row->ips_site_id, $row->ips_site_page );
+			$siteLinks[] = new SiteLink( $row->ips_site_id, $row->ips_site_page );
 		}
 
 		$this->releaseConnection( $dbr );

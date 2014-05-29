@@ -41,7 +41,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			->method( 'parse' )
 			->will( $this->returnValue( $entity->getId() ) );
 
-		$entityLookup = $this->getMock( 'Wikibase\EntityLookup' );
+		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$idParser->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnValue( $entity ) );

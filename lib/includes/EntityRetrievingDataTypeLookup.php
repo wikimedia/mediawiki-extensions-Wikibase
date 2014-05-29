@@ -3,8 +3,8 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityLookup;
-use Wikibase\Property;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * PropertyDataTypeLookup that uses an EntityLookup to find
@@ -17,9 +17,6 @@ use Wikibase\Property;
  */
 class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 
-	/**
-	 * @var EntityLookup
-	 */
 	private $entityLookup;
 
 	public function __construct( EntityLookup $entityLookup ) {

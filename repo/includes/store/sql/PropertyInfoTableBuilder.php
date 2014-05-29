@@ -5,6 +5,7 @@ namespace Wikibase;
 use DatabaseBase;
 use MessageReporter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Utility class for rebuilding the wb_property_info table.
@@ -16,45 +17,32 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class PropertyInfoTableBuilder {
 
-	/**
-	 * @since 0.4
-	 *
-	 * @var PropertyInfoTable $table
-	 */
-	protected $table;
+	private $table;
+	private $entityLookup;
 
 	/**
-	 * @var EntityLookup
-	 */
-	protected $entityLookup;
-
-	/**
-	 * @since 0.4
-	 *
 	 * @var MessageReporter $reporter
 	 */
-	protected $reporter;
+	private $reporter;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var bool
 	 */
-	protected $useTransactions = true;
+	private $useTransactions = true;
 
 	/**
 	 * Whether all entries should be updated, or only missing entries
 	 *
 	 * @var bool
 	 */
-	protected $all = false;
+	private $all = false;
 
 	/**
 	 * Starting point
 	 *
 	 * @var int
 	 */
-	protected $fromId = 1;
+	private $fromId = 1;
 
 	/**
 	 * The batch size, giving the number of rows to be updated in each database transaction.
@@ -63,14 +51,6 @@ class PropertyInfoTableBuilder {
 	 */
 	protected $batchSize = 100;
 
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.4
-	 *
-	 * @param PropertyInfoTable $table
-	 * @param EntityLookup $entityLookup
-	 */
 	public function __construct( PropertyInfoTable $table, EntityLookup $entityLookup ) {
 		$this->table = $table;
 		$this->entityLookup = $entityLookup;

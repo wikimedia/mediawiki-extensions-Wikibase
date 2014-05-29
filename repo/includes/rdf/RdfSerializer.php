@@ -6,6 +6,7 @@ use EasyRdf_Exception;
 use EasyRdf_Format;
 use EasyRdf_Graph;
 use SiteList;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * RDF serialization for wikibase data model.
@@ -19,20 +20,9 @@ use SiteList;
  */
 class RdfSerializer {
 
-	/**
-	 * @var EntityLookup
-	 */
-	protected $entityLookup;
-
-	/**
-	 * @var EasyRdf_Format
-	 */
-	protected $format;
-
-	/**
-	 * @var SiteList
-	 */
-	protected $sites;
+	private $entityLookup;
+	private $format;
+	private $sites;
 
 	/**
 	 * @param EasyRdf_Format $format
