@@ -91,7 +91,7 @@
 	"wikibase-snakview-snaktypeselector-value": "自定义值",
 	"wikibase-snakformat-invalid-value": "无效值。",
 	"wikibase-snakformat-propertynotfound": "未找到属性。",
-	"wikibase-shortcopyrightwarning": "点击“$1”即表示您接受[[$2|使用条款]]，并不可撤销地接受以$3发布您的贡献。",
+	"wikibase-shortcopyrightwarning": "点击“$1”，即表示你认同[[$2|使用条款]]，并义无反顾地同意采用$3发表你的贡献。",
 	"wikibase-copyrighttooltip-acknowledge": "我接受对我未来的编辑也采用这些条款。不再显示该信息。",
 	"wikibase-entityselector-more": "更多",
 	"wikibase-anonymouseditwarning": "警告：您没有登录。\n您的IP地址将被记录在该实体的编辑历史中。",
