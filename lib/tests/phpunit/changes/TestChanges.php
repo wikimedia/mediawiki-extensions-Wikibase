@@ -284,7 +284,6 @@ final class TestChanges {
 			$entityList[] = $entity;
 
 			$entity->setId( 112 );
-			$entity->stub();
 			$entity->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
 
 			$entityList[] = $entity;
