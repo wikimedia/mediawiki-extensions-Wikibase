@@ -104,7 +104,7 @@ class PropertyContent extends EntityContent {
 	 * @return PropertyContent
 	 */
 	public static function newEmpty() {
-		return new static( Property::newEmpty() );
+		return new static( Property::newFromType( 'string' ) );
 	}
 
 	/**

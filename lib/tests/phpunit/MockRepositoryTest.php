@@ -42,7 +42,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item->setId( $q23 );
 		$this->repo->putEntity( $item );
 
-		$prop = Property::newEmpty();
+		$prop = Property::newFromType( 'string' );
 		$prop->setId( $p23 );
 		$this->repo->putEntity( $prop );
 
@@ -598,9 +598,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	 * @dataProvider provideAddDataTypes
 	 */
 	public function testGetDataTypeIdForProperty() {
-		$property = Property::newEmpty();
+		$property = Property::newFromType( 'url' );
 		$property->setId( new PropertyId( 'P4' ) );
-		$property->setDataTypeId( 'url' );
 
 		$this->repo->putEntity( $property );
 		$this->assertEquals( 'url', $this->repo->getDataTypeIdForProperty( new PropertyId( 'P4' ) ) );

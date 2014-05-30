@@ -388,9 +388,8 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 			$id = new PropertyId( $id );
 		}
 
-		$property = Property::newEmpty();
+		$property = Property::newFromType( $dataTypeId );
 		$property->setId( $id );
-		$property->setDataTypeId( $dataTypeId );
 
 		$property->setLabel( 'en', "label:$id" );
 		$property->setDescription( 'en', "description:$id" );

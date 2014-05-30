@@ -59,8 +59,8 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		static $snaks = array();
 
 		if ( !isset( $snaks[$type] ) ) {
-			$prop = Property::newEmpty();
-			$propertyId = $this->makeProperty( $prop, 'string' )->getId();
+			$prop = Property::newFromType( 'string' );
+			$propertyId = $this->makeProperty( $prop )->getId();
 
 			$snaks[$type] = new $type( $propertyId, $data );
 			$this->assertInstanceOf( 'Wikibase\Snak', $snaks[$type] );
@@ -73,14 +73,11 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 * Creates the given property in the database, if necessary.
 	 *
 	 * @param Property $property
-	 * @param $type
 	 *
 	 * @return Property
 	 */
-	protected function makeProperty( Property $property, $type ) {
+	protected function makeProperty( Property $property ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
-		$property->setDataTypeId( $type );
 
 		$store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 		return $property;
@@ -96,8 +93,8 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$newItem = Item::newEmpty();
 			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-			$prop = Property::newEmpty();
-			$propId = $this->makeProperty( $prop, 'string' )->getId();
+			$prop = Property::newFromType( 'string' );
+			$propId = $this->makeProperty( $prop )->getId();
 			$claim = new Statement( new PropertyValueSnak( $propId, new StringValue( '^_^' ) ) );
 
 			$guidGenerator = new ClaimGuidGenerator();
