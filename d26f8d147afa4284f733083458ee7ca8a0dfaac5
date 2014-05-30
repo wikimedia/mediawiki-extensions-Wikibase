@@ -34,6 +34,23 @@
       "revId": "d26f8d147afa4284f733083458ee7ca8a0dfaac5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_f6535f18",
+        "filename": "client/includes/scribunto/WikibaseLuaBindings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-05-30T21:49:38Z",
+      "side": 0,
+      "message": "Please fix the documentation instead of deleting it.",
+      "revId": "d26f8d147afa4284f733083458ee7ca8a0dfaac5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
