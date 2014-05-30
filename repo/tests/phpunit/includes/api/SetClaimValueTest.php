@@ -82,8 +82,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getEntities( EntityId $propertyId ) {
-		$property = Property::newEmpty();
-		$property->setDataTypeId( 'string' );
+		$property = Property::newFromType( 'string' );
 
 		$item = Item::newEmpty();
 

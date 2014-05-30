@@ -77,9 +77,8 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 		$entityContentSerializerOptions =
 			new EntityRevisionSerializationOptions( $entitySerializerOptions );
 
-		$entity = Property::newEmpty();
+		$entity = Property::newFromType( 'string' );
 		$entity->setId( new PropertyId( 'P652320' ) );
-		$entity->setDataTypeId( 'foo' );
 
 		$expectedEntityPageTitle = $this->getTitleForId( $entity->getId() );
 

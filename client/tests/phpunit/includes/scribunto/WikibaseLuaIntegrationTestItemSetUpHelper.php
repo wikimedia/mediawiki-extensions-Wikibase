@@ -85,8 +85,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 * @return Property
 	 */
 	protected function createTestProperty( $dataTypeId, $label ) {
-		$property = Property::newEmpty();
-		$property->setDataTypeId( $dataTypeId );
+		$property = Property::newFromType( $dataTypeId );
 		$property->setLabel( 'de', $label );
 
 		$this->mockRepository->putEntity( $property );

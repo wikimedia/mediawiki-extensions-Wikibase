@@ -41,12 +41,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 			foreach ( $infos as $info ) {
-				$dataType = $info[ PropertyInfoStore::KEY_DATA_TYPE ];
-				$label = $info[ 'test' ];
-
-				$property = Property::newEmpty();
-				$property->setDataTypeId( $dataType );
-				$property->setDescription( 'en', $label );
+				$property = Property::newFromType( $info[PropertyInfoStore::KEY_DATA_TYPE] );
+				$property->setDescription( 'en', $info['test'] );
 
 				$revision = $store->saveEntity( $property, "test", $GLOBALS['wgUser'], EDIT_NEW );
 

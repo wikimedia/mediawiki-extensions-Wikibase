@@ -30,9 +30,8 @@ class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		$lookup = new MockRepository();
 
 		foreach ( $this->propertiesAndTypes as $propertyId => $dataTypeId ) {
-			$property = Property::newEmpty();
+			$property = Property::newFromType( $dataTypeId );
 			$property->setId( new PropertyId( $propertyId ) );
-			$property->setDataTypeId( $dataTypeId );
 
 			$lookup->putEntity( $property );
 		}

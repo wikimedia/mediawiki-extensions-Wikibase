@@ -33,14 +33,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 		if( !isset( self::$hasSetup ) ){
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-			$prop = Property::newEmpty();
-			$prop->setDataTypeId( 'string' );
+			$prop = Property::newFromType( 'string' );
 			$store->saveEntity( $prop, 'EditEntityTestP56', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%P56%'] = $prop->getId()->getSerialization();
 			self::$idMap['%StringProp%'] = $prop->getId()->getSerialization();
 
-			$prop = Property::newEmpty();
-			$prop->setDataTypeId( 'string' );
+			$prop = Property::newFromType( 'string' );
 			$store->saveEntity( $prop, 'EditEntityTestP72', $GLOBALS['wgUser'], EDIT_NEW );
 			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
 

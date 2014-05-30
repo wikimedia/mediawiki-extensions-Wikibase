@@ -97,7 +97,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	}
 
 	public static function listEntitiesProvider() {
-		$property = Property::newEmpty();
+		$property = Property::newFromType( 'string' );
 		$item = Item::newEmpty();
 
 		return array(

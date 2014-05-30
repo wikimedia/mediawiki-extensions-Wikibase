@@ -59,8 +59,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$propertyIds = array();
 
 		for( $i = 0; $i < 4; $i++ ) {
-			$property = Property::newEmpty();
-			$property->setDataTypeId( 'string' );
+			$property = Property::newFromType( 'string' );
 
 			$store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 

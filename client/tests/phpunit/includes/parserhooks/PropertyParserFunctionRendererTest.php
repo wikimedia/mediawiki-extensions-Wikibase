@@ -74,10 +74,8 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 		$item->addClaim( $claim2 );
 		$item->addClaim( $claim3 );
 
-		$property = Property::newEmpty();
+		$property = Property::newFromType( 'string' );
 		$property->setId( $propertyId );
-
-		$property->setDataTypeId( 'string' );
 		$property->setLabel( 'en', 'kitten' );
 
 		$entityLookup->putEntity( $item );
