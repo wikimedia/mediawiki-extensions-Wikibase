@@ -124,7 +124,7 @@ final class TestChanges {
 			$changes['change-enwiki-sitelink-badges'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$new->removeSiteLink( 'dewiki', false );
+			$new->removeSiteLink( 'dewiki' );
 			$changes['remove-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
@@ -161,7 +161,7 @@ final class TestChanges {
 			$changes['item-deletion-linked'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
 
 			// -----
-			$new->removeSiteLink( 'enwiki', false );
+			$new->removeSiteLink( 'enwiki' );
 			$changes['remove-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
