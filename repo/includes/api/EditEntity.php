@@ -178,6 +178,7 @@ class EditEntity extends ModifyEntity {
 					);
 				}
 			}
+
 			$entity->clear();
 		}
 

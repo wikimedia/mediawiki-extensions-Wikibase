@@ -82,16 +82,6 @@ class EntityFactoryTest extends EntityTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider provideNewFromArray
-	 */
-	public function testNewFromArray( $type, $data, $class ) {
-		$entity = EntityFactory::singleton()->newFromArray( $type, $data );
-
-		$this->assertInstanceOf( $class, $entity );
-		$this->assertEntityStructureEquals( $data, $entity );
-	}
-
 	public static function provideNewFromBlob() {
 		$tests = array();
 
