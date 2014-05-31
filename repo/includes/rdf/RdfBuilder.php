@@ -8,6 +8,7 @@ use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use SiteList;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
  * RDF mapping for wikibase data model.
@@ -468,7 +469,10 @@ class RdfBuilder {
 	public function resolvedMentionedEntities( EntityLookup $entityLookup ) {
 		foreach ( $this->entitiesResolved as $id => $resolved ) {
 			if ( !$resolved ) {
-				$id = EntityId::newFromPrefixedId( $id );
+				// FIXME: should use an injected EntityIdParser or avoid the need for a general id parse
+				$idParser = new BasicEntityIdParser();
+
+				$id = $idParser->parse( $id );
 				$entity = $entityLookup->getEntity( $id );
 
 				$this->addEntityStub( $entity );
