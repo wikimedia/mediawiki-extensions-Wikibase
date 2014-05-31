@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Site;
+use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
@@ -1135,9 +1136,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
-	protected static function titles2strings( $titles ) {
+	private function titles2strings( array $titles ) {
 		return array_map(
-			function ( $title ) {
+			function ( Title $title ) {
 				return $title->getPrefixedDBKey();
 			},
 			$titles
@@ -1151,7 +1152,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->updateMockRepo( $entities );
 
 		$toUpdate = $this->handler->getPagesToUpdate( $change );
-		$toUpdate = self::titles2strings( $toUpdate );
+		$toUpdate = $this->titles2strings( $toUpdate );
 
 		$this->assertArrayEquals( $expected, $toUpdate );
 	}
