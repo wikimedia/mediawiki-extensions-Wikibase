@@ -1113,12 +1113,12 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	protected function updateMockRepo( $entities ) {
 		$repo = self::getMockRepo();
 
-		foreach ( $entities as $k => $v ) {
-			if ( !( $v instanceof \Wikibase\Entity ) ) {
+		foreach ( $entities as $id => $siteLinks ) {
+			if ( !( $siteLinks instanceof \Wikibase\Entity ) ) {
 				$entity = Item::newEmpty();
-				$entity->setId( EntityId::newFromPrefixedId( $k ) );
+				$entity->setId( new ItemId( $id ) );
 
-				foreach ( $v as $siteId => $page ) {
+				foreach ( $siteLinks as $siteId => $page ) {
 					if ( is_int( $siteId ) ) {
 						$siteIdentifier = $this->site->getGlobalId();
 					} else {
@@ -1128,7 +1128,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 					$entity->addSiteLink( new SimpleSiteLink( $siteIdentifier, $page ) );
 				}
 			} else {
-				$entity = $v;
+				$entity = $siteLinks;
 			}
 
 			$repo->putEntity( $entity );
