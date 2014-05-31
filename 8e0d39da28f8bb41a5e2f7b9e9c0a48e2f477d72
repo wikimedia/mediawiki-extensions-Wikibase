@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_df575728",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-05-31T14:57:26Z",
+      "side": 0,
+      "message": "WikibaseClient caches eg. the SnakFormatters, so if these have been constructed with a real store, the store mocking wont affect them.\nBecause of that I\u0027ve introduced the ability to reset WikibaseClient in order to have all tests run on instances constructed with the right store.",
+      "parentUuid": "4e1dcb5b_0db5bbe0",
+      "revId": "8e0d39da28f8bb41a5e2f7b9e9c0a48e2f477d72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_e2005306",
         "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
         "patchSetId": 1
