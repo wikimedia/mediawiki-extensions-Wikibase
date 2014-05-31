@@ -65,7 +65,7 @@
 	"wikibase-unconnectedpages-page-warning": "Ця назва сторінки не може бути використаною у запиті й ігнорована.",
 	"wikibase-unconnectedpages-iwdata-label": "Лише сторінки із міжмовними інтервікі-посиланнями",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|міжмовне посилання|міжмовні посилання|міжмовних посилань}} на сторінці)",
-	"wikibase-pageinfo-entity-id": "Ідентифікатор елемента у {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id": "Ідентифікатор елемента у {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Нема",
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
 	"wikibase-otherprojects": "Інші проекти"

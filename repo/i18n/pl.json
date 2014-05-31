@@ -90,7 +90,7 @@
 	"wikibase-blockeduser-tooltip-message": "Nie masz uprawnienia do edycji, ponieważ twój login lub adres IP został zablokowany.",
 	"wikibase-move-error": "",
 	"wikibase-warning-constraint-violation-length": "Dla języka o kodzie „$1” nastąpiło ograniczenie długości.",
-	"wikibase-validator-label-conflict": "Inna właściwość ($3) ma już etykietę „$1” powiązaną z językiem o kodzie $2.",
+	"wikibase-validator-label-conflict": "Właściwość $3 ma już etykietę „$1” powiązaną z językiem o kodzie $2.",
 	"wikibase-validator-label-with-description-conflict": "Inny element ($3) ma już etykietę \"$1\" i opis \"$4\" powiązaną z językiem o kodzie $2.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Identyfikator języka „$1” jest nieznany. Użyj identyfikatora języka, który jest znany w systemie, na przykład „pl”.",
 	"wikibase-wikibaserepopage-invalid-id": "Identyfikator „$1” jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.",

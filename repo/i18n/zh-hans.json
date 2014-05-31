@@ -102,7 +102,7 @@
 	"wikibase-error-constraint-violation-label": "{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|标签}}“$3”{{PLURAL:$1|违反限制}}。",
 	"wikibase-error-constraint-violation-description": "{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|说明}}“$3”违反{{PLURAL:$1|限制}}。",
 	"wikibase-error-constraint-violation-aliases": "{{PLURAL:$1|语言代码}}“$2”的{{PLURAL:$1|别名}}“$3”违反{{PLURAL:$1|限制}}。",
-	"wikibase-validator-sitelink-conflict": "站点链接$1已被项$2使用。",
+	"wikibase-validator-sitelink-conflict": "网站链接$1已经被项$2使用。",
 	"wikibase-validator-label-conflict": "属性$3已经关联语言代码$2的标签“$1”。",
 	"wikibase-validator-label-with-description-conflict": "项$3已经关联语言代码$2的标签“$1”，使用同一描述文本。",
 	"wikibase-validator-label-no-entityid": "该标签不是有效的实体ID。",

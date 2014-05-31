@@ -139,6 +139,7 @@ $magicWords['ru'] = array(
 /** Ukrainian (українська) */
 $magicWords['uk'] = array(
 	'noexternallanglinks' => array( 0, 'беззовнішніхпосилань' ),
+	'property' => array( 0, 'властивість' ),
 );
 
 /** Vietnamese (Tiếng Việt) */
