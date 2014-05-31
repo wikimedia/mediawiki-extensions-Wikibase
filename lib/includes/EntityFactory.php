@@ -74,7 +74,7 @@ class EntityFactory {
 	/**
 	 * Creates a new empty entity of the given type.
 	 *
-	 * @since 0.3
+	 * @deprecated constructing an empty entity from just a type is based on flawed notions
 	 *
 	 * @param String $entityType The type of the desired new entity.
 	 *
@@ -92,12 +92,10 @@ class EntityFactory {
 	 * @param String $entityType The type of the desired new entity.
 	 * @param array $data A structure of nested arrays representing the entity.
 	 *
-	 * @since 0.3
-	 *
 	 * @throws MWException if the given entity type is not known.
 	 * @return Entity The new Entity object.
 	 */
-	public function newFromArray( $entityType, array $data ) {
+	private function newFromArray( $entityType, array $data ) {
 		if ( !$this->isEntityType( $entityType ) ) {
 			throw new MWException( "Unknown entity type: $entityType" );
 		}
@@ -115,7 +113,7 @@ class EntityFactory {
 	 * @param String $blob The serialized representation of the entity
 	 * @param String|null $format The serialization format
 	 *
-	 * @since 0.3
+	 * @deprecated Use a deserializer
 	 *
 	 * @throws MWException if the given entity type or serialization format is not known.
 	 * @throws MWContentSerializationException if the given blob was malformed.
