@@ -393,7 +393,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		$user = User::newFromId( 0 );
 		$context->setUser( $user );
 
-		$factory = new LanguageFallbackChainFactory( false, true );
+		$factory = new LanguageFallbackChainFactory( $experimental, $anonymousPageViewCached );
 		$fallbackChain = $factory->newFromContextForPageView( $context );
 
 		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChain', $fallbackChain, $msg );
