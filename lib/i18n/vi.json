@@ -90,5 +90,7 @@
 	"wikibase-validator-not-allowed": "Giá trị không hợp lệ: $1",
 	"datatypes-type-wikibase-item": "Khoản mục",
 	"datatypes-type-commonsMedia": "Tập tin phương tiện Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-snakformatter-valuetype-mismatch": "Kiểu giá trị “$1” không hợp kiểu thuộc tính “$2”.",
+	"wikibase-snakformatter-property-not-found": "Không thể xác định kiểu dữ liệu vì không tìm thấy thuộc tính $1."
 }

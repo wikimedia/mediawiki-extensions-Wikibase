@@ -3,7 +3,8 @@
 		"authors": [
 			"Minisarm",
 			"Stelistcristi",
-			"Metalhead64"
+			"Metalhead64",
+			"XXN"
 		]
 	},
 	"wikibase-client-desc": "Client pentru extensia Wikibase",
@@ -35,6 +36,7 @@
 	"wikibase-property-notfound": "Proprietatea $1 nu a fost găsită.",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
 	"wikibase-rc-hide-wikidata-hide": "Ascunde",
+	"wikibase-rc-hide-wikidata-show": "Arată",
 	"wikibase-rc-show-wikidata-pref": "Arată modificările de la Wikidata în lista cu schimbări recente",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modificare la Wikidata",

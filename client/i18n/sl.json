@@ -37,6 +37,7 @@
 	"wikibase-linkitem-not-loggedin": "Za uporabo te funkcije morate biti prijavljeni tako v tem wikiju kot v [$1 osrednji zbirki podatkov].",
 	"wikibase-linkitem-success-link": "Strani sta uspešno povezani. Predmet s povezavami lahko najdete v našem [$1 osrednjem podatkovnem odložišču].",
 	"wikibase-property-notfound": "Lastnosti $1 ni mogoče najti.",
+	"wikibase-property-notsupportedyet": "Wikibase še ne podpira vrste lastnosti za lastnost $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{GRAMMAR:tožilnik|{{WBREPONAME}}}}",
 	"wikibase-rc-hide-wikidata-hide": "Skrij",
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
