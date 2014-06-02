@@ -45,18 +45,27 @@ class EditEntityTest extends \MediaWikiTestCase {
 	}
 
 	function setUp() {
-		global $wgGroupPermissions;
+		global $wgGroupPermissions, $wgHooks;
 
 		parent::setUp();
 
 		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = array( 'user' );
+
+		if ( empty( $wgHooks['EditFilterMergedContent'] ) ) {
+			// This fake ensures EditEntity::runEditFilterHooks is run and runtime errors are found
+			$wgHooks['EditFilterMergedContent'] = array( null );
+		}
 	}
 
 	function tearDown() {
-		global $wgGroupPermissions;
+		global $wgGroupPermissions, $wgHooks;
 
 		$wgGroupPermissions = $this->permissions;
+
+		if ( $wgHooks['EditFilterMergedContent'] === array( null ) ) {
+			unset( $wgHooks['EditFilterMergedContent'] );
+		}
 
 		parent::tearDown();
 	}
@@ -710,4 +719,5 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $expected, $repo->isWatching( $user, $item->getId() ), "watched" );
 	}
+
 }
