@@ -2,6 +2,11 @@
 
 namespace Wikibase\Tests;
 
+use DerivativeContext;
+use OutputPage;
+use RequestContext;
+use Title;
+use Wikibase\NamespaceUtils;
 use Wikibase\RepoHooks;
 use WikiImporter;
 
@@ -17,6 +22,18 @@ use WikiImporter;
  * @author Daniel Kinzler
  */
 class RepoHooksTest extends \MediaWikiTestCase {
+
+	public function testOnMakeGlobalVariablesScript() {
+		$ns = NamespaceUtils::getEntityNamespace( 'wikibase-property' );
+		$this->assertInternalType( 'int', $ns );
+
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setTitle( Title::makeTitle( $ns, 'P1' ) );
+		$outputPage = new OutputPage( $context );
+
+		$success = RepoHooks::onMakeGlobalVariablesScript( array(), $outputPage );
+		$this->assertTrue( $success );
+	}
 
 	public function revisionInfoProvider() {
 		return array(
@@ -55,13 +72,13 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 		$source->expects( $this->any() )
 			->method( 'atEnd' )
-			->will( $this->returnCallback( function () use ( $atEnd ) {
+			->will( $this->returnCallback( function() use ( $atEnd ) {
 				return $atEnd->atEnd;
 			} ) );
 
 		$source->expects( $this->any() )
 			->method( 'readChunk' )
-			->will( $this->returnCallback( function () use ( $atEnd, $xml ) {
+			->will( $this->returnCallback( function() use ( $atEnd, $xml ) {
 				$atEnd->atEnd = true;
 				return $xml;
 			} ) );
@@ -128,7 +145,7 @@ XML
 		$source = $this->getMockImportStream( $xml );
 		$importer = new WikiImporter( $source );
 
-		$importer->setNoticeCallback( function () {
+		$importer->setNoticeCallback( function() {
 			// Do nothing for now. Could collect and compare notices.
 		} );
 
