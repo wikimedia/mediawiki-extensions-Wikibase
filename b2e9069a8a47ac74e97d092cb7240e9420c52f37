@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_2348715f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:11:57Z",
+      "side": 1,
+      "message": "\"by default\" means here \"for all users (including IP)\". It\u0027s needed because frwikisource and itwikisource has already this feature enabled for everybody.",
+      "parentUuid": "4e1dcb5b_11c37e8d",
+      "revId": "b2e9069a8a47ac74e97d092cb7240e9420c52f37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_b1372aab",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-02T12:50:08Z",
       "side": 1,
       "message": "Why is the \"default\" setting needed in addition to the count check?",
+      "revId": "b2e9069a8a47ac74e97d092cb7240e9420c52f37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_03433544",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:11:57Z",
+      "side": 1,
+      "message": "Because otherProjectsLinksByDefault may be enabled and otherProjectsLinksBeta disabled (like for fr and it wikisource)",
+      "parentUuid": "4e1dcb5b_b1372aab",
       "revId": "b2e9069a8a47ac74e97d092cb7240e9420c52f37",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_43600dcc",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:11:57Z",
+      "side": 1,
+      "message": "Because building the sidebar is expensive. So the sidebar is built for all pages, put in the siebar cache and if the sidebar shouldn\u0027t be displayed it\u0027s simply removed.",
+      "parentUuid": "4e1dcb5b_7141920d",
+      "revId": "b2e9069a8a47ac74e97d092cb7240e9420c52f37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_11525ee2",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 7
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_235f5115",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:11:57Z",
+      "side": 1,
+      "message": "It\u0027s how Extension:BetaFeature works",
+      "parentUuid": "4e1dcb5b_11525ee2",
+      "revId": "b2e9069a8a47ac74e97d092cb7240e9420c52f37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_516fb68f",
         "filename": "client/i18n/en.json",
         "patchSetId": 7
@@ -98,6 +170,24 @@
       "writtenOn": "2014-06-02T12:50:08Z",
       "side": 1,
       "message": "This is to technical in my opinion and hard to understand for ordinary users. Suggestions:\n* Adds a \"{{int:wikibase-otherprojects}}\" section under the interlanguage links\n* Adds a \"{{int:wikibase-otherprojects}}\" section under \"{{int:otherlanguages}}\"\n* that provides links to other Wikimedia projects (e.g. Wikimedia Commons)",
+      "revId": "b2e9069a8a47ac74e97d092cb7240e9420c52f37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_e3a039f3",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:11:57Z",
+      "side": 1,
+      "message": "\"under the interlanguage links\" is not true. The section is displayed usually after the toolbox or elsewhere if it position is changed with MediaWiki:Sidebar\n\nI believe it\u0027s important to say where the links are from",
+      "parentUuid": "4e1dcb5b_516fb68f",
       "revId": "b2e9069a8a47ac74e97d092cb7240e9420c52f37",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
