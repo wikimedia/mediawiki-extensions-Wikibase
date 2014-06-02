@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_710f52e5",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T12:57:22Z",
+      "side": 1,
+      "message": "Just a question: Would it be ok to use \"new self()\" here?",
+      "revId": "7aefbeb18f41b5d72670d7a705958878ac5b4bb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
