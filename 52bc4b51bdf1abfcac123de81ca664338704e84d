@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_c3689d1b",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T16:37:04Z",
+      "side": 1,
+      "message": "Why is it a method? It should be a constant as far as I understand:\n\nconst DEFAULT_CONTENT_FORMAT \u003d CONTENT_FORMAT_JSON;",
+      "revId": "52bc4b51bdf1abfcac123de81ca664338704e84d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_8362a535",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T16:37:04Z",
+      "side": 1,
+      "message": "This does not \"encode a BLOB\". It encodes an array. Suggestions:\n* encodeEntityContentData()\n* encode()\n* getBlob()",
+      "revId": "52bc4b51bdf1abfcac123de81ca664338704e84d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_43548d56",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T16:37:04Z",
+      "side": 1,
+      "message": "This really needs to be ungreedy. Either \u0027@/\\*.*?\\*/@s\u0027 or \u0027@/\\*.*\\*/@sU\u0027.",
+      "revId": "52bc4b51bdf1abfcac123de81ca664338704e84d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
