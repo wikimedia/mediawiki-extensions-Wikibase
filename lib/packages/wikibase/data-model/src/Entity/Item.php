@@ -55,6 +55,30 @@ class Item extends Entity {
 	}
 
 	/**
+	 * Can be integer since 0.1.
+	 * Can be ItemId since 0.5.
+	 * Can be null since 1.0.
+	 *
+	 * @param ItemId|int|null $id
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setId( $id ) {
+		if ( $id === null || $id instanceof ItemId ) {
+			$this->id = $id;
+		}
+		else if ( is_integer( $id ) ) {
+			$this->id = ItemId::newFromNumber( $id );
+		}
+		else if ( $id instanceof EntityId ) {
+			$this->id = new ItemId( $id->getSerialization() );
+		}
+		else {
+			throw new InvalidArgumentException( __METHOD__ . ' only accepts ItemId, integer and null' );
+		}
+	}
+
+	/**
 	 * @since 0.8
 	 *
 	 * @return SiteLinkList
@@ -304,17 +328,6 @@ class Item extends Entity {
 		$claims = $patcher->patch( $claims, $patch->getClaimsDiff() );
 
 		$this->setClaims( new Claims( $claims ) );
-	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @param string $idSerialization
-	 *
-	 * @return EntityId
-	 */
-	protected function idFromSerialization( $idSerialization ) {
-		return new ItemId( $idSerialization );
 	}
 
 	/**
