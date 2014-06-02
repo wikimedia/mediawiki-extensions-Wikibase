@@ -55,7 +55,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @see SpecialNewEntity::createEntity
 	 */
 	protected function createEntity() {
-		return Property::newEmpty();
+		return Property::newFromType( 'string' );
 	}
 
 	/**

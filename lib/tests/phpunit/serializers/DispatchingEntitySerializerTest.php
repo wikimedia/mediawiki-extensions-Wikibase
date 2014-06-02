@@ -76,9 +76,8 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 	 * @return Entity
 	 */
 	protected function getPropertyInstance() {
-		$property = Property::newEmpty();
+		$property = Property::newFromType( 'wibbly' );
 		$property->setId( new PropertyId( 'P17' ) );
-		$property->setDataTypeId( 'wibbly' );
 
 		return $property;
 	}

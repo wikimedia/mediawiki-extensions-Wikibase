@@ -45,8 +45,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 
 			$this->initTestEntities( array( 'Empty', 'Empty2' ) );
 
-			$prop = Property::newEmpty();
-			$prop->setDataTypeId( 'string' );
+			$prop = Property::newFromType( 'string' );
 			$store->saveEntity( $prop, 'mergeitemstest', $GLOBALS['wgUser'], EDIT_NEW );
 
 			self::$thePropertyId = $prop->getId();

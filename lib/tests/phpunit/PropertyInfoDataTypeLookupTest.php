@@ -50,9 +50,8 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 			);
 
 			// register property as an entity, for the fallback
-			$property = Property::newEmpty();
+			$property = Property::newFromType( $dataTypeId );
 			$property->setId( $id );
-			$property->setDataTypeId( $dataTypeId );
 			$mockRepo->putEntity( $property );
 
 			// try with a working info store

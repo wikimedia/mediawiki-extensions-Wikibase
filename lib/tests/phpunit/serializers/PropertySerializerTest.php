@@ -42,7 +42,7 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 	 * @return Property
 	 */
 	protected function getEntityInstance() {
-		$property = Property::newEmpty();
+		$property = Property::newFromType( 'string' );
 		$property->setId( 42 );
 		return $property;
 	}

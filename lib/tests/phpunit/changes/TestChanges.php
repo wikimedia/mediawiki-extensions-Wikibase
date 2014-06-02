@@ -54,14 +54,14 @@ final class TestChanges {
 		static $changes = array();
 
 		if ( empty( $changes ) ) {
-			$empty = Property::newEmpty();
+			$empty = Property::newFromType( 'string' );
 			$empty->setId( new PropertyId( 'p100' ) );
 
 			$changes['property-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
 			$changes['property-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
-			$old = Property::newEmpty();
+			$old = Property::newFromType( 'string' );
 			$old->setId( new PropertyId( 'p100' ) );
 			$new = $old->copy();
 
@@ -273,7 +273,7 @@ final class TestChanges {
 
 		$entities = array(
 			Item::newEmpty(),
-			Property::newEmpty(),
+			Property::newFromType( 'string' ),
 		);
 
 		/**

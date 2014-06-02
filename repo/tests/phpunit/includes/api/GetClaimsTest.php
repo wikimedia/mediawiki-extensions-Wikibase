@@ -70,9 +70,7 @@ class GetClaimsTest extends \ApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getNewEntities() {
-		$property = Property::newEmpty();
-
-		$property->setDataTypeId( 'string' );
+		$property = Property::newFromType( 'string' );
 
 		return array(
 			$this->addClaimsAndSave( Item::newEmpty() ),
