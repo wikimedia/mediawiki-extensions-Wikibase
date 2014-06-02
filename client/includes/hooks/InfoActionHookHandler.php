@@ -5,7 +5,7 @@ namespace Wikibase\Client\Hooks;
 use IContextSource;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\NamespaceChecker;
 use Wikibase\RepoLinker;
 use Wikibase\SiteLinkLookup;
@@ -71,7 +71,7 @@ class InfoActionHookHandler {
 	 */
 	private function getPageInfoRow( IContextSource $context, Title $title ) {
 		$entityId = $this->siteLinkLookup->getEntityIdForSiteLink(
-			new SimpleSiteLink( $this->siteId, $title->getFullText() )
+			new SiteLink( $this->siteId, $title->getFullText() )
 		);
 
 		$row = $entityId ? $this->getItemPageInfo( $context, $entityId )
