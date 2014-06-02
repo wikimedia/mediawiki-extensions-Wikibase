@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_91b9cee8",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T13:19:12Z",
+      "side": 1,
+      "message": "Replaced with array( null ) which does the exact same but is, hopefully, a bit easier to understand,",
+      "parentUuid": "4e1dcb5b_184aa95f",
+      "revId": "274651eaed8c69e7773873cc0bbaa96472e37353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_f8c36d5f",
         "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2014-05-27T16:01:21Z",
       "side": 1,
       "message": "Hm, no attempt to restore the original value? Is this safe?",
+      "revId": "274651eaed8c69e7773873cc0bbaa96472e37353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_71bcf2d5",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T13:19:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_f8c36d5f",
       "revId": "274651eaed8c69e7773873cc0bbaa96472e37353",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
