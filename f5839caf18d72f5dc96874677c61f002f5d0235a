@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_716e32c6",
+        "filename": "repo/includes/EntityDiffVisualizer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:57:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_9f0a1823",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_3fa304aa",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 8
@@ -213,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_115ffe14",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:57:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_9fb458e6",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_ff5a2cf8",
         "filename": "repo/includes/content/EntityContentDiff.php",
         "patchSetId": 8
@@ -276,6 +312,24 @@
       "writtenOn": "2014-05-28T14:28:53Z",
       "side": 1,
       "message": "you want testConstructionWithEntityDiff and testConstructionWithRedirectDiff? as well as testConstructionWithBothKindsOfDiffs?",
+      "parentUuid": "4e1dcb5b_1ff288cd",
+      "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b1a3aafc",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentDiffTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:57:19Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "4e1dcb5b_1ff288cd",
       "revId": "f5839caf18d72f5dc96874677c61f002f5d0235a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
