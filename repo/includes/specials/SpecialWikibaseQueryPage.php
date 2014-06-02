@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Specials;
+namespace Wikibase\Repo\Specials;
 
 use Html;
 use Linker;
