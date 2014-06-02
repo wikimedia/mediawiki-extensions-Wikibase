@@ -187,4 +187,40 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $unorderedReference->getHash(), $orderedReference->getHash() );
 	}
 
+	public function testReferenceEqualsItself() {
+		$reference = new Reference( new SnakList( array( new PropertyNoValueSnak( 42 ) ) ) );
+		$this->assertTrue( $reference->equals( $reference ) );
+	}
+
+	public function testReferenceDoesNotEqualReferenceWithDifferentSnakProperty() {
+		$reference0 = new Reference( new SnakList( array( new PropertyNoValueSnak( 42 ) ) ) );
+		$reference1 = new Reference( new SnakList( array( new PropertyNoValueSnak( 1337 ) ) ) );
+		$this->assertFalse( $reference0->equals( $reference1 ) );
+	}
+
+	public function testReferenceDoesNotEqualReferenceWithMoreSnaks() {
+		$reference0 = new Reference( new SnakList( array( new PropertyNoValueSnak( 42 ) ) ) );
+
+		$reference1 = new Reference( new SnakList( array(
+			new PropertyNoValueSnak( 42 ),
+			new PropertySomeValueSnak( 42 )
+		) ) );
+
+		$this->assertFalse( $reference0->equals( $reference1 ) );
+	}
+
+	public function testReferenceEqualsReferenceWithDifferentSnakOrder() {
+		$reference0 = new Reference( new SnakList( array(
+			new PropertyNoValueSnak( 1337 ),
+			new PropertyNoValueSnak( 42 )
+		) ) );
+
+		$reference1 = new Reference( new SnakList( array(
+			new PropertyNoValueSnak( 42 ),
+			new PropertyNoValueSnak( 1337 )
+		) ) );
+
+		$this->assertTrue( $reference0->equals( $reference1 ) );
+	}
+
 }
