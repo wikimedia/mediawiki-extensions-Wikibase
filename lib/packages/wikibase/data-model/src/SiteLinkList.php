@@ -9,6 +9,8 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use OutOfBoundsException;
 use Traversable;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdSet;
 
 /**
  * Unordered collection of SiteLink objects.
@@ -34,7 +36,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 				throw new InvalidArgumentException( 'SiteLinkList only accepts SiteLink objects' );
 			}
 
-			$this->add( $siteLink );
+			$this->addObject( $siteLink );
 		}
 	}
 
@@ -44,13 +46,30 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 * @param SiteLink $link
 	 *
 	 * @throws InvalidArgumentException
+	 * @return self
 	 */
-	public function add( SiteLink $link ) {
+	public function addObject( SiteLink $link ) {
 		if ( array_key_exists( $link->getSiteId(), $this->siteLinks ) ) {
 			throw new InvalidArgumentException( 'Duplicate site id: ' . $link->getSiteId() );
 		}
 
 		$this->siteLinks[$link->getSiteId()] = $link;
+
+		return $this;
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param string $siteId
+	 * @param string $pageName
+	 * @param ItemIdSet|ItemId[] $badges
+	 *
+	 * @throws InvalidArgumentException
+	 * @return self
+	 */
+	public function add( $siteId, $pageName, $badges = array() ) {
+		return $this->addObject( new SiteLink( $siteId, $pageName, $badges ) );
 	}
 
 	/**
