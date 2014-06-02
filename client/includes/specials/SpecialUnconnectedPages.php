@@ -6,9 +6,10 @@ use DatabaseBase;
 use Html;
 use Linker;
 use MWException;
+use SpecialPage;
 use Title;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\NamespaceChecker;
 
 /**
@@ -18,12 +19,10 @@ use Wikibase\NamespaceChecker;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
+class SpecialUnconnectedPages extends SpecialPage {
 
 	/**
 	 * The title as a string to start search at
-	 *
-	 * @since 0.4
 	 *
 	 * @var string
 	 */
@@ -32,18 +31,12 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	/**
 	 * The startPage as a title to start search at
 	 *
-	 * @since 0.4
-	 *
-	 * @var Title
+	 * @var Title|null
 	 */
 	private $startTitle = null;
 
 	/**
-	 * The namespaceChecker
-	 *
-	 * @since 0.4
-	 *
-	 * @var NamespaceChecker
+	 * @var NamespaceChecker|null
 	 */
 	private $namespaceChecker = null;
 
@@ -58,20 +51,47 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 
 	public function __construct() {
 		parent::__construct( 'UnconnectedPages' );
-
 	}
 
 	/**
-	 * @see SpecialWikibasePage::execute
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
+	}
+
+	public function setHeaders() {
+		$out = $this->getOutput();
+		$out->setArticleRelated( false );
+		$out->setPageTitle( $this->getDescription() );
+	}
+
+	/**
+	 * @see SpecialPage::execute
 	 *
-	 * @since 0.4
+	 * @param null|string $subPage
 	 */
 	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
+		$this->setHeaders();
+
+		$contLang = $this->getContext()->getLanguage();
+		$this->outputHeader( $contLang->lc( 'wikibase-' . $this->getName() ) . '-summary' );
+
+		// If the user is authorized, display the page, if not, show an error.
+		if ( !$this->userCanExecute( $this->getUser() ) ) {
+			$this->displayRestrictionError();
 		}
 
-		$output = $this->getOutput();
+		$this->setFieldsFromRequestData( $subPage );
+
+		$this->addFormToOutput();
+
+		$this->showQuery();
+	}
+
+	private function setFieldsFromRequestData( $subPage ) {
+		$subPage = is_null( $subPage ) ? '' : $subPage;
+
 		$request = $this->getRequest();
 
 		$this->startPage = $request->getText( 'page', $subPage );
@@ -80,7 +100,9 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 		}
 
 		$this->iwData = $request->getText( 'iwdata', '' );
+	}
 
+	private function addFormToOutput() {
 		$out = '';
 
 		if ( $this->startPage !== '' && $this->startTitle === null ) {
@@ -88,59 +110,127 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 		}
 
 		$out .= Html::openElement(
-			'form',
-			array(
-				'action' => $this->getPageTitle()->getLocalURL(),
-				'name' => 'unconnectedpages',
-				'id' => 'wbc-unconnectedpages-form'
+				'form',
+				array(
+					'action' => $this->getPageTitle()->getLocalURL(),
+					'name' => 'unconnectedpages',
+					'id' => 'wbc-unconnectedpages-form'
+				)
 			)
-		)
-		. Html::openElement( 'fieldset' )
-		. Html::element( 'legend', array(), $this->msg( 'wikibase-unconnectedpages-legend' )->text() )
-		. Html::openElement( 'p' )
-		. Html::element( 'label', array( 'for' => 'language' ), $this->msg( 'wikibase-unconnectedpages-page' )->text() )
-		. ' '
-		. Html::input(
-			'page',
-			$this->startPage,
-			'text',
-			array(
-				'id' => 'page'
+			. Html::openElement( 'fieldset' )
+			. Html::element( 'legend', array(), $this->msg( 'wikibase-unconnectedpages-legend' )->text() )
+			. Html::openElement( 'p' )
+			. Html::element( 'label', array( 'for' => 'language' ), $this->msg( 'wikibase-unconnectedpages-page' )->text() )
+			. ' '
+			. Html::input(
+				'page',
+				$this->startPage,
+				'text',
+				array(
+					'id' => 'page'
+				)
 			)
-		)
-		. Html::input(
-			'submit',
-			$this->msg( 'wikibase-unconnectedpages-submit' )->text(),
-			'submit',
-			array(
-				'id' => 'wbc-unconnectedpages-submit',
-				'class' => 'wbc-input-button'
+			. Html::input(
+				'submit',
+				$this->msg( 'wikibase-unconnectedpages-submit' )->text(),
+				'submit',
+				array(
+					'id' => 'wbc-unconnectedpages-submit',
+					'class' => 'wbc-input-button'
+				)
 			)
-		)
-		. ' '
-		. Html::input(
-			'iwdata',
-			'only',
-			'checkbox',
-			array(
-				'id' => 'wbc-unconnectedpages-iwdata',
-				'class' => 'wbc-input-button',
-				$this->iwData === 'only' ? 'checked' : 'unchecked' => ''
+			. ' '
+			. Html::input(
+				'iwdata',
+				'only',
+				'checkbox',
+				array(
+					'id' => 'wbc-unconnectedpages-iwdata',
+					'class' => 'wbc-input-button',
+					$this->iwData === 'only' ? 'checked' : 'unchecked' => ''
+				)
 			)
-		)
-		. ' '
-		. Html::element( 'label', array( 'for' => 'wbc-unconnectedpages-iwdata' ), $this->msg( 'wikibase-unconnectedpages-iwdata-label' )->text() )
-		. Html::closeElement( 'p' )
-		. Html::closeElement( 'fieldset' )
-		. Html::closeElement( 'form' );
-		$output->addHTML( $out );
+			. ' '
+			. Html::element( 'label', array( 'for' => 'wbc-unconnectedpages-iwdata' ), $this->msg( 'wikibase-unconnectedpages-iwdata-label' )->text() )
+			. Html::closeElement( 'p' )
+			. Html::closeElement( 'fieldset' )
+			. Html::closeElement( 'form' );
 
+		$this->getOutput()->addHTML( $out );
+	}
+
+	private function showQuery() {
 		$query = array();
 		if ( $this->iwData === 'only' ) {
 			$query['iwdata'] = $this->iwData;
 		}
 
-		$this->showQuery( $query );
+		$paging = false;
+		$out = $this->getOutput();
+
+		list( $limit, $offset ) = $this->getRequest()->getLimitOffset();
+
+		$result = $this->getResult( $offset, $limit + 1 );
+
+		$numRows = count( $result );
+
+		$out->addHTML( Html::openElement( 'div', array( 'class' => 'mw-spcontent' ) ) );
+
+		if ( $numRows > 0 ) {
+			$out->addHTML( $this->msg( 'showingresults' )->numParams(
+			// do not format the one extra row, if exist
+				min( $numRows, $limit ),
+				$offset + 1 )->parseAsBlock() );
+			// Disable the "next" link when we reach the end
+			$paging = $this->getLanguage()->viewPrevNext(
+				$this->getPageTitle( $this->startPage ),
+				$offset,
+				$limit,
+				$query,
+				$numRows <= $limit
+			);
+			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
+		} else {
+			// No results to show, so don't bother with "showing X of Y" etc.
+			// -- just let the user know and give up now
+			$out->addWikiMsg( 'specialpage-empty' );
+			$out->addHTML( Html::closeElement( 'div' ) );
+		}
+
+		$this->outputResults(
+			$result,
+			// do not format the one extra row, if it exist
+			min( $numRows, $limit ),
+			$offset
+		);
+
+		if( $paging ) {
+			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
+		}
+
+		$out->addHTML( Html::closeElement( 'div' ) );
+	}
+
+	/**
+	 * Format and output report results using the given information plus OutputPage
+	 *
+	 * @param EntityId[] $results
+	 * @param integer $num number of available result rows
+	 * @param integer $offset paging offset
+	 */
+	private function outputResults( array $results, $num, $offset ) {
+		if ( $num > 0 ) {
+			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
+			for ( $i = 0; $i < $num; $i++ ) {
+				$line = $this->formatRow( $results[$i] );
+				if ( $line ) {
+					$html .= Html::rawElement( 'li', array(), $line );
+				}
+			}
+			$html .= Html::closeElement( 'ol' );
+
+			$this->getOutput()->addHTML( $html );
+		}
 	}
 
 	/**
@@ -159,7 +249,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 *
 	 * @since 0.4
 	 *
-	 * @return \Wikibase\NamespaceChecker
+	 * @return NamespaceChecker
 	 */
 	public function getNamespaceChecker() {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
@@ -204,7 +294,6 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	public function getResult( $offset = 0, $limit = 0 ) {
-
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$conds = $this->buildConditionals( $dbr );
@@ -252,12 +341,7 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 		return $entries;
 	}
 
-	/**
-	 * @see SpecialWikibaseQueryPage::formatRow
-	 *
-	 * @since 0.4
-	 */
-	protected function formatRow( $entry ) {
+	private function formatRow( $entry ) {
 		try {
 			$out = Linker::linkKnown( $entry['title'] );
 			if ( $entry['num'] > 0 ) {
@@ -269,15 +353,6 @@ class SpecialUnconnectedPages extends SpecialWikibaseQueryPage {
 			wfWarn( "Error formatting result row: " . $e->getMessage() );
 			return false;
 		}
-	}
-
-	/**
-	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
-	 *
-	 * @since 0.4
-	 */
-	protected function getTitleForNavigation() {
-		return $this->getPageTitle( $this->startPage );
 	}
 
 }
