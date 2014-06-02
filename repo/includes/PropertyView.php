@@ -21,8 +21,6 @@ class PropertyView extends EntityView {
 	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
 	 * this does not group all the HTMl within one parent node as one entity.
 	 *
-	 * @string
-	 *
 	 * @param EntityRevision $entityRevision
 	 * @param bool $editable
 	 *
@@ -86,7 +84,7 @@ class PropertyView extends EntityView {
 		return $html;
 	}
 
-	protected function getDataType( Property $property ) {
+	private function getDataType( Property $property ) {
 		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
 			->getType( $property->getDataTypeId() );
 	}
@@ -94,14 +92,11 @@ class PropertyView extends EntityView {
 	/**
 	 * Builds and returns the HTML representing a property entity's data type information.
 	 *
-	 * @since 0.1
-	 *
 	 * @param DataType $dataType the data type to render
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForDataType( DataType $dataType, $editable = true ) {
+	private function getHtmlForDataType( DataType $dataType ) {
 		$lang = $this->getLanguage();
 
 		return wfTemplate( 'wb-section-heading',
