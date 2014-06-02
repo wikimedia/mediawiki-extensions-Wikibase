@@ -34,6 +34,24 @@
       "revId": "e62baa44925a1d239de8367cb71912f1f6ca1dce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_91ad4e83",
+        "filename": "tests/browser/features/special_set_sitelink.feature",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-02T13:53:13Z",
+      "side": 1,
+      "message": "Sure, but we also assert that a specific sitelink does not exist. I think we should either assert 0 sitelinks in Given or just assert existance of enwiki:Asia in Then. Currently it seems to be a mix of two different styles.",
+      "parentUuid": "8e23439c_a82355ff",
+      "revId": "e62baa44925a1d239de8367cb71912f1f6ca1dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
