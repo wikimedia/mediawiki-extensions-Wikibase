@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers Wikibase\DataModel\Entity\BasicEntityIdParser
+ * @covers Wikibase\DataModel\Entity\DispatchingEntityIdParser
  *
  * @group Wikibase
  * @group WikibaseDataModel
