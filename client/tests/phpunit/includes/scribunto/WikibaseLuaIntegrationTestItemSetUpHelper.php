@@ -140,7 +140,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	 */
 	protected function getTestStatement( Snak $mainSnak ) {
 		$statement = new Statement( $mainSnak );
-		$guidGen = new V4GuidGenerator();
+		$guidGen = new V4GuidGenerator( uniqid( 'kittens', true ) );
 		$statement->setGuid( $guidGen->newGuid() );
 
 		return $statement;

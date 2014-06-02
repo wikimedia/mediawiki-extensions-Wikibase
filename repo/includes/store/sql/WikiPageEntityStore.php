@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Repo\Store;
 
 use MWException;
 use PermissionsError;
@@ -8,13 +8,14 @@ use Revision;
 use Status;
 use Title;
 use User;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityPerPage;
 use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\StorageException;
 use Wikibase\util\GenericEventDispatcher;
 use WikiPage;
