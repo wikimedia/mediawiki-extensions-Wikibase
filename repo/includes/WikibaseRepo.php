@@ -8,6 +8,7 @@ use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\ChangeNotifier;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -649,6 +650,13 @@ class WikibaseRepo {
 			$this->getSiteStore(),
 			$wgLang
 		);
+	}
+
+	/**
+	 * @return ChangeNotifier
+	 */
+	public function newChangeNotifier() {
+		return new ChangeNotifier( $this->settings->getSetting( 'useChangesTable' ) );
 	}
 
 	/**
