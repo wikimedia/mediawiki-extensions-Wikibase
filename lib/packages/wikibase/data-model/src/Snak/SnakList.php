@@ -111,14 +111,8 @@ class SnakList extends HashArray implements Snaks {
 	 * @return string
 	 */
 	public function getHash() {
-		$args = func_get_args();
-
-		/**
-		 * @var MapHasher $hasher
-		 */
-		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher( true );
-
-		return parent::getHash( $hasher );
+		$hasher = new MapValueHasher();
+		return $hasher->hash( $this );
 	}
 
 	/**

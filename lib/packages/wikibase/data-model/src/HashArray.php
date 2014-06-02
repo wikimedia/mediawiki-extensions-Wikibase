@@ -287,15 +287,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * @return string
 	 */
 	public function getHash() {
-		// We cannot have this as optional arg, because then we're no longer
-		// implementing the Hashable interface properly according to PHP...
-		$args = func_get_args();
-
-		/**
-		 * @var MapHasher $hasher
-		 */
-		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
-
+		$hasher = new MapValueHasher();
 		return $hasher->hash( $this );
 	}
 
@@ -381,16 +373,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 			$this->offsetSet( $offset, $hashable );
 		}
 	}
-
-
-
-
-
-
-
-
-
-
 
 	/**
 	 * @see ArrayObject::append

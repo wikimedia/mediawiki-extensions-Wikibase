@@ -48,6 +48,7 @@ Other breaking changes:
 * Removed these class aliases deprecated since 0.4:
 `ItemObject`, `ReferenceObject`, `ClaimObject`, `StatementObject`
 * Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
+* `HashArray` and `SnakList` no longer take an optional parameter in `getHash`
 
 #### Additions
 

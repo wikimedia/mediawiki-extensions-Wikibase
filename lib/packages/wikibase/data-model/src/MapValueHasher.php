@@ -16,22 +16,10 @@ use Traversable;
  */
 class MapValueHasher implements MapHasher {
 
-	/**
-	 * @since 0.1
-	 *
-	 * @var boolean
-	 */
-	protected $ordered;
+	private $isOrdered;
 
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 *
-	 * @param boolean $ordered
-	 */
-	public function __construct( $ordered = false ) {
-		$this->ordered = $ordered;
+	public function __construct( $holdOrderIntoAccount = false ) {
+		$this->isOrdered = $holdOrderIntoAccount;
 	}
 
 	/**
@@ -58,7 +46,7 @@ class MapValueHasher implements MapHasher {
 			$hashes[] = $hashable->getHash();
 		}
 
-		if ( !$this->ordered ) {
+		if ( !$this->isOrdered ) {
 			sort( $hashes );
 		}
 
