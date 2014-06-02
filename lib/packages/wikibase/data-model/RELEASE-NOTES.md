@@ -54,6 +54,7 @@ Other breaking changes:
 
 * Added `AliasGroupList::hasGroupForLanguage`
 * Added `SiteLinkList::add`
+* Added `SiteLinkList::addObject`
 * Added `SiteLinkList::removeLinkWithSiteId`
 * Added `SiteLinkList::isEmpty`
 * Added `SiteLinkList::removeLinkWithSiteId`

@@ -83,7 +83,7 @@ class Item extends Entity {
 	 * @param SiteLink $siteLink
 	 */
 	public function addSiteLink( SiteLink $siteLink ) {
-		$this->siteLinks->add( $siteLink );
+		$this->siteLinks->addObject( $siteLink );
 	}
 
 	/**
@@ -242,7 +242,7 @@ class Item extends Entity {
 
 		foreach ( $links as $siteId => $linkData ) {
 			if ( array_key_exists( 'name', $linkData ) ) {
-				$this->siteLinks->add( new SiteLink(
+				$this->siteLinks->addObject( new SiteLink(
 					$siteId,
 					$linkData['name'],
 					array_map(
