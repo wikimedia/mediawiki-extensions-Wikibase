@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Claim\ClaimListDiffer
+ * @covers Wikibase\DataModel\Claim\ClaimList
  * @uses Wikibase\DataModel\Claim\Claim
  * @uses Wikibase\DataModel\Claim\ClaimList
  * @uses Wikibase\DataModel\Snak\SnakList
