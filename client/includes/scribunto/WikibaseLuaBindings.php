@@ -44,6 +44,15 @@ class WikibaseLuaBindings {
 	/* @var string */
 	private $siteId;
 
+	/**
+	 * @param EntityIdParser $entityIdParser
+	 * @param EntityLookup $entityLookup
+	 * @param SiteLinkLookup $siteLinkTable
+	 * @param LanguageFallbackChainFactory $fallbackChainFactory
+	 * @param Language $language
+	 * @param string[] $languageCodes
+	 * @param string $siteId
+	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
