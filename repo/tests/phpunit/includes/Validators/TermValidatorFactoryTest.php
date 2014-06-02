@@ -40,7 +40,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $builders;
 	}
 
-	public function testGetUniquenessValidator() {
+	public function testGetFingerprintValidator() {
 		$builders = $this->newFactory( 20, array( 'ja', 'ru' ) );
 
 		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
