@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Item;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Term;
@@ -115,7 +115,7 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item1->setId( 42 );
 
 		$item1->setLabel( $languageCode, $termText );
-		$item1->addSiteLink( new SimpleSiteLink( 'enwiki', 'A' ) );
+		$item1->addSiteLink( new SiteLink( 'enwiki', 'A' ) );
 
 		$termIndex->saveTermsOfEntity( $item1 );
 
@@ -123,10 +123,10 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item2->setId( 23 );
 
 		$item2->setLabel( $languageCode, $termText );
-		$item2->addSiteLink( new SimpleSiteLink( 'enwiki', 'B' ) );
-		$item2->addSiteLink( new SimpleSiteLink( 'dewiki', 'B' ) );
-		$item2->addSiteLink( new SimpleSiteLink( 'hrwiki', 'B' ) );
-		$item2->addSiteLink( new SimpleSiteLink( 'uzwiki', 'B' ) );
+		$item2->addSiteLink( new SiteLink( 'enwiki', 'B' ) );
+		$item2->addSiteLink( new SiteLink( 'dewiki', 'B' ) );
+		$item2->addSiteLink( new SiteLink( 'hrwiki', 'B' ) );
+		$item2->addSiteLink( new SiteLink( 'uzwiki', 'B' ) );
 
 		$termIndex->saveTermsOfEntity( $item2 );
 
@@ -134,8 +134,8 @@ class TermSqlIndexTest extends TermIndexTest {
 		$item3->setId( 108 );
 
 		$item3->setLabel( $languageCode, $termText );
-		$item3->addSiteLink( new SimpleSiteLink( 'hrwiki', 'C' ) );
-		$item3->addSiteLink( new SimpleSiteLink( 'uzwiki', 'C' ) );
+		$item3->addSiteLink( new SiteLink( 'hrwiki', 'C' ) );
+		$item3->addSiteLink( new SiteLink( 'uzwiki', 'C' ) );
 
 		$termIndex->saveTermsOfEntity( $item3 );
 
@@ -192,12 +192,8 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	/**
 	 * @dataProvider termProvider
-	 * @param $languageCode
-	 * @param $termText
-	 * @param $searchText
-	 * @param boolean $matches
 	 */
-	public function testPrefixSearchQuoting( $languageCode, $termText, $searchText, $matches ) {
+	public function testPrefixSearchQuoting( $languageCode, $termText ) {
 		$termIndex = $this->getTermIndex();
 
 		$termIndex->clear();
