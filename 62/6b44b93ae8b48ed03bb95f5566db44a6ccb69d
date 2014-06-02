@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Code-Review+2: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 02 Jun 2014 14:29:24 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/136030
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
