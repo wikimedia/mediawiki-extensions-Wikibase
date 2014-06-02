@@ -11,7 +11,7 @@ use ValueFormatters\GeoCoordinateFormatter;
 use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -26,20 +26,9 @@ use Wikibase\LanguageFallbackChainFactory;
  */
 class WikibaseValueFormatterBuilders {
 
-	/**
-	 * @var EntityLookup
-	 */
-	protected $entityLookup;
-
-	/**
-	 * @var Language
-	 */
-	protected $defaultLanguage;
-
-	/**
-	 * @var EntityTitleLookup|null
-	 */
-	protected $entityTitleLookup;
+	private $entityLookup;
+	private $defaultLanguage;
+	private $entityTitleLookup;
 
 	/**
 	 * This determines which value is formatted how by providing a formatter mapping
@@ -108,11 +97,6 @@ class WikibaseValueFormatterBuilders {
 		),
 	);
 
-	/**
-	 * @param EntityLookup $lookup
-	 * @param Language $defaultLanguage
-	 * @param EntityTitleLookup|null $entityTitleLookup
-	 */
 	public function __construct(
 		EntityLookup $lookup,
 		Language $defaultLanguage,

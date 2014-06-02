@@ -4,8 +4,8 @@ namespace Wikibase\Client\Scribunto;
 
 use Language;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Entity;
-use Wikibase\EntityLookup;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
@@ -44,15 +44,6 @@ class WikibaseLuaBindings {
 	/* @var string */
 	private $siteId;
 
-	/**
-	 * @param EntityIdParser $entityIdParser
-	 * @param EntityLookup $entityLookup
-	 * @param SiteLinkLookup $siteLinkTable
-	 * @param LanguageFallbackChainFactory $fallbackChainFactory
-	 * @param Language $language
-	 * @param $languageCodes
-	 * @param $siteId
-	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,

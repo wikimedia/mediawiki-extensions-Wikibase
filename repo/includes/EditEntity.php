@@ -7,8 +7,9 @@ use IContextSource;
 use Status;
 use Title;
 use User;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\store\EntityStore;
+use Wikibase\Lib\Store\EntityStore;
 use WikiPage;
 
 /**

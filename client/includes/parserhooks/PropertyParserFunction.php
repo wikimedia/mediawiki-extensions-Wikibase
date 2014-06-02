@@ -11,6 +11,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Handler of the {{#property}} parser function.

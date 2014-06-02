@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use Wikibase\Lib\Store\EntityLookup;
+
 /**
  * Client store interface.
  *

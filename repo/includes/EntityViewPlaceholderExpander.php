@@ -9,6 +9,7 @@ use RuntimeException;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Utility for expanding the placeholders left in the HTML by EntityView.
@@ -28,42 +29,12 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  */
 class EntityViewPlaceholderExpander {
 
-	/**
-	 * @var User
-	 */
-	protected $user;
-
-	/**
-	 * @var Title
-	 */
-	protected $targetPage;
-
-	/**
-	 * The current user language
-	 *
-	 * @var Language
-	 */
-	protected $userLanguage;
-
-	/**
-	 * @var string[]|null
-	 */
-	protected $extraLanguages = null;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	protected $idParser;
-
-	/**
-	 * @var EntityLookup
-	 */
-	protected $entityLookup;
-
-	/**
-	 * @var UserLanguageLookup
-	 */
-	protected $userLanguageLookup;
+	private $user;
+	private $targetPage;
+	private $extraLanguages = null;
+	private $idParser;
+	private $entityLookup;
+	private $userLanguageLookup;
 
 	/**
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.

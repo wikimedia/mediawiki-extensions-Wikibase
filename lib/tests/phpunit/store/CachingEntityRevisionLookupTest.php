@@ -4,12 +4,12 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
-use Wikibase\store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 
 /**
- * @covers Wikibase\store\CachingEntityRevisionLookup
+ * @covers Wikibase\Lib\Store\CachingEntityRevisionLookup
  *
  * @group WikibaseLib
  * @group WikibaseEntityLookup

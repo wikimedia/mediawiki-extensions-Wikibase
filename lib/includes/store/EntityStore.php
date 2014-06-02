@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\store;
+namespace Wikibase\Lib\Store;
 
 use PermissionsError;
 use User;
-use Wikibase\Entity;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
 

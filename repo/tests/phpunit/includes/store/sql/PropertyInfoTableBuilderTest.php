@@ -8,7 +8,7 @@ use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\WikiPageEntityLookup;
+use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
  * @covers Wikibase\PropertyInfoTableBuilder

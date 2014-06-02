@@ -8,7 +8,7 @@ use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\EntityLookup;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * EntityExistsValidator checks that a given entity exists.
@@ -18,14 +18,8 @@ use Wikibase\EntityLookup;
  */
 class EntityExistsValidator implements ValueValidator {
 
-	/**
-	 * @var EntityLookup
-	 */
-	protected $lookup;
+	private $lookup;
 
-	/**
-	 * @param EntityLookup $lookup
-	 */
 	public function __construct( EntityLookup $lookup ) {
 		$this->lookup = $lookup;
 	}

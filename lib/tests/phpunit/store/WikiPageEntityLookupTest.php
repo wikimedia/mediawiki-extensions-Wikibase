@@ -4,12 +4,12 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
-use Wikibase\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\WikiPageEntityLookup;
+use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
- * @covers Wikibase\WikiPageEntityLookup
+ * @covers Wikibase\Lib\Store\WikiPageEntityLookup
  *
  * @group Database
  * @group Wikibase
