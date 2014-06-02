@@ -10,11 +10,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityPerPageTable;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
 use Wikibase\StorageException;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\WikiPageEntityStore;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
