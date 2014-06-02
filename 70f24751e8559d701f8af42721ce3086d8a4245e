@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_03b9f528",
+        "filename": "repo/tests/phpunit/includes/api/SetQualifierTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T15:13:42Z",
+      "side": 1,
+      "message": "Wow, this interface is odd. Just wondering. Not part of this patch.",
+      "revId": "70f24751e8559d701f8af42721ce3086d8a4245e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
