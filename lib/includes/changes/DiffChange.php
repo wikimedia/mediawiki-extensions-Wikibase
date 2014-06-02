@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use Diff\Diff;
+use Diff\DiffOp\Diff\Diff;
 
 /**
  * Class for changes that can be represented as a Diff.
@@ -65,6 +65,9 @@ class DiffChange extends ChangeRow {
 	 * @return DiffChange
 	 */
 	public static function newFromDiff( Diff $diff, array $fields = null ) {
+		/**
+		 * @var self $instance
+		 */
 		$instance = new static(
 			ChangesTable::singleton(),
 			$fields,
