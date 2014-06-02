@@ -64,23 +64,21 @@ class ReferencedPagesFinder {
 	 * @return Title[]
 	 */
 	public function getPages( Change $change ) {
-		if ( ! ( $change instanceof ItemChange ) ) {
-			return array();
+		if ( $change instanceof ItemChange ) {
+			return $this->getTitlesToUpdate( $this->getReferencedPages( $change ) );
 		}
 
-		$pages = $this->getReferencedPages( $change );
-
-		return $this->getTitlesToUpdate( $pages );
+		return array();
 	}
 
 	/**
 	 * Returns the pages that need some kind of updating given the change.
 	 *
-	 * @param Change $change
+	 * @param ItemChange $change
 	 *
 	 * @return Title[] the titles of the pages to update
 	 */
-	private function getReferencedPages( Change $change ) {
+	private function getReferencedPages( ItemChange $change ) {
 		$itemId = $change->getEntityId();
 
 		$pages = $this->itemUsageIndex->getEntityUsage( array( $itemId ) );
