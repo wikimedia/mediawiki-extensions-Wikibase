@@ -96,13 +96,6 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 				'baseRevid' => false,
 				'error' => 'Wikibase\StorageException'
 			),
-
-			'bad base' => array(
-				'entity' => new Item( array( 'label' => array( 'en' => 'one', 'de' => 'eins' ) ) ),
-				'flags' => EDIT_UPDATE,
-				'baseRevid' => 1234,
-				'error' => 'Wikibase\StorageException'
-			),
 		);
 	}
 
