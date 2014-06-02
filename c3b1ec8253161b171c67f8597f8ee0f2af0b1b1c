@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b20cc5f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T21:50:31Z",
+      "side": 1,
+      "message": "That\u0027s a pretty bad description of this patch.",
+      "revId": "c3b1ec8253161b171c67f8597f8ee0f2af0b1b1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_f2291d37",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T21:50:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right. Now we have a mixture of Lib/Store and Repo/Store? Really?",
+      "revId": "c3b1ec8253161b171c67f8597f8ee0f2af0b1b1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
