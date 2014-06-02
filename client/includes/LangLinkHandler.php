@@ -6,7 +6,7 @@ use ParserOutput;
 use Site;
 use SiteStore;
 use Title;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * Handles language links.
@@ -75,7 +75,7 @@ class LangLinkHandler {
 	 *
 	 * @param Title $title
 	 *
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 */
 	public function getEntityLinks( Title $title ) {
 		wfProfileIn( __METHOD__ );
@@ -84,7 +84,7 @@ class LangLinkHandler {
 
 		$links = array();
 
-		$siteLink = new SimpleSiteLink( $this->siteId, $title->getFullText() );
+		$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
 		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
 
 		if ( $itemId !== null ) {
@@ -148,9 +148,9 @@ class LangLinkHandler {
 	 * @since 0.1
 	 *
 	 * @param ParserOutput $out
-	 * @param SimpleSiteLink[] $repoLinks An array that uses global site IDs as keys.
+	 * @param SiteLink[] $repoLinks An array that uses global site IDs as keys.
 	 *
-	 * @return SimpleSiteLink[] A filtered copy of $repoLinks, with any inappropriate
+	 * @return SiteLink[] A filtered copy of $repoLinks, with any inappropriate
 	 *         entries removed.
 	 */
 	public function suppressRepoLinks( ParserOutput $out, array $repoLinks ) {
@@ -185,10 +185,10 @@ class LangLinkHandler {
 	 *
 	 * @since  0.4
 	 *
-	 * @param SimpleSiteLink[] $repoLinks An array that uses global site IDs as keys.
+	 * @param SiteLink[] $repoLinks An array that uses global site IDs as keys.
 	 * @param string[] $allowedGroups A list of allowed site groups
 	 *
-	 * @return SimpleSiteLink[] A filtered copy of $repoLinks, retaining only the links
+	 * @return SiteLink[] A filtered copy of $repoLinks, retaining only the links
 	 *         pointing to a site in an allowed group.
 	 */
 	public function filterRepoLinksByGroup( array $repoLinks, array $allowedGroups ) {
@@ -305,7 +305,7 @@ class LangLinkHandler {
 	 * Converts a list of SiteLink objects into an associative array that maps
 	 * global site IDs to the respective target pages on the designated wikis.
 	 *
-	 * @param SimpleSiteLink[] $repoLinks
+	 * @param SiteLink[] $repoLinks
 	 *
 	 * @return string[] An associative array, using site IDs for keys
 	 *         and the target pages on the respective wiki as the associated value.
@@ -340,7 +340,7 @@ class LangLinkHandler {
 	 * @param Title $title The page's title
 	 * @param ParserOutput $out   Parsed representation of the page
 	 *
-	 * @return SimpleSiteLink[] An associative array, using site IDs for keys
+	 * @return SiteLink[] An associative array, using site IDs for keys
 	 *         and the target pages in the respective languages as the associated value.
 	 */
 	public function getEffectiveRepoLinks( Title $title, ParserOutput $out ) {
