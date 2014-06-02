@@ -2,8 +2,6 @@
 
 namespace Wikibase;
 
-use Wikibase\Repo\WikibaseRepo;
-
 /**
  * Interface for change notification.
  * Whenever a change is made, it should be fed to this interface
@@ -16,6 +14,15 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ChangeNotifier {
 
+	private $useChangesTable;
+
+	/**
+	 * @param bool $useChangesTable
+	 */
+	public function __construct( $useChangesTable ) {
+		$this->useChangesTable = $useChangesTable;
+	}
+
 	/**
 	 * Handles the provided change.
 	 *
@@ -26,7 +33,7 @@ class ChangeNotifier {
 	 * @return \Status
 	 */
 	public function handleChange( Change $change ) {
-		if ( !WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useChangesTable' ) ) {
+		if ( !$this->useChangesTable ) {
 			return \Status::newGood( false );
 		}
 
