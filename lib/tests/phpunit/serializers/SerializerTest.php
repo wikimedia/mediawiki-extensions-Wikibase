@@ -41,12 +41,4 @@ class SerializerTest extends \MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	/**
-	 * @dataProvider apiSerializerProvider
-	 * @param Serializer $serializer
-	 */
-	public function testSetApiResult( Serializer $serializer ) {
-		$this->assertTrue( true );
-	}
-
 }
