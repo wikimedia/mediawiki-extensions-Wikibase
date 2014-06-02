@@ -1,8 +1,12 @@
 <?php
+
 namespace Wikibase;
 
-use Diff\Diff;
-use Diff\DiffOp;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 
 /**
  * Creates an array structure with comment information for storing
@@ -147,7 +151,7 @@ class SiteLinkCommentCreator {
 	private function getChangeParamsForDiffOp( DiffOp $diffOp, $siteId, $messagePrefix ) {
 		$params = array();
 
-		if ( $diffOp instanceof \Diff\DiffOpAdd ) {
+		if ( $diffOp instanceof DiffOpAdd ) {
 			$params['message'] = $messagePrefix . 'add';
 			$params['sitelink'] = array(
 				'newlink' => array(
@@ -155,7 +159,7 @@ class SiteLinkCommentCreator {
 					'page' => $diffOp->getNewValue()
 				)
 			);
-		} elseif ( $diffOp instanceof \Diff\DiffOpRemove ) {
+		} elseif ( $diffOp instanceof DiffOpRemove ) {
 			$params['message'] = $messagePrefix . 'remove';
 			$params['sitelink'] = array(
 				'oldlink' => array(
@@ -163,7 +167,7 @@ class SiteLinkCommentCreator {
 					'page' => $diffOp->getOldValue()
 				)
 			);
-		} elseif ( $diffOp instanceof \Diff\DiffOpChange ) {
+		} elseif ( $diffOp instanceof DiffOpChange ) {
 			$params['sitelink'] = array(
 				'oldlink' => array(
 					'site' => $siteId,
@@ -195,11 +199,11 @@ class SiteLinkCommentCreator {
 		if ( in_array( $action, array( 'remove', 'restore' ) ) ) {
 			// Messages: wikibase-comment-remove, wikibase-comment-restore
 			$params['message'] = 'wikibase-comment-' . $action;
-		} elseif ( $diffOp instanceof \Diff\DiffOpAdd ) {
+		} elseif ( $diffOp instanceof DiffOpAdd ) {
 			$params['message'] = 'wikibase-comment-linked';
-		} elseif ( $diffOp instanceof \Diff\DiffOpRemove ) {
+		} elseif ( $diffOp instanceof DiffOpRemove ) {
 			$params['message'] = 'wikibase-comment-unlink';
-		} elseif ( $diffOp instanceof \Diff\DiffOpChange ) {
+		} elseif ( $diffOp instanceof DiffOpChange ) {
 			$params['message'] = 'wikibase-comment-sitelink-change';
 
 			// FIXME: this code appears to be doing something incorrect as "best effort"
