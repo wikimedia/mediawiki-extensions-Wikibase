@@ -102,5 +102,7 @@
 	"wikibase-validator-not-allowed": "Valeur interdite : $1",
 	"datatypes-type-wikibase-item": "Élément",
 	"datatypes-type-commonsMedia": "Fichier multimédia de Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-snakformatter-valuetype-mismatch": "Le type de valeur « $1 » ne correspond pas au type de propriété « $2 ».",
+	"wikibase-snakformatter-property-not-found": "Propriété $1 non trouvée, impossible de déterminer le type de données à utiliser."
 }
