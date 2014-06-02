@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_920f89e4",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-02T21:48:02Z",
+      "side": 1,
+      "message": "You could have used $this-\u003emergeMwGlobalArrayValue( ... ) here",
+      "revId": "de40fc9aedf1c2a4e84abf6423ea739354aa9f58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
