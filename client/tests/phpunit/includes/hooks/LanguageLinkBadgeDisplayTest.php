@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\ClientSiteLinkLookup;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\Item;
 use Language;
 use Title;

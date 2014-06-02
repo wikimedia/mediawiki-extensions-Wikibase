@@ -7,12 +7,11 @@ use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
-use Wikibase\EntityDiff;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemUsageIndex;
 
 /**
@@ -30,7 +29,6 @@ use Wikibase\ItemUsageIndex;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ChangeHandlerTest extends \MediaWikiTestCase {
-
 
 	/** @var MockRepository $repo */
 	protected static $repo;
@@ -1126,7 +1124,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 						$siteIdentifier = $siteId;
 					}
 
-					$entity->addSiteLink( new SimpleSiteLink( $siteIdentifier, $page ) );
+					$entity->addSiteLink( new SiteLink( $siteIdentifier, $page ) );
 				}
 			} else {
 				$entity = $siteLinks;
