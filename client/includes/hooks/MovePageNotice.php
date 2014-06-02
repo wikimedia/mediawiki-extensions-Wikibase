@@ -4,7 +4,7 @@ namespace Wikibase\Client;
 
 use Html;
 use Title;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\RepoLinker;
 use Wikibase\SiteLinkLookup;
 
@@ -17,7 +17,6 @@ use Wikibase\SiteLinkLookup;
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-
 final class MovePageNotice {
 
 	/**
@@ -56,7 +55,7 @@ final class MovePageNotice {
 	 */
 	private function getItemUrl( Title $title ) {
 		$entityId = $this->siteLinkLookup->getEntityIdForSiteLink(
-			new SimpleSiteLink(
+			new SiteLink(
 				$this->siteId,
 				$title->getFullText()
 			)
