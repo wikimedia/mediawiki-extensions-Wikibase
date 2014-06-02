@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Serializers;
 use DataValues\DataValueFactory;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\PropertyValueSnak;
@@ -103,8 +104,7 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 	 * @return Snak
 	 */
 	public function newFromSerialization( array $serialization ) {
-		// TODO: inject id parser
-		$propertyId = EntityId::newFromPrefixedId( $serialization['property'] );
+		$propertyId = new PropertyId( $serialization['property'] );
 
 		if ( !$propertyId ) {
 			throw new InvalidArgumentException( "Invalid property ID: " . $serialization['property'] );
