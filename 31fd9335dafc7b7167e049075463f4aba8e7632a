@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_66ce7761",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-02T17:55:20Z",
+      "side": 1,
+      "message": "No, this is going to far in the wrong direction. I want to see something like this:\n\n    public static function onSkinBuildSidebar( Skin $skin, \u0026$bar ) {\n        WikibaseClient::getDefaultInstance()-\u003egetSidebarBuilder()-\u003ebuild( $skin, $bar );\n        return true;\n    }",
+      "revId": "31fd9335dafc7b7167e049075463f4aba8e7632a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
