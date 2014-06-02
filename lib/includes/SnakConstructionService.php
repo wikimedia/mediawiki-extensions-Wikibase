@@ -8,7 +8,7 @@ use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Snak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\SnakFactory;
 
 /**
@@ -21,25 +21,10 @@ use Wikibase\SnakFactory;
  */
 class SnakConstructionService {
 
-	/**
-	 * @var SnakFactory
-	 */
-	protected $snakFactory;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	protected $dataTypeLookup;
-
-	/**
-	 * @var DataTypeFactory
-	 */
-	protected $dataTypeFactory;
-
-	/**
-	 * @var DataValueFactory
-	 */
-	protected $dataValueFactory;
+	private $snakFactory;
+	private $dataTypeLookup;
+	private $dataTypeFactory;
+	private $dataValueFactory;
 
 	/**
 	 * @param SnakFactory            $snakFactory
