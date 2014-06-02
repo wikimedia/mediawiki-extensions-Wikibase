@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Repo\Specials;
+
 use Html;
 use Site;
 use SiteStore;
