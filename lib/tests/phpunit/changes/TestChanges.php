@@ -163,7 +163,6 @@ final class TestChanges {
 			// -----
 			$new->removeSiteLink( 'enwiki' );
 			$changes['remove-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
-			$old = $new->copy();
 
 			// apply all the defaults ----------
 			$defaults = array(

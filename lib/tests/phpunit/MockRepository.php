@@ -474,7 +474,7 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	public function getEntities( array $entityIds ) {
 		$entities = array();
 
-		foreach ( $entityIds as $key => $entityId ) {
+		foreach ( $entityIds as $entityId ) {
 
 			if ( is_string( $entityId ) ) {
 				$entityId = EntityId::newFromPrefixedId( $entityId );
