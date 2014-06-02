@@ -143,13 +143,15 @@ final class ClientHooks {
 		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )]
 			. " store on the client..." );
 		$store->rebuild();
-		$changes = ChangesTable::singleton();
-		$changes = $changes->select(
+
+		$changesTable = new ChangesTable();
+		$changes = $changesTable->select(
 			null,
 			array(),
 			array(),
 			__METHOD__
 		);
+
 		ChangeHandler::singleton()->handleChanges( iterator_to_array( $changes ) );
 		$reportMessage( "done!\n" );
 
