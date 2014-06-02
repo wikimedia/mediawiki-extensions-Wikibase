@@ -17,7 +17,7 @@ use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\StorageException;
-use Wikibase\util\GenericEventDispatcher;
+use Wikibase\Repo\GenericEventDispatcher;
 use WikiPage;
 
 /**
