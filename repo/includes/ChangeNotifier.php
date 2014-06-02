@@ -26,27 +26,12 @@ class ChangeNotifier {
 	 * @return \Status
 	 */
 	public function handleChange( Change $change ) {
-		return $this->handleChanges( array( $change ) );
-	}
-
-	/**
-	 * Handles the provided changes.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Change[] $changes
-	 *
-	 * @return \Status
-	 */
-	public function handleChanges( array $changes ) {
 		if ( !WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useChangesTable' ) ) {
 			return \Status::newGood( false );
 		}
 
-		foreach ( $changes as $change ) {
-			//XXX: the Change interface does not define save().
-			$change->save();
-		}
+		//XXX: the Change interface does not define save().
+		$change->save();
 
 		return \Status::newGood( true );
 	}
