@@ -456,6 +456,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		if ( $badges !== null ) {
 			$badges = $this->parseBadges( $badges, $status );
+		} else {
+			$badges = array();
 		}
 
 		if ( !$status->isGood() ) {
