@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\V4GuidGenerator;
 use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
 use Wikibase\Test\MockRepository;
