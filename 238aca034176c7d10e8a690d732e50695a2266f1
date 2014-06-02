@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_911d4e69",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:32:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_783d12b8",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_7fc61c50",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 13
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_71207296",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:32:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_583a56c1",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_ff00ec6e",
         "filename": "lib/includes/serializers/EntitySerializer.php",
         "patchSetId": 13
@@ -100,6 +136,24 @@
       "writtenOn": "2014-05-28T18:50:42Z",
       "side": 1,
       "message": "Well, at least it *can* be change at all now, before, it was just hard coded.\nWe could get rid of this simply by requiring $entityFactory to be provided. We should do that. But fixing that is beyond the scope of this patch.",
+      "parentUuid": "4e1dcb5b_ff00ec6e",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_5137b6e0",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:32:23Z",
+      "side": 1,
+      "message": "added a comment now, and filed a bug.",
       "parentUuid": "4e1dcb5b_ff00ec6e",
       "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -247,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_3132faef",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:32:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_38bd5a17",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_c2531719",
         "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
         "patchSetId": 13
@@ -258,6 +330,24 @@
       "writtenOn": "2014-05-28T16:18:33Z",
       "side": 1,
       "message": "The changes in this file seem unrelated to the rest of the patch. If that\u0027s true then please try to move it to an other patch.",
+      "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b1260ab4",
+        "filename": "lib/tests/phpunit/NoBadDependencyUsageTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T11:32:23Z",
+      "side": 1,
+      "message": "They are not unrelated: I mention WikibaseRepo in a comment in lib, so I need to adjust this test to account for this.",
+      "parentUuid": "4e1dcb5b_c2531719",
       "revId": "238aca034176c7d10e8a690d732e50695a2266f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
