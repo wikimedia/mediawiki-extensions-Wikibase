@@ -16,7 +16,6 @@ use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
-use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Summary;

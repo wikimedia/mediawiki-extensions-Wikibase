@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\Lib\Specials\SpecialWikibasePage;
-
 /**
  * Base for special pages that resolve certain arguments to an item.
  *

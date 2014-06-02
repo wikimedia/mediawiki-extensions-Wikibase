@@ -6,7 +6,6 @@ use HttpError;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Lib\Specials\SpecialWikibasePage;
 use Wikibase\LinkedData\EntityDataRequestHandler;
 use Wikibase\LinkedData\EntityDataSerializationService;
 use Wikibase\LinkedData\EntityDataUriManager;
