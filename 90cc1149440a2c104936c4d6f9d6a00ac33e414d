@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b6bcc068",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T10:43:26Z",
+      "side": 1,
+      "message": "Use WikibaseClient::getDefaultInstance()-\u003egetSiteStore() instead. \nSiteSQLStore::newInstance() causes the whole muti KB blob to be fetched again from memcached.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_96b30496",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T10:43:26Z",
+      "side": 1,
+      "message": "if getOtherProjectsSites() would use the site\u0027s global ID as array keys, this could be done more conveniently with $siteIdsToOutput \u003d array_keys( $siteToOutput ).",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_d6685cf4",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T10:43:26Z",
+      "side": 1,
+      "message": "please document what this does, and based on what logic.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_56ad6c2d",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T10:43:26Z",
+      "side": 1,
+      "message": "Seems to me like $currentSite should be a constructor argument. I will never change. $supportedSiteGroupIds however is specific to a wiki page (or rather, the associated data item). So ¯that¯ should probably be a parameter of getOtherProjectsSites.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_36a8b01c",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-02T10:43:26Z",
+      "side": 1,
+      "message": "Nested loop, please break this out into a separate function.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
