@@ -3,10 +3,10 @@
 namespace Wikibase\util\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\util\GenericEventDispatcher;
+use Wikibase\Repo\GenericEventDispatcher;
 
 /**
- * @covers Wikibase\util\GenericEventDispatcher
+ * @covers Wikibase\Repo\GenericEventDispatcher
  *
  * @group Wikibase
  * @group WikibaseLib

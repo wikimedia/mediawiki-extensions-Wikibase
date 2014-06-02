@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\util;
+namespace Wikibase\Repo;
 
 /**
  * Dispatches a notification to a set of watchers.
