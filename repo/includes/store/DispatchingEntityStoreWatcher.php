@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
-use Wikibase\util\GenericEventDispatcher;
+use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Repo\GenericEventDispatcher;
 
 /**
  * EntityStoreWatcher that dispatches events to more EntityStoreWatchers.
@@ -37,4 +38,5 @@ class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements En
 	public function entityDeleted( EntityId $entityId ) {
 		$this->dispatch( 'entityDeleted', $entityId );
 	}
+
 }

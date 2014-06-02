@@ -12,9 +12,9 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 
