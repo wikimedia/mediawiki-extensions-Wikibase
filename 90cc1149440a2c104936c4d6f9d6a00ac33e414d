@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_31dd5a74",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T12:30:10Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d please.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_36a8b01c",
         "filename": "client/includes/OtherProjectsSitesProvider.php",
         "patchSetId": 1
@@ -81,6 +98,40 @@
       "writtenOn": "2014-06-02T10:43:26Z",
       "side": 1,
       "message": "Nested loop, please break this out into a separate function.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b1d84a80",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T12:30:10Z",
+      "side": 1,
+      "message": "This logic seems odd to me and may be broken.\n\nIf the list contains only 1 entry it is added to the result no matter what the language is.\n\nIf the list contains more than 1 entry the languages are compared. If no language matches *NOTHING* is added.\n\nI don\u0027t think this is what should happen. An explanation of what the method is supposed to do is appreciated.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_71fbd2de",
+        "filename": "client/tests/phpunit/includes/OtherProjectsSitesProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-02T12:30:10Z",
+      "side": 1,
+      "message": "This is not an \"result\". Please name this $expectedSites or at least $expected.",
       "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
