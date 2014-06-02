@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_59c91cad",
+        "filename": "client/includes/ReferencedPagesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-02T19:05:14Z",
+      "side": 1,
+      "message": "this is not an improvement imho and makes the code less clear / clean.\n\nI\u0027m fine though with putting in the if block:\n\nif ( $change instanceof ItemChange ) {\n  $pages \u003d $this-\u003egetReferencedPages( $change );\n  return $this-\u003egetTitlesToUpdate( $pages );\n}",
+      "revId": "cfe103fd9736975341dce21c38973a9e23ef2e7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_39c42094",
+        "filename": "client/includes/ReferencedPagesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-02T19:05:14Z",
+      "side": 1,
+      "message": "looks good",
+      "revId": "cfe103fd9736975341dce21c38973a9e23ef2e7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
