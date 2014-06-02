@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_83fbc5dd",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_b6bcc068",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_96b30496",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-02T10:43:26Z",
       "side": 1,
       "message": "if getOtherProjectsSites() would use the site\u0027s global ID as array keys, this could be done more conveniently with $siteIdsToOutput \u003d array_keys( $siteToOutput ).",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_63e2e92f",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:42:14Z",
+      "side": 1,
+      "message": "It would requires to drop the use of the nice SiteList container. So I\u0027m not sure it\u0027s a good idea (but I\u0027m ready to move from SiteList to an associative array if your prefers)",
+      "parentUuid": "4e1dcb5b_96b30496",
       "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_e3d5d948",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_56ad6c2d",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_31dd5a74",
         "filename": "client/includes/OtherProjectsSitesProvider.php",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2014-06-02T12:30:10Z",
       "side": 1,
       "message": "\u003d\u003d\u003d please.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_a3cfe1b4",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_31dd5a74",
       "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_2352b1e2",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_36a8b01c",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_b1d84a80",
         "filename": "client/includes/OtherProjectsSitesProvider.php",
         "patchSetId": 1
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_43f12dd9",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:42:14Z",
+      "side": 1,
+      "message": "See methods documentation added in the next patchset.",
+      "parentUuid": "4e1dcb5b_b1d84a80",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_71fbd2de",
         "filename": "client/tests/phpunit/includes/OtherProjectsSitesProviderTest.php",
         "patchSetId": 1
@@ -132,6 +240,24 @@
       "writtenOn": "2014-06-02T12:30:10Z",
       "side": 1,
       "message": "This is not an \"result\". Please name this $expectedSites or at least $expected.",
+      "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_a3b921e8",
+        "filename": "client/tests/phpunit/includes/OtherProjectsSitesProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-02T15:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e1dcb5b_71fbd2de",
       "revId": "90cc1149440a2c104936c4d6f9d6a00ac33e414d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
