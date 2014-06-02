@@ -4,11 +4,12 @@ namespace Wikibase;
 
 use DataValues\DataValue;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Factory for creating new snaks.
  *
- * @since 0.3
+ * @deprecated
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -22,7 +23,7 @@ class SnakFactory {
 	 *
 	 * @since 0.4
 	 *
-	 * @param EntityId $propertyId
+	 * @param PropertyId $propertyId
 	 * @param string $snakType
 	 * @param DataValue $value
 	 *
@@ -30,11 +31,7 @@ class SnakFactory {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function newSnak( EntityId $propertyId, $snakType, DataValue $value = null ) {
-		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
-			throw new InvalidArgumentException( 'Expected an EntityId of a property' );
-		}
-
+	public function newSnak( PropertyId $propertyId, $snakType, DataValue $value = null ) {
 		switch ( $snakType ) {
 			case 'value':
 				if ( $value === null ) {
