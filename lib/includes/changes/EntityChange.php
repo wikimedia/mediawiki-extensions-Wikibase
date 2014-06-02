@@ -300,7 +300,7 @@ class EntityChange extends DiffChange {
 	 * @param Entity|null $newEntity
 	 * @param array|null  $fields additional fields to set
 	 *
-	 * @return EntityChange
+	 * @return static
 	 * @throws MWException
 	 */
 	public static function newFromUpdate( $action, Entity $oldEntity = null, Entity $newEntity = null, array $fields = null ) {
