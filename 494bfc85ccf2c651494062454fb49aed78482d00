@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_6790fa46",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-03T20:22:46Z",
+      "side": 1,
+      "message": "This mixes two different meanings of \"header\" now:\n1. The original SpecialPage::setHeaders() is meant to set stuff that belongs to the HTML HEAD (\u003cmeta\u003e, \u003ctitle\u003e).\n2. SpecialPage::outputHeader() .",
+      "revId": "494bfc85ccf2c651494062454fb49aed78482d00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_87a556b4",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-03T20:22:46Z",
+      "side": 1,
+      "message": "This line is not needed. Just confusing to have it here. Please remove.",
+      "revId": "494bfc85ccf2c651494062454fb49aed78482d00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
