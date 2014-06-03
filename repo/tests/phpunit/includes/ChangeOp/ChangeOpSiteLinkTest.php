@@ -78,21 +78,21 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// adding sitelink with badges
 		$args[] = array(
-			clone $item,
+			$item->copy(),
 			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q149' ) ) ),
 			array_merge( $existingSiteLinks, array ( $enSiteLink ) )
 		);
 
 		// deleting sitelink
 		$args[] = array(
-			clone $item,
+			$item->copy(),
 			new ChangeOpSiteLink( 'dewiki', null ),
 			array( $plSiteLink )
 		);
 
 		// setting badges on existing sitelink
 		$args[] = array(
-			clone $item,
+			$item->copy(),
 			new ChangeOpSiteLink( 'plwiki', 'Berlin', array( new ItemId( 'Q42' ), new ItemId( 'Q149' ) ) ),
 			array(
 				$deSiteLink,
@@ -102,7 +102,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// changing sitelink without modifying badges
 		$args[] = array(
-			clone $item,
+			$item->copy(),
 			new ChangeOpSiteLink( 'plwiki', 'Test' ),
 			array(
 				$deSiteLink,
@@ -112,7 +112,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// change badges without modifying title
 		$args[] = array(
-			clone $item,
+			$item->copy(),
 			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'Q149' ) ) ),
 			array(
 				$deSiteLink,
@@ -122,7 +122,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// add duplicate badges
 		$args[] = array(
-			clone $item,
+			$item->copy(),
 			new ChangeOpSiteLink( 'plwiki', null, array( new ItemId( 'q42' ), new ItemId( 'Q149' ), new ItemId( 'Q42' ) ) ),
 			array(
 				$deSiteLink,
@@ -170,7 +170,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		// cannot change badges of non-existing sitelink
 		$args[] = array(
-			clone $item,
+			$item->copy(),
 			new ChangeOpSiteLink( 'enwiki', null, array( new ItemId( 'Q149' ) ) ),
 		);
 
