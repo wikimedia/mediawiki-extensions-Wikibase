@@ -15,13 +15,17 @@ class SitesBuilder {
 	/**
 	 * @var SiteStore
 	 */
-	protected $store;
+	private $store;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	protected $validGroups;
+	private $validGroups;
 
+	/**
+	 * @param SiteStore $store
+	 * @param string[] $validGroups
+	 */
 	public function __construct( SiteStore $store, array $validGroups ) {
 		$this->store = $store;
 		$this->validGroups = $validGroups;
@@ -82,7 +86,7 @@ class SitesBuilder {
 	 *
 	 * @return string
 	 */
-	protected function getInterwikiGroup( array $sites, $wikiId ) {
+	private function getInterwikiGroup( array $sites, $wikiId ) {
 		if ( !array_key_exists( $wikiId, $sites ) ) {
 			return null;
 		}
