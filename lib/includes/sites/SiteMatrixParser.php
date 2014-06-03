@@ -12,22 +12,22 @@ class SiteMatrixParser {
 	/**
 	 * @var string
 	 */
-	protected $scriptPath;
+	private $scriptPath;
 
 	/**
 	 * @var string
 	 */
-	protected $articlePath;
+	private $articlePath;
 
 	/**
 	 * @var boolean
 	 */
-	protected $expandGroup;
+	private $expandGroup;
 
 	/**
 	 * @var string
 	 */
-	protected $stripProtocol;
+	private $stripProtocol;
 
 	/**
 	 * @param string $scriptPath (e.g. '/w/$1')
@@ -90,7 +90,7 @@ class SiteMatrixParser {
 	 *
 	 * @return Site[]
 	 */
-	protected function getSpecialSites( array $specialSites ) {
+	private function getSpecialSites( array $specialSites ) {
 		$sites = array();
 
 		foreach( $specialSites as $specialSite ) {
@@ -114,7 +114,7 @@ class SiteMatrixParser {
 	 *
 	 * @return Site[]
 	 */
-	protected function getSitesFromLangGroup( $langGroup ) {
+	private function getSitesFromLangGroup( $langGroup ) {
 		$sites = array();
 
 		foreach( $langGroup['site'] as $siteData ) {
@@ -136,7 +136,7 @@ class SiteMatrixParser {
 	 *
 	 * @return Site
 	 */
-	protected function getSiteFromSiteData( $siteData ) {
+	private function getSiteFromSiteData( $siteData ) {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( $siteData['dbname'] );
 
