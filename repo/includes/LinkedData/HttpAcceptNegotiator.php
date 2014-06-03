@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\LinkedData;
 
 /**
  * Utility for negotiating a value from a set of supported values using a preference list.

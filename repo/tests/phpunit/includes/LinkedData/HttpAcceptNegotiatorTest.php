@@ -2,10 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\HttpAcceptNegotiator;
+use Wikibase\Repo\LinkedData\HttpAcceptNegotiator;
 
 /**
- * @covers Wikibase\HttpAcceptNegotiator
+ * @covers Wikibase\Repo\LinkedData\HttpAcceptNegotiator
  *
  * @group Wikibase
  * @group WikibaseLib
