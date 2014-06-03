@@ -1,5 +1,6 @@
 <?php
-namespace Wikibase\LinkedData;
+
+namespace Wikibase\Repo\LinkedData;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;

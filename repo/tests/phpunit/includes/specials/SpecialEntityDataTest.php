@@ -15,9 +15,9 @@ use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\LinkedData\EntityDataRequestHandler;
-use Wikibase\LinkedData\EntityDataSerializationService;
-use Wikibase\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
+use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
 use Wikibase\Repo\WikibaseRepo;
 

@@ -8,10 +8,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 
 /**
- * @covers \Wikibase\LinkedData\EntityDataSerializationService
+ * @covers Wikibase\Repo\LinkedData\EntityDataSerializationService
  *
  * @group Wikibase
  * @group WikibaseEntityData

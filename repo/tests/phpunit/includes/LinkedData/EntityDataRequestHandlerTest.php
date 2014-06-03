@@ -14,12 +14,12 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\LinkedData\EntityDataRequestHandler;
-use Wikibase\LinkedData\EntityDataSerializationService;
-use Wikibase\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
+use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
 /**
- * @covers Wikibase\LinkedData\EntityDataRequestHandler
+ * @covers Wikibase\Repo\LinkedData\EntityDataRequestHandler
  *
  * @group Database
  *
