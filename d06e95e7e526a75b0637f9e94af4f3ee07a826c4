@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_0dcde562",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-03T20:32:01Z",
+      "side": 1,
+      "message": "Does this solve the problem Hoo had? I\u0027m not sure how to test this.",
+      "revId": "d06e95e7e526a75b0637f9e94af4f3ee07a826c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
