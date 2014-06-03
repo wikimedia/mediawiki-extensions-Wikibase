@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_369b561d",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-03T14:13:02Z",
+      "side": 1,
+      "message": "what docs do you think it needs?",
+      "parentUuid": "2e1a5767_5396e4f4",
+      "revId": "2f10c0a1ac8f5e9df57d16c2df115fa92696f4f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_339b681d",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-03T09:01:36Z",
       "side": 1,
       "message": "missing docs",
+      "revId": "2f10c0a1ac8f5e9df57d16c2df115fa92696f4f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_16a05a3d",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-03T14:13:02Z",
+      "side": 1,
+      "message": "I removed the @see, which was no longer applicable and the @since, which was pointless. Adding docs that where missing is not the goal of this commit, and can be easily done afterwards.",
+      "parentUuid": "2e1a5767_339b681d",
       "revId": "2f10c0a1ac8f5e9df57d16c2df115fa92696f4f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_f684beb7",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-03T14:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e1a5767_93f47c52",
+      "revId": "2f10c0a1ac8f5e9df57d16c2df115fa92696f4f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_13a06c3d",
         "filename": "client/includes/specials/SpecialUnconnectedPages.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-06-03T09:01:36Z",
       "side": 1,
       "message": "really?",
+      "revId": "2f10c0a1ac8f5e9df57d16c2df115fa92696f4f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_d681c2a5",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-03T14:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e1a5767_13a06c3d",
       "revId": "2f10c0a1ac8f5e9df57d16c2df115fa92696f4f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
