@@ -24,25 +24,10 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 	/**
 	 * @var EntityRevision[]
 	 */
-	protected static $testEntities = array();
-
-	public function setUp( ) {
-		if ( !defined( 'WB_VERSION' ) ) {
-			$this->markTestSkipped( "Only works on the repository (can't do foreign db access in unit tests)." );
-		}
-
-		parent::setUp();
-	}
+	private static $testEntities = array();
 
 	protected static function storeTestEntity( Entity $entity ) {
 		global $wgUser;
-
-		//FIXME: We are using WikibaseRepo here, which is not available on the client.
-		//      For now, this test case will only work on the repository.
-
-		if ( !defined( 'WB_VERSION' ) ) {
-			throw new \MWException( "Can't generate test entities in a client database." );
-		}
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$revision = $store->saveEntity( $entity, "storeTestEntity", $wgUser );
