@@ -11,8 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- *
- * @todo: rename to SiteLinkIndex
  */
 interface SiteLinkCache extends SiteLinkLookup {
 
