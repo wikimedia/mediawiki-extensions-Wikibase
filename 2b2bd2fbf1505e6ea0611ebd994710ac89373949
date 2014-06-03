@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_c8bfdba6",
+        "filename": "repo/includes/EntityDiffVisualizer.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-03T21:15:35Z",
+      "side": 1,
+      "message": "Capitalisation.",
+      "revId": "2b2bd2fbf1505e6ea0611ebd994710ac89373949",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_a8a5bf9c",
+        "filename": "repo/includes/content/EntityContentDiff.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-03T21:15:35Z",
+      "side": 1,
+      "message": "So EntityContentDiff is in Repo, EntityDiff is in WikibaseDataModel and the redirect diff doesn\u0027t even have a dedicated class? I think I understand the reasons for all three decisions. Still feels odd. Like we can\u0027t agree.",
+      "revId": "2b2bd2fbf1505e6ea0611ebd994710ac89373949",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
