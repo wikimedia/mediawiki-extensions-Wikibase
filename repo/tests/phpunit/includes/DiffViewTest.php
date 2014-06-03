@@ -20,6 +20,8 @@ use Wikibase\DiffView;
 class DiffViewTest extends \PHPUnit_Framework_TestCase {
 
 	public function diffOpProvider() {
+		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
+
 		return array(
 			'Empty' => array(
 				'@^$@',
@@ -42,13 +44,13 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 				'@<a\b[^>]* href="[^"]*\bNEW"[^>]*>NEW</a>@',
 				null,
 				'NEW',
-				'links/enwiki'
+				$linkPath . '/enwiki'
 			),
 			'Link has direction' => array(
 				'@<a\b[^>]* hreflang="en" dir="auto"@',
 				null,
 				'NEW',
-				'links/enwiki'
+				$linkPath . '/enwiki'
 			),
 		);
 	}
