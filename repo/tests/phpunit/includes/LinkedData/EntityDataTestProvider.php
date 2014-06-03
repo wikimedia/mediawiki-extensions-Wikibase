@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 
 /**
  * Provider class for EntityData tests.

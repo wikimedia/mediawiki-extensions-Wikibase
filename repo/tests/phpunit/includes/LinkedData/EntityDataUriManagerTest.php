@@ -6,10 +6,10 @@ use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
 /**
- * @covers Wikibase\LinkedData\EntityUriManager
+ * @covers Wikibase\Repo\LinkedData\EntityDataUriManager
  *
  * @group Database
  * ^--- just because Title is a mess

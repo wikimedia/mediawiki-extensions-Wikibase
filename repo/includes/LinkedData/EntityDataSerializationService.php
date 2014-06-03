@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\LinkedData;
+namespace Wikibase\Repo\LinkedData;
 
 use ApiFormatBase;
 use ApiFormatXml;
