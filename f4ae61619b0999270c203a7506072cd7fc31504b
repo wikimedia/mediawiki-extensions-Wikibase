@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_88c3230a",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "rather wb-badges-container ? The current name seems to generic",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_88b203e3",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "this selector looks overly complicated to me... can\u0027t we simplify it?",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_c8a8fb76",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "image not included in this PS",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_28e88fae",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "spaces, not tabs",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_0871530b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "include suggests that there will be more, but you plan to show all of them, right? Also I\u0027m not sure this scales with more than maybe 5 badges.",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_c8d6bbf6",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_e8261711",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "maybe add the example of featured article or so?",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_48106bad",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T21:18:40Z",
+      "side": 1,
+      "message": "* defined",
+      "revId": "f4ae61619b0999270c203a7506072cd7fc31504b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
