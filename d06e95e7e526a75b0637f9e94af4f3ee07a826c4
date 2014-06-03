@@ -16,6 +16,41 @@
       "revId": "d06e95e7e526a75b0637f9e94af4f3ee07a826c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_6d21f9ab",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T20:45:08Z",
+      "side": 1,
+      "message": "I didn\u0027t test this, but I\u0027m pretty sure you\u0027ll have to move it up. If you reset the instance *after* mocking the store, the default store will be used again",
+      "parentUuid": "2e1a5767_0dcde562",
+      "revId": "d06e95e7e526a75b0637f9e94af4f3ee07a826c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_4d3f5dd4",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T20:45:08Z",
+      "side": 1,
+      "message": "just use WikibaseClient::getDefaultInstance( \u0027reset\u0027 ); here, that\u0027s easier and it also resets the SnakFormatters etc.",
+      "revId": "d06e95e7e526a75b0637f9e94af4f3ee07a826c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
