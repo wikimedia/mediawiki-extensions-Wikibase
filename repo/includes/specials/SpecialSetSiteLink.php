@@ -214,10 +214,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	protected function getFormElements( Entity $entity = null ) {
 		if ( $this->page === null ) {
-			$this->page = $this->getSiteLink( $entity, $this->site );
+			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
 		if ( $this->badges === null ) {
-			$this->badges = $this->getBadges( $entity, $this->site );
+			$this->badges = $this->site === null ? array() : $this->getBadges( $entity, $this->site );
 		}
 		$pageinput = Html::input(
 			'page',
