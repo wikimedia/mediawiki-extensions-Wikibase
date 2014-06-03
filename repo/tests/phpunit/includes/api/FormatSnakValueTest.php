@@ -105,14 +105,13 @@ class FormatSnakValueTest extends \ApiTestCase {
 				null,
 				'@commons\.wikimedia\.org\/wiki\/File:Example\.jpg@' ),
 
-			// FIXME: This test uses the production environment, but it should have its own mock data
 			array( new EntityIdValue( new ItemId( 'Q200000' ) ),
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'/^<a\b[^>]* href="[^"]*\bQ200000"[^>]*>[^<]*<\/a>.*$/' ),
+				'/^<span.*\bQ200000\b".*>.*' . preg_quote( wfMessage( 'wikibase-deletedentity-item' )->text(),  '/' ) . '.*<\/span>$/' ),
 
-			//TODO: test HTML output
+			// @TODO: Test an existing Item id
 		);
 	}
 
