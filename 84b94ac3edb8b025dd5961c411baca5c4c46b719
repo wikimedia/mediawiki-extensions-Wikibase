@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_1c9ab966",
+        "filename": "client/includes/parserhooks/PropertyParserFunctionRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-03T17:27:09Z",
+      "side": 1,
+      "message": "Because of mistake. :-( See Ia58896fc4f5af6939e37ff74d7dbd82440171197.",
+      "parentUuid": "2e1a5767_1c275961",
+      "revId": "84b94ac3edb8b025dd5961c411baca5c4c46b719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_3cb8d5e1",
         "filename": "lib/includes/Validators/EntityExistsValidator.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-03T17:15:41Z",
       "side": 1,
       "message": "no documentation here? (i realize it\u0027s somewhat obvious, but consistency is helpful)",
+      "revId": "84b94ac3edb8b025dd5961c411baca5c4c46b719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_dc9b2167",
+        "filename": "lib/includes/Validators/EntityExistsValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-03T17:27:09Z",
+      "side": 1,
+      "message": "I fully agree. See my long rant at I908c43505c3ef66386b123c01cdc40bcba9ef9b8. But in this case it\u0027s really, really, really obvious and I did not wanted to revert everything Jeroen did.",
+      "parentUuid": "2e1a5767_3cb8d5e1",
       "revId": "84b94ac3edb8b025dd5961c411baca5c4c46b719",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
