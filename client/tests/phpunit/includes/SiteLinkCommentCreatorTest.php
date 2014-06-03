@@ -15,6 +15,7 @@ use Wikibase\SiteLinkCommentCreator;
  *
  * @group Wikibase
  * @group WikibaseClient
+ * @group SiteLinkCommentCreatorTest
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -83,7 +84,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->getNewItem();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Japan' ) );
 
-		$item2 = $item->copy();
+		$item2 = $this->getNewItem();
 		$item2->removeSiteLink( 'enwiki' );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
@@ -95,7 +96,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->getNewItem();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Japan' ) );
 
-		$item2 = $item->copy();
+		$item2 = $this->getNewItem();
 		$item2->addSiteLink( new SiteLink( 'enwiki', 'Tokyo' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
@@ -115,7 +116,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->getNewItem();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Japan' ) );
 
-		$item2 = $item->copy();
+		$item2 = $this->getNewItem();
 		$item2->addSiteLink( new SiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
@@ -166,7 +167,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Japan' ) );
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Japan' ) );
 
-		$item2 = $item->copy();
+		$item2 = $this->getNewItem();
+		$item2->addSiteLink( new SiteLink( 'enwiki', 'Japan' ) );
 		$item2->addSiteLink( new SiteLink( 'dewiki', 'Tokyo' ) );
 
 		$change = ItemChange::newFromUpdate( ItemChange::UPDATE, $item, $item2 );
