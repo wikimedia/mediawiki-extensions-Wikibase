@@ -17,12 +17,12 @@ class HttpAcceptNegotiator {
 	/**
 	 * @var array
 	 */
-	protected $supportedValues;
+	private $supportedValues;
 
 	/**
 	 * @var mixed
 	 */
-	protected $defaultValue;
+	private $defaultValue;
 
 	/**
 	 * @param array $supported A list of supported values.
