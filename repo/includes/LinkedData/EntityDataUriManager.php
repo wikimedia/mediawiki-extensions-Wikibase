@@ -17,24 +17,24 @@ use Wikibase\EntityTitleLookup;
 class EntityDataUriManager {
 
 	/**
-	 * @var \Title
+	 * @var Title
 	 */
-	protected $interfaceTitle;
+	private $interfaceTitle;
 
 	/**
 	 * @var String[]
 	 */
-	protected $supportedExtensions;
+	private $supportedExtensions;
 
 	/**
 	 * @var EntityTitleLookup
 	 */
-	protected $entityTitleLookup;
+	private $entityTitleLookup;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param \Title               $interfaceTitle
+	 * @param Title                $interfaceTitle
 	 * @param string[]             $supportedExtensions an associative Array mapping canonical format names to file extensions.
 	 * @param EntityTitleLookup    $entityTitleLookup
 	 */

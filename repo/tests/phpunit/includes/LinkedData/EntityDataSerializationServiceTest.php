@@ -25,7 +25,7 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
 
-	protected function newService() {
+	private function newService() {
 		$entityLookup = new MockRepository();
 
 		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
@@ -70,7 +70,6 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 		return $service;
 	}
 
-
 	public static function provideGetSerializedData() {
 		$cases = EntityDataTestProvider::provideGetSerializedData();
 
@@ -79,7 +78,6 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideGetSerializedData
-	 *
 	 */
 	public function testGetSerializedData(
 		$format,
@@ -94,25 +92,25 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 		$this->assertRegExp( $expectedDataRegex, $data, "outpout" );
 	}
 
-	protected static $apiMimeTypes = array(
+	private static $apiMimeTypes = array(
 		'application/vnd.php.serialized',
 		'application/json',
 		'text/xml'
 	);
 
-	protected static $apiExtensions = array(
+	private static $apiExtensions = array(
 		'php',
 		'json',
 		'xml'
 	);
 
-	protected static $apiFormats = array(
+	private static $apiFormats = array(
 		'php',
 		'json',
 		'xml'
 	);
 
-	protected static $rdfMimeTypes = array(
+	private static $rdfMimeTypes = array(
 		'application/rdf+xml',
 		'text/n3',
 		'text/rdf+n3',
@@ -121,33 +119,33 @@ class EntityDataSerializationServiceTest extends \PHPUnit_Framework_TestCase {
 		'application/ntriples',
 	);
 
-	protected static $rdfExtensions = array(
+	private static $rdfExtensions = array(
 		'rdf',
 		'n3',
 		'ttl',
 		'nt'
 	);
 
-	protected static $rdfFormats = array(
+	private static $rdfFormats = array(
 		'rdfxml',
 		'n3',
 		'turtle',
 		'ntriples'
 	);
 
-	protected static $badMimeTypes = array(
+	private static $badMimeTypes = array(
 		'text/html',
 		'text/text',
 		// 'text/plain', // ntriples presents as text/plain!
 	);
 
-	protected static $badExtensions = array(
+	private static $badExtensions = array(
 		'html',
 		'text',
 		'txt',
 	);
 
-	protected static $badFormats = array(
+	private static $badFormats = array(
 		'html',
 		'text',
 	);

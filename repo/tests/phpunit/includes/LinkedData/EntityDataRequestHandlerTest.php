@@ -35,7 +35,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @var Title
 	 */
-	protected $interfaceTitle;
+	private $interfaceTitle;
 
 	/**
 	 * @var int
