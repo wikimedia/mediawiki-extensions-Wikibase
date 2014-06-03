@@ -61,17 +61,17 @@ class PropertyParserFunctionRenderer {
 	}
 
 	/**
-	 * @param string $IdOrLabel
+	 * @param string $idOrLabel
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws PropertyLabelNotResolvedException
 	 * @return PropertyId
 	 */
-	private function getPropertyIdFromIdSerializationOrLabel( $IdOrLabel ) {
+	private function getPropertyIdFromIdSerializationOrLabel( $idOrLabel ) {
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		try {
-			$propertyId = $idParser->parse( $IdOrLabel );
+			$propertyId = $idParser->parse( $idOrLabel );
 
 			if ( !( $propertyId instanceof PropertyId ) ) {
 				throw new InvalidArgumentException( 'Not a valid property id' );
@@ -84,13 +84,13 @@ class PropertyParserFunctionRenderer {
 			//
 			//     $this->propertyLabelResolver->preloadLabelsFor( $propertiesUsedByItem );
 
-			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $IdOrLabel ) );
+			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $idOrLabel ) );
 
 			if ( empty( $propertyIds ) ) {
-				throw new PropertyLabelNotResolvedException( $IdOrLabel, $this->language->getCode() );
+				throw new PropertyLabelNotResolvedException( $idOrLabel, $this->language->getCode() );
 			}
 
-			$propertyId = $propertyIds[$IdOrLabel];
+			$propertyId = $propertyIds[$idOrLabel];
 		}
 
 		return $propertyId;
