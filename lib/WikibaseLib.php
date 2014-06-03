@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Welcome to the inside of Wikibase,              <>
  * the software that powers                   /\        /\
  * Wikidata and other                       <{  }>    <{  }>
