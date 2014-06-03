@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_8d49f56c",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T20:14:50Z",
+      "side": 1,
+      "message": "superfluous",
+      "revId": "395df1a11b41b81a03d93cd4e06a4e82485521a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_6d4e9974",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T20:14:50Z",
+      "side": 1,
+      "message": "superfluous",
+      "revId": "395df1a11b41b81a03d93cd4e06a4e82485521a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_0d472524",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-03T20:14:50Z",
+      "side": 1,
+      "message": "you could use an EntityContent type hint here",
+      "revId": "395df1a11b41b81a03d93cd4e06a4e82485521a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
