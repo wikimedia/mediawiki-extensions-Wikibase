@@ -29,19 +29,46 @@ use Wikibase\Lib\Store\EntityLookup;
  */
 class EntityViewPlaceholderExpander {
 
-	private $user;
+	/**
+	 * @var Title
+	 */
 	private $targetPage;
-	private $extraLanguages = null;
-	private $idParser;
+
+	/**
+	 * @var User
+	 */
+	private $user;
+
+	/**
+	 * @var Language
+	 */
+	private $uiLanguage;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
+	 * @var EntityLookup
+	 */
 	private $entityLookup;
+
+	/**
+	 * @var UserLanguageLookup
+	 */
 	private $userLanguageLookup;
+
+	/**
+	 * @var string[]|null
+	 */
+	private $extraLanguages = null;
 
 	/**
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
-	 *
-	 * @param EntityIdParser $idParser
+	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param UserLanguageLookup $userLanguageLookup
 	 */
@@ -49,14 +76,14 @@ class EntityViewPlaceholderExpander {
 		Title $targetPage,
 		User $user,
 		Language $uiLanguage,
-		EntityIdParser $idParser,
+		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		UserLanguageLookup $userLanguageLookup
 	) {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
 		$this->uiLanguage = $uiLanguage;
-		$this->idParser = $idParser;
+		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
 		$this->userLanguageLookup = $userLanguageLookup;
 	}
@@ -127,7 +154,7 @@ class EntityViewPlaceholderExpander {
 			);
 		}
 
-		return $this->idParser->parse( $entityId );
+		return $this->entityIdParser->parse( $entityId );
 	}
 
 	/**

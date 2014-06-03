@@ -16,7 +16,9 @@ use Wikibase\Lib\SnakFormatter;
 
 class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 
-	/* @var WikibaseLuaEntityBindings */
+	/**
+	 * @var WikibaseLuaEntityBindings
+	 */
 	private $wbLibrary;
 
 	/**
@@ -69,7 +71,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function getGlobalSiteId() {
 		return array( $this->wbLibrary->getGlobalSiteId() );
@@ -82,10 +84,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $entityId
 	 * @param string $propertyId
-	 * @param array $acceptableRanks
+	 * @param int[] $acceptableRanks
 	 *
 	 * @throws ScribuntoException
-	 * @return array
+	 * @return string[]
 	 */
 	public function formatPropertyValues( $entityId, $propertyId, array $acceptableRanks ) {
 		$this->checkType( 'formatPropertyValues', 0, $entityId, 'string' );

@@ -3,8 +3,11 @@
 namespace Wikibase;
 
 use DatabaseUpdater;
+use DBAccessBase;
 use DBError;
+use HashBagOStuff;
 use InvalidArgumentException;
+use ObservableMessageReporter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
@@ -17,31 +20,38 @@ use Wikibase\Lib\Store\WikiPageEntityLookup;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
+class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 
+	/**
+	 * @var string
+	 */
 	private $tableName;
+
+	/**
+	 * @var bool
+	 */
 	private $isReadonly;
 
 	/**
-	 * @param bool $readonly Whether the table can be modified.
+	 * @param bool $isReadonly Whether the table can be modified.
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 */
-	public function __construct( $readonly, $wiki = false ) {
-		assert( is_bool( $readonly ) );
+	public function __construct( $isReadonly, $wiki = false ) {
+		assert( is_bool( $isReadonly ) );
 		assert( is_string( $wiki ) || $wiki === false );
 
 		$this->tableName = 'wb_property_info';
-		$this->isReadonly = $readonly;
+		$this->isReadonly = $isReadonly;
 		$this->wiki = $wiki;
 	}
 
 	/**
 	 * Register the updates needed for creating the appropriate table(s).
 	 *
-	 * @param \DatabaseUpdater $updater
+	 * @param DatabaseUpdater $updater
 	 */
-	public static function registerDatabaseUpdates( \DatabaseUpdater $updater ) {
+	public static function registerDatabaseUpdates( DatabaseUpdater $updater ) {
 		$table = 'wb_property_info';
 
 		if ( !$updater->tableExists( $table ) ) {
@@ -69,7 +79,7 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	 * @param DatabaseUpdater $updater
 	 */
 	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
-		$reporter = new \ObservableMessageReporter();
+		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			function ( $msg ) use ( $updater ) {
 				$updater->output( "..." . $msg . "\n" );
@@ -78,7 +88,7 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 
 		$table = new PropertyInfoTable( false );
 		$wikiPageEntityLookup = new WikiPageEntityLookup( false );
-		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
+		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new HashBagOStuff() );
 
 		$builder = new PropertyInfoTableBuilder( $table, $cachingEntityLookup );
 		$builder->setReporter( $reporter );
@@ -153,7 +163,7 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	 *
 	 * @return array[]
 	 *
-	 * @throws \DBError
+	 * @throws DBError
 	 */
 	public function getAllPropertyInfo() {
 		wfProfileIn( __METHOD__ );
@@ -279,4 +289,5 @@ class PropertyInfoTable extends \DBAccessBase implements PropertyInfoStore {
 	public function getTableName() {
 		return $this->tableName;
 	}
+
 }

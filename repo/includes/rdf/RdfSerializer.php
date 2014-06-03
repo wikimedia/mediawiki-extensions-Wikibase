@@ -20,9 +20,30 @@ use Wikibase\Lib\Store\EntityLookup;
  */
 class RdfSerializer {
 
-	private $entityLookup;
+	/**
+	 * @var string
+	 */
+	private $baseUri;
+
+	/**
+	 * @var string
+	 */
+	private $dataUri;
+
+	/**
+	 * @var EasyRdf_Format
+	 */
 	private $format;
+
+	/**
+	 * @var SiteList
+	 */
 	private $sites;
+
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
 
 	/**
 	 * @param EasyRdf_Format $format
@@ -147,4 +168,5 @@ class RdfSerializer {
 	public function getDefaultMimeType() {
 		return $this->format->getDefaultMimeType();
 	}
+
 }

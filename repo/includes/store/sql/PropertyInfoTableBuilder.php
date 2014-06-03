@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\EntityLookup;
  */
 class PropertyInfoTableBuilder {
 
-	private $table;
+	private $propertyInfoTable;
 	private $entityLookup;
 
 	/**
@@ -51,8 +51,8 @@ class PropertyInfoTableBuilder {
 	 */
 	protected $batchSize = 100;
 
-	public function __construct( PropertyInfoTable $table, EntityLookup $entityLookup ) {
-		$this->table = $table;
+	public function __construct( PropertyInfoTable $propertyInfoTable, EntityLookup $entityLookup ) {
+		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
 	}
 
@@ -128,7 +128,7 @@ class PropertyInfoTableBuilder {
 	 * @since 0.4
 	 */
 	public function rebuildPropertyInfo() {
-		$dbw = $this->table->getWriteConnection();
+		$dbw = $this->propertyInfoTable->getWriteConnection();
 
 		$rowId = $this->fromId -1;
 
@@ -141,7 +141,7 @@ class PropertyInfoTableBuilder {
 			// Find properties in wb_entity_per_page with no corresponding
 			// entry in wb_property_info.
 
-			$piTable = $this->table->getTableName();
+			$piTable = $this->propertyInfoTable->getTableName();
 
 			$tables[] = $piTable;
 			$join[$piTable] = array( 'LEFT JOIN',
@@ -218,7 +218,7 @@ class PropertyInfoTableBuilder {
 	 * @author Tim Starling (stolen from recompressTracked.php)
 	 */
 	protected function waitForSlaves() {
-		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->table
+		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->propertyInfoTable
 
 		while ( true ) {
 			list( $host, $maxLag ) = $lb->getMaxLag();
@@ -254,7 +254,7 @@ class PropertyInfoTableBuilder {
 			);
 		}
 
-		$update = new PropertyInfoUpdate( $property, $this->table );
+		$update = new PropertyInfoUpdate( $property, $this->propertyInfoTable );
 		$update->doUpdate();
 	}
 

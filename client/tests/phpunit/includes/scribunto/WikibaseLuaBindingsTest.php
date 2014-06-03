@@ -5,11 +5,11 @@ namespace Wikibase\Client\Scribunto\Test;
 use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaBindings;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -62,8 +62,8 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getEntityProvider
 	 */
-	public function testGetEntity( $expected, $entity, $entityLookup ) {
-		$prefixedId = $entity->getId()->getSerialization();
+	public function testGetEntity( array $expected, Item $item, EntityLookup $entityLookup ) {
+		$prefixedId = $item->getId()->getSerialization();
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
 		$entityArr = $wikibaseLibrary->getEntity( $prefixedId );
 		$actual = is_array( $entityArr ) ? array_keys( $entityArr ) : array();
@@ -115,7 +115,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideZeroIndexedArray
 	 */
-	public function testZeroIndexArray ( $array, $expected ) {
+	public function testZeroIndexArray ( array $array, array $expected ) {
 		$this->getWikibaseLibraryImplementation()->renumber( $array );
 		$this->assertSame( $expected, $array );
 	}
@@ -147,4 +147,5 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			),
 		);
 	}
+
 }

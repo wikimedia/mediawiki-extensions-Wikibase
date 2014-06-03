@@ -5,6 +5,8 @@ namespace Wikibase\Test;
 use Language;
 use Parser;
 use ParserOptions;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\PropertyParserFunction;
@@ -22,10 +24,21 @@ use Wikibase\PropertyParserFunction;
  */
 class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 
-	public function getPropertyParserFunction( $parser, $entityId, $entity = null ) {
+	/**
+	 * @param Parser $parser
+	 * @param EntityId $entityId
+	 * @param Entity|null $entity
+	 *
+	 * @return PropertyParserFunction
+	 */
+	private function getPropertyParserFunction(
+		Parser $parser,
+		EntityId $entityId,
+		Entity $entity = null
+	) {
 		$entityLookup = new MockRepository();
 
-		if ( $entity ) {
+		if ( $entity !== null ) {
 			$entityLookup->putEntity( $entity );
 		}
 
@@ -61,7 +74,11 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider isParserUsingVariantsProvider
 	 */
 	public function testIsParserUsingVariants(
-		$outputType, $interfaceMessage, $disableContentConversion, $disableTitleConversion, $expected
+		$outputType,
+		$interfaceMessage,
+		$disableContentConversion,
+		$disableTitleConversion,
+		$expected
 	) {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
@@ -88,7 +105,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider processRenderedArrayProvider
 	 */
-	public function testProcessRenderedArray( $outputType, $textArray, $expected ) {
+	public function testProcessRenderedArray( $outputType, array $textArray, $expected ) {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
@@ -133,4 +150,5 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 			$result
 		);
 	}
+
 }

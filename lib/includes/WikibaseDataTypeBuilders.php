@@ -31,14 +31,26 @@ use Wikibase\Validators\UrlValidator;
  */
 class WikibaseDataTypeBuilders {
 
-	private $entityLookup;
+	/**
+	 * @var EntityIdParser
+	 */
 	private $entityIdParser;
 
 	/**
-	 * @var array
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @var string[]
 	 */
 	private $urlSchemes;
 
+	/**
+	 * @param EntityLookup $lookup
+	 * @param EntityIdParser $idParser
+	 * @param string[] $urlSchemes
+	 */
 	public function __construct(
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
@@ -245,7 +257,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'globe-coordinate'
+	 * @param string $id Data type ID, typically 'globe-coordinate'
 	 *
 	 * @return DataType
 	 */
@@ -297,7 +309,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'url'
+	 * @param string $id Data type ID, typically 'url'
 	 *
 	 * @return DataType
 	 */
@@ -312,7 +324,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'quantity'
+	 * @param string $id Data type ID, typically 'quantity'
 	 *
 	 * @return DataType
 	 */

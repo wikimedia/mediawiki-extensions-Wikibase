@@ -4,11 +4,11 @@ namespace Wikibase\Client\Scribunto;
 
 use Language;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
 
@@ -23,19 +23,29 @@ use Wikibase\Lib\Store\EntityLookup;
 
 class WikibaseLuaEntityBindings {
 
-	/* @var EntityLookup */
-	private $entityLookup;
-
-	/* @var Language */
-	private $language;
-
-	/* @var string */
-	private $siteId;
-
-	/* @var SnakFormatter */
+	/**
+	 * @var SnakFormatter
+	 */
 	private $snakFormatter;
 
-	/* @var Entity[] */
+	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @var string
+	 */
+	private $siteId;
+
+	/**
+	 * @var Language
+	 */
+	private $language;
+
+	/**
+	 * @var Entity[]
+	 */
 	private $entities = array();
 
 	/**
@@ -94,7 +104,7 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @return string
 	 */
-	private function formatSnakList( $snaks ) {
+	private function formatSnakList( array $snaks ) {
 		$formattedValues = $this->formatSnaks( $snaks );
 		return $this->language->commaList( $formattedValues );
 	}
@@ -104,14 +114,14 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @return string[]
 	 */
-	private function formatSnaks( $snaks ) {
-		$strings = array();
+	private function formatSnaks( array $snaks ) {
+		$formattedValues = array();
 
 		foreach ( $snaks as $snak ) {
-			$strings[] = $this->snakFormatter->formatSnak( $snak );
+			$formattedValues[] = $this->snakFormatter->formatSnak( $snak );
 		}
 
-		return $strings;
+		return $formattedValues;
 	}
 
 	/**
@@ -121,7 +131,7 @@ class WikibaseLuaEntityBindings {
 	 *
 	 * @param string $entityId
 	 * @param string $propertyId
-	 * @param array $acceptableRanks
+	 * @param int[] $acceptableRanks
 	 *
 	 * @return string
 	 */
@@ -166,4 +176,5 @@ class WikibaseLuaEntityBindings {
 	public function getGlobalSiteId() {
 		return $this->siteId;
 	}
+
 }

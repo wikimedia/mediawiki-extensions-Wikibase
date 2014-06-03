@@ -28,15 +28,18 @@ class PropertyParserFunctionRenderer {
 	private $language;
 	private $entityLookup;
 	private $propertyLabelResolver;
-	private $snaksFormatter;
+	private $snakFormatter;
 
-	public function __construct( Language $language,
-		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver,
-		SnakFormatter $snaksFormatter ) {
+	public function __construct(
+		Language $language,
+		EntityLookup $entityLookup,
+		PropertyLabelResolver $propertyLabelResolver,
+		SnakFormatter $snakFormatter
+	) {
 		$this->language = $language;
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
-		$this->snaksFormatter = $snaksFormatter;
+		$this->snakFormatter = $snakFormatter;
 	}
 
 	/**
@@ -58,18 +61,19 @@ class PropertyParserFunctionRenderer {
 	}
 
 	/**
-	 * @param string $string
-	 * @return PropertyId
+	 * @param string $IdOrLabel
+	 *
 	 * @throws InvalidArgumentException
 	 * @throws PropertyLabelNotResolvedException
+	 * @return PropertyId
 	 */
-	private function getPropertyIdFromIdSerializationOrLabel( $string ) {
+	private function getPropertyIdFromIdSerializationOrLabel( $IdOrLabel ) {
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		try {
-			$propertyId = $idParser->parse( $string );
+			$propertyId = $idParser->parse( $IdOrLabel );
 
-			if ( ! ( $propertyId instanceof PropertyId ) ) {
+			if ( !( $propertyId instanceof PropertyId ) ) {
 				throw new InvalidArgumentException( 'Not a valid property id' );
 			}
 		} catch ( EntityIdParsingException $ex ) {
@@ -80,13 +84,13 @@ class PropertyParserFunctionRenderer {
 			//
 			//     $this->propertyLabelResolver->preloadLabelsFor( $propertiesUsedByItem );
 
-			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $string ) );
+			$propertyIds = $this->propertyLabelResolver->getPropertyIdsForLabels( array( $IdOrLabel ) );
 
-			if ( $propertyIds === null || empty( $propertyIds ) ) {
-				throw new PropertyLabelNotResolvedException( $string, $this->language->getCode() );
+			if ( empty( $propertyIds ) ) {
+				throw new PropertyLabelNotResolvedException( $IdOrLabel, $this->language->getCode() );
 			}
 
-			$propertyId = $propertyIds[$string];
+			$propertyId = $propertyIds[$IdOrLabel];
 		}
 
 		return $propertyId;
@@ -97,19 +101,24 @@ class PropertyParserFunctionRenderer {
 	 *
 	 * @return string - wikitext format
 	 */
-	private function formatSnakList( $snaks ) {
+	private function formatSnakList( array $snaks ) {
 		$formattedValues = $this->formatSnaks( $snaks );
 		return $this->language->commaList( $formattedValues );
 	}
 
-	private function formatSnaks( $snaks ) {
-		$strings = array();
+	/**
+	 * @param Snak[] $snaks
+	 *
+	 * @return string[]
+	 */
+	private function formatSnaks( array $snaks ) {
+		$formattedValues = array();
 
 		foreach ( $snaks as $snak ) {
-			$strings[] = $this->snaksFormatter->formatSnak( $snak );
+			$formattedValues[] = $this->snakFormatter->formatSnak( $snak );
 		}
 
-		return $strings;
+		return $formattedValues;
 	}
 
 	/**

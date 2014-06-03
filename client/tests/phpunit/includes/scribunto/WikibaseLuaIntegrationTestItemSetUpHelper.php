@@ -24,7 +24,9 @@ use Wikibase\Test\MockRepository;
  */
 class WikibaseLuaIntegrationTestItemSetUpHelper {
 
-	/* @var MockRepository */
+	/**
+	 * @var MockRepository
+	 */
 	protected $mockRepository;
 
 	public function __construct() {
@@ -94,9 +96,9 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	}
 
 	/**
-	 * @param array $labels
+	 * @param string[] $labels
 	 * @param Claim[]|null $claims
-	 * @param array $siteLinks
+	 * @param SiteLink[]|null $siteLinks
 	 *
 	 * @return Item
 	 */
@@ -124,6 +126,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	/**
 	 * @param PropertyId $propertyId
 	 * @param DataValue $value
+	 *
 	 * @return Snak
 	 */
 	protected function getTestSnak( PropertyId $propertyId, DataValue $value ) {
@@ -135,6 +138,7 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 
 	/**
 	 * @param Snak $mainSnak
+	 *
 	 * @return Statement
 	 */
 	protected function getTestStatement( Snak $mainSnak ) {

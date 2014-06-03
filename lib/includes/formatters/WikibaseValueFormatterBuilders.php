@@ -11,10 +11,10 @@ use ValueFormatters\GeoCoordinateFormatter;
 use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Defines the formatters for DataValues supported by Wikibase.
@@ -26,8 +26,19 @@ use Wikibase\LanguageFallbackChainFactory;
  */
 class WikibaseValueFormatterBuilders {
 
+	/**
+	 * @var EntityLookup
+	 */
 	private $entityLookup;
+
+	/**
+	 * @var Language
+	 */
 	private $defaultLanguage;
+
+	/**
+	 * @var EntityTitleLookup|null
+	 */
 	private $entityTitleLookup;
 
 	/**
@@ -98,11 +109,11 @@ class WikibaseValueFormatterBuilders {
 	);
 
 	public function __construct(
-		EntityLookup $lookup,
+		EntityLookup $entityLookup,
 		Language $defaultLanguage,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		$this->entityLookup = $lookup;
+		$this->entityLookup = $entityLookup;
 		$this->defaultLanguage = $defaultLanguage;
 		$this->entityTitleLookup = $entityTitleLookup;
 	}

@@ -75,10 +75,11 @@ class PropertyParserFunction {
 	/**
 	 * Post-process rendered array (variant text) into wikitext to be used in pages.
 	 *
-	 * @param array $textArray
+	 * @param string[] $textArray
+	 *
 	 * @return string
 	 */
-	public function processRenderedArray( $textArray ) {
+	public function processRenderedArray( array $textArray ) {
 		// We got arrays, so they must have already checked that variants are being used.
 		$text = '';
 		foreach ( $textArray as $variantCode => $variantText ) {
@@ -95,6 +96,7 @@ class PropertyParserFunction {
 	 * Build a PropertyParserFunctionRenderer object for a given language.
 	 *
 	 * @param Language $language
+	 *
 	 * @return PropertyParserFunctionRenderer
 	 */
 	public function getRenderer( Language $language ) {
