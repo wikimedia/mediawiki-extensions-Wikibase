@@ -63,11 +63,26 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 					$label = $itemLabel;
 				}
 			} catch ( OutOfBoundsException $ex ) {
-				$attributes['class'] = 'new';
+				return $this->getHtmlForNonExistent( $entityId, $title );
 			}
 		}
 
 		$html = Html::element( 'a', $attributes, $label );
+
+		return $html;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @param Title $title
+	 *
+	 * @return string
+	 */
+	private function getHtmlForNonExistent( EntityId $entityId, Title $title ) {
+		$label = wfMessage( 'wikibase-deletedentity-' . $entityId->getEntityType() )->text();
+		$attributes = array( 'title' => $title->getPrefixedText() );
+
+		$html = Html::element( 'span', $attributes, $label );
 
 		return $html;
 	}
