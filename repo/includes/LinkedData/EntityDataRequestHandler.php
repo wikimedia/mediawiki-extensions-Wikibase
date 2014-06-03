@@ -12,8 +12,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
-use Wikibase\HttpAcceptNegotiator;
-use Wikibase\HttpAcceptParser;
+use Wikibase\Repo\LinkedData\HttpAcceptNegotiator;
+use Wikibase\Repo\LinkedData\HttpAcceptParser;
 use Wikibase\StorageException;
 
 /**

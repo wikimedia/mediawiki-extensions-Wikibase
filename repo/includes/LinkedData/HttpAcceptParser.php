@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\LinkedData;
 
 /**
  * Utility for parsing a HTTP Accept header value into a weight map. May also be used with
