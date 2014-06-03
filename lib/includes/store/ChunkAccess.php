@@ -1,21 +1,15 @@
 <?php
-/**
- * Interface for DAO objects providing chunked access.
- *
- * @since 0.4
- *
- * @licence GNU GPL v2+
- * @author Daniel Kinzler
- */
 
 namespace Wikibase;
-
 
 /**
  * Interface for DAO objects providing chunked access based on sequential indexes.
  * "holes" in the index sequence are acceptable but should not be frequent.
  *
- * @package Wikibase
+ * @since 0.4
+ *
+ * @licence GNU GPL v2+
+ * @author Daniel Kinzler
  */
 interface ChunkAccess {
 

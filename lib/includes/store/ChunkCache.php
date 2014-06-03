@@ -1,4 +1,9 @@
 <?php
+
+namespace Wikibase;
+
+use MWException;
+
 /**
  * Interface for DAO objects providing chunked access.
  *
@@ -7,18 +12,12 @@
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-
-namespace Wikibase;
-
-
-use MWException;
-
 class ChunkCache implements ChunkAccess {
 
 	/**
 	 * @var ChunkAccess
 	 */
-	protected $source;
+	private $source;
 
 	/**
 	 * Array containing cache entries; each entry is an associative array with the
@@ -32,39 +31,39 @@ class ChunkCache implements ChunkAccess {
 	 *
 	 * @var array
 	 */
-	protected $entries = array();
+	private $entries = array();
 
 	/**
 	 * @var int
 	 */
-	protected $size = 0;
+	private $size = 0;
 
 	/**
 	 * @var int
 	 */
-	protected $maxSize;
+	private $maxSize;
 
 	/**
 	 * @var int
 	 */
-	protected $chunkSize;
+	private $chunkSize;
 
 	/**
 	 * @var int
 	 */
-	protected $hitCount = 0;
+	private $hitCount = 0;
 
 	/**
 	 * @var int
 	 */
-	protected $missCount = 0;
+	private $missCount = 0;
 
 	/**
 	 * modification counter (logical clock)
 	 *
 	 * @var int
 	 */
-	protected $modCount = 0;
+	private $modCount = 0;
 
 	/**
 	 * @param ChunkAccess $source    The source to load from
@@ -221,7 +220,7 @@ class ChunkCache implements ChunkAccess {
 	 *         - next:  the id the following chunk starts at (or after)
 	 *         - touched: (logical) timestamp of the entry's creation (taken from $this->modCount)
 	 */
-	protected function insertChunk( $start, $size, $before ) {
+	private function insertChunk( $start, $size, $before ) {
 		assert( '$start >= 0' );
 		assert( '$size >= 0' );
 		assert( '$before >= 0' );
@@ -264,7 +263,7 @@ class ChunkCache implements ChunkAccess {
 	 *
 	 * Note that this implementation is rather inefficient for large number of chunks.
 	 */
-	protected function prune() {
+	private function prune() {
 		if ( $this->size <= $this->maxSize ) {
 			return;
 		}
@@ -291,7 +290,7 @@ class ChunkCache implements ChunkAccess {
 	 *
 	 * @return bool
 	 */
-	protected function dropChunk( $startKey ) {
+	private function dropChunk( $startKey ) {
 		foreach ( $this->entries as $pos => $entry ) {
 			if ( $entry['start'] === $startKey ) {
 				unset( $this->entries[$pos] );
@@ -347,4 +346,5 @@ class ChunkCache implements ChunkAccess {
 
 		return $this->hitCount / $total;
 	}
+
 }
