@@ -57,5 +57,6 @@
 	"wikibase-validator-not-allowed": "Nedozvoljena vrednost: $1",
 	"datatypes-type-wikibase-item": "Stavka",
 	"datatypes-type-commonsMedia": "Datoteka sa Ostave",
-	"version-wikibase": "Vikibaza"
+	"version-wikibase": "Vikibaza",
+	"wikibase-snakformatter-valuetype-mismatch": "Vrsta vrednosti „$1“ nepoklapa se sa vrstom svojstva „$2“."
 }
