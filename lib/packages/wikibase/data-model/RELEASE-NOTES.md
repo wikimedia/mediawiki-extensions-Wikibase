@@ -53,8 +53,8 @@ Other breaking changes:
 #### Additions
 
 * Added `AliasGroupList::hasGroupForLanguage`
-* Added `SiteLinkList::add`
-* Added `SiteLinkList::addObject`
+* Added `SiteLinkList::addSiteLink`
+* Added `SiteLinkList::addNewSiteLink`
 * Added `SiteLinkList::removeLinkWithSiteId`
 * Added `SiteLinkList::isEmpty`
 * Added `SiteLinkList::removeLinkWithSiteId`
