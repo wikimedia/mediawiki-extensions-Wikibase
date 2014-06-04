@@ -30,7 +30,7 @@ class EntityContentDataCodec {
 	public function getSupportedFormats() {
 		return array(
 			CONTENT_FORMAT_JSON,
-			CONTENT_FORMAT_SERIALIZED
+			CONTENT_FORMAT_SERIALIZED,
 		);
 	}
 
@@ -44,23 +44,15 @@ class EntityContentDataCodec {
 	}
 
 	/**
-	 * Returns a sanitized version of $format, or throws an exception if $format
-	 * is invalid.
+	 * Returns a sanitized version of $format.
 	 *
 	 * @param string|null $format The requested format. If null, getDefaultFormat() will
 	 * be consulted.
 	 *
 	 * @return string The format to actually use.
-	 * @throws InvalidArgumentException If $format is not supported.
 	 */
 	private function sanitizeFormat( $format ) {
-		if ( $format === null ) {
-			$format = $this->getDefaultFormat();
-		} elseif ( !in_array( $format, $this->getSupportedFormats() ) ) {
-			throw new InvalidArgumentException( "Unsupported format: $format" );
-		}
-
-		return $format;
+		return $format === null ? $this->getDefaultFormat() : $format;
 	}
 
 	/**
@@ -72,21 +64,24 @@ class EntityContentDataCodec {
 	 * @param array $data A nested data array representing an EntityContent object.
 	 * @param string|null $format The desired serialization format.
 	 *
-	 * @return string the blob
 	 * @throws InvalidArgumentException If the format is not supported.
+	 * @throws MWContentSerializationException If the array could not be encoded.
+	 * @return string the blob
 	 */
 	public function encodeEntityContentData( array $data, $format ) {
-		$format = $this->sanitizeFormat( $format );
-
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$blob = serialize( $data );
-				break;
+		switch ( $this->sanitizeFormat( $format ) ) {
 			case CONTENT_FORMAT_JSON:
 				$blob = json_encode( $data );
 				break;
+			case CONTENT_FORMAT_SERIALIZED:
+				$blob = serialize( $data );
+				break;
 			default:
-				throw new InvalidArgumentException( "Unsupported format: $format" );
+				throw new InvalidArgumentException( "Unsupported encoding format: $format" );
+		}
+
+		if ( !is_string( $blob ) ) {
+			throw new MWContentSerializationException( "Failed to encode as $format" );
 		}
 
 		return $blob;
@@ -101,27 +96,25 @@ class EntityContentDataCodec {
 	 * @param string $blob The data blob to deserialize
 	 * @param string|null $format The serialization format of $blob
 	 *
-	 * @return array An array representation of an EntityContent object
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException If the blob could not be decoded.
+	 * @return array An array representation of an EntityContent object
 	 */
 	public function decodeEntityContentData( $blob, $format ) {
 		if ( !is_string( $blob ) ) {
 			throw new InvalidArgumentException( '$blob must be a string' );
 		}
 
-		$format = $this->sanitizeFormat( $format );
-
 		wfSuppressWarnings();
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$data = unserialize( $blob );
-				break;
+		switch ( $this->sanitizeFormat( $format ) ) {
 			case CONTENT_FORMAT_JSON:
 				$data = json_decode( $blob, true );
 				break;
+			case CONTENT_FORMAT_SERIALIZED:
+				$data = unserialize( $blob );
+				break;
 			default:
-				throw new InvalidArgumentException( "Unsupported format: $format" );
+				throw new InvalidArgumentException( "Unsupported decoding format: $format" );
 		}
 		wfRestoreWarnings();
 

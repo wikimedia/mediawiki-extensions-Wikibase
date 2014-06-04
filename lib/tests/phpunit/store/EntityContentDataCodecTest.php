@@ -16,8 +16,15 @@ use Wikibase\Test\EntityTestCase;
  */
 class EntityContentDataCodecTest extends EntityTestCase {
 
-	protected function getCodec() {
-		return new EntityContentDataCodec();
+	/**
+	 * @var EntityContentDataCodec
+	 */
+	private $codec;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->codec = new EntityContentDataCodec();
 	}
 
 	public function encodeDecodeProvider() {
@@ -33,30 +40,30 @@ class EntityContentDataCodecTest extends EntityTestCase {
 	/**
 	 * @dataProvider encodeDecodeProvider
 	 */
-	public function testEncodeEntityContentData( $data, $format ) {
-		$codec = $this->getCodec();
-
-		$blob = $codec->encodeEntityContentData( $data, $format );
+	public function testEncodeEntityContentData( array $data, $format ) {
+		$blob = $this->codec->encodeEntityContentData( $data, $format );
 		$this->assertType( 'string', $blob );
 
-		$actual = $codec->decodeEntityContentData( $blob, $format );
+		$actual = $this->codec->decodeEntityContentData( $blob, $format );
 
 		$this->assertEquals( $data, $actual, 'round trip' );
 	}
 
-	public function testGetDefaultFormat() {
-		$codec = $this->getCodec();
-
-		$this->assertType( 'string', $codec->getDefaultFormat() );
-		$this->assertContains( $codec->getDefaultFormat(), $codec->getSupportedFormats() );
+	public function testGetDefaultFormat_isJson() {
+		$defaultFormat = $this->codec->getDefaultFormat();
+		$this->assertEquals( CONTENT_FORMAT_JSON, $defaultFormat );
 	}
 
 	public function testGetSupportedFormats() {
-		$codec = $this->getCodec();
+		$supportedFormats = $this->codec->getSupportedFormats();
+		$this->assertType( 'array', $supportedFormats );
+		$this->assertNotEmpty( $supportedFormats );
+		$this->assertContainsOnly( 'string', $supportedFormats );
+	}
 
-		$supported = $codec->getSupportedFormats();
-		$this->assertType( 'array', $supported );
-		$this->assertContains( CONTENT_FORMAT_JSON, $codec->getSupportedFormats() );
+	public function testGetSupportedFormats_containsDefaultFormat() {
+		$supportedFormats = $this->codec->getSupportedFormats();
+		$this->assertContains( $this->codec->getDefaultFormat(), $supportedFormats );
 	}
 
 }
