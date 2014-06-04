@@ -2,6 +2,108 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e1a5767_6b0b1cda",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-06-04T15:39:53Z",
+      "side": 1,
+      "message": "Is there a reason why you did not put this next to the setsitelink messages?",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_6bfafc74",
+        "filename": "repo/includes/Badge/BadgeException.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-06-04T15:39:53Z",
+      "side": 1,
+      "message": "This class does not contain any content related to badges but still is called so. I propose to rename this in something like TranslatableException or MessageException or UserException.\n\nHowever, the much bigger problem is that to verify user input no exceptions should be thrown but rather some fatal status should be applied. Exceptions should not occur in the normal functionality. So exceptions with a message do not make that much sense imo.\n\nThis discussion however is a bit more general because you have to decide in the team whether exceptions with translatable messages should be used in the whole project or not. If yes, there has to be one central exception class for that purpose but not one for this special use case.",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_2b2ac4d7",
+        "filename": "repo/includes/Badge/BadgeValidator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-06-04T15:39:53Z",
+      "side": 1,
+      "message": "Do we really have to check this? Imo we can assume that all ids in the config also have an existing item.",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_ab2ff4f2",
+        "filename": "repo/includes/Badge/BadgeValidator.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-06-04T15:39:53Z",
+      "side": 1,
+      "message": "As already mentioned, I am not sure if an exception should be thrown here. Perhaps it is better to return false or set some status rather than throwing an exception.",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_eb23acfe",
+        "filename": "repo/includes/Badge/BadgesParser.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-06-04T15:39:53Z",
+      "side": 1,
+      "message": "As already mentioned, just returning null/false here is better than throwing such an exception.",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_c6158742",
+        "filename": "repo/includes/Localisation/WikibaseRepoExceptionLocalizer.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-06-04T15:39:53Z",
+      "side": 1,
+      "message": "This would be easier if there was one central MessageException or TranslatableException class.",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_52e6f5ab",
         "filename": "repo/includes/specials/SpecialSetSiteLink.php",
         "patchSetId": 11
@@ -13,6 +115,24 @@
       "writtenOn": "2014-05-05T09:42:41Z",
       "side": 1,
       "message": "@note using $siteStore from $repo causes issues with tests. To use the same instance from $repo, we need more proper injection of the dependencies.\n\nFor this special page, I don\u0027t think it\u0027s such a huge problem to do this way (at least for now).  it\u0027s at least one instance used on this special page vs. several.",
+      "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_2b1c0418",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-06-04T15:39:53Z",
+      "side": 1,
+      "message": "But how do other classes handle this like the ChangeOps. I think they also need a sitestore.\n\nSee for example \\Wikibase\\Api\\SetSiteLink which uses the following line:\n\n  $sites \u003d $this-\u003esiteLinkTargetProvider-\u003egetSiteList( $this-\u003esiteLinkGroups );\n\nwhere siteLinkTargetProvider is created in \\Wikbase\\Api\\ModifyEntity also based on the repo site store:\n\n  $this-\u003esiteLinkTargetProvider \u003d new SiteLinkTargetProvider( $repo-\u003egetSiteStore() );\n\nso I don\u0027t quite understand why it does not work here in the tests.",
+      "parentUuid": "8e23439c_52e6f5ab",
       "revId": "5372daee6d035a6ea8cf89754909063fb1f61d39",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
