@@ -24,7 +24,6 @@ globeCoordinate.Formatter = ( function( globeCoordinate ) {
 		minute: '\'',
 		second: '"',
 		precisionTexts: [
-			{ precision: 1, text: 'to a degree' },
 			{ precision: 1 / 60, text: 'to an arcminute' },
 			{ precision: 1 / 3600, text: 'to an arcsecond' },
 			{ precision: 1 / 36000, text: 'to 1/10 of an arcsecond' },

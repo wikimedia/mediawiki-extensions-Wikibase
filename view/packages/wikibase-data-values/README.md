@@ -21,6 +21,10 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 * Removed the arbitrary list of precisions for globe coordinates
 
+#### Enhancements
+
+* #42 Removed 'to a degree' label, now shown as '±1°'
+
 ### 0.5.1 (2014-06-04)
 
 #### Bugfixes
