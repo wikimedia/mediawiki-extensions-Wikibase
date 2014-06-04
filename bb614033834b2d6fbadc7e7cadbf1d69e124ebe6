@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_b5a2b339",
+        "filename": "repo/includes/ValueParserFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-04T10:24:13Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be in the ValueParsers namespace? Which requires this to be moved to the DataValues extension. Not sure if this is worth it.",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_9567b722",
+        "filename": "repo/includes/ValueParserFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-04T10:24:13Z",
+      "side": 1,
+      "message": "Newline?",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_55711fdc",
+        "filename": "repo/includes/ValueParserFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-04T10:24:13Z",
+      "side": 1,
+      "message": "string[]|callable[]\n\nNote: Not totally correct because the array can contain both types. But the most helpful hint in my opinion.",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_756c1b06",
+        "filename": "repo/includes/ValueParserFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-04T10:24:13Z",
+      "side": 1,
+      "message": "string[]|callable[]",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_d5840fa6",
+        "filename": "repo/tests/phpunit/includes/ValueParserFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-04T10:24:13Z",
+      "side": 1,
+      "message": "We usually don\u0027t use @covers on the method level. Only in core.",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
