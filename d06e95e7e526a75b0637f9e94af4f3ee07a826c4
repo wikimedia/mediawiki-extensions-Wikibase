@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_953337c0",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-04T08:07:22Z",
+      "side": 1,
+      "message": "uh duh. you are right, of course",
+      "parentUuid": "2e1a5767_6d21f9ab",
+      "revId": "d06e95e7e526a75b0637f9e94af4f3ee07a826c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_4d3f5dd4",
         "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
         "patchSetId": 4
