@@ -15,6 +15,12 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.6.0 (dev)
+
+#### Breaking changes
+
+* Removed the arbitrary list of precisions for globe coordinates
+
 ### 0.5.1 (2014-06-04)
 
 #### Bugfixes
