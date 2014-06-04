@@ -2,6 +2,7 @@
 
 namespace Wikibase\Store\Test;
 
+use Wikibase\ItemHandler;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Test\EntityTestCase;
 
@@ -45,10 +46,11 @@ class EntityContentDataCodecTest extends EntityTestCase {
 	}
 
 	public function testGetDefaultFormat() {
-		$codec = $this->getCodec();
+		$handler = new ItemHandler( $this->getCodec(), null );
 
-		$this->assertType( 'string', $codec->getDefaultFormat() );
-		$this->assertContains( $codec->getDefaultFormat(), $codec->getSupportedFormats() );
+		// Just hard-code this: there's no good reason to use anything else,
+		// and changing the default serialization format would break a wiki's database.
+		$this->assertEquals( CONTENT_FORMAT_JSON, $handler->getDefaultFormat() );
 	}
 
 	public function testGetSupportedFormats() {

@@ -132,15 +132,6 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getDefaultFormat() {
-		return $this->contentCodec->getDefaultFormat();
-	}
-
-	/**
 	 * @param Content $content
 	 * @param string|null $format
 	 *
