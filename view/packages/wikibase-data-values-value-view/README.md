@@ -109,7 +109,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.6 (dev)
+### 0.6 (2014-06-04)
 
 * Re-created jQuery.ui.suggester widget removing dependencies on jQuery.ui.autocomplete and jQuery.ui.menu
 * Implemented jQuery.util.highlightMatchingCharacters
