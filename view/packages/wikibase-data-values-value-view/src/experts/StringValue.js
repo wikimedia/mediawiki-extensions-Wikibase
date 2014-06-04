@@ -15,25 +15,26 @@
 	 * @constructor
 	 * @extends jQuery.valueview.Expert
 	 */
-	vv.experts.StringValue = vv.expert( 'StringValue', PARENT, {
+	vv.experts.StringValue = vv.expert( 'StringValue', PARENT, function() {
+		PARENT.apply( this, arguments );
+		this.$input = $( '<textarea/>' );
+	}, {
 		/**
 		 * The nodes of the input element. The input element will be used to display the value
-		 * during edit mode as well as during non-edit mode.
+		 * during edit mode.
 		 * @type jQuery
 		 */
 		$input: null,
 
 		/**
-		 * @see jQuery.valueview.Expert._init
+		 * @see jQuery.valueview.Expert.init
 		 */
-		_init: function() {
+		init: function() {
 			var notifier = this._viewNotifier;
 
-			this.$input = $( '<textarea/>', {
-				'class': this.uiBaseClass + '-input valueview-input',
-				'type': 'text'
-			} )
-			.appendTo( this.$viewPort )
+			this.$input
+			.addClass( this.uiBaseClass + '-input valueview-input' )
+			.val( this.viewState().getTextValue() )
 			.on( 'keydown', function( event ) {
 				// Prevent Enter key from adding a new line character:
 				if( event.keyCode === $.ui.keyCode.ENTER ) {
@@ -42,28 +43,20 @@
 			} )
 			.on( 'eachchange', function() {
 				notifier.notify( 'change' );
-			} );
+			} )
+			.appendTo( this.$viewPort );
 
-			var textValue = this.viewState().getTextValue();
-			this.$input.val( textValue );
+			PARENT.prototype.init.call( this );
 		},
 
 		/**
 		 * @see jQuery.valueview.Expert.destroy
 		 */
 		destroy: function() {
-			if( !this.$input ) {
-				return; // destroyed already
+			if( this.$input ) {
+				this.$input.off( 'eachchange' );
+				this.$input = null;
 			}
-
-			var inputExtender = this.$input.data( 'inputextender' );
-			if( inputExtender ) {
-				inputExtender.destroy();
-			}
-
-			this.$input.off( 'eachchange' );
-
-			this.$input = null;
 
 			PARENT.prototype.destroy.call( this );  // empties viewport
 		},
@@ -84,6 +77,8 @@
 
 			// disable/enable input box
 			this.$input.prop('disabled', this.viewState().isDisabled() );
+
+			PARENT.prototype.draw.call( this );
 		},
 
 		/**

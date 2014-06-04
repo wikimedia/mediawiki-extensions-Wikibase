@@ -20,18 +20,18 @@ jQuery.valueview = jQuery.valueview || {};
 	 *
 	 * @param {string} name Should be all-lowercase and without any special characters. Will be used
 	 *        in within some DOM class attributes and
-	 * @param {Function} [base] Constructor of the expert the new expert should be based on.
-	 *        By default this is jQuery.valueview.Expert.
+	 * @param {Function} base Constructor of the expert the new expert should be based on.
+	 * @param {Function} [constructor] Constructor of the new expert.
 	 * @param {Object} expertDefinition Definition of the expert.
 	 *
 	 * @return {jQuery.valueview.Expert} the new expert constructor.
 	 */
-	vv.expert = function( name, base, expertDefinition ) {
-		if( !expertDefinition ) {
-			expertDefinition = base;
-			base = vv.Expert;
+	vv.expert = function( name, base, constructor, expertDefinition ) {
+		if( !expertDefinition ){
+			expertDefinition = constructor;
+			constructor = null;
 		}
-		else if( !$.isFunction( base ) ) {
+		if( !$.isFunction( base ) ) {
 			throw new Error( 'The expert\'s base must be a constructor function' );
 		}
 
@@ -39,6 +39,7 @@ jQuery.valueview = jQuery.valueview || {};
 		var Expert = util.inherit(
 			'ValueviewExpert_' + name,
 			base,
+			constructor,
 			$.extend( expertDefinition, {
 				uiBaseClass: 'valueview-expert-' + name
 			} )
@@ -101,7 +102,6 @@ jQuery.valueview = jQuery.valueview || {};
 		this._viewNotifier = valueViewNotifier;
 
 		this.$viewPort = $( viewPortNode );
-		this.$viewPort.addClass( this.uiBaseClass );
 
 		this._options = $.extend( ( !this._options ) ? {} : this._options, options || {} );
 
@@ -112,7 +112,7 @@ jQuery.valueview = jQuery.valueview || {};
 			messageGetter: msgGetter
 		} );
 
-		this._init();
+		this._extendable = new util.Extendable();
 	};
 
 	vv.Expert.prototype = {
@@ -155,11 +155,23 @@ jQuery.valueview = jQuery.valueview || {};
 		 */
 		_messageProvider: null,
 
+		_extendable: null,
+
+		addExtension: function( extension ){
+			this._extendable.addExtension( extension );
+		},
+
 		/**
 		 * Will be called initially for new expert instances.
 		 *
-		 * @since 0.1
+		 * @since 0.5
 		 */
+		init: function() {
+			this.$viewPort.addClass( this.uiBaseClass );
+			this._init(); // for backwards-compatibility
+			this._extendable.callExtensions( 'init' );
+		},
+
 		_init: function() {},
 
 		/**
@@ -178,6 +190,7 @@ jQuery.valueview = jQuery.valueview || {};
 			if( !this.$viewPort ) {
 				return; // destroyed already
 			}
+			this._extendable.callExtensions( 'destroy' );
 			this.$viewPort.removeClass( this.uiBaseClass ).empty();
 			this.$viewPort = null;
 			this._viewState = null;
@@ -228,9 +241,10 @@ jQuery.valueview = jQuery.valueview || {};
 		 * Will draw the user interface components for the user to edit the value.
 		 *
 		 * @since 0.1
-		 * @abstract
 		 */
-		draw: util.abstractMember,
+		draw: function() {
+			this._extendable.callExtensions( 'draw' );
+		},
 
 		/**
 		 * Will set the focus if there is some focusable input elements.

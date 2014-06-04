@@ -240,6 +240,11 @@ return call_user_func( function() {
 			),
 		),
 
+		'util.Extendable' => $moduleTemplate + array(
+			'scripts' => array(
+				'util/util.Extendable.js',
+			),
+		),
 	);
 
 } );

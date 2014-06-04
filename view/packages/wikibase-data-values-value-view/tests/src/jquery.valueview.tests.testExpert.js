@@ -70,6 +70,7 @@ function testExpert( testDefinition ) {
 					notifier = definition.args[2];
 
 				var expert = new Expert( $viewPort, viewState, notifier );
+				expert.init();
 
 				return {
 					expert: expert,

@@ -451,6 +451,7 @@
 		 */
 		next: function() {
 			this._setValue( this.$next.data( 'value' ) );
+			this.activate();
 		},
 
 		/**
@@ -458,6 +459,7 @@
 		 */
 		prev: function() {
 			this._setValue( this.$prev.data( 'value' ) );
+			this.activate();
 		},
 
 		/**
