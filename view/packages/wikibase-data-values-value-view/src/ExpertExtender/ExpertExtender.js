@@ -6,7 +6,7 @@
 	 * @param object[] extensions An array of extensions for this ExpertExtender.
 	 *                            An extension may have any of the following methods:
 	 *                            - init( $container )
-	 *                            - initialShow()
+	 *                            - onInitialShow()
 	 *                            - draw()
 	 *                            - destroy()
 	 */
@@ -63,7 +63,7 @@
 			var self = this;
 			this._extendable.callExtensions( 'init', [ $extender ] );
 			this.$input.one( 'inputextenderaftertoggle', function() {
-				self._extendable.callExtensions( 'initialShow' );
+				self._extendable.callExtensions( 'onInitialShow' );
 				self._extendable.callExtensions( 'draw' );
 			} );
 		}

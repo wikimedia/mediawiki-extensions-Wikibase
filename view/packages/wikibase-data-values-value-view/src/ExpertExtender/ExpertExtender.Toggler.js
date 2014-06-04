@@ -48,9 +48,9 @@
 		},
 
 		/**
-		 * Callback for the initialShow ExpertExtender event
+		 * Callback for the onInitialShow ExpertExtender event
 		 */
-		initialShow: function() {
+		onInitialShow: function() {
 			this.$toggler.toggler( { $subject: this.$subject } );
 			this.$subject.hide();
 		},

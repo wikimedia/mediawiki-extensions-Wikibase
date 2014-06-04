@@ -40,10 +40,10 @@
 		},
 
 		/**
-		 * Callback for the initialShow ExpertExtender event
+		 * Callback for the onInitialShow ExpertExtender event
 		 */
-		initialShow: function() {
-			this._callChild( 'initialShow' );
+		onInitialShow: function() {
+			this._callChild( 'onInitialShow' );
 		},
 
 		/**

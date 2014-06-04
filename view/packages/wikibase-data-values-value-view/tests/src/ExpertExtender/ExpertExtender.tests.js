@@ -47,10 +47,10 @@
 	QUnit.asyncTest( 'init calls extensions', function( assert ) {
 		var $input = $( '<input/>' ).appendTo( 'body' );
 		var init = sinon.spy();
-		var initialShow = sinon.spy();
+		var onInitialShow = sinon.spy();
 		var draw = sinon.spy();
 		var expertExtender = new ExpertExtender( $input, [ {
-			init: init, initialShow: initialShow, draw: draw
+			init: init, onInitialShow: onInitialShow, draw: draw
 		} ] );
 
 		$input.focus();
@@ -58,7 +58,7 @@
 
 		window.setTimeout( function() {
 			sinon.assert.calledOnce( init );
-			sinon.assert.calledOnce( initialShow );
+			sinon.assert.calledOnce( onInitialShow );
 			sinon.assert.calledOnce( draw );
 
 			$input.remove();
