@@ -255,7 +255,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $lookup->termExists( 'testDeleteTermsForEntity' ) );
 
-		$this->assertTrue( $lookup->deleteTermsOfEntity( $item ) !== false );
+		$this->assertTrue( $lookup->deleteTermsOfEntity( $item->getId() ) !== false );
 
 		$this->assertFalse( $lookup->termExists( 'testDeleteTermsForEntity' ) );
 

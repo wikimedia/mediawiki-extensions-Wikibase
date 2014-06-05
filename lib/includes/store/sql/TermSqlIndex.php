@@ -138,7 +138,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$entityIdentifiers = array(
 			'term_entity_id' => $entity->getId()->getNumericId(),
-			'term_entity_type' => $entity->getType()
+			'term_entity_type' => $entity->getId()->getEntityType()
 		);
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": inserting terms for " . $entity->getId()->getPrefixedId() );
@@ -240,7 +240,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$entityIdentifiers = array(
 			'term_entity_id' => $entity->getId()->getNumericId(),
-			'term_entity_type' => $entity->getType()
+			'term_entity_type' => $entity->getId()->getEntityType()
 		);
 
 		$uniqueKeyFields = array( 'term_entity_type', 'term_entity_id', 'term_language', 'term_type', 'term_text' );
@@ -319,13 +319,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	/**
 	 * @see TermCache::deleteTermsOfEntity
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityId $entityId
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteTermsOfEntity( Entity $entity ) {
+	public function deleteTermsOfEntity( EntityId $entityId ) {
 		wfProfileIn( __METHOD__ );
 
 		$dbw = $this->getConnection( DB_MASTER );
@@ -333,8 +333,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$success = $dbw->delete(
 			$this->tableName,
 			array(
-				'term_entity_id' => $entity->getId()->getNumericId(),
-				'term_entity_type' => $entity->getType()
+				'term_entity_id' => $entityId->getNumericId(),
+				'term_entity_type' => $entityId->getEntityType()
 			),
 			__METHOD__
 		);
