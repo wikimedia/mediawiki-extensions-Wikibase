@@ -3,24 +3,25 @@
 namespace Wikibase\Test;
 
 use Exception;
-use RuntimeException;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\ParseException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
+use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
+use Wikibase\Repo\Localizer\MessageParameterFormatter;
 
 /**
- * @covers Wikibase\Lib\Localizer\WikibaseExceptionLocalizer
+ * @covers Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
 		$result0 = Result::newError( array() );
@@ -33,13 +34,26 @@ class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		return array(
-			'RuntimeException' => array( new RuntimeException( 'Oops!' ), 'wikibase-error-unexpected', array( 'Oops!' ) ),
-			'ParseException' => array( new ParseException( 'Blarg!' ), 'wikibase-parse-error', array() ),
-
 			'ChangeOpValidationException(0)' => array( new ChangeOpValidationException( $result0 ), 'wikibase-validator-invalid', array() ),
 			'ChangeOpValidationException(1)' => array( new ChangeOpValidationException( $result1 ), 'wikibase-validator-too-long', array( '8' ) ),
 			'ChangeOpValidationException(2)' => array( new ChangeOpValidationException( $result2 ), 'wikibase-validator-too-long', array( 'eekwiki|Eek' ) ),
 		);
+	}
+
+	/**
+	 * @dataProvider provideGetExceptionMessage
+	 */
+	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
+		$formatter = $this->getMockFormatter();
+		$localizer = new ChangeOpValidationExceptionLocalizer( $formatter );
+
+		$this->assertTrue( $localizer->hasExceptionMessage( $ex ) );
+
+		$message = $localizer->getExceptionMessage( $ex );
+
+		$this->assertTrue( $message->exists(), 'Message ' . $message->getKey() . ' should exist.' );
+		$this->assertEquals( $expectedKey, $message->getKey(), 'Message key:' );
+		$this->assertEquals( $expectedParams, $message->getParams(), 'Message parameters:' );
 	}
 
 	/**
@@ -60,21 +74,6 @@ class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 			) );
 
 		return $mock;
-	}
-
-	/**
-	 * @dataProvider provideGetExceptionMessage
-	 */
-	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
-		$localizer = new WikibaseExceptionLocalizer( $this->getMockFormatter() );
-
-		$this->assertTrue( $localizer->hasExceptionMessage( $ex ) );
-
-		$message = $localizer->getExceptionMessage( $ex );
-
-		$this->assertTrue( $message->exists(), 'Message ' . $message->getKey() . ' should exist.' );
-		$this->assertEquals( $expectedKey, $message->getKey(), 'Message key:' );
-		$this->assertEquals( $expectedParams, $message->getParams(), 'Message parameters:' );
 	}
 
 }
