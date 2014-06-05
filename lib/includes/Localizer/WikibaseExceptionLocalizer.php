@@ -20,6 +20,8 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @todo: Extend the interface to allow multiple messages to be returned, for use
  *        with chained exceptions, multiple validation errors, etc.
  *
+ * @deprecated 0.5
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
@@ -43,91 +45,18 @@ class WikibaseExceptionLocalizer implements ExceptionLocalizer {
 	 *
 	 * @param Exception $ex
 	 *
+	 * @deprecated 0.5
 	 * @return Message
 	 */
 	public function getExceptionMessage( Exception $ex ) {
-		if ( $ex instanceof MessageException ) {
-			return $this->getMessageExceptionMessage( $ex );
-		} elseif ( $ex instanceof ParseException ) {
-			return $this->getParseExceptionMessage( $ex );
-		} elseif ( $ex instanceof ChangeOpValidationException ) {
-			return $this->getChangeOpValidationExceptionMessage( $ex );
-		} else {
-			return $this->getGenericExceptionMessage( $ex );
-		}
-	}
+		$localizers = array(
+			'MessageException' => new MessageExceptionLocalizer(),
+			'ParseException' => new ParseExceptionLocalizer()
+		);
 
-	/**
-	 * @param MessageException $messageException
-	 *
-	 * @return Message
-	 */
-	protected function getMessageExceptionMessage( MessageException $messageException ) {
-		$key = $messageException->getKey();
-		$params = $messageException->getParams();
-		$msg = wfMessage( $key )->params( $params );
+		$localizer = new DispatchingExceptionLocalizer( $localizers );
 
-		return $msg;
-	}
-
-	/**
-	 * @param ParseException $parseError
-	 *
-	 * @return Message
-	 */
-	protected function getParseExceptionMessage( ParseException $parseError ) {
-		$baseKey = 'wikibase-parse-error';
-		$params = array();
-		$msg = null;
-
-		// Messages that can be used here:
-		// * wikibase-parse-error
-		// * wikibase-parse-error-coordinate
-		// * wikibase-parse-error-entity-id
-		// * wikibase-parse-error-quantity
-		// * wikibase-parse-error-time
-		$expectedFormat = $parseError->getExpectedFormat();
-		if( $expectedFormat !== null ) {
-			$msg = new Message( $baseKey . '-' . $expectedFormat, $params );
-			if( !$msg->exists() ) {
-				$msg = null;
-			}
-		}
-
-		if( $msg === null ) {
-			$msg = new Message( $baseKey, $params );
-		}
-
-		return $msg;
-	}
-
-	/**
-	 * @param ChangeOpValidationException $ex
-	 *
-	 * @return Message
-	 */
-	public function getChangeOpValidationExceptionMessage( ChangeOpValidationException $ex ) {
-		$result = $ex->getValidationResult();
-
-		foreach ( $result->getErrors() as $error ) {
-			$msg = $this->validatorErrorLocalizer->getErrorMessage( $error );
-			return $msg;
-		}
-
-		return wfMessage( 'wikibase-validator-invalid' );
-	}
-
-	/**
-	 * @param Exception $error
-	 *
-	 * @return Message
-	 */
-	protected function getGenericExceptionMessage( Exception $error ) {
-		$key = 'wikibase-error-unexpected';
-		$params = array( $error->getMessage() );
-		$msg = wfMessage( $key )->params( $params );
-
-		return $msg;
+		return $localizer->getExceptionMessage( $ex );
 	}
 
 	/**
