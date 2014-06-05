@@ -1,0 +1,361 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_0efcacb0",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "If you can change the WikibaseEntityDeletionUpdate hook in WikibaseQuery\\HookSetup.php (I\u0027m not sure about this because I can\u0027t find a documentation of that hook) you can replace $this with $this-\u003egetEntity().",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_ee285034",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Same here. We can easily get rid of these two EntityContent dependencies and replace them with Entity. But this probably needs two new hook names and should be done in an other patch.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_ce2d9443",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "This variable name doesn\u0027t tell me anything about the meaning of this property. What does it represent in the context of this EntityHandler class?",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_ae22584e",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Whoops. Should be $this-\u003e...",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_8e279c5f",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Could be Entity $entity. See comments in EntityContent.php.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_6e1c4019",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Could be $content-\u003egetEntity(). See comments in EntityContent.php.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_4e198426",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Could be Entity $entity. See comments in EntityContent.php.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_0eba6c1e",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "The old code did this. This will waste some resources by doing a SELECT in EntityPerPageTable::addEntityPage. Is this a problem?",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_2e1648f7",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Could be $content-\u003egetEntity(). See comments in EntityContent.php.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_0e138c06",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Uh? Why is this code here in the comment?",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_eed73027",
+        "filename": "repo/includes/content/PropertyHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "According to what we discussed yesterday, yes, we should have a PropertyInfo class because PropertyInfo obviously is a domain concept.\n\nNot in this patch, obviously.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_cedc744e",
+        "filename": "repo/includes/content/PropertyHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Avoid the warning by using ...-\u003egetEntity(). You already do this in the ItemHandler class. Same should be done here.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_8ee67c12",
+        "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Why did you deleted PropertyInfoUpdate if you need the concept in two places, here and in PropertyHandler? Not that I insist of having these extra classes. They all feel a bit weird to me.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_4ee864dd",
+        "filename": "repo/includes/updates/DataUpdateClosure.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "What about DelegatedDataUpdate?\n\nAlso: Backslash.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_2ef528b6",
+        "filename": "repo/includes/updates/DataUpdateClosure.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "@throws InvalidArgumentException\n\nAlso: The preferred syntax is [$args,...] in plural and without space. Really.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_0ef26ccd",
+        "filename": "repo/includes/updates/DataUpdateClosure.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Backslash.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_eebe10d1",
+        "filename": "repo/includes/updates/DataUpdateClosure.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Pointless to repeat the @since.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_aeb818e3",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "You only need the EntityId here.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_4ecf4483",
+        "filename": "repo/tests/phpunit/includes/content/ItemHandlerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "What? Hey, if it\u0027s that easy, why do we even need lookups?",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_ceaa3482",
+        "filename": "repo/tests/phpunit/includes/content/ItemHandlerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_aeaff890",
+        "filename": "repo/tests/phpunit/includes/content/PropertyHandlerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T16:08:31Z",
+      "side": 1,
+      "message": "And again.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
