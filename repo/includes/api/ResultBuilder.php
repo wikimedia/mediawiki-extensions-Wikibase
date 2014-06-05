@@ -313,9 +313,9 @@ class ResultBuilder {
 			$entitySerializer = $this->serializerFactory->newSerializerForObject( $entity, $serializerOptions );
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
-			if( !empty( $siteIds ) && array_key_exists( 'sitelinks',$entitySerialization ) ) {
-				foreach( $entitySerialization['sitelinks'] as $key => $sitelink ) {
-					if( !in_array( $sitelink['site'], $siteIds ) ) {
+			if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $entitySerialization ) ) {
+				foreach ( $entitySerialization['sitelinks'] as $key => $sitelink ) {
+					if ( is_array( $sitelink ) && !in_array( $sitelink['site'], $siteIds ) ) {
 						unset( $entitySerialization['sitelinks'][$key] );
 					}
 				}
