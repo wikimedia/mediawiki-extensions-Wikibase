@@ -27,5 +27,5 @@ When /^I load the huge item (.+)$/ do |pagename|
 end
 
 Then /^Javascript UI should be initialized$/ do
-  on(ItemPage).edit_label_link_element.attribute("href").should == "javascript:void(0);"
+  expect(on(ItemPage).edit_label_link_element.attribute("href")).to be == "javascript:void(0);"
 end

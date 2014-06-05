@@ -44,74 +44,74 @@ When /^I enter a long string as label$/ do
 end
 
 Then /^Label edit button should be there$/ do
-  on(ItemPage).edit_label_link?.should be_true
+  expect(on(ItemPage).edit_label_link?).to be true
 end
 
 Then /^Label edit button should not be there$/ do
-  on(ItemPage).edit_label_link?.should be_false
+  expect(on(ItemPage).edit_label_link?).to be false
 end
 
 Then /^Label input element should be there$/ do
-  on(ItemPage).label_input_field?.should be_true
+  expect(on(ItemPage).label_input_field?).to be true
 end
 
 Then /^Label input element should not be there$/ do
-  on(ItemPage).label_input_field?.should be_false
+  expect(on(ItemPage).label_input_field?).to be false
 end
 
 Then /^Label input element should contain original label$/ do
-  on(ItemPage).label_input_field.should == @item_under_test["label"]
+  expect(on(ItemPage).label_input_field).to be == @item_under_test["label"]
 end
 
 Then /^Label input element should be empty$/ do
-  on(ItemPage).label_input_field.should == ""
+  expect(on(ItemPage).label_input_field).to be == ""
 end
 
 Then /^Label cancel button should be there$/ do
-  on(ItemPage).cancel_label_link?.should be_true
+  expect(on(ItemPage).cancel_label_link?).to be true
 end
 
 Then /^Label cancel button should not be there$/ do
-  on(ItemPage).cancel_label_link?.should be_false
+  expect(on(ItemPage).cancel_label_link?).to be false
 end
 
 Then /^Label save button should be there$/ do
-  on(ItemPage).save_label_link?.should be_true
+  expect(on(ItemPage).save_label_link?).to be true
 end
 
 Then /^Label save button should not be there$/ do
-  on(ItemPage).save_label_link?.should be_false
+  expect(on(ItemPage).save_label_link?).to be false
 end
 
 Then /^Original label of item (.*) should be displayed$/ do |item_handle|
-  on(ItemPage).entity_label_span.should == @items[item_handle]["label"]
+  expect(on(ItemPage).entity_label_span).to be == @items[item_handle]["label"]
 end
 
 Then /^Original label should be displayed$/ do
   on(ItemPage) do |page|
-    page.first_heading.should be_true
-    page.entity_label_span.should be_true
-    @browser.title.include?(@item_under_test["label"]).should be_true
-    page.entity_label_span.should == @item_under_test["label"]
+    expect(page.first_heading?).to be true
+    expect(page.entity_label_span?).to be true
+    expect(@browser.title.include?(@item_under_test["label"])).to be true
+    expect(page.entity_label_span).to be == @item_under_test["label"]
   end
 end
 
 Then /^(.+) should be displayed as label$/ do |value|
   on(ItemPage) do |page|
-    page.first_heading.should be_true
-    page.entity_label_span.should be_true
-    @browser.title.include?(value).should be_true
-    page.entity_label_span.should == value
+    expect(page.first_heading?).to be true
+    expect(page.entity_label_span?).to be true
+    expect(@browser.title.include?(value)).to be true
+    expect(page.entity_label_span).to be == value
   end
 end
 
 Then /^Entity id should be displayed next to the label$/ do
   on(ItemPage) do |page|
-      page.entity_id_span_element.visible?.should be_true
-      page.entity_id_span.sub(/[()]/, "") == @item_under_test["label"]
+      expect(page.entity_id_span_element.visible?).to be true
+      expect(page.entity_id_span.sub(/[()]/, "")).to be == @item_under_test["label"]
     end
 end
 
 Then /^Entity id should not be displayed next to the label$/ do
-  on(ItemPage).entity_id_span_element.visible?.should be_false
+  expect(on(ItemPage).entity_id_span_element.visible?).to be false
 end

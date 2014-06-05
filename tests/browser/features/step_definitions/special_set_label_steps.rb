@@ -19,9 +19,9 @@ When /^I press the set label button$/ do
 end
 
 Then /^Label input field should be there$/ do
-  on(SpecialSetLabelPage).term_input_field?.should be_true
+  expect(on(SpecialSetLabelPage).term_input_field?).to be true
 end
 
 Then /^Set label button should be there$/ do
-  on(SpecialSetLabelPage).set_label_button?.should be_true
+  expect(on(SpecialSetLabelPage).set_label_button?).to be true
 end

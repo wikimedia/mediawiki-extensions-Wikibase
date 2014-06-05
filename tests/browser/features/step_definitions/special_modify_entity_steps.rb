@@ -16,17 +16,17 @@ When /^I enter the ID of item (.+) into the ID input field$/ do |item_handle|
 end
 
 Then /^Anonymous edit warning should be there$/ do
-  on(SpecialModifyEntityPage).anonymous_edit_warning?.should be_true
+  expect(on(SpecialModifyEntityPage).anonymous_edit_warning?).to be true
 end
 
 Then /^Anonymous edit warning should not be there$/ do
-  on(SpecialModifyEntityPage).anonymous_edit_warning?.should be_false
+  expect(on(SpecialModifyEntityPage).anonymous_edit_warning?).to be false
 end
 
 Then /^An error message should be displayed on the special page$/ do
-  on(SpecialModifyEntityPage).error_message?.should be_true
+  expect(on(SpecialModifyEntityPage).error_message?).to be true
 end
 
 Then /^ID input field should be there$/ do
-  on(SpecialModifyEntityPage).id_input_field?.should be_true
+  expect(on(SpecialModifyEntityPage).id_input_field?).to be true
 end
