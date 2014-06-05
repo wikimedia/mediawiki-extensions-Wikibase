@@ -76,7 +76,10 @@ class NoBadDependencyUsageTest extends \PHPUnit_Framework_TestCase {
 		 */
 		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
 			if ( $fileInfo->isFile() && substr( $fileInfo->getFilename(), -4 ) === '.php' ) {
-				if ( stripos( file_get_contents( $fileInfo->getPathname() ), $string ) !== false ) {
+				$text = file_get_contents( $fileInfo->getPathname() );
+				$text = preg_replace( '@/\*.*?\*/@s', '', $text );
+
+				if ( stripos( $text, $string ) !== false ) {
 					$count++;
 				}
 			}

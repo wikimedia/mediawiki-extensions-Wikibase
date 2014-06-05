@@ -1242,15 +1242,17 @@ final class RepoHooks {
 	private static function newItemHandler() {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
+		$codec = $repo->getEntityContentDataCodec();
 
-		return new ItemHandler( array( $validator ) );
+		return new ItemHandler( $codec, array( $validator ) );
 	}
 
 	private static function newPropertyHandler() {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$validator = $repo->getEntityConstraintProvider()->getConstraints( Property::ENTITY_TYPE );
+		$codec = $repo->getEntityContentDataCodec();
 
-		return new PropertyHandler( array( $validator ) );
+		return new PropertyHandler( $codec, array( $validator ) );
 	}
 
 	/**
