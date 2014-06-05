@@ -39,7 +39,6 @@ Other breaking changes:
 * `Claim` and `Statement` no longer implement `Serializable`
 * `SiteLinkList` is now mutable
 * Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
-* `Item::removeSiteLink` no longer takes an optional second parameter and no longer returns a boolean
 * Removed `Fingerprint::getAliases`
 * Removed `EntityId::newFromPrefixedId`
 * The constructor of `EntityId` is no longer public
@@ -52,22 +51,42 @@ Other breaking changes:
 
 #### Additions
 
-* Added `AliasGroupList::hasGroupForLanguage`
-* Added `SiteLinkList::addSiteLink`
-* Added `SiteLinkList::addNewSiteLink`
-* Added `SiteLinkList::removeLinkWithSiteId`
-* Added `SiteLinkList::isEmpty`
-* Added `SiteLinkList::removeLinkWithSiteId`
-* Added `Item::getSiteLinkList`
-* Added `Item::setSiteLinkList`
 * Added `LegacyIdInterpreter`
 * Added `ClaimListDiffer`
-* Added `TermList::setTextForLanguage`
-* Added `AliasGroupList::setAliasesForLanguage`
+
+## Version 0.8 (2014-06-05)
+
+#### Breaking changes
+
+* `Item::removeSiteLink` no longer takes an optional second parameter and no longer returns a boolean
+* Shallow clones of `Item` will now share the same list of site links
+
+#### Additions
+
+* `AliasGroupList::hasGroupForLanguage`
+* `SiteLinkList::addSiteLink`
+* `SiteLinkList::addNewSiteLink`
+* `SiteLinkList::removeLinkWithSiteId`
+* `SiteLinkList::isEmpty`
+* `SiteLinkList::removeLinkWithSiteId`
+* `Item::getSiteLinkList`
+* `Item::setSiteLinkList`
+* `TermList::setTextForLanguage`
+* `AliasGroupList::setAliasesForLanguage`
+
+#### Deprecations
+
+* `Item::addSiteLink`
+* `Item::removeSiteLink`
+* `Item::getSiteLinks`
+* `Item::getSiteLink`
+* `Item::hasLinkToSite`
+* `Item::hasSiteLinks`
 
 #### Improvements
 
 * An empty `TermList` can now be constructed with no constructor arguments
+* An empty `AliasGroupList` can now be constructed with no constructor arguments
 
 ## Version 0.7.4 (2014-04-24)
 
