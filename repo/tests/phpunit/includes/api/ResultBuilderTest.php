@@ -299,6 +299,57 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $result->getData() );
 	}
 
+	public function testAddEntityRevision_SiteLinksFilterDoesNotCorruptIndexedMode() {
+		$indexedMode = true;
+
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q123099' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Berlin' ) );
+		$item->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
+		$entityRevision = new EntityRevision( $item, 0, '20010203040506' );
+
+		$options = new SerializationOptions();
+		$options->setIndexTags( $indexedMode );
+		$props = array( 'sitelinks' );
+		$siteIds = array( 'enwiki' );
+
+		$result = $this->getDefaultResult( $indexedMode );
+		$resultBuilder = $this->getResultBuilder( $result );
+		$resultBuilder->addEntityRevision( $entityRevision, $options, $props, $siteIds );
+
+		$expected = array( 'entities' => array(
+			array(
+				'id' => 'Q123099',
+				'type' => 'item',
+				'sitelinks' => array(
+					array(
+						'site' => 'enwiki',
+						'title' => 'Berlin',
+						'badges' => array(
+							'_element' => 'badge'
+						)
+					),
+					'_element' => 'sitelink'
+				),
+				'aliases' => array(
+					'_element' => 'alias'
+				),
+				'descriptions' => array(
+					'_element' => 'description'
+				),
+				'labels' => array(
+					'_element' => 'label'
+				),
+				'claims' => array(
+					'_element' => 'property'
+				),
+			),
+			'_element' => 'entity'
+		) );
+
+		$this->assertEquals( $expected, $result->getData() );
+	}
+
 	public function testAddBasicEntityInformation() {
 		$result = $this->getDefaultResult();
 		$entityId = new ItemId( 'Q67' );
