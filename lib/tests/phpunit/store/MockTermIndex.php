@@ -122,7 +122,7 @@ class MockTermIndex implements TermIndex {
 	/**
 	 * @throws Exception always
 	 */
-	public function deleteTermsOfEntity( Entity $entity ) {
+	public function deleteTermsOfEntity( EntityId $entityId ) {
 		throw new Exception( 'not implemented by mock class ' );
 	}
 

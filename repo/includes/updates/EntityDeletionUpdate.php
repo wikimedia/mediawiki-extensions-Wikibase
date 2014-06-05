@@ -50,7 +50,7 @@ class EntityDeletionUpdate extends \DataUpdate {
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
 		$entity = $this->content->getEntity();
 
-		$store->getTermIndex()->deleteTermsOfEntity( $entity );
+		$store->getTermIndex()->deleteTermsOfEntity( $entity->getId() );
 		$this->doTypeSpecificStuff( $store, $entity );
 
 		$store->newEntityPerPage()->deleteEntityPage(
