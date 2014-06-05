@@ -96,7 +96,7 @@ class EntityFactory {
 	/**
 	 * Creates a new empty entity of the given type.
 	 *
-	 * @since 0.3
+	 * @deprecated constructing an empty entity from just a type is based on flawed notions
 	 *
 	 * @param String $entityType The type of the desired new entity.
 	 *
@@ -111,7 +111,7 @@ class EntityFactory {
 	/**
 	 * Creates a new entity of the given type.
 	 *
-	 * @since 0.3
+	 * @deprecated constructing an empty entity from just a type is based on flawed notions
 	 *
 	 * @param String $entityType The type of the desired new entity.
 	 * @param array $data An array structure representing the Entity.
