@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_746ad4b2",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-05T12:52:01Z",
+      "side": 1,
+      "message": "This should be injected in the constructor. At least, init it in the constructor, and add a TODO for injecting it.",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_94a45006",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-05T12:52:01Z",
+      "side": 1,
+      "message": "Please factor the logic for getting $siteLinks for a given group into a separate function. Perhaps factor looking up the URLs for all the links into a separate function too.",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_74a9b4db",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-05T12:52:01Z",
+      "side": 1,
+      "message": "The content of this loop should probably go into a separate function (or two - the branches of the if-clause below).",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_54aeb8e5",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-05T12:52:01Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_f4bca41c",
+        "filename": "repo/tests/phpunit/includes/view/SiteLinksViewTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-05T12:52:01Z",
+      "side": 1,
+      "message": "assertTag is somewhat nicer for checking HTML. It also supports regular expressions, on top of stuff for the dom structure.",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
