@@ -26,7 +26,8 @@ use Wikibase\Lib\DispatchingValueFormatter;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
-use Wikibase\Lib\Localizer\MessageParameterFormatter;
+use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
+use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
 use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
@@ -39,6 +40,8 @@ use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
+use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -499,12 +502,26 @@ class WikibaseRepo {
 	 */
 	public function getExceptionLocalizer() {
 		if ( !$this->exceptionLocalizer ) {
-			$this->exceptionLocalizer = new WikibaseExceptionLocalizer(
-				$this->getMessageParameterFormatter()
-			);
+			$formatter = $this->getMessageParameterFormatter();
+			$localizers = $this->getExceptionLocalizers( $formatter );
+
+			$this->exceptionLocalizer = new WikibaseExceptionLocalizer( $localizers, $formatter );
 		}
 
 		return $this->exceptionLocalizer;
+	}
+
+	/**
+	 * @param MessageParameterFormatter $formatter
+	 *
+	 * @return ExceptionLocalizer[]
+	 */
+	private function getExceptionLocalizers( MessageParameterFormatter $formatter ) {
+		return array(
+			'MessageException' => new MessageExceptionLocalizer(),
+			'ParseException' => new ParseExceptionLocalizer(),
+			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter )
+		);
 	}
 
 	/**
