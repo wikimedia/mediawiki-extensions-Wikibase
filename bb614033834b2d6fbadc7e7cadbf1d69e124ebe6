@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_2730abe4",
+        "filename": "repo/includes/ValueParserFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-05T20:40:05Z",
+      "side": 1,
+      "message": "If I am not mistaken that is where it was originally located. I\u0027m opposed to reintroducing it there as-is.",
+      "parentUuid": "2e1a5767_b5a2b339",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_9567b722",
         "filename": "repo/includes/ValueParserFactory.php",
         "patchSetId": 1
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_87589f36",
+        "filename": "repo/includes/ValueParserFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-05T20:40:05Z",
+      "side": 1,
+      "message": "No. This is an array of string or callable. It is not an array of string or an array of callable.\n\nThe current type hint might confuse tools though. Perhaps better to just have \"array\" there, since the doc already explains it anyway.\n\nActually, this is really not relevant for this commit. If you want to change this, which is not what this commit is about, then please submit a follow up.",
+      "parentUuid": "2e1a5767_756c1b06",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_d5840fa6",
         "filename": "repo/tests/phpunit/includes/ValueParserFactoryTest.php",
         "patchSetId": 1
@@ -81,6 +117,24 @@
       "writtenOn": "2014-06-04T10:24:13Z",
       "side": 1,
       "message": "We usually don\u0027t use @covers on the method level. Only in core.",
+      "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_870adf22",
+        "filename": "repo/tests/phpunit/includes/ValueParserFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-05T20:40:05Z",
+      "side": 1,
+      "message": "I\u0027m neutral towards this tag. However I am not happy with the \"Only in core\" reasoning. We are way ahead of core in many ways with regards to coding style and conventions. And most of our code should not have anything to do with MediaWiki, so referring to MediaWiki styles rather than generally adopted practices in the PHP community strikes me as odd.",
+      "parentUuid": "2e1a5767_d5840fa6",
       "revId": "bb614033834b2d6fbadc7e7cadbf1d69e124ebe6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
