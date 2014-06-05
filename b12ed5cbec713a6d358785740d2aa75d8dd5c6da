@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_7486541a",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-05T13:30:53Z",
+      "side": 1,
+      "message": "thanks for adding the test!\n\nthis appears to also generally test the sitelinks filter, including index mode. suggest to name this tests more general also.\n\n(not in scope of bug fix, but would be nice to also test non-index mode)",
+      "revId": "b12ed5cbec713a6d358785740d2aa75d8dd5c6da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
