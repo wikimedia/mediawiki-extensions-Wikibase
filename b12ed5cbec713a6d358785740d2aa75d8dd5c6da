@@ -16,6 +16,24 @@
       "revId": "b12ed5cbec713a6d358785740d2aa75d8dd5c6da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_1427200f",
+        "filename": "repo/tests/phpunit/includes/api/ResultBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-05T13:42:46Z",
+      "side": 1,
+      "message": "Non-index mode is already tested above.\n\nWill change the name of the test.",
+      "parentUuid": "2e1a5767_7486541a",
+      "revId": "b12ed5cbec713a6d358785740d2aa75d8dd5c6da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
