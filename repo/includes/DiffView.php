@@ -159,6 +159,7 @@ class DiffView extends ContextSource {
 	 * @return string
 	 */
 	private function getDeletedLine( $value, array $path ) {
+		// @todo: inject a formatter instead of doing special cases based on the path here!
 		if ( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
 			return Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
 				$this->getSiteLinkElement( $path[1], $value )
@@ -174,6 +175,7 @@ class DiffView extends ContextSource {
 	 * @return string
 	 */
 	private function getAddedLine( $value, array $path ) {
+		// @todo: inject a formatter instead of doing special cases based on the path here!
 		if ( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
 			return Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
 				$this->getSiteLinkElement( $path[1], $value )
