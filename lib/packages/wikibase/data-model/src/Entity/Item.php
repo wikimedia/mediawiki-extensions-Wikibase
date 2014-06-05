@@ -83,6 +83,10 @@ class Item extends Entity {
 	 * @param SiteLink $siteLink
 	 */
 	public function addSiteLink( SiteLink $siteLink ) {
+		if ( $this->siteLinks->hasLinkWithSiteId( $siteLink->getSiteId() ) ) {
+			$this->siteLinks->removeLinkWithSiteId( $siteLink->getSiteId() );
+		}
+
 		$this->siteLinks->addSiteLink( $siteLink );
 	}
 
