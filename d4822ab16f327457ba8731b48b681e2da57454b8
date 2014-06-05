@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_54211899",
+        "filename": "lib/tests/phpunit/store/EntityContentDataCodecTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-05T12:31:28Z",
+      "side": 1,
+      "message": "Must call parent::setUp()!\n\nI personally prefer to create the object under test explicitly in the test function, using plain \"new\" or a factory function. A matter of test, I guess.",
+      "revId": "d4822ab16f327457ba8731b48b681e2da57454b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
