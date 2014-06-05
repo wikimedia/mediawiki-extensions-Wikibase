@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use RequestContext;
 use Wikibase\EntityContentDiffView;
 use Wikibase\Item;
@@ -80,7 +81,10 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGenerateContentDiffBody( Item $item0, Item $item1, $matchers ) {
-		$diffView = new EntityContentDiffView( RequestContext::getMain() );
+		$context = RequestContext::getMain();
+		$context->setLanguage( Language::factory( 'en' ) );
+
+		$diffView = new EntityContentDiffView( $context );
 
 		$html = $diffView->generateContentDiffBody(
 			ItemContent::newFromItem( $item0 ),
