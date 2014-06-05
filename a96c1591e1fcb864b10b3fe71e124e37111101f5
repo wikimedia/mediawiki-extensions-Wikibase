@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_a43f19d3",
+        "filename": "lib/resources/parsers/MonolingualTextParser.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-05T20:24:13Z",
+      "side": 1,
+      "message": "This looks like it should be using composition rather than inheritance",
+      "revId": "a96c1591e1fcb864b10b3fe71e124e37111101f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
