@@ -11,9 +11,9 @@ When /^I press the ESC key in the entity selector input field$/ do
 end
 
 Then /^Entity selector input element should be there$/ do
-  on(ItemPage).entity_selector_input?.should be_true
+  expect(on(ItemPage).entity_selector_input?).to be true
 end
 
 Then /^Entity selector input element should not be there$/ do
-  on(ItemPage).entity_selector_input?.should be_false
+  expect(on(ItemPage).entity_selector_input?).to be false
 end

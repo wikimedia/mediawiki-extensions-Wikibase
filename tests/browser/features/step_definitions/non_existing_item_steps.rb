@@ -11,7 +11,7 @@ end
 
 Then(/^check if this page behaves correctly$/) do
   on_page(NonExistingItemPage) do |page|
-    page.first_heading.should be_true
-    page.first_heading_element.text.should == ENV["ITEM_NAMESPACE"] + ENV["ITEM_ID_PREFIX"] + "xy"
+    expect(page.first_heading?).to be true
+    expect(page.first_heading_element.text).to be == ENV["ITEM_NAMESPACE"] + ENV["ITEM_ID_PREFIX"] + "xy"
   end
 end

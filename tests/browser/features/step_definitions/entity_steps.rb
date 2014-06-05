@@ -80,12 +80,12 @@ end
 Given /^The following sitelinks do not exist:$/ do |sitelinks|
   wb_api = WikibaseAPI::Gateway.new(URL.repo_api)
   sitelinks.raw.each do |sitelink|
-    wb_api.wb_remove_sitelink(sitelink[0], sitelink[1]).should be_true
+    expect(wb_api.wb_remove_sitelink(sitelink[0], sitelink[1])).to be true
   end
 end
 
 Then /^An error message should be displayed$/ do
-  on(ItemPage).wb_error_div?.should be_true
+  expect(on(ItemPage).wb_error_div?).to be true
 end
 
 When /^I reload the page$/ do
