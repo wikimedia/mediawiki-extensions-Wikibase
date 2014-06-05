@@ -464,7 +464,7 @@ abstract class EntityHandler extends ContentHandler {
 		// Unregister the entity from the terms table.
 		$updates[] = new DataUpdateClosure(
 			array( $this->termIndex, 'deleteTermsOfEntity' ),
-			$content->getEntity()
+			$content->getEntity()->getId()
 		);
 
 		// Unregister the entity from the EntityPerPage table.

@@ -44,13 +44,13 @@ interface TermIndex extends TermCombinationMatchFinder {
 	/**
 	 * Deletes the terms of the provided entity from the term cache.
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityId $entityId
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteTermsOfEntity( Entity $entity );
+	public function deleteTermsOfEntity( EntityId $entityId );
 
 	/**
 	 * Returns the terms stored for the given entity.
