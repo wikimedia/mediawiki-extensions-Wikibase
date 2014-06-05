@@ -3,54 +3,32 @@
 namespace Wikibase\Test;
 
 use Exception;
-use RuntimeException;
-use ValueFormatters\ValueFormatter;
 use ValueParsers\ParseException;
-use Wikibase\Lib\Localizer\WikibaseExceptionLocalizer;
+use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
 
 /**
- * @covers Wikibase\Lib\Localizer\WikibaseExceptionLocalizer
+ * @covers Wikibase\Lib\Localizer\ParseExceptionLocalizer
  *
  * @group Wikibase
  * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class WikibaseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
+class ParseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
 		return array(
-			'RuntimeException' => array( new RuntimeException( 'Oops!' ), 'wikibase-error-unexpected', array( 'Oops!' ) ),
 			'ParseException' => array( new ParseException( 'Blarg!' ), 'wikibase-parse-error', array() ),
 		);
-	}
-
-	/**
-	 * @return ValueFormatter
-	 */
-	private function getMockFormatter() {
-		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
-		$mock->expects( $this->any() )
-			->method( 'format' )
-			->will( $this->returnCallback(
-				function ( $param ) {
-					if ( is_array( $param ) ) {
-						$param = implode( '|', $param );
-					}
-
-					return strval( $param );
-				}
-			) );
-
-		return $mock;
 	}
 
 	/**
 	 * @dataProvider provideGetExceptionMessage
 	 */
 	public function testGetExceptionMessage( Exception $ex, $expectedKey, $expectedParams ) {
-		$localizer = new WikibaseExceptionLocalizer( $this->getMockFormatter() );
+		$localizer = new ParseExceptionLocalizer();
 
 		$this->assertTrue( $localizer->hasExceptionMessage( $ex ) );
 
