@@ -69,63 +69,63 @@ When /^I press the RETURN key in the statement value input field$/ do
 end
 
 Then /^Statement help field should be there$/ do
-  on(ItemPage).statement_help_field?.should be_true
+  expect(on(ItemPage).statement_help_field?).to be true
 end
 
 Then /^Statement add button should be there$/ do
-  on(ItemPage).add_statement?.should be_true
+  expect(on(ItemPage).add_statement?).to be true
 end
 
 Then /^Statement add button should be disabled$/ do
   on(ItemPage) do |page|
-    page.add_statement?.should be_false
-    page.add_statement_disabled?.should be_true
+    expect(page.add_statement?).to be false
+    expect(page.add_statement_disabled?).to be true
   end
 end
 
 Then /^Statement edit button for claim (.+) in group (.+) should be there$/ do |claim_index, group_index|
-  on(ItemPage).edit_claim_element(group_index, claim_index).exists?.should be_true
+  expect(on(ItemPage).edit_claim_element(group_index, claim_index).exists?).to be true
 end
 
 Then /^Statement save button should be there$/ do
-  on(ItemPage).save_statement?.should be_true
+  expect(on(ItemPage).save_statement?).to be true
 end
 
 Then /^Statement save button should not be there$/ do
-  on(ItemPage).save_statement?.should be_false
+  expect(on(ItemPage).save_statement?).to be false
 end
 
 Then /^Statement save button should be disabled$/ do
   on(ItemPage) do |page|
-    page.save_statement?.should be_false
-    page.save_statement_disabled?.should be_true
+    expect(page.save_statement?).to be false
+    expect(page.save_statement_disabled?).to be true
   end
 end
 
 Then /^Statement cancel button should be there$/ do
-  on(ItemPage).cancel_statement?.should be_true
+  expect(on(ItemPage).cancel_statement?).to be true
 end
 
 Then /^Statement cancel button should not be there$/ do
-  on(ItemPage).cancel_statement?.should be_false
+  expect(on(ItemPage).cancel_statement?).to be false
 end
 
 Then /^Statement value input element should be there$/ do
-  on(ItemPage).statement_value_input_field?.should be_true
+  expect(on(ItemPage).statement_value_input_field?).to be true
 end
 
 Then /^Statement value input element should not be there$/ do
-  on(ItemPage).statement_value_input?.should be_false
+  expect(on(ItemPage).statement_value_input?).to be false
 end
 
 Then /^Statement name of group (.+) should be the label of (.+)$/ do |group_index, handle|
-  on(ItemPage).statement_name_element(group_index).text.should == @properties[handle]["label"]
+  expect(on(ItemPage).statement_name_element(group_index).text).to be == @properties[handle]["label"]
 end
 
 Then /^Statement string value of claim (.+) in group (.+) should be (.+)$/ do |claim_index, group_index, value|
-  on(ItemPage).statement_string_value(group_index, claim_index).should == value
+  expect(on(ItemPage).statement_string_value(group_index, claim_index)).to be == value
 end
 
 Then /^Statement value of claim (.+) in group (.+) should be the label of item (.+)$/ do |claim_index, group_index, handle|
-  on(ItemPage).statement_value_element(group_index, claim_index).text.should == @items[handle]["label"]
+  expect(on(ItemPage).statement_value_element(group_index, claim_index).text).to be == @items[handle]["label"]
 end

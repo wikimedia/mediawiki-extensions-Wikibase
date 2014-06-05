@@ -8,7 +8,7 @@
 # tests for the Special:SetLabel page
 
 Then /^Language input field should be there$/ do
-  on(SpecialModifyTermPage).language_input_field?.should be_true
+  expect(on(SpecialModifyTermPage).language_input_field?).to be true
 end
 
 When /^I enter (.+) into the language input field$/ do |language_code|
