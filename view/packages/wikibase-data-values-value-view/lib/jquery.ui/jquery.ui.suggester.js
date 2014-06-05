@@ -109,6 +109,12 @@
 		_term: null,
 
 		/**
+		 * Minimum amount of characters to begin a search.
+		 * @type {int}
+		 */
+		_minTermLength: 1,
+
+		/**
 		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
@@ -398,7 +404,7 @@
 
 			this._term = this.element.val();
 
-			if( this._term.length < 1 ) {
+			if( this._term.length < this._minTermLength ) {
 				this._close();
 				return deferred.resolve( [], this._term ).promise();
 			}
