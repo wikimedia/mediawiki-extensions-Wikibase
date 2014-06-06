@@ -15,7 +15,6 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  * @since 0.1
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemContent extends EntityContent {
 
@@ -31,7 +30,7 @@ class ItemContent extends EntityContent {
 	 * @since 0.1
 	 * @var Item
 	 */
-	protected $item;
+	private $item;
 
 	/**
 	 * Do not use to construct new stuff from outside of this class,
@@ -175,7 +174,7 @@ class ItemContent extends EntityContent {
 		return array_merge(
 			parent::getEntityPageProperties(),
 			array(
-				'wb-sitelinks' => count( $item->getSiteLinks() ),
+				'wb-sitelinks' => $item->getSiteLinkList()->count(),
 			)
 		);
 	}
@@ -201,4 +200,5 @@ class ItemContent extends EntityContent {
 
 		return $status;
 	}
+
 }
