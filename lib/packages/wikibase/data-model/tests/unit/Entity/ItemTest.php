@@ -713,4 +713,8 @@ class ItemTest extends EntityTest {
 		$this->assertCount( 0, $entity->getClaims(), "should be empty again" );
 	}
 
+	public function testEmptyItemReturnsEmptySiteLinkList() {
+		$this->assertTrue( Item::newEmpty()->getSiteLinkList()->isEmpty() );
+	}
+
 }
