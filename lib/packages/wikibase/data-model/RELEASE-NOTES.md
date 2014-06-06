@@ -37,7 +37,6 @@ Removal of `toArray` and `newFromArray`:
 Other breaking changes:
 
 * `Claim` and `Statement` no longer implement `Serializable`
-* `SiteLinkList` is now mutable
 * Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
 * Removed `Fingerprint::getAliases`
 * Removed `EntityId::newFromPrefixedId`
@@ -62,6 +61,7 @@ Other breaking changes:
 
 * `Item::removeSiteLink` no longer takes an optional second parameter and no longer returns a boolean
 * Shallow clones of `Item` will now share the same list of site links
+* `SiteLinkList` is now mutable
 
 #### Additions
 
