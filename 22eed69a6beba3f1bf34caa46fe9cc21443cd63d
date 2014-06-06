@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_37eb34a2",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "I know. But then the hook could not handle changes to/from a redirect.",
+      "parentUuid": "2e1a5767_0efcacb0",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_ee285034",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 9
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_f7349c48",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "The global mapping between Entities and Pages. It\u0027s backed by database table. We need to update it when entities get created or deleted. Don\u0027t blame me for the class name...",
+      "parentUuid": "2e1a5767_ce2d9443",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_ae22584e",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 9
@@ -64,6 +100,24 @@
       "writtenOn": "2014-06-05T16:08:31Z",
       "side": 1,
       "message": "Whoops. Should be $this-\u003e...",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_171718aa",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e1a5767_ae22584e",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_972a08d6",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "No. The hook needs to be notified about changes to/from entity redirects too.",
+      "parentUuid": "2e1a5767_8e279c5f",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_6e1c4019",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 9
@@ -98,6 +170,24 @@
       "writtenOn": "2014-06-05T16:08:31Z",
       "side": 1,
       "message": "Could be $content-\u003egetEntity(). See comments in EntityContent.php.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_77276c0e",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "2e1a5767_6e1c4019",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_57247007",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "2e1a5767_4e198426",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_0eba6c1e",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 9
@@ -132,6 +240,24 @@
       "writtenOn": "2014-06-05T16:08:31Z",
       "side": 1,
       "message": "The old code did this. This will waste some resources by doing a SELECT in EntityPerPageTable::addEntityPage. Is this a problem?",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_3721f4f6",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "probably not a problem.",
+      "parentUuid": "2e1a5767_0eba6c1e",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_177ef8e1",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "nope.",
+      "parentUuid": "2e1a5767_2e1648f7",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_0e138c06",
         "filename": "repo/includes/content/ItemContent.php",
         "patchSetId": 9
@@ -166,6 +310,24 @@
       "writtenOn": "2014-06-05T16:08:31Z",
       "side": 1,
       "message": "Uh? Why is this code here in the comment?",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_f7825ccc",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "an accident...",
+      "parentUuid": "2e1a5767_0e138c06",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -206,6 +368,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_77552c52",
+        "filename": "repo/includes/content/PropertyHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "That just shifts the warning, since Entity doesn\u0027t have getDataTypeId(). I\u0027d need a temp variable and an explicite case to avoid it.",
+      "parentUuid": "2e1a5767_cedc744e",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_8ee67c12",
         "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
         "patchSetId": 9
@@ -223,6 +403,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_f7c81c27",
+        "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "I don\u0027t really need the concept of an UpdateObject in two places. I need the knowledge of how to construct a property info array from a Property in two places. Yes, this should be wrapped nicely, perhaps in PropertyInfoStore or, perhaps better, a new PropertyInfo class. Not in this patch though.",
+      "parentUuid": "2e1a5767_8ee67c12",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_4ee864dd",
         "filename": "repo/includes/updates/DataUpdateClosure.php",
         "patchSetId": 9
@@ -234,6 +432,24 @@
       "writtenOn": "2014-06-05T16:08:31Z",
       "side": 1,
       "message": "What about DelegatedDataUpdate?\n\nAlso: Backslash.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_d7cd2036",
+        "filename": "repo/includes/updates/DataUpdateClosure.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "How about DataUpdateAdapterForCallables?...\n\n\"Delegated\" doesn\u0027t tell me what it delegates to, and also, it should probably be \"Delegating\", not \"Delegated\", right?....",
+      "parentUuid": "2e1a5767_4ee864dd",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -308,6 +524,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_57e11096",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "But the EntityId is not yet set. The first line actually assigns it. We could get away with just passing the Entity object I guess.",
+      "parentUuid": "2e1a5767_aeb818e3",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_4ecf4483",
         "filename": "repo/tests/phpunit/includes/content/ItemHandlerTest.php",
         "patchSetId": 9
@@ -319,6 +553,24 @@
       "writtenOn": "2014-06-05T16:08:31Z",
       "side": 1,
       "message": "What? Hey, if it\u0027s that easy, why do we even need lookups?",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_37de94df",
+        "filename": "repo/tests/phpunit/includes/content/ItemHandlerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "Because it\u0027s not guaranteed to be that easy for all kinds of entity forever. This is just where the simple implementation for the simple case of Property is. I\u0027m actually changing the Lookup to use the method from the EntityHandler for the \"simple\" cases.",
+      "parentUuid": "2e1a5767_4ecf4483",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -342,6 +594,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_17eb9878",
+        "filename": "repo/tests/phpunit/includes/content/ItemHandlerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "see above.",
+      "parentUuid": "2e1a5767_ceaa3482",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_aeaff890",
         "filename": "repo/tests/phpunit/includes/content/PropertyHandlerTest.php",
         "patchSetId": 9
@@ -353,6 +623,24 @@
       "writtenOn": "2014-06-05T16:08:31Z",
       "side": 1,
       "message": "And again.",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_f7effc80",
+        "filename": "repo/tests/phpunit/includes/content/PropertyHandlerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:58:00Z",
+      "side": 1,
+      "message": "This is special knowledge we have about how *properties* map to pages.",
+      "parentUuid": "2e1a5767_aeaff890",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
