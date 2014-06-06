@@ -6,7 +6,7 @@ use Site;
 use SiteStore;
 use Title;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Outputs a sidebar section for other project links.

@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use MediaWikiSite;
 use Site;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Item;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemUsageIndex;
 
 /**
@@ -32,7 +32,7 @@ class ItemUsageIndexTest extends \MediaWikiTestCase {
 		$item->setId( $id );
 
 		foreach ( $links as $siteId => $page ) {
-			$item->addSiteLink( new SimpleSiteLink( $siteId, $page ) );
+			$item->addSiteLink( new SiteLink( $siteId, $page ) );
 		}
 
 		return $item;

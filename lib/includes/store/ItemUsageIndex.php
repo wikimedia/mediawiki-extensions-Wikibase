@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Site;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Index for tracking the usage of entities on a specific client wiki.
