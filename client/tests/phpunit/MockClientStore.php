@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\ClientStore;
 use Wikibase\PropertyInfoStore;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * (Incomplete) ClientStore mock
