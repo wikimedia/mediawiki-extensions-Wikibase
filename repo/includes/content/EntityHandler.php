@@ -21,7 +21,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Updates\DataUpdateClosure;
+use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -602,20 +602,20 @@ abstract class EntityHandler extends ContentHandler {
 
 		// Call the WikibaseEntityDeletionUpdate hook.
 		// Do this before doing any well-known updates.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DataUpdateAdapter(
 			'wfRunHooks',
 			'WikibaseEntityDeletionUpdate',
 			array( $content, $title )
 		);
 
 		// Unregister the entity from the terms table.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DataUpdateAdapter(
 			array( $this->termIndex, 'deleteTermsOfEntity' ),
 			$entityId
 		);
 
 		// Unregister the entity from the EntityPerPage table.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DataUpdateAdapter(
 			array( $this->entityPerPage, 'deleteEntityPage' ),
 			$entityId,
 			$title->getArticleID()
@@ -648,27 +648,27 @@ abstract class EntityHandler extends ContentHandler {
 
 		if ( $content->isRedirect() ) {
 			// Remove the entity from the terms table since it's now a redirect.
-			$updates[] = new DataUpdateClosure(
+			$updates[] = new DataUpdateAdapter(
 				array( $this->termIndex, 'deleteTermsOfEntity' ),
 				$entityId
 			);
 
 			// Unregister the entity from the EntityPerPage table.
-			$updates[] = new DataUpdateClosure(
+			$updates[] = new DataUpdateAdapter(
 				array( $this->entityPerPage, 'deleteEntityPage' ),
 				$entityId,
 				$title->getArticleID()
 			);
 		} else {
 			// Register the entity in the EntityPerPage table.
-			$updates[] = new DataUpdateClosure(
+			$updates[] = new DataUpdateAdapter(
 				array( $this->entityPerPage, 'addEntityPage' ),
 				$entityId,
 				$title->getArticleID()
 			);
 
 			// Register the entity in the terms table.
-			$updates[] = new DataUpdateClosure(
+			$updates[] = new DataUpdateAdapter(
 				array( $this->termIndex, 'saveTermsOfEntity' ),
 				$content->getEntity()
 			);
@@ -676,7 +676,7 @@ abstract class EntityHandler extends ContentHandler {
 
 		// Call the WikibaseEntityModificationUpdate hook.
 		// Do this after doing all well-known updates.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DataUpdateAdapter(
 			'wfRunHooks',
 			'WikibaseEntityModificationUpdate',
 			array( $content, $title )

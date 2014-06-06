@@ -4,10 +4,10 @@ namespace Wikibase\Updates\Test;
 
 use RuntimeException;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
-use Wikibase\Updates\DataUpdateClosure;
+use Wikibase\Updates\DataUpdateAdapter;
 
 /**
- * @covers Wikibase\Updates\DataUpdateClosure
+ * @covers Wikibase\Updates\DataUpdateAdapter
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -15,14 +15,14 @@ use Wikibase\Updates\DataUpdateClosure;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DataUpdateClosureTest extends \PHPUnit_Framework_TestCase {
+class DataUpdateAdapterTest extends \PHPUnit_Framework_TestCase {
 
 	public function testDoUpdate() {
 		$reporter = $this->getMock( 'Wikibase\Lib\Reporting\MessageReporter' );
 		$reporter->expects( $this->once() )
 			->method( 'reportMessage' );
 
-		$update = new DataUpdateClosure( function() { throw new RuntimeException( 'Test' ); } );
+		$update = new DataUpdateAdapter( function() { throw new RuntimeException( 'Test' ); } );
 		$update->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 
 		// Should call the callback provided to the constructor, which will throw an exception,

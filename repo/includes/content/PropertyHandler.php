@@ -6,7 +6,7 @@ use DataUpdate;
 use Title;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Updates\DataUpdateClosure;
+use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -133,7 +133,7 @@ class PropertyHandler extends EntityHandler {
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DataUpdateAdapter(
 			array( $this->infoStore, 'removePropertyInfo' ),
 			$content->getEntity()->getId()
 		);
@@ -166,7 +166,7 @@ class PropertyHandler extends EntityHandler {
 			PropertyInfoStore::KEY_DATA_TYPE => $content->getProperty()->getDataTypeId()
 		);
 
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DataUpdateAdapter(
 			array( $this->infoStore, 'setPropertyInfo' ),
 			$content->getEntity()->getId(),
 			$info

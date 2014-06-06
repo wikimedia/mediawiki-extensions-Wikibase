@@ -7,7 +7,7 @@ use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
-use Wikibase\Updates\DataUpdateClosure;
+use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -114,7 +114,7 @@ class ItemHandler extends EntityHandler {
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DataUpdateAdapter(
 			array( $this->siteLinkStore, 'deleteLinksOfItem' ),
 			$content->getEntityId()
 		);
@@ -141,12 +141,12 @@ class ItemHandler extends EntityHandler {
 		$updates = array();
 
 		if ( $content->isRedirect() ) {
-			$updates[] = new DataUpdateClosure(
+			$updates[] = new DataUpdateAdapter(
 				array( $this->siteLinkStore, 'deleteLinksOfItem' ),
 				$content->getEntityId()
 			);
 		} else {
-			$updates[] = new DataUpdateClosure(
+			$updates[] = new DataUpdateAdapter(
 				array( $this->siteLinkStore, 'saveLinksOfItem' ),
 				$content->getEntity()
 			);
