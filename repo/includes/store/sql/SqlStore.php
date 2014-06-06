@@ -10,6 +10,8 @@ use ObjectCache;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;

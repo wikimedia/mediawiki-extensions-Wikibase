@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 

@@ -46,7 +46,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 	 */
 	public function testGetMovePageNoticeHtml( $expected, Title $oldTitle, Title $newTitle, $message ) {
 		$siteLinkLookup = $this->getMock(
-			'Wikibase\SiteLinkTable',
+			'Wikibase\Lib\Store\SiteLinkTable',
 			array( 'getEntityIdForSiteLink' ),
 			array( 'SiteLinkTable', true )
 		);

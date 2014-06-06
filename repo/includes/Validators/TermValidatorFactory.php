@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Provides validators for terms (like the maximum length of labels, etc).
