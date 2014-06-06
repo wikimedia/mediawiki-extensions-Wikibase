@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_b7b184de",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:19:18Z",
+      "side": 1,
+      "message": "Note that the Content interface requires us to provide a way to get an empty Content object. We could have that method fail (it\u0027s mainly used when creating a new page the standard MediaWiki way, which we don\u0027t need), or create an EntityContent with no entity... but we need to make some decision there.",
+      "revId": "187ca67ff916db1488c7b6d1f1b76fcbf975704a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_d7e3e0d2",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:19:18Z",
+      "side": 1,
+      "message": "This comment does not apply to newFromArray(). newFromArray() could check that it has all desired info, and fail if it doesn\u0027t.\n\nWe need some generic interface for constructing an entity given an entity type and an array structure. Internally, it would use the appropriate deserializer (picked based on the entity type). But we need this kind of method *somewhere* - where should it be, if not in EntityFactory?",
+      "revId": "187ca67ff916db1488c7b6d1f1b76fcbf975704a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_f7b7fcd1",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:19:18Z",
+      "side": 1,
+      "message": "unrelated / pointless",
+      "revId": "187ca67ff916db1488c7b6d1f1b76fcbf975704a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
