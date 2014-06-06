@@ -80,9 +80,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
 
-	public static function provideValidConstruction() {
-		$from = self::getItem( 'Q111' );
-		$to = self::getItem( 'Q222' );
+	public function provideValidConstruction() {
+		$from = $this->newItemWithId( 'Q111' );
+		$to = $this->newItemWithId( 'Q222' );
 		return array(
 			array( $from, $to, array() ),
 			array( $from, $to, array( 'label' ) ),
@@ -104,9 +104,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public static function provideInvalidConstruction() {
-		$from = self::getItem( 'Q111' );
-		$to = self::getItem( 'Q222' );
+	public function provideInvalidConstruction() {
+		$from = $this->newItemWithId( 'Q111' );
+		$to = $this->newItemWithId( 'Q222' );
 		return array(
 			array( $from, $to, array( 'foo' ) ),
 			array( $from, $to, array( 'label', 'foo' ) ),
@@ -122,6 +122,12 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	public static function getItem( $id, array $data = array() ) {
 		$item = new Item( $data );
 		$item->setId( new ItemId( $id ) );
+		return $item;
+	}
+
+	private function newItemWithId( $idString ) {
+		$item = Item::newEmpty();
+		$item->setId( new Itemid( $idString ) );
 		return $item;
 	}
 
@@ -345,12 +351,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testExceptionThrownWhenSitelinkDuplicatesDetected() {
-		$from = self::getItem( 'Q111', array() );
-		$to = self::getItem( 'Q222', array(
-			'links' => array(
-				'eewiki' => array( 'site' => 'eewiki', 'name' => 'DUPE' )
-			)
-		) );
+		$from = $this->newItemWithId( 'Q111' );
+		$to = $this->newItemWithId( 'Q222' );
+		$to->getSiteLinkList()->addNewSiteLink( 'eewiki', 'DUPE' );
 
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
@@ -366,16 +369,11 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 
 	public function testExceptionNotThrownWhenSitelinkDuplicatesDetectedOnFromItem() {
 		// the from-item keeps the sitelinks
-		$from = self::getItem( 'Q111', array(
-			'links' => array(
-				'eewiki' => array( 'site' => 'eewiki', 'name' => 'DUPE' )
-			)
-		) );
-		$to = self::getItem( 'Q222', array(
-			'links' => array(
-				'eewiki' => array( 'site' => 'eewiki', 'name' => 'BLOOP' )
-			)
-		) );
+		$from = $this->newItemWithId( 'Q111' );
+		$from->getSiteLinkList()->addNewSiteLink( 'eewiki', 'DUPE' );
+
+		$to = $this->newItemWithId( 'Q222' );
+		$to->getSiteLinkList()->addNewSiteLink( 'eewiki', 'BLOOP' );
 
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
