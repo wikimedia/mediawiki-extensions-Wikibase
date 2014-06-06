@@ -17,7 +17,7 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DataUpdateClosure extends DataUpdate {
+class DelegatingDataUpdate extends DataUpdate {
 
 	/**
 	 * @var callable
