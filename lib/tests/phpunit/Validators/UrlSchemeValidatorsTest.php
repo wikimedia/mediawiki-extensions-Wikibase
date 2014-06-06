@@ -124,10 +124,7 @@ class UrlSchemeValidatorsTest extends \PHPUnit_Framework_TestCase {
 		$validators = $fatory->getValidators( $schemes );
 
 		$this->assertEquals( array( 'http', 'https', 'ftp' ), array_keys( $validators ) );
-
-		foreach ( $validators as $validator ) {
-			$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
-		}
+		$this->assertContainsOnlyInstancesOf( 'ValueValidators\ValueValidator', $validators );
 	}
 
 }

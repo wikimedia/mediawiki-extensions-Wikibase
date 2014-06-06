@@ -31,7 +31,7 @@ class DataUpdateClosure extends DataUpdate {
 
 	/**
 	 * @param callable $function
-	 * @param mixed [$arg, ...]
+	 * @param mixed [$args,...]
 	 *
 	 * @throws InvalidArgumentException
 	 */

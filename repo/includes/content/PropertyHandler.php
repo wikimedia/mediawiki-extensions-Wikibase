@@ -131,6 +131,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
+		/** @var PropertyContent $content */
 		$updates = array();
 
 		//XXX: Where to encode the knowledge about how to extract an info array from a Property object?
@@ -152,4 +153,3 @@ class PropertyHandler extends EntityHandler {
 	}
 
 }
-
