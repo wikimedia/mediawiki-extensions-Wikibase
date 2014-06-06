@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityIdPager;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\ItemsPerSiteBuilder;
-use Wikibase\SiteLinkTable;
+use Wikibase\Lib\Store\SiteLinkTable;
 
 /**
  * @covers Wikibase\ItemsPerSiteBuilder

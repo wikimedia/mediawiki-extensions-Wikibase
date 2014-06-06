@@ -1,7 +1,8 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**

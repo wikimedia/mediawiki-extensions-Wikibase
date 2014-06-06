@@ -5,7 +5,7 @@ namespace Wikibase\Validators;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Provides constraints for each entity type.
