@@ -2,14 +2,14 @@
 
 namespace Wikibase\Test;
 
-use Diff\Diff;
-use Diff\DiffOpChange;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpChange;
 use Exception;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityChange;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemChange;
-use Wikibase\ItemDiff;
+use Wikibase\DataModel\Entity\ItemDiff;
 
 /**
  * @covers Wikibase\ItemChange
@@ -162,4 +162,15 @@ class ItemChangeTest extends EntityChangeTest {
 			throw $exception;
 		}
 	}
+
+	public function testNewFromUpdate() {
+		$item = Item::newEmpty();
+		$item->setId( 112 );
+		$item->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
+
+		$itemChange = ItemChange::newFromUpdate( EntityChange::UPDATE, null, $item );
+
+		$this->assertFalse( $itemChange->isEmpty() );
+	}
+
 }
