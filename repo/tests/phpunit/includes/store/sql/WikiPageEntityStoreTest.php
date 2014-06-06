@@ -62,7 +62,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// create one
-		$one = new Item( array( 'label' => array( 'en' => 'one' ) ) );
+		$one = Item::newEmpty();
+		$one->setLabel( 'en', 'one' );
 
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
 		$oneId = $r1->getEntity()->getId();
@@ -73,7 +74,9 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $r1->getEntity()->getId(), $r1actual->getEntity()->getId(), 'entity id' );
 
 		// update one
-		$one = new Item( array( 'entity' => $oneId->getSerialization(), 'label' => array( 'en' => 'ONE' ) ) );
+		$one = Item::newEmpty();
+		$one->setId( $oneId );
+		$one->setLabel( 'en', 'ONE' );
 
 		$r2 = $store->saveEntity( $one, 'update one', $user, EDIT_UPDATE );
 		$this->assertNotEquals( $r1->getRevision(), $r2->getRevision(), 'expected new revision id' );
@@ -85,16 +88,24 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideSaveEntityError() {
+		$firstItem = Item::newEmpty();
+		$firstItem->setLabel( 'en', 'one' );
+
+		$secondItem = Item::newEmpty();
+		$secondItem->setId( 768476834 );
+		$secondItem->setLabel( 'en', 'Bwahahaha' );
+		$secondItem->setLabel( 'de', 'Kähähähä' );
+
 		return array(
 			'not fresh' => array(
-				'entity' => new Item( array( 'label' => array( 'en' => 'one' ) ) ),
+				'entity' => $firstItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
 				'error' => 'Wikibase\StorageException'
 			),
 
 			'not exists' => array(
-				'entity' => new Item( array( 'entity' => 'Q768476834', 'label' => array( 'en' => 'Bwahahaha', 'de' => 'Kähähähä' ) ) ),
+				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
 				'error' => 'Wikibase\StorageException'
@@ -111,7 +122,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// setup target item
-		$one = new Item( array( 'label' => array( 'en' => 'one' ) ) );
+		$one = Item::newEmpty();
+		$one->setLabel( 'en', 'one' );
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
 
 		// inject ids
