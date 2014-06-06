@@ -20,15 +20,13 @@ use WikiPage;
  * @since 0.1
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class PropertyContent extends EntityContent {
 
 	/**
-	 * @since 0.1
 	 * @var Property
 	 */
-	protected $property;
+	private $property;
 
 	/**
 	 * Do not use to construct new stuff from outside of this class,
@@ -59,19 +57,6 @@ class PropertyContent extends EntityContent {
 	 */
 	public static function newFromProperty( Property $property ) {
 		return new static( $property );
-	}
-
-	/**
-	 * Create a new PropertyContent object from the provided Property data.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return PropertyContent
-	 */
-	public static function newFromArray( array $data ) {
-		return new static( new Property( $data ) );
 	}
 
 	/**
@@ -212,4 +197,5 @@ class PropertyContent extends EntityContent {
 			$configBuilder
 		);
 	}
+
 }
