@@ -22,11 +22,8 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Updates\DataUpdateClosure;
+use Wikibase\Updates\DelegatingDataUpdate;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
@@ -504,19 +501,19 @@ abstract class EntityHandler extends ContentHandler {
 
 		// Call the WikibaseEntityDeletionUpdate hook.
 		// Do this before doing any well-known updates.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			'wfRunHooks',
 			'WikibaseEntityDeletionUpdate',
 			array( $content, $title ) );
 
 		// Unregister the entity from the terms table.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			array( $this->termIndex, 'deleteTermsOfEntity' ),
 			$content->getEntity()->getId()
 		);
 
 		// Unregister the entity from the EntityPerPage table.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			array( $this->entityPerPage, 'deleteEntityPage' ),
 			$content->getEntity()->getId(),
 			$title->getArticleID()
@@ -544,21 +541,21 @@ abstract class EntityHandler extends ContentHandler {
 		// @todo: Only do this if the entity is new.
 		// Note that $title->exists() will already return true at this point
 		// even if we are just now creating the entity.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			array( $this->entityPerPage, 'addEntityPage' ),
 			$content->getEntity()->getId(),
 			$title->getArticleID()
 		);
 
 		// Register the entity in the terms table.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			array( $this->termIndex, 'saveTermsOfEntity' ),
 			$content->getEntity()
 		);
 
 		// Call the WikibaseEntityModificationUpdate hook.
 		// Do this after doing all well-known updates.
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			'wfRunHooks',
 			'WikibaseEntityModificationUpdate',
 			array( $content, $title )
