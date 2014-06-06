@@ -380,7 +380,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// create one
-		$one = new Item( array( 'label' => array( 'en' => 'one' ) ) );
+		$one = Item::newEmpty();
+		$one->setLabel( 'en', 'one' );
 
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
 		$oneId = $r1->getEntity()->getId();
