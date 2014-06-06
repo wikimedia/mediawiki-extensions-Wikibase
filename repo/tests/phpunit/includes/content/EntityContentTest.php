@@ -8,15 +8,15 @@ use IContextSource;
 use ParserOptions;
 use RequestContext;
 use Title;
-use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDiff;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
-use WikitextContent;
 
 /**
  * @covers Wikibase\EntityContent
@@ -31,21 +31,21 @@ use WikitextContent;
  */
 abstract class EntityContentTest extends \MediaWikiTestCase {
 
-	protected $permissions;
-	protected $old_user;
+	private $originalGroupPermissions;
+	private $originalUser;
 
 	/**
 	 * @var EntityStore
 	 */
-	protected $entityStore;
+	private $entityStore;
 
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
 
 		parent::setUp();
 
-		$this->permissions = $wgGroupPermissions;
-		$this->old_user = $wgUser;
+		$this->originalGroupPermissions = $wgGroupPermissions;
+		$this->originalUser = $wgUser;
 
 		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 	}
@@ -54,10 +54,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		global $wgGroupPermissions;
 		global $wgUser;
 
-		$wgGroupPermissions = $this->permissions;
+		$wgGroupPermissions = $this->originalGroupPermissions;
 
-		if ( $this->old_user ) { // should not be null, but sometimes, it is
-			$wgUser = $this->old_user;
+		if ( $this->originalUser ) { // should not be null, but sometimes, it is
+			$wgUser = $this->originalUser;
 		}
 
 		if ( $wgUser ) { // should not be null, but sometimes, it is
@@ -374,15 +374,15 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertTrue( $expected->equals( $actual ), 'equals()' );
 	}
 
-	protected function getExistingPageTitle( EntityContent $content ) {
+	private function createTitleForEntity( Entity $entity ) {
 		// NOTE: needs database access
-		$this->entityStore->assignFreshId( $content->getEntity() );
+		$this->entityStore->assignFreshId( $entity );
 		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$title = $titleLookup->getTitleForId( $content->getEntity()->getId() );
+		$title = $titleLookup->getTitleForId( $entity->getId() );
 
 		if ( !$title->exists() ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-			$store->saveEntity( $content->getEntity(), 'test', $GLOBALS['wgUser'] );
+			$store->saveEntity( $entity, 'test', $GLOBALS['wgUser'] );
 
 			// $title lies, make a new one
 			$title = Title::makeTitleSafe( $title->getNamespace(), $title->getText() );
@@ -396,30 +396,27 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSecondaryDataUpdates() {
-		$empty = $this->newEmpty();
-		$title = $this->getExistingPageTitle( $empty );
+		$entityContent = $this->newEmpty();
+		$title = $this->createTitleForEntity( $entityContent->getEntity() );
 
 		// NOTE: $title->exists() must be true.
-		$updates = $empty->getSecondaryDataUpdates( $title );
+		$updates = $entityContent->getSecondaryDataUpdates( $title );
 
 		$this->assertDataUpdates( $updates );
 	}
 
 	public function testGetDeletionUpdates() {
-		$empty = $this->newEmpty();
-		$title = $this->getExistingPageTitle( $empty );
+		$entityContent = $this->newEmpty();
+		$title = $this->createTitleForEntity( $entityContent->getEntity() );
 
-		$updates = $empty->getDeletionUpdates( new WikiPage( $title ) );
+		$updates = $entityContent->getDeletionUpdates( new WikiPage( $title ) );
 
 		$this->assertDataUpdates( $updates );
 	}
 
-	protected function assertDataUpdates( $updates ) {
-
+	private function assertDataUpdates( $updates ) {
 		$this->assertInternalType( 'array', $updates );
-
-		foreach ( $updates as $update ) {
-			$this->assertInstanceOf( 'DataUpdate', $update );
-		}
+		$this->assertContainsOnlyInstancesOf( 'DataUpdate', $updates );
 	}
+
 }
