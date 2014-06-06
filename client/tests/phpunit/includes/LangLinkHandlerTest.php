@@ -19,7 +19,7 @@ use Wikibase\NamespaceChecker;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class LangLinkHandlerTest extends \MediaWikiTestCase {
+class LangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	/* @var MockRepository $mockRepo */
 	private $mockRepo;
