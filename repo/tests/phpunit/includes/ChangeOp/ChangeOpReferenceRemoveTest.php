@@ -8,10 +8,11 @@ use Wikibase\ChangeOp\ChangeOpReferenceRemove;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpReferenceRemove
@@ -45,7 +46,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q345', $snak );
+		$item = $this->newItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
 		/** @var Statement $claim */
 		$claim = reset( $claims );
@@ -61,7 +62,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		$changeOp = new ChangeOpReferenceRemove( $claimGuid, $referenceHash );
 		$args[ 'Removing a single reference' ] = array ( $item, $changeOp, $referenceHash );
 
-		$item = $this->provideNewItemWithClaim( 'q346', $snak );
+		$item = $this->newItemWithClaim( 'q346', $snak );
 		$claims = $item->getClaims();
 		/** @var Statement $claim */
 		$claim = reset( $claims );
@@ -98,15 +99,17 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $references->hasReferenceHash( $referenceHash ), "Reference still exists" );
 	}
 
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
-		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
-		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8494TYA-25E4-4334-AG03-A3290BCT9CQP' );
+	private function newItemWithClaim( $itemIdString, $snak ) {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( $itemIdString ) );
+
+		$claim = $item->newClaim( $snak );
+		$claim->setGuid( $item->getId()->getPrefixedId() . '$D8494TYA-25E4-4334-AG03-A3290BCT9CQP' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
-		$entity->setClaims( $claims );
+		$item->setClaims( $claims );
 
-		return $entity;
+		return $item;
 	}
 
 }
