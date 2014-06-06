@@ -5,6 +5,8 @@ namespace Wikibase\Test;
 use Title;
 use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLinkList;
 
 /**
  * @covers Wikibase\Client\ClientSiteLinkLookup
@@ -18,26 +20,28 @@ use Wikibase\DataModel\Entity\Item;
  */
 class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 
-	static $itemData = array(
-		1 => array(
-			'id' => 1,
-			'label' => array( 'en' => 'Foo' ),
-			'links' => array(
-				'dewiki' => array(
-					'name' => 'Foo de',
-					'badges' => array( 'Q3' )
-				),
-				'enwiki' => array(
-					'name' => 'Foo en',
-					'badges' => array( 'Q4', 'Q123' )
-				),
-				'srwiki' => 'Foo sr',
-				'nlwiki' => 'ThisIsANamespace:Foo nl',
-				'dewiktionary' => 'Foo de word',
-				'enwiktionary' => 'Foo en word',
-			)
-		)
-	);
+	private function newSiteLinkList() {
+		$list = new SiteLinkList();
+
+		$list->addNewSiteLink( 'dewiki', 'Foo de', array( new ItemId( 'Q3' ) ) );
+		$list->addNewSiteLink( 'enwiki', 'Foo en', array( new ItemId( 'Q3' ), new ItemId( 'Q123' ) ) );
+		$list->addNewSiteLink( 'srwiki', 'Foo sr' );
+		$list->addNewSiteLink( 'nlwiki', 'ThisIsANamespace:Foo nl' );
+		$list->addNewSiteLink( 'dewiktionary', 'Foo de word' );
+		$list->addNewSiteLink( 'enwiktionary', 'Foo en word' );
+
+		return $list;
+	}
+
+	private function newItem() {
+		$item = Item::newEmpty();
+
+		$item->setId( 1 );
+		$item->setLabel( 'en', 'Foo' );
+		$item->setSiteLinkList( $this->newSiteLinkList() );
+
+		return $item;
+	}
 
 	/**
 	 * @param string $localSiteId
@@ -45,12 +49,10 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 	 * @return ClientSiteLinkLookup
 	 */
 	private function getClientSiteLinkLookup( $localSiteId ) {
-		$mockRepo = new MockRepository();
+		$item = $this->newItem();
 
-		foreach ( self::$itemData as $key => $data ) {
-			$item = new Item( $data );
-			$mockRepo->putEntity( $item );
-		}
+		$mockRepo = new MockRepository();
+		$mockRepo->putEntity( $item );
 
 		return new ClientSiteLinkLookup(
 			$localSiteId,
@@ -62,26 +64,25 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetSiteLinks
 	 */
-	public function testGetSiteLinks( $expected, $localSiteId, Title $title, $message ) {
+	public function testGetSiteLinks( SiteLinkList $expectedLinks, $localSiteId, Title $title, $message ) {
 		$clientSiteLinkLookup = $this->getClientSiteLinkLookup( $localSiteId );
 
 		$this->assertEquals(
-			$expected,
-			$clientSiteLinkLookup->getSiteLinks( $title ),
+			$expectedLinks,
+			new SiteLinkList( $clientSiteLinkLookup->getSiteLinks( $title ) ),
 			$message
 		);
 	}
 
 	public function provideGetSiteLinks() {
-		$item = new Item( self::$itemData[1] );
-		$sitelinks = $item->getSiteLinks();
+		$siteLinks = $this->newSiteLinkList();
 
 		return array(
-			array( $sitelinks, 'dewiki', Title::newFromText( 'Foo de' ), 'from dewiki title' ),
-			array( $sitelinks, 'enwiktionary', Title::newFromText( 'Foo en word' ), 'from enwiktionary title' ),
-			array( $sitelinks, 'nlwiki', Title::newFromText( 'ThisIsANamespace:Foo nl' ), 'from nlwiki non-main namespace title' ),
-			array( array(), 'enwiki', Title::newFromText( 'Bar en' ), 'from nonexisting title' ),
-			array( array(), 'barwiki', Title::newFromText( 'Foo bar' ), 'from nonexisting site' ),
+			array( $siteLinks, 'dewiki', Title::newFromText( 'Foo de' ), 'from dewiki title' ),
+			array( $siteLinks, 'enwiktionary', Title::newFromText( 'Foo en word' ), 'from enwiktionary title' ),
+			array( $siteLinks, 'nlwiki', Title::newFromText( 'ThisIsANamespace:Foo nl' ), 'from nlwiki non-main namespace title' ),
+			array( new SiteLinkList(), 'enwiki', Title::newFromText( 'Bar en' ), 'from nonexisting title' ),
+			array( new SiteLinkList(), 'barwiki', Title::newFromText( 'Foo bar' ), 'from nonexisting site' ),
 		);
 	}
 
@@ -99,13 +100,13 @@ class ClientSiteLinkLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetSiteLink() {
-		$item = new Item( self::$itemData[1] );
+		$links = $this->newSiteLinkList();
 
 		return array(
-			array( $item->getSiteLink( 'enwiki' ), 'dewiki', Title::newFromText( 'Foo de' ), 'enwiki', 'enwiki from dewiki title' ),
-			array( $item->getSiteLink( 'dewiktionary' ), 'enwiktionary', Title::newFromText( 'Foo en word' ), 'dewiktionary', 'dewiktionary from enwiktionary title' ),
-			array( $item->getSiteLink( 'enwiki' ), 'nlwiki', Title::newFromText( 'ThisIsANamespace:Foo nl' ), 'enwiki', 'enwiki from nlwiki non-main namespace title' ),
-			array( $item->getSiteLink( 'nlwiki' ), 'enwiki', Title::newFromText( 'Foo en' ), 'nlwiki', 'non-main namespace nlwiki from enwiki title' ),
+			array( $links->getBySiteId( 'enwiki' ), 'dewiki', Title::newFromText( 'Foo de' ), 'enwiki', 'enwiki from dewiki title' ),
+			array( $links->getBySiteId( 'dewiktionary' ), 'enwiktionary', Title::newFromText( 'Foo en word' ), 'dewiktionary', 'dewiktionary from enwiktionary title' ),
+			array( $links->getBySiteId( 'enwiki' ), 'nlwiki', Title::newFromText( 'ThisIsANamespace:Foo nl' ), 'enwiki', 'enwiki from nlwiki non-main namespace title' ),
+			array( $links->getBySiteId( 'nlwiki' ), 'enwiki', Title::newFromText( 'Foo en' ), 'nlwiki', 'non-main namespace nlwiki from enwiki title' ),
 			array( null, 'enwiki', Title::newFromText( 'Bar en' ), 'dewiki', 'from nonexisting title' ),
 			array( null, 'barwiki', Title::newFromText( 'Foo bar' ), 'enwiki', 'from nonexisting site' ),
 			array( null, 'dewiki', Title::newFromText( 'Foo de' ), 'frwiki', 'nonexisting site from dewiki title' ),
