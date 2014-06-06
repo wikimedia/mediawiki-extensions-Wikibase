@@ -7,6 +7,7 @@ use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\DataModel\Entity\Item;
 use Language;
 use Title;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
@@ -22,49 +23,43 @@ use Title;
  */
 class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 
-	static $itemData = array(
-		1 => array(
-			'id' => 1,
-			'links' => array(
-				'dewiki' => 'Georg Friedrich Haendel',
-				'enwiki' => array(
-					'name' => 'George Frideric Handel',
-					'badges' => array( 'Q3', 'Q2' )
-				),
-				'nlwiki' => 'Georg Friedrich Haendel'
-			)
-		),
-		2 => array(
-			'id' => 2,
-			'links' => array(
-				'dewiki' => 'Benutzer:Testbenutzer',
-				'enwiki' => array(
-					'name' => 'User:Testuser',
-					'badges' => array( 'Q3', 'Q4' )
-				)
-			)
-		),
-		3 => array(
-			'id' => 3,
-			'label' => array(
-				'en' => 'Good article',
-				'de' => 'Lesenswerter Artikel'
-			)
-		),
-		4 => array(
-			'id' => 4,
-			'label' => array(
-				'en' => 'Featured article',
-				'de' => 'Exzellenter Artikel'
-			)
-		)
-	);
+	private function getItems() {
+		$items = array();
+
+		$item = Item::newEmpty();
+		$item->setId( 1 );
+		$item->getSiteLinkList()
+			->addNewSiteLink( 'dewiki', 'Georg Friedrich Haendel' )
+			->addNewSiteLink( 'nlwiki', 'Georg Friedrich Haendel' )
+			->addNewSiteLink( 'enwiki', 'George Frideric Handel', array( new ItemId( 'Q3' ), new ItemId( 'Q2' ) ) );
+		$items[] = $item;
+
+		$item = Item::newEmpty();
+		$item->setId( 2 );
+		$item->getSiteLinkList()
+			->addNewSiteLink( 'dewiki', 'Benutzer:Testbenutzer' )
+			->addNewSiteLink( 'enwiki', 'User:Testuser', array( new ItemId( 'Q3' ), new ItemId( 'Q4' ) ) );
+		$items[] = $item;
+
+		$item = Item::newEmpty();
+		$item->setId( 3 );
+		$item->setLabel( 'en', 'Good article' );
+		$item->setLabel( 'de', 'Lesenswerter Artikel' );
+		$items[] = $item;
+
+		$item = Item::newEmpty();
+		$item->setId( 4 );
+		$item->setLabel( 'en', 'Featured article' );
+		$item->setLabel( 'de', 'Exzellenter Artikel' );
+		$items[] = $item;
+
+		return $items;
+	}
 
 	private function getLanguageLinkBadgeDisplay() {
 		$mockRepo = new MockRepository();
 
-		foreach ( self::$itemData as $data ) {
-			$item = new Item( $data );
+		foreach ( $this->getItems() as $item ) {
 			$mockRepo->putEntity( $item );
 		}
 
