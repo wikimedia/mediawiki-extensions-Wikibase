@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e3593d1_3216d05b",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "I think we agree that it\u0027s generally not nice to add new stuff to Lib. Can this be avoided at this point? Or is it that much easier to do this in future patches?",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_d20c2448",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "ExceptionLocalizer[]",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_77cacc4b",
         "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
         "patchSetId": 5
@@ -13,6 +47,24 @@
       "writtenOn": "2014-06-06T12:28:25Z",
       "side": 1,
       "message": "I suggest to not have a generic exception message hardcoded in the dispatching localizer. If a generic fallback is wanted, the last localizer in the list provided to the constructor can implement that.",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_150a9624",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this. I wonder why the ExceptionLocalizer interface is designed in a way that it throws an InvalidArgumentException? What\u0027s the use-case for this? All this does is replacing one exception with an other. Which is pretty much the opposite of what an interface that\u0027s supposed to make an error message better readable should do. There is no way around having a sensible default.\n\nSure, we could move the concept of having a GenericMessageLocalizer to an other class. But why? Will the two ever be used separately?",
+      "parentUuid": "2e1a5767_77cacc4b",
       "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -36,6 +88,74 @@
     },
     {
       "key": {
+        "uuid": "0e3593d1_f535d2d8",
+        "filename": "lib/includes/Localizer/MessageExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "Replace with if ( !$this-\u003ehasExceptionMessage( ... ) )? Does this make sense?",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_952c4691",
+        "filename": "lib/includes/Localizer/ParseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "As before.",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_554ede73",
+        "filename": "lib/includes/Localizer/ParseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "Could be simplified, see below.",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_7549e269",
+        "filename": "lib/includes/Localizer/ParseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "if ( $msg \u003d\u003d\u003d null || !$msg-\u003eexists() ) {",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_17015871",
         "filename": "lib/includes/Localizer/WikibaseExceptionLocalizer.php",
         "patchSetId": 5
@@ -47,6 +167,41 @@
       "writtenOn": "2014-06-06T12:28:25Z",
       "side": 1,
       "message": "Just delete this class and replace all usages with an DispatchingExceptionLocalizer. The knowledge about the sub-localizers should be in the factory method that instantiates the \"top\" exception localizer in the application context (WikibaseRepo or WikibaseClient, respectively).",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_35535a1c",
+        "filename": "lib/includes/Localizer/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "But we could easily do this in a separate patch, right? Would make reviewing the two much easier.",
+      "parentUuid": "2e1a5767_17015871",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_f53cb2be",
+        "filename": "lib/includes/Localizer/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T16:34:44Z",
+      "side": 1,
+      "message": "Why is the ChangeOpValidationException from the old code missing here? Shouldn\u0027t this just recreate the old behavior?",
       "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
