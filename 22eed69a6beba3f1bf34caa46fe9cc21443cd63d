@@ -386,6 +386,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_977b28bd",
+        "filename": "repo/includes/content/PropertyHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T15:54:29Z",
+      "side": 1,
+      "message": "Oh, never mind then. See follow-up.",
+      "parentUuid": "2e1a5767_77552c52",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_8ee67c12",
         "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
         "patchSetId": 9
@@ -450,6 +468,24 @@
       "side": 1,
       "message": "How about DataUpdateAdapterForCallables?...\n\n\"Delegated\" doesn\u0027t tell me what it delegates to, and also, it should probably be \"Delegating\", not \"Delegated\", right?....",
       "parentUuid": "2e1a5767_4ee864dd",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_32fa5074",
+        "filename": "repo/includes/updates/DataUpdateClosure.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T15:54:29Z",
+      "side": 1,
+      "message": "But it\u0027s representing a DataUpdate. It\u0027s not something that just points to a DataUpdate. It _is_ a \"custom\" or \"delegated\" or \"functional\" DataUpdate after it\u0027s constructed.\n\nWe agreed on continuing this discussion in a follow-up.",
+      "parentUuid": "2e1a5767_d7cd2036",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -536,6 +572,24 @@
       "side": 1,
       "message": "But the EntityId is not yet set. The first line actually assigns it. We could get away with just passing the Entity object I guess.",
       "parentUuid": "2e1a5767_aeb818e3",
+      "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_924d7c42",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T15:54:29Z",
+      "side": 1,
+      "message": "Oh well. Then it\u0027s the name. This doesn\u0027t get existing objects and returns null or fails if one doesn\u0027t exist. It creates new objects.\n\nBut that\u0027s a private implementation detail and no reason to block this further. See follow-up.",
+      "parentUuid": "2e1a5767_57e11096",
       "revId": "22eed69a6beba3f1bf34caa46fe9cc21443cd63d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
