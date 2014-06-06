@@ -509,7 +509,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
-				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
 			)
 		),
@@ -710,7 +709,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
 				'jquery.ui.suggester',
-				'jquery.ui.ooMenu',
 				'jquery.ui.widget',
 			),
 			'messages' => array(
