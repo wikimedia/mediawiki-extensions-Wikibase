@@ -27,42 +27,38 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/* @var LangLinkHandler $langLinkHandler */
 	private $langLinkHandler;
 
-	static $itemData = array(
-		1 => array( // matching item
-			'id' => 1,
-			'label' => array( 'en' => 'Foo' ),
-			'links' => array(
-				'dewiki' => 'Foo de',
-				'enwiki' => 'Foo en',
-				'srwiki' => 'Foo sr',
-				'dewiktionary' => 'Foo de word',
-				'enwiktionary' => 'Foo en word',
-			)
-		),
-		2 => array( // matches, but not in a namespace with external langlinks enabled
-			'id' => 2,
-			'label' => array( 'en' => 'Talk:Foo' ),
-			'links' => array(
-				'dewiki' => 'Talk:Foo de',
-				'enwiki' => 'Talk:Foo en',
-				'srwiki' => 'Talk:Foo sr',
-			)
-		)
-	);
+	private function getItems() {
+		$items = array();
+
+		$item = Item::newEmpty();
+		$item->setId( 1 );
+		$item->setLabel( 'en', 'Foo' );
+		$item->getSiteLinkList()
+			->addNewSiteLink( 'dewiki', 'Foo de' )
+			->addNewSiteLink( 'enwiki', 'Foo en' )
+			->addNewSiteLink( 'srwiki', 'Foo sr' )
+			->addNewSiteLink( 'dewiktionary', 'Foo de word' )
+			->addNewSiteLink( 'enwiktionary', 'Foo en word' );
+		$items[] = $item;
+
+		$item = Item::newEmpty();
+		$item->setId( 2 );
+		$item->setLabel( 'en', 'Talk:Foo' );
+		$item->getSiteLinkList()
+			->addNewSiteLink( 'dewiki', 'Talk:Foo de' )
+			->addNewSiteLink( 'enwiki', 'Talk:Foo en' )
+			->addNewSiteLink( 'srwiki', 'Talk:Foo sr' );
+		$items[] = $item;
+
+		return $items;
+	}
 
 	public function setUp() {
 		parent::setUp();
 
-		static $hasSites = false;
-
-		if ( !$hasSites ) {
-			$hasSites = true;
-		}
-
 		$this->mockRepo = new MockRepository();
 
-		foreach ( self::$itemData as $data ) {
-			$item = new Item( $data );
+		foreach ( $this->getItems() as $item ) {
 			$this->mockRepo->putEntity( $item );
 		}
 
