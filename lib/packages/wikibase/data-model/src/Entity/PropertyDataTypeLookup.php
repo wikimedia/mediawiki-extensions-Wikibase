@@ -3,9 +3,6 @@
 namespace Wikibase\DataModel\Entity;
 
 /**
- * Interface for objects that can find the if of the DataType
- * for the Property of which the id is given.
- *
  * @since 1.0
  *
  * @licence GNU GPL v2+
