@@ -7,7 +7,7 @@ use Site;
 use SiteStore;
 use UsageException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\StringNormalizer;
 
 /**

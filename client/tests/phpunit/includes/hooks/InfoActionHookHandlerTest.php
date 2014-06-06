@@ -95,7 +95,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'buildEntityLink' )
 			->will( $this->returnValue( 'https://www.wikidata.org/wiki/Q4' ) );
 
-		$siteLinkLookup = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
+		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
 			->disableOriginalConstructor()
 			->getMock();
 
