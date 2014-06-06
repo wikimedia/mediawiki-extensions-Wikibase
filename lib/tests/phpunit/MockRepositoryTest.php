@@ -56,7 +56,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetEntity() {
-		$item = new Item( array() );
+		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'foo' );
 
 		// set up a data Item
@@ -101,7 +101,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetEntityRevision() {
-		$item = new Item( array() );
+		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'foo' );
 
 		// set up a data Item
@@ -143,7 +143,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetItemIdForLink() {
-		$item = new Item( array() );
+		$item = Item::newEmpty();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		// test item lookup
@@ -171,36 +171,43 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		// #0: same link ---------
-		$a = new Item( array( 'entity' => 'Q1' ) );
+		$a = Item::newEmpty();
+		$a->setId( 1 );
 		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 		$a->addSiteLink( new SiteLink( 'dewiki', 'Foo' ) );
 
-		$b = new Item( array( 'entity' => 'Q2' ) );
+		$b = Item::newEmpty();
+		$b->setId( 2 );
 		$b->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 		$b->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array( array( 'enwiki', 'Foo', 1 ) ) );
 
 		// #1: same site ---------
-		$a = new Item( array( 'entity' => 'Q1' ) );
+		$a = Item::newEmpty();
+		$a->setId( 1 );
 		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
-		$b = new Item( array( 'entity' => 'Q2' ) );
+		$b = Item::newEmpty();
+		$b->setId( 2 );
 		$b->addSiteLink( new SiteLink( 'enwiki', 'Bar' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #2: same page ---------
-		$a = new Item( array( 'entity' => 'Q1' ) );
+		$a = Item::newEmpty();
+		$a->setId( 1 );
 		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
-		$b = new Item( array( 'entity' => 'Q2' ) );
+		$b = Item::newEmpty();
+		$b->setId( 2 );
 		$b->addSiteLink( new SiteLink( 'dewiki', 'Foo' ) );
 
 		$cases[] = array( $a, $b, array() );
 
 		// #3: same item ---------
-		$a = new Item( array( 'entity' => 'Q1' ) );
+		$a = Item::newEmpty();
+		$a->setId( 1 );
 		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 
 		$cases[] = array( $a, $a, array() );
@@ -221,11 +228,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public static function provideGetLinks() {
 		$cases = array();
 
-		$a = new Item( array( 'entity' => 'Q1' ) );
+		$a = Item::newEmpty();
+		$a->setId( 1 );
 		$a->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
 		$a->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
 
-		$b = new Item( array( 'entity' => 'Q2' ) );
+		$b = Item::newEmpty();
+		$b->setId( 2 );
 		$b->addSiteLink( new SiteLink( 'enwiki', 'Bar' ) );
 		$b->addSiteLink( new SiteLink( 'dewiki', 'Xoo' ) );
 
@@ -361,10 +370,23 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function setupGetEntities() {
-		$one = new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one' ) ) );
-		$two = new Item( array( 'entity' => 'Q2', 'label' => array( 'en' => 'two' ) ) );
-		$three = new Item( array( 'entity' => 'Q3', 'label' => array( 'en' => 'three', 'de' => 'drei' ), 'description' => array( 'en' => 'the third' ) ) );
-		$prop = new Property( array( 'entity' => 'P4', 'label' => array( 'en' => 'property!' ), 'datatype' => 'string' ) );
+		$one = Item::newEmpty();
+		$one->setId( 1 );
+		$one->setLabel( 'en', 'one' );
+
+		$two = Item::newEmpty();
+		$two->setId( 2 );
+		$two->setLabel( 'en', 'two' );
+
+		$three = Item::newEmpty();
+		$three->setId( 3 );
+		$three->setLabel( 'en', 'three' );
+		$three->setLabel( 'de', 'drei' );
+		$three->setDescription( 'en', 'the third' );
+
+		$prop = Property::newFromType( 'string' );
+		$prop->setId( 4 );
+		$prop->setLabel( 'en', 'property!' );
 
 		$this->repo->putEntity( $one, 1001 );
 		$this->repo->putEntity( $two, 1002 );
@@ -443,7 +465,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSiteLinksForItem() {
-		$one = new Item( array( 'entity' => 'Q1' ) );
+		$one = Item::newEmpty();
+		$one->setId( 1 );
 
 		$one->addSiteLink( new SiteLink( 'dewiki', 'Xoo' ) );
 		$one->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
@@ -655,35 +678,57 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideSaveEntity() {
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'one' );
+
+		$secondItem = Item::newEmpty();
+		$secondItem->setId( 1 );
+		$secondItem->setLabel( 'en', 'one' );
+		$secondItem->setLabel( 'it', 'uno' );
+
+		$thirdItem = Item::newEmpty();
+		$thirdItem->setId( 1 );
+		$thirdItem->setLabel( 'en', 'one' );
+
+		$fourthItem = Item::newEmpty();
+		$fourthItem->setId( 123 );
+		$fourthItem->setLabel( 'en', 'one two three' );
+		$fourthItem->setLabel( 'de', 'eins zwei drei' );
+
+		$fifthItem = Item::newEmpty();
+		$fifthItem->setId( 1 );
+		$fifthItem->setLabel( 'en', 'one' );
+		$fifthItem->setLabel( 'de', 'eins' );
+
 		return array(
 			'fresh' => array(
-				'entity' => new Item( array( 'label' => array( 'en' => 'one' ) ) ),
+				'entity' => $item,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
 			),
 
 			'update' => array(
-				'entity' => new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one', 'it' => 'uno',  ) ) ),
+				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1011,
 			),
 
 			'not fresh' => array(
-				'entity' => new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one' ) ) ),
+				'entity' => $thirdItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
 				'error' => 'Wikibase\StorageException'
 			),
 
 			'not exists' => array(
-				'entity' => new Item( array( 'entity' => 'Q123', 'label' => array( 'en' => 'one two three', 'de' => 'eins zwei drei' ) ) ),
+				'entity' => $fourthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
 				'error' => 'Wikibase\StorageException'
 			),
 
 			'bad base' => array(
-				'entity' => new Item( array( 'entity' => 'Q1', 'label' => array( 'en' => 'one', 'de' => 'eins' ) ) ),
+				'entity' => $fifthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1234,
 				'error' => 'Wikibase\StorageException'
