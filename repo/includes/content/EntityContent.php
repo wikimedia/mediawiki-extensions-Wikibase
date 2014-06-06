@@ -537,7 +537,7 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * Apply all EntityValidators registered for on-save validation.
 	 */
-	protected function applyOnSaveValidators() {
+	private function applyOnSaveValidators() {
 		/* @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$validators = $handler->getOnSaveValidators();
@@ -559,12 +559,12 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @param $langCode
+	 * @param string $langCode
 	 * @param LanguageFallbackChain $fallbackChain
 	 *
 	 * @return SerializationOptions
 	 */
-	protected function makeSerializationOptions( $langCode, LanguageFallbackChain $fallbackChain ) {
+	private function makeSerializationOptions( $langCode, LanguageFallbackChain $fallbackChain ) {
 		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
 
 		$options = new SerializationOptions();
@@ -637,4 +637,5 @@ abstract class EntityContent extends AbstractContent {
 			return self::STATUS_NONE;
 		}
 	}
+
 }
