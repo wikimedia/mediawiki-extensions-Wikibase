@@ -151,7 +151,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 	public function testAddClaimWithOnlyMainSnak() {
 		$list = new ClaimList();
 
-		$list->addClaim( $this->newSnak( 42, 'foo' ) );
+		$list->addNewClaim( $this->newSnak( 42, 'foo' ) );
 
 		$this->assertEquals(
 			new ClaimList( array(
@@ -164,7 +164,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 	public function testAddClaimWithQualifiersAsSnakArray() {
 		$list = new ClaimList();
 
-		$list->addClaim(
+		$list->addNewClaim(
 			$this->newSnak( 42, 'foo' ),
 			array(
 				$this->newSnak( 1, 'bar' )
@@ -190,7 +190,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 			$this->newSnak( 1, 'bar' )
 		) );
 
-		$list->addClaim(
+		$list->addNewClaim(
 			$this->newSnak( 42, 'foo' ),
 			$snakList
 		);
@@ -209,7 +209,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 	public function testAddClaimWithGuid() {
 		$list = new ClaimList();
 
-		$list->addClaim(
+		$list->addNewClaim(
 			$this->newSnak( 42, 'foo' ),
 			null,
 			'kittens'

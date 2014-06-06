@@ -79,11 +79,11 @@ class ClaimList implements \IteratorAggregate {
 
 	private function addClaims( Claims $claims ) {
 		foreach ( $claims as $claim ) {
-			$this->addClaimObject( $claim );
+			$this->addClaim( $claim );
 		}
 	}
 
-	public function addClaimObject( Claim $claim ) {
+	public function addClaim( Claim $claim ) {
 		$this->claims[] = $claim;
 	}
 
@@ -92,13 +92,13 @@ class ClaimList implements \IteratorAggregate {
 	 * @param Snak[]|Snaks|null $qualifiers
 	 * @param string|null $guid
 	 */
-	public function addClaim( Snak $mainSnak, $qualifiers = null, $guid = null ) {
+	public function addNewClaim( Snak $mainSnak, $qualifiers = null, $guid = null ) {
 		$qualifiers = is_array( $qualifiers ) ? new SnakList( $qualifiers ) : $qualifiers;
 
 		$claim = new Claim( $mainSnak, $qualifiers );
 		$claim->setGuid( $guid );
 
-		$this->addClaimObject( $claim );
+		$this->addClaim( $claim );
 	}
 
 	/**

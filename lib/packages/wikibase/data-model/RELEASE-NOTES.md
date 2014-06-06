@@ -52,6 +52,7 @@ Other breaking changes:
 #### Additions
 
 * Added `LegacyIdInterpreter`
+* Added `ClaimList`
 * Added `ClaimListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
 * Added `PropertyNotFoundException`
