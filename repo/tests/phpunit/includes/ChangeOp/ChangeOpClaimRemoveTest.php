@@ -8,8 +8,9 @@ use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpClaimRemove;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpClaimRemove
@@ -21,7 +22,6 @@ use Wikibase\ItemContent;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-
 class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorProvider() {
@@ -49,7 +49,7 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q345', $snak );
+		$item = $this->newItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
@@ -74,15 +74,17 @@ class ChangeOpClaimRemoveTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $claims->getClaimWithGuid( $changeOp->getClaimGuid() ) );
 	}
 
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
-		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim =$entity->newClaim( $snak );
-		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
+	private function newItemWithClaim( $itemIdString, $snak ) {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( $itemIdString ) );
+
+		$claim = $item->newClaim( $snak );
+		$claim->setGuid( $item->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
-		$entity->setClaims( $claims );
+		$item->setClaims( $claims );
 
-		return $entity;
+		return $item;
 	}
 
 }
