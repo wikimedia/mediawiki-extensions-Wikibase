@@ -16,7 +16,6 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -35,7 +34,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var ChangeOpTestMockProvider
 	 */
-	protected $mockProvider;
+	private $mockProvider;
 
 	/**
 	 * @param string|null $name
@@ -49,7 +48,9 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidArgumentProvider() {
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+
 		$guidGenerator = new ClaimGuidGenerator();
 		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
 		$snaks = new SnakList();
@@ -79,7 +80,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$item = $this->newItemWithClaim( $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
@@ -113,7 +114,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyNoValueSnak( 1 );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$item = $this->newItemWithClaim( $snak );
 		$claims = $item->getClaims();
 		/** @var Statement $claim */
 		$claim = reset( $claims );
@@ -173,7 +174,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$item = $this->newItemWithClaim( $snak );
 		$claims = $item->getClaims();
 		/** @var Statement $claim */
 		$claim = reset( $claims );
@@ -193,7 +194,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$args[] = array ( $item, $changeOp, $changedReference->getHash() );
 
 		// Just change a reference's index:
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$item = $this->newItemWithClaim( $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 
@@ -237,15 +238,17 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $references->hasReferenceHash( $referenceHash ), "No reference with expected hash" );
 	}
 
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
-		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
-		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8494TYA-25E4-4334-AG03-A3290BCT9CQP' );
+	private function newItemWithClaim( $snak ) {
+		$item = Item::newEmpty();
+		$item->setId( 123 );
+
+		$claim = $item->newClaim( $snak );
+		$claim->setGuid( $item->getId()->getPrefixedId() . '$D8494TYA-25E4-4334-AG03-A3290BCT9CQP' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
-		$entity->setClaims( $claims );
+		$item->setClaims( $claims );
 
-		return $entity;
+		return $item;
 	}
 
 	public function provideApplyInvalid() {
