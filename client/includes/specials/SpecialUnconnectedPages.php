@@ -83,20 +83,16 @@ class SpecialUnconnectedPages extends SpecialPage {
 		}
 
 		$this->setFieldsFromRequestData( $subPage );
-
 		$this->addFormToOutput();
-
 		$this->showQuery();
 	}
 
 	private function setFieldsFromRequestData( $subPage ) {
-		$subPage = is_null( $subPage ) ? '' : $subPage;
-
 		$request = $this->getRequest();
 
 		$this->startPage = $request->getText( 'page', $subPage );
 		if ( $this->startPage !== '' ) {
-			$this->startTitle = \Title::newFromText( $this->startPage );
+			$this->startTitle = Title::newFromText( $this->startPage );
 		}
 
 		$this->iwData = $request->getText( 'iwdata', '' );
@@ -180,7 +176,8 @@ class SpecialUnconnectedPages extends SpecialPage {
 			$out->addHTML( $this->msg( 'showingresults' )->numParams(
 			// do not format the one extra row, if exist
 				min( $numRows, $limit ),
-				$offset + 1 )->parseAsBlock() );
+				$offset + 1
+			)->parseAsBlock() );
 			// Disable the "next" link when we reach the end
 			$paging = $this->getLanguage()->viewPrevNext(
 				$this->getPageTitle( $this->startPage ),
@@ -219,18 +216,20 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * @param integer $offset paging offset
 	 */
 	private function outputResults( array $results, $num, $offset ) {
-		if ( $num > 0 ) {
-			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
-			for ( $i = 0; $i < $num; $i++ ) {
-				$line = $this->formatRow( $results[$i] );
-				if ( $line ) {
-					$html .= Html::rawElement( 'li', array(), $line );
-				}
-			}
-			$html .= Html::closeElement( 'ol' );
-
-			$this->getOutput()->addHTML( $html );
+		if ( $num <= 0 ) {
+			return;
 		}
+
+		$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
+		for ( $i = 0; $i < $num; $i++ ) {
+			$line = $this->formatRow( $results[$i] );
+			if ( $line !== false ) {
+				$html .= Html::rawElement( 'li', array(), $line );
+			}
+		}
+		$html .= Html::closeElement( 'ol' );
+
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
@@ -252,14 +251,14 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * @return NamespaceChecker
 	 */
 	public function getNamespaceChecker() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
 		if ( $this->namespaceChecker === null ) {
+			$settings = WikibaseClient::getDefaultInstance()->getSettings();
 			$this->namespaceChecker = new NamespaceChecker(
 				$settings->getSetting( 'excludeNamespaces' ),
 				$settings->getSetting( 'namespaces' )
 			);
 		}
+
 		return $this->namespaceChecker;
 	}
 
@@ -271,20 +270,27 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * @param DatabaseBase $dbr
 	 * @param Title $title
 	 * @param NamespaceChecker $checker
+	 *
 	 * @return string[]
 	 */
 	public function buildConditionals( $dbr, Title $title = null, $checker = null ) {
-		if ( !isset( $title ) ) {
+		$conds = array();
+
+		if ( $title === null ) {
 			$title = $this->startTitle;
 		}
-		if ( !isset( $checker ) ) {
-			$checker = $this->getNamespaceChecker();
-		}
+
 		if ( $title !== null ) {
 			$conds[] = 'page_title >= ' . $dbr->addQuotes( $title->getDBkey() );
 			$conds[] = 'page_namespace = ' . $title->getNamespace();
+		} else {
+			if ( $checker === null ) {
+				$checker = $this->getNamespaceChecker();
+			}
+
+			$conds[] = 'page_namespace IN (' . implode(',', $checker->getWikibaseNamespaces() ) . ')';
 		}
-		$conds[] = 'page_namespace IN (' . implode(',', $checker->getWikibaseNamespaces() ) . ')';
+
 		return $conds;
 	}
 
@@ -297,8 +303,8 @@ class SpecialUnconnectedPages extends SpecialPage {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$conds = $this->buildConditionals( $dbr );
-		$conds["page_is_redirect"] = '0';
-		$conds[] = "pp_propname IS NULL";
+		$conds['page_is_redirect'] = '0';
+		$conds[] = 'pp_propname IS NULL';
 		if ( $this->iwData === 'only' ) {
 			$conds[] = 'll_from IS NOT NULL';
 		}
@@ -334,13 +340,18 @@ class SpecialUnconnectedPages extends SpecialPage {
 
 		$entries = array();
 		foreach ( $rows as $row ) {
-			$title = \Title::newFromRow( $row );
+			$title = Title::newFromRow( $row );
 			$numIWLinks = $row->page_num_iwlinks;
 			$entries[] = array( 'title' => $title, 'num' => $numIWLinks);
 		}
 		return $entries;
 	}
 
+	/**
+	 * @param array $entry
+	 *
+	 * @return string|bool
+	 */
 	private function formatRow( $entry ) {
 		try {
 			$out = Linker::linkKnown( $entry['title'] );
