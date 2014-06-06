@@ -55,7 +55,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @return SiteLinkList
 	 */
@@ -64,7 +64,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param SiteLinkList $siteLinks
 	 */
@@ -77,7 +77,7 @@ class Item extends Entity {
 	 * If there already is a site link with the site id of the provided site link,
 	 * then that one will be overridden by the provided one.
 	 *
-	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.6
 	 *
 	 * @param SiteLink $siteLink
@@ -89,7 +89,7 @@ class Item extends Entity {
 	/**
 	 * Removes the sitelink with specified site ID if the Item has such a sitelink.
 	 *
-	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.1
 	 *
 	 * @param string $siteId the target site's id
@@ -99,7 +99,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.6
 	 *
 	 * @return SiteLink[]
@@ -109,7 +109,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.6
 	 *
 	 * @param string $siteId
@@ -122,7 +122,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.4
 	 *
 	 * @param string $siteId
@@ -134,7 +134,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getSiteLinkList and setSiteLinkList instead
+	 * @deprecated since 0.8, use getSiteLinkList and setSiteLinkList instead
 	 * @since 0.5
 	 *
 	 * @return bool

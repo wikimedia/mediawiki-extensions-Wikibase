@@ -41,7 +41,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param SiteLink $link
 	 *
@@ -61,7 +61,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @see SiteLink::__construct
 	 *
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param string $siteId
 	 * @param string $pageName
@@ -109,7 +109,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param string $siteId
 	 *
@@ -151,7 +151,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param string $siteId
 	 * @throws InvalidArgumentException

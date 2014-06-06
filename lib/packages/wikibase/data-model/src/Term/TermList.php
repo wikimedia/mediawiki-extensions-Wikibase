@@ -110,7 +110,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param string $languageCode
 	 * @param string $termText

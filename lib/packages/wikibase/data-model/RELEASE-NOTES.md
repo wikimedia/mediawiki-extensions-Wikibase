@@ -66,6 +66,7 @@ Other breaking changes:
 #### Additions
 
 * `AliasGroupList::hasGroupForLanguage`
+* `AliasGroupList::setAliasesForLanguage`
 * `SiteLinkList::addSiteLink`
 * `SiteLinkList::addNewSiteLink`
 * `SiteLinkList::removeLinkWithSiteId`
@@ -74,7 +75,6 @@ Other breaking changes:
 * `Item::getSiteLinkList`
 * `Item::setSiteLinkList`
 * `TermList::setTextForLanguage`
-* `AliasGroupList::setAliasesForLanguage`
 
 #### Deprecations
 

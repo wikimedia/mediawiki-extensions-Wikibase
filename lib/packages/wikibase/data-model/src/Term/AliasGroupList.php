@@ -146,7 +146,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param string $languageCode
 	 *
@@ -158,7 +158,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	/**
-	 * @since 1.0
+	 * @since 0.8
 	 *
 	 * @param string $languageCode
 	 * @param string[] $aliases
