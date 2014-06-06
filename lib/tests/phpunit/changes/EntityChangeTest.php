@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityChange;
 
 /**
@@ -106,21 +106,6 @@ class EntityChangeTest extends DiffChangeTest {
 			$changes );
 
 		return $cases;
-	}
-
-	/**
-	 * @dataProvider entityProvider
-	 *
-	 * @param Entity $entity
-	 */
-	public function testNewFromUpdate( Entity $entity ) {
-		/* @var EntityChange $entityChange */
-		$class = $this->getRowClass();
-		$entityChange = $class::newFromUpdate( EntityChange::UPDATE, null, $entity );
-		$this->assertInstanceOf( $class, $entityChange );
-
-		$this->assertEquals( $entity->isEmpty(), $entityChange->getDiff()->isEmpty(),
-			"The diff must be empty if and only if the entity was empty" );
 	}
 
 	/**
