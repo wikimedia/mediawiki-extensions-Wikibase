@@ -8,8 +8,9 @@ use Wikibase\ChangeOp\ChangeOpQualifierRemove;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpQualifierRemove
@@ -43,7 +44,7 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q345', $snak );
+		$item = $this->newItemWithClaim( 'q345', $snak );
 		$claims = $item->getClaims();
 		/** @var Claim $claim */
 		$claim = reset( $claims );
@@ -76,14 +77,17 @@ class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $qualifiers->hasSnakHash( $snakHash ), "Qualifier still exists" );
 	}
 
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
-		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
-		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP' );
+	private function newItemWithClaim( $itemIdString, $snak ) {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( $itemIdString ) );
+
+		$claim = $item->newClaim( $snak );
+		$claim->setGuid( $itemIdString . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
-		$entity->setClaims( $claims );
-		return $entity;
+		$item->setClaims( $claims );
+
+		return $item;
 	}
 
 } 
