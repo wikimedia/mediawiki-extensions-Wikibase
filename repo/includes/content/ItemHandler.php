@@ -6,7 +6,7 @@ use DataUpdate;
 use Title;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
-use Wikibase\Updates\DataUpdateClosure;
+use Wikibase\Updates\DelegatingDataUpdate;
 use Wikibase\Validators\EntityValidator;
 
 /**
@@ -106,7 +106,7 @@ class ItemHandler extends EntityHandler {
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			array( $this->siteLinkStore, 'deleteLinksOfItem' ),
 			$content->getEntity()->getId()
 		);
@@ -132,7 +132,7 @@ class ItemHandler extends EntityHandler {
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
-		$updates[] = new DataUpdateClosure(
+		$updates[] = new DelegatingDataUpdate(
 			array( $this->siteLinkStore, 'saveLinksOfItem' ),
 			$content->getEntity()
 		);
@@ -142,4 +142,5 @@ class ItemHandler extends EntityHandler {
 			parent::getEntityModificationUpdates( $content, $title )
 		);
 	}
+
 }
