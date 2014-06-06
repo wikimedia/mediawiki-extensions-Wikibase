@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_77cacc4b",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:28:25Z",
+      "side": 1,
+      "message": "I suggest to not have a generic exception message hardcoded in the dispatching localizer. If a generic fallback is wanted, the last localizer in the list provided to the constructor can implement that.",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_57d7d0f2",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:28:25Z",
+      "side": 1,
+      "message": "should not always be true, see above.",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_17015871",
+        "filename": "lib/includes/Localizer/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-06T12:28:25Z",
+      "side": 1,
+      "message": "Just delete this class and replace all usages with an DispatchingExceptionLocalizer. The knowledge about the sub-localizers should be in the factory method that instantiates the \"top\" exception localizer in the application context (WikibaseRepo or WikibaseClient, respectively).",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
