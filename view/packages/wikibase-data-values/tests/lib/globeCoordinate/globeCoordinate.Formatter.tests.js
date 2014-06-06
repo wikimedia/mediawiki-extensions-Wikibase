@@ -70,7 +70,7 @@ define( [
 			// Look up precision text:
 			if( typeof expected === 'number' ) {
 
-				$.each( globeCoordinate.GlobeCoordinate.PRECISIONS, function( i, precision ) {
+				$.each( [ 10, 1, 1 / 60, 1 / 3600000 ], function( i, precision ) {
 					if( '' + precision === testPrecision ) {
 
 						assert.strictEqual(

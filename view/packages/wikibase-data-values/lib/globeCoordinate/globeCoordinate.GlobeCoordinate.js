@@ -151,26 +151,6 @@ globeCoordinate.GlobeCoordinate = ( function( globeCoordinate ) {
 
 	};
 
-	/**
-	 * Precisions a globe coordinate may feature.
-	 * @type {number[]}
-	 */
-	GlobeCoordinate.PRECISIONS = [
-		10,
-		1,
-		0.1,
-		1 / 60,
-		0.01,
-		0.001,
-		1 / 3600,
-		0.0001,
-		1 / 36000,
-		0.00001,
-		1 / 360000,
-		0.000001,
-		1 / 3600000
-	];
-
 	return GlobeCoordinate;
 
 }( globeCoordinate ) );
