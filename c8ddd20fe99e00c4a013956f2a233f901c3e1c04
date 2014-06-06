@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e3593d1_fb0f033a",
+        "filename": "client/includes/specials/SpecialUnconnectedPages.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-06T21:28:44Z",
+      "side": 1,
+      "message": "Unnecessary copy and paste, please remove.",
+      "revId": "c8ddd20fe99e00c4a013956f2a233f901c3e1c04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
