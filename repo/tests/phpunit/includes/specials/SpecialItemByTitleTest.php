@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialItemByTitle;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemByTitle

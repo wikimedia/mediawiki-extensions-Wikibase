@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Maintenance;
+use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

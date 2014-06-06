@@ -7,7 +7,7 @@ use Title;
 use Wikibase\Api\ItemByTitleHelper;
 use Wikibase\Api\ResultBuilder;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\SiteLinkCache;
+use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\StringNormalizer;
 
 /**
@@ -57,7 +57,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinkCache
 	 */
 	public function getSiteLinkCacheMock( $itemId = null ) {
-		$siteLinkCacheMock = $this->getMockBuilder( '\Wikibase\SiteLinkCache' )
+		$siteLinkCacheMock = $this->getMockBuilder( '\Wikibase\Lib\Store\SiteLinkCache' )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -5,6 +5,7 @@ namespace Wikibase;
 use DataUpdate;
 use Title;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
 
