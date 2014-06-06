@@ -108,7 +108,7 @@ end
 Then /^Entity id should be displayed next to the label$/ do
   on(ItemPage) do |page|
       expect(page.entity_id_span_element.visible?).to be true
-      expect(page.entity_id_span.sub(/[()]/, "")).to be == @item_under_test["label"]
+      expect(page.entity_id_span.include?(@item_under_test["id"])).to be true
     end
 end
 
