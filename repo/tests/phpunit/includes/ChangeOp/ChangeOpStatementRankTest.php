@@ -7,8 +7,9 @@ use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpStatementRank;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -24,7 +25,9 @@ use Wikibase\Lib\ClaimGuidGenerator;
 class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidArgumentProvider() {
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+
 		$guidGenerator = new ClaimGuidGenerator();
 		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
 		$validRank = 1;
@@ -49,7 +52,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$item = $this->newItemWithClaim( 'q123', $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
@@ -77,14 +80,17 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $rank, $expectedRank, "No reference with expected hash" );
 	}
 
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
-		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
-		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8499CDA-25E4-4334-AG03-A3290BCD9CQP' );
+	private function newItemWithClaim( $itemIdString, $snak ) {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( $itemIdString ) );
+
+		$claim = $item->newClaim( $snak );
+		$claim->setGuid( $itemIdString . '$D8499CDA-25E4-4334-AG03-A3290BCD9CQP' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
-		$entity->setClaims( $claims );
+		$item->setClaims( $claims );
 
-		return $entity;
+		return $item;
 	}
+
 }
