@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityIdPager;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\ItemsPerSiteBuilder;
-use Wikibase\SiteLinkTable;
+use Wikibase\Lib\Store\SiteLinkTable;
 
 /**
  * @covers Wikibase\ItemsPerSiteBuilder
@@ -53,7 +53,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return SiteLinkTable
 	 */
 	private function getSiteLinkTableMock() {
-		$siteLinkTableMock = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
+		$siteLinkTableMock = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
 			->disableOriginalConstructor()
 			->getMock();
 

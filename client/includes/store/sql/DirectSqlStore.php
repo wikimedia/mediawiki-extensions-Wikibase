@@ -9,6 +9,8 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**

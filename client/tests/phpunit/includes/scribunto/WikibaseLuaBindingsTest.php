@@ -37,7 +37,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 	private function getWikibaseLibraryImplementation( EntityLookup $entityLookup = null ) {
 		$language = new Language( "en" );
 
-		$siteLinkTable = $this->getMockBuilder( '\Wikibase\SiteLinkTable' )
+		$siteLinkTable = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
 			->disableOriginalConstructor()
 			->getMock();
 
