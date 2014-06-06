@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\NamespaceChecker;
 
 /**
- * List client pages that is not connected to repository items.
+ * List client pages that are not connected to repository items.
  *
  * @since 0.4
  * @licence GNU GPL v2+
@@ -22,14 +22,14 @@ use Wikibase\NamespaceChecker;
 class SpecialUnconnectedPages extends SpecialPage {
 
 	/**
-	 * The title as a string to start search at
+	 * The page name as a string to start search at
 	 *
 	 * @var string
 	 */
-	private $startPage = '';
+	private $startPageName = '';
 
 	/**
-	 * The startPage as a title to start search at
+	 * Title object build from the $startPageName parameter
 	 *
 	 * @var Title|null
 	 */
@@ -41,7 +41,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 	private $namespaceChecker = null;
 
 	/**
-	 * If the search should only include pages with iw-links
+	 * Set to 'only' if the search should only include pages with inter wiki links
 	 *
 	 * @since 0.4
 	 *
@@ -83,20 +83,16 @@ class SpecialUnconnectedPages extends SpecialPage {
 		}
 
 		$this->setFieldsFromRequestData( $subPage );
-
 		$this->addFormToOutput();
-
 		$this->showQuery();
 	}
 
 	private function setFieldsFromRequestData( $subPage ) {
-		$subPage = is_null( $subPage ) ? '' : $subPage;
-
 		$request = $this->getRequest();
 
-		$this->startPage = $request->getText( 'page', $subPage );
-		if ( $this->startPage !== '' ) {
-			$this->startTitle = \Title::newFromText( $this->startPage );
+		$this->startPageName = $request->getText( 'page', $subPage );
+		if ( $this->startPageName !== '' ) {
+			$this->startTitle = Title::newFromText( $this->startPageName );
 		}
 
 		$this->iwData = $request->getText( 'iwdata', '' );
@@ -105,7 +101,8 @@ class SpecialUnconnectedPages extends SpecialPage {
 	private function addFormToOutput() {
 		$out = '';
 
-		if ( $this->startPage !== '' && $this->startTitle === null ) {
+		// FIXME: How is it possible this can ever happen? How is this relevant here?
+		if ( $this->startPageName !== '' && $this->startTitle === null ) {
 			$out .= Html::element( 'div', array(), $this->msg( 'wikibase-unconnectedpages-page-warning' )->text() );
 		}
 
@@ -124,7 +121,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 			. ' '
 			. Html::input(
 				'page',
-				$this->startPage,
+				$this->startPageName,
 				'text',
 				array(
 					'id' => 'page'
@@ -178,12 +175,13 @@ class SpecialUnconnectedPages extends SpecialPage {
 
 		if ( $numRows > 0 ) {
 			$out->addHTML( $this->msg( 'showingresults' )->numParams(
-			// do not format the one extra row, if exist
+				// do not format the one extra row, if exist
 				min( $numRows, $limit ),
-				$offset + 1 )->parseAsBlock() );
+				$offset + 1
+			)->parseAsBlock() );
 			// Disable the "next" link when we reach the end
 			$paging = $this->getLanguage()->viewPrevNext(
-				$this->getPageTitle( $this->startPage ),
+				$this->getPageTitle( $this->startPageName ),
 				$offset,
 				$limit,
 				$query,
@@ -204,7 +202,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 			$offset
 		);
 
-		if( $paging ) {
+		if ( $paging ) {
 			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
 		}
 
@@ -215,22 +213,24 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * Format and output report results using the given information plus OutputPage
 	 *
 	 * @param EntityId[] $results
-	 * @param integer $num number of available result rows
-	 * @param integer $offset paging offset
+	 * @param int $num number of available result rows
+	 * @param int $offset paging offset
 	 */
 	private function outputResults( array $results, $num, $offset ) {
-		if ( $num > 0 ) {
-			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
-			for ( $i = 0; $i < $num; $i++ ) {
-				$line = $this->formatRow( $results[$i] );
-				if ( $line ) {
-					$html .= Html::rawElement( 'li', array(), $line );
-				}
-			}
-			$html .= Html::closeElement( 'ol' );
-
-			$this->getOutput()->addHTML( $html );
+		if ( $num <= 0 ) {
+			return;
 		}
+
+		$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
+		for ( $i = 0; $i < $num; $i++ ) {
+			$line = $this->formatRow( $results[$i] );
+			if ( $line !== false ) {
+				$html .= Html::rawElement( 'li', array(), $line );
+			}
+		}
+		$html .= Html::closeElement( 'ol' );
+
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**
@@ -252,14 +252,15 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * @return NamespaceChecker
 	 */
 	public function getNamespaceChecker() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
 		if ( $this->namespaceChecker === null ) {
+			$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
 			$this->namespaceChecker = new NamespaceChecker(
 				$settings->getSetting( 'excludeNamespaces' ),
 				$settings->getSetting( 'namespaces' )
 			);
 		}
+
 		return $this->namespaceChecker;
 	}
 
@@ -271,20 +272,24 @@ class SpecialUnconnectedPages extends SpecialPage {
 	 * @param DatabaseBase $dbr
 	 * @param Title $title
 	 * @param NamespaceChecker $checker
+	 *
 	 * @return string[]
 	 */
-	public function buildConditionals( $dbr, Title $title = null, $checker = null ) {
-		if ( !isset( $title ) ) {
+	public function buildConditionals( DatabaseBase $dbr, Title $title = null, NamespaceChecker $checker = null ) {
+		$conds = array();
+
+		if ( $title === null ) {
 			$title = $this->startTitle;
 		}
-		if ( !isset( $checker ) ) {
+		if ( $checker === null ) {
 			$checker = $this->getNamespaceChecker();
 		}
 		if ( $title !== null ) {
 			$conds[] = 'page_title >= ' . $dbr->addQuotes( $title->getDBkey() );
 			$conds[] = 'page_namespace = ' . $title->getNamespace();
 		}
-		$conds[] = 'page_namespace IN (' . implode(',', $checker->getWikibaseNamespaces() ) . ')';
+		$conds[] = 'page_namespace IN (' . implode( ',', $checker->getWikibaseNamespaces() ) . ')';
+
 		return $conds;
 	}
 
@@ -297,8 +302,8 @@ class SpecialUnconnectedPages extends SpecialPage {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$conds = $this->buildConditionals( $dbr );
-		$conds["page_is_redirect"] = '0';
-		$conds[] = "pp_propname IS NULL";
+		$conds['page_is_redirect'] = '0';
+		$conds[] = 'pp_propname IS NULL';
 		if ( $this->iwData === 'only' ) {
 			$conds[] = 'll_from IS NOT NULL';
 		}
@@ -327,6 +332,7 @@ class SpecialUnconnectedPages extends SpecialPage {
 				'USE INDEX' => array( 'page' => 'name_title' )
 			),
 			array(
+				// FIXME: Should 'wikibase_item' really be hardcoded here?
 				'page_props' => array( 'LEFT JOIN', array( 'page_id = pp_page', "pp_propname = 'wikibase_item'" ) ),
 				'langlinks' => array( 'LEFT JOIN', 'll_from = page_id' )
 			)
@@ -334,14 +340,19 @@ class SpecialUnconnectedPages extends SpecialPage {
 
 		$entries = array();
 		foreach ( $rows as $row ) {
-			$title = \Title::newFromRow( $row );
-			$numIWLinks = $row->page_num_iwlinks;
-			$entries[] = array( 'title' => $title, 'num' => $numIWLinks);
+			$title = Title::newFromRow( $row );
+			$numInterWikiLinks = $row->page_num_iwlinks;
+			$entries[] = array( 'title' => $title, 'num' => $numInterWikiLinks );
 		}
 		return $entries;
 	}
 
-	private function formatRow( $entry ) {
+	/**
+	 * @param array $entry
+	 *
+	 * @return string|false
+	 */
+	private function formatRow( array $entry ) {
 		try {
 			$out = Linker::linkKnown( $entry['title'] );
 			if ( $entry['num'] > 0 ) {
@@ -349,8 +360,8 @@ class SpecialUnconnectedPages extends SpecialPage {
 					->numParams( $entry['num'] )->text();
 			}
 			return $out;
-		} catch ( MWException $e ) {
-			wfWarn( "Error formatting result row: " . $e->getMessage() );
+		} catch ( MWException $ex ) {
+			wfWarn( 'Error formatting result row: ' . $ex->getMessage() );
 			return false;
 		}
 	}
