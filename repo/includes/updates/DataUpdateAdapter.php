@@ -20,12 +20,12 @@ use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DataUpdateClosure extends DataUpdate {
+class DataUpdateAdapter extends DataUpdate {
 
 	/**
 	 * @var callable
 	 */
-	private $function;
+	private $doUpdateFunction;
 
 	/**
 	 * @var array
@@ -38,20 +38,20 @@ class DataUpdateClosure extends DataUpdate {
 	private $exceptionHandler;
 
 	/**
-	 * @param callable $function
+	 * @param callable $doUpdateFunction
 	 * @param mixed [$args,...]
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $function ) {
-		if ( !is_callable( $function ) ) {
-			throw new InvalidArgumentException( '$function must be callable' );
+	public function __construct( $doUpdateFunction ) {
+		if ( !is_callable( $doUpdateFunction ) ) {
+			throw new InvalidArgumentException( '$doUpdateFunction must be callable' );
 		}
 
 		$args = func_get_args();
 		array_shift( $args );
 
-		$this->function = $function;
+		$this->doUpdateFunction = $doUpdateFunction;
 		$this->arguments = $args;
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
@@ -67,9 +67,10 @@ class DataUpdateClosure extends DataUpdate {
 	 */
 	public function doUpdate() {
 		try {
-			call_user_func_array( $this->function, $this->arguments );
+			call_user_func_array( $this->doUpdateFunction, $this->arguments );
 		} catch ( Exception $ex ) {
-			$this->exceptionHandler->handleException( $ex, 'data-update-failed', 'A data update callback triggered an exception' );
+			$this->exceptionHandler->handleException( $ex, 'data-update-failed',
+				'A data update callback triggered an exception' );
 		}
 	}
 
