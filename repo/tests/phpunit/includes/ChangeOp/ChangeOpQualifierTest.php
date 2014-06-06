@@ -10,14 +10,13 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\Item;
-use Wikibase\ItemContent;
 use Wikibase\Lib\ClaimGuidGenerator;
 
 /**
@@ -36,7 +35,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var ChangeOpTestMockProvider
 	 */
-	protected $mockProvider;
+	private $mockProvider;
 
 	/**
 	 * @param string|null $name
@@ -50,7 +49,9 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidArgumentProvider() {
-		$item = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getEntity();
+		$item = Item::newEmpty();
+		$item->setId( 42 );
+
 		$guidGenerator = new ClaimGuidGenerator();
 		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
@@ -77,7 +78,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$item = $this->newItemWithClaim( $snak );
 		$claims = $item->getClaims();
 		$claim = reset( $claims );
 		$claimGuid = $claim->getGuid();
@@ -109,7 +110,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
 		$args = array();
 
-		$item = $this->provideNewItemWithClaim( 'q123', $snak );
+		$item = $this->newItemWithClaim( $snak );
 		$claims = $item->getClaims();
 		/** @var Claim $claim */
 		$claim = reset( $claims );
@@ -143,14 +144,17 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), "No qualifier with expected hash" );
 	}
 
-	protected function provideNewItemWithClaim( $itemId, $snak ) {
-		$entity = ItemContent::newFromArray( array( 'entity' => $itemId ) )->getEntity();
-		$claim = $entity->newClaim( $snak );
-		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP' );
+	private function newItemWithClaim( $snak ) {
+		$item = Item::newEmpty();
+		$item->setId( 123 );
+
+		$claim = $item->newClaim( $snak );
+		$claim->setGuid( $item->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG03-A3290BCD9CQP' );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
-		$entity->setClaims( $claims );
-		return $entity;
+		$item->setClaims( $claims );
+
+		return $item;
 	}
 
 	public function applyInvalidProvider() {
