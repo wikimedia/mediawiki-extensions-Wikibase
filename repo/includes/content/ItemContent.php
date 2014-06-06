@@ -71,7 +71,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * Create a new ItemContent object from the provided Item data.
 	 *
-	 * @since 0.1
+	 * @deprecated
 	 *
 	 * @param array $data
 	 *
