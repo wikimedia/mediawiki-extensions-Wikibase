@@ -2,17 +2,11 @@
 
 namespace Wikibase;
 
-use Content;
-use DataUpdate;
 use IContextSource;
-use ParserOutput;
-use Title;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
-use WikiPage;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -25,10 +19,9 @@ use WikiPage;
 class PropertyContent extends EntityContent {
 
 	/**
-	 * @since 0.1
 	 * @var Property
 	 */
-	protected $property;
+	private $property;
 
 	/**
 	 * Do not use to construct new stuff from outside of this class,
@@ -64,7 +57,7 @@ class PropertyContent extends EntityContent {
 	/**
 	 * Create a new PropertyContent object from the provided Property data.
 	 *
-	 * @since 0.1
+	 * @deprecated Use a dedicated deserializer
 	 *
 	 * @param array $data
 	 *

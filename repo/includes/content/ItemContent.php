@@ -27,7 +27,6 @@ class ItemContent extends EntityContent {
 	const STATUS_LINKSTUB = 60;
 
 	/**
-	 * @since 0.1
 	 * @var Item
 	 */
 	private $item;
@@ -65,7 +64,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * Create a new ItemContent object from the provided Item data.
 	 *
-	 * @deprecated
+	 * @deprecated Use a dedicated deserializer
 	 *
 	 * @param array $data
 	 *
