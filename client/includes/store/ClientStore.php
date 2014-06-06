@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Client store interface.

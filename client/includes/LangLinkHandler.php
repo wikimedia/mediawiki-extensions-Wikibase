@@ -7,6 +7,7 @@ use Site;
 use SiteStore;
 use Title;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Handles language links.

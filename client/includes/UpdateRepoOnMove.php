@@ -3,6 +3,7 @@
 namespace Wikibase;
 use Title;
 use User;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Provides logic to update the repo after page moves in the client.

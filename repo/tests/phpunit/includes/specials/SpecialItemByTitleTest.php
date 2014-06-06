@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialItemByTitle;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemByTitle
@@ -50,7 +50,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	private function getMockSiteLinkLookup() {
 		$entityId = new ItemId( 'Q123' );
 
-		$mock = $this->getMock( '\Wikibase\SiteLinkLookup' );
+		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 
 		$mock->expects( $this->any() )
 			->method( 'getItemIdForLink' )

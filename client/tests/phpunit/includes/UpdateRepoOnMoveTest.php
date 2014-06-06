@@ -25,7 +25,7 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 	protected function getFakeMoveData() {
 		$entityId = new ItemId( 'Q123' );
 
-		$siteLinkLookupMock = $this->getMock( '\Wikibase\SiteLinkLookup' );
+		$siteLinkLookupMock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 
 		$siteLinkLookupMock->expects( $this->any() )
 			->method( 'getEntityIdForSiteLink' )

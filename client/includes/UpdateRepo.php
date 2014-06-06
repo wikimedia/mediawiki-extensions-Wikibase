@@ -10,6 +10,7 @@ use RuntimeException;
 use Title;
 use User;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Provides logic to update the repo after certain changes have been

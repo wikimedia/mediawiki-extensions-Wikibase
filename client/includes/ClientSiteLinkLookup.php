@@ -6,7 +6,7 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\SiteLinkLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Provides access to sitelinks on repo.

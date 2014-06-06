@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\SiteLinkTable;
 
 /**
  * Utility class for rebuilding the wb_items_per_site table.

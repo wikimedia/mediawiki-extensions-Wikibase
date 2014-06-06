@@ -3,12 +3,12 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Item;
-use Wikibase\SiteLinkTable;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\Store\SiteLinkTable;
 
 /**
- * @covers Wikibase\SiteLinkTable
+ * @covers Wikibase\Lib\Store\SiteLinkTable
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -51,7 +51,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		);
 
 		foreach( $sitelinks as $site => $page ) {
-			$item->addSiteLink( new SimpleSiteLink( $site, $page ) );
+			$item->addSiteLink( new SiteLink( $site, $page ) );
 		}
 
 		$items[] = $item;
@@ -74,16 +74,16 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		// save initial links
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'q177' ) );
-		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foo' ) );
-		$item->addSiteLink( new SimpleSiteLink( 'dewiki', 'Bar' ) );
-		$item->addSiteLink( new SimpleSiteLink( 'svwiki', 'Börk' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Foo' ) );
+		$item->addSiteLink( new SiteLink( 'dewiki', 'Bar' ) );
+		$item->addSiteLink( new SiteLink( 'svwiki', 'Börk' ) );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 
 		// modify links, and save again
-		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'FooK' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'FooK' ) );
 		$item->removeSiteLink( 'dewiki' );
-		$item->addSiteLink( new SimpleSiteLink( 'nlwiki', 'GrooK' ) );
+		$item->addSiteLink( new SiteLink( 'nlwiki', 'GrooK' ) );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 
