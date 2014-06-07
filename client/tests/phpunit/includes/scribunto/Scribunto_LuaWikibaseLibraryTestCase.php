@@ -28,9 +28,6 @@ use Wikibase\Test\MockClientStore;
  */
 class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase {
 
-	/* @var ClientStore */
-	private $oldStore = null;
-
 	/**
 	 * Makes sure WikibaseClient uses our ClientStore mock
 	 */
