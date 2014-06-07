@@ -5,6 +5,7 @@ namespace Wikibase;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Handles wikibase_item page and parser output property

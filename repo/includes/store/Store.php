@@ -6,6 +6,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\SiteLinkCache;
 
 /**
  * Store interface. All interaction with store Wikibase does on top
