@@ -1201,7 +1201,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		}
 
 		if ( isset( $updates['injectRCRecord'] ) ) {
-			foreach ( $updates['injectRCRecord'] as $page => $rcAttr ) {
+			foreach ( $updates['injectRCRecord'] as $rcAttr ) {
 				$this->assertType( 'array', $rcAttr );
 				$this->assertArrayHasKey( 'wikibase-repo-change', $rcAttr );
 				$this->assertType( 'array', $rcAttr['wikibase-repo-change'] );
