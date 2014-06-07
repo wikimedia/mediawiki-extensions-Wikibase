@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e3593d1_612120ac",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-07T00:54:55Z",
+      "side": 1,
+      "message": "That is what EntityDeserializer is for",
+      "parentUuid": "2e1a5767_d7e3e0d2",
+      "revId": "187ca67ff916db1488c7b6d1f1b76fcbf975704a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_f7b7fcd1",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 2
