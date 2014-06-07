@@ -168,7 +168,9 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery',
+				'jquery.ui.core',
 				'jquery.ui.ooMenu',
+				'jquery.ui.position',
 				'jquery.ui.widget',
 			),
 		),
