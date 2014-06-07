@@ -640,7 +640,7 @@ class ItemTest extends EntityTest {
 		}
 
 		$this->assertInternalType( 'array', $item->getSiteLinks() );
-		$this->assertEquals( $siteLinks, array_values( $item->getSiteLinks() ) );
+		$this->assertEquals( $siteLinks, $item->getSiteLinks() );
 	}
 
 	public function simpleSiteLinksProvider() {

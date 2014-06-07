@@ -109,7 +109,7 @@ class Item extends Entity {
 	 * @return SiteLink[]
 	 */
 	public function getSiteLinks() {
-		return iterator_to_array( $this->siteLinks );
+		return array_values( iterator_to_array( $this->siteLinks ) );
 	}
 
 	/**
