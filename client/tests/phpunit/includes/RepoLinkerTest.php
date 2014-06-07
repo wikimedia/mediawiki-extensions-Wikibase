@@ -86,7 +86,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function testGetNamespaceWithInvalid_ThrowsException( array $settings, $entityType ) {
 	 	$repoLinker = $this->getRepoLinkerForSettings( $settings );
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$namespace = $repoLinker->getNamespace( $entityType );
+		$repoLinker->getNamespace( $entityType );
 	}
 
 	public function invalidNamespaceProvider() {
@@ -146,7 +146,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPageUrlInvalidThrowsException( $settings, $page ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$url = $repoLinker->getPageUrl( $page );
+		$repoLinker->getPageUrl( $page );
 	}
 
 	public function getPageUrlInvalidProvider() {

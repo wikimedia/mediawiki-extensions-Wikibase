@@ -564,7 +564,6 @@ final class ClientHooks {
 	public static function onSkinTemplateOutputPageBeforeExec( Skin &$skin, QuickTemplate &$template ) {
 		$title = $skin->getContext()->getTitle();
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
 
 		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
