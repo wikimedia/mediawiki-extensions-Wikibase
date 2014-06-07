@@ -575,4 +575,12 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	 */
 	public abstract function isEmpty();
 
+	/**
+	 * Removes all content from the Entity.
+	 * The id is not part of the content.
+	 *
+	 * @since 0.1
+	 */
+	public abstract function clear();
+
 }

@@ -759,4 +759,20 @@ class ItemTest extends EntityTest {
 		return $statement;
 	}
 
+	public function testClearRemovesAllButId() {
+		$item = Item::newEmpty();
+
+		$item->setId( 42 );
+		$item->getFingerprint()->setLabel( 'en', 'foo' );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		$item->addClaim( $this->newStatement() );
+
+		$item->clear();
+
+		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
+		$this->assertTrue( $item->getFingerprint()->isEmpty() );
+		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
+		$this->assertEmpty( $item->getClaims() );
+	}
+
 }

@@ -200,6 +200,18 @@ class Item extends Entity {
 	}
 
 	/**
+	 * Removes all content from the Item.
+	 * The id is not part of the content.
+	 *
+	 * @since 0.1
+	 */
+	public function clear() {
+		$this->fingerprint = Fingerprint::newEmpty();
+		$this->siteLinks = new SiteLinkList();
+		$this->statements = array();
+	}
+
+	/**
 	 * @see Entity::getDiffArray
 	 *
 	 * @return array
@@ -395,5 +407,7 @@ class Item extends Entity {
 		$list = new Claims( $this->statements );
 		return $list->equals( new Claims( $statements ) );
 	}
+
+
 
 }

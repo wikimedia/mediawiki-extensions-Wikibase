@@ -89,4 +89,16 @@ class PropertyTest extends EntityTest {
 		$this->assertFalse( $property->isEmpty() );
 	}
 
+	public function testClearRemovesAllButId() {
+		$property = Property::newFromType( 'string' );
+
+		$property->setId( 42 );
+		$property->getFingerprint()->setLabel( 'en', 'foo' );
+
+		$property->clear();
+
+		$this->assertEquals( new PropertyId( 'P42' ), $property->getId() );
+		$this->assertTrue( $property->getFingerprint()->isEmpty() );
+	}
+
 }
