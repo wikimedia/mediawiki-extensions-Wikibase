@@ -179,18 +179,20 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$changeOp->apply( $item );
 	}
 
-	protected function makeNewItemWithClaim( $itemId, $snak ) {
-		$entity = Item::newFromArray( array( 'entity' => $itemId ) );
-		$claim = $entity->newClaim( $snak );
-		$claim->setGuid( $this->mockProvider->getGuidGenerator()->newGuid( $entity->getId() ) );
+	private function makeNewItemWithClaim( $itemIdString, $snak ) {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( $itemIdString ) );
+
+		$claim = $item->newClaim( $snak );
+		$claim->setGuid( $this->mockProvider->getGuidGenerator()->newGuid( $item->getId() ) );
 		$claims = new Claims();
 		$claims->addClaim( $claim );
-		$entity->setClaims( $claims );
+		$item->setClaims( $claims );
 
-		return $entity;
+		return $item;
 	}
 
-	protected function makeSnak( $propertyId, $value ) {
+	private function makeSnak( $propertyId, $value ) {
 		if ( is_string( $propertyId ) ) {
 			$propertyId = new PropertyId( $propertyId );
 		}
