@@ -104,7 +104,7 @@ class ChangeOpAliases extends ChangeOpBase {
 			throw new ChangeOpException( 'Bad action: ' . $this->action );
 		}
 
-		$fingerprint->setAliasGroup( new AliasGroup( $this->language, $updated ) );
+		$fingerprint->getAliasGroups()->setAliasesForLanguage( $this->language, $updated );
 	}
 
 	/**
