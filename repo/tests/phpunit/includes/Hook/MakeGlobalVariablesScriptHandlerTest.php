@@ -76,7 +76,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $entityId ) {
-		$name = $entityId->getEntityType() . ':' . $entityId->getPrefixedId();
+		$name = $entityId->getEntityType() . ':' . $entityId->getSerialization();
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 
@@ -125,7 +125,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityContent
 	 */
 	public function getEntityContent() {
-		$item = Item::newFromArray( array() );
+		$item = Item::newEmpty();
 
 		$itemId = new ItemId( 'Q5881' );
 		$item->setId( $itemId );
