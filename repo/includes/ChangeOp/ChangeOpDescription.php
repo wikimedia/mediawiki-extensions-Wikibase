@@ -75,7 +75,7 @@ class ChangeOpDescription extends ChangeOpBase {
 		if ( $this->description === null ) {
 			$fingerprint->removeDescription( $this->language );
 		} else {
-			$fingerprint->setDescription( new Term( $this->language, $this->description ) );
+			$fingerprint->getDescriptions()->setTextForLanguage( $this->language, $this->description );
 		}
 	}
 

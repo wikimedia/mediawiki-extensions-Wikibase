@@ -75,7 +75,7 @@ class ChangeOpLabel extends ChangeOpBase {
 		if ( $this->label === null ) {
 			$fingerprint->removeLabel( $this->language );
 		} else {
-			$fingerprint->setLabel( new Term( $this->language, $this->label ) );
+			$fingerprint->getLabels()->setTextForLanguage( $this->language, $this->label );
 		}
 	}
 
