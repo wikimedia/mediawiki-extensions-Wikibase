@@ -729,4 +729,34 @@ class ItemTest extends EntityTest {
 		$this->assertTrue( $item->getSiteLinkList()->getBySiteId( 'kittens' )->equals( $newLink ) );
 	}
 
+	public function testEmptyItemIsEmpty() {
+		$this->assertTrue( Item::newEmpty()->isEmpty() );
+	}
+
+	public function testItemWithIdIsEmpty() {
+		$item = Item::newEmpty();
+		$item->setId( 1337 );
+		$this->assertTrue( $item->isEmpty() );
+	}
+
+	public function testItemWithStuffIsNotEmpty() {
+		$item = Item::newEmpty();
+		$item->getFingerprint()->setAliasGroup( 'en', array( 'foo' ) );
+		$this->assertFalse( $item->isEmpty() );
+
+		$item = Item::newEmpty();
+		$item->getSiteLinkList()->addNewSiteLink( 'en', 'o_O' );
+		$this->assertFalse( $item->isEmpty() );
+
+		$item = Item::newEmpty();
+		$item->addClaim( $this->newStatement() );
+		$this->assertFalse( $item->isEmpty() );
+	}
+
+	private function newStatement() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'kittens' );
+		return $statement;
+	}
+
 }

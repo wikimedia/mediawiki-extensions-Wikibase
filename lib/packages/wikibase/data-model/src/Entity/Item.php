@@ -186,6 +186,20 @@ class Item extends Entity {
 	}
 
 	/**
+	 * Returns if the Item has no content.
+	 * Having an id set does not count as having content.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return $this->fingerprint->isEmpty()
+			&& $this->siteLinks->isEmpty()
+			&& empty( $this->statements );
+	}
+
+	/**
 	 * @see Entity::getDiffArray
 	 *
 	 * @return array

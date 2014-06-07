@@ -10,7 +10,6 @@ Changes in the `Entity` hierarchy:
 * Changed the constructor signature of `Property`
 * Removed `Entity::setClaims` (`Item::setClaims` has been retained)
 * Removed `Entity::clear`
-* Removed `Entity::isEmpty`
 * Removed `Entity::stub`
 * Removed `Property::newEmpty`
 * Removed `Entity::getIdFromClaimGuid`
@@ -55,6 +54,10 @@ Other breaking changes:
 * Added `ClaimListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
 * Added `PropertyNotFoundException`
+
+#### Other changes
+
+* Undeprecated `Entity::isEmpty`
 
 ## Version 0.8 (2014-06-05)
 

@@ -129,4 +129,16 @@ class Property extends Entity {
 			&& $this->dataTypeId == $that->dataTypeId;
 	}
 
+	/**
+	 * Returns if the Property has no content.
+	 * Having an id and type set does not count as having content.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return $this->fingerprint->isEmpty();
+	}
+
 }
