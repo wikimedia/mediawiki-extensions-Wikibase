@@ -13,7 +13,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -116,7 +117,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	private function getEntity() {
-		$item = Item::newFromArray( array() );
+		$item = Item::newEmpty();
 		$itemId = new ItemId( 'Q5881' );
 		$item->setId( $itemId );
 		$item->setLabel( 'en', 'Cake' );
@@ -132,10 +133,9 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	private function getProperty() {
-		$property = Property::newFromArray( array() );
+		$property = Property::newFromType( 'string' );
 		$property->setId( new PropertyId( 'P794' ) );
 		$property->setLabel( 'en', 'AwesomeID' );
-		$property->setDataTypeId( 'string' );
 
 		return $property;
 	}
@@ -182,7 +182,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $entityId ) {
-		$name = $entityId->getEntityType() . ':' . $entityId->getPrefixedId();
+		$name = $entityId->getEntityType() . ':' . $entityId->getSerialization();
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 
