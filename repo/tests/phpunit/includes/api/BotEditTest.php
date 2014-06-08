@@ -110,10 +110,6 @@ class BotEditTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 		$this->assertArrayHasKey( 'lastrevid', $result['entity'] , 'entity should contain lastrevid key' );
 		$myid = $result['entity']['id'];
-		//@todo remove crappy hack the below while fixing bug:52732 (linktitles currently doesn't return an id with a q...)
-		if( $params['action'] == 'wblinktitles' ){
-			$myid = 'q'.$myid;
-		}
 
 		// -- get the recentchanges -------------------------------------------
 		$rcRequest = array(

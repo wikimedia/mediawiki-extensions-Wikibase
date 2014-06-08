@@ -73,7 +73,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 
 		// check the item in the database -------------------------------
 		if ( array_key_exists( 'id', $result['entity'] )  ) {
-			$item = $this->loadEntity( 'Q'.$result['entity']['id'] );
+			$item = $this->loadEntity( $result['entity']['id'] );
 			$links = self::flattenArray( $item['sitelinks'], 'site', 'title' );
 			$this->assertEquals( $params['fromtitle'], $links[ $params['fromsite'] ], 'wrong link target' );
 			$this->assertEquals( $params['totitle'], $links[ $params['tosite'] ], 'wrong link target' );
