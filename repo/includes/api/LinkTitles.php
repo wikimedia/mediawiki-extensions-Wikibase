@@ -169,8 +169,7 @@ class LinkTitles extends ApiWikibase {
 	private function buildResult( Item $item = null, Status $status ) {
 		if ( $item !== null ) {
 			$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity' );
-			//FIXME: breaking change, remove forced numeric ids!!!
-			$this->getResultBuilder()->addBasicEntityInformation( $item->getId(), 'entity', true );
+			$this->getResultBuilder()->addBasicEntityInformation( $item->getId(), 'entity' );
 		}
 
 		$this->getResultBuilder()->markSuccess( $status->isOK() );
