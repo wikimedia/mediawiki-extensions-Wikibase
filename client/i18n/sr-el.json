@@ -17,6 +17,8 @@
 	"wikibase-rc-show-wikidata-pref": "Prikaži izmene na Vikipodacima u skorašnjim izmenama",
 	"wikibase-rc-wikibase-edit-letter": "d",
 	"wikibase-rc-wikibase-edit-title": "Izmena na Vikipodacima",
+	"wikibase-watchlist-show-changes-pref": "Prikaži izmene na Vikipodacima u spisku nadgledanja",
 	"special-unconnectedpages": "Stranice koje nisu povezane sa stavkama",
-	"wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima"
+	"wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima",
+	"wikibase-pageinfo-entity-id-none": "Nema"
 }

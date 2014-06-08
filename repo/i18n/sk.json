@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"KuboF"
+			"KuboF",
+			"Sudo77(new)"
 		]
 	},
 	"wikibase-desc": "Úložisko štruktúrovaných údajov",
@@ -19,11 +20,12 @@
 	"wikibase-sitelink-site-edit-placeholder": "projekt",
 	"wikibase-sitelink-page-edit-placeholder": "článok",
 	"wikibase-alias-edit-placeholder": "zadaj alias",
+	"wikibase-statements": "Výroky",
+	"wikibase-terms": "V iných jazykoch",
 	"wikibase-remove": "odstrániť",
 	"wikibase-propertyedittool-full": "Zoznam hodnôt je kompletný.",
 	"wikibase-aliases-label": "Tiež známy ako:",
 	"wikibase-propertypage-datatype": "Typ údaju",
-	"wikibase-snakview-snaktypeselector-somevalue": "neznáma hodnota",
 	"wikibase-itembytitle-submit": "Hľadať",
 	"wikibase-itembytitle-create": "Tiež môžeš [{{fullurl:Special:NewItem|site=$1&page=$2}} vytvoriť položku].",
 	"wikibase-itemdisambiguation-lookup-language": "Jazyk:",

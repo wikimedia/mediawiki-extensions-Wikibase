@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Teslaton"
+			"Teslaton",
+			"KuboF",
+			"Sudo77(new)"
 		]
 	},
-	"wikibase-replicationnote": "Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki."
+	"wikibase-replicationnote": "Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki.",
+	"wikibase-sitelinks-wikipedia": "Stránky Wikipédie prepojené s touto položkou",
+	"wikibase-snakview-snaktypeselector-somevalue": "neznáma hodnota"
 }
