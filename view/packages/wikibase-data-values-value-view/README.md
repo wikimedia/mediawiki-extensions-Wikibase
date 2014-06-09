@@ -109,7 +109,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.6.1 (dev)
+### 0.6.1 (2014-06-09)
 
 * Make the minimal term length of the suggester configurable.
 * Add resource loader dependencies for jquery.ui.suggester, fixing bug 66268 and bug 66257.
