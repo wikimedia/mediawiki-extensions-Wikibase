@@ -24,7 +24,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var ChangeOpTestMockProvider
 	 */
-	protected $mockProvider;
+	private $mockProvider;
 
 	/**
 	 * @param string|null $name
@@ -77,7 +77,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			$to,
 			$ignoreConflicts
 		);
-		$this->assertInstanceOf( '\Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
+		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
 	}
 
 	public function provideValidConstruction() {
@@ -119,7 +119,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return Item
 	 */
-	public static function getItem( $id, array $data = array() ) {
+	private function getItem( $id, array $data = array() ) {
 		$item = new Item( $data );
 		$item->setId( new ItemId( $id ) );
 		return $item;
@@ -135,8 +135,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideData
 	 */
 	public function testCanApply( array $fromData, array $toData, $expectedFromData, $expectedToData, array $ignoreConflicts = array() ) {
-		$from = self::getItem( 'Q111', $fromData );
-		$to = self::getItem( 'Q222', $toData );
+		$from = $this->getItem( 'Q111', $fromData );
+		$to = $this->getItem( 'Q222', $toData );
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
@@ -179,7 +179,7 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return array 1=>fromData 2=>toData 3=>expectedFromData 4=>expectedToData
 	 */
-	public static function provideData() {
+	public function provideData() {
 		$testCases = array();
 		$testCases['labelMerge'] = array(
 			array( 'label' => array( 'en' => 'foo' ) ),

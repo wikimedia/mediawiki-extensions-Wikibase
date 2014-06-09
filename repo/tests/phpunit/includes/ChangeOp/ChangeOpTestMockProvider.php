@@ -45,7 +45,7 @@ use Wikibase\Validators\TypeValidator;
 class ChangeOpTestMockProvider {
 
 	/**
-	 * @var
+	 * @var PHPUnit_Framework_TestCase
 	 */
 	private $mockBuilderFactory;
 
@@ -63,7 +63,7 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @return PHPUnit_Framework_MockObject_MockBuilder
 	 */
-	protected function getMockBuilder( $class ) {
+	private function getMockBuilder( $class ) {
 		return $this->mockBuilderFactory->getMockBuilder( $class );
 	}
 
@@ -74,7 +74,7 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @return object
 	 */
-	protected function getMock( $class ) {
+	private function getMock( $class ) {
 		return $this->mockBuilderFactory->getMock( $class );
 	}
 
