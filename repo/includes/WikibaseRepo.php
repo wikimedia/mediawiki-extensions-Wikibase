@@ -4,6 +4,8 @@ namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
@@ -17,6 +19,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
+use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
@@ -712,4 +716,16 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec();
 	}
+
+	public function newInternalDeserializerFactory() {
+		return new DeserializerFactory(
+			new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ),
+			$this->getEntityIdParser()
+		);
+	}
+
+	public function newInternalSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer() );
+	}
+
 }
