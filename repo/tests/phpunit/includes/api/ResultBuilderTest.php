@@ -401,20 +401,6 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $result->getData() );
 	}
 
-	public function testAddBasicEntityInformationForcedNumeric() {
-		$result = $this->getDefaultResult();
-		$entityId = new ItemId( 'Q67' );
-		$expected = array( 'entity' => array(
-			'id' => '67',
-			'type' => 'item',
-		) );
-
-		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addBasicEntityInformation( $entityId, 'entity', true );
-
-		$this->assertEquals( $expected, $result->getData() );
-	}
-
 	public function testAddLabels(){
 		$result = $this->getDefaultResult();
 		$labels = array( 'en' => 'foo', 'de' => 'bar' );
