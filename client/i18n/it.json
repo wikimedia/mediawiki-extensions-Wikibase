@@ -29,7 +29,7 @@
 	"wikibase-dataitem": "Dati sull'elemento",
 	"wikibase-editlinks": "Modifica link",
 	"wikibase-editlinkstitle": "Modifica collegamenti interlinguistici",
-	"wikibase-linkitem-addlinks": "Aggiungi link",
+	"wikibase-linkitem-addlinks": "Aggiungi collegamenti",
 	"wikibase-linkitem-alreadylinked": "La pagina che si vuole collegare è già associata ad un altro [$1 elemento] nell'archivio centrale dei dati che punta su $2 in questo sito. Gli elementi possono essere collegati ad una sola pagina per sito. Scegli una pagina diversa a cui collegarla.",
 	"wikibase-linkitem-close": "Chiudi la finestra di dialogo e ricarica la pagina",
 	"wikibase-linkitem-failure": "Si è verificato un errore sconosciuto durante il tentativo di collegare la pagina indicata.",
