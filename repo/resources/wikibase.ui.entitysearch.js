@@ -31,9 +31,7 @@
 			$( ooMenu )
 			.off( 'selected' )
 			.on( 'selected.entitysearch', function( event, item ) {
-				if( /^key/.test( event.originalEvent.type ) ) {
-					location.href = item.getEntityStub().url;
-				}
+				location.href = item.getEntityStub().url;
 			} );
 
 			return ooMenu;
