@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_57aa6483",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_d20c2448",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_77cacc4b",
         "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
         "patchSetId": 5
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_17b4dce3",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e1a5767_77cacc4b",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_57d7d0f2",
         "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
         "patchSetId": 5
@@ -82,6 +118,24 @@
       "writtenOn": "2014-06-06T12:28:25Z",
       "side": 1,
       "message": "should not always be true, see above.",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_f798387e",
+        "filename": "lib/includes/Localizer/DispatchingExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e1a5767_57d7d0f2",
       "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_d7953444",
+        "filename": "lib/includes/Localizer/MessageExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_f535d2d8",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_952c4691",
         "filename": "lib/includes/Localizer/ParseExceptionLocalizer.php",
         "patchSetId": 5
@@ -122,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_b7a2b0a2",
+        "filename": "lib/includes/Localizer/ParseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_952c4691",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_554ede73",
         "filename": "lib/includes/Localizer/ParseExceptionLocalizer.php",
         "patchSetId": 5
@@ -133,6 +223,24 @@
       "writtenOn": "2014-06-06T16:34:44Z",
       "side": 1,
       "message": "Could be simplified, see below.",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d77c141e",
+        "filename": "lib/includes/Localizer/ParseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "only moved this code.  agree it could be nicer but prefer not in this patch",
+      "parentUuid": "0e3593d1_554ede73",
       "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -191,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_979fac62",
+        "filename": "lib/includes/Localizer/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "killed it",
+      "parentUuid": "0e3593d1_35535a1c",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_f53cb2be",
         "filename": "lib/includes/Localizer/WikibaseExceptionLocalizer.php",
         "patchSetId": 5
@@ -202,6 +328,24 @@
       "writtenOn": "2014-06-06T16:34:44Z",
       "side": 1,
       "message": "Why is the ChangeOpValidationException from the old code missing here? Shouldn\u0027t this just recreate the old behavior?",
+      "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_178bbc21",
+        "filename": "lib/includes/Localizer/WikibaseExceptionLocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-10T11:50:22Z",
+      "side": 1,
+      "message": "repo-specific, does not belong here",
+      "parentUuid": "0e3593d1_f53cb2be",
       "revId": "7a35e390c23dc70a9672394e5de605ae8426afd2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
