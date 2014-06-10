@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_972fac9c",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-10T13:33:21Z",
+      "side": 1,
+      "message": "are we sure that array is indexed like that? to get the first element of an array, use array_shift() or reset()",
+      "revId": "2a5b01d6f98004752c8cd73760f2590fbfa9f7d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d70c1448",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-10T13:33:21Z",
+      "side": 1,
+      "message": "$sitesToOutput could/should have the global ID as the array key.\nAlso, implementing the default here, inline in a factory method, feels bad. You could make the default value for the otherProjectsLinks  setting a closure - that closure would then be evaluated the first time the setting is accessed (unless the setting is overwritten with a concrete value).",
+      "revId": "2a5b01d6f98004752c8cd73760f2590fbfa9f7d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
