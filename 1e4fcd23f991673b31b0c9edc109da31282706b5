@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_576ca405",
+        "filename": "lib/includes/Localizer/GenericExceptionLocalizer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-10T13:17:35Z",
+      "side": 1,
+      "message": "Could be passed in via the constructor.",
+      "revId": "1e4fcd23f991673b31b0c9edc109da31282706b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
