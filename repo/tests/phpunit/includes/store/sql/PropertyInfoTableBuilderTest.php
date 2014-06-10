@@ -8,7 +8,6 @@ use Wikibase\PropertyInfoStore;
 use Wikibase\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
  * @covers Wikibase\PropertyInfoTableBuilder
@@ -51,7 +50,15 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		return $properties;
 	}
 
+	private function resetPropertyInfoTable( PropertyInfoTable $table ) {
+		$dbw = $table->getWriteConnection();
+		$dbw->delete( 'wb_entity_per_page',  '*' );
+	}
+
 	public function testRebuildPropertyInfo() {
+		$table = new PropertyInfoTable( false );
+
+		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 		$propertyIds = array_keys( $properties );
 
@@ -59,7 +66,6 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		//       so we should also use the EntityLookup from WikibaseRepo.
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
 
-		$table = new PropertyInfoTable( false );
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
 		$builder->setBatchSize( 3 );
 
