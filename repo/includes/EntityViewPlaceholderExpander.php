@@ -212,20 +212,25 @@ class EntityViewPlaceholderExpander {
 	 * Generates HTML of the term box, to be injected into the entity page.
 	 *
 	 * @param Entityid $entityId
-	 * @param int $entityRevision
+	 * @param int $revisionId
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function renderTermBox( EntityId $entityId, $entityRevision ) {
+	public function renderTermBox( EntityId $entityId, $revisionId ) {
 		$languages = $this->getExtraUserLanguages();
 
 		if ( !$languages ) {
 			return '';
 		}
 
-		// we may want to cache this...
-		$entity = $this->entityLookup->getEntity( $entityId, $entityRevision );
+		try {
+			// we may want to cache this...
+			$entity = $this->entityLookup->getEntity( $entityId, $revisionId );
+		} catch ( StorageException $ex ) {
+			// entity not found, might be a deleted revision
+			return '';
+		}
 
 		if ( !$entity ) {
 			return '';
