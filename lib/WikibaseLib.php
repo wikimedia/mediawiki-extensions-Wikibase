@@ -43,6 +43,8 @@ if ( defined( 'WBL_VERSION' ) ) {
 	return 1;
 }
 
+define( 'WB_EXPERIMENTAL_FEATURES', true );
+
 define( 'WBL_VERSION', '0.5 alpha'
 	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
 
