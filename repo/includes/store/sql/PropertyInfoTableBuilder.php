@@ -35,7 +35,7 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @var bool
 	 */
-	private $all = false;
+	private $shouldUpdateAllEntities = false;
 
 	/**
 	 * Starting point
@@ -49,7 +49,7 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @var int
 	 */
-	protected $batchSize = 100;
+	private $batchSize = 100;
 
 	public function __construct( PropertyInfoTable $propertyInfoTable, EntityLookup $entityLookup ) {
 		$this->propertyInfoTable = $propertyInfoTable;
@@ -60,7 +60,7 @@ class PropertyInfoTableBuilder {
 	 * @return boolean
 	 */
 	public function getRebuildAll() {
-		return $this->all;
+		return $this->shouldUpdateAllEntities;
 	}
 
 	/**
@@ -81,7 +81,7 @@ class PropertyInfoTableBuilder {
 	 * @param boolean $all
 	 */
 	public function setRebuildAll( $all ) {
-		$this->all = $all;
+		$this->shouldUpdateAllEntities = $all;
 	}
 
 	/**
@@ -137,7 +137,7 @@ class PropertyInfoTableBuilder {
 		$join = array();
 		$tables = array( 'wb_entity_per_page' );
 
-		if ( !$this->all ) {
+		if ( !$this->shouldUpdateAllEntities ) {
 			// Find properties in wb_entity_per_page with no corresponding
 			// entry in wb_property_info.
 
@@ -168,7 +168,7 @@ class PropertyInfoTableBuilder {
 				array(
 					'epp_entity_type = ' . $dbw->addQuotes( Property::ENTITY_TYPE ),
 					'epp_entity_id > ' . (int) $rowId,
-					$this->all ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
+					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
 				),
 				__METHOD__,
 				array(
@@ -187,7 +187,7 @@ class PropertyInfoTableBuilder {
 
 			foreach ( $props as $row ) {
 				$id = PropertyId::newFromNumber( (int)$row->epp_entity_id );
-				$this->updatePropertyInfo( $dbw, $id );
+				$this->updatePropertyInfo( $id );
 
 				$rowId = $row->epp_entity_id;
 				$c+= 1;
@@ -197,7 +197,7 @@ class PropertyInfoTableBuilder {
 				$dbw->commit();
 			}
 
-			$this->report( "Updated $c properties, up to ID $rowId." );
+			$this->reportMessage( "Updated $c properties, up to ID $rowId." );
 			$total += $c;
 
 			if ( $c < $this->batchSize ) {
@@ -217,7 +217,7 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @author Tim Starling (stolen from recompressTracked.php)
 	 */
-	protected function waitForSlaves() {
+	private function waitForSlaves() {
 		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->propertyInfoTable
 
 		while ( true ) {
@@ -226,9 +226,9 @@ class PropertyInfoTableBuilder {
 				break;
 			}
 
-			$this->report( "Slaves are lagged by $maxLag seconds, sleeping..." );
+			$this->reportMessage( "Slaves are lagged by $maxLag seconds, sleeping..." );
 			sleep( 5 );
-			$this->report( "Resuming..." );
+			$this->reportMessage( "Resuming..." );
 		}
 	}
 
@@ -242,10 +242,9 @@ class PropertyInfoTableBuilder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param DatabaseBase $dbw the database connection to use
 	 * @param PropertyId $id the Property to process
 	 */
-	protected function updatePropertyInfo( DatabaseBase $dbw, PropertyId $id ) {
+	private function updatePropertyInfo( PropertyId $id ) {
 		$property = $this->entityLookup->getEntity( $id );
 
 		if( !$property instanceof Property ) {
@@ -265,14 +264,7 @@ class PropertyInfoTableBuilder {
 		);
 	}
 
-	/**
-	 * reports a message
-	 *
-	 * @since 0.4
-	 *
-	 * @param $msg
-	 */
-	protected function report( $msg ) {
+	private function reportMessage( $msg ) {
 		if ( $this->reporter ) {
 			$this->reporter->reportMessage( $msg );
 		}
