@@ -430,11 +430,8 @@ class ClaimsTest extends \PHPUnit_Framework_TestCase {
 
 		$hashes = $claims->getHashes();
 		$this->assertInternalType( 'array', $hashes );
+		$this->assertContainsOnly( 'string', $hashes );
 		$this->assertSameSize( $claims, $hashes );
-
-		foreach ( $hashes as $hash ) {
-			$this->assertInternalType( 'string', $hash );
-		}
 
 		$hashSet = array_flip( $hashes );
 
