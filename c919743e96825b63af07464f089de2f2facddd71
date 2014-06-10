@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_259a0667",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-10T17:43:08Z",
+      "side": 1,
+      "message": "I didn\u0027t change anything about that, it already has a FIXME and EntityView\u0027s constructor is so ugly I don\u0027t want to do anything with ItemView\u0027s constructor.",
+      "parentUuid": "2e1a5767_746ad4b2",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_94a45006",
         "filename": "repo/includes/view/SiteLinksView.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-05T12:52:01Z",
       "side": 1,
       "message": "Please factor the logic for getting $siteLinks for a given group into a separate function. Perhaps factor looking up the URLs for all the links into a separate function too.",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_000ff034",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-10T17:43:08Z",
+      "side": 1,
+      "message": "Am refactoring this in a follow-up.",
+      "parentUuid": "2e1a5767_94a45006",
       "revId": "c919743e96825b63af07464f089de2f2facddd71",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_e00bcc24",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-10T17:43:08Z",
+      "side": 1,
+      "message": "Am refactoring this in a follow-up.",
+      "parentUuid": "2e1a5767_74a9b4db",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_54aeb8e5",
         "filename": "repo/includes/view/TermBoxView.php",
         "patchSetId": 6
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_45acea84",
+        "filename": "repo/includes/view/TermBoxView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-10T17:43:08Z",
+      "side": 1,
+      "message": "Because it\u0027s used and I moved it into a different namespace. Might also just move the TermBoxView into Wikibase\\View as well.",
+      "parentUuid": "2e1a5767_54aeb8e5",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_f4bca41c",
         "filename": "repo/tests/phpunit/includes/view/SiteLinksViewTest.php",
         "patchSetId": 6
@@ -81,6 +153,24 @@
       "writtenOn": "2014-06-05T12:52:01Z",
       "side": 1,
       "message": "assertTag is somewhat nicer for checking HTML. It also supports regular expressions, on top of stuff for the dom structure.",
+      "revId": "c919743e96825b63af07464f089de2f2facddd71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_45e3cad4",
+        "filename": "repo/tests/phpunit/includes/view/SiteLinksViewTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-10T17:43:08Z",
+      "side": 1,
+      "message": "Does that allow asserting empty?",
+      "parentUuid": "2e1a5767_f4bca41c",
       "revId": "c919743e96825b63af07464f089de2f2facddd71",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
