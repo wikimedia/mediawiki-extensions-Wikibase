@@ -143,6 +143,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testGetExceptionLocalizer() {
+		$localizer = $this->getDefaultInstance()->getExceptionLocalizer();
+		$this->assertInstanceOf( 'Wikibase\Lib\Localizer\ExceptionLocalizer', $localizer );
+	}
+
 	/**
 	 * @return WikibaseRepo
 	 */
