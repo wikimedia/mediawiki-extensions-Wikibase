@@ -112,6 +112,7 @@ Other methods an Expert needs to provide:
 ### 0.6.2 (dev)
 
 * Support editing arbitrary precisions for GlobeCoordinates
+* Added support for options in the ui.toggler widget.
 
 ### 0.6.1 (2014-06-09)
 
