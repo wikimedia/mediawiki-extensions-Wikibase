@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Adrian Lang <adrian.lang@wikimedia.de>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Tue, 10 Jun 2014 16:32:59 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/138529
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
