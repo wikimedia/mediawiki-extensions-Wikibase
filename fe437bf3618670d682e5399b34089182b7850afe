@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_fa3c9dbe",
+        "filename": "repo/tests/phpunit/includes/store/sql/PropertyInfoTableBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-10T13:41:36Z",
+      "side": 1,
+      "message": "This should go into initProperties. It must only be done in the case where we actually save the properties. otherwise, we may end up resetting the table more often than we generate the property pages.\nOh, and the reset functionality should have it\u0027s own function",
+      "revId": "fe437bf3618670d682e5399b34089182b7850afe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
