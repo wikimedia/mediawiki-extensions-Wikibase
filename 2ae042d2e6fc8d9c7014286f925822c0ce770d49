@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_e9edf0b5",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-11T16:04:44Z",
+      "side": 1,
+      "message": "Clearly string[].",
+      "revId": "2ae042d2e6fc8d9c7014286f925822c0ce770d49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_09f15492",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-11T16:04:44Z",
+      "side": 1,
+      "message": "Description and implementation don\u0027t fit. Either use array_keys() to make the implementation fit the description or add \"content model to entity type IDs mapping\" to the description.",
+      "revId": "2ae042d2e6fc8d9c7014286f925822c0ce770d49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_6910e0ad",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-11T16:04:44Z",
+      "side": 1,
+      "message": "string!\n\nAlso: Rename to $entityType if you are touching the line anyway.",
+      "revId": "2ae042d2e6fc8d9c7014286f925822c0ce770d49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_49151c9c",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-11T16:04:44Z",
+      "side": 1,
+      "message": "string!\n\nAlso: Rename to $entityType if you are touching the line anyway.",
+      "revId": "2ae042d2e6fc8d9c7014286f925822c0ce770d49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_e94cd0e6",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-11T16:04:44Z",
+      "side": 1,
+      "message": "Call it $entityType then? I know, it was like that before. I would prefer the longer name, though.",
+      "revId": "2ae042d2e6fc8d9c7014286f925822c0ce770d49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
