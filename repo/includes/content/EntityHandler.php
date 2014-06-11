@@ -14,10 +14,17 @@ use RequestContext;
 use Revision;
 use Title;
 use User;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
@@ -51,18 +58,25 @@ abstract class EntityHandler extends ContentHandler {
 	private $termIndex;
 
 	/**
+	 * @var ValidatorErrorLocalizer
+	 */
+	private $errorLocalizer;
+
+	/**
 	 * @param string $modelId
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
+	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 */
 	public function __construct(
 		$modelId,
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
-		array $preSaveValidators
+		array $preSaveValidators,
+		ValidatorErrorLocalizer $errorLocalizer
 	) {
 		$formats = $contentCodec->getSupportedFormats();
 
@@ -72,6 +86,7 @@ abstract class EntityHandler extends ContentHandler {
 		$this->preSaveValidators = $preSaveValidators;
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
+		$this->errorLocalizer = $errorLocalizer;
 	}
 
 	/**
@@ -95,13 +110,35 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Returns a set of validators for enforcing hard constraints on the content
-	 * before saving. For soft constraints, see the TermValidatorFactory.
+	 * Returns the concrete EntityView implementation to use.
 	 *
-	 * @return EntityValidator[]
+	 * @since 0.5
+	 *
+	 * @return string The class name.
 	 */
-	public function getOnSaveValidators() {
-		return $this->preSaveValidators;
+	protected abstract function getEntityViewClass();
+
+	/**
+	 * Apply all EntityValidators registered for on-save validation
+	 *
+	 * @param EntityContent $content
+	 *
+	 * @return \Status
+	 */
+	public function applyOnSaveValidators( EntityContent $content ) {
+		$entity = $content->getEntity();
+		$result = Result::newSuccess();
+
+		/* @var EntityValidator $validator */
+		foreach ( $this->preSaveValidators as $validator ) {
+			$result = $validator->validateEntity( $entity );
+
+			if ( !$result->isValid() ) {
+				break;
+			}
+		}
+
+		return $this->errorLocalizer->getResultStatus( $result );
 	}
 
 	/**
@@ -515,6 +552,95 @@ abstract class EntityHandler extends ContentHandler {
 		);
 
 		return $updates;
+	}
+
+
+	/**
+	 * Creates an EntityView suitable for rendering the entity.
+	 *
+	 * @note: this uses global state to access the services needed for
+	 * displaying the entity.
+	 *
+	 * @since 0.5
+	 *
+	 * @param IContextSource|null $context
+	 * @param ParserOptions|null $options
+	 * @param LanguageFallbackChain|null $uiLanguageFallbackChain
+	 *
+	 * @return EntityView
+	 *
+	 * @todo Factor out into a EntityViewFactory class, and inject that!
+	 */
+	public function getEntityView( IContextSource $context = null, ParserOptions $options = null,
+		LanguageFallbackChain $uiLanguageFallbackChain = null
+	) {
+		if ( $context === null ) {
+			$context = RequestContext::getMain();
+		}
+
+		// determine output language ----
+		$langCode = $context->getLanguage()->getCode();
+
+		if ( $options !== null ) {
+			// NOTE: Parser Options language overrides context language!
+			$langCode = $options->getUserLang();
+		}
+
+		// make formatter options ----
+		$formatterOptions = new FormatterOptions();
+		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $langCode );
+
+		// Force the context's language to be the one specified by the parser options.
+		if ( $context && $context->getLanguage()->getCode() !== $langCode ) {
+			$context = clone $context;
+			$context->setLanguage( $langCode );
+		}
+
+		// apply language fallback chain ----
+		if ( !$uiLanguageFallbackChain ) {
+			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
+			$uiLanguageFallbackChain = $factory->newFromContextForPageView( $context );
+		}
+
+		$formatterOptions->setOption( 'languages', $uiLanguageFallbackChain );
+
+		// get all the necessary services ----
+		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
+			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
+		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
+		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
+		$idParser = new BasicEntityIdParser();
+
+		$langCodes = Utils::getLanguageCodes() + array( $langCode => $uiLanguageFallbackChain );
+
+		$options = new SerializationOptions();
+		$options->setLanguages( $langCodes );
+
+		$configBuilder = new ParserOutputJsConfigBuilder(
+			$entityInfoBuilder,
+			$idParser,
+			$entityContentFactory,
+			new ReferencedEntitiesFinder(),
+			$context->getLanguage()->getCode()
+		);
+
+		// construct the instance ----
+		$viewClass = $this->getEntityViewClass();
+
+		$entityView = new $viewClass(
+			$context,
+			$snakFormatter,
+			$dataTypeLookup,
+			$entityInfoBuilder,
+			$entityTitleLookup,
+			$options,
+			$configBuilder
+		);
+
+		return $entityView;
 	}
 
 }

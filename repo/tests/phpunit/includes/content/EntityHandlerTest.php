@@ -3,13 +3,18 @@
 namespace Wikibase\Test;
 
 use ContentHandler;
+use IContextSource;
 use Language;
+use ParserOptions;
+use RequestContext;
 use Revision;
 use Title;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageWithConversion;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -275,6 +280,52 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$content = $handler->makeEmptyContent();
 
 		$this->assertEquals( $this->getModelId(), $content->getModel() );
+	}
+
+
+	public function dataGetEntityView() {
+		$context = new RequestContext();
+		$context->setLanguage( 'de' );
+
+		$options = new ParserOptions();
+		$options->setUserLang( 'nl' );
+
+		$fallbackChain = new LanguageFallbackChain( array(
+			LanguageWithConversion::factory( $context->getLanguage() )
+		) );
+
+		return array(
+			array( $context, null, null ),
+			array( null, $options, null ),
+			array( $context, $options, null ),
+
+			array( $context, null, $fallbackChain ),
+			array( null, $options, $fallbackChain ),
+			array( $context, $options, $fallbackChain ),
+		);
+	}
+
+	/**
+	 * @dataProvider dataGetEntityView
+	 *
+	 * @param IContextSource $context
+	 * @param ParserOptions $parserOptions
+	 * @param LanguageFallbackChain $fallbackChain
+	 */
+	public function testGetEntityView(
+		IContextSource $context = null,
+		ParserOptions $parserOptions = null,
+		LanguageFallbackChain $fallbackChain = null
+	) {
+		$handler = $this->getHandler();
+		$view = $handler->getEntityView( $context, $parserOptions, $fallbackChain );
+
+		$this->assertInstanceOf( 'Wikibase\EntityView', $view );
+
+		if ( $parserOptions ) {
+			// NOTE: the view must be using the language from the parser options.
+			$this->assertEquals( $view->getLanguage()->getCode(), $parserOptions->getUserLang() );
+		}
 	}
 
 }

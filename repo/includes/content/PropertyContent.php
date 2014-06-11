@@ -2,12 +2,6 @@
 
 namespace Wikibase;
 
-use IContextSource;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
-
 /**
  * Content object for articles representing Wikibase properties.
  *
@@ -111,46 +105,4 @@ class PropertyContent extends EntityContent {
 		return $this->property;
 	}
 
-	/**
-	 * Instantiates an EntityView.
-	 *
-	 * @see getEntityView()
-	 *
-	 * @param IContextSource $context
-	 * @param SnakFormatter $snakFormatter
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityIdParser $idParser
-	 * @param SerializationOptions $options
-	 *
-	 * @return EntityView
-	 */
-	protected function newEntityView(
-		IContextSource $context,
-		SnakFormatter $snakFormatter,
-		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilder $entityInfoBuilder,
-		EntityTitleLookup $entityTitleLookup,
-		EntityIdParser $idParser,
-		SerializationOptions $options
-	) {
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilder,
-			$idParser,
-			$entityTitleLookup,
-			new ReferencedEntitiesFinder(),
-			$context->getLanguage()->getCode()
-		);
-
-		return new PropertyView(
-			$context,
-			$snakFormatter,
-			$dataTypeLookup,
-			$entityInfoBuilder,
-			$entityTitleLookup,
-			$options,
-			$configBuilder
-		);
-	}
 }
