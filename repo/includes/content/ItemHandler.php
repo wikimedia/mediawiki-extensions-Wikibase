@@ -8,6 +8,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Content handler for Wikibase items.
@@ -25,6 +26,34 @@ class ItemHandler extends EntityHandler {
 	private $siteLinkStore;
 
 	/**
+	 * @param EntityPerPage $entityPerPage
+	 * @param TermIndex $termIndex
+	 * @param EntityContentDataCodec $contentCodec
+	 * @param EntityValidator[] $preSaveValidators
+	 * @param ValidatorErrorLocalizer $errorLocalizer
+	 * @param SiteLinkCache $siteLinkStore
+	 */
+	public function __construct(
+		EntityPerPage $entityPerPage,
+		TermIndex $termIndex,
+		EntityContentDataCodec $contentCodec,
+		array $preSaveValidators,
+		ValidatorErrorLocalizer $errorLocalizer,
+		SiteLinkCache $siteLinkStore
+	) {
+		parent::__construct(
+			CONTENT_MODEL_WIKIBASE_ITEM,
+			$entityPerPage,
+			$termIndex,
+			$contentCodec,
+			$preSaveValidators,
+			$errorLocalizer
+		);
+
+		$this->siteLinkStore = $siteLinkStore;
+	}
+
+	/**
 	 * @see EntityHandler::getContentClass
 	 *
 	 * @since 0.3
@@ -33,31 +62,6 @@ class ItemHandler extends EntityHandler {
 	 */
 	protected function getContentClass() {
 		return '\Wikibase\ItemContent';
-	}
-
-	/**
-	 * @param EntityPerPage $entityPerPage
-	 * @param TermIndex $termIndex
-	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityValidator[] $preSaveValidators
-	 * @param SiteLinkCache $siteLinkStore
-	 */
-	public function __construct(
-		EntityPerPage $entityPerPage,
-		TermIndex $termIndex,
-		EntityContentDataCodec $contentCodec,
-		array $preSaveValidators,
-		SiteLinkCache $siteLinkStore
-	) {
-		parent::__construct(
-			CONTENT_MODEL_WIKIBASE_ITEM,
-			$entityPerPage,
-			$termIndex,
-			$contentCodec,
-			$preSaveValidators
-		);
-
-		$this->siteLinkStore = $siteLinkStore;
 	}
 
 	/**
@@ -142,4 +146,5 @@ class ItemHandler extends EntityHandler {
 			parent::getEntityModificationUpdates( $content, $title )
 		);
 	}
+
 }

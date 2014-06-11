@@ -1245,9 +1245,10 @@ final class RepoHooks {
 		$codec = $repo->getEntityContentDataCodec();
 		$entityPerPage = $repo->getStore()->newEntityPerPage();
 		$termIndex = $repo->getStore()->getTermIndex();
+		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
 
-		return new ItemHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $siteLinkStore );
+		return new ItemHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $errorLocalizer, $siteLinkStore );
 	}
 
 	private static function newPropertyHandler() {
@@ -1256,9 +1257,10 @@ final class RepoHooks {
 		$codec = $repo->getEntityContentDataCodec();
 		$entityPerPage = $repo->getStore()->newEntityPerPage();
 		$termIndex = $repo->getStore()->getTermIndex();
+		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
 
-		return new PropertyHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $propertyInfoStore );
+		return new PropertyHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $errorLocalizer, $propertyInfoStore );
 	}
 
 	/**

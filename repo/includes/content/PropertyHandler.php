@@ -7,6 +7,7 @@ use Title;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Content handler for Wikibase items.
@@ -40,6 +41,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
+	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param PropertyInfoStore $infoStore
 	 */
 	public function __construct(
@@ -47,6 +49,7 @@ class PropertyHandler extends EntityHandler {
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		$preSaveValidators,
+		ValidatorErrorLocalizer $errorLocalizer,
 		PropertyInfoStore $infoStore
 	) {
 		parent::__construct(
@@ -54,7 +57,8 @@ class PropertyHandler extends EntityHandler {
 			$entityPerPage,
 			$termIndex,
 			$contentCodec,
-			$preSaveValidators
+			$preSaveValidators,
+			$errorLocalizer
 		);
 
 		$this->infoStore = $infoStore;
