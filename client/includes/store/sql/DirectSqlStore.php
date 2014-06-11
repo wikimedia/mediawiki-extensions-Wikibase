@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Deserializers\Deserializer;
 use Language;
 use ObjectCache;
 use Site;
@@ -91,26 +92,26 @@ class DirectSqlStore implements ClientStore {
 	private $contentCodec;
 
 	/**
-	 * @var EntityFactory
+	 * @var Deserializer
 	 */
-	private $entityFactory;
+	private $entityDeserializer;
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityFactory $entityFactory
+	 * @param Deserializer $entityDeserializer
 	 * @param Language $wikiLanguage
 	 * @param string    $repoWiki the symbolic database name of the repo wiki
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		EntityFactory $entityFactory,
+		Deserializer $entityDeserializer,
 		Language $wikiLanguage,
 		$repoWiki
 	) {
 		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
 		$this->contentCodec = $contentCodec;
-		$this->entityFactory = $entityFactory;
+		$this->entityDeserializer = $entityDeserializer;
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -221,7 +222,7 @@ class DirectSqlStore implements ClientStore {
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$lookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityFactory, $this->repoWiki );
+		$lookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityDeserializer, $this->repoWiki );
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		// We need to verify the revision ID against the database to avoid stale data.
