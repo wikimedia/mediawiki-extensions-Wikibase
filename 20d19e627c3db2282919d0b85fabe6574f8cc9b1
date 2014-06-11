@@ -16,6 +16,24 @@
       "revId": "20d19e627c3db2282919d0b85fabe6574f8cc9b1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_a4338fbf",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T17:07:18Z",
+      "side": 0,
+      "message": "This code constructs an WikiPageEntityLookup, which needs a Deserializer for entities, which depends on application context. Lib does not have application context, hence this code cannot be here in its current form.\n\nThe code was moved to the only place where it was used: SqlStore.",
+      "parentUuid": "ee391fd1_44fce3d5",
+      "revId": "20d19e627c3db2282919d0b85fabe6574f8cc9b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
