@@ -9,12 +9,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\ItemDeserializer
+ * @covers Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
