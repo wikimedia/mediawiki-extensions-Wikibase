@@ -28,6 +28,7 @@ use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\Localizer\DispatchingExceptionLocalizer;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
+use Wikibase\Lib\Localizer\GenericExceptionLocalizer;
 use Wikibase\Lib\Localizer\MessageExceptionLocalizer;
 use Wikibase\Lib\Localizer\ParseExceptionLocalizer;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
@@ -525,7 +526,8 @@ class WikibaseRepo {
 		return array(
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
-			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter )
+			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter ),
+			'Exception' => new GenericExceptionLocalizer()
 		);
 	}
 
