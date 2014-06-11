@@ -9,11 +9,11 @@ matrix:
       php: 5.3
     - env: DBTYPE=sqlite LANG=de; MW=master WB=repo
       php: 5.3
-    - env: DBTYPE=sqlite LANG=de; MW=1.23.0-rc.1 WB=both
+    - env: DBTYPE=sqlite LANG=de; MW=master WB=both
       php: 5.4
-    - env: DBTYPE=sqlite LANG=en; MW=1.23.0-rc.1 WB=client
+    - env: DBTYPE=sqlite LANG=en; MW=master WB=client
       php: 5.5
-    - env: DBTYPE=sqlite LANG=en; MW=1.23.0-rc.1 WB=repo
+    - env: DBTYPE=mysql LANG=en; MW=master WB=repo
       php: 5.6
     - env: DBTYPE=sqlite LANG=en; MW=master WB=both
       php: hhvm
