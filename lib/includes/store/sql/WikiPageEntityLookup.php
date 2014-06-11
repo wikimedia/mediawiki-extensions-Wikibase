@@ -3,11 +3,12 @@
 namespace Wikibase\Lib\Store;
 
 use DBQueryError;
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
@@ -35,24 +36,24 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	private $contentCodec;
 
 	/**
-	 * @var EntityFactory
+	 * @var Deserializer
 	 */
-	private $entityFactory;
+	private $entityDeserializer;
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityFactory $entityFactory
+	 * @param Deserializer $entityDeserializer
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		EntityFactory $entityFactory,
+		Deserializer $entityDeserializer,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
 
 		$this->contentCodec = $contentCodec;
-		$this->entityFactory = $entityFactory;
+		$this->entityDeserializer = $entityDeserializer;
 
 		// TODO: migrate table away from using a numeric field so we no longer need this!
 		$this->idParser = new BasicEntityIdParser();
@@ -96,7 +97,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		$row = $this->loadRevisionRow( $entityId, $revision );
 
 		if ( $row ) {
-			$entityRev = $this->loadEntity( $entityId->getEntityType(), $row );
+			$entityRev = $this->loadEntity( $row );
 
 			if ( !$entityRev ) {
 				// This only happens when there is a problem with the external store.
@@ -356,13 +357,11 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
 	 *        should contain the relevant fields from the revision and/or text table.
-	 * @param String $entityType The entity type ID, determines what kind of object is constructed
-	 *        from the blob in the database.
 	 *
 	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
 	 * with either $entityRev or $redirect or both being null (but not both being non-null).
 	 */
-	private function loadEntity( $entityType, $row ) {
+	private function loadEntity( $row ) {
 		wfProfileIn( __METHOD__ );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": calling getRevisionText() on rev " . $row->rev_id );
@@ -380,7 +379,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		}
 
 		$format = $row->rev_content_format;
-		$entity = $this->unserializeEntity( $entityType, $blob, $format );
+		$entity = $this->unserializeEntity( $blob, $format );
 		$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Created entity object from revision blob: "
@@ -395,15 +394,21 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @since 0.5
 	 *
-	 * @param $entityType
 	 * @param string $blob
 	 * @param null|string $format
 	 *
 	 * @return Entity|null
+	 * @throws StorageException
 	 */
-	private function unserializeEntity( $entityType, $blob, $format = null ) {
+	private function unserializeEntity( $blob, $format = null ) {
 		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
-		$entity = $this->entityFactory->newFromArray( $entityType, $data );
+
+		try {
+			$entity = $this->entityDeserializer->deserialize( $data );
+		}
+		catch ( DeserializationException $ex ) {
+			throw new StorageException( $ex->getMessage(), 0, $ex );
+		}
 
 		return $entity;
 	}
