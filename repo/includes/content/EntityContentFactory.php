@@ -24,40 +24,46 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	/**
 	 * @since 0.5
 	 *
-	 * @var array
+	 * @var string[] Entity type ID to content model ID mapping.
 	 */
-	protected $typeMap;
+	private $entityContentModels;
 
 	/**
-	 * @param array $typeMap Entity type -> content model mapping
+	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
 	 */
-	public function __construct( array $typeMap ) {
-		$this->typeMap = $typeMap;
+	public function __construct( array $entityContentModels ) {
+		$this->entityContentModels = $entityContentModels;
 	}
 
 	/**
 	 * Determines whether the given content model is designated to hold some kind of Wikibase entity.
-	 * Shorthand for in_array( $ns, self::getEntityModels() );
 	 *
 	 * @since 0.2
 	 *
-	 * @param String $model the content model ID
+	 * @param string $contentModel
 	 *
-	 * @return bool True iff $model is an entity content model
+	 * @return bool If the given content model ID is a known entity content model.
 	 */
-	public function isEntityContentModel( $model ) {
-		return in_array( $model, $this->getEntityContentModels() );
+	public function isEntityContentModel( $contentModel ) {
+		return in_array( $contentModel, $this->entityContentModels );
 	}
 
 	/**
-	 * Returns a list of content model IDs that are used to represent Wikibase entities.
-	 *
 	 * @since 0.2
 	 *
-	 * @return array An array of string content model IDs.
+	 * @return string[] A list of content model IDs used to represent Wikibase entities.
 	 */
 	public function getEntityContentModels() {
-		return $this->typeMap;
+		return array_values( $this->entityContentModels );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return string[] A list of entity type IDs used for Wikibase entities.
+	 */
+	public function getEntityTypes() {
+		return array_keys( $this->entityContentModels );
 	}
 
 	/**
@@ -71,10 +77,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $id ) {
-		return Title::newFromText(
-			$id->getSerialization(),
-			$this->getNamespaceForType( $id->getEntityType() )
-		);
+		$handler = $this->getContentHandlerForType( $id->getEntityType() );
+		return $handler->getTitleForId( $id );
 	}
 
 	/**
@@ -82,14 +86,29 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.5
 	 *
-	 * @param int $type
+	 * @param string $entityType
 	 *
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return int
 	 */
-	public function getNamespaceForType( $type ) {
-		$model = $this->getContentModelForType( $type );
-		return NamespaceUtils::getEntityNamespace( $model );
+	public function getNamespaceForType( $entityType ) {
+		$handler = $this->getContentHandlerForType( $entityType );
+		return $handler->getEntityNamespace();
+	}
+
+	/**
+	 * Returns the ContentHandler for the given entity type.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $entityType
+	 *
+	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
+	 * @return EntityHandler
+	 */
+	public function getContentHandlerForType( $entityType ) {
+		$contentModel = $this->getContentModelForType( $entityType );
+		return ContentHandler::getForModelID( $contentModel );
 	}
 
 	/**
@@ -97,17 +116,17 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.5
 	 *
-	 * @param int $type
+	 * @param string $entityType
 	 *
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return int
 	 */
-	public function getContentModelForType( $type ) {
-		if ( !isset( $this->typeMap[$type] ) ) {
-			throw new OutOfBoundsException( 'No content model defined for entity type ' . $type );
+	public function getContentModelForType( $entityType ) {
+		if ( !isset( $this->entityContentModels[$entityType] ) ) {
+			throw new OutOfBoundsException( 'No content model defined for entity type ' . $entityType );
 		}
 
-		return $this->typeMap[$type];
+		return $this->entityContentModels[$entityType];
 	}
 
 	/**
@@ -117,7 +136,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.2
 	 *
-	 * @param integer $revisionId
+	 * @param int $revisionId
 	 *
 	 * @return EntityContent|null
 	 */
@@ -141,11 +160,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @return EntityContent
 	 */
 	public function newFromEntity( Entity $entity ) {
-		/**
-		 * @var EntityHandler $handler
-		 */
-		$handler = ContentHandler::getForModelID( $this->typeMap[$entity->getType()] );
-
+		$handler = $this->getContentHandlerForType( $entity->getType() );
 		return $handler->newContentFromEntity( $entity );
 	}
 
@@ -158,6 +173,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @param string $quick
 	 *
 	 * @return Status a status object representing the check's result.
+	 *
+	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
 	protected function getPermissionStatus( User $user, $permission, Title $entityPage, $quick = '' ) {
 		wfProfileIn( __METHOD__ );
@@ -185,6 +202,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @param string $quick
 	 *
 	 * @return Status a status object representing the check's result.
+	 *
+	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
 	public function getPermissionStatusForEntityId( User $user, $permission, EntityId $entityId, $quick = '' ) {
 		wfProfileIn( __METHOD__ );
@@ -201,15 +220,17 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @param User $user
 	 * @param string $permission
-	 * @param string $type
+	 * @param string $entityType
 	 * @param string $quick
 	 *
 	 * @return Status a status object representing the check's result.
+	 *
+	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
-	public function getPermissionStatusForEntityType( User $user, $permission, $type, $quick = '' ) {
+	public function getPermissionStatusForEntityType( User $user, $permission, $entityType, $quick = '' ) {
 		wfProfileIn( __METHOD__ );
 
-		$ns = $this->getNamespaceForType( $type );
+		$ns = $this->getNamespaceForType( $entityType );
 		$dummyTitle = Title::makeTitleSafe( $ns, '/' );
 
 		$status = $this->getPermissionStatus( $user, $permission, $dummyTitle, $quick );
@@ -231,21 +252,23 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 * @param string $quick
 	 *
 	 * @return Status a status object representing the check's result.
+	 *
+	 * @todo Move to a separate service (merge into WikiPageEntityStore?)
 	 */
 	public function getPermissionStatusForEntity( User $user, $permission, Entity $entity, $quick = '' ) {
 		$id = $entity->getId();
 		$status = null;
 
 		if ( !$id ) {
-			$type = $entity->getType();
+			$entityType = $entity->getType();
 
 			if ( $permission === 'edit' ) {
 				// for editing a non-existing page, check the createpage permission
-				$status = $this->getPermissionStatusForEntityType( $user, 'createpage', $type, $quick );
+				$status = $this->getPermissionStatusForEntityType( $user, 'createpage', $entityType, $quick );
 			}
 
 			if ( !$status || $status->isOK() ) {
-				$status = $this->getPermissionStatusForEntityType( $user, $permission, $type, $quick );
+				$status = $this->getPermissionStatusForEntityType( $user, $permission, $entityType, $quick );
 			}
 		} else {
 			$status = $this->getPermissionStatusForEntityId( $user, $permission, $id, $quick );

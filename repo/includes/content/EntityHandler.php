@@ -234,7 +234,6 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityId
 	 */
 	public function getIdForTitle( Title $target ) {
-		//FIXME: inject an EntityTitleLookup!
 		$parser = new BasicEntityIdParser();
 		$id = $parser->parse( $target->getText() );
 		return $id;
@@ -257,7 +256,6 @@ abstract class EntityHandler extends ContentHandler {
 				. $this->getEntityType() );
 		}
 
-		//FIXME: inject an EntityTitleLookup!
 		$title = Title::makeTitle( $this->getEntityNamespace(), $id->getSerialization() );
 		return $title;
 	}
