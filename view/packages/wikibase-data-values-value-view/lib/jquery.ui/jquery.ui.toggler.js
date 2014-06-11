@@ -102,6 +102,7 @@
 					self.options.$subject.stop().animateWithEvent(
 						'togglerstatetransition',
 						'slideToggle',
+						self.options,
 						function( animationEvent ) {
 							self._trigger( 'animation', animationEvent );
 						}
