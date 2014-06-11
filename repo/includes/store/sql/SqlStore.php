@@ -9,6 +9,8 @@ use HashBagOStuff;
 use MWException;
 use ObjectCache;
 use Revision;
+use Deserializers\Deserializer;
+use ObservableMessageReporter;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -30,7 +32,6 @@ use WikiPage;
  *
  * @since 0.1
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
 class SqlStore implements Store {
@@ -91,20 +92,20 @@ class SqlStore implements Store {
 	private $contentCodec;
 
 	/**
-	 * @var EntityFactory
+	 * @var Deserializer
 	 */
-	private $entityFactory;
+	private $entityDeserializer;
 
 	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param EntityFactory $entityFactory
+	 * @param Deserializer $entityDeserializer
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		EntityFactory $entityFactory
+		Deserializer $entityDeserializer
 	) {
 		$this->contentCodec = $contentCodec;
-		$this->entityFactory = $entityFactory;
+		$this->entityDeserializer = $entityDeserializer;
 
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -214,7 +215,57 @@ class SqlStore implements Store {
 		$this->updateEntityPerPageTable( $updater, $db );
 		$this->updateTermsTable( $updater, $db );
 
-		PropertyInfoTable::registerDatabaseUpdates( $updater );
+		$this->registerPropertyInfoTableUpdates( $updater );
+	}
+
+	private function registerPropertyInfoTableUpdates( DatabaseUpdater $updater ) {
+		$table = 'wb_property_info';
+
+		if ( !$updater->tableExists( $table ) ) {
+			$type = $updater->getDB()->getType();
+			$fileBase = __DIR__ . '/../../../../lib/includes/store/sql/' . $table;
+
+			$file = $fileBase . '.' . $type . '.sql';
+			if ( !file_exists( $file ) ) {
+				$file = $fileBase . '.sql';
+			}
+
+			$updater->addExtensionTable( $table, $file );
+
+			// populate the table after creating it
+			$updater->addExtensionUpdate( array(
+				array( __CLASS__, 'rebuildPropertyInfo' )
+			) );
+		}
+	}
+
+	/**
+	 * Wrapper for invoking PropertyInfoTableBuilder from DatabaseUpdater
+	 * during a database update.
+	 *
+	 * @param DatabaseUpdater $updater
+	 */
+	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
+		$reporter = new ObservableMessageReporter();
+		$reporter->registerReporterCallback(
+			function ( $msg ) use ( $updater ) {
+				$updater->output( "..." . $msg . "\n" );
+			}
+		);
+
+		$table = new PropertyInfoTable( false );
+		$contentCodec = new EntityContentDataCodec();
+		$entityDeserializer = WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer();
+
+		$wikiPageEntityLookup = new WikiPageEntityLookup( $contentCodec, $entityDeserializer, false );
+		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
+
+		$builder = new PropertyInfoTableBuilder( $table, $cachingEntityLookup );
+		$builder->setReporter( $reporter );
+		$builder->setUseTransactions( false );
+
+		$updater->output( 'Populating ' . $table->getTableName() . "\n" );
+		$builder->rebuildPropertyInfo();
 	}
 
 	/**
@@ -476,7 +527,7 @@ class SqlStore implements Store {
 		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$rawLookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityFactory, false );
+		$rawLookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityDeserializer, false );
 
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.

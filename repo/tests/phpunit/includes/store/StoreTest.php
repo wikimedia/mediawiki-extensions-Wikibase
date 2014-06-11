@@ -23,10 +23,10 @@ class StoreTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
 		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$entityDeserializer = WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer();
 
 		$instances = array(
-			new SqlStore( $contentCodec, $entityFactory )
+			new SqlStore( $contentCodec, $entityDeserializer )
 		);
 
 		return array( $instances );

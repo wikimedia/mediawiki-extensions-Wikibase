@@ -8,8 +8,10 @@ use IContextSource;
 use ParserOptions;
 use RequestContext;
 use Title;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
@@ -80,8 +82,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 * @return EntityContent
 	 */
 	protected function newFromArray( array $data ) {
+		$deserializer = WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer();
+		$entity = $deserializer->deserialize( $data );
 		$class = $this->getContentClass();
-		return $class::newFromArray( $data );
+		return new $class( $entity );
 	}
 
 	/**
@@ -144,17 +148,25 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$cases = array();
 
 		$cases['empty'] = array(
-			array(),
+			$this->newEmpty(),
 			array( 'wb-status' => EntityContent::STATUS_EMPTY, 'wb-claims' => 0 )
 		);
 
+		$contentWithLabel = $this->newEmpty();
+		$contentWithLabel->getEntity()->setLabel( 'en', 'Foo' );
+
 		$cases['labels'] = array(
-			array( 'label' => array( 'en' => 'Foo' ) ),
+			$contentWithLabel,
 			array( 'wb-status' => EntityContent::STATUS_STUB, 'wb-claims' => 0 )
 		);
 
+		$contentWithClaim = $this->newEmpty();
+		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
+		$claim->setGuid( '$testing$' );
+		$contentWithClaim->getEntity()->addClaim( $claim );
+
 		$cases['claims'] = array(
-			array( 'claims' => array( array( 'm' => array( 'value', 83, 'string', 'foo' ), 'q' => array(), 'g' => '$testing$' ) ) ),
+			$contentWithClaim,
 			array( 'wb-claims' => 1 )
 		);
 
@@ -163,13 +175,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider providePageProperties
-	 *
-	 * @param array $entityData
-	 * @param array $expectedProps
 	 */
-	public function testPageProperties( array $entityData, array $expectedProps ) {
-		$content = $this->newFromArray( $this->prepareEntityData( $entityData ) );
-
+	public function testPageProperties( EntityContent $content, array $expectedProps ) {
 		$title = \Title::newFromText( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title, null, null, false );
 
@@ -180,20 +187,25 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetEntityStatus() {
-		$label = array( 'language' => 'de', 'value' => 'xyz' );
-		$claim = array( 'm' => array( 'novalue', 83, ), 'q' => array(), 'g' => '$testing$' );
+		$contentWithLabel = $this->newEmpty();
+		$contentWithLabel->getEntity()->setLabel( 'de', 'xyz' );
+
+		$contentWithClaim = $this->newEmpty();
+		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
+		$claim->setGuid( '$testing$' );
+		$contentWithClaim->getEntity()->addClaim( $claim );
 
 		return array(
 			'empty' => array(
-				array(),
+				$this->newEmpty(),
 				EntityContent::STATUS_EMPTY
 			),
 			'labels' => array(
-				array( 'label' => array( 'de' => $label ) ),
+				$contentWithLabel,
 				EntityContent::STATUS_STUB
 			),
 			'claims' => array(
-				array( 'claims' => array( $claim ) ),
+				$contentWithClaim,
 				EntityContent::STATUS_NONE
 			),
 		);
@@ -202,17 +214,13 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntityStatus
 	 */
-	public function testGetEntityStatus( array $entityData, $status ) {
-		$content = $this->newFromArray( $this->prepareEntityData( $entityData ) );
+	public function testGetEntityStatus( EntityContent $content, $status ) {
 		$actual = $content->getEntityStatus();
 
 		$this->assertEquals( $status, $actual );
 	}
 
 	public function provideGetEntityPageProperties() {
-		$label = array( 'language' => 'de', 'value' => 'xyz' );
-		$claim = array( 'm' => array( 'novalue', 11 ), 'q' => array(), 'g' => 'P11x' );
-
 		return array(
 			'empty' => array(
 				array(),
@@ -223,17 +231,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 			),
 
 			'labels' => array(
-				array( 'label' => array( 'de' => $label ) ),
+				array( 'label' => array( 'de' => 'xyz' ) ),
 				array(
 					'wb-status' => EntityContent::STATUS_STUB,
 					'wb-claims' => 0,
-				)
-			),
-
-			'claims' => array(
-				array( 'claims' => array( 'P11a' => $claim ) ),
-				array(
-					'wb-claims' => 1,
 				)
 			),
 		);

@@ -3,8 +3,10 @@
 namespace Wikibase\Test;
 
 use Title;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\Entity;
 use Wikibase\ItemContent;
 
 /**
@@ -67,6 +69,10 @@ class ItemHandlerTest extends EntityHandlerTest {
 
 		$id = $handler->getIdForTitle( $title );
 		$this->assertEquals( $title->getText(), $id->getSerialization() );
+	}
+
+	protected function newEntity() {
+		return Item::newEmpty();
 	}
 
 }

@@ -4,6 +4,8 @@ namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
 use SiteSQLStore;
 use SiteStore;
 use StubObject;
@@ -18,6 +20,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityContentFactory;
+use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
@@ -432,7 +436,7 @@ class WikibaseRepo {
 		if ( !$this->store ) {
 			$this->store = new SqlStore(
 				$this->getEntityContentDataCodec(),
-				$this->getEntityFactory()
+				$this->newInternalDeserializerFactory()->newEntityDeserializer()
 			);
 		}
 
@@ -733,4 +737,16 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec();
 	}
+
+	public function newInternalDeserializerFactory() {
+		return new DeserializerFactory(
+			new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ),
+			$this->getEntityIdParser()
+		);
+	}
+
+	public function newInternalSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer() );
+	}
+
 }
