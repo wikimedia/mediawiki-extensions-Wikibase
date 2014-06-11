@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_89b784d3",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T15:43:54Z",
+      "side": 1,
+      "message": "Why is this code being put into this class?",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
