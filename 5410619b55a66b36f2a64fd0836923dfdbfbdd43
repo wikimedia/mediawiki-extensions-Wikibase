@@ -16,6 +16,24 @@
       "revId": "5410619b55a66b36f2a64fd0836923dfdbfbdd43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_e95050db",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-11T14:53:16Z",
+      "side": 1,
+      "message": "In which way? Entity ids must be either string or float. If we have code that converts entity ids to int then we are doing it wrong.",
+      "parentUuid": "ee391fd1_ae1c8e7d",
+      "revId": "5410619b55a66b36f2a64fd0836923dfdbfbdd43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
