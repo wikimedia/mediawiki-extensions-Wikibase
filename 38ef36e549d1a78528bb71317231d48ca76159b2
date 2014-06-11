@@ -52,6 +52,24 @@
       "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_89342448",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T15:58:50Z",
+      "side": 1,
+      "message": "It\u0027s just a question of what you do first. I can\u0027t fix all the lose ends at once.\nNote that EntityHandler will need to have a getEntityView method anyway, it will just delegate the call to a factory that is injected via the constructor. So, I just inlined the factory code for now, to me moved later (see the @todo)",
+      "parentUuid": "ee391fd1_a900086e",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
