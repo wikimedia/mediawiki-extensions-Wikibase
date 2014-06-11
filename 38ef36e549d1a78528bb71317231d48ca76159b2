@@ -70,6 +70,24 @@
       "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_695ea07d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T16:06:39Z",
+      "side": 1,
+      "message": "\u003e Note that EntityHandler will need to have a getEntityView method anyway\n\nWhy?",
+      "parentUuid": "ee391fd1_89342448",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
