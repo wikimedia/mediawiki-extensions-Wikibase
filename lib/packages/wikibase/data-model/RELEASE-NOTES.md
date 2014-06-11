@@ -9,8 +9,6 @@ Changes in the `Entity` hierarchy:
 * Changed the constructor signature of `Item`
 * Changed the constructor signature of `Property`
 * Removed `Entity::setClaims` (`Item::setClaims` has been retained)
-* Removed `Entity::clear`
-* Removed `Entity::isEmpty`
 * Removed `Entity::stub`
 * Removed `Property::newEmpty`
 * Removed `Entity::getIdFromClaimGuid`
@@ -55,6 +53,11 @@ Other breaking changes:
 * Added `ClaimListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
 * Added `PropertyNotFoundException`
+
+#### Other changes
+
+* Undeprecated `Entity::isEmpty`
+* Undeprecated `Entity::clear`
 
 ## Version 0.8 (2014-06-05)
 
@@ -123,8 +126,8 @@ Other breaking changes:
 
 #### Deprecations
 
-* `Entity::clear` (to be removed in 1.0)
-* `Entity::isEmpty` (to be removed in 1.0)
+* ~~`Entity::clear` (to be removed in 1.0)~~
+* ~~`Entity::isEmpty` (to be removed in 1.0)~~
 * `Entity::stub` (to be removed in 1.0)
 * `Fingerprint::getAliases` (in favour of `Fingerprint::getAliasGroups`)
 
