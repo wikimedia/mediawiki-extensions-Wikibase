@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_2e9adebd",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-11T11:42:05Z",
+      "side": 1,
+      "message": "shouldn\u0027t be defined here... only in local settings.\n\nwhat are you trying to do here?",
+      "revId": "b48318e07a0456437f60d8a93838697c1add91e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
