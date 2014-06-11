@@ -34,6 +34,24 @@
       "revId": "db9cdddfc557731961b7319e154703c5766f7a90",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_0ec5da90",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-11T12:11:28Z",
+      "side": 1,
+      "message": "If it can be blank why is the parameter not nullable? Is this a bug?",
+      "parentUuid": "ee391fd1_7369f31c",
+      "revId": "db9cdddfc557731961b7319e154703c5766f7a90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
