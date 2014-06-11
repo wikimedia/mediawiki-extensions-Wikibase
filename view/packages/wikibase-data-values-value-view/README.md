@@ -109,6 +109,10 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.2 (dev)
+
+* Support editing arbitrary precisions for GlobeCoordinates
+
 ### 0.6.1 (2014-06-09)
 
 * Make the minimal term length of the suggester configurable.
