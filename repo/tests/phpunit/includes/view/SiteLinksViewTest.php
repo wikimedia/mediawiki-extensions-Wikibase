@@ -6,6 +6,7 @@ use MediaWikiSite;
 use SiteList;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\SiteLinksView;
 
 /**
@@ -19,6 +20,21 @@ use Wikibase\View\SiteLinksView;
  */
 class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
+	private $specialSiteLinkGroups = array( 'special group' );
+
+	private $oldSpecialSiteLinkGroups;
+
+	public function setUp() {
+		parent::setUp();
+		$this->oldSpecialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'specialSiteLinkGroups' );
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'specialSiteLinkGroups', $this->specialSiteLinkGroups );
+	}
+
+	public function tearDown() {
+		parent::tearDown();
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'specialSiteLinkGroups', $this->oldSpecialSiteLinkGroups );
+	}
+
 	/**
 	 * @dataProvider getHtmlProvider
 	 */
@@ -28,16 +44,138 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		$item,
 		$groups,
 		$editable,
-		$expectedValueRegExp
+		$expectedValue
 	) {
 		$siteLinksView = new SiteLinksView( $siteStore, $sectionEditLinkGenerator );
 
 		$value = $siteLinksView->getHtml( $item, $groups, $editable );
 		$this->assertInternalType( 'string', $value );
-		$this->assertRegExp( $expectedValueRegExp, $value );
+		$this->assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
 
 	public function getHtmlProvider() {
+		$siteStore = $this->getSiteStoreMock();
+		$sectionEditLinkGenerator = $this->getSectionEditLinkGeneratorMock();
+
+		$testCases = array();
+
+		$item = Item::newEmpty();
+		$item->addSiteLink( new SiteLink( 'enwiki', 'test' ) );
+
+		$testCases[] = array(
+			$siteStore,
+			$sectionEditLinkGenerator,
+			$item,
+			array( 'wikipedia' ),
+			false,
+			array(
+				'tag' => 'table',
+				'attributes' => array(
+					'data-wb-sitelinks-group' => 'wikipedia'
+				),
+				'descendant' => array(
+					'tag' => 'td',
+					'class' => 'wb-sitelinks-link-enwiki',
+					'content' => 'test'
+				)
+			)
+		);
+
+		$testCases[] = array(
+			$siteStore,
+			$sectionEditLinkGenerator,
+			$item,
+			array( 'wikipedia' ),
+			true,
+			array(
+				'tag' => 'table',
+				'attributes' => array(
+					'data-wb-sitelinks-group' => 'wikipedia'
+				),
+				'descendant' => array(
+					'tag' => 'td',
+					'class' => 'wb-sitelinks-link-enwiki',
+					'content' => 'test'
+				)
+			)
+		);
+
+		$item = Item::newEmpty();
+		$item->addSiteLink( new SiteLink( 'specialwiki', 'test' ) );
+
+		$testCases[] = array(
+			$siteStore,
+			$sectionEditLinkGenerator,
+			$item,
+			array( 'special group' ),
+			true,
+			array(
+				'tag' => 'table',
+				'attributes' => array(
+					'data-wb-sitelinks-group' => 'special'
+				),
+				'child' => array(
+					'tag' => 'thead',
+					'child' => array(
+						'tag' => 'tr'
+					)
+				)
+			)
+		);
+
+		$item = Item::newEmpty();
+
+		$testCases[] = array(
+			$siteStore,
+			$sectionEditLinkGenerator,
+			$item,
+			array( 'wikipedia', 'special group' ),
+			true,
+			array(
+				'tag' => 'table',
+				'child' => array(
+					'tag' => 'thead',
+					'content' => ''
+				)
+			)
+		);
+
+		$item = Item::newEmpty();
+		$item->addSiteLink( new SiteLink( 'dewiki', 'test' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'test2' ) );
+
+		$testCases[] = array(
+			$siteStore,
+			$sectionEditLinkGenerator,
+			$item,
+			array( 'wikipedia' ),
+			true,
+			array(
+				'tag' => 'table',
+			)
+		);
+
+		return $testCases;
+	}
+
+	/**
+	 * @dataProvider getEmptyHtmlProvider
+	 */
+	public function testGetEmptyHtml(
+		$siteStore,
+		$sectionEditLinkGenerator,
+		$item,
+		$groups,
+		$editable
+	) {
+		$siteLinksView = new SiteLinksView( $siteStore, $sectionEditLinkGenerator );
+
+		$value = $siteLinksView->getHtml( $item, $groups, $editable );
+		$this->assertInternalType( 'string', $value );
+		$this->assertEquals( '', $value );
+	}
+
+	public function getEmptyHtmlProvider() {
 		$siteStore = $this->getSiteStoreMock();
 		$sectionEditLinkGenerator = $this->getSectionEditLinkGeneratorMock();
 
@@ -49,7 +187,6 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			Item::newEmpty(),
 			array(),
 			true,
-			'/^$/'
 		);
 
 		$testCases[] = array(
@@ -58,7 +195,6 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			Item::newEmpty(),
 			array(),
 			false,
-			'/^$/'
 		);
 
 		$item = Item::newEmpty();
@@ -70,25 +206,6 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			$item,
 			array(),
 			false,
-			'/^$/'
-		);
-
-		$testCases[] = array(
-			$siteStore,
-			$sectionEditLinkGenerator,
-			$item,
-			array( 'wikipedia' ),
-			false,
-			'/wb-sitelinks-link-enwiki.*test/'
-		);
-
-		$testCases[] = array(
-			$siteStore,
-			$sectionEditLinkGenerator,
-			$item,
-			array( 'wikipedia' ),
-			true,
-			'/wb-sitelinks-link-enwiki.*test/'
 		);
 
 		return $testCases;
@@ -113,13 +230,19 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		$dummySite = MediaWikiSite::newFromGlobalId( 'enwiki' );
 		$dummySite->setGroup( 'wikipedia' );
 
+		$dummySite2 = MediaWikiSite::newFromGlobalId( 'specialwiki' );
+		$dummySite2->setGroup( 'special group' );
+
+		$dummySite3 = MediaWikiSite::newFromGlobalId( 'dewiki' );
+		$dummySite3->setGroup( 'wikipedia' );
+
 		$siteStoreMock = $this->getMockBuilder( '\SiteStore' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$siteStoreMock->expects( $this->any() )
 			->method( 'getSites' )
-			->will( $this->returnValue( new SiteList( array( $dummySite ) ) ) );
+			->will( $this->returnValue( new SiteList( array( $dummySite, $dummySite2, $dummySite3 ) ) ) );
 
 		return $siteStoreMock;
 	}
