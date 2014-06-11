@@ -62,19 +62,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Create a new ItemContent object from the provided Item data.
-	 *
-	 * @deprecated Use a dedicated deserializer
-	 *
-	 * @param array $data
-	 *
-	 * @return ItemContent
-	 */
-	public static function newFromArray( array $data ) {
-		return new static( new Item( $data ) );
-	}
-
-	/**
 	 * Returns the Item that makes up this ItemContent.
 	 *
 	 * @since 0.1

@@ -108,19 +108,5 @@ class EntityFactory {
 		return $class::newEmpty();
 	}
 
-	/**
-	 * Creates a new entity of the given type.
-	 *
-	 * @since 0.3
-	 *
-	 * @param String $entityType The type of the desired new entity.
-	 * @param array $data An array structure representing the Entity.
-	 *
-	 * @return Entity The new Entity object.
-	 */
-	public function newFromArray( $entityType, $data ) {
-		$class = $this->getEntityClass( $entityType );
-		return $class::newFromArray( $data );
-	}
 
 }

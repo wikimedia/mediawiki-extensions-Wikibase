@@ -60,8 +60,9 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 
 		return new WikiPageEntityLookup(
 			$this->getEntityContentCodec(),
-			$this->getEntityFactory(),
-			false );
+			WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer(),
+			false
+		);
 	}
 
 	protected function resolveLogicalRevision( $revision ) {
@@ -76,10 +77,4 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 		return new EntityContentDataCodec();
 	}
 
-	private function getEntityFactory() {
-		return new EntityFactory( array(
-			Item::ENTITY_TYPE => '\Wikibase\Item',
-			Property::ENTITY_TYPE => '\Wikibase\Property',
-		) );
-	}
 }
