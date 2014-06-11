@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_33fc8bd5",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T07:08:13Z",
+      "side": 1,
+      "message": "The complexity of this method was already on the high side. Please split it when adding more things.",
+      "revId": "345fa40ca3bc804b8a8872158530ef4c1699ee28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
