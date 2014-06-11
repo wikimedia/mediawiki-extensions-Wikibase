@@ -50,10 +50,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @return Entity
 	 */
-	protected function newEntity() {
-		$handler = $this->getHandler();
-		return EntityFactory::singleton()->newEmpty( $handler->getEntityType() );
-	}
+	protected abstract function newEntity();
 
 	/**
 	 * Returns EntityContents that can be handled by the EntityHandler deriving class.
