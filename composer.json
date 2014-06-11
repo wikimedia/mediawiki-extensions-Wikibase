@@ -36,6 +36,8 @@
 		"data-values/value-view": "~0.6.1",
 
 		"wikibase/data-model": "~0.8.1",
+		"wikibase/internal-serialization": "~1.0",
+
 		"diff/diff": "~1.0",
 		"wikibase/easyrdf_lite": "~0.8.1"
 	},
