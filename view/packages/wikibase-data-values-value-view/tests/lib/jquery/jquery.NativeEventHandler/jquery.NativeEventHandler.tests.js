@@ -66,14 +66,37 @@
 		 * @see jQuery.NativeEventHandlerTestDefinition.test.newWidgetTestBody
 		 */
 		newTestBody: function() {
-			var TestWidget = function() {
+
+			// FIXME: Move to a separate module
+			var SubclassableWidget = function( options, element ) {
+				this._childConstructors = [];
+				this._createWidget( options, element );
 				$.Widget.apply( this, arguments );
 			};
-			TestWidget.prototype = $.extend( new $.Widget(), {
-				constructor: TestWidget,
-				widgetName: 'neh_test_widget',
-				widgetEventPrefix: 'neh_test_widget_'
+
+			SubclassableWidget.prototype = $.extend( new $.Widget(), {
+				widgetFullName: 'widget' // Needs to be set for _createWidget to pass
 			} );
+
+			function getWidgetSubclass( namespace, widgetName, constructor ) {
+				var PARENT = SubclassableWidget;
+
+				constructor = constructor || function( options, element ) {
+					PARENT.call( this, options, element );
+				}
+
+				constructor.prototype = $.extend( new PARENT(), {
+					constructor: constructor,
+					namespace: namespace,
+					widgetName: widgetName,
+					widgetFullName: namespace + '.' + widgetName,
+					widgetEventPrefix: namespace + '_' + widgetName + '_'
+				} );
+
+				return constructor;
+			}
+
+			var TestWidget = getWidgetSubclass( 'neh_test', 'widget' );
 
 			var testBody = new TestWidget( {}, $( '<div/>' ) );
 
