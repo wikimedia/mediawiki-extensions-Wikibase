@@ -3,6 +3,8 @@
 namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
 use Exception;
 use Language;
 use LogicException;
@@ -16,6 +18,8 @@ use Wikibase\ClientStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DirectSqlStore;
@@ -288,7 +292,7 @@ final class WikibaseClient {
 		if ( $this->store === null ) {
 			$this->store = new DirectSqlStore(
 				$this->getEntityContentDataCodec(),
-				$this->getEntityFactory(),
+				$this->newInternalDeserializerFactory()->newEntityDeserializer(),
 				$this->getContentLanguage(),
 				$repoDatabase
 			);
@@ -603,6 +607,17 @@ final class WikibaseClient {
 		}
 
 		return $this->clientSiteLinkLookup;
+	}
+
+	public function newInternalDeserializerFactory() {
+		return new DeserializerFactory(
+			new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ),
+			$this->getEntityIdParser()
+		);
+	}
+
+	public function newInternalSerializerFactory() {
+		return new SerializerFactory( new DataValueSerializer() );
 	}
 
 }
