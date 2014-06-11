@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee391fd1_a91c887d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-11T16:37:48Z",
+      "side": 1,
+      "message": "shoudl? :)",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_8921c4ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-11T16:37:48Z",
+      "side": 1,
+      "message": "factoried factory :)",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_491bdc82",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-11T16:37:48Z",
+      "side": 1,
+      "message": "ugh but can\u0027t suggest an alternative",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_697100dd",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 2
