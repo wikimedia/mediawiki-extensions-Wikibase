@@ -16,6 +16,24 @@
       "revId": "b48318e07a0456437f60d8a93838697c1add91e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_cebeb2fa",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-06-11T12:11:51Z",
+      "side": 1,
+      "message": "I guess this was just a mistake. Removed it in PS4.",
+      "parentUuid": "ee391fd1_2e9adebd",
+      "revId": "b48318e07a0456437f60d8a93838697c1add91e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
