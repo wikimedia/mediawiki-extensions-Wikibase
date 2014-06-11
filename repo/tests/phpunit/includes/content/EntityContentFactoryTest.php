@@ -48,8 +48,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	public function testIsEntityContentModel() {
 		$factory = $this->newFactory();
 
-		foreach ( $factory->getEntityContentModels() as $type ) {
-			$this->assertTrue( $factory->isEntityContentModel( $type ) );
+		foreach ( $factory->getEntityContentModels() as $model ) {
+			$this->assertTrue( $factory->isEntityContentModel( $model ) );
 		}
 
 		$this->assertFalse( $factory->isEntityContentModel( 'this-does-not-exist' ) );
@@ -76,6 +76,20 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$ns = $factory->getNamespaceForType( $id->getEntityType() );
 
 		$this->assertGreaterThanOrEqual( 0, $ns, 'namespace' );
+	}
+
+	public function testGetContentHandlerForType() {
+		$factory = $this->newFactory();
+
+		foreach ( $factory->getEntityTypes() as $type  ) {
+			$model = $factory->getContentModelForType( $type );
+			$handler = $factory->getContentHandlerForType( $type );
+
+			$this->assertEquals( $model, $handler->getModelId() );
+			$this->assertEquals( $type, $handler->getEntityType() );
+		}
+
+		$this->assertFalse( $factory->isEntityContentModel( 'this-does-not-exist' ) );
 	}
 
 	public function provideGetPermissionStatusForEntity() {
