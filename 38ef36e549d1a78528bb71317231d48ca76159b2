@@ -34,6 +34,24 @@
       "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_a900086e",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T15:56:08Z",
+      "side": 1,
+      "message": "I agree it does not belong into EntityContent. However, neither do it belong here. Seems like you moved it here just because EntityContent happens to have an instance of this class. Putting code that does not belong here because it does also not belong somewhere else is just moving the problem. How is putting it into a new class to begin with more work?",
+      "parentUuid": "ee391fd1_a9d9282e",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
