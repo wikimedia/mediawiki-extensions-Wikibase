@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 use DataUpdate;
+use Deserializers\Deserializer;
+use Serializers\Serializer;
 use Title;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
@@ -41,20 +43,26 @@ class ItemHandler extends EntityHandler {
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param SiteLinkCache $siteLinkStore
+	 * @param Serializer $entitySerializer
+	 * @param Deserializer $entityDeserializer
 	 */
 	public function __construct(
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
-		SiteLinkCache $siteLinkStore
+		SiteLinkCache $siteLinkStore,
+		Serializer $entitySerializer,
+		Deserializer $entityDeserializer
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_ITEM,
 			$entityPerPage,
 			$termIndex,
 			$contentCodec,
-			$preSaveValidators
+			$preSaveValidators,
+			$entitySerializer,
+			$entityDeserializer
 		);
 
 		$this->siteLinkStore = $siteLinkStore;
