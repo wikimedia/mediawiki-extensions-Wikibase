@@ -42,8 +42,8 @@ class ItemContentTest extends EntityContentTest {
 				true
 			),
 			array( #1
-				array( 'labels' => array() ),
-				array( 'descriptions' => null ),
+				array( 'label' => array() ),
+				array( 'description' => array() ),
 				true
 			),
 			array( #2
@@ -57,21 +57,21 @@ class ItemContentTest extends EntityContentTest {
 				false
 			),
 			array( #4
-				array( 'labels' => array(
+				array( 'label' => array(
 					'en' => 'foo',
 					'de' => 'bar',
 				) ),
-				array( 'labels' => array(
+				array( 'label' => array(
 					'en' => 'foo',
 				) ),
 				false
 			),
 			array( #5
-				array( 'labels' => array(
+				array( 'label' => array(
 					'en' => 'foo',
 					'de' => 'bar',
 				) ),
-				array( 'labels' => array(
+				array( 'label' => array(
 					'de' => 'bar',
 					'en' => 'foo',
 				) ),
@@ -131,8 +131,11 @@ class ItemContentTest extends EntityContentTest {
 	public function providePageProperties() {
 		$cases = parent::providePageProperties();
 
+		$contentLinkStub = ItemContent::newEmpty();
+		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+
 		$cases['sitelinks'] = array(
-			array( 'links' => array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) ) ),
+			$contentLinkStub,
 			array( 'wb-claims' => 0, 'wb-sitelinks' => 1 )
 		);
 
@@ -142,29 +145,39 @@ class ItemContentTest extends EntityContentTest {
 	public function provideGetEntityStatus() {
 		$cases = parent::provideGetEntityStatus();
 
-		$links = array( 'enwiki' => array( 'name' => 'Foo', 'badges' => array() ) );
+		$contentLinkStub = ItemContent::newEmpty();
+		$contentLinkStub->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$cases['linkstub'] = array(
-			array( 'links' => $links ),
+			$contentLinkStub,
 			ItemContent::STATUS_LINKSTUB
 		);
 
+		$linksAndTerms = $contentLinkStub->copy();
+		$linksAndTerms->getEntity()->setLabel( 'en', 'foo' );
+
 		$cases['linkstub with terms'] = array(
-			array(
-				'label' => array( 'en' => 'Foo' ),
-				'links' => $links
-			),
+			$linksAndTerms,
 			ItemContent::STATUS_LINKSTUB
 		);
 
 		$cases['statements and links'] = $cases['claims']; // from parent::provideGetEntityStatus();
-		$cases['statements and links'][0]['links'] = $links;
+		$cases['statements and links'][0]->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		return $cases;
 	}
 
 	public function provideGetEntityPageProperties() {
 		$cases = parent::provideGetEntityPageProperties();
+
+		$claim = array( 'm' => array( 'novalue', 11 ), 'q' => array(), 'g' => 'P11x' );
+
+		$cases['claims'] = array(
+			array( 'claims' => array( 'P11a' => $claim ) ),
+			array(
+				'wb-claims' => 1,
+			)
+		);
 
 		// expect wb-sitelinks => 0 for all inherited cases
 		foreach ( $cases as &$case ) {

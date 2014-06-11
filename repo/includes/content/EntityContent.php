@@ -487,11 +487,11 @@ abstract class EntityContent extends AbstractContent {
 	 * @return ItemContent
 	 */
 	public function copy() {
-		/* @var EntityHandler $handler */
+		/**
+		 * @var EntityHandler $handler
+		 */
 		$handler = $this->getContentHandler();
-
-		$entity = $this->getEntity()->copy();
-		return $handler->makeEntityContent( $entity );
+		return $handler->makeEntityContent( $this->getEntity()->copy() );
 	}
 
 	/**

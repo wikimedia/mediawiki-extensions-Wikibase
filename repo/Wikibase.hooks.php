@@ -1225,6 +1225,8 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentHandlerForModelID( $modelId, &$handler ) {
+		// FIXME: this code needs to be moved out. Construction should happen elsewhere and
+		// a mechanism for registering additional entity types needs to be put in place.
 		switch ( $modelId ) {
 			case CONTENT_MODEL_WIKIBASE_ITEM:
 				$handler = self::newItemHandler();
@@ -1247,8 +1249,19 @@ final class RepoHooks {
 		$termIndex = $repo->getStore()->getTermIndex();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
+		$entitySerializer = $repo->newInternalSerializerFactory()->newEntitySerializer();
+		$entityDeserializer = $repo->newInternalDeserializerFactory()->newEntityDeserializer();
 
-		return new ItemHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $errorLocalizer, $siteLinkStore );
+		return new ItemHandler(
+			$entityPerPage,
+			$termIndex,
+			$codec,
+			array( $validator ),
+			$errorLocalizer,
+			$siteLinkStore,
+			$entitySerializer,
+			$entityDeserializer
+		);
 	}
 
 	private static function newPropertyHandler() {
@@ -1259,8 +1272,19 @@ final class RepoHooks {
 		$termIndex = $repo->getStore()->getTermIndex();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
+		$entitySerializer = $repo->newInternalSerializerFactory()->newEntitySerializer();
+		$entityDeserializer = $repo->newInternalDeserializerFactory()->newEntityDeserializer();
 
-		return new PropertyHandler( $entityPerPage, $termIndex, $codec, array( $validator ), $errorLocalizer, $propertyInfoStore );
+		return new PropertyHandler(
+			$entityPerPage,
+			$termIndex,
+			$codec,
+			array( $validator ),
+			$errorLocalizer,
+			$propertyInfoStore,
+			$entitySerializer,
+			$entityDeserializer
+		);
 	}
 
 	/**
