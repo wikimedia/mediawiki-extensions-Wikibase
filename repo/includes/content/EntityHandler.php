@@ -5,6 +5,8 @@ namespace Wikibase;
 use Content;
 use ContentHandler;
 use DataUpdate;
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -12,6 +14,8 @@ use MWContentSerializationException;
 use ParserOptions;
 use RequestContext;
 use Revision;
+use Serializers\Exceptions\SerializationException;
+use Serializers\Serializer;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -51,18 +55,32 @@ abstract class EntityHandler extends ContentHandler {
 	private $termIndex;
 
 	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
+	/**
+	 * @var Deserializer
+	 */
+	private $entityDeserializer;
+
+	/**
 	 * @param string $modelId
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
+	 * @param Serializer $entitySerializer
+	 * @param Deserializer $entityDeserializer
 	 */
 	public function __construct(
 		$modelId,
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
-		array $preSaveValidators
+		array $preSaveValidators,
+		Serializer $entitySerializer,
+		Deserializer $entityDeserializer
 	) {
 		$formats = $contentCodec->getSupportedFormats();
 
@@ -72,6 +90,8 @@ abstract class EntityHandler extends ContentHandler {
 		$this->preSaveValidators = $preSaveValidators;
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
+		$this->entitySerializer = $entitySerializer;
+		$this->entityDeserializer = $entityDeserializer;
 	}
 
 	/**
@@ -195,14 +215,21 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param string|null $format
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws MWContentSerializationException
 	 * @return string
 	 */
 	public function serializeContent( Content $content, $format = null ) {
 		if ( ! $content instanceof EntityContent ) {
-			throw new \InvalidArgumentException( '$content mist be an instance of EntityContent' );
+			throw new \InvalidArgumentException( '$content must be an instance of EntityContent' );
 		}
 
-		$data = $content->getEntity()->toArray();
+		try {
+			$data = $this->entitySerializer->serialize( $content->getEntity() );
+		}
+		catch ( SerializationException $ex ) {
+			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+		}
+
 		return $this->contentCodec->encodeEntityContentData( $data, $format );
 	}
 
@@ -214,14 +241,22 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param string $blob
 	 * @param null|string $format
 	 *
-	 * @throws \MWContentSerializationException
+	 * @throws MWContentSerializationException
 	 * @return EntityContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
 		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
 
-		$entityContent = $this->newContentFromArray( $data );
-		return $entityContent;
+		try {
+			$entity = $this->entityDeserializer->deserialize( $data );
+		}
+		catch ( DeserializationException $ex ) {
+			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+		}
+
+		// TODO: use an EntityContent Deserializer
+		$contentClass = $this->getContentClass();
+		return new $contentClass( $entity );
 	}
 
 	/**
@@ -260,19 +295,6 @@ abstract class EntityHandler extends ContentHandler {
 		//FIXME: inject an EntityTitleLookup!
 		$title = Title::makeTitle( $this->getEntityNamespace(), $id->getSerialization() );
 		return $title;
-	}
-
-	/**
-	 * Calls the static function newFromArray() on the content class,
-	 * to create a new EntityContent object based on the array data.
-	 *
-	 * @param array $data
-	 *
-	 * @return EntityContent
-	 */
-	protected function newContentFromArray( array $data ) {
-		$contentClass = $this->getContentClass();
-		return $contentClass::newFromArray( $data );
 	}
 
 	/**

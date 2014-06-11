@@ -48,60 +48,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	}
 
 	/**
-	 * Register the updates needed for creating the appropriate table(s).
-	 *
-	 * @param DatabaseUpdater $updater
-	 */
-	public static function registerDatabaseUpdates( DatabaseUpdater $updater ) {
-		$table = 'wb_property_info';
-
-		if ( !$updater->tableExists( $table ) ) {
-			$type = $updater->getDB()->getType();
-			$fileBase = __DIR__ . '/' . $table;
-
-			$file = $fileBase . '.' . $type . '.sql';
-			if ( !file_exists( $file ) ) {
-				$file = $fileBase . '.sql';
-			}
-
-			$updater->addExtensionTable( $table, $file );
-
-			// populate the table after creating it
-			$updater->addExtensionUpdate( array(
-				array( 'Wikibase\PropertyInfoTable', 'rebuildPropertyInfo' )
-			) );
-		}
-	}
-
-	/**
-	 * Wrapper for invoking PropertyInfoTableBuilder from DatabaseUpdater
-	 * during a database update.
-	 *
-	 * @param DatabaseUpdater $updater
-	 */
-	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
-		$reporter = new ObservableMessageReporter();
-		$reporter->registerReporterCallback(
-			function ( $msg ) use ( $updater ) {
-				$updater->output( "..." . $msg . "\n" );
-			}
-		);
-
-		$table = new PropertyInfoTable( false );
-		$contentCodec = new EntityContentDataCodec();
-		$entityFactory = new EntityFactory( array( Property::ENTITY_TYPE => '\Wikibase\Property' ) );
-		$wikiPageEntityLookup = new WikiPageEntityLookup( $contentCodec, $entityFactory, false );
-		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
-
-		$builder = new PropertyInfoTableBuilder( $table, $cachingEntityLookup );
-		$builder->setReporter( $reporter );
-		$builder->setUseTransactions( false );
-
-		$updater->output( 'Populating ' . $table->getTableName() . "\n" );
-		$builder->rebuildPropertyInfo();
-	}
-
-	/**
 	 * @see PropertyInfoStore::getPropertyInfo
 	 *
 	 * @param PropertyId $propertyId
