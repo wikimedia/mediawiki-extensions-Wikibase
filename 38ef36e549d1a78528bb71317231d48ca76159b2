@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_040c9b3c",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T16:42:54Z",
+      "side": 1,
+      "message": "Yea, if this grows some more, we\u0027ll probably factor out something that generates the DataUpdates (covering $entityPerPage and $termIndex), and something that does the validator stuff (wrapping $preSaveValidators and $errorLocalizer).",
+      "parentUuid": "ee391fd1_2958988b",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_89b784d3",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 2
