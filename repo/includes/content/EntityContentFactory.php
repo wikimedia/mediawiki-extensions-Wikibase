@@ -106,7 +106,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.5
 	 *
-	 * @param int $type
+	 * @param string $type
 	 *
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return EntityHandler
@@ -121,7 +121,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.5
 	 *
-	 * @param int $type
+	 * @param string $type
 	 *
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return int
@@ -141,7 +141,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @since 0.2
 	 *
-	 * @param integer $revisionId
+	 * @param int $revisionId
 	 *
 	 * @return EntityContent|null
 	 */

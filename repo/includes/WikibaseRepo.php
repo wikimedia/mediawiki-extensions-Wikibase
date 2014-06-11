@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use SiteSQLStore;
 use SiteStore;
+use StubObject;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ChangeNotifier;
@@ -672,6 +673,7 @@ class WikibaseRepo {
 	 */
 	protected function getMessageParameterFormatter() {
 		global $wgLang;
+		StubObject::unstub( $wgLang );
 
 		$formatterOptions = new FormatterOptions();
 		$valueFormatterBuilders = $this->getValueFormatterBuilders();

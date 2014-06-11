@@ -4,27 +4,15 @@ namespace Wikibase;
 
 use AbstractContent;
 use Content;
-use Diff\DiffOp\Diff\Diff;
 use DataUpdate;
-use IContextSource;
+use Diff\DiffOp\Diff\Diff;
 use ParserOptions;
 use ParserOutput;
-use RequestContext;
 use Status;
 use Title;
 use User;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
-use ValueValidators\Result;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\Content\EntityContentDiff;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntitySearchTextGenerator;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\EntityValidator;
 use WikiPage;
 
 /**
@@ -37,7 +25,6 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 abstract class EntityContent extends AbstractContent {
-
 
 	/**
 	 * For use in the wb-status page property to indicate that the entity has no special
@@ -77,27 +64,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Returns the Title for the item or false if there is none.
-	 *
-	 * @since 0.1
-	 * @deprecated use EntityTitleLookup instead
-	 *
-	 * @deprecated since 0.5, use EntityTitleLookup:.getTitleForId instead.
-	 *
-	 * @return Title|bool
-	 */
-	public function getTitle() {
-		$id = $this->getEntity()->getId();
-
-		if ( !$id ) {
-			return false;
-		}
-
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		return $lookup->getTitleForId( $id );
-	}
-
-	/**
 	 * Returns the entity contained by this entity content.
 	 * Deriving classes typically have a more specific get method as
 	 * for greater clarity and type hinting.
@@ -107,6 +73,18 @@ abstract class EntityContent extends AbstractContent {
 	 * @return Entity
 	 */
 	abstract public function getEntity();
+
+	/**
+	 * Returns the ID of the entity represented by this EntityContent;
+	 *
+	 * @return null|EntityId
+	 *
+	 * @todo: Force an ID to be present; Entity objects without an ID may sense, EntityContent
+	 * objects with no entity ID don't.
+	 */
+	public function getEntityId() {
+		return $this->getEntity()->getId();
+	}
 
 	/**
 	 * @see Content::getDeletionUpdates
@@ -178,7 +156,9 @@ abstract class EntityContent extends AbstractContent {
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null,
 		$generateHtml = true
 	) {
-		$entityView = $this->getEntityView( null, $options, null );
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
+		$entityView = $handler->getEntityView( null, $options, null );
 		$editable = !$options? true : $options->getEditSection();
 
 		if ( $revId === null || $revId === 0 ) {
@@ -199,105 +179,6 @@ abstract class EntityContent extends AbstractContent {
 
 		return $output;
 	}
-
-	/**
-	 * Creates an EntityView suitable for rendering the entity.
-	 *
-	 * @note: this uses global state to access the services needed for
-	 * displaying the entity.
-	 *
-	 * @since 0.5
-	 *
-	 * @param IContextSource|null $context
-	 * @param ParserOptions|null $options
-	 * @param LanguageFallbackChain|null $uiLanguageFallbackChain
-	 *
-	 * @return EntityView
-	 */
-	public function getEntityView( IContextSource $context = null, ParserOptions $options = null,
-		LanguageFallbackChain $uiLanguageFallbackChain = null
-	) {
-		//TODO: cache last used entity view
-
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
-		}
-
-		// determine output language ----
-		$langCode = $context->getLanguage()->getCode();
-
-		if ( $options !== null ) {
-			// NOTE: Parser Options language overrides context language!
-			$langCode = $options->getUserLang();
-		}
-
-		// make formatter options ----
-		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $langCode );
-
-		// Force the context's language to be the one specified by the parser options.
-		if ( $context && $context->getLanguage()->getCode() !== $langCode ) {
-			$context = clone $context;
-			$context->setLanguage( $langCode );
-		}
-
-		// apply language fallback chain ----
-		if ( !$uiLanguageFallbackChain ) {
-			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
-			$uiLanguageFallbackChain = $factory->newFromContextForPageView( $context );
-		}
-
-		$formatterOptions->setOption( 'languages', $uiLanguageFallbackChain );
-
-		// get all the necessary services ----
-		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
-			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
-
-		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$idParser = new BasicEntityIdParser();
-
-		$options = $this->makeSerializationOptions( $langCode, $uiLanguageFallbackChain );
-
-		// construct the instance ----
-		$entityView = $this->newEntityView(
-			$context,
-			$snakFormatter,
-			$dataTypeLookup,
-			$entityInfoBuilder,
-			$entityContentFactory,
-			$idParser,
-			$options
-		);
-
-		return $entityView;
-	}
-
-	/**
-	 * Instantiates an EntityView.
-	 *
-	 * @see getEntityView()
-	 *
-	 * @param IContextSource $context
-	 * @param SnakFormatter $snakFormatter
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityIdParser $idParser
-	 * @param SerializationOptions $options
-	 *
-	 * @return EntityView
-	 */
-	protected abstract function newEntityView(
-		IContextSource $context,
-		SnakFormatter $snakFormatter,
-		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilder $entityInfoBuilder,
-		EntityTitleLookup $entityTitleLookup,
-		EntityIdParser $idParser,
-		SerializationOptions $options
-	);
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text
@@ -499,13 +380,11 @@ abstract class EntityContent extends AbstractContent {
 	 * @return ItemContent
 	 */
 	public function copy() {
-		$array = array();
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
 
-		foreach ( $this->getEntity()->toArray() as $key => $value ) {
-			$array[$key] = is_object( $value ) ? clone $value : $value;
-		}
-
-		return static::newFromArray( $array );
+		$entity = $this->getEntity()->copy();
+		return $handler->makeEntityContent( $entity );
 	}
 
 	/**
@@ -528,49 +407,12 @@ abstract class EntityContent extends AbstractContent {
 			return $status;
 		}
 
-		$status = $this->applyOnSaveValidators();
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
+		$status = $handler->applyOnSaveValidators( $this );
 
 		wfProfileOut( __METHOD__ );
 		return $status;
-	}
-
-	/**
-	 * Apply all EntityValidators registered for on-save validation.
-	 */
-	private function applyOnSaveValidators() {
-		/* @var EntityHandler $handler */
-		$handler = $this->getContentHandler();
-		$validators = $handler->getOnSaveValidators();
-
-		$entity = $this->getEntity();
-		$result = Result::newSuccess();
-
-		/* @var EntityValidator $validator */
-		foreach ( $validators as $validator ) {
-			$result = $validator->validateEntity( $entity );
-
-			if ( !$result->isValid() ) {
-				break;
-			}
-		}
-
-		$localizer = WikibaseRepo::getDefaultInstance()->getValidatorErrorLocalizer();
-		return $localizer->getResultStatus( $result );
-	}
-
-	/**
-	 * @param string $langCode
-	 * @param LanguageFallbackChain $fallbackChain
-	 *
-	 * @return SerializationOptions
-	 */
-	private function makeSerializationOptions( $langCode, LanguageFallbackChain $fallbackChain ) {
-		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
-
-		$options = new SerializationOptions();
-		$options->setLanguages( $langCodes );
-
-		return $options;
 	}
 
 	/**
