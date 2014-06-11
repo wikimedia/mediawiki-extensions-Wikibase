@@ -55,19 +55,6 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * Create a new PropertyContent object from the provided Property data.
-	 *
-	 * @deprecated Use a dedicated deserializer
-	 *
-	 * @param array $data
-	 *
-	 * @return PropertyContent
-	 */
-	public static function newFromArray( array $data ) {
-		return new static( new Property( $data ) );
-	}
-
-	/**
 	 * Gets the property that makes up this property content.
 	 *
 	 * @since 0.1

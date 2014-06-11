@@ -164,51 +164,7 @@ class MergeItemsTest extends WikibaseApiTestCase {
 				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
 				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
 		);
-		//Identical claims (mainsnak and qualifiers) should merge references
-		$testCases['identicalClaimMergeReferences'] = array(
-			array( 'claims' =>
-				array( '{Prop}' =>
-					array( array( 'mainsnak' =>
-						array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' =>
-							array( 'value' => 'imastring', 'type' => 'string' ) ),
-						'type' => 'statement',
-						'rank' => 'normal',
-						'references' => array(
-							array( 'snaks' => array( '{Prop}' => array(
-								array( 'snaktype' => 'value',
-									'property' => '{Prop}',
-									'datavalue' => array(
-										'value' => 'imastring',
-										'type' => 'string'
-									)
-								) ) ) ) ) ) ) ) ),
-			array( 'claims' =>
-				array( '{Prop}' =>
-					array( array( 'mainsnak' =>
-						array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' =>
-							array( 'value' => 'imastring', 'type' => 'string' ) ),
-						'type' => 'statement',
-						'rank' => 'normal'
-					) ) ) ),
-			array(), //empty
-			array( 'claims' =>
-				array( '{Prop}' =>
-					array( array( 'mainsnak' =>
-						array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' =>
-							array( 'value' => 'imastring', 'type' => 'string' ) ),
-						'type' => 'statement',
-						'rank' => 'normal',
-						'references' => array(
-							array( 'snaks' => array( '{Prop}' => array(
-								array( 'snaktype' => 'value',
-									'property' => '{Prop}',
-									'datavalue' => array(
-										'value' => 'imastring',
-										'type' => 'string',
-										'snaks-order' => '{Prop}'
-									)
-								) ) ) ) ) ) ) ) ),
-		);
+
 		return $testCases;
 	}
 

@@ -68,44 +68,4 @@ class EntityFactoryTest extends EntityTestCase {
 		$this->assertTrue( $entity->isEmpty(), "should be empty" );
 	}
 
-	public static function provideNewFromArray() {
-		return array(
-			array( // #0
-				Item::ENTITY_TYPE,
-				array(
-					'label' => array(
-						'en' => 'Foo',
-						'de' => 'FOO',
-					)
-				),
-				'\Wikibase\Item' ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideNewFromArray
-	 */
-	public function testNewFromArray( $type, $data, $class ) {
-		$entity = EntityFactory::singleton()->newFromArray( $type, $data );
-
-		$this->assertInstanceOf( $class, $entity );
-		$this->assertEntityStructureEquals( $data, $entity );
-	}
-
-	public static function provideNewFromBlob() {
-		$tests = array();
-
-		foreach ( self::provideNewFromArray() as $arrayTest ) {
-			$tests[] = array(
-				$arrayTest[0],
-				json_encode( $arrayTest[1] ),
-				null,
-				$arrayTest[1],
-				$arrayTest[2],
-			);
-		}
-
-		return $tests;
-	}
-
 }

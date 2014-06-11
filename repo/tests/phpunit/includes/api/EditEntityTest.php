@@ -288,63 +288,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 				) )
 			),
 
-			'clear and add complex claim with qualifiers and references' => array( // clear and add complex claim with qualifiers and references
-				'p' => array( 'clear' => '', 'data' => '{"claims": [{"mainsnak": {"snaktype": "value", "property": "%P56%", "datavalue": { "value": "str", "type": "string" } },'.
-					'"qualifiers": { "%P56%": [ { "snaktype": "value", "property": "%P56%", "datavalue": { "value": "qual", "type": "string" } } ] }, "type": "statement", "rank": "normal",'.
-					'"references": [ { "snaks": { "%P56%": [ { "snaktype": "value", "property": "%P56%", "datavalue": { "value": "src", "type": "string" } } ] } } ]}]}' ),
-				'e' => array( 'claims' => array(
-					'%P56%' => array(
-						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => '%P56%',
-							'datavalue' => array(
-								'value' => 'str',
-								'type' => 'string' ) ),
-						'qualifiers' => array(
-							'%P56%' => array(
-								'snaktype' => 'value', 'property' => '%P56%',
-								'datavalue' => array(
-									'value' => 'qual',
-									'type' => 'string' ) ),
-						),
-						'type' => 'statement',
-						'rank' => 'normal',
-						'references' => array(
-							'snaks' => array(
-								'%P56%' => array(
-									'snaktype' => 'value', 'property' => '%P56%',
-									'datavalue' => array(
-										'value' => 'src',
-										'type' => 'string' ) ),
-							),
-							'snaks-order' => array( '%P56%' ),
-						),
-					)
-				) )
-			),
-
-			'clear and add multiple claims within property groups' => array( // clear and add multiple claims within property groups
-				'p' => array( 'clear' => '',
-					'data' => '{"claims":{"%P56%":[{"mainsnak":{"snaktype":"value","property":"%P56%","datavalue":{"value":"imastring56","type":"string"}},"type":"statement","rank":"normal"}],'.
-							'"%P72%":[{"mainsnak":{"snaktype":"value","property":"%P72%","datavalue":{"value":"imastring72","type":"string"}},"type":"statement","rank":"normal"}]}}' ),
-				'e' => array( 'claims' => array(
-					array(
-						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => '%P56%',
-							'datavalue' => array(
-								'value' => 'imastring56',
-								'type' => 'string' ) ),
-						'type' => 'statement',
-						'rank' => 'normal' ),
-					array(
-						'mainsnak' => array(
-							'snaktype' => 'value', 'property' => '%P72%',
-							'datavalue' => array(
-								'value' => 'imastring72',
-								'type' => 'string' ) ),
-						'type' => 'statement',
-						'rank' => 'normal' )
-				) )
-			),
 		);
 	}
 

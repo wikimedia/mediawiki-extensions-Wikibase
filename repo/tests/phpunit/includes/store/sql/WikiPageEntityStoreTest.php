@@ -40,9 +40,9 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		//NOTE: we want to test integration of WikiPageEntityLookup and WikiPageEntityStore here!
 		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$entityDeserializer = WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer();
 
-		$lookup = new WikiPageEntityLookup( $contentCodec, $entityFactory, false, CACHE_DB );
+		$lookup = new WikiPageEntityLookup( $contentCodec, $entityDeserializer, false );
 
 		$typeMap = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
 
