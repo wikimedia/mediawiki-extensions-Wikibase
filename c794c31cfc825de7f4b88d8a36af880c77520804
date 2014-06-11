@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_6e0b46da",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T12:24:19Z",
+      "side": 1,
+      "message": "It should be used to decide whether we want to show \"edit\" links. \nBut it might just as well be a constructor parameter I suppose.",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_8e5f8ae8",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T12:24:19Z",
+      "side": 1,
+      "message": "use the global id as the array key here.",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_6e5466ca",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T12:24:19Z",
+      "side": 1,
+      "message": "if you used the id as the array key above, you can just use ksort.",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ce6472b1",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T12:24:19Z",
+      "side": 1,
+      "message": "Functions that return HTML should generally have a name that contains \"HTML\" somewhere. This helps to see at a glance which return values need escaping, and which must not be escaped.",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ee6736b3",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T12:24:19Z",
+      "side": 1,
+      "message": "declare @param SimpleSiteLink[] $siteLinksForTable, then you don\u0027t need the inline type hint thingy.\n\nAlso, isn\u0027t SimpleSiteLink a deprecated alias for SiteLink now?",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ce4d9241",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T12:24:19Z",
+      "side": 1,
+      "message": "This should probably be done by the caller. would make the signature of this method nicer, and remove a responsibility",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ae012ebb",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T12:24:19Z",
+      "side": 1,
+      "message": "still too big... also, please at least document the parameter types for private methods. phpstorm will do that for you if you just type /**\u003center\u003e.",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
