@@ -88,6 +88,24 @@
       "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_e9517066",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-11T16:08:43Z",
+      "side": 1,
+      "message": "Because it\u0027s need to implement EntityContent::getParserOutput.\n\nI have filed bug 66486 so we can have the issue of factoring out the EntityViewFactory in the backlog.",
+      "parentUuid": "ee391fd1_695ea07d",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
