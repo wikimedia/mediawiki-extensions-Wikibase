@@ -5,21 +5,22 @@ namespace Wikibase;
 use DatabaseBase;
 use DatabaseUpdater;
 use DBQueryError;
+use HashBagOStuff;
 use MWException;
 use ObjectCache;
+use Revision;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\SiteLinkCache;
-use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Lib\Store\WikiPageEntityLookup;
-use Wikibase\Repo\Store\WikiPageEntityStore;
-use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\WikiPageEntityLookup;
+use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
+use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\WikibaseRepo;
+use WikiPage;
 
 /**
  * Implementation of the store interface using an SQL backend via MediaWiki's
@@ -170,8 +171,8 @@ class SqlStore implements Store {
 		);
 
 		foreach ( $pages as $pageRow ) {
-			$page = \WikiPage::newFromID( $pageRow->page_id );
-			$revision = \Revision::newFromId( $pageRow->page_latest );
+			$page = WikiPage::newFromID( $pageRow->page_id );
+			$revision = Revision::newFromId( $pageRow->page_latest );
 			try {
 				$page->doEditUpdates( $revision, $GLOBALS['wgUser'] );
 			} catch ( DBQueryError $e ) {
@@ -464,34 +465,43 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * Creates a new EntityRevisionLookup(s).
-	 * This returns a pair of lookup services, one being the raw uncached lookup, the other being the cached lookup.
+	 * Creates a strongly connected pair of EntityRevisionLookup services, the first being the raw
+	 * uncached lookup, the second being the cached lookup.
 	 *
-	 * @return array ( WikiPageEntityLookup, CachingEntityRevisionLookup )
+	 * @return array( WikiPageEntityLookup, CachingEntityRevisionLookup )
 	 */
 	protected function newEntityRevisionLookup() {
 		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$lookup = $rawLookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityFactory, false );
+		$rawLookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityFactory, false );
 
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.
+		/** @var WikiPageEntityStore $dispatcher */
 		$dispatcher = $this->getEntityStoreWatcher();
 
 		// Lower caching layer using persistent cache (e.g. memcached).
+		$persistentCachingLookup = new CachingEntityRevisionLookup(
+			$rawLookup,
+			wfGetCache( $this->cacheType ),
+			$this->cacheDuration,
+			$key
+		);
 		// We need to verify the revision ID against the database to avoid stale data.
-		$lookup = new CachingEntityRevisionLookup( $lookup, wfGetCache( $this->cacheType ), $this->cacheDuration, $key );
-		$lookup->setVerifyRevision( true );
-		$dispatcher->registerWatcher( $lookup ); // we know it's a WikiPageEntityStore
+		$persistentCachingLookup->setVerifyRevision( true );
+		$dispatcher->registerWatcher( $persistentCachingLookup );
 
 		// Top caching layer using an in-process hash.
+		$hashCachingLookup = new CachingEntityRevisionLookup(
+			$persistentCachingLookup,
+			new HashBagOStuff()
+		);
 		// No need to verify the revision ID, we'll ignore updates that happen during the request.
-		$lookup = new CachingEntityRevisionLookup( $lookup, new \HashBagOStuff() );
-		$lookup->setVerifyRevision( false );
-		$dispatcher->registerWatcher( $lookup ); // we know it's a WikiPageEntityStore
+		$hashCachingLookup->setVerifyRevision( false );
+		$dispatcher->registerWatcher( $hashCachingLookup );
 
-		return array( $rawLookup, $lookup );
+		return array( $rawLookup, $hashCachingLookup );
 	}
 
 	/**
