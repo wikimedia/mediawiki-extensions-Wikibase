@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_6efa2675",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T13:16:31Z",
+      "side": 1,
+      "message": "I\u0027d not have the flag in the same method. You can just have two methods.",
+      "revId": "cd79ff07df9a95077617e98c1ca4455c9769b50a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_0eca7a4a",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T13:16:31Z",
+      "side": 1,
+      "message": "Better do something along these lines: https://gerrit.wikimedia.org/r/#/c/138310/1/repo/includes/WikibaseRepo.php",
+      "revId": "cd79ff07df9a95077617e98c1ca4455c9769b50a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_eed616f6",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T13:16:31Z",
+      "side": 1,
+      "message": "This is a different test, so putting it into the same method violates Arrange Act Assert",
+      "revId": "cd79ff07df9a95077617e98c1ca4455c9769b50a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ae000e6e",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T13:16:31Z",
+      "side": 1,
+      "message": "Have a look at this.\n\nhttps://github.com/wmde/WikibaseInternalSerialization/blob/73c0d63f23d57f4e754eec787389c4759c0568b9/tests/integration/Deserializers/ItemRoundtripTest.php#L42-123\n\nA lot clearer no?",
+      "revId": "cd79ff07df9a95077617e98c1ca4455c9769b50a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
