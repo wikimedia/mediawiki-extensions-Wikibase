@@ -106,6 +106,24 @@
       "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_29d778c6",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-11T16:12:25Z",
+      "side": 1,
+      "message": "\u003e Because it\u0027s need to implement EntityContent::getParserOutput.\n\nAnd why does that mean this class needs to have a getEntityView method?\n\nIt is EntityContent::getParserOutput that needs the entity view. If you want these concerns not put directly into EntityContent, then it needs to delegate to something yes. But why this class? Right now you are using it as a bucket for procedural code.",
+      "parentUuid": "ee391fd1_e9517066",
+      "revId": "38ef36e549d1a78528bb71317231d48ca76159b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
