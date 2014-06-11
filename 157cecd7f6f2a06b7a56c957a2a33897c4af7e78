@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_a4d4af4c",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-11T17:04:22Z",
+      "side": 1,
+      "message": "rebase?",
+      "revId": "157cecd7f6f2a06b7a56c957a2a33897c4af7e78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
