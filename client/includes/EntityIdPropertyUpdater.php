@@ -54,31 +54,11 @@ class EntityIdPropertyUpdater {
 		if ( $itemId instanceof EntityId ) {
 			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
 		} else {
-			// unset property, if it was set
-			$this->unsetProperty( $out, 'wikibase_item' );
+			$out->unsetProperty( 'wikibase_item' );
 
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': Trying to set wikibase_item property for '
 				. $siteLink->getSiteId() . ':' . $siteLink->getPageName()
-				. " but $itemId is not an EntityId object." );
-		}
-	}
-
-	/**
-	 * Unsets the wikibase_item property
-	 * @todo: should use functionality in core, and if not exists, add it there.
-	 *
-	 * @since 0.4
-	 *
-	 * @param ParserOutput $out
-	 * @param string $propertyName
-	 */
-	private function unsetProperty( \ParserOutput $out, $propertyName ) {
-		// unset property, if it was set
-		$properties = $out->getProperties();
-
-		if ( array_key_exists( $propertyName, $properties ) ) {
-			unset( $properties[$propertyName] );
-			$out->mProperties = $properties;
+				. ' but $itemId ' . $itemId . ' is not an EntityId object.' );
 		}
 	}
 }
