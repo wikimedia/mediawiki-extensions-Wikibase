@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\Lib\Specials\SpecialWikibaseQueryPage;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
