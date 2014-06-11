@@ -499,13 +499,11 @@ abstract class EntityContent extends AbstractContent {
 	 * @return ItemContent
 	 */
 	public function copy() {
-		$array = array();
-
-		foreach ( $this->getEntity()->toArray() as $key => $value ) {
-			$array[$key] = is_object( $value ) ? clone $value : $value;
-		}
-
-		return static::newFromArray( $array );
+		/**
+		 * @var EntityHandler $handler
+		 */
+		$handler = $this->getContentHandler();
+		return $handler->makeEntityContent( $this->getEntity()->copy() );
 	}
 
 	/**
