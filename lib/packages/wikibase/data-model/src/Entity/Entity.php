@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimAggregate;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -409,44 +410,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	 * @since 0.1
 	 *
 	 * @param Entity $target
-	 * @param Differ|null $differ Since 0.4
 	 *
 	 * @return EntityDiff
 	 * @throws InvalidArgumentException
 	 */
-	public final function getDiff( Entity $target, Differ $differ = null ) {
-		if ( $this->getType() !== $target->getType() ) {
-			throw new InvalidArgumentException( 'Can only diff between entities of the same type' );
-		}
-
-		if ( $differ === null ) {
-			$differ = new MapDiffer( true );
-		}
-
-		$oldEntity = $this->getDiffArray();
-		$newEntity = $target->getDiffArray();
-
-		$diffOps = $differ->doDiff( $oldEntity, $newEntity );
-
-		$claims = new Claims( $this->getClaims() );
-		$diffOps['claim'] = $claims->getDiff( new Claims( $target->getClaims() ) );
-
-		return EntityDiff::newForType( $this->getType(), $diffOps );
-	}
-
-	/**
-	 * Create and returns an array based serialization suitable for EntityDiff.
-	 *
-	 * @return array[]
-	 */
-	protected function getDiffArray() {
-		$array = array();
-
-		$array['aliases'] = $this->getAllAliases();
-		$array['label'] = $this->getLabels();
-		$array['description'] = $this->getDescriptions();
-
-		return $array;
+	public final function getDiff( Entity $target ) {
+		$differ = new EntityDiffer();
+		return $differ->diffEntities( $this, $target );
 	}
 
 	/**
