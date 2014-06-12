@@ -140,11 +140,11 @@ namespace Wikibase {
 	/**
 	 * @deprecated since 0.6, use the base class instead.
 	 */
-	class ItemDiff extends \Wikibase\DataModel\Entity\ItemDiff {}
+	class ItemDiff extends \Wikibase\DataModel\Entity\Diff\ItemDiff {}
 	/**
 	 * @deprecated since 0.6, use the base class instead.
 	 */
-	class EntityDiff extends \Wikibase\DataModel\Entity\EntityDiff {}
+	class EntityDiff extends \Wikibase\DataModel\Entity\Diff\EntityDiff {}
 
 }
 
@@ -154,5 +154,18 @@ namespace Wikibase\DataModel {
 	 * @deprecated since 0.6, use the base class instead.
 	 */
 	class SimpleSiteLink extends SiteLink {}
+
+}
+
+namespace Wikibase\DataModel\Entity {
+
+	/**
+	 * @deprecated since 1.0, use the base class instead.
+	 */
+	class ItemDiff extends \Wikibase\DataModel\Entity\Diff\ItemDiff {}
+	/**
+	 * @deprecated since 1.0, use the base class instead.
+	 */
+	class EntityDiff extends \Wikibase\DataModel\Entity\Diff\EntityDiff {}
 
 }

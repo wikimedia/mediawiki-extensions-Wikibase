@@ -61,9 +61,11 @@ class_alias( 'Wikibase\DataModel\Snak\SnakList', 'Wikibase\SnakList' );
 class_alias( 'Wikibase\DataModel\Snak\SnakObject', 'Wikibase\SnakObject' );
 class_alias( 'Wikibase\DataModel\Snak\SnakRole', 'Wikibase\SnakRole' );
 class_alias( 'Wikibase\DataModel\Snak\Snaks', 'Wikibase\Snaks' );
-class_alias( 'Wikibase\DataModel\Entity\ItemDiff', 'Wikibase\ItemDiff' );
-class_alias( 'Wikibase\DataModel\Entity\EntityDiff', 'Wikibase\EntityDiff' );
+class_alias( 'Wikibase\DataModel\Entity\Diff\ItemDiff', 'Wikibase\ItemDiff' );
+class_alias( 'Wikibase\DataModel\Entity\Diff\EntityDiff', 'Wikibase\EntityDiff' );
 class_alias( 'Wikibase\DataModel\SiteLink', 'Wikibase\DataModel\SimpleSiteLink' );
 
 // Aliases introduced in 1.0
 class_alias( 'Wikibase\DataModel\LegacyIdInterpreter', 'Wikibase\DataModel\Internal\LegacyIdInterpreter' );
+class_alias( 'Wikibase\DataModel\Entity\Diff\EntityDiff', 'Wikibase\DataModel\Entity\EntityDiff' );
+class_alias( 'Wikibase\DataModel\Entity\Diff\ItemDiff', 'Wikibase\DataModel\Entity\ItemDiff' );

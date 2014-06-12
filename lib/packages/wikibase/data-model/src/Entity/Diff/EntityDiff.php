@@ -1,11 +1,12 @@
 <?php
 
-namespace Wikibase\DataModel\Entity;
+namespace Wikibase\DataModel\Entity\Diff;
 
 use Diff\DiffOp\Diff\Diff;
+use Wikibase\DataModel\Entity\Item;
 
 /**
- * Represents a diff between two Wikibase\Entity instances.
+ * Represents a diff between two Entity instances.
  *
  * @since 0.1
  *

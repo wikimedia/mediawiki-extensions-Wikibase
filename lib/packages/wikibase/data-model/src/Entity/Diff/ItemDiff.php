@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\DataModel\Entity;
+namespace Wikibase\DataModel\Entity\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 
 /**
- * Represents a diff between two Wikibase\Item instances.
+ * Represents a diff between two Item instances.
  *
  * @since 0.1
  *
@@ -54,6 +54,6 @@ class ItemDiff extends EntityDiff {
 	 * @return string 'diff/' . Item::ENTITY_TYPE
 	 */
 	public function getType() {
-		return 'diff/' . Item::ENTITY_TYPE;
+		return 'diff/item';
 	}
 }
