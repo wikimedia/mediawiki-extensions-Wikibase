@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Entity\Diff;
 use Diff\Differ\MapDiffer;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -28,20 +28,20 @@ class ItemDiffer implements EntityDifferStrategy {
 	}
 
 	/**
-	 * @param Entity $from
-	 * @param Entity $to
+	 * @param EntityDocument $from
+	 * @param EntityDocument $to
 	 *
 	 * @return ItemDiff
 	 * @throws InvalidArgumentException
 	 */
-	public function diffEntities( Entity $from, Entity $to ) {
+	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
 		$this->assertIsItem( $from );
 		$this->assertIsItem( $to );
 
 		return $this->diffItems( $from, $to );
 	}
 
-	private function assertIsItem( Entity $item ) {
+	private function assertIsItem( EntityDocument $item ) {
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( 'All entities need to be items' );
 		}

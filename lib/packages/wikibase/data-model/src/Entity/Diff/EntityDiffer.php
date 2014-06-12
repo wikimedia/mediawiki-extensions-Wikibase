@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Entity\Diff;
 
 use InvalidArgumentException;
 use RuntimeException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * @since 1.0
@@ -29,14 +29,14 @@ class EntityDiffer {
 	}
 
 	/**
-	 * @param Entity $from
-	 * @param Entity $to
+	 * @param EntityDocument $from
+	 * @param EntityDocument $to
 	 *
 	 * @return EntityDiff
 	 * @throws InvalidArgumentException
 	 * @throws RuntimeException
 	 */
-	public function diffEntities( Entity $from, Entity $to ) {
+	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
 		$this->assertTypesMatch( $from, $to );
 
 		foreach ( $this->differStrategies as $diffStrategy ) {
@@ -48,7 +48,7 @@ class EntityDiffer {
 		throw new RuntimeException( 'Diffing the provided types of entities is not supported' );
 	}
 
-	private function assertTypesMatch( Entity $from, Entity $to ) {
+	private function assertTypesMatch( EntityDocument $from, EntityDocument $to ) {
 		if ( $from->getType() !== $to->getType() ) {
 			throw new InvalidArgumentException( 'Can only diff two entities of the same type' );
 		}

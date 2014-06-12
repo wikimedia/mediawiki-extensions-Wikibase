@@ -4,7 +4,7 @@ namespace Wikibase\DataModel\Entity\Diff;
 
 use Diff\Differ\MapDiffer;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 
 /**
@@ -25,20 +25,20 @@ class PropertyDiffer implements EntityDifferStrategy {
 	}
 
 	/**
-	 * @param Entity $from
-	 * @param Entity $to
+	 * @param EntityDocument $from
+	 * @param EntityDocument $to
 	 *
 	 * @return EntityDiff
 	 * @throws InvalidArgumentException
 	 */
-	public function diffEntities( Entity $from, Entity $to ) {
+	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
 		$this->assertIsProperty( $from );
 		$this->assertIsProperty( $to );
 
 		return $this->diffProperties( $from, $to );
 	}
 
-	private function assertIsProperty( Entity $item ) {
+	private function assertIsProperty( EntityDocument $item ) {
 		if ( !( $item instanceof Property ) ) {
 			throw new InvalidArgumentException( 'All entities need to be properties' );
 		}

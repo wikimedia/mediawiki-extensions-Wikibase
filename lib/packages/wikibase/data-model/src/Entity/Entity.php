@@ -28,7 +28,7 @@ use Wikibase\DataModel\Term\TermList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvider {
+abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvider, EntityDocument {
 
 	/**
 	 * @var EntityId|null
@@ -487,13 +487,13 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	}
 
 	/**
-	 * Returns a type identifier for the entity.
+	 * @since 0.5
 	 *
-	 * @since 0.1
+	 * @param string $idSerialization
 	 *
-	 * @return string
+	 * @return EntityId
 	 */
-	public abstract function getType();
+	protected abstract function idFromSerialization( $idSerialization );
 
 	/**
 	 * Returns if the Entity has no content.

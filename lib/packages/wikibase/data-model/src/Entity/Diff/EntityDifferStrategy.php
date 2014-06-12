@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Entity\Diff;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * @since 1.0
@@ -21,12 +21,12 @@ interface EntityDifferStrategy {
 	public function canDiffEntityType( $entityType );
 
 	/**
-	 * @param Entity $from
-	 * @param Entity $to
+	 * @param EntityDocument $from
+	 * @param EntityDocument $to
 	 *
 	 * @return EntityDiff
 	 * @throws InvalidArgumentException
 	 */
-	public function diffEntities( Entity $from, Entity $to );
+	public function diffEntities( EntityDocument $from, EntityDocument $to );
 
 }
