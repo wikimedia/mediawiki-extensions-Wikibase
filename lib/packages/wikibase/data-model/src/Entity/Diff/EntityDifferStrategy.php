@@ -29,4 +29,20 @@ interface EntityDifferStrategy {
 	 */
 	public function diffEntities( EntityDocument $from, EntityDocument $to );
 
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getConstructionDiff( EntityDocument $entity );
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getDestructionDiff( EntityDocument $entity );
+
 }

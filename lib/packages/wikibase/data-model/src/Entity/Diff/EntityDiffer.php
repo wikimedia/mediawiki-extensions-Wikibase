@@ -39,19 +39,43 @@ class EntityDiffer {
 	public function diffEntities( EntityDocument $from, EntityDocument $to ) {
 		$this->assertTypesMatch( $from, $to );
 
-		foreach ( $this->differStrategies as $diffStrategy ) {
-			if ( $diffStrategy->canDiffEntityType( $from->getType() ) ) {
-				return $diffStrategy->diffEntities( $from, $to );
-			}
-		}
-
-		throw new RuntimeException( 'Diffing the provided types of entities is not supported' );
+		return $this->getDiffStrategy( $from->getType() )->diffEntities( $from, $to );
 	}
 
 	private function assertTypesMatch( EntityDocument $from, EntityDocument $to ) {
 		if ( $from->getType() !== $to->getType() ) {
 			throw new InvalidArgumentException( 'Can only diff two entities of the same type' );
 		}
+	}
+
+	private function getDiffStrategy( $entityType ) {
+		foreach ( $this->differStrategies as $diffStrategy ) {
+			if ( $diffStrategy->canDiffEntityType( $entityType ) ) {
+				return $diffStrategy;
+			}
+		}
+
+		throw new RuntimeException( 'Diffing the provided types of entities is not supported' );
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getConstructionDiff( EntityDocument $entity ) {
+		return $this->getDiffStrategy( $entity->getType() )->getConstructionDiff( $entity );
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getDestructionDiff( EntityDocument $entity ) {
+		return $this->getDiffStrategy( $entity->getType() )->getDestructionDiff( $entity );
 	}
 
 }

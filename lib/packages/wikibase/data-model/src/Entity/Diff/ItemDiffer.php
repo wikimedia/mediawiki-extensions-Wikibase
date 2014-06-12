@@ -89,4 +89,26 @@ class ItemDiffer implements EntityDifferStrategy {
 		return $links;
 	}
 
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return ItemDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getConstructionDiff( EntityDocument $entity ) {
+		$this->assertIsItem( $entity );
+		return $this->diffEntities( Item::newEmpty(), $entity );
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return ItemDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getDestructionDiff( EntityDocument $entity ) {
+		$this->assertIsItem( $entity );
+		return $this->diffEntities( $entity, Item::newEmpty() );
+	}
+
 }

@@ -38,5 +38,19 @@ class EntityDifferTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $diff->isEmpty() );
 	}
 
+	public function testGivenUnknownEntityType_getConstructionDiffThrowsException() {
+		$differ = new EntityDiffer();
+
+		$this->setExpectedException( 'RuntimeException' );
+		$differ->getConstructionDiff( new EntityOfUnknownType() );
+	}
+
+	public function testGivenUnknownEntityType_getDestructionDiffThrowsException() {
+		$differ = new EntityDiffer();
+
+		$this->setExpectedException( 'RuntimeException' );
+		$differ->getDestructionDiff( new EntityOfUnknownType() );
+	}
+
 }
 

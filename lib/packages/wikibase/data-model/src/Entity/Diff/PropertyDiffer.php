@@ -45,8 +45,12 @@ class PropertyDiffer implements EntityDifferStrategy {
 	}
 
 	public function diffProperties( Property $from, Property $to ) {
+		return $this->diffPropertyArrays( $this->toDiffArray( $from ), $this->toDiffArray( $to ) );
+	}
+
+	private function diffPropertyArrays( array $from, array $to ) {
 		$differ = new MapDiffer( true );
-		$diffOps = $differ->doDiff( $this->toDiffArray( $from ), $this->toDiffArray( $to ) );
+		$diffOps = $differ->doDiff( $from, $to );
 
 		return new EntityDiff( $diffOps );
 	}
@@ -59,6 +63,28 @@ class PropertyDiffer implements EntityDifferStrategy {
 		$array['description'] = $item->getDescriptions();
 
 		return $array;
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getConstructionDiff( EntityDocument $entity ) {
+		$this->assertIsProperty( $entity );
+		return $this->diffPropertyArrays( array(), $this->toDiffArray( $entity ) );
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDiff
+	 * @throws InvalidArgumentException
+	 */
+	public function getDestructionDiff( EntityDocument $entity ) {
+		$this->assertIsProperty( $entity );
+		return $this->diffPropertyArrays( $this->toDiffArray( $entity ), array() );
 	}
 
 }

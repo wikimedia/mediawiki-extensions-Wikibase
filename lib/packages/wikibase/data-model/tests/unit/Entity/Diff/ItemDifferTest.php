@@ -7,6 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiffer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -69,6 +70,35 @@ class ItemDifferTest extends \PHPUnit_Framework_TestCase {
 		$diff = $differ->diffItems( $firstItem, $secondItem );
 
 		$this->assertCount( 1, $diff->getClaimsDiff()->getAdditions() );
+	}
+
+	public function testGivenEmptyItem_constructionDiffIsEmpty() {
+		$differ = new ItemDiffer();
+		$this->assertTrue( $differ->getConstructionDiff( Item::newEmpty() )->isEmpty() );
+	}
+
+	public function testGivenEmptyItem_destructionDiffIsEmpty() {
+		$differ = new ItemDiffer();
+		$this->assertTrue( $differ->getDestructionDiff( Item::newEmpty() )->isEmpty() );
+	}
+
+	public function testConstructionDiffContainsAddOperations() {
+		$item = Item::newEmpty();
+		$item->getFingerprint()->setLabel( 'en', 'foo' );
+		$item->getSiteLinkList()->addNewSiteLink( 'bar', 'baz' );
+
+		$differ = new ItemDiffer();
+		$diff = $differ->getConstructionDiff( $item );
+
+		$this->assertEquals(
+			new Diff( array( 'en' => new DiffOpAdd( 'foo' ) ) ),
+			$diff->getLabelsDiff()
+		);
+
+		$this->assertEquals(
+			new Diff( array( 'bar' => new Diff( array( 'name' => new DiffOpAdd( 'baz' ) ) ) ) ),
+			$diff->getSiteLinkDiff()
+		);
 	}
 
 }
