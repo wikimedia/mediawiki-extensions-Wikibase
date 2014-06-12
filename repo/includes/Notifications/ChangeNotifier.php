@@ -28,9 +28,9 @@ class ChangeNotifier {
 	 */
 	private $changeTransmitter;
 
-	public function __construct( EntityChangeFactory $changeFactory, ChangeTransmitter $notificationChannel ) {
+	public function __construct( EntityChangeFactory $changeFactory, ChangeTransmitter $changeTransmitter ) {
 		$this->changeFactory = $changeFactory;
-		$this->changeTransmitter = $notificationChannel;
+		$this->changeTransmitter = $changeTransmitter;
 	}
 
 	/**
@@ -77,16 +77,15 @@ class ChangeNotifier {
 	public function notifyOnPageUndeleted( Revision $revision ) {
 		wfProfileIn( __METHOD__ );
 
-		/* @var EntityChange $content */
+		/** @var EntityContent $content */
 		$content = $revision->getContent();
+
 		if ( $content->isRedirect() ) {
 			// TODO: notify the client about changes to redirects!
 			return null;
 		}
 
-		$entity = $content->getEntity();
-
-		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $entity );
+		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
 
 		$change->setRevisionInfo( $revision );
 
@@ -113,18 +112,16 @@ class ChangeNotifier {
 	public function notifyOnPageCreated( Revision $revision ) {
 		wfProfileIn( __METHOD__ );
 
-		/* @var EntityContent $newContent */
-		$newContent = $revision->getContent();
+		/** @var EntityContent $content */
+		$content = $revision->getContent();
 
-		if ( $newContent->isRedirect() ) {
+		if ( $content->isRedirect() ) {
 			// Clients currently don't care about redirected being created.
 			// TODO: notify the client about changes to redirects!
 			return null;
 		}
 
-		$newEntity = $newContent->getEntity();
-
-		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $newEntity );
+		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
 
 		$change->setRevisionInfo( $revision );
 
@@ -154,13 +151,7 @@ class ChangeNotifier {
 			throw new InvalidArgumentException( '$parent->getId() must be the same as $current->getParentId()!' );
 		}
 
-		/* @var EntityContent $newContent */
-		$newContent = $current->getContent();
-
-		/* @var EntityContent $oldContent */
-		$oldContent = $parent->getContent();
-
-		$change = $this->getChangeForModification( $oldContent, $newContent );
+		$change = $this->getChangeForModification( $parent->getContent(), $current->getContent() );
 
 		if ( !$change ) {
 			// nothing to do
@@ -188,10 +179,10 @@ class ChangeNotifier {
 	 * @return EntityChange|null
 	 */
 	private function getChangeForModification( EntityContent $oldContent, EntityContent $newContent ) {
-		$newEntity = $newContent->isRedirect() ? null : $newContent->getEntity();
 		$oldEntity = $oldContent->isRedirect() ? null : $oldContent->getEntity();
+		$newEntity = $newContent->isRedirect() ? null : $newContent->getEntity();
 
-		if ( $newEntity === null && $oldEntity === null ) {
+		if ( $oldEntity === null && $newEntity === null ) {
 			// Old and new versions are redirects. Nothing to do.
 			return null;
 		} elseif ( $newEntity === null ) {

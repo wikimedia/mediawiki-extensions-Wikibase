@@ -2,15 +2,17 @@
 
 namespace Wikibase\Lib\Store;
 
+use DBAccessBase;
 use DBQueryError;
 use MWContentSerializationException;
+use Revision;
+use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
-use Wikibase\UnresolvedRedirectException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -22,7 +24,7 @@ use Wikibase\UnresolvedRedirectException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup {
+class WikiPageEntityLookup extends DBAccessBase implements EntityRevisionLookup {
 
 	/**
 	 * @var EntityIdParser
@@ -54,15 +56,15 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @see EntityLookup::getEntity
 	 *
 	 * @param EntityId $entityId
-	 * @param int $revision The desired revision id, 0 means "current".
+	 * @param int $revisionId The desired revision id, 0 means "current".
 	 *
 	 * @return Entity|null
 	 *
 	 * @throw StorageException
 	 */
-	public function getEntity( EntityId $entityId, $revision = 0 ) {
-		$entityRev = $this->getEntityRevision( $entityId, $revision );
-		return $entityRev === null ? null : $entityRev->getEntity();
+	public function getEntity( EntityId $entityId, $revisionId = 0 ) {
+		$entityRevision = $this->getEntityRevision( $entityId, $revisionId );
+		return $entityRevision === null ? null : $entityRevision->getEntity();
 	}
 
 	/**
@@ -70,60 +72,57 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @see   EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
-	 * @param int $revision The desired revision id, 0 means "current".
+	 * @param int $revisionId The desired revision id, 0 means "current".
 	 *
-	 * @return EntityRevision|null
 	 * @throws StorageException
+	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revision = 0 ) {
+	public function getEntityRevision( EntityId $entityId, $revisionId = 0 ) {
 		wfProfileIn( __METHOD__ );
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up entity " . $entityId
-				. " (rev $revision)" );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
+			. " (revision $revisionId)." );
 
-		if ( $revision === false ) { // default changed from false to 0
-			wfWarn( 'getEntityRevision() called with $revision = false, use 0 instead.' );
-			$revision = 0;
+		if ( $revisionId === false ) { // default changed from false to 0
+			wfWarn( 'getEntityRevision() called with $revisionId = false, use 0 instead.' );
+			$revisionId = 0;
 		}
 
-		$row = $this->loadRevisionRow( $entityId, $revision );
+		/** @var EntityRevision $entityRevision */
+		$entityRevision = null;
 
-		/* @var EntityRevision $entityRev */
-		/* @var EntityId $redirect */
+		$row = $this->loadRevisionRow( $entityId, $revisionId );
 
 		if ( $row ) {
-			list( $entityRev, $redirect ) = $this->loadEntity( $row );
+			list( $entityRevision, $redirect ) = $this->loadEntity( $row );
 
 			if ( $redirect !== null ) {
-				// TODO: Optionally follow redirects. Doesn't make sense if a revision is given.
+				// TODO: Optionally follow redirects. Doesn't make sense if a revision ID is given.
 				wfProfileOut( __METHOD__ );
 				throw new UnresolvedRedirectException( $redirect );
 			}
 
-			if ( !$entityRev ) {
+			if ( $entityRevision === null ) {
 				// This only happens when there is a problem with the external store.
-				wfLogWarning( __METHOD__ . ": Entity not loaded for " . $entityId );
+				wfLogWarning( __METHOD__ . ': Entity not loaded for ' . $entityId );
 			}
-		} else {
-			// No such revision
-			$entityRev = null;
 		}
 
-		if ( $entityRev && !$entityId->equals( $entityRev->getEntity()->getId() ) ) {
+		if ( $entityRevision !== null && !$entityRevision->getEntity()->getId()->equals( $entityId ) ) {
 			// This can happen when giving a revision ID that doesn't belong to the given entity
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Loaded wrong entity: expected " . $entityId
-							. ", got " . $entityRev->getEntity()->getId());
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Loaded wrong entity: Expected ' . $entityId
+				. ', got ' . $entityRevision->getEntity()->getId() );
 
-			$entityRev = null;
+			$entityRevision = null;
 		}
 
-		if ( $entityRev === null && $revision > 0 ) {
-			// If a revision was specified, that revision doesn't exist or doesn't belong to
+		if ( $revisionId > 0 && $entityRevision === null ) {
+			// If a revision ID was specified, that revision doesn't exist or doesn't belong to
 			// the given entity. Throw an error.
-			throw new StorageException( "No such revision found for $entityId: $revision" );
+			throw new StorageException( "No such revision found for $entityId: $revisionId" );
 		}
 
 		wfProfileOut( __METHOD__ );
-		return $entityRev;
+		return $entityRevision;
 	}
 
 	/**
@@ -132,13 +131,13 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return bool
 	 * @throws StorageException
+	 * @return bool
 	 */
 	public function hasEntity( EntityId $entityId ) {
 		$row = $this->loadPageRow( $entityId );
 
-		return ( $row !== null );
+		return $row !== null;
 	}
 
 	/**
@@ -158,20 +157,20 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 	/**
 	 * @param EntityId $entityId
-	 * @param int $revision
+	 * @param int $revisionId
 	 *
 	 * @throws DBQueryError
 	 * @return object|null
 	 */
-	private function loadRevisionRow( EntityId $entityId, $revision ) {
-		$row = $this->selectRevisionRow( $entityId, $revision );
+	private function loadRevisionRow( EntityId $entityId, $revisionId ) {
+		$row = $this->selectRevisionRow( $entityId, $revisionId );
 
 		if ( !$row ) {
 			// try loading from master
-			wfDebugLog(  __CLASS__, __FUNCTION__ . ': try to load '
-				. $entityId->getSerialization() . "with $revision from DB_MASTER." );
+			wfDebugLog(  __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
+				. " with $revisionId from DB_MASTER." );
 
-			$row = $this->selectRevisionRow( $entityId, $revision, DB_MASTER );
+			$row = $this->selectRevisionRow( $entityId, $revisionId, DB_MASTER );
 		}
 
 		return $row;
@@ -183,17 +182,15 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
-	 * @param int $revision The desired revision id, 0 means "current".
-	 * @param int $connType DB_READ or DB_MASTER
+	 * @param int $revisionId The desired revision id, 0 means "current".
+	 * @param int $connType DB_SLAVE or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	protected function selectRevisionRow( EntityId $entityId, $revision = 0, $connType = DB_READ ) {
+	protected function selectRevisionRow( EntityId $entityId, $revisionId = 0, $connType = DB_SLAVE ) {
 		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
-
-		$opt = array();
 
 		$tables = array(
 			'page',
@@ -210,9 +207,9 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		$where = array();
 		$join = array();
 
-		if ( $revision > 0 ) {
+		if ( $revisionId > 0 ) {
 			// pick revision by id
-			$where['rev_id'] = $revision;
+			$where['rev_id'] = $revisionId;
 
 			// pick page via rev_page
 			$join['page'] = array( 'INNER JOIN', 'page_id=rev_page' );
@@ -220,7 +217,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 			// pick text via rev_text_id
 			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revision of " . $entityId );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up revision $revisionId of " . $entityId );
 		} else {
 			// entity to page mapping
 			$tables[] = 'wb_entity_per_page';
@@ -240,27 +237,25 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 			// pick text via rev_text_id
 			$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Looking up latest revision of " . $entityId );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up latest revision of ' . $entityId );
 		}
 
-		$res = $db->select( $tables, $vars, $where, __METHOD__, $opt, $join );
+		$res = $db->select( $tables, $vars, $where, __METHOD__, array(), $join );
 
 		if ( !$res ) {
 			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
 			$error = $db->lastError();
 			$errno = $db->lastErrno();
+
 			throw new DBQueryError( $db, $error, $errno, '', __METHOD__ );
 		}
 
 		$this->releaseConnection( $db );
 
-		if ( $row = $res->fetchObject() ) {
-			wfProfileOut( __METHOD__ );
-			return $row;
-		} else {
-			wfProfileOut( __METHOD__ );
-			return null;
-		}
+		$row = $res->fetchObject();
+
+		wfProfileOut( __METHOD__ );
+		return $row ? $row : null;
 	}
 
 	/**
@@ -274,8 +269,8 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		if ( !$row ) {
 			// try to load from master
-			wfDebugLog(  __CLASS__, __FUNCTION__ . ': try to load '
-				. $entityId->getSerialization() . ' from DB_MASTER.' );
+			wfDebugLog(  __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
+				. ' from DB_MASTER.' );
 
 			$row = $this->selectPageRow( $entityId, DB_MASTER );
 		}
@@ -289,12 +284,12 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
-	 * @param int $connType DB_READ or DB_MASTER
+	 * @param int $connType DB_SLAVE or DB_MASTER
 	 *
-	 * @throws \DBQueryError If the query fails.
+	 * @throws DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
 	 */
-	protected function selectPageRow( EntityId $entityId, $connType = DB_READ ) {
+	protected function selectPageRow( EntityId $entityId, $connType = DB_SLAVE ) {
 		wfProfileIn( __METHOD__ );
 		$db = $this->getConnection( $connType );
 
@@ -305,7 +300,6 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		$where = array();
 		$join = array();
-		$opt = array();
 
 		$entityId = $this->getProperEntityId( $entityId );
 
@@ -316,7 +310,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		// pick page via epp_page_id
 		$join['page'] = array( 'INNER JOIN', 'epp_page_id=page_id' );
 
-		$res = $db->select( $tables, '*', $where, __METHOD__, $opt, $join );
+		$res = $db->select( $tables, '*', $where, __METHOD__, array(), $join );
 
 		if ( !$res ) {
 			// this can only happen if the DB is set to ignore errors, which shouldn't be the case...
@@ -329,13 +323,10 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		$this->releaseConnection( $db );
 
-		if ( $row = $res->fetchObject() ) {
-			wfProfileOut( __METHOD__ );
-			return $row;
-		} else {
-			wfProfileOut( __METHOD__ );
-			return null;
-		}
+		$row = $res->fetchObject();
+
+		wfProfileOut( __METHOD__ );
+		return $row ? $row : null;
 	}
 
 	/**
@@ -354,13 +345,12 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @see loadEntityBlob()
 	 *
-	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
+	 * @param Object $row a row object as expected Revision::getRevisionText(), that is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
 	 * @throws MWContentSerializationException
-	 *
-	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
-	 * with either $entityRev or $redirect or both being null (but not both being non-null).
+	 * @return object[] list( EntityRevision|null $entityRevision, EntityRedirect|null $redirect ),
+	 * with either $entityRevision or $redirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row ) {
 		wfProfileIn( __METHOD__ );
@@ -369,9 +359,9 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		$entity = $this->contentCodec->decodeEntity( $blob, $row->rev_content_format );
 
 		if ( $entity ) {
-			$entityRev = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
+			$entityRevision = new EntityRevision( $entity, (int)$row->rev_id, $row->rev_timestamp );
 
-			$result = array( $entityRev, null );
+			$result = array( $entityRevision, null );
 		} else {
 			$redirect = $this->contentCodec->decodeRedirect( $blob, $row->rev_content_format );
 
@@ -394,7 +384,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
 	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
 	 *
-	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
+	 * @param Object $row a row object as expected Revision::getRevisionText(), that is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
 	 * @throws MWContentSerializationException
@@ -403,21 +393,21 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 */
 	private function loadEntityBlob( $row ) {
 		wfProfileIn( __METHOD__ );
-
-		wfDebugLog( __CLASS__, __FUNCTION__ . ": calling getRevisionText() on rev " . $row->rev_id );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ': Calling getRevisionText() on revision '
+			. $row->rev_id );
 
 		//NOTE: $row contains revision fields from another wiki. This SHOULD not
 		//      cause any problems, since getRevisionText should only look at the old_flags
 		//      and old_text fields. But be aware.
-		$blob = \Revision::getRevisionText( $row, 'old_', $this->wiki );
+		$blob = Revision::getRevisionText( $row, 'old_', $this->wiki );
 
 		wfProfileOut( __METHOD__ );
 
 		if ( $blob === false ) {
-			wfWarn( "Unable to load raw content blob for rev " . $row->rev_id );
+			wfWarn( 'Unable to load raw content blob for revision ' . $row->rev_id );
 
 			throw new MWContentSerializationException(
-				"Unable to load raw content blob for rev " . $row->rev_id
+				'Unable to load raw content blob for revision ' . $row->rev_id
 			);
 		}
 

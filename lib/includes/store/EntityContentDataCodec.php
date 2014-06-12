@@ -132,7 +132,7 @@ class EntityContentDataCodec {
 	 * @param string|null $format The desired serialization format.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
-	 * @throws MWContentSerializationException If the array could not be encoded.
+	 * @throws MWContentSerializationException
 	 * @return string A blob representing the given Entity.
 	 */
 	public function encodeEntity( Entity $entity, $format ) {
@@ -148,14 +148,13 @@ class EntityContentDataCodec {
 	/**
 	 * Encodes an EntityRedirect into a blob for storage.
 	 *
-	 * @see Entity::toArray()
 	 * @see EntityHandler::serializeContent()
 	 *
 	 * @param EntityRedirect $redirect
 	 * @param string|null $format The desired serialization format.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
-	 * @throws MWContentSerializationException If the array could not be encoded.
+	 * @throws MWContentSerializationException
 	 * @return string A blob representing the given Entity.
 	 */
 	public function encodeRedirect( EntityRedirect $redirect, $format ) {
@@ -172,13 +171,11 @@ class EntityContentDataCodec {
 	 * Decodes the given blob into an array structure representing an EntityContent
 	 * object.
 	 *
-	 * @see EntityHandler::unserializeContent
-	 *
 	 * @param string $blob The data blob to deserialize
 	 * @param string|null $format The serialization format of $blob
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
-	 * @throws MWContentSerializationException If the blob could not be decoded.
+	 * @throws MWContentSerializationException
 	 * @return array An array representation of an EntityContent object
 	 */
 	private function decodeEntityContentData( $blob, $format ) {
@@ -209,15 +206,13 @@ class EntityContentDataCodec {
 	/**
 	 * Decodes a blob loaded from storage into an Entity.
 	 *
-	 * @see Entity::toArray()
-	 * @see EntityHandler::serializeContent()
+	 * @see EntityHandler::unserializeContent()
 	 *
 	 * @param string $blob
 	 * @param string|null $format The serialization format of $blob.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
-	 * @throws MWContentSerializationException If the array could not be decoded
-	 *
+	 * @throws MWContentSerializationException
 	 * @return Entity|null The Entity represented by $blob, or null if $blob represents a redirect.
 	 */
 	public function decodeEntity( $blob, $format ) {
@@ -240,8 +235,7 @@ class EntityContentDataCodec {
 	/**
 	 * Decodes a blob loaded from storage into an EntityRedirect.
 	 *
-	 * @see Entity::toArray()
-	 * @see EntityHandler::serializeContent()
+	 * @see EntityHandler::unserializeContent()
 	 *
 	 * @param string $blob
 	 * @param string|null $format The serialization format of $blob.
