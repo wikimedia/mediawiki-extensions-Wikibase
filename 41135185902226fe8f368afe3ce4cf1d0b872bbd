@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_54b12cdb",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T13:55:43Z",
+      "side": 1,
+      "message": "Why not simply add a type hint?\n\nAt least use get_class( $that ) \u003d\u003d\u003d get_called_class(), that\u0027s way less strange.",
+      "parentUuid": "ee391fd1_f979392b",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_d9767539",
         "filename": "lib/includes/store/TermIndex.php",
         "patchSetId": 23
