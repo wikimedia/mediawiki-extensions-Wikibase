@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_f9a259a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "You will get a comment from Aude here. ;-)",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d99f9561",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "I think this is ok. We clearly need an action for \"entity was changed into a redirect\" that\u0027s different from \"entity was deleted\" (see below). But the inverse operation? \"A redirect was turned into an entity\"? That\u0027s a restore, isn\u0027t it?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_598ba520",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "I\u0027m able to find 2 places where these actions are used. One is here in EntityChange::getAction but it doesn\u0027t do any validation, so introducing new values is fine. The other is in ExternalChangeFactory::extractChangeType, see I6318568ea3614eb00a38e142c307630cb4c3fa34.",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3980e1f8",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "Does this case have a test? Just asking. Please make sure.",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_f979392b",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "All \"else\" here are superfluous.\n\nAsking for get_class( $this ) is very strange. What\u0027s wrong with if ( !( $that instanceof self ) )?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d9767539",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "But it does. Huh?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9990ed47",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "Uh, what? This is odd. You are checking this twice. And why is it protected?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_599a8567",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "This should never happen and either throw something or not be here at all. Just let getRedirectTarget()-\u003e... fail.",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_199cfd5e",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "So this will show #REDIRECT [[...]] in the summary? That\u0027s ok, but don\u0027t we have a good auto-summary for that in core?\n\n\"autoredircomment\": \"Redirected page to [[$1]]\",\n\nCan we reuse this, please? Maybe in an following patch?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_f9a81976",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "Double ;;\n\nAnd why did you changed that from description to label? Won\u0027t this show the label twice?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d9a5559c",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "There is an \"s\" missing!",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_99b7cdd3",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T09:22:31Z",
+      "side": 1,
+      "message": "This does not return a Redirect object. newFrom... please.",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
