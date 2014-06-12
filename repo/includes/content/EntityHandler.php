@@ -14,6 +14,7 @@ use MWException;
 use ParserOptions;
 use RequestContext;
 use Revision;
+use Status;
 use Title;
 use User;
 use ValueValidators\Result;
@@ -113,7 +114,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @param EntityContent $content
 	 *
-	 * @return \Status
+	 * @return Status
 	 */
 	public function applyOnSaveValidators( EntityContent $content ) {
 		$entity = $content->getEntity();
@@ -136,7 +137,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @throws \MWException Always. EntityContent cannot be empty.
+	 * @throws MWException Always. EntityContent cannot be empty.
 	 * @return EntityContent
 	 */
 	public function makeEmptyContent() {
@@ -278,7 +279,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function serializeContent( Content $content, $format = null ) {
 		if ( ! $content instanceof EntityContent ) {
-			throw new \InvalidArgumentException( '$content mist be an instance of EntityContent' );
+			throw new InvalidArgumentException( '$content mist be an instance of EntityContent' );
 		}
 
 		if ( $content->isRedirect() ) {
@@ -298,7 +299,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param string $blob
 	 * @param null|string $format
 	 *
-	 * @throws \MWContentSerializationException
+	 * @throws MWContentSerializationException
 	 * @return EntityContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
@@ -349,7 +350,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @param EntityId $id
 	 *
-	 * @throws \InvalidArgumentException if $id refers to an entity of the wrong type.
+	 * @throws InvalidArgumentException if $id refers to an entity of the wrong type.
 	 * @return Title $target
 	 */
 	public function getTitleForId( EntityId $id ) {
@@ -422,6 +423,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function getPageViewLanguage( Title $title, Content $content = null ) {
 		global $wgLang;
+
 		return $wgLang;
 	}
 
@@ -444,6 +446,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function getPageLanguage( Title $title, Content $content = null ) {
 		global $wgContLang;
+
 		return $wgContLang;
 	}
 
@@ -471,17 +474,19 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return Content|bool Content on success, false on failure
 	 */
-	public function getUndoContent( Revision $latestRevision, Revision $newerRevision,
+	public function getUndoContent(
+		Revision $latestRevision,
+		Revision $newerRevision,
 		Revision $olderRevision
 	) {
 		/**
 		 * @var EntityContent $latestContent
-		 * @var EntityContent $olderContent
 		 * @var EntityContent $newerContent
+		 * @var EntityContent $olderContent
 		 */
-		$olderContent = $olderRevision->getContent();
-		$newerContent = $newerRevision->getContent();
 		$latestContent = $latestRevision->getContent();
+		$newerContent = $newerRevision->getContent();
+		$olderContent = $olderRevision->getContent();
 
 		if ( $newerRevision->getId() === $latestRevision->getId() ) {
 			// no patching needed, just roll back
@@ -543,7 +548,8 @@ abstract class EntityHandler extends ContentHandler {
 		$updates[] = new DataUpdateClosure(
 			'wfRunHooks',
 			'WikibaseEntityDeletionUpdate',
-			array( $content, $title ) );
+			array( $content, $title )
+		);
 
 		// Unregister the entity from the terms table.
 		$updates[] = new DataUpdateClosure(
