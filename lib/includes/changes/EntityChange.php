@@ -434,4 +434,5 @@ class EntityChange extends DiffChange {
 
 		return parent::serializeInfo( $info );
 	}
+
 }
