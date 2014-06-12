@@ -40,10 +40,10 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "დამალე",
 	"wikibase-rc-hide-wikidata-show": "აჩვენეთ",
-	"wikibase-rc-show-wikidata-pref": "ბოლო ცვლილებების სიაში ვიკიმონაცემების რედაქტირებების ჩვენება",
+	"wikibase-rc-show-wikidata-pref": "ბოლო ცვლილებების სიაში {{grammar:genitive|{{WBREPONAME}}}} რედაქტირებების ჩვენება",
 	"wikibase-rc-wikibase-edit-letter": "ვ",
-	"wikibase-rc-wikibase-edit-title": "ვიკიმონაცემების რედაქტირება",
-	"wikibase-watchlist-show-changes-pref": "თქვენი კონტროლის სიაში ვიკიმონაცემების რედაქტირებების ჩვენება",
+	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} რედაქტირება",
+	"wikibase-watchlist-show-changes-pref": "თქვენი კონტროლის სიაში {{grammar:genitive|{{WBREPONAME}}}} რედაქტირებების ჩვენება",
 	"wikibase-error-invalid-entity-id": "მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.",
 	"special-unconnectedpages": "ელემენტებთან დაუკავშირებელი გვერდები",
 	"wikibase-unconnectedpages-legend": "დაუკავშირებელი გვერდების პარამეტრები",
@@ -52,6 +52,6 @@
 	"wikibase-unconnectedpages-invalid-language": "„$1“ არ არის ენის სწორი კოდი.",
 	"wikibase-unconnectedpages-iwdata-label": "მხოლოდ ენათშორისი ბმულების მქონე გვერდები",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)",
-	"wikibase-pageinfo-entity-id": "ვიკიმონაცემების ელემენტის ID",
+	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ელემენტის ID",
 	"wikibase-pageinfo-entity-id-none": "არაფერი"
 }
