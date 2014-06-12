@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_74e1d0fa",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-12T14:23:01Z",
+      "side": 1,
+      "message": "Not explicitly. But Entity::toArray() currently uses the old style, so yes, this code path is tested.\n\nI\u0027ll add an explicit test case though.",
+      "parentUuid": "ee391fd1_3980e1f8",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_f979392b",
         "filename": "lib/includes/store/EntityRedirect.php",
         "patchSetId": 23
@@ -105,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_34cd8863",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-12T14:23:01Z",
+      "side": 1,
+      "message": "because instanceof is not reflexive.",
+      "parentUuid": "ee391fd1_f979392b",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_d9767539",
         "filename": "lib/includes/store/TermIndex.php",
         "patchSetId": 23
@@ -116,6 +152,24 @@
       "writtenOn": "2014-06-12T09:22:31Z",
       "side": 1,
       "message": "But it does. Huh?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_14ca844a",
+        "filename": "lib/includes/store/TermIndex.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-12T14:23:01Z",
+      "side": 1,
+      "message": "heh, forgot to remove the fixme. fixed in an earlier patch :)",
+      "parentUuid": "ee391fd1_d9767539",
       "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -173,6 +227,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_144044a7",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-12T14:23:01Z",
+      "side": 1,
+      "message": "ContentHandler::getAutosummary calls getTextForSummary and passes it as a parameter to the autoredircomment message.",
+      "parentUuid": "ee391fd1_199cfd5e",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_f9a81976",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 23
@@ -184,6 +256,24 @@
       "writtenOn": "2014-06-12T09:22:31Z",
       "side": 1,
       "message": "Double ;;\n\nAnd why did you changed that from description to label? Won\u0027t this show the label twice?",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9482f4cb",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-12T14:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_f9a81976",
       "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -218,6 +308,24 @@
       "writtenOn": "2014-06-12T09:22:31Z",
       "side": 1,
       "message": "This does not return a Redirect object. newFrom... please.",
+      "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3458e88b",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 23
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-12T14:23:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_99b7cdd3",
       "revId": "41135185902226fe8f368afe3ce4cf1d0b872bbd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
