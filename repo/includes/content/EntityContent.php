@@ -4,8 +4,8 @@ namespace Wikibase;
 
 use AbstractContent;
 use Content;
-use Diff\DiffOp\Diff\Diff;
 use DataUpdate;
+use Diff\DiffOp\Diff\Diff;
 use IContextSource;
 use ParserOptions;
 use ParserOutput;
@@ -15,16 +15,14 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Validators\EntityValidator;
 use WikiPage;
 
 /**
@@ -37,7 +35,6 @@ use WikiPage;
  * @author Daniel Kinzler
  */
 abstract class EntityContent extends AbstractContent {
-
 
 	/**
 	 * For use in the wb-status page property to indicate that the entity has no special
@@ -77,27 +74,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Returns the Title for the item or false if there is none.
-	 *
-	 * @since 0.1
-	 * @deprecated use EntityTitleLookup instead
-	 *
-	 * @deprecated since 0.5, use EntityTitleLookup:.getTitleForId instead.
-	 *
-	 * @return Title|bool
-	 */
-	public function getTitle() {
-		$id = $this->getEntity()->getId();
-
-		if ( !$id ) {
-			return false;
-		}
-
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		return $lookup->getTitleForId( $id );
-	}
-
-	/**
 	 * Returns the entity contained by this entity content.
 	 * Deriving classes typically have a more specific get method as
 	 * for greater clarity and type hinting.
@@ -107,6 +83,18 @@ abstract class EntityContent extends AbstractContent {
 	 * @return Entity
 	 */
 	abstract public function getEntity();
+
+	/**
+	 * Returns the ID of the entity represented by this EntityContent;
+	 *
+	 * @return null|EntityId
+	 *
+	 * @todo: Force an ID to be present; Entity objects without an ID may sense, EntityContent
+	 * objects with no entity ID don't.
+	 */
+	public function getEntityId() {
+		return $this->getEntity()->getId();
+	}
 
 	/**
 	 * @see Content::getDeletionUpdates
@@ -499,13 +487,11 @@ abstract class EntityContent extends AbstractContent {
 	 * @return ItemContent
 	 */
 	public function copy() {
-		$array = array();
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
 
-		foreach ( $this->getEntity()->toArray() as $key => $value ) {
-			$array[$key] = is_object( $value ) ? clone $value : $value;
-		}
-
-		return static::newFromArray( $array );
+		$entity = $this->getEntity()->copy();
+		return $handler->makeEntityContent( $entity );
 	}
 
 	/**
@@ -528,34 +514,12 @@ abstract class EntityContent extends AbstractContent {
 			return $status;
 		}
 
-		$status = $this->applyOnSaveValidators();
+		/* @var EntityHandler $handler */
+		$handler = $this->getContentHandler();
+		$status = $handler->applyOnSaveValidators( $this );
 
 		wfProfileOut( __METHOD__ );
 		return $status;
-	}
-
-	/**
-	 * Apply all EntityValidators registered for on-save validation.
-	 */
-	private function applyOnSaveValidators() {
-		/* @var EntityHandler $handler */
-		$handler = $this->getContentHandler();
-		$validators = $handler->getOnSaveValidators();
-
-		$entity = $this->getEntity();
-		$result = Result::newSuccess();
-
-		/* @var EntityValidator $validator */
-		foreach ( $validators as $validator ) {
-			$result = $validator->validateEntity( $entity );
-
-			if ( !$result->isValid() ) {
-				break;
-			}
-		}
-
-		$localizer = WikibaseRepo::getDefaultInstance()->getValidatorErrorLocalizer();
-		return $localizer->getResultStatus( $result );
 	}
 
 	/**

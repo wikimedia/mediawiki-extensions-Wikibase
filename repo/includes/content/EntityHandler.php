@@ -14,10 +14,17 @@ use RequestContext;
 use Revision;
 use Title;
 use User;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
+use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
@@ -51,18 +58,25 @@ abstract class EntityHandler extends ContentHandler {
 	private $termIndex;
 
 	/**
+	 * @var ValidatorErrorLocalizer
+	 */
+	private $errorLocalizer;
+
+	/**
 	 * @param string $modelId
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
+	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 */
 	public function __construct(
 		$modelId,
 		EntityPerPage $entityPerPage,
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
-		array $preSaveValidators
+		array $preSaveValidators,
+		ValidatorErrorLocalizer $errorLocalizer
 	) {
 		$formats = $contentCodec->getSupportedFormats();
 
@@ -72,6 +86,7 @@ abstract class EntityHandler extends ContentHandler {
 		$this->preSaveValidators = $preSaveValidators;
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
+		$this->errorLocalizer = $errorLocalizer;
 	}
 
 	/**
@@ -95,13 +110,26 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * Returns a set of validators for enforcing hard constraints on the content
-	 * before saving. For soft constraints, see the TermValidatorFactory.
+	 * Apply all EntityValidators registered for on-save validation
 	 *
-	 * @return EntityValidator[]
+	 * @param EntityContent $content
+	 *
+	 * @return \Status
 	 */
-	public function getOnSaveValidators() {
-		return $this->preSaveValidators;
+	public function applyOnSaveValidators( EntityContent $content ) {
+		$entity = $content->getEntity();
+		$result = Result::newSuccess();
+
+		/* @var EntityValidator $validator */
+		foreach ( $this->preSaveValidators as $validator ) {
+			$result = $validator->validateEntity( $entity );
+
+			if ( !$result->isValid() ) {
+				break;
+			}
+		}
+
+		return $this->errorLocalizer->getResultStatus( $result );
 	}
 
 	/**
