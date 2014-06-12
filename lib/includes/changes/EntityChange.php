@@ -19,9 +19,9 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  */
 class EntityChange extends DiffChange {
 
-	const UPDATE =  'update';
-	const ADD =     'add';
-	const REMOVE =  'remove';
+	const UPDATE  = 'update';
+	const ADD     = 'add';
+	const REMOVE  = 'remove';
 	const RESTORE = 'restore';
 
 	/**
@@ -99,8 +99,8 @@ class EntityChange extends DiffChange {
 	 * @return string
 	 */
 	public function getEntityType() {
-		$id = $this->getEntityId();
-		return $id->getEntityType();
+		$entityId = $this->getEntityId();
+		return $entityId->getEntityType();
 	}
 
 	/**
@@ -119,14 +119,12 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 *
-	 *
 	 * @since 0.3
 	 *
 	 * @return string
 	 */
 	public function getAction() {
-		list(, $action ) = explode( '~', $this->getType(), 2 );
+		list( , $action ) = explode( '~', $this->getType(), 2 );
 
 		return $action;
 	}
@@ -136,7 +134,7 @@ class EntityChange extends DiffChange {
 	 *
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
-	 * @return array|bool
+	 * @return array|bool false if no meta data could be found in the info array
 	 */
 	public function getMetadata( $cache = 'no' ) {
 		$info = $this->getInfo( $cache );
@@ -217,7 +215,7 @@ class EntityChange extends DiffChange {
 	 * @since 0.1
 	 */
 	protected function postConstruct() {
-
+		// FIXME: This misses an explanation why it's empty.
 	}
 
 	/**
@@ -339,8 +337,8 @@ class EntityChange extends DiffChange {
 	 * @return string
 	 */
 	public function __toString() {
-		$s = get_class( $this );
-		$s .= ": ";
+		$string = get_class( $this );
+		$string .= ': ';
 
 		$fields = $this->getFields();
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
@@ -354,16 +352,16 @@ class EntityChange extends DiffChange {
 			$fields = array_merge( $fields, $meta );
 		}
 
-		foreach ( $fields as $k => $v ) {
-			if ( is_array( $v ) || is_object( $v ) ) {
-				unset( $fields[$k] );
+		foreach ( $fields as $key => $value ) {
+			if ( is_array( $value ) || is_object( $value ) ) {
+				unset( $fields[$key] );
 			}
 		}
 
 		ksort( $fields );
 
-		$s .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
-		return $s;
+		$string .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
+		return $string;
 	}
 
 	/**
@@ -380,10 +378,10 @@ class EntityChange extends DiffChange {
 		$data = parent::arrayalizeObjects( $data );
 
 		if ( $data instanceof Claim ) {
-			$a = $data->toArray();
-			$a['_claimclass_'] = get_class( $data );
+			$array = $data->toArray();
+			$array['_claimclass_'] = get_class( $data );
 
-			return $a;
+			return $array;
 		}
 
 		return $data;
@@ -405,8 +403,10 @@ class EntityChange extends DiffChange {
 		if ( is_array( $data ) && isset( $data['_claimclass_'] ) ) {
 			$class = $data['_claimclass_'];
 
-			if ( $class === 'Wikibase\Claim' || $class === 'Wikibase\DataModel\Claim\Claim'
-				|| is_subclass_of( $class, 'Wikibase\Claim' ) ) {
+			if ( $class === 'Wikibase\Claim'
+				|| $class === 'Wikibase\DataModel\Claim\Claim'
+				|| is_subclass_of( $class, 'Wikibase\DataModel\Claim\Claim' )
+			) {
 				unset( $data['_claimclass_'] );
 
 				$claim = call_user_func( array( $class, 'newFromArray' ), $data );
@@ -434,4 +434,5 @@ class EntityChange extends DiffChange {
 
 		return parent::serializeInfo( $info );
 	}
+
 }

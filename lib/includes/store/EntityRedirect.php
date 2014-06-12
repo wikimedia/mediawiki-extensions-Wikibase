@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -27,10 +28,12 @@ class EntityRedirect  {
 	/**
 	 * @param EntityId $entityId
 	 * @param EntityId $targetId
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	function __construct( EntityId $entityId, EntityId $targetId ) {
 		if ( $entityId->getEntityType() !== $targetId->getEntityType() ) {
-			throw new \InvalidArgumentException( '$entityId and $targetId must refer to the same kind of entity' );
+			throw new InvalidArgumentException( '$entityId and $targetId must refer to the same kind of entity' );
 		}
 
 		$this->entityId = $entityId;
@@ -57,17 +60,14 @@ class EntityRedirect  {
 	 * @return bool
 	 */
 	public function equals( $that ) {
-		if ( !is_object( $that )) {
-			return false;
-		} elseif ( get_class( $that ) !== get_class( $this ) ) {
-			return false;
-		} elseif ( !$this->getEntityId()->equals( $that->getEntityId() ) ) {
-			return false;
-		} elseif ( !$this->getTargetId()->equals( $that->getTargetId() ) ) {
-			return false;
-		} else {
+		if ( $that === $this ) {
 			return true;
 		}
+
+		return is_object( $that )
+			&& get_class( $that ) === get_called_class()
+			&& $this->getEntityId()->equals( $that->getEntityId() )
+			&& $this->getTargetId()->equals( $that->getTargetId() );
 	}
 
 }

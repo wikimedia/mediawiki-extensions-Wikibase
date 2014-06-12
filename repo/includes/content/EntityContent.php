@@ -6,11 +6,12 @@ use AbstractContent;
 use Article;
 use Content;
 use DataUpdate;
-use Diff\DiffOp\Diff\Diff;
 use Diff\Differ\MapDiffer;
+use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
 use IContextSource;
+use Language;
 use LogicException;
 use ParserOptions;
 use ParserOutput;
@@ -23,11 +24,11 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -92,8 +93,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @note This default implementation will fail if isRedirect() is true.
 	 * Subclasses that support redirects must override getEntityRedirect().
 	 *
+	 * @throws LogicException
 	 * @return EntityRedirect|null
-	 * @throws \LogicException
 	 */
 	public function getEntityRedirect() {
 		if ( $this->isRedirect() ) {
@@ -117,13 +118,14 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * Returns the ID of the entity represented by this EntityContent;
 	 *
+	 * @throws RuntimeException if no entity ID is set
 	 * @return EntityId
 	 */
 	public function getEntityId() {
 		if ( $this->isRedirect() ) {
 			return $this->getEntityRedirect()->getEntityId();
 		} else {
-			if ( ! $this->getEntity()->getId() ) {
+			if ( !$this->getEntity()->getId() ) {
 				// @todo: Force an ID to be present; Entity objects without an ID may sense,
 				// EntityContent objects with no entity ID don't.
 				throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
@@ -137,8 +139,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::getDeletionUpdates
 	 * @see EntityHandler::getEntityDeletionUpdates
 	 *
-	 * @param \WikiPage $page
-	 * @param null|\ParserOutput $parserOutput
+	 * @param WikiPage $page
+	 * @param null|ParserOutput $parserOutput
 	 *
 	 * @since 0.1
 	 *
@@ -204,7 +206,7 @@ abstract class EntityContent extends AbstractContent {
 		$generateHtml = true
 	) {
 		if ( $this->isRedirect() ) {
-			return $this->getParserOutputForRedirect( $this->getEntityRedirect(), $this->getRedirectTarget(), $generateHtml );
+			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
 			return $this->getParserOutputFromEntityView( $title, $revId, $options, $generateHtml );
 		}
@@ -215,14 +217,14 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @note Will fail if this EntityContent does not represent a redirect.
 	 *
-	 * @param EntityRedirect $redirect
-	 * @param Title $target
 	 * @param $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	protected function getParserOutputForRedirect( EntityRedirect $redirect, Title $target, $generateHtml ) {
+	protected function getParserOutputForRedirect( $generateHtml ) {
 		$output = new ParserOutput();
+		/** @var Title $target */
+		$target = $this->getRedirectTarget();
 
 		// Make sure to include the redirect link in pagelinks
 		$output->addLink( $target );
@@ -353,7 +355,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param IContextSource $context
 	 * @param SnakFormatter $snakFormatter
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
@@ -398,7 +400,9 @@ abstract class EntityContent extends AbstractContent {
 	 * @note Will fail if this EntityContent is not a redirect.
 	 */
 	protected function getRedirectText() {
-		return '#REDIRECT [[' . $this->getRedirectTarget()->getFullText() . ']]';
+		/** @var Title $target */
+		$target = $this->getRedirectTarget();
+		return '#REDIRECT [[' . $target->getFullText() . ']]';
 	}
 
 	/**
@@ -470,16 +474,17 @@ abstract class EntityContent extends AbstractContent {
 	 * Returns a textual representation of the content suitable for use in edit summaries and log
 	 * messages.
 	 *
-	 * @param int $maxlength maximum length of the summary text
+	 * @param int $maxLength maximum length of the summary text
 	 * @return String the summary text
 	 */
-	public function getTextForSummary( $maxlength = 250 ) {
+	public function getTextForSummary( $maxLength = 250 ) {
 		if ( $this->isRedirect() ) {
 			return $this->getRedirectText();
 		} else {
-			$lang = $GLOBALS['wgLang']->getCode();
-			$text = $this->getEntity()->getDescription( $lang );
-			return substr( $text, 0, $maxlength );
+			/** @var Language $language */
+			$language = $GLOBALS['wgLang'];
+			$text = $this->getEntity()->getDescription( $language->getCode() );
+			return substr( $text, 0, $maxLength );
 		}
 	}
 
@@ -553,6 +558,7 @@ abstract class EntityContent extends AbstractContent {
 			return false;
 		}
 
+		/** @var Title $thisRedirect */
 		$thisRedirect = $this->getRedirectTarget();
 		$thatRedirect = $that->getRedirectTarget();
 
@@ -583,12 +589,12 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Returns an empty entity.
-	 *
 	 * @return Entity
 	 */
 	protected function getEmptyEntity() {
-		return $this->getContentHandler()->makeEmptyEntity();
+		/** @var EntityHandler $contentHandler */
+		$contentHandler = $this->getContentHandler();
+		return $contentHandler->makeEmptyEntity();
 	}
 
 	/**
