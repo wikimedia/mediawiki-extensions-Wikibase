@@ -33,7 +33,7 @@ class EntityRedirect  {
 	 */
 	public function __construct( EntityId $entityId, EntityId $targetId ) {
 		if ( $entityId->getEntityType() !== $targetId->getEntityType() ) {
-			throw new \InvalidArgumentException( '$entityId and $targetId must refer to the same kind of entity' );
+			throw new InvalidArgumentException( '$entityId and $targetId must refer to the same kind of entity.' );
 		}
 
 		$this->entityId = $entityId;
@@ -60,8 +60,12 @@ class EntityRedirect  {
 	 * @return bool
 	 */
 	public function equals( $that ) {
+		if ( $that === $this ) {
+			return true;
+		}
+
 		return is_object( $that )
-			&& get_class( $that ) === get_class( $this )
+			&& get_class( $that ) === get_called_class()
 			&& $this->entityId->equals( $that->entityId )
 			&& $this->targetId->equals( $that->targetId );
 	}
