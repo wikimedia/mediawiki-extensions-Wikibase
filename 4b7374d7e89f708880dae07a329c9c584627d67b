@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_94755495",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-12T12:48:51Z",
+      "side": 1,
+      "message": "That MediaWiki... when global state alone is not enough",
+      "revId": "4b7374d7e89f708880dae07a329c9c584627d67b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
