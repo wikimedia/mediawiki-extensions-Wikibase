@@ -4,9 +4,10 @@
  */
 
 .ui-entityselector-list {
+	overflow-x: hidden;
 	padding: 0;
 	position: absolute;
-	overflow-x: hidden;
+	z-index: 4; /* needed for MonoBook, #p-search is at 3 */
 }
 
 .ui-entityselector-list li,
