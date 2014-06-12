@@ -147,7 +147,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @throws \MWException Always. EntityContent cannot be empty.
+	 * @throws MWException Always. EntityContent cannot be empty.
 	 * @return EntityContent
 	 */
 	public function makeEmptyContent() {
@@ -473,6 +473,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function getPageViewLanguage( Title $title, Content $content = null ) {
 		global $wgLang;
+
 		return $wgLang;
 	}
 
@@ -495,6 +496,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function getPageLanguage( Title $title, Content $content = null ) {
 		global $wgContLang;
+
 		return $wgContLang;
 	}
 
@@ -522,7 +524,9 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return Content|bool Content on success, false on failure
 	 */
-	public function getUndoContent( Revision $latestRevision, Revision $newerRevision,
+	public function getUndoContent(
+		Revision $latestRevision,
+		Revision $newerRevision,
 		Revision $olderRevision
 	) {
 		/**

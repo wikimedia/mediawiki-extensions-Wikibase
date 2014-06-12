@@ -10,7 +10,6 @@ use DatabaseUpdater;
 use DummyLinker;
 use HistoryPager;
 use Html;
-use InvalidArgumentException;
 use Language;
 use Linker;
 use LogEntryBase;
@@ -32,8 +31,8 @@ use Title;
 use User;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\TextInjector;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -143,7 +142,7 @@ final class RepoHooks {
 			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
 		}
 
-		/* @var SqlStore $store */
+		/** @var SqlStore $store */
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
 		$store->doSchemaUpdate( $updater );
 
@@ -164,9 +163,7 @@ final class RepoHooks {
 		// @codeCoverageIgnoreStart
 		$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-		/**
-		 * @var SplFileInfo $fileInfo
-		 */
+		/** @var SplFileInfo $fileInfo */
 		$ourFiles = array();
 		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
 			if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
@@ -223,8 +220,7 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
-
-			/* @var EntityContent $newContent */
+			/** @var EntityContent $newContent */
 			$newContent = $article->getContent();
 
 			// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
@@ -276,7 +272,7 @@ final class RepoHooks {
 			return true;
 		}
 
-		/* @var EntityContent $content */
+		/** @var EntityContent $content */
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.
@@ -311,16 +307,14 @@ final class RepoHooks {
 			return true;
 		}
 
-		$revId = $title->getLatestRevID();
-		$revision = Revision::newFromId( $revId );
+		$revisionId = $title->getLatestRevID();
+		$revision = Revision::newFromId( $revisionId );
 		$content = $revision ? $revision->getContent() : null;
 
-		if ( !$content instanceof EntityContent ) {
+		if ( !( $content instanceof EntityContent ) ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
-
-		/* @var EntityContent $content */
 
 		//XXX: EntityContent::save() also does this. Why are we doing this twice?
 		WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage()->addEntityPage(
@@ -343,31 +337,30 @@ final class RepoHooks {
 	 *
 	 * @todo: find a better way to do this!
 	 *
-	 * @since ?
-	 *
-	 * @param $rc RecentChange
+	 * @param $recentChange RecentChange
 	 * @return bool
 	 */
-	public static function onRecentChangeSave( RecentChange $rc ) {
-		if ( $rc->getAttribute( 'rc_log_type' ) === null ) {
+	public static function onRecentChangeSave( RecentChange $recentChange ) {
+		if ( $recentChange->getAttribute( 'rc_log_type' ) === null ) {
 			$changesTable = ChangesTable::singleton();
 
 			$slave = $changesTable->getReadDb();
 			$changesTable->setReadDb( DB_MASTER );
 
-			/* @var EntityChange $change */
+			/** @var EntityChange $change */
 			$change = $changesTable->selectRow(
 				null,
-				array( 'revision_id' => $rc->getAttribute( 'rc_this_oldid' ) )
+				array( 'revision_id' => $recentChange->getAttribute( 'rc_this_oldid' ) )
 			);
 
 			$changesTable->setReadDb( $slave );
 
 			if ( $change ) {
-				$change->setMetadataFromRC( $rc );
+				$change->setMetadataFromRC( $recentChange );
 				$change->save();
 			}
 		}
+
 		return true;
 	}
 
@@ -463,25 +456,25 @@ final class RepoHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param SkinTemplate $sktemplate
+	 * @param SkinTemplate $skinTemplate
 	 * @param array $links
 	 *
 	 * @return bool
 	 */
-	public static function onPageTabs( SkinTemplate &$sktemplate, array &$links ) {
+	public static function onPageTabs( SkinTemplate &$skinTemplate, array &$links ) {
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		$title = $sktemplate->getTitle();
-		$request = $sktemplate->getRequest();
+		$title = $skinTemplate->getTitle();
+		$request = $skinTemplate->getRequest();
 
 		if ( $entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
 			unset( $links['views']['edit'] );
 			unset( $links['views']['viewsource'] );
 
-			if ( $title->quickUserCan( 'edit', $sktemplate->getUser() ) ) {
-				$old = !$sktemplate->isRevisionCurrent()
+			if ( $title->quickUserCan( 'edit', $skinTemplate->getUser() ) ) {
+				$old = !$skinTemplate->isRevisionCurrent()
 					&& !$request->getCheck( 'diff' );
 
 				$restore = $request->getCheck( 'restore' );
@@ -489,19 +482,19 @@ final class RepoHooks {
 				if ( $old || $restore ) {
 					// insert restore tab into views array, at the second position
 
-					$revid = $restore ? $request->getText( 'restore' ) : $sktemplate->getRevisionId();
+					$revid = $restore ? $request->getText( 'restore' ) : $skinTemplate->getRevisionId();
 
-					$head = array_slice( $links['views'], 0, 1);
+					$head = array_slice( $links['views'], 0, 1 );
 					$tail = array_slice( $links['views'], 1 );
 					$neck['restore'] = array(
 						'class' => $restore ? 'selected' : false,
-						'text' => $sktemplate->getLanguage()->ucfirst(
-								wfMessage( 'wikibase-restoreold' )->text()
-							),
+						'text' => $skinTemplate->getLanguage()->ucfirst(
+							wfMessage( 'wikibase-restoreold' )->text()
+						),
 						'href' => $title->getLocalURL( array(
-								'action' => 'edit',
-								'restore' => $revid )
-							),
+							'action' => 'edit',
+							'restore' => $revid
+						) ),
 					);
 
 					$links['views'] = array_merge( $head, $neck, $tail );
@@ -528,7 +521,9 @@ final class RepoHooks {
 
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
 
-		$reportMessage( 'Starting rebuild of the Wikibase repository ' . get_class( $store ) . ' store...' );
+		$reportMessage(
+			'Starting rebuild of the Wikibase repository ' . get_class( $store ) . ' store...'
+		);
 
 		$store->rebuild();
 
@@ -628,11 +623,10 @@ final class RepoHooks {
 			// We only add the classes, if there is an actual item and not just an empty Page in the right namespace.
 			// XXX: Let's hope the page isn't re-loaded from the database.
 			$entityPage = new WikiPage( $out->getTitle() );
+			/** @var EntityContent $entityContent */
 			$entityContent = $entityPage->getContent();
 
-			/* @var EntityContent $entityContent */
-
-			if( $entityContent !== null && !$entityContent->isRedirect() ) {
+			if ( $entityContent !== null && !$entityContent->isRedirect() ) {
 				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
 				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getEntity()->getType() );
 
@@ -670,6 +664,7 @@ final class RepoHooks {
 	 * @return bool true
 	 */
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query, &$options, &$ret ) {
+		global $wgTitle;
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -690,11 +685,9 @@ final class RepoHooks {
 			return true;
 		}
 
-		global $wgTitle;
-
 		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
 		// just check whether the page is a special page and if not, disable the behavior.
-		if( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
+		if ( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
 			//       users language so they are cache independent.
@@ -730,7 +723,7 @@ final class RepoHooks {
 			return true;
 		}
 
-		/* @var EntityContent $content */
+		/** @var EntityContent $content */
 		$entity = $content->getEntity();
 		if ( is_null( $entity ) ) {
 			// Failed, can't continue. This could happen because there is an illegal structure that could
@@ -821,9 +814,7 @@ final class RepoHooks {
 			$namespace = $pageObj->getTitle()->getNamespace();
 
 			foreach ( $entityContentFactory->getEntityContentModels() as $model ) {
-				/**
-				 * @var EntityHandler $handler
-				 */
+				/** @var EntityHandler $handler */
 				$handler = ContentHandler::getForModelID( $model );
 
 				if ( $handler->getEntityNamespace() == $namespace ) {
@@ -885,7 +876,7 @@ final class RepoHooks {
 			$lang = $searchPage->getLanguage();
 			$page = WikiPage::factory( $result->getTitle() );
 
-			/* @var EntityContent $content */
+			/** @var EntityContent $content */
 			$content = $page->getContent();
 
 			if ( $content ) {
@@ -944,16 +935,9 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
-		if ( !NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
-			return true;
-		}
-
-		// Remove create and move protection for Wikibase NSs
-		if ( in_array( 'create', $types ) ) {
-			unset( $types[ array_search( 'create', $types ) ] );
-		}
-		if ( in_array( 'move', $types ) ) {
-			unset( $types[ array_search( 'move', $types ) ] );
+		if ( NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
+			// Remove create and move protection for Wikibase namespaces
+			$types = array_diff( $types, array( 'create', 'move' ) );
 		}
 
 		return true;
@@ -969,14 +953,13 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onAbuseFilterContentToString( Content $content, &$text ) {
-		if ( !( $content instanceof EntityContent ) ) {
-			return true;
+		if ( $content instanceof EntityContent ) {
+			$text = $content->getTextForFilters();
+
+			return false;
 		}
 
-		/* @var EntityContent $content */
-		$text = $content->getTextForFilters();
-
-		return false;
+		return true;
 	}
 
 	/**
@@ -992,7 +975,7 @@ final class RepoHooks {
 	 * @param string $pre the string before the autocomment
 	 * @param string $auto the autocomment unformatted
 	 * @param string $post the string after the autocomment
-	 * @param Title $title use for further information
+	 * @param Title|null $title use for further information
 	 * @param bool $local shall links be generated locally or globally
 	 *
 	 * @return bool
@@ -1003,7 +986,9 @@ final class RepoHooks {
 		list( $contentModel, $prefix ) = $data;
 
 		// If it is possible to avoid loading the whole page then the code will be lighter on the server.
-		$title = $title === null ? $wgTitle : $title;
+		if ( $title === null ) {
+			$title = $wgTitle;
+		}
 
 		if ( $title->getContentModel() !== $contentModel ) {
 			return true;
@@ -1102,16 +1087,14 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
-		if ( !NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
-			return true;
+		if ( NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+			$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+			$hookHandler = new OutputPageJsConfigHookHandler( $settings );
+
+			$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+
+			$hookHandler->handle( $out, $isExperimental );
 		}
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$hookHandler = new OutputPageJsConfigHookHandler( $settings );
-
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-
-		$hookHandler->handle( $out, $isExperimental );
 
 		return true;
 	}
@@ -1129,25 +1112,23 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onMakeGlobalVariablesScript( $vars, $out ) {
-		if ( !NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
-			return true;
+		if ( NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$languageCode = $out->getContext()->getLanguage()->getCode();
+
+			$fallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
+			$fallbackChain = $fallbackChainFactory->newFromContextForPageView( $out->getContext() );
+
+			$languageCodes = Utils::getLanguageCodes() + array( $languageCode => $fallbackChain );
+
+			$hookHandler = new MakeGlobalVariablesScriptHandler(
+				$wikibaseRepo->getEntityContentFactory(),
+				$wikibaseRepo->getParserOutputJsConfigBuilder( $languageCode ),
+				$languageCodes
+			);
+
+			$hookHandler->handle( $out );
 		}
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$langCode = $out->getContext()->getLanguage()->getCode();
-
-		$fallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$fallbackChain = $fallbackChainFactory->newFromContextForPageView( $out->getContext() );
-
-		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
-
-		$hookHandler = new MakeGlobalVariablesScriptHandler(
-			$wikibaseRepo->getEntityContentFactory(),
-			$wikibaseRepo->getParserOutputJsConfigBuilder( $langCode ),
-			$langCodes
-		);
-
-		$hookHandler->handle( $out );
 
 		return true;
 	}
@@ -1317,4 +1298,5 @@ final class RepoHooks {
 
 		return true;
 	}
+
 }
