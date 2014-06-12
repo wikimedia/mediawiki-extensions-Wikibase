@@ -64,7 +64,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
 		//       so we should also use the EntityLookup from WikibaseRepo.
-		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup( 'uncached' );
 
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
 		$builder->setBatchSize( 3 );
