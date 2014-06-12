@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_19c3dd3e",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-12T10:07:39Z",
+      "side": 1,
+      "message": "Ouch!",
+      "revId": "2d0ac55a55d9a66c679eae17324feb13cbae8196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
