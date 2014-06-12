@@ -32,8 +32,8 @@ class ExternalChangeFactory {
 	 *
 	 * @param RecentChange $recentChange
 	 *
-	 * @return ExternalChange
 	 * @throws UnexpectedValueException
+	 * @return ExternalChange
 	 */
 	public function newFromRecentChange( RecentChange $recentChange ) {
 		$changeParams = $this->extractChangeData( $recentChange );
@@ -69,8 +69,8 @@ class ExternalChangeFactory {
 	/**
 	 * @param RecentChange $recentChange
 	 *
-	 * @return array
 	 * @throws UnexpectedValueException
+	 * @return array
 	 */
 	private function extractChangeData( RecentChange $recentChange ) {
 		$params = unserialize( $recentChange->getAttribute( 'rc_params' ) );
@@ -90,17 +90,16 @@ class ExternalChangeFactory {
 	 * @param array $changeParams
 	 *
 	 * @throws UnexpectedValueException
-	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function validateChangeData( $changeParams ) {
-		if ( ! is_array( $changeParams ) ) {
+		if ( !is_array( $changeParams ) ) {
 			throw new UnexpectedValueException( 'Invalid Wikibase change' );
 		}
 
 		$keys = array( 'type', 'page_id', 'rev_id', 'parent_id', 'object_id' );
 
-		foreach( $keys as $key ) {
+		foreach ( $keys as $key ) {
 			if ( !array_key_exists( $key, $changeParams ) ) {
 				throw new UnexpectedValueException( "$key key missing in change data" );
 			}
@@ -110,24 +109,19 @@ class ExternalChangeFactory {
 	}
 
 	/**
+	 * @see EntityChange::getAction
+	 *
 	 * @param string $type
 	 *
-	 * @return string
 	 * @throws UnexpectedValueException
+	 * @return string
 	 */
 	private function extractChangeType( $type ) {
 		if ( !is_string( $type ) ) {
 			throw new UnexpectedValueException( '$type must be a string.' );
 		}
 
-		$validTypes = array( 'remove', 'restore', 'add', 'update' );
-
-		$parts = explode( '~', $type );
-		$changeType = $parts[1] ?: null;
-
-		if ( !in_array( $changeType, $validTypes ) ) {
-			throw new UnexpectedValueException( 'invalid change type' );
-		}
+		list( , $changeType ) = explode( '~', $type, 2 );
 
 		return $changeType;
 	}
@@ -135,8 +129,8 @@ class ExternalChangeFactory {
 	/**
 	 * @param string $prefixedId
 	 *
-	 * @return ItemId
 	 * @throws UnexpectedValueException
+	 * @return ItemId
 	 */
 	private function extractItemId( $prefixedId ) {
 		try {
