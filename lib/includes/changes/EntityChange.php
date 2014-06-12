@@ -55,8 +55,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @deprecated: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
 	 *
 	 * @return Entity|null
@@ -71,8 +69,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @note: as of version 0.4, no code calls setEntity(), so getEntity() will always return null.
 	 * This is kept in the expectation that we may want to construct EntityChange objects
 	 * from an atom feed or the like, where full entity data would be included and useful.
@@ -86,8 +82,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @return string
 	 */
 	public function getType() {
@@ -95,8 +89,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @return string
 	 */
 	public function getEntityType() {
@@ -105,8 +97,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @return EntityId
 	 */
 	public function getEntityId() {
@@ -120,24 +110,18 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 *
-	 *
-	 * @since 0.3
-	 *
 	 * @return string
 	 */
 	public function getAction() {
-		list(, $action ) = explode( '~', $this->getType(), 2 );
+		list( , $action ) = explode( '~', $this->getType(), 2 );
 
 		return $action;
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param string $cache set to 'cache' to cache the unserialized diff.
 	 *
-	 * @return array|bool
+	 * @return array|bool false if no meta data could be found in the info array
 	 */
 	public function getMetadata( $cache = 'no' ) {
 		$info = $this->getInfo( $cache );
@@ -150,8 +134,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param array $metadata
 	 *
 	 * @return bool
@@ -186,8 +168,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param string
 	 *
 	 * @return string
@@ -203,8 +183,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @return string
 	 */
 	public function getComment() {
@@ -215,15 +193,13 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.1
+	 * @see ChangeRow::postConstruct
 	 */
 	protected function postConstruct() {
-
+		// FIXME: This misses an explanation why it's empty.
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param RecentChange $rc
 	 *
 	 * @todo rename to setRecentChangeInfo
@@ -240,8 +216,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.3
-	 *
 	 * @param User $user
 	 *
 	 * @todo rename to setUserInfo, set fields too.
@@ -259,7 +233,7 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.5
 	 *
-	 * @param \Revision $revision
+	 * @param Revision $revision
 	 */
 	public function setRevisionInfo( Revision $revision ) {
 		/* @var EntityContent $content */
@@ -305,8 +279,8 @@ class EntityChange extends DiffChange {
 	 * @return string
 	 */
 	public function __toString() {
-		$s = get_class( $this );
-		$s .= ": ";
+		$string = get_class( $this );
+		$string .= ': ';
 
 		$fields = $this->getFields();
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
@@ -320,16 +294,16 @@ class EntityChange extends DiffChange {
 			$fields = array_merge( $fields, $meta );
 		}
 
-		foreach ( $fields as $k => $v ) {
-			if ( is_array( $v ) || is_object( $v ) ) {
-				unset( $fields[$k] );
+		foreach ( $fields as $key => $value ) {
+			if ( is_array( $value ) || is_object( $value ) ) {
+				unset( $fields[$key] );
 			}
 		}
 
 		ksort( $fields );
 
-		$s .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
-		return $s;
+		$string .= preg_replace( '/\s+/s', ' ', var_export( $fields, true ) );
+		return $string;
 	}
 
 	/**
@@ -346,10 +320,10 @@ class EntityChange extends DiffChange {
 		$data = parent::arrayalizeObjects( $data );
 
 		if ( $data instanceof Claim ) {
-			$a = $data->toArray();
-			$a['_claimclass_'] = get_class( $data );
+			$array = $data->toArray();
+			$array['_claimclass_'] = get_class( $data );
 
-			return $a;
+			return $array;
 		}
 
 		return $data;
@@ -371,8 +345,10 @@ class EntityChange extends DiffChange {
 		if ( is_array( $data ) && isset( $data['_claimclass_'] ) ) {
 			$class = $data['_claimclass_'];
 
-			if ( $class === 'Wikibase\Claim' || $class === 'Wikibase\DataModel\Claim\Claim'
-				|| is_subclass_of( $class, 'Wikibase\Claim' ) ) {
+			if ( $class === 'Wikibase\Claim'
+				|| $class === 'Wikibase\DataModel\Claim\Claim'
+				|| is_subclass_of( $class, 'Wikibase\DataModel\Claim\Claim' )
+			) {
 				unset( $data['_claimclass_'] );
 
 				$claim = call_user_func( array( $class, 'newFromArray' ), $data );
