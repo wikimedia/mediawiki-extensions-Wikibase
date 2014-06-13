@@ -3,6 +3,7 @@
 namespace Wikibase\Hook;
 
 use OutputPage;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -88,24 +89,27 @@ class MakeGlobalVariablesScriptHandler {
 	private function getParserConfigVars( $revisionId ) {
 		$entityContent = $this->entityContentFactory->getFromRevision( $revisionId );
 
-		if ( $entityContent === null || ! $entityContent instanceof \Wikibase\EntityContent ) {
+		if ( $entityContent === null || ! $entityContent instanceof EntityContent ) {
 			// entity or revision deleted, or non-entity content in entity namespace
 			wfDebugLog( __CLASS__, "No entity content found for revision $revisionId" );
 			return array();
 		}
 
-		return $this->buildParserConfigVars( $entityContent );
+		if ( $entityContent->isRedirect() ) {
+			return array();
+		} else {
+			$entity = $entityContent->getEntity();
+			return $this->buildParserConfigVars( $entity );
+		}
 	}
 
 	/**
-	 * @param EntityContent $entityContent
+	 * @param Entity $entity
 	 *
 	 * @return array
 	 */
-	private function buildParserConfigVars( EntityContent $entityContent ) {
+	private function buildParserConfigVars( Entity $entity ) {
 		$options = $this->makeSerializationOptions();
-
-		$entity = $entityContent->getEntity();
 
 		$parserConfigVars = $this->parserOutputConfigBuilder->build(
 			$entity,

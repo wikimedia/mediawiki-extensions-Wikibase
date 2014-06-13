@@ -344,6 +344,10 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return String
 	 */
 	public function getLabelText( EntityContent $content ) {
+		if ( $content->isRedirect() ) {
+			//TODO: use a message like <autoredircomment> to represent the redirect.
+			return $this->getPageTitle();
+		}
 
 		$languageFallbackChain = $this->getLanguageFallbackChain();
 		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
