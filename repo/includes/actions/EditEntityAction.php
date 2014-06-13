@@ -14,10 +14,10 @@ use Status;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use WebRequest;
-use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EscapingValueFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -344,9 +344,13 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return String
 	 */
 	public function getLabelText( EntityContent $content ) {
+		$labelData = null;
 
-		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		// TODO: use a message like <autoredircomment> to represent the redirect.
+		if ( !$content->isRedirect() ) {
+			$languageFallbackChain = $this->getLanguageFallbackChain();
+			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		}
 
 		if ( $labelData ) {
 			return $labelData['value'];

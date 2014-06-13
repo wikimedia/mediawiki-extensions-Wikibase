@@ -40,6 +40,10 @@ class ViewEntityActionTest extends ActionTestCase {
 			array(
 				'Berlin',
 				'/Berlin/'
+			),
+			array(
+				'Berlin2',
+				'/#REDIRECT/'
 			)
 		);
 	}

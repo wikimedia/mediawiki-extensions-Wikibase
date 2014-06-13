@@ -49,8 +49,6 @@ class HistoryEntityAction extends \HistoryAction {
 	/**
 	 * Returns the content of the page being viewed.
 	 *
-	 * @since 0.3
-	 *
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {
@@ -60,9 +58,7 @@ class HistoryEntityAction extends \HistoryAction {
 	/**
 	 * Return a string for use as title.
 	 *
-	 * @since 0.3
-	 *
-	 * @return \Article
+	 * @return string
 	 */
 	protected function getPageTitle() {
 		$content = $this->getContent();
@@ -72,10 +68,15 @@ class HistoryEntityAction extends \HistoryAction {
 			return parent::getPageTitle();
 		}
 
+		if ( $content->isRedirect() ) {
+			//TODO: use a message like <autoredircomment> to represent the redirect.
+			return parent::getPageTitle();
+		}
+
 		$entity = $content->getEntity();
 
 		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getLabels() );
 
 		if ( $labelData ) {
 			$labelText = $labelData['value'];
@@ -97,4 +98,5 @@ class HistoryEntityAction extends \HistoryAction {
 				->rawParams( $idSerialization )->text();
 		}
 	}
+
 }
