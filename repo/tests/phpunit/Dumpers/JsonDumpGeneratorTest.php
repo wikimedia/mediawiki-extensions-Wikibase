@@ -254,6 +254,11 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$dumper->generateDump( $pager );
 			$json = ob_get_clean();
 
+			if ( $shardingFactor ) {
+				// If a sharding factor is present, we don't get a valid json list but only snippets
+				$json = "[$json]";
+			}
+
 			// check that the resulting json contains all the ids we asked for.
 			$data = json_decode( $json, true );
 			$this->assertTrue( is_array( $data ), 'decode failed: ' . $json );
