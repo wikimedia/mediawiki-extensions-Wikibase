@@ -66,13 +66,13 @@
 			}
 
 			if( this._$customItem ) {
-				this.rotator.options.values.splice(this._customValue, 1);
+				this.rotator.options.values.splice(this._customValueIndex, 1);
 				this._$customItem.remove();
 				this._$customItem = null;
-				this._customValue = null;
+				this._customValueIndex = null;
 			}
 			if( value.custom ) {
-				this._customValue = this.rotator.options.values.push( value ) - 1;
+				this._customValueIndex = this.rotator.options.values.push( value ) - 1;
 				this._$customItem = this.rotator._addMenuItem( value );
 				value = value.value;
 			}

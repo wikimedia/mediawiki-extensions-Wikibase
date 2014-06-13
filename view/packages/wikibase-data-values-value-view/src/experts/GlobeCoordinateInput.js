@@ -125,7 +125,7 @@
 	 * @return {number}
 	 */
 	function roundPrecision( precision ) {
-		return Number( precision.toPrecision(4) );
+		return parseFloat( precision.toPrecision(4) );
 	}
 
 	/**
