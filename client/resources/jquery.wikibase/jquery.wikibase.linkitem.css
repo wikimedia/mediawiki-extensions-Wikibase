@@ -22,3 +22,8 @@
 .wbclient-linkItem-input {
 	margin: 20px;
 }
+
+/* Fix for the ooMenu based suggester, the dialog is at about 1002 */
+.ui-suggester-list.ui-ooMenu {
+	z-index: 2000;
+}
