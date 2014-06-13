@@ -240,7 +240,7 @@ $.widget( 'wikibase.linkitem', {
 				'class': 'wbclient-linkItem-input'
 			} )
 			.siteselector( {
-				resultSet: this._getLinkableSites()
+				source: this._getLinkableSites()
 			} )
 			.on(
 				'siteselectoropen siteselectorclose siteselectorautocomplete blur',
@@ -257,7 +257,7 @@ $.widget( 'wikibase.linkitem', {
 	 */
 	_getLinkableSites: function() {
 		var sites,
-			linkableSites = {},
+			linkableSites = [],
 			site,
 			currentSiteId;
 
@@ -266,7 +266,7 @@ $.widget( 'wikibase.linkitem', {
 
 		for( site in sites ) {
 			if ( sites[ site ].getId() !== currentSiteId ) {
-				linkableSites[ site ] = sites[ site ];
+				linkableSites.push( sites[ site ] );
 			}
 		}
 
