@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_4dc876aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-13T12:31:13Z",
+      "side": 1,
+      "message": "the the",
+      "revId": "e7ac78856d5bdb6c1787cd18658cac7cab164b4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_2dc53291",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 32
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-13T12:31:13Z",
+      "side": 1,
+      "message": "Why not implement a toArray() in EntityRedirect similar to Entity::toArray? Wrong place?",
+      "revId": "e7ac78856d5bdb6c1787cd18658cac7cab164b4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_cdbea6d1",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 32
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-13T12:31:13Z",
+      "side": 1,
+      "message": "It\u0027s not an EntityId!",
+      "revId": "e7ac78856d5bdb6c1787cd18658cac7cab164b4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_edf16ac9",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 32
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-13T12:31:13Z",
+      "side": 1,
+      "message": "This is wrong, because of the wrong type hint above.",
+      "revId": "e7ac78856d5bdb6c1787cd18658cac7cab164b4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
