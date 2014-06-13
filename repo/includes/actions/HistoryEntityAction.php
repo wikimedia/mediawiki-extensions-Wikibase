@@ -62,7 +62,7 @@ class HistoryEntityAction extends \HistoryAction {
 	 *
 	 * @since 0.3
 	 *
-	 * @return \Article
+	 * @return string
 	 */
 	protected function getPageTitle() {
 		$content = $this->getContent();
@@ -72,10 +72,15 @@ class HistoryEntityAction extends \HistoryAction {
 			return parent::getPageTitle();
 		}
 
+		if ( $content->isRedirect() ) {
+			//TODO: use a message like <autoredircomment> to represent the redirect.
+			return parent::getPageTitle();
+		}
+
 		$entity = $content->getEntity();
 
 		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getLabels() );
 
 		if ( $labelData ) {
 			$labelText = $labelData['value'];

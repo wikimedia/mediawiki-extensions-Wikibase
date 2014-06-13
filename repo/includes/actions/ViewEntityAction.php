@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Article;
+use InvalidArgumentException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -173,7 +174,7 @@ abstract class ViewEntityAction extends \ViewAction {
 		// NOTE: page-wide property, independent of user permissions
 		$out->addJsConfigVars( 'wbIsEditView', $editable );
 
-		if ( $editable ) {
+		if ( $editable && !$content->isRedirect() ) {
 			$permissionChecker = $this->getPermissionChecker();
 			$permissionStatus = $permissionChecker->getPermissionStatusForEntity(
 				$this->getUser(),
@@ -197,12 +198,17 @@ abstract class ViewEntityAction extends \ViewAction {
 
 		// Figure out which label to use for title.
 		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+
+		if ( $content->isRedirect() ) {
+			$labelData = array();
+		} else {
+			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		}
 
 		if ( $labelData ) {
 			$labelText = $labelData['value'];
 		} else {
-			$labelText = $content->getEntity()->getId()->getSerialization();
+			$labelText = $content->getEntityId()->getSerialization();
 		}
 
 		// Create and set the title.
