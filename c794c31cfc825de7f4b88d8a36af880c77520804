@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_2debf1a1",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-13T13:38:38Z",
+      "side": 1,
+      "message": "Going to do that in a follow-up.",
+      "parentUuid": "ee391fd1_8e5f8ae8",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_6e5466ca",
         "filename": "repo/includes/view/SiteLinksView.php",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2014-06-11T12:24:19Z",
       "side": 1,
       "message": "if you used the id as the array key above, you can just use ksort.",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_cd390540",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-13T13:38:38Z",
+      "side": 1,
+      "message": "That\u0027s why I moved this code here, for such improvements to become obvious.",
+      "parentUuid": "ee391fd1_6e5466ca",
       "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_6d40d9a8",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-13T13:38:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_ce6472b1",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_ee6736b3",
         "filename": "repo/includes/view/SiteLinksView.php",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2014-06-11T12:24:19Z",
       "side": 1,
       "message": "declare @param SimpleSiteLink[] $siteLinksForTable, then you don\u0027t need the inline type hint thingy.\n\nAlso, isn\u0027t SimpleSiteLink a deprecated alias for SiteLink now?",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_4d24f507",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-13T13:38:38Z",
+      "side": 1,
+      "message": "$siteLink is not even a SiteLink, it\u0027s the beginning of a SiteLinkViewData thing with siteLink and site members.",
+      "parentUuid": "ee391fd1_ee6736b3",
       "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_cd87c5db",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-13T13:38:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_ce4d9241",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_ae012ebb",
         "filename": "repo/includes/view/SiteLinksView.php",
         "patchSetId": 2
@@ -115,6 +205,24 @@
       "writtenOn": "2014-06-11T12:24:19Z",
       "side": 1,
       "message": "still too big... also, please at least document the parameter types for private methods. phpstorm will do that for you if you just type /**\u003center\u003e.",
+      "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ad63613a",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-13T13:38:38Z",
+      "side": 1,
+      "message": "Split up a bit, added method docs.",
+      "parentUuid": "ee391fd1_ae012ebb",
       "revId": "c794c31cfc825de7f4b88d8a36af880c77520804",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
