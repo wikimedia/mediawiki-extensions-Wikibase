@@ -113,6 +113,7 @@ $magicWords['ml'] = array(
 /** Dutch (Nederlands) */
 $magicWords['nl'] = array(
 	'noexternallanglinks' => array( 0, 'geenexternetaalkoppelingen', 'geenexternetaalverwijzingen' ),
+	'property' => array( 0, 'eigenschap' ),
 );
 
 /** Norwegian Nynorsk (norsk nynorsk) */
