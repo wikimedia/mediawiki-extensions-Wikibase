@@ -64,6 +64,7 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'output', "Output file (default is stdout). Will be overwritten.", false, true );
 		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
+		$this->addOption( 'snippet', "Don't output valid json lists, but only comma separated entities", false, false );
 	}
 
 	public function initServices() {
@@ -148,6 +149,7 @@ class DumpJson extends Maintenance {
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
 		$batchSize = (int)$this->getOption( 'batch-size', 100 );
+		$snippets = (bool)$this->getOption( 'snippet', false );
 
 		//TODO: Allow injection of an OutputStream for logging
 		$this->openLogFile( $this->getOption( 'log', 'php://stderr' ) );
@@ -190,6 +192,7 @@ class DumpJson extends Maintenance {
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 		$dumper->setEntityTypeFilter( $entityType );
 		$dumper->setBatchSize( $batchSize );
+		$dumper->setUseSnippets( $snippets );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
 		$dumper->generateDump( $idStream );

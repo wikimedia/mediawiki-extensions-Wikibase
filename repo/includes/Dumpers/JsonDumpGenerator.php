@@ -55,12 +55,17 @@ class JsonDumpGenerator {
 	 */
 	protected $shardingFactor = 1;
 
-	/*
+	/**
 	 * @var int Number of the requested shard
 	 */
 	protected $shard = 0;
 
-	/*
+	/**
+	 * @var bool
+	 */
+	private $useSnippets = false;
+
+	/**
 	 * @var string|null
 	 */
 	protected $entityType = null;
@@ -102,7 +107,7 @@ class JsonDumpGenerator {
 	 *
 	 * @param int $batchSize
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setBatchSize( $batchSize ) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
@@ -110,6 +115,13 @@ class JsonDumpGenerator {
 		}
 
 		$this->batchSize = $batchSize;
+	}
+
+	/**
+	 * @param bool Whether to output valid json (false) or only comma separated entities
+	 */
+	public function setUseSnippets( $useSnippets ) {
+		$this->useSnippets = (bool)$useSnippets;
 	}
 
 	/**
@@ -194,8 +206,9 @@ class JsonDumpGenerator {
 	 */
 	public function generateDump( EntityIdPager $idPager ) {
 
-		$json = "[\n"; //TODO: make optional
-		$this->writeToDump( $json );
+		if ( !$this->useSnippets ) {
+			$this->writeToDump( "[\n" );
+		}
 
 		$dumpCount = 0;
 
@@ -206,8 +219,10 @@ class JsonDumpGenerator {
 			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
 		};
 
-		$json = "\n]\n"; //TODO: make optional
-		$this->writeToDump( $json );
+		if ( !$this->useSnippets ) {
+			$this->writeToDump( "\n]" );
+		}
+		$this->writeToDump( "\n" );
 	}
 
 	/**
