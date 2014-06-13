@@ -410,4 +410,45 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		ob_end_clean();
 	}
 
+	/**
+	 * @dataProvider useSnippetsProvider
+	 */
+	public function testSnippets(
+		array $ids,
+		$shardingFactor,
+		$shard
+	) {
+		$dumper = $this->newDumpGenerator( $ids );
+		$dumper->setUseSnippets( true );
+
+		$pager = $this->makeIdPager( $ids );
+		$dumper->setShardingFilter( $shardingFactor, $shard );
+
+		// Generate the dump and grab the output
+		ob_start();
+		$dumper->generateDump( $pager );
+		$json = trim( ob_get_clean() );
+
+		$this->assertStringStartsWith( '{', $json, 'Snippet starts with {' );
+		$this->assertStringEndsWith( '}', $json, 'Snippet ends with }' );
+	}
+
+	public static function useSnippetsProvider() {
+		$ids = array();
+
+		for ( $i = 1; $i < 5; $i++ ) {
+			$ids[] = new ItemId( "Q$i" );
+		}
+
+		return array(
+			// Only one shard
+			array( $ids, 1, 0, ),
+
+			// Three shards
+			array( $ids, 3, 0, ),
+			array( $ids, 3, 1, ),
+			array( $ids, 3, 2, ),
+		);
+	}
+
 }
