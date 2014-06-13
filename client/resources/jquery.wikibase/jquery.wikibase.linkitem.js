@@ -116,12 +116,13 @@ $.widget( 'wikibase.linkitem', {
 			self._createDialog();
 			$( '#wbclient-linkItem-site' ).focus();
 		} )
-		.fail( function() {
+		.fail( function( errorCode, errorInfo ) {
 			$dialogSpinner.remove();
 			self.element.show();
 
 			self.element.wbtooltip( {
-				content: mw.msg( 'wikibase-error-unexpected' ),
+				content: mw.msg( 'wikibase-error-unexpected',
+					( errorInfo.error && errorInfo.error.info ) || errorInfo.exception ),
 				gravity: 'w'
 			} );
 
