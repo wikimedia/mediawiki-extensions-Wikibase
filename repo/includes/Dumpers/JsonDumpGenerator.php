@@ -55,12 +55,17 @@ class JsonDumpGenerator {
 	 */
 	protected $shardingFactor = 1;
 
-	/*
+	/**
 	 * @var int Number of the requested shard
 	 */
 	protected $shard = 0;
 
-	/*
+	/**
+	 * @var string Sharding format to use
+	 */
+	private $shardFormat = 'arrays';
+
+	/**
 	 * @var string|null
 	 */
 	protected $entityType = null;
@@ -102,7 +107,7 @@ class JsonDumpGenerator {
 	 *
 	 * @param int $batchSize
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setBatchSize( $batchSize ) {
 		if ( !is_int( $batchSize ) || $batchSize < 1 ) {
@@ -110,6 +115,19 @@ class JsonDumpGenerator {
 		}
 
 		$this->batchSize = $batchSize;
+	}
+
+	/**
+	 * @param string $format The shard format to use (arrays, substrings or fragments)
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setShardFormat( $format ) {
+		if ( !in_array( $format, array( 'arrays', 'substrings', 'fragments' ) ) ) {
+			throw new InvalidArgumentException( '$format must be either "arrays", "substrings" or "fragments".' );
+		}
+
+		$this->shardFormat = $format;
 	}
 
 	/**
@@ -194,8 +212,11 @@ class JsonDumpGenerator {
 	 */
 	public function generateDump( EntityIdPager $idPager ) {
 
-		$json = "[\n"; //TODO: make optional
-		$this->writeToDump( $json );
+		if ( $this->shardFormat === 'arrays' ||
+			( $this->shardFormat === 'substrings' && $this->shard === 0 )
+		) {
+			$this->writeToDump( "[\n" );
+		}
 
 		$dumpCount = 0;
 
@@ -206,8 +227,15 @@ class JsonDumpGenerator {
 			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
 		};
 
-		$json = "\n]\n"; //TODO: make optional
-		$this->writeToDump( $json );
+		if ( $this->shardFormat === 'arrays' ||
+			( $this->shardFormat === 'substrings' && ( $this->shard + 1 ) === $this->shardingFactor )
+		) {
+			$this->writeToDump( "\n]\n" );
+		} elseif ( $this->shardFormat === 'substrings' && ( $this->shard + 1 ) < $this->shardingFactor ) {
+			$this->writeToDump( ",\n" );
+		} else {
+			$this->writeToDump( "\n" );
+		}
 	}
 
 	/**

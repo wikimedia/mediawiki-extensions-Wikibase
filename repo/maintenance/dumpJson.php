@@ -63,6 +63,7 @@ class DumpJson extends Maintenance {
 		$this->addOption( 'batch-size', "The number of entities per processing batch", false, true );
 		$this->addOption( 'output', "Output file (default is stdout). Will be overwritten.", false, true );
 		$this->addOption( 'log', "Log file (default is stderr). Will be appended.", false, true );
+		$this->addOption( 'shard-format', "The shardformat to use (arrays, substrings or fragments), default is arrays", false, true );
 		$this->addOption( 'quiet', "Disable progress reporting", false, false );
 	}
 
@@ -148,6 +149,7 @@ class DumpJson extends Maintenance {
 		$shardingFactor = (int)$this->getOption( 'sharding-factor', 1 );
 		$shard = (int)$this->getOption( 'shard', 0 );
 		$batchSize = (int)$this->getOption( 'batch-size', 100 );
+		$shardFormat = $this->getOption( 'shard-format', 'arrays' );
 
 		//TODO: Allow injection of an OutputStream for logging
 		$this->openLogFile( $this->getOption( 'log', 'php://stderr' ) );
@@ -190,6 +192,7 @@ class DumpJson extends Maintenance {
 		$dumper->setShardingFilter( $shardingFactor, $shard );
 		$dumper->setEntityTypeFilter( $entityType );
 		$dumper->setBatchSize( $batchSize );
+		$dumper->setShardFormat( $shardFormat );
 
 		$idStream = $this->makeIdStream( $entityType, $exceptionReporter );
 		$dumper->generateDump( $idStream );

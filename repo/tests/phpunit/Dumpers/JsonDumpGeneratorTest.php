@@ -407,4 +407,57 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		ob_end_clean();
 	}
 
+	/**
+	 * @dataProvider shardingFormatProvider
+	 */
+	public function testShardingFormat(
+		$firstChar,
+		$lastChar,
+		array $ids,
+		$shardingFactor,
+		$shard,
+		$shardFormat
+	) {
+		$dumper = $this->newDumpGenerator( $ids );
+		$dumper->setShardFormat( $shardFormat );
+
+		$pager = $this->makeIdPager( $ids );
+		$dumper->setShardingFilter( $shardingFactor, $shard );
+
+		// Generate the dump and grab the output
+		ob_start();
+		$dumper->generateDump( $pager );
+		$json = ob_get_clean();
+		$json = trim( $json, "\n " );
+
+		$this->assertEquals( $firstChar, substr( $json, 0, 1 ), 'Shard starts with ' . $firstChar );
+		$this->assertEquals( $lastChar, substr( $json, -1, 1 ), 'Shard ends with ' . $lastChar );
+	}
+
+	public static function shardingFormatProvider() {
+		$ids = array();
+
+		for ( $i = 1; $i < 50; $i++ ) {
+			$ids[] = new ItemId( "Q$i" );
+		}
+
+		return array(
+			// arrays: Always start on [ and end on ]
+			array( '[', ']', $ids, 1, 0, 'arrays' ),
+			array( '[', ']', $ids, 2, 1, 'arrays' ),
+
+			// substrings: First fragment starts on [ and last fragment ends on ].
+			// Shards in between end on a comma.
+			array( '[', ',', $ids, 3, 0, 'substrings' ),
+			array( '{', ',', $ids, 3, 1, 'substrings' ),
+			array( '{', ']', $ids, 3, 2, 'substrings' ),
+
+			array( '[', ']', $ids, 1, 0, 'substrings' ),
+
+			// fragments: Aren't enclosed by [] at all
+			array( '{', '}', $ids, 2, 0, 'fragments' ),
+			array( '{', '}', $ids, 2, 1, 'fragments' ),
+		);
+	}
+
 }
