@@ -492,9 +492,11 @@
 		 *         - {string}
 		 */
 		_getSuggestions: function( term ) {
-			return ( $.isArray( this.options.source ) )
-				? this._getSuggestionsFromArray( term, this.options.source )
-				: this.options.source( term );
+			if ( typeof this.options.source === 'function' ) {
+				return this.options.source( term );
+			}
+
+			return this._getSuggestionsFromArray( term, this.options.source );
 		},
 
 		/**

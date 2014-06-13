@@ -4,8 +4,9 @@
  */
 
 .ui-suggester-list {
-	border-color: #C9C9C9;
 	background: white;
+	border-color: #C9C9C9;
+	z-index: 2000; /* required for the client link feature, the dialog is at ~1002 */
 }
 
 .ui-suggester-list .ui-state-hover {
