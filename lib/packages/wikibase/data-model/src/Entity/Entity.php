@@ -50,9 +50,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 		return $this->id;
 	}
 
-	/**
-	 * @deprecated since 1.0
-	 */
 	public abstract function setId( $id );
 
 	/**
