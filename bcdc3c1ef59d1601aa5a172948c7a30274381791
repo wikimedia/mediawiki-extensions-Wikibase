@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_4dff55a8",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-13T12:49:52Z",
+      "side": 1,
+      "message": "I like it to be pretty like that too, but I\u0027m told not to do this, because.... reasons.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_6d19f926",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-13T12:49:52Z",
+      "side": 1,
+      "message": "Ugh, I have no idea! It disabled code defined in the parent class. May or may not be intentional? Bah, this class is a mess :(",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_6de8d9dd",
+        "filename": "lib/includes/store/EntityRevision.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-13T12:49:52Z",
+      "side": 1,
+      "message": "I don\u0027t like the \"mw\" prefix - that refers to the format, not the function of the field. Fields should be named by functionality though, let\u0027s please not start using Hungarian Notation.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_cdb8e5e4",
+        "filename": "lib/includes/store/EntityRevision.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-13T12:49:52Z",
+      "side": 1,
+      "message": "This would be the place to say that it\u0027s using MediaWiki\u0027s timestamp format.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_0da6edbe",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-13T12:49:52Z",
+      "side": 1,
+      "message": "substituting array() for $opt does not make this more readable. $opt gives an indication to the meaning of that parameter. array() is completely opaque.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_cdafc590",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-13T12:49:52Z",
+      "side": 1,
+      "message": "object[] implies a list of objects... it\u0027s not really a list, it\u0027s a tuple, so i would use array in this case. just a matter of taste, i guess.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
