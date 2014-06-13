@@ -10,7 +10,6 @@ use DatabaseUpdater;
 use DummyLinker;
 use HistoryPager;
 use Html;
-use InvalidArgumentException;
 use Language;
 use Linker;
 use LogEntryBase;
@@ -32,8 +31,8 @@ use Title;
 use User;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\TextInjector;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -730,11 +729,8 @@ final class RepoHooks {
 			return true;
 		}
 
-		/* @var EntityContent $content */
-		$entity = $content->getEntity();
-		if ( is_null( $entity ) ) {
-			// Failed, can't continue. This could happen because there is an illegal structure that could
-			// not be parsed.
+		if ( $content->isRedirect() ) {
+			// TODO: resolve redirect, show redirect info in link
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
@@ -744,6 +740,8 @@ final class RepoHooks {
 		$context = RequestContext::getMain();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
+		/** @var EntityContent $content */
+		$entity = $content->getEntity();
 		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getLabels() );
 		$descriptionData = $languageFallbackChain->extractPreferredValueOrAny( $entity->getDescriptions() );
 
@@ -888,7 +886,7 @@ final class RepoHooks {
 			/* @var EntityContent $content */
 			$content = $page->getContent();
 
-			if ( $content ) {
+			if ( $content && !$content->isRedirect() ) {
 				$entity = $content->getEntity();
 				$description = $entity->getDescription( $lang->getCode() ); // TODO: language fallback!
 
@@ -1317,4 +1315,5 @@ final class RepoHooks {
 
 		return true;
 	}
+
 }
