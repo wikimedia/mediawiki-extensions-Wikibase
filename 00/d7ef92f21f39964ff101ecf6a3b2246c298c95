@@ -1,0 +1,8 @@
+Code-Review+2: Hoo man <hoo@online.de>
+Verified+2: jenkins-bot
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 13 Jun 2014 16:02:44 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/139404
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/mw1.24-wmf8
