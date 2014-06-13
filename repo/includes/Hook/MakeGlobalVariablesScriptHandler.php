@@ -3,6 +3,7 @@
 namespace Wikibase\Hook;
 
 use OutputPage;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -94,18 +95,21 @@ class MakeGlobalVariablesScriptHandler {
 			return array();
 		}
 
-		return $this->buildParserConfigVars( $entityContent );
+		if ( $entityContent->isRedirect() ) {
+			return array();
+		} else {
+			$entity = $entityContent->getEntity();
+			return $this->buildParserConfigVars( $entity );
+		}
 	}
 
 	/**
-	 * @param EntityContent $entityContent
+	 * @param Entity $entity
 	 *
 	 * @return array
 	 */
-	private function buildParserConfigVars( EntityContent $entityContent ) {
+	private function buildParserConfigVars( Entity $entity ) {
 		$options = $this->makeSerializationOptions();
-
-		$entity = $entityContent->getEntity();
 
 		$parserConfigVars = $this->parserOutputConfigBuilder->build(
 			$entity,
