@@ -194,7 +194,9 @@ class JsonDumpGenerator {
 	 */
 	public function generateDump( EntityIdPager $idPager ) {
 
-		$json = "[\n"; //TODO: make optional
+		if ( $this->shard === 0 ) {
+			$json = "[\n";
+		}
 		$this->writeToDump( $json );
 
 		$dumpCount = 0;
@@ -206,7 +208,9 @@ class JsonDumpGenerator {
 			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
 		};
 
-		$json = "\n]\n"; //TODO: make optional
+		if ( ( $this->shard + 1 ) === $this->shardingFactor ) {
+			$json = "\n]\n";
+		}
 		$this->writeToDump( $json );
 	}
 
