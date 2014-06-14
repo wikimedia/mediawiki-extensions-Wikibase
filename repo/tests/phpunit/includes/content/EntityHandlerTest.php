@@ -243,7 +243,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 		if ( $expected ) {
 			$this->assertInstanceOf( 'Wikibase\EntityContent', $undo, $message );
-			$this->assertEquals( $expected->toArray(), $undo->getEntity()->toArray(), $message );
+			$this->assertTrue( $expected->equals( $undo->getEntity() ), $message );
 		} else {
 			$this->assertFalse( $undo, $message );
 		}
