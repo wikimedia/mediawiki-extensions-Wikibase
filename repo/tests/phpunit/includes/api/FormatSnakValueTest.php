@@ -44,6 +44,8 @@ class FormatSnakValueTest extends \ApiTestCase {
 			TimeValue::PRECISION_MONTH,
 			TimeFormatter::CALENDAR_GREGORIAN );
 
+		$wordSeparator = wfMessage( 'word-separator' )->text();
+
 		return array(
 			array( new StringValue( 'test' ),
 				null,
@@ -105,14 +107,13 @@ class FormatSnakValueTest extends \ApiTestCase {
 				null,
 				'@commons\.wikimedia\.org\/wiki\/File:Example\.jpg@' ),
 
-			// FIXME: This test uses the production environment, but it should have its own mock data
-			array( new EntityIdValue( new ItemId( 'Q200000' ) ),
+			array( new EntityIdValue( new ItemId( 'Q45345345435' ) ),
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'/^<a\b[^>]* href="[^"]*\bQ200000"[^>]*>[^<]*<\/a>.*$/' ),
+				'/^Q45345345435' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( wfMessage( 'wikibase-deletedentity-item' )->text(),  '/' ) . '\)<\/span>$/' ),
 
-			//TODO: test HTML output
+			// @TODO: Test an existing Item id
 		);
 	}
 

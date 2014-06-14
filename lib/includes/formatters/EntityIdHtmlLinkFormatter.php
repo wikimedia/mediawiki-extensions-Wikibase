@@ -63,13 +63,31 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 					$label = $itemLabel;
 				}
 			} catch ( OutOfBoundsException $ex ) {
-				$attributes['class'] = 'new';
+				return $this->getHtmlForNonExistent( $entityId );
 			}
 		}
 
 		$html = Html::element( 'a', $attributes, $label );
 
 		return $html;
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 *
+	 * @return string
+	 */
+	private function getHtmlForNonExistent( EntityId $entityId ) {
+		$attributes = array( 'class' => 'wb-entity-undefinedinfo' );
+
+		$message = wfMessage( 'parentheses',
+			wfMessage( 'wikibase-deletedentity-' . $entityId->getEntityType() )->text()
+		);
+
+		$undefinedInfo = Html::element( 'span', $attributes, $message );
+
+		$separator = wfMessage( 'word-separator' )->text();
+		return $entityId->getSerialization() . $separator . $undefinedInfo;
 	}
 
 }
