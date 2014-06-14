@@ -59,6 +59,10 @@ Other breaking changes:
 * Undeprecated `Entity::isEmpty`
 * Undeprecated `Entity::clear`
 
+## Version 0.8.1 (2014-06-06)
+
+* Fixed fatal error when calling `Item::getSiteLinkList` on an `Item` right after constructing it
+
 ## Version 0.8 (2014-06-05)
 
 #### Breaking changes
