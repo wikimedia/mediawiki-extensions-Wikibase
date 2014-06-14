@@ -5,6 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -171,11 +172,11 @@ class EntityPerPageTable implements EntityPerPage {
 
 	protected function getEntityIdsFromRows( $rows ) {
 		$entities = array();
-		$idParser = new BasicEntityIdParser();
+		$idParser = new LegacyIdInterpreter();
 
 		foreach ( $rows as $row ) {
-			$id = new EntityId( $row->entity_type, (int)$row->entity_id );
-			$entities[] = $idParser->parse( $id->getSerialization() );
+			// FIXME: this only works for items and properties
+			$entities[] = $idParser->newIdFromTypeAndNumber( $row->entity_type, (int)$row->entity_id );
 		}
 
 		return $entities;

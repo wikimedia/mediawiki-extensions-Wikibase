@@ -2,10 +2,9 @@
 
 namespace Wikibase;
 
-use Diff\Diff;
-use Diff\Differ;
-use Diff\DiffOpChange;
-use Wikibase\DataModel\Internal\ObjectComparer;
+use Diff\DiffOp\Diff\Diff;
+use Diff\Differ\Differ;
+use Diff\DiffOp\DiffOpChange;
 
 /**
  * Class for generating a ClaimDifference given two claims.
@@ -19,15 +18,11 @@ use Wikibase\DataModel\Internal\ObjectComparer;
 class ClaimDiffer {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var Differ
 	 */
 	private $listDiffer;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param Differ $listDiffer
@@ -71,10 +66,15 @@ class ClaimDiffer {
 		$oldClaimMainSnak = $oldClaim === null ? null : $oldClaim->getMainSnak();
 		$newClaimMainSnak = $newClaim === null ? null : $newClaim->getMainSnak();
 
-		$mainSnakComparer = new ObjectComparer();
-		if( !$mainSnakComparer->dataEquals( $oldClaimMainSnak, $newClaimMainSnak ) ) {
+		if ( $oldClaimMainSnak === null && $newClaimMainSnak === null ) {
+			return null;
+		}
+
+		if( ( $oldClaimMainSnak === null && $newClaimMainSnak !== null )
+			|| !$oldClaimMainSnak->equals( $newClaimMainSnak ) ) {
 			return new DiffOpChange( $oldClaimMainSnak, $newClaimMainSnak );
 		}
+
 		return null;
 	}
 
@@ -85,13 +85,18 @@ class ClaimDiffer {
 	 * @return Diff
 	 */
 	private function diffQualifiers( $oldClaim, $newClaim ) {
-		$oldQualifiers = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getQualifiers() );
-		$newQualifiers = $newClaim === null ? array() : iterator_to_array( $newClaim->getQualifiers() );
+		$oldQualifiers = $oldClaim === null ? new SnakList( array() ): $oldClaim->getQualifiers();
+		$newQualifiers = $newClaim === null ? new SnakList( array() ) : $newClaim->getQualifiers();
 
-		$qualifierComparer = new ObjectComparer();
-		if (  !$qualifierComparer->dataEquals( $oldQualifiers, $newQualifiers ) ) {
-			return new Diff( $this->listDiffer->doDiff( $oldQualifiers, $newQualifiers ), false );
+		if ( !$oldQualifiers->equals( $newQualifiers ) ) {
+			$diffOps = $this->listDiffer->doDiff(
+				iterator_to_array( $oldQualifiers ),
+				iterator_to_array( $newQualifiers )
+			);
+
+			return new Diff( $diffOps, false );
 		}
+
 		return null;
 	}
 
@@ -105,10 +110,10 @@ class ClaimDiffer {
 		$oldRank = $oldClaim === null ? null : $oldClaim->getRank();
 		$newRank = $newClaim === null ? null : $newClaim->getRank();
 
-		$rankComparer = new ObjectComparer();
-		if( !$rankComparer->dataEquals( $oldRank, $newRank ) ){
+		if( $oldRank !== $newRank ) {
 			return new DiffOpChange( $oldRank, $newRank );
 		}
+
 		return null;
 	}
 
@@ -119,13 +124,18 @@ class ClaimDiffer {
 	 * @return Diff
 	 */
 	private function diffReferences( $oldClaim, $newClaim ) {
-		$oldReferences = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getReferences() );
-		$newReferences = $newClaim === null ? array() : iterator_to_array( $newClaim->getReferences() );
+		$oldReferences = $oldClaim === null ? new ReferenceList( array() ) : $oldClaim->getReferences();
+		$newReferences = $newClaim === null ? new ReferenceList( array() ) : $newClaim->getReferences();
 
-		$referenceComparer = new ObjectComparer();
-		if ( !$referenceComparer->dataEquals( $oldReferences, $newReferences ) ) {
-			return new Diff( $this->listDiffer->doDiff( $oldReferences, $newReferences ), false );
+		if ( !$oldReferences->equals( $newReferences ) ) {
+			$diffOps = $this->listDiffer->doDiff(
+				iterator_to_array( $oldReferences ),
+				iterator_to_array( $newReferences )
+			);
+
+			return new Diff( $diffOps, false );
 		}
+
 		return null;
 	}
 
