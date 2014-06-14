@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_8296244e",
+        "filename": "repo/tests/phpunit/includes/view/SiteLinksViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-14T13:54:32Z",
+      "side": 1,
+      "message": "This has a lot of the signs of being one of those tests that will end up being more of a pain then helpful. It goes through the view and is written in a very hard to read fashion.",
+      "revId": "49bbffca34456e82de3012fad0990a68c6ab857c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
