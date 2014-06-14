@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Dumpers;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -205,8 +206,10 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $expectedIds, $actualIds );
 
+		$idParser = new BasicEntityIdParser();
+
 		foreach ( $data as $serialization ) {
-			$id = EntityId::newFromPrefixedId( $serialization['id'] );
+			$id = $idParser->parse( $serialization['id'] );
 			$this->assertEntitySerialization( $id, $serialization );
 		}
 	}

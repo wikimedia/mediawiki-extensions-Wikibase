@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\DataValue;
 use Language;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -102,7 +103,8 @@ class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,
-			$language
+			$language,
+			new BasicEntityIdParser()
 		);
 
 		return $formatter;
