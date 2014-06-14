@@ -33,6 +33,40 @@
       "revId": "9be59e4e35eb406a89f14c0695f9e426ad9bce04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_22a658bf",
+        "filename": "repo/includes/view/SiteLinksView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-14T13:51:31Z",
+      "side": 1,
+      "message": "Why a whole Item? Would a SiteLinkList not suffice?",
+      "revId": "9be59e4e35eb406a89f14c0695f9e426ad9bce04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_c2b42ce7",
+        "filename": "repo/tests/phpunit/includes/view/SiteLinksViewTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-14T13:51:31Z",
+      "side": 1,
+      "message": "This is very hard to read. If you are testing different things, using different well named methods is almost always better.\n\nie testGivenLinksInEditMode_editButtonIsPresent() {}\n\nAlso be careful about writing tests that go though the view. If you create a very simply view that simply walks over a data structure and turns it into html, then there is not much to test there, and a single smoke test tends to suffice.",
+      "revId": "9be59e4e35eb406a89f14c0695f9e426ad9bce04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
