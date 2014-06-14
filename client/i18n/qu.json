@@ -4,7 +4,8 @@
 			"AlimanRuna"
 		]
 	},
-	"wikibase-after-page-move": "T'inkisqa Wikidata qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
+	"wikibase-after-page-move": "T'inkisqa {{WBREPONAME}} qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
+	"wikibase-dataitem": "Willa qallawa",
 	"wikibase-editlinks": "T'inkikunata llamk'apuy",
 	"wikibase-editlinkstitle": "Wikipura t'inkikunata llamk'apuy",
 	"wikibase-linkitem-addlinks": "T'inkikunata yapay",
@@ -18,5 +19,14 @@
 	"wikibase-linkitem-confirmitem-button": "Takyachiy",
 	"wikibase-linkitem-not-loggedin-title": "Yaykunaykim tiyan",
 	"wikibase-linkitem-not-loggedin": "Kay wikipi [$1 chawpi willa hallch'apipas] yaykunaykim tiyan kayta ruranaykipaq.",
-	"wikibase-linkitem-success-link": "P'anqakunaqa aypalla t'inkinakusqañam. T'inkikunayuq kaq qallawata [$1 chawpi willañiqintinpim] tariyta atinki."
+	"wikibase-linkitem-success-link": "P'anqakunaqa aypalla t'inkinakusqañam. T'inkikunayuq kaq qallawata [$1 chawpi willañiqintinpim] tariyta atinki.",
+	"wikibase-rc-hide-wikidata-hide": "Pakay",
+	"wikibase-rc-hide-wikidata-show": "Rikuchiy",
+	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}} llamk'apusqakunata rikuchiy ñaqha hukchasqakunapi",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} llamk'apusqa",
+	"wikibase-unconnectedpages-submit": "Riy",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} qallawa ID",
+	"wikibase-pageinfo-entity-id-none": "Mana mayqinpas",
+	"wikibase-otherprojects": "Huk ruraykamaykuna"
 }
