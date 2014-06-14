@@ -6,7 +6,9 @@ use MWException;
 use RecentChange;
 use Revision;
 use User;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Represents a change for an entity; to be extended by various change subtypes
@@ -215,13 +217,6 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @since 0.1
-	 */
-	protected function postConstruct() {
-
-	}
-
-	/**
 	 * @since 0.3
 	 *
 	 * @param RecentChange $rc
@@ -346,13 +341,31 @@ class EntityChange extends DiffChange {
 		$data = parent::arrayalizeObjects( $data );
 
 		if ( $data instanceof Claim ) {
-			$a = $data->toArray();
+			$a = $this->serializeClaim( $data );
 			$a['_claimclass_'] = get_class( $data );
 
 			return $a;
 		}
 
 		return $data;
+	}
+
+	private function serializeClaim( Claim $claim ) {
+		return $this->getClaimSerializer()->serialize( $claim );
+	}
+
+	private function getClaimSerializer() {
+		// FIXME: the change row system needs to be reworked to either allow for sane injection
+		// or to avoid this kind of configuration dependent tasks.
+		if ( defined( 'WB_VERSION' ) ) {
+			return WikibaseRepo::getDefaultInstance()->getInternalClaimSerializer();
+		}
+		else if ( defined( 'WBC_VERSION' ) ) {
+			throw new \RuntimeException( 'Cannot serialize claims on the client' );
+		}
+		else {
+			throw new \RuntimeException( 'Need either client or repo loaded' );
+		}
 	}
 
 	/**
