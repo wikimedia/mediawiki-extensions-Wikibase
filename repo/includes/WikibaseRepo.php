@@ -592,7 +592,8 @@ class WikibaseRepo {
 			$idFormatter,
 			$valueFormatter,
 			$snakFormatter,
-			$wgContLang
+			$wgContLang,
+			$this->getEntityIdParser()
 		);
 
 		return $formatter;

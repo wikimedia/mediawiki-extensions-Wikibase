@@ -8,6 +8,7 @@ use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use SiteList;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -467,9 +468,11 @@ class RdfBuilder {
 	 * @param EntityLookup $entityLookup
 	 */
 	public function resolvedMentionedEntities( EntityLookup $entityLookup ) {
+		$idParser = new BasicEntityIdParser();
+
 		foreach ( $this->entitiesResolved as $id => $resolved ) {
 			if ( !$resolved ) {
-				$id = EntityId::newFromPrefixedId( $id );
+				$id = $idParser->parse( $id );
 				$entity = $entityLookup->getEntity( $id );
 
 				$this->addEntityStub( $entity );

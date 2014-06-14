@@ -8,6 +8,9 @@ use InvalidArgumentException;
 use Language;
 use MWException;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -28,33 +31,39 @@ class SummaryFormatter {
 	/**
 	 * @var Language
 	 */
-	protected $language;
+	private $language;
 
 	/**
 	 * @var EntityIdFormatter
 	 */
-	protected $idFormatter;
+	private $idFormatter;
 
 	/**
 	 * @var ValueFormatter
 	 */
-	protected $valueFormatter;
+	private $valueFormatter;
 
 	/**
 	 * @var SnakFormatter
 	 */
-	protected $snakFormatter;
+	private $snakFormatter;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
 
 	/**
 	 * @param EntityIdFormatter $idFormatter
 	 * @param ValueFormatter $valueFormatter
 	 * @param SnakFormatter $snakFormatter
 	 * @param Language $language
+	 * @param EntityIdParser $idParser
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( EntityIdFormatter $idFormatter, ValueFormatter $valueFormatter,
-		SnakFormatter $snakFormatter, Language $language
+		SnakFormatter $snakFormatter, Language $language, EntityIdParser $idParser
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_PLAIN ) {
 			throw new InvalidArgumentException(
@@ -66,6 +75,7 @@ class SummaryFormatter {
 		$this->valueFormatter = $valueFormatter;
 		$this->snakFormatter = $snakFormatter;
 		$this->language = $language;
+		$this->idParser = $idParser;
 
 		$this->stringNormalizer = new StringNormalizer();
 	}
@@ -206,11 +216,7 @@ class SummaryFormatter {
 			if ( is_string( $key ) ) {
 				//HACK: if the key *looks* like an entity id,
 				//      apply entity id formatting.
-				$entityId = EntityId::newFromPrefixedId( $key );
-
-				if ( $entityId !== null ) {
-					$key = $this->idFormatter->format( $entityId );
-				}
+				$key = $this->formatIfEntityId( $key );
 			}
 
 			$value = $this->formatArg( $value );
@@ -218,6 +224,15 @@ class SummaryFormatter {
 		}
 
 		return $list;
+	}
+
+	private function formatIfEntityId( $value ) {
+		try {
+			return $this->idFormatter->format( $this->idParser->parse( $value ) );
+		}
+		catch ( EntityIdParsingException $ex ) {
+			return $value;
+		}
 	}
 
 	/**
