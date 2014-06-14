@@ -48,13 +48,6 @@ use WikiPage;
  */
 final class RepoHooks {
 
-	private static function isTitleInEntityNamespace( Title $title ) {
-		$entityNamespaces = array_flip( NamespaceUtils::getEntityNamespaces() );
-		$namespace = $title->getNamespace();
-
-		return array_key_exists( $namespace, $entityNamespaces );
-	}
-
 	/**
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
@@ -712,11 +705,9 @@ final class RepoHooks {
 
 		//NOTE: the model returned by Title::getContentModel() is not reliable, see bug 37209
 		$model = $target->getContentModel();
-		$entityModels = $entityContentFactory->getEntityContentModels();
-
 
 		// we only want to handle links to Wikibase entities differently here
-		if ( !in_array( $model, $entityModels ) ) {
+		if ( !$entityContentFactory->isEntityContentModel( $model ) ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
@@ -958,9 +949,8 @@ final class RepoHooks {
 	 */
 	public static function onShowSearchHitTitle( &$link_t, &$titleSnippet, SearchResult $result ) {
 		$title = $result->getTitle();
-		$entityNamespaces = NamespaceUtils::getEntityNamespaces();
 
-		if ( in_array( $title->getNamespace(), $entityNamespaces ) ) {
+		if ( NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
 			$titleSnippet = $title->getPrefixedText();
 		}
 
@@ -1141,7 +1131,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
-		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
+		if ( !NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1168,7 +1158,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onMakeGlobalVariablesScript( $vars, $out ) {
-		if ( !self::isTitleInEntityNamespace( $out->getTitle() ) ) {
+		if ( !NamespaceUtils::isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -1202,12 +1192,11 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentModelCanBeUsedOn( $contentModel, Title $title, &$ok ) {
-		$contentModels = array_flip( NamespaceUtils::getEntityNamespaces() );
-		$namespace = $title->getNamespace();
+		$expectedModel = array_search( $title->getNamespace(), NamespaceUtils::getEntityNamespaces() );
 
 		// If the namespace is an entity namespace, the content model
 		// must be the model assigned to that namespace.
-		if ( isset( $contentModels[$namespace] ) && $contentModels[$namespace] !== $contentModel ) {
+		if ( $expectedModel !== false && $expectedModel !== $contentModel ) {
 			$ok = false;
 			return false;
 		}
