@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_e2b850e4",
+        "filename": "repo/includes/view/SectionEditLinkGenerator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-14T13:39:41Z",
+      "side": 1,
+      "message": "doc missing... also $specialpagename isn\u0027t a nice name (not your fault, though)",
+      "revId": "9be59e4e35eb406a89f14c0695f9e426ad9bce04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
