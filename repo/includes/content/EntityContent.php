@@ -381,7 +381,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array
 	 */
 	public function getNativeData() {
-		return $this->getEntity()->toArray();
+		return WikibaseRepo::getDefaultInstance()->newInternalSerializerFactory()
+			->newEntitySerializer()->serialize( $this->getEntity() );
 	}
 
 	/**

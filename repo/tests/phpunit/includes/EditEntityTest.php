@@ -208,9 +208,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 				12,     // base rev
 				true,  // expected conflict
 				true,  // expected fix
-				array( // expected data
-					'label' => array( 'en' => 'test', 'de' => 'yarrr' ),
-				)
 			),
 			array( // #3: case IIIb: user was last to edit, but intoduces a new operand
 				array( // input data
@@ -219,7 +216,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 				11,     // base rev
 				true,  // expected conflict
 				false, // expected failure, diff operand change
-				null
 			),
 			array( // #4: case IV: patch applied
 				array( // input data
@@ -228,10 +224,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 				10,     // base rev
 				true,  // expected conflict
 				true,  // expected fix
-				array( // expected data
-					'label' => array( 'de' => 'bar', 'en' => 'test',
-					                  'nl' => 'test', 'fr' => 'frrrrtt' ),
-				)
 			),
 			array( // #5: case V: patch failed, expect a conflict
 				array( // input data
@@ -240,7 +232,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 				10,     // base rev
 				true,  // expected conflict
 				false, // expected fix
-				null   // expected data
 			),
 			array( // #6: case VI: patch is empty, keep current (not base)
 				array( // input data
@@ -249,10 +240,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 				12,     // base rev
 				true,  // expected conflict
 				true,  // expected fix
-				array( // expected data
-					'label' => array( 'en' => 'test', 'de' => 'bar' ),
-					'description' => array( 'en' => 'more testing' )
-				)
 			),
 		);
 	}
@@ -260,7 +247,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideHasEditConflict
 	 */
-	public function testHasEditConflict( $inputData, $baseRevisionId, $expectedConflict, $expectedFix, array $expectedData = null ) {
+	public function testHasEditConflict( $inputData, $baseRevisionId, $expectedConflict, $expectedFix ) {
 		$repo = $this->makeMockRepo();
 
 		$entityId = new ItemId( 'Q17' );
@@ -302,15 +289,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 		if ( $conflict ) {
 			$fixed = $editEntity->fixEditConflict();
 			$this->assertEquals( $expectedFix, $fixed, 'fixEditConflict()' );
-		}
-
-		if ( $expectedData !== null ) {
-			$data = $editEntity->getNewEntity()->toArray();
-
-			foreach ( $expectedData as $key => $expectedValue ) {
-				$actualValue = $data[$key];
-				$this->assertArrayEquals( $expectedValue, $actualValue, false, true );
-			}
 		}
 	}
 
