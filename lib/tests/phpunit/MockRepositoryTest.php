@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use User;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -403,10 +404,12 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public function testGetEntities( $ids, $expected, $expectedError = false ) {
 		$this->setupGetEntities();
 
+		$idParser = new BasicEntityIdParser();
+
 		// convert string IDs to EntityId objects
 		foreach ( $ids as $i => $id ) {
 			if ( is_string( $id ) ) {
-				$ids[ $i ] = EntityId::newFromPrefixedId( $id );
+				$ids[ $i ] = $idParser->parse( $id );
 			}
 		}
 
