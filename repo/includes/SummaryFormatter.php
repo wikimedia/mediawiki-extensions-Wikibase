@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Language;
 use MWException;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -202,11 +203,13 @@ class SummaryFormatter {
 	protected function formatKeyValuePairs( array $pairs ) {
 		$list = array();
 
+		$idParser = new BasicEntityIdParser();
+
 		foreach ( $pairs as $key => $value ) {
 			if ( is_string( $key ) ) {
 				//HACK: if the key *looks* like an entity id,
 				//      apply entity id formatting.
-				$entityId = EntityId::newFromPrefixedId( $key );
+				$entityId = $idParser->parse( $key );
 
 				if ( $entityId !== null ) {
 					$key = $this->idFormatter->format( $entityId );
