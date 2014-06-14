@@ -1,0 +1,9 @@
+Code-Review+2: Jeroen De Dauw <jeroendedauw@gmail.com>
+Code-Review+1: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Code-Review+1: Tobias Gritschacher <tobias.gritschacher@wikimedia.de>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: Jeroen De Dauw <jeroendedauw@gmail.com>
+Submitted-at: Sat, 14 Jun 2014 18:11:13 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/136946
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
