@@ -151,4 +151,13 @@ class Property extends Entity {
 		$this->fingerprint = Fingerprint::newEmpty();
 	}
 
+	/**
+	 * @deprecated since 0.7.3. Use Property::newFromType
+	 *
+	 * @return Property
+	 */
+	public static function newEmpty() {
+		return self::newFromType( '' );
+	}
+
 }
