@@ -5,6 +5,7 @@ namespace Wikibase;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * Class EntityInfoBuilder implementation relying on database access.
@@ -225,10 +226,12 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 * @throws \InvalidArgumentException
 	 */
 	private function injectTerms( $dbResult, array &$entityInfo ) {
+		$idParser = new LegacyIdInterpreter();
+
 		foreach ( $dbResult as $row ) {
-			// this is deprecated, but I don't see an alternative.
-			$id = new EntityId( $row->term_entity_type, (int)$row->term_entity_id );
-			$key = $id->getPrefixedId();
+			// FIXME: this only works for items and properties
+			$id = $idParser->newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+			$key = $id->getSerialization();
 
 			if ( !isset( $entityInfo[$key] ) ) {
 				continue;

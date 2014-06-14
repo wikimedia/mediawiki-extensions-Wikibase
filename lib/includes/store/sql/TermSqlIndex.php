@@ -8,6 +8,7 @@ use Iterator;
 use MWException;
 use ResultWrapper;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * Term lookup cache.
@@ -716,13 +717,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		// turn numbers into entity ids
 		$result = array();
-		$idParser = new BasicEntityIdParser();
+		$idParser = new LegacyIdInterpreter();
 
 		foreach ( $numericIds as $numericId ) {
-			// FIXME: this is using the deprecated EntityId constructor and a hack to get the
-			// correct EntityId type that will not work for entity types other then item and property.
-			$entityId = new EntityId( $entityType, $numericId );
-			$result[] = $idParser->parse( $entityId->getSerialization() );
+			// FIXME: this only works for items and properties
+			$result[] = $idParser->newIdFromTypeAndNumber( $entityType, $numericId );
 		}
 
 		wfProfileOut( __METHOD__ );
