@@ -4,6 +4,7 @@ namespace Tests\Wikibase\DataModel\Deserializers;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
+use DataValues\UnDeserializableValue;
 use Wikibase\DataModel\Deserializers\SnakDeserializer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -158,4 +159,35 @@ class SnakDeserializerTest extends DeserializerBaseTest {
 			'property' => 'Q42'
 		) );
 	}
+
+	public function testGivenInvalidDataValue_unDeseriableValueIsConstructed() {
+		$serialization = array(
+			'snaktype' => 'value',
+			'property' => 'P42',
+			'datavalue' => array(
+				'type' => 'string',
+				'value' => 1337
+			)
+		);
+
+		$snak = $this->buildDeserializer()->deserialize( $serialization );
+
+		$this->assertInstanceOf( 'Wikibase\DataModel\Snak\PropertyValueSnak', $snak );
+		$this->assertSnakHasUnDeseriableValue( $snak );
+	}
+
+	private function assertSnakHasUnDeseriableValue( PropertyValueSnak $snak ) {
+		$this->assertEquals( new PropertyId( 'P42' ), $snak->getPropertyId() );
+
+		$dataValue = $snak->getDataValue();
+
+		/**
+		 * @var UnDeserializableValue $dataValue
+		 */
+		$this->assertInstanceOf( 'DataValues\UnDeserializableValue', $dataValue );
+
+		$this->assertEquals( $dataValue->getTargetType(), 'string' );
+		$this->assertEquals( $dataValue->getValue(), 1337 );
+	}
+
 }

@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Deserializers;
 
+use DataValues\UnDeserializableValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
@@ -107,8 +108,17 @@ class SnakDeserializer implements DispatchableDeserializer {
 
 		return new PropertyValueSnak(
 			$this->deserializePropertyId( $serialization['property'] ),
-			$this->dataValueDeserializer->deserialize( $serialization['datavalue'] )
+			$this->deserializeDataValue( $serialization['datavalue'] )
 		);
+	}
+
+	private function deserializeDataValue( $serialization ) {
+		try {
+			return $this->dataValueDeserializer->deserialize( $serialization );
+		}
+		catch ( DeserializationException $ex ) {
+			return new UnDeserializableValue( $serialization['value'], $serialization['type'], $ex->getMessage() );
+		}
 	}
 
 	private function deserializePropertyId( $serialization ) {
