@@ -201,9 +201,6 @@
 			.appendTo( 'body' );
 
 			$( ooMenu )
-			.on( 'blur.suggester', function() {
-				self.element.val( self._term );
-			} )
 			.on( 'selected.suggester', function( event, item ) {
 				if( item instanceof $.ui.ooMenu.Item && !( item instanceof $.ui.ooMenu.CustomItem ) ) {
 					self._term = item.getValue();
