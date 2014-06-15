@@ -22,6 +22,5 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
 	),
 	'url' => 'https://github.com/wmde/WikibaseDataModel',
-	'description' => 'PHP implementation of the Wikibase DataModel'
+	'description' => 'Component defining the Wikibase data model'
 );
-
