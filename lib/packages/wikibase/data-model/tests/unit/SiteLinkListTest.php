@@ -239,11 +239,11 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $list->equals( $otherInstance ) );
 	}
 
-	public function testAddHasFluentInterface() {
+	public function testAddNewSiteLink() {
 		$list = new SiteLinkList();
 
-		$list->addNewSiteLink( 'enwiki', 'cats' )
-			->addNewSiteLink( 'dewiki', 'katzen', array( new ItemId( 'Q1' ) ) );
+		$list->addNewSiteLink( 'enwiki', 'cats' );
+		$list->addNewSiteLink( 'dewiki', 'katzen', array( new ItemId( 'Q1' ) ) );
 
 		$this->assertTrue( $list->equals( new SiteLinkList( array (
 			new SiteLink( 'enwiki', 'cats' ),
@@ -251,11 +251,11 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		) ) ) );
 	}
 
-	public function testAddObjectHasFluentInterface() {
+	public function testAddSiteLink() {
 		$list = new SiteLinkList();
 
-		$list->addSiteLink( new SiteLink( 'enwiki', 'cats' ) )
-			->addSiteLink( new SiteLink( 'dewiki', 'katzen' ) );
+		$list->addSiteLink( new SiteLink( 'enwiki', 'cats' ) );
+		$list->addSiteLink( new SiteLink( 'dewiki', 'katzen' ) );
 
 		$this->assertTrue( $list->equals( new SiteLinkList( array (
 			new SiteLink( 'enwiki', 'cats' ),
