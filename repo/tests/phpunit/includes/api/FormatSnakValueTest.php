@@ -45,6 +45,7 @@ class FormatSnakValueTest extends \ApiTestCase {
 			TimeFormatter::CALENDAR_GREGORIAN );
 
 		$wordSeparator = wfMessage( 'word-separator' )->text();
+		$deletedItem = wfMessage( 'wikibase-deletedentity-item' )->inLanguage( 'en' )->text()
 
 		return array(
 			array( new StringValue( 'test' ),
@@ -111,7 +112,7 @@ class FormatSnakValueTest extends \ApiTestCase {
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'/^Q45345345435' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( wfMessage( 'wikibase-deletedentity-item' )->text(),  '/' ) . '\)<\/span>$/' ),
+				'/^Q45345345435' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem,  '/' ) . '\)<\/span>$/' ),
 
 			// @TODO: Test an existing Item id
 		);
