@@ -224,14 +224,7 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
-
-			/* @var EntityContent $newContent */
-			$newContent = $article->getContent();
-
-			// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
-			// May be redundant in some cases. Take care not to cause infinite regress.
-			$entityRev = new EntityRevision( $newContent->getEntity(), $revision->getId(), $revision->getTimestamp() );
-			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+			self::notifyEntityStoreWatcherOnUpdate( $revision );
 
 			$notifier = new ChangeNotifier(
 				WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
@@ -248,6 +241,25 @@ final class RepoHooks {
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	/**
+	 * @param Revision $revision
+	 */
+	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
+		/* @var EntityContent $content */
+		$content = $revision->getContent();
+
+		// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
+		// May be redundant in some cases. Take care not to cause infinite regress.
+		if ( $content->isRedirect() ) {
+			$redirect = $content->getEntityRedirect();
+			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->redirectUpdated( $redirect, $revision->getId() );
+		} else {
+			$entity = $content->getEntity();
+			$entityRev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
+			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+		}
 	}
 
 	/**

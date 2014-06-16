@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityPerPage;
 use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\StorageException;
@@ -119,81 +120,92 @@ class WikiPageEntityStore implements EntityStore {
 	}
 
 	/**
-	 * Saves the given Entity to a wiki page via a WikiPage object.
-	 *
-	 * @param Entity $entity the entity to save.
-	 * @param string $summary the edit summary for the new revision.
-	 * @param User $user the user to whom to attribute the edit
-	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
-	 * @param int|bool $baseRevId the revision ID $entity is based on.
-	 *
-	 * @see EntityStore::saveEntity()
+	 * @see EntityStore::saveEntity
 	 * @see WikiPage::doEditContent
 	 *
-	 * @return EntityRevision
+	 * @param Entity $entity
+	 * @param string $summary
+	 * @param User $user
+	 * @param int $flags
+	 * @param int|bool $baseRevId
 	 *
 	 * @throws StorageException
-	 * @throws PermissionsError
+	 * @return EntityRevision
 	 */
 	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
 		wfProfileIn( __METHOD__ );
 
-		$content = $this->contentFactory->newFromEntity( $entity );
-		$status = $this->saveEntity_internal( $content, $summary, $user, $flags, $baseRevId );
-
-		if ( !$status->isOK() ) {
-			wfProfileOut( __METHOD__ );
-			throw new StorageException( $status );
+		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
+			if ( $entity->getId() === null ) {
+				$this->assignFreshId( $entity );
+			}
+		} else {
+			if ( $entity->getId() === null ) {
+				wfProfileOut( __METHOD__ );
+				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
+			}
 		}
 
-		// As per convention defined by WikiPage, the new revision ID is in the status value:
-		$value = $status->getValue();
+		$content = $this->contentFactory->newFromEntity( $entity );
+		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
 
-		/* @var Revision $revision */
-		$revision = $value['revision'];
+		$entityRevision = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
 
-		$rev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
-
-		$this->dispatcher->dispatch( 'entityUpdated', $rev );
+		$this->dispatcher->dispatch( 'entityUpdated', $entityRevision );
 
 		wfProfileOut( __METHOD__ );
-		return $rev;
+		return $entityRevision;
 	}
 
+	/**
+	 * @see EntityStore::saveRedirect
+	 * @see WikiPage::doEditContent
+	 *
+	 * @param EntityRedirect $redirect
+	 * @param string $summary
+	 * @param User $user
+	 * @param int $flags
+	 * @param int|bool $baseRevId
+	 *
+	 * @throws StorageException
+	 * @return int The new revision ID
+	 */
+	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false ) {
+		wfProfileIn( __METHOD__ );
+
+		$content = $this->contentFactory->newFromRedirect( $redirect );
+		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
+
+		$this->dispatcher->dispatch( 'redirectUpdated', $redirect, $revision->getId() );
+
+		wfProfileOut( __METHOD__ );
+		return $revision->getId();
+	}
 
 	/**
-	 * Saves this item.
-	 * If this item does not exist yet, it will be created (ie a new ID will be determined and a new
-	 * page in the data NS created).
-	 *
-	 * @note: if the item does not have an ID yet (i.e. it was not yet created in the database),
-	 *        save() will fail with a edit-gone-missing message unless the EDIT_NEW bit is set in
-	 *        $flags.
-	 *
-	 * @note: if the save is triggered by any kind of user interaction, consider using
-	 *        EditEntity::attemptSave(), which automatically handles edit conflicts, permission
-	 *        checks, etc.
+	 * Saves the entity. If the corresponding page does not exist yet, it will be created
+	 * (ie a new ID will be determined and a new page in the data NS created).
 	 *
 	 * @note: this method should not be overloaded, and should not be extended to save additional
 	 *        information to the database. Such things should be done in a way that will also be
 	 *        triggered when the save is performed by calling WikiPage::doEditContent.
 	 *
-	 * @since 0.1
-	 *
-	 * @param EntityContent $entityContent the entity to save.
-	 * @param string     $summary
-	 * @param null|User  $user
-	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
-	 *
-	 * @param int|bool   $baseRevId
-	 *
 	 * @see WikiPage::doEditContent
 	 *
-	 * @todo: move logic into WikiPageEntityStore and make this method a deprecated adapter.
+	 * @since 0.5
 	 *
-	 * @return Status Success indicator, like the one returned by WikiPage::doEditContent().
+	 * @param EntityContent $entityContent the entity to save.
+	 * @param string $summary
+	 * @param null|User $user
+	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
+	 *
+	 * @param int|bool $baseRevId
+	 *
+	 * @throws StorageException
+	 *
+	 * @return Revision The new revision (or the latest one, in case of a null edit).
 	 */
-	private function saveEntity_internal(
+	private function saveEntityContent(
 		EntityContent $entityContent,
 		$summary = '',
 		User $user = null,
@@ -202,22 +214,13 @@ class WikiPageEntityStore implements EntityStore {
 	) {
 		wfProfileIn( __METHOD__ );
 
-		$entity = $entityContent->getEntity();
+		$page = $this->getWikiPageForEntity( $entityContent->getEntityId() );
 
 		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
-			if ( $entity->getId() === null ) {
-				$this->assignFreshId( $entity );
-			} else{
-				$title = $this->contentFactory->getTitleForId( $entity->getId() );
-				if ( $title->exists() ) {
-					wfProfileOut( __METHOD__ );
-					return Status::newFatal( 'edit-already-exists' );
-				}
-			}
-		} else {
-			if ( $entity->getId() === null ) {
+			$title = $page->getTitle();
+			if ( $title->exists() ) {
 				wfProfileOut( __METHOD__ );
-				return Status::newFatal( 'edit-gone-missing' );
+				throw new StorageException( Status::newFatal( 'edit-already-exists' ) );
 			}
 		}
 
@@ -229,7 +232,6 @@ class WikiPageEntityStore implements EntityStore {
 		//
 		//       TODO: might be able to further optimize handling of prepared edit in WikiPage.
 
-		$page = $this->getWikiPageForEntity( $entity->getId() );
 		$page->clear();
 		$page->clearPreparedEdit();
 
@@ -241,16 +243,23 @@ class WikiPageEntityStore implements EntityStore {
 			$user
 		);
 
-		if ( $status->isOK() && !isset ( $status->value['revision'] ) ) {
-			// HACK: No new revision was created (content didn't change). Report the old one.
-			// There *might* be a race condition here, but since $page already loaded the
-			// latest revision, it should still be cached, and should always be the correct one.
-			$status->value['revision'] = $page->getRevision();
+		if ( !$status->isOK() ) {
+			wfProfileOut( __METHOD__ );
+			throw new StorageException( $status );
 		}
 
+		// As per convention defined by WikiPage, the new revision is in the status value:
+		if ( isset ( $status->value['revision'] ) ) {
+			$revision = $status->value['revision'];
+		} else {
+			// NOTE: No new revision was created (content didn't change). Report the old one.
+			// There *might* be a race condition here, but since $page already loaded the
+			// latest revision, it should still be cached, and should always be the correct one.
+			$revision = $page->getRevision();
+		}
 
 		wfProfileOut( __METHOD__ );
-		return $status;
+		return $revision;
 	}
 
 	/**
