@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_bbca6d48",
+        "filename": "repo/tests/phpunit/includes/View/SectionEditLinkGeneratorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-16T18:01:10Z",
+      "side": 1,
+      "message": "That\u0027s a bad dependency for a test. But I don\u0027t see an other way to solve this at the moment other than registering a hook or setting $wgSpecialPages, which is not really better.",
+      "revId": "5426218937bd41c54a38ad78ab9eda511c9f39f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
