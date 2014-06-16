@@ -224,7 +224,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
-	 * Notifies the cache that an entity was updated.
+	 * Notifies the cache that an Entity was created or updated.
 	 *
 	 * @param EntityRevision $entityRevision
 	 */
@@ -234,7 +234,19 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
-	 * Notifies the cache that an entity was deleted.
+	 * Notifies the cache that a redirect was created or updated.
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+		//TODO: cache redirects
+		$key = $this->getCacheKey( $entityRedirect->getEntityId() );
+		$this->cache->delete( $key );
+	}
+
+	/**
+	 * Notifies the cache that an Entity or redirect was deleted.
 	 *
 	 * @param EntityId $entityId
 	 */
@@ -243,4 +255,5 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		$this->cache->delete( $key );
 		// XXX: if $this->lookup supports purging, purge?
 	}
+
 }

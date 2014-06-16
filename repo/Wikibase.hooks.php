@@ -10,7 +10,6 @@ use DatabaseUpdater;
 use DummyLinker;
 use HistoryPager;
 use Html;
-use InvalidArgumentException;
 use Language;
 use Linker;
 use LogEntryBase;
@@ -32,8 +31,8 @@ use Title;
 use User;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\TextInjector;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -223,14 +222,7 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
-
-			/* @var EntityContent $newContent */
-			$newContent = $article->getContent();
-
-			// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
-			// May be redundant in some cases. Take care not to cause infinite regress.
-			$entityRev = new EntityRevision( $newContent->getEntity(), $revision->getId(), $revision->getTimestamp() );
-			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+			self::notifyEntityStoreWatcherOnUpdate( $revision );
 
 			$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 
@@ -244,6 +236,30 @@ final class RepoHooks {
 
 		wfProfileOut( __METHOD__ );
 		return true;
+	}
+
+	/**
+	 * @param Revision $revision
+	 */
+	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
+		/** @var EntityContent $content */
+		$content = $revision->getContent();
+		$watcher = WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher();
+
+		// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
+		// May be redundant in some cases. Take care not to cause infinite regress.
+		if ( $content->isRedirect() ) {
+			$watcher->redirectUpdated(
+				$content->getEntityRedirect(),
+				$revision->getId()
+			);
+		} else {
+			$watcher->entityUpdated( new EntityRevision(
+				$content->getEntity(),
+				$revision->getId(),
+				$revision->getTimestamp()
+			) );
+		}
 	}
 
 	/**
@@ -1317,4 +1333,5 @@ final class RepoHooks {
 
 		return true;
 	}
+
 }

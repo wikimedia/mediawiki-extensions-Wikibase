@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\GenericEventDispatcher;
 
@@ -22,7 +23,7 @@ class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements En
 	}
 
 	/**
-	 * called when an entity is updated
+	 * @see EntityStoreWatcher::entityUpdated
 	 *
 	 * @param EntityRevision $entityRevision
 	 */
@@ -31,7 +32,17 @@ class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements En
 	}
 
 	/**
-	 * called when an entity is deleted
+	 * @see EntityStoreWatcher::redirectUpdated
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+		$this->dispatch( 'redirectUpdated', $entityRedirect, $revisionId );
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityDeleted
 	 *
 	 * @param EntityId $entityId
 	 */
