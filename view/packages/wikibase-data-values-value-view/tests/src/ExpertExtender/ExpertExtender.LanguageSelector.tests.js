@@ -26,7 +26,7 @@
 		new ExpertExtender.LanguageSelector( new util.MessageProvider(), function() { } )
 	);
 
-	QUnit.test( 'value changes if upstream value changes', function( assert ) {
+	QUnit.test( 'value does not change if upstream value changes', function( assert ) {
 		var upstreamValue = 'en';
 		var languageSelector = new ExpertExtender.LanguageSelector( new util.MessageProvider( {
 			messageGetter: function( key ) {
@@ -38,13 +38,14 @@
 		var $extender = $( '<div />' );
 
 		languageSelector.init( $extender );
-		languageSelector.draw();
+		languageSelector.onInitialShow && languageSelector.onInitialShow();
+		languageSelector.draw && languageSelector.draw();
 
 		assert.equal( languageSelector.getValue(), 'en' );
 
 		upstreamValue = 'de';
-		languageSelector.draw();
-		assert.equal( languageSelector.getValue(), 'de' );
+		languageSelector.draw && languageSelector.draw();
+		assert.equal( languageSelector.getValue(), 'en' );
 	} );
 
 } )(

@@ -65,9 +65,9 @@
 		},
 
 		/**
-		 * Callback for the draw ExpertExtender event
+		 * Callback for the onInitialShow ExpertExtender event
 		 */
-		draw: function() {
+		onInitialShow: function() {
 			this.$selector.val( this._languagesMap[ this._getUpstreamValue() ] );
 		},
 
