@@ -33,6 +33,7 @@
 		_getUpstreamValue: null,
 
 		_$customItem: null,
+		_customValueIndex: null,
 
 		rotator: null,
 
