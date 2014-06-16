@@ -487,15 +487,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	}
 
 	/**
-	 * @since 0.5
-	 *
-	 * @param string $idSerialization
-	 *
-	 * @return EntityId
-	 */
-	protected abstract function idFromSerialization( $idSerialization );
-
-	/**
 	 * Returns if the Entity has no content.
 	 * Having an id set does not count as having content.
 	 *

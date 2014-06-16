@@ -3,6 +3,9 @@
 namespace Wikibase\DataModel\Entity;
 
 /**
+ * Minimal interface for all objects that represent an entity.
+ * All entities have an EntityId and an entity type.
+ *
  * @since 1.0
  *
  * @licence GNU GPL v2+
