@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Language;
+use SpecialPageFactory;
 use Wikibase\Datamodel\Entity\Entity;
 use Wikibase\Datamodel\Entity\Item;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
@@ -76,12 +77,12 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function getEditUrlProvider() {
 		return array(
 			array(
-				'+Special:Version/Q1$+',
+				'+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1$+',
 				'Version',
 				new Item( array( 'entity' => 'Q1' ) )
 			),
 			array(
-				'+Special:Version/Q1/de$+',
+				'+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1/de$+',
 				'Version',
 				new Item( array( 'entity' => 'Q1' ) ),
 				Language::factory( 'de' )
