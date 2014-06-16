@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View;
+namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;

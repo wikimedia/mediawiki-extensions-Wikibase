@@ -2,7 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\SectionEditLinkGenerator;
+use Language;
+use Wikibase\Datamodel\Entity\Entity;
+use Wikibase\Datamodel\Entity\Item;
+use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
  * @covers Wikibase\SectionEditLinkGenerator

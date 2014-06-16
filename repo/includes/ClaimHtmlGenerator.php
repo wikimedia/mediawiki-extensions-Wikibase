@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\Lib\Serializers\ClaimSerializer;
-use Wikibase\View\SnakHtmlGenerator;
+use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * Base class for generating the HTML for a Claim in Entity View.

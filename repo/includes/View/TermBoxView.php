@@ -1,10 +1,12 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use Language;
 use SpecialPage;
 use Title;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\Utils;
 
 /**
  * Generates HTML for displaying the term box, that is, the box

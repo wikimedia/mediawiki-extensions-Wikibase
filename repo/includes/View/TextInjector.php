@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 /**
  * Helper for injecting text by substituting placeholders.
