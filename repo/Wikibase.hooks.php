@@ -1238,8 +1238,6 @@ final class RepoHooks {
 		$termIndex = $repo->getStore()->getTermIndex();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
-		$entitySerializer = $repo->newInternalSerializerFactory()->newEntitySerializer();
-		$entityDeserializer = $repo->newInternalDeserializerFactory()->newEntityDeserializer();
 
 		return new ItemHandler(
 			$entityPerPage,
@@ -1247,9 +1245,7 @@ final class RepoHooks {
 			$codec,
 			array( $validator ),
 			$errorLocalizer,
-			$siteLinkStore,
-			$entitySerializer,
-			$entityDeserializer
+			$siteLinkStore
 		);
 	}
 
@@ -1261,8 +1257,6 @@ final class RepoHooks {
 		$termIndex = $repo->getStore()->getTermIndex();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
-		$entitySerializer = $repo->newInternalSerializerFactory()->newEntitySerializer();
-		$entityDeserializer = $repo->newInternalDeserializerFactory()->newEntityDeserializer();
 
 		return new PropertyHandler(
 			$entityPerPage,
@@ -1270,9 +1264,7 @@ final class RepoHooks {
 			$codec,
 			array( $validator ),
 			$errorLocalizer,
-			$propertyInfoStore,
-			$entitySerializer,
-			$entityDeserializer
+			$propertyInfoStore
 		);
 	}
 
