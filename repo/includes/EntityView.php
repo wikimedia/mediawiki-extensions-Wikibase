@@ -212,14 +212,6 @@ window.setTimeout( function() {
 		return $html;
 	}
 
-	protected function getFormattedIdForEntity( Entity $entity ) {
-		if ( !$entity->getId() ) {
-			return ''; //XXX: should probably throw an exception
-		}
-
-		return $entity->getId()->getPrefixedId();
-	}
-
 	/**
 	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
 	 * this does not group all the HTMl within one parent node as one entity.
@@ -404,19 +396,24 @@ window.setTimeout( function() {
 	public function getHtmlForLabel( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$lang = $this->getLanguage();
+		$language = $this->getLanguage();
+		$entityId = $entity->getId();
+		$label = $entity->getLabel( $language->getCode() );
+		$supplement = '';
 
-		$label = $entity->getLabel( $lang->getCode() );
-		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetLabel', $entity, $lang );
-		$prefixedId = $this->getFormattedIdForEntity( $entity );
+		if ( $entityId !== null ) {
+			$prefixedId = $entityId->getSerialization();
+			$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetLabel', $prefixedId, $language );
+			$supplement .= wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $prefixedId ) )
+				. $this->getHtmlForEditSection( $editUrl );
+		}
 
 		$html = wfTemplate( 'wb-label',
-			$prefixedId,
+			$entityId !== null ? $entityId->getSerialization() : 'new',
 			wfTemplate( 'wb-property',
 				$label === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
-				wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $prefixedId ) )
-					. $this->getHtmlForEditSection( $editUrl )
+				$supplement
 			)
 		);
 
@@ -436,15 +433,22 @@ window.setTimeout( function() {
 	public function getHtmlForDescription( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$lang = $this->getLanguage();
-		$description = $entity->getDescription( $lang->getCode() );
-		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetDescription', $entity, $lang );
+		$language = $this->getLanguage();
+		$entityId = $entity->getId();
+		$description = $entity->getDescription( $language->getCode() );
+		$editSection = '';
+
+		if ( $entityId !== null ) {
+			$prefixedId = $entityId->getSerialization();
+			$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetDescription', $prefixedId, $language );
+			$editSection .= $this->getHtmlForEditSection( $editUrl );
+		}
 
 		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
-				$this->getHtmlForEditSection( $editUrl )
+				$editSection
 			)
 		);
 
@@ -464,17 +468,24 @@ window.setTimeout( function() {
 	public function getHtmlForAliases( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$lang = $this->getLanguage();
+		$language = $this->getLanguage();
+		$entityId = $entity->getId();
+		$aliases = $entity->getAliases( $language->getCode() );
+		$editSection = '';
 
-		$aliases = $entity->getAliases( $lang->getCode() );
-		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetAliases', $entity, $lang );
+		if ( $entityId !== null ) {
+			$prefixedId = $entityId->getSerialization();
+			$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetAliases', $prefixedId, $language );
+			$action = empty( $aliases ) ? 'add' : 'edit';
+			$editSection .= $this->getHtmlForEditSection( $editUrl, 'span', $action );
+		}
 
 		if ( empty( $aliases ) ) {
 			$html = wfTemplate( 'wb-aliases-wrapper',
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$this->getHtmlForEditSection( $editUrl, 'span', 'add' )
+				$editSection
 			);
 		} else {
 			$aliasesHtml = '';
@@ -487,7 +498,7 @@ window.setTimeout( function() {
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $this->getHtmlForEditSection( $editUrl )
+				$aliasList . $editSection
 			);
 		}
 
@@ -602,7 +613,7 @@ window.setTimeout( function() {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $url specifies the URL for the button, default is an empty string
+	 * @param string $url specifies the URL for the button
 	 * @param string $tag allows to specify the type of the outer node
 	 * @param string $action by default 'edit', for aliases this could also be 'add'
 	 * @param bool $enabled can be set to false to display the button disabled

@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\View;
 
 use Message;
+use Site;
+use SiteList;
 use SiteStore;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Item;
@@ -46,6 +48,7 @@ class SiteLinksView {
 	 * @param Item $item the entity to render
 	 * @param string $group a site group ID
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
 	private function getHtmlForSiteLinkGroup( Item $item, $group, $editable = true ) {
@@ -69,7 +72,12 @@ class SiteLinksView {
 		);
 
 		// Link to SpecialPage
-		$editLink = $this->sectionEditLinkGenerator->getEditUrl( 'SetSiteLink', $item, null );
+		$editLink = null;
+		$entityId = $item->getId();
+		if ( $entityId !== null ) {
+			$prefixedId = $entityId->getSerialization();
+			$editLink = $this->sectionEditLinkGenerator->getEditUrl( 'SetSiteLink', $prefixedId );
+		}
 
 		if( !empty( $siteLinksForTable ) ) {
 			$thead = $this->getTableHeadHtml( $isSpecialGroup );
@@ -98,6 +106,8 @@ class SiteLinksView {
 	 * @param SiteList $sites
 	 * @param string $group
 	 * @param Item $item
+	 *
+	 * @return array[]
 	 */
 	private function getSiteLinksForTable( $sites, $group, $item ) {
 		$allSiteLinks = $item->getSiteLinks();
@@ -135,6 +145,8 @@ class SiteLinksView {
 
 	/**
 	 * @param bool $isSpecialGroup
+	 *
+	 * @return string
 	 */
 	private function getTableHeadHtml( $isSpecialGroup ) {
 		// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
@@ -154,8 +166,10 @@ class SiteLinksView {
 
 	/**
 	 * @param object[] $siteLinksForTable
-	 * @param string $editLink
+	 * @param string|null $editLink
 	 * @param bool $isSpecialGroup
+	 *
+	 * @return string
 	 */
 	private function getTableBodyHtml( $siteLinksForTable, $editLink, $isSpecialGroup ) {
 		$i = 0;
@@ -171,7 +185,9 @@ class SiteLinksView {
 
 	/**
 	 * @param bool $isFull
-	 * @param string $editLink
+	 * @param string|null $editLink
+	 *
+	 * @return string
 	 */
 	private function getTableFootHtml( $isFull, $editLink ) {
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
@@ -184,15 +200,17 @@ class SiteLinksView {
 
 	/**
 	 * @param object $siteLinkForTable
-	 * @param string $editLink
+	 * @param string|null $editLink
 	 * @param bool $isSpecialGroup
 	 * @param string $alternatingClass
+	 *
+	 * @return string
 	 */
 	private function getHtmlForSiteLink( $siteLinkForTable, $editLink, $isSpecialGroup, $alternatingClass ) {
-		/* @var Site $site */
+		/** @var Site $site */
 		$site = $siteLinkForTable['site'];
 
-		/* @var SiteLink $siteLink */
+		/** @var SiteLink $siteLink */
 		$siteLink = $siteLinkForTable['siteLink'];
 
 		if ( $site->getDomain() === '' ) {
@@ -232,8 +250,10 @@ class SiteLinksView {
 
 	/**
 	 * @param SiteLink $siteLink
-	 * @param string $editLink
+	 * @param string|null $editLink
 	 * @param string $alternatingClass
+	 *
+	 * @return string
 	 */
 	private function getHtmlForUnknownSiteLink( $siteLink, $editLink, $alternatingClass ) {
 		// the link is pointing to an unknown site.
@@ -252,6 +272,14 @@ class SiteLinksView {
 		);
 	}
 
+	/**
+	 * @param string|null $url
+	 * @param string $tag defaults to 'span'
+	 * @param string $action defaults to 'edit'
+	 * @param bool $enabled defaults to true
+	 *
+	 * @return string
+	 */
 	private function getHtmlForEditSection( $url, $tag = 'span', $action = 'edit', $enabled = true ) {
 		$msg = new Message( 'wikibase-' . $action );
 
