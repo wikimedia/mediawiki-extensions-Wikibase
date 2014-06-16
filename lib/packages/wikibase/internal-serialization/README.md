@@ -106,6 +106,10 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
+### 1.1 (2014-06-14)
+
+* Added `DeserializerFactory::newClaimDeserializer`
+
 ### 1.0 (2014-05-27)
 
 Initial release with these features:
