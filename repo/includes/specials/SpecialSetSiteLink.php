@@ -289,7 +289,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			)
 			. Html::input(
 				'site',
-				$this->getRequest()->getVal( 'site' ),
+				$this->getRequest()->getVal( 'site' ) ? $this->getRequest()->getVal( 'site' ) : $this->site,
 				'text',
 				array(
 					'class' => 'wb-input',
