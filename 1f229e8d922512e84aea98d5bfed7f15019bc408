@@ -16,6 +16,24 @@
       "revId": "1f229e8d922512e84aea98d5bfed7f15019bc408",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_20bacb1e",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-16T13:23:24Z",
+      "side": 1,
+      "message": "I see your point, but at the same time I think it\u0027s a good idea to maximize compatibility. Keeping these few characters doesn\u0027t hurt, don\u0027t you think?",
+      "parentUuid": "ee391fd1_05923900",
+      "revId": "1f229e8d922512e84aea98d5bfed7f15019bc408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
