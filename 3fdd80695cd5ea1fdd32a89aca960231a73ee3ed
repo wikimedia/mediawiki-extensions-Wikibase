@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_fb10f505",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-16T17:37:54Z",
+      "side": 1,
+      "message": "SerilaizationException also possible now",
+      "revId": "3fdd80695cd5ea1fdd32a89aca960231a73ee3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_bbf26ddd",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-16T17:37:54Z",
+      "side": 1,
+      "message": "DeserilaizationException also possible now",
+      "revId": "3fdd80695cd5ea1fdd32a89aca960231a73ee3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_dbf531c9",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-16T17:37:54Z",
+      "side": 1,
+      "message": "DeserilaizationException also possible now",
+      "revId": "3fdd80695cd5ea1fdd32a89aca960231a73ee3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
