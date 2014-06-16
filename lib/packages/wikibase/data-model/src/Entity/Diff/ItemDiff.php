@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Entity\Diff;
 
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
 
 /**
  * Represents a diff between two Item instances.
@@ -15,9 +16,7 @@ use Diff\DiffOp\Diff\Diff;
 class ItemDiff extends EntityDiff {
 
 	/**
-	 * Constructor.
-	 *
-	 * @param \Diff\DiffOp[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function __construct( array $operations = array() ) {
 		$this->fixSubstructureDiff( $operations, 'links' );
@@ -49,11 +48,12 @@ class ItemDiff extends EntityDiff {
 	}
 
 	/**
-	 * @see DiffOp::getType();
+	 * @see DiffOp::getType
 	 *
-	 * @return string 'diff/' . Item::ENTITY_TYPE
+	 * @return string
 	 */
 	public function getType() {
 		return 'diff/item';
 	}
+
 }
