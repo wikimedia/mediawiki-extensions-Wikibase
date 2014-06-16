@@ -4,6 +4,7 @@ namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use Message;
+use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -30,7 +31,7 @@ class SiteLinksView {
 	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator ) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->specialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
+		$this->specialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'specialSiteLinkGroups' );
 	}
 
 	/**
@@ -85,7 +86,7 @@ class SiteLinksView {
 			// TODO: support entity-id as prefix for element IDs.
 		);
 
-		if( !empty( $siteLinksForTable ) ) {
+		if ( !empty( $siteLinksForTable ) ) {
 			$thead = $this->getTableHeadHtml( $isSpecialGroup );
 			$tbody = $this->getTableBodyHtml( $siteLinksForTable, $itemId, $isSpecialGroup );
 		}
@@ -121,7 +122,7 @@ class SiteLinksView {
 	private function getSiteLinksForTable( SiteList $sites, array $itemSiteLinks ) {
 		$siteLinksForTable = array(); // site links of the currently handled site group
 
-		foreach( $itemSiteLinks as $siteLink ) {
+		foreach ( $itemSiteLinks as $siteLink ) {
 			if ( !$sites->hasSite( $siteLink->getSiteId() ) ) {
 				// FIXME: Maybe show it instead
 				continue;
@@ -183,7 +184,7 @@ class SiteLinksView {
 		$i = 0;
 		$tbody = '';
 
-		foreach( $siteLinksForTable as $siteLinkForTable ) {
+		foreach ( $siteLinksForTable as $siteLinkForTable ) {
 			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 			$tbody .= $this->getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup, $alternatingClass );
 		}
@@ -215,10 +216,10 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup, $alternatingClass ) {
-		/* @var \Site $site */
+		/** @var Site $site */
 		$site = $siteLinkForTable['site'];
 
-		/* @var SiteLink $siteLink */
+		/** @var SiteLink $siteLink */
 		$siteLink = $siteLinkForTable['siteLink'];
 
 		if ( $site->getDomain() === '' ) {
@@ -226,10 +227,8 @@ class SiteLinksView {
 		}
 
 		$languageCode = $site->getLanguageCode();
-		$pageName = $siteLink->getPageName();
 		$siteId = $siteLink->getSiteId();
-		$escapedPageName = htmlspecialchars( $pageName );
-		$escapedSiteId = htmlspecialchars( $siteId );
+		$pageName = $siteLink->getPageName();
 
 		// FIXME: this is a quickfix to allow a custom site-name for groups defined in $wgSpecialSiteLinkGroups instead of showing the language-name
 		if ( $isSpecialGroup ) {
@@ -248,11 +247,11 @@ class SiteLinksView {
 			$languageCode,
 			$alternatingClass,
 			$siteName,
-			$escapedSiteId, // displayed site ID
+			htmlspecialchars( $siteId ), // displayed site ID
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
-			$escapedPageName,
-			'<td>' . $this->getHtmlForEditSection( $itemId, $escapedSiteId ) . '</td>',
-			$escapedSiteId // ID used in classes
+			htmlspecialchars( $pageName ),
+			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId ) . '</td>',
+			htmlspecialchars( $siteId ) // ID used in classes
 		);
 	}
 
@@ -264,37 +263,40 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getHtmlForUnknownSiteLink( $siteLink, $itemId, $alternatingClass ) {
-		// the link is pointing to an unknown site.
-		// XXX: hide it? make it red? strike it out?
-
-		$pageName = $siteLink->getPageName();
 		$siteId = $siteLink->getSiteId();
-		$escapedPageName = htmlspecialchars( $pageName );
-		$escapedSiteId = htmlspecialchars( $siteId );
+		$pageName = $siteLink->getPageName();
 
 		return wfTemplate( 'wb-sitelink-unknown',
 			$alternatingClass,
-			$escapedSiteId,
-			$escapedPageName,
-			'<td>' . $this->getHtmlForEditSection( $itemId ) . '</td>'
+			htmlspecialchars( $siteId ),
+			htmlspecialchars( $pageName ),
+			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId ) . '</td>'
 		);
 	}
 
+	/**
+	 * @param ItemId|null $itemId
+	 * @param string $subPage defaults to ''
+	 * @param string $action defaults to 'edit'
+	 * @param bool $enabled defaults to true
+	 *
+	 * @return string
+	 */
 	private function getHtmlForEditSection( $itemId, $subPage = '', $action = 'edit', $enabled = true ) {
-		$msg = new Message( 'wikibase-' . $action );
-		$specialPage = 'SetSiteLink';
+		$specialPageUrlParams = array();
 
-		$specialPageIdParam = $itemId ? $itemId->getSerialization() : '';
-		$specialPageParams = array( $specialPageIdParam );
+		if ( $itemId !== null ) {
+			$specialPageUrlParams[] = $itemId->getSerialization();
 
-		if( $subPage !== '' ) {
-			$specialPageParams[] = $subPage;
+			if ( $subPage !== '' ) {
+				$specialPageUrlParams[] = $subPage;
+			}
 		}
 
 		return $this->sectionEditLinkGenerator->getHtmlForEditSection(
-			$specialPage,
-			$specialPageParams,
-			$msg,
+			'SetSiteLink',
+			$specialPageUrlParams,
+			new Message( 'wikibase-' . $action ),
 			$enabled
 		);
 	}
