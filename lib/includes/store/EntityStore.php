@@ -42,6 +42,15 @@ interface EntityStore {
 	/**
 	 * Saves the given Entity to some underlying storage mechanism.
 	 *
+	 * @note: If the item does not have an ID yet (i.e. it was not yet created in the database),
+	 *        saveEntity() will fail with a edit-gone-missing message unless the EDIT_NEW bit is
+	 *        set in $flags. If EDIT_NEW is set and the Entity does not yet have an ID, a new ID
+	 *        is assigned using assignFreshId().
+	 *
+	 * @note: if the save is triggered by any kind of user interaction, consider using
+	 *        EditEntity::attemptSave(), which automatically handles edit conflicts, permission
+	 *        checks, etc.
+	 *
 	 * @param Entity $entity the entity to save.
 	 * @param string $summary the edit summary for the new revision.
 	 * @param User $user the user to whom to attribute the edit
@@ -57,6 +66,27 @@ interface EntityStore {
 	 * @throws PermissionsError
 	 */
 	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false );
+
+	/**
+	 * Saves the given EntityRedirect to some underlying storage mechanism.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityRedirect $redirect the redirect to save.
+	 * @param string $summary the edit summary for the new revision.
+	 * @param User $user the user to whom to attribute the edit
+	 * @param int $flags EDIT_XXX flags, as defined for WikiPage::doEditContent.
+	 * @param int|bool $baseRevId the revision ID $entity is based on. Saving should fail if
+	 * $baseRevId is no longer the current revision.
+	 *
+	 * @see WikiPage::doEditContent
+	 *
+	 * @return int The new revision ID
+	 *
+	 * @throws StorageException
+	 * @throws PermissionsError
+	 */
+	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false );
 
 	/**
 	 * Deletes the given entity in some underlying storage mechanism.
