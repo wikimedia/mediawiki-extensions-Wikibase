@@ -7,8 +7,10 @@ use Status;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityPerPageTable;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -71,6 +73,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $r1->getRevision(), $r1actual->getRevision(), 'revid' );
 		$this->assertEquals( $r1->getTimestamp(), $r1actual->getTimestamp(), 'timestamp' );
 		$this->assertEquals( $r1->getEntity()->getId(), $r1actual->getEntity()->getId(), 'entity id' );
+
+		// TODO: check notifications in wb_changes table!
 
 		// update one
 		$one = Item::newEmpty();
@@ -143,6 +147,46 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		// check for error
 		$this->setExpectedException( $error );
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
+	}
+
+	public function testSaveRedirect() {
+		/* @var EntityStore $store */
+		/* @var EntityRevisionLookup $lookup */
+		list( $store, $lookup ) = $this->createStoreAndLookup();
+		$user = $GLOBALS['wgUser'];
+
+		// create one
+		$one = Item::newEmpty();
+		$one->setLabel( 'en', 'one' );
+
+		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
+		$oneId = $r1->getEntity()->getId();
+
+		// redirect one to Q33
+		$q33 = new ItemId( 'Q33' );
+		$redirect = new EntityRedirect( $oneId, $q33 );
+
+		$redirectRevId = $store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
+
+		// FIXME: use the $lookup to check this, once EntityLookup supports redirects.
+		$revision = Revision::newFromId( $redirectRevId );
+
+		$this->assertTrue( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
+		$this->assertTrue( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
+		$this->assertTrue( $revision->getContent()->getEntityRedirect()->equals( $redirect ), 'getEntityRedirect()' );
+
+		// check that the term index got updated (via a DataUpdate).
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
+
+		// TODO: check notifications in wb_changes table!
+
+		// Revert to original content
+		$r1 = $store->saveEntity( $one, 'restore one', $user, EDIT_UPDATE );
+		$revision = Revision::newFromId( $r1->getRevision() );
+
+		$this->assertFalse( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
+		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
 	}
 
 	public function testUserWasLastToEdit() {
@@ -398,6 +442,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
+
+		// TODO: check notifications in wb_changes table!
 	}
 
 }
