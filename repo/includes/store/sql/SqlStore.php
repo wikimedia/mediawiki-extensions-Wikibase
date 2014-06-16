@@ -254,10 +254,11 @@ class SqlStore implements Store {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$contentCodec = new EntityContentDataCodec();
+		$entitySerializer = WikibaseRepo::getDefaultInstance()->newInternalSerializerFactory()->newEntitySerializer();
 		$entityDeserializer = WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer();
+		$contentCodec = new EntityContentDataCodec( new BasicEntityIdParser(), $entitySerializer, $entityDeserializer );
 
-		$wikiPageEntityLookup = new WikiPageEntityLookup( $contentCodec, $entityDeserializer, false );
+		$wikiPageEntityLookup = new WikiPageEntityLookup( $contentCodec, false );
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 
 		$builder = new PropertyInfoTableBuilder( $table, $cachingEntityLookup );
@@ -527,7 +528,7 @@ class SqlStore implements Store {
 		//NOTE: Keep in sync with DirectSqlStore::newEntityLookup on the client
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$rawLookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityDeserializer, false );
+		$rawLookup = new WikiPageEntityLookup( $this->contentCodec, false );
 
 		// Maintain a list of watchers to be notified of changes to any entities,
 		// in order to update caches.
