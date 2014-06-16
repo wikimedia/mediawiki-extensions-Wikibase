@@ -49,7 +49,7 @@ use Wikibase\Utils;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
-abstract class EntityViewTest extends \MediaWikiTestCase {
+abstract class EntityViewTest extends \MediaWikiLangTestCase {
 
 	protected static $mockRepo;
 
@@ -216,13 +216,13 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 	protected abstract function makeEntity( EntityId $id, $claims = array() );
 
 	/**
-	 * Generates a suitable entity ID based on $n.
+	 * Generates a prefixed entity ID based on a numeric ID.
 	 *
-	 * @param int|string $n
+	 * @param int|string $numericId
 	 *
 	 * @return EntityId
 	 */
-	protected abstract function makeEntityId( $n );
+	protected abstract function makeEntityId( $numericId );
 
 	/**
 	 * @param Claim[] $claims
@@ -245,7 +245,7 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 	 * @return array
 	 */
 	public function getHtmlForClaimsProvider() {
-		$item = $this->makeEntity( $this->makeEntityId( '33' ), array(
+		$item = $this->makeEntity( $this->makeEntityId( 33 ), array(
 			$this->makeClaim( new PropertyNoValueSnak(
 				new PropertyId( 'P11' )
 			) ),
@@ -506,11 +506,59 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 		return $argLists;
 	}
 
+	public function testGetHtmlForLabel_editable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForLabel( $entity );
+
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/\w1/en"[^>]*>\S+</a>@', $html );
+	}
+
+	public function testGetHtmlForLabel_notEditable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForLabel( $entity, false );
+
+		$this->assertNotContains( '<a ', $html );
+	}
+
+	public function testGetHtmlForDescription_editable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForDescription( $entity );
+
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetDescription/\w1/en"[^>]*>\S+</a>@', $html );
+	}
+
+	public function testGetHtmlForDescription_notEditable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForDescription( $entity, false );
+
+		$this->assertNotContains( '<a ', $html );
+	}
+
+	public function testGetHtmlForAliases_editable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForAliases( $entity );
+
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetAliases/\w1/en"[^>]*>\S+</a>@', $html );
+	}
+
+	public function testGetHtmlForAliases_notEditable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForAliases( $entity, false );
+
+		$this->assertNotContains( '<a ', $html );
+	}
+
 	/**
 	 * @return Entity
 	 */
 	protected function getTestEntity() {
-		$entity = $this->makeEntity( $this->makeEntityId( '22' ) );
+		$entity = $this->makeEntity( $this->makeEntityId( 22 ) );
 		$entity->setLabel( 'de', 'fuh' );
 		$entity->setLabel( 'en', 'foo' );
 
