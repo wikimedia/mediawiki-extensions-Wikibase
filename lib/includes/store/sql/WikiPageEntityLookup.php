@@ -3,13 +3,11 @@
 namespace Wikibase\Lib\Store;
 
 use DBQueryError;
-use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
 
@@ -36,24 +34,16 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	private $contentCodec;
 
 	/**
-	 * @var Deserializer
-	 */
-	private $entityDeserializer;
-
-	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param Deserializer $entityDeserializer
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		Deserializer $entityDeserializer,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
 
 		$this->contentCodec = $contentCodec;
-		$this->entityDeserializer = $entityDeserializer;
 
 		// TODO: migrate table away from using a numeric field so we no longer need this!
 		$this->idParser = new BasicEntityIdParser();
@@ -184,7 +174,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @param EntityId $entityId The entity to query the DB for.
 	 * @param int $revision The desired revision id, 0 means "current".
-	 * @param boolean $connType DB_READ or DB_MASTER
+	 * @param bool|int $connType DB_READ or DB_MASTER
 	 *
 	 * @throws \DBQueryError If the query fails.
 	 * @return object|null a raw database row object, or null if no such entity revision exists.
@@ -358,8 +348,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @param Object $row a row object as expected \Revision::getRevisionText(), that is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
-	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
-	 * with either $entityRev or $redirect or both being null (but not both being non-null).
+	 * @return EntityRevision
 	 */
 	private function loadEntity( $row ) {
 		wfProfileIn( __METHOD__ );
@@ -401,10 +390,8 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @throws StorageException
 	 */
 	private function unserializeEntity( $blob, $format = null ) {
-		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
-
 		try {
-			$entity = $this->entityDeserializer->deserialize( $data );
+			$entity = $this->contentCodec->decodeEntity( $blob, $format );
 		}
 		catch ( DeserializationException $ex ) {
 			throw new StorageException( $ex->getMessage(), 0, $ex );

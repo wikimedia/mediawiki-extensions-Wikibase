@@ -3,8 +3,6 @@
 namespace Wikibase;
 
 use DataUpdate;
-use Deserializers\Deserializer;
-use Serializers\Serializer;
 use Title;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Updates\DataUpdateClosure;
@@ -45,8 +43,6 @@ class PropertyHandler extends EntityHandler {
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param PropertyInfoStore $infoStore
-	 * @param Serializer $entitySerializer
-	 * @param Deserializer $entityDeserializer
 	 */
 	public function __construct(
 		EntityPerPage $entityPerPage,
@@ -54,9 +50,7 @@ class PropertyHandler extends EntityHandler {
 		EntityContentDataCodec $contentCodec,
 		$preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
-		PropertyInfoStore $infoStore,
-		Serializer $entitySerializer,
-		Deserializer $entityDeserializer
+		PropertyInfoStore $infoStore
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_PROPERTY,
@@ -64,9 +58,7 @@ class PropertyHandler extends EntityHandler {
 			$termIndex,
 			$contentCodec,
 			$preSaveValidators,
-			$errorLocalizer,
-			$entitySerializer,
-			$entityDeserializer
+			$errorLocalizer
 		);
 
 		$this->infoStore = $infoStore;
