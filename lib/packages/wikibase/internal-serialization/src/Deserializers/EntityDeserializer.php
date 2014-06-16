@@ -3,6 +3,7 @@
 namespace Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\Entity;
 
@@ -12,12 +13,25 @@ use Wikibase\DataModel\Entity\Entity;
  */
 class EntityDeserializer implements Deserializer {
 
+	/**
+	 * @var Deserializer
+	 */
 	private $legacyDeserializer;
+
+	/**
+	 * @var DispatchableDeserializer
+	 */
 	private $currentDeserializer;
 
+	/**
+	 * @var mixed
+	 */
 	private $serialization;
 
-	public function __construct( Deserializer $legacyDeserializer, Deserializer $currentDeserializer ) {
+	public function __construct(
+		Deserializer $legacyDeserializer,
+		DispatchableDeserializer $currentDeserializer
+	) {
 		$this->legacyDeserializer = $legacyDeserializer;
 		$this->currentDeserializer = $currentDeserializer;
 	}
@@ -47,7 +61,7 @@ class EntityDeserializer implements Deserializer {
 	}
 
 	private function isCurrentSerialization() {
-		return array_key_exists( 'id', $this->serialization );
+		return $this->currentDeserializer->isDeserializerFor( $this->serialization );
 	}
 
 	private function fromLegacySerialization() {
@@ -60,12 +74,12 @@ class EntityDeserializer implements Deserializer {
 
 	private function fromUnknownSerialization() {
 		try {
-			return $this->legacyDeserializer->deserialize( $this->serialization );
+			return $this->fromLegacySerialization();
 		}
 		catch ( DeserializationException $ex ) {}
 
 		try {
-			return $this->currentDeserializer->deserialize( $this->serialization );
+			return $this->fromCurrentSerialization();
 		}
 		catch ( DeserializationException $ex ) {}
 
