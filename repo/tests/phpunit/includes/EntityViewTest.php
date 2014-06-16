@@ -49,7 +49,7 @@ use Wikibase\Utils;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
-abstract class EntityViewTest extends \MediaWikiTestCase {
+abstract class EntityViewTest extends \MediaWikiLangTestCase {
 
 	protected static $mockRepo;
 
@@ -501,6 +501,54 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 			array( 'http://acme.com/test' ) );
 
 		return $argLists;
+	}
+
+	public function testGetHtmlForLabel_editable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForLabel( $entity );
+
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/Q1/en"[^>]*>\S+</a>@', $html );
+	}
+
+	public function testGetHtmlForLabel_notEditable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForLabel( $entity, false );
+
+		$this->assertNotContains( '<a ', $html );
+	}
+
+	public function testGetHtmlForDescription_editable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForDescription( $entity );
+
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetDescription/Q1/en"[^>]*>\S+</a>@', $html );
+	}
+
+	public function testGetHtmlForDescription_notEditable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForDescription( $entity, false );
+
+		$this->assertNotContains( '<a ', $html );
+	}
+
+	public function testGetHtmlForAliases_editable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForAliases( $entity );
+
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetAliases/Q1/en"[^>]*>\S+</a>@', $html );
+	}
+
+	public function testGetHtmlForAliases_notEditable() {
+		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
+		$entityView = $this->newEntityView( $entity->getType() );
+		$html = $entityView->getHtmlForAliases( $entity, false );
+
+		$this->assertNotContains( '<a ', $html );
 	}
 
 	/**
