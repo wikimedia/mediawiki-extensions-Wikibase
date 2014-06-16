@@ -16,6 +16,24 @@
       "revId": "e73e1214d137682fceef87896a86808a13c6fdeb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_442efe3f",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-16T20:25:24Z",
+      "side": 1,
+      "message": "I just copied this line from two other places in SpecialModifyTerm and SpecialSetSiteLink that did the same. The reason to write it like that is that the $this-\u003efoo variables may be set to default values. We don\u0027t want the default value show up in the form.\n\nIt\u0027s true that $this-site currently doesn\u0027t get such a default value. However, I would like to keep it as it is now just to be sure.",
+      "parentUuid": "ee391fd1_1ee5e79f",
+      "revId": "e73e1214d137682fceef87896a86808a13c6fdeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
