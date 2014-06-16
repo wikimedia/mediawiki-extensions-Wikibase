@@ -2,11 +2,13 @@
 
 namespace Wikibase\Test;
 
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityFactory;
 use Wikibase\EntityRevision;
+use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
@@ -60,7 +62,6 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 
 		return new WikiPageEntityLookup(
 			$this->getEntityContentCodec(),
-			WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer(),
 			false
 		);
 	}
@@ -74,7 +75,17 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 	}
 
 	private function getEntityContentCodec() {
-		return new EntityContentDataCodec();
+		$idParser = new BasicEntityIdParser();
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ), $idParser );
+
+		$codec = new EntityContentDataCodec(
+			$idParser,
+			$serializerFactory->newEntitySerializer(),
+			$deserializerFactory->newEntityDeserializer()
+		);
+
+		return $codec;
 	}
 
 }

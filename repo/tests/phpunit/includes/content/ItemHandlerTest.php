@@ -6,7 +6,6 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Entity;
 use Wikibase\ItemContent;
 
 /**

@@ -587,7 +587,11 @@ final class WikibaseClient {
 	 * @return EntityContentDataCodec
 	 */
 	public function getEntityContentDataCodec() {
-		return new EntityContentDataCodec();
+		return new EntityContentDataCodec(
+			$this->getEntityIdParser(),
+			$this->newInternalSerializerFactory()->newEntitySerializer(),
+			$this->newInternalDeserializerFactory()->newEntityDeserializer()
+		);
 	}
 
 	/**

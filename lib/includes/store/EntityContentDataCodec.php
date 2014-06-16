@@ -2,8 +2,16 @@
 
 namespace Wikibase\Lib\Store;
 
+use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
+use Serializers\Serializer;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Internal\LegacyIdInterpreter;
 
 /**
  * A codec for use by EntityContent resp EntityHandler subclasses for the
@@ -21,6 +29,36 @@ use MWContentSerializationException;
  * @author Daniel Kinzler
  */
 class EntityContentDataCodec {
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
+	/**
+	 * @var Deserializer
+	 */
+	private $entityDeserializer;
+
+	/**
+	 * @param EntityIdParser $entityIdParser
+	 * @param Serializer $entitySerializer
+	 * @param Deserializer $entityDeserializer
+	 */
+	function __construct(
+		EntityIdParser $entityIdParser,
+		Serializer $entitySerializer,
+		Deserializer $entityDeserializer
+	) {
+		$this->entityIdParser = $entityIdParser;
+		$this->entitySerializer = $entitySerializer;
+		$this->entityDeserializer = $entityDeserializer;
+	}
 
 	/**
 	 * Returns the supported serialization formats as a list of strings.
@@ -58,17 +96,14 @@ class EntityContentDataCodec {
 	/**
 	 * Encodes the given array structure as a blob using the given serialization format.
 	 *
-	 * @see EntityContent::toArray()
-	 * @see EntityHandler::serializeContent()
-	 *
-	 * @param array $data A nested data array representing an EntityContent object.
+	 * @param array $data A nested data array representing (part of) an EntityContent object.
 	 * @param string|null $format The desired serialization format.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException If the array could not be encoded.
 	 * @return string the blob
 	 */
-	public function encodeEntityContentData( array $data, $format ) {
+	private function encodeEntityContentData( array $data, $format ) {
 		switch ( $this->sanitizeFormat( $format ) ) {
 			case CONTENT_FORMAT_JSON:
 				$blob = json_encode( $data );
@@ -88,6 +123,29 @@ class EntityContentDataCodec {
 	}
 
 	/**
+	 * Encodes an Entity into a blob for storage.
+	 *
+	 * @see Entity::toArray()
+	 * @see EntityHandler::serializeContent()
+	 *
+	 * @param Entity $entity
+	 * @param string|null $format The desired serialization format.
+	 *
+	 * @throws InvalidArgumentException If the format is not supported.
+	 * @throws MWContentSerializationException If the array could not be encoded.
+	 * @return string A blob representing the given Entity.
+	 */
+	public function encodeEntity( Entity $entity, $format ) {
+		try {
+			$data = $this->entitySerializer->serialize( $entity );
+			return $this->encodeEntityContentData( $data, $format );
+		}
+		catch ( DeserializationException $ex ) {
+			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+		}
+	}
+
+	/**
 	 * Decodes the given blob into an array structure representing an EntityContent
 	 * object.
 	 *
@@ -100,7 +158,7 @@ class EntityContentDataCodec {
 	 * @throws MWContentSerializationException If the blob could not be decoded.
 	 * @return array An array representation of an EntityContent object
 	 */
-	public function decodeEntityContentData( $blob, $format ) {
+	private function decodeEntityContentData( $blob, $format ) {
 		if ( !is_string( $blob ) ) {
 			throw new InvalidArgumentException( '$blob must be a string' );
 		}
@@ -123,6 +181,64 @@ class EntityContentDataCodec {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Decodes a blob loaded from storage into an Entity.
+	 *
+	 * @see Entity::toArray()
+	 * @see EntityHandler::serializeContent()
+	 *
+	 * @param string $blob
+	 * @param string|null $format The serialization format of $blob.
+	 *
+	 * @throws InvalidArgumentException If the format is not supported.
+	 * @throws MWContentSerializationException If the array could not be decoded.
+	 * @return Entity|null The Entity represented by $blob, or null if $blob represents a redirect.
+	 */
+	public function decodeEntity( $blob, $format ) {
+		$data = $this->decodeEntityContentData( $blob, $format );
+
+		if ( $this->extractEntityId( $data, 'redirect' ) ) {
+			// If it's a redirect, return null.
+			return null;
+		}
+
+		try {
+			$entity = $this->entityDeserializer->deserialize( $data );
+			return $entity;
+		}
+		catch ( DeserializationException $ex ) {
+			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+		}
+	}
+
+	/**
+	 * @param array $data An array representation of an EntityContent object.
+	 * @param string $key The key in $data that contains the serialized ID.
+	 *
+	 * @throws MWContentSerializationException
+	 * @return EntityId|null The ID of the entity (resp. redirect), or null if
+	 *         $key is not set in $data.
+	 */
+	private function extractEntityId( array $data, $key ) {
+		if ( !isset( $data[$key] ) ) {
+			return null;
+		}
+
+		if ( is_array( $data[$key] ) ) {
+			// Handle the old-style representation of IDs as a two element array.
+			$stubbedId = $data[$key];
+			return LegacyIdInterpreter::newIdFromTypeAndNumber( $stubbedId[0], $stubbedId[1] );
+		}
+
+		try {
+			return $this->entityIdParser->parse( $data[$key] );
+		}
+		catch ( EntityIdParsingException $ex ) {
+			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+		}
+		return $this->entityIdParser->parse( $data[$key] );
 	}
 
 }
