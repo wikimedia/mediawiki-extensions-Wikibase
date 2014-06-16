@@ -138,6 +138,10 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$this->assertEquals( 12, $rev->getRevision(), 'new revision should be detected after notification' );
 	}
 
+	public function testEntityRedirected() {
+		$this->markTestIncomplete( 'Can\'t test entityRedirected notification, since MockRepository does not yet support redirects.' );
+	}
+
 	public function testEntityDeleted() {
 		$mock = new MockRepository();
 
