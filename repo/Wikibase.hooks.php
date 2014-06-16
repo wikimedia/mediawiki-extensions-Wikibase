@@ -32,6 +32,7 @@ use User;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\View\TextInjector;
 use WikiPage;
 
 /**

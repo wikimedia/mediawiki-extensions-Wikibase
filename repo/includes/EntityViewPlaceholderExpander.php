@@ -10,6 +10,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Repo\View\TermBoxView;
 
 /**
  * Utility for expanding the placeholders left in the HTML by EntityView.

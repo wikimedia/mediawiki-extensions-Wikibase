@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 use Language;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Item;
-use Wikibase\TermBoxView;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\View\TermBoxView;
 
 /**
  * @covers Wikibase\TermBoxView
