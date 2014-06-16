@@ -64,7 +64,7 @@ class PropertySerializerTest extends EntitySerializerBaseTest {
 		$validArgs[] = array(
 			$property,
 			array(
-				'id' => $this->getFormattedIdForEntity( $property ),
+				'id' => $property->getId()->getSerialization(),
 				'type' => $property->getType(),
 				'datatype' => $property->getDataTypeId()
 			)

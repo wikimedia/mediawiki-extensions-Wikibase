@@ -65,7 +65,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 		$validArgs[] = array(
 			$item,
 			array(
-				'id' => $this->getFormattedIdForEntity( $item ),
+				'id' => $item->getId()->getSerialization(),
 				'type' => $item->getType(),
 			),
 		);
@@ -76,7 +76,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 		$validArgs[] = array(
 			$item,
 			array(
-				'id' => $this->getFormattedIdForEntity( $item ),
+				'id' => $item->getId()->getSerialization(),
 				'type' => $item->getType(),
 			),
 			$options

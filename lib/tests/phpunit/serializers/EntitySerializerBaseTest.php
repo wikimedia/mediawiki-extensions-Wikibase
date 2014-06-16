@@ -61,7 +61,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$entity0,
 			array(
-				'id' => $this->getFormattedIdForEntity( $entity0 ),
+				'id' => $entity0->getId()->getSerialization(),
 				'type' => $entity0->getType(),
 				'aliases' => array(
 					'en' => array(
@@ -101,7 +101,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$entity1,
 			array(
-				'id' => $this->getFormattedIdForEntity( $entity1 ),
+				'id' => $entity1->getId()->getSerialization(),
 				'type' => $entity1->getType(),
 				'labels' => array(
 					'en' => array(
@@ -150,7 +150,7 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		$validArgs[] = array(
 			$entity2,
 			array(
-				'id' => $this->getFormattedIdForEntity( $entity2 ),
+				'id' => $entity2->getId()->getSerialization(),
 				'type' => $entity2->getType(),
 				'labels' => array(
 					'en' => array(
@@ -179,10 +179,6 @@ abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 		);
 
 		return $validArgs;
-	}
-
-	protected function getFormattedIdForEntity( Entity $entity ) {
-		return $entity->getId()->getSerialization();
 	}
 
 }
