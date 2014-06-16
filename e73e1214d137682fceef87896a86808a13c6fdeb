@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_1ee5e79f",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-16T19:45:36Z",
+      "side": 1,
+      "message": "$this-\u003esite already has the value of $this-\u003egetRequest()-\u003egetVal( \u0027site\u0027 ) per default AFAIS, so the whole logic here probably isn\u0027t needed",
+      "revId": "e73e1214d137682fceef87896a86808a13c6fdeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
