@@ -43,10 +43,10 @@ class StatementDeserializer implements Deserializer {
 			throw new DeserializationException( 'Claim serialization must be an array' );
 		}
 
-		if ( $this->isLegacySerialization( $serialization ) ) {
-			return $this->fromLegacySerialization( $serialization );
-		} elseif ( $this->isCurrentSerialization( $serialization ) ) {
-			return $this->fromCurrentSerialization( $serialization );
+		if ( $this->currentDeserializer->isDeserializerFor( $serialization ) ) {
+			return $this->currentDeserializer->deserialize( $serialization );
+		} elseif ( $this->isLegacySerialization( $serialization ) ) {
+			return $this->legacyDeserializer->deserialize( $serialization );
 		} else {
 			return $this->fromUnknownSerialization( $serialization );
 		}
@@ -57,25 +57,13 @@ class StatementDeserializer implements Deserializer {
 		return array_key_exists( 'm', $serialization );
 	}
 
-	private function isCurrentSerialization( array $serialization ) {
-		return $this->currentDeserializer->isDeserializerFor( $serialization );
-	}
-
-	private function fromLegacySerialization( array $serialization ) {
-		return $this->legacyDeserializer->deserialize( $serialization );
-	}
-
-	private function fromCurrentSerialization( array $serialization ) {
-		return $this->currentDeserializer->deserialize( $serialization );
-	}
-
 	private function fromUnknownSerialization( array $serialization ) {
 		try {
-			return $this->fromLegacySerialization( $serialization );
-		} catch ( DeserializationException $legacyEx ) {
+			return $this->currentDeserializer->deserialize( $serialization );
+		} catch ( DeserializationException $currentEx ) {
 			try {
-				return $this->fromCurrentSerialization( $serialization );
-			} catch ( DeserializationException $currentEx ) {
+				return $this->legacyDeserializer->deserialize( $serialization );
+			} catch ( DeserializationException $legacyEx ) {
 				throw new DeserializationException(
 					'The provided claim serialization is neither legacy ('
 					. $legacyEx->getMessage() . ') nor current ('
