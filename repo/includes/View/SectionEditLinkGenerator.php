@@ -5,7 +5,6 @@ namespace Wikibase\Repo\View;
 use Language;
 use Message;
 use SpecialPageFactory;
-use Wikibase\Entity;
 
 /**
  * Generates HTML for a section edit link
@@ -26,7 +25,7 @@ class SectionEditLinkGenerator {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $url specifies the URL for the button, default is an empty string
+	 * @param string|null $url specifies the URL for the button
 	 * @param Message $message the message to show on the link
 	 * @param string $tag allows to specify the type of the outer node
 	 * @param bool $enabled can be set to false to display the button disabled
@@ -38,10 +37,10 @@ class SectionEditLinkGenerator {
 
 		$buttonLabel = $message->text();
 
-		$button = ( $enabled ) ?
+		$button = $url !== null && $enabled ?
 			wfTemplate( 'wikibase-toolbarbutton',
 				$buttonLabel,
-				$url // todo: add link to special page for non-JS editing
+				$url
 			) :
 			wfTemplate( 'wikibase-toolbarbutton-disabled',
 				$buttonLabel
@@ -68,25 +67,27 @@ class SectionEditLinkGenerator {
 	 * @since 0.5
 	 *
 	 * @param string $specialPageName The special page to link to
-	 * @param Entity $entity The entity to edit
-	 * @param Language $language The desired language of the special page
+	 * @param string|null $prefixedId The ID serialization of the entity to edit
+	 * @param Language|null $language The desired language of the special page
+	 *
+	 * @return string
 	 */
-	public function getEditUrl( $specialPageName, Entity $entity, Language $language = null ) {
+	public function getEditUrl( $specialPageName, $prefixedId, Language $language = null ) {
 		$specialPage = SpecialPageFactory::getPage( $specialPageName );
 
 		if ( $specialPage === null ) {
 			return ''; //XXX: this should throw an exception?!
 		}
 
-		if ( $entity->getId() ) {
-			$subPage = $entity->getId()->getPrefixedId();
-		} else {
-			$subPage = ''; // can't skip this, that would confuse the order of parameters!
+		// All special pages relevant here accept the first parameter to be empty
+		$subPage = '';
+		if ( $prefixedId !== null ) {
+			$subPage .= $prefixedId;
 		}
-
 		if ( $language !== null ) {
 			$subPage .= '/' . $language->getCode();
 		}
+
 		return $specialPage->getPageTitle( $subPage )->getLocalURL();
 	}
 

@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Language;
 use Wikibase\Datamodel\Entity\Entity;
 use Wikibase\Datamodel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
@@ -65,10 +66,10 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getEditUrlProvider
 	 * @covers SectionEditLinkGenerator::getEditUrl
 	 */
-	public function testGetEditUrl( $expected, $specialpagename, Entity $entity, $language = null ) {
+	public function testGetEditUrl( $expected, $specialpagename, $prefixedId, $language = null ) {
 		$generator = new SectionEditLinkGenerator();
 
-		$editUrl = $generator->getEditUrl( $specialpagename, $entity, $language );
+		$editUrl = $generator->getEditUrl( $specialpagename, $prefixedId, $language );
 
 		$this->assertRegExp( $expected, $editUrl );
 	}
@@ -78,12 +79,12 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'+Special:Version/Q1$+',
 				'Version',
-				new Item( array( 'entity' => 'Q1' ) )
+				'Q1'
 			),
 			array(
 				'+Special:Version/Q1/de$+',
 				'Version',
-				new Item( array( 'entity' => 'Q1' ) ),
+				'Q1',
 				Language::factory( 'de' )
 			)
 		);
