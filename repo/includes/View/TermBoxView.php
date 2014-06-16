@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\View;
 
 use Language;
+use Message;
 use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Utils;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
  * Generates HTML for displaying the term box, that is, the box
@@ -24,12 +24,12 @@ class TermBoxView {
 	/**
 	 * @var SectionEditLinkGenerator
 	 */
-	protected $sectionEditLinkGenerator;
+	private $sectionEditLinkGenerator;
 
 	/**
 	 * @var Language
 	 */
-	protected $language;
+	private $language;
 
 	public function __construct( Language $language ) {
 		$this->language = $language;
@@ -39,9 +39,9 @@ class TermBoxView {
 	/**
 	 * @param $key
 	 *
-	 * @return \Message
+	 * @return Message
 	 */
-	protected function msg( $key ) {
+	private function msg( $key ) {
 		return wfMessage( $key )->inLanguage( $this->language );
 	}
 
@@ -52,13 +52,13 @@ class TermBoxView {
 	 *
 	 * @param Title $title The title of the page the term box is to be shown on
 	 * @param Entity $entity the entity to render
-	 * @param string[] $languages list of languages to show terms for
+	 * @param string[] $languageCodes list of language codes to show terms for
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	public function renderTermBox( Title $title, Entity $entity, $languages, $editable = true ) {
-		if ( empty( $languages ) ) {
+	public function renderTermBox( Title $title, Entity $entity, array $languageCodes, $editable = true ) {
+		if ( empty( $languageCodes ) ) {
 			return '';
 		}
 
@@ -66,37 +66,44 @@ class TermBoxView {
 
 		$html = $thead = $tbody = '';
 
+		$entityId = $entity->getId();
 		$labels = $entity->getLabels();
 		$descriptions = $entity->getDescriptions();
+
+		// FIXME: Reuse SectionEditLinkGenerator::getEditUrl here if possible.
+		// All special pages relevant here accept the first parameter to be empty
+		$subPage = '';
+		if ( $entityId !== null ) {
+			$subPage .= $entityId->getSerialization();
+		}
 
 		$html .= wfTemplate( 'wb-terms-heading', $this->msg( 'wikibase-terms' ) );
 
 		$rowNumber = 0;
-		foreach( $languages as $language ) {
-
-			$label = array_key_exists( $language, $labels ) ? $labels[$language] : false;
-			$description = array_key_exists( $language, $descriptions ) ? $descriptions[$language] : false;
+		foreach ( $languageCodes as $languageCode ) {
+			$label = array_key_exists( $languageCode, $labels ) ? $labels[$languageCode] : false;
+			$description = array_key_exists( $languageCode, $descriptions ) ? $descriptions[$languageCode] : false;
 
 			$alternatingClass = ( $rowNumber++ % 2 ) ? 'even' : 'uneven';
 
-			$entitySubPage = $this->getFormattedIdForEntity( $entity ) . '/' . $language;
-			$specialSetLabel = SpecialPage::getTitleFor( "SetLabel", $entitySubPage );
-			$specialSetDescription = SpecialPage::getTitleFor( "SetDescription", $entitySubPage );
+			$localSubPage = $subPage . '/' . $languageCode;
+			$specialSetLabel = SpecialPage::getTitleFor( 'SetLabel', $localSubPage );
+			$specialSetDescription = SpecialPage::getTitleFor( 'SetDescription', $localSubPage );
 
 			$editLabelLink = $specialSetLabel->getLocalURL();
 			$editDescriptionLink = $specialSetDescription->getLocalURL();
 
 			$tbody .= wfTemplate( 'wb-term',
-				$language,
+				$languageCode,
 				$alternatingClass,
-				htmlspecialchars( Utils::fetchLanguageName( $language ) ),
+				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
 				htmlspecialchars( $label !== false ? $label : $this->msg( 'wikibase-label-empty' )->text() ),
 				htmlspecialchars( $description !== false ? $description : $this->msg( 'wikibase-description-empty' )->text() ),
 				$this->sectionEditLinkGenerator->getHtmlForEditSection( $editLabelLink, $this->msg( 'wikibase-edit' ), 'span', $editable ),
 				$this->sectionEditLinkGenerator->getHtmlForEditSection( $editDescriptionLink, $this->msg( 'wikibase-edit' ), 'span', $editable ),
 				$label !== false ? '' : 'wb-value-empty',
 				$description !== false ? '' : 'wb-value-empty',
-				$title->getLocalURL( array( 'setlang' => $language ) )
+				$title->getLocalURL( array( 'setlang' => $languageCode ) )
 			);
 		}
 
@@ -104,19 +111,6 @@ class TermBoxView {
 
 		wfProfileOut( __METHOD__ );
 		return $html;
-	}
-
-	/**
-	 * @param Entity $entity
-	 *
-	 * @return string
-	 */
-	protected function getFormattedIdForEntity( Entity $entity ) {
-		if ( !$entity->getId() ) {
-			return ''; //XXX: should probably throw an exception?
-		}
-
-		return $entity->getId()->getPrefixedId();
 	}
 
 }
