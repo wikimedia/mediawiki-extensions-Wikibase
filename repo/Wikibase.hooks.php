@@ -10,6 +10,7 @@ use DatabaseUpdater;
 use DummyLinker;
 use HistoryPager;
 use Html;
+use InvalidArgumentException;
 use Language;
 use Linker;
 use LogEntryBase;
@@ -287,15 +288,24 @@ final class RepoHooks {
 	 * @param Entity|null $newEntity
 	 * @param Revision $revision
 	 * @param User $user
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private static function notifyClientWikisOnUpdate( $action, $oldEntity, $newEntity, Revision $revision, User $user ) {
+		if ( $newEntity ) {
+			$objectId = $newEntity->getId()->getPrefixedId();
+		} elseif ( $oldEntity ) {
+			$objectId = $oldEntity->getId()->getPrefixedId();
+		} else {
+			throw new InvalidArgumentException( 'At least one of $newEntity or $oldEntity must be given!' );
+		}
 
 		$change = EntityChange::newFromUpdate( $action, $oldEntity, $newEntity );
 
 		$change->setFields( array(
 			'revision_id' => $revision->getId(),
 			'user_id' => $user->getId(),
-			'object_id' => $newEntity->getId()->getPrefixedId(),
+			'object_id' => $objectId,
 			'time' => $revision->getTimestamp(),
 		) );
 
@@ -345,7 +355,7 @@ final class RepoHooks {
 		}
 
 		//TODO: notify the client over the deletion of a redirect!
-		if ( $content->isRedirect() ) {
+		if ( !$content->isRedirect() ) {
 
 			/* @var EntityContent $content */
 			$entity = $content->getEntity();

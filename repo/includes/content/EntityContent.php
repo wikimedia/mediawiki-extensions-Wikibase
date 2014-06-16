@@ -746,9 +746,7 @@ abstract class EntityContent extends AbstractContent {
 		// Chain to parent
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 		if ( $status->isOK() ) {
-			if ( $this->isRedirect() ) {
-				$status = Result::newSuccess();
-			} else {
+			if ( !$this->isRedirect() ) {
 				/* @var EntityHandler $handler */
 				$handler = $this->getContentHandler();
 				$status = $handler->applyOnSaveValidators( $this );

@@ -113,7 +113,7 @@ class ItemHandler extends EntityHandler {
 
 		$updates[] = new DataUpdateClosure(
 			array( $this->siteLinkStore, 'deleteLinksOfItem' ),
-			$content->getEntity()->getId()
+			$content->getEntityId()
 		);
 
 		return array_merge(
@@ -137,10 +137,17 @@ class ItemHandler extends EntityHandler {
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
 		$updates = array();
 
-		$updates[] = new DataUpdateClosure(
-			array( $this->siteLinkStore, 'saveLinksOfItem' ),
-			$content->getEntity()
-		);
+		if ( $content->isRedirect() ) {
+			$updates[] = new DataUpdateClosure(
+				array( $this->siteLinkStore, 'deleteLinksOfItem' ),
+				$content->getEntityId()
+			);
+		} else {
+			$updates[] = new DataUpdateClosure(
+				array( $this->siteLinkStore, 'saveLinksOfItem' ),
+				$content->getEntity()
+			);
+		}
 
 		return array_merge(
 			$updates,

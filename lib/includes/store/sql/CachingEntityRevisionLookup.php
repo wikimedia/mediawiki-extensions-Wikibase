@@ -234,6 +234,18 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
+	 * Notifies the cache that an entity was redirected.
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function entityRedirected( EntityRedirect $entityRedirect, $revisionId ) {
+		//TODO: cache redirects
+		$key = $this->getCacheKey( $entityRedirect->getEntityId() );
+		$this->cache->delete( $key );
+	}
+
+	/**
 	 * Notifies the cache that an entity was deleted.
 	 *
 	 * @param EntityId $entityId

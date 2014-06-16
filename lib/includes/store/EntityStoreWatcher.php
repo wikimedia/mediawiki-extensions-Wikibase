@@ -15,7 +15,26 @@ use Wikibase\EntityRevision;
  */
 interface EntityStoreWatcher {
 
+	/**
+	 * called when an entity is updated
+	 *
+	 * @param EntityRevision $entityRevision
+	 */
 	public function entityUpdated( EntityRevision $entityRevision );
+
+	/**
+	 * called when an entity is deleted
+	 *
+	 * @param EntityId $entityId
+	 */
 	public function entityDeleted( EntityId $entityId );
+
+	/**
+	 * called when an entity is redirected
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function entityRedirected( EntityRedirect $entityRedirect, $revisionId );
 
 }
