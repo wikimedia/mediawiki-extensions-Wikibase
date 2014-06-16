@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_05923900",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-06-16T12:02:34Z",
+      "side": 1,
+      "message": "I would prefer removing these lines. It seems that before change Ibb169101bd75e4244ba7cae404ccaf49b9b3171d, \"messages\" could end up not being structured correctly.",
+      "revId": "1f229e8d922512e84aea98d5bfed7f15019bc408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
