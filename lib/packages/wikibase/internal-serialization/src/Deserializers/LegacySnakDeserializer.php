@@ -3,6 +3,7 @@
 namespace Wikibase\InternalSerialization\Deserializers;
 
 use DataValues\DataValue;
+use DataValues\UnDeserializableValue;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use LogicException;
@@ -48,12 +49,16 @@ class LegacySnakDeserializer implements Deserializer {
 	}
 
 	private function deserializeValueSnak( array $serialization ) {
-		$dataValue = $this->dataValueDeserializer->deserialize(
-			array(
-				'type' => $serialization[2],
-				'value' => $serialization[3],
-			)
-		);
+		try {
+			$dataValue = $this->dataValueDeserializer->deserialize(
+				array(
+					'type' => $serialization[2],
+					'value' => $serialization[3],
+				)
+			);
+		} catch ( DeserializationException $ex ) {
+			$dataValue = new UnDeserializableValue( $serialization[3], $serialization[2], $ex->getMessage() );
+		}
 
 		/**
 		 * @var DataValue $dataValue
