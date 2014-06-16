@@ -12,6 +12,7 @@ use WikiPage;
 
 /**
  * @covers Wikibase\EditEntityAction
+ * @covers Wikibase\SubmitEntityAction
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

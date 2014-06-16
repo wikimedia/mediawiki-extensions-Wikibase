@@ -299,7 +299,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			// if the revision to undo is the latest revision, then there can be no conflicts
 			$appDiff = $diff;
 		} else {
-			$patchedCurrent = $latestContent->getPatched( $diff );
+			$patchedCurrent = $latestContent->getPatchedCopy( $diff );
 			$appDiff = $latestContent->getDiff( $patchedCurrent );
 		}
 
