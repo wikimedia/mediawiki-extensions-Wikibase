@@ -7,6 +7,7 @@ use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Utils;
+use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
  * Generates HTML for displaying the term box, that is, the box

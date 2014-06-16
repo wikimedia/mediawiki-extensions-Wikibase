@@ -2,7 +2,10 @@
 
 namespace Wikibase\Repo\View;
 
+use Language;
 use Message;
+use SpecialPageFactory;
+use Wikibase\Entity;
 
 /**
  * Generates HTML for a section edit link
@@ -15,7 +18,6 @@ use Message;
  * @author Daniel Kinzler
  */
 class SectionEditLinkGenerator {
-
 
 	/**
 	 * Returns a toolbar with an edit link for a single statement. Equivalent to edit toolbar in JavaScript but with
@@ -59,4 +61,33 @@ class SectionEditLinkGenerator {
 		wfProfileOut( __METHOD__ );
 		return $html;
 	}
+
+	/**
+	 * Get the Url to an edit special page
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $specialPageName The special page to link to
+	 * @param Entity $entity The entity to edit
+	 * @param Language $language The desired language of the special page
+	 */
+	public function getEditUrl( $specialPageName, Entity $entity, Language $language = null ) {
+		$specialPage = SpecialPageFactory::getPage( $specialPageName );
+
+		if ( $specialPage === null ) {
+			return ''; //XXX: this should throw an exception?!
+		}
+
+		if ( $entity->getId() ) {
+			$subPage = $entity->getId()->getPrefixedId();
+		} else {
+			$subPage = ''; // can't skip this, that would confuse the order of parameters!
+		}
+
+		if ( $language !== null ) {
+			$subPage .= '/' . $language->getCode();
+		}
+		return $specialPage->getPageTitle( $subPage )->getLocalURL();
+	}
+
 }
