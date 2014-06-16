@@ -9,7 +9,7 @@ use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\View\SnakHtmlGenerator;
+use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * @covers Wikibase\SnakHtmlGenerator

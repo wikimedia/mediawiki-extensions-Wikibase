@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TextInjector;
+use Wikibase\Repo\View\TextInjector;
 
 /**
  * @covers Wikibase\TextInjector

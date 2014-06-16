@@ -15,7 +15,7 @@ use Wikibase\Reference;
 use Wikibase\ReferenceList;
 use Wikibase\SnakList;
 use Wikibase\Statement;
-use Wikibase\View\SnakHtmlGenerator;
+use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator

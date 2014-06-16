@@ -12,7 +12,8 @@ use SpecialPageFactory;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\View\SnakHtmlGenerator;
+use Wikibase\Repo\View\SnakHtmlGenerator;
+use Wikibase\Repo\View\TextInjector;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
