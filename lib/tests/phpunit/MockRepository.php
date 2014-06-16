@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DatabaseBase;
+use PermissionsError;
 use Status;
 use User;
 use Wikibase\DataModel\Claim\Claims;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;
@@ -870,6 +872,22 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 		//XXX: Using setId() with an integer argument is deprecated!
 		$this->maxId++;
 		$entity->setId( $this->maxId );
+	}
+
+	/**
+	 * @see EntityStore::saveRedirect
+	 *
+	 * @param EntityRedirect $redirect
+	 * @param string $summary
+	 * @param User $user
+	 * @param int $flags
+	 * @param bool $baseRevId
+	 *
+	 * @throws StorageException Always
+	 * @return int Never
+	 */
+	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false ) {
+		throw new StorageException( "Redirects are not supported by " . __CLASS__ );
 	}
 
 	private function parseId( $id ) {

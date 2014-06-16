@@ -310,12 +310,19 @@ final class RepoHooks {
 	 * @param Revision $revision
 	 */
 	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
-		$entity = $revision->getContent()->getEntity();
+		/* @var EntityContent $content */
+		$content = $revision->getContent();
 
 		// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
 		// May be redundant in some cases. Take care not to cause infinite regress.
-		$entityRev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
-		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+		if ( $content->isRedirect() ) {
+			$redirect = $content->getEntityRedirect();
+			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->redirectUpdated( $redirect, $revision->getId() );
+		} else {
+			$entity = $content->getEntity();
+			$entityRev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
+			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
+		}
 	}
 
 	/**
