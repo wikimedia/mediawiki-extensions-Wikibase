@@ -106,9 +106,10 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
-### 1.1 (2014-06-14)
+### 1.1 (2014-06-16)
 
 * Added `DeserializerFactory::newClaimDeserializer`
+* The Deserializer for snaks now constructs `UnDeserializableValue` objects for invalid data values
 
 ### 1.0 (2014-05-27)
 
