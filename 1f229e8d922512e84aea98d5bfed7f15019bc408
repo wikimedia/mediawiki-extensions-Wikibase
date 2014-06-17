@@ -34,6 +34,24 @@
       "revId": "1f229e8d922512e84aea98d5bfed7f15019bc408",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_4aa605c0",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-06-17T07:32:00Z",
+      "side": 1,
+      "message": "Why did you raise the question in the comment if you already have an opinion? However, in my opinion, you should only have compatibility to what you are aware of - everything else just works by accident. At least, there should be a comment why this compatibility is needed / which component may return the abnormal structure. Without a comment, everybody stumbling over these lines will wonder why they are necessary and whether they may be removed - basically adding confusion and complexity.",
+      "parentUuid": "ee391fd1_20bacb1e",
+      "revId": "1f229e8d922512e84aea98d5bfed7f15019bc408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
