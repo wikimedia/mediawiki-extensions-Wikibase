@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_f85eae7a",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T20:52:14Z",
+      "side": 1,
+      "message": "This is currently broken. Since it uses a chain it needs to return the language somehow but currently doesn\u0027t.",
+      "revId": "a004ed33f06844d7151af84a41679562228a5c89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
