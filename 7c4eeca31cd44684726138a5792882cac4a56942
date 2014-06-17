@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_b06e0429",
+        "filename": "lib/includes/store/EntityStoreWatcher.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T16:03:56Z",
+      "side": 1,
+      "message": "What does \"redirected\" mean? When a redirect is executed? Probably not. When a redirect is created? Does this include the other events or are they all executed in this case? Delete for the old entity, update for the new plus the redirect call?",
+      "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_704f7cc1",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T16:03:56Z",
+      "side": 1,
+      "message": "Why is the revision id here?",
+      "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_50c47811",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T16:03:56Z",
+      "side": 1,
+      "message": "So this really is the same as the delete call below? Why not use delete then?",
+      "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_50eb5877",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T16:03:56Z",
+      "side": 1,
+      "message": "100% of the code here is duplicated. Is this a mistake???",
+      "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
