@@ -37,6 +37,30 @@ class Property extends Entity {
 	}
 
 	/**
+	 * Can be integer since 0.1.
+	 * Can be PropertyId since 0.5.
+	 * Can be null since 1.0.
+	 *
+	 * @param PropertyId|int|null $id
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function setId( $id ) {
+		if ( $id === null || $id instanceof PropertyId ) {
+			$this->id = $id;
+		}
+		else if ( is_integer( $id ) ) {
+			$this->id = PropertyId::newFromNumber( $id );
+		}
+		else if ( $id instanceof EntityId ) {
+			$this->id = new PropertyId( $id->getSerialization() );
+		}
+		else {
+			throw new InvalidArgumentException( __METHOD__ . ' only accepts PropertyId, integer and null' );
+		}
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $dataTypeId
@@ -84,17 +108,6 @@ class Property extends Entity {
 			Fingerprint::newEmpty(),
 			$dataTypeId
 		);
-	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @param string $idSerialization
-	 *
-	 * @return EntityId
-	 */
-	protected function idFromSerialization( $idSerialization ) {
-		return new PropertyId( $idSerialization );
 	}
 
 	/**

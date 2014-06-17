@@ -50,38 +50,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 		return $this->id;
 	}
 
-	/**
-	 * Can be EntityId since 0.3.
-	 * The support for setting an integer here is deprecated since 0.5.
-	 * New deriving classes are allowed to reject anything that is not an EntityId of the correct type.
-	 * Null can be provided as of 1.0.
-	 *
-	 * @since 0.1
-	 *
-	 * @param EntityId|null $id
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function setId( $id ) {
-		if ( $id === null ) {
-			$this->id = null;
-		}
-		else if ( $id instanceof EntityId ) {
-			if ( $id->getEntityType() !== $this->getType() ) {
-				throw new InvalidArgumentException( 'Attempt to set an EntityId with mismatching entity type' );
-			}
-
-			// This ensures the id is an instance of the correct derivative of EntityId.
-			// EntityId (non-derivative) instances are thus converted.
-			$this->id = $this->idFromSerialization( $id->getSerialization() );
-		}
-		else if ( is_integer( $id ) ) {
-			$this->id = LegacyIdInterpreter::newIdFromTypeAndNumber( $this->getType(), $id );
-		}
-		else {
-			throw new InvalidArgumentException( __METHOD__ . ' only accepts EntityId and integer' );
-		}
-	}
+	public abstract function setId( $id );
 
 	/**
 	 * Sets the value for the label in a certain value.
@@ -546,15 +515,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	public function setFingerprint( Fingerprint $fingerprint ) {
 		$this->fingerprint = $fingerprint;
 	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @param string $idSerialization
-	 *
-	 * @return EntityId
-	 */
-	protected abstract function idFromSerialization( $idSerialization );
 
 	/**
 	 * Returns a type identifier for the entity.
