@@ -801,22 +801,17 @@ final class RepoHooks {
 		// The following three vars should all exist, unless there is a failurre
 		// somewhere, and then it will fail hard. Better test it now!
 		$page = new WikiPage( $target );
-		if ( is_null( $page ) ) {
-			// Failed, can't continue. This should not happen.
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
 		$content = null;
 
 		try {
 			$content = $page->getContent();
 		} catch ( MWContentSerializationException $ex ) {
 			// if this fails, it's not horrible.
-			wfWarn( "Failed to get entity object for [[" . $page->getTitle()->getFullText() . "]]"
-					. ": " . $ex->getMessage() );
+			wfWarn( 'Failed to get entity object for [[' . $page->getTitle()->getFullText() . ']]'
+					. ': ' . $ex->getMessage() );
 		}
 
-		if ( is_null( $content ) || !( $content instanceof EntityContent ) ) {
+		if ( !( $content instanceof EntityContent ) ) {
 			// Failed, can't continue. This could happen because the content is empty (page doesn't exist),
 			// e.g. after item was deleted.
 
@@ -826,7 +821,8 @@ final class RepoHooks {
 			return true;
 		}
 
-		if ( $content->isRedirect() ) {
+		$entity = $content->getEntity();
+		if ( $entity === null || $content->isRedirect() ) {
 			// TODO: resolve redirect, show redirect info in link
 			wfProfileOut( __METHOD__ );
 			return true;
@@ -1409,4 +1405,5 @@ final class RepoHooks {
 
 		return true;
 	}
+
 }
