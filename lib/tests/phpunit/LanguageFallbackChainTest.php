@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
@@ -19,9 +20,9 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideExtractPreferredValue
 	 */
-	public function testExtractPreferredValue( $lang, $mode, $data, $expected ) {
+	public function testExtractPreferredValue( $languageCode, $mode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguageCode( $lang, $mode );
+		$chain = $factory->newFromLanguageCode( $languageCode, $mode );
 
 		$resolved = $chain->extractPreferredValue( $data );
 
@@ -110,9 +111,9 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideExtractPreferredValueOrAny
 	 */
-	public function testExtractPreferredValueOrAny( $lang, $mode, $data, $expected ) {
+	public function testExtractPreferredValueOrAny( $languageCode, $mode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode );
+		$chain = $factory->newFromLanguage( Language::factory( $languageCode ), $mode );
 
 		$resolved = $chain->extractPreferredValueOrAny( $data );
 
@@ -162,6 +163,26 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			), null ),
 			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, array(), null ),
 		);
+	}
+
+	public function testExtractPreferredValue_fromEntityInfoBuilderArray() {
+		$factory = new LanguageFallbackChainFactory();
+		$chain = $factory->newFromLanguageCode( 'de', LanguageFallbackChainFactory::FALLBACK_SELF );
+
+		$expected = array( 'value' => 'example' );
+		$value = $chain->extractPreferredValue( array( 'de' => $expected ) );
+
+		$this->assertEquals( $expected, $value );
+	}
+
+	public function testExtractPreferredValueOrAny_fromEntityInfoBuilderArray() {
+		$factory = new LanguageFallbackChainFactory();
+		$chain = $factory->newFromLanguageCode( 'de', LanguageFallbackChainFactory::FALLBACK_SELF );
+
+		$expected = array( 'value' => 'example' );
+		$value = $chain->extractPreferredValueOrAny( array( 'en' => $expected ) );
+
+		$this->assertEquals( $expected, $value );
 	}
 
 }

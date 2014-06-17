@@ -38,25 +38,29 @@ class LanguageFallbackChain {
 	/**
 	 * Try to fetch the best value in a multilingual data array.
 	 *
-	 * @param string[] $data Multilingual data with language codes as keys
+	 * @param string[]|array[] $data Multilingual data with language codes as keys
 	 *
-	 * @return null|array of three items: array(
+	 * @return string[]|null of three items: array(
 	 * 	'value' => finally fetched and translated value
 	 * 	'language' => language code of the language which final value is in
 	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no "acceptable" data can be found.
 	 */
 	public function extractPreferredValue( array $data ) {
-
 		foreach ( $this->chain as $languageWithConversion ) {
-			$fetchCode = $languageWithConversion->getFetchLanguageCode();
+			$languageCode = $languageWithConversion->getFetchLanguageCode();
 
-			if ( isset( $data[$fetchCode] ) ) {
-				return array(
-					'value' => $languageWithConversion->translate( $data[$fetchCode] ),
-					'language' => $languageWithConversion->getLanguageCode(),
-					'source' => $languageWithConversion->getSourceLanguageCode(),
-				);
+			if ( isset( $data[$languageCode] ) ) {
+				// Return pre-build data from an EntityInfoBuilder as it is
+				if ( is_array( $data[$languageCode] ) ) {
+					return $data[$languageCode];
+				} else {
+					return array(
+						'value' => $languageWithConversion->translate( $data[$languageCode] ),
+						'language' => $languageWithConversion->getLanguageCode(),
+						'source' => $languageWithConversion->getSourceLanguageCode(),
+					);
+				}
 			}
 		}
 
@@ -67,9 +71,9 @@ class LanguageFallbackChain {
 	 * Try to fetch the best value in a multilingual data array first.
 	 * If no "acceptable" value exists, return any value known.
 	 *
-	 * @param string[] $data Multilingual data with language codes as keys
+	 * @param string[]|array[] $data Multilingual data with language codes as keys
 	 *
-	 * @return null|array of three items: array(
+	 * @return string[]|null of three items: array(
 	 * 	'value' => finally fetched and translated value
 	 * 	'language' => language code of the language which final value is in
 	 * 	'source' => language code of the language where the value is translated from
@@ -78,17 +82,21 @@ class LanguageFallbackChain {
 	public function extractPreferredValueOrAny( array $data ) {
 		$preferred = $this->extractPreferredValue( $data );
 
-		if ( $preferred ) {
+		if ( $preferred !== null ) {
 			return $preferred;
 		}
 
-		foreach ( $data as $code => $value ) {
-			if ( Language::isValidCode( $code ) ) {
-				return array(
-					'value' => $value,
-					'language' => $code,
-					'source' => null,
-				);
+		foreach ( $data as $languageCode => $value ) {
+			if ( Language::isValidCode( $languageCode ) ) {
+				if ( is_array( $value ) ) {
+					return $value;
+				} else {
+					return array(
+						'value' => $value,
+						'language' => $languageCode,
+						'source' => null,
+					);
+				}
 			}
 		}
 
