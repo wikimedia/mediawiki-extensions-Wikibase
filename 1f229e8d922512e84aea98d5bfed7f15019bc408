@@ -52,6 +52,24 @@
       "revId": "1f229e8d922512e84aea98d5bfed7f15019bc408",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d564dae3",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T09:21:19Z",
+      "side": 1,
+      "message": "Because I wasn\u0027t sure but have an opinion now? I asked if this ever was not an array. You answered that: Yes. Which is reason enough to keep it.\n\nAll this is tested now. What you are asking for is in the tests.",
+      "parentUuid": "ee391fd1_4aa605c0",
+      "revId": "1f229e8d922512e84aea98d5bfed7f15019bc408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
