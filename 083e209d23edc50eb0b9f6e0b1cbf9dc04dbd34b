@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_1a916a4a",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "bah, phpstorm doesn\u0027t add the \"public\" when generating constructors, and I forget.",
+      "parentUuid": "ee391fd1_5a137205",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_9a19da29",
         "filename": "lib/includes/store/EntityRedirect.php",
         "patchSetId": 41
@@ -81,6 +99,24 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "Can be done simpler: https://github.com/wmde/WikibaseDataModel/blob/master/src/SiteLink.php#L102\n\nNo need for a long if else like that, and no need to access the data via the methods.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ba9ffe54",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "I find it more readable this way, but Thiemo also complained, so I\u0027ll use a single expression.",
+      "parentUuid": "ee391fd1_9a19da29",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_7aa99677",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "Should be fien for variables that can only be objects or null. Ok, since this comes from a nasty untyped tuple, i\u0027ll add !\u003d\u003d null.",
+      "parentUuid": "ee391fd1_bac81eab",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_3ad54e48",
         "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
         "patchSetId": 41
@@ -115,6 +169,24 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "non-explicit check",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3ab30eea",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "Can only be an object or null.",
+      "parentUuid": "ee391fd1_3ad54e48",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +210,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_bac6de4c",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "Hm.... after removing all the logging fluff, there\u0027s not much meat left to split up...",
+      "parentUuid": "ee391fd1_7ac2b689",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_5aa6d2a8",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 41
@@ -149,6 +239,24 @@
       "writtenOn": "2014-06-17T18:19:39Z",
       "side": 1,
       "message": "Big increase to the amount of stuff in static scope here and to the complexity of this method in particular. Please move it out as suggested in the 2013 ECR.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_fa39063f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "I agree, this should definitly go into a ClientNotifier or ChangeFactory thingy. BUt I didn\u0027t want to bloat this patch even more. See bug 65594. So... do we need to block this change on the introduction of a ChangeFactory, or can that be done in a follow-up?",
+      "parentUuid": "ee391fd1_5aa6d2a8",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -183,6 +291,24 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "Why would the handlers of entity contents know how to construct ids of entities? Seems like a misplaced responsibility.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_1a83aad2",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "It\u0027s used to re-construct an EntityRedirect object after patching. I\u0027m not very happy with it. We could alternatively inject an EntityIdParser (or, in the future, an EntityRedirectDeserializer, perhaps). Got a good idea?",
+      "parentUuid": "ee391fd1_7a687684",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -302,6 +428,24 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "random underscore?",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_fa9b4619",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-17T18:43:27Z",
+      "side": 1,
+      "message": "I use them when testing different aspects/cases of the same function. testGetParserOutputRedirect would test the getter for a ParserOutputRedirect. testGetParserOutput_redirect tests getting a ParserOutput object in the redirect case.\n\nI find the distinction useful, but I\u0027m not totally in love with it.",
+      "parentUuid": "ee391fd1_3abf8ecf",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
