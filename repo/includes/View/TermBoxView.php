@@ -66,16 +66,10 @@ class TermBoxView {
 
 		$html = $thead = $tbody = '';
 
-		$entityId = $entity->getId();
+		$entityId = $entity->getId()->getSerialization();
 		$labels = $entity->getLabels();
 		$descriptions = $entity->getDescriptions();
 
-		// FIXME: Reuse SectionEditLinkGenerator::getEditUrl here if possible.
-		// All special pages relevant here accept the first parameter to be empty
-		$subPage = '';
-		if ( $entityId !== null ) {
-			$subPage .= $entityId->getSerialization();
-		}
 
 		$html .= wfTemplate( 'wb-terms-heading', $this->msg( 'wikibase-terms' ) );
 
@@ -84,14 +78,20 @@ class TermBoxView {
 			$label = array_key_exists( $languageCode, $labels ) ? $labels[$languageCode] : false;
 			$description = array_key_exists( $languageCode, $descriptions ) ? $descriptions[$languageCode] : false;
 
+			$editLabelSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
+				'SetLabel',
+				array( $entityId, $language ),
+				$this->msg( 'wikibase-edit' ),
+				$editable
+			);
+			$editDescriptionSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
+				'SetDescription',
+				array( $entityId, $language ),
+				$this->msg( 'wikibase-edit' ),
+				$editable
+			);
+
 			$alternatingClass = ( $rowNumber++ % 2 ) ? 'even' : 'uneven';
-
-			$localSubPage = $subPage . '/' . $languageCode;
-			$specialSetLabel = SpecialPage::getTitleFor( 'SetLabel', $localSubPage );
-			$specialSetDescription = SpecialPage::getTitleFor( 'SetDescription', $localSubPage );
-
-			$editLabelLink = $specialSetLabel->getLocalURL();
-			$editDescriptionLink = $specialSetDescription->getLocalURL();
 
 			$tbody .= wfTemplate( 'wb-term',
 				$languageCode,
@@ -99,8 +99,8 @@ class TermBoxView {
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
 				htmlspecialchars( $label !== false ? $label : $this->msg( 'wikibase-label-empty' )->text() ),
 				htmlspecialchars( $description !== false ? $description : $this->msg( 'wikibase-description-empty' )->text() ),
-				$this->sectionEditLinkGenerator->getHtmlForEditSection( $editLabelLink, $this->msg( 'wikibase-edit' ), 'span', $editable ),
-				$this->sectionEditLinkGenerator->getHtmlForEditSection( $editDescriptionLink, $this->msg( 'wikibase-edit' ), 'span', $editable ),
+				$editLabelSection,
+				$editDescriptionSection,
 				$label !== false ? '' : 'wb-value-empty',
 				$description !== false ? '' : 'wb-value-empty',
 				$title->getLocalURL( array( 'setlang' => $languageCode ) )
