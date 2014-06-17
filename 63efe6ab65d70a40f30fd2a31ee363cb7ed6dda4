@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_874d03e3",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T16:46:53Z",
+      "side": 1,
+      "message": "Now $entity is undefined!",
+      "revId": "63efe6ab65d70a40f30fd2a31ee363cb7ed6dda4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
