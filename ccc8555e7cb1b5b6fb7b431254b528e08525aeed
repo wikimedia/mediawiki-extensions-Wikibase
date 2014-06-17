@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_10cf10b7",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T11:58:02Z",
+      "side": 1,
+      "message": "Catch MWContentSerializationException instead?",
+      "revId": "ccc8555e7cb1b5b6fb7b431254b528e08525aeed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_b0c5e492",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T11:58:02Z",
+      "side": 1,
+      "message": "Catch MWContentSerializationException instead? No, doesn\u0027t make sense.",
+      "revId": "ccc8555e7cb1b5b6fb7b431254b528e08525aeed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_90c2e086",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T11:58:02Z",
+      "side": 1,
+      "message": "Catch MWContentSerializationException instead? No, doesn\u0027t make sense.",
+      "revId": "ccc8555e7cb1b5b6fb7b431254b528e08525aeed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
