@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_9ae8bade",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "Why is this value object representing a concept from our domain in a \"Store\" namespace?\n\nAnd please stop putting things in Lib.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3ad8ae57",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "This doc block does not add value",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_5a137205",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "Visibility missing. Private constructors are not a crazy concept, so assuming something is intended to be public is problematic as it is for other methods",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9a19da29",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "Can be done simpler: https://github.com/wmde/WikibaseDataModel/blob/master/src/SiteLink.php#L102\n\nNo need for a long if else like that, and no need to access the data via the methods.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_bac81eab",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "non-explicit check",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3ad54e48",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "non-explicit check",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_7ac2b689",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "This method was on the big side to begin with. Please split it up when adding new things.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_1a396a9f",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "It has already been demonstrated that you do not need this for diffing",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_7a687684",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "Why would the handlers of entity contents know how to construct ids of entities? Seems like a misplaced responsibility.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_fab8e6e3",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "If you put the code this comment applies to in its own method, you do not need the comment. And it\u0027ll be a lot easier to quickly see what is going on.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_dabd22d3",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3abf8ecf",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:09:04Z",
+      "side": 1,
+      "message": "random underscore?",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
