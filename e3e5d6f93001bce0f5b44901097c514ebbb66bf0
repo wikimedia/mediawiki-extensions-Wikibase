@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_d52a9ad6",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T10:37:08Z",
+      "side": 1,
+      "message": "Dead code.",
+      "revId": "e3e5d6f93001bce0f5b44901097c514ebbb66bf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
