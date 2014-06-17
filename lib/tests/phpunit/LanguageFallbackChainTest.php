@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use Wikibase\LanguageFallbackChainFactory;
 
 /**
@@ -13,15 +14,16 @@ use Wikibase\LanguageFallbackChainFactory;
  *
  * @licence GNU GPL v2+
  * @author Liangent
+ * @author Thiemo Mättig
  */
 class LanguageFallbackChainTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideExtractPreferredValue
 	 */
-	public function testExtractPreferredValue( $lang, $mode, $data, $expected ) {
+	public function testExtractPreferredValue( $languageCode, $mode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguageCode( $lang, $mode );
+		$chain = $factory->newFromLanguageCode( $languageCode, $mode );
 
 		$resolved = $chain->extractPreferredValue( $data );
 
@@ -35,6 +37,16 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			'zh-cn' => '测试',
 			'lzh' => '試',
 			'zh-classical' => '驗',
+		);
+		$entityInfoBuilderArray = array(
+			'de' => array(
+				'language' => 'de',
+				'value' => 'Beispiel'
+			),
+			'zh-cn' => array(
+				'language' => 'zh-cn',
+				'value' => '测试'
+			)
 		);
 
 		return array(
@@ -104,15 +116,26 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 				'language' => 'zh-hant',
 				'source' => 'zh-cn',
 			) ),
+
+			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, array(
+				'value' => 'Beispiel',
+				'language' => 'de',
+				'source' => null,
+			) ),
+			array( 'gan-hant', LanguageFallbackChainFactory::FALLBACK_ALL, $entityInfoBuilderArray, array(
+				'value' => '測試',
+				'language' => 'zh-hant',
+				'source' => 'zh-cn',
+			) ),
 		);
 	}
 
 	/**
 	 * @dataProvider provideExtractPreferredValueOrAny
 	 */
-	public function testExtractPreferredValueOrAny( $lang, $mode, $data, $expected ) {
+	public function testExtractPreferredValueOrAny( $languageCode, $mode, $data, $expected ) {
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode );
+		$chain = $factory->newFromLanguage( Language::factory( $languageCode ), $mode );
 
 		$resolved = $chain->extractPreferredValueOrAny( $data );
 
@@ -124,6 +147,12 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			'en' => 'foo',
 			'nl' => 'bar',
 			'zh-cn' => '测试',
+		);
+		$entityInfoBuilderArray = array(
+			'en' => array(
+				'language' => 'en',
+				'value' => 'Example'
+			),
 		);
 
 		return array(
@@ -161,6 +190,11 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 				':' => 'qux',
 			), null ),
 			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, array(), null ),
+
+			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, array(
+				'value' => 'Example',
+				'language' => 'en',
+			) ),
 		);
 	}
 
