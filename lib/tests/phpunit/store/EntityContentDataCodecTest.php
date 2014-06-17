@@ -2,6 +2,15 @@
 
 namespace Wikibase\Store\Test;
 
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Test\EntityTestCase;
 
@@ -24,29 +33,62 @@ class EntityContentDataCodecTest extends EntityTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->codec = new EntityContentDataCodec();
+		$idParser = new BasicEntityIdParser();
+
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ), $idParser );
+
+		$this->codec = new EntityContentDataCodec(
+			$idParser,
+			$serializerFactory->newEntitySerializer(),
+			$deserializerFactory->newEntityDeserializer()
+		);
 	}
 
-	public function encodeDecodeProvider() {
-		return array(
-			'empty' => array( array(), null ),
-			'empty json' => array( array(), CONTENT_FORMAT_JSON ),
+	public function entityIdProvider() {
+		$q11 = new ItemId( 'Q11' );
 
-			'list' => array( array( 'a', 'b', 'c' ), null ),
-			'list json' => array( array( 'a', 'b', 'c' ), CONTENT_FORMAT_JSON ),
+		return array(
+			'new style' => array( json_encode( array( 'entity' => 'Q11' ) ), $q11 ),
+			'old style' => array( json_encode( array( 'entity' => array( 'item', 11 ) ) ), $q11 ),
 		);
 	}
 
 	/**
-	 * @dataProvider encodeDecodeProvider
+	 * @dataProvider entityIdProvider
 	 */
-	public function testEncodeEntityContentData( array $data, $format ) {
-		$blob = $this->codec->encodeEntityContentData( $data, $format );
+	public function testEntityIdDecoding( $data, EntityId $id ) {
+		$entity = $this->codec->decodeEntity( $data, CONTENT_FORMAT_JSON );
+		$this->assertEquals( $id, $entity->getId() );
+	}
+
+	public function entityProvider() {
+		$empty = Item::newEmpty();
+		$empty->setId( new ItemId( 'Q1' ) );
+
+		$simple = Item::newEmpty();
+		$simple->setId( new ItemId( 'Q1' ) );
+		$simple->setLabel( 'en', 'Test' );
+
+		return array(
+			'empty' => array( $empty, null ),
+			'empty json' => array( $empty, CONTENT_FORMAT_JSON ),
+
+			'simple' => array( $simple, null ),
+			'simple json' => array( $simple, CONTENT_FORMAT_JSON ),
+			'simple php' => array( $simple, CONTENT_FORMAT_SERIALIZED ),
+		);
+	}
+
+	/**
+	 * @dataProvider entityProvider
+	 */
+	public function testEncodeAndDecodeEntity( Entity $entity, $format ) {
+		$blob = $this->codec->encodeEntity( $entity, $format );
 		$this->assertType( 'string', $blob );
 
-		$actual = $this->codec->decodeEntityContentData( $blob, $format );
-
-		$this->assertEquals( $data, $actual, 'round trip' );
+		$actual = $this->codec->decodeEntity( $blob, $format );
+		$this->assertTrue( $entity->equals( $actual ), 'round trip' );
 	}
 
 	public function testGetDefaultFormat_isJson() {

@@ -222,7 +222,7 @@ class DirectSqlStore implements ClientStore {
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
-		$lookup = new WikiPageEntityLookup( $this->contentCodec, $this->entityDeserializer, $this->repoWiki );
+		$lookup = new WikiPageEntityLookup( $this->contentCodec, $this->repoWiki );
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		// We need to verify the revision ID against the database to avoid stale data.

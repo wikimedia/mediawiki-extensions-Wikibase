@@ -5,7 +5,6 @@ namespace Wikibase;
 use Content;
 use ContentHandler;
 use DataUpdate;
-use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use IContextSource;
 use InvalidArgumentException;
@@ -15,17 +14,11 @@ use ParserOptions;
 use RequestContext;
 use Revision;
 use Serializers\Exceptions\SerializationException;
-use Serializers\Serializer;
 use Title;
 use User;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Updates\DataUpdateClosure;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
@@ -67,24 +60,12 @@ abstract class EntityHandler extends ContentHandler {
 	private $errorLocalizer;
 
 	/**
-	 * @var Serializer
-	 */
-	private $entitySerializer;
-
-	/**
-	 * @var Deserializer
-	 */
-	private $entityDeserializer;
-
-	/**
 	 * @param string $modelId
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
-	 * @param Serializer $entitySerializer
-	 * @param Deserializer $entityDeserializer
 	 */
 	public function __construct(
 		$modelId,
@@ -92,9 +73,7 @@ abstract class EntityHandler extends ContentHandler {
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
-		ValidatorErrorLocalizer $errorLocalizer,
-		Serializer $entitySerializer,
-		Deserializer $entityDeserializer
+		ValidatorErrorLocalizer $errorLocalizer
 	) {
 		$formats = $contentCodec->getSupportedFormats();
 
@@ -105,8 +84,6 @@ abstract class EntityHandler extends ContentHandler {
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
 		$this->errorLocalizer = $errorLocalizer;
-		$this->entitySerializer = $entitySerializer;
-		$this->entityDeserializer = $entityDeserializer;
 	}
 
 	/**
@@ -251,14 +228,8 @@ abstract class EntityHandler extends ContentHandler {
 			throw new \InvalidArgumentException( '$content must be an instance of EntityContent' );
 		}
 
-		try {
-			$data = $this->entitySerializer->serialize( $content->getEntity() );
-		}
-		catch ( SerializationException $ex ) {
-			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
-		}
-
-		return $this->contentCodec->encodeEntityContentData( $data, $format );
+		$entity = $content->getEntity();
+		return $this->contentCodec->encodeEntity( $entity, $format );
 	}
 
 	/**
@@ -273,14 +244,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		$data = $this->contentCodec->decodeEntityContentData( $blob, $format );
-
-		try {
-			$entity = $this->entityDeserializer->deserialize( $data );
-		}
-		catch ( DeserializationException $ex ) {
-			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
-		}
+		$entity = $this->contentCodec->decodeEntity( $blob, $format );
 
 		// TODO: use an EntityContent Deserializer
 		$contentClass = $this->getContentClass();
