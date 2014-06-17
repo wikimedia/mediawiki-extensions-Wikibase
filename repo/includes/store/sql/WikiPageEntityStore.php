@@ -7,6 +7,7 @@ use Revision;
 use Status;
 use Title;
 use User;
+use WatchAction;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
@@ -17,8 +18,8 @@ use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Repo\GenericEventDispatcher;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\GenericEventDispatcher;
 use WikiPage;
 
 /**
@@ -74,16 +75,16 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	public function assignFreshId( Entity $entity ) {
 		if ( $entity->getId() !== null ) {
-			throw new StorageException( "This entity already has an ID!" );
+			throw new StorageException( 'This entity already has an ID!' );
 		}
 
 		wfProfileIn( __METHOD__ );
 
 		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
-		$id = $this->idGenerator->getNewId( $contentModelId );
+		$numericId = $this->idGenerator->getNewId( $contentModelId );
 
 		//FIXME: this relies on setId() accepting numeric IDs!
-		$entity->setId( $id );
+		$entity->setId( $numericId );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -164,7 +165,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param int $flags
 	 * @param int|bool $baseRevId
 	 *
-	 * @throws \Wikibase\Lib\Store\StorageException
+	 * @throws StorageException
 	 * @return int The new revision ID
 	 */
 	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false ) {
@@ -202,11 +203,9 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param string $summary
 	 * @param null|User $user
 	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
-	 *
 	 * @param int|bool $baseRevId
 	 *
 	 * @throws StorageException
-	 *
 	 * @return Revision The new revision (or the latest one, in case of a null edit).
 	 */
 	private function saveEntityContent(
@@ -362,9 +361,9 @@ class WikiPageEntityStore implements EntityStore {
 			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
 				$dbw->begin( $fname );
 				if ( $watch ) {
-					\WatchAction::doWatch( $title, $user );
+					WatchAction::doWatch( $title, $user );
 				} else {
-					\WatchAction::doUnwatch( $title, $user );
+					WatchAction::doUnwatch( $title, $user );
 				}
 				$dbw->commit( $fname );
 			} );
