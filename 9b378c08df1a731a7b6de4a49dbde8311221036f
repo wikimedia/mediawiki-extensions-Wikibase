@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_2a1ce1ca",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T08:13:18Z",
+      "side": 1,
+      "message": "setShardingFormat? See other comments.",
+      "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_6a21c9f5",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T08:13:18Z",
+      "side": 1,
+      "message": "You could merge all three \"\\n\" to a single line in the end, outside the if.",
+      "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_a4f5aab7",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T08:13:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be called \"sharding\" just as the other parameters here? Hm, not sure. Feel free to object.",
+      "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_84f2a6cb",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-17T08:13:18Z",
+      "side": 1,
+      "message": "The format could be the third parameter here. Again, I\u0027m not sure if this makes sense. It may be a matter of taste. Feel free to ignore.",
+      "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
