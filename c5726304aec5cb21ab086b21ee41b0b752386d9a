@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_9aa9da23",
+        "filename": "lib/includes/store/sql/PropertyInfoTable.php",
+        "patchSetId": 43
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-17T18:46:45Z",
+      "side": 1,
+      "message": "huh?",
+      "revId": "c5726304aec5cb21ab086b21ee41b0b752386d9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
