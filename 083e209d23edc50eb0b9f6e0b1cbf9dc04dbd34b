@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee391fd1_da9ac265",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:19:39Z",
+      "side": 1,
+      "message": "Why introduce a variable in the scope here?",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_9ae8bade",
         "filename": "lib/includes/store/EntityRedirect.php",
         "patchSetId": 41
@@ -121,6 +138,23 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_5aa6d2a8",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:19:39Z",
+      "side": 1,
+      "message": "Big increase to the amount of stuff in static scope here and to the complexity of this method in particular. Please move it out as suggested in the 2013 ECR.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_1a396a9f",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 41
@@ -149,6 +183,74 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "Why would the handlers of entity contents know how to construct ids of entities? Seems like a misplaced responsibility.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_fa86a617",
+        "filename": "repo/includes/content/UnresolvedRedirectException.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:19:39Z",
+      "side": 1,
+      "message": "namespace",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3a8c2e32",
+        "filename": "repo/includes/content/UnresolvedRedirectException.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:19:39Z",
+      "side": 1,
+      "message": "Is being unable to resolve a redirect really a storage problem?",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_1a928a57",
+        "filename": "repo/includes/content/UnresolvedRedirectException.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:19:39Z",
+      "side": 1,
+      "message": "Can be private",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ba801efa",
+        "filename": "repo/includes/content/UnresolvedRedirectException.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-17T18:19:39Z",
+      "side": 1,
+      "message": "space",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
