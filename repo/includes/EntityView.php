@@ -404,10 +404,9 @@ window.setTimeout( function() {
 	public function getHtmlForLabel( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$lang = $this->getLanguage();
+		$langCode = $this->getLanguage()->getCode();
 
-		$label = $entity->getLabel( $lang->getCode() );
-		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetLabel', $entity, $lang );
+		$label = $entity->getLabel( $langCode );
 		$prefixedId = $this->getFormattedIdForEntity( $entity );
 
 		$html = wfTemplate( 'wb-label',
@@ -416,7 +415,7 @@ window.setTimeout( function() {
 				$label === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
 				wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $prefixedId ) )
-					. $this->getHtmlForEditSection( $editUrl )
+					. $this->getHtmlForEditSection( 'SetLabel', array( $prefixedId, $langCode ) )
 			)
 		);
 
@@ -436,15 +435,16 @@ window.setTimeout( function() {
 	public function getHtmlForDescription( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$lang = $this->getLanguage();
-		$description = $entity->getDescription( $lang->getCode() );
-		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetDescription', $entity, $lang );
+		$langCode = $this->getLanguage()->getCode();
+		$prefixedId = $this->getFormattedIdForEntity( $entity );
+
+		$description = $entity->getDescription( $langCode );
 
 		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
-				$this->getHtmlForEditSection( $editUrl )
+				$this->getHtmlForEditSection( 'SetDescription', array( $prefixedId, $langCode ) )
 			)
 		);
 
@@ -464,17 +464,17 @@ window.setTimeout( function() {
 	public function getHtmlForAliases( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$lang = $this->getLanguage();
+		$langCode = $this->getLanguage()->getCode();
+		$prefixedId = $this->getFormattedIdForEntity( $entity );
 
-		$aliases = $entity->getAliases( $lang->getCode() );
-		$editUrl = $this->sectionEditLinkGenerator->getEditUrl( 'SetAliases', $entity, $lang );
+		$aliases = $entity->getAliases( $langCode );
 
 		if ( empty( $aliases ) ) {
 			$html = wfTemplate( 'wb-aliases-wrapper',
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$this->getHtmlForEditSection( $editUrl, 'span', 'add' )
+				$this->getHtmlForEditSection( 'SetAliases', array( $prefixedId, $langCode ), 'add' )
 			);
 		} else {
 			$aliasesHtml = '';
@@ -487,7 +487,7 @@ window.setTimeout( function() {
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $this->getHtmlForEditSection( $editUrl )
+				$aliasList . $this->getHtmlForEditSection( 'SetAliases', array( $prefixedId, $langCode ) )
 			);
 		}
 
@@ -562,7 +562,7 @@ window.setTimeout( function() {
 				htmlspecialchars( $propertyLabel )
 			);
 
-			$htmlForEditSection = $this->getHtmlForEditSection( '', 'span' ); // TODO: add link to SpecialPage
+			$htmlForEditSection = $this->getHtmlForEditSection( '', array() ); // TODO: add link to SpecialPage
 
 			foreach( $claims as $claim ) {
 				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
@@ -575,7 +575,7 @@ window.setTimeout( function() {
 			$toolbarHtml = wfTemplate( 'wikibase-toolbar',
 				'wb-addtoolbar',
 				// TODO: add link to SpecialPage
-				$this->getHtmlForEditSection( '', 'span', 'add' )
+				$this->getHtmlForEditSection( '', array(), 'add' )
 			);
 
 			$claimsHtml .= wfTemplate( 'wb-claimlistview',
@@ -602,18 +602,18 @@ window.setTimeout( function() {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $url specifies the URL for the button, default is an empty string
-	 * @param string $tag allows to specify the type of the outer node
+	 * @param string $specialPage specifies the special page
+	 * @param string[] $specialPageParams specifies additional params for the special page
 	 * @param string $action by default 'edit', for aliases this could also be 'add'
 	 * @param bool $enabled can be set to false to display the button disabled
 	 *
 	 * @return string
 	 */
-	private function getHtmlForEditSection( $url, $tag = 'span', $action = 'edit', $enabled = true ) {
+	private function getHtmlForEditSection( $specialPage, array $specialPageParams, $action = 'edit', $enabled = true ) {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = $this->getContext()->msg( $key );
 
-		return $this->sectionEditLinkGenerator->getHtmlForEditSection( $url, $msg, $tag, $enabled );
+		return $this->sectionEditLinkGenerator->getHtmlForEditSection( $specialPage, $specialPageParams, $msg, $enabled );
 	}
 
 	/**

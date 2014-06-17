@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use MediaWikiSite;
 use SiteList;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\SiteLinksView;
@@ -48,7 +49,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$siteLinksView = new SiteLinksView( $siteStore, $sectionEditLinkGenerator );
 
-		$value = $siteLinksView->getHtml( $item, $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
 		$this->assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
@@ -60,6 +61,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		$testCases = array();
 
 		$item = Item::newEmpty();
+		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'enwiki', 'test' ) );
 
 		$testCases[] = array(
@@ -101,6 +103,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
+		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'specialwiki', 'test' ) );
 
 		$testCases[] = array(
@@ -124,6 +127,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
+		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
 
 		$testCases[] = array(
 			$siteStore,
@@ -141,6 +145,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
+		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'dewiki', 'test' ) );
 		$item->addSiteLink( new SiteLink( 'enwiki', 'test2' ) );
 
@@ -162,6 +167,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
+		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'dewiki', 'test' ) );
 		$item->addSiteLink( new SiteLink( 'nonexistingwiki', 'test2' ) );
 
@@ -197,7 +203,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$siteLinksView = new SiteLinksView( $siteStore, $sectionEditLinkGenerator );
 
-		$value = $siteLinksView->getHtml( $item, $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
 		$this->assertEquals( '', $value );
 	}
@@ -206,12 +212,15 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		$siteStore = $this->getSiteStoreMock();
 		$sectionEditLinkGenerator = $this->getSectionEditLinkGeneratorMock();
 
+		$item = Item::newEmpty();
+		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
+
 		$testCases = array();
 
 		$testCases[] = array(
 			$siteStore,
 			$sectionEditLinkGenerator,
-			Item::newEmpty(),
+			$item,
 			array(),
 			true,
 		);
@@ -219,12 +228,11 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		$testCases[] = array(
 			$siteStore,
 			$sectionEditLinkGenerator,
-			Item::newEmpty(),
+			$item,
 			array(),
 			false,
 		);
 
-		$item = Item::newEmpty();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'test' ) );
 
 		$testCases[] = array(

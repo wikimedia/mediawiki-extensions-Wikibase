@@ -25,15 +25,15 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getHtmlForEditSectionProvider
 	 */
-	public function testGetHtmlForEditSection( $expected, $url, $tag, $action, $enabled, $langCode ) {
+	public function testGetHtmlForEditSection( $expected, $pageName, $action, $enabled, $langCode ) {
 		$generator = new SectionEditLinkGenerator();
 
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = wfMessage( $key )->inLanguage( $langCode );
 
-		$editSectionHtml = $generator->getHtmlForEditSection( $url, $msg, $tag, $enabled );
+		$editSectionHtml = $generator->getHtmlForEditSection( $pageName, array(), $msg, $enabled );
 		$matcher = array(
-			'tag' => $tag,
+			'tag' => 'span',
 			'class' => 'wb-editsection'
 		);
 
@@ -45,16 +45,14 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				'/' . wfMessage( 'wikibase-edit' )->inLanguage( 'es' )->text() . '/',
-				'',
-				'div',
+				'Version',
 				'edit',
 				true,
 				'es'
 			),
 			array(
 				'/' . wfMessage( 'wikibase-add' )->inLanguage( 'de' )->text() . '/',
-				'',
-				'span',
+				'Version',
 				'add',
 				true,
 				'de'
@@ -63,29 +61,39 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider getEditUrlProvider
-	 * @covers SectionEditLinkGenerator::getEditUrl
+	 * @dataProvider getHtmlForEditSection_editUrlProvider
+	 * @covers SectionEditLinkGenerator::getHtmlForEditSection
 	 */
-	public function testGetEditUrl( $expected, $specialpagename, Entity $entity, $language = null ) {
+	public function testGetHtmlForEditSection_editUrl( $expected, $specialPageName, $specialPageParams ) {
 		$generator = new SectionEditLinkGenerator();
 
-		$editUrl = $generator->getEditUrl( $specialpagename, $entity, $language );
+		$editSection = $generator->getHtmlForEditSection( $specialPageName, $specialPageParams, wfMessage( 'wikibase-add' ) );
 
-		$this->assertRegExp( $expected, $editUrl );
+		$this->assertTag( $expected, $editSection );
 	}
 
-	public function getEditUrlProvider() {
+	public function getHtmlForEditSection_editUrlProvider() {
 		return array(
 			array(
-				'+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1$+',
+				array(
+					'tag' => 'a',
+					'attributes' => array(
+						'href' => 'regexp:+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1$+',
+					)
+				),
 				'Version',
-				new Item( array( 'entity' => 'Q1' ) )
+				array( 'Q1' )
 			),
 			array(
-				'+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1/de$+',
+				array(
+					'tag' => 'a',
+					'attributes' => array(
+						'href' => 'regexp:+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1/de$+',
+						'href' => 'regexp:+Special:Version/Q1/de+'
+					)
+				),
 				'Version',
-				new Item( array( 'entity' => 'Q1' ) ),
-				Language::factory( 'de' )
+				array( 'Q1', 'de' ),
 			)
 		);
 	}
