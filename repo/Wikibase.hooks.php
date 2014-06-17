@@ -142,7 +142,7 @@ final class RepoHooks {
 			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
 		}
 
-		/* @var SqlStore $store */
+		/** @var SqlStore $store */
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
 		$store->doSchemaUpdate( $updater );
 
@@ -222,13 +222,13 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
-			/* @var EntityContent $newContent */
-			$newContent = $article->getContent( Revision::RAW );
-
 			$parent = is_null( $revision->getParentId() )
 				? null : Revision::newFromId( $revision->getParentId() );
 
+			/** @var EntityContent $oldContent */
+			/** @var EntityContent $newContent */
 			$oldContent = $parent ? $parent->getContent( Revision::RAW ) : null;
+			$newContent = $article->getContent( Revision::RAW );
 
 			$oldEntity = null;
 			$newEntity = null;
@@ -309,20 +309,15 @@ final class RepoHooks {
 	 * @param Revision $revision
 	 */
 	private static function notifyEntityStoreWatcherOnUpdate( Revision $revision ) {
-		/* @var EntityContent $content */
+		/** @var EntityContent $content */
 		$content = $revision->getContent();
+		$entity = $content->getEntity();
+
+		$entityRevision = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
 
 		// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
 		// May be redundant in some cases. Take care not to cause infinite regress.
-		if ( $content->isRedirect() ) {
-			$entity = $content->getEntity();
-			$entityRev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
-			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
-		} else {
-			$entity = $content->getEntity();
-			$entityRev = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
-			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
-		}
+		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRevision );
 	}
 
 	/**
@@ -357,8 +352,7 @@ final class RepoHooks {
 
 		//TODO: notify the client over the deletion of a redirect!
 		if ( !$content->isRedirect() ) {
-
-			/* @var EntityContent $content */
+			/** @var EntityContent $content */
 			$entity = $content->getEntity();
 
 			// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
@@ -458,7 +452,7 @@ final class RepoHooks {
 			$slave = $changesTable->getReadDb();
 			$changesTable->setReadDb( DB_MASTER );
 
-			/* @var EntityChange $change */
+			/** @var EntityChange $change */
 			$change = $changesTable->selectRow(
 				null,
 				array( 'revision_id' => $rc->getAttribute( 'rc_this_oldid' ) )
@@ -731,9 +725,8 @@ final class RepoHooks {
 			// We only add the classes, if there is an actual item and not just an empty Page in the right namespace.
 			// XXX: Let's hope the page isn't re-loaded from the database.
 			$entityPage = new WikiPage( $out->getTitle() );
+			/** @var EntityContent $entityContent */
 			$entityContent = $entityPage->getContent();
-
-			/* @var EntityContent $entityContent */
 
 			if( $entityContent !== null && !$entityContent->isRedirect() ) {
 				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
@@ -833,7 +826,7 @@ final class RepoHooks {
 			return true;
 		}
 
-		/* @var EntityContent $content */
+		/** @var EntityContent $content */
 		$entity = $content->getEntity();
 		if ( is_null( $entity ) ) {
 			// Failed, can't continue. This could happen because there is an illegal structure that could
@@ -982,18 +975,18 @@ final class RepoHooks {
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		$model = $result->getTitle()->getContentModel();
+		$title = $result->getTitle();
+		$contentModel = $title->getContentModel();
 
-		if ( $entityContentFactory->isEntityContentModel( $model ) ) {
-			$lang = $searchPage->getLanguage();
-			$page = WikiPage::factory( $result->getTitle() );
-
-			/* @var EntityContent $content */
+		if ( $entityContentFactory->isEntityContentModel( $contentModel ) ) {
+			/** @var EntityContent $content */
+			$page = WikiPage::factory( $title );
 			$content = $page->getContent();
 
 			if ( $content ) {
 				$entity = $content->getEntity();
-				$description = $entity->getDescription( $lang->getCode() ); // TODO: language fallback!
+				$language = $searchPage->getLanguage();
+				$description = $entity->getDescription( $language->getCode() ); // TODO: language fallback!
 
 				if ( $description !== false && $description !== '' ) {
 					$attr = array( 'class' => 'wb-itemlink-description' );
@@ -1076,7 +1069,6 @@ final class RepoHooks {
 			return true;
 		}
 
-		/* @var EntityContent $content */
 		$text = $content->getTextForFilters();
 
 		return false;

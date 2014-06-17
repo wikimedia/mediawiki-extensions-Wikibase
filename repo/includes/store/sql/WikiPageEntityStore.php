@@ -3,23 +3,23 @@
 namespace Wikibase\Repo\Store;
 
 use MWException;
-use PermissionsError;
 use Revision;
 use Status;
 use Title;
 use User;
+use WatchAction;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityPerPage;
 use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\StorageException;
 use Wikibase\Repo\GenericEventDispatcher;
+use Wikibase\StorageException;
 use WikiPage;
 
 /**
@@ -75,16 +75,16 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	public function assignFreshId( Entity $entity ) {
 		if ( $entity->getId() !== null ) {
-			throw new StorageException( "This entity already has an ID!" );
+			throw new StorageException( 'This entity already has an ID!' );
 		}
 
 		wfProfileIn( __METHOD__ );
 
 		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
-		$id = $this->idGenerator->getNewId( $contentModelId );
+		$numericId = $this->idGenerator->getNewId( $contentModelId );
 
 		//FIXME: this relies on setId() accepting numeric IDs!
-		$entity->setId( $id );
+		$entity->setId( $numericId );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -135,12 +135,10 @@ class WikiPageEntityStore implements EntityStore {
 	public function saveEntity( Entity $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
 		wfProfileIn( __METHOD__ );
 
-		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
-			if ( $entity->getId() === null ) {
+		if ( $entity->getId() === null ) {
+			if ( ( $flags & EDIT_NEW ) === EDIT_NEW ) {
 				$this->assignFreshId( $entity );
-			}
-		} else {
-			if ( $entity->getId() === null ) {
+			} else {
 				wfProfileOut( __METHOD__ );
 				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
 			}
@@ -175,11 +173,12 @@ class WikiPageEntityStore implements EntityStore {
 
 		$content = $this->contentFactory->newFromRedirect( $redirect );
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
+		$revisionId = $revision->getId();
 
-		$this->dispatcher->dispatch( 'entityRedirected', $redirect, $revision->getId() );
+		$this->dispatcher->dispatch( 'entityRedirected', $redirect, $revisionId );
 
 		wfProfileOut( __METHOD__ );
-		return $revision->getId();
+		return $revisionId;
 	}
 
 	/**
@@ -198,7 +197,6 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param string $summary
 	 * @param null|User $user
 	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
-	 *
 	 * @param int|bool $baseRevId
 	 *
 	 * @throws StorageException
@@ -216,7 +214,7 @@ class WikiPageEntityStore implements EntityStore {
 
 		$page = $this->getWikiPageForEntity( $entityContent->getEntityId() );
 
-		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
+		if ( ( $flags & EDIT_NEW ) === EDIT_NEW ) {
 			$title = $page->getTitle();
 			if ( $title->exists() ) {
 				wfProfileOut( __METHOD__ );
@@ -249,7 +247,7 @@ class WikiPageEntityStore implements EntityStore {
 		}
 
 		// As per convention defined by WikiPage, the new revision is in the status value:
-		if ( isset ( $status->value['revision'] ) ) {
+		if ( isset( $status->value['revision'] ) ) {
 			$revision = $status->value['revision'];
 		} else {
 			// NOTE: No new revision was created (content didn't change). Report the old one.
@@ -358,9 +356,9 @@ class WikiPageEntityStore implements EntityStore {
 			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
 				$dbw->begin( $fname );
 				if ( $watch ) {
-					\WatchAction::doWatch( $title, $user );
+					WatchAction::doWatch( $title, $user );
 				} else {
-					\WatchAction::doUnwatch( $title, $user );
+					WatchAction::doUnwatch( $title, $user );
 				}
 				$dbw->commit( $fname );
 			} );
