@@ -17,7 +17,7 @@ interface IdGenerator {
 	 *
 	 * @todo: Change this to return an EntityId
 	 *
-	 * @param string $type
+	 * @param string $type Usually the content model identifier, e.g. 'wikibase-item'.
 	 *
 	 * @return int
 	 */

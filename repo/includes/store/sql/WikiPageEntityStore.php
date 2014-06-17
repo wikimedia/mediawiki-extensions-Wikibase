@@ -8,17 +8,18 @@ use Revision;
 use Status;
 use Title;
 use User;
+use WatchAction;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityPerPage;
 use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\StorageException;
 use Wikibase\Repo\GenericEventDispatcher;
+use Wikibase\StorageException;
 use WikiPage;
 
 /**
@@ -74,16 +75,16 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	public function assignFreshId( Entity $entity ) {
 		if ( $entity->getId() !== null ) {
-			throw new StorageException( "This entity already has an ID!" );
+			throw new StorageException( 'This entity already has an ID!' );
 		}
 
 		wfProfileIn( __METHOD__ );
 
 		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
-		$id = $this->idGenerator->getNewId( $contentModelId );
+		$numericId = $this->idGenerator->getNewId( $contentModelId );
 
 		//FIXME: this relies on setId() accepting numeric IDs!
-		$entity->setId( $id );
+		$entity->setId( $numericId );
 
 		wfProfileOut( __METHOD__ );
 	}
@@ -184,7 +185,6 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param string     $summary
 	 * @param null|User  $user
 	 * @param int $flags Flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
-	 *
 	 * @param int|bool   $baseRevId
 	 *
 	 * @see WikiPage::doEditContent
@@ -204,20 +204,18 @@ class WikiPageEntityStore implements EntityStore {
 
 		$entity = $entityContent->getEntity();
 
-		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
-			if ( $entity->getId() === null ) {
-				$this->assignFreshId( $entity );
-			} else{
-				$title = $this->contentFactory->getTitleForId( $entity->getId() );
-				if ( $title->exists() ) {
-					wfProfileOut( __METHOD__ );
-					return Status::newFatal( 'edit-already-exists' );
-				}
-			}
-		} else {
-			if ( $entity->getId() === null ) {
+		if ( $entity->getId() === null ) {
+			if ( ( $flags & EDIT_NEW ) !== EDIT_NEW ) {
 				wfProfileOut( __METHOD__ );
 				return Status::newFatal( 'edit-gone-missing' );
+			}
+
+			$this->assignFreshId( $entity );
+		} else {
+			$title = $this->contentFactory->getTitleForId( $entity->getId() );
+			if ( $title->exists() ) {
+				wfProfileOut( __METHOD__ );
+				return Status::newFatal( 'edit-already-exists' );
 			}
 		}
 
@@ -241,13 +239,12 @@ class WikiPageEntityStore implements EntityStore {
 			$user
 		);
 
-		if ( $status->isOK() && !isset ( $status->value['revision'] ) ) {
+		if ( $status->isOK() && !isset( $status->value['revision'] ) ) {
 			// HACK: No new revision was created (content didn't change). Report the old one.
 			// There *might* be a race condition here, but since $page already loaded the
 			// latest revision, it should still be cached, and should always be the correct one.
 			$status->value['revision'] = $page->getRevision();
 		}
-
 
 		wfProfileOut( __METHOD__ );
 		return $status;
@@ -349,9 +346,9 @@ class WikiPageEntityStore implements EntityStore {
 			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
 				$dbw->begin( $fname );
 				if ( $watch ) {
-					\WatchAction::doWatch( $title, $user );
+					WatchAction::doWatch( $title, $user );
 				} else {
-					\WatchAction::doUnwatch( $title, $user );
+					WatchAction::doUnwatch( $title, $user );
 				}
 				$dbw->commit( $fname );
 			} );
