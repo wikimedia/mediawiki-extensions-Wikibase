@@ -3,11 +3,12 @@
 namespace Wikibase;
 
 use Content;
+use MWException;
+use Revision;
 use Status;
 use Title;
 use User;
 use WatchAction;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -32,10 +33,10 @@ class SubmitEntityAction extends EditEntityAction {
 	 * In that case $this->undo(); is called to perform the action after a permission check.
 	 */
 	public function show() {
-		$req = $this->getRequest();
+		$request = $this->getRequest();
 
-		if ( $req->getCheck('undo') || $req->getCheck('undoafter') || $req->getCheck('restore') ) {
-			if ( $this->showPermissionError( "read" ) || $this->showPermissionError( "edit" ) ) {
+		if ( $request->getCheck( 'undo' ) || $request->getCheck( 'undoafter' ) || $request->getCheck( 'restore' ) ) {
+			if ( $this->showPermissionError( 'read' ) || $this->showPermissionError( 'edit' ) ) {
 				return;
 			}
 
@@ -50,24 +51,25 @@ class SubmitEntityAction extends EditEntityAction {
 	 * Perform the undo operation specified by the web request.
 	 */
 	public function undo() {
-		$req = $this->getRequest();
+		$request = $this->getRequest();
+		$title = $this->getTitle();
 
-		if ( !$req->wasPosted() || !$req->getCheck('wpSave') ) {
-			$args = array( 'action' => "edit" );
+		if ( !$request->wasPosted() || !$request->getCheck( 'wpSave' ) ) {
+			$args = array( 'action' => 'edit' );
 
-			if ( $req->getCheck( 'undo' ) ) {
-				$args['undo'] = $req->getInt( 'undo' );
+			if ( $request->getCheck( 'undo' ) ) {
+				$args['undo'] = $request->getInt( 'undo' );
 			}
 
-			if ( $req->getCheck( 'undoafter' ) ) {
-				$args['undoafter'] = $req->getInt( 'undoafter' );
+			if ( $request->getCheck( 'undoafter' ) ) {
+				$args['undoafter'] = $request->getInt( 'undoafter' );
 			}
 
-			if ( $req->getCheck( 'restore' ) ) {
-				$args['restore'] = $req->getInt( 'restore' );
+			if ( $request->getCheck( 'restore' ) ) {
+				$args['restore'] = $request->getInt( 'restore' );
 			}
 
-			$undoUrl = $this->getTitle()->getLocalURL( $args );
+			$undoUrl = $title->getLocalURL( $args );
 			$this->getOutput()->redirect( $undoUrl );
 			return;
 		}
@@ -79,9 +81,9 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		/**
-		 * @var \Revision $olderRevision
-		 * @var \Revision $newerRevision
-		 * @var \Revision $latestRevision
+		 * @var Revision $olderRevision
+		 * @var Revision $newerRevision
+		 * @var Revision $latestRevision
 		 */
 		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
 
@@ -96,14 +98,11 @@ class SubmitEntityAction extends EditEntityAction {
 
 		$diff = $newerContent->getDiff( $olderContent );
 
-		$title = $this->getTitle();
 		$user = $this->getUser();
-		$token = $req->getText( 'wpEditToken' );
-		$watch = $user->getOption( 'watchdefault' );
+		$summary = $request->getText( 'wpSummary' );
+		$editToken = $request->getText( 'wpEditToken' );
 
-		if ( $newerRevision->getId() == $latestRevision->getId() ) { // restore
-			$summary = $req->getText( 'wpSummary' );
-
+		if ( $newerRevision->getId() === $latestRevision->getId() ) { // restore
 			if ( $summary === '' ) {
 				$summary = $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision );
 			}
@@ -112,7 +111,7 @@ class SubmitEntityAction extends EditEntityAction {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
-				$status = $this->attemptSave( $title, $olderContent, $summary, $user, $token, $watch );
+				$status = $this->attemptSave( $title, $olderContent, $summary, $user, $editToken );
 			}
 		} else { // undo
 			$patchedContent = $latestContent->getPatchedCopy( $diff );
@@ -121,25 +120,26 @@ class SubmitEntityAction extends EditEntityAction {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
-				$summary = $req->getText( 'wpSummary' );
-
 				if ( $summary === '' ) {
 					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
 				}
 
-				$status = $this->attemptSave( $title, $patchedContent, $summary, $user, $token, $watch );
+				$status = $this->attemptSave( $title, $patchedContent, $summary, $user, $editToken );
 			}
 		}
 
 		if ( $status->isOK() ) {
-			$this->getOutput()->redirect( $this->getTitle()->getFullUrl() );
+			$this->getOutput()->redirect( $title->getFullUrl() );
 		} else {
 			$this->showStatusErrorsPage( 'wikibase-undo-title', $status );
 		}
 	}
 
+	/**
+	 * @throws MWException
+	 */
 	public function execute() {
-		throw new \MWException( "not applicable" );
+		throw new MWException( 'Not applicable.' );
 	}
 
 	/**
@@ -147,21 +147,17 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @param Content $content
 	 * @param string $summary
 	 * @param User $user
-	 * @param string $token
-	 * @param bool $watch
+	 * @param string $editToken
 	 *
 	 * @return Status
 	 */
-	private function attemptSave( Title $title, Content $content, $summary, User $user, $token, $watch ) {
-
-		// check token
-		$status = $this->getTokenStatus( $user, $token );
+	private function attemptSave( Title $title, Content $content, $summary, User $user, $editToken ) {
+		$status = $this->getEditTokenStatus( $user, $editToken );
 
 		if ( !$status->isOK() ) {
 			return $status;
 		}
 
-		// check edit permission
 		$status = $this->getPermissionStatus( $user, 'edit', $title );
 
 		if ( !$status->isOK() ) {
@@ -178,10 +174,7 @@ class SubmitEntityAction extends EditEntityAction {
 			return $status;
 		}
 
-		// update watchlist
-		if ( $watch && $user->isLoggedIn() && !$user->isWatched( $title ) ) {
-			WatchAction::doWatch( $title, $user );
-		}
+		$this->doWatch( $title, $user );
 
 		return $status;
 	}
@@ -205,7 +198,7 @@ class SubmitEntityAction extends EditEntityAction {
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
-			call_user_func_array( array( $status, 'fatal'), $error );
+			call_user_func_array( array( $status, 'fatal' ), $error );
 			$status->setResult( false );
 		}
 
@@ -217,15 +210,15 @@ class SubmitEntityAction extends EditEntityAction {
 	 * Checks that the given token is valid.
 	 *
 	 * @param User $user
-	 * @param string $token
+	 * @param string $editToken
 	 *
 	 * @return Status
 	 */
-	private function getTokenStatus( User $user, $token ) {
+	private function getEditTokenStatus( User $user, $editToken ) {
 		$status = Status::newGood();
 
-		if ( !$user->matchEditToken( $token ) ) {
-			if ( $user->matchEditTokenNoSuffix( $token ) ) {
+		if ( !$user->matchEditToken( $editToken ) ) {
+			if ( $user->matchEditTokenNoSuffix( $editToken ) ) {
 				$status = Status::newFatal( 'token_suffix_mismatch' );
 			} else {
 				$status = Status::newFatal( 'session_fail_preview' );
@@ -234,4 +227,20 @@ class SubmitEntityAction extends EditEntityAction {
 
 		return $status;
 	}
+
+	/**
+	 * Update watchlist.
+	 *
+	 * @param Title $title
+	 * @param User $user
+	 */
+	private function doWatch( Title $title, User $user ) {
+		if ( $user->isLoggedIn()
+			&& $user->getOption( 'watchdefault' )
+			&& !$user->isWatched( $title )
+		) {
+			WatchAction::doWatch( $title, $user );
+		}
+	}
+
 }
