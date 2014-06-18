@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_ef513dde",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-18T14:01:27Z",
+      "side": 1,
+      "message": "repo? in the client",
+      "revId": "ef20b4197e96b94d0c6011f9fd57047595c3efd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_cf4c3946",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-18T14:01:27Z",
+      "side": 1,
+      "message": "repo?",
+      "revId": "ef20b4197e96b94d0c6011f9fd57047595c3efd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
