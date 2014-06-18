@@ -2,7 +2,10 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Settings;
+use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\Repo\WikibaseRepo
@@ -148,10 +151,56 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Localizer\ExceptionLocalizer', $localizer );
 	}
 
+	public function testGetEntityContentDataCodec() {
+		$codec = $this->getDefaultInstance()->getEntityContentDataCodec();
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityContentDataCodec', $codec );
+	}
+
+	public function testGetInternalEntitySerializer() {
+		$serializer = $this->getDefaultInstance()->getInternalEntitySerializer();
+		$this->assertInstanceOf( 'Serializers\Serializer', $serializer );
+	}
+
+	public function testGetInternalEntityDeserializer() {
+		$deserializer = $this->getDefaultInstance()->getInternalEntityDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testGetEntityContentDataCodec_legacy() {
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'Hello' );
+		$item->setLabel( 'es', 'Holla' );
+
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+
+		$codec = $repo->getEntityContentDataCodec();
+		$json = $codec->encodeEntity( $item, CONTENT_FORMAT_JSON );
+		$data = json_decode( $json, true );
+
+		$this->assertEquals( $item->toArray(), $data );
+	}
+
+	public function testGetInternalEntitySerializer_legacy() {
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'Hello' );
+		$item->setLabel( 'es', 'Holla' );
+
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+
+		$serializer = $repo->getInternalEntitySerializer();
+		$data = $serializer->serialize( $item );
+
+		$this->assertEquals( $item->toArray(), $data );
+	}
+
 	/**
 	 * @return WikibaseRepo
 	 */
 	private function getDefaultInstance() {
-		return WikibaseRepo::getDefaultInstance();
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		return new WikibaseRepo( $settings );
 	}
+
 }

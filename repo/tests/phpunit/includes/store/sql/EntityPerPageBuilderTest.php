@@ -62,14 +62,19 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	protected function getTestSettings() {
-		$settings = new SettingsArray( array(
-			'entityNamespaces' => array(
-				'wikibase-item' => 0,
-				'wikibase-property' => 102
-			)
-		) );
+		$globalSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy();
 
-		return $settings;
+		$settings = array_merge(
+			$globalSettings,
+			array(
+				'entityNamespaces' => array(
+					'wikibase-item' => 0,
+					'wikibase-property' => 102
+				)
+			)
+		);
+
+		return new SettingsArray( $settings );
 	}
 
 	protected function clearTables() {
