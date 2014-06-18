@@ -9,7 +9,6 @@ use HashBagOStuff;
 use MWException;
 use ObjectCache;
 use Revision;
-use Deserializers\Deserializer;
 use ObservableMessageReporter;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -92,20 +91,12 @@ class SqlStore implements Store {
 	private $contentCodec;
 
 	/**
-	 * @var Deserializer
-	 */
-	private $entityDeserializer;
-
-	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param Deserializer $entityDeserializer
 	 */
 	public function __construct(
-		EntityContentDataCodec $contentCodec,
-		Deserializer $entityDeserializer
+		EntityContentDataCodec $contentCodec
 	) {
 		$this->contentCodec = $contentCodec;
-		$this->entityDeserializer = $entityDeserializer;
 
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -254,9 +245,7 @@ class SqlStore implements Store {
 		);
 
 		$table = new PropertyInfoTable( false );
-		$entitySerializer = WikibaseRepo::getDefaultInstance()->newInternalSerializerFactory()->newEntitySerializer();
-		$entityDeserializer = WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer();
-		$contentCodec = new EntityContentDataCodec( new BasicEntityIdParser(), $entitySerializer, $entityDeserializer );
+		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 
 		$wikiPageEntityLookup = new WikiPageEntityLookup( $contentCodec, false );
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );

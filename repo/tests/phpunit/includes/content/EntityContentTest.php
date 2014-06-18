@@ -82,7 +82,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 * @return EntityContent
 	 */
 	protected function newFromArray( array $data ) {
-		$deserializer = WikibaseRepo::getDefaultInstance()->newInternalDeserializerFactory()->newEntityDeserializer();
+		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
 		$entity = $deserializer->deserialize( $data );
 		$class = $this->getContentClass();
 		return new $class( $entity );
