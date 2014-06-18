@@ -7,7 +7,6 @@ use MWException;
 use Revision;
 use Status;
 use Title;
-use User;
 use WatchAction;
 use WikiPage;
 
@@ -98,7 +97,6 @@ class SubmitEntityAction extends EditEntityAction {
 
 		$diff = $newerContent->getDiff( $olderContent );
 
-		$user = $this->getUser();
 		$summary = $request->getText( 'wpSummary' );
 		$editToken = $request->getText( 'wpEditToken' );
 
@@ -111,7 +109,7 @@ class SubmitEntityAction extends EditEntityAction {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
-				$status = $this->attemptSave( $title, $olderContent, $summary, $user, $editToken );
+				$status = $this->attemptSave( $title, $olderContent, $summary, $editToken );
 			}
 		} else { // undo
 			$patchedContent = $latestContent->getPatchedCopy( $diff );
@@ -124,7 +122,7 @@ class SubmitEntityAction extends EditEntityAction {
 					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
 				}
 
-				$status = $this->attemptSave( $title, $patchedContent, $summary, $user, $editToken );
+				$status = $this->attemptSave( $title, $patchedContent, $summary, $editToken );
 			}
 		}
 
@@ -146,19 +144,18 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @param Title $title
 	 * @param Content $content
 	 * @param string $summary
-	 * @param User $user
 	 * @param string $editToken
 	 *
 	 * @return Status
 	 */
-	private function attemptSave( Title $title, Content $content, $summary, User $user, $editToken ) {
-		$status = $this->getEditTokenStatus( $user, $editToken );
+	private function attemptSave( Title $title, Content $content, $summary, $editToken ) {
+		$status = $this->getEditTokenStatus( $editToken );
 
 		if ( !$status->isOK() ) {
 			return $status;
 		}
 
-		$status = $this->getPermissionStatus( $user, 'edit', $title );
+		$status = $this->getPermissionStatus( 'edit', $title );
 
 		if ( !$status->isOK() ) {
 			return $status;
@@ -174,7 +171,7 @@ class SubmitEntityAction extends EditEntityAction {
 			return $status;
 		}
 
-		$this->doWatch( $title, $user );
+		$this->doWatch( $title );
 
 		return $status;
 	}
@@ -182,19 +179,18 @@ class SubmitEntityAction extends EditEntityAction {
 	/**
 	 * Checks the given permission.
 	 *
-	 * @param User $user
 	 * @param string $permission
 	 * @param Title $title
 	 * @param string $quick
 	 *
 	 * @return Status a status object representing the check's result.
 	 */
-	private function getPermissionStatus( User $user, $permission, Title $title, $quick = '' ) {
+	private function getPermissionStatus( $permission, Title $title, $quick = '' ) {
 		wfProfileIn( __METHOD__ );
 
 		//XXX: would be nice to be able to pass the $short flag too,
 		//     as used by getUserPermissionsErrorsInternal. But Title doesn't expose that.
-		$errors = $title->getUserPermissionsErrors( $permission, $user, $quick !== 'quick' );
+		$errors = $title->getUserPermissionsErrors( $permission, $this->getUser(), $quick !== 'quick' );
 		$status = Status::newGood();
 
 		foreach ( $errors as $error ) {
@@ -209,13 +205,13 @@ class SubmitEntityAction extends EditEntityAction {
 	/**
 	 * Checks that the given token is valid.
 	 *
-	 * @param User $user
 	 * @param string $editToken
 	 *
 	 * @return Status
 	 */
-	private function getEditTokenStatus( User $user, $editToken ) {
+	private function getEditTokenStatus( $editToken ) {
 		$status = Status::newGood();
+		$user = $this->getUser();
 
 		if ( !$user->matchEditToken( $editToken ) ) {
 			if ( $user->matchEditTokenNoSuffix( $editToken ) ) {
@@ -232,9 +228,10 @@ class SubmitEntityAction extends EditEntityAction {
 	 * Update watchlist.
 	 *
 	 * @param Title $title
-	 * @param User $user
 	 */
-	private function doWatch( Title $title, User $user ) {
+	private function doWatch( Title $title ) {
+		$user = $this->getUser();
+
 		if ( $user->isLoggedIn()
 			&& $user->getOption( 'watchdefault' )
 			&& !$user->isWatched( $title )
