@@ -5,12 +5,15 @@ namespace Wikibase\Test;
 use ContentHandler;
 use Language;
 use Revision;
+use Symfony\Component\Yaml\Exception\RuntimeException;
 use Title;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
+use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\EntityHandler
@@ -41,11 +44,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param SettingsArray $settings
+	 *
 	 * @return EntityHandler
 	 */
-	protected function getHandler() {
-		return ContentHandler::getForModelID( $this->getModelId() );
-	}
+	protected abstract function getHandler( SettingsArray $settings = null );
 
 	/**
 	 * @return Entity
@@ -272,6 +275,50 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$content = $handler->makeEmptyContent();
 
 		$this->assertEquals( $this->getModelId(), $content->getModel() );
+	}
+
+	public function exportTransformProvider() {
+		$entity = $this->newEntity();
+
+		//FIXME: We need a better way to set an ID. If091211c1d1d changes how
+		//       entity creation is handled in tests.
+		$entity->setId( 7 );
+
+		$legacySerializer = new LegacyInternalEntitySerializer();
+		$oldBlob = json_encode( $legacySerializer->serialize( $entity ) );
+
+		// replace "entity":["item",7] with "entity":"q7"
+		$id = $entity->getId()->getSerialization();
+		$veryOldBlob = preg_replace( '/"entity":\["\w+",\d+\]/', '"entity":"' . strtolower( $id ) . '"', $oldBlob );
+
+		// sanity
+		if ( $oldBlob == $veryOldBlob ) {
+			throw new RuntimeException( 'Failed to fake very old serialization format based on oldish serialization format.' );
+		}
+
+		$currentSerializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
+		$newBlob = json_encode( $currentSerializer->serialize( $entity ) );
+
+		return array(
+			'old serialization / ancient id format' => array( $veryOldBlob, $newBlob ),
+			'old serialization / new silly id format' => array( $oldBlob, $newBlob ),
+			'new serialization format, keep as is' => array( $newBlob, $newBlob ),
+		);
+	}
+
+	/**
+	 * @dataProvider exportTransformProvider
+	 *
+	 * @param $blob
+	 * @param $expected
+	 */
+	public function testExportTransform( $blob, $expected ) {
+		$settings = new SettingsArray();
+		$settings->setSetting( 'transformLegacyFormatOnExport', true );
+		$handler = $this->getHandler( $settings );
+
+		$actual = $handler->exportTransform( $blob );
+		$this->assertEquals( $expected, $actual );
 	}
 
 }

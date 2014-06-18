@@ -5,7 +5,6 @@ namespace Wikibase;
 use Content;
 use ContentHandler;
 use DataUpdate;
-use Deserializers\Exceptions\DeserializationException;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -13,7 +12,6 @@ use MWContentSerializationException;
 use ParserOptions;
 use RequestContext;
 use Revision;
-use Serializers\Exceptions\SerializationException;
 use Title;
 use User;
 use ValueValidators\Result;
@@ -60,12 +58,18 @@ abstract class EntityHandler extends ContentHandler {
 	private $errorLocalizer;
 
 	/**
+	 * @var
+	 */
+	private $transformOnExport;
+
+	/**
 	 * @param string $modelId
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
+	 * @param bool $transformOnExport
 	 */
 	public function __construct(
 		$modelId,
@@ -73,7 +77,8 @@ abstract class EntityHandler extends ContentHandler {
 		TermIndex $termIndex,
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
-		ValidatorErrorLocalizer $errorLocalizer
+		ValidatorErrorLocalizer $errorLocalizer,
+		$transformOnExport
 	) {
 		$formats = $contentCodec->getSupportedFormats();
 
@@ -84,6 +89,7 @@ abstract class EntityHandler extends ContentHandler {
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
 		$this->errorLocalizer = $errorLocalizer;
+		$this->transformOnExport = $transformOnExport;
 	}
 
 	/**
@@ -190,6 +196,48 @@ abstract class EntityHandler extends ContentHandler {
 		// have to call ParserOptions::getUserLangObj to split the cache by user language.
 		$options->getUserLangObj();
 		return $options;
+	}
+
+
+	/**
+	 * @see ContentHandler::exportTransform
+	 *
+	 * @param string $blob
+	 * @param string|null $format
+	 *
+	 * @return string|void
+	 */
+	public function exportTransform( $blob, $format = null ) {
+		if ( $this->transformOnExport && $this->isBlobUsingLegacyFormat( $blob, $format ) ) {
+			$format = ( $format === null ) ? $this->getDefaultFormat() : $format;
+
+			$content = $this->unserializeContent( $blob, $format );
+			$blob = $this->serializeContent( $content );
+		}
+
+		return $blob;
+	}
+
+	/**
+	 * Detects blobs that may be using a legacy serialization format.
+	 *
+	 * @note: False positives (detecting a legacy format when really no legacy format was used)
+	 * are acceptable, false negatives (failing to detect a legacy format when one was used)
+	 * are not acceptable.
+	 *
+	 * @param string $blob
+	 * @param string $format
+	 *
+	 * @return bool True if $blob seems to be using a legacy serialization format.
+	 */
+	protected function isBlobUsingLegacyFormat( $blob, $format ) {
+		// The current serialization uses puts a type identifier first
+		// or "entity":"p21" for the entity ID.
+		if ( preg_match( '/\s*"entity"\s*:/s', $blob ) > 0 ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
