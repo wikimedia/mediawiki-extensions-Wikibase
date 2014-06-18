@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_b2927efe",
+        "filename": "docs/options.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-18T16:13:22Z",
+      "side": 1,
+      "message": "entitiy?",
+      "revId": "0c4217978f6bdc281bc33f401d80f647f5748e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_92953ae9",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-18T16:13:22Z",
+      "side": 1,
+      "message": "omg!",
+      "revId": "0c4217978f6bdc281bc33f401d80f647f5748e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
