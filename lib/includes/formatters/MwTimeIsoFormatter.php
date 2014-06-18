@@ -70,6 +70,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @param string $isoTimestamp
 	 * @param int $precision
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string Formatted date
 	 */
 	private function getUnocalizedDate( $isoTimestamp, $precision ) {
@@ -83,6 +84,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @param string $isoTimestamp
 	 * @param int $precision
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string Formatted date
 	 */
 	private function getLocalizedDate( $isoTimestamp, $precision ) {
@@ -101,7 +103,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			// If we can not reliably fix the year, return the full time stamp. This should
 			// never happen as Language::sprintfDate should always return a 4 digit year.
 			if ( substr_count( $localizedDate, $mwYear ) !== 1 ) {
-				return $isoTimestamp;
+				throw new InvalidArgumentException( 'Can not identify year in formatted date.' );
 			}
 
 			$localizedDate = str_replace( $mwYear, $localizedYear, $localizedDate );
@@ -131,6 +133,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @param string $isoTimestamp
 	 * @param int $precision
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string MediaWiki time stamp in the format YYYYMMDDHHMMSS
 	 */
 	private function getMwTimestamp( $isoTimestamp, $precision ) {
@@ -154,16 +157,17 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 */
 	private function splitIsoTimestamp( $isoTimestamp, $precision ) {
 		if ( !preg_match(
-			'/^[-+]?(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)/',
+			'/(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)/',
 			$isoTimestamp,
 			$matches
 		) ) {
 			throw new InvalidArgumentException( 'Unable to parse time value.' );
 		}
 
-		$year  = intval( $matches[1] );
-		$month = intval( $matches[2] );
-		$day   = intval( $matches[3] );
+		// The year can easily exceed the 32 bit integer limit
+		$year  = floatval( $matches[1] );
+		$month =   intval( $matches[2] );
+		$day   =   intval( $matches[3] );
 
 		if (   empty( $year  ) && $precision <  TimeValue::PRECISION_YEAR
 			|| empty( $month ) && $precision >= TimeValue::PRECISION_MONTH
