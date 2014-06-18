@@ -9,6 +9,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
@@ -28,7 +29,7 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @var EntityLookup
 	 */
-	private $entityLookup = null;
+	private $entityRevisionLookup = null;
 
 	/**
 	 * @var PropertyLabelResolver
@@ -192,18 +193,29 @@ class DirectSqlStore implements ClientStore {
 
 
 	/**
-	 * @see Store::getEntityLookup
+	 * @see ClientStore::getEntityLookup
 	 *
 	 * @since 0.4
 	 *
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		if ( !$this->entityLookup ) {
-			$this->entityLookup = $this->newEntityLookup();
+		return $this->getEntityRevisionLookup();
+	}
+
+	/**
+	 * @see ClientStore::getEntityRevisionLookup
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	public function getEntityRevisionLookup() {
+		if ( !$this->entityRevisionLookup ) {
+			$this->entityRevisionLookup = $this->newEntityRevisionLookup();
 		}
 
-		return $this->entityLookup;
+		return $this->entityRevisionLookup;
 	}
 
 	/**
@@ -211,7 +223,7 @@ class DirectSqlStore implements ClientStore {
 	 *
 	 * @return CachingEntityRevisionLookup
 	 */
-	protected function newEntityLookup() {
+	protected function newEntityRevisionLookup() {
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
 		$key = $this->cachePrefix . ':WikiPageEntityLookup';
 
