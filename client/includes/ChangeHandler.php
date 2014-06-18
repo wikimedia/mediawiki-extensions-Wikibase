@@ -8,6 +8,7 @@ use SiteList;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -74,9 +75,9 @@ class ChangeHandler {
 
 
 	/**
-	 * @var EntityLookup $entityLookup
+	 * @var EntityRevisionLookup $entityRevisionLookup
 	 */
-	private $entityLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var Site $site
@@ -99,7 +100,7 @@ class ChangeHandler {
 	private $checkPageExistence = true;
 
 	public function __construct( PageUpdater $updater = null,
-			EntityLookup $entityLookup = null,
+			EntityRevisionLookup $entityRevisionLookup = null,
 			ItemUsageIndex $entityUsageIndex = null,
 			Site $localSite = null,
 			SiteList $sites = null) {
@@ -118,8 +119,8 @@ class ChangeHandler {
 			$updater = new WikiPageUpdater();
 		}
 
-		if ( !$entityLookup ) {
-			$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		if ( !$entityRevisionLookup ) {
+			$entityRevisionLookup = $wikibaseClient->getStore()->getEntityRevisionLookup();
 		}
 
 		if ( !$entityUsageIndex ) {
@@ -140,7 +141,7 @@ class ChangeHandler {
 		$this->siteId = $localSite->getGlobalId();
 
 		$this->updater = $updater;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityUsageIndex = $entityUsageIndex;
 
 		// TODO: allow these to be passed in as parameters!
@@ -261,20 +262,20 @@ class ChangeHandler {
 		$parentRevId = $firstmeta['parent_id'];
 		$latestRevId = $firstmeta['rev_id'];
 
-		$entity = $this->entityLookup->getEntity( $entityId, $latestRevId );
+		$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $latestRevId );
 
-		if ( !$entity ) {
+		if ( !$entityRev ) {
 			throw new MWException( "Failed to load revision $latestRevId of $entityId" );
 		}
 
-		$parent = $parentRevId ? $this->entityLookup->getEntity( $entityId, $parentRevId ) : null;
+		$parentRev = $parentRevId ? $this->entityRevisionLookup->getEntityRevision( $entityId, $parentRevId ) : null;
 
 		//XXX: we could avoid loading the entity data by merging the diffs programatically
 		//     instead of re-calculating.
 		$change = EntityChange::newFromUpdate(
-			$parent ? EntityChange::UPDATE : EntityChange::ADD,
-			$parent,
-			$entity
+			$parentRev ? EntityChange::UPDATE : EntityChange::ADD,
+			$parentRev === null ? null : $parentRev->getEntity(),
+			$entityRev->getEntity()
 		);
 
 		$change->setFields(

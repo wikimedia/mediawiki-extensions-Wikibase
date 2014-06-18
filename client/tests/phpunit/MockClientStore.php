@@ -38,6 +38,13 @@ class MockClientStore implements ClientStore {
 		return $this->getMock();
 	}
 
+	/*
+	 * @return EntityRevisionLookup
+	 */
+	public function getEntityRevisionLookup() {
+		return $this->getMock();
+	}
+
 	/**
 	 * @return SiteLinkLookup
 	 */
