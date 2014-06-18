@@ -126,7 +126,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 	 * @return array
 	 * @throws InvalidArgumentException
 	 */
-	final public function getSerialized( $entity ) {
+	final public function getSe( $entity ) {
 		if ( !( $entity instanceof Entity ) ) {
 			throw new InvalidArgumentException( 'EntitySerializer can only serialize Entity objects' );
 		}
