@@ -25,12 +25,11 @@ interface EntityLookup {
 	 * @since 0.3
 	 *
 	 * @param EntityId $entityId
-	 * @param int $revision The desired revision id, 0 means "current".
 	 *
 	 * @throw StorageException
 	 * @return Entity|null
 	 */
-	public function getEntity( EntityId $entityId, $revision = 0 );
+	public function getEntity( EntityId $entityId );
 
 	/**
 	 * Returns whether the given entity can bee looked up using

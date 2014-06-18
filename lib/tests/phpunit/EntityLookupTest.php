@@ -79,23 +79,8 @@ abstract class EntityLookupTest extends EntityTestCase {
 			array( // #0: any revision
 				new ItemId( 'q42' ), 0, true,
 			),
-			array( // #1: first revision
-				new ItemId( 'q42' ), 11, true,
-			),
-			array( // #2: second revision
-				new ItemId( 'q42' ), 12, true,
-			),
-			array( // #3: bad revision
-				new ItemId( 'q42' ), 600000, false, 'Wikibase\StorageException',
-			),
-			array( // #4: wrong type
+			array( // #1: wrong type
 				new ItemId( 'q753' ), 0, false,
-			),
-			array( // #5: bad revision
-				new PropertyId( 'p753' ), 23, false, 'Wikibase\StorageException',
-			),
-			array( // #6: some revision
-				new PropertyId( 'p753' ), 0, true,
 			),
 		);
 
@@ -106,19 +91,12 @@ abstract class EntityLookupTest extends EntityTestCase {
 	 * @dataProvider provideGetEntity
 	 *
 	 * @param EntityId $id    The entity to get
-	 * @param int             $revision The revision to get (or 0)
 	 * @param bool            $shouldExist
-	 * @param string|null     $expectException
 	 */
-	public function testGetEntity( $id, $revision, $shouldExist, $expectException = null ) {
-		if ( $expectException !== null ) {
-			$this->setExpectedException( $expectException );
-		}
-
-		$revision = $this->resolveLogicalRevision( $revision );
+	public function testGetEntity( $id, $shouldExist ) {
 
 		$lookup = $this->getEntityLookup();
-		$entity = $lookup->getEntity( $id, $revision );
+		$entity = $lookup->getEntity( $id );
 
 		if ( $shouldExist == true ) {
 			$this->assertNotNull( $entity, "ID " . $id->__toString() );
@@ -129,10 +107,8 @@ abstract class EntityLookupTest extends EntityTestCase {
 		} else {
 			$this->assertNull( $entity, "ID " . $id->__toString() );
 
-			if ( $revision == 0 ) {
-				$has = $lookup->hasEntity( $id );
-				$this->assertFalse( $has, 'hasEntity' );
-			}
+			$has = $lookup->hasEntity( $id );
+			$this->assertFalse( $has, 'hasEntity' );
 		}
 	}
 

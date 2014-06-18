@@ -164,13 +164,12 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @see   EntityLookup::getEntity
 	 *
 	 * @param EntityId $entityId
-	 * @param int      $revisionId The desired revision id, 0 means "current".
 	 *
 	 * @throw StorageException
 	 * @return Entity|null
 	 */
-	public function getEntity( EntityId $entityId, $revisionId = 0 ) {
-		$entityRevision = $this->getEntityRevision( $entityId, $revisionId );
+	public function getEntity( EntityId $entityId ) {
+		$entityRevision = $this->getEntityRevision( $entityId );
 		return $entityRevision === null ? null : $entityRevision->getEntity();
 	}
 
