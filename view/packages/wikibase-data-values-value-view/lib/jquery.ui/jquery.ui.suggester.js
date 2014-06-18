@@ -484,7 +484,8 @@
 		 * @param {string} term
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {string[]}
+		 *         - {string[]} suggestions
+		 *         - {string} requestTerm
 		 *         Rejected parameters:
 		 *         - {string}
 		 */
@@ -503,7 +504,8 @@
 		 * @param {string[]} source
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {string[]}
+		 *         - {string[]} suggestions
+		 *         - {string} requestTerm
 		 *         Rejected parameters:
 		 *         - {string}
 		 */
