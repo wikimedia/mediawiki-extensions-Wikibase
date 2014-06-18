@@ -7,7 +7,9 @@ use MediaWikiSite;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Settings;
 use Wikibase\SettingsArray;
 
 /**
@@ -99,10 +101,13 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$siteStore = $this->getMockSiteStore();
 
 		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
+
+		$settings->setSetting( 'siteGroup', 'wikipedia' );
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', null );
 
 		$settings2 = clone $settings;
+		$settings2->setSetting( 'siteGroup', 'wikipedia' );
 		$settings2->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings2->setSetting( 'languageLinkSiteGroup', 'wikivoyage' );
 
@@ -172,10 +177,56 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 			WikibaseClient::getDefaultInstance() );
 	}
 
+	public function testGetEntityContentDataCodec() {
+		$codec = $this->getDefaultInstance()->getEntityContentDataCodec();
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityContentDataCodec', $codec );
+	}
+
+	public function testGetInternalEntitySerializer() {
+		$serializer = $this->getDefaultInstance()->getInternalEntitySerializer();
+		$this->assertInstanceOf( 'Serializers\Serializer', $serializer );
+	}
+
+	public function testGetInternalEntityDeserializer() {
+		$deserializer = $this->getDefaultInstance()->getInternalEntityDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testGetEntityContentDataCodec_legacy() {
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'Hello' );
+		$item->setLabel( 'es', 'Holla' );
+
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+
+		$codec = $repo->getEntityContentDataCodec();
+		$json = $codec->encodeEntity( $item, CONTENT_FORMAT_JSON );
+		$data = json_decode( $json, true );
+
+		$this->assertEquals( $item->toArray(), $data );
+	}
+
+	public function testGetInternalEntitySerializer_legacy() {
+		$item = Item::newEmpty();
+		$item->setLabel( 'en', 'Hello' );
+		$item->setLabel( 'es', 'Holla' );
+
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+
+		$serializer = $repo->getInternalEntitySerializer();
+		$data = $serializer->serialize( $item );
+
+		$this->assertEquals( $item->toArray(), $data );
+	}
+
 	/**
 	 * @return WikibaseClient
 	 */
 	private function getDefaultInstance() {
-		return WikibaseClient::getDefaultInstance();
+		$settings = new SettingsArray( iterator_to_array( Settings::singleton() ) );
+		return new WikibaseClient( $settings, Language::factory( 'en' ) );
 	}
+
 }
