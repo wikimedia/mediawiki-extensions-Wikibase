@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_1d327bef",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T16:39:19Z",
+      "side": 1,
+      "message": "change this to say \"converted on the fly\"",
+      "parentUuid": "ee391fd1_9239baf1",
+      "revId": "a6c7cbfee6c8a785e3c6c06498136fd0e559fe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_d2050218",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-18T16:31:06Z",
       "side": 1,
       "message": "Whooo! Whats the point here? This is way to complicated. Should start with a constant for performance reasons. Stop the regex the moment you know it\u0027s the old format. Which is when you find the first digit of the numeric id, right?\n\nSuggestion:\npreg_match( \u0027/\"entity\"\\s*:\\s*\\[\\s*\"XXX\"\\s*,\\s*\\d/\u0027, $blob )\nReplace XXX with what you are looking for. I assume something like \"\\w+id\".",
+      "revId": "a6c7cbfee6c8a785e3c6c06498136fd0e559fe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3d3e5fb6",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T16:39:19Z",
+      "side": 1,
+      "message": "you really think starting the pattern with a character class like [{,] is so bad? why would that be? This should never cause backtracking, so what\u0027s the issue here? Does pcre suck so much? \n\nYour XXX would actually be \\w+, or maybe [a-z]+. The closing ] should not cause an issue, since that bit will only ever be executed if the rest already matches, and than it will very likely succeed after two characters or so.\n\nThe sucky bit is that \"entity\":[\"foo\",17] is typically located after all the labels, descriptions, and aliases,  but before the claims. Maybe it would be more performant to do a plain substring search for \u0027\"entity\"\u0027 first, and only use the regex if that is found?",
+      "parentUuid": "ee391fd1_d2050218",
       "revId": "a6c7cbfee6c8a785e3c6c06498136fd0e559fe88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
