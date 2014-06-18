@@ -1239,6 +1239,7 @@ final class RepoHooks {
 		$termIndex = $repo->getStore()->getTermIndex();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
+		$transformOnExport = $repo->getSettings()->getSetting( 'transformLegacyFormatOnExport' );
 
 		return new ItemHandler(
 			$entityPerPage,
@@ -1246,7 +1247,8 @@ final class RepoHooks {
 			$codec,
 			array( $validator ),
 			$errorLocalizer,
-			$siteLinkStore
+			$siteLinkStore,
+			$transformOnExport
 		);
 	}
 
@@ -1258,6 +1260,7 @@ final class RepoHooks {
 		$termIndex = $repo->getStore()->getTermIndex();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
+		$transformOnExport = $repo->getSettings()->getSetting( 'transformLegacyFormatOnExport' );
 
 		return new PropertyHandler(
 			$entityPerPage,
@@ -1265,7 +1268,8 @@ final class RepoHooks {
 			$codec,
 			array( $validator ),
 			$errorLocalizer,
-			$propertyInfoStore
+			$propertyInfoStore,
+			$transformOnExport
 		);
 	}
 

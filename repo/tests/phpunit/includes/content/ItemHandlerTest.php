@@ -6,7 +6,11 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\EntityHandler;
 use Wikibase\ItemContent;
+use Wikibase\ItemHandler;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\ItemHandler
@@ -72,6 +76,37 @@ class ItemHandlerTest extends EntityHandlerTest {
 
 	protected function newEntity() {
 		return Item::newEmpty();
+	}
+
+	/**
+	 * @param SettingsArray $settings
+	 *
+	 * @return EntityHandler
+	 */
+	protected function getHandler( SettingsArray $settings = null ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
+		$codec = $repo->getEntityContentDataCodec();
+		$entityPerPage = $repo->getStore()->newEntityPerPage();
+		$termIndex = $repo->getStore()->getTermIndex();
+		$errorLocalizer = $repo->getValidatorErrorLocalizer();
+		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
+
+		if ( !$settings ) {
+			$settings = $repo->getSettings();
+		}
+
+		$transformOnExport = $settings->getSetting( 'transformLegacyFormatOnExport' );
+
+		return new ItemHandler(
+			$entityPerPage,
+			$termIndex,
+			$codec,
+			array( $validator ),
+			$errorLocalizer,
+			$siteLinkStore,
+			$transformOnExport
+		);
 	}
 
 }
