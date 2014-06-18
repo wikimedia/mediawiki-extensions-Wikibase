@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_29ece5f1",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T09:28:27Z",
+      "side": 1,
+      "message": "The flag controls whether the output is a snipped or a complete JSON document. We use it in the context of sharding, true, but it has of and by itself nothing to do with sharding at all.\n\nSo, please call it \"outputFlavour\" or \"JsonMode\" or \"SnippetFormat\" some such.",
+      "parentUuid": "ee391fd1_2a1ce1ca",
+      "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_6a21c9f5",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 7
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_e9f5bdb6",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T09:28:27Z",
+      "side": 1,
+      "message": "No, it should be called \"snippet-mode\" or some such. It controls what the output looks like. it has nothing to do with sharding.",
+      "parentUuid": "ee391fd1_a4f5aab7",
+      "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_84f2a6cb",
         "filename": "repo/maintenance/dumpJson.php",
         "patchSetId": 7
@@ -64,6 +100,24 @@
       "writtenOn": "2014-06-17T08:13:18Z",
       "side": 1,
       "message": "The format could be the third parameter here. Again, I\u0027m not sure if this makes sense. It may be a matter of taste. Feel free to ignore.",
+      "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_89c2b15b",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T09:28:27Z",
+      "side": 1,
+      "message": "Again: even if the primary use case of changing the output format is sharding, it is completely independent of sharding. You might use it e.g. to combine dumps of different entity types, or from different repos.",
+      "parentUuid": "ee391fd1_84f2a6cb",
       "revId": "9b378c08df1a731a7b6de4a49dbde8311221036f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
