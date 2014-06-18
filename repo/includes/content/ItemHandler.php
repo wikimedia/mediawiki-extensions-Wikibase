@@ -32,6 +32,7 @@ class ItemHandler extends EntityHandler {
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param SiteLinkCache $siteLinkStore
+	 * @param bool $transformOnExport
 	 */
 	public function __construct(
 		EntityPerPage $entityPerPage,
@@ -39,7 +40,8 @@ class ItemHandler extends EntityHandler {
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
-		SiteLinkCache $siteLinkStore
+		SiteLinkCache $siteLinkStore,
+		$transformOnExport
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_ITEM,
@@ -47,7 +49,8 @@ class ItemHandler extends EntityHandler {
 			$termIndex,
 			$contentCodec,
 			$preSaveValidators,
-			$errorLocalizer
+			$errorLocalizer,
+			$transformOnExport
 		);
 
 		$this->siteLinkStore = $siteLinkStore;
