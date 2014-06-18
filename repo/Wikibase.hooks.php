@@ -1286,7 +1286,7 @@ final class RepoHooks {
 			$data['position'] = $row->chd_seen;
 		}
 		if ( isset( $row->chd_touched ) ) {
-			$data['touched'] = $row->chd_touched;
+			$data['touched'] = wfTimestamp( TS_ISO_8601, $row->chd_touched );
 		}
 
 		return $data;
