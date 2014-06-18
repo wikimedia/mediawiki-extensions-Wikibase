@@ -49,7 +49,11 @@ class ClaimListDiffer {
 			$oldClaim = $fromClaims->getClaimWithGuid( $guid );
 			$newClaim = $toClaims->getClaimWithGuid( $guid );
 
-			assert( $oldClaim->getGuid() === $newClaim->getGuid() );
+			if ( !( $oldClaim instanceof Claim
+					&& $newClaim instanceof Claim
+					&& $oldClaim->getGuid() === $newClaim->getGuid() ) ) {
+				throw new UnexpectedValueException( 'Invalid operands' );
+			}
 
 			return new DiffOpChange( $oldClaim, $newClaim );
 		}
