@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_9239baf1",
+        "filename": "docs/options.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-18T16:31:06Z",
+      "side": 1,
+      "message": "\"updated\" is very, very misleading since the database is not updated, as you just explained. Right?",
+      "revId": "a6c7cbfee6c8a785e3c6c06498136fd0e559fe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d2050218",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-18T16:31:06Z",
+      "side": 1,
+      "message": "Whooo! Whats the point here? This is way to complicated. Should start with a constant for performance reasons. Stop the regex the moment you know it\u0027s the old format. Which is when you find the first digit of the numeric id, right?\n\nSuggestion:\npreg_match( \u0027/\"entity\"\\s*:\\s*\\[\\s*\"XXX\"\\s*,\\s*\\d/\u0027, $blob )\nReplace XXX with what you are looking for. I assume something like \"\\w+id\".",
+      "revId": "a6c7cbfee6c8a785e3c6c06498136fd0e559fe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
