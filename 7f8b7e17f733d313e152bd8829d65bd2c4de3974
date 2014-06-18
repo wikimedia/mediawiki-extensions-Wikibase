@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_ef4dbde1",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-18T14:33:11Z",
+      "side": 1,
+      "message": "Settings:: is deprecated.\n\nNoBadDependencyUsageTest fails",
+      "revId": "7f8b7e17f733d313e152bd8829d65bd2c4de3974",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
