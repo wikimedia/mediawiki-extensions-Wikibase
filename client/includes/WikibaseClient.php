@@ -5,11 +5,13 @@ namespace Wikibase\Client;
 use DataTypes\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use Deserializers\Deserializer;
 use Exception;
 use Language;
 use LogicException;
 use MediaWikiSite;
 use MWException;
+use Serializers\Serializer;
 use Site;
 use SiteSQLStore;
 use SiteStore;
@@ -292,7 +294,6 @@ final class WikibaseClient {
 		if ( $this->store === null ) {
 			$this->store = new DirectSqlStore(
 				$this->getEntityContentDataCodec(),
-				$this->newInternalDeserializerFactory()->newEntityDeserializer(),
 				$this->getContentLanguage(),
 				$repoDatabase
 			);
@@ -589,8 +590,8 @@ final class WikibaseClient {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->newInternalSerializerFactory()->newEntitySerializer(),
-			$this->newInternalDeserializerFactory()->newEntityDeserializer()
+			$this->getInternalEntitySerializer(),
+			$this->getInternalEntityDeserializer()
 		);
 	}
 
@@ -613,14 +614,34 @@ final class WikibaseClient {
 		return $this->clientSiteLinkLookup;
 	}
 
-	public function newInternalDeserializerFactory() {
+	/**
+	 * @return Deserializer
+	 */
+	public function getInternalEntityDeserializer() {
+		return $this->getInternalDeserializerFactory()->newEntityDeserializer();
+	}
+
+	/**
+	 * @return Serializer
+	 */
+	public function getInternalEntitySerializer() {
+		return $this->getInternalSerializerFactory()->newEntitySerializer();
+	}
+
+	/**
+	 * @return DeserializerFactory
+	 */
+	protected function getInternalDeserializerFactory() {
 		return new DeserializerFactory(
 			new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ),
 			$this->getEntityIdParser()
 		);
 	}
 
-	public function newInternalSerializerFactory() {
+	/**
+	 * @return SerializerFactory
+	 */
+	protected function getInternalSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer() );
 	}
 

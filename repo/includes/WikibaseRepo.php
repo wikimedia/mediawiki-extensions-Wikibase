@@ -6,6 +6,8 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use Deserializers\Deserializer;
+use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
 use StubObject;
@@ -435,8 +437,7 @@ class WikibaseRepo {
 	public function getStore() {
 		if ( !$this->store ) {
 			$this->store = new SqlStore(
-				$this->getEntityContentDataCodec(),
-				$this->newInternalDeserializerFactory()->newEntityDeserializer()
+				$this->getEntityContentDataCodec()
 			);
 		}
 
@@ -738,19 +739,39 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->newInternalSerializerFactory()->newEntitySerializer(),
-			$this->newInternalDeserializerFactory()->newEntityDeserializer()
+			$this->getInternalEntitySerializer(),
+			$this->getInternalEntityDeserializer()
 		);
 	}
 
-	public function newInternalDeserializerFactory() {
+	/**
+	 * @return Deserializer
+	 */
+	public function getInternalEntityDeserializer() {
+		return $this->getInternalDeserializerFactory()->newEntityDeserializer();
+	}
+
+	/**
+	 * @return Serializer
+	 */
+	public function getInternalEntitySerializer() {
+		return $this->getInternalSerializerFactory()->newEntitySerializer();
+	}
+
+	/**
+	 * @return DeserializerFactory
+	 */
+	protected function getInternalDeserializerFactory() {
 		return new DeserializerFactory(
 			new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ),
 			$this->getEntityIdParser()
 		);
 	}
 
-	public function newInternalSerializerFactory() {
+	/**
+	 * @return SerializerFactory
+	 */
+	protected function getInternalSerializerFactory() {
 		return new SerializerFactory( new DataValueSerializer() );
 	}
 

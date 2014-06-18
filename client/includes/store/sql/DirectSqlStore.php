@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Deserializers\Deserializer;
 use Language;
 use ObjectCache;
 use Site;
@@ -92,26 +91,18 @@ class DirectSqlStore implements ClientStore {
 	private $contentCodec;
 
 	/**
-	 * @var Deserializer
-	 */
-	private $entityDeserializer;
-
-	/**
 	 * @param EntityContentDataCodec $contentCodec
-	 * @param Deserializer $entityDeserializer
 	 * @param Language $wikiLanguage
 	 * @param string    $repoWiki the symbolic database name of the repo wiki
 	 */
 	public function __construct(
 		EntityContentDataCodec $contentCodec,
-		Deserializer $entityDeserializer,
 		Language $wikiLanguage,
 		$repoWiki
 	) {
 		$this->repoWiki = $repoWiki;
 		$this->language = $wikiLanguage;
 		$this->contentCodec = $contentCodec;
-		$this->entityDeserializer = $entityDeserializer;
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
