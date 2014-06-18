@@ -54,14 +54,13 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @see EntityLookup::getEntity
 	 *
 	 * @param EntityId $entityId
-	 * @param int $revision The desired revision id, 0 means "current".
 	 *
 	 * @return Entity|null
 	 *
 	 * @throw StorageException
 	 */
-	public function getEntity( EntityId $entityId, $revision = 0 ) {
-		$entityRev = $this->getEntityRevision( $entityId, $revision );
+	public function getEntity( EntityId $entityId ) {
+		$entityRev = $this->getEntityRevision( $entityId );
 		return $entityRev === null ? null : $entityRev->getEntity();
 	}
 
