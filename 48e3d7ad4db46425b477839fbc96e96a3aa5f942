@@ -16,6 +16,24 @@
       "revId": "48e3d7ad4db46425b477839fbc96e96a3aa5f942",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_c98af9bf",
+        "filename": "repo/includes/Hook/MakeGlobalVariablesScriptHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-18T10:23:58Z",
+      "side": 1,
+      "message": "Asked Adrian. Decided it\u0027s probably more confusing for scripts/gadgets to have such information. A redirect is just not an entity.",
+      "parentUuid": "ee391fd1_096da12d",
+      "revId": "48e3d7ad4db46425b477839fbc96e96a3aa5f942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
