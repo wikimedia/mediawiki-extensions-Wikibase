@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_096da12d",
+        "filename": "repo/includes/Hook/MakeGlobalVariablesScriptHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-18T10:15:28Z",
+      "side": 1,
+      "message": "Can\u0027t this still return a compatible array?\n\nreturn array(\n\t\u0027wbEntityId\u0027 \u003d\u003e $entityContent-\u003egetEntityId(),\n\t\u0027wbUsedEntities\u0027 \u003d\u003e FormatJson::encode( array() ),\n\t\u0027wbEntity\u0027 \u003d\u003e FormatJson::encode( null ),\n);\n\nwbEntity can be ommited.\nwbUsedEntities could contain the target entity.\n\nNot sure if this is helpful. A redirect is not an entity. Gadgets will fail anyway. Maybe add a TODO or something?",
+      "revId": "48e3d7ad4db46425b477839fbc96e96a3aa5f942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
