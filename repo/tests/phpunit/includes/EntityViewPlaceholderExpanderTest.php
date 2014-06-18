@@ -7,8 +7,10 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityViewPlaceholderExpander;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\StorageException;
 
 /**
@@ -28,7 +30,7 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	 * @param EntityLookup $entityLookup
 	 * @param ItemId $itemId
 	 */
-	private function newExpander( User $user, EntityLookup $entityLookup, ItemId $itemId ) {
+	private function newExpander( User $user, EntityRevisionLookup $entityRevisionLookup, ItemId $itemId ) {
 		$title = new Title( 'EntityViewPlaceholderExpanderTest-DummyTitleForLocalUrls' );
 
 		$language = Language::factory( 'en' );
@@ -54,24 +56,35 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 			$user,
 			$language,
 			$idParser,
-			$entityLookup,
+			$entityRevisionLookup,
 			$userLanguages
 		);
 	}
 
-	private function getEntityLookup( Item $item = null ) {
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+	/**
+	 * @param Item $item
+	 * @param int $revId
+	 *
+	 * @return EntityRevisionLookup
+	 */
+	private function getEntityRevisionLookup( Item $item = null, $revId = 5 ) {
+		$revision = ( $item === null ) ? null : new EntityRevision( $item, $revId );
+
+		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
 		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnValue( $item ) );
+			->method( 'getEntityRevision' )
+			->will( $this->returnValue( $revision ) );
 
 		return $entityLookup;
 	}
 
-	private function getExceptionThrowingEntityLookup() {
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
+	/**
+	 * @return EntityRevisionLookup
+	 */
+	private function getExceptionThrowingEntityRevisionLookup() {
+		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
 		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
+			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function() {
 				throw new StorageException( 'Entity not found' );
 			} )
@@ -106,8 +119,8 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 	public function testGetHtmlForPlaceholder() {
 		$item = $this->getItem();
-		$entityLookup = $this->getEntityLookup( $item );
-		$expander = $this->newExpander( $this->newUser( false ), $entityLookup, $item->getId() );
+		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
+		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $item->getId() );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox-toc' );
 		$this->assertInternalType( 'string', $html );
@@ -118,8 +131,8 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 	public function testRenderTermBoxTocEntry() {
 		$item = $this->getItem();
-		$entityLookup = $this->getEntityLookup( $item );
-		$expander = $this->newExpander( $this->newUser( false ), $entityLookup, $item->getId() );
+		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
+		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $item->getId() );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
@@ -130,8 +143,8 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 
 	public function renderTermBox() {
 		$item = $this->getItem();
-		$entityLookup = $this->getEntityLookup( $item );
-		$expander = $this->newExpander( $this->newUser( false ), $entityLookup, $item->getId() );
+		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
+		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $item->getId() );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
@@ -147,9 +160,9 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	public function testRenderTermBoxForDeleteRevision() {
 		$item = $this->getItem();
 		$itemId = $item->getId();
-		$entityLookup = $this->getExceptionThrowingEntityLookup();
+		$entityRevisionLookup = $this->getExceptionThrowingEntityRevisionLookup();
 
-		$expander = $this->newExpander( $this->newUser( false ), $entityLookup, $itemId );
+		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $itemId );
 
 		$html = $expander->renderTermBox( $itemId, 1 );
 		$this->assertEquals( '', $html );
@@ -158,12 +171,12 @@ class EntityViewPlaceholderExpanderTest extends \MediaWikiTestCase {
 	public function testGetExtraUserLanguages() {
 		$item = $this->getItem();
 		$itemId = $item->getId();
-		$entityLookup = $this->getEntityLookup( $item );
+		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
 
-		$expander = $this->newExpander( $this->newUser( true ), $entityLookup, $itemId );
+		$expander = $this->newExpander( $this->newUser( true ), $entityRevisionLookup, $itemId );
 		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
 
-		$expander = $this->newExpander( $this->newUser( false ), $entityLookup, $itemId );
+		$expander = $this->newExpander( $this->newUser( false ), $entityRevisionLookup, $itemId );
 		$this->assertArrayEquals( array( 'de', 'en', 'ru' ), $expander->getExtraUserLanguages() );
 	}
 
