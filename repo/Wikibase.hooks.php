@@ -1107,7 +1107,7 @@ final class RepoHooks {
 				$out->getUser(),
 				$out->getLanguage(),
 				WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-				WikibaseRepo::getDefaultInstance()->getEntityLookup(),
+				WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup(),
 				$userLanguageLookup
 			);
 

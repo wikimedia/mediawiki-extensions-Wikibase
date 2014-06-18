@@ -9,7 +9,7 @@ use RuntimeException;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\View\TermBoxView;
 
 /**
@@ -51,9 +51,9 @@ class EntityViewPlaceholderExpander {
 	private $entityIdParser;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityRevisionLookup
 	 */
-	private $entityLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var UserLanguageLookup
@@ -70,7 +70,7 @@ class EntityViewPlaceholderExpander {
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
 	 * @param EntityIdParser $entityIdParser
-	 * @param EntityLookup $entityLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param UserLanguageLookup $userLanguageLookup
 	 */
 	public function __construct(
@@ -78,14 +78,14 @@ class EntityViewPlaceholderExpander {
 		User $user,
 		Language $uiLanguage,
 		EntityIdParser $entityIdParser,
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		UserLanguageLookup $userLanguageLookup
 	) {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
 		$this->uiLanguage = $uiLanguage;
 		$this->entityIdParser = $entityIdParser;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->userLanguageLookup = $userLanguageLookup;
 	}
 
@@ -227,7 +227,8 @@ class EntityViewPlaceholderExpander {
 
 		try {
 			// we may want to cache this...
-			$entity = $this->entityLookup->getEntity( $entityId, $revisionId );
+			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
+			$entity = $entityRev->getEntity();
 		} catch ( StorageException $ex ) {
 			// entity not found, might be a deleted revision
 			return '';
