@@ -755,7 +755,14 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getInternalEntitySerializer() {
-		return $this->getInternalSerializerFactory()->newEntitySerializer();
+		$entitySerializerClass = $this->getSettings()->getSetting( 'internalEntitySerializerClass' );
+
+		if ( $entitySerializerClass !== null ) {
+			$serializer = new $entitySerializerClass;
+			return $serializer;
+		} else {
+			return $this->getInternalSerializerFactory()->newEntitySerializer();
+		}
 	}
 
 	/**
