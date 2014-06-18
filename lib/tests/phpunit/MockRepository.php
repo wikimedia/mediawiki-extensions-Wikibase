@@ -69,14 +69,13 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 * @see EntityLookup::getEntity
 	 *
 	 * @param EntityID $entityId
-	 * @param int $revision The desired revision id, 0 means "current".
 	 *
 	 * @return Entity|null
 	 *
 	 * @throw StorageException
 	 */
-	public function getEntity( EntityId $entityId, $revision = 0 ) {
-		$rev = $this->getEntityRevision( $entityId, $revision );
+	public function getEntity( EntityId $entityId ) {
+		$rev = $this->getEntityRevision( $entityId );
 
 		return $rev === null ? null : $rev->getEntity()->copy();
 	}

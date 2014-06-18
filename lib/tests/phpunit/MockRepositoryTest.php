@@ -88,13 +88,6 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$item = $this->repo->getEntity( $itemId );
 		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
 
-		// test item by rev id
-		$item = $this->repo->getEntity( $itemId, 23 );
-		$this->assertNotNull( $item, "Entity " . $itemId . "@23" );
-		$this->assertInstanceOf( '\Wikibase\Item', $item, "Entity " . $itemId );
-		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
-		$this->assertEquals( null, $item->getLabel( 'de' ) );
-
 		// test latest prop
 		$prop = $this->repo->getEntity( $propId );
 		$this->assertNotNull( $prop, "Entity " . $propId );

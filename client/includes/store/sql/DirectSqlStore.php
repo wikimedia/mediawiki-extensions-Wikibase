@@ -222,7 +222,7 @@ class DirectSqlStore implements ClientStore {
 			$this->entityRevisionLookup = $this->newEntityRevisionLookup();
 		}
 
-		return $this->getEntityLookup();
+		return $this->entityRevisionLookup;
 	}
 
 	/**
