@@ -84,29 +84,6 @@ return call_user_func( function() {
 			'datatypesconfigvarname' => 'wbDataTypes',
 		),
 
-		'wikibase.datamodel' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.datamodel/datamodel.entities/wikibase.Entity.js',
-				'wikibase.datamodel/datamodel.entities/wikibase.Item.js',
-				'wikibase.datamodel/datamodel.entities/wikibase.Property.js',
-				'wikibase.datamodel/wikibase.EntityId.js',
-				'wikibase.datamodel/wikibase.Snak.js',
-				'wikibase.datamodel/wikibase.SnakList.js',
-				'wikibase.datamodel/wikibase.PropertyValueSnak.js',
-				'wikibase.datamodel/wikibase.PropertySomeValueSnak.js',
-				'wikibase.datamodel/wikibase.PropertyNoValueSnak.js',
-				'wikibase.datamodel/wikibase.Reference.js',
-				'wikibase.datamodel/wikibase.Claim.js',
-				'wikibase.datamodel/wikibase.Statement.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase',
-				'mw.ext.dataValues', // DataValues extension
-				'wikibase.dataTypes',
-			)
-		),
-
 		'wikibase.serialization' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.serialization/serialization.js',
