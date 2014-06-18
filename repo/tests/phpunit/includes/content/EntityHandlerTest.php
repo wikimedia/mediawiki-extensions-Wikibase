@@ -10,7 +10,9 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
+use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\EntityHandler
@@ -41,11 +43,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param SettingsArray $settings
+	 *
 	 * @return EntityHandler
 	 */
-	protected function getHandler() {
-		return ContentHandler::getForModelID( $this->getModelId() );
-	}
+	protected abstract function getHandler( SettingsArray $settings = null );
 
 	/**
 	 * @return Entity
@@ -272,6 +274,40 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$content = $handler->makeEmptyContent();
 
 		$this->assertEquals( $this->getModelId(), $content->getModel() );
+	}
+
+	public function exportTransformProvider() {
+		$entity = $this->newEntity();
+
+		//FIXME: We need a better way to set an ID. If091211c1d1d changes how
+		//       entity creation is handled in tests.
+		$entity->setId( 7 );
+
+		$legacySerializer = new LegacyInternalEntitySerializer();
+		$oldBlob = json_encode( $legacySerializer->serialize( $entity ) );
+
+		$currentSerializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
+		$newBlob = json_encode( $currentSerializer->serialize( $entity ) );
+
+		return array(
+			array( $oldBlob, $newBlob ),
+			array( $newBlob, $newBlob ),
+		);
+	}
+
+	/**
+	 * @dataProvider exportTransformProvider
+	 *
+	 * @param $blob
+	 * @param $expected
+	 */
+	public function testExportTransform( $blob, $expected ) {
+		$settings = new SettingsArray();
+		$settings->setSetting( 'transformLegacyFormatOnExport', true );
+		$handler = $this->getHandler( $settings );
+
+		$actual = $handler->exportTransform( $blob );
+		$this->assertEquals( $expected, $actual );
 	}
 
 }
