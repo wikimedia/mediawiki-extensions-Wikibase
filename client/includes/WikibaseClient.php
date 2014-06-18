@@ -4,7 +4,6 @@ namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
-use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
 use Exception;
 use Language;
@@ -21,7 +20,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
-use Wikibase\InternalSerialization\SerializerFactory;
+use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DirectSqlStore;
@@ -588,9 +587,12 @@ final class WikibaseClient {
 	 * @return EntityContentDataCodec
 	 */
 	public function getEntityContentDataCodec() {
+		// Serialization is not supported on the client, since the client never stores entities.
+		$forbiddenSerializer = new ForbiddenSerializer( 'Entity serialization is not supported on the client!' );
+
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->getInternalEntitySerializer(),
+			$forbiddenSerializer,
 			$this->getInternalEntityDeserializer()
 		);
 	}
@@ -622,13 +624,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return Serializer
-	 */
-	public function getInternalEntitySerializer() {
-		return $this->getInternalSerializerFactory()->newEntitySerializer();
-	}
-
-	/**
 	 * @return DeserializerFactory
 	 */
 	protected function getInternalDeserializerFactory() {
@@ -636,13 +631,6 @@ final class WikibaseClient {
 			new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ),
 			$this->getEntityIdParser()
 		);
-	}
-
-	/**
-	 * @return SerializerFactory
-	 */
-	protected function getInternalSerializerFactory() {
-		return new SerializerFactory( new DataValueSerializer() );
 	}
 
 }
