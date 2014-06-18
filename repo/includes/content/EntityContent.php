@@ -6,12 +6,13 @@ use AbstractContent;
 use Article;
 use Content;
 use DataUpdate;
-use Diff\DiffOp\Diff\Diff;
 use Diff\Differ\MapDiffer;
+use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
 use IContextSource;
 use LogicException;
+use MWException;
 use ParserOptions;
 use ParserOutput;
 use RequestContext;
@@ -21,13 +22,12 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\EntitySearchTextGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -108,8 +108,7 @@ abstract class EntityContent extends AbstractContent {
 	 * Deriving classes typically have a more specific get method as
 	 * for greater clarity and type hinting.
 	 *
-	 * @since 0.1
-	 *
+	 * @throws MWException when it's a redirect and the target can not be resolved
 	 * @return Entity
 	 */
 	abstract public function getEntity();
@@ -138,10 +137,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::getDeletionUpdates
 	 * @see EntityHandler::getEntityDeletionUpdates
 	 *
-	 * @param \WikiPage $page
-	 * @param null|\ParserOutput $parserOutput
-	 *
-	 * @since 0.1
+	 * @param WikiPage $page
+	 * @param ParserOutput|null $parserOutput
 	 *
 	 * @return DataUpdate[]
 	 */
@@ -159,8 +156,6 @@ abstract class EntityContent extends AbstractContent {
 	/**
 	 * @see Content::getSecondaryDataUpdates
 	 * @see EntityHandler::getEntityModificationUpdates
-	 *
-	 * @since 0.1
 	 *
 	 * @param Title              $title
 	 * @param Content|null       $old
@@ -191,8 +186,6 @@ abstract class EntityContent extends AbstractContent {
 	 * by user language.
 	 *
 	 * @see Content::getParserOutput
-	 *
-	 * @since 0.1
 	 *
 	 * @param Title $title
 	 * @param int|null $revId
@@ -354,7 +347,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @param IContextSource $context
 	 * @param SnakFormatter $snakFormatter
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
@@ -701,8 +694,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return bool
 	 */
 	public function isEmpty() {
@@ -715,8 +706,6 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * @see Content::copy
-	 *
-	 * @since 0.1
 	 *
 	 * @return ItemContent
 	 */

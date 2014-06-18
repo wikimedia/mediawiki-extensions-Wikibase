@@ -56,8 +56,6 @@ class ItemContent extends EntityContent {
 	 * In other words: treat as protected (which it was, but now cannot
 	 * be since we derive from Content).
 	 *
-	 * @since 0.1
-	 *
 	 * @param Item $item
 	 * @param EntityRedirect $redirect
 	 * @param Title $redirectTitle
@@ -105,8 +103,6 @@ class ItemContent extends EntityContent {
 	/**
 	 * Create a new ItemContent object for the provided Item.
 	 *
-	 * @since 0.1
-	 *
 	 * @param Item $item
 	 *
 	 * @return ItemContent
@@ -150,10 +146,8 @@ class ItemContent extends EntityContent {
 	/**
 	 * Returns the Item that makes up this ItemContent.
 	 *
-	 * @since 0.1
-	 *
+	 * @throws MWException when it's a redirect and the target can not be resolved
 	 * @throws LogicException
-	 * @throws MWException
 	 * @return Item
 	 */
 	public function getItem() {
@@ -173,8 +167,6 @@ class ItemContent extends EntityContent {
 	/**
 	 * Returns a new empty ItemContent.
 	 *
-	 * @since 0.1
-	 *
 	 * @return ItemContent
 	 */
 	public static function newEmpty() {
@@ -184,8 +176,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see EntityContent::getEntity
 	 *
-	 * @since 0.1
-	 *
+	 * @throws MWException when it's a redirect and the target can not be resolved
 	 * @return Item
 	 */
 	public function getEntity() {
@@ -211,8 +202,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Instantiates an EntityView.
-	 *
 	 * @see getEntityView()
 	 *
 	 * @param IContextSource $context
@@ -223,7 +212,7 @@ class ItemContent extends EntityContent {
 	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
 	 *
-	 * @return EntityView
+	 * @return ItemView
 	 */
 	protected function newEntityView(
 		IContextSource $context,
