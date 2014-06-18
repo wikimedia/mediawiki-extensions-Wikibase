@@ -232,7 +232,7 @@ class GetEntities extends ApiWikibase {
 			foreach ( $params['languages'] as $languageCode ) {
 				// $languageCode is already filtered as valid ones
 				$languages[$languageCode] = $this->languageFallbackChainFactory
-					->newFromContextAndLanguageCode( $this->getContext(), $languageCode );
+					->newFromContextAndLanguageCode( $this, $languageCode );
 			}
 		} else {
 			$languages = $params['languages'];
