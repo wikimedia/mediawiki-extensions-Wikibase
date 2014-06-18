@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_e9949d8f",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T08:46:58Z",
+      "side": 1,
+      "message": "So we can put it into the cache once we cache redirects. The having the revision ID cached along with the redirect will allow us to check whether the cache entry is stale, just like we do it for entities now.",
+      "parentUuid": "ee391fd1_704f7cc1",
+      "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_50c47811",
         "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_299bc5c2",
+        "filename": "lib/includes/store/sql/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T08:46:58Z",
+      "side": 1,
+      "message": "Because once EntityLookup supports resolving redirects, we will want to cache redirects separately. This is a task for the next sprint.",
+      "parentUuid": "ee391fd1_50c47811",
+      "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_50eb5877",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2014-06-17T16:03:56Z",
       "side": 1,
       "message": "100% of the code here is duplicated. Is this a mistake???",
+      "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_a9ee951d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-18T08:46:58Z",
+      "side": 1,
+      "message": "ooop! yes, it is. thanks!",
+      "parentUuid": "ee391fd1_50eb5877",
       "revId": "7c4eeca31cd44684726138a5792882cac4a56942",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
