@@ -137,7 +137,7 @@ abstract class ApiWikibase extends ApiBase {
 		$this->errorReporter = new ApiErrorReporter(
 			$this,
 			$this->exceptionLocalizer,
-			$this->getContext()->getLanguage()
+			$this->getLanguage()
 		);
 	}
 
