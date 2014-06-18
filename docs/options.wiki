@@ -58,6 +58,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :;length: the maximum length of the string, in characters.
 :Default: <code>array( 'length' => 250 )</code>
 ;usePropertyInfoTable: Whether to use the wb_property_info table for quick lookup of meta-information about properties. True per default, can be set to false in an environment where the necessary database update can't be deployed right away. To set up the table manually, run lib/includes/store/sql/wb_property_info.sql to create it, then use repo/maintenance/rebuildPropertyInfo.php to populate the table.
+;internalEntitySerializerClass: The class name of a serializer that is to be used when serializing entities for storage. Defaults to null, causing the default entity serializer from the SerializerFactory to be used. Should be set to Wikibase\Lib\Serializers\LegacyInternalEntitySerializer for compatibility with client wikis that run older code.
 
 == Client Settings ==
 
