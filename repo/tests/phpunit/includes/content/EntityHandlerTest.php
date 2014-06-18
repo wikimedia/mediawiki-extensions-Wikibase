@@ -274,4 +274,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $this->getModelId(), $content->getModel() );
 	}
 
+	public function testExportTransform() {
+		...
+	}
 }

@@ -80,6 +80,8 @@ return call_user_func( function() {
 		// Can be used to override the serialization used for storage.
 		// Typical value: Wikibase\Lib\Serializers\LegacyInternalEntitySerializer
 		'internalEntitySerializerClass' => null,
+
+		'transformLegacyFormatOnExport' => true,
 	);
 
 	return $defaults;
