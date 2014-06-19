@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_66720f12",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T11:30:27Z",
+      "side": 1,
+      "message": "\"Uses puts\"?",
+      "revId": "6d73ea0fc7ae1034c7d32790f3ce0736a285033d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_c6c77b14",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T11:30:27Z",
+      "side": 1,
+      "message": "This description (why is there an \"or\"?) now doesn\u0027t really explain any more why the check below is sufficient to identify the legacy format.",
+      "revId": "6d73ea0fc7ae1034c7d32790f3ce0736a285033d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_e6c4bf13",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T11:30:27Z",
+      "side": 1,
+      "message": "The first \\s* is pointless.",
+      "revId": "6d73ea0fc7ae1034c7d32790f3ce0736a285033d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
