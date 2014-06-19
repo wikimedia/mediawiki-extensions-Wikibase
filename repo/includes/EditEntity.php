@@ -2,8 +2,9 @@
 
 namespace Wikibase;
 
+use DerivativeContext;
 use Hooks;
-use IContextSource;
+use RequestContext;
 use Status;
 use Title;
 use User;
@@ -161,8 +162,8 @@ class EditEntity {
 	 *        This will detect "late" edit conflicts, i.e. someone squeezing in an edit
 	 *        just before the actual database transaction for saving beings.
 	 *        The empty string and 0 are both treated as `false`, disabling conflict checks.
-	 * @param IContextSource $context the context source to use while processing the edit; defaults
-	 *        to \RequestContext::getMain().
+	 * @param RequestContext|DerivativeContext $context the context to use while processing
+	 *        the edit; defaults to \RequestContext::getMain().
 	 *
 	 * @internal param \Wikibase\EntityStore $store
 	 */
@@ -174,7 +175,7 @@ class EditEntity {
 		Entity $newEntity,
 		User $user,
 		$baseRevId = false,
-		IContextSource $context = null
+		$context = null
 	) {
 		$this->newEntity = $newEntity;
 
@@ -191,6 +192,11 @@ class EditEntity {
 
 		$this->errorType = 0;
 		$this->status = Status::newGood();
+
+		if ( $context !== null && !$context instanceof RequestContext && !$context instanceof DerivativeContext ) {
+			throw new \InvalidArgumentException( '$context must be an instance of RequestContext'
+				 . ' or DerivativeContext' );
+		}
 
 		if ( $context === null ) {
 			$context = \RequestContext::getMain();
