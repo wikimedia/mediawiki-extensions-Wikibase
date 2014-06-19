@@ -439,7 +439,8 @@ abstract class ApiWikibase extends ApiBase {
 			$entity,
 			$user,
 			$baseRevisionId,
-			$this );
+			$this->getContext()
+		);
 
 		$token = $this->evaluateTokenParam( $params );
 
