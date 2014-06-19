@@ -190,6 +190,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
+	public function testGetEntityChangeFactory() {
+		$factory = $this->getDefaultInstance()->getEntityChangeFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
+	}
+
 	/**
 	 * @return WikibaseClient
 	 */

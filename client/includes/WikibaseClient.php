@@ -20,6 +20,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\DataModel\Entity\Item;
@@ -633,4 +634,23 @@ final class WikibaseClient {
 		);
 	}
 
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityChangeFactory
+	 */
+	public function getEntityChangeFactory() {
+		//TODO: take this from a setting or registry.
+		$changeClasses = array(
+			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			// Other types of entities will use EntityChange
+		);
+
+		return new EntityChangeFactory(
+			$this->getStore()->newChangesTable(),
+			$this->getEntityFactory(),
+			$changeClasses
+		);
+	}
 }

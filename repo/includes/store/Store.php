@@ -133,4 +133,13 @@ interface Store {
 	 */
 	public function getPropertyInfoStore();
 
+	/**
+	 * Returns an ChangesTable
+	 *
+	 * @since 0.5
+	 *
+	 * @return ChangesTable
+	 */
+	public function getChangesTable();
+
 }

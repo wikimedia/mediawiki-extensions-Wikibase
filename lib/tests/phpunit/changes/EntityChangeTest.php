@@ -122,8 +122,9 @@ class EntityChangeTest extends DiffChangeTest {
 	 * @param Entity $entity
 	 */
 	public function testSetAndGetEntity( Entity $entity ) {
-		$class = $this->getRowClass();
-        $entityChange = $class::newFromUpdate( EntityChange::UPDATE, null, $entity );
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $entity->getId() );
+
 		$entityChange->setEntity( $entity );
 		$this->assertEquals( $entity, $entityChange->getEntity() );
 	}
