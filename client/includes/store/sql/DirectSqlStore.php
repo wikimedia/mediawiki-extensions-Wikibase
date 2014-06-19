@@ -46,6 +46,16 @@ class DirectSqlStore implements ClientStore {
 	private $propertyInfoTable = null;
 
 	/**
+	 * @var ChangesTable
+	 */
+	private $changesTable = null;
+
+	/**
+	 * @var string|bool false for local, or a database id that wfGetLB understands.
+	 */
+	private $changesDatabase;
+
+	/**
 	 * @var String|bool $repoWiki
 	 */
 	protected $repoWiki;
@@ -108,6 +118,8 @@ class DirectSqlStore implements ClientStore {
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
+
+		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
 
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
@@ -351,4 +363,20 @@ class DirectSqlStore implements ClientStore {
 			return new DummyPropertyInfoStore();
 		}
 	}
+
+	/**
+	 * Returns an ChangesTable
+	 *
+	 * @since 0.5
+	 *
+	 * @return ChangesTable
+	 */
+	public function getChangesTable() {
+		if ( $this->changesTable === null ) {
+			$this->changesTable = new ChangesTable( $this->changesDatabase );
+		}
+
+		return $this->changesTable;
+	}
+
 }

@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Change;
 use Wikibase\ChangeRow;
+use Wikibase\ChangesTable;
 use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
@@ -12,6 +13,8 @@ use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\DiffChange;
 use Wikibase\Entity;
 use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
@@ -50,15 +53,42 @@ final class TestChanges {
 		return $changes['set-de-label']->toArray();
 	}
 
+	/**
+	 * @return EntityChangeFactory
+	 */
+	public static function getEntityChangeFactory() {
+		// NOTE: always use a local changes table for testing!
+		$changesDatabase = false;
+
+		$entityClasses = array(
+			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
+		);
+
+		$changeClasses = array(
+			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+		);
+
+		$factory = new EntityChangeFactory(
+			new ChangesTable( $changesDatabase ),
+			new EntityFactory( $entityClasses ),
+			$changeClasses
+		);
+
+		return $factory;
+	}
+
 	protected static function getInstances() {
 		static $changes = array();
+
+		$changeFactory = self::getEntityChangeFactory();
 
 		if ( empty( $changes ) ) {
 			$empty = Property::newFromType( 'string' );
 			$empty->setId( new PropertyId( 'p100' ) );
 
-			$changes['property-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
-			$changes['property-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
+			$changes['property-creation'] = $changeFactory->newFromUpdate( EntityChange::ADD, null, $empty );
+			$changes['property-deletion'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 			// -----
 			$old = Property::newFromType( 'string' );
@@ -66,7 +96,7 @@ final class TestChanges {
 			$new = $old->copy();
 
 			$new->setLabel( "de", "dummy" );
-			$changes['property-set-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['property-set-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
 			// -----
 			$old = Item::newEmpty();
@@ -75,24 +105,24 @@ final class TestChanges {
 			/* @var Item $new */
 			$new = $old->copy();
 
-			$changes['item-creation'] = EntityChange::newFromUpdate( EntityChange::ADD, null, $new );
-			$changes['item-deletion'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
+			$changes['item-creation'] = $changeFactory->newFromUpdate( EntityChange::ADD, null, $new );
+			$changes['item-deletion'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $old, null );
 
 			// -----
 
-			//FIXME: EntityChange::newFromUpdate causes Item::getSiteLinks to be called,
+			//FIXME: $changeFactory->newFromUpdate causes Item::getSiteLinks to be called,
 			//       which uses SiteLink::newFromText, which in turn uses the Sites singleton
 			//       which relies on the database. This is inconsistent with the Site objects
 			//       generated here, or elsewhere in test cases.
 
 			$link = new SimpleSiteLink( 'dewiki', "Dummy" );
 			$new->addSiteLink( $link, 'add' );
-			$changes['set-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['set-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$link = new SimpleSiteLink( 'enwiki', "Emmy" );
 			$new->addSiteLink( $link, 'add' );
-			$changes['set-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['set-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
@@ -105,40 +135,40 @@ final class TestChanges {
 			$link = new SimpleSiteLink( 'dewiki', "Dummy" );
 			$new->addSiteLink( $link, 'add' );
 
-			$changes['change-sitelink-order'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['change-sitelink-order'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
 			$link = new SimpleSiteLink( 'dewiki', "Dummy2" );
 			$new->addSiteLink( $link, 'set' );
-			$changes['change-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['change-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$link = new SimpleSiteLink( 'enwiki', "Emmy2" );
 			$new->addSiteLink( $link, 'set' );
-			$changes['change-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['change-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$link = new SimpleSiteLink( 'enwiki', "Emmy2", array( new ItemId( 'Q17' ) ) );
 			$new->addSiteLink( $link, 'set' );
-			$changes['change-enwiki-sitelink-badges'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['change-enwiki-sitelink-badges'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$new->removeSiteLink( 'dewiki' );
-			$changes['remove-dewiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['remove-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
 			$new->setLabel( "de", "dummy" );
-			$changes['set-de-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['set-de-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$new->setLabel( "en", "emmy" );
-			$changes['set-en-label'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['set-en-label'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$new->setAliases( "en", array( "foo", "bar" ) );
-			$changes['set-en-aliases'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['set-en-aliases'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
@@ -149,20 +179,20 @@ final class TestChanges {
 
 			$claims = new Claims( array( $claim ) );
 			$new->setClaims( $claims );
-			$changes['add-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['add-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			$claims = new Claims();
 			$new->setClaims( $claims );
-			$changes['remove-claim'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['remove-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
-			$changes['item-deletion-linked'] = EntityChange::newFromUpdate( EntityChange::REMOVE, $old, null );
+			$changes['item-deletion-linked'] = $changeFactory->newFromUpdate( EntityChange::REMOVE, $old, null );
 
 			// -----
 			$new->removeSiteLink( 'enwiki' );
-			$changes['remove-enwiki-sitelink'] = EntityChange::newFromUpdate( EntityChange::UPDATE, $old, $new );
+			$changes['remove-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 
 			// apply all the defaults ----------
 			$defaults = array(

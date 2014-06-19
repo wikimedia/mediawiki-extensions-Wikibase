@@ -80,4 +80,13 @@ interface ClientStore {
 	 * @since 0.2
 	 */
 	public function rebuild();
+
+	/**
+	 * Returns an ChangesTable
+	 *
+	 * @since 0.5
+	 *
+	 * @return ChangesTable
+	 */
+	public function getChangesTable();
 }
