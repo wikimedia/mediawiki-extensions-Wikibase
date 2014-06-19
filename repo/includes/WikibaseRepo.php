@@ -21,6 +21,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\EntityContentFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
@@ -214,6 +215,25 @@ class WikibaseRepo {
 	 */
 	public function getEntityContentFactory() {
 		return new EntityContentFactory( $this->getContentModelMappings() );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityChangeFactory
+	 */
+	public function getEntityChangeFactory() {
+		//TODO: take this from a setting or registry.
+		$changeClasses = array(
+			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			// Other types of entities will use EntityChange
+		);
+
+		return new EntityChangeFactory(
+			$this->getStore()->getChangesTable(),
+			$this->getEntityFactory(),
+			$changeClasses
+		);
 	}
 
 	/**

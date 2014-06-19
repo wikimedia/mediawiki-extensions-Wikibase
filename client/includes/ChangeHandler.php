@@ -7,6 +7,7 @@ use Site;
 use SiteList;
 use Title;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -98,21 +99,28 @@ class ChangeHandler {
 	 */
 	private $checkPageExistence = true;
 
-	public function __construct( PageUpdater $updater = null,
-			EntityLookup $entityLookup = null,
-			ItemUsageIndex $entityUsageIndex = null,
-			Site $localSite = null,
-			SiteList $sites = null) {
+	/**
+	 * @var EntityChangeFactory
+	 */
+	private $changeFactory;
+
+	public function __construct(
+		EntityChangeFactory $changeFactory = null,
+		PageUpdater $updater = null,
+		EntityLookup $entityLookup = null,
+		ItemUsageIndex $entityUsageIndex = null,
+		Site $localSite = null,
+		SiteList $sites = null
+	) {
 		wfProfileIn( __METHOD__ );
 
+		//FIXME: proper injection!
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
-		if ( $sites === null ) {
-			$sites = $wikibaseClient->getSiteStore()->getSites();
+		if ( !$changeFactory ) {
+			$changeFactory = $wikibaseClient->getEntityChangeFactory();
 		}
-
-		$this->sites = $sites;
 
 		if ( !$updater ) {
 			$updater = new WikiPageUpdater();
@@ -126,6 +134,12 @@ class ChangeHandler {
 			$entityUsageIndex = $wikibaseClient->getStore()->getItemUsageIndex();
 		}
 
+		if ( $sites === null ) {
+			$sites = $wikibaseClient->getSiteStore()->getSites();
+		}
+
+		$this->sites = $sites;
+
 		if ( !$localSite ) {
 			//XXX: DB lookup in a constructor, ugh
 			$siteGlobalId = $settings->getSetting( 'siteGlobalID' );
@@ -136,12 +150,14 @@ class ChangeHandler {
 			}
 		}
 
-		$this->site = $localSite;
-		$this->siteId = $localSite->getGlobalId();
+		$this->changeFactory = $changeFactory;
 
 		$this->updater = $updater;
 		$this->entityLookup = $entityLookup;
 		$this->entityUsageIndex = $entityUsageIndex;
+
+		$this->site = $localSite;
+		$this->siteId = $localSite->getGlobalId();
 
 		// TODO: allow these to be passed in as parameters!
 		$this->setNamespaces(
@@ -271,7 +287,7 @@ class ChangeHandler {
 
 		//XXX: we could avoid loading the entity data by merging the diffs programatically
 		//     instead of re-calculating.
-		$change = EntityChange::newFromUpdate(
+		$change = $this->changeFactory->newFromUpdate(
 			$parent ? EntityChange::UPDATE : EntityChange::ADD,
 			$parent,
 			$entity
@@ -721,12 +737,12 @@ class ChangeHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Change $change the change to get a comment for
+	 * @param EntityChange $change the change to get a comment for
 	 *
 	 * @throws \MWException
 	 * @return array
 	 */
-	public function getEditComment( Change $change ) {
+	public function getEditComment( EntityChange $change ) {
 		$commentCreator = new SiteLinkCommentCreator(
 			$this->site->getGlobalId()
 		);

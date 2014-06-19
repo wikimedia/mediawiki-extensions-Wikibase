@@ -163,14 +163,4 @@ class ItemChangeTest extends EntityChangeTest {
 		}
 	}
 
-	public function testNewFromUpdate() {
-		$item = Item::newEmpty();
-		$item->setId( 112 );
-		$item->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
-
-		$itemChange = ItemChange::newFromUpdate( EntityChange::UPDATE, null, $item );
-
-		$this->assertFalse( $itemChange->isEmpty() );
-	}
-
 }
