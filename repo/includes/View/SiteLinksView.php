@@ -5,7 +5,7 @@ namespace Wikibase\Repo\View;
 use Message;
 use SiteStore;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
