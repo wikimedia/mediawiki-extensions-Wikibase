@@ -62,8 +62,11 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				return $site;
 			} ) );
 
+		$changeFactory = TestChanges::getEntityChangeFactory();
+
 		$this->updater = new MockPageUpdater();
 		$handler = new ChangeHandler(
+			$changeFactory,
 			$this->updater,
 			$repo,
 			$usageIndex,
@@ -722,8 +725,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$empty = Item::newEmpty();
 		$empty->setId( new ItemId( 'q55668877' ) );
 
-		$itemCreation = EntityChange::newFromUpdate( EntityChange::ADD, null, $empty );
-		$itemDeletion = EntityChange::newFromUpdate( EntityChange::REMOVE, $empty, null );
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$itemCreation = $changeFactory->newFromUpdate( EntityChange::ADD, null, $empty );
+		$itemDeletion = $changeFactory->newFromUpdate( EntityChange::REMOVE, $empty, null );
 
 		$itemCreation->setField( 'time', '20130101010101' );
 		$itemDeletion->setField( 'time', '20130102020202' );
@@ -979,8 +983,11 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				return $site;
 			} ) );
 
+		$changeFactory = TestChanges::getEntityChangeFactory();
+
 		$updater = new MockPageUpdater();
 		$handler = new ChangeHandler(
+			$changeFactory,
 			$updater,
 			$repo,
 			$usageIndex,

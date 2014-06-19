@@ -66,6 +66,16 @@ class SqlStore implements Store {
 	private $propertyInfoTable = null;
 
 	/**
+	 * @var ChangesTable
+	 */
+	private $changesTable = null;
+
+	/**
+	 * @var string|bool false for local, or a database id that wfGetLB understands.
+	 */
+	private $changesDatabase;
+
+	/**
 	 * @var TermIndex
 	 */
 	private $termIndex = null;
@@ -98,6 +108,7 @@ class SqlStore implements Store {
 	) {
 		$this->contentCodec = $contentCodec;
 
+		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
@@ -106,6 +117,8 @@ class SqlStore implements Store {
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
 		$this->cacheType = $cacheType;
+
+		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
 	}
 
 	/**
@@ -607,6 +620,21 @@ class SqlStore implements Store {
 			// dummy info store
 			return new DummyPropertyInfoStore();
 		}
+	}
+
+	/**
+	 * Returns an ChangesTable
+	 *
+	 * @since 0.5
+	 *
+	 * @return ChangesTable
+	 */
+	public function getChangesTable() {
+		if ( $this->changesTable === null ) {
+			$this->changesTable = new ChangesTable( $this->changesDatabase );
+		}
+
+		return $this->changesTable;
 	}
 
 }

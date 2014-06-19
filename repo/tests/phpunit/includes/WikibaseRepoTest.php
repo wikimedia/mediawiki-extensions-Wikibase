@@ -166,6 +166,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
+	public function testGetEntityChangeFactory() {
+		$factory = $this->getDefaultInstance()->getEntityChangeFactory();
+		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
+	}
+
 	public function testGetEntityContentDataCodec_legacy() {
 		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'Hello' );

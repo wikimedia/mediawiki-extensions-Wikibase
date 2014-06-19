@@ -57,12 +57,14 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$berlin = Title::makeTitle( NS_MAIN, 'Berlin' );
 		$rome = Title::makeTitle( NS_MAIN, 'Rome' );
 
+		$changeFactory = TestChanges::getEntityChangeFactory();
+
 		$cases = array();
 
 		$cases[] = array(
 			array( $berlin ),
 			array(),
-			ItemChange::newFromUpdate(
+			$changeFactory->newFromUpdate(
 				ItemChange::ADD,
 				null,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Berlin' ) )
@@ -73,7 +75,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array( $berlin ),
 			array(),
-			ItemChange::newFromUpdate(
+			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Berlin' ) ),
 				$this->getEmptyItem()
@@ -84,7 +86,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array( $rome ),
 			array(),
-			ItemChange::newFromUpdate(
+			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getEmptyItem(),
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) )
@@ -95,7 +97,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array( $berlin, $rome ),
 			array(),
-			ItemChange::newFromUpdate(
+			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) ),
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Berlin' ) )
@@ -106,7 +108,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array( $rome ),
 			array(),
-			ItemChange::newFromUpdate(
+			$changeFactory->newFromUpdate(
 				ItemChange::REMOVE,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) ),
 				null
@@ -117,7 +119,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array( $rome ),
 			array( 'Rome' ),
-			ItemChange::newFromUpdate(
+			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) ),
 				$this->getItemWithSiteLinks( array(
@@ -131,7 +133,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array(),
 			array(),
-			ItemChange::newFromUpdate(
+			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getEmptyItem(),
 				$this->getItemWithLabel( 'de', 'Berlin' )
@@ -146,7 +148,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array( $berlin ),
 			array( 'Berlin' ),
-			ItemChange::newFromUpdate( ItemChange::UPDATE, $connectedItem, $connectedItemWithLabel ),
+			$changeFactory->newFromUpdate( ItemChange::UPDATE, $connectedItem, $connectedItemWithLabel ),
 			'connected item label change'
 		);
 
@@ -157,7 +159,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		$cases[] = array(
 			array(),
 			array(),
-			ItemChange::newFromUpdate( ItemChange::UPDATE,
+			$changeFactory->newFromUpdate( ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) ),
 				$itemWithBadge ),
 			'badge change'
