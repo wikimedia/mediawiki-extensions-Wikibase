@@ -249,7 +249,7 @@ final class RepoHooks {
 				'time' => $revision->getTimestamp(),
 			) );
 
-			WikibaseRepo::getDefaultInstance()->newChangeNotifier()->handleChange( $change );
+			WikibaseRepo::getDefaultInstance()->getChangeNotificationChannel()->sendChangeNotification( $change );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -306,7 +306,7 @@ final class RepoHooks {
 
 		$change->setMetadataFromUser( $user );
 
-		WikibaseRepo::getDefaultInstance()->newChangeNotifier()->handleChange( $change );
+		WikibaseRepo::getDefaultInstance()->getChangeNotificationChannel()->sendChangeNotification( $change );
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -368,7 +368,7 @@ final class RepoHooks {
 		$user = User::newFromId( $userId );
 		$change->setMetadataFromUser( $user );
 
-		WikibaseRepo::getDefaultInstance()->newChangeNotifier()->handleChange( $change );
+		WikibaseRepo::getDefaultInstance()->getChangeNotificationChannel()->sendChangeNotification( $change );
 
 		wfProfileOut( __METHOD__ );
 		return true;

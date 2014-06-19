@@ -138,6 +138,11 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpFactoryProvider', $returnValue );
 	}
 
+	public function testGetChangeNotificationChannel() {
+		$returnValue = $this->getDefaultInstance()->getChangeNotificationChannel();
+		$this->assertInstanceOf( 'Wikibase\Repo\Notifications\ChangeNotificationChannel', $returnValue );
+	}
+
 	public function testGetContentModelMappings() {
 		$array = $this->getDefaultInstance()->getContentModelMappings();
 		foreach( $array as $entityType => $contentModel ) {

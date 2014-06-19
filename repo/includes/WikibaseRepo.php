@@ -13,7 +13,8 @@ use SiteStore;
 use StubObject;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\ChangeNotifier;
+use Wikibase\Repo\Notifications\ChangeNotificationChannel;
+use Wikibase\Repo\Notifications\DatabaseChangeNotificationChannel;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -53,6 +54,7 @@ use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
+use Wikibase\Repo\Notifications\DummyChangeNotificationChannel;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -714,10 +716,14 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return ChangeNotifier
+	 * @return ChangeNotificationChannel
 	 */
-	public function newChangeNotifier() {
-		return new ChangeNotifier( $this->settings->getSetting( 'useChangesTable' ) );
+	public function getChangeNotificationChannel() {
+		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
+			return new DatabaseChangeNotificationChannel();
+		} else {
+			return new DummyChangeNotificationChannel();
+		}
 	}
 
 	/**
