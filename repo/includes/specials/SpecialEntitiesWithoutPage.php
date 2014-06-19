@@ -74,7 +74,6 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 */
 	private function prepareArguments( $subPage ) {
 		$request = $this->getRequest();
-		$output = $this->getOutput();
 
 		$this->language = '';
 		$this->type = null;
