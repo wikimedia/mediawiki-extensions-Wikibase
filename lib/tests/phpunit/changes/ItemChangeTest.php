@@ -168,7 +168,8 @@ class ItemChangeTest extends EntityChangeTest {
 		$item->setId( 112 );
 		$item->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
 
-		$itemChange = ItemChange::newFromUpdate( EntityChange::UPDATE, null, $item );
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$itemChange = $changeFactory->newFromUpdate( EntityChange::UPDATE, null, $item );
 
 		$this->assertFalse( $itemChange->isEmpty() );
 	}
