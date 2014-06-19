@@ -8,6 +8,9 @@ use Wikibase\ChangeRow;
 /**
  * Notification channel based on a database table.
  *
+ * @todo: Move the database bindings from ChangeRow into this class.
+ *        Having Changes be active records is bad.
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+

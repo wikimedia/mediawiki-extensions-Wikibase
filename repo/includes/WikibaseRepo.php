@@ -13,6 +13,7 @@ use SiteStore;
 use StubObject;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
@@ -718,12 +719,24 @@ class WikibaseRepo {
 	/**
 	 * @return ChangeTransmitter
 	 */
-	public function getChangeTransmitter() {
+	private function getChangeTransmitter() {
 		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
 			return new DatabaseChangeTransmitter();
 		} else {
 			return new DummyChangeTransmitter();
 		}
+	}
+
+	/**
+	 * @return ChangeNotifier
+	 */
+	public function getChangeNotifier() {
+		// TODO: Instead of having getChangeTransmitter return a dummy,
+		//       return a dummy from here if useChangesTable is not set.
+		return new ChangeNotifier(
+			$this->getEntityChangeFactory(),
+			$this->getChangeTransmitter()
+		);
 	}
 
 	/**
