@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_bd680185",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-19T20:10:12Z",
+      "side": 1,
+      "message": "There is quit some duplication in this class, some of which is new.",
+      "revId": "6d4e28a5d20f425fe98a3e4101993102cab4a2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
