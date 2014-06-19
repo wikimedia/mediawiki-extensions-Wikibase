@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_bc6b68ed",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "Please don\u0027t renumber existing parameters. Just add a parameter $9 and leave the others untouched.",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_1c86f4ac",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "Why do you need two DIV containers? Please find a name that describes the meaning, not a name that describes the implementation.",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_dc362c00",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "Please find a name that describes the meaning, not a name that describes the implementation. A simple suggestion is \"wb-badges-list\".",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9c40a45c",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "Why not \"wb-badge\"?",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_77099b2e",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "Please move down below the block where this belongs to.",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_f72b4b76",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "\"badges\" refers to something that contains multiple badges. How is it possible a list does have a single star as a background?\n\nObviously the name \"wb-badges\" is confusing. Can you find a better one?",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_f7146b46",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "No SVG? Who made these images? Don\u0027t get me wrong. This is clearly not a blocker for this patch. We can very easily add SVGs later. Still it would be nice to provide the vector source if you have one.",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_77575b06",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "As said in templates.php, please find a descriptive name for the div.",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3739d3cb",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "Isn\u0027t this already a jQuery object? Why wrap it in an other $() call?",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_17480f5f",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "\"now\" -\u003e \"no\"",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d77167a8",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T15:14:46Z",
+      "side": 1,
+      "message": "As said in templates.php, please move down and make this the last parameter.",
+      "revId": "e9d89fa2a0f400a95af5ab85595e58ce6d13f3b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
