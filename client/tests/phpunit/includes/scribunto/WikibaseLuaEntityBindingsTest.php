@@ -47,21 +47,17 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return Item
 	 */
-	private function getItemMock() {
+	private function getItem() {
 		$snakFactory = new SnakFactory();
 		$snak = $snakFactory->newSnak(
 			new PropertyId( 'P123456' ),
 			'somevalue'
 		);
 		$claim = new Claim( $snak );
-		$claim->setGuid( '1' );
+		$claim->setGuid( 'gsdfgsadg' );
 
-		$item = $this->getMockBuilder( 'Wikibase\DataModel\Entity\Item' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$item->expects( $this->any() )->method( 'getClaims' )
-			->will( $this->returnValue( array( $claim ) ) );
+		$item = Item::newEmpty();
+		$item->addClaim( $claim );
 
 		return $item;
 	}
@@ -94,7 +90,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 
 
 	public function testFormatPropertyValues() {
-		$item = $this->getItemMock();
+		$item = $this->getItem();
 
 		$entityLookup = $this->getEntityLookupMock( $item );
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
@@ -103,11 +99,20 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( 'Snak snak snak', $ret );
 	}
 
+	public function testFormatPropertyValuesNoProperty() {
+		$entityLookup = $this->getEntityLookupMock( Item::newEmpty() );
+
+		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
+		$ret = $wikibaseLibrary->formatPropertyValues( 'Q2', 'P123456' );
+
+		$this->assertSame( '', $ret );
+	}
+
 	public function testFormatPropertyValuesNoEntity() {
 		$entityLookup = $this->getEntityLookupMock();
 
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation( $entityLookup );
-		$ret = $wikibaseLibrary->formatPropertyValues( 'Q1', 'P123456' );
+		$ret = $wikibaseLibrary->formatPropertyValues( 'Q3', 'P123456' );
 
 		$this->assertSame( '', $ret );
 	}
