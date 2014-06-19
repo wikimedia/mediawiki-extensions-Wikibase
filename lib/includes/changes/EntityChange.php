@@ -252,6 +252,23 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @param int $revisionId
+	 * @param int $userId
+	 * @param EntityId $entityId
+	 * @param string $timestamp Revision timestamp in TS_MW format
+	 */
+	public function setFieldsForRevision( $revisionId, $userId, EntityId $entityId, $timestamp ) {
+		$this->setFields( array(
+			'revision_id' => $revisionId,
+			'user_id' => $userId,
+			'object_id' => $entityId->getSerialization(),
+			'time' => $timestamp,
+		) );
+	}
+
+	/**
 	 * Returns a human readable string representation of the change. Useful for logging and debugging.
 	 *
 	 * @since 0.4
