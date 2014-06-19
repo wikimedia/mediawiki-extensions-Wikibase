@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
 
 /**
@@ -67,6 +69,12 @@ class EntityChangeTest extends DiffChangeTest {
 		return 'Wikibase\Entity';
 	}
 
+	protected function newEntityChange( EntityId $entityId ) {
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $entityId );
+
+		return $entityChange;
+	}
 
 	public function entityProvider() {
 		$entityClass = $this->getEntityClass(); // PHP fail
@@ -173,5 +181,24 @@ class EntityChangeTest extends DiffChangeTest {
 
 		$this->assertTrue( stripos( $s, $id ) !== false, "missing entity ID $id" );
 		$this->assertTrue( stripos( $s, $type ) !== false, "missing type $type" );
+	}
+
+	/**
+	 * @dataProvider changeProvider
+	 * @since 0.5
+	 */
+	public function testSetFieldsForRevision( EntityChange $entityChange ) {
+		$id = new ItemId( 'Q7' );
+
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $id );
+
+		$timestamp = '20140523' . '174422';
+		$entityChange->setFieldsForRevision( 5, 7, $id, $timestamp );
+
+		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 5 );
+		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 7 );
+		$this->assertEquals( 'Q7', strtoupper( $entityChange->getField( 'object_id' ) ) );
+		$this->assertEquals( $timestamp, $entityChange->getField( 'time' ) );
 	}
 }

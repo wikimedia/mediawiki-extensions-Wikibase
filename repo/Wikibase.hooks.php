@@ -31,6 +31,7 @@ use Title;
 use User;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
+use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\TextInjector;
 use WikiPage;
@@ -222,34 +223,26 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		if ( $entityContentFactory->isEntityContentModel( $article->getContent()->getModel() ) ) {
-			/**
-			 * @var $newEntity Entity
-			 */
-			$newEntity = $article->getContent()->getEntity();
+
+			/* @var EntityContent $newContent */
+			$newContent = $article->getContent();
 
 			// Notify storage/lookup services that the entity was updated. Needed to track page-level changes.
 			// May be redundant in some cases. Take care not to cause infinite regress.
-			$entityRev = new EntityRevision( $newEntity, $revision->getId(), $revision->getTimestamp() );
+			$entityRev = new EntityRevision( $newContent->getEntity(), $revision->getId(), $revision->getTimestamp() );
 			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
 
-			$parent = is_null( $revision->getParentId() )
-				? null : Revision::newFromId( $revision->getParentId() );
-
-			$entityChangeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
-			$change = $entityChangeFactory->newFromUpdate(
-				$parent ? EntityChange::UPDATE : EntityChange::ADD,
-				$parent ? $parent->getContent()->getEntity() : null,
-				$newEntity
+			$notifier = new ChangeNotifier(
+				WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
+				WikibaseRepo::getDefaultInstance()->getChangeTransmitter()
 			);
 
-			$change->setFields( array(
-				'revision_id' => $revision->getId(),
-				'user_id' => $user->getId(),
-				'object_id' => $newEntity->getId()->getPrefixedId(),
-				'time' => $revision->getTimestamp(),
-			) );
-
-			WikibaseRepo::getDefaultInstance()->getChangeTransmitter()->transmitChange( $change );
+			if ( $revision->getParentId() === null ) {
+				$notifier->notifyOnPageCreated( $revision );
+			} else {
+				$parent = Revision::newFromId( $revision->getParentId() );
+				$notifier->notifyOnPageModified( $revision, $parent );
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -286,27 +279,18 @@ final class RepoHooks {
 			return true;
 		}
 
-		/**
-		 * @var EntityContent $content
-		 * @var Entity $entity
-		 */
-		$entity = $content->getEntity();
+		/* @var EntityContent $content */
 
 		// Notify storage/lookup services that the entity was deleted. Needed to track page-level deletion.
 		// May be redundant in some cases. Take care not to cause infinite regress.
-		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $entity->getId() );
+		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
 
-		$entityChangeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
-		$change = $entityChangeFactory->newFromUpdate( EntityChange::REMOVE, $entity, null, array(
-			'revision_id' => 0, // there's no current revision
-			'user_id' => $user->getId(),
-			'object_id' => $entity->getId()->getPrefixedId(),
-			'time' => $logEntry->getTimestamp(),
-		) );
+		$notifier = new ChangeNotifier(
+			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
+			WikibaseRepo::getDefaultInstance()->getChangeTransmitter()
+		);
 
-		$change->setMetadataFromUser( $user );
-
-		WikibaseRepo::getDefaultInstance()->getChangeTransmitter()->transmitChange( $change );
+		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -343,40 +327,36 @@ final class RepoHooks {
 			return true;
 		}
 
-		$entity = $content->getEntity();
+		/* @var EntityContent $content */
 
 		//XXX: EntityContent::save() also does this. Why are we doing this twice?
 		WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage()->addEntityPage(
-			$entity->getId(),
+			$content->getEntityId(),
 			$title->getArticleID()
 		);
 
+		$notifier = new ChangeNotifier(
+			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
+			WikibaseRepo::getDefaultInstance()->getChangeTransmitter()
+		);
+
 		$rev = Revision::newFromId( $revId );
-
 		$userId = $rev->getUser();
-
-		$entityChangeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
-		$change = $entityChangeFactory->newFromUpdate( EntityChange::RESTORE, null, $entity, array(
-			// TODO: Use timestamp of log entry, but needs core change.
-			// This hook is called before the log entry is created.
-			'revision_id' => $revId,
-			'user_id' => $userId,
-			'object_id' => $entity->getId()->getPrefixedId(),
-			'time' => wfTimestamp( TS_MW, wfTimestampNow() )
-		) );
-
 		$user = User::newFromId( $userId );
-		$change->setMetadataFromUser( $user );
 
-		WikibaseRepo::getDefaultInstance()->getChangeTransmitter()->transmitChange( $change );
+		$notifier->notifyOnPageUndeleted( $content, $user, $revId, wfTimestamp( TS_MW, wfTimestampNow() ) );
 
 		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
 	/**
-	 * TODO: Add some stuff? Seems to be changes propagation...
+	 * Nasty hack to inject information from RC into the change notification saved earlier
+	 * by the onNewRevisionFromEditComplete hook handler.
+	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/RecentChange_save
+	 *
+	 * @todo: find a better way to do this!
 	 *
 	 * @since ?
 	 *
