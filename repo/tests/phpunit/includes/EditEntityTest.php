@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use HashBagOStuff;
+use Hooks;
 use RequestContext;
 use Status;
 use Title;
@@ -51,10 +52,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = array( 'user' );
+		$this->hooks = $wgHooks;
 
-		if ( empty( $wgHooks['EditFilterMergedContent'] ) ) {
-			// This fake ensures EditEntity::runEditFilterHooks is run and runtime errors are found
-			$wgHooks['EditFilterMergedContent'] = array( null );
+		if ( !Hooks::isRegistered( 'EditFilterMergedContent' ) ) {
+			Hooks::register( 'EditFilterMergedContent', function() {
+				return true;
+			} );
 		}
 	}
 
@@ -62,10 +65,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		global $wgGroupPermissions, $wgHooks;
 
 		$wgGroupPermissions = $this->permissions;
-
-		if ( $wgHooks['EditFilterMergedContent'] === array( null ) ) {
-			unset( $wgHooks['EditFilterMergedContent'] );
-		}
+		$wgHooks = $this->hooks;
 
 		parent::tearDown();
 	}
