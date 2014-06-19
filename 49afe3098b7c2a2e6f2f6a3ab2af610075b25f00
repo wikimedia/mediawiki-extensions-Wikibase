@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_81627d35",
+        "filename": "lib/includes/store/EntityStoreWatcher.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T12:39:15Z",
+      "side": 1,
+      "message": "I wanted to propose the name entityRedirectUpdated (because it\u0027s not just a \"Redirect\") but failed to publish my comment (again).\n\nGood thing is we don\u0027t have a Redirect class currently. So this naming detail may not be important.",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_c1c76514",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T12:39:15Z",
+      "side": 1,
+      "message": "Doesn\u0027t return anything.",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_a1cea12f",
+        "filename": "lib/tests/phpunit/store/CachingEntityRevisionLookupTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T12:39:15Z",
+      "side": 1,
+      "message": "function testRedirectUpdated()",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_61d8b9f4",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T12:39:15Z",
+      "side": 1,
+      "message": "Hint: Please always use two stars for inline docs.",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
