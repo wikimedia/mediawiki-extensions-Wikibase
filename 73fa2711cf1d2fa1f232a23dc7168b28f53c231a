@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_fce9f0a7",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "Could you try to bring these lines in the same order as in the constructor?",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9cfb0477",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "Jeroen not happy. :-(",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_7cfe2068",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "Huh? We have an \"array\" type hint for that.",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_5cf59c7e",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "This misses a comment why this is done.",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3cf0988d",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "Isn\u0027t this deprecated in favor of getSerialization?",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_1cef14af",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "Same here. Please add a comment why this is done here. Who needs these attributes?",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_bc048881",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "Why are you using the other method here? Because the additional stuff is not tested here?",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_dc018c72",
+        "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "You changed that in EntityChangeTest, why not here?",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_fcd21000",
+        "filename": "repo/includes/store/Store.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-19T14:27:01Z",
+      "side": 1,
+      "message": "\"An\" is wrong here.\n\nAnd it\u0027s pointless to describe a \"getFoo\" method with \"returns a foo\".",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
