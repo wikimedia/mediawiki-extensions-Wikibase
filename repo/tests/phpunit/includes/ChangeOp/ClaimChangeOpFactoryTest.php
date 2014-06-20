@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\ChangeOp\ClaimChangeOpFactoryTest
+ * @covers Wikibase\ChangeOp\ClaimChangeOpFactory
  *
  * @group Wikibase
  * @group WikibaseRepo

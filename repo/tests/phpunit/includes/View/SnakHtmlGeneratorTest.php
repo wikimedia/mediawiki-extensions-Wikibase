@@ -12,7 +12,7 @@ use Wikibase\PropertyValueSnak;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
- * @covers Wikibase\SnakHtmlGenerator
+ * @covers Wikibase\Repo\View\SnakHtmlGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo

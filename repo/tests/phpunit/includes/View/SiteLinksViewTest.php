@@ -10,7 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\SiteLinksView;
 
 /**
- * @covers Wikibase\SiteLinksView
+ * @covers Wikibase\Repo\View\SiteLinksView
  *
  * @group Wikibase
  * @group WikibaseRepo

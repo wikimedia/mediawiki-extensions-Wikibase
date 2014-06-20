@@ -9,7 +9,7 @@ use Wikibase\Datamodel\Entity\Item;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
- * @covers Wikibase\SectionEditLinkGenerator
+ * @covers Wikibase\Repo\View\SectionEditLinkGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo

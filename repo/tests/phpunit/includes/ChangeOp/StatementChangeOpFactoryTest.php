@@ -7,7 +7,7 @@ use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
 
 /**
- * @covers Wikibase\ChangeOp\ItemChangeOpFactory
+ * @covers Wikibase\ChangeOp\StatementChangeOpFactory
  *
  * @group Wikibase
  * @group WikibaseRepo

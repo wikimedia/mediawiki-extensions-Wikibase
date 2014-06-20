@@ -12,10 +12,10 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Validators\TermValidatorFactory;
 
 /**
- * @covers TermValidatorFactory
+ * @covers Wikibase\Validators\TermValidatorFactory
  *
- * @group WikibaseLib
  * @group Wikibase
+ * @group WikibaseRepo
  * @group WikibaseValidators
  *
  * @license GPL 2+

@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  *
  * @group Database
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseEntityLookup
  *
  * @licence GNU GPL v2+

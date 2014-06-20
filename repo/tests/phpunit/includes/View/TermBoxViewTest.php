@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\View\TermBoxView;
 
 /**
- * @covers Wikibase\TermBoxView
+ * @covers Wikibase\Repo\View\TermBoxView
  *
  * @group Wikibase
  * @group WikibaseRepo
