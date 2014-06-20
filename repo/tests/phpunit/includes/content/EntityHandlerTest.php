@@ -7,9 +7,9 @@ use Language;
 use Revision;
 use Symfony\Component\Yaml\Exception\RuntimeException;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
-use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
 use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Repo\WikibaseRepo;
@@ -51,9 +51,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	protected abstract function getHandler( SettingsArray $settings = null );
 
 	/**
+	 * @param EntityId|null $entityId
+	 *
 	 * @return Entity
 	 */
-	protected abstract function newEntity();
+	protected abstract function newEntity( EntityId $entityId = null );
 
 	/**
 	 * Returns EntityContents that can be handled by the EntityHandler deriving class.
@@ -77,7 +79,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityHandler $entityHandler
+	 * @param EntityHandler $entityHandler
 	 */
 	public function testGetModelName( EntityHandler $entityHandler ) {
 		$this->assertEquals( $this->getModelId(), $entityHandler->getModelID() );
@@ -88,7 +90,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param \Wikibase\EntityHandler $entityHandler
+	 * @param EntityHandler $entityHandler
 	 */
 	public function testGetSpecialPageForCreation( EntityHandler $entityHandler ) {
 		$specialPageName = $entityHandler->getSpecialPageForCreation();
@@ -150,7 +152,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		global $wgLang;
 
 		$handler = $this->getHandler();
-		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
+		$title = Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
 
 		//NOTE: we expect getPageViewLanguage to return the user language, because Wikibase Entities
 		//      are always shown in the user language.
@@ -280,10 +282,6 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function exportTransformProvider() {
 		$entity = $this->newEntity();
 
-		//FIXME: We need a better way to set an ID. If091211c1d1d changes how
-		//       entity creation is handled in tests.
-		$entity->setId( 7 );
-
 		$legacySerializer = new LegacyInternalEntitySerializer();
 		$oldBlob = json_encode( $legacySerializer->serialize( $entity ) );
 
@@ -308,16 +306,12 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider exportTransformProvider
-	 *
-	 * @param $blob
-	 * @param $expected
 	 */
 	public function testExportTransform( $blob, $expected ) {
-		$settings = new SettingsArray();
-		$settings->setSetting( 'transformLegacyFormatOnExport', true );
+		$settings = new SettingsArray( array( 'transformLegacyFormatOnExport' => true ) );
 		$handler = $this->getHandler( $settings );
-
 		$actual = $handler->exportTransform( $blob );
+
 		$this->assertEquals( $expected, $actual );
 	}
 

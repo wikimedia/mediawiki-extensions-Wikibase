@@ -3,10 +3,10 @@
 namespace Wikibase\Test;
 
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\EntityHandler;
 use Wikibase\ItemContent;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
@@ -74,21 +74,27 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$this->assertEquals( $title->getText(), $id->getSerialization() );
 	}
 
-	protected function newEntity() {
-		return Item::newEmpty();
+	protected function newEntity( EntityId $itemId = null ) {
+		if ( $itemId === null ) {
+			$itemId = new ItemId( 'Q7' );
+		}
+
+		$item = Item::newEmpty();
+		$item->setId( $itemId );
+		return $item;
 	}
 
 	/**
 	 * @param SettingsArray $settings
 	 *
-	 * @return EntityHandler
+	 * @return ItemHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
-		$codec = $repo->getEntityContentDataCodec();
 		$entityPerPage = $repo->getStore()->newEntityPerPage();
 		$termIndex = $repo->getStore()->getTermIndex();
+		$codec = $repo->getEntityContentDataCodec();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
 
