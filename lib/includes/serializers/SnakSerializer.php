@@ -118,7 +118,35 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 			$constructorArguments[] = DataValueFactory::singleton()->newFromArray( $serialization['datavalue'] );
 		}
 
-		return SnakObject::newFromType( $serialization['snaktype'], $constructorArguments );
+		return $this->newSnakFromType( $serialization['snaktype'], $constructorArguments );
+	}
+
+	private function newSnakFromType( $snakType, array $constructorArguments ) {
+		if ( $constructorArguments === array() || ( $snakType === 'value' ) && count( $constructorArguments ) < 2 ) {
+			throw new InvalidArgumentException( __METHOD__ . ' got an array with to few constructor arguments' );
+		}
+
+		$snakJar = array(
+			'value' => '\Wikibase\PropertyValueSnak',
+			'novalue' => '\Wikibase\PropertyNoValueSnak',
+			'somevalue' => '\Wikibase\PropertySomeValueSnak',
+		);
+
+		if ( !array_key_exists( $snakType, $snakJar ) ) {
+			throw new InvalidArgumentException( 'Cannot construct a snak from array with unknown snak type "' . $snakType . '"' );
+		}
+
+		$snakClass = $snakJar[$snakType];
+
+		if ( $snakType === 'value' ) {
+			return new $snakClass(
+				$constructorArguments[0],
+				$constructorArguments[1]
+			);
+		}
+		else {
+			return new $snakClass( $constructorArguments[0] );
+		}
 	}
 
 }
