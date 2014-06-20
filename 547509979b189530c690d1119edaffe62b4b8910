@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_5137beab",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T09:33:16Z",
+      "side": 1,
+      "message": "$hooks missing here.",
+      "revId": "547509979b189530c690d1119edaffe62b4b8910",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_1141360e",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T09:33:16Z",
+      "side": 1,
+      "message": "Move this inside the if.",
+      "revId": "547509979b189530c690d1119edaffe62b4b8910",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_f147d220",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T09:33:16Z",
+      "side": 1,
+      "message": "if ( isset( $this-\u003ehooks ) ) {\n\t$wgHooks \u003d $this-\u003ehooks;\n\tunset( $this-\u003ehooks );\n}",
+      "revId": "547509979b189530c690d1119edaffe62b4b8910",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
