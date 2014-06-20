@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_590c80f0",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:36:32Z",
+      "side": 1,
+      "message": "Newline.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_b9fa4cb4",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:36:32Z",
+      "side": 1,
+      "message": "What is a \"channel\" OOP wise? Like in a TV channel? This name is very rare in OOP. Try to google it.\n\nAll I see here is a notification method. It\u0027s a notifier or sender as far as I see, not a channel.\n\nWhy not keep the old name ChangeNotifier?",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_793744ac",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:36:32Z",
+      "side": 1,
+      "message": "Gerrit complaints about whitespace.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_792ce445",
+        "filename": "repo/includes/Notifications/DatabaseChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:36:32Z",
+      "side": 1,
+      "message": "This is not better than the original class. This is not \"sending a notification\". Nor is this a \"channel\".\n\nI understand that the code is a bit better. It replaces the bool flag with subclasses. But still.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_39265c64",
+        "filename": "repo/includes/Notifications/DummyChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:36:32Z",
+      "side": 1,
+      "message": "In my opinion such classes are dumb. Sorry. Just don\u0027t instantiate an object, allow null and use if ( $handler !\u003d\u003d null ) { $handler-\u003esendChangeNotification( $change ) }. Or at least come up with a name without \"dummy\" in it.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_191dd814",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:36:32Z",
+      "side": 1,
+      "message": "return null;",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
