@@ -34,6 +34,24 @@
       "revId": "48e3d7ad4db46425b477839fbc96e96a3aa5f942",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_0c57d906",
+        "filename": "repo/includes/Hook/MakeGlobalVariablesScriptHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T14:02:30Z",
+      "side": 1,
+      "message": "Indeed. A redirect page is a redirect page, even if it\u0027s in an entity namespace.",
+      "parentUuid": "ee391fd1_c98af9bf",
+      "revId": "48e3d7ad4db46425b477839fbc96e96a3aa5f942",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
