@@ -7,11 +7,12 @@ use Language;
 use Revision;
 use Symfony\Component\Yaml\Exception\RuntimeException;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
-use Wikibase\EntityFactory;
 use Wikibase\EntityHandler;
 use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -45,15 +46,21 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param SettingsArray $settings
+	 * @param EntityContentDataCodec $codec
 	 *
 	 * @return EntityHandler
 	 */
-	protected abstract function getHandler( SettingsArray $settings = null );
+	protected abstract function getHandler(
+		SettingsArray $settings = null,
+		EntityContentDataCodec $codec = null
+	);
 
 	/**
+	 * @param EntityId|null $entityId
+	 *
 	 * @return Entity
 	 */
-	protected abstract function newEntity();
+	protected abstract function newEntity( EntityId $entityId = null );
 
 	/**
 	 * Returns EntityContents that can be handled by the EntityHandler deriving class.
@@ -280,10 +287,6 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function exportTransformProvider() {
 		$entity = $this->newEntity();
 
-		//FIXME: We need a better way to set an ID. If091211c1d1d changes how
-		//       entity creation is handled in tests.
-		$entity->setId( 7 );
-
 		$legacySerializer = new LegacyInternalEntitySerializer();
 		$oldBlob = json_encode( $legacySerializer->serialize( $entity ) );
 
@@ -308,16 +311,12 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider exportTransformProvider
-	 *
-	 * @param $blob
-	 * @param $expected
 	 */
 	public function testExportTransform( $blob, $expected ) {
-		$settings = new SettingsArray();
-		$settings->setSetting( 'transformLegacyFormatOnExport', true );
+		$settings = new SettingsArray( array( 'transformLegacyFormatOnExport' => true ) );
 		$handler = $this->getHandler( $settings );
-
 		$actual = $handler->exportTransform( $blob );
+
 		$this->assertEquals( $expected, $actual );
 	}
 
