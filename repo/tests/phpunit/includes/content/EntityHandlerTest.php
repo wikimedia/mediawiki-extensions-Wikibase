@@ -11,6 +11,7 @@ use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityHandler;
 use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -44,10 +45,14 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param SettingsArray $settings
+	 * @param EntityContentDataCodec $codec
 	 *
 	 * @return EntityHandler
 	 */
-	protected abstract function getHandler( SettingsArray $settings = null );
+	protected abstract function getHandler(
+		SettingsArray $settings = null,
+		EntityContentDataCodec $codec = null
+	);
 
 	/**
 	 * @return Entity
@@ -309,6 +314,27 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$settings->setSetting( 'transformLegacyFormatOnExport', true );
 		$handler = $this->getHandler( $settings );
 		$actual = $handler->exportTransform( $blob );
+
+		$this->assertEquals( $expected, $actual );
+	}
+
+	public function testExportTransform_neverRecodeNonLegacyFormat() {
+		$codec = $this->getMockBuilder( '\Wikibase\Lib\Store\EntityContentDataCodec' )
+			->disableOriginalConstructor()
+			->getMock();
+		$codec->expects( $this->never() )
+			->method( 'decodeEntity' );
+		$codec->expects( $this->never() )
+			->method( 'encodeEntity' );
+
+		$entity = $this->newEntity();
+		$currentSerializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
+		$expected = json_encode( $currentSerializer->serialize( $entity ) );
+
+		$settings = new SettingsArray();
+		$settings->setSetting( 'transformLegacyFormatOnExport', true );
+		$handler = $this->getHandler( $settings, $codec );
+		$actual = $handler->exportTransform( $expected );
 
 		$this->assertEquals( $expected, $actual );
 	}
