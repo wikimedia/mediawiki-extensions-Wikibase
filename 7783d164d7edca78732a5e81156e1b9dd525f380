@@ -87,6 +87,41 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_593a4034",
+        "filename": "repo/includes/Notifications/DummyChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-20T22:03:51Z",
+      "side": 1,
+      "message": "https://en.wikipedia.org/wiki/Null_Object_pattern",
+      "parentUuid": "ee391fd1_39265c64",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_7933c45f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-20T22:03:51Z",
+      "side": 1,
+      "message": "What will be using this method? You only need this for constructing a ChangeNotifier no? In that case, the factory does not need to provide access to it.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_191dd814",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
@@ -98,6 +133,24 @@
       "writtenOn": "2014-06-20T21:36:32Z",
       "side": 1,
       "message": "return null;",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_b9e92ca9",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-20T22:03:51Z",
+      "side": 1,
+      "message": "Null object pattern (or not far from it). This is not bad IMO",
+      "parentUuid": "ee391fd1_191dd814",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
