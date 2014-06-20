@@ -1,10 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Wikibase\Repo\View\TextInjector;
 
 /**
- * @covers Wikibase\TextInjector
+ * @covers Wikibase\Repo\View\TextInjector
  *
  * @group Wikibase
  * @group WikibaseRepo

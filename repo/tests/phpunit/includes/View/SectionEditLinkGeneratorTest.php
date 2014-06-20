@@ -9,7 +9,7 @@ use Wikibase\Datamodel\Entity\Item;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
- * @covers Wikibase\SectionEditLinkGenerator
+ * @covers Wikibase\Repo\View\SectionEditLinkGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -64,7 +64,6 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getEditUrlProvider
-	 * @covers SectionEditLinkGenerator::getEditUrl
 	 */
 	public function testGetEditUrl( $expected, $specialpagename, Entity $entity, $language = null ) {
 		$generator = new SectionEditLinkGenerator();

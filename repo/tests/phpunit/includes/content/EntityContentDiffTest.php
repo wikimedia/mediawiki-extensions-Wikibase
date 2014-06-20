@@ -10,7 +10,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\DataModel\Entity\EntityDiff;
 
 /**
- * @covers Wikibase\EntityContentDiff
+ * @covers Wikibase\Repo\Content\EntityContentDiff
  *
  * @group WikibaseRepo
  * @group Wikibase

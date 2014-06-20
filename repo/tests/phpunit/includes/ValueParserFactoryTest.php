@@ -18,7 +18,6 @@ class ValueParserFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider getParserIdsProvider
-	 * @covers ValueParserFactory::getParserIds
 	 */
 	public function testGetParserIds( $valueParsers, $expected ) {
 		$valueParserFactory = new ValueParserFactory( $valueParsers );

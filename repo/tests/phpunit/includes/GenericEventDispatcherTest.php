@@ -9,7 +9,7 @@ use Wikibase\Repo\GenericEventDispatcher;
  * @covers Wikibase\Repo\GenericEventDispatcher
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

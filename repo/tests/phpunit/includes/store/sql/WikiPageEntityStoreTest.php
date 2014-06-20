@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
- * @covers Wikibase\Lib\Store\WikiPageEntityStore
+ * @covers Wikibase\Repo\Store\WikiPageEntityStore
  *
  * @group Database
  * @group Wikibase
