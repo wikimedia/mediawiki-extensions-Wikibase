@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_310c3af0",
+        "filename": "client/tests/phpunit/includes/scribunto/WikibaseLuaEntityBindingsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T09:49:19Z",
+      "side": 1,
+      "message": "jhagsdjkaghdsfg? ;-)",
+      "revId": "25ab8eb5942ac258e5d5a18685e65e5b2efcafe9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
