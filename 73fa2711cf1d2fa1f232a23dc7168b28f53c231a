@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_b1e14a99",
+        "filename": "client/includes/ChangeHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_fce9f0a7",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_9cfb0477",
         "filename": "lib/includes/changes/EntityChangeFactory.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-19T14:27:01Z",
       "side": 1,
       "message": "Jeroen not happy. :-(",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_91dc06e7",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "Hm? Why? It\u0027s a specific namespace, corresponding to the directory.",
+      "parentUuid": "ee391fd1_9cfb0477",
       "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_71ebe277",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_7cfe2068",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_5cf59c7e",
         "filename": "lib/includes/changes/EntityChangeFactory.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2014-06-19T14:27:01Z",
       "side": 1,
       "message": "This misses a comment why this is done.",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_11e81676",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "newForEntity and newFromUpdate were moved as-is from EntityChange. They could be made nicer, but that should be done in a separate change.",
+      "parentUuid": "ee391fd1_5cf59c7e",
       "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_f1feb234",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "idem",
+      "parentUuid": "ee391fd1_3cf0988d",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_1cef14af",
         "filename": "lib/includes/changes/EntityChangeFactory.php",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2014-06-19T14:27:01Z",
       "side": 1,
       "message": "Same here. Please add a comment why this is done here. Who needs these attributes?",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d1f96e4c",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "idem",
+      "parentUuid": "ee391fd1_1cef14af",
       "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_7192c201",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "This is just setup, it\u0027s just a way to create an EntityChange. newForEntity was not available before, but it preferred now.",
+      "parentUuid": "ee391fd1_bc048881",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_dc018c72",
         "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
         "patchSetId": 2
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_319c3a12",
+        "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "because this actually tests newFromUpdate. But newFromUpdate is no longer in EntityChange, so i\u0027m removing this method.",
+      "parentUuid": "ee391fd1_dc018c72",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_fcd21000",
         "filename": "repo/includes/store/Store.php",
         "patchSetId": 2
@@ -149,6 +293,24 @@
       "writtenOn": "2014-06-19T14:27:01Z",
       "side": 1,
       "message": "\"An\" is wrong here.\n\nAnd it\u0027s pointless to describe a \"getFoo\" method with \"returns a foo\".",
+      "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_119ff607",
+        "filename": "repo/includes/store/Store.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:14:10Z",
+      "side": 1,
+      "message": "Yea, pointless, but consistent with the other methods in this interface.",
+      "parentUuid": "ee391fd1_fcd21000",
       "revId": "73fa2711cf1d2fa1f232a23dc7168b28f53c231a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
