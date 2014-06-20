@@ -235,7 +235,8 @@ final class RepoHooks {
 			$parent = is_null( $revision->getParentId() )
 				? null : Revision::newFromId( $revision->getParentId() );
 
-			$change = EntityChange::newFromUpdate(
+			$entityChangeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
+			$change = $entityChangeFactory->newFromUpdate(
 				$parent ? EntityChange::UPDATE : EntityChange::ADD,
 				$parent ? $parent->getContent()->getEntity() : null,
 				$newEntity
@@ -295,7 +296,8 @@ final class RepoHooks {
 		// May be redundant in some cases. Take care not to cause infinite regress.
 		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $entity->getId() );
 
-		$change = EntityChange::newFromUpdate( EntityChange::REMOVE, $entity, null, array(
+		$entityChangeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
+		$change = $entityChangeFactory->newFromUpdate( EntityChange::REMOVE, $entity, null, array(
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
 			'object_id' => $entity->getId()->getPrefixedId(),
@@ -352,7 +354,9 @@ final class RepoHooks {
 		$rev = Revision::newFromId( $revId );
 
 		$userId = $rev->getUser();
-		$change = EntityChange::newFromUpdate( EntityChange::RESTORE, null, $entity, array(
+
+		$entityChangeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
+		$change = $entityChangeFactory->newFromUpdate( EntityChange::RESTORE, null, $entity, array(
 			// TODO: Use timestamp of log entry, but needs core change.
 			// This hook is called before the log entry is created.
 			'revision_id' => $revId,

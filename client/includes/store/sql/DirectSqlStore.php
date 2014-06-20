@@ -109,6 +109,8 @@ class DirectSqlStore implements ClientStore {
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
 
+		$this->changesDatabase = $settings->getSetting( 'changesDatabase' );
+
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
 		$this->cacheType = $cacheType;

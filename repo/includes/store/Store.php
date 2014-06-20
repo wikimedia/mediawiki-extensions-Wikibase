@@ -125,12 +125,21 @@ interface Store {
 	public function getEntityInfoBuilder();
 
 	/**
-	 * Returns an PropertyInfoStore
+	 * Returns a PropertyInfoStore
 	 *
 	 * @since 0.4
 	 *
 	 * @return PropertyInfoStore
 	 */
 	public function getPropertyInfoStore();
+
+	/**
+	 * Returns a ChangesTable
+	 *
+	 * @since 0.5
+	 *
+	 * @return ChangesTable
+	 */
+	public function getChangesTable();
 
 }
