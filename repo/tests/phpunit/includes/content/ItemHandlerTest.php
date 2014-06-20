@@ -6,7 +6,6 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\EntityHandler;
 use Wikibase\ItemContent;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
@@ -75,13 +74,15 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	protected function newEntity() {
-		return Item::newEmpty();
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q7' ) );
+		return $item;
 	}
 
 	/**
 	 * @param SettingsArray $settings
 	 *
-	 * @return EntityHandler
+	 * @return ItemHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
 		$repo = WikibaseRepo::getDefaultInstance();
