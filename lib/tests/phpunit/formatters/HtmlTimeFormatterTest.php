@@ -32,8 +32,6 @@ class HtmlTimeFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider timeFormatProvider
-	 *
-	 * @covers HtmlTimeFormatter::format()
 	 */
 	public function testFormat( $value, $options, $pattern ) {
 		$formatter = new HtmlTimeFormatter( $options, $this->getMockFormatter() );

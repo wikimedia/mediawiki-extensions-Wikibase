@@ -89,7 +89,6 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider formatSnakProvider
-	 * @covers PropertyValueSnakFormatter::formatSnak()
 	 */
 	public function testFormatSnak(
 		$snak, $dataType, $valueType, $targetFormat, $formatters, $onError,
@@ -278,17 +277,11 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		return $formatter;
 	}
 
-	/**
-	 * @covers PropertyValueSnakFormatter::getFormat()
-	 */
 	public function testGetFormat() {
 		$formatter = $this->getDummyPropertyValueSnakFormatter();
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
-	/**
-	 * @covers PropertyValueSnakFormatter::canFormatSnak
-	 */
 	public function testCanFormatSnak() {
 		$formatter = $this->getDummyPropertyValueSnakFormatter();
 

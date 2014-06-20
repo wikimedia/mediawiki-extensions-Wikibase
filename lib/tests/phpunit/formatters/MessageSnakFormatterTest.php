@@ -21,9 +21,6 @@ use Wikibase\PropertySomeValueSnak;
  */
 class MessageSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @covers MessageSnakFormatter::formatSnak()
-	 */
 	public function testFormatSnak() {
 		//TODO: Find a better message for testing, one that actually contains wikitext.
 		$msg = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
@@ -36,9 +33,6 @@ class MessageSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $msg->parse(), $formatter->formatSnak( $snak ) );
 	}
 
-	/**
-	 * @covers MessageSnakFormatter::getFormat()
-	 */
 	public function testGetFormat() {
 		$msg = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
 		$formatter = new MessageSnakFormatter( 'any', $msg, 'test' );
@@ -46,9 +40,6 @@ class MessageSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 
-	/**
-	 * @covers MessageSnakFormatter::canFormatSnak()
-	 */
 	public function testCanFormatSnak() {
 		$msg = wfMessage( 'wikibase-snakview-snaktypeselector-novalue' );
 		$formatter = new MessageSnakFormatter( 'novalue', $msg, 'test' );

@@ -8,7 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\CommonsLinkFormatter;
 
 /**
- * @covers CommonsLinkFormatter
+ * @covers Wikibase\Lib\CommonsLinkFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -69,8 +69,6 @@ class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider commonsLinkFormatProvider
-	 *
-	 * @covers CommonsLinkFormatter::format
 	 */
 	public function testFormat( $value, $options, $pattern ) {
 		$formatter = new CommonsLinkFormatter( $options );
@@ -79,9 +77,6 @@ class CommonsLinkFormatterTest extends \PHPUnit_Framework_TestCase {
 		$this->assertRegExp( $pattern, $html );
 	}
 
-	/**
-	 * @covers CommonsLinkFormatter::format
-	 */
 	public function testFormatError() {
 		$formatter = new CommonsLinkFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );

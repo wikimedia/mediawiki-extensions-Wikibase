@@ -22,8 +22,6 @@ class HtmlUrlFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider urlFormatProvider
-	 *
-	 * @covers HtmlUrlFormatter::format()
 	 */
 	public function testFormat( $value, $options, $pattern ) {
 		$formatter = new HtmlUrlFormatter( $options );
@@ -44,9 +42,6 @@ class HtmlUrlFormatterTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	/**
-	 * @covers HtmlUrlFormatter::format()
-	 */
 	public function testFormatError() {
 		$formatter = new HtmlUrlFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );

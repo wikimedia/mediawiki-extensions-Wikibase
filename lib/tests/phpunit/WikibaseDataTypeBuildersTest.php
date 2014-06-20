@@ -19,7 +19,7 @@ use Wikibase\Item;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 
 /**
- * @covers WikibaseDataTypeBuilders
+ * @covers Wikibase\Lib\WikibaseDataTypeBuilders
  *
  * @group WikibaseLib
  * @group Wikibase

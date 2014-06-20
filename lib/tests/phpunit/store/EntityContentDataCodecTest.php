@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Test\EntityTestCase;
 
 /**
- * @covers Wikibase\Serializers\EntityContentCodec
+ * @covers Wikibase\Lib\Store\EntityContentDataCodec
  *
  * @group Wikibase
  * @group WikibaseLib

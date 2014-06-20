@@ -23,8 +23,6 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider quantityFormatProvider
-	 *
-	 * @covers GlobeCoordinateDetailsFormatter::format
 	 */
 	public function testFormat( $value, $options, $pattern ) {
 		$formatter = new GlobeCoordinateDetailsFormatter( $options );
@@ -55,9 +53,6 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	/**
-	 * @covers GlobeCoordinateDetailsFormatter::format
-	 */
 	public function testFormatError() {
 		$formatter = new GlobeCoordinateDetailsFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );

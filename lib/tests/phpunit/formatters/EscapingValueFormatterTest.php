@@ -8,7 +8,7 @@ use ValueFormatters\StringFormatter;
 use Wikibase\Lib\EscapingValueFormatter;
 
 /**
- * @covers EscapingValueFormatter
+ * @covers Wikibase\Lib\EscapingValueFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -20,9 +20,6 @@ use Wikibase\Lib\EscapingValueFormatter;
  */
 class EscapingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @covers EscapingValueFormatter::format
-	 */
 	public function testFormat() {
 		$formatter = new EscapingValueFormatter( new StringFormatter( new FormatterOptions() ), 'htmlspecialchars' );
 		$value = new StringValue( '3 < 5' );

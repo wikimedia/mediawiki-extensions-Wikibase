@@ -23,8 +23,6 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider quantityFormatProvider
-	 *
-	 * @covers TimeDetailsFormatter::format
 	 */
 	public function testFormat( $value, $options, $pattern ) {
 		$formatter = new TimeDetailsFormatter( $options );
@@ -57,9 +55,6 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	/**
-	 * @covers TimeDetailsFormatter::format
-	 */
 	public function testFormatError() {
 		$formatter = new TimeDetailsFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );

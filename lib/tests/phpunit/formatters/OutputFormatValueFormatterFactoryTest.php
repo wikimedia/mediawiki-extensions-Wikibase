@@ -7,7 +7,7 @@ use ValueFormatters\StringFormatter;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 
 /**
- * @covers OutputFormatValueFormatterFactory
+ * @covers Wikibase\Lib\OutputFormatValueFormatterFactory
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -54,7 +54,6 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 
 	/**
 	 * @dataProvider getValueFormatterProvider
-	 * @covers OutputFormatValueFormatterFactory::getValueFormatter
 	 */
 	public function testGetValueFormatter( $builders, $format ) {
 		$factory = new OutputFormatValueFormatterFactory( $builders );

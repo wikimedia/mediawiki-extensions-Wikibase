@@ -72,9 +72,6 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		return new WikibaseSnakFormatterBuilders( $valueFormatterBuilders, $typeLookup, $typeFactory );
 	}
 
-	/**
-	 * @covers WikibaseSnakFormatterBuilders::getSnakFormatterBuildersForFormats
-	 */
 	public function testGetSnakFormatterBuildersForFormats() {
 		$builders = $this->newBuilders( 'string', new ItemId( 'Q5' ) );
 
@@ -98,7 +95,6 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider buildDispatchingSnakFormatterProvider
-	 * @covers WikibaseSnakFormatterBuilders::buildDispatchingSnakFormatter
 	 */
 	public function testBuildDispatchingSnakFormatter( $format, $options, $type, $snak, $expected ) {
 		$builders = $this->newBuilders( $type, new ItemId( 'Q5' ) );

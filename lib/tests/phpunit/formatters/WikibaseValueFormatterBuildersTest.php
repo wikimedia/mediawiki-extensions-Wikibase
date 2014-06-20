@@ -65,7 +65,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider buildDispatchingValueFormatterProvider
-	 * @covers WikibaseValueFormatterBuilders::buildDispatchingValueFormatter
 	 */
 	public function testBuildDispatchingValueFormatter( $format, $options, $snak, $expected, $dataTypeId = null ) {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
@@ -304,9 +303,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		$formatter->format( $timeValue ); // expecting a FormattingException
 	}
 
-	/**
-	 * @covers WikibaseValueFormatterBuilders::getPlainTextFormatters
-	 */
 	public function testGetPlainTextFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
@@ -334,9 +330,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @covers WikibaseValueFormatterBuilders::getWikiTextFormatters
-	 */
 	public function testGetWikiTextFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
@@ -356,9 +349,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @covers WikibaseValueFormatterBuilders::getHtmlFormatters
-	 */
 	public function testGetHtmlFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
@@ -378,9 +368,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @covers WikibaseValueFormatterBuilders::getWidgetFormatters
-	 */
 	public function testGetWidgetFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
@@ -400,9 +387,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @covers WikibaseValueFormatterBuilders::getDiffFormatters
-	 */
 	public function testGetDiffFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 		$options = new FormatterOptions();
@@ -446,9 +430,6 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 		$this->assertEmpty( array_intersect( $skippedTypes, $actualTypes ), 'skipped' );
 	}
 
-	/**
-	 * @covers WikibaseValueFormatterBuilders::makeEscapingFormatters
-	 */
 	public function testMakeEscapingFormatters() {
 		$builders = $this->newWikibaseValueFormatterBuilders( new ItemId( 'Q5' ) );
 

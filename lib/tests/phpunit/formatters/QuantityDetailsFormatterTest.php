@@ -22,8 +22,6 @@ class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider quantityFormatProvider
-	 *
-	 * @covers QuantityDetailsFormatter::format
 	 */
 	public function testFormat( $value, $options, $pattern ) {
 		$formatter = new QuantityDetailsFormatter( $options );
@@ -54,9 +52,6 @@ class QuantityDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	/**
-	 * @covers QuantityDetailsFormatter::format
-	 */
 	public function testFormatError() {
 		$formatter = new QuantityDetailsFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );

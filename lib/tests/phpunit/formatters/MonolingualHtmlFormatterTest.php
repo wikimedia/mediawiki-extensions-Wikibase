@@ -8,7 +8,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 
 /**
- * @covers MonolingualHtmlFormatter
+ * @covers Wikibase\Formatters\MonolingualHtmlFormatter
  *
  * @group ValueFormatters
  * @group DataValueExtensions
@@ -22,8 +22,6 @@ class MonolingualHtmlFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider monolingualHtmlFormatProvider
-	 *
-	 * @covers MonolingualHtmlFormatter::format
 	 */
 	public function testFormat( $value, $options, $pattern, $not = '' ) {
 		$formatter = new MonolingualHtmlFormatter( $options );

@@ -55,7 +55,6 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider formatProvider
-	 * @covers DispatchingValueFormatter::format()
 	 */
 	public function testFormat( $value, $formatters, $expected ) {
 		$formatter = new DispatchingValueFormatter(
@@ -98,7 +97,6 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider formatValueProvider
-	 * @covers DispatchingValueFormatter::formatValue()
 	 */
 	public function testFormatValue( $value, $type, $formatters, $expected ) {
 		$formatter = new DispatchingValueFormatter(
