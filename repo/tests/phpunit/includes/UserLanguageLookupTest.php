@@ -15,7 +15,7 @@ use User;
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
-class UserLanguagesTest extends \PHPUnit_Framework_TestCase {
+class UserLanguageLookupTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $subject
@@ -52,7 +52,7 @@ class UserLanguagesTest extends \PHPUnit_Framework_TestCase {
 		$user = new User();
 		// Required to not be anonymous
 		$user->setId( 1 );
-		$user->setName( 'UserLanguagesTest-TestUser' );
+		$user->setName( 'UserLanguageLookupTest-TestUser' );
 		$user->setOption( 'language', $usersLanguage );
 		// Not a real option, just to manipulate the double class
 		$user->setOption( 'babelLanguages', $babelLanguages );
