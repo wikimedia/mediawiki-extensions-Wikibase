@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_80db8d53",
+        "filename": "repo/tests/phpunit/includes/UserLanguagesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T17:37:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this name be fixed too?",
+      "revId": "f10e19087ada94fe6fad041813594eafd0367263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_40e5a505",
+        "filename": "repo/tests/phpunit/includes/View/TermBoxViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T17:37:09Z",
+      "side": 1,
+      "message": "Missed that missing newline. ;-)",
+      "revId": "f10e19087ada94fe6fad041813594eafd0367263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
