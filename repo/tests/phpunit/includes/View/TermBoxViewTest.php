@@ -1,10 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+
 use Language;
 use Title;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\View\TermBoxView;
 
 /**
