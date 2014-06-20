@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_2c6bbdb6",
+        "filename": "lib/includes/store/EntityStoreWatcher.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T14:17:12Z",
+      "side": 1,
+      "message": "Well, it actually is a redirect in the MediaWiki sense. It\u0027s just a bit more than that. I like the name \"redirectUpdated\" because it\u0027s shorter and symmetrical to \"entityUpdated\". But I have no strong feelings about it.",
+      "parentUuid": "ee391fd1_81627d35",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_c1c76514",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-19T12:39:15Z",
       "side": 1,
       "message": "Doesn\u0027t return anything.",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_0c6eb9c4",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T14:17:12Z",
+      "side": 1,
+      "message": "phpstorm complains if i remove it, because the comment in the parent class declares the function to return an int.",
+      "parentUuid": "ee391fd1_c1c76514",
       "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_8c59892f",
+        "filename": "lib/tests/phpunit/store/CachingEntityRevisionLookupTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T14:17:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_a1cea12f",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_61d8b9f4",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 7
@@ -64,6 +118,24 @@
       "writtenOn": "2014-06-19T12:39:15Z",
       "side": 1,
       "message": "Hint: Please always use two stars for inline docs.",
+      "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ac5e8d15",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T14:17:12Z",
+      "side": 1,
+      "message": "I consistently use only one star for inline @var comments, because they are type hints for the IDE, not documentation to be processed by doxygen.",
+      "parentUuid": "ee391fd1_61d8b9f4",
       "revId": "49afe3098b7c2a2e6f2f6a3ab2af610075b25f00",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
