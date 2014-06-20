@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_31179a58",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "EntityRedirect is a concept used by EntityConcept on the storage level. It is essentially an implementation details of EntityContent and should really not be used outside that context (and WikiPageEntityLookup). \n\nWe need a place for shared storage level stuff... shall we make a new \"wikibase storage\" component (that doesn\u0027t include the repo side stuff, but some mediawiki bindings?...) This needs more thought, and more moving around than I want to do in this change.",
+      "parentUuid": "ee391fd1_9ae8bade",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_3ad8ae57",
         "filename": "lib/includes/store/EntityRedirect.php",
         "patchSetId": 41
@@ -47,6 +65,24 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "This doc block does not add value",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_b1338a09",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "now it does.",
+      "parentUuid": "ee391fd1_3ad8ae57",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -88,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_912e469f",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_5a137205",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_9a19da29",
         "filename": "lib/includes/store/EntityRedirect.php",
         "patchSetId": 41
@@ -116,6 +170,24 @@
       "writtenOn": "2014-06-17T18:43:27Z",
       "side": 1,
       "message": "I find it more readable this way, but Thiemo also complained, so I\u0027ll use a single expression.",
+      "parentUuid": "ee391fd1_9a19da29",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_711d2278",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "ee391fd1_9a19da29",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -228,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_d10bae2c",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_7ac2b689",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_5aa6d2a8",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 41
@@ -263,6 +353,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_91052619",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Most of this has now moved into ChangeNotifier",
+      "parentUuid": "ee391fd1_5aa6d2a8",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_1a396a9f",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 41
@@ -274,6 +382,24 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "It has already been demonstrated that you do not need this for diffing",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_6cfc2509",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "I consider that an open discussion issue. I\u0027m trying to avoid empty Entities, and I think there should really be no empty EntityContent objects. But getting rid of those is not subject of this patch. Here I\u0027m shifting from using empty EntityContent (pretty bad) to only needing empty Entity objects (not quite as bad).",
+      "parentUuid": "ee391fd1_1a396a9f",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -349,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_cc0af121",
+        "filename": "repo/includes/content/UnresolvedRedirectException.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Yes, since redirects are only defined on the storage level. An alias defined an alias for lookup, that\u0027s it. This exception is used by EntityLookup, I can\u0027t think of any other place where it makes sense.\n\nKeep in mind: an Entity can never be a redirect. EntityContent can contain a redirect. That\u0027s storage level only.",
+      "parentUuid": "ee391fd1_3a8c2e32",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_1a928a57",
         "filename": "repo/includes/content/UnresolvedRedirectException.php",
         "patchSetId": 41
@@ -360,6 +504,24 @@
       "writtenOn": "2014-06-17T18:19:39Z",
       "side": 1,
       "message": "Can be private",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_ac19ed7f",
+        "filename": "repo/includes/content/UnresolvedRedirectException.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_1a928a57",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -383,6 +545,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_8c14e945",
+        "filename": "repo/includes/content/UnresolvedRedirectException.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_ba801efa",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_fab8e6e3",
         "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
         "patchSetId": 41
@@ -400,6 +580,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_6c2305a7",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_fab8e6e3",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_dabd22d3",
         "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
         "patchSetId": 41
@@ -411,6 +609,24 @@
       "writtenOn": "2014-06-17T18:09:04Z",
       "side": 1,
       "message": "Same here.",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_4c2601b7",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-20T13:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_dabd22d3",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
