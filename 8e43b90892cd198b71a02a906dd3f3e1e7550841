@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_998c2834",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:54:46Z",
+      "side": 1,
+      "message": "Is there a reason for this order? If not, please make it:\n\nEntityId $entityId, $revisionId, $timestamp, $userId\n\nThis makes more sense IMHO and is more consistent to existing code.",
+      "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_f9c8d452",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-20T21:54:46Z",
+      "side": 1,
+      "message": "This can be so much simpler. Just\n\n$notifier \u003d WikibaseRepo::getDefaultInstance()-\u003egetChangeNotifier();\n\nwhich can be null, so the decision is made by\n\nif ( $notifier !\u003d\u003d null ) {\n\t$notifier-\u003e...();\n}\n\nMost important benefit: If you know there is nobody to be notified you can skip pointless code paths.",
+      "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
