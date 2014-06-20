@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityHandler;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyHandler;
 use Wikibase\Repo\WikibaseRepo;
@@ -74,21 +74,22 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	}
 
 	protected function newEntity() {
-		return Property::newFromType( 'string' );
+		$property = Property::newFromType( 'string' );
+		$property->setId( new PropertyId( 'P7' ) );
+		return $property;
 	}
-
 
 	/**
 	 * @param SettingsArray $settings
 	 *
-	 * @return EntityHandler
+	 * @return PropertyHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$validator = $repo->getEntityConstraintProvider()->getConstraints( Property::ENTITY_TYPE );
-		$codec = $repo->getEntityContentDataCodec();
 		$entityPerPage = $repo->getStore()->newEntityPerPage();
 		$termIndex = $repo->getStore()->getTermIndex();
+		$codec = $repo->getEntityContentDataCodec();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
 		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
 
