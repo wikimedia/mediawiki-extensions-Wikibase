@@ -47,8 +47,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 * @since 0.4
 	 *
 	 * @param string $siteId
-	 * @param string|null $pageName Null in case the link with the provided siteId should be removed
-	 * @param array|null $badges
+	 * @param string|null $pageName Null to remove the sitelink (if $badges are also null)
+	 * @param array|null $badges Null for no-op
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -130,6 +130,52 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	}
 
 	/**
+	 * Whether an entity's sitelink has badges
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return bool
+	 */
+	private function entityHasBadges( Entity $entity ) {
+		return $entity->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) &&
+				count( $entity->getSiteLinkList()->getBySiteId( $this->siteId )->getBadges() );
+	}
+
+	/**
+	 * Apply badges to an entity
+	 *
+	 * @param Entity $entity
+	 * @param array &$commentArgs
+	 * @param string &$action
+	 *
+	 * @return array
+	 */
+	private function applyBadges( Entity $entity, array &$commentArgs, &$action ) {
+		if ( $this->badges === null ) {
+			// If badges are not set in the change make sure that they remain intact
+			if ( $entity->hasLinkToSite( $this->siteId ) ) {
+				$badges = $entity->getSiteLink( $this->siteId )->getBadges();
+			} else {
+				$badges = array();
+			}
+		} elseif ( !$this->entityHasBadges( $entity, $this->siteId ) && $this->badges === array() ) {
+			// If we didn't have badges before and aren't adding any, don't claim we changed badges
+			$badges = array();
+		} else {
+			if ( $this->pageName === null ) {
+				$action .= '-badges';
+			} else {
+				$action .= '-both';
+			}
+
+			$badges = $this->badges;
+			$commentArgs[] = $badges;
+		}
+
+		return $badges;
+	}
+
+	/**
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
@@ -159,25 +205,9 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				$commentArgs[] = $pageName;
 			}
 
-			if ( $this->badges === null ) {
-				// If badges are not set in the change make sure that they remain intact
-				if ( $entity->hasLinkToSite( $this->siteId ) ) {
-					$badges = $entity->getSiteLink( $this->siteId )->getBadges();
-				} else {
-					$badges = array();
-				}
-			} else {
-				$badges = $this->badges;
-				$commentArgs[] = $badges;
-			}
-
 			$action = $entity->hasLinkToSite( $this->siteId ) ? 'set' : 'add';
 
-			if ( $this->pageName === null ) {
-				$action .= '-badges';
-			} elseif ( $this->badges !== null ) {
-				$action .= '-both';
-			}
+			$badges = $this->applyBadges( $entity, $commentArgs, $action );
 
 			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
 
