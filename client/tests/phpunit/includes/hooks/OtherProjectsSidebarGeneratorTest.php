@@ -10,7 +10,7 @@ use Wikibase\Test\MockRepository;
 use Wikibase\Test\MockSiteStore;
 
 /**
- * @covers Wikibase\Client\OtherProjectsSidebarGenerator
+ * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGenerator
  *
  * @since 0.5
  *
