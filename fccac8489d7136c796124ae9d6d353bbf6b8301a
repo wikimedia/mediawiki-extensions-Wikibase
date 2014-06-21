@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_c5107e55",
+        "filename": "repo/tests/phpunit/includes/content/ItemHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-21T16:02:55Z",
+      "side": 1,
+      "message": "what is your motivation for making this change? What does it solve? Setting the id here, with the weird optional behaviour is not more clear to me.",
+      "revId": "fccac8489d7136c796124ae9d6d353bbf6b8301a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
