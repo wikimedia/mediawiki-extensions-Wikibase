@@ -159,6 +159,11 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				$commentArgs[] = $pageName;
 			}
 
+			$action = $entity->hasLinkToSite( $this->siteId ) ? 'set' : 'add';
+
+			$hasBadges = $entity->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) &&
+				count( $entity->getSiteLinkList()->getBySiteId( $this->siteId )->getBadges() );
+
 			if ( $this->badges === null ) {
 				// If badges are not set in the change make sure that they remain intact
 				if ( $entity->hasLinkToSite( $this->siteId ) ) {
@@ -166,17 +171,18 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				} else {
 					$badges = array();
 				}
+			} elseif ( !$hasBadges && $this->badges === array() ) {
+				// If we didn't have badges before and aren't adding any, don't claim we changed badges
+				$badges = array();
 			} else {
+				if ( $this->pageName === null ) {
+					$action .= '-badges';
+				} else {
+					$action .= '-both';
+				}
+
 				$badges = $this->badges;
 				$commentArgs[] = $badges;
-			}
-
-			$action = $entity->hasLinkToSite( $this->siteId ) ? 'set' : 'add';
-
-			if ( $this->pageName === null ) {
-				$action .= '-badges';
-			} elseif ( $this->badges !== null ) {
-				$action .= '-both';
 			}
 
 			$this->updateSummary( $summary, $action, $this->siteId, $commentArgs );
