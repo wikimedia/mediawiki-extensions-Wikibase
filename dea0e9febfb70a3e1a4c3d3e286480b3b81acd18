@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_25006a03",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-21T15:48:21Z",
+      "side": 1,
+      "message": "Please put this predicate in its own method. The $hasBadges var has no reason to be in such a big scope and to be always calculated",
+      "revId": "dea0e9febfb70a3e1a4c3d3e286480b3b81acd18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_0507a61d",
+        "filename": "repo/includes/ChangeOp/ChangeOpSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-21T15:48:21Z",
+      "side": 1,
+      "message": "This method was way to big to begin with, please do not make it bigger. Things can easily be extracted",
+      "revId": "dea0e9febfb70a3e1a4c3d3e286480b3b81acd18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
