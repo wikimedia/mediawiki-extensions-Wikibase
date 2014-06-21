@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
@@ -189,4 +190,92 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$changeOpSiteLink->apply( $entity );
 	}
 
+	public function summaryTestProvider() {
+		$this->applySettings();
+
+		$item = Item::newEmpty();
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
+		$item->getSiteLinkList()->addNewSiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) );
+
+		$cases = array();
+		$badge = new ItemId( 'Q149' );
+
+		// Add sitelink without badges
+		$cases['add-sitelink-without-badges'] = array(
+			'add',
+			array( 'Berlin' ),
+			$item->copy(),
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', array() )
+		);
+
+		// Add sitelink with badges
+		$cases['add-sitelink-with-badges'] = array(
+			'add-both',
+			array( 'Berlin', array( $badge ) ),
+			$item->copy(),
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', array( $badge ) )
+		);
+
+		// Set page name only for existing sitelink
+		$cases['set-pagename-existing-sitelink'] = array(
+			'set',
+			array( 'London' ),
+			$item->copy(),
+			new ChangeOpSiteLink( 'ruwiki', 'London' )
+		);
+
+		// Add badge to existing sitelink
+		$cases['add-badges-to-existing-sitelink'] = array(
+			'set-badges',
+			array( array( $badge ) ),
+			$item->copy(),
+			new ChangeOpSiteLink( 'dewiki', null, array( $badge ) )
+		);
+
+		// Set page name and badges for existing sitelink
+		$cases['set-pagename-badges-existing-sitelink'] = array(
+			'set-both',
+			array( 'London', array( $badge ) ),
+			$item->copy(),
+			new ChangeOpSiteLink( 'dewiki', 'London', array( $badge ) ),
+		);
+
+		// Changes badges for existing sitelink
+		$cases['change-badges-for-existing-sitelink'] = array(
+			'set-badges',
+			array( array( $badge ) ),
+			$item->copy(),
+			new ChangeOpSiteLink( 'ruwiki', null, array( $badge ) )
+		);
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider summaryTestProvider
+	 *
+	 * @param string $expectedAction
+	 * @param array $expectedArguments
+	 * @param Item $entity
+	 * @param ChangeOpSiteLink $changeOpSiteLink
+	 */
+	public function testApplySummary(
+		$expectedAction,
+		array $expectedArguments,
+		Item $entity,
+		ChangeOpSiteLink $changeOpSiteLink
+	) {
+		$summary = new Summary();
+		$changeOpSiteLink->apply( $entity, $summary );
+
+		$this->assertSame(
+			$expectedAction,
+			$summary->getActionName()
+		);
+
+		$this->assertEquals(
+			$expectedArguments,
+			$summary->getAutoSummaryArgs()
+		);
+	}
 }
