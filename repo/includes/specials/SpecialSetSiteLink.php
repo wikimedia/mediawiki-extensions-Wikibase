@@ -454,10 +454,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 		}
 
+		$hasBadges = $item->getSiteLinkList()->hasLinkWithSiteId( $siteId ) &&
+				$item->getSiteLinkList()->getBySiteId( $siteId )->getBadges();
+
 		if ( $badges !== null ) {
 			$badges = $this->parseBadges( $badges, $status );
-		} else {
+		} elseif( $hasBadges ) {
+			// If badges are already present and the field is empty, remove them
 			$badges = array();
+		} else {
+			$badges = null;
 		}
 
 		if ( !$status->isGood() ) {
