@@ -43,7 +43,7 @@
 	"wikibase-linkitem-selectlink": "请选择您想要和该页面链接的网站和页面。",
 	"wikibase-linkitem-input-site": "语言：",
 	"wikibase-linkitem-input-page": "页面：",
-	"wikibase-linkitem-confirmitem-text": "您选择的页面已经关联至[$1 我们的中央数据存储库上的项]。请确认下面显示的是您想要与该页面链接的页面。",
+	"wikibase-linkitem-confirmitem-text": "您选择的页面已经关联至[$1 我们的中央数据存储库上的项]。请确认下面显示的是您想要与该页面链接的{{PLURAL:$2|页面}}。",
 	"wikibase-linkitem-confirmitem-button": "确认",
 	"wikibase-linkitem-not-loggedin-title": "您必须登录",
 	"wikibase-linkitem-not-loggedin": "您必须在此维基项目和[$1 中央数据存储库]上登录才能使用此功能。",
