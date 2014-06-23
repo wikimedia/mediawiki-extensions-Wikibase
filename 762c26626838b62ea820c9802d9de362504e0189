@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_79a29b3c",
+        "filename": "repo/tests/phpunit/includes/content/ItemHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T11:42:57Z",
+      "side": 1,
+      "message": "The ID should be an optional parameter. Which I think I have done in one of the open patches.",
+      "revId": "762c26626838b62ea820c9802d9de362504e0189",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
