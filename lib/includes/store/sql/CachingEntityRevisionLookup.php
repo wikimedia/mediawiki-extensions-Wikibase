@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use BagOStuff;
+use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
@@ -164,13 +165,24 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @see   EntityLookup::getEntity
 	 *
 	 * @param EntityId $entityId
+	 * @param int $resolveRedirects
 	 *
 	 * @throw StorageException
 	 * @return Entity|null
 	 */
-	public function getEntity( EntityId $entityId ) {
-		$entityRevision = $this->getEntityRevision( $entityId );
-		return $entityRevision === null ? null : $entityRevision->getEntity();
+	public function getEntity( EntityId $entityId, $resolveRedirects = 1 ) {
+		try {
+			$entityRevision = $this->getEntityRevision( $entityId );
+			return $entityRevision === null ? null : $entityRevision->getEntity();
+		} catch ( UnresolvedRedirectException $ex ) {
+			if ( $resolveRedirects > 1 ) {
+				// recursively resolve redirects
+				$target = $ex->getRedirectTargetId();
+				return $this->getEntity( $target, $resolveRedirects -1 );
+			} else {
+				throw $ex;
+			}
+		}
 	}
 
 	/**
@@ -179,18 +191,21 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
+	 * @param int $resolveRedirects
 	 *
 	 * @throw StorageException
 	 * @return bool
 	 */
-	public function hasEntity( EntityId $entityId ) {
+	public function hasEntity( EntityId $entityId, $resolveRedirects = 1 ) {
 		wfProfileIn( __METHOD__ );
 		$key = $this->getCacheKey( $entityId );
 
 		if ( $this->cache->get( $key ) ) {
 			$has = true;
 		} else {
-			$has = $this->lookup->getEntityRevision( $entityId ) !== null;
+			$has = $this->lookup->hasEntity( $entityId, $resolveRedirects );
+			//XXX: Cache the fact that the entity exists, without knowing it?
+			//     How does that interact with redirects?
 		}
 
 		wfProfileOut( __METHOD__ );

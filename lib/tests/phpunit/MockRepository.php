@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use DatabaseBase;
-use PermissionsError;
 use Status;
 use User;
+use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -69,15 +69,27 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 * @see EntityLookup::getEntity
 	 *
 	 * @param EntityID $entityId
+	 * @param int $resolveRedirects
 	 *
+	 * @throws \Exception
+	 * @throws \Wikibase\Content\UnresolvedRedirectException
 	 * @return Entity|null
 	 *
 	 * @throw StorageException
 	 */
-	public function getEntity( EntityId $entityId ) {
-		$rev = $this->getEntityRevision( $entityId );
-
-		return $rev === null ? null : $rev->getEntity()->copy();
+	public function getEntity( EntityId $entityId, $resolveRedirects = 1 ) {
+		try {
+			$rev = $this->getEntityRevision( $entityId );
+			return $rev === null ? null : $rev->getEntity()->copy();
+		} catch ( UnresolvedRedirectException $ex ) {
+			if ( $resolveRedirects > 1 ) {
+				// recursively resolve redirects
+				$target = $ex->getRedirectTargetId();
+				return $this->getEntity( $target, $resolveRedirects -1 );
+			} else {
+				throw $ex;
+			}
+		}
 	}
 
 	/**
@@ -131,10 +143,13 @@ class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLooku
 	 * @since 0.4
 	 *
 	 * @param EntityID $entityId
+	 * @param int $resolveRedirects
 	 *
 	 * @return bool
 	 */
-	public function hasEntity( EntityId $entityId ) {
+	public function hasEntity( EntityId $entityId, $resolveRedirects = 1 ) {
+		//TODO: support for redirects
+
 		return $this->getEntity( $entityId ) !== null;
 	}
 

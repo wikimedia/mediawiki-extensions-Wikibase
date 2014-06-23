@@ -4,13 +4,13 @@ namespace Wikibase\Lib\Store;
 
 use DBQueryError;
 use MWContentSerializationException;
+use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
-use Wikibase\UnresolvedRedirectException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -51,17 +51,28 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	}
 
 	/**
-	 * @see EntityLookup::getEntity
+	 * @since 0.5
+	 * @see   EntityLookup::getEntity
 	 *
 	 * @param EntityId $entityId
-	 *
-	 * @return Entity|null
+	 * @param int $resolveRedirects
 	 *
 	 * @throw StorageException
+	 * @return Entity|null
 	 */
-	public function getEntity( EntityId $entityId ) {
-		$entityRev = $this->getEntityRevision( $entityId );
-		return $entityRev === null ? null : $entityRev->getEntity();
+	public function getEntity( EntityId $entityId, $resolveRedirects = 1 ) {
+		try {
+			$entityRevision = $this->getEntityRevision( $entityId );
+			return $entityRevision === null ? null : $entityRevision->getEntity();
+		} catch ( UnresolvedRedirectException $ex ) {
+			if ( $resolveRedirects > 1 ) {
+				// recursively resolve redirects
+				$target = $ex->getRedirectTargetId();
+				return $this->getEntity( $target, $resolveRedirects -1 );
+			} else {
+				throw $ex;
+			}
+		}
 	}
 
 	/**
@@ -130,14 +141,40 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 * @see   EntityLookup::hasEntity
 	 *
 	 * @param EntityId $entityId
+	 * @param int $resolveRedirects
 	 *
 	 * @return bool
-	 * @throws StorageException
 	 */
-	public function hasEntity( EntityId $entityId ) {
-		$row = $this->loadPageRow( $entityId );
+	public function hasEntity( EntityId $entityId, $resolveRedirects = 1 ) {
+		$row = $this->loadPageRow( $entityId, $resolveRedirects );
+
+		if ( $row && $row->page_is_redirect ) {
+			if ( $resolveRedirects > 0 ) {
+				// recursively resolve redirects
+				$redirect = $this->loadRedirectFromRow( $row );
+				return $this->hasEntity( $redirect->getTargetId(), $resolveRedirects );
+			} else {
+				$row = null;
+			}
+		}
 
 		return ( $row !== null );
+	}
+
+	/**
+	 * @param object $row A row from the page table
+	 *
+	 * @return EntityRedirect|null
+	 * @throws StorageException
+	 */
+	private function loadRedirectFromRow( $row ) {
+		list( , $redirect ) = $this->loadEntity( $row );
+
+		if ( !$redirect ) {
+			throw new StorageException( 'Failed to load redirect data from page ID ' . $row->page_id );
+		}
+
+		return $redirect;
 	}
 
 	/**
@@ -265,10 +302,9 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws DBQueryError
 	 * @return object|null
 	 */
-	private function loadPageRow( EntityId $entityId ) {
+	private function loadPageRow( EntityId $entityId  ) {
 		$row = $this->selectPageRow( $entityId );
 
 		if ( !$row ) {

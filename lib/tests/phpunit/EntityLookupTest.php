@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * Base class for testing EntityLookup implementations
@@ -22,17 +23,18 @@ use Wikibase\EntityRevision;
 abstract class EntityLookupTest extends EntityTestCase {
 
 	/**
-	 * @param EntityRevision[] $entities
+	 * @param EntityRevision[] $entityRevisions
+	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @todo: Support for multiple revisions per entity.
 	 *        Needs a way to return the revision IDs.
 	 *
 	 * @return EntityLookup
 	 */
-	protected abstract function newEntityLookup( array $entities );
+	protected abstract function newEntityLookup( array $entityRevisions, array $entityRedirects );
 
 	/**
-	 * @note: not really needed for testing EntityLookup, mut makes it easier to
+	 * @note: not really needed for testing EntityLookup, but makes it easier to
 	 * set up tests for EntityRevisionLookup implementation in a consistent way.
 	 *
 	 * @return EntityRevision[]
@@ -61,11 +63,35 @@ abstract class EntityLookupTest extends EntityTestCase {
 	}
 
 	/**
+	 * @note: not really needed for testing EntityLookup, but makes it easier to
+	 * set up tests for EntityRevisionLookup implementation in a consistent way.
+	 *
+	 * @return EntityRedirect[]
+	 */
+	protected function getTestRedirects() {
+		static $redirects = null;
+
+		if ( $redirects === null ) {
+			// regular redirect
+			$redirects[101] = new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) );
+
+			// double redirect
+			$redirects[102] = new EntityRedirect( new ItemId( 'Q6' ), new ItemId( 'Q23' ) );
+
+			// broken redirect
+			$redirects[103] = new EntityRedirect( new ItemId( 'Q77' ), new ItemId( 'Q776655' ) );
+		}
+
+		return $redirects;
+	}
+
+	/**
 	 * @return EntityLookup
 	 */
 	protected function getEntityLookup() {
 		$entities = $this->getTestRevisions();
-		$lookup = $this->newEntityLookup( $entities );
+		$redirects = $this->getTestRevisions();
+		$lookup = $this->newEntityLookup( $entities, $redirects );
 
 		return $lookup;
 	}

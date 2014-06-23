@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * @covers Wikibase\Lib\Store\CachingEntityRevisionLookup
@@ -24,14 +25,19 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
 	 * @param EntityRevision[] $entityRevisions
+	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityLookup
 	 */
-	protected function newEntityRevisionLookup( array $entityRevisions ) {
+	protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects ) {
 		$mock = new MockRepository();
 
 		foreach ( $entityRevisions as $entityRev ) {
 			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevision() );
+		}
+
+		foreach ( $entityRedirects as $entityRedir ) {
+			$mock->putRedirect( $entityRedir );
 		}
 
 		return new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );

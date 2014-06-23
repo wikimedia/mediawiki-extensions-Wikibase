@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
@@ -24,25 +25,29 @@ abstract class EntityRevisionLookupTest extends EntityLookupTest {
 	 */
 	protected function getEntityRevisionLookup() {
 		$revisions = $this->getTestRevisions();
-		$lookup = $this->newEntityRevisionLookup( $revisions );
+		$redirects = $this->getTestRedirects();
+
+		$lookup = $this->newEntityRevisionLookup( $revisions, $redirects );
 
 		return $lookup;
 	}
 
 	/**
 	 * @param EntityRevision[] $entityRevisions
+	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	protected abstract function newEntityRevisionLookup( array $entityRevisions );
+	protected abstract function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects );
 
 	/**
 	 * @param EntityRevision[] $entities
+	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityLookup
 	 */
-	protected function newEntityLookup( array $entities ) {
-		return $this->newEntityRevisionLookup( $entities );
+	protected function newEntityLookup( array $entities, array $entityRedirects ) {
+		return $this->newEntityRevisionLookup( $entities, $entityRedirects );
 	}
 
 	public static function provideGetEntityRevision() {
