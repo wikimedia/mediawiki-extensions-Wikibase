@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_595c77f4",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T08:52:13Z",
+      "side": 1,
+      "message": "I find the word \"use\" a little bit confusing. Sounds like a input option but is an output option. Sure, that\u0027s more a matter of taste. Suggestions: setOutputSnippets, setSnippetMode, ... ok, this is not better. Feel free to object. ;-)",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d9486734",
+        "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T08:52:13Z",
+      "side": 1,
+      "message": "Why do you need to list the characters?",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9952dfe0",
+        "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T08:52:13Z",
+      "side": 1,
+      "message": "There are assertStringStartsWith and assertStringEndsWith. Isn\u0027t PHPUnit awesome? ;-)",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_794dfb3e",
+        "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T08:52:13Z",
+      "side": 1,
+      "message": "Why start with 1? This create 49 elements, right? Seems a bit overpowered. for ( $i \u003d 0; $i \u003c 6; $i++ ) should be enough for what needs to be tested here.",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
