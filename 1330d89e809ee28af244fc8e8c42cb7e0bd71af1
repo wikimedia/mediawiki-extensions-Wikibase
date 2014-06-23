@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_7aa2893c",
+        "filename": "lib/includes/Validators/NumberValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T17:33:26Z",
+      "side": 1,
+      "message": "\u0027number\u0027 is the common PHP abbreviation for int/float. I would prefer that. It\u0027s much easier to read for non-tech people.",
+      "revId": "1330d89e809ee28af244fc8e8c42cb7e0bd71af1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
