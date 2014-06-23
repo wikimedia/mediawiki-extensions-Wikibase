@@ -18,9 +18,11 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
+use Wikibase\Lib\Test\Store\RedirectResolvingEntityLookupTest;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -443,6 +445,8 @@ class SqlStore implements Store {
 	 * @see Store::getEntityLookup
 	 * @see SqlStore::getEntityRevisionLookup
 	 *
+	 * The EntityLookup returned by this method will resolve redirects.
+	 *
 	 * @since 0.4
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
@@ -450,7 +454,8 @@ class SqlStore implements Store {
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup( $uncached = '' ) {
-		return $this->getEntityRevisionLookup( $uncached );
+		$lookup = $this->getEntityRevisionLookup( $uncached );
+		return new RedirectResolvingEntityLookup( $lookup );
 	}
 
 	/**

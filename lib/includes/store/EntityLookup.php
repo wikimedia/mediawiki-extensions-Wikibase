@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Contains methods for interaction with an entity store.
+ * Service interface for retrieving Entities from storage.
  *
  * @since 0.3
  *
@@ -18,9 +18,11 @@ interface EntityLookup {
 
 	/**
 	 * Returns the entity with the provided id or null if there is no such
-	 * entity. If a $revision is given, the requested revision of the entity is loaded.
-	 * If that revision does not exist or does not belong to the given entity,
-	 * an exception is thrown.
+	 * entity.
+	 *
+	 * @note Implementations of this method may or may not resolve redirects.
+	 * Code that needs control over redirect resolution should use an
+	 * EntityRevisionLookup instead.
 	 *
 	 * @since 0.3
 	 *
@@ -35,6 +37,10 @@ interface EntityLookup {
 	 * Returns whether the given entity can bee looked up using
 	 * getEntity(). This avoids loading and deserializing entity content
 	 * just to check whether the entity exists.
+	 *
+	 * @note Implementations of this method may or may not resolve redirects.
+	 * Code that needs control over redirect resolution should use an
+	 * EntityRevisionLookup instead.
 	 *
 	 * @since 0.4
 	 *

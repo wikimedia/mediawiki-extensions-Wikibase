@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\WikiPageEntityLookup;
@@ -202,12 +203,15 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see ClientStore::getEntityLookup
 	 *
+	 * The EntityLookup returned by this method will resolve redirects.
+	 *
 	 * @since 0.4
 	 *
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		return $this->getEntityRevisionLookup();
+		$lookup = $this->getEntityRevisionLookup();
+		return new RedirectResolvingEntityLookup( $lookup );
 	}
 
 	/**
