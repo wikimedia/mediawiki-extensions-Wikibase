@@ -21,6 +21,8 @@ interface EntityRevisionLookup {
 	 * If that revision does not exist or does not belong to the given entity,
 	 * an exception is thrown.
 	 *
+	 * Implementations of this method must not silently resolve redirects.
+	 *
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
@@ -33,6 +35,8 @@ interface EntityRevisionLookup {
 
 	/**
 	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
+	 *
+	 * Implementations of this method must not silently resolve redirects.
 	 *
 	 * @param EntityId $entityId
 	 *
