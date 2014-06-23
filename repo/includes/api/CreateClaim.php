@@ -184,7 +184,7 @@ class CreateClaim extends ModifyClaim {
 				=> ' Creates a claim for item Q42 of property P9002 with string value "itsastring"',
 			'api.php?action=wbcreateclaim&entity=Q42&property=P9003&snaktype=value&value={"entity-type":"item","numeric-id":1}'
 				=> 'Creates a claim for item Q42 of property P9003 with a value of item Q1',
-			'api.php?action=wbcreateclaim&entity=Q42&property=P9004&snaktype=value&value={"latitude":40.748433,"longitude":-73.985656,"globe":"http://www.wikidata.org/entity/Q2"}'
+			'api.php?action=wbcreateclaim&entity=Q42&property=P9004&snaktype=value&value={"latitude":40.748433,"longitude":-73.985656,"globe":"http://www.wikidata.org/entity/Q2","precision":0.000001}'
 				=> 'Creates a claim for item Q42 of property P9004 with a coordinate snak value',
 		);
 	}
