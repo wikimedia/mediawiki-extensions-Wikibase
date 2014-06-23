@@ -8,8 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 
 /**
- * Implementation of EntityLookup that caches the obtained entities in memory.
- * The cache is never invalidated or purged. There is no size limit.
+ * Implementation of EntityLookup that caches the obtained entities.
  *
  * @since 0.5
  *

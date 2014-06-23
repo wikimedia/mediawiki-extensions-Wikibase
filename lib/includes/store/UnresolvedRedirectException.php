@@ -1,5 +1,5 @@
 <?php
-namespace Wikibase\Content;
+namespace Wikibase\Lib\Store;
 
 use Exception;
 use Wikibase\DataModel\Entity\EntityId;
