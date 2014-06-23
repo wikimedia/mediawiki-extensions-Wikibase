@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_fffe6b65",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2014-06-23T15:18:59Z",
+      "side": 1,
+      "message": "Spaces instead of tabs!",
+      "revId": "ef86b3ae10e98d513fe34cf7188ddc47f60bf610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_bff0e38e",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 334
+      },
+      "writtenOn": "2014-06-23T15:18:59Z",
+      "side": 1,
+      "message": "Spaces instead of tabs!",
+      "revId": "ef86b3ae10e98d513fe34cf7188ddc47f60bf610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
