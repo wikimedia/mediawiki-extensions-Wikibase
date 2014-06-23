@@ -16,6 +16,24 @@
       "revId": "ff0f2858e1db31cfd8e80b3419ec0003b733f9ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_7f2cbb8f",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T14:30:58Z",
+      "side": 0,
+      "message": "The /s modifier only changes the meaning of the dot, but there is no dot in this regex.",
+      "parentUuid": "ee391fd1_997c1fe4",
+      "revId": "ff0f2858e1db31cfd8e80b3419ec0003b733f9ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
