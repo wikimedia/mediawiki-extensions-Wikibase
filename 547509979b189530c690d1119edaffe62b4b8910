@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_b9180324",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T09:52:18Z",
+      "side": 1,
+      "message": "you can use $this-\u003estashMwGlobals( array( \u0027wgHooks\u0027, \u0027wgGroupPermissions\u0027 ) ), they will automatically get restored.",
+      "parentUuid": "ee391fd1_1141360e",
+      "revId": "547509979b189530c690d1119edaffe62b4b8910",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_f147d220",
         "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-06-20T09:33:16Z",
       "side": 1,
       "message": "if ( isset( $this-\u003ehooks ) ) {\n\t$wgHooks \u003d $this-\u003ehooks;\n\tunset( $this-\u003ehooks );\n}",
+      "revId": "547509979b189530c690d1119edaffe62b4b8910",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_99177ff2",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T09:52:18Z",
+      "side": 1,
+      "message": "see above.",
+      "parentUuid": "ee391fd1_f147d220",
       "revId": "547509979b189530c690d1119edaffe62b4b8910",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
