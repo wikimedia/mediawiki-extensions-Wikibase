@@ -77,6 +77,7 @@
 	"wikibase-tooltip-error-details": "Link within an error tooltip that will unfold additional information regarding the error (i.e. the more specific error message returned from the underlying API).\n{{Identical|Detail}}",
 	"wikibase-undeserializable-value": "Message to display for any data values that are invalid and cannot be deserialized.  The message is displayed in such places as when users view a diff.",
 	"wikibase-validator-invalid": "Generic input validation error shown when the input is invalid but no further information is provided by the validator.",
+	"wikibase-validator-missing-field": "Input validation error shown when a field is missing from the input.\n\nParameters:\n* $1 - the required field\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-bad-type": "Input validation error shown when the input has the wrong type.\n\nParameters:\n* $1 - the expected type\n* $2 - the actual type\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-too-long": "Input validation error shown when the input is too long. Parameters:\n* $1 - the maximum length\n* $2 - (Unused) the actual length\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-too-short": "Input validation error shown when the input is too short. Parameters:\n* $1 - the minimum length\n* $2 - (Unused) the actual length\n{{Related|Wikibase-validator}}",
