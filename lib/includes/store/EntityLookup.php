@@ -20,6 +20,10 @@ interface EntityLookup {
 	 * Returns the entity with the provided id or null if there is no such
 	 * entity.
 	 *
+	 * @note Implementations of this method may or may not resolve redirects.
+	 * Code that needs control over redirect resolution should use an
+	 * EntityRevisionLookup instead.
+	 *
 	 * @since 0.3
 	 *
 	 * @param EntityId $entityId
@@ -33,6 +37,10 @@ interface EntityLookup {
 	 * Returns whether the given entity can bee looked up using
 	 * getEntity(). This avoids loading and deserializing entity content
 	 * just to check whether the entity exists.
+	 *
+	 * @note Implementations of this method may or may not resolve redirects.
+	 * Code that needs control over redirect resolution should use an
+	 * EntityRevisionLookup instead.
 	 *
 	 * @since 0.4
 	 *
