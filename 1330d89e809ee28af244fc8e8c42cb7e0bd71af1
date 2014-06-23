@@ -16,6 +16,40 @@
       "revId": "1330d89e809ee28af244fc8e8c42cb7e0bd71af1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_5a1ea576",
+        "filename": "lib/tests/phpunit/Validators/NumberValidatorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-23T17:37:13Z",
+      "side": 1,
+      "message": "test should be split into two, instead of if ( !$result-\u003eisValid() )",
+      "revId": "1330d89e809ee28af244fc8e8c42cb7e0bd71af1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3a21a1ac",
+        "filename": "lib/tests/phpunit/Validators/NumberValidatorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-23T17:37:13Z",
+      "side": 1,
+      "message": "integer?",
+      "revId": "1330d89e809ee28af244fc8e8c42cb7e0bd71af1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
