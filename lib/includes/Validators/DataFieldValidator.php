@@ -4,12 +4,16 @@ namespace Wikibase\Validators;
 
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
+use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 
 /**
  * The DataFieldValidator class allows the validation of a single field of a complex
  * DataValues object based on the DataValue's array representation.
+ *
+ * If the respective field is missing or null, the validation will fail with
+ * the code 'missing-field'
  *
  * @since 0.4
  *
@@ -59,10 +63,14 @@ class DataFieldValidator implements ValueValidator {
 			throw new InvalidArgumentException( "DataValue is not represented as an array" );
 		}
 
-		if ( !array_key_exists( $this->field, $data ) ) {
-			//XXX: or should this just be reported as invalid?
-			throw new InvalidArgumentException( "DataValue's array representation does not "
-				. "contain the field " . $this->field );
+		if ( !isset( $data[$this->field] ) ) {
+			return Result::newError( array(
+				Error::newError( 'Required field ' . $this->field . ' not set',
+					$this->field,
+					'missing-field',
+					array( $this->field )
+				)
+			) );
 		}
 
 		$fieldValue = $data[$this->field];
