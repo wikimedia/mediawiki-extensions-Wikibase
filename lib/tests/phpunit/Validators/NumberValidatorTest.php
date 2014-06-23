@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Validators;
 
+use ValueValidators\Error;
 use Wikibase\Validators\NumberValidator;
 
 /**
@@ -38,6 +39,36 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $data;
+	}
+
+	/**
+	 * @dataProvider validateErrorProvider
+	 */
+	public function testValidateError( $value, $message ) {
+		$validator = new NumberValidator();
+		$result = $validator->validate( $value );
+		$errors = array( $this->newError( $value ) );
+
+		$this->assertEquals( $errors, $result->getErrors(), $message );
+	}
+
+	public function validateErrorProvider() {
+		$data = array(
+			array( false, 'boolean is invalid' ),
+			array( null, 'null is invalid' ),
+			array( '4.33', 'string is invalid' )
+		);
+
+		return $data;
+	}
+
+	private function newError( $value ) {
+		return Error::newError(
+			'Bad type, expected an integer or float value',
+			null,
+			'bad-type',
+			array( 'integer or float', gettype( $value ) )
+		);
 	}
 
 }
