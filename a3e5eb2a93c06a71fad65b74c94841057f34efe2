@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_ff4c2ba1",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-23T16:13:23Z",
+      "side": 1,
+      "message": "perhaps add a colon?\n\nMissing required field: $1",
+      "revId": "a3e5eb2a93c06a71fad65b74c94841057f34efe2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
