@@ -340,6 +340,18 @@ class MockRepository implements
 	}
 
 	/**
+	 * Puts a redirect into the mock repository. If there already is an entity with the same ID
+	 * in the mock repository, it is replaced with the redirect.
+	 *
+	 * @param EntityRedirect $redirect
+	 *
+	 * @return int
+	 */
+	public function putRedirect( EntityRedirect $redirect ) {
+		throw new \RuntimeException( 'not yet implemented' );
+	}
+
+	/**
 	 * Removes an entity from the mock repository.
 	 *
 	 * @param EntityId $id
