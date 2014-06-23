@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_24ece38d",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T21:41:40Z",
+      "side": 1,
+      "message": "Then it\u0027s a transmitter. Still a pointless dependency loop. All the newly introduced classes do is calling ...-\u003esave() on an object they get as a parameter. And this method is not even in the interface. I fail to see how this \"encapsulates\" anything.",
+      "parentUuid": "ee391fd1_b495aa44",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_793744ac",
         "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
         "patchSetId": 3
@@ -153,6 +171,24 @@
       "side": 1,
       "message": "\"MuteChangeNotificationChannel\"? As Jeroen points out, this is actually a tried and true design pattern that helps with avoiding complexity. Kind of like an anchor object does. I love anchor objects.",
       "parentUuid": "ee391fd1_39265c64",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_645d4b4a",
+        "filename": "repo/includes/Notifications/DummyChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-23T21:41:40Z",
+      "side": 1,
+      "message": "Search for \"dummy\" in the Wikipedia article.",
+      "parentUuid": "ee391fd1_f48a121b",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
