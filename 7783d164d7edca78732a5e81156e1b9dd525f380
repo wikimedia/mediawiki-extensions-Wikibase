@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_b495aa44",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T13:11:24Z",
+      "side": 1,
+      "message": "Because I want to recycle that name for the thing that actually builds the notification based on local events. The responsibility of the notifier is to know when a notification should be send, what kind of notification, what it should contain, and where that info should come from.\n\nThis \"channel\" class encapsulates the knowledge of *how* the notification is transmitted to the clients.",
+      "parentUuid": "ee391fd1_b9fa4cb4",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_793744ac",
         "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
         "patchSetId": 3
@@ -64,6 +82,24 @@
       "writtenOn": "2014-06-20T21:36:32Z",
       "side": 1,
       "message": "This is not better than the original class. This is not \"sending a notification\". Nor is this a \"channel\".\n\nI understand that the code is a bit better. It replaces the bool flag with subclasses. But still.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_548e7e34",
+        "filename": "repo/includes/Notifications/DatabaseChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T13:11:24Z",
+      "side": 1,
+      "message": "This is the same as the original class, except i replaced a behavior flag with an extra implementation of the interface.  The main point of this change however is renaming the class. The idea of abstracting the knowledge about how clients are notified of changes remains.",
+      "parentUuid": "ee391fd1_792ce445",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_f48a121b",
+        "filename": "repo/includes/Notifications/DummyChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T13:11:24Z",
+      "side": 1,
+      "message": "\"MuteChangeNotificationChannel\"? As Jeroen points out, this is actually a tried and true design pattern that helps with avoiding complexity. Kind of like an anchor object does. I love anchor objects.",
+      "parentUuid": "ee391fd1_39265c64",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_7933c45f",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
@@ -116,6 +170,24 @@
       "writtenOn": "2014-06-20T22:03:51Z",
       "side": 1,
       "message": "What will be using this method? You only need this for constructing a ChangeNotifier no? In that case, the factory does not need to provide access to it.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_d4814efe",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T13:11:24Z",
+      "side": 1,
+      "message": "True for now.",
+      "parentUuid": "ee391fd1_7933c45f",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -150,6 +222,24 @@
       "writtenOn": "2014-06-20T22:03:51Z",
       "side": 1,
       "message": "Null object pattern (or not far from it). This is not bad IMO",
+      "parentUuid": "ee391fd1_191dd814",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_34909a45",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T13:11:24Z",
+      "side": 1,
+      "message": "No, then all callers need to make an if/then/else check, instead of just sending to whatever channel they get.\n\nThink about it this way: why do we have /dev/null, if you could just provide no file name?",
       "parentUuid": "ee391fd1_191dd814",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
