@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_997c1fe4",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T11:33:57Z",
+      "side": 0,
+      "message": "um, isn\u0027t hte /s modifier needed? doesn\u0027t json allow line breaks between the key and value of a map?",
+      "revId": "ff0f2858e1db31cfd8e80b3419ec0003b733f9ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

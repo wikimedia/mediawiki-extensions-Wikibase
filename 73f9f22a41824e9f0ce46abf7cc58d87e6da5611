@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_3969b31d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T11:33:57Z",
+      "side": 1,
+      "message": "No, please don\u0027t do that. This would indicate that subclasses cannot override this to return a string. The general contract is that this *may* return a string or null. Callers must not rely on it always returning null, that\u0027s an implementation detail.\n\nI accidentally made this mistake with AbstractContent::getRedirectTarget, IIRC. It\u0027s annoying as hell.",
+      "revId": "73f9f22a41824e9f0ce46abf7cc58d87e6da5611",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
