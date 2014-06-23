@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_344e5a73",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T12:00:26Z",
+      "side": 1,
+      "message": "$makeSnippets, $enableSnippetMode, $beSnippy...",
+      "parentUuid": "ee391fd1_595c77f4",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_b4392acd",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-23T12:00:26Z",
+      "side": 1,
+      "message": "This doesn\u0027t really convey the intent of this option. Perhaps like this? \"Output a JSON snippet without square brackets at the start and end. Allows output to be combined more freely\".",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_d9486734",
         "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
         "patchSetId": 9
