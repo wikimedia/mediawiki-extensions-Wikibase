@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_bd8106ff",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-24T07:15:15Z",
+      "side": 1,
+      "message": "$id is an object. in_array is bound to apply some scary voodoo magic to compare it to the objects in $ids. Please convert everything to a string before comparing.",
+      "revId": "ae0f63c083e2f863256dab9a1cba277cbd7e451a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
