@@ -74,6 +74,7 @@
 	"wikibase-tooltip-error-details": "Podrobnosti",
 	"wikibase-undeserializable-value": "Hodnota je neplatná a nelze ji zobrazit.",
 	"wikibase-validator-invalid": "Neplatná hodnota",
+	"wikibase-validator-missing-field": "Chybí povinné pole „$1“",
 	"wikibase-validator-bad-type": "$2 namísto $1",
 	"wikibase-validator-too-long": "Nesmí být delší než {{PLURAL:$1|jeden znak|$1 znaky|$1 znaků}}",
 	"wikibase-validator-too-short": "Nesmí být kratší než {{PLURAL:$1|jeden znak|$1 znaky|$1 znaků}}",

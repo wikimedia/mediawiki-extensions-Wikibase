@@ -59,6 +59,8 @@
 	"wikibase-globedetails-globe": "글로브",
 	"wikibase-parse-error": "잘못된 값입니다.",
 	"wikibase-parse-error-coordinate": "좌표 값 형식이 잘못되었습니다.",
+	"wikibase-parse-error-quantity": "양 값이 잘못 설정되었습니다.",
+	"wikibase-parse-error-time": "시간 값이 잘못 설정되었습니다.",
 	"wikibase-replicationnote": "바뀐 내용이 모든 위키에 보이는데 시간이 걸릴 수 있음을 주의하세요.",
 	"wikibase-sitelinks-wikipedia": "이 항목을 가리키는 위키백과 문서",
 	"wikibase-sitelinks-sitename-columnheading": "언어",
@@ -70,6 +72,7 @@
 	"wikibase-tooltip-error-details": "자세한 사항",
 	"wikibase-undeserializable-value": "유효하지 않은 값이므로 표시할 수 없습니다.",
 	"wikibase-validator-invalid": "잘못된 값",
+	"wikibase-validator-missing-field": "필수 칸 '$1'이 없습니다.",
 	"wikibase-validator-bad-type": "$1 대신 $2",
 	"wikibase-validator-too-long": "{{PLURAL:$1|한 문자|$1 문자}}보다 더 길지 않아야 합니다",
 	"wikibase-validator-too-short": "{{PLURAL:$1|한 문자|$1 문자}} 이상이어야 합니다",
@@ -90,5 +93,7 @@
 	"wikibase-validator-not-allowed": "잘못된 값: $1",
 	"datatypes-type-wikibase-item": "항목",
 	"datatypes-type-commonsMedia": "공용 미디어 파일",
-	"version-wikibase": "위키베이스"
+	"version-wikibase": "위키베이스",
+	"wikibase-snakformatter-valuetype-mismatch": "값의 종류 \"$1\"이 속성의 종류 \"$2\"와 일치하지 않습니다.",
+	"wikibase-snakformatter-property-not-found": "속성 $1을 찾을 수 없으므로, 사용할 데이터타입을 결정할 수 없습니다."
 }

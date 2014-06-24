@@ -68,6 +68,7 @@
 	"wikibase-tooltip-error-details": "Подробно",
 	"wikibase-undeserializable-value": "Вредноста е неважечка и затоа не може да се прикаже.",
 	"wikibase-validator-invalid": "Неважечка вредност",
+	"wikibase-validator-missing-field": "Недостасува задолжителното поле „$1“",
 	"wikibase-validator-bad-type": "$2 наместо $1",
 	"wikibase-validator-too-long": "Не може да има повеќе од {{PLURAL:$1|еден знак|$1 знаци}}",
 	"wikibase-validator-too-short": "Мора да има барем {{PLURAL:$1|еден знак|$1 знаци}}",

@@ -82,6 +82,7 @@
 	"wikibase-tooltip-error-details": "Détails",
 	"wikibase-undeserializable-value": "La valeur n’est pas valide et ne peut pas être affichée.",
 	"wikibase-validator-invalid": "Valeur non valide",
+	"wikibase-validator-missing-field": "Champ obligatoire '$1' manquant",
 	"wikibase-validator-bad-type": "$2 au lieu de $1",
 	"wikibase-validator-too-long": "Ne doit pas dépasser {{PLURAL:$1|un caractère|$1 caractères}} de long",
 	"wikibase-validator-too-short": "Doit faire au moins {{PLURAL:$1|un caractère|$1 caractères}} de long",

@@ -69,6 +69,7 @@
 	"wikibase-tooltip-error-details": "פרטים",
 	"wikibase-undeserializable-value": "הערך אינו תקין ואינו יכול להיות מוצג.",
 	"wikibase-validator-invalid": "ערך בלתי־תקין",
+	"wikibase-validator-missing-field": "חסר השדה הדרוש \"$1\"",
 	"wikibase-validator-bad-type": "$2 במקום $1",
 	"wikibase-validator-too-long": "חייב להיות באורך של {{PLURAL:$1|תו אחד|$1 תווים}} לכל היותר",
 	"wikibase-validator-too-short": "חייב להיות באורך של {{PLURAL:$1|תו אחד|$1 תווים}} לכל הפחות",

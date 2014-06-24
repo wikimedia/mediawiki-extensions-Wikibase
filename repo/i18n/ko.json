@@ -87,6 +87,7 @@
 	"wikibase-error-constraint-violation-label": "\"$2\" {{PLURAL:$1|언어 코드}}에 \"$3\" {{PLURAL:$1|레이블}}에 대해 {{PLURAL:$1|제약}} 위반입니다.",
 	"wikibase-error-constraint-violation-description": "\"$2\" {{PLURAL:$1|언어 코드}}에 \"$3\" {{PLURAL:$1|설명}}에 대해 {{PLURAL:$1|제약}} 위반입니다.",
 	"wikibase-error-constraint-violation-aliases": "\"$2\" {{PLURAL:$1|언어 코드}}에 \"$3\" {{PLURAL:$1|별칭}}에 대해 {{PLURAL:$1|제약}} 위반입니다.",
+	"wikibase-validator-sitelink-conflict": "사이트링크 $1은 이미 항목 $2가 사용하고 있습니다.",
 	"wikibase-validator-label-conflict": "속성($3)은 이미 $2 언어 코드와 관련된 \"$1\" 레이블이 있습니다.",
 	"wikibase-validator-label-with-description-conflict": "항목($3)은 이미 같은 설명을 사용하는 $2 언어 코드와 관련된 \"$1\" 레이블이 있습니다.",
 	"wikibase-validator-label-no-entityid": "레이블은 유효한 항목 id가 아니어야 합니다.",

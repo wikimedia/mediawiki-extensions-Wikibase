@@ -74,6 +74,7 @@
 	"wikibase-tooltip-error-details": "Einzelheiten",
 	"wikibase-undeserializable-value": "Der Wert ist ungültig und kann nicht angezeigt werden.",
 	"wikibase-validator-invalid": "Ungültiger Wert",
+	"wikibase-validator-missing-field": "Das erforderliche Feld „$1“ fehlt",
 	"wikibase-validator-bad-type": "$2 anstatt von $1",
 	"wikibase-validator-too-long": "Darf nicht länger als {{PLURAL:$1|ein Zeichen|$1 Zeichen}} sein.",
 	"wikibase-validator-too-short": "Muss mindestens {{PLURAL:$1|ein Zeichen|$1 Zeichen}} lang sein",
