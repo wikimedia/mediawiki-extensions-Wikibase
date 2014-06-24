@@ -34,12 +34,8 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$changeTransmitter->expects( $this->exactly( $expectNotifications ) )
 			->method( 'transmitChange' );
 
-		$notifier = new ChangeNotifier(
-			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
-			array( $changeTransmitter )
-		);
-
-		return $notifier;
+		$changeFactory = WikibaseRepo::getDefaultInstance()->getEntityChangeFactory();
+		return new ChangeNotifier( $changeFactory, [ $changeTransmitter ] );
 	}
 
 	/**
@@ -48,10 +44,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @return ItemContent
 	 */
 	private function makeItemContent( ItemId $id ) {
-		$item = new Item( $id );
-
-		$content = ItemContent::newFromItem( $item );
-		return $content;
+		return ItemContent::newFromItem( new Item( $id ) );
 	}
 
 	/**
@@ -63,9 +56,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 */
 	protected function makeItemRedirectContent( ItemId $id, ItemId $target ) {
 		$title = Title::newFromText( $target->getSerialization() );
-		$redirect = new EntityRedirect( $id, $target );
-		$content = ItemContent::newFromRedirect( $redirect, $title );
-		return $content;
+		return ItemContent::newFromRedirect( new EntityRedirect( $id, $target ), $title );
 	}
 
 	/**
@@ -78,7 +69,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @return Revision
 	 */
 	private function makeRevision( Content $content, User $user, $revisionId, $timestamp, $parent_id = 0 ) {
-		$revision = new Revision( array(
+		return new Revision( [
 			'id' => $revisionId,
 			'page' => 7,
 			'content' => $content,
@@ -86,9 +77,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 			'user_text' => $user->getName(),
 			'timestamp' => $timestamp,
 			'parent_id' => $parent_id,
-		) );
-
-		return $revision;
+		] );
 	}
 
 	private function makeUser( $name ) {
