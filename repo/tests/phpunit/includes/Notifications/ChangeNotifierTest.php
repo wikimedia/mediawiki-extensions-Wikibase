@@ -13,9 +13,7 @@ use Wikibase\EntityChange;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Repo\Notifications\ChangeNotifier;
-use Wikibase\Repo\Notifications\DummyChangeNotificationChannel;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Notifications\NullChangeNotifier;
 
 /**
  * @covers Wikibase\Repo\Notifications\ChangeNotifier
@@ -32,10 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
 class ChangeNotifierTest extends \MediaWikiTestCase {
 
 	protected function getChangeNotifier() {
-		$notifier = new ChangeNotifier(
-			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
-			new DummyChangeNotificationChannel()
-		);
+		$notifier = new NullChangeNotifier();
 
 		return $notifier;
 	}

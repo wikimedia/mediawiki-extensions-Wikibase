@@ -10,7 +10,6 @@ use DatabaseUpdater;
 use DummyLinker;
 use HistoryPager;
 use Html;
-use InvalidArgumentException;
 use Language;
 use Linker;
 use LogEntryBase;
@@ -32,9 +31,8 @@ use Title;
 use User;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\Hook\OutputPageJsConfigHookHandler;
-use Wikibase\Repo\Notifications\ChangeNotifier;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\TextInjector;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -233,10 +231,7 @@ final class RepoHooks {
 			$entityRev = new EntityRevision( $newContent->getEntity(), $revision->getId(), $revision->getTimestamp() );
 			WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityUpdated( $entityRev );
 
-			$notifier = new ChangeNotifier(
-				WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
-				WikibaseRepo::getDefaultInstance()->getChangeNotificationChannel()
-			);
+			$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 
 			if ( $revision->getParentId() === null ) {
 				$notifier->notifyOnPageCreated( $revision );
@@ -286,10 +281,7 @@ final class RepoHooks {
 		// May be redundant in some cases. Take care not to cause infinite regress.
 		WikibaseRepo::getDefaultInstance()->getEntityStoreWatcher()->entityDeleted( $content->getEntityId() );
 
-		$notifier = new ChangeNotifier(
-			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
-			WikibaseRepo::getDefaultInstance()->getChangeNotificationChannel()
-		);
+		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 
 		$notifier->notifyOnPageDeleted( $content, $user, $logEntry->getTimestamp() );
 
@@ -336,10 +328,7 @@ final class RepoHooks {
 			$title->getArticleID()
 		);
 
-		$notifier = new ChangeNotifier(
-			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
-			WikibaseRepo::getDefaultInstance()->getChangeNotificationChannel()
-		);
+		$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
 
 		$rev = Revision::newFromId( $revId );
 		$userId = $rev->getUser();
@@ -1329,4 +1318,5 @@ final class RepoHooks {
 
 		return true;
 	}
+
 }
