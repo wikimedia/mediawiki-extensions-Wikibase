@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use StubObject;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
@@ -11,7 +12,7 @@ use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\Store\WikiPageEntityLookup;
+use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 
 /**
@@ -25,7 +26,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikipageEntityLookupTest extends EntityRevisionLookupTest {
+class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 	/**
 	 * @var EntityRevision[]
@@ -49,6 +50,7 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 	 * @return EntityRevisionLookup
 	 */
 	protected function newEntityRevisionLookup( array $entityRevisions ) {
+
 		// make sure all test entities are in the database.
 		/* @var EntityRevision $entityRev */
 		foreach ( $entityRevisions as $entityRev ) {
@@ -60,7 +62,7 @@ class WikipageEntityLookupTest extends EntityRevisionLookupTest {
 			}
 		}
 
-		return new WikiPageEntityLookup(
+		return new WikiPageEntityRevisionLookup(
 			$this->getEntityContentCodec(),
 			false
 		);

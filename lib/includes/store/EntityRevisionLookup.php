@@ -6,14 +6,14 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 
 /**
- * Contains methods for interaction with an entity store.
+ * Service interface for retrieving EntityRevisions from storage.
  *
  * @since 0.4
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-interface EntityRevisionLookup extends EntityLookup {
+interface EntityRevisionLookup {
 
 	/**
 	 * Returns the entity revision with the provided id or null if there is no such

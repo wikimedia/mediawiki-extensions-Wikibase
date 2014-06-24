@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Contains methods for interaction with an entity store.
+ * Service interface for retrieving Entities from storage.
  *
  * @since 0.3
  *
@@ -18,9 +18,7 @@ interface EntityLookup {
 
 	/**
 	 * Returns the entity with the provided id or null if there is no such
-	 * entity. If a $revision is given, the requested revision of the entity is loaded.
-	 * If that revision does not exist or does not belong to the given entity,
-	 * an exception is thrown.
+	 * entity.
 	 *
 	 * @since 0.3
 	 *

@@ -4,13 +4,12 @@ namespace Wikibase\Lib\Store;
 
 use DBQueryError;
 use MWContentSerializationException;
+use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityRevision;
 use Wikibase\StorageException;
-use Wikibase\UnresolvedRedirectException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -22,7 +21,7 @@ use Wikibase\UnresolvedRedirectException;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup {
+class WikiPageEntityRevisionLookup extends \DBAccessBase implements EntityRevisionLookup {
 
 	/**
 	 * @var EntityIdParser
@@ -48,20 +47,6 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		// TODO: migrate table away from using a numeric field so we no longer need this!
 		$this->idParser = new BasicEntityIdParser();
-	}
-
-	/**
-	 * @see EntityLookup::getEntity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return Entity|null
-	 *
-	 * @throw StorageException
-	 */
-	public function getEntity( EntityId $entityId ) {
-		$entityRev = $this->getEntityRevision( $entityId );
-		return $entityRev === null ? null : $entityRev->getEntity();
 	}
 
 	/**
@@ -123,21 +108,6 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 
 		wfProfileOut( __METHOD__ );
 		return $entityRev;
-	}
-
-	/**
-	 * @since 0.4
-	 * @see   EntityLookup::hasEntity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @return bool
-	 * @throws StorageException
-	 */
-	public function hasEntity( EntityId $entityId ) {
-		$row = $this->loadPageRow( $entityId );
-
-		return ( $row !== null );
 	}
 
 	/**
