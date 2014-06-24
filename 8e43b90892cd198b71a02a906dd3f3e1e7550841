@@ -33,6 +33,24 @@
       "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_12bd0ad2",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-24T15:35:57Z",
+      "side": 1,
+      "message": "That is not simpler, it\u0027s more complex (one more condition each time we need a ChangeNotifier). It may be more efficient, but it\u0027s not simpler, and it drags in knowledge we shouldn\u0027t have or care about here (whether or not someone cares about the notificatiohns). Here, we just have an event, and want to react to it.",
+      "parentUuid": "ee391fd1_f9c8d452",
+      "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
