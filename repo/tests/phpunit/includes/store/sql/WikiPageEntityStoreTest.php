@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
 use Wikibase\StorageException;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\WikiPageEntityLookup;
+use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 
 /**
  * @covers Wikibase\Lib\Store\WikiPageEntityStore
@@ -40,10 +40,10 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		// make sure the term index is empty to avoid conlficts.
 		WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex()->clear();
 
-		//NOTE: we want to test integration of WikiPageEntityLookup and WikiPageEntityStore here!
+		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
 		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
 
-		$lookup = new WikiPageEntityLookup( $contentCodec, false );
+		$lookup = new WikiPageEntityRevisionLookup( $contentCodec, false );
 
 		$typeMap = WikibaseRepo::getDefaultInstance()->getContentModelMappings();
 
@@ -461,8 +461,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$store->deleteEntity( $oneId, 'testing', $user );
 
 		// check that it's gone
-		$this->assertFalse( $lookup->hasEntity( $oneId ), 'hasEntity()' );
-		$this->assertNull( $lookup->getEntity( $oneId ), 'getEntityRevision()' );
+		$this->assertFalse( $lookup->getLatestRevisionId( $oneId ), 'getLatestRevisionId()' );
+		$this->assertNull( $lookup->getEntityRevision( $oneId ), 'getEntityRevision()' );
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();

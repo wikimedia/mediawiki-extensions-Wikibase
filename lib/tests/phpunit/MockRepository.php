@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use DatabaseBase;
-use PermissionsError;
 use Status;
 use User;
 use Wikibase\DataModel\Claim\Claims;
@@ -15,6 +14,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataModel\Entity\Item;
@@ -32,7 +32,14 @@ use Wikibase\Lib\Store\EntityStore;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class MockRepository implements SiteLinkLookup, EntityStore, EntityRevisionLookup, EntityInfoBuilder, PropertyDataTypeLookup {
+class MockRepository implements
+		SiteLinkLookup,
+		EntityStore,
+		EntityLookup,
+		EntityRevisionLookup,
+		EntityInfoBuilder,
+		PropertyDataTypeLookup
+{
 
 	/**
 	 * Entity id serialization => array of EntityRevision

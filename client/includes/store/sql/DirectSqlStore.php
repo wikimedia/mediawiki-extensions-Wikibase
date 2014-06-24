@@ -11,9 +11,10 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Lib\Store\WikiPageEntityLookup;
+use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 
 /**
  * Implementation of the client store interface using direct access to the repository's
@@ -207,7 +208,8 @@ class DirectSqlStore implements ClientStore {
 	 * @return EntityLookup
 	 */
 	public function getEntityLookup() {
-		return $this->getEntityRevisionLookup();
+		$lookup = $this->getEntityRevisionLookup();
+		return new RevisionBasedEntityLookup( $lookup );
 	}
 
 	/**
@@ -232,9 +234,9 @@ class DirectSqlStore implements ClientStore {
 	 */
 	protected function newEntityRevisionLookup() {
 		//NOTE: Keep in sync with SqlStore::newEntityLookup on the repo
-		$key = $this->cachePrefix . ':WikiPageEntityLookup';
+		$key = $this->cachePrefix . ':WikiPageEntityRevisionLookup';
 
-		$lookup = new WikiPageEntityLookup( $this->contentCodec, $this->repoWiki );
+		$lookup = new WikiPageEntityRevisionLookup( $this->contentCodec, $this->repoWiki );
 
 		// Lower caching layer using persistent cache (e.g. memcached).
 		// We need to verify the revision ID against the database to avoid stale data.
