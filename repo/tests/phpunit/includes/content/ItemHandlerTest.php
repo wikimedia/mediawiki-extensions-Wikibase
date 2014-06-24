@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\ItemContent;
 use Wikibase\ItemHandler;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -81,13 +82,16 @@ class ItemHandlerTest extends EntityHandlerTest {
 
 	/**
 	 * @param SettingsArray $settings
+	 * @param EntityContentDataCodec $codec
 	 *
 	 * @return ItemHandler
 	 */
-	protected function getHandler( SettingsArray $settings = null ) {
+	protected function getHandler(
+		SettingsArray $settings = null,
+		EntityContentDataCodec $codec = null
+	) {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
-		$codec = $repo->getEntityContentDataCodec();
 		$entityPerPage = $repo->getStore()->newEntityPerPage();
 		$termIndex = $repo->getStore()->getTermIndex();
 		$errorLocalizer = $repo->getValidatorErrorLocalizer();
@@ -95,6 +99,10 @@ class ItemHandlerTest extends EntityHandlerTest {
 
 		if ( !$settings ) {
 			$settings = $repo->getSettings();
+		}
+
+		if ( !$codec ) {
+			$codec = $repo->getEntityContentDataCodec();
 		}
 
 		$transformOnExport = $settings->getSetting( 'transformLegacyFormatOnExport' );
