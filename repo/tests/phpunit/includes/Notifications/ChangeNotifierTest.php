@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Repo\Notifications\ChangeNotifier;
+use Wikibase\Repo\Notifications\DatabaseChangeNotifier;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -32,12 +32,10 @@ use Wikibase\Repo\WikibaseRepo;
 class ChangeNotifierTest extends \MediaWikiTestCase {
 
 	private function getChangeNotifier() {
-		$notifier = new ChangeNotifier(
+		return new DatabaseChangeNotifier(
 			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
 			new DummyChangeTransmitter()
 		);
-
-		return $notifier;
 	}
 
 	/**
@@ -62,6 +60,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @param ItemId $id
 	 * @param ItemId $target
 	 *
+	 * @throws RuntimeException
 	 * @return EntityContent
 	 */
 	protected function makeItemRedirectContent( ItemId $id, ItemId $target ) {
