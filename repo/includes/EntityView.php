@@ -183,9 +183,12 @@ abstract class EntityView extends ContextSource {
 			$this->getInnerHtml( $entityRevision, $editable )
 		);
 
-		// show loading spinner as long as JavaScript is initialising;
-		// the fastest way to show the loading spinner is placing the script right after the
-		// corresponsing html
+		// Show loading spinner as long as JavaScript is initialising.
+		// The fastest way to show it is placing the script right after the corresponding HTML.
+		// Remove it after a while in any case (e.g. some resources might not have been loaded
+		// silently, so JavaScript is not initialising).
+		// Additionally attaching to window.error would only make sense before any other
+		// JavaScript is parsed.
 		$html .= Html::inlineScript( '
 $( ".wb-entity" ).addClass( "loading" ).after( function() {
 	var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
@@ -196,12 +199,6 @@ $( ".wb-entity" ).addClass( "loading" ).after( function() {
 	);
 	return $div;
 } );
-
-// Remove loading spinner after a couple of seconds in any case. (e.g. some resource
-// might not have been loaded silently, so JavaScript is not initialising)
-// Additionally attaching to window.error would only make sense before any other
-// JavaScript is parsed. Since the JavaScript is loaded in the header, it does not make
-// any sense to attach to window.error here.
 window.setTimeout( function() {
 	$( ".wb-entity" ).removeClass( "loading" );
 	$( ".wb-entity-spinner" ).remove();
