@@ -14,11 +14,6 @@ use SiteStore;
 use StubObject;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\ItemHandler;
-use Wikibase\PropertyHandler;
-use Wikibase\Repo\Notifications\ChangeNotifier;
-use Wikibase\Repo\Notifications\ChangeTransmitter;
-use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -26,14 +21,16 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityFactory;
+use Wikibase\EntityPermissionChecker;
+use Wikibase\EntityTitleLookup;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\EntityFactory;
+use Wikibase\ItemHandler;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
 use Wikibase\Lib\DispatchingValueFormatter;
@@ -50,15 +47,23 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\PropertyHandler;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
-use Wikibase\Repo\Notifications\DummyChangeTransmitter;
+use Wikibase\Repo\Notifications\ChangeNotifier;
+use Wikibase\Repo\Notifications\DatabaseChangeNotifier;
+use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
+use Wikibase\Repo\Notifications\NullChangeNotifier;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -245,7 +250,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\Lib\Store\EntityStoreWatcher
+	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher() {
 		return $this->getStore()->getEntityStoreWatcher();
@@ -254,7 +259,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\EntityTitleLookup
+	 * @return EntityTitleLookup
 	 */
 	public function getEntityTitleLookup() {
 		return $this->getEntityContentFactory();
@@ -265,7 +270,7 @@ class WikibaseRepo {
 	 *
 	 * @param string $uncached Flag string, set to 'uncached' to get an uncached direct lookup service.
 	 *
-	 * @return \Wikibase\Lib\Store\EntityRevisionLookup
+	 * @return EntityRevisionLookup
 	 */
 	public function getEntityRevisionLookup( $uncached = '' ) {
 		return $this->getStore()->getEntityRevisionLookup( $uncached );
@@ -274,7 +279,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\Lib\Store\EntityStore
+	 * @return EntityStore
 	 */
 	public function getEntityStore() {
 		return $this->getStore()->getEntityStore();
@@ -637,7 +642,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return \Wikibase\EntityPermissionChecker
+	 * @return EntityPermissionChecker
 	 */
 	public function getEntityPermissionChecker() {
 		return $this->getEntityContentFactory();
@@ -720,26 +725,17 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return ChangeTransmitter
-	 */
-	private function getChangeTransmitter() {
-		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
-			return new DatabaseChangeTransmitter();
-		} else {
-			return new DummyChangeTransmitter();
-		}
-	}
-
-	/**
 	 * @return ChangeNotifier
 	 */
 	public function getChangeNotifier() {
-		// TODO: Instead of having getChangeTransmitter return a dummy,
-		//       return a dummy from here if useChangesTable is not set.
-		return new ChangeNotifier(
-			$this->getEntityChangeFactory(),
-			$this->getChangeTransmitter()
-		);
+		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
+			return new DatabaseChangeNotifier(
+				$this->getEntityChangeFactory(),
+				new DatabaseChangeTransmitter()
+			);
+		} else {
+			return new NullChangeNotifier();
+		}
 	}
 
 	/**
