@@ -373,6 +373,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_72a576b1",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-24T15:40:13Z",
+      "side": 1,
+      "message": "Sure, but I first want to agree with Thiemo about how to go on with this.",
+      "parentUuid": "ae43a74e_f2ea86d6",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_191dd814",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
