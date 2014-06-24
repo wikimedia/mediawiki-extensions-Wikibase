@@ -170,4 +170,5 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$rev = $lookup->getEntityRevision( $id );
 		$this->assertNull( $rev, 'deletion should be detected after notification' );
 	}
+
 }

@@ -3,9 +3,10 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
@@ -17,7 +18,40 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-abstract class EntityRevisionLookupTest extends EntityLookupTest {
+abstract class EntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @note: not really needed for testing EntityLookup, mut makes it easier to
+	 * set up tests for EntityRevisionLookup implementation in a consistent way.
+	 *
+	 * @return EntityRevision[]
+	 */
+	protected function getTestRevisions() {
+		static $entities = null;
+
+		if ( $entities === null ) {
+			$item = Item::newEmpty();
+			$item->setId( 42 );
+
+			$entities[11] = new EntityRevision( $item, 11, '20130101001100' );
+
+			$item = $item->copy();
+			$item->setLabel( 'en', "Foo" );
+
+			$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
+
+			$prop = Property::newFromType( "string" );
+			$prop->setId( 753 );
+
+			$entities[13] = new EntityRevision( $prop, 13, '20130101001300' );
+		}
+
+		return $entities;
+	}
+
+	protected function resolveLogicalRevision( $revision ) {
+		return $revision;
+	}
 
 	/**
 	 * @return EntityRevisionLookup
@@ -35,15 +69,6 @@ abstract class EntityRevisionLookupTest extends EntityLookupTest {
 	 * @return EntityRevisionLookup
 	 */
 	protected abstract function newEntityRevisionLookup( array $entityRevisions );
-
-	/**
-	 * @param EntityRevision[] $entities
-	 *
-	 * @return EntityLookup
-	 */
-	protected function newEntityLookup( array $entities ) {
-		return $this->newEntityRevisionLookup( $entities );
-	}
 
 	public static function provideGetEntityRevision() {
 		$cases = array(
@@ -94,16 +119,8 @@ abstract class EntityRevisionLookupTest extends EntityLookupTest {
 		if ( $shouldExist == true ) {
 			$this->assertNotNull( $entityRev, "ID " . $id->__toString() );
 			$this->assertEquals( $id->__toString(), $entityRev->getEntity()->getId()->__toString() );
-
-			$has = $lookup->hasEntity( $id );
-			$this->assertTrue( $has, 'hasEntity' );
 		} else {
 			$this->assertNull( $entityRev, "ID " . $id->__toString() );
-
-			if ( $revision == 0 ) {
-				$has = $lookup->hasEntity( $id );
-				$this->assertFalse( $has, 'hasEntity' );
-			}
 		}
 	}
 
