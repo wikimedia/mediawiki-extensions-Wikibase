@@ -34,6 +34,24 @@
       "revId": "a16ee5255b9f93877b9c4642b168956d552dc316",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_dd996a72",
+        "filename": "repo/tests/phpunit/includes/content/EntityHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-24T07:20:10Z",
+      "side": 1,
+      "message": "Yes, sure - I was referring to actually comparing the json. That\u0027s redundant. Asserting that the serializer is never called is definitly good. Hence +2, not -1 :)",
+      "parentUuid": "ee391fd1_5ffd7703",
+      "revId": "a16ee5255b9f93877b9c4642b168956d552dc316",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
