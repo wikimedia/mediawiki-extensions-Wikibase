@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_5d77bafd",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-24T08:07:41Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "ee391fd1_590c80f0",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_b9fa4cb4",
         "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
         "patchSetId": 3
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_7d7cbee2",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-24T08:07:41Z",
+      "side": 1,
+      "message": "not all notifications involve saving, so that doesn\u0027t belong in the interface.\n\nto me, this seems the right level of abstraction to allow various implementations.",
+      "parentUuid": "ee391fd1_24ece38d",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_793744ac",
         "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
         "patchSetId": 3
@@ -83,6 +119,24 @@
       "writtenOn": "2014-06-20T21:36:32Z",
       "side": 1,
       "message": "Gerrit complaints about whitespace.",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_3d66364f",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-24T08:07:41Z",
+      "side": 1,
+      "message": "eek ;)",
+      "parentUuid": "ee391fd1_793744ac",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +243,24 @@
       "side": 1,
       "message": "Search for \"dummy\" in the Wikipedia article.",
       "parentUuid": "ee391fd1_f48a121b",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9d264210",
+        "filename": "repo/includes/Notifications/DummyChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-24T08:07:41Z",
+      "side": 1,
+      "message": "NullChangeNotificationChannel?",
+      "parentUuid": "ee391fd1_645d4b4a",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
