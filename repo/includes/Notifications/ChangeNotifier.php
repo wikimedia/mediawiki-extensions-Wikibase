@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use Hooks;
 use InvalidArgumentException;
 use Revision;
 use User;
@@ -64,13 +63,11 @@ class ChangeNotifier {
 		}
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
-
 		$change->setTimestamp( $timestamp );
 		$change->setMetadataFromUser( $user );
 
 		$this->transmitChange( $change );
 
-		Hooks::run( 'WikibaseChange', array( $change ) );
 		return $change;
 	}
 
@@ -102,7 +99,6 @@ class ChangeNotifier {
 
 		$this->transmitChange( $change );
 
-		Hooks::run( 'WikibaseChange', array( $change ) );
 		return $change;
 	}
 
@@ -127,7 +123,6 @@ class ChangeNotifier {
 		}
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
-
 		$change->setRevisionInfo( $revision );
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!

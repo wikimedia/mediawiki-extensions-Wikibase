@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\Repo;
+namespace Wikibase\Repo\Tests\Notifications;
 
 use Content;
 use Revision;
@@ -34,12 +34,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$changeTransmitter->expects( $this->exactly( $expectNotifications ) )
 			->method( 'transmitChange' );
 
-		$notifier = new ChangeNotifier(
+		return new ChangeNotifier(
 			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
 			array( $changeTransmitter )
 		);
-
-		return $notifier;
 	}
 
 	/**
