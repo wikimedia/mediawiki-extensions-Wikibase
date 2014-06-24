@@ -12,6 +12,7 @@ use MWContentSerializationException;
 use ParserOptions;
 use RequestContext;
 use Revision;
+use Status;
 use Title;
 use User;
 use ValueValidators\Result;
@@ -22,7 +23,7 @@ use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
- * Base handler class for Wikibase\Entity content classes.
+ * Base handler class for Wikibase\DataModel\Entity\Entity content classes.
  *
  * @since 0.1
  *
@@ -31,16 +32,6 @@ use Wikibase\Validators\ValidatorErrorLocalizer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class EntityHandler extends ContentHandler {
-
-	/**
-	 * @var EntityValidator[]
-	 */
-	protected $preSaveValidators;
-
-	/**
-	 * @var EntityContentDataCodec
-	 */
-	protected $contentCodec;
 
 	/**
 	 * @var EntityPerPage
@@ -53,12 +44,22 @@ abstract class EntityHandler extends ContentHandler {
 	private $termIndex;
 
 	/**
+	 * @var EntityContentDataCodec
+	 */
+	protected $contentCodec;
+
+	/**
+	 * @var EntityValidator[]
+	 */
+	protected $preSaveValidators;
+
+	/**
 	 * @var ValidatorErrorLocalizer
 	 */
 	private $errorLocalizer;
 
 	/**
-	 * @var
+	 * @var bool If legacy serializations should be transformed on export.
 	 */
 	private $transformOnExport;
 
@@ -69,7 +70,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
-	 * @param bool $transformOnExport
+	 * @param bool $transformOnExport If legacy serializations should be transformed on export.
 	 */
 	public function __construct(
 		$modelId,
@@ -84,10 +85,10 @@ abstract class EntityHandler extends ContentHandler {
 
 		parent::__construct( $modelId, $formats );
 
-		$this->contentCodec = $contentCodec;
-		$this->preSaveValidators = $preSaveValidators;
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
+		$this->contentCodec = $contentCodec;
+		$this->preSaveValidators = $preSaveValidators;
 		$this->errorLocalizer = $errorLocalizer;
 		$this->transformOnExport = $transformOnExport;
 	}
@@ -117,7 +118,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @param EntityContent $content
 	 *
-	 * @return \Status
+	 * @return Status
 	 */
 	public function applyOnSaveValidators( EntityContent $content ) {
 		$entity = $content->getEntity();
@@ -156,19 +157,19 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.5
 	 *
-	 * @param \Title $title
-	 * @param string $text
+	 * @param Title $destination
+	 * @param string $text Unused in this default implementation.
 	 *
 	 * @return EntityContent|null
 	 */
-	public function makeRedirectContent( Title $title, $text = '' ) {
+	public function makeRedirectContent( Title $destination, $text = '' ) {
 		$contentClass = $this->getContentClass();
 
 		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
-			// For now, we only support redirects in experimental mode.E
+			// For now, we only support redirects in experimental mode.
 			return null;
 		} elseif ( method_exists( $contentClass, 'newRedirect' ) ) {
-			return $contentClass::newRedirect( $title );
+			return $contentClass::newRedirect( $destination );
 		} else {
 			return null;
 		}
@@ -233,11 +234,7 @@ abstract class EntityHandler extends ContentHandler {
 	protected function isBlobUsingLegacyFormat( $blob, $format ) {
 		// The legacy serialization uses something like "entity":["item",21] or
 		// even "entity":"p21" for the entity ID.
-		if ( preg_match( '/"entity"\s*:/s', $blob ) > 0 ) {
-			return true;
-		}
-
-		return false;
+		return preg_match( '/"entity"\s*:/', $blob ) > 0;
 	}
 
 	/**
@@ -272,8 +269,8 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	public function serializeContent( Content $content, $format = null ) {
-		if ( ! $content instanceof EntityContent ) {
-			throw new \InvalidArgumentException( '$content must be an instance of EntityContent' );
+		if ( !($content instanceof EntityContent) ) {
+			throw new InvalidArgumentException( '$content must be an instance of EntityContent' );
 		}
 
 		$entity = $content->getEntity();
@@ -322,7 +319,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @param EntityId $id
 	 *
-	 * @throws \InvalidArgumentException if $id refers to an entity of the wrong type.
+	 * @throws InvalidArgumentException if $id refers to an entity of the wrong type.
 	 * @return Title $target
 	 */
 	public function getTitleForId( EntityId $id ) {
@@ -340,7 +337,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	final public function getEntityNamespace() {
 		return NamespaceUtils::getEntityNamespace( $this->getModelID() );
@@ -376,7 +373,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @return bool true
+	 * @return bool Always true in this default implementation.
 	 */
 	public function isParserCacheSupported() {
 		return true;
@@ -427,7 +424,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.2
 	 *
-	 * @return string|null
+	 * @return string|null Always null in this default implementation.
 	 */
 	public function getSpecialPageForCreation() {
 		return null;
@@ -463,14 +460,14 @@ abstract class EntityHandler extends ContentHandler {
 	) {
 		/**
 		 * @var EntityContent $latestContent
-		 * @var EntityContent $olderContent
 		 * @var EntityContent $newerContent
+		 * @var EntityContent $olderContent
 		 */
-		$olderContent = $olderRevision->getContent();
-		$newerContent = $newerRevision->getContent();
 		$latestContent = $latestRevision->getContent();
+		$newerContent = $newerRevision->getContent();
+		$olderContent = $olderRevision->getContent();
 
-		if ( $newerRevision->getId() === $latestRevision->getId() ) {
+		if ( $latestRevision->getId() === $newerRevision->getId() ) {
 			// no patching needed, just roll back
 			return $olderContent;
 		}
@@ -519,7 +516,8 @@ abstract class EntityHandler extends ContentHandler {
 		$updates[] = new DataUpdateClosure(
 			'wfRunHooks',
 			'WikibaseEntityDeletionUpdate',
-			array( $content, $title ) );
+			array( $content, $title )
+		);
 
 		// Unregister the entity from the terms table.
 		$updates[] = new DataUpdateClosure(
