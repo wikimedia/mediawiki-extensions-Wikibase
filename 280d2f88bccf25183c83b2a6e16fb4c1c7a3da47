@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3e1bb9_d00bfc24",
+        "filename": "repo/includes/Notifications/DatabaseChangeNotifier.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-24T09:46:05Z",
+      "side": 1,
+      "message": "Only one line in this class has anything to do with the database: $change-\u003esave(). If we want to use a different method of notification, we would do what - subclass this? Have a RedisChangeNotifier, that is (derives from) a DatabaseChangeNotifier? That doesn\u0027t make any sense to me.",
+      "revId": "280d2f88bccf25183c83b2a6e16fb4c1c7a3da47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
