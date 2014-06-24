@@ -338,6 +338,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_f2ea86d6",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-24T15:31:54Z",
+      "side": 1,
+      "message": "Well then change it?",
+      "parentUuid": "ee391fd1_d4814efe",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_191dd814",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
@@ -385,6 +403,24 @@
       "side": 1,
       "message": "No, then all callers need to make an if/then/else check, instead of just sending to whatever channel they get.\n\nThink about it this way: why do we have /dev/null, if you could just provide no file name?",
       "parentUuid": "ee391fd1_191dd814",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_12e62a14",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-24T15:31:54Z",
+      "side": 1,
+      "message": "\u003e why do we have /dev/null\n\nTo make jokes about MongoDB",
+      "parentUuid": "ee391fd1_34909a45",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
