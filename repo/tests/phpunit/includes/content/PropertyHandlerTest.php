@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Title;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityHandler;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyHandler;
 use Wikibase\Repo\WikibaseRepo;
@@ -74,14 +73,15 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	}
 
 	protected function newEntity() {
-		return Property::newFromType( 'string' );
+		$property = Property::newFromType( 'string' );
+		$property->setId( new PropertyId( 'P7' ) );
+		return $property;
 	}
-
 
 	/**
 	 * @param SettingsArray $settings
 	 *
-	 * @return EntityHandler
+	 * @return PropertyHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
 		$repo = WikibaseRepo::getDefaultInstance();
