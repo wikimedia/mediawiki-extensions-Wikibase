@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_fd49ce90",
+        "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-24T08:50:37Z",
+      "side": 1,
+      "message": "Ok, fine, transmitter.\n\nThe fact that save isn\u0027t in the interface of Change... well, EntityChange is implemented as a smart ORM object. That just sucks.\n\nThis is not really a new class or a new abstraction. It\u0027s just a renamed and cleaned up version of the old ChangeNotifier. It\u0027s not intended to do anything new or special.",
+      "parentUuid": "ee391fd1_24ece38d",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_793744ac",
         "filename": "repo/includes/Notifications/ChangeNotificationChannel.php",
         "patchSetId": 3
@@ -260,6 +278,24 @@
       "writtenOn": "2014-06-24T08:07:41Z",
       "side": 1,
       "message": "NullChangeNotificationChannel?",
+      "parentUuid": "ee391fd1_645d4b4a",
+      "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_bd634609",
+        "filename": "repo/includes/Notifications/DummyChangeNotificationChannel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-24T08:50:37Z",
+      "side": 1,
+      "message": "According to Webster, a dummy is \"an imitation, copy, or likeness of something used as a substitute\". Seems appropriate. But I don\u0027t care about the name at all. Suggest one.\n\nThe point remains: \"empty\" implementations can help to avoid complexity.",
       "parentUuid": "ee391fd1_645d4b4a",
       "revId": "7783d164d7edca78732a5e81156e1b9dd525f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
