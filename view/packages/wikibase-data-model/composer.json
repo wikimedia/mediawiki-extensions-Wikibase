@@ -1,0 +1,37 @@
+{
+	 "name": "wikibase/data-model-javascript",
+	 "description": "Wikibase datamodel implementation in JavaScript",
+	 "require": {
+		  "data-values/javascript": "~0.5.0"
+	 },
+	 "license": "GPL-2.0+",
+	 "authors": [
+			{
+				"name": "Daniel Werner",
+				"homepage": "https://www.mediawiki.org/wiki/User:Danwe"
+			},
+			{
+				"name": "H. Snater",
+				"homepage": "http://www.snater.com"
+			},
+			{
+				"name": "Jeroen De Dauw",
+				"email": "jeroendedauw@gmail.com",
+				"homepage": "http://jeroendedauw.com"
+			},
+			{
+				"name": "Adrian Lang",
+				"email": "adrian.lang@wikimedia.de"
+			}
+	 ],
+	 "minimum-stability": "dev",
+		"support": {
+			"issues": "https://bugzilla.wikimedia.org/",
+			"irc": "irc://irc.freenode.net/wikidata"
+		},
+		"autoload": {
+			"files" : [
+				"init.mw.php"
+			]
+		}
+}
