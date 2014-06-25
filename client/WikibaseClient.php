@@ -101,8 +101,8 @@ call_user_func( function() {
 	$wgHooks['SkinBuildSidebar'][]              = '\Wikibase\ClientHooks::onSkinBuildSidebar';
 	$wgHooks['SpecialMovepageAfterMove'][]				= '\Wikibase\ClientHooks::onSpecialMovepageAfterMove';
 	$wgHooks['SpecialWatchlistQuery'][]			= '\Wikibase\ClientHooks::onSpecialWatchlistQuery';
-	$wgHooks['SpecialRecentChangesQuery'][]				= '\Wikibase\ClientHooks::onSpecialRecentChangesQuery';
-	$wgHooks['SpecialRecentChangesFilters'][]			= '\Wikibase\ClientHooks::onSpecialRecentChangesFilters';
+	$wgHooks['ChangesListSpecialPageQuery'][]				= '\Wikibase\ClientHooks::onChangesListSpecialPageQuery';
+	$wgHooks['ChangesListSpecialPageFilters'][]			= '\Wikibase\ClientHooks::onChangesListSpecialPageFilters';
 	$wgHooks['GetPreferences'][]						= '\Wikibase\ClientHooks::onGetPreferences';
 	$wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
 	$wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplayAddJsConfig';
