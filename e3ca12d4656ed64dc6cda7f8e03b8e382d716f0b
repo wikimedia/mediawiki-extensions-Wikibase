@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_110f3f35",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T13:34:16Z",
+      "side": 1,
+      "message": "Will this cause an extra db query on every request?",
+      "revId": "e3ca12d4656ed64dc6cda7f8e03b8e382d716f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
