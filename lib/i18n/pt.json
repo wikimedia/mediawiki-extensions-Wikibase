@@ -76,6 +76,7 @@
 	"wikibase-tooltip-error-details": "Detalhes",
 	"wikibase-undeserializable-value": "Este valor é inválido e não pode ser exibido.",
 	"wikibase-validator-invalid": "Valor inválido",
+	"wikibase-validator-missing-field": "Campo obrigatório em falta '$1'",
 	"wikibase-validator-bad-type": "$2 invés de $1",
 	"wikibase-validator-too-long": "Não pode ter mais que {{PLURAL:$1|um carácter|$1 caracteres}} de comprimento",
 	"wikibase-validator-too-short": "Deve ter pelo menos {{PLURAL:$1|um carácter|$1 caracteres}} de comprimento",

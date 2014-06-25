@@ -69,6 +69,7 @@
 	"wikibase-tooltip-error-details": "Dettagli",
 	"wikibase-undeserializable-value": "Il valore non è valido e non può essere visualizzato.",
 	"wikibase-validator-invalid": "Valore non valido",
+	"wikibase-validator-missing-field": "Campo obbligatorio mancante \"$1\"",
 	"wikibase-validator-bad-type": "$2 anziché $1",
 	"wikibase-validator-too-long": "Non deve essere più lunga di {{PLURAL:$1|un carattere|$1 caratteri}}",
 	"wikibase-validator-too-short": "Deve essere lunga almeno {{PLURAL:$1|un carattere|$1 caratteri}}",

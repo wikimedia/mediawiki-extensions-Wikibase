@@ -119,7 +119,7 @@ $specialPageAliases['de'] = array(
 	'EntitiesWithoutLabel' => array( 'Objekte_ohne_Bezeichnung' ),
 	'EntitiesWithoutDescription' => array( 'Objekte_ohne_Beschreibung' ),
 	'ItemsWithoutSitelinks' => array( 'Objekte_ohne_Websitelinks' ),
-	'MyLanguageFallbackChain' => array( 'Meine_Sprachfallbackkette' ),
+	'MyLanguageFallbackChain' => array( 'Meine_Alternativsprachenabfolge' ),
 );
 
 /** Zazaki (Zazaki) */

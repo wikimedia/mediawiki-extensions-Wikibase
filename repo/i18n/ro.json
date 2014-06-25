@@ -3,7 +3,8 @@
 		"authors": [
 			"Minisarm",
 			"Rsocol",
-			"Stelistcristi"
+			"Stelistcristi",
+			"Danutz"
 		]
 	},
 	"wikibase-desc": "Depozit de date structurate",
@@ -62,8 +63,6 @@
 	"wikibase-snakview-variations-somevalue-label": "valoare necunoscută",
 	"wikibase-snakview-variations-novalue-label": "nici o valoare",
 	"wikibase-snakview-snaktypeselector-value": "valoare specificată",
-	"wikibase-snakview-snaktypeselector-somevalue": "valoare necunoscută",
-	"wikibase-snakview-snaktypeselector-novalue": "nici o valoare",
 	"wikibase-shortcopyrightwarning": "Apăsând butonul „$1”, sunteți de acord cu [[$2|termenii și condițiile de utilizare]] și eliberați irevocabil contribuția dumneavoastră sub $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Accept acești termeni pentru modificările mele viitoare. Nu se mai afișează acest mesaj din nou.",
 	"wikibase-entityselector-more": "mai multe",
@@ -71,8 +70,8 @@
 	"wikibase-restrictionedit-tooltip-message": "Această pagină este protejată. Editarea nu este permisă.",
 	"wikibase-blockeduser-tooltip-message": "Nu aveți permisiunea de a modifica întrucât numele dumneavoastră de utilizator sau adresa IP v-a fost blocat(ă).",
 	"wikibase-warning-constraint-violation-length": "O limitare de lungime a fost declanșată pentru codul de limbă „$1”.",
-	"wikibase-error-label-not-unique-wikibase-property": "O altă proprietate ($3) are deja eticheta „$1” asociată cu codul de limbă $2.",
-	"wikibase-error-label-no-entityid": "Eticheta nu trebuie să fie un ID de entitate valid.",
+	"wikibase-validator-label-conflict": "O altă proprietate ($3) are deja eticheta „$1” asociată cu codul de limbă $2.",
+	"wikibase-validator-label-no-entityid": "Eticheta nu trebuie să fie un ID de entitate valid.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Identificatorul de limbă „$1” nu este cunoscut. Utilizați un identificator de limbă recunoscut de sistem, cum ar fi „en”.",
 	"wikibase-wikibaserepopage-invalid-id": "ID-ul „$1” nu este recunoscut de sistem. Utilizați un ID de entitate valid.",
 	"special-itembytitle": "Element după titlu",
@@ -108,7 +107,7 @@
 	"wikibase-newitem-not-recognized-siteid": "Identificatorul de site furnizat nu a fost recunoscut.",
 	"wikibase-newentity-label": "Etichetă:",
 	"wikibase-newentity-description": "Descriere:",
-	"wikibase-newentity-submit": "Creează",
+	"wikibase-newentity-submit": "Creare",
 	"special-setlabel": "Creare etichetă",
 	"wikibase-setlabel-introfull": "Sunteți pe cale să definiți o etichetă în $2 pentru [[$1]].",
 	"wikibase-setlabel-intro": "Acest formular vă permite să definiți eticheta unei entități. Trebuie să furnizați identificatorul entității (de ex. Q23), un cod de limbă (de ex. „en”) și eticheta de definit.",
