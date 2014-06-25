@@ -214,7 +214,7 @@ final class ClientHooks {
 
 	/**
 	 * Hook for modifying the query for fetching recent changes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesQuery
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageQuery
 	 *
 	 * @since 0.2
 	 *
@@ -227,7 +227,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables,
+	public static function onChangesListSpecialPageQuery( array &$conds, array &$tables,
 		array &$join_conds, FormOptions $opts, array &$query_options, array &$fields
 	) {
 		wfProfileIn( __METHOD__ );
@@ -648,7 +648,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialRecentChangesFilters( SpecialRecentChanges $special, array &$filters ) {
+	public static function onChangesListSpecialPageFilters( SpecialRecentChanges $special, array &$filters ) {
 		$context = $special->getContext();
 
 		if ( $context->getRequest()->getBool( 'enhanced', $context->getUser()->getOption( 'usenewrc' ) ) === false ) {
