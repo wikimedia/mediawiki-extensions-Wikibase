@@ -53,12 +53,16 @@
 		 * @param {jQuery} $extender
 		 */
 		init: function( $extender ) {
-			this.$selector.suggester( {
-				source: $.map( this._languagesMap, function( language ) {
-					return language;
-				} ),
-				change: this._onValueChange
-			} );
+			if( this._languagesMap ) {
+				this.$selector.suggester( {
+					source: $.map( this._languagesMap, function( language ) {
+						return language;
+					} ),
+					change: this._onValueChange
+				} );
+			} else {
+				this.$selector.on( 'eachchange', this._onValueChange );
+			}
 			$extender
 				.append( $( '<span />' ).text( this._messageProvider.getMessage( this._prefix + '-label' ) ) )
 				.append( this.$selector );
@@ -68,7 +72,11 @@
 		 * Callback for the onInitialShow ExpertExtender event
 		 */
 		onInitialShow: function() {
-			this.$selector.val( this._languagesMap[ this._getUpstreamValue() ] );
+			var value = this._getUpstreamValue();
+			if( this._languagesMap ) {
+				value = this._languagesMap[ this._getUpstreamValue() ];
+			}
+			this.$selector.val( value );
 		},
 
 		/**
@@ -89,13 +97,17 @@
 		 * @return {string|null} The current value
 		 */
 		getValue: function() {
-			return this._inverseLanguagesMap[ this.$selector.val() ];
+			return this._inverseLanguagesMap ? this._inverseLanguagesMap[ this.$selector.val() ] : this.$selector.val();
 		},
 	} );
 
 	function getLanguagesMaps( getMsg ) {
 		var languagesMap = {};
 		var inverseLanguagesMap = {};
+		if( !uls ) {
+			return [];
+		}
+
 		$.each( uls.data.languages, function( key, language ) {
 			var str;
 			if( !language[2] ) {
