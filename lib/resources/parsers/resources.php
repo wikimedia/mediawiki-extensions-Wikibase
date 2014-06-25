@@ -50,60 +50,17 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.GlobeCoordinateParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'GlobeCoordinateParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueParser',
-			),
-		),
-
-		'wikibase.QuantityParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'QuantityParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueParser',
-			),
-		),
-
-		'wikibase.TimeParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'TimeParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueParser',
-			),
-		),
-
-		'wikibase.MonolingualTextParser' => $moduleTemplate + array(
-			'scripts' => array(
-				'MonolingualTextParser.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.ApiBasedValueParser',
-			),
-		),
-
 		'wikibase.parsers' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.parsers.js',
 			),
 			'dependencies' => array(
 				'dataValues.values',
+				'jquery',
 				'valueParsers.parsers',
 				'valueParsers.ValueParserStore',
 				'wikibase.datamodel',
-				'wikibase.EntityIdParser',
-				'wikibase.GlobeCoordinateParser',
-				'wikibase.QuantityParser',
-				'wikibase.TimeParser',
-				'wikibase.MonolingualTextParser',
+				'wikibase.EntityIdParser'
 			),
 		),
 
