@@ -16,6 +16,24 @@
       "revId": "e3ca12d4656ed64dc6cda7f8e03b8e382d716f0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_b1b9932b",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2014-06-25T13:50:20Z",
+      "side": 1,
+      "message": "This setting is only used on page rendering. So, if there is an extra query, it\u0027ll be only when a page is rendered.",
+      "parentUuid": "ae43a74e_110f3f35",
+      "revId": "e3ca12d4656ed64dc6cda7f8e03b8e382d716f0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
