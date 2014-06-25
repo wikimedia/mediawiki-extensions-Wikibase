@@ -51,6 +51,40 @@
       "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_ecbf42a6",
+        "filename": "repo/tests/phpunit/includes/Notifications/ChangeNotifierTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T16:29:20Z",
+      "side": 1,
+      "message": "Why protected?",
+      "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_0cc3a63e",
+        "filename": "repo/tests/phpunit/includes/Notifications/ChangeNotifierTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T16:29:20Z",
+      "side": 1,
+      "message": "6 arguments? \"assertChange\"?",
+      "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
