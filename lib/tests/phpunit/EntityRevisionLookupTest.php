@@ -113,9 +113,6 @@ abstract class EntityRevisionLookupTest extends EntityLookupTest {
 				new ItemId( 'q42' ), 12,
 			),
 			array( // #1
-				new ItemId( 'q753' ), false,
-			),
-			array( // #2
 				new PropertyId( 'p753' ), 13,
 			),
 		);
@@ -135,15 +132,24 @@ abstract class EntityRevisionLookupTest extends EntityLookupTest {
 
 		$expected = $this->resolveLogicalRevision( $expected );
 
+		$this->assertInternalType( 'int', $result );
 		$this->assertEquals( $expected, $result );
 
 		$entityRev = $lookup->getEntityRevision( $id );
+		$this->assertInstanceOf( 'Wikibase\EntityRevision', $entityRev );
+	}
 
-		if ( $expected ) {
-			$this->assertInstanceOf( 'Wikibase\EntityRevision', $entityRev );
-		} else {
-			$this->assertNull( $entityRev );
-		}
+	public function testGetLatestRevisionForMissing() {
+		$lookup = $this->getEntityRevisionLookup();
+		$itemId = new ItemId( 'Q753' );
+
+		$result = $lookup->getLatestRevisionId( $itemId );
+		$expected = $this->resolveLogicalRevision( false );
+
+		$this->assertEquals( $expected, $result );
+
+		$entityRev = $lookup->getEntityRevision( $itemId );
+		$this->assertNull( $entityRev );
 	}
 
 }
