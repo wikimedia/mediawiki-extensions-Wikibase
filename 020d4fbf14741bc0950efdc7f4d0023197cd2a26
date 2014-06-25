@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_cc5a3e22",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T15:57:15Z",
+      "side": 1,
+      "message": "Should be split up. Just look at the comments or NPath",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_ac9ffab8",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T15:57:15Z",
+      "side": 1,
+      "message": "Introducing these vars in the scope while this is not needed contributes to this method being on the scary side complexity wise.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_4cae4ee6",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T15:57:15Z",
+      "side": 1,
+      "message": "How about putting the diffing and patching stuff in dedicated service objects? This is adding quite some complexity and dependencies to EntityContent.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
