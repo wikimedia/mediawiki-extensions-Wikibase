@@ -586,7 +586,7 @@
 	 */
 	function flipPosition( position ) {
 		function flipOrientation( orientation ) {
-			if( /right/i.match( orientation ) ) {
+			if( /right/i.test( orientation ) ) {
 				return orientation.replace( /right/i, 'left' );
 			} else {
 				return orientation.replace( /left/i, 'right' );
