@@ -110,17 +110,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.serialization.fetchedcontent' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.serialization/serialization.FetchedContentUnserializer.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.serialization',
-				'wikibase.store.FetchedContent',
-			)
-		),
-
 		'wikibase.store' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.store/store.js'
@@ -137,6 +126,18 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.store',
 				'mediawiki.Title',
+			)
+		),
+
+		'wikibase.store.FetchedContentUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.store/store.FetchedContentUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization', // For registering in the SerializerFactory
+				'wikibase.store',
+				'wikibase.store.FetchedContent',
 			)
 		),
 
@@ -161,9 +162,9 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.serialization',
 				'wikibase.serialization.entities',
-				'wikibase.serialization.fetchedcontent',
 				'wikibase.serialization.entities',
 				'wikibase.store.FetchedContent',
+				'wikibase.store.FetchedContentUnserializer',
 				'wikibase.datamodel'
 			)
 		),
