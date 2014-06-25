@@ -143,7 +143,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	public function getLatestRevisionId( EntityId $entityId ) {
 		$row = $this->loadPageRow( $entityId );
 
-		return $row === null ? false : $row->page_latest;
+		return $row === null ? false : (int)$row->page_latest;
 	}
 
 	/**
