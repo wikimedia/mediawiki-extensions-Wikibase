@@ -162,7 +162,6 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.serialization',
 				'wikibase.serialization.entities',
-				'wikibase.serialization.entities',
 				'wikibase.store.FetchedContent',
 				'wikibase.store.FetchedContentUnserializer',
 				'wikibase.datamodel'
