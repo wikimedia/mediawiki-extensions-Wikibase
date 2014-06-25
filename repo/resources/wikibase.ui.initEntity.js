@@ -17,7 +17,7 @@
 
 		var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) ),
 			unserializerFactory = new wb.serialization.SerializerFactory(),
-			entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
+			entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity, wb.dataTypes );
 
 		wb.entity = entityUnserializer.unserialize( entityJSON );
 		entityJSON = null;

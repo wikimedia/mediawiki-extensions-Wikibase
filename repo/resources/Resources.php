@@ -57,6 +57,7 @@ return call_user_func( function() {
 				'jquery.json',
 				'wikibase',
 				'wikibase.datamodel',
+				'wikibase.dataTypes',
 				'wikibase.serialization',
 				'wikibase.serialization.entities',
 			),

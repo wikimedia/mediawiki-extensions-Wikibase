@@ -106,7 +106,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization',
 				'wikibase.datamodel',
-				'wikibase.dataTypes',
+				'dataTypes.DataTypeStore',
 			)
 		),
 
@@ -160,6 +160,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.json',
 				'wikibase',
+				'wikibase.dataTypes',
 				'wikibase.serialization',
 				'wikibase.serialization.entities',
 				'wikibase.store.FetchedContent',
@@ -174,6 +175,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel',
+				'wikibase.dataTypes',
 				'wikibase.serialization.entities',
 				'wikibase.RepoApi',
 			)
