@@ -1061,3 +1061,8 @@ table.diff table.wb-details td {
 	border: none;
 }
 /***** /DIFF VIEW *****/
+
+/* Fix for the ooMenu based suggester, the dialog is at about 1002 */
+.ui-suggester-list.ui-ooMenu {
+	z-index: 2000
+}
