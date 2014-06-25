@@ -109,9 +109,10 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.6.3 (dev)
+### 0.6.3 (2014-06-25)
 * Support editing arbitrary precisions for GlobeCoordinates
 * Added support for options in the ui.toggler widget.
+* Added expert for MonolingualText values.
 
 ### 0.6.2 (2014-06-16)
 * Fixed a bug where the values of inputs with a suggester on were set to an older value sometimes.
