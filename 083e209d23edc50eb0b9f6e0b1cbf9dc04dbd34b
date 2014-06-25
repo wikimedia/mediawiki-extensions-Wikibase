@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_51aca784",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T14:46:27Z",
+      "side": 1,
+      "message": "I remember you arguing we should consider redirects as being part of our domain. What you wrote now is the exact opposite position. What???\n\nI do not see anything storage related in this class.",
+      "parentUuid": "ee391fd1_31179a58",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_3ad8ae57",
         "filename": "lib/includes/store/EntityRedirect.php",
         "patchSetId": 41
@@ -441,6 +459,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_31b123dd",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T14:46:27Z",
+      "side": 1,
+      "message": "I do not understand why this is needed or what problem it solves without spending more time reviewing this, and can thus no suggest a good solution. All I can tell is that this code is extremely suspect.",
+      "parentUuid": "ee391fd1_1a83aad2",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_fa86a617",
         "filename": "repo/includes/content/UnresolvedRedirectException.php",
         "patchSetId": 41
@@ -662,6 +698,24 @@
       "side": 1,
       "message": "I use them when testing different aspects/cases of the same function. testGetParserOutputRedirect would test the getter for a ParserOutputRedirect. testGetParserOutput_redirect tests getting a ParserOutput object in the redirect case.\n\nI find the distinction useful, but I\u0027m not totally in love with it.",
       "parentUuid": "ee391fd1_3abf8ecf",
+      "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_51e387d4",
+        "filename": "repo/tests/phpunit/includes/content/ItemContentTest.php",
+        "patchSetId": 41
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-25T14:46:27Z",
+      "side": 1,
+      "message": "testGivenSituation_operationResultsIn()\n\nThat actually tells you what is being tested. \"testFunctionName\" obviously does not. \"testFunctionName_topic\" only a little clearer",
+      "parentUuid": "ee391fd1_fa9b4619",
       "revId": "083e209d23edc50eb0b9f6e0b1cbf9dc04dbd34b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
