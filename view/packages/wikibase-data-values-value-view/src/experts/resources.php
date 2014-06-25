@@ -73,6 +73,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.valueview.experts.MonolingualText' => $moduleTemplate + array(
+			'scripts' => array(
+				'MonolingualText.js',
+			),
+			'dependencies' => array(
+				'jquery.valueview.Expert',
+				'jquery.valueview.ExpertExtender',
+				'jquery.valueview.ExpertExtender.LanguageSelector',
+				'jquery.valueview.experts',
+				'jquery.valueview.experts.StringValue',
+			),
+		),
+
 		'jquery.valueview.experts.StringValue' => $moduleTemplate + array(
 			'scripts' => array(
 				'StringValue.js',

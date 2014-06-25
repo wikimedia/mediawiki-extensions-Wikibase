@@ -13,7 +13,7 @@ return call_user_func( function() {
 		'remoteExtPath' => $remoteExtPathParts[1],
 	);
 
-	return array(
+	$modules = array(
 		'jquery.valueview.ExpertExtender' => $moduleTemplate + array(
 			'scripts' => array(
 				'ExpertExtender.js',
@@ -54,6 +54,22 @@ return call_user_func( function() {
 				'jquery',
 				'jquery.valueview.ExpertExtender',
 			),
+		),
+
+		'jquery.valueview.ExpertExtender.LanguageSelector' => $moduleTemplate + array(
+			'scripts' => array(
+				'ExpertExtender.LanguageSelector.js',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.event.special.eachchange',
+				'jquery.ui.suggester',
+				'jquery.valueview.ExpertExtender',
+			),
+			'messages' => array(
+				'valueview-expertextender-languageselector-languagetemplate',
+				'valueview-expertextender-languageselector-label',
+			)
 		),
 
 		'jquery.valueview.ExpertExtender.Listrotator' => $moduleTemplate + array(
@@ -103,4 +119,10 @@ return call_user_func( function() {
 			),
 		),
 	);
+
+	if ( defined( 'ULS_VERSION' ) ) {
+		$modules['jquery.valueview.ExpertExtender.LanguageSelector']['dependencies'][] = 'jquery.uls.data';
+	}
+
+	return $modules;
 } );
