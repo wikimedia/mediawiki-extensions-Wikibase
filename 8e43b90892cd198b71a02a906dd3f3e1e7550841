@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_c401f2ba",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-25T23:42:15Z",
+      "side": 1,
+      "message": "One of the most ugly design flaws I found when working on my follow-up was this method. Why is it here? Why is it public? Why does it have so many parameters? But none of them is a Revision as the name suggests?\n\nWhy doesn\u0027t setEntity() set the entity ID? Why do you need to set it twice?\n\nWhy isn\u0027t it called setRevision() and gets a Revision? Why is the fact exposed that it sets database fields?\n\nThis is a helper method in the wrong class.\n\nAll this should be private implementation details, partly here but most of it in the code that constructs the EntityChange.",
+      "parentUuid": "ee391fd1_998c2834",
+      "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_f9c8d452",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 4
@@ -48,6 +66,23 @@
       "side": 1,
       "message": "That is not simpler, it\u0027s more complex (one more condition each time we need a ChangeNotifier). It may be more efficient, but it\u0027s not simpler, and it drags in knowledge we shouldn\u0027t have or care about here (whether or not someone cares about the notificatiohns). Here, we just have an event, and want to react to it.",
       "parentUuid": "ee391fd1_f9c8d452",
+      "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_a4dcae4c",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-25T23:42:15Z",
+      "side": 1,
+      "message": "Half the knowledge of how a Change is constructed is in the factory but the other half is here. Does this mean the factory returns invalid Changes and you are supposed to use public methods on the Change to complete it? This can\u0027t be right.\n\nPlus a bit of the knowledge is in public methods in the EntityChange class. See my other comment there.\n\nEither do all the construction here or in the factory.",
       "revId": "8e43b90892cd198b71a02a906dd3f3e1e7550841",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
