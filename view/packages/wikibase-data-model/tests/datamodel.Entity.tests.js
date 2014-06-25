@@ -259,6 +259,7 @@
 		};
 	}
 
+	wb.tests = wb.tests || {};
 	wb.tests.testEntity = function( testDefinition ) {
 		var test = new EntityTest( testDefinition );
 
