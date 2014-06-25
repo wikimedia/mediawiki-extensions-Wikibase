@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_9b1c6e7e",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-25T11:02:17Z",
+      "side": 1,
+      "message": "This URL does not exist.",
+      "revId": "4dbb164bf77cc123381e1aa1526846a66dd2369d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
