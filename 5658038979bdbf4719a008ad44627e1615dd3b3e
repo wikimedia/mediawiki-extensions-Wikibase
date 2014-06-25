@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_6176b8d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-25T23:17:03Z",
+      "side": 1,
+      "message": "Forgot to change the commit message.",
+      "revId": "5658038979bdbf4719a008ad44627e1615dd3b3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_a13a60e2",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-25T23:17:03Z",
+      "side": 1,
+      "message": "In it\u0027s core this is what this patch (not looking at the following patch) does: renaming existing stuff. Instead of having a \"notifier\" that could \"handle\" changes now it\u0027s a \"transmitter\" that \"transmits\" them. Whatever that means. Sure, the old naming was bad (\"handle\" means nothing, \"notifier\" is vague). But the new is not really better.",
+      "revId": "5658038979bdbf4719a008ad44627e1615dd3b3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_0185ac9f",
+        "filename": "repo/includes/Notifications/DummyChangeTransmitter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-25T23:17:03Z",
+      "side": 1,
+      "message": "Still a bad name. A dummy is something you would expect in a test. This is a null implementation. And it\u0027s pointless and makes things much more complicated than they are.",
+      "revId": "5658038979bdbf4719a008ad44627e1615dd3b3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_611b5883",
+        "filename": "repo/tests/phpunit/includes/Notifications/DatabaseChangeTransmitterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-25T23:17:03Z",
+      "side": 1,
+      "message": "This test makes it very obvious that the class thats now named a \"Transmitter\" is in no way \"transmitting\" anything, not \"notifying\", not even \"sending\". It just changes the database. That\u0027s it. This test constructs a Change object (using the factory), modifies it for some reason (why does the factory return an invalid object?), stores it to the database and checks that by reading from the database!\n\nWhats the job of the class in this test? A StorageLayer? But what does it do? It doesn\u0027t have any constructor parameters. No options. Nothing. How does it know what \"transmit\" means? Judging from this test it either heavily relies on global state or is so trivial that it\u0027s pointless to have it in the first place. And it is. This test would also succeed if you replace this line with $change-\u003esave(). And thats exactly what you are testing here. You are testing if the save() call succeeded.\n\nYou can not hide this.\n\nComing up with a vague name that doesn\u0027t tell anything while at the same time literally everything else is screaming \"database manipulation\" is nothing but confusing.",
+      "revId": "5658038979bdbf4719a008ad44627e1615dd3b3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
