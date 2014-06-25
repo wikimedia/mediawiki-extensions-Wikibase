@@ -113,6 +113,7 @@ Other methods an Expert needs to provide:
 * Added expert for MonolingualText values.
 * Support editing arbitrary precisions for GlobeCoordinates.
 * Added support for options in the ui.toggler widget.
+* Fixed wrong valueview-valueview-... class names after jQuery update.
 * Fixed RTL related bug in ui.suggester.
 
 ### 0.6.2 (2014-06-16)

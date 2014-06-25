@@ -92,11 +92,6 @@ function expertProxy( fnName ) {
  */
 $.widget( 'valueview.valueview', PARENT, {
 	/**
-	 * @see jQuery.Widget
-	 */
-	widgetBaseClass: 'valueview', // jQuery.widget would set this to 'valueview-valueview'
-
-	/**
 	 * Current, accepted value. Might be "behind" the expert's raw value until the raw value gets
 	 * parsed and the parsed result set as the new accepted value.
 	 * @type dv.DataValue|null
@@ -943,5 +938,9 @@ $.widget( 'valueview.valueview', PARENT, {
 		return {};
 	}
 } );
+
+// We have to override this here because $.widget sets it no matter what's in
+// the prototype
+$.valueview.valueview.prototype.widgetBaseClass = 'valueview';
 
 }( dataValues, util, jQuery, valueFormatters, valueParsers ) );
