@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use MWException;
 use RecentChange;
+use Revision;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
@@ -224,6 +225,8 @@ class EntityChange extends DiffChange {
 	 * @since 0.3
 	 *
 	 * @param RecentChange $rc
+	 *
+	 * @todo rename to setRecentChangeInfo
 	 */
 	public function setMetadataFromRC( RecentChange $rc ) {
 		$this->setMetadata( array(
@@ -240,6 +243,8 @@ class EntityChange extends DiffChange {
 	 * @since 0.3
 	 *
 	 * @param User $user
+	 *
+	 * @todo rename to setUserInfo, set fields too.
 	 */
 	public function setMetadataFromUser( User $user ) {
 		$this->setMetadata( array(
@@ -249,6 +254,47 @@ class EntityChange extends DiffChange {
 			'parent_id' => 0,
 			'comment' => '',
 		) );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param \Revision $revision
+	 */
+	public function setRevisionInfo( Revision $revision ) {
+		/* @var EntityContent $content */
+		$content = $revision->getContent();
+		$entityId = $content->getEntityId();
+
+		$this->setFields( array(
+			'revision_id' => $revision->getId(),
+			'user_id' => $revision->getUser(),
+			'object_id' => $entityId->getSerialization(),
+			'time' => $revision->getTimestamp(),
+		) );
+	}
+
+	/**
+	 * @param EntityId $id
+	 */
+	public function setEntityId( EntityId $id ) {
+		$this->setField( 'object_id', strtolower( $id->getSerialization() ) );
+	}
+
+	/**
+	 * @param int $userId
+	 *
+	 * @todo Merge into future setUserInfo.
+	 */
+	public function setUserId( $userId ) {
+		$this->setField( 'user_id', $userId );
+	}
+
+	/**
+	 * @param string $timestamp Timestamp in TS_MW format
+	 */
+	public function setTimestamp( $timestamp ) {
+		$this->setField( 'time', $timestamp );
 	}
 
 	/**

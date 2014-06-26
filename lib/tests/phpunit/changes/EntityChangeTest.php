@@ -2,8 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Revision;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
+use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\EntityChange
@@ -67,6 +72,12 @@ class EntityChangeTest extends DiffChangeTest {
 		return 'Wikibase\Entity';
 	}
 
+	protected function newEntityChange( EntityId $entityId ) {
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $entityId );
+
+		return $entityChange;
+	}
 
 	public function entityProvider() {
 		$entityClass = $this->getEntityClass(); // PHP fail
@@ -174,4 +185,62 @@ class EntityChangeTest extends DiffChangeTest {
 		$this->assertTrue( stripos( $s, $id ) !== false, "missing entity ID $id" );
 		$this->assertTrue( stripos( $s, $type ) !== false, "missing type $type" );
 	}
+
+	public function testSetRevisionInfo() {
+		$id = new ItemId( 'Q7' );
+		$item = Item::newEmpty();
+		$item->setId( $id );
+
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$entityChange = $changeFactory->newForEntity( EntityChange::UPDATE, $id );
+
+		$timestamp = '20140523' . '174422';
+
+		$revision = new Revision( array(
+			'id' => 5,
+			'user' => 7,
+			'timestamp' => $timestamp,
+			'content' => ItemContent::newFromItem( $item ),
+		) );
+
+		$entityChange->setRevisionInfo( $revision );
+
+		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 5 );
+		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 7 );
+		$this->assertEquals( 'Q7', strtoupper( $entityChange->getField( 'object_id' ) ) );
+		$this->assertEquals( $timestamp, $entityChange->getField( 'time' ) );
+	}
+
+	public function testSetUserId() {
+		$id = new ItemId( 'Q7' );
+
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$change = $changeFactory->newForEntity( EntityChange::UPDATE, $id );
+
+		$change->setUserId( 7 );
+		$this->assertEquals( 7, $change->getField( 'user_id' ), 7 );
+	}
+
+	public function testSetEntityId() {
+		$q7 = new ItemId( 'Q7' );
+		$q8 = new ItemId( 'Q8' );
+
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$change = $changeFactory->newForEntity( EntityChange::UPDATE, $q7 );
+
+		$change->setEntityId( $q8 );
+		$this->assertEquals( strtolower( $q8->getSerialization() ), $change->getObjectId() );
+	}
+
+	public function testSetTimestamp() {
+		$q7 = new ItemId( 'Q7' );
+
+		$changeFactory = TestChanges::getEntityChangeFactory();
+		$change = $changeFactory->newForEntity( EntityChange::UPDATE, $q7 );
+
+		$timestamp = '20140523' . '174422';
+		$change->setTimestamp( $timestamp );
+		$this->assertEquals( $timestamp, $change->getTime() );
+	}
+
 }
