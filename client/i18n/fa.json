@@ -47,7 +47,6 @@
 	"wikibase-linkitem-not-loggedin": "شما نیاز است که در این ویکی و [$1 مخزن اصلی داده] وارد شوید تا بتوانید از این امکان استفاده کنید.",
 	"wikibase-linkitem-success-link": "این صفحه به‌درستی پیوند داده شد. شما می‌توانید آیتم حاوی پیوند را در [$1 مخزن مرکزی داده‌ها] بیابید.",
 	"wikibase-property-notfound": "خصوصیت $1 یافت نشد.",
-	"wikibase-property-notsupportedyet": "ویکی‌بیس هنوز نوع خصوصیت برای خصوصیت $1 را پشتیبانی نمی‌کند.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "پنهان‌کردن",
 	"wikibase-rc-hide-wikidata-show": "نمایش",

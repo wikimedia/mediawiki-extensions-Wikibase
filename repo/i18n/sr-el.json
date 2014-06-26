@@ -72,7 +72,6 @@
 	"wikibase-itembytitle-lookup-site": "Sajt:",
 	"wikibase-itembytitle-lookup-page": "Strana:",
 	"wikibase-itembytitle-submit": "Pretraži",
-	"wikibase-itembytitle-description": "Sajt predstavlja identifikacioni kod, kao što je „srwiki“",
 	"wikibase-itembytitle-create": "Možete takođe i [{{fullurl:Special:NewItem|site=$1&page=$2}} napraviti stavku].",
 	"special-itemdisambiguation": "Višeznačna stavka",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Pretraga stavki prema jeziku i nazivu",

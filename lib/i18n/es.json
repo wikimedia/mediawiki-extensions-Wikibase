@@ -61,6 +61,7 @@
 	"wikibase-snakview-snaktypeselector-novalue": "sin valor",
 	"wikibase-tooltip-error-details": "Detalles",
 	"wikibase-validator-invalid": "Valor no válido",
+	"wikibase-validator-missing-field": "Falta el campo obligatorio «$1»",
 	"wikibase-validator-no-such-entity": "No se encontró \"$1\"",
 	"wikibase-validator-no-such-property": "No se encontró la propiedad $1",
 	"wikibase-validator-bad-value": "Valor corrupto: $1",

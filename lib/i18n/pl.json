@@ -28,7 +28,7 @@
 	"wikibase-diffview-description": "opis",
 	"wikibase-diffview-link": "linki",
 	"wikibase-error-unexpected": "Wystąpił nieoczekiwany błąd: $1.",
-	"wikibase-error-save-generic": "Wystąpił błąd podczas próby zapisu i z tego powodu zmiany nie zostały zapisane.",
+	"wikibase-error-save-generic": "Wystąpił błąd podczas próby zapisywania. Twoje zmiany nie zostały zapisane.",
 	"wikibase-error-remove-generic": "Wystąpił błąd podczas próby usunięcia i z tego powodu zmiany nie zostały zapisane.",
 	"wikibase-error-save-connection": "Wystąpił błąd połączenia podczas próby zapisu i z tego powodu zmiany nie zostały zapisane. Sprawdź swoje połączenie z Internetem.",
 	"wikibase-error-remove-connection": "Wystąpił błąd połączenia podczas próby usunięcia i z tego powodu zmiany nie zostały zapisane. Sprawdź swoje połączenie z Internetem.",

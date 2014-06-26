@@ -71,6 +71,7 @@
 	"wikibase-tooltip-error-details": "Detaljer",
 	"wikibase-undeserializable-value": "Värdet är ogiltigt och kunde inte visas.",
 	"wikibase-validator-invalid": "Ogiltigt värde",
+	"wikibase-validator-missing-field": "Saknar obligatoriskt fält '$1'",
 	"wikibase-validator-bad-type": "$2 istället för $1",
 	"wikibase-validator-too-long": "Får inte vara mer än {{PLURAL:$1|ett tecken|$1 tecken}} lång",
 	"wikibase-validator-too-short": "Måste vara minst {{PLURAL:$1|ett tecken|$1 tecken}} lång",

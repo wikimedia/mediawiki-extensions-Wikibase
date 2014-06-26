@@ -39,7 +39,6 @@
 	"wikibase-linkitem-not-loggedin": "Du musst auf diesem Wiki und im [$1 zentralen Datenrepositorium] angemeldet sein, um diese Funktion nutzen zu können.",
 	"wikibase-linkitem-success-link": "Die Seiten wurden erfolgreich verlinkt. Du findest das Objekt, das die Links enthält, in unserem [$1 zentralen Datenrepositorium].",
 	"wikibase-property-notfound": "Die Eigenschaft „$1“ wurde nicht gefunden.",
-	"wikibase-property-notsupportedyet": "Wikibase unterstützt den Eigenschaftstyp der Eigenschaft „$1“ noch nicht.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "ausblenden",
 	"wikibase-rc-hide-wikidata-show": "anzeigen",

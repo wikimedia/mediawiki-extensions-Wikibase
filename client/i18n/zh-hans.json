@@ -49,7 +49,6 @@
 	"wikibase-linkitem-not-loggedin": "您必须在此维基项目和[$1 中央数据存储库]上登录才能使用此功能。",
 	"wikibase-linkitem-success-link": "页面已成功链接。您可以在我们的[$1 中央数据库]中找到包含该链接的项。",
 	"wikibase-property-notfound": "未找到$1属性。",
-	"wikibase-property-notsupportedyet": "维基数据库还不支持$1属性的属性类型。",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隐藏",
 	"wikibase-rc-hide-wikidata-show": "显示",

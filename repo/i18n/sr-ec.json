@@ -72,7 +72,6 @@
 	"wikibase-itembytitle-lookup-site": "Сајт:",
 	"wikibase-itembytitle-lookup-page": "Страна:",
 	"wikibase-itembytitle-submit": "Претражи",
-	"wikibase-itembytitle-description": "Сајт представља идентификациони код, као што је „srwiki“",
 	"wikibase-itembytitle-create": "Можете такође и [{{fullurl:Special:NewItem|site=$1&page=$2}} направити ставку].",
 	"special-itemdisambiguation": "Вишезначна ставка",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Претрага ставки према језику и називу",
