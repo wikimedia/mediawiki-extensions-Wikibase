@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_f57a5ee6",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-26T13:34:21Z",
+      "side": 1,
+      "message": "The whole point is that the caller does not have to know how these params are encoded in the URL.",
+      "parentUuid": "ae43a74e_75b8aee2",
+      "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_f515beea",
         "filename": "repo/includes/View/SectionEditLinkGenerator.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_9569d21f",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-26T13:34:21Z",
+      "side": 1,
+      "message": "I don\u0027t and I would have found it while changing getHtmlForEditSection.",
+      "parentUuid": "ae43a74e_f515beea",
+      "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_b5d73628",
         "filename": "repo/includes/View/TermBoxView.php",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2014-06-26T13:28:48Z",
       "side": 1,
       "message": "$prefixedId\n\nOh, and why does this remove the possibility that the EntityId can be null? This may happen when editing entities in memory. They don\u0027t necessarily have an id. Sure, not relevant in our current use cases.",
+      "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_d54e3ac4",
+        "filename": "repo/includes/View/TermBoxView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-26T13:34:21Z",
+      "side": 1,
+      "message": "Because we currently don\u0027t support entities without ids in the whole view system either. It\u0027s not necessary to remove support for that, here, too, I agree, but it does not hurt either :)",
+      "parentUuid": "ae43a74e_b5d73628",
       "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
