@@ -104,7 +104,7 @@ class SubmitEntityAction extends EditEntityAction {
 
 		if ( $newerRevision->getId() === $latestRevision->getId() ) { // restore
 			if ( $summary === '' ) {
-				$summary = $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision );
+				$summary = $this->makeRestoreSummary( $olderRevision );
 			}
 
 			if ( $diff->isEmpty() ) {
@@ -121,7 +121,7 @@ class SubmitEntityAction extends EditEntityAction {
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
 				if ( $summary === '' ) {
-					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
+					$summary = $this->makeUndoSummary( $newerRevision );
 				}
 
 				$status = $this->attemptSave( $title, $patchedContent, $summary, $user, $editToken );
