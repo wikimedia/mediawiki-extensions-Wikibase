@@ -2,7 +2,6 @@
 
 namespace Wikibase;
 
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\SiteLinksView;
 

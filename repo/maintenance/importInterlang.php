@@ -14,7 +14,7 @@
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
 
@@ -141,7 +141,7 @@ class importInterlang extends Maintenance {
 			$label = preg_replace( '/ *\(.*\)$/u', '', $name );
 
 			$item->setLabel( $lang, $label );
-			$item->addSiteLink( new SimpleSiteLink( $lang . 'wiki',  $name ) );
+			$item->addSiteLink( new SiteLink( $lang . 'wiki',  $name ) );
 		}
 
 		try {
