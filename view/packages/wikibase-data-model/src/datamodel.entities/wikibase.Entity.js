@@ -385,9 +385,6 @@
 			case 'item':
 				return new wb.Item( data );
 			case 'property':
-				if( data.datatype ) {
-					data.datatype = data.datatype.getId();
-				}
 				return new wb.Property( data );
 			default:
 				return null;
