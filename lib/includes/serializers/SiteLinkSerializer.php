@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use SiteStore;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * Serializer for sitelinks.
@@ -128,7 +128,7 @@ class SiteLinkSerializer extends SerializerObject {
 	 * @since 0.4
 	 *
 	 * @param array $siteLinks
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 */
 	protected function sortSiteLinks( $siteLinks ) {
 		$unsortedSiteLinks = $siteLinks;
@@ -140,14 +140,14 @@ class SiteLinkSerializer extends SerializerObject {
 			if ( $sortDirection === EntitySerializer::SORT_ASC ) {
 				$sortOk = usort(
 					$siteLinks,
-					function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+					function( SiteLink $a, SiteLink $b ) {
 						return strcmp( $a->getSiteId(), $b->getSiteId() );
 					}
 				);
 			} elseif ( $sortDirection === EntitySerializer::SORT_DESC ) {
 				$sortOk = usort(
 					$siteLinks,
-					function( SimpleSiteLink $a, SimpleSiteLink $b ) {
+					function( SiteLink $a, SiteLink $b ) {
 						return strcmp( $b->getSiteId(), $a->getSiteId() );
 					}
 				);
@@ -168,7 +168,7 @@ class SiteLinkSerializer extends SerializerObject {
 	 *
 	 * @param array $data
 	 *
-	 * @return SimpleSiteLink[]
+	 * @return SiteLink[]
 	 * @throws InvalidArgumentException
 	 */
 	public function newFromSerialization( array $data ) {
@@ -184,7 +184,7 @@ class SiteLinkSerializer extends SerializerObject {
 				$badges = $this->extractBadges( $siteLink['badges'] );
 			}
 
-			$siteLinks[] = new SimpleSiteLink( $siteLink['site'], $siteLink['title'], $badges );
+			$siteLinks[] = new SiteLink( $siteLink['site'], $siteLink['title'], $badges );
 		}
 
 		return $siteLinks;

@@ -9,7 +9,7 @@ use Wikibase\Claim;
 use Wikibase\Claims;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\DiffChange;
 use Wikibase\Entity;
 use Wikibase\EntityChange;
@@ -40,9 +40,9 @@ final class TestChanges {
 		$item->setDescription( 'en', 'a country' );
 		$item->addAliases( 'en', array( 'Bolivarian Republic of Venezuela' ) );
 
-		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Venezuela' )  );
-		$item->addSiteLink( new SimpleSiteLink( 'jawiki', 'ベネズエラ' )  );
-		$item->addSiteLink( new SimpleSiteLink( 'cawiki', 'Veneçuela' )  );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Venezuela' )  );
+		$item->addSiteLink( new SiteLink( 'jawiki', 'ベネズエラ' )  );
+		$item->addSiteLink( new SiteLink( 'cawiki', 'Veneçuela' )  );
 
 		return $item;
 	}
@@ -115,12 +115,12 @@ final class TestChanges {
 			//       which relies on the database. This is inconsistent with the Site objects
 			//       generated here, or elsewhere in test cases.
 
-			$link = new SimpleSiteLink( 'dewiki', "Dummy" );
+			$link = new SiteLink( 'dewiki', "Dummy" );
 			$new->addSiteLink( $link, 'add' );
 			$changes['set-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$link = new SimpleSiteLink( 'enwiki', "Emmy" );
+			$link = new SiteLink( 'enwiki', "Emmy" );
 			$new->addSiteLink( $link, 'add' );
 			$changes['set-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
@@ -129,27 +129,27 @@ final class TestChanges {
 			$new->removeSiteLink( 'enwiki' );
 			$new->removeSiteLink( 'dewiki' );
 
-			$link = new SimpleSiteLink( 'enwiki', "Emmy" );
+			$link = new SiteLink( 'enwiki', "Emmy" );
 			$new->addSiteLink( $link, 'add' );
 
-			$link = new SimpleSiteLink( 'dewiki', "Dummy" );
+			$link = new SiteLink( 'dewiki', "Dummy" );
 			$new->addSiteLink( $link, 'add' );
 
 			$changes['change-sitelink-order'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
 			// -----
-			$link = new SimpleSiteLink( 'dewiki', "Dummy2" );
+			$link = new SiteLink( 'dewiki', "Dummy2" );
 			$new->addSiteLink( $link, 'set' );
 			$changes['change-dewiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$link = new SimpleSiteLink( 'enwiki', "Emmy2" );
+			$link = new SiteLink( 'enwiki', "Emmy2" );
 			$new->addSiteLink( $link, 'set' );
 			$changes['change-enwiki-sitelink'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
 
-			$link = new SimpleSiteLink( 'enwiki', "Emmy2", array( new ItemId( 'Q17' ) ) );
+			$link = new SiteLink( 'enwiki', "Emmy2", array( new ItemId( 'Q17' ) ) );
 			$new->addSiteLink( $link, 'set' );
 			$changes['change-enwiki-sitelink-badges'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();

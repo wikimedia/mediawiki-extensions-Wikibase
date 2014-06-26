@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use InvalidArgumentException;
 use SiteSQLStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SiteLinkSerializer;
@@ -29,9 +29,9 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$options = new SerializationOptions();
 		$options->setIndexTags( false );
 		$siteLinks = array(
-			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q42" ) ) ),
-			new SimpleSiteLink( "dewiki", "Rom" ),
-			new SimpleSiteLink( "itwiki", "Roma", array( new ItemId( "Q149" ) ) ),
+			new SiteLink( "enwiki", "Rome", array( new ItemId( "Q42" ) ) ),
+			new SiteLink( "dewiki", "Rom" ),
+			new SiteLink( "itwiki", "Roma", array( new ItemId( "Q149" ) ) ),
 		);
 		$expectedSerialization = array(
 			"enwiki" => array( "site" => "enwiki", "title" => "Rome", "badges" => array( "Q42" ) ),
@@ -44,9 +44,9 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$options->setIndexTags( false );
 		$options->addToOption( EntitySerializer::OPT_PARTS, "sitelinks/removed" );
 		$siteLinks = array(
-				new SimpleSiteLink( "enwiki", "", array( new ItemId( "Q42" ) ) ),
-				new SimpleSiteLink( "dewiki", "", array() ),
-				new SimpleSiteLink( "itwiki", "" ),
+				new SiteLink( "enwiki", "", array( new ItemId( "Q42" ) ) ),
+				new SiteLink( "dewiki", "", array() ),
+				new SiteLink( "itwiki", "" ),
 		);
 		$expectedSerialization = array(
 				"enwiki" => array( "site" => "enwiki", "title" => "", "removed" => "" ),
@@ -58,9 +58,9 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$options = new SerializationOptions();
 		$options->setIndexTags( true );
 		$siteLinks = array(
-			new SimpleSiteLink( "enwiki", "Rome", array( new ItemId( "Q149" ), new ItemId( "Q49" ) ) ),
-			new SimpleSiteLink( "dewiki", "Rom", array( new ItemId( "Q42" ) ) ),
-			new SimpleSiteLink( "itwiki", "Roma" ),
+			new SiteLink( "enwiki", "Rome", array( new ItemId( "Q149" ), new ItemId( "Q49" ) ) ),
+			new SiteLink( "dewiki", "Rom", array( new ItemId( "Q42" ) ) ),
+			new SiteLink( "itwiki", "Roma" ),
 		);
 		$expectedSerialization = array(
 			array( "site" => "enwiki", "title" => "Rome", "badges" => array( "Q149", "Q49", "_element" => "badge" ) ),
@@ -114,8 +114,8 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 		$options = new SerializationOptions();
 		$siteLinkSerializer = new SiteLinkSerializer( $options, $siteStore );
 
-		$simpleSiteLinks = $siteLinkSerializer->newFromSerialization( $serialized );
-		$this->assertEquals( $expected, $simpleSiteLinks );
+		$siteLinks = $siteLinkSerializer->newFromSerialization( $serialized );
+		$this->assertEquals( $expected, $siteLinks );
 	}
 
 	public function newFromSerializationProvider() {
@@ -126,8 +126,8 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 			new ItemId( 'Q1004' )
 		);
 
-		$siteLinks[] = new SimpleSiteLink( 'enwiki', 'Cat' );
-		$siteLinks[] = new SimpleSiteLink( 'dewiki', 'Katze', $badges );
+		$siteLinks[] = new SiteLink( 'enwiki', 'Cat' );
+		$siteLinks[] = new SiteLink( 'dewiki', 'Katze', $badges );
 
 		// todo inject / mock
 		$siteStore = SiteSQLStore::newInstance();
@@ -140,4 +140,5 @@ class SiteLinkSerializerTest extends \PHPUnit_Framework_TestCase {
 			array( $siteLinks, $serialized )
 		);
 	}
+
 }
