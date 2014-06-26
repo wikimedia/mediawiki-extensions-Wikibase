@@ -1,4 +1,8 @@
-# Wikibase datamodel implementation in JavaScript
+# Wikibase DataModel JavaScript
+
+**Wikibase DataModel JavasSript** is the JavaScript implementation of the
+[Data Model](https://meta.wikimedia.org/wiki/Wikidata/Data_model)
+at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
