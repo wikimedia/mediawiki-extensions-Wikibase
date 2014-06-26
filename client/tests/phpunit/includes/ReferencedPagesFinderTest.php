@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Item;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemChange;
 use Wikibase\ReferencedPagesFinder;
 
@@ -154,7 +154,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 
 		$itemWithBadge = $this->getEmptyItem();
 		$badges = array( new ItemId( 'Q34' ) );
-		$itemWithBadge->addSiteLink( new SimpleSiteLink( 'enwiki', 'Rome', $badges  ) );
+		$itemWithBadge->addSiteLink( new SiteLink( 'enwiki', 'Rome', $badges  ) );
 
 		$cases[] = array(
 			array(),
@@ -180,7 +180,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 
 		foreach( $links as $siteId => $page ) {
 			$item->addSiteLink(
-				new SimpleSiteLink( $siteId, $page )
+				new SiteLink( $siteId, $page )
 			);
 		}
 
