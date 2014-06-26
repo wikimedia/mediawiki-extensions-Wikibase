@@ -106,7 +106,6 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.serialization',
 				'wikibase.datamodel',
-				'wikibase.dataTypes',
 			)
 		),
 
@@ -545,6 +544,7 @@ return call_user_func( function() {
 				'mediawiki.legacy.shared',
 				'util.inherit',
 				'wikibase.datamodel',
+				'wikibase.dataTypes',
 				'wikibase.experts',
 				'wikibase.formatters',
 				'wikibase.parsers',
