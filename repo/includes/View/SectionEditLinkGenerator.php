@@ -26,29 +26,26 @@ class SectionEditLinkGenerator {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string $url specifies the URL for the button, default is an empty string
+	 * @param string $specialPageName the special page for the button
+	 * @param string[] $specialPageUrlParams Additional URL params for the special page
 	 * @param Message $message the message to show on the link
-	 * @param string $tag allows to specify the type of the outer node
 	 * @param bool $enabled can be set to false to display the button disabled
 	 *
 	 * @return string
 	 */
-	public function getHtmlForEditSection( $url, Message $message, $tag = 'span', $enabled = true ) {
+	public function getHtmlForEditSection(
+		$specialPageName,
+		array $specialPageUrlParams,
+		Message $message,
+		$enabled = true
+	) {
 		wfProfileIn( __METHOD__ );
 
-		$buttonLabel = $message->text();
-
-		$button = ( $enabled ) ?
-			wfTemplate( 'wikibase-toolbarbutton',
-				$buttonLabel,
-				$url // todo: add link to special page for non-JS editing
-			) :
-			wfTemplate( 'wikibase-toolbarbutton-disabled',
-				$buttonLabel
-			);
+		$editUrl = $this->getEditUrl( $specialPageName, $specialPageUrlParams );
+		$button = $this->getEditLink( $editUrl, $message, $enabled );
 
 		$html = wfTemplate( 'wb-editsection',
-			$tag,
+			'span',
 			wfTemplate( 'wikibase-toolbar',
 				'',
 				wfTemplate( 'wikibase-toolbareditgroup',
@@ -65,29 +62,39 @@ class SectionEditLinkGenerator {
 	/**
 	 * Get the Url to an edit special page
 	 *
-	 * @since 0.5
-	 *
 	 * @param string $specialPageName The special page to link to
-	 * @param Entity $entity The entity to edit
-	 * @param Language $language The desired language of the special page
+	 * @param string[] $specialPageUrlParams Additional URL params for the special page
 	 */
-	public function getEditUrl( $specialPageName, Entity $entity, Language $language = null ) {
+	private function getEditUrl( $specialPageName, array $specialPageUrlParams ) {
 		$specialPage = SpecialPageFactory::getPage( $specialPageName );
 
 		if ( $specialPage === null ) {
 			return ''; //XXX: this should throw an exception?!
 		}
 
-		if ( $entity->getId() ) {
-			$subPage = $entity->getId()->getPrefixedId();
-		} else {
-			$subPage = ''; // can't skip this, that would confuse the order of parameters!
-		}
-
-		if ( $language !== null ) {
-			$subPage .= '/' . $language->getCode();
-		}
+		$subPage = implode( '/', array_map( 'wfUrlencode', $specialPageUrlParams ) );
 		return $specialPage->getPageTitle( $subPage )->getLocalURL();
 	}
 
+	/**
+	 * @param string $editUrl The edit url
+	 * @param Message $message the message to show on the link
+	 * @param bool $enabled can be set to false to display the button disabled
+	 *
+	 * @return string
+	 */
+	private function getEditLink( $editUrl, Message $message, $enabled = true ) {
+		$buttonLabel = $message->text();
+
+		$button = ( $enabled ) ?
+			wfTemplate( 'wikibase-toolbarbutton',
+				$buttonLabel,
+				$editUrl // todo: add link to special page for non-JS editing
+			) :
+			wfTemplate( 'wikibase-toolbarbutton-disabled',
+				$buttonLabel
+			);
+
+		return $button;
+	}
 }
