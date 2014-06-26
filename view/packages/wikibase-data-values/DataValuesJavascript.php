@@ -23,8 +23,8 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 		'[http://www.snater.com H. Snater]',
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
 	),
-    'url' => 'https://github.com/wmde/DataValuesJavascript',
-    'description' => 'JavaScript related to the DataValues library',
+	'url' => 'https://github.com/wmde/DataValuesJavascript',
+	'description' => 'JavaScript related to the DataValues library',
 );
 
 // Resource Loader module registration
