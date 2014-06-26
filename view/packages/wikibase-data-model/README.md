@@ -8,6 +8,7 @@
 	datatype attribute when creating a Property.
 * Let Property.getDataType return the data type's string identifier instead of
 	a DataType instance.
+* Fix regular expressions in resource loader definitions
 
 ### 0.1 (2014-06-18)
 

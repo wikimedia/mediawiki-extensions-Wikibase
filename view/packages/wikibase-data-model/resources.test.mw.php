@@ -3,7 +3,13 @@
 global $wgHooks;
 
 $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \ResourceLoader &$resourceLoader ) {
-	preg_match( '+^(.*?)' . DIRECTORY_SEPARATOR . '(vendor|extensions)' . DIRECTORY_SEPARATOR . '(.*)$+', __DIR__, $remoteExtPathParts );
+	preg_match(
+		'+^(.*?)' . preg_quote( DIRECTORY_SEPARATOR ) . '(vendor|extensions)' .
+			preg_quote( DIRECTORY_SEPARATOR ) . '(.*)$+',
+		__DIR__,
+		$remoteExtPathParts
+	);
+
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '../' . $remoteExtPathParts[2] . DIRECTORY_SEPARATOR . $remoteExtPathParts[3],
