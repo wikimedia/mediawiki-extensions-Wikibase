@@ -20,17 +20,17 @@ class EntityIdReader implements EntityIdPager, Disposable {
 	/**
 	 * @var LineReader
 	 */
-	protected $reader;
+	private $reader;
 
 	/**
-	 * @var ExceptionHandler
+	 * @var ExceptionHandler|null
 	 */
-	protected $exceptionHandler;
+	private $exceptionHandler;
 
 	/**
 	 * @var string|null
 	 */
-	protected $entityType;
+	private $entityType;
 
 	/**
 	 * @param LineReader $reader
@@ -48,12 +48,12 @@ class EntityIdReader implements EntityIdPager, Disposable {
 	/**
 	 * @param ExceptionHandler $exceptionHandler
 	 */
-	public function setExceptionHandler( $exceptionHandler ) {
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
 	}
 
 	/**
-	 * @return ExceptionHandler
+	 * @return ExceptionHandler|null
 	 */
 	public function getExceptionHandler() {
 		return $this->exceptionHandler;
