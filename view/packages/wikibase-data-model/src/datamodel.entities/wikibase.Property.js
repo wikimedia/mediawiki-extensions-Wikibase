@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
-( function( wb, dataTypeStore, util ) {
+( function( wb, util ) {
 	'use strict';
 
 	var PARENT = wb.Entity;
@@ -20,33 +20,16 @@
 	 * TODO: implement setters
 	 */
 	var SELF = wb.Property = util.inherit( 'WbProperty', PARENT, {
-		/**
-		 * Will hold the data type object after it has been requested once.
-		 * @type dataTypes.DataType
-		 */
-		_dataType: null,
 
 		/**
-		 * Returns the Property's data type.
+		 * Returns the Property's data type's identifier.
 		 *
 		 * @since 0.4
 		 *
-		 * @return dataTypes.DataType
+		 * @return string
 		 */
 		getDataType: function() {
-			if( !this._dataType ) {
-				var typeId = this._data.datatype;
-
-				if( !typeId ) { // shouldn't really happen!
-					throw new Error( 'No data type specified for this Property' );
-				}
-				this._dataType = dataTypeStore.getDataType( typeId );
-
-				if( !this._dataType ) {
-					throw new Error( 'The Property\'s data type "' + typeId + '" is unknown' );
-				}
-			}
-			return this._dataType;
+			return this._data.datatype;
 		},
 
 		/**
@@ -55,7 +38,7 @@
 		equals: function( entity ) {
 			if(
 				entity instanceof SELF
-				&& this._data.datatype !== entity.getDataType().getId()
+				&& this.getDataType() !== entity.getDataType()
 			) {
 				return false;
 			}
@@ -78,4 +61,4 @@
 	 */
 	SELF.TYPE = 'property';
 
-}( wikibase, wikibase.dataTypes, util ) );
+}( wikibase, util ) );

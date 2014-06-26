@@ -5,7 +5,7 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-( function( wb, dt, $, QUnit ) {
+( function( wb, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.datamodel.Property', QUnit.newWbEnvironment() );
@@ -30,4 +30,4 @@
 
 	wb.tests.testEntity( entityTestDefinition );
 
-}( wikibase, dataTypes, jQuery, QUnit ) );
+}( wikibase, jQuery, QUnit ) );
