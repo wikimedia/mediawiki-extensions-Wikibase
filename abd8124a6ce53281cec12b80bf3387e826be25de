@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_cad4594e",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Suggestions:\n* To long!\n* \"to [$1 an other item]\"\n* ... or not mention \"item\" at all.\n* \"Items can only have one page per site attached.\" explains that from the wrong direction! Swap! \"A page can only have one item connected.\"\n* Drop \"Please choose a different page to link with.\" completely. This advice is pointless.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_8ace51b8",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "\"Dialog\" is correct. It is one.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_6ad32d62",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "When is this message shown? It never should. \"Unknown\" shouldn\u0027t be in the code. If an exception is missing a text this exception needs to be fixed!",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_4ac869aa",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Done.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_2ac52591",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Done.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_0ac26188",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Unused. Dropped it.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_eabefdf9",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "This is used in two cases: Syntactical invalid entity ID or entity not found. Which are practically the same for client users. So whats wrong with \"Entity could not be found\"?",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_4a474923",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Done.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_2a44051c",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Done.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_0a5141dd",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Done.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_ea4ddd40",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Done.",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_ca5a19f9",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Why not a single \"your action could not be completed\"?",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_8a5411cb",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T10:45:49Z",
+      "side": 1,
+      "message": "Why not a single \"your action could not be completed\"?",
+      "revId": "abd8124a6ce53281cec12b80bf3387e826be25de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
