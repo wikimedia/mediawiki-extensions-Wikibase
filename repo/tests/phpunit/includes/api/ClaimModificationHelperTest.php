@@ -85,26 +85,6 @@ class ClaimModificationHelperTest extends \PHPUnit_Framework_TestCase {
 		$claimModificationHelper->getClaimFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $item );
 	}
 
-	/**
-	 * @return ValueFormatter
-	 */
-	private function getMockFormatter() {
-		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
-		$mock->expects( $this->any() )
-			->method( 'format' )
-			->will( $this->returnCallback(
-				function ( $param ) {
-					if ( is_object( $param ) ) {
-						$param = get_class( $param );
-					}
-
-					return strval( $param );
-				}
-			) );
-
-		return $mock;
-	}
-
 	private function getNewInstance() {
 		$api = new ApiMain();
 
