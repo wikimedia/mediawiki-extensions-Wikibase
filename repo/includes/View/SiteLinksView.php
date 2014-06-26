@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\View;
 
 use Message;
+use SiteList;
 use SiteStore;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\EntityId;
@@ -24,14 +25,14 @@ class SiteLinksView {
 	 *
 	 * @since 0.5
 	 *
-	 * @param SiteLinks $siteLinks the site links to render
+	 * @param SiteLink[] $siteLinks the site links to render
 	 * @param EntityId $entityId The id of the entity
 	 * @param string[] $groups An array of site group IDs
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	public function getHtml( $siteLinks, EntityId $entityId, array $groups, $editable ) {
+	public function getHtml( array $siteLinks, EntityId $entityId, array $groups, $editable ) {
 		$html = '';
 
 		foreach ( $groups as $group ) {
@@ -44,13 +45,14 @@ class SiteLinksView {
 	/**
 	 * Builds and returns the HTML representing a group of a WikibaseEntity's site-links.
 	 *
-	 * @param SiteLinks $siteLinks the site links to render
+	 * @param SiteLink[] $siteLinks the site links to render
 	 * @param EntityId $entityId The id of the entity
 	 * @param string $group a site group ID
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLinkGroup( $siteLinks, EntityId $entityId, $group, $editable = true ) {
+	private function getHtmlForSiteLinkGroup( array $siteLinks, EntityId $entityId, $group, $editable = true ) {
 
 		// FIXME: editable is completely unused
 
@@ -97,8 +99,10 @@ class SiteLinksView {
 	 * @param SiteList $sites
 	 * @param string $group
 	 * @param SiteLink[] $itemSiteLinks
+	 *
+	 * @return array[]
 	 */
-	private function getSiteLinksForTable( $sites, $group, $itemSiteLinks ) {
+	private function getSiteLinksForTable( SiteList $sites, $group, array $itemSiteLinks ) {
 		$siteLinksForTable = array(); // site links of the currently handled site group
 
 		foreach( $itemSiteLinks as $siteLink ) {
@@ -133,6 +137,8 @@ class SiteLinksView {
 
 	/**
 	 * @param bool $isSpecialGroup
+	 *
+	 * @return string
 	 */
 	private function getTableHeadHtml( $isSpecialGroup ) {
 		// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
@@ -154,6 +160,8 @@ class SiteLinksView {
 	 * @param object[] $siteLinksForTable
 	 * @param EntityId $entityId The id of the entity
 	 * @param bool $isSpecialGroup
+	 *
+	 * @return string
 	 */
 	private function getTableBodyHtml( $siteLinksForTable, $entityId, $isSpecialGroup ) {
 		$i = 0;
@@ -170,6 +178,8 @@ class SiteLinksView {
 	/**
 	 * @param EntityId $entityId The id of the entity
 	 * @param bool $isFull
+	 *
+	 * @return string
 	 */
 	private function getTableFootHtml( $entityId, $isFull ) {
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
@@ -185,9 +195,11 @@ class SiteLinksView {
 	 * @param EntityId $entityId The id of the entity
 	 * @param bool $isSpecialGroup
 	 * @param string $alternatingClass
+	 *
+	 * @return string
 	 */
 	private function getHtmlForSiteLink( $siteLinkForTable, $entityId, $isSpecialGroup, $alternatingClass ) {
-		/* @var Site $site */
+		/* @var \Site $site */
 		$site = $siteLinkForTable['site'];
 
 		/* @var SiteLink $siteLink */
@@ -232,6 +244,8 @@ class SiteLinksView {
 	 * @param SiteLink $siteLink
 	 * @param EntityId $entityId The id of the entity
 	 * @param string $alternatingClass
+	 * 
+	 * @return string
 	 */
 	private function getHtmlForUnknownSiteLink( $siteLink, $entityId, $alternatingClass ) {
 		// the link is pointing to an unknown site.
