@@ -41,7 +41,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityContent
 	 */
-	protected function makeItemContent( ItemId $id ) {
+	private function makeItemContent( ItemId $id ) {
 		$item = Item::newEmpty();
 		$item->setId( $id );
 
@@ -58,7 +58,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 *
 	 * @return Revision
 	 */
-	protected function makeRevision( Content $content, User $user, $revisionId, $timestamp, $parent_id = 0 ) {
+	private function makeRevision( Content $content, User $user, $revisionId, $timestamp, $parent_id = 0 ) {
 		$revision = new Revision( array(
 			'id' => $revisionId,
 			'page' => 7,
@@ -72,7 +72,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		return $revision;
 	}
 
-	protected function makeUser( $name ) {
+	private function makeUser( $name ) {
 		$user = User::newFromName( $name );
 
 		if ( $user->getId() === 0 ) {

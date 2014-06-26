@@ -205,10 +205,10 @@ class EntityChangeTest extends DiffChangeTest {
 
 		$entityChange->setRevisionInfo( $revision );
 
-		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 5 );
-		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 7 );
-		$this->assertEquals( 'Q7', strtoupper( $entityChange->getField( 'object_id' ) ) );
-		$this->assertEquals( $timestamp, $entityChange->getField( 'time' ) );
+		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ) );
+		$this->assertEquals( 7, $entityChange->getField( 'user_id' ) );
+		$this->assertEquals( 'q7', $entityChange->getObjectId() );
+		$this->assertEquals( $timestamp, $entityChange->getTime() );
 	}
 
 	public function testSetUserId() {

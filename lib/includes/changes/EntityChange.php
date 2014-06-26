@@ -278,7 +278,7 @@ class EntityChange extends DiffChange {
 	 * @param EntityId $id
 	 */
 	public function setEntityId( EntityId $id ) {
-		$this->setField( 'object_id', strtolower( $id->getSerialization() ) );
+		$this->setField( 'object_id', $id->getSerialization() );
 	}
 
 	/**
@@ -400,4 +400,5 @@ class EntityChange extends DiffChange {
 
 		return parent::serializeInfo( $info );
 	}
+
 }

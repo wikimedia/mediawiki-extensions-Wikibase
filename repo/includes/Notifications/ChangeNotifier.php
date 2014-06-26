@@ -37,7 +37,7 @@ class ChangeNotifier {
 	 * This method constructs and sends the appropriate notifications (if any)
 	 * when a wiki page containing an EntityContent was deleted.
 	 *
-	 * @param EntityContent $content The ID of the deleted entity
+	 * @param EntityContent $content
 	 * @param User $user
 	 * @param string $timestamp timestamp in TS_MW format.
 	 *
