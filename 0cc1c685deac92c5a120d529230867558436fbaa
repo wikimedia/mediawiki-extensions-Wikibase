@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_b51616ab",
+        "filename": "lib/resources/wikibase.serialization/serialization.EntityUnserializer.propertyExpert.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-26T13:27:21Z",
+      "side": 1,
+      "message": "Isn\u0027t this whole file completely pointless now? It doesn\u0027t do anything. You can replace the implementation here with \"return serialization;\". That\u0027s it.",
+      "revId": "0cc1c685deac92c5a120d529230867558436fbaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
