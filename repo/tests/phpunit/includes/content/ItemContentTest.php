@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 
@@ -120,7 +120,7 @@ class ItemContentTest extends EntityContentTest {
 		/** @var ItemContent $itemContent */
 		$itemContent = $this->newEmpty();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
-		$itemContent->getEntity()->addSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
+		$itemContent->getEntity()->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
 
 		return array(
 			array( $itemContent, '!^cake$!' ),

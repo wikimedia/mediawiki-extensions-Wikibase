@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemContent;
 use Wikibase\ItemHandler;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -52,7 +52,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		 * @var ItemContent $content
 		 */
 		$content = clone $contents[1][0];
-		$content->getItem()->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
+		$content->getItem()->addSiteLink( new SiteLink( 'enwiki', 'Foobar' ) );
 		$contents[] = array( $content );
 
 		return $contents;
