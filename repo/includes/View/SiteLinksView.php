@@ -12,12 +12,25 @@ use Wikibase\Utils;
 
 class SiteLinksView {
 
-	private $siteStore;
+	/**
+	 * @var SiteList
+	 */
+	private $sites;
+
+	/**
+	 * @var SectionEditLinkGenerator
+	 */
 	private $sectionEditLinkGenerator;
 
+	/**
+	 * @var string[]
+	 */
+	private $specialSiteLinkGroups;
+
 	public function __construct( SiteStore $siteStore, SectionEditLinkGenerator $sectionEditLinkGenerator ) {
-		$this->siteStore = $siteStore;
+		$this->sites = $siteStore->getSites();
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
+		$this->specialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
 	}
 
 	/**
@@ -34,7 +47,7 @@ class SiteLinksView {
 	 */
 	public function getHtml( array $siteLinks, EntityId $entityId, array $groups, $editable ) {
 		// FIXME: editable is completely unused
-		
+
 		$html = '';
 
 		foreach ( $groups as $group ) {
@@ -54,11 +67,9 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getHtmlForSiteLinkGroup( array $siteLinks, EntityId $entityId, $group ) {
-		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
-		$isSpecialGroup = in_array( $group, $specialGroups );
+		$isSpecialGroup = $this->siteLinkGroupIsSpecial( $group );
 
-		// @todo inject into constructor
-		$sites = $this->siteStore->getSites()->getGroup( $group );
+		$sites = $this->sites->getGroup( $group );
 		$siteLinksForTable = $this->getSiteLinksForTable( $sites, $siteLinks );
 
 		$html = $thead = $tbody = $tfoot = '';
@@ -91,6 +102,10 @@ class SiteLinksView {
 			$tfoot,
 			htmlspecialchars( $groupName )
 		);
+	}
+
+	private function siteLinkGroupIsSpecial( $groupName ) {
+		return in_array( $groupName, $this->specialSiteLinkGroups );
 	}
 
 	/**
