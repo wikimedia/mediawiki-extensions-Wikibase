@@ -33,10 +33,12 @@ class SiteLinksView {
 	 * @return string
 	 */
 	public function getHtml( array $siteLinks, EntityId $entityId, array $groups, $editable ) {
+		// FIXME: editable is completely unused
+		
 		$html = '';
 
 		foreach ( $groups as $group ) {
-			$html .= $this->getHtmlForSiteLinkGroup( $siteLinks, $entityId, $group, $editable );
+			$html .= $this->getHtmlForSiteLinkGroup( $siteLinks, $entityId, $group );
 		}
 
 		return $html;
@@ -48,20 +50,16 @@ class SiteLinksView {
 	 * @param SiteLink[] $siteLinks the site links to render
 	 * @param EntityId $entityId The id of the entity
 	 * @param string $group a site group ID
-	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLinkGroup( array $siteLinks, EntityId $entityId, $group, $editable = true ) {
-
-		// FIXME: editable is completely unused
-
+	private function getHtmlForSiteLinkGroup( array $siteLinks, EntityId $entityId, $group ) {
 		$specialGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
 		$isSpecialGroup = in_array( $group, $specialGroups );
 
 		// @todo inject into constructor
 		$sites = $this->siteStore->getSites()->getGroup( $group );
-		$siteLinksForTable = $this->getSiteLinksForTable( $sites, $group, $siteLinks );
+		$siteLinksForTable = $this->getSiteLinksForTable( $sites, $siteLinks );
 
 		$html = $thead = $tbody = $tfoot = '';
 
@@ -97,12 +95,11 @@ class SiteLinksView {
 
 	/**
 	 * @param SiteList $sites
-	 * @param string $group
 	 * @param SiteLink[] $itemSiteLinks
 	 *
 	 * @return array[]
 	 */
-	private function getSiteLinksForTable( SiteList $sites, $group, array $itemSiteLinks ) {
+	private function getSiteLinksForTable( SiteList $sites, array $itemSiteLinks ) {
 		$siteLinksForTable = array(); // site links of the currently handled site group
 
 		foreach( $itemSiteLinks as $siteLink ) {
@@ -244,7 +241,7 @@ class SiteLinksView {
 	 * @param SiteLink $siteLink
 	 * @param EntityId $entityId The id of the entity
 	 * @param string $alternatingClass
-	 * 
+	 *
 	 * @return string
 	 */
 	private function getHtmlForUnknownSiteLink( $siteLink, $entityId, $alternatingClass ) {
