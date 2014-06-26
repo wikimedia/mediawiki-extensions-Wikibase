@@ -47,7 +47,6 @@
 	"wikibase-linkitem-not-loggedin": "This messages informs the user that he needs to be logged in on both this wiki and the repository to use this feature.\n\nParameters:\n* $1 - the URI to the login form of the repository",
 	"wikibase-linkitem-success-link": "Success message after the page the user currently is on has been linked with an item. $1 holds a URL pointing to the item.",
 	"wikibase-property-notfound": "Message for property parser function when a property is not found. Parameters:\n* $1 - the name of the property",
-	"wikibase-property-notsupportedyet": "Used as error message. Parameters:\n* $1 - property label",
 	"wikibase-rc-hide-wikidata": "This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to \"hide\", it hides edits made to the connected item in the Wikidata repository.\n\nParameters:\n* $1 - a link with the text {{msg-mw|wikibase-rc-hide-wikidata-show}} or {{msg-mw|wikibase-rc-hide-wikidata-hide}}\n* <nowiki>{{WBREPONAME}}</nowiki> - expanded to {{msg-mw|wikibase-repo-name}}",
 	"wikibase-rc-hide-wikidata-hide": "{{doc-actionlink}}\nOption text in [[Special:RecentChanges]] in conjunction with {{msg-mw|wikibase-rc-hide-wikidata}}.\n\nSee also:\n* {{msg-mw|wikibase-rc-hide-wikidata-show}}\n{{Identical|Hide}}",
 	"wikibase-rc-hide-wikidata-show": "{{doc-actionlink}}\nOption text in [[Special:RecentChanges]] in conjunction with {{msg-mw|wikibase-rc-hide-wikidata}}.\n\nSee also:\n* {{msg-mw|wikibase-rc-hide-wikidata-hide}}\n{{Identical|Show}}",
