@@ -41,7 +41,6 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase', // What? Just for the namespace?
 				'mw.ext.dataValues', // DataValues extension
-				'wikibase.dataTypes', // That seems to be a wrong dependency
 			)
 		),
 	);
