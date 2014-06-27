@@ -22,6 +22,8 @@ return call_user_func( function() {
 				'wikibase.parsers.api.js',
 			),
 			'dependencies' => array(
+				'dataValues',
+				'jquery',
 				'wikibase',
 				'wikibase.RepoApi'
 			),
@@ -32,8 +34,10 @@ return call_user_func( function() {
 				'ApiBasedValueParser.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'util.inherit',
 				'valueParsers.ValueParser',
+				'wikibase',
 				'wikibase.parsers.api',
 			),
 		),
@@ -43,6 +47,7 @@ return call_user_func( function() {
 				'EntityIdParser.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'util.inherit',
 				'valueParsers.ValueParser',
 				'wikibase',
@@ -59,6 +64,7 @@ return call_user_func( function() {
 				'jquery',
 				'valueParsers.parsers',
 				'valueParsers.ValueParserStore',
+				'wikibase.ApiBasedValueParser',
 				'wikibase.datamodel',
 				'wikibase.EntityIdParser'
 			),
