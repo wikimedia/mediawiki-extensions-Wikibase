@@ -51,6 +51,8 @@ class MonthNameUnlocalizer {
 		$initialString = $string;
 
 		for ( $i = 1; $i <= 12; $i++ ) {
+			// either month name or genitive month name
+			$string = str_replace( $from->getMonthNameGen( $i ), $to->getMonthName( $i ), $string );
 			$string = str_replace( $from->getMonthName( $i ), $to->getMonthName( $i ), $string );
 		}
 

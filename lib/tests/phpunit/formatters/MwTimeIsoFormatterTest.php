@@ -1,7 +1,7 @@
 <?php
 
 namespace ValueFormatters\Test;
-
+use Language;
 use DataValues\TimeValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\TimeFormatter;
@@ -375,6 +375,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			'de', //switches separators
 			'or', //replaces all numbers and separators
 		);
+
 		foreach ( $languageCodes as $languageCode ) {
 			$argLists[] = array(
 				'3333',
@@ -385,6 +386,25 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 					TimeFormatter::CALENDAR_GREGORIAN
 				),
 				false,
+				$languageCode
+			);
+		}
+
+		// month names - in genetive forms
+		foreach ( $languageCodes as $languageCode ) {
+			$lang = Language::factory( $languageCode );
+			$localizedDateGenetiveName = $lang->sprintfDate( "j xg Y", "20130416000000" );
+			// TOOD: please remove the next line once bug 63732 is fixed
+			$localizedDateGenetiveName = $lang->parseFormattedNumber( $localizedDateGenetiveName );
+			$argLists[] = array(
+				$localizedDateGenetiveName,
+				new TimeValue(
+					'+2013-04-16T00:00:00Z',
+					0, 0, 0,
+					TimeValue::PRECISION_DAY,
+					TimeFormatter::CALENDAR_GREGORIAN
+				),
+				true,
 				$languageCode
 			);
 		}
