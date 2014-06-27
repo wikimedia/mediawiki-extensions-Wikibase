@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_ce5e9f7b",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T19:30:18Z",
+      "side": 1,
+      "message": "With the change above the event names in the on() and off() calls may not match any more.",
+      "revId": "52f9de0c64284a8a18f612f3154fdc0a54a80197",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
