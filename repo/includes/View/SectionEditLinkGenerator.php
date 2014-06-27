@@ -29,6 +29,7 @@ class SectionEditLinkGenerator {
 	 * @param string $specialPageName the special page for the button
 	 * @param string[] $specialPageUrlParams Additional URL params for the special page
 	 * @param Message $message the message to show on the link
+	 * @param string $tag to specify the outer node
 	 * @param bool $enabled can be set to false to display the button disabled
 	 *
 	 * @return string
@@ -37,6 +38,7 @@ class SectionEditLinkGenerator {
 		$specialPageName,
 		array $specialPageUrlParams,
 		Message $message,
+		$tag,
 		$enabled = true
 	) {
 		wfProfileIn( __METHOD__ );
@@ -45,7 +47,7 @@ class SectionEditLinkGenerator {
 		$button = $this->getEditLink( $editUrl, $message, $enabled );
 
 		$html = wfTemplate( 'wb-editsection',
-			'span',
+			$tag,
 			wfTemplate( 'wikibase-toolbar',
 				'',
 				wfTemplate( 'wikibase-toolbareditgroup',

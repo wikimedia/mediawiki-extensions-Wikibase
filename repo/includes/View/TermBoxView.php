@@ -82,6 +82,7 @@ class TermBoxView {
 				'SetLabel',
 				array( $entityId, $languageCode ),
 				$this->msg( 'wikibase-edit' ),
+				'span',
 				$editable
 			);
 			$editDescriptionSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(

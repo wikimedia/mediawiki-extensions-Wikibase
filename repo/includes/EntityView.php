@@ -612,7 +612,15 @@ if ( $ ) {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = $this->getContext()->msg( $key );
 
-		return $this->sectionEditLinkGenerator->getHtmlForEditSection( $specialPage, $specialPageParams, $msg, $enabled );
+		$html = $this->sectionEditLinkGenerator->getHtmlForEditSection(
+			$specialPage,
+			$specialPageParams,
+			$msg,
+			'span',
+			$enabled
+		);
+
+		return $html;
 	}
 
 	/**
