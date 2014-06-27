@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_b4696f1f",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T09:17:18Z",
+      "side": 1,
+      "message": "This reverts I68f8f8266bea29505128ac71615a7f7b7727d53c!",
+      "parentUuid": "ae43a74e_b9c3a860",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_d922eca1",
         "filename": "repo/includes/Notifications/ChangeNotifier.php",
         "patchSetId": 46
