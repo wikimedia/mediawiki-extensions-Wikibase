@@ -4,12 +4,12 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Entity;
-use Wikibase\Item;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Serializers\ItemSerializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\Lib\Serializers\DispatchingEntitySerializer
@@ -67,7 +67,7 @@ class DispatchingEntitySerializerTest extends EntitySerializerBaseTest {
 	protected function getItemInstance() {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q17' ) );
-		$item->addSiteLink( new SimpleSiteLink( 'test', 'Foo' ) );
+		$item->addSiteLink( new SiteLink( 'test', 'Foo' ) );
 
 		return $item;
 	}
