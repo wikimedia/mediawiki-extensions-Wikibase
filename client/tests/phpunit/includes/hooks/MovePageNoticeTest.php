@@ -6,7 +6,7 @@ use Language;
 use Title;
 use Wikibase\Client\MovePageNotice;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\RepoLinker;
 
 /**
@@ -53,7 +53,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getEntityIdForSiteLink' )
-			->with( new SimpleSiteLink( 'dewiki', 'New Amsterdam' ) )
+			->with( new SiteLink( 'dewiki', 'New Amsterdam' ) )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 
 		$movePageNotice = new MovePageNotice(

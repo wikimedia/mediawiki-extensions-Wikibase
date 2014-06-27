@@ -8,7 +8,7 @@ use Parser;
 use Status;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\SimpleSiteLink;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
@@ -224,7 +224,7 @@ class PropertyParserFunction {
 
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
 		$entityId = $siteLinkLookup->getEntityIdForSiteLink( //FIXME: method not in the interface
-			new SimpleSiteLink( $siteId, $parser->getTitle()->getFullText() )
+			new SiteLink( $siteId, $parser->getTitle()->getFullText() )
 		);
 
 		// @todo handle when site link is not there, such as site link / entity has been deleted...
