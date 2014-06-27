@@ -126,7 +126,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			return 'F Y';
 		}
 
-		return 'j F Y';
+		return 'j xg Y';
 	}
 
 	/**
