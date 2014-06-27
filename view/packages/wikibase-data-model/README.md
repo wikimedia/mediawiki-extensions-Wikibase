@@ -6,7 +6,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
-### 0.2 (2014-06-26)
+### 0.2.0 (2014-06-26)
 
 * Let Entity.newFromMap expect a string instead of a DataType instance as
 	datatype attribute when creating a Property.
@@ -14,6 +14,6 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 	a DataType instance.
 * Fix regular expressions in resource loader definitions
 
-### 0.1 (2014-06-18)
+### 0.1.0 (2014-06-18)
 
 Initial release.
