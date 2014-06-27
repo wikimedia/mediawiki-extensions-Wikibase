@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae43a74e_7ee64615",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "We usually don\u0027t put an empty line between @throws and @return.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_b90608d0",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "Adding if ( $this \u003d\u003d\u003d $that ) { return true; } would be nice but is optional.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_b9c3a860",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "Please make sure the ISO format fix is not lost in rebase hell.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_d922eca1",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "Here is an other proof that makes it - in my opinion - very obvious that this design is broken. The class is called a \"notifier\". It\u0027s made of \"notify\" methods. The methods get some basic information about revisions and/or content objects. They construct a change object (most of the knowledge how to do this is here[1]). And then? It\u0027s unclear. The class can\u0027t decide. Like it doesn\u0027t know what it\u0027s supposed to do. It passes the change object to a service and additionally returns it.\n\nDoing both is wrong.\n\nOne solution is to return the change and move the service outside of this class. Then it\u0027s very obvious that the name must change. It\u0027s not a notifier. It\u0027s a factory.\n\nThe other solution is to not return anything. Or to return the result from the service (probably bool, probably pointless). But this means that the construction part can not be tested separately. Which means that the first solution is the better one:\n* Move the service out of this class.\n* Rename EntityChangeFactory to EntityChangeFactoryHelper.\n* Rename ChangeNotifier to EntityChangeFactory.\n* Rename the ChangeNotificationChannel/Transmitter to EntityChangeNotifier.\n* Use whats then called EntityChangeFactory as a service in whats then called EntityChangeNotifier.\n\nThat\u0027s flipping it the other way around I was talking about.\n\n[1]Which I still find confusing. Whats the point in having a ChangeFactory then? The way it\u0027s used with constants from an other class is very odd. It\u0027s unclear what it does. \"From update\" tells one story (there is nothing about an update in the parameters). The constant tells a different story (looks like it will create an RemoveEntityChange object). The entity parameter tells a third story (still not sure why it needs a full entity and how its possible to describe a change with a single object in the first place). None of these three possible meanings fit to the implementation. The implementation seems to depend on the type. There is nothing about the type in the signature of the newFromUpdate( ... ) method.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_cc5a3e22",
         "filename": "repo/includes/Notifications/ChangeNotifier.php",
         "patchSetId": 46
@@ -13,6 +81,41 @@
       "writtenOn": "2014-06-25T15:57:15Z",
       "side": 1,
       "message": "Should be split up. Just look at the comments or NPath",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_99b8e4e3",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "I already started rewriting this code in a much simpler way in my follow-up.",
+      "parentUuid": "ae43a74e_cc5a3e22",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_f9c81079",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "This is not a getter.",
       "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -47,6 +150,40 @@
       "writtenOn": "2014-06-25T15:57:15Z",
       "side": 1,
       "message": "How about putting the diffing and patching stuff in dedicated service objects? This is adding quite some complexity and dependencies to EntityContent.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_59803cf9",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "Strange comment. Why is it here if you know that? (I know why but the comment doesn\u0027t explain.)",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_19a99478",
+        "filename": "repo/includes/content/ItemHandler.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T00:40:24Z",
+      "side": 1,
+      "message": "Where does the \"make\" naming scheme come from when the same thing is called \"newEmpty\" the line below?",
       "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
