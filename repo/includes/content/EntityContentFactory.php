@@ -9,6 +9,7 @@ use Revision;
 use Status;
 use Title;
 use User;
+use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * Factory for EntityContent objects.
@@ -153,6 +154,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	/**
 	 * Constructs a new EntityContent from an Entity.
 	 *
+	 * @see EntityHandler::makeEntityContent
+	 *
 	 * @since 0.3
 	 *
 	 * @param Entity $entity
@@ -161,7 +164,23 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 */
 	public function newFromEntity( Entity $entity ) {
 		$handler = $this->getContentHandlerForType( $entity->getType() );
-		return $handler->newContentFromEntity( $entity );
+		return $handler->makeEntityContent( $entity );
+	}
+
+	/**
+	 * Constructs a new EntityContent from an EntityRedirect.
+	 *
+	 * @see EntityHandler::makeEntityRedirectContent
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityRedirect $redirect
+	 *
+	 * @return EntityContent
+	 */
+	public function newFromRedirect( EntityRedirect $redirect ) {
+		$handler = $this->getContentHandlerForType( $redirect->getEntityId()->getEntityType() );
+		return $handler->makeEntityRedirectContent( $redirect );
 	}
 
 	/**

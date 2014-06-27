@@ -2,16 +2,10 @@
 
 namespace Wikibase;
 
-use DatabaseUpdater;
 use DBAccessBase;
 use DBError;
-use HashBagOStuff;
 use InvalidArgumentException;
-use ObservableMessageReporter;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\WikiPageEntityLookup;
 
 /**
  * Class PropertyInfoTable implements PropertyInfoStore on top of an SQL table.

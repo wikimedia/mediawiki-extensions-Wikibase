@@ -146,6 +146,29 @@ class EntityContentDataCodec {
 	}
 
 	/**
+	 * Encodes an EntityRedirect into a blob for storage.
+	 *
+	 * @see Entity::toArray()
+	 * @see EntityHandler::serializeContent()
+	 *
+	 * @param EntityRedirect $redirect
+	 * @param string|null $format The desired serialization format.
+	 *
+	 * @throws InvalidArgumentException If the format is not supported.
+	 * @throws MWContentSerializationException If the array could not be encoded.
+	 * @return string A blob representing the given Entity.
+	 */
+	public function encodeRedirect( EntityRedirect $redirect, $format ) {
+		// TODO: Use proper Serializer
+		$data = array(
+			'entity' => $redirect->getEntityId()->getSerialization(),
+			'redirect' => $redirect->getTargetId()->getSerialization(),
+		);
+
+		return $this->encodeEntityContentData( $data, $format );
+	}
+
+	/**
 	 * Decodes the given blob into an array structure representing an EntityContent
 	 * object.
 	 *
@@ -193,7 +216,8 @@ class EntityContentDataCodec {
 	 * @param string|null $format The serialization format of $blob.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
-	 * @throws MWContentSerializationException If the array could not be decoded.
+	 * @throws MWContentSerializationException If the array could not be decoded
+	 *
 	 * @return Entity|null The Entity represented by $blob, or null if $blob represents a redirect.
 	 */
 	public function decodeEntity( $blob, $format ) {
@@ -209,6 +233,46 @@ class EntityContentDataCodec {
 			return $entity;
 		}
 		catch ( DeserializationException $ex ) {
+			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
+		}
+	}
+
+	/**
+	 * Decodes a blob loaded from storage into an EntityRedirect.
+	 *
+	 * @see Entity::toArray()
+	 * @see EntityHandler::serializeContent()
+	 *
+	 * @param string $blob
+	 * @param string|null $format The serialization format of $blob.
+	 *
+	 * @throws InvalidArgumentException If the format is not supported.
+	 * @throws MWContentSerializationException If the array could not be decoded.
+	 * @return EntityRedirect|null The EntityRedirect represented by $blob,
+	 *         or null if $blob does not represent a redirect.
+	 */
+	public function decodeRedirect( $blob, $format ) {
+		$data = $this->decodeEntityContentData( $blob, $format );
+
+		$targetId = $this->extractEntityId( $data, 'redirect' );
+
+		if ( !$targetId ) {
+			// If it's not a redirect, return null.
+			return null;
+		}
+
+		$entityId = $this->extractEntityId( $data, 'entity' );
+
+		if ( !$entityId ) {
+			throw new MWContentSerializationException( 'No entity ID found in serialization data!' );
+		}
+
+		try {
+			// TODO: Use proper Deserializer
+			$redirect = new EntityRedirect( $entityId, $targetId );
+			return $redirect;
+		}
+		catch ( InvalidArgumentException $ex ) {
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 	}

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Test\EntityTestCase;
 
 /**
@@ -89,6 +90,29 @@ class EntityContentDataCodecTest extends EntityTestCase {
 
 		$actual = $this->codec->decodeEntity( $blob, $format );
 		$this->assertTrue( $entity->equals( $actual ), 'round trip' );
+	}
+
+	public function redirectProvider() {
+		$q6 = new ItemId( 'Q6' );
+		$q8 = new ItemId( 'Q8' );
+
+		$redirect = new EntityRedirect( $q6, $q8 );
+
+		return array(
+			'redirect' => array( $redirect, null ),
+			'empty json' => array( $redirect, CONTENT_FORMAT_JSON ),
+		);
+	}
+
+	/**
+	 * @dataProvider redirectProvider
+	 */
+	public function testEncodeAndDecodeRedirect( EntityRedirect $redirect, $format ) {
+		$blob = $this->codec->encodeRedirect( $redirect, $format );
+		$this->assertType( 'string', $blob );
+
+		$actual = $this->codec->decodeRedirect( $blob, $format );
+		$this->assertTrue( $redirect->equals( $actual ), 'round trip' );
 	}
 
 	public function testGetDefaultFormat_isJson() {

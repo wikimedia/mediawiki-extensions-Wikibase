@@ -4,11 +4,13 @@ namespace Wikibase\Tests\Repo;
 
 use Content;
 use Revision;
+use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
@@ -46,6 +48,19 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$item->setId( $id );
 
 		$content = ItemContent::newFromItem( $item );
+		return $content;
+	}
+
+	/**
+	 * @param ItemId $id
+	 * @param ItemId $target
+	 *
+	 * @return EntityContent
+	 */
+	protected function makeItemRedirectContent( ItemId $id, ItemId $target ) {
+		$title = Title::newFromText( $target->getSerialization() );
+		$redirect = new EntityRedirect( $id, $target );
+		$content = ItemContent::newFromRedirect( $redirect, $title );
 		return $content;
 	}
 
@@ -107,6 +122,17 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testNotifyOnPageDeleted_redirect() {
+		$user = $this->makeUser( 'ChangeNotifierTestUser' );
+		$timestamp = '20140523' . '174822';
+		$content = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
+
+		$notifier = $this->getChangeNotifier();
+		$change = $notifier->notifyOnPageDeleted( $content, $user, $timestamp );
+
+		$this->assertNull( $change );
+	}
+
 	public function testNotifyOnPageUndeleted() {
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$user->setId( 17 );
@@ -115,12 +141,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$content = $this->makeItemContent( new ItemId( 'Q12' ) );
 		$revisionId = 12345;
 
-		$revision = new Revision( array(
-			'id' => $revisionId,
-			'content' => $content,
-			'timestamp' => $timestamp,
-			'user' => $user->getId(),
-		) );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
 
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageUndeleted( $revision );
@@ -141,6 +162,22 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 			),
 			$change->getFields()
 		);
+	}
+
+	public function testNotifyOnPageUndeleted_redirect() {
+		$user = $this->makeUser( 'ChangeNotifierTestUser' );
+		$user->setId( 17 );
+
+		$timestamp = '20140523' . '174822';
+		$content = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
+		$revisionId = 12345;
+
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
+
+		$notifier = $this->getChangeNotifier();
+		$change = $notifier->notifyOnPageUndeleted( $revision );
+
+		$this->assertNull( $change );
 	}
 
 	public function testNotifyOnPageCreated() {
@@ -166,6 +203,20 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testNotifyOnPageCreated_redirect() {
+		$user = $this->makeUser( 'ChangeNotifierTestUser' );
+		$timestamp = '20140523' . '174822';
+		$revisionId = 12345;
+
+		$content = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
+
+		$notifier = $this->getChangeNotifier();
+		$change = $notifier->notifyOnPageCreated( $revision );
+
+		$this->assertNull( $change );
+	}
+
 	public function testNotifyOnPageModified() {
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$timestamp = '20140523' . '174822';
@@ -188,6 +239,75 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 				'revision_id' => $revisionId,
 				'time' => $timestamp,
 				'type' => 'wikibase-item~update',
+			),
+			$change->getFields()
+		);
+	}
+
+	public function testNotifyOnPageModified_redirect() {
+		$user = $this->makeUser( 'ChangeNotifierTestUser' );
+		$timestamp = '20140523' . '174822';
+		$revisionId = 12345;
+
+		$oldContent = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
+		$parent = $this->makeRevision( $oldContent, $user, $revisionId-1, $timestamp );
+
+		$content = $this->makeItemRedirectContent( $oldContent->getEntityId(), new ItemId( 'Q19' ) );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
+
+		$notifier = $this->getChangeNotifier();
+		$change = $notifier->notifyOnPageModified( $revision, $parent );
+
+		$this->assertNull( $change );
+	}
+
+	public function testNotifyOnPageModified_from_redirect() {
+		$user = $this->makeUser( 'ChangeNotifierTestUser' );
+		$timestamp = '20140523' . '174822';
+		$revisionId = 12345;
+
+		$oldContent = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
+		$parent = $this->makeRevision( $oldContent, $user, $revisionId-1, $timestamp );
+
+		$content = $this->makeItemContent( $oldContent->getEntityId() );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
+
+		$notifier = $this->getChangeNotifier();
+		$change = $notifier->notifyOnPageModified( $revision, $parent );
+
+		$this->assertFields(
+			array(
+				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
+				'user_id' => $user->getId(),
+				'revision_id' => $revisionId,
+				'time' => $timestamp,
+				'type' => 'wikibase-item~restore',
+			),
+			$change->getFields()
+		);
+	}
+
+	public function testNotifyOnPageModified_to_redirect() {
+		$user = $this->makeUser( 'ChangeNotifierTestUser' );
+		$timestamp = '20140523' . '174822';
+		$revisionId = 12345;
+
+		$oldContent = $this->makeItemContent( new ItemId( 'Q12' ) );
+		$parent = $this->makeRevision( $oldContent, $user, $revisionId-1, $timestamp );
+
+		$content = $this->makeItemRedirectContent( $oldContent->getEntityId(), new ItemId( 'Q19' ) );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
+
+		$notifier = $this->getChangeNotifier();
+		$change = $notifier->notifyOnPageModified( $revision, $parent );
+
+		$this->assertFields(
+			array(
+				'object_id' => strtolower( $content->getEntityId()->getSerialization() ),
+				'user_id' => $user->getId(),
+				'revision_id' => $revisionId,
+				'time' => $timestamp,
+				'type' => 'wikibase-item~remove',
 			),
 			$change->getFields()
 		);
