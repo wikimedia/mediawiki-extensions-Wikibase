@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_8ec6574d",
+        "filename": "repo/resources/wikibase.ui.entitysearch.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T17:57:50Z",
+      "side": 1,
+      "message": "How is this change related to the bug described in the commit message?",
+      "revId": "0da81052ec93e5af7e51dd4053d755cac62a4627",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_ceac5f87",
+        "filename": "repo/resources/wikibase.ui.entitysearch.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T17:57:50Z",
+      "side": 1,
+      "message": "Wait. Why is this restricted to events that start with the substring \"key\"? Whats the idea behind this check? We just removed this in I173f87b1d8cbf26fa494d44cbaffee6fcc52dbb8 because it made it impossible to do certain actions with the mouse.\n\nI\u0027m smelling a browser issue here. Chrome?",
+      "revId": "0da81052ec93e5af7e51dd4053d755cac62a4627",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
