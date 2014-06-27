@@ -11,7 +11,15 @@
 	$.widget( 'wikibase.entitysearch', $.wikibase.entityselector, {
 
 		/**
-		 *@see jQuery.ui.entityselector._createMenuItemFromSuggestion
+		 * @see jQuery.wikibase.entityselector._create
+		 */
+		_create: function() {
+			$.wikibase.entityselector.prototype._create.call( this );
+			this.element.off( 'blur' );
+		},
+
+		/**
+		 *@see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
 		 */
 		_createMenuItemFromSuggestion: function( suggestion ) {
 			var $label = this._createLabelFromSuggestion( suggestion ),
@@ -21,7 +29,7 @@
 		},
 
 		/**
-		 * @see jQuery.ui.entityselector._createMenuItemFromSuggestion
+		 * @see jQuery.wikibase.entityselector._createMenuItemFromSuggestion
 		 */
 		_initMenu: function( ooMenu ) {
 			$.wikibase.entityselector.prototype._initMenu.apply( this, arguments );
@@ -29,10 +37,7 @@
 			ooMenu.element.addClass( 'wikibase-entitysearch-list' );
 
 			$( ooMenu )
-			.off( 'selected' )
-			.on( 'selected.entitysearch', function( event, item ) {
-				location.href = item.getEntityStub().url;
-			} );
+			.off( 'selected' );
 
 			return ooMenu;
 		}
