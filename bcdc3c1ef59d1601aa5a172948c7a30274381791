@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_b954beca",
+        "filename": "lib/includes/store/EntityRevision.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T20:55:28Z",
+      "side": 1,
+      "message": "I honestly have no idea how Hungarian notation exactly works. This is not a data type. This describes on a high, abstract level what this field is. Nothing more, nothing less. Naming a field $timestamp is almost like naming a field $int.",
+      "parentUuid": "ee391fd1_6de8d9dd",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_cdb8e5e4",
         "filename": "lib/includes/store/EntityRevision.php",
         "patchSetId": 6
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_3968ce83",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T20:55:28Z",
+      "side": 1,
+      "message": "$opt like in \"optional\"? \"Optimum\"? \"Optics\"? Sorry, I fail to see an information here. I removed the badly named, pointless and confusing variable for exactly that reason: to increase readability.\n\nBefore: Oh, so the SELECT uses options? Why does it do that? Where are these options? I can\u0027t see any in the code. Got they lost halfway in an incomplete refactoring session or what? Why is this a variable if it\u0027s never used? I\u0027m confused.\n\nAfter: Ok, this parameter is not used.\n\nPlace the cursor next to the array() and press Ctrl+P and PHPStorm will show you the meaning of the parameter.",
+      "parentUuid": "ee391fd1_0da6edbe",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_cdafc590",
         "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
         "patchSetId": 6
@@ -98,6 +134,24 @@
       "writtenOn": "2014-06-13T12:49:52Z",
       "side": 1,
       "message": "object[] implies a list of objects... it\u0027s not really a list, it\u0027s a tuple, so i would use array in this case. just a matter of taste, i guess.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_79f536c7",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T20:55:28Z",
+      "side": 1,
+      "message": "\"array\" implies an unbounded list of \"mixed\". It\u0027s identical to \"mixed[]\". This is worse, isn\u0027t it?",
+      "parentUuid": "ee391fd1_cdafc590",
       "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
