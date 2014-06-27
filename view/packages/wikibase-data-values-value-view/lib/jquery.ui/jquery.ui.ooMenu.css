@@ -19,3 +19,7 @@
 .ui-ooMenu li a {
 	display: block;
 }
+
+.ui-ooMenu li.ui-ooMenu-customItem-action {
+	cursor: pointer;
+}
