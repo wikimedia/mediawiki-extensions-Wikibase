@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_6e557352",
+        "filename": "lib/includes/IO/EntityIdReader.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T18:25:52Z",
+      "side": 1,
+      "message": "Here. It can\u0027t be null.",
+      "revId": "b6f1ade21fddc3f899c2e87a6012d72554a59637",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
