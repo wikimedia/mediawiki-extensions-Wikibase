@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -75,7 +74,7 @@ class ItemContentTest extends EntityContentTest {
 		/** @var ItemContent $itemContent */
 		$itemContent = $this->newEmpty();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
-		$itemContent->getEntity()->addSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
+		$itemContent->getEntity()->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
 
 		return array(
 			array( $itemContent, '!^cake$!' ),

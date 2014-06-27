@@ -8,7 +8,6 @@ use Site;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -101,14 +100,14 @@ class UpdateRepoOnMoveJob extends Job {
 	}
 
 	/**
-	 * Get a SimpleSiteLink for a specific item and site
+	 * Get a SiteLink for a specific item and site
 	 *
 	 * @param Item $item
 	 * @param string $globalId
 	 *
-	 * @return SimpleSiteLink|null
+	 * @return SiteLink|null
 	 */
-	protected function getSimpleSiteLink( $item, $globalId ) {
+	protected function getSiteLink( $item, $globalId ) {
 		try {
 			return $item->getSiteLink( $globalId );
 		} catch( OutOfBoundsException $e ) {
@@ -162,7 +161,7 @@ class UpdateRepoOnMoveJob extends Job {
 
 		$site = $this->getSite( $siteId );
 
-		$oldSiteLink = $this->getSimpleSiteLink( $item, $siteId );
+		$oldSiteLink = $this->getSiteLink( $item, $siteId );
 		if ( !$oldSiteLink || $oldSiteLink->getPageName() !== $oldPage ) {
 			// Probably something changed since the job has been inserted
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": The site link to " . $siteId . " is no longer $oldPage" );
@@ -178,7 +177,7 @@ class UpdateRepoOnMoveJob extends Job {
 			return false;
 		}
 
-		$siteLink = new SimpleSiteLink(
+		$siteLink = new SiteLink(
 			$siteId,
 			$newPage
 		);

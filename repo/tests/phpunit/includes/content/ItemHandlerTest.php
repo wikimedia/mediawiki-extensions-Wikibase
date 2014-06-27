@@ -2,17 +2,16 @@
 
 namespace Wikibase\Test;
 
-use Title;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Entity;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\ItemHandler;
-use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -57,7 +56,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		 * @var ItemContent $content
 		 */
 		$content = clone $contents[1][0];
-		$content->getItem()->addSiteLink( new SimpleSiteLink( 'enwiki', 'Foobar' ) );
+		$content->getItem()->addSiteLink( new SiteLink( 'enwiki', 'Foobar' ) );
 		$contents[] = array( $content );
 
 		return $contents;

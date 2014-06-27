@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\SimpleSiteLink;
-use Wikibase\Item;
+use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ItemSearchTextGenerator;
 
 /**
@@ -25,8 +25,8 @@ class ItemSearchTextGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$item->setDescription( 'en', 'city in Spain' );
 		$item->setAliases( 'en', array( 'abc', 'cde' ) );
 		$item->setAliases( 'de', array( 'xyz', 'uvw' ) );
-		$item->addSiteLink( new SimpleSiteLink( 'dewiki', 'Berlin' ) );
-		$item->addSiteLink( new SimpleSiteLink( 'enwiki', 'Rome' ) );
+		$item->addSiteLink( new SiteLink( 'dewiki', 'Berlin' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Rome' ) );
 
 		$patterns = array(
 			'/^Test$/',
