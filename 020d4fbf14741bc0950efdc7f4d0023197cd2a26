@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_147b9bec",
+        "filename": "lib/includes/store/EntityContentDataCodec.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "I do, because it makes it easier to spot the return type.",
+      "parentUuid": "ae43a74e_7ee64615",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_b90608d0",
         "filename": "lib/includes/store/EntityRedirect.php",
         "patchSetId": 46
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-27T00:40:24Z",
       "side": 1,
       "message": "Adding if ( $this \u003d\u003d\u003d $that ) { return true; } would be nice but is optional.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_f477f7fb",
+        "filename": "lib/includes/store/EntityRedirect.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "right. maybe it\u0027ll add that.",
+      "parentUuid": "ae43a74e_b90608d0",
       "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -88,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_b4c84f26",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "Returning the Change object in addition to sending it is a bit strange, yes. It\u0027s mainly to make testing easier.  We could change that.\n\nBut that\u0027s not the subject of this change at all. Let\u0027s improve the design of the ChangeNotifier later.",
+      "parentUuid": "ae43a74e_d922eca1",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_cc5a3e22",
         "filename": "repo/includes/Notifications/ChangeNotifier.php",
         "patchSetId": 46
@@ -123,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_14f83b45",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "I have rewritten this method to reduce the complexity. I did not find an obvious way to split it.",
+      "parentUuid": "ae43a74e_cc5a3e22",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_f9c81079",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 46
@@ -134,6 +206,24 @@
       "writtenOn": "2014-06-27T00:40:24Z",
       "side": 1,
       "message": "This is not a getter.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_54fec336",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_f9c81079",
       "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -157,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_74e9c77a",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_ac9ffab8",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_4cae4ee6",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 46
@@ -168,6 +276,24 @@
       "writtenOn": "2014-06-25T15:57:15Z",
       "side": 1,
       "message": "How about putting the diffing and patching stuff in dedicated service objects? This is adding quite some complexity and dependencies to EntityContent.",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_34fb3f46",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "That would be nice, but it would require EntityContent to expose getRedirectData(), which is a messy internal detail I really don\u0027t want to be public. I\u0027d be happy to discuss options with you, but let\u0027s keep this as it is for now if you don\u0027t see other problems.",
+      "parentUuid": "ae43a74e_4cae4ee6",
       "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -191,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_74a0a73e",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "Can\u0027t happen any more.",
+      "parentUuid": "ae43a74e_59803cf9",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_19a99478",
         "filename": "repo/includes/content/ItemHandler.php",
         "patchSetId": 46
@@ -202,6 +346,24 @@
       "writtenOn": "2014-06-27T00:40:24Z",
       "side": 1,
       "message": "Where does the \"make\" naming scheme come from when the same thing is called \"newEmpty\" the line below?",
+      "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_94b2eb90",
+        "filename": "repo/includes/content/ItemHandler.php",
+        "patchSetId": 46
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-27T12:00:33Z",
+      "side": 1,
+      "message": "From the ContentHandler base class. I guess it was my mistake. To me, it implies that something is/may be constructed in a more complex way than just calling new. But that\u0027s a detail that shouldn\u0027t be exposed anyway. \n\nBut, since ContentHandler uses this scheme, I think it\u0027s consistent to stick with it here.",
+      "parentUuid": "ae43a74e_19a99478",
       "revId": "020d4fbf14741bc0950efdc7f4d0023197cd2a26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
