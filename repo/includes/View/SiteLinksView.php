@@ -174,7 +174,7 @@ class SiteLinksView {
 	private function getTableFootHtml( $entityId, $isFull ) {
 		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			'<td>' . $this->getHtmlForEditSection( $entityId, '', 'add', !$isFull ) . '</td>'
+			$this->getHtmlForSiteLinkEditSection( $entityId, '', 'add', !$isFull )
 		);
 
 		return $tfoot;
@@ -223,7 +223,7 @@ class SiteLinksView {
 			$escapedSiteId, // displayed site ID
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			$escapedPageName,
-			'<td>' . $this->getHtmlForEditSection( $entityId, $escapedSiteId ) . '</td>',
+			$this->getHtmlForSiteLinkEditSection( $entityId, $escapedSiteId ),
 			$escapedSiteId // ID used in classes
 		);
 	}
@@ -246,11 +246,13 @@ class SiteLinksView {
 			$alternatingClass,
 			$escapedSiteId,
 			$escapedPageName,
-			'<td>' . $this->getHtmlForEditSection( $entityId ) . '</td>'
+			$this->getHtmlForSiteLinkEditSection( $entityId )
 		);
 	}
 
-	private function getHtmlForEditSection( EntityId $entityId, $subPage = '', $action = 'edit', $enabled = true ) {
+	private function getHtmlForSiteLinkEditSection( EntityId $entityId, $subPage = '',
+		$action = 'edit', $enabled = true
+	) {
 		$msg = new Message( 'wikibase-' . $action );
 		$specialPage = 'SetSiteLink';
 		$specialPageParams = array(
@@ -264,6 +266,7 @@ class SiteLinksView {
 			$specialPage,
 			$specialPageParams,
 			$msg,
+			'td',
 			$enabled
 		);
 	}

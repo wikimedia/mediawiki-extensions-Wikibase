@@ -25,15 +25,24 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getHtmlForEditSectionProvider
 	 */
-	public function testGetHtmlForEditSection( $expected, $pageName, $action, $enabled, $langCode ) {
+	public function testGetHtmlForEditSection( $expected, $pageName, $action, $tag, $enabled,
+		$langCode
+	) {
 		$generator = new SectionEditLinkGenerator();
 
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = wfMessage( $key )->inLanguage( $langCode );
 
-		$editSectionHtml = $generator->getHtmlForEditSection( $pageName, array(), $msg, $enabled );
+		$editSectionHtml = $generator->getHtmlForEditSection(
+			$pageName,
+			array(),
+			$msg,
+			$tag,
+			$enabled
+		);
+
 		$matcher = array(
-			'tag' => 'span',
+			'tag' => $tag,
 			'class' => 'wb-editsection'
 		);
 
@@ -47,6 +56,7 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 				'/' . wfMessage( 'wikibase-edit' )->inLanguage( 'es' )->text() . '/',
 				'Version',
 				'edit',
+				'span',
 				true,
 				'es'
 			),
@@ -54,6 +64,7 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 				'/' . wfMessage( 'wikibase-add' )->inLanguage( 'de' )->text() . '/',
 				'Version',
 				'add',
+				'blink',
 				true,
 				'de'
 			)
@@ -67,7 +78,12 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function testGetHtmlForEditSection_editUrl( $expected, $specialPageName, $specialPageParams ) {
 		$generator = new SectionEditLinkGenerator();
 
-		$editSection = $generator->getHtmlForEditSection( $specialPageName, $specialPageParams, wfMessage( 'wikibase-add' ) );
+		$editSection = $generator->getHtmlForEditSection(
+			$specialPageName,
+			$specialPageParams,
+			wfMessage( 'wikibase-add' ),
+			'span'
+		);
 
 		$this->assertTag( $expected, $editSection );
 	}
