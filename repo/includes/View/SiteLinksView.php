@@ -4,7 +4,6 @@ namespace Wikibase\Repo\View;
 
 use Message;
 use SiteList;
-use SiteStore;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
@@ -27,8 +26,8 @@ class SiteLinksView {
 	 */
 	private $specialSiteLinkGroups;
 
-	public function __construct( SiteStore $siteStore, SectionEditLinkGenerator $sectionEditLinkGenerator ) {
-		$this->sites = $siteStore->getSites();
+	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator ) {
+		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->specialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
 	}
