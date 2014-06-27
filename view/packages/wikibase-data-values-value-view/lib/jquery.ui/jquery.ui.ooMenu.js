@@ -511,6 +511,13 @@ CustomItem = util.inherit(
 		 */
 		getCssClass: function() {
 			return this._cssClass;
+		},
+
+		/**
+		 * @param {string} [link]
+		 */
+		setLink: function( link ) {
+			this._link = link || null;
 		}
 	}
 );

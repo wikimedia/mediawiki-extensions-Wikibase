@@ -109,6 +109,10 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.4 (dev)
+* Added setLink() function to jQuery.ui.ooMenu.CustomItem prototype allowing dynamical updates of the link target.
+* Removed default "javascript:void(0);" link target of jQuery.ui.ooMenu.CustomItem instances.
+
 ### 0.6.3 (2014-06-25)
 * Added expert for MonolingualText values.
 * Support editing arbitrary precisions for GlobeCoordinates.
