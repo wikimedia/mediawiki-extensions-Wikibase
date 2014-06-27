@@ -26,6 +26,7 @@
 	"wikibase-label-input-help-message": "Унесите назив овог скупа података на језику $1.",
 	"wikibase-description-input-help-message": "Унесите кратак опис на $1 језику.",
 	"wikibase-statements": "Изјаве",
+	"wikibase-attributes": "Особине",
 	"wikibase-terms": "На другим језицима",
 	"wikibase-sitelinks-input-help-message": "Поставите везу према страници која се односи на ову ставку.",
 	"wikibase-remove": "уклони",

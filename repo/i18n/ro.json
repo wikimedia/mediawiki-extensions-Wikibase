@@ -69,7 +69,6 @@
 	"wikibase-anonymouseditwarning": "Atenție: Nu sunteți autentificat.\nAdresa dumnevoastră IP va fi memorată în istoricul modificărilor al acestei entități.",
 	"wikibase-restrictionedit-tooltip-message": "Această pagină este protejată. Editarea nu este permisă.",
 	"wikibase-blockeduser-tooltip-message": "Nu aveți permisiunea de a modifica întrucât numele dumneavoastră de utilizator sau adresa IP v-a fost blocat(ă).",
-	"wikibase-warning-constraint-violation-length": "O limitare de lungime a fost declanșată pentru codul de limbă „$1”.",
 	"wikibase-validator-label-conflict": "O altă proprietate ($3) are deja eticheta „$1” asociată cu codul de limbă $2.",
 	"wikibase-validator-label-no-entityid": "Eticheta nu trebuie să fie un ID de entitate valid.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Identificatorul de limbă „$1” nu este cunoscut. Utilizați un identificator de limbă recunoscut de sistem, cum ar fi „en”.",
