@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_b51cd67d",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T12:29:52Z",
+      "side": 1,
+      "message": "Aude is more happy with the old message.",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_b022a4a0",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T12:29:52Z",
+      "side": 1,
+      "message": "\u0027wikibase-wikibaserepopage-invalid-langcode\u0027 and \u0027wikibase-itemdisambiguation-invalid-langcode\u0027 are duplicates.",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_f0182c7c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T12:29:52Z",
+      "side": 1,
+      "message": "\u0027wikibase-wikibaserepopage-invalid-langcode\u0027 and \u0027wikibase-itemdisambiguation-invalid-langcode\u0027 are duplicates.",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_701c3c6b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T12:29:52Z",
+      "side": 1,
+      "message": "To complicated!",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_50213899",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T12:29:52Z",
+      "side": 1,
+      "message": "To complicated!",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
