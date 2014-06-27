@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_0eb94778",
+        "filename": "lib/tests/phpunit/serializers/SiteLinkSerializerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-27T18:35:23Z",
+      "side": 1,
+      "message": "Uppercase mistake. Fixed it in PS2.",
+      "revId": "4578fd68cbc528094f682a4e3403af3c9ff407f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
