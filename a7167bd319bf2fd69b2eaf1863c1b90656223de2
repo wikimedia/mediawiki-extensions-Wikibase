@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_546119cf",
+        "filename": "client/includes/store/ClientStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T14:18:28Z",
+      "side": 1,
+      "message": "This does not makes sense. You did not changed anything here in the interface.",
+      "revId": "a7167bd319bf2fd69b2eaf1863c1b90656223de2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_743d3db8",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T14:18:28Z",
+      "side": 1,
+      "message": "Oh, that\u0027s the reason for the endless loop in the following patch. This really should not be in our code base, not even for a minute.",
+      "revId": "a7167bd319bf2fd69b2eaf1863c1b90656223de2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
