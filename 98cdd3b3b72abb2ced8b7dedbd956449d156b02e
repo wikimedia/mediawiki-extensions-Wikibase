@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_74641de2",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-28T14:18:00Z",
+      "side": 1,
+      "message": "This is not better than in_array. Please don\u0027t use \"raw\" or \"magic\" comparison of objects.",
+      "revId": "98cdd3b3b72abb2ced8b7dedbd956449d156b02e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
