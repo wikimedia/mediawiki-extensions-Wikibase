@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_f7c36f08",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-06-28T21:36:09Z",
+      "side": 1,
+      "message": "That\u0027s right: The caller has to know about the special page and what arguments it takes, and the method knows how to encode this into an URL. Unless the SectionEditLinkGenerator learns about all the edit special pages we use and provides a dedicated method for each special page, that seems to be the correct split of responsibilities to me.",
+      "parentUuid": "ae43a74e_20365401",
+      "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_f515beea",
         "filename": "repo/includes/View/SectionEditLinkGenerator.php",
         "patchSetId": 3
