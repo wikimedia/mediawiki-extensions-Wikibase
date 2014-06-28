@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_d44e2972",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-28T14:15:53Z",
+      "side": 1,
+      "message": "Am I missing something? We can\u0027t just switch to upper case...\n\nChanges use a lowercase version of the entity ID as the object id, for historical reasons. It\u0027s annoying, but we can\u0027t just change it without a clear migration path. Note that the changes table is a communication channel between the repo and the client, and is thus often accessed by different versions of Wikibase at the same time. It\u0027s also a buffer, so even if client and repo were updated at once.",
+      "revId": "cdafe9468dab61dbc53480bb7ba79b9148d6e4e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_543a39c1",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-28T14:15:53Z",
+      "side": 1,
+      "message": "The intention of the old version was that the test would still pass when we change to upper case.",
+      "revId": "cdafe9468dab61dbc53480bb7ba79b9148d6e4e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
