@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_20365401",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T13:46:51Z",
+      "side": 1,
+      "message": "Then you should have picked an other interface. With this array the caller still has to know pretty much everything: The order of the parameters, the possible values and their meaning depending on the special page. The only advantage of the array is that the caller does not have to know about the slash.\n\nPossible solutions: Two parameters ..., string $prefixedId, string $languageCode, ... or an array( \u0027prefixedId\u0027 \u003d\u003e ..., languageCode\u0027 \u003d\u003e ... ). Then it really is an \"array of parameters\" and not just an array of not yet concatenated strings.",
+      "parentUuid": "ae43a74e_f57a5ee6",
+      "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_f515beea",
         "filename": "repo/includes/View/SectionEditLinkGenerator.php",
         "patchSetId": 3
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "I don\u0027t and I would have found it while changing getHtmlForEditSection.",
       "parentUuid": "ae43a74e_f515beea",
+      "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_802620c8",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T13:46:51Z",
+      "side": 1,
+      "message": "For the record: See I2860129712aa83c23402a514fe92792c76ef1d02 (bug 67244).",
+      "parentUuid": "ae43a74e_9569d21f",
       "revId": "60e6595307839fcdc95dbce476786613c10e71b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
