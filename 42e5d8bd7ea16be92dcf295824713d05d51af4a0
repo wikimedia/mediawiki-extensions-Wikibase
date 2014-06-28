@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_d42749b0",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T14:12:34Z",
+      "side": 1,
+      "message": "Wait, what? This was an endless loop before! How did this happened?",
+      "revId": "42e5d8bd7ea16be92dcf295824713d05d51af4a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
