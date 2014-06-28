@@ -16,6 +16,24 @@
       "revId": "98cdd3b3b72abb2ced8b7dedbd956449d156b02e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_347a1520",
+        "filename": "lib/tests/phpunit/store/TermIndexTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T16:45:27Z",
+      "side": 1,
+      "message": "I will not change this further. There is nothing \"magic\" here. This checks if an element can be found in an array. Thats it. What you suggested would make this code overly complicated, unreadable and would also be completely pointless since it does the exact same. There is nothing wrong here. Please construct a test case that succeeds when it shouldn\u0027t. If you can\u0027t find any then please merge this as it is.",
+      "parentUuid": "ae43a74e_74641de2",
+      "revId": "98cdd3b3b72abb2ced8b7dedbd956449d156b02e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
