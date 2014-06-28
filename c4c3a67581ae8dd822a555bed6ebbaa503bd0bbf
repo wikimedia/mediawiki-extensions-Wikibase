@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_348575a0",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T18:57:19Z",
+      "side": 1,
+      "message": "See, that\u0027s why this needs to be documented. ;-) Done.",
+      "parentUuid": "ae43a74e_f49fedb7",
+      "revId": "c4c3a67581ae8dd822a555bed6ebbaa503bd0bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_d4a4e906",
         "filename": "repo/includes/content/ItemContent.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-28T14:23:49Z",
       "side": 1,
       "message": "I\u0027m dubious about changing the return type when overriding methods. It\u0027s sound in theory, as long as we only narrow the type. Should be OK I guess, but I seem to recall that PHPStorm complains. Maybe that was in an old version?",
+      "revId": "c4c3a67581ae8dd822a555bed6ebbaa503bd0bbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_944d419e",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T18:57:19Z",
+      "side": 1,
+      "message": "Sure, this only makes sense when we narrow the type to be a subclass. It\u0027s a documentation after all, nothing PHP uses at runtime. PHPStorm knows this is a subclass and will suggest something in the line of \"EntityView|ItemView\" in usages and potential subclasses. Which is fine IMHO.",
+      "parentUuid": "ae43a74e_d4a4e906",
       "revId": "c4c3a67581ae8dd822a555bed6ebbaa503bd0bbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
