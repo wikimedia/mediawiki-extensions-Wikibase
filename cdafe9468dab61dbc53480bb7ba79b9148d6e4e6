@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_549c795f",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T16:55:58Z",
+      "side": 1,
+      "message": "setField does the strtolower a second time.\n\nThats also the reason why the setRevisionInfo method above is fine even if it never did strtolower. setFields uses setField which takes care of the capitalization.",
+      "parentUuid": "ae43a74e_d44e2972",
+      "revId": "cdafe9468dab61dbc53480bb7ba79b9148d6e4e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_543a39c1",
         "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-28T14:15:53Z",
       "side": 1,
       "message": "The intention of the old version was that the test would still pass when we change to upper case.",
+      "revId": "cdafe9468dab61dbc53480bb7ba79b9148d6e4e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_34a9f578",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T16:55:58Z",
+      "side": 1,
+      "message": "You said it: Currently it\u0027s important to be lowercase. I really think this should be tested. Whoever wants to change the capitalization should be forced to change at least one test (which now is this one). He should know he is performing a breaking change.",
+      "parentUuid": "ae43a74e_543a39c1",
       "revId": "cdafe9468dab61dbc53480bb7ba79b9148d6e4e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
