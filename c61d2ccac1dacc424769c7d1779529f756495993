@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_14ba711e",
+        "filename": "repo/includes/store/IdGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-28T14:28:35Z",
+      "side": 1,
+      "message": "This is currently the case, but really not a good thing; it should be using entity types, not content model ids. At least the interface shouldn\u0027t know anything about EntityContent or content models. The implementation probably shouldn\u0027t either.",
+      "revId": "c61d2ccac1dacc424769c7d1779529f756495993",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

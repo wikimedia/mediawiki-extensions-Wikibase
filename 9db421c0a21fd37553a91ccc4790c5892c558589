@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_34bd7517",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-28T14:28:35Z",
+      "side": 0,
+      "message": "This cleanup is helpful, but unrelated to IdGenerator. Please submit separately.",
+      "revId": "9db421c0a21fd37553a91ccc4790c5892c558589",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
