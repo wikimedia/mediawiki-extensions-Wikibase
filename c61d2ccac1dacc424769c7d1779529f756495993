@@ -16,6 +16,24 @@
       "revId": "c61d2ccac1dacc424769c7d1779529f756495993",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_3433350c",
+        "filename": "repo/includes/store/IdGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-28T19:07:57Z",
+      "side": 1,
+      "message": "Sorry, but this doesn\u0027t make sense. The whole interface is unusable and just pointless if the users are disallowed to know what the $type parameter means. What you suggest would require an second interface or at least two separate fromContentModel() and fromEntityType() methods.\n\nHere in this patch I should actually rename the parameter to $contentModel.",
+      "parentUuid": "ae43a74e_14ba711e",
+      "revId": "c61d2ccac1dacc424769c7d1779529f756495993",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
