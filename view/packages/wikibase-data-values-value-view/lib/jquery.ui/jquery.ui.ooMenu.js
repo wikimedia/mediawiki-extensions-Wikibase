@@ -151,19 +151,26 @@ $.widget( 'ui.ooMenu', {
 			? this.options.manipulateLabel( item.getLabel() )
 			: item.getLabel();
 
+		var $a = $( '<a/>' )
+			.attr( 'tabindex', -1 )
+			.html( label );
+
+		if( item.getLink() ) {
+			$a.attr( 'href', item.getLink() );
+		}
+
 		var $item = $( '<li/>' )
 			.addClass( 'ui-ooMenu-item' )
 			.attr( 'dir', 'auto' )
 			.data( 'ui-ooMenu-item', item )
-			.append(
-				$( '<a/>' )
-				.attr( 'href', item.getLink() )
-				.attr( 'tabindex', -1 )
-				.html( label )
-			);
+			.append( $a );
 
 		if( item instanceof $.ui.ooMenu.CustomItem ) {
 			$item.addClass( 'ui-ooMenu-customItem' );
+
+			if( $.isFunction( item.getAction() ) ) {
+				$item.addClass( 'ui-ooMenu-customItem-action' );
+			}
 
 			if( item.getCssClass() ) {
 				$item.addClass( item.getCssClass() );
@@ -419,10 +426,10 @@ $.extend( Item.prototype, {
 	},
 
 	/**
-	 * @return {string}
+	 * @return {string|null}
 	 */
 	getLink: function() {
-		return this._link || 'javascript:void(0);';
+		return this._link;
 	}
 } );
 
@@ -504,6 +511,13 @@ CustomItem = util.inherit(
 		 */
 		getCssClass: function() {
 			return this._cssClass;
+		},
+
+		/**
+		 * @param {string} [link]
+		 */
+		setLink: function( link ) {
+			this._link = link || null;
 		}
 	}
 );
