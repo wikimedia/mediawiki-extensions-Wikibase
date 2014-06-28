@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_ca27a2b0",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-28T22:47:09Z",
+      "side": 1,
+      "message": "Can this var ever get the return result of the messagesObjectToHtml method?! If so, I declare JS as being weird :)",
+      "revId": "6823a1ac2f6ce473205fb9dd35abdc960c536c1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
