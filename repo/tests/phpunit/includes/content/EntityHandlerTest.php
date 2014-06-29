@@ -375,6 +375,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testExportTransform_neverRecodeNonLegacyFormat() {
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		$oldEntitySerializer = $repo->getSettings()->getSetting( 'internalEntitySerializerClass' );
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
+
 		$codec = $this->getMockBuilder( '\Wikibase\Lib\Store\EntityContentDataCodec' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -384,7 +389,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			->method( 'encodeEntity' );
 
 		$entity = $this->newEntity();
-		$currentSerializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
+		$currentSerializer = $repo->getInternalEntitySerializer();
 		$expected = json_encode( $currentSerializer->serialize( $entity ) );
 
 		$settings = new SettingsArray();
@@ -393,6 +398,8 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$actual = $handler->exportTransform( $expected );
 
 		$this->assertEquals( $expected, $actual );
+
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', $oldEntitySerializer );
 	}
 
 }
