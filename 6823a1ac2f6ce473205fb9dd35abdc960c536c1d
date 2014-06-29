@@ -16,6 +16,24 @@
       "revId": "6823a1ac2f6ce473205fb9dd35abdc960c536c1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_c880ca4d",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-29T17:03:51Z",
+      "side": 1,
+      "message": "PHP forces a bool type cast when using these logical operators but most other languages including JavaScript don\u0027t do this. You get the uncasted result. It\u0027s more like PHP is acting weird. ;-)",
+      "parentUuid": "ae43a74e_ca27a2b0",
+      "revId": "6823a1ac2f6ce473205fb9dd35abdc960c536c1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
