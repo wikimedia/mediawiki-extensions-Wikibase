@@ -2,10 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use SpecialPageFactory;
-use Wikibase\Datamodel\Entity\Entity;
-use Wikibase\Datamodel\Entity\Item;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
@@ -89,7 +86,6 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 					'tag' => 'a',
 					'attributes' => array(
 						'href' => 'regexp:+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1/de$+',
-						'href' => 'regexp:+Special:Version/Q1/de+'
 					)
 				),
 				'Version',
