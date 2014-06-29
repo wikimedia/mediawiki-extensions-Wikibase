@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_6d6e9095",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-29T12:56:39Z",
+      "side": 1,
+      "message": "beSnippy :D Still I dislike my name the least :P",
+      "parentUuid": "ee391fd1_344e5a73",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_b4392acd",
         "filename": "repo/maintenance/dumpJson.php",
         "patchSetId": 9
@@ -48,6 +66,24 @@
       "writtenOn": "2014-06-23T12:00:26Z",
       "side": 1,
       "message": "This doesn\u0027t really convey the intent of this option. Perhaps like this? \"Output a JSON snippet without square brackets at the start and end. Allows output to be combined more freely\".",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_4d6bcc82",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-29T12:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_b4392acd",
       "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_ed0160ba",
+        "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-29T12:56:39Z",
+      "side": 1,
+      "message": "For some reason I though trim would only remove spaces per default",
+      "parentUuid": "ee391fd1_d9486734",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_9952dfe0",
         "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
         "patchSetId": 9
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_cd069cd1",
+        "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-29T12:56:39Z",
+      "side": 1,
+      "message": "I\u0027d rather call that feature creep, but nice over here indeed.",
+      "parentUuid": "ee391fd1_9952dfe0",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_794dfb3e",
         "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
         "patchSetId": 9
@@ -99,6 +171,24 @@
       "writtenOn": "2014-06-23T08:52:13Z",
       "side": 1,
       "message": "Why start with 1? This create 49 elements, right? Seems a bit overpowered. for ( $i \u003d 0; $i \u003c 6; $i++ ) should be enough for what needs to be tested here.",
+      "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_ad0b58d8",
+        "filename": "repo/tests/phpunit/Dumpers/JsonDumpGeneratorTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-06-29T12:56:39Z",
+      "side": 1,
+      "message": "heh... agreed :)",
+      "parentUuid": "ee391fd1_794dfb3e",
       "revId": "245987242bfbeca8f9eb2653cce3a9a254c3037d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
