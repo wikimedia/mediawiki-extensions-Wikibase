@@ -3,10 +3,12 @@
 		"authors": [
 			"Emperyan",
 			"Rapsar",
-			"Sadrettin"
+			"Sadrettin",
+			"Sayginer"
 		]
 	},
 	"specialpages-group-wikibaseclient": "Vikiveri istemcisi",
+	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
 	"wikibase-after-page-move-queued": "Bu sayfa ile ilişkili [$1 Vikiveri öğesi] kısa bir süre içinde otomatik olarak güncellenecektir.",
 	"wikibase-dataitem": "Veri öğesi",
 	"wikibase-editlinks": "Bağlantıları düzenle",

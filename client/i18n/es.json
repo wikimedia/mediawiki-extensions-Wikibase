@@ -12,7 +12,8 @@
 			"Invadinado",
 			"Pegna",
 			"Vivaelcelta",
-			"Themasterriot"
+			"Themasterriot",
+			"Macofe"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
@@ -42,13 +43,12 @@
 	"wikibase-linkitem-selectlink": "Selecciona un sitio y la página que quieres enlazar con esta.",
 	"wikibase-linkitem-input-site": "Idioma:",
 	"wikibase-linkitem-input-page": "Página:",
-	"wikibase-linkitem-confirmitem-text": "La página que usted eligió ya está asociada a un [$1 elemento de nuestro depósito central de datos]. Confirme que {{PLURAL:$2|la página|las páginas}} que se {{PLURAL:$2|muestra|muestran}} a continuación {{PLURAL:$2|es|son}} {{PLURAL:$2|la|las}} que desea enlazar con esta página.",
+	"wikibase-linkitem-confirmitem-text": "La página que usted eligió ya está asociada a un [$1 elemento de nuestro depósito central de datos]. Confirme que {{PLURAL:$2|la página|las páginas}} que se {{PLURAL:$2|muestra|muestran}} a continuación {{PLURAL:$2|es|son}} {{PLURAL:$2|la|las}} que desea enlazar a esta página.",
 	"wikibase-linkitem-confirmitem-button": "Confirmar",
 	"wikibase-linkitem-not-loggedin-title": "Necesita haberse identificado",
 	"wikibase-linkitem-not-loggedin": "Necesita haberse identificado en esta wiki y en el [$1 central data repository], para usar esta función.",
 	"wikibase-linkitem-success-link": "Se han enlazado las páginas correctamente. Puede encontrar el elemento que contiene los enlaces en el [$1 depósito central de datos].",
 	"wikibase-property-notfound": "No se encuentra la propiedad \"$1\"",
-	"wikibase-property-notsupportedyet": "Wikibase aún no soporta el tipo de propiedad de la propiedad \"$1\".",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
 	"wikibase-rc-hide-wikidata-show": "Mostrar",

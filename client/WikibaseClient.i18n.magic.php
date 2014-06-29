@@ -121,6 +121,11 @@ $magicWords['nn'] = array(
 	'noexternallanglinks' => array( 0, 'ingenspråklenkjerutanfrå' ),
 );
 
+/** Polish (polski) */
+$magicWords['pl'] = array(
+	'property' => array( 0, 'właściwość' ),
+);
+
 /** Portuguese (português) */
 $magicWords['pt'] = array(
 	'property' => array( 0, 'propriedade' ),
