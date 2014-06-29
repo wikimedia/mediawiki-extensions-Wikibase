@@ -88,6 +88,24 @@
       "revId": "e73e1214d137682fceef87896a86808a13c6fdeb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_c8ce8ab9",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-29T17:46:54Z",
+      "side": 1,
+      "message": "Oh, right, thanks for the hint. This is actually one of the few cases where the ?: shortcut makes sense. However, it\u0027s a bit questionable if it really helps making the code better readable. I prefer max. compatibility, if it makes sense. I guess I should increase my personal compatibility matrix ;-) to 5.3 since we are using namespaces everywhere.",
+      "parentUuid": "ae43a74e_e8f26e02",
+      "revId": "e73e1214d137682fceef87896a86808a13c6fdeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
