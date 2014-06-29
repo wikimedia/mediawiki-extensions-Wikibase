@@ -52,6 +52,24 @@
       "revId": "e73e1214d137682fceef87896a86808a13c6fdeb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_68979e94",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-29T17:07:52Z",
+      "side": 1,
+      "message": "Yes, but this default will only be used when the value is null, not when it is \u0027\u0027. But that\u0027s the whole reason for this patch: to use the default in both cases.",
+      "parentUuid": "ae43a74e_2a198e7e",
+      "revId": "e73e1214d137682fceef87896a86808a13c6fdeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
