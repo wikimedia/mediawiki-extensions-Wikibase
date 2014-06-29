@@ -82,7 +82,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 
 		if ( !$this->isValidLanguageCode( $this->language ) && $this->language !== null ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-modifyterm-invalid-langcode', $this->language )->parse() );
+			$errorMessage = $this->msg(
+				'wikibase-wikibaserepopage-invalid-langcode',
+				$this->language
+			)->parse();
+
+			$this->showErrorHTML( $errorMessage );
 		}
 
 		// Value
