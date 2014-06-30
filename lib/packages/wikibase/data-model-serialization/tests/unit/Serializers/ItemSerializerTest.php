@@ -57,7 +57,11 @@ class ItemSerializerTest extends SerializerBaseTest {
 		$provider = array(
 			array(
 				array(
-					'type' => 'item'
+					'type' => 'item',
+					'labels' => array(),
+					'descriptions' => array(),
+					'aliases' => array(),
+					'sitelinks' => array(),
 				),
 				Item::newEmpty()
 			),
@@ -74,7 +78,10 @@ class ItemSerializerTest extends SerializerBaseTest {
 						'title' => 'Nyan Cat',
 						'badges' => array()
 					)
-				)
+				),
+				'labels' => array(),
+				'descriptions' => array(),
+				'aliases' => array(),
 			),
 			$item
 		);

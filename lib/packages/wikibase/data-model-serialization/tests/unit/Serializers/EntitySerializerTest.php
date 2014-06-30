@@ -75,7 +75,10 @@ class EntitySerializerTest extends SerializerBaseTest {
 
 		$argumentLists[] = array(
 			array(
-				'type' => 'item'
+				'type' => 'item',
+				'labels' => array(),
+				'descriptions' => array(),
+				'aliases' => array(),
 			),
 			Item::newEmpty()
 		);
@@ -85,7 +88,10 @@ class EntitySerializerTest extends SerializerBaseTest {
 		$argumentLists[] = array(
 			array(
 				'type' => 'item',
-				'id' => 'Q42'
+				'id' => 'Q42',
+				'labels' => array(),
+				'descriptions' => array(),
+				'aliases' => array(),
 			),
 			$entity
 		);
@@ -107,7 +113,9 @@ class EntitySerializerTest extends SerializerBaseTest {
 						'language' => 'fr',
 						'value' => 'Nyan Cat'
 					)
-				)
+				),
+				'descriptions' => array(),
+				'aliases' => array(),
 			),
 			$entity
 		);
@@ -129,7 +137,9 @@ class EntitySerializerTest extends SerializerBaseTest {
 						'language' => 'fr',
 						'value' => 'A Nyan Cat'
 					)
-				)
+				),
+				'labels' => array(),
+				'aliases' => array(),
 			),
 			$entity
 		);
@@ -157,7 +167,9 @@ class EntitySerializerTest extends SerializerBaseTest {
 							'value' => 'Cat'
 						)
 					)
-				)
+				),
+				'labels' => array(),
+				'descriptions' => array(),
 			),
 			$entity
 		);
@@ -180,7 +192,10 @@ class EntitySerializerTest extends SerializerBaseTest {
 							'rank' => 'normal'
 						)
 					)
-				)
+				),
+				'labels' => array(),
+				'descriptions' => array(),
+				'aliases' => array(),
 			),
 			$entity
 		);

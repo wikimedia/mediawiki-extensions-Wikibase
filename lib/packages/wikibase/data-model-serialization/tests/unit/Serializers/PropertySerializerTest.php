@@ -50,7 +50,10 @@ class PropertySerializerTest extends SerializerBaseTest {
 			array(
 				array(
 					'type' => 'property',
-					'datatype' => 'string'
+					'datatype' => 'string',
+					'labels' => array(),
+					'descriptions' => array(),
+					'aliases' => array(),
 				),
 				$property
 			),

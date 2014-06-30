@@ -51,9 +51,7 @@ class ItemSerializer extends EntitySerializer {
 	private function addSiteLinksToSerialization( Item $item, array &$serialization ) {
 		$siteLinks = $item->getSiteLinks();
 
-		if ( count( $siteLinks ) === 0 ) {
-			return;
-		}
+		$serialization['sitelinks'] = array();
 
 		foreach( $siteLinks as $siteLink ) {
 			$serialization['sitelinks'][$siteLink->getSiteId()] = $this->siteLinkSerializer->serialize( $siteLink );

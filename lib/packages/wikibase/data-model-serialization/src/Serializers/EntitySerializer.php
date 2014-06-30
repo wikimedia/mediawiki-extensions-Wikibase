@@ -96,19 +96,11 @@ abstract class EntitySerializer implements DispatchableSerializer {
 	private function addLabelsToSerialization( Entity $entity, array &$serialization ) {
 		$labels = $entity->getLabels();
 
-		if ( count( $labels ) === 0 ) {
-			return;
-		}
-
 		$serialization['labels'] = $this->serializeValuePerLanguageArray( $labels );
 	}
 
 	private function addDescriptionsToSerialization( Entity $entity, array &$serialization ) {
 		$descriptions = $entity->getDescriptions();
-
-		if ( count( $descriptions ) === 0 ) {
-			return;
-		}
 
 		$serialization['descriptions'] = $this->serializeValuePerLanguageArray( $descriptions );
 	}
@@ -129,10 +121,6 @@ abstract class EntitySerializer implements DispatchableSerializer {
 
 	private function addAliasesToSerialization( Entity $entity, array &$serialization ) {
 		$aliases = $entity->getAllAliases();
-
-		if ( count( $aliases ) === 0 ) {
-			return;
-		}
 
 		$serialization['aliases'] = $this->serializeValuesPerLanguageArray( $aliases );
 	}
