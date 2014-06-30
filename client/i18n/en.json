@@ -24,7 +24,7 @@
 	"wikibase-comment-sitelink-change": "Language link changed from $1 to $2",
 	"wikibase-comment-sitelink-remove": "Language link removed: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|change|changes}}",
-	"wikibase-dataitem": "Data item",
+	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "Edit links",
 	"wikibase-editlinkstitle": "Edit interlanguage links",
 	"wikibase-linkitem-addlinks": "Add links",
