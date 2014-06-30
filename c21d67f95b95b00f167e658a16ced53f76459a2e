@@ -16,6 +16,41 @@
       "revId": "c21d67f95b95b00f167e658a16ced53f76459a2e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_5e3a50c1",
+        "filename": "repo/tests/phpunit/includes/content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T07:37:38Z",
+      "side": 1,
+      "message": "How is it misleading? The code has a hardcoded test that will skip the re-coding if it doesn\u0027t detect the legacy format. internalEntitySerializerClass doesn\u0027t change that. \n\nYes, that may lead to silly behavior if you enable transformLegacyFormatOnExport and set internalEntitySerializerClass to use the old format. The only way I see around this is to move to detection into the serializer (which would also be annoying, since the \"serializer\" knows about the array structure, but not about JSON, because it\u0027s not really a serializer).",
+      "parentUuid": "ae43a74e_8de65412",
+      "revId": "c21d67f95b95b00f167e658a16ced53f76459a2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_3e478c52",
+        "filename": "repo/tests/phpunit/includes/content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T07:37:38Z",
+      "side": 1,
+      "message": "Please do this in setUp/tearDown, so the cleanup is always applied, even if the test fails.",
+      "revId": "c21d67f95b95b00f167e658a16ced53f76459a2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
