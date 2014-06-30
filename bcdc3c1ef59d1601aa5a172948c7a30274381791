@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_462e0640",
+        "filename": "lib/includes/store/EntityRevision.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T20:35:47Z",
+      "side": 1,
+      "message": "why? it\u0027s the revision\u0027s timestamp. what would you call it? timeOfCreation?",
+      "parentUuid": "ee391fd1_b954beca",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_cdb8e5e4",
         "filename": "lib/includes/store/EntityRevision.php",
         "patchSetId": 6
@@ -82,6 +100,23 @@
       "writtenOn": "2014-06-13T12:49:52Z",
       "side": 1,
       "message": "This would be the place to say that it\u0027s using MediaWiki\u0027s timestamp format.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_06e7de10",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T20:35:47Z",
+      "side": 1,
+      "message": "Days without using the ternary operator: 0.",
       "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -152,6 +187,41 @@
       "side": 1,
       "message": "\"array\" implies an unbounded list of \"mixed\". It\u0027s identical to \"mixed[]\". This is worse, isn\u0027t it?",
       "parentUuid": "ee391fd1_cdafc590",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_e61cda1a",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T20:35:47Z",
+      "side": 1,
+      "message": "don\u0027t care much. the important info is the list(...) part anyway.",
+      "parentUuid": "ee391fd1_79f536c7",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_460726ce",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T20:35:47Z",
+      "side": 1,
+      "message": "\"must\". my bad. but would you, while you are at it?....",
       "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
