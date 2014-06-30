@@ -71,18 +71,18 @@ class EntitySerializerTest extends SerializerBaseTest {
 	}
 
 	public function serializationProvider() {
-		$provider = array(
+		$argumentLists = array();
+
+		$argumentLists[] = array(
 			array(
-				array(
-					'type' => 'item'
-				),
-				Item::newEmpty()
+				'type' => 'item'
 			),
+			Item::newEmpty()
 		);
 
 		$entity = Item::newEmpty();
 		$entity->setId( new ItemId( 'Q42' ) );
-		$provider[] = array(
+		$argumentLists[] = array(
 			array(
 				'type' => 'item',
 				'id' => 'Q42'
@@ -95,7 +95,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 			'en' => 'Nyan Cat',
 			'fr' => 'Nyan Cat'
 		) );
-		$provider[] = array(
+		$argumentLists[] = array(
 			array(
 				'type' => 'item',
 				'labels' => array(
@@ -117,7 +117,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 			'en' => 'A Nyan Cat',
 			'fr' => 'A Nyan Cat'
 		) );
-		$provider[] = array(
+		$argumentLists[] = array(
 			array(
 				'type' => 'item',
 				'descriptions' => array(
@@ -137,7 +137,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 		$entity = Item::newEmpty();
 		$entity->setAliases( 'en', array( 'Cat', 'My cat' ) );
 		$entity->setAliases( 'fr', array( 'Cat' ) );
-		$provider[] = array(
+		$argumentLists[] = array(
 			array(
 				'type' => 'item',
 				'aliases' => array(
@@ -166,7 +166,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 		$entity->setClaims( new Claims( array( $claim ) ) );
-		$provider[] = array(
+		$argumentLists[] = array(
 			array(
 				'type' => 'item',
 				'claims' => array(
@@ -185,6 +185,6 @@ class EntitySerializerTest extends SerializerBaseTest {
 			$entity
 		);
 
-		return $provider;
+		return $argumentLists;
 	}
 }
