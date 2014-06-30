@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_9ed31861",
+        "filename": "repo/tests/phpunit/includes/content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-30T09:46:20Z",
+      "side": 1,
+      "message": "with your explanation, then it\u0027s not never!  it depends on settings! \n\nprobably the two settings should be in a provider and test the expected result.\n\n(also the documentation in options.wiki and Wikibase.default.php should be a bit more informative)\n\nand please remove \"never\" from this test name.",
+      "parentUuid": "ae43a74e_5e3a50c1",
+      "revId": "c21d67f95b95b00f167e658a16ced53f76459a2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_3e478c52",
         "filename": "repo/tests/phpunit/includes/content/EntityHandlerTest.php",
         "patchSetId": 1
