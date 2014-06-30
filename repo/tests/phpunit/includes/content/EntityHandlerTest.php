@@ -3,13 +3,16 @@
 namespace Wikibase\Test;
 
 use ContentHandler;
+use DataValues\Serializers\DataValueSerializer;
 use Language;
 use Revision;
+use RuntimeException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityHandler;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -46,14 +49,25 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param SettingsArray $settings
-	 * @param EntityContentDataCodec $codec
+	 *
+	 * @return WikibaseRepo
+	 */
+	protected function getRepo( SettingsArray $settings = null ) {
+		$repoSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy();
+
+		if ( $settings ) {
+			$repoSettings = array_merge( $repoSettings, $settings->getArrayCopy() );
+		}
+
+		return new WikibaseRepo( new SettingsArray( $repoSettings ) );
+	}
+
+	/**
+	 * @param SettingsArray $settings
 	 *
 	 * @return EntityHandler
 	 */
-	protected abstract function getHandler(
-		SettingsArray $settings = null,
-		EntityContentDataCodec $codec = null
-	);
+	protected abstract function getHandler( SettingsArray $settings = null );
 
 	/**
 	 * @param Entity $entity
@@ -352,8 +366,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 			throw new RuntimeException( 'Failed to fake very old serialization format based on oldish serialization format.' );
 		}
 
-		$currentSerializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
-		$newBlob = json_encode( $currentSerializer->serialize( $entity ) );
+		// make new style blob
+		$newSerializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$newSerializer = $newSerializerFactory->newEntitySerializer();
+		$newBlob = json_encode( $newSerializer->serialize( $entity ) );
 
 		return array(
 			'old serialization / ancient id format' => array( $veryOldBlob, $newBlob ),
@@ -368,6 +384,8 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testExportTransform( $blob, $expected ) {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'transformLegacyFormatOnExport', true );
+		$settings->setSetting( 'internalEntitySerializerClass', null );
+
 		$handler = $this->getHandler( $settings );
 		$actual = $handler->exportTransform( $blob );
 
@@ -383,12 +401,14 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$codec->expects( $this->never() )
 			->method( 'encodeEntity' );
 
-		$entity = $this->newEntity();
-		$currentSerializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
-		$expected = json_encode( $currentSerializer->serialize( $entity ) );
-
 		$settings = new SettingsArray();
 		$settings->setSetting( 'transformLegacyFormatOnExport', true );
+		$settings->setSetting( 'internalEntitySerializerClass', null );
+
+		$entity = $this->newEntity();
+		$currentSerializer = $this->getRepo( $settings )->getInternalEntitySerializer();
+		$expected = json_encode( $currentSerializer->serialize( $entity ) );
+
 		$handler = $this->getHandler( $settings, $codec );
 		$actual = $handler->exportTransform( $expected );
 

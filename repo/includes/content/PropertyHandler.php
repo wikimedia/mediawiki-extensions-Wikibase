@@ -44,7 +44,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param PropertyInfoStore $infoStore
-	 * @param bool $transformOnExport
+	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
 		EntityPerPage $entityPerPage,
@@ -53,7 +53,7 @@ class PropertyHandler extends EntityHandler {
 		$preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
 		PropertyInfoStore $infoStore,
-		$transformOnExport
+		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_PROPERTY,
@@ -62,7 +62,7 @@ class PropertyHandler extends EntityHandler {
 			$contentCodec,
 			$preSaveValidators,
 			$errorLocalizer,
-			$transformOnExport
+			$legacyExportFormatDetector
 		);
 
 		$this->infoStore = $infoStore;

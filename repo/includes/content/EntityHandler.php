@@ -5,8 +5,6 @@ namespace Wikibase;
 use Content;
 use ContentHandler;
 use DataUpdate;
-use Diff\Differ\MapDiffer;
-use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\PatcherException;
 use IContextSource;
 use InvalidArgumentException;
@@ -65,9 +63,10 @@ abstract class EntityHandler extends ContentHandler {
 	private $errorLocalizer;
 
 	/**
-	 * @var bool If legacy serializations should be transformed on export.
+	 * @var callable|null Callback to determine whether a serialized
+	 *        blob needs to be re-serialized on export.
 	 */
-	private $transformOnExport;
+	private $legacyExportFormatDetector;
 
 	/**
 	 * @param string $modelId
@@ -76,7 +75,10 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityValidator[] $preSaveValidators
 	 * @param ValidatorErrorLocalizer $errorLocalizer
-	 * @param bool $transformOnExport If legacy serializations should be transformed on export.
+	 * @param callable|null $legacyExportFormatDetector Callback to determine whether a serialized
+	 *        blob needs to be re-serialized on export. The callback must take two parameters,
+	 *        the blob an the serialization format. It must return true if re-serialization is needed.
+	 *        False positives are acceptable, false negatives are not.
 	 */
 	public function __construct(
 		$modelId,
@@ -85,18 +87,32 @@ abstract class EntityHandler extends ContentHandler {
 		EntityContentDataCodec $contentCodec,
 		array $preSaveValidators,
 		ValidatorErrorLocalizer $errorLocalizer,
-		$transformOnExport
+		$legacyExportFormatDetector = null
 	) {
 		$formats = $contentCodec->getSupportedFormats();
 
 		parent::__construct( $modelId, $formats );
+
+		if ( $legacyExportFormatDetector && !is_callable( $legacyExportFormatDetector ) ) {
+			throw new InvalidArgumentException( '$legacyExportFormatDetector must be a callable (or null)' );
+		}
 
 		$this->entityPerPage = $entityPerPage;
 		$this->termIndex = $termIndex;
 		$this->contentCodec = $contentCodec;
 		$this->preSaveValidators = $preSaveValidators;
 		$this->errorLocalizer = $errorLocalizer;
-		$this->transformOnExport = $transformOnExport;
+		$this->legacyExportFormatDetector = $legacyExportFormatDetector;
+	}
+
+	/**
+	 * Returns the callback used to determine whether a serialized blob needs
+	 * to be re-serialized on export (or null of re-serialization is disabled).
+	 *
+	 * @return callable|null
+	 */
+	public function getLegacyExportFormatDetector() {
+		return $this->legacyExportFormatDetector;
 	}
 
 	/**
@@ -247,7 +263,13 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string|void
 	 */
 	public function exportTransform( $blob, $format = null ) {
-		if ( $this->transformOnExport && $this->isBlobUsingLegacyFormat( $blob, $format ) ) {
+		if ( !$this->legacyExportFormatDetector ) {
+			return $blob;
+		}
+
+		$needsTransform = call_user_func( $this->legacyExportFormatDetector, $blob, $format );
+
+		if ( $needsTransform ) {
 			$format = ( $format === null ) ? $this->getDefaultFormat() : $format;
 
 			$content = $this->unserializeContent( $blob, $format );
@@ -255,24 +277,6 @@ abstract class EntityHandler extends ContentHandler {
 		}
 
 		return $blob;
-	}
-
-	/**
-	 * Detects blobs that may be using a legacy serialization format.
-	 *
-	 * @note: False positives (detecting a legacy format when really no legacy format was used)
-	 * are acceptable, false negatives (failing to detect a legacy format when one was used)
-	 * are not acceptable.
-	 *
-	 * @param string $blob
-	 * @param string $format
-	 *
-	 * @return bool True if $blob seems to be using a legacy serialization format.
-	 */
-	protected function isBlobUsingLegacyFormat( $blob, $format ) {
-		// The legacy serialization uses something like "entity":["item",21] or
-		// even "entity":"p21" for the entity ID.
-		return preg_match( '/"entity"\s*:/', $blob ) > 0;
 	}
 
 	/**
