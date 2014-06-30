@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_1d116db1",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:31:43Z",
+      "side": 1,
+      "message": "Now it would totally make sense to order this alphabetically. ;-P",
+      "revId": "5563cc854b4146e88548bd2df69efe6cd4cfddd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_7d2199f5",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:31:43Z",
+      "side": 1,
+      "message": "Reminder: Rename ApiWikibase::$entityLookup to $entityRevisionLookup.",
+      "revId": "5563cc854b4146e88548bd2df69efe6cd4cfddd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
