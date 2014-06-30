@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_fde9097c",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "Please don\u0027t reuse the variable name.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_9df8bd47",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "This explaintion does not make sense to me. Why should it fail with an \"unresolved\" exception when the only thing it\u0027s supposed to do is to resolve?\n\nI\u0027m award there is an other way top read this that makes sense. ;-) Please try to reword.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_3dbe7161",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "This interface is somewhat strange. It\u0027s to wide and unspecific. Why not provide an $entityLookup as a parameter?",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_5d6815f2",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "The \"get\" here must be a mistake. This is neither a getter nor a callable.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_3d6d5102",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "Again, the \"has\" implies this is a callable but it\u0027s not.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_dd7be5bb",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "__FUNCTION__? I\u0027m sorry, but I find this extremely strange and questionable outside of debugging code. As said in an other comment, simply use $this-\u003elookup as the parameter for the resolver.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_7d82b998",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "What\u0027s the point in having two resolvers if they are identical anyway? Please merge this to a single $this-\u003eresolver.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_5d4ff597",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-06-30T16:47:46Z",
+      "side": 1,
+      "message": "Please add an @see if this is the implementation of an interface method or remove it if there is no interface. It\u0027s just pointless to have this here if it\u0027s dead code anyway.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
