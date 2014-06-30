@@ -11,7 +11,7 @@
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
-	"specialpages-group-wikibaseclient": "Klient {{grammar:D.lp|{{WBREPONAME}}}}",
+	"specialpages-group-wikibaseclient": "Klient Wikidanych",
 	"tooltip-t-wikibase": "Link do powiązanego elementu w repozytorium danych",
 	"wikibase-after-page-move": "Możesz także [$1 zaktualizować] powiązany element {{grammar:D.lp|{{WBREPONAME}}}} w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
 	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element {{grammar:genitive|{{WBREPONAME}}}}] zostanie wkrótce automatycznie zaktualizowany.",
@@ -43,7 +43,6 @@
 	"wikibase-linkitem-not-loggedin": "Aby użyć tej funkcji musisz być zalogowany na tej wiki oraz [$1 centralnym repozytorium danych].",
 	"wikibase-linkitem-success-link": "Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].",
 	"wikibase-property-notfound": "Właściwość $1 nie została znaleziona.",
-	"wikibase-property-notsupportedyet": "Wikibase nie obsługuje jeszcze typu właściwość dla właściwości $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Schowaj",
 	"wikibase-rc-hide-wikidata-show": "Pokaż",

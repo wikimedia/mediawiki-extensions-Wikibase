@@ -21,7 +21,7 @@
 	"wikibase-comment-sitelink-change": "Sprachlink $1 geändert in $2",
 	"wikibase-comment-sitelink-remove": "Sprachlink entfernt: $1",
 	"wikibase-comment-multi": "{{PLURAL:$1|Eine Änderung|$1 Änderungen}}",
-	"wikibase-dataitem": "Datenobjekt",
+	"wikibase-dataitem": "{{WBREPONAME}}-Datenobjekt",
 	"wikibase-editlinks": "Links bearbeiten",
 	"wikibase-editlinkstitle": "Links auf Artikel in anderen Sprachen bearbeiten",
 	"wikibase-linkitem-addlinks": "Links hinzufügen",

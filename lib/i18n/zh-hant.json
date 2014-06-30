@@ -8,7 +8,8 @@
 			"Simon Shek",
 			"Tntchn",
 			"Waihorace",
-			"Stevenliuyi"
+			"Stevenliuyi",
+			"LNDDYL"
 		]
 	},
 	"wikibase-lib-desc": "儲存維基基礎及其客戶端的共同功能",
@@ -31,7 +32,7 @@
 	"wikibase-error-unexpected": "發生意外錯誤：$1",
 	"wikibase-error-save-generic": "儲存時發生錯誤。您所作的更變可能未完成。",
 	"wikibase-error-remove-generic": "刪除時發生錯誤。您所作的更變可能未完成。",
-	"wikibase-error-save-connection": "儲存時發生錯誤。您所作的更變可能未完成。請檢查您的網絡連接。",
+	"wikibase-error-save-connection": "儲存時發生錯誤。您所作的更變可能未完成。請檢查您的網絡連線。",
 	"wikibase-error-remove-connection": "刪除時發生錯誤。您所作的更變可能未完成。請檢查您的網絡連接。",
 	"wikibase-error-save-timeout": "我们遇到技術問題。無法完成「儲存」。",
 	"wikibase-error-remove-timeout": "我们遇到技術問題。您無法完成「刪除」。",
