@@ -65,6 +65,12 @@ class ItemHandlerTest extends EntityHandlerTest {
 	public function provideGetUndoContent() {
 		$cases = parent::provideGetUndoContent();
 
+		if ( !$this->getHandler()->supportsRedirects() ) {
+			// As of 2014-06-30, redirects are still experimental.
+			// So do a feature check before trying to test redirects.
+			return $cases;
+		}
+
 		$e1 = $this->newEntity();
 		$e1->setLabel( 'en', 'Foo' );
 		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 11 );
@@ -102,6 +108,12 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	public function testMakeEntityRedirectContent() {
+		if ( !$this->getHandler()->supportsRedirects() ) {
+			// As of 2014-06-30, redirects are still experimental.
+			// So do a feature check before trying to test redirects.
+			$this->markTestSkipped( 'Redirects not yet supported.' );
+		}
+
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
 		$redirect = new EntityRedirect( $q2, $q3 );
