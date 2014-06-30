@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_71e8a20b",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "I could do it all in one expression without any variable names :)",
+      "parentUuid": "ae43a74e_fde9097c",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_9df8bd47",
         "filename": "lib/includes/store/EntityRedirectResolver.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-30T16:47:46Z",
       "side": 1,
       "message": "This explaintion does not make sense to me. Why should it fail with an \"unresolved\" exception when the only thing it\u0027s supposed to do is to resolve?\n\nI\u0027m award there is an other way top read this that makes sense. ;-) Please try to reword.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_91c2e686",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "hm, got a suggestion?",
+      "parentUuid": "ae43a74e_9df8bd47",
       "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,41 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_113ef687",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "To make it more generic :) \n\nI\u0027m starting to understand what monads are for. For doing this kind of thing. Adding an aspect to a function call.",
+      "parentUuid": "ae43a74e_3dbe7161",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_714e623e",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "\"apply\" isn\u0027t a great name. Perhaps i should use __call to just forward all calls to the respective method on a target object. That would be nicer still!",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_5d6815f2",
         "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
         "patchSetId": 10
@@ -64,6 +135,24 @@
       "writtenOn": "2014-06-30T16:47:46Z",
       "side": 1,
       "message": "The \"get\" here must be a mistake. This is neither a getter nor a callable.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_9168a685",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "It indeed acts like a callable. That\u0027s the idea. But I admit that it\u0027s a lame attempt at making PHP something it isn\u0027t.",
+      "parentUuid": "ae43a74e_5d6815f2",
       "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_3107bacf",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "it sorta kinda is... if you squint real hard...",
+      "parentUuid": "ae43a74e_3d6d5102",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_dd7be5bb",
         "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
         "patchSetId": 10
@@ -98,6 +205,24 @@
       "writtenOn": "2014-06-30T16:47:46Z",
       "side": 1,
       "message": "__FUNCTION__? I\u0027m sorry, but I find this extremely strange and questionable outside of debugging code. As said in an other comment, simply use $this-\u003elookup as the parameter for the resolver.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_71fc22b2",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "but this will still work if the function gets renamed :)",
+      "parentUuid": "ae43a74e_dd7be5bb",
       "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_11239655",
+        "filename": "lib/includes/store/RedirectResolvingEntityLookup.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "They are not identical! __FUNCTION__ has a different value here! One resolver calls hasEntity, the other calls getEntity. Hence their names.\n\nBut I\u0027ll think again how this can be made nicer. Maybe it\u0027s over the top, I just didn\u0027t want to re-implement the resolve-recursively logic twice, or more times, for every method I want it for.",
+      "parentUuid": "ae43a74e_7d82b998",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_5d4ff597",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 10
@@ -132,6 +275,24 @@
       "writtenOn": "2014-06-30T16:47:46Z",
       "side": 1,
       "message": "Please add an @see if this is the implementation of an interface method or remove it if there is no interface. It\u0027s just pointless to have this here if it\u0027s dead code anyway.",
+      "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_f127f25d",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-06-30T21:00:12Z",
+      "side": 1,
+      "message": "It\u0027s a placeholder/reminder. We\u0027ll need it for full test coverage for redirects.",
+      "parentUuid": "ae43a74e_5d4ff597",
       "revId": "8ff549464c0a27aea05e7f9def4709ad96c363c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
