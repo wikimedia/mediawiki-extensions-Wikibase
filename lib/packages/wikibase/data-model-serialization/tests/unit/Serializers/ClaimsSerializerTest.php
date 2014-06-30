@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  */
 class ClaimsSerializerTest extends SerializerBaseTest {
 
-	public function buildSerializer() {
+	protected function buildSerializer() {
 		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 

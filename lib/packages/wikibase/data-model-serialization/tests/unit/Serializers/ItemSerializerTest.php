@@ -15,7 +15,7 @@ use Wikibase\DataModel\SiteLink;
  */
 class ItemSerializerTest extends SerializerBaseTest {
 
-	public function buildSerializer() {
+	protected function buildSerializer() {
 		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
 
 		$siteLinkSerializerMock = $this->getMock( '\Serializers\Serializer' );

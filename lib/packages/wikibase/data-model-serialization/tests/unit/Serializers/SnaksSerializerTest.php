@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class SnaksSerializerTest extends SerializerBaseTest {
 
-	public function buildSerializer() {
+	protected function buildSerializer() {
 		$snakSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )

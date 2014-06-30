@@ -14,7 +14,7 @@ use Wikibase\DataModel\SiteLink;
  */
 class SiteLinkSerializerTest extends SerializerBaseTest {
 
-	public function buildSerializer() {
+	protected function buildSerializer() {
 		return new SiteLinkSerializer();
 	}
 

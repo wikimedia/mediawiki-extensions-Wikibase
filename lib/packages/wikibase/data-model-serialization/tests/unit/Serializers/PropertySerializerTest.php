@@ -14,7 +14,7 @@ use Wikibase\DataModel\Serializers\PropertySerializer;
  */
 class PropertySerializerTest extends SerializerBaseTest {
 
-	public function buildSerializer() {
+	protected function buildSerializer() {
 		$claimsSerializerMock = $this->getMock( 'Serializers\Serializer' );
 
 		return new PropertySerializer( $claimsSerializerMock );

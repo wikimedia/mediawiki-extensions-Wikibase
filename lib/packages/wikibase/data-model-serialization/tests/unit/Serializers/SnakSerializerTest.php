@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  */
 class SnakSerializerTest extends SerializerBaseTest {
 
-	public function buildSerializer() {
+	protected function buildSerializer() {
 		return new SnakSerializer( new DataValueSerializer() );
 	}
 

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Serializers\ReferencesSerializer;
  */
 class ReferencesSerializerTest extends SerializerBaseTest {
 
-	public function buildSerializer() {
+	protected function buildSerializer() {
 		$referenceSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$referenceSerializerMock->expects( $this->any() )
 			->method( 'serialize' )

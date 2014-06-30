@@ -14,7 +14,7 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return Serializer
 	 */
-	public abstract function buildSerializer();
+	protected abstract function buildSerializer();
 
 	public function testImplementsSerializerInterface() {
 		$this->assertInstanceOf( 'Serializers\Serializer', $this->buildSerializer() );
