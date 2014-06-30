@@ -205,6 +205,70 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertEquals( $item->toArray(), $data );
 	}
 
+	public function testNewItemHandler() {
+		$repo = $this->getDefaultInstance();
+		$handler = $repo->newItemHandler();
+		$this->assertInstanceOf( 'Wikibase\EntityHandler', $handler );
+	}
+
+	public function testNewPropertyHandler() {
+		$repo = $this->getDefaultInstance();
+		$handler = $repo->newPropertyHandler();
+		$this->assertInstanceOf( 'Wikibase\EntityHandler', $handler );
+	}
+
+	public function testNewItemHandler_noTransform() {
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
+
+		$handler = $repo->newItemHandler();
+		$this->assertNull( $handler->getLegacyExportFormatDetector() );
+	}
+
+	public function testNewPropertyHandler_noTransform() {
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
+
+		$handler = $repo->newPropertyHandler();
+		$this->assertNull( $handler->getLegacyExportFormatDetector() );
+	}
+
+	public function testNewItemHandler_withTransform() {
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
+
+		$handler = $repo->newItemHandler();
+		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
+	}
+
+	public function testNewPropertyHandler_withTransform() {
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', null );
+
+		$handler = $repo->newPropertyHandler();
+		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
+	}
+
+	public function testNewItemHandler_badSerializerSetting() {
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+
+		$this->setExpectedException( 'RuntimeException' );
+		$repo->newItemHandler();
+	}
+
+	public function testNewPropertyHandler_badSerializerSetting() {
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
+		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
+
+		$this->setExpectedException( 'RuntimeException' );
+		$repo->newPropertyHandler();
+	}
+
 	/**
 	 * @return WikibaseRepo
 	 */

@@ -1201,62 +1201,19 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentHandlerForModelID( $modelId, &$handler ) {
-		// FIXME: this code needs to be moved out. Construction should happen elsewhere and
-		// a mechanism for registering additional entity types needs to be put in place.
+		// FIXME: a mechanism for registering additional entity types needs to be put in place.
 		switch ( $modelId ) {
 			case CONTENT_MODEL_WIKIBASE_ITEM:
-				$handler = self::newItemHandler();
+				$handler = WikibaseRepo::getDefaultInstance()->newItemHandler();
 				return false;
 
 			case CONTENT_MODEL_WIKIBASE_PROPERTY:
-				$handler = self::newPropertyHandler();
+				$handler = WikibaseRepo::getDefaultInstance()->newPropertyHandler();
 				return false;
 
 			default:
 				return true;
 		}
-	}
-
-	private static function newItemHandler() {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
-		$codec = $repo->getEntityContentDataCodec();
-		$entityPerPage = $repo->getStore()->newEntityPerPage();
-		$termIndex = $repo->getStore()->getTermIndex();
-		$errorLocalizer = $repo->getValidatorErrorLocalizer();
-		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
-		$transformOnExport = $repo->getSettings()->getSetting( 'transformLegacyFormatOnExport' );
-
-		return new ItemHandler(
-			$entityPerPage,
-			$termIndex,
-			$codec,
-			array( $validator ),
-			$errorLocalizer,
-			$siteLinkStore,
-			$transformOnExport
-		);
-	}
-
-	private static function newPropertyHandler() {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$validator = $repo->getEntityConstraintProvider()->getConstraints( Property::ENTITY_TYPE );
-		$codec = $repo->getEntityContentDataCodec();
-		$entityPerPage = $repo->getStore()->newEntityPerPage();
-		$termIndex = $repo->getStore()->getTermIndex();
-		$errorLocalizer = $repo->getValidatorErrorLocalizer();
-		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
-		$transformOnExport = $repo->getSettings()->getSetting( 'transformLegacyFormatOnExport' );
-
-		return new PropertyHandler(
-			$entityPerPage,
-			$termIndex,
-			$codec,
-			array( $validator ),
-			$errorLocalizer,
-			$propertyInfoStore,
-			$transformOnExport
-		);
 	}
 
 	/**

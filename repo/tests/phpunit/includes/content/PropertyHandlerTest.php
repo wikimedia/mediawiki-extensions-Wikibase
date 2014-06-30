@@ -92,40 +92,12 @@ class PropertyHandlerTest extends EntityHandlerTest {
 
 	/**
 	 * @param SettingsArray $settings
-	 * @param EntityContentDataCodec $codec
 	 *
 	 * @return PropertyHandler
 	 */
-	protected function getHandler(
-		SettingsArray $settings = null,
-		EntityContentDataCodec $codec = null
-	) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$validator = $repo->getEntityConstraintProvider()->getConstraints( Property::ENTITY_TYPE );
-		$entityPerPage = $repo->getStore()->newEntityPerPage();
-		$termIndex = $repo->getStore()->getTermIndex();
-		$errorLocalizer = $repo->getValidatorErrorLocalizer();
-		$propertyInfoStore = $repo->getStore()->getPropertyInfoStore();
-
-		if ( !$settings ) {
-			$settings = $repo->getSettings();
-		}
-
-		if ( !$codec ) {
-			$codec = $repo->getEntityContentDataCodec();
-		}
-
-		$transformOnExport = $settings->getSetting( 'transformLegacyFormatOnExport' );
-
-		return new PropertyHandler(
-			$entityPerPage,
-			$termIndex,
-			$codec,
-			array( $validator ),
-			$errorLocalizer,
-			$propertyInfoStore,
-			$transformOnExport
-		);
+	protected function getHandler( SettingsArray $settings = null ) {
+		$repo = $this->getRepo( $settings );
+		return $repo->newPropertyHandler();
 	}
 
 }
