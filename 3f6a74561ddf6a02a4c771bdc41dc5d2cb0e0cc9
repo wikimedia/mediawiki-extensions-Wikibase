@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_fe7d84e5",
+        "filename": "repo/tests/phpunit/includes/actions/ActionTestCase.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-30T10:44:48Z",
+      "side": 1,
+      "message": "Why is all this stuff static?",
+      "revId": "3f6a74561ddf6a02a4c771bdc41dc5d2cb0e0cc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_3e7b0ced",
+        "filename": "repo/tests/phpunit/includes/actions/ActionTestCase.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-06-30T10:44:48Z",
+      "side": 1,
+      "message": "So much logic. This really should not be needed in a test case.",
+      "revId": "3f6a74561ddf6a02a4c771bdc41dc5d2cb0e0cc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
