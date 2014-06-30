@@ -173,6 +173,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * not have a static newFromRedirect() function).
 	 *
 	 * @see makeRedirectContent()
+	 * @see supportsRedirects()
 	 *
 	 * @since 0.5
 	 *
@@ -183,15 +184,32 @@ abstract class EntityHandler extends ContentHandler {
 	public function makeEntityRedirectContent( EntityRedirect $redirect ) {
 		$contentClass = $this->getContentClass();
 
-		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
-			// For now, we only support redirects in experimental mode.
+		if ( !$this->supportsRedirects() ) {
 			return null;
-		} elseif ( method_exists( $contentClass, 'newFromRedirect' ) ) {
+		} else {
 			$title = $this->getTitleForId( $redirect->getTargetId() );
 			return $contentClass::newFromRedirect( $redirect, $title );
-		} else {
-			return null;
 		}
+	}
+
+	/**
+	 * Will return true if the Content class has a static newFromRedirect() function.
+	 *
+	 * @see makeRedirectContent()
+	 * @see makeEntityRedirectContent()
+	 *
+	 * @since 0.5
+	 *
+	 * @return bool
+	 */
+	public function supportsRedirects() {
+		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
+			// For now, we only support redirects in experimental mode.
+			return false;
+		}
+
+		$contentClass = $this->getContentClass();
+		return method_exists( $contentClass, 'newFromRedirect' );
 	}
 
 	/**

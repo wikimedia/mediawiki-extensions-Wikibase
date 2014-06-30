@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use ContentHandler;
 use Revision;
 use Status;
 use User;
@@ -158,7 +159,18 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
 	}
 
+	private function itemSupportsRedirects() {
+		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+		return $handler->supportsRedirects();
+	}
+
 	public function testSaveRedirect() {
+		if ( !$this->itemSupportsRedirects() ) {
+			// As of 2014-06-30, redirects are still experimental.
+			// So do a feature check before trying to test redirects.
+			$this->markTestSkipped( 'Redirects not yet supported.' );
+		}
+
 		/* @var WikiPageEntityStore $store */
 		/* @var EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();

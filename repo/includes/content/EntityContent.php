@@ -74,7 +74,18 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::isValid()
 	 */
 	public function isValid() {
+
 		if ( $this->isRedirect() ) {
+
+			// Under some circumstances, the handler will not support redirects,
+			// but it's still possible to construct Content objects that represent
+			// redirects. In such a case, make sure such Content objects are considered
+			// invalid and do not get saved.
+
+			if ( !$this->getContentHandler()->supportsRedirects() ) {
+				return false;
+			}
+
 			return true;
 		}
 
