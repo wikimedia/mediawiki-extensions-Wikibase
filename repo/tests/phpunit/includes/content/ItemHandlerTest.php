@@ -145,43 +145,15 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$item->setId( $id );
 		return $item;
 	}
-		
+
 	/**
 	 * @param SettingsArray $settings
-	 * @param EntityContentDataCodec $codec
 	 *
 	 * @return ItemHandler
 	 */
-	protected function getHandler(
-		SettingsArray $settings = null,
-		EntityContentDataCodec $codec = null
-	) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$validator = $repo->getEntityConstraintProvider()->getConstraints( Item::ENTITY_TYPE );
-		$entityPerPage = $repo->getStore()->newEntityPerPage();
-		$termIndex = $repo->getStore()->getTermIndex();
-		$errorLocalizer = $repo->getValidatorErrorLocalizer();
-		$siteLinkStore = $repo->getStore()->newSiteLinkCache();
-
-		if ( !$settings ) {
-			$settings = $repo->getSettings();
-		}
-
-		if ( !$codec ) {
-			$codec = $repo->getEntityContentDataCodec();
-		}
-
-		$transformOnExport = $settings->getSetting( 'transformLegacyFormatOnExport' );
-
-		return new ItemHandler(
-			$entityPerPage,
-			$termIndex,
-			$codec,
-			array( $validator ),
-			$errorLocalizer,
-			$siteLinkStore,
-			$transformOnExport
-		);
+	protected function getHandler( SettingsArray $settings = null ) {
+		$repo = $this->getRepo( $settings );
+		return $repo->newItemHandler();
 	}
 
 }

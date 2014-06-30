@@ -1,4 +1,5 @@
 <?php
+use Wikibase\SettingsArray;
 
 /**
  * This file assigns the default values to all Wikibase Repo settings.
@@ -81,7 +82,10 @@ return call_user_func( function() {
 		// Typical value: Wikibase\Lib\Serializers\LegacyInternalEntitySerializer
 		'internalEntitySerializerClass' => null,
 
-		'transformLegacyFormatOnExport' => true,
+		'transformLegacyFormatOnExport' => function( SettingsArray $settings ) {
+			// Enabled, unless internalEntitySerializerClass is set.
+			return $settings->getSetting( 'internalEntitySerializerClass' ) === null;
+		},
 	);
 
 	return $defaults;
