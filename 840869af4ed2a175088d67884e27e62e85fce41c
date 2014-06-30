@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_3951e6dd",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-30T12:34:13Z",
+      "side": 1,
+      "message": "what will be searched when a value is entered?\n\nIf I understand correctly, a comma is needed after \u0027entered\u0027",
+      "revId": "840869af4ed2a175088d67884e27e62e85fce41c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_194e223d",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-06-30T12:34:13Z",
+      "side": 1,
+      "message": "comma needed after \u0027entered\u0027 to make this more understandable",
+      "revId": "840869af4ed2a175088d67884e27e62e85fce41c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
