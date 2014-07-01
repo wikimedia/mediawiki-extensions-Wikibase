@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_4a571b06",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-01T23:26:15Z",
+      "side": 1,
+      "message": "EntityId does have a handy __toString. No need to call getSerialization. Makes the code hard to read.",
+      "revId": "0e4bd9cbbf9c58ba2360bbad9a1c179807f6e49d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_2a3e17b6",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-01T23:26:15Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this test P-\u003eQ and Q-\u003eP too?",
+      "revId": "0e4bd9cbbf9c58ba2360bbad9a1c179807f6e49d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
