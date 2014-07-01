@@ -1,0 +1,134 @@
+<?php
+
+namespace Wikibase\Test\Api;
+
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Repo\Interactors\CreateRedirectException;
+use Wikibase\Repo\Interactors\CreateRedirectInteractor;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
+use Wikibase\Test\MockRepository;
+
+/**
+ * @covers Wikibase\Repo\Interactors\CreateRedirectInteractor
+ *
+ * @group API
+ * @group Wikibase
+ * @group WikibaseAPI
+ * @group WikibaseRepo
+ *
+ * @licence GNU GPL v2+
+ * @author Daniel Kinzler
+ */
+class CreateRedirectInteractorTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var MockRepository
+	 */
+	private $repo = null;
+
+	public function setUp() {
+		parent::setUp();
+
+		$this->repo = new MockRepository();
+
+		// empty item
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q11' ) );
+		$this->repo->putEntity( $item );
+
+		// non-empty item
+		$item->setLabel( 'en', 'Foo' );
+		$item->setId( new ItemId( 'Q12' ) );
+		$this->repo->putEntity( $item );
+
+		// a property
+		$prop = Property::newEmpty();
+		$prop->setId( new PropertyId( 'P11' ) );
+		$this->repo->putEntity( $prop );
+
+		// another property
+		$prop->setId( new PropertyId( 'P12' ) );
+		$this->repo->putEntity( $prop );
+
+		// redirect
+		$redirect = new EntityRedirect( new ItemId( 'Q22' ), new ItemId( 'Q12' ) );
+		$this->repo->putRedirect( $redirect );
+	}
+
+	/**
+	 * @return CreateRedirectInteractor
+	 */
+	private function newInteractor() {
+		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+
+		$interactor = new CreateRedirectInteractor(
+			$this->repo,
+			$this->repo,
+			$summaryFormatter
+		);
+
+		return $interactor;
+	}
+
+	public function createRedirectProvider_success() {
+		return array(
+			'redirect empty entity' => array( new ItemId( 'Q11' ), new ItemId( 'Q12' ) ),
+			'update redirect' => array( new ItemId( 'Q22' ), new ItemId( 'Q11' ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider createRedirectProvider_success
+	 */
+	public function testCreateRedirect_success( EntityId $fromId, EntityId $toId ) {
+		$interactor = $this->newInteractor();
+
+		$summary = new Summary( 'test', 'redirect' );
+		$user = $GLOBALS['wgUser'];
+		$interactor->createRedirect( $fromId, $toId, $summary, $user );
+
+		try {
+			$this->repo->getEntity( $fromId );
+			$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
+		} catch ( UnresolvedRedirectException $ex ) {
+			$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
+		}
+	}
+
+	public function createRedirectProvider_failure() {
+		return array(
+			'source not found' => array( new ItemId( 'Q77' ), new ItemId( 'Q12' ), 'no-such-entity' ),
+			'target not found' => array( new ItemId( 'Q11' ), new ItemId( 'Q77' ), 'no-such-entity' ),
+			'target is a redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q22' ), 'target-is-redirect' ),
+			'target is incompatible' => array( new ItemId( 'Q11' ), new PropertyId( 'P11' ), 'target-is-incompatible' ),
+
+			'source not empty' => array( new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'not-empty' ),
+			'can\'t redirect' => array( new PropertyId( 'P11' ), new PropertyId( 'P12' ), 'cant-redirect' ),
+		);
+	}
+
+	/**
+	 * @dataProvider createRedirectProvider_failure
+	 */
+	public function testCreateRedirect_failure( EntityId $fromId, EntityId $toId, $expectedCode ) {
+		$interactor = $this->newInteractor();
+
+		$summary = new Summary( 'test', 'redirect' );
+		$user = $GLOBALS['wgUser'];
+
+		try {
+			$interactor->createRedirect( $fromId, $toId, $summary, $user );
+			$this->fail( 'createRedirect not fail with error ' . $expectedCode . ' as expected!' );
+		} catch ( CreateRedirectException $ex ) {
+			$this->assertEquals( $expectedCode, $ex->getErrorCode() );
+		}
+	}
+
+}
