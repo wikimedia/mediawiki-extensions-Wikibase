@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_69c9d67a",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-01T22:29:08Z",
+      "side": 1,
+      "message": "It seems problematic to access the $viewPort variable. This is the first time it\u0027s mentioned in this file. There is no guarantee it is there. To me it looks like this can be replaced with this.$snakValue.empty();",
+      "revId": "f57957a956bd36a193ffb1885971d71f3d574f10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
