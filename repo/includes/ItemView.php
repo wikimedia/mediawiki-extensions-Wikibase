@@ -82,7 +82,9 @@ class ItemView extends EntityView {
 			$this->sectionEditLinkGenerator
 		);
 
-		return $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
+		$itemId = $item->getId();
+
+		return $siteLinksView->getHtml( $item->getSiteLinks(), $itemId, $groups, $editable );
 	}
 
 }
