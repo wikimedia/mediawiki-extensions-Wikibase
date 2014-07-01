@@ -197,7 +197,7 @@ class GetEntities extends ApiWikibase {
 		$revisionArray = array();
 
 		foreach ( $entityIds as $entityId ) {
-			$entityRevision = $this->entityLookup->getEntityRevision( $entityId );
+			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 			if ( is_null( $entityRevision ) ) {
 				$this->getResultBuilder()->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
 			} else {
