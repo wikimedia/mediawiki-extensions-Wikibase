@@ -219,7 +219,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 					'messages/0/html/*' => '/gefunden/', // in German
 					'messages/1/name' => 'wikibase-noentity',
 					'messages/1/parameters/0' => 'Q123',
-					'messages/1/html/*' => '/Datensatz/', // in German
+					'messages/1/html/*' => '/ist nicht vorhanden/', // in German
 				),
 			),
 
