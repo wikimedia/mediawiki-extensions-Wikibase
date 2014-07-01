@@ -105,7 +105,7 @@ class LinkTitles extends ApiWikibase {
 		elseif ( $fromId === null && $toId !== null ) {
 			// reuse to-site's item
 			/** @var Item $item */
-			$itemRev = $this->entityLookup->getEntityRevision( $toId );
+			$itemRev = $this->entityRevisionLookup->getEntityRevision( $toId );
 			$item = $itemRev->getEntity();
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
@@ -115,7 +115,7 @@ class LinkTitles extends ApiWikibase {
 		elseif ( $fromId !== null && $toId === null ) {
 			// reuse from-site's item
 			/** @var Item $item */
-			$itemRev = $this->entityLookup->getEntityRevision( $fromId );
+			$itemRev = $this->entityRevisionLookup->getEntityRevision( $fromId );
 			$item = $itemRev->getEntity();
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );
@@ -182,7 +182,7 @@ class LinkTitles extends ApiWikibase {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
+	 * @see ModifyEntity::validateParameters
 	 */
 	protected function validateParameters( array $params ) {
 		if ( $params['fromsite'] === $params['tosite'] ) {
@@ -208,7 +208,7 @@ class LinkTitles extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::isWriteMode()
+	 * @see ApiBase::isWriteMode
 	 */
 	public function isWriteMode() {
 		return true;

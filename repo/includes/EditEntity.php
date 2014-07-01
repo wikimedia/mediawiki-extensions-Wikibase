@@ -4,14 +4,18 @@ namespace Wikibase;
 
 use DerivativeContext;
 use Hooks;
+use Html;
+use InvalidArgumentException;
+use MWException;
+use ReadOnlyError;
 use RequestContext;
 use Status;
 use Title;
 use User;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\Store\EntityStore;
 use WikiPage;
 
 /**
@@ -29,7 +33,7 @@ class EditEntity {
 	/**
 	 * @var EntityRevisionLookup
 	 */
-	protected $entityLookup;
+	protected $entityRevisionLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -164,9 +168,9 @@ class EditEntity {
 	 *        just before the actual database transaction for saving beings.
 	 *        The empty string and 0 are both treated as `false`, disabling conflict checks.
 	 * @param RequestContext|DerivativeContext $context the context to use while processing
-	 *        the edit; defaults to \RequestContext::getMain().
+	 *        the edit; defaults to RequestContext::getMain().
 	 *
-	 * @internal param \Wikibase\EntityStore $store
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
@@ -195,18 +199,18 @@ class EditEntity {
 		$this->status = Status::newGood();
 
 		if ( $context !== null && !$context instanceof RequestContext && !$context instanceof DerivativeContext ) {
-			throw new \InvalidArgumentException( '$context must be an instance of RequestContext'
+			throw new InvalidArgumentException( '$context must be an instance of RequestContext'
 				 . ' or DerivativeContext' );
 		}
 
 		if ( $context === null ) {
-			$context = \RequestContext::getMain();
+			$context = RequestContext::getMain();
 		}
 
 		$this->context = $context;
 
 		$this->titleLookup = $titleLookup;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityLookup;
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 	}
@@ -260,7 +264,7 @@ class EditEntity {
 		wfProfileIn( __METHOD__ );
 		if ( $this->latestRev === null ) {
 			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
-			$this->latestRev = $this->entityLookup->getEntityRevision( $this->getEntityId() );
+			$this->latestRev = $this->entityRevisionLookup->getEntityRevision( $this->getEntityId() );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -282,7 +286,7 @@ class EditEntity {
 			if ( $this->latestRev !== null ) {
 				$this->latestRevId = $this->latestRev->getRevision();
 			} else {
-				$this->latestRevId = $this->entityLookup->getLatestRevisionId( $this->getEntityId() );
+				$this->latestRevId = $this->entityRevisionLookup->getLatestRevisionId( $this->getEntityId() );
 			}
 		}
 
@@ -327,7 +331,7 @@ class EditEntity {
 	 * In the trivial non-conflicting case, this will be the same as $this->getLatestRevision().
 	 *
 	 * @return EntityRevision|null
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	public function getBaseRevision() {
 		wfProfileIn( __METHOD__ );
@@ -342,11 +346,11 @@ class EditEntity {
 				$this->baseRev = $this->getLatestRevision();
 			} else {
 				$entityId = $this->getEntityId();
-				$this->baseRev = $this->entityLookup->getEntityRevision( $entityId, $baseRevId );
+				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $baseRevId );
 
 				if ( $this->baseRev === null ) {
 					wfProfileOut( __METHOD__ );
-					throw new \MWException( 'Base revision ID not found: rev ' . $baseRevId
+					throw new MWException( 'Base revision ID not found: rev ' . $baseRevId
 						. ' of ' . $entityId->getSerialization() );
 				}
 			}
@@ -628,7 +632,7 @@ class EditEntity {
 	 * @param bool|null $watch        Whether the user wants to watch the entity.
 	 *                                Set to null to apply default according to getWatchDefault().
 	 *
-	 * @throws \ReadOnlyError
+	 * @throws ReadOnlyError
 	 * @return Status Indicates success and provides detailed warnings or error messages. See
 	 *         getStatus() for more details.
 	 * @see    WikiPage::doEditContent
@@ -637,7 +641,7 @@ class EditEntity {
 		wfProfileIn( __METHOD__ );
 
 		if ( wfReadOnly() ) {
-			throw new \ReadOnlyError();
+			throw new ReadOnlyError();
 		}
 
 		if ( $watch === null ) {
@@ -857,7 +861,7 @@ class EditEntity {
 
 		$text = $this->status->getHTML();
 
-		$out->addHTML( \Html::rawElement( 'div', array( 'class' => 'error' ), $text ) );
+		$out->addHTML( Html::rawElement( 'div', array( 'class' => 'error' ), $text ) );
 
 		wfProfileOut( __METHOD__ );
 		return true;
@@ -896,7 +900,7 @@ class EditEntity {
 	 *
 	 * @param bool $watch whether to watch or unwatch the page.
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 * @return void : keep in sync with logic in EditPage
 	 */
 	public function updateWatchlist( $watch ) {
@@ -904,7 +908,7 @@ class EditEntity {
 		$title = $this->getTitle();
 
 		if ( !$title ) {
-			throw new \MWException( "Title not yet known!" );
+			throw new MWException( "Title not yet known!" );
 		}
 
 		$this->entityStore->updateWatchlist( $user, $this->getEntityId(), $watch );

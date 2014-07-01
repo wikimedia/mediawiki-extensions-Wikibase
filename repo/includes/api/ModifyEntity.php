@@ -111,7 +111,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : 0;
 
 			try {
-				$entityRevision = $this->entityLookup->getEntityRevision( $entityId, $baseRevisionId );
+				$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId, $baseRevisionId );
 			} catch ( StorageException $ex ) {
 				$this->dieException( $ex, 'no-such-entity' );
 			}
