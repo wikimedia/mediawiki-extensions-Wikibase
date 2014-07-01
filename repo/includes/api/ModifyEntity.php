@@ -15,8 +15,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 
@@ -111,7 +111,7 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : 0;
-		$entityRevision = $this->entityLookup->getEntityRevision( $entityId, $baseRevisionId );
+		$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId, $baseRevisionId );
 
 		if ( is_null( $entityRevision ) ) {
 			$this->dieUsage( "Can't access entity " . $entityId->getSerialization() . ", revision may have been deleted.", 'no-such-entity' );

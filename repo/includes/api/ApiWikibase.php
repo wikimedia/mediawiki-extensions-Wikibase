@@ -16,15 +16,15 @@ use Wikibase\EditEntity;
 use Wikibase\EntityFactory;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StorageException;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -80,7 +80,7 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @var EntityRevisionLookup
 	 */
-	protected $entityLookup;
+	protected $entityRevisionLookup;
 
 	/**
 	 * @since 0.5
@@ -124,8 +124,8 @@ abstract class ApiWikibase extends ApiBase {
 		$this->idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
 
 		// NOTE: use uncached lookup for write mode!
-		$uncachedFlag = $this->isWriteMode() ? 'uncached' : '';
-		$this->entityLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( $uncachedFlag );
+		$uncached = $this->isWriteMode() ? 'uncached' : '';
+		$this->entityRevisionLookup = WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( $uncached );
 		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$this->dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
@@ -301,7 +301,7 @@ abstract class ApiWikibase extends ApiBase {
 	 */
 	protected function loadEntityRevision( EntityId $entityId, $revId = 0 ) {
 		try {
-			$revision = $this->entityLookup->getEntityRevision( $entityId, $revId );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId );
 
 			if ( !$revision ) {
 				$this->dieError(
@@ -435,7 +435,7 @@ abstract class ApiWikibase extends ApiBase {
 
 		$editEntity = new EditEntity(
 			$this->titleLookup,
-			$this->entityLookup,
+			$this->entityRevisionLookup,
 			$this->entityStore,
 			$this->permissionChecker,
 			$entity,

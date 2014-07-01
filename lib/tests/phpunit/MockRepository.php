@@ -7,23 +7,23 @@ use Status;
 use User;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\StorageException;
-use Wikibase\Lib\Store\EntityStore;
 
 /**
  * Mock repository for use in tests.
@@ -33,12 +33,12 @@ use Wikibase\Lib\Store\EntityStore;
  * @author Daniel Kinzler
  */
 class MockRepository implements
-		SiteLinkLookup,
-		EntityStore,
-		EntityLookup,
-		EntityRevisionLookup,
-		EntityInfoBuilder,
-		PropertyDataTypeLookup
+	EntityInfoBuilder,
+	EntityLookup,
+	EntityRevisionLookup,
+	EntityStore,
+	PropertyDataTypeLookup,
+	SiteLinkLookup
 {
 
 	/**

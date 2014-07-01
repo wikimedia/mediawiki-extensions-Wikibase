@@ -23,8 +23,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Utils;
@@ -169,7 +169,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( $params['clear'] ) {
 			if( $params['baserevid'] && $exists ) {
-				$latestRevision = $this->entityLookup->getLatestRevisionId( $entity->getId() );
+				$latestRevision = $this->entityRevisionLookup->getLatestRevisionId( $entity->getId() );
 				if( !$baseRevId === $latestRevision ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieUsage(

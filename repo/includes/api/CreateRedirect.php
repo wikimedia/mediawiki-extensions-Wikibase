@@ -90,7 +90,7 @@ class CreateRedirect extends ApiWikibase { //FIXME: test me!
 
 	private function checkEmpty( EntityId $id ) {
 		try {
-			$revision = $this->entityLookup->getEntityRevision( $id );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $id );
 
 			if ( !$revision ) {
 				$this->dieError(
@@ -112,7 +112,7 @@ class CreateRedirect extends ApiWikibase { //FIXME: test me!
 
 	private function checkExists( EntityId $id ) {
 		try {
-			$revision = $this->entityLookup->getLatestRevisionId( $id );
+			$revision = $this->entityRevisionLookup->getLatestRevisionId( $id );
 
 			if ( !$revision ) {
 				$this->dieError( 'Entity ' . $id->getSerialization() . ' not found', 'target-not-found' );
