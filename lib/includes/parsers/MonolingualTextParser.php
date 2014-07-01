@@ -32,8 +32,7 @@ class MonolingualTextParser extends StringValueParser {
 	 * @throws ParseException
 	 */
 	protected function stringParse( $value ) {
-		$this->getOptions()->defaultOption( 'lang', 'en' );
-		$lang = $this->getOptions()->getOption( 'lang' );
+		$lang = $this->getOptions()->getOption( 'valuelang' );
 
 		return new MonolingualTextValue( trim( $lang ), trim( $value ) );
 	}
