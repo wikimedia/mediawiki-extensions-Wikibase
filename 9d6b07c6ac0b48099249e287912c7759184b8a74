@@ -36,6 +36,41 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_35367d01",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-01T19:24:35Z",
+      "side": 1,
+      "message": "Agree. $levelsToResolve, $numberOfRecursiveLookups, $maxRecursion, $maximumRecursion, ...",
+      "parentUuid": "ae43a74e_1a54c629",
+      "revId": "9d6b07c6ac0b48099249e287912c7759184b8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_5016af4e",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-01T19:24:35Z",
+      "side": 1,
+      "message": "The current attempt definitely wins my personal \"implementation of the month\" price. I love it. (But I also love code minifying contests, you know.)\n\nWhat\u0027s wrong with simply providing the EntityLookup as a service?",
+      "revId": "9d6b07c6ac0b48099249e287912c7759184b8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_da4d1e9d",
         "filename": "lib/includes/store/EntityRedirectResolver.php",
         "patchSetId": 11
@@ -47,6 +82,40 @@
       "writtenOn": "2014-07-01T17:35:01Z",
       "side": 1,
       "message": "visibility",
+      "revId": "9d6b07c6ac0b48099249e287912c7759184b8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_10282780",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-01T19:24:35Z",
+      "side": 1,
+      "message": "Why does this check the presence and type of $arguments[0] when this variable is not used as the _source_ but as the _target_ of the resolving process? This should check the source, not the target.",
+      "revId": "9d6b07c6ac0b48099249e287912c7759184b8a74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_304a0b60",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-01T19:24:35Z",
+      "side": 1,
+      "message": "Make this a break.\n\nOr wait, that\u0027s better:\n\nif ( !isset( $arguments[0] ) || !( $arguments[0] instanceof EntityId ) {\nbreak;\n}\n$arguments[0] \u003d $ex-\u003egetRedirectTargetId();\n\nStill strange. Better check the argument first when the method starts, not in the middle of this loop. Calling the user function doesn\u0027t make sense when the argument is wrong.\n\nI understand that this allows to use this wrapper class with all methods (that don\u0027t have an EntityId as first parameter). But it\u0027s pointless to wrap this around such methods. It should be type safe and throw an exception if you use this wrong.\n\nWhich brings me back to: Please change to __construct( EntityLookup $entityLookup, $levels \u003d 1 ).",
       "revId": "9d6b07c6ac0b48099249e287912c7759184b8a74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
