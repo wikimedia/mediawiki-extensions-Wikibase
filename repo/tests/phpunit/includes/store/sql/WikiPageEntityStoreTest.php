@@ -9,6 +9,7 @@ use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContentFactory;
 use Wikibase\EntityPerPageTable;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -217,6 +218,28 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFalse( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
 		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
+	}
+
+	public function unsupportedRedirectProvider() {
+		$p1 = new PropertyId( 'P1' );
+		$p2 = new PropertyId( 'P2' );
+
+		return array(
+			'P1 -> P2' => array( new EntityRedirect( $p1, $p2 ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider unsupportedRedirectProvider
+	 */
+	public function testSaveRedirectFailure( EntityRedirect $redirect ) {
+		/* @var WikiPageEntityStore $store */
+		/* @var EntityRevisionLookup $lookup */
+		list( $store, $lookup ) = $this->createStoreAndLookup();
+		$user = $GLOBALS['wgUser'];
+
+		$this->setExpectedException( 'Wikibase\StorageException' );
+		$store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
 	}
 
 	public function testUserWasLastToEdit() {

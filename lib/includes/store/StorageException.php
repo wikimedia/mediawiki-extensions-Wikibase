@@ -13,9 +13,9 @@ use Status;
 class StorageException extends \MWException {
 
 	/**
-	 * @var Status
+	 * @var Status|null
 	 */
-	private $status;
+	private $status = null;
 
 	/**
 	 * @param string|Status $status
@@ -34,7 +34,7 @@ class StorageException extends \MWException {
 	}
 
 	/**
-	 * @return Status
+	 * @return Status|null
 	 */
 	public function getStatus() {
 		return $this->status;
