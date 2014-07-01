@@ -11,9 +11,6 @@ if ( $IP === false ) {
 
 $self = 'foobar';
 
-// Detect compiled mode
-# Get the MWInit class
-require_once "$IP/includes/Init.php";
 require_once "$IP/includes/AutoLoader.php";
 
 # Stub the profiler
@@ -28,7 +25,7 @@ if ( file_exists( "$IP/StartProfiler.php" ) ) {
 // Some other requires
 require_once "$IP/includes/Defines.php";
 
-require_once MWInit::compiledPath( 'includes/DefaultSettings.php' );
+require_once "$IP/includes/DefaultSettings.php";
 
 foreach ( get_defined_vars() as $key => $var ) {
 	if ( !array_key_exists( $key, $GLOBALS ) ) {
@@ -45,7 +42,7 @@ if ( defined( 'MW_CONFIG_CALLBACK' ) ) {
 }
 
 // Some last includes
-require_once MWInit::compiledPath( 'includes/Setup.php' );
+require_once "$IP/includes/Setup.php";
 
 // Much much faster startup than creating a title object
 $wgTitle = null;
