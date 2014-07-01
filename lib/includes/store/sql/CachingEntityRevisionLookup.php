@@ -160,44 +160,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	}
 
 	/**
-	 * @since 0.5
-	 * @see   EntityLookup::getEntity
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @throw StorageException
-	 * @return Entity|null
-	 */
-	public function getEntity( EntityId $entityId ) {
-		$entityRevision = $this->getEntityRevision( $entityId );
-		return $entityRevision === null ? null : $entityRevision->getEntity();
-	}
-
-	/**
-	 * See EntityLookup::hasEntity()
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityId $entityId
-	 *
-	 * @throw StorageException
-	 * @return bool
-	 */
-	public function hasEntity( EntityId $entityId ) {
-		wfProfileIn( __METHOD__ );
-		$key = $this->getCacheKey( $entityId );
-
-		if ( $this->cache->get( $key ) ) {
-			$has = true;
-		} else {
-			$has = $this->lookup->getEntityRevision( $entityId ) !== null;
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $has;
-	}
-
-	/**
 	 * Returns the id of the latest revision of the given entity,
 	 * or false if there is no such entity.
 	 *
