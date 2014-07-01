@@ -168,7 +168,8 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	}
 
 	/**
-	 * Constructs a new EntityContent from an EntityRedirect.
+	 * Constructs a new EntityContent from an EntityRedirect,
+	 * or null if the respective kind of entity does not support redirects.
 	 *
 	 * @see EntityHandler::makeEntityRedirectContent
 	 *
@@ -176,7 +177,7 @@ class EntityContentFactory implements EntityTitleLookup, EntityPermissionChecker
 	 *
 	 * @param EntityRedirect $redirect
 	 *
-	 * @return EntityContent
+	 * @return EntityContent|null
 	 */
 	public function newFromRedirect( EntityRedirect $redirect ) {
 		$handler = $this->getContentHandlerForType( $redirect->getEntityId()->getEntityType() );

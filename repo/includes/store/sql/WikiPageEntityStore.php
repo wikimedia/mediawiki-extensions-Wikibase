@@ -171,6 +171,13 @@ class WikiPageEntityStore implements EntityStore {
 		wfProfileIn( __METHOD__ );
 
 		$content = $this->contentFactory->newFromRedirect( $redirect );
+
+		if ( !$content ) {
+			throw new StorageException( 'Failed to create redirect' .
+				' from ' . $redirect->getEntityId()->getSerialization() .
+				' to ' . $redirect->getTargetId()->getSerialization() );
+		}
+
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
 
 		$this->dispatcher->dispatch( 'redirectUpdated', $redirect, $revision->getId() );
