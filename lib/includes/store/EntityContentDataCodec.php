@@ -6,6 +6,7 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use MWContentSerializationException;
+use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -140,7 +141,7 @@ class EntityContentDataCodec {
 			$data = $this->entitySerializer->serialize( $entity );
 			return $this->encodeEntityContentData( $data, $format );
 		}
-		catch ( DeserializationException $ex ) {
+		catch ( SerializationException $ex ) {
 			throw new MWContentSerializationException( $ex->getMessage(), 0, $ex );
 		}
 	}
