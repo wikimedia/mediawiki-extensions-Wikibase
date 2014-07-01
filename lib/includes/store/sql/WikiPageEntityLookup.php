@@ -87,7 +87,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 		$row = $this->loadRevisionRow( $entityId, $revision );
 
 		/* @var EntityRevision $entityRev */
-		/* @var EntityId $redirect */
+		/* @var EntityRedirect $redirect */
 
 		if ( $row ) {
 			list( $entityRev, $redirect ) = $this->loadEntity( $row );
@@ -95,7 +95,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 			if ( $redirect !== null ) {
 				// TODO: Optionally follow redirects. Doesn't make sense if a revision is given.
 				wfProfileOut( __METHOD__ );
-				throw new UnresolvedRedirectException( $redirect );
+				throw new UnresolvedRedirectException( $redirect->getTargetId() );
 			}
 
 			if ( !$entityRev ) {
@@ -358,7 +358,7 @@ class WikiPageEntityLookup extends \DBAccessBase implements EntityRevisionLookup
 	 *
 	 * @throws MWContentSerializationException
 	 *
-	 * @return array list( EntityRevision|null $entityRev, EntityId|null $redirect ),
+	 * @return array list( EntityRevision|null $entityRev, EntityRedirect|null $redirect ),
 	 * with either $entityRev or $redirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row ) {
