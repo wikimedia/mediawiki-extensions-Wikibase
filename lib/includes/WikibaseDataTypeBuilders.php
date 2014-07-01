@@ -107,7 +107,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'wikibase-item'
+	 * @param string $id Data type ID, typically 'wikibase-item'
 	 *
 	 * @return DataType
 	 */
@@ -139,7 +139,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'commonsMedia'
+	 * @param string $id Data type ID, typically 'commonsMedia'
 	 *
 	 * @return DataType
 	 */
@@ -162,7 +162,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'string'
+	 * @param string $id Data type ID, typically 'string'
 	 *
 	 * @return DataType
 	 */
@@ -177,7 +177,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'monolingualtext'
+	 * @param string $id Data type ID, typically 'monolingualtext'
 	 *
 	 * @return DataType
 	 */
@@ -204,7 +204,7 @@ class WikibaseDataTypeBuilders {
 	}
 
 	/**
-	 * @param string $id Data type ID, e.g. 'time'
+	 * @param string $id Data type ID, typically 'time'
 	 *
 	 * @return DataType
 	 */
