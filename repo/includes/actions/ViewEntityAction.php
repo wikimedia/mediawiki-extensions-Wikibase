@@ -3,6 +3,10 @@
 namespace Wikibase;
 
 use Article;
+use ContentHandler;
+use LogEventsList;
+use SpecialPage;
+use ViewAction;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -14,7 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  */
-abstract class ViewEntityAction extends \ViewAction {
+abstract class ViewEntityAction extends ViewAction {
 
 	/**
 	 * @var LanguageFallbackChain
@@ -58,7 +62,7 @@ abstract class ViewEntityAction extends \ViewAction {
 	 * Get permission checker.
 	 * Uses the default WikibaseRepo instance to get the service if it was not previously set.
 	 *
-	 * @return \Wikibase\EntityPermissionChecker
+	 * @return EntityPermissionChecker
 	 */
 	public function getPermissionChecker() {
 		if ( $this->permissionChecker === null ) {
@@ -71,7 +75,7 @@ abstract class ViewEntityAction extends \ViewAction {
 	/**
 	 * Set permission checker.
 	 *
-	 * @param \Wikibase\EntityPermissionChecker $permissionChecker
+	 * @param EntityPermissionChecker $permissionChecker
 	 */
 	public function setPermissionChecker( $permissionChecker ) {
 		$this->permissionChecker = $permissionChecker;
@@ -173,7 +177,7 @@ abstract class ViewEntityAction extends \ViewAction {
 		// NOTE: page-wide property, independent of user permissions
 		$out->addJsConfigVars( 'wbIsEditView', $editable );
 
-		if ( $editable ) {
+		if ( $editable && !$content->isRedirect() ) {
 			$permissionChecker = $this->getPermissionChecker();
 			$permissionStatus = $permissionChecker->getPermissionStatusForEntity(
 				$this->getUser(),
@@ -197,12 +201,16 @@ abstract class ViewEntityAction extends \ViewAction {
 
 		// Figure out which label to use for title.
 		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		$labelData = null;
+
+		if ( !$content->isRedirect() ) {
+			$labelData = $languageFallbackChain->extractPreferredValueOrAny( $content->getEntity()->getLabels() );
+		}
 
 		if ( $labelData ) {
 			$labelText = $labelData['value'];
 		} else {
-			$labelText = $content->getEntity()->getId()->getSerialization();
+			$labelText = $content->getEntityId()->getSerialization();
 		}
 
 		// Create and set the title.
@@ -247,7 +255,7 @@ abstract class ViewEntityAction extends \ViewAction {
 		wfRunHooks( 'ShowMissingArticle', array( $this ) );
 
 		# Show delete and move logs
-		\LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
+		LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
 			array(  'lim' => 10,
 			        'conds' => array( "log_action != 'revision'" ),
 			        'showIfEmpty' => false,
@@ -272,7 +280,7 @@ abstract class ViewEntityAction extends \ViewAction {
 					wfMessage( 'missingarticle-rev', $oldid )->plain() )->plain();
 			} else {
 				/** @var $entityHandler EntityHandler */
-				$entityHandler = \ContentHandler::getForTitle( $this->getTitle() );
+				$entityHandler = ContentHandler::getForTitle( $this->getTitle() );
 				$entityCreationPage = $entityHandler->getSpecialPageForCreation();
 
 				$text = wfMessage( 'wikibase-noentity' )->plain();
@@ -285,7 +293,7 @@ abstract class ViewEntityAction extends \ViewAction {
 					 * add text with link to special page for creating an entity of that type if possible and
 					 * if user has the rights for it
 					 */
-					$createEntityPage = \SpecialPage::getTitleFor( $entityCreationPage );
+					$createEntityPage = SpecialPage::getTitleFor( $entityCreationPage );
 					$text .= ' ' . wfMessage(
 						'wikibase-noentity-createone',
 						$createEntityPage->getPrefixedText() // TODO: might be nicer to use an 'action=create' instead
@@ -300,7 +308,6 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
-	 * (non-PHPdoc)
 	 * @see Action::getDescription()
 	 */
 	protected function getDescription() {
@@ -308,7 +315,6 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
-	 * (non-PHPdoc)
 	 * @see Action::requiresUnblock()
 	 */
 	public function requiresUnblock() {
@@ -316,7 +322,6 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
-	 * (non-PHPdoc)
 	 * @see Action::requiresWrite()
 	 */
 	public function requiresWrite() {

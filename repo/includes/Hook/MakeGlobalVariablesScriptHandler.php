@@ -3,6 +3,7 @@
 namespace Wikibase\Hook;
 
 use OutputPage;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityContent;
 use Wikibase\EntityContentFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -19,36 +20,39 @@ class MakeGlobalVariablesScriptHandler {
 	/**
 	 * @var EntityContentFactory
 	 */
-	protected $entityContentFactory;
+	private $entityContentFactory;
 
 	/**
 	 * @var ParserOutputJsConfigBuilder
 	 */
-	protected $parserOutputConfigBuilder;
+	private $parserOutputConfigBuilder;
+
+	/**
+	 * @var string[]
+	 */
+	private $languageCodes;
 
 	/**
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param ParserOutputJsConfigBuilder $parserOutputConfigBuilder
-	 * @param array $langCodes
+	 * @param string[] $languageCodes
 	 */
 	public function __construct(
 		EntityContentFactory $entityContentFactory,
 		ParserOutputJsConfigBuilder $parserOutputConfigBuilder,
-		array $langCodes
+		array $languageCodes
 	) {
 		$this->entityContentFactory = $entityContentFactory;
 		$this->parserOutputConfigBuilder = $parserOutputConfigBuilder;
-		$this->langCodes = $langCodes;
+		$this->languageCodes = $languageCodes;
 	}
 
 	/**
 	 * @param OutputPage $out
 	 */
 	public function handle( OutputPage $out ) {
-		$configVars = $out->getJsConfigVars();
-
 		// backwards compatibility, in case config is not in parser cache and output page
-		if ( !$this->hasParserConfigVars( $configVars ) ) {
+		if ( !$this->hasParserConfigVars( $out ) ) {
 			$this->addConfigVars( $out );
 		}
 	}
@@ -72,11 +76,13 @@ class MakeGlobalVariablesScriptHandler {
 	}
 
 	/**
-	 * @param mixed
+	 * @param OutputPage $out
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	private function hasParserConfigVars( $configVars ) {
+	private function hasParserConfigVars( OutputPage $out ) {
+		$configVars = $out->getJsConfigVars();
+
 		return is_array( $configVars ) && array_key_exists( 'wbEntityId', $configVars );
 	}
 
@@ -88,24 +94,27 @@ class MakeGlobalVariablesScriptHandler {
 	private function getParserConfigVars( $revisionId ) {
 		$entityContent = $this->entityContentFactory->getFromRevision( $revisionId );
 
-		if ( $entityContent === null || ! $entityContent instanceof \Wikibase\EntityContent ) {
+		if ( !( $entityContent instanceof EntityContent ) ) {
 			// entity or revision deleted, or non-entity content in entity namespace
 			wfDebugLog( __CLASS__, "No entity content found for revision $revisionId" );
 			return array();
 		}
 
-		return $this->buildParserConfigVars( $entityContent );
+		if ( $entityContent->isRedirect() ) {
+			return array();
+		} else {
+			$entity = $entityContent->getEntity();
+			return $this->buildParserConfigVars( $entity );
+		}
 	}
 
 	/**
-	 * @param EntityContent $entityContent
+	 * @param Entity $entity
 	 *
 	 * @return array
 	 */
-	private function buildParserConfigVars( EntityContent $entityContent ) {
+	private function buildParserConfigVars( Entity $entity ) {
 		$options = $this->makeSerializationOptions();
-
-		$entity = $entityContent->getEntity();
 
 		$parserConfigVars = $this->parserOutputConfigBuilder->build(
 			$entity,
@@ -120,7 +129,7 @@ class MakeGlobalVariablesScriptHandler {
 	 */
 	private function makeSerializationOptions() {
 		$options = new SerializationOptions();
-		$options->setLanguages( $this->langCodes );
+		$options->setLanguages( $this->languageCodes );
 
 		return $options;
 	}

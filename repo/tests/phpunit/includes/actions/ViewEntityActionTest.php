@@ -36,12 +36,21 @@ class ViewEntityActionTest extends ActionTestCase {
 	}
 
 	public static function provideShow() {
-		return array(
-			array(
-				'Berlin',
-				'/Berlin/'
-			)
+		$cases = array();
+
+		$cases[] = array(
+			'Berlin',
+			'/Berlin/'
 		);
+
+		if ( self::shouldTestRedirects() ) {
+			$cases[] = array(
+				'Berlin2',
+				'/#REDIRECT/'
+			);
+		}
+
+		return $cases;
 	}
 
 	/**

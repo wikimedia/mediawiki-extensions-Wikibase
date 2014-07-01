@@ -91,7 +91,7 @@ class EditEntityActionTest extends ActionTestCase {
 	public static function provideUndoForm() {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
-		return array(
+		$cases = array(
 			array( //0: edit, no parameters
 				'edit',   // action
 				'Berlin', // handle
@@ -294,12 +294,28 @@ class EditEntityActionTest extends ActionTestCase {
 			),
 
 		);
+
+		if ( self::shouldTestRedirects() ) {
+			// -- show undo form for redirect -----------------------------------
+			$cases[] = array( //18: // undo form with legal undo
+				'edit',   // action
+				'Berlin2', // handle
+				array(    // params
+					'undo' => 0, // current revision
+				),
+				false,    // post
+				null,     // user
+				'/undo-success/', // htmlPattern: should be a success
+			);
+		}
+
+		return $cases;
 	}
 
 	/**
 	 * @dataProvider provideUndoForm
 	 */
-	 public function testUndoForm( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
+	public function testUndoForm( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
 		$this->tryUndoAction( $action, $page, $params, $post, $user, $htmlPattern, $expectedProps );
 	}
 
@@ -611,6 +627,15 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 	}
 
+	/**
+	 * @param string $action
+	 * @param WikiPage|Title|string $page
+	 * @param array $params
+	 * @param bool $post
+	 * @param User $user
+	 * @param null $htmlPattern
+	 * @param null $expectedProps
+	 */
 	protected function tryUndoAction( $action, $page, array $params, $post = false, User $user = null, $htmlPattern = null, $expectedProps = null ) {
 		if ( $user ) {
 			$this->setUser( $user );
