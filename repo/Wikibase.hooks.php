@@ -686,6 +686,8 @@ final class RepoHooks {
 	 * @return bool true
 	 */
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query, &$options, &$ret ) {
+		global $wgTitle;
+
 		wfProfileIn( __METHOD__ );
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
@@ -706,8 +708,6 @@ final class RepoHooks {
 			return true;
 		}
 
-		global $wgTitle;
-
 		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
 		// just check whether the page is a special page and if not, disable the behavior.
 		if( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
@@ -721,22 +721,17 @@ final class RepoHooks {
 		// The following three vars should all exist, unless there is a failurre
 		// somewhere, and then it will fail hard. Better test it now!
 		$page = new WikiPage( $target );
-		if ( is_null( $page ) ) {
-			// Failed, can't continue. This should not happen.
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
 		$content = null;
 
 		try {
 			$content = $page->getContent();
 		} catch ( MWContentSerializationException $ex ) {
 			// if this fails, it's not horrible.
-			wfWarn( "Failed to get entity object for [[" . $page->getTitle()->getFullText() . "]]"
-					. ": " . $ex->getMessage() );
+			wfWarn( 'Failed to get entity object for [[' . $page->getTitle()->getFullText() . ']]'
+					. ': ' . $ex->getMessage() );
 		}
 
-		if ( is_null( $content ) || !( $content instanceof EntityContent ) ) {
+		if ( !( $content instanceof EntityContent ) ) {
 			// Failed, can't continue. This could happen because the content is empty (page doesn't exist),
 			// e.g. after item was deleted.
 
