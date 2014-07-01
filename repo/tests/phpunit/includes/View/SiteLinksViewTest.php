@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use MediaWikiSite;
 use SiteList;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\WikibaseRepo;
@@ -52,7 +52,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		$testCases = array();
 
 		$item = Item::newEmpty();
-		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
+		$item->setId( new ItemId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'enwiki', 'test' ) );
 
 		$testCases[] = array(
@@ -90,7 +90,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
-		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
+		$item->setId( new ItemId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'specialwiki', 'test' ) );
 
 		$testCases[] = array(
@@ -112,7 +112,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
-		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
+		$item->setId( new ItemId( 'Q1' ) );
 
 		$testCases[] = array(
 			$item,
@@ -128,7 +128,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
-		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
+		$item->setId( new ItemId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'dewiki', 'test' ) );
 		$item->addSiteLink( new SiteLink( 'enwiki', 'test2' ) );
 
@@ -148,7 +148,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$item = Item::newEmpty();
-		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
+		$item->setId( new ItemId( 'Q1' ) );
 		$item->addSiteLink( new SiteLink( 'dewiki', 'test' ) );
 		$item->addSiteLink( new SiteLink( 'nonexistingwiki', 'test2' ) );
 
@@ -183,7 +183,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 	public function getEmptyHtmlProvider() {
 		$item = Item::newEmpty();
-		$item->setId( EntityId::newFromPrefixedId( 'Q1' ) );
+		$item->setId( new ItemId( 'Q1' ) );
 
 		$testCases = array();
 
@@ -205,6 +205,15 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			$item,
 			array(),
 			false,
+		);
+
+		$newItem = Item::newEmpty();
+
+		// item with no id, as happens with new items
+		$testCases[] = array(
+			$newItem,
+			array(),
+			true
 		);
 
 		return $testCases;
