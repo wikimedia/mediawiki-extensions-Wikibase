@@ -13,7 +13,8 @@
 			"Yfdyh000",
 			"Zhuyifei1999",
 			"乌拉跨氪",
-			"Mywood"
+			"Mywood",
+			"Impersonator 1"
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
@@ -31,7 +32,7 @@
 	"wikibase-comment-sitelink-change": "语言链接更改自$1至$2",
 	"wikibase-comment-sitelink-remove": "删除语言链接：$1",
 	"wikibase-comment-multi": "$1个更改",
-	"wikibase-dataitem": "数据项",
+	"wikibase-dataitem": "{{WBREPONAME}}项",
 	"wikibase-editlinks": "编辑链接",
 	"wikibase-editlinkstitle": "编辑跨语言链接",
 	"wikibase-linkitem-addlinks": "添加链接",

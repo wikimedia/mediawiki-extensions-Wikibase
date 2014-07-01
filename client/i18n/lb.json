@@ -20,7 +20,7 @@
 	"wikibase-comment-sitelink-change": "Sproochlink vun $1 op $2 geännert",
 	"wikibase-comment-sitelink-remove": "Sproochlink ewechgeholl: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|Ännerung|Ännerungen}}",
-	"wikibase-dataitem": "Datenelement",
+	"wikibase-dataitem": "{{WBREPONAME}}element",
 	"wikibase-editlinks": "Linken änneren",
 	"wikibase-editlinkstitle": "Interwiki-Linken änneren",
 	"wikibase-linkitem-addlinks": "Link derbäisetzen",

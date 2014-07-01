@@ -19,7 +19,7 @@
 	"wikibase-comment-sitelink-change": "Изменета јазична врска од $1 на $2",
 	"wikibase-comment-sitelink-remove": "Отстранета јазична врска: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|промена|промени}}",
-	"wikibase-dataitem": "Податотечен предмет",
+	"wikibase-dataitem": "Единица на {{WBREPONAME}}",
 	"wikibase-editlinks": "Уреди врски",
 	"wikibase-editlinkstitle": "Уредување на меѓујазични врски",
 	"wikibase-linkitem-addlinks": "Додај врски",

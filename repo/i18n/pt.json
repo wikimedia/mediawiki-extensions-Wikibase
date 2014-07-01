@@ -185,7 +185,7 @@
 	"wikibase-conflict-patched": "A sua edição foi actualizada para a versão mais recente.",
 	"wikibase-restoreold": "redefinir",
 	"wikibase-restore-summary": "Restaurar revisão $1 por [[Special:Contributions/$2|$2]]",
-	"wikibase-noentity": "Este conjunto de dados não existe. Pode\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os registos relacionados]</span>\npara descobrir o que lhe sucedeu.",
+	"wikibase-noentity": "Este conjunto de dados não existe. Pode\n[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os registos relacionados]\npara descobrir o que lhe sucedeu.",
 	"wikibase-noentity-createone": "Pode também [[$1|criar um novo]].",
 	"wikibase-item-summary-wbsetitem": "Novo item criado",
 	"wikibase-item-summary-wbcreate-new": "Novo item criado",
