@@ -10,6 +10,7 @@ use WebResponse;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\Store\EntityRedirectResolver;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\StorageException;
@@ -48,6 +49,7 @@ class EntityDataRequestHandler {
 
 	/**
 	 * @var EntityRevisionLookup
+	 * @note This is actually an EntityRedirectResolver that pretends to be EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
 
@@ -98,7 +100,7 @@ class EntityDataRequestHandler {
 		$this->uriManager = $uriManager;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdParser = $entityIdParser;
-		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->entityRevisionLookup = new EntityRedirectResolver( $entityRevisionLookup );
 		$this->serializationService = $serializationService;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
