@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_fbcc5f8e",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-02T15:57:04Z",
+      "side": 1,
+      "message": "Personally, I like the terminus \"prefixed ID\" more.",
+      "revId": "2a66b30108c05b37d2f1264f1f6dd98c37e65aac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_dbc75b66",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-02T15:57:04Z",
+      "side": 1,
+      "message": "This keeps confusing me. What happens here is that the redirect _is_ resolved, at least the first level. Why is the exception called _unresolved_?",
+      "revId": "2a66b30108c05b37d2f1264f1f6dd98c37e65aac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_0148d65e",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-02T15:57:04Z",
+      "side": 1,
+      "message": "\"put\" is odd. It was not me who merged this, or was it? Usually we call this \"push\" or \"add\" when it refers to an list and \"set\" when it refers to a map.",
+      "revId": "2a66b30108c05b37d2f1264f1f6dd98c37e65aac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_c171aea8",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-02T15:57:04Z",
+      "side": 1,
+      "message": "Better rename the variable then. It\u0027s private anyway.",
+      "revId": "2a66b30108c05b37d2f1264f1f6dd98c37e65aac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_616e82c6",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-02T15:57:04Z",
+      "side": 1,
+      "message": "Isn\u0027t this a violation of the injection principle? Should this class or the caller know that we need to resolve redirects here?",
+      "revId": "2a66b30108c05b37d2f1264f1f6dd98c37e65aac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
