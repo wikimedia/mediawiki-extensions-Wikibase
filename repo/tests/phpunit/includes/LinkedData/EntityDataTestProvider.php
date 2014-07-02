@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * Provider class for EntityData tests.
@@ -16,6 +17,9 @@ use Wikibase\DataModel\Entity\Item;
  */
 class EntityDataTestProvider {
 
+	/**
+	 * @return EntityRevision[]
+	 */
 	public static function getEntityRevisions() {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q42' ) );
@@ -26,13 +30,24 @@ class EntityDataTestProvider {
 		return array( $itemRev );
 	}
 
+	/**
+	 * @return EntityRedirect[]
+	 */
+	public static function getEntityRedirects() {
+		$redirect = new EntityRedirect( new ItemId( 'Q22' ), new Itemid( 'Q42' ) );
+
+		return array( $redirect );
+	}
+
 	public static function getMockRepo() {
 		$repo = new MockRepository();
-		$entityRevs = self::getEntityRevisions();
 
-		/* @var EntityRevision $entityRev */
-		foreach ( $entityRevs as $entityRev ) {
+		foreach ( self::getEntityRevisions() as $entityRev ) {
 			$repo->putEntity( $entityRev->getEntity(), $entityRev->getRevision(), $entityRev->getTimestamp() );
+		}
+
+		foreach ( self::getEntityRedirects() as $entityRedir ) {
+			$repo->putRedirect( $entityRedir );
 		}
 
 		return $repo;
@@ -127,10 +142,10 @@ class EntityDataTestProvider {
 			415,  // http code
 		);
 
-		$cases[] = array( // #8: xml
+		$cases[] = array( // #8: xml, redirected id
 			'',      // subpage
 			array( // parameters
-				'id' => 'Q42',
+				'id' => 'Q22',
 				'format' => 'xml',
 			),
 			array(), // headers
