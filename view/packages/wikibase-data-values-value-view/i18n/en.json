@@ -1,28 +1,28 @@
 {
-    "@metadata": {
-        "authors": [
-            "Daniel Werner < daniel.werner@wikimedia.de >",
-            "H. Snater < mediawiki@snater.com >"
-        ]
-    },
-    "valueview-desc": "UI components for displaying and editing data values",
-    "valueview-expert-advancedadjustments": "advanced adjustments",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Handling of \"$1\" values is not yet supported.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Handling of values for \"$1\" data type is not yet supported.",
-    "valueview-expert-emptyvalue-empty": "empty",
-    "valueview-expert-globecoordinateinput-precision": "Precision:",
-    "valueview-expert-globecoordinateinput-customprecision": "special ($1)",
-    "valueview-expert-timevalue-calendar-gregorian": "Gregorian",
-    "valueview-expert-timevalue-calendar-julian": "Julian",
-    "valueview-expert-timeinput-precision": "Precision:",
-    "valueview-expert-timeinput-calendar": "Calendar:",
-    "valueview-expertextender-calendarhint-gregorian": "(Gregorian calendar)",
-    "valueview-expertextender-calendarhint-julian": "(Julian calendar)",
-    "valueview-expertextender-calendarhint-switch-gregorian": "&rarr; change to Gregorian",
-    "valueview-expertextender-calendarhint-switch-julian": "&rarr; change to Julian",
-    "valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
-    "valueview-expertextender-languageselector-label": "Language: ",
-    "valueview-preview-label": "will be displayed as:",
-    "valueview-preview-novalue": "no valid value recognized",
-    "valueview-listrotator-auto": "auto"
+	"@metadata": {
+		"authors": [
+			"Daniel Werner < daniel.werner@wikimedia.de >",
+			"H. Snater < mediawiki@snater.com >"
+		]
+	},
+	"valueview-desc": "UI components for displaying and editing data values",
+	"valueview-expert-advancedadjustments": "advanced adjustments",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Handling of \"$1\" values is not yet supported.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Handling of values for \"$1\" data type is not yet supported.",
+	"valueview-expert-emptyvalue-empty": "empty",
+	"valueview-expert-globecoordinateinput-precision": "Precision:",
+	"valueview-expert-globecoordinateinput-customprecision": "special ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
+	"valueview-expert-timevalue-calendar-julian": "Julian",
+	"valueview-expert-timeinput-precision": "Precision:",
+	"valueview-expert-timeinput-calendar": "Calendar:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregorian calendar)",
+	"valueview-expertextender-calendarhint-julian": "(Julian calendar)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; change to Gregorian",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; change to Julian",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Language (mandatory): ",
+	"valueview-preview-label": "will be displayed as:",
+	"valueview-preview-novalue": "no valid value recognized",
+	"valueview-listrotator-auto": "auto"
 }
