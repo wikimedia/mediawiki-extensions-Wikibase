@@ -2,12 +2,12 @@
 
 namespace Wikibase\Dumpers;
 
-use ExceptionHandler;
+use Wikibase\Lib\Reporting\ExceptionHandler;
 use InvalidArgumentException;
 use MessageReporter;
 use MWException;
 use NullMessageReporter;
-use RethrowingExceptionHandler;
+use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityIdPager;
 use Wikibase\Lib\Store\EntityLookup;
@@ -148,7 +148,7 @@ class JsonDumpGenerator {
 	}
 
 	/**
-	 * @param ExceptionHandler $exceptionHandler
+	 * @param \Wikibase\Lib\Reporting\ExceptionHandler $exceptionHandler
 	 */
 	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;

@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use Disposable;
-use ExceptionHandler;
+use Wikibase\Lib\Reporting\ExceptionHandler;
 use Maintenance;
 use MWException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -184,7 +184,7 @@ class DumpJson extends Maintenance {
 		$progressReporter->registerReporterCallback( array( $this, 'logMessage' ) );
 		$dumper->setProgressReporter( $progressReporter );
 
-		$exceptionReporter = new \ReportingExceptionHandler( $progressReporter );
+		$exceptionReporter = new Lib\Reporting\ReportingExceptionHandler( $progressReporter );
 		$dumper->setExceptionHandler( $exceptionReporter );
 
 		//NOTE: we filter for $entityType twice: filtering in the DB is efficient,

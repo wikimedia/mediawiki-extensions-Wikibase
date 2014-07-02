@@ -372,7 +372,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$dumper = $this->newDumpGenerator( $ids, $missingIds );
 		$pager = $this->makeIdPager( $ids );
 
-		$exceptionHandler = $this->getMock( 'ExceptionHandler' );
+		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
 		$exceptionHandler->expects( $this->exactly( count( $missingIds ) ) )
 			->method( 'handleException' );
 

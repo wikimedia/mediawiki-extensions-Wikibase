@@ -3,7 +3,7 @@
 namespace Wikibase\IO;
 
 use Disposable;
-use ExceptionHandler;
+use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -42,7 +42,7 @@ class EntityIdReader implements EntityIdPager, Disposable {
 		$this->parser = $parser;
 		$this->entityType = $entityType;
 
-		$this->exceptionHandler = new \RethrowingExceptionHandler();
+		$this->exceptionHandler = new \Wikibase\Lib\Reporting\RethrowingExceptionHandler();
 	}
 
 	/**
@@ -53,7 +53,7 @@ class EntityIdReader implements EntityIdPager, Disposable {
 	}
 
 	/**
-	 * @return ExceptionHandler
+	 * @return \Wikibase\Lib\Reporting\ExceptionHandler
 	 */
 	public function getExceptionHandler() {
 		return $this->exceptionHandler;
