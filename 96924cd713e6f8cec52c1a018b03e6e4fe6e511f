@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_6184425f",
+        "filename": "lib/includes/LanguageFallbackChain.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-02T15:59:05Z",
+      "side": 1,
+      "message": "If translation applies, the \u0027language\u0027 field should be updated. If no translation takes place, the laguage and and source fields should be the same (or the source field omitted). It seems to me that the function that does the translating should also update these field(s).",
+      "revId": "96924cd713e6f8cec52c1a018b03e6e4fe6e511f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
