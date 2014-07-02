@@ -31,7 +31,7 @@
 	"wikibase-comment-sitelink-change": "Se ha cambiado el enlace de idioma de $1 a $2",
 	"wikibase-comment-sitelink-remove": "Se ha eliminado el enlace de idioma: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|cambio|cambios}}",
-	"wikibase-dataitem": "Elemento de datos",
+	"wikibase-dataitem": "Elemento de {{WBREPONAME}}",
 	"wikibase-editlinks": "Editar los enlaces",
 	"wikibase-editlinkstitle": "Editar enlaces de interlengua",
 	"wikibase-linkitem-addlinks": "Añadir enlace",
