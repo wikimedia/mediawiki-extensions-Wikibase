@@ -110,6 +110,7 @@ Other methods an Expert needs to provide:
 ## Release notes
 
 ### 0.6.4 (dev)
+* Changed MonolingualText option from "lang" to "valuelang".
 * Added setLink() function to jQuery.ui.ooMenu.CustomItem prototype allowing dynamical updates of the link target.
 * Removed default "javascript:void(0);" link target of jQuery.ui.ooMenu.CustomItem instances.
 

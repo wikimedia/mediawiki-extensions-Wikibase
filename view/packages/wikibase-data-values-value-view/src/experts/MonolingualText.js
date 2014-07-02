@@ -39,7 +39,7 @@
 		valueCharacteristics: function() {
 			var options = {};
 			if( this._languageSelector ) {
-				options.lang = this._languageSelector.getValue();
+				options.valuelang = this._languageSelector.getValue();
 			}
 			return options;
 		},
