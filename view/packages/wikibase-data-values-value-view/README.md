@@ -109,10 +109,11 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.6.4 (dev)
+### 0.6.4 (2014-07-02)
 * Changed MonolingualText option from "lang" to "valuelang".
-* Added setLink() function to jQuery.ui.ooMenu.CustomItem prototype allowing dynamical updates of the link target.
+* Added setLink() function to jQuery.ui.ooMenu.CustomItem prototype allowing dynamic updates of the link target.
 * Removed default "javascript:void(0);" link target of jQuery.ui.ooMenu.CustomItem instances.
+* Reordered GlobeCoordinate precisions.
 
 ### 0.6.3 (2014-06-25)
 * Added expert for MonolingualText values.
