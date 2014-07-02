@@ -919,7 +919,7 @@ $.widget( 'valueview.valueview', PARENT, {
 				var changeDetected
 					= differentValueCharacteristics || self.getTextValue() !== self._expert.rawValue();
 
-				if( !self._setValueIsOngoing && changeDetected ) {
+				if( changeDetected ) {
 					self.__lastValueCharacteristics = newValueCharacteristics;
 					self._trigger( 'change' );
 					self._updateValue();
