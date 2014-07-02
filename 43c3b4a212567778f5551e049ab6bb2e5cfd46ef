@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_dcd2b100",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-02T18:20:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_c1ee4e1f",
+      "revId": "43c3b4a212567778f5551e049ab6bb2e5cfd46ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_41c93ead",
         "filename": "lib/includes/store/EntityRedirectResolver.php",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-02T16:31:57Z",
       "side": 1,
       "message": "As discussed all a user of this class can see are the class name and the names of the two constructor arguments: EntityRedirectResolver( $target, $maxResolutionDepth ).\n\nSuggestions:\n* Rename $target to $byEntityIdLookupService, $byEntityIdLookup, $lookupByEntityIdService, $lookupByEntityId, ...\n* Rename the class at least to EntityIdRedirectResolver (there are no Entity objects here, just EntityId\u0027s). Or RedirectingEntityIdResolver, IndirectEntityIdResolver, ...",
+      "revId": "43c3b4a212567778f5551e049ab6bb2e5cfd46ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_fcd7b5f0",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-02T18:20:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_41c93ead",
       "revId": "43c3b4a212567778f5551e049ab6bb2e5cfd46ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_1cc95955",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-02T18:20:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_61bc42d6",
+      "revId": "43c3b4a212567778f5551e049ab6bb2e5cfd46ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_01cd7688",
         "filename": "lib/includes/store/EntityRedirectResolver.php",
         "patchSetId": 12
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_9cdd491a",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-02T18:20:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_01cd7688",
+      "revId": "43c3b4a212567778f5551e049ab6bb2e5cfd46ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_41813efc",
         "filename": "lib/includes/store/EntityRedirectResolver.php",
         "patchSetId": 12
@@ -81,6 +153,24 @@
       "writtenOn": "2014-07-02T16:31:57Z",
       "side": 1,
       "message": "You can delete this comment when you use a do-while.",
+      "revId": "43c3b4a212567778f5551e049ab6bb2e5cfd46ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_dcbbd1b8",
+        "filename": "lib/includes/store/EntityRedirectResolver.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-02T18:20:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_41813efc",
       "revId": "43c3b4a212567778f5551e049ab6bb2e5cfd46ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
