@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -41,7 +41,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		$reporter = new \ObservableMessageReporter();
+		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			array( $this, 'report' )
 		);

@@ -1,7 +1,7 @@
 <?php
 namespace Wikibase;
 
-use MessageReporter;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
@@ -98,9 +98,9 @@ class EntityPerPageBuilder {
 	/**
 	 * Sets the reporter to use for reporting preogress.
 	 *
-	 * @param \MessageReporter $reporter
+	 * @param MessageReporter $reporter
 	 */
-	public function setReporter( \MessageReporter $reporter ) {
+	public function setReporter( MessageReporter $reporter ) {
 		$this->reporter = $reporter;
 	}
 
