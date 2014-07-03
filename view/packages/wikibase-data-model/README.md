@@ -6,6 +6,10 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
+### 0.3.0 (???)
+
+* Remove methods isSameAs and equals from wikibase.Entity
+
 ### 0.2.0 (2014-06-26)
 
 * Let Entity.newFromMap expect a string instead of a DataType instance as
