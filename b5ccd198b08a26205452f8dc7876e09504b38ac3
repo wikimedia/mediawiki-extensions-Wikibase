@@ -16,6 +16,24 @@
       "revId": "b5ccd198b08a26205452f8dc7876e09504b38ac3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_35a8ab1c",
+        "filename": "lib/includes/parsers/MonolingualTextParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-03T14:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_f54c6345",
+      "revId": "b5ccd198b08a26205452f8dc7876e09504b38ac3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
