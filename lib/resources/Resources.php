@@ -186,6 +186,7 @@ return call_user_func( function() {
 				'jquery.json',
 				'user.tokens',
 				'mediawiki.api',
+				'mediawiki',
 				'wikibase.repoAccess',
 				'wikibase',
 			)
