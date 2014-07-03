@@ -68,7 +68,7 @@ CREATE INDEX /*i*/term_search ON /*_*/wb_terms (term_language, term_entity_id, t
 CREATE TABLE IF NOT EXISTS /*_*/wb_entity_per_page (
   epp_entity_id                  INT unsigned        NOT NULL, -- Id of the entity
   epp_entity_type                VARBINARY(32)       NOT NULL, -- Type of the entity
-  epp_page_id                    INT unsigned        NOT NULL -- Id of the page that store the entity
+  epp_page_id                    INT unsigned        NOT NULL -- Id of the page that stores the entity
 ) /*$wgDBTableOptions*/;
 
 CREATE UNIQUE INDEX /*i*/wb_epp_entity ON /*_*/wb_entity_per_page (epp_entity_id, epp_entity_type);
