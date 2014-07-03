@@ -184,8 +184,10 @@ $.widget( 'ui.ooMenu', {
 		.on( 'mouseleave.ooMenu', function() {
 			self.deactivate();
 		} )
-		.on( 'mousedown.ooMenu', function( event ) {
-			self.select( event );
+		.on( 'mousedown.ooMenu', function( e ) {
+			if ( !( e.which !== 1 || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey ) ) {
+				self.select( event );
+			}
 		} );
 
 		$item.appendTo( this.element );
