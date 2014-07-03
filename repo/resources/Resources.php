@@ -34,6 +34,7 @@ return call_user_func( function() {
 				'jquery.wikibase.claimgrouplabelscroll',
 				'wikibase.EntityInitializer',
 				'wikibase.ui.initTermBox',
+				'wikibase.sites',
 				'wikibase.store.EntityStore',
 				'wikibase.compileEntityStoreFromMwConfig'
 			),
@@ -121,6 +122,7 @@ return call_user_func( function() {
 				'wikibase.special/wikibase.special.itemByTitle.js'
 			),
 			'dependencies' => array(
+				'wikibase.sites',
 				'wikibase.special',
 				'jquery.ui.suggester'
 			)
