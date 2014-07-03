@@ -43,10 +43,16 @@ return call_user_func( function() {
 				'src/wikibase.Statement.js',
 			),
 			'dependencies' => array(
-				'jquery', // wikibase.Claim
-				'util.inherit',
-				'wikibase', // What? Just for the namespace?
+				// Used by wikibase.Claim, wikibase.Entity, wikibase.Reference, wikibase.Snak,
+				// wikibase.SnakList, wikibase.Statement
+				// Methods: $.each, $.extend, $.inArray, $.isArray, $.isPlainObject
+				'jquery',
+
+				// Used by wikibase.EntityId, wikibase.PropertyValueSnak, wikibase.Snak
 				'mw.ext.dataValues', // DataValues extension
+
+				'util.inherit',
+				'wikibase', // Just for the namespace
 			)
 		),
 	);
