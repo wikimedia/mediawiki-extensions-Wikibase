@@ -1,7 +1,7 @@
 <?php
 namespace Wikibase;
 
-use MessageReporter;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
@@ -100,7 +100,7 @@ class EntityPerPageBuilder {
 	 *
 	 * @param \MessageReporter $reporter
 	 */
-	public function setReporter( \MessageReporter $reporter ) {
+	public function setReporter( Lib\Reporting\MessageReporter $reporter ) {
 		$this->reporter = $reporter;
 	}
 

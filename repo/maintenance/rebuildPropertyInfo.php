@@ -41,7 +41,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 			exit;
 		}
 
-		$reporter = new \ObservableMessageReporter();
+		$reporter = new Lib\Reporting\ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			array( $this, 'report' )
 		);
