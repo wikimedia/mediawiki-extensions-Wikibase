@@ -3,13 +3,15 @@
 namespace Wikibase;
 
 use Disposable;
-use ExceptionHandler;
 use Maintenance;
 use MWException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\IO\EntityIdReader;
 use Wikibase\IO\LineReader;
+use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
@@ -180,11 +182,11 @@ class DumpJson extends Maintenance {
 
 		$dumper = new JsonDumpGenerator( $output, $this->entityLookup, $this->entitySerializer );
 
-		$progressReporter = new \ObservableMessageReporter();
+		$progressReporter = new ObservableMessageReporter();
 		$progressReporter->registerReporterCallback( array( $this, 'logMessage' ) );
 		$dumper->setProgressReporter( $progressReporter );
 
-		$exceptionReporter = new \ReportingExceptionHandler( $progressReporter );
+		$exceptionReporter = new ReportingExceptionHandler( $progressReporter );
 		$dumper->setExceptionHandler( $exceptionReporter );
 
 		//NOTE: we filter for $entityType twice: filtering in the DB is efficient,

@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use DatabaseBase;
-use MessageReporter;
+use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
  * Utility class for rebuilding the term_search_key field.

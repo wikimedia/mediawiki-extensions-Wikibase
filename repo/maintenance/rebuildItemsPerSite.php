@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Maintenance;
+use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -41,7 +42,7 @@ class RebuildItemsPerSite extends Maintenance {
 
 		$batchSize = intval( $this->getOption( 'batch-size', 100 ) );
 
-		$reporter = new \ObservableMessageReporter();
+		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			array( $this, 'report' )
 		);
