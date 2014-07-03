@@ -50,6 +50,57 @@
       "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_3a81b8a4",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-03T12:37:30Z",
+      "side": 1,
+      "message": "we normally put @param ExceptionHandler $exceptionHandler",
+      "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_fa8a10bf",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-03T12:37:30Z",
+      "side": 1,
+      "message": "namespacing seems odd although should work",
+      "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_dab98c79",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-03T12:37:30Z",
+      "side": 1,
+      "message": "why the odd namespacing?",
+      "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
