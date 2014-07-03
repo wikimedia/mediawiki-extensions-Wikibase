@@ -1,38 +1,38 @@
 {
-	 "name": "wikibase/serialization-javascript",
-	 "description": "Wikibase datamodel serialization implementation in JavaScript",
-	 "require": {
-		  "data-values/javascript": "~0.5.0",
-			"wikibase/data-model-javascript": "~0.2.0"
-	 },
-	 "license": "GPL-2.0+",
-	 "authors": [
-			{
-				"name": "Daniel Werner",
-				"homepage": "https://www.mediawiki.org/wiki/User:Danwe"
-			},
-			{
-				"name": "H. Snater",
-				"homepage": "http://www.snater.com"
-			},
-			{
-				"name": "Jeroen De Dauw",
-				"email": "jeroendedauw@gmail.com",
-				"homepage": "http://jeroendedauw.com"
-			},
-			{
-				"name": "Adrian Lang",
-				"email": "adrian.lang@wikimedia.de"
-			}
-	 ],
-	 "minimum-stability": "dev",
-		"support": {
-			"issues": "https://bugzilla.wikimedia.org/",
-			"irc": "irc://irc.freenode.net/wikidata"
+	"name": "wikibase/serialization-javascript",
+	"description": "Wikibase datamodel serialization implementation in JavaScript",
+	"require": {
+		"data-values/javascript": "~0.5.0",
+		"wikibase/data-model-javascript": "~0.2.0"
+	},
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Daniel Werner",
+			"homepage": "https://www.mediawiki.org/wiki/User:Danwe"
 		},
-		"autoload": {
-			"files" : [
-				"init.mw.php"
-			]
+		{
+			"name": "H. Snater",
+			"homepage": "http://www.snater.com"
+		},
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com"
+		},
+		{
+			"name": "Adrian Lang",
+			"email": "adrian.lang@wikimedia.de"
 		}
+	],
+	"minimum-stability": "dev",
+	"support": {
+		"issues": "https://bugzilla.wikimedia.org/",
+		"irc": "irc://irc.freenode.net/wikidata"
+	},
+	"autoload": {
+		"files" : [
+			"init.mw.php"
+		]
+	}
 }
