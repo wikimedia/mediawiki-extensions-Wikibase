@@ -32,7 +32,7 @@ return call_user_func( function() {
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
 				'jquery.wikibase.claimgrouplabelscroll',
-				'wikibase.ui.initEntity',
+				'wikibase.EntityInitializer',
 				'wikibase.ui.initTermBox',
 				'wikibase.store.EntityStore',
 				'wikibase.compileEntityStoreFromMwConfig'
@@ -49,9 +49,9 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.ui.initEntity' => $moduleTemplate + array(
+		'wikibase.EntityInitializer' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.ui.initEntity.js',
+				'wikibase.EntityInitializer.js',
 			),
 			'dependencies' => array(
 				'json',
@@ -72,7 +72,6 @@ return call_user_func( function() {
 				'mediawiki.Title',
 				'wikibase',
 				'wikibase.templates',
-				'wikibase.ui.initEntity',
 				'wikibase.ui.PropertyEditTool',
 			),
 			'messages' => array(
