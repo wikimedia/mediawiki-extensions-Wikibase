@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_6d4f8798",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-03T20:40:21Z",
+      "side": 1,
+      "message": "Why remove the IContextSource type hint here? Both classes you are checking implement this interface.",
+      "revId": "a8a8863f4df844a1b2781577ec784fe110555f0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
