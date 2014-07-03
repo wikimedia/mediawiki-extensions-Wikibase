@@ -2,9 +2,11 @@
 
 namespace Wikibase\Test;
 
+use ContentHandler;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityPerPageBuilder;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -41,9 +43,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$this->entityPerPageTable = $this->wikibaseRepo->getStore()->newEntityPerPage();
 
 		$this->clearTables();
-		$this->addItems();
+		$items = $this->addItems();
 
-		assert( $this->countPages() === 10 );
+		assert( $this->countPages() === count( $items ) );
 
 		$this->entityPerPageRows = $this->getEntityPerPageData();
 	}
@@ -87,11 +89,19 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		assert( $this->countEntityPerPageRows() === 0 );
 	}
 
+	private function itemSupportsRedirect() {
+		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+		return $handler->supportsRedirects();
+	}
+
 	protected function addItems() {
 		$user = $this->getUser();
 
-		$labels = array( 'Berlin', 'New York City', 'Tokyo', 'Jakarta', 'Nairobi',
-			'Rome', 'Cairo', 'Santiago', 'Sydney', 'Toronto' );
+		$labels = array( 'New York City', 'Tokyo', 'Jakarta', 'Nairobi',
+			'Rome', 'Cairo', 'Santiago', 'Sydney', 'Toronto', 'Berlin' );
+
+		/** @var Item[] $items */
+		$items = array();
 
 		$prefix = get_class( $this ) . '/';
 
@@ -100,8 +110,26 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		foreach( $labels as $label ) {
 			$item = Item::newEmpty();
 			$item->setLabel( 'en', $prefix . $label );
-			$store->saveEntity( $item, "added an item", $user, EDIT_NEW );
+			$rev = $store->saveEntity( $item, "added an item", $user, EDIT_NEW );
+			$items[] = $rev->getEntity();
 		}
+
+		if ( $this->itemSupportsRedirect() ) {
+			// add another berlin (so we have a valid id), then turn it into a redirect
+			$item = Item::newEmpty();
+			$item->setLabel( 'en', $prefix . 'Berlin2' );
+			$rev = $store->saveEntity( $item, "added an item", $user, EDIT_NEW );
+			$items[] = $rev->getEntity();
+
+			$items = array_reverse( $items );
+			$berlin2 = $items[0]->getId();
+			$berlin1 = $items[1]->getId();
+			$redirect = new EntityRedirect( $berlin2, $berlin1 );
+
+			$store->saveRedirect( $redirect, "created redirect", $user, EDIT_UPDATE );
+		}
+
+		return $items;
 	}
 
 	protected function partialClearEntityPerPageTable( $pageId ) {
