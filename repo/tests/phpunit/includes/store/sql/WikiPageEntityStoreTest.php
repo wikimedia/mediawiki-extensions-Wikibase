@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContentFactory;
+use Wikibase\EntityId;
 use Wikibase\EntityPerPageTable;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -103,6 +104,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity()' );
+
+		$this->assertEntityPerPage( true, $oneId );
 	}
 
 	public function provideSaveEntityError() {
@@ -206,6 +209,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
 		$this->assertTrue( $revision->getContent()->getEntityRedirect()->equals( $redirect ), 'getEntityRedirect()' );
 
+		$this->assertEntityPerPage( false, $oneId );
+
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
@@ -218,6 +223,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFalse( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
 		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
+
+		$this->assertEntityPerPage( true, $oneId );
 	}
 
 	public function unsupportedRedirectProvider() {
@@ -504,6 +511,20 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
+
+		$this->assertEntityPerPage( false, $oneId );
+	}
+
+	private function assertEntityPerPage( $expected, EntityId $entityId ) {
+		$epp = new EntityPerPageTable();
+
+		$pageId = $epp->getPageIdForEntity( $entityId );
+
+		if ( $expected === true ) {
+			$this->assertGreaterThan( 0, $pageId );
+		} else {
+			$this->assertEquals( $expected, $pageId );
+		}
 	}
 
 }

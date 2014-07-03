@@ -289,4 +289,32 @@ class EntityPerPageTable implements EntityPerPage {
 		return $ids;
 	}
 
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return int|false the ID of the page containing the entity,
+	 *         or false if there is no such entity page.
+	 */
+	public function getPageIdForEntity( EntityId $entityId ) {
+		$dbr = wfGetDB( DB_SLAVE );
+
+		$row = $dbr->selectRow(
+			'wb_entity_per_page',
+			array( 'epp_page_id' ),
+			array(
+				'epp_entity_type' => $entityId->getEntityType(),
+				'epp_entity_id' => $entityId->getNumericId()
+			),
+			__METHOD__
+		);
+
+		if ( !$row ) {
+			return false;
+		}
+
+		return intval( $row->epp_page_id );
+	}
+
 }

@@ -652,24 +652,27 @@ abstract class EntityHandler extends ContentHandler {
 			$entityId = $this->getIdForTitle( $title );
 		}
 
-		// Register the entity in the EntityPerPage table.
-		// @todo: Only do this if the entity is new.
-		// Note that $title->exists() will already return true at this point
-		// even if we are just now creating the entity.
-		// @todo: if this is a redirect, record redirect target
-		$updates[] = new DataUpdateClosure(
-			array( $this->entityPerPage, 'addEntityPage' ),
-			$entityId,
-			$title->getArticleID()
-		);
-
 		if ( $content->isRedirect() ) {
 			// Remove the entity from the terms table since it's now a redirect.
 			$updates[] = new DataUpdateClosure(
 				array( $this->termIndex, 'deleteTermsOfEntity' ),
 				$entityId
 			);
+
+			// Unregister the entity from the EntityPerPage table.
+			$updates[] = new DataUpdateClosure(
+				array( $this->entityPerPage, 'deleteEntityPage' ),
+				$entityId,
+				$title->getArticleID()
+			);
 		} else {
+			// Register the entity in the EntityPerPage table.
+			$updates[] = new DataUpdateClosure(
+				array( $this->entityPerPage, 'addEntityPage' ),
+				$entityId,
+				$title->getArticleID()
+			);
+
 			// Register the entity in the terms table.
 			$updates[] = new DataUpdateClosure(
 				array( $this->termIndex, 'saveTermsOfEntity' ),
