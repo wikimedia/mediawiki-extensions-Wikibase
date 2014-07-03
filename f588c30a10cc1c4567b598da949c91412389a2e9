@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_956bd7b4",
+        "filename": "lib/includes/Reporting/LoggingExceptionHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-03T13:02:38Z",
+      "side": 1,
+      "message": "what log? debug log? warning? the name of this thing is not clear.\n\ni\u0027m not blind, can read below ;) but the name of the thing is not clear.\n\ndepending on the thing, debug is sometimes better and sometimes we want to be more noisy in logs.",
+      "revId": "f588c30a10cc1c4567b598da949c91412389a2e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
