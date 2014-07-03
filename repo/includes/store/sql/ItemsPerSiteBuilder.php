@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use MessageReporter;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 
