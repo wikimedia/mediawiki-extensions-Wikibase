@@ -978,24 +978,23 @@ table.wb-sitelinks .wb-sitelinks-link {
 	border-right: none;
 }
 
+table.wb-sitelinks td:last-child {
+	border-right: 1px solid #C9C9C9;
+	padding-right: 0;
+	height: 32px;
+	display: table-cell;
+	float: none;
+}
+
 /* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
 table.wb-sitelinks .wb-editsection {
 	width: 18em;
+	float: right;
 	position: static; /* clear absolute positioning */
-	float: none; /* overwrite edit section's float: right */
-	border-right: 1px solid #C9C9C9;
-	padding: 0;
-	margin-left: 0; /* reset edit section's margin which is set in the toolbar group instead;
-	                applying margin to the edit section cell should not have any effect at all */
 }
 
 table.wb-sitelinks .wb-editsection > .wikibase-toolbar {
-	width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
-	display: inline-block;
-}
-
-table.wb-sitelinks .wb-editsection .wikibase-toolbar .wikibase-toolbar {
-	margin-left: 1px; /* even out table cell's right border */
+	width: 18em; /* additionally assign width to toolbar to enforce width in JS version */
 }
 
 table.wb-sitelinks .wb-editsection .wikibase-toolbar .wikibase-toolbar {
