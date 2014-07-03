@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
+use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -43,7 +44,7 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 		$batchSize = intval( $this->getOption( 'batch-size', 100 ) );
 		$rebuildAll = $this->getOption( 'rebuild-all', false );
 
-		$reporter = new \ObservableMessageReporter();
+		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			array( $this, 'report' )
 		);
