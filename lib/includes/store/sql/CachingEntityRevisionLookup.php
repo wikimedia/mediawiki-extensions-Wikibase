@@ -31,6 +31,11 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	protected $cache;
 
 	/**
+	 * @var int $cacheTimeout
+	 */
+	protected $cacheTimeout;
+
+	/**
 	 * The key prefix to use when caching entities in memory.
 	 *
 	 * @var $cacheKeyPrefix
@@ -38,36 +43,34 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	protected $cacheKeyPrefix;
 
 	/**
-	 * @var int $cacheTimeout
-	 */
-	protected $cacheTimeout;
-
-	/**
 	 * @var bool $shouldVerifyRevision
 	 */
 	protected $shouldVerifyRevision;
 
 	/**
-	 * @param EntityRevisionLookup $lookup The lookup to use
+	 * @param EntityRevisionLookup $entityRevisionLookup The lookup to use
 	 * @param BagOStuff $cache The cache to use
-	 * @param int $cacheDuration Cache duration in seconds.
+	 * @param int $cacheDuration Cache duration in seconds. Defaults to 3600 (1 hour).
 	 * @param string $cacheKeyPrefix The key prefix to use for constructing cache keys.
 	 *         Defaults to "wbentity". There should be no reason to change this.
-	 *
-	 * @return \Wikibase\Lib\Store\CachingEntityRevisionLookup
 	 */
-	public function __construct( EntityRevisionLookup $lookup, BagOStuff $cache, $cacheDuration = 3600, $cacheKeyPrefix = "wbentity" ) {
-		$this->lookup = $lookup;
+	public function __construct(
+		EntityRevisionLookup $entityRevisionLookup,
+		BagOStuff $cache,
+		$cacheDuration = 3600,
+		$cacheKeyPrefix = 'wbentity'
+	) {
+		$this->lookup = $entityRevisionLookup;
 		$this->cache = $cache;
-		$this->cacheKeyPrefix = $cacheKeyPrefix;
 		$this->cacheTimeout = $cacheDuration;
+		$this->cacheKeyPrefix = $cacheKeyPrefix;
 	}
 
 	/**
 	 * Determine whether the revision of the cached entity should be verified against the
 	 * current revision in the underlying lookup.
 	 *
-	 * @param boolean $shouldVerifyRevision
+	 * @param bool $shouldVerifyRevision
 	 */
 	public function setVerifyRevision( $shouldVerifyRevision ) {
 		$this->shouldVerifyRevision = $shouldVerifyRevision;
@@ -81,8 +84,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @return String
 	 */
 	protected function getCacheKey( EntityId $entityId ) {
-		$cacheKey = $this->cacheKeyPrefix
-			. ':' . $entityId->getSerialization();
+		$cacheKey = $this->cacheKeyPrefix . ':' . $entityId->getSerialization();
 
 		return $cacheKey;
 	}
