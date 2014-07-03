@@ -31,6 +31,17 @@ return call_user_func( function() {
 		),
 
 		'wikibase.sites' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.sites.js',
+				'wikibase.Site.js',
+			),
+			'dependencies' => array(
+				'mw.config.values.wbSiteDetails',
+				'wikibase'
+			)
+		),
+
+		'mw.config.values.wbSiteDetails' => $moduleTemplate + array(
 			'class' => 'Wikibase\SitesModule'
 		),
 
@@ -41,12 +52,10 @@ return call_user_func( function() {
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
-				'wikibase.Site.js',
 				'wikibase.RevisionStore.js'
 			),
 			'dependencies' => array(
 				'wikibase.common',
-				'wikibase.sites',
 			),
 			'messages' => array(
 				'special-createitem',
@@ -311,7 +320,11 @@ return call_user_func( function() {
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase',
 				'wikibase.RepoApiError',
+<<<<<<< HEAD
 				'wikibase.templates',
+=======
+				'wikibase.sites',
+>>>>>>> Move sites-related methods from wikibase to wikibase.sites
 				'wikibase.ui.Base',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
