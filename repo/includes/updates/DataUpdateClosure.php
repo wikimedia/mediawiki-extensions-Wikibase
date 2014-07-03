@@ -3,7 +3,10 @@
 namespace Wikibase\Updates;
 
 use DataUpdate;
+use Exception;
 use InvalidArgumentException;
+use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 
 /**
  * A generic DataUpdate based on a callable passed to the constructor.
@@ -22,12 +25,17 @@ class DataUpdateClosure extends DataUpdate {
 	/**
 	 * @var callable
 	 */
-	protected $function;
+	private $function;
 
 	/**
 	 * @var array
 	 */
-	protected $arguments;
+	private $arguments;
+
+	/**
+	 * @var ExceptionHandler
+	 */
+	private $exceptionHandler;
 
 	/**
 	 * @param callable $function
@@ -45,6 +53,12 @@ class DataUpdateClosure extends DataUpdate {
 
 		$this->function = $function;
 		$this->arguments = $args;
+
+		$this->exceptionHandler = new LogWarningExceptionHandler();
+	}
+
+	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
+		$this->exceptionHandler = $exceptionHandler;
 	}
 
 	/**
@@ -52,7 +66,11 @@ class DataUpdateClosure extends DataUpdate {
 	 * passed to the constructor.
 	 */
 	public function doUpdate() {
-		call_user_func_array( $this->function, $this->arguments );
+		try {
+			call_user_func_array( $this->function, $this->arguments );
+		} catch ( Exception $ex ) {
+			$this->exceptionHandler->handleException( $ex, 'data-update-failed', 'A data update callback triggered an exception' );
+		}
 	}
 
 }
