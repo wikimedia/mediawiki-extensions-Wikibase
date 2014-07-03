@@ -16,6 +16,24 @@
       "revId": "7762e3a1a836181de259cc9eee5cef94c7ab0fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_1a34b4f0",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-03T12:51:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_7ae86077",
+      "revId": "7762e3a1a836181de259cc9eee5cef94c7ab0fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
