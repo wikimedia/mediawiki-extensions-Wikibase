@@ -136,127 +136,6 @@
 			} );
 		};
 
-		/**
-		 * Will test the Entity type's "equal" function. This will be done for all entity
-		 * definitions given in the test definition's "testData" field.
-		 */
-		this.testEquals = function( assert ) {
-			// test all entities we got in test definition for equality here:
-			$.each( testEntities, function( entityName, entity ) {
-				var summaryIntro = entityType + ' Entity created from "' + entityName + '" data ';
-
-				assert.ok(
-					!entity.equals( 'foo' ),
-					summaryIntro + 'is not equal to some totally unrelated non-Entity value'
-				);
-
-				assert.ok(
-					entity.equals( entity ),
-					summaryIntro + 'is equal to itself'
-				);
-
-				// Create equal entity and create equal entity but with added/removed ID to test'
-				// whether ID actually gets ignored in the process of checking for equality.
-				var entityMapData = entity.toMap(),
-					entityCopy = wb.Entity.newFromMap( entityMapData ),
-					idAction;
-
-				if( entityMapData.id ) {
-					entityMapData.id = 'foo';
-					idAction = 'added ID';
-				} else {
-					delete( entityMapData.id );
-					idAction = 'removed ID';
-				}
-				var entityCopyWithSwitchedId = wb.Entity.newFromMap( entityMapData );
-
-				assert.ok(
-					entity.equals( entityCopy ) && entityCopy.equals( entity ),
-					summaryIntro + 'is equal to copy of itself'
-				);
-
-				assert.ok(
-					entityCopyWithSwitchedId.equals( entityCopy ),
-					summaryIntro + 'is equal to copy of itself with ' + idAction
-				);
-
-				// Test this entity against all other entities given in the test definition.
-				// This Entity should not be equal to any other given Entity!
-				$.each( testEntities, function( otherTestEntityName, otherEntity ) {
-					if( otherTestEntityName !== entityName ) {
-						assert.ok(
-							!entity.equals( otherEntity ),
-							summaryIntro + ' is not equal to Entity based on "' +
-								otherTestEntityName + '" data'
-						);
-					}
-				} );
-			} );
-		};
-
-		/**
-		 * Will test the Entity type's "isSameAs" function. Similar to "equals" test.
-		 */
-		this.testIsSameAs = function( assert ) {
-			// test all entities we got in test definition for equality here:
-			$.each( testEntities, function( entityName, entity ) {
-				var summaryIntro = entityType + ' Entity created from "' + entityName + '" data ';
-
-				assert.ok(
-					!entity.isSameAs( 'foo' ),
-					summaryIntro + 'is not same as some totally unrelated non-Entity value'
-				);
-
-				// for following tests, we want the entity in a version with an ID, and one without
-				// ID since "isSameAs" heavily depends on whether an Entity has an ID.
-				var entityMapData = entity.toMap(),
-					entityWithId,
-					entityWithoutId;
-
-				if( entityMapData.id ) {
-					entityWithId = wb.Entity.newFromMap( entityMapData );
-					delete( entityMapData.id );
-					entityWithoutId = wb.Entity.newFromMap( entityMapData );
-				} else {
-					entityWithId = wb.Entity.newFromMap(
-						$.extend( { id: 'testIsSame-uniqueId' }, entityMapData ) );
-					entityWithoutId = wb.Entity.newFromMap( entityMapData );
-					summaryIntro += '(but with id "' + entityWithId.getId() + '") ';
-				}
-
-				assert.ok(
-					entityWithId.isSameAs( entityWithId ),
-					'is equal to itself because Entity has an ID'
-				);
-
-				assert.ok(
-					!entityWithoutId.isSameAs( entityWithoutId ),
-					'is not equal to itself because Entity has no ID yet'
-				);
-
-				// lets trust that "isSameAs" works in case the entity has no ID anyhow and perform
-				// following tests only for the version of the entity with ID:
-				var entityWithIdCopy = wb.Entity.newFromMap( entityWithId.toMap() );
-
-				assert.ok(
-					entityWithId.isSameAs( entityWithIdCopy ) && entityWithIdCopy.isSameAs( entityWithId ),
-					summaryIntro + 'is equal to copy of itself'
-				);
-
-				// Test this entity against all other entities given in the test definition.
-				// This Entity should not be equal to any other given Entity!
-				$.each( testEntities, function( otherTestEntityName, otherEntity ) {
-					if( otherTestEntityName !== entityName ) {
-						assert.ok(
-							!entity.isSameAs( otherEntity ),
-							summaryIntro + 'is not equal to Entity based on "' +
-								otherTestEntityName + '" data'
-						);
-
-					}
-				} );
-			} );
-		};
 	}
 
 	wb.tests = wb.tests || {};
@@ -271,8 +150,6 @@
 
 		QUnit.test( 'constructor', callTestFn( 'testConstructor' ) );
 		QUnit.test( 'getters', callTestFn( 'testGetters' ) );
-		QUnit.test( 'equals', callTestFn( 'testEquals' ) );
-		QUnit.test( 'isSameAs', callTestFn( 'testIsSameAs' ) );
 	};
 
 	/**
