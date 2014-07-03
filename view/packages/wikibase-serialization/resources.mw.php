@@ -1,5 +1,9 @@
 <?php
 
+if ( !defined( 'MEDIAWIKI' ) ) {
+	die( 'Not an entry point.' );
+}
+
 /**
  * File for Wikibase resourceloader modules.
  *
