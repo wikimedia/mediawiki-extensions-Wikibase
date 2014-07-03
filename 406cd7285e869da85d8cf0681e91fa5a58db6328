@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_3f3f6a22",
+        "filename": "lib/resources/formatters/resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-03T09:07:09Z",
+      "side": 1,
+      "message": "stuff shouldn\u0027t depend on jquery explicitly... don\u0027t ask me why, but for some reason... I think there\u0027s even a Qunit test about this :P",
+      "revId": "406cd7285e869da85d8cf0681e91fa5a58db6328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
