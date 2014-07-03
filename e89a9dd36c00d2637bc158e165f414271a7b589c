@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_5aad9c2d",
+        "filename": "lib/tests/phpunit/Reporting/LoggingExceptionHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-03T12:40:32Z",
+      "side": 1,
+      "message": "gah, hit enter to quick. may bad, thanks for spotting.",
+      "parentUuid": "ae43a74e_da92acff",
+      "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_9a9c2414",
         "filename": "lib/tests/phpunit/Reporting/ReportingExceptionHandlerTest.php",
         "patchSetId": 1
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_7ab62087",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-03T12:40:32Z",
+      "side": 1,
+      "message": "This is an artifact of the automatic refactoring. Bah.",
+      "parentUuid": "ae43a74e_3a81b8a4",
+      "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_fa8a10bf",
         "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
         "patchSetId": 1
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_3aa8981c",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-03T12:40:32Z",
+      "side": 1,
+      "message": "yea... when you move a class to a different namespace, phpstorm will automatically fix all usages. but in a sucky way :/",
+      "parentUuid": "ae43a74e_fa8a10bf",
+      "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_dab98c79",
         "filename": "repo/maintenance/dumpJson.php",
         "patchSetId": 1
@@ -98,6 +152,24 @@
       "writtenOn": "2014-07-03T12:37:30Z",
       "side": 1,
       "message": "why the odd namespacing?",
+      "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_1aa7144e",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-03T12:40:32Z",
+      "side": 1,
+      "message": "hmhm.",
+      "parentUuid": "ae43a74e_dab98c79",
       "revId": "e89a9dd36c00d2637bc158e165f414271a7b589c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
