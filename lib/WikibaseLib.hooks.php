@@ -80,6 +80,8 @@ final class LibHooks {
 				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
 
+				'tests/qunit/wikibase.sites.tests.js',
+
 				'tests/qunit/wikibase.Site.tests.js',
 
 				'tests/qunit/wikibase.RepoApi/wikibase.RepoApi.tests.js',
@@ -122,6 +124,7 @@ final class LibHooks {
 				'wikibase',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.parsers',
+				'wikibase.sites',
 				'wikibase.store.FetchedContent',
 				'wikibase.utilities',
 				'wikibase.utilities.ClaimGuidGenerator',
