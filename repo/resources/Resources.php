@@ -40,6 +40,7 @@ return call_user_func( function() {
 				'wikibase.ui.initTermBox',
 				'wikibase.parsers',
 				'wikibase.RepoApi',
+				'wikibase.sites',
 				'wikibase.store.EntityStore',
 				'wikibase.compileEntityStoreFromMwConfig',
 				'wikibase.ValueViewBuilder'
@@ -128,6 +129,7 @@ return call_user_func( function() {
 				'wikibase.special/wikibase.special.itemByTitle.js'
 			),
 			'dependencies' => array(
+				'wikibase.sites',
 				'wikibase.special',
 				'jquery.ui.suggester'
 			)

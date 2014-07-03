@@ -326,8 +326,8 @@ $.extend( wb.PageConnector.prototype, {
 				labels: {},
 				sitelinks: {}
 			},
-			firstSite = wb.getSite( firstSiteId ),
-			secondSite = wb.getSite( secondSiteId );
+			firstSite = wb.sites.getSite( firstSiteId ),
+			secondSite = wb.sites.getSite( secondSiteId );
 
 		// Labels (page titles)
 		// FIXME: Remove this after bug 57564 has been solved!
