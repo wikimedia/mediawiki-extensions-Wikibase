@@ -141,7 +141,7 @@
 
 					// actual initialization
 					new wb.ui.SiteLinksEditTool( $( this ), {
-						allowedSites: wb.getSitesOfGroup( group ),
+						allowedSites: wb.sites.getSitesOfGroup( group ),
 						counterContainers: $sitesCounterContainer
 					} );
 				} );
