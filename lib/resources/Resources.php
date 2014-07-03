@@ -84,31 +84,6 @@ return call_user_func( function() {
 			'datatypesconfigvarname' => 'wbDataTypes',
 		),
 
-		'wikibase.serialization' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.serialization/serialization.js',
-				'wikibase.serialization/serialization.Serializer.js',
-				'wikibase.serialization/serialization.Unserializer.js',
-				'wikibase.serialization/serialization.SerializerFactory.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase',
-			)
-		),
-
-		'wikibase.serialization.entities' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.serialization/serialization.EntityUnserializer.js',
-				'wikibase.serialization/serialization.EntityUnserializer.propertyExpert.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.serialization',
-				'wikibase.datamodel',
-			)
-		),
-
 		'wikibase.store' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.store/store.js'
