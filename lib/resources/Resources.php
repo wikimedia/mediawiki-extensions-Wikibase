@@ -157,7 +157,7 @@ return call_user_func( function() {
 				'wikibase.compileEntityStoreFromMwConfig.js',
 			),
 			'dependencies' => array(
-				'jquery.json',
+				'json',
 				'wikibase',
 				'wikibase.serialization',
 				'wikibase.serialization.entities',
@@ -183,7 +183,7 @@ return call_user_func( function() {
 				'wikibase.RepoApi/wikibase.RepoApi.js',
 			),
 			'dependencies' => array(
-				'jquery.json',
+				'json',
 				'user.tokens',
 				'mediawiki.api',
 				'wikibase.repoAccess',

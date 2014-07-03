@@ -23,6 +23,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues',
+				'json',
 				'jquery',
 				'wikibase',
 				'wikibase.RepoApi'

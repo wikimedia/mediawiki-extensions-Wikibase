@@ -54,7 +54,7 @@ return call_user_func( function() {
 				'wikibase.ui.initEntity.js',
 			),
 			'dependencies' => array(
-				'jquery.json',
+				'json',
 				'wikibase',
 				'wikibase.datamodel',
 				'wikibase.serialization',

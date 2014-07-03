@@ -22,6 +22,8 @@ return call_user_func( function() {
 				'wikibase.formatters.api.js',
 			),
 			'dependencies' => array(
+				'json',
+				'jquery',
 				'wikibase',
 				'wikibase.RepoApi',
 				'wikibase.dataTypes'
