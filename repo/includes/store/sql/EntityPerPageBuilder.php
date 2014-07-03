@@ -155,7 +155,8 @@ class EntityPerPageBuilder {
 
 		$conds = array(
 			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
-			'page_id > ' . (int) $lastPageSeen
+			'page_id > ' . (int) $lastPageSeen,
+			'page_is_redirect' => 0
 		);
 
 		if ( $wgContentHandlerUseDB ) {
