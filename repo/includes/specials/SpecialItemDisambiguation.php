@@ -8,10 +8,10 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityTitleLookup;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
 
@@ -270,16 +270,13 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @return Item[]
 	 */
 	private function findLabelUsage( $language, $label ) {
-		$terms = $this->termIndex->getEntityIdsForLabel( $label, $language, Item::ENTITY_TYPE, true );
+		$entityIds = $this->termIndex->getEntityIdsForLabel( $label, $language, Item::ENTITY_TYPE, true );
 		$entities = array();
 
 		$count = 0;
 
-		foreach ( $terms as $termRow ) {
-			list( , $numericId ) = $termRow;
-			$itemId = ItemId::newFromNumber( (int)$numericId );
-
-			$entity = $this->entityLookup->getEntity( $itemId );
+		foreach ( $entityIds as $entityId ) {
+			$entity = $this->entityLookup->getEntity( $entityId );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;
@@ -294,4 +291,5 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 
 		return $entities;
 	}
+
 }
