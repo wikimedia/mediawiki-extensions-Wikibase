@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_7ae86077",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-03T12:28:06Z",
+      "side": 1,
+      "message": "The name, the docs and the implementation don\u0027t seem to fit very well.",
+      "revId": "7762e3a1a836181de259cc9eee5cef94c7ab0fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
