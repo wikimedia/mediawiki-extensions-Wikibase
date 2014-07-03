@@ -36,7 +36,7 @@ return call_user_func( function() {
 				'wikibase.dataTypes',
 				'wikibase.experts',
 				'wikibase.formatters.getStore',
-				'wikibase.ui.initEntity',
+				'wikibase.EntityInitializer',
 				'wikibase.ui.initTermBox',
 				'wikibase.parsers',
 				'wikibase.RepoApi',
@@ -56,9 +56,9 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.ui.initEntity' => $moduleTemplate + array(
+		'wikibase.EntityInitializer' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.ui.initEntity.js',
+				'wikibase.EntityInitializer.js',
 			),
 			'dependencies' => array(
 				'json',
@@ -79,7 +79,6 @@ return call_user_func( function() {
 				'mediawiki.Title',
 				'wikibase',
 				'wikibase.templates',
-				'wikibase.ui.initEntity',
 				'wikibase.ui.PropertyEditTool',
 			),
 			'messages' => array(

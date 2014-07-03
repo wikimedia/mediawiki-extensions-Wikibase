@@ -103,45 +103,71 @@
 			// the entity node (see FIXME below).
 			$claims.toolbarcontroller( toolbarControllerConfig ); // BUILD TOOLBARS
 
-			var repoApi = new wb.RepoApi();
-			var abstractedRepoApi = new wb.AbstractedRepoApi();
-			var entityStore = new wb.store.EntityStore( abstractedRepoApi );
-			wb.compileEntityStoreFromMwConfig( entityStore );
+			var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
 
-			// FIXME: Initializing entityview on $claims leads to the claim section inserted as
-			// child of $claims. It should be direct child of ".wb-entity".
-			$claims.entityview( {
-				value: wb.entity,
-				entityStore: entityStore,
-				valueViewBuilder: new wb.ValueViewBuilder(
-					experts,
-					getFormatterStore( repoApi, dataTypes ),
-					parsers,
-					mw
-				)
-			} ).appendTo( $claimsParent );
+			entityInitializer.getEntity().done( function( entity ) {
+				var entityStore = new wb.store.EntityStore();
+				wb.compileEntityStoreFromMwConfig( entityStore );
 
-			// This is here to be sure there is never a duplicate id
-			$( '.wb-claimgrouplistview' )
-				.prev( '.wb-section-heading' )
-				.first()
-				.attr( 'id', 'claims' );
+				// FIXME: Initializing entityview on $claims leads to the claim section inserted as
+				// child of $claims. It should be direct child of ".wb-entity".
+				var repoApi = new wb.RepoApi();
+				var abstractedRepoApi = new wb.AbstractedRepoApi();
+				var entityStore = new wb.store.EntityStore( abstractedRepoApi );
+				wb.compileEntityStoreFromMwConfig( entityStore );
 
-			// removing site links heading to rebuild it with value counter
-			$( 'table.wb-sitelinks' ).each( function() {
-				var group = $( this ).data( 'wb-sitelinks-group' ),
-					$sitesCounterContainer = $( '<span/>' );
+				// FIXME: Initializing entityview on $claims leads to the claim section inserted as
+				// child of $claims. It should be direct child of ".wb-entity".
+				$claims.entityview( {
+					value: wb.entity,
+					entityStore: entityStore,
+					valueViewBuilder: new wb.ValueViewBuilder(
+						experts,
+						getFormatterStore( repoApi, dataTypes ),
+						parsers,
+						mw
+					)
+				} ).appendTo( $claimsParent );
 
-				$( this ).prev().append( $sitesCounterContainer );
+				// This is here to be sure there is never a duplicate id
+				$( '.wb-claimgrouplistview' )
+					.prev( '.wb-section-heading' )
+					.first()
+					.attr( 'id', 'claims' );
 
-				// actual initialization
-				new wb.ui.SiteLinksEditTool( $( this ), {
-					allowedSites: wb.getSitesOfGroup( group ),
-					counterContainers: $sitesCounterContainer
+				// removing site links heading to rebuild it with value counter
+				$( 'table.wb-sitelinks' ).each( function() {
+					var group = $( this ).data( 'wb-sitelinks-group' ),
+						$sitesCounterContainer = $( '<span/>' );
+
+					$( this ).prev().append( $sitesCounterContainer );
+
+					// actual initialization
+					new wb.ui.SiteLinksEditTool( $( this ), {
+						allowedSites: wb.getSitesOfGroup( group ),
+						counterContainers: $sitesCounterContainer
+					} );
 				} );
-			} );
 
-			$( '.wb-entity' ).claimgrouplabelscroll();
+				$( '.wb-entity' ).claimgrouplabelscroll();
+
+				$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
+					// Display anonymous user edit warning:
+					if ( mw.user && mw.user.isAnon()
+						&& $.find( '.mw-notification-content' ).length === 0
+						&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
+					) {
+						mw.notify(
+							mw.msg( 'wikibase-anonymouseditwarning',
+								mw.msg( 'wikibase-entity-' + entity.getType() )
+							)
+						);
+					}
+				} );
+
+				wb.ui.initTermBox( entity );
+
+			} );
 		}
 
 		// Handle edit restrictions:
@@ -180,18 +206,6 @@
 		}
 
 		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
-			// Display anonymous user edit warning:
-			if ( mw.user && mw.user.isAnon()
-				&& $.find( '.mw-notification-content' ).length === 0
-				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
-			) {
-				mw.notify(
-					mw.msg( 'wikibase-anonymouseditwarning',
-						mw.msg( 'wikibase-entity-' + wb.entity.getType() )
-					)
-				);
-			}
-
 			// add copyright warning to 'save' button if there is one:
 			if( mw.config.exists( 'wbCopyright' ) ) {
 
