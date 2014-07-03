@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_55868fbf",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-03T14:35:47Z",
+      "side": 1,
+      "message": "needs typecast to int",
+      "revId": "b13e0c6d012e8dbdb6cb9684ed84220216996b8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
