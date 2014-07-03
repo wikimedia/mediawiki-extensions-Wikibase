@@ -28,6 +28,11 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityContentFactoryTest extends \MediaWikiTestCase {
 
+	private function supportsRedirects() {
+		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+		return $handler->supportsRedirects();
+	}
+
 	/**
 	 * @dataProvider contentModelsProvider
 	 */
@@ -248,6 +253,12 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	 * @param EntityRedirect $redirect
 	 */
 	public function testNewFromRedirect( EntityRedirect $redirect ) {
+		if ( !$this->supportsRedirects() ) {
+			// As of 2014-07-03, redirects are still experimental.
+			// So do a feature check before trying to test redirects.
+			$this->markTestSkipped( 'Redirects not yet supported.' );
+		}
+
 		$factory = $this->newFactory();
 		$content = $factory->newFromRedirect( $redirect );
 
