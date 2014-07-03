@@ -267,6 +267,7 @@ $specialPageAliases['mk'] = array(
 	'SetDescription' => array( 'ЗадајОпис' ),
 	'SetAliases' => array( 'ЗадајАлијаси' ),
 	'SetSiteLink' => array( 'ЗадајВикиврска' ),
+	'MergeItems' => array( 'СпојПредмети' ),
 	'EntitiesWithoutLabel' => array( 'ЕдинициБезЕтикета' ),
 	'EntitiesWithoutDescription' => array( 'ЕдинициБезОпис' ),
 	'ItemsWithoutSitelinks' => array( 'ПредметиБезВикиврски' ),

@@ -30,7 +30,7 @@
 	"wikibase-comment-sitelink-change": "Lien de langue modifié de $1 à $2",
 	"wikibase-comment-sitelink-remove": "Lien de langue supprimé : $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|modification|modifications}}",
-	"wikibase-dataitem": "Élément sur Wikidata",
+	"wikibase-dataitem": "Élément {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifier les liens",
 	"wikibase-editlinkstitle": "Modifier les liens interlangue",
 	"wikibase-linkitem-addlinks": "Ajouter des liens",

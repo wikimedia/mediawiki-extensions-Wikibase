@@ -179,7 +179,7 @@
 	"wikibase-mergeitems-toid": "要合并到的ID",
 	"wikibase-mergeitems-submit": "合并项",
 	"special-dispatchstats": "更改发送统计",
-	"wikibase-dispatchstats-intro": "本页面提供关于发送至客户的更改的统计。当{{SITENAME}}上的更改已经发送至客户wiki并已被客户维基的工作队列处理，客户wiki即知晓该更改。\n*[[#{{int:wikibase-dispatchstats-changes}}|{{int:wikibase-dispatchstats-changes}}]]展示目前在队列中的最早和最新的项的编号和日期。\n*[[#{{int:wikibase-dispatchstats-stats}}|{{int:wikibase-dispatchstats-stats}}]]提供关于最快和最慢以及两者中值的客户wiki的信息。对每个wiki，提供以下信息：\n**“{{int:wikibase-dispatchstats-site-id}}”是客户wiki的内部ID。\n**“{{int:wikibase-dispatchstats-pos}}”是发送至客户wiki的最后更改的ID。\n**“{{int:wikibase-dispatchstats-lag-num}}”是尚未发送至客户wiki的更改的数目。\n**“{{int:wikibase-dispatchstats-lag-time}}”是最后发送至客户wiki的更改和{{SITENAME}}上的最后更改之间的时间。\n**“{{int:wikibase-dispatchstats-touched}}”是发送至客户wiki的最后一批更改的发送时间。",
+	"wikibase-dispatchstats-intro": "本页面提供关于发送至客户的更改的统计。当{{SITENAME}}上的更改已经发送至客户wiki并已被客户维基的工作队列处理，客户wiki即知晓该更改。\n*{{int:wikibase-dispatchstats-changes}}展示目前在队列中的最早和最新的项的编号和日期。\n*{{int:wikibase-dispatchstats-stats}}提供关于最快和最慢以及两者中值的客户wiki的信息。对每个wiki，提供以下信息：\n**“{{int:wikibase-dispatchstats-site-id}}”是客户wiki的内部ID。\n**“{{int:wikibase-dispatchstats-pos}}”是发送至客户wiki的最后更改的ID。\n**“{{int:wikibase-dispatchstats-lag-num}}”是尚未发送至客户wiki的更改的数目。\n**“{{int:wikibase-dispatchstats-lag-time}}”是最后发送至客户wiki的更改和{{SITENAME}}上的最后更改之间的时间。\n**“{{int:wikibase-dispatchstats-touched}}”是发送至客户wiki的最后一批更改的发送时间。",
 	"wikibase-dispatchstats-no-stats": "目前没有统计数据。",
 	"wikibase-dispatchstats-changes": "更改日志统计",
 	"wikibase-dispatchstats-stats": "发送统计",
