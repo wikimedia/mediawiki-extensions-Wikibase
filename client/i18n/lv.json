@@ -9,7 +9,7 @@
 	"wikibase-comment-sitelink-change": "Valodas saite mainīta no $1 uz $2",
 	"wikibase-comment-sitelink-remove": "Valodas saite noņemta: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmaiņa|izmaiņas}}",
-	"wikibase-dataitem": "Datu ieraksts",
+	"wikibase-dataitem": "{{WBREPONAME}} ieraksts",
 	"wikibase-editlinks": "Labot saites",
 	"wikibase-editlinkstitle": "Labot starpvalodu saites",
 	"wikibase-linkitem-addlinks": "Pievienot saites",

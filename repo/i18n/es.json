@@ -95,7 +95,7 @@
 	"wikibase-validator-label-conflict": "La propiedad $3 ya tiene la etiqueta \"$1\" asociada con el código de idioma $2.",
 	"wikibase-validator-label-with-description-conflict": "Otro elemento ($3) ya tiene la etiqueta \"$1\" y la descripción \"$4\" asociada con el código de idioma $2.",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" no es un elemento válido de identificación.",
-	"wikibase-wikibaserepopage-invalid-langcode": "El identificador de idioma \"$1\" es desconocido. Utiliza un identificador de idioma que sea conocido para el sistema, como \"es\".",
+	"wikibase-wikibaserepopage-invalid-langcode": "El código de idioma «$1» es desconocido. Utiliza un código de idioma que el sistema reconozca, como «es».",
 	"wikibase-wikibaserepopage-invalid-id": "El identificador ID \"$1\" es desconocido para el sistema. Utiliza un identificador de entidad que sea válido.",
 	"special-itembytitle": "Elemento por título",
 	"wikibase-itembytitle-lookup-fieldset": "Búsqueda de artículos por sitio y título",

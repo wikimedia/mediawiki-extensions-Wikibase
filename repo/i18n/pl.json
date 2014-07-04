@@ -38,6 +38,7 @@
 	"wikibase-description-input-help-message": "Podaj krótki opis w języku: $1.",
 	"wikibase-claims": "Stwierdzenia",
 	"wikibase-statements": "Deklaracje",
+	"wikibase-attributes": "Atrybuty",
 	"wikibase-terms": "W innych językach",
 	"wikibase-sitelinks-empty": "Brak strony powiązanej z tym elementem.",
 	"wikibase-sitelinks-input-help-message": "Podaj link do strony związanej z tym elementem.",

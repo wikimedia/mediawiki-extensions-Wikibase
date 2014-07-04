@@ -73,6 +73,7 @@
 	"wikibase-tooltip-error-details": "Подробности",
 	"wikibase-undeserializable-value": "Значение является недопустимым и не может быть отображено.",
 	"wikibase-validator-invalid": "Недопустимое значение",
+	"wikibase-validator-missing-field": "Отсутствует обязательное поле '$1'",
 	"wikibase-validator-bad-type": "$2 вместо $1",
 	"wikibase-validator-too-long": "Длина должна быть не более чем $1 {{PLURAL:$1|символ|символов|символа}}",
 	"wikibase-validator-too-short": "Длина должна быть не менее чем $1 {{PLURAL:$1|символ|символов|символа}}",
