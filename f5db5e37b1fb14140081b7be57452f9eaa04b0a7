@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae43a74e_8252753d",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-04T13:48:06Z",
+      "side": 1,
+      "message": "these lines now get wrapped in gerrit. anyoing.",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_6249d18f",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-04T13:48:06Z",
+      "side": 1,
+      "message": "o_O",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_2263c90b",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-04T13:48:06Z",
+      "side": 1,
+      "message": "I would prefer the information flow to be a) explicit and b) consistent to getParserOutputFromEntityView.",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_e25ca150",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-04T13:48:06Z",
+      "side": 1,
+      "message": "here you introduce a local variable, in other places you remove them by inlining calls to getters... I don\u0027t see the pattern.",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_227ce9b3",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 11
@@ -13,6 +81,23 @@
       "writtenOn": "2014-07-04T13:30:38Z",
       "side": 1,
       "message": "thanks!",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_a23699fe",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-04T13:48:06Z",
+      "side": 1,
+      "message": "Either/or is always exclusive. \nAlso, I prefer to handle these cases separately in order to\na) give a clearer error message\nb) be able to set a breakpoint for a specific case\nc) see all error cases individually when reading the code\nd) be able to easily change the handling for a specific case\n\nOtoh, if several cases need the same non-trivial handling, I\u0027d probably do it your way.",
       "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
