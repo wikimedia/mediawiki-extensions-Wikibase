@@ -10,6 +10,7 @@ use ParserOutput;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Repo\View\TextInjector;
@@ -31,9 +32,9 @@ use Wikibase\Repo\View\TextInjector;
 abstract class EntityView extends ContextSource {
 
 	/**
-	 * @var EntityInfoBuilder
+	 * @var EntityInfoBuilderFactory
 	 */
-	protected $entityRevisionLookup;
+	protected $entityInfoBuilderFactory;
 
 	/**
 	 * @var EntityTitleLookup
@@ -87,7 +88,7 @@ abstract class EntityView extends ContextSource {
 	 * @param IContextSource|null $context
 	 * @param SnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializationOptions $options
 	 * @param ParserOutputJsConfigBuilder $configBuilder
@@ -100,7 +101,7 @@ abstract class EntityView extends ContextSource {
 		IContextSource $context,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilder $entityInfoBuilder,
+		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		SerializationOptions $options,
 		ParserOutputJsConfigBuilder $configBuilder
@@ -113,7 +114,7 @@ abstract class EntityView extends ContextSource {
 
 		$this->setContext( $context );
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->entityInfoBuilder = $entityInfoBuilder;
+		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->options = $options;
 		$this->configBuilder = $configBuilder;
@@ -637,16 +638,15 @@ if ( $ ) {
 		} );
 
 		// NOTE: This is a bit hackish, it would be more appropriate to use a TermTable here.
-		$entityInfo = $this->entityInfoBuilder->buildEntityInfo( $propertyIds );
-		$this->entityInfoBuilder->removeMissing( $entityInfo );
-		$this->entityInfoBuilder->addTerms(
-			$entityInfo,
+		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
+		$entityInfoBuilder->removeMissing();
+		$entityInfoBuilder->collectTerms(
 			array( 'label', 'description' ),
 			array( $languageCode )
 		);
 
 		wfProfileOut( __METHOD__ );
-		return $entityInfo;
+		return $entityInfoBuilder->getEntityInfo();
 	}
 
 }
