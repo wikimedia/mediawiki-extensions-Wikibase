@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -111,7 +112,7 @@ class PropertyContent extends EntityContent {
 	 * @param IContextSource $context
 	 * @param SnakFormatter $snakFormatter
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
@@ -122,13 +123,13 @@ class PropertyContent extends EntityContent {
 		IContextSource $context,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilder $entityInfoBuilder,
+		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
 		SerializationOptions $options
 	) {
 		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilder,
+			$entityInfoBuilderFactory,
 			$idParser,
 			$entityTitleLookup,
 			new ReferencedEntitiesFinder(),
@@ -139,7 +140,7 @@ class PropertyContent extends EntityContent {
 			$context,
 			$snakFormatter,
 			$dataTypeLookup,
-			$entityInfoBuilder,
+			$entityInfoBuilderFactory,
 			$entityTitleLookup,
 			$options,
 			$configBuilder
