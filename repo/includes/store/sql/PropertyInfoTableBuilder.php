@@ -159,6 +159,7 @@ class PropertyInfoTableBuilder {
 				$dbw->begin();
 			}
 
+			//FIXME: use an EntityIdPager from EntityPerPage
 			$props = $dbw->select(
 				$tables,
 				array(
