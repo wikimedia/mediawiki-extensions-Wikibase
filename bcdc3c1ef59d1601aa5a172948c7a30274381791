@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_02956542",
+        "filename": "lib/includes/store/EntityRevision.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-04T10:20:17Z",
+      "side": 1,
+      "message": "It\u0027s not just \"a revisions\u0027s timestamp\". What does this even mean? The timestamp field in the revision class is different, it can in any form and is converted to TS_MW in the getter. In this class it must be a TS_MW. We know that. Look at the constructor. Why not reflect this knowledge in the code?",
+      "parentUuid": "ae43a74e_462e0640",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_cdb8e5e4",
         "filename": "lib/includes/store/EntityRevision.php",
         "patchSetId": 6
@@ -117,6 +135,24 @@
       "writtenOn": "2014-06-30T20:35:47Z",
       "side": 1,
       "message": "Days without using the ternary operator: 0.",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_8290354f",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-04T10:20:17Z",
+      "side": 1,
+      "message": "Come on. It\u0027s a tool. However, I agree that\u0027s not nice to do more than a atomic return after wfProfileOut.",
+      "parentUuid": "ae43a74e_06e7de10",
       "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
