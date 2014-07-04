@@ -4,8 +4,10 @@ namespace Wikibase;
 
 use FormatJson;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 
 /**
  * @since 0.5
@@ -20,9 +22,9 @@ use Wikibase\Lib\Serializers\SerializerFactory;
 class ParserOutputJsConfigBuilder {
 
 	/**
-	 * @var EntityInfoBuilder
+	 * @var EntityInfoBuilderFactory
 	 */
-	protected $entityInfoBuilder;
+	protected $entityInfoBuilderFactory;
 
 	/**
 	 * @var EntityIdParser
@@ -50,17 +52,17 @@ class ParserOutputJsConfigBuilder {
 	protected $serializerFactory;
 
 	/**
-	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param ReferencedEntitiesFinder $refFinder
 	 * @param string $langCode
 	 */
-	public function __construct( EntityInfoBuilder $entityInfoBuilder,
+	public function __construct( EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityIdParser $entityIdParser, EntityTitleLookup $entityTitleLookup,
 		ReferencedEntitiesFinder $refFinder, $langCode
 	) {
-		$this->entityInfoBuilder = $entityInfoBuilder;
+		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->refFinder = $refFinder;
@@ -119,16 +121,17 @@ class ParserOutputJsConfigBuilder {
 		$entityIds = $this->refFinder->findSnakLinks( $entity->getAllSnaks() );
 
 		// TODO: apply language fallback!
-		$entities = $this->entityInfoBuilder->buildEntityInfo( $entityIds );
+		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
-		$this->entityInfoBuilder->removeMissing( $entities );
-		$this->entityInfoBuilder->addTerms( $entities, array( 'label', 'description' ), array( $this->langCode ) );
-		$this->entityInfoBuilder->addDataTypes( $entities );
+		$entityInfoBuilder->removeMissing();
+		$entityInfoBuilder->collectTerms( array( 'label', 'description' ), array( $this->langCode ) );
+		$entityInfoBuilder->collectDataTypes();
 
-		$revisions = $this->attachRevisionInfo( $entities );
+		$entityInfo = $entityInfoBuilder->getEntityInfo();
+		$revisionInfo = $this->attachRevisionInfo( $entityInfo );
 
 		wfProfileOut( __METHOD__ );
-		return $revisions;
+		return $revisionInfo;
 	}
 
 	/**

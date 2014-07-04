@@ -628,7 +628,7 @@ class WikibaseRepo {
 
 	public function getParserOutputJsConfigBuilder( $langCode ) {
 		return new ParserOutputJsConfigBuilder(
-			$this->getStore()->getEntityInfoBuilder(),
+			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityIdParser(),
 			$this->getEntityContentFactory(),
 			new ReferencedEntitiesFinder(),
