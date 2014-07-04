@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_4275adc7",
+        "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-04T13:30:32Z",
+      "side": 1,
+      "message": "Sure, it\u0027s not like I don\u0027t use it. And in this case, it\u0027s clear enough. \nI used it a lot in the past actually, and then trained myself not to, because it\u0027s easier for breakpoints, adding logic, etc. But not a problem. Just something I noticed.",
+      "parentUuid": "ae43a74e_8290354f",
+      "revId": "bcdc3c1ef59d1601aa5a172948c7a30274381791",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_0da6edbe",
         "filename": "lib/includes/store/sql/WikiPageEntityLookup.php",
         "patchSetId": 6
