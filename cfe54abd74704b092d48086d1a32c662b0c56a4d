@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_253753e2",
+        "filename": "lib/tests/phpunit/store/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-04T14:29:40Z",
+      "side": 1,
+      "message": "WikibaseLib",
+      "revId": "cfe54abd74704b092d48086d1a32c662b0c56a4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_05320fef",
+        "filename": "lib/tests/phpunit/store/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-04T14:29:40Z",
+      "side": 1,
+      "message": "this doesn\u0027t work over here if run from a client wiki, as MediaWikiTestCase will try to clear a local table",
+      "revId": "cfe54abd74704b092d48086d1a32c662b0c56a4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_e5302be7",
+        "filename": "lib/tests/phpunit/store/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-04T14:29:40Z",
+      "side": 1,
+      "message": "also doesn\u0027t work over here",
+      "revId": "cfe54abd74704b092d48086d1a32c662b0c56a4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
