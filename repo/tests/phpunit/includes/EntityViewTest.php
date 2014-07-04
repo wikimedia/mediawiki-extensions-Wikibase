@@ -16,7 +16,6 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Entity;
-use Wikibase\EntityInfoBuilder;
 use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
@@ -25,6 +24,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
@@ -95,7 +95,7 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $entityType
-	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param IContextSource $context
 	 * @param LanguageFallbackChain $languageFallbackChain
@@ -103,8 +103,11 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 	 * @throws InvalidArgumentException
 	 * @return EntityView
 	 */
-	protected function newEntityView( $entityType, EntityInfoBuilder $entityInfoBuilder = null,
-		EntityTitleLookup $entityTitleLookup = null, IContextSource $context = null,
+	protected function newEntityView(
+		$entityType,
+		EntityInfoBuilderFactory $entityInfoBuilderFactory = null,
+		EntityTitleLookup $entityTitleLookup = null,
+		IContextSource $context = null,
 		LanguageFallbackChain $languageFallbackChain = null
 	) {
 		if ( !is_string( $entityType ) ) {
@@ -125,8 +128,8 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 
 		$mockRepo = $this->getMockRepo();
 
-		if ( !$entityInfoBuilder ) {
-			$entityInfoBuilder = $mockRepo;
+		if ( !$entityInfoBuilderFactory ) {
+			$entityInfoBuilderFactory = $mockRepo;
 		}
 
 		if ( !$entityTitleLookup ) {
@@ -140,7 +143,7 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
 
 		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilder,
+			$entityInfoBuilderFactory,
 			$idParser,
 			$entityTitleLookup,
 			new ReferencedEntitiesFinder(),
@@ -159,7 +162,7 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 			$context,
 			$snakFormatter,
 			$mockRepo,
-			$entityInfoBuilder,
+			$entityInfoBuilderFactory,
 			$entityTitleLookup,
 			$options,
 			$configBuilder

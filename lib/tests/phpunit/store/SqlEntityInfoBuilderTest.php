@@ -3,11 +3,12 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Property;
-use Wikibase\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 
 /**
  * @covers Wikibase\SqlEntityInfoBuilder
@@ -30,6 +31,10 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 	public function setUp() {
 		parent::setUp();
+
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( 'Entity info tables are not available locally on the client' );
+		}
 
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->tablesUsed[] = 'wb_terms';
@@ -102,8 +107,13 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function newEntityInfoBuilder() {
-		return new SqlEntityInfoBuilder( new BasicEntityIdParser() );
+	/**
+	 * @param EntityId[] $ids
+	 *
+	 * @return SqlEntityInfoBuilder
+	 */
+	public function newEntityInfoBuilder( array $ids ) {
+		return new SqlEntityInfoBuilder( $ids, new BasicEntityIdParser() );
 	}
 
 	public function provideBuildEntityInfo() {
@@ -139,10 +149,9 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideBuildEntityInfo
 	 */
-	public function testBuildEntityInfo( array $ids, array $expected ) {
-		$builder = $this->newEntityInfoBuilder();
-
-		$actual = $builder->buildEntityInfo( $ids );
+	public function testGetEntityInfo( array $ids, array $expected ) {
+		$builder = $this->newEntityInfoBuilder( $ids );
+		$actual = $builder->getEntityInfo();
 
 		$this->assertArrayEquals( $expected, $actual, false, true );
 	}
@@ -179,7 +188,7 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 		return $records;
 	}
 
-	public function provideAddTerms() {
+	public function provideCollectTerms() {
 		return array(
 			array(
 				array(),
@@ -190,9 +199,9 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 			array(
 				array(
-					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE ),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+					new ItemId( 'Q1' ),
+					new PropertyId( 'P3' ),
+					new ItemId( 'Q7' ),
 				),
 				null,
 				null,
@@ -213,9 +222,9 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 			array(
 				array(
-					'Q1' => array( 'id' => 'Q1', 'type' => Item::ENTITY_TYPE ),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE ),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+					new ItemId( 'Q1' ),
+					new PropertyId( 'P3' ),
+					new ItemId( 'Q7' ),
 				),
 				array( 'label' ),
 				array( 'de' ),
@@ -233,12 +242,13 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideAddTerms
+	 * @dataProvider provideCollectTerms
 	 */
-	public function testAddTerms( array $entityInfo, array $types = null, array $languages = null, array $expected = null ) {
-		$builder = $this->newEntityInfoBuilder();
+	public function testCollectTerms( array $ids, array $types = null, array $languages = null, array $expected = null ) {
+		$builder = $this->newEntityInfoBuilder( $ids );
 
-		$builder->addTerms( $entityInfo, $types, $languages );
+		$builder->collectTerms( $types, $languages );
+		$entityInfo = $builder->getEntityInfo();
 
 		$this->assertSameSize( $expected, $entityInfo );
 
@@ -250,7 +260,7 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function provideAddDataTypes() {
+	public function provideCollectDataTypes() {
 		return array(
 			array(
 				array(),
@@ -259,10 +269,10 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 			array(
 				array(
-					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE ),
-					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE ),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
-					'P7' => array( 'id' => 'P7', 'type' => Property::ENTITY_TYPE ),
+					new PropertyId( 'P2' ),
+					new PropertyId( 'P3' ),
+					new ItemId( 'Q7' ),
+					new PropertyId( 'P7' ),
 				),
 				array(
 					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE, 'datatype' => 'type2' ),
@@ -275,12 +285,13 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideAddDataTypes
+	 * @dataProvider provideCollectDataTypes
 	 */
-	public function testAddDataTypes( array $entityInfo, array $expected = null ) {
-		$builder = $this->newEntityInfoBuilder();
+	public function testCollectDataTypes( array $ids, array $expected = null ) {
+		$builder = $this->newEntityInfoBuilder( $ids );
 
-		$builder->addDataTypes( $entityInfo );
+		$builder->collectDataTypes();
+		$entityInfo = $builder->getEntityInfo();
 
 		$this->assertSameSize( $expected, $entityInfo );
 
@@ -301,7 +312,7 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 			array(
 				array(
-					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+					new ItemId( 'Q2' ),
 				),
 				array(
 					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
@@ -310,17 +321,17 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 
 			array(
 				array(
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
+					new ItemId( 'Q7' ),
 				),
 				array()
 			),
 
 			array(
 				array(
-					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE ),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE ),
-					'P7' => array( 'id' => 'P7', 'type' => Property::ENTITY_TYPE ),
-					'Q2' => array( 'id' => 'Q2', 'type' => Item::ENTITY_TYPE ),
+					new ItemId( 'Q2' ),
+					new PropertyId( 'P7' ),
+					new ItemId( 'Q7' ),
+					new PropertyId( 'P2' ),
 				),
 				array(
 					'P2' => array( 'id' => 'P2', 'type' => Property::ENTITY_TYPE ),
@@ -333,10 +344,11 @@ class SqlEntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideRemoveMissing
 	 */
-	public function testRemoveMissing( array $entityInfo, array $expected = null ) {
-		$builder = $this->newEntityInfoBuilder();
+	public function testRemoveMissing( array $ids, array $expected = null ) {
+		$builder = $this->newEntityInfoBuilder( $ids );
 
-		$builder->removeMissing( $entityInfo );
+		$builder->removeMissing();
+		$entityInfo = $builder->getEntityInfo();
 
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
