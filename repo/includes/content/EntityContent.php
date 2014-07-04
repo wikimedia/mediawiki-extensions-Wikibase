@@ -28,6 +28,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\EntitySearchTextGenerator;
@@ -332,7 +333,7 @@ abstract class EntityContent extends AbstractContent {
 			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
 
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-		$entityInfoBuilder = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilder();
+		$entityInfoBuilderFactory = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilderFactory();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$idParser = new BasicEntityIdParser();
 
@@ -343,7 +344,7 @@ abstract class EntityContent extends AbstractContent {
 			$context,
 			$snakFormatter,
 			$dataTypeLookup,
-			$entityInfoBuilder,
+			$entityInfoBuilderFactory,
 			$entityContentFactory,
 			$idParser,
 			$options
@@ -360,7 +361,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @param IContextSource $context
 	 * @param SnakFormatter $snakFormatter
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
@@ -371,7 +372,7 @@ abstract class EntityContent extends AbstractContent {
 		IContextSource $context,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilder $entityInfoBuilder,
+		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
 		SerializationOptions $options

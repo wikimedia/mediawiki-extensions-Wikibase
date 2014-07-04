@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
 
@@ -199,7 +200,7 @@ class ItemContent extends EntityContent {
 	 * @param IContextSource $context
 	 * @param SnakFormatter $snakFormatter
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
@@ -210,13 +211,16 @@ class ItemContent extends EntityContent {
 		IContextSource $context,
 		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilder $entityInfoBuilder,
+		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $idParser,
 		SerializationOptions $options
 	) {
+		//FIXME: we are using the EntityInfoBuilderFactory in two places,
+		// this indicates we are also doing the bulk database queries twice!
+
 		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilder,
+			$entityInfoBuilderFactory,
 			$idParser,
 			$entityTitleLookup,
 			new ReferencedEntitiesFinder(),
@@ -227,7 +231,7 @@ class ItemContent extends EntityContent {
 			$context,
 			$snakFormatter,
 			$dataTypeLookup,
-			$entityInfoBuilder,
+			$entityInfoBuilderFactory,
 			$entityTitleLookup,
 			$options,
 			$configBuilder
