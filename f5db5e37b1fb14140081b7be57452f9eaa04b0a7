@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_227ce9b3",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-04T13:30:38Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
