@@ -9,8 +9,7 @@ use Wikibase\DataModel\Entity\PropertyNotFoundException;
  * @covers Wikibase\DataModel\Entity\PropertyNotFoundException
  * @uses Wikibase\DataModel\Entity\PropertyId
  *
- * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseDataModel
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
