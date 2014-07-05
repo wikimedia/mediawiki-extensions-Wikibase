@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_db1624f6",
+        "filename": "lib/includes/Reporting/ExceptionHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-05T12:47:21Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "71c81ddc64cb690c3053accdd1b696946dfc6e97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_bb1120fe",
+        "filename": "lib/includes/Reporting/ExceptionHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-05T12:47:21Z",
+      "side": 1,
+      "message": "Comma?",
+      "revId": "71c81ddc64cb690c3053accdd1b696946dfc6e97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_9bd89c59",
+        "filename": "lib/includes/Reporting/MessageReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-05T12:47:21Z",
+      "side": 1,
+      "message": "Version 1.21 of what? Core?\n\nLOL. See Ia93dae2 and I8575626.",
+      "revId": "71c81ddc64cb690c3053accdd1b696946dfc6e97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_fbe68810",
+        "filename": "lib/includes/Reporting/NullMessageReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-05T12:47:21Z",
+      "side": 1,
+      "message": "Erm, no.",
+      "revId": "71c81ddc64cb690c3053accdd1b696946dfc6e97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_dbf504b7",
+        "filename": "lib/includes/Reporting/ObservableMessageReporter.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-05T12:47:21Z",
+      "side": 1,
+      "message": "Erm, no.",
+      "revId": "71c81ddc64cb690c3053accdd1b696946dfc6e97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
