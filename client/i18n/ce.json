@@ -36,8 +36,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Ахьа авторизаци ян еза",
 	"wikibase-linkitem-not-loggedin": "И функци лела я йиш хилийта ахьа хьай цӀерца болх ба беза хӀокху вики чох а [$1 Викихаамаш чохь а].",
 	"wikibase-linkitem-success-link": "АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.",
-	"wikibase-property-notfound": "Свойства «$1» ца карайо",
-	"wikibase-property-notsupportedyet": "Wikibase ловш дац хьалан тайп «$1».",
+	"wikibase-property-notfound": "Билгало «$1» ца карайо",
 	"wikibase-rc-hide-wikidata": "$1 Викихаамаш",
 	"wikibase-rc-hide-wikidata-hide": "Къайлабаха",
 	"wikibase-rc-hide-wikidata-show": "Гайта",
@@ -57,6 +56,6 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|хьажораг|хьажоргаш}} ю)",
 	"wikibase-pageinfo-entity-id": "Викихаамаш чур элиментан ID",
 	"wikibase-pageinfo-entity-id-none": "ХӀумма цаоьшу",
-	"wikibase-property-render-error": "свойства «$1»: $2 гучуйоккхуш гӀалат ду",
+	"wikibase-property-render-error": "билгало «$1»: $2 гучуйоккхуш гӀалат ду",
 	"wikibase-otherprojects": "Кхин проекташ"
 }

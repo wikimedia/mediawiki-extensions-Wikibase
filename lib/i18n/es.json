@@ -8,7 +8,8 @@
 			"Pegna",
 			"Savh",
 			"Vivaelcelta",
-			"Mcervera"
+			"Mcervera",
+			"Macofe"
 		]
 	},
 	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
@@ -56,7 +57,7 @@
 	"wikibase-sitelinks-wikipedia": "Páginas de Wikipedia enlazadas con este elemento",
 	"wikibase-sitelinks-sitename-columnheading": "Idioma",
 	"wikibase-sitelinks-siteid-columnheading": "Código",
-	"wikibase-sitelinks-link-columnheading": "Artículo enlazado",
+	"wikibase-sitelinks-link-columnheading": "Página enlazada",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconocido",
 	"wikibase-snakview-snaktypeselector-novalue": "sin valor",
 	"wikibase-tooltip-error-details": "Detalles",
