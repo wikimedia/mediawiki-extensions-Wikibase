@@ -19,7 +19,7 @@
 	"wikibase-comment-sitelink-change": "Юкъарвики-хьажораг хийцина $1 → $2",
 	"wikibase-comment-sitelink-remove": "Юкъарвики-хьажораг дӀаяьккхина: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|хийцам|хийцамаш}}",
-	"wikibase-dataitem": "Хаамашан элемент",
+	"wikibase-dataitem": "Элемент {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Хьажоргаш нисъяр",
 	"wikibase-editlinkstitle": "Меттанийн юкъара хьажоргаш нисъяр",
 	"wikibase-linkitem-addlinks": "ТӀетоха хьажоргаш",
