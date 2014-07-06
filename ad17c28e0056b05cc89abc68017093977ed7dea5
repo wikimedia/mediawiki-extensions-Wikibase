@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_91a63dbd",
+        "filename": "repo/includes/api/CreateRedirect.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-07-06T13:01:54Z",
+      "side": 1,
+      "message": "@since 0.1? :D",
+      "revId": "ad17c28e0056b05cc89abc68017093977ed7dea5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_71a9998c",
+        "filename": "repo/includes/api/CreateRedirect.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-07-06T13:01:54Z",
+      "side": 1,
+      "message": "ewww",
+      "revId": "ad17c28e0056b05cc89abc68017093977ed7dea5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
