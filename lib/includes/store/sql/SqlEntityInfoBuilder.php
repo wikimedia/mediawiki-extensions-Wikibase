@@ -3,8 +3,12 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
+use OutOfBoundsException;
 use ResultWrapper;
+use RuntimeException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel;
 use Wikibase\EntityId;
@@ -33,71 +37,122 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	);
 
 	/**
-	 * @var string
+	 * @var string The name of the database table holding terms.
 	 */
 	protected $termTable;
 
 	/**
-	 * @var string
+	 * @var string The name of the database table holding property info.
 	 */
 	protected $propertyInfoTable;
 
 	/**
-	 * @var string
+	 * @var string The name of the database table connecting entities to pages.
 	 */
 	protected $entityPerPageTable;
 
 	/**
-	 * @var EntityIdParser
-	 *
-	 * @note: currently not used, but we will need it once the database contains
-	 * full string IDs instead of numeric ids.
+	 * @var bool
 	 */
-	protected $idParser;
+	private $useRedirectTargetColumn;
 
 	/**
-	 * @var EntityId[] id-string -> EntityId
+	 * EntityId objects indexed by serialized ID. This allows us to re-use
+	 * the original EntityId object and avoids parsing the string again.
+	 *
+	 * @see getEntityId()
+	 *
+	 * @var EntityId[] map of id-strings to EntityId objects: id-string => EntityId
 	 */
 	private $entityIds = null;
 
 	/**
-	 * @var array[] id-string -> entity-record-array
+	 * The entity info data structure. This data structure is exposed via getEntityInfo().
+	 * After resolveRedirects() is called, this will contain entries for the redirect targets
+	 * in addition to the entries for the redirected IDs. Entries for the redirected IDs
+	 * will be php references to the entries that use the actual (target) IDs as keys.
+	 *
+	 * @see EntityInfoBuilder::getEntityInfo()
+	 *
+	 * @var array[] map of id-strings to entity-record arrays:
+	 *      id-string => record
 	 */
 	private $entityInfo = null;
 
 	/**
-	 * @var array[] type -> id-key -> int
+	 * Maps of id strings to numeric ids, grouped by entity type.
+	 * Used to build database queries on tables that use separate
+	 * fields for type and numeric id.
+	 *
+	 * @var array[] map of entity types to maps of id-strings to numeric ids:
+	 *      type => id-string => id-int
 	 */
 	private $numericIdsByType = null;
 
 	/**
+	 * Maps of id strings to page info records, grouped by entity type.
+	 * This uses the same basic structure as $this->numericIdsByType.
+	 * Each page info record is an associative array with keys page_id
+	 * and redirect_target.
+	 *
+	 * Initialized lazily by getPageInfoIdsByType().
+	 *
+	 * @var array[] map of entity type to maps of id-strings to numeric ids:
+	 *      type => id-string => id-int
+	 */
+	private $pageInfoByType = null;
+
+	/**
+	 * A map of entity id strings to EntityId objects, representing any
+	 * redirects present in the list of entities provided to the constructor.
+	 *
+	 * Initialized lazily by resolveRedirects().
+	 *
+	 * @var string[] map of id-string to EntityId objects:
+	 *      id-string => EntityId
+	 */
+	private $redirects = null;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
 	 * @param EntityId[] $ids
-	 * @param EntityIdParser $idParser
+	 * @param bool $useRedirectTargetColumn
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( array $ids, EntityIdParser $idParser, $wiki = false ) {
+	public function __construct( array $ids, $useRedirectTargetColumn = true, $wiki = false ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 
 		parent::__construct( $wiki );
 
-		$this->idParser = $idParser;
-
 		$this->termTable = 'wb_terms';
 		$this->propertyInfoTable = 'wb_property_info';
 		$this->entityPerPageTable = 'wb_entity_per_page';
+		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
+
+		$this->idParser = new BasicEntityIdParser();
 
 		$this->setEntityIds( $ids );
 	}
 
 	/**
 	 * @param EntityId[] $ids
+	 *
+	 * @throws RuntimeException If called more than once.
 	 */
 	private function setEntityIds( array $ids ) {
+		if ( $this->entityIds !== null ) {
+			throw new \RuntimeException( 'EntityIds have already been initialized' );
+		}
+
 		$this->entityIds = array();
 		$this->entityInfo = array();
 		$this->numericIdsByType = array();
@@ -106,29 +161,77 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 			$key = $id->getSerialization();
 			$type = $id->getEntityType();
 
-			$this->entityIds[$key] = $id;
-
 			$this->entityInfo[$key] = array(
 				'id' => $key,
 				'type' => $type,
 			);
 
 			$this->numericIdsByType[$type][$key] = $id->getNumericId();
+			$this->entityIds[$key] = $id;
 		}
 	}
 
 	/**
-	 * Returns an entity info data structure. The entity info is represented
-	 * by a nested array structure. On the top level, entity id strings are used as
-	 * keys that refer to entity "records". Each record is an associative array with
-	 * at least the fields "id" and "type". Which other fields are present depends on
-	 * which methods have been called on the EntityInfoBuilder in order to gather
-	 * information about the entities.
+	 * @see EntityInfoBuilder::getEntityInfo
 	 *
 	 * @return array[]
 	 */
 	public function getEntityInfo() {
 		return $this->entityInfo;
+	}
+
+	/**
+	 * @see EntityInfoBuilder::resolveRedirects
+	 */
+	public function resolveRedirects() {
+		if ( $this->redirects !== null ) {
+			// already done
+			return;
+		}
+
+		$this->redirects = $this->findRedirects();
+
+		foreach ( $this->redirects as $key => $targetId ) {
+			$this->applyRedirect( $key, $targetId );
+		}
+	}
+
+	/**
+	 * Applied the given redirect to the internal data structure
+	 *
+	 * @param string $idString The redirected entity id
+	 * @param EntityId $targetId The redirect target
+	 */
+	private function applyRedirect( $idString, EntityId $targetId ) {
+		$redirectedId = $this->getEntityId( $idString );
+		$type = $redirectedId->getEntityType();
+
+		$targetKey = $targetId->getSerialization();
+
+		if ( $idString === $targetKey ) {
+			// Sanity check: self-redirect, nothing to do.
+			return;
+		}
+
+		// If the redirect target doesn't have a record yet, copy the old record.
+		// Since two IDs may be redirected to the same target, this may already have
+		// happened.
+		if ( !isset( $this->entityInfo[$targetKey] ) ) {
+			$this->entityInfo[$targetKey] = $this->entityInfo[$idString]; // copy
+			$this->entityInfo[$targetKey]['id'] = $targetKey; // update id
+		}
+
+		// Make the redirected key a reference to the target record.
+		unset( $this->entityInfo[$idString] ); // just to be sure not to cause a mess
+		$this->entityInfo[$idString] = & $this->entityInfo[$targetKey];
+
+		// Remove the numeric id of the redirect, since we don't want to
+		// use it in database queries.
+		unset( $this->numericIdsByType[$type][$idString] );
+
+		// Record the id of the target.
+		$this->numericIdsByType[$type][$targetKey] = $targetId->getNumericId();
+		$this->entityIds[$targetKey] = $targetId;
 	}
 
 	/**
@@ -360,22 +463,12 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	/**
 	 * @see EntityInfoBuilder::removeMissing
 	 */
-	public function removeMissing() {
+	public function removeMissing( $redirects = 'keep-redirects' ) {
 		wfProfileIn( __METHOD__ );
 
-		//NOTE: we make one DB query per entity type, so we can take advantage of the
-		//      database index on the epp_entity_type field.
-		foreach ( $this->numericIdsByType as $type => $idsForType ) {
-			$pageIds = $this->getPageIdsForEntities( $type, $idsForType );
-			$missingNumericIds = array_diff( $idsForType, array_keys( $pageIds ) );
+		$missingIds = $this->getMissingIds( $redirects !== 'keep-redirects' );
 
-			// get the missing prefixed ids based on the missing numeric ids
-			$numericToPrefixed = array_flip( $idsForType );
-			$missingPrefixedIds = array_intersect_key( $numericToPrefixed, array_flip( array_values( $missingNumericIds ) ) );
-
-			$this->unsetEntityInfo( $missingPrefixedIds );
-		}
-
+		$this->unsetEntityInfo( $missingIds );
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -400,20 +493,35 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 * Creates a mapping from the given entity IDs to the corresponding page IDs.
 	 *
 	 * @param string $entityType
-	 * @param int[] $entityIds
 	 *
-	 * @return array A map of (numeric) entity IDs to page ids.
+	 * @return array A map of (numeric) entity IDs to page info record.
+	 *         Each page info record is an associative array with the fields
+	 *         page_id and redirect_target. Redirects are included.
 	 */
-	private function getPageIdsForEntities( $entityType, array $entityIds ) {
+	private function getPageInfoForType( $entityType ) {
+		if ( isset( $this->pageInfoByType[$entityType] ) ) {
+			return $this->pageInfoByType[$entityType];
+		}
+
 		wfProfileIn( __METHOD__ );
 
-		$pageIds = array();
+		$entityIds = $this->numericIdsByType[$entityType];
 
 		$dbw = $this->getConnection( DB_SLAVE );
 
+		$fields = array(
+			'epp_entity_type',
+			'epp_entity_id',
+			'epp_page_id',
+			$this->useRedirectTargetColumn
+				? 'epp_redirect_target'
+				: 'NULL AS epp_redirect_target'
+		);
+
+
 		$res = $dbw->select(
 			$this->entityPerPageTable,
-			array( 'epp_entity_type', 'epp_entity_id', 'epp_page_id' ),
+			$fields,
 			array(
 				'epp_entity_type' => $entityType,
 				'epp_entity_id' => $entityIds,
@@ -421,14 +529,120 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 			__METHOD__
 		);
 
+		$idStrings = array_flip( $entityIds );
+
+		$this->pageInfoByType[$entityType] = array();
+
 		foreach ( $res as $row ) {
-			$pageIds[$row->epp_entity_id] = $row->epp_page_id;
+			$key = $idStrings[$row->epp_entity_id];
+
+			$this->pageInfoByType[$entityType][$key] = array(
+				'page_id' => $row->epp_page_id,
+				'redirect_target' => $row->epp_redirect_target,
+			);
 		}
 
 		$this->releaseConnection( $dbw );
 
 		wfProfileOut( __METHOD__ );
 
-		return $pageIds;
+		return $this->pageInfoByType[$entityType];
+	}
+
+	/**
+	 * @return array[] Associative array containing a page info record for each entity ID.
+	 *         Each page info record is an associative array with the fields
+	 *         page_id and redirect_target. Redirects are included.
+	 */
+	private function getPageInfo() {
+		$info = array();
+
+		foreach ( $this->numericIdsByType as $type => $ids ) {
+			$info[$type] = $this->getPageInfoForType( $type );
+		}
+
+		return $this->ungroup( $info );
+	}
+
+	/**
+	 * Returns an EntityId object for the given serialized ID.
+	 * This is implemented as a lookup of the original EntityId object supplied
+	 * to the constructor (or found during redirect resolution).
+	 *
+	 * @param string $idString the serialized id
+	 *
+	 * @return EntityId
+	 * @throws EntityIdParsingException If the ID is malformed.
+	 */
+	private function getEntityId( $idString ) {
+		if ( !isset( $this->entityIds[$idString] ) ) {
+			$this->entityIds[$idString] = $this->idParser->parse( $idString );
+		}
+
+		return $this->entityIds[$idString];
+	}
+
+	/**
+	 * Flattens a grouped array structure into a flat array.
+	 * Useful e.g. to convert "by type" structures into flat arrays
+	 * with ID strings as keys.
+	 *
+	 * @param array[] $groupedArrays
+	 *
+	 * @return array
+	 */
+	private function ungroup( $groupedArrays ) {
+		$merged = array_reduce(
+			$groupedArrays,
+			function ( $acc, $next ) {
+				return array_merge( $acc, $next );
+			},
+			array()
+		);
+
+		return $merged;
+	}
+
+	/**
+	 * @param bool $includeRedirects Whether redirects should be included in the list of missing ids.
+	 *
+	 * @return string[] The subset of entity ids supplied to the constructor that
+	 * do not represent actual entities.
+	 */
+	private function getMissingIds( $includeRedirects = false ) {
+		$pageInfo = $this->getPageInfo();
+		$missingIds = array();
+
+		foreach ( $this->entityInfo as $key => $info ) {
+			if ( isset( $pageInfo[$key] ) ) {
+				// ID found. If we don't want to include redirects, or it's not a redirect, skip it.
+				if ( !$includeRedirects || $pageInfo[$key]['redirect_target'] === null ) {
+					continue;
+				}
+			}
+
+			$missingIds[] = $key;
+		}
+
+		return $missingIds;
+	}
+
+	/**
+	 * Finds and returns any redirects from the set of entities supplied to the constructor.
+	 *
+	 * @return EntityId[] An associative array mapping id strings to EntityIds representing
+	 * the redirect targets.
+	 */
+	private function findRedirects() {
+		$pageInfo = $this->getPageInfo();
+		$redirects = array();
+
+		foreach ( $pageInfo as $key => $pageRecord ) {
+			if ( $pageInfo[$key]['redirect_target'] !== null ) {
+				$redirects[$key] = $this->getEntityId( $pageInfo[$key]['redirect_target'] );
+			}
+		}
+
+		return $redirects;
 	}
 }

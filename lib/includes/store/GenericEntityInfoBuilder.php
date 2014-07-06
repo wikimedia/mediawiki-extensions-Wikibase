@@ -22,9 +22,17 @@ use Wikibase\DataModel\Entity\Property;
 class GenericEntityInfoBuilder implements EntityInfoBuilder {
 
 	/**
-	 * @var array[]
+	 * The entity info data structure. This data structure is exposed via getEntityInfo().
+	 * After resolveRedirects() is called, this will contain entries for the redirect targets
+	 * in addition to the entries for the redirected IDs. Entries for the redirected IDs
+	 * will be php references to the entries that use the actual (target) IDs as keys.
+	 *
+	 * @see EntityInfoBuilder::getEntityInfo()
+	 *
+	 * @var array[] map of id-strings to entity record arrays:
+	 *      id-string => entity-record
 	 */
-	private $entityInfo;
+	private $entityInfo = null;
 
 	/**
 	 * @var EntityIdParser
@@ -32,18 +40,29 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	private $idParser;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityRevisionLookup
 	 */
-	private $entityLookup;
+	private $entityRevisionLookup;
+
+	/**
+	 * A map of entity id strings to EntityId objects, representing any
+	 * redirects present in the list of entities provided to the constructor.
+	 *
+	 * Initialized lazily by resolveRedirects().
+	 *
+	 * @var string[] map of id-strings to EntityId objects:
+	 *      id-string => EntityId
+	 */
+	private $redirects = null;
 
 	/**
 	 * @param EntityId[] $ids
 	 * @param EntityIdParser $idParser
-	 * @param EntityLookup $entityLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 */
-	public function __construct( array $ids, EntityIdParser $idParser, EntityLookup $entityLookup ) {
+	public function __construct( array $ids, EntityIdParser $idParser, EntityRevisionLookup $entityRevisionLookup ) {
 		$this->idParser = $idParser;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 
 		$this->setEntityIds( $ids );
 	}
@@ -70,7 +89,70 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	private function getEntity( EntityId $id ) {
-		return $this->entityLookup->getEntity( $id );
+		try {
+			$rev = $this->entityRevisionLookup->getEntityRevision( $id );
+			return $rev === null ? null : $rev->getEntity();
+		} catch ( UnresolvedRedirectException $ex ) {
+			return null;
+		}
+	}
+
+	private function getRedirect( EntityId $id ) {
+		try {
+			$this->entityRevisionLookup->getEntityRevision( $id );
+			return null;
+		} catch ( UnresolvedRedirectException $ex ) {
+			return $ex->getRedirectTargetId();
+		}
+	}
+
+	/**
+	 * @see EntityInfoBuilder::resolveRedirects
+	 */
+	public function resolveRedirects() {
+		$ids = array_keys( $this->entityInfo );
+
+		$this->redirects = array();
+
+		foreach ( $ids as $idString ) {
+			$id = $this->parseId( $idString );
+			$targetId = $this->getRedirect( $id );
+
+			if ( $targetId ) {
+				$this->redirects[$idString] = $targetId;
+				$this->applyRedirect( $idString, $targetId );
+			}
+		}
+	}
+
+	/**
+	 * Applied the given redirect to the internal data structure
+	 *
+	 * @param string $idString The redirected entity id
+	 * @param EntityId $targetId The redirect target
+	 */
+	private function applyRedirect( $idString, EntityId $targetId) {
+		$redirectedId = $this->parseId( $idString );
+		$type = $redirectedId->getEntityType();
+
+		$targetKey = $targetId->getSerialization();
+
+		if ( $idString === $targetKey ) {
+			// Sanity check: self-redirect, nothing to do.
+			return;
+		}
+
+		// If the redirect target doesn't have a record yet, copy the old record.
+		// Since two IDs may be redirected to the same target, this may already have
+		// happened.
+		if ( !isset( $this->entityInfo[$targetKey] ) ) {
+			$this->entityInfo[$targetKey] = $this->entityInfo[$idString]; // copy
+			$this->entityInfo[$targetKey]['id'] = $targetKey; // update id
+		}
+
+		// Make the redirected key a reference to the target record.
+		unset( $this->entityInfo[$idString] ); // just to be sure not to cause a mess
+		$this->entityInfo[$idString] = & $this->entityInfo[$targetKey];
 	}
 
 	/**
@@ -179,12 +261,21 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	/**
 	 * @see EntityInfoBuilder::removeMissing
 	 */
-	public function removeMissing() {
+	public function removeMissing( $redirects = 'keep-redirects' ) {
 		foreach ( array_keys( $this->entityInfo ) as $key ) {
 			$id = $this->parseId( $key );
-			$entity = $this->getEntity( $id );
 
-			if ( !$entity ) {
+			try {
+				$rev = $this->entityRevisionLookup->getEntityRevision( $id );
+			} catch ( UnresolvedRedirectException $ex ) {
+				if ( $redirects === 'keep-redirects' ) {
+					continue;
+				} else {
+					$rev = null;
+				}
+			}
+
+			if ( !$rev ) {
 				unset( $this->entityInfo[$key] );
 			}
 		}
