@@ -62,13 +62,21 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * @var array[] id-string -> entity-record-array
+	 *
+	 * @note: after resolveRedirect was called, this uses the resolved (target) ids
+	 * as keys. These are mapped back to the original ids by getEntityInfo().
 	 */
 	private $entityInfo = null;
 
 	/**
-	 * @var array[] type -> id-key -> int
+	 * @var array[] type -> id-string -> int
 	 */
 	private $numericIdsByType = null;
+
+	/**
+	 * @var string[] id-string -> id-string
+	 */
+	private $redirects = null;
 
 	/**
 	 * @param EntityId[] $ids
@@ -98,15 +106,12 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityId[] $ids
 	 */
 	private function setEntityIds( $ids ) {
-		$this->entityIds = array();
 		$this->entityInfo = array();
 		$this->numericIdsByType = array();
 
 		foreach ( $ids as $id ) {
 			$key = $id->getSerialization();
 			$type = $id->getEntityType();
-
-			$this->entityIds[$key] = $id;
 
 			$this->entityInfo[$key] = array(
 				'id' => $key,
@@ -118,17 +123,66 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * Returns an entity info data structure. The entity info is represented
-	 * by a nested array structure. On the top level, entity id strings are used as
-	 * keys that refer to entity "records". Each record is an associative array with
-	 * at least the fields "id" and "type". Which other fields are present depends on
-	 * which methods have been called on the EntityInfoBuilder in order to gather
-	 * information about the entities.
+	 * @see EntityInfoBuilder::getEntityInfo
 	 *
 	 * @return array[]
 	 */
 	public function getEntityInfo() {
-		return $this->entityInfo;
+		$entityInfo = $this->entityInfo;
+
+		// re-key entries from $this->entityInfo with keys that are redirect targets
+		foreach ( $this->redirects as $from => $to ) {
+			$record = $this->entityInfo[$to];
+			$entityInfo[$from] = $record;
+		}
+
+		return $entityInfo;
+	}
+
+	/**
+	 * @see EntityInfoBuilder::resolveRedirects
+	 */
+	public function resolveRedirects() {
+		if ( $this->redirects !== null ) {
+			// already done
+			return;
+		}
+
+		// find redirects based on missing ids,
+		// because the current logic for findRedirects is slow.
+		$missingIdsbyType = $this->listMissingIdsByType();
+
+		// flip and flatten to get a list of id strings
+		$missingIds = array_reduce(
+			$missingIdsbyType,
+			function ( $acc, $next ) {
+				return array_merge( $acc, array_keys( $next ) );
+			},
+			array()
+		);
+
+		$this->redirects = $this->findRedirects( $missingIds );
+
+		foreach ( $this->redirects as $key => $target ) {
+			$id = $this->idParser->parse( $key );
+			$type = $id->getEntityType();
+
+			$targetId = $this->idParser->parse( $target );
+			$targetKey = $targetId->getSerialization();
+
+			if ( $key === $targetKey ) {
+				// Sanity check: self-redirect, nothing to do.
+				continue;
+			}
+
+			$this->entityInfo[$targetKey] = $this->entityInfo[$key];
+
+			$this->entityInfo[$targetKey]['id'] = $target;
+			$this->numericIdsByType[$type][$targetKey] = $targetId->getNumericId();
+
+			unset( $this->entityInfo[$key] );
+			unset( $this->numericIdsByType[$type][$key] );
+		}
 	}
 
 	/**
@@ -348,20 +402,44 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	public function removeMissing() {
 		wfProfileIn( __METHOD__ );
 
-		//NOTE: we make one DB query per entity type, so we can take advantage of the
-		//      database index on the epp_entity_type field.
-		foreach ( $this->numericIdsByType as $type => $idsForType ) {
-			$pageIds = $this->getPageIdsForEntities( $type, $idsForType );
-			$missingNumericIds = array_diff( $idsForType, array_keys( $pageIds ) );
+		$missingIdsbyType = $this->listMissingIdsByType();
 
+		foreach ( $missingIdsbyType as $missingNumericIds ) {
 			// get the missing prefixed ids based on the missing numeric ids
-			$numericToPrefixed = array_flip( $idsForType );
+			$numericToPrefixed = array_flip( $missingNumericIds );
 			$missingPrefixedIds = array_intersect_key( $numericToPrefixed, array_flip( array_values( $missingNumericIds ) ) );
+
+			//FIXME: detect and keep redirects
 
 			$this->unsetEntityInfo( $missingPrefixedIds );
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Lists IDs of missing entities, grouped by type.
+	 *
+	 * @return array[] Maps entity types to arrays that associate the id string of non-existing
+	 * entities with the respective numeric id.
+	 *
+	 */
+	private function listMissingIdsByType() {
+		wfProfileIn( __METHOD__ );
+
+		//FIXME: cache!
+
+		$missing = array();
+
+		//NOTE: we make one DB query per entity type, so we can take advantage of the
+		//      database index on the epp_entity_type field.
+		foreach ( $this->numericIdsByType as $type => $idsForType ) {
+			$pageIds = $this->getPageIdsForEntities( $type, $idsForType );
+			$missing[$type] = array_diff( $idsForType, array_keys( $pageIds ) );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $missing;
 	}
 
 	/**
@@ -371,7 +449,6 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function unsetEntityInfo( $ids ) {
 		$this->entityInfo = array_diff_key( $this->entityInfo, array_flip( $ids ) );
-		$this->entityIds = array_diff_key( $this->entityIds, array_flip( $ids ) );
 
 		foreach ( $this->numericIdsByType as &$numeridIds ) {
 			$numeridIds = array_diff_key( $numeridIds, array_flip( $ids ) );
