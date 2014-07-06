@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * A factory for SqlEntityInfoBuilder instances.
@@ -21,9 +22,9 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 
 	/**
-	 * @var EntityIdParser
+	 * @var EntityRevisionLookup
 	 */
-	private $idParser;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var bool
@@ -31,18 +32,18 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	private $wiki;
 
 	/**
-	 * @param EntityIdParser $idParser
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $idParser, $wiki = false ) {
+	public function __construct( EntityRevisionLookup $entityRevisionLookup, $wiki = false ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 
-		$this->idParser = $idParser;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->wiki = $wiki;
 	}
 
@@ -54,6 +55,6 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	 * @return EntityInfoBuilder
 	 */
 	public function newEntityInfoBuilder( array $ids ) {
-		return new SqlEntityInfoBuilder( $ids, $this->idParser, $this->wiki );
+		return new SqlEntityInfoBuilder( $ids, $this->entityRevisionLookup, $this->wiki );
 	}
 }
