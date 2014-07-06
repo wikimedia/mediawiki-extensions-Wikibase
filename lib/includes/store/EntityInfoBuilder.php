@@ -33,9 +33,24 @@ interface EntityInfoBuilder {
 	 * EntitySerializer and related classes. It should be suitable for serialization,
 	 * and must thus not contain any objects.
 	 *
+	 * @note: after resolveRedirects() is called, entity records will be available under
+	 * their actual ID as well as any relevant redirect ID.
+	 *
 	 * @return array[]
 	 */
 	public function getEntityInfo();
+
+	/**
+	 * Resolves any redirects.
+	 *
+	 * This updates the 'id' field of the records in the data structure
+	 * returned by getEntityInfo() to the id of the target redirect, if the
+	 * original ID referred to a redirect.
+	 *
+	 * Thus, the keys in the data structure returned by getEntityInfo()
+	 * may come to be different from the respective record's id field.
+	 */
+	public function resolveRedirects();
 
 	/**
 	 * Adds terms (like labels and/or descriptions) to the entity info.
@@ -44,6 +59,9 @@ interface EntityInfoBuilder {
 	 *
 	 * @note: For historical reasons, the types expected by $termTypes are different from the
 	 * keys used in entity info!
+	 *
+	 * @note: If resolveRedirects() was previously called, terms from any redirect's target
+	 * entity are used.
 	 *
 	 * @param string[]|null $termTypes Which types of terms to include (e.g. "label", "description",
 	 * "alias"). Note that the corresponding fields that will be set set in the entity records
@@ -63,9 +81,11 @@ interface EntityInfoBuilder {
 	public function collectDataTypes();
 
 	/**
-	 * Removes entries for non-existent Entities from this builder. The data structure
-	 * returned by getEntityInfo will then only contain records for entities that could
-	 * actually be found.
+	 * Removes entries for any ID that does not identify an entity.
+	 *
+	 * @param string $redirects A string flag indicating whether redirects
+	 *        should be kept or removed. Must be either 'keep-redirects'
+	 *        or 'remove-redirects'.
 	 */
-	public function removeMissing();
+	public function removeMissing( $redirects = 'keep-redirects' );
 }
