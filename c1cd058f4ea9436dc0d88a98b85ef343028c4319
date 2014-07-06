@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_d67b9be9",
+        "filename": "lib/resources/wikibase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-06T01:45:29Z",
+      "side": 0,
+      "message": "https://www.wikidata.org/wiki/MediaWiki:Gadget-FindRedirectsForAliases.js and https://www.wikidata.org/wiki/MediaWiki:Gadget-Search.js use this",
+      "revId": "c1cd058f4ea9436dc0d88a98b85ef343028c4319",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_5688cbeb",
+        "filename": "lib/resources/wikibase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-06T01:45:29Z",
+      "side": 0,
+      "message": "https://www.wikidata.org/wiki/MediaWiki:Gadget-Preview.js, https://www.wikidata.org/wiki/MediaWiki:Gadget-Move.js, https://www.wikidata.org/wiki/MediaWiki:Gadget-Search.js and https://www.wikidata.org/wiki/MediaWiki:Gadget-FindRedirectsForAliases.js use this",
+      "revId": "c1cd058f4ea9436dc0d88a98b85ef343028c4319",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
