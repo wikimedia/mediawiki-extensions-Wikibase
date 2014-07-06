@@ -3,12 +3,15 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
+use OutOfBoundsException;
 use ResultWrapper;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use RuntimeException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel;
 use Wikibase\EntityId;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Property;
 
 /**
@@ -33,71 +36,111 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	);
 
 	/**
-	 * @var string
+	 * @var string The name of the database table holding terms.
 	 */
 	protected $termTable;
 
 	/**
-	 * @var string
+	 * @var string The name of the database table holding property info.
 	 */
 	protected $propertyInfoTable;
 
 	/**
-	 * @var string
+	 * @var string The name of the database table connecting entities to pages.
 	 */
 	protected $entityPerPageTable;
 
 	/**
-	 * @var EntityIdParser
-	 *
-	 * @note: currently not used, but we will need it once the database contains
-	 * full string IDs instead of numeric ids.
+	 * @var EntityRevisionLookup High level lookup used to resolve redirects.
 	 */
-	protected $idParser;
+	protected $entityRevisionLookup;
 
 	/**
+	 * EntityId objects indexed by serialized ID. This allows us to re-use
+	 * the original EntityId object and avoids parsing the string again.
+	 *
+	 * @see getEntityId()
+	 *
 	 * @var EntityId[] id-string -> EntityId
 	 */
 	private $entityIds = null;
 
 	/**
+	 * The entity info data structure. This data structure is exposed via getEntityInfo().
+	 * After resolveRedirects() is called, this will contain entries for the redirect targets
+	 * in addition to the entries for the redirected IDs. Entries for the redirected IDs
+	 * will be php references to the entries that use the actual (target) IDs as keys.
+	 *
+	 * @see EntityInfoBuilder::getEntityInfo()
+	 *
 	 * @var array[] id-string -> entity-record-array
 	 */
 	private $entityInfo = null;
 
 	/**
-	 * @var array[] type -> id-key -> int
+	 * Maps of id strings to numeric ids, grouped by entity type.
+	 * Used to build database queries on tables that use separate
+	 * fields for type and numeric id.
+	 *
+	 * @var array[] type -> id-string -> int
 	 */
 	private $numericIdsByType = null;
 
 	/**
+	 * Maps of id strings to numeric ids, grouped by entity type,
+	 * of entity IDs with no corresponding Entity in the database.
+	 * This uses the same structure as $this->numericIdsByType.
+	 *
+	 * Initialized lazily by getMissingIdsByType().
+	 *
+	 * @var array[] type -> id-string -> int
+	 */
+	private $missingIdsByType = null;
+
+	/**
+	 * A map of entity id strings to EntityId objects, representing any
+	 * redirects present in the list of entities provided to the constructor.
+	 *
+	 * Initialized lazily by resolveRedirects().
+	 *
+	 * @var string[] id-string -> EntityId
+	 */
+	private $redirects = null;
+
+	/**
 	 * @param EntityId[] $ids
-	 * @param EntityIdParser $idParser
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $ids, EntityIdParser $idParser, $wiki = false ) {
+	public function __construct( array $ids, EntityRevisionLookup $entityRevisionLookup, $wiki = false ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 
 		parent::__construct( $wiki );
 
-		$this->idParser = $idParser;
-
 		$this->termTable = 'wb_terms';
 		$this->propertyInfoTable = 'wb_property_info';
 		$this->entityPerPageTable = 'wb_entity_per_page';
+
+		$this->entityRevisionLookup = $entityRevisionLookup;
 
 		$this->setEntityIds( $ids );
 	}
 
 	/**
 	 * @param EntityId[] $ids
+	 *
+	 * @throws RuntimeException If called more than once.
 	 */
 	private function setEntityIds( $ids ) {
+		if ( $this->entityIds !== null ) {
+			throw new \RuntimeException( 'EntityIds have already been initialized' );
+		}
+
 		$this->entityIds = array();
 		$this->entityInfo = array();
 		$this->numericIdsByType = array();
@@ -106,29 +149,77 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 			$key = $id->getSerialization();
 			$type = $id->getEntityType();
 
-			$this->entityIds[$key] = $id;
-
 			$this->entityInfo[$key] = array(
 				'id' => $key,
 				'type' => $type,
 			);
 
 			$this->numericIdsByType[$type][$key] = $id->getNumericId();
+			$this->entityIds[$key] = $id;
 		}
 	}
 
 	/**
-	 * Returns an entity info data structure. The entity info is represented
-	 * by a nested array structure. On the top level, entity id strings are used as
-	 * keys that refer to entity "records". Each record is an associative array with
-	 * at least the fields "id" and "type". Which other fields are present depends on
-	 * which methods have been called on the EntityInfoBuilder in order to gather
-	 * information about the entities.
+	 * @see EntityInfoBuilder::getEntityInfo
 	 *
 	 * @return array[]
 	 */
 	public function getEntityInfo() {
 		return $this->entityInfo;
+	}
+
+	/**
+	 * @see EntityInfoBuilder::resolveRedirects
+	 */
+	public function resolveRedirects() {
+		if ( $this->redirects !== null ) {
+			// already done
+			return;
+		}
+
+		$this->redirects = $this->findRedirects();
+
+		foreach ( $this->redirects as $key => $targetId ) {
+			$this->applyRedirect( $key, $targetId );
+		}
+	}
+
+	/**
+	 * Applied the given redirect to the internal data structure
+	 *
+	 * @param string $idString The redirected entity id
+	 * @param EntityId $targetId The redirect target
+	 */
+	private function applyRedirect( $idString, EntityId $targetId) {
+		$redirectedId = $this->getEntityId( $idString );
+		$type = $redirectedId->getEntityType();
+
+		$targetKey = $targetId->getSerialization();
+
+		if ( $idString === $targetKey ) {
+			// Sanity check: self-redirect, nothing to do.
+			return;
+		}
+
+		// If the redirect target doesn't have a record yet, copy the old record.
+		// Since two IDs may be redirected to the same target, this may already have
+		// happened.
+		if ( !isset( $this->entityInfo[$targetKey] ) ) {
+			$this->entityInfo[$targetKey] = $this->entityInfo[$idString]; // copy
+			$this->entityInfo[$targetKey]['id'] = $targetKey; // update id
+		}
+
+		// Make the redirected key a reference to the target record.
+		unset( $this->entityInfo[$idString] ); // just to be sure not to cause a mess
+		$this->entityInfo[$idString] = & $this->entityInfo[$targetKey];
+
+		// Remove the numeric id of the redirect, since we don't want to
+		// use it in database queries.
+		unset( $this->numericIdsByType[$type][$idString] );
+
+		// Record the id of the target.
+		$this->numericIdsByType[$type][$targetKey] = $targetId->getNumericId();
+		$this->entityIds[$targetKey] = $targetId;
 	}
 
 	/**
@@ -348,20 +439,49 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	public function removeMissing() {
 		wfProfileIn( __METHOD__ );
 
-		//NOTE: we make one DB query per entity type, so we can take advantage of the
-		//      database index on the epp_entity_type field.
-		foreach ( $this->numericIdsByType as $type => $idsForType ) {
-			$pageIds = $this->getPageIdsForEntities( $type, $idsForType );
-			$missingNumericIds = array_diff( $idsForType, array_keys( $pageIds ) );
+		$missingIds = $this->getMissingIds();
+		$missingPrefixedIds = array_keys( $missingIds );
 
-			// get the missing prefixed ids based on the missing numeric ids
-			$numericToPrefixed = array_flip( $idsForType );
-			$missingPrefixedIds = array_intersect_key( $numericToPrefixed, array_flip( array_values( $missingNumericIds ) ) );
+		if ( !empty( $this->redirects ) ) {
+			// keep any redirects
+			$missingPrefixedIds = array_diff_key( $missingPrefixedIds, array_keys( $this->redirects ) );
+		}
 
+		if ( !empty( $missingPrefixedIds ) ) {
 			$this->unsetEntityInfo( $missingPrefixedIds );
 		}
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Lists IDs of missing entities, grouped by type. These ids represent a subset of the
+	 * entity ids provided to the constructor that do not correspond to actual entities.
+	 * The corresponding entities may have been deleted, may have never existed, or may
+	 * be redirects.
+	 *
+	 * @return array[] Maps entity types to arrays that associate the id string of non-existing
+	 * entities with the respective numeric id.
+	 *
+	 */
+	private function getMissingIdsByType() {
+		if ( $this->missingIdsByType !== null ) {
+			return $this->missingIdsByType;
+		}
+
+		wfProfileIn( __METHOD__ );
+
+		$this->missingIdsByType = array();
+
+		//NOTE: we make one DB query per entity type, so we can take advantage of the
+		//      database index on the epp_entity_type field.
+		foreach ( $this->numericIdsByType as $type => $idsForType ) {
+			$pageIds = $this->getPageIdsForEntities( $type, $idsForType );
+			$this->missingIdsByType[$type] = array_diff( $idsForType, array_keys( $pageIds ) );
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $this->missingIdsByType;
 	}
 
 	/**
@@ -371,7 +491,6 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function unsetEntityInfo( $ids ) {
 		$this->entityInfo = array_diff_key( $this->entityInfo, array_flip( $ids ) );
-		$this->entityIds = array_diff_key( $this->entityIds, array_flip( $ids ) );
 
 		foreach ( $this->numericIdsByType as &$numeridIds ) {
 			$numeridIds = array_diff_key( $numeridIds, array_flip( $ids ) );
@@ -415,5 +534,86 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		wfProfileOut( __METHOD__ );
 
 		return $pageIds;
+	}
+
+	/**
+	 * Returns an EntityId object for the given serialized ID.
+	 * This is implemented as a lookup of the original EntityId object supplied
+	 * to the constructor (or found during redirect resolution).
+	 *
+	 * @param string $idString the serialized id
+	 *
+	 * @return EntityId
+	 * @throws OutOfBoundsException If the ID string does not correspond to any ID
+	 * supplied to the constructor (or found during redirect resolution).
+	 */
+	private function getEntityId( $idString ) {
+		if ( !isset( $this->entityIds[$idString] ) ) {
+			throw new OutOfBoundsException( 'Unknown ID: ' . $idString );
+		}
+
+		return $this->entityIds[$idString];
+	}
+
+	/**
+	 * @return EntityId[] The subset of EntityIds supplied to the constructor that
+	 * do not represent actual entities. They may have been deleted, have never existed,
+	 * or be redirects.
+	 */
+	private function getMissingIds() {
+		// find redirects based on missing ids,
+		// because the current logic for findRedirects is slow.
+		$missingIdsbyType = $this->getMissingIdsByType();
+
+		// flip and flatten to get a list of id strings
+		$missingIdStrings = array_reduce(
+			$missingIdsbyType,
+			function ( $acc, $next ) {
+				return array_merge( $acc, array_keys( $next ) );
+			},
+			array()
+		);
+
+		$missingIds = array();
+
+		foreach ( $missingIdStrings as $idString ) {
+			$missingIds[$idString] = $this->getEntityId( $idString );
+		}
+
+		return $missingIds;
+	}
+
+	/**
+	 * Finds and returns any redirects from the set of entities suppied to the constructor.
+	 *
+	 * @note: The current implementation is rather inefficient in cases where there are lots of
+	 * redirects or missing entities. It first finds uses getMissingIds() to find all ids not
+	 * present in the entity_per_page table. These are potential redirects (but may also be
+	 * deleted or otherwise missing entities). It then tries to load each of the potential
+	 * redirects from the full serialized blob. This could be sped up by recording the redirects
+	 * in a separate database table.
+	 * Assuming that entities and redirects are relatively rare in a well maintained
+	 * Wikibase instance, the present implementation should be ok for now.
+	 *
+	 * @return EntityId[] An associative array mapping id strings to EntityIds representing
+	 * the redirect targets.
+	 */
+	private function findRedirects() {
+		// find redirects based on missing ids,
+		// because the current logic for findRedirects is slow.
+		$missingIds = $this->getMissingIds();
+
+		$redirects = array();
+
+		foreach ( $missingIds as $key => $id ) {
+			// NOTE: We are really only interested in the exception.
+			try {
+				$this->entityRevisionLookup->getEntityRevision( $id );
+			} catch ( UnresolvedRedirectException $ex ) {
+				$redirects[$key] = $ex->getRedirectTargetId();
+			}
+		}
+
+		return $redirects;
 	}
 }

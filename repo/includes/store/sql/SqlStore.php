@@ -592,10 +592,7 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	protected function newEntityInfoBuilderFactory() {
-		//TODO: Get $idParser from WikibaseRepo?
-		$idParser = new BasicEntityIdParser();
-		$builder = new SqlEntityInfoBuilderFactory( $idParser );
-		return $builder;
+		return new SqlEntityInfoBuilderFactory( $this->getEntityRevisionLookup() );
 	}
 
 	/**
