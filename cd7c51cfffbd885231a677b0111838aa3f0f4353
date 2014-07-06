@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_16724310",
+        "filename": "lib/resources/wikibase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-06T01:41:56Z",
+      "side": 0,
+      "message": "https://www.wikidata.org/wiki/MediaWiki:Guidedtour-lib.js relies on this :/",
+      "revId": "cd7c51cfffbd885231a677b0111838aa3f0f4353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
