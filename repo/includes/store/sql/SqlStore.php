@@ -10,9 +10,9 @@ use MWException;
 use ObjectCache;
 use Revision;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -21,8 +21,8 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
-use Wikibase\Lib\Test\Store\RedirectResolvingEntityLookupTest;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -59,9 +59,9 @@ class SqlStore implements Store {
 	private $entityStoreWatcher = null;
 
 	/**
-	 * @var EntityInfoBuilder
+	 * @var EntityInfoBuilderFactory
 	 */
-	private $entityInfoBuilder = null;
+	private $entityInfoBuilderFactory = null;
 
 	/**
 	 * @var PropertyInfoTable
@@ -104,11 +104,6 @@ class SqlStore implements Store {
 	private $contentCodec;
 
 	/**
-	 * @var bool
-	 */
-	private $useRedirectTargetColumn;
-
-	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 */
 	public function __construct(
@@ -121,8 +116,6 @@ class SqlStore implements Store {
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
-
-		$this->useRedirectTargetColumn = $settings->getSetting( 'useRedirectTargetColumn' );
 
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
@@ -269,13 +262,12 @@ class SqlStore implements Store {
 
 		$table = new PropertyInfoTable( false );
 		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
-		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup( $contentCodec, false );
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
 
@@ -360,12 +352,6 @@ class SqlStore implements Store {
 			);
 
 			$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
-		} elseif ( $this->useRedirectTargetColumn ) {
-			$updater->addExtensionField(
-				'wb_entity_per_page',
-				'eep_redirect_target',
-				$this->getUpdateScriptPath( 'AddEppRedirectTarget', $db->getType() )
-			);
 		}
 	}
 
@@ -456,7 +442,7 @@ class SqlStore implements Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage() {
-		return new EntityPerPageTable( $this->useRedirectTargetColumn );
+		return new EntityPerPageTable();
 	}
 
 	/**
@@ -584,30 +570,27 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::getEntityInfoBuilder
+	 * @see Store::getEntityInfoBuilderFactory
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @return EntityInfoBuilder
+	 * @return EntityInfoBuilderFactory
 	 */
-	public function getEntityInfoBuilder() {
-		if ( !$this->entityInfoBuilder ) {
-			$this->entityInfoBuilder = $this->newEntityInfoBuilder();
+	public function getEntityInfoBuilderFactory() {
+		if ( !$this->entityInfoBuilderFactory ) {
+			$this->entityInfoBuilderFactory = $this->newEntityInfoBuilderFactory();
 		}
 
-		return $this->entityInfoBuilder;
+		return $this->entityInfoBuilderFactory;
 	}
 
 	/**
-	 * Creates a new EntityInfoBuilder
+	 * Creates a new EntityInfoBuilderFactory
 	 *
-	 * @return EntityInfoBuilder
+	 * @return EntityInfoBuilderFactory
 	 */
-	protected function newEntityInfoBuilder() {
-		//TODO: Get $idParser from WikibaseRepo?
-		$idParser = new BasicEntityIdParser();
-		$builder = new SqlEntityInfoBuilder( $idParser );
-		return $builder;
+	protected function newEntityInfoBuilderFactory() {
+		return new SqlEntityInfoBuilderFactory( $this->getEntityRevisionLookup() );
 	}
 
 	/**
