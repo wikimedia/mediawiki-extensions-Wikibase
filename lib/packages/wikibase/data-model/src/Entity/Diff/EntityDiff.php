@@ -1,11 +1,13 @@
 <?php
 
-namespace Wikibase\DataModel\Entity;
+namespace Wikibase\DataModel\Entity\Diff;
 
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Wikibase\DataModel\Entity\Item;
 
 /**
- * Represents a diff between two Wikibase\Entity instances.
+ * Represents a diff between two Entity instances.
  *
  * @since 0.1
  *
@@ -20,7 +22,7 @@ class EntityDiff extends Diff {
 	 * @param string $entityType
 	 * @param \Diff\DiffOp[] $operations
 	 *
-	 * @return EntityDiff
+	 * @return self
 	 */
 	public static function newForType( $entityType, $operations = array() ) {
 		if ( $entityType === Item::ENTITY_TYPE ) {
@@ -34,7 +36,7 @@ class EntityDiff extends Diff {
 	/**
 	 * Constructor.
 	 *
-	 * @param \Diff\DiffOp[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function __construct( array $operations = array() ) {
 		$this->fixSubstructureDiff( $operations, 'aliases' );
@@ -137,11 +139,12 @@ class EntityDiff extends Diff {
 	}
 
 	/**
-	 * @see DiffOp::getType();
+	 * @see DiffOp::getType
 	 *
-	 * @return string 'diff/entity'
+	 * @return string
 	 */
 	public function getType() {
-		return 'diff/entity'; // generic
+		return 'diff/entity';
 	}
+
 }

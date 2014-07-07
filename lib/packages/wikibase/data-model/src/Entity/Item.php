@@ -235,19 +235,6 @@ class Item extends Entity {
 		$this->statements = array();
 	}
 
-	/**
-	 * @see Entity::getDiffArray
-	 *
-	 * @return array
-	 */
-	protected function getDiffArray() {
-		$array = parent::getDiffArray();
-
-		$array['links'] = $this->getLinksInDiffFormat();
-
-		return $array;
-	}
-
 	private function getLinksInDiffFormat() {
 		$links = array();
 

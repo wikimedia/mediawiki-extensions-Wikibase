@@ -18,3 +18,4 @@ if ( !is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
 $autoLoader = require_once( __DIR__ . '/../vendor/autoload.php' );
 
 $autoLoader->addPsr4( 'Wikibase\\Test\\', __DIR__ . '/unit/' );
+$autoLoader->addPsr4( 'Wikibase\\Test\\DataModel\\Fixtures\\', __DIR__ . '/fixtures/' );
