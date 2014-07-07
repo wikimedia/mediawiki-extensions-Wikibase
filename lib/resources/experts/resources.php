@@ -49,7 +49,6 @@ return call_user_func( function() {
 				'jquery.wikibase.entityselector',
 				'mediawiki.util',
 				'wikibase',
-				'wikibase.datamodel',
 			),
 		),
 	);

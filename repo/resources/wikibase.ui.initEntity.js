@@ -17,7 +17,7 @@
 
 		var entityJSON = JSON.parse( mw.config.get( 'wbEntity' ) ),
 			unserializerFactory = new wb.serialization.SerializerFactory(),
-			entityUnserializer = unserializerFactory.newUnserializerFor( wb.Entity );
+			entityUnserializer = unserializerFactory.newUnserializerFor( wb.datamodel.Entity );
 
 		wb.entity = entityUnserializer.unserialize( entityJSON );
 		entityJSON = null;
