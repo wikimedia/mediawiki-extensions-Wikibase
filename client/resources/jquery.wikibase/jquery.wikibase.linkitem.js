@@ -80,7 +80,7 @@ $.widget( 'wikibase.linkitem', {
 		) ).getPrefixedText(),
 		globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
 		namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
-		repoArticlePath: mw.config.get( 'wbRepoUrl' ) + mw.config.get( 'wbRepoArticlePath' ),
+		repoArticlePath: mw.config.get( 'wbRepo' ).url + mw.config.get( 'wbRepo' ).articlePath,
 		langLinkSiteGroup: mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup
 	},
 

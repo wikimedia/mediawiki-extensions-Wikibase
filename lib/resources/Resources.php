@@ -34,7 +34,7 @@ return call_user_func( function() {
 			'class' => 'Wikibase\SitesModule'
 		),
 
-		'wikibase.repoAccess' => $moduleTemplate + array(
+		'mw.config.values.wbRepo' => $moduleTemplate + array(
 			'class' => 'Wikibase\RepoAccessModule',
 		),
 
@@ -162,7 +162,7 @@ return call_user_func( function() {
 				'user.tokens',
 				'mediawiki.api',
 				'mediawiki',
-				'wikibase.repoAccess',
+				'mw.config.values.wbRepo',
 				'wikibase',
 			)
 		),

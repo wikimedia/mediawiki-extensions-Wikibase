@@ -3,6 +3,7 @@
 namespace Wikibase;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
+use Xml;
 
 /**
  * JavaScript variables needed to access the repo independent from the current
@@ -33,20 +34,20 @@ class RepoAccessModule extends ResourceLoaderModule {
 
 		if ( $settings->hasSetting( 'repoUrl' ) ) {
 			// We're on a client (or at least the client configuration is available)
-			$variables = array(
-				'wbRepoUrl' => $settings->getSetting( 'repoUrl' ),
-				'wbRepoScriptPath' => $settings->getSetting( 'repoScriptPath' ),
-				'wbRepoArticlePath' => $settings->getSetting( 'repoArticlePath' )
+			$wbRepo = array(
+				'url' => $settings->getSetting( 'repoUrl' ),
+				'scriptPath' => $settings->getSetting( 'repoScriptPath' ),
+				'articlePath' => $settings->getSetting( 'repoArticlePath' )
 			);
 		} else {
 			// Client configuration isn't available... just assume we're the repo
-			$variables = array(
-				'wbRepoUrl' => $wgServer,
-				'wbRepoScriptPath' => $wgScriptPath,
-				'wbRepoArticlePath' => $wgArticlePath
+			$wbRepo = array(
+				'url' => $wgServer,
+				'scriptPath' => $wgScriptPath,
+				'articlePath' => $wgArticlePath
 			);
 		}
 
-		return 'mediaWiki.config.set( ' . \FormatJson::encode( $variables ) . ' );';
+		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbRepo' => $wbRepo ) );
 	}
 }

@@ -72,6 +72,7 @@ return call_user_func( function() {
 				'mediawiki.util',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg',
+				'mw.config.value.wbRepo',
 				'wikibase.client.currentSite',
 				'wikibase.sites',
 				'wikibase.RepoApi',
