@@ -11,7 +11,7 @@
 	QUnit.module( 'wikibase.datamodel.Item', QUnit.newWbEnvironment() );
 
 	var entityTestDefinition = $.extend( {}, wb.tests.testEntity.basicTestDefinition, {
-		entityConstructor: wb.Item
+		entityConstructor: wb.datamodel.Item
 	} );
 
 	wb.tests.testEntity( entityTestDefinition );

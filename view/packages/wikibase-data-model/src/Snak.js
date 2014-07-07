@@ -14,8 +14,8 @@
  *
  * @param {String} propertyId
  */
-var SELF = wb.Snak = function WbSnak( propertyId ) {
-	// check whether the Snak has a type, doesn't make sense to create an instance of wb.Snak!
+var SELF = wb.datamodel.Snak = function WbSnak( propertyId ) {
+	// check whether the Snak has a type, doesn't make sense to create an instance of wb.datamodel.Snak!
 	if( !this.constructor.TYPE ) {
 		throw new Error( 'Can not create abstract Snak of no specific type' );
 	}
@@ -62,7 +62,7 @@ $.extend( SELF.prototype, {
 	 * Returns whether this Snak is equal to another Snak. This means that their property and type
 	 * are the same, as well as any other attributes they might have depending on their Snak type.
 	 *
-	 * @param {wb.Snak|*} that
+	 * @param {wb.datamodel.Snak|*} that
 	 * @return {Boolean}
 	 */
 	equals: function( that ) {
@@ -81,7 +81,7 @@ $.extend( SELF.prototype, {
 	 * Returns a simple JSON structure representing this Snak.
 	 * @since 0.3
 	 *
-	 * TODO: implement this as a wb.serialization.Serializer
+	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *
 	 * @return Object
 	 */
@@ -112,7 +112,7 @@ $.extend( SELF.prototype, {
  * Creates a new Snak Object from a given JSON structure.
  *
  * @param {String} json
- * @return wb.Snak|null
+ * @return wb.datamodel.Snak|null
  */
 SELF.newFromJSON = function( json ) {
 	// don't alter given Object in case of 'value' Snak by copying structure into new Object
@@ -137,16 +137,16 @@ SELF.newFromJSON = function( json ) {
  * @since 0.4
  *
  * @param {Object} map Requires at least 'snaktype' and 'property' fields.
- * @return wb.Snak|null
+ * @return wb.datamodel.Snak|null
  */
 SELF.newFromMap = function( map ) {
 	switch( map.snaktype ) {
 		case 'value':
-			return new wb.PropertyValueSnak( map.property, map.datavalue );
+			return new wb.datamodel.PropertyValueSnak( map.property, map.datavalue );
 		case 'novalue':
-			return new wb.PropertyNoValueSnak( map.property );
+			return new wb.datamodel.PropertyNoValueSnak( map.property );
 		case 'somevalue':
-			return new wb.PropertySomeValueSnak( map.property );
+			return new wb.datamodel.PropertySomeValueSnak( map.property );
 		default:
 			return null;
 	}

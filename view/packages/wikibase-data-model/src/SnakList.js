@@ -15,9 +15,9 @@
  * @since 0.4
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Snaks
  *
- * @param {wb.Snak[]|wb.Snak|wb.SnakList} [snaks] One or more Snaks in the list initially.
+ * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks] One or more Snaks in the list initially.
  */
-var SELF = wb.SnakList = function WbSnakList( snaks ) {
+var SELF = wb.datamodel.SnakList = function WbSnakList( snaks ) {
 	this._snaks = [];
 	this.length = 0;
 
@@ -26,11 +26,11 @@ var SELF = wb.SnakList = function WbSnakList( snaks ) {
 			this.addSnak( snaks[i] );
 		}
 	}
-	else if( snaks instanceof wb.SnakList ) {
+	else if( snaks instanceof wb.datamodel.SnakList ) {
 		this._snaks = snaks.toArray();
 		this.length = this._snaks.length;
 	}
-	else if( snaks instanceof wb.Snak ) {
+	else if( snaks instanceof wb.datamodel.Snak ) {
 		this.addSnak( snaks );
 	}
 	else if( snaks !== undefined ) {
@@ -47,7 +47,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * List of snaks for keeping track over Snaks internally.
-	 * @type wb.Snak[]
+	 * @type wb.datamodel.Snak[]
 	 */
 	_snaks: null,
 
@@ -57,11 +57,11 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * @param {wb.Snak} snak
+	 * @param {wb.datamodel.Snak} snak
 	 * @return boolean Whether Snak was not yet in the list and therefore added.
 	 */
 	addSnak: function( snak ) {
-		if( !( snak instanceof wb.Snak ) ) {
+		if( !( snak instanceof wb.datamodel.Snak ) ) {
 			throw new Error( 'No Snak given which could be added to the Snak list' );
 		}
 		// if an equal Snak is in the list already, don't add it again!
@@ -78,7 +78,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * @param {wb.Snak} snak
+	 * @param {wb.datamodel.Snak} snak
 	 * @return boolean Whether Snak was in the list and therefore removed.
 	 */
 	removeSnak: function( snak ) {
@@ -108,7 +108,7 @@ $.extend( SELF.prototype, {
 			return this.constructor.newFromJSON( this.toJSON() );
 		}
 
-		var filteredQualifiers = new wb.SnakList();
+		var filteredQualifiers = new wb.datamodel.SnakList();
 
 		this.each( function( i, snak ) {
 			if( snak.getPropertyId() === propertyId ) {
@@ -120,7 +120,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a list of wb.SnakList objects, each of them grouped by the property used by the
+	 * Returns a list of wb.datamodel.SnakList objects, each of them grouped by the property used by the
 	 * snaks.
 	 * @since 0.5
 	 *
@@ -141,7 +141,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * @param {wb.Snak} snak
+	 * @param {wb.datamodel.Snak} snak
 	 * @return boolean
 	 */
 	hasSnak: function( snak ) {
@@ -158,7 +158,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * @param {wb.SnakList} snakList
+	 * @param {wb.datamodel.SnakList} snakList
 	 * @return boolean
 	 */
 	equals: function( snakList ) {
@@ -188,7 +188,7 @@ $.extend( SELF.prototype, {
 	 * @param {Function} fn A callback, called for each Snak in the list. The callback can have
 	 *        two parameters:
 	 *        (1) {Number} index A continuous number, increased with each callback.
-	 *        (2) {wb.Snak} snak A Snak from the list.
+	 *        (2) {wb.datamodel.Snak} snak A Snak from the list.
 	 *        If false is returned by one of the callbacks, the iteration will stop. The context of
 	 *        the callbacks will be the Snak object.
 	 */
@@ -413,7 +413,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * TODO: implement this as a wb.serialization.Serializer
+	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *
 	 * @return Object
 	 */
@@ -436,7 +436,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * @return wb.Snak[]
+	 * @return wb.datamodel.Snak[]
 	 */
 	toArray: function() {
 		return this._snaks.slice(); // don't reveal internal array!
@@ -461,7 +461,7 @@ SELF.newFromJSON = function( json, order ) {
 	 */
 	function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
 		for( var i = 0; i < serializedSnaks.length; i++ ) {
-			snakList.addSnak( wb.Snak.newFromJSON( serializedSnaks[i] ) );
+			snakList.addSnak( wb.datamodel.Snak.newFromJSON( serializedSnaks[i] ) );
 		}
 		return snakList;
 	}

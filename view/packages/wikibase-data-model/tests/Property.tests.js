@@ -14,7 +14,7 @@
 	//  should create own mock data type instead and not rely on global data type store...
 
 	var entityTestDefinition = $.extend( true, {}, wb.tests.testEntity.basicTestDefinition, {
-		entityConstructor: wb.Property,
+		entityConstructor: wb.datamodel.Property,
 		testData: {
 			empty: {
 				datatype: 'commonsMedia'

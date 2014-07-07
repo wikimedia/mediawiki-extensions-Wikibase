@@ -29,8 +29,8 @@
 	 *
 	 * TODO: implement setter functions
 	 */
-	var SELF = wb.Entity = function WbEntity( data ) {
-		// check whether the Entity has a type, doesn't make sense to create an instance of wb.Entity!
+	var SELF = wb.datamodel.Entity = function WbEntity( data ) {
+		// check whether the Entity has a type, doesn't make sense to create an instance of wb.datamodel.Entity!
 		if( !this.constructor.TYPE ) {
 			throw new Error( 'Can not create abstract Entity of no specific type' );
 		}
@@ -219,7 +219,7 @@
 		 *
 		 * @since 0.4
 		 *
-		 * @return wb.Claim[]
+		 * @return wb.datamodel.Claim[]
 		 */
 		getClaims: newGetterFn( 'claims', [] ),
 
@@ -245,7 +245,7 @@
 	 * @since 0.4
 	 *
 	 * @param {Object} map Requires at least 'snaktype' and 'property' fields.
-	 * @return wb.Entity|null
+	 * @return wb.datamodel.Entity|null
 	 */
 	SELF.newFromMap = function( map ) {
 		// TODO: allow for registration of new Entity types to this factory
@@ -255,9 +255,9 @@
 
 		switch( map.type ) {
 			case 'item':
-				return new wb.Item( data );
+				return new wb.datamodel.Item( data );
 			case 'property':
-				return new wb.Property( data );
+				return new wb.datamodel.Property( data );
 			default:
 				return null;
 		}
@@ -269,7 +269,7 @@
 	 * @since 0.4
 	 *
 	 * @param {string} type Entity type
-	 * @return wb.Entity
+	 * @return wb.datamodel.Entity
 	 */
 	SELF.newEmpty = function( type ) {
 		var entity = SELF.newFromMap( {

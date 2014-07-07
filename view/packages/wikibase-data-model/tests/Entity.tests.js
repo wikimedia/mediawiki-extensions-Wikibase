@@ -43,11 +43,11 @@
 		 * if first parameter is omitted.
 		 *
 		 * @param {object} [data] (optional)
-		 * @return wb.Entity
+		 * @return wb.datamodel.Entity
 		 */
 		function newEntity( data ) {
 			return !data
-				? wb.Entity.newEmpty( entityType )
+				? wb.datamodel.Entity.newEmpty( entityType )
 				: new ( definition( 'entityConstructor' ) )( data );
 		}
 
@@ -72,7 +72,7 @@
 			if( entity === undefined ) {
 				throw new Error( 'No Entity data provided for "' + name + '" in test definition' );
 			}
-			return wb.Entity.newFromMap( entity.toMap() );
+			return wb.datamodel.Entity.newFromMap( entity.toMap() );
 		}
 
 		/**
@@ -80,13 +80,13 @@
 		 */
 		this.testConstructor = function( assert ) {
 			assert.ok(
-				newEntity() instanceof wb.Entity,
+				newEntity() instanceof wb.datamodel.Entity,
 				'New ' + entityType + ' empty Entity created'
 			);
 
 			$.each( testEntities, function( entityName, entity ) {
 				assert.ok(
-					entity instanceof wb.Entity,
+					entity instanceof wb.datamodel.Entity,
 					'New ' + entityType + ' Entity created from "' + entityName + '" Entity data'
 				);
 			} );
@@ -155,7 +155,7 @@
 	/**
 	 * Basic test definition for Entity tests. Requires the following fields:
 	 *
-	 * - entityConstructor {Function} a constructor based on wb.Entity
+	 * - entityConstructor {Function} a constructor based on wb.datamodel.Entity
 	 *
 	 * - testData {Object} Entity definitions required for the tests. Should be in a format
 	 *    compatible to the constructor given in "entityConstructor". The Object's keys serve as
@@ -200,9 +200,9 @@
 					th: [ 'th1', 'th2' ]
 				},
 				claims: [
-					new wb.Claim(
-						new wb.PropertyNoValueSnak( 42 ),
-						new wb.SnakList()
+					new wb.datamodel.Claim(
+						new wb.datamodel.PropertyNoValueSnak( 42 ),
+						new wb.datamodel.SnakList()
 					)
 				]
 			}

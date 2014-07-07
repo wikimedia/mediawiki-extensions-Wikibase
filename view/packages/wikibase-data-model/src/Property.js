@@ -5,13 +5,13 @@
 ( function( wb, util ) {
 	'use strict';
 
-	var PARENT = wb.Entity;
+	var PARENT = wb.datamodel.Entity;
 
 	/**
 	 * Represents a Wikibase Property.
 	 *
 	 * @constructor
-	 * @extends wb.Entity
+	 * @extends wb.datamodel.Entity
 	 * @since 0.4
 	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Properties
 	 *
@@ -19,7 +19,7 @@
 	 *
 	 * TODO: implement setters
 	 */
-	var SELF = wb.Property = util.inherit( 'WbProperty', PARENT, {
+	var SELF = wb.datamodel.Property = util.inherit( 'WbProperty', PARENT, {
 
 		/**
 		 * Returns the Property's data type's identifier.
@@ -33,7 +33,7 @@
 		},
 
 		/**
-		 * @see wb.Entity.equals
+		 * @see wb.datamodel.Entity.equals
 		 */
 		equals: function( entity ) {
 			if(
@@ -46,7 +46,7 @@
 		},
 
 		/**
-		 * @see wb.Entity.toMap
+		 * @see wb.datamodel.Entity.toMap
 		 */
 		toMap: function() {
 			var map = PARENT.prototype.toMap.call( this );
@@ -57,7 +57,7 @@
 
 
 	/**
-	 * @see wb.Entity.TYPE
+	 * @see wb.datamodel.Entity.TYPE
 	 */
 	SELF.TYPE = 'property';
 

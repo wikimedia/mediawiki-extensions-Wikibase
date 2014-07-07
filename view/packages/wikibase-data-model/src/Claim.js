@@ -11,14 +11,14 @@
  * @since 0.2
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
  *
- * @param {wb.Snak} mainSnak
- * @param {wb.SnakList|null} [qualifiers]
+ * @param {wb.datamodel.Snak} mainSnak
+ * @param {wb.datamodel.SnakList|null} [qualifiers]
  * @param {String|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
  *        if this is a new Claim, not yet stored in the database and associated with some entity.
  */
-var SELF = wb.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
+var SELF = wb.datamodel.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
 	this.setMainSnak( mainSnak );
-	this.setQualifiers( qualifiers || new wb.SnakList() );
+	this.setQualifiers( qualifiers || new wb.datamodel.SnakList() );
 	this._guid = guid || null;
 };
 
@@ -31,12 +31,12 @@ SELF.TYPE = 'claim';
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type wb.Snak
+	 * @type wb.datamodel.Snak
 	 */
 	_mainSnak: null,
 
 	/**
-	 * @type {wb.SnakList}
+	 * @type {wb.datamodel.SnakList}
 	 */
 	_qualifiers: null,
 
@@ -59,7 +59,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns the main Snak.
 	 *
-	 * @return {wb.Snak}
+	 * @return {wb.datamodel.Snak}
 	 */
 	getMainSnak: function() {
 		return this._mainSnak;
@@ -68,26 +68,26 @@ $.extend( SELF.prototype, {
 	/**
 	 * Overwrites the current main Snak.
 	 *
-	 * @param {wb.Snak} mainSnak
+	 * @param {wb.datamodel.Snak} mainSnak
 	 */
 	setMainSnak: function( mainSnak ) {
-		if( !( mainSnak instanceof wb.Snak ) ) {
+		if( !( mainSnak instanceof wb.datamodel.Snak ) ) {
 			throw new Error( 'For creating a new claim, at least a Main Snak is required' );
 		}
 		this._mainSnak = mainSnak;
 	},
 
 	/**
-	 * Returns all qualifiers as a wb.SnakList object.
+	 * Returns all qualifiers as a wb.datamodel.SnakList object.
 	 *
-	 * @return wb.SnakList
+	 * @return wb.datamodel.SnakList
 	 */
 	getQualifiers: function( propertyId ) {
 		if( !propertyId ) {
 			return this._qualifiers;
 		}
 
-		var filteredQualifiers = new wb.SnakList();
+		var filteredQualifiers = new wb.datamodel.SnakList();
 
 		this._qualifiers.each( function( i, snak ) {
 			if( snak.getPropertyId() === propertyId ) {
@@ -101,11 +101,11 @@ $.extend( SELF.prototype, {
 	/**
 	 * Overwrites the current set of qualifiers.
 	 *
-	 * @param {wb.SnakList} qualifiers
+	 * @param {wb.datamodel.SnakList} qualifiers
 	 */
 	setQualifiers: function( qualifiers ) {
-		if( !( qualifiers instanceof wb.SnakList ) ) {
-			throw new Error( 'Qualifiers have to be a wb.SnakList object' );
+		if( !( qualifiers instanceof wb.datamodel.SnakList ) ) {
+			throw new Error( 'Qualifiers have to be a wb.datamodel.SnakList object' );
 		}
 		this._qualifiers = qualifiers;
 	},
@@ -117,7 +117,7 @@ $.extend( SELF.prototype, {
 	 *
 	 * @since 0.4
 	 *
-	 * @param {wb.Claim|*} other If this is not a wb.Claim, false will be returned.
+	 * @param {wb.datamodel.Claim|*} other If this is not a wb.datamodel.Claim, false will be returned.
 	 * @return boolean
 	 */
 	equals: function( other ) {
@@ -133,7 +133,7 @@ $.extend( SELF.prototype, {
 	 * Returns a JSON structure representing this claim.
 	 * @since 0.4
 	 *
-	 * TODO: implement this as a wb.serialization.Serializer
+	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *
 	 * @return {Object}
 	 */
@@ -159,36 +159,36 @@ $.extend( SELF.prototype, {
 /**
  * Creates a new Claim object from a given JSON structure.
  *
- * TODO: implement this as a wb.serialization.Unserializer
+ * TODO: implement this as a wb.datamodel.serialization.Unserializer
  *
  * @param {Object} json
- * @return {wb.Claim}
+ * @return {wb.datamodel.Claim}
  */
 SELF.newFromJSON = function( json ) {
-	var mainSnak = wb.Snak.newFromJSON( json.mainsnak ),
-		qualifiers = new wb.SnakList(),
+	var mainSnak = wb.datamodel.Snak.newFromJSON( json.mainsnak ),
+		qualifiers = new wb.datamodel.SnakList(),
 		references = [],
 		rank,
 		guid,
 		isStatement = json.type === 'statement';
 
 	if ( json.qualifiers !== undefined ) {
-		qualifiers = wb.SnakList.newFromJSON( json.qualifiers, json['qualifiers-order'] );
+		qualifiers = wb.datamodel.SnakList.newFromJSON( json.qualifiers, json['qualifiers-order'] );
 	}
 
 	if ( isStatement && json.references !== undefined ) {
 		$.each( json.references, function( i, reference ) {
-			references.push( wb.Reference.newFromJSON( reference ) );
+			references.push( wb.datamodel.Reference.newFromJSON( reference ) );
 		} );
 	}
 
 	guid = json.id || null;
 
 	if ( isStatement ) {
-		rank = wb.Statement.RANK[ json.rank.toUpperCase() ];
-		return new wb.Statement( mainSnak, qualifiers, references, rank, guid );
+		rank = wb.datamodel.Statement.RANK[ json.rank.toUpperCase() ];
+		return new wb.datamodel.Statement( mainSnak, qualifiers, references, rank, guid );
 	}
-	return new wb.Claim( mainSnak, qualifiers, guid );
+	return new wb.datamodel.Claim( mainSnak, qualifiers, guid );
 };
 
 }( wikibase, jQuery ) );
