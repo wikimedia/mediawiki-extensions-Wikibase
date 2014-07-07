@@ -48,11 +48,14 @@ Other breaking changes:
 
 #### Additions
 
+* Added `EntityDocument` interface, which is implemented by `Entity`
 * Added `LegacyIdInterpreter`
 * Added `ClaimList`
 * Added `ClaimListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
 * Added `PropertyNotFoundException`
+* Added `ItemDiffer` and `PropertyDiffer`
+* Added `EntityDiffer` and `EntityDifferStrategy`
 
 #### Other changes
 
