@@ -38,7 +38,7 @@
 	 * TODO: we should probably have a ClaimList which then has its own unserializer.
 	 *
 	 * @param {Object} serialization
-	 * @return wb.Claim[]
+	 * @return wb.datamodel.Claim[]
 	 */
 	function unserializeClaims( serialization ) {
 		var claims = [];
@@ -50,7 +50,7 @@
 			for( var i in claimsPerProp ) {
 				var serializedClaim = claimsPerProp[ i ],
 					// TODO: use ClaimUnserializer here after it got implemented
-					claim = wb.Claim.newFromJSON( serializedClaim );
+					claim = wb.datamodel.Claim.newFromJSON( serializedClaim );
 
 				claims.push( claim );
 			}
@@ -69,7 +69,7 @@
 		/**
 		 * @see wb.serialization.Unserializer.unserialize
 		 *
-		 * @return wb.Entity
+		 * @return wb.datamodel.Entity
 		 */
 		unserialize: function( serialization ) {
 			var entityType = serialization.type,
@@ -100,21 +100,21 @@
 				$.extend( entityMapData, typeSpecificData );
 			}
 
-			return wb.Entity.newFromMap(
+			return wb.datamodel.Entity.newFromMap(
 				entityMapData
 			);
 		}
 	} );
 
-	// register in SerializationFactory for wb.Entity unserialization handling:
-	MODULE.SerializerFactory.registerUnserializer( SELF, wb.Entity );
+	// register in SerializationFactory for wb.datamodel.Entity unserialization handling:
+	MODULE.SerializerFactory.registerUnserializer( SELF, wb.datamodel.Entity );
 
 	/**
 	 * Allows to register advanced unserialization logic for a certain type of Entity. Takes the
 	 * type the additional handling is required for and a Unserializer object which has the job to
 	 * return the type specific map data as Object. The Object keys should contain the data which
 	 * is different for the handled type of entity compared to other entity types. The keys should
-	 * be what wb.Entity.newFromMap requires to create a new Entity of the specific type.
+	 * be what wb.datamodel.Entity.newFromMap requires to create a new Entity of the specific type.
 	 *
 	 * @since 0.4
 	 *
