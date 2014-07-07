@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_e675ccc9",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-07T17:29:08Z",
+      "side": 1,
+      "message": "oh because of the wrong documentation in AbstractContent. Sigh...",
+      "parentUuid": "ae43a74e_45201796",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_227ce9b3",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 11
@@ -170,6 +188,24 @@
       "side": 1,
       "message": "People confuse \"or\" a lot.\n\nNot sure to what \"specific\" cases you refer. There is only one XOR case and a second one for the title. They are now reflected in the code.\n\nI found your original collection of checks very hard to read. The code was highly redundant too. You basically told the user what he did (A and B empty? Error. A and B set? Same error.) instead of telling him what he should do.",
       "parentUuid": "ae43a74e_a23699fe",
+      "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_e6b6ec84",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-07T17:29:08Z",
+      "side": 1,
+      "message": "\"or\" by itself is not exclusive. \"either...or\" is exclusive (xor).",
+      "parentUuid": "ae43a74e_253e33b6",
       "revId": "f5db5e37b1fb14140081b7be57452f9eaa04b0a7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
