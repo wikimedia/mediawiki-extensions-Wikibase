@@ -70,18 +70,16 @@ $.widget( 'wikibase.linkitem', {
 	targetArticle: null,
 
 	/**
-	 * (Additional) default options
+	 * Options
 	 * @see jQuery.Widget.options
 	 */
 	options: {
-		pageTitle: ( new mw.Title(
-			mw.config.get( 'wgTitle' ),
-			mw.config.get( 'wgNamespaceNumber' )
-		) ).getPrefixedText(),
-		globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
-		namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
-		repoArticlePath: mw.config.get( 'wbRepo' ).url + mw.config.get( 'wbRepo' ).articlePath,
-		langLinkSiteGroup: mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup
+		repoApi: null,
+		pageTitle: null,
+		globalSiteId: null
+		namespaceNumber: null
+		repoArticlePath: null
+		langLinkSiteGroup: null
 	},
 
 	/**
@@ -94,7 +92,7 @@ $.widget( 'wikibase.linkitem', {
 		var self = this,
 			$dialogSpinner = $.createSpinner();
 
-		this._repoApi = new wb.RepoApi();
+		this._repoApi = this.options.repoApi;
 
 		this.element
 		.hide()
@@ -354,6 +352,7 @@ $.widget( 'wikibase.linkitem', {
 		this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
 		this._pageConnector = new wb.PageConnector(
+			this._repoApi,
 			this.options.globalSiteId,
 			this.options.pageTitle,
 			this.targetSite,
