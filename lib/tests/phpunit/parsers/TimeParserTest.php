@@ -80,11 +80,11 @@ class TimeParserTest extends StringValueParserTest {
 				array( '+0000000000000000-00-20T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 
 			//Wikibase\Lib\ParsersMwTimeIsoParser
-			'in 13 billion years' =>
+			'13 billion years CE' =>
 				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
-			'in 13,000 million years' =>
+			'13,000 million years CE' =>
 				array( '+0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
-			'13,000 million years ago' =>
+			'13,000 million years BCE' =>
 				array( '-0000013000000000-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_Ga , TimeFormatter::CALENDAR_GREGORIAN ),
 			'1980s' =>
 				array( '+0000000000001980-00-00T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_10a , TimeFormatter::CALENDAR_GREGORIAN ),

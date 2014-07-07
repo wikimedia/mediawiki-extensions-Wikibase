@@ -112,51 +112,51 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'+12345671912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
-				'in 12345670000 years',
+				'12345670000 years CE',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
-				'in 12345680000 years',
+				'12345680000 years CE',
 			),
 			array(
 				'+12345618912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
-				'in 12345600000 years',
+				'12345600000 years CE',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
-				'in 12345700000 years',
+				'12345700000 years CE',
 			),
 			array(
 				'+12345178912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
-				'in 12345 million years',
+				'12345 million years CE',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
-				'in 12346 million years',
+				'12346 million years CE',
 			),
 			array(
 				'+12341678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
-				'in 12340 million years',
+				'12340 million years CE',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
-				'in 12350 million years',
+				'12350 million years CE',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
-				'in 12300 million years',
+				'12300 million years CE',
 			),
 			array(
 				'+12375678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
-				'in 12400 million years',
+				'12400 million years CE',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
-				'in 12 billion years',
+				'12 billion years CE',
 			),
 			array(
 				'+12545678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
-				'in 13 billion years',
+				'13 billion years CE',
 			),
 
 			// Negative dates
@@ -228,51 +228,51 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'-12345671912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
-				'12345670000 years ago',
+				'12345670000 years BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10ka,
-				'12345680000 years ago',
+				'12345680000 years BCE',
 			),
 			array(
 				'-12345618912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
-				'12345600000 years ago',
+				'12345600000 years BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100ka,
-				'12345700000 years ago',
+				'12345700000 years BCE',
 			),
 			array(
 				'-12345178912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
-				'12345 million years ago',
+				'12345 million years BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ma,
-				'12346 million years ago',
+				'12346 million years BCE',
 			),
 			array(
 				'-12341678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
-				'12340 million years ago',
+				'12340 million years BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10Ma,
-				'12350 million years ago',
+				'12350 million years BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
-				'12300 million years ago',
+				'12300 million years BCE',
 			),
 			array(
 				'-12375678912-01-01T01:01:01Z', TimeValue::PRECISION_100Ma,
-				'12400 million years ago',
+				'12400 million years BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
-				'12 billion years ago',
+				'12 billion years BCE',
 			),
 			array(
 				'-12545678912-01-01T01:01:01Z', TimeValue::PRECISION_Ga,
-				'13 billion years ago',
+				'13 billion years BCE',
 			),
 
 			// Valid values with day, month and/or year zero
