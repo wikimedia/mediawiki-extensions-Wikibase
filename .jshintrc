@@ -34,6 +34,7 @@
 		"wikibase",
 		"dataValues",
 		"dataTypes",
+		"sinon",
 		"util",
 		"valueFormatters",
 		"valueParsers",

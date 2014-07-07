@@ -32,10 +32,14 @@ return call_user_func( function() {
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
 				'jquery.wikibase.claimgrouplabelscroll',
+				'wikibase.experts',
+				'wikibase.formatters',
 				'wikibase.ui.initEntity',
 				'wikibase.ui.initTermBox',
+				'wikibase.parsers',
 				'wikibase.store.EntityStore',
-				'wikibase.compileEntityStoreFromMwConfig'
+				'wikibase.compileEntityStoreFromMwConfig',
+				'wikibase.ValueViewBuilder'
 			),
 			'messages' => array(
 				'pagetitle',
