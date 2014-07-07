@@ -192,6 +192,17 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.RepoApi.FormatValueCaller' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.RepoApi/wikibase.FormatValueCaller.js',
+			),
+			'dependencies' => array(
+				'json',
+				'jquery',
+				'wikibase.RepoApi', // For the namespace
+			)
+		),
+
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
