@@ -10,7 +10,7 @@
  * TODO: Refactor this huge single function into smaller pieces of code.
  */
 
-( function( $, mw, wb ) {
+( function( $, mw, wb, experts, formatters, parsers ) {
 	'use strict';
 	/* jshint nonew: false */
 
@@ -114,7 +114,8 @@
 			// child of $claims. It should be direct child of ".wb-entity".
 			$claims.entityview( {
 				value: wb.entity,
-				entityStore: entityStore
+				entityStore: entityStore,
+				valueViewBuilder: new wb.ValueViewBuilder( experts, formatters, mw, parsers )
 			} ).appendTo( $claimsParent );
 
 			// This is here to be sure there is never a duplicate id
@@ -320,4 +321,4 @@
 
 	} );
 
-} )( jQuery, mediaWiki, wikibase );
+} )( jQuery, mediaWiki, wikibase, wikibase.experts.store, wikibase.formatters.store, wikibase.parsers.store );
