@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae43a74e_b7f00c8f",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-07-07T21:03:53Z",
+      "side": 1,
+      "message": "Can we then please mark this as an experimental feature here, too?",
+      "revId": "ad17c28e0056b05cc89abc68017093977ed7dea5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_91a63dbd",
         "filename": "repo/includes/api/CreateRedirect.php",
         "patchSetId": 5
