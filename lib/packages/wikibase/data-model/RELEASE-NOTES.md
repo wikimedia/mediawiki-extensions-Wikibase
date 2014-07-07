@@ -61,6 +61,8 @@ Other breaking changes:
 
 * Undeprecated `Entity::isEmpty`
 * Undeprecated `Entity::clear`
+* Undeprecated passing an integer to `Item::setId` and `Property::setId`
+* Deprecated `Entity::setId`
 
 ## Version 0.8.1 (2014-06-06)
 
