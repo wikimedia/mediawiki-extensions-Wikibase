@@ -121,6 +121,7 @@ final class LibHooks {
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
 				'wikibase.AbstractedRepoApi',
+				'wikibase.datamodel', // For RepoApi.tests
 				'wikibase.parsers',
 				'wikibase.store.FetchedContent',
 				'wikibase.utilities',
@@ -198,6 +199,7 @@ final class LibHooks {
 				),
 				'dependencies' => array(
 					'jquery.wikibase.statementview',
+					'wikibase.datamodel',
 				),
 			);
 

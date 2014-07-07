@@ -113,7 +113,7 @@
 
 	/**
 	 * @param {mediaWiki.Title} title
-	 * @param {wikibase.Entity} entity
+	 * @param {wb.datamodel.Entity} entity
 	 * @param {string[]} languageCodes
 	 * @return {jQuery|undefined}
 	 */
