@@ -22,10 +22,9 @@ return call_user_func( function() {
 				'wikibase.formatters.api.js',
 			),
 			'dependencies' => array(
-				'json',
-				'jquery',
-				'wikibase',
+				'wikibase', // For the namespace
 				'wikibase.RepoApi',
+				'wikibase.api.FormatValueCaller',
 				'wikibase.dataTypes'
 			),
 		),
