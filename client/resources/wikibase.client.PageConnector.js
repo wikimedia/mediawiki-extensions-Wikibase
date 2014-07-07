@@ -10,23 +10,25 @@
  * @constructor
  * @since 0.5
  *
+ * @param {wb.RepoApi} repoApi
  * @param {string} firstSiteId
  * @param {string} firstPageName
  * @param {string} secondSiteId
  * @param {string} secondPageName
  */
 wb.PageConnector = function PageConnector(
+	repoApi,
 	firstSiteId,
 	firstPageName,
 	secondSiteId,
 	secondPageName
 ) {
+	this._repoApi = repoApi;
+
 	this._firstSiteId = firstSiteId;
 	this._firstPageName = firstPageName;
 	this._secondSiteId = secondSiteId;
 	this._secondPageName = secondPageName;
-
-	this._repoApi = new wb.RepoApi();
 };
 
 $.extend( wb.PageConnector.prototype, {
