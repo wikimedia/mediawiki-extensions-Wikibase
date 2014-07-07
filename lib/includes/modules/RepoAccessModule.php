@@ -48,6 +48,6 @@ class RepoAccessModule extends ResourceLoaderModule {
 			);
 		}
 
-		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbRepo' => $wbRepo ) );
+		return Xml::encodeJsCall( 'mediaWiki.config.set', array( 'wbRepo', $wbRepo ) );
 	}
 }
