@@ -12,23 +12,32 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => '..' . $remoteExtPathParts[2],
+		'remoteExtPath' => '..' . $remoteExtPathParts[2] . DIRECTORY_SEPARATOR . 'tests',
 	);
 
 	$testModules['qunit']['wikibase.datamodel.tests'] = $moduleTemplate + array(
 		'scripts' => array(
-			'tests/Claim.tests.js',
-			'tests/Entity.tests.js',
-			'tests/Item.tests.js',
-			'tests/Property.tests.js',
-			'tests/Reference.tests.js',
-			'tests/Snak.tests.js',
-			'tests/SnakList.tests.js',
-			'tests/Statement.tests.js',
+			'Claim.tests.js',
+			'Item.tests.js',
+			'Property.tests.js',
+			'Reference.tests.js',
+			'Snak.tests.js',
+			'SnakList.tests.js',
+			'Statement.tests.js',
 		),
 		'dependencies' => array(
 			'wikibase.datamodel',
+			'wikibase.datamodel.tests.testEntity',
 			'wikibase.tests.qunit.testrunner',
+		)
+	);
+
+	$testModules['qunit']['wikibase.datamodel.tests.testEntity'] = $moduleTemplate + array(
+		'scripts' => array(
+			'testEntity.js',
+		),
+		'dependencies' => array(
+			'wikibase.datamodel',
 		)
 	);
 

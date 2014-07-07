@@ -138,8 +138,8 @@
 
 	}
 
-	wb.tests = wb.tests || {};
-	wb.tests.testEntity = function( testDefinition ) {
+	wb.datamodel.tests = wb.datamodel.tests || {};
+	wb.datamodel.tests.testEntity = function( testDefinition ) {
 		var test = new EntityTest( testDefinition );
 
 		function callTestFn( testFnName ) {
@@ -175,7 +175,7 @@
 	 *
 	 * @type Object
 	 */
-	wb.tests.testEntity.basicTestDefinition = {
+	wb.datamodel.tests.testEntity.basicTestDefinition = {
 		entityConstructor: null,
 		testData: {
 			empty: {},
