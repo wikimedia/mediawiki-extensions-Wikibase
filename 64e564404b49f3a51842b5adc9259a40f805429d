@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_c9ce595f",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-07T18:15:04Z",
+      "side": 1,
+      "message": "This should probably also load mw.config.values.wbRepo explicitly",
+      "revId": "64e564404b49f3a51842b5adc9259a40f805429d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_09e581d7",
+        "filename": "client/resources/wikibase.client.linkitem.init.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-07T18:15:04Z",
+      "side": 1,
+      "message": "Dependency missing AFAIS",
+      "revId": "64e564404b49f3a51842b5adc9259a40f805429d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
