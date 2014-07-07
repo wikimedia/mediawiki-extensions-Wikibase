@@ -18,7 +18,7 @@
 	"wikibase-comment-sitelink-change": "Tungumálatengli breytt frá $1 í $2",
 	"wikibase-comment-sitelink-remove": "Tungumálatengill fjarlægður: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|breyting|breytingar}}",
-	"wikibase-dataitem": "Gagna hlutur",
+	"wikibase-dataitem": "{{WBREPONAME}} hlutur",
 	"wikibase-editlinks": "Breyta tenglum",
 	"wikibase-editlinkstitle": "Breyta tungumálatenglum",
 	"wikibase-linkitem-addlinks": "Bæta við tenglum",
