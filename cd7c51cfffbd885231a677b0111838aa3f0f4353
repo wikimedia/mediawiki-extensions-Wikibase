@@ -16,6 +16,24 @@
       "revId": "cd7c51cfffbd885231a677b0111838aa3f0f4353",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_c71647f6",
+        "filename": "lib/resources/wikibase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-07T07:38:26Z",
+      "side": 0,
+      "message": "Could use wbEntityId instead: https://www.wikidata.org/wiki/MediaWiki_talk:Guidedtour-lib.js#Replace_wb.entity_usage",
+      "parentUuid": "ae43a74e_16724310",
+      "revId": "cd7c51cfffbd885231a677b0111838aa3f0f4353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
