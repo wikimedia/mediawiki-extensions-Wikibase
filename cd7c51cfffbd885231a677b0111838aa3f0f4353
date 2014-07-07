@@ -34,6 +34,24 @@
       "revId": "cd7c51cfffbd885231a677b0111838aa3f0f4353",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_e7802ba2",
+        "filename": "lib/resources/wikibase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-07T10:55:44Z",
+      "side": 0,
+      "message": "in the future, please add {{editprotected}} since only admins can edit these pages and that helps get attention, and  also sign your message. ~~~~\n\nin this case, you can ask bene* since he\u0027s working on the tours.",
+      "parentUuid": "ae43a74e_c71647f6",
+      "revId": "cd7c51cfffbd885231a677b0111838aa3f0f4353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
