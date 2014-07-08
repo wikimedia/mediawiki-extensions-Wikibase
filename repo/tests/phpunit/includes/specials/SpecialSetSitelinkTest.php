@@ -101,9 +101,6 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 					) );
 			}
 		}
-
-		self::$oldBadgeItemsSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array( self::$badgeId => '' ) );
 	}
 
 	public function tearDown() {
@@ -116,12 +113,16 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
+		self::$badgeId = $badge->getId()->getSerialization();
+
+		self::$oldBadgeItemsSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
+		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'badgeItems', array( self::$badgeId => '' ) );
+
 		$item = Item::newEmpty();
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) ) );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		self::$itemId = $item->getId()->getSerialization();
-		self::$badgeId = $badge->getId()->getSerialization();
 	}
 
 	public function testExecuteEmptyForm() {
