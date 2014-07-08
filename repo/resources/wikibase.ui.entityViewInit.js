@@ -109,7 +109,7 @@
 			// the entity node (see FIXME below).
 			$claims.toolbarcontroller( toolbarControllerConfig ); // BUILD TOOLBARS
 
-			var abstractedRepoApi = new wb.AbstractedRepoApi();
+			var abstractedRepoApi = new wb.AbstractedRepoApi( repoApi );
 			var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 			wb.compileEntityStoreFromMwConfig( entityStore );
 
