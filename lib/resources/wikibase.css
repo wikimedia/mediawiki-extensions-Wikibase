@@ -946,6 +946,23 @@ table.wb-sitelinks .wb-sitelinks-link {
 	border-right: 1px solid #C9C9C9;
 }
 
+table.wb-sitelinks .wb-sitelinks-badges {
+	display: table-cell;
+}
+
+table.wb-sitelinks .wb-sitelinks-page {
+	display: table-cell;
+	width: 100%;
+}
+
+table.wb-sitelinks .wb-badge {
+	display: inline;
+	padding: 7px;
+	/* @embed */
+	background: url(images/wb-badges-default.svg) no-repeat center center;
+	background-size: 20px;
+}
+
 table.wb-sitelinks {
 	clear: both;
 }
