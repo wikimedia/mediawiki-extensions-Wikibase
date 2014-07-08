@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_dd967797",
+        "filename": "lib/includes/store/BadRevisionException.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T17:59:50Z",
+      "side": 1,
+      "message": "do we really want to keep putting stuff in the top-level namespace?",
+      "revId": "840a3c14eb9ae0498692b2f7b06c7b3e32c584d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fdc7f398",
+        "filename": "lib/includes/store/BadRevisionException.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T17:59:50Z",
+      "side": 1,
+      "message": "huh, ExceptionException?\n\nalso, i\u0027m not a fan of referring to things as \u0027Bad\u0027. The revision is simply not found, so maybe UnknownRevisionException or something?",
+      "revId": "840a3c14eb9ae0498692b2f7b06c7b3e32c584d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ddc43797",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T17:59:50Z",
+      "side": 1,
+      "message": "ExceptionException?",
+      "revId": "840a3c14eb9ae0498692b2f7b06c7b3e32c584d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
