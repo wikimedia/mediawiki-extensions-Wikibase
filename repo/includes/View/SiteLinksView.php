@@ -2,14 +2,26 @@
 
 namespace Wikibase\Repo\View;
 
+use Html;
 use InvalidArgumentException;
+use Language;
 use Message;
+use Sanitizer;
 use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
+/**
+ * Creates views for lists of site links.
+ *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
+ * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ */
 class SiteLinksView {
 
 	/**
@@ -23,14 +35,37 @@ class SiteLinksView {
 	private $sectionEditLinkGenerator;
 
 	/**
+	 * @var string
+	 */
+	private $lang;
+
+	/**
 	 * @var string[]
 	 */
 	private $specialSiteLinkGroups;
 
-	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator ) {
+	/**
+	 * @var array
+	 */
+	private $badgeItems;
+
+	/**
+	 * @var EntityInfoBuilder
+	 */
+	private $entityInfoBuilder;
+
+	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator, Language $language ) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->specialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
+		$this->lang = $language->getCode();
+
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		$settings = $repo->getSettings();
+		$this->specialSiteLinkGroups = $settings->getSetting( 'specialSiteLinkGroups' );
+		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+
+		$this->entityInfoBuilder = $repo->getStore()->getEntityInfoBuilder();
 	}
 
 	/**
@@ -252,7 +287,8 @@ class SiteLinksView {
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			$escapedPageName,
 			'<td>' . $this->getHtmlForEditSection( $itemId, $escapedSiteId ) . '</td>',
-			$escapedSiteId // ID used in classes
+			$escapedSiteId, // ID used in classes,
+			$this->getHtmlForBadges( $siteLink )
 		);
 	}
 
@@ -297,6 +333,32 @@ class SiteLinksView {
 			$msg,
 			$enabled
 		);
+	}
+
+	private function getHtmlForBadges( SiteLink $siteLink ) {
+		$html = '';
+
+		foreach ( $siteLink->getBadges() as $badge ) {
+			$serialization = $badge->getSerialization();
+			$class = 'wb-badge wb-badge-' . Sanitizer::escapeClass( $serialization );
+			if ( $this->badgeItems[$serialization] ) {
+				$class .= ' ' . Sanitizer::escapeClass( $this->badgeItems[$serialization] );
+			}
+
+			$entityInfo = $this->entityInfoBuilder->buildEntityInfo( array( $badge ) );
+			$this->entityInfoBuilder->addTerms( $entityInfo, array( 'label' ), array( $this->lang ) );
+			$title = isset( $entityInfo[$serialization]['labels'][$this->lang] ) ? $entityInfo[$serialization]['labels'][$this->lang]['value'] : $serialization;
+
+			$html .= Html::element(
+				'span',
+				array(
+					'class' => $class,
+					'title' => $title
+				)
+			);
+		}
+
+		return $html;
 	}
 
 }
