@@ -212,6 +212,7 @@
 	"wikibase-entitydata-bad-revision": "Can't show revision $2 of entity $1.",
 	"wikibase-entitydata-bad-id": "Invalid ID: $1.",
 	"wikibase-entitydata-unsupported-format": "The data format $1 is not supported by this interface.",
+	"wikibase-entitydata-storage-error": "Failed to load $1",
 	"wikibase-entitydata-title": "Entity Data",
 	"wikibase-entitydata-text": "This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.",
 	"special-mylanguagefallbackchain": "My language fallback chain",
