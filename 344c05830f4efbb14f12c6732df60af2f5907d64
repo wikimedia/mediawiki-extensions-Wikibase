@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_1d0abf24",
+        "filename": "lib/includes/store/EntityRedirectResolvingDecorator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T17:50:02Z",
+      "side": 1,
+      "message": "$targetObject. Dejavu.",
+      "revId": "344c05830f4efbb14f12c6732df60af2f5907d64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bd460b53",
+        "filename": "lib/includes/store/EntityRedirectResolvingDecorator.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T17:50:02Z",
+      "side": 1,
+      "message": "Not sure why you moved this in the loop. The value doesn\u0027t change.",
+      "revId": "344c05830f4efbb14f12c6732df60af2f5907d64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
