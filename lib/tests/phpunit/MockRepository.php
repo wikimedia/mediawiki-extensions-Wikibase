@@ -22,7 +22,7 @@ use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\EntityStore;
 
 /**

@@ -11,7 +11,7 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityViewPlaceholderExpander;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * @covers Wikibase\EntityViewPlaceholderExpander

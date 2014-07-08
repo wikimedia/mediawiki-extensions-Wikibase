@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityIdPager;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Serializers\Serializer;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * JsonDumpGenerator generates an JSON dump of a given set of entities.

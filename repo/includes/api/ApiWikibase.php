@@ -9,6 +9,8 @@ use LogicException;
 use Status;
 use UsageException;
 use User;
+use Wikibase\BadRevisionException;
+use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -21,9 +23,8 @@ use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -312,8 +313,10 @@ abstract class ApiWikibase extends ApiBase {
 			return $revision;
 		} catch ( UnresolvedRedirectException $ex ) {
 			$this->dieException( $ex, 'unresolved-redirect' );
-		} catch ( StorageException $ex ) {
+		} catch ( BadRevisionException $ex ) {
 			$this->dieException( $ex, 'nosuchrevid' );
+		} catch ( StorageException $ex ) {
+			$this->dieException( $ex, 'failed-save' );
 		}
 
 		throw new LogicException( 'ApiErrorReporter::dieError did not throw a UsageException' );
