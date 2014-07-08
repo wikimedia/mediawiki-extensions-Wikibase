@@ -107,7 +107,9 @@
 			// the entity node (see FIXME below).
 			$claims.toolbarcontroller( toolbarControllerConfig ); // BUILD TOOLBARS
 
-			var entityStore = new wb.store.EntityStore();
+			var repoApi = new wb.RepoApi();
+			var abstractedRepoApi = new wb.AbstractedRepoApi();
+			var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 			wb.compileEntityStoreFromMwConfig( entityStore );
 
 			// FIXME: Initializing entityview on $claims leads to the claim section inserted as
@@ -118,8 +120,8 @@
 				valueViewBuilder: new wb.ValueViewBuilder(
 					experts,
 					getFormatterStore( new wb.RepoApi(), dataTypes ),
-					parsers,
-					mw
+					mw,
+					parsers
 				)
 			} ).appendTo( $claimsParent );
 
