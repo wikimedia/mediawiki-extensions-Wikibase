@@ -12,7 +12,7 @@ three interconnected extensions:
 
 * Wikibase Repository (in the directory repo)
 * Wikibase Client (in the directory client)
-* WikibaseLib (in the directory lib)
+* Wikibase Lib (in the directory lib)
 
 These extensions allow for the creation, maintenance, dissemination, and usage of structured data
 in MediaWiki.
