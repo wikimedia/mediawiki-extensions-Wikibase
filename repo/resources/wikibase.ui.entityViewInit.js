@@ -61,7 +61,7 @@
 			if( $( this ).children( '.wb-property-container-key' ).attr( 'title' ) === 'description' ) {
 				new wb.ui.DescriptionEditTool( this );
 			} else {
-				new wb.ui.PropertyEditTool( this );
+				throw new Error( 'This should not happen' );
 			}
 		} );
 
