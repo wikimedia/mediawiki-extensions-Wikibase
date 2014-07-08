@@ -10,6 +10,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
+ * @author Bene* < benestar.wikimedia@gmail.com >
  *
  * @return array templates
  */
@@ -316,7 +317,7 @@ HTML;
 <tr class="wb-sitelinks-$8 $2">
 	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$8" lang="$1" dir="auto">$3</td>
 	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$8">$4</td>
-	<td class="wb-sitelinks-link wb-sitelinks-link-$8" lang="$1"><a href="$5" hreflang="$1" dir="auto">$6</a></td>
+	<td class="wb-sitelinks-link wb-sitelinks-link-$8" lang="$1"><span class="wb-sitelinks-badges">$9</span><span class="wb-sitelinks-page"><a href="$5" hreflang="$1" dir="auto">$6</a></span></td>
 	$7
 </tr>
 HTML;

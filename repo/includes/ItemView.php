@@ -79,7 +79,8 @@ class ItemView extends EntityView {
 		// FIXME: Inject this
 		$siteLinksView = new SiteLinksView(
 			WikibaseRepo::getDefaultInstance()->getSiteStore()->getSites(),
-			$this->sectionEditLinkGenerator
+			$this->sectionEditLinkGenerator,
+			$this->getLanguage()
 		);
 
 		$itemId = $item->getId();
