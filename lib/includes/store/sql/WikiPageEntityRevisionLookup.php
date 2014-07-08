@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use DBQueryError;
 use MWContentSerializationException;
+use Wikibase\BadRevisionExceptionException;
 use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -97,13 +98,13 @@ class WikiPageEntityRevisionLookup extends \DBAccessBase implements EntityRevisi
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": Loaded wrong entity: expected " . $entityId
 							. ", got " . $entityRev->getEntity()->getId());
 
-			$entityRev = null;
+			throw new BadRevisionExceptionException( "Revision $revision does not belong to entity $entityId" );
 		}
 
 		if ( $entityRev === null && $revision > 0 ) {
 			// If a revision was specified, that revision doesn't exist or doesn't belong to
 			// the given entity. Throw an error.
-			throw new StorageException( "No such revision found for $entityId: $revision" );
+			throw new BadRevisionExceptionException( "No such revision found for $entityId: $revision" );
 		}
 
 		wfProfileOut( __METHOD__ );
