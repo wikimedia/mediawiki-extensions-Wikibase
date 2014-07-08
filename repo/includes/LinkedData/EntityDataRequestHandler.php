@@ -7,12 +7,13 @@ use OutputPage;
 use SquidUpdate;
 use WebRequest;
 use WebResponse;
+use Wikibase\BadRevisionException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
@@ -339,10 +340,14 @@ class EntityDataRequestHandler {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId"  );
 				throw new \HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
 			}
-		} catch ( StorageException $ex ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": could not load: $prefixedId: $ex revision $revision"  );
+		} catch ( BadRevisionException $ex ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": could not load revision $revision or $prefixedId: $ex"  );
 			$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
 			throw new \HttpError( 404, $msg->params( $prefixedId, $revision ) );
+		} catch ( StorageException $ex ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load $prefixedId: $ex (revision $revision)"  );
+			$msg = wfMessage( 'wikibase-entitydata-storage-error' );
+			throw new \HttpError( 500, $msg->params( $prefixedId, $revision ) );
 		}
 
 		// handle If-Modified-Since

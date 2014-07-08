@@ -86,7 +86,7 @@ class EntityDataTestProvider {
 			),
 			array(), // headers
 			'!!', // output regex
-			404,       // http code
+			500,       // http code
 		);
 
 		$cases[] = array( // #5: no format, cause 303 to default format

@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 
