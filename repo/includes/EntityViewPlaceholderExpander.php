@@ -230,7 +230,7 @@ class EntityViewPlaceholderExpander {
 			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
 			$entity = $entityRev->getEntity();
 		} catch ( StorageException $ex ) {
-			// entity not found, might be a deleted revision
+			// could not load entity, might be a deleted revision
 			return '';
 		}
 
