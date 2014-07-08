@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\GenericEventDispatcher;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 use WikiPage;
 
 /**
@@ -164,7 +164,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param int $flags
 	 * @param int|bool $baseRevId
 	 *
-	 * @throws StorageException
+	 * @throws \Wikibase\Lib\Store\StorageException
 	 * @return int The new revision ID
 	 */
 	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false ) {

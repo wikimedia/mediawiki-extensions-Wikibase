@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 
@@ -122,14 +122,14 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 				'entity' => $firstItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-				'error' => 'Wikibase\StorageException'
+				'error' => 'Wikibase\Lib\Store\StorageException'
 			),
 
 			'not exists' => array(
 				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
-				'error' => 'Wikibase\StorageException'
+				'error' => 'Wikibase\Lib\Store\StorageException'
 			),
 		);
 	}
@@ -245,7 +245,7 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		list( $store, $lookup ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
-		$this->setExpectedException( 'Wikibase\StorageException' );
+		$this->setExpectedException( 'Wikibase\Lib\Store\StorageException' );
 		$store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
 	}
 

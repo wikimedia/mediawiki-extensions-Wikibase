@@ -6,12 +6,10 @@ use DBAccessBase;
 use DBQueryError;
 use MWContentSerializationException;
 use Revision;
-use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityRevision;
-use Wikibase\StorageException;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -97,13 +95,12 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': Loaded wrong entity: Expected ' . $entityId
 				. ', got ' . $entityRevision->getEntity()->getId() );
 
-			$entityRevision = null;
+			throw new BadRevisionException( "Revision $revisionId does not belong to entity $entityId" );
 		}
 
 		if ( $revisionId > 0 && $entityRevision === null ) {
-			// If a revision ID was specified, that revision doesn't exist or doesn't belong to
-			// the given entity. Throw an error.
-			throw new StorageException( "No such revision found for $entityId: $revisionId" );
+			// If a revision ID was specified, but that revision doesn't exist:
+			throw new BadRevisionException( "No such revision found for $entityId: $revisionId" );
 		}
 
 		wfProfileOut( __METHOD__ );

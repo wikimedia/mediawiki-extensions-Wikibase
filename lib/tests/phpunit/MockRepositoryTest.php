@@ -713,21 +713,21 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 				'entity' => $thirdItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-				'error' => 'Wikibase\StorageException'
+				'error' => 'Wikibase\Lib\Store\StorageException'
 			),
 
 			'not exists' => array(
 				'entity' => $fourthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
-				'error' => 'Wikibase\StorageException'
+				'error' => 'Wikibase\Lib\Store\\StorageException'
 			),
 
 			'bad base' => array(
 				'entity' => $fifthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1234,
-				'error' => 'Wikibase\StorageException'
+				'error' => 'Wikibase\Lib\Store\\StorageException'
 			),
 		);
 	}
