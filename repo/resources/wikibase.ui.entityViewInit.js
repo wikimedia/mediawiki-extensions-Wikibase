@@ -10,7 +10,7 @@
  * TODO: Refactor this huge single function into smaller pieces of code.
  */
 
-( function( $, mw, wb, experts, formatters, parsers ) {
+( function( $, mw, wb, dataTypes, experts, getFormatterStore, parsers ) {
 	'use strict';
 	/* jshint nonew: false */
 
@@ -115,7 +115,12 @@
 			$claims.entityview( {
 				value: wb.entity,
 				entityStore: entityStore,
-				valueViewBuilder: new wb.ValueViewBuilder( experts, formatters, parsers, mw )
+				valueViewBuilder: new wb.ValueViewBuilder(
+					experts,
+					getFormatterStore( new wb.RepoApi(), dataTypes ),
+					parsers,
+					mw
+				)
 			} ).appendTo( $claimsParent );
 
 			// This is here to be sure there is never a duplicate id
@@ -321,4 +326,12 @@
 
 	} );
 
-} )( jQuery, mediaWiki, wikibase, wikibase.experts.store, wikibase.formatters.store, wikibase.parsers.store );
+} )(
+	jQuery,
+	mediaWiki,
+	wikibase,
+	wikibase.dataTypes,
+	wikibase.experts.store,
+	wikibase.formatters.getStore,
+	wikibase.parsers.store
+);
