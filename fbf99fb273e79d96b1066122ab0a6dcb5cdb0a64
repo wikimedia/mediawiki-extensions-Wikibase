@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_34fa3874",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-07-08T11:40:23Z",
+      "side": 1,
+      "message": "Too bad for Katie!",
+      "parentUuid": "ae43a74e_b51cd67d",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_b022a4a0",
         "filename": "repo/i18n/en.json",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b4ed08b7",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-07-08T11:40:23Z",
+      "side": 1,
+      "message": "Nothing wrong with duplication if the use cases are different. I don\u0027t know if that\u0027s the case. Could also be that (partial) automated key generation causes this pattern. It would be possible to use {{int:DUPLICATEKEYNAME}} to reduce translation burden if the message is parsed.",
+      "parentUuid": "ae43a74e_b022a4a0",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_f0182c7c",
         "filename": "repo/i18n/en.json",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2014-06-27T12:29:52Z",
       "side": 1,
       "message": "\u0027wikibase-wikibaserepopage-invalid-langcode\u0027 and \u0027wikibase-itemdisambiguation-invalid-langcode\u0027 are duplicates.",
+      "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_94ea0c9b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-07-08T11:40:23Z",
+      "side": 1,
+      "message": "Nothing wrong with duplication if the use cases are different. I don\u0027t know if that\u0027s the case. Could also be that (partial) automated key generation causes this pattern. It would be possible to use {{int:DUPLICATEKEYNAME}} to reduce translation burden if the message is parsed.",
+      "parentUuid": "ae43a74e_f0182c7c",
       "revId": "fbf99fb273e79d96b1066122ab0a6dcb5cdb0a64",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
