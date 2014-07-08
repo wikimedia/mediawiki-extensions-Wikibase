@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_bd5deb1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T17:53:31Z",
+      "side": 1,
+      "message": "still seems to me that the main point of the patch is to add handling for UnresolvedRedirectException instead of general improvement.\n\nalso, please no colon. :)  it\u0027s slightly odd when viewing --pretty\u003doneline etc.",
+      "revId": "c9e1c66617e1e73135ce36aaa126e7b44e2c5ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fd3c93be",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T17:53:31Z",
+      "side": 1,
+      "message": "no message for \u0027Unresolved redirect\u0027?  why the inconsistency?",
+      "revId": "c9e1c66617e1e73135ce36aaa126e7b44e2c5ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7d70a3a3",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T17:53:31Z",
+      "side": 1,
+      "message": "nitpick: perhaps there should be punctuation at the end here, like there was before?",
+      "revId": "c9e1c66617e1e73135ce36aaa126e7b44e2c5ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
