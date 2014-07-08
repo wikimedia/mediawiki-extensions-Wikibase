@@ -16,6 +16,24 @@
       "revId": "71711f7fedd663083b708cf51c171c37eaba8666",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_083ddbb8",
+        "filename": "repo/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T19:04:09Z",
+      "side": 1,
+      "message": "we log it below, which i think is enough but could add another here...",
+      "parentUuid": "8e28a382_1d1bdf83",
+      "revId": "71711f7fedd663083b708cf51c171c37eaba8666",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
