@@ -10,6 +10,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\View\TermBoxView;
 
 /**
@@ -230,7 +231,7 @@ class EntityViewPlaceholderExpander {
 			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
 			$entity = $entityRev->getEntity();
 		} catch ( StorageException $ex ) {
-			// entity not found, might be a deleted revision
+			// could not load entity, might be a deleted revision
 			return '';
 		}
 
