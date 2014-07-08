@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a22f069c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "\"Encountered\"? This is not war. Can you find an other word?",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7d5ae3fa",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "Why? To do what? This is a really bad message in terms of UX.",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5d5f27e9",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "Yea, so what? Is this a problem? If yes, why?",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3d545bc9",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "To what does \"type\" refer? Entity type?",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fd6db397",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "\"Present\" sounds like it\u0027s possible to change the type but I\u0027m pretty sure it\u0027s not.",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_dd6af77d",
+        "filename": "repo/includes/Interactors/CreateRedirectException.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "Non-informative line, please remove or expand.\n\nMaybe add a @see to the UnresolvedRedirectException or StorageException class where the copy \u0026 paste parts are from. ;-)",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fdea53d6",
+        "filename": "repo/includes/Interactors/CreateRedirectException.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "This looks like a duplicate of Exception::getCode() but the difference is the type (int vs. string). is there a better name for string \"codes\"?",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bd516b67",
+        "filename": "repo/includes/Interactors/CreateRedirectInteractor.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "But this is API specific, isn\u0027t it? Why did you moved this here?",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7dc3030b",
+        "filename": "repo/includes/api/CreateRedirectModule.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T18:46:15Z",
+      "side": 1,
+      "message": "Maybe the interface, but this implementation is new and it\u0027s documentation isn\u0027t supposed to document the interface. Please remove and consider a @see.",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
