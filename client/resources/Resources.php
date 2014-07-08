@@ -51,8 +51,7 @@ return call_user_func( function() {
 				'wikibase.client.PageConnector.js'
 			),
 			'dependencies' => array(
-				'wikibase.sites',
-				'wikibase.RepoApi',
+				'wikibase.sites'
 			),
 		),
 		'jquery.wikibase.linkitem' => $moduleTemplate + array(
