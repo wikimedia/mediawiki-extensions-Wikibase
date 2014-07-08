@@ -257,6 +257,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.store/store.EntityStore.tests.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'wikibase.store.EntityStore',
 				'wikibase.tests.qunit.testrunner'
 			),
