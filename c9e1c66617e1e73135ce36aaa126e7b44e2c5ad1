@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_1d599f01",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-08T18:03:44Z",
+      "side": 1,
+      "message": "Because no messages should be used here. The above was a misguided attempt at localizing the API. The self-documentation of the API should be English, implemented directly as literals. The respective messages should be re-purposed for use with dieError().",
+      "parentUuid": "8e28a382_fd3c93be",
+      "revId": "c9e1c66617e1e73135ce36aaa126e7b44e2c5ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7d70a3a3",
         "filename": "repo/includes/api/ApiWikibase.php",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2014-07-08T17:53:31Z",
       "side": 1,
       "message": "nitpick: perhaps there should be punctuation at the end here, like there was before?",
+      "revId": "c9e1c66617e1e73135ce36aaa126e7b44e2c5ad1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bd672bb4",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-08T18:03:44Z",
+      "side": 1,
+      "message": "perhaps",
+      "parentUuid": "8e28a382_7d70a3a3",
       "revId": "c9e1c66617e1e73135ce36aaa126e7b44e2c5ad1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
