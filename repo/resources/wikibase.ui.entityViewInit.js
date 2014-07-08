@@ -32,10 +32,12 @@
 		// adjustments are necessary.
 		mw.hook( 'wikibase.domready' ).fire();
 
+		var repoApi = new wb.RepoApi();
+
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		var $firstHeading = $( '.wb-firstHeading' );
 		if ( $firstHeading.length ) { // Special pages do not have a custom wb heading
-			var labelEditTool = new wb.ui.LabelEditTool( $firstHeading[0] ),
+			var labelEditTool = new wb.ui.LabelEditTool( $firstHeading[0], { api: repoApi } ),
 				editableLabel = labelEditTool.getValues( true )[0], // [0] will always be set
 				fn = function( event, origin ) {
 					// Limit the global stopItemPageEditMode event to that element
@@ -59,7 +61,7 @@
 		$( '.wb-property-container' ).each( function() {
 			// TODO: Make this nicer when we have implemented the data model
 			if( $( this ).children( '.wb-property-container-key' ).attr( 'title' ) === 'description' ) {
-				new wb.ui.DescriptionEditTool( this );
+				new wb.ui.DescriptionEditTool( this, { api: repoApi } );
 			} else {
 				throw new Error( 'This should not happen' );
 			}
@@ -75,7 +77,7 @@
 
 			// edit tool for aliases:
 			$( '.wb-aliases' ).each( function() {
-				new wb.ui.AliasesEditTool( this );
+				new wb.ui.AliasesEditTool( this, { api: repoApi } );
 			} );
 
 			// BUILD CLAIMS VIEW:
@@ -107,7 +109,6 @@
 			// the entity node (see FIXME below).
 			$claims.toolbarcontroller( toolbarControllerConfig ); // BUILD TOOLBARS
 
-			var repoApi = new wb.RepoApi();
 			var abstractedRepoApi = new wb.AbstractedRepoApi();
 			var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 			wb.compileEntityStoreFromMwConfig( entityStore );
@@ -141,7 +142,8 @@
 				// actual initialization
 				new wb.ui.SiteLinksEditTool( $( this ), {
 					allowedSites: wb.getSitesOfGroup( group ),
-					counterContainers: $sitesCounterContainer
+					counterContainers: $sitesCounterContainer,
+					api: repoApi
 				} );
 			} );
 
