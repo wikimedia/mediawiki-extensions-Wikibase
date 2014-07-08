@@ -122,7 +122,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'mediawiki.Title',
 				'wikibase.store',
-				'wikibase.AbstractedRepoApi',
 				'wikibase.store.FetchedContent'
 			)
 		),
