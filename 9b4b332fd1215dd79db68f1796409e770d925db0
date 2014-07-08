@@ -69,6 +69,24 @@
       "revId": "9b4b332fd1215dd79db68f1796409e770d925db0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c2d692f6",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-07-08T17:04:51Z",
+      "side": 1,
+      "message": "And because it\u0027s a title, this uses title case? -\u003e we don\u0027t use title case in MediaWiki.",
+      "parentUuid": "8e28a382_62c35e62",
+      "revId": "9b4b332fd1215dd79db68f1796409e770d925db0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
