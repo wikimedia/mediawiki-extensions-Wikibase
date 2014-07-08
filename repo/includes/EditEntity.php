@@ -8,6 +8,7 @@ use Status;
 use Title;
 use User;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
 use WikiPage;

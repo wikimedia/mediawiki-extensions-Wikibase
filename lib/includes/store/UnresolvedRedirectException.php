@@ -3,7 +3,7 @@ namespace Wikibase\Lib\Store;
 
 use Exception;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\StorageException;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Exception indicating that an attempt was made to access a redirected EntityId
