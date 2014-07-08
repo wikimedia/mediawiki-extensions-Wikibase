@@ -189,11 +189,13 @@ final class LibHooks {
 				'tests/qunit/jquery.wikibase/jquery.wikibase.referenceview.tests.js',
 			),
 			'dependencies' => array(
+				'jquery.valueview.ExpertStore',
 				'jquery.wikibase.referenceview',
+				'mediawiki.Title',
 				'wikibase.datamodel',
+				'wikibase.store.FetchedContent',
 				'wikibase.store.EntityStore',
 				'wikibase.ValueViewBuilder',
-				'jquery.valueview',
 				'valueFormatters'
 			),
 		);
@@ -257,6 +259,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.store/store.EntityStore.tests.js',
 			),
 			'dependencies' => array(
+				'jquery',
 				'wikibase.store.EntityStore',
 				'wikibase.tests.qunit.testrunner'
 			),
