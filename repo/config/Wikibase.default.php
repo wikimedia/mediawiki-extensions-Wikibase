@@ -42,7 +42,8 @@ return call_user_func( function() {
 		// Should the page names (titles) be normalized against the external site
 		'normalizeItemByTitlePageNames' => false,
 
-		// items allowed to be used as badges
+		// items allowed to be used as badges pointing to their CSS class names, e.g.
+		// array( 'Q101' => 'wb-badge-featuredarticle' )
 		'badgeItems' => array(),
 
 		// Number of seconds for which data output shall be cached.
