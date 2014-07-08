@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_88be6bd0",
+        "filename": "repo/resources/wikibase.ui.entitysearch.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T19:44:54Z",
+      "side": 1,
+      "message": "I still think this is patching a bug in the base class. Why not fix it in the base class?",
+      "revId": "04248c99aaf10dcfc1118feb7389ca6648ae52d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a8f127ca",
+        "filename": "repo/resources/wikibase.ui.entitysearch.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-08T19:44:54Z",
+      "side": 1,
+      "message": "I still don\u0027t understand why you are checking for events that start with the substring \"key\". Why not check for \"keydown\"? Why don\u0027t you check the keyCode if you want to do something on Enter? Why isn\u0027t this done in the base class?",
+      "revId": "04248c99aaf10dcfc1118feb7389ca6648ae52d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
