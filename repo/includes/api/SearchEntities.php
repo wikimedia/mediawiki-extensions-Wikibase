@@ -148,7 +148,7 @@ class SearchEntities extends ApiBase {
 			$entityId = $this->idParser->parse( $term );
 			$title = $this->titleLookup->getTitleForId( $entityId );
 
-			if ( $title->exists() && $entityId->getEntityType() === $entityType ) {
+			if ( $title && $title->exists() && ( $entityId->getEntityType() === $entityType ) ) {
 				return $entityId;
 			}
 		} catch ( EntityIdParsingException $ex ) {
