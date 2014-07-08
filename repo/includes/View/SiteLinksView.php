@@ -2,14 +2,25 @@
 
 namespace Wikibase\Repo\View;
 
+use Html;
 use InvalidArgumentException;
 use Message;
+use Sanitizer;
 use SiteList;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
+/**
+ * Creates views for lists of site links.
+ *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
+ * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ */
 class SiteLinksView {
 
 	/**
@@ -27,10 +38,17 @@ class SiteLinksView {
 	 */
 	private $specialSiteLinkGroups;
 
+	/**
+	 * @var array
+	 */
+	private $badgeItems;
+
 	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator ) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->specialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( "specialSiteLinkGroups" );
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$this->specialSiteLinkGroups = $settings->getSetting( 'specialSiteLinkGroups' );
+		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 	}
 
 	/**
@@ -252,7 +270,8 @@ class SiteLinksView {
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			$escapedPageName,
 			'<td>' . $this->getHtmlForEditSection( $itemId, $escapedSiteId ) . '</td>',
-			$escapedSiteId // ID used in classes
+			$escapedSiteId, // ID used in classes,
+			$this->getHtmlForBadges( $siteLink )
 		);
 	}
 
@@ -297,6 +316,21 @@ class SiteLinksView {
 			$msg,
 			$enabled
 		);
+	}
+
+	private function getHtmlForBadges( SiteLink $siteLink ) {
+		$html = '';
+
+		foreach ( $siteLink->getBadges() as $badge ) {
+			$serialization = $badge->getSerialization();
+			$class = 'wb-badge wb-badge-' . Sanitizer::escapeClass( $serialization );
+			if ( $this->badgeItems[$serialization] ) {
+				$class .= ' ' . Sanitizer::escapeClass( $this->badgeItems[$serialization] );
+			}
+			$html .= Html::element( 'span', array( 'class' => $class ) ); // @todo add label as title
+		}
+
+		return $html;
 	}
 
 }
