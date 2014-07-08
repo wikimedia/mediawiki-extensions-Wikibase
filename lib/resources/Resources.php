@@ -156,7 +156,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel',
 				'wikibase.serialization.entities',
-				'wikibase.RepoApi',
 			)
 		),
 
@@ -327,7 +326,6 @@ return call_user_func( function() {
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.tagadata',
-				'wikibase.AbstractedRepoApi',
 			),
 			'messages' => array(
 				'wikibase-save-inprogress',
@@ -766,7 +764,6 @@ return call_user_func( function() {
 				'jquery.tipsy',
 				'jquery.ui.toggler',
 				'jquery.ui.widget',
-				'wikibase.RepoApiError',
 			),
 			'messages' => array(
 				'wikibase-tooltip-error-details',

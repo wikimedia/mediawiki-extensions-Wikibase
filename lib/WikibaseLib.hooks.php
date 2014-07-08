@@ -118,6 +118,7 @@ final class LibHooks {
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
+				'wikibase.RepoApi',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel', // For RepoApi.tests
 				'wikibase.store.FetchedContent',
