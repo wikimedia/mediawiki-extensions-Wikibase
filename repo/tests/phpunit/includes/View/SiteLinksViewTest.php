@@ -41,7 +41,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getHtmlProvider
 	 */
 	public function testGetHtml( Item $item, array $groups, $editable, $expectedValue ) {
-		$siteLinksView = new SiteLinksView( $this->newSiteList(), $this->getSectionEditLinkGeneratorMock() );
+		$siteLinksView = $this->getSiteLinksView();
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
@@ -174,7 +174,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getEmptyHtmlProvider
 	 */
 	public function testGetEmptyHtml( Item $item, array $groups, $editable ) {
-		$siteLinksView = new SiteLinksView( $this->newSiteList(), $this->getSectionEditLinkGeneratorMock() );
+		$siteLinksView = $this->getSiteLinksView();
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
@@ -220,6 +220,17 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return SiteLinksView
+	 */
+	private function getSiteLinksView() {
+		return new SiteLinksView(
+			$this->newSiteList(),
+			$this->getSectionEditLinkGeneratorMock(),
+			Language::factory( 'en' )
+		);
+	}
+
+	/**
 	 * @return SectionEditLinkGenerator
 	 */
 	private function getSectionEditLinkGeneratorMock() {
@@ -244,6 +255,9 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		return $sectionEditLinkGenerator;
 	}
 
+	/**
+	 * @return SiteList
+	 */
 	private function newSiteList() {
 		$dummySite = MediaWikiSite::newFromGlobalId( 'enwiki' );
 		$dummySite->setGroup( 'wikipedia' );
