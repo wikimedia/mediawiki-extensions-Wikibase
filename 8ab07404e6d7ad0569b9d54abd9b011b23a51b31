@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_c8a233a4",
+        "filename": "repo/includes/api/ApiWikibase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-08T19:49:52Z",
+      "side": 1,
+      "message": "why no $this-\u003emsg() here, vs the other error codes?",
+      "revId": "8ab07404e6d7ad0569b9d54abd9b011b23a51b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
