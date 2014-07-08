@@ -218,7 +218,7 @@
 	"wikibase-restoreold": "відновити",
 	"wikibase-restore-summary": "Відновлена версія $1 за допомогою [[Special:Contributions/$2|$2]]",
 	"wikibase-no-direct-editing": "У просторі назв «$1» вимкнено пряме редагування",
-	"wikibase-noentity": "Такої сутності не існує. Ви можете\n[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пошукати відповідні записи в журналах], щоб дізнатися, куди вона поділася.",
+	"wikibase-noentity": "Такої сутності не існує. Ви можете [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пошукати відповідні записи в журналах], щоб дізнатися, куди вона поділася.",
 	"wikibase-noentity-createone": "Ви також можете [[$1|створити нову]].",
 	"wikibase-special-mergeitems-error-prefix": "Елементи не можуть бути об'єднані. Виникла наступна помилка:",
 	"wikibase-item-summary-wbsetitem": "Створено новий елемент",

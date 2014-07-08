@@ -54,7 +54,7 @@
 	"wikibase-rc-hide-wikidata-show": "Mostrar",
 	"wikibase-rc-show-wikidata-pref": "Mostrar las ediciones de {{WBREPONAME}} en cambios recientes",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Editar {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Edición de {{WBREPONAME}}",
 	"wikibase-watchlist-show-changes-pref": "Mostrar las ediciones de {{WBREPONAME}} en tu lista de seguimiento",
 	"wikibase-error-serialize-error": "Error al serializar datos.",
 	"wikibase-error-invalid-entity-id": "El ID ingresado es desconocido para el sistema. Utilice un identificador de entidad válido.",

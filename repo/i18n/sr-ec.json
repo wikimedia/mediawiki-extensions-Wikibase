@@ -161,6 +161,7 @@
 	"wikibase-item-summary-wbeditentity-override": "Преклопљена ставка",
 	"wikibase-item-summary-wbsetreference": "Унета референца",
 	"wikibase-item-summary-wbsetreference-add": "Додата референца за тврдњу",
+	"wikibase-item-summary-wbsetreference-set": "Промењена референца за тврдњу:",
 	"wikibase-item-summary-wbsetlabel-add": "Додат [$2] назив",
 	"wikibase-item-summary-wbsetlabel-set": "Измењен [$2] назив",
 	"wikibase-item-summary-wbsetlabel-remove": "Уклоњен [$2] назив",
