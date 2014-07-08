@@ -259,7 +259,7 @@
 	function createEntityDom( entity, $claims, $claimsParent, repoApi ) {
 		// FIXME: Initializing entityview on $claims leads to the claim section inserted as
 		// child of $claims. It should be direct child of ".wb-entity".
-		var abstractedRepoApi = new wb.AbstractedRepoApi();
+		var abstractedRepoApi = new wb.AbstractedRepoApi( repoApi );
 		var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 		wb.compileEntityStoreFromMwConfig( entityStore );
 
