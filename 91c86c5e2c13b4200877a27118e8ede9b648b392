@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_bf903899",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-09T14:11:56Z",
+      "side": 1,
+      "message": "not just lua",
+      "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
