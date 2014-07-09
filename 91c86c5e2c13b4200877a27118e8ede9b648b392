@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_1f806cf8",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-09T14:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_7fdc104c",
+      "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_dfa2e4a3",
         "filename": "client/includes/scribunto/mw.wikibase.lua",
         "patchSetId": 2
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_3f8b2822",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-09T14:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_dfa2e4a3",
+      "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_df79c42b",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
@@ -83,6 +119,24 @@
       "writtenOn": "2014-07-09T14:31:07Z",
       "side": 1,
       "message": "a a?",
+      "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_dfbf84a6",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-09T14:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_df79c42b",
       "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
