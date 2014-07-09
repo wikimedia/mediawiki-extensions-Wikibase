@@ -3,11 +3,12 @@
 namespace Wikibase\IO;
 
 use Disposable;
-use ExceptionHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityIdPager;
+use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 
 /**
  * EntityIdReader reads entity IDs from a file, one per line.
@@ -42,7 +43,7 @@ class EntityIdReader implements EntityIdPager, Disposable {
 		$this->parser = $parser;
 		$this->entityType = $entityType;
 
-		$this->exceptionHandler = new \RethrowingExceptionHandler();
+		$this->exceptionHandler = new RethrowingExceptionHandler();
 	}
 
 	/**
