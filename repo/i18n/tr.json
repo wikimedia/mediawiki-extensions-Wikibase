@@ -4,7 +4,8 @@
 			"Emperyan",
 			"Incelemeelemani",
 			"Rapsar",
-			"Marmase"
+			"Marmase",
+			"Sayginer"
 		]
 	},
 	"wikibase-edit": "değiştir",
@@ -23,7 +24,9 @@
 	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, $3 kapsamında geri döndürülemez bir biçimde sağlamış olacaksınız.",
 	"special-itembytitle": "Başlığına göre öge",
 	"wikibase-itemdisambiguation-lookup-language": "Dil:",
+	"wikibase-newproperty-invalid-datatype": "Geçersiz veri türü belirtildi.",
 	"special-newitem": "Yeni bir öge oluştur",
 	"wikibase-newitem-summary": "Ögenin [[Special:ItemByTitle|halihazırda var olup olmadığından]] emin olun!<br />Oluşturulan her bir öge için birer [[Help:Label|etiket]] ve [[Help:Description|tanımlama]] da oluşturmanız gerekmektedir.",
-	"wikibase-newitem-fieldset": "Yeni bir öge oluştur"
+	"wikibase-newitem-fieldset": "Yeni bir öge oluştur",
+	"special-listdatatypes": "Kullanılabilen tüm veri türleri listesi"
 }
