@@ -61,8 +61,14 @@ function wikibase.setupInterface()
 	end
 
 	-- Get the mw.wikibase.entity object for the current page
-	wikibase.getEntityObject = function()
-		local id = getEntityIdForCurrentPage()
+	wikibase.getEntityObject = function( id )
+		if id ~= nil and type( id ) ~= 'string' then
+			error( 'Id must be either of type string or nil, ' .. type( id ) .. ' given' )
+		end
+
+		if id == nil then
+			id = getEntityIdForCurrentPage()
+		end
 
 		if id == nil then
 			return nil
