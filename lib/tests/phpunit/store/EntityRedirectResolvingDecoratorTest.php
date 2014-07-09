@@ -10,6 +10,7 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\PropertyLabelResolver;
 
 /**
  * @covers Wikibase\Lib\Store\EntityRedirectResolver
@@ -61,27 +62,6 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 		$lookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( array( $this, 'getEntityRevision' ) ) );
-
-		return $lookup;
-	}
-
-	/**
-	 * Constructs a mock EntityId we will (ab)use to test calling methods that throw exception.
-	 *
-	 * @return EntityId
-	 */
-	private function getFakeEntityId() {
-		$lookup = $this->getMockBuilder( 'Wikibase\DataModel\Entity\EntityId' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$lookup->expects( $this->any() )
-			->method( 'getEntityType' )
-			->will( $this->throwException( new UnresolvedRedirectException( new ItemId( 'Q33' ) ) ) );
-
-		$lookup->expects( $this->any() )
-			->method( 'getSerialization' )
-			->will( $this->throwException( new RuntimeException() ) );
 
 		return $lookup;
 	}
@@ -142,23 +122,29 @@ class EntityRedirectResolvingDecoratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNoEntityId() {
-		$target = $this->getFakeEntityId();
+		$target = $this->getMock( 'Wikibase\PropertyLabelResolver' );
+		$target->expects( $this->once() )
+			->method( 'getPropertyIdsForLabels' )
+			->will( $this->throwException( new UnresolvedRedirectException( new ItemId( 'Q12' ) ) ) );
 
 		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
 
-		/* @var EntityId $decorator */
+		/* @var PropertyLabelResolver $decorator */
 		$decorator = new EntityRedirectResolvingDecorator( $target );
-		$decorator->getEntityType();
+		$decorator->getPropertyIdsForLabels( array( 'foo' ) );
 	}
 
 	public function testError() {
-		$target = $this->getFakeEntityId();
+		$target = $this->getMock( 'Wikibase\PropertyLabelResolver' );
+		$target->expects( $this->once() )
+			->method( 'getPropertyIdsForLabels' )
+			->will( $this->throwException( new RuntimeException( 'Boo!' ) ) );
 
 		$this->setExpectedException( 'RuntimeException' );
 
-		/* @var EntityId $decorator */
+		/* @var PropertyLabelResolver $decorator */
 		$decorator = new EntityRedirectResolvingDecorator( $target );
-		$decorator->getSerialization();
+		$decorator->getPropertyIdsForLabels( array( 'foo' ) );
 	}
 
 
