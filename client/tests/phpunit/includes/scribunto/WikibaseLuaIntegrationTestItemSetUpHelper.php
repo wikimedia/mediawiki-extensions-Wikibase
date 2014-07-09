@@ -8,6 +8,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
@@ -77,7 +78,10 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 			'en' => 'Test all the code paths'
 		);
 
-		$this->createTestItem( $labels, array( $statement1, $statement2 ), $siteLinks );
+		$this->createTestItem( new ItemId( 'Q32487' ), $labels, array( $statement1, $statement2 ), $siteLinks );
+
+		// Create another test item to test arbitrary access
+		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ) );
 	}
 
 	/**
@@ -96,14 +100,16 @@ class WikibaseLuaIntegrationTestItemSetUpHelper {
 	}
 
 	/**
+	 * @param ItemId $id
 	 * @param string[] $labels
 	 * @param Claim[]|null $claims
 	 * @param SiteLink[]|null $siteLinks
 	 *
 	 * @return Item
 	 */
-	protected function createTestItem( array $labels, array $claims = null, array $siteLinks = null ) {
+	protected function createTestItem( ItemId $id, array $labels, array $claims = null, array $siteLinks = null ) {
 		$item = Item::newEmpty();
+		$item->setId( $id );
 		$item->setLabels( $labels );
 
 		if ( is_array( $siteLinks ) ) {
