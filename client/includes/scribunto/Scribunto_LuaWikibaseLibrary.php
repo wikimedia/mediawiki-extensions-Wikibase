@@ -39,6 +39,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getStore()->getSiteLinkTable(),
 			$wikibaseClient->getLanguageFallbackChainFactory(),
 			$language,
+			$wikibaseClient->getSettings(),
 			Utils::getLanguageCodes(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
@@ -54,6 +55,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function register() {
 		$lib = array(
 			'getEntity' => array( $this, 'getEntity' ),
+			'getSetting' => array( $this, 'getSetting' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
 			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' )
 		);
@@ -113,4 +115,17 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		return array( $this->wbLibrary->getGlobalSiteId() );
 	}
 
+	/**
+	 * Wrapper for getSetting in Scribunto_LuaWikibaseLibraryImplementation
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $setting
+	 *
+	 * @return mixed
+	 */
+	public function getSetting( $setting ) {
+		$this->checkType( 'setting', 1, $setting, 'string' );
+		return array( $this->wbLibrary->getSetting( $setting ) );
+	}
 }
