@@ -52,6 +52,23 @@
       "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_dfa2e4a3",
+        "filename": "client/includes/scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-09T14:29:35Z",
+      "side": 1,
+      "message": "arbitrary",
+      "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
