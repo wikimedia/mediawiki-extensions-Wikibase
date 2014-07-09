@@ -21,6 +21,7 @@ use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StorageException;
 use Wikibase\Lib\Store\EntityStore;
@@ -183,6 +184,9 @@ abstract class ApiWikibase extends ApiBase {
 			array( 'code' => 'badtoken', 'info' => $this->msg( 'wikibase-api-badtoken' )->text()  ),
 			array( 'code' => 'nosuchrevid', 'info' => $this->msg( 'wikibase-api-nosuchrevid' )->text()  ),
 			array( 'code' => 'cant-load-entity-content', 'info' => $this->msg( 'wikibase-api-cant-load-entity-content' )->text()  ),
+
+			// @todo: use literal strings above as well, see bug 67732
+			array( 'code' => 'unresolved-redirect', 'info' => 'Unresolved redirect' ),
 		);
 	}
 
@@ -302,16 +306,16 @@ abstract class ApiWikibase extends ApiBase {
 			$revision = $this->entityLookup->getEntityRevision( $entityId, $revId );
 
 			if ( !$revision ) {
-				$this->errorReporter->dieError(
-					"Can't access item content of "
-						. $entityId->getSerialization()
-						. ", revision may have been deleted.",
+				$this->dieError(
+					'Entity ' . $entityId->getSerialization() . ' not found',
 					'cant-load-entity-content' );
 			}
 
 			return $revision;
+		} catch ( UnresolvedRedirectException $ex ) {
+			$this->dieException( $ex, 'unresolved-redirect' );
 		} catch ( StorageException $ex ) {
-			$this->errorReporter->dieError( "Revision $revId not found: " . $ex->getMessage(), 'nosuchrevid' );
+			$this->dieException( $ex, 'nosuchrevid' );
 		}
 
 		throw new LogicException( 'ApiErrorReporter::dieError did not throw a UsageException' );
