@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_3c47b324",
+        "filename": "lib/includes/store/sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-09T16:21:57Z",
+      "side": 1,
+      "message": "The \"doesn\u0027t belong\" comment is now misplaced here.",
+      "revId": "8ddba3d6fe6853994afdbc63add381531a6be07e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
