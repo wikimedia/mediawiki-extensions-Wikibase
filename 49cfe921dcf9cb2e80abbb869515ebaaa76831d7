@@ -16,6 +16,24 @@
       "revId": "49cfe921dcf9cb2e80abbb869515ebaaa76831d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ff548058",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T14:50:02Z",
+      "side": 1,
+      "message": "Not sure it will go away. Bit may just be true per default then.",
+      "parentUuid": "8e28a382_5f8714dd",
+      "revId": "49cfe921dcf9cb2e80abbb869515ebaaa76831d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
