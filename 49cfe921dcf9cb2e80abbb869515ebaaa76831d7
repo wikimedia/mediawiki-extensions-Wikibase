@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_5f8714dd",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1087
+      },
+      "writtenOn": "2014-07-09T14:46:49Z",
+      "side": 1,
+      "message": "Can you document that this setting will go away once we have usage tracking?",
+      "revId": "49cfe921dcf9cb2e80abbb869515ebaaa76831d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
