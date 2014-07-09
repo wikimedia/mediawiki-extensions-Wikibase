@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_5a48428c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "this message isn\u0027t even used by this patch. moving it to a different patch.",
+      "parentUuid": "8e28a382_a22f069c",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7d5ae3fa",
         "filename": "repo/i18n/en.json",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-08T18:46:15Z",
       "side": 1,
       "message": "Why? To do what? This is a really bad message in terms of UX.",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9a4eaa9a",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_7d5ae3fa",
       "revId": "f238446378b3757140ff6e3e02d6905676be944f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_ba816694",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_5d5f27e9",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_3d545bc9",
         "filename": "repo/i18n/en.json",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-07-08T18:46:15Z",
       "side": 1,
       "message": "To what does \"type\" refer? Entity type?",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_da8432a6",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_3d545bc9",
       "revId": "f238446378b3757140ff6e3e02d6905676be944f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_fa77eecd",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_fd6db397",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_dd6af77d",
         "filename": "repo/includes/Interactors/CreateRedirectException.php",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2014-07-08T18:46:15Z",
       "side": 1,
       "message": "Non-informative line, please remove or expand.\n\nMaybe add a @see to the UnresolvedRedirectException or StorageException class where the copy \u0026 paste parts are from. ;-)",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9ab8ea75",
+        "filename": "repo/includes/Interactors/CreateRedirectException.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_dd6af77d",
       "revId": "f238446378b3757140ff6e3e02d6905676be944f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_5ab28293",
+        "filename": "repo/includes/Interactors/CreateRedirectException.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "i can\u0027t think of a better term.",
+      "parentUuid": "8e28a382_fdea53d6",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_bd516b67",
         "filename": "repo/includes/Interactors/CreateRedirectInteractor.php",
         "patchSetId": 6
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_5a95e234",
+        "filename": "repo/includes/Interactors/CreateRedirectInteractor.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "These codes are used here, not in the API module. This class has knowledge about them, the API module shouldn\u0027t need that knowledge.",
+      "parentUuid": "8e28a382_bd516b67",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7dc3030b",
         "filename": "repo/includes/api/CreateRedirectModule.php",
         "patchSetId": 6
@@ -149,6 +293,24 @@
       "writtenOn": "2014-07-08T18:46:15Z",
       "side": 1,
       "message": "Maybe the interface, but this implementation is new and it\u0027s documentation isn\u0027t supposed to document the interface. Please remove and consider a @see.",
+      "revId": "f238446378b3757140ff6e3e02d6905676be944f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3a7696d6",
+        "filename": "repo/includes/api/CreateRedirectModule.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-09T15:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_7dc3030b",
       "revId": "f238446378b3757140ff6e3e02d6905676be944f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
