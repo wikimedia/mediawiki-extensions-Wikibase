@@ -5,7 +5,13 @@ In <code>mw.wikibase</code> general Lua functionality for working with Wikibase 
 
 === mw.wikibase.getEntityObject ===
 <code>wikibase.getEntityObject()</code><br>
-Gets a [[#mw.wikibase.entity|mw.wikibase.entity]] table with data of the Wikibase item connected to the current page.
+<code>wikibase.getEntityObject( id )</code><br>
+Gets a [[#mw.wikibase.entity|mw.wikibase.entity]] table with data of the Wikibase item requested by id. If no id was given, the item connected to the current page will be returned.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getEntityObject( 'Q42' ) -- Returns a [[#mw.wikibase.entity|mw.wikibase.entity]] table for the Item with the id Q42
+</source>
 
 === mw.wikibase.label ===
 <code>wikibase.label( id )</code><br>
