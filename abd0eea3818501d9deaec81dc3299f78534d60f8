@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a464ab46",
+        "filename": "lib/tests/phpunit/store/EntityRedirectResolvingDecoratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-09T13:20:49Z",
+      "side": 1,
+      "message": "This test is worthless now. What it is testing is not part of the tested code any more but part of the mock right above this line.\n\nShort: You are testing the mock.",
+      "revId": "abd0eea3818501d9deaec81dc3299f78534d60f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4463c73b",
+        "filename": "lib/tests/phpunit/store/EntityRedirectResolvingDecoratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-09T13:20:49Z",
+      "side": 1,
+      "message": "Same problem. This test is only testing the mock.",
+      "revId": "abd0eea3818501d9deaec81dc3299f78534d60f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
