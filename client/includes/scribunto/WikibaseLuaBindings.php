@@ -11,6 +11,7 @@ use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\SettingsArray;
 
 /**
  * Actual implementations of the functions to access Wikibase through the Scribunto extension
@@ -49,6 +50,11 @@ class WikibaseLuaBindings {
 	private $language;
 
 	/**
+	 * @var SettingsArray
+	 */
+	private $settings;
+
+	/**
 	 * @var string[]
 	 */
 	private $languageCodes;
@@ -73,6 +79,7 @@ class WikibaseLuaBindings {
 		SiteLinkLookup $siteLinkTable,
 		LanguageFallbackChainFactory $fallbackChainFactory,
 		Language $language,
+		SettingsArray $settings,
 		$languageCodes,
 		$siteId
 	) {
@@ -81,6 +88,7 @@ class WikibaseLuaBindings {
 		$this->siteLinkTable = $siteLinkTable;
 		$this->fallbackChainFactory = $fallbackChainFactory;
 		$this->language = $language;
+		$this->settings = $settings;
 		$this->languageCodes = $languageCodes;
 		$this->siteId = $siteId;
 	}
@@ -208,4 +216,12 @@ class WikibaseLuaBindings {
 		return $this->siteId;
 	}
 
+	/**
+	 * @param string $setting
+	 *
+	 * @return mixed
+	 */
+	public function getSetting( $setting ) {
+		return $this->settings->getSetting( $setting );
+	}
 }

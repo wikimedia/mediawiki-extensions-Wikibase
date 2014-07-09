@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -54,6 +55,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			$siteLinkTable,
 			new LanguageFallbackChainFactory(),
 			$language, // language
+			new SettingsArray(),
 			array( 'de', 'en', 'es', 'ja' ),
 			"enwiki" // siteId
 		);
