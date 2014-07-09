@@ -16,6 +16,24 @@
       "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3f10c803",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-09T14:21:06Z",
+      "side": 1,
+      "message": "mh? What else?",
+      "parentUuid": "8e28a382_bf903899",
+      "revId": "91c86c5e2c13b4200877a27118e8ede9b648b392",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
