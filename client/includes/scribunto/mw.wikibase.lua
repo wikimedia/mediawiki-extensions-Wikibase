@@ -15,21 +15,43 @@ function wikibase.setupInterface()
 	local php = mw_interface
 	mw_interface = nil
 
-	-- Caching variable for the wikibase.entity object belonging to the current page
-	local entity = false
+	-- Caching variable for the wikibase.entity objects
+	local entities = {}
+	-- Caching variable for the entity id string belonging to the current page (nil if page is not linked to an entity)
+	local pageEntityId = false
 
+	-- Get the mw.wikibase.entity object for a given id. Cached.
 	local getEntityObject = function( id )
-		local entity = php.getEntity( id, false )
-		if type( entity ) ~= 'table' then
-			return nil
+		if entities[ id ] == nil then
+			local entity = php.getEntity( id, false )
+
+			if type( entity ) ~= 'table' then
+				entities[ id ] = false
+				return nil
+			end
+
+			entities[ id ] = wikibase.entity.create( entity )
 		end
 
-		return wikibase.entity.create( entity )
+		if type( entities[ id ] ) == 'table' then
+			return entities[ id ]
+		else
+			return nil
+		end
+	end
+
+	-- Get the entity id for the current page. Cached
+	local getEntityIdForCurrentPage = function()
+		if pageEntityId == false then
+			pageEntityId = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+		end
+
+		return pageEntityId
 	end
 
 	-- @DEPRECATED, uses a legacy plain Lua table holding the entity
 	wikibase.getEntity = function()
-		local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+		local id = getEntityIdForCurrentPage()
 
 		if id == nil then
 			return nil
@@ -40,19 +62,13 @@ function wikibase.setupInterface()
 
 	-- Get the mw.wikibase.entity object for the current page
 	wikibase.getEntityObject = function()
-		if entity ~= false then
-			return entity
-		end
-
-		local id = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+		local id = getEntityIdForCurrentPage()
 
 		if id == nil then
-			entity = nil
+			return nil
 		else
-			entity = getEntityObject( id )
+			return getEntityObject( id )
 		end
-
-		return entity
 	end
 
 	-- Get the label for the given entity id (in content language)
