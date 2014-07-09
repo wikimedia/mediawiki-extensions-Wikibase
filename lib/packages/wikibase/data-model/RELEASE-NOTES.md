@@ -45,6 +45,7 @@ Other breaking changes:
 `ItemObject`, `ReferenceObject`, `ClaimObject`, `StatementObject`
 * Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
 * `HashArray` and `SnakList` no longer take an optional parameter in `getHash`
+* Calling `clear` on an `Item` will now cause its statements to be removed
 
 #### Additions
 
