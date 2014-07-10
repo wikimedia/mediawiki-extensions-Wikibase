@@ -92,12 +92,24 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 			// Experimental setting of badges on the special page
 			// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
 			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+				$badgeMatcher = array(
+					'tag' => 'option',
+					'attributes' => array(
+						'value' => self::$badgeId
+					)
+				);
+
 				self::$matchers['badges'] = array(
-					'tag' => 'input',
+					'tag' => 'select',
 					'attributes' => array(
 						'id' => 'wb-setsitelink-badges',
 						'class' => 'wb-input',
-						'name' => 'badges',
+						'name' => 'badges[]',
+						'multiple' => ''
+					),
+					'children' => array(
+						'count' => 1,
+						'only' => $badgeMatcher
 					) );
 			}
 		}
@@ -130,7 +142,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '' );
 
 		foreach( $matchers as $key => $matcher ){
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
 		}
 	}
 
@@ -178,7 +190,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		// Experimental setting of badges on the special page
 		// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$matchers['badges']['attributes']['value'] = self::$badgeId;
+			$matchers['badges']['children']['only']['attributes']['selected'] = '';
 		}
 
 		foreach( $matchers as $key => $matcher ) {
