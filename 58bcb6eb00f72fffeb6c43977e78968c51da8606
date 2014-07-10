@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_66711d0b",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-10T09:16:15Z",
+      "side": 1,
+      "message": "please add a comment here that this will no longer be needed with DataModel 1.0",
+      "revId": "58bcb6eb00f72fffeb6c43977e78968c51da8606",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_466e212c",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-10T09:16:15Z",
+      "side": 1,
+      "message": "remove all the things :D",
+      "revId": "58bcb6eb00f72fffeb6c43977e78968c51da8606",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
