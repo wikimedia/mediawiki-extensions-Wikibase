@@ -157,10 +157,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'json',
-				'user.tokens',
-				'mediawiki.api',
 				'mediawiki',
-				'mw.config.values.wbRepo',
 				'wikibase',
 			)
 		),
