@@ -62,6 +62,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	protected $rightsText;
 
 	/**
+	 * @var array
+	 */
+	protected $badgeItems;
+
+	/**
 	 * @var SiteLinkChangeOpFactory
 	 */
 	protected $siteLinkChangeOpFactory;
@@ -72,13 +77,15 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	public function __construct() {
 		parent::__construct( 'SetSiteLink' );
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		$settings = $repo->getSettings();
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
+		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 
-		$changeOpFactoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+		$this->siteLinkChangeOpFactory = $repo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 	}
 
 	/**
@@ -116,15 +123,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->page = $request->getVal( 'page' );
 
 		// badges
-		$badges = $request->getVal( 'badges', '' );
-
-		if ( $badges === '' ) {
-			$badges = null;
-		}
-
-		if ( $badges !== null ) {
-			$this->badges = explode( '|', $badges );
-		}
+		$this->badges = $request->getArray( 'badges', array() );
 	}
 
 	/**
@@ -170,7 +169,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		}
 
 		if ( !$status->isGood() ) {
-			$this->showErrorHTML( $status->getHTML() );
+			$this->showErrorHTML( $status->getMessage()->parse() );
 			return false;
 		}
 
@@ -216,7 +215,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		if ( $this->page === null ) {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
-		if ( $this->badges === null ) {
+		if ( empty( $this->badges ) ) {
 			$this->badges = $this->site === null ? array() : $this->getBadges( $entity, $this->site );
 		}
 		$pageinput = Html::input(
@@ -234,7 +233,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
 		// @todo when removing from experimental update i18n wikibase-setsitelink-intro
 		//	   @see https://gerrit.wikimedia.org/r/#/c/94939/13/repo/Wikibase.i18n.php
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES && !empty( $this->badgeItems ) ) {
 			$pageinput .= Html::element( 'br' )
 			. Html::element(
 				'label',
@@ -244,15 +243,17 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				),
 				$this->msg( 'wikibase-setsitelink-badges' )->text()
 			)
-			. Html::input(
-				'badges',
-				implode( '|', $this->badges ),
-				'text',
+			. Html::openElement(
+				'select',
 				array(
+					'name' => 'badges[]',
 					'class' => 'wb-input',
-					'id' => 'wb-setsitelink-badges'
+					'id' => 'wb-setsitelink-badges',
+					'multiple' => true
 				)
-			);
+			)
+			. $this->getBadgesOptionsHtml()
+			. Html::closeElement( 'select' );
 		}
 
 		$site = $this->siteStore->getSite( $this->site );
@@ -307,6 +308,30 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			)
 			. $pageinput;
 		}
+	}
+
+	/**
+	 * Returns the HTML containing an option tag for each badge.
+	 *
+	 * @return string
+	 */
+	private function getBadgesOptionsHtml() {
+		$options = '';
+
+		foreach ( $this->badgeItems as $badgeId => $value ) {
+			$attrs = array( 'value' => $badgeId );
+			if ( in_array( $badgeId, $this->badges ) ) {
+				$attrs['selected'] = true;
+			}
+
+			$options .= Html::element(
+				'option',
+				$attrs,
+				$badgeId // @todo use the label here when we have a nice lookup
+			);
+		}
+
+		return $options;
 	}
 
 	/**
@@ -393,10 +418,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				return false;
 			}
 
-			$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()
-					->getSetting( 'badgeItems' );
-
-			if ( !array_key_exists( $badgeId->getPrefixedId(), $badgeItems ) ) {
+			if ( !array_key_exists( $badgeId->getPrefixedId(), $this->badgeItems ) ) {
 				$status->fatal( 'wikibase-setsitelink-not-badge', $badgeId->getPrefixedId() );
 				return false;
 			}
@@ -454,18 +476,13 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			}
 		}
 
-		if ( $badges !== null ) {
-			$badges = $this->parseBadges( $badges, $status );
-		} else {
-			$badges = array();
-		}
+		$badges = $this->parseBadges( $badges, $status );
 
 		if ( !$status->isGood() ) {
 			return $status;
 		}
 
 		$changeOp = $this->siteLinkChangeOpFactory->newSetSiteLinkOp( $siteId, $pageName, $badges );
-
 		$this->applyChangeOp( $changeOp, $item, $summary );
 
 		return $status;
