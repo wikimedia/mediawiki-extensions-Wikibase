@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_793e6228",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-10T11:21:38Z",
+      "side": 1,
+      "message": "if you want to fix, looks like this is indented 1 too many tabs\n\ni also don\u0027t see the point of the comments, even though I see pointless comments above for other test cases.",
+      "revId": "5632a48a760f282f87192ceb9bb4b4b6a649d2cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_194d1ee1",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-10T11:21:38Z",
+      "side": 1,
+      "message": "the api examples use \u0027clear \u003d\u003e true\u0027 although I think users can put anything there, and think I\u0027ve seen bot\u003d1 so users might put 1.\n\napi.php?action\u003dwbeditentity\u0026clear\u003dtrue\u0026id\u003dQ42\u0026data\u003d{}\n\nmaybe add another test case?",
+      "revId": "5632a48a760f282f87192ceb9bb4b4b6a649d2cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
