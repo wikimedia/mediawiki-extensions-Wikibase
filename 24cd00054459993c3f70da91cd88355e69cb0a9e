@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b9916a54",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T10:52:23Z",
+      "side": 1,
+      "message": "Ok, thanks for the explanation.",
+      "parentUuid": "8e28a382_59472623",
+      "revId": "24cd00054459993c3f70da91cd88355e69cb0a9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d922f6a1",
         "filename": "lib/resources/wikibase.ValueViewBuilder.js",
         "patchSetId": 6
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "It\u0027s new and sorted alphabetically. We could do it differently, I don\u0027t care too much.",
       "parentUuid": "8e28a382_d922f6a1",
+      "revId": "24cd00054459993c3f70da91cd88355e69cb0a9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d9a556b3",
+        "filename": "lib/resources/wikibase.ValueViewBuilder.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T10:52:23Z",
+      "side": 1,
+      "message": "There are three \"store\" parameters. I find it much more intuitive to keep them together.",
+      "parentUuid": "8e28a382_19519edd",
       "revId": "24cd00054459993c3f70da91cd88355e69cb0a9e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
