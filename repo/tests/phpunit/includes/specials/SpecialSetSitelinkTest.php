@@ -92,12 +92,24 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 			// Experimental setting of badges on the special page
 			// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
 			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+				$badgeMatcher = array(
+					'tag' => 'option',
+					'attributes' => array(
+						'value' => self::$itemId
+					)
+				);
+
 				self::$matchers['badges'] = array(
-					'tag' => 'input',
+					'tag' => 'select',
 					'attributes' => array(
 						'id' => 'wb-setsitelink-badges',
 						'class' => 'wb-input',
-						'name' => 'badges',
+						'name' => 'badges[]',
+						'multiple' => true
+					),
+					'children' => array(
+						'count' => 1,
+						'only' => $badgeMatcher
 					) );
 			}
 		}
