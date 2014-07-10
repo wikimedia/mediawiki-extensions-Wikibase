@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_dcd78427",
+        "filename": "lib/resources/wikibase.ValueViewBuilder.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-10T12:37:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_d9a556b3",
+      "revId": "24cd00054459993c3f70da91cd88355e69cb0a9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_79fc22d6",
         "filename": "lib/resources/wikibase.ValueViewBuilder.js",
         "patchSetId": 6
