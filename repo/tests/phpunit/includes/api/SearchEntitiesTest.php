@@ -58,6 +58,19 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
 	}
 
+	public function testSearchExactMatch() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => EntityTestHelper::getId( 'Berlin' ),
+			'language' => 'en'
+		);
+
+		$expected = array( 'handle' => 'Berlin' );
+
+		list( $result,, ) = $this->doApiRequest( $params );
+		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
+	}
+
 	private function assertResultLooksGood( $result ) {
 		$this->assertResultSuccess( $result );
 		$this->assertArrayHasKey( 'searchinfo', $result );
