@@ -82,13 +82,13 @@ abstract class EntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 				new ItemId( 'q42' ), 12, true,
 			),
 			array( // #3: bad revision
-				new ItemId( 'q42' ), 600000, false, 'Wikibase\StorageException',
+				new ItemId( 'q42' ), 600000, false, 'Wikibase\Lib\Store\StorageException',
 			),
 			array( // #4: wrong type
 				new ItemId( 'q753' ), 0, false,
 			),
-			array( // #5: bad revision
-				new PropertyId( 'p753' ), 23, false, 'Wikibase\StorageException',
+			array( // #5: mismatching revision
+				new PropertyId( 'p753' ), 11, false, 'Wikibase\Lib\Store\StorageException',
 			),
 			array( // #6: some revision
 				new PropertyId( 'p753' ), 0, true,
