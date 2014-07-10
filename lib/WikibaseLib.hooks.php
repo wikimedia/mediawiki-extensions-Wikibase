@@ -116,11 +116,13 @@ final class LibHooks {
 				'tests/qunit/jquery.wikibase/toolbar/toolbareditgroup.tests.js',
 			),
 			'dependencies' => array(
+				'mediawiki.api',
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
 				'wikibase.RepoApi',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel', // For RepoApi.tests
+				'wikibase.RepoApi',
 				'wikibase.store.FetchedContent',
 				'wikibase.templates',
 				'wikibase.utilities',
