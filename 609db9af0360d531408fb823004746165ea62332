@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_268f95d3",
+        "filename": "lib/resources/api/resources.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T09:40:45Z",
+      "side": 1,
+      "message": "You are introducing a module with two underscores? What does this mean? I can\u0027t find any existing code that does this or uses the name \"namespace.js\". How are all the other namespaces introduced? Why not stick to the pattern they use?",
+      "revId": "609db9af0360d531408fb823004746165ea62332",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
