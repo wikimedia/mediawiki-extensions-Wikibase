@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_fc6480b0",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-07-10T12:35:34Z",
+      "side": 1,
+      "message": "I agree that this needs to be fixed. However, let\u0027s create another patch to fix it as it is not related to what this patch aims to fix.",
+      "parentUuid": "8e28a382_793e6228",
+      "revId": "5632a48a760f282f87192ceb9bb4b4b6a649d2cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_194d1ee1",
         "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-10T11:21:38Z",
       "side": 1,
       "message": "the api examples use \u0027clear \u003d\u003e true\u0027 although I think users can put anything there, and think I\u0027ve seen bot\u003d1 so users might put 1.\n\napi.php?action\u003dwbeditentity\u0026clear\u003dtrue\u0026id\u003dQ42\u0026data\u003d{}\n\nmaybe add another test case?",
+      "revId": "5632a48a760f282f87192ceb9bb4b4b6a649d2cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bc06f8cf",
+        "filename": "repo/tests/phpunit/includes/api/EditEntityTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-07-10T12:35:34Z",
+      "side": 1,
+      "message": "Ok, I will add another testcase.",
+      "parentUuid": "8e28a382_194d1ee1",
       "revId": "5632a48a760f282f87192ceb9bb4b4b6a649d2cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
