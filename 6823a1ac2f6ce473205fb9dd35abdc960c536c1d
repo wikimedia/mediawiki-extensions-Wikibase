@@ -51,6 +51,24 @@
       "revId": "6823a1ac2f6ce473205fb9dd35abdc960c536c1d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1752856a",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApiError.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T14:05:49Z",
+      "side": 1,
+      "message": "This is basically a check for if ( messages.length \u003e 1 ). But since this is not guaranteed to be an array (it was and still is an { \u00270\u0027: ..., \u00271\u0027: ... } object in some cases) I can not use .length. This is a simple workaround that works in all cases (assuming that no numbers are missing, sure).",
+      "parentUuid": "8e28a382_37dea171",
+      "revId": "6823a1ac2f6ce473205fb9dd35abdc960c536c1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
