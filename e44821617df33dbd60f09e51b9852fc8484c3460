@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a81b4ed3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-07-10T17:57:45Z",
+      "side": 1,
+      "message": "We usually write \"cannot\" in MediaWiki strings.",
+      "revId": "e44821617df33dbd60f09e51b9852fc8484c3460",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
