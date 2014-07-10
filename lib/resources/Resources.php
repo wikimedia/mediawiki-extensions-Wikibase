@@ -570,7 +570,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.snakview',
 				'jquery.wikibase.snaklistview',
-				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel',
 				'jquery.wikibase.toolbarcontroller',
 			),
@@ -589,7 +588,6 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
-				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel'
 			)
 		),
@@ -611,7 +609,6 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.toolbarcontroller',
-				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel',
 				'wikibase.utilities',
 			),
@@ -637,7 +634,6 @@ return call_user_func( function() {
 				'jquery.wikibase.statementview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase',
-				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel',
 				'wikibase.RepoApiError',
 				'wikibase.templates',
@@ -661,7 +657,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase',
 				'wikibase.datamodel',
-				'wikibase.AbstractedRepoApi',
 			),
 		),
 
