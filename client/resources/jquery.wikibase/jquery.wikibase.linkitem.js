@@ -352,7 +352,7 @@ $.widget( 'wikibase.linkitem', {
 		this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
 		this._pageConnector = new wb.PageConnector(
-			new wb.RepoApi(),
+			new wb.RepoApi( this._mwApiForRepo ),
 			this.options.globalSiteId,
 			this.options.pageTitle,
 			this.targetSite,
