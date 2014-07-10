@@ -121,7 +121,6 @@ final class LibHooks {
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
 				'wikibase.AbstractedRepoApi',
-				'wikibase.parsers',
 				'wikibase.store.FetchedContent',
 				'wikibase.utilities',
 				'wikibase.utilities.ClaimGuidGenerator',
