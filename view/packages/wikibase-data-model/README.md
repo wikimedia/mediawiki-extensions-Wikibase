@@ -6,7 +6,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
-### 0.3.0 (???)
+### 0.3.0 (2014-07-10)
 
 * Remove methods isSameAs and equals from wikibase.Entity
 * Move all classes from wikibase to wikibase.datamodel, e. g.
