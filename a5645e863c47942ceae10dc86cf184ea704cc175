@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_fc76c038",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T12:51:35Z",
+      "side": 1,
+      "message": "If you really know this is dead code (I checked and yes, it is), why not just remove it? Suggestion:\n\n$( \u0027.wb-property-container:has( .wb-property-container-key[title\u003ddescription] )\u0027 ).each( function() {\n\tnew wb.ui.DescriptionEditTool( this );\n} );\n\nOr even better:\n\n$( \u0027.wb-property-container:has( \u003e .wb-property-container-key[title\u003ddescription] )\u0027 ).each( function() {\n\tnew wb.ui.DescriptionEditTool( this );\n} );\n\n(I wonder why my PHPStorm complaints about this, it works.)",
+      "revId": "a5645e863c47942ceae10dc86cf184ea704cc175",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
