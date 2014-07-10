@@ -32,7 +32,13 @@
 		// adjustments are necessary.
 		mw.hook( 'wikibase.domready' ).fire();
 
-		var repoApi = new wb.RepoApi();
+		var mwApi = new mw.Api();
+		var repoConfig = mw.config.get( 'wbRepo' );
+		var repoApi = new wb.RepoApi(
+			mwApi,
+			repoConfig.url + repoConfig.scriptPath + '/api.php',
+			mw.user.tokens.get( 'editToken' )
+		);
 
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		var $firstHeading = $( '.wb-firstHeading' );
@@ -261,13 +267,12 @@
 					if ( mw.user.isAnon() ) {
 						$.cookie( cookieKey, copyRightVersion, { 'expires': 365 * 3, 'path': '/' } );
 					} else {
-						var api = new mw.Api();
-						api.get( {
+						mwApi.get( {
 							'action': 'tokens',
 							'type': 'options'
 						}, function( data ) {
 							if ( data.tokens && data.tokens.optionstoken ) {
-								api.post( {
+								mwApi.post( {
 									'action': 'options',
 									'token': data.tokens.optionstoken,
 									'optionname': optionsKey,
@@ -308,9 +313,8 @@
 			// Note: The exposed function fails for empty jQuery collections
 			if ( $link.length ) {
 				updateWatchLink( $link, 'watch', 'loading' );
-				var api = new mw.Api();
 				var pageid = mw.config.get( 'wgArticleId' );
-				api.get( {
+				mwApi.get( {
 					'action': 'query',
 					'prop': 'info',
 					'inprop': 'watched',
