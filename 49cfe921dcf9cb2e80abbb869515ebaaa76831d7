@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f92c9291",
+        "filename": "client/tests/phpunit/includes/scribunto/LuaWikibaseLibraryTests.lua",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-10T10:06:19Z",
+      "side": 1,
+      "message": "Done in follow-up",
+      "parentUuid": "8e28a382_dc778ffc",
+      "revId": "49cfe921dcf9cb2e80abbb869515ebaaa76831d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_bc64c346",
         "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
         "patchSetId": 4
@@ -83,6 +101,24 @@
       "writtenOn": "2014-07-09T17:07:54Z",
       "side": 1,
       "message": "should be a parameter to doMock()",
+      "revId": "49cfe921dcf9cb2e80abbb869515ebaaa76831d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f9437241",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-10T10:06:19Z",
+      "side": 1,
+      "message": "Done in follow-up (had to do it a little different though, per our conversation yesterday)",
+      "parentUuid": "8e28a382_bc64c346",
       "revId": "49cfe921dcf9cb2e80abbb869515ebaaa76831d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
