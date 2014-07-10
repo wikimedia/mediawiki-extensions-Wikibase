@@ -5,36 +5,36 @@
 ( function( wb, util, $ ) {
 'use strict';
 
-var PARENT = wb.Claim,
+var PARENT = wb.datamodel.Claim,
 	constructor = function( mainSnak, qualifiers, references, rank, guid ) {
 		PARENT.call( this, mainSnak, qualifiers, guid );
 		this.setReferences( references || [] );
-		this.setRank( rank === undefined ? wb.Statement.RANK.NORMAL : rank );
+		this.setRank( rank === undefined ? wb.datamodel.Statement.RANK.NORMAL : rank );
 	};
 
 /**
  * Represents a Wikibase Statement in JavaScript.
  * @constructor
- * @extends wb.Claim
+ * @extends wb.datamodel.Claim
  * @since 0.3
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
  *
- * @param {wb.Snak} mainSnak
- * @param {wb.Snak[]} [qualifiers]
- * @param {wb.Reference[]} [references] An array of references or an empty array
+ * @param {wb.datamodel.Snak} mainSnak
+ * @param {wb.datamodel.Snak[]} [qualifiers]
+ * @param {wb.datamodel.Reference[]} [references] An array of references or an empty array
  * @param {Number} [rank]
  * @param {String|null} [guid] The Global Unique Identifier of this Statement. Can be omitted or null
  *        if this is a new Statement, not yet stored in the database and associated with some entity.
  */
-var SELF = wb.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
+var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
 	/**
-	 * @type {wb.Reference[]}
+	 * @type {wb.datamodel.Reference[]}
 	 * @todo think about implementing a ReferenceList/ClaimList rather than having an Array here
 	 */
 	_references: null,
 
 	/**
-	 * @see wb.Statement.RANK
+	 * @see wb.datamodel.Statement.RANK
 	 * @type Number
 	 */
 	_rank: null,
@@ -43,7 +43,7 @@ var SELF = wb.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
 	 * Returns all of the statement's references.
 	 *
 	 * sufficient
-	 * @return {wb.Reference[]|null} An array of references or an empty array.
+	 * @return {wb.datamodel.Reference[]|null} An array of references or an empty array.
 	 */
 	getReferences: function() {
 		return this._references;
@@ -52,7 +52,7 @@ var SELF = wb.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
 	/**
 	 * Overwrites the current set of the statements references.
 	 *
-	 * @param {wb.Reference[]} references An array of references or an empty array.
+	 * @param {wb.datamodel.Reference[]} references An array of references or an empty array.
 	 */
 	setReferences: function( references ) {
 		if( !$.isArray( references ) ) {
@@ -64,7 +64,7 @@ var SELF = wb.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
 	/**
 	 * Returns the rank of the statement.
 	 *
-	 * @return {Number} one of the wb.Statement.RANK enum
+	 * @return {Number} one of the wb.datamodel.Statement.RANK enum
 	 */
 	getRank: function() {
 		return this._rank;
@@ -88,10 +88,10 @@ var SELF = wb.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
 
 	/**
 	 * Returns whether this statement is equal to another statement.
-	 * @see wb.Claim.equals
+	 * @see wb.datamodel.Claim.equals
 	 * @since 0.4
 	 *
-	 * @param {wb.Statement|*} other
+	 * @param {wb.datamodel.Statement|*} other
 	 * @return {boolean}
 	 */
 	equals: function( other ) {
@@ -124,7 +124,7 @@ var SELF = wb.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
 	 * Returns a JSON structure representing this statement.
 	 * @since 0.4
 	 *
-	 * TODO: implement this as a wb.serialization.Serializer
+	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *
 	 * @return {Object}
 	 */
@@ -164,7 +164,7 @@ SELF.RANK = {
 };
 
 /**
- * @see wb.Claim.TYPE
+ * @see wb.datamodel.Claim.TYPE
  */
 SELF.TYPE = 'statement';
 

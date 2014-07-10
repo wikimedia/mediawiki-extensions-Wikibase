@@ -12,7 +12,7 @@
 	 * @since 0.3
 	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#ReferenceRecords
 	 *
-	 * @param {wb.Snak[]|wb.Snak|wb.SnakList} [snaks]
+	 * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks]
 	 * @param {string} [hash] The hash of the Reference, required when API is used to change or
 	 *        remove a certain Reference. In the PHP object model, the hash of a Reference changes
 	 *        always when the Reference changes. In the JavaScript Reference object the hash will
@@ -21,7 +21,7 @@
 	 * TODO: get rid of 'hash' parameter and introduce a method to generate the hash, but make sure
 	 *       it will be the same as it would be for a Reference in PHP.
 	 */
-	var SELF = wb.Reference = function WbReference( snaks, hash ) {
+	var SELF = wb.datamodel.Reference = function WbReference( snaks, hash ) {
 		this.setSnaks( snaks );
 		this._hash = hash;
 	};
@@ -33,7 +33,7 @@
 		_hash: null,
 
 		/**
-		 * @type wb.SnakList
+		 * @type wb.datamodel.SnakList
 		 */
 		_snaks: null,
 
@@ -51,7 +51,7 @@
 		/**
 		 * Returns a list of the Snaks.
 		 *
-		 * @return wb.SnakList
+		 * @return wb.datamodel.SnakList
 		 */
 		getSnaks: function() {
 			return this._snaks;
@@ -60,17 +60,17 @@
 		/**
 		 * Overwrites the current set of snaks.
 		 *
-		 * @param {wb.Snak[]|wb.Snak|wb.SnakList} snaks
+		 * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} snaks
 		 */
 		setSnaks: function( snaks ) {
-			this._snaks = new wb.SnakList( snaks );
+			this._snaks = new wb.datamodel.SnakList( snaks );
 		},
 
 		/**
 		 * Will return whether a given reference equals this one. This will compare the reference's
 		 * snaks only and not involve checking the hash.
 		 *
-		 * @param {wb.Reference} reference
+		 * @param {wb.datamodel.Reference} reference
 		 * @return {boolean}
 		 */
 		equals: function( reference ) {
@@ -81,7 +81,7 @@
 		 * Returns a JSON structure representing this reference.
 		 * @since 0.4
 		 *
-		 * TODO: implement this as a wb.serialization.Serializer
+		 * TODO: implement this as a wb.datamodel.serialization.Serializer
 		 *
 		 * @return {Object}
 		 */
@@ -101,7 +101,7 @@
 
 	SELF.newFromJSON = function( json ) {
 		return new SELF(
-			wb.SnakList.newFromJSON( json.snaks, json['snaks-order'] ),
+			wb.datamodel.SnakList.newFromJSON( json.snaks, json['snaks-order'] ),
 			json.hash
 		);
 	};

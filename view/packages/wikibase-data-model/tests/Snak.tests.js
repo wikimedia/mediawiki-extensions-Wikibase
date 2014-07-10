@@ -14,22 +14,22 @@
 
 	QUnit.module( 'wikibase.datamodel.snak.js', QUnit.newMwEnvironment() );
 
-	QUnit.test( 'wb.Snak.prototype, its constructor and wb.Snak static functions', function( assert ) {
+	QUnit.test( 'wb.datamodel.Snak.prototype, its constructor and wb.datamodel.Snak static functions', function( assert ) {
 		var snakInfo = [
-			[ wb.PropertyNoValueSnak ],
-			[ wb.PropertySomeValueSnak ],
-			[ wb.PropertyValueSnak, [ '21', new dv.StringValue( 'test' ) ] ]
+			[ wb.datamodel.PropertyNoValueSnak ],
+			[ wb.datamodel.PropertySomeValueSnak ],
+			[ wb.datamodel.PropertyValueSnak, [ '21', new dv.StringValue( 'test' ) ] ]
 		];
-		var unequalSnak = new wb.PropertyValueSnak( '21', new dv.StringValue( 'not equal!' ) );
+		var unequalSnak = new wb.datamodel.PropertyValueSnak( '21', new dv.StringValue( 'not equal!' ) );
 
 		/**
 		 * Does test functions of the Snak prototype which turn the Snak into an Object representing
 		 * the Snak.
 		 *
-		 * @param {wb.Snak} snak
+		 * @param {wb.datamodel.Snak} snak
 		 * @param {String} methodLabel Objectification method name used in test messages
-		 * @param {String} toObjectFnName name of a function in wb.Snak.prototype
-		 * @param {String} fromObjectFnName name of a function in wb.Snak
+		 * @param {String} toObjectFnName name of a function in wb.datamodel.Snak.prototype
+		 * @param {String} fromObjectFnName name of a function in wb.datamodel.Snak
 		 */
 		var snakToObjectTest = function( snak, methodLabel, toObjectFnName, fromObjectFnName ) {
 			var objectifiedSnak = snak[ toObjectFnName ]();
@@ -44,11 +44,11 @@
 				"In the " + methodLabel + ", the 'snaktype' field is set correctly"
 			);
 
-			var deobjectifiedSnak = wb.Snak[ fromObjectFnName ]( objectifiedSnak );
+			var deobjectifiedSnak = wb.datamodel.Snak[ fromObjectFnName ]( objectifiedSnak );
 
 			assert.ok(
-				deobjectifiedSnak instanceof wb.Snak,
-				'Constructing new Snak from ' + methodLabel + ' via wb.Snak.' + fromObjectFnName
+				deobjectifiedSnak instanceof wb.datamodel.Snak,
+				'Constructing new Snak from ' + methodLabel + ' via wb.datamodel.Snak.' + fromObjectFnName
 					+ '() successful'
 			);
 
@@ -64,7 +64,7 @@
 				snak = new snakConstructor( snakParams[0], snakParams[1] );
 
 			assert.ok(
-				snak instanceof wb.Snak,
+				snak instanceof wb.datamodel.Snak,
 				'New snak is an instance of wikibase.Snak'
 			);
 

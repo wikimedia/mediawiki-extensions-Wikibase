@@ -10,11 +10,11 @@
 
 	QUnit.module( 'wikibase.datamodel.Item', QUnit.newWbEnvironment() );
 
-	var entityTestDefinition = $.extend( {}, wb.tests.testEntity.basicTestDefinition, {
-		entityConstructor: wb.Item
+	var entityTestDefinition = $.extend( {}, wb.datamodel.tests.testEntity.basicTestDefinition, {
+		entityConstructor: wb.datamodel.Item
 	} );
 
-	wb.tests.testEntity( entityTestDefinition );
+	wb.datamodel.tests.testEntity( entityTestDefinition );
 
 	// TODO: test site-links stuff after it got implemented
 

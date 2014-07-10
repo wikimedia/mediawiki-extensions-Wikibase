@@ -5,7 +5,7 @@
 ( function( wb, dv, util ) {
 'use strict';
 
-var PARENT = wb.Snak,
+var PARENT = wb.datamodel.Snak,
 	constructor = function( propertyId, value ) {
 		if( !( value instanceof dv.DataValue ) ) {
 			throw new Error( 'The value has to be an instance of dataValues.DataValue' );
@@ -17,14 +17,14 @@ var PARENT = wb.Snak,
 /**
  * Represents a Wikibase PropertyValueSnak in JavaScript.
  * @constructor
- * @extends wb.Snak
+ * @extends wb.datamodel.Snak
  * @since 0.2
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#PropertyValueSnak
  *
  * @param {string} propertyId
  * @param {dv.DataValue} value
  */
-var SELF = wb.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak', PARENT, constructor, {
+var SELF = wb.datamodel.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak', PARENT, constructor, {
 	/**
 	 * @type dv.DataValue
 	 */
@@ -40,7 +40,7 @@ var SELF = wb.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak', PARENT, c
 	},
 
 	/**
-	 * @see wb.Snak.equals
+	 * @see wb.datamodel.Snak.equals
 	 */
 	equals: function( snak ) {
 		// Snaks are equal if basic stuff (id, type) are equal...
@@ -54,8 +54,8 @@ var SELF = wb.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak', PARENT, c
 	},
 
 	/**
-	 * @see wb.Snak.toJSON
-	 * TODO: implement this as a wb.serialization.Serializer
+	 * @see wb.datamodel.Snak.toJSON
+	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 */
 	toJSON: function() {
 		var json = this.toMap();
@@ -69,7 +69,7 @@ var SELF = wb.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak', PARENT, c
 	},
 
 	/**
-	 * @see wb.Snak.toMap
+	 * @see wb.datamodel.Snak.toMap
 	 */
 	toMap: function() {
 		var map = PARENT.prototype.toMap.call( this );
@@ -80,7 +80,7 @@ var SELF = wb.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak', PARENT, c
 } );
 
 /**
- * @see wb.Snak.TYPE
+ * @see wb.datamodel.Snak.TYPE
  */
 SELF.TYPE = 'value';
 

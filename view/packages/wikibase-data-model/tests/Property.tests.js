@@ -13,8 +13,8 @@
 	// TODO: not nice to just assume that 'commonsMedia' data type is globally registered,
 	//  should create own mock data type instead and not rely on global data type store...
 
-	var entityTestDefinition = $.extend( true, {}, wb.tests.testEntity.basicTestDefinition, {
-		entityConstructor: wb.Property,
+	var entityTestDefinition = $.extend( true, {}, wb.datamodel.tests.testEntity.basicTestDefinition, {
+		entityConstructor: wb.datamodel.Property,
 		testData: {
 			empty: {
 				datatype: 'commonsMedia'
@@ -28,6 +28,6 @@
 		}
 	} );
 
-	wb.tests.testEntity( entityTestDefinition );
+	wb.datamodel.tests.testEntity( entityTestDefinition );
 
 }( wikibase, jQuery, QUnit ) );

@@ -5,24 +5,24 @@
 ( function( wb, util ) {
 	'use strict';
 
-	var PARENT = wb.Entity;
+	var PARENT = wb.datamodel.Entity;
 
 	/**
 	 * Represents a Wikibase Item.
 	 *
 	 * @constructor
-	 * @extends wb.Entity
+	 * @extends wb.datamodel.Entity
 	 * @since 0.4
 	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Items
 	 *
 	 * @param {Object} data
 	 */
-	var SELF = wb.Item = util.inherit( 'WbItem', PARENT, {
+	var SELF = wb.datamodel.Item = util.inherit( 'WbItem', PARENT, {
 		// TODO: implement sitelinks related getter/setter
 	} );
 
 	/**
-	 * @see wb.Entity.TYPE
+	 * @see wb.datamodel.Entity.TYPE
 	 */
 	SELF.TYPE = 'item';
 

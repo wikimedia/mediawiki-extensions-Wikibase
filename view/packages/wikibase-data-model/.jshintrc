@@ -37,6 +37,7 @@
 		"valueParsers",
 		"time",
 		"util",
+		"wikibase",
 		// require.js globals:
 		"require",
 		"requirejs",

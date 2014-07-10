@@ -5,21 +5,21 @@
 ( function( wb, util ) {
 'use strict';
 
-var PARENT = wb.Snak;
+var PARENT = wb.datamodel.Snak;
 
 /**
  * Represents a Wikibase PropertyNoValueSnak in JavaScript.
  * @constructor
- * @extends wb.Snak
+ * @extends wb.datamodel.Snak
  * @since 0.2
  * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#PropertyNoValueSnak
  *
  * @param {Number} propertyId
  */
-var SELF = wb.PropertyNoValueSnak = util.inherit( 'WbPropertyNoValueSnak', PARENT, {} );
+var SELF = wb.datamodel.PropertyNoValueSnak = util.inherit( 'WbPropertyNoValueSnak', PARENT, {} );
 
 /**
- * @see wb.Snak.TYPE
+ * @see wb.datamodel.Snak.TYPE
  * @type String
  */
 SELF.TYPE = 'novalue';

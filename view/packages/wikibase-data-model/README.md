@@ -1,6 +1,6 @@
 # Wikibase DataModel JavaScript
 
-**Wikibase DataModel JavasSript** is the JavaScript implementation of the
+**Wikibase DataModel JavaScript** is the JavaScript implementation of the
 [Data Model](https://meta.wikimedia.org/wiki/Wikidata/Data_model)
 at the heart of the [Wikibase software](http://wikiba.se/).
 
@@ -9,6 +9,8 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 ### 0.3.0 (???)
 
 * Remove methods isSameAs and equals from wikibase.Entity
+* Move all classes from wikibase to wikibase.datamodel, e. g.
+	wikibase.Claim becomes wikibase.datamodel.Claim
 
 ### 0.2.0 (2014-06-26)
 

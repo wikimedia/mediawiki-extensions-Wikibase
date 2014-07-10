@@ -28,7 +28,7 @@
 		this._numericId = numericId;
 	};
 
-	wb.EntityId = util.inherit( 'WbEntityId', PARENT, constructor, {
+	wb.datamodel.EntityId = util.inherit( 'WbEntityId', PARENT, constructor, {
 
 		/**
 		 * @type String
@@ -109,7 +109,7 @@
 		 *
 		 * @since 0.4
 		 *
-		 * @return wb.EntityId
+		 * @return wb.datamodel.EntityId
 		 */
 		getValue: function() {
 			return this;
@@ -145,12 +145,12 @@
 /**
  * @see dv.DataValue.newFromJSON
  */
-wb.EntityId.newFromJSON = function( json ) {
-	return new wb.EntityId( json['entity-type'], json['numeric-id'] );
+wb.datamodel.EntityId.newFromJSON = function( json ) {
+	return new wb.datamodel.EntityId( json['entity-type'], json['numeric-id'] );
 };
 
-wb.EntityId.TYPE = 'wikibase-entityid';
+wb.datamodel.EntityId.TYPE = 'wikibase-entityid';
 
-dv.registerDataValue( wb.EntityId );
+dv.registerDataValue( wb.datamodel.EntityId );
 
 }( wikibase, dataValues, util ) );
