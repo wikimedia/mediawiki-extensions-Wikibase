@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_86a0893f",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T09:27:38Z",
+      "side": 1,
+      "message": "I really, really hope this options object is never cloned. Please make sure it is not. Before this patch it only contained scalar values. Which is not a problem to clone. Now it contains scary stuff.",
+      "revId": "56ce912ab27708f0d187e650bfa83ab6a3bc6949",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_06f5b94c",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T09:27:38Z",
+      "side": 1,
+      "message": "My first idea was: You removed all default values. This could either be a breaking change or it was dead code anyway.\n\nBut you just moved this to init.js. Ok.",
+      "revId": "56ce912ab27708f0d187e650bfa83ab6a3bc6949",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
