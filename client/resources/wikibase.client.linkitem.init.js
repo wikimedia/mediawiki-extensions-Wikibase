@@ -19,20 +19,38 @@
 
 		mw.loader.using( [
 				'jquery.wikibase.linkitem',
+				'mediawiki.api',
 				'mediawiki.Title',
+				'user.tokens',
 				'mw.config.values.wbRepo',
-				'wikibase.RepoApi',
+				'wikibase.RepoApi'
 			],
 			function() {
-				var wb = wikibase;
-
 				$spinner.remove();
 
-				var repoConfig = mw.config.get( 'wbRepo' );
+				var repoConfig = mw.config.get( 'wbRepo' ),
+					repoScriptUrl = repoConfig.url + repoConfig.scriptPath,
+					localScriptUrl = mw.config.get( 'wgServer' ) + mw.config.get( 'wgScriptPath' ),
+					repoIsLocal = repoScriptUrl === localScriptUrl,
+					originForCors = null;
+
+				if( !repoIsLocal ) {
+					originForCors = mw.config.get( 'wgServer' );
+					if ( originForCors.indexOf( '//' ) === 0 ) {
+						// The origin parameter musn't be protocol relative
+						originForCors = document.location.protocol + originForCors;
+					}
+				}
+
 				$linkItemLink
 				.show()
 				.linkitem( {
-					repoApi: new wb.RepoApi(),
+					repoApi: new wikibase.RepoApi(
+						new mw.Api(),
+						repoScriptUrl + '/api.php',
+						repoIsLocal && mw.user.tokens.get( 'editToken' ),
+						originForCors
+					),
 					pageTitle: ( new mw.Title(
 						mw.config.get( 'wgTitle' ),
 						mw.config.get( 'wgNamespaceNumber' )
