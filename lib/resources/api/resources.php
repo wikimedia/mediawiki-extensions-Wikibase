@@ -35,6 +35,18 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.api.ParseValueCaller' => $moduleTemplate + array(
+			'scripts' => array(
+				'ParseValueCaller.js',
+			),
+			'dependencies' => array(
+				'dataValues',
+				'json',
+				'jquery',
+				'wikibase.api.__namespace',
+			)
+		),
+
 	);
 
 } );
