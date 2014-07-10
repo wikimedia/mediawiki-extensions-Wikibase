@@ -248,7 +248,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		if ( isset( $expected['sitelinks'] ) ) {
 			if ( !( $expectEmptyArrays === false && $expected['sitelinks'] === array() ) ) {
-				$data = self::flattenArray( $actual['sitelinks'], 'site', 'title' );
+				$data = self::flattenArray( isset( $actual['sitelinks'] ) ? $actual['sitelinks'] : array(), 'site', 'title' );
 				$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
 
 				// keys are significant in flat form
