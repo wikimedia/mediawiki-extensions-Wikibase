@@ -37,7 +37,7 @@
 
 	// register to EntityUnserializer:
 	MODULE.EntityUnserializer.registerTypeSpecificExpert(
-		wb.Property.TYPE,
+		wb.datamodel.Property.TYPE,
 		PropertyUnserializationExpert
 	);
 
