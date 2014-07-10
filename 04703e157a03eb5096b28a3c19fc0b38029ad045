@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_28787ebe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-10T19:53:31Z",
+      "side": 1,
+      "message": "but others",
+      "revId": "04703e157a03eb5096b28a3c19fc0b38029ad045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d522b24f",
+        "filename": "docs/options.wiki",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-10T19:53:31Z",
+      "side": 1,
+      "message": "Having these in Wikibase is evil. See also https://gerrit.wikimedia.org/r/145416",
+      "revId": "04703e157a03eb5096b28a3c19fc0b38029ad045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
