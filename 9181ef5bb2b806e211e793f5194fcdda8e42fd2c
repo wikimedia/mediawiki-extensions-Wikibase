@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_1c24ec06",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-10T13:05:22Z",
+      "side": 1,
+      "message": "If you want to add a check it should be in init, since entityStore, valueViewBuilder and abstractedRepoApi are required options (to this and most other views).",
+      "parentUuid": "8e28a382_7c3e5028",
+      "revId": "9181ef5bb2b806e211e793f5194fcdda8e42fd2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_5c4394b6",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
         "patchSetId": 2
