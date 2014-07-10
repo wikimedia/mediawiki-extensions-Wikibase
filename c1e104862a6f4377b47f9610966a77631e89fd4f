@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_9c10dcae",
+        "filename": "repo/includes/api/CreateRedirectModule.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-10T13:05:20Z",
+      "side": 1,
+      "message": "Yes. This is dictated by the framework. I think this workaround is good enough.",
+      "parentUuid": "8e28a382_5f9a7167",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_9fb7b9d3",
         "filename": "repo/includes/api/CreateRedirectModule.php",
         "patchSetId": 12
@@ -98,6 +116,24 @@
       "writtenOn": "2014-07-09T18:08:50Z",
       "side": 1,
       "message": "This test now duplicates what has already been tested via the interactor test. That is not good.",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fc4920d4",
+        "filename": "repo/tests/phpunit/includes/api/CreateRedirectModuleTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-10T13:05:20Z",
+      "side": 1,
+      "message": "it\u0027s not necessary, but since it was already there, i saw no reason to remove it. why would this be bad?",
+      "parentUuid": "8e28a382_dfbc21b4",
       "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
