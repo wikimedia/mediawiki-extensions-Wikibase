@@ -203,6 +203,14 @@ class EntityTestHelper {
 				),
 			)
 		),
+		'Osaka' => array(
+			"new" => "item",
+			"data" => array(
+				"labels" => array(
+					array( "language" => "en", "value" => "Osaka" )
+				)
+			)
+		),
 		'Leipzig' => array(
 			"new" => "item",
 			"data" => array(

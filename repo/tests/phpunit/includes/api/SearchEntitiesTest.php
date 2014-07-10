@@ -24,7 +24,9 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 		parent::setUp();
 
 		if( !isset( self::$hasSetup ) ) {
-			$this->initTestEntities( array( 'StringProp', 'Berlin', 'London', 'Oslo', 'Episkopi', 'Leipzig', 'Guangzhou' ) );
+			$this->initTestEntities( array( 'StringProp', 'Berlin', 'London', 'Oslo', 'Episkopi',
+				'Leipzig', 'Guangzhou', 'Osaka' )
+			);
 		}
 		self::$hasSetup = true;
 	}
@@ -69,6 +71,19 @@ class SearchEntitiesTest extends WikibaseApiTestCase {
 
 		list( $result,, ) = $this->doApiRequest( $params );
 		$this->assertApiResultHasExpected( $result['search'], $params, $expected );
+	}
+
+	public function testSearchContinue() {
+		$params = array(
+			'action' => 'wbsearchentities',
+			'search' => 'O',
+			'language' => 'en',
+			'limit' => 1
+		);
+
+		list( $result,, ) = $this->doApiRequest( $params );
+
+		$this->assertArrayHasKey( 'search-continue', $result );
 	}
 
 	private function assertResultLooksGood( $result ) {
