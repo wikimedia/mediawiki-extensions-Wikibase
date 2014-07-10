@@ -86,7 +86,9 @@
 	 * @param {jQuery} $entityview
 	 */
 	function createEntityDom( entity, $entityview ) {
-		var abstractedRepoApi = new wb.AbstractedRepoApi();
+		var repoConfig = mw.config.get( 'wbRepo' );
+		var mwApi = wb.api.getLocationAgnosticMwApi( repoConfig.url + repoConfig.scriptPath + '/api.php' );
+		var abstractedRepoApi = new wb.AbstractedRepoApi( mwApi );
 		var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 		wb.compileEntityStoreFromMwConfig( entityStore );
 
