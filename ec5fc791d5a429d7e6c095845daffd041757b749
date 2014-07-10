@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_5c9a74be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T12:36:18Z",
+      "side": 1,
+      "message": "We have an \"abstracted\" implementation of this thing? Uh, fancy.",
+      "revId": "ec5fc791d5a429d7e6c095845daffd041757b749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fc4da040",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T12:36:18Z",
+      "side": 1,
+      "message": "This can be null and it actually is null in a lot of cases. Shouldn\u0027t this be documented?",
+      "revId": "ec5fc791d5a429d7e6c095845daffd041757b749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5c6ef494",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T12:36:18Z",
+      "side": 1,
+      "message": "What about this?\n\nif( !entityId || !store._repoApi )",
+      "revId": "ec5fc791d5a429d7e6c095845daffd041757b749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9c545ccb",
+        "filename": "lib/resources/wikibase.store/store.EntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T12:36:18Z",
+      "side": 1,
+      "message": "Since _repoApi can be null shouldn\u0027t this be checked? Or is it intended that this fails horribly in this case?",
+      "revId": "ec5fc791d5a429d7e6c095845daffd041757b749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
