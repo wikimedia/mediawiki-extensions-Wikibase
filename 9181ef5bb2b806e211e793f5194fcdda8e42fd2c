@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_7c3e5028",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimlistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T13:03:50Z",
+      "side": 1,
+      "message": "This fails badly if something is wrong with the option. The old code couldn\u0027t fail. I wonder if it makes sense to add a check and throw an exception.",
+      "revId": "9181ef5bb2b806e211e793f5194fcdda8e42fd2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5c4394b6",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.claimview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T13:03:50Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "9181ef5bb2b806e211e793f5194fcdda8e42fd2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1c4d0ce1",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T13:03:50Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "9181ef5bb2b806e211e793f5194fcdda8e42fd2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_dc1664ac",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T13:03:50Z",
+      "side": 1,
+      "message": "And again.",
+      "revId": "9181ef5bb2b806e211e793f5194fcdda8e42fd2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
