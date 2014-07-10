@@ -285,7 +285,17 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'type' => 'string' ) ),
 						'type' => 'statement',
 						'rank' => 'normal' )
-				) )
+				) ),
+
+				'remove all stuff' => array( // remove all stuff
+					'p' => array( 'clear' => '' ),
+					'e' => array(
+						'labels' => array(),
+						'descriptions' => array(),
+						'aliases' => array(),
+						'sitelinks' => array(),
+						'claims' => array()
+					) ),
 			),
 
 		);
