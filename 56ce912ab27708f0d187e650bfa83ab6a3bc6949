@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_667b5dbe",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-10T09:39:55Z",
+      "side": 1,
+      "message": "Apparently jQuery UI stopped deep-cloning the widget\u0027s options. Check core\u0027s resources/lib/jquery.ui/jquery.ui.widget.js:145.",
+      "parentUuid": "8e28a382_86a0893f",
+      "revId": "56ce912ab27708f0d187e650bfa83ab6a3bc6949",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_06f5b94c",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 6
