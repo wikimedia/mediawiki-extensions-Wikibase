@@ -6,7 +6,6 @@ use DBAccessBase;
 use DBQueryError;
 use MWContentSerializationException;
 use Revision;
-use Wikibase\Content\UnresolvedRedirectException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
