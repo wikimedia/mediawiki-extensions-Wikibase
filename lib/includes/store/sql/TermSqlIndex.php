@@ -616,8 +616,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$queryOptions = array();
 
-		if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
-			$queryOptions['LIMIT'] = $options['LIMIT'];
+		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
+			$queryOptions['LIMIT'] = intval( $options['LIMIT'] );
 		}
 
 		$obtainedTerms = $dbr->select(
@@ -673,16 +673,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			$selectionFields[] = 'term_weight';
 		}
 
-		$queryOptions = array( 'DISTINCT' );
+		$queryOptions = array(
+			'DISTINCT',
+			'LIMIT' => $internalLimit,
+		);
 
-		if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
-			if ( $hasWeight ) {
-				// if we take the weight into account, we need to grab basically all hits in order
-				// to allow for the post-search sorting below.
-				$queryOptions['LIMIT'] = $internalLimit;
-			} else {
-				$queryOptions['LIMIT'] = $options['LIMIT'];
-			}
+		$requestedLimit = isset( $options['LIMIT'] ) ? max( intval( $options['LIMIT'] ), 0 ) : 0;
+		// if we take the weight into account, we need to grab basically all hits in order
+		// to allow for the post-search sorting below.
+		if ( !$hasWeight && $requestedLimit && $requestedLimit < $queryOptions['LIMIT'] ) {
+			$queryOptions['LIMIT'] = $requestedLimit;
 		}
 
 		$obtainedIDs = $dbr->select(
@@ -705,8 +705,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			// weight to it here (which would allow us to delegate the sorting to SQL itself)
 			arsort( $weights, SORT_NUMERIC );
 
-			if ( array_key_exists( 'LIMIT', $options ) && $options['LIMIT'] ) {
-				$numericIds = array_keys( array_slice( $weights, 0, $options['LIMIT'], true ) );
+			if ( $requestedLimit ) {
+				$numericIds = array_keys( array_slice( $weights, 0, $requestedLimit, true ) );
 			} else {
 				$numericIds = array_keys( $weights );
 			}
