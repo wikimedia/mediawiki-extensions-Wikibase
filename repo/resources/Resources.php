@@ -24,14 +24,15 @@ return call_user_func( function() {
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
 			),
 			'dependencies' => array(
-				'mediawiki.api',
 				'mediawiki.user',
+				'mw.config.values.wbRepo',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
 				'jquery.wikibase.claimgrouplabelscroll',
 				'jquery.wikibase.sitelinkgroupview',
+				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.dataTypes',
 				'wikibase.experts',
