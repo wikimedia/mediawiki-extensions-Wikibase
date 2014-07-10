@@ -38,7 +38,7 @@ return call_user_func( function() {
 				'wikibase.formatters.getStore',
 				'wikibase.EntityInitializer',
 				'wikibase.ui.initTermBox',
-				'wikibase.parsers',
+				'wikibase.parsers.getStore',
 				'wikibase.RepoApi',
 				'wikibase.store.EntityStore',
 				'wikibase.compileEntityStoreFromMwConfig',

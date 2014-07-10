@@ -10,7 +10,7 @@
  * TODO: Refactor this huge single function into smaller pieces of code.
  */
 
-( function( $, mw, wb, dataTypes, experts, getFormatterStore, parsers ) {
+( function( $, mw, wb, dataTypes, experts, getFormatterStore, getParserStore ) {
 	'use strict';
 	/* jshint nonew: false */
 
@@ -122,7 +122,7 @@
 					valueViewBuilder: new wb.ValueViewBuilder(
 						experts,
 						getFormatterStore( repoApi, dataTypes ),
-						parsers,
+						getParserStore( repoApi ),
 						mw
 					)
 				} ).appendTo( $claimsParent );
@@ -344,5 +344,5 @@
 	wikibase.dataTypes,
 	wikibase.experts.store,
 	wikibase.formatters.getStore,
-	wikibase.parsers.store
+	wikibase.parsers.getStore
 );
