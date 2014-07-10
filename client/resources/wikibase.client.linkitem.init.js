@@ -17,14 +17,31 @@
 		.hide()
 		.after( $spinner );
 
-		mw.loader.using(
-			'jquery.wikibase.linkitem',
+		mw.loader.using( [
+				'jquery.wikibase.linkitem',
+				'mediawiki.Title',
+				'mw.config.values.wbRepo',
+				'wikibase.RepoApi',
+			],
 			function() {
+				var wb = wikibase;
+
 				$spinner.remove();
 
+				var repoConfig = mw.config.get( 'wbRepo' );
 				$linkItemLink
 				.show()
-				.linkitem();
+				.linkitem( {
+					repoApi: new wb.RepoApi(),
+					pageTitle: ( new mw.Title(
+						mw.config.get( 'wgTitle' ),
+						mw.config.get( 'wgNamespaceNumber' )
+					) ).getPrefixedText(),
+					globalSiteId: mw.config.get( 'wbCurrentSite' ).globalSiteId,
+					namespaceNumber: mw.config.get( 'wgNamespaceNumber' ),
+					repoArticlePath: repoConfig.url + repoConfig.articlePath,
+					langLinkSiteGroup: mw.config.get( 'wbCurrentSite' ).langLinkSiteGroup
+				} );
 
 				var widgetName = $linkItemLink.data( 'linkitem' ).widgetName;
 
