@@ -33,9 +33,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'json',
-				'mw.config.values.wbRepo',
 				'wikibase',
-				'wikibase.api.getLocationAgnosticMwApi',
 			),
 		),
 
