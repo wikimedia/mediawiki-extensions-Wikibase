@@ -123,7 +123,8 @@
 					getFormatterStore( repoApi, dataTypes ),
 					mw,
 					getParserStore( repoApi )
-				)
+				),
+				abstractedRepoApi: abstractedRepoApi
 			} ).appendTo( $claimsParent );
 
 			// This is here to be sure there is never a duplicate id
