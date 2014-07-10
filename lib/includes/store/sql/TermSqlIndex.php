@@ -679,7 +679,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 			if ( $hasWeight ) {
 				// if we take the weight into account, we need to grab basically all hits in order
 				// to allow for the post-search sorting below.
-				$queryOptions['LIMIT'] = max( $options['LIMIT'], $internalLimit );
+				$queryOptions['LIMIT'] = min( $options['LIMIT'], $internalLimit );
 			} else {
 				$queryOptions['LIMIT'] = $options['LIMIT'];
 			}
