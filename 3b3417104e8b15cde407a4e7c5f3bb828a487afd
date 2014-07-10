@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_19c2be88",
+        "filename": "lib/resources/formatters/getApiBasedValueFormatterConstructor.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T10:31:45Z",
+      "side": 1,
+      "message": "getApiBasedValueFormatterConstructor.js? This looks a bit hackish to me. What\u0027s the reason to use a method name as file name? We usually don\u0027t do this, right?",
+      "revId": "3b3417104e8b15cde407a4e7c5f3bb828a487afd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
