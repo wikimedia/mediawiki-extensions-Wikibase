@@ -39,7 +39,7 @@ return call_user_func( function() {
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinks' => array(),
 		// List of additional CSS class names for site links that have badges, e.g.
-		// array( 'Q101' => 'wb-badge-featuredarticle' ).
+		// array( 'Q101' => 'wb-badge-goldstar' ).
 		'badgeClassNames' => array(),
 
 		/**
