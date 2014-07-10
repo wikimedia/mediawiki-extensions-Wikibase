@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f9b9322a",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T10:17:23Z",
+      "side": 1,
+      "message": "Cool. They stopped using $.extend and introduced $.widget.extend. This still does a deep clone, but only on plain objects.\n\nProblem is: mediaWiki and most stuff in it are plain objects. But the wb.RepoApi object in question here is not. Great!",
+      "parentUuid": "8e28a382_667b5dbe",
+      "revId": "56ce912ab27708f0d187e650bfa83ab6a3bc6949",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_06f5b94c",
         "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
         "patchSetId": 6
