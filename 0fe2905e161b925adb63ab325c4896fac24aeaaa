@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_48362ae6",
+        "filename": "repo/includes/Search/EntitiesByTermSearcher.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-10T17:25:30Z",
+      "side": 1,
+      "message": "Please remove my mail address. This was one of my first contributions, later I decided to not use my mail address anywhere. My name is unique anyway. ;-)",
+      "revId": "0fe2905e161b925adb63ab325c4896fac24aeaaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
