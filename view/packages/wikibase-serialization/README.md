@@ -21,7 +21,7 @@ version 1.0 of this package:
 
 ## Release notes
 
-### 1.1.0 (???)
+### 1.1.0 (2014-07-10)
 
 * Adapt to changes in wikibase/data-model-javascript@0.3.0.
 
