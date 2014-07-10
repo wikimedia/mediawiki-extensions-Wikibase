@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_59472623",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-10T10:32:34Z",
+      "side": 1,
+      "message": "I use it for creating spies in the ValueViewBuilder test. It\u0027s in core and I used it in some other tests before.",
+      "parentUuid": "8e28a382_c6533142",
+      "revId": "24cd00054459993c3f70da91cd88355e69cb0a9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d922f6a1",
         "filename": "lib/resources/wikibase.ValueViewBuilder.js",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-10T10:24:30Z",
       "side": 1,
       "message": "The order or these 4 paramters is a bit off. Is this new or moved from somewhere?",
+      "revId": "24cd00054459993c3f70da91cd88355e69cb0a9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_19519edd",
+        "filename": "lib/resources/wikibase.ValueViewBuilder.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-10T10:32:34Z",
+      "side": 1,
+      "message": "It\u0027s new and sorted alphabetically. We could do it differently, I don\u0027t care too much.",
+      "parentUuid": "8e28a382_d922f6a1",
       "revId": "24cd00054459993c3f70da91cd88355e69cb0a9e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
