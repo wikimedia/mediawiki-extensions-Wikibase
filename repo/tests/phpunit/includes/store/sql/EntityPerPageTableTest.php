@@ -119,13 +119,13 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 	public function testGetPageIdForEntity() {
 		$entity = Item::newEmpty();
-		$entity->setId( new ItemId( 'Q7' ) );
 
 		$epp = $this->newEntityPerPageTable( array( $entity ) );
+		$entityId = $entity->getId();
 
-		$this->assertFalse( $epp->getPageIdForEntity( new ItemId( 'Q77' ) ) );
+		$this->assertFalse( $epp->getPageIdForEntity( new ItemId( 'Q7435389457' ) ) );
 
-		$pageId = $epp->getPageIdForEntity( new ItemId( 'Q7' ) );
+		$pageId = $epp->getPageIdForEntity( $entityId );
 		$this->assertInternalType( 'int', $pageId );
 		$this->assertGreaterThan( 0, $pageId );
 	}
