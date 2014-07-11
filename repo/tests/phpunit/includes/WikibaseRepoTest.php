@@ -269,6 +269,14 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$repo->newPropertyHandler();
 	}
 
+	public function testGetBadgeLookup() {
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'badgeItems', array() );
+
+		$badgeLookup = $repo->getBadgeLookup();
+		$this->assertInstanceOf( 'Wikibase\Repo\BadgeLookup', $badgeLookup );
+	}
+
 	/**
 	 * @return WikibaseRepo
 	 */
