@@ -1,21 +1,33 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataAccess;
 
 use InvalidArgumentException;
 use Language;
 use Status;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\PropertyLabelResolver;
 
 /**
+ * @todo split up and clean up this class and see what
+ * code can be shared with Lua code.
+ *
+ * the name 'PropertyParserFunctionEntityRenderer' is intended
+ * to be temporary and the code here to be restructured.
+ *
  * Renderer of the {{#property}} parser function.
  *
  * @since 0.5
+ * @deprecated
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -23,7 +35,7 @@ use Wikibase\Lib\Store\EntityLookup;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class PropertyParserFunctionRenderer {
+class PropertyParserFunctionEntityRenderer {
 
 	private $language;
 	private $entityLookup;
