@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_21dad421",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T08:24:37Z",
+      "side": 1,
+      "message": "Supported by default? That\u0027s totally unclear... be more specific here, like: Class names that have icon definitions in Wikibase or something like that. This is just confusing and can make a user think we do more than deliver a CSS icon definition",
+      "revId": "3e89b21823e858f4cce4fca40eb330991deda8af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
