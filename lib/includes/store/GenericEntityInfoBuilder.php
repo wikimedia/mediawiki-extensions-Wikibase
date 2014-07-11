@@ -290,4 +290,37 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 		return $this->entityInfo;
 	}
 
+	/**
+	 * @param EntityId[] $ids
+	 *
+	 * @return string[]
+	 */
+	private function convertEntityIdsToStrings( array $ids ) {
+		return array_map( function ( EntityId $id ) {
+			return $id->getSerialization();
+		}, $ids );
+	}
+
+	/**
+	 * Remove info records for the given EntityIds.
+	 *
+	 * @param EntityId[] $ids
+	 */
+	public function removeEntityInfo( array $ids ) {
+		$remove = $this->convertEntityIdsToStrings( $ids );
+		$this->entityInfo = array_diff_key( $this->entityInfo, array_flip( $remove ) );
+	}
+
+	/**
+	 * Retain only info records for the given EntityIds.
+	 * Useful e.g. after resolveRedirects(), to remove explicit entries for
+	 * redirect targets not present in the original input.
+	 *
+	 * @param EntityId[] $ids
+	 */
+	public function retainEntityInfo( array $ids ) {
+		$retain = $this->convertEntityIdsToStrings( $ids );
+		$this->entityInfo = array_intersect_key( $this->entityInfo, array_flip( $retain ) );
+	}
+
 }
