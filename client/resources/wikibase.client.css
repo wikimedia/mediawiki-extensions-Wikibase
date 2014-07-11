@@ -27,12 +27,12 @@
 	color: #0645AD !important;
 }
 
-.wb-badge-goodarticle {
+.wb-badge-silverstar {
 	/* @embed */
-	list-style-image: url(images/wb-badge-goodarticle.png);
+	list-style-image: url(images/wb-badge-silverstar.png);
 }
 
-.wb-badge-featuredarticle {
+.wb-badge-goldstar {
 	/* @embed */
-	list-style-image: url(images/wb-badge-featuredarticle.png);
+	list-style-image: url(images/wb-badge-goldstar.png);
 }
