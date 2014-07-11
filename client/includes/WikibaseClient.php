@@ -196,7 +196,7 @@ final class WikibaseClient {
 			EntityIdLabelFormatter::OPT_LANG => $languageCode
 		) );
 
-		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityLookup() );
+		$labelFormatter = new EntityIdLabelFormatter( $options, $this->getEntityFingerprintLookup() );
 
 		return $labelFormatter;
 	}

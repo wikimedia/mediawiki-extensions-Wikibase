@@ -50,6 +50,20 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 	}
 
 	/**
+	 * Returns a new DispatchingValueFormatter dispatching to the same formatters
+	 * as this instances, except for the formatters overwritten by $formatters.
+	 *
+	 * @param ValueFormatter[] $formatters Maps prefixed type ids to ValueFormatter instances.
+	 * Compare the $formatters parameter of the constructor.
+	 *
+	 * @return DispatchingValueFormatter
+	 */
+	public function getDerivedFormatter( array $formatters ) {
+		$formatters = array_merge( $this->formatters, $formatters );
+		return new DispatchingValueFormatter( $formatters );
+	}
+
+	/**
 	 * @see ValueFormatter::format().
 	 *
 	 * Formats the given value by finding an appropriate formatter among the ones supplied

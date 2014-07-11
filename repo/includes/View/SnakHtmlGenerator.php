@@ -5,7 +5,7 @@ namespace Wikibase\Repo\View;
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\EntityTitleLookup;
+use Wikibase\Lib\EntityIdFormatter;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakFormatter;
 
@@ -29,34 +29,31 @@ class SnakHtmlGenerator {
 	protected $snakFormatter;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var EntityTitleLookup
+	 * @var EntityIdFormatter
 	 */
-	protected $entityTitleLookup;
+	private $propertyLinkFormatter;
 
 	/**
 	 * @param SnakFormatter $snakFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityIdFormatter $propertyLinkFormatter
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup
+		EntityIdFormatter $propertyLinkFormatter
 	) {
 		$this->snakFormatter = $snakFormatter;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityLinkFormatter = $propertyLinkFormatter;
 	}
 
 	/**
 	 * Generates the HTML for a single snak.
 	 *
 	 * @param Snak $snak
-	 * @param array[] $entityInfo
 	 * @param bool $showPropertyLink
 	 *
 	 * @return string
 	 */
-	public function getSnakHtml( Snak $snak, array $entityInfo, $showPropertyLink = false ) {
+	public function getSnakHtml( Snak $snak, $showPropertyLink = false ) {
 		$snakViewVariation = $this->getSnakViewVariation( $snak );
 		$snakViewCssClass = 'wb-snakview-variation-' . $snakViewVariation;
 
@@ -67,7 +64,7 @@ class SnakHtmlGenerator {
 		}
 
 		$propertyLink = $showPropertyLink ?
-			$this->makePropertyLink( $snak, $entityInfo, $showPropertyLink ) : '';
+			$this->makePropertyLink( $snak, $showPropertyLink ) : '';
 
 		$html = wfTemplate( 'wb-snak',
 			// Display property link only once for snaks featuring the same property:
@@ -81,26 +78,13 @@ class SnakHtmlGenerator {
 
 	/**
 	 * @param Snak $snak
-	 * @param array[] $entityInfo
 	 *
 	 * @return string
 	 */
-	private function makePropertyLink( Snak $snak, array $entityInfo ) {
+	private function makePropertyLink( Snak $snak ) {
 		$propertyId = $snak->getPropertyId();
-		$key = $propertyId->getSerialization();
-		$propertyLabel = $key;
-		if ( isset( $entityInfo[$key] ) && !empty( $entityInfo[$key]['labels'] ) ) {
-			$entityInfoLabel = reset( $entityInfo[$key]['labels'] );
-			$propertyLabel = $entityInfoLabel['value'];
-		}
-
-		// @todo use EntityIdHtmlLinkFormatter here
-		$propertyLink = \Linker::link(
-			$this->entityTitleLookup->getTitleForId( $propertyId ),
-			htmlspecialchars( $propertyLabel )
-		);
-
-		return $propertyLink;
+		$link = $this->propertyLinkFormatter->format( $propertyId );
+		return $link;
 	}
 
 	/**
