@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_ecb843e4",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T12:03:30Z",
+      "side": 1,
+      "message": "@var string[], if I remember right.",
+      "revId": "149a41cc2e59c5890d0f2492e29bff01a1bfa6d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6ca333a9",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T12:03:30Z",
+      "side": 1,
+      "message": "You don\u0027t need to count here, just use empty().",
+      "revId": "149a41cc2e59c5890d0f2492e29bff01a1bfa6d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4c775736",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T12:03:30Z",
+      "side": 1,
+      "message": "I try to be specific when working with languages. $language for Language objects and $languageCode for codes. Just a note, not a problem here.",
+      "revId": "149a41cc2e59c5890d0f2492e29bff01a1bfa6d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0c914f4a",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T12:03:30Z",
+      "side": 1,
+      "message": "Try to avoid using \"class\" as an identifier, use $className.",
+      "revId": "149a41cc2e59c5890d0f2492e29bff01a1bfa6d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6ca9f377",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T12:03:30Z",
+      "side": 1,
+      "message": "Not a problem here but please be aware that this is a loop in a loop.",
+      "revId": "149a41cc2e59c5890d0f2492e29bff01a1bfa6d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6cc0d32f",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T12:03:30Z",
+      "side": 1,
+      "message": "The idea of the info builder is to query all you need in a single call. Please collect the IDs first, do a single query and then use the info array you got.",
+      "revId": "149a41cc2e59c5890d0f2492e29bff01a1bfa6d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
