@@ -16,6 +16,24 @@
       "revId": "5d18ae91864cd92d0d47c7089505093c1c9931b9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e753bc18",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T13:19:06Z",
+      "side": 1,
+      "message": "Sure, this patch shouldn\u0027t be backported.",
+      "parentUuid": "8e28a382_4c16374f",
+      "revId": "5d18ae91864cd92d0d47c7089505093c1c9931b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
