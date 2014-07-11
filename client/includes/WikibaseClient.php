@@ -15,8 +15,11 @@ use Site;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
-use Wikibase\ClientStore;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\ClientStore;
+use Wikibase\DataAccess\PropertyParserFunctionHandler;
+use Wikibase\DataAccess\PropertyParserFunctionLanguageRenderer;
+use Wikibase\DataAccess\PropertyParserFunctionVariantsRenderer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -656,12 +659,33 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return PropertyParserFunctionHandler
+	 */
+	public function getPropertyParserFunctionHandler() {
+		$languageRenderer = new PropertyParserFunctionLanguageRenderer(
+			$this->getStore()->getEntityLookup(),
+			$this->getStore()->getPropertyLabelResolver()
+		);
+
+		$variantsRenderer = new PropertyParserFunctionVariantsRenderer( $languageRenderer );
+
+		$propertyParserFunctionHandler = new PropertyParserFunctionHandler(
+			$this->getStore()->getSiteLinkTable(),
+			$languageRenderer,
+			$variantsRenderer,
+			$this->getSettings()->getSetting( 'siteGlobalID' )
+		);
+
+		return $propertyParserFunctionHandler;
+	}
+
+	/**
 	 * @return ParserFunctionRegistrant
 	 */
 	public function getParserFunctionRegistrant() {
 		return new ParserFunctionRegistrant(
+			$this->getPropertyParserFunctionHandler(),
 			$this->getSettings()->getSetting( 'allowDataTransclusion' )
 		);
 	}
-
 }

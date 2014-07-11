@@ -34,6 +34,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\WikibaseClient;
 
 /**
