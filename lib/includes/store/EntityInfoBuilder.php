@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Lib\Store;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * A builder for collecting information about a batch of entities in an efficient way.
@@ -34,7 +35,9 @@ interface EntityInfoBuilder {
 	 * and must thus not contain any objects.
 	 *
 	 * @note: after resolveRedirects() is called, entity records will be available under
-	 * their actual ID as well as any relevant redirect ID.
+	 * their actual ID as well as any relevant redirect ID. If records should only be
+	 * available under the ID supplied to the builder's constructor, use retain() to
+	 * strip any others.
 	 *
 	 * @return array[]
 	 */
@@ -89,4 +92,20 @@ interface EntityInfoBuilder {
 	 * If resolveRedirects() was not called, redirects will be removed as missing.
 	 */
 	public function removeMissing();
+
+	/**
+	 * Remove info records for the given EntityIds.
+	 *
+	 * @param EntityId[] $ids
+	 */
+	public function remove( $ids );
+
+	/**
+	 * Retain only info records for the given EntityIds.
+	 * Useful e.g. after resolveRedirects(), to remove explicit entries for
+	 * redirect targets not present in the original input.
+	 *
+	 * @param EntityId[] $ids
+	 */
+	public function retain( $ids );
 }
