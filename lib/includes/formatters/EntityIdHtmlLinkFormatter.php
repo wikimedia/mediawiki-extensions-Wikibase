@@ -28,7 +28,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	public function __construct(
 		FormatterOptions $options,
-		EntityLookup $entityLookup,
+		EntityFingerprintLookup $entityFingerprintLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
 		parent::__construct( $options, $entityLookup );

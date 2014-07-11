@@ -152,7 +152,7 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @param FormatterOptions $formatterOptions
 	 */
 	public function testParseWithValidArguments( $entityId, $expectedString, FormatterOptions $formatterOptions ) {
-		$formatter = new EntityIdLabelFormatter( $formatterOptions, $this->newEntityLoader() );
+		$formatter = new EntityIdLabelFormatter( $formatterOptions, $this->newEntityFingerprintLookup() );
 
 		$formattedValue = $formatter->format( $entityId );
 

@@ -509,7 +509,7 @@ class WikibaseValueFormatterBuilders {
 		FormatterOptions $options,
 		WikibaseValueFormatterBuilders $builders
 	) {
-		return new EntityIdLabelFormatter( $options, $builders->entityLookup );
+		return new EntityIdLabelFormatter( $options, $builders->entityFingerprintLookup );
 	}
 
 	/**
@@ -527,7 +527,7 @@ class WikibaseValueFormatterBuilders {
 	) {
 		return new EntityIdHtmlLinkFormatter(
 			$options,
-			$builders->entityLookup,
+			$builders->entityFingerprintLookup,
 			$builders->entityTitleLookup
 		);
 	}
