@@ -4,7 +4,10 @@ namespace Wikibase\Test;
 
 use Wikibase\ClientStore;
 use Wikibase\PropertyInfoStore;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\PropertyLabelResolver;
 
 /**
  * (Incomplete) ClientStore mock
@@ -16,7 +19,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  */
 class MockClientStore implements ClientStore {
 	public function getItemUsageIndex() {}
-	public function getPropertyLabelResolver() {}
 	public function getTermIndex() {}
 	public function newChangesTable() {}
 	public function clear() {}
@@ -62,4 +64,12 @@ class MockClientStore implements ClientStore {
 		}
 		return $mockPropertyInfoStore;
 	}
+
+	/**
+	 * @return PropertyLabelResolver
+	 */
+	public function getPropertyLabelResolver() {
+		return new MockPropertyLabelResolver( 'en', $this->getMock() );
+	}
+
 }

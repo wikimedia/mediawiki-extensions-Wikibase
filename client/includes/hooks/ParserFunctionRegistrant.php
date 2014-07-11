@@ -3,9 +3,14 @@
 namespace Wikibase\Client\Hooks;
 
 use Parser;
-use Wikibase\PropertyParserFunction;
+use Wikibase\DataAccess\PropertyParserFunctionHandler;
 
 class ParserFunctionRegistrant {
+
+	/**
+	 * @var PropertyParserFunctionHandler
+	 */
+	private $propertyParserFunctionHandler;
 
 	/**
 	 * @param boolean - setting to enable use of property parser function
@@ -13,9 +18,14 @@ class ParserFunctionRegistrant {
 	private $allowDataTransclusion;
 
 	/**
+	 * @param PropertyParserFunctionHandler $propertyParserFunctionHandler
 	 * @param boolean $allowDataTransclusion
 	 */
-	public function __construct( $allowDataTransclusion ) {
+	public function __construct(
+		PropertyParserFunctionHandler $propertyParserFunctionHandler,
+		$allowDataTransclusion
+	) {
+		$this->propertyParserFunctionHandler = $propertyParserFunctionHandler;
 		$this->allowDataTransclusion = $allowDataTransclusion;
 	}
 
@@ -27,6 +37,9 @@ class ParserFunctionRegistrant {
 		$this->registerPropertyParserFunction( $parser );
 	}
 
+	/**
+	 * @param Parser $parser
+	 */
 	private function registerNoLangLinkHandler( Parser $parser ) {
 		$parser->setFunctionHook(
 			'noexternallanglinks',
@@ -35,15 +48,20 @@ class ParserFunctionRegistrant {
 		);
 	}
 
+	/**
+	 * @param Parser $parser
+	 */
 	private function registerPropertyParserFunction( Parser $parser ) {
-		if( !$this->allowDataTransclusion ) {
+		if ( !$this->allowDataTransclusion ) {
 			return;
 		}
 
+		$propertyParserFunctionHandler = $this->propertyParserFunctionHandler;
+
 		$parser->setFunctionHook(
 			'property',
-			function( Parser $parser, $propertyLabel ) {
-				return PropertyParserFunction::render( $parser, $propertyLabel );
+			function( Parser $parser, $propertyLabel ) use( $propertyParserFunctionHandler ) {
+				return $propertyParserFunctionHandler->handle( $parser, $propertyLabel );
 			}
 		);
 
