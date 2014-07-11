@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_07da4878",
+        "filename": "repo/includes/BadgeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T13:38:48Z",
+      "side": 1,
+      "message": "@since missing",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_67eb4c0a",
         "filename": "repo/includes/BadgeLookup.php",
         "patchSetId": 1
@@ -13,6 +30,23 @@
       "writtenOn": "2014-07-11T13:37:08Z",
       "side": 1,
       "message": "Why bind to the Language object if you only need a $languageCode?",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_87de386f",
+        "filename": "repo/includes/BadgeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T13:38:48Z",
+      "side": 1,
+      "message": "I think you should be more specific here... like\n@return array ( $badgeId \u003d\u003e $label )",
       "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -47,6 +81,75 @@
       "writtenOn": "2014-07-11T13:37:08Z",
       "side": 1,
       "message": "Move this bit to a private method.",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e7ce1cb9",
+        "filename": "repo/includes/BadgeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T13:38:48Z",
+      "side": 1,
+      "message": "+1 This function clearly is to large",
+      "parentUuid": "8e28a382_07f36808",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_27d54448",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T13:38:48Z",
+      "side": 1,
+      "message": "@since missing",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_27ee6420",
+        "filename": "repo/tests/phpunit/includes/BadgeLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T13:38:48Z",
+      "side": 1,
+      "message": "@group Database missing in current state",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c7fc40d8",
+        "filename": "repo/tests/phpunit/includes/BadgeLookupTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T13:38:48Z",
+      "side": 1,
+      "message": "just mock this... will also make this faster as no DB-interaction will be needed",
       "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
