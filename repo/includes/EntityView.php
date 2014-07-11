@@ -7,9 +7,14 @@ use Html;
 use IContextSource;
 use InvalidArgumentException;
 use ParserOutput;
+use ValueFormatters\FormatterOptions;
+use Wikibase\Lib\DispatchingSnakFormatter;
+use Wikibase\Lib\EntityIdFormatter;
+use Wikibase\Lib\EntityIdHtmlLinkFormatter;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\PropertyValueSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
@@ -62,11 +67,6 @@ abstract class EntityView extends ContextSource {
 	protected $configBuilder;
 
 	/**
-	 * @var ClaimHtmlGenerator
-	 */
-	protected $claimHtmlGenerator;
-
-	/**
 	 * Maps entity types to the corresponding entity view.
 	 * FIXME: remove this stuff, big OCP violation
 	 *
@@ -83,14 +83,19 @@ abstract class EntityView extends ContextSource {
 	);
 
 	/**
+	 * @var DispatchingSnakFormatter
+	 */
+	private $snakFormatter;
+
+	/**
 	 * @since 0.1
 	 *
 	 * @param IContextSource|null $context
-	 * @param SnakFormatter $snakFormatter
+	 * @param DispatchingSnakFormatter $snakFormatter
 	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SerializationOptions $options
+	 * @param FormatterOptions $options
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 *
 	 * @todo: move the $editable flag here, instead of passing it around everywhere
@@ -99,11 +104,11 @@ abstract class EntityView extends ContextSource {
 	 */
 	public function __construct(
 		IContextSource $context,
-		SnakFormatter $snakFormatter,
+		DispatchingSnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
-		SerializationOptions $options,
+		FormatterOptions $options,
 		ParserOutputJsConfigBuilder $configBuilder
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
@@ -113,6 +118,7 @@ abstract class EntityView extends ContextSource {
 		}
 
 		$this->setContext( $context );
+		$this->snakFormatter = $snakFormatter;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -121,17 +127,57 @@ abstract class EntityView extends ContextSource {
 
 		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->textInjector = new TextInjector();
+	}
 
-		// @todo inject in constructor
+	protected function getSnakFormatter( EntityIdFormatter $idFormatter = null ) {
+		$snakFormatter = $this->snakFormatter;
+
+		if ( $idFormatter ) {
+			// Do a little dance to inject $idFormatter deep down in the
+			// formatter hierarchy.
+
+			/** @var PropertyValueSnakFormatter $valueSnakFormatter */
+			$valueSnakFormatter = $snakFormatter->getFormatter( 'value' );
+			$valueFormatter = $valueSnakFormatter->getValueFormatter();
+
+			$valueFormatter = $valueFormatter->getDerivedFormatter(
+				array( 'wikibase-item' => $idFormatter )
+			);
+
+			$valueSnakFormatter = $valueSnakFormatter->getDerivedFormatter(
+				$valueFormatter
+			);
+
+			$snakFormatter = $snakFormatter->getDerivedFormatter(
+				array( 'value' => $valueSnakFormatter )
+			);
+		}
+
+		return $snakFormatter;
+	}
+
+	protected function getClaimHtmlGenerator( $entityInfo ) {
+
+		$entityFingerprintLookup = new EntityInfoFingerprintLookup( $entityInfo );
+
+		$idFormatter = new EntityIdHtmlLinkFormatter(
+			$this->options,
+			$entityFingerprintLookup,
+			$this->entityTitleLookup
+		);
+
+		$snakFormatter = $this->getSnakFormatter( $idFormatter );
+
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$snakFormatter,
-			$entityTitleLookup
+			$idFormatter
 		);
 
-		$this->claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$entityTitleLookup
+		$claimHtmlGenerator = new ClaimHtmlGenerator(
+			$snakHtmlGenerator
 		);
+
+		return $claimHtmlGenerator;
 	}
 
 	/**
@@ -340,7 +386,10 @@ if ( $ ) {
 		$entity =  $entityRevision->getEntity();
 		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
 
-		$configVars = $this->configBuilder->build( $entity, $this->options, $isExperimental );
+		$serializationOptions = $this->getSerializationOptions();
+
+		//FIXME: re-use the entity info we have collected via getEntityInfo() inside the config builder!
+		$configVars = $this->configBuilder->build( $entity, $serializationOptions, $isExperimental );
 		$pout->addJsConfigVars( $configVars );
 
 		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
@@ -540,6 +589,8 @@ if ( $ ) {
 
 		$entityInfo = $this->getEntityInfo( $entity, $this->getLanguage()->getCode() );
 
+		$claimHtmlGenerator = $this->getClaimHtmlGenerator( $entityInfo );
+
 		/**
 		 * @var string $claimsHtml
 		 * @var Claim[] $claims
@@ -565,9 +616,8 @@ if ( $ ) {
 			$htmlForEditSection = $this->getHtmlForEditSection( '', array() ); // TODO: add link to SpecialPage
 
 			foreach( $claims as $claim ) {
-				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
+				$propertyHtml .= $claimHtmlGenerator->getHtmlForClaim(
 					$claim,
-					$entityInfo,
 					$htmlForEditSection
 				);
 			}
@@ -633,17 +683,17 @@ if ( $ ) {
 		// TODO: Make a finder just for properties, so we don't have to filter.
 		$refFinder = new ReferencedEntitiesFinder();
 		$entityIds = $refFinder->findSnakLinks( $entity->getAllSnaks() );
-		$propertyIds = array_filter( $entityIds, function ( EntityId $id ) {
-			return $id->getEntityType() === Property::ENTITY_TYPE;
-		} );
 
 		// NOTE: This is a bit hackish, it would be more appropriate to use a TermTable here.
-		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
+		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
+		$entityInfoBuilder->resolveRedirects();
 		$entityInfoBuilder->removeMissing();
 		$entityInfoBuilder->collectTerms(
 			array( 'label', 'description' ),
 			array( $languageCode )
 		);
+
+		$entityInfoBuilder->retain( $entityIds );
 
 		wfProfileOut( __METHOD__ );
 		return $entityInfoBuilder->getEntityInfo();

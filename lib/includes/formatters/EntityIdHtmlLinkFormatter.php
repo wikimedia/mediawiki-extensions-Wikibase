@@ -7,6 +7,7 @@ use OutOfBoundsException;
 use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\EntityFingerprintLookup;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityTitleLookup;
 
@@ -28,10 +29,10 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	public function __construct(
 		FormatterOptions $options,
-		EntityLookup $entityLookup,
+		EntityFingerprintLookup $entityFingerprintLookup,
 		EntityTitleLookup $entityTitleLookup = null
 	) {
-		parent::__construct( $options, $entityLookup );
+		parent::__construct( $options, $entityFingerprintLookup );
 
 		$this->entityTitleLookup = $entityTitleLookup;
 	}

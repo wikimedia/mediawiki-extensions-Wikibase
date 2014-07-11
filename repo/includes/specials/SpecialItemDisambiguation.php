@@ -171,7 +171,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 
 		$linkFormatter = new EntityIdHtmlLinkFormatter(
 			$formatterOptions,
-			$this->entityLookup,
+			$this->entityFingerprintLookup,
 			$this->entityTitleLookup
 		);
 

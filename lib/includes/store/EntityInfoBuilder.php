@@ -90,6 +90,10 @@ interface EntityInfoBuilder {
 	/**
 	 * Remove info records for the given EntityIds.
 	 *
+	 * @note: Call this only after all desired data has been collected using
+	 * collectTerms() etc. Depending on implementation, remove() may otherwise
+	 * prevent redirects from being followed correctly.
+	 *
 	 * @param EntityId[] $ids
 	 */
 	public function remove( $ids );
@@ -98,6 +102,10 @@ interface EntityInfoBuilder {
 	 * Retain only info records for the given EntityIds.
 	 * Useful e.g. after resolveRedirects(), to remove explicit entries for
 	 * redirect targets not present in the original input.
+	 *
+	 * @note: Call this only after all desired data has been collected using
+	 * collectTerms() etc. Depending on implementation, retain() may otherwise
+	 * prevent redirects from being followed correctly.
 	 *
 	 * @param EntityId[] $ids
 	 */

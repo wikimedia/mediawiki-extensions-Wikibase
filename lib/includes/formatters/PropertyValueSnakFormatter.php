@@ -108,6 +108,25 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
 
+	/**
+	 * Returns a new PropertyValueSnakFormatter which uses the same services
+	 * as this instances, except for the value formatter.
+	 *
+	 * @param DispatchingValueFormatter $valueFormatter
+	 * Compare the $valueFormatter parameter of the constructor.
+	 *
+	 * @return DispatchingValueFormatter
+	 */
+	public function getDerivedFormatter( DispatchingValueFormatter $valueFormatter ) {
+		return new PropertyValueSnakFormatter(
+			$this->format,
+			$this->options,
+			$valueFormatter,
+			$this->typeLookup,
+			$this->dataTypeFactory
+		);
+	}
+
 	private function failOnErrors() {
 		return $this->options->getOption( self::OPT_ON_ERROR )
 			=== self::ON_ERROR_FAIL;
@@ -315,6 +334,13 @@ class PropertyValueSnakFormatter implements SnakFormatter, TypedValueFormatter {
 	 */
 	public function canFormatSnak( Snak $snak ) {
 		return $snak->getType() === 'value';
+	}
+
+	/**
+	 * @return DispatchingValueFormatter
+	 */
+	public function getValueFormatter() {
+		return $this->valueFormatter;
 	}
 
 }

@@ -58,6 +58,24 @@ class DispatchingSnakFormatter implements SnakFormatter {
 	}
 
 	/**
+	 * Returns a new DispatchingSnakFormatter dispatching to the same formatters
+	 * as this instances, except for the formatters overwritten by $formatters.
+	 *
+	 * @param SnakFormatter[] $formatters a map of snak type IDs to SnakFormatter objects
+	 * Compare the $formatters parameter of the constructor.
+	 *
+	 * @return DispatchingValueFormatter
+	 */
+	public function getDerivedFormatter( array $formatters ) {
+		$formatters = array_merge( $this->formatters, $formatters );
+
+		return new DispatchingSnakFormatter(
+			$this->format,
+			$formatters
+		);
+	}
+
+	/**
 	 * Formats the given Snak by finding an appropriate formatter among the ones supplied
 	 * to the constructor, and applying it.
 	 *
