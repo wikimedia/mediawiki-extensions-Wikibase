@@ -123,9 +123,11 @@ class ParserOutputJsConfigBuilder {
 		// TODO: apply language fallback!
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
 
+		$entityInfoBuilder->resolveRedirects();
 		$entityInfoBuilder->removeMissing();
 		$entityInfoBuilder->collectTerms( array( 'label', 'description' ), array( $this->langCode ) );
 		$entityInfoBuilder->collectDataTypes();
+		$entityInfoBuilder->retain( $entityIds );
 
 		$entities = $entityInfoBuilder->getEntityInfo();
 		$revisions = $this->attachRevisionInfo( $entities );
