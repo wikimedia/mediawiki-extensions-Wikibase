@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_67eb4c0a",
+        "filename": "repo/includes/BadgeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T13:37:08Z",
+      "side": 1,
+      "message": "Why bind to the Language object if you only need a $languageCode?",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_67946c8e",
+        "filename": "repo/includes/BadgeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T13:37:08Z",
+      "side": 1,
+      "message": "Typo.",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_07f36808",
+        "filename": "repo/includes/BadgeLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T13:37:08Z",
+      "side": 1,
+      "message": "Move this bit to a private method.",
+      "revId": "20c8b676c45de851aedca5242f98c293190dcbf6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
