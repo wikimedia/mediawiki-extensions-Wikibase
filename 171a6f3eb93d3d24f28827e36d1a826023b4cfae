@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4765f0a9",
+        "filename": "client/tests/phpunit/includes/recentchanges/ChangeLineFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-11T13:53:22Z",
+      "side": 1,
+      "message": "debug code?!",
+      "revId": "171a6f3eb93d3d24f28827e36d1a826023b4cfae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
