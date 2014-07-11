@@ -34,6 +34,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -694,12 +695,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onParserFirstCallInit( Parser &$parser ) {
-		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::handle', SFH_NO_HASH );
-		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
-
-		if ( $allowDataTransclusion === true ) {
-			$parser->setFunctionHook( 'property', array( '\Wikibase\PropertyParserFunction', 'render' ) );
-		}
+		WikibaseClient::getDefaultInstance()->getParserFunctionRegistrant()->register( $parser );
 
 		return true;
 	}
