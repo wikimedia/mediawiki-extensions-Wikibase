@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_2702e4be",
+        "filename": ".travis.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-11T13:52:48Z",
+      "side": 1,
+      "message": "how about ar (arabic) instead?\n\nthis would catch issues with number formatting, rtl, unicode, etc.\n\nplus at least Wikidata developer can read it ;)",
+      "revId": "d8919c00e427e11adfed01bbdea84a5a0ee6397a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
