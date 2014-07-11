@@ -213,6 +213,7 @@
 	"wikibase-mylanguagefallbackchain-text": "La catena delle lingue di riserva che usi per visualizzare le etichette delle entità è mostrata di seguito.",
 	"wikibase-mylanguagefallbackchain-babel": "Puoi modificarla inserendo <nowiki>{{#babel: }}</nowiki> nella {{GENDER:$1|tua}} [[Special:MyPage|pagina utente]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, convertito da $3 - $4",
+	"wikibase-api-unresolved-redirect": "L'ID di entità specificato si riferisce a un redirect, che non è supportato in questo contesto.",
 	"wikibase-api-no-such-sitelink": "Non è possibile trovare un collegamento al sito",
 	"wikibase-self-conflict-patched": "La tua modifica è stata inserita nell'ultima versione, escludendo alcune delle tue modifiche intermedie.",
 	"wikibase-conflict-patched": "La tua modifica è stata inserita nell'ultima versione.",

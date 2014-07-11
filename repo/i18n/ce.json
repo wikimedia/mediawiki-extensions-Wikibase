@@ -131,6 +131,7 @@
 	"wikibase-item-summary-wbremoveclaims-remove": "{{PLURAL:$1|1=ДӀадаьккхина дехар|ДӀадаьхина дехарш}}",
 	"wikibase-item-summary-wbsetclaim-create": "{{PLURAL:$3|1=Кхоьллина дехар|Кхоьллина дехарш}}",
 	"wikibase-item-summary-clientsitelink-update": "АгӀо кхечухьа яьккхина (цӀе хийцина) [$3] → [$4]",
+	"wikibase-property-summary-wbeditentity-update": "ХӀума хийцина",
 	"wikibase-property-summary-wbsetlabel-set": "Хийцина билгало [$2]",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-listdatatypes-commonsmedia-head": "Викигуламера медиа",

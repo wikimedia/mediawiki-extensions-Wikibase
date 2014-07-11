@@ -76,6 +76,7 @@
 	"wikibase-tooltip-error-details": "詳細資訊",
 	"wikibase-undeserializable-value": "此值無效無法顯示。",
 	"wikibase-validator-invalid": "不準確值",
+	"wikibase-validator-missing-field": "缺少所需欄位「$1」",
 	"wikibase-validator-bad-type": "用於代替$1的$2",
 	"wikibase-validator-too-long": "必須不超出$1個位元",
 	"wikibase-validator-too-short": "必須不少於$1個位元",

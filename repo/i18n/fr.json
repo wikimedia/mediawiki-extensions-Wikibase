@@ -26,7 +26,8 @@
 			"Tititou36",
 			"Tpt",
 			"Wyz",
-			"Zolo"
+			"Zolo",
+			"SnowedEarth"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -228,6 +229,7 @@
 	"wikibase-mylanguagefallbackchain-text": "L’enchaînement de langues de repli utilisé pour vous afficher les libellés des entités est présenté ci-dessous.",
 	"wikibase-mylanguagefallbackchain-babel": "Vous pouvez la modifier en mettant <nowiki>{{#babel: }}</nowiki> sur {{GENDER:$1|votre}} [[Special:MyPage|page utilisateur]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, traduit depuis $3 - $4",
+	"wikibase-api-unresolved-redirect": "L'identifiant de l'entité fait référence à une redirection, ce qui n'est pas pris en charge dans ce contexte.",
 	"wikibase-api-no-such-sitelink": "Impossible de trouver un tel lien de site.",
 	"wikibase-self-conflict-patched": "Votre modification a été intégrée dans la dernière version, écrasant certaines de vos corrections intermédiaires.",
 	"wikibase-conflict-patched": "Votre modification a été intégrée dans la dernière version.",
