@@ -3,9 +3,11 @@
 namespace Wikibase\Test;
 
 use ChangesList;
+use DerivativeContext;
 use Language;
 use RecentChange;
 use RequestContext;
+use User;
 use Wikibase\ChangeLineFormatter;
 use Wikibase\ExternalChangeFactory;
 use Wikibase\RepoLinker;
@@ -52,16 +54,15 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider formatProvider
 	 */
 	public function testFormat( array $expectedTags, array $patterns, RecentChange $recentChange ) {
-		$context = new RequestContext();
+		$context = $this->getTestContext();
+
 		$changesList = ChangesList::newFromContext( $context );
-
 		$changeFactory = new ExternalChangeFactory( 'testrepo' );
-
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$formatter = new ChangeLineFormatter(
 			$changesList->getUser(),
-			$changesList->getLanguage(),
+			Language::factory( 'en' ),
 			$this->repoLinker
 		);
 
@@ -79,6 +80,14 @@ class ChangeLineFormatterTest extends \MediaWikiTestCase {
 		foreach( $patterns as $pattern ) {
 			$this->assertRegExp( $pattern, $formattedLine );
 		}
+	}
+
+	private function getTestContext() {
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setLanguage( Language::factory( 'en' ) );
+		$context->setUser( User::newFromId( 0 ) );
+
+		return $context;
 	}
 
 	public function formatProvider() {
