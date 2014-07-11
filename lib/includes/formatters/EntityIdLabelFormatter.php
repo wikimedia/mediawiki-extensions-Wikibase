@@ -7,7 +7,7 @@ use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityFingerprintLookup;
 use Wikibase\LanguageFallbackChain;
 
 /**
@@ -37,23 +37,23 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	const FALLBACK_NONE = 2;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityFingerprintLookup
 	 */
-	protected $entityLookup;
+	protected $entityFingerprintLookup;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @param FormatterOptions $options Supported options: OPT_LOOKUP_LABEL (boolean),
 	 *        OPT_LABEL_FALLBACK (FALLBACK_XXX)
-	 * @param EntityLookup $entityLookup
+	 * @param EntityFingerprintLookup $entityFingerprintLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( FormatterOptions $options, EntityLookup $entityLookup ) {
+	public function __construct( FormatterOptions $options, EntityFingerprintLookup $entityFingerprintLookup ) {
 		parent::__construct( $options );
 
-		$this->entityLookup = $entityLookup;
+		$this->entityFingerprintLookup = $entityFingerprintLookup;
 
 		$this->defaultOption( self::OPT_LOOKUP_LABEL, true );
 		$this->defaultOption( self::OPT_LABEL_FALLBACK, self::FALLBACK_PREFIXED_ID );
@@ -123,26 +123,25 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 * @return string|bool False if no label was found in the language or language fallback chain.
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
-		$entity = $this->entityLookup->getEntity( $entityId );
+		//TODO: only fetch the languages needed below.
+		$fingerprint = $this->entityFingerprintLookup->getFingerprint( $entityId );
 
-		if ( $entity === null ) {
+		if ( $fingerprint === null ) {
 			throw new OutOfBoundsException( "An Entity with the id $entityId does not exist" );
 		}
+
+		$labelList = $fingerprint->getLabels();
+		$labels = $labelList->toTextArray();
 
 		/* @var LanguageFallbackChain $languageFallbackChain */
 		if ( $this->options->hasOption( 'languages' ) ) {
 			$languageFallbackChain = $this->getOption( 'languages' );
 
-			$extractedData = $languageFallbackChain->extractPreferredValue( $entity->getLabels() );
-
-			if ( $extractedData === null ) {
-				return false;
-			} else {
-				return $extractedData['value'];
-			}
+			$preferredValue = $languageFallbackChain->extractPreferredValue( $labels );
+			return ( $preferredValue !== null ) ? $preferredValue['value'] : false;
 		} else {
 			$lang = $this->getOption( self::OPT_LANG );
-			return $entity->getLabel( $lang );
+			return isset( $labels[$lang] ) ? $labels[$lang] : false;
 		}
 	}
 
