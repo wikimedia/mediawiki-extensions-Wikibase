@@ -63,7 +63,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
+			->method( 'getMainItem' )
 			->will( $this->returnValue( $entity ) );
 
 		$lang = Language::factory( 'en' );

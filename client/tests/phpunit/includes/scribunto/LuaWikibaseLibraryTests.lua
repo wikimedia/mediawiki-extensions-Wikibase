@@ -38,10 +38,10 @@ end
 local tests = {
 	-- Integration tests
 
-	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
+	{ name = 'mw.wikibase.getMainItem (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }
 	},
-	{ name = 'mw.wikibase.getEntity (schema version)', func = testGetEntitySchemaVersion,
+	{ name = 'mw.wikibase.getMainItem (schema version)', func = testGetEntitySchemaVersion,
 	  expect = { 1 }
 	},
 	{ name = 'mw.wikibase.getEntityObject (type)', func = testGetEntityObjectType, type='ToString',

@@ -70,7 +70,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	private function getEntityLookupMock( Entity $entity = null ) {
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 
-		$entityLookup->expects( $this->any() )->method( 'getEntity' )
+		$entityLookup->expects( $this->any() )->method( 'getMainItem' )
 			->will( $this->returnValue( $entity ) );
 
 		return $entityLookup;

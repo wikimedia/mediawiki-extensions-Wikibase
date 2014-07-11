@@ -64,8 +64,8 @@ class RedirectResolvingEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 
 		$mock->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnCallback( array( $this, 'getEntity' ) ) );
+			->method( 'getMainItem' )
+			->will( $this->returnCallback( array( $this, 'getMainItem' ) ) );
 
 		$mock->expects( $this->any() )
 			->method( 'hasEntity' )
