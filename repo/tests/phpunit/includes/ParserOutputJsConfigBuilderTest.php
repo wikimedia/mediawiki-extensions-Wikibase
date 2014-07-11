@@ -2,13 +2,13 @@
 
 namespace Wikibase\Test;
 
-use DataValues\StringValue;
 use Language;
 use Title;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -19,6 +19,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 
@@ -69,13 +70,22 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function buildProvider() {
-		$entity = $this->getEntity();
+		$entity = $this->getMainItem();
+		$referencedItem = $this->getReferencedItem();
 
 		$property = $this->getProperty();
-		$usedEntities = $this->getUsedEntities( $property );
+		$redirect = $this->getRedirect();
+
+		$propertyKey = $property->getId()->getSerialization();
+		$redirectKey = $redirect->getEntityId()->getSerialization();
+
+		$usedEntities = array(
+			$propertyKey => $this->getPropertyInfo( $property ),
+			$redirectKey => $this->getEntityInfo( $referencedItem ),
+		);
 
 		return array(
-			array( $entity, $usedEntities, true )
+			array( $entity, $usedEntities ),
 		);
 	}
 
@@ -116,13 +126,23 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 		return $options;
 	}
 
-	private function getEntity() {
+	private function getRedirect() {
+		$redirect = new EntityRedirect( new ItemId( 'Q44' ), new ItemId( 'Q55' ) );
+		return $redirect;
+	}
+
+	private function getMainItem() {
+		$redirect = $this->getRedirect();
+
 		$item = Item::newEmpty();
 		$itemId = new ItemId( 'Q5881' );
 		$item->setId( $itemId );
 		$item->setLabel( 'en', 'Cake' );
 
-		$snak = new PropertyValueSnak( new PropertyId( 'P794' ), new StringValue( 'a' ) );
+		$snak = new PropertyValueSnak(
+			new PropertyId( 'P794' ),
+			new EntityIdValue( $redirect->getEntityId() )
+		);
 
 		$claim = new Claim( $snak );
 		$claim->setGuid( 'P794$muahahaha' );
@@ -132,46 +152,56 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 		return $item;
 	}
 
+	private function getReferencedItem() {
+		$item = Item::newEmpty();
+		$itemId = new ItemId( 'Q55' );
+		$item->setId( $itemId );
+		$item->setLabel( 'en', 'Vanilla' );
+
+		return $item;
+	}
+
 	private function getProperty() {
-		$property = Property::newFromType( 'string' );
+		$property = Property::newFromType( 'wikibase-item' );
 		$property->setId( new PropertyId( 'P794' ) );
 		$property->setLabel( 'en', 'AwesomeID' );
 
 		return $property;
 	}
 
-	private function getUsedEntities( Property $property ) {
-		$propertyId = $property->getId()->getSerialization();
+	private function getPropertyInfo( Property $property ) {
+		$info = $this->getEntityInfo( $property );
+		$info['content']['datatype'] = $property->getDataTypeId();
 
-		$usedEntities = array(
-			$propertyId => array(
-				'content' => array(
-					'id' => $propertyId,
-					'type' => 'property',
-					'labels' => array(
-						'en' => array(
-							'language' => 'en',
-							'value' => $property->getLabel( 'en' )
-						)
-					),
-					'descriptions' => $property->getDescriptions(),
-					'datatype' => $property->getDataTypeId(),
+		return $info;
+	}
+
+	private function getEntityInfo( Entity $entity ) {
+		$entityId = $entity->getId()->getSerialization();
+
+		return array(
+			'content' => array(
+				'id' => $entityId,
+				'type' => $entity->getType(),
+				'labels' => array(
+					'en' => array(
+						'language' => 'en',
+						'value' => $entity->getLabel( 'en' )
+					)
 				),
-				'title' => "property:$propertyId"
-			)
+				'descriptions' => $entity->getDescriptions(),
+			),
+			'title' => $entity->getType() . ":$entityId"
 		);
-
-		return $usedEntities;
 	}
 
 	private function getMockRepository() {
 		$mockRepo = new MockRepository();
 
-		$entity = $this->getEntity();
-		$mockRepo->putEntity( $entity );
-
-		$property = $this->getProperty();
-		$mockRepo->putEntity( $property );
+		$mockRepo->putEntity( $this->getMainItem() );
+		$mockRepo->putEntity( $this->getReferencedItem() );
+		$mockRepo->putRedirect( $this->getRedirect() );
+		$mockRepo->putEntity( $this->getProperty() );
 
 		return $mockRepo;
 	}

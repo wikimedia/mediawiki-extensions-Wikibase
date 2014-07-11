@@ -645,4 +645,39 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 
 		return $redirects;
 	}
+
+	/**
+	 * @param EntityId[] $ids
+	 *
+	 * @return string[]
+	 */
+	private function asIdStrings( array $ids ) {
+		return array_map( function ( EntityId $id ) {
+			return $id->getSerialization();
+		}, $ids );
+	}
+
+	/**
+	 * Remove info records for the given EntityIds.
+	 *
+	 * @param EntityId[] $ids
+	 */
+	public function remove( array $ids ) {
+		$remove = $this->asIdStrings( $ids );
+		$this->unsetEntityInfo( $remove );
+	}
+
+	/**
+	 * Retain only info records for the given EntityIds.
+	 * Useful e.g. after resolveRedirects(), to remove explicit entries for
+	 * redirect targets not present in the original input.
+	 *
+	 * @param EntityId[] $ids
+	 */
+	public function retain( array $ids ) {
+		$retain = $this->asIdStrings( $ids );
+		$remove = array_diff( array_keys( $this->entityInfo ), $retain );
+		$this->unsetEntityInfo( $remove );
+	}
+
 }
