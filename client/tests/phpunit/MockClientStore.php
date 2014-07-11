@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  */
 class MockClientStore implements ClientStore {
 	public function getItemUsageIndex() {}
-	public function getPropertyLabelResolver() {}
 	public function getTermIndex() {}
 	public function newChangesTable() {}
 	public function clear() {}
@@ -62,4 +61,12 @@ class MockClientStore implements ClientStore {
 		}
 		return $mockPropertyInfoStore;
 	}
+
+	/**
+	 * @return PropertyLabelResolver
+	 */
+	public function getPropertyLabelResolver() {
+		return new MockPropertyLabelResolver( 'en', $this->getMock() );
+	}
+
 }

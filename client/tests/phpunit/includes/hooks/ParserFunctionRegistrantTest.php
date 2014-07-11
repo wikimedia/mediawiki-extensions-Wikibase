@@ -13,7 +13,11 @@ class ParserFunctionRegistrantTest extends \PHPUnit_Framework_TestCase {
 	public function testRegisterPropertyParserFunctions() {
 		$parser = $this->newParser();
 
-		$registrant = new ParserFunctionRegistrant( true );
+		$registrant = new ParserFunctionRegistrant(
+			$this->getPropertyParserFunctionHandler(),
+			true
+		);
+
 		$registrant->register( $parser );
 
 		$functionHooks = $parser->getFunctionHooks();
@@ -24,7 +28,11 @@ class ParserFunctionRegistrantTest extends \PHPUnit_Framework_TestCase {
 	public function testRegisterOnlyNoExternalLangLinksFuntion() {
 		$parser = $this->newParser();
 
-		$registrant = new ParserFunctionRegistrant( false );
+		$registrant = new ParserFunctionRegistrant(
+			$this->getPropertyParserFunctionHandler(),
+			false
+		);
+
 		$registrant->register( $parser );
 
 		$functionHooks = $parser->getFunctionHooks();
@@ -35,6 +43,19 @@ class ParserFunctionRegistrantTest extends \PHPUnit_Framework_TestCase {
 	private function newParser() {
 		$parserConfig = array( 'class' => 'Parser' );
 		return new Parser( $parserConfig );
+	}
+
+	private function getPropertyParserFunctionHandler() {
+		$propertyParserFunctionHandler = $this->getMockBuilder(
+				'\Wikibase\DataAccess\PropertyParserFunctionHandler'
+			)->disableOriginalConstructor()
+			->getMock();
+
+		$propertyParserFunctionHandler->expects( $this->any() )
+			->method( 'handle' )
+			->will( $this->returnValue( 'prop!' ) );
+
+		return $propertyParserFunctionHandler;
 	}
 
 }

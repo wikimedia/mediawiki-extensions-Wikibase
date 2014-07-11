@@ -10,11 +10,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Property;
-use Wikibase\PropertyParserFunctionRenderer;
+use Wikibase\DataAccess\PropertyParserFunctionRenderer;
 use Wikibase\PropertyValueSnak;
 
 /**
- * @covers Wikibase\PropertyParserFunctionRenderer
+ * @covers Wikibase\DataAccess\PropertyParserFunctionRenderer
  *
  * @group Wikibase
  * @group WikibaseClient
