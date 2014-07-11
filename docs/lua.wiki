@@ -25,8 +25,8 @@ An example call might look like this:
 mw.wikibase.sitelink( 'Q42' ) -- Returns the given items page title in the current Wiki as a string, like "Berlin".
 </source>
 
-=== mw.wikibase.getEntity ===
-<code>wikibase.getEntity()</code><br>
+=== mw.wikibase.getMainItem ===
+<code>wikibase.getMainItem()</code><br>
 Gets entity data of the Wikidata item connected with the current page. The returned object will have a legacy format, where tables are 0-based rather than 1-based. Also they will hold claims with both upper an lower case property ids (lower key property ids are deprecated).
 
 <strong style="color:red">Deprecated: Please use <code>[[#mw.wikibase.getEntityObject|mw.wikibase.getEntityObject]]</code></strong>

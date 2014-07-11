@@ -305,7 +305,8 @@ abstract class EntityViewTest extends \MediaWikiTestCase {
 		$parserOutput = $entityView->getParserOutput( $revision, null, false );
 		$configVars = $parserOutput->getJsConfigVars();
 
-		// @todo moar tests
+		!!!...fixme... check the config vars... check redirect resolution...!!!
+
 		$this->assertInternalType( 'array', $configVars );
 	}
 

@@ -51,7 +51,7 @@ class WikibaseValueFormatterBuildersTest extends \MediaWikiTestCase {
 
 		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityLookup' );
 		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
+			->method( 'getMainItem' )
 			->will( $this->returnValue( $entity ) );
 
 		return new WikibaseValueFormatterBuilders( $entityLookup, Language::factory( 'en' ) );

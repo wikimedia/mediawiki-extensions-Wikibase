@@ -125,7 +125,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		$this->assertEquals( $redirect, $content->getEntityRedirect() );
 		$this->assertEquals( $target->getFullText(), $content->getRedirectTarget()->getFullText() );
 
-		// getEntity() should fail
+		// getMainItem() should fail
 		$this->setExpectedException( 'MWException' );
 		$content->getEntity();
 	}

@@ -76,7 +76,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 
 		$item = $this->getTestItem();
 		$entityLookupMock->expects( $this->exactly( 10 ) )
-			->method( 'getEntity' )
+			->method( 'getMainItem' )
 			->will( $this->returnValue( $item ) )
 			->with( $this->equalTo( $this->getTestItemId() ) );
 
