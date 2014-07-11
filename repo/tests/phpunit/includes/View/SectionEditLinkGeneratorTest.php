@@ -42,14 +42,14 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				'/' . wfMessage( 'wikibase-edit' )->inLanguage( 'es' )->text() . '/',
-				'Version',
+				\SpecialPage::getTitleFor( 'Version' )->getText(),
 				'edit',
 				true,
 				'es'
 			),
 			array(
 				'/' . wfMessage( 'wikibase-add' )->inLanguage( 'de' )->text() . '/',
-				'Version',
+				\SpecialPage::getTitleFor( 'Version' )->getText(),
 				'add',
 				true,
 				'de'
@@ -75,7 +75,7 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'tag' => 'a',
 					'attributes' => array(
-						'href' => 'regexp:+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1$+',
+						'href' => 'regexp:+' . preg_quote( urlencode( SpecialPageFactory::getLocalNameFor( 'Version' ) ), '+' ) . '/Q1$+',
 					)
 				),
 				'Version',
@@ -85,7 +85,7 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'tag' => 'a',
 					'attributes' => array(
-						'href' => 'regexp:+' . preg_quote( SpecialPageFactory::getLocalNameFor( 'Version' ), '+' ) . '/Q1/de$+',
+						'href' => 'regexp:+' . preg_quote( urlencode( SpecialPageFactory::getLocalNameFor( 'Version' ) ), '+' ) . '/Q1/de$+',
 					)
 				),
 				'Version',
