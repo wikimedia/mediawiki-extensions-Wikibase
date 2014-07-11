@@ -27,7 +27,7 @@ use Wikibase\SummaryFormatter;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class SummaryFormatterTest extends \PHPUnit_Framework_TestCase {
+class SummaryFormatterTest extends \MediaWikiLangTestCase {
 
 	/**
 	 * @param EntityIdValue|EntityId $id
