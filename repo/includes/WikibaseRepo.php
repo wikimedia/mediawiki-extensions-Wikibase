@@ -153,6 +153,11 @@ class WikibaseRepo {
 	private $store;
 
 	/**
+	 * @var BadgeLookup
+	 */
+	private $badgeLookup = null;
+
+	/**
 	 * Returns the default instance constructed using newInstance().
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
@@ -888,6 +893,25 @@ class WikibaseRepo {
 		}
 
 		return array( 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer', 'isBlobUsingLegacyFormat' );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return BadgeLookup
+	 */
+	public function getBadgeLookup() {
+		global $wgLang;
+
+		if ( $this->badgeLookup === null ) {
+			$this->badgeLookup = new BadgeLookup(
+				$wgLang,
+				$this->getSettings()->getSetting( 'badgeItems' ),
+				$this->getStore()->getEntityInfoBuilder()
+			);
+		}
+
+		return $this->badgeLookup;
 	}
 
 }
