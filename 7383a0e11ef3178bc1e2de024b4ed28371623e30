@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_2c7e4be2",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T13:03:40Z",
+      "side": 1,
+      "message": "This is a problem in older non-SVG browsers. Please see my depending patch I002f873.",
+      "revId": "7383a0e11ef3178bc1e2de024b4ed28371623e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ec1043af",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-11T13:03:40Z",
+      "side": 1,
+      "message": "Same problem with misusing the info builder here. Collect the IDs first, query once, then use it.",
+      "revId": "7383a0e11ef3178bc1e2de024b4ed28371623e30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
