@@ -639,6 +639,7 @@ if ( $ ) {
 
 		// NOTE: This is a bit hackish, it would be more appropriate to use a TermTable here.
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $propertyIds );
+		$entityInfoBuilder->resolveRedirects();
 		$entityInfoBuilder->removeMissing();
 		$entityInfoBuilder->collectTerms(
 			array( 'label', 'description' ),
