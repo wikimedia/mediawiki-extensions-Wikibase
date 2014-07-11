@@ -437,4 +437,76 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
+
+	public function provideRemove() {
+		return array(
+			'empty' => array(
+				array(),
+				array(),
+				array(),
+			),
+			'remove some' => array(
+				array(
+					new ItemId( 'Q1' ),
+					new ItemId( 'Q2' ),
+					new ItemId( 'Q3' ),
+				),
+				array(
+					new ItemId( 'Q2' )
+				),
+				array(
+					'Q1',
+					'Q3'
+				),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideRemove
+	 */
+	public function testRemove( array $ids, array $remove, array $expected ) {
+		$builder = $this->newEntityInfoBuilder( $ids );
+
+		$builder->remove( $remove );
+		$entityInfo = $builder->getEntityInfo();
+
+		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
+	}
+
+	public function provideRetain() {
+		return array(
+			'empty' => array(
+				array(),
+				array(),
+				array(),
+			),
+			'retain some' => array(
+				array(
+					new ItemId( 'Q1' ),
+					new ItemId( 'Q2' ),
+					new ItemId( 'Q3' ),
+				),
+				array(
+					new ItemId( 'Q2' )
+				),
+				array(
+					'Q2'
+				),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideRetain
+	 */
+	public function testRetain( array $ids, array $retain, array $expected ) {
+		$builder = $this->newEntityInfoBuilder( $ids );
+
+		$builder->retain( $retain );
+		$entityInfo = $builder->getEntityInfo();
+
+		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
+	}
+
 }
