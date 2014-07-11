@@ -34,6 +34,24 @@
       "revId": "d8919c00e427e11adfed01bbdea84a5a0ee6397a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_072ec83e",
+        "filename": ".travis.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-11T13:55:55Z",
+      "side": 1,
+      "message": "both is ok w/ me, then we have 4 different languages covered :)",
+      "parentUuid": "8e28a382_67ffcca8",
+      "revId": "d8919c00e427e11adfed01bbdea84a5a0ee6397a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
