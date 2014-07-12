@@ -7,6 +7,11 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
+/* FIXME: Remove when the fix in ValueView got reviewed and released */
+.ui-suggester-list a {
+	text-decoration: none;
+}
+
 /* No point in always displaying the notification right under the search box since notifications
 are also triggered down the document */
 .wb-entitypage #mw-notification-area {
