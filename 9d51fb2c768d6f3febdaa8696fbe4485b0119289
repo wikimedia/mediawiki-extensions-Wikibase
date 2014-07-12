@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_de69a61e",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T12:15:30Z",
+      "side": 1,
+      "message": "isn\u0027t $tableCells[ $tableCells.length - 2 ] a jQuery object itself?",
+      "revId": "9d51fb2c768d6f3febdaa8696fbe4485b0119289",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_be5eda79",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T12:15:30Z",
+      "side": 1,
+      "message": "Why is this? Seems unused in SiteLinksView",
+      "revId": "9d51fb2c768d6f3febdaa8696fbe4485b0119289",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7e58728c",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T12:15:30Z",
+      "side": 1,
+      "message": "classes",
+      "revId": "9d51fb2c768d6f3febdaa8696fbe4485b0119289",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9e631e3b",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T12:15:30Z",
+      "side": 1,
+      "message": "empty also test isset, so the explicit isset call isn\u0027t needed here (it also clutters the condition)",
+      "revId": "9d51fb2c768d6f3febdaa8696fbe4485b0119289",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
