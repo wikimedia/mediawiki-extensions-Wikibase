@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a0f594b7",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T19:15:11Z",
+      "side": 1,
+      "message": "use .eq",
+      "revId": "e39e8f6d708a972ed130adb6410083cdb9d5d97d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_40c4b068",
+        "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T19:15:11Z",
+      "side": 1,
+      "message": "this will fail in non-Experimental mode",
+      "revId": "e39e8f6d708a972ed130adb6410083cdb9d5d97d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_80f298cb",
+        "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T19:15:11Z",
+      "side": 1,
+      "message": "trailing ws",
+      "revId": "e39e8f6d708a972ed130adb6410083cdb9d5d97d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_60bfacce",
+        "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-12T19:15:11Z",
+      "side": 1,
+      "message": "trailing ws",
+      "revId": "e39e8f6d708a972ed130adb6410083cdb9d5d97d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
