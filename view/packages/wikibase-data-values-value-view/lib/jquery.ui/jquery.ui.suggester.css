@@ -29,6 +29,7 @@
 
 .ui-suggester-list .ui-ooMenu-item a {
 	padding: 0 0.2em;
+	text-decoration: none;
 }
 
 .ui-suggester-list .ui-ooMenu-item a.ui-state-hover,
