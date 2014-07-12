@@ -210,6 +210,7 @@
 	"wikibase-entitydata-bad-revision": "Не удаётся показать версию $2 сущности «$1».",
 	"wikibase-entitydata-bad-id": "Недопустимый идентификатор: $1.",
 	"wikibase-entitydata-unsupported-format": "Формат данных «$1» не поддерживается этим интерфейсом.",
+	"wikibase-entitydata-storage-error": "Не удалось загрузить сущность $1.",
 	"wikibase-entitydata-title": "Данные сущности",
 	"wikibase-entitydata-text": "Эта страница предоставляет интерфейс связанных данных для значений сущности. Просьба предоставить идентификатор сущности в URL, используя синтаксис подстраниц.",
 	"special-mylanguagefallbackchain": "Моя цепочка резервных языков",
