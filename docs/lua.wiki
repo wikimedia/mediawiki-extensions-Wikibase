@@ -70,12 +70,33 @@ entity:getProperties() -- Returns a table like: { "P123", "P1337" }
 <code>entity:formatPropertyValues( propertyId )</code><br>
 <code>entity:formatPropertyValues( propertyId, acceptableRanks )</code><br>
 Get the formatted value of the claims with the given property id. Per default only the best claims will be returned.
-Alternatively a table with acceptable ranks can be given as second parameter.
+Alternatively a table with acceptable ranks can be given as second parameter (a mapping table with all ranks can be found in [[#mw.wikibase.entity.claimRanks|<code>mw.wikibase.entity.claimRanks</code>]]).
 
 An example call might look like this:
 <source lang="lua">
-entity:formatPropertyValues( 'P12' ) -- Returns a table like: { value = "Formatted claim value", label = "Label of the Property" }
-entity:formatPropertyValues( 'P42', { mw.wikibase.entity.claimRanks.RANK_NORMAL } ) -- Returns the normal ranked claims with the property Id 42 (same format as above)
+-- Return a table like: { value = "Formatted claim value", label = "Label of the Property" }
+entity:formatPropertyValues( 'P12' )
+
+-- Return the normal ranked claims with the property Id 42 (same format as above)
+entity:formatPropertyValues( 'P42', { mw.wikibase.entity.claimRanks.RANK_NORMAL } )
+</source>
+
+=== mw.wikibase.entity.claimRanks ===
+The <code>mw.wikibase.entity.claimRanks</code> table contains a map of all available claim ranks.
+
+The available ranks are:
+# RANK_TRUTH
+# RANK_PREFERRED
+# RANK_NORMAL
+# RANK_DEPRECATED
+
+This can for example be used like this:
+<source lang="lua">
+-- Return the normal ranked claims with the property id P5
+entity:formatPropertyValues( 'P5', { mw.wikibase.entity.claimRanks.RANK_NORMAL } )
+
+ -- Return all claims with id P123 (as the table passed contains all possible claim ranks)
+entity:formatPropertyValues( 'P123', mw.wikibase.entity.claimRanks )
 </source>
 
 === mw.wikibase.entity.create ===
