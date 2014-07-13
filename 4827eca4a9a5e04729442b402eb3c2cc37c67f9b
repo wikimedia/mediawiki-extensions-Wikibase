@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_89e8830c",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:28:44Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_69d55747",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:28:44Z",
+      "side": 1,
+      "message": "I honestly don\u0027t understand this description. Does this block ids to be removed via remove()?",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_29cf4fb7",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:28:44Z",
+      "side": 1,
+      "message": "All new methods miss the \"array\" type hint.",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_49da9b79",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:28:44Z",
+      "side": 1,
+      "message": "So this is a splice() function? removeAllBut()? What about removeAll( array $keepIds \u003d null )?",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_693437a8",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:28:44Z",
+      "side": 1,
+      "message": "Code duplication. Could be a helper function in the interface/abstract base class.",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
