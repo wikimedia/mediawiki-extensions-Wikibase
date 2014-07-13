@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_09aff3e1",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 19
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-13T10:41:01Z",
+      "side": 1,
+      "message": "please add a more verbose comment... this is an evil workaround and should at very least have a comment that says so",
+      "revId": "c33b92b91282a53b3cd43c807cdc7e6979050628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
