@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_6930b753",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Please be aware of what Jeroen currently does at https://github.com/JeroenDeDauw/BatchingIterator and https://github.com/wmde/WikibaseEntityStore.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e92a67d6",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "This is the only place here in this interface that mentions the ids. Which is strange, don\u0027t you think? The interface is all about returning information about entities but it does not contain anything about how these ids are specified. Would it help to include an abstract __constructor( array $ids ) here?",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4983bbd1",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Isn\u0027t it \"aliases\"? I think you made a mistake here.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0916d3a9",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Type of both parameters is string[]|null.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_093ff323",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "The same parameters are switched in the proposed EntityFingerprintLookup::getFingerprint( ..., $languages, $termTypes ) in one of the following patches. Can we please make the order the same in one way or the other? Either here or there? Don\u0027t have a strong favorite - maybe language first is best.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8921a3f8",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Messed order again, compared to the constructor.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c927ab0c",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_29886feb",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "More specific string[]|null type hints please.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_098db3fb",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "$entityRecord[\u0027aliases\u0027][$lang] \u003d array();\nis missing here.\n\nYou can write a test that executes collectTerms() twice to test this. Currently you will get duplicate aliases.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a97b3fea",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "This block is odd. Why not\nif ( ... instanceof ... ) {\n} else {\n}",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e9d707c3",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "I\u0027m aware that pretty much all mistakes I found here are from older code and only moved over here.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_09d373da",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "string[]",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_29ce2f32",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_49c97b28",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Both are string[]|null.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_69c43712",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_894f63c0",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a9521f68",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c9556b54",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e958278e",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_09649341",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_295f4f79",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_69655741",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_496a9b13",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:48:30Z",
+      "side": 1,
+      "message": "Please don\u0027t use the name $entities.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
