@@ -43,7 +43,7 @@
 	"wikibase-linkitem-selectlink": "Selecciona un sitio y la página que quieres enlazar con esta.",
 	"wikibase-linkitem-input-site": "Idioma:",
 	"wikibase-linkitem-input-page": "Página:",
-	"wikibase-linkitem-confirmitem-text": "La página que usted eligió ya está asociada a un [$1 elemento de nuestro depósito central de datos]. Confirme que {{PLURAL:$2|la página|las páginas}} que se {{PLURAL:$2|muestra|muestran}} a continuación {{PLURAL:$2|es|son}} {{PLURAL:$2|la|las}} que desea enlazar a esta página.",
+	"wikibase-linkitem-confirmitem-text": "La página elagida ya está asociada con un [$1 elemento de nuestro depósito central de datos]. Confirma que {{PLURAL:$2|la página|las páginas}} que se {{PLURAL:$2|muestra|muestran}} a continuación {{PLURAL:$2|es|son}} {{PLURAL:$2|la|las}} que quieres enlazar con esta página.",
 	"wikibase-linkitem-confirmitem-button": "Confirmar",
 	"wikibase-linkitem-not-loggedin-title": "Necesita haberse identificado",
 	"wikibase-linkitem-not-loggedin": "Necesita haberse identificado en esta wiki y en el [$1 central data repository], para usar esta función.",

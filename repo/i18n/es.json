@@ -81,7 +81,7 @@
 	"wikibase-snakview-property-input-placeholder": "propiedad",
 	"wikibase-snakview-choosesnaktype": "Elige un tipo de valor.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "El valor no cumple con la definición de la propiedad.",
-	"wikibase-snakview-variation-datavaluetypemismatch-details": "Inesperado conflicto entre el tipo de propiedad \"$2\" y el tipo de valor \"$1\".",
+	"wikibase-snakview-variation-datavaluetypemismatch-details": "Conflicto inesperado entre el tipo de propiedad «$2» y el tipo de valor «$1».",
 	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "No es posible definir un nuevo valor para una propiedad borrada.",
 	"wikibase-snakview-variations-somevalue-label": "valor desconocido",
 	"wikibase-snakview-variations-novalue-label": "sin valor",

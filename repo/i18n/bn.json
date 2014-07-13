@@ -145,6 +145,7 @@
 	"special-itemswithoutsitelinks": "সাইটলিংক বিহীন আইটেম",
 	"wikibase-entitydata-bad-id": "অবৈধ আইডি: $1।",
 	"special-mylanguagefallbackchain": "আমার ভাষা ফলব্যাক চেইন",
+	"wikibase-mylanguagefallbackchain-babel": "{{GENDER:$1|আপনি}} আপনার [[Special:MyPage|ব্যবহারকারী পাতায়]]  <nowiki>{{#babel: }}</nowiki> লাগানোর দ্বারা এটি সম্পাদনা করতে পারেন।",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, $3 - $4 থেকে রূপান্তরিত",
 	"wikibase-restoreold": "পুনরুদ্ধার",
 	"wikibase-restore-summary": "[[Special:Contributions/$2|$2]] কর্তৃক $1-এর সংশোধনটি পুনরুদ্ধার করা হয়েছে",

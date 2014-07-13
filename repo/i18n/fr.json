@@ -223,6 +223,7 @@
 	"wikibase-entitydata-bad-revision": "Impossible d’afficher la révision $2 de l’entité $1.",
 	"wikibase-entitydata-bad-id": "ID non valide : $1",
 	"wikibase-entitydata-unsupported-format": "Le format de données $1 n’est pas pris en charge par cette interface.",
+	"wikibase-entitydata-storage-error": "Échec au chargement de l’entité $1.",
 	"wikibase-entitydata-title": "Données d’entité",
 	"wikibase-entitydata-text": "Cette page fournit une interface de données liées à des valeurs d’entité. Veuillez fournir l'ID de l’entité dans l'URL, en utilisant la syntaxe de sous-page.",
 	"special-mylanguagefallbackchain": "Mon enchaînement de langues de repli",

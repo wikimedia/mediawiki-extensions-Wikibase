@@ -21,7 +21,7 @@
 	"wikibase-diffview-alias": "pseudónimos",
 	"wikibase-diffview-description": "descrición",
 	"wikibase-diffview-link": "ligazóns",
-	"wikibase-error-unexpected": "Produciuse un erro inesperado.",
+	"wikibase-error-unexpected": "Produciuse un erro inesperado: $1.",
 	"wikibase-error-save-generic": "Houbo un erro ao levar a cabo o gardado, polo que non se puideron completar os cambios.",
 	"wikibase-error-remove-generic": "Houbo un erro ao levar a cabo a eliminación, polo que non se puideron completar os cambios.",
 	"wikibase-error-save-connection": "Houbo un erro na conexión ao levar a cabo o gardado, polo que non se puideron completar os cambios. Comprobe a súa conexión á internet.",

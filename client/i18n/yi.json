@@ -19,7 +19,7 @@
 	"wikibase-comment-sitelink-change": "שפראכלינק געענדערט פון $1 אויף $2",
 	"wikibase-comment-sitelink-remove": "שפראך לינק אראפגענומען: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ענדערונג|ענדערונגען}}",
-	"wikibase-dataitem": "דאטנאביעקט",
+	"wikibase-dataitem": "{{WBREPONAME}}־אביעקט",
 	"wikibase-editlinks": "רעדאקטירן לינקען",
 	"wikibase-editlinkstitle": "רעדאקטירן אינטערשפראך לינקען",
 	"wikibase-linkitem-addlinks": "צולייגן לינקען",
