@@ -45,9 +45,9 @@ class SqlIdGenerator implements IdGenerator {
 	}
 
 	/**
-	 * @see IdIncrementer::getNewId
+	 * @see IdGenerator::getNewId
 	 *
-	 * @param string $type Usually the content model identifier, e.g. 'wikibase-item'.
+	 * @param string $type
 	 *
 	 * @return int
 	 */
@@ -60,7 +60,7 @@ class SqlIdGenerator implements IdGenerator {
 	 *
 	 * @since 0,1
 	 *
-	 * @param string $type Usually the content model identifier, e.g. 'wikibase-item'.
+	 * @param string $type
 	 * @param bool $retry Retry once in case of e.g. race conditions. Defaults to true.
 	 *
 	 * @throws MWException
