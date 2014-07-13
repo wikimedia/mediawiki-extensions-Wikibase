@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_8991a39e",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:16:28Z",
+      "side": 1,
+      "message": "\"Compare to\"? Also misses a dot.",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_69ee7721",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:16:28Z",
+      "side": 1,
+      "message": "return new self( ... );",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_29f86fe1",
+        "filename": "lib/includes/formatters/DispatchingValueFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:16:28Z",
+      "side": 1,
+      "message": "\"Compare to\"?",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_49f3bb07",
+        "filename": "lib/includes/formatters/DispatchingValueFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:16:28Z",
+      "side": 1,
+      "message": "Use self, please.",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e9e1472a",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:16:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure but I think \"compare the\" is not valid English.",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_09fdb3d1",
+        "filename": "lib/includes/formatters/PropertyValueSnakFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:16:28Z",
+      "side": 1,
+      "message": "self, please.",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c9de8b70",
+        "filename": "lib/includes/store/EntityFingerprintLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:16:28Z",
+      "side": 1,
+      "message": "You are confusing \"any\" with \"all\" (two times).",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
