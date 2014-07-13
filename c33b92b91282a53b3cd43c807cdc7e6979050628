@@ -16,6 +16,23 @@
       "revId": "c33b92b91282a53b3cd43c807cdc7e6979050628",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_89bac31c",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 19
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T10:53:26Z",
+      "side": 1,
+      "message": "I just realized this creates a 14px square but the background is 20px. Hm. I adjusted my follow-up I002f873 accordingly.",
+      "revId": "c33b92b91282a53b3cd43c807cdc7e6979050628",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
