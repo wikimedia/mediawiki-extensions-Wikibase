@@ -92,9 +92,9 @@ final class RepoHooks {
 				. 'See ExampleSettings.php for details and examples.');
 		}
 
-		foreach ( $namespaces as $model => $ns ) {
-			if ( !isset( $wgNamespaceContentModels[$ns] ) ) {
-				$wgNamespaceContentModels[$ns] = $model;
+		foreach ( $namespaces as $contentModel => $namespace ) {
+			if ( !isset( $wgNamespaceContentModels[$namespace] ) ) {
+				$wgNamespaceContentModels[$namespace] = $contentModel;
 			}
 		}
 
@@ -688,10 +688,10 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		//NOTE: the model returned by Title::getContentModel() is not reliable, see bug 37209
-		$model = $target->getContentModel();
+		$contentModel = $target->getContentModel();
 
 		// we only want to handle links to Wikibase entities differently here
-		if ( !$entityContentFactory->isEntityContentModel( $model ) ) {
+		if ( !$entityContentFactory->isEntityContentModel( $contentModel ) ) {
 			wfProfileOut( __METHOD__ );
 			return true;
 		}
@@ -825,9 +825,9 @@ final class RepoHooks {
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
-			foreach ( $entityContentFactory->getEntityContentModels() as $model ) {
+			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {
 				/** @var EntityHandler $handler */
-				$handler = ContentHandler::getForModelID( $model );
+				$handler = ContentHandler::getForModelID( $contentModel );
 
 				if ( $handler->getEntityNamespace() == $namespace ) {
 					// trying to use ApiEditPage on an entity namespace
@@ -882,18 +882,18 @@ final class RepoHooks {
 
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
-		$model = $result->getTitle()->getContentModel();
+		$title = $result->getTitle();
+		$contentModel = $title->getContentModel();
 
-		if ( $entityContentFactory->isEntityContentModel( $model ) ) {
-			$lang = $searchPage->getLanguage();
-			$page = WikiPage::factory( $result->getTitle() );
-
+		if ( $entityContentFactory->isEntityContentModel( $contentModel ) ) {
 			/** @var EntityContent $content */
+			$page = WikiPage::factory( $title );
 			$content = $page->getContent();
 
 			if ( $content && !$content->isRedirect() ) {
 				$entity = $content->getEntity();
-				$description = $entity->getDescription( $lang->getCode() ); // TODO: language fallback!
+				$language = $searchPage->getLanguage();
+				$description = $entity->getDescription( $language->getCode() ); // TODO: language fallback!
 
 				if ( $description !== false && $description !== '' ) {
 					$attr = array( 'class' => 'wb-itemlink-description' );
