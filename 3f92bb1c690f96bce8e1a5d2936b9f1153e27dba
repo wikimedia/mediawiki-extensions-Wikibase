@@ -118,6 +118,23 @@
       "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a94d7fe2",
+        "filename": "lib/includes/store/EntityFingerprintLookup.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T16:05:11Z",
+      "side": 1,
+      "message": "This parameter order conflicts with the one in EntityInfoBuilder::collectTerms( $termTypes, $languages ). Please make the order the same by changing one of the methods. Don\u0027t have a strong favorite - maybe language first is best.",
+      "revId": "3f92bb1c690f96bce8e1a5d2936b9f1153e27dba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
