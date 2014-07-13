@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_091c9378",
+        "filename": "repo/includes/store/IdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-13T18:16:28Z",
+      "side": 1,
+      "message": "This interface has nothing to do with content models. And it has nothing to do with entity ids, so I\u0027m wtf at the todo above.",
+      "revId": "f5fadd7aa88684857246f0ad8fdc6acf5662a954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
