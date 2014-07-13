@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_e9470721",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:38:55Z",
+      "side": 1,
+      "message": "Can\u0027t this parsing fail?",
+      "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a951ffde",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-13T11:38:55Z",
+      "side": 1,
+      "message": "The size of this method and the number of comments needed to explain what it does is on the scary side.",
+      "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
