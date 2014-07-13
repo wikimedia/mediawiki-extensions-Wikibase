@@ -18,24 +18,16 @@ use Wikibase\Repo\WikibaseRepo;
 class SqlIdGenerator implements IdGenerator {
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var string
 	 */
-	protected $table;
+	private $table;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var DatabaseBase
 	 */
-	protected $db;
+	private $db;
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 *
 	 * @param string $tableName
 	 * @param DatabaseBase $database
 	 */
