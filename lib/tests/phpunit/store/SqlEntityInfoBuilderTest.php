@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
-use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Property;
 use Wikibase\Settings;
 
