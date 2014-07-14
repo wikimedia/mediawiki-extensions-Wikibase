@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_5530ec52",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Thanks for the pointer. I don\u0027t think that logic would be useful here.",
+      "parentUuid": "8e28a382_6930b753",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e92a67d6",
         "filename": "lib/includes/store/EntityInfoBuilder.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "This is the only place here in this interface that mentions the ids. Which is strange, don\u0027t you think? The interface is all about returning information about entities but it does not contain anything about how these ids are specified. Would it help to include an abstract __constructor( array $ids ) here?",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_35356043",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "It would be nice, but it\u0027S not possible: the actual constructors need additional arguments, so their signature would be incompatible with the interface. But I\u0027ll try to improve the documentation.",
+      "parentUuid": "8e28a382_e92a67d6",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f5ffd860",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "no. these are term types as used with the TermIndex service. The term type is \"alias\", not \"aliases\". The field that will be set in the data structure is indeed called \"aliases\".  See the mapping defined in SqlEntityTypeBuilder::$termTypeFields.\n\nHm, perhaps the parameters here should correspond to the fields being set, and the mapping should be used to find out what keys to used in the database?...",
+      "parentUuid": "8e28a382_4983bbd1",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0916d3a9",
         "filename": "lib/includes/store/EntityInfoBuilder.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "Type of both parameters is string[]|null.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d5f4dc85",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_0916d3a9",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b5f15094",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "getFingerprint() should probably use the same order used here: types first, then language. This is also the order used in the TermIndex interface.",
+      "parentUuid": "8e28a382_093ff323",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_8921a3f8",
         "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "Messed order again, compared to the constructor.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_155f0479",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_8921a3f8",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_356a0013",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_c927ab0c",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_29886feb",
         "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
         "patchSetId": 6
@@ -132,6 +258,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "More specific string[]|null type hints please.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d5585c8e",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_29886feb",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b555d054",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_098db3fb",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_a97b3fea",
         "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
         "patchSetId": 6
@@ -166,6 +328,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "This block is odd. Why not\nif ( ... instanceof ... ) {\n} else {\n}",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b527100d",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_a97b3fea",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -206,6 +386,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_95241409",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_09d373da",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_29ce2f32",
         "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -217,6 +415,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7521a8f5",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_29ce2f32",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -240,6 +456,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_557eace2",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_49c97b28",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_69c43712",
         "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -251,6 +485,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "Type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_358320d3",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_69c43712",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -274,6 +526,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_158824eb",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_894f63c0",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_a9521f68",
         "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -285,6 +555,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f58c7801",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_a9521f68",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -308,6 +596,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d5717c0c",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_c9556b54",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e958278e",
         "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -319,6 +625,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b56ef028",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_e958278e",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -342,6 +666,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_957bf4ea",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_09649341",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_295f4f79",
         "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -353,6 +695,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "array type hint missing.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_757888ed",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_295f4f79",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -376,6 +736,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_55658c40",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_69655741",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_496a9b13",
         "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
         "patchSetId": 6
@@ -387,6 +765,24 @@
       "writtenOn": "2014-07-13T16:48:30Z",
       "side": 1,
       "message": "Please don\u0027t use the name $entities.",
+      "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9552d468",
+        "filename": "repo/includes/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_496a9b13",
       "revId": "1d902b0f7fd465ad067b555e3d0b15ae728c8959",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
