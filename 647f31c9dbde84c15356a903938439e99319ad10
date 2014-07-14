@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_0c8c9688",
+        "filename": "client/includes/hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-14T22:41:29Z",
+      "side": 1,
+      "message": "You so totally stole the name from my ParserHooks library https://github.com/JeroenDeDauw/ParserHooks",
+      "revId": "647f31c9dbde84c15356a903938439e99319ad10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8c19a629",
+        "filename": "client/tests/phpunit/includes/hooks/ParserFunctionRegistrantTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-14T22:41:29Z",
+      "side": 1,
+      "message": "If you create two name constants (one true, one false) in the class, then this construction becomes more clear",
+      "revId": "647f31c9dbde84c15356a903938439e99319ad10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
