@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_15b38497",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:50:20Z",
+      "side": 1,
+      "message": "The keys come from the EntityId objects passed to the constructor. If the parsing fails, something is seriously wrong.",
+      "parentUuid": "8e28a382_e9470721",
+      "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_a951ffde",
         "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-13T11:38:55Z",
       "side": 1,
       "message": "The size of this method and the number of comments needed to explain what it does is on the scary side.",
+      "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f5b7d87f",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T12:50:20Z",
+      "side": 1,
+      "message": "Yes. Though npath complexity is low. Do you see a good way to split it?",
+      "parentUuid": "8e28a382_a951ffde",
       "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
