@@ -87,6 +87,24 @@
       "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_67169b4f",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T13:18:38Z",
+      "side": 1,
+      "message": "But that\u0027s not what\u0027s happening here. Look closely at the keys used. It\u0027s juggeling the actual entriy to a new id, sets the id field, unsets the entry under the original id, and replaces that with a reference to the entry under the new id.",
+      "parentUuid": "8e28a382_7559a85c",
+      "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
