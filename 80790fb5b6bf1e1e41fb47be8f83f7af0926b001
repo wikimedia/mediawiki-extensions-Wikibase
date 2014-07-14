@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_d19aa965",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T22:00:03Z",
+      "side": 1,
+      "message": "What? Why did the parameters switch place?",
+      "revId": "80790fb5b6bf1e1e41fb47be8f83f7af0926b001",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
