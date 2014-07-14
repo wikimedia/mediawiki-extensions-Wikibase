@@ -56,13 +56,9 @@
 		}
 
 		// add an edit tool for all properties in the data view:
-		$( '.wb-property-container' ).each( function() {
+		$( '.wb-property-container:has( > .wb-property-container-key[title=description] )' ).each( function() {
 			// TODO: Make this nicer when we have implemented the data model
-			if( $( this ).children( '.wb-property-container-key' ).attr( 'title' ) === 'description' ) {
-				new wb.ui.DescriptionEditTool( this );
-			} else {
-				new wb.ui.PropertyEditTool( this );
-			}
+			new wb.ui.DescriptionEditTool( this );
 		} );
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
