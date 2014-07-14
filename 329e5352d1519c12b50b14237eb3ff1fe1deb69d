@@ -69,6 +69,24 @@
       "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7559a85c",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T13:11:12Z",
+      "side": 1,
+      "message": "For example, private\n$this-\u003esetEntityInfoForId( $idString, array $info )\n$this-\u003esetEntityId( EntityId $entityId )\n$this-\u003eremoveId( $idString )",
+      "parentUuid": "8e28a382_f5b7d87f",
+      "revId": "329e5352d1519c12b50b14237eb3ff1fe1deb69d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
