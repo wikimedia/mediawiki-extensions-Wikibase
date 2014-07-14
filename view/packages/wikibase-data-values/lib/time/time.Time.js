@@ -232,6 +232,10 @@ time.Time = ( function( time, $ ) {
 		}
 
 		return this.precision() === otherTime.precision()
+			&& this.calendar() === otherTime.calendar()
+			&& this.after() === otherTime.after()
+			&& this.before() === otherTime.before()
+			&& this.utcoffset() === otherTime.utcoffset()
 			&& this.iso8601() === otherTime.iso8601();
 	};
 
