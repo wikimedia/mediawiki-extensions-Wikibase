@@ -16,6 +16,24 @@
       "revId": "80790fb5b6bf1e1e41fb47be8f83f7af0926b001",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_31da0d22",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-14T22:03:44Z",
+      "side": 1,
+      "message": "https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/87a09eebd7eef2ee074c7580f359576d9b3dcdb6/lib/resources/wikibase.ValueViewBuilder.js#L16",
+      "parentUuid": "8e28a382_d19aa965",
+      "revId": "80790fb5b6bf1e1e41fb47be8f83f7af0926b001",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
