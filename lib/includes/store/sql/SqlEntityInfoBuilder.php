@@ -2,18 +2,17 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
+use DBAccessBase;
 use InvalidArgumentException;
-use OutOfBoundsException;
 use ResultWrapper;
 use RuntimeException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel;
-use Wikibase\EntityId;
 use Wikibase\Lib\Store\EntityInfoBuilder;
-use Wikibase\Property;
 
 /**
  * Class EntityInfoBuilder implementation relying on database access.
@@ -23,7 +22,7 @@ use Wikibase\Property;
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
+class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * Maps term types to fields used for lists of these terms in entity serializations.
@@ -39,17 +38,17 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	/**
 	 * @var string The name of the database table holding terms.
 	 */
-	protected $termTable;
+	private $termTable;
 
 	/**
 	 * @var string The name of the database table holding property info.
 	 */
-	protected $propertyInfoTable;
+	private $propertyInfoTable;
 
 	/**
 	 * @var string The name of the database table connecting entities to pages.
 	 */
-	protected $entityPerPageTable;
+	private $entityPerPageTable;
 
 	/**
 	 * @var bool
@@ -150,7 +149,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function setEntityIds( array $ids ) {
 		if ( $this->entityIds !== null ) {
-			throw new \RuntimeException( 'EntityIds have already been initialized' );
+			throw new RuntimeException( 'EntityIds have already been initialized' );
 		}
 
 		$this->entityIds = array();
@@ -158,16 +157,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		$this->numericIdsByType = array();
 
 		foreach ( $ids as $id ) {
-			$key = $id->getSerialization();
-			$type = $id->getEntityType();
-
-			$this->entityInfo[$key] = array(
-				'id' => $key,
-				'type' => $type,
-			);
-
-			$this->numericIdsByType[$type][$key] = $id->getNumericId();
-			$this->entityIds[$key] = $id;
+			$this->updateEntityInfo( $id );
 		}
 	}
 
@@ -215,7 +205,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		}
 
 		// Copy the record for the old key to the target key.
-		$this->initRecord( $targetKey, $this->entityInfo[$idString] );
+		$this->initEntityInfo( $targetKey, $this->entityInfo[$idString] );
 
 		// Remove the original entry for the old key.
 		$this->unsetKey( $idString );
@@ -224,7 +214,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 		$this->createEntityInfoReference( $idString, $this->entityInfo[$targetKey] );
 
 		// From now on, use the target ID in the record and for database queries.
-		$this->forceEntityId( $targetKey, $targetId  );
+		$this->updateEntityInfo( $targetId );
 	}
 
 	/**
@@ -236,7 +226,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 * @param array $record
 	 */
 	private function createEntityInfoReference( $key, array &$record ) {
-		$this->entityInfo[$key] = & $record;
+		$this->entityInfo[$key] = &$record;
 	}
 
 	/**
@@ -262,30 +252,28 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 * @param string $key
 	 * @param array $record
 	 */
-	private function initRecord( $key, array $record ) {
+	private function initEntityInfo( $key, array $record ) {
 		if ( !isset( $this->entityInfo[$key] ) ) {
 			$this->entityInfo[$key] = $record;
 		}
 	}
 
 	/**
-	 * Forces the EntityId associated with the given key.
-	 * May be used on entries for ids that are redirected, when the
-	 * actual ID differs from the original (redirected) entity id.
-	 *
-	 * This updates the $entityInfo structure, and makes the ID
+	 * Updates the $entityInfo structure and makes the ID
 	 * available via the $numericIdsByType and $entityIds caches.
 	 *
-	 * @param string $key
 	 * @param EntityId $id
 	 */
-	private function forceEntityId( $key, EntityId $id ) {
-		//NOTE: we assume that the type of entity never changes.
+	private function updateEntityInfo( EntityId $id ) {
 		$type = $id->getEntityType();
+		$key = $id->getSerialization();
 
-		$this->numericIdsByType[$type][$key] = $id->getNumericId();
+		// NOTE: we assume that the type of entity never changes.
+		$this->initEntityInfo( $key, array( 'type' => $type ) );
+
 		$this->entityIds[$key] = $id;
 		$this->entityInfo[$key]['id'] = $key;
+		$this->numericIdsByType[$type][$key] = $id->getNumericId();
 	}
 
 	/**
@@ -392,7 +380,7 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	 *
 	 * @param ResultWrapper $dbResult
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	private function injectTerms( ResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
