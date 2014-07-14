@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_31d8cd57",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:04:56Z",
+      "side": 1,
+      "message": "registry is a place where records or data are held.\n\nregistrant is something that does the registering, as done here.\n\nhttps://en.wiktionary.org/wiki/registrant",
+      "parentUuid": "8e28a382_0a9c7e11",
+      "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_6a82e298",
         "filename": "client/includes/hooks/ParserFunctionRegistrant.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-07-14T16:56:35Z",
       "side": 1,
       "message": "Would be nice to have a description what this parameter means. Can be copied from options.wiki, I think.",
+      "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9196614e",
+        "filename": "client/includes/hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:04:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_6a82e298",
       "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f1e365d2",
+        "filename": "client/tests/phpunit/includes/hooks/ParserFunctionRegistrantTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:04:56Z",
+      "side": 1,
+      "message": "if the magic word is not in the cache, then an exception is thrown in Parser::setFunctionHook\n\nI tried removing this again and it seems to work now for me, but might need to be re-added as a workaround. (or add complex code or mock to workaround in another way)",
+      "parentUuid": "8e28a382_8a33ce09",
+      "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_5d16d24e",
         "filename": "client/tests/phpunit/includes/hooks/ParserFunctionRegistrantTest.php",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2014-07-14T16:56:35Z",
       "side": 1,
       "message": "Instead of having a provider with exactly two true/false cases it\u0027s probably better to have two test functions for the true/false cases. I think it will be easier to read then.",
+      "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_91cae148",
+        "filename": "client/tests/phpunit/includes/hooks/ParserFunctionRegistrantTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:04:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_5d16d24e",
       "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
