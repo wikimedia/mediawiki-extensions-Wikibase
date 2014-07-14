@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_518c79db",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T22:24:46Z",
+      "side": 1,
+      "message": "I have never seen a \"registrant\" pattern in source code. This is not a good reason to block this change, still I find the name very odd.",
+      "parentUuid": "8e28a382_31d8cd57",
+      "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_6a82e298",
         "filename": "client/includes/hooks/ParserFunctionRegistrant.php",
         "patchSetId": 1
@@ -83,6 +101,23 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "8e28a382_6a82e298",
+      "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d17629d5",
+        "filename": "client/includes/hooks/ParserFunctionRegistrant.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T22:24:46Z",
+      "side": 1,
+      "message": "Can you change this to a closure similar to the other hook below?",
       "revId": "8ccd9d71fc8503460c2e438eb0a9511baa96ba49",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
