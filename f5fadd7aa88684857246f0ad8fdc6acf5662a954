@@ -16,6 +16,24 @@
       "revId": "f5fadd7aa88684857246f0ad8fdc6acf5662a954",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7a3077fc",
+        "filename": "repo/includes/store/IdGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T07:37:34Z",
+      "side": 1,
+      "message": "I found the unexplained \"string $type\" highly confusing and just documented how this is used _now_. Do you think this was wrong?",
+      "parentUuid": "8e28a382_091c9378",
+      "revId": "f5fadd7aa88684857246f0ad8fdc6acf5662a954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
