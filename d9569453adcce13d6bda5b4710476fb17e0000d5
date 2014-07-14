@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f1cec5b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:10:16Z",
+      "side": 1,
+      "message": "omitted",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_715e5519",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:10:16Z",
+      "side": 1,
+      "message": "this is making the code much too complex.  please split into another method",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d1ae29e4",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:10:16Z",
+      "side": 1,
+      "message": "all this editSection code could be split",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b1b39d4b",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:10:16Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7194158e",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:10:16Z",
+      "side": 1,
+      "message": "numeric id?",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_71ebf509",
+        "filename": "repo/tests/phpunit/includes/View/SectionEditLinkGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-14T22:10:16Z",
+      "side": 1,
+      "message": "$editSectionHtml is more clear, imho, but not strong opinion",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
