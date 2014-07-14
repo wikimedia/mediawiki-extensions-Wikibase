@@ -158,8 +158,11 @@ final class LibHooks {
 				'wikibase.store.EntityStore',
 				'wikibase.datamodel',
 				'wikibase.store.FetchedContent',
+				'wikibase.ValueViewBuilder',
 				'dataValues.values',
-				'mediawiki.Title'
+				'mediawiki.Title',
+				'jquery.valueview',
+				'valueFormatters'
 			),
 		);
 
@@ -190,6 +193,9 @@ final class LibHooks {
 				'jquery.wikibase.referenceview',
 				'wikibase.datamodel',
 				'wikibase.store.EntityStore',
+				'wikibase.ValueViewBuilder',
+				'jquery.valueview',
+				'valueFormatters'
 			),
 		);
 
@@ -211,8 +217,11 @@ final class LibHooks {
 				'jquery.wikibase.snaklistview',
 				'wikibase.store.EntityStore',
 				'wikibase.store.FetchedContent',
+				'wikibase.ValueViewBuilder',
 				'wikibase.datamodel',
-				'mediawiki.Title'
+				'mediawiki.Title',
+				'jquery.valueview',
+				'valueFormatters'
 			),
 		);
 
@@ -277,6 +286,17 @@ final class LibHooks {
 				'wikibase.EntityIdParser',
 				'wikibase.tests.qunit.testrunner',
 			),
+		);
+
+		$testModules['qunit']['wikibase.ValueViewBuilder.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/wikibase.ValueViewBuilder.tests.js'
+			),
+			'dependencies' => array(
+				'jquery',
+				'test.sinonjs',
+				'wikibase.ValueViewBuilder'
+			)
 		);
 
 		return true;
