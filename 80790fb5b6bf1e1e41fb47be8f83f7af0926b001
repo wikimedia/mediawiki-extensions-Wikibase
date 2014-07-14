@@ -34,6 +34,24 @@
       "revId": "80790fb5b6bf1e1e41fb47be8f83f7af0926b001",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_51eb59a0",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T22:07:07Z",
+      "side": 1,
+      "message": "I asked for this switch in 24cd0005 (PS6). Obviously a merge mistake. I fixed it.",
+      "parentUuid": "8e28a382_31da0d22",
+      "revId": "80790fb5b6bf1e1e41fb47be8f83f7af0926b001",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
