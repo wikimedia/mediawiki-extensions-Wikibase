@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_b57dd019",
+        "filename": "lib/includes/store/EntityInfoFingerprintLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T10:43:08Z",
+      "side": 1,
+      "message": "array[]",
+      "revId": "078223dc3797e0643f36a4971609c283a8f13cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_957ad41d",
+        "filename": "lib/includes/store/EntityInfoFingerprintLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T10:43:08Z",
+      "side": 1,
+      "message": "array[]",
+      "revId": "078223dc3797e0643f36a4971609c283a8f13cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_75776836",
+        "filename": "lib/includes/store/EntityInfoFingerprintLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-14T10:43:08Z",
+      "side": 1,
+      "message": "[WIP]?",
+      "revId": "078223dc3797e0643f36a4971609c283a8f13cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
