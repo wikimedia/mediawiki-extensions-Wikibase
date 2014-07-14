@@ -16,6 +16,7 @@ use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
+use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -653,4 +654,14 @@ final class WikibaseClient {
 			$changeClasses
 		);
 	}
+
+	/**
+	 * @return ParserFunctionRegistrant
+	 */
+	public function getParserFunctionRegistrant() {
+		return new ParserFunctionRegistrant(
+			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+		);
+	}
+
 }
