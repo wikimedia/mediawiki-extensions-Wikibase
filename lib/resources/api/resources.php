@@ -15,9 +15,9 @@ return call_user_func( function() {
 
 	return array(
 
-		'wikibase.api.__namespace' => $moduleTemplate + array(
+		'wikibase.api.init' => $moduleTemplate + array(
 			'scripts' => array(
-				'namespace.js'
+				'init.js'
 			),
 			'dependencies' => array(
 				'wikibase' // For the namespace
@@ -31,7 +31,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'json',
 				'jquery',
-				'wikibase.api.__namespace',
+				'wikibase.api.init',
 			)
 		),
 
@@ -43,7 +43,7 @@ return call_user_func( function() {
 				'dataValues',
 				'json',
 				'jquery',
-				'wikibase.api.__namespace',
+				'wikibase.api.init',
 			)
 		),
 
