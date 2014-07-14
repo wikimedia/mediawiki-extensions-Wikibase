@@ -217,6 +217,7 @@
 	"wikibase-mylanguagefallbackchain-text": "Ниже показана цепочка резервных языков, действующая для вас при отображении меток сущностей.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можете изменить её, разместив блок <nowiki>{{#babel:}}</nowiki> на своей [[Special:MyPage|персональной странице {{GENDER:$1|участника|участницы}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 — $2, преобразованные из $3 — $4",
+	"wikibase-api-unresolved-redirect": "Указанный идентификатор сущности относится к перенаправленнию, которое не поддерживается в данном контексте.",
 	"wikibase-api-no-such-sitelink": "Не удалось найти такую ссылку на сайт",
 	"wikibase-self-conflict-patched": "Ваша правка была помещена в последнюю версию, при этом были перекрыты некоторые из ваших собственных промежуточных изменений.",
 	"wikibase-conflict-patched": "Ваша правка было исправлена в последней версии.",

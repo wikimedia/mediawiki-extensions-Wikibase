@@ -207,6 +207,7 @@
 	"wikibase-entitydata-bad-revision": "Non è possibile mostrare la versione $2 dell'entità $1.",
 	"wikibase-entitydata-bad-id": "ID non valido: $1.",
 	"wikibase-entitydata-unsupported-format": "Il formato dati $1 non è supportato dall'interfaccia.",
+	"wikibase-entitydata-storage-error": "Impossibile caricare l'entità $1.",
 	"wikibase-entitydata-title": "Dati dell'entità",
 	"wikibase-entitydata-text": "Questa pagina fornisce un'interfaccia di dati collegati ai valori dell'entità. Si prega di fornire l'ID dell'entità nell'URL, utilizzando la sintassi sottopagina.",
 	"special-mylanguagefallbackchain": "Catena delle lingue di riserva",

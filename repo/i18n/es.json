@@ -55,7 +55,7 @@
 	"wikibase-remove": "eliminar",
 	"wikibase-move-up": "subir",
 	"wikibase-move-down": "bajar",
-	"wikibase-undo-title": "Deshaciendo una edición de \"$1\"",
+	"wikibase-undo-title": "Deshacer una edición en «$1»",
 	"wikibase-restore-title": "Restauración de la revisión antigua de «$1»",
 	"wikibase-partial-undo": "La edición se puede deshacer parcialmente.",
 	"wikibase-omitted-undo-ops": "$1 {{PLURAL:$1|cambio|cambios}} no se {{PLURAL:$1|pudo|pudieron}} deshacer porque {{PLURAL:$1|el valor ha|los valores han}} cambiado desde entonces.",
