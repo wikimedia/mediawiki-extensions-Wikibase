@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b55f1044",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T13:15:37Z",
+      "side": 1,
+      "message": "No, it removes all other ids. It#s the equivalent of the retainAll() method in Java Collection classes.",
+      "parentUuid": "8e28a382_69d55747",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_29cf4fb7",
         "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2014-07-13T11:28:44Z",
       "side": 1,
       "message": "All new methods miss the \"array\" type hint.",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9533f409",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T13:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_29cf4fb7",
       "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_352200b2",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T13:15:37Z",
+      "side": 1,
+      "message": "That would be the exactly the opposite of the semantics of removaAll in a Java Collection :)",
+      "parentUuid": "8e28a382_49da9b79",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_693437a8",
         "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
         "patchSetId": 6
@@ -81,6 +135,24 @@
       "writtenOn": "2014-07-13T11:28:44Z",
       "side": 1,
       "message": "Code duplication. Could be a helper function in the interface/abstract base class.",
+      "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_950ad427",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-14T13:15:37Z",
+      "side": 1,
+      "message": "Yea. I\u0027m wondering whether an abstract base class is acceptable here. Not for a helper function like this, though. There is actually quite a bit of duplication between the Generic and the Sql implementation. Could be factored out into a helper class, but that helper class would likels still be specific to the needs of the specific implementation of these classes. Not so nice.",
+      "parentUuid": "8e28a382_693437a8",
       "revId": "4827eca4a9a5e04729442b402eb3c2cc37c67f9b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
