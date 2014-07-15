@@ -116,8 +116,8 @@
 				valueViewBuilder: new wb.ValueViewBuilder(
 					experts,
 					getFormatterStore( repoApi, dataTypes ),
-					mw,
-					parsers
+					parsers,
+					mw
 				)
 			} ).appendTo( $claimsParent );
 
