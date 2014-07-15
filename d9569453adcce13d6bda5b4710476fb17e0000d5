@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_ac17bfa7",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-15T09:49:14Z",
+      "side": 1,
+      "message": "This is the third time I see this code... that\u0027s why there was getFormattedIdForEntity(). Now you want HTML, perhaps make a getEditSectionHtml or some such?",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7194158e",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 5
