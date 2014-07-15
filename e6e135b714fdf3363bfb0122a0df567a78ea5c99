@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f5190a7f",
+        "filename": "repo/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-15T16:33:13Z",
+      "side": 1,
+      "message": "$newPageNormalized",
+      "revId": "e6e135b714fdf3363bfb0122a0df567a78ea5c99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
