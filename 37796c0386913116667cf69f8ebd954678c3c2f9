@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_d59e0e66",
+        "filename": "repo/includes/UpdateRepoOnMoveJob.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-15T16:56:56Z",
+      "side": 1,
+      "message": "Nitpick: double colon: weird.",
+      "revId": "37796c0386913116667cf69f8ebd954678c3c2f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
