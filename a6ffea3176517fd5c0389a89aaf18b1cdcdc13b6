@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_3a6f8191",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-15T15:26:14Z",
+      "side": 1,
+      "message": "Shit! I just fixed exactly this in PS8! Why the heck got it reverted?",
+      "revId": "a6ffea3176517fd5c0389a89aaf18b1cdcdc13b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
