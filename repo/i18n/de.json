@@ -122,7 +122,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "Der angegebene Sprachcode ist dem System leider nicht bekannt. Bitte verwende einen gültigen Sprachcode, bspw. „de“.",
 	"wikibase-itemdisambiguation-description": "Die für die Suche genutzten Werte müssen vollständige Texteinträge sein. Sprache ist eine Kennung, z.&nbsp;B. „de“.",
 	"special-newproperty": "Ein neues Attribut erstellen",
-	"wikibase-newproperty-summary": "Überprüfe, [[Special:PropertyDisambiguation|ob die Eigenschaft bereits vorhanden ist]]!<br />Du solltest eine [[Help:Label|Bezeichnung]] und eine [[Help:Description|Beschreibung]] für alle neuen Eigenschaften erstellen und zusätzlich einen gültigen Eigenschaftstyp.",
+	"wikibase-newproperty-summary": "Überprüfe, ob die Eigenschaft bereits vorhanden ist!<br />Du solltest eine [[Help:Label|Bezeichnung]] und eine [[Help:Description|Beschreibung]] für alle neuen Eigenschaften erstellen und zusätzlich einen gültigen Eigenschaftstyp.",
 	"wikibase-newproperty-fieldset": "Ein neues Attribut erstellen",
 	"wikibase-newproperty-datatype": "Datentyp:",
 	"wikibase-newproperty-invalid-datatype": "Es wurde ein ungültiger Datentyp angegeben.",
