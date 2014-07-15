@@ -144,10 +144,7 @@ abstract class EntitySerializer implements DispatchableSerializer {
 	private function addClaimsToSerialization( Entity $entity, array &$serialization ) {
 		$claims = new Claims( $entity->getClaims() );
 
-		if ( $claims->isEmpty() ) {
-			return;
-		}
-
 		$serialization['claims'] = $this->claimsSerializer->serialize( $claims );
 	}
+
 }
