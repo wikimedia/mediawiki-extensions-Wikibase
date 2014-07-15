@@ -103,7 +103,7 @@
 		_options: {
 			messages: {
 				'valueview-expert-timeinput-precision': 'Precision',
-				'valueview-expert-timeinput-calendar': 'Calendar',
+				'valueview-expert-timeinput-calendar': 'Calendar'
 			}
 		},
 
@@ -173,7 +173,7 @@
 		$.each( timeSettings.calendarnames, function( calendarKey, calendarTerms ) {
 			var label = messageProvider.getMessage(
 				'valueview-expert-timevalue-calendar-' + calendarTerms[0].toLowerCase()
-			);
+			) || calendarTerms[0];
 			calendarValues.push( { value: calendarTerms[0], label: label } );
 		} );
 		return calendarValues;

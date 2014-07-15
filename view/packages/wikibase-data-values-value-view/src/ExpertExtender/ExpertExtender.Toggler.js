@@ -43,7 +43,7 @@
 		init: function( $extender ) {
 			this.$toggler
 				.addClass( 'valueview-expertextender-advancedtoggler' )
-				.text( this._messageProvider.getMessage( 'valueview-expert-advancedadjustments' ) );
+				.text( this._messageProvider.getMessage( 'valueview-expert-advancedadjustments' ) || 'more' );
 			$extender.append( this.$toggler );
 		},
 
