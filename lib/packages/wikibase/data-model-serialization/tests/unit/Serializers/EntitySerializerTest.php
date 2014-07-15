@@ -17,25 +17,27 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 class EntitySerializerTest extends SerializerBaseTest {
 
 	protected function buildSerializer() {
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
-
 		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
 		$claimsSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
-			->with( $this->equalTo( new Claims( array( $claim ) ) ) )
-			->will( $this->returnValue( array(
-				'P42' => array(
-					array(
-						'mainsnak' => array(
-							'snaktype' => 'novalue',
-							'property' => 'P42'
-						),
-						'type' => 'statement',
-						'rank' => 'normal'
+			->will( $this->returnCallback( function( Claims $claims ) {
+				if ( $claims->isEmpty() ) {
+					return array();
+				}
+
+				return array(
+					'P42' => array(
+						array(
+							'mainsnak' => array(
+								'snaktype' => 'novalue',
+								'property' => 'P42'
+							),
+							'type' => 'statement',
+							'rank' => 'normal'
+						)
 					)
-				)
-			) ) );
+				);
+			} ) );
 
 		$entitySerializerMock = $this->getMockForAbstractClass(
 			'\Wikibase\DataModel\Serializers\EntitySerializer',
@@ -79,6 +81,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 				'labels' => array(),
 				'descriptions' => array(),
 				'aliases' => array(),
+				'claims' => array(),
 			),
 			Item::newEmpty()
 		);
@@ -92,6 +95,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 				'labels' => array(),
 				'descriptions' => array(),
 				'aliases' => array(),
+				'claims' => array(),
 			),
 			$entity
 		);
@@ -116,6 +120,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 				),
 				'descriptions' => array(),
 				'aliases' => array(),
+				'claims' => array(),
 			),
 			$entity
 		);
@@ -140,6 +145,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 				),
 				'labels' => array(),
 				'aliases' => array(),
+				'claims' => array(),
 			),
 			$entity
 		);
@@ -170,6 +176,7 @@ class EntitySerializerTest extends SerializerBaseTest {
 				),
 				'labels' => array(),
 				'descriptions' => array(),
+				'claims' => array(),
 			),
 			$entity
 		);
@@ -202,4 +209,5 @@ class EntitySerializerTest extends SerializerBaseTest {
 
 		return $argumentLists;
 	}
+
 }
