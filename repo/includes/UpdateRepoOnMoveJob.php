@@ -40,10 +40,9 @@ class UpdateRepoOnMoveJob extends Job {
 	 *
 	 * @param Title $title Ignored
 	 * @param array|bool $params
-	 * @param integer $id
 	 */
-	public function __construct( Title $title, $params = false, $id = 0 ) {
-		parent::__construct( 'UpdateRepoOnMove', $title, $params, $id );
+	public function __construct( Title $title, $params = false ) {
+		parent::__construct( 'UpdateRepoOnMove', $title, $params );
 	}
 
 	/**
@@ -179,19 +178,19 @@ class UpdateRepoOnMoveJob extends Job {
 		}
 
 		// Normalize the name again, just in case the page has been updated in the mean time
-		$newPage = $site->normalizePageName( $newPage );
-		if ( !$newPage ) {
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": Normalizing the page name $newPage failed" );
+		$newPageNormalized = $site->normalizePageName( $newPage );
+		if ( !$newPageNormalized ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": Normalizing the page name $newPage on $siteId failed" );
 			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
 		$siteLink = new SiteLink(
 			$siteId,
-			$newPage
+			$newPageNormalized
 		);
 
-		$summary = $this->getSummary( $siteId, $oldPage, $newPage );
+		$summary = $this->getSummary( $siteId, $oldPage, $newPageNormalized );
 
 		return $this->doUpdateSiteLink( $item, $siteLink, $summary, $user );
 	}
