@@ -228,6 +228,10 @@ class UpdateRepoOnMoveJob extends Job {
 			$this->getEntityStore()->isWatching( $user, $item->getid() )
 		);
 
+		if ( !$status->isOK() ) {
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": attemptSave failed: " . $status->getMessage()->text() );
+		}
+
 		wfProfileOut( __METHOD__ );
 
 		// TODO: Analyze what happened and let the user know in case a manual fix could be needed
