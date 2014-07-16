@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_775877fd",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-16T13:58:14Z",
+      "side": 1,
+      "message": "I think this is bad as the caller controls the internal data flow way to much",
+      "revId": "946484804f4ec4d5e3748452e41258658f0794d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_175253e2",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-16T13:58:14Z",
+      "side": 1,
+      "message": "uh... I\u0027m not a fan of this \"interface\" :/",
+      "revId": "946484804f4ec4d5e3748452e41258658f0794d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
