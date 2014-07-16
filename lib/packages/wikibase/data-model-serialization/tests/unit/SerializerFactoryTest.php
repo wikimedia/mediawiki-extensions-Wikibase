@@ -90,4 +90,5 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 			new PropertyNoValueSnak( 42 )
 		);
 	}
+
 }

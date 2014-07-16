@@ -32,7 +32,7 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 	 *
 	 * @param mixed $serialization
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isDeserializerFor( $serialization ) {
 		return $this->isValidSerialization( $serialization );
@@ -103,4 +103,5 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 			throw new DeserializationException( 'The reference serialization provides a wrong hash' );
 		}
 	}
+
 }

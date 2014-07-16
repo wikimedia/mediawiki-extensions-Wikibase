@@ -34,10 +34,10 @@ class SnaksSerializer implements DispatchableSerializer {
 	 *
 	 * @param mixed $object
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return is_object( $object ) && $object instanceof Snaks;
+		return $object instanceof Snaks;
 	}
 
 	/**
@@ -71,4 +71,5 @@ class SnaksSerializer implements DispatchableSerializer {
 
 		return $serialization;
 	}
+
 }

@@ -110,4 +110,5 @@ class SerializerFactory {
 	public function newSnakSerializer() {
 		return new SnakSerializer( $this->dataValueSerializer );
 	}
+
 }

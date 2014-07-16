@@ -125,4 +125,5 @@ class SiteLinkDeserializerTest extends DeserializerBaseTest {
 			'badges' => 'Q42'
 		) );
 	}
+
 }

@@ -52,7 +52,7 @@ class ClaimDeserializer implements DispatchableDeserializer {
 	 *
 	 * @param mixed $serialization
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isDeserializerFor( $serialization ) {
 		return $this->hasType( $serialization ) && $this->hasCorrectType( $serialization );
@@ -172,4 +172,5 @@ class ClaimDeserializer implements DispatchableDeserializer {
 			);
 		}
 	}
+
 }

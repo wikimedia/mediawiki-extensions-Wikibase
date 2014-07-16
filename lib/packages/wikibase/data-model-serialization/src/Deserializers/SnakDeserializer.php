@@ -49,7 +49,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 *
 	 * @param mixed $serialization
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isDeserializerFor( $serialization ) {
 		return is_array( $serialization )
@@ -84,14 +84,17 @@ class SnakDeserializer implements DispatchableDeserializer {
 		return $snak;
 	}
 
+	/**
+	 * @see SnakDeserializer::hasCorrectSnakType
+	 */
 	private function getDeserialized( array $serialization ) {
 		switch ( $serialization['snaktype'] ) {
-			case 'value':
-				return $this->newValueSnak( $serialization );
 			case 'novalue':
 				return $this->newNoValueSnak( $serialization );
 			case 'somevalue':
 				return $this->newSomeValueSnak( $serialization );
+			default:
+				return $this->newValueSnak( $serialization );
 		}
 	}
 
@@ -149,7 +152,6 @@ class SnakDeserializer implements DispatchableDeserializer {
 		}
 	}
 
-
 	protected function requireAttribute( array $array, $attributeName ) {
 		if ( !array_key_exists( $attributeName, $array ) ) {
 			throw new MissingAttributeException(
@@ -167,4 +169,5 @@ class SnakDeserializer implements DispatchableDeserializer {
 			throw new DeserializationException( 'The snak serialization provides a wrong hash' );
 		}
 	}
+
 }

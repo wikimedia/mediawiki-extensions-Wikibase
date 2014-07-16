@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use Deserializers\Deserializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
@@ -16,6 +17,9 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  */
 class EntityDeserializerTest extends DeserializerBaseTest {
 
+	/**
+	 * @return Deserializer
+	 */
 	public function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$entityIdDeserializerMock->expects( $this->any() )
@@ -219,4 +223,5 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 	}
+
 }

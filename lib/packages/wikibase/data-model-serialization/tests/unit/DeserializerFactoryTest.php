@@ -119,4 +119,5 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 			'Q42'
 		);
 	}
+
 }
