@@ -62,4 +62,5 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
 		$entityIdDeserializer->deserialize( 'test' );
 	}
+
 }

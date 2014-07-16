@@ -34,10 +34,10 @@ class ClaimsSerializer implements DispatchableSerializer {
 	 *
 	 * @param mixed $object
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return is_object( $object ) && $object instanceof Claims;
+		return $object instanceof Claims;
 	}
 
 	/**
@@ -71,4 +71,5 @@ class ClaimsSerializer implements DispatchableSerializer {
 
 		return $serialization;
 	}
+
 }

@@ -21,10 +21,10 @@ class SiteLinkSerializer implements DispatchableSerializer {
 	 *
 	 * @param mixed $object
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return is_object( $object ) && $object instanceof SiteLink;
+		return $object instanceof SiteLink;
 	}
 
 	/**
@@ -68,4 +68,5 @@ class SiteLinkSerializer implements DispatchableSerializer {
 
 		return $serialization;
 	}
+
 }

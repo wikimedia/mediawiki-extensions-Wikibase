@@ -33,10 +33,10 @@ class ReferencesSerializer implements DispatchableSerializer {
 	 *
 	 * @param mixed $object
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return is_object( $object ) && $object instanceof References;
+		return $object instanceof References;
 	}
 
 	/**
@@ -67,4 +67,5 @@ class ReferencesSerializer implements DispatchableSerializer {
 
 		return $serialization;
 	}
+
 }

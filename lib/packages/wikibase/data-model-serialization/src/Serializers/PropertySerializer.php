@@ -18,10 +18,10 @@ class PropertySerializer extends EntitySerializer {
 	 *
 	 * @param mixed $object
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return is_object( $object ) && $object instanceof Property;
+		return $object instanceof Property;
 	}
 
 	protected function getSpecificSerialization( Entity $entity ) {
@@ -32,4 +32,5 @@ class PropertySerializer extends EntitySerializer {
 			'datatype' => $entity->getDataTypeId()
 		);
 	}
+
 }

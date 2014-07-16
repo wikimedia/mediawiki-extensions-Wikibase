@@ -149,4 +149,5 @@ class ReferenceDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 	}
+
 }

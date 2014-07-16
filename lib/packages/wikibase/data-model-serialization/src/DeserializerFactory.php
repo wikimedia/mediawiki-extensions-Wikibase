@@ -133,4 +133,5 @@ class DeserializerFactory {
 	public function newEntityIdDeserializer() {
 		return new EntityIdDeserializer( $this->entityIdParser );
 	}
+
 }

@@ -73,5 +73,4 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 		return $argumentLists;
 	}
 
-
 }

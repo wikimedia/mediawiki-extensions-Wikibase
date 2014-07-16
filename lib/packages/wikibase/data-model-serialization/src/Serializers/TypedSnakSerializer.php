@@ -42,7 +42,7 @@ class TypedSnakSerializer implements Serializer {
 	}
 
 	private function assertIsSerializerFor( $object ) {
-		if ( !is_object( $object ) || !( $object instanceof TypedSnak ) ) {
+		if ( !( $object instanceof TypedSnak ) ) {
 			throw new UnsupportedObjectException(
 				$object,
 				'TypedSnakSerializer can only serialize TypedSnak objects'
@@ -57,4 +57,5 @@ class TypedSnakSerializer implements Serializer {
 
 		return $serialization;
 	}
+
 }

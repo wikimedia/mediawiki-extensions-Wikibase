@@ -8,7 +8,8 @@ use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
-use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\Snaks;
 
 /**
  * @since 0.1
@@ -55,10 +56,10 @@ class ClaimSerializer implements DispatchableSerializer {
 	 *
 	 * @param mixed $object
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isSerializerFor( $object ) {
-		return is_object( $object ) && $object instanceof Claim;
+		return $object instanceof Claim;
 	}
 
 	/**
@@ -124,9 +125,12 @@ class ClaimSerializer implements DispatchableSerializer {
 		}
 	}
 
-	private function buildQualifiersOrderList( SnakList $snaks ) {
+	private function buildQualifiersOrderList( Snaks $snaks ) {
 		$list = array();
 
+		/**
+		 * @var Snak $snak
+		 */
 		foreach ( $snaks as $snak ) {
 			$id = $snak->getPropertyId()->getSerialization();
 			if ( !in_array( $id, $list ) ) {
@@ -136,4 +140,5 @@ class ClaimSerializer implements DispatchableSerializer {
 
 		return $list;
 	}
+
 }
