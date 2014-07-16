@@ -61,6 +61,16 @@ abstract class ModifyEntity extends ApiWikibase {
 	protected $badgeItems;
 
 	/**
+	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
+	 *
+	 * @see EditEntity::attemptSave
+	 * @see WikiPage::doEditContent
+	 *
+	 * @var integer $flags
+	 */
+	protected $flags;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -80,16 +90,6 @@ abstract class ModifyEntity extends ApiWikibase {
 		$this->siteLinkLookup = $repo->getStore()->newSiteLinkCache();
 		$this->badgeItems = $repo->getSettings()->getSetting( 'badgeItems' );
 	}
-
-	/**
-	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
-	 *
-	 * @see EditEntity::attemptSave
-	 * @see WikiPage::doEditContent
-	 *
-	 * @var integer $flags
-	 */
-	protected $flags;
 
 	/**
 	 * Get the entity using the id, site and title params passed to the api
