@@ -9,72 +9,74 @@
 ( function( $, mw, wb ) {
 	'use strict';
 
-	mw.hook( 'wikibase.domready' ).add( function() {
-		var termsValueTools = [],
-			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
-			userSpecifiedLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
-			hasSpecifiedLanguages = userSpecifiedLanguages && userSpecifiedLanguages.length,
-			isUlsDefined = mw.uls !== undefined && $.uls !== undefined && $.uls.data !== undefined;
+	wb.ui.initTermBox = function( entity ) {
+		mw.hook( 'wikibase.domready' ).add( function() {
+			var termsValueTools = [],
+				$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
+				userSpecifiedLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
+				hasSpecifiedLanguages = userSpecifiedLanguages && userSpecifiedLanguages.length,
+				isUlsDefined = mw.uls !== undefined && $.uls !== undefined && $.uls.data !== undefined;
 
-		// Skip if having no extra languages is what the user wants
-		if( !$termBoxRows.length && !hasSpecifiedLanguages && isUlsDefined ) {
-			// No term box present; Ask ULS to provide languages and generate plain HTML
-			var languageCodes = mw.uls.getFrequentLanguageList(),
-				title = new mw.Title(
-					mw.config.get( 'wgTitle' ),
-					mw.config.get( 'wgNamespaceNumber' )
-				);
+			// Skip if having no extra languages is what the user wants
+			if( !$termBoxRows.length && !hasSpecifiedLanguages && isUlsDefined ) {
+				// No term box present; Ask ULS to provide languages and generate plain HTML
+				var languageCodes = mw.uls.getFrequentLanguageList(),
+					title = new mw.Title(
+						mw.config.get( 'wgTitle' ),
+						mw.config.get( 'wgNamespaceNumber' )
+					);
 
-			if( !languageCodes.length ) {
-				return;
+				if( !languageCodes.length ) {
+					return;
+				}
+
+				var $sectionHeading = addTermBoxSection();
+				$sectionHeading.after( renderTermBox( title, entity, languageCodes.slice( 1, 4 ) ) );
+
+				$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' );
 			}
 
-			var $sectionHeading = addTermBoxSection();
-			$sectionHeading.after( renderTermBox( title, wb.entity, languageCodes.slice( 1, 4 ) ) );
+			$termBoxRows.each( function() {
+				var $termsRow = $( this ),
+					editTool = wb.ui.PropertyEditTool[
+						$termsRow.hasClass( 'wb-terms-label' ) ? 'EditableLabel' : 'EditableDescription'
+					],
+					$toolbar = mw.template( 'wikibase-toolbar', '', '' ).toolbar(),
+					toolbar = $toolbar.data( 'toolbar' ),
+					$editGroup = mw.template( 'wikibase-toolbareditgroup', '', '' ).toolbareditgroup();
 
-			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' );
-		}
+				toolbar.addElement( $editGroup );
 
-		$termBoxRows.each( function() {
-			var $termsRow = $( this ),
-				editTool = wb.ui.PropertyEditTool[
-					$termsRow.hasClass( 'wb-terms-label' ) ? 'EditableLabel' : 'EditableDescription'
-				],
-				$toolbar = mw.template( 'wikibase-toolbar', '', '' ).toolbar(),
-				toolbar = $toolbar.data( 'toolbar' ),
-				$editGroup = mw.template( 'wikibase-toolbareditgroup', '', '' ).toolbareditgroup();
+				// TODO: EditableLabel should not assume that this is set
+				toolbar.$editGroup = $editGroup;
 
-			toolbar.addElement( $editGroup );
-
-			// TODO: EditableLabel should not assume that this is set
-			toolbar.$editGroup = $editGroup;
-
-			termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
-		} );
-
-		$( wb )
-		.on( 'startItemPageEditMode', function( event, origin ) {
-			// Disable language terms table's editable value or mark it as the active one if it is
-			// the one being edited by the user and therefore the origin of the event
-			$.each( termsValueTools, function( i, termValueTool ) {
-				if(
-					!( origin instanceof wb.ui.PropertyEditTool.EditableValue )
-					|| origin.getSubject() !== termValueTool.getSubject()
-				) {
-					termValueTool.disable();
-				} else if( origin && origin.getSubject() === termValueTool.getSubject() ) {
-					$( 'table.wb-terms' ).addClass( 'wb-edit' );
-				}
+				termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
 			} );
-		} )
-		.on( 'stopItemPageEditMode', function( event, origin ) {
-			$( 'table.wb-terms' ).removeClass( 'wb-edit' );
-			$.each( termsValueTools, function( i, termValueTool ) {
-				termValueTool.enable();
-			} );
-		} );
 
-	} );
+			$( wb )
+			.on( 'startItemPageEditMode', function( event, origin ) {
+				// Disable language terms table's editable value or mark it as the active one if it is
+				// the one being edited by the user and therefore the origin of the event
+				$.each( termsValueTools, function( i, termValueTool ) {
+					if(
+						!( origin instanceof wb.ui.PropertyEditTool.EditableValue )
+						|| origin.getSubject() !== termValueTool.getSubject()
+					) {
+						termValueTool.disable();
+					} else if( origin && origin.getSubject() === termValueTool.getSubject() ) {
+						$( 'table.wb-terms' ).addClass( 'wb-edit' );
+					}
+				} );
+			} )
+			.on( 'stopItemPageEditMode', function( event, origin ) {
+				$( 'table.wb-terms' ).removeClass( 'wb-edit' );
+				$.each( termsValueTools, function( i, termValueTool ) {
+					termValueTool.enable();
+				} );
+			} );
+
+		} );
+	};
 
 	/**
 	 * @return {jQuery}
