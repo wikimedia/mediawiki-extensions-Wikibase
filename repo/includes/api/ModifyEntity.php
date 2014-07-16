@@ -94,20 +94,15 @@ abstract class ModifyEntity extends ApiWikibase {
 	/**
 	 * Get the entity using the id, site and title params passed to the api
 	 *
-	 * @since 0.1
-	 *
 	 * @param array $params
 	 *
 	 * @return EntityRevision Found existing entity
 	 */
 	protected function getEntityRevisionFromApiParams( array $params ) {
-		if ( isset( $params['id'] ) ) {
-			$id = $params['id'];
-			$entityId = $this->getEntityIdFromString( $id );
-		} elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$entityId = $this->getEntityIdFromSiteTitleCombination( $params['site'],  $params['title'] );
-		} else {
-			//Things that use this method assume null means we want a new entity
+		$entityId = $this->getEntityIdFromParams( $params );
+
+		// Things that use this method assume null means we want a new entity
+		if ( $entityId === null ) {
 			return null;
 		}
 
@@ -120,10 +115,32 @@ abstract class ModifyEntity extends ApiWikibase {
 		}
 
 		if ( is_null( $entityRevision ) ) {
-			$this->dieUsage( "Can't access entity " . $entityId->getSerialization() . ", revision may have been deleted.", 'no-such-entity' );
+			$this->dieUsage( "Can't access entity " . $entityId->getSerialization()
+				. ", revision may have been deleted.", 'no-such-entity' );
 		}
 
 		return $entityRevision;
+	}
+
+	/**
+	 * @param array $params
+	 *
+	 * @return EntityId|null
+	 */
+	private function getEntityIdFromParams( $params ) {
+		if ( isset( $params['id'] ) ) {
+			$id = $params['id'];
+			$entityId = $this->getEntityIdFromString( $id );
+		} elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+			$entityId = $this->getEntityIdFromSiteTitleCombination(
+				$params['site'],
+				$params['title']
+			);
+		} else {
+			return null;
+		}
+
+		return $entityId;
 	}
 
 	/**
