@@ -34,6 +34,24 @@
       "revId": "a6685c7281b272367b47781f547eed9c8983ab86",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_97876314",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-16T14:26:24Z",
+      "side": 1,
+      "message": "You didn\u0027t, just caching sometimes screws this over apparently (problems were gone after a hard reload, but that\u0027s not acceptable for production)",
+      "parentUuid": "8e28a382_b7a93f8f",
+      "revId": "a6685c7281b272367b47781f547eed9c8983ab86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
