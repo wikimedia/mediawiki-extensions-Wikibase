@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_7762b738",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-16T14:52:10Z",
+      "side": 1,
+      "message": "pointless...",
+      "revId": "62c1359cbb8f6ca4e04280018d7f22bced1719da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
