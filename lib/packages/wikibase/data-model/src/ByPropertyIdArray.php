@@ -45,7 +45,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	/**
 	 * @since 0.2
 	 *
-	 * @var null|object[][]
+	 * @var array[]|null
 	 */
 	private $byId = null;
 

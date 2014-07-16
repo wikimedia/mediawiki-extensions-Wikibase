@@ -297,7 +297,7 @@ class Item extends Entity {
 		}
 	}
 
-	private function patchClaims( EntityDiff $patch ) {
+	private function patchClaims( ItemDiff $patch ) {
 		$patcher = new MapPatcher();
 
 		$patcher->setValueComparer( new CallbackComparer(
@@ -407,7 +407,5 @@ class Item extends Entity {
 		$list = new Claims( $this->statements );
 		return $list->equals( new Claims( $statements ) );
 	}
-
-
 
 }

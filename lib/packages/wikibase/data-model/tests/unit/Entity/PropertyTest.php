@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Entity;
 
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 
