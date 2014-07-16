@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4311415e",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-16T00:32:40Z",
+      "side": 1,
+      "message": "This really needs a (temporary) fallback!",
+      "revId": "a6685c7281b272367b47781f547eed9c8983ab86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
