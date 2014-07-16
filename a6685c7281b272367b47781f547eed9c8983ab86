@@ -52,6 +52,24 @@
       "revId": "a6685c7281b272367b47781f547eed9c8983ab86",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_17aa536d",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-07-16T14:28:07Z",
+      "side": 1,
+      "message": "Hm, but how? This only touches resource files, there shouldn\u0027t be a caching issue with those, right? Otherwise many of our JS changes would break.",
+      "parentUuid": "8e28a382_97876314",
+      "revId": "a6685c7281b272367b47781f547eed9c8983ab86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
