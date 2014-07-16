@@ -16,6 +16,24 @@
       "revId": "62c1359cbb8f6ca4e04280018d7f22bced1719da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b795bfe8",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-16T15:02:30Z",
+      "side": 1,
+      "message": "For you and me, but not for PHPStorm. We discussed this extensively when I introduced the original LogicException in Ie6acf74. I would love to kill these ugly \"die\" functions that hide the \"throw\" keyword. I recently convinced Jeroen to use \"throw $this-\u003enew...Exception( ... )\" instead.",
+      "parentUuid": "8e28a382_7762b738",
+      "revId": "62c1359cbb8f6ca4e04280018d7f22bced1719da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
