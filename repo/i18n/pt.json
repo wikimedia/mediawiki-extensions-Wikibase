@@ -182,6 +182,7 @@
 	"wikibase-entitydata-bad-id": "ID inválido: $1.",
 	"wikibase-entitydata-unsupported-format": "O formato de dados $1 não é suportado por esta interface.",
 	"wikibase-entitydata-title": "Dados de entidade",
+	"wikibase-api-unresolved-redirect": "O identificador (ID) fornecido refere-se a um redirecionamento, o que não é suportado neste contexto.",
 	"wikibase-conflict-patched": "A sua edição foi actualizada para a versão mais recente.",
 	"wikibase-restoreold": "redefinir",
 	"wikibase-restore-summary": "Restaurar revisão $1 por [[Special:Contributions/$2|$2]]",

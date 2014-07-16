@@ -11,6 +11,7 @@
 	"wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
 	"specialpages-group-wikibaseclient": "{{WBREPONAME}} kliens",
 	"wikibase-after-page-move": "Ha azt akarod, hogy a nyelvközi hivatkozások megmaradjanak, [$1 frissítsd] a kapcsolt {{WBREPONAME}} elemet is.",
+	"wikibase-after-page-move-queued": "Az ezzel a lappal összekapcsolt  [$1 {{WBREPONAME}}-elem] hamarosan automatikusan frissülni fog.",
 	"wikibase-comment-remove": "Nyelvközi hivatkozások eltávolítása – a kapcsolt {{WBREPONAME}} elemet törölték.",
 	"wikibase-comment-linked": "Egy {{WBREPONAME}} elemet kapcsoltak ehhez az oldalhoz.",
 	"wikibase-comment-unlink": "Nyelvközi hivatkozások eltávolítása – már nincs összekapcsolva a {{WBREPONAME}} elemmel.",
