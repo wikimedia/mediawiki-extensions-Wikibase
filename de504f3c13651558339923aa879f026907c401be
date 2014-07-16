@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_37966f98",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-16T13:53:25Z",
+      "side": 1,
+      "message": "this can return null, as well as throw exception. \n\nsee https://gerrit.wikimedia.org/r/#/c/146689/3/repo/includes/api/ModifyEntity.php\n\nboth cases are an error, or please explain more why you are changing the behavior.",
+      "revId": "de504f3c13651558339923aa879f026907c401be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
