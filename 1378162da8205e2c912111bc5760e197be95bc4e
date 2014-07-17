@@ -16,6 +16,40 @@
       "revId": "1378162da8205e2c912111bc5760e197be95bc4e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_74f187fd",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-17T16:12:45Z",
+      "side": 1,
+      "message": "an empty line would be nice here",
+      "revId": "1378162da8205e2c912111bc5760e197be95bc4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_54f8cbe1",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-17T16:12:45Z",
+      "side": 1,
+      "message": "an empty line would be nice here",
+      "revId": "1378162da8205e2c912111bc5760e197be95bc4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
