@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_6ec41912",
+        "filename": "client/includes/DataAccess/PropertyParserFunctionHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-17T02:00:20Z",
+      "side": 1,
+      "message": "i can\u0027t think of a good name right now but agree!",
+      "parentUuid": "8e28a382_a3245a08",
+      "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_23118ab1",
         "filename": "client/includes/DataAccess/PropertyParserFunctionLanguageRenderer.php",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2014-07-16T23:18:57Z",
       "side": 1,
       "message": "doc missing",
+      "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4ec71d16",
+        "filename": "client/includes/DataAccess/PropertyParserFunctionLanguageRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-17T02:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_23118ab1",
       "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0ed115d0",
+        "filename": "client/includes/DataAccess/PropertyParserFunctionRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-17T02:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_03144e9f",
+      "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_631792a9",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 5
@@ -81,6 +135,24 @@
       "writtenOn": "2014-07-16T23:18:57Z",
       "side": 1,
       "message": "do we need this public? I\u0027m not a fan of so much code in here...",
+      "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_eed7e9c2",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-17T02:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_631792a9",
       "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_2ee5f19f",
+        "filename": "client/tests/phpunit/MockClientStore.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-17T02:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_83d27eff",
+      "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_c33e4624",
         "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunctionLanguageRendererTest.php",
         "patchSetId": 5
@@ -115,6 +205,24 @@
       "writtenOn": "2014-07-16T23:18:57Z",
       "side": 1,
       "message": "this is WIP, I guess? :D",
+      "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ae8fa1d0",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunctionLanguageRendererTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-17T02:00:20Z",
+      "side": 1,
+      "message": "yeah, missed this and need to make sure all test cases we had before are covered in the new code, plus add more.",
+      "parentUuid": "8e28a382_c33e4624",
       "revId": "8e0e2b75d92e48f328d0768b785040c071befbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
