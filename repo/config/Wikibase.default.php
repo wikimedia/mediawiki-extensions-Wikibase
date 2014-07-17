@@ -86,6 +86,8 @@ return call_user_func( function() {
 			// Enabled, unless internalEntitySerializerClass is set.
 			return $settings->getSetting( 'internalEntitySerializerClass' ) === null;
 		},
+
+		'useRedirectTargetColumn' => true,
 	);
 
 	return $defaults;

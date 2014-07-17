@@ -48,8 +48,9 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 
 		$table = new PropertyInfoTable( false );
 		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
+		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
 		$builder->setReporter( $reporter );
 
 		$builder->setBatchSize( intval( $this->getOption( 'batch-size', 100 ) ) );
