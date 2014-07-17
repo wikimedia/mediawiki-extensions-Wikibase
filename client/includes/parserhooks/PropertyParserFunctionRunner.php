@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\EntityLookup;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class PropertyParserFunction {
+class PropertyParserFunctionRunner {
 
 	/**
 	 * @var EntityLookup
