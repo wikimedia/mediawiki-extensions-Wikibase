@@ -124,6 +124,7 @@ final class LibHooks {
 				'wikibase.datamodel', // For RepoApi.tests
 				'wikibase.parsers',
 				'wikibase.store.FetchedContent',
+				'wikibase.templates',
 				'wikibase.utilities',
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.utilities.GuidGenerator',

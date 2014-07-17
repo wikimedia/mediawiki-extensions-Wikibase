@@ -47,7 +47,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.common',
 				'wikibase.sites',
-				'wikibase.templates'
 			),
 			'messages' => array(
 				'special-createitem',
@@ -312,6 +311,7 @@ return call_user_func( function() {
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase',
 				'wikibase.RepoApiError',
+				'wikibase.templates',
 				'wikibase.ui.Base',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
@@ -381,6 +381,7 @@ return call_user_func( function() {
 				'jquery.ui.widget',
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbareditgroup',
+				'wikibase.templates',
 			),
 		),
 
@@ -390,6 +391,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbase',
+				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-add'
@@ -403,6 +405,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbase',
 				'jquery.wikibase.toolbareditgroup',
+				'wikibase.templates',
 			)
 		),
 
@@ -431,6 +434,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbase',
+				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-remove',
@@ -733,6 +737,7 @@ return call_user_func( function() {
 				'jquery.ui.widget',
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.wbtooltip',
+				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-cancel',
