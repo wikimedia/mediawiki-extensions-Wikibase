@@ -11,7 +11,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 	);
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__,
+		'localBasePath' => __DIR__ . DIRECTORY_SEPARATOR . 'tests',
 		'remoteExtPath' => '..' . $remoteExtPathParts[2] . DIRECTORY_SEPARATOR . 'tests',
 	);
 
@@ -26,6 +26,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			'Statement.tests.js',
 		),
 		'dependencies' => array(
+			'jquery',
 			'wikibase.datamodel',
 			'wikibase.datamodel.tests.testEntity',
 			'wikibase.tests.qunit.testrunner',
@@ -37,6 +38,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			'testEntity.js',
 		),
 		'dependencies' => array(
+			'jquery',
 			'wikibase.datamodel',
 		)
 	);

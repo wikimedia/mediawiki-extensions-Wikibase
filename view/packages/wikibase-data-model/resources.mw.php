@@ -107,11 +107,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery', // $.each, $.extend
-
 				'mw.ext.dataValues', // DataValues extension
-
-				'util.inherit',
-
 				'wikibase.datamodel.__namespace',
 			)
 		),
