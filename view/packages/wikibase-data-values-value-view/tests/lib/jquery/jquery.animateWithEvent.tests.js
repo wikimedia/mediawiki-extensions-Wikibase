@@ -67,7 +67,7 @@
 		} );
 	} );
 
-	QUnit.test( 'options.start callback', 2, function( assert ) {
+	QUnit.test( 'options.start callback', function( assert ) {
 		var $elem = $( '<div/>');
 		var animationEventsAnimation;
 
