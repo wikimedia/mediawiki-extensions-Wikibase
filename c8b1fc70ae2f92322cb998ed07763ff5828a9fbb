@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_2f628837",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1523
+      },
+      "writtenOn": "2014-07-17T18:24:43Z",
+      "side": 1,
+      "message": "Casting to array is much more readable imo, and only takes one line.\n\n$changeOps \u003d (array)$changeOps;",
+      "revId": "c8b1fc70ae2f92322cb998ed07763ff5828a9fbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
