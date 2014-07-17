@@ -13,6 +13,7 @@ use Wikibase\Summary;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Thiemo Mättig
  */
 class ChangeOps implements ChangeOp {
 
@@ -21,51 +22,53 @@ class ChangeOps implements ChangeOp {
 	 *
 	 * @var ChangeOp[]
 	 */
-	protected $ops;
+	private $changeOps = array();
 
 	/**
 	 * @since 0.4
-	 */
-	public function __construct() {
-		$this->ops = array();
-	}
-
-	/**
-	 * Adds a changeOp
 	 *
-	 * @since 0.4
-	 *
-	 * @param ChangeOp|ChangeOp[] $changeOp
+	 * @param ChangeOp|ChangeOp[] $changeOps
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function add( $changeOp ) {
-		if ( !is_array( $changeOp ) && !( $changeOp instanceof ChangeOp ) ) {
-			throw new InvalidArgumentException( '$changeOp needs to be an instance of ChangeOp or an array of ChangeOps' );
+	public function __construct( $changeOps = array() ) {
+		$this->add( $changeOps );
+	}
+
+	/**
+	 * Adds one change operation or a list of change operations.
+	 *
+	 * @since 0.4
+	 *
+	 * @param ChangeOp|ChangeOp[] $changeOps
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function add( $changeOps ) {
+		if ( !is_array( $changeOps ) ) {
+			$changeOps = array( $changeOps );
 		}
 
-		if ( $changeOp instanceof ChangeOp ) {
-			$this->ops[] = $changeOp;
-		} else {
-			foreach ( $changeOp as $op ) {
-				if ( $op instanceof ChangeOp ) {
-					$this->ops[] = $op;
-				} else {
-					throw new InvalidArgumentException( 'array $changeOp must contain ChangeOps only' );
-				}
+		foreach ( $changeOps as $changeOp ) {
+			if ( !( $changeOp instanceof ChangeOp ) ) {
+				throw new InvalidArgumentException(
+					'$changeOp needs to be an instance of ChangeOp or an array of ChangeOps'
+				);
 			}
+
+			$this->changeOps[] = $changeOp;
 		}
 	}
 
 	/**
-	 * Get the array of changeOps
+	 * Get the array of change operations.
 	 *
 	 * @since 0.4
 	 *
 	 * @return ChangeOp[]
 	 */
 	public function getChangeOps() {
-		return $this->ops;
+		return $this->changeOps;
 	}
 
 	/**
@@ -77,11 +80,11 @@ class ChangeOps implements ChangeOp {
 	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
-	 * @return bool
+	 * @return bool Deprecated, do not rely on this value.
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
-		foreach ( $this->ops as $op ) {
-			$op->apply( $entity, $summary );
+		foreach ( $this->changeOps as $changeOp ) {
+			$changeOp->apply( $entity, $summary );
 		}
 
 		return true;
@@ -102,17 +105,18 @@ class ChangeOps implements ChangeOp {
 		$result = Result::newSuccess();
 		$entity = $entity->copy();
 
-		foreach ( $this->ops as $op ) {
-			$result = $op->validate( $entity );
+		foreach ( $this->changeOps as $changeOp ) {
+			$result = $changeOp->validate( $entity );
 
 			if ( !$result->isValid() ) {
 				// XXX: alternatively, we could collect all the errors.
 				break;
 			}
 
-			$op->apply( $entity );
+			$changeOp->apply( $entity );
 		}
 
 		return $result;
 	}
+
 }
