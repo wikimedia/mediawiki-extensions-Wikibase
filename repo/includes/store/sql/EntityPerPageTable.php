@@ -22,15 +22,53 @@ use Wikibase\DataModel\Entity\ItemId;
 class EntityPerPageTable implements EntityPerPage {
 
 	/**
+	 * @var BasicEntityIdParser
+	 */
+	private $idParser;
+
+	/**
+	 * @var bool
+	 */
+	private $useRedirectTargetColumn;
+
+	function __construct( $useRedirectTargetColumn = true ) {
+		$this->idParser = new BasicEntityIdParser();
+		$this->useRedirectTargetColumn;
+	}
+
+	/**
 	 * @see EntityPerPage::addEntityPage
 	 *
 	 * @param EntityId $entityId
 	 * @param int $pageId
 	 *
 	 * @throws InvalidArgumentException
-	 * @return boolean Success indicator
 	 */
 	public function addEntityPage( EntityId $entityId, $pageId ) {
+		$this->addRow( $entityId, $pageId );
+	}
+
+	/**
+	 * @see EntityPerPage::addEntityPage
+	 *
+	 * @param EntityId $entityId
+	 * @param int $pageId
+	 * @param EntityId $targetId
+	 */
+	public function addRedirectPage( EntityId $entityId, $pageId, EntityId $targetId ) {
+		$this->addRow( $entityId, $pageId, $targetId );
+	}
+
+	/**
+	 * @see EntityPerPage::addEntityPage
+	 *
+	 * @param EntityId $entityId
+	 * @param int $pageId
+	 * @param EntityId $targetId
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	private function addRow( EntityId $entityId, $pageId, EntityId $targetId = null ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int' );
 		}
@@ -40,27 +78,40 @@ class EntityPerPageTable implements EntityPerPage {
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
-		$select = $dbw->selectField(
-			'wb_entity_per_page',
-			'epp_page_id',
-			array(
-				'epp_entity_id' => $entityId->getNumericId(),
-				'epp_entity_type' => $entityId->getEntityType()
-			),
-			__METHOD__
+
+		$redirectTarget = $targetId ? $targetId->getSerialization() : null;
+
+		$values = array(
+			'epp_entity_id' => $entityId->getNumericId(),
+			'epp_entity_type' => $entityId->getEntityType(),
+			'epp_page_id' => $pageId,
 		);
-		if( $select !== false ) {
-			return false;
+
+		if ( $this->useRedirectTargetColumn ) {
+			$values['epp_redirect_target'] = $redirectTarget;
 		}
 
-		return $dbw->insert(
+		$dbw->replace(
 			'wb_entity_per_page',
-			array(
-				'epp_entity_id' => $entityId->getNumericId(),
-				'epp_entity_type' => $entityId->getEntityType(),
-				'epp_page_id' => $pageId
-			),
+			$this->getUniqueIndexes(),
+			$values,
 			__METHOD__
+		);
+	}
+
+	/**
+	 * Returns a list of unique indexes, each index being described by a list of fields.
+	 * This is intended for use with DatabaseBase::replace().
+	 *
+	 * @return array[]
+	 */
+	private function getUniqueIndexes() {
+		// CREATE UNIQUE INDEX /*i*/wb_epp_entity ON /*_*/wb_entity_per_page (epp_entity_id, epp_entity_type);
+		// CREATE UNIQUE INDEX /*i*/wb_epp_page ON /*_*/wb_entity_per_page (epp_page_id);
+
+		return array(
+			'wb_epp_entity' => array( 'epp_entity_id', 'epp_entity_type' ),
+			'wb_epp_page' => array( 'epp_page_id' ),
 		);
 	}
 
@@ -108,21 +159,6 @@ class EntityPerPageTable implements EntityPerPage {
 	}
 
 	/**
-	 * @see EntityPerPage::rebuild
-	 *
-	 * @since 0.2
-	 *
-	 * @return boolean success indicator
-	 */
-	public function rebuild() {
-		// FIXME: class not found!
-		$rebuilder = new EntityPerPageRebuilder();
-		$rebuilder->rebuild( $this );
-
-		return true;
-	}
-
-	/**
 	 * @see EntityPerPage::getEntitiesWithoutTerm
 	 *
 	 * @since 0.2
@@ -140,7 +176,14 @@ class EntityPerPageTable implements EntityPerPage {
 		$conditions = array(
 			'term_entity_type IS NULL'
 		);
-		$joinConditions = 'term_entity_id = epp_entity_id AND term_entity_type = epp_entity_type AND term_type = ' . $dbr->addQuotes( $termType );
+
+		$joinConditions = 'term_entity_id = epp_entity_id ' .
+			'AND term_entity_type = epp_entity_type ' .
+			'AND term_type = ' . $dbr->addQuotes( $termType ) . ' ';
+
+		if ( $this->useRedirectTargetColumn ) {
+			$joinConditions .= 'AND epp_redirect_target IS NULL';
+		}
 
 		if ( $language !== null ) {
 			$joinConditions .= ' AND term_language = ' . $dbr->addQuotes( $language );
@@ -171,11 +214,10 @@ class EntityPerPageTable implements EntityPerPage {
 
 	protected function getEntityIdsFromRows( $rows ) {
 		$entities = array();
-		$idParser = new BasicEntityIdParser();
 
 		foreach ( $rows as $row ) {
 			$id = new EntityId( $row->entity_type, (int)$row->entity_id );
-			$entities[] = $idParser->parse( $id->getSerialization() );
+			$entities[] = $this->idParser->parse( $id->getSerialization() );
 		}
 
 		return $entities;
@@ -197,7 +239,12 @@ class EntityPerPageTable implements EntityPerPage {
 			'ips_site_page IS NULL'
 		);
 		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
-		$joinConditions = 'ips_item_id = epp_entity_id';
+
+		$joinConditions = 'ips_item_id = epp_entity_id ';
+
+		if ( $this->useRedirectTargetColumn ) {
+			$joinConditions .= 'AND epp_redirect_target IS NULL';
+		}
 
 		if ( $siteId !== null ) {
 			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
@@ -256,6 +303,10 @@ class EntityPerPageTable implements EntityPerPage {
 			$orderBy = array( 'epp_entity_id' );
 		}
 
+		if ( $this->useRedirectTargetColumn ) {
+			$where[ 'epp_redirect_target' ] = null;
+		}
+
 		if ( !is_int( $limit ) || $limit < 1 ) {
 			throw new InvalidArgumentException( '$limit must be a positive integer' );
 		}
@@ -297,7 +348,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return int|false the ID of the page containing the entity,
 	 *         or false if there is no such entity page.
 	 */
-	public function getPageIdForEntity( EntityId $entityId ) {
+	public function getPageIdForEntityId( EntityId $entityId ) {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$row = $dbr->selectRow(
@@ -315,6 +366,42 @@ class EntityPerPageTable implements EntityPerPage {
 		}
 
 		return intval( $row->epp_page_id );
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 *
+	 * @return EntityId|null|false The ID of the redirect target, or null if $entityId
+	 *         does not refer to a redirect, or false if $entityId is not known.
+	 */
+	public function getRedirectForEntityId( EntityId $entityId ) {
+		$column = $this->useRedirectTargetColumn
+			? 'epp_redirect_target'
+			: 'NULL AS epp_redirect_target';
+
+		$dbr = wfGetDB( DB_SLAVE );
+
+		$row = $dbr->selectRow(
+			'wb_entity_per_page',
+			array( $column ),
+			array(
+				'epp_entity_type' => $entityId->getEntityType(),
+				'epp_entity_id' => $entityId->getNumericId()
+			),
+			__METHOD__
+		);
+
+		if ( !$row ) {
+			return false;
+		}
+
+		if ( !$row->epp_redirect_target ) {
+			return null;
+		}
+
+		return $this->idParser->parse( $row->epp_redirect_target );
 	}
 
 }
