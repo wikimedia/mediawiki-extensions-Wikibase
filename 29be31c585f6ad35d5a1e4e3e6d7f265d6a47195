@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_1ec944ae",
+        "filename": "client/tests/phpunit/includes/scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-17T12:45:39Z",
+      "side": 1,
+      "message": "this could, in theory, still be null. better check first.",
+      "revId": "29be31c585f6ad35d5a1e4e3e6d7f265d6a47195",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
