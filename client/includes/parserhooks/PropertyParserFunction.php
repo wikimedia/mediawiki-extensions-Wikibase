@@ -27,16 +27,6 @@ use Wikibase\Lib\Store\EntityLookup;
 class PropertyParserFunction {
 
 	/**
-	 * @var Parser
-	 */
-	private $parser;
-
-	/**
-	 * @var EntityId
-	 */
-	private $entityId;
-
-	/**
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
@@ -47,16 +37,13 @@ class PropertyParserFunction {
 	private $propertyLabelResolver;
 
 	/**
-	 * @param Parser $parser
-	 * @param EntityId $entityId
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyLabelResolver $propertyLabelResolver
 	 */
-	public function __construct( Parser $parser, EntityId $entityId,
-		EntityLookup $entityLookup, PropertyLabelResolver $propertyLabelResolver
+	public function __construct(
+		EntityLookup $entityLookup,
+		PropertyLabelResolver $propertyLabelResolver
 	) {
-		$this->parser = $parser;
-		$this->entityId = $entityId;
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
 	}
@@ -66,9 +53,9 @@ class PropertyParserFunction {
 	 *
 	 * @return bool
 	 */
-	public function isParserUsingVariants() {
-		$parserOptions = $this->parser->getOptions();
-		return $this->parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+	public function isParserUsingVariants( Parser $parser ) {
+		$parserOptions = $parser->getOptions();
+		return $parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
 			&& !$parserOptions->getDisableContentConversion();
 	}
 
@@ -125,16 +112,17 @@ class PropertyParserFunction {
 	}
 
 	/**
+	 * @param EntityId $entityId
 	 * @param string $propertyLabel property label or ID (pXXX)
 	 * @param Language $language
 	 *
 	 * @return string
 	 */
-	public function renderInLanguage( $propertyLabel, Language $language ) {
+	public function renderInLanguage( EntityId $entityId, $propertyLabel, Language $language ) {
 		$renderer = $this->getRenderer( $language );
 
 		try {
-			$status = $renderer->renderForEntityId( $this->entityId, $propertyLabel );
+			$status = $renderer->renderForEntityId( $entityId, $propertyLabel );
 		} catch ( PropertyLabelNotResolvedException $ex ) {
 			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
 		} catch ( InvalidArgumentException $ex ) {
@@ -187,19 +175,23 @@ class PropertyParserFunction {
 	}
 
 	/**
+	 * @param Parser $parser
 	 * @param string $propertyLabel property label or ID (pXXX)
 	 *
 	 * @return string Wikitext
 	 */
-	public function doRender( $propertyLabel ) {
+	public function runFunction( Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
-		$targetLanguage = $this->parser->getTargetLanguage();
+		$targetLanguage = $parser->getTargetLanguage();
 
-		if ( $this->isParserUsingVariants() && $this->parser->getConverterLanguage()->hasVariants() ) {
-			$text = $this->processRenderedArray( $this->renderInVariants(
-				$propertyLabel, $this->parser->getConverterLanguage()->getVariants()
-			) );
+		if ( $this->isParserUsingVariants( $parser ) && $parser->getConverterLanguage()->hasVariants() ) {
+			$renderedVariantsArray = $this->renderInVariants(
+				$propertyLabel,
+				$parser->getConverterLanguage()->getVariants()
+			);
+
+			$text = $this->processRenderedArray( $renderedVariantsArray );
 		} else {
 			$text = $this->renderInLanguage( $propertyLabel, $targetLanguage );
 		}
@@ -236,10 +228,10 @@ class PropertyParserFunction {
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
 
-		$instance = new self( $parser, $entityId, $entityLookup, $propertyLabelResolver );
+		$instance = new self( $entityLookup, $propertyLabelResolver );
 
 		$result = array(
-			$instance->doRender( $propertyLabel ),
+			$instance->runFunction( $parser, $entityId, $propertyLabel ),
 			'noparse' => false, // parse wikitext
 			'nowiki' => false,  // formatters take care of escaping as needed
 		);
