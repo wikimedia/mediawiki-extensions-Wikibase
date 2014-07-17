@@ -9,7 +9,7 @@
 ( function( $, mw, wb ) {
 	'use strict';
 
-	wb.ui.initTermBox = function( entity ) {
+	wb.ui.initTermBox = function( entity, api ) {
 		mw.hook( 'wikibase.domready' ).add( function() {
 			var termsValueTools = [],
 				$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
@@ -50,7 +50,9 @@
 				// TODO: EditableLabel should not assume that this is set
 				toolbar.$editGroup = $editGroup;
 
-				termsValueTools.push( editTool.newFromDom( $termsRow, {}, toolbar ) );
+				termsValueTools.push( editTool.newFromDom( $termsRow, {
+					api: api
+				}, toolbar ) );
 			} );
 
 			$( wb )

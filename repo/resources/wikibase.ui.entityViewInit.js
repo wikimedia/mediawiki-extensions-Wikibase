@@ -164,7 +164,7 @@
 					}
 				} );
 
-				wb.ui.initTermBox( entity );
+				wb.ui.initTermBox( entity, repoApi );
 
 			} );
 		}
