@@ -26,16 +26,11 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Parser $parser
-	 * @param EntityId $entityId
 	 * @param Entity|null $entity
 	 *
 	 * @return PropertyParserFunction
 	 */
-	private function getPropertyParserFunction(
-		Parser $parser,
-		EntityId $entityId,
-		Entity $entity = null
-	) {
+	private function getPropertyParserFunction( Parser $parser, Entity $entity = null ) {
 		$entityLookup = new MockRepository();
 
 		if ( $entity !== null ) {
@@ -47,8 +42,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup
 		);
 
-		return new PropertyParserFunction( $parser, $entityId, $entityLookup,
-			$propertyLabelResolver );
+		return new PropertyParserFunction( $entityLookup, $propertyLabelResolver );
 	}
 
 	/**
@@ -58,8 +52,8 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$instance = $this->getPropertyParserFunction( $parser, new ItemId( 'q42' ) );
-		$renderer = $instance->getRenderer( Language::factory( $languageCode ) );
+		$functionRunner = $this->getPropertyParserFunction( $parser );
+		$renderer = $functionRunner->getRenderer( Language::factory( $languageCode ) );
 		$this->assertInstanceOf( 'Wikibase\PropertyParserFunctionRenderer', $renderer );
 	}
 
@@ -80,14 +74,17 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$disableTitleConversion,
 		$expected
 	) {
-		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parserOptions->setInterfaceMessage( $interfaceMessage );
 		$parserOptions->disableContentConversion( $disableContentConversion );
 		$parserOptions->disableTitleConversion( $disableTitleConversion );
+
+		$parser = new Parser();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$instance = $this->getPropertyParserFunction( $parser, new ItemId( 'q42' ) );
-		$this->assertEquals( $expected, $instance->isParserUsingVariants() );
+
+		$instance = $this->getPropertyParserFunction( $parser );
+
+		$this->assertEquals( $expected, $instance->isParserUsingVariants( $parser ) );
 	}
 
 	public function isParserUsingVariantsProvider() {
@@ -109,8 +106,8 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$instance = $this->getPropertyParserFunction( $parser, new ItemId( 'q42' ) );
-		$this->assertEquals( $expected, $instance->processRenderedArray( $textArray ) );
+		$functionRunner = $this->getPropertyParserFunction( $parser );
+		$this->assertEquals( $expected, $functionRunner->processRenderedArray( $textArray ) );
 	}
 
 	public function processRenderedArrayProvider() {
@@ -133,10 +130,10 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q42' ) );
 
-		$instance = $this->getPropertyParserFunction( $parser, $item->getId(), $item );
+		$functionRunner = $this->getPropertyParserFunction( $parser, $item );
 		$lang = Language::factory( 'qqx' );
 
-		$result = $instance->renderInLanguage( 'invalidLabel', $lang );
+		$result = $functionRunner->renderInLanguage( $item->getId(), 'invalidLabel', $lang );
 
 		// Test against the regexp of the {{#iferror parser function, as that should be able
 		// to detect errors from PropertyParserFunction. See ExtParserFunctions::iferror
