@@ -41,6 +41,8 @@ return call_user_func( function() {
 		// List of additional CSS class names for site links that have badges, e.g.
 		// array( 'Q101' => 'wb-badge-goldstar' ).
 		'badgeClassNames' => array(),
+		// Allow accessing data from other items in the parser functions and via Lua
+		'allowArbitraryDataAccess' => true,
 
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
