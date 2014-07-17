@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_2f3de829",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-17T18:35:31Z",
+      "side": 1,
+      "message": "The \"wikibase-item-summary-wbcreateredirect-???\" auto-summary message is missing here.",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_5fbdd1d0",
         "filename": "repo/includes/Interactors/CreateRedirectException.php",
         "patchSetId": 12
