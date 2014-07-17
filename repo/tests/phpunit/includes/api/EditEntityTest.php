@@ -538,6 +538,24 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
+	public function testLabelDescriptionConflict() {
+		$params = array(
+			'action' => 'wbeditentity',
+			'new' => 'item',
+			'data' => '{
+				"labels": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } },
+				"descriptions": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } }
+			}',
+		);
+		$this->doApiRequestWithToken( $params );
+
+		$expectedException = array(
+			'type' => 'UsageException',
+			'code' => 'modification-failed',
+		);
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
 	public function testClearFromBadRevId() {
 		$params = array(
 			'action' => 'wbeditentity',
