@@ -16,8 +16,8 @@
 
 		// this will build a drop-down for the language selection:
 		var siteList = [];
-		for ( var siteId in wb.getSites() ) {
-			var site = wb.getSite( siteId );
+		for ( var siteId in wb.sites.getSites() ) {
+			var site = wb.sites.getSite( siteId );
 			siteList.push( {
 				'label': site.getName() + ' (' + site.getId() + ')',
 				'value': site.getName() + ' (' + site.getId() + ')'
@@ -29,8 +29,8 @@
 		$( '#wb-itembytitle-form1' ).submit( function() {
 			var $input = $( '#wb-itembytitle-sitename' );
 			var langID = String( $input.val().replace(/.*\(|\).*/gi,'') );
-			if ( wb._siteList[langID].getId() !== undefined ) {
-				$input.val( wb._siteList[langID].getId() );
+			if ( wb.sites.getSite( langID ).getId() !== undefined ) {
+				$input.val( wb.sites.getSite( langID ).getId() );
 			}
 		});
 	} );
