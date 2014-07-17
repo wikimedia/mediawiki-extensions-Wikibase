@@ -32,6 +32,31 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->tablesUsed[] = 'wb_entity_per_page';
 	}
 
+	public function testAddEntityPage() {
+		$epp = new EntityPerPageTable();
+		$epp->clear();
+
+		$entityId = new ItemId( 'Q5' );
+		$epp->addEntityPage( $entityId, 55 );
+
+		$this->assertEquals( 55, $epp->getPageIdForEntityId( $entityId ) );
+	}
+
+	public function testAddRedirectPage() {
+		$epp = new EntityPerPageTable();
+		$epp->clear();
+
+		$redirectId = new ItemId( 'Q5' );
+		$targetId = new ItemId( 'Q10' );
+		$epp->addRedirectPage( $redirectId, 55, $targetId );
+
+		$this->assertEquals( $targetId, $epp->getRedirectForEntityId( $redirectId ) );
+		$this->assertEquals( 55, $epp->getPageIdForEntityId( $redirectId ) );
+
+		$ids = $epp->listEntities( Item::ENTITY_TYPE, 10 );
+		$this->assertEmpty( $ids, 'Redirects must not show up in ID listings' );
+	}
+
 	/**
 	 * @param Entity[] $entities
 	 *
@@ -117,17 +142,35 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testGetPageIdForEntity() {
+	public function testGetPageIdForEntityId() {
 		$entity = Item::newEmpty();
 
 		$epp = $this->newEntityPerPageTable( array( $entity ) );
 		$entityId = $entity->getId();
 
-		$this->assertFalse( $epp->getPageIdForEntity( new ItemId( 'Q7435389457' ) ) );
+		$this->assertFalse( $epp->getPageIdForEntityId( new ItemId( 'Q7435389457' ) ) );
 
-		$pageId = $epp->getPageIdForEntity( $entityId );
+		$pageId = $epp->getPageIdForEntityId( $entityId );
 		$this->assertInternalType( 'int', $pageId );
 		$this->assertGreaterThan( 0, $pageId );
+	}
+
+	public function testGetRedirectForEntityId() {
+		$entity = Item::newEmpty();
+		$entity2 = Item::newEmpty();
+
+		$epp = $this->newEntityPerPageTable( array( $entity, $entity2 ) );
+		$redirectId = $entity->getId();
+		$targetId = $entity2->getId();
+
+		$redirectPageId = $epp->getPageIdForEntityId( $redirectId );
+		$epp->addRedirectPage( $redirectId, $redirectPageId, $targetId );
+
+		$this->assertFalse( $epp->getRedirectForEntityId( new ItemId( 'Q7435389457' ) ) );
+		$this->assertNull( $epp->getRedirectForEntityId( $targetId ) );
+
+		$targetIdFromEpp = $epp->getRedirectForEntityId( $redirectId );
+		$this->assertEquals( $targetId->getSerialization(), $targetIdFromEpp->getSerialization() );
 	}
 
 }

@@ -653,11 +653,12 @@ abstract class EntityHandler extends ContentHandler {
 				$entityId
 			);
 
-			// Unregister the entity from the EntityPerPage table.
+			// Register the redirect from the EntityPerPage table.
 			$updates[] = new DataUpdateClosure(
-				array( $this->entityPerPage, 'deleteEntityPage' ),
+				array( $this->entityPerPage, 'addRedirectPage' ),
 				$entityId,
-				$title->getArticleID()
+				$title->getArticleID(),
+				$content->getEntityRedirect()->getTargetId()
 			);
 		} else {
 			// Register the entity in the EntityPerPage table.

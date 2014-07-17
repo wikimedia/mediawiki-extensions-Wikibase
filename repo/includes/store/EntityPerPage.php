@@ -31,7 +31,21 @@ interface EntityPerPage {
 	public function addEntityPage( EntityId $entityId, $pageId );
 
 	/**
+	 * Adds a new link between an entity redirect and a page
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $entityId
+	 * @param int $pageId
+	 * @param EntityId $targetId
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function addRedirectPage( EntityId $entityId, $pageId, EntityId $targetId );
+
+	/**
 	 * Lists entities of the given type.
+	 * This does not include redirects.
 	 *
 	 * @since 0.5
 	 *
@@ -45,7 +59,7 @@ interface EntityPerPage {
 	public function listEntities( $entityType, $limit, EntityId $after = null );
 
 	/**
-	 * Removes a link between an entity and a page
+	 * Removes a link between an entity (or entity redirect) and a page
 	 *
 	 * @since 0.5
 	 *
@@ -58,7 +72,7 @@ interface EntityPerPage {
 	public function deleteEntityPage( EntityId $entityId, $pageId );
 
 	/**
-	 * Removes all associations of the given entity
+	 * Removes all associations of the given entity (or entity redirect).
 	 *
 	 * @since 0.5
 	 *
@@ -76,15 +90,6 @@ interface EntityPerPage {
 	 * @return boolean Success indicator
 	 */
 	public function clear();
-
-	/**
-	 * Rebuilds the table
-	 *
-	 * @since 0.2
-	 *
-	 * @return boolean success indicator
-	 */
-	public function rebuild();
 
 	/**
 	 * Return all entities without a specify term
