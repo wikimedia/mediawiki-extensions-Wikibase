@@ -188,13 +188,14 @@
 				);
 
 				assert.ok(
-					instance.extensionIsVisible(),
-					'Extension is still visible immediately after calling "hideExtension".'
+					!instance.extensionIsVisible(),
+					'Extension is regarded invisible immediately when calling "hideExtension".'
 				);
 
-				assert.ok(
+				assert.strictEqual(
 					instance.extension(),
-					'extension() still returns extension\'s DOM at this state.'
+					null,
+					'extension() no longer returns extension\'s DOM at this stage.'
 				);
 			},
 			whenFullyHiddenAgain: function( instance ) {
@@ -211,7 +212,7 @@
 				assert.strictEqual(
 					instance.extension(),
 					null,
-					'extension() no longer returns null at this state.'
+					'extension() does not return extension\'s DOM in this state.'
 				);
 			}
 		} );

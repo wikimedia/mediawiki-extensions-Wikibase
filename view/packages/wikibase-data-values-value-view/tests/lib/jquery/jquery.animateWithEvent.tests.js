@@ -45,6 +45,8 @@
 	QUnit.test( 'special start callback', function( assert ) {
 		var $elem = $( '<div/>');
 
+		QUnit.stop();
+
 		$elem.animateWithEvent(
 			'foopurpose',
 			{ width: 200 },
@@ -56,16 +58,20 @@
 				);
 				assert.ok(
 					animationEvent instanceof $.AnimationEvent,
-					'Airst argument is an instance of jQuery.AnimationEvent.'
+					'First argument is an instance of jQuery.AnimationEvent.'
 				);
 
 			}
-		);
+		).promise().done( function() {
+			QUnit.start();
+		} );
 	} );
 
 	QUnit.test( 'options.start callback', 2, function( assert ) {
 		var $elem = $( '<div/>');
 		var animationEventsAnimation;
+
+		QUnit.stop();
 
 		$elem.animateWithEvent(
 			'foopurpose',
@@ -87,7 +93,9 @@
 			}, function( animationEvent ) {
 				animationEventsAnimation = animationEvent.animation;
 			}
-		);
+		).promise().done( function() {
+			QUnit.start();
+		} );
 	} );
 
 	QUnit.test( 'On jQuery set of multiple elements', function( assert ) {
@@ -95,7 +103,8 @@
 		var $confirmedElems = $();
 		var animationEventInstances = [];
 
-		QUnit.stop();
+		QUnit.stop( 2 );
+
 		$elems.animateWithEvent( 'fadesomethingin', 'fadeIn', function( animationEvent ) {
 			var elem = animationEvent.animation.elem;
 			$confirmedElems = $confirmedElems.add( elem );
@@ -107,6 +116,8 @@
 			if( $confirmedElems.length >= $elems.length ) {
 				QUnit.start();
 			}
+		} ).promise().done( function() {
+			QUnit.start();
 		} );
 
 		assert.ok(
@@ -141,26 +152,37 @@
 		);
 	} );
 
-	QUnit.test( 'Two arguments are sufficient', function( assert ) {
+	QUnit.test( 'Two arguments are sufficient', 2, function( assert ) {
 		var $node = $( '<div/>');
-		var result;
 
-		result = $node.animateWithEvent(
+		QUnit.stop();
+
+		$node.animateWithEvent(
 			'fooeventpurpose',
 			{ width: 200 }
-		);
-		assert.ok(
-			result === $node,
-			'Can call with only first two arguments'
-		);
+		).promise().done( function() {
+			QUnit.start();
 
-		result = $node.animateWithEvent(
+			assert.ok(
+				true,
+				'Can call with only first two arguments'
+			);
+		} );
+
+		$node = $( '<div/>');
+
+		QUnit.stop();
+
+		$node.animateWithEvent(
 			'xxxevent'
-		);
-		assert.ok(
-			result === $node,
-			'Can call with only first argument'
-		);
+		).promise().done( function() {
+			QUnit.start();
+
+			assert.ok(
+				true,
+				'Can call with only first argument'
+			);
+		} );
 	} );
 
 }( jQuery, QUnit ) );
