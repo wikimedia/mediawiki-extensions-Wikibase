@@ -100,6 +100,7 @@ class ChangeOps implements ChangeOp {
 	 */
 	public function validate( Entity $entity ) {
 		$result = Result::newSuccess();
+		$entity = $entity->copy();
 
 		foreach ( $this->ops as $op ) {
 			$result = $op->validate( $entity );
@@ -108,6 +109,8 @@ class ChangeOps implements ChangeOp {
 				// XXX: alternatively, we could collect all the errors.
 				break;
 			}
+
+			$op->apply( $entity );
 		}
 
 		return $result;
