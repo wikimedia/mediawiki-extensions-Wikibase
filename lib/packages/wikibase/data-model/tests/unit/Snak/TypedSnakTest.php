@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Snak\Test;
 
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\TypedSnak;
 
 /**
@@ -17,6 +18,7 @@ use Wikibase\DataModel\Snak\TypedSnak;
 class TypedSnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGettersReturnCorrectValues() {
+		/** @var Snak $snak */
 		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
 		$dataTypeId = 'awesome';
 

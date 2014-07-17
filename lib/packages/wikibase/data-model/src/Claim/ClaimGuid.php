@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Claim;
 
 use Comparable;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -14,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityId;
 class ClaimGuid implements Comparable {
 
 	/**
-	 * The separator for the prefix and suffix of the guid
+	 * The separator for the prefix and suffix of the GUID.
 	 */
 	const SEPARATOR = '$';
 
@@ -31,18 +32,18 @@ class ClaimGuid implements Comparable {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $guid
-	 * @throws \InvalidArgumentException
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $entityId, $guid ) {
-
 		if( !$entityId instanceof EntityId ){
-			throw new \InvalidArgumentException( '$entityId needs to be an EntityId' );
+			throw new InvalidArgumentException( '$entityId needs to be an EntityId' );
 		}
 		if( !is_string( $guid ) ){
-			throw new \InvalidArgumentException( '$guid needs to be a string' );
+			throw new InvalidArgumentException( '$guid needs to be a string' );
 		}
 
-		$this->serialization = $entityId->getPrefixedId() . self::SEPARATOR . $guid;
+		$this->serialization = $entityId->getSerialization() . self::SEPARATOR . $guid;
 		$this->entityId = $entityId;
 	}
 
@@ -62,11 +63,12 @@ class ClaimGuid implements Comparable {
 
 	/**
 	 * @param ClaimGuid $target
+	 *
 	 * @return bool
 	 */
 	public function equals( $target ) {
 		return $target instanceof self
-			&& $target->__toString() === $this->__toString();
+			&& $target->getSerialization() === $this->getSerialization();
 	}
 
 	public function __toString() {

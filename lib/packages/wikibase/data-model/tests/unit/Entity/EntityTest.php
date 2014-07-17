@@ -274,6 +274,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 			$this->assertEquals( $expected, $actual );
 		}
 
+		/** @var AliasGroup $aliasGroup */
 		foreach ( $entity->getFingerprint()->getAliasGroups() as $langCode => $aliasGroup ) {
 			$this->assertEquals( $aliasGroup->getAliases(), array_unique( $aliasesToSet[$langCode] ) );
 		}

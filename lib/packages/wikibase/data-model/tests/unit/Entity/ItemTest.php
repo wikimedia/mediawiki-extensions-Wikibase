@@ -10,7 +10,6 @@ use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemDiff;
@@ -24,6 +23,7 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
@@ -685,6 +685,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testNewClaimReturnsStatementWithProvidedMainSnak() {
+		/** @var Snak $snak */
 		$snak = $this->getMock( 'Wikibase\DataModel\Snak\Snak' );
 
 		$item = Item::newEmpty();
@@ -698,13 +699,13 @@ class ItemTest extends EntityTest {
 		$entity = $this->getNewEmpty();
 		$this->assertCount( 0, $entity->getClaims(), "initially, no claims" );
 
-		$claims = array(
-			$claim0 = new Claim( new PropertyNoValueSnak( 42 ) ),
-			$claim1 = new Claim( new PropertySomeValueSnak( 42 ) ),
-		);
+		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim0->setGuid( 'TEST$NVS42' );
 
-		$claims[0]->setGuid( 'TEST$NVS42' );
-		$claims[1]->setGuid( 'TEST$SVS42' );
+		$claim1 = new Claim( new PropertySomeValueSnak( 42 ) );
+		$claim1->setGuid( 'TEST$SVS42' );
+
+		$claims = array( $claim0, $claim1 );
 
 		$entity->setClaims( new Claims( $claims ) );
 		$this->assertSameSize( $claims, $entity->getClaims(), "added some claims" );
