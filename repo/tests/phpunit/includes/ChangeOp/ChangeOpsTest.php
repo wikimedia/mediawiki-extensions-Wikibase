@@ -25,6 +25,7 @@ use Wikibase\Lib\ClaimGuidGenerator;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
+ * @author Thiemo Mättig
  */
 class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
@@ -163,6 +164,35 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $changeOps->validate( $item );
 		$this->assertFalse( $result->isValid(), 'isValid()' );
+	}
+
+	public function testValidate_() {
+		$item = Item::newEmpty();
+
+		$changeOp = $this->getMockBuilder( '\Wikibase\ChangeOp\ChangeOp' )
+			->disableOriginalConstructor()
+			->getMock();
+		$changeOp->expects( $this->any() )
+			->method( 'validate' )
+			->will( $this->returnCallback( function( Item $item ) {
+				// Fail when the label is already set (by a previous apply call).
+				return $item->getLabel( 'en' )
+					? Result::newError( array() )
+					: Result::newSuccess();
+			} ) );
+		$changeOp->expects( $this->any() )
+			->method( 'apply' )
+			->will( $this->returnCallback( function( Item $item ) {
+				$item->setLabel( 'en', 'Label' );
+			} ) );
+
+		$changeOps = new ChangeOps();
+		$changeOps->add( $changeOp );
+		$changeOps->add( $changeOp );
+		$result = $changeOps->validate( $item );
+
+		$this->assertFalse( $result->isValid(), 'Validate must fail with this mock' );
+		$this->assertTrue( $item->isEmpty(), 'Item must still be empty' );
 	}
 
 }
