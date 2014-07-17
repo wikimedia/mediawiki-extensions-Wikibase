@@ -119,12 +119,15 @@ class EntityPerPageBuilder {
 			$this->waitForSlaves( $dbw );
 
 			$pages = $dbw->select(
-				array( 'page', 'wb_entity_per_page' ),
-				array( 'page_title', 'page_id' ),
+				array( 'page', 'redirect', 'wb_entity_per_page' ),
+				array( 'page_title', 'page_id', 'rd_title' ),
 				$this->getQueryConds( $lastPageSeen ),
 				__METHOD__,
 				array( 'LIMIT' => $this->batchSize, 'ORDER BY' => 'page_id' ),
-				array( 'wb_entity_per_page' => array( 'LEFT JOIN', 'page_id = epp_page_id' ) )
+				array(
+					'redirect' => array( 'LEFT JOIN', 'rd_from = page_id' ),
+					'wb_entity_per_page' => array( 'LEFT JOIN', 'page_id = epp_page_id' )
+				)
 			);
 
 			$numPages = $pages->numRows();
@@ -156,7 +159,6 @@ class EntityPerPageBuilder {
 		$conds = array(
 			'page_namespace' => NamespaceUtils::getEntityNamespaces(),
 			'page_id > ' . (int) $lastPageSeen,
-			'page_is_redirect' => 0
 		);
 
 		if ( $wgContentHandlerUseDB ) {
@@ -168,6 +170,21 @@ class EntityPerPageBuilder {
 		}
 
 		return $conds;
+	}
+
+	/**
+	 * @param string $idString
+	 *
+	 * @return EntityId|null
+	 */
+	private function tryParseId( $idString ) {
+		try {
+			return $this->entityIdParser->parse( $idString );
+		} catch ( EntityIdParsingException $e ) {
+			wfDebugLog( __CLASS__, 'Invalid entity id ' . $idString );
+		}
+
+		return null;
 	}
 
 	/**
@@ -183,22 +200,39 @@ class EntityPerPageBuilder {
 		$lastPageSeen = 0;
 
 		foreach ( $pages as $pageRow ) {
-			try {
-				$entityId = $this->entityIdParser->parse( $pageRow->page_title );
-			} catch ( EntityIdParsingException $e ) {
-				wfDebugLog( __CLASS__, __METHOD__ . ': entity id in page row is invalid.' );
-				continue;
-			}
+			$this->updateEntry( $pageRow );
 
-			if ( $this->rebuildAll === true ) {
-				$this->entityPerPageTable->deleteEntity( $entityId );
-			}
-
-			$this->entityPerPageTable->addEntityPage( $entityId, (int)$pageRow->page_id );
 			$lastPageSeen = $pageRow->page_id;
 		}
 
 		return $lastPageSeen;
+	}
+
+	/**
+	 * @param object $pageRow
+	 */
+	private function updateEntry( $pageRow ) {
+		// Derive the entity id from the page title
+		$entityId = $this->tryParseId( $pageRow->page_title );
+
+		if ( !$entityId ) {
+			return;
+		}
+
+		// Derive the target id from the redirect target title
+		$targetId = $pageRow->rd_title === null ? null : $this->tryParseId( $pageRow->rd_title );
+
+		if ( $this->rebuildAll === true ) {
+			$this->entityPerPageTable->deleteEntity( $entityId );
+		}
+
+		$pageId = (int)$pageRow->page_id;
+
+		if ( $targetId ) {
+			$this->entityPerPageTable->addRedirectPage( $entityId, $pageId, $targetId );
+		} else {
+			$this->entityPerPageTable->addEntityPage( $entityId, $pageId );
+		}
 	}
 
 	/**

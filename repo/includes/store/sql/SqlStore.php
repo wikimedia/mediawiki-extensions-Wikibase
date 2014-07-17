@@ -106,6 +106,11 @@ class SqlStore implements Store {
 	private $contentCodec;
 
 	/**
+	 * @var bool
+	 */
+	private $useRedirectTargetColumn;
+
+	/**
 	 * @param EntityContentDataCodec $contentCodec
 	 */
 	public function __construct(
@@ -118,6 +123,8 @@ class SqlStore implements Store {
 		$cachePrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$cacheType = $settings->getSetting( 'sharedCacheType' );
+
+		$this->useRedirectTargetColumn = $settings->getSetting( 'useRedirectTargetColumn' );
 
 		$this->cachePrefix = $cachePrefix;
 		$this->cacheDuration = $cacheDuration;
@@ -264,12 +271,13 @@ class SqlStore implements Store {
 
 		$table = new PropertyInfoTable( false );
 		$contentCodec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
+		$useRedirectTargetColumn = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'useRedirectTargetColumn' );
 
 		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup( $contentCodec, false );
 		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new \HashBagOStuff() );
 		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
 
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup );
+		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $useRedirectTargetColumn );
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
 
@@ -354,6 +362,12 @@ class SqlStore implements Store {
 			);
 
 			$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
+		} elseif ( $this->useRedirectTargetColumn ) {
+			$updater->addExtensionField(
+				'wb_entity_per_page',
+				'epp_redirect_target',
+				$this->getUpdateScriptPath( 'AddEppRedirectTarget', $db->getType() )
+			);
 		}
 	}
 
@@ -444,7 +458,7 @@ class SqlStore implements Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage() {
-		return new EntityPerPageTable();
+		return new EntityPerPageTable( $this->useRedirectTargetColumn );
 	}
 
 	/**
