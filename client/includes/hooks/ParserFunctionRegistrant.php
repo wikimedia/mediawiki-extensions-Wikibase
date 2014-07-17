@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Parser;
-use Wikibase\PropertyParserFunction;
+use Wikibase\PropertyParserFunctionRunner;
 
 class ParserFunctionRegistrant {
 
@@ -43,7 +43,7 @@ class ParserFunctionRegistrant {
 		$parser->setFunctionHook(
 			'property',
 			function( Parser $parser, $propertyLabel ) {
-				return PropertyParserFunction::render( $parser, $propertyLabel );
+				return PropertyParserFunctionRunner::render( $parser, $propertyLabel );
 			}
 		);
 
