@@ -352,6 +352,12 @@ class SqlStore implements Store {
 			);
 
 			$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
+		} else {
+			$updater->addExtensionField(
+				'wb_entity_per_page',
+				'eep_redirect_target',
+				$this->getUpdateScriptPath( 'AddEppRedirectTarget', $db->getType() )
+			);
 		}
 	}
 

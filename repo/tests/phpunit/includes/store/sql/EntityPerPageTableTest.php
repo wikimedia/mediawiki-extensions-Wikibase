@@ -117,17 +117,35 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testGetPageIdForEntity() {
+	public function testGetPageIdForEntityId() {
 		$entity = Item::newEmpty();
 
 		$epp = $this->newEntityPerPageTable( array( $entity ) );
 		$entityId = $entity->getId();
 
-		$this->assertFalse( $epp->getPageIdForEntity( new ItemId( 'Q7435389457' ) ) );
+		$this->assertFalse( $epp->getPageIdForEntityId( new ItemId( 'Q7435389457' ) ) );
 
-		$pageId = $epp->getPageIdForEntity( $entityId );
+		$pageId = $epp->getPageIdForEntityId( $entityId );
 		$this->assertInternalType( 'int', $pageId );
 		$this->assertGreaterThan( 0, $pageId );
+	}
+
+	public function testGetRedirectForEntityId() {
+		$entity = Item::newEmpty();
+		$entity2 = Item::newEmpty();
+
+		$epp = $this->newEntityPerPageTable( array( $entity, $entity2 ) );
+		$redirectId = $entity->getId();
+		$targetId = $entity2->getId();
+
+		$redirectPageId = $epp->getPageIdForEntityId( $redirectId );
+		$epp->addRedirectPage( $redirectId, $redirectPageId, $targetId );
+
+		$this->assertFalse( $epp->getRedirectForEntityId( new ItemId( 'Q7435389457' ) ) );
+		$this->assertNull( $epp->getRedirectForEntityId( $targetId ) );
+
+		$targetIdFromEpp = $epp->getRedirectForEntityId( $redirectId );
+		$this->assertEquals( $targetId->getSerialization(), $targetIdFromEpp->getSerialization() );
 	}
 
 }

@@ -209,7 +209,8 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
 		$this->assertTrue( $revision->getContent()->getEntityRedirect()->equals( $redirect ), 'getEntityRedirect()' );
 
-		$this->assertEntityPerPage( false, $oneId );
+		$this->assertEntityPerPage( true, $oneId );
+		$this->assertRedirectPerPage( $q33, $oneId );
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
@@ -518,12 +519,24 @@ class WikiPageEntityStoreTest extends \PHPUnit_Framework_TestCase {
 	private function assertEntityPerPage( $expected, EntityId $entityId ) {
 		$epp = new EntityPerPageTable();
 
-		$pageId = $epp->getPageIdForEntity( $entityId );
+		$pageId = $epp->getPageIdForEntityId( $entityId );
 
 		if ( $expected === true ) {
 			$this->assertGreaterThan( 0, $pageId );
 		} else {
 			$this->assertEquals( $expected, $pageId );
+		}
+	}
+
+	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
+		$epp = new EntityPerPageTable();
+
+		$targetId = $epp->getRedirectForEntityId( $entityId );
+
+		if ( $expected === true ) {
+			$this->assertNotNull( $targetId );
+		} else {
+			$this->assertEquals( $expected->getSerialization(), $targetId->getSerialization() );
 		}
 	}
 
