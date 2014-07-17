@@ -15,7 +15,7 @@
 	"specialpages-group-wikibaseclient": "Klient {{grammar:genitive|{{WBREPONAME}}}}",
 	"tooltip-t-wikibase": "Link do powiązanego elementu w repozytorium danych",
 	"wikibase-after-page-move": "Możesz także [$1 zaktualizować] powiązany element {{grammar:genitive|{{WBREPONAME}}}} w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
-	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element {{grammar:genitive|{{WBREPONAME}}}}] zostanie wkrótce automatycznie zaktualizowany.",
+	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie wkrótce automatycznie zaktualizowany.",
 	"wikibase-comment-add": "Utworzono element {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-comment-remove": "Powiązany element {{grammar:genitive|{{WBREPONAME}}}} skasowany. Linki do innych wersji językowych usunięte.",
 	"wikibase-comment-linked": "Z tą stroną powiązano element {{grammar:genitive|{{WBREPONAME}}}}.",

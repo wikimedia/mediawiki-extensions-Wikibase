@@ -306,6 +306,25 @@ $specialPageAliases['scn'] = array(
 	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
 );
 
+/** Swedish (svenska) */
+$specialPageAliases['sv'] = array(
+	'EntityData' => array( 'Objektdata' ),
+	'NewItem' => array( 'Nytt_objekt', 'Skapa_objekt' ),
+	'NewProperty' => array( 'Ny_egenskap', 'Skapa_egenskap' ),
+	'ItemByTitle' => array( 'Objekt_efter_titel' ),
+	'ItemDisambiguation' => array( 'Objektsärskiljning' ),
+	'ListDatatypes' => array( 'Lista_datatyper' ),
+	'SetLabel' => array( 'Ange_etikett' ),
+	'SetDescription' => array( 'Ange_beskrivning' ),
+	'SetAliases' => array( 'Ange_alias' ),
+	'SetSiteLink' => array( 'Ange_webbplatslänk' ),
+	'MergeItems' => array( 'Slå_ihop_objekt' ),
+	'EntitiesWithoutLabel' => array( 'Objekt_utan_etikett' ),
+	'EntitiesWithoutDescription' => array( 'Objekt_utan_beskrivning' ),
+	'ItemsWithoutSitelinks' => array( 'Objekt_utan_webbplatslänk' ),
+	'MyLanguageFallbackChain' => array( 'Min_språkåterfallskedja' ),
+);
+
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = array(
 	'DispatchStats' => array( 'Thống_kê_truyền_bá' ),
