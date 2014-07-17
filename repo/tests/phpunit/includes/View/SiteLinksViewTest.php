@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use MediaWikiSite;
 use SiteList;
 use Wikibase\DataModel\Entity\Item;
@@ -19,29 +20,41 @@ use Wikibase\Repo\View\SiteLinksView;
  *
  * @licence GNU GPL v2+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
-	private $specialSiteLinkGroups = array( 'special group' );
-
-	private $oldSpecialSiteLinkGroups;
+	private $settings = array(
+		'specialSiteLinkGroups' => array( 'special group' ),
+		'badgeItems' => array(
+			'Q42' => 'wb-badge-featuredarticle',
+			'Q12' => 'wb-badge-goodarticle'
+		)
+	);
 
 	public function setUp() {
 		parent::setUp();
-		$this->oldSpecialSiteLinkGroups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'specialSiteLinkGroups' );
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'specialSiteLinkGroups', $this->specialSiteLinkGroups );
+		$this->switchSettings();
 	}
 
 	public function tearDown() {
 		parent::tearDown();
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'specialSiteLinkGroups', $this->oldSpecialSiteLinkGroups );
+		$this->switchSettings();
+	}
+
+	private function switchSettings() {
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		foreach ( $this->settings as $name => $value ) {
+			$this->settings[$name] = $settings->getSetting( $name );
+			$settings->setSetting( $name, $value );
+		}
 	}
 
 	/**
 	 * @dataProvider getHtmlProvider
 	 */
 	public function testGetHtml( Item $item, array $groups, $editable, $expectedValue ) {
-		$siteLinksView = new SiteLinksView( $this->newSiteList(), $this->getSectionEditLinkGeneratorMock() );
+		$siteLinksView = $this->getSiteLinksView();
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
@@ -167,6 +180,43 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 
+		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
+			$item = Item::newEmpty();
+			$item->setId( new ItemId( 'Q1' ) );
+			$item->addSiteLink( new SiteLink( 'enwiki', 'en test', array( new ItemId( 'Q42' ) ) ) );
+			$item->addSiteLink( new SiteLink( 'dewiki', 'de test', array( new ItemId( 'Q42' ), new ItemId( 'Q12' ) ) ) );
+
+			$testCases[] = array(
+				$item,
+				array( 'wikipedia' ),
+				true,
+				array(
+					'tag' => 'table',
+					'descendant' => array(
+						'tag' => 'span',
+						'attributes' => array(
+							'class' => 'wb-badge wb-badge-Q42 wb-badge-featuredarticle'
+						)
+					)
+				)
+			);
+
+			$testCases[] = array(
+				$item,
+				array( 'wikipedia' ),
+				true,
+				array(
+					'tag' => 'table',
+					'descendant' => array(
+						'tag' => 'span',
+						'attributes' => array(
+							'class' => 'wb-badge wb-badge-Q12 wb-badge-goodarticle'
+						)
+					)
+				)
+			);
+		}
+
 		return $testCases;
 	}
 
@@ -174,7 +224,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getEmptyHtmlProvider
 	 */
 	public function testGetEmptyHtml( Item $item, array $groups, $editable ) {
-		$siteLinksView = new SiteLinksView( $this->newSiteList(), $this->getSectionEditLinkGeneratorMock() );
+		$siteLinksView = $this->getSiteLinksView();
 
 		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
@@ -220,6 +270,16 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @return SiteLinksView
+	 */
+	private function getSiteLinksView() {
+		return new SiteLinksView(
+			$this->newSiteList(),
+			$this->getSectionEditLinkGeneratorMock()
+		);
+	}
+
+	/**
 	 * @return SectionEditLinkGenerator
 	 */
 	private function getSectionEditLinkGeneratorMock() {
@@ -244,6 +304,9 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 		return $sectionEditLinkGenerator;
 	}
 
+	/**
+	 * @return SiteList
+	 */
 	private function newSiteList() {
 		$dummySite = MediaWikiSite::newFromGlobalId( 'enwiki' );
 		$dummySite->setGroup( 'wikipedia' );
