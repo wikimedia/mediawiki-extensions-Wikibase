@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f4c8d752",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-17T16:55:53Z",
+      "side": 1,
+      "message": "@param missing",
+      "revId": "e28fb4c9fc48e479d806447767df76d20ac4d7c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_54e44bdb",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-17T16:55:53Z",
+      "side": 1,
+      "message": "why is this public? (Not your fault, I know)",
+      "revId": "e28fb4c9fc48e479d806447767df76d20ac4d7c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_144483bc",
+        "filename": "client/includes/parserhooks/PropertyParserFunction.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-17T16:55:53Z",
+      "side": 1,
+      "message": "runFunction is a bit of a weird name (I would expect something with that name to take a callable and work with that). I would suggest to just call this renderProperty or so",
+      "revId": "e28fb4c9fc48e479d806447767df76d20ac4d7c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
