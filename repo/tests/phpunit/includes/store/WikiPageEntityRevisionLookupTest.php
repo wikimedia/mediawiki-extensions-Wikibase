@@ -9,7 +9,8 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -41,23 +42,39 @@ class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		return $revision;
 	}
 
+	protected static function storeTestRedirect( EntityRedirect $redirect ) {
+		global $wgUser;
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$revision = $store->saveRedirect( $redirect, "storeTestEntity", $wgUser );
+
+		return $revision;
+	}
+
 	/**
-	 * @see EntityRevisionLookupTest::newEntityRevisionLookup(newEntityLookup
+	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
 	 * @param EntityRevision[] $entityRevisions
+	 * @param EntityRedirect[] $entityRedirects
 	 *
-	 * @return EntityRevisionLookup
+	 * @return EntityLookup
 	 */
-	protected function newEntityRevisionLookup( array $entityRevisions ) {
+	protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects ) {
 
 		// make sure all test entities are in the database.
-		/* @var EntityRevision $entityRev */
+
 		foreach ( $entityRevisions as $entityRev ) {
 			$logicalRev = $entityRev->getRevision();
 
 			if ( !isset( self::$testEntities[$logicalRev] ) ) {
 				$rev = self::storeTestEntity( $entityRev->getEntity() );
 				self::$testEntities[$logicalRev] = $rev;
+			}
+		}
+
+		if ( $this->itemSupportsRedirect() ) {
+			foreach ( $entityRedirects as $entityRedir ) {
+				self::storeTestRedirect( $entityRedir );
 			}
 		}
 
