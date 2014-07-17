@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_d494bb8f",
+        "filename": "repo/includes/ChangeOp/ChangeOps.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-17T16:11:05Z",
+      "side": 1,
+      "message": "We need to apply the chances here so that the next validation steps are useful (working on the correct data), right?",
+      "revId": "1378162da8205e2c912111bc5760e197be95bc4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
