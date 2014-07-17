@@ -7,6 +7,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
  * @covers Wikibase\Lib\Store\CachingEntityRevisionLookup
@@ -24,14 +26,19 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	 * @see EntityLookupTest::newEntityLoader(newEntityLookup
 	 *
 	 * @param EntityRevision[] $entityRevisions
+	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityLookup
 	 */
-	protected function newEntityRevisionLookup( array $entityRevisions ) {
+	protected function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects ) {
 		$mock = new MockRepository();
 
 		foreach ( $entityRevisions as $entityRev ) {
 			$mock->putEntity( $entityRev->getEntity(), $entityRev->getRevision() );
+		}
+
+		foreach ( $entityRedirects as $entityRedir ) {
+			$mock->putRedirect( $entityRedir );
 		}
 
 		return new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
@@ -139,7 +146,35 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 	}
 
 	public function testRedirectUpdated() {
-		$this->markTestIncomplete( 'Can\'t test redirectUpdated notification, since MockRepository does not yet support redirects.' );
+		$mock = new MockRepository();
+
+		$id = new ItemId( 'Q123' );
+		$item = Item::newEmpty();
+		$item->setId( $id );
+
+		$mock->putEntity( $item, 11 );
+
+		$lookup = new CachingEntityRevisionLookup( $mock, new \HashBagOStuff() );
+		$lookup->setVerifyRevision( false );
+
+		// fetch first revision, so it gets cached
+		$lookup->getEntityRevision( $id );
+
+		// replace by a redirect
+		$targetId = new ItemId( 'Q222' );
+		$redir = new EntityRedirect( $id, $targetId );
+		$mock->putRedirect( $redir );
+
+		// now, notify the cache
+		$lookup->redirectUpdated( $redir, 17 );
+
+		// make sure we get the new revision now
+		try {
+			$lookup->getEntityRevision( $id );
+			$this->fail( 'UnresolvedRedirectException expected; perhaps the cache did not get purged properly.' );
+		} catch ( UnresolvedRedirectException $ex ) {
+			$this->assertEquals( $targetId, $ex->getRedirectTargetId() );
+		}
 	}
 
 	public function testEntityDeleted() {
