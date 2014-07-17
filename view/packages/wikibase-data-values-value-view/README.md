@@ -109,6 +109,11 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.5 (2014-07-17)
+* Fixed the Qunit tests
+* Don't underline ooMenu/ sugester items
+* Various small bug fixes
+
 ### 0.6.4 (2014-07-02)
 * Changed MonolingualText option from "lang" to "valuelang".
 * Added setLink() function to jQuery.ui.ooMenu.CustomItem prototype allowing dynamic updates of the link target.
