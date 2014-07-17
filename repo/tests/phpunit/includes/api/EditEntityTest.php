@@ -528,6 +528,39 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
+	public function testLabelConflict() {
+		$params = array(
+			'action' => 'wbeditentity',
+			'data' => '{ "labels": { "de": { "language": "de", "value": "LabelConflict" } } }',
+			'new' => 'item',
+		);
+		$this->doApiRequestWithToken( $params );
+
+		$expectedException = array(
+			'type' => 'UsageException',
+			'code' => 'label-conflict',
+		);
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
+	public function testLabelWithDescriptionConflict() {
+		$params = array(
+			'action' => 'wbeditentity',
+			'new' => 'item',
+			'data' => '{
+				"labels": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } },
+				"descriptions": { "de": { "language": "de", "value": "LabelWithDescriptionConflict" } }
+			}',
+		);
+		$this->doApiRequestWithToken( $params );
+
+		$expectedException = array(
+			'type' => 'UsageException',
+			'code' => 'label-with-description-conflict',
+		);
+		$this->doTestQueryExceptions( $params, $expectedException );
+	}
+
 	public function testClearFromBadRevId() {
 		$params = array(
 			'action' => 'wbeditentity',
