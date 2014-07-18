@@ -18,84 +18,35 @@ use Wikibase\Test\MockRepository;
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\Renderer
  *
+ * @fixme add test cases to cover all error possibilities
+ *
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseDataAccess
  * @group PropertyParserFunctionTest
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RendererTest extends \PHPUnit_Framework_TestCase {
 
-	private function getDefaultInstance() {
+	private function getRenderer() {
 		$targetLanguage = Language::factory( 'en' );
-		$mockRepo = $this->newMockRepository();
-		$mockResolver = new MockPropertyLabelResolver( $targetLanguage->getCode(), $mockRepo );
-
-		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
-		$formatter->expects( $this->any() )
-			->method( 'formatSnak' )
-			->will( $this->returnValue( '(a kitten)' ) );
 
 		return new Renderer(
 			$targetLanguage,
-			$mockRepo,
-			$mockResolver,
-			$formatter
+			$this->getSnaksFinder(),
+			$this->getSnakFormatter()
 		);
 	}
 
-	private function newMockRepository() {
-		$propertyId = new PropertyId( 'P1337' );
+	public function testRenderForEntityId() {
+		$renderer = $this->getRenderer();
 
-		$entityLookup = new MockRepository();
-
-		$claim1 = new Claim( new PropertyValueSnak(
-			$propertyId,
-			new StringValue( 'Please write tests before merging your code' )
-		) );
-		$claim1->setGuid( __METHOD__ . '$' . 1 );
-
-		$claim2 = new Claim( new PropertyValueSnak(
-			$propertyId,
-			new StringValue( 'or kittens will die' )
-		) );
-		$claim2->setGuid( __METHOD__ . '$' . 2 );
-
-		// A Statement with a lower rank which should not affect the output
-		$claim3 = new Statement( new PropertyValueSnak(
-			$propertyId,
-			new StringValue( 'really' )
-		) );
-		$claim3->setGuid( __METHOD__ . '$' . 3 );
-		$claim3->setRank( Claim::RANK_NORMAL );
-
-		$item = Item::newEmpty();
-		$item->setId( 42 );
-		$item->addClaim( $claim1 );
-		$item->addClaim( $claim2 );
-		$item->addClaim( $claim3 );
-
-		$property = Property::newFromType( 'string' );
-		$property->setId( $propertyId );
-		$property->setLabel( 'en', 'kitten' );
-
-		$entityLookup->putEntity( $item );
-		$entityLookup->putEntity( $property );
-
-		return $entityLookup;
-	}
-
-	/**
-	 * @dataProvider provideRenderForEntityId
-	 */
-	public function testRenderForEntityId( $name, $expected, $info ) {
-		$parserFunction = $this->getDefaultInstance();
-
-		$status = $parserFunction->renderForEntityId(
+		$status = $renderer->renderForEntityId(
 			new ItemId( 'Q42' ),
-			$name
+			Language::factory( 'en' ),
+			'p1337'
 		);
 
 		$this->assertTrue( $status->isOK() );
@@ -103,52 +54,38 @@ class RendererTest extends \PHPUnit_Framework_TestCase {
 		$text = $status->getValue();
 		$this->assertInternalType( 'string', $text );
 
-		$this->assertEquals(
-			$expected,
-			$text,
-			$info
-		);
+		$expected = '(a kitten), (a kitten)';
+		$this->assertEquals( $expected, $text );
 	}
 
-	public function provideRenderForEntityId() {
-		return array(
-			array(
-				'p1337',
-				'(a kitten), (a kitten)',
-				'Congratulations, you just killed a kitten'
-			),
-			array(
-				'P1337',
-				'(a kitten), (a kitten)',
-				'Congratulations, you just killed a kitten'
-			),
-			array(
-				'kitten',
-				'(a kitten), (a kitten)',
-				'Congratulations, you just killed a kitten'
-			),
+	private function getSnaksFinder() {
+		$snaksFinder = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\SnaksFinder'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$propertyId = new PropertyId( 'P1337' );
+		$snaks = array(
+			'Q42$1' => new PropertyValueSnak( $propertyId, new StringValue( 'a kitten!' ) ),
+			'Q42$2' => new PropertyValueSnak( $propertyId, new StringValue( 'two kittens!!' ) )
 		);
+
+		$snaksFinder->expects( $this->any() )
+			->method( 'findSnaks' )
+			->will( $this->returnValue( $snaks ) );
+
+		return $snaksFinder;
 	}
 
-	/**
-	 * @dataProvider invalidRenderForEntityIdProvider
-	 * @expectedException \Wikibase\Lib\PropertyLabelNotResolvedException
-	 */
-	public function testInvalidRenderForEntityId( $name, $message ) {
-		$parserFunction = $this->getDefaultInstance();
+	private function getSnakFormatter() {
+		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
 
-		$status = $parserFunction->renderForEntityId(
-			new ItemId( 'Q42' ),
-			$name
-		);
+		$snakFormatter->expects( $this->any() )
+			->method( 'formatSnak' )
+			->will( $this->returnValue( '(a kitten)' ) );
 
-		$this->assertFalse( $status->isOK(), $message );
-	}
-
-	public function invalidRenderForEntityIdProvider() {
-		return array(
-			array( 'Kitten', 'invalid label, property by label lookup is case-sensitive' )
-		);
+		return $snakFormatter;
 	}
 
 }
