@@ -2,8 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Diff\Differ\Differ;
-use Diff\Differ\MapDiffer;
 use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
