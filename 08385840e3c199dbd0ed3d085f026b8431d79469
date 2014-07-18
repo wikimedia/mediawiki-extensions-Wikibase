@@ -51,6 +51,24 @@
       "revId": "08385840e3c199dbd0ed3d085f026b8431d79469",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_71486b60",
+        "filename": "lib/tests/phpunit/store/EntityInfoBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T15:39:53Z",
+      "side": 1,
+      "message": "Searching for \"function\\s+\\w+Provider\\b\" in my code base gives 1202 results.\nSearching for \"function\\s+provide[A-Z]\\w*\\b\" gives 591 results.\n\nI can\u0027t barely remember when I reviewed a provideFoo function. They are all named fooProvider in Wikibase.\n\nPlus I find \"provideRemove\" really ugly.",
+      "parentUuid": "8e28a382_0444466d",
+      "revId": "08385840e3c199dbd0ed3d085f026b8431d79469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
