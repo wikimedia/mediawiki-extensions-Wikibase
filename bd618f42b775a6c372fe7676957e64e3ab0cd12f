@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_df9a8b74",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T14:43:31Z",
+      "side": 1,
+      "message": "\"or\"",
+      "revId": "bd618f42b775a6c372fe7676957e64e3ab0cd12f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3f918f52",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T14:43:31Z",
+      "side": 1,
+      "message": "str_replace doesn\u0027t check word boundaries, so assuming the genitive form has some extra suffix (in German, the genitive of April would be Aprils), this is going to break: you will substitute the partial month name, leaving the suffix behind. \nWhen you fix this, please write a test case that checks for this issue.",
+      "revId": "bd618f42b775a6c372fe7676957e64e3ab0cd12f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
