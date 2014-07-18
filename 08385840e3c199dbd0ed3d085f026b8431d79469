@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_5e18e1d7",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:49:04Z",
+      "side": 1,
+      "message": "You are confusing \"any\" and \"all\" again.",
+      "revId": "08385840e3c199dbd0ed3d085f026b8431d79469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fe8b0de6",
+        "filename": "lib/tests/phpunit/store/EntityInfoBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:49:04Z",
+      "side": 1,
+      "message": "Huh? I got used to the fooProvider() naming scheme. I remember us talking about this months ago. Did we decided on a naming scheme?",
+      "revId": "08385840e3c199dbd0ed3d085f026b8431d79469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
