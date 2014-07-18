@@ -969,7 +969,11 @@ table.wb-sitelinks .wb-badge {
 }
 
 table.wb-sitelinks .wb-badge-empty {
-	/* @TODO */
+	background-image: url(images/wb-badges-empty.png);
+	/* @embed */
+	background-image: -webkit-linear-gradient(transparent, transparent), url(images/wb-badges-empty.svg);
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url(images/wb-badges-empty.svg);
 }
 
 table.wb-sitelinks {
