@@ -120,7 +120,7 @@ class Runner {
 		$renderer = $this->rendererFactory->newFromLanguage( $language );
 
 		try {
-			$status = $renderer->renderForEntityId( $entityId, $propertyLabel );
+			$status = $renderer->renderForEntityId( $entityId, $language, $propertyLabel );
 		} catch ( PropertyLabelNotResolvedException $ex ) {
 			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
 		} catch ( InvalidArgumentException $ex ) {
