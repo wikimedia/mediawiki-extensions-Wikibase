@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_bed345d6",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-18T11:52:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_734e36c6",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_53ec5a8e",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Yes, try to wrap it in an \u003ca\u003e and let the user control how to open the window. When opening a new page/tab, the current page will not be updated automatically - but that is a different issue anyway...",
       "parentUuid": "8e28a382_d3adea2f",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9ee2c99a",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-18T11:52:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_f37586c9",
       "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +225,24 @@
       "side": 1,
       "message": "I do... but it was almost 4am when I finished this up so started to no longer feel like doing this properly (If stuff like this can be done properly at all)",
       "parentUuid": "8e28a382_531e9a76",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5eec618e",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-18T11:52:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_3e007503",
       "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
