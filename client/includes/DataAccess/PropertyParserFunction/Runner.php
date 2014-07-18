@@ -14,6 +14,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyLabelResolver;
 
 /**
@@ -40,15 +41,31 @@ class Runner {
 	private $propertyLabelResolver;
 
 	/**
+	 * @var SiteLinkLookup
+	 */
+	private $siteLinkLookup;
+
+	/**
+	 * @var string
+	 */
+	private $siteId;
+
+	/**
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyLabelResolver $propertyLabelResolver
+	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param string $siteId
 	 */
 	public function __construct(
 		EntityLookup $entityLookup,
-		PropertyLabelResolver $propertyLabelResolver
+		PropertyLabelResolver $propertyLabelResolver,
+		SiteLinkLookup $siteLinkLookup,
+		$siteId
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
+		$this->siteLinkLookup = $siteLinkLookup;
+		$this->siteId = $siteId;
 	}
 
 	/**
@@ -185,14 +202,34 @@ class Runner {
 
 	/**
 	 * @param Parser $parser
-	 * @param EntityId $entityId
 	 * @param string $propertyLabel property label or ID (pXXX)
 	 *
 	 * @return string Wikitext
 	 */
-	public function runPropertyParserFunction( Parser $parser, EntityId $entityId, $propertyLabel ) {
+	public function runPropertyParserFunction( Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
+		// @todo use id provided as argument, if arbitrary access allowed
+		$itemId = $this->getItemIdForConnectedPage( $parser );
+
+		// @todo handle when site link is not there, such as site link / entity has been deleted...
+		if ( $itemId === null ) {
+			wfProfileOut( __METHOD__ );
+			return '';
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $this->renderForEntityId( $parser, $itemId, $propertyLabel );
+	}
+
+	/**
+	 * @param Parser $parser
+	 * @param EntityId $entityId
+	 * @param string $propertyLabel
+	 *
+	 * @return string
+	 */
+	private function renderForEntityId( Parser $parser, EntityId $entityId, $propertyLabel ) {
 		$targetLanguage = $parser->getTargetLanguage();
 
 		if ( $this->isParserUsingVariants( $parser ) && $parser->getConverterLanguage()->hasVariants() ) {
@@ -202,13 +239,23 @@ class Runner {
 				$parser->getConverterLanguage()->getVariants()
 			);
 
-			$text = $this->processRenderedArray( $renderedVariantsArray );
+			return $this->processRenderedArray( $renderedVariantsArray );
 		} else {
-			$text = $this->renderInLanguage( $entityId, $propertyLabel, $targetLanguage );
+			return $this->renderInLanguage( $entityId, $propertyLabel, $targetLanguage );
 		}
+	}
 
-		wfProfileOut( __METHOD__ );
-		return $text;
+	/**
+	 * @param Parser $parser
+	 *
+	 * @return ItemId|null
+	 */
+	private function getItemIdForConnectedPage( Parser $parser ) {
+		$title = $parser->getTitle();
+		$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
+		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+
+		return $itemId;
 	}
 
 	/**
@@ -223,26 +270,16 @@ class Runner {
 		wfProfileIn( __METHOD__ );
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
-
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
-		$entityId = $siteLinkLookup->getEntityIdForSiteLink( //FIXME: method not in the interface
-			new SiteLink( $siteId, $parser->getTitle()->getFullText() )
-		);
-
-		// @todo handle when site link is not there, such as site link / entity has been deleted...
-		if ( $entityId === null ) {
-			wfProfileOut( __METHOD__ );
-			return '';
-		}
 
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
+		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
 
-		$instance = new self( $entityLookup, $propertyLabelResolver );
+		$instance = new self( $entityLookup, $propertyLabelResolver, $siteLinkLookup, $siteId );
 
 		$result = array(
-			$instance->runPropertyParserFunction( $parser, $entityId, $propertyLabel ),
+			$instance->runPropertyParserFunction( $parser, $propertyLabel ),
 			'noparse' => false, // parse wikitext
 			'nowiki' => false,  // formatters take care of escaping as needed
 		);
