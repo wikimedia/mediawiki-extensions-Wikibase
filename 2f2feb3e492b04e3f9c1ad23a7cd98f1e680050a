@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_717cebe2",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T16:38:20Z",
+      "side": 1,
+      "message": "This is not really needed here. ;-)",
+      "revId": "2f2feb3e492b04e3f9c1ad23a7cd98f1e680050a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
