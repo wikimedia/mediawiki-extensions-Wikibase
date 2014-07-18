@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b96a3f7c",
+        "filename": "repo/includes/store/EntityPerPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T13:12:58Z",
+      "side": 1,
+      "message": "Agree. Using \"addEntityPage\" to add a redirect is odd.",
+      "parentUuid": "8e28a382_7edddde0",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f3e7c6dd",
         "filename": "repo/includes/store/sql/AddEntityPerPage.sql",
         "patchSetId": 4
@@ -386,6 +404,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b9e7df0c",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T13:12:58Z",
+      "side": 1,
+      "message": "Thats why I\u0027m asking for this change. Your additions are breaking the consistency. See $joinConditions .\u003d \u0027 AND ... below.",
+      "parentUuid": "8e28a382_3e6cf504",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_be9b4567",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 4
@@ -421,6 +457,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_79f177c7",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T13:12:58Z",
+      "side": 1,
+      "message": "See $joinConditions .\u003d \u0027 AND ... below.",
+      "parentUuid": "8e28a382_1e7379e7",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_9eaac96b",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 4
@@ -450,6 +504,24 @@
       "side": 1,
       "message": "I\u0027m emulating the column in case it\u0027s not in the database.",
       "parentUuid": "8e28a382_9eaac96b",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_19ba73db",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T13:12:58Z",
+      "side": 1,
+      "message": "Which makes the whole query pointless since this is the only column you are requesting here. Just shorten out and return null.",
+      "parentUuid": "8e28a382_5e50e136",
       "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
