@@ -19,15 +19,8 @@ class ClaimGuid implements Comparable {
 	 */
 	const SEPARATOR = '$';
 
-	/**
-	 * @var EntityId
-	 */
-	protected $entityId;
-
-	/**
-	 * @var string
-	 */
-	protected $serialization;
+	private $entityId;
+	private $serialization;
 
 	/**
 	 * @param EntityId $entityId
@@ -68,7 +61,7 @@ class ClaimGuid implements Comparable {
 	 */
 	public function equals( $target ) {
 		return $target instanceof self
-			&& $target->getSerialization() === $this->getSerialization();
+			&& $target->serialization === $this->serialization;
 	}
 
 	public function __toString() {
