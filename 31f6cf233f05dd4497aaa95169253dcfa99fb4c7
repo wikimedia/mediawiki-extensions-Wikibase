@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_1360122e",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T09:12:35Z",
+      "side": 1,
+      "message": "I would be happy to create the SVG if thats ok for you.",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_53ec5a8e",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T09:12:35Z",
+      "side": 1,
+      "message": "I understand why you are doing this but I object. We are never opening new windows. This is much more confusing than loosing an unsaved edit. You don\u0027t lose much anyway. Just a page name which you probably have in the clipboard anyway. So no, no new windows please.\n\nJust asked Lydia. No new windows.\n\nMake sure Ctrl+click works.",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_53933a04",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T09:12:35Z",
+      "side": 1,
+      "message": "I think you should do some basic special character encoding here.",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
