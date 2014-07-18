@@ -37,6 +37,13 @@ class PropertyInfoTableBuilder {
 	private $shouldUpdateAllEntities = false;
 
 	/**
+	 * Whether to use the epp_redirect_target column.
+	 *
+	 * @var bool
+	 */
+	private $useRedirectTargetColumn;
+
+	/**
 	 * Starting point
 	 *
 	 * @var int
@@ -50,9 +57,14 @@ class PropertyInfoTableBuilder {
 	 */
 	private $batchSize = 100;
 
-	public function __construct( PropertyInfoTable $propertyInfoTable, EntityLookup $entityLookup ) {
+	public function __construct(
+		PropertyInfoTable $propertyInfoTable,
+		EntityLookup $entityLookup,
+		$useRedirectTargetColumn = true
+	) {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
+		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 	}
 
 	/**
@@ -168,6 +180,7 @@ class PropertyInfoTableBuilder {
 				array(
 					'epp_entity_type = ' . $dbw->addQuotes( Property::ENTITY_TYPE ),
 					'epp_entity_id > ' . (int) $rowId,
+					$this->useRedirectTargetColumn ? 'epp_redirect_target IS NULL' : '1',
 					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
 				),
 				__METHOD__,
