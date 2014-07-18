@@ -109,6 +109,11 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.6 (2014-07-18)
+* Mouse clicks other than simple left clicks don't trigger events any more in all ooMenus
+* Suggester items default to black even if they are links
+* Suggesters z-index is now dynamically calculated with it's position on screen
+
 ### 0.6.5 (2014-07-17)
 * Fixed the Qunit tests
 * Don't underline ooMenu/ sugester items
