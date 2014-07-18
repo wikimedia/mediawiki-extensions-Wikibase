@@ -1,36 +1,39 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
 use Language;
 use Parser;
 use ParserOptions;
+use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\PropertyParserFunctionRunner;
+use Wikibase\Test\MockPropertyLabelResolver;
+use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\PropertyParserFunctionRunner
+ * @covers Wikibase\DataAccess\PropertyParserFunction\Runner
  *
  * @group Wikibase
  * @group WikibaseClient
+ * @group WikibaseDataAccess
  * @group PropertyParserFunctionTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
+class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Parser $parser
 	 * @param Entity|null $entity
 	 *
-	 * @return PropertyParserFunctionRunner
+	 * @return Runner
 	 */
-	private function getPropertyParserFunctionRunner( Parser $parser, Entity $entity = null ) {
+	private function getRunner( Parser $parser, Entity $entity = null ) {
 		$entityLookup = new MockRepository();
 
 		if ( $entity !== null ) {
@@ -42,7 +45,7 @@ class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup
 		);
 
-		return new PropertyParserFunctionRunner( $entityLookup, $propertyLabelResolver );
+		return new Runner( $entityLookup, $propertyLabelResolver );
 	}
 
 	/**
@@ -52,9 +55,9 @@ class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$functionRunner = $this->getPropertyParserFunctionRunner( $parser );
-		$renderer = $functionRunner->getRenderer( Language::factory( $languageCode ) );
-		$this->assertInstanceOf( 'Wikibase\PropertyParserFunctionRenderer', $renderer );
+		$runner = $this->getRunner( $parser );
+		$renderer = $runner->getRenderer( Language::factory( $languageCode ) );
+		$this->assertInstanceOf( 'Wikibase\DataAccess\PropertyParserFunction\Renderer', $renderer );
 	}
 
 	public function getRendererProvider() {
@@ -82,9 +85,9 @@ class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
 
-		$instance = $this->getPropertyParserFunctionRunner( $parser );
+		$runner = $this->getRunner( $parser );
 
-		$this->assertEquals( $expected, $instance->isParserUsingVariants( $parser ) );
+		$this->assertEquals( $expected, $runner->isParserUsingVariants( $parser ) );
 	}
 
 	public function isParserUsingVariantsProvider() {
@@ -106,8 +109,8 @@ class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$functionRunner = $this->getPropertyParserFunctionRunner( $parser );
-		$this->assertEquals( $expected, $functionRunner->processRenderedArray( $textArray ) );
+		$runner = $this->getRunner( $parser );
+		$this->assertEquals( $expected, $runner->processRenderedArray( $textArray ) );
 	}
 
 	public function processRenderedArrayProvider() {
@@ -130,10 +133,10 @@ class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q42' ) );
 
-		$functionRunner = $this->getPropertyParserFunctionRunner( $parser, $item );
+		$runner = $this->getRunner( $parser, $item );
 		$lang = Language::factory( 'qqx' );
 
-		$result = $functionRunner->renderInLanguage( $item->getId(), 'invalidLabel', $lang );
+		$result = $runner->renderInLanguage( $item->getId(), 'invalidLabel', $lang );
 
 		// Test against the regexp of the {{#iferror parser function, as that should be able
 		// to detect errors from PropertyParserFunctionRunner. See ExtParserFunctions::iferror
