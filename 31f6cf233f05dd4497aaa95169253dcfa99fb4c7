@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_53ba1a6e",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-18T09:17:23Z",
+      "side": 1,
+      "message": "Sure, go ahead... might want to put that in a follow up though to not clutter this change up",
+      "parentUuid": "8e28a382_1360122e",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_53ec5a8e",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d3adea2f",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-18T09:17:23Z",
+      "side": 1,
+      "message": "I guess I\u0027ll just wrap things in an \u003ca\u003e then",
+      "parentUuid": "8e28a382_53ec5a8e",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_53933a04",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2014-07-18T09:12:35Z",
       "side": 1,
       "message": "I think you should do some basic special character encoding here.",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b3a81e1e",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-18T09:17:23Z",
+      "side": 1,
+      "message": "what do you mean? Neither entity ids nor site ids can contain slashes",
+      "parentUuid": "8e28a382_53933a04",
       "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
