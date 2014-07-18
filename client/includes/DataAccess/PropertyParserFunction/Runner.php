@@ -41,6 +41,11 @@ class Runner {
 	private $propertyLabelResolver;
 
 	/**
+	 * @var RendererFactory
+	 */
+	private $rendererFactory;
+
+	/**
 	 * @var SiteLinkLookup
 	 */
 	private $siteLinkLookup;
@@ -53,17 +58,20 @@ class Runner {
 	/**
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyLabelResolver $propertyLabelResolver
+	 * @param RendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $siteId
 	 */
 	public function __construct(
 		EntityLookup $entityLookup,
 		PropertyLabelResolver $propertyLabelResolver,
+		RendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
 		$siteId
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->propertyLabelResolver = $propertyLabelResolver;
+		$this->rendererFactory = $rendererFactory;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 	}
@@ -102,41 +110,6 @@ class Runner {
 	}
 
 	/**
-	 * Build a PropertyParserFunctionRenderer object for a given language.
-	 *
-	 * @param Language $language
-	 *
-	 * @return PropertyParserFunctionRenderer
-	 */
-	public function getRenderer( Language $language ) {
-		wfProfileIn( __METHOD__ );
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$languageFallbackChainFactory = $wikibaseClient->getLanguageFallbackChainFactory();
-		$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $language,
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
-
-		$options = new FormatterOptions( array(
-			'languages' => $languageFallbackChain,
-			// ...more options...
-		) );
-
-		$snaksFormatter = $wikibaseClient->newSnakFormatter( SnakFormatter::FORMAT_WIKI, $options );
-
-		$instance = new Renderer(
-			$language,
-			$this->entityLookup,
-			$this->propertyLabelResolver,
-			$snaksFormatter
-		);
-
-		wfProfileOut( __METHOD__ );
-		return $instance;
-	}
-
-	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabel property label or ID (pXXX)
 	 * @param Language $language
@@ -144,7 +117,7 @@ class Runner {
 	 * @return string
 	 */
 	public function renderInLanguage( EntityId $entityId, $propertyLabel, Language $language ) {
-		$renderer = $this->getRenderer( $language );
+		$renderer = $this->rendererFactory->newFromLanguage( $language );
 
 		try {
 			$status = $renderer->renderForEntityId( $entityId, $propertyLabel );
@@ -218,8 +191,11 @@ class Runner {
 			return '';
 		}
 
+		$rendered = $this->renderForEntityId( $parser, $itemId, $propertyLabel );
+		$result = $this->buildResult( $rendered );
+
 		wfProfileOut( __METHOD__ );
-		return $this->renderForEntityId( $parser, $itemId, $propertyLabel );
+		return $result;
 	}
 
 	/**
@@ -259,6 +235,21 @@ class Runner {
 	}
 
 	/**
+	 * @param string $rendered
+	 *
+	 * @return array
+	 */
+	private function buildResult( $rendered ) {
+		$result = array(
+			$rendered,
+			'noparse' => false, // parse wikitext
+			'nowiki' => false,  // formatters take care of escaping as needed
+		);
+
+		return $result;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param Parser $parser
@@ -270,12 +261,7 @@ class Runner {
 		wfProfileIn( __METHOD__ );
 
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
-
-		$result = array(
-			$runner->runPropertyParserFunction( $parser, $propertyLabel ),
-			'noparse' => false, // parse wikitext
-			'nowiki' => false,  // formatters take care of escaping as needed
-		);
+		$result = $runner->runPropertyParserFunction( $parser, $propertyLabel );
 
 		wfProfileOut( __METHOD__ );
 		return $result;
