@@ -45,7 +45,12 @@ class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup
 		);
 
-		return new Runner( $entityLookup, $propertyLabelResolver );
+		return new Runner(
+			$entityLookup,
+			$propertyLabelResolver,
+			$this->getSiteLinkLookup(),
+			'enwiki'
+		);
 	}
 
 	/**
@@ -149,6 +154,17 @@ class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 			'/wikibase-property-render-error.*invalidLabel.*qqx/',
 			$result
 		);
+	}
+
+	private function getSiteLinkLookup() {
+		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkLookup' )
+			->getMock();
+
+		$siteLinkLookup->expects( $this->any() )
+			->method( 'getEntityIdForSiteLink' )
+			->will( $this->returnValue( new ItemId( 'Q3' ) ) );
+
+		return $siteLinkLookup;
 	}
 
 }
