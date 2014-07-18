@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_04e8c6ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T14:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_f1cec5b8",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_715e5519",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-14T22:10:16Z",
       "side": 1,
       "message": "this is making the code much too complex.  please split into another method",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0f9b6569",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T14:43:59Z",
+      "side": 1,
+      "message": "I don\u0027t agree. It\u0027s already split a lot. For example the getHtmlForEditSection method is reused a lot. Whats left is the core needed to fill the template. All three places you are pointing at are very different, use different templates, refers to different special pages and do special things. I don\u0027t see a way to split this that doesn\u0027t end with three different private methods for all three places or a way to complex one with a horrible interface.\n\nIf you have an idea, eel free to submit a patch.",
+      "parentUuid": "8e28a382_715e5519",
       "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_7f127702",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T14:43:59Z",
+      "side": 1,
+      "message": "Why? What\u0027s the point in having three more private methods?",
+      "parentUuid": "8e28a382_d1ae29e4",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_b1b39d4b",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2014-07-14T22:10:16Z",
       "side": 1,
       "message": "idem",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9f1763f2",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T14:43:59Z",
+      "side": 1,
+      "message": "Again, this is very different, uses a different template, refers to a different special page and makes use of an \"add\" vs. \"edit\" switch based on the number of existing aliases.",
+      "parentUuid": "8e28a382_b1b39d4b",
       "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0f7c851a",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T14:43:59Z",
+      "side": 1,
+      "message": "What do you mean with \"this code\"? I will not turn this back into a pointless $idString \u003d $this-\u003egetIdString( $entityId );",
+      "parentUuid": "8e28a382_ac17bfa7",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7194158e",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 5
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_44dece15",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T14:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_7194158e",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_71ebf509",
         "filename": "repo/tests/phpunit/includes/View/SectionEditLinkGeneratorTest.php",
         "patchSetId": 5
@@ -115,6 +223,24 @@
       "writtenOn": "2014-07-14T22:10:16Z",
       "side": 1,
       "message": "$editSectionHtml is more clear, imho, but not strong opinion",
+      "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_64b42ad0",
+        "filename": "repo/tests/phpunit/includes/View/SectionEditLinkGeneratorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T14:43:59Z",
+      "side": 1,
+      "message": "The reason to touch this was that the test below called this $editSection. I just wanted to make them the same and picked the most common one. The variables contain HTML and are tested for HTML features.",
+      "parentUuid": "8e28a382_71ebf509",
       "revId": "d9569453adcce13d6bda5b4710476fb17e0000d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
