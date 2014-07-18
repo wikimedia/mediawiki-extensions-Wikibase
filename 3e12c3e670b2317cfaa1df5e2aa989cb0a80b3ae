@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_33b78ed5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Newline missing.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_53db3a25",
+        "filename": "repo/includes/store/EntityPerPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "What about this?\npublic function addEntityPage( EntityId $entityId, $pageId, EntityId $targetId \u003d null );\nDo you have a special reason to not do it that way?",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f3e7c6dd",
+        "filename": "repo/includes/store/sql/AddEntityPerPage.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "This is strange. All EntityId columns in all tables are still INT, but this new one is a string? This is not really helpful, don#t you think? The table needs to be converted anyway. Having one column already in the right format doesn\u0027t make this easier.\n\nAnd: Since the type _must_ be the same it\u0027s really easy to use an INT column here.\n\nOn the other hand it\u0027s not really a problem to mix the two. The only problem is that it\u0027s mixed and a bit confusing for a while.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_73d3d605",
+        "filename": "repo/includes/store/sql/AddEppRedirectTarget.sqlite.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Huh? What\u0027s the purpose of this script? It\u0027s name and description (\"add epp_redirect_target\") don\u0027t match the code. The select assumes the column is already there. All this script does is recreating the exact same table. It doesn\u0027t change anything.\n\nWhat am I missing?",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_93ef62ad",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Uh, this is interesting. So you are actually using titles as EntityIds! I like this but since we are constantly stating the fact that this is not true in general I really think this decision needs a comment.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_53021a77",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Funny method name. I think I would not like this in a public interface, but as a private method it\u0027s nice. :-)",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_131252b6",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Capitalization.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_734996d2",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "You need to check for null here! And \"continue\" in case it fails. I don\u0027t think the removal of the \"continue\" was intended.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f31466a2",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Ouch!",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d32baad9",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "See, this is what I asked for. Why not make this signature public? You can name the third parameter $redirectTargetId to make it very obvious what it means.\n\npublic function addEntityPage( EntityId $entityId, $pageId, EntityId $redirectTargetId \u003d null ) {",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d3728a0f",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "The old code did not allowed to update the page ID, the new code does. Is this intended?\n\nOh, and it does more. If this is used to change a page ID the replace() call below will update one row and delete an other row that had the page ID before.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3e907545",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Remove the \u0027 \u0027 above and add a space here.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_be9b4567",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Add the space here, not above.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9eaac96b",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Uh, what? You realize it\u0027s pointless to ask the SQL server for a NULL value? ;-) Since this boils down to \"SELECT NULL;\". Please just return null.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7ea5dd99",
+        "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Having \u00271\u0027 in a where clause is odd. Probably not a problem but I don\u0027t like it.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1ee5b9d7",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T10:35:59Z",
+      "side": 1,
+      "message": "Are you sure this is better? Whats wrong with numRows()?",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
