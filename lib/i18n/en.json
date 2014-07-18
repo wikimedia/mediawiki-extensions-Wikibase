@@ -105,5 +105,6 @@
 	"wikibase-time-precision-BCE-10annum": "$1s BCE",
 	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "The value's type \"$1\" does not match property's type \"$2\".",
-	"wikibase-snakformatter-property-not-found": "Property $1 not found, cannot determine the data type to use."
+	"wikibase-snakformatter-property-not-found": "Property $1 not found, cannot determine the data type to use.",
+	"wikibase-add-badges": "Add badges"
 }
