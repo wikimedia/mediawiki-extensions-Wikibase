@@ -65,7 +65,7 @@ class ClaimGuid implements Comparable {
 	}
 
 	public function __toString() {
-		return $this->getSerialization();
+		return $this->serialization;
 	}
 
 }
