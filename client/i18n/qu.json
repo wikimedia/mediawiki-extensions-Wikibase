@@ -5,7 +5,7 @@
 		]
 	},
 	"wikibase-after-page-move": "T'inkisqa {{WBREPONAME}} qallawatapas [$1 musuqchaytam] atinki astasqa p'anqapi rimay t'inkikunata hat'allinaykipaq.",
-	"wikibase-dataitem": "Willa qallawa",
+	"wikibase-dataitem": "{{WBREPONAME}} willa qallawa",
 	"wikibase-editlinks": "T'inkikunata llamk'apuy",
 	"wikibase-editlinkstitle": "Wikipura t'inkikunata llamk'apuy",
 	"wikibase-linkitem-addlinks": "T'inkikunata yapay",
