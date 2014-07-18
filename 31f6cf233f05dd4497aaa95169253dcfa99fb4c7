@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_734e36c6",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-07-18T09:22:30Z",
+      "side": 1,
+      "message": "I guess there is no really \"clean\" way to access the badges span. \"this._subject.prev( \u0027.wb-sitelinks-badges\u0027 );\" works as well and does not make an assumption about the parent - at least a little better.",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_53ec5a8e",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
         "patchSetId": 2
@@ -72,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f37586c9",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-07-18T09:22:30Z",
+      "side": 1,
+      "message": "Yes, try to wrap it in an \u003ca\u003e and let the user control how to open the window. When opening a new page/tab, the current page will not be updated automatically - but that is a different issue anyway...",
+      "parentUuid": "8e28a382_d3adea2f",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_53933a04",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
         "patchSetId": 2
@@ -101,6 +136,23 @@
       "side": 1,
       "message": "what do you mean? Neither entity ids nor site ids can contain slashes",
       "parentUuid": "8e28a382_53933a04",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f39fc604",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-07-18T09:22:30Z",
+      "side": 1,
+      "message": "Yes, it is ugly. ;) For me, wbEntityId does not seem to be defined either. If we would not initialize the entityview on the claims node, you could query for this._subject.parents( \u0027:wikibase-entityview\u0027 ) and get the information from there. The current alternative would be this._subject.parents( \u0027.wb-entity\u0027 ) and, provided that the node is found, scrape the id from the node id... just a little bit better.",
       "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
