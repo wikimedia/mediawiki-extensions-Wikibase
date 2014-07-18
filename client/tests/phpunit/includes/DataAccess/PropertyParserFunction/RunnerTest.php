@@ -5,11 +5,16 @@ namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 use Language;
 use Parser;
 use ParserOptions;
+use Status;
+use Title;
+use User;
+use Wikibase\DataAccess\PropertyParserFunction\Renderer;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Test\MockPropertyLabelResolver;
 use Wikibase\Test\MockRepository;
 
@@ -29,11 +34,12 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Parser $parser
+	 * @param Renderer $renderer
 	 * @param Entity|null $entity
 	 *
 	 * @return Runner
 	 */
-	private function getRunner( Parser $parser, Entity $entity = null ) {
+	private function getRunner( Parser $parser, Renderer $renderer, Entity $entity = null ) {
 		$entityLookup = new MockRepository();
 
 		if ( $entity !== null ) {
@@ -48,27 +54,9 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		return new Runner(
 			$entityLookup,
 			$propertyLabelResolver,
+			$this->getRendererFactory( $renderer ),
 			$this->getSiteLinkLookup(),
 			'enwiki'
-		);
-	}
-
-	/**
-	 * @dataProvider getRendererProvider
-	 */
-	public function testGetRenderer( $languageCode, $outputType ) {
-		$parser = new Parser();
-		$parserOptions = new ParserOptions();
-		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$runner = $this->getRunner( $parser );
-		$renderer = $runner->getRenderer( Language::factory( $languageCode ) );
-		$this->assertInstanceOf( 'Wikibase\DataAccess\PropertyParserFunction\Renderer', $renderer );
-	}
-
-	public function getRendererProvider() {
-		return array(
-			array( 'en', Parser::OT_HTML ),
-			array( 'zh', Parser::OT_WIKI ),
 		);
 	}
 
@@ -87,10 +75,10 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		$parserOptions->disableContentConversion( $disableContentConversion );
 		$parserOptions->disableTitleConversion( $disableTitleConversion );
 
-		$parser = new Parser();
+		$parser = $this->getParser( 'de' );
 		$parser->startExternalParse( null, $parserOptions, $outputType );
 
-		$runner = $this->getRunner( $parser );
+		$runner = $this->getRunner( $parser, $this->getRenderer() );
 
 		$this->assertEquals( $expected, $runner->isParserUsingVariants( $parser ) );
 	}
@@ -114,7 +102,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$runner = $this->getRunner( $parser );
+		$runner = $this->getRunner( $parser, $this->getRenderer() );
 		$this->assertEquals( $expected, $runner->processRenderedArray( $textArray ) );
 	}
 
@@ -130,21 +118,41 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testRenderInLanguageError() {
-		$parser = new Parser();
-		$parserOptions = new ParserOptions();
-		$parser->startExternalParse( null, $parserOptions, Parser::OT_WIKI );
+	public function testRenderInLanguage() {
+		$runner = $this->getRunner(
+			$this->getParser( 'es' ),
+			$this->getRenderer()
+		);
 
-		$item = Item::newEmpty();
-		$item->setId( new ItemId( 'Q42' ) );
+		$language = Language::factory( 'he' );
+		$result = $runner->renderInLanguage( new ItemId( 'Q3' ), 'gato', $language );
 
-		$runner = $this->getRunner( $parser, $item );
-		$lang = Language::factory( 'qqx' );
+		$this->assertEquals( 'meow!', $result );
+	}
 
-		$result = $runner->renderInLanguage( $item->getId(), 'invalidLabel', $lang );
+	private function getRenderer() {
+		$entityRenderer = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\Renderer'
+			)
+			->disableOriginalConstructor()
+			->getMock();
 
-		// Test against the regexp of the {{#iferror parser function, as that should be able
-		// to detect errors from PropertyParserFunctionRunner. See ExtParserFunctions::iferror
+		$entityRenderer->expects( $this->any() )
+			->method( 'renderForEntityId' )
+			->will( $this->returnValue( Status::newGood( 'meow!' ) ) );
+
+		return $entityRenderer;
+	}
+
+	public function testRenderForPropertyNotFound() {
+		$runner = $this->getRunner(
+			$this->getParser( 'qqx' ),
+			$this->getRendererForPropertyNotFound()
+		);
+
+		$language = Language::factory( 'qqx' );
+		$result = $runner->renderInLanguage( new ItemId( 'Q4' ), 'invalidLabel', $language );
+
 		$this->assertRegExp(
 			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
 			$result
@@ -156,6 +164,18 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	private function getRendererForPropertyNotFound() {
+		$entityRenderer = $this->getRenderer();
+
+		$entityRenderer->expects( $this->any() )
+			->method( 'renderForEntityId' )
+			->will( $this->returnCallback( function() {
+				throw new PropertyLabelNotResolvedException( 'invalidLabel', 'qqx' );
+			} ) );
+
+		return $entityRenderer;
+	}
+
 	private function getSiteLinkLookup() {
 		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkLookup' )
 			->getMock();
@@ -165,6 +185,35 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new ItemId( 'Q3' ) ) );
 
 		return $siteLinkLookup;
+	}
+
+	private function getRendererFactory( Renderer $renderer ) {
+		$rendererFactory = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\RendererFactory'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$rendererFactory->expects( $this->any() )
+			->method( 'newFromLanguage' )
+			->will( $this->returnValue( $renderer ) );
+
+		return $rendererFactory;
+	}
+
+	private function getParser( $languageCode ) {
+		$parserConfig = array( 'class' => 'Parser' );
+		$parser = new Parser( $parserConfig );
+
+		$parser->setTitle( Title::newFromText( 'Cat' ) );
+
+		$language = Language::factory( $languageCode );
+		$parserOptions = new ParserOptions( User::newFromId( 0 ), $languageCode );
+		$parserOptions->setTargetLanguage( $language );
+
+		$parser->startExternalParse( null, $parserOptions, Parser::OT_WIKI );
+
+		return $parser;
 	}
 
 }
