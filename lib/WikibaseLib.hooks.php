@@ -120,7 +120,6 @@ final class LibHooks {
 				'wikibase',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel', // For RepoApi.tests
-				'wikibase.parsers',
 				'wikibase.store.FetchedContent',
 				'wikibase.templates',
 				'wikibase.utilities',
