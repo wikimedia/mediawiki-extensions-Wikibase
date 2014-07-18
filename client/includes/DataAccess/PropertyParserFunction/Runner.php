@@ -269,17 +269,10 @@ class Runner {
 	public static function render( Parser $parser, $propertyLabel ) {
 		wfProfileIn( __METHOD__ );
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$propertyLabelResolver = $wikibaseClient->getStore()->getPropertyLabelResolver();
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkTable();
-		$siteId = $wikibaseClient->getSettings()->getSetting( 'siteGlobalID' );
-
-		$instance = new self( $entityLookup, $propertyLabelResolver, $siteLinkLookup, $siteId );
+		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
 
 		$result = array(
-			$instance->runPropertyParserFunction( $parser, $propertyLabel ),
+			$runner->runPropertyParserFunction( $parser, $propertyLabel ),
 			'noparse' => false, // parse wikitext
 			'nowiki' => false,  // formatters take care of escaping as needed
 		);

@@ -200,6 +200,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\ParserFunctionRegistrant', $registrant );
 	}
 
+    public function testGetPropertyParserFunctionRunner() {
+        $runner = $this->getDefaultInstance()->getPropertyParserFunctionRunner();
+        $this->assertInstanceOf( 'Wikibase\DataAccess\PropertyParserFunction\Runner', $runner );
+    }
+
 	/**
 	 * @return WikibaseClient
 	 */
