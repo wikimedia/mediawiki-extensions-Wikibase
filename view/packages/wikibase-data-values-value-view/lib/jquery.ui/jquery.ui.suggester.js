@@ -572,6 +572,7 @@
 			this.options.menu.element.position( $.extend( {
 				of: this.element
 			}, position ) );
+			this.options.menu.element.zIndex( this.element.zIndex() + 1 );
 
 			this.options.menu.scale();
 		}
