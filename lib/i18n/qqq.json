@@ -113,5 +113,6 @@
 	"wikibase-time-precision-BCE-10annum": "!!DO NOT TRANSLATE!! Used to present a point in time BCE (before current era) with the precession of 10 years\n{{Related|Wikibase-time-precision}}",
 	"wikibase-monolingualtext": "Format for displaying monolingual text (along with a language name).\n\nParameters:\n* $1 - the text\n* $2 - the code of the language of the text\n* $3 - the name of the language of the text, in the user's language.",
 	"wikibase-snakformatter-valuetype-mismatch": "Warning shown when if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the type of the Snak's actual value.\n\nParameters:\n* $1 - data value type of the property-value Snak's value.\n* $2 - data value type used by the data type used in the property which is used by the property-value Snak",
-	"wikibase-snakformatter-property-not-found": "Warning shown when a Snak's (see [[d:Wikidata:Glossary]]) data type could not be determined based on the Snak's property ID."
+	"wikibase-snakformatter-property-not-found": "Warning shown when a Snak's (see [[d:Wikidata:Glossary]]) data type could not be determined based on the Snak's property ID.",
+	"wikibase-add-badges": "Title for an empty (dummy) badge sign that asks the user to add badges to a sitelink."
 }
