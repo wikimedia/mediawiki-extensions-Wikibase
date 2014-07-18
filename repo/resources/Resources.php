@@ -66,6 +66,10 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.datamodel',
 				'wikibase.serialization',
+				// FIXME: Resolve implicitly required wikibase.serialization.entities dependency.
+				// wikibase.serialization.entities self-registers to the SerializerFactory provided
+				// by wikibase.serialization which is why wikibase.serialization.entities is
+				// implicitly required as dependency.
 				'wikibase.serialization.entities',
 			),
 		),

@@ -1,7 +1,4 @@
 /**
- * Term box initialisation.
- * The term box displays label and description in languages other than the user language.
- * @since 0.5
  * @licence GNU GPL v2+
  *
  * @author: H. Snater < mediawiki@snater.com >
@@ -9,13 +6,23 @@
 ( function( $, mw, wb ) {
 	'use strict';
 
+	/**
+	 * Term box initialization.
+	 * The term box displays label and description in languages other than the user language.
+	 * @since 0.5
+	 *
+	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {wikibase.RepoApi} api
+	 */
 	wb.ui.initTermBox = function( entity, api ) {
 		mw.hook( 'wikibase.domready' ).add( function() {
 			var termsValueTools = [],
 				$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
 				userSpecifiedLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
 				hasSpecifiedLanguages = userSpecifiedLanguages && userSpecifiedLanguages.length,
-				isUlsDefined = mw.uls !== undefined && $.uls !== undefined && $.uls.data !== undefined;
+				isUlsDefined = mw.uls !== undefined
+					&& $.uls !== undefined
+					&& $.uls.data !== undefined;
 
 			// Skip if having no extra languages is what the user wants
 			if( !$termBoxRows.length && !hasSpecifiedLanguages && isUlsDefined ) {
@@ -31,7 +38,9 @@
 				}
 
 				var $sectionHeading = addTermBoxSection();
-				$sectionHeading.after( renderTermBox( title, entity, languageCodes.slice( 1, 4 ) ) );
+				$sectionHeading.after(
+					renderTermBox( title, entity, languageCodes.slice( 1, 4 ) )
+				);
 
 				$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' );
 			}
@@ -39,11 +48,14 @@
 			$termBoxRows.each( function() {
 				var $termsRow = $( this ),
 					editTool = wb.ui.PropertyEditTool[
-						$termsRow.hasClass( 'wb-terms-label' ) ? 'EditableLabel' : 'EditableDescription'
+						$termsRow.hasClass( 'wb-terms-label' )
+							? 'EditableLabel'
+							: 'EditableDescription'
 					],
 					$toolbar = mw.template( 'wikibase-toolbar', '', '' ).toolbar(),
 					toolbar = $toolbar.data( 'toolbar' ),
-					$editGroup = mw.template( 'wikibase-toolbareditgroup', '', '' ).toolbareditgroup();
+					$editGroup = mw.template( 'wikibase-toolbareditgroup', '', '' )
+						.toolbareditgroup();
 
 				toolbar.addElement( $editGroup );
 
@@ -57,8 +69,8 @@
 
 			$( wb )
 			.on( 'startItemPageEditMode', function( event, origin ) {
-				// Disable language terms table's editable value or mark it as the active one if it is
-				// the one being edited by the user and therefore the origin of the event
+				// Disable language terms table's editable value or mark it as the active one if it
+				// is the one being edited by the user and therefore the origin of the event
 				$.each( termsValueTools, function( i, termValueTool ) {
 					if(
 						!( origin instanceof wb.ui.PropertyEditTool.EditableValue )
@@ -117,7 +129,7 @@
 
 	/**
 	 * @param {mediaWiki.Title} title
-	 * @param {wb.datamodel.Entity} entity
+	 * @param {wikibase.datamodel.Entity} entity
 	 * @param {string[]} languageCodes
 	 * @return {jQuery|undefined}
 	 */

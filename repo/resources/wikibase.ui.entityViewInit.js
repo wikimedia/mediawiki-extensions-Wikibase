@@ -108,64 +108,7 @@
 			var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
 
 			entityInitializer.getEntity().done( function( entity ) {
-				// FIXME: Initializing entityview on $claims leads to the claim section inserted as
-				// child of $claims. It should be direct child of ".wb-entity".
-				var abstractedRepoApi = new wb.AbstractedRepoApi();
-				var entityStore = new wb.store.EntityStore( abstractedRepoApi );
-				wb.compileEntityStoreFromMwConfig( entityStore );
-
-				// FIXME: Initializing entityview on $claims leads to the claim section inserted as
-				// child of $claims. It should be direct child of ".wb-entity".
-				$claims.entityview( {
-					value: entity,
-					entityStore: entityStore,
-					valueViewBuilder: new wb.ValueViewBuilder(
-						experts,
-						getFormatterStore( repoApi, dataTypes ),
-						getParserStore( repoApi ),
-						mw
-					)
-				} ).appendTo( $claimsParent );
-
-				// This is here to be sure there is never a duplicate id
-				$( '.wb-claimgrouplistview' )
-					.prev( '.wb-section-heading' )
-					.first()
-					.attr( 'id', 'claims' );
-
-				// removing site links heading to rebuild it with value counter
-				$( 'table.wb-sitelinks' ).each( function() {
-					var group = $( this ).data( 'wb-sitelinks-group' ),
-						$sitesCounterContainer = $( '<span/>' );
-
-					$( this ).prev().append( $sitesCounterContainer );
-
-					// actual initialization
-					new wb.ui.SiteLinksEditTool( $( this ), {
-						allowedSites: wb.sites.getSitesOfGroup( group ),
-						counterContainers: $sitesCounterContainer,
-						api: repoApi
-					} );
-				} );
-
-				$( '.wb-entity' ).claimgrouplabelscroll();
-
-				$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
-					// Display anonymous user edit warning:
-					if ( mw.user && mw.user.isAnon()
-						&& $.find( '.mw-notification-content' ).length === 0
-						&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
-					) {
-						mw.notify(
-							mw.msg( 'wikibase-anonymouseditwarning',
-								mw.msg( 'wikibase-entity-' + entity.getType() )
-							)
-						);
-					}
-				} );
-
-				wb.ui.initTermBox( entity, repoApi );
-
+				createEntityDom( entity, $claims, $claimsParent, repoApi );
 			} );
 		}
 
@@ -336,6 +279,74 @@
 		$( '.wb-entity-spinner' ).remove();
 
 	} );
+
+	/**
+	 * Creates the entity DOM structure.
+	 *
+	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {jQuery} $claims
+	 * @param {jQuery} $claimsParent
+	 * @param {wikibase.RepoApi} repoApi
+	 */
+	function createEntityDom( entity, $claims, $claimsParent, repoApi ) {
+		// FIXME: Initializing entityview on $claims leads to the claim section inserted as
+		// child of $claims. It should be direct child of ".wb-entity".
+		var abstractedRepoApi = new wb.AbstractedRepoApi();
+		var entityStore = new wb.store.EntityStore( abstractedRepoApi );
+		wb.compileEntityStoreFromMwConfig( entityStore );
+
+		// FIXME: Initializing entityview on $claims leads to the claim section inserted as
+		// child of $claims. It should be direct child of ".wb-entity".
+		$claims.entityview( {
+			value: entity,
+			entityStore: entityStore,
+			valueViewBuilder: new wb.ValueViewBuilder(
+				experts,
+				getFormatterStore( repoApi, dataTypes ),
+				getParserStore( repoApi ),
+				mw
+			)
+		} ).appendTo( $claimsParent );
+
+		// This is here to be sure there is never a duplicate id
+		$( '.wb-claimgrouplistview' )
+			.prev( '.wb-section-heading' )
+			.first()
+			.attr( 'id', 'claims' );
+
+		// removing site links heading to rebuild it with value counter
+		$( 'table.wb-sitelinks' ).each( function() {
+			var group = $( this ).data( 'wb-sitelinks-group' ),
+				$sitesCounterContainer = $( '<span/>' );
+
+			$( this ).prev().append( $sitesCounterContainer );
+
+			// actual initialization
+			new wb.ui.SiteLinksEditTool( $( this ), {
+				allowedSites: wb.sites.getSitesOfGroup( group ),
+				counterContainers: $sitesCounterContainer,
+				api: repoApi
+			} );
+		} );
+
+		$( '.wb-entity' ).claimgrouplabelscroll();
+
+		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
+			// Display anonymous user edit warning:
+			if ( mw.user && mw.user.isAnon()
+				&& $.find( '.mw-notification-content' ).length === 0
+				&& !$.cookie( 'wikibase-no-anonymouseditwarning' )
+			) {
+				mw.notify(
+					mw.msg( 'wikibase-anonymouseditwarning',
+						mw.msg( 'wikibase-entity-' + entity.getType() )
+					)
+				);
+			}
+		} );
+
+		wb.ui.initTermBox( entity, repoApi );
+	}
 
 } )(
 	jQuery,
