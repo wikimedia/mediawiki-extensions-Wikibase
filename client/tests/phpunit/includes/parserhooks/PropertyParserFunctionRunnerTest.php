@@ -9,10 +9,10 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\PropertyParserFunction;
+use Wikibase\PropertyParserFunctionRunner;
 
 /**
- * @covers Wikibase\PropertyParserFunction
+ * @covers Wikibase\PropertyParserFunctionRunner
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -22,15 +22,15 @@ use Wikibase\PropertyParserFunction;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
+class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Parser $parser
 	 * @param Entity|null $entity
 	 *
-	 * @return PropertyParserFunction
+	 * @return PropertyParserFunctionRunner
 	 */
-	private function getPropertyParserFunction( Parser $parser, Entity $entity = null ) {
+	private function getPropertyParserFunctionRunner( Parser $parser, Entity $entity = null ) {
 		$entityLookup = new MockRepository();
 
 		if ( $entity !== null ) {
@@ -42,7 +42,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 			$entityLookup
 		);
 
-		return new PropertyParserFunction( $entityLookup, $propertyLabelResolver );
+		return new PropertyParserFunctionRunner( $entityLookup, $propertyLabelResolver );
 	}
 
 	/**
@@ -52,7 +52,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$functionRunner = $this->getPropertyParserFunction( $parser );
+		$functionRunner = $this->getPropertyParserFunctionRunner( $parser );
 		$renderer = $functionRunner->getRenderer( Language::factory( $languageCode ) );
 		$this->assertInstanceOf( 'Wikibase\PropertyParserFunctionRenderer', $renderer );
 	}
@@ -82,7 +82,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
 
-		$instance = $this->getPropertyParserFunction( $parser );
+		$instance = $this->getPropertyParserFunctionRunner( $parser );
 
 		$this->assertEquals( $expected, $instance->isParserUsingVariants( $parser ) );
 	}
@@ -106,7 +106,7 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$functionRunner = $this->getPropertyParserFunction( $parser );
+		$functionRunner = $this->getPropertyParserFunctionRunner( $parser );
 		$this->assertEquals( $expected, $functionRunner->processRenderedArray( $textArray ) );
 	}
 
@@ -130,13 +130,13 @@ class PropertyParserFunctionTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q42' ) );
 
-		$functionRunner = $this->getPropertyParserFunction( $parser, $item );
+		$functionRunner = $this->getPropertyParserFunctionRunner( $parser, $item );
 		$lang = Language::factory( 'qqx' );
 
 		$result = $functionRunner->renderInLanguage( $item->getId(), 'invalidLabel', $lang );
 
 		// Test against the regexp of the {{#iferror parser function, as that should be able
-		// to detect errors from PropertyParserFunction. See ExtParserFunctions::iferror
+		// to detect errors from PropertyParserFunctionRunner. See ExtParserFunctions::iferror
 		$this->assertRegExp(
 			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
 			$result
