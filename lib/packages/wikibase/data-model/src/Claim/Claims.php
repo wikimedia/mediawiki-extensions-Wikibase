@@ -52,14 +52,12 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $guid
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getGuidKey( $guid ) {
+	private function getGuidKey( $guid ) {
 		if ( !is_string( $guid ) ) {
 			throw new InvalidArgumentException( 'Expected a GUID string' );
 		}
@@ -71,14 +69,12 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	/**
 	 * @param Claim $claim
 	 *
-	 * @since 0.5
-	 *
 	 * @param Claim $claim
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getClaimKey( Claim $claim ) {
+	private function getClaimKey( Claim $claim ) {
 		$guid = $claim->getGuid();
 
 		if ( $guid === null ) {
@@ -110,12 +106,10 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param Claim $claim
 	 * @param int $index
 	 */
-	protected function insertClaimAtIndex( Claim $claim, $index ) {
+	private function insertClaimAtIndex( Claim $claim, $index ) {
 		// Determine the claims to shift and remove them from the array:
 		$claimsToShift = array_slice( (array)$this, $index );
 

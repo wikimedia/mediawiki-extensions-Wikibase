@@ -17,13 +17,9 @@ use Wikibase\DataModel\Snak\Snaks;
 class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 
 	/**
-	 * The property snaks that make up this reference.
-	 *
-	 * @since 0.1
-	 *
 	 * @var Snaks
 	 */
-	protected $snaks;
+	private $snaks;
 
 	/**
 	 * @since 0.1

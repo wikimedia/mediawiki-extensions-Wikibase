@@ -15,7 +15,7 @@ use Wikibase\DataModel\LegacyIdInterpreter;
  */
 class EntityIdValue extends DataValueObject {
 
-	protected $entityId;
+	private $entityId;
 
 	public function __construct( EntityId $entityId ) {
 		$this->entityId = $entityId;
@@ -43,7 +43,7 @@ class EntityIdValue extends DataValueObject {
 	 *
 	 * @return int
 	 */
-	protected function getNumericId() {
+	private function getNumericId() {
 		return (int)substr( $this->entityId->getSerialization(), 1 );
 	}
 

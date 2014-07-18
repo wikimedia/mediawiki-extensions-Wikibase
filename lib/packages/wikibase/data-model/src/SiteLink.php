@@ -21,13 +21,13 @@ use Wikibase\DataModel\Entity\ItemIdSet;
  */
 class SiteLink implements Comparable {
 
-	protected $siteId;
-	protected $pageName;
+	private $siteId;
+	private $pageName;
 
 	/**
 	 * @var ItemIdSet
 	 */
-	protected $badges;
+	private $badges;
 
 	/**
 	 * @param string $siteId
