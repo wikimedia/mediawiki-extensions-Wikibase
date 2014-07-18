@@ -7,12 +7,12 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemDiff;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\DataModel\Entity\ItemDiff
+ * @covers Wikibase\DataModel\Entity\Diff\ItemDiff
  *
  * @group Wikibase
  * @group WikibaseDataModel
