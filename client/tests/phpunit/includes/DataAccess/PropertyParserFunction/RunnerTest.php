@@ -30,14 +30,14 @@ use Wikibase\Test\MockRepository;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class PropertyParserFunctionRunnerTest extends \PHPUnit_Framework_TestCase {
+class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param Parser $parser
 	 * @param Renderer $renderer
 	 * @param Entity|null $entity
 	 *
-	 * @return PropertyParserFunctionRunner
+	 * @return Runner
 	 */
 	private function getRunner( Parser $parser, Renderer $renderer, Entity $entity = null ) {
 		$entityLookup = new MockRepository();
