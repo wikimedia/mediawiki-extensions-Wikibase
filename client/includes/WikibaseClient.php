@@ -17,6 +17,7 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -661,6 +662,18 @@ final class WikibaseClient {
 	public function getParserFunctionRegistrant() {
 		return new ParserFunctionRegistrant(
 			$this->getSettings()->getSetting( 'allowDataTransclusion' )
+		);
+	}
+
+	/**
+	 * @return Runner
+	 */
+	public function getPropertyParserFunctionRunner() {
+		return new Runner(
+			$this->getEntityLookup(),
+			$this->getStore()->getPropertyLabelResolver(),
+			$this->getStore()->getSiteLinkTable(),
+			$this->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
 
