@@ -27,8 +27,7 @@ class PropertyParserFunctionRendererFactoryTest extends \PHPUnit_Framework_TestC
 
 	public function testNewFromLanguage() {
 		$rendererFactory = new RendererFactory(
-			$this->getEntityLookup(),
-			$this->getPropertyLabelResolver(),
+			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory()
 		);
@@ -40,20 +39,14 @@ class PropertyParserFunctionRendererFactoryTest extends \PHPUnit_Framework_TestC
 		$this->assertInstanceOf( $expectedClass, $renderer );
 	}
 
-	private function getEntityLookup() {
-		$entityLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityLookup' )
+	private function getSnaksFinder() {
+		$snakListFinder = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\SnaksFinder'
+			)
 			->disableOriginalConstructor()
 			->getMock();
 
-		return $entityLookup;
-	}
-
-	private function getPropertyLabelResolver() {
-		$propertyLabelResolver = $this->getMockBuilder( 'Wikibase\PropertyLabelResolver' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $propertyLabelResolver;
+		return $snakListFinder;
 	}
 
 	private function getLanguageFallbackChainFactory() {

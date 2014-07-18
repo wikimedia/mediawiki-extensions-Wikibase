@@ -19,14 +19,9 @@ use Wikibase\PropertyLabelResolver;
 class RendererFactory {
 
 	/**
-	 * @var EntityLookup
+	 * @var SnaksFinder
 	 */
-	private $entityLookup;
-
-	/**
-	 * @var PropertyLabelResolver
-	 */
-	private $propertyLabelResolver;
+	private $snaksFinder;
 
 	/**
 	 * @var LanguageFallbackChainFactory
@@ -39,18 +34,16 @@ class RendererFactory {
 	private $snakFormatterFactory;
 
 	/**
-	 * @param EntityLookup $entityLookup
-	 * @param PropertyLabelResolver $propertyLabelResolver
+	 * @param SnaksFinder $snaksFinder
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 */
 	public function __construct(
-		EntityLookup $entityLookup,
-		PropertyLabelResolver $propertyLabelResolver,
+		SnaksFinder $snaksFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory
 	) {
-		$this->entityLookup = $entityLookup;
-		$this->propertyLabelResolver = $propertyLabelResolver;
+		$this->snaksFinder = $snaksFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 	}
@@ -63,8 +56,7 @@ class RendererFactory {
 	public function newFromLanguage( Language $language ) {
 		return new Renderer(
 			$language,
-			$this->entityLookup,
-			$this->propertyLabelResolver,
+			$this->snaksFinder,
 			$this->newSnakFormatterForLanguage( $language )
 		);
 	}
