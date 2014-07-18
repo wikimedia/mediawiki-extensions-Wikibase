@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_7edddde0",
+        "filename": "repo/includes/store/EntityPerPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "Just because pages that contain redirects do not contain entities, and it seems nicer to keep these separate. In the end though, your way would be simpler. *shrug*",
+      "parentUuid": "8e28a382_53db3a25",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f3e7c6dd",
         "filename": "repo/includes/store/sql/AddEntityPerPage.sql",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2014-07-18T10:35:59Z",
       "side": 1,
       "message": "This is strange. All EntityId columns in all tables are still INT, but this new one is a string? This is not really helpful, don#t you think? The table needs to be converted anyway. Having one column already in the right format doesn\u0027t make this easier.\n\nAnd: Since the type _must_ be the same it\u0027s really easy to use an INT column here.\n\nOn the other hand it\u0027s not really a problem to mix the two. The only problem is that it\u0027s mixed and a bit confusing for a while.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3eef5584",
+        "filename": "repo/includes/store/sql/AddEntityPerPage.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "Yea, I just didn\u0027t see a point to do it the wrong way here again. But we are not really using the value if this field at the moment, and it will need to become a string eventually, so...",
+      "parentUuid": "8e28a382_f3e7c6dd",
       "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_1ee6d9ac",
+        "filename": "repo/includes/store/sql/AddEppRedirectTarget.sqlite.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "It\u0027s broken, epp_redirect_target shouldn\u0027t be mentioned in the select. fixed now.",
+      "parentUuid": "8e28a382_73d3d605",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_93ef62ad",
         "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
         "patchSetId": 4
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_befa253e",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "The entire maintenance script is about constructing entity ids from page titles and filling the epp table this way. Yes, it\u0027s not true in general. For other kinds of entities, we\u0027ll need to hook into this script somehow and do special things. Though even for the MediaInfo case, the IDs can actually be derived from the page titles.",
+      "parentUuid": "8e28a382_93ef62ad",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_53021a77",
         "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
         "patchSetId": 4
@@ -98,6 +170,24 @@
       "writtenOn": "2014-07-18T10:35:59Z",
       "side": 1,
       "message": "Funny method name. I think I would not like this in a public interface, but as a private method it\u0027s nice. :-)",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5e934104",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "I like to use \"tryXxx\"  for stuff that does a try/catch and swallows errors.",
+      "parentUuid": "8e28a382_53021a77",
       "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_1e9db90e",
+        "filename": "repo/includes/store/sql/EntityPerPageBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "you are right.",
+      "parentUuid": "8e28a382_734996d2",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f31466a2",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 4
@@ -149,6 +257,24 @@
       "writtenOn": "2014-07-18T10:35:59Z",
       "side": 1,
       "message": "Ouch!",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7e8b9dc4",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "hehe yea, took me 20 minutes to find that une \u003e_\u003c",
+      "parentUuid": "8e28a382_f31466a2",
       "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_3ebd1564",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "Still torn on the issue. I feel it\u0027s impotant to make it very very clear that redirects are NOT entities.",
+      "parentUuid": "8e28a382_d32baad9",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d3728a0f",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 4
@@ -183,6 +327,24 @@
       "writtenOn": "2014-07-18T10:35:59Z",
       "side": 1,
       "message": "The old code did not allowed to update the page ID, the new code does. Is this intended?\n\nOh, and it does more. If this is used to change a page ID the replace() call below will update one row and delete an other row that had the page ID before.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7ea27d3c",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "rewrote that bit. yes, it will delete all rows that conflict, because of the page id *or* the entity id. That might be two rows (but that would indicate the table got corrupted somehow).",
+      "parentUuid": "8e28a382_d3728a0f",
       "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -206,6 +368,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_3e6cf504",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "This should be consistent. Either always have a space at the end, or always at the beginning. A matter of taste, really, I haven\u0027t decided on either style. So you really want me to change it throughout?",
+      "parentUuid": "8e28a382_3e907545",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_be9b4567",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 4
@@ -217,6 +397,24 @@
       "writtenOn": "2014-07-18T10:35:59Z",
       "side": 1,
       "message": "Add the space here, not above.",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1e7379e7",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "why?",
+      "parentUuid": "8e28a382_be9b4567",
       "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -240,6 +438,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_5e50e136",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "I\u0027m emulating the column in case it\u0027s not in the database.",
+      "parentUuid": "8e28a382_9eaac96b",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7ea5dd99",
         "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
         "patchSetId": 4
@@ -257,6 +473,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_7e583d59",
+        "filename": "repo/includes/store/sql/PropertyInfoTableBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "It\u0027s consistent with the line below. It\u0027s a simple (and pretty common) way to \"shorten out\" a condition. The alternative would be to have \n\n  if ( ... ) { $conditions[] \u003d ... ; } \n\nI find using a trinary here mroe convenient, and it doesn\u0027t require a local variable.",
+      "parentUuid": "8e28a382_7ea5dd99",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_1ee5b9d7",
         "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderTest.php",
         "patchSetId": 4
@@ -268,6 +502,24 @@
       "writtenOn": "2014-07-18T10:35:59Z",
       "side": 1,
       "message": "Are you sure this is better? Whats wrong with numRows()?",
+      "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5e37c1fc",
+        "filename": "repo/tests/phpunit/includes/store/sql/EntityPerPageBuilderTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-18T11:27:43Z",
+      "side": 1,
+      "message": "numRows actually transfers the result set to the client, buffers it, and the conts the rows. That\u0027s just pointless.",
+      "parentUuid": "8e28a382_1ee5b9d7",
       "revId": "3e12c3e670b2317cfaa1df5e2aa989cb0a80b3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
