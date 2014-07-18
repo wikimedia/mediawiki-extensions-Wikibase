@@ -315,6 +315,7 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbareditgroup',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
+				'mediawiki.util',
 				'mediawiki.language',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
@@ -366,6 +367,7 @@ return call_user_func( function() {
 				'wikibase-error-ui-link-exists',
 				'wikibase-error-ui-session-failure',
 				'wikibase-error-ui-edit-conflict',
+				'wikibase-add-badges',
 				'parentheses',
 			)
 		),
