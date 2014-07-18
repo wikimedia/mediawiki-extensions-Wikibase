@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d3116a60",
+        "filename": "lib/resources/images/wb-badges-empty.svg",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T09:46:03Z",
+      "side": 1,
+      "message": "Opera. Dang. Will fix.",
+      "parentUuid": "8e28a382_1341325f",
+      "revId": "00bc35e707fc9a5a4ee28479a8f02d88b05db51c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d32a8a8e",
         "filename": "lib/resources/images/wb-badges-empty.svg",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-07-18T09:30:07Z",
       "side": 1,
       "message": "Jared suggested to use #AAAAAA. You could avoid the opacity parameter then which might produce unexpected results.",
+      "revId": "00bc35e707fc9a5a4ee28479a8f02d88b05db51c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b30c9e46",
+        "filename": "lib/resources/images/wb-badges-empty.svg",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T09:46:03Z",
+      "side": 1,
+      "message": "I actually did this on purpose. Assuming light gray looks good on all backgrounds is not going to work. Imagine your #AAA image on a #AAA background. It would be invisible. The transparent black is always visible except for a black background.\n\n#AAA would be 0.333, my 0.4 is a little bit darker which is a good thing in my opinion.",
+      "parentUuid": "8e28a382_d32a8a8e",
       "revId": "00bc35e707fc9a5a4ee28479a8f02d88b05db51c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
