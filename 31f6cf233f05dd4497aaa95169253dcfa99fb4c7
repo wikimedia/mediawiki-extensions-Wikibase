@@ -156,6 +156,24 @@
       "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_531e9a76",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-18T09:32:29Z",
+      "side": 1,
+      "message": "Hoo should now about mw.config.get( \u0027wbEntityId\u0027 ). ;-)",
+      "parentUuid": "8e28a382_f39fc604",
+      "revId": "31f6cf233f05dd4497aaa95169253dcfa99fb4c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
