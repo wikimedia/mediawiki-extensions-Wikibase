@@ -218,16 +218,24 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		if ( empty( $this->badges ) ) {
 			$this->badges = $this->site === null ? array() : $this->getBadges( $entity, $this->site );
 		}
-		$pageinput = Html::input(
-			'page',
-			$this->getRequest()->getVal( 'page' ) ?: $this->page,
-			'text',
-			array(
-				'class' => 'wb-input wb-input-text',
-				'id' => 'wb-setsitelink-page',
-				'size' => 50
-			)
-		);
+		$pageinput = Html::element(
+				'label',
+				array(
+					'for' => 'wb-setsitelink-page',
+					'class' => 'wb-label'
+				),
+				$this->msg( 'wikibase-setsitelink-label' )->text()
+			) .
+			Html::input(
+				'page',
+				$this->getRequest()->getVal( 'page' ) ?: $this->page,
+				'text',
+				array(
+					'class' => 'wb-input wb-input-text',
+					'id' => 'wb-setsitelink-page',
+					'size' => 50
+				)
+			);
 
 		// Experimental setting of badges on the special page
 		// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
@@ -298,14 +306,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				)
 			)
 			. Html::element( 'br' )
-			. Html::element(
-				'label',
-				array(
-					'for' => 'wb-setsitelink-page',
-					'class' => 'wb-label'
-				),
-				$this->msg( 'wikibase-setsitelink-label' )->text()
-			)
 			. $pageinput;
 		}
 	}
