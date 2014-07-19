@@ -14,5 +14,7 @@
 	"wikibase-linkitem-addlinks": "Girêdanan lê zêde bike",
 	"wikibase-linkitem-input-site": "Ziman:",
 	"wikibase-linkitem-input-page": "Rûpel:",
-	"wikibase-rc-hide-wikidata": "Wikidatayê $1"
+	"wikibase-rc-hide-wikidata": "Wikidatayê $1",
+	"wikibase-rc-hide-wikidata-hide": "veşêre",
+	"wikibase-rc-hide-wikidata-show": "nîşan bide"
 }
