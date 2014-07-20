@@ -56,8 +56,6 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 
 		$reference = $this->getDeserialized( $serialization );
 
-		$this->validateHash( $reference, $serialization );
-
 		return $reference;
 	}
 
@@ -92,16 +90,6 @@ class ReferenceDeserializer implements DispatchableDeserializer {
 				$serialization['snaks-order'],
 				"snaks-order attribute is not a valid array"
 			);
-		}
-	}
-
-	private function validateHash( Reference $reference, array $serialization ) {
-		if( !array_key_exists( 'hash', $serialization ) ) {
-			return;
-		}
-
-		if( $reference->getHash() !== $serialization['hash'] ) {
-			throw new DeserializationException( 'The reference serialization provides a wrong hash' );
 		}
 	}
 
