@@ -223,4 +223,20 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $reference0->equals( $reference1 ) );
 	}
 
+	public function testReferencesWithDifferentSnakOrderHaveTheSameHash() {
+		$reference0 = new Reference( new SnakList( array(
+			new PropertySomeValueSnak( 1337 ),
+			new PropertyNoValueSnak( 1337 ),
+			new PropertyNoValueSnak( 42 )
+		) ) );
+
+		$reference1 = new Reference( new SnakList( array(
+			new PropertyNoValueSnak( 1337 ),
+			new PropertyNoValueSnak( 42 ),
+			new PropertySomeValueSnak( 1337 )
+		) ) );
+
+		$this->assertSame( $reference0->getHash(), $reference1->getHash() );
+	}
+
 }
