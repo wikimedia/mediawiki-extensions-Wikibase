@@ -10,7 +10,7 @@ namespace Wikibase\DataModel\Entity;
  */
 class PropertyNotFoundException extends \RuntimeException {
 
-	protected $propertyId;
+	private $propertyId;
 
 	public function __construct( PropertyId $propertyId, $message = null, \Exception $previous = null ) {
 		$this->propertyId = $propertyId;
