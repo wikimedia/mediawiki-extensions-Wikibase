@@ -102,6 +102,11 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
+### 1.0.2 (2014-07-20)
+
+* Fixed issue where invalid snaks-order elements in reference serialization caused an error rather
+ than a deserialization exception
+
 ### 1.0.1 (2014-06-16)
 
 * The Deserializer for snaks now constructs UnDeserializableValue objects for invalid data values

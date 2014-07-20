@@ -137,7 +137,7 @@ class ReferenceDeserializerTest extends DeserializerBaseTest {
 	 * @dataProvider invalidDeserializationProvider
 	 */
 	public function testInvalidSerialization( $serialization ) {
-		$this->setExpectedException( '\Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
 		$this->buildDeserializer()->deserialize( $serialization );
 	}
 
@@ -148,6 +148,15 @@ class ReferenceDeserializerTest extends DeserializerBaseTest {
 				'snaks' => array()
 			),
 		);
+	}
+
+	public function testGivenInvalidSnaksOrderAttribute_exceptionIsThrown() {
+		$this->setExpectedException( 'Deserializers\Exceptions\InvalidAttributeException' );
+		$this->buildDeserializer()->deserialize( array(
+			'hash' => 'foo',
+			'snaks' => array(),
+			'snaks-order' => null
+		) );
 	}
 
 }

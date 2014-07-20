@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Deserializers;
 use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
+use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Reference;
 
 /**
