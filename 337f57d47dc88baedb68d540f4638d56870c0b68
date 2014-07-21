@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_989f6806",
+        "filename": "repo/tests/phpunit/includes/Notifications/ChangeNotifierTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-21T17:51:14Z",
+      "side": 1,
+      "message": "DatabaseChangeNotifierTest",
+      "revId": "337f57d47dc88baedb68d540f4638d56870c0b68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
