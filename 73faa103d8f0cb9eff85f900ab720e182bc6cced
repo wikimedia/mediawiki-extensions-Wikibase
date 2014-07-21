@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_3553dd6f",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "Looks strange. Is neither code nor text. Suggestion:\n\n@var array[] list of $idString \u003d\u003e $entityRecordArray pairs.",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_95fe1165",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "EntityId[]\n\nAlso as above. Suggestion:\n\n@var EntityId[] list of $idString \u003d\u003e $entityId pairs.",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_953df12b",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "Please remove the $resolveRedirect parameter (as discussed). See the comments below.",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7511655e",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "Resolving the redirect is pointless if you know you don\u0027t need it.\n\npublic function removeMissing( $redirects \u003d \u0027keep-redirects\u0027 ) {\n\tforeach ( array_keys( $this-\u003eentityInfo ) as $key ) {\n\t\t$id \u003d $this-\u003eparseId( $key );\n\t\ttry {\n\t\t\t$entity \u003d $this-\u003egetEntity( $id );\n\t\t} catch ( UnresolvedRedirectException $ex ) {\n\t\t\tif ( $redirects \u003d\u003d\u003d \u0027keep-redirects\u0027 ) {\n\t\t\t\t...\n\t\t\t} else {\n\t\t\t\t...\n\t\t\t}\n\t\t}\n\n\t\tif ( !$entity ) {\n\t\t\tunset( $this-\u003eentityInfo[$key] );\n\t\t}\n\t}\n}",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1558e157",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "This can never happen. Please remove.",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_75728511",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "Not true any more, but can throw an EntityIdParsingException now.",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f5655542",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "Why not call it \"flatten\" than? Or \"flattenArray\" to make clear it works on arrays. Private anyway, so not really a problem.",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f57e75e0",
+        "filename": "lib/tests/phpunit/store/SqlEntityInfoBuilderTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:20:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the test always test both code paths no matter what the current setting is? Not sure if this is possible. Obviously requires schema creation during test. Do we do this?",
+      "revId": "73faa103d8f0cb9eff85f900ab720e182bc6cced",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
