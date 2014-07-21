@@ -4,23 +4,17 @@ namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Language;
-use Wikibase\Claim;
-use Wikibase\DataAccess\PropertyParserFunction\Renderer;
+use Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
-use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Test\MockPropertyLabelResolver;
-use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\Renderer
- *
- * @fixme add test cases to cover all error possibilities
+ * @covers Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -30,15 +24,16 @@ use Wikibase\Test\MockRepository;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RendererTest extends \PHPUnit_Framework_TestCase {
+class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param SnaksFinder $snaksFinder
 	 * @param string $languageCode
 	 */
 	private function getRenderer( SnaksFinder $snaksFinder, $languageCode ) {
 		$targetLanguage = Language::factory( $languageCode );
 
-		return new Renderer(
+		return new LanguageAwareRenderer(
 			$targetLanguage,
 			$snaksFinder,
 			$this->getSnakFormatter()

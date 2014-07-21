@@ -61,75 +61,6 @@ class Runner {
 	}
 
 	/**
-	 * Check whether variants are used in this parser run.
-	 *
-	 * @param Parser $parser
-	 *
-	 * @return bool
-	 */
-	public function isParserUsingVariants( Parser $parser ) {
-		$parserOptions = $parser->getOptions();
-		return $parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
-			&& !$parserOptions->getDisableContentConversion();
-	}
-
-	/**
-	 * Post-process rendered array (variant text) into wikitext to be used in pages.
-	 *
-	 * @param string[] $textArray
-	 *
-	 * @return string
-	 */
-	public function processRenderedArray( array $textArray ) {
-		// We got arrays, so they must have already checked that variants are being used.
-		$text = '';
-		foreach ( $textArray as $variantCode => $variantText ) {
-			$text .= "$variantCode:$variantText;";
-		}
-		if ( $text !== '' ) {
-			$text = '-{' . $text . '}-';
-		}
-
-		return $text;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param string $propertyLabelOrId property label or ID (pXXX)
-	 * @param Language $language
-	 *
-	 * @return string
-	 */
-	public function renderInLanguage( EntityId $entityId, $propertyLabelOrId, Language $language ) {
-		$renderer = $this->rendererFactory->newFromLanguage( $language );
-		return $renderer->render( $entityId, $propertyLabelOrId );
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param string $propertyLabelOrId property label or ID (pXXX)
-	 * @param string[] $variants Variant codes
-	 *
-	 * @return string[], key by variant codes
-	 */
-	public function renderInVariants( EntityId $entityId, $propertyLabelOrId, array $variants ) {
-		$textArray = array();
-
-		foreach ( $variants as $variantCode ) {
-			$variantLanguage = Language::factory( $variantCode );
-			$variantText = $this->renderInLanguage( $entityId, $propertyLabelOrId, $variantLanguage );
-			// LanguageConverter doesn't handle empty strings correctly, and it's more difficult
-			// to fix the issue there, as it's using empty string as a special value.
-			// Also keeping the ability to check a missing property with {{#if: }} is another reason.
-			if ( $variantText !== '' ) {
-				$textArray[$variantCode] = $variantText;
-			}
-		}
-
-		return $textArray;
-	}
-
-	/**
 	 * @param Parser $parser
 	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 *
@@ -157,24 +88,66 @@ class Runner {
 	/**
 	 * @param Parser $parser
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel
+	 * @param string $propertyLabelOrId
 	 *
 	 * @return string
 	 */
 	private function renderForEntityId( Parser $parser, EntityId $entityId, $propertyLabelOrId ) {
-		$targetLanguage = $parser->getTargetLanguage();
-
-		if ( $this->isParserUsingVariants( $parser ) && $parser->getConverterLanguage()->hasVariants() ) {
-			$renderedVariantsArray = $this->renderInVariants(
-				$entityId,
-				$propertyLabelOrId,
-				$parser->getConverterLanguage()->getVariants()
-			);
-
-			return $this->processRenderedArray( $renderedVariantsArray );
+		if ( $this->useVariants( $parser ) ) {
+			return $this->renderInVariants( $parser, $entityId, $propertyLabelOrId );
 		} else {
+			$targetLanguage = $parser->getTargetLanguage();
 			return $this->renderInLanguage( $entityId, $propertyLabelOrId, $targetLanguage );
 		}
+	}
+
+	/**
+	 * Check whether variants are used in this parser run.
+	 *
+	 * @param Parser $parser
+	 *
+	 * @return boolean
+	 */
+	private function isParserUsingVariants( Parser $parser ) {
+		$parserOptions = $parser->getOptions();
+		return $parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+			&& !$parserOptions->getDisableContentConversion();
+	}
+
+	/**
+	 * @param Parser $parser
+	 *
+	 * @return boolean
+	 */
+	private function useVariants( Parser $parser ) {
+		$converterLanguageHasVariants = $parser->getConverterLanguage()->hasVariants();
+		return $this->isParserUsingVariants( $parser ) && $converterLanguageHasVariants;
+	}
+
+	/**
+	 * @param Parser $parser
+	 * @param EntityId $entityId
+	 * @param string $propertyLabelOrId
+	 *
+	 * @return string
+	 */
+	private function renderInVariants( Parser $parser, EntityId $entityId, $propertyLabelOrId ) {
+		$variants = $parser->getConverterLanguage()->getVariants();
+		$variantsRenderer = $this->rendererFactory->newVariantsAwareRenderer( $variants );
+
+		return $variantsRenderer->render( $entityId, $propertyLabelOrId );
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @param string $propertyLabelOrId property label or ID (pXXX)
+	 * @param Language $language
+	 *
+	 * @return string
+	 */
+	private function renderInLanguage( EntityId $entityId, $propertyLabelOrId, Language $language ) {
+		$renderer = $this->rendererFactory->newLanguageAwareRenderer( $language );
+		return $renderer->render( $entityId, $propertyLabelOrId );
 	}
 
 	/**

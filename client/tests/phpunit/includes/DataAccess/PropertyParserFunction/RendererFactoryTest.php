@@ -25,7 +25,7 @@ use Wikibase\Lib\SnakFormatter;
  */
 class PropertyParserFunctionRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	public function testNewFromLanguage() {
+	public function testNewLanguageAwareRenderer() {
 		$rendererFactory = new RendererFactory(
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
@@ -33,9 +33,9 @@ class PropertyParserFunctionRendererFactoryTest extends \PHPUnit_Framework_TestC
 		);
 
 		$language = Language::factory( 'he' );
-		$renderer = $rendererFactory->newFromLanguage( $language );
+		$renderer = $rendererFactory->newLanguageAwareRenderer( $language );
 
-		$expectedClass = 'Wikibase\DataAccess\PropertyParserFunction\Renderer';
+		$expectedClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer';
 		$this->assertInstanceOf( $expectedClass, $renderer );
 	}
 
