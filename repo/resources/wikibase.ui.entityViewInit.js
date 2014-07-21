@@ -63,6 +63,8 @@
 			new wb.ui.DescriptionEditTool( this, { api: repoApi } );
 		} );
 
+		registerEditRestrictionHandlers();
+
 		if( mw.config.get( 'wbEntity' ) !== null ) {
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
@@ -109,42 +111,8 @@
 
 			entityInitializer.getEntity().done( function( entity ) {
 				createEntityDom( entity, $claims, $claimsParent, repoApi );
+				triggerEditRestrictionHandlers();
 			} );
-		}
-
-		// Handle edit restrictions:
-		$( wb )
-		.on( 'restrictEntityPageActions blockEntityPageActions', function( event ) {
-			$( '.wikibase-toolbarbutton' ).each( function( i, node ) {
-				var toolbarButton = $( node ).data( 'toolbarbutton' );
-
-				toolbarButton.disable();
-
-				var messageId = ( event.type === 'blockEntityPageActions' )
-					? 'wikibase-blockeduser-tooltip-message'
-					: 'wikibase-restrictionedit-tooltip-message';
-
-				toolbarButton.element.wbtooltip( {
-					content: mw.message( messageId ).escaped(),
-					gravity: 'nw'
-				} );
-			} );
-		} );
-
-		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
-			$( wb ).triggerHandler( 'blockEntityPageActions' );
-		} else if ( !mw.config.get( 'wbUserCanEdit' ) ) {
-			$( wb ).triggerHandler( 'restrictEntityPageActions' );
-		}
-
-		if( !mw.config.get( 'wbIsEditView' ) ) {
-			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars directly like this is
-			// not really worse than hacking the Toolbar prototype to achieve this:
-			$( '.wikibase-toolbar' ).hide();
-			$( 'body' ).addClass( 'wb-editing-disabled' );
-			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
-			// firebug to show hidden nodes again to click on them:
-			$( wb ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
 		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
@@ -346,6 +314,44 @@
 		} );
 
 		wb.ui.initTermBox( entity, repoApi );
+	}
+
+	function registerEditRestrictionHandlers() {
+		$( wb )
+			.on( 'restrictEntityPageActions blockEntityPageActions', function( event ) {
+				$( '.wikibase-toolbarbutton' ).each( function( i, node ) {
+					var toolbarButton = $( node ).data( 'toolbarbutton' );
+
+					toolbarButton.disable();
+
+					var messageId = ( event.type === 'blockEntityPageActions' )
+						? 'wikibase-blockeduser-tooltip-message'
+						: 'wikibase-restrictionedit-tooltip-message';
+
+					toolbarButton.element.wbtooltip( {
+						content: mw.message( messageId ).escaped(),
+						gravity: 'nw'
+					} );
+				} );
+			} );
+	}
+
+	function triggerEditRestrictionHandlers() {
+		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
+			$( wb ).triggerHandler( 'blockEntityPageActions' );
+		} else if ( !mw.config.get( 'wbUserCanEdit' ) ) {
+			$( wb ).triggerHandler( 'restrictEntityPageActions' );
+		}
+
+		if( !mw.config.get( 'wbIsEditView' ) ) {
+			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars directly like this is
+			// not really worse than hacking the Toolbar prototype to achieve this:
+			$( '.wikibase-toolbar' ).hide();
+			$( 'body' ).addClass( 'wb-editing-disabled' );
+			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
+			// firebug to show hidden nodes again to click on them:
+			$( wb ).triggerHandler( 'restrictEntityPageActions' );
+		}
 	}
 
 } )(
