@@ -200,8 +200,6 @@ label and its toolbar */
 	 * the supplement will get jumbled without isolation */
 	unicode-bidi: -moz-isolate;
 	unicode-bidi: -webkit-isolate;
-	unicode-bidi: -ms-isolate;
-	unicode-bidi: -o-isolate;
 	unicode-bidi: isolate;
 }
 
