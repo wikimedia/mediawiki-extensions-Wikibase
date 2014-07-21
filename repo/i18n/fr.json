@@ -27,7 +27,8 @@
 			"Tpt",
 			"Wyz",
 			"Zolo",
-			"SnowedEarth"
+			"SnowedEarth",
+			"Verdy p"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -176,7 +177,7 @@
 	"wikibase-setsitelink-not-badge": "L’élément $1 n’est pas un insigne.",
 	"wikibase-setsitelink-add-failed": "Le lien de site n’a pas pu être enregistré.",
 	"wikibase-setsitelink-remove-failed": "Le site de lien n’a pas pu être supprimé.",
-	"wikibase-modifyentity-id": "ID:",
+	"wikibase-modifyentity-id": "Identifiant :",
 	"wikibase-modifyterm-language": "Langue :",
 	"special-mergeitems": "Fusionner les deux éléments",
 	"wikibase-mergeitems-intro": "Si vous fusionnez deux éléments, tous les libellés, descriptions, alias, liens de site et déclarations seront déplacés d’un élément vers l’autre.",

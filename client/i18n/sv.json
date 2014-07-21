@@ -24,7 +24,7 @@
 	"wikibase-comment-sitelink-change": "Språklänk ändrades från $1 till $2",
 	"wikibase-comment-sitelink-remove": "Språklänk togs bort: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ändring|ändringar}}",
-	"wikibase-dataitem": "{{WBREPONAME}}-objekt",
+	"wikibase-dataitem": "{{WBREPONAME}}objekt",
 	"wikibase-editlinks": "Redigera länkar",
 	"wikibase-editlinkstitle": "Redigera interwikilänkar",
 	"wikibase-linkitem-addlinks": "Lägg till länkar",

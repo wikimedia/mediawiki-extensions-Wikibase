@@ -97,5 +97,6 @@
 	"datatypes-type-commonsMedia": "Mediendatei auf Commons",
 	"version-wikibase": "Wikibase-Erweiterungen",
 	"wikibase-snakformatter-valuetype-mismatch": "Der Wertetyp „$1“ stimmt nicht mit dem Eigenschaftstyp „$2“ überein.",
-	"wikibase-snakformatter-property-not-found": "Die Eigenschaft $1 wurde nicht gefunden. Der zu verwendende Datentyp konnte nicht bestimmt werden."
+	"wikibase-snakformatter-property-not-found": "Die Eigenschaft $1 wurde nicht gefunden. Der zu verwendende Datentyp konnte nicht bestimmt werden.",
+	"wikibase-add-badges": "Auszeichnungen hinzufügen"
 }
