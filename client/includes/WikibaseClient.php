@@ -17,6 +17,7 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
@@ -672,11 +673,16 @@ final class WikibaseClient {
 	 */
 	private function getPropertyParserFunctionRendererFactory() {
 		$snaksFinder = new SnaksFinder(
-			$this->getEntityLookup(),
-			$this->getStore()->getPropertyLabelResolver()
+			$this->getEntityLookup()
+		);
+
+		$propertyIdResolver = new PropertyIdResolver(
+			$this->getStore()->getPropertyLabelResolver(),
+			$this->getEntityIdParser()
 		);
 
 		return new RendererFactory(
+			$propertyIdResolver,
 			$snaksFinder,
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory()
