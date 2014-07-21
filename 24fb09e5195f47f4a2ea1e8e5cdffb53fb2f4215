@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_e4eec11e",
+        "filename": "repo/tests/phpunit/includes/store/WikiPageEntityRevisionLookupTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-21T21:22:02Z",
+      "side": 1,
+      "message": "Why is this static?",
+      "revId": "24fb09e5195f47f4a2ea1e8e5cdffb53fb2f4215",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
