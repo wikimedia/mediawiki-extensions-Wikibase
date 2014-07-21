@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_33f655c3",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-21T18:28:43Z",
+      "side": 1,
+      "message": "CQRS violation. A method that does notification (a side effect) should not return a newly constructed object. Bad interface.",
+      "revId": "bc4911d05c3f9fec7ea4f6db15220e20aeda3738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
