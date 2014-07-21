@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 use DataValues\StringValue;
 use Language;
 use Wikibase\DataAccess\PropertyParserFunction\LanguageRenderer;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -27,21 +28,22 @@ use Wikibase\PropertyValueSnak;
 class LanguageRendererTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param SnaksFinder $snaksFinder
+	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param string $languageCode
 	 */
-	private function getRenderer( SnaksFinder $snaksFinder, $languageCode ) {
+	private function getRenderer( PropertyIdResolver $propertyIdResolver, $languageCode ) {
 		$targetLanguage = Language::factory( $languageCode );
 
 		return new LanguageRenderer(
 			$targetLanguage,
-			$snaksFinder,
+			$propertyIdResolver,
+			$this->getSnaksFinder(),
 			$this->getSnakFormatter()
 		);
 	}
 
 	public function testRender() {
-		$renderer = $this->getRenderer( $this->getSnaksFinder(), 'en' );
+		$renderer = $this->getRenderer( $this->getPropertyIdResolver(), 'en' );
 
 		$result = $renderer->render(
 			new ItemId( 'Q42' ),
@@ -50,6 +52,20 @@ class LanguageRendererTest extends \PHPUnit_Framework_TestCase {
 
 		$expected = '(a kitten), (a kitten)';
 		$this->assertEquals( $expected, $result );
+	}
+
+	private function getPropertyIdResolver() {
+		$propertyIdResolver = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$propertyIdResolver->expects( $this->any() )
+			->method( 'resolvePropertyId' )
+			->will( $this->returnValue( new PropertyId( 'P1337' ) ) );
+
+		return $propertyIdResolver;
 	}
 
 	private function getSnaksFinder() {
@@ -73,7 +89,7 @@ class LanguageRendererTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testRenderForPropertyNotFound() {
-		$renderer = $this->getRenderer( $this->getSnaksFinderForPropertyNotFound(), 'qqx' );
+		$renderer = $this->getRenderer( $this->getPropertyIdResolverForPropertyNotFound(), 'qqx' );
 		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
 
 		$this->assertRegExp(
@@ -87,21 +103,21 @@ class LanguageRendererTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getSnaksFinderForPropertyNotFound() {
-		$snaksFinder = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\SnaksFinder'
+	private function getPropertyIdResolverForPropertyNotFound() {
+		$propertyIdResolver = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver'
 			)
 			->disableOriginalConstructor()
 			->getMock();
 
-		$snaksFinder->expects( $this->any() )
-			->method( 'findSnaks' )
-			->will( $this->returnCallback( function() {
-				throw new PropertyLabelNotResolvedException( 'invalidLabel', 'qqx' );
+		$propertyIdResolver->expects( $this->any() )
+			->method( 'resolvePropertyId' )
+			->will( $this->returnCallback( function( $propertyLabelOrId, $languageCode ) {
+				throw new PropertyLabelNotResolvedException( $propertyLabelOrId, $languageCode );
 			} )
 		);
 
-		return $snaksFinder;
+		return $propertyIdResolver;
 	}
 
 	private function getSnakFormatter() {

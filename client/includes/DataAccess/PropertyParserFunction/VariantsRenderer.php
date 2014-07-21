@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -39,27 +40,27 @@ class VariantsRenderer implements Renderer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param string $propertyLabelOrId
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabel ) {
-		$renderedVariantsArray = $this->buildRenderedVariantsArray( $entityId, $propertyLabel );
+	public function render( EntityId $entityId, $propertyLabelOrId ) {
+		$renderedVariantsArray = $this->buildRenderedVariantsArray( $entityId, $propertyLabelOrId );
 
 		return $this->processRenderedArray( $renderedVariantsArray );
 	}
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel
+	 * @param string $propertyLabelOrId
 	 *
 	 * @return string[], key by variant codes
 	 */
-	private function buildRenderedVariantsArray( EntityId $entityId, $propertyLabel ) {
+	private function buildRenderedVariantsArray( EntityId $entityId, $propertyLabelOrId ) {
 		$renderedVariantsArray = array();
 
 		foreach ( $this->variants as $variantCode ) {
-			$variantText = $this->getVariantText( $variantCode, $entityId, $propertyLabel );
+			$variantText = $this->getVariantText( $variantCode, $entityId, $propertyLabelOrId );
 
 			// LanguageConverter doesn't handle empty strings correctly, and it's more difficult
 			// to fix the issue there, as it's using empty string as a special value.
@@ -95,15 +96,15 @@ class VariantsRenderer implements Renderer {
 	/**
 	 * @param string $variantCode
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel
+	 * @param string $propertyLabelOrId
 	 *
 	 * @return string
 	 */
-	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabel ) {
+	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabelOrId ) {
 		$variantLanguage = Language::factory( $variantCode );
 		$renderer = $this->rendererFactory->newFromLanguage( $variantLanguage );
 
-		return $renderer->render( $entityId, $propertyLabel );
+		return $renderer->render( $entityId, $propertyLabelOrId );
 	}
 
 }

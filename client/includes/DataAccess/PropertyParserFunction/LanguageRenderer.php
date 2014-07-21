@@ -32,32 +32,40 @@ use Wikibase\PropertyLabelResolver;
 class LanguageRenderer implements Renderer {
 
 	private $language;
+	private $propertyIdResolver;
 	private $snaksFinder;
 	private $snakFormatter;
 
 	public function __construct(
 		Language $language,
+		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		SnakFormatter $snakFormatter
 	) {
 		$this->language = $language;
+		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->snakFormatter = $snakFormatter;
 	}
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabel ) {
+	public function render( EntityId $entityId, $propertyLabelOrId ) {
 		try {
-			$status = $this->getStatus( $entityId, $propertyLabel );
+			$propertyId = $this->propertyIdResolver->resolvePropertyId(
+				$propertyLabelOrId,
+				$this->language->getCode()
+			);
+
+			$status = $this->renderWithStatus( $entityId, $propertyId );
 		} catch ( PropertyLabelNotResolvedException $ex ) {
-			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
+			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		} catch ( InvalidArgumentException $ex ) {
-			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
+			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		}
 
 		if ( !$status->isGood() ) {
@@ -65,8 +73,7 @@ class LanguageRenderer implements Renderer {
 			return '<p class="error wikibase-error">' . $error . '</p>';
 		}
 
-		$text = $status->getValue();
-		return $text;
+		return $status->getValue();
 	}
 
 	/**
@@ -100,16 +107,16 @@ class LanguageRenderer implements Renderer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel
+	 * @param PropertyId $propertyId
 	 *
 	 * @return Status a status object wrapping a wikitext string
 	 */
-	private function getStatus( EntityId $entityId, $propertyLabel ) {
+	private function renderWithStatus( EntityId $entityId, PropertyId $propertyId ) {
 		wfProfileIn( __METHOD__ );
 
 		$snaks = $this->snaksFinder->findSnaks(
 			$entityId,
-			$propertyLabel,
+			$propertyId,
 			$this->language->getCode()
 		);
 
@@ -117,7 +124,7 @@ class LanguageRenderer implements Renderer {
 			return Status::newGood( '' );
 		}
 
-		$text = $this->formatSnaks( $snaks, $propertyLabel );
+		$text = $this->formatSnaks( $snaks );
 		$status = Status::newGood( $text );
 
 		wfProfileOut( __METHOD__ );
