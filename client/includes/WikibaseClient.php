@@ -17,6 +17,7 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\ClientStore;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -666,12 +667,25 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return RendererFactory
+	 */
+	private function getPropertyParserFunctionRendererFactory() {
+		return new RendererFactory(
+			$this->getEntityLookup(),
+			$this->getStore()->getPropertyLabelResolver(),
+			$this->getLanguageFallbackChainFactory(),
+			$this->getSnakFormatterFactory()
+		);
+	}
+
+	/**
 	 * @return Runner
 	 */
 	public function getPropertyParserFunctionRunner() {
 		return new Runner(
 			$this->getEntityLookup(),
 			$this->getStore()->getPropertyLabelResolver(),
+			$this->getPropertyParserFunctionRendererFactory(),
 			$this->getStore()->getSiteLinkTable(),
 			$this->getSettings()->getSetting( 'siteGlobalID' )
 		);
