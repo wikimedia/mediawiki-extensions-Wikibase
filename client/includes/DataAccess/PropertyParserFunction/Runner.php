@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use InvalidArgumentException;
 use Language;
@@ -8,10 +8,13 @@ use Parser;
 use Status;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\PropertyLabelResolver;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -24,7 +27,7 @@ use Wikibase\Lib\Store\EntityLookup;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class PropertyParserFunctionRunner {
+class Runner {
 
 	/**
 	 * @var EntityLookup
@@ -105,9 +108,12 @@ class PropertyParserFunctionRunner {
 
 		$snaksFormatter = $wikibaseClient->newSnakFormatter( SnakFormatter::FORMAT_WIKI, $options );
 
-		$instance = new PropertyParserFunctionRenderer( $language,
-			$this->entityLookup, $this->propertyLabelResolver,
-			$snaksFormatter );
+		$instance = new Renderer(
+			$language,
+			$this->entityLookup,
+			$this->propertyLabelResolver,
+			$snaksFormatter
+		);
 
 		wfProfileOut( __METHOD__ );
 		return $instance;

@@ -1,29 +1,32 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Language;
 use Wikibase\Claim;
+use Wikibase\DataAccess\PropertyParserFunction\Renderer;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\Property;
-use Wikibase\PropertyParserFunctionRenderer;
 use Wikibase\PropertyValueSnak;
+use Wikibase\Test\MockPropertyLabelResolver;
+use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\PropertyParserFunctionRenderer
+ * @covers Wikibase\DataAccess\PropertyParserFunction\Renderer
  *
  * @group Wikibase
  * @group WikibaseClient
+ * @group WikibaseDataAccess
  * @group PropertyParserFunctionTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
+class RendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getDefaultInstance() {
 		$targetLanguage = Language::factory( 'en' );
@@ -35,7 +38,7 @@ class PropertyParserFunctionRendererTest extends \PHPUnit_Framework_TestCase {
 			->method( 'formatSnak' )
 			->will( $this->returnValue( '(a kitten)' ) );
 
-		return new PropertyParserFunctionRenderer(
+		return new Renderer(
 			$targetLanguage,
 			$mockRepo,
 			$mockResolver,
