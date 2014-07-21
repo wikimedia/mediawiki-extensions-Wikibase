@@ -16,7 +16,7 @@ interface Renderer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabelOrId property label or ID (pXXX)
+	 * @param string $propertyLabelOrId
 	 *
 	 * @return string
 	 */

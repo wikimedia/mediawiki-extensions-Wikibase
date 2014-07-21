@@ -7,6 +7,7 @@ use Language;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
@@ -33,6 +34,8 @@ class LanguageAwareRenderer implements Renderer {
 	 */
 	private $language;
 
+	private $propertyIdResolver;
+
 	/**
 	 * @var SnaksFinder
 	 */
@@ -56,11 +59,13 @@ class LanguageAwareRenderer implements Renderer {
 	 */
 	public function __construct(
 		Language $language,
+		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		SnakFormatter $snakFormatter,
 		UsageAccumulator $usageAcc
 	) {
 		$this->language = $language;
+		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->snakFormatter = $snakFormatter;
 		$this->usageAccumulator = $usageAcc;
@@ -68,17 +73,22 @@ class LanguageAwareRenderer implements Renderer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 *
 	 * @return string
 	 */
-	public function render( EntityId $entityId, $propertyLabel ) {
+	public function render( EntityId $entityId, $propertyLabelOrId ) {
 		try {
-			$status = $this->getStatus( $entityId, $propertyLabel );
+			$propertyId = $this->propertyIdResolver->resolvePropertyId(
+				$propertyLabelOrId,
+				$this->language->getCode()
+			);
+
+			$status = $this->renderWithStatus( $entityId, $propertyId );
 		} catch ( PropertyLabelNotResolvedException $ex ) {
-			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
+			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		} catch ( InvalidArgumentException $ex ) {
-			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
+			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		}
 
 		if ( !$status->isGood() ) {
@@ -86,8 +96,7 @@ class LanguageAwareRenderer implements Renderer {
 			return '<p class="error wikibase-error">' . $error . '</p>';
 		}
 
-		$text = $status->getValue();
-		return $text;
+		return $status->getValue();
 	}
 
 	/**
@@ -142,16 +151,16 @@ class LanguageAwareRenderer implements Renderer {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel
+	 * @param PropertyId $propertyId
 	 *
 	 * @return Status a status object wrapping a wikitext string
 	 */
-	private function getStatus( EntityId $entityId, $propertyLabel ) {
+	private function renderWithStatus( EntityId $entityId, PropertyId $propertyId ) {
 		wfProfileIn( __METHOD__ );
 
 		$snaks = $this->snaksFinder->findSnaks(
 			$entityId,
-			$propertyLabel,
+			$propertyId,
 			$this->language->getCode()
 		);
 
@@ -161,7 +170,7 @@ class LanguageAwareRenderer implements Renderer {
 
 		$this->trackUsage( $snaks );
 
-		$text = $this->formatSnaks( $snaks, $propertyLabel );
+		$text = $this->formatSnaks( $snaks );
 		$status = Status::newGood( $text );
 
 		wfProfileOut( __METHOD__ );

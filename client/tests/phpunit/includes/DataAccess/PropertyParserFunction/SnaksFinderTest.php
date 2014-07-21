@@ -29,9 +29,8 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
 	private function getDefaultInstance() {
 		$repo = $this->newMockRepository();
-		$propertyLabelResolver = new MockPropertyLabelResolver( 'en', $repo );
 
-		return new SnaksFinder( $repo, $propertyLabelResolver );
+		return new SnaksFinder( $repo );
 	}
 
 	private function newMockRepository() {
@@ -96,20 +95,9 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return array(
-			array( $snaks, $itemId, 'a kitten!' ),
-			array( $snaks, $itemId, 'p1337' ),
-			array( $snaks, $itemId, 'P1337' ),
-			array( array(), $itemId, 'P1444' ),
-			array( array(), new ItemId( 'Q100' ), 'P1337' )
+			array( $snaks, $itemId, new PropertyId( 'P1337' ) ),
+			array( array(), $itemId, new PropertyId( 'P90001' ) )
 		);
-	}
-
-	public function testFindSnaksWithUnknownPropertyLabel_throwsException() {
-		$snaksFinder = $this->getDefaultInstance();
-
-		$this->setExpectedException( 'Wikibase\Lib\PropertyLabelNotResolvedException' );
-
-		$snaksFinder->findSnaks( new ItemId( 'Q42' ), 'hedgehog', 'en' );
 	}
 
 }

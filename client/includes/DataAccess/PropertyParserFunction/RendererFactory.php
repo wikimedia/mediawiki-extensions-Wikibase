@@ -20,6 +20,11 @@ use Wikibase\Client\Usage\UsageAccumulator;
 class RendererFactory {
 
 	/**
+	 * @var PropertyIdResolver
+	 */
+	private $propertyIdResolver;
+
+	/**
 	 * @var SnaksFinder
 	 */
 	private $snaksFinder;
@@ -35,15 +40,18 @@ class RendererFactory {
 	private $snakFormatterFactory;
 
 	/**
+	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 */
 	public function __construct(
+		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory
 	) {
+		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
@@ -75,6 +83,7 @@ class RendererFactory {
 	public function newLanguageAwareRenderer( Language $language, UsageAccumulator $usageAccumulator ) {
 		return new LanguageAwareRenderer(
 			$language,
+			$this->propertyIdResolver,
 			$this->snaksFinder,
 			$this->newSnakFormatterForLanguage( $language ),
 			$usageAccumulator
