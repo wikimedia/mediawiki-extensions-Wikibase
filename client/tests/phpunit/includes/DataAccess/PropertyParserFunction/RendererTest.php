@@ -6,10 +6,12 @@ use DataValues\StringValue;
 use Language;
 use Wikibase\Claim;
 use Wikibase\DataAccess\PropertyParserFunction\Renderer;
+use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
+use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Test\MockPropertyLabelResolver;
@@ -30,32 +32,29 @@ use Wikibase\Test\MockRepository;
  */
 class RendererTest extends \PHPUnit_Framework_TestCase {
 
-	private function getRenderer() {
-		$targetLanguage = Language::factory( 'en' );
+	/**
+	 * @param string $languageCode
+	 */
+	private function getRenderer( SnaksFinder $snaksFinder, $languageCode ) {
+		$targetLanguage = Language::factory( $languageCode );
 
 		return new Renderer(
 			$targetLanguage,
-			$this->getSnaksFinder(),
+			$snaksFinder,
 			$this->getSnakFormatter()
 		);
 	}
 
-	public function testRenderForEntityId() {
-		$renderer = $this->getRenderer();
+	public function testRender() {
+		$renderer = $this->getRenderer( $this->getSnaksFinder(), 'en' );
 
-		$status = $renderer->renderForEntityId(
+		$result = $renderer->render(
 			new ItemId( 'Q42' ),
-			Language::factory( 'en' ),
 			'p1337'
 		);
 
-		$this->assertTrue( $status->isOK() );
-
-		$text = $status->getValue();
-		$this->assertInternalType( 'string', $text );
-
 		$expected = '(a kitten), (a kitten)';
-		$this->assertEquals( $expected, $text );
+		$this->assertEquals( $expected, $result );
 	}
 
 	private function getSnaksFinder() {
@@ -74,6 +73,38 @@ class RendererTest extends \PHPUnit_Framework_TestCase {
 		$snaksFinder->expects( $this->any() )
 			->method( 'findSnaks' )
 			->will( $this->returnValue( $snaks ) );
+
+		return $snaksFinder;
+	}
+
+	public function testRenderForPropertyNotFound() {
+		$renderer = $this->getRenderer( $this->getSnaksFinderForPropertyNotFound(), 'qqx' );
+		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
+
+		$this->assertRegExp(
+			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
+			$result
+		);
+
+		$this->assertRegExp(
+			'/wikibase-property-render-error.*invalidLabel.*qqx/',
+			$result
+		);
+	}
+
+	private function getSnaksFinderForPropertyNotFound() {
+		$snaksFinder = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\SnaksFinder'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$snaksFinder->expects( $this->any() )
+			->method( 'findSnaks' )
+			->will( $this->returnCallback( function() {
+				throw new PropertyLabelNotResolvedException( 'invalidLabel', 'qqx' );
+			} )
+		);
 
 		return $snaksFinder;
 	}

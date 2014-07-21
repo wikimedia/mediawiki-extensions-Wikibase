@@ -118,35 +118,7 @@ class Runner {
 	 */
 	public function renderInLanguage( EntityId $entityId, $propertyLabel, Language $language ) {
 		$renderer = $this->rendererFactory->newFromLanguage( $language );
-
-		try {
-			$status = $renderer->renderForEntityId( $entityId, $language, $propertyLabel );
-		} catch ( PropertyLabelNotResolvedException $ex ) {
-			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
-		} catch ( InvalidArgumentException $ex ) {
-			$status = $this->getStatusForException( $propertyLabel, $ex->getMessage() );
-		}
-
-		if ( !$status->isGood() ) {
-			$error = $status->getMessage()->inLanguage( $language )->text();
-			return '<p class="error wikibase-error">' . $error . '</p>';
-		}
-
-		return $status->getValue();
-	}
-
-	/**
-	 * @param string $propertyLabel
-	 * @param string $message
-	 *
-	 * @return Status
-	 */
-	private function getStatusForException( $propertyLabel, $message ) {
-		return Status::newFatal(
-			'wikibase-property-render-error',
-			$propertyLabel,
-			$message
-		);
+		return $renderer->render( $entityId, $propertyLabel );
 	}
 
 	/**

@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Test\MockPropertyLabelResolver;
 use Wikibase\Test\MockRepository;
 
@@ -131,49 +130,17 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getRenderer() {
-		$entityRenderer = $this->getMockBuilder(
+		$renderer = $this->getMockBuilder(
 				'Wikibase\DataAccess\PropertyParserFunction\Renderer'
 			)
 			->disableOriginalConstructor()
 			->getMock();
 
-		$entityRenderer->expects( $this->any() )
-			->method( 'renderForEntityId' )
-			->will( $this->returnValue( Status::newGood( 'meow!' ) ) );
+		$renderer->expects( $this->any() )
+			->method( 'render' )
+			->will( $this->returnValue( 'meow!' ) );
 
-		return $entityRenderer;
-	}
-
-	public function testRenderForPropertyNotFound() {
-		$runner = $this->getRunner(
-			$this->getParser( 'qqx' ),
-			$this->getRendererForPropertyNotFound()
-		);
-
-		$language = Language::factory( 'qqx' );
-		$result = $runner->renderInLanguage( new ItemId( 'Q4' ), 'invalidLabel', $language );
-
-		$this->assertRegExp(
-			'/<(?:strong|span|p|div)\s(?:[^\s>]*\s+)*?class="(?:[^"\s>]*\s+)*?error(?:\s[^">]*)?"/',
-			$result
-		);
-
-		$this->assertRegExp(
-			'/wikibase-property-render-error.*invalidLabel.*qqx/',
-			$result
-		);
-	}
-
-	private function getRendererForPropertyNotFound() {
-		$entityRenderer = $this->getRenderer();
-
-		$entityRenderer->expects( $this->any() )
-			->method( 'renderForEntityId' )
-			->will( $this->returnCallback( function() {
-				throw new PropertyLabelNotResolvedException( 'invalidLabel', 'qqx' );
-			} ) );
-
-		return $entityRenderer;
+		return $renderer;
 	}
 
 	private function getSiteLinkLookup() {
