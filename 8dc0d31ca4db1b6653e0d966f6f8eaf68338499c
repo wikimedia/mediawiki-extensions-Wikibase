@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_d5f139ff",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/SnaksFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T14:57:20Z",
+      "side": 1,
+      "message": "I wonder why these names are here if the class is new and not just renamed.",
+      "revId": "8dc0d31ca4db1b6653e0d966f6f8eaf68338499c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1590e196",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/SnaksFinderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T14:57:20Z",
+      "side": 1,
+      "message": "I wonder why this name is here if the class is new and not just renamed.",
+      "revId": "8dc0d31ca4db1b6653e0d966f6f8eaf68338499c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
