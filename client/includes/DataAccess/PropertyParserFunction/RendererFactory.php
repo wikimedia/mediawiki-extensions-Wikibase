@@ -54,11 +54,20 @@ class RendererFactory {
 	 * @return Renderer
 	 */
 	public function newFromLanguage( Language $language ) {
-		return new Renderer(
+		return new LanguageRenderer(
 			$language,
 			$this->snaksFinder,
 			$this->newSnakFormatterForLanguage( $language )
 		);
+	}
+
+	/**
+	 * @param string[] $variants
+	 *
+	 * @return VariantsRenderer
+	 */
+	public function newVariantsRenderer( array $variants ) {
+		return new VariantsRenderer( $this, $variants );
 	}
 
 	/**
