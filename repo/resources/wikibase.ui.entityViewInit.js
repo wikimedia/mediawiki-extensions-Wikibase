@@ -131,22 +131,6 @@
 			} );
 		} );
 
-		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
-			$( wb ).triggerHandler( 'blockEntityPageActions' );
-		} else if ( !mw.config.get( 'wbUserCanEdit' ) ) {
-			$( wb ).triggerHandler( 'restrictEntityPageActions' );
-		}
-
-		if( !mw.config.get( 'wbIsEditView' ) ) {
-			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars directly like this is
-			// not really worse than hacking the Toolbar prototype to achieve this:
-			$( '.wikibase-toolbar' ).hide();
-			$( 'body' ).addClass( 'wb-editing-disabled' );
-			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
-			// firebug to show hidden nodes again to click on them:
-			$( wb ).triggerHandler( 'restrictEntityPageActions' );
-		}
-
 		$( wb ).on( 'startItemPageEditMode', function( event, origin, options ) {
 			// add copyright warning to 'save' button if there is one:
 			if( mw.config.exists( 'wbCopyright' ) ) {
@@ -346,6 +330,22 @@
 		} );
 
 		wb.ui.initTermBox( entity, repoApi );
+
+		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
+			$( wb ).triggerHandler( 'blockEntityPageActions' );
+		} else if ( !mw.config.get( 'wbUserCanEdit' ) ) {
+			$( wb ).triggerHandler( 'restrictEntityPageActions' );
+		}
+
+		if( !mw.config.get( 'wbIsEditView' ) ) {
+			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars directly like this is
+			// not really worse than hacking the Toolbar prototype to achieve this:
+			$( '.wikibase-toolbar' ).hide();
+			$( 'body' ).addClass( 'wb-editing-disabled' );
+			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
+			// firebug to show hidden nodes again to click on them:
+			$( wb ).triggerHandler( 'restrictEntityPageActions' );
+		}
 	}
 
 } )(
