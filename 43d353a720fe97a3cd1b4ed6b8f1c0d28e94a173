@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_22a5e19a",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-21T13:20:33Z",
+      "side": 1,
+      "message": "ItemId|null",
+      "revId": "43d353a720fe97a3cd1b4ed6b8f1c0d28e94a173",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
