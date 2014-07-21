@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_583900ca",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T16:29:07Z",
+      "side": 1,
+      "message": "This would display stuff like \"Date of birth: 1. Julis 2014\" (wrong) instead of \"Date of birth: 1. Juli 2014\" (correct) in German.",
+      "revId": "3e44c79f269cac1a96bc50e93c5a6775c039d673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7559658f",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 3
