@@ -102,8 +102,8 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expected
 	 */
 	public function testUnlocalize( $date, $languageCode, $expected ) {
-		$unlocalizer = new MonthNameUnlocalizer();
-		$actual = $unlocalizer->unlocalize( $date, $languageCode );
+		$unlocalizer = new MonthNameUnlocalizer( $languageCode );
+		$actual = $unlocalizer->unlocalize( $date );
 
 		$this->assertEquals( $expected, $actual );
 	}
@@ -131,10 +131,9 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $expected
 	 */
 	public function testUnlocalize_withLanguageChains( $date, array $languageCodes, $expected ) {
-		$unlocalizer = new MonthNameUnlocalizer();
-
 		foreach ( $languageCodes as $languageCode ) {
-			$date = $unlocalizer->unlocalize( $date, $languageCode );
+			$unlocalizer = new MonthNameUnlocalizer( $languageCode );
+			$date = $unlocalizer->unlocalize( $date );
 		}
 
 		$this->assertEquals( $expected, $date );
