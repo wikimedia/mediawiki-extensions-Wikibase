@@ -26,107 +26,58 @@ use Wikibase\Test\MockRepository;
  * @group PropertyParserFunctionTest
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Marius Hoch < hoo@online.de >
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param Parser $parser
-	 * @param Renderer $renderer
-	 *
 	 * @return Runner
 	 */
-	private function getRunner( Parser $parser, Renderer $renderer ) {
+	private function getRunner() {
 		return new Runner(
-			$this->getRendererFactory( $renderer ),
+			$this->getRendererFactory(),
 			$this->getSiteLinkLookup(),
 			'enwiki'
 		);
 	}
 
 	/**
-	 * @dataProvider isParserUsingVariantsProvider
+	 * @dataProvider runPropertyParserFunctionProvider
 	 */
-	public function testIsParserUsingVariants(
-		$outputType,
+	public function testRunPropertyParserFunction(
+		$expectedRendered,
+		$languageCode,
 		$interfaceMessage,
 		$disableContentConversion,
 		$disableTitleConversion,
-		$expected
+		$outputType
 	) {
-		$parserOptions = new ParserOptions();
-		$parserOptions->setInterfaceMessage( $interfaceMessage );
-		$parserOptions->disableContentConversion( $disableContentConversion );
-		$parserOptions->disableTitleConversion( $disableTitleConversion );
+		$parser = $this->getParser( $languageCode, $interfaceMessage, $disableContentConversion,
+			$disableTitleConversion, $outputType );
 
-		$parser = $this->getParser( 'de' );
-		$parser->startExternalParse( null, $parserOptions, $outputType );
+		$runner = $this->getRunner();
+		$result = $runner->runPropertyParserFunction( $parser, 'gato' );
 
-		$runner = $this->getRunner( $parser, $this->getRenderer() );
+		$expected = array(
+			$expectedRendered,
+			'noparse' => false,
+			'nowiki' => false
+		);
 
-		$this->assertEquals( $expected, $runner->isParserUsingVariants( $parser ) );
+		$this->assertEquals( $expected, $result );
 	}
 
-	public function isParserUsingVariantsProvider() {
+	public function runPropertyParserFunctionProvider() {
 		return array(
-			array( Parser::OT_HTML, false, false, false, true ),
-			array( Parser::OT_WIKI, false, false, false, false ),
-			array( Parser::OT_PREPROCESS, false, false, false, false ),
-			array( Parser::OT_PLAIN, false, false, false, false ),
-			array( Parser::OT_HTML, true, false, false, false ),
-			array( Parser::OT_HTML, false, true, false, false ),
-			array( Parser::OT_HTML, false, false, true, true ),
+			array( 'meow!', 'en', false, false, false, Parser::OT_HTML ),
+			array( 'meow!', 'ku', false, false, false, Parser::OT_PLAIN ),
+			array( 'meow!', 'zh', false, false, false, Parser::OT_WIKI ),
+			array( 'meow!', 'zh', false, true, false, Parser::OT_HTML ),
+			array( 'meow!', 'zh', true, false, false, Parser::OT_HTML ),
+			array( 'meow!', 'zh', false, false, false, Parser::OT_PREPROCESS ),
+			array( 'm30w!', 'zh', false, false, true, Parser::OT_HTML ),
+			array( 'm30w!', 'ku', false, false, false, Parser::OT_HTML )
 		);
-	}
-
-	/**
-	 * @dataProvider processRenderedArrayProvider
-	 */
-	public function testProcessRenderedArray( $outputType, array $textArray, $expected ) {
-		$parser = new Parser();
-		$parserOptions = new ParserOptions();
-		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$runner = $this->getRunner( $parser, $this->getRenderer() );
-		$this->assertEquals( $expected, $runner->processRenderedArray( $textArray ) );
-	}
-
-	public function processRenderedArrayProvider() {
-		return array(
-			array( Parser::OT_HTML, array(
-				'zh-cn' => 'fo&#60;ob&#62;ar',
-				'zh-tw' => 'FO&#60;OB&#62;AR',
-			), '-{zh-cn:fo&#60;ob&#62;ar;zh-tw:FO&#60;OB&#62;AR;}-' ),
-			// Don't create "-{}-" for empty input,
-			// to keep the ability to check a missing property with {{#if: }}.
-			array( Parser::OT_HTML, array(), '' ),
-		);
-	}
-
-	public function testRenderInLanguage() {
-		$runner = $this->getRunner(
-			$this->getParser( 'es' ),
-			$this->getRenderer()
-		);
-
-		$language = Language::factory( 'he' );
-		$result = $runner->renderInLanguage( new ItemId( 'Q3' ), 'gato', $language );
-
-		$this->assertEquals( 'meow!', $result );
-	}
-
-	private function getRenderer() {
-		$renderer = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\Renderer'
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$renderer->expects( $this->any() )
-			->method( 'render' )
-			->will( $this->returnValue( 'meow!' ) );
-
-		return $renderer;
 	}
 
 	private function getSiteLinkLookup() {
@@ -140,7 +91,10 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		return $siteLinkLookup;
 	}
 
-	private function getRendererFactory( Renderer $renderer ) {
+	private function getRendererFactory() {
+		$languageRenderer = $this->getLanguageRenderer();
+		$variantsRenderer = $this->getVariantsRenderer();
+
 		$rendererFactory = $this->getMockBuilder(
 				'Wikibase\DataAccess\PropertyParserFunction\RendererFactory'
 			)
@@ -149,22 +103,60 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 		$rendererFactory->expects( $this->any() )
 			->method( 'newFromLanguage' )
-			->will( $this->returnValue( $renderer ) );
+			->will( $this->returnValue( $languageRenderer ) );
+
+		$rendererFactory->expects( $this->any() )
+			->method( 'newVariantsRenderer' )
+			->will( $this->returnValue( $variantsRenderer ) );
 
 		return $rendererFactory;
 	}
 
-	private function getParser( $languageCode ) {
-		$parserConfig = array( 'class' => 'Parser' );
-		$parser = new Parser( $parserConfig );
+	private function getLanguageRenderer() {
+		$languageRenderer = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\LanguageRenderer'
+			)
+			->disableOriginalConstructor()
+			->getMock();
 
+		$languageRenderer->expects( $this->any() )
+			->method( 'render' )
+			->will( $this->returnValue( 'meow!' ) );
+
+		return $languageRenderer;
+	}
+
+	private function getVariantsRenderer() {
+		$variantsRenderer = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\VariantsRenderer'
+			)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$variantsRenderer->expects( $this->any() )
+			->method( 'render' )
+			->will( $this->returnValue( 'm30w!' ) );
+
+		return $variantsRenderer;
+	}
+
+	private function getParser( $languageCode, $interfaceMessage, $disableContentConversion,
+		$disableTitleConversion, $outputType
+	) {
+		$parserConfig = array( 'class' => 'Parser' );
+
+		$parser = new Parser( $parserConfig );
 		$parser->setTitle( Title::newFromText( 'Cat' ) );
 
 		$language = Language::factory( $languageCode );
+
 		$parserOptions = new ParserOptions( User::newFromId( 0 ), $languageCode );
 		$parserOptions->setTargetLanguage( $language );
+		$parserOptions->setInterfaceMessage( $interfaceMessage );
+		$parserOptions->disableContentConversion( $disableContentConversion );
+		$parserOptions->disableTitleConversion( $disableTitleConversion );
 
-		$parser->startExternalParse( null, $parserOptions, Parser::OT_WIKI );
+		$parser->startExternalParse( null, $parserOptions, $outputType );
 
 		return $parser;
 	}
