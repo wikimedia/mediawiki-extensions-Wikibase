@@ -16,6 +16,24 @@
       "revId": "bc4911d05c3f9fec7ea4f6db15220e20aeda3738",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c4d86581",
+        "filename": "repo/includes/Notifications/ChangeNotifier.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T21:22:26Z",
+      "side": 1,
+      "message": "Yea, finally somebody agreeing! Exactly that is the main reason why I\u0027m touching this code. I just split my change to make it a bit easier to review. See the following patch.",
+      "parentUuid": "8e28a382_33f655c3",
+      "revId": "bc4911d05c3f9fec7ea4f6db15220e20aeda3738",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
