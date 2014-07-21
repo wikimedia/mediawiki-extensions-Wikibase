@@ -66,8 +66,7 @@ class DateTimeParser extends StringValueParser {
 				$this->getValueWithFixedSeparators(
 					$this->monthUnlocalizer->unlocalize(
 						trim( $value ),
-						$options->getOption( ValueParser::OPT_LANG ),
-						new ParserOptions()
+						$options->getOption( ValueParser::OPT_LANG )
 					)
 				)
 			);
