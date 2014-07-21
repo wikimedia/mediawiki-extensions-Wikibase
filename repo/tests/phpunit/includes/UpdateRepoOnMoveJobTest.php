@@ -42,7 +42,9 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	 */
 	public function testJob() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$wikibaseRepo->getSiteStore()->saveSites( TestSites::getSites() );
+		if ( !$wikibaseRepo->getSiteStore()->getSite( 'enwiki' ) ) {
+			$wikibaseRepo->getSiteStore()->saveSites( TestSites::getSites() );
+		}
 
 		$user = User::newFromName( 'UpdateRepoOnMoveJobTest' );
 		$user->addToDatabase();
