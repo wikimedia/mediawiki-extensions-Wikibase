@@ -3,13 +3,21 @@
 namespace Wikibase\Test;
 
 use Title;
+use User;
+use TestSites;
 use Wikibase\UpdateRepoOnMoveJob;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\EntityPerPageTable;
 
 /**
  * @covers Wikibase\UpdateRepoOnMoveJob
  *
  * @group Wikibase
  * @group WikibaseRepo
+ * @group WikibaseIntegration
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
@@ -29,4 +37,44 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * Simple generic integration test testing the whole class.
+	 */
+	public function testJob() {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$wikibaseRepo->getSiteStore()->saveSites( TestSites::getSites() );
+
+		$user = User::newFromName( 'UpdateRepoOnMoveJobTest' );
+		$user->addToDatabase();
+
+		$item = Item::newEmpty();
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name' );
+
+		$store = new WikiPageEntityStore(
+			$wikibaseRepo->getEntityContentFactory(),
+			$wikibaseRepo->getStore()->newIdGenerator(),
+			new EntityPerPageTable()
+		);
+
+		$store->saveEntity( $item, 'UpdateRepoOnMoveJobTest', $user, EDIT_NEW );
+
+		$params = array(
+			'siteId' => 'enwiki',
+			'entityId' => $item->getId()->getSerialization(),
+			'oldTitle' => 'Old page name',
+			'newTitle' => 'New page name',
+			'user' => $user->getName()
+		);
+
+		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
+
+		$job->run();
+
+		$item = $wikibaseRepo->getEntityLookup()->getEntity( $item->getId() );
+
+		$this->assertSame(
+			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getPageName(),
+			'New page name'
+		);
+	}
 }
