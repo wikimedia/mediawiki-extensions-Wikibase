@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_753e05b7",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T14:50:05Z",
+      "side": 1,
+      "message": "This signature is a bit odd. \"For exception\" suggests there is an exception but there is none. Would make a bit more sense this way:\n\ngetStatusForException( $propertyLabel, Exception $exception )\n\nBut it\u0027s private anyway, so this is just a suggestion.",
+      "revId": "82e2334a59901c66db7cbed0dd159546764d6dc4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
