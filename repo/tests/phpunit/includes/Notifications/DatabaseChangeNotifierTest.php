@@ -14,11 +14,10 @@ use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Notifications\DatabaseChangeNotifier;
-use Wikibase\Repo\Notifications\DummyChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Notifications\ChangeNotifier
+ * @covers Wikibase\Repo\Notifications\DatabaseChangeNotifier
  *
  * @group Database
  *
@@ -29,12 +28,11 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ChangeNotifierTest extends \MediaWikiTestCase {
+class DatabaseChangeNotifierTest extends \MediaWikiTestCase {
 
 	private function getChangeNotifier() {
 		return new DatabaseChangeNotifier(
-			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory(),
-			new DummyChangeTransmitter()
+			WikibaseRepo::getDefaultInstance()->getEntityChangeFactory()
 		);
 	}
 
