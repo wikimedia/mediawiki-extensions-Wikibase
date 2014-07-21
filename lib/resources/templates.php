@@ -334,7 +334,7 @@ HTML;
 <<<HTML
 <tr>
 	<td colspan="2" class="wb-sitelinks-sitename"></td>
-	<td class="wb-sitelinks-link"></td>
+	<td class="wb-sitelinks-link"><span class="wb-sitelinks-badges"></span><span class="wb-sitelinks-page"></span></td>
 	<td></td><!-- cell for toolbar -->
 </tr>
 HTML;

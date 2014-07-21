@@ -968,6 +968,10 @@ table.wb-sitelinks .wb-badge {
 	padding: 0 8px;
 }
 
+table.wb-sitelinks .wb-badge-empty {
+	/* @TODO */
+}
+
 table.wb-sitelinks {
 	clear: both;
 }
