@@ -7,6 +7,7 @@ use RecentChange;
 use Revision;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Represents a change for an entity; to be extended by various change subtypes
@@ -196,7 +197,7 @@ class EntityChange extends DiffChange {
 	 * @see ChangeRow::postConstruct
 	 */
 	protected function postConstruct() {
-		// FIXME: This misses an explanation why it's empty.
+		// This implementation should not set the type field.
 	}
 
 	/**
@@ -320,13 +321,31 @@ class EntityChange extends DiffChange {
 		$data = parent::arrayalizeObjects( $data );
 
 		if ( $data instanceof Claim ) {
-			$array = $data->toArray();
+			$array = $this->serializeClaim( $data );
 			$array['_claimclass_'] = get_class( $data );
 
 			return $array;
 		}
 
 		return $data;
+	}
+
+	private function serializeClaim( Claim $claim ) {
+		return $this->getClaimSerializer()->serialize( $claim );
+	}
+
+	private function getClaimSerializer() {
+		// FIXME: the change row system needs to be reworked to either allow for sane injection
+		// or to avoid this kind of configuration dependent tasks.
+		if ( defined( 'WB_VERSION' ) ) {
+			return WikibaseRepo::getDefaultInstance()->getInternalClaimSerializer();
+		}
+		else if ( defined( 'WBC_VERSION' ) ) {
+			throw new \RuntimeException( 'Cannot serialize claims on the client' );
+		}
+		else {
+			throw new \RuntimeException( 'Need either client or repo loaded' );
+		}
 	}
 
 	/**

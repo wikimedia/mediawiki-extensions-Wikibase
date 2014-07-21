@@ -808,6 +808,20 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return Serializer
+	 */
+	public function getInternalClaimSerializer() {
+		$claimSerializerClass = $this->getSettings()->getSetting( 'internalClaimSerializerClass' );
+
+		if ( $claimSerializerClass !== null ) {
+			$serializer = new $claimSerializerClass;
+			return $serializer;
+		} else {
+			return $this->getInternalSerializerFactory()->newClaimSerializer();
+		}
+	}
+
+	/**
 	 * @return DeserializerFactory
 	 */
 	protected function getInternalDeserializerFactory() {

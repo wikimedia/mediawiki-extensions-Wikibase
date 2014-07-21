@@ -2,9 +2,10 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 
 /**
@@ -203,6 +204,19 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$data = $serializer->serialize( $item );
 
 		$this->assertEquals( $item->toArray(), $data );
+	}
+
+	public function testGetInternalClaimSerializer_legacy() {
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
+		$claim->setGuid( 'kittens' );
+
+		$repo = $this->getDefaultInstance();
+		$repo->getSettings()->setSetting( 'internalClaimSerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalClaimSerializer' );
+
+		$serializer = $repo->getInternalClaimSerializer();
+		$data = $serializer->serialize( $claim );
+
+		$this->assertEquals( $claim->toArray(), $data );
 	}
 
 	public function testNewItemHandler() {
