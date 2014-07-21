@@ -30,54 +30,23 @@ use Wikibase\Test\MockRepository;
  */
 class RunnerTest extends \PHPUnit_Framework_TestCase {
 
-	/**
-	 * @return Runner
-	 */
-	private function getRunner() {
-		return new Runner(
+	public function testRunPropertyParserFunction() {
+		$runner = new Runner(
 			$this->getRendererFactory(),
 			$this->getSiteLinkLookup(),
 			'enwiki'
 		);
-	}
 
-	/**
-	 * @dataProvider runPropertyParserFunctionProvider
-	 */
-	public function testRunPropertyParserFunction(
-		$expectedRendered,
-		$languageCode,
-		$interfaceMessage,
-		$disableContentConversion,
-		$disableTitleConversion,
-		$outputType
-	) {
-		$parser = $this->getParser( $languageCode, $interfaceMessage, $disableContentConversion,
-			$disableTitleConversion, $outputType );
-
-		$runner = $this->getRunner();
-		$result = $runner->runPropertyParserFunction( $parser, 'gato' );
+		$parser = $this->getParser();
+		$result = $runner->runPropertyParserFunction( $parser, 'Cat' );
 
 		$expected = array(
-			$expectedRendered,
+			'meow!',
 			'noparse' => false,
 			'nowiki' => false
 		);
 
 		$this->assertEquals( $expected, $result );
-	}
-
-	public function runPropertyParserFunctionProvider() {
-		return array(
-			array( 'meow!', 'en', false, false, false, Parser::OT_HTML ),
-			array( 'meow!', 'ku', false, false, false, Parser::OT_PLAIN ),
-			array( 'meow!', 'zh', false, false, false, Parser::OT_WIKI ),
-			array( 'meow!', 'zh', false, true, false, Parser::OT_HTML ),
-			array( 'meow!', 'zh', true, false, false, Parser::OT_HTML ),
-			array( 'meow!', 'zh', false, false, false, Parser::OT_PREPROCESS ),
-			array( 'm30w!', 'zh', false, false, true, Parser::OT_HTML ),
-			array( 'm30w!', 'ku', false, false, false, Parser::OT_HTML )
-		);
 	}
 
 	private function getSiteLinkLookup() {
@@ -92,8 +61,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getRendererFactory() {
-		$languageRenderer = $this->getLanguageRenderer();
-		$variantsRenderer = $this->getVariantsRenderer();
+		$renderer = $this->getRenderer();
 
 		$rendererFactory = $this->getMockBuilder(
 				'Wikibase\DataAccess\PropertyParserFunction\RendererFactory'
@@ -102,61 +70,31 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$rendererFactory->expects( $this->any() )
-			->method( 'newFromLanguage' )
-			->will( $this->returnValue( $languageRenderer ) );
-
-		$rendererFactory->expects( $this->any() )
-			->method( 'newVariantsRenderer' )
-			->will( $this->returnValue( $variantsRenderer ) );
+			->method( 'newFromParser' )
+			->will( $this->returnValue( $renderer ) );
 
 		return $rendererFactory;
 	}
 
-	private function getLanguageRenderer() {
-		$languageRenderer = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\LanguageRenderer'
+	private function getRenderer() {
+		$renderer = $this->getMockBuilder(
+				'Wikibase\DataAccess\PropertyParserFunction\Renderer'
 			)
 			->disableOriginalConstructor()
 			->getMock();
 
-		$languageRenderer->expects( $this->any() )
+		$renderer->expects( $this->any() )
 			->method( 'render' )
 			->will( $this->returnValue( 'meow!' ) );
 
-		return $languageRenderer;
+		return $renderer;
 	}
 
-	private function getVariantsRenderer() {
-		$variantsRenderer = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\VariantsRenderer'
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$variantsRenderer->expects( $this->any() )
-			->method( 'render' )
-			->will( $this->returnValue( 'm30w!' ) );
-
-		return $variantsRenderer;
-	}
-
-	private function getParser( $languageCode, $interfaceMessage, $disableContentConversion,
-		$disableTitleConversion, $outputType
-	) {
+	private function getParser() {
 		$parserConfig = array( 'class' => 'Parser' );
 
 		$parser = new Parser( $parserConfig );
 		$parser->setTitle( Title::newFromText( 'Cat' ) );
-
-		$language = Language::factory( $languageCode );
-
-		$parserOptions = new ParserOptions( User::newFromId( 0 ), $languageCode );
-		$parserOptions->setTargetLanguage( $language );
-		$parserOptions->setInterfaceMessage( $interfaceMessage );
-		$parserOptions->disableContentConversion( $disableContentConversion );
-		$parserOptions->disableTitleConversion( $disableTitleConversion );
-
-		$parser->startExternalParse( null, $parserOptions, $outputType );
 
 		return $parser;
 	}

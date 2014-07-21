@@ -2,23 +2,14 @@
 
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
-use InvalidArgumentException;
-use Language;
 use Parser;
-use Status;
-use ValueFormatters\FormatterOptions;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\PropertyLabelNotResolvedException;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\PropertyLabelResolver;
 
 /**
- * Handler of the {{#property}} parser function.
+ * Runner for the {{#property}} parser function.
  *
  * @since 0.4
  *
@@ -69,85 +60,22 @@ class Runner {
 	public function runPropertyParserFunction( Parser $parser, $propertyLabelOrId ) {
 		wfProfileIn( __METHOD__ );
 
-		// @todo use id provided as argument, if arbitrary access allowed
-		$itemId = $this->getItemIdForConnectedPage( $parser );
+		// @todo use id provided as argument, if arbitrary access allowed,
+		// which means property ids might also be allowed here.
+		$entityId = $this->getItemIdForConnectedPage( $parser );
 
 		// @todo handle when site link is not there, such as site link / entity has been deleted...
-		if ( $itemId === null ) {
+		if ( $entityId === null ) {
 			wfProfileOut( __METHOD__ );
 			return '';
 		}
 
-		$rendered = $this->renderForEntityId( $parser, $itemId, $propertyLabelOrId );
+		$renderer = $this->rendererFactory->newFromParser( $parser );
+		$rendered = $renderer->render( $entityId, $propertyLabelOrId );
 		$result = $this->buildResult( $rendered );
 
 		wfProfileOut( __METHOD__ );
 		return $result;
-	}
-
-	/**
-	 * @param Parser $parser
-	 * @param EntityId $entityId
-	 * @param string $propertyLabelOrId
-	 *
-	 * @return string
-	 */
-	private function renderForEntityId( Parser $parser, EntityId $entityId, $propertyLabelOrId ) {
-		if ( $this->useVariants( $parser ) ) {
-			return $this->renderInVariants( $parser, $entityId, $propertyLabelOrId );
-		} else {
-			$targetLanguage = $parser->getTargetLanguage();
-			return $this->renderInLanguage( $entityId, $propertyLabelOrId, $targetLanguage );
-		}
-	}
-
-	/**
-	 * Check whether variants are used in this parser run.
-	 *
-	 * @param Parser $parser
-	 *
-	 * @return boolean
-	 */
-	private function isParserUsingVariants( Parser $parser ) {
-		$parserOptions = $parser->getOptions();
-		return $parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
-			&& !$parserOptions->getDisableContentConversion();
-	}
-
-	/**
-	 * @param Parser $parser
-	 *
-	 * @return boolean
-	 */
-	private function useVariants( Parser $parser ) {
-		$converterLanguageHasVariants = $parser->getConverterLanguage()->hasVariants();
-		return $this->isParserUsingVariants( $parser ) && $converterLanguageHasVariants;
-	}
-
-	/**
-	 * @param Parser $parser
-	 * @param EntityId $entityId
-	 * @param string $propertyLabelOrId
-	 *
-	 * @return string
-	 */
-	private function renderInVariants( Parser $parser, EntityId $entityId, $propertyLabelOrId ) {
-		$variants = $parser->getConverterLanguage()->getVariants();
-		$variantsRenderer = $this->rendererFactory->newVariantsRenderer( $variants );
-
-		return $variantsRenderer->render( $entityId, $propertyLabelOrId );
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param string $propertyLabelOrId property label or ID (pXXX)
-	 * @param Language $language
-	 *
-	 * @return string
-	 */
-	private function renderInLanguage( EntityId $entityId, $propertyLabelOrId, Language $language ) {
-		$renderer = $this->rendererFactory->newFromLanguage( $language );
-		return $renderer->render( $entityId, $propertyLabelOrId );
 	}
 
 	/**

@@ -3,12 +3,11 @@
 namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Language;
+use Parser;
 use ValueFormatters\FormatterOptions;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\PropertyLabelResolver;
 
 /**
  * @since 0.5
@@ -49,6 +48,21 @@ class RendererFactory {
 	}
 
 	/**
+	 * @param Parser $parser
+	 *
+	 * @return Renderer
+	 */
+	public function newFromParser( Parser $parser ) {
+		if ( $this->useVariants( $parser ) ) {
+			$variants = $parser->getConverterLanguage()->getVariants();
+			return $this->newVariantsRenderer( $variants );
+		} else {
+			$targetLanguage = $parser->getTargetLanguage();
+			return $this->newFromLanguage( $targetLanguage );
+		}
+	}
+
+	/**
 	 * @param Language $language
 	 *
 	 * @return Renderer
@@ -66,8 +80,31 @@ class RendererFactory {
 	 *
 	 * @return VariantsRenderer
 	 */
-	public function newVariantsRenderer( array $variants ) {
+	private function newVariantsRenderer( array $variants ) {
 		return new VariantsRenderer( $this, $variants );
+	}
+
+	/**
+	 * Check whether variants are used in this parser run.
+	 *
+	 * @param Parser $parser
+	 *
+	 * @return boolean
+	 */
+	private function isParserUsingVariants( Parser $parser ) {
+		$parserOptions = $parser->getOptions();
+		return $parser->OutputType() === Parser::OT_HTML && !$parserOptions->getInterfaceMessage()
+			&& !$parserOptions->getDisableContentConversion();
+	}
+
+	/**
+	 * @param Parser $parser
+	 *
+	 * @return boolean
+	 */
+	private function useVariants( Parser $parser ) {
+		$converterLanguageHasVariants = $parser->getConverterLanguage()->hasVariants();
+		return $this->isParserUsingVariants( $parser ) && $converterLanguageHasVariants;
 	}
 
 	/**
