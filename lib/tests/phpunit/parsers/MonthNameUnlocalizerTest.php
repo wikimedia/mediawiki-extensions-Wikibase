@@ -20,28 +20,30 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideUnlocalize() {
 		$testCases = array(
-
-			//Should unlocalize dates
+			// Should unlocalize dates
 			array( '1 Juli 2013', 'de', '1 July 2013' ),
+			array( '1 Julis 2013', 'de', '1 July 2013' ),
 			array( '1 Januarie 1999', 'af', '1 January 1999' ),
 			array( '1 Jan 1999', 'af', '1 January 1999' ),
 			array( '16 Jenna 1999', 'bar', '16 January 1999' ),
 
-			//Shouldn#t do anything if we cant / don#t need to
+			// Shouldn't do anything if we can't or don't need to
 			array( '1 June 2013', 'en', '1 June 2013' ),
 			array( '1 Jan 2013', 'en', '1 Jan 2013' ),
+			array( '1 January 1999', 'en', '1 January 1999' ),
 			array( '16 FooBarBarxxx 1999', 'bar', '16 FooBarBarxxx 1999' ),
-
+			array( 'Juli Juli', 'de', 'Juli Juli' ),
 		);
 
-		//Loop through some other languages
-		$someLangs = array( 'war', 'ceb', 'uk', 'ru', 'de' );
+		// Loop through some other languages
+		$languageCodes = array( 'war', 'ceb', 'uk', 'ru', 'de' );
 		$en = Language::factory( 'en' );
 
-		foreach( $someLangs as $from ) {
+		foreach ( $languageCodes as $from ) {
 			$fromLang = Language::factory( $from );
 			for ( $i = 1; $i <= 12; $i++ ) {
 				$testCases[] = array( $fromLang->getMonthName( $i ), $from, $en->getMonthName( $i ) );
+				$testCases[] = array( $fromLang->getMonthNameGen( $i ), $from, $en->getMonthName( $i ) );
 				$testCases[] = array( $fromLang->getMonthAbbreviation( $i ), $from, $en->getMonthName( $i ) );
 			}
 		}
@@ -53,14 +55,14 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideUnlocalize
 	 *
 	 * @param $localized
-	 * @param $lang
+	 * @param $languageCode
 	 * @param $expected
 	 */
-	public function testUnlocalize( $localized, $lang, $expected ) {
+	public function testUnlocalize( $localized, $languageCode, $expected ) {
 		$monthUnlocalizer = new MonthNameUnlocalizer();
 		$options = new ParserOptions();
 
-		$actual = $monthUnlocalizer->unlocalize( $localized, $lang, $options );
+		$actual = $monthUnlocalizer->unlocalize( $localized, $languageCode, $options );
 
 		$this->assertEquals( $expected, $actual );
 	}

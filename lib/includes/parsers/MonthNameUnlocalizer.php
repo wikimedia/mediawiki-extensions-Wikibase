@@ -21,26 +21,27 @@ class MonthNameUnlocalizer {
 	 * @see Unlocalizer::unlocalize()
 	 *
 	 * @param string $string string to process
-	 * @param string $langCode
+	 * @param string $languageCode
 	 * @param ParserOptions $options
 	 *
 	 * @return string unlocalized string
 	 */
-	public function unlocalize( $string, $langCode, ParserOptions $options ) {
-		if( $langCode === 'en' ) {
+	public function unlocalize( $string, $languageCode, ParserOptions $options ) {
+		if ( $languageCode === 'en' ) {
 			return $string;
 		}
 
-		$lang = Language::factory( $langCode );
+		$language = Language::factory( $languageCode );
 		$en = Language::factory( 'en' );
 
-		$string = $this->unlocalizeMonthNames( $lang, $en, $string );
+		$string = $this->unlocalizeMonthNames( $language, $en, $string );
 
 		return $string;
 	}
 
 	/**
-	 * Unlocalizes month names in a string, checking both full month names and abbreviations
+	 * Unlocalizes month names in a string, checking full month names, genitives and abbreviations.
+	 *
 	 * @param Language $from
 	 * @param Language $to
 	 * @param string $string
@@ -48,18 +49,27 @@ class MonthNameUnlocalizer {
 	 * @return string
 	 */
 	private function unlocalizeMonthNames( Language $from, Language $to, $string ) {
-		$initialString = $string;
+		$replacements = array();
 
 		for ( $i = 1; $i <= 12; $i++ ) {
-			$string = str_replace( $from->getMonthName( $i ), $to->getMonthName( $i ), $string );
+			$replace = $to->getMonthName( $i );
+
+			$replacements[$from->getMonthName( $i )] = $replace;
+			$replacements[$from->getMonthNameGen( $i )] = $replace;
+			$replacements[$from->getMonthAbbreviation( $i )] = $replace;
 		}
 
-		if( $string !== $initialString ) {
-			return $string;
-		}
+		// Order search strings from longest to shortest
+		uksort( $replacements, function( $a, $b ) {
+			return strlen( $b ) - strlen( $a );
+		} );
 
-		for ( $i = 1; $i <= 12; $i++ ) {
-			$string = str_replace( $from->getMonthAbbreviation( $i ), $to->getMonthName( $i ), $string );
+		foreach ( $replacements as $search => $replace ) {
+			$unlocalized = str_replace( $search, $replace, $string, $count );
+
+			if ( $count === 1 ) {
+				return $unlocalized;
+			}
 		}
 
 		return $string;
