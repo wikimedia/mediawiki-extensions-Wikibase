@@ -29,7 +29,7 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 
 // Resource Loader module registration
 $GLOBALS['wgResourceModules'] = array_merge(
-	$GLOBALS['wgResourceModules'],
+	isset( $GLOBALS['wgResourceModules'] ) ? $GLOBALS['wgResourceModules'] : array(),
 	include( __DIR__ . '/lib/resources.php' ),
 	include( __DIR__ . '/src/resources.php' )
 );
