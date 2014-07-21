@@ -2,13 +2,16 @@
 
 namespace Wikibase\Test;
 
+use ContentHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
  * Base class for testing EntityRevisionLookup implementations
@@ -21,32 +24,38 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 abstract class EntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @note: not really needed for testing EntityLookup, mut makes it easier to
-	 * set up tests for EntityRevisionLookup implementation in a consistent way.
-	 *
 	 * @return EntityRevision[]
 	 */
 	protected function getTestRevisions() {
-		static $entities = null;
+		$entities = array();
 
-		if ( $entities === null ) {
-			$item = Item::newEmpty();
-			$item->setId( 42 );
+		$item = Item::newEmpty();
+		$item->setId( 42 );
 
-			$entities[11] = new EntityRevision( $item, 11, '20130101001100' );
+		$entities[11] = new EntityRevision( $item, 11, '20130101001100' );
 
-			$item = $item->copy();
-			$item->setLabel( 'en', "Foo" );
+		$item = $item->copy();
+		$item->setLabel( 'en', "Foo" );
 
-			$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
+		$entities[12] = new EntityRevision( $item, 12, '20130101001200' );
 
-			$prop = Property::newFromType( "string" );
-			$prop->setId( 753 );
+		$prop = Property::newFromType( "string" );
+		$prop->setId( 753 );
 
-			$entities[13] = new EntityRevision( $prop, 13, '20130101001300' );
-		}
+		$entities[13] = new EntityRevision( $prop, 13, '20130101001300' );
 
 		return $entities;
+	}
+
+	/**
+	 * @return EntityRedirect[]
+	 */
+	protected function getTestRedirects() {
+		$redirects = array();
+
+		$redirects[] = new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) );
+
+		return $redirects;
 	}
 
 	protected function resolveLogicalRevision( $revision ) {
@@ -58,17 +67,31 @@ abstract class EntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 	 */
 	protected function getEntityRevisionLookup() {
 		$revisions = $this->getTestRevisions();
-		$lookup = $this->newEntityRevisionLookup( $revisions );
+		$redirects = $this->getTestRedirects();
+
+		$lookup = $this->newEntityRevisionLookup( $revisions, $redirects );
 
 		return $lookup;
 	}
 
 	/**
 	 * @param EntityRevision[] $entityRevisions
+	 * @param EntityRedirect[] $entityRedirects
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	protected abstract function newEntityRevisionLookup( array $entityRevisions );
+	protected abstract function newEntityRevisionLookup( array $entityRevisions, array $entityRedirects );
+
+	protected function itemSupportsRedirect() {
+		if ( !defined( 'CONTENT_MODEL_WIKIBASE_ITEM' ) ) {
+			// We currently cannot determine whether redirects are supported if
+			// no repo code is available. Just skip the corresponding tests in that case.
+			return false;
+		}
+
+		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+		return $handler->supportsRedirects();
+	}
 
 	public static function provideGetEntityRevision() {
 		$cases = array(
@@ -121,6 +144,35 @@ abstract class EntityRevisionLookupTest extends \PHPUnit_Framework_TestCase {
 			$this->assertEquals( $id->__toString(), $entityRev->getEntity()->getId()->__toString() );
 		} else {
 			$this->assertNull( $entityRev, "ID " . $id->__toString() );
+		}
+	}
+
+	public function provideGetEntityRevision_redirect() {
+		$redirects = $this->getTestRedirects();
+		$cases = array();
+
+		foreach ( $redirects as $redirect ) {
+			$cases[] = array( $redirect->getEntityId(), $redirect->getTargetId() );
+		}
+
+		return $cases;
+	}
+
+	/**
+	 * @dataProvider provideGetEntityRevision_redirect
+	 */
+	public function testGetEntityRevision_redirect( EntityId $entityId, EntityId $expectedRedirect ) {
+		if ( !$this->itemSupportsRedirect() ) {
+			$this->markTestSkipped( 'redirects not supported' );
+		}
+
+		$lookup = $this->getEntityRevisionLookup();
+
+		try {
+			$lookup->getEntityRevision( $entityId );
+			$this->fail( 'Expected an UnresolvedRedirectException exception when looking up a redirect.' );
+		} catch ( UnresolvedRedirectException $ex ) {
+			$this->assertEquals( $expectedRedirect, $ex->getRedirectTargetId() );
 		}
 	}
 
