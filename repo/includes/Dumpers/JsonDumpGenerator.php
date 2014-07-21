@@ -220,9 +220,8 @@ class JsonDumpGenerator {
 		};
 
 		if ( !$this->useSnippets ) {
-			$this->writeToDump( "\n]" );
+			$this->writeToDump( "\n]\n" );
 		}
-		$this->writeToDump( "\n" );
 	}
 
 	/**
