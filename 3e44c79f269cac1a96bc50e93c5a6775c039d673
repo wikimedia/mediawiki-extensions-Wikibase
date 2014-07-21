@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_7559658f",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-21T15:43:54Z",
+      "side": 1,
+      "message": "This is better for languages that use a suffix to indicate the genitive. Shoudl work for European languages, at least. But maybe in some languages it\u0027s the other way around? Can you survey the translation files and see if there is any language where the genitive of a month name is actually a prefix in the nominative form of the month name?\n\nI would feel better though if this would replace only full words, that is, consider word boundaries. That would mean doing some regex magic, I suppose...",
+      "revId": "3e44c79f269cac1a96bc50e93c5a6775c039d673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_55542956",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-21T15:43:54Z",
+      "side": 1,
+      "message": "Please move this to a separate private function, for readability. \nThe loop above should go to a separate function too, actually.",
+      "revId": "3e44c79f269cac1a96bc50e93c5a6775c039d673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
