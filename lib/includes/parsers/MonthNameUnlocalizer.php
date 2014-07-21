@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Parsers;
 
 use Language;
-use ValueParsers\ParserOptions;
 
 /**
  * Class to unlocalize a month name in a date string using MediaWiki's Language object.
@@ -22,11 +21,10 @@ class MonthNameUnlocalizer {
 	 *
 	 * @param string $date Localized date string.
 	 * @param string $languageCode
-	 * @param ParserOptions $options
 	 *
 	 * @return string
 	 */
-	public function unlocalize( $date, $languageCode, ParserOptions $options ) {
+	public function unlocalize( $date, $languageCode ) {
 		if ( $languageCode === 'en' ) {
 			return $date;
 		}

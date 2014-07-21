@@ -100,9 +100,8 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testUnlocalize( $localized, $languageCode, $expected ) {
 		$monthUnlocalizer = new MonthNameUnlocalizer();
-		$options = new ParserOptions();
 
-		$actual = $monthUnlocalizer->unlocalize( $localized, $languageCode, $options );
+		$actual = $monthUnlocalizer->unlocalize( $localized, $languageCode );
 
 		$this->assertEquals( $expected, $actual );
 	}
