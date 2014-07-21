@@ -8,11 +8,11 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Entity\EntityDiff
+ * @covers Wikibase\DataModel\Entity\Diff\EntityDiff
  *
  * @group Wikibase
  * @group WikibaseDataModel

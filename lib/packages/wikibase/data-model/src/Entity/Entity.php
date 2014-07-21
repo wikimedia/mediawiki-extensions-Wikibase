@@ -6,6 +6,7 @@ use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\ClaimAggregate;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Term\AliasGroup;

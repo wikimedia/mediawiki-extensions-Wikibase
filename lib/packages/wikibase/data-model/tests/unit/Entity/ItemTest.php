@@ -12,7 +12,7 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemDiff;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdSet;
 use Wikibase\DataModel\Entity\PropertyId;
