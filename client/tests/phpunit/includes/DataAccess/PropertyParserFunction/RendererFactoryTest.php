@@ -35,7 +35,7 @@ class PropertyParserFunctionRendererFactoryTest extends \PHPUnit_Framework_TestC
 		$language = Language::factory( 'he' );
 		$renderer = $rendererFactory->newFromLanguage( $language );
 
-		$expectedClass = 'Wikibase\DataAccess\PropertyParserFunction\Renderer';
+		$expectedClass = 'Wikibase\DataAccess\PropertyParserFunction\LanguageRenderer';
 		$this->assertInstanceOf( $expectedClass, $renderer );
 	}
 
