@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a9177455",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/SnaksFinder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-21T21:02:43Z",
+      "side": 1,
+      "message": "missing @param",
+      "revId": "57e3bcb0ce1fff54d440f5d95c97d63c3e9a6762",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c92080aa",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/SnaksFinderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-21T21:02:43Z",
+      "side": 1,
+      "message": "This MockRepository thing is a quite scary fake. (Fakes are a type of test double.)\n\nThe new class you created, SnaksFinder, luckily uses decent interfaces for the dependencies it needs. You can much decrease the coupling or this test by using a much simpler test double for EntityLookup. All you need is a class implementing it that holds an array, for instance called InMemoryEntityLookup.",
+      "revId": "57e3bcb0ce1fff54d440f5d95c97d63c3e9a6762",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
