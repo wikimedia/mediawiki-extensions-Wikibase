@@ -4,10 +4,13 @@ namespace Wikibase\Lib\Changes;
 
 use InvalidArgumentException;
 use MWException;
+use Revision;
+use User;
 use Wikibase\ChangesTable;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityChange;
+use Wikibase\EntityContent;
 use Wikibase\EntityFactory;
 
 /**
@@ -131,6 +134,130 @@ class EntityChangeFactory {
 		$instance->setEntity( $theEntity );
 
 		return $instance;
+	}
+
+	/**
+	 * @see ChangeNotifier::notifyOnPageDeleted
+	 */
+	public function getOnPageDeletedChange( EntityContent $content, User $user, $timestamp ) {
+		wfProfileIn( __METHOD__ );
+
+		if ( $content->isRedirect() ) {
+			// TODO: notify the client about changes to redirects!
+			return null;
+		}
+
+		$change = $this->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
+
+		$change->setTimestamp( $timestamp );
+		$change->setUserId( $user->getId() );
+		$change->setMetadataFromUser( $user );
+
+		wfProfileOut( __METHOD__ );
+		return $change;
+	}
+
+	/**
+	 * @see ChangeNotifier::notifyOnPageUndeleted
+	 */
+	public function getOnPageUndeletedChange( Revision $revision ) {
+		wfProfileIn( __METHOD__ );
+
+		/** @var EntityContent $content */
+		$content = $revision->getContent();
+
+		if ( $content->isRedirect() ) {
+			// TODO: notify the client about changes to redirects!
+			return null;
+		}
+
+		$change = $this->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
+
+		$change->setRevisionInfo( $revision );
+
+		$user = User::newFromId( $revision->getUser() );
+		$change->setMetadataFromUser( $user );
+
+		wfProfileOut( __METHOD__ );
+		return $change;
+	}
+
+	/**
+	 * @see ChangeNotifier::notifyOnPageCreated
+	 */
+	public function getOnPageCreatedChange( Revision $revision ) {
+		wfProfileIn( __METHOD__ );
+
+		/** @var EntityContent $content */
+		$content = $revision->getContent();
+
+		if ( $content->isRedirect() ) {
+			// Clients currently don't care about redirected being created.
+			// TODO: notify the client about changes to redirects!
+			return null;
+		}
+
+		$change = $this->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
+
+		$change->setRevisionInfo( $revision );
+
+		wfProfileOut( __METHOD__ );
+		return $change;
+	}
+
+	/**
+	 * @see ChangeNotifier::notifyOnPageModified
+	 */
+	public function getOnPageModifiedChange( Revision $current, Revision $parent ) {
+		wfProfileIn( __METHOD__ );
+
+		if ( $current->getParentId() !== $parent->getId() ) {
+			throw new InvalidArgumentException( '$parent->getId() must be the same as $current->getParentId()!' );
+		}
+
+		$change = $this->getChangeForModification( $parent->getContent(), $current->getContent() );
+
+		if ( !$change ) {
+			// nothing to do
+			return null;
+		}
+
+		$change->setRevisionInfo( $current );
+
+		wfProfileOut( __METHOD__ );
+		return $change;
+	}
+
+	/**
+	 * Returns a EntityChange based on the old and new content object, taking
+	 * redirects into consideration.
+	 *
+	 * @todo: Notify the client about changes to redirects explicitly.
+	 *
+	 * @param EntityContent $oldContent
+	 * @param EntityContent $newContent
+	 *
+	 * @return EntityChange|null
+	 */
+	private function getChangeForModification( EntityContent $oldContent, EntityContent $newContent ) {
+		$oldEntity = $oldContent->isRedirect() ? null : $oldContent->getEntity();
+		$newEntity = $newContent->isRedirect() ? null : $newContent->getEntity();
+
+		if ( $oldEntity === null && $newEntity === null ) {
+			// Old and new versions are redirects. Nothing to do.
+			return null;
+		} elseif ( $newEntity === null ) {
+			// The new version is a redirect. For now, treat that as a deletion.
+			$action = EntityChange::REMOVE;
+		} elseif ( $oldEntity === null ) {
+			// The old version is a redirect. For now, treat that like restoring the entity.
+			$action = EntityChange::RESTORE;
+		} else {
+			// No redirects involved
+			$action = EntityChange::UPDATE;
+		}
+
+		return $this->newFromUpdate( $action, $oldEntity, $newEntity );
 	}
 
 }

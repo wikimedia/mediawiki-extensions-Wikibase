@@ -62,7 +62,6 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeNotifier;
-use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\NullChangeNotifier;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Settings;
@@ -715,10 +714,7 @@ class WikibaseRepo {
 	 */
 	public function getChangeNotifier() {
 		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
-			return new DatabaseChangeNotifier(
-				$this->getEntityChangeFactory(),
-				new DatabaseChangeTransmitter()
-			);
+			return new DatabaseChangeNotifier( $this->getEntityChangeFactory() );
 		} else {
 			return new NullChangeNotifier();
 		}
