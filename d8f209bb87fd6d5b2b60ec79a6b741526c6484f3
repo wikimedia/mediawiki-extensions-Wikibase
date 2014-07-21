@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_75c965ad",
+        "filename": "repo/tests/phpunit/includes/UpdateRepoOnMoveJobTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-21T14:59:44Z",
+      "side": 1,
+      "message": "How do you know this is sufficient? The line below doesn\u0027t say anything about \"enwiki\".",
+      "revId": "d8f209bb87fd6d5b2b60ec79a6b741526c6484f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
