@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_15d34106",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-21T15:33:13Z",
+      "side": 1,
+      "message": "why is it better to have \"label\" plus a reference to an onscure internal mapping hardcoded here, than to just hardcode \"labels\"?",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d533795d",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-21T15:33:13Z",
+      "side": 1,
+      "message": "The logic of this method is going to be the same for all implementations of EntityTermLookup. That indicates that it\u0027s defined in the wrong place. \n\nPerhaps applying the fallback could be done by a decorator implementing the same interface. Maybe we need two interfaces: one for getting \"the\" label (and description), applying knowledge about language and language fallback; another for just getting all labels (resp Descriptions), possibly for a fixed list of languages.",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_354e3dde",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-21T15:33:13Z",
+      "side": 1,
+      "message": "I tend to think that we want a TermFingerprintLookup. But perhaps we really need two interfaces: one that does language fallback, on top of one that doesn\u0027t.",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7544c5bd",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-21T15:33:13Z",
+      "side": 1,
+      "message": "\"value\" is an odd name for a structured array with metadata. it\u0027s kind of the opposite of the label value. it\u0027s label info, or label data...",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f51795a6",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-21T15:33:13Z",
+      "side": 1,
+      "message": "Having methods that apply language fallback in this interface seems odd, since their implementation is going to be the same for all classes implementing this interface. That implies that they are in the wrong place.",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
