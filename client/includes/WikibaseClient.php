@@ -688,8 +688,6 @@ final class WikibaseClient {
 	 */
 	public function getPropertyParserFunctionRunner() {
 		return new Runner(
-			$this->getEntityLookup(),
-			$this->getStore()->getPropertyLabelResolver(),
 			$this->getPropertyParserFunctionRendererFactory(),
 			$this->getStore()->getSiteLinkTable(),
 			$this->getSettings()->getSetting( 'siteGlobalID' )
