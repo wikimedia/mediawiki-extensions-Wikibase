@@ -97,5 +97,6 @@
 	"datatypes-type-commonsMedia": "Mediální soubor na Commons",
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "Typ hodnoty „$1“ neodpovídá typu vlastnosti „$2“.",
-	"wikibase-snakformatter-property-not-found": "Vlastnost $1 nenalezena, nelze určit datový typ, který se má použít."
+	"wikibase-snakformatter-property-not-found": "Vlastnost $1 nenalezena, nelze určit datový typ, který se má použít.",
+	"wikibase-add-badges": "Přidat odznaky"
 }

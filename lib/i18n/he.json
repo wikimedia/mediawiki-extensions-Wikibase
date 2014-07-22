@@ -92,5 +92,6 @@
 	"datatypes-type-commonsMedia": "קובץ מדיה בוויקישיתוף",
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "סוג הערך \"$1\" אינו מתאים לסוג המאפיין \"$2\".",
-	"wikibase-snakformatter-property-not-found": "המאפיין $1 לא נמצא. לא ברור באיזה סוג נתונים להשתמש."
+	"wikibase-snakformatter-property-not-found": "המאפיין $1 לא נמצא. לא ברור באיזה סוג נתונים להשתמש.",
+	"wikibase-add-badges": "הוספת סמלים"
 }

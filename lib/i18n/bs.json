@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Edinwiki"
+			"Edinwiki",
+			"CERminator",
+			"KWiki"
 		]
 	},
 	"wikibase-lib-desc": "Sadrži zajedničku funkcionalnost za Wikibazu i proširenje za Wikibaza klijent.",
@@ -20,7 +22,7 @@
 	"wikibase-error-autocomplete-connection": "Nije bilo moguće poslati upit prema Wikipedija API. Pokušajte kasnije ponovo.",
 	"wikibase-error-autocomplete-response": "Odgovor servera: $1",
 	"wikibase-error-ui-client-error": "Konekcija sa klijent stranicom je prekinuta. Pokušajte kasnije ponovo.",
-	"wikibase-error-ui-no-external-page": "Naveden članak nije pronađen na odgovarajućoj stranici.",
+	"wikibase-error-ui-no-external-page": "Navedeni članak nije pronađen na odgovarajućoj stranici.",
 	"wikibase-error-ui-cant-edit": "Niste ovlašteni da izvršite ovo djelo.",
 	"wikibase-error-ui-no-permissions": "Nemate dovoljno prava da izvršite ovo djelo.",
 	"wikibase-error-ui-link-exists": "Nemožete povezivati ovu stranicu zato što već druga stavka ima vezu prema njoj.",
@@ -31,6 +33,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",
 	"wikibase-sitelinks-siteid-columnheading": "Kod",
 	"wikibase-sitelinks-link-columnheading": "Povezana stranica",
+	"wikibase-snakview-snaktypeselector-novalue": "nema vrijednosti",
 	"wikibase-tooltip-error-details": "Detalji",
 	"datatypes-type-wikibase-item": "Stavka",
 	"datatypes-type-commonsMedia": "Commons medijska datoteka",

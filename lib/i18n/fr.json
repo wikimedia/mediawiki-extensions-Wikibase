@@ -105,5 +105,6 @@
 	"datatypes-type-commonsMedia": "Fichier multimédia de Commons",
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "Le type de valeur « $1 » ne correspond pas au type de propriété « $2 ».",
-	"wikibase-snakformatter-property-not-found": "Propriété $1 non trouvée, impossible de déterminer le type de données à utiliser."
+	"wikibase-snakformatter-property-not-found": "Propriété $1 non trouvée, impossible de déterminer le type de données à utiliser.",
+	"wikibase-add-badges": "Ajouter des badges"
 }
