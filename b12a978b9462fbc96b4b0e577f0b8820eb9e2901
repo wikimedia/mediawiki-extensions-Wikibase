@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_cda76507",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-22T16:07:29Z",
+      "side": 1,
+      "message": "Please try to be consistent and reuse the same style everywhere: \u0027wb-canonical-uri\u0027.",
+      "revId": "b12a978b9462fbc96b4b0e577f0b8820eb9e2901",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6de07124",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-22T16:07:29Z",
+      "side": 1,
+      "message": "See above.",
+      "revId": "b12a978b9462fbc96b4b0e577f0b8820eb9e2901",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2db82924",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-22T16:07:29Z",
+      "side": 1,
+      "message": "Please be consistent. \u0027wikibase-canonical-uri\u0027 should be enough.",
+      "revId": "b12a978b9462fbc96b4b0e577f0b8820eb9e2901",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
