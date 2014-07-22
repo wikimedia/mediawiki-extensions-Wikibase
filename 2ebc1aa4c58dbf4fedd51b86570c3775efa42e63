@@ -33,6 +33,23 @@
       "revId": "2ebc1aa4c58dbf4fedd51b86570c3775efa42e63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3280888d",
+        "filename": "lib/includes/store/GenericEntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-22T15:32:50Z",
+      "side": 1,
+      "message": "\"asIdStrings\" is unclear to me w/o looking at the code.\n\nperhaps convertEntityIdsToStrings or perhaps (but less clear) convertIdsToStrings?",
+      "revId": "2ebc1aa4c58dbf4fedd51b86570c3775efa42e63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
