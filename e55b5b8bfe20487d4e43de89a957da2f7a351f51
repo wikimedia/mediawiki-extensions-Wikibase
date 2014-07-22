@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_47459446",
+        "filename": "composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-22T10:54:09Z",
+      "side": 1,
+      "message": "Not sure what conflict you are referring to. You mean \"~1.0\"?",
+      "parentUuid": "8e28a382_7e7dc1af",
+      "revId": "e55b5b8bfe20487d4e43de89a957da2f7a351f51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_9e4bcd87",
         "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-22T00:36:32Z",
       "side": 1,
       "message": "This assumes all entities have a fingerprint. You could have a getFingerprint instead. Though constructing a fingerprint sucks until we have DM 1.0",
+      "revId": "e55b5b8bfe20487d4e43de89a957da2f7a351f51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_873ffcb0",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-22T10:54:09Z",
+      "side": 1,
+      "message": "getFingerprint is useless in DataModel 0.x. And no, this doesn\u0027t assume, it\u0027s a fact that all entities in 0.x have labels, descriptions and aliases.",
+      "parentUuid": "8e28a382_9e4bcd87",
       "revId": "e55b5b8bfe20487d4e43de89a957da2f7a351f51",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
