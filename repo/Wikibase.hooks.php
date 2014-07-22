@@ -1272,4 +1272,25 @@ final class RepoHooks {
 		return true;
 	}
 
+	public static function onSkinTemplateBuildNavUrlsNav_urlsAfterPermalink( &$skintemplate, &$nav_urls, &$oldid, &$revid ) {
+		$title = $skintemplate->getTitle();
+
+		if ( NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
+			$nav_urls['wb-canonicalURI'] = array(
+				'text' => $skintemplate->msg( 'wikibase-canonicaluri-toolboxlink' ),
+				'href' => WikibaseRepo::getDefaultInstance()->getRdfBaseURI() . $title->getDBKey()
+			);
+		}
+
+		return true;
+	}
+
+	public static function onBaseTemplateToolbox( $skintemplate, &$toolbox ) {
+		if ( isset( $skintemplate->data['nav_urls']['wb-canonicalURI'] ) ) {
+			$toolbox['wb-canonicalURI'] = $skintemplate->data['nav_urls']['wb-canonicalURI'];
+			$toolbox['wb-canonicalURI']['id'] = 'wb-canonicalURI';
+		}
+
+		return true;
+	}
 }
