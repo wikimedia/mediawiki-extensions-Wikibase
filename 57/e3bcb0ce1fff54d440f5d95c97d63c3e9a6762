@@ -1,0 +1,8 @@
+Code-Review+2: Jeroen De Dauw <jeroendedauw@gmail.com>
+Verified+1: jenkins-bot
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: Jeroen De Dauw <jeroendedauw@gmail.com>
+Submitted-at: Tue, 22 Jul 2014 00:21:18 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/147500
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
