@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_244846ce",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T09:40:38Z",
+      "side": 1,
+      "message": "so this renders a language? :P I think we should rather call this LanguageAwareRenderer or something like that... I\u0027m not very good at naming",
+      "revId": "1e2d5abcb2f6632a5998090b06db08d5d687e6ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e41d9ec8",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T09:40:38Z",
+      "side": 1,
+      "message": "I\u0027m also not totally happy with this class name",
+      "revId": "1e2d5abcb2f6632a5998090b06db08d5d687e6ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
