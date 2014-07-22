@@ -31,16 +31,6 @@ use Wikibase\PropertyLabelResolver;
 class Runner {
 
 	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	/**
-	 * @var PropertyLabelResolver
-	 */
-	private $propertyLabelResolver;
-
-	/**
 	 * @var RendererFactory
 	 */
 	private $rendererFactory;
@@ -56,21 +46,15 @@ class Runner {
 	private $siteId;
 
 	/**
-	 * @param EntityLookup $entityLookup
-	 * @param PropertyLabelResolver $propertyLabelResolver
 	 * @param RendererFactory $rendererFactory
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param string $siteId
 	 */
 	public function __construct(
-		EntityLookup $entityLookup,
-		PropertyLabelResolver $propertyLabelResolver,
 		RendererFactory $rendererFactory,
 		SiteLinkLookup $siteLinkLookup,
 		$siteId
 	) {
-		$this->entityLookup = $entityLookup;
-		$this->propertyLabelResolver = $propertyLabelResolver;
 		$this->rendererFactory = $rendererFactory;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
@@ -147,11 +131,11 @@ class Runner {
 
 	/**
 	 * @param Parser $parser
-	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 *
 	 * @return string Wikitext
 	 */
-	public function runPropertyParserFunction( Parser $parser, $propertyLabel ) {
+	public function runPropertyParserFunction( Parser $parser, $propertyLabelOrId ) {
 		wfProfileIn( __METHOD__ );
 
 		// @todo use id provided as argument, if arbitrary access allowed

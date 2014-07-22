@@ -34,25 +34,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param Parser $parser
 	 * @param Renderer $renderer
-	 * @param Entity|null $entity
 	 *
 	 * @return Runner
 	 */
-	private function getRunner( Parser $parser, Renderer $renderer, Entity $entity = null ) {
-		$entityLookup = new MockRepository();
-
-		if ( $entity !== null ) {
-			$entityLookup->putEntity( $entity );
-		}
-
-		$propertyLabelResolver = new MockPropertyLabelResolver(
-			$parser->getTargetLanguage(),
-			$entityLookup
-		);
-
+	private function getRunner( Parser $parser, Renderer $renderer ) {
 		return new Runner(
-			$entityLookup,
-			$propertyLabelResolver,
 			$this->getRendererFactory( $renderer ),
 			$this->getSiteLinkLookup(),
 			'enwiki'
