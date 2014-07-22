@@ -52,7 +52,7 @@ define( [
 
 	QUnit.test( 'precisionText()', function( assert ) {
 		var precisions = {
-				1: 'to a degree',
+				1: '±1°',
 				0.016666666666666666: 'to an arcminute',
 				2.7777777777777776e-7: 'to 1/1000 of an arcsecond',
 				10: '±10°'
