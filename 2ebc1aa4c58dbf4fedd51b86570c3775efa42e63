@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_d26f04f8",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-22T15:32:00Z",
+      "side": 1,
+      "message": "removeRecords?",
+      "revId": "2ebc1aa4c58dbf4fedd51b86570c3775efa42e63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f26e80fd",
+        "filename": "lib/includes/store/EntityInfoBuilder.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-22T15:32:00Z",
+      "side": 1,
+      "message": "retainRecords?\n\notherwise, not clear enough imho",
+      "revId": "2ebc1aa4c58dbf4fedd51b86570c3775efa42e63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
