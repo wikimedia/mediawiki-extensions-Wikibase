@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_1e4d9dc7",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/RendererTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-22T00:22:14Z",
+      "side": 1,
+      "message": "ugh, dat regex...",
+      "revId": "64ae0411ad2c0b32392b010bef07fefc7950cc75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
