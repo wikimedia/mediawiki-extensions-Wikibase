@@ -1272,4 +1272,47 @@ final class RepoHooks {
 		return true;
 	}
 
+	/**
+	 * Called by SkinTemplate, allows us to set up nav URLs to later be used in the toolbox
+	 *
+	 * @param object $skintemplate
+	 * @param array $nav_urls
+	 * @param int $revid
+	 * @param int $revid
+	 *
+	 * @return bool
+	 */
+	public static function onSkinTemplateBuildNavUrlsNav_urlsAfterPermalink( $skintemplate, &$nav_urls, $revid, $revid ) {
+		$title = $skintemplate->getTitle();
+
+		if ( !NamespaceUtils::isEntityNamespace( $title->getNamespace() ) ) {
+			return true;
+		}
+
+		$nav_urls['wb-canonical-uri'] = array(
+			'text' => $skintemplate->msg( 'wikibase-canonical-uri' ),
+			'href' => WikibaseRepo::getDefaultInstance()->getRdfBaseURI() . $title->getDBKey()
+		);
+
+		return true;
+	}
+
+	/**
+	 * Called by SkinTemplate, allows us to add nav URLs to the toolbox
+	 *
+	 * @param object $skintemplate
+	 * @param array $toolbox
+	 *
+	 * @return bool
+	 */
+	public static function onBaseTemplateToolbox( $skintemplate, &$toolbox ) {
+		if ( !isset( $skintemplate->data['nav_urls']['wb-canonical-uri'] ) ) {
+			return true;
+		}
+
+		$toolbox['wb-canonical-uri'] = $skintemplate->data['nav_urls']['wb-canonical-uri'];
+		$toolbox['wb-canonical-uri']['id'] = 't-wb-canonical-uri';
+
+		return true;
+	}
 }
