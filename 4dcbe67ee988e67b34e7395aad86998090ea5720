@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_87649c12",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T14:01:34Z",
+      "side": 1,
+      "message": "I don\u0027t think this should support null as special page name",
+      "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6761b0ff",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T14:01:34Z",
+      "side": 1,
+      "message": "make this two functions maybe depending on whether we want an enabled or disabled button?",
+      "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
