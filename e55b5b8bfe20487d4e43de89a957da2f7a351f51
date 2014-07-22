@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_7e7dc1af",
+        "filename": "composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-22T00:36:32Z",
+      "side": 1,
+      "message": "For the numbers using the full range (ie starting at 1.0.0), I have found it better to use ~x.y than ~x.y.z. Imagine Wikibase Query or another thing depending on this repo needs a feature from data-model-serialization 1.1. You\u0027ll have a conflict for no good reason.",
+      "revId": "e55b5b8bfe20487d4e43de89a957da2f7a351f51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9e4bcd87",
+        "filename": "lib/tests/phpunit/serializers/DataModelSerializationRoundtripTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-22T00:36:32Z",
+      "side": 1,
+      "message": "This assumes all entities have a fingerprint. You could have a getFingerprint instead. Though constructing a fingerprint sucks until we have DM 1.0",
+      "revId": "e55b5b8bfe20487d4e43de89a957da2f7a351f51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
