@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_52455446",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T14:16:12Z",
+      "side": 1,
+      "message": "just return if this isn\u0027t the case, no need for nested blocks here",
+      "revId": "4d34910bb3f9ae8e192a6af114c5ee7a01ec21a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7235f0d5",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T14:16:12Z",
+      "side": 1,
+      "message": "Don\u0027t abuse WikibaseRepo::getRdfBaseURI here, please. Also I don\u0027t think assuming db key \u003d\u003d entity id is a good idea",
+      "revId": "4d34910bb3f9ae8e192a6af114c5ee7a01ec21a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f277a099",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T14:16:12Z",
+      "side": 1,
+      "message": "is this used as ID on the actual html elem? If so, I don\u0027t like the camel case",
+      "revId": "4d34910bb3f9ae8e192a6af114c5ee7a01ec21a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
