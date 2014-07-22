@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_442232fd",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-22T09:42:03Z",
+      "side": 1,
+      "message": "I know that\u0027s not introduced here... but why does the output type matter? Just wondering to understand this bit better",
+      "revId": "1e2d5abcb2f6632a5998090b06db08d5d687e6ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e41d9ec8",
         "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsRenderer.php",
         "patchSetId": 3
