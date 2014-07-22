@@ -19,11 +19,13 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 #### Breaking changes
 
-* Removed the arbitrary list of precisions for globe coordinates
+* #40 Removed the arbitrary list of precisions for globe coordinates
 
 #### Enhancements
 
+* #44 Fixed comparing time values
 * #42 Removed 'to a degree' label, now shown as '±1°'
+* #45 Removed constructor naming debugging feature
 
 ### 0.5.1 (2014-06-04)
 
