@@ -370,6 +370,7 @@
 	"wikibase-listdatatypes-time-body": "{{Wikibase-datatype-body|Time}}",
 	"wikibase-listdatatypes-url-head": "{{Wikibase-datatype-head|Url}}\n{{Identical|URL}}",
 	"wikibase-listdatatypes-url-body": "{{Wikibase-datatype-body|Url}}",
+	"wikibase-canonicaluri-toolboxlink": "Text for canonical link in toolbox on entity pages.",
 	"datatypes-type-url": "Unused at this time.\n{{Identical|URL}}",
 	"content-model-wikibase-item": "The name for Wikibase item content model, used when describing what type of content a page contains.",
 	"content-model-wikibase-property": "The name for Wikibase property content model, used when describing what type of content a page contains.",
