@@ -9,11 +9,6 @@ this.util = this.util || {};
 	'use strict';
 
 	/**
-	 * @type {Function}
-	 */
-	var EMPTY_FN = function() {};
-
-	/**
 	 * Extends an object with the attributes of another object.
 	 *
 	 * @param {Object} target
@@ -30,32 +25,15 @@ this.util = this.util || {};
 	}
 
 	/**
-	 * Helper to create a named function which will execute a given function.
+	 * Helper to create a function which will execute a given function.
 	 *
-	 * @param {string} name Name of the new function. All characters not matching [\w$] will be
-	 *        removed.
-	 * @param {Function} [originalFn] Function which will be executed by new function. If not given,
-	 *        an empty function will be used instead.
+	 * @param {Function} [originalFn] Optional function which will be executed by new function.
 	 * @return {Function}
-	 *
-	 * @throws {Error} if the given name has no characters matching [\w$].
 	 */
-	function createNamedFunction( name, originalFn ) {
-		/* jshint evil: true */
-		/* jshint unused: false */
-		var namedFn;
-		var evilsSeed = originalFn || EMPTY_FN;
-		var fnName = name.replace( /(?:(^\d+)|[^\w$])/ig, '' );
-
-		if( !fnName ) {
-			// only bad characters were in the name!
-			throw new Error( 'Bad function name given. At least one word character or $ required.' );
-		}
-
-		eval( 'namedFn = function ' + fnName +
-			'(){ evilsSeed.apply( this, arguments ); }' );
-
-		return namedFn; // value got assigned in eval
+	function createFunction( originalFn ) {
+		return originalFn
+			? function() { originalFn.apply( this, arguments ) }
+			: function() {};
 	}
 
 	/**
@@ -82,7 +60,10 @@ this.util = this.util || {};
 	util.inherit = function( name, base, constructor, members ) {
 		// name is optional
 		if( typeof name !== 'string' ) {
-			members = constructor; constructor = base; base = name; name = false;
+			members = constructor;
+			constructor = base;
+			base = name;
+			name = false;
 		}
 
 		// allow to omit constructor since it can be inherited directly. But if given, require it as
@@ -96,19 +77,13 @@ this.util = this.util || {};
 				constructor = false;
 			}
 		}
-		// If no name is given, find suitable constructor name. We want proper names here, so
-		// instances can easily be identified during debugging.
-		var constructorName = name
-				|| constructor.name
-				|| ( base.name ? base.name + '_SubProto' : 'SomeInherited' ),
-			prototypeName = base.name || 'SomeProto';
 
 		// function we execute in our real constructor
-		var NewConstructor = createNamedFunction( constructorName, constructor || base );
+		var NewConstructor = createFunction( constructor || base );
 
 		// new constructor for avoiding direct use of base constructor and its potential
 		// side-effects
-		var NewPrototype = createNamedFunction( prototypeName );
+		var NewPrototype = createFunction();
 		NewPrototype.prototype = base.prototype;
 
 		NewConstructor.prototype = extend(
