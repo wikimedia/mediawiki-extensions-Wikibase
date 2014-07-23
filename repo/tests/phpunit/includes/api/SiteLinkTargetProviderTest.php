@@ -34,27 +34,27 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 
 	public static function provideExpected() {
 		return array(
-			//groupsToGet, specialGroups, siteIdsExpected
-			array( array( 'foo' ), array(), array( 'site1', 'site2' ) ),
-			array( array( 'bar' ), array(), array( 'site3' ) ),
-			array( array( 'baz' ), array(), array( 'site4' ) ),
+			// groupsToGet, specialGroups, siteIdsExpected
+			array( array( 'wikipedia' ), array(), array( 'eswiki', 'dawiki' ) ),
+			array( array( 'species' ), array(), array( 'specieswiki' ) ),
+			array( array( 'wikiquote' ), array(), array( 'eswikiquote' ) ),
 			array( array( 'qwerty' ), array(), array() ),
-			array( array( 'foo', 'bar' ), array(), array( 'site1', 'site2', 'site3' ) ),
-			array( array( 'foo', 'baz' ), array(), array( 'site1', 'site2', 'site4' ) ),
-			array( array( 'special' ), array( 'bar' ), array( 'site3' ) ),
-			array( array( 'foo' ), array( 'bar' ), array( 'site1', 'site2' ) ),
-			array( array( 'special', 'foo' ), array( 'bar', 'baz' ), array( 'site1', 'site2', 'site3', 'site4' ) ),
-			array( array(), array( 'foo' ), array() ),
+			array( array( 'wikipedia', 'species' ), array(), array( 'eswiki', 'dawiki', 'specieswiki' ) ),
+			array( array( 'wikipedia', 'wikiquote' ), array(), array( 'eswiki', 'dawiki', 'eswikiquote' ) ),
+			array( array( 'special' ), array( 'species' ), array( 'specieswiki' ) ),
+			array( array( 'wikipedia' ), array( 'species' ), array( 'eswiki', 'dawiki' ) ),
+			array( array( 'special', 'wikipedia' ), array( 'species', 'wikiquote' ), array( 'eswiki', 'dawiki', 'specieswiki', 'eswikiquote' ) ),
+			array( array(), array( 'wikipedia' ), array() ),
 			array( array(), array(), array() ),
 		);
 	}
 
 	protected function getSiteList() {
 		$siteList = new SiteList();
-		$siteList->append( $this->getMockSite( 'site1', 'foo' ) );
-		$siteList->append( $this->getMockSite( 'site2', 'foo' ) );
-		$siteList->append( $this->getMockSite( 'site3', 'bar' ) );
-		$siteList->append( $this->getMockSite( 'site4', 'baz' ) );
+		$siteList->append( $this->getMockSite( 'eswiki', 'wikipedia' ) );
+		$siteList->append( $this->getMockSite( 'dawiki', 'wikipedia' ) );
+		$siteList->append( $this->getMockSite( 'specieswiki', 'species' ) );
+		$siteList->append( $this->getMockSite( 'eswikiquote', 'wikiquote' ) );
 		return $siteList;
 	}
 
