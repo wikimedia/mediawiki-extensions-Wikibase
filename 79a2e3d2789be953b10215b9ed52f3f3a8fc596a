@@ -33,6 +33,23 @@
       "revId": "79a2e3d2789be953b10215b9ed52f3f3a8fc596a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_14ba11bc",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-23T10:16:17Z",
+      "side": 1,
+      "message": "Discussed in the team. We think \"canonical\" can be a bit misleading because we already have canonical URIs for the pages in MediaWiki and canonical URIs for the documents in Wikibase (e.g. https://www.wikidata.org/wiki/Special:EntityData/Q9351). The .../entity/Q... URIs are canonical URIs for the concepts our items describe.\n\nPlease make the link label\n\"Concept URI\"\nand add a tooltip\n\"URI that identifies the concept described by this item\".\n\nWe also suggest to change the message key to \u0027wikibase-concept-uri\u0027 to make it clear which of the URIs it describes.",
+      "revId": "79a2e3d2789be953b10215b9ed52f3f3a8fc596a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
