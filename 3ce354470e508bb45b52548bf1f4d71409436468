@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_8a613802",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T15:25:34Z",
+      "side": 1,
+      "message": "added @todo in I4086402",
+      "parentUuid": "8e28a382_caace0ed",
+      "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0f3d5adb",
         "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
         "patchSetId": 5
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "like your suggestions :) can rename in follow up or maybe try here and rebase. (just not right now)",
       "parentUuid": "8e28a382_0f3d5adb",
+      "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6a784c26",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T15:25:34Z",
+      "side": 1,
+      "message": "done in I56f7bc4",
+      "parentUuid": "8e28a382_aab51431",
       "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -136,6 +172,24 @@
       "side": 1,
       "message": "sounds good.  can do in follow up patch",
       "parentUuid": "8e28a382_8a6378d8",
+      "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ea3d5cdb",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsAwareRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T15:25:34Z",
+      "side": 1,
+      "message": "added in-process caching for the renderer objects in I4086402\n\nperhaps something more can be done in follow up",
+      "parentUuid": "8e28a382_eaa79c06",
       "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
