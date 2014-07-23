@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4afa30b7",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T14:17:40Z",
+      "side": 1,
+      "message": "I think this should be done by the caller. The Renderer should not have to worry about resolving property names at all, it should just get a PropertyId.",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_aaf754cf",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T14:17:40Z",
+      "side": 1,
+      "message": "I think the second parameter should be a PropertyId.\nThe property name should be resolved before calling the renderer.",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
