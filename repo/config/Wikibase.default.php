@@ -93,6 +93,15 @@ return call_user_func( function() {
 		},
 
 		'useRedirectTargetColumn' => true,
+
+		'conceptBaseUri' => function() {
+			$uri = $GLOBALS['wgServer'];
+			$uri = preg_replace( '!^//!', 'http://', $uri );
+			$uri = $uri . '/entity/';
+
+			return $uri;
+		},
+
 	);
 
 	return $defaults;

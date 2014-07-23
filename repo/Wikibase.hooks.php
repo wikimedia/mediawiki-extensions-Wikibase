@@ -1291,9 +1291,10 @@ final class RepoHooks {
 			return true;
 		}
 
+		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
 		$nav_urls['wb-canonical-uri'] = array(
 			'text' => $skintemplate->msg( 'wikibase-concept-uri' ),
-			'href' => WikibaseRepo::getDefaultInstance()->getRdfBaseURI() . $title->getDBKey(),
+			'href' => $baseUri . $title->getDBKey(),
 			'title' => $skintemplate->msg( 'wikibase-concept-uri-tooltip' )
 		);
 

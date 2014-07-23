@@ -89,7 +89,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		);
 
 		$serializationService = new EntityDataSerializationService(
-			$repo->getRdfBaseURI(),
+			$repo->getSettings()->getSetting( 'conceptBaseUri' ),
 			$this->getPageTitle()->getCanonicalURL() . '/',
 			$repo->getStore()->getEntityLookup(),
 			$titleLookup,
