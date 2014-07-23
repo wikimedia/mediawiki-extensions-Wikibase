@@ -41,8 +41,9 @@ class SitesModule extends ResourceLoaderModule {
 		foreach ( SiteSQLStore::newInstance()->getSites() as $site ) {
 			$group = $site->getGroup();
 
-			if ( $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $group, $groups ) ) {
-				// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
+			if ( $site->getType() === Site::TYPE_MEDIAWIKI && ( in_array( $group, $groups ) || in_array( $group, $specialGroups ) ) ) {
+				// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
+				// special according to the specialSiteLinkGroups setting
 				if ( in_array( $group, $specialGroups ) ) {
 					$languageNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
 					$languageName = $languageNameMsg->exists() ? $languageNameMsg->parse() : $site->getGlobalId();
