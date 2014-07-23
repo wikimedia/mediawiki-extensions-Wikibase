@@ -34,6 +34,24 @@
       "revId": "0f01b36e06a6ae313532950e574340aa23b5caff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0a62e8a8",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-23T15:24:31Z",
+      "side": 1,
+      "message": "Ok, first things first:\n* \u0027pretty\u0027 misses the year and is of no use for what we do.\n* \u0027default\u0027 is in some languages set to weird formats none of our parsers will be able to parse in the near future.\n\nI think this is a misunderstanding. You are free to submit an other patch if you want to change the DMY order. Please make sure our parsers are able to parse all possible orders then. This patch here is not about the order. All I want to change here and all that should be changed in this patch is the nominative/genitive form of the month. That\u0027s all.\n\nAnd why should I add support for an option nobody requested and nobody will use?",
+      "parentUuid": "8e28a382_8ff4aacb",
+      "revId": "0f01b36e06a6ae313532950e574340aa23b5caff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
