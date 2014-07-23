@@ -41,44 +41,70 @@ class SitesModule extends ResourceLoaderModule {
 		foreach ( SiteSQLStore::newInstance()->getSites() as $site ) {
 			$group = $site->getGroup();
 
-			if ( $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $group, $groups ) ) {
-				// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
-				if ( in_array( $group, $specialGroups ) ) {
-					$languageNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
-					$languageName = $languageNameMsg->exists() ? $languageNameMsg->parse() : $site->getGlobalId();
-					$groupName = 'special';
-				} else {
-					$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
-					$groupName = $group;
-				}
-				$globalId = $site->getGlobalId();
-
-				// Use protocol relative URIs, as it's safe to assume that all wikis support the same protocol
-				list( $pageUrl, $apiUrl ) = preg_replace(
-					"/^https?:/i",
-					'',
-					array(
-						$site->getPageUrl(),
-						$site->getFileUrl( 'api.php' )
-					)
-				);
-
-				//TODO: figure out which name ist best
-				//$localIds = $site->getLocalIds();
-				//$name = empty( $localIds['equivalent'] ) ? $site->getGlobalId() : $localIds['equivalent'][0];
-
-				$sites[ $globalId ] = array(
-					'shortName' => $languageName,
-					'name' => $languageName, // use short name for both, for now
-					'id' => $globalId,
-					'pageUrl' => $pageUrl,
-					'apiUrl' => $apiUrl,
-					'languageCode' => $site->getLanguageCode(),
-					'group' => $groupName
-				);
+			if ( !$this->shouldSiteBeIncluded( $site, $groups, $specialGroups ) ) {
+				continue;
 			}
+
+			// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
+			// special according to the specialSiteLinkGroups setting
+			if ( in_array( $group, $specialGroups ) ) {
+				$languageNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
+				$languageName = $languageNameMsg->exists() ? $languageNameMsg->parse() : $site->getGlobalId();
+				$groupName = 'special';
+			} else {
+				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
+				$groupName = $group;
+			}
+			$globalId = $site->getGlobalId();
+
+			// Use protocol relative URIs, as it's safe to assume that all wikis support the same protocol
+			list( $pageUrl, $apiUrl ) = preg_replace(
+				"/^https?:/i",
+				'',
+				array(
+					$site->getPageUrl(),
+					$site->getFileUrl( 'api.php' )
+				)
+			);
+
+			//TODO: figure out which name ist best
+			//$localIds = $site->getLocalIds();
+			//$name = empty( $localIds['equivalent'] ) ? $site->getGlobalId() : $localIds['equivalent'][0];
+
+			$sites[ $globalId ] = array(
+				'shortName' => $languageName,
+				'name' => $languageName, // use short name for both, for now
+				'id' => $globalId,
+				'pageUrl' => $pageUrl,
+				'apiUrl' => $apiUrl,
+				'languageCode' => $site->getLanguageCode(),
+				'group' => $groupName
+			);
 		}
 
 		return 'mediaWiki.config.set( "wbSiteDetails", ' . \FormatJson::encode( $sites ) . ' );';
+	}
+
+	/**
+	 * Whether it's needed to add a Site to the JS variable.
+	 *
+	 * @param Site $site
+	 * @param array $groups
+	 * @param array $specialGroups
+	 *
+	 * @return bool
+	 */
+	private function shouldSiteBeIncluded( Site $site, array $groups, array $specialGroups ) {
+		if ( in_array( 'special', $groups ) ) {
+			// The "special" group actually maps to multiple groups
+			$groups = array_diff( $groups, array( 'special' ) );
+			$groups = array_merge( $groups, $specialGroups );
+		}
+
+		if ( $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $site->getGroup(), $groups ) ) {
+			return true;
+		}
+
+		return false;
 	}
 }

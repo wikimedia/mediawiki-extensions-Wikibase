@@ -93,9 +93,9 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getHtmlForSiteLinkGroup( array $siteLinks, $itemId, $group ) {
-		$isSpecialGroup = $this->siteLinkGroupIsSpecial( $group );
+		$isSpecialGroup = $group === 'special';
 
-		$sites = $this->sites->getGroup( $group );
+		$sites = $this->getSitesForGroup( $group );
 		$siteLinksForTable = $this->getSiteLinksForTable( $sites, $siteLinks );
 
 		$html = $thead = $tbody = $tfoot = '';
@@ -119,19 +119,40 @@ class SiteLinksView {
 		$isFull = count( $siteLinksForTable ) >= count( $sites );
 		$tfoot = $this->getTableFootHtml( $itemId, $isFull );
 
-		$groupName = $isSpecialGroup ? 'special' : $group;
-
 		return $html . wfTemplate(
 			'wb-sitelinks-table',
 			$thead,
 			$tbody,
 			$tfoot,
-			htmlspecialchars( $groupName )
+			htmlspecialchars( $group )
 		);
 	}
 
-	private function siteLinkGroupIsSpecial( $groupName ) {
-		return in_array( $groupName, $this->specialSiteLinkGroups );
+	/**
+	 * Get all sites for a given site group, with special handling for the
+	 * "special" site group.
+	 *
+	 * @param string $group
+	 *
+	 * @return SiteList
+	 */
+	private function getSitesForGroup( $group ) {
+		$siteList = new SiteList();
+
+		if ( $group === 'special' ) {
+			$groups = $this->specialSiteLinkGroups;
+		} else {
+			$groups = array( $group );
+		}
+
+		foreach ( $groups as $group ) {
+			$sites = $this->sites->getGroup( $group );
+			foreach ( $sites as $site ) {
+				$siteList->setSite( $site );
+			}
+		}
+
+		return $siteList;
 	}
 
 	/**
@@ -179,7 +200,8 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getTableHeadHtml( $isSpecialGroup ) {
-		// FIXME: quickfix to allow a custom site-name / handling for groups defined in $wgSpecialSiteLinkGroups
+		// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
+		// special according to the specialSiteLinkGroups setting
 		$siteNameMessageKey = 'wikibase-sitelinks-sitename-columnheading';
 		if ( $isSpecialGroup ) {
 			$siteNameMessageKey .= '-special';
@@ -253,7 +275,8 @@ class SiteLinksView {
 		$escapedPageName = htmlspecialchars( $pageName );
 		$escapedSiteId = htmlspecialchars( $siteId );
 
-		// FIXME: this is a quickfix to allow a custom site-name for groups defined in $wgSpecialSiteLinkGroups instead of showing the language-name
+		// FIXME: this is a quickfix to allow a custom site-name for the site groups which are
+		// special according to the specialSiteLinkGroups setting
 		if ( $isSpecialGroup ) {
 			// FIXME: not escaped?
 			$siteNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $siteId );
