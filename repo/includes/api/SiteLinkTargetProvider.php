@@ -13,6 +13,7 @@ use SiteStore;
  *
  * @author Daniel K
  * @author Adam Shorland
+ * @author Marius Hoch < hoo@online.de >
  */
 class SiteLinkTargetProvider {
 
@@ -22,10 +23,17 @@ class SiteLinkTargetProvider {
 	protected $siteStore;
 
 	/**
-	 * @param SiteStore $siteStore
+	 * @var array
 	 */
-	public function __construct( SiteStore $siteStore ) {
+	private $specialSiteGroups;
+
+	/**
+	 * @param SiteStore $siteStore
+	 * @param array $specialSiteGroups
+	 */
+	public function __construct( SiteStore $siteStore, array $specialSiteGroups ) {
 		$this->siteStore = $siteStore;
+		$this->specialSiteGroups = $specialSiteGroups;
 	}
 
 	/**
@@ -36,6 +44,10 @@ class SiteLinkTargetProvider {
 	 * @return SiteList
 	 */
 	public function getSiteList( array $groups ) {
+		// As the special sitelink group actually just wraps multiple groups
+		// into one we have to replace it with the actual groups
+		$this->substituteSpecialSiteGroups( $groups );
+
 		$sites = new SiteList();
 		$allSites = $this->siteStore->getSites();
 
@@ -49,4 +61,15 @@ class SiteLinkTargetProvider {
 		return $sites;
 	}
 
+	/**
+	 * @param array &$groups
+	 */
+	private function substituteSpecialSiteGroups( &$groups ) {
+		if ( !in_array( 'special', $groups ) ) {
+			return;
+		}
+
+		$groups = array_diff( $groups, array( 'special' ) );
+		$groups = array_merge( $groups, $this->specialSiteGroups );
+	}
 }
