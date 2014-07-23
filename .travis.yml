@@ -18,9 +18,9 @@ matrix:
     - env: DBTYPE=mysql LANG=en; MW=master WB=repo
       php: 5.6
     - env: DBTYPE=sqlite LANG=en; MW=master WB=both
-      php: hhvm
+      php: hhvm-nightly
   allow_failures:
-    - php: hhvm
+    - php: hhvm-nightly
   exclude:
     - env: THENEEDFORTHIS=FAIL
 
