@@ -26,6 +26,11 @@ class SpecialWatchlistQueryHandler {
 	private $db;
 
 	/**
+	 * @var boolean
+	 */
+	private $showExternalChanges;
+
+	/**
 	 * @var string
 	 */
 	private $rcTypeLogCondition;
@@ -33,10 +38,12 @@ class SpecialWatchlistQueryHandler {
 	/**
 	 * @param User $user
 	 * @param DatabaseBase $db
+	 * @param boolean $showExternalChanges
 	 */
-	public function __construct( User $user, DatabaseBase $db ) {
+	public function __construct( User $user, DatabaseBase $db, $showExternalChanges ) {
 		$this->user = $user;
 		$this->db = $db;
+		$this->showExternalChanges = $showExternalChanges;
 	}
 
 	/**
@@ -49,17 +56,31 @@ class SpecialWatchlistQueryHandler {
 	public function addWikibaseConditions( WebRequest $request, array $conds, $opts ) {
 		// do not include wikibase changes for activated enhanced watchlist
 		// since we do not support that format yet
-		if (
-			$this->isEnhancedChangesEnabled( $request ) === true ||
-			!$opts ||
-			$opts->getValue( 'hideWikibase' ) === true
-		) {
+		if ( $this->shouldHideWikibaseChanges( $request, $opts ) ) {
 			$newConds = $this->makeHideWikibaseConds( $conds );
 		} else {
 			$newConds = $this->makeShowWikibaseConds( $conds );
 		}
 
 		return $newConds;
+	}
+
+	/**
+	 * @param WebRequest $request
+	 * @param FormOptions|null $opts
+	 *
+	 * @return boolean
+	 */
+	private function shouldHideWikibaseChanges( WebRequest $request, $opts ) {
+		if ( !$this->showExternalChanges || $this->isEnhancedChangesEnabled( $request ) === true ) {
+			return true;
+		}
+
+		if ( !$opts || $opts->getValue( 'hideWikibase' ) === true ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -78,7 +99,7 @@ class SpecialWatchlistQueryHandler {
 	 *
 	 * @return array
 	 */
-	 private function makeShowWikibaseConds( array $conds ) {
+	private function makeShowWikibaseConds( array $conds ) {
 		$newConds = array();
 
 		foreach( $conds as $key => $cond ) {
