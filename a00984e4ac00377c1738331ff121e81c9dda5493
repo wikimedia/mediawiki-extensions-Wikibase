@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4aa4709e",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/RunnerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T14:44:20Z",
+      "side": 1,
+      "message": "no factory?",
+      "revId": "a00984e4ac00377c1738331ff121e81c9dda5493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0abae8bb",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/RunnerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T14:44:20Z",
+      "side": 1,
+      "message": "\"Factory\"?",
+      "revId": "a00984e4ac00377c1738331ff121e81c9dda5493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
