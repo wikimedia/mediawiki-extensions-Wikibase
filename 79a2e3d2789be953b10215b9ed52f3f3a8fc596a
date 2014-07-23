@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_14ad7199",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T09:05:54Z",
+      "side": 1,
+      "message": "can we have type hints?\n\nalso, why $revid twice?",
+      "revId": "79a2e3d2789be953b10215b9ed52f3f3a8fc596a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f4ad4599",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T09:05:54Z",
+      "side": 1,
+      "message": "type hints?",
+      "revId": "79a2e3d2789be953b10215b9ed52f3f3a8fc596a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
