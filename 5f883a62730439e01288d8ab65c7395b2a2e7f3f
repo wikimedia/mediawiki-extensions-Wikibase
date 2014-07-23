@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_8f46ea23",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T11:44:16Z",
+      "side": 1,
+      "message": "Is this loop needed? str_replace accepts arrays to do multi-string replacements with one call. It won\u0027t stop ofter finding a match, ok...",
+      "revId": "5f883a62730439e01288d8ab65c7395b2a2e7f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6f4f3e3a",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T11:44:16Z",
+      "side": 1,
+      "message": "Why is no unlocalization expected in this case?",
+      "revId": "5f883a62730439e01288d8ab65c7395b2a2e7f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
