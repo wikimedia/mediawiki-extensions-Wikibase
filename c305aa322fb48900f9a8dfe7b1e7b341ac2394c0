@@ -16,6 +16,24 @@
       "revId": "c305aa322fb48900f9a8dfe7b1e7b341ac2394c0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f5bbfcdb",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-23T20:11:17Z",
+      "side": 1,
+      "message": "didn\u0027t want to change the code in the same step... but I now wonder whether this should actually be prot. relative in the sidebar",
+      "parentUuid": "8e28a382_b53574d8",
+      "revId": "c305aa322fb48900f9a8dfe7b1e7b341ac2394c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
