@@ -8,7 +8,7 @@ use ParserOptions;
 use Status;
 use Title;
 use User;
-use Wikibase\DataAccess\PropertyParserFunction\Renderer;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRenderer;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -32,7 +32,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRunPropertyParserFunction() {
 		$runner = new Runner(
-			$this->getRendererFactory(),
+			$this->getPropertyClaimsRenderer(),
 			$this->getSiteLinkLookup(),
 			'enwiki'
 		);
@@ -60,11 +60,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		return $siteLinkLookup;
 	}
 
-	private function getRendererFactory() {
+	private function getPropertyClaimsRenderer() {
 		$renderer = $this->getRenderer();
 
 		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\RendererFactory'
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -78,7 +78,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getRenderer() {
 		$renderer = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\Renderer'
+				'Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRenderer'
 			)
 			->disableOriginalConstructor()
 			->getMock();
