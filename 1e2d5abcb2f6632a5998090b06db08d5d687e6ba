@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_efe1eecb",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T12:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_244846ce",
+      "revId": "1e2d5abcb2f6632a5998090b06db08d5d687e6ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_442232fd",
         "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_cfe632e3",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T12:43:43Z",
+      "side": 1,
+      "message": "i am not entirely sure and would have to ask Liangent or examine the variants / converter code more closely.  the feature in core is not documented much at all.",
+      "parentUuid": "8e28a382_442232fd",
+      "revId": "1e2d5abcb2f6632a5998090b06db08d5d687e6ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e41d9ec8",
         "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsRenderer.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-07-22T09:40:38Z",
       "side": 1,
       "message": "I\u0027m also not totally happy with this class name",
+      "revId": "1e2d5abcb2f6632a5998090b06db08d5d687e6ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_afcf665a",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsRenderer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T12:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_e41d9ec8",
       "revId": "1e2d5abcb2f6632a5998090b06db08d5d687e6ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
