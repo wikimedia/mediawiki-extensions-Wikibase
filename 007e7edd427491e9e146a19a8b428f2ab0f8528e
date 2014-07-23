@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4fd24202",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T12:48:34Z",
+      "side": 1,
+      "message": "yay documentation!\n\ntypo: single",
+      "revId": "007e7edd427491e9e146a19a8b428f2ab0f8528e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2f03767b",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T12:48:34Z",
+      "side": 1,
+      "message": "can all these checks go in their own method, with a clear name?",
+      "revId": "007e7edd427491e9e146a19a8b428f2ab0f8528e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
