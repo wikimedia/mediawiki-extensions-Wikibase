@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_ac709106",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-23T16:25:49Z",
+      "side": 1,
+      "message": "still says canonical",
+      "revId": "335ae1adeeeda474d1bd32abb7ba85c89f6f44f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
