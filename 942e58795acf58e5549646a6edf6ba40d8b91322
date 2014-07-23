@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0ce205d0",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-23T16:14:19Z",
+      "side": 1,
+      "message": "can we move this up into the parent name space? I would also like to use this in Lua for bug 46160",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_aaf754cf",
         "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
         "patchSetId": 4
