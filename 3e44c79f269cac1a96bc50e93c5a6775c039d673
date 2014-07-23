@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_74df15dc",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T09:46:37Z",
+      "side": 1,
+      "message": "The fundamental problem here is that the date pattern needs to be defined per-language, and not hard coded as we currently have it. That could be done simply by taking it from a localizable message. The Language object also has functions for date formatting, which we should probably re-use here if possible (not sure that the functionality in MediaWiki core can deal with BC, etc). \n\nIn any case, changing the hard coded month name to using the genitive form makes things worse, not better. In several \"big\" languages, the result is simply wrong.",
+      "parentUuid": "8e28a382_13bc79b0",
+      "revId": "3e44c79f269cac1a96bc50e93c5a6775c039d673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7559658f",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 3
