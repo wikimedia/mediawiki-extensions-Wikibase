@@ -215,6 +215,13 @@ abstract class ApiWikibase extends ApiBase {
 	}
 
 	/**
+	 * @see ApiBase::getTokenSalt()
+	 */
+	public function getTokenSalt() {
+		return $this->needsToken() ? '' : false;
+	}
+
+	/**
 	 * @see ApiBase::mustBePosted()
 	 */
 	public function mustBePosted() {
