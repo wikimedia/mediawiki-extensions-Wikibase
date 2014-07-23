@@ -15,7 +15,7 @@ use Wikibase\Lib\SnakFormatter;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RendererFactory {
+class PropertyClaimsRendererFactory {
 
 	/**
 	 * @var PropertyIdResolver
