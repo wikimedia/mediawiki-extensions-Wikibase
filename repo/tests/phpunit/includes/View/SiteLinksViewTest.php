@@ -108,7 +108,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$item,
-			array( 'special group' ),
+			array( 'special' ),
 			true,
 			array(
 				'tag' => 'table',
@@ -129,7 +129,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$testCases[] = array(
 			$item,
-			array( 'wikipedia', 'special group' ),
+			array( 'wikipedia', 'special' ),
 			true,
 			array(
 				'tag' => 'table',

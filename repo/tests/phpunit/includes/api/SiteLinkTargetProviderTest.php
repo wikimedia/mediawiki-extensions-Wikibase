@@ -14,14 +14,15 @@ use Wikibase\Api\SiteLinkTargetProvider;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Marius Hoch < hoo@online.de >
  */
 class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideExpected
 	 */
-	public function testGetSiteList( $groups, $expectedGlobalIds ) {
-		$provider = new SiteLinkTargetProvider( $this->getMockSiteStore() );
+	public function testGetSiteList( $groups, $specialGroups, $expectedGlobalIds ) {
+		$provider = new SiteLinkTargetProvider( $this->getMockSiteStore(), $specialGroups );
 
 		$siteList = $provider->getSiteList( $groups );
 
@@ -33,14 +34,18 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 
 	public static function provideExpected() {
 		return array(
-			//groupsToGet, siteIdsExpected
-			array( array( 'foo' ), array( 'site1', 'site2' ) ),
-			array( array( 'bar' ), array( 'site3' ) ),
-			array( array( 'baz' ), array( 'site4' ) ),
-			array( array( 'qwerty' ), array() ),
-			array( array( 'foo', 'bar' ), array( 'site1', 'site2', 'site3' ) ),
-			array( array( 'foo', 'baz' ), array( 'site1', 'site2', 'site4' ) ),
-			array( array(), array() ),
+			//groupsToGet, specialGroups, siteIdsExpected
+			array( array( 'foo' ), array(), array( 'site1', 'site2' ) ),
+			array( array( 'bar' ), array(), array( 'site3' ) ),
+			array( array( 'baz' ), array(), array( 'site4' ) ),
+			array( array( 'qwerty' ), array(), array() ),
+			array( array( 'foo', 'bar' ), array(), array( 'site1', 'site2', 'site3' ) ),
+			array( array( 'foo', 'baz' ), array(), array( 'site1', 'site2', 'site4' ) ),
+			array( array( 'special' ), array( 'bar' ), array( 'site3' ) ),
+			array( array( 'foo' ), array( 'bar' ), array( 'site1', 'site2' ) ),
+			array( array( 'special', 'foo' ), array( 'bar', 'baz' ), array( 'site1', 'site2', 'site3', 'site4' ) ),
+			array( array(), array( 'foo' ), array() ),
+			array( array(), array(), array() ),
 		);
 	}
 

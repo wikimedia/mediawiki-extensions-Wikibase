@@ -84,7 +84,11 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		//TODO: provide a mechanism to override the services
 		$this->stringNormalizer = $repo->getStringNormalizer();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( $repo->getSiteStore() );
+
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$repo->getSiteStore(),
+			$repo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
 
 		$this->siteLinkGroups = $repo->getSettings()->getSetting( 'siteLinkGroups' );
 		$this->siteLinkLookup = $repo->getStore()->newSiteLinkCache();
