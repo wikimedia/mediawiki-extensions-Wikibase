@@ -32,17 +32,30 @@ use Wikibase\Test\MockRepository;
 class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param Parser $parser
 	 * @param Renderer $renderer
 	 *
 	 * @return Runner
 	 */
-	private function getRunner( Parser $parser, Renderer $renderer ) {
+	private function getRunner( Renderer $renderer ) {
 		return new Runner(
 			$this->getRendererFactory( $renderer ),
 			$this->getSiteLinkLookup(),
 			'enwiki'
 		);
+	}
+
+	public function testRunPropertyParserFunction() {
+		$runner = $this->getRunner( $this->getRenderer() );
+		$parser = $this->getParser( 'en' );
+
+		$expected = array(
+			'meow!',
+			'noparse' => false,
+			'nowiki' => false,
+		);
+
+		$result = $runner->runPropertyParserFunction( $parser, 'Cat' );
+		$this->assertEquals( $expected, $result );
 	}
 
 	/**
@@ -63,7 +76,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		$parser = $this->getParser( 'de' );
 		$parser->startExternalParse( null, $parserOptions, $outputType );
 
-		$runner = $this->getRunner( $parser, $this->getRenderer() );
+		$runner = $this->getRunner( $this->getRenderer() );
 
 		$this->assertEquals( $expected, $runner->isParserUsingVariants( $parser ) );
 	}
@@ -87,7 +100,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		$parser = new Parser();
 		$parserOptions = new ParserOptions();
 		$parser->startExternalParse( null, $parserOptions, $outputType );
-		$runner = $this->getRunner( $parser, $this->getRenderer() );
+		$runner = $this->getRunner( $this->getRenderer() );
 		$this->assertEquals( $expected, $runner->processRenderedArray( $textArray ) );
 	}
 
@@ -104,10 +117,7 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testRenderInLanguage() {
-		$runner = $this->getRunner(
-			$this->getParser( 'es' ),
-			$this->getRenderer()
-		);
+		$runner = $this->getRunner( $this->getRenderer() );
 
 		$language = Language::factory( 'he' );
 		$result = $runner->renderInLanguage( new ItemId( 'Q3' ), 'gato', $language );

@@ -95,29 +95,29 @@ class Runner {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 * @param Language $language
 	 *
 	 * @return string
 	 */
-	public function renderInLanguage( EntityId $entityId, $propertyLabel, Language $language ) {
+	public function renderInLanguage( EntityId $entityId, $propertyLabelOrId, Language $language ) {
 		$renderer = $this->rendererFactory->newFromLanguage( $language );
-		return $renderer->render( $entityId, $propertyLabel );
+		return $renderer->render( $entityId, $propertyLabelOrId );
 	}
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 * @param string[] $variants Variant codes
 	 *
 	 * @return string[], key by variant codes
 	 */
-	public function renderInVariants( EntityId $entityId, $propertyLabel, array $variants ) {
+	public function renderInVariants( EntityId $entityId, $propertyLabelOrId, array $variants ) {
 		$textArray = array();
 
 		foreach ( $variants as $variantCode ) {
 			$variantLanguage = Language::factory( $variantCode );
-			$variantText = $this->renderInLanguage( $entityId, $propertyLabel, $variantLanguage );
+			$variantText = $this->renderInLanguage( $entityId, $propertyLabelOrId, $variantLanguage );
 			// LanguageConverter doesn't handle empty strings correctly, and it's more difficult
 			// to fix the issue there, as it's using empty string as a special value.
 			// Also keeping the ability to check a missing property with {{#if: }} is another reason.
@@ -147,7 +147,7 @@ class Runner {
 			return '';
 		}
 
-		$rendered = $this->renderForEntityId( $parser, $itemId, $propertyLabel );
+		$rendered = $this->renderForEntityId( $parser, $itemId, $propertyLabelOrId );
 		$result = $this->buildResult( $rendered );
 
 		wfProfileOut( __METHOD__ );
@@ -161,19 +161,19 @@ class Runner {
 	 *
 	 * @return string
 	 */
-	private function renderForEntityId( Parser $parser, EntityId $entityId, $propertyLabel ) {
+	private function renderForEntityId( Parser $parser, EntityId $entityId, $propertyLabelOrId ) {
 		$targetLanguage = $parser->getTargetLanguage();
 
 		if ( $this->isParserUsingVariants( $parser ) && $parser->getConverterLanguage()->hasVariants() ) {
 			$renderedVariantsArray = $this->renderInVariants(
 				$entityId,
-				$propertyLabel,
+				$propertyLabelOrId,
 				$parser->getConverterLanguage()->getVariants()
 			);
 
 			return $this->processRenderedArray( $renderedVariantsArray );
 		} else {
-			return $this->renderInLanguage( $entityId, $propertyLabel, $targetLanguage );
+			return $this->renderInLanguage( $entityId, $propertyLabelOrId, $targetLanguage );
 		}
 	}
 
@@ -209,15 +209,15 @@ class Runner {
 	 * @since 0.4
 	 *
 	 * @param Parser $parser
-	 * @param string $propertyLabel property label or ID (pXXX)
+	 * @param string $propertyLabelOrId property label or ID (pXXX)
 	 *
 	 * @return array
 	 */
-	public static function render( Parser $parser, $propertyLabel ) {
+	public static function render( Parser $parser, $propertyLabelOrId ) {
 		wfProfileIn( __METHOD__ );
 
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
-		$result = $runner->runPropertyParserFunction( $parser, $propertyLabel );
+		$result = $runner->runPropertyParserFunction( $parser, $propertyLabelOrId );
 
 		wfProfileOut( __METHOD__ );
 		return $result;
