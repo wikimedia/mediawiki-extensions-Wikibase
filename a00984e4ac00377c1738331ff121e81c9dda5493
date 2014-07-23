@@ -33,6 +33,24 @@
       "revId": "a00984e4ac00377c1738331ff121e81c9dda5493",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0a99c822",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/RunnerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T15:14:17Z",
+      "side": 1,
+      "message": "bah! rage!",
+      "parentUuid": "8e28a382_0abae8bb",
+      "revId": "a00984e4ac00377c1738331ff121e81c9dda5493",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
