@@ -107,37 +107,40 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$basicCases = array(
 			array( //0 badtoken
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'linktitle' => 'testSetLiteLinkWithNoToken' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'loss of session data' ) ) ),
-			array( //1 testSetLiteLinkWithNoId
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'notoken', 'message' => 'The token parameter must be set' ) ) ),
+			array( //1
+				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'linktitle' => 'testSetLiteLinkWithBadToken', 'token' => '88888888888888888888888888888888+\\' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'badtoken', 'message' => 'Invalid token' ) ) ),
+			array( //2 testSetLiteLinkWithNoId
 				'p' => array( 'linksite' => 'enwiki', 'linktitle' => 'testSetLiteLinkWithNoId' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			array( //2 testSetLiteLinkWithBadId
+			array( //3 testSetLiteLinkWithBadId
 				'p' => array( 'id' => 123456789, 'linksite' => 'enwiki', 'linktitle' => 'testSetLiteLinkWithNoId' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			array( //3 testSetLiteLinkWithBadSite
+			array( //4 testSetLiteLinkWithBadSite
 				'p' => array( 'site' => 'dewiktionary', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			array( //4 testSetLiteLinkWithBadTitle
+			array( //5 testSetLiteLinkWithBadTitle
 				'p' => array( 'site' => 'dewiki', 'title' => 'BadTitle_de', 'linksite' => 'enwiki', 'linktitle' => 'BadTitle_en' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			array( //5 testSetLiteLinkWithBadTargetSite
+			array( //6 testSetLiteLinkWithBadTargetSite
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'enwiktionary', 'linktitle' => 'Berlin' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
 		);
 		$badgesCases = array(
-			array( //6 bad badge id
+			array( //7 bad badge id
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'abc|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
-			array( //7 badge id is not an item id
+			array( //8 badge id is not an item id
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'P2|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
-			array( //8 badge item does not exist
+			array( //9 badge item does not exist
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'Q99999|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
-			array( //9 badge id is not specified
+			array( //10 badge id is not specified
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => '{faItem}|{otherItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-badge' ) ) ),
-			array( //10 no sitelink - cannot change badges
+			array( //11 no sitelink - cannot change badges
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'badges' => '{gaItem}|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
 		);

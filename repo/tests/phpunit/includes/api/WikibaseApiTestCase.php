@@ -130,7 +130,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 */
 	public function doTestQueryExceptions( $params, $exception ) {
 		try {
-			if ( array_key_exists( 'code', $exception ) && $exception['code'] == 'badtoken' ) {
+			if ( array_key_exists( 'code', $exception )
+					&& preg_match( '/^(no|bad)token$/', $exception['code'] ) ) {
+
 				$this->doApiRequest( $params );
 			} else {
 				$this->doApiRequestWithToken( $params );
