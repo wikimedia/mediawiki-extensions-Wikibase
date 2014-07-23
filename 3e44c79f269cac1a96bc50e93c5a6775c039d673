@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_6f173e4b",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-23T11:31:16Z",
+      "side": 1,
+      "message": "What we need here are the \u0027dmy date\u0027 and \u0027dmy monthonly\u0027 $dateFormats from the MessagesXx.php files.",
+      "parentUuid": "8e28a382_74df15dc",
+      "revId": "3e44c79f269cac1a96bc50e93c5a6775c039d673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7559658f",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 3
