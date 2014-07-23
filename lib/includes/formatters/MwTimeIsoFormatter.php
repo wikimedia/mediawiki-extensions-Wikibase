@@ -123,10 +123,12 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		}
 
 		if ( $precision === TimeValue::PRECISION_MONTH ) {
-			return 'F Y';
+			$format = $this->language->getDateFormatString( 'monthonly', 'dmy' );
+			return $format ?: 'F Y';
 		}
 
-		return 'j F Y';
+		$format = $this->language->getDateFormatString( 'date', 'dmy' );
+		return $format ?: 'j F Y';
 	}
 
 	/**

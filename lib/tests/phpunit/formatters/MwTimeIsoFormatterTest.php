@@ -265,6 +265,15 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'13 billion years BCE',
 			),
 
+			// Some languages default to genitive month names
+			array(
+				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
+				// Nominative is "Augustus", genitive is "Augusti".
+				'16 Augusti 2013',
+				true,
+				'la'
+			),
+
 			// Valid values with day, month and/or year zero
 			array(
 				'+00000001995-00-00T00:00:00Z', TimeValue::PRECISION_YEAR,
@@ -354,7 +363,8 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			$argLists[] = array(
 				isset( $args[2] ) ? $args[2] : $args[0],
 				$timeValue,
-				isset( $args[3] )
+				isset( $args[3] ),
+				isset( $args[4] ) ? $args[4] : 'en'
 			);
 		}
 
@@ -363,8 +373,10 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			'ar', //replaces all numbers and separators
 			'bo', //replaces only numbers
 			'de', //switches separators
+			'la', //defaults to genitive month names
 			'or', //replaces all numbers and separators
 		);
+
 		foreach ( $languageCodes as $languageCode ) {
 			$argLists[] = array(
 				'3333',
