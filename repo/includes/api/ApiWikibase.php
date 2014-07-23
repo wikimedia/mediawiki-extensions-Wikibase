@@ -524,9 +524,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @param null $extradata
 	 */
 	public function dieUsage( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
-		//NOTE: This is just here for the wfDeprecated call and the @deprecated flag above.
-		wfDeprecated( __METHOD__ );
-
+		//NOTE: This is just here for the @deprecated flag above.
 		parent::dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 	}
 
