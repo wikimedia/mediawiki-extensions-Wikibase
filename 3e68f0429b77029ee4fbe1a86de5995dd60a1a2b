@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_ecb219f8",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/RendererFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T16:01:46Z",
+      "side": 1,
+      "message": "changed it to newRendererFromParser",
+      "parentUuid": "8e28a382_ac465123",
+      "revId": "3e68f0429b77029ee4fbe1a86de5995dd60a1a2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0c0a05d5",
         "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-23T15:50:27Z",
       "side": 1,
       "message": "why property ids? Do we really want someone to call {{#property:P42|of\u003dP123}} :P Not really something we need to solve here, just wondered",
+      "revId": "3e68f0429b77029ee4fbe1a86de5995dd60a1a2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ac1bf11e",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T16:01:46Z",
+      "side": 1,
+      "message": "already would be the case with arbitrary lua access for the list of properties pages\n\nwhy should the parser function be different?",
+      "parentUuid": "8e28a382_0c0a05d5",
       "revId": "3e68f0429b77029ee4fbe1a86de5995dd60a1a2b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
