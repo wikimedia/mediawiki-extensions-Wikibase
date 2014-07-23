@@ -60,7 +60,7 @@ class RemoveReferences extends ModifyClaim {
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $claimGuid, $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
-			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
+			$this->dieError( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
 		}
 
 		$referenceHashes = $this->getReferenceHashesFromParams( $params, $claim );
@@ -71,7 +71,7 @@ class RemoveReferences extends ModifyClaim {
 		try {
 			$changeOps->apply( $entity, $summary );
 		} catch ( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
+			$this->dieException( $e, 'failed-save' );
 		}
 
 		$this->saveChanges( $entity, $summary );
@@ -87,7 +87,7 @@ class RemoveReferences extends ModifyClaim {
 	 */
 	protected function validateParameters( array $params ) {
 		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
 
@@ -123,7 +123,7 @@ class RemoveReferences extends ModifyClaim {
 	
 		foreach ( array_unique( $params['references'] ) as $referenceHash ) {
 			if ( !$references->hasReferenceHash( $referenceHash ) ) {
-				$this->dieUsage( 'Invalid reference hash', 'no-such-reference' );
+				$this->dieError( 'Invalid reference hash', 'no-such-reference' );
 			}
 			$hashes[] = $referenceHash;
 		}

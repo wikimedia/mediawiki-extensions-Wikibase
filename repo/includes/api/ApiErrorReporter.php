@@ -113,7 +113,7 @@ class ApiErrorReporter {
 	 * If possible, a localized error message based on the exception is
 	 * included in the error sent to the client. Localization of errors
 	 * is attempted using the ExceptionLocalizer service provided to the
-	 * constructor. If that fails, dieUSage() is called, which in turn
+	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
 	 * @see ApiBase::dieUsage()
@@ -148,7 +148,7 @@ class ApiErrorReporter {
 	 * If possible, a localized error message based on the exception is
 	 * included in the error sent to the client. Localization of errors
 	 * is attempted using the ExceptionLocalizer service provided to the
-	 * constructor. If that fails, dieUSage() is called, which in turn
+	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
 	 * @see ApiBase::dieUsage()

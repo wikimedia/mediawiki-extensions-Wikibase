@@ -67,7 +67,7 @@ class RemoveQualifiers extends ModifyClaim {
 		try {
 			$changeOps->apply( $entity, $summary );
 		} catch ( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
+			$this->dieException( $e, 'failed-save' );
 		}
 
 		$this->saveChanges( $entity, $summary );
@@ -83,7 +83,7 @@ class RemoveQualifiers extends ModifyClaim {
 	 */
 	protected function validateParameters( array $params ) {
 		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
 
@@ -119,7 +119,7 @@ class RemoveQualifiers extends ModifyClaim {
 
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
-				$this->dieUsage( 'Invalid snak hash', 'no-such-qualifier' );
+				$this->dieError( 'Invalid snak hash', 'no-such-qualifier' );
 			}
 			$hashes[] = $qualifierHash;
 		}

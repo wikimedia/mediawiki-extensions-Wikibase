@@ -518,8 +518,6 @@ abstract class ApiWikibase extends ApiBase {
 	 * @deprecated since 0.5, use dieError(), dieException() or the
 	 * methods in $this->apiErrorReporter instead.
 	 *
-	 * @todo: Remove all usages of this!
-	 *
 	 * @param string $description
 	 * @param string $errorCode
 	 * @param int $httpRespCode
