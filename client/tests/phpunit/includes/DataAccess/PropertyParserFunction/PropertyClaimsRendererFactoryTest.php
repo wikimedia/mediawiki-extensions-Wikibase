@@ -7,13 +7,13 @@ use Parser;
 use ParserOptions;
 use Title;
 use User;
-use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
+use Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\SnakFormatter;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\RendererFactory
+ * @covers Wikibase\DataAccess\PropertyParserFunction\PropertyClaimsRendererFactory
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -23,7 +23,7 @@ use Wikibase\Lib\SnakFormatter;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class RendererFactoryTest extends \PHPUnit_Framework_TestCase {
+class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider newFromParserProvider
@@ -39,7 +39,7 @@ class RendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			$outputType
 		);
 
-		$rendererFactory = new RendererFactory(
+		$rendererFactory = new PropertyClaimsRendererFactory(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
@@ -68,7 +68,7 @@ class RendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewLanguageAwareRenderer() {
-		$rendererFactory = new RendererFactory(
+		$rendererFactory = new PropertyClaimsRendererFactory(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),

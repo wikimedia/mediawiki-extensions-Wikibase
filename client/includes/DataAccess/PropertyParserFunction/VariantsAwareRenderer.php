@@ -17,10 +17,10 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class VariantsAwareRenderer implements Renderer {
+class VariantsAwareRenderer implements PropertyClaimsRenderer {
 
 	/**
-	 * @var RendererFactory
+	 * @var PropertyClaimsRendererFactory
 	 */
 	private $rendererFactory;
 
@@ -30,10 +30,10 @@ class VariantsAwareRenderer implements Renderer {
 	private $variants;
 
 	/**
-	 * @param RendererFactory $rendererFactory
+	 * @param PropertyClaimsRendererFactory $rendererFactory
 	 * @param string[] $variants
 	 */
-	public function __construct( RendererFactory $rendererFactory, array $variants ) {
+	public function __construct( PropertyClaimsRendererFactory $rendererFactory, array $variants ) {
 		$this->rendererFactory = $rendererFactory;
 		$this->variants = $variants;
 	}

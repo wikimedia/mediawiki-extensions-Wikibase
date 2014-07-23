@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\PropertyLabelResolver;
 
 /**
- * Renderer of the {{#property}} parser function.
+ * PropertyClaimsRenderer of the {{#property}} parser function.
  *
  * @fixme see what code can be shared with Lua handling code.
  *
@@ -29,7 +29,7 @@ use Wikibase\PropertyLabelResolver;
  * @author Daniel Kinzler
  * @author Liangent < liangent@gmail.com >
  */
-class LanguageAwareRenderer implements Renderer {
+class LanguageAwareRenderer implements PropertyClaimsRenderer {
 
 	private $language;
 	private $propertyIdResolver;
