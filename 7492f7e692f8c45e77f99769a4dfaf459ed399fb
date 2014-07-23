@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_cf42b262",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T13:36:49Z",
+      "side": 1,
+      "message": "no can haz type hint?",
+      "revId": "7492f7e692f8c45e77f99769a4dfaf459ed399fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8f282a96",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T13:36:49Z",
+      "side": 1,
+      "message": "no type hint?",
+      "revId": "7492f7e692f8c45e77f99769a4dfaf459ed399fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
