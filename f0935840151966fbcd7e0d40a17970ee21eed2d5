@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_8a3c98bc",
+        "filename": "lib/tests/phpunit/store/EntityInfoBuilderTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-23T13:51:14Z",
+      "side": 1,
+      "message": "Note: Add test case that removes an ID thats not in the original data.",
+      "revId": "f0935840151966fbcd7e0d40a17970ee21eed2d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
