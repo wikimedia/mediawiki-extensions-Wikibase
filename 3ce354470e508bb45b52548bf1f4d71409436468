@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_caace0ed",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T14:00:12Z",
+      "side": 1,
+      "message": "good idea, @todo in follow up",
+      "parentUuid": "8e28a382_6a45ec46",
+      "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0f3d5adb",
         "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-23T13:55:46Z",
       "side": 1,
       "message": "Very generic. How about \"PropertyClaimsRenderer\"?",
+      "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_aab51431",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T14:00:12Z",
+      "side": 1,
+      "message": "like your suggestions :) can rename in follow up or maybe try here and rebase. (just not right now)",
+      "parentUuid": "8e28a382_0f3d5adb",
       "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0aa7880a",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T14:00:12Z",
+      "side": 1,
+      "message": "see later in the chain :)",
+      "parentUuid": "8e28a382_2afec401",
+      "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_8a6378d8",
         "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsAwareRenderer.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2014-07-23T13:55:46Z",
       "side": 1,
       "message": "This could take an associative array that maps variant codes to (LanguageAware)Renderers. That way, we would not need to instantiate a new renderer for every variant of every value.",
+      "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_eaa79c06",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsAwareRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T14:00:12Z",
+      "side": 1,
+      "message": "sounds good.  can do in follow up patch",
+      "parentUuid": "8e28a382_8a6378d8",
       "revId": "3ce354470e508bb45b52548bf1f4d71409436468",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
