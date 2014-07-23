@@ -40,6 +40,11 @@ class PropertyClaimsRendererFactory {
 	private $snakFormatterFactory;
 
 	/**
+	 * @var LanguageAwareRenderer[]
+	 */
+	private $languageAwareRenderers = array();
+
+	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
@@ -88,6 +93,32 @@ class PropertyClaimsRendererFactory {
 			$this->newSnakFormatterForLanguage( $language ),
 			$usageAccumulator
 		);
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param UsageAccumulator|null $usageAccumulator
+	 *
+	 * @return LanguageAwareRenderer
+	 */
+	public function getLanguageAwareRendererFromCode( $languageCode, UsageAccumulator $usageAccumulator ) {
+		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
+			$languageAwareRenderer = $this->newLanguageAwareRendererFromCode( $languageCode, $usageAccumulator );
+			$this->languageAwareRenderers[$languageCode] = $languageAwareRenderer;
+		}
+
+		return $this->languageAwareRenderers[$languageCode];
+	}
+
+	/**
+	 * @param string $languageCode
+	 * @param UsageAccumulator|null $usageAccumulator
+	 *
+	 * @return LanguageAwareRenderer
+	 */
+	private function newLanguageAwareRendererFromCode( $languageCode, UsageAccumulator $usageAccumulator ) {
+		$language = Language::factory( $languageCode );
+		return $this->newLanguageAwareRenderer( $language, $usageAccumulator );
 	}
 
 	/**

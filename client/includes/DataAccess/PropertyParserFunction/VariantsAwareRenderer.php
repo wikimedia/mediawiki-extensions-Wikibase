@@ -108,8 +108,7 @@ class VariantsAwareRenderer implements PropertyClaimsRenderer {
 	 * @return string
 	 */
 	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabelOrId ) {
-		$variantLanguage = Language::factory( $variantCode );
-		$renderer = $this->rendererFactory->newLanguageAwareRenderer( $variantLanguage, $this->usageAccumulator );
+		$renderer = $this->rendererFactory->getLanguageAwareRendererFromCode( $variantCode, $this->usageAccumulator );
 
 		return $renderer->render( $entityId, $propertyLabelOrId );
 	}

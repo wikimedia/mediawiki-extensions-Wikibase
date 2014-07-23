@@ -86,6 +86,7 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 
 			$status = $this->renderWithStatus( $entityId, $propertyId );
 		} catch ( PropertyLabelNotResolvedException $ex ) {
+			// @fixme use ExceptionLocalizer
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
 		} catch ( InvalidArgumentException $ex ) {
 			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
