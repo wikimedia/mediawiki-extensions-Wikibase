@@ -25,6 +25,7 @@ class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function testAddWikibaseConditions(
 		array $expected,
 		array $conds,
+		$showExternalChanges,
 		$enhanced,
 		$hideWikibase,
 		$message
@@ -32,7 +33,7 @@ class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 		$user = $this->getUser( $enhanced );
 
 		$database = $this->getDatabase();
-		$hookHandler = new SpecialWatchlistQueryHandler( $user, $database );
+		$hookHandler = new SpecialWatchlistQueryHandler( $user, $database, $showExternalChanges );
 
 		$opts = new FormOptions();
 		$opts->add( 'hideWikibase', $hideWikibase );
@@ -49,10 +50,11 @@ class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 		$expectedShowConds = array( "(rc_this_oldid=page_latest) OR rc_type IN (3,5)" );
 
 		return array(
-			array( $expectedHideConds, $conds, true, true, 'enhanced, hide wikibase opt' ),
-			array( $expectedHideConds, $conds, true, false, 'enhanced, no hide wikibase opt' ),
-			array( $expectedHideConds, $conds, false, true, 'not enhanced, hide wikibase opt' ),
-			array( $expectedShowConds, $conds, false, false, 'not enhanced, show wikibase opt' )
+			array( $expectedHideConds, $conds, true, true, true, 'enhanced, hide wikibase opt' ),
+			array( $expectedHideConds, $conds, true, true, false, 'enhanced, no hide wikibase opt' ),
+			array( $expectedHideConds, $conds, true, false, true, 'not enhanced, hide wikibase opt' ),
+			array( $expectedShowConds, $conds, true, false, false, 'not enhanced, show wikibase opt' ),
+			array( $expectedHideConds, $conds, false, false, false, 'changes integration not enabled' )
 		);
 	}
 
