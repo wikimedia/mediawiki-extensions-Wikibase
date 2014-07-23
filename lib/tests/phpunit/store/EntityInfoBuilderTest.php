@@ -76,7 +76,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	 */
 	protected abstract function newEntityInfoBuilder( array $ids );
 
-	public function provideBuildEntityInfo() {
+	public function getEntityInfoProvider() {
 		return array(
 			array(
 				array(),
@@ -107,7 +107,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideBuildEntityInfo
+	 * @dataProvider getEntityInfoProvider
 	 */
 	public function testGetEntityInfo( array $ids, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
@@ -116,7 +116,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expected, $actual, false, true );
 	}
 
-	public function provideResolveRedirects() {
+	public function resolveRedirectsProvider() {
 		return array(
 			'empty' => array(
 				array(),
@@ -139,7 +139,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideResolveRedirects
+	 * @dataProvider resolveRedirectsProvider
 	 */
 	public function testResolveRedirects( array $ids, array $expected = null ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
@@ -189,7 +189,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		return $records;
 	}
 
-	public function provideCollectTerms() {
+	public function collectTermsProvider() {
 		return array(
 			array(
 				array(),
@@ -243,7 +243,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideCollectTerms
+	 * @dataProvider collectTermsProvider
 	 */
 	public function testCollectTerms( array $ids, array $types = null, array $languages = null, array $expected = null ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
@@ -292,7 +292,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function provideCollectDataTypes() {
+	public function collectDataTypesProvider() {
 		return array(
 			array(
 				array(),
@@ -317,7 +317,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideCollectDataTypes
+	 * @dataProvider collectDataTypesProvider
 	 */
 	public function testCollectDataTypes( array $ids, array $expected = null ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
@@ -335,7 +335,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function provideRemoveMissing_removeRedirects() {
+	public function removeMissingAndRedirectsProvider() {
 		return array(
 			'empty' => array(
 				array(),
@@ -374,9 +374,9 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideRemoveMissing_removeRedirects
+	 * @dataProvider removeMissingAndRedirectsProvider
 	 */
-	public function testRemoveMissing_removeRedirects( array $ids, array $expected = null ) {
+	public function testRemoveMissingAndRedirects( array $ids, array $expected = null ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->removeMissing( 'remove-redirects' );
@@ -385,7 +385,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
 
-	public function provideRemoveMissing() {
+	public function removeMissingButKeepRedirects() {
 		return array(
 			'empty' => array(
 				array(),
@@ -427,9 +427,9 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideRemoveMissing
+	 * @dataProvider removeMissingButKeepRedirects
 	 */
-	public function testRemoveMissing( array $ids, array $expected = null ) {
+	public function testRemoveMissingButKeepRedirects( array $ids, array $expected = null ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->removeMissing();
@@ -438,12 +438,21 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( array_keys( $expected ), array_keys( $entityInfo ) );
 	}
 
-	public function provideRemoveEntityInfo() {
+	public function removeEntityInfoProvider() {
 		return array(
 			'empty' => array(
 				array(),
 				array(),
 				array(),
+			),
+			'remove nonexisting' => array(
+				array(
+					new ItemId( 'Q1' ),
+				),
+				array(
+					new ItemId( 'Q2' ),
+				),
+				array( 'Q1' ),
 			),
 			'remove some' => array(
 				array(
@@ -452,18 +461,15 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 					new ItemId( 'Q3' ),
 				),
 				array(
-					new ItemId( 'Q2' )
+					new ItemId( 'Q2' ),
 				),
-				array(
-					'Q1',
-					'Q3'
-				),
+				array( 'Q1', 'Q3' ),
 			),
 		);
 	}
 
 	/**
-	 * @dataProvider provideRemoveEntityInfo
+	 * @dataProvider removeEntityInfoProvider
 	 */
 	public function testRemoveEntityInfo( array $ids, array $remove, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
@@ -474,11 +480,20 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expected, array_keys( $entityInfo ) );
 	}
 
-	public function provideRetainEntityInfo() {
+	public function retainEntityInfoProvider() {
 		return array(
 			'empty' => array(
 				array(),
 				array(),
+				array(),
+			),
+			'retain nonexisting' => array(
+				array(
+					new ItemId( 'Q1' ),
+				),
+				array(
+					new ItemId( 'Q2' ),
+				),
 				array(),
 			),
 			'retain some' => array(
@@ -488,17 +503,15 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 					new ItemId( 'Q3' ),
 				),
 				array(
-					new ItemId( 'Q2' )
+					new ItemId( 'Q2' ),
 				),
-				array(
-					'Q2'
-				),
+				array( 'Q2' ),
 			),
 		);
 	}
 
 	/**
-	 * @dataProvider provideRetainEntityInfo
+	 * @dataProvider retainEntityInfoProvider
 	 */
 	public function testRetainEntityInfo( array $ids, array $retain, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );

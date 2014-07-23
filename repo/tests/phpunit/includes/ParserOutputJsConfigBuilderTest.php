@@ -9,11 +9,11 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
@@ -59,7 +59,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 		$this->assertSerializationEqualsEntity( $entity, json_decode( $configVars['wbEntity'], true ) );
 	}
 
-	public function assertSerializationEqualsEntity( $entity, $serialization ) {
+	public function assertSerializationEqualsEntity( Entity $entity, $serialization ) {
 		$serializerFactory = new SerializerFactory();
 		$options = new SerializationOptions();
 
