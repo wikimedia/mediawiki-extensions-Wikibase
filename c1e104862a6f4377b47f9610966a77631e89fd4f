@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0f6c3a2c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T13:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_2f3de829",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_5fbdd1d0",
         "filename": "repo/includes/Interactors/CreateRedirectException.php",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-09T18:08:50Z",
       "side": 1,
       "message": "This starts with a verb.\n\nRedirectCreationException",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_cf619233",
+        "filename": "repo/includes/Interactors/CreateRedirectException.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T13:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_5fbdd1d0",
       "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_af5ac682",
+        "filename": "repo/includes/Interactors/CreateRedirectInteractor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T13:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_9faa1981",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_ff791d2b",
         "filename": "repo/includes/Interactors/CreateRedirectInteractor.php",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2014-07-09T18:08:50Z",
       "side": 1,
       "message": "4 arguments for the main method? That\u0027s not nice",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8f570a5b",
+        "filename": "repo/includes/Interactors/CreateRedirectInteractor.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T13:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_ff791d2b",
       "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -123,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0fcb1a23",
+        "filename": "repo/includes/api/CreateRedirectModule.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T13:08:57Z",
+      "side": 1,
+      "message": "Seems like we\u0027ll have to agree to disagree here.",
+      "parentUuid": "8e28a382_92d2002b",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_9fb7b9d3",
         "filename": "repo/includes/api/CreateRedirectModule.php",
         "patchSetId": 12
@@ -134,6 +224,24 @@
       "writtenOn": "2014-07-09T18:08:50Z",
       "side": 1,
       "message": "This method is rather big",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_efcb2e1f",
+        "filename": "repo/includes/api/CreateRedirectModule.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T13:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_9fb7b9d3",
       "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -187,6 +295,24 @@
       "side": 1,
       "message": "Increased binding. You will now also have to update this test when making a change in the interactor. It\u0027s essentially testing application logic though the presentation mechanism.",
       "parentUuid": "8e28a382_fc4920d4",
+      "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4fdc82e5",
+        "filename": "repo/tests/phpunit/includes/api/CreateRedirectModuleTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T13:08:57Z",
+      "side": 1,
+      "message": "I have changed this to only check for the expected response for a given input now, it no longer checks the effect on the repo, which is left to the test for the interactor.\n\nI have however kept all the different input cases, since it seems important to check the structure and content of the response for all of them.",
+      "parentUuid": "8e28a382_d2864818",
       "revId": "c1e104862a6f4377b47f9610966a77631e89fd4f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
