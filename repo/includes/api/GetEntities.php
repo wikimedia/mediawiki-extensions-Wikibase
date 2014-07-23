@@ -62,7 +62,12 @@ class GetEntities extends ApiWikibase {
 
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider( $wikibaseRepo->getSiteStore() );
+
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
+
 		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
 	}
 
