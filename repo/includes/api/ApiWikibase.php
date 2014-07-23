@@ -518,15 +518,15 @@ abstract class ApiWikibase extends ApiBase {
 	 * @deprecated since 0.5, use dieError(), dieException() or the
 	 * methods in $this->apiErrorReporter instead.
 	 *
-	 * @todo: Remove all usages of this!
-	 *
 	 * @param string $description
 	 * @param string $errorCode
 	 * @param int $httpRespCode
 	 * @param null $extradata
 	 */
 	public function dieUsage( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
-		//NOTE: This is just here for the @deprecated flag above.
+		//NOTE: This is just here for the wfDeprecated call and the @deprecated flag above.
+		wfDeprecated( __METHOD__ );
+
 		parent::dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 	}
 

@@ -64,7 +64,7 @@ class SetReference extends ModifyClaim {
 		$claim = $this->claimModificationHelper->getClaimFromEntity( $params['statement'], $entity );
 
 		if ( ! ( $claim instanceof Statement ) ) {
-			$this->dieUsage( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
+			$this->dieError( 'The referenced claim is not a statement and thus cannot have references', 'not-statement' );
 		}
 
 		if ( isset( $params['reference'] ) ) {
@@ -101,7 +101,7 @@ class SetReference extends ModifyClaim {
 	 */
 	protected function validateParameters( array $params ) {
 		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['statement'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 	}
 
@@ -113,7 +113,7 @@ class SetReference extends ModifyClaim {
 	 */
 	protected function validateReferenceHash( Statement $claim, $referenceHash ) {
 		if ( !$claim->getReferences()->hasReferenceHash( $referenceHash ) ) {
-			$this->dieUsage( "Claim does not have a reference with the given hash" , 'no-such-reference' );
+			$this->dieError( "Claim does not have a reference with the given hash" , 'no-such-reference' );
 		}
 	}
 
@@ -128,7 +128,7 @@ class SetReference extends ModifyClaim {
 		$rawArray = FormatJson::decode( $arrayParam, true );
 
 		if ( !is_array( $rawArray ) || !count( $rawArray ) ) {
-			$this->dieUsage( 'No array or invalid JSON given', 'invalid-json' );
+			$this->dieError( 'No array or invalid JSON given', 'invalid-json' );
 		}
 
 		return $rawArray;
@@ -155,11 +155,11 @@ class SetReference extends ModifyClaim {
 		try {
 			foreach( $snakOrder as $propertyId ) {
 				if ( !is_array( $rawSnaks[$propertyId] ) ) {
-					$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
+					$this->dieError( 'Invalid snak JSON given', 'invalid-json' );
 				}
 				foreach ( $rawSnaks[$propertyId] as $rawSnak ) {
 					if ( !is_array( $rawSnak ) ) {
-						$this->dieUsage( 'Invalid snak JSON given', 'invalid-json' );
+						$this->dieError( 'Invalid snak JSON given', 'invalid-json' );
 					}
 
 					$snak = $snakUnserializer->newFromSerialization( $rawSnak );
@@ -168,13 +168,13 @@ class SetReference extends ModifyClaim {
 			}
 		} catch( InvalidArgumentException $invalidArgumentException ) {
 			// Handle Snak instantiation failures
-			$this->dieUsage(
+			$this->dieError(
 				'Failed to get reference from reference Serialization '
 					. $invalidArgumentException->getMessage(),
 				'snak-instantiation-failure'
 			);
 		} catch( OutOfBoundsException $outOfBoundsException ) {
-			$this->dieUsage(
+			$this->dieError(
 				'Failed to get reference from reference Serialization '
 					. $outOfBoundsException->getMessage(),
 				'snak-instantiation-failure'

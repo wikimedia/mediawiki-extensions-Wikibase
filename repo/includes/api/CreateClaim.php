@@ -57,7 +57,7 @@ class CreateClaim extends ModifyClaim {
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 		if( !$propertyId instanceof PropertyId ){
-			$this->dieUsage(
+			$this->dieError(
 				$propertyId->getSerialization() . ' does not appear to be a property ID',
 				'param-illegal'
 			);
@@ -93,19 +93,19 @@ class CreateClaim extends ModifyClaim {
 	protected function validateParameters( array $params ) {
 		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
 			if ( $params['snaktype'] == 'value' ) {
-				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
+				$this->dieError( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'param-missing' );
 			}
 			else {
-				$this->dieUsage( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'param-illegal' );
+				$this->dieError( 'You cannot provide a value when creating a claim with no PropertyValueSnak as main snak', 'param-illegal' );
 			}
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
+			$this->dieError( 'A property ID needs to be provided when creating a claim with a Snak', 'param-missing' );
 		}
 
 		if ( isset( $params['value'] ) && \FormatJson::decode( $params['value'], true ) == null ) {
-			$this->dieUsage( 'Could not decode snak value', 'invalid-snak' );
+			$this->dieError( 'Could not decode snak value', 'invalid-snak' );
 		}
 	}
 

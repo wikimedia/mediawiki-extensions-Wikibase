@@ -67,7 +67,7 @@ class SetSiteLink extends ModifyEntity {
 
 		// If we found anything then check if it is of the correct base class
 		if ( !is_null( $entityRev ) && !( $entityRev->getEntity() instanceof Item ) ) {
-			$this->dieUsage( 'The content on the found page is not of correct type', 'wrong-class' );
+			$this->dieError( 'The content on the found page is not of correct type', 'wrong-class' );
 		}
 
 		return $entityRev;
@@ -81,7 +81,7 @@ class SetSiteLink extends ModifyEntity {
 
 		if ( !( $entity instanceof Item ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage( "The given entity is not an item", "not-item" );
+			$this->dieError( "The given entity is not an item", "not-item" );
 		}
 
 		$item = $entity;
@@ -106,7 +106,7 @@ class SetSiteLink extends ModifyEntity {
 				$this->getResultBuilder()->addSiteLinks( array( $link ), 'entity', array( 'url' ) );
 			} else {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( "Cannot modify badges: sitelink to '{$params['linktitle']}' doesn't exist", 'no-such-sitelink' );
+				$this->dieError( "Cannot modify badges: sitelink to '{$params['linktitle']}' doesn't exist", 'no-such-sitelink' );
 			}
 		}
 
@@ -133,7 +133,7 @@ class SetSiteLink extends ModifyEntity {
 
 			if ( $site === false ) {
 				wfProfileOut( __METHOD__ );
-				$this->dieUsage( 'The supplied site identifier was not recognized' , 'not-recognized-siteid' );
+				$this->dieError( 'The supplied site identifier was not recognized' , 'not-recognized-siteid' );
 			}
 
 			if ( isset( $params['linktitle'] ) ) {
@@ -141,7 +141,7 @@ class SetSiteLink extends ModifyEntity {
 
 				if ( $page === false ) {
 					wfProfileOut( __METHOD__ );
-					$this->dieUsage( 'The external client site did not provide page information' , 'no-external-page' );
+					$this->dieError( 'The external client site did not provide page information' , 'no-external-page' );
 				}
 			} else {
 				$page = null;

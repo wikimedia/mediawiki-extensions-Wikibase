@@ -81,21 +81,21 @@ class SetQualifier extends ModifyClaim {
 	 */
 	protected function validateParameters( array $params ) {
 		if ( !( $this->claimModificationHelper->validateClaimGuid( $params['claim'] ) ) ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
 		if ( !isset( $params['snakhash'] ) ) {
 			if ( !isset( $params['snaktype'] ) ) {
-				$this->dieUsage( 'When creating a new qualifier (ie when not providing a snakhash) a snaktype should be specified', 'param-missing' );
+				$this->dieError( 'When creating a new qualifier (ie when not providing a snakhash) a snaktype should be specified', 'param-missing' );
 			}
 
 			if ( !isset( $params['property'] ) ) {
-				$this->dieUsage( 'When creating a new qualifier (ie when not providing a snakhash) a property should be specified', 'param-missing' );
+				$this->dieError( 'When creating a new qualifier (ie when not providing a snakhash) a property should be specified', 'param-missing' );
 			}
 		}
 
 		if ( isset( $params['snaktype'] ) && $params['snaktype'] === 'value' && !isset( $params['value'] ) ) {
-			$this->dieUsage( 'When setting a qualifier that is a PropertyValueSnak, the value needs to be provided', 'param-missing' );
+			$this->dieError( 'When setting a qualifier that is a PropertyValueSnak, the value needs to be provided', 'param-missing' );
 		}
 	}
 
@@ -107,7 +107,7 @@ class SetQualifier extends ModifyClaim {
 	 */
 	protected function validateQualifierHash( Claim $claim, $qualifierHash ) {
 		if ( !$claim->getQualifiers()->hasSnakHash( $qualifierHash ) ) {
-			$this->dieUsage( "Claim does not have a qualifier with the given hash" , 'no-such-qualifier' );
+			$this->dieError( "Claim does not have a qualifier with the given hash" , 'no-such-qualifier' );
 		}
 	}
 
@@ -123,7 +123,7 @@ class SetQualifier extends ModifyClaim {
 
 		$propertyId = $this->claimModificationHelper->getEntityIdFromString( $params['property'] );
 		if( !$propertyId instanceof PropertyId ){
-			$this->dieUsage(
+			$this->dieError(
 				$propertyId->getSerialization() . ' does not appear to be a property ID',
 				'param-illegal'
 			);

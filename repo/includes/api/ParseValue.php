@@ -136,7 +136,7 @@ class ParseValue extends ApiWikibase {
 			$options = \FormatJson::decode( $optionsParam, true );
 
 			if ( !is_array( $options ) ) {
-				$this->dieUsage( 'Malformed options parameter', 'malformed-options' );
+				$this->dieError( 'Malformed options parameter', 'malformed-options' );
 			}
 
 			foreach ( $options as $name => $value ) {

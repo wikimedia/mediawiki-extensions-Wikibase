@@ -61,7 +61,7 @@ class SetClaim extends ModifyClaim {
 
 		$guid = $claim->getGuid();
 		if( $guid === null ){
-			$this->dieUsage( 'GUID must be set when setting a claim', 'invalid-claim' );
+			$this->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
 		$guid = $this->claimGuidParser->parse( $guid );
 
@@ -131,9 +131,9 @@ class SetClaim extends ModifyClaim {
 			}
 			return $claim;
 		} catch( InvalidArgumentException $invalidArgumentException ) {
-			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(), 'invalid-claim' );
+			$this->dieError( 'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(), 'invalid-claim' );
 		} catch( OutOfBoundsException $outOfBoundsException ) {
-			$this->dieUsage( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
+			$this->dieError( 'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(), 'invalid-claim' );
 		}
 
 		// Note: since dieUsage() never returns, this should be unreachable!

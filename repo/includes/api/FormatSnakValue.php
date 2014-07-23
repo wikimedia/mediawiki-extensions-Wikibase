@@ -117,14 +117,14 @@ class FormatSnakValue extends ApiWikibase {
 		$data = \FormatJson::decode( $json, true );
 
 		if ( !is_array( $data ) ) {
-			$this->dieUsage( 'Failed to decode datavalue', 'baddatavalue' );
+			$this->dieError( 'Failed to decode datavalue', 'baddatavalue' );
 		}
 
 		try {
 			$value = $this->getValueFactory()->newFromArray( $data );
 			return $value;
 		} catch ( IllegalValueException $ex ) {
-			$this->dieUsage( $ex->getMessage(), 'baddatavalue' );
+			$this->dieException( $ex, 'baddatavalue' );
 		}
 
 		throw new LogicException( 'ApiBase::dieUsage did not throw a UsageException' );
