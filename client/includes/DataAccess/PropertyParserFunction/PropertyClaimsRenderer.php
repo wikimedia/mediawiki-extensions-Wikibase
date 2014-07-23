@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-interface Renderer {
+interface PropertyClaimsRenderer {
 
 	/**
 	 * @param EntityId $entityId
