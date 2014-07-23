@@ -16,6 +16,24 @@
       "revId": "0f01b36e06a6ae313532950e574340aa23b5caff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8ff4aacb",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-23T11:57:35Z",
+      "side": 1,
+      "message": "Or maybe \u0027pretty\u0027. And perhaps it should be possible to override this using FormatterOptions?",
+      "parentUuid": "8e28a382_8f6dca97",
+      "revId": "0f01b36e06a6ae313532950e574340aa23b5caff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
