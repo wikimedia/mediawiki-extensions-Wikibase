@@ -89,7 +89,7 @@ class GetClaims extends ApiWikibase {
 
 	protected function validateParameters( array $params ) {
 		if ( !isset( $params['entity'] ) && !isset( $params['claim'] ) ) {
-			$this->dieUsage( 'Either the entity parameter or the claim parameter need to be set', 'param-missing' );
+			$this->dieError( 'Either the entity parameter or the claim parameter need to be set', 'param-missing' );
 		}
 	}
 
@@ -187,7 +187,7 @@ class GetClaims extends ApiWikibase {
 			$entityId = $this->getEntityIdFromClaimGuid( $params['claim'] );
 
 			if( isset( $params['entity'] ) && $entityId !== $params['entity'] ) {
-				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
+				$this->dieError( 'If both entity id and claim key are provided they need to point to the same entity', 'param-illegal' );
 			}
 		} else {
 			$claimGuid = null;
@@ -199,7 +199,7 @@ class GetClaims extends ApiWikibase {
 
 	protected function getEntityIdFromClaimGuid( $claimGuid ) {
 		if ( $this->claimGuidValidator->validateFormat( $claimGuid ) === false ) {
-			$this->dieUsage( 'Invalid claim guid' , 'invalid-guid' );
+			$this->dieError( 'Invalid claim guid' , 'invalid-guid' );
 		}
 
 		return $this->claimGuidParser->parse( $claimGuid )->getEntityId()->getSerialization();

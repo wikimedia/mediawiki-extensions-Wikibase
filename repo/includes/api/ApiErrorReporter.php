@@ -113,7 +113,7 @@ class ApiErrorReporter {
 	 * If possible, a localized error message based on the exception is
 	 * included in the error sent to the client. Localization of errors
 	 * is attempted using the ExceptionLocalizer service provided to the
-	 * constructor. If that fails, dieUSage() is called, which in turn
+	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
 	 * @see ApiBase::dieUsage()
@@ -148,7 +148,7 @@ class ApiErrorReporter {
 	 * If possible, a localized error message based on the exception is
 	 * included in the error sent to the client. Localization of errors
 	 * is attempted using the ExceptionLocalizer service provided to the
-	 * constructor. If that fails, dieUSage() is called, which in turn
+	 * constructor. If that fails, dieUsage() is called, which in turn
 	 * attempts localization based on the error code.
 	 *
 	 * @see ApiBase::dieUsage()
@@ -245,7 +245,7 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * Throws a UsageException by calling $this->apiModule->dieUsage().
+	 * Throws a UsageException by calling ApiBase::dieUsage().
 	 *
 	 * @see ApiBase::dieUsage()
 	 *
@@ -257,7 +257,7 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	protected function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
-		$this->apiModule->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		$this->apiModule->getMain()->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 
 		throw new LogicException( 'UsageException not thrown' );
 	}

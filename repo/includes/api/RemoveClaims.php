@@ -64,7 +64,7 @@ class RemoveClaims extends ModifyClaim {
 		try {
 			$changeOps->apply( $entity, $summary );
 		} catch ( ChangeOpException $e ) {
-			$this->dieUsage( $e->getMessage(), 'failed-save' );
+			$this->dieException( $e, 'failed-save' );
 		}
 
 		$this->saveChanges( $entity, $summary );
@@ -88,20 +88,20 @@ class RemoveClaims extends ModifyClaim {
 
 		foreach ( $params['claim'] as $guid ) {
 			if ( !$this->claimModificationHelper->validateClaimGuid( $guid ) ) {
-				$this->dieUsage( "Invalid claim guid $guid" , 'invalid-guid' );
+				$this->dieError( "Invalid claim guid $guid" , 'invalid-guid' );
 			}
 
 			if ( is_null( $entityId ) ) {
 				$entityId = $this->claimGuidParser->parse( $guid )->getEntityId();
 			} else {
 				if ( !$this->claimGuidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
-					$this->dieUsage( 'All claims must belong to the same entity' , 'invalid-guid' );
+					$this->dieError( 'All claims must belong to the same entity' , 'invalid-guid' );
 				}
 			}
 		}
 
 		if ( is_null( $entityId ) ) {
-			$this->dieUsage( 'Could not find an entity for the claims' , 'invalid-guid' );
+			$this->dieError( 'Could not find an entity for the claims' , 'invalid-guid' );
 		}
 
 		return $entityId ;
@@ -120,7 +120,7 @@ class RemoveClaims extends ModifyClaim {
 
 		foreach ( $guids as $guid) {
 			if ( !$claims->hasClaimWithGuid( $guid ) ) {
-				$this->dieUsage( "Claim with guid $guid not found" , 'invalid-guid' );
+				$this->dieError( "Claim with guid $guid not found" , 'invalid-guid' );
 			}
 		}
 	}

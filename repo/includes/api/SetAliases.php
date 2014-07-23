@@ -75,7 +75,7 @@ class SetAliases extends ModifyEntity {
 		parent::validateParameters( $params );
 
 		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) ) xor isset( $params['set'] ) ) ) {
-			$this->dieUsage( "Parameters 'add' and 'remove' are not allowed to be set when parameter 'set' is provided" , 'invalid-list' );
+			$this->dieError( "Parameters 'add' and 'remove' are not allowed to be set when parameter 'set' is provided" , 'invalid-list' );
 		}
 	}
 
@@ -83,7 +83,7 @@ class SetAliases extends ModifyEntity {
 	 * @see ApiModifyEntity::createEntity()
 	 */
 	protected function createEntity( array $params ) {
-		$this->dieUsage( 'Could not find an existing entity' , 'no-such-entity' );
+		$this->dieError( 'Could not find an existing entity' , 'no-such-entity' );
 	}
 
 	/**

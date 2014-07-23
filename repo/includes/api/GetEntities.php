@@ -75,7 +75,7 @@ class GetEntities extends ApiWikibase {
 
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {
 			wfProfileOut( __METHOD__ );
-			$this->dieUsage(
+			$this->dieError(
 				'Either provide the item "ids" or pairs of "sites" and "titles" for corresponding pages',
 				'param-missing'
 			);
@@ -123,7 +123,7 @@ class GetEntities extends ApiWikibase {
 					$ids[] = $this->idParser->parse( $id );
 				} catch( EntityIdParsingException $e ) {
 					wfProfileOut( __METHOD__ );
-					$this->dieUsage( "Invalid id: $id", 'no-such-entity' );
+					$this->dieError( "Invalid id: $id", 'no-such-entity' );
 				}
 			}
 		}
