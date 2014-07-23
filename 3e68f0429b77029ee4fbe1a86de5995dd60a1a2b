@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_ac465123",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/RendererFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-23T15:50:27Z",
+      "side": 1,
+      "message": "sounds like a static method for getting a new RendererFactory... maybe getForParser or just getRenderer?",
+      "revId": "3e68f0429b77029ee4fbe1a86de5995dd60a1a2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0c0a05d5",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-23T15:50:27Z",
+      "side": 1,
+      "message": "why property ids? Do we really want someone to call {{#property:P42|of\u003dP123}} :P Not really something we need to solve here, just wondered",
+      "revId": "3e68f0429b77029ee4fbe1a86de5995dd60a1a2b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
