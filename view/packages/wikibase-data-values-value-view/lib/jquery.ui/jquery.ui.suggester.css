@@ -30,8 +30,3 @@
 	padding: 0 0.2em;
 	text-decoration: none;
 }
-
-.ui-suggester-list a.ui-state-hover,
-.ui-suggester-list a.ui-state-active {
-	margin: 0;
-}
