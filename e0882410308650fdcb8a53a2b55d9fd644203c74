@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_129a1e17",
+        "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T19:05:53Z",
+      "side": 1,
+      "message": "only generates if the context and settings are appropriate.\n\nChangesPageWikibaseFilterHookHandler?\n\nChangesPageFilterHookHandler?",
+      "parentUuid": "8e28a382_b2422aaf",
+      "revId": "e0882410308650fdcb8a53a2b55d9fd644203c74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f2fd526a",
         "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "getFilter, createFilter, makeFilter, makeWikibaseChangesToggle, makeChangesToggle, getChangesToggle. Choose one, or something different:P",
       "parentUuid": "8e28a382_f2fd526a",
+      "revId": "e0882410308650fdcb8a53a2b55d9fd644203c74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_529426eb",
+        "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T19:05:53Z",
+      "side": 1,
+      "message": "it only gets added, created, made depending on context and setting\n\ncreateFilterDependingOnContextAndSettings?\n\nall of this is the responsibility of the hook. :/",
+      "parentUuid": "8e28a382_120fbe8e",
       "revId": "e0882410308650fdcb8a53a2b55d9fd644203c74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
