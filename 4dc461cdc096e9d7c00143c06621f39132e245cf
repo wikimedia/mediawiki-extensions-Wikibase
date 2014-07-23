@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_6f2bbb78",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-23T17:01:46Z",
+      "side": 1,
+      "message": "this is only used in unsetKey?\n\nif so, this could go in the unsetKey method?\n\nwhile I see what the code does, it\u0027s slightly confusing that in the $idString was unset before and now $redirectedId is being given.",
+      "revId": "4dc461cdc096e9d7c00143c06621f39132e245cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
