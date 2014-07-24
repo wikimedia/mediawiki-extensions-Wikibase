@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_89f37c68",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T13:22:59Z",
+      "side": 1,
+      "message": "why does this have to be a static method? that makes it nasty to test. WikibaseClient could just have a factory method for the OtherProjectsSitesProvider.",
+      "revId": "e189d0546a369fd694ded4d69786ceed23169689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e900c03a",
         "filename": "client/includes/OtherProjectsSitesProvider.php",
         "patchSetId": 12
