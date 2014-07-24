@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f840880b",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T20:51:42Z",
+      "side": 1,
+      "message": "Or functional style:\n\n  $otherProjectsSiteIds \u003d array_map( function( Site $site ) {\n    return $site-\u003egetGlobalId();\n  }, $otherProjectsSites );\n\nI for one find that easier to read. Wouldn\u0027t Python style list comprehension be nice?",
+      "revId": "82cecdc64930dc7c03931b62c0fbff5af77e44e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_185354e3",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T20:51:42Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "revId": "82cecdc64930dc7c03931b62c0fbff5af77e44e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
