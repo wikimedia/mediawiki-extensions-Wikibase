@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_c2bcb603",
+        "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-24T21:53:56Z",
+      "side": 1,
+      "message": "I still don\u0027t think this should take a special page... https://en.wikipedia.org/wiki/Law_of_Demeter anyone?",
+      "revId": "ce782554aec4fb23b58e021f7989a99fc93f198e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
