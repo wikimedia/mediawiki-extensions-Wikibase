@@ -9,23 +9,27 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
- * @todo Add test for qualifiers.
- * @todo Add test for references.
+ * @todo Fix the UnDeserializableValue test.
  * @todo Add test for ranks.
+ * @todo Is something special needed to test ordering?
  * @todo Add tests with $options->setIndexTags( true ).
  *
  * @licence GNU GPL v2+
@@ -99,6 +103,22 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSymmetric( $expectedEntity, $actualEntity );
 	}
 
+	/**
+	 * @dataProvider entityProvider
+	 */
+	public function testEmptyArraySerialization( Entity $entity ) {
+		$serializer = $this->getSerializer();
+		$serialization = $serializer->serialize( $entity );
+
+		$this->assertArrayHasKey( 'labels', $serialization );
+		$this->assertArrayHasKey( 'descriptions', $serialization );
+		$this->assertArrayHasKey( 'aliases', $serialization );
+
+		if ( $entity->getType() === 'item' ) {
+			$this->assertArrayHasKey( 'sitelinks', $serialization );
+		}
+	}
+
 	public function entityProvider() {
 		$tests = array();
 
@@ -136,21 +156,23 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q4' ) );
-		$this->addClaims( $item );
+		$this->addClaimsWithoutQualifiers( $item );
+		$this->addClaimWithQualifiers( $item );
+		$this->addStatementWithQualifiersAndReferences( $item );
 		$entities[] = $item;
 
 		return $entities;
 	}
 
-	private function addFingerprint( Entity $entity ) {
-		$entity->setLabel( 'de', 'de-label' );
-		$entity->setLabel( 'en', 'en-label' );
+	private function addFingerprint( Item $item ) {
+		$item->setLabel( 'de', 'de-label' );
+		$item->setLabel( 'en', 'en-label' );
 
-		$entity->setDescription( 'de', 'de-description' );
-		$entity->setDescription( 'en', 'en-description' );
+		$item->setDescription( 'de', 'de-description' );
+		$item->setDescription( 'en', 'en-description' );
 
-		$entity->addAliases( 'de', array( 'de-alias1', 'de-alias2' ) );
-		$entity->addAliases( 'en', array( 'en-alias1', 'en-alias2' ) );
+		$item->addAliases( 'de', array( 'de-alias1', 'de-alias2' ) );
+		$item->addAliases( 'en', array( 'en-alias1', 'en-alias2' ) );
 	}
 
 	private function addSiteLinks( Item $item ) {
@@ -163,40 +185,66 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$item->addSiteLink( new SiteLink( 'enwiki', 'enwiki-pagename', $badges ) );
 	}
 
-	private function addClaims( Item $item ) {
-		$this->addClaim( $item, new PropertyNoValueSnak(
-			new PropertyId( 'P401' )
-		) );
-
-		$this->addClaim( $item, new PropertySomeValueSnak(
-			new PropertyId( 'P402' )
-		) );
-
-		$this->addClaim( $item, new PropertyValueSnak(
-			new PropertyId( 'P403' ),
-			new BooleanValue( true )
-		) );
-		$this->addClaim( $item, new PropertyValueSnak(
-			new PropertyId( 'P404' ),
-			new StringValue( 'stringvalue' )
-		) );
-		$this->addClaim( $item, new PropertyValueSnak(
-			new PropertyId( 'P405' ),
-			new UnDeserializableValue( 'undeserializable-data', 'string', 'undeserializable-error' )
-		) );
-		$this->addClaim( $item, new PropertyValueSnak(
-			new PropertyId( 'P406' ),
-			new UnknownValue( 'unknown-value' )
-		) );
+	private function getSnaks( $baseId = 'P' ) {
+		return array(
+			new PropertyNoValueSnak(
+				new PropertyId( $baseId . '1' )
+			),
+			new PropertySomeValueSnak(
+				new PropertyId( $baseId . '2' )
+			),
+			new PropertyValueSnak(
+				new PropertyId( $baseId . '3' ),
+				new BooleanValue( true )
+			),
+			new PropertyValueSnak(
+				new PropertyId( $baseId . '4' ),
+				new StringValue( 'string-value' )
+			),
+			//new PropertyValueSnak(
+			//	new PropertyId( $baseId . '5' ),
+			//	new UnDeserializableValue( 'undeserializable-data', 'unsupported', 'error' )
+			//),
+			new PropertyValueSnak(
+				new PropertyId( $baseId . '6' ),
+				new UnknownValue( 'unknown-value' )
+			),
+		);
 	}
 
-	private function addClaim( Item $item, Snak $mainSnak ) {
-		$claim = new Claim( $mainSnak );
+	private function addClaimsWithoutQualifiers( Item $item ) {
+		foreach ( $this->getSnaks( 'P40' ) as $mainSnak ) {
+			$claim = new Claim( $mainSnak );
+			$this->setGuid( $claim );
+			$item->addClaim( $claim );
+		}
+	}
 
+	private function addClaimWithQualifiers( Item $item ) {
+		$mainSnak = new PropertyNoValueSnak(
+			new PropertyId( 'P501' )
+		);
+		$qualifiers = new SnakList( $this->getSnaks( 'P51' ) );
+		$claim = new Claim( $mainSnak, $qualifiers );
+		$this->setGuid( $claim );
+		$item->addClaim( $claim );
+	}
+
+	private function addStatementWithQualifiersAndReferences( Item $item ) {
+		$mainSnak = new PropertyNoValueSnak(
+			new PropertyId( 'P601' )
+		);
+		$qualifiers = new SnakList( $this->getSnaks( 'P61' ) );
+		$reference = new Reference( new SnakList( $this->getSnaks( 'P62' ) ) );
+		$references = new ReferenceList( array( $reference ) );
+		$statement = new Statement( $mainSnak, $qualifiers, $references );
+		$this->setGuid( $statement );
+		$item->addClaim( $statement );
+	}
+
+	private function setGuid( Claim $claim ) {
 		$claim->setGuid( 'DataModelSerializationRoundtripTest$' . $this->guidCounter );
 		$this->guidCounter++;
-
-		$item->addClaim( $claim );
 	}
 
 	private function getLegacySerializer( Entity $entity ) {
@@ -223,7 +271,9 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	private function getDeserializer() {
 		$dataValueDeserializer = new DataValueDeserializer( array(
+			'boolean' => 'DataValues\BooleanValue',
 			'string' => 'DataValues\StringValue',
+			'unknown' => 'DataValues\UnknownValue',
 		) );
 		$entityIdParser = new BasicEntityIdParser();
 		$deserializerFactory = new \Wikibase\DataModel\DeserializerFactory( $dataValueDeserializer, $entityIdParser );
