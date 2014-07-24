@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d6f483cc",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-24T07:41:33Z",
+      "side": 1,
+      "message": "I need to stop and do additional checks after the first match. See PS2.",
+      "parentUuid": "8e28a382_8f46ea23",
+      "revId": "5f883a62730439e01288d8ab65c7395b2a2e7f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_6f4f3e3a",
         "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-23T11:44:16Z",
       "side": 1,
       "message": "Why is no unlocalization expected in this case?",
+      "revId": "5f883a62730439e01288d8ab65c7395b2a2e7f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b6fd77b0",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-24T07:41:33Z",
+      "side": 1,
+      "message": "Because it\u0027s clearly not a valid date.",
+      "parentUuid": "8e28a382_6f4f3e3a",
       "revId": "5f883a62730439e01288d8ab65c7395b2a2e7f3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
