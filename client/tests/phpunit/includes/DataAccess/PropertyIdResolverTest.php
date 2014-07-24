@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
+namespace Wikibase\DataAccess\Tests;
 
 use DataValues\StringValue;
 use Language;
-use Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver;
+use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -17,12 +17,11 @@ use Wikibase\Test\MockPropertyLabelResolver;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver
+ * @covers Wikibase\DataAccess\PropertyIdResolver
  *
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseDataAccess
- * @group PropertyParserFunctionTest
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >

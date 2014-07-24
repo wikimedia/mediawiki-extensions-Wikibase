@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataAccess\PropertyParserFunction;
+namespace Wikibase\DataAccess;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Entity;

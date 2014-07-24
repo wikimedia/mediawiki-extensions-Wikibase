@@ -99,7 +99,7 @@ class PropertyClaimsRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyIdResolver() {
 		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver'
+				'Wikibase\DataAccess\PropertyIdResolver'
 			)
 			->disableOriginalConstructor()
 			->getMock();
