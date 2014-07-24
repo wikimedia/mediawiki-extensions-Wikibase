@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_76c6ef1b",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-24T09:25:02Z",
+      "side": 1,
+      "message": "\u003e if XX is to be replaced with YYY, and date is \"XX YYY\", it will be skipped.\n\nYes. Perfect. Exactly what I expect and intended to do here.\n\n\u003e I see more and more special cases coming up here.\n\nI don\u0027t. It\u0027s the exact opposite. I\u0027m eliminating more and more special cases.\n\n\u003e I recommend simplifying the contract of the method.\n\nSimplifying the contract of a date parser? In which way? Like replacing the class with a \"@see str_replace\"? Why?\n\n\u003e It\u0027s trying to be too smart.\n\nIt\u0027s a date parser. What for good sake do you expect? if ( $input \u003d\u003d\u003d \u0027Mai\u0027) return \u0027May\u0027?\n\n\u003e I still think the contract should be \"replace the longest month name in the input with it\u0027s unlocalized version\".\n\nIt is.\n\n\u003e If you want to protect month names that are already in the right form, just add them to the replacement array, and make them map to themselves.\n\nNo. Heck, why? This would not help and reintroduce all kinds of false positives and false negatives. Please take your time and try to understand what I\u0027m doing here. Thanks.",
+      "parentUuid": "8e28a382_163d6b29",
+      "revId": "75e4df00164f9c921e28f560c9346ad881d06adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f6f65f8b",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-24T08:58:03Z",
       "side": 1,
       "message": "this method has two loops now, one of which contains increasingly complex conditionals. Please factor that out into separate functions.",
+      "revId": "75e4df00164f9c921e28f560c9346ad881d06adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_56cbf321",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-24T09:25:02Z",
+      "side": 1,
+      "message": "This is already done, see I7f1ce71. I will not increase the rebase hell more than I already did.",
+      "parentUuid": "8e28a382_f6f65f8b",
       "revId": "75e4df00164f9c921e28f560c9346ad881d06adc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
