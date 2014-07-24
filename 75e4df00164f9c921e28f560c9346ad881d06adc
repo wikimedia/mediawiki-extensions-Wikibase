@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_163d6b29",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T08:58:03Z",
+      "side": 1,
+      "message": "This should check whether $search is a substring of $replace, not just check string length, I think. Otherwise, if XX is to be replaced with YYY, and date is \"XX YYY\", it will be skipped. I guess that\u0027s not too horrible, since that would not be a \"valid date\" anyway... \n\nI see more and more special cases coming up here. I recommend simplifying the contract of the method. It\u0027s trying to be too smart. I still think the contract should be \"replace the longest month name in the input with it\u0027s unlocalized version\". \n\nIf you want to protect month names that are already in the right form, just add them to the replacement array, and make them map to themselves.",
+      "revId": "75e4df00164f9c921e28f560c9346ad881d06adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f6f65f8b",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T08:58:03Z",
+      "side": 1,
+      "message": "this method has two loops now, one of which contains increasingly complex conditionals. Please factor that out into separate functions.",
+      "revId": "75e4df00164f9c921e28f560c9346ad881d06adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
