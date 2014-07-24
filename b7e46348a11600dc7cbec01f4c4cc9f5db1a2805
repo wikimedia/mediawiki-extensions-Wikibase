@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_290fe88e",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T12:52:49Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8e28a382_090f8ce5",
+      "revId": "b7e46348a11600dc7cbec01f4c4cc9f5db1a2805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e9f7a0ce",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_e92c40f4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T12:52:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_e9f7a0ce",
+      "revId": "b7e46348a11600dc7cbec01f4c4cc9f5db1a2805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_490914e0",
         "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2014-07-24T12:11:11Z",
       "side": 1,
       "message": "I\u0027d be more happy if this had a type hint on IContextSource because that\u0027s really what is needed here AFAIS",
+      "revId": "b7e46348a11600dc7cbec01f4c4cc9f5db1a2805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_89481cd0",
+        "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T12:52:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_490914e0",
       "revId": "b7e46348a11600dc7cbec01f4c4cc9f5db1a2805",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
