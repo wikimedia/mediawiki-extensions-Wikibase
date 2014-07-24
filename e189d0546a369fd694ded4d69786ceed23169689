@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_69c6101c",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T13:22:38Z",
+      "side": 1,
+      "message": "this line not needed, afaik",
+      "revId": "e189d0546a369fd694ded4d69786ceed23169689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e900c03a",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T13:22:38Z",
+      "side": 1,
+      "message": "I thought this was a repo setting, but upon checking, it is a lib setting.\n\nI don\u0027t think we have it set for the clients in production. please add a deploy note and be sure we do that.",
+      "revId": "e189d0546a369fd694ded4d69786ceed23169689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
