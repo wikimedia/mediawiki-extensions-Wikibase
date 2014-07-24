@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_58a8bc89",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T21:04:46Z",
+      "side": 1,
+      "message": "if ( !$language ) { return array(); } would avoid the nesting. Guard statements are good, I think...",
+      "revId": "76b1ec060d0b95e267cb9dd8c90c58e9e8e10c26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f8b2c8f7",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T21:04:46Z",
+      "side": 1,
+      "message": "Yes, they are slow, but when will this method not be called, so we actually benefit from the laziness? Also, the object for the user\u0027s interface language is very likely already loaded and cached.",
+      "revId": "76b1ec060d0b95e267cb9dd8c90c58e9e8e10c26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
