@@ -713,6 +713,10 @@ final class WikibaseClient {
 	 * @return OtherProjectsSitesProvider
 	 */
 	public function getOtherProjectsSitesProvider() {
-		return new OtherProjectsSitesProvider( $this->getSiteStore(), $this->getSite() );
+		return new OtherProjectsSitesProvider(
+			$this->getSiteStore(),
+			$this->getSite(),
+			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
 	}
 }
