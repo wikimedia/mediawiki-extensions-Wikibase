@@ -71,24 +71,6 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\SnakConstructionService', $returnValue );
 	}
 
-	/**
-	 * @dataProvider provideGetRdfBaseURI
-	 */
-	public function testGetRdfBaseURI( $server, $expected ) {
-		$this->setMwGlobals( 'wgServer', $server );
-
-		$returnValue = $this->getDefaultInstance()->getRdfBaseURI();
-		$this->assertEquals( $expected, $returnValue );
-	}
-
-	public function provideGetRdfBaseURI() {
-		return array(
-			array ( 'http://acme.test', 'http://acme.test/entity/' ),
-			array ( 'https://acme.test', 'https://acme.test/entity/' ),
-			array ( '//acme.test', 'http://acme.test/entity/' ),
-		);
-	}
-
 	public function testGetEntityIdParserReturnType() {
 		$returnValue = $this->getDefaultInstance()->getEntityIdParser();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
