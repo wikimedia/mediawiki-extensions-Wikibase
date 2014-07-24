@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_6cd73e51",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T14:26:13Z",
+      "side": 1,
+      "message": "agree generally but this is language dependent.\n\nthe variants renderer calls this for each language variant so perhaps we would resolve it there before calling here?\n\nif the runner has a LanguageAwareRenderer, resolve the id in the Runner?\n\nseems more messy, so probably can use more thought and should be done in a follow up.\n\nI added a @todo in I56d4339",
+      "parentUuid": "8e28a382_4afa30b7",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0ce205d0",
         "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0cd2fa5c",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T14:26:13Z",
+      "side": 1,
+      "message": "done in I8db5e72",
+      "parentUuid": "8e28a382_0ce205d0",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_aaf754cf",
         "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2014-07-23T14:17:40Z",
       "side": 1,
       "message": "I think the second parameter should be a PropertyId.\nThe property name should be resolved before calling the renderer.",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ac4f6638",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T14:26:13Z",
+      "side": 1,
+      "message": "can you suggest a way to nicely do this given that resolving the PropertyId depends on language? \n\ncurrently we check / resolve for each variant language and if not using variants renderer, then just resolve it when rendering for a language.",
+      "parentUuid": "8e28a382_aaf754cf",
       "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
