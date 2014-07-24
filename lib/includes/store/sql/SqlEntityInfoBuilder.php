@@ -197,15 +197,16 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 	}
 
 	/**
-	 * Applied the given redirect to the internal data structure
+	 * Applied the given redirect to the internal data structure.
+	 *
+	 * After this method returns, the old ID will have been replaced by the target ID
+	 * in the $entityInfo as well as the $numericIdsByType structures. In $entityInfo,
+	 * the old key will remain as a reference to the entry under the new (target) key.
 	 *
 	 * @param string $idString The redirected entity id
 	 * @param EntityId $targetId The redirect target
 	 */
 	private function applyRedirect( $idString, EntityId $targetId ) {
-		$redirectedId = $this->getEntityId( $idString );
-		$type = $redirectedId->getEntityType();
-
 		$targetKey = $targetId->getSerialization();
 
 		if ( $idString === $targetKey ) {
@@ -213,25 +214,78 @@ class SqlEntityInfoBuilder extends \DBAccessBase implements EntityInfoBuilder {
 			return;
 		}
 
-		// If the redirect target doesn't have a record yet, copy the old record.
-		// Since two IDs may be redirected to the same target, this may already have
-		// happened.
-		if ( !isset( $this->entityInfo[$targetKey] ) ) {
-			$this->entityInfo[$targetKey] = $this->entityInfo[$idString]; // copy
-			$this->entityInfo[$targetKey]['id'] = $targetKey; // update id
-		}
+		// Copy the record for the old key to the target key.
+		$this->initRecord( $targetKey, $this->entityInfo[$idString] );
+
+		// Remove the original entry for the old key.
+		$this->unsetKey( $idString );
 
 		// Make the redirected key a reference to the target record.
-		unset( $this->entityInfo[$idString] ); // just to be sure not to cause a mess
-		$this->entityInfo[$idString] = & $this->entityInfo[$targetKey];
+		$this->createEntityInfoReference( $idString, $this->entityInfo[$targetKey] );
 
-		// Remove the numeric id of the redirect, since we don't want to
-		// use it in database queries.
+		// From now on, use the target ID in the record and for database queries.
+		$this->forceEntityId( $targetKey, $targetId  );
+	}
+
+	/**
+	 * Sets the given key in the $entityInfo data structure to a reference
+	 * to the given record. This allows the same record to be accessed
+	 * under multiple different keys.
+	 *
+	 * @param string $key
+	 * @param array $record
+	 */
+	private function createEntityInfoReference( $key, array &$record ) {
+		$this->entityInfo[$key] = & $record;
+	}
+
+	/**
+	 * Removes any references to the given entity from the $entityInfo data
+	 * structure as well as the $numericIdsByType cache, but not from
+	 * the $entityIds cache.
+	 *
+	 * @param string $idString
+	 */
+	private function unsetKey( $idString ) {
+		$id = $this->getEntityId( $idString );
+
+		$type = $id->getEntityType();
+
+		unset( $this->entityInfo[$idString] );
 		unset( $this->numericIdsByType[$type][$idString] );
+	}
 
-		// Record the id of the target.
-		$this->numericIdsByType[$type][$targetKey] = $targetId->getNumericId();
-		$this->entityIds[$targetKey] = $targetId;
+	/**
+	 * Sets the given key in the $entityInfo data structure to
+	 * the given record if that key is not already set.
+	 *
+	 * @param string $key
+	 * @param array $record
+	 */
+	private function initRecord( $key, array $record ) {
+		if ( !isset( $this->entityInfo[$key] ) ) {
+			$this->entityInfo[$key] = $record;
+		}
+	}
+
+	/**
+	 * Forces the EntityId associated with the given key.
+	 * May be used on entries for ids that are redirected, when the
+	 * actual ID differs from the original (redirected) entity id.
+	 *
+	 * This updates the $entityInfo structure, and makes the ID
+	 * available via the $numericIdsByType and $entityIds caches.
+	 *
+	 * @param string $key
+	 * @param EntityId $id
+	 */
+	private function forceEntityId( $key, EntityId $id ) {
+		//NOTE: we assume that the type of entity never changes.
+		$type = $id->getEntityType();
+
+		$this->numericIdsByType[$type][$key] = $id->getNumericId();
+		$this->entityIds[$key] = $id;
+		$this->entityInfo[$key]['id'] = $key;
 	}
 
 	/**
