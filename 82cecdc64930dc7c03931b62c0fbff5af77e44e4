@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d8a14c92",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-24T21:18:47Z",
+      "side": 1,
+      "message": "I don\u0027t find the functional style easy to read at all... so much nested stuff (with a slightly more sophisticated function it *might* makes sense, but not here. Python style of course would be awesome, but not really an option :D",
+      "parentUuid": "8e28a382_f840880b",
+      "revId": "82cecdc64930dc7c03931b62c0fbff5af77e44e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_185354e3",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-24T20:51:42Z",
       "side": 1,
       "message": "why is this needed?",
+      "revId": "82cecdc64930dc7c03931b62c0fbff5af77e44e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_18947438",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-24T21:18:47Z",
+      "side": 1,
+      "message": "I only realized it\u0027s not when doing the follow up... so it\u0027s being removed there not here, because I\u0027m a lazy person and didn\u0027t want to redo this again",
+      "parentUuid": "8e28a382_185354e3",
       "revId": "82cecdc64930dc7c03931b62c0fbff5af77e44e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
