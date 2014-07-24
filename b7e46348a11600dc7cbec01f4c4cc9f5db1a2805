@@ -104,6 +104,24 @@
       "revId": "b7e46348a11600dc7cbec01f4c4cc9f5db1a2805",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c9286497",
+        "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-24T13:48:09Z",
+      "side": 1,
+      "message": "changed it back. It would be nice to pass $context here but then SpecialPage::getContext() would be in the hooks class and not covered by tests.\n\nI think lesser of evils is to pass the special page variable directly.\n\nbtw, I thought SpecialPage derives from ContextSource but it does not (yet) and prefer that didn\u0027t happen (despite the @todo in SpecialPage).  \n\nChanged the code here accordingly.",
+      "parentUuid": "8e28a382_89481cd0",
+      "revId": "b7e46348a11600dc7cbec01f4c4cc9f5db1a2805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
