@@ -16,6 +16,24 @@
       "revId": "d97e7f18c9cc4ea5c973e0652988520f2a7d90cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a9e99811",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-24T11:30:27Z",
+      "side": 1,
+      "message": "I could either move that into a static? function in OtherProjectsSitesProvider or move that into the WikibaseClient factory",
+      "parentUuid": "8e28a382_6973b0b0",
+      "revId": "d97e7f18c9cc4ea5c973e0652988520f2a7d90cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
