@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_93b3c9fc",
+        "filename": "lib/includes/store/EntityInfoTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-24T13:42:13Z",
+      "side": 1,
+      "message": "I\u0027m sorry? What \"logic\"? You are clearly talking about a completely different class, not about this one.\n\nReturn \"all labels\" seems pointless. You can just call Entity::getLabels if you want that.",
+      "parentUuid": "8e28a382_d533795d",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_354e3dde",
         "filename": "lib/includes/store/EntityTermLookup.php",
         "patchSetId": 4
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_099f8c07",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-24T13:42:13Z",
+      "side": 1,
+      "message": "\"Value\" is short for \"ValueArray\". Yes, that\u0027s misleading. Should be \"Info\".",
+      "parentUuid": "8e28a382_7544c5bd",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f51795a6",
         "filename": "lib/includes/store/EntityTermLookup.php",
         "patchSetId": 4
@@ -81,6 +117,24 @@
       "writtenOn": "2014-07-21T15:33:13Z",
       "side": 1,
       "message": "Having methods that apply language fallback in this interface seems odd, since their implementation is going to be the same for all classes implementing this interface. That implies that they are in the wrong place.",
+      "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e987a0b8",
+        "filename": "lib/includes/store/EntityTermLookup.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-24T13:42:13Z",
+      "side": 1,
+      "message": "Yes, the fallback must go to a constructor.",
+      "parentUuid": "8e28a382_f51795a6",
       "revId": "f99935b685937596f7b9aa50213376810c10ff5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
