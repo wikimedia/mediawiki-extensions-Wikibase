@@ -83,6 +83,7 @@ class LanguageAwareRenderer implements PropertyClaimsRenderer {
 	 */
 	public function render( EntityId $entityId, $propertyLabelOrId ) {
 		try {
+			// @todo have the $propertyId resolved before passing into here
 			$propertyId = $this->propertyIdResolver->resolvePropertyId(
 				$propertyLabelOrId,
 				$this->language->getCode()
