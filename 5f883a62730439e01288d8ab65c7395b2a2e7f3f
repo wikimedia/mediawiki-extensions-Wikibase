@@ -69,6 +69,24 @@
       "revId": "5f883a62730439e01288d8ab65c7395b2a2e7f3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d64243b0",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T08:58:23Z",
+      "side": 1,
+      "message": "i still don\u0027t think a month name unlocalizer should know or care about dates.",
+      "parentUuid": "8e28a382_b6fd77b0",
+      "revId": "5f883a62730439e01288d8ab65c7395b2a2e7f3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
