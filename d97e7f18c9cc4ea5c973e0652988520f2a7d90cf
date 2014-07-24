@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_6973b0b0",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T10:39:12Z",
+      "side": 1,
+      "message": "This feels a bit too much for a setting initializer. Perhaps it would be better to have a getOtherProjectsLinks() method somewhere that contains this logic? It\u0027s bad to hide this kind of thing in the setting defaults, I think.",
+      "revId": "d97e7f18c9cc4ea5c973e0652988520f2a7d90cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
