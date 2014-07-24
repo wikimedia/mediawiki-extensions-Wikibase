@@ -22,7 +22,7 @@
 	"wikibase-comment-sitelink-change": "Mezijazykový odkaz změněn z $1 na $2",
 	"wikibase-comment-sitelink-remove": "Odstraněn mezijazykový odkaz: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|změna|změny|změn}}",
-	"wikibase-dataitem": "Datová položka",
+	"wikibase-dataitem": "Položka na {{grammar:6sg|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Upravit odkazy",
 	"wikibase-editlinkstitle": "Editovat mezijazykové odkazy",
 	"wikibase-linkitem-addlinks": "Přidat odkazy",
@@ -40,7 +40,6 @@
 	"wikibase-linkitem-not-loggedin": "Je třeba být přihlášen na této wiki a [$1  Wikidatech], chcete-li použít tuto funkci.",
 	"wikibase-linkitem-success-link": "Stránky byly úspěšně propojeny. V [$1 centrálním datovém úložišti] byla založena položka obsahující tyto odkazy.",
 	"wikibase-property-notfound": "Vlastnost $1 nebyla nalezena.",
-	"wikibase-property-notsupportedyet": "Wikibase zatím nepodporuje typ vlastnosti $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{grammar:4sg|{{WBREPONAME}}}}",
 	"wikibase-rc-hide-wikidata-hide": "Skrýt",
 	"wikibase-rc-hide-wikidata-show": "Zobrazit",
@@ -61,5 +60,7 @@
 	"wikibase-pageinfo-entity-id": "ID položky {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Žádná",
 	"wikibase-property-render-error": "Nepodařilo se zobrazit vlastnost $1: $2",
-	"wikibase-otherprojects": "Jiné projekty"
+	"wikibase-otherprojects": "Jiné projekty",
+	"wikibase-otherprojects-beta-message": "Panel Jiné projekty",
+	"wikibase-otherprojects-beta-description": "Přidává na postranní panel sekci „{{int:wikibase-otherprojects}}“ obsahující odkazy na ostatní projekty Wikimedia podle údajů na {{grammar:6sg|{{WBREPONAME}}}}."
 }

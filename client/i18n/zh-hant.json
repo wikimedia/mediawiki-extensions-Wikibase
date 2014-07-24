@@ -10,7 +10,8 @@
 			"Stevenliuyi",
 			"Tntchn",
 			"Yfdyh000",
-			"乌拉跨氪"
+			"乌拉跨氪",
+			"LNDDYL"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
@@ -46,14 +47,13 @@
 	"wikibase-linkitem-not-loggedin": "你必需於本維基及[$1 中央數據庫]中登入才可使用此功能。",
 	"wikibase-linkitem-success-link": "頁面已成功連接，你可以於[$1 中央數據庫]中找到包含此連結的項目。",
 	"wikibase-property-notfound": "$1屬性未找到。",
-	"wikibase-property-notsupportedyet": "Wikibase尚未支援$1屬性。",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隱藏",
 	"wikibase-rc-hide-wikidata-show": "顯示",
 	"wikibase-rc-show-wikidata-pref": "在最近更改中顯示{{WBREPONAME}}的編輯",
 	"wikibase-rc-wikibase-edit-letter": "編",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}編輯",
-	"wikibase-watchlist-show-changes-pref": "在我的監視列表中顯示維基數據編輯",
+	"wikibase-watchlist-show-changes-pref": "在我的監視清單中顯示維基數據編輯",
 	"wikibase-error-serialize-error": "無法序列化資料",
 	"wikibase-error-invalid-entity-id": "系統無法辨認你輸入的ID。請使用一個有效的ID。",
 	"special-unconnectedpages": "未連接到任一項目的頁面",
