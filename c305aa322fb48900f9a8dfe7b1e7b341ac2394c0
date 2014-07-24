@@ -52,6 +52,24 @@
       "revId": "c305aa322fb48900f9a8dfe7b1e7b341ac2394c0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_29524816",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T10:35:08Z",
+      "side": 1,
+      "message": "For reference: https://tools.ietf.org/html/rfc3986#section-4.1\nThe spec defines \"relative references\" and says \"URI-references\" may be relative references. These are not actual URIs though.",
+      "parentUuid": "8e28a382_0909cc2e",
+      "revId": "c305aa322fb48900f9a8dfe7b1e7b341ac2394c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
