@@ -4,8 +4,8 @@ namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
 use DataValues\StringValue;
 use Language;
+use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
-use Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -56,7 +56,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyIdResolver() {
 		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver'
+				'Wikibase\DataAccess\PropertyIdResolver'
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -105,7 +105,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 
 	private function getPropertyIdResolverForPropertyNotFound() {
 		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\DataAccess\PropertyParserFunction\PropertyIdResolver'
+				'Wikibase\DataAccess\PropertyIdResolver'
 			)
 			->disableOriginalConstructor()
 			->getMock();

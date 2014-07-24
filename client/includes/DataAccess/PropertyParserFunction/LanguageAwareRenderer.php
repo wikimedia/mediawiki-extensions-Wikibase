@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Language;
 use Status;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataAccess\PropertyIdResolver;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
