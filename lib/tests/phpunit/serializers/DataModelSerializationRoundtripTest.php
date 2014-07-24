@@ -2,9 +2,12 @@
 
 namespace Tests\Wikibase\DataModel;
 
+use DataValues\BooleanValue;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use DataValues\UnDeserializableValue;
+use DataValues\UnknownValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -20,6 +23,9 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
+ * @todo Add test for qualifiers.
+ * @todo Add test for references.
+ * @todo Add test for ranks.
  * @todo Add tests with $options->setIndexTags( true ).
  *
  * @licence GNU GPL v2+
@@ -161,12 +167,26 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$this->addClaim( $item, new PropertyNoValueSnak(
 			new PropertyId( 'P401' )
 		) );
+
 		$this->addClaim( $item, new PropertySomeValueSnak(
 			new PropertyId( 'P402' )
 		) );
+
 		$this->addClaim( $item, new PropertyValueSnak(
 			new PropertyId( 'P403' ),
+			new BooleanValue( true )
+		) );
+		$this->addClaim( $item, new PropertyValueSnak(
+			new PropertyId( 'P404' ),
 			new StringValue( 'stringvalue' )
+		) );
+		$this->addClaim( $item, new PropertyValueSnak(
+			new PropertyId( 'P405' ),
+			new UnDeserializableValue( 'undeserializable-data', 'string', 'undeserializable-error' )
+		) );
+		$this->addClaim( $item, new PropertyValueSnak(
+			new PropertyId( 'P406' ),
+			new UnknownValue( 'unknown-value' )
 		) );
 	}
 
