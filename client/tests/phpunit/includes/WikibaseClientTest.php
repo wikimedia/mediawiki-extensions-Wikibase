@@ -184,16 +184,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetOtherProjectsSitesProvider() {
-		$settings = $this->getDefaultInstance()->getSettings();
-
-		$siteGlobalID = $settings->getSetting( 'siteGlobalID' );
-
-		$settings->setSetting( 'siteGlobalID', 'enwiki' );
-
 		$returnValue = $this->getDefaultInstance()->getOtherProjectsSitesProvider();
 		$this->assertInstanceOf( 'Wikibase\Client\OtherProjectsSitesProvider', $returnValue );
-
-		$settings->setSetting( 'siteGlobalID', $siteGlobalID );
 	}
 
 	public function testGetDefaultInstance() {

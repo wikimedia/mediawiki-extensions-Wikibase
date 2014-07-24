@@ -32,7 +32,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	public function testOtherProjectSites( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
 		$siteStore = $this->getSiteStoreMock();
 
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite );
+		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
 
 		$this->assertEquals(
 			$expectedSites,
@@ -45,7 +45,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	 */
 	public function testOtherProjectSiteIds( array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
 		$siteStore = $this->getSiteStoreMock();
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite );
+		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array( 'wikidata' ) );
 
 		$expectedSiteIds = array();
 		foreach ( $expectedSites as $site ) {
@@ -84,6 +84,23 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$tests['Only one in group'] = array(
 			array( 'wikipedia', 'wikisource', 'commons' ),
 			$siteStore->getSite( 'eswiki' ),
+			$result
+		);
+
+		$result = new SiteList();
+		$result[] = $siteStore->getSite( 'wikidatawiki' );
+		$tests['Special group'] = array(
+			array( 'wikipedia', 'wikisource', 'special' ),
+			$siteStore->getSite( 'eswiki' ),
+			$result
+		);
+
+		$result = new SiteList();
+		$result[] = $siteStore->getSite( 'frwikisource' );
+		$result[] = $siteStore->getSite( 'wikidatawiki' );
+		$tests['Special group + language'] = array(
+			array( 'wikipedia', 'wikisource', 'special' ),
+			$siteStore->getSite( 'frwiki' ),
 			$result
 		);
 
@@ -146,6 +163,12 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'commonswiki' );
 		$site->setGroup( 'commons' );
+		$site->setLanguageCode( 'en' );
+		$sites[] = $site;
+
+		$site = new MediaWikiSite();
+		$site->setGlobalId( 'wikidatawiki' );
+		$site->setGroup( 'wikidata' );
 		$site->setLanguageCode( 'en' );
 		$sites[] = $site;
 
