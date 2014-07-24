@@ -52,6 +52,24 @@
       "revId": "0f01b36e06a6ae313532950e574340aa23b5caff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_336999bc",
+        "filename": "lib/includes/formatters/MwTimeIsoFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T08:31:39Z",
+      "side": 1,
+      "message": "The option was just a thought. It seems undesirable to me that we force the order, which is generally language/culture dependent. But you are right that it makes parsing a lot easier this way, and we need this to round trip with the parser.  So as long as the parser doesn\u0027t use the same pattern for determining the order of things, we probably have to stick to \u0027dmy\u0027. Convinced :)\n\n(but people *will* come and complain that the dates are \"wrong\" in their language... we\u0027ll have to deal with that eventually)",
+      "parentUuid": "8e28a382_0a62e8a8",
+      "revId": "0f01b36e06a6ae313532950e574340aa23b5caff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
