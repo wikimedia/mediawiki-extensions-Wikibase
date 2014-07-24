@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_78fa58b7",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T20:55:39Z",
+      "side": 1,
+      "message": "Yes, I would resolve the property name in the Runner. I don\u0027t mean the logic should be in the Runner - the Runner uses one service to get the PropertyId, and another to render the values.",
+      "parentUuid": "8e28a382_6cd73e51",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0ce205d0",
         "filename": "client/includes/DataAccess/PropertyParserFunction/PropertyIdResolver.php",
         "patchSetId": 4
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "can you suggest a way to nicely do this given that resolving the PropertyId depends on language? \n\ncurrently we check / resolve for each variant language and if not using variants renderer, then just resolve it when rendering for a language.",
       "parentUuid": "8e28a382_aaf754cf",
+      "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d81eec10",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Renderer.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-24T20:55:39Z",
+      "side": 1,
+      "message": "That logic should be implemented in a separate service (PropertyIdResolver or something). Would that need much code duplication to deal with variants?",
+      "parentUuid": "8e28a382_ac4f6638",
       "revId": "942e58795acf58e5549646a6edf6ba40d8b91322",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
