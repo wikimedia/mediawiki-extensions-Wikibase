@@ -28,12 +28,18 @@ class OtherProjectsSitesProvider {
 	private $currentSite;
 
 	/**
+	 * @var array
+	 */
+	private $specialSiteGroups;
+
+	/**
 	 * @param SiteStore $siteStore
 	 * @param Site $currentSite
 	 */
-	public function __construct( SiteStore $siteStore, Site $currentSite ) {
+	public function __construct( SiteStore $siteStore, Site $currentSite, array $specialSiteGroups ) {
 		$this->siteStore = $siteStore;
 		$this->currentSite = $currentSite;
+		$this->specialSiteGroups = $specialSiteGroups;
 	}
 
 	/**
@@ -50,8 +56,9 @@ class OtherProjectsSitesProvider {
 		if ( !$localSite ) {
 			return array();
 		}
+		$specialSiteGroups = $settings->getSetting( 'specialSiteLinkGroups' );
 
-		$otherProjectsSitesProvider = new self( $sitesStore, $localSite );
+		$otherProjectsSitesProvider = new self( $sitesStore, $localSite, $specialSiteGroups );
 		$otherProjectsSites = $otherProjectsSitesProvider->getOtherProjectsSites( $settings->getSetting( 'siteLinkGroups' ) );
 
 		$otherProjectsSiteIds = array();
@@ -75,6 +82,8 @@ class OtherProjectsSitesProvider {
 	public function getOtherProjectsSites( array $supportedSiteGroupIds ) {
 		$currentGroupId = $this->currentSite->getGroup();
 		$otherProjectsSites = new SiteList();
+
+		$this->substituteSpecialSiteGroups( $supportedSiteGroupIds );
 
 		foreach ( $supportedSiteGroupIds as $groupId ) {
 			if ( $groupId === $currentGroupId ) {
@@ -114,5 +123,17 @@ class OtherProjectsSitesProvider {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param array &$groups
+	 */
+	private function substituteSpecialSiteGroups( &$groups ) {
+		if ( !in_array( 'special', $groups ) ) {
+			return;
+		}
+
+		$groups = array_diff( $groups, array( 'special' ) );
+		$groups = array_merge( $groups, $this->specialSiteGroups );
 	}
 }

@@ -6,7 +6,6 @@ use MediaWikiSite;
 use Site;
 use SiteList;
 use SiteStore;
-use TestSites;
 use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Test\MockSiteStore;
@@ -31,7 +30,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 	 * @dataProvider otherProjectSitesProvider
 	 */
 	public function testOtherProjectSites( SiteStore $siteStore, array $supportedSites, Site $inputSite, SiteList $expectedSites ) {
-		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite );
+		$otherProjectsSitesProvider = new OtherProjectsSitesProvider( $siteStore, $inputSite, array() );
 
 		$this->assertEquals(
 			$expectedSites,
@@ -118,6 +117,12 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 		$site->setLanguageCode( 'en' );
 		$sites[] = $site;
 
+		$site = new MediaWikiSite();
+		$site->setGlobalId( 'wikidatawiki' );
+		$site->setGroup( 'wikidata' );
+		$site->setLanguageCode( 'en' );
+		$sites[] = $site;
+
 		return $sites;
 	}
 
@@ -137,11 +142,13 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 
 		$siteStore->saveSites( $sites );
 
+		$oldSpecialSiteLinkGroups = $settings->getSetting( 'specialSiteLinkGroups' );
 		$oldSiteGlobalId = $settings->getSetting( 'siteGlobalID' );
 		$oldSiteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 
 		$settings->setSetting( 'siteGlobalID', $siteGlobalID );
 		$settings->setSetting( 'siteLinkGroups', $siteLinkGroups );
+		$settings->setSetting( 'specialSiteLinkGroups', array( 'wikidata' ) );
 
 		$siteIds = OtherProjectsSitesProvider::getSiteIds();
 
@@ -150,6 +157,7 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 			$siteIds
 		);
 
+		$settings->setSetting( 'specialSiteLinkGroups', $oldSpecialSiteLinkGroups );
 		$settings->setSetting( 'siteLinkGroups', $oldSiteLinkGroups );
 		$settings->setSetting( 'siteGlobalID', $oldSiteGlobalId );
 		WikibaseClient::getDefaultInstance( 'reset' );
@@ -166,7 +174,9 @@ class OtherProjectsSitesProviderTest extends \MediaWikiTestCase {
 			'No sister sites in language' =>
 				array( array(), 'eswiki', array( 'wikipedia', 'wikisource', 'wikivoyage' ) ),
 			'Only one siteLinkGroup' =>
-				array( array(), 'enwiki', array( 'wikipedia' ) )
+				array( array(), 'enwiki', array( 'wikipedia' ) ),
+			'Special siteLinkGroup' =>
+				array( array( 'wikidatawiki' ), 'enwiki', array( 'wikipedia', 'special' ) )
 		);
 	}
 }
