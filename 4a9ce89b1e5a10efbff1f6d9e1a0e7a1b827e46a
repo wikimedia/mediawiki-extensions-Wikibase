@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_09ed3eee",
+        "filename": "repo/includes/ClaimDiffer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-25T18:44:14Z",
+      "side": 1,
+      "message": "The \"\u0026\u0026 $newClaimMainSnak !\u003d\u003d null\" bit is not necessary here. But not wrong.",
+      "revId": "4a9ce89b1e5a10efbff1f6d9e1a0e7a1b827e46a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
