@@ -12,7 +12,6 @@ use Wikibase\Lib\Reporting\ObservableMessageReporter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class ObservableMessageReporterTest extends \PHPUnit_Framework_TestCase {
 

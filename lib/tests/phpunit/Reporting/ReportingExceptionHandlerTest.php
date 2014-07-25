@@ -13,7 +13,6 @@ use Wikibase\Lib\Reporting\ReportingExceptionHandler;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class ReportingExceptionHandlerTest extends \PHPUnit_Framework_TestCase {
 

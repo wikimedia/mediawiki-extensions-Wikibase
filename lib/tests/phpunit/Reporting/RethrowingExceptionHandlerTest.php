@@ -13,7 +13,6 @@ use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- *
  */
 class RethrowingExceptionHandlerTest extends \PHPUnit_Framework_TestCase {
 
