@@ -388,7 +388,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$savedClaim = $claims->getClaimWithGuid( $claim->getGuid() );
 		if( count( $claim->getQualifiers() ) ) {
-			$this->assertArrayEquals( $claim->getQualifiers()->toArray(), $savedClaim->getQualifiers()->toArray(), true );
+			$this->assertTrue( $claim->getQualifiers()->equals( $savedClaim->getQualifiers() ) );
 		}
 
 		$this->assertEquals( $claimCount, $claims->count(), "Claims count is wrong after {$requestLabel}" );
