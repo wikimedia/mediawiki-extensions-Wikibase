@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
 
 /**
  * Class for changes that can be represented as a Diff.
@@ -109,7 +110,7 @@ class DiffChange extends ChangeRow {
 	 * @return string
 	 */
 	public function serializeInfo( array $info ) {
-		if ( isset( $info['diff'] ) && $info['diff'] instanceof \Diff\DiffOp ) {
+		if ( isset( $info['diff'] ) && $info['diff'] instanceof DiffOp ) {
 			if ( Settings::get( "changesAsJson" ) === true  ) {
 				/* @var \Diff\DiffOp $op */
 				$op = $info['diff'];
