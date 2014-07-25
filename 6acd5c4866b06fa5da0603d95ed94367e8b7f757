@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_9c50510f",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-25T15:35:11Z",
+      "side": 1,
+      "message": "string[] ?",
+      "revId": "6acd5c4866b06fa5da0603d95ed94367e8b7f757",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bc4b0d62",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-25T15:35:11Z",
+      "side": 1,
+      "message": "param missing",
+      "revId": "6acd5c4866b06fa5da0603d95ed94367e8b7f757",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
