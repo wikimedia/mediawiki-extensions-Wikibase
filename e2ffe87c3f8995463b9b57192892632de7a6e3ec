@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_91ca7a1c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-25T14:53:43Z",
+      "side": 1,
+      "message": "\"target-not-empty\", see Ia3ee4cc.",
+      "parentUuid": "8e28a382_36497c36",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_6503cc10",
         "filename": "repo/i18n/en.json",
         "patchSetId": 14
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_51d092cb",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-25T14:53:43Z",
+      "side": 1,
+      "message": "That\u0027s not a reason to not use the \"wb\" prefix. Again, see Ia3ee4cc.",
+      "parentUuid": "8e28a382_56408809",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_253824cf",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 14
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "That\u0027s what we currently use it for. But it could just be the error code for \"should be empty, isn\u0027t empty\" anywhere. I\u0027m still undecided on whether re-using error codes is good or bad.",
       "parentUuid": "8e28a382_253824cf",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f1de5ede",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-25T14:53:43Z",
+      "side": 1,
+      "message": "It can\u0027t because the en.json message mentions redirects.",
+      "parentUuid": "8e28a382_d64b582a",
       "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -171,6 +225,24 @@
       "side": 1,
       "message": "Relying on __toString is discouraged in MediaWiki, as far as I know. Did that change?",
       "parentUuid": "8e28a382_c541603b",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d1f24264",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-25T14:53:43Z",
+      "side": 1,
+      "message": "Never heard of that. [[WP:IAR]]. ;-)",
+      "parentUuid": "8e28a382_565768cd",
       "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
