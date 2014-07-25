@@ -5,6 +5,7 @@ namespace Wikibase;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -36,12 +37,14 @@ class EntityPerPageTable implements EntityPerPage {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	function __construct( $useRedirectTargetColumn = true ) {
+	public function __construct( $useRedirectTargetColumn = true ) {
 		if ( !is_bool( $useRedirectTargetColumn ) ) {
 			throw new InvalidArgumentException( '$useRedirectTargetColumn must be true or false' );
 		}
 
+		// FIXME: this needs to be injected if the table is to work with entities other than items and properties
 		$this->idParser = new BasicEntityIdParser();
+
 		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 	}
 
@@ -252,9 +255,11 @@ class EntityPerPageTable implements EntityPerPage {
 	protected function getEntityIdsFromRows( $rows ) {
 		$entities = array();
 
+		$legacyIdParser = new LegacyIdInterpreter();
+
 		foreach ( $rows as $row ) {
-			$id = new EntityId( $row->entity_type, (int)$row->entity_id );
-			$entities[] = $this->idParser->parse( $id->getSerialization() );
+			// FIXME: this only works for items and properties
+			$entities[] = $legacyIdParser->newIdFromTypeAndNumber( $row->entity_type, (int)$row->entity_id );
 		}
 
 		return $entities;
