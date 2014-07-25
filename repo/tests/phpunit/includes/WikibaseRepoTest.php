@@ -159,6 +159,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
 	}
 
+	// TODO: DM 1.0 blocker, this uses Entity::toArray
 	public function testGetEntityContentDataCodec_legacy() {
 		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'Hello' );
@@ -174,6 +175,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertEquals( $item->toArray(), $data );
 	}
 
+	// TODO: DM 1.0 blocker, this uses Entity::toArray
 	public function testGetInternalEntitySerializer_legacy() {
 		$item = Item::newEmpty();
 		$item->setLabel( 'en', 'Hello' );
@@ -188,6 +190,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertEquals( $item->toArray(), $data );
 	}
 
+	// TODO: DM 1.0 blocker, this uses Claim::toArray
 	public function testGetInternalClaimSerializer_legacy() {
 		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'kittens' );
