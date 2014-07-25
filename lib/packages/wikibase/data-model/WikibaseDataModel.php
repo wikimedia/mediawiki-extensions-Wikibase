@@ -65,7 +65,9 @@ class_alias( 'Wikibase\DataModel\Entity\Diff\ItemDiff', 'Wikibase\ItemDiff' );
 class_alias( 'Wikibase\DataModel\Entity\Diff\EntityDiff', 'Wikibase\EntityDiff' );
 class_alias( 'Wikibase\DataModel\SiteLink', 'Wikibase\DataModel\SimpleSiteLink' );
 
-// Aliases introduced in 1.0
+// Aliases introduced in 0.8.2
 class_alias( 'Wikibase\DataModel\LegacyIdInterpreter', 'Wikibase\DataModel\Internal\LegacyIdInterpreter' );
+
+// Aliases introduced in 1.0
 class_alias( 'Wikibase\DataModel\Entity\Diff\EntityDiff', 'Wikibase\DataModel\Entity\EntityDiff' );
 class_alias( 'Wikibase\DataModel\Entity\Diff\ItemDiff', 'Wikibase\DataModel\Entity\ItemDiff' );
