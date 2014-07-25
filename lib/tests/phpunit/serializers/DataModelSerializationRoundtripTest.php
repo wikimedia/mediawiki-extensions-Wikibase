@@ -28,7 +28,6 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
  * @todo Fix the UnDeserializableValue test.
- * @todo Add test for ranks.
  * @todo Is something special needed to test ordering?
  * @todo Add tests with $options->setIndexTags( true ).
  *
@@ -157,8 +156,9 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q4' ) );
 		$this->addClaimsWithoutQualifiers( $item );
-		$this->addClaimWithQualifiers( $item );
-		$this->addStatementWithQualifiersAndReferences( $item );
+		$this->addClaimsWithQualifiers( $item );
+		$this->addStatementsWithRanks( $item );
+		$this->addStatementsWithQualifiersAndReferences( $item );
 		$entities[] = $item;
 
 		return $entities;
@@ -220,7 +220,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	private function addClaimWithQualifiers( Item $item ) {
+	private function addClaimsWithQualifiers( Item $item ) {
 		$mainSnak = new PropertyNoValueSnak(
 			new PropertyId( 'P501' )
 		);
@@ -230,7 +230,24 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$item->addClaim( $claim );
 	}
 
-	private function addStatementWithQualifiersAndReferences( Item $item ) {
+	private function addStatementsWithRanks( Item $item ) {
+		$ranks = array(
+			Claim::RANK_PREFERRED,
+			Claim::RANK_NORMAL,
+			Claim::RANK_DEPRECATED,
+		);
+		foreach ( $ranks as $rank ) {
+			$mainSnak = new PropertyNoValueSnak(
+				new PropertyId( 'P701' )
+			);
+			$statement = new Statement( $mainSnak );
+			$this->setGuid( $statement );
+			$statement->setRank( $rank );
+			$item->addClaim( $statement );
+		}
+	}
+
+	private function addStatementsWithQualifiersAndReferences( Item $item ) {
 		$mainSnak = new PropertyNoValueSnak(
 			new PropertyId( 'P601' )
 		);
