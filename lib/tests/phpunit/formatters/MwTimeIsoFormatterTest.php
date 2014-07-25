@@ -274,6 +274,20 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'la'
 			),
 
+			// Preserve punctuation as given in MessagesXx.php but skip suffixes and words
+			array(
+				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
+				'16 Avgust. 2013',
+				true,
+				'kaa'
+			),
+			array(
+				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
+				'16 agosto 2013',
+				true,
+				'pt'
+			),
+
 			// Valid values with day, month and/or year zero
 			array(
 				'+00000001995-00-00T00:00:00Z', TimeValue::PRECISION_YEAR,
