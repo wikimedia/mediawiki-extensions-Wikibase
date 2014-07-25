@@ -120,15 +120,43 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	private function getDateFormat( $precision ) {
 		if ( $precision <= TimeValue::PRECISION_YEAR ) {
 			return 'Y';
-		}
-
-		if ( $precision === TimeValue::PRECISION_MONTH ) {
+		} elseif ( $precision === TimeValue::PRECISION_MONTH ) {
 			$format = $this->language->getDateFormatString( 'monthonly', 'dmy' );
-			return $format ?: 'F Y';
+			return sprintf( '%s Y', $this->getMonthFormat( $format ) );
+		} else {
+			$format = $this->language->getDateFormatString( 'date', 'dmy' );
+			return sprintf( '%s %s Y', $this->getDayFormat( $format ), $this->getMonthFormat( $format ) );
+		}
+	}
+
+	/**
+	 * @see Language::sprintfDate
+	 *
+	 * @param string $dateFormat
+	 *
+	 * @return string A date format for the day that roundtrips the Wikibase TimeParsers.
+	 */
+	private function getDayFormat( $dateFormat ) {
+		if ( preg_match( '/[dj][.,]?/', $dateFormat, $matches ) ) {
+			return $matches[0];
 		}
 
-		$format = $this->language->getDateFormatString( 'date', 'dmy' );
-		return $format ?: 'j F Y';
+		return 'j';
+	}
+
+	/**
+	 * @see Language::sprintfDate
+	 *
+	 * @param string $dateFormat
+	 *
+	 * @return string A date format for the month that roundtrips the Wikibase TimeParsers.
+	 */
+	private function getMonthFormat( $dateFormat ) {
+		if ( preg_match( '/(?:[FM]|xg)[.,]?/', $dateFormat, $matches ) ) {
+			return $matches[0];
+		}
+
+		return 'F';
 	}
 
 	/**
