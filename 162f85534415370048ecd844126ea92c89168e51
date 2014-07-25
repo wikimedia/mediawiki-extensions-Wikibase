@@ -16,6 +16,24 @@
       "revId": "162f85534415370048ecd844126ea92c89168e51",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7184ae0f",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-25T14:15:37Z",
+      "side": 1,
+      "message": "Blame the diff algorithm. It should be able to understand if code was just moved around. I try to avoid such changes but I really like it if the parameters are in the same order as in the constructor.",
+      "parentUuid": "8e28a382_76df0440",
+      "revId": "162f85534415370048ecd844126ea92c89168e51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
