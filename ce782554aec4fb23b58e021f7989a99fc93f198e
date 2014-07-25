@@ -34,6 +34,24 @@
       "revId": "ce782554aec4fb23b58e021f7989a99fc93f198e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_119e8a58",
+        "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-07-25T14:18:58Z",
+      "side": 1,
+      "message": "yay, untested code then",
+      "parentUuid": "8e28a382_91c5da66",
+      "revId": "ce782554aec4fb23b58e021f7989a99fc93f198e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
