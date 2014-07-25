@@ -177,6 +177,7 @@ class EntityPerPageTable implements EntityPerPage {
 		return $dbw->delete(
 			'wb_entity_per_page',
 			array(
+				// FIXME: this only works for items and properties
 				'epp_entity_id' => $entityId->getNumericId(),
 				'epp_entity_type' => $entityId->getEntityType()
 			),
