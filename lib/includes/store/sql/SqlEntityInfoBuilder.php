@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 
 /**
@@ -383,10 +384,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @throws InvalidArgumentException
 	 */
 	private function injectTerms( ResultWrapper $dbResult ) {
+		$idParser = new LegacyIdInterpreter();
+
 		foreach ( $dbResult as $row ) {
-			// this is deprecated, but I don't see an alternative.
-			$id = new EntityId( $row->term_entity_type, (int)$row->term_entity_id );
-			$key = $id->getPrefixedId();
+			// FIXME: this only works for items and properties
+			$id = $idParser->newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+			$key = $id->getSerialization();
 
 			if ( !isset( $this->entityInfo[$key] ) ) {
 				continue;
