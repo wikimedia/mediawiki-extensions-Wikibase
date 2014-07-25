@@ -14,6 +14,8 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
 
+$wgAPIModules['wbcreateredirect'] = 'Wikibase\Api\CreateRedirectModule';
+
 call_user_func( function() {
 	global $wgHooks;
 
