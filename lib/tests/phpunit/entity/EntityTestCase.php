@@ -2,8 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Entity;
-use Wikibase\Query;
+use Wikibase\DataModel\Entity\Entity;
 
 /**
  * Base class for tests that have to inspect entity structures.
