@@ -24,7 +24,7 @@ use Wikibase\Test\EntityTestCase;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityContentDataCodecTest extends EntityTestCase {
+class EntityContentDataCodecTest extends \MediaWikiTestCase {
 
 	/**
 	 * @var EntityContentDataCodec

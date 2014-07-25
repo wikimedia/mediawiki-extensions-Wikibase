@@ -17,7 +17,7 @@ use Wikibase\Property;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityFactoryTest extends EntityTestCase {
+class EntityFactoryTest extends \MediaWikiTestCase {
 
 	public function testGetEntityTypes() {
 		$types = EntityFactory::singleton()->getEntityTypes();
