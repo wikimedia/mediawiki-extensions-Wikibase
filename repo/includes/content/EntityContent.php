@@ -527,7 +527,8 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		// NOTE: this may or may not be consistent with what EntityContentCodec does!
-		return $this->getEntity()->toArray();
+		$serializer = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer();
+		return $serializer->serialize( $this->getEntity() );
 	}
 
 	/**
