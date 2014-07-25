@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_96071085",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T11:42:17Z",
+      "side": 1,
+      "message": "The name seems to indicate that this replaces any groups listed as special with something else, while in fact it does the opposite: replace the \u0027special\u0027 group with all the special groups. maybe \"expandSpecialGroups\" or \"insertSpecialGroups\" would be clearer.",
+      "revId": "fd2b396afef1afa22e443396a092d413ae1e3110",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
