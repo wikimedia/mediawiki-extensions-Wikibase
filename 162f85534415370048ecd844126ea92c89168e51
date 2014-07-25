@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_76df0440",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-25T11:00:31Z",
+      "side": 1,
+      "message": "You evil person, I thought you added a new field!",
+      "revId": "162f85534415370048ecd844126ea92c89168e51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
