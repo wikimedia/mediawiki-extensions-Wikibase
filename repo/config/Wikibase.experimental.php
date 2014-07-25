@@ -15,31 +15,3 @@ if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 }
 
 $wgAPIModules['wbcreateredirect'] = 'Wikibase\Api\CreateRedirectModule';
-
-call_user_func( function() {
-	global $wgHooks;
-
-	/**
-	 * Hook to add PHPUnit test cases.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
-	 *
-	 * @since 0.3
-	 *
-	 * @param array &$files
-	 *
-	 * @return boolean
-	 */
-	$wgHooks['UnitTestsList'][] = function( array &$files ) {
-		// @codeCoverageIgnoreStart
-		$testFiles = array(
-		);
-
-		foreach ( $testFiles as $file ) {
-			$files[] = __DIR__ . '/../tests/phpunit/includes/' . $file . 'Test.php';
-		}
-
-		return true;
-		// @codeCoverageIgnoreEnd
-	};
-
-} );
