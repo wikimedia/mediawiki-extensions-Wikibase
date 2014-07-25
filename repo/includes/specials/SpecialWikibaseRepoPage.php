@@ -14,10 +14,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntity;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\EntityTitleLookup;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -38,7 +38,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * @var EntityRevisionLookup
 	 */
-	private $entityLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -72,7 +72,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 
 		//TODO: allow overriding services for testing
 		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
-		$this->entityLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
+		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->entityStore = $wikibaseRepo->getEntityStore();
 		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
@@ -138,7 +138,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @throws UserInputException
 	 */
 	protected function loadEntity( EntityId $id ) {
-		$entity = $this->entityLookup->getEntityRevision( $id );
+		$entity = $this->entityRevisionLookup->getEntityRevision( $id );
 
 		if ( $entity === null ) {
 			throw new UserInputException(
@@ -177,7 +177,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	protected function saveEntity( Entity $entity, Summary $summary, $token, $flags = EDIT_UPDATE, $baseRev = false ) {
 		$editEntity = new EditEntity(
 			$this->titleLookup,
-			$this->entityLookup,
+			$this->entityRevisionLookup,
 			$this->entityStore,
 			$this->permissionChecker,
 			$entity,
@@ -194,4 +194,5 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 
 		return $status;
 	}
+
 }

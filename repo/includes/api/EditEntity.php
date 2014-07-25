@@ -24,8 +24,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\Utils;
@@ -93,12 +93,12 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ApiWikibase::getRequiredPermissions()
+	 * @see ApiWikibase::getRequiredPermissions
 	 *
-	 * @param \Wikibase\DataModel\Entity\Entity $entity
+	 * @param Entity $entity
 	 * @param array $params
 	 *
-	 * @return array|\Status
+	 * @return string[]
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
@@ -137,7 +137,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::validateParameters()
+	 * @see ModifyEntity::validateParameters
 	 */
 	protected function validateParameters( array $params ) {
 		$hasId = isset( $params['id'] );
@@ -157,7 +157,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \Wikibase\Api\ModifyEntity::modifyEntity()
+	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
 		wfProfileIn( __METHOD__ );
@@ -170,7 +170,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( $params['clear'] ) {
 			if( $params['baserevid'] && $exists ) {
-				$latestRevision = $this->entityLookup->getLatestRevisionId( $entity->getId() );
+				$latestRevision = $this->entityRevisionLookup->getLatestRevisionId( $entity->getId() );
 				if( !$baseRevId === $latestRevision ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieError(
@@ -708,7 +708,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
+	 * @see ApiBase::getPossibleErrors
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
@@ -735,7 +735,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams()
+	 * @see ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
 		return array_merge(
@@ -759,7 +759,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription()
+	 * @see ApiBase::getParamDescription
 	 */
 	public function getParamDescription() {
 		return array_merge(
@@ -783,7 +783,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getDescription()
+	 * @see ApiBase::getDescription
 	 */
 	public function getDescription() {
 		return array(
@@ -792,7 +792,7 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see \ApiBase::getExamples()
+	 * @see ApiBase::getExamples
 	 */
 	protected function getExamples() {
 		return array(
@@ -860,9 +860,9 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * Check some of the supplied data for sitelink arg
 	 *
-	 * @param $arg Array: The argument array to verify
-	 * @param $siteCode string: The site code used in the argument
-	 * @param &$sites \SiteList: The valid site codes as an assoc array
+	 * @param array $arg The argument array to verify
+	 * @param string $siteCode The site code used in the argument
+	 * @param SiteList $sites The valid site codes as an assoc array
 	 */
 	public function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
 		if ( !is_array( $arg ) ) {

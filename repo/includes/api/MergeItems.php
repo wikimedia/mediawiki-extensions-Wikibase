@@ -46,12 +46,12 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see \Wikibase\Api\Api::getRequiredPermissions()
+	 * @see Api::getRequiredPermissions
 	 *
 	 * @param Entity $entity
 	 * @param array $params
 	 *
-	 * @return array|\Status
+	 * @return string[]
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
@@ -60,7 +60,7 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::execute()
+	 * @see ApiBase::execute
 	 */
 	public function execute() {
 		$user = $this->getUser();
@@ -126,7 +126,7 @@ class MergeItems extends ApiWikibase {
 	private function getEntityRevisionFromIdString( $idString ) {
 		try{
 			$entityId = $this->idParser->parse( $idString );
-			return $this->entityLookup->getEntityRevision( $entityId );
+			return $this->entityRevisionLookup->getEntityRevision( $entityId );
 		}
 		catch ( EntityIdParsingException $e ){
 			$this->dieError( 'You must provide valid ids' , 'param-invalid' );
@@ -204,7 +204,7 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
+	 * @see ApiBase::getPossibleErrors
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
@@ -214,7 +214,7 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getAllowedParams()
+	 * @see ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
 		return array_merge(
@@ -241,7 +241,7 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getParamDescription()
+	 * @see ApiBase::getParamDescription
 	 */
 	public function getParamDescription() {
 		return array_merge(
@@ -264,7 +264,7 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getDescription()
+	 * @see ApiBase::getDescription
 	 */
 	public function getDescription() {
 		return array(
@@ -273,7 +273,7 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getExamples()
+	 * @see ApiBase::getExamples
 	 */
 	protected function getExamples() {
 		return array(
