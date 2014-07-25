@@ -243,7 +243,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		$labeledEntityContent = $this->newEmpty();
 		$fingerprint = $labeledEntityContent->getEntity()->getFingerprint();
-		$fingerprint->setLabel( new Term( 'de', 'xyz' ) );
+		$fingerprint->getLabels()->setTerm( new Term( 'de', 'xyz' ) );
 		$labeledEntityContent->getEntity()->setFingerprint( $fingerprint );
 
 		return array(
