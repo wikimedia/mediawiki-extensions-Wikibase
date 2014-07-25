@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_561f685e",
+        "filename": "lib/includes/store/sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-25T10:32:21Z",
+      "side": 1,
+      "message": "Er, wait. This method is static. All methods in this class are static. Why construct an object then?",
+      "revId": "2cd71695878e1eff4dc746aa4a35be4d10dd7d3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
