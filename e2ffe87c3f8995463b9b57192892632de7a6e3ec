@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_36497c36",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T10:53:10Z",
+      "side": 1,
+      "message": "true... the original error code is just \"not-empty\"; I guess \"cannot-override-non-empty-entioty-with-redirect\" is a bit long. Can you come up with something in between?",
+      "parentUuid": "8e28a382_85291887",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_6503cc10",
         "filename": "repo/i18n/en.json",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-25T10:18:31Z",
       "side": 1,
       "message": "What happened to the indention here? And why is the message name so different from all other summary messages? Should be named after the API request: wbcreateredirect.",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_56408809",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T10:53:10Z",
+      "side": 1,
+      "message": "Because the summary doesn\u0027t come from the api, but from the interactor. they should all be like that, because the logic of all modules should be factored out into interactors. we can have a convention to include the \"wb\" prefix anyway, but that was the reason I removed it.\n\nThe indentation was an oversight - phpstorm defaults to using spaces fopr indentation in json files, for whatever reason.",
+      "parentUuid": "8e28a382_6503cc10",
       "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d64b582a",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T10:53:10Z",
+      "side": 1,
+      "message": "That\u0027s what we currently use it for. But it could just be the error code for \"should be empty, isn\u0027t empty\" anywhere. I\u0027m still undecided on whether re-using error codes is good or bad.",
+      "parentUuid": "8e28a382_253824cf",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e5445c4d",
         "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2014-07-25T10:18:31Z",
       "side": 1,
       "message": "Why are you introducing this if you think it\u0027s silly?",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b65c4cf5",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T10:53:10Z",
+      "side": 1,
+      "message": "Because I can\u0027t think of a good alternative, and want to move forward with the feature even if there are some loose ends.",
+      "parentUuid": "8e28a382_e5445c4d",
       "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_565768cd",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T10:53:10Z",
+      "side": 1,
+      "message": "Relying on __toString is discouraged in MediaWiki, as far as I know. Did that change?",
+      "parentUuid": "8e28a382_c541603b",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_65686cb8",
         "filename": "repo/includes/api/CreateRedirectModule.php",
         "patchSetId": 14
@@ -98,6 +188,24 @@
       "writtenOn": "2014-07-25T10:18:31Z",
       "side": 1,
       "message": "Forgot to change the variable name.",
+      "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_36705c6e",
+        "filename": "repo/includes/api/CreateRedirectModule.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T10:53:10Z",
+      "side": 1,
+      "message": "should probably just be called $interactor or, perhaps better, $redirectCreator.",
+      "parentUuid": "8e28a382_65686cb8",
       "revId": "e2ffe87c3f8995463b9b57192892632de7a6e3ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
