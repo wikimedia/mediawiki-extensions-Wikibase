@@ -27,10 +27,6 @@ class MonthNameUnlocalizer {
 	 * @return string
 	 */
 	public function unlocalize( $date, $languageCode, ParserOptions $options ) {
-		if ( $languageCode === 'en' ) {
-			return $date;
-		}
-
 		$language = Language::factory( $languageCode );
 		$en = Language::factory( 'en' );
 
@@ -41,7 +37,6 @@ class MonthNameUnlocalizer {
 
 	/**
 	 * Unlocalizes the longest month name in a date string that could be found first.
-	 * Tries to avoid doing multiple replacements and returns the localized original if in doubt.
 	 * Takes full month names, genitive names and abbreviations into account.
 	 *
 	 * @param Language $from
@@ -51,6 +46,24 @@ class MonthNameUnlocalizer {
 	 * @return string
 	 */
 	private function unlocalizeMonthName( Language $from, Language $to, $date ) {
+		// Replace month names in the $from language with the canonical name in the $to language.
+		// Also replace all forms already in the target language with the canonical form.
+		$replacements = array_merge(
+			$this->getMonthNameMappings( $from, $to ),
+			$this->getMonthNameMappings( $to, $to )
+		);
+
+		// Order search strings from longest to shortest
+		uksort( $replacements, function( $a, $b ) {
+			return strlen( $b ) - strlen( $a );
+		} );
+
+		// Try replacing each mapping, longest first
+		$date = $this->replace_first( $replacements, $date );
+		return $date;
+	}
+
+	private function getMonthNameMappings( Language $from, Language $to ) {
 		$replacements = array();
 
 		for ( $i = 1; $i <= 12; $i++ ) {
@@ -61,34 +74,32 @@ class MonthNameUnlocalizer {
 			$replacements[$from->getMonthAbbreviation( $i )] = $replace;
 		}
 
-		// Order search strings from longest to shortest
-		uksort( $replacements, function( $a, $b ) {
-			return strlen( $b ) - strlen( $a );
-		} );
+		return $replacements;
+	}
 
+	/**
+	 * Replaces the first key from $replacements found in $text
+	 * with the corresponding value. If the key is found multiple
+	 * times in $text, all occurrences are replaced.
+	 *
+	 * @param array $replacements An associative array representing the desired replacements.
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	private function replace_first( array $replacements, $text ) {
+
+		// Try each mapping, in order
 		foreach ( $replacements as $search => $replace ) {
-			$unlocalized = str_replace( $search, $replace, $date, $count );
+			$mangled = str_replace( $search, $replace, $text, $count );
 
-			// Nothing happened, try the next.
-			if ( $count <= 0 ) {
-				continue;
+			// Found a match, done
+			if ( $count > 0 ) {
+				return $mangled;
 			}
-
-			// Do not mess with strings that are clearly not a valid date.
-			if ( $count > 1 ) {
-				break;
-			}
-
-			// Do not mess with already unlocalized month names, e.g. "Juli" should not become
-			// "Julyi" when replacing "Jul" with "July". But shortening "Julyus" to "July" is ok.
-			if ( strpos( $date, $replace ) !== false && strlen( $replace ) >= strlen( $search ) ) {
-				break;
-			}
-
-			return $unlocalized;
 		}
 
-		return $date;
+		return $text;
 	}
 
 }
