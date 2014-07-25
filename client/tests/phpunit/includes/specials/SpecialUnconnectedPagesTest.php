@@ -24,10 +24,8 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 		return new SpecialUnconnectedPages();
 	}
 
-	public function testExecute(  ) {
-		//TODO: Actually verify that the output is correct.
-		//      Currently this just tests that there is no fatal error.
-		list( $output, ) = $this->executeSpecialPage( '' );
+	public function testExecuteDoesNotCauseFatalError() {
+		$this->executeSpecialPage( '' );
 		$this->assertTrue( true, 'Calling execute without any subpage value' );
 	}
 
