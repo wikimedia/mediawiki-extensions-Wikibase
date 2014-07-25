@@ -571,13 +571,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		$this->releaseConnection( $db );
 
-		$idParser = new LegacyIdInterpreter();
-
 		$entityIds = array_map(
-			function( $entity ) use ( $idParser ) {
+			function( $entity ) {
 				// FIXME: this only works for items and properties
-				$entityId = $idParser->newIdFromTypeAndNumber( $entity->term_entity_type, (int)$entity->term_entity_id );
-				return $entityId;
+				return LegacyIdInterpreter::newIdFromTypeAndNumber( $entity->term_entity_type, (int)$entity->term_entity_id );
 			},
 			iterator_to_array( $entities )
 		);
@@ -720,11 +717,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 		// turn numbers into entity ids
 		$result = array();
-		$idParser = new LegacyIdInterpreter();
 
 		foreach ( $numericIds as $numericId ) {
 			// FIXME: this only works for items and properties
-			$result[] = $idParser->newIdFromTypeAndNumber( $entityType, $numericId );
+			$result[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -1075,4 +1071,5 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	public function supportsWeight() {
 		return !Settings::get( 'withoutTermWeight' );
 	}
+
 }

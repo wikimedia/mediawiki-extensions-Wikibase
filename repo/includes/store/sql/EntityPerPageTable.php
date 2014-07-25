@@ -253,14 +253,12 @@ class EntityPerPageTable implements EntityPerPage {
 		return $this->getEntityIdsFromRows( $rows );
 	}
 
-	protected function getEntityIdsFromRows( $rows ) {
+	protected function getEntityIdsFromRows( array $rows ) {
 		$entities = array();
-
-		$legacyIdParser = new LegacyIdInterpreter();
 
 		foreach ( $rows as $row ) {
 			// FIXME: this only works for items and properties
-			$entities[] = $legacyIdParser->newIdFromTypeAndNumber( $row->entity_type, (int)$row->entity_id );
+			$entities[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->entity_type, (int)$row->entity_id );
 		}
 
 		return $entities;

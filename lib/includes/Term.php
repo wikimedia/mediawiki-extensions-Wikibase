@@ -184,9 +184,11 @@ class Term {
 	}
 
 	/**
+	 * @see TermSqlIndex::getMatchingIDs
+	 *
 	 * @since 0.2
+	 *
 	 * @return EntityId|null
-	 * @see \Wikibase\TermSqlIndex::getMatchingIDs
 	 */
 	public function getEntityId() {
 		$entityType = $this->getEntityType();
@@ -195,8 +197,7 @@ class Term {
 			$numericId = $this->fields['entityId'];
 
 			// FIXME: this only works for items and properties
-			$idParser = new LegacyIdInterpreter();
-			return $idParser->newIdFromTypeAndNumber( $entityType, $numericId );
+			return LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
 		}
 
 		return null;
