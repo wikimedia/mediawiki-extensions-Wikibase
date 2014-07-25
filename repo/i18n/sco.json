@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"John Reid"
+			"John Reid",
+			"AmaryllisGardener"
 		]
 	},
 	"wikibase-claims": "Claims",
@@ -18,7 +19,9 @@
 	"wikibase-mergeitems-toid": "The id tae merge til",
 	"wikibase-mergeitems-submit": "Merge eitems",
 	"wikibase-listdatatypes-intro": "This is ae leet o aw datatypes available oan this instawation:",
+	"wikibase-api-target-is-incompatible": "Attempt tae redirect tae an entity o a different type.",
 	"wikibase-special-mergeitems-error-prefix": "The eetems coudna be merged. The follaein mistak occurred:",
+	"wikibase-item-summary-wbcreateredirect": "Redirectit tae $4",
 	"wikibase-item-summary-wblinktitles-create": "Cræftit this eetem fer tae connect pages",
 	"wikibase-item-summary-wblinktitles-connect": "Eikit ae leid airtin fer tae connect pages",
 	"wikibase-listdatatypes-wikibase-item-body": "airt til ither eetems at the waurk. During entrie the \"Eetem\" namespace oan Wikidata will be raket fer matchin entries. It conseests o ae single tex entrie field.",

@@ -96,5 +96,6 @@
 	"datatypes-type-commonsMedia": "Медиафайл на Викискладе",
 	"version-wikibase": "Вики-база",
 	"wikibase-snakformatter-valuetype-mismatch": "Тип значения «$1» не соответствует типу свойства «$2».",
-	"wikibase-snakformatter-property-not-found": "Свойство $1 не найдено, невозможно определить тип данных для использования."
+	"wikibase-snakformatter-property-not-found": "Свойство $1 не найдено, невозможно определить тип данных для использования.",
+	"wikibase-add-badges": "Добавить значки"
 }
