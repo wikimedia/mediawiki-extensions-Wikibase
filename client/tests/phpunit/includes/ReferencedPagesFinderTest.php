@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use Title;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemChange;
 use Wikibase\ReferencedPagesFinder;
 
@@ -25,7 +25,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getPagesProvider
 	 */
-	public function testGetPages( $expected, $usage, $change, $message ) {
+	public function testGetPages( array $expected, array $usage, ItemChange $change, $message ) {
 		$itemUsageIndex = $this->getMockBuilder( '\Wikibase\ItemUsageIndex' )
 							->disableOriginalConstructor()->getMock();
 
@@ -124,7 +124,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) ),
 				$this->getItemWithSiteLinks( array(
 					'enwiki' => 'Rome',
-					'itwiki' => 'Roma'
+					'itwiki' => 'Roma',
 				) )
 			),
 			'added site link on connected item'
@@ -168,6 +168,9 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		return $cases;
 	}
 
+	/**
+	 * @return Item
+	 */
 	private function getEmptyItem() {
 		$item = Item::newEmpty();
 		$item->setId( 2 );
@@ -175,7 +178,12 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		return $item->copy();
 	}
 
-	private function getItemWithSiteLinks( $links ) {
+	/**
+	 * @param string[] $links
+	 *
+	 * @return Item
+	 */
+	private function getItemWithSiteLinks( array $links ) {
 		$item = $this->getEmptyItem();
 
 		foreach( $links as $siteId => $page ) {
@@ -187,16 +195,28 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 		return $item->copy();
 	}
 
-	private function getItemWithLabel( $lang, $label ) {
+	/**
+	 * @param string $languageCode
+	 * @param string $label
+	 *
+	 * @return Item
+	 */
+	private function getItemWithLabel( $languageCode, $label ) {
 		$item = $this->getEmptyItem();
-		$item->setLabel( $lang, $label );
+		$item->setLabel( $languageCode, $label );
 
 		return $item;
 	}
 
+	/**
+	 * @param Title[] $titles
+	 *
+	 * @return string[]
+	 */
 	private function getPrefixedTitles( array $titles ) {
 		return array_map( function( Title $title ) {
 			return $title->getPrefixedText();
 		}, $titles );
 	}
+
 }
