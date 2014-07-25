@@ -16,6 +16,24 @@
       "revId": "ce782554aec4fb23b58e021f7989a99fc93f198e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_91c5da66",
+        "filename": "client/includes/hooks/ChangesPageWikibaseFilterHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-25T14:17:03Z",
+      "side": 1,
+      "message": "Agree. It should take a user object; and still needs to somehow check if \"enhanced\" mode was enabled via a request param... that could be done by the caller and passed as a bool. Alternatively, the Request could be provided to the methods that need this info.",
+      "parentUuid": "8e28a382_c2bcb603",
+      "revId": "ce782554aec4fb23b58e021f7989a99fc93f198e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
