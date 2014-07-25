@@ -33,21 +33,21 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$item = Item::newEmpty();
 		$item->setId( 1 );
 		$item->setLabel( 'en', 'Foo' );
-		$item->getSiteLinkList()
-			->addNewSiteLink( 'dewiki', 'Foo de' )
-			->addNewSiteLink( 'enwiki', 'Foo en' )
-			->addNewSiteLink( 'srwiki', 'Foo sr' )
-			->addNewSiteLink( 'dewiktionary', 'Foo de word' )
-			->addNewSiteLink( 'enwiktionary', 'Foo en word' );
+		$links = $item->getSiteLinkList();
+		$links->addNewSiteLink( 'dewiki', 'Foo de' );
+		$links->addNewSiteLink( 'enwiki', 'Foo en' );
+		$links->addNewSiteLink( 'srwiki', 'Foo sr' );
+		$links->addNewSiteLink( 'dewiktionary', 'Foo de word' );
+		$links->addNewSiteLink( 'enwiktionary', 'Foo en word' );
 		$items[] = $item;
 
 		$item = Item::newEmpty();
 		$item->setId( 2 );
 		$item->setLabel( 'en', 'Talk:Foo' );
-		$item->getSiteLinkList()
-			->addNewSiteLink( 'dewiki', 'Talk:Foo de' )
-			->addNewSiteLink( 'enwiki', 'Talk:Foo en' )
-			->addNewSiteLink( 'srwiki', 'Talk:Foo sr' );
+		$links = $item->getSiteLinkList();
+		$links->addNewSiteLink( 'dewiki', 'Talk:Foo de' );
+		$links->addNewSiteLink( 'enwiki', 'Talk:Foo en' );
+		$links->addNewSiteLink( 'srwiki', 'Talk:Foo sr' );
 		$items[] = $item;
 
 		return $items;
