@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_96acb09e",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-25T11:11:26Z",
+      "side": 1,
+      "message": "A list comprehension would be nice yes. Unfortunately in PHP the simplest way you can write this is with a loop. Doing an array_map is simply not what people expect, I\u0027m quite sure it\u0027s less clear to most people.",
+      "parentUuid": "8e28a382_d8a14c92",
+      "revId": "82cecdc64930dc7c03931b62c0fbff5af77e44e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_185354e3",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 13
