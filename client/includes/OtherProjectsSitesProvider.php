@@ -28,13 +28,14 @@ class OtherProjectsSitesProvider {
 	private $currentSite;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $specialSiteGroups;
 
 	/**
 	 * @param SiteStore $siteStore
 	 * @param Site $currentSite
+	 * @param string[] $specialSiteGroups
 	 */
 	public function __construct( SiteStore $siteStore, Site $currentSite, array $specialSiteGroups ) {
 		$this->siteStore = $siteStore;
