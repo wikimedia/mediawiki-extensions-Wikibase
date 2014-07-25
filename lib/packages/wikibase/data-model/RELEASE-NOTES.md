@@ -46,6 +46,7 @@ Other breaking changes:
 * Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
 * `HashArray` and `SnakList` no longer take an optional parameter in `getHash`
 * Calling `clear` on an `Item` will now cause its statements to be removed
+* `SiteLinkList::addNewSiteLink` no longer the `SiteLinkList` instance
 
 #### Additions
 
