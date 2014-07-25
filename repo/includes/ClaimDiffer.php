@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
-use Diff\Diff;
-use Diff\Differ;
-use Diff\DiffOpChange;
+use Diff\DiffOp\Diff\Diff;
+use Diff\Differ\Differ;
+use Diff\DiffOp\DiffOpChange;
 use Wikibase\DataModel\Internal\ObjectComparer;
 
 /**
@@ -18,20 +18,8 @@ use Wikibase\DataModel\Internal\ObjectComparer;
  */
 class ClaimDiffer {
 
-	/**
-	 * @since 0.4
-	 *
-	 * @var Differ
-	 */
 	private $listDiffer;
 
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.4
-	 *
-	 * @param Differ $listDiffer
-	 */
 	public function __construct( Differ $listDiffer ) {
 		$this->listDiffer = $listDiffer;
 	}
@@ -62,12 +50,12 @@ class ClaimDiffer {
 	}
 
 	/**
-	 * @param Claim $oldClaim
-	 * @param Claim $newClaim
+	 * @param Claim|null $oldClaim
+	 * @param Claim|null $newClaim
 	 *
 	 * @return DiffOpChange|null
 	 */
-	private function diffMainSnaks( $oldClaim, $newClaim ) {
+	private function diffMainSnaks( Claim $oldClaim = null, Claim $newClaim = null ) {
 		$oldClaimMainSnak = $oldClaim === null ? null : $oldClaim->getMainSnak();
 		$newClaimMainSnak = $newClaim === null ? null : $newClaim->getMainSnak();
 
@@ -79,12 +67,12 @@ class ClaimDiffer {
 	}
 
 	/**
-	 * @param Claim $oldClaim
-	 * @param Claim $newClaim
+	 * @param Claim|null $oldClaim
+	 * @param Claim|null $newClaim
 	 *
 	 * @return Diff
 	 */
-	private function diffQualifiers( $oldClaim, $newClaim ) {
+	private function diffQualifiers( Claim $oldClaim = null, Claim $newClaim = null ) {
 		$oldQualifiers = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getQualifiers() );
 		$newQualifiers = $newClaim === null ? array() : iterator_to_array( $newClaim->getQualifiers() );
 
@@ -96,12 +84,12 @@ class ClaimDiffer {
 	}
 
 	/**
-	 * @param Statement $oldClaim
-	 * @param Statement $newClaim
+	 * @param Statement|null $oldClaim
+	 * @param Statement|null $newClaim
 	 *
 	 * @return DiffOpChange|null
 	 */
-	private function diffRank( $oldClaim, $newClaim ) {
+	private function diffRank( Statement $oldClaim = null, Statement $newClaim = null ) {
 		$oldRank = $oldClaim === null ? null : $oldClaim->getRank();
 		$newRank = $newClaim === null ? null : $newClaim->getRank();
 
@@ -113,12 +101,12 @@ class ClaimDiffer {
 	}
 
 	/**
-	 * @param Statement $oldClaim
-	 * @param Statement $newClaim
+	 * @param Statement|null $oldClaim
+	 * @param Statement|null $newClaim
 	 *
 	 * @return Diff
 	 */
-	private function diffReferences( $oldClaim, $newClaim ) {
+	private function diffReferences( Statement $oldClaim = null, Statement $newClaim = null ) {
 		$oldReferences = $oldClaim === null ? array() : iterator_to_array( $oldClaim->getReferences() );
 		$newReferences = $newClaim === null ? array() : iterator_to_array( $newClaim->getReferences() );
 
