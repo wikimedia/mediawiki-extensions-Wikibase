@@ -34,7 +34,8 @@ class EditPageTest extends WikibaseApiTestCase {
 		$store->saveEntity( $item, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$item->setLabel( "de", "EditPageTest" );
-		$data = $item->toArray();
+
+		$data = WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer()->serialize( $item );
 		$text = json_encode( $data );
 
 		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $item->getId() );
@@ -48,7 +49,6 @@ class EditPageTest extends WikibaseApiTestCase {
 				'text' => $text,
 			)
 		);
-
 	}
 
 	/**
