@@ -16,6 +16,24 @@
       "revId": "fd2b396afef1afa22e443396a092d413ae1e3110",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_317d06b1",
+        "filename": "client/includes/OtherProjectsSitesProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-25T15:00:36Z",
+      "side": 1,
+      "message": "expandSpecialGroups sounds good to me",
+      "parentUuid": "8e28a382_96071085",
+      "revId": "fd2b396afef1afa22e443396a092d413ae1e3110",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
