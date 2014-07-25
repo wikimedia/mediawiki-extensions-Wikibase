@@ -49,7 +49,6 @@ Other breaking changes:
 
 #### Additions
 
-* Added `EntityDocument` interface, which is implemented by `Entity`
 * Added `ClaimList`
 * Added `ClaimListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
