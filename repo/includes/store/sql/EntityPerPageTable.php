@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -22,7 +22,7 @@ use Wikibase\DataModel\Entity\ItemId;
 class EntityPerPageTable implements EntityPerPage {
 
 	/**
-	 * @var BasicEntityIdParser
+	 * @var LegacyIdInterpreter
 	 */
 	private $idParser;
 
@@ -41,7 +41,7 @@ class EntityPerPageTable implements EntityPerPage {
 			throw new InvalidArgumentException( '$useRedirectTargetColumn must be true or false' );
 		}
 
-		$this->idParser = new BasicEntityIdParser();
+		$this->idParser = new LegacyIdInterpreter();
 		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 	}
 
@@ -253,8 +253,8 @@ class EntityPerPageTable implements EntityPerPage {
 		$entities = array();
 
 		foreach ( $rows as $row ) {
-			$id = new EntityId( $row->entity_type, (int)$row->entity_id );
-			$entities[] = $this->idParser->parse( $id->getSerialization() );
+			// FIXME: this only works for items and properties
+			$entities[] = $this->idParser->newIdFromTypeAndNumber( $row->entity_type, (int)$row->entity_id );
 		}
 
 		return $entities;
