@@ -28,12 +28,18 @@ class OtherProjectsSitesProvider {
 	private $currentSite;
 
 	/**
+	 * @var array
+	 */
+	private $specialSiteGroups;
+
+	/**
 	 * @param SiteStore $siteStore
 	 * @param Site $currentSite
 	 */
-	public function __construct( SiteStore $siteStore, Site $currentSite ) {
+	public function __construct( SiteStore $siteStore, Site $currentSite, array $specialSiteGroups ) {
 		$this->siteStore = $siteStore;
 		$this->currentSite = $currentSite;
+		$this->specialSiteGroups = $specialSiteGroups;
 	}
 
 	/**
@@ -50,6 +56,7 @@ class OtherProjectsSitesProvider {
 		$currentGroupId = $this->currentSite->getGroup();
 		$otherProjectsSites = new SiteList();
 
+		$this->expandSpecialGroups( $supportedSiteGroupIds );
 		foreach ( $supportedSiteGroupIds as $groupId ) {
 			if ( $groupId === $currentGroupId ) {
 				continue;
@@ -105,5 +112,17 @@ class OtherProjectsSitesProvider {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param array &$groups
+	 */
+	private function expandSpecialGroups( &$groups ) {
+		if ( !in_array( 'special', $groups ) ) {
+			return;
+		}
+
+		$groups = array_diff( $groups, array( 'special' ) );
+		$groups = array_merge( $groups, $this->specialSiteGroups );
 	}
 }
