@@ -29,14 +29,14 @@ class CreateRedirectModule extends ApiBase {
 	private $idParser;
 
 	/**
-	 * @var RedirectCreationInteractor
-	 */
-	private $createRedirectInteractor;
-
-	/**
 	 * @var ApiErrorReporter
 	 */
 	private $errorReporter;
+
+	/**
+	 * @var RedirectCreationInteractor
+	 */
+	private $interactor;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -70,12 +70,11 @@ class CreateRedirectModule extends ApiBase {
 	public function setServices(
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
-		RedirectCreationInteractor $createRedirectInteractor
+		RedirectCreationInteractor $interactor
 	) {
 		$this->idParser = $idParser;
 		$this->errorReporter = $errorReporter;
-
-		$this->createRedirectInteractor = $createRedirectInteractor;
+		$this->interactor = $interactor;
 	}
 
 	/**
@@ -108,7 +107,7 @@ class CreateRedirectModule extends ApiBase {
 	 * @throws RedirectCreationException
 	 */
 	private function createRedirect( EntityId $fromId, EntityId $toId, ApiResult $result ) {
-		$this->createRedirectInteractor->createRedirect( $fromId, $toId );
+		$this->interactor->createRedirect( $fromId, $toId );
 
 		$result->addValue( null, 'success', 1 );
 		$result->addValue( null, 'redirect', $toId->getSerialization() );
@@ -136,7 +135,7 @@ class CreateRedirectModule extends ApiBase {
 	public function getPossibleErrors() {
 		$errors = array();
 
-		foreach ( $this->createRedirectInteractor->getErrorCodeInfo() as $code => $info ) {
+		foreach ( $this->interactor->getErrorCodeInfo() as $code => $info ) {
 			$errors[$code] = $info;
 		}
 

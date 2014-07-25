@@ -34,6 +34,11 @@ class RedirectCreationInteractor {
 	private $entityStore;
 
 	/**
+	 * @var EntityPermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
@@ -42,11 +47,6 @@ class RedirectCreationInteractor {
 	 * @var User
 	 */
 	private $user;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
 
 	/**
 	 * @param EntityRevisionLookup $entityRevisionLookup
@@ -62,11 +62,11 @@ class RedirectCreationInteractor {
 		SummaryFormatter $summaryFormatter,
 		User $user
 	) {
-		$this->entityRevisionLookup =$entityRevisionLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
+		$this->permissionChecker = $permissionChecker;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->user = $user;
-		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -92,7 +92,7 @@ class RedirectCreationInteractor {
 		$this->checkExists( $toId );
 		$this->checkEmpty( $fromId );
 
-		$summary = new Summary( 'createredirect' );
+		$summary = new Summary( 'wbcreateredirect' );
 		$summary->addAutoSummaryArgs( $fromId, $toId );
 
 		$redirect = new EntityRedirect( $fromId, $toId );
@@ -103,8 +103,8 @@ class RedirectCreationInteractor {
 		return $redirect;
 	}
 
-	private function checkPermissions( EntityId $id ) {
-		$status = $this->permissionChecker->getPermissionStatusForEntityId( $this->user, 'edit', $id );
+	private function checkPermissions( EntityId $entityId ) {
+		$status = $this->permissionChecker->getPermissionStatusForEntityId( $this->user, 'edit', $entityId );
 
 		if ( !$status->isOK() ) {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
@@ -114,26 +114,28 @@ class RedirectCreationInteractor {
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function checkEmpty( EntityId $id ) {
+	private function checkEmpty( EntityId $entityId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $id );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 
 			if ( !$revision ) {
 				throw new RedirectCreationException(
-					'Entity ' . $id->getSerialization() . ' not found',
-					'no-such-entity' );
+					"Entity $entityId not found",
+					'no-such-entity'
+				);
 			}
 
 			$entity = $revision->getEntity();
 
 			if ( !$entity->isEmpty() ) {
 				throw new RedirectCreationException(
-					'Entity ' . $id->getSerialization() . ' is not empty',
-					'not-empty' );
+					"Entity $entityId is not empty",
+					'target-not-empty'
+				);
 			}
 		} catch ( UnresolvedRedirectException $ex ) {
 			// Nothing to do. It's ok to override a redirect with a redirect.
@@ -143,24 +145,22 @@ class RedirectCreationInteractor {
 	}
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId $entityId
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function checkExists( EntityId $id ) {
+	private function checkExists( EntityId $entityId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getLatestRevisionId( $id );
+			$revision = $this->entityRevisionLookup->getLatestRevisionId( $entityId );
 
 			if ( !$revision ) {
 				throw new RedirectCreationException(
-					'Entity ' . $id->getSerialization() . ' not found',
-					'no-such-entity' );
+					"Entity $entityId not found",
+					'no-such-entity'
+				);
 			}
 		} catch ( UnresolvedRedirectException $ex ) {
-			throw new RedirectCreationException(
-				$ex->getMessage(),
-				'target-is-redirect',
-				$ex );
+			throw new RedirectCreationException( $ex->getMessage(), 'target-is-redirect', $ex );
 		}
 	}
 
@@ -174,7 +174,8 @@ class RedirectCreationInteractor {
 		if ( $fromId->getEntityType() !== $toId->getEntityType() ) {
 			throw new RedirectCreationException(
 				'Incompatible entity types',
-				'target-is-incompatible' );
+				'target-is-incompatible'
+			);
 		}
 	}
 
@@ -209,7 +210,7 @@ class RedirectCreationInteractor {
 	public function getErrorCodeInfo() {
 		return array(
 			'invalid-entity-id'=> 'Invalid entity ID',
-			'not-empty'=> 'The entity that is to be turned into a redirect is not empty',
+			'target-not-empty'=> 'The entity that is to be turned into a redirect is not empty',
 			'no-such-entity'=> 'Entity not found',
 			'target-is-redirect'=> 'The redirect target is itself a redirect',
 			'target-is-incompatible'=> 'The redirect target is incompatible (e.g. a different type of entity)',
