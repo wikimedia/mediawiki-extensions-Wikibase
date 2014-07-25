@@ -195,7 +195,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	private function getPrefixedTitles( array $titles ) {
-		return array_map( function( $title ) {
+		return array_map( function( Title $title ) {
 			return $title->getPrefixedText();
 		}, $titles );
 	}
