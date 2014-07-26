@@ -324,7 +324,8 @@ HTML;
 	$templates['wb-sitelink-unknown'] =
 <<<HTML
 <tr class="wb-sitelinks-site-unknown $1">
-	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-unknown">$2</td>
+	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-unknown"></td>
+	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-unknown">$2</td>
 	<td class="wb-sitelinks-link wb-sitelinks-link-unknown">$3</td>
 	$4
 </tr>

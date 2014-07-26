@@ -6,6 +6,7 @@ use ContextSource;
 use Html;
 use IContextSource;
 use InvalidArgumentException;
+use Linker;
 use ParserOutput;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
@@ -87,7 +88,7 @@ abstract class EntityView extends ContextSource {
 	 *
 	 * @param IContextSource|null $context
 	 * @param SnakFormatter $snakFormatter
-	 * @param Lib\PropertyDataTypeLookup $dataTypeLookup
+	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializationOptions $options
@@ -212,14 +213,6 @@ if ( $ ) {
 		return $html;
 	}
 
-	protected function getFormattedIdForEntity( Entity $entity ) {
-		if ( !$entity->getId() ) {
-			return ''; //XXX: should probably throw an exception
-		}
-
-		return $entity->getId()->getPrefixedId();
-	}
-
 	/**
 	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
 	 * this does not group all the HTMl within one parent node as one entity.
@@ -273,7 +266,7 @@ if ( $ ) {
 
 		$i = 1;
 
-		foreach( $tocSections as $id => $message ) {
+		foreach ( $tocSections as $id => $message ) {
 			$tocContent .= wfTemplate( 'wb-entity-toc-section',
 				$i++,
 				$id,
@@ -404,18 +397,26 @@ if ( $ ) {
 	public function getHtmlForLabel( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$langCode = $this->getLanguage()->getCode();
+		$languageCode = $this->getLanguage()->getCode();
+		$label = $entity->getLabel( $languageCode );
+		$entityId = $entity->getId();
+		$idString = 'new';
+		$supplement = '';
 
-		$label = $entity->getLabel( $langCode );
-		$prefixedId = $this->getFormattedIdForEntity( $entity );
+		if ( $entityId !== null ) {
+			$idString = $entityId->getSerialization();
+			$supplement .= wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $idString ) );
+			if ( $editable ) {
+				$supplement .= $this->getHtmlForEditSection( 'SetLabel', array( $idString, $languageCode ) );
+			}
+		}
 
 		$html = wfTemplate( 'wb-label',
-			$prefixedId,
+			$idString,
 			wfTemplate( 'wb-property',
 				$label === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
-				wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $prefixedId ) )
-					. $this->getHtmlForEditSection( 'SetLabel', array( $prefixedId, $langCode ) )
+				$supplement
 			)
 		);
 
@@ -435,16 +436,21 @@ if ( $ ) {
 	public function getHtmlForDescription( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$langCode = $this->getLanguage()->getCode();
-		$prefixedId = $this->getFormattedIdForEntity( $entity );
+		$languageCode = $this->getLanguage()->getCode();
+		$description = $entity->getDescription( $languageCode );
+		$entityId = $entity->getId();
+		$editSection = '';
 
-		$description = $entity->getDescription( $langCode );
+		if ( $entityId !== null && $editable ) {
+			$idString = $entityId->getSerialization();
+			$editSection .= $this->getHtmlForEditSection( 'SetDescription', array( $idString, $languageCode ) );
+		}
 
 		$html = wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
 				$description === false ? 'wb-value-empty' : '',
 				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
-				$this->getHtmlForEditSection( 'SetDescription', array( $prefixedId, $langCode ) )
+				$editSection
 			)
 		);
 
@@ -464,21 +470,27 @@ if ( $ ) {
 	public function getHtmlForAliases( Entity $entity, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		$langCode = $this->getLanguage()->getCode();
-		$prefixedId = $this->getFormattedIdForEntity( $entity );
+		$languageCode = $this->getLanguage()->getCode();
+		$aliases = $entity->getAliases( $languageCode );
+		$entityId = $entity->getId();
+		$editSection = '';
 
-		$aliases = $entity->getAliases( $langCode );
+		if ( $entityId !== null && $editable ) {
+			$idString = $entityId->getSerialization();
+			$action = empty( $aliases ) ? 'add' : 'edit';
+			$editSection = $this->getHtmlForEditSection( 'SetAliases', array( $idString, $languageCode ), $action );
+		}
 
 		if ( empty( $aliases ) ) {
 			$html = wfTemplate( 'wb-aliases-wrapper',
 				'wb-aliases-empty',
 				'wb-value-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$this->getHtmlForEditSection( 'SetAliases', array( $prefixedId, $langCode ), 'add' )
+				$editSection
 			);
 		} else {
 			$aliasesHtml = '';
-			foreach( $aliases as $alias ) {
+			foreach ( $aliases as $alias ) {
 				$aliasesHtml .= wfTemplate( 'wb-alias', htmlspecialchars( $alias ) );
 			}
 			$aliasList = wfTemplate( 'wb-aliases', $aliasesHtml );
@@ -487,7 +499,7 @@ if ( $ ) {
 				'',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $this->getHtmlForEditSection( 'SetAliases', array( $prefixedId, $langCode ) )
+				$aliasList . $editSection
 			);
 		}
 
@@ -533,7 +545,7 @@ if ( $ ) {
 
 		// aggregate claims by properties
 		$claimsByProperty = array();
-		foreach( $claims as $claim ) {
+		foreach ( $claims as $claim ) {
 			$propertyId = $claim->getMainSnak()->getPropertyId();
 			$claimsByProperty[$propertyId->getNumericId()][] = $claim;
 		}
@@ -546,7 +558,7 @@ if ( $ ) {
 		 */
 		$claimsHtml = '';
 
-		foreach( $claimsByProperty as $claims ) {
+		foreach ( $claimsByProperty as $claims ) {
 			$propertyHtml = '';
 
 			$propertyId = $claims[0]->getMainSnak()->getPropertyId();
@@ -557,14 +569,14 @@ if ( $ ) {
 				$propertyLabel = $entityInfoLabel['value'];
 			}
 
-			$propertyLink = \Linker::link(
+			$propertyLink = Linker::link(
 				$this->entityTitleLookup->getTitleForId( $propertyId ),
 				htmlspecialchars( $propertyLabel )
 			);
 
 			$htmlForEditSection = $this->getHtmlForEditSection( '', array() ); // TODO: add link to SpecialPage
 
-			foreach( $claims as $claim ) {
+			foreach ( $claims as $claim ) {
 				$propertyHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 					$claim,
 					$entityInfo,
@@ -600,20 +612,21 @@ if ( $ ) {
 	 * an edit link pointing to a special page where the statement can be edited. In case JavaScript is available, this
 	 * toolbar will be removed an replaced with the interactive JavaScript one.
 	 *
-	 * @since 0.2
-	 *
 	 * @param string $specialPage specifies the special page
 	 * @param string[] $specialPageParams specifies additional params for the special page
 	 * @param string $action by default 'edit', for aliases this could also be 'add'
-	 * @param bool $enabled can be set to false to display the button disabled
 	 *
 	 * @return string
 	 */
-	private function getHtmlForEditSection( $specialPage, array $specialPageParams, $action = 'edit', $enabled = true ) {
+	private function getHtmlForEditSection( $specialPage, array $specialPageParams, $action = 'edit' ) {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
-		$msg = $this->getContext()->msg( $key );
+		$message = $this->getContext()->msg( $key );
 
-		return $this->sectionEditLinkGenerator->getHtmlForEditSection( $specialPage, $specialPageParams, $msg, $enabled );
+		return $this->sectionEditLinkGenerator->getHtmlForEditSection(
+			$specialPage,
+			$specialPageParams,
+			$message
+		);
 	}
 
 	/**

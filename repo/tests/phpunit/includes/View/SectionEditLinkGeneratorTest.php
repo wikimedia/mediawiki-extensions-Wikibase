@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use SpecialPageFactory;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 
 /**
@@ -17,7 +16,7 @@ use Wikibase\Repo\View\SectionEditLinkGenerator;
  * @author Daniel Kinzler
  * @author Adrian Lang
  */
-class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
+class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 
 	/**
 	 * @dataProvider getHtmlForEditSectionProvider
@@ -28,14 +27,14 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = wfMessage( $key )->inLanguage( $langCode );
 
-		$editSectionHtml = $generator->getHtmlForEditSection( $pageName, array(), $msg, $enabled );
+		$html = $generator->getHtmlForEditSection( $pageName, array(), $msg, $enabled );
 		$matcher = array(
 			'tag' => 'span',
 			'class' => 'wb-editsection'
 		);
 
-		$this->assertTag( $matcher, $editSectionHtml, "$action action" );
-		$this->assertRegExp( $expected, $editSectionHtml, "$action button label" );
+		$this->assertTag( $matcher, $html, "$action action" );
+		$this->assertRegExp( $expected, $html, "$action button label" );
 	}
 
 	public function getHtmlForEditSectionProvider() {
@@ -59,14 +58,13 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getHtmlForEditSection_editUrlProvider
-	 * @covers SectionEditLinkGenerator::getHtmlForEditSection
 	 */
 	public function testGetHtmlForEditSection_editUrl( $expected, $specialPageName, $specialPageParams ) {
 		$generator = new SectionEditLinkGenerator();
 
-		$editSection = $generator->getHtmlForEditSection( $specialPageName, $specialPageParams, wfMessage( 'wikibase-add' ) );
+		$html = $generator->getHtmlForEditSection( $specialPageName, $specialPageParams, wfMessage( 'wikibase-add' ) );
 
-		$this->assertTag( $expected, $editSection );
+		$this->assertTag( $expected, $html );
 	}
 
 	public function getHtmlForEditSection_editUrlProvider() {
@@ -74,9 +72,7 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 			array(
 				array(
 					'tag' => 'a',
-					'attributes' => array(
-						'href' => 'regexp:+' . preg_quote( urlencode( SpecialPageFactory::getLocalNameFor( 'Version' ) ), '+' ) . '/Q1$+',
-					)
+					'attributes' => array( 'href' => 'regexp:+\bSpecial:Version/Q1$+' )
 				),
 				'Version',
 				array( 'Q1' )
@@ -84,13 +80,42 @@ class SectionEditLinkGeneratorTest extends \PHPUnit_Framework_TestCase {
 			array(
 				array(
 					'tag' => 'a',
-					'attributes' => array(
-						'href' => 'regexp:+' . preg_quote( urlencode( SpecialPageFactory::getLocalNameFor( 'Version' ) ), '+' ) . '/Q1/de$+',
-					)
+					'attributes' => array( 'href' => 'regexp:+\bSpecial:SetLabel/Q1/de$+' )
 				),
-				'Version',
+				'SetLabel',
 				array( 'Q1', 'de' ),
 			)
+		);
+	}
+
+	/**
+	 * @dataProvider getHtmlForEditSection_disabledProvider
+	 */
+	public function testGetHtmlForEditSection_disabled( $specialPageName, $specialPageUrlParams, $enabled ) {
+		$generator = new SectionEditLinkGenerator();
+
+		$html = $generator->getHtmlForEditSection(
+			$specialPageName,
+			$specialPageUrlParams,
+			wfMessage( 'wikibase-edit' ),
+			$enabled
+		);
+
+		$this->assertNotTag( array(
+			'tag' => 'a',
+			'attributes' => array( 'href' => 'regexp:+\bSpecial:SetLabel\b+' )
+		), $html );
+		$this->assertTag( array(
+			'tag' => 'a',
+			'attributes' => array( 'class' => 'wikibase-toolbarbutton-disabled' )
+		), $html );
+	}
+
+	public function getHtmlForEditSection_disabledProvider() {
+		return array(
+			array( 'SetLabel', array( 'Q1' ), false ),
+			array( 'SetLabel', array(), true ),
+			array( null, array( 'Q1' ), true ),
 		);
 	}
 
