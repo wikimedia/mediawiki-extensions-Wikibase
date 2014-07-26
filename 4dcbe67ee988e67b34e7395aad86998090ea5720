@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_78b92ac6",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-26T15:00:58Z",
+      "side": 1,
+      "message": "You could have made getHtmlForEditSection throw an invalid argument exception if it doesn\u0027t get a string... we don\u0027t really need scalar type hints for such a thing.",
+      "parentUuid": "8e28a382_97c5ca66",
+      "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_6761b0ff",
         "filename": "repo/includes/View/SectionEditLinkGenerator.php",
         "patchSetId": 6
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Sorry? Could it be that you missed the point of this refactoring?",
       "parentUuid": "8e28a382_6761b0ff",
+      "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_98b4d6d0",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-26T15:00:58Z",
+      "side": 1,
+      "message": "I just think that a function solely consisting of an if else might be better split up... but this one is small enough so that I don\u0027t care enough",
+      "parentUuid": "8e28a382_b7c0c655",
       "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
