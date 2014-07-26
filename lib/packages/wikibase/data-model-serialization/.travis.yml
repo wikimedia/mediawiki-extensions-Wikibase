@@ -7,9 +7,31 @@ php:
   - 5.6
   - hhvm
 
+env:
+  - THENEEDFORTHIS=FAIL
+
+matrix:
+  fast_finish: true
+  include:
+    - env: DM=0.7
+      php: 5.3
+    - env: DM=~0.7
+      php: 5.4
+    - env: DM=~1.0@dev
+      php: 5.5
+    - env: DM=~0.7
+      php: 5.6
+    - env: DM=~0.7
+      php: hhvm
+    - env: DM=~0.7
+      php: hhvm-nightly
+  exclude:
+    - env: THENEEDFORTHIS=FAIL
+  allow_failures:
+    - env: DM=~1.0@dev
+
 before_script:
-  - composer self-update
-  - composer install --prefer-source
+  - composer require "wikibase/data-model=$DM" --prefer-source
 
 script:
   - phpunit
