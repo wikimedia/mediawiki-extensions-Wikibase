@@ -6,7 +6,7 @@ use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Internal\ObjectComparer;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Validators\EntityConstraintProvider;
 
 /**
@@ -120,7 +120,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function getItem( $id, array $data = array() ) {
-		$item = new Item( $data );
+		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+		$item = $deserializer->deserialize( $data );
 		$item->setId( new ItemId( $id ) );
 		return $item;
 	}
@@ -137,43 +138,36 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	public function testCanApply( array $fromData, array $toData, $expectedFromData, $expectedToData, array $ignoreConflicts = array() ) {
 		$from = $this->getItem( 'Q111', $fromData );
 		$to = $this->getItem( 'Q222', $toData );
+
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
 			$ignoreConflicts
 		);
 
-		$this->assertTrue( $from->equals( new Item( $fromData ) ), 'FromItem was not filled correctly' );
-		$this->assertTrue( $to->equals( new Item( $toData ) ), 'ToItem was not filled correctly' );
+		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+
+		$this->assertTrue( $from->equals( $deserializer->deserialize( $fromData ) ), 'FromItem was not filled correctly' );
+		$this->assertTrue( $to->equals( $deserializer->deserialize( $toData ) ), 'ToItem was not filled correctly' );
 
 		$changeOps->apply();
 
+		$expectedFrom = $deserializer->deserialize( $expectedFromData );
+		$expectedTo = $deserializer->deserialize( $expectedToData );
 
-		$fromData = $from->toArray();
-		$toData = $to->toArray();
+		$this->removeClaimsGuids( $from );
+		$this->removeClaimsGuids( $expectedFrom );
+		$this->removeClaimsGuids( $to );
+		$this->removeClaimsGuids( $expectedTo );
 
-		//Cycle through the old claims and set the guids to null (we no longer know what they should be)
-		$fromClaims = array();
-		foreach( $fromData['claims'] as $claim ) {
-			unset( $claim['g'] );
-			$fromClaims[] = $claim;
+		$this->assertTrue( $from->equals( $expectedFrom ) );
+		$this->assertTrue( $to->equals( $expectedTo ) );
+	}
+
+	private function removeClaimsGuids( Item $item ) {
+		foreach ( $item->getClaims() as $claim ) {
+			$claim->setGuid( null );
 		}
-
-		$toClaims = array();
-		foreach( $toData['claims'] as $claim ) {
-			unset( $claim['g'] );
-			$toClaims[] = $claim;
-		}
-
-		$fromData['claims'] = $fromClaims;
-		$toData['claims'] = $toClaims;
-
-		$fromData = array_intersect_key( $fromData, $expectedFromData );
-		$toData = array_intersect_key( $toData, $expectedToData );
-
-		$comparer = new ObjectComparer();
-		$this->assertTrue( $comparer->dataEquals( $expectedFromData, $fromData, array( 'entity' ) ) );
-		$this->assertTrue( $comparer->dataEquals( $expectedToData, $toData, array( 'entity' ) ) );
 	}
 
 	/**
@@ -257,7 +251,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			array( 'claims' => array(
 				array(
 					'm' => array( 'novalue', 56 ),
-					'q' => array( ) )
+					'q' => array( ),
+					'g' => 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556'
+				)
 			),
 			),
 		);
@@ -274,7 +270,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 			array( 'claims' => array(
 				array(
 					'm' => array( 'novalue', 56 ),
-					'q' => array( array(  'novalue', 56  ) ) )
+					'q' => array( array(  'novalue', 56  ) ),
+					'g' => 'Q111$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
+				)
 			),
 			),
 		);
@@ -301,7 +299,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
-						'q' => array( array(  'novalue', 88  ) ) )
+						'q' => array( array(  'novalue', 88  ) ),
+						'g' => 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F'
+					)
 				),
 			),
 		);
@@ -342,7 +342,9 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 				'claims' => array(
 					array(
 						'm' => array( 'novalue', 88 ),
-						'q' => array( array(  'novalue', 88  ) ) )
+						'q' => array( array(  'novalue', 88  ) ),
+						'g' => 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F'
+					)
 				),
 			),
 			array( 'label', 'description', 'sitelink' )
