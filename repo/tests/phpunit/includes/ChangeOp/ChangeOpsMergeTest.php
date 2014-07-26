@@ -4,9 +4,11 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Internal\ObjectComparer;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Validators\EntityConstraintProvider;
 
 /**
@@ -120,7 +122,8 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function getItem( $id, array $data = array() ) {
-		$item = new Item( $data );
+		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+		$item = $deserializer->deserialize( $data );
 		$item->setId( new ItemId( $id ) );
 		return $item;
 	}
@@ -137,43 +140,31 @@ class ChangeOpsMergeTest extends \PHPUnit_Framework_TestCase {
 	public function testCanApply( array $fromData, array $toData, $expectedFromData, $expectedToData, array $ignoreConflicts = array() ) {
 		$from = $this->getItem( 'Q111', $fromData );
 		$to = $this->getItem( 'Q222', $toData );
+
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
 			$ignoreConflicts
 		);
 
-		$this->assertTrue( $from->equals( new Item( $fromData ) ), 'FromItem was not filled correctly' );
-		$this->assertTrue( $to->equals( new Item( $toData ) ), 'ToItem was not filled correctly' );
+		$deserializer = WikibaseRepo::getDefaultInstance()->getInternalEntityDeserializer();
+
+		$this->assertTrue( $from->equals( $deserializer->deserialize( $fromData ) ), 'FromItem was not filled correctly' );
+		$this->assertTrue( $to->equals( $deserializer->deserialize( $toData ) ), 'ToItem was not filled correctly' );
 
 		$changeOps->apply();
 
+		$this->removeClaimsGuids( $from );
+		$this->removeClaimsGuids( $to );
 
-		$fromData = $from->toArray();
-		$toData = $to->toArray();
+		$this->assertTrue( $from->equals( $deserializer->deserialize( $expectedFromData ) ) );
+		$this->assertTrue( $to->equals( $deserializer->deserialize( $expectedToData ) ) );
+	}
 
-		//Cycle through the old claims and set the guids to null (we no longer know what they should be)
-		$fromClaims = array();
-		foreach( $fromData['claims'] as $claim ) {
-			unset( $claim['g'] );
-			$fromClaims[] = $claim;
+	private function removeClaimsGuids( Item $item ) {
+		foreach ( $item->getClaims() as $claim ) {
+			$claim->setGuid( null );
 		}
-
-		$toClaims = array();
-		foreach( $toData['claims'] as $claim ) {
-			unset( $claim['g'] );
-			$toClaims[] = $claim;
-		}
-
-		$fromData['claims'] = $fromClaims;
-		$toData['claims'] = $toClaims;
-
-		$fromData = array_intersect_key( $fromData, $expectedFromData );
-		$toData = array_intersect_key( $toData, $expectedToData );
-
-		$comparer = new ObjectComparer();
-		$this->assertTrue( $comparer->dataEquals( $expectedFromData, $fromData, array( 'entity' ) ) );
-		$this->assertTrue( $comparer->dataEquals( $expectedToData, $toData, array( 'entity' ) ) );
 	}
 
 	/**
