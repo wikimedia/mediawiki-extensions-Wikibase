@@ -133,7 +133,7 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 	}
 
 	private function setClaimsFromSerialization( array $serialization, Entity $entity ) {
-		if ( !array_key_exists( 'claims', $serialization ) ) {
+		if ( !array_key_exists( 'claims', $serialization ) || !method_exists( $entity, 'setClaims' ) ) {
 			return;
 		}
 

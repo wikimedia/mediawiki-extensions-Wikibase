@@ -80,20 +80,22 @@ class ReferenceSerializerTest extends SerializerBaseTest {
 
 		$referenceSerializer = new ReferenceSerializer( $snakListSerializerMock );
 
+		$reference = new Reference( new SnakList( array(
+			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
+			new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
+			new PropertyNoValueSnak( new PropertyId( 'P24' ) )
+		) ) );
+
 		$this->assertEquals(
 			array(
-				'hash' => 'c473c0006ec3e5930a0b3d87406909d4c87dae96',
+				'hash' => $reference->getHash(),
 				'snaks' => array(),
 				'snaks-order' => array(
 					'P42',
 					'P24'
 				)
 			),
-			$referenceSerializer->serialize( new Reference( new SnakList( array(
-				new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
-				new PropertySomeValueSnak( new PropertyId( 'P24' ) ),
-				new PropertyNoValueSnak( new PropertyId( 'P24' ) )
-			) ) ) )
+			$referenceSerializer->serialize( $reference )
 		);
 	}
 }
