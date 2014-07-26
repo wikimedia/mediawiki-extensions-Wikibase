@@ -4,6 +4,7 @@ env:
   - THENEEDFORTHIS=FAIL
 
 matrix:
+  fast_finish: true
   include:
     - env: DBTYPE=mysql LANG=de; MW=master WB=client
       php: 5.3
