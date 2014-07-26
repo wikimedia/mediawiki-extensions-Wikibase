@@ -215,6 +215,7 @@
 	"wikibase-special-mergeitems-error-prefix": "Elementy nie mogły zostać połączone. Wystąpił następujący błąd:",
 	"wikibase-item-summary-wbsetitem": "Utworzono nowy element",
 	"wikibase-item-summary-wbcreate-new": "Utworzono nowy element",
+	"wikibase-item-summary-wbcreateredirect": "Przekierowano do $4",
 	"wikibase-item-summary-wbeditentity": "Utworzono nowy element",
 	"wikibase-item-summary-wbeditentity-create": "Utworzono nowy element",
 	"wikibase-item-summary-wbeditentity-update": "Zmieniono element",

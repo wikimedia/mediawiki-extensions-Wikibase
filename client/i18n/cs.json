@@ -22,7 +22,7 @@
 	"wikibase-comment-sitelink-change": "Mezijazykový odkaz změněn z $1 na $2",
 	"wikibase-comment-sitelink-remove": "Odstraněn mezijazykový odkaz: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|změna|změny|změn}}",
-	"wikibase-dataitem": "Položka na {{grammar:6sg|{{WBREPONAME}}}}",
+	"wikibase-dataitem": "Položka {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Upravit odkazy",
 	"wikibase-editlinkstitle": "Editovat mezijazykové odkazy",
 	"wikibase-linkitem-addlinks": "Přidat odkazy",

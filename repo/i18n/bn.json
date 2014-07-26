@@ -32,6 +32,7 @@
 	"wikibase-terms": "অন্য ভাষায়",
 	"wikibase-sitelinks-empty": "এই আইটেমে কোন পাতা এখনও সংযোগ করা নেই।",
 	"wikibase-sitelinks-input-help-message": "এই আইটেম সম্পর্কিত একটি পাতার লিঙ্ক ধার্য করুন।",
+	"wikibase-sitelinks-special": "এই আইটেমে সংযুক্ত অন্যান্য সাইটের পাতা",
 	"wikibase-remove": "অপসারণ",
 	"wikibase-move-up": "উপরে তুলুন",
 	"wikibase-move-down": "নিচে নামান",
