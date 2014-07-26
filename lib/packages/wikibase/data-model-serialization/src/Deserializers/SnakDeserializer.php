@@ -77,11 +77,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 		$this->assertCanDeserialize( $serialization );
 		$this->requireAttribute( $serialization, 'property' );
 
-		$snak = $this->getDeserialized( $serialization );
-
-		$this->validateHash( $snak, $serialization );
-
-		return $snak;
+		return $this->getDeserialized( $serialization );
 	}
 
 	/**
@@ -157,16 +153,6 @@ class SnakDeserializer implements DispatchableDeserializer {
 			throw new MissingAttributeException(
 				$attributeName
 			);
-		}
-	}
-
-	private function validateHash( Snak $snak, array $serialization ) {
-		if( !array_key_exists( 'hash', $serialization ) ) {
-			return;
-		}
-
-		if( $snak->getHash() !== $serialization['hash'] ) {
-			throw new DeserializationException( 'The snak serialization provides a wrong hash' );
 		}
 	}
 

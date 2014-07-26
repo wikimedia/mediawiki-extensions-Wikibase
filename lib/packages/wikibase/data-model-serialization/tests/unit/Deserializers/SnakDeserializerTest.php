@@ -111,6 +111,14 @@ class SnakDeserializerTest extends DeserializerBaseTest {
 					)
 				)
 			),
+			array(
+				new PropertyNoValueSnak( 42 ),
+				array(
+					'snaktype' => 'novalue',
+					'property' => 'P42',
+					'hash' => 'not a valid hash'
+				)
+			),
 		);
 	}
 
@@ -133,13 +141,6 @@ class SnakDeserializerTest extends DeserializerBaseTest {
 				array(
 					'snaktype' => 'value',
 					'property' => 'P42'
-				)
-			),
-			array(
-				array(
-					'snaktype' => 'novalue',
-					'property' => 'P42',
-					'hash' => '5c'
 				)
 			),
 		);
