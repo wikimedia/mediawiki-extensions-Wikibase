@@ -384,12 +384,10 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @throws InvalidArgumentException
 	 */
 	private function injectTerms( ResultWrapper $dbResult ) {
-		$idParser = new LegacyIdInterpreter();
-
 		foreach ( $dbResult as $row ) {
 			// FIXME: this only works for items and properties
-			$id = $idParser->newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
-			$key = $id->getSerialization();
+			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+			$key = $entityId->getSerialization();
 
 			if ( !isset( $this->entityInfo[$key] ) ) {
 				continue;
