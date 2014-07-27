@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_90fa6ad8",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:14:23Z",
+      "side": 1,
+      "message": "This is a private function. It returns null if something it can\u0027t create an edit URL. What is wrong with that?",
+      "parentUuid": "8e28a382_78b92ac6",
+      "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_6761b0ff",
         "filename": "repo/includes/View/SectionEditLinkGenerator.php",
         "patchSetId": 6
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I just think that a function solely consisting of an if else might be better split up... but this one is small enough so that I don\u0027t care enough",
       "parentUuid": "8e28a382_b7c0c655",
+      "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_70e37e32",
+        "filename": "repo/includes/View/SectionEditLinkGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:14:23Z",
+      "side": 1,
+      "message": "Splitting a function with basically 4 logical lines? What? Again, what\u0027s wrong here? I really don\u0027t understand what you are asking for. Please explain.",
+      "parentUuid": "8e28a382_98b4d6d0",
       "revId": "4dcbe67ee988e67b34e7395aad86998090ea5720",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
