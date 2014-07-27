@@ -102,6 +102,10 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
+### 1.0.3 (2014-07-26)
+
+* Hashes are now ignored by the SnakDeserializer
+
 ### 1.0.2 (2014-07-21)
 
 * Fixed issue where invalid snaks-order elements in reference serialization caused an error rather
