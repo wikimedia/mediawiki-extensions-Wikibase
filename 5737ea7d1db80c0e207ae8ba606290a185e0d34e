@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_90acaaec",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:04:53Z",
+      "side": 1,
+      "message": "Why did you removed the \"nothing to do\" check?",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_50b2c247",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:04:53Z",
+      "side": 1,
+      "message": "Why? This is pointless. This also replaces English abbreviations with full month names which is not part of the contract of an \"unlocalizer\".",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_30bbb624",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:04:53Z",
+      "side": 1,
+      "message": "Why? The thing is not called \"normalizer\", it\u0027s called \"unlocalizer\".",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_10b8ba23",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:04:53Z",
+      "side": 1,
+      "message": "Why? Why does this need to become an unabbreviator?",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d08d9286",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:04:53Z",
+      "side": 1,
+      "message": "So this is not replaced but \"Juli July\" is? Congratulations, your solution is not better than mine.",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b07e8665",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:04:53Z",
+      "side": 1,
+      "message": "Again, why?",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f0888e77",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-27T13:04:53Z",
+      "side": 1,
+      "message": "What\u0027s the point of this replacement?",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
