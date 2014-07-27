@@ -238,7 +238,7 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 			$entity->setLabels( $labels );
 		}
 
-		if ( array_key_exists( 'claims', $data ) ) {
+		if ( array_key_exists( 'claims', $data ) && method_exists( $entity, 'setClaims' ) ) {
 			$claimsSerializer = new ClaimsSerializer( $this->claimSerializer, $this->options );
 			$claims = $claimsSerializer->newFromSerialization( $data['claims'] );
 			$entity->setClaims( $claims );
