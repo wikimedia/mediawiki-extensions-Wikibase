@@ -26,16 +26,6 @@ use Wikibase\Lib\Parsers\TimeParser;
  */
 class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
-		parent::setUp();
-		/*
-		 * Temporary wgHooks performance improvement,
-		 * this can be removed once the following is merged:
-		 * https://gerrit.wikimedia.org/r/#/c/125706/1
-		 */
-		$this->stashMwGlobals( 'wgHooks' );
-	}
-
 	/**
 	 * Returns an array of test parameters.
 	 *
