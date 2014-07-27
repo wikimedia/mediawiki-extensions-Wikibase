@@ -16,7 +16,7 @@
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
 	"specialpages-group-wikibaseclient": "{{WBREPONAME}}客戶端",
-	"tooltip-t-wikibase": "連接至被連接數據庫項",
+	"tooltip-t-wikibase": "連結至被連接資料儲存庫項",
 	"wikibase-after-page-move": "您還可以[$1 更新]關聯的{{WBREPONAME}}項，使其連結至移動後的頁面。",
 	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}}項]及之相關頁面將盡快更新。",
 	"wikibase-comment-add": "一個{{WBREPONAME}}項已被创建。",

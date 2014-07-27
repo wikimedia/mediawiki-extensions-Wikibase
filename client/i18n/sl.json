@@ -20,7 +20,7 @@
 	"wikibase-comment-sitelink-change": "Jezikovna povezava spremenjena iz $1 v $2",
 	"wikibase-comment-sitelink-remove": "Jezikovna povezava odstranjena: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|sprememba|spremembi|spremembe|sprememb}}",
-	"wikibase-dataitem": "Podatkovni objekt",
+	"wikibase-dataitem": "Objekt {{WBREPONAME}}",
 	"wikibase-editlinks": "Uredi povezave",
 	"wikibase-editlinkstitle": "Uredi medjezikovne povezave",
 	"wikibase-linkitem-addlinks": "Dodaj povezave",
