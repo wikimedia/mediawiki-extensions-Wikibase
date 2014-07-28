@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
 use Wikibase\EntityPermissionChecker;
 use Wikibase\EntityTitleLookup;
@@ -305,13 +306,20 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 
 		if ( $expectedData !== null ) {
-			$data = $editEntity->getNewEntity()->toArray();
+			$data = $this->fingerprintToPartialArray( $editEntity->getNewEntity()->getFingerprint() );
 
 			foreach ( $expectedData as $key => $expectedValue ) {
 				$actualValue = $data[$key];
 				$this->assertArrayEquals( $expectedValue, $actualValue, false, true );
 			}
 		}
+	}
+
+	private function fingerprintToPartialArray( Fingerprint $fingerprint ) {
+		return array(
+			'label' => $fingerprint->getLabels()->toTextArray(),
+			'description' => $fingerprint->getDescriptions()->toTextArray(),
+		);
 	}
 
 	public static function provideAttemptSaveWithLateConflict() {
