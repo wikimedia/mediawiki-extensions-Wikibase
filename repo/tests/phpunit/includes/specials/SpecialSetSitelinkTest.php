@@ -35,21 +35,21 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 				'id' => 'wb-modifyentity-id',
 				'class' => 'wb-input',
 				'name' => 'id',
-		) ),
+			) ),
 		'site' => array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-site',
 				'class' => 'wb-input',
 				'name' => 'site',
-		) ),
+			) ),
 		'page' => array(
 			'tag' => 'input',
 			'attributes' => array(
 				'id' => 'wb-setsitelink-page',
 				'class' => 'wb-input',
 				'name' => 'page',
-		) ),
+			) ),
 		'submit' => array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -57,7 +57,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 				'class' => 'wb-button',
 				'type' => 'submit',
 				'name' => 'wikibase-setsitelink-submit',
-		) )
+			) )
 	);
 
 	/**
@@ -94,10 +94,10 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 				$badgeMatcher = array(
 					'tag' => 'option',
+					'content' => 'Good article',
 					'attributes' => array(
 						'value' => self::$badgeId
-					)
-				);
+					) );
 
 				self::$matchers['badges'] = array(
 					'tag' => 'select',
@@ -124,22 +124,24 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	}
 
 	private function createItems() {
-		$badge = Item::newEmpty();
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$badge = Item::newEmpty();
+		$badge->setLabel( 'en', 'Good article' );
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$item = Item::newEmpty();
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) ) );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
-		self::$itemId = $item->getId()->getSerialization();
 		self::$badgeId = $badge->getId()->getSerialization();
+		self::$itemId = $item->getId()->getSerialization();
 	}
 
 	public function testExecuteEmptyForm() {
 		$matchers = self::$matchers;
 		// Execute with no subpage value
-		list( $output, ) = $this->executeSpecialPage( '' );
+		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
 
 		foreach( $matchers as $key => $matcher ){
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
@@ -149,7 +151,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	public function testExecuteOneValuePreset() {
 		$matchers = self::$matchers;
 		// Execute with one subpage value
-		list( $output, ) = $this->executeSpecialPage( self::$itemId );
+		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'en' );
 		$matchers['id']['attributes']['value'] = self::$itemId;
 
 		foreach( $matchers as $key => $matcher ) {
@@ -160,7 +162,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	public function testExecuteTwoValuesPreset() {
 		$matchers = self::$matchers;
 		// Execute with two subpage values
-		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki' );
+		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en' );
 		$matchers['id'] = array(
 			'tag' => 'input',
 			'attributes' => array(
