@@ -137,7 +137,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string A date format for the day that roundtrips the Wikibase TimeParsers.
 	 */
 	private function getDayFormat( $dateFormat ) {
-		if ( preg_match( '/[dj][.,]?/', $dateFormat, $matches ) ) {
+		if ( preg_match( '/(?:d|(?<!x)j)[.,]?/', $dateFormat, $matches ) ) {
 			return $matches[0];
 		}
 
@@ -152,7 +152,7 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string A date format for the month that roundtrips the Wikibase TimeParsers.
 	 */
 	private function getMonthFormat( $dateFormat ) {
-		if ( preg_match( '/(?:[FM]|xg)[.,]?/', $dateFormat, $matches ) ) {
+		if ( preg_match( '/(?:[FMn]|(?<!x)m|xg)[.,]?/', $dateFormat, $matches ) ) {
 			return $matches[0];
 		}
 
