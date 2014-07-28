@@ -180,42 +180,40 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$item = Item::newEmpty();
-			$item->setId( new ItemId( 'Q1' ) );
-			$item->addSiteLink( new SiteLink( 'enwiki', 'en test', array( new ItemId( 'Q42' ) ) ) );
-			$item->addSiteLink( new SiteLink( 'dewiki', 'de test', array( new ItemId( 'Q42' ), new ItemId( 'Q12' ) ) ) );
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q1' ) );
+		$item->addSiteLink( new SiteLink( 'enwiki', 'en test', array( new ItemId( 'Q42' ) ) ) );
+		$item->addSiteLink( new SiteLink( 'dewiki', 'de test', array( new ItemId( 'Q42' ), new ItemId( 'Q12' ) ) ) );
 
-			$testCases[] = array(
-				$item,
-				array( 'wikipedia' ),
-				true,
-				array(
-					'tag' => 'table',
-					'descendant' => array(
-						'tag' => 'span',
-						'attributes' => array(
-							'class' => 'wb-badge wb-badge-Q42 wb-badge-featuredarticle'
-						)
+		$testCases[] = array(
+			$item,
+			array( 'wikipedia' ),
+			true,
+			array(
+				'tag' => 'table',
+				'descendant' => array(
+					'tag' => 'span',
+					'attributes' => array(
+						'class' => 'wb-badge wb-badge-Q42 wb-badge-featuredarticle'
 					)
 				)
-			);
+			)
+		);
 
-			$testCases[] = array(
-				$item,
-				array( 'wikipedia' ),
-				true,
-				array(
-					'tag' => 'table',
-					'descendant' => array(
-						'tag' => 'span',
-						'attributes' => array(
-							'class' => 'wb-badge wb-badge-Q12 wb-badge-goodarticle'
-						)
+		$testCases[] = array(
+			$item,
+			array( 'wikipedia' ),
+			true,
+			array(
+				'tag' => 'table',
+				'descendant' => array(
+					'tag' => 'span',
+					'attributes' => array(
+						'class' => 'wb-badge wb-badge-Q12 wb-badge-goodarticle'
 					)
 				)
-			);
-		}
+			)
+		);
 
 		return $testCases;
 	}

@@ -88,30 +88,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 			$sitesTable->saveSites( TestSites::getSites() );
 
 			$this->createItems();
-
-			// Experimental setting of badges on the special page
-			// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
-			if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-				$badgeMatcher = array(
-					'tag' => 'option',
-					'attributes' => array(
-						'value' => self::$badgeId
-					)
-				);
-
-				self::$matchers['badges'] = array(
-					'tag' => 'select',
-					'attributes' => array(
-						'id' => 'wb-setsitelink-badges',
-						'class' => 'wb-input',
-						'name' => 'badges[]',
-						'multiple' => ''
-					),
-					'children' => array(
-						'count' => 1,
-						'only' => $badgeMatcher
-					) );
-			}
+			$this->addBadgeMatcher();
 		}
 
 		self::$oldBadgeItemsSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
@@ -136,6 +113,28 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		self::$badgeId = $badge->getId()->getSerialization();
 	}
 
+	private function addBadgeMatcher() {
+		$badgeMatcher = array(
+			'tag' => 'option',
+			'attributes' => array(
+				'value' => self::$badgeId
+			)
+		);
+
+		self::$matchers['badges'] = array(
+			'tag' => 'select',
+			'attributes' => array(
+				'id' => 'wb-setsitelink-badges',
+				'class' => 'wb-input',
+				'name' => 'badges[]',
+				'multiple' => ''
+			),
+			'children' => array(
+				'count' => 1,
+				'only' => $badgeMatcher
+			) );
+	}
+
 	public function testExecuteEmptyForm() {
 		$matchers = self::$matchers;
 		// Execute with no subpage value
@@ -150,6 +149,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		$matchers = self::$matchers;
 		// Execute with one subpage value
 		list( $output, ) = $this->executeSpecialPage( self::$itemId );
+
 		$matchers['id']['attributes']['value'] = self::$itemId;
 
 		foreach( $matchers as $key => $matcher ) {
@@ -161,6 +161,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		$matchers = self::$matchers;
 		// Execute with two subpage values
 		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki' );
+
 		$matchers['id'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -187,11 +188,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 
 		$matchers['value']['attributes']['value'] = 'Wikidata';
 
-		// Experimental setting of badges on the special page
-		// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$matchers['badges']['children']['only']['attributes']['selected'] = '';
-		}
+		$matchers['badges']['children']['only']['attributes']['selected'] = '';
 
 		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
