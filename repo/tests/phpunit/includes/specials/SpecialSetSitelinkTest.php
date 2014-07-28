@@ -96,7 +96,8 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 					'tag' => 'option',
 					'attributes' => array(
 						'value' => self::$badgeId
-					)
+					),
+					'content' => 'Good article'
 				);
 
 				self::$matchers['badges'] = array(
@@ -124,8 +125,10 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	}
 
 	private function createItems() {
-		$badge = Item::newEmpty();
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$badge = Item::newEmpty();
+		$badge->getFingerprint()->getLabels()->setTextForLanguage( 'en', 'Good article' );
 		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
 		$item = Item::newEmpty();
@@ -139,7 +142,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	public function testExecuteEmptyForm() {
 		$matchers = self::$matchers;
 		// Execute with no subpage value
-		list( $output, ) = $this->executeSpecialPage( '' );
+		list( $output, ) = $this->executeSpecialPage( '', null, 'en' );
 
 		foreach( $matchers as $key => $matcher ){
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}'" );
@@ -149,7 +152,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	public function testExecuteOneValuePreset() {
 		$matchers = self::$matchers;
 		// Execute with one subpage value
-		list( $output, ) = $this->executeSpecialPage( self::$itemId );
+		list( $output, ) = $this->executeSpecialPage( self::$itemId, null, 'en' );
 		$matchers['id']['attributes']['value'] = self::$itemId;
 
 		foreach( $matchers as $key => $matcher ) {
@@ -160,7 +163,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	public function testExecuteTwoValuesPreset() {
 		$matchers = self::$matchers;
 		// Execute with two subpage values
-		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki' );
+		list( $output, ) = $this->executeSpecialPage( self::$itemId . '/dewiki', null, 'en' );
 		$matchers['id'] = array(
 			'tag' => 'input',
 			'attributes' => array(
