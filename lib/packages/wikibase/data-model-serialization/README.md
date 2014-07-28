@@ -102,14 +102,16 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
-### 1.0.3 (2014-07-26)
+### 1.0.3 (2014-07-28)
 
 * Hashes are now ignored by the SnakDeserializer
+* Compatibility with Wikibase DataModel 1.x was added
 
 ### 1.0.2 (2014-07-21)
 
 * Fixed issue where invalid snaks-order elements in reference serialization caused an error rather
  than a deserialization exception
+* Hashes are now ignored by the ReferenceDeserializer
 
 ### 1.0.1 (2014-06-16)
 
