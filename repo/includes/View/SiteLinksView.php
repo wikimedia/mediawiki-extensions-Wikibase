@@ -8,8 +8,10 @@ use Message;
 use Sanitizer;
 use Site;
 use SiteList;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
@@ -35,6 +37,16 @@ class SiteLinksView {
 	private $sectionEditLinkGenerator;
 
 	/**
+	 * @var EntityLookup
+	 */
+	private $entityLookup;
+
+	/**
+	 * @var string
+	 */
+	private $languageCode;
+
+	/**
 	 * @var string[]
 	 */
 	private $specialSiteLinkGroups;
@@ -44,9 +56,12 @@ class SiteLinksView {
 	 */
 	private $badgeItems;
 
-	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator ) {
+	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator,
+			EntityLookup $entityLookup, $languageCode ) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
+		$this->entityLookup = $entityLookup;
+		$this->languageCode = $languageCode;
 
 		// @todo inject option/objects instead of using the singleton
 		$repo = WikibaseRepo::getDefaultInstance();
@@ -362,12 +377,34 @@ class SiteLinksView {
 				'span',
 				array(
 					'class' => $classes,
-					'title' => $serialization // @todo get label here
+					'title' => $this->getTitleForBadge( $badge )
 				)
 			);
 		}
 
 		return $html;
+	}
+
+	/**
+	 * Returns the title for the given badge id.
+	 * @todo use TermLookup when we have one
+	 *
+	 * @param EntityId $badgeId
+	 *
+	 * @return string
+	 */
+	private function getTitleForBadge( EntityId $badgeId ) {
+		$entity = $this->entityLookup->getEntity( $badgeId );
+		if ( $entity === null ) {
+			return $badgeId->getSerialization();
+		}
+
+		$labels = $entity->getFingerprint()->getLabels();
+		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
+			return $labels->getByLanguage( $this->languageCode )->getText();
+		} else {
+			return $badgeId->getSerialization();
+		}
 	}
 
 }
