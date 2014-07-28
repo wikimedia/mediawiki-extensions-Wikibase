@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_44d1e024",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T10:15:53Z",
+      "side": 1,
+      "message": "This method is big and complex now. Please split it up.",
+      "revId": "3ffe28820a2e2956129c21fd88099aeed0bdf06f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_04bbd8ba",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T10:15:53Z",
+      "side": 1,
+      "message": "One non-trivial test case i\u0027m missing here is:\n\n   array( \u002715 March 44 BC\u0027, \u0027nrm\u0027, \u002715 March 44 BC\u0027 ),\n\nIn nrm, it\u0027s \"Mar\", which is a prefix of the unlocalized form. That should be tested.",
+      "revId": "3ffe28820a2e2956129c21fd88099aeed0bdf06f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
