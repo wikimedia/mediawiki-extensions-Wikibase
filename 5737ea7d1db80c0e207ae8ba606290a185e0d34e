@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_241494ec",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T09:44:53Z",
+      "side": 1,
+      "message": "To allow \"Dec\" to be normalized to \"December\" even if the target language is German. The idea is that \"English always goes\".",
+      "parentUuid": "8e28a382_90acaaec",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_50b2c247",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-27T13:04:53Z",
       "side": 1,
       "message": "Why? This is pointless. This also replaces English abbreviations with full month names which is not part of the contract of an \"unlocalizer\".",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c4def043",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T09:44:53Z",
+      "side": 1,
+      "message": "Sure. It\u0027s an unlocalization from English to canonical.",
+      "parentUuid": "8e28a382_50b2c247",
       "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_a4df643e",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T09:44:53Z",
+      "side": 1,
+      "message": "For consistency.",
+      "parentUuid": "8e28a382_10b8ba23",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d08d9286",
         "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2014-07-27T13:04:53Z",
       "side": 1,
       "message": "So this is not replaced but \"Juli July\" is? Congratulations, your solution is not better than mine.",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_04f078c2",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T09:44:53Z",
+      "side": 1,
+      "message": "Since \"Juli\" and \"July\" have the same length, \"Juli July\" actually may or may not be changed to \"July July\", depending on the exact behavior of the sorting algorithm (is it stable)?\n\nI didn\u0027t say it handles edge cases better. It handles them differently. Some are still odd. The behavior is just easier to predict, and the code easier to understand.",
+      "parentUuid": "8e28a382_d08d9286",
       "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_a4b644f4",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T09:44:53Z",
+      "side": 1,
+      "message": "For consistency. Also, to be able to use a parser in the next step that no longer knows or cares about abbreviations. All it needs to know are the canonical month names. they didn\u0027t even need to be English.",
+      "parentUuid": "8e28a382_b07e8665",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f0888e77",
         "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
         "patchSetId": 2
@@ -115,6 +205,24 @@
       "writtenOn": "2014-07-27T13:04:53Z",
       "side": 1,
       "message": "What\u0027s the point of this replacement?",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_84bb48dd",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T09:44:53Z",
+      "side": 1,
+      "message": "None, it\u0027s an odd edge case.",
+      "parentUuid": "8e28a382_f0888e77",
       "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
