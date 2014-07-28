@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_44cc4065",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T10:32:14Z",
+      "side": 1,
+      "message": "we can make an additional guarantee about the output without any extra effort. Guarantees are good. They simplify subsequent code.",
+      "parentUuid": "8e28a382_a493e450",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d08d9286",
         "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
         "patchSetId": 2
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "No, it\u0027s not. It\u0027s unpredictable. It does more nonobvious magic than my solution.",
       "parentUuid": "8e28a382_04f078c2",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_24d5b4e9",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-28T10:32:14Z",
+      "side": 1,
+      "message": "Try a hallway experiment. Explain your logic to someone in the hallway and ask them to predict the outcome of the test cases.",
+      "parentUuid": "8e28a382_04a4f89c",
       "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
