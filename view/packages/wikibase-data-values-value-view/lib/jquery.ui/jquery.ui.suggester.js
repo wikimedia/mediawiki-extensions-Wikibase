@@ -549,6 +549,10 @@
 		 * Hides the suggester menu.
 		 */
 		_close: function() {
+			if( !this.options.menu.element.is( ':visible' ) ) {
+				return;
+			}
+
 			this.options.menu.deactivate();
 			this.options.menu.element.hide();
 
