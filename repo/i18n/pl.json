@@ -205,6 +205,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Możesz to zmienić wstawiając <nowiki>{{#babel: }}</nowiki> na {{GENDER:$1|swojej}} [[Special:MyPage|stronie użytkownika]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, przekonwertowano z $3 - $4",
 	"wikibase-api-no-such-sitelink": "Nie udało się znaleźć takiego linku do strony",
+	"wikibase-api-target-is-redirect": "Cel przekierowania nie może być przekierowaniem.",
 	"wikibase-self-conflict-patched": "Do Twojej edycja została zastosowana poprawka do najnowszej wersji, zastępując kilka zmian pośrednich.",
 	"wikibase-conflict-patched": "Do Twojej edycji została zastosowana poprawka do najnowszej wersji.",
 	"wikibase-restoreold": "przywróć",

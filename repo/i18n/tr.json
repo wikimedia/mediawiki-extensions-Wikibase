@@ -28,5 +28,6 @@
 	"special-newitem": "Yeni bir öge oluştur",
 	"wikibase-newitem-summary": "Ögenin [[Special:ItemByTitle|halihazırda var olup olmadığından]] emin olun!<br />Oluşturulan her bir öge için birer [[Help:Label|etiket]] ve [[Help:Description|tanımlama]] da oluşturmanız gerekmektedir.",
 	"wikibase-newitem-fieldset": "Yeni bir öge oluştur",
-	"special-listdatatypes": "Kullanılabilen tüm veri türleri listesi"
+	"special-listdatatypes": "Kullanılabilen tüm veri türleri listesi",
+	"wikibase-api-target-is-redirect": "Yönlendirmenin hedefi başka bir yönlendirme olmamalıdır."
 }

@@ -5,7 +5,8 @@
 			"SPQRobin",
 			"Saruman",
 			"Siebrand",
-			"Southparkfan"
+			"Southparkfan",
+			"Sjoerddebruin"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
@@ -69,7 +70,7 @@
 	"wikibase-validator-invalid": "Ongeldige waarde",
 	"wikibase-validator-bad-type": "$2 in plaats van $1",
 	"wikibase-validator-too-long": "Moet niet meer dan {{PLURAL:$1|één teken $1 tekens}} lang zijn",
-	"wikibase-validator-too-short": "Moet tenminste {{PLURAL:$1|één teken $1 tekens}} lang zijn",
+	"wikibase-validator-too-short": "Moet tenminste {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
 	"wikibase-validator-too-high": "Buiten het bereik, moet niet hoger zijn dan $1",
 	"wikibase-validator-too-low": "Buiten het bereik, moet niet lager zijn dan $1",
 	"wikibase-validator-malformed-value": "Ongeldige invoer: $1",
