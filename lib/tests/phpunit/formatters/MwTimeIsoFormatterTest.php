@@ -287,6 +287,12 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				true,
 				'pt'
 			),
+			array(
+				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
+				'16 8月 2013',
+				true,
+				'yue'
+			),
 
 			// Valid values with day, month and/or year zero
 			array(
