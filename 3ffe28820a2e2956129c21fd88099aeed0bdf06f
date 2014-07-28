@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_c436f04e",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-28T10:38:01Z",
+      "side": 1,
+      "message": "You already said that. Did you missed my answer? Let me repeat: \"This is already done, see I7f1ce71. I will not increase the rebase hell more than I already did.\"",
+      "parentUuid": "8e28a382_44d1e024",
+      "revId": "3ffe28820a2e2956129c21fd88099aeed0bdf06f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_04bbd8ba",
         "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-28T10:15:53Z",
       "side": 1,
       "message": "One non-trivial test case i\u0027m missing here is:\n\n   array( \u002715 March 44 BC\u0027, \u0027nrm\u0027, \u002715 March 44 BC\u0027 ),\n\nIn nrm, it\u0027s \"Mar\", which is a prefix of the unlocalized form. That should be tested.",
+      "revId": "3ffe28820a2e2956129c21fd88099aeed0bdf06f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6445fcb8",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-28T10:38:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_04bbd8ba",
       "revId": "3ffe28820a2e2956129c21fd88099aeed0bdf06f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
