@@ -238,11 +238,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 				)
 			);
 
-		// Experimental setting of badges on the special page
-		// @todo remove experimental once JS UI is in place, (also remove the experimental test case)
-		// @todo when removing from experimental update i18n wikibase-setsitelink-intro
-		//	   @see https://gerrit.wikimedia.org/r/#/c/94939/13/repo/Wikibase.i18n.php
-		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES && !empty( $this->badgeItems ) ) {
+		if ( !empty( $this->badgeItems ) ) {
 			$pageinput .= Html::element( 'br' )
 			. Html::element(
 				'label',
