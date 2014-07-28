@@ -74,12 +74,15 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinks( Item $item, $editable = true ) {
-		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$groups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
 
 		// FIXME: Inject this
 		$siteLinksView = new SiteLinksView(
-			WikibaseRepo::getDefaultInstance()->getSiteStore()->getSites(),
-			$this->sectionEditLinkGenerator
+			$wikibaseRepo->getSiteStore()->getSites(),
+			$this->sectionEditLinkGenerator,
+			$wikibaseRepo->getEntityLookup(),
+			$this->getLanguage()->getCode()
 		);
 
 		$itemId = $item->getId();
