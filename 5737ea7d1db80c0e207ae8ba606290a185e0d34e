@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_e48d6c2f",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-28T10:15:32Z",
+      "side": 1,
+      "message": "The class is not called \"MonthNameNormalizer\". We don\u0027t reimplement translate.google.com here.",
+      "parentUuid": "8e28a382_241494ec",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_50b2c247",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 2
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_a493e450",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-28T10:15:32Z",
+      "side": 1,
+      "message": "Consistency with what? Your solution is not consistent. So whats the point?",
+      "parentUuid": "8e28a382_a4df643e",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d08d9286",
         "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
         "patchSetId": 2
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "Since \"Juli\" and \"July\" have the same length, \"Juli July\" actually may or may not be changed to \"July July\", depending on the exact behavior of the sorting algorithm (is it stable)?\n\nI didn\u0027t say it handles edge cases better. It handles them differently. Some are still odd. The behavior is just easier to predict, and the code easier to understand.",
       "parentUuid": "8e28a382_d08d9286",
+      "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_04a4f89c",
+        "filename": "lib/tests/phpunit/parsers/MonthNameUnlocalizerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-28T10:15:32Z",
+      "side": 1,
+      "message": "No, it\u0027s not. It\u0027s unpredictable. It does more nonobvious magic than my solution.",
+      "parentUuid": "8e28a382_04f078c2",
       "revId": "5737ea7d1db80c0e207ae8ba606290a185e0d34e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
