@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_b777959a",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-07-28T17:50:51Z",
+      "side": 1,
+      "message": "Please add message documentation when adding messages. See https://www.mediawiki.org/wiki/I18n#Message_documentation for details.",
+      "revId": "dcc26388e565e7454f7c479091e2b207435a22fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
