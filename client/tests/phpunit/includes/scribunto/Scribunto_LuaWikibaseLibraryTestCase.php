@@ -11,7 +11,6 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 use Language;
 use Title;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\ClientStore;
 use Wikibase\Test\MockClientStore;
 
 /**
@@ -39,6 +38,8 @@ class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase 
 			$store = new MockClientStore();
 			$wikibaseClient->overrideStore( $store );
 		}
+
+		$wikibaseClient->getSettings()->setSetting( 'allowArbitraryDataAccess', true );
 	}
 
 	/**
