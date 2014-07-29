@@ -27,7 +27,6 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
- * @todo Fix the UnDeserializableValue test.
  * @todo Is something special needed to test ordering?
  * @todo Add tests with $options->setIndexTags( true ).
  *
@@ -201,10 +200,10 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 				new PropertyId( $baseId . '4' ),
 				new StringValue( 'string-value' )
 			),
-			//new PropertyValueSnak(
-			//	new PropertyId( $baseId . '5' ),
-			//	new UnDeserializableValue( 'undeserializable-data', 'unsupported', 'error' )
-			//),
+			new PropertyValueSnak(
+				new PropertyId( $baseId . '5' ),
+				new UnDeserializableValue( 'undeserializable-data', 'string', 'error' )
+			),
 			new PropertyValueSnak(
 				new PropertyId( $baseId . '6' ),
 				new UnknownValue( 'unknown-value' )

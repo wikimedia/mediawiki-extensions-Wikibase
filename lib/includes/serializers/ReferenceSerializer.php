@@ -111,10 +111,6 @@ class ReferenceSerializer extends SerializerObject implements Unserializer {
 
 		$reference = new Reference( new SnakList( $snakList ) );
 
-		if ( array_key_exists( 'hash', $serialization ) && $serialization['hash'] !== $reference->getHash() ) {
-			throw new InvalidArgumentException( 'If a hash is present in a reference serialization it needs to be correct' );
-		}
-
 		return $reference;
 	}
 
