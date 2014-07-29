@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_990de73b",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "We should really find a better name, this one is meaningless at best. It\u0027s in the feature request, sure, but I still think we can do better. Special:FollowSiteLink? More informative, but still a bit obscure...",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d955affd",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "This is not really a search. \"go to page\" would be more accurate.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d96c8fcd",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "This is the message key for the title of the special page. The qqq description should reflect that. Is this a copy\u0026paste-error? \n\nAlso, in the case described here (no matching sitelink entry could be found), it\u0027s unclear what \"further qualification must be done\" means. If there is no such link, then there just isn\u0027t one....",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_1698a41d",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -88,6 +139,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_39a393ff",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "Extracting an ItemId an a Site from $subPage should be in a separate function.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_b67e70ab",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -123,6 +191,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b9e4233a",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "I agree, but note that SiteLinkLookup::getLinks expects the numeric ID. This may should in the future, but I don\u0027t think we have a concrete plan. We are phasing out numeric IDs in places where we don\u0027t know the item type; SiteLinkLookup is build around the wb_items_per_site table though, which will keep using the numeric id, since it\u0027s specifically about items.\n\nSo: use ItemId objects, call getNumericId only in the last second, if needed.\n\nNote to self: SiteLinkLookup needs an overhaul.",
+      "parentUuid": "8e28a382_b67e70ab",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f9a86bd9",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -134,6 +220,40 @@
       "writtenOn": "2014-07-29T10:46:28Z",
       "side": 1,
       "message": "\"$itemId !\u003d\u003d null\" makes it more clear what is going on",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_99b16744",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "Do not use empty on strings, use $x \u003d\u003d\u003d \u0027\u0027 resp. $x \u003d\u003d\u003d null. Note that empty( $x ) will return true if $x \u003d \"0\"; Gotta love PHP, no?...",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_398a736f",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "Bah, the interface of SiteLinkLookup is ugly :(",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -168,6 +288,40 @@
       "writtenOn": "2014-07-29T10:00:03Z",
       "side": 1,
       "message": "More spaces missing.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d9824f52",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "This is a line where STUFF HAPPENS. That should be made easier to spot, perhaps a comment would be enough.\n\nNote that this method actually returns, it just sets the redirect target in the Output page. Perhaps add a return here, to avoid generating and sending the input form along with the redirect header.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_79ea3b06",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "As the code is now, we *always* reach this line, even if we found a redirect target (see comment above).",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -225,6 +379,40 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_59e53f31",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "would be nice to have a selector widget here... we do have a selector widget for site ids, right?",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_19db377d",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "do we want an entity selector widget here?",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_36528040",
         "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
         "patchSetId": 3
@@ -276,6 +464,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_59bc1f01",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "Mocking this requires you to know what methods are called on the SiteList. It might be better to use an actual SiteList object. Since that is a value object (though rather complex), that shouldn\u0027t cause problems.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_765b6857",
         "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
         "patchSetId": 3
@@ -293,6 +498,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_393713ae",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "There should be two test methods:\n\nOne that checks the form in cases where no redirect is found (because the input is incomplete, or doesn\u0027t match a sitelink). This should also check that the Location header is empty. The matchers for checking the form can probably be defined in the test method, not the data provider, unless we want to check the content of individual form fields.\n\nThe other should check the redirect target in case a sitelink was found, and check that no form was generated.",
+      "parentUuid": "8e28a382_765b6857",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_b96783e5",
         "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
         "patchSetId": 3
@@ -304,6 +527,23 @@
       "writtenOn": "2014-07-29T10:46:28Z",
       "side": 1,
       "message": "@param docs do not add value here",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1961f7a3",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T11:14:48Z",
+      "side": 1,
+      "message": "There should be two test methods, one for the \"form\" case, and one for the \"redirect\" case (see my comment above).",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
