@@ -1,5 +1,6 @@
 <?php
 
+use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
 
 /**
@@ -37,7 +38,6 @@ return call_user_func( function() {
 		),
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
-		'otherProjectsLinks' => array(),
 		'otherProjectsLinksByDefault' => false,
 		'otherProjectsLinksBeta' => false,
 		// List of additional CSS class names for site links that have badges, e.g.
@@ -237,6 +237,11 @@ return call_user_func( function() {
 	$defaults['siteGroup'] = function ( SettingsArray $settings ) {
 		// by default lookup from SiteSQLStore, can override with setting for performance reasons
 		return null;
+	};
+
+	$defaults['otherProjectsLinks'] = function ( SettingsArray $settings ) {
+		$otherProjectsSitesProvider = WikibaseClient::getDefaultInstance()->getOtherProjectsSitesProvider();
+		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
 	};
 
 	// Prefix to use for cache keys that should be shared among
