@@ -27,7 +27,6 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializationOptions;
 
 /**
- * @todo Is something special needed to test ordering?
  * @todo Add tests with $options->setIndexTags( true ).
  *
  * @licence GNU GPL v2+
@@ -115,6 +114,25 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		if ( $entity->getType() === 'item' ) {
 			$this->assertArrayHasKey( 'sitelinks', $serialization );
 		}
+	}
+
+	public function testQualifiersAndSnaksOrder() {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q1' ) );
+		$this->addStatementsWithQualifiersAndReferences( $item );
+
+		$legacySerializer = $this->getLegacySerializer( $item );
+		$legacySerialization = $legacySerializer->getSerialized( $item );
+		$legacyQualifiersOrder = $legacySerialization['claims']['P601'][0]['qualifiers-order'];
+		$legacySnaksOrder = $legacySerialization['claims']['P601'][0]['references'][0]['snaks-order'];
+
+		$serializer = $this->getSerializer();
+		$serialization = $serializer->serialize( $item );
+		$qualifiersOrder = $serialization['claims']['P601'][0]['qualifiers-order'];
+		$snaksOrder = $serialization['claims']['P601'][0]['references'][0]['snaks-order'];
+
+		$this->assertOrderArrayEquals( $legacyQualifiersOrder, $qualifiersOrder );
+		$this->assertOrderArrayEquals( $legacySnaksOrder, $snaksOrder );
 	}
 
 	public function entityProvider() {
@@ -231,13 +249,13 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 	private function addStatementsWithRanks( Item $item ) {
 		$ranks = array(
-			Claim::RANK_PREFERRED,
-			Claim::RANK_NORMAL,
-			Claim::RANK_DEPRECATED,
+			'1' => Claim::RANK_PREFERRED,
+			'2' => Claim::RANK_NORMAL,
+			'3' => Claim::RANK_DEPRECATED,
 		);
-		foreach ( $ranks as $rank ) {
+		foreach ( $ranks as $id => $rank ) {
 			$mainSnak = new PropertyNoValueSnak(
-				new PropertyId( 'P701' )
+				new PropertyId( 'P70' . $id )
 			);
 			$statement = new Statement( $mainSnak );
 			$this->setGuid( $statement );
@@ -294,6 +312,12 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$entityIdParser = new BasicEntityIdParser();
 		$deserializerFactory = new \Wikibase\DataModel\DeserializerFactory( $dataValueDeserializer, $entityIdParser );
 		return $deserializerFactory->newEntityDeserializer();
+	}
+
+	private function assertOrderArrayEquals( array $expected, array $actual ) {
+		$this->assertNotEmpty( $actual );
+		$this->assertContainsOnly( 'string', $actual );
+		$this->assertEquals( $expected, $actual );
 	}
 
 	private function assertSymmetric( Entity $a, Entity $b ) {
