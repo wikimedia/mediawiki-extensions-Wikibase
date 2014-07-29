@@ -13,9 +13,6 @@ use Wikibase\DataModel\LegacyIdInterpreter;
  *
  * @since 0.2
  *
- * @todo: make this extend DBAccessBase, so it can be used to access the repo's EPP table
- * from a client!
- *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
