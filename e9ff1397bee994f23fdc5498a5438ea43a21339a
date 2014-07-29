@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_bcc9b15f",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T15:01:03Z",
+      "side": 1,
+      "message": "now you are missing @author Jan Zerebecki...",
+      "revId": "e9ff1397bee994f23fdc5498a5438ea43a21339a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
