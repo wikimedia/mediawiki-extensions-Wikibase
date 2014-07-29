@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b940a339",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-29T10:46:28Z",
+      "side": 1,
+      "message": "Indeed, and doing so makes the comment superfluous",
+      "parentUuid": "8e28a382_968374ac",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f6b1988d",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -81,6 +99,41 @@
       "writtenOn": "2014-07-29T10:00:03Z",
       "side": 1,
       "message": "Why does this need to be numeric? Please be aware that we are currently killing the last instances of numeric IDs. Please don\u0027t introduce new usages. Use the full Q... IDs please.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_59589f28",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-29T10:46:28Z",
+      "side": 1,
+      "message": "The SiteLinkLookup interface expects a numeric id. And in this case it is not problematic, as it is always an item id. The problematic instances are those in which you have entity ids.",
+      "parentUuid": "8e28a382_b67e70ab",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f9a86bd9",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-29T10:46:28Z",
+      "side": 1,
+      "message": "\"$itemId !\u003d\u003d null\" makes it more clear what is going on",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +174,23 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_79bc7b1a",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-29T10:46:28Z",
+      "side": 1,
+      "message": "This method is rather long, complexity can very likely be reduced by splitting it",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_567f4ca6",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -132,6 +202,23 @@
       "writtenOn": "2014-07-29T10:00:03Z",
       "side": 1,
       "message": "Not correct.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_19a6970d",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-29T10:46:28Z",
+      "side": 1,
+      "message": "Why protected?",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -200,6 +287,23 @@
       "writtenOn": "2014-07-29T10:00:03Z",
       "side": 1,
       "message": "So the $matchers array is the same in all test cases? This means it should not be part of the provider. Please move all these constant bits down to the test.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b96783e5",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-07-29T10:46:28Z",
+      "side": 1,
+      "message": "@param docs do not add value here",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
