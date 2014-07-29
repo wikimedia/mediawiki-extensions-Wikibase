@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_1698a41d",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Why are these people here? Just because you copied some code doesn\u0027t make these people responsible.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_768ec8d6",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Whats wrong with $siteStore?",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_968374ac",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "\"groups\" is a very generic variable name. Please pick a more descriptive one.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f6b1988d",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Misplaced space.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b67e70ab",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Why does this need to be numeric? Please be aware that we are currently killing the last instances of numeric IDs. Please don\u0027t introduce new usages. Use the full Q... IDs please.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_967934c5",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Spaces missing.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_768488a3",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "More spaces missing.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_567f4ca6",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Not correct.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_36528040",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Please remove unrelated names.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_16554426",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "More spaces missing.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f647587a",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "Spaces.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_765b6857",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-29T10:00:03Z",
+      "side": 1,
+      "message": "So the $matchers array is the same in all test cases? This means it should not be part of the provider. Please move all these constant bits down to the test.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
