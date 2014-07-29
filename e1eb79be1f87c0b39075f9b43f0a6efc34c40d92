@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f615184e",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/VariantsAwareRenderer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-07-29T10:17:49Z",
+      "side": 1,
+      "message": "Instead of injecting the factory and the variants here, would it not be nicer to just inject a map of code \u003d\u003e renderer?\n\nInjecting a factory is sensible when we don\u0027t have enough information to call the factory and create the actual service when initializing the object. But we do: we already know all the variants we will want renderers for. So why not resolve them beforehand?\n\nThe in-process caching would then be implicit, the factory would no longer have to do that.",
+      "revId": "e1eb79be1f87c0b39075f9b43f0a6efc34c40d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
