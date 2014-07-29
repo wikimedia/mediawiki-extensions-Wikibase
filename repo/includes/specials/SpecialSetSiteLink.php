@@ -9,6 +9,7 @@ use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -327,11 +328,30 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$options .= Html::element(
 				'option',
 				$attrs,
-				$badgeId // @todo use the label here when we have a nice lookup
+				$this->getTitleForBadge( new ItemId( $badgeId ) )
 			);
 		}
 
 		return $options;
+	}
+
+	/**
+	 * Returns the title for the given badge id.
+	 * @todo use TermLookup when we have one
+	 *
+	 * @param EntityId $badgeId
+	 * @return string
+	 */
+	private function getTitleForBadge( EntityId $badgeId ) {
+		$entity = $this->loadEntity( $badgeId )->getEntity();
+		$languageCode = $this->getLanguage()->getCode();
+
+		$labels = $entity->getFingerprint()->getLabels();
+		if ( $labels->hasTermForLanguage( $languageCode ) ) {
+			return $labels->getByLanguage( $languageCode )->getText();
+		} else {
+			return $badgeId->getSerialization();
+		}
 	}
 
 	/**
