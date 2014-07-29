@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_61acc3eb",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-29T00:00:04Z",
+      "side": 1,
+      "message": "maybe add a comment that this is supposed to be temporary?",
+      "revId": "4d99ac6ae09644289f2147600ce6f9e3026ed6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c1a137f6",
+        "filename": "repo/tests/phpunit/includes/View/SiteLinksViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-29T00:00:04Z",
+      "side": 1,
+      "message": "Item::newFromArray will go away with DataModel 1.0, so don\u0027t use it. Rather use Item::newEmpty and then set the stuff you need.",
+      "revId": "4d99ac6ae09644289f2147600ce6f9e3026ed6ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
