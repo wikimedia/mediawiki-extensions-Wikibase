@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_597f7fa6",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "SitelinkByItem ? RedirectToSitelinkByItemAndSite ?",
+      "parentUuid": "8e28a382_990de73b",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d955affd",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-29T11:14:48Z",
       "side": 1,
       "message": "This is not really a search. \"go to page\" would be more accurate.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_99e967e3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_d955affd",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b9ee63e9",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Yea sort of a copy\u0026paste error from itembytitle. Done.",
+      "parentUuid": "8e28a382_d96c8fcd",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_1698a41d",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_39c2735e",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_1698a41d",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_768ec8d6",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2014-07-29T10:00:03Z",
       "side": 1,
       "message": "Whats wrong with $siteStore?",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f9b74bf0",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_768ec8d6",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d9ba4fd9",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "I removed the code needing this. Removed this, too.",
+      "parentUuid": "8e28a382_b940a339",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f6b1988d",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -133,6 +241,24 @@
       "writtenOn": "2014-07-29T10:00:03Z",
       "side": 1,
       "message": "Misplaced space.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b9d54315",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_f6b1988d",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -209,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_9997274b",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_b9e4233a",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f9a86bd9",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -237,6 +381,24 @@
       "writtenOn": "2014-07-29T11:14:48Z",
       "side": 1,
       "message": "Do not use empty on strings, use $x \u003d\u003d\u003d \u0027\u0027 resp. $x \u003d\u003d\u003d null. Note that empty( $x ) will return true if $x \u003d \"0\"; Gotta love PHP, no?...",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3990334e",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "8e28a382_99b16744",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -277,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f9850b0c",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_967934c5",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_768488a3",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -311,6 +491,42 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_1992174f",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_768488a3",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b9a2e393",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "I hope the return and a new line makes it easy enough to spot.",
+      "parentUuid": "8e28a382_d9824f52",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_79ea3b06",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -322,6 +538,24 @@
       "writtenOn": "2014-07-29T11:14:48Z",
       "side": 1,
       "message": "As the code is now, we *always* reach this line, even if we found a redirect target (see comment above).",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_39b6f3d8",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_79ea3b06",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -362,6 +596,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b9c9c35f",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_567f4ca6",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_19a6970d",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -373,6 +625,24 @@
       "writtenOn": "2014-07-29T10:46:28Z",
       "side": 1,
       "message": "Why protected?",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_794c7be4",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Because it has no user outside and later removing a public method is a backwards incompatible API change. It\u0027s not private because a private method can not be replaced for testing in e.g. a mock. That being said those reasons are not particularly important in this case.",
+      "parentUuid": "8e28a382_19a6970d",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -430,6 +700,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_19c57764",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_36528040",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_16554426",
         "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
         "patchSetId": 3
@@ -441,6 +729,24 @@
       "writtenOn": "2014-07-29T10:00:03Z",
       "side": 1,
       "message": "More spaces missing.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_191d77c7",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_16554426",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -464,6 +770,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f90f4b8b",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_f647587a",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_59bc1f01",
         "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
         "patchSetId": 3
@@ -475,6 +799,24 @@
       "writtenOn": "2014-07-29T11:14:48Z",
       "side": 1,
       "message": "Mocking this requires you to know what methods are called on the SiteList. It might be better to use an actual SiteList object. Since that is a value object (though rather complex), that shouldn\u0027t cause problems.",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_19ca171e",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Not used anyway, so removed.",
+      "parentUuid": "8e28a382_59bc1f01",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -516,6 +858,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_d9b48f7e",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_393713ae",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_b96783e5",
         "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
         "patchSetId": 3
@@ -533,6 +893,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_99aa8714",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_b96783e5",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_1961f7a3",
         "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
         "patchSetId": 3
@@ -544,6 +922,24 @@
       "writtenOn": "2014-07-29T11:14:48Z",
       "side": 1,
       "message": "There should be two test methods, one for the \"form\" case, and one for the \"redirect\" case (see my comment above).",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b9af8326",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialTitleByItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T13:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_1961f7a3",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
