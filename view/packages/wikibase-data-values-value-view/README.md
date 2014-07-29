@@ -109,6 +109,9 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.8 (2014-07-29)
+* Only attempt to close a suggester if it's open
+
 ### 0.6.7 (2014-07-23)
 * Fix bug 68386, black colored text on blue background in jquery.ui.suggester when hovered via keydown.
 
