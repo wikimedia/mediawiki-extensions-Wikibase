@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_e1b79333",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetSitelinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-29T00:02:18Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "0189c76da53868b20d636843f34d3d0b8c825af5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
