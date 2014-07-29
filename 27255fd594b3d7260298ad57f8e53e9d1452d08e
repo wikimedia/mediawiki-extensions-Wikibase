@@ -282,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_4bb67dd9",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T20:30:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_39a393ff",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_b67e70ab",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -579,6 +597,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_2bb9f1c6",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T20:30:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_79bc7b1a",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_567f4ca6",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -666,6 +702,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_6bba59b7",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T20:30:56Z",
+      "side": 1,
+      "message": "The problem of just using that would be that it fills in not just the site ID but also its label (example: \"English (enwiki)\"). So it takes still more work than the following:\n\nmw.loader.using( [ \"jquery.wikibase.siteselector\", \"wikibase.sites\" ], function () {\n\t$( \"#wb-titlebyitem-sitename\" ).siteselector( {\n\t\tsource: $.map(wikibase.sites.getSites(), function(value, key) {\n\t\t\treturn [value];\n\t\t} )\n\t} );\n} );",
+      "parentUuid": "8e28a382_59e53f31",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_19db377d",
         "filename": "repo/includes/specials/SpecialTitleByItem.php",
         "patchSetId": 3
@@ -677,6 +731,24 @@
       "writtenOn": "2014-07-29T11:14:48Z",
       "side": 1,
       "message": "do we want an entity selector widget here?",
+      "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2be0d1c6",
+        "filename": "repo/includes/specials/SpecialTitleByItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-07-29T20:30:56Z",
+      "side": 1,
+      "message": "The entity selector widget can not really be used because it fills in the label, no item ID. Otherwise the following would do the trick:\n\n$( \"#itemid\" ).entityselector( { url: mw.util.wikiScript( \"api\" ) } );",
+      "parentUuid": "8e28a382_19db377d",
       "revId": "27255fd594b3d7260298ad57f8e53e9d1452d08e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
