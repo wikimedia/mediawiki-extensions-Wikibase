@@ -22,30 +22,6 @@ use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
  */
 class LegacyInternalEntitySerializerTest extends \PHPUnit_Framework_TestCase {
 
-	public function entityProvider() {
-		$empty = Item::newEmpty();
-
-		$withLabels = Item::newEmpty();
-		$withLabels->setLabel( 'en', 'Hello' );
-		$withLabels->setLabel( 'es', 'Holla' );
-
-		return array(
-			array( $empty ),
-			array( $withLabels ),
-		);
-	}
-
-	/**
-	 * @dataProvider entityProvider
-	 * @param Entity $entity
-	 */
-	public function testSerialize( Entity $entity ) {
-		$serializer = new LegacyInternalEntitySerializer();
-		$data = $serializer->serialize( $entity );
-
-		$this->assertEquals( $entity->toArray(), $data );
-	}
-
 	public function legacyFormatBlobProvider() {
 		$entity = Item::newEmpty();
 		$entity->setId( new ItemId( 'Q12' ) );
