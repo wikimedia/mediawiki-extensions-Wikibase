@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_c70a56d4",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 127
+      },
+      "writtenOn": "2014-07-30T19:01:47Z",
+      "side": 1,
+      "message": "Does the order of the sites matter? As in: a given set of sites should have always the same hash even if the order they appear in the loop below is changed?",
+      "revId": "e95f320d3c1f2ca4f96e6dc5edf15bb6fb4eaade",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
