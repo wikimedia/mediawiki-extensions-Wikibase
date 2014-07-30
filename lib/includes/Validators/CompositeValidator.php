@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators;
 
-use InvalidArgumentException;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 
@@ -18,12 +17,12 @@ class CompositeValidator implements ValueValidator {
 	/**
 	 * @var ValueValidator[]
 	 */
-	protected $validators;
+	private $validators;
 
 	/**
 	 * @var bool
 	 */
-	protected $failFast;
+	private $failFast;
 
 	/**
 	 * @param ValueValidator[] $validators
@@ -41,7 +40,6 @@ class CompositeValidator implements ValueValidator {
 	 * @param mixed $value The value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		$result = Result::newSuccess();
@@ -69,4 +67,5 @@ class CompositeValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }

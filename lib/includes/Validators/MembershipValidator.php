@@ -18,42 +18,38 @@ class MembershipValidator implements ValueValidator {
 	/**
 	 * @var array
 	 */
-	protected $allowedValues;
+	private $allowed;
 
 	/**
 	 * @var string
 	 */
-	protected $code;
+	private $errorCode;
 
 	/**
 	 * @var callable
 	 */
-	protected $normalize;
+	private $normalizer;
 
 	/**
 	 * @param array $allowed The allowed values
-	 * @param string $code Code to use in Errors; should indicate what kind of value would have been allowed.
-	 * @param callable|string $normalize The function to use normalize the value before
+	 * @param string $errorCode Code to use in Errors; should indicate what kind of value would have been allowed.
+	 * @param callable|string|null $normalizer An optional function to normalize the value before
 	 *                        comparing it to the list of allowed values, e.g. 'strtolower'.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $allowed, $code = 'not-allowed', $normalize = null ) {
-		if ( !is_array( $allowed ) ) {
-			throw new InvalidArgumentException( '$allowed must be an array' );
+	public function __construct( array $allowed, $errorCode = 'not-allowed', $normalizer = null ) {
+		if ( !is_string( $errorCode ) ) {
+			throw new InvalidArgumentException( 'Error code must be a string' );
 		}
 
-		if ( !is_string( $code ) ) {
-			throw new InvalidArgumentException( '$code must be a string' );
-		}
-
-		if ( !is_null( $normalize ) && !is_callable( $normalize ) ) {
-			throw new InvalidArgumentException( '$normalize must be callable (or null)' );
+		if ( !is_null( $normalizer ) && !is_callable( $normalizer ) ) {
+			throw new InvalidArgumentException( 'Normalizer must be callable (or null)' );
 		}
 
 		$this->allowed = $allowed;
-		$this->code = $code;
-		$this->normalize = $normalize;
+		$this->errorCode = $errorCode;
+		$this->normalizer = $normalizer;
 	}
 
 	/**
@@ -62,16 +58,15 @@ class MembershipValidator implements ValueValidator {
 	 * @param string $value The value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
-		if ( $this->normalize !== null ) {
-			$value = call_user_func( $this->normalize, $value );
+		if ( $this->normalizer !== null ) {
+			$value = call_user_func( $this->normalizer, $value );
 		}
 
 		if ( !in_array( $value, $this->allowed ) ) {
 			return Result::newError( array(
-				Error::newError( 'not a legal value: ' . $value, null, $this->code, array( $value ) )
+				Error::newError( 'not a legal value: ' . $value, null, $this->errorCode, array( $value ) )
 			) );
 		}
 
@@ -86,4 +81,5 @@ class MembershipValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }

@@ -37,9 +37,9 @@ class NotEntityIdValidator implements ValueValidator {
 	 * @param EntityIdParser $idParser The parser to use for testing whether a string is an entity ID.
 	 * @param string $errorCode The error code to use when this validator fails.
 	 * @param string[]|null $forbiddenTypes A list of entity types who's IDs should be considered
-	 *        invalid values. If null, all valid entity IDs are considered invaliud input.
+	 *        invalid values. If null, all valid entity IDs are considered invalid input.
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( EntityIdParser $idParser, $errorCode, $forbiddenTypes = null ) {
 		if ( !is_null( $forbiddenTypes ) && !is_array( $forbiddenTypes ) ) {
@@ -61,7 +61,6 @@ class NotEntityIdValidator implements ValueValidator {
 	 * @param string $value The value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		$result = Result::newSuccess();

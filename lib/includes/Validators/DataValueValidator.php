@@ -19,12 +19,10 @@ class DataValueValidator implements ValueValidator {
 	/**
 	 * @var ValueValidator
 	 */
-	protected $validator;
+	private $validator;
 
 	/**
 	 * @param ValueValidator $validator The validator to apply to the given field
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct( ValueValidator $validator ) {
 		$this->validator = $validator;
@@ -35,8 +33,8 @@ class DataValueValidator implements ValueValidator {
 	 *
 	 * @param DataValue $value The value to validate
 	 *
-	 * @return Result
 	 * @throws InvalidArgumentException
+	 * @return Result
 	 */
 	public function validate( $value ) {
 		if ( !( $value instanceof DataValue ) ) {
@@ -56,4 +54,5 @@ class DataValueValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }
