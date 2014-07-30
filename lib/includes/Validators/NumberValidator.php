@@ -1,7 +1,7 @@
 <?php
+
 namespace Wikibase\Validators;
 
-use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -18,17 +18,21 @@ class NumberValidator implements ValueValidator {
 	 * @param mixed $value The value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
-		$isValid = ( is_float( $value ) || is_int( $value ) );
+		$isValid = is_int( $value ) || is_float( $value );
 
 		if ( $isValid ) {
 			return Result::newSuccess();
 		}
 
 		return Result::newError( array(
-			Error::newError( 'Bad type, expected an integer or float value', null, 'bad-type', array( 'number', gettype( $value ) ) )
+			Error::newError(
+				'Bad type, expected an integer or float value',
+				null,
+				'bad-type',
+				array( 'number', gettype( $value ) )
+			)
 		) );
 	}
 
@@ -40,4 +44,5 @@ class NumberValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }

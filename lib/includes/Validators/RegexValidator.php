@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators;
 
-use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -18,17 +17,17 @@ class RegexValidator implements ValueValidator {
 	/**
 	 * @var string
 	 */
-	protected $expression;
+	private $expression;
 
 	/**
 	 * @var bool
 	 */
-	protected $inverse;
+	private $inverse;
 
 	/**
 	 * @var string
 	 */
-	protected $errorCode;
+	private $errorCode;
 
 	/**
 	 * @param string  $expression
@@ -48,7 +47,6 @@ class RegexValidator implements ValueValidator {
 	 * @param string $value The value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		$match = preg_match( $this->expression, $value );
@@ -56,14 +54,24 @@ class RegexValidator implements ValueValidator {
 		if ( $match === 0 && !$this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				Error::newError( 'Pattern match failed: ' . $this->expression, null, $this->errorCode, array( $value ) )
+				Error::newError(
+					'Pattern match failed: ' . $this->expression,
+					null,
+					$this->errorCode,
+					array( $value )
+				),
 			) );
 		}
 
 		if ( $match === 1 && $this->inverse ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				Error::newError( 'Negative pattern matched: ' . $this->expression, null, $this->errorCode, array( $value ) )
+				Error::newError(
+					'Negative pattern matched: ' . $this->expression,
+					null,
+					$this->errorCode,
+					array( $value )
+				),
 			) );
 		}
 
@@ -78,4 +86,5 @@ class RegexValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }

@@ -18,14 +18,14 @@ use ValueValidators\Result;
 class ValidatorErrorLocalizer {
 
 	/**
-	 * @var ValueFormatter Formatter for generating wikitext for message parameters.
+	 * @var ValueFormatter|null Formatter for generating wikitext for message parameters.
 	 */
-	protected $paramFormatter;
+	private $paramFormatter;
 
 	/**
-	 * @param ValueFormatter $paramFormatter A formatter for formatting message parameters.
-	 *        MUST return wikitext. This is typically some kind of dispatcher. If not provided,
-	 *        naive formatting will be used, which will fail on non-primitive parameters.
+	 * @param ValueFormatter|null $paramFormatter Optional formatter for formatting message
+	 * parameters. MUST return wikitext. This is typically some kind of dispatcher. If not
+	 * provided, naive formatting will be used, which will fail on non-primitive parameters.
 	 */
 	function __construct( ValueFormatter $paramFormatter = null ) {
 		$this->paramFormatter = $paramFormatter;
@@ -35,6 +35,7 @@ class ValidatorErrorLocalizer {
 	 * Returns a Status representing the given validation result.
 	 *
 	 * @param Result $result
+	 *
 	 * @return Status
 	 */
 	public function getResultStatus( Result $result ) {
@@ -54,6 +55,7 @@ class ValidatorErrorLocalizer {
 	 * This can be used for reporting validation failures.
 	 *
 	 * @param Error $error
+	 *
 	 * @return Message
 	 */
 	public function getErrorMessage( Error $error ) {
@@ -84,15 +86,16 @@ class ValidatorErrorLocalizer {
 	 * @return string wikitext
 	 */
 	private function paramToString( $param ) {
-		if ( $this->paramFormatter ) {
+		if ( $this->paramFormatter !== null ) {
 			try {
 				return $this->paramFormatter->format( $param );
-			} catch ( FormattingException $e ) {
+			} catch ( FormattingException $ex ) {
 				// ok, never mind, use naive version below.
-				wfWarn( __METHOD__ . ': Formatting of message parameter fialed: ' . $e->getMessage() );
+				wfWarn( __METHOD__ . ': Formatting of message parameter fialed: ' . $ex->getMessage() );
 			}
 		}
 
 		return wfEscapeWikiText( strval( $param ) );
 	}
+
 }

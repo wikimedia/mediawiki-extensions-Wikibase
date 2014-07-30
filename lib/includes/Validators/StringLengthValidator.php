@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators;
 
-use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -18,17 +17,17 @@ class StringLengthValidator implements ValueValidator {
 	/**
 	 * @var int
 	 */
-	protected $minLength;
+	private $minLength;
 
 	/**
 	 * @var int
 	 */
-	protected $maxLength;
+	private $maxLength;
 
 	/**
 	 * @var callable
 	 */
-	protected $measure;
+	private $measure;
 
 	/**
 	 * @param int             $minLength
@@ -52,7 +51,6 @@ class StringLengthValidator implements ValueValidator {
 	 * @param string $value The value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		$length = call_user_func( $this->measure, $value );
@@ -60,15 +58,23 @@ class StringLengthValidator implements ValueValidator {
 		if ( $length < $this->minLength ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				Error::newError( 'Too short, minimum length is ' . $this->minLength, null, 'too-short',
-					array( $this->minLength, $value ) )
+				Error::newError(
+					'Too short, minimum length is ' . $this->minLength,
+					null,
+					'too-short',
+					array( $this->minLength, $value )
+				),
 			) );
 		}
 
 		if ( $length > $this->maxLength ) {
 			return Result::newError( array(
-				Error::newError( 'Too long, maximum length is ' . $this->maxLength, null, 'too-long',
-					array( $this->maxLength, $this->truncateValue( $value ) ) )
+				Error::newError(
+					'Too long, maximum length is ' . $this->maxLength,
+					null,
+					'too-long',
+					array( $this->maxLength, $this->truncateValue( $value ) )
+				),
 			) );
 		}
 
@@ -104,4 +110,5 @@ class StringLengthValidator implements ValueValidator {
 
 		return $value;
 	}
+
 }

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators;
 
-use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -23,14 +22,14 @@ use ValueValidators\ValueValidator;
 class DataFieldValidator implements ValueValidator {
 
 	/**
-	 * @var string
+	 * @var string|int
 	 */
-	protected $field;
+	private $field;
 
 	/**
 	 * @var ValueValidator
 	 */
-	protected $validator;
+	private $validator;
 
 	/**
 	 * @param string|int     $field     The field on the target DataValue's array representation to check
@@ -44,32 +43,31 @@ class DataFieldValidator implements ValueValidator {
 		}
 
 		$this->field = $field;
-
 		$this->validator = $validator;
 	}
 
 	/**
 	 * @see ValueValidator::validate()
 	 *
-	 * @param array $data The value to validate
+	 * @param array $data The data array to validate
 	 *
 	 * @return Result
 	 * @throws InvalidArgumentException
-	 * @throws IllegalValueException
 	 */
 	public function validate( $data ) {
 		if ( !is_array( $data ) ) {
 			//XXX: or should this just be reported as invalid?
-			throw new InvalidArgumentException( "DataValue is not represented as an array" );
+			throw new InvalidArgumentException( 'DataValue is not represented as an array' );
 		}
 
 		if ( !isset( $data[$this->field] ) ) {
 			return Result::newError( array(
-				Error::newError( 'Required field ' . $this->field . ' not set',
+				Error::newError(
+					'Required field ' . $this->field . ' not set',
 					$this->field,
 					'missing-field',
 					array( $this->field )
-				)
+				),
 			) );
 		}
 
@@ -89,4 +87,5 @@ class DataFieldValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }

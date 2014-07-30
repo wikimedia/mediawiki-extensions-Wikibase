@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators;
 
-use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -16,19 +15,14 @@ use ValueValidators\ValueValidator;
 class NumberRangeValidator implements ValueValidator {
 
 	/**
-	 * @var int
+	 * @var int|float
 	 */
-	protected $min;
+	private $min;
 
 	/**
-	 * @var int
+	 * @var int|float
 	 */
-	protected $max;
-
-	/**
-	 * @var callable
-	 */
-	protected $measure;
+	private $max;
 
 	/**
 	 * @param int|float  $min
@@ -42,22 +36,31 @@ class NumberRangeValidator implements ValueValidator {
 	/**
 	 * @see ValueValidator::validate()
 	 *
-	 * @param string $value The value to validate
+	 * @param int|float $value The numeric value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		if ( $value < $this->min ) {
 			// XXX: having to provide an array is quite inconvenient
 			return Result::newError( array(
-				Error::newError( 'Value out of range, the minimum value is ' . $this->min, null, 'too-low', array( $this->min, $value ) )
+				Error::newError(
+					'Value out of range, the minimum value is ' . $this->min,
+					null,
+					'too-low',
+					array( $this->min, $value )
+				),
 			) );
 		}
 
 		if ( $value > $this->max ) {
 			return Result::newError( array(
-				Error::newError( 'Value out of range, the maximum value is ' . $this->max, null, 'too-high', array( $this->max, $value ) )
+				Error::newError(
+					'Value out of range, the maximum value is ' . $this->max,
+					null,
+					'too-high',
+					array( $this->max, $value )
+				),
 			) );
 		}
 
@@ -72,4 +75,5 @@ class NumberRangeValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }

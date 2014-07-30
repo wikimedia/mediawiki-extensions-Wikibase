@@ -2,7 +2,6 @@
 
 namespace Wikibase\Validators;
 
-use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -18,14 +17,12 @@ class TypeValidator implements ValueValidator {
 	/**
 	 * @var string
 	 */
-	protected $type;
+	private $type;
 
 	/**
 	 * Constructs a TypeValidator that checks for the given type.
 	 *
 	 * @param string $type A PHP type name or a class name.
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $type ) {
 		$this->type = $type;
@@ -37,7 +34,6 @@ class TypeValidator implements ValueValidator {
 	 * @param mixed $value The value to validate
 	 *
 	 * @return Result
-	 * @throws InvalidArgumentException
 	 */
 	public function validate( $value ) {
 		$type = gettype( $value );
@@ -67,4 +63,5 @@ class TypeValidator implements ValueValidator {
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.
 	}
+
 }
