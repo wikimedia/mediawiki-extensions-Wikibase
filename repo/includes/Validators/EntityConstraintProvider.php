@@ -21,7 +21,7 @@ class EntityConstraintProvider {
 	/**
 	 * @var LabelDescriptionDuplicateDetector
 	 */
-	private $termDuplicateDetector;
+	private $duplicateDetector;
 
 	/**
 	 * @var SiteLinkLookup
@@ -29,14 +29,14 @@ class EntityConstraintProvider {
 	private $siteLinkLookup;
 
 	/**
-	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
+	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
 	 * @param SiteLinkLookup $siteLinkLookup
 	 */
 	public function __construct(
-		LabelDescriptionDuplicateDetector $termDuplicateDetector,
+		LabelDescriptionDuplicateDetector $duplicateDetector,
 		SiteLinkLookup $siteLinkLookup
 	) {
-		$this->termDuplicateDetector = $termDuplicateDetector;
+		$this->duplicateDetector = $duplicateDetector;
 		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
@@ -54,7 +54,7 @@ class EntityConstraintProvider {
 
 		switch ( $entityType ) {
 			case Property::ENTITY_TYPE:
-				$validators[] = new LabelUniquenessValidator( $this->termDuplicateDetector );
+				$validators[] = new LabelUniquenessValidator( $this->duplicateDetector );
 				break;
 
 			case Item::ENTITY_TYPE:
