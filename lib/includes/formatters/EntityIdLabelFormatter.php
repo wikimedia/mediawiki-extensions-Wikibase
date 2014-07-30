@@ -9,6 +9,8 @@ use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 
 /**
  * @since 0.4
@@ -119,14 +121,24 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @throws OutOfBoundsException If an entity with that ID does not exist.
+	 * @throws OutOfBoundsException If an entity with that ID could not be loaded.
 	 * @return string|bool False if no label was found in the language or language fallback chain.
 	 */
 	protected function lookupEntityLabel( EntityId $entityId ) {
-		$entity = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
+		} catch ( UnresolvedRedirectException $ex )  {
+			$entity = null;
+		} catch ( StorageException $ex )  {
+			$entity = null;
+			wfLogWarning( 'Failed to load entity: '
+				. $entityId->getSerialization() . ': '
+				. $ex->getMessage() );
+		}
 
 		if ( $entity === null ) {
-			throw new OutOfBoundsException( "An Entity with the id $entityId does not exist" );
+			// double redirect, deleted entity, etc
+			throw new OutOfBoundsException( "An Entity with the id $entityId could not be loaded" );
 		}
 
 		/* @var LanguageFallbackChain $languageFallbackChain */

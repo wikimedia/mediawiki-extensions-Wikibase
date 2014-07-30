@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdLabelFormatter;
+use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter
@@ -36,8 +38,8 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$entity->setLabel( 'zh-cn', '测试' );
 		$entity->setId( new ItemId( 'Q42' ) );
 
-
 		$loader->putEntity( $entity );
+		$loader->putRedirect( new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) ) );
 
 		return $loader;
 	}
@@ -140,6 +142,11 @@ class EntityIdLabelFormatterTest extends \PHPUnit_Framework_TestCase {
 		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
 
 		$argLists[] = array( new PropertyId( 'P9001' ), 'P9001', $options );
+
+		$options = new FormatterOptions();
+		$options->setOption( EntityIdLabelFormatter::OPT_LANG, 'en' );
+
+		$argLists['unresolved-redirect'] = array( new ItemId( 'Q23' ), 'Q23', $options );
 
 		return $argLists;
 	}
