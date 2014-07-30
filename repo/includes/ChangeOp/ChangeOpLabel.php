@@ -17,6 +17,7 @@ use Wikibase\Validators\TermValidatorFactory;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class ChangeOpLabel extends ChangeOpBase {
 
@@ -25,44 +26,42 @@ class ChangeOpLabel extends ChangeOpBase {
 	 *
 	 * @var string
 	 */
-	protected $language;
+	private $languageCode;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var string|null
 	 */
-	protected $label;
+	private $label;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var TermValidatorFactory
 	 */
-	protected $termValidatorFactory;
+	private $termValidatorFactory;
 
 	/**
 	 * @since 0.5
 	 *
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string|null $label
-	 *
 	 * @param TermValidatorFactory $termValidatorFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		$language,
+		$languageCode,
 		$label,
 		TermValidatorFactory $termValidatorFactory
 	) {
-		if ( !is_string( $language ) ) {
-			throw new InvalidArgumentException( '$language needs to be a string' );
+		if ( !is_string( $languageCode ) ) {
+			throw new InvalidArgumentException( 'Language code needs to be a string.' );
 		}
 
-		$this->language = $language;
+		$this->languageCode = $languageCode;
 		$this->label = $label;
-
 		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
@@ -73,9 +72,9 @@ class ChangeOpLabel extends ChangeOpBase {
 	 */
 	private function updateFingerprint( Fingerprint $fingerprint ) {
 		if ( $this->label === null ) {
-			$fingerprint->removeLabel( $this->language );
+			$fingerprint->removeLabel( $this->languageCode );
 		} else {
-			$fingerprint->getLabels()->setTextForLanguage( $this->language, $this->label );
+			$fingerprint->getLabels()->setTextForLanguage( $this->languageCode, $this->label );
 		}
 	}
 
@@ -85,25 +84,20 @@ class ChangeOpLabel extends ChangeOpBase {
 	 * @param Entity $entity
 	 * @param Summary $summary
 	 *
-	 * @throws ChangeOpException
 	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$fingerprint = $entity->getFingerprint();
-		$exists = $fingerprint->getLabels()->hasTermForLanguage( $this->language );
 
-		if ( $this->label === null ) {
-			if ( $exists ) {
-				$old = $fingerprint->getLabel( $this->language )->getText();
-				$this->updateSummary( $summary, 'remove', $this->language, $old );
+		if ( $fingerprint->getLabels()->hasTermForLanguage( $this->languageCode ) ) {
+			if ( $this->label === null ) {
+				$oldLabel = $fingerprint->getLabel( $this->languageCode )->getText();
+				$this->updateSummary( $summary, 'remove', $this->languageCode, $oldLabel );
+			} else {
+				$this->updateSummary( $summary, 'set', $this->languageCode, $this->label );
 			}
 		} else {
-			if ( $exists ) {
-				$fingerprint->getLabel( $this->language );
-				$this->updateSummary( $summary, 'set', $this->language, $this->label );
-			} else {
-				$this->updateSummary( $summary, 'add', $this->language, $this->label );
-			}
+			$this->updateSummary( $summary, 'add', $this->languageCode, $this->label );
 		}
 
 		$this->updateFingerprint( $fingerprint );
@@ -129,7 +123,7 @@ class ChangeOpLabel extends ChangeOpBase {
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 		// check that the language is valid
-		$result = $languageValidator->validate( $this->language );
+		$result = $languageValidator->validate( $this->languageCode );
 
 		if ( $result->isValid() && $this->label !== null ) {
 			// Check that the new label is valid
@@ -141,15 +135,16 @@ class ChangeOpLabel extends ChangeOpBase {
 		}
 
 		// Check if the new fingerprint of the entity is valid (e.g. if the label is unique)
-		$fingerprint = clone $entity->getFingerprint();
+		$fingerprint = unserialize( serialize( $entity->getFingerprint() ) );
 		$this->updateFingerprint( $fingerprint );
 
 		$result = $fingerprintValidator->validateFingerprint(
 			$fingerprint,
 			$entity->getId(),
-			array( $this->language )
+			array( $this->languageCode )
 		);
 
 		return $result;
 	}
+
 }

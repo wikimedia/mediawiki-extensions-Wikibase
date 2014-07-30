@@ -25,58 +25,56 @@ class ChangeOpAliases extends ChangeOpBase {
 	 *
 	 * @var string
 	 */
-	protected $language;
+	private $languageCode;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var string[]
 	 */
-	protected $aliases;
+	private $aliases;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var array
 	 */
-	protected $action;
+	private $action;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var TermValidatorFactory
 	 */
-	protected $termValidatorFactory;
+	private $termValidatorFactory;
 
 	/**
 	 * @since 0.5
 	 *
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string[] $aliases
 	 * @param string $action should be set|add|remove
-	 *
 	 * @param TermValidatorFactory $termValidatorFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		$language,
+		$languageCode,
 		array $aliases,
 		$action,
 		TermValidatorFactory $termValidatorFactory
 	) {
-		if ( !is_string( $language ) ) {
-			throw new InvalidArgumentException( '$language needs to be a string' );
+		if ( !is_string( $languageCode ) ) {
+			throw new InvalidArgumentException( 'Language code needs to be a string.' );
 		}
 
 		if ( !is_string( $action ) ) {
-			throw new InvalidArgumentException( '$action needs to be a string' );
+			throw new InvalidArgumentException( 'Action needs to be a string.' );
 		}
 
-		$this->language = $language;
+		$this->languageCode = $languageCode;
 		$this->aliases = $aliases;
 		$this->action = $action;
-
 		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
@@ -88,23 +86,23 @@ class ChangeOpAliases extends ChangeOpBase {
 	 * @throws ChangeOpException
 	 */
 	private function updateFingerprint( Fingerprint $fingerprint ) {
-		try {
-			$current = $fingerprint->getAliasGroup( $this->language )->getAliases();
-		} catch ( \OutOfBoundsException $ex ) {
-			$current = array();
+		if ( $fingerprint->getAliasGroups()->hasGroupForLanguage( $this->languageCode ) ) {
+			$oldAliases = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
+		} else {
+			$oldAliases = array();
 		}
 
-		if ( $this->action === "remove" ) {
-			$updated = array_diff( $current, $this->aliases );
-		} elseif ( $this->action === "add" ) {
-			$updated = array_merge( $current, $this->aliases );
-		} elseif ( $this->action === "set" || $this->action === "" ) {
-			$updated = $this->aliases;
+		if ( $this->action === 'set' || $this->action === '' ) {
+			$newAliases = $this->aliases;
+		} elseif ( $this->action === 'add' ) {
+			$newAliases = array_merge( $oldAliases, $this->aliases );
+		} elseif ( $this->action === 'remove' ) {
+			$newAliases = array_diff( $oldAliases, $this->aliases );
 		} else {
 			throw new ChangeOpException( 'Bad action: ' . $this->action );
 		}
 
-		$fingerprint->getAliasGroups()->setAliasesForLanguage( $this->language, $updated );
+		$fingerprint->getAliasGroups()->setAliasesForLanguage( $this->languageCode, $newAliases );
 	}
 
 	/**
@@ -113,10 +111,11 @@ class ChangeOpAliases extends ChangeOpBase {
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$fingerprint = $entity->getFingerprint();
 
-		$this->updateFingerprint( $fingerprint );
-		$this->updateSummary( $summary, $this->action, $this->language, $this->aliases );
+		$this->updateSummary( $summary, $this->action, $this->languageCode, $this->aliases );
 
+		$this->updateFingerprint( $fingerprint );
 		$entity->setFingerprint( $fingerprint );
+
 		return true;
 	}
 
@@ -137,12 +136,13 @@ class ChangeOpAliases extends ChangeOpBase {
 		$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
 
 		// check that the language is valid
-		$result = $languageValidator->validate( $this->language );
+		$result = $languageValidator->validate( $this->languageCode );
 
 		if ( !$result->isValid() ) {
 			return $result;
 		}
 
+		// It should be possible to remove invalid aliases, but not to add/set new invalid ones
 		if ( $this->action === 'set' || $this->action === '' || $this->action === 'add' ) {
 			// Check that the new aliases are valid
 			foreach ( $this->aliases as $alias ) {
@@ -157,6 +157,7 @@ class ChangeOpAliases extends ChangeOpBase {
 		}
 
 		//XXX: Do we want to check the updated fingerprint, as we do for labels and descriptions?
-		return Result::newSuccess();
+		return $result;
 	}
+
 }

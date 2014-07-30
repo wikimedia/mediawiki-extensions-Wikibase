@@ -7,6 +7,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Summary;
 use Wikibase\Validators\TermValidatorFactory;
 
@@ -17,6 +18,7 @@ use Wikibase\Validators\TermValidatorFactory;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class ChangeOpDescription extends ChangeOpBase {
 
@@ -25,44 +27,42 @@ class ChangeOpDescription extends ChangeOpBase {
 	 *
 	 * @var string
 	 */
-	protected $language;
+	private $languageCode;
 
 	/**
 	 * @since 0.4
 	 *
 	 * @var string|null
 	 */
-	protected $description;
+	private $description;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var TermValidatorFactory
 	 */
-	protected $termValidatorFactory;
+	private $termValidatorFactory;
 
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $language
+	 * @param string $languageCode
 	 * @param string|null $description
-	 *
 	 * @param TermValidatorFactory $termValidatorFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		$language,
+		$languageCode,
 		$description,
 		TermValidatorFactory $termValidatorFactory
 	) {
-		if ( !is_string( $language ) ) {
-			throw new InvalidArgumentException( '$language needs to be a string' );
+		if ( !is_string( $languageCode ) ) {
+			throw new InvalidArgumentException( 'Language code needs to be a string.' );
 		}
 
-		$this->language = $language;
+		$this->languageCode = $languageCode;
 		$this->description = $description;
-
 		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
@@ -73,9 +73,9 @@ class ChangeOpDescription extends ChangeOpBase {
 	 */
 	private function updateFingerprint( Fingerprint $fingerprint ) {
 		if ( $this->description === null ) {
-			$fingerprint->removeDescription( $this->language );
+			$fingerprint->removeDescription( $this->languageCode );
 		} else {
-			$fingerprint->getDescriptions()->setTextForLanguage( $this->language, $this->description );
+			$fingerprint->getDescriptions()->setTextForLanguage( $this->languageCode, $this->description );
 		}
 	}
 
@@ -84,20 +84,16 @@ class ChangeOpDescription extends ChangeOpBase {
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$fingerprint = $entity->getFingerprint();
-		$exists = $fingerprint->getDescriptions()->hasTermForLanguage( $this->language );
 
-		if ( $this->description === null ) {
-			if ( $exists ) {
-				$old = $fingerprint->getDescription( $this->language )->getText();
-				$this->updateSummary( $summary, 'remove', $this->language, $old );
+		if ( $fingerprint->getDescriptions()->hasTermForLanguage( $this->languageCode ) ) {
+			if ( $this->description === null ) {
+				$removedDescription = $fingerprint->getDescription( $this->languageCode )->getText();
+				$this->updateSummary( $summary, 'remove', $this->languageCode, $removedDescription );
+			} else {
+				$this->updateSummary( $summary, 'set', $this->languageCode, $this->description );
 			}
 		} else {
-			if ( $exists ) {
-				$fingerprint->getDescription( $this->language );
-				$this->updateSummary( $summary, 'set', $this->language, $this->description );
-			} else {
-				$this->updateSummary( $summary, 'add', $this->language, $this->description );
-			}
+			$this->updateSummary( $summary, 'add', $this->languageCode, $this->description );
 		}
 
 		$this->updateFingerprint( $fingerprint );
@@ -123,7 +119,7 @@ class ChangeOpDescription extends ChangeOpBase {
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 		// check that the language is valid
-		$result = $languageValidator->validate( $this->language );
+		$result = $languageValidator->validate( $this->languageCode );
 
 		if ( $result->isValid() && $this->description !== null ) {
 			// Check that the new description is valid
@@ -136,15 +132,16 @@ class ChangeOpDescription extends ChangeOpBase {
 
 		// Check if the new fingerprint of the entity is valid (e.g. if the combination
 		// of label and description  is still unique)
-		$fingerprint = clone $entity->getFingerprint();
+		$fingerprint = unserialize( serialize( $entity->getFingerprint() ) );
 		$this->updateFingerprint( $fingerprint );
 
 		$result = $fingerprintValidator->validateFingerprint(
 			$fingerprint,
 			$entity->getId(),
-			array( $this->language )
+			array( $this->languageCode )
 		);
 
 		return $result;
 	}
+
 }
