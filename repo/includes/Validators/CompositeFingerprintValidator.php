@@ -19,7 +19,7 @@ class CompositeFingerprintValidator implements FingerprintValidator {
 	/**
 	 * @var FingerprintValidator[]
 	 */
-	protected $validators;
+	private $validators;
 
 	/**
 	 * @param FingerprintValidator[] $validators
@@ -33,15 +33,17 @@ class CompositeFingerprintValidator implements FingerprintValidator {
 	 *
 	 * @see FingerprintValidator::validateFingerprint
 	 *
-	 * @since 0.5
-	 *
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId|null $entityId
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
-	public function validateFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $languageCodes = null ) {
+	public function validateFingerprint(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		array $languageCodes = null
+	) {
 		foreach ( $this->validators as $validator ) {
 			$result = $validator->validateFingerprint( $fingerprint, $entityId, $languageCodes );
 

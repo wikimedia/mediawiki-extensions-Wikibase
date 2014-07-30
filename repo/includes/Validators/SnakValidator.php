@@ -5,17 +5,18 @@ namespace Wikibase\Validators;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
+use InvalidArgumentException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\References;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
-use Wikibase\References;
-use Wikibase\Snak;
-use Wikibase\Statement;
 
 /**
  * Class SnakValidator for validating Snaks.
@@ -28,19 +29,19 @@ use Wikibase\Statement;
 class SnakValidator implements ValueValidator {
 
 	/**
-	 * @var DataTypeFactory
-	 */
-	protected $dataTypeFactory;
-
-	/**
 	 * @var PropertyDataTypeLookup
 	 */
-	protected $propertyDataTypeLookup;
+	private $propertyDataTypeLookup;
+
+	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
 
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		DataTypeFactory $dataTypeFactory ) {
-
+		DataTypeFactory $dataTypeFactory
+	) {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
@@ -51,9 +52,9 @@ class SnakValidator implements ValueValidator {
 	 * the main snak, the qualifiers, and all snaks of all references,
 	 * in case the claim is a Statement.
 	 *
-	 * @param \Wikibase\Claim $claim The value to validate
+	 * @param Claim $claim The value to validate
 	 *
-	 * @return \ValueValidators\Result
+	 * @return Result
 	 */
 	public function validateClaimSnaks( Claim $claim ) {
 		$snak = $claim->getMainSnak();
@@ -87,12 +88,12 @@ class SnakValidator implements ValueValidator {
 	 * This is done by validating all snaks in all of the references.
 	 *
 	 * @param References $references
-	 * @return \ValueValidators\Result
+	 *
+	 * @return Result
 	 */
 	public function validateReferences( References $references ) {
-		/* @var Reference $ref */
-		foreach ( $references as $ref ) {
-			$result = $this->validateReference( $ref );
+		foreach ( $references as $reference ) {
+			$result = $this->validateReference( $reference );
 
 			if ( !$result->isValid() ) {
 				return $result;
@@ -107,7 +108,8 @@ class SnakValidator implements ValueValidator {
 	 * This is done by validating all snaks in all of the references.
 	 *
 	 * @param Reference $reference
-	 * @return \ValueValidators\Result
+	 *
+	 * @return Result
 	 */
 	public function validateReference( Reference $reference ) {
 		foreach ( $reference->getSnaks() as $snak ) {
@@ -131,10 +133,14 @@ class SnakValidator implements ValueValidator {
 	 *
 	 * @param Snak $snak The value to validate
 	 *
-	 * @return \ValueValidators\Result
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
+	 * @return Result
 	 */
 	public function validate( $snak ) {
+		if ( !( $snak instanceof Snak ) ) {
+			throw new InvalidArgumentException( 'Snak expected' );
+		}
+
 		// XXX: instead of an instanceof check, we could have multiple validators
 		//      with a canValidate() method, to determine which validator to use
 		//      for a given snak.
@@ -172,12 +178,21 @@ class SnakValidator implements ValueValidator {
 
 		if ( $dataValue instanceof UnDeserializableValue ) {
 			$result = Result::newError( array(
-				Error::newError( "Bad snak value: " . $dataValue->getReason(), null, 'bad-value', array( $dataValue->getReason() ) )
+				Error::newError(
+					'Bad snak value: ' . $dataValue->getReason(),
+					null,
+					'bad-value',
+					array( $dataValue->getReason() )
+				),
 			) );
 		} elseif ( $dataType->getDataValueType() != $dataValue->getType() ) {
 			$result = Result::newError( array(
-					Error::newError( "Bad value type: " . $dataValue->getType() . ", expected " . $dataType->getDataValueType(),
-						null, 'bad-value-type', array( $dataValue->getType(), $dataType->getDataValueType() ) )
+				Error::newError(
+					'Bad value type: ' . $dataValue->getType() . ', expected ' . $dataType->getDataValueType(),
+					null,
+					'bad-value-type',
+					array( $dataValue->getType(), $dataType->getDataValueType() )
+				),
 			) );
 		} else {
 			$result = Result::newSuccess();

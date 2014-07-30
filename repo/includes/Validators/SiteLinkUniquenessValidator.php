@@ -67,7 +67,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 *
 	 * @return Error
 	 */
-	protected function getConflictError( array $conflict ) {
+	private function getConflictError( array $conflict ) {
 		$entityId = ItemId::newFromNumber( $conflict['itemId'] );
 
 		return new UniquenessViolation(

@@ -28,7 +28,7 @@ class TermValidatorFactory {
 	/**
 	 * @var string[]
 	 */
-	private $languages;
+	private $languageCodes;
 
 	/**
 	 * @var EntityIdParser
@@ -36,29 +36,39 @@ class TermValidatorFactory {
 	private $idParser;
 
 	/**
+	 * @var LabelDescriptionDuplicateDetector
+	 */
+	private $duplicateDetector;
+
+	/**
+	 * @var SiteLinkLookup
+	 */
+	private $siteLinkLookup;
+
+	/**
 	 * @param int $maxLength The maximum length of terms.
-	 * @param string[] $languages A list of valid language codes
+	 * @param string[] $languageCodes A list of valid language codes
 	 * @param EntityIdParser $idParser
-	 * @param LabelDescriptionDuplicateDetector $termDuplicateDetector
+	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
 	 * @param SiteLinkLookup $siteLinkLookup
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	function __construct(
 		$maxLength,
-		array $languages,
+		array $languageCodes,
 		EntityIdParser $idParser,
-		LabelDescriptionDuplicateDetector $termDuplicateDetector,
+		LabelDescriptionDuplicateDetector $duplicateDetector,
 		SiteLinkLookup $siteLinkLookup
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
-			throw new \InvalidArgumentException( '$maxLength must be a positive integer.' );
+			throw new InvalidArgumentException( '$maxLength must be a positive integer.' );
 		}
 
 		$this->maxLength = $maxLength;
-		$this->languages = $languages;
+		$this->languageCodes = $languageCodes;
 		$this->idParser = $idParser;
-		$this->termDuplicateDetector = $termDuplicateDetector;
+		$this->duplicateDetector = $duplicateDetector;
 		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
@@ -72,7 +82,6 @@ class TermValidatorFactory {
 	 *
 	 * @param string $entityType
 	 *
-	 * @throws InvalidArgumentException
 	 * @return FingerprintValidator
 	 */
 	public function getFingerprintValidator( $entityType ) {
@@ -80,7 +89,7 @@ class TermValidatorFactory {
 
 		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
-				return new LabelDescriptionUniquenessValidator( $this->termDuplicateDetector );
+				return new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
 
 			default:
 				return new CompositeFingerprintValidator( array() );
@@ -143,7 +152,7 @@ class TermValidatorFactory {
 	public function getLanguageValidator() {
 		$validators = array();
 		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new MembershipValidator( $this->languages, 'not-a-language' );
+		$validators[] = new MembershipValidator( $this->languageCodes, 'not-a-language' );
 
 		$validator = new CompositeValidator( $validators, true ); //Note: each validator is fatal
 		return $validator;
