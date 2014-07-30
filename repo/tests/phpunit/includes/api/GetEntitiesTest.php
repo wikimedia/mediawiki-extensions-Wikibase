@@ -2,18 +2,30 @@
 
 namespace Wikibase\Test\Api;
 
+use ApiMain;
+use DataValues\Deserializers\DataValueDeserializer;
+use FauxRequest;
+use User;
+use Wikibase\Api\GetEntities;
+use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\DispatchingEntitySerializerTest;
+use Wikibase\Test\MockRepository;
+use Wikibase\Test\MockRepositoryTest;
 
 /**
  * @covers Wikibase\Api\GetEntities
  *
- * Test cases are generated using the data provided in the various static arrays below
- * Adding one extra element to any of the arrays (except format) will generate 4 new tests
- *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Daniel Kinzler
  *
  * @group API
  * @group Wikibase
@@ -24,18 +36,119 @@ use Wikibase\Lib\Serializers\SerializerFactory;
  * @group Database
  * @group medium
  */
-class GetEntitiesTest extends WikibaseApiTestCase {
+class GetEntitiesTest extends \PHPUnit_Framework_TestCase {
 
-	private static $hasSetup;
-	private static $usedHandles = array( 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' );
+	private static $handles = array(
+		'Q1' => 'StringProp',
+		'Q2' => 'Berlin',
+		'Q3' => 'London',
+		'Q4' => 'Oslo',
+		'Q5' => 'Guangzhou',
+		'Q6' => 'Empty'
+	);
 
-	public function setup() {
-		parent::setup();
+	private function getEntityData( $handle ) {
+		return EntityTestHelper::getEntityData( $handle );
+	}
 
-		if( !isset( self::$hasSetup ) ){
-			$this->initTestEntities( self::$usedHandles );
+	private $deserializer = null;
+
+	private function getDeserializer() {
+		if ( !$this->deserializer ) {
+			$typeMap = array();
+
+			$factory = new DeserializerFactory(
+				new DataValueDeserializer( $typeMap ),
+				new BasicEntityIdParser()
+			);
+
+			$this->deserializer = $factory->newEntityDeserializer();
 		}
-		self::$hasSetup = true;
+
+		return $this->deserializer;
+	}
+
+	private function getEntity( EntityId $id ) {
+		$key = $id->getSerialization();
+		$handle = self::$handles[$key];
+
+		$deserializer = $this->getDeserializer();
+		$data = EntityTestHelper::getEntityData( $handle );
+
+		$entity = $deserializer->deserialize( $data );
+		$entity->setId( $id );
+
+		return $entity;
+	}
+
+	private function getIdForHandle( $handle ) {
+		$ids = array_flip( self::$handles );
+		return $ids[$handle];
+	}
+
+	private function newMockRepository() {
+		$repo = new MockRepository();
+
+		foreach ( self::$handles as $key => $handle ) {
+			$id = new ItemId( $key );
+			$entity = $this->getEntity( $id );
+
+			$repo->putEntity( $entity );
+		}
+
+		return $repo;
+	}
+
+	private function applyMockServices( GetEntities $module ) {
+		$factory = WikibaseRepo::getDefaultInstance();
+
+		$siteLinkGroups = array( 'wikipedia', 'special' );
+		$specialLinkGroups = array( 'commons', 'wikidata' );
+
+		$module->initServices(
+			$factory->getStringNormalizer(),
+			$factory->getLanguageFallbackChainFactory(),
+			$siteStore,
+			$siteLinkLookup,
+			$siteLinkGroups,
+			$specialLinkGroups
+		);
+	}
+
+	/**
+	 * @param array $params
+	 * @param User $user
+	 *
+	 * @return GetEntities
+	 */
+	private function newApiModule( $params, User $user = null ) {
+		if ( !$user ) {
+			$user = $GLOBALS['wgUser'];
+		}
+
+		$request = new FauxRequest( $params, true );
+		$main = new ApiMain( $request );
+		$main->getContext()->setUser( $user );
+
+		$module = new GetEntities( $main, 'wbgetentities' );
+
+		$this->applyMockServices( $module );
+		return $module;
+	}
+
+	private function callApiModule( $params, User $user = null ) {
+		global $wgUser;
+
+		if ( !isset( $params['token'] ) ) {
+			$params['token'] = $wgUser->getToken();
+		}
+
+		$module = $this->newApiModule( $params, $user );
+
+		$module->execute();
+		$result = $module->getResult();
+
+		return $result->getData();
 	}
 
 	/**
@@ -190,7 +303,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		$expected = $this->calculateExpectedData( $expected, $params );
 
 		// -- do the request --------------------------------------------------------
-		list( $result,, ) = $this->doApiRequest( $params );
+		$result = $this->callApiModule( $params );
 
 		// -- check the result --------------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
@@ -233,8 +346,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			foreach ( $params['handles'] as $handle ) {
 				//For every id we use we add both the uppercase and lowercase id to the test
 				//This then makes sure we only get 1 entity when the only difference between the ids is the case
-				$ids[] = strtolower( EntityTestHelper::getId( $handle ) );
-				$ids[] = strtoupper( EntityTestHelper::getId( $handle ) );
+				$ids[] = strtolower( $this->getIdForHandle( $handle ) );
+				$ids[] = strtoupper( $this->getIdForHandle( $handle ) );
 			}
 		}
 		return $ids;
@@ -301,11 +414,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		}
 
 		//Assert the whole entity is as expected (claims, sitelinks, aliases, descriptions, labels)
-		$expectedEntityOutput = EntityTestHelper::getEntityOutput (
-			EntityTestHelper::getHandle( $entity['id'] ),
-			$expected['props'],
-			$expected['languages']
-		);
+		$expectedEntityOutput = $this->getEntityData( $entity['id'] );
+
 		if( !$expected['groupedbyproperty'] ) {
 			$options = new SerializationOptions();
 			$options->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
@@ -318,6 +428,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 				)
 			);
 		}
+
 		$this->assertEntityEquals(
 			$expectedEntityOutput,
 			$entity,
@@ -463,12 +574,14 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		if ( array_key_exists( 'handles', $params ) ) {
 			$ids = array();
 			foreach ( $params['handles'] as $handle ) {
-				$ids[ $handle ] = EntityTestHelper::getId( $handle );
+				$ids[ $handle ] = $this->getIdForHandle( $handle );
 			}
 			$params['ids'] = implode( '|', $ids );
 			unset( $params['handles'] );
 		}
-		$this->doTestQueryExceptions( $params, $expected['exception'] );
+
+		$this->setExpectedException( $expected['exception'] );
+		$this->callApiModule( $params );
 	}
 
 	public function provideLanguageFallback() {
@@ -532,9 +645,9 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * @todo factor this into the main test method
 	 */
 	public function testLanguageFallback( $handle, $languages, $expectedLabels, $expectedDescriptions ) {
-		$id = EntityTestHelper::getId( $handle );
+		$id = $this->getIdForHandle( $handle );
 
-		list( $res,, ) = $this->doApiRequest(
+		$res = $this->callApiModule(
 			array(
 				'action' => 'wbgetentities',
 				'languages' => join( '|', $languages ),
@@ -549,10 +662,10 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	}
 
 	public function testSitelinkFilter () {
-		$id = EntityTestHelper::getId( 'Oslo' );
+		$id = $this->getIdForHandle( 'Oslo' );
 
-		list( $res,, ) = $this->doApiRequest(
-			array(
+		$res = $this->callApiModule(
+		array(
 				'action' => 'wbgetentities',
 				'sitefilter' => 'dewiki|enwiki',
 				'format' => 'json', // make sure IDs are used as keys

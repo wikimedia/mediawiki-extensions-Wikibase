@@ -4,12 +4,14 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
+use SiteStore;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
@@ -24,6 +26,7 @@ use Wikibase\Utils;
  * @author Marius Hoch < hoo@online.de >
  * @author Michał Łazowik
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class GetEntities extends ApiWikibase {
 
@@ -50,6 +53,23 @@ class GetEntities extends ApiWikibase {
 	protected $siteLinkGroups;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var array
+	 */
+	protected $specialLinkGroups;
+
+	/**
+	 * @var SiteStore
+	 */
+	protected $siteStore;
+
+	/**
+	 * @var SiteLinkLookup
+	 */
+	protected $siteLinkLookup;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -58,17 +78,49 @@ class GetEntities extends ApiWikibase {
 	 */
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
-		$this->languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
+		$this->initServices(
+			$wikibaseRepo->getStringNormalizer(),
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getStore()->newSiteLinkCache(),
+			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' ),
 			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
+	}
 
-		$this->siteLinkGroups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
+	/**
+	 * @since 0.5
+	 *
+	 * @param StringNormalizer $stringNormalizer
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param SiteStore $siteStore ,
+	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param array $siteLinkGroups
+	 * @param array $specialLinkGroups
+	 */
+	public function initServices(
+		StringNormalizer $stringNormalizer,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		SiteStore $siteStore,
+		SiteLinkLookup $siteLinkLookup,
+		array $siteLinkGroups,
+		array $specialLinkGroups
+	) {
+		$this->stringNormalizer = $stringNormalizer;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$siteStore,
+			$specialLinkGroups
+		);
+
+		$this->siteStore = $siteStore;
+		$this->siteLinkLookup = $siteLinkLookup;
+
+		$this->siteLinkGroups = $siteLinkGroups;
+		$this->specialLinkGroups = $specialLinkGroups;
 	}
 
 	/**
@@ -153,12 +205,10 @@ class GetEntities extends ApiWikibase {
 	 * @return ItemByTitleHelper
 	 */
 	private function getItemByTitleHelper() {
-		$siteLinkCache = WikibaseRepo::getDefaultInstance()->getStore()->newSiteLinkCache();
-		$siteStore = WikibaseRepo::getDefaultInstance()->getSiteStore();
 		return new ItemByTitleHelper(
 			$this->getResultBuilder(),
-			$siteLinkCache,
-			$siteStore,
+			$this->siteLinkLookup,
+			$this->siteStore,
 			$this->stringNormalizer
 		);
 	}
