@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Alex Monk <krenair@wikimedia.org>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Wed, 30 Jul 2014 14:54:03 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/150517
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
