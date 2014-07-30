@@ -10,13 +10,48 @@ use SiteSQLStore;
 /**
  *
  * @since 0.2
- * @todo This modules content should be invalidated whenever sites stuff (config) changes
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Marius Hoch < hoo@online.de >
  */
 class SitesModule extends ResourceLoaderModule {
+
+	/**
+	 * @return string[]
+	 */
+	private function getSiteLinkGroups() {
+		return Settings::get( "siteLinkGroups" );
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getSpecialSiteLinkGroups() {
+		return Settings::get( "specialSiteLinkGroups" );
+	}
+
+	/**
+	 * Get a hash representing the sites table. (This should change
+	 * if eg. new sites get added to the sites table).
+	 *
+	 * @return string
+	 */
+	private function getSitesHash() {
+		$data = '';
+		$sites = (array)SiteSQLStore::newInstance()->getSites();
+		sort( $sites );
+
+		/**
+		 * @var Site $site
+		 */
+		foreach ( $sites as $site ) {
+			$data .= json_encode( (array) $site );
+		}
+
+		return sha1( $data );
+	}
 
 	/**
 	 * Used to propagate information about sites to JavaScript.
@@ -32,8 +67,8 @@ class SitesModule extends ResourceLoaderModule {
 	public function getScript( ResourceLoaderContext $context ) {
 		$sites = array();
 
-		$groups = Settings::get( "siteLinkGroups" );
-		$specialGroups = Settings::get( "specialSiteLinkGroups" );
+		$groups = $this->getSiteLinkGroups();
+		$specialGroups = $this->getSpecialSiteLinkGroups();
 
 		/**
 		 * @var MediaWikiSite $site
@@ -106,5 +141,33 @@ class SitesModule extends ResourceLoaderModule {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @see ResourceLoaderModule::getModifiedHash
+	 *
+	 * @param ResourceLoaderContext $context
+	 *
+	 * @return string
+	 */
+	public function getModifiedHash( ResourceLoaderContext $context ) {
+		$data = array(
+			$this->getSiteLinkGroups(),
+			$this->getSpecialSiteLinkGroups(),
+			$this->getSitesHash()
+		);
+
+		return sha1( json_encode( $data ) );
+	}
+
+	/**
+	 * @see ResourceLoaderModule::getModifiedTime
+	 *
+	 * @param ResourceLoaderContext $context
+	 *
+	 * @return int
+	 */
+	public function getModifiedTime( ResourceLoaderContext $context ) {
+		return $this->getHashMtime( $context );
 	}
 }
