@@ -70,7 +70,9 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
 			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
-				if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
+				$userWithoutPermissionName = 'UserWithoutPermission-' . $permission;
+
+				if ( $user->getName() === $userWithoutPermissionName ) {
 					return Status::newFatal( 'permissiondenied' );
 				} else {
 					return Status::newGood();
@@ -152,10 +154,20 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testSetRedirect_noPermission() {
+	public function permissionProvider() {
+		return array(
+			'edit' => array( 'edit' ),
+			'item-redirect' => array( 'item-redirect' ),
+		);
+	}
+
+	/**
+	 * @dataProvider permissionProvider
+	 */
+	public function testSetRedirect_noPermission( $permission ) {
 		$this->setExpectedException( 'Wikibase\Repo\Interactors\RedirectCreationException' );
 
-		$user = User::newFromName( 'UserWithoutPermission' );
+		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 
 		$interactor = $this->newInteractor( $user );
 		$interactor->createRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ) );

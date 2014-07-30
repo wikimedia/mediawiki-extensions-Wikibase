@@ -87,6 +87,7 @@ call_user_func( function() {
 	$wgGroupPermissions['*']['item-term']			= true;
 	$wgGroupPermissions['*']['property-term']		= true;
 	$wgGroupPermissions['*']['item-merge']			= true;
+	$wgGroupPermissions['*']['item-redirect']		= true;
 	$wgGroupPermissions['*']['property-create']		= true;
 
 	// i18n
