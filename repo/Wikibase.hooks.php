@@ -998,11 +998,11 @@ final class RepoHooks {
 		list( $contentModel, $prefix ) = $data;
 
 		// If it is possible to avoid loading the whole page then the code will be lighter on the server.
-		if ( $title === null ) {
+		if ( !( $title instanceof Title ) ) {
 			$title = $wgTitle;
 		}
 
-		if ( $title->getContentModel() !== $contentModel ) {
+		if ( !( $title instanceof Title ) || $title->getContentModel() !== $contentModel ) {
 			return true;
 		}
 
@@ -1030,6 +1030,7 @@ final class RepoHooks {
 				$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
 			}
 		}
+
 		return true;
 	}
 
