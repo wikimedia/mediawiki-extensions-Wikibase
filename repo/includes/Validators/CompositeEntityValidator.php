@@ -18,7 +18,7 @@ class CompositeEntityValidator implements EntityValidator {
 	/**
 	 * @var EntityValidator[]
 	 */
-	protected $validators;
+	private $validators;
 
 	/**
 	 * @param EntityValidator[] $validators
