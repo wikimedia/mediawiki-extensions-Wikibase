@@ -10,6 +10,8 @@ use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 use Wikibase\Utils;
@@ -86,8 +88,11 @@ class GetEntities extends ApiWikibase {
 			);
 		}
 
+		$resolveRedirects = !$params['noredirects'];
+
 		$entityIds = $this->getEntityIdsFromParams( $params );
-		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds );
+		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects );
+
 		foreach( $entityRevisions as $entityRevision ) {
 			$this->handleEntity( $entityRevision, $params );
 		}
@@ -191,36 +196,66 @@ class GetEntities extends ApiWikibase {
 
 	/**
 	 * @param EntityId[] $entityIds
+	 * @param bool $resolveRedirects
+	 *
 	 * @return EntityRevision[]
 	 */
-	protected function getEntityRevisionsFromEntityIds( $entityIds ) {
+	protected function getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects = false ) {
 		$revisionArray = array();
 
 		foreach ( $entityIds as $entityId ) {
-			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
-			if ( is_null( $entityRevision ) ) {
-				$this->getResultBuilder()->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
-			} else {
-				$revisionArray[] = $entityRevision;
-			}
+			$key = $entityId->getSerialization();
+			$entityRevision = $this->getEntityRevision( $entityId, $resolveRedirects );
+
+			$revisionArray[$key] = $entityRevision;
 		}
+
 		return $revisionArray;
 	}
 
 	/**
-	 * Fetches the entity with provided id and adds its serialization to the output.
+	 * @param EntityId $entityId
+	 * @param bool $resolveRedirects
+	 *
+	 * @return null|EntityRevision
+	 */
+	private function getEntityRevision( EntityId $entityId, $resolveRedirects = false ) {
+		$entityRevision = null;
+
+		try {
+			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+		} catch ( UnresolvedRedirectException $ex ) {
+			if ( $resolveRedirects ) {
+				$entityId = $ex->getRedirectTargetId();
+				$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+			}
+		}
+
+		return $entityRevision;
+	}
+
+	/**
+	 * Adds the given EntityRevision to the API result.
 	 *
 	 * @since 0.2
 	 *
+	 * @param EntityId $id
 	 * @param EntityRevision $entityRevision
 	 * @param array $params
 	 */
-	protected function handleEntity( EntityRevision $entityRevision, array $params ) {
+	protected function handleEntity( EntityId $id, EntityRevision $entityRevision = null, array $params = array() ) {
 		wfProfileIn( __METHOD__ );
-		$props = $this->getPropsFromParams( $params );
-		$options = $this->getSerializationOptions( $params, $props );
-		$siteFilterIds = $params['sitefilter'];
-		$this->getResultBuilder()->addEntityRevision( $entityRevision, $options, $props, $siteFilterIds );
+
+		if ( $entityRevision === null ) {
+			$this->getResultBuilder()->addMissingEntity( array( 'id' => $id->getSerialization() ) );
+		} else {
+			$props = $this->getPropsFromParams( $params );
+			$options = $this->getSerializationOptions( $params, $props );
+			$siteFilterIds = $params['sitefilter'];
+
+			$this->getResultBuilder()->addEntityRevision( $entityRevision, $options, $props, $siteFilterIds );
+		}
+
 		wfProfileOut( __METHOD__ );
 	}
 
@@ -274,6 +309,10 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 				ApiBase::PARAM_ALLOW_DUPLICATES => true
+			),
+			'noredirects' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
 			),
 			'props' => array(
 				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'sitelinks/urls', 'aliases', 'labels',
@@ -333,6 +372,7 @@ class GetEntities extends ApiWikibase {
 			'titles' => array( 'The title of the corresponding page',
 				"Use together with 'sites', but only give one site for several titles or several sites for one title."
 			),
+			'noredirects' => 'Disable redirect resolution. Redirects will be treated like deleted entities.',
 			'props' => array( 'The names of the properties to get back from each entity.',
 				"Will be further filtered by any languages given."
 			),
