@@ -16,6 +16,23 @@
       "revId": "e95f320d3c1f2ca4f96e6dc5edf15bb6fb4eaade",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_07a97e8d",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2014-07-30T19:10:25Z",
+      "side": 1,
+      "message": "I\u0027m not sure whether caching the hash is necessary, the timestamp should already get cached in the startup module.\n\nCan\u0027t really hurt though.",
+      "revId": "e95f320d3c1f2ca4f96e6dc5edf15bb6fb4eaade",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
