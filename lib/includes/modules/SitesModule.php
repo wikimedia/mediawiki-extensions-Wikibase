@@ -19,6 +19,56 @@ use SiteSQLStore;
 class SitesModule extends ResourceLoaderModule {
 
 	/**
+	 * @return string[]
+	 */
+	private function getSiteLinkGroups() {
+		return Settings::get( "siteLinkGroups" );
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getSpecialSiteLinkGroups() {
+		return Settings::get( "specialSiteLinkGroups" );
+	}
+
+	/**
+	 * Get a hash representing the sites table. (This should change
+	 * if new sites get added to the sites table).
+	 *
+	 * This is being cached for 5 minutes because this is getting
+	 * called a lot and getting all Sites from memcached already
+	 * is quite heavy.
+	 *
+	 * @return string
+	 */
+	private function getSitesHash() {
+		global $wgMemc;
+
+		$key = wfMemcKey( 'SitesModule', 'SitesHash' );
+
+		$cached = $wgMemc->get( $key );
+		if ( is_string( $cached ) ) {
+			return $cached;
+		}
+
+		$data = '';
+		$sites = SiteSQLStore::newInstance()->getSites();
+
+		/**
+		 * @var Site $site
+		 */
+		foreach ( $sites as $site ) {
+			$data .= '-' . $site->getGlobalId();
+		}
+
+		$hash = sha1( $data );
+		$wgMemc->set( $key, $hash, 300 );
+
+		return $hash;
+	}
+
+	/**
 	 * Used to propagate information about sites to JavaScript.
 	 * Sites infos will be available in 'wbSiteDetails' config var.
 	 * @see ResourceLoaderModule::getScript
@@ -32,8 +82,8 @@ class SitesModule extends ResourceLoaderModule {
 	public function getScript( ResourceLoaderContext $context ) {
 		$sites = array();
 
-		$groups = Settings::get( "siteLinkGroups" );
-		$specialGroups = Settings::get( "specialSiteLinkGroups" );
+		$groups = $this->getSiteLinkGroups();
+		$specialGroups = $this->getSpecialSiteLinkGroups();
 
 		/**
 		 * @var MediaWikiSite $site
@@ -106,5 +156,33 @@ class SitesModule extends ResourceLoaderModule {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @see ResourceLoaderModule::getModifiedHash
+	 *
+	 * @param ResourceLoaderContext $context
+	 *
+	 * @return string
+	 */
+	public function getModifiedHash( ResourceLoaderContext $context ) {
+		$data = array(
+			$this->getSiteLinkGroups(),
+			$this->getSpecialSiteLinkGroups(),
+			$this->getSitesHash()
+		);
+
+		return sha1( json_encode( $data ) );
+	}
+
+	/**
+	 * @see ResourceLoaderModule::getModifiedTime
+	 *
+	 * @param ResourceLoaderContext $context
+	 *
+	 * @return int
+	 */
+	public function getModifiedTime( ResourceLoaderContext $context ) {
+		return $this->getHashMtime( $context );
 	}
 }
