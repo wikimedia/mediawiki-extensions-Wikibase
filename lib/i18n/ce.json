@@ -46,6 +46,7 @@
 	"wikibase-snakview-snaktypeselector-novalue": "маьӀна цакарийна",
 	"wikibase-tooltip-error-details": "Мадарра",
 	"wikibase-validator-invalid": "Магийна доцу маьӀна",
+	"wikibase-validator-missing-field": "Хила еза меттиг яц '$1'",
 	"datatypes-type-wikibase-item": "Элемент",
 	"datatypes-type-commonsMedia": "Медиафайл Викидlайуьллуче чохь",
 	"version-wikibase": "Вики-баз",
