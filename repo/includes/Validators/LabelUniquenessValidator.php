@@ -23,7 +23,7 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 	/**
 	 * @var LabelDescriptionDuplicateDetector
 	 */
-	protected $duplicateDetector;
+	private $duplicateDetector;
 
 	/**
 	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
@@ -48,15 +48,17 @@ class LabelUniquenessValidator implements EntityValidator, FingerprintValidator 
 	/**
 	 * @see FingerprintValidator::validateFingerprint()
 	 *
-	 * @since 0.5
-	 *
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId|null $entityId
-	 * @param array|null $languageCodes
+	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
-	public function validateFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $languageCodes = null ) {
+	public function validateFingerprint(
+		Fingerprint $fingerprint,
+		EntityId $entityId = null,
+		array $languageCodes = null
+	) {
 		$labels = array_map(
 			function( Term $term ) {
 				return $term->getText();
