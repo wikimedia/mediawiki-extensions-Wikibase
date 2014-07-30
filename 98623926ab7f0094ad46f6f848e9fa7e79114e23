@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_e74f926c",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-30T18:43:31Z",
+      "side": 1,
+      "message": "Done (needed to convert the sites to arrays first, though)",
+      "parentUuid": "8e28a382_8488ccca",
+      "revId": "98623926ab7f0094ad46f6f848e9fa7e79114e23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_e49790ed",
         "filename": "lib/includes/modules/SitesModule.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-30T18:38:04Z",
       "side": 1,
       "message": "should probably be a lower, e.g. 5*60",
+      "revId": "98623926ab7f0094ad46f6f848e9fa7e79114e23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_640e0040",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-07-30T18:43:31Z",
+      "side": 1,
+      "message": "Done in PS4",
+      "parentUuid": "8e28a382_e49790ed",
       "revId": "98623926ab7f0094ad46f6f848e9fa7e79114e23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
