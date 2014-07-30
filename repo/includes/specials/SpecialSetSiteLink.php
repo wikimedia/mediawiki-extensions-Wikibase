@@ -279,10 +279,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			. $pageinput;
 		}
 		else {
+			$intro = $this->msg( 'wikibase-setsitelink-intro' )->text();
+
+			if ( !empty( $this->badgeItems ) ) {
+				$intro .= $this->msg( 'word-separator' )->text() . $this->msg( 'wikibase-setsitelink-intro-badges' )->text();
+			}
+
 			return Html::element(
 				'p',
 				array(),
-				$this->msg( 'wikibase-setsitelink-intro' )->parse()
+				$intro
 			)
 			. parent::getFormElements( $entity )
 			. Html::element(
