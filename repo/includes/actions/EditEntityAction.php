@@ -562,7 +562,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "<p class='editOptions'>\n" );
 
-		$labelText = wfMessage( 'summary' )->parse();
+		$labelText = wfMessage( 'summary' )->text();
 		list( $label, $field ) = $this->getSummaryInput( $summary, $labelText );
 		$this->getOutput()->addHTML( $label . " " . $field );
 		$this->getOutput()->addHTML( "<p class='editButtons'>\n" );
