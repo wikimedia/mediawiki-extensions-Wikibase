@@ -31,11 +31,12 @@ class OutputPageJsConfigBuilder {
 	 * @param OutputPage $out
 	 * @param string $rightsUrl
 	 * @param string $rightsText
+	 * @param array $badgeItems
 	 * @param boolean $isExperimental
 	 *
 	 * @return array
 	 */
-	public function build( OutputPage $out, $rightsUrl, $rightsText, $isExperimental ) {
+	public function build( OutputPage $out, $rightsUrl, $rightsText, $badgeItems, $isExperimental ) {
 		$user = $out->getUser();
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
@@ -46,6 +47,7 @@ class OutputPageJsConfigBuilder {
 
 		$configVars = array_merge( $userConfigVars, $copyrightConfig );
 
+		$configVars['wbBadgeItems'] = $badgeItems;
 		$configVars['wbExperimentalFeatures'] = $isExperimental;
 
 		return $configVars;
