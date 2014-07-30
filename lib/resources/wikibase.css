@@ -513,6 +513,7 @@ div.wb-snak {
 
 div.wb-snak .wb-snak-value-container {
 	margin-left: 16px;
+	min-height: .8em; /* reduces jumping when clicking edit */
 }
 
 div .wb-snak-value span.error.wb-format-error {
