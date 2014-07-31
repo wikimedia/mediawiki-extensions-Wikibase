@@ -292,7 +292,6 @@ final class LibHooks {
 
 		$testModules['qunit']['wikibase.sites.tests'] = $moduleBase + array(
 			'scripts' => array(
-				'tests/qunit/wikibase.Site.tests.js',
 				'tests/qunit/wikibase.sites.tests.js',
 			),
 			'dependencies' => array(

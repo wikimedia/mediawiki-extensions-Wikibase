@@ -502,10 +502,10 @@ $.widget( 'wikibase.linkitem', {
 				$siteLinks
 				.find( 'table' )
 				.append(
-					this._createSiteLinkRow(
+					this._createSiteLinkRow( new wb.SiteLink(
 						wb.sites.getSite( entity.sitelinks[ i ].site ),
-						entity.sitelinks[ i ]
-					)
+						entity.sitelinks[ i ].title
+					) )
 				);
 			}
 		}
@@ -515,24 +515,24 @@ $.widget( 'wikibase.linkitem', {
 	/**
 	 * Creates a table row for a site link.
 	 *
-	 * @param {wb.Site} site
-	 * @param {object} entitySitelinks
-	 *
+	 * @param {wikibase.SiteLink} siteLink
 	 * @return {jQuery}
 	 */
-	_createSiteLinkRow: function( site, entitySitelinks ) {
+	_createSiteLinkRow: function( siteLink ) {
+		var site = siteLink.getSite();
+
 		return $( '<tr>' )
 			.append(
 				$( '<td>' )
 				.addClass( 'wbclient-linkItem-column-site' )
 				.text( site.getName() )
-				.css( 'direction', site.getLanguage().dir )
+				.css( 'direction', site.getLanguageDirection() )
 			)
 			.append(
 				$( '<td>' )
 				.addClass( 'wbclient-linkItem-column-page' )
-				.append( site.getLinkTo( entitySitelinks.title ) )
-				.css( 'direction', site.getLanguage().dir )
+				.append( siteLink.getLink() )
+				.css( 'direction', site.getLanguageDirection() )
 			);
 	},
 
