@@ -35,16 +35,13 @@ return call_user_func( function() {
 				'Item.js',
 				'Property.js',
 				'Reference.js',
+				'Site.js',
 				'SnakList.js',
 				'Statement.js',
 			),
 			'dependencies' => array(
-				// Used by wikibase.Claim, wikibase.Entity, wikibase.Reference, wikibase.SnakList,
-				// wikibase.Statement
-				// Methods: $.each, $.extend, $.inArray, $.isArray, $.isPlainObject
 				'jquery',
 
-				// Used by wikibase.EntityId
 				'mw.ext.dataValues', // DataValues extension
 
 				'util.inherit',
