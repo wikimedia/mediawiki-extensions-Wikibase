@@ -217,11 +217,6 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return bool
 	 */
 	public function supportsRedirects() {
-		if ( !defined( 'WB_EXPERIMENTAL_FEATURES' ) || !WB_EXPERIMENTAL_FEATURES ) {
-			// For now, we only support redirects in experimental mode.
-			return false;
-		}
-
 		$contentClass = $this->getContentClass();
 		return method_exists( $contentClass, 'newFromRedirect' );
 	}
