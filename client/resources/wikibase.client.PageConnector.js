@@ -341,12 +341,12 @@ $.extend( wb.PageConnector.prototype, {
 		};
 
 		// Sitelinks
-		entityData.sitelinks[ firstSite.getGlobalSiteId() ] = {
-			site: firstSite.getGlobalSiteId(),
+		entityData.sitelinks[ firstSite.getId() ] = {
+			site: firstSite.getId(),
 			title: firstPageName
 		};
-		entityData.sitelinks[ secondSite.getGlobalSiteId() ] = {
-			site: secondSite.getGlobalSiteId(),
+		entityData.sitelinks[ secondSite.getId() ] = {
+			site: secondSite.getId(),
 			title: secondPageName
 		};
 
