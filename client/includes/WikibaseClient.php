@@ -629,6 +629,13 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return Deserializer
+	 */
+	public function getInternalClaimDeserializer() {
+		return $this->getInternalDeserializerFactory()->newClaimDeserializer();
+	}
+
+	/**
 	 * @return DeserializerFactory
 	 */
 	protected function getInternalDeserializerFactory() {

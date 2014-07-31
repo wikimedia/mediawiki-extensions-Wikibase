@@ -6,6 +6,7 @@ use MWException;
 use RecentChange;
 use Revision;
 use User;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -348,6 +349,20 @@ class EntityChange extends DiffChange {
 		}
 	}
 
+	private function getClaimDeserializer() {
+		// FIXME: the change row system needs to be reworked to either allow for sane injection
+		// or to avoid this kind of configuration dependent tasks.
+		if ( defined( 'WB_VERSION' ) ) {
+			return WikibaseRepo::getDefaultInstance()->getInternalClaimDeserializer();
+		}
+		else if ( defined( 'WBC_VERSION' ) ) {
+			throw WikibaseClient::getDefaultInstance()->getInternalClaimDeserializer();
+		}
+		else {
+			throw new \RuntimeException( 'Need either client or repo loaded' );
+		}
+	}
+
 	/**
 	 * @see DiffChange::objectifyArrays
 	 *
@@ -370,8 +385,7 @@ class EntityChange extends DiffChange {
 			) {
 				unset( $data['_claimclass_'] );
 
-				$claim = call_user_func( array( $class, 'newFromArray' ), $data );
-				return $claim;
+				return $this->getClaimDeserializer()->deserialize( $data );
 			}
 		}
 
