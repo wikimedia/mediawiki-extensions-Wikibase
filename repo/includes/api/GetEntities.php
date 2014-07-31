@@ -249,7 +249,7 @@ class GetEntities extends ApiWikibase {
 				);
 		}
 		$options->setLanguages( $languages );
-		$options->setOption( EntitySerializer::OPT_SORT_ORDER, $params['dir'] );
+		$options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
 		$options->setOption( EntitySerializer::OPT_PARTS, $props );
 		$options->setIndexTags( $this->getResult()->getIsRawMode() );
 		return $options;
@@ -280,22 +280,6 @@ class GetEntities extends ApiWikibase {
 					'descriptions', 'claims', 'datatype' ),
 				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims|datatype',
 				ApiBase::PARAM_ISMULTI => true,
-			),
-			'sort' => array(
-				// This could be done like the urls, where sitelinks/title sort on the title field
-				// and sitelinks/site sort on the site code.
-				ApiBase::PARAM_TYPE => array( 'sitelinks' ),
-				ApiBase::PARAM_DFLT => '',
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'dir' => array(
-				ApiBase::PARAM_TYPE => array(
-					EntitySerializer::SORT_ASC,
-					EntitySerializer::SORT_DESC,
-					EntitySerializer::SORT_NONE
-				),
-				ApiBase::PARAM_DFLT => EntitySerializer::SORT_ASC,
-				ApiBase::PARAM_ISMULTI => false,
 			),
 			'languages' => array(
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
@@ -335,14 +319,6 @@ class GetEntities extends ApiWikibase {
 			),
 			'props' => array( 'The names of the properties to get back from each entity.',
 				"Will be further filtered by any languages given."
-			),
-			'sort' => array( 'The names of the properties to sort.',
-				"Use together with 'dir' to give the sort order.",
-				"Note that this will change due to name clash (ie. sort should work on all entities)."
-			),
-			'dir' => array( 'The sort order for the given properties.',
-				"Use together with 'sort' to give the properties to sort.",
-				"Note that this will change due to name clash (ie. dir should work on all entities)."
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
@@ -408,8 +384,8 @@ class GetEntities extends ApiWikibase {
 			=> 'Get the item for page "Berlin" on the site "enwiki", with language attributes in English language',
 			'api.php?action=wbgetentities&sites=enwiki&titles=berlin&normalize='
 			=> 'Get the item for page "Berlin" on the site "enwiki" after normalizing the title from "berlin"',
-			'api.php?action=wbgetentities&ids=Q42&props=sitelinks&sort&dir=descending'
-			=> 'Get the sitelinks for item Q42 sorted in a descending order"',
+			'api.php?action=wbgetentities&ids=Q42&props=sitelinks'
+			=> 'Get the sitelinks for item Q42',
 			'api.php?action=wbgetentities&ids=Q42&sitefilter=enwiki'
 			=> 'Get entities with ID Q42 showing only sitelinks from enwiki'
 		);
