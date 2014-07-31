@@ -43,7 +43,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	/* @var ItemId */
 	private static $otherItemId;
 
-	public static function provideData() {
+	public function provideData() {
 		return array(
 			array( //0 set new link using id
 				'p' => array( 'handle' => 'Leipzig', 'linksite' => 'dewiki', 'linktitle' => 'leipzig', 'badges' => '{gaItem}|{faItem}' ),
@@ -90,7 +90,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		);
 	}
 
-	public static function provideExceptionData() {
+	public function provideExceptionData() {
 		return array(
 			array( //0 badtoken
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'linktitle' => 'testSetLiteLinkWithNoToken' ),
@@ -113,21 +113,27 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			array( //6 testSetLiteLinkWithBadTargetSite
 				'p' => array( 'site' => 'dewiki', 'title' => 'Berlin', 'linksite' => 'enwiktionary', 'linktitle' => 'Berlin' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			array( //7 bad badge id
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'abc|{faItem}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
-			array( //8 badge id is not an item id
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'P2|{faItem}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
-			array( //9 badge item does not exist
+			array( //7 badge item does not exist
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'Q99999|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity' ) ) ),
-			array( //10 badge id is not specified
-				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => '{faItem}|{otherItem}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-badge' ) ) ),
-			array( //11 no sitelink - cannot change badges
+			array( //8 no sitelink - cannot change badges
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'svwiki', 'badges' => '{gaItem}|{faItem}' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-sitelink' ) ) ),
+		);
+	}
+
+	public function provideBadBadgeData() {
+		return array(
+			array( //0 bad badge id
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'abc|{faItem}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+			array( //1 badge id is not an item id
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => 'P2|{faItem}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
+			array( //2 badge id is not specified
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'linksite' => 'enwiki', 'linktitle' => 'Berlin', 'badges' => '{faItem}|{otherItem}' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-badge' ) ) ),
+
 		);
 	}
 
@@ -313,6 +319,28 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		}
 
 		$this->doTestQueryExceptions( $params, $expected['exception'] );
+	}
+
+	/**
+	 * @dataProvider provideBadBadgeData
+	 */
+	public function testBadBadges( $params, $expected ) {
+		// -- set any defaults ------------------------------------
+		$params['action'] = 'wbsetsitelink';
+
+		// Replace the placeholder item ids in the API params
+		if ( isset( $params['badges'] ) ) {
+			$params['badges'] = str_replace(
+				array( '{gaItem}', '{faItem}', '{otherItem}' ),
+				array( self::$gaItemId->getPrefixedId(), self::$faItemId->getPrefixedId(), self::$otherItemId->getPrefixedId() ),
+				$params['badges']
+			);
+		}
+
+		list( $result, ) = $this->doApiRequestWithToken( $params );
+
+		$warning = $result['warnings']['wbsetsitelink']['*'];
+		$this->assertRegExp( "/Unrecognized value for parameter 'badges'/", $warning );
 	}
 }
 
