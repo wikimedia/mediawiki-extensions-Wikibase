@@ -369,18 +369,24 @@ $specialPageAliases['zh-hans'] = array(
 $specialPageAliases['zh-hant'] = array(
 	'DispatchStats' => array( '派遣統計' ),
 	'EntityData' => array( '實體數據' ),
-	'NewItem' => array( '創建項目' ),
-	'NewProperty' => array( '新建屬性' ),
-	'ItemByTitle' => array( '按標題搜索項目' ),
+	'NewItem' => array( '建立項目' ),
+	'NewProperty' => array( '新增屬性' ),
+	'ItemByTitle' => array( '按標題搜尋項目' ),
 	'ItemDisambiguation' => array( '項目消歧義' ),
 	'ListDatatypes' => array( '列出數據類型' ),
-	'SetLabel' => array( '設置標籤' ),
-	'SetDescription' => array( '設置描述' ),
-	'SetAliases' => array( '設置別名' ),
-	'SetSiteLink' => array( '設定站點連接' ),
+	'SetLabel' => array( '設定標籤' ),
+	'SetDescription' => array( '設定描述' ),
+	'SetAliases' => array( '設定別名' ),
+	'SetSiteLink' => array( '設定站點連結' ),
 	'MergeItems' => array( '合併項' ),
 	'EntitiesWithoutLabel' => array( '沒有標籤的實體' ),
 	'EntitiesWithoutDescription' => array( '無類型實體' ),
 	'ItemsWithoutSitelinks' => array( '沒有條目連結的項目' ),
 	'MyLanguageFallbackChain' => array( '我的備用語言鏈' ),
+);
+
+/** Chinese (Taiwan) (中文（台灣）‎) */
+$specialPageAliases['zh-tw'] = array(
+	'NewItem' => array( '建立項目' ),
+	'NewProperty' => array( '新增屬性' ),
 );

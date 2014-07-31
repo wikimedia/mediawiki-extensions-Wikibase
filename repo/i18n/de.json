@@ -159,6 +159,7 @@
 	"special-setsitelink": "Einen Websitelink festlegen",
 	"wikibase-setsitelink-introfull": "Du legst den Websitelink von $2 für [[$1]] fest.",
 	"wikibase-setsitelink-intro": "Dieses Formular ermöglicht dir die Festlegung des Websitelinks eines Objektes. Du musst die Objektkennung (z.&nbsp;B. „Q23“), eine Websitekennung (z.&nbsp;B. „dewiki“) und den Websitelink angeben.",
+	"wikibase-setsitelink-intro-badges": "Zusätzlich kannst du verschiedene Auszeichnungen für diesen Websitelink festlegen, die unten aufgeführt sind.",
 	"wikibase-setsitelink-site": "Websitekennung:",
 	"wikibase-setsitelink-label": "Websitelink:",
 	"wikibase-setsitelink-badges": "Auszeichnungen:",

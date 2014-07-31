@@ -141,6 +141,8 @@
 	"wikibase-setaliases-warning-remove": "Deseja remover todos os nomes alternativos para [[$1]]?",
 	"special-setsitelink": "Definir ligação de sítio",
 	"wikibase-setsitelink-introfull": "Está a definir a ligação de sítio \"$2\" para [[$1]].",
+	"wikibase-setsitelink-intro": "Este formulário permite que defina a ligação do sítio de um item. Precisa de fornecer o ID do item (ex.: Q23), um ID de sítio (ex.: \"ptwiki\") e a ligação do sítio a definir.",
+	"wikibase-setsitelink-intro-badges": "Além disso, pode definir vários dos emblemas listados abaixo para esta ligação de sítio.",
 	"wikibase-setsitelink-site": "ID do sítio:",
 	"wikibase-setsitelink-label": "Ligação do sítio:",
 	"wikibase-setsitelink-submit": "Definir a ligação de sítio",
