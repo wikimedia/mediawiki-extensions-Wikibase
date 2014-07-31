@@ -168,7 +168,7 @@ class GetEntities extends ApiWikibase {
 	 */
 	private function addMissingItemsToResult( $missingItems ){
 		foreach( $missingItems as $missingItem ) {
-			$this->getResultBuilder()->addMissingEntity( $missingItem );
+			$this->getResultBuilder()->addMissingEntity( null, $missingItem );
 		}
 	}
 
@@ -199,7 +199,7 @@ class GetEntities extends ApiWikibase {
 		foreach ( $entityIds as $entityId ) {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 			if ( is_null( $entityRevision ) ) {
-				$this->getResultBuilder()->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
+				$this->getResultBuilder()->addMissingEntity( null, array( 'id' => $entityId->getSerialization() ) );
 			} else {
 				$revisionArray[] = $entityRevision;
 			}
@@ -220,7 +220,7 @@ class GetEntities extends ApiWikibase {
 		$props = $this->getPropsFromParams( $params );
 		$options = $this->getSerializationOptions( $params, $props );
 		$siteFilterIds = $params['sitefilter'];
-		$this->getResultBuilder()->addEntityRevision( $entityRevision, $options, $props, $siteFilterIds );
+		$this->getResultBuilder()->addEntityRevision( null, $entityRevision, $options, $props, $siteFilterIds );
 		wfProfileOut( __METHOD__ );
 	}
 
