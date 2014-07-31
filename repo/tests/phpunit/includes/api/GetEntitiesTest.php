@@ -118,14 +118,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	);
 
 	/**
-	 * Possible sorts, will cause extra assertions
-	 */
-	protected static $goodSorts = array(
-		array( 'sort' => 'sitelinks', 'dir' => 'descending' ),
-		array( 'sort' => 'sitelinks', 'dir' => 'ascending' )
-	);
-
-	/**
 	 * These are all available formats for the API. we need to make sure they all work
 	 * Each format is only tested against the first set of good parameters, from then on json is always used
 	 */
@@ -164,14 +156,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		foreach ( self::$goodLangs as $langData ) {
 			foreach ( self::$goodItems as $testCase ) {
 				$testCase['p']['languages'] = $langData;
-				$testCases[] = $testCase;
-			}
-		}
-
-		// Test cases for sort order
-		foreach ( self::$goodSorts as $sortData ) {
-			foreach ( self::$goodItems as $testCase ) {
-				$testCase['p'] = array_merge( $testCase['p'], $sortData );
 				$testCases[] = $testCase;
 			}
 		}
