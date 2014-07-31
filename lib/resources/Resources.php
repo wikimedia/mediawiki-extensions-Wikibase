@@ -33,12 +33,36 @@ return call_user_func( function() {
 		'wikibase.sites' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.sites.js',
-				'wikibase.Site.js',
 			),
 			'dependencies' => array(
 				'mw.config.values.wbSiteDetails',
-				'wikibase'
+				'wikibase',
+				'wikibase.Site',
 			)
+		),
+
+		'wikibase.Site' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.Site.js',
+			),
+			'dependencies' => array(
+				'jquery',
+				'util.inherit',
+				'wikibase',
+				'wikibase.datamodel',
+			),
+		),
+
+		'wikibase.SiteLink' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.SiteLink.js',
+			),
+			'dependencies' => array(
+				'mediawiki.util',
+				'util.inherit',
+				'wikibase',
+				'wikibase.datamodel',
+			),
 		),
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + array(
@@ -321,6 +345,7 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.RepoApiError',
 				'wikibase.templates',
+				'wikibase.SiteLink',
 				'wikibase.sites',
 				'wikibase.ui.Base',
 				'wikibase.utilities',
@@ -782,7 +807,7 @@ return call_user_func( function() {
 
 	if ( defined( 'ULS_VERSION' ) ) {
 		$modules['wikibase']['dependencies'][] = 'ext.uls.mediawiki';
-		$modules['wikibase.sites']['dependencies'][] = 'ext.uls.mediawiki';
+		$modules['wikibase.Site']['dependencies'][] = 'ext.uls.mediawiki';
 		$modules['wikibase.ui.PropertyEditTool']['dependencies'][] = 'ext.uls.mediawiki';
 	}
 

@@ -71,6 +71,7 @@ return call_user_func( function() {
 				'mediawiki.util',
 				'mediawiki.jqueryMsg',
 				'wikibase.client.currentSite',
+				'wikibase.SiteLink',
 				'wikibase.sites',
 				'wikibase.RepoApi',
 				'wikibase.RepoApiError',
