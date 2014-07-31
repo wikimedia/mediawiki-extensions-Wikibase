@@ -526,13 +526,13 @@ $.widget( 'wikibase.linkitem', {
 				$( '<td>' )
 				.addClass( 'wbclient-linkItem-column-site' )
 				.text( site.getName() )
-				.css( 'direction', site.getLanguage().dir )
+				.css( 'direction', site.getLanguageDirection() )
 			)
 			.append(
 				$( '<td>' )
 				.addClass( 'wbclient-linkItem-column-page' )
 				.append( site.getLinkTo( entitySitelinks.title ) )
-				.css( 'direction', site.getLanguage().dir )
+				.css( 'direction', site.getLanguageDirection() )
 			);
 	},
 
