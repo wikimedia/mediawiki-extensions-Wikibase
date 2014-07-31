@@ -295,9 +295,32 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		) ) );
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addEntityRevision( $entityRevision, new SerializationOptions(), $props );
+		$resultBuilder->addEntityRevision( null, $entityRevision, new SerializationOptions(), $props );
 
 		$this->assertEquals( $expected, $result->getData() );
+	}
+
+	public function testAddEntityRevisionKey() {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q11' ) );
+
+		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
+
+		$props = array();
+		$result = $this->getDefaultResult();
+		$resultBuilder = $this->getResultBuilder( $result );
+
+		// automatic key
+		$resultBuilder->addEntityRevision( null, $entityRevision, new SerializationOptions(), $props );
+
+		$data = $result->getData();
+		$this->assertArrayHasKey( 'Q11', $data['entities'] );
+
+		// explicit key
+		$resultBuilder->addEntityRevision( 'FOO', $entityRevision, new SerializationOptions(), $props );
+
+		$data = $result->getData();
+		$this->assertArrayHasKey( 'FOO', $data['entities'] );
 	}
 
 	public function testAddEntityRevisionWithSiteLinksFilter() {
@@ -313,7 +336,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addEntityRevision( $entityRevision, $options, $props, $siteIds );
+		$resultBuilder->addEntityRevision( null, $entityRevision, $options, $props, $siteIds );
 
 		$expected = array( 'entities' => array(
 			'Q123099' => array(
@@ -352,7 +375,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$result = $this->getDefaultResult( $indexedMode );
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addEntityRevision( $entityRevision, $options, $props, $siteIds );
+		$resultBuilder->addEntityRevision( null, $entityRevision, $options, $props, $siteIds );
 
 		$expected = array( 'entities' => array(
 			array(
@@ -622,8 +645,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 
-		foreach( $missingEntities as $missingDetails ){
-			$resultBuilder->addMissingEntity( $missingDetails );
+		foreach( $missingEntities as $key => $missingDetails ){
+			if ( is_int( $key ) ) {
+				// string keys are kept for use in the result structure, integer keys aren't
+				$key = null;
+			}
+
+			$resultBuilder->addMissingEntity( $key, $missingDetails );
 		}
 
 		$this->assertEquals( $expected, $result->getData() );
@@ -640,7 +668,32 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'-1' => array(
 							'site' => 'enwiki',
 							'title' => 'Berlin',
-							//@todo fix bug 45509 useless missing flag
+							'missing' => '',
+						)
+					),
+				)
+			),
+			array(
+				array(
+					array( 'id' => 'Q77' ),
+				),
+				array(
+					'entities' => array(
+						'Q77' => array(
+							'id' => 'Q77',
+							'missing' => '',
+						)
+					),
+				)
+			),
+			array(
+				array(
+					'Q77' => array( 'foo' => 'bar' ),
+				),
+				array(
+					'entities' => array(
+						'Q77' => array(
+							'foo' => 'bar',
 							'missing' => '',
 						)
 					),
@@ -656,13 +709,11 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'-1' => array(
 							'site' => 'enwiki',
 							'title' => 'Berlin',
-							//@todo fix bug 45509 useless missing flag
 							'missing' => '',
 						),
 						'-2' => array(
 							'site' => 'dewiki',
 							'title' => 'Foo',
-							//@todo fix bug 45509 useless missing flag
 							'missing' => '',
 						)
 					),

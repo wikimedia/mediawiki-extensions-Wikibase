@@ -274,16 +274,23 @@ class ResultBuilder {
 	/**
 	 * Get serialized entity for the EntityRevision and add it to the result
 	 *
+	 * @param string|null $key The key for the entity in the 'entities' structure.
+	 *        Will default to the entity's serialized ID if null.
 	 * @param EntityRevision $entityRevision
 	 * @param SerializationOptions|null $options
 	 * @param array|string $props a list of fields to include, or "all"
 	 * @param array $siteIds A list of site IDs to filter by
-
+	 *
 	 * @since 0.5
 	 */
-	public function addEntityRevision( EntityRevision $entityRevision, SerializationOptions $options = null, $props = 'all', $siteIds = array() ) {
+	public function addEntityRevision( $key, EntityRevision $entityRevision, SerializationOptions $options = null, $props = 'all', $siteIds = array() ) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
+
+		if ( $key === null ) {
+			$key = $entityId->getSerialization();
+		}
+
 		$record = array();
 
 		if ( $options ) {
@@ -314,9 +321,9 @@ class ResultBuilder {
 			$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 			if ( !empty( $siteIds ) && array_key_exists( 'sitelinks', $entitySerialization ) ) {
-				foreach ( $entitySerialization['sitelinks'] as $key => $sitelink ) {
+				foreach ( $entitySerialization['sitelinks'] as $siteId => $sitelink ) {
 					if ( is_array( $sitelink ) && !in_array( $sitelink['site'], $siteIds ) ) {
-						unset( $entitySerialization['sitelinks'][$key] );
+						unset( $entitySerialization['sitelinks'][$siteId] );
 					}
 				}
 			}
@@ -324,7 +331,7 @@ class ResultBuilder {
 			$record = array_merge( $record, $entitySerialization );
 		}
 
-		$this->appendValue( array( 'entities' ), $entityId->getSerialization(), $record, 'entity' );
+		$this->appendValue( array( 'entities' ), $key, $record, 'entity' );
 	}
 
 	/**
@@ -475,14 +482,25 @@ class ResultBuilder {
 	/**
 	 * Add an entry for a missing entity...
 	 *
+	 * @param string|null $key The key under which to place the missing entity in the 'entities'
+	 *        structure. If null, defaults to the 'id' field in $missingDetails if that is set;
+	 *        otherwise, it defaults to using a unique negative number.
 	 * @param array $missingDetails array containing key value pair missing details
 	 *
 	 * @since 0.5
 	 */
-	public function addMissingEntity( $missingDetails ) {
+	public function addMissingEntity( $key, $missingDetails ) {
+		if ( $key === null && isset( $missingDetails['id'] ) ) {
+			$key = $missingDetails['id'];
+		}
+
+		if ( $key === null ) {
+			$key = $this->missingEntityCounter;
+		}
+
 		$this->appendValue(
 			'entities',
-			$this->missingEntityCounter,
+			$key,
 			array_merge( $missingDetails, array( 'missing' => "" ) ),
 			'entity'
 		);
