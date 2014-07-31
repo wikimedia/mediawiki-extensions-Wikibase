@@ -13,5 +13,3 @@
 if ( !defined( 'WB_VERSION' ) || !defined( 'WB_EXPERIMENTAL_FEATURES' ) ) {
 	die( 'Not an entry point.' );
 }
-
-$wgAPIModules['wbcreateredirect'] = 'Wikibase\Api\CreateRedirectModule';
