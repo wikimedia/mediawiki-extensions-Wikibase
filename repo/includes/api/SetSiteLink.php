@@ -194,7 +194,7 @@ class SetSiteLink extends ModifyEntity {
 					ApiBase::PARAM_TYPE => 'string',
 				),
 				'badges' => array(
-					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_TYPE => array_keys( $this->badgeItems ),
 					ApiBase::PARAM_ISMULTI => true,
 				),
 			)
