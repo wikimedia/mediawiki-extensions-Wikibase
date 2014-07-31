@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_799c6570",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-31T10:04:16Z",
+      "side": 1,
+      "message": "Are you sure parse() is the right one? These methods still confuse me a lot.",
+      "revId": "01d9454d5c59f748df7f72bb570410b6dbe486be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_59f3e9e2",
+        "filename": "repo/includes/specials/SpecialSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-07-31T10:04:16Z",
+      "side": 1,
+      "message": "We have a \u0027word-separator\u0027 message for the space.",
+      "revId": "01d9454d5c59f748df7f72bb570410b6dbe486be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
