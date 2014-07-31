@@ -50,6 +50,7 @@ class OutputPageJsConfigHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			'wbUserIsBlocked',
 			'wbUserCanEdit',
 			'wbCopyright',
+			'wbBadgeItems',
 			'wbExperimentalFeatures'
 		);
 
