@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_c076ae9e",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-08-01T13:47:29Z",
+      "side": 1,
+      "message": "What does prevent this from throwing another UnresolvedRedirectException ?",
+      "revId": "9d76c677ed6ce9f1a4b89c6b4f29d60d78d80de1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1d5b0358",
+        "filename": "repo/includes/api/GetEntities.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-08-01T13:47:29Z",
+      "side": 1,
+      "message": "Incomplete type: |null",
+      "revId": "9d76c677ed6ce9f1a4b89c6b4f29d60d78d80de1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
