@@ -9,21 +9,20 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EntityPermissionChecker;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Repo\Interactors\RedirectCreationInteractor
  *
- * @group API
  * @group Wikibase
- * @group WikibaseAPI
  * @group WikibaseRepo
+ * @group WikibaseInteractor
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -64,6 +63,9 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		$this->repo->putRedirect( $redirect );
 	}
 
+	/**
+	 * @return EntityPermissionChecker
+	 */
 	private function getPermissionCheckers() {
 		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 
