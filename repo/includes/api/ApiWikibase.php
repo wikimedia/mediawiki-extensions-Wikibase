@@ -46,70 +46,70 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @var ResultBuilder
 	 */
-	protected $resultBuilder;
+	private $resultBuilder;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var ApiErrorReporter
 	 */
-	protected $errorReporter;
+	private $errorReporter;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var ExceptionLocalizer
 	 */
-	protected $exceptionLocalizer;
+	private $exceptionLocalizer;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var EntityTitleLookup
 	 */
-	protected $titleLookup;
+	private $titleLookup;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var EntityIdParser
 	 */
-	protected $idParser;
+	private $idParser;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var EntityRevisionLookup
 	 */
-	protected $entityRevisionLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var EntityStore
 	 */
-	protected $entityStore;
+	private $entityStore;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var PropertyDataTypeLookup
 	 */
-	protected $dataTypeLookup;
+	private $dataTypeLookup;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var SummaryFormatter
 	 */
-	protected $summaryFormatter;
+	private $summaryFormatter;
 
 	/**
 	 * @since 0.5
 	 *
 	 * @var EntityPermissionChecker
 	 */
-	protected $permissionChecker;
+	private $permissionChecker;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -141,6 +141,41 @@ abstract class ApiWikibase extends ApiBase {
 			$this->exceptionLocalizer,
 			$this->getLanguage()
 		);
+	}
+
+	/**
+	 * @return ApiErrorReporter
+	 */
+	protected function getErrorReporter() {
+		return $this->errorReporter;
+	}
+
+	/**
+	 * @return EntityStore
+	 */
+	protected function getEntityStore() {
+		return $this->entityStore;
+	}
+
+	/**
+	 * @return EntityRevisionLookup
+	 */
+	protected function getEntityRevisionLookup() {
+		return $this->entityRevisionLookup;
+	}
+
+	/**
+	 * @return EntityIdParser
+	 */
+	protected function getIdParser() {
+		return $this->idParser;
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	protected function getTitleLookup() {
+		return $this->titleLookup;
 	}
 
 	/**
@@ -325,7 +360,7 @@ abstract class ApiWikibase extends ApiBase {
 		} catch ( BadRevisionException $ex ) {
 			$this->dieException( $ex, 'nosuchrevid' );
 		} catch ( StorageException $ex ) {
-			$this->dieException( $ex, 'failed-save' );
+			$this->dieException( $ex, 'cant-load-entity-content' );
 		}
 
 		throw new LogicException( 'ApiErrorReporter::dieError did not throw a UsageException' );

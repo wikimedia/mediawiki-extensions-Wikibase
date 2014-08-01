@@ -111,7 +111,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : 0;
 
 			try {
-				$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId, $baseRevisionId );
+				$entityRevision = $this->getEntityRevisionLookup()->getEntityRevision( $entityId, $baseRevisionId );
 			} catch ( StorageException $ex ) {
 				$this->dieException( $ex, 'no-such-entity' );
 			}
@@ -154,7 +154,7 @@ abstract class ModifyEntity extends ApiWikibase {
 	 */
 	protected function getEntityIdFromString( $id ) {
 		try {
-			return $this->idParser->parse( $id );
+			return $this->getIdParser()->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->dieException( $ex, 'no-such-entity-id' );
 		}
@@ -194,7 +194,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 		foreach ( $badgesParams as $badgeSerialization ) {
 			try {
-				$badgeId = $this->idParser->parse( $badgeSerialization );
+				$badgeId = $this->getIdParser()->parse( $badgeSerialization );
 			} catch( EntityIdParsingException $e ) {
 				$this->dieError( 'Badges: could not parse "' . $badgeSerialization
 					. '", the id is invalid', 'no-such-entity-id' );
@@ -211,7 +211,7 @@ abstract class ModifyEntity extends ApiWikibase {
 					'not-badge' );
 			}
 
-			$itemTitle = $this->titleLookup->getTitleForId( $badgeId );
+			$itemTitle = $this->getTitleLookup()->getTitleForId( $badgeId );
 
 			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
 				$this->dieError( 'Badges: no item found matching id "' . $badgeSerialization . '"',
@@ -287,7 +287,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 			$changeOp->apply( $entity, $summary );
 		} catch ( ChangeOpException $ex ) {
-			$this->errorReporter->dieException( $ex, 'modification-failed' );
+			$this->dieException( $ex, 'modification-failed' );
 		}
 	}
 
@@ -328,7 +328,7 @@ abstract class ModifyEntity extends ApiWikibase {
 
 			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
 			if ( $entity->getId() === null ) {
-				$this->entityStore->assignFreshId( $entity );
+				$this->getEntityStore()->assignFreshId( $entity );
 			}
 		} else {
 			$entity = $entityRev->getEntity();
