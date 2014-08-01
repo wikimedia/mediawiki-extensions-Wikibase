@@ -10,27 +10,27 @@
  * @constructor
  * @since 0.3
  *
- * @param {wikibase.datamodel.Site} site
+ * @param {string} siteId
  * @param {string} pageName
- * @param {string[]} badges
+ * @param {string[]} [badges]
  *
- * @throws {Error} if no Site object is specified as parameter.
+ * @throws {Error} if required parameters are not specified.
  */
-var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( site, pageName, badges ) {
-	if( site === undefined ) {
-		throw new Error( 'Site needs to be specified' );
+var SELF = wb.datamodel.SiteLink = function WbDataModelSiteLink( siteId, pageName, badges ) {
+	if( siteId === undefined || pageName === undefined ) {
+		throw new Error( 'Required parameters not specified' );
 	}
 
-	this._site = site;
-	this._pageName = pageName || null;
+	this._siteId = siteId;
+	this._pageName = pageName;
 	this._badges = badges || [];
 };
 
 $.extend( SELF.prototype, {
 	/**
-	 * @type {wikibase.Site}
+	 * @type {string}
 	 */
-	_site: null,
+	_siteId: null,
 
 	/**
 	 * @type {string|null}
@@ -43,10 +43,10 @@ $.extend( SELF.prototype, {
 	_badges: null,
 
 	/**
-	 * @return {wikibase.Site}
+	 * @return {string}
 	 */
-	getSite: function() {
-		return this._site;
+	getSiteId: function() {
+		return this._siteId;
 	},
 
 	/**
@@ -68,37 +68,6 @@ $.extend( SELF.prototype, {
 	 */
 	getBadges: function() {
 		return this._badges;
-	},
-
-	/**
-	 * Returns the url to a page of the site.
-	 *
-	 * @return {string}
-	 */
-	getUrl: function() {
-		var pageName = this._urlEncode( $.trim( this._pageName ) );
-		return this._site.getPageUrl().replace( /\$1/g, pageName );
-	},
-
-	/**
-	 * Returns a html link to a site of the site.
-	 *
-	 * @return {jQuery}
-	 */
-	getLink: function() {
-		var url = this.getUrl();
-		return $( '<a/>', {
-			'href': url,
-			'text': this._pageName
-		} );
-	},
-
-	/**
-	 * @param {string} string
-	 * @return {string}
-	 */
-	_urlEncode: function( string ) {
-		return encodeURIComponent( string );
 	}
 
 } );

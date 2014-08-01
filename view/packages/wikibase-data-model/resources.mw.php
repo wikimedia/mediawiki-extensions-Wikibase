@@ -35,7 +35,6 @@ return call_user_func( function() {
 				'Item.js',
 				'Property.js',
 				'Reference.js',
-				'Site.js',
 				'SiteLink.js',
 				'SnakList.js',
 				'Statement.js',

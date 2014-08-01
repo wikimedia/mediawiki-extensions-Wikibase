@@ -6,27 +6,18 @@
 ( function( wb, $, QUnit ) {
 'use strict';
 
-var siteDetails = {
-	apiUrl: 'http://en.wikipedia.org/w/api.php',
-	id: 'en-global',
-	name: 'English Wikipedia',
-	pageUrl: 'http://en.wikipedia.org/wiki/$1',
-	shortName: 'English',
-	languageCode: 'en',
-	group: 'wikipedia'
-};
-
-var site = new wb.datamodel.Site( siteDetails ),
-	pageName = 'test';
+var siteId = 'test-id',
+	pageName = 'test-page';
 
 QUnit.module( 'wikibase.datamodel.SiteLink', QUnit.newMwEnvironment() );
 
 QUnit.test( 'Basic tests', function( assert ) {
-	var siteLink = new wb.datamodel.SiteLink( site, pageName );
+	var siteLink = new wb.datamodel.SiteLink( siteId, pageName );
 
-	assert.ok(
-		siteLink.getSite() instanceof wb.datamodel.Site,
-		'Verified site instance.'
+	assert.equal(
+		siteLink.getSiteId(),
+		'test-id',
+		'Verified site id.'
 	);
 
 	assert.equal(
@@ -36,25 +27,8 @@ QUnit.test( 'Basic tests', function( assert ) {
 	);
 } );
 
-QUnit.test( 'Link generation', function( assert ) {
-	var siteLink = new wb.datamodel.SiteLink( site, pageName );
-
-	assert.equal(
-		siteLink.getUrl(),
-		'http://en.wikipedia.org/wiki/test',
-		'Created URL.'
-	);
-
-	var $link = siteLink.getLink();
-
-	assert.ok(
-		$link.length === 1 && $link instanceof $ && $link.get( 0 ).nodeName === 'A',
-		'Created HTML link.'
-	);
-} );
-
 QUnit.test( 'Badges', function( assert ) {
-	var siteLink = new wb.datamodel.SiteLink( site, pageName ),
+	var siteLink = new wb.datamodel.SiteLink( siteId, pageName ),
 		badges = ['Q123', 'Q456'];
 
 	assert.equal(
@@ -79,7 +53,7 @@ QUnit.test( 'Badges', function( assert ) {
 		'Removed badges.'
 	);
 
-	siteLink = new wb.datamodel.SiteLink( site, pageName, badges );
+	siteLink = new wb.datamodel.SiteLink( siteId, pageName, badges );
 
 	assert.equal(
 		badges.join( ',' ),
