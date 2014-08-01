@@ -186,6 +186,16 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['jquery.wikibase.pagesuggester.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.pagesuggester.tests.js'
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.wikibase.pagesuggester',
+			),
+		);
+
 		$testModules['qunit']['jquery.wikibase.referenceview.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.referenceview.tests.js',
