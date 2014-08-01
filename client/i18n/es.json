@@ -69,5 +69,6 @@
 	"wikibase-pageinfo-entity-id": "Id. del elemento de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Ninguno",
 	"wikibase-property-render-error": "Error al procesar propiedad $1: $2",
-	"wikibase-otherprojects": "Otros proyectos"
+	"wikibase-otherprojects": "Otros proyectos",
+	"wikibase-otherprojects-beta-message": "Barra lateral de otros proyectos"
 }

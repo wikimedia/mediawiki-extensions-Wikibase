@@ -49,7 +49,7 @@
 	"wikibase-quantitydetails-upperbound": "Limite superior",
 	"wikibase-quantitydetails-lowerbound": "Limite inferior",
 	"wikibase-quantitydetails-unit": "Unidade",
-	"wikibase-timedetails-time": "Tempo",
+	"wikibase-timedetails-time": "Hora",
 	"wikibase-timedetails-isotime": "Data e hora em formato ISO",
 	"wikibase-timedetails-timezone": "Fuso horário",
 	"wikibase-timedetails-calendar": "Calendário",
@@ -78,8 +78,8 @@
 	"wikibase-validator-invalid": "Valor inválido",
 	"wikibase-validator-missing-field": "Campo obrigatório em falta '$1'",
 	"wikibase-validator-bad-type": "$2 invés de $1",
-	"wikibase-validator-too-long": "Não pode ter mais que {{PLURAL:$1|um carácter|$1 caracteres}} de comprimento",
-	"wikibase-validator-too-short": "Deve ter pelo menos {{PLURAL:$1|um carácter|$1 caracteres}} de comprimento",
+	"wikibase-validator-too-long": "Não pode ter mais que {{PLURAL:$1|um carácter|$1 caracteres}}",
+	"wikibase-validator-too-short": "Deve ter pelo menos {{PLURAL:$1|um carácter|$1 caracteres}}",
 	"wikibase-validator-too-high": "Fora do intervalo. Não pode ser maior que $1",
 	"wikibase-validator-too-low": "Fora do intervalo. Não pode ser menor que $1",
 	"wikibase-validator-malformed-value": "Entrada inválida: $1",
@@ -88,7 +88,7 @@
 	"wikibase-validator-no-such-entity": "$1 não encontrado",
 	"wikibase-validator-no-such-property": "Propriedade $1 não encontrada",
 	"wikibase-validator-bad-value": "Valor de dados corrompido: $1",
-	"wikibase-validator-bad-value-type": "Tipo de valor inválido; esperava-se $2",
+	"wikibase-validator-bad-value-type": "Tipo de valor inválido $1; esperava-se $2",
 	"wikibase-validator-bad-url": "URL inválido: $1",
 	"wikibase-validator-bad-url-scheme": "Esquema de URL não suportado: $1",
 	"wikibase-validator-bad-http-url": "URL HTTP inválido: $1",
@@ -99,5 +99,6 @@
 	"datatypes-type-commonsMedia": "Ficheiro de média do Commons",
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "Tipo do valor, \"$1\", não coincide com o tipo da propriedade, \"$2\".",
-	"wikibase-snakformatter-property-not-found": "Propriedade $1 não encontrada, não é possível determinar o tipo de dados a usar."
+	"wikibase-snakformatter-property-not-found": "Propriedade $1 não encontrada, não é possível determinar o tipo de dados a usar.",
+	"wikibase-add-badges": "Adicionar emblemas"
 }
