@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_a0ccc238",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesRedirectTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-01T15:06:18Z",
+      "side": 1,
+      "message": "I\u0027ll kill this dependency.",
+      "revId": "b1fbfbc77027b685d84cb2d58054251524e63edb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_a0b722f1",
         "filename": "repo/tests/phpunit/includes/api/GetEntitiesRedirectTest.php",
         "patchSetId": 9
@@ -13,6 +30,24 @@
       "writtenOn": "2014-08-01T14:18:38Z",
       "side": 1,
       "message": "why not just use assertEntityEquals here?",
+      "revId": "b1fbfbc77027b685d84cb2d58054251524e63edb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_207a12e7",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesRedirectTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-01T15:06:18Z",
+      "side": 1,
+      "message": "Because I don\u0027t have the Entity object here, and because I don\u0027t care about the content of the entity in this context. I\u0027m just checking that redirect resolution works as designed.",
+      "parentUuid": "8e28a382_a0b722f1",
       "revId": "b1fbfbc77027b685d84cb2d58054251524e63edb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
