@@ -153,15 +153,17 @@ final class LibHooks {
 				'tests/qunit/jquery.wikibase/jquery.wikibase.claimview.tests.js',
 			),
 			'dependencies' => array(
+				'dataValues.values',
+				'jquery.valueview',
 				'jquery.wikibase.claimview',
-				'wikibase.store.EntityStore',
+				'mediawiki.Title',
+				'valueFormatters',
+				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel',
+				'wikibase.RepoApi',
+				'wikibase.store.EntityStore',
 				'wikibase.store.FetchedContent',
 				'wikibase.ValueViewBuilder',
-				'dataValues.values',
-				'mediawiki.Title',
-				'jquery.valueview',
-				'valueFormatters'
 			),
 		);
 
@@ -192,7 +194,9 @@ final class LibHooks {
 				'jquery.valueview.ExpertStore',
 				'jquery.wikibase.referenceview',
 				'mediawiki.Title',
+				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel',
+				'wikibase.RepoApi',
 				'wikibase.store.FetchedContent',
 				'wikibase.store.EntityStore',
 				'wikibase.ValueViewBuilder',
