@@ -42,71 +42,51 @@ use Wikibase\SummaryFormatter;
 abstract class ApiWikibase extends ApiBase {
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var ResultBuilder
 	 */
 	private $resultBuilder;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var ApiErrorReporter
 	 */
 	private $errorReporter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var ExceptionLocalizer
 	 */
 	private $exceptionLocalizer;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityTitleLookup
 	 */
 	private $titleLookup;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityIdParser
 	 */
 	private $idParser;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityStore
 	 */
 	private $entityStore;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var PropertyDataTypeLookup
 	 */
 	private $dataTypeLookup;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var EntityPermissionChecker
 	 */
 	private $permissionChecker;
@@ -192,7 +172,7 @@ abstract class ApiWikibase extends ApiBase {
 	/**
 	 * @return ResultBuilder
 	 */
-	public function getResultBuilder() {
+	protected function getResultBuilder() {
 		if( !isset( $this->resultBuilder ) ) {
 
 			$serializerFactory = new SerializerFactory(
@@ -317,7 +297,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @return Status the check's result
 	 * @todo: use this also to check for read access in ApiGetEntities, etc
 	 */
-	public function checkPermissions( Entity $entity, User $user, array $params ) {
+	protected function checkPermissions( Entity $entity, User $user, array $params ) {
 		$permissions = $this->getRequiredPermissions( $entity, $params );
 		$status = Status::newGood();
 
@@ -420,7 +400,7 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @throws UsageException If $status->isOK() returns false.
 	 */
-	public function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
+	private function handleStatus( Status $status, $errorCode, array $extradata = array(), $httpRespCode = 0 ) {
 		wfProfileIn( __METHOD__ );
 
 		if ( $status->isGood() ) {
@@ -508,7 +488,7 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @return false|null|string
 	 */
-	protected function evaluateTokenParam( array $params ) {
+	private function evaluateTokenParam( array $params ) {
 		if ( !$this->needsToken() ) {
 			// false disabled the token check
 			$token = false;
@@ -525,13 +505,18 @@ abstract class ApiWikibase extends ApiBase {
 	 *
 	 * @return null|false|int
 	 */
-	protected function evaluateBaseRevisionParam( array $params ) {
+	private function evaluateBaseRevisionParam( array $params ) {
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 
 		return $baseRevisionId;
 	}
 
+	/**
+	 * @param Summary $summary
+	 *
+	 * @return string
+	 */
 	protected function formatSummary( Summary $summary ) {
 		$formatter = $this->summaryFormatter;
 		return $formatter->formatSummary( $summary );
@@ -573,6 +558,8 @@ abstract class ApiWikibase extends ApiBase {
 	/**
 	 * @see ApiErrorReporter::dieError()
 	 *
+	 * @since 0.5
+	 *
 	 * @param string $description
 	 * @param string $code
 	 * @param int $httpStatusCode
@@ -584,6 +571,8 @@ abstract class ApiWikibase extends ApiBase {
 
 	/**
 	 * @see ApiErrorReporter::dieException()
+	 *
+	 * @since 0.5
 	 *
 	 * @param Exception $exception
 	 * @param string $code
