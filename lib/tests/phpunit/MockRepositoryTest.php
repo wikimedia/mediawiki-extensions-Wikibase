@@ -10,6 +10,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\Store\EntityRedirect;
 
 /**
  * @covers Wikibase\Test\MockRepository
@@ -559,6 +560,53 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$entity->setLabel( 'en', 'STRANGE' );
 		$entity = $this->repo->getEntity( $entity->getId() );
 		$this->assertNotEquals( 'STRANGE', $entity->getLabel( 'en' ) );
+	}
+
+	public function testGetLogEntry() {
+		$this->setupGetEntities();
+
+		$q10 = new ItemId( 'Q10' );
+		$q11 = new ItemId( 'Q11' );
+
+		$redirect = new EntityRedirect( $q10, $q11 );
+		$revId = $this->repo->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
+
+		$logEntry = $this->repo->getLogEntry( $revId );
+
+		$this->assertNotNull( $logEntry );
+		$this->assertEquals( $revId, $logEntry['revision'] );
+		$this->assertEquals( 'Q10', $logEntry['entity'] );
+		$this->assertEquals( 'foo', $logEntry['summary'] );
+	}
+
+	public function testGetLatestLogEntryFor() {
+		$this->setupGetEntities();
+
+		$q10 = new ItemId( 'Q10' );
+		$q11 = new ItemId( 'Q11' );
+		$q12 = new ItemId( 'Q12' );
+
+		// first entry
+		$redirect = new EntityRedirect( $q10, $q11 );
+		$revId = $this->repo->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
+
+		$logEntry = $this->repo->getLatestLogEntryFor( $q10 );
+
+		$this->assertNotNull( $logEntry );
+		$this->assertEquals( $revId, $logEntry['revision'] );
+		$this->assertEquals( 'Q10', $logEntry['entity'] );
+		$this->assertEquals( 'foo', $logEntry['summary'] );
+
+		// second entry
+		$redirect = new EntityRedirect( $q10, $q12 );
+		$revId = $this->repo->saveRedirect( $redirect, 'bar', $GLOBALS['wgUser'], EDIT_NEW );
+
+		$logEntry = $this->repo->getLatestLogEntryFor( $q10 );
+
+		$this->assertNotNull( $logEntry );
+		$this->assertEquals( $revId, $logEntry['revision'] );
+		$this->assertEquals( 'Q10', $logEntry['entity'] );
+		$this->assertEquals( 'bar', $logEntry['summary'] );
 	}
 
 	public function testDeleteEntity( ) {
