@@ -144,6 +144,7 @@ call_user_func( function() {
 	$wgSpecialPages['NewItem'] 							= 'Wikibase\Repo\Specials\SpecialNewItem';
 	$wgSpecialPages['NewProperty'] 						= 'Wikibase\Repo\Specials\SpecialNewProperty';
 	$wgSpecialPages['ItemByTitle'] 						= 'Wikibase\Repo\Specials\SpecialItemByTitle';
+	$wgSpecialPages['GoToLinkedPage']					= 'Wikibase\Repo\Specials\SpecialGoToLinkedPage';
 	$wgSpecialPages['ItemDisambiguation'] 				= 'Wikibase\Repo\Specials\SpecialItemDisambiguation';
 	$wgSpecialPages['ItemsWithoutSitelinks']			= 'Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks';
 	$wgSpecialPages['SetLabel'] 						= 'Wikibase\Repo\Specials\SpecialSetLabel';
@@ -162,6 +163,7 @@ call_user_func( function() {
 	$wgSpecialPageGroups['NewItem']						= 'wikibaserepo';
 	$wgSpecialPageGroups['NewProperty']					= 'wikibaserepo';
 	$wgSpecialPageGroups['ItemByTitle']					= 'wikibaserepo';
+	$wgSpecialPageGroups['GoToLinkedPage']					= 'wikibaserepo';
 	$wgSpecialPageGroups['ItemDisambiguation']			= 'wikibaserepo';
 	$wgSpecialPageGroups['ItemsWithoutSitelinks']		= 'wikibaserepo';
 	$wgSpecialPageGroups['SetLabel']					= 'wikibaserepo';
