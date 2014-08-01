@@ -21,6 +21,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			'Item.tests.js',
 			'Property.tests.js',
 			'Reference.tests.js',
+			'SiteLink.tests.js',
 			'Snak.tests.js',
 			'SnakList.tests.js',
 			'Statement.tests.js',
