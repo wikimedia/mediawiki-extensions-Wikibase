@@ -21,7 +21,7 @@
 				'jquery.wikibase.linkitem',
 				'mediawiki.Title',
 				'mw.config.values.wbRepo',
-				'wikibase.RepoApi',
+				'wikibase.RepoApi'
 			],
 			function() {
 				var wb = wikibase;
@@ -47,12 +47,14 @@
 
 				$linkItemLink
 				.on( 'linkitemdialogclose.' + widgetName, function( event ) {
-					$linkItemLink.data( 'linkitem' ).destroy();
+					$linkItemLink
+					.off( '.' + widgetName )
+					.data( 'linkitem' ).destroy();
 				} )
 				.on( 'linkitemsuccess.' + widgetName, function( event ) {
 					// Don't reshow the "Add links" link but reload the page on dialog close:
 					$linkItemLink
-					.off( 'linkitemdialogclose' )
+					.off( '.' + widgetName )
 					.on( 'linkitemdialogclose.' + widgetName, function() {
 						window.location.reload( true );
 					} );
