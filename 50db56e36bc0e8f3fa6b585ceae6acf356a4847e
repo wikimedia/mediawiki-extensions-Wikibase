@@ -16,6 +16,24 @@
       "revId": "50db56e36bc0e8f3fa6b585ceae6acf356a4847e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1d8423a2",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-08-01T13:09:39Z",
+      "side": 1,
+      "message": "Good catch, will follow-up",
+      "parentUuid": "8e28a382_dd6a1bea",
+      "revId": "50db56e36bc0e8f3fa6b585ceae6acf356a4847e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
