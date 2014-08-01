@@ -324,6 +324,7 @@ return call_user_func( function() {
 				'jquery.ui.suggester',
 				'util.inherit',
 				'jquery.wikibase.entityselector',
+				'jquery.wikibase.pagesuggester',
 				'jquery.wikibase.toolbareditgroup',
 				'jquery.wikibase.siteselector',
 				'mediawiki.api',
@@ -500,6 +501,16 @@ return call_user_func( function() {
 				'jquery.ui.ooMenu',
 				'jquery.ui.suggester',
 			)
+		),
+
+		'jquery.wikibase.pagesuggester' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.pagesuggester.js',
+			),
+			'dependencies' => array(
+				'jquery',
+				'jquery.ui.suggester',
+			),
 		),
 
 		'jquery.wikibase.listview' => $moduleTemplate + array(
