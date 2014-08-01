@@ -7,7 +7,7 @@ use ApiMain;
 use InvalidArgumentException;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\Item;
@@ -27,7 +27,7 @@ use Wikibase\Summary;
 class MergeItems extends ApiWikibase {
 
 	/**
-	 * @var SiteLinkChangeOpFactory
+	 * @var MergeChangeOpsFactory
 	 */
 	protected $changeOpFactory;
 
