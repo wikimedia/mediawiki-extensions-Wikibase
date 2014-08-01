@@ -354,6 +354,8 @@ class MockRepository implements
 			$rev->user = $user;
 		}
 
+		unset( $this->redirects[$key] );
+
 		$this->entities[$key][$revision] = $rev;
 		ksort( $this->entities[$key] );
 
@@ -368,6 +370,11 @@ class MockRepository implements
 	 */
 	public function putRedirect( EntityRedirect $redirect ) {
 		$key = $redirect->getEntityId()->getSerialization();
+
+		if ( isset( $this->entities[$key] ) ) {
+			$this->removeEntity( $redirect->getEntityId() );
+		}
+
 		$this->redirects[$key] = $redirect;
 	}
 
@@ -379,15 +386,20 @@ class MockRepository implements
 	 * @return Entity
 	 */
 	public function removeEntity( EntityId $id ) {
-		$oldEntity = $this->getEntity( $id );
+		try {
+			$oldEntity = $this->getEntity( $id );
 
-		if ( $oldEntity && ( $oldEntity instanceof Item ) ) {
-			// clean up old sitelinks
-			$this->unregisterSiteLinks( $oldEntity );
+			if ( $oldEntity && ( $oldEntity instanceof Item ) ) {
+				// clean up old sitelinks
+				$this->unregisterSiteLinks( $oldEntity );
+			}
+		} catch ( StorageException $ex ) {
+			$oldEntity = null; // ignore
 		}
 
 		$key = $id->getPrefixedId();
 		unset( $this->entities[$key] );
+		unset( $this->redirects[$key] );
 
 		return $oldEntity;
 	}

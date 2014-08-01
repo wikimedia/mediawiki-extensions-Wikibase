@@ -551,7 +551,13 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 			$this->setExpectedException( $error );
 		}
 
-		$rev = $this->repo->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
+		$rev = $this->repo->saveEntity( $entity, 'f00', $GLOBALS['wgUser'], $flags, $baseRevId );
+
+		$logEntry = $this->repo->getLogEntry( $rev->getRevision() );
+		$this->assertNotNull( $logEntry );
+		$this->assertEquals( $rev->getRevision(), $logEntry['revision'] );
+		$this->assertEquals( $entity->getId()->getSerialization(), $logEntry['entity'] );
+		$this->assertEquals( 'f00', $logEntry['summary'] );
 
 		$this->assertEquals( $entity->getLabels(), $rev->getEntity()->getLabels() );
 		$this->assertEquals( $entity->getLabels(), $this->repo->getEntity( $entity->getId() )->getLabels() );
@@ -559,7 +565,29 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// test we can't mess with entities in the repo
 		$entity->setLabel( 'en', 'STRANGE' );
 		$entity = $this->repo->getEntity( $entity->getId() );
+		$this->assertNotNull( $entity );
 		$this->assertNotEquals( 'STRANGE', $entity->getLabel( 'en' ) );
+	}
+
+	public function testSaveRedirect() {
+		$this->setupGetEntities();
+
+		$q10 = new ItemId( 'Q10' );
+		$q1 = new ItemId( 'Q1' );
+
+		$redirect = new EntityRedirect( $q10, $q1 );
+		$revId = $this->repo->saveRedirect( $redirect, 'redirected Q10 to Q1', $GLOBALS['wgUser'] );
+
+		$this->assertGreaterThan( 0, $revId );
+
+		$logEntry = $this->repo->getLogEntry( $revId );
+		$this->assertNotNull( $logEntry );
+		$this->assertEquals( $revId, $logEntry['revision'] );
+		$this->assertEquals( $redirect->getEntityId()->getSerialization(), $logEntry['entity'] );
+		$this->assertEquals( 'redirected Q10 to Q1', $logEntry['summary'] );
+
+		$this->setExpectedException( 'Wikibase\Lib\Store\UnresolvedRedirectException' );
+		$this->repo->getEntity( $q10 );
 	}
 
 	public function testGetLogEntry() {
@@ -617,6 +645,14 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		$this->repo->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );
 		$this->assertFalse( $this->repo->hasEntity( $item->getId() ) );
+	}
+
+	public function testDeleteRedirect( ) {
+		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
+		$this->repo->putRedirect( $redirect );
+
+		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
+		$this->assertNull( $this->repo->getEntity( $redirect->getEntityId() ) );
 	}
 
 	public function testUpdateWatchlist() {
