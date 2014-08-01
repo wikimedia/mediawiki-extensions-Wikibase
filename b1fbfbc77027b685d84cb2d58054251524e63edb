@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a0b722f1",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesRedirectTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-08-01T14:18:38Z",
+      "side": 1,
+      "message": "why not just use assertEntityEquals here?",
+      "revId": "b1fbfbc77027b685d84cb2d58054251524e63edb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e0c1aa59",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesRedirectTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-08-01T14:18:38Z",
+      "side": 1,
+      "message": "why not just use assertEntityEquals here?",
+      "revId": "b1fbfbc77027b685d84cb2d58054251524e63edb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c0c46e6a",
+        "filename": "repo/tests/phpunit/includes/api/GetEntitiesRedirectTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-08-01T14:18:38Z",
+      "side": 1,
+      "message": "why not just use assertEntityEquals here?",
+      "revId": "b1fbfbc77027b685d84cb2d58054251524e63edb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
