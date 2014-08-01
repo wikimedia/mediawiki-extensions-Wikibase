@@ -542,7 +542,7 @@ class EntityDataSerializationService {
 			$this->entityTitleLookup,
 			$this->serializerFactory
 		);
-		$resultBuilder->addEntityRevision( $entityRevision, $options );
+		$resultBuilder->addEntityRevision( null, $entityRevision, $options );
 
 		wfProfileOut( __METHOD__ );
 		return $res;

@@ -37,7 +37,7 @@ class IntegrationApiTest extends ApiTestCase {
 				),
 				array(
 					'entities' => array(
-						'-1' => array(
+						'Q919191919191' => array(
 							'id' => 'Q919191919191',
 							'missing' => '',
 						),
