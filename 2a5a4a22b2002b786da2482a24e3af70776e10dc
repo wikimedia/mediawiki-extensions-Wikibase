@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_3dcb5f4f",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-01T12:51:14Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "2a5a4a22b2002b786da2482a24e3af70776e10dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bd062f87",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-01T12:51:14Z",
+      "side": 1,
+      "message": "should document at least parameters and return type",
+      "revId": "2a5a4a22b2002b786da2482a24e3af70776e10dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_dd033b78",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-01T12:51:14Z",
+      "side": 1,
+      "message": "missing type hint for $itemId (nullable)\nalso, should have minimal documentation, at least @returns",
+      "revId": "2a5a4a22b2002b786da2482a24e3af70776e10dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7dfc476d",
+        "filename": "repo/includes/specials/SpecialGoToLinkedPage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-01T12:51:14Z",
+      "side": 1,
+      "message": "Should say that \"output\" means \"write to the context\u0027s OutputPage object\".\nPerhaps it would be nice to take the OutputPage as a parameter. That would make the calls to redirect() and switchForm() in execute() more symmetrical.\n\nI also wonder about the name... \"switchForm\"? Why \"switch\"? generateInputForm() would be better in my opinion.",
+      "revId": "2a5a4a22b2002b786da2482a24e3af70776e10dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
