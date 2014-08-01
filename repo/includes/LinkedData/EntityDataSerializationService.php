@@ -300,9 +300,9 @@ class EntityDataSerializationService {
 		$this->fileExtensions = array();
 
 		$api = $this->newApiMain( "dummy" );
-		$formats = $api->getFormats();
+		$formatNames = $api->getModuleManager()->getNames( 'format' );
 
-		foreach ( $formats as $name => $class ) {
+		foreach ( $formatNames as $name ) {
 			if ( $this->formatWhiteList !== null && !in_array( $name, $this->formatWhiteList ) ) {
 				continue;
 			}
