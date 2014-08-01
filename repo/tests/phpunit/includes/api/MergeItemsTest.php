@@ -2,61 +2,125 @@
 
 namespace Wikibase\Test\Api;
 
-use LogicException;
+use Language;
+use Status;
+use User;
+use Wikibase\Api\ApiErrorReporter;
+use Wikibase\Api\MergeItems;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\ApiModuleTestHelper;
+use Wikibase\Test\EntityModificationTestHelper;
+use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Api\MergeItems
  *
  * @group API
- * @group Database
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
  * @group MergeItemsTest
  *
- * @group medium
- *
  * @licence GNU GPL v2+
  * @author Adam Shorland
  */
-class MergeItemsTest extends WikibaseApiTestCase {
-
-	private static $hasSetup = false;
+class MergeItemsTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var EntityId
+	 * @var MockRepository
 	 */
-	private static $thePropertyId;
+	private $repo = null;
 
 	/**
-	 * @var EntityId
+	 * @var EntityModificationTestHelper
 	 */
-	private static $theItemId;
+	private $entityModificationTestHelper = null;
+
+	/**
+	 * @var ApiModuleTestHelper
+	 */
+	private $apiModuleTestHelper = null;
 
 	public function setUp() {
 		parent::setUp();
 
-		if( !self::$hasSetup ){
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$this->entityModificationTestHelper = new EntityModificationTestHelper();
+		$this->apiModuleTestHelper = new ApiModuleTestHelper();
 
-			$this->initTestEntities( array( 'Empty', 'Empty2' ) );
+		$this->repo = $this->entityModificationTestHelper->getRepository();
 
-			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'mergeitemstest', $GLOBALS['wgUser'], EDIT_NEW );
+		$this->entityModificationTestHelper->putEntities( array(
+			'Q1' => array(),
+			'Q2' => array(),
+			'P1' => array( 'datatype' => 'string' ),
+			'P2' => array( 'datatype' => 'string' ),
+		) );
 
-			self::$thePropertyId = $prop->getId();
+		$this->entityModificationTestHelper->putRedirects( array(
+			'Q11' => 'Q1',
+			'Q12' => 'Q2',
+		) );
+	}
 
-			$item = Item::newEmpty();
-			$store->saveEntity( $item, 'mergeitemstest', $GLOBALS['wgUser'], EDIT_NEW );
+	private function getPermissionCheckers() {
+		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 
-			self::$theItemId = $item->getId();
+		$permissionChecker->expects( $this->any() )
+			->method( 'getPermissionStatusForEntityId' )
+			->will( $this->returnCallback( function( User $user, $permission, EntityId $id ) {
+				if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
+					return Status::newFatal( 'permissiondenied' );
+				} else {
+					return Status::newGood();
+				}
+			} ) );
 
-			self::$hasSetup = true;
-		}
+		return $permissionChecker;
+	}
+
+	/**
+	 * @param MergeItems $module
+	 */
+	private function overrideServices( MergeItems $module ) {
+		$idParser = new BasicEntityIdParser();
+
+		$errorReporter = new ApiErrorReporter(
+			$module,
+			WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
+			Language::factory( 'en' )
+		);
+
+		$resultBuilder = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getResultBuilder( $module );
+		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();
+
+		$changeOpsFactory = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()->getMergeChangeOpFactory();
+
+		$module->setServices(
+			$idParser,
+			$errorReporter,
+			$resultBuilder,
+			new ItemMergeInteractor(
+				$changeOpsFactory,
+				$this->repo,
+				$this->repo,
+				$this->getPermissionCheckers(),
+				$summaryFormatter,
+				$module->getUser()
+			)
+		);
+	}
+
+	private function callApiModule( $params, User $user = null ) {
+		$module = $this->apiModuleTestHelper->newApiModule( 'Wikibase\Api\MergeItems', 'wbmergeitems', $params, $user );
+		$this->overrideServices( $module );
+
+		$module->execute();
+
+		$result = $module->getResult();
+		return $result->getData();
 	}
 
 	public static function provideData(){
@@ -66,68 +130,6 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			array(),
 			array(),
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-		);
-		$testCases['identicalLabelMerge'] = array(
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array(),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-		);
-		$testCases['ignoreConflictLabelMerge'] = array(
-			array( 'labels' => array(
-				'en' => array( 'language' => 'en', 'value' => 'foo' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
-			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array( 'labels' => array(
-				'en' => array( 'language' => 'en', 'value' => 'bar' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
-			'label'
-		);
-		$testCases['descriptionMerge'] = array(
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array(),
-			array(),
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-		);
-		$testCases['identicalDescriptionMerge'] = array(
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array(),
-			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-		);
-		$testCases['ignoreConflictDescriptionMerge'] = array(
-			array( 'descriptions' => array(
-				'en' => array( 'language' => 'en', 'value' => 'foo' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
-			array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
-			array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array( 'descriptions' => array(
-				'en' => array( 'language' => 'en', 'value' => 'bar' ),
-				'de' => array( 'language' => 'de', 'value' => 'berlin' )
-			) ),
-			'description'
-		);
-		$testCases['aliasesMerge'] = array(
-			array( 'aliases' => array( array( "language" => "nl", "value" => "Dickes B" ) ) ),
-			array(),
-			array(),
-			array( 'aliases' => array( array( "language" => "nl", "value" => "Dickes B" ) ) ),
-		);
-		$testCases['aliasesMerge2'] = array(
-			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali1" ) ) ),
-			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali2" ) ) ),
-			array(),
-			array( 'aliases' => array( array( "language" => "nl", "value" => "Ali2" ),array( "language" => "nl", "value" => "Ali1" ) ) ),
-		);
-		$testCases['sitelinksMerge'] = array(
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-			array(),
-			array(),
-			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
 		);
 		$testCases['IgnoreConflictSitelinksMerge'] = array(
 			array( 'sitelinks' => array(
@@ -143,26 +145,14 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			'sitelink'
 		);
 		$testCases['claimMerge'] = array(
-			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
+			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
+				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
 			array(),
 			array(),
-			array( 'claims' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
-				'type' => 'statement', 'rank' => 'normal' ) ) ),
-		);
-		$testCases['claimMerge'] = array(
-			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ),
+			array( 'claims' => array( 'P1' => array ( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-			array( 'claims' => array( '{Prop}' => array( array( 'mainsnak' => array(
-				'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
-				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
-			array(),
-			array( 'claims' => array(
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ),
-				array( 'mainsnak' => array( 'snaktype' => 'value', 'property' => '{Prop}', 'datavalue' => array( 'value' => 'imastring1', 'type' => 'string' ) ), 'type' => 'statement', 'rank' => 'normal' ) ) ),
 		);
 
 		return $testCases;
@@ -172,58 +162,49 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	 * @dataProvider provideData
 	 */
 	function testMergeRequest( $pre1, $pre2, $expectedFrom, $expectedTo, $ignoreConflicts = null ){
-		$this->injectIds( $pre1 );
-		$this->injectIds( $pre2 );
-		$this->injectIds( $expectedFrom );
-		$this->injectIds( $expectedTo );
-
 		// -- set up params ---------------------------------
 		$params = array(
 			'action' => 'wbmergeitems',
-			'fromid' => EntityTestHelper::getId( 'Empty' ),
-			'toid' => EntityTestHelper::getId( 'Empty2' ),
+			'fromid' => 'Q1',
+			'toid' => 'Q2',
 			'summary' => 'CustomSummary!',
 		);
 		if( $ignoreConflicts !== null ){
 			$params['ignoreconflicts'] = $ignoreConflicts;
 		}
+
 		// -- prefill the entities --------------------------------------------
-		$this->doApiRequestWithToken( array(
-			'action' => 'wbeditentity',
-			'id' => EntityTestHelper::getId( 'Empty' ) ,
-			'clear' => '',
-			'data' => json_encode( $pre1 ) ) );
-		$this->doApiRequestWithToken( array(
-			'action' => 'wbeditentity',
-			'id' => EntityTestHelper::getId( 'Empty2' ) ,
-			'clear' => '',
-			'data' => json_encode( $pre2 ) ) );
+		$this->entityModificationTestHelper->putEntity( $pre1, 'Q1' );
+		$this->entityModificationTestHelper->putEntity( $pre2, 'Q2' );
 
 		// -- do the request --------------------------------------------
-		list( $result,, ) = $this->doApiRequestWithToken( $params );
+		$result = $this->callApiModule( $params );
 
 		// -- check the result --------------------------------------------
-		$this->assertResultSuccess( $result );
-		$this->assertArrayHasKey( 'from', $result );
-		$this->assertArrayHasKey( 'to', $result );
-		$this->assertArrayHasKey( 'id', $result['from'] );
-		$this->assertArrayHasKey( 'id', $result['to'] );
-		$this->assertArrayHasKey( 'lastrevid', $result['from'] );
-		$this->assertArrayHasKey( 'lastrevid', $result['to'] );
+		$this->apiModuleTestHelper->assertResultSuccess( $result );
+
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'from', 'id' ), $result );
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'to', 'id' ), $result );
+		$this->assertEquals( 'Q1', $result['from']['id'] );
+		$this->assertEquals( 'Q2', $result['to']['id'] );
+
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'from', 'lastrevid' ), $result );
+		$this->apiModuleTestHelper->assertResultHasKeyInPath( array( 'to', 'lastrevid' ), $result );
 		$this->assertGreaterThan( 0, $result['from']['lastrevid'] );
 		$this->assertGreaterThan( 0, $result['to']['lastrevid'] );
 
 		// -- check the items --------------------------------------------
-		$actualFrom = $this->loadEntity( $result['from']['id'] );
-		$this->assertEntityEquals( $expectedFrom, $actualFrom );
-		$actualTo = $this->loadEntity( $result['to']['id'] );
-		$this->assertEntityEquals( $expectedTo, $actualTo );
+		$actualFrom = $this->entityModificationTestHelper->getEntity( $result['from']['id'] );
+		$this->entityModificationTestHelper->assertEntityEquals( $expectedFrom, $actualFrom );
+
+		$actualTo = $this->entityModificationTestHelper->getEntity( $result['to']['id'] );
+		$this->entityModificationTestHelper->assertEntityEquals( $expectedTo, $actualTo );
 
 		// -- check the edit summaries --------------------------------------------
-		$this->assertRevisionSummary( array( 'wbmergeitems' ), $result['from']['lastrevid'] );
-		$this->assertRevisionSummary( "/CustomSummary/" , $result['from']['lastrevid'] );
-		$this->assertRevisionSummary( array( 'wbmergeitems' ), $result['to']['lastrevid'] );
-		$this->assertRevisionSummary( "/CustomSummary/" , $result['to']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['from']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( "/CustomSummary/" , $result['from']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( array( 'wbmergeitems' ), $result['to']['lastrevid'] );
+		$this->entityModificationTestHelper->assertRevisionSummary( "/CustomSummary/" , $result['to']['lastrevid'] );
 	}
 
 	public static function provideExceptionParamsData() {
@@ -232,32 +213,32 @@ class MergeItemsTest extends WikibaseApiTestCase {
 				'p' => array( ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //1 only from id
-				'p' => array( 'fromid' => '{item}' ),
+				'p' => array( 'fromid' => 'Q1' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //2 only to id
-				'p' => array( 'toid' => '{item}' ),
+				'p' => array( 'toid' => 'Q1' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
 			array( //3 toid bad
-				'p' => array( 'fromid' => '{item}', 'toid' => 'ABCDE' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
+				'p' => array( 'fromid' => 'Q1', 'toid' => 'ABCDE' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 			array( //4 fromid bad
-				'p' => array( 'fromid' => 'ABCDE', 'toid' => '{item}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
+				'p' => array( 'fromid' => 'ABCDE', 'toid' => 'Q1' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 			array( //5 both same id
-				'p' => array( 'fromid' => '{Item}', 'toid' => '{item}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid', 'message' => 'You must provide unique ids' ) ) ),
+				'p' => array( 'fromid' => 'Q1', 'toid' => 'Q1' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id', 'message' => 'You must provide unique ids' ) ) ),
 			array( //6 from id is property
-				'p' => array( 'fromid' => '{prop}', 'toid' => '{item}' ),
+				'p' => array( 'fromid' => 'P1', 'toid' => 'Q1' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
 			array( //7 to id is property
-				'p' => array( 'fromid' => '{item}', 'toid' => '{prop}' ),
+				'p' => array( 'fromid' => 'Q1', 'toid' => 'P1' ),
 				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-item' ) ) ),
-			array( //8 bad ignoreconficts (GETVALIDID is replaced by a valid id)
-				'p' => array( 'fromid' => 'GETVALIDID', 'toid' => 'GETVALIDID', 'ignoreconflicts' => 'foo' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
-			array( //9 bad ignoreconficts (GETVALIDID is replaced by a valid id)
-				'p' => array( 'fromid' => 'GETVALIDID', 'toid' => 'GETVALIDID', 'ignoreconflicts' => 'label|foo' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-invalid' ) ) ),
+			array( //8 bad ignoreconficts
+				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'foo' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
+			array( //9 bad ignoreconficts
+				'p' => array( 'fromid' => 'Q2', 'toid' => 'Q2', 'ignoreconflicts' => 'label|foo' ),
+				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-entity-id' ) ) ),
 		);
 	}
 
@@ -265,18 +246,15 @@ class MergeItemsTest extends WikibaseApiTestCase {
 	 * @dataProvider provideExceptionParamsData
 	 */
 	public function testMergeItemsParamsExceptions( $params, $expected ){
-		$this->injectIds( $params );
-		$this->injectIds( $expected );
-
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbmergeitems';
-		if( isset( $params['from'] ) && $params['from'] === 'GETVALIDID' ){
-			$params['from'] = EntityTestHelper::getId( 'Empty' );
+
+		try {
+			$this->callApiModule( $params );
+			$this->fail( 'Expected UsageException!' );
+		} catch ( \UsageException $ex ) {
+			$this->apiModuleTestHelper->assertUsageException( $expected, $ex );
 		}
-		if( isset( $params['to'] ) && $params['to'] === 'GETVALIDID' ){
-			$params['to'] = EntityTestHelper::getId( 'Empty2' );
-		}
-		$this->doTestQueryExceptions( $params, $expected['exception'] );
 	}
 
 	public static function provideExceptionConflictsData() {
@@ -284,10 +262,6 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			array(
 				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 				array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
-			),
-			array(
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
 			),
 			array(
 				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
@@ -303,25 +277,22 @@ class MergeItemsTest extends WikibaseApiTestCase {
 		$expected = array( 'exception' => array( 'type' => 'UsageException', 'code' => 'failed-save' ) );
 
 		// -- prefill the entities --------------------------------------------
-		$this->doApiRequestWithToken( array(
-			'action' => 'wbeditentity',
-			'id' => EntityTestHelper::getId( 'Empty' ) ,
-			'clear' => '',
-			'data' => json_encode( $pre1 ) ) );
-		$this->doApiRequestWithToken( array(
-			'action' => 'wbeditentity',
-			'id' => EntityTestHelper::getId( 'Empty2' ) ,
-			'clear' => '',
-			'data' => json_encode( $pre2 ) ) );
+		$this->entityModificationTestHelper->putEntity( $pre1, 'Q1' );
+		$this->entityModificationTestHelper->putEntity( $pre2, 'Q2' );
 
 		$params = array(
 			'action' => 'wbmergeitems',
-			'fromid' => EntityTestHelper::getId( 'Empty' ),
-			'toid' => EntityTestHelper::getId( 'Empty2' ),
+			'fromid' => 'Q1',
+			'toid' => 'Q2',
 		);
 
 		// -- do the request --------------------------------------------
-		$this->doTestQueryExceptions( $params, $expected['exception'] );
+		try {
+			$this->callApiModule( $params );
+			$this->fail( 'Expected UsageException!' );
+		} catch ( \UsageException $ex ) {
+			$this->apiModuleTestHelper->assertUsageException( $expected, $ex );
+		}
 	}
 
 	public function testMergeNonExistingItem() {
@@ -331,29 +302,12 @@ class MergeItemsTest extends WikibaseApiTestCase {
 			'toid' => 'Q60457978'
 		);
 
-		$expectedException = array( 'type' => 'UsageException', 'code' => 'no-such-entity' );
-		$this->doTestQueryExceptions( $params, $expectedException );
-	}
-
-	/**
-	 * Applies self::$idMap to all data in the given data structure, recursively.
-	 *
-	 * @param $data
-	 *
-	 * @throws LogicException
-	 */
-	protected function injectIds( &$data ) {
-		if ( !self::$hasSetup ) {
-			throw new LogicException( 'setUp() was not yet completed.' );
+		try {
+			$this->callApiModule( $params );
+			$this->fail( 'Expected UsageException!' );
+		} catch ( \UsageException $ex ) {
+			$this->apiModuleTestHelper->assertUsageException( 'no-such-entity', $ex );
 		}
-
-		$idMap = array(
-			'{prop}' => lcfirst( self::$thePropertyId->getSerialization() ),
-			'{item}' => lcfirst( self::$theItemId->getSerialization() ),
-			'{Prop}' => ucfirst( self::$thePropertyId->getSerialization() ),
-			'{Item}' => ucfirst( self::$theItemId->getSerialization() ),
-		);
-
-		EntityTestHelper::injectIds( $data, $idMap );
 	}
+
 }
