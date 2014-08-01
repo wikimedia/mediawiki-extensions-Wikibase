@@ -125,8 +125,8 @@ class MergeItems extends ApiWikibase {
 
 	private function getEntityRevisionFromIdString( $idString ) {
 		try{
-			$entityId = $this->idParser->parse( $idString );
-			return $this->entityRevisionLookup->getEntityRevision( $entityId );
+			$entityId = $this->getIdParser()->parse( $idString );
+			return $this->getEntityRevisionLookup()->getEntityRevision( $entityId );
 		}
 		catch ( EntityIdParsingException $e ){
 			$this->dieError( 'You must provide valid ids' , 'param-invalid' );

@@ -125,7 +125,7 @@ class GetEntities extends ApiWikibase {
 		if( isset( $params['ids'] ) ) {
 			foreach( $params['ids'] as $id ) {
 				try {
-					$ids[] = $this->idParser->parse( $id );
+					$ids[] = $this->getIdParser()->parse( $id );
 				} catch( EntityIdParsingException $e ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieError( "Invalid id: $id", 'no-such-entity' );
@@ -195,9 +195,10 @@ class GetEntities extends ApiWikibase {
 	 */
 	protected function getEntityRevisionsFromEntityIds( $entityIds ) {
 		$revisionArray = array();
+		$lookup = $this->getEntityRevisionLookup();
 
 		foreach ( $entityIds as $entityId ) {
-			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
+			$entityRevision = $lookup->getEntityRevision( $entityId );
 			if ( is_null( $entityRevision ) ) {
 				$this->getResultBuilder()->addMissingEntity( array( 'id' => $entityId->getSerialization() ) );
 			} else {

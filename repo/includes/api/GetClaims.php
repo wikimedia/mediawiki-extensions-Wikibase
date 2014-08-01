@@ -65,7 +65,7 @@ class GetClaims extends ApiWikibase {
 		list( $id, $claimGuid ) = $this->getIdentifiers( $params );
 
 		try {
-			$entityId = $this->idParser->parse( $id );
+			$entityId = $this->getIdParser()->parse( $id );
 		} catch ( EntityIdParsingException $e ) {
 			$this->dieException( $e, 'param-invalid' );
 		}
@@ -158,7 +158,7 @@ class GetClaims extends ApiWikibase {
 
 		if ( isset( $params['property'] ) ){
 			try {
-				$parsedProperty = $this->idParser->parse( $params['property'] );
+				$parsedProperty = $this->getIdParser()->parse( $params['property'] );
 			} catch ( EntityIdParsingException $e ) {
 				$this->dieException( $e, 'param-invalid' );
 			}

@@ -166,11 +166,12 @@ class EditEntity extends ModifyEntity {
 		$data = json_decode( $params['data'], true );
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
+		$revisionLookup = $this->getEntityRevisionLookup();
 		$exists = $this->entityExists( $entity );
 
 		if ( $params['clear'] ) {
 			if( $params['baserevid'] && $exists ) {
-				$latestRevision = $this->entityRevisionLookup->getLatestRevisionId( $entity->getId() );
+				$latestRevision = $revisionLookup->getLatestRevisionId( $entity->getId() );
 				if( !$baseRevId === $latestRevision ) {
 					wfProfileOut( __METHOD__ );
 					$this->dieError(
@@ -563,7 +564,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	protected function validateDataProperties( $data, Entity $entity, $revId = 0 ) {
 		$entityId = $entity->getId();
-		$title = $entityId === null ? null : $this->titleLookup->getTitleForId( $entityId );
+		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 
 		$allowedProps = array(
 			// ignored props
@@ -687,7 +688,7 @@ class EditEntity extends ModifyEntity {
 				);
 			}
 
-			$dataId = $this->idParser->parse( $data['id'] );
+			$dataId = $this->getIdParser()->parse( $data['id'] );
 			if( !$entityId->equals( $dataId ) ) {
 				$this->dieError(
 					'Invalid field used in call: "id", must match id parameter',

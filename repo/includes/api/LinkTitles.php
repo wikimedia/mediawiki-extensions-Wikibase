@@ -60,6 +60,8 @@ class LinkTitles extends ApiWikibase {
 	public function execute() {
 		wfProfileIn( __METHOD__ );
 
+		$lookup = $this->getEntityRevisionLookup();
+
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -105,7 +107,7 @@ class LinkTitles extends ApiWikibase {
 		elseif ( $fromId === null && $toId !== null ) {
 			// reuse to-site's item
 			/** @var Item $item */
-			$itemRev = $this->entityRevisionLookup->getEntityRevision( $toId );
+			$itemRev = $lookup->getEntityRevision( $toId );
 			$item = $itemRev->getEntity();
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
@@ -115,7 +117,7 @@ class LinkTitles extends ApiWikibase {
 		elseif ( $fromId !== null && $toId === null ) {
 			// reuse from-site's item
 			/** @var Item $item */
-			$itemRev = $this->entityRevisionLookup->getEntityRevision( $fromId );
+			$itemRev = $lookup->getEntityRevision( $fromId );
 			$item = $itemRev->getEntity();
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );
