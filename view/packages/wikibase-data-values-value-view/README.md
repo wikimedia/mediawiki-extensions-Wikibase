@@ -109,6 +109,10 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.9 (dev)
+* $.ui.suggester updates "lang" and "dir" attribute of its menu whenever repositioning the menu.
+* $.ui.suggester issues "error" event in case of an error.
+
 ### 0.6.8 (2014-07-29)
 * Only attempt to close a suggester if it's open
 
@@ -121,8 +125,8 @@ Other methods an Expert needs to provide:
 * Suggesters z-index is now dynamically calculated with it's position on screen
 
 ### 0.6.5 (2014-07-17)
-* Fixed the Qunit tests
-* Don't underline ooMenu/ sugester items
+* Fixed the QUnit tests
+* Don't underline ooMenu/ suggester items
 * Various small bug fixes
 
 ### 0.6.4 (2014-07-02)
