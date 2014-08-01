@@ -51,6 +51,14 @@ class MockRepository implements
 	protected $entities = array();
 
 	/**
+	 * Log entries. Each entry has the following fields:
+	 * revision, entity, summary, user
+	 *
+	 * @var array
+	 */
+	protected $log = array();
+
+	/**
 	 * Entity id serialization => EntityRedirect
 	 *
 	 * @var EntityRedirect[]
@@ -681,7 +689,35 @@ class MockRepository implements
 			throw new StorageException( $status );
 		}
 
-		return $this->putEntity( $entity, 0, 0, $user );
+		$entityRevision = $this->putEntity( $entity, 0, 0, $user );
+
+		$this->putLog( $entityRevision->getRevision(), $entity->getId(), $summary, $user->getName() );
+		return $entityRevision;
+	}
+
+	/**
+	 * @see EntityStore::saveRedirect
+	 *
+	 * @param EntityRedirect $redirect
+	 * @param string $summary
+	 * @param User $user
+	 * @param int $flags
+	 * @param bool $baseRevId
+	 *
+	 * @throws StorageException Always
+	 * @return int Never
+	 */
+	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false ) {
+		if ( $redirect->getEntityId()->getEntityType() !== Item::ENTITY_TYPE ) {
+			throw new StorageException( 'Entity type does not support redirects: ' . $redirect->getEntityId()->getEntityType() );
+		}
+
+		$this->putRedirect( $redirect );
+
+		$revId = ++$this->maxRev;
+		$this->putLog( $revId, $redirect->getEntityId(), $summary, $user->getName() );
+
+		return $revId;
 	}
 
 	/**
@@ -765,29 +801,65 @@ class MockRepository implements
 		$entity->setId( $this->maxId );
 	}
 
-	/**
-	 * @see EntityStore::saveRedirect
-	 *
-	 * @param EntityRedirect $redirect
-	 * @param string $summary
-	 * @param User $user
-	 * @param int $flags
-	 * @param bool $baseRevId
-	 *
-	 * @throws StorageException Always
-	 * @return int Never
-	 */
-	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false ) {
-		if ( $redirect->getEntityId()->getEntityType() !== Item::ENTITY_TYPE ) {
-			throw new StorageException( 'Entity type does not support redirects: ' . $redirect->getEntityId()->getEntityType() );
-		}
-
-		$this->putRedirect( $redirect );
-	}
-
 	private function parseId( $id ) {
 		$parser = new BasicEntityIdParser();
 		return $parser->parse( $id );
 	}
 
+	private function putLog( $revId, $entityId, $summary, $user ) {
+		if ( $entityId instanceof EntityId ) {
+			$entityId = $entityId->getSerialization();
+		}
+
+		if ( $user instanceof User ) {
+			$user = $user->getName();
+		}
+
+		$this->log[$revId] = array(
+			'revision' => intval( $revId ),
+			'entity' => strval( $entityId ),
+			'summary' => strval( $summary ),
+			'user' => strval( $user ),
+		);
+	}
+
+	/**
+	 * Returns the log entry for the given revision Id.
+	 *
+	 * @param $revisionId
+	 *
+	 * @return array|null An associative array containing the fields
+	 * 'revision', 'entity', 'summary', and 'user'.
+	 */
+	public function getLogEntry( $revisionId ) {
+		return isset( $this->log[ $revisionId ] ) ? $this->log[ $revisionId ] : null;
+	}
+
+	/**
+	 * Returns the newest (according to the revision id) log entry
+	 * for the given entity.
+	 *
+	 * @param EntityId|string $entityId
+	 *
+	 * @return array|null An associative array containing the fields
+	 * 'revision', 'entity', 'summary', and 'user'.
+	 */
+	public function getLatestLogEntryFor( $entityId ) {
+		if ( $entityId instanceof EntityId ) {
+			$entityId = $entityId->getSerialization();
+		}
+
+		// log entries by revision id, largest id first.
+		$log = $this->log;
+		ksort( $log );
+		$log = array_reverse( $log );
+
+		foreach ( $log as $entry ) {
+			if ( $entry['entity'] === $entityId ) {
+				return $entry;
+			}
+		}
+
+		return null;
+	}
 }
