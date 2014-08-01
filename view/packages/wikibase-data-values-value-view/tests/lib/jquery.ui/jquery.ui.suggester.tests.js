@@ -166,4 +166,43 @@
 		} );
 	} );
 
+	QUnit.test( 'Error', 2, function( assert ) {
+		var $suggester = newTestSuggester( {
+				source: function( term ) {
+					var deferred = new $.Deferred();
+					return deferred.reject( 'error string' ).promise();
+				}
+			} ),
+			suggester = $suggester.data( 'suggester' );
+
+		$suggester.on( 'suggestererror', function( event, errorString ) {
+			assert.equal(
+				errorString,
+				'error string',
+				'Validated expected error string.'
+			);
+		} );
+
+		$suggester.val( 'a' );
+
+		QUnit.stop();
+
+		suggester.search()
+		.done( function( suggestions ) {
+			assert.ok(
+				false,
+				'Searching was successful although it should have failed.'
+			);
+		} )
+		.fail( function() {
+			assert.ok(
+				true,
+				'Searching failed as expected.'
+			);
+		} )
+		.always( function() {
+			QUnit.start();
+		} );
+	} );
+
 }( jQuery, QUnit ) );

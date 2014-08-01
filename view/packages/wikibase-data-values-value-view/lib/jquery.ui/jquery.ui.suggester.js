@@ -74,6 +74,13 @@
  *        Triggered when the suggester's value has changed.
  *        - {jQuery.Event}
  *
+ * @event error
+ *        Triggered whenever an error occurred while gathering suggestions. This may happen only
+ *        when using a function as source. The {string} parameter is forwarded from the rejected
+ *        promise returned by the source function.
+ *        - {jQuery.Event}
+ *        - {string}
+ *
  * @dependency jQuery.ui.ooMenu
  * @dependency jQuery.ui.position
  */
@@ -419,7 +426,7 @@
 			} )
 			.fail( function( message ) {
 				self.element.addClass( 'ui-suggester-error' );
-				// TODO: Display error message.
+				self._trigger( 'error', null, [message] );
 			} )
 			.always( function() {
 				if( --self._pending === 0 ) {
@@ -506,8 +513,7 @@
 		 *         Resolved parameters:
 		 *         - {string[]} suggestions
 		 *         - {string} requestTerm
-		 *         Rejected parameters:
-		 *         - {string}
+		 *         Promise may not be rejected.
 		 */
 		_getSuggestionsFromArray: function( term, source ) {
 			var deferred = $.Deferred();
