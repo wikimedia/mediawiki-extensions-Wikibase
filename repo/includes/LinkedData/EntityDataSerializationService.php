@@ -463,8 +463,8 @@ class EntityDataSerializationService {
 	public function createApiSerializer( $formatName ) {
 		//MediaWiki formats
 		$api = $this->newApiMain( $formatName );
-		$formats = $api->getFormats();
-		if ( $formatName !== null && array_key_exists( $formatName, $formats ) ) {
+		$formatNames = $api->getModuleManager()->getNames( 'format' );
+		if ( $formatName !== null && in_array( $formatName, $formatNames ) ) {
 			return $api->createPrinterByName( $formatName );
 		}
 
