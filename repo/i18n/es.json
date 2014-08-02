@@ -200,7 +200,7 @@
 	"wikibase-entitydata-title": "Datos de la entidad",
 	"wikibase-entitydata-text": "Esta página proporciona una interfaz de datos enlazados a los valores de la entidad. Por favor proporciona el identificador ID de la entidad en la dirección URL, utilizando la sintaxis de la subpágina.",
 	"wikibase-mylanguagefallbackchain-babel": "Tu puedes editar esto poniendo <nowiki>{{#babel: }}</nowiki> en {{GENDER:$1|tu}} [[Special:MyPage|página de usuario]].",
-	"wikibase-api-target-not-empty": "La redirección sólo se pueden crear en la parte superior de una entidad vacía.",
+	"wikibase-api-target-not-empty": "Solo se puede crear la redirección sobre una entidad vacía.",
 	"wikibase-api-target-is-redirect": "El destino de la redirección no debe ser una redirección.",
 	"wikibase-api-target-is-incompatible": "Intento de redirigir a una entidad de un tipo diferente.",
 	"wikibase-api-cant-redirect": "No se puede crear la redirección (posiblemente porque redirige entre estos tipos de entidad no son compatibles para nada).",

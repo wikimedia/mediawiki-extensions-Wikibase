@@ -20,7 +20,8 @@
 			"乌拉跨氪",
 			"Hudafu",
 			"Mywood",
-			"Impersonator 1"
+			"Impersonator 1",
+			"NigelSoft"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -115,6 +116,11 @@
 	"wikibase-itembytitle-lookup-page": "页面：",
 	"wikibase-itembytitle-submit": "搜索",
 	"wikibase-itembytitle-create": "您也可以[{{fullurl:Special:NewItem|site=$1&page=$2}} 创建项]。",
+	"special-gotolinkedpage": "转到链接的页面",
+	"wikibase-gotolinkedpage-lookup-fieldset": "根据站点和项前往连接的页面",
+	"wikibase-gotolinkedpage-lookup-site": "站点：",
+	"wikibase-gotolinkedpage-lookup-item": "项目 id：",
+	"wikibase-gotolinkedpage-submit": "前往",
 	"special-itemdisambiguation": "项消歧义",
 	"wikibase-itemdisambiguation-lookup-fieldset": "按语言和标签搜索项",
 	"wikibase-itemdisambiguation-lookup-language": "语言：",
