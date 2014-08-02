@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_a1df210f",
+        "filename": "lib/resources/wikibase.Site.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2014-08-02T06:40:17Z",
+      "side": 1,
+      "message": "The comment doesn\u0027t fit to the changed function.",
+      "revId": "443a2be0f45c8d650fadf75900fa2bc0e4740832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_c306b888",
         "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
         "patchSetId": 5
