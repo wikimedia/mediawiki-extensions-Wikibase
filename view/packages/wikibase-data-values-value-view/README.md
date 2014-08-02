@@ -12,9 +12,9 @@ ValueView introduces the <code>jQuery.valueview</code> widget which may be used 
 
 Experts are widgets that deal with editing data values. An expert provides the functionality to edit a specific data value type or data values suitable for a certain data type. <code>jQuery.valueview.Expert</code> is the base constructor for such experts.
 
-### jQuery.valueview.ExpertFactory
+### jQuery.valueview.ExpertStore
 
-Experts are managed by <code>jQuery.valueview.ExpertFactory</code> instance which provides its experts to <code>jQuery.valueview</code>.
+Experts are managed by <code>jQuery.valueview.ExpertStore</code> instance which provides its experts to <code>jQuery.valueview</code>.
 
 ### jQuery.valueview.ViewState
 
@@ -22,17 +22,20 @@ Experts are managed by <code>jQuery.valueview.ExpertFactory</code> instance whic
 
 ## Usage
 
-When using <code>jQuery.valueview</code> for handling a data value of some sort, a <code>jQuery.valueview.ExpertFactory</code> with knowledge about an expert dedicated to the used data value type is required and can be set up as follows:
+The following assumes you also have ```data-values/data-types```,  ```data-values/data-values``` and ```data-values/javascript``` installed.
+
+When using <code>jQuery.valueview</code> for handling a data value of some sort, a <code>jQuery.valueview.ExpertStore</code> with knowledge about an expert dedicated to the used data value type is required and can be set up as follows:
 
 ```javascript
 var dv = dataValues;
 var vv = jQuery.valueview;
-var experts = new vv.ExpertFactory();
+var dt = dataTypes;
+var experts = new vv.ExpertStore();
 
 var stringValue = new dv.StringValue( 'foo' );
 
 // Consider this a data value using the "string" data value type internally:
-var urlDataType = dataTypes.getDataType( 'url' );
+var urlDataType = new dt.DataType( 'url', dv.StringValue.TYPE );
 
 experts.registerDataValueExpert( vv.experts.StringValue, dv.StringValue.TYPE );
 
@@ -40,28 +43,21 @@ console.log(
   experts.getExpert( stringValue.getType() ) === experts.getExpert( urlDataType.getDataValueType(), urlDataType.getId() )
 );
 // true because "url" data type's data value type is "string"; The string expert will be used as fallback.
-
-experts.registerDataTypeExpert( vv.experts.UrlType, urlDataType.getId() );
-
-console.log(
-  experts.getExpert( stringValue.getType() ) === experts.getExpert( urlDataType.getDataValueType(), urlDataType.getId() )
-);
-// false because we now have a dedicated expert registered for the "url" data type.
 ```
 
-The <code>jQuery.valueview.ExpertFactory</code> can now be injected into a new <code>jQuery.valueview</code> which will then be able to edit string data values.
+The <code>jQuery.valueview.ExpertStore</code> can now be injected into a new <code>jQuery.valueview</code> which will then be able to edit string data values.
 
 ```javascript
 var $subject = $( '<div/>' ).appendTo( $( 'body' ).empty() );
 
 // In addition to the expert factory, value parser and value formatter factories need to be provided. The feature the same mechanisms than the expert factory. For this example, we just initialize them with the string parser/formatter as default parser/formatter.
-var parsers = new valueParsers.ValueParserFactory( valueParsers.StringParser );
-var formatters = new valueParsers.ValueFormatterFactory( valueFormatters.StringFormatter );
+var parsers = new valueParsers.ValueParserStore( valueParsers.StringParser );
+var formatters = new valueFormatters.ValueFormatterStore( valueFormatters.StringFormatter );
 
 $subject.valueview( {
-  expertProvider: experts,
-  valueParserProvider: parsers,
-  valueFormatterProvider: formatters,
+  expertStore: experts,
+  parserStore: parsers,
+  formatterStore: formatters,
   value: new dv.StringValue( 'text' )
 } );
 
@@ -79,7 +75,7 @@ Setting the view to a data value it cannot handle because of lacking a suitable 
 
 ## Running as MediaWiki extension
 
-<code>mediaWiki.ext.valueView</code> may be used to initialize ValueView as MediaWiki extension. Loading <code>mediaWiki.ext.valueView</code> will initialize and fill a <code>jQuery.valueview.ExpertFactory</code> which is issued to <code>jQuery.valueview</code> as default expert provider. Consequently, no custom experts for basic data values and data types need to be registered and <code>jQuery.valueview</code> may be used without passing a custom <code>jQuery.ExpertFactory</code>.
+<code>mediaWiki.ext.valueView</code> may be used to initialize ValueView as MediaWiki extension. Loading <code>mediaWiki.ext.valueView</code> will initialize and fill a <code>jQuery.valueview.ExpertStore</code> which is issued to <code>jQuery.valueview</code> as default expert provider. Consequently, no custom experts for basic data values and data types need to be registered and <code>jQuery.valueview</code> may be used without passing a custom <code>jQuery.ExpertStore</code>.
 
 ## Architecture
 
