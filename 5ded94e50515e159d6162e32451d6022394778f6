@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_b5a51b02",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-03T10:36:39Z",
+      "side": 1,
+      "message": "\"Always\", \"never\"? From what I can see this is not true.",
+      "revId": "5ded94e50515e159d6162e32451d6022394778f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_95a8dfd8",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-03T10:36:39Z",
+      "side": 1,
+      "message": "Documentation missing. Is null allowed? Is this the reason the type hints are missing?",
+      "revId": "5ded94e50515e159d6162e32451d6022394778f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f5b60338",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-03T10:36:39Z",
+      "side": 1,
+      "message": "The type casts are not really helpful. If one of the parameters (e.g. the entity) is null it should be stored as null and not forced to be an empty string or whatever the string cast does. Please remove, maybe except for the first intval.",
+      "revId": "5ded94e50515e159d6162e32451d6022394778f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_55b6f73c",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-03T10:36:39Z",
+      "side": 1,
+      "message": "You know there is a krsort, do you? ;-)",
+      "revId": "5ded94e50515e159d6162e32451d6022394778f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_15bcef18",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-03T10:36:39Z",
+      "side": 1,
+      "message": "Either add a type cast here or remove them above (I prefer the later).",
+      "revId": "5ded94e50515e159d6162e32451d6022394778f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
