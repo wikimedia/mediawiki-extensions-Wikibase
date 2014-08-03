@@ -14,16 +14,6 @@ if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
 
 define( 'WIKIBASE_DATAMODEL_VERSION', '1.0 alpha' );
 
-// Temporary global to migrate away from DataValueFactory::singleton.
-// It should not be used outside this component and should not be used
-// for any code that did not before use DataValueFactory::singleton.
-$GLOBALS['evilDataValueMap'] = array(
-	'boolean' => 'DataValues\BooleanValue',
-	'number' => 'DataValues\NumberValue',
-	'string' => 'DataValues\StringValue',
-	'unknown' => 'DataValues\UnknownValue',
-);
-
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {
 		require_once __DIR__ . '/WikibaseDataModel.mw.php';
