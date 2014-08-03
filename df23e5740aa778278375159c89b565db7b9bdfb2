@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_b58cfb89",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-03T10:42:38Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "df23e5740aa778278375159c89b565db7b9bdfb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
