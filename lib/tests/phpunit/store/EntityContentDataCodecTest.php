@@ -37,7 +37,7 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 		$idParser = new BasicEntityIdParser();
 
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ), $idParser );
+		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( array() ), $idParser );
 
 		$this->codec = new EntityContentDataCodec(
 			$idParser,
