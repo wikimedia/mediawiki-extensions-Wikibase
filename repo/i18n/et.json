@@ -138,7 +138,7 @@
 	"wikibase-setaliases-warning-remove": "Kas soovid tõesti kõik olemi [[$1]] rööpkujud eemaldada?",
 	"special-setsitelink": "Võrgukohalingi määramine",
 	"wikibase-setsitelink-introfull": "Määrad $2 keeles üksuse [[$1]] võrgukohalinki.",
-	"wikibase-setsitelink-intro": "See vorm võimaldab määrata olemi võrgukohalingi. Sul tuleb ära tuua olemi identifikaator (nt Q23), võrgukoha identifikaator (nt \"et\") ja soovitud võrgukohalink.",
+	"wikibase-setsitelink-intro": "See vorm võimaldab määrata üksuse võrgukohalingi. Sul tuleb ära tuua üksuse identifikaator (nt Q23), võrgukoha identifikaator (nt \"et\") ja soovitud võrgukohalink.",
 	"wikibase-setsitelink-site": "Võrgukoha identifikaator:",
 	"wikibase-setsitelink-label": "Võrgukohalink:",
 	"wikibase-setsitelink-badges": "Märgistused:",

@@ -21,6 +21,7 @@
 	"wikibase-label-edit-placeholder-language-aware": "skriv inn merkelapp på $1",
 	"wikibase-description-empty": "Inga skildring er definert enno",
 	"wikibase-description-edit-placeholder": "skriv inn skildring",
+	"wikibase-description-edit-placeholder-language-aware": "skriv inn ei skildring på $1",
 	"wikibase-sitelink-site-edit-placeholder": "nettstad",
 	"wikibase-sitelink-page-edit-placeholder": "side",
 	"wikibase-alias-edit-placeholder": "skriv inn tilleggsnamn",
