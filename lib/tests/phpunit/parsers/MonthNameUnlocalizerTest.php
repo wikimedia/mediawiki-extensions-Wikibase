@@ -15,10 +15,11 @@ use Wikibase\Lib\Parsers\MonthNameUnlocalizer;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  */
 class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 
-	public function provideUnlocalize() {
+	public function localizedDateProvider() {
 		$testCases = array(
 			// Nominative month names.
 			array( '1 Juli 2013', 'de', '1 July 2013' ),
@@ -42,6 +43,7 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			// No localized month name found.
 			array( '16 FooBarBarxxx 1999', 'bar', '16 FooBarBarxxx 1999' ),
 			array( '16 Martii 1999', 'de', '16 Martii 1999' ),
+			array( 'Jann 2013', 'de', 'Jann 2013' ),
 			array( '16 May 1999', 'de', '16 May 1999' ),
 			array( '16 Dezember 1999', 'la', '16 Dezember 1999' ),
 
@@ -79,12 +81,15 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 		$languageCodes = array( 'war', 'ceb', 'uk', 'ru', 'de' );
 		$en = Language::factory( 'en' );
 
-		foreach ( $languageCodes as $from ) {
-			$fromLang = Language::factory( $from );
+		foreach ( $languageCodes as $languageCode ) {
+			$language = Language::factory( $languageCode );
+
 			for ( $i = 1; $i <= 12; $i++ ) {
-				$testCases[] = array( $fromLang->getMonthName( $i ), $from, $en->getMonthName( $i ) );
-				$testCases[] = array( $fromLang->getMonthNameGen( $i ), $from, $en->getMonthName( $i ) );
-				$testCases[] = array( $fromLang->getMonthAbbreviation( $i ), $from, $en->getMonthName( $i ) );
+				$expected = $en->getMonthName( $i );
+
+				$testCases[] = array( $language->getMonthName( $i ), $languageCode, $expected );
+				$testCases[] = array( $language->getMonthNameGen( $i ), $languageCode, $expected );
+				$testCases[] = array( $language->getMonthAbbreviation( $i ), $languageCode, $expected );
 			}
 		}
 
@@ -92,18 +97,48 @@ class MonthNameUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider provideUnlocalize
-	 *
-	 * @param $localized
-	 * @param $languageCode
-	 * @param $expected
+	 * @dataProvider localizedDateProvider
+	 * @param string $date
+	 * @param string $languageCode
+	 * @param string $expected
 	 */
-	public function testUnlocalize( $localized, $languageCode, $expected ) {
-		$monthUnlocalizer = new MonthNameUnlocalizer();
-
-		$actual = $monthUnlocalizer->unlocalize( $localized, $languageCode );
+	public function testUnlocalize( $date, $languageCode, $expected ) {
+		$unlocalizer = new MonthNameUnlocalizer();
+		$actual = $unlocalizer->unlocalize( $date, $languageCode );
 
 		$this->assertEquals( $expected, $actual );
+	}
+
+	public function languageChainProvider() {
+		return array(
+			// First language contains the word.
+			array( 'Feb.', array( 'de', 'la' ), 'February' ),
+
+			// Second language contains the word.
+			array( 'February', array( 'de', 'en' ), 'February' ),
+			array( 'Februar', array( 'en', 'de' ), 'February' ),
+			array( 'Feb', array( 'de', 'la' ), 'February' ),
+			array( 'Jun', array( 'de', 'ms' ), 'June' ),
+
+			// No language contains the word.
+			array( 'Jun', array( 'de', 'la' ), 'Jun' ),
+		);
+	}
+
+	/**
+	 * @dataProvider languageChainProvider
+	 * @param string $date
+	 * @param array $languageCodes
+	 * @param string $expected
+	 */
+	public function testUnlocalize_withLanguageChains( $date, array $languageCodes, $expected ) {
+		$unlocalizer = new MonthNameUnlocalizer();
+
+		foreach ( $languageCodes as $languageCode ) {
+			$date = $unlocalizer->unlocalize( $date, $languageCode );
+		}
+
+		$this->assertEquals( $expected, $date );
 	}
 
 }
