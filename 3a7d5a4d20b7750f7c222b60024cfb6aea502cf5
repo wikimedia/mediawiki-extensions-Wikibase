@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f55723f7",
+        "filename": "lib/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-03T10:23:06Z",
+      "side": 1,
+      "message": "What about this?\n\ndir \u003d ( $.uls \u0026\u0026 $.uls.data.getDir( lang ) )\n|| this.getSubject().css( \u0027direction\u0027 )\n|| \u0027auto\u0027;",
+      "revId": "3a7d5a4d20b7750f7c222b60024cfb6aea502cf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
