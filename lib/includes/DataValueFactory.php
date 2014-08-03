@@ -21,7 +21,18 @@ class DataValueFactory {
 	 *
 	 * @var string[]
 	 */
-	protected $values = array();
+	protected $values = array(
+		'boolean' => 'DataValues\BooleanValue',
+		'number' => 'DataValues\NumberValue',
+		'string' => 'DataValues\StringValue',
+		'unknown' => 'DataValues\UnknownValue',
+		'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+		'monolingualtext' => 'DataValues\MonolingualTextValue',
+		'multilingualtext' => 'DataValues\MultilingualTextValue',
+		'quantity' => 'DataValues\QuantityValue',
+		'time' => 'DataValues\TimeValue',
+		'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+	);
 
 	/**
 	 * Singleton.
@@ -36,10 +47,6 @@ class DataValueFactory {
 
 		if ( $instance === null ) {
 			$instance = new DataValueFactory();
-
-			foreach ( $GLOBALS['evilDataValueMap'] as $type => $class ) {
-				$instance->registerDataValue( $type, $class );
-			}
 		}
 
 		return $instance;
