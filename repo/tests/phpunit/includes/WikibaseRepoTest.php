@@ -276,4 +276,9 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		return new WikibaseRepo( $settings );
 	}
 
+	public function testGetApiHelperFactory() {
+		$factory = $this->getDefaultInstance()->getApiHelperFactory();
+		$this->assertInstanceOf( 'Wikibase\Api\ApiHelperFactory', $factory );
+	}
+
 }

@@ -48,15 +48,9 @@ class CreateRedirectModule extends ApiBase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$errorReporter = new ApiErrorReporter(
-			$this,
-			WikibaseRepo::getDefaultInstance()->getExceptionLocalizer(),
-			$this->getLanguage()
-		);
-
 		$this->setServices(
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			$errorReporter,
+			WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getErrorReporter( $this ),
 			new RedirectCreationInteractor(
 				WikibaseRepo::getDefaultInstance()->getEntityRevisionLookup( 'uncached' ),
 				WikibaseRepo::getDefaultInstance()->getEntityStore(),
