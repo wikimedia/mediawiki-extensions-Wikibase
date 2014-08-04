@@ -97,8 +97,9 @@
 		 * @return {string|null} The current value
 		 */
 		getValue: function() {
-			return this._inverseLanguagesMap ? this._inverseLanguagesMap[ this.$selector.val() ] : this.$selector.val();
-		},
+			var key = this.$selector.val();
+			return ( this._inverseLanguagesMap && this._inverseLanguagesMap[key] ) || key;
+		}
 	} );
 
 	function getLanguagesMaps( getMsg ) {
