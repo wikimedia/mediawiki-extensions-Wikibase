@@ -62,5 +62,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} objekt-ID",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-property-render-error": "Misslyckades att rendera egenskapen $1: $2",
-	"wikibase-otherprojects": "Andra projekt"
+	"wikibase-otherprojects": "Andra projekt",
+	"wikibase-otherprojects-beta-message": "Sidofält för andra projekt",
+	"wikibase-otherprojects-beta-description": "Lägger till ett \"{{int:wikibase-otherprojects}}\"-avsnitt till sidofältet som innehåller länkar till andra Wikimedia-projekten utifrån {{WBREPONAME}}-data."
 }

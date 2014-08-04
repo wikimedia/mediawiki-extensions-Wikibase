@@ -75,6 +75,8 @@
 	"wikibase-itembytitle-lookup-page": "Страна:",
 	"wikibase-itembytitle-submit": "Претражи",
 	"wikibase-itembytitle-create": "Можете такође и [{{fullurl:Special:NewItem|site=$1&page=$2}} направити ставку].",
+	"wikibase-gotolinkedpage-lookup-site": "Сајт:",
+	"wikibase-gotolinkedpage-submit": "Иди",
 	"special-itemdisambiguation": "Вишезначна ставка",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Претрага ставки према језику и називу",
 	"wikibase-itemdisambiguation-lookup-language": "Језик:",
