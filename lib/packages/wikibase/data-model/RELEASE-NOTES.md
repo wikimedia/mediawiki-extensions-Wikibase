@@ -34,6 +34,7 @@ Removal of `toArray` and `newFromArray`:
 
 Other breaking changes:
 
+* Removed the global variable `evilDataValueMap`
 * `Claim` and `Statement` no longer implement `Serializable`
 * Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
 * Removed `Fingerprint::getAliases`
