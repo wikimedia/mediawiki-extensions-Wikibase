@@ -34,7 +34,6 @@ Removal of `toArray` and `newFromArray`:
 
 Other breaking changes:
 
-* Removed the global variable `evilDataValueMap`
 * `Claim` and `Statement` no longer implement `Serializable`
 * Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
 * Removed `Fingerprint::getAliases`
@@ -48,6 +47,7 @@ Other breaking changes:
 * `HashArray` and `SnakList` no longer take an optional parameter in `getHash`
 * Calling `clear` on an `Item` will now cause its statements to be removed
 * `SiteLinkList::addNewSiteLink` no longer the `SiteLinkList` instance
+* Removed the global variable `evilDataValueMap`
 
 #### Additions
 
