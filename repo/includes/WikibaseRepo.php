@@ -14,6 +14,7 @@ use SiteStore;
 use StubObject;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Api\ApiHelperFactory;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Claim\ClaimGuidParser;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -906,4 +907,15 @@ class WikibaseRepo {
 		return array( 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer', 'isBlobUsingLegacyFormat' );
 	}
 
+	/**
+	 * @return ApiHelperFactory
+	 */
+	public function getApiHelperFactory() {
+		return new ApiHelperFactory(
+			$this->getEntityTitleLookup(),
+			$this->getExceptionLocalizer(),
+			$this->getPropertyDataTypeLookup(),
+			$this->getEntityFactory()
+		);
+	}
 }
