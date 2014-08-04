@@ -116,6 +116,7 @@ $.widget( 'ui.ooMenu', {
 	 */
 	_refresh: function() {
 		this.element.empty();
+		this.element.scrollTop( 0 );
 		for( var i = 0; i < this.options.items.length; i++ ) {
 			this._appendItem( this.options.items[i] );
 		}
