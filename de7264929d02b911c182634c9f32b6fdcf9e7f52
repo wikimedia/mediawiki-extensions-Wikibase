@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_11563c5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-04T15:44:07Z",
+      "side": 1,
+      "message": "Not very informative",
+      "revId": "de7264929d02b911c182634c9f32b6fdcf9e7f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d14b14b2",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-04T15:44:07Z",
+      "side": 1,
+      "message": "No newlines here",
+      "revId": "de7264929d02b911c182634c9f32b6fdcf9e7f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b1c64818",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-04T15:44:07Z",
+      "side": 1,
+      "message": "Method not needed like this",
+      "revId": "de7264929d02b911c182634c9f32b6fdcf9e7f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_51cf242c",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-04T15:44:07Z",
+      "side": 1,
+      "message": "If these methods are only called from here, please make them private. Also please put them below the user - that makes it easier to find out what this test class is doing.",
+      "revId": "de7264929d02b911c182634c9f32b6fdcf9e7f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_31da58ed",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-04T15:44:07Z",
+      "side": 1,
+      "message": "Probably want to config your editor to not save tailing spaces. What editor are you using?",
+      "revId": "de7264929d02b911c182634c9f32b6fdcf9e7f52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
