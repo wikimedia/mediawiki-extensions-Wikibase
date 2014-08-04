@@ -463,7 +463,7 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 	 * ClaimList::getBestClaims instead.
 	 *
 	 * @see Claims::getClaimsForProperty
-	 * @see ClaimList::getBestClaims
+	 * @see ClaimList::getBestClaimPerProperty
 	 *
 	 * @since 0.7
 	 *
