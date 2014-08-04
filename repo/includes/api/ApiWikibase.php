@@ -13,11 +13,9 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EditEntity;
-use Wikibase\EntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -116,11 +114,9 @@ abstract class ApiWikibase extends ApiBase {
 
 		$this->exceptionLocalizer = WikibaseRepo::getDefaultInstance()->getExceptionLocalizer();
 
-		$this->errorReporter = new ApiErrorReporter(
-			$this,
-			$this->exceptionLocalizer,
-			$this->getLanguage()
-		);
+		$this->errorReporter = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getErrorReporter( $this );
+
+		$this->resultBuilder = WikibaseRepo::getDefaultInstance()->getApiHelperFactory()->getResultBuilder( $this );
 	}
 
 	/**
@@ -173,20 +169,6 @@ abstract class ApiWikibase extends ApiBase {
 	 * @return ResultBuilder
 	 */
 	protected function getResultBuilder() {
-		if( !isset( $this->resultBuilder ) ) {
-
-			$serializerFactory = new SerializerFactory(
-				null,
-				$this->dataTypeLookup,
-				EntityFactory::singleton()
-			);
-
-			$this->resultBuilder = new ResultBuilder(
-				$this->getResult(),
-				$this->titleLookup,
-				$serializerFactory
-			);
-		}
 		return $this->resultBuilder;
 	}
 
