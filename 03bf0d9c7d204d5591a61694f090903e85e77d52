@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_05a26f95",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2014-08-05T15:07:12Z",
+      "side": 1,
+      "message": "Why is here not used api.getToken( \u0027edit\u0027 )?",
+      "revId": "03bf0d9c7d204d5591a61694f090903e85e77d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
