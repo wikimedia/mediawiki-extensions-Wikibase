@@ -46,6 +46,9 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 
 		$this->setMwGlobals( 'wgUser', $user );
+
+		// Remove handlers for the "OutputPageParserOutput" hook
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => array() ) );
 	}
 
 	public function testActionForPage() {
