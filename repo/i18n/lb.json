@@ -78,6 +78,7 @@
 	"wikibase-itembytitle-submit": "Sichen",
 	"wikibase-itembytitle-create": "Dir kënnt och [{{fullurl:Special:NewItem|site=$1&page=$2}} en Element uleeën].",
 	"special-gotolinkedpage": "Op déi verlinkt Säit goen",
+	"wikibase-gotolinkedpage-lookup-fieldset": "Op déi verlinkt Säit, no Site an Element, goen",
 	"wikibase-gotolinkedpage-lookup-site": "Site:",
 	"wikibase-gotolinkedpage-lookup-item": "Nummer vum Element:",
 	"wikibase-gotolinkedpage-submit": "Lass",

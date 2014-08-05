@@ -6,7 +6,8 @@
 			"Nike",
 			"Silvonen",
 			"Stryn",
-			"VezonThunder"
+			"VezonThunder",
+			"Pxos"
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
@@ -16,7 +17,7 @@
 	"wikibase-after-page-move-queued": "Tähän sivuun liitetty [$1 {{WBREPONAME}}-kohde] päivitetään pian automaattisesti.",
 	"wikibase-comment-add": "{{WBREPONAME}}-kohde luotu.",
 	"wikibase-comment-remove": "Sivuun liittyvä {{WBREPONAME}}-kohde poistettu. Kielilinkit poistettu.",
-	"wikibase-comment-linked": "{{WBREPONAME}}-kohde liitettiin tähän sivuun.",
+	"wikibase-comment-linked": "{{WBREPONAME}}-kohteesta on tehty linkki tähän sivuun.",
 	"wikibase-comment-unlink": "Tämä sivu ei ole enää liitettynä {{WBREPONAME}}-kohteeseen. Kielilinkit poistettu.",
 	"wikibase-comment-restore": "Sivuun liittyvä {{WBREPONAME}}-kohde palautettu. Kielilinkit palautettu.",
 	"wikibase-comment-update": "{{WBREPONAME}}-kohdetta muutettu",

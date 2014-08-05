@@ -111,6 +111,7 @@ $specialPageAliases['de'] = array(
 	'NewItem' => array( 'Neues_Datenelement_erstellen' ),
 	'NewProperty' => array( 'Neues_Attribut_erstellen' ),
 	'ItemByTitle' => array( 'Datenelement_nach_Name' ),
+	'GoToLinkedPage' => array( 'Gehe_zur_verlinkten_Seite' ),
 	'ItemDisambiguation' => array( 'Begriffsklärung_zu_Datenelement' ),
 	'ListDatatypes' => array( 'Datentypen_auflisten' ),
 	'SetLabel' => array( 'Bezeichnung_festlegen' ),
