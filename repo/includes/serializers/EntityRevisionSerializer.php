@@ -3,7 +3,6 @@
 namespace Wikibase\Serializers;
 
 use InvalidArgumentException;
-use Wikibase\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
@@ -22,11 +21,6 @@ use Wikibase\Lib\Serializers\SerializerObject;
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  */
 class EntityRevisionSerializer extends SerializerObject {
-	/**
-	 * @see SerializerObject::$options
-	 * @var EntityRevisionSerializationOptions
-	 */
-	protected $options;
 
 	/**
 	 * @var EntityTitleLookup
@@ -34,14 +28,15 @@ class EntityRevisionSerializer extends SerializerObject {
 	protected $titleLookup;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.5
 	 *
 	 * @param EntityTitleLookup $titleLookup
 	 * @param EntityRevisionSerializationOptions $options
 	 */
-	public function __construct( EntityTitleLookup $titleLookup, EntityRevisionSerializationOptions $options = null ) {
+	public function __construct(
+		EntityTitleLookup $titleLookup,
+		EntityRevisionSerializationOptions $options = null
+	) {
 		if( $options === null ) {
 			$options = new EntityRevisionSerializationOptions();
 		}
@@ -66,15 +61,14 @@ class EntityRevisionSerializer extends SerializerObject {
 				'EntityRevisionSerializer can only serialize EntityRevision objects' );
 		}
 
-		/** @var $entity Entity */
 		$entity = $entityRevision->getEntity();
 		$entityTitle = $this->titleLookup->getTitleForId( $entity->getId() );
-		$SerializationOptions = $this->options->getSerializationOptions();
+		$serializationOptions = $this->options->getSerializationOptions();
 
 		$serializerFactory = new SerializerFactory(); //TODO: inject
 		$entitySerializer = $serializerFactory->newSerializerForObject(
 			$entity,
-			$SerializationOptions
+			$serializationOptions
 		);
 		$serialization['content'] = $entitySerializer->getSerialized( $entity );
 		$serialization['title'] = $entityTitle->getPrefixedText();
@@ -95,17 +89,21 @@ class EntityRevisionSerializer extends SerializerObject {
 	 *
 	 * @return EntityRevisionSerializer
 	 */
-	public static function newForFrontendStore( EntityTitleLookup $titleLookup, $primaryLanguage, LanguageFallbackChain $languageFallbackChain ) {
-		$SerializationOptions =
-			new SerializationOptions();
+	public static function newForFrontendStore(
+		EntityTitleLookup $titleLookup,
+		$primaryLanguage,
+		LanguageFallbackChain $languageFallbackChain
+	) {
+		$serializationOptions = new SerializationOptions();
 
-		$SerializationOptions->setOption( EntitySerializer::OPT_PARTS, array( 'labels', 'descriptions', 'datatype' ) );
-		$SerializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
+		$serializationOptions->setOption( EntitySerializer::OPT_PARTS, array( 'labels', 'descriptions', 'datatype' ) );
+		$serializationOptions->setLanguages( array( $primaryLanguage => $languageFallbackChain ) );
 
 		$entityRevisionSerializationOptions =
-			new EntityRevisionSerializationOptions( $SerializationOptions );
+			new EntityRevisionSerializationOptions( $serializationOptions );
 
 		$serializer = new EntityRevisionSerializer( $titleLookup, $entityRevisionSerializationOptions );
 		return $serializer;
 	}
+
 }
