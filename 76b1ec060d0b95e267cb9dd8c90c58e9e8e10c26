@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_3fd14126",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-06T17:24:10Z",
+      "side": 1,
+      "message": "I don\u0027t remember an \"avoid nesting at all costs\" rule. I will not do this. This will make the code _more_ complex and error-prone.",
+      "parentUuid": "8e28a382_58a8bc89",
+      "revId": "76b1ec060d0b95e267cb9dd8c90c58e9e8e10c26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f8b2c8f7",
         "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "More premature optimization magic introducing more cases to test. why? what\u0027s the *actual* benefit? the three conditionals (one in the constructor, two in the getters) means 8 times more test cases if you want to cover all possibilities. Sure, each one is simple enough by itself. But they interact, and in case of the one in the constructor, in non-obvious ways.\n\nI used to use lazy initialization per default, for everything, until about a year ago or so. It was actually Jeroen who convinced me that this is pointless in most cases, and just adds useless weight. Just a little at a time, but it adds up, and the interactions become increasingly complex.",
       "parentUuid": "8e28a382_d12da2a4",
+      "revId": "76b1ec060d0b95e267cb9dd8c90c58e9e8e10c26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1f78c524",
+        "filename": "lib/includes/parsers/MonthNameUnlocalizer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-06T17:24:10Z",
+      "side": 1,
+      "message": "\"Non-obvious\". \"8 times more test cases\". \"Useless weight\". I still wonder why this class offends you. I will not continue this out of scale discussion.",
+      "parentUuid": "8e28a382_c4983021",
       "revId": "76b1ec060d0b95e267cb9dd8c90c58e9e8e10c26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
