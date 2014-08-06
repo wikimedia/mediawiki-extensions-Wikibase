@@ -390,11 +390,12 @@ table.wb-terms td {
     border-top: 1px solid #C9C9C9;
 }
 
-table.wb-terms .uneven td {
-    background: #F0F0F0;
+table.wb-terms td {
+	background: #F0F0F0;
 }
-table.wb-terms .even td {
-    background: #F8F8F8;
+table.wb-terms tr:nth-child(4n) td,
+table.wb-terms tr:nth-child(4n-1) td {
+	background: #F8F8F8;
 }
 
 table.wb-terms td.wb-terms-label,
