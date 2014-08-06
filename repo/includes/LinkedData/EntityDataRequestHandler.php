@@ -422,6 +422,7 @@ class EntityDataRequestHandler {
 		$smaxage = max( 0, min( 60 * 60 * 24 * 31, $smaxage ) );
 
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
+		$response->header( 'Access-Control-Allow-Origin: *' );
 
 		if ( $lastModified ) {
 			$response->header( 'Last-Modified: ' . wfTimestamp( TS_RFC2822, $lastModified ) );
