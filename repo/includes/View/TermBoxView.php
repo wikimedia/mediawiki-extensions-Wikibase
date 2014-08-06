@@ -91,11 +91,8 @@ class TermBoxView {
 				$editable
 			);
 
-			$alternatingClass = ( $rowNumber++ % 2 ) ? 'even' : 'uneven';
-
 			$tbody .= wfTemplate( 'wb-term',
 				$languageCode,
-				$alternatingClass,
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
 				htmlspecialchars( $label !== false ? $label : $this->msg( 'wikibase-label-empty' )->text() ),
 				htmlspecialchars( $description !== false ? $description : $this->msg( 'wikibase-description-empty' )->text() ),
