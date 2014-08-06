@@ -313,17 +313,17 @@ HTML;
 
 	$templates['wb-sitelink'] =
 <<<HTML
-<tr class="wb-sitelinks-$8 $2">
-	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$8" lang="$1" dir="auto">$3</td>
-	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$8">$4</td>
-	<td class="wb-sitelinks-link wb-sitelinks-link-$8" lang="$1"><span class="wb-sitelinks-badges">$9</span><span class="wb-sitelinks-page"><a href="$5" hreflang="$1" dir="auto">$6</a></span></td>
-	$7
+<tr class="wb-sitelinks-$7">
+	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$7" lang="$1" dir="auto">$2</td>
+	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$7">$3</td>
+	<td class="wb-sitelinks-link wb-sitelinks-link-$7" lang="$1"><span class="wb-sitelinks-badges">$8</span><span class="wb-sitelinks-page"><a href="$4" hreflang="$1" dir="auto">$5</a></span></td>
+	$6
 </tr>
 HTML;
 
 	$templates['wb-sitelink-unknown'] =
 <<<HTML
-<tr class="wb-sitelinks-site-unknown $1">
+<tr class="wb-sitelinks-site-unknown">
 	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-unknown"></td>
 	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-unknown">$2</td>
 	<td class="wb-sitelinks-link wb-sitelinks-link-unknown">$3</td>
