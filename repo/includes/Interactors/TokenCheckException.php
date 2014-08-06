@@ -6,14 +6,14 @@ use Exception;
 use MessageException;
 
 /**
- * Exception representing a failure to execute the "merge items" use case.
+ * Exception representing a token check failure.
  *
  * @since 0.5
  *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
-class ItemMergeException extends MessageException {
+class TokenCheckException extends MessageException {
 
 	/**
 	 * @var string
@@ -26,7 +26,7 @@ class ItemMergeException extends MessageException {
 	 * @param Exception $previous The previous exception that caused this exception.
 	 */
 	public function __construct( $message, $errorCode = '', Exception $previous = null ) {
-		parent::__construct( 'wikibase-itemmerge-' . $errorCode, array(), $message, $previous );
+		parent::__construct( 'wikibase-tokencheck-' . $errorCode, array(), $message, $previous );
 		$this->errorCode = $errorCode;
 	}
 

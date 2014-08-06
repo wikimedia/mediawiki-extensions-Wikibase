@@ -25,6 +25,7 @@ use Wikibase\Test\MockRepository;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 
@@ -266,7 +267,11 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 			'Q2' => $toData,
 		) );
 
-		$interactor->mergeItems( $fromId, $toId, (array)$ignoreConflicts, 'CustomSummary' );
+		if ( is_string( $ignoreConflicts ) ) {
+			$ignoreConflicts = explode( '|', $ignoreConflicts );
+		}
+
+		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
 
 		$actualTo = $this->testHelper->getEntity( $toId );
 		$this->testHelper->assertEntityEquals( $expectedTo, $actualTo, 'modified target item' );
@@ -286,10 +291,9 @@ class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'missing from' => array( new ItemId( 'Q100' ), new ItemId( 'Q2' ), array(), 'no-such-entity' ),
 			'missing to' => array( new ItemId( 'Q1' ), new ItemId( 'Q200' ), array(), 'no-such-entity' ),
-			'merge into self' => array( new ItemId( 'Q1' ), new ItemId( 'Q1' ), array(), 'param-invalid' ),
+			'merge into self' => array( new ItemId( 'Q1' ), new ItemId( 'Q1' ), array(), 'cant-merge-self' ),
 			'from redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q2' ), array(), 'cant-load-entity-content' ),
 			'to redirect' => array( new ItemId( 'Q1' ), new ItemId( 'Q12' ), array(), 'cant-load-entity-content' ),
-			'bad ignore flags' => array( new ItemId( 'Q1' ), new ItemId( 'Q2' ), array( 'BAD' ), 'param-invalid' ),
 		);
 	}
 
