@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_94b9efc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-06T10:03:27Z",
+      "side": 1,
+      "message": "There should be a space inbetween the commie message content and the Bug: line",
+      "revId": "ddc29f8acc52c9ee868783292f3bfd392346d5b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_94d0cff8",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-06T10:03:27Z",
+      "side": 1,
+      "message": "Generally rather than accessing globals through the super global $GLOBALS we create a local instance of the global\n\nglobal $wgUser;\n\nsame throughout this change",
+      "revId": "ddc29f8acc52c9ee868783292f3bfd392346d5b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_34f91b7e",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-06T10:03:27Z",
+      "side": 1,
+      "message": "coding styles say there should be spaces inside of brackets.\n\n$this-\u003eassertGetFinalParamDescription($moduleClass, $module);\nbecomes\n$this-\u003eassertGetFinalParamDescription( $moduleClass, $module );\n\nsame throughout this change",
+      "revId": "ddc29f8acc52c9ee868783292f3bfd392346d5b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d4f1b792",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-06T10:03:27Z",
+      "side": 1,
+      "message": "$module class is a string thus this should be \n\n@param string $moduleClass\n\nsame throughout this change",
+      "revId": "ddc29f8acc52c9ee868783292f3bfd392346d5b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b4ecebb8",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-06T10:03:27Z",
+      "side": 1,
+      "message": "This TODO could be included in the comment block above using the @todo tag!\n\n@todo compare if the messages here are existing Systemmessages",
+      "revId": "ddc29f8acc52c9ee868783292f3bfd392346d5b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
