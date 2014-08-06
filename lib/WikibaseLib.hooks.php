@@ -240,6 +240,15 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['jquery.wikibase.toolbarbase.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/toolbar/toolbarbase.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.toolbarbase',
+			),
+		);
+
 		$testModules['qunit']['jquery.wikibase.wbtooltip.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.wbtooltip.tests.js',
