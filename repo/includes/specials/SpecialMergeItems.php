@@ -2,16 +2,18 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Exception;
 use Html;
-use InvalidArgumentException;
-use Status;
+use SpecialPage;
 use UserInputException;
-use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\MergeChangeOpsFactory;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\Interactors\ItemMergeInteractor;
+use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * Special page for merging one item to another.
@@ -19,36 +21,29 @@ use Wikibase\Summary;
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Daniel Kinzler
  */
-class SpecialMergeItems extends SpecialWikibaseRepoPage {
+class SpecialMergeItems extends SpecialPage {
 
 	/**
-	 * The item content to merge from.
-	 *
-	 * @var EntityRevision
+	 * @var EntityIdParser
 	 */
-	private $fromItemRevision;
+	private $idParser;
 
 	/**
-	 * The item content to merge to.
-	 *
-	 * @var EntityRevision
+	 * @var ExceptionLocalizer
 	 */
-	private $toItemRevision;
+	private $exceptionLocalizer;
 
 	/**
-	 * The conflicts that should be ignored
-	 *
-	 * @var string[]
+	 * @var ItemMergeInteractor
 	 */
-	private $ignoreConflicts;
+	private $interactor;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var MergeChangeOpsFactory
+	 * @var TokenCheckInteractor
 	 */
-	protected $changeOpFactory;
+	private $tokenCheck;
 
 	/**
 	 * Constructor.
@@ -58,8 +53,78 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	public function __construct() {
 		parent::__construct( 'MergeItems', 'item-merge' );
 
-		$factoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->changeOpFactory = $factoryProvider->getMergeChangeOpFactory();
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		$this->initServices(
+			$repo->getEntityIdParser(),
+			$repo->getExceptionLocalizer(),
+			new TokenCheckInteractor(
+				$this->getUser()
+			),
+			new ItemMergeInteractor(
+				$repo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+				$repo->getEntityRevisionLookup( 'uncached' ),
+				$repo->getEntityStore(),
+				$repo->getEntityPermissionChecker(),
+				$repo->getSummaryFormatter(),
+				$this->getUser()
+			)
+		);
+	}
+
+	public function initServices(
+		EntityIdParser $idParser,
+		ExceptionLocalizer $exceptionLocalizer,
+		TokenCheckInteractor $tokenCheck,
+		ItemMergeInteractor $interactor
+	) {
+		$this->idParser = $idParser;
+		$this->exceptionLocalizer = $exceptionLocalizer;
+		$this->tokenCheck = $tokenCheck;
+		$this->interactor = $interactor;
+	}
+
+	private function requireItemIdParam( $name ) {
+		$rawId = $this->getTextParam( $name );
+
+		if ( $rawId === '' ) {
+			throw new UserInputException(
+				'wikibase-mergeitems-missing-parameter',
+				array( $name ),
+				'Missing required parameter ' . $name
+			);
+		}
+
+		try {
+			$id = $this->idParser->parse( $rawId );
+
+			if ( !( $id instanceof ItemId ) ) {
+				throw new UserInputException(
+					'wikibase-mergeitems-not-item',
+					array( $name ),
+					'Id does not refer to an item: ' . $name
+				);
+			}
+
+			return $id;
+		} catch ( EntityIdParsingException $ex ) {
+			throw new UserInputException(
+				'wikibase-wikibaserepopage-invalid-id',
+				array( $rawId ),
+				'Entity id is not valid'
+			);
+		}
+	}
+
+	private function getStringListParam( $name ) {
+		$list = $this->getTextParam( $name );
+
+		return $list === '' ? array() : explode( '|', $list );
+	}
+
+	private function getTextParam( $name ) {
+		$value = $this->getRequest()->getText( $name, '' );
+		return trim( $value );
 	}
 
 	/**
@@ -72,150 +137,59 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 	 * @return boolean
 	 */
 	public function execute( $subPage ) {
-		if ( !parent::execute( $subPage ) ) {
-			return false;
-		}
-
-		$this->checkPermissions();
-		$this->checkBlocked();
 		$this->checkReadOnly();
 
 		$this->setHeaders();
 		$this->outputHeader();
 
 		try {
-			$this->prepareArguments();
-		} catch ( UserInputException $ex ) {
-			$error = $this->msg( $ex->getKey(), $ex->getParams() )->parse();
-			$this->showErrorHTML( $error );
-		}
+			$this->tokenCheck->checkRequestToken( $this->getRequest(), 'token' );
 
-		/**
-		 * @var Status $status
-		 */
-		$status = Status::newGood();
+			$fromId = $this->requireItemIdParam( 'fromid' );
+			$toId = $this->requireItemIdParam( 'toid' );
 
-		if ( $this->modifyEntity( $status ) ) {
-			if ( !$status->isGood() ) {
-				$this->showErrorHTML( $this->msg('wikibase-special-mergeitems-error-prefix')->text() . ' ' . $status->getMessage() );
-			} elseif ( $this->saveChanges() ) {
-				return true;
-			}
+			$ignoreConflicts = $this->getStringListParam( 'ignoreconflicts' );
+			$summary = $this->getTextParam( 'summary' );
+
+			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+		} catch ( Exception $ex ) {
+			$this->showExceptionMessage( $ex );
 		}
 
 		$this->createForm();
-
-		return true;
 	}
 
-	/**
-	 * Prepares the arguments.
-	 */
-	protected function prepareArguments() {
-		$request = $this->getRequest();
+	protected function showExceptionMessage( Exception $ex ) {
+		$class = 'error';
+		$msg = $this->exceptionLocalizer->getExceptionMessage( $ex );
 
-		// Get from id
-		$rawFromId = $request->getVal( 'fromid', null );
-		$rawToId = $request->getVal( 'toid', null );
-
-		if ( !$rawFromId || !$rawToId ) {
-			return;
-		}
-
-		$fromId = $this->parseItemId( $rawFromId );
-		$toId = $this->parseItemId( $rawToId );
-
-		$this->fromItemRevision = $this->loadEntity( $fromId );
-		$this->toItemRevision = $this->loadEntity( $toId );
-
-		// Get ignore conflicts
-		$ignoreConflicts = $request->getVal( 'ignoreconflicts', null );
-
-		if ( $ignoreConflicts ) {
-			$this->ignoreConflicts = explode( '|', 'ignoreconflicts' );
-		} else {
-			$this->ignoreConflicts = array();
-		}
-	}
-
-	/**
-	 * Modifies the entity.
-	 *
-	 * @param Status $status
-	 *
-	 * @return boolean
-	 */
-	protected function modifyEntity( Status $status ) {
-		if ( $this->fromItemRevision === null || $this->toItemRevision === null ) {
-			return false;
-		}
-		try {
-			$changeOps = $this->changeOpFactory->newMergeOps(
-				$this->fromItemRevision->getEntity(),
-				$this->toItemRevision->getEntity(),
-				$this->ignoreConflicts
-			);
-
-			//XXX: need a validate() step here?
-			$changeOps->apply();
-		} catch( InvalidArgumentException $e ) {
-			// FIXME: caution, this does not return a message key but a hardcoded message
-			$status->fatal( $e->getMessage() );
-		} catch( ChangeOpException $e ) {
-			// FIXME: caution, this does not return a message key but a hardcoded message
-			$status->fatal( $e->getMessage() );
-		}
-		return true;
-	}
-
-	/**
-	 * Saves the changes made by the ChangeOps.
-	 *
-	 * @return boolean
-	 */
-	protected function saveChanges() {
-		// remove the content from the "from" item
-		$toSummary = $this->getSummary( 'to', $this->toItemRevision->getEntity()->getId() );
-		$fromStatus = $this->saveEntity( $this->fromItemRevision->getEntity(), $toSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
-
-		if ( !$fromStatus->isOK() ) {
-			$this->showErrorHTML( $fromStatus->getMessage() );
-		} else {
-			// add the content to the "to" item
-			$fromSummary = $this->getSummary( 'from', $this->fromItemRevision->getEntity()->getId() );
-			$toStatus = $this->saveEntity( $this->toItemRevision->getEntity(), $fromSummary, $this->getRequest()->getVal( 'wpEditToken' ) );
-
-			if ( !$toStatus->isOK() ) {
-				$this->showErrorHTML( $toStatus->getMessage() );
-			} else {
-				// Everything went well so redirect to the merged item
-				// TODO: instead of redirecting, we should display a success message containing links to the merged items
-				//       and the changes that were made as well as some instructions to undo the merge.
-				$title = $this->getEntityTitle( $this->toItemRevision->getEntity()->getId() );
-				$toEntityUrl = $title->getFullUrl();
-				$this->getOutput()->redirect( $toEntityUrl );
-				return true; // no need to create the form now
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Creates the summary.
-	 *
-	 * @param string $direction
-	 * @param EntityId $id
-	 *
-	 * @return Summary
-	 */
-	protected function getSummary( $direction, $id ) {
-		$summary = new Summary(
-			'wbmergeitems',
-			$direction,
-			null,
-			array( $id->getSerialization() )
+		$this->getOutput()->addHTML(
+			Html::rawElement(
+				'p',
+				array( 'class' => $class ),
+				$msg->parse()
+			)
 		);
-		return $summary;
+	}
+
+	/**
+	 * @param ItemId $fromId
+	 * @param ItemId $toId
+	 * @param array $ignoreConflicts
+	 * @param string $summary
+	 */
+	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
+		/** @var EntityRevision $newRevisionFrom  */
+		/** @var EntityRevision $newRevisionTo */
+		list( $newRevisionFrom, $newRevisionTo ) = $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+
+		//XXX: might be nicer to pass pre-rendered links as parameters
+		$this->getOutput()->addWikiMsg(
+			'wikibase-mergeitems-success',
+			$fromId->getSerialization(),
+			$newRevisionFrom->getRevision(),
+			$toId->getSerialization(),
+			$newRevisionTo->getRevision() );
 	}
 
 	/**
@@ -225,7 +199,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 
 		if ( $this->getUser()->isAnon() ) {
-			$this->showErrorHTML(
+			$this->getOutput()->addWikiMsg(
 				$this->msg(
 					'wikibase-anonymouseditwarning',
 					$this->msg( 'wikibase-entity-item' )->text()
@@ -274,7 +248,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 				)
 			)
 			. Html::input(
-				'wpEditToken',
+				'token',
 				$this->getUser()->getEditToken(),
 				'hidden'
 			)
@@ -331,6 +305,7 @@ class SpecialMergeItems extends SpecialWikibaseRepoPage {
 			)
 		)
 		. Html::element( 'br' );
-		// TODO: Here should be a way to easily ignore conflicts
+		// TODO: Selector for ignoreconflicts
 	}
+
 }
