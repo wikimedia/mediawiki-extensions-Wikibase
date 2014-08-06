@@ -31,7 +31,7 @@
 	"wikibase-diffview-alias": "Sub heading for alias changes in a diff\n{{Identical|Alias}}",
 	"wikibase-diffview-description": "Sub heading for description changes in a diff.\n{{Identical|Description}}",
 	"wikibase-diffview-link": "Sub heading for link changes in a diff.\n{{Identical|Link}}",
-	"wikibase-error-unexpected": "Generic error used by the API to indicate that an unexpected error occurred.\n\nParameters:\n* $1 - the raw, unlocalized error message",
+	"wikibase-error-unexpected": "Generic error messaged used for reporting unknown exception.\n\nParameters:\n* $1 - the raw, unlocalized error message",
 	"wikibase-error-save-generic": "Generic error message for an error happening during a save operation.",
 	"wikibase-error-remove-generic": "Generic error message for an error happening during a remove operation",
 	"wikibase-error-save-connection": "Error message for an error happening during a save operation. The error might most likely be caused by a connection problem.",
