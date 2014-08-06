@@ -244,8 +244,7 @@ class SiteLinksView {
 		$tbody = '';
 
 		foreach ( $siteLinksForTable as $siteLinkForTable ) {
-			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
-			$tbody .= $this->getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup, $alternatingClass );
+			$tbody .= $this->getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup );
 		}
 
 		return $tbody;
@@ -270,11 +269,10 @@ class SiteLinksView {
 	 * @param object $siteLinkForTable
 	 * @param ItemId|null $itemId The id of the item
 	 * @param bool $isSpecialGroup
-	 * @param string $alternatingClass
 	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup, $alternatingClass ) {
+	private function getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup ) {
 		/** @var Site $site */
 		$site = $siteLinkForTable['site'];
 
@@ -282,7 +280,7 @@ class SiteLinksView {
 		$siteLink = $siteLinkForTable['siteLink'];
 
 		if ( $site->getDomain() === '' ) {
-			return $this->getHtmlForUnknownSiteLink( $siteLink, $itemId, $alternatingClass );
+			return $this->getHtmlForUnknownSiteLink( $siteLink, $itemId );
 		}
 
 		$languageCode = $site->getLanguageCode();
@@ -305,7 +303,6 @@ class SiteLinksView {
 		// and will fail when having too much site links
 		return wfTemplate( 'wb-sitelink',
 			$languageCode,
-			$alternatingClass,
 			$siteName,
 			htmlspecialchars( $siteId ), // displayed site ID
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
@@ -319,16 +316,14 @@ class SiteLinksView {
 	/**
 	 * @param SiteLink $siteLink
 	 * @param ItemId|null $itemId The id of the item
-	 * @param string $alternatingClass
 	 *
 	 * @return string
 	 */
-	private function getHtmlForUnknownSiteLink( $siteLink, $itemId, $alternatingClass ) {
+	private function getHtmlForUnknownSiteLink( $siteLink, $itemId ) {
 		$siteId = $siteLink->getSiteId();
 		$pageName = $siteLink->getPageName();
 
 		return wfTemplate( 'wb-sitelink-unknown',
-			$alternatingClass,
 			htmlspecialchars( $siteId ),
 			htmlspecialchars( $pageName ),
 			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId ) . '</td>'
