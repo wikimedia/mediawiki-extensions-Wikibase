@@ -76,7 +76,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::saveTermsOfEntity
+	 * @see TermIndex::saveTermsOfEntity
 	 *
 	 * @since 0.1
 	 *
@@ -317,7 +317,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::deleteTermsOfEntity
+	 * @see TermIndex::deleteTermsOfEntity
 	 *
 	 * @since 0.5
 	 *
@@ -349,7 +349,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 
 	/**
 	 * Returns the terms stored for the given entity.
-	 * @see TermCache::getTermsOfEntity
+	 * @see TermIndex::getTermsOfEntity
 	 *
 	 * @param EntityId $id
 	 *
@@ -390,7 +390,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	/**
 	 * Returns the terms stored for the given entities.
 	 *
-	 * @see TermCache::getTermsOfEntities
+	 * @see TermIndex::getTermsOfEntities
 	 *
 	 * @param EntityId[] $ids
 	 * @param string $entityType
@@ -475,7 +475,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::termExists
+	 * @see TermIndex::termExists
 	 *
 	 * @since 0.1
 	 *
@@ -524,7 +524,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::getEntityIdsForLabel
+	 * @see TermIndex::getEntityIdsForLabel
 	 *
 	 * @since 0.1
 	 *
@@ -585,7 +585,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::getMatchingTerms
+	 * @see TermIndex::getMatchingTerms
 	 *
 	 * @since 0.2
 	 *
@@ -634,7 +634,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::getMatchingIDs
+	 * @see TermIndex::getMatchingIDs
 	 *
 	 * @since 0.4
 	 *
@@ -866,7 +866,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::clear
+	 * @see TermIndex::clear
 	 *
 	 * @since 0.2
 	 *
@@ -880,7 +880,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 	}
 
 	/**
-	 * @see TermCache::getMatchingTermCombination
+	 * @see TermIndex::getMatchingTermCombination
 	 *
 	 * Note: the interface specifies capability for only a single join, which in this implementation
 	 * is enforced by the $joinCount var. The code itself however could handle multiple joins.
