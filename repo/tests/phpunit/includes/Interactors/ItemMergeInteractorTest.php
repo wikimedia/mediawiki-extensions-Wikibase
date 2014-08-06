@@ -25,6 +25,7 @@ use Wikibase\Test\MockRepository;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class ItemMergeInteractorTest extends \PHPUnit_Framework_TestCase {
 
