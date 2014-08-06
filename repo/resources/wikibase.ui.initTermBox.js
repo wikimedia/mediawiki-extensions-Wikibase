@@ -142,12 +142,10 @@
 			$tbody = $( '<tbody>' );
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
-			var languageCode = languageCodes[i],
-				alternatingClass = i % 2 ? 'even' : 'uneven';
+			var languageCode = languageCodes[i];
 
 			$tbody.append( mw.template( 'wb-term',
 				languageCode,
-				alternatingClass,
 				$.uls.data.getAutonym( languageCode ),
 				labels.hasOwnProperty( languageCode ) ? labels[languageCode] : '',
 				descriptions.hasOwnProperty( languageCode ) ? descriptions[languageCode] : '',
