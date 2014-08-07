@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_cbd58aeb",
+        "filename": "lib/resources/experts/EntityIdInput.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-07T12:03:50Z",
+      "side": 1,
+      "message": "I would have named this \"wbRepo\" instead of \"repoConfig\".",
+      "revId": "5d1da682ab6ff925c43aa461e0822cc8fc17b267",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2bfe4e67",
+        "filename": "lib/resources/experts/EntityIdInput.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-07T12:03:50Z",
+      "side": 1,
+      "message": "To make this equivalent it should use \"mw.config.get( \u0027wgScriptExtension\u0027 )\" instead of asuming \".php\", right? Oh, wait, this doesn\u0027t makes sense. Hm, ... this is strange, but I guess we don\u0027t have a better solution at the moment, right?",
+      "revId": "5d1da682ab6ff925c43aa461e0822cc8fc17b267",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
