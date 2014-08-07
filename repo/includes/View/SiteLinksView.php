@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\View;
 
-use Html;
 use InvalidArgumentException;
 use Message;
 use Sanitizer;
@@ -363,17 +362,14 @@ class SiteLinksView {
 		/** @var ItemId $badge */
 		foreach ( $siteLink->getBadges() as $badge ) {
 			$serialization = $badge->getSerialization();
-			$classes = 'wb-badge wb-badge-' . Sanitizer::escapeClass( $serialization );
+			$classes = Sanitizer::escapeClass( $serialization );
 			if ( !empty( $this->badgeItems[$serialization] ) ) {
 				$classes .= ' ' . Sanitizer::escapeClass( $this->badgeItems[$serialization] );
 			}
 
-			$html .= Html::element(
-				'span',
-				array(
-					'class' => $classes,
-					'title' => $this->getTitleForBadge( $badge )
-				)
+			$html .= wfTemplate( 'wb-badge',
+				$classes,
+				$this->getTitleForBadge( $badge )
 			);
 		}
 
