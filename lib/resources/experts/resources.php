@@ -47,6 +47,7 @@ return call_user_func( function() {
 				'jquery.valueview.Expert',
 				'jquery.valueview.experts.StringValue',
 				'jquery.wikibase.entityselector',
+				'mw.config.values.wbRepo',
 				'mediawiki.util',
 				'wikibase',
 			),
