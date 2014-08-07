@@ -81,7 +81,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $statements;
 	}
 
-	public function buildUpdateClaimSummaryPovider() {
+	public function buildUpdateClaimSummaryProvider() {
 		$arguments = array();
 
 		foreach ( $this->claimProvider() as $claim ) {
@@ -146,7 +146,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider buildUpdateClaimSummaryPovider
+	 * @dataProvider buildUpdateClaimSummaryProvider
 	 *
 	 * @param Claim $originalClaim
 	 * @param Claim $modifiedClaim
