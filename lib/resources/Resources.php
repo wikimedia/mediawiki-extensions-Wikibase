@@ -552,6 +552,7 @@ return call_user_func( function() {
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.entityselector',
 				'mediawiki.legacy.shared',
+				'mw.config.values.wbRepo',
 				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.dataTypes',
