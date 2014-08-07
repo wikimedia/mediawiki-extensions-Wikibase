@@ -340,6 +340,11 @@ HTML;
 </tr>
 HTML;
 
+	$templates['wb-badge'] =
+<<<HTML
+<span class="wb-badge wb-badge-$1" title="$2"></span>
+HTML;
+
 	$templates['wb-property-datatype'] =
 <<<HTML
 <div class="wb-datatype">
