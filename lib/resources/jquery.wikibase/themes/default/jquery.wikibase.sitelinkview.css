@@ -1,0 +1,38 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
+ */
+
+.wb-badge {
+	/* SVG support using a transparent gradient to guarantee cross-browser
+	 * compatibility (browsers able to understand gradient syntax support also SVG).
+	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
+	background-image: url(images/wb-badges-default.png);
+	/* @embed */
+	background-image: -webkit-linear-gradient(transparent, transparent), url(images/wb-badges-default.svg);
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url(images/wb-badges-default.svg);
+	background-repeat: no-repeat;
+	background-position: 0 center;
+	display: inline;
+	padding: 0 8px;
+}
+
+.wb-badge-empty {
+	background-image: url(images/wb-badges-empty.png);
+	/* @embed */
+	background-image: -webkit-linear-gradient(transparent, transparent), url(images/wb-badges-empty.svg);
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url(images/wb-badges-empty.svg);
+}
+
+.wikibase-sitelinkview input {
+	margin: 0;
+	font-family: inherit;
+	font-size: 1em; /* prevent font size rounding errors */
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
