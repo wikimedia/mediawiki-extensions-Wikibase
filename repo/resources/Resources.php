@@ -32,6 +32,7 @@ return call_user_func( function() {
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
 				'jquery.wikibase.claimgrouplabelscroll',
+				'jquery.wikibase.sitelinklistview',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.dataTypes',
 				'wikibase.experts',
