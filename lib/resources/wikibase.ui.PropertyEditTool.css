@@ -28,22 +28,12 @@
 
 /***** HIGHLIGHT COLOURS *****/
 
-/* propertyedittool within table is a multi-value edit tool (site-links)
- * We might want to add a .wb-ui-multivaluepropertyedittool class later */
-.wb-ui-propertyedittool-ineditmode,
-table.wb-ui-propertyedittool-ineditmode .wb-ui-propertyedittool-editablevalue-ineditmode td {
-	background-color: #D6F3FF;
-}
 table.wb-ui-propertyedittool-ineditmode {
 	background-color: inherit !important;
 }
 /* while tooltip is shown on editable value */
 .wb-ui-propertyedittool-ineditmode.wb-error {
 	background-color: #FFDFC9;
-}
-/* while tooltip is shown on (multi-valued) editable value */
-.wb-ui-propertyedittool-editablevalue-ineditmode.wb-error td {
-	background-color: #FFDFC9 !important;
 }
 
 /***** /HIGHLIGHT COLOURS *****/
@@ -135,66 +125,6 @@ sizes and line heights within the heading */
 }
 
 /********** /ALIASES **********/
-
-
-/********** SITE LINKS **********/
-
-.wb-section-heading .wb-ui-propertyedittool-counter {
-	font-size: 67%; /* reset to standard font size */
-	margin-left: 0.6em;
-	line-height: 100%; /* prevent white space below heading */
-}
-
-table.wb-sitelinks input {
-	margin: 0;
-	font-family: inherit;
-	font-size: 1em; /* prevent font size rounding errors */
-	width: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-}
-
-/* the following ruler elements are used to detect the maximum site id column with preventing layout
-jitters when toggling edit mode */
-table.wb-sitelinks .wb-ruler,
-table.wb-sitelinks .wb-ruler th,
-table.wb-sitelinks .wb-ruler td,
-table.wb-sitelinks .wb-ruler .wb-ruler {
-	height: 0;
-	overflow: hidden;
-	border: none;
-}
-table.wb-sitelinks .wb-ruler .wb-ruler {
-	position: absolute;
-}
-
-table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-sitename {
-	white-space: normal;
-}
-
-table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
-	padding-left: 7px;
-}
-@-moz-document url-prefix() { /* Firefox */
-	table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
-		padding-left: 6px;
-	}
-}
-
-table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
-	background-color: #D6F3FF; /* hihglight color when editing */
-}
-table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td.wb-sitelinks-siteid {
-	background-color: #D0EBF7;
-}
-
-table.wb-sitelinks .wikibase-toolbar {
-	float: none; /* prevent white space jittering for PropertyEditTool toolbar */
-}
-
-/********** /SITE LINKS **********/
-
 
 /********** TAGADATA **********/
 
