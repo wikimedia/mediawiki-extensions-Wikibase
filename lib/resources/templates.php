@@ -313,7 +313,7 @@ HTML;
 
 	$templates['wikibase-sitelinkview'] =
 <<<HTML
-<tr class="wikibase-sitelinkview wikibase-sitelinkview-$1">
+<tr class="wikibase-sitelinkview wikibase-sitelinkview-$1" data-wb-siteid="$1">
 	<td class="wikibase-sitelinkview-sitename wikibase-sitelinkview-sitename-$1" lang="$2" dir="$3">$4</td>
 	<td class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1">$5</td>
 	<td class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</td>
@@ -338,7 +338,7 @@ HTML;
 
 	$templates['wb-badge'] =
 <<<HTML
-<span class="wb-badge wb-badge-$1" title="$2" data-wb-badge="$3"></span>
+<span class="wb-badge wb-badge-$1" title="$2"></span>
 HTML;
 
 	$templates['wb-property-datatype'] =
