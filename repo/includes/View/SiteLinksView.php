@@ -135,7 +135,7 @@ class SiteLinksView {
 		$tfoot = $this->getTableFootHtml( $itemId, $isFull );
 
 		return $html . wfTemplate(
-			'wb-sitelinks-table',
+			'wikibase-sitelinklistview',
 			$thead,
 			$tbody,
 			$tfoot,
@@ -222,7 +222,7 @@ class SiteLinksView {
 			$siteNameMessageKey .= '-special';
 		}
 
-		$thead = wfTemplate( 'wb-sitelinks-thead',
+		$thead = wfTemplate( 'wikibase-sitelinklistview-thead',
 			wfMessage( $siteNameMessageKey )->parse(),
 			wfMessage( 'wikibase-sitelinks-siteid-columnheading' )->parse(),
 			wfMessage( 'wikibase-sitelinks-link-columnheading' )->parse()
@@ -256,7 +256,7 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getTableFootHtml( $itemId, $isFull ) {
-		$tfoot = wfTemplate( 'wb-sitelinks-tfoot',
+		$tfoot = wfTemplate( 'wikibase-sitelinklistview-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
 			'<td>' . $this->getHtmlForEditSection( $itemId, '', 'add', !$isFull ) . '</td>'
 		);
@@ -284,7 +284,6 @@ class SiteLinksView {
 
 		$languageCode = $site->getLanguageCode();
 		$siteId = $siteLink->getSiteId();
-		$pageName = $siteLink->getPageName();
 
 		// FIXME: this is a quickfix to allow a custom site-name for the site groups which are
 		// special according to the specialSiteLinkGroups setting
@@ -300,15 +299,32 @@ class SiteLinksView {
 		// TODO: for non-JS, also set the dir attribute on the link cell;
 		// but do not build language objects for each site since it causes too much load
 		// and will fail when having too much site links
-		return wfTemplate( 'wb-sitelink',
+		return wfTemplate( 'wikibase-sitelinkview',
+			htmlspecialchars( $siteId ), // ID used in classes
 			$languageCode,
+			'auto',
 			$siteName,
 			htmlspecialchars( $siteId ), // displayed site ID
+			$this->getHtmlForPage( $siteLink, $site ),
+			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId ) . '</td>'
+		);
+	}
+
+	/**
+	 * @param SiteLink $siteLink
+	 * @param Site $site
+	 *
+	 * @return string
+	 */
+	private function getHtmlForPage( $siteLink, $site ) {
+		$pageName = $siteLink->getPageName();
+
+		return wfTemplate( 'wikibase-sitelinkview-pagename',
 			htmlspecialchars( $site->getPageUrl( $pageName ) ),
 			htmlspecialchars( $pageName ),
-			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId ) . '</td>',
-			htmlspecialchars( $siteId ), // ID used in classes
-			$this->getHtmlForBadges( $siteLink )
+			$this->getHtmlForBadges( $siteLink ),
+			$site->getLanguageCode(),
+			'auto'
 		);
 	}
 
@@ -322,7 +338,8 @@ class SiteLinksView {
 		$siteId = $siteLink->getSiteId();
 		$pageName = $siteLink->getPageName();
 
-		return wfTemplate( 'wb-sitelink-unknown',
+		// FIXME: No need for separate template; Use 'wikibase-sitelinkview' template.
+		return wfTemplate( 'wikibase-sitelinkview-unknown',
 			htmlspecialchars( $siteId ),
 			htmlspecialchars( $pageName ),
 			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId ) . '</td>'
@@ -369,7 +386,8 @@ class SiteLinksView {
 
 			$html .= wfTemplate( 'wb-badge',
 				$classes,
-				$this->getTitleForBadge( $badge )
+				$this->getTitleForBadge( $badge ),
+				Sanitizer::escapeClass( $serialization )
 			);
 		}
 
