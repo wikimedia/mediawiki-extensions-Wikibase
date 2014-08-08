@@ -9,6 +9,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 ### 0.3.1 (dev)
 
 * Added wikibase.datamodel.SiteLink.
+* Added wikibase.datamodel.Item.getSiteLinks().
 
 ### 0.3.0 (2014-07-10)
 

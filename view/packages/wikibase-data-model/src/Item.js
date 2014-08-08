@@ -18,7 +18,13 @@
 	 * @param {Object} data
 	 */
 	var SELF = wb.datamodel.Item = util.inherit( 'WbItem', PARENT, {
-		// TODO: implement sitelinks related getter/setter
+		/**
+		 * @since 0.3
+		 * @return {wikibase.datamodel.SiteLink[]}
+		 */
+		getSiteLinks: function() {
+			return this._data.sitelinks || [];
+		}
 	} );
 
 	/**
