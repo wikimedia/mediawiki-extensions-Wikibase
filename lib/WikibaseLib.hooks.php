@@ -86,16 +86,12 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
 				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
 				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
-				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableAliases.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
 
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
@@ -193,6 +189,30 @@ final class LibHooks {
 				'wikibase.store.EntityStore',
 				'wikibase.ValueViewBuilder',
 				'valueFormatters'
+			),
+		);
+
+		$testModules['qunit']['jquery.wikibase.sitelinkview.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.sitelinkview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.sitelinkview',
+				'wikibase.datamodel',
+				'wikibase.store.EntityStore',
+				'wikibase.tests.qunit.testrunner',
+			),
+		);
+
+		$testModules['qunit']['jquery.wikibase.sitelinklistview.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.sitelinklistview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.sitelinklistview',
+				'wikibase.datamodel',
+				'wikibase.store.EntityStore',
+				'wikibase.tests.qunit.testrunner',
 			),
 		);
 
