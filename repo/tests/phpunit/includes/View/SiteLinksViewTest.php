@@ -80,7 +80,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 				),
 				'descendant' => array(
 					'tag' => 'td',
-					'class' => 'wb-sitelinks-link-enwiki',
+					'class' => 'wikibase-sitelinkview-link-enwiki',
 					'content' => 'test'
 				)
 			)
@@ -97,7 +97,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 				),
 				'descendant' => array(
 					'tag' => 'td',
-					'class' => 'wb-sitelinks-link-enwiki',
+					'class' => 'wikibase-sitelinkview-link-enwiki',
 					'content' => 'test'
 				)
 			)
