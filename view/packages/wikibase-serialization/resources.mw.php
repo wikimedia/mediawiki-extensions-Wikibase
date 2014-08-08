@@ -39,7 +39,6 @@ return call_user_func( function() {
 				'src/serialization.SerializerFactory.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'util.inherit',
 				'wikibase',
 			)
@@ -48,10 +47,10 @@ return call_user_func( function() {
 		'wikibase.serialization.entities' => $moduleTemplate + array(
 			'scripts' => array(
 				'src/serialization.EntityUnserializer.js',
+				'src/serialization.EntityUnserializer.itemExpert.js',
 				'src/serialization.EntityUnserializer.propertyExpert.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'util.inherit',
 				'wikibase.serialization',
 				'wikibase.datamodel',
