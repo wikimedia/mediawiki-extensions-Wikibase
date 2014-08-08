@@ -6,13 +6,10 @@
 ( function( wb, $, QUnit ) {
 'use strict';
 
-var siteId = 'test-id',
-	pageName = 'test-page';
-
 QUnit.module( 'wikibase.datamodel.SiteLink', QUnit.newMwEnvironment() );
 
 QUnit.test( 'Basic tests', function( assert ) {
-	var siteLink = new wb.datamodel.SiteLink( siteId, pageName );
+	var siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-name' );
 
 	assert.equal(
 		siteLink.getSiteId(),
@@ -22,13 +19,13 @@ QUnit.test( 'Basic tests', function( assert ) {
 
 	assert.equal(
 		siteLink.getPageName(),
-		pageName,
+		'test-name',
 		'Verified page name.'
 	);
 } );
 
 QUnit.test( 'Badges', function( assert ) {
-	var siteLink = new wb.datamodel.SiteLink( siteId, pageName ),
+	var siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-page' ),
 		badges = ['Q123', 'Q456'];
 
 	assert.equal(
@@ -53,13 +50,69 @@ QUnit.test( 'Badges', function( assert ) {
 		'Removed badges.'
 	);
 
-	siteLink = new wb.datamodel.SiteLink( siteId, pageName, badges );
+	siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-page', badges );
 
 	assert.equal(
 		badges.join( ',' ),
 		siteLink.getBadges().join( ',' ),
 		'Instantiated site link with badges.'
 	);
+} );
+
+QUnit.test( 'equals()', function( assert ) {
+	var testSet = [
+		['siteId', 'pageName', []],
+		['anotherSiteId', 'pageName', []],
+		['siteId', 'anotherPageName', []],
+		['anotherSiteId', 'anotherPageName', []],
+		['siteId', 'pageName', ['badgeId']],
+		['siteId', 'pageName', ['badgeId', 'anotherBadgeId']]
+	];
+
+	var invalid = [
+		'plain string',
+		1,
+		0,
+		false,
+		true,
+		['siteId', 'pageName', []]
+	];
+
+	for( var i = 0; i < testSet.length; i++ ) {
+		var siteLink1 = new wb.datamodel.SiteLink(
+			testSet[i][0],
+			testSet[i][1],
+			testSet[i][2]
+		);
+
+		for( var j = 0; j < invalid.length; j++ ) {
+			assert.ok(
+				!siteLink1.equals( invalid[j] ),
+				'Test set #' + i + ' is not equal to invalid set #' + j + '.'
+			);
+		}
+
+		for( j = 0; j < testSet.length; j++ ) {
+			var siteLink2 = new wb.datamodel.SiteLink(
+				testSet[j][0],
+				testSet[j][1],
+				testSet[j][2]
+			);
+
+			if( i === j ) {
+				assert.ok(
+					siteLink1.equals( siteLink2 ),
+					'Test set #' + i + ' equals.'
+				);
+			} else {
+				assert.ok(
+					!siteLink1.equals( siteLink2 ),
+					'Test set #' + j + ' is not equal to test set #' + i + '.'
+				);
+			}
+		}
+	}
+
 } );
 
 }( wikibase, jQuery, QUnit ) );
