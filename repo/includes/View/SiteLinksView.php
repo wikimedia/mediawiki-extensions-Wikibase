@@ -379,13 +379,15 @@ class SiteLinksView {
 		/** @var ItemId $badge */
 		foreach ( $siteLink->getBadges() as $badge ) {
 			$serialization = $badge->getSerialization();
+			$classes = Sanitizer::escapeClass( $serialization );
+
+			if ( !empty( $this->badgeItems[$serialization] ) ) {
+				$classes .= ' ' . Sanitizer::escapeClass( $this->badgeItems[$serialization] );
+			}
 
 			$html .= wfTemplate( 'wb-badge',
-				!empty( $this->badgeItems[$serialization] )
-					? Sanitizer::escapeClass( $this->badgeItems[$serialization] )
-					: '',
-				$this->getTitleForBadge( $badge ),
-				Sanitizer::escapeClass( $serialization )
+				$classes,
+				$this->getTitleForBadge( $badge )
 			);
 		}
 
