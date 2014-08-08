@@ -272,77 +272,73 @@ HTML;
 </tr>
 HTML;
 
-	$templates['wb-sitelinks-table'] =
+	$templates['wikibase-sitelinklistview'] =
 <<<HTML
-<table class="wb-sitelinks" data-wb-sitelinks-group="$4">
+<table class="wikibase-sitelinklistview" data-wb-sitelinks-group="$4">
 	<colgroup>
-		<col class="wb-sitelinks-sitename" />
-		<col class="wb-sitelinks-siteid" />
-		<col class="wb-sitelinks-link" />
+		<col class="wikibase-sitelinklistview-sitename" />
+		<col class="wikibase-sitelinklistview-siteid" />
+		<col class="wikibase-sitelinklistview-link" />
 		<col class="wb-editsection" />
 	</colgroup>
 	<thead>
-		$1 <!-- wb-sitelinks-thead -->
+		$1 <!-- wikibase-sitelinklist-thead -->
 	</thead>
 	<tbody>
-		$2 <!-- [0,*] wb-sitelink -->
+		$2 <!-- [0,*] wikibase-sitelinkview -->
 	</tbody>
 	<tfoot>
-		$3 <!-- wb-sitelinks-tfoot -->
+		$3 <!-- wikibase-sitelinklistview-tfoot -->
 	</tfoot>
 </table>
 HTML;
 
-	$templates['wb-sitelinks-thead'] =
+	$templates['wikibase-sitelinklistview-thead'] =
 <<<HTML
-<tr class="wb-sitelinks-columnheaders">
-	<th class="wb-sitelinks-sitename">$1</th>
-	<th class="wb-sitelinks-siteid">$2</th>
-	<th class="wb-sitelinks-link">$3</th>
+<tr class="wikibase-sitelinklistview-columnheaders">
+	<th class="wikibase-sitelinkview-sitename">$1</th>
+	<th class="wikibase-sitelinkview-siteid">$2</th>
+	<th class="wikibase-sitelinkview-link">$3</th>
 	<th class="unsortable"></th>
 </tr>
 HTML;
 
-	$templates['wb-sitelinks-tfoot'] =
+	$templates['wikibase-sitelinklistview-tfoot'] =
 <<<HTML
 <tr>
-	<td colspan="3" class="wb-sitelinks-placeholder">$1</td>
+	<td colspan="3" class="wikibase-sitelinklistview-placeholder">$1</td>
 	$2 <!-- wb-editsection( param1: 'td' ) -->
 </tr>
 HTML;
 
-	$templates['wb-sitelink'] =
+	$templates['wikibase-sitelinkview'] =
 <<<HTML
-<tr class="wb-sitelinks-$7">
-	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$7" lang="$1" dir="auto">$2</td>
-	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$7">$3</td>
-	<td class="wb-sitelinks-link wb-sitelinks-link-$7" lang="$1"><span class="wb-sitelinks-badges">$8</span><span class="wb-sitelinks-page"><a href="$4" hreflang="$1" dir="auto">$5</a></span></td>
-	$6
+<tr class="wikibase-sitelinkview wikibase-sitelinkview-$1">
+	<td class="wikibase-sitelinkview-sitename wikibase-sitelinkview-sitename-$1" lang="$2" dir="$3">$4</td>
+	<td class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1">$5</td>
+	<td class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</td>
+	$7
 </tr>
 HTML;
 
-	$templates['wb-sitelink-unknown'] =
+	$templates['wikibase-sitelinkview-pagename'] =
 <<<HTML
-<tr class="wb-sitelinks-site-unknown">
-	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-unknown"></td>
-	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-unknown">$2</td>
-	<td class="wb-sitelinks-link wb-sitelinks-link-unknown">$3</td>
+	<span class="wikibase-sitelinkview-badges">$3</span><span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4" dir="$5">$2</a></span>
+HTML;
+
+	$templates['wikibase-sitelinkview-unknown'] =
+<<<HTML
+<tr class="wikibase-sitelinkview-site-unknown">
+	<td class="wikibase-sitelinkview-sitename wikibase-sitelinkview-sitename-unknown"></td>
+	<td class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-unknown">$2</td>
+	<td class="wikibase-sitelinkview-link wikibase-sitelinkview-link-unknown">$3</td>
 	$4
-</tr>
-HTML;
-
-	$templates['wb-sitelink-new'] =
-<<<HTML
-<tr>
-	<td colspan="2" class="wb-sitelinks-sitename"></td>
-	<td class="wb-sitelinks-link"><span class="wb-sitelinks-badges"></span><span class="wb-sitelinks-page"></span></td>
-	<td></td><!-- cell for toolbar -->
 </tr>
 HTML;
 
 	$templates['wb-badge'] =
 <<<HTML
-<span class="wb-badge wb-badge-$1" title="$2"></span>
+<span class="wb-badge wb-badge-$1" title="$2" data-wb-badge="$3"></span>
 HTML;
 
 	$templates['wb-property-datatype'] =
