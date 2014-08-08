@@ -338,7 +338,7 @@ HTML;
 
 	$templates['wb-badge'] =
 <<<HTML
-<span class="wb-badge wb-badge-$1" title="$2" data-wb-badge="$3"></span>
+<span class="wb-badge wb-badge-$1" title="$2"></span>
 HTML;
 
 	$templates['wb-property-datatype'] =
