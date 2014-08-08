@@ -386,8 +386,7 @@ class SiteLinksView {
 
 			$html .= wfTemplate( 'wb-badge',
 				$classes,
-				$this->getTitleForBadge( $badge ),
-				Sanitizer::escapeClass( $serialization )
+				$this->getTitleForBadge( $badge )
 			);
 		}
 

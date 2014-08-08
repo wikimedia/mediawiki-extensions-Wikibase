@@ -279,55 +279,45 @@
 			.first()
 			.attr( 'id', 'claims' );
 
-		/**
-		 * @param {jQuery} $badges
-		 * @return {string[]}
-		 */
-		function getBadges( $badges ) {
-			return $.map( $badges, function( badge ) {
-				return $( badge ).data( 'wb-badge' );
-			} );
-		}
-
 		// removing site links heading to rebuild it with value counter
 		$( '.wikibase-sitelinklistview' ).each( function() {
-			$( this ).toolbarcontroller( {
+			var $sitelinklistview = $( this ),
+				siteIdsOfGroup = [];
+
+			$sitelinklistview.find( '.wikibase-sitelinkview' ).each( function() {
+				siteIdsOfGroup.push( $( this ).data( 'wb-siteid' ) );
+			} );
+
+			$sitelinklistview.toolbarcontroller( {
 				addtoolbar: ['sitelinklistview'],
 				edittoolbar: ['sitelinkview']
 			} );
 
+			// TODO: Implement sitelinkgrouplistview to manage sitelinklistview widgets
 			var group = $( this ).data( 'wb-sitelinks-group' ),
-				$sitesCounterContainer = $( '<span/>' );
-
-			$( this ).prev().append( $sitesCounterContainer );
-
-			// TODO: Get represented site links from Item object
-			var groupSiteIds = [],
-				siteLinks = [],
-				prefix = 'wikibase-sitelinkview-';
-
-			$( this ).find( 'tbody > tr' ).each( function() {
-				var $tr = $( this ),
-					cssClasses = $tr.attr( 'class' ) ? $tr.attr( 'class' ).split( ' ' ) : '';
-
-				for( var i = 0; i < cssClasses.length; i++ ) {
-					if( cssClasses[i].indexOf( prefix ) === 0 ) {
-						siteLinks.push( new wb.datamodel.SiteLink(
-							cssClasses[i].substr( prefix.length ),
-							$.trim( $tr.children( 'td.wikibase-sitelinkview-link' ).text() ),
-							getBadges( $tr.find( '.wb-badge' ) )
-						) );
-					}
-				}
-			} );
+				groupSiteIds = [],
+				$sitesCounterContainer = $( '<span/>' ),
+				siteLinks = entity.getSiteLinks(),
+				siteLinksOfGroup = [];
 
 			$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
 				groupSiteIds.push( siteId );
 			} );
 
+			for( var i = 0; i < siteIdsOfGroup.length; i++ ) {
+				for( var j = 0; j < siteLinks.length; j++ ) {
+					if( siteLinks[j].getSiteId() === siteIdsOfGroup[i] ) {
+						siteLinksOfGroup.push( siteLinks[j] );
+						break;
+					}
+				}
+			}
+
+			$( this ).prev().append( $sitesCounterContainer );
+
 			// actual initialization
 			$( this ).sitelinklistview( {
-				value: siteLinks,
+				value: siteLinksOfGroup,
 				allowedSiteIds: groupSiteIds,
 				entityId: entity.getId(),
 				api: repoApi,
