@@ -11,7 +11,8 @@
 			"OTAVIO1981",
 			"SandroHc",
 			"Vitorvicentevalente",
-			"Waldir"
+			"Waldir",
+			555
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -29,7 +30,7 @@
 	"wikibase-comment-sitelink-change": "Ligação de idioma alterada de $1 para $2",
 	"wikibase-comment-sitelink-remove": "Ligação de idioma removida: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|alteração|alterações}}",
-	"wikibase-dataitem": "Dados de item {{WBREPONAME}}",
+	"wikibase-dataitem": "Item no {{WBREPONAME}}",
 	"wikibase-editlinks": "Editar ligações",
 	"wikibase-editlinkstitle": "Editar ligações interlínguas",
 	"wikibase-linkitem-addlinks": "Adicionar ligações",

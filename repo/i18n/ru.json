@@ -108,6 +108,7 @@
 	"wikibase-itembytitle-submit": "Найти",
 	"wikibase-itembytitle-create": "Вы также можете [{{fullurl:Special:NewItem|site=$1&page=$2}} создать элемент].",
 	"wikibase-gotolinkedpage-lookup-site": "Сайт:",
+	"wikibase-gotolinkedpage-lookup-item": "Id элемента:",
 	"wikibase-gotolinkedpage-submit": "Перейти",
 	"special-itemdisambiguation": "Неоднозначные элементы (с одним и тем же названием)",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Искать элементы по языку и метке (названию)",

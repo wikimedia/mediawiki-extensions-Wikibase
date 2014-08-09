@@ -213,7 +213,7 @@
 	"wikibase-restoreold": "przywróć",
 	"wikibase-restore-summary": "Przywrócono wersję $1 zrobioną przez [[Special:Contributions/$2|$2]]",
 	"wikibase-no-direct-editing": "Bezpośrednia edycja jest wyłączona w przestrzeni nazw $1",
-	"wikibase-noentity": "Ten zbiór danych nie istnieje. Możesz <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} przeszukać rejestry operacji]</span>, aby sprawdzić gdzie on się podział.",
+	"wikibase-noentity": "Ta encja nie istnieje. Możesz [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} przeszukać rejestry operacji], aby sprawdzić gdzie ona mogła się podziać.",
 	"wikibase-noentity-createone": "Możesz także [[$1|utworzyć nowy]].",
 	"wikibase-special-mergeitems-error-prefix": "Elementy nie mogły zostać połączone. Wystąpił następujący błąd:",
 	"wikibase-item-summary-wbsetitem": "Utworzono nowy element",

@@ -354,6 +354,7 @@ $specialPageAliases['zh-hans'] = array(
 	'NewItem' => array( '创建项' ),
 	'NewProperty' => array( '新属性' ),
 	'ItemByTitle' => array( '项按标题' ),
+	'GoToLinkedPage' => array( '前往已链接页面' ),
 	'ItemDisambiguation' => array( '项消歧义' ),
 	'ListDatatypes' => array( '数据类型列表' ),
 	'SetLabel' => array( '设置标签' ),

@@ -82,6 +82,11 @@ $specialPageAliases['nl'] = array(
 	'UnconnectedPages' => array( 'OngekoppeldePaginas', 'OngekoppeldePagina\'s' ),
 );
 
+/** Portuguese (português) */
+$specialPageAliases['pt'] = array(
+	'UnconnectedPages' => array( 'Páginas_sem_conexões' ),
+);
+
 /** Turkish (Türkçe) */
 $specialPageAliases['tr'] = array(
 	'UnconnectedPages' => array( 'BağlanmamışSayfalar', 'Bağlantısız', 'SiteBağlantısız' ),
