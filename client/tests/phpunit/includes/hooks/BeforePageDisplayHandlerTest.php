@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use RequestContext;
 use Skin;
-use SkinVector;
+use SkinFallback;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 
 /**
@@ -274,7 +274,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getSkin( $loggedIn, $titleExists ) {
 		$context = $this->getContext( $loggedIn, $titleExists );
-		$skin = new SkinVector();
+		$skin = new SkinFallback();
 		$skin->setContext( $context );
 
 		return $skin;
