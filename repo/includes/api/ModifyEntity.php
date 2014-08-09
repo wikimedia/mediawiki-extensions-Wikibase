@@ -536,8 +536,7 @@ abstract class ModifyEntity extends ApiWikibase {
 			'type' => array( 'A specific type of entity.',
 				"Will default to 'item' as this will be the most common type."
 			),
-			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
-			),
+			'token' => 'A "edittoken" token previously obtained through the token module (prop=info).',
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),

@@ -263,11 +263,7 @@ class LinkTitles extends ApiWikibase {
 			'fromtitle' => array( 'Title of the page to associate.',
 				"Use together with 'fromsite' to make a complete sitelink."
 			),
-			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
-				'Later it can be implemented a mechanism where a token can be returned spontaneously',
-				'and the requester should then start using the new token from the next request, possibly when',
-				'repeating a failed request.'
-			),
+			'token' => 'A "edittoken" token previously obtained through the token module (prop=info).',
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
