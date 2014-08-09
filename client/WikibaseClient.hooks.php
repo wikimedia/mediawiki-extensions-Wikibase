@@ -577,7 +577,7 @@ final class ClientHooks {
 		$repoLinker = $wikibaseClient->newRepoLinker();
 		$entityIdParser = $wikibaseClient->getEntityIdParser();
 
-		$siteGroup = $wikibaseClient->getSiteGroup();
+		$siteGroup = $wikibaseClient->getLangLinkSiteGroup();
 
 		$langLinkGenerator = new RepoItemLinkGenerator(
 			WikibaseClient::getDefaultInstance()->getNamespaceChecker(),
