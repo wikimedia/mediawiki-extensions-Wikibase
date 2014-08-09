@@ -786,7 +786,6 @@ class EditEntity {
 				$this->status->fatal( 'edit-conflict' );
 				$this->errorType |= self::EDIT_CONFLICT_ERROR;
 
-				wfProfileOut( "Wikibase-" . __METHOD__ );
 				return $this->status;
 			}
 		}
