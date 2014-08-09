@@ -31,7 +31,7 @@ class RepoItemLinkGenerator {
 	/**
 	 * @var string
 	 */
-	private $siteGroup;
+	private $langLinkSiteGroup;
 
 	/**
 	 * @since 0.4
@@ -39,18 +39,18 @@ class RepoItemLinkGenerator {
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param RepoLinker       $repoLinker
 	 * @param EntityIdParser   $entityIdParser
-	 * @param string           $siteGroup
+	 * @param string           $langLinkSiteGroup
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		RepoLinker $repoLinker,
 		EntityIdParser $entityIdParser,
-		$siteGroup
+		$langLinkSiteGroup
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
 		$this->entityIdParser = $entityIdParser;
-		$this->siteGroup = $siteGroup;
+		$this->langLinkSiteGroup = $langLinkSiteGroup;
 	}
 
 	/**
@@ -125,7 +125,7 @@ class RepoItemLinkGenerator {
 	 * @return string[]
 	 */
 	private function getEditLinksLink( EntityId $entityId ) {
-		$fragment = '#sitelinks-' . htmlspecialchars( $this->siteGroup, ENT_QUOTES );
+		$fragment = '#sitelinks-' . htmlspecialchars( $this->langLinkSiteGroup, ENT_QUOTES );
 
 		$link = array(
 			'action' => 'edit',
