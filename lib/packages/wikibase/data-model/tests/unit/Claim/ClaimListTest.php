@@ -89,7 +89,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testGetBestClaims() {
+	public function testGetBestClaimPerProperty() {
 		$list = new ClaimList( array(
 			$this->getStubClaim( 1, 'one', Claim::RANK_PREFERRED ),
 			$this->getStubClaim( 1, 'two', Claim::RANK_NORMAL ),
@@ -113,7 +113,7 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 
 				$this->getStubClaim( 4, 'eight', Claim::RANK_TRUTH ),
 			),
-			$list->getBestClaims()->toArray()
+			$list->getBestClaimPerProperty()->toArray()
 		);
 	}
 

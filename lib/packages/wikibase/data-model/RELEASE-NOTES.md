@@ -35,6 +35,7 @@ Removal of `toArray` and `newFromArray`:
 Other breaking changes:
 
 * `Claim` and `Statement` no longer implement `Serializable`
+* `ClaimList::getBestClaims` got renamed to `ClaimList::getBestClaimPerProperty`
 * Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
 * Removed `Fingerprint::getAliases`
 * Removed `EntityId::newFromPrefixedId`
@@ -46,7 +47,7 @@ Other breaking changes:
 * Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
 * `HashArray` and `SnakList` no longer take an optional parameter in `getHash`
 * Calling `clear` on an `Item` will now cause its statements to be removed
-* `SiteLinkList::addNewSiteLink` no longer the `SiteLinkList` instance
+* `SiteLinkList::addNewSiteLink` no longer returns a `SiteLinkList` instance
 * Removed the global variable `evilDataValueMap`
 
 #### Additions
