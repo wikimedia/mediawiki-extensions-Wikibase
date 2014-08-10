@@ -21,20 +21,13 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class EntityIdTest extends \PHPUnit_Framework_TestCase {
 
-	public function testConstructorWithNumericId() {
-		$id = new ItemId( 'Q123' );
-		$this->assertEquals( $id->getSerialization(),'Q123' );
-
-		$id = new PropertyId( 'P123' );
-		$this->assertEquals( $id->getSerialization(), 'P123' );
-	}
-
 	public function instanceProvider() {
 		$ids = array();
 
 		$ids[] = array( new ItemId( 'Q1' ) );
 		$ids[] = array( new ItemId( 'Q42' ) );
 		$ids[] = array( new ItemId( 'Q31337' ) );
+		$ids[] = array( new ItemId( 'Q2147483648' ) );
 		$ids[] = array( new PropertyId( 'P101010' ) );
 
 		return $ids;
