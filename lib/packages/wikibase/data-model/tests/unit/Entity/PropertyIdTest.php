@@ -37,6 +37,7 @@ class PropertyIdTest extends \PHPUnit_Framework_TestCase {
 			array( 'p31337' ),
 			array( 'P31337' ),
 			array( 'P42' ),
+			array( 'P2147483648' ),
 		);
 	}
 
@@ -67,9 +68,35 @@ class PropertyIdTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewFromNumber() {
-		$id = PropertyId::newFromNumber( 42 );
-		$this->assertEquals( 'P42', $id->getSerialization() );
+	/**
+	 * @dataProvider numericIdProvider
+	 */
+	public function testNewFromNumber( $number ) {
+		$id = PropertyId::newFromNumber( $number );
+		$this->assertEquals( 'P' . $number, $id->getSerialization() );
+	}
+
+	public function numericIdProvider() {
+		return array(
+			array( 42 ),
+			array( 42.0 ),
+			array( 2147483648 ),
+		);
+	}
+
+	/**
+	 * @dataProvider invalidNumericIdProvider
+	 */
+	public function testNewFromNumberWithInvalidNumericId( $number ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		PropertyId::newFromNumber( $number );
+	}
+
+	public function invalidNumericIdProvider() {
+		return array(
+			array( '42' ),
+			array( 2147483648.1 ),
+		);
 	}
 
 }
