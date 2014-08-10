@@ -574,7 +574,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		$entityIds = array_map(
 			function( $entity ) {
 				// FIXME: this only works for items and properties
-				return LegacyIdInterpreter::newIdFromTypeAndNumber( $entity->term_entity_type, (int)$entity->term_entity_id );
+				return LegacyIdInterpreter::newIdFromTypeAndNumber( $entity->term_entity_type, $entity->term_entity_id );
 			},
 			iterator_to_array( $entities )
 		);
@@ -692,7 +692,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		if ( $hasWeight ) {
 			$weights = array();
 			foreach ( $obtainedIDs as $obtainedID ) {
-				$weights[intval( $obtainedID->term_entity_id )] = floatval( $obtainedID->term_weight );
+				$weights[$obtainedID->term_entity_id] = floatval( $obtainedID->term_weight );
 			}
 
 			// this is a post-search sorting by weight. This allows us to not require an additional
@@ -709,7 +709,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex {
 		} else {
 			$numericIds = array();
 			foreach ( $obtainedIDs as $obtainedID ) {
-				$numericIds[] = intval( $obtainedID->term_entity_id );
+				$numericIds[] = $obtainedID->term_entity_id;
 			}
 		}
 

@@ -255,7 +255,7 @@ class EntityPerPageTable implements EntityPerPage {
 
 		foreach ( $rows as $row ) {
 			// FIXME: this only works for items and properties
-			$entities[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->entity_type, (int)$row->entity_id );
+			$entities[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->entity_type, $row->entity_id );
 		}
 
 		return $entities;
