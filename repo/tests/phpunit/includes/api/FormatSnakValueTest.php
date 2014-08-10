@@ -108,11 +108,11 @@ class FormatSnakValueTest extends \ApiTestCase {
 				null,
 				'@commons\.wikimedia\.org\/wiki\/File:Example\.jpg@' ),
 
-			array( new EntityIdValue( new ItemId( 'Q45345345435' ) ),
+			array( new EntityIdValue( new ItemId( 'Q2147483647' ) ),
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'/^Q45345345435' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem,  '/' ) . '\)<\/span>$/' ),
+				'/^Q2147483647' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem,  '/' ) . '\)<\/span>$/' ),
 
 			// @TODO: Test an existing Item id
 		);
