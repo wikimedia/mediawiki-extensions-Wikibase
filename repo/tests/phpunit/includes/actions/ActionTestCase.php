@@ -232,11 +232,15 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @return String the token
 	 */
 	protected function getToken( Title $title, $for = 'edit' ) {
-		$func = '\ApiQueryInfo::get' . ucfirst( $for ) . 'Token';
+		global $wgUser;
 
-		$token = call_user_func( $func, $title->getArticleID(), $title );
+		switch ( $for ) {
+			case 'edit':
+				return $wgUser->getEditToken();
 
-		return $token;
+			default:
+				throw new MWException( "unknown token action: $for" );
+		}
 	}
 
 	/**

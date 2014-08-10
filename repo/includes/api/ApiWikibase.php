@@ -226,7 +226,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @see ApiBase::needsToken()
 	 */
 	public function needsToken() {
-		return $this->isWriteMode();
+		return $this->isWriteMode() ? 'csrf' : false;
 	}
 
 	/**

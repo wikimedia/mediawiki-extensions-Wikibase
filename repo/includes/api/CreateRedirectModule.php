@@ -153,7 +153,7 @@ class CreateRedirectModule extends ApiBase {
 	 * @see ApiBase::needsToken()
 	 */
 	public function needsToken() {
-		return true;
+		return 'csrf';
 	}
 
 	/**
@@ -206,7 +206,7 @@ class CreateRedirectModule extends ApiBase {
 		return array(
 			'from' => array( 'Entity ID to make a redirect' ),
 			'to' => array( 'Entity ID to point the redirect to' ),
-			'token' => array( 'A "edittoken" token previously obtained through the token module' ),
+			'token' => 'A "edittoken" token previously obtained through the token module',
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
