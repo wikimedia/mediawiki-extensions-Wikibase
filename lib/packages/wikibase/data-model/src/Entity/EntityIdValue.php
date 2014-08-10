@@ -41,10 +41,10 @@ class EntityIdValue extends DataValueObject {
 	 * though cannot be removed until we ditch the "numeric id" part
 	 * from the serialization.
 	 *
-	 * @return int
+	 * @return double Numeric id as a whole number. Can not be int because of 32-bit PHP.
 	 */
-	private function getNumericId() {
-		return (int)substr( $this->entityId->getSerialization(), 1 );
+	protected function getNumericId() {
+		return doubleval( substr( $this->entityId->getSerialization(), 1 ) );
 	}
 
 	/**
