@@ -54,7 +54,7 @@
 	"wikibase-rc-show-wikidata-pref": "Mostrar as edições {{WBREPONAME}} nas mudanças recentes",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Edição {{WBREPONAME}}",
-	"wikibase-watchlist-show-changes-pref": "Mostra as edições {{WBREPONAME}} na sua lista de vigiados",
+	"wikibase-watchlist-show-changes-pref": "Mostrar as edições no {{WBREPONAME}} na sua lista de páginas vigiadas",
 	"wikibase-error-invalid-entity-id": "O identificador introduzido não é reconhecido pelo sistema. Utilize um identificador válido.",
 	"special-unconnectedpages": "Páginas não ligadas a itens",
 	"wikibase-unconnectedpages-legend": "Opções de páginas não ligadas",
