@@ -73,6 +73,8 @@
 	"wikibase-itembytitle-lookup-page": "Strana:",
 	"wikibase-itembytitle-submit": "Pretraži",
 	"wikibase-itembytitle-create": "Možete takođe i [{{fullurl:Special:NewItem|site=$1&page=$2}} napraviti stavku].",
+	"wikibase-gotolinkedpage-lookup-site": "Sajt:",
+	"wikibase-gotolinkedpage-submit": "Idi",
 	"special-itemdisambiguation": "Višeznačna stavka",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Pretraga stavki prema jeziku i nazivu",
 	"wikibase-itemdisambiguation-lookup-language": "Jezik:",
