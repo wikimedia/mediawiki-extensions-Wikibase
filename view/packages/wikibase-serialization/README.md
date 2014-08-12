@@ -24,6 +24,7 @@ version 1.0 of this package:
 ### 1.1.1 (dev)
 
 * Added serialization.EntityUnserializer.itemExpert unserializing site links.
+* Fixed unserializing aliases in EntityUnserializer.
 
 ### 1.1.0 (2014-07-10)
 

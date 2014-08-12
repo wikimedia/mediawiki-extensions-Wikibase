@@ -15,6 +15,16 @@
 	var typeSpecificUnserializers = {};
 
 	/**
+	 * @param {Object[]} array
+	 * @return {*[]}
+	 */
+	function extractValuesFromObjectArray( array ) {
+		return $.map( array, function( valueObj ) {
+			return valueObj.value;
+		} );
+	}
+
+	/**
 	 * Helper for unserializing multilingual value.
 	 *
 	 * @param {Object} serialization
@@ -27,8 +37,11 @@
 		var unserialized = {};
 
 		for( var lang in serialization ) {
-			unserialized[ lang ] = serialization[ lang ].value;
+			unserialized[lang] = $.isArray( serialization[lang] )
+				? extractValuesFromObjectArray( serialization[lang] )
+				: serialization[lang].value;
 		}
+
 		return unserialized;
 	}
 
