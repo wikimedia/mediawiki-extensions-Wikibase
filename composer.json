@@ -35,7 +35,7 @@
 		"data-values/javascript": "~0.5.1",
 		"data-values/value-view": "~0.6.5",
 
-		"wikibase/data-model": "~0.9.0",
+		"wikibase/data-model": "~1.0@dev",
 		"wikibase/data-model-javascript": "~0.3.0",
 		"wikibase/data-model-serialization": "~1.0.1",
 		"wikibase/internal-serialization": "~1.1",
@@ -71,5 +71,11 @@
 		"psr-4": {
 			"Wikibase\\Repo\\View\\": "repo/includes/View"
 		}
-	}
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/wmde/WikibaseDataModel.git"
+		}
+	]
 }
