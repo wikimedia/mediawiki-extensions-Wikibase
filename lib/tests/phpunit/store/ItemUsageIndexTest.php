@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use MediaWikiSite;
 use Site;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemUsageIndex;
 
 /**

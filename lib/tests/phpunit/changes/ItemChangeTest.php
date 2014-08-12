@@ -6,10 +6,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Exception;
 use Wikibase\DataModel\Entity\Entity;
-use Wikibase\EntityChange;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\ItemChange;
 use Wikibase\DataModel\Entity\ItemDiff;
+use Wikibase\EntityChange;
+use Wikibase\ItemChange;
 
 /**
  * @covers Wikibase\ItemChange
