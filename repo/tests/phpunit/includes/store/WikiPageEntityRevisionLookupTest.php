@@ -79,7 +79,7 @@ class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		}
 
 		return new WikiPageEntityRevisionLookup(
-			$this->getEntityContentCodec(),
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
 			false
 		);
 	}
@@ -90,20 +90,6 @@ class WikipageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		}
 
 		return $revision;
-	}
-
-	private function getEntityContentCodec() {
-		$idParser = new BasicEntityIdParser();
-		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( $GLOBALS['evilDataValueMap'] ), $idParser );
-
-		$codec = new EntityContentDataCodec(
-			$idParser,
-			$serializerFactory->newEntitySerializer(),
-			$deserializerFactory->newEntityDeserializer()
-		);
-
-		return $codec;
 	}
 
 }
