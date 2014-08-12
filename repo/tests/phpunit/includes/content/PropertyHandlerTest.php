@@ -6,10 +6,8 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyHandler;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
 /**

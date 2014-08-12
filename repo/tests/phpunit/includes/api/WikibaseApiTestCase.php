@@ -2,10 +2,7 @@
 
 namespace Wikibase\Test\Api;
 
-use ApiTestCase;
 use Revision;
-use TestSites;
-use TestUser;
 use UsageException;
 use User;
 use Wikibase\EntityFactory;

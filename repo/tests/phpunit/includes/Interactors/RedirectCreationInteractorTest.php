@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 use Wikibase\Test\MockRepository;
 
 /**

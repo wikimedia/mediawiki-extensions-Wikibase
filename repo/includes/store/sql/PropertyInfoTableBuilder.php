@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
