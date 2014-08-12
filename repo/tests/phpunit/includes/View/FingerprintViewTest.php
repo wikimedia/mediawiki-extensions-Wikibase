@@ -4,9 +4,7 @@ namespace Wikibase\Test;
 
 use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 
@@ -134,38 +132,30 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$noAliases->removeAliasGroup( 'en' );
 
 		return array(
-			array( Fingerprint::newEmpty(), 'No' ),
-			array( $noLabel, 'No label' ),
-			array( $noDescription, 'No description' ),
-			array( $noAliases, 'No aliases' ),
+			array( Fingerprint::newEmpty(), array( 'wb-value-empty', 'wb-empty' ), 'No' ),
+			array( $noLabel, array( 'wb-value-empty' ), 'No label' ),
+			array( $noDescription, array( 'wb-value-empty' ), 'No description' ),
+			array( $noAliases, array( 'wb-empty' ), 'No aliases' ),
 		);
 	}
 
 	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
-	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint ) {
+	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint, array $classes ) {
 		$fingerprintView = $this->getFingerprintView();
 		$html = $fingerprintView->getHtml( $fingerprint );
 
-		$this->assertContains( 'wb-value-empty', $html );
-	}
-
-	public function testGetHtml_isMarkedAsEmptyAliases() {
-		$fingerprintView = $this->getFingerprintView();
-		$fingerprint = $this->getFingerprint();
-		$fingerprint->removeAliasGroup( 'en' );
-		$html = $fingerprintView->getHtml( $fingerprint );
-
-		$this->assertContains( 'wb-aliases-empty', $html );
+		foreach ( $classes as $class ) {
+			$this->assertContains( $class, $html );
+		}
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
 		$fingerprintView = $this->getFingerprintView();
 		$html = $fingerprintView->getHtml( $this->getFingerprint() );
 
-		$this->assertNotContains( 'wb-value-empty', $html );
-		$this->assertNotContains( 'wb-aliases-empty', $html );
+		$this->assertNotContains( 'wb-empty', $html );
 	}
 
 	/**
@@ -206,7 +196,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
-	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $message ) {
+	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, array $classes, $message ) {
 		$fingerprintView = $this->getFingerprintView();
 		$html = $fingerprintView->getHtml( $fingerprint );
 

@@ -26,9 +26,11 @@ return call_user_func( function() {
 		// common styles independent from JavaScript being enabled or disabled
 		'wikibase.common' => $moduleTemplate + array(
 			'styles' => array(
-				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
+				// Order must be hierarchical, do not order alphabetically
 				'wikibase.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.aliasesview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkview.css',
 			)
 		),
 
@@ -298,14 +300,10 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
-				'wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js',
-				'wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.js',
 				'wikibase.ui.PropertyEditTool.EditableDescription.js',
 				'wikibase.ui.PropertyEditTool.EditableLabel.js',
-				'wikibase.ui.PropertyEditTool.EditableAliases.js',
 				'wikibase.ui.LabelEditTool.js',
 				'wikibase.ui.DescriptionEditTool.js',
-				'wikibase.ui.AliasesEditTool.js',
 			),
 			'styles' => array(
 				'wikibase.ui.PropertyEditTool.css'
@@ -470,6 +468,27 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.aliasesview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.aliasesview.js'
+			),
+			'styles' => array(
+				'jquery.wikibase/themes/default/jquery.wikibase.aliasesview.css',
+			),
+			'dependencies' => array(
+				'jquery.inputautoexpand',
+				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.toolbarcontroller',
+				'wikibase.RepoApiError',
+				'wikibase.templates',
+				'wikibase.utilities.jQuery.ui.tagadata',
+			),
+			'messages' => array(
+				'wikibase-aliases-label'
+			),
+		),
+
 		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.sitelinkgroupview.js'
@@ -493,6 +512,7 @@ return call_user_func( function() {
 				'jquery.tablesorter',
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.addtoolbar',
+				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.sitelinkview',
 				'jquery.wikibase.toolbarcontroller',
