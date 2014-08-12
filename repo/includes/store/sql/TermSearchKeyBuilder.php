@@ -198,7 +198,7 @@ class TermSearchKeyBuilder {
 		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->table
 
 		while ( true ) {
-			list( $host, $maxLag ) = $lb->getMaxLag();
+			list( , $maxLag ) = $lb->getMaxLag();
 			if ( $maxLag < 2 ) {
 				break;
 			}
