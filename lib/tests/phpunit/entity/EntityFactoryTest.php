@@ -2,9 +2,9 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\EntityFactory;
 
 /**
  * @covers Wikibase\EntityFactory

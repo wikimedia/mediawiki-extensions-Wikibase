@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Parsers\Test;
 
 use Language;
-use ValueParsers\ParserOptions;
 use Wikibase\Lib\Parsers\MonthNameUnlocalizer;
 
 /**

@@ -12,7 +12,6 @@ use Wikibase\Item;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
 
 /**
  * @covers Wikibase\Lib\EntityIdLabelFormatter
