@@ -133,7 +133,6 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	 */
 	private function applyRedirect( $idString, EntityId $targetId) {
 		$redirectedId = $this->parseId( $idString );
-		$type = $redirectedId->getEntityType();
 
 		$targetKey = $targetId->getSerialization();
 
