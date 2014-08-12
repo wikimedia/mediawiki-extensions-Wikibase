@@ -10,9 +10,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\ItemHandler;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
 /**
