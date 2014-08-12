@@ -62,18 +62,6 @@
 		registerEditRestrictionHandlers();
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
-			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
-			// needed for running the page without JS
-			$( '.wb-aliases-empty' )
-			.each( function() {
-				$( this ).replaceWith( wb.ui.AliasesEditTool.getEmptyStructure() );
-			} );
-
-			// edit tool for aliases:
-			$( '.wb-aliases' ).each( function() {
-				new wb.ui.AliasesEditTool( this, { api: repoApi } );
-			} );
-
 			// BUILD CLAIMS VIEW:
 			// Note: $.entityview() only works for claims right now, the goal is to use it for more
 			var $claims = $( '.wb-claims' ).first(),
@@ -258,6 +246,20 @@
 		var abstractedRepoApi = new wb.AbstractedRepoApi( repoApi );
 		var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 		wb.compileEntityStoreFromMwConfig( entityStore );
+
+		// TODO: Integrate into entityview
+		$( '.wikibase-aliasesview' )
+		.toolbarcontroller( {
+			edittoolbar: ['aliasesview']
+		} )
+		.aliasesview( {
+			value: {
+				language:  mw.config.get( 'wgUserLanguage' ),
+				aliases: entity.getAliases( mw.config.get( 'wgUserLanguage' ) )
+			},
+			entityId: entity.getId(),
+			api: repoApi
+		} );
 
 		// FIXME: Initializing entityview on $claims leads to the claim section inserted as
 		// child of $claims. It should be direct child of ".wb-entity".

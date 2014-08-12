@@ -1,0 +1,84 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-aliasesview,
+.wikibase-aliasesview-empty {
+	float: left; /* necessary for highlighting in edit mode */
+	width: 100%;
+}
+
+/* aliases exclusive helper div containing editable value and its toolbar but not the
+PropertyEditTool toolbar */
+.wikibase-aliasesview .wikibase-aliasesview-container {
+	display: block !important;
+	padding-left: 10px;
+	padding-right: 19em;
+	position: relative;
+}
+
+.wikibase-aliasesview-label {
+	font-size: 84%; /* using #contentSub font-size */
+	float: left;
+	font-weight: bold;
+	margin-right: 1em;
+	margin-top: 1px; /* even out border of alias values */
+	margin-bottom: -3px; /* IE 7 would not wrap around directly but instead leave empty space
+							underneath the label for one line in some cases */
+}
+
+.wikibase-aliasesview.wb-empty .wikibase-aliasesview-label {
+	font-weight: normal;
+}
+
+.wikibase-aliasesview .wikibase-aliasesview-label,
+.wikibase-aliasesview ul {
+	overflow: auto;
+}
+
+.wikibase-aliasesview div {
+	display: inline;
+}
+
+.wikibase-aliasesview ul {
+	margin: 0;
+	padding: 0;
+	line-height: inherit;
+}
+
+.wikibase-aliasesview li {
+	font-size: 84%;
+	float: left;
+	margin: 0.2em 12px 0.2em 0;
+	display: inline;
+	list-style-type: none;
+	border: 1px solid #CCC;
+	padding: 0 12px 0 7px;
+	line-height: 136%;
+	background-color: #F8F8F8;
+}
+
+.wikibase-aliasesview ul.tagadata li {
+	margin: 0.2em 4px 0.2em 0;
+}
+
+.wikibase-aliasesview ul.tagadata li.tagadata-choice {
+	line-height: 136%;
+}
+
+.wikibase-aliasesview .tagadata-choice input {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+.wikibase-aliasesview.wb-edit {
+	background-color: #D6F3FF;
+	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
+}
+
+.wikibase-aliasesview.wb-edit ul {
+	/* since the aliases ul list is cloned in JS, its stashed pendant will be visible as box on the
+	edit mode highlight colour in non-Webkit browsers without making the bg colour transparent */
+	background: transparent;
+	font-size: 1em;
+}
