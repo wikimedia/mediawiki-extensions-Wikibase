@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_8f8403a5",
+        "filename": "client/includes/UpdateRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-08-12T21:53:09Z",
+      "side": 1,
+      "message": "no longer",
+      "revId": "2a018b673700ab26c841e4b256313359b3a16d0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

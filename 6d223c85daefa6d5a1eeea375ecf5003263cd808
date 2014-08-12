@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_2f53cf44",
+        "filename": "client/tests/phpunit/includes/UpdateRepoOnMoveTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-08-12T21:53:09Z",
+      "side": 0,
+      "message": "it still should throw (not sure what it will throw, but it should)",
+      "revId": "6d223c85daefa6d5a1eeea375ecf5003263cd808",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
