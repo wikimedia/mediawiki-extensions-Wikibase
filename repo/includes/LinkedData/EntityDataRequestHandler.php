@@ -12,9 +12,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
+use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 
 /**
