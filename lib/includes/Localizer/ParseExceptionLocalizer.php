@@ -19,9 +19,10 @@ class ParseExceptionLocalizer implements ExceptionLocalizer {
 	/**
 	 * @see ExceptionLocalizer::getExceptionMessage()
 	 *
-	 * @param ParseException $exception
+	 * @param Exception $exception
 	 *
 	 * @return Message
+	 * @throws InvalidArgumentException
 	 */
 	public function getExceptionMessage( Exception $exception ) {
 		if ( !$this->hasExceptionMessage( $exception ) ) {
