@@ -279,40 +279,21 @@
 			.first()
 			.attr( 'id', 'claims' );
 
-		// removing site links heading to rebuild it with value counter
-		$( '.wikibase-sitelinklistview' ).each( function() {
+		$( '.wikibase-sitelinkgroupview' ).each( function() {
 			$( this ).toolbarcontroller( {
 				addtoolbar: ['sitelinklistview'],
 				edittoolbar: ['sitelinkview']
 			} );
 
-			// TODO: Implement sitelinkgrouplistview to manage sitelinklistview widgets
-			var group = $( this ).data( 'wb-sitelinks-group' ),
-				$sitesCounterContainer = $( '<span/>' ),
-				siteLinks = entity.getSiteLinks(),
-				groupSiteIds = [],
-				siteLinksOfGroup = [];
-
-			$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
-				groupSiteIds.push( siteId );
-			} );
-
-			for( var i = 0; i < siteLinks.length; i++ ) {
-				if( $.inArray( siteLinks[i].getSiteId(), groupSiteIds ) !== -1 ) {
-					siteLinksOfGroup.push( siteLinks[i] );
-				}
-			}
-
-			$( this ).prev().append( $sitesCounterContainer );
-
-			// actual initialization
-			$( this ).sitelinklistview( {
-				value: siteLinksOfGroup,
-				allowedSiteIds: groupSiteIds,
+			// TODO: Implement sitelinkgrouplistview to manage sitelinkgroupview widgets
+			$( this ).sitelinkgroupview( {
+				value: {
+					group: $( this ).data( 'wb-sitelinks-group' ),
+					siteLinks: entity.getSiteLinks()
+				},
 				entityId: entity.getId(),
 				api: repoApi,
-				entityStore: entityStore,
-				$counter: $sitesCounterContainer
+				entityStore: entityStore
 			} );
 		} );
 
