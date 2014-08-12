@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\PropertyLabelResolver;
@@ -16,7 +17,7 @@ use Wikibase\PropertyLabelResolver;
 /**
  * Find Snaks for claims in an entity, with EntityId, based on property label or property id.
  *
- * @fixme see what code can be shared with Lua handling code.
+ * TODO: see what code can be shared with Lua handling code.
  *
  * @since 0.5
  *
@@ -42,8 +43,9 @@ class SnaksFinder {
 	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabel
+	 * @param string $languageCode
 	 *
-	 * @fixme use SnakList instead of array of Snaks
+	 * TODO: use SnakList instead of array of Snaks
 	 *
 	 * @return Snak[]
 	 */
