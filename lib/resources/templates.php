@@ -190,24 +190,20 @@ HTML;
 <span class="wb-value-supplement">$1</span>
 HTML;
 
-	$templates['wb-aliases-wrapper'] =
+	$templates['wikibase-aliasesview'] =
 <<<HTML
-<div class="wb-aliases $1">
-	<div class="wb-gridhelper">
-		<span class="wb-aliases-label $2">$3</span>
-		$4
+<div class="wikibase-aliasesview $1">
+	<div class="wikibase-aliasesview-container">
+		<span class="wikibase-aliasesview-label">$2</span>
+		<ul class="wikibase-aliasesview-list">$3</ul>
+		<!-- wb-toolbar -->$4
 	</div>
 </div>
 HTML;
 
-	$templates['wb-aliases'] =
+	$templates['wikibase-aliasesview-list-item'] =
 <<<HTML
-<ul class="wb-aliases-container">$1</ul>
-HTML;
-
-	$templates['wb-alias'] =
-<<<HTML
-<li class="wb-aliases-alias">$1</li>
+<li class="wikibase-aliasesview-list-item">$1</li>
 HTML;
 
 	$templates['wb-editsection'] =
