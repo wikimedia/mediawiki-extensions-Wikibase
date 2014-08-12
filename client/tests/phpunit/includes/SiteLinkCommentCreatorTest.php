@@ -4,9 +4,9 @@ namespace Wikibase\Test;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
 

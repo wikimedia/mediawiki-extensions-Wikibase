@@ -5,16 +5,9 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 use InvalidArgumentException;
 use Language;
 use Status;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\PropertyLabelResolver;
 
 /**
  * Renderer of the {{#property}} parser function.
