@@ -116,13 +116,6 @@ class SiteLinksView {
 
 		$html = $thead = $tbody = $tfoot = '';
 
-		$html .= wfTemplate(
-			'wb-section-heading-sitelinks',
-			wfMessage( 'wikibase-sitelinks-' . $group )->parse(), // heading
-			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ) // ID
-			// TODO: support entity-id as prefix for element IDs.
-		);
-
 		if ( !empty( $siteLinksForTable ) ) {
 			$thead = $this->getTableHeadHtml( $isSpecialGroup );
 			$tbody = $this->getTableBodyHtml(
@@ -140,11 +133,16 @@ class SiteLinksView {
 		$isFull = count( $siteLinksForTable ) >= count( $sites );
 		$tfoot = $this->getTableFootHtml( $itemId, $isFull, $editable );
 
-		return $html . wfTemplate(
-			'wikibase-sitelinklistview',
-			$thead,
-			$tbody,
-			$tfoot,
+		return $html . wfTemplate( 'wikibase-sitelinkgroupview',
+			// TODO: support entity-id as prefix for element IDs.
+			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ),
+			wfMessage( 'wikibase-sitelinks-' . $group )->parse(),
+			'', // counter
+			wfTemplate( 'wikibase-sitelinklistview',
+				$thead,
+				$tbody,
+				$tfoot
+			),
 			htmlspecialchars( $group )
 		);
 	}
