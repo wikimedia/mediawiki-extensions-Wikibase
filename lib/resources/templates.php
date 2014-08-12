@@ -56,11 +56,6 @@ HTML;
 <h2 class="wb-section-heading" dir="auto" id="$2">$1</h2>
 HTML;
 
-	$templates['wb-section-heading-sitelinks'] =
-<<<HTML
-<h2 class="wb-section-heading wb-sitelinks-heading" dir="auto" id="$2">$1</h2>
-HTML;
-
 	$templates['wb-claimgrouplistview'] =
 <<<HTML
 <div class="wb-claimgrouplistview">
@@ -272,9 +267,21 @@ HTML;
 </tr>
 HTML;
 
+	$templates['wikibase-sitelinkgroupview'] =
+<<<HTML
+<div class="wikibase-sitelinkgroupview" data-wb-sitelinks-group="$5">
+	<h2 class="wb-section-heading wikibase-sitelinkgroupview-heading" dir="auto" id="$1">
+		$2<span class="wikibase-sitelinkgroupview-counter">$3</span>
+	</h2>
+	<div class="wikibase-sitelinkgroupview-sitelinklistview">
+		<!-- wikibase-sitelinklistview -->$4
+	</div>
+</div>
+HTML;
+
 	$templates['wikibase-sitelinklistview'] =
 <<<HTML
-<table class="wikibase-sitelinklistview" data-wb-sitelinks-group="$4">
+<table class="wikibase-sitelinklistview">
 	<colgroup>
 		<col class="wikibase-sitelinklistview-sitename" />
 		<col class="wikibase-sitelinklistview-siteid" />
