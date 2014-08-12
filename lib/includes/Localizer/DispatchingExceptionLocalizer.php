@@ -33,6 +33,7 @@ class DispatchingExceptionLocalizer implements ExceptionLocalizer {
 	 * @param Exception $exception
 	 *
 	 * @return Message
+	 * @throws InvalidArgumentException
 	 */
 	public function getExceptionMessage( Exception $exception ) {
 		$localizer = $this->getLocalizerForException( $exception );

@@ -20,6 +20,7 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 	 * @param Exception $exception
 	 *
 	 * @return Message
+	 * @throws InvalidArgumentException
 	 */
 	public function getExceptionMessage( Exception $exception ) {
 		if ( !$this->hasExceptionMessage( $exception ) ) {
