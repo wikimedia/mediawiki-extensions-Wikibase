@@ -8,7 +8,6 @@ use SiteList;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**

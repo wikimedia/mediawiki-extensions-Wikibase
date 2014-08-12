@@ -2,13 +2,13 @@
 
 namespace Wikibase\Client\Hooks;
 
-use Title;
 use Language;
-use SiteList;
 use Sanitizer;
-use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\DataModel\Entity\ItemId;
+use SiteList;
+use Title;
 use Wikibase\Client\ClientSiteLinkLookup;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityLookup;
 
 /**
  * Provides access to the badges of the current page's sitelinks

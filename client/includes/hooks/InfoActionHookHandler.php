@@ -6,9 +6,9 @@ use IContextSource;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
 use Wikibase\RepoLinker;
-use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @since 0.5

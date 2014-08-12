@@ -8,9 +8,7 @@ use Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Item;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
-use Wikibase\Property;
 use Wikibase\PropertyValueSnak;
 
 /**

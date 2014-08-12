@@ -4,18 +4,9 @@ namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
 use Language;
 use Parser;
-use ParserOptions;
-use Status;
 use Title;
-use User;
-use Wikibase\DataAccess\PropertyParserFunction\Renderer;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Test\MockPropertyLabelResolver;
-use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\Runner

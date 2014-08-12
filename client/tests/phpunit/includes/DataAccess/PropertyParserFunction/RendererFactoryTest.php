@@ -8,9 +8,6 @@ use ParserOptions;
 use Title;
 use User;
 use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\RendererFactory

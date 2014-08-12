@@ -7,11 +7,11 @@ use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
-use Wikibase\DataModel\Entity\EntityDiff;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemUsageIndex;
 
 /**

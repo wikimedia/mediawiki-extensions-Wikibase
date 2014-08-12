@@ -5,9 +5,7 @@ namespace Wikibase\Client\Test;
 use MediaWikiSite;
 use Site;
 use SiteList;
-use SiteStore;
 use Wikibase\Client\OtherProjectsSitesProvider;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Test\MockSiteStore;
 
 /**
