@@ -134,7 +134,7 @@ class ApiErrorReporter {
 		$this->addStatusToResult( $status, $extradata );
 
 		//XXX: when to prefer $statusCode over $errorCode?
-		list( $statusCode, $description ) = $this->apiModule->getErrorFromStatus( $status );
+		list( , $description ) = $this->apiModule->getErrorFromStatus( $status );
 
 		$this->throwUsageException( $description, $errorCode, $httpRespCode, $extradata );
 

@@ -234,7 +234,7 @@ class PropertyInfoTableBuilder {
 		$lb = wfGetLB(); //TODO: allow foreign DB, get from $this->propertyInfoTable
 
 		while ( true ) {
-			list( $host, $maxLag ) = $lb->getMaxLag();
+			list( , $maxLag ) = $lb->getMaxLag();
 			if ( $maxLag < 2 ) {
 				break;
 			}
