@@ -159,51 +159,6 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
 	}
 
-	// TODO: DM 1.0 blocker, this uses Entity::toArray
-	public function testGetEntityContentDataCodec_legacy() {
-		$item = Item::newEmpty();
-		$item->setLabel( 'en', 'Hello' );
-		$item->setLabel( 'es', 'Holla' );
-
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
-
-		$codec = $repo->getEntityContentDataCodec();
-		$json = $codec->encodeEntity( $item, CONTENT_FORMAT_JSON );
-		$data = json_decode( $json, true );
-
-		$this->assertEquals( $item->toArray(), $data );
-	}
-
-	// TODO: DM 1.0 blocker, this uses Entity::toArray
-	public function testGetInternalEntitySerializer_legacy() {
-		$item = Item::newEmpty();
-		$item->setLabel( 'en', 'Hello' );
-		$item->setLabel( 'es', 'Holla' );
-
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'internalEntitySerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer' );
-
-		$serializer = $repo->getInternalEntitySerializer();
-		$data = $serializer->serialize( $item );
-
-		$this->assertEquals( $item->toArray(), $data );
-	}
-
-	// TODO: DM 1.0 blocker, this uses Claim::toArray
-	public function testGetInternalClaimSerializer_legacy() {
-		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'kittens' );
-
-		$repo = $this->getDefaultInstance();
-		$repo->getSettings()->setSetting( 'internalClaimSerializerClass', 'Wikibase\Lib\Serializers\LegacyInternalClaimSerializer' );
-
-		$serializer = $repo->getInternalClaimSerializer();
-		$data = $serializer->serialize( $claim );
-
-		$this->assertEquals( $claim->toArray(), $data );
-	}
-
 	public function testNewItemHandler() {
 		$repo = $this->getDefaultInstance();
 		$handler = $repo->newItemHandler();
