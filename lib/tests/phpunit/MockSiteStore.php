@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Site;
 use SiteList;
 use SiteStore;
-use TestSites;
 
 /**
  * @license GPL 2+

@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Entity;
 use Serializers\Serializer as NewStyleSerializer;
+use Wikibase\DataModel\Entity\Entity;
 
 /**
  * Serializer for generating the legacy serialization of an Entity.

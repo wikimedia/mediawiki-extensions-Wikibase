@@ -7,8 +7,8 @@ use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
 

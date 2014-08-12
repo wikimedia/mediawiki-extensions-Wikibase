@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\Serializers\DataValueSerializer;
 use RuntimeException;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\InternalSerialization\SerializerFactory;

@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Store;
 
 use BagOStuff;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 
