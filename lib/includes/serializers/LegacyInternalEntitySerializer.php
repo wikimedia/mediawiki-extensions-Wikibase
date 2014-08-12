@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use Serializers\Serializer as NewStyleSerializer;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Serializer for generating the legacy serialization of an Entity.
@@ -31,7 +32,7 @@ class LegacyInternalEntitySerializer implements NewStyleSerializer {
 			throw new InvalidArgumentException( '$entity must be an Entity' );
 		}
 
-		return $entity->toArray();
+		return WikibaseRepo::getDefaultInstance()->getInternalEntitySerializer()->serialize( $entity );
 	}
 
 	/**
