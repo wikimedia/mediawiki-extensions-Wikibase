@@ -15,7 +15,6 @@ use Wikibase\EntityHandler;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
