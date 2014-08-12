@@ -11,7 +11,8 @@
 			"Tntchn",
 			"Zolo",
 			"아라",
-			"LNDDYL"
+			"LNDDYL",
+			"Cwlin0416"
 		]
 	},
 	"wikibase-desc": "結構化數據存儲庫",
@@ -103,6 +104,9 @@
 	"wikibase-itembytitle-lookup-page": "頁面：",
 	"wikibase-itembytitle-submit": "搜尋",
 	"wikibase-itembytitle-create": "您也可以[{{fullurl:Special:NewItem|site=$1&page=$2}} 創建項目]。",
+	"wikibase-gotolinkedpage-lookup-site": "網站：",
+	"wikibase-gotolinkedpage-lookup-item": "項目 ID：",
+	"wikibase-gotolinkedpage-submit": "執行",
 	"special-itemdisambiguation": "項目消歧義",
 	"wikibase-itemdisambiguation-lookup-fieldset": "按語言和標籤搜尋項目",
 	"wikibase-itemdisambiguation-lookup-language": "語言：",

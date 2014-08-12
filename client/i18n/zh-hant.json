@@ -11,7 +11,8 @@
 			"Tntchn",
 			"Yfdyh000",
 			"乌拉跨氪",
-			"LNDDYL"
+			"LNDDYL",
+			"Cwlin0416"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
@@ -29,7 +30,7 @@
 	"wikibase-comment-sitelink-change": "語言連結從$1更改為$2",
 	"wikibase-comment-sitelink-remove": "刪除語言連結：$1",
 	"wikibase-comment-multi": "$1次{{PLURAL:$1|更改|更改}}",
-	"wikibase-dataitem": "數據項",
+	"wikibase-dataitem": "{{WBREPONAME}} 項目",
 	"wikibase-editlinks": "編輯連結",
 	"wikibase-editlinkstitle": "編輯跨語言連結",
 	"wikibase-linkitem-addlinks": "添加連結",

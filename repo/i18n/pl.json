@@ -101,6 +101,7 @@
 	"wikibase-itembytitle-lookup-page": "Strona:",
 	"wikibase-itembytitle-submit": "Szukaj",
 	"wikibase-itembytitle-create": "Możesz także [{{fullurl:Special:NewItem|site=$1&page=$2}} utworzyć element].",
+	"wikibase-gotolinkedpage-lookup-site": "Witryna:",
 	"wikibase-gotolinkedpage-lookup-item": "Identyfikator elementu:",
 	"wikibase-gotolinkedpage-submit": "Dalej",
 	"special-itemdisambiguation": "Ujednoznacznienie elementów",
