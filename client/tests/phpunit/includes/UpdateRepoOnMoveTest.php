@@ -121,11 +121,5 @@ class UpdateRepoOnMoveTest extends \MediaWikiTestCase {
 		$jobQueueGroupMock = $this->getJobQueueGroupMock( $job, true );
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
-
-		// This is supposed to throw an exception in case it fails
-		$jobQueueGroupMock = $this->getJobQueueGroupMock( $job, false );
-		$this->setExpectedException( 'RuntimeException' );
-
-		$updateRepo->injectJob( $jobQueueGroupMock );
 	}
 }
