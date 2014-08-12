@@ -97,35 +97,6 @@ sizes and line heights within the heading */
 
 /***** /DESCRIPTION *****/
 
-
-/********** ALIASES **********/
-
-.wb-aliases ul.tagadata li {
-	margin: 0.2em 4px 0.2em 0;
-}
-
-.wb-aliases ul.tagadata li.tagadata-choice {
-	line-height: 136%;
-}
-
-.wb-aliases .tagadata-choice input {
-	padding-top: 0 !important;
-	padding-bottom: 0 !important;
-}
-
-.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
-	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
-}
-
-.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode ul {
-	/* since the aliases ul list is cloned in JS, its stashed pendant will be visible as box on the
-	edit mode highlight colour in non-Webkit browsers without making the bg colour transparent */
-	background: transparent;
-	font-size: 1em;
-}
-
-/********** /ALIASES **********/
-
 /********** TAGADATA **********/
 
 ul.tagadata {

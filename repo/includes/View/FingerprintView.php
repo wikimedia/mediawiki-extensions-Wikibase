@@ -146,21 +146,23 @@ class FingerprintView {
 			$aliasesHtml = '';
 			$aliases = $aliasGroups->getByLanguage( $this->languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= wfTemplate( 'wb-alias', htmlspecialchars( $alias ) );
+				$aliasesHtml .= wfTemplate(
+					'wikibase-aliasesview-list-item',
+					htmlspecialchars( $alias )
+				);
 			}
-			$aliasesList = wfTemplate( 'wb-aliases', $aliasesHtml );
 
-			return wfTemplate( 'wb-aliases-wrapper',
-				'',
+			return wfTemplate( 'wikibase-aliasesview',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->escaped(),
-				$aliasesList . $editSection
+				$aliasesHtml,
+				'<div>' . $editSection . '</div>'
 			);
 		} else {
-			return wfTemplate( 'wb-aliases-wrapper',
-				'wb-aliases-empty',
-				'wb-value-empty',
+			return wfTemplate( 'wikibase-aliasesview',
+				'wb-empty',
 				wfMessage( 'wikibase-aliases-empty' )->escaped(),
+				'',
 				$editSection
 			);
 		}
