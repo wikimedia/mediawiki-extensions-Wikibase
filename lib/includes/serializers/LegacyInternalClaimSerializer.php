@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\Repo\WikibaseRepo;
 
 class LegacyInternalClaimSerializer implements \Serializers\Serializer {
 
@@ -20,7 +21,7 @@ class LegacyInternalClaimSerializer implements \Serializers\Serializer {
 			throw new InvalidArgumentException( '$claim must be an Claim' );
 		}
 
-		return $claim->toArray();
+		return WikibaseRepo::getDefaultInstance()->getInternalClaimSerializer()->serialize( $claim );
 	}
 
 }
