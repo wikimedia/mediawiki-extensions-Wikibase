@@ -192,6 +192,18 @@ final class LibHooks {
 			),
 		);
 
+		$testModules['qunit']['jquery.wikibase.sitelinkgroupview.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.sitelinkgroupview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.sitelinkgroupview',
+				'wikibase.datamodel',
+				'wikibase.store.EntityStore',
+				'wikibase.tests.qunit.testrunner',
+			),
+		);
+
 		$testModules['qunit']['jquery.wikibase.sitelinkview.tests'] = $moduleBase + array(
 			'scripts' => array(
 				'tests/qunit/jquery.wikibase/jquery.wikibase.sitelinkview.tests.js',

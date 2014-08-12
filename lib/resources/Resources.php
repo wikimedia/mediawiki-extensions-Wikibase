@@ -470,6 +470,17 @@ return call_user_func( function() {
 			)
 		),
 
+		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.sitelinkgroupview.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.sitelinklistview',
+				'wikibase.sites',
+			),
+		),
+
 		'jquery.wikibase.sitelinklistview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.sitelinklistview.js'
