@@ -148,7 +148,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$fingerprintView = $this->getFingerprintView();
 		$html = $fingerprintView->getHtml( $fingerprint );
 
-		$this->assertContains( 'wb-value-empty', $html );
+		$this->assertContains( '-empty', $html );
 	}
 
 	public function testGetHtml_isMarkedAsEmptyAliases() {
@@ -157,15 +157,14 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$fingerprint->removeAliasGroup( 'en' );
 		$html = $fingerprintView->getHtml( $fingerprint );
 
-		$this->assertContains( 'wb-aliases-empty', $html );
+		$this->assertContains( 'wb-empty', $html );
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
 		$fingerprintView = $this->getFingerprintView();
 		$html = $fingerprintView->getHtml( $this->getFingerprint() );
 
-		$this->assertNotContains( 'wb-value-empty', $html );
-		$this->assertNotContains( 'wb-aliases-empty', $html );
+		$this->assertNotContains( 'wb-empty', $html );
 	}
 
 	/**
