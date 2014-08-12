@@ -85,7 +85,7 @@ return call_user_func( function() {
 
 		// Can be used to override the serialization used for storage.
 		// Typical value: Wikibase\Lib\Serializers\LegacyInternalClaimSerializer
-		'internalClaimSerializerClass' => 'Wikibase\Lib\Serializers\LegacyInternalClaimSerializer',
+		'internalClaimSerializerClass' => null,
 
 		'transformLegacyFormatOnExport' => function( SettingsArray $settings ) {
 			// Enabled, unless internalEntitySerializerClass is set.
