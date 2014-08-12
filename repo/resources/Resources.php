@@ -27,6 +27,7 @@ return call_user_func( function() {
 				'mediawiki.api',
 				'mediawiki.user',
 				'wikibase.ui.PropertyEditTool',
+				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.entityview',
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.wbtooltip',
