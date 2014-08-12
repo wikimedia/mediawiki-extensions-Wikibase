@@ -791,12 +791,7 @@ class EditEntity {
 			}
 		}
 
-		/**
-		 * @var Entity $entity
-		 */
-		$entity = $this->getNewEntity();
-		$baseRev = $this->getBaseRevision();
-		$base = $baseRev === null ? null : $baseRev->getEntity();
+		$this->getBaseRevision();
 
 		return $this->status;
 	}
