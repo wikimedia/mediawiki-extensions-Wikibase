@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use MWException;
-use TestSites;
 use Title;
 use User;
 use Wikibase\NamespaceUtils;
