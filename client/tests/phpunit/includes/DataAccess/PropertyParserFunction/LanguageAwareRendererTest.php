@@ -27,6 +27,8 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param SnaksFinder $snaksFinder
 	 * @param string $languageCode
+	 *
+	 * @return LanguageAwareRenderer
 	 */
 	private function getRenderer( SnaksFinder $snaksFinder, $languageCode ) {
 		$targetLanguage = Language::factory( $languageCode );
