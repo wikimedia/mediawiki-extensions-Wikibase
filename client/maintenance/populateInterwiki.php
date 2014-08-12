@@ -65,9 +65,8 @@ TEXT;
 		);
 
 		// todo: is valid
-		if ( !empty ( $this->source ) ) {
+		if ( !empty( $this->source ) ) {
 			try {
-				// make sure this has the '?'
 				$baseUrl = rtrim( $this->source, '?' ) . '?';
 			} catch( Exception $e ) {
 				$this->error( "Error: Invalid api source" );
