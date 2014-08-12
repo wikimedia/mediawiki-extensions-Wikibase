@@ -482,24 +482,23 @@ if ( $ ) {
 		}
 
 		if ( empty( $aliases ) ) {
-			$html = wfTemplate( 'wb-aliases-wrapper',
-				'wb-aliases-empty',
-				'wb-value-empty',
+			$html = wfTemplate( 'wikibase-aliasesview',
+				'wb-empty',
 				wfMessage( 'wikibase-aliases-empty' )->text(),
+				'',
 				$editSection
 			);
 		} else {
 			$aliasesHtml = '';
 			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= wfTemplate( 'wb-alias', htmlspecialchars( $alias ) );
+				$aliasesHtml .= wfTemplate( 'wikibase-aliasesview-list-item', htmlspecialchars( $alias ) );
 			}
-			$aliasList = wfTemplate( 'wb-aliases', $aliasesHtml );
 
-			$html = wfTemplate( 'wb-aliases-wrapper',
-				'',
+			$html = wfTemplate( 'wikibase-aliasesview',
 				'',
 				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $editSection
+				$aliasesHtml,
+				'<div>' . $editSection . '</div>'
 			);
 		}
 
