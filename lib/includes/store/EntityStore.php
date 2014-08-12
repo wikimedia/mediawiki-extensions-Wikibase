@@ -7,7 +7,6 @@ use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * Storage interface for Entities.

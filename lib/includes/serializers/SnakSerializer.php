@@ -4,13 +4,11 @@ namespace Wikibase\Lib\Serializers;
 
 use DataValues\DataValueFactory;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Snak;
-use Wikibase\SnakObject;
 
 /**
  * Serializer for Snak objects.

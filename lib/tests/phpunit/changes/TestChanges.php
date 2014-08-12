@@ -13,9 +13,9 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DiffChange;
 use Wikibase\Entity;
 use Wikibase\EntityChange;
-use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Item;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
 

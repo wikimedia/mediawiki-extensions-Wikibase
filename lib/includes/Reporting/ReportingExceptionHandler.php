@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Reporting;
 
 use Exception;
-use Wikibase\Lib\Reporting\MessageReporter;
 
 /**
  * ReportingExceptionHandler reports exceptions to a MessageReporter.
