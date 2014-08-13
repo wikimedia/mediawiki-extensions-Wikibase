@@ -164,13 +164,14 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			array( 'quantity', QuantityValue::newFromNumber( 5 ), true, 'Simple integer' ),
 			array( 'quantity', QuantityValue::newFromNumber( 5, 'm' ), false, 'We don\'t support units yet' ),
 			array( 'quantity', QuantityValue::newFromDecimal( '-11.234', '1', '-10', '-12' ), true, 'decimal strings' ),
+
+			//monolingual text
+			array( 'monolingualtext', new MonoLingualTextValue( 'en', 'text' ), true, 'Simple value' ),
+			array( 'monolingualtext', new MonoLingualTextValue( 'grrr', 'text' ), false, 'Not a valid language' ),
 		);
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$cases = array_merge( $cases, array(
-
-				array( 'monolingualtext', new MonoLingualTextValue( 'en', 'text' ), true, 'Simple value' ),
-				array( 'monolingualtext', new MonoLingualTextValue( 'grrr', 'text' ), false, 'Not a valid language' ),
 
 				// ....
 			) );
