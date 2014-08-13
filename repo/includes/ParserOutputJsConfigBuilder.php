@@ -138,8 +138,7 @@ class ParserOutputJsConfigBuilder {
 	}
 
 	/**
-	 * Wraps each record in $entities with revision info, similar to how EntityRevisionSerializer
-	 * does this.
+	 * Wraps each record in $entities with revision info.
 	 *
 	 * @todo: perhaps move this into EntityInfoBuilder; Note however that it is useful to be
 	 * able to pick which information is actually needed in which context. E.g. we are skipping the
