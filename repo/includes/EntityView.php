@@ -258,7 +258,7 @@ if ( $ ) {
 	 * @param bool $editable
 	 * @return string
 	 */
-	protected function getHtmlForFingerprint( Entity $entity, $editable = true ) {;
+	protected function getHtmlForFingerprint( Entity $entity, $editable = true ) {
 		return $this->fingerprintView->getHtml( $entity->getFingerprint(), $entity->getId(), $editable );
 	}
 
