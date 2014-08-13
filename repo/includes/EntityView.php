@@ -8,10 +8,12 @@ use IContextSource;
 use InvalidArgumentException;
 use Linker;
 use ParserOutput;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Repo\View\TextInjector;
@@ -227,15 +229,12 @@ if ( $ ) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $entityRevision->getEntity();
+		$fingerprint = $entity->getFingerprint();
+		$entityId = $entity->getId();
 
 		$html = '';
 
-		$html .= $this->getHtmlForLabel( $entity, $editable );
-		$html .= $this->getHtmlForDescription( $entity, $editable );
-
-		$html .= wfTemplate( 'wb-entity-header-separator' );
-
-		$html .= $this->getHtmlForAliases( $entity, $editable );
+		$html .= $this->getHtmlForFingerprint( $fingerprint, $entityId, $editable );
 		$html .= $this->getHtmlForToc();
 		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
 		$html .= $this->getHtmlForClaims( $entity, $editable );
@@ -245,7 +244,20 @@ if ( $ ) {
 	}
 
 	/**
-	 * Builds and returns the html for the toc.
+	 * Builds and returns the HTML for the entity's fingerprint.
+	 *
+	 * @param Fingerprint $fingerprint
+	 * @param EntityId|null $entityId
+	 * @param bool $editable
+	 * @return string
+	 */
+	private function getHtmlForFingerprint( Fingerprint $fingerprint, EntityId $entityId = null, $editable = true ) {
+		$fingerprintView = new FingerprintView( $this->sectionEditLinkGenerator, $this->getLanguage()->getCode() );
+		return $fingerprintView->getHtml( $fingerprint, $entityId, $editable );
+	}
+
+	/**
+	 * Builds and returns the HTML for the toc.
 	 *
 	 * @return string
 	 */
@@ -383,128 +395,6 @@ if ( $ ) {
 
 		wfProfileOut( __METHOD__ );
 		return $pout;
-	}
-
-	/**
-	 * Builds and returns the HTML representing a WikibaseEntity's label.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity the entity to render
-	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 * @return string
-	 */
-	public function getHtmlForLabel( Entity $entity, $editable = true ) {
-		wfProfileIn( __METHOD__ );
-
-		$languageCode = $this->getLanguage()->getCode();
-		$label = $entity->getLabel( $languageCode );
-		$entityId = $entity->getId();
-		$idString = 'new';
-		$supplement = '';
-
-		if ( $entityId !== null ) {
-			$idString = $entityId->getSerialization();
-			$supplement .= wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $idString ) );
-			if ( $editable ) {
-				$supplement .= $this->getHtmlForEditSection( 'SetLabel', array( $idString, $languageCode ) );
-			}
-		}
-
-		$html = wfTemplate( 'wb-label',
-			$idString,
-			wfTemplate( 'wb-property',
-				$label === false ? 'wb-value-empty' : '',
-				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
-				$supplement
-			)
-		);
-
-		wfProfileOut( __METHOD__ );
-		return $html;
-	}
-
-	/**
-	 * Builds and returns the HTML representing a WikibaseEntity's description.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity the entity to render
-	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 * @return string
-	 */
-	public function getHtmlForDescription( Entity $entity, $editable = true ) {
-		wfProfileIn( __METHOD__ );
-
-		$languageCode = $this->getLanguage()->getCode();
-		$description = $entity->getDescription( $languageCode );
-		$entityId = $entity->getId();
-		$editSection = '';
-
-		if ( $entityId !== null && $editable ) {
-			$idString = $entityId->getSerialization();
-			$editSection .= $this->getHtmlForEditSection( 'SetDescription', array( $idString, $languageCode ) );
-		}
-
-		$html = wfTemplate( 'wb-description',
-			wfTemplate( 'wb-property',
-				$description === false ? 'wb-value-empty' : '',
-				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
-				$editSection
-			)
-		);
-
-		wfProfileOut( __METHOD__ );
-		return $html;
-	}
-
-	/**
-	 * Builds and returns the HTML representing a WikibaseEntity's aliases.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity the entity to render
-	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 * @return string
-	 */
-	public function getHtmlForAliases( Entity $entity, $editable = true ) {
-		wfProfileIn( __METHOD__ );
-
-		$languageCode = $this->getLanguage()->getCode();
-		$aliases = $entity->getAliases( $languageCode );
-		$entityId = $entity->getId();
-		$editSection = '';
-
-		if ( $entityId !== null && $editable ) {
-			$idString = $entityId->getSerialization();
-			$action = empty( $aliases ) ? 'add' : 'edit';
-			$editSection = $this->getHtmlForEditSection( 'SetAliases', array( $idString, $languageCode ), $action );
-		}
-
-		if ( empty( $aliases ) ) {
-			$html = wfTemplate( 'wb-aliases-wrapper',
-				'wb-aliases-empty',
-				'wb-value-empty',
-				wfMessage( 'wikibase-aliases-empty' )->text(),
-				$editSection
-			);
-		} else {
-			$aliasesHtml = '';
-			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= wfTemplate( 'wb-alias', htmlspecialchars( $alias ) );
-			}
-			$aliasList = wfTemplate( 'wb-aliases', $aliasesHtml );
-
-			$html = wfTemplate( 'wb-aliases-wrapper',
-				'',
-				'',
-				wfMessage( 'wikibase-aliases-label' )->text(),
-				$aliasList . $editSection
-			);
-		}
-
-		wfProfileOut( __METHOD__ );
-		return $html;
 	}
 
 	/**
