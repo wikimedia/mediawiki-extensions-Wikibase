@@ -108,6 +108,7 @@ Other methods an Expert needs to provide:
 ### 0.6.9 (dev)
 * $.ui.suggester updates "lang" and "dir" attribute of its menu whenever repositioning the menu.
 * $.ui.suggester issues "error" event in case of an error.
+* LanguageSelector allows typing the language code instead of the name.
 
 ### 0.6.8 (2014-07-29)
 * Only attempt to close a suggester if it's open
