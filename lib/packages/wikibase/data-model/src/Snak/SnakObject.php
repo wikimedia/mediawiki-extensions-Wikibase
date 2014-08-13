@@ -67,9 +67,7 @@ abstract class SnakObject implements Snak {
 	}
 
 	/**
-	 * @see Snak::getHash
-	 *
-	 * @since 0.1
+	 * @see Hashable::getHash
 	 *
 	 * @return string
 	 */

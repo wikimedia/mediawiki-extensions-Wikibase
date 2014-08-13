@@ -26,31 +26,22 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 class PropertyValueSnakTest extends SnakObjectTest {
 
 	public function constructorProvider() {
-		$argLists = array(
-			array( true, 'P1', new StringValue( 'a' ) ),
-			array( true, 'P9001', new StringValue( 'a' ) ),
+		return array(
+			array( true, new PropertyId( 'P1' ), new StringValue( 'a' ) ),
+			array( true, new PropertyId( 'P9001' ), new StringValue( 'a' ) ),
 		);
-
-		foreach ( $argLists as &$argList ) {
-			if ( count( $argList ) > 1 ) {
-				$argList[1] = new PropertyId( $argList[1] );
-			}
-		}
-
-		return $argLists;
 	}
 
 	public function getClass() {
-		return '\Wikibase\DataModel\Snak\PropertyValueSnak';
+		return 'Wikibase\DataModel\Snak\PropertyValueSnak';
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetDataValue( PropertyValueSnak $omnomnom ) {
-		$dataValue = $omnomnom->getDataValue();
-		$this->assertInstanceOf( '\DataValues\DataValue', $dataValue );
-		$this->assertTrue( $dataValue->equals( $omnomnom->getDataValue() ) );
+	public function testGetDataValue( PropertyValueSnak $snak ) {
+		$dataValue = $snak->getDataValue();
+		$this->assertInstanceOf( 'DataValues\DataValue', $dataValue );
 	}
 
 }
