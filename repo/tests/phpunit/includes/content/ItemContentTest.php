@@ -94,6 +94,18 @@ class ItemContentTest extends EntityContentTest {
 			array( 'wb-claims' => 0, 'wb-sitelinks' => 1 )
 		);
 
+		// @todo this is needed in PropertyContentTest as well
+		//       once we have statements in properties
+		$contentWithClaim = $this->newEmpty();
+		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
+		$claim->setGuid( '$testing$' );
+		$contentWithClaim->getEntity()->addClaim( $claim );
+
+		$cases['claims'] = array(
+			$contentWithClaim,
+			array( 'wb-claims' => 1 )
+		);
+
 		return $cases;
 	}
 
@@ -116,8 +128,25 @@ class ItemContentTest extends EntityContentTest {
 			ItemContent::STATUS_LINKSTUB
 		);
 
-		$cases['statements and links'] = $cases['claims']; // from parent::provideGetEntityStatus();
-		$cases['statements and links'][0]->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+		// @todo this is needed in PropertyContentTest as well
+		//       once we have statements in properties
+		$contentWithClaim = $this->newEmpty();
+		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
+		$claim->setGuid( '$testing$' );
+		$contentWithClaim->getEntity()->addClaim( $claim );
+		
+		$cases['claims'] = array(
+			$contentWithClaim,
+			EntityContent::STATUS_NONE
+		);
+
+		$contentWithClaimAndLink = $contentWithClaim->copy();
+		$contentWithClaimAndLink->getEntity()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
+
+		$cases['statements and links'] = array(
+			$contentWithClaimAndLink,
+			EntityContent::STATUS_NONE
+		);
 
 		return $cases;
 	}
