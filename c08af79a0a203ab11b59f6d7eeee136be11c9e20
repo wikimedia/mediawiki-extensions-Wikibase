@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_bd0ff63a",
+        "filename": "lib/includes/WikibaseDataTypeBuilders.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-08-13T16:29:22Z",
+      "side": 1,
+      "message": "missing space before \u003d\u003e",
+      "revId": "c08af79a0a203ab11b59f6d7eeee136be11c9e20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
