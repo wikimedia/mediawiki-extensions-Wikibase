@@ -506,54 +506,6 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		return $argLists;
 	}
 
-	public function testGetHtmlForLabel_editable() {
-		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
-		$entityView = $this->newEntityView( $entity->getType() );
-		$html = $entityView->getHtmlForLabel( $entity );
-
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/\w1/en"[^>]*>\S+</a>@', $html );
-	}
-
-	public function testGetHtmlForLabel_notEditable() {
-		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
-		$entityView = $this->newEntityView( $entity->getType() );
-		$html = $entityView->getHtmlForLabel( $entity, false );
-
-		$this->assertNotContains( '<a ', $html );
-	}
-
-	public function testGetHtmlForDescription_editable() {
-		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
-		$entityView = $this->newEntityView( $entity->getType() );
-		$html = $entityView->getHtmlForDescription( $entity );
-
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetDescription/\w1/en"[^>]*>\S+</a>@', $html );
-	}
-
-	public function testGetHtmlForDescription_notEditable() {
-		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
-		$entityView = $this->newEntityView( $entity->getType() );
-		$html = $entityView->getHtmlForDescription( $entity, false );
-
-		$this->assertNotContains( '<a ', $html );
-	}
-
-	public function testGetHtmlForAliases_editable() {
-		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
-		$entityView = $this->newEntityView( $entity->getType() );
-		$html = $entityView->getHtmlForAliases( $entity );
-
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetAliases/\w1/en"[^>]*>\S+</a>@', $html );
-	}
-
-	public function testGetHtmlForAliases_notEditable() {
-		$entity = $this->makeEntity( $this->makeEntityId( 1 ) );
-		$entityView = $this->newEntityView( $entity->getType() );
-		$html = $entityView->getHtmlForAliases( $entity, false );
-
-		$this->assertNotContains( '<a ', $html );
-	}
-
 	/**
 	 * @return Entity
 	 */
