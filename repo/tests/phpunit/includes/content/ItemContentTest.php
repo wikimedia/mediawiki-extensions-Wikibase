@@ -94,6 +94,18 @@ class ItemContentTest extends EntityContentTest {
 			array( 'wb-claims' => 0, 'wb-sitelinks' => 1 )
 		);
 
+		// @todo this is needed in PropertyContentTest as well
+		//       once we have statements in properties
+		$contentWithClaim = $this->newEmpty();
+		$claim = new Statement( new PropertyNoValueSnak( 83 ) );
+		$claim->setGuid( '$testing$' );
+		$contentWithClaim->getEntity()->addClaim( $claim );
+
+		$cases['claims'] = array(
+			$contentWithClaim,
+			array( 'wb-claims' => 1 )
+		);
+
 		return $cases;
 	}
 
