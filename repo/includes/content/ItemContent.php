@@ -275,7 +275,7 @@ class ItemContent extends EntityContent {
 	 */
 	public function getEntityStatus() {
 		$status = parent::getEntityStatus();
-		$hasSiteLinks = $this->getItem()->hasSiteLinks();
+		$hasSiteLinks = !$this->getItem()->getSiteLinkList()->isEmpty();
 
 		if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
 			$status = self::STATUS_LINKSTUB;
