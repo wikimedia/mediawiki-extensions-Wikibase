@@ -92,10 +92,10 @@ class WikibaseDataTypeBuilders {
 			'time'             => array( $this, 'buildTimeType' ),
 			'url'              => array( $this, 'buildUrlType' ),
 			'wikibase-item'    => array( $this, 'buildItemType' ),
+			'monolingualtext'  => array( $this, 'buildMonolingualTextType' ),
 		);
 
 		$experimental = array(
-			'monolingualtext' => array( $this, 'buildMonolingualTextType' ),
 			// 'multilingualtext' => array( $this, 'buildMultilingualTextType' ),
 		);
 
