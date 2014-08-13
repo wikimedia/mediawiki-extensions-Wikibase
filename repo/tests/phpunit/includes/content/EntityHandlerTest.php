@@ -15,7 +15,6 @@ use Wikibase\EntityHandler;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -357,12 +356,16 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$legacySerializer = new LegacyInternalEntitySerializer();
 		$oldBlob = json_encode( $legacySerializer->serialize( $entity ) );
 
-		// replace "entity":["item",7] with "entity":"q7"
+		// fake several old formats
+		$type = $entity->getType();
 		$id = $entity->getId()->getSerialization();
-		$veryOldBlob = preg_replace( '/"entity":\["\w+",\d+\]/', '"entity":"' . strtolower( $id ) . '"', $oldBlob );
+		// replace "type":"item","id":"q7" with "entity":["item",7]
+		$veryOldBlob = preg_replace( '/"type":"\w+","id":"\w\d+"/', '"entity":["' . strtolower( $type ) . '",' . substr( $id, 1 ) . ']', $oldBlob );
+		// replace "entity":["item",7] with "entity":"q7"
+		$veryVeryOldBlob = preg_replace( '/"entity":\["\w+",\d+\]/', '"entity":"' . strtolower( $id ) . '"', $veryOldBlob );
 
-		// sanity
-		if ( $oldBlob == $veryOldBlob ) {
+		// sanity (cannot compare $veryOldBlob and $oldBlob until we have the new serialization in place)
+		if ( $veryVeryOldBlob == $veryOldBlob /* || $veryOldBlob == $oldBlob */ ) {
 			throw new RuntimeException( 'Failed to fake very old serialization format based on oldish serialization format.' );
 		}
 
@@ -372,8 +375,9 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$newBlob = json_encode( $newSerializer->serialize( $entity ) );
 
 		return array(
-			'old serialization / ancient id format' => array( $veryOldBlob, $newBlob ),
-			'old serialization / new silly id format' => array( $oldBlob, $newBlob ),
+			'old serialization / ancient id format' => array( $veryVeryOldBlob, $newBlob ),
+			'old serialization / new silly id format' => array( $veryOldBlob, $newBlob ),
+			'old serialization / old serializer format' => array( $oldBlob, $newBlob ),
 			'new serialization format, keep as is' => array( $newBlob, $newBlob ),
 		);
 	}
