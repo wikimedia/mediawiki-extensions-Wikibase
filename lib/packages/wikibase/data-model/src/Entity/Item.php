@@ -170,7 +170,7 @@ class Item extends Entity {
 	 * @return bool
 	 */
 	public function hasSiteLinks() {
-		return !empty( $this->siteLinks );
+		return !$this->siteLinks->isEmpty();
 	}
 
 	/**

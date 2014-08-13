@@ -754,6 +754,17 @@ class ItemTest extends EntityTest {
 		$this->assertFalse( $item->isEmpty() );
 	}
 
+	public function testItemWithSitelinksHasSitelinks() {
+		$item = Item::newEmpty();
+		$item->getSiteLinkList()->addNewSiteLink( 'en', 'foo' );
+		$this->assertTrue( $item->hasSiteLinks() );
+	}
+
+	public function testItemWithoutSitelinksHasNoSitelinks() {
+		$item = Item::newEmpty();
+		$this->assertFalse( $item->hasSiteLinks() );
+	}
+
 	private function newStatement() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'kittens' );
