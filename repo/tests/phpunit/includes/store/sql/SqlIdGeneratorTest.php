@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\IdGenerator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StoreFactory;
 
 /**
  * @covers Wikibase\SqlIdGenerator

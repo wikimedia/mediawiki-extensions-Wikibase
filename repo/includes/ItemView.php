@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\View\SiteLinksView;
 
 /**
  * Class for creating views for Wikibase\Item instances.

@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Html;
 use InvalidArgumentException;
+use Html;
 use SiteStore;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Enables accessing a linked page on a site by providing the item id and site

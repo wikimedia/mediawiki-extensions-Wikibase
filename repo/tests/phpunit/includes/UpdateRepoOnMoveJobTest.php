@@ -4,11 +4,12 @@ namespace Wikibase\Test;
 
 use Title;
 use User;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityPerPageTable;
-use Wikibase\Repo\Store\WikiPageEntityStore;
-use Wikibase\Repo\WikibaseRepo;
+use TestSites;
 use Wikibase\UpdateRepoOnMoveJob;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\EntityPerPageTable;
 
 /**
  * @covers Wikibase\UpdateRepoOnMoveJob

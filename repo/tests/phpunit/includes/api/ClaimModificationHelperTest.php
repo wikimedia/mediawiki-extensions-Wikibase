@@ -5,6 +5,7 @@ namespace Wikibase\Test\Api;
 use ApiMain;
 use DataValues\StringValue;
 use UsageException;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Api\ApiErrorReporter;
 use Wikibase\Api\ClaimModificationHelper;
 use Wikibase\Api\CreateClaim;

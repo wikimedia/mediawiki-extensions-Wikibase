@@ -8,8 +8,8 @@ use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\EntityViewPlaceholderExpander;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\EntityViewPlaceholderExpander;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 

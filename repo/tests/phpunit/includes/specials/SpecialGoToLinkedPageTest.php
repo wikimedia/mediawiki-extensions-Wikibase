@@ -5,8 +5,9 @@ namespace Wikibase\Test;
 use FauxResponse;
 use Site;
 use SiteStore;
-use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialGoToLinkedPage

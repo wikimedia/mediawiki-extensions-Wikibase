@@ -13,9 +13,9 @@ use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
 use Wikibase\ReferenceList;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\SnakList;
 use Wikibase\Statement;
+use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator

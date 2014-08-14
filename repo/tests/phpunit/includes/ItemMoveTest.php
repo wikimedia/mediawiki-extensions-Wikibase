@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

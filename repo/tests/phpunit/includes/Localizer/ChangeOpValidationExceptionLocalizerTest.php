@@ -4,10 +4,12 @@ namespace Wikibase\Test;
 
 use Exception;
 use ValueFormatters\ValueFormatter;
+use ValueParsers\ParseException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
+use Wikibase\Repo\Localizer\MessageParameterFormatter;
 
 /**
  * @covers Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer

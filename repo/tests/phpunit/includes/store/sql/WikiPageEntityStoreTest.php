@@ -15,12 +15,12 @@ use Wikibase\EntityId;
 use Wikibase\EntityPerPageTable;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 
 /**
  * @covers Wikibase\Repo\Store\WikiPageEntityStore

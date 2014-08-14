@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Api;
 
+use ApiTestCase;
+use TestUser;
 use Title;
 use Wikibase\NamespaceUtils;
 

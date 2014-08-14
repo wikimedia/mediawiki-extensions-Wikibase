@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Api;
 
 use ApiTestCase;
+use TestSites;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;

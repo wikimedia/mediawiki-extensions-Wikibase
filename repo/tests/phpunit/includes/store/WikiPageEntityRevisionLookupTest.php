@@ -2,12 +2,18 @@
 
 namespace Wikibase\Test;
 
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
+use Wikibase\InternalSerialization\DeserializerFactory;
+use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityContentDataCodec;
 
 /**
  * @covers Wikibase\Lib\Store\WikiPageEntityLookup

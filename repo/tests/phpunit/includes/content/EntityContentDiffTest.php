@@ -5,8 +5,9 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Entity\EntityDiff;
+use MediaWikiTestCase;
 use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\DataModel\Entity\EntityDiff;
 
 /**
  * @covers Wikibase\Repo\Content\EntityContentDiff

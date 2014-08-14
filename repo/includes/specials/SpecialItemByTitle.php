@@ -7,8 +7,8 @@ use Site;
 use SiteStore;
 use Wikibase\EntityTitleLookup;
 use Wikibase\ItemHandler;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Enables accessing items by providing the identifier of a site and the title
