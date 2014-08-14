@@ -30,7 +30,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'json',
-				'jquery',
 				'wikibase.api.__namespace',
 			)
 		),
@@ -42,7 +41,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'dataValues',
 				'json',
-				'jquery',
 				'wikibase.api.__namespace',
 			)
 		),
