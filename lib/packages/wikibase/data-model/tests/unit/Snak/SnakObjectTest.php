@@ -115,8 +115,8 @@ abstract class SnakObjectTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetPropertyId( Snak $snak ) {
-		$id = $snak->getPropertyId();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityId', $id );
+		$propertyId = $snak->getPropertyId();
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyId', $propertyId );
 	}
 
 }
