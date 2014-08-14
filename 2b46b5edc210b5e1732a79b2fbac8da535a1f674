@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_8f6ab5e8",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-14T15:01:59Z",
+      "side": 1,
+      "message": "It\u0027s a public method but perhaps this @since is already implied in the class @since tag. What says our guideline about @since?",
+      "parentUuid": "8e28a382_0c537370",
+      "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_2c586f8b",
         "filename": "repo/includes/View/FingerprintView.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_4f74cdcc",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-14T15:01:59Z",
+      "side": 1,
+      "message": "Ups, yes ;-)\n\nnote to myself: missing @since tag",
+      "parentUuid": "8e28a382_2c586f8b",
+      "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_cc4c4bce",
         "filename": "repo/includes/View/FingerprintView.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-08-14T12:15:14Z",
       "side": 1,
       "message": "Parameter order is messed up in all three method calls!\n\nThe order ( $payload, $entityId, $editable ) makes sense, please keep this.",
+      "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2f7bc1be",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-14T15:01:59Z",
+      "side": 1,
+      "message": "thanks for noting, I played a bit with the order of parameters and forgot to fix this.",
+      "parentUuid": "8e28a382_cc4c4bce",
       "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
