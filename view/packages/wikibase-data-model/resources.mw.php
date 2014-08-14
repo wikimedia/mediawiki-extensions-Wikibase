@@ -40,7 +40,6 @@ return call_user_func( function() {
 				'Statement.js',
 			),
 			'dependencies' => array(
-				'jquery',
 
 				'mw.ext.dataValues', // DataValues extension
 
@@ -103,7 +102,6 @@ return call_user_func( function() {
 				'Snak.js',
 			),
 			'dependencies' => array(
-				'jquery', // $.each, $.extend
 				'mw.ext.dataValues', // DataValues extension
 				'wikibase.datamodel.__namespace',
 			)
