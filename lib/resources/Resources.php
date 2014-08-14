@@ -46,7 +46,6 @@ return call_user_func( function() {
 				'wikibase.Site.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'mediawiki.util',
 				'util.inherit',
 				'wikibase',
@@ -82,7 +81,6 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'dataTypes.DataType',
 				'dataTypes.DataTypeStore',
-				'jquery',
 				'mw.config.values.wbDataTypes',
 				'wikibase',
 			),
@@ -179,7 +177,6 @@ return call_user_func( function() {
 				'json',
 				'user.tokens',
 				'mediawiki.api',
-				'mediawiki',
 				'mw.config.values.wbRepo',
 				'wikibase',
 			)
@@ -473,7 +470,6 @@ return call_user_func( function() {
 				'wikibase.ValueViewBuilder.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'wikibase',
 				'jquery.valueview'
 			)

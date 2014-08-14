@@ -42,7 +42,6 @@ return call_user_func( function() {
 				'EntityIdInput.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.event.special.eachchange',
 				'jquery.valueview.Expert',
 				'jquery.valueview.experts.StringValue',

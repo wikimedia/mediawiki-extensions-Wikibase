@@ -22,7 +22,6 @@ return call_user_func( function() {
 				'getApiBasedValueParserConstructor.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'util.inherit',
 				'valueParsers.ValueParser',
 				'wikibase',
@@ -34,7 +33,6 @@ return call_user_func( function() {
 				'EntityIdParser.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'util.inherit',
 				'valueParsers.ValueParser',
 				'wikibase',
@@ -48,7 +46,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'jquery',
 				'valueParsers.parsers',
 				'valueParsers.ValueParserStore',
 				'wikibase.api.ParseValueCaller',
