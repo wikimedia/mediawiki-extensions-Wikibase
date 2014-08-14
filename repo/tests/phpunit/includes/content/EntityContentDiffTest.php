@@ -5,9 +5,8 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use MediaWikiTestCase;
-use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\Repo\Content\EntityContentDiff;
 
 /**
  * @covers Wikibase\Repo\Content\EntityContentDiff
@@ -18,7 +17,7 @@ use Wikibase\DataModel\Entity\EntityDiff;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityContentDiffTest extends MediaWikiTestCase {
+class EntityContentDiffTest extends \MediaWikiTestCase {
 
 	public function provideConstruction() {
 		return array(
