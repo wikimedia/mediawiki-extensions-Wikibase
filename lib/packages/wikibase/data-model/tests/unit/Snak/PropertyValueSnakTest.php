@@ -28,7 +28,7 @@ class PropertyValueSnakTest extends SnakObjectTest {
 	public function constructorProvider() {
 		return array(
 			array( true, new PropertyId( 'P1' ), new StringValue( 'a' ) ),
-			array( true, new PropertyId( 'P9001' ), new StringValue( 'a' ) ),
+			array( true, new PropertyId( 'P9001' ), new StringValue( 'bc' ) ),
 		);
 	}
 
