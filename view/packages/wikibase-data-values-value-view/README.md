@@ -105,7 +105,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.6.10 (dev)
+### 0.6.10 (2014-08-14)
 * Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
 
 ### 0.6.9 (2014-08-13)
