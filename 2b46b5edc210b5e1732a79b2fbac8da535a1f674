@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_0c537370",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-14T12:15:14Z",
+      "side": 1,
+      "message": "I find this @since not helpful, please remove.",
+      "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2c586f8b",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-14T12:15:14Z",
+      "side": 1,
+      "message": "A Fingerprint?",
+      "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_cc4c4bce",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-14T12:15:14Z",
+      "side": 1,
+      "message": "Parameter order is messed up in all three method calls!\n\nThe order ( $payload, $entityId, $editable ) makes sense, please keep this.",
+      "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
