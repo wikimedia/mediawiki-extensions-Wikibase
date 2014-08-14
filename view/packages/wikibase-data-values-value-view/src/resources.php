@@ -25,7 +25,6 @@ return call_user_func( function() {
 				'jquery.valueview.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.valueview.valueview',
 			),
 		),
@@ -35,7 +34,6 @@ return call_user_func( function() {
 				'jquery.valueview.Expert.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'util.inherit',
 				'util.MessageProvider',
 				'util.Notifier',
@@ -47,17 +45,11 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.valueview.ExpertStore.js',
 			),
-			'dependencies' => array(
-				'jquery',
-			),
 		),
 
 		'jquery.valueview.experts' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.experts.js',
-			),
-			'dependencies' => array(
-				'jquery',
 			),
 		),
 
@@ -71,7 +63,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
-				'jquery',
 				'jquery.ui.widget',
 				'jquery.valueview.ViewState',
 				'jquery.valueview.ExpertStore',
@@ -86,9 +77,6 @@ return call_user_func( function() {
 		'jquery.valueview.ViewState' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.valueview.ViewState.js',
-			),
-			'dependencies' => array(
-				'jquery',
 			),
 		),
 
