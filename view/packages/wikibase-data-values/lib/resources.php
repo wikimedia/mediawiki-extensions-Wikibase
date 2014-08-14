@@ -42,9 +42,6 @@ return call_user_func( function() {
 				'time/time.Time.validate.js',
 				'time/time.Parser.js',
 			),
-			'dependencies' => array(
-				'jquery',
-			),
 		),
 
 		'time.js.validTimeDefinitions' => $moduleTemplate + array(
