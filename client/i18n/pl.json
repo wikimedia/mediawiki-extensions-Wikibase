@@ -45,7 +45,7 @@
 	"wikibase-linkitem-success-link": "Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].",
 	"wikibase-property-notfound": "Właściwość $1 nie została znaleziona.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Schowaj",
+	"wikibase-rc-hide-wikidata-hide": "Ukryj",
 	"wikibase-rc-hide-wikidata-show": "Pokaż",
 	"wikibase-rc-show-wikidata-pref": "Pokazuj edycje w Wikidanych w ostatnich zmianach",
 	"wikibase-rc-wikibase-edit-letter": "d",
