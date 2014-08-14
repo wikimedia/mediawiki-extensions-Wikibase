@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_7a050913",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-14T15:21:36Z",
+      "side": 1,
+      "message": "I find it useless in about 95% of the cases. It\u0027s important in interfaces (for the class and for all public and protected methods and properties). But in ordinary services like this with no inheritance and no interfaces? Who cares? It\u0027s just noise in the source.\n\nAlso note that the 0.5 never changed since I\u0027m working here. Which makes it pointless from my point of view. This is different in the smaller packages that have actual versions.",
+      "parentUuid": "8e28a382_8f6ab5e8",
+      "revId": "2b46b5edc210b5e1732a79b2fbac8da535a1f674",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_2c586f8b",
         "filename": "repo/includes/View/FingerprintView.php",
         "patchSetId": 1
