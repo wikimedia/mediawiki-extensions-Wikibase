@@ -1,0 +1,10 @@
+Code-Review+2: Aude <aude.wiki@gmail.com>
+Verified+2: jenkins-bot
+Code-Review+1: Helder.wiki <helder.wiki@gmail.com>
+Code-Review-1: Fomafix
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Thu, 14 Aug 2014 14:52:40 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/154050
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
