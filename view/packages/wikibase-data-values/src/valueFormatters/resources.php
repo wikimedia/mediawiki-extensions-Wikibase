@@ -28,7 +28,6 @@ return call_user_func( function() {
 				'formatters/ValueFormatter.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'util.inherit',
 				'valueFormatters',
 			),
@@ -50,7 +49,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'jquery',
 				'util.inherit',
 				'valueFormatters.ValueFormatter',
 			),

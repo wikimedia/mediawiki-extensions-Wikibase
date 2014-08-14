@@ -27,6 +27,10 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 * #42 Removed 'to a degree' label, now shown as '±1°'
 * #45 Removed constructor naming debugging feature
 
+#### Bugfixes
+
+* Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
+
 ### 0.5.1 (2014-06-04)
 
 #### Bugfixes
