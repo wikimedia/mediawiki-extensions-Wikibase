@@ -19,7 +19,6 @@ return call_user_func( function() {
 				'ExpertExtender.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.inputextender',
 				'jquery.valueview',
 				'util.Extendable',
@@ -34,7 +33,6 @@ return call_user_func( function() {
 				'ExpertExtender.CalendarHint.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.valueview.ExpertExtender',
 				'time.js'
 			),
@@ -51,7 +49,6 @@ return call_user_func( function() {
 				'ExpertExtender.Container.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.valueview.ExpertExtender',
 			),
 		),
@@ -61,7 +58,6 @@ return call_user_func( function() {
 				'ExpertExtender.LanguageSelector.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.event.special.eachchange',
 				'jquery.ui.suggester',
 				'jquery.valueview.ExpertExtender',
@@ -77,7 +73,6 @@ return call_user_func( function() {
 				'ExpertExtender.Listrotator.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.listrotator',
 				'jquery.valueview.ExpertExtender',
 			),
@@ -91,7 +86,6 @@ return call_user_func( function() {
 				'ExpertExtender.Preview.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.preview',
 				'jquery.valueview.ExpertExtender',
 				'util.MessageProvider',
@@ -110,7 +104,6 @@ return call_user_func( function() {
 				'ExpertExtender.Toggler.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.toggler',
 				'jquery.valueview.ExpertExtender',
 			),

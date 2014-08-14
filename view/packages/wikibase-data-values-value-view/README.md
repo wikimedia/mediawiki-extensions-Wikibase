@@ -105,6 +105,9 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.10 (dev)
+* Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
+
 ### 0.6.9 (2014-08-13)
 * $.ui.suggester updates "lang" and "dir" attribute of its menu whenever repositioning the menu.
 * $.ui.suggester issues "error" event in case of an error.

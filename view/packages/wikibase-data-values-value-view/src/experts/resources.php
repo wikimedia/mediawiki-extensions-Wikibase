@@ -56,7 +56,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'globeCoordinate.js',
-				'jquery',
 				'jquery.valueview.ExpertExtender',
 				'jquery.valueview.ExpertExtender.Container',
 				'jquery.valueview.ExpertExtender.Listrotator',
@@ -91,7 +90,6 @@ return call_user_func( function() {
 				'StringValue.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.event.special.eachchange',
 				'jquery.focusAt',
 				'jquery.inputautoexpand',
@@ -121,7 +119,6 @@ return call_user_func( function() {
 				'TimeInput.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.valueview.ExpertExtender',
 				'jquery.valueview.ExpertExtender.CalendarHint',
 				'jquery.valueview.ExpertExtender.Container',

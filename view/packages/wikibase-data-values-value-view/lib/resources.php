@@ -23,7 +23,6 @@ return call_user_func( function() {
 				'jquery/jquery.animateWithEvent.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.AnimationEvent',
 			),
 		),
@@ -33,7 +32,6 @@ return call_user_func( function() {
 				'jquery/jquery.AnimationEvent.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.PurposedCallbacks',
 			),
 		),
@@ -43,7 +41,6 @@ return call_user_func( function() {
 				'jquery/jquery.autocompletestring.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.util.adaptlettercase',
 			),
 		),
@@ -52,9 +49,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery/jquery.focusAt.js',
 			),
-			'dependencies' => array(
-				'jquery',
-			),
 		),
 
 		'jquery.inputautoexpand' => $moduleTemplate + array(
@@ -62,7 +56,6 @@ return call_user_func( function() {
 				'jquery/jquery.inputautoexpand.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.event.special.eachchange',
 			),
 		),
@@ -71,17 +64,11 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery/jquery.NativeEventHandler.js',
 			),
-			'dependencies' => array(
-				'jquery',
-			),
 		),
 
 		'jquery.PurposedCallbacks' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery/jquery.PurposedCallbacks.js',
-			),
-			'dependencies' => array(
-				'jquery',
 			),
 		),
 
@@ -91,7 +78,6 @@ return call_user_func( function() {
 				'jquery.event/jquery.event.special.eachchange.js'
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.client',
 			),
 		),
@@ -105,7 +91,6 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.inputextender.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.animateWithEvent',
 				'jquery.event.special.eachchange',
 				'jquery.ui.position',
@@ -121,7 +106,6 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.listrotator.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.autocomplete', // needs jquery.ui.menu
 				'jquery.ui.widget',
 				'jquery.ui.position',
@@ -139,7 +123,6 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.ooMenu.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.widget',
 				'jquery.util.getscrollbarwidth',
 				'util.inherit',
@@ -154,7 +137,6 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.preview.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.widget',
 			),
 		),
@@ -167,7 +149,6 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.suggester.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.core',
 				'jquery.ui.ooMenu',
 				'jquery.ui.position',
@@ -180,7 +161,6 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.suggestCommons.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.ui.suggester',
 				'jquery.ui.widget',
 				'jquery.util.highlightMatchingCharacters',
@@ -195,7 +175,6 @@ return call_user_func( function() {
 				'jquery.ui/jquery.ui.toggler.css',
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.animateWithEvent',
 				'jquery.ui.widget',
 			),
@@ -206,26 +185,17 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.util/jquery.util.adaptlettercase.js',
 			),
-			'dependencies' => array(
-				'jquery',
-			),
 		),
 
 		'jquery.util.highlightMatchingCharacters' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.util/jquery.util.highlightMatchingCharacters.js',
 			),
-			'dependencies' => array(
-				'jquery',
-			),
 		),
 
 		'jquery.util.getscrollbarwidth' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.util/jquery.util.getscrollbarwidth.js',
-			),
-			'dependencies' => array(
-				'jquery',
 			),
 		),
 
