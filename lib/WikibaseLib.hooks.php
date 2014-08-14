@@ -264,7 +264,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.store/store.EntityStore.tests.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'wikibase.store.EntityStore',
 				'wikibase.tests.qunit.testrunner'
 			),
@@ -300,7 +299,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.sites.tests.js',
 			),
 			'dependencies' => array(
-				'jquery',
 				'wikibase',
 				'wikibase.sites',
 				'wikibase.tests.qunit.testrunner',
@@ -312,7 +310,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.ValueViewBuilder.tests.js'
 			),
 			'dependencies' => array(
-				'jquery',
 				'test.sinonjs',
 				'wikibase.ValueViewBuilder'
 			)
