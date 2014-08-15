@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_86e3b7d3",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-15T12:44:09Z",
+      "side": 1,
+      "message": "per jenkins output it doesnt look like $subArr is an array here\n\n1) Wikibase\\Test\\Api\\ApiConventionsTest::testApiConventions\nInvalid argument supplied for foreach()\n\n/var/lib/jenkins/jobs/wikibase-repo-api-tests/workspace/extensions/Wikibase/repo/tests/phpunit/includes/api/ApiConventionsTest.php:93\n/var/lib/jenkins/jobs/wikibase-repo-api-tests/workspace/extensions/Wikibase/repo/tests/phpunit/includes/api/ApiConventionsTest.php:33\n/var/lib/jenkins/jobs/wikibase-repo-api-tests/workspace/tests/phpunit/MediaWikiTestCase.php:133",
+      "revId": "32a35c17a74cbbb69edcb946327dc41a5aa01969",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
