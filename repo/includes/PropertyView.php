@@ -39,7 +39,12 @@ class PropertyView extends EntityView {
 
 		$html = '';
 
-		$html .= $this->getHtmlForFingerprint( $property, $editable );
+		$html .= $this->getHtmlForLabel( $property, $editable );
+		$html .= $this->getHtmlForDescription( $property, $editable );
+
+		$html .= wfTemplate( 'wb-entity-header-separator' );
+
+		$html .= $this->getHtmlForAliases( $property, $editable );
 		$html .= $this->getHtmlForToc();
 		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
 
