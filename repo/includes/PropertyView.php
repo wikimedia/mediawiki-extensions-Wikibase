@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DataTypes\DataType;
+use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -46,7 +47,7 @@ class PropertyView extends EntityView {
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$html .= $this->getHtmlForClaims( $property, $editable );
+			$html .= $this->getHtmlForClaims( $property );
 		}
 
 		$footer = $this->msg( 'wikibase-property-footer' );
@@ -60,23 +61,14 @@ class PropertyView extends EntityView {
 	}
 
 	/**
-	 * Returns the HTML for the heading of the claims section
+	 * Returns the HTML for the claims of this property.
 	 *
-	 * @since 0.5
-	 *
-	 * @param Entity $entity
-	 * @param bool $editable
+	 * @param Property $property
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForClaimsSectionHeading( Entity $entity, $editable = true ) {
-		$html = wfTemplate(
-			'wb-section-heading',
-			wfMessage( 'wikibase-attributes' )->escaped(),
-			'claims' // ID - TODO: should not be added if output page is not the entity's page
-		);
-
-		return $html;
+	private function getHtmlForClaims( Property $property ) {
+		return $this->claimsView->getHtml( $property->getClaims(), 'wikibase-attributes' );
 	}
 
 	private function getDataType( Property $property ) {
