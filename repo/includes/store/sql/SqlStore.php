@@ -10,7 +10,6 @@ use MWException;
 use ObjectCache;
 use Revision;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -18,13 +17,12 @@ use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\RedirectResolvingEntityLookup;
+use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
-use Wikibase\Lib\Test\Store\RedirectResolvingEntityLookupTest;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -606,7 +604,7 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	protected function newEntityInfoBuilderFactory() {
-		return new SqlEntityInfoBuilderFactory( $this->getEntityRevisionLookup() );
+		return new SqlEntityInfoBuilderFactory( $this->useRedirectTargetColumn );
 	}
 
 	/**
