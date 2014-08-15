@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\SiteLinksView;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -30,23 +30,10 @@ class ItemView extends EntityView {
 	}
 
 	/**
-	 * Returns the HTML for the heading of the claims section
-	 *
-	 * @since 0.5
-	 *
-	 * @param Entity $entity
-	 * @param bool $editable
-	 *
-	 * @return string
+	 * @see EntityView::getHtmlForClaims
 	 */
-	protected function getHtmlForClaimsSectionHeading( Entity $entity, $editable = true ) {
-		$html = wfTemplate(
-			'wb-section-heading',
-			wfMessage( 'wikibase-statements' ),
-			'claims' // ID - TODO: should not be added if output page is not the entity's page
-		);
-
-		return $html;
+	protected function getHtmlForClaims( Entity $entity ) {
+		return $this->claimsView->getHtml( $entity->getClaims(), 'wikibase-statements' );
 	}
 
 	/**
