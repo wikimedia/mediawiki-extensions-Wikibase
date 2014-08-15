@@ -51,12 +51,15 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 
 	private function getFingerprint( $languageCode = 'en' ) {
 		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setLabel( new Term( $languageCode, 'Example label' ) );
-		$fingerprint->setDescription( new Term( $languageCode, 'This is an example description' ) );
-		$fingerprint->setAliasGroup( new AliasGroup( $languageCode, array(
-			'sample alias',
-			'specimen alias',
-		) ) );
+		$fingerprint->setLabel( $languageCode, 'Example label' );
+		$fingerprint->setDescription( $languageCode, 'This is an example description' );
+		$fingerprint->setAliasGroup(
+			$languageCode,
+			array(
+				'sample alias',
+				'specimen alias',
+			)
+		);
 		return $fingerprint;
 	}
 
@@ -108,9 +111,9 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	public function testGetHtml_valuesAreEscaped() {
 		$fingerprintView = $this->getFingerprintView();
 		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setLabel( new Term( 'en', '<a href="#">evil html</a>' ) );
-		$fingerprint->setDescription( new Term( 'en', '<script>alert( "xss" );</script>' ) );
-		$fingerprint->setAliasGroup( new AliasGroup( 'en', array( '<b>bold</b>', '<i>italic</i>' ) ) );
+		$fingerprint->setLabel( 'en', '<a href="#">evil html</a>' );
+		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
+		$fingerprint->setAliasGroup( 'en', array( '<b>bold</b>', '<i>italic</i>' ) );
 		$html = $fingerprintView->getHtml( $fingerprint );
 
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
