@@ -258,4 +258,24 @@ class StatementTest extends ClaimTest {
 		$this->assertFalse( $statement->equals( $differentStatement ) );
 	}
 
+	public function testGetClaim() {
+		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
+
+		$statement = new Statement(
+			new PropertyNoValueSnak( 42 ),
+			$qualifiers,
+			new ReferenceList( array(
+				new PropertyNoValueSnak( 1337 ),
+			) )
+		);
+		$statement->setGuid( '~=[,,_,,]:3' );
+
+		$claim = $statement->getClaim();
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
+
+		$this->assertEquals( '~=[,,_,,]:3', $claim->getGuid() );
+		$this->assertEquals( new PropertyNoValueSnak( 42 ), $claim->getMainSnak() );
+		$this->assertSame( $qualifiers, $claim->getQualifiers() );
+	}
+
 }

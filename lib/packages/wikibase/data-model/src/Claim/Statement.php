@@ -149,4 +149,13 @@ class Statement extends Claim {
 			&& $this->references->equals( $target->getReferences() );
 	}
 
+	/**
+	 * @since 1.0
+	 *
+	 * @return Claim
+	 */
+	public function getClaim() {
+		return $this;
+	}
+
 }
