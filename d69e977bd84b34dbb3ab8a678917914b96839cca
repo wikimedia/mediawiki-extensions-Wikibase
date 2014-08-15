@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_3269dd89",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-15T21:41:38Z",
+      "side": 1,
+      "message": "It\u0027s be nicer to have this injected in the constructor. You\u0027ll be able to kill at least one current constructor parameter: claimHtmlGenerator.",
+      "revId": "d69e977bd84b34dbb3ab8a678917914b96839cca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f2c6b56a",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-15T21:41:38Z",
+      "side": 1,
+      "message": "This shows a split was needed. 5 constructor args is already near the max you want to have",
+      "revId": "d69e977bd84b34dbb3ab8a678917914b96839cca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
