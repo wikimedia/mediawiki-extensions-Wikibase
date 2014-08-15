@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_23c19534",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-15T08:59:59Z",
+      "side": 1,
+      "message": "Why is the id before the label?",
+      "revId": "4ec25c6a4adaf8936156672e6f4e7a14d4134899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e3ba6db5",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-15T08:59:59Z",
+      "side": 1,
+      "message": "What is \"wrapper HTML\"?",
+      "revId": "4ec25c6a4adaf8936156672e6f4e7a14d4134899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c3d9b12d",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-15T08:59:59Z",
+      "side": 1,
+      "message": "Why did you removed the \"wb-value-empty\" CSS class name?",
+      "revId": "4ec25c6a4adaf8936156672e6f4e7a14d4134899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_83e3a9d3",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-15T08:59:59Z",
+      "side": 1,
+      "message": "So all descriptions are marked as empty, even non-empty ones? Very ouch.",
+      "revId": "4ec25c6a4adaf8936156672e6f4e7a14d4134899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_63e67de5",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-15T08:59:59Z",
+      "side": 1,
+      "message": "I think it must be \"exists\".",
+      "revId": "4ec25c6a4adaf8936156672e6f4e7a14d4134899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e3d14dfd",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-15T08:59:59Z",
+      "side": 1,
+      "message": "Concatenating messages like this is bad because you will never be able to find them again in the code. Please simplify to ... ? \u0027wikibase-add\u0027 : \u0027wikibase-edit\u0027 like it was done before.",
+      "revId": "4ec25c6a4adaf8936156672e6f4e7a14d4134899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a3034578",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-15T08:59:59Z",
+      "side": 1,
+      "message": "What was wrong with the $action parameter?",
+      "revId": "4ec25c6a4adaf8936156672e6f4e7a14d4134899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
