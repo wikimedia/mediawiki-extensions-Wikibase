@@ -36,7 +36,6 @@ class_alias( 'Wikibase\DataModel\MapHasher', 'Wikibase\MapHasher' );
 class_alias( 'Wikibase\DataModel\MapValueHasher', 'Wikibase\MapValueHasher' );
 class_alias( 'Wikibase\DataModel\ByPropertyIdArray', 'Wikibase\ByPropertyIdArray' );
 class_alias( 'Wikibase\DataModel\Claim\Claim', 'Wikibase\Claim' );
-class_alias( 'Wikibase\DataModel\Claim\ClaimAggregate', 'Wikibase\ClaimAggregate' );
 class_alias( 'Wikibase\DataModel\Claim\ClaimListAccess', 'Wikibase\ClaimListAccess' );
 class_alias( 'Wikibase\DataModel\Claim\Claims', 'Wikibase\Claims' );
 class_alias( 'Wikibase\DataModel\Claim\Statement', 'Wikibase\Statement' );

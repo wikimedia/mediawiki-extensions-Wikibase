@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Entity;
 use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\ClaimAggregate;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
 use Wikibase\DataModel\Snak\Snak;
@@ -25,7 +24,7 @@ use Wikibase\DataModel\Term\TermList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvider, EntityDocument {
+abstract class Entity implements \Comparable, FingerprintProvider, EntityDocument {
 
 	/**
 	 * @var EntityId|null
@@ -364,8 +363,6 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	}
 
 	/**
-	 * @see ClaimAggregate::getClaims
-	 *
 	 * @since 0.3
 	 * @deprecated since 1.0
 	 *

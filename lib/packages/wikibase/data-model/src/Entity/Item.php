@@ -339,8 +339,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see ClaimAggregate::getClaims
-	 *
 	 * @since 0.3
 	 *
 	 * @return Claim[]

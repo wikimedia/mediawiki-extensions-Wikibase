@@ -48,6 +48,7 @@ Other breaking changes:
 * Calling `clear` on an `Item` will now cause its statements to be removed
 * `SiteLinkList::addNewSiteLink` no longer returns a `SiteLinkList` instance
 * Removed the global variable `evilDataValueMap`
+* Removed `ClaimAggregate` interface, which is thus no longer implemented by `Entity`
 
 #### Additions
 
