@@ -696,7 +696,7 @@ class ItemTest extends EntityTest {
 	}
 
 	public function testSetStatements() {
-		$entity = $this->getNewEmpty();
+		$item = Item::newEmpty();
 
 		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement0->setGuid( 'TEST$NVS42' );
@@ -706,11 +706,11 @@ class ItemTest extends EntityTest {
 
 		$statements = array( $statement0, $statement1 );
 
-		$entity->setClaims( new Claims( $statements ) );
-		$this->assertSameSize( $statements, $entity->getStatements(), "added some statements" );
+		$item->setClaims( new Claims( $statements ) );
+		$this->assertSameSize( $statements, $item->getStatements(), "added some statements" );
 
-		$entity->setClaims( new Claims() );
-		$this->assertCount( 0, $entity->getStatements(), "should be empty again" );
+		$item->setClaims( new Claims() );
+		$this->assertCount( 0, $item->getStatements(), "should be empty again" );
 	}
 
 
