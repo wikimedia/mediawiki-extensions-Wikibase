@@ -52,18 +52,20 @@ Other breaking changes:
 
 #### Additions
 
-* Added `getClaim` method to `Statement`
 * Added `ClaimList`
 * Added `ClaimListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
 * Added `PropertyNotFoundException`
 * Added `ItemDiffer` and `PropertyDiffer`
 * Added `EntityDiffer` and `EntityDifferStrategy`
+* Added `Item::getStatements`
+* Added `Statement::getClaim`
 
 #### Other changes
 
 * Undeprecated passing an integer to `Item::setId` and `Property::setId`
 * Deprecated `Entity::setId`, `Entity::newClaim` and `Entity::getAllSnaks`
+* Deprecated `Item::getClaims` in favour of `Item::getStatements`
 
 ## Version 0.9 (2014-08-15)
 
