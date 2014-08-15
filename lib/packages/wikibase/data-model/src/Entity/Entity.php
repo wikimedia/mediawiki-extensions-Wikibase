@@ -392,6 +392,7 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 
 	/**
 	 * @since 0.3
+	 * @deprecated since 1.0
 	 *
 	 * @param Snak $mainSnak
 	 *
@@ -451,6 +452,9 @@ abstract class Entity implements \Comparable, ClaimAggregate, FingerprintProvide
 	 *
 	 * This is a convenience method for use in code that needs to operate on all snaks, e.g.
 	 * to find all referenced Entities.
+	 *
+	 * @since 0.5
+	 * @deprecated since 1.0
 	 *
 	 * @return Snak[]
 	 */
