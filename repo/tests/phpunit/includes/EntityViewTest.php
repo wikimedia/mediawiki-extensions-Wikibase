@@ -242,61 +242,6 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getHtmlForClaimsProvider() {
-		$item = $this->makeEntity( $this->makeEntityId( 33 ), array(
-			$this->makeClaim( new PropertyNoValueSnak(
-				new PropertyId( 'P11' )
-			) ),
-			$this->makeClaim( new PropertyValueSnak(
-				new PropertyId( 'P11' ),
-				new EntityIdValue( new ItemId( 'Q22' ) )
-			) ),
-			$this->makeClaim( new PropertyValueSnak(
-				new PropertyId( 'P23' ),
-				new StringValue( 'test' )
-			) ),
-		) );
-
-		return array(
-			array( $item )
-		);
-	}
-
-	/**
-	 * @dataProvider getHtmlForClaimsProvider
-	 *
-	 * @param Entity $entity
-	 */
-	public function testGetHtmlForClaims( Entity $entity ) {
-		$entityView = $this->newEntityView( $entity->getType() );
-
-		$lang = Language::factory( 'en' );
-
-		// Using a DOM document to parse HTML output:
-		$doc = new \DOMDocument();
-
-		// Disable default error handling in order to catch warnings caused by malformed markup:
-		libxml_use_internal_errors( true );
-
-		// Try loading the HTML:
-		$this->assertTrue( $doc->loadHTML( $entityView->getHtmlForClaims( $entity, $lang ) ) );
-
-		// Check if no warnings have been thrown:
-		$errorString = '';
-		foreach( libxml_get_errors() as $error ) {
-			$errorString .= "\r\n" . $error->message;
-		}
-
-		$this->assertEmpty( $errorString, 'Malformed markup:' . $errorString );
-
-		// Clear error cache and re-enable default error handling:
-		libxml_clear_errors();
-		libxml_use_internal_errors();
-	}
-
-	/**
 	 * @dataProvider parserOutputExtensionDataProvider
 	 */
 	public function testParserOutputExtensionData( EntityRevision $revision ) {
