@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * A factory for SqlEntityInfoBuilder instances.
@@ -21,9 +20,9 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var bool
 	 */
-	private $entityRevisionLookup;
+	private $useRedirectTargetColumn;
 
 	/**
 	 * @var bool
@@ -31,18 +30,18 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	private $wiki;
 
 	/**
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param bool $useRedirectTargetColumn
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityRevisionLookup $entityRevisionLookup, $wiki = false ) {
+	public function __construct( $useRedirectTargetColumn = true, $wiki = false ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 
-		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->useRedirectTargetColumn = $useRedirectTargetColumn;
 		$this->wiki = $wiki;
 	}
 
@@ -54,6 +53,7 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	 * @return EntityInfoBuilder
 	 */
 	public function newEntityInfoBuilder( array $ids ) {
-		return new SqlEntityInfoBuilder( $ids, $this->entityRevisionLookup, $this->wiki );
+		return new SqlEntityInfoBuilder( $ids, $this->useRedirectTargetColumn, $this->wiki );
 	}
+
 }

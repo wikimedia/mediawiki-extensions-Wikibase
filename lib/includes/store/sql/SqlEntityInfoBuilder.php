@@ -87,7 +87,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @var array[] map of entity types to maps of id-strings to numeric ids:
 	 *      type => id-string => id-int
 	 */
-	private $numericIdsByType = null;
+	private $numericIdsByType = array();
 
 	/**
 	 * Maps of id strings to page info records, grouped by entity type.
@@ -560,7 +560,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 				? 'epp_redirect_target'
 				: 'NULL AS epp_redirect_target'
 		);
-
 
 		$res = $dbw->select(
 			$this->entityPerPageTable,
