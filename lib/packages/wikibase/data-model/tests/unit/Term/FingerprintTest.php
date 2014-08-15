@@ -348,4 +348,40 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $groups, $fingerprint->getAliasGroups() );
 	}
 
+	public function testEmptyFingerprintDoesNotHaveLabel() {
+		$this->assertFalse( Fingerprint::newEmpty()->hasLabel( 'en' ) );
+	}
+
+	public function testEmptyFingerprintDoesNotHaveDescription() {
+		$this->assertFalse( Fingerprint::newEmpty()->hasDescription( 'en' ) );
+	}
+
+	public function testEmptyFingerprintDoesNotHaveAliasGroup() {
+		$this->assertFalse( Fingerprint::newEmpty()->hasAliasGroup( 'en' ) );
+	}
+
+	public function testHasLabelReturnsTrueOnlyWhenLabelExists() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'foo' );
+
+		$this->assertTrue( $fingerprint->hasLabel( 'en' ) );
+		$this->assertFalse( $fingerprint->hasLabel( 'de' ) );
+	}
+
+	public function testHasDescriptionReturnsTrueOnlyWhenDescriptionExists() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setDescription( 'en', 'foo' );
+
+		$this->assertTrue( $fingerprint->hasDescription( 'en' ) );
+		$this->assertFalse( $fingerprint->hasDescription( 'de' ) );
+	}
+
+	public function testHasAliasGroupReturnsTrueOnlyWhenAliasGroupExists() {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setAliasGroup( 'en', array( 'foo' ) );
+
+		$this->assertTrue( $fingerprint->hasAliasGroup( 'en' ) );
+		$this->assertFalse( $fingerprint->hasAliasGroup( 'de' ) );
+	}
+
 }

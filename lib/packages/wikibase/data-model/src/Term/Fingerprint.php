@@ -45,6 +45,17 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.9
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return boolean
+	 */
+	public function hasLabel( $languageCode ) {
+		return $this->labels->hasTermForLanguage( $languageCode );
+	}
+
+	/**
 	 * @since 0.7.4
 	 *
 	 * @param string $languageCode
@@ -85,6 +96,17 @@ class Fingerprint implements Comparable {
 	}
 
 	/**
+	 * @since 0.9
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return boolean
+	 */
+	public function hasDescription( $languageCode ) {
+		return $this->descriptions->hasTermForLanguage( $languageCode );
+	}
+
+	/**
 	 * @since 0.7.4
 	 *
 	 * @param string $languageCode
@@ -122,6 +144,17 @@ class Fingerprint implements Comparable {
 	 */
 	public function getAliasGroups() {
 		return $this->aliasGroups;
+	}
+
+	/**
+	 * @since 0.9
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return boolean
+	 */
+	public function hasAliasGroup( $languageCode ) {
+		return $this->aliasGroups->hasGroupForLanguage( $languageCode );
 	}
 
 	/**
