@@ -4,6 +4,7 @@ namespace Wikibase\Repo\View;
 
 use Language;
 use Message;
+use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Utils;
