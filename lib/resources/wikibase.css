@@ -954,7 +954,7 @@ table.wb-sitelinks .wb-sitelinks-page {
 	width: 100%;
 }
 
-table.wb-sitelinks .wb-badge {
+.wb-badge {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
@@ -969,7 +969,7 @@ table.wb-sitelinks .wb-badge {
 	padding: 0 8px;
 }
 
-table.wb-sitelinks .wb-badge-empty {
+.wb-badge-empty {
 	background-image: url(images/wb-badges-empty.png);
 	/* @embed */
 	background-image: -webkit-linear-gradient(transparent, transparent), url(images/wb-badges-empty.svg);
