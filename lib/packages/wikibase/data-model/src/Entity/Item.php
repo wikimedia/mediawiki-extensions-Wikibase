@@ -339,11 +339,18 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see ClaimAggregate::getClaims
+	 * @since 1.0
 	 *
-	 * @since 0.3
+	 * @return Statement[]
+	 */
+	public function getStatements() {
+		return $this->statements;
+	}
+
+	/**
+	 * @deprecated since 1.0, use getStatements instead
 	 *
-	 * @return Claim[]
+	 * @return Statement[]
 	 */
 	public function getClaims() {
 		return $this->statements;

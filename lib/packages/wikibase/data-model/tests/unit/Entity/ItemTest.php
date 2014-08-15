@@ -695,23 +695,22 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( $snak, $statement->getMainSnak() );
 	}
 
-	public function testSetClaims() {
-		$entity = $this->getNewEmpty();
-		$this->assertCount( 0, $entity->getClaims(), "initially, no claims" );
+	public function testSetStatements() {
+		$item = Item::newEmpty();
 
-		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim0->setGuid( 'TEST$NVS42' );
+		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement0->setGuid( 'TEST$NVS42' );
 
-		$claim1 = new Claim( new PropertySomeValueSnak( 42 ) );
-		$claim1->setGuid( 'TEST$SVS42' );
+		$statement1 = new Statement( new PropertySomeValueSnak( 42 ) );
+		$statement1->setGuid( 'TEST$SVS42' );
 
-		$claims = array( $claim0, $claim1 );
+		$statements = array( $statement0, $statement1 );
 
-		$entity->setClaims( new Claims( $claims ) );
-		$this->assertSameSize( $claims, $entity->getClaims(), "added some claims" );
+		$item->setClaims( new Claims( $statements ) );
+		$this->assertSameSize( $statements, $item->getStatements(), "added some statements" );
 
-		$entity->setClaims( new Claims() );
-		$this->assertCount( 0, $entity->getClaims(), "should be empty again" );
+		$item->setClaims( new Claims() );
+		$this->assertCount( 0, $item->getStatements(), "should be empty again" );
 	}
 
 
@@ -784,7 +783,7 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
 		$this->assertTrue( $item->getFingerprint()->isEmpty() );
 		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
-		$this->assertEmpty( $item->getClaims() );
+		$this->assertEmpty( $item->getStatements() );
 	}
 
 }

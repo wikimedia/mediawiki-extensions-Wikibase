@@ -80,10 +80,6 @@ namespace Wikibase {
 	/**
 	 * @deprecated since 0.6, use the base class instead.
 	 */
-	interface ClaimAggregate extends \Wikibase\DataModel\Claim\ClaimAggregate {}
-	/**
-	 * @deprecated since 0.6, use the base class instead.
-	 */
 	interface ClaimListAccess extends \Wikibase\DataModel\Claim\ClaimListAccess {}
 	/**
 	 * @deprecated since 0.6, use the base class instead.
