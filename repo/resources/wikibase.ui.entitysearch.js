@@ -44,7 +44,7 @@
 					&& /^key/.test( event.originalEvent.type )
 					&& !( item instanceof $.ui.ooMenu.CustomItem )
 				) {
-					location.href = item.getEntityStub().url;
+					window.location.href = item.getEntityStub().url;
 				}
 			} );
 
