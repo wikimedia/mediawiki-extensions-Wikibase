@@ -44,7 +44,6 @@ Other breaking changes:
 * `Claims::getDiff` now throws an `UnexpectedValueException` rather than an `InvalidArgumentException`
 * Removed these class aliases deprecated since 0.4:
 `ItemObject`, `ReferenceObject`, `ClaimObject`, `StatementObject`
-* Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
 * `HashArray` and `SnakList` no longer take an optional parameter in `getHash`
 * Calling `clear` on an `Item` will now cause its statements to be removed
 * `SiteLinkList::addNewSiteLink` no longer returns a `SiteLinkList` instance
