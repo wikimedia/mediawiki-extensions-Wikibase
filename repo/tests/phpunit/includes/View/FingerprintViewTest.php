@@ -19,7 +19,7 @@ use Wikibase\Repo\View\SectionEditLinkGenerator;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class FingerprintViewTest extends \PHPUnit_Framework_TestCase {
+class FingerprintViewTest extends \MediaWikiLangTestCase {
 
 	public function provideTestGetHtml() {
 		$cases = array();
