@@ -52,6 +52,23 @@ if ( ( !defined( 'WIKIBASE_DATAMODEL_VERSION' ) || !defined( 'Diff_VERSION' ) ||
 	include_once( __DIR__ . '/../vendor/autoload.php' );
 }
 
+// needed for deserializing Snaks in DataModel 0.8.2
+if( !array_key_exists( 'evilDataValueMap', $GLOBALS ) ) {
+	$GLOBALS['evilDataValueMap'] = array();
+}
+
+$GLOBALS['evilDataValueMap'] = array_merge(
+	$GLOBALS['evilDataValueMap'],
+	 array(
+		'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+		'monolingualtext' => 'DataValues\MonolingualTextValue',
+		'multilingualtext' => 'DataValues\MultilingualTextValue',
+		'quantity' => 'DataValues\QuantityValue',
+		'time' => 'DataValues\TimeValue',
+		'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+	 )
+);
+
 call_user_func( function() {
 	global $wgExtensionCredits, $wgJobClasses, $wgHooks, $wgResourceModules, $wgMessagesDirs;
 
@@ -69,7 +86,7 @@ call_user_func( function() {
 	define( 'SUMMARY_MAX_LENGTH', 250 );
 
 	// i18n
-	$wgMessagesDirs['WikibaseLib']           = __DIR__ . '/i18n';
+	$wgMessagesDirs['WikibaseLib']		   = __DIR__ . '/i18n';
 
 	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
 
