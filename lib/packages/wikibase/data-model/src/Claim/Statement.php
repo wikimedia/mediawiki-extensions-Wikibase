@@ -21,18 +21,14 @@ use Wikibase\DataModel\Snak\Snaks;
 class Statement extends Claim {
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var References
 	 */
-	protected $references;
+	private $references;
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var integer, element of the Claim::RANK_ enum
 	 */
-	protected $rank = self::RANK_NORMAL;
+	private $rank = self::RANK_NORMAL;
 
 	/**
 	 * @since 0.1
