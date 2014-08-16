@@ -786,11 +786,17 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.entityview.js'
 			),
 			'dependencies' => array(
-				'jquery.wikibase.statementview',
-				'jquery.wikibase.claimlistview',
+				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.claimgrouplistview',
+				'jquery.wikibase.claimlistview',
+				'jquery.wikibase.descriptionview',
+				'jquery.wikibase.labelview',
 				'jquery.wikibase.toolbarcontroller',
-			)
+				'jquery.wikibase.statementview',
+				'wikibase',
+				'wikibase.templates',
+			),
 		),
 
 		'jquery.wikibase.entityselector' => $moduleTemplate + array(
