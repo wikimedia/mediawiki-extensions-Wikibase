@@ -245,7 +245,7 @@
 			}
 		} );
 
-		wb.ui.initTermBox( entity, abstractedRepoApi );
+		wb.initTermBox( entity, abstractedRepoApi );
 	}
 
 	function registerEditRestrictionHandlers() {

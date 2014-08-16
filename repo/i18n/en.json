@@ -53,7 +53,6 @@
 	"wikibase-undo-badpage": "Bad revision: Revision $2 does not belong to [[$1]].",
 	"wikibase-undo-firstrev": "Cannot undo the page's creation",
 	"wikibase-undo-nocontent": "Cannot load content of revision $2 of page $1",
-	"wikibase-propertyedittool-full": "List of values is complete.",
 	"wikibase-ui-pendingquantitycounter-nonpending": "$2 $1",
 	"wikibase-ui-pendingquantitycounter-pending": "$2$3 $1",
 	"wikibase-ui-pendingquantitycounter-pending-pendingsubpart": "+$1",

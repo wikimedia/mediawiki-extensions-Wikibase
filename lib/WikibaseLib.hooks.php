@@ -83,14 +83,9 @@ final class LibHooks {
 				'tests/qunit/wikibase.RepoApi/wikibase.RepoApi.tests.js',
 				'tests/qunit/wikibase.RepoApi/wikibase.RepoApiError.tests.js',
 
-				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
-
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.GuidGenerator.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
@@ -111,7 +106,6 @@ final class LibHooks {
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.utilities.GuidGenerator',
 				'wikibase.utilities.jQuery',
-				'wikibase.ui.PropertyEditTool',
 				'jquery.ui.suggester',
 				'jquery.wikibase.entityselector',
 				'jquery.NativeEventHandler',
