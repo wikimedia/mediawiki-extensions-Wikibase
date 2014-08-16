@@ -401,22 +401,17 @@ if ( $ ) {
 		$label = $entity->getLabel( $languageCode );
 		$entityId = $entity->getId();
 		$idString = 'new';
-		$supplement = '';
 
-		if ( $entityId !== null ) {
-			$idString = $entityId->getSerialization();
-			$supplement .= wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $idString ) );
-			if ( $editable ) {
-				$supplement .= $this->getHtmlForEditSection( 'SetLabel', array( $idString, $languageCode ) );
-			}
-		}
-
-		$html = wfTemplate( 'wb-label',
+		$html = wfTemplate( 'wikibase-h1',
 			$idString,
-			wfTemplate( 'wb-property',
+			wfTemplate( 'wikibase-labelview',
 				$label === false ? 'wb-value-empty' : '',
-				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
-				$supplement
+				htmlspecialchars( $label === false
+					? wfMessage( 'wikibase-label-empty' )->text()
+					: $label
+				),
+				wfMessage( 'parentheses', $entityId->getSerialization() )->text(),
+				$this->getHtmlForEditSection( 'SetLabel', array( $idString, $languageCode ) )
 			)
 		);
 

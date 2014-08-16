@@ -30,29 +30,6 @@
 
 		var repoApi = new wb.RepoApi();
 
-		// add an edit tool for the main label. This will be integrated into the heading nicely:
-		var $firstHeading = $( '.wb-firstHeading' );
-		if ( $firstHeading.length ) { // Special pages do not have a custom wb heading
-			var labelEditTool = new wb.ui.LabelEditTool( $firstHeading[0], { api: repoApi } ),
-				editableLabel = labelEditTool.getValues( true )[0], // [0] will always be set
-				fn = function( event, origin ) {
-					// Limit the global stopItemPageEditMode event to that element
-					if ( event.type !== 'stopItemPageEditMode' || origin === editableLabel ) {
-						var title = editableLabel.isEmpty()
-							? mw.config.get( 'wgTitle' )
-							: editableLabel.getValue()[0];
-
-						// update 'title' tag
-						$( 'title' ).text( mw.msg( 'pagetitle', title ) );
-					}
-				};
-
-			editableLabel.getSubject().on( 'eachchange', fn );
-			// Can't use afterStopEditing because it does not fire on cancel
-			// but this is needed to reset the title
-			$( wb ).on( 'stopItemPageEditMode', fn );
-		}
-
 		registerEditRestrictionHandlers();
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
@@ -242,6 +219,33 @@
 		wb.compileEntityStoreFromMwConfig( entityStore );
 
 		// TODO: Integrate into entityview
+		$( '.wikibase-labelview' )
+		.toolbarcontroller( {
+			edittoolbar: ['labelview']
+		} )
+		.labelview( {
+			value: {
+				language: mw.config.get( 'wgUserLanguage' ),
+				label: entity.getLabel( mw.config.get( 'wgUserLanguage' ) )
+			},
+			helpMessage: mw.msg(
+				'wikibase-description-input-help-message',
+				wb.getLanguageNameByCode( mw.config.get( 'wgUserLanguage' ) )
+			),
+			entityId: entity.getId(),
+			api: repoApi,
+			showEntityId: true
+		} )
+		.on( 'labelviewchange', function( event ) {
+			var $labelview = $( event.target ),
+				labelview = $labelview.data( 'labelview' ),
+				label = labelview.value().label;
+
+			$( 'title' ).text(
+				mw.msg( 'pagetitle', label && label !== '' ? label : mw.config.get( 'wgTitle' ) )
+			);
+		} );
+
 		$( '.wikibase-descriptionview' )
 		.toolbarcontroller( {
 			edittoolbar: ['descriptionview']
@@ -317,7 +321,8 @@
 		// it to a sensible place.
 		$( wb )
 		.on( 'startItemPageEditMode', function( event, target, options ) {
-			$( ':wikibase-descriptionview, :wikibase-aliasesview, :wikibase-sitelinklistview' )
+			$( ':wikibase-labelview, :wikibase-descriptionview, :wikibase-aliasesview,' +
+				':wikibase-sitelinklistview' )
 			.find( ':wikibase-toolbar' )
 			.not( $( target ).data( 'edittoolbar' ).toolbar.element )
 			.each( function() {
@@ -327,6 +332,16 @@
 		.on( 'stopItemPageEditMode', function( event, target, options ) {
 			$( ':wikibase-aliasesview' ).find( ':wikibase-toolbar' ).each( function() {
 				$( this ).data( 'toolbar' ).enable();
+			} );
+			$( ':wikibase-labelview' ).each( function() {
+				var $labelview = $( this ),
+					labelview = $labelview.data( 'labelview' );
+
+				if( labelview.value().label ) {
+					$labelview.find( ':wikibase-toolbar' ).each( function() {
+						$( this ).data( 'toolbar' ).enable();
+					} );
+				}
 			} );
 			$( ':wikibase-descriptionview' ).each( function() {
 				var $descriptionview = $( this ),
