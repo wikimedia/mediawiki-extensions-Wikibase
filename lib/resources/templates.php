@@ -159,14 +159,27 @@ HTML;
 </div>
 HTML;
 
-	$templates['wb-label'] =
+	$templates['wikibase-firstHeading'] =
 // add an h1 for displaying the entity's label; the actual firstHeading is being hidden by
 // css since the original MediaWiki DOM does not represent a Wikidata entity's structure
 // where the combination of label and description is the unique "title" of an entity which
 // should not be semantically disconnected by having elements in between, like siteSub,
 // contentSub and jump-to-nav
 <<<HTML
-<h1 id="wb-firstHeading-$1" class="wb-firstHeading wb-value-row">$2</h1>
+<h1 id="wb-firstHeading-$1" class="wb-firstHeading">
+	<!-- wikibase-labelview -->$2
+</h1>
+HTML;
+
+	$templates['wikibase-labelview'] =
+<<<HTML
+<div class="wikibase-labelview $1">
+	<div class="wikibase-labelview-container">
+		<span class="wikibase-labelview-text">$2</span>
+		<span class="wikibase-labelview-entityid">$3</span>
+		<!-- wikibase-toolbar -->$4
+	</div>
+</div>
 HTML;
 
 	$templates['wikibase-descriptionview'] =
