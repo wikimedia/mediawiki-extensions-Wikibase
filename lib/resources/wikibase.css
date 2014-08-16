@@ -162,8 +162,7 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 
 /********** LABEL & DESCRIPTION **********/
 
-.wb-ui-labeledittool .wb-value-container,
-.wb-ui-descriptionedittool .wb-value-container {
+.wb-ui-labeledittool .wb-value-container {
 	padding-right: 19em; /* width of toolbar + white space border */
 }
 
@@ -240,29 +239,6 @@ label and its toolbar */
 
 /********** /LABEL **********/
 
-/********** DESCRIPTION **********/
-
-.wb-description {
-	margin-top: -2px; /* move to top decreasing space between label and description */
-}
-
-.wb-description .wb-value-container {
-	padding-left: 10px;
-	padding-top: 0.1em;
-	padding-bottom: 0.1em;
-}
-
-.wb-description .wb-value {
-	line-height: 2; /* force height to be able to align toolbar */
-}
-
-.wb-description .wb-editsection {
-	top: 0.1em; /* see padding-top of editablevalue container */
-	line-height: 2;
-}
-
-/********** /DESCRIPTION **********/
-
 /********** /LABEL & DESCRIPTION **********/
 
 
@@ -314,13 +290,11 @@ table.wb-terms tr:nth-child(4n-1) td {
 	background: #F8F8F8;
 }
 
-table.wb-terms td.wb-terms-label,
-table.wb-terms td.wb-terms-description {
+table.wb-terms td.wb-terms-label {
 	padding: 10px;
 }
 
-table.wb-terms .wb-edit td.wb-terms-label,
-table.wb-terms .wb-edit td.wb-terms-description {
+table.wb-terms .wb-edit td.wb-terms-label {
 	padding: 8px 8px 9px 7px;
 }
 
@@ -349,6 +323,27 @@ table.wb-terms .wb-editsection .wikibase-toolbar .wikibase-toolbar {
 table.wb-terms input {
 	font-family: inherit;
 	width: 100%;
+}
+
+.wb-terms .wikibase-descriptionview .wikibase-descriptionview-text {
+	line-height: 1.4;
+	padding-right: 0;
+}
+
+.wb-terms .wikibase-descriptionview {
+	display: block;
+	float: none;
+	margin-top: 0;
+	padding: 10px;
+	width: auto;
+}
+
+.wb-terms .wikibase-descriptionview.wb-edit {
+	padding: 9px 8px 9px 7px;
+}
+
+.wb-terms .wb-error {
+	background-color: #FFDFC9;
 }
 
 /********** /TERMS **********/
