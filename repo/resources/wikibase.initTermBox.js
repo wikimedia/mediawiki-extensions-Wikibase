@@ -14,7 +14,7 @@
  * @param {wikibase.datamodel.Entity} entity
  * @param {wikibase.AbstractedRepoApi} api
  */
-wb.ui.initTermBox = function( entity, api ) {
+wb.initTermBox = function( entity, api ) {
 	mw.hook( 'wikibase.domready' ).add( function() {
 		var $termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
 			userSpecifiedLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
