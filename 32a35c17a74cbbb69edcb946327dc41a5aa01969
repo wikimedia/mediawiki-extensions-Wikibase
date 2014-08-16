@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_7a2f3bf4",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-16T15:57:30Z",
+      "side": 1,
+      "message": "Please try to avoid abbreviated variable names. $i is perfect as a counter/iterator in a loop but here it\u0027s a description, right?",
+      "revId": "32a35c17a74cbbb69edcb946327dc41a5aa01969",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_86e3b7d3",
         "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
         "patchSetId": 3
@@ -13,6 +30,57 @@
       "writtenOn": "2014-08-15T12:44:09Z",
       "side": 1,
       "message": "per jenkins output it doesnt look like $subArr is an array here\n\n1) Wikibase\\Test\\Api\\ApiConventionsTest::testApiConventions\nInvalid argument supplied for foreach()\n\n/var/lib/jenkins/jobs/wikibase-repo-api-tests/workspace/extensions/Wikibase/repo/tests/phpunit/includes/api/ApiConventionsTest.php:93\n/var/lib/jenkins/jobs/wikibase-repo-api-tests/workspace/extensions/Wikibase/repo/tests/phpunit/includes/api/ApiConventionsTest.php:33\n/var/lib/jenkins/jobs/wikibase-repo-api-tests/workspace/tests/phpunit/MediaWikiTestCase.php:133",
+      "revId": "32a35c17a74cbbb69edcb946327dc41a5aa01969",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3a39b33e",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-16T15:57:30Z",
+      "side": 1,
+      "message": "We already discussed this. ;-) strcmp is C style. strcmp() \u003d\u003d\u003d 0 is equality. If you are used to Java you learned to avoid using \u003d\u003d for strings but that\u0027s Java-only. In PHP we use \u003d\u003d\u003d for string comparisons. Not \u003d\u003d because it haves some strange magic type conversions effects. Short: Only use \u003d\u003d if you want magic type conversion, e.g. when comparing user input (which is always string) with numbers.",
+      "revId": "32a35c17a74cbbb69edcb946327dc41a5aa01969",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fa420bb1",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-16T15:57:30Z",
+      "side": 1,
+      "message": "Check assertContains.",
+      "revId": "32a35c17a74cbbb69edcb946327dc41a5aa01969",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1a3cb72c",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-16T15:57:30Z",
+      "side": 1,
+      "message": "Check assertInternalType( \u0027string\u0027, ... ) - this only accepts internal types - or short assertType( \u0027string\u0027, ... ) - this accepts classes and internal types. Both is ok.",
       "revId": "32a35c17a74cbbb69edcb946327dc41a5aa01969",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
