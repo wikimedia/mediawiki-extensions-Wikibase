@@ -157,6 +157,15 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 	width: auto;
 }
 
+ul.tagadata {
+	padding: 0;
+}
+
+li.tagadata-choice-modified .tagadata-label-text {
+	/* highlight new tags since initialization */
+	text-decoration: underline;
+}
+
 /********** /BASIC LAYOUT **********/
 
 
