@@ -400,23 +400,20 @@ if ( $ ) {
 		$languageCode = $this->getLanguage()->getCode();
 		$label = $entity->getLabel( $languageCode );
 		$entityId = $entity->getId();
-		$idString = 'new';
-		$supplement = '';
+		$idString = $entityId === null ? 'new' : $idString = $entityId->getSerialization();
 
-		if ( $entityId !== null ) {
-			$idString = $entityId->getSerialization();
-			$supplement .= wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $idString ) );
-			if ( $editable ) {
-				$supplement .= $this->getHtmlForEditSection( 'SetLabel', array( $idString, $languageCode ) );
-			}
-		}
-
-		$html = wfTemplate( 'wb-label',
+		$html = wfTemplate( 'wikibase-firstHeading',
 			$idString,
-			wfTemplate( 'wb-property',
+			wfTemplate( 'wikibase-labelview',
 				$label === false ? 'wb-value-empty' : '',
-				htmlspecialchars( $label === false ? wfMessage( 'wikibase-label-empty' )->text() : $label ),
-				$supplement
+				htmlspecialchars( $label === false
+					? wfMessage( 'wikibase-label-empty' )->text()
+					: $label
+				),
+				wfMessage( 'parentheses', $entityId->getSerialization() )->text(),
+				$entityId === null || !$editable
+					? ''
+					: $this->getHtmlForEditSection( 'SetLabel', array( $idString, $languageCode ) )
 			)
 		);
 
