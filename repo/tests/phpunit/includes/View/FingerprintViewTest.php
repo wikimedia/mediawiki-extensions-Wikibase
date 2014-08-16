@@ -132,8 +132,8 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$noAliases->removeAliasGroup( 'en' );
 
 		return array(
-			array( Fingerprint::newEmpty(), array( 'wb-value-empty', 'wb-empty' ), 'No' ),
-			array( $noLabel, array( 'wb-value-empty' ), 'No label' ),
+			array( Fingerprint::newEmpty(), array( 'wb-empty' ), 'No' ),
+			array( $noLabel, array( 'wb-empty' ), 'No label' ),
 			array( $noDescription, array( 'wb-empty' ), 'No description' ),
 			array( $noAliases, array( 'wb-empty' ), 'No aliases' ),
 		);
@@ -168,9 +168,6 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 
 		$this->assertNotContains( 'id="wb-firstHeading-new"', $html );
 		$this->assertContains( 'id="wb-firstHeading-' . $idString . '"', $html );
-		$this->assertContains( 'wb-value-supplement', $html );
-		$this->assertRegExp( '/[ "]wb-value[ "].*[ "]wb-value-supplement[ "]/s', $html,
-			'supplement follows value' );
 		$this->assertContains( '<a ', $html );
 	}
 
@@ -180,7 +177,6 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 
 		$this->assertContains( 'id="wb-firstHeading-new"', $html );
 		$this->assertNotContains( 'id="wb-firstHeading-Q', $html );
-		$this->assertNotContains( 'wb-value-supplement', $html );
 		$this->assertNotContains( '<a ', $html );
 	}
 

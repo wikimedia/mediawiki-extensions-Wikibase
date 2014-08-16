@@ -16,8 +16,7 @@
  */
 wb.ui.initTermBox = function( entity, api ) {
 	mw.hook( 'wikibase.domready' ).add( function() {
-		var termsValueTools = [],
-			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
+		var $termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
 			userSpecifiedLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
 			hasSpecifiedLanguages = userSpecifiedLanguages && userSpecifiedLanguages.length,
 			isUlsDefined = mw.uls !== undefined
@@ -25,7 +24,7 @@ wb.ui.initTermBox = function( entity, api ) {
 				&& $.uls.data !== undefined;
 
 		$( '.wb-terms' ).toolbarcontroller( {
-			edittoolbar: ['terms-descriptionview']
+			edittoolbar: ['terms-labelview', 'terms-descriptionview']
 		} );
 
 		// Skip if having no extra languages is what the user wants
@@ -50,39 +49,37 @@ wb.ui.initTermBox = function( entity, api ) {
 		}
 
 		$termBoxRows.each( function() {
-			var $termsRow = $( this );
-
-			if( $termsRow.hasClass( 'wb-terms-label' ) ) {
-				var editTool = wb.ui.PropertyEditTool.EditableLabel,
-					$toolbar = mw.template( 'wikibase-toolbar', '', '' ).toolbar(),
-					toolbar = $toolbar.data( 'toolbar' ),
-					$editGroup = mw.template( 'wikibase-toolbareditgroup', '', '' )
-						.toolbareditgroup();
-
-				toolbar.addElement( $editGroup );
-
-				// TODO: EditableLabel should not assume that this is set
-				toolbar.$editGroup = $editGroup;
-
-				termsValueTools.push( editTool.newFromDom( $termsRow, {
-					api: api
-				}, toolbar ) );
-
-				return true;
-			}
-
-			var languageCode;
+			var $termsRow = $( this ),
+				languageCode;
 
 			// TODO: Find more sane way to figure out language code.
 			$.each( $termsRow.attr( 'class' ).split( ' ' ), function( i, cssClass ) {
 				if(
 					cssClass.indexOf( 'wb-terms-' ) === 0
+					&& cssClass.indexOf( 'wb-terms-label' ) === -1
 					&& cssClass.indexOf( 'wb-terms-description' ) === -1
 				) {
 					languageCode =  cssClass.replace( /wb-terms-/, '' );
 					return false;
 				}
 			} );
+
+			if( $termsRow.hasClass( 'wb-terms-label' ) ) {
+				$termsRow.children( 'td' ).eq( 1 ).labelview( {
+					value: {
+						language: languageCode,
+						label: entity.getLabel( languageCode )
+					},
+					helpMessage: mw.msg(
+						'wikibase-label-input-help-message',
+						wb.getLanguageNameByCode( languageCode )
+					),
+					entityId: entity.getId(),
+					api: api
+				} );
+
+				return true;
+			}
 
 			$termsRow.children( 'td' ).first().descriptionview( {
 				value: {
@@ -101,30 +98,29 @@ wb.ui.initTermBox = function( entity, api ) {
 
 		$( wb )
 		.on( 'startItemPageEditMode', function( event, origin ) {
-			// Disable language terms table's editable value or mark it as the active one if it
-			// is the one being edited by the user and therefore the origin of the event
-			$.each( termsValueTools, function( i, termValueTool ) {
-				if(
-					!( origin instanceof wb.ui.PropertyEditTool.EditableValue )
-					|| origin.getSubject() !== termValueTool.getSubject()
-				) {
-					termValueTool.disable();
-				} else if( origin && origin.getSubject() === termValueTool.getSubject() ) {
-					$( 'table.wb-terms' ).addClass( 'wb-edit' );
-				}
-			} );
-
-			$termBoxRows.find( ':wikibase-descriptionview' )
+			$termBoxRows.find( ':wikibase-labelview, :wikibase-descriptionview' )
 			.not( origin )
 			.each( function() {
-				$( this ).data( 'descriptionview' ).disable();
+				( $( this ).data( 'labelview' ) || $( this ).data( 'descriptionview' ) )
+					.disable();
 				$( this ).data( 'edittoolbar' ).toolbar.disable();
 			} );
 		} )
 		.on( 'stopItemPageEditMode', function( event, origin ) {
-			$( 'table.wb-terms' ).removeClass( 'wb-edit' );
-			$.each( termsValueTools, function( i, termValueTool ) {
-				termValueTool.enable();
+			$termBoxRows.find( ':wikibase-labelview' ).each( function() {
+				var labelview = $( this ).data( 'labelview' );
+
+				if( labelview.value().label ) {
+					var toolbar = $( this ).data( 'edittoolbar' ).toolbar,
+						btnEdit = toolbar.editGroup.getButton( 'edit' ).data( 'toolbarbutton' );
+
+					$( this ).data( 'edittoolbar' ).toolbar.enable();
+
+					// FIXME: Get rid of StatableObject making things complicated
+					btnEdit.setState( btnEdit.STATE.ENABLED );
+				} else {
+					labelview.enable();
+				}
 			} );
 
 			$termBoxRows.find( ':wikibase-descriptionview' ).each( function() {
@@ -215,7 +211,71 @@ function renderTermBox( title, entity, languageCodes ) {
 	return mw.template( 'wb-terms-table', $tbody );
 }
 
-// TODO: Merge with native descriptionview toolbar definiton
+// TODO: Merge with native labelview/descriptionview toolbar definiton
+$.wikibase.toolbarcontroller.definition( 'edittoolbar', {
+	id: 'terms-labelview',
+	selector: '.wb-terms-label',
+	events: {
+		labelviewcreate: function( event, toolbarcontroller ) {
+			var $labelview = $( event.target ),
+				labelview = $labelview.data( 'labelview' );
+
+			$labelview.edittoolbar( {
+				$container: $labelview.next(),
+				interactionWidgetName: $.wikibase.labelview.prototype.widgetName,
+				enableRemove: false
+			} );
+
+			$labelview.on( 'keyup', function( event ) {
+				if( labelview.option( 'disabled' ) ) {
+					return;
+				}
+				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
+					labelview.stopEditing( true );
+				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
+					labelview.stopEditing( false );
+				}
+			} );
+
+			if( !labelview.value().label ) {
+				labelview.startEditing();
+			}
+		},
+		'labelviewchange labelviewafterstartediting': function( event ) {
+			var $labelview = $( event.target ),
+				labelview = $labelview.data( 'labelview' ),
+				toolbar = $labelview.data( 'edittoolbar' ).toolbar,
+				$btnSave = toolbar.editGroup.getButton( 'save' ),
+				btnSave = $btnSave.data( 'toolbarbutton' ),
+				enable = labelview.isValid() && !labelview.isInitialValue(),
+				$btnCancel = toolbar.editGroup.getButton( 'cancel' ),
+				btnCancel = $btnCancel.data( 'toolbarbutton' ),
+				currentLabel = labelview.value().label,
+				disableCancel = !currentLabel && labelview.isInitialValue();
+
+			btnSave[enable ? 'enable' : 'disable']();
+			btnCancel[disableCancel ? 'disable' : 'enable']();
+		},
+		labelviewafterstopediting: function( event, dropValue ) {
+			var $labelview = $( event.target ),
+				labelview = $labelview.data( 'labelview' );
+
+			if( !labelview.value().label ) {
+				labelview.startEditing();
+			}
+		},
+		toolbareditgroupedit: function( event, toolbarcontroller ) {
+			var $labelview = $( event.target ).closest( ':wikibase-edittoolbar' ),
+				labelview = $labelview.data( 'labelview' );
+
+			if( !labelview ) {
+				return;
+			}
+
+			labelview.focus();
+		}
+	}
+} );
 $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	id: 'terms-descriptionview',
 	selector: '.wb-terms-description',
