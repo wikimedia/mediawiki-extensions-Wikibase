@@ -78,25 +78,6 @@ sizes and line heights within the heading */
 /***** /LABEL *****/
 
 
-/***** DESCRIPTION *****/
-
-.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
-	margin-right: .3em;
-	padding-left: 7px;
-}
-
-.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
-	padding: 0;
-}
-
-.wb-ui-descriptionedittool input {
-	width: 100%;
-	padding: 0 2px;
-	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
-}
-
-/***** /DESCRIPTION *****/
-
 /********** TAGADATA **********/
 
 ul.tagadata {

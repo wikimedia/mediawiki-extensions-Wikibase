@@ -169,11 +169,13 @@ HTML;
 <h1 id="wb-firstHeading-$1" class="wb-firstHeading wb-value-row">$2</h1>
 HTML;
 
-	$templates['wb-description'] =
+	$templates['wikibase-descriptionview'] =
 <<<HTML
-<div class="wb-property-container wb-value-row wb-description" dir="auto">
-	<div class="wb-property-container-key" title="description"></div>
-	$1
+<div class="wikibase-descriptionview $1" dir="auto">
+	<div class="wikibase-descriptionview-container">
+		<span class="wikibase-descriptionview-text">$2</span>
+		<!-- wikibase-toolbar -->$3
+	</div>
 </div>
 HTML;
 
