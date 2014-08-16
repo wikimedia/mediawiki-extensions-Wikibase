@@ -199,7 +199,7 @@ abstract class EntityView extends ContextSource {
 		$entityId = $entityRevision->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
-		$html .= wfTemplate( 'wb-entity',
+		$html .= wfTemplate( 'wikibase-entityview',
 			$entityRevision->getEntity()->getType(),
 			$entityId,
 			$lang->getCode(),
@@ -215,7 +215,7 @@ abstract class EntityView extends ContextSource {
 		// JavaScript is parsed.
 		$html .= Html::inlineScript( '
 if ( $ ) {
-	$( ".wb-entity" ).addClass( "loading" ).after( function() {
+	$( ".wikibase-entityview" ).addClass( "loading" ).after( function() {
 		var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
 		$div.css( "top", $div.height() + "px" );
 		$div.css(
@@ -225,7 +225,7 @@ if ( $ ) {
 		return $div;
 	} );
 	window.setTimeout( function() {
-		$( ".wb-entity" ).removeClass( "loading" );
+		$( ".wikibase-entityview" ).removeClass( "loading" );
 		$( ".wb-entity-spinner" ).remove();
 	}, 7000 );
 }
