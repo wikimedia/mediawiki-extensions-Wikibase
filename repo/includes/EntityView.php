@@ -443,15 +443,19 @@ if ( $ ) {
 
 		if ( $entityId !== null && $editable ) {
 			$idString = $entityId->getSerialization();
-			$editSection .= $this->getHtmlForEditSection( 'SetDescription', array( $idString, $languageCode ) );
+			$editSection .= $this->getHtmlForEditSection(
+					'SetDescription',
+					array( $idString, $languageCode )
+				);
 		}
 
-		$html = wfTemplate( 'wb-description',
-			wfTemplate( 'wb-property',
-				$description === false ? 'wb-value-empty' : '',
-				htmlspecialchars( $description === false ? wfMessage( 'wikibase-description-empty' )->text() : $description ),
-				$editSection
-			)
+		$html = wfTemplate( 'wikibase-descriptionview',
+			$description === false ? 'wb-empty' : '',
+			htmlspecialchars( $description === false
+				? wfMessage( 'wikibase-description-empty' )->text()
+				: $description
+			),
+			$editSection
 		);
 
 		wfProfileOut( __METHOD__ );
