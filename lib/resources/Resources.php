@@ -216,7 +216,6 @@ return call_user_func( function() {
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
-				'wikibase.utilities/wikibase.utilities.ObservableObject.js',
 				'wikibase.utilities/wikibase.utilities.ui.js',
 				'wikibase.utilities/wikibase.utilities.ui.StatableObject.js',
 			),
@@ -286,79 +285,6 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.ui.Base' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.ui.js',
-				'wikibase.ui.Base.js',
-			),
-			'dependencies' => array(
-				'wikibase',
-				'wikibase.utilities',
-			),
-		),
-
-		'wikibase.ui.PropertyEditTool' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.ui.PropertyEditTool.js',
-				'wikibase.ui.PropertyEditTool.EditableValue.js',
-				'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
-			),
-			'styles' => array(
-				'wikibase.ui.PropertyEditTool.css'
-			),
-			'dependencies' => array(
-				'jquery.event.special.eachchange',
-				'jquery.NativeEventHandler',
-				'jquery.inputautoexpand',
-				'util.inherit',
-				'jquery.wikibase.toolbareditgroup',
-				'mediawiki.api',
-				'mediawiki.util',
-				'mediawiki.language',
-				'mediawiki.Title',
-				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
-				'wikibase',
-				'wikibase.RepoApiError',
-				'wikibase.templates',
-				'wikibase.ui.Base',
-				'wikibase.utilities',
-				'wikibase.utilities.jQuery',
-				'wikibase.utilities.jQuery.ui.tagadata',
-			),
-			'messages' => array(
-				'wikibase-save-inprogress',
-				'wikibase-remove-inprogress',
-				'wikibase-label-edit-placeholder',
-				'wikibase-label-edit-placeholder-language-aware',
-				'wikibase-description-edit-placeholder',
-				'wikibase-description-edit-placeholder-language-aware',
-				'wikibase-aliases-label',
-				'wikibase-aliases-input-help-message',
-				'wikibase-alias-edit-placeholder',
-				'wikibase-label-input-help-message',
-				'wikibase-description-input-help-message',
-				'wikibase-propertyedittool-full',
-				'wikibase-propertyedittool-counter-pending-tooltip',
-				'wikibase-propertyedittool-counter-entrieslabel',
-				'wikibase-error-save-generic',
-				'wikibase-error-remove-generic',
-				'wikibase-error-save-connection',
-				'wikibase-error-remove-connection',
-				'wikibase-error-save-timeout',
-				'wikibase-error-remove-timeout',
-				'wikibase-error-autocomplete-connection',
-				'wikibase-error-autocomplete-response',
-				'wikibase-error-ui-client-error',
-				'wikibase-error-ui-no-external-page',
-				'wikibase-error-ui-cant-edit',
-				'wikibase-error-ui-no-permissions',
-				'wikibase-error-ui-link-exists',
-				'wikibase-error-ui-session-failure',
-				'wikibase-error-ui-edit-conflict',
-				'parentheses',
-			)
-		),
-
 		'jquery.wikibase.toolbarcontroller' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase/toolbar/toolbarcontroller.js',
@@ -405,6 +331,10 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarbase',
 				'jquery.wikibase.toolbareditgroup',
 				'wikibase.templates',
+			),
+			'messages' => array(
+				'wikibase-remove-inprogress',
+				'wikibase-save-inprogress',
 			)
 		),
 
@@ -483,7 +413,9 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery.ui.tagadata',
 			),
 			'messages' => array(
-				'wikibase-aliases-label'
+				'wikibase-aliases-label',
+				'wikibase-aliases-input-help-message',
+				'wikibase-alias-edit-placeholder',
 			),
 		),
 
@@ -502,6 +434,11 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.RepoApiError',
 			),
+			'messages' => array(
+				'wikibase-description-edit-placeholder',
+				'wikibase-description-edit-placeholder-language-aware',
+				'wikibase-description-input-help-message',
+			),
 		),
 
 		'jquery.wikibase.labelview' => $moduleTemplate + array(
@@ -518,6 +455,12 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.RepoApiError',
 			),
+			'messages' => array(
+				'parentheses',
+				'wikibase-label-edit-placeholder',
+				'wikibase-label-edit-placeholder-language-aware',
+				'wikibase-label-input-help-message',
+			),
 		),
 
 		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + array(
@@ -527,6 +470,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.sitelinklistview',
+				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.sites',
 			),
 		),
@@ -563,7 +507,7 @@ return call_user_func( function() {
 				'wikibase-sitelinks-sitename-columnheading-special',
 				'wikibase-sitelinks-siteid-columnheading',
 				'wikibase-sitelinks-link-columnheading',
-				'wikibase-sitelinksedittool-full',
+				'wikibase-propertyedittool-full',
 			)
 		),
 
@@ -709,7 +653,8 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
-				'wikibase.datamodel'
+				'wikibase.datamodel',
+				'wikibase.utilities.jQuery',
 			)
 		),
 
@@ -912,7 +857,6 @@ return call_user_func( function() {
 	if ( defined( 'ULS_VERSION' ) ) {
 		$modules['wikibase']['dependencies'][] = 'ext.uls.mediawiki';
 		$modules['wikibase.Site']['dependencies'][] = 'ext.uls.mediawiki';
-		$modules['wikibase.ui.PropertyEditTool']['dependencies'][] = 'ext.uls.mediawiki';
 	}
 
 	return $modules;
