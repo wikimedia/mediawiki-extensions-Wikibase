@@ -301,8 +301,6 @@ return call_user_func( function() {
 				'wikibase.ui.PropertyEditTool.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
-				'wikibase.ui.PropertyEditTool.EditableLabel.js',
-				'wikibase.ui.LabelEditTool.js',
 			),
 			'styles' => array(
 				'wikibase.ui.PropertyEditTool.css'
@@ -497,6 +495,23 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.inputautoexpand',
+				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.toolbarcontroller',
+				'wikibase',
+				'wikibase.RepoApiError',
+			),
+		),
+
+		'jquery.wikibase.labelview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.labelview.js'
+			),
+			'styles' => array(
+				'jquery.wikibase/themes/default/jquery.wikibase.labelview.css',
+			),
+			'dependencies' => array(
+				'jquery',
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
