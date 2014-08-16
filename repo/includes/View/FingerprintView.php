@@ -71,30 +71,30 @@ class FingerprintView {
 		$hasLabel = $labels->hasTermForLanguage( $this->languageCode );
 		$editSection = $this->getHtmlForEditSection( 'SetLabel', $entityId, $editable );
 
-		if ( $entityId === null ) {
-			$idString = 'new';
-			$suplement = '';
-		} else {
+		$idString = 'new';
+
+		if ( $entityId !== null ) {
 			$idString = $entityId->getSerialization();
-			$suplement = wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $idString ) );
 		}
 
 		if ( $hasLabel ) {
-			return wfTemplate( 'wb-label',
+			return wfTemplate( 'wikibase-firstHeading',
 				$idString,
-				wfTemplate( 'wb-property',
+				wfTemplate( 'wikibase-labelview',
 					'',
 					htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() ),
-					$suplement . $editSection
+					wfMessage( 'parentheses', $idString ),
+					$editSection
 				)
 			);
 		} else {
-			return wfTemplate( 'wb-label',
+			return wfTemplate( 'wikibase-firstHeading',
 				$idString,
-				wfTemplate( 'wb-property',
-					'wb-value-empty',
+				wfTemplate( 'wikibase-labelview',
+					'wb-empty',
 					wfMessage( 'wikibase-label-empty' )->escaped(),
-					$suplement . $editSection
+					wfMessage( 'parentheses', $idString ),
+					$editSection
 				)
 			);
 		}

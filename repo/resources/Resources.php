@@ -30,6 +30,7 @@ return call_user_func( function() {
 				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.entityview',
+				'jquery.wikibase.labelview',
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
