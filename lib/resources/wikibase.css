@@ -56,14 +56,14 @@ h2.wb-section-heading {
 }
 
 /* entity container */
-.wb-entity {
+.wikibase-entityview {
 	width: 100%;
 	max-width: 65em;
 	float: left; /* float left to let widget container float right next to it */
 	clear: both; /* wrap around success message */
 }
 
-.wb-entity input {
+.wikibase-entityview input {
 	/* prevent browsers from applying their default styles */
 	padding: 0 2px;
 	border: 1px solid #AAA;
@@ -74,7 +74,7 @@ h2.wb-section-heading {
 
 }
 
-.wb-entity textarea {
+.wikibase-entityview textarea {
 	font-family: inherit;
 }
 
