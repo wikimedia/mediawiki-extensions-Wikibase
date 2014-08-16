@@ -112,20 +112,16 @@ class FingerprintView {
 		$editSection = $this->getHtmlForEditSection( 'SetDescription', $entityId, $editable );
 
 		if ( $hasDescription ) {
-			return wfTemplate( 'wb-description',
-				wfTemplate( 'wb-property',
-					'',
-					htmlspecialchars( $descriptions->getByLanguage( $this->languageCode )->getText() ),
-					$editSection
-				)
+			return wfTemplate( 'wikibase-descriptionview',
+				'',
+				htmlspecialchars( $descriptions->getByLanguage( $this->languageCode )->getText() ),
+				$editSection
 			);
 		} else {
-			return wfTemplate( 'wb-description',
-				wfTemplate( 'wb-property',
-					'wb-value-empty',
-					wfMessage( 'wikibase-description-empty' )->escaped(),
-					$editSection
-				)
+			return wfTemplate( 'wikibase-descriptionview',
+				'wb-empty',
+				wfMessage( 'wikibase-description-empty' )->escaped(),
+				$editSection
 			);
 		}
 	}
