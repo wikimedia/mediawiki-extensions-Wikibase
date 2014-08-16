@@ -134,7 +134,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		return array(
 			array( Fingerprint::newEmpty(), array( 'wb-value-empty', 'wb-empty' ), 'No' ),
 			array( $noLabel, array( 'wb-value-empty' ), 'No label' ),
-			array( $noDescription, array( 'wb-value-empty' ), 'No description' ),
+			array( $noDescription, array( 'wb-empty' ), 'No description' ),
 			array( $noAliases, array( 'wb-empty' ), 'No aliases' ),
 		);
 	}
