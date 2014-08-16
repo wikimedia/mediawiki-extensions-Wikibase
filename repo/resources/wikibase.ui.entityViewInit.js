@@ -60,26 +60,12 @@
 					return;
 				}
 
-				var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' );
-				var $activeToolbar = $( '.wb-edit' )
-					// label/description of EditableValue always in edit mode if empty, 2nd '.wb-edit'
-					// on PropertyEditTool only appended when really being edited by the user though
-					.not( '.wb-ui-propertyedittool-editablevalue-ineditmode' )
-					.find( '.wikibase-toolbareditgroup-ineditmode' );
+				var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' ),
+					edittoolbar = $( origin ).data( 'edittoolbar' );
 
-				if( !$activeToolbar.length ) {
-					return; // no toolbar for some reason, just stop
-				} else if ( $( 'table.wb-terms' ).hasClass( 'wb-edit' ) ) {
-					// TODO: When having multiple empty EditableValues which are initialized in edit
-					// mode, every EditableValue has the same classes assigned. This check should
-					// either be made more generic (not just invoked for the terms table) or an
-					// improved detection of the active toolbar be implemented.
-					$activeToolbar = origin.getSubject()
-						.find( '.wikibase-toolbareditgroup-ineditmode' );
+				if( !edittoolbar ) {
+					return;
 				}
-
-				var toolbar = $activeToolbar.data( 'toolbareditgroup' )
-					|| $activeToolbar.data( 'toolbar' );
 
 				var $hideMessage = $( '<a/>', {
 						text: mw.msg( 'wikibase-copyrighttooltip-acknowledge' )
@@ -98,7 +84,7 @@
 						content: $message,
 						permanent: true,
 						gravity: gravity,
-						$anchor: toolbar.getButton( 'save' )
+						$anchor: edittoolbar.toolbar.editGroup.getButton( 'save' )
 					} );
 
 				$hideMessage.on( 'click', function( event ) {
