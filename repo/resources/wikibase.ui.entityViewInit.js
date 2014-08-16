@@ -53,12 +53,6 @@
 			$( wb ).on( 'stopItemPageEditMode', fn );
 		}
 
-		// add an edit tool for all properties in the data view:
-		$( '.wb-property-container:has( > .wb-property-container-key[title=description] )' ).each( function() {
-			// TODO: Make this nicer when we have implemented the data model
-			new wb.ui.DescriptionEditTool( this, { api: repoApi } );
-		} );
-
 		registerEditRestrictionHandlers();
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
@@ -248,6 +242,26 @@
 		wb.compileEntityStoreFromMwConfig( entityStore );
 
 		// TODO: Integrate into entityview
+		$( '.wikibase-descriptionview' )
+		.toolbarcontroller( {
+			edittoolbar: ['descriptionview']
+		} )
+		.descriptionview( {
+			value: {
+				language: mw.config.get( 'wgUserLanguage' ),
+				description: $( '.wikibase-descriptionview' ).hasClass( 'wb-empty' )
+					? null
+					// FIXME: entity object should not contain fallback strings
+					: entity.getDescription( mw.config.get( 'wgUserLanguage' ) )
+			},
+			helpMessage: mw.msg(
+				'wikibase-description-input-help-message',
+				wb.getLanguageNameByCode( mw.config.get( 'wgUserLanguage' ) )
+			),
+			entityId: entity.getId(),
+			api: repoApi
+		} );
+
 		$( '.wikibase-aliasesview' )
 		.toolbarcontroller( {
 			edittoolbar: ['aliasesview']
@@ -323,9 +337,9 @@
 		// it to a sensible place.
 		$( wb )
 		.on( 'startItemPageEditMode', function( event, target, options ) {
-			$( ':wikibase-aliasesview, :wikibase-sitelinklistview' )
+			$( ':wikibase-descriptionview, :wikibase-aliasesview, :wikibase-sitelinklistview' )
+			.not( target )
 			.find( ':wikibase-toolbar' )
-			.not( $( target ).find( ':wikibase-toolbar' ) )
 			.each( function() {
 				$( this ).data( 'toolbar' ).disable();
 			} );
@@ -334,6 +348,17 @@
 			$( ':wikibase-aliasesview' ).find( ':wikibase-toolbar' ).each( function() {
 				$( this ).data( 'toolbar' ).enable();
 			} );
+			$( ':wikibase-descriptionview' ).each( function() {
+				var $descriptionview = $( this ),
+					descriptionview = $descriptionview.data( 'descriptionview' );
+
+				if( descriptionview.value().description ) {
+					$descriptionview.find( ':wikibase-toolbar' ).each( function() {
+						$( this ).data( 'toolbar' ).enable();
+					} );
+				}
+			} );
+
 			$( ':wikibase-sitelinklistview' ).each( function() {
 				var $sitelinklistview = $( this ),
 					sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
