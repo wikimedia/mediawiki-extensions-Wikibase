@@ -104,7 +104,7 @@
 }
 
 .wikibase-sitelinklistview .wikibase-toolbar {
-	float: none; /* prevent white space jittering for PropertyEditTool toolbar */
+	float: none; /* prevent white space jittering */
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-sitename {
