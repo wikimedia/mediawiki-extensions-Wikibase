@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_ba7a43e5",
+        "filename": "repo/includes/api/ApiHelperFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-16T16:06:00Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be private?",
+      "revId": "9b3695f6eb22c7ab67dd30e6015e73ce7a8959da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
