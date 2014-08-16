@@ -83,9 +83,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.RepoApi/wikibase.RepoApi.tests.js',
 				'tests/qunit/wikibase.RepoApi/wikibase.RepoApiError.tests.js',
 
-				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
 
@@ -166,6 +164,15 @@ final class LibHooks {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.descriptionview',
+			),
+		);
+
+		$testModules['qunit']['jquery.wikibase.labelview.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.wikibase/jquery.wikibase.labelview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.labelview',
 			),
 		);
 
