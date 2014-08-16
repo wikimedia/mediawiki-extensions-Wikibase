@@ -65,11 +65,6 @@ ul.tagadata li.tagadata-choice-empty .tagadata-close {
 
 ul.tagadata li.tagadata-choice-existing {}
 
-.wb-ui-propertyedittool-editablevaluelistinterface li.tagadata-choice-modified .tagadata-label-text {
-	/* highlight new tags since initialization */
-	text-decoration: underline;
-}
-
 ul.tagadata li.tagadata-choice-empty .tagadata-label-text, /* don't underline when only placeholder is displayed */
 ul.tagadata li.tagadata-choice:last-of-type.tagadata-choice-equal .tagadata-label-text /* don't underline when conflict */ {
 	text-decoration:none;
