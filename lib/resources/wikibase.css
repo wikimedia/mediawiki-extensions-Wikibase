@@ -160,88 +160,6 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 /********** /BASIC LAYOUT **********/
 
 
-/********** LABEL & DESCRIPTION **********/
-
-.wb-ui-labeledittool .wb-value-container {
-	padding-right: 19em; /* width of toolbar + white space border */
-}
-
-/********** LABEL **********/
-
-#content .wb-firstHeading {
-	font-size: 100%; /* required since Gerrit Ic5ba836364d04b2c3814777b69b5f47fce25292a */
-}
-
-.wb-firstHeading {
-	border-bottom: 0;
-	margin-bottom: 0; /* FIXME: Should be removed if the Typography refresh is stable */
-	padding-top: 0; /* FIXME: Should be removed if the Typography refresh is stable */
-	clear: both; /* so success bar after new item created won't float heading */
-}
-
-.wb-firstHeading span {
-	line-height: 100%;
-}
-
-/* the label edit tool styles have to be further customized due to the differing font sizes of the
-label and its toolbar */
-
-/* preventing layout jittering toggling between view and edit mode */
-.wb-firstHeading .wb-value {
-	font-size: 188%;
-	line-height: 1.2; /* adjust line height to input box height in edit mode */
-	padding: 1px 0; /* even out border of input box in edit mode */
-}
-
-.wb-firstHeading .wb-value-supplement {
-	line-height: 188%;
-	/* In RTL UI, if the last word of the label is LTR,
-	 * the supplement will get jumbled without isolation */
-	unicode-bidi: -moz-isolate;
-	unicode-bidi: -webkit-isolate;
-	unicode-bidi: isolate;
-}
-
-.wb-firstHeading .wb-value-container {
-	display: block;
-	margin: .3em .3em .13em 10px; /* h1 natively has 0.17em bottom padding to avoid clipping */
-}
-
-.wb-firstHeading .wb-editsection {
-	/* this nodes font size will affect the toolbar padding which is specified in em; therefore, the
-	font size should be the same as on every other toolbar container node */
-	font-size: 100%;
-}
-
-/* vertical positioning */
-/* the following lines are used to vertically position the toolbar on the baseline of the heading
-(label) which has a bigger font size */
-.wb-firstHeading .wb-editsection {
-	/* FIXME: Should use the LESS variable @content-font-family */
-	font-family: sans-serif;
-	line-height: 188%;
-	top: .3em; /* even out margin of label container in view mode */
-}
-.wb-firstHeading .wikibase-toolbar {
-	font-size: 188%;
-	line-height: 1.2; /* adjust to height of value */
-	padding-top: 1px; /* even out border of input box */
-}
-.wb-firstHeading .wikibase-toolbar .wikibase-toolbareditgroup {
-	font-size: 53%;
-	margin-bottom: 2px;
-}
-.wb-firstHeading .wikibase-toolbar .wikibase-toolbar, /* inner group (buttons) */
-.wb-firstHeading .wikibase-toolbar .wikibase-toolbarlabel /* tooltip */ {
-	font-size: 100%;
-	margin-bottom: 0; /* even out border of label container in view mode */
-}
-
-/********** /LABEL **********/
-
-/********** /LABEL & DESCRIPTION **********/
-
-
 /********** TERMS **********/
 
 .wb-terms .wb-value {
@@ -330,6 +248,7 @@ table.wb-terms input {
 	padding-right: 0;
 }
 
+.wb-terms .wikibase-labelview,
 .wb-terms .wikibase-descriptionview {
 	display: block;
 	float: none;
@@ -338,6 +257,7 @@ table.wb-terms input {
 	width: auto;
 }
 
+.wb-terms .wikibase-labelview.wb-edit,
 .wb-terms .wikibase-descriptionview.wb-edit {
 	padding: 9px 8px 9px 7px;
 }
