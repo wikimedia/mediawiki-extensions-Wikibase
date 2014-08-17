@@ -218,7 +218,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
 				'wikibase.utilities/wikibase.utilities.ui.js',
-				'wikibase.utilities/wikibase.utilities.ui.StatableObject.js',
 			),
 			'styles' => array(
 				'wikibase.utilities/wikibase.utilities.ui.css',
