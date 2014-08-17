@@ -12,6 +12,4 @@
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.testsOnWidget.js
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js
-./lib/tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js
-./lib/tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js
 ./tests/browser/vendor/
