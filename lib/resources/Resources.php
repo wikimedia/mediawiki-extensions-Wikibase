@@ -271,12 +271,12 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.utilities.jQuery.ui.tagadata' => $moduleTemplate + array(
+		'jquery.ui.tagadata' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.js',
+				'jquery.ui/jquery.ui.tagadata.js',
 			),
 			'styles' => array(
-				'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.css',
+				'jquery.ui/jquery.ui.tagadata.css',
 			),
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
@@ -406,12 +406,12 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.inputautoexpand',
+				'jquery.ui.tagadata',
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.RepoApiError',
 				'wikibase.templates',
-				'wikibase.utilities.jQuery.ui.tagadata',
 			),
 			'messages' => array(
 				'wikibase-aliases-label',
