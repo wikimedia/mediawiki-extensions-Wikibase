@@ -89,7 +89,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 
 				'tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
@@ -113,6 +112,15 @@ final class LibHooks {
 				'jquery.event.special.eachchange',
 				'util.inherit',
 			)
+		);
+
+		$testModules['qunit']['jquery.ui.tagadata.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery.ui/jquery.ui.tagadata.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.tagadata',
+			),
 		);
 
 		$testModules['qunit']['jquery.wikibase.aliasesview.tests'] = $moduleBase + array(
