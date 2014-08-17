@@ -111,13 +111,7 @@ wb.initTermBox = function( entity, api ) {
 				var labelview = $( this ).data( 'labelview' );
 
 				if( labelview.value().label ) {
-					var toolbar = $( this ).data( 'edittoolbar' ).toolbar,
-						btnEdit = toolbar.editGroup.getButton( 'edit' ).data( 'toolbarbutton' );
-
 					$( this ).data( 'edittoolbar' ).toolbar.enable();
-
-					// FIXME: Get rid of StatableObject making things complicated
-					btnEdit.setState( btnEdit.STATE.ENABLED );
 				}
 				labelview.enable();
 			} );
@@ -126,13 +120,7 @@ wb.initTermBox = function( entity, api ) {
 				var descriptionview = $( this ).data( 'descriptionview' );
 
 				if( descriptionview.value().description ) {
-					var toolbar = $( this ).data( 'edittoolbar' ).toolbar,
-						btnEdit = toolbar.editGroup.getButton( 'edit' ).data( 'toolbarbutton' );
-
 					$( this ).data( 'edittoolbar' ).toolbar.enable();
-
-					// FIXME: Get rid of StatableObject making things complicated
-					btnEdit.setState( btnEdit.STATE.ENABLED );
 				}
 				descriptionview.enable();
 			} );
