@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Admresdeserv.",
-			"Papuass"
+			"Papuass",
+			"Edgars2007"
 		]
 	},
 	"wikibase-edit": "labot",
@@ -59,8 +60,8 @@
 	"wikibase-itemdisambiguation-lookup-label": "Nosaukums:",
 	"wikibase-itemdisambiguation-submit": "Meklēt",
 	"wikibase-newproperty-datatype": "Datu tips:",
-	"special-newitem": "Izveidotu jaunu ierakstu",
-	"wikibase-newitem-fieldset": "Izveidotu jaunu ierakstu",
+	"special-newitem": "Izveido jaunu ierakstu",
+	"wikibase-newitem-fieldset": "Izveido jaunu ierakstu",
 	"wikibase-newentity-label": "Nosaukums:",
 	"wikibase-newentity-description": "Apraksts:",
 	"wikibase-newentity-submit": "Izveidot",
@@ -97,6 +98,8 @@
 	"wikibase-restoreold": "atjaunot",
 	"wikibase-no-direct-editing": "Vārdtelpā $1 tieša labošana ir atslēgta",
 	"wikibase-noentity-createone": "Jūs varat arī [[$1|izveidot jaunu]].",
+	"wikibase-item-summary-wbsetitem": "Izveidots jauns ieraksts",
+	"wikibase-item-summary-wbeditentity-create": "Izveidots jauns ieraksts",
 	"wikibase-item-summary-wbsetlabel-set": "Izmainīja [$2] nosaukumu",
 	"wikibase-item-summary-wbsetdescription-set": "Izmainīja [$2] aprakstu",
 	"wikibase-item-summary-wbsetdescription-remove": "Nodzēsa [$2] aprakstu",

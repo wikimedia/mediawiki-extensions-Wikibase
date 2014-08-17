@@ -48,7 +48,7 @@
 	"wikibase-undo-title": "Cofanie edycji „$1”",
 	"wikibase-restore-title": "Przywracanie poprzedniej wersji „$1”",
 	"wikibase-partial-undo": "Ta edycja może być częściowo cofnięta.",
-	"wikibase-omitted-undo-ops": "$1 {{PLURAL:$1|zmiana nie może zostać cofnięta|zmiany nie może zostać cofnięte|zmian nie może zostać cofniętych}}, ponieważ {{PLURAL:$1|dana została w międzyczasie zmieniona|dane zostały w międzyczasie zmienione}}.",
+	"wikibase-omitted-undo-ops": "$1 {{PLURAL:$1|zmiana nie może zostać cofnięta|zmiany nie mogą zostać cofnięte|zmian nie może zostać cofniętych}}, ponieważ {{PLURAL:$1|dana została w międzyczasie zmieniona|dane zostały w międzyczasie zmienione}}.",
 	"wikibase-empty-undo": "Nie można niczego przywrócić.",
 	"wikibase-undo-revision-error": "Cofnięcie nie powiodło się",
 	"wikibase-undo-samerev": "Aby cofnąć edycję, należy wskazać dwie różne wersje.",

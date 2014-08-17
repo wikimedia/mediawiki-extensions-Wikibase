@@ -53,6 +53,7 @@ $magicWords['eo'] = array(
 /** Spanish (español) */
 $magicWords['es'] = array(
 	'noexternallanglinks' => array( 0, 'nointerwikis' ),
+	'property' => array( 0, 'propiedad' ),
 );
 
 /** Estonian (eesti) */

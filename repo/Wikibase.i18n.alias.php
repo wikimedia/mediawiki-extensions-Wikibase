@@ -296,6 +296,12 @@ $specialPageAliases['nl'] = array(
 	'ItemsWithoutSitelinks' => array( 'ItemsZonderSitekoppelingen' ),
 );
 
+/** Polish (polski) */
+$specialPageAliases['pl'] = array(
+	'EntitiesWithoutLabel' => array( 'Encje_bez_etykiety' ),
+	'EntitiesWithoutDescription' => array( 'Encje_bez_opisu' ),
+);
+
 /** Sicilian (sicilianu) */
 $specialPageAliases['scn'] = array(
 	'EntityData' => array( 'DatiEntità' ),
