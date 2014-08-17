@@ -113,9 +113,6 @@ wb.initTermBox = function( entity, api ) {
 						btnEdit = toolbar.editGroup.getButton( 'edit' ).data( 'toolbarbutton' );
 
 					$( this ).data( 'edittoolbar' ).toolbar.enable();
-
-					// FIXME: Get rid of StatableObject making things complicated
-					btnEdit.setState( btnEdit.STATE.ENABLED );
 				}
 			} );
 
@@ -127,9 +124,6 @@ wb.initTermBox = function( entity, api ) {
 						btnEdit = toolbar.editGroup.getButton( 'edit' ).data( 'toolbarbutton' );
 
 					$( this ).data( 'edittoolbar' ).toolbar.enable();
-
-					// FIXME: Get rid of StatableObject making things complicated
-					btnEdit.setState( btnEdit.STATE.ENABLED );
 				}
 			} );
 		} );
