@@ -36,7 +36,7 @@ class TermMatchScoreCalculator {
 	 *
 	 * @since 0.3
 	 *
-	 * @returns integer $score
+	 * @return integer $score
 	 */
 	public function calculateScore() {
 		$score = 0;
