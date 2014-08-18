@@ -2,10 +2,9 @@
 
 namespace Wikibase\Repo\View;
 
-use Message;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 
 /**
@@ -15,6 +14,7 @@ use Wikibase\DataModel\Term\TermList;
  * @since 0.5
  * @licence GNU GPL v2+
  *
+ * @author Thiemo Mättig
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class FingerprintView {
@@ -39,13 +39,10 @@ class FingerprintView {
 	}
 
 	/**
-	 * Builds and returns the HTML representing a fingerprint.
-	 *
-	 * @since 0.5
-	 *
 	 * @param Fingerprint $fingerprint the fingerprint to render
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
 	public function getHtml( Fingerprint $fingerprint, EntityId $entityId = null, $editable = true ) {
@@ -64,30 +61,31 @@ class FingerprintView {
 	}
 
 	/**
-	 * Builds and returns the HTML representing a label.
-	 *
 	 * @param TermList $labels the list of labels to render
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	private function getHtmlForLabel( TermList $labels, EntityId $entityId = null, $editable = true ) {
-		$labelExists = $labels->hasTermForLanguage( $this->languageCode );
+	private function getHtmlForLabel( TermList $labels, EntityId $entityId = null, $editable ) {
+		$hasLabel = $labels->hasTermForLanguage( $this->languageCode );
 		$editSection = $this->getHtmlForEditSection( 'SetLabel', $entityId, $editable );
-		if ( $entityId !== null ) {
-			$idString = $entityId->getSerialization();
-			$editSection = wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $idString ) ) . $editSection;
-		} else {
+
+		if ( $entityId === null ) {
 			$idString = 'new';
+			$suplement = '';
+		} else {
+			$idString = $entityId->getSerialization();
+			$suplement = wfTemplate( 'wb-property-value-supplement', wfMessage( 'parentheses', $idString ) );
 		}
 
-		if ( $labelExists ) {
+		if ( $hasLabel ) {
 			return wfTemplate( 'wb-label',
 				$idString,
 				wfTemplate( 'wb-property',
 					'',
 					htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() ),
-					$editSection
+					$suplement . $editSection
 				)
 			);
 		} else {
@@ -95,26 +93,25 @@ class FingerprintView {
 				$idString,
 				wfTemplate( 'wb-property',
 					'wb-value-empty',
-					wfMessage( 'wikibase-label-empty' )->text(),
-					$editSection
+					wfMessage( 'wikibase-label-empty' )->escaped(),
+					$suplement . $editSection
 				)
 			);
 		}
 	}
 
 	/**
-	 * Builds and returns the HTML representing a description.
-	 *
 	 * @param TermList $descriptions the list of descriptions to render
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	private function getHtmlForDescription( TermList $descriptions, EntityId $entityId = null, $editable = true ) {
-		$descriptionExists = $descriptions->hasTermForLanguage( $this->languageCode );
+	private function getHtmlForDescription( TermList $descriptions, EntityId $entityId = null, $editable ) {
+		$hasDescription = $descriptions->hasTermForLanguage( $this->languageCode );
 		$editSection = $this->getHtmlForEditSection( 'SetDescription', $entityId, $editable );
 
-		if ( $descriptionExists ) {
+		if ( $hasDescription ) {
 			return wfTemplate( 'wb-description',
 				wfTemplate( 'wb-property',
 					'',
@@ -126,7 +123,7 @@ class FingerprintView {
 			return wfTemplate( 'wb-description',
 				wfTemplate( 'wb-property',
 					'wb-value-empty',
-					wfMessage( 'wikibase-description-empty' )->text(),
+					wfMessage( 'wikibase-description-empty' )->escaped(),
 					$editSection
 				)
 			);
@@ -134,21 +131,20 @@ class FingerprintView {
 	}
 
 	/**
-	 * Builds and returns the HTML representing aliases.
-	 *
 	 * @param AliasGroupList $aliasGroups the list of alias groups to render
 	 * @param EntityId|null $entityId the id of the fingerprint's entity
 	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 *
 	 * @return string
 	 */
-	private function getHtmlForAliases( AliasGroupList $aliasGroups, EntityId $entityId = null, $editable = true ) {
-		$aliasesExist = $aliasGroups->hasGroupForLanguage( $this->languageCode );
-		$action = $aliasesExist ? 'edit' : 'add';
+	private function getHtmlForAliases( AliasGroupList $aliasGroups, EntityId $entityId = null, $editable ) {
+		$hasAliases = $aliasGroups->hasGroupForLanguage( $this->languageCode );
+		$action = $hasAliases ? 'edit' : 'add';
 		$editSection = $this->getHtmlForEditSection( 'SetAliases', $entityId, $editable, $action );
 
-		if ( $aliasesExist ) {
-			$aliases = $aliasGroups->getByLanguage( $this->languageCode )->getAliases();
+		if ( $hasAliases ) {
 			$aliasesHtml = '';
+			$aliases = $aliasGroups->getByLanguage( $this->languageCode )->getAliases();
 			foreach ( $aliases as $alias ) {
 				$aliasesHtml .= wfTemplate( 'wb-alias', htmlspecialchars( $alias ) );
 			}
@@ -157,38 +153,37 @@ class FingerprintView {
 			return wfTemplate( 'wb-aliases-wrapper',
 				'',
 				'',
-				wfMessage( 'wikibase-aliases-label' )->text(),
+				wfMessage( 'wikibase-aliases-label' )->escaped(),
 				$aliasesList . $editSection
 			);
 		} else {
 			return wfTemplate( 'wb-aliases-wrapper',
 				'wb-aliases-empty',
 				'wb-value-empty',
-				wfMessage( 'wikibase-aliases-empty' )->text(),
+				wfMessage( 'wikibase-aliases-empty' )->escaped(),
 				$editSection
 			);
 		}
 	}
 
 	/**
-	 * Builds and returns the HTML for the edit section.
-	 *
 	 * @param string $specialPageName
 	 * @param EntityId|null $entityId
 	 * @param bool $editable
-	 * @param string $action
+	 * @param string $action by default 'edit', for aliases this could also be 'add'
+	 *
 	 * @return string
 	 */
-	private function getHtmlForEditSection( $specialPageName, EntityId $entityId = null, $editable = true, $action = 'edit' ) {
-		if ( $entityId !== null && $editable ) {
-			return $this->sectionEditLinkGenerator->getHtmlForEditSection(
-				$specialPageName,
-				array( $entityId->getSerialization(), $this->languageCode ),
-				wfMessage( 'wikibase-' . $action )
-			);
-		} else {
+	private function getHtmlForEditSection( $specialPageName, EntityId $entityId = null, $editable, $action = 'edit' ) {
+		if ( $entityId === null || !$editable ) {
 			return '';
 		}
+
+		return $this->sectionEditLinkGenerator->getHtmlForEditSection(
+			$specialPageName,
+			array( $entityId->getSerialization(), $this->languageCode ),
+			wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )
+		);
 	}
 
 }

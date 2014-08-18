@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\EntityId;
+use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -21,121 +21,195 @@ use Wikibase\Repo\View\SectionEditLinkGenerator;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class FingerprintViewTest extends \MediaWikiLangTestCase {
 
-	public function provideTestGetHtml() {
-		$cases = array();
+	protected function setUp() {
+		parent::setUp();
 
-		$fingerprint = Fingerprint::newEmpty();
+		$msgCache = MessageCache::singleton();
+		$msgCache->enable();
 
-		$cases['empty fingerprint'] = array(
-			$fingerprint,
-			new ItemId( 'Q42' ),
-			'en'
-		);
+		// Mocks for all "this is empty" placeholders
+		$msgCache->replace( 'Wikibase-label-empty', '<strong class="test">No label</strong>' );
+		$msgCache->replace( 'Wikibase-description-empty', '<strong class="test">No description</strong>' );
+		$msgCache->replace( 'Wikibase-aliases-empty', '<strong class="test">No aliases</strong>' );
 
-		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setLabel( new Term( 'en', 'Foobar' ) );
-		$fingerprint->setDescription( new Term( 'en', 'This is a foo bar.' ) );
-		$fingerprint->setAliasGroup( new AliasGroup( 'en', array( 'foo', 'bar' ) ) );
-
-		$cases['empty fingerprint'] = array(
-			$fingerprint,
-			new ItemId( 'Q42' ),
-			'en'
-		);
-
-		$cases['other language'] = array(
-			$fingerprint,
-			new ItemId( 'Q42' ),
-			'de'
-		);
-
-		$cases['other item id'] = array(
-			$fingerprint,
-			new ItemId( 'Q12' ),
-			'en'
-		);
-
-		$fingerprint = Fingerprint::newEmpty();
-		$fingerprint->setLabel( new Term( 'de', '<a href="#">evil html</a>' ) );
-		$fingerprint->setDescription( new Term( 'de', '<script>alert( "xss" );</script>' ) );
-		$fingerprint->setAliasGroup( new AliasGroup( 'de', array( '<b>bold</b>', '<i>italic</i>' ) ) );
-
-		$cases['html escaping'] = array(
-			$fingerprint,
-			new ItemId( 'Q42' ),
-			'de'
-		);
-
-		return $cases;
+		// Mock for the only other message in the class
+		$msgCache->replace( 'Wikibase-aliases-label', '<strong class="test">A.&thinsp;k.&thinsp;a.:</strong>' );
 	}
 
-	/**
-	 * @dataProvider provideTestGetHtml
-	 */
-	public function testGetHtmlEditable( Fingerprint $fingerprint, EntityId $entityId, $languageCode ) {
-		$fingerprintView = new FingerprintView( new SectionEditLinkGenerator(), $languageCode );
-		$html = $fingerprintView->getHtml( $fingerprint, $entityId, true );
-		$serializedId = $entityId->getSerialization();
+	protected function tearDown() {
+		$msgCache = MessageCache::singleton();
+		$msgCache->disable();
+	}
 
-		$this->assertContains( $serializedId, $html );
+	private function getFingerprintView( $languageCode = 'en' ) {
+		return new FingerprintView( new SectionEditLinkGenerator(), $languageCode );
+	}
 
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/' . $serializedId . '/' . $languageCode . '"[^>]*>\S+</a>@', $html );
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetDescription/' . $serializedId . '/' . $languageCode . '"[^>]*>\S+</a>@', $html );
-		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetAliases/' . $serializedId . '/' . $languageCode . '"[^>]*>\S+</a>@', $html );
+	private function getFingerprint( $languageCode = 'en' ) {
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( new Term( $languageCode, 'Example label' ) );
+		$fingerprint->setDescription( new Term( $languageCode, 'This is an example description' ) );
+		$fingerprint->setAliasGroup( new AliasGroup( $languageCode, array(
+			'sample alias',
+			'specimen alias',
+		) ) );
+		return $fingerprint;
+	}
 
-		$hasLabel = $fingerprint->getLabels()->hasTermForLanguage( $languageCode );
-		if ( $hasLabel ) {
-			$label = $fingerprint->getLabel( $languageCode )->getText();
-			$this->assertContains( htmlspecialchars( $label ), $html );
-		} else {
-			$this->assertRegExp( '@class="[^"]*wb-value-empty@', $html );
-		}
+	public function testGetHtml_containsTermsAndAliases() {
+		$fingerprintView = $this->getFingerprintView();
+		$fingerprint = $this->getFingerprint();
+		$html = $fingerprintView->getHtml( $fingerprint );
 
-		$hasDescription = $fingerprint->getDescriptions()->hasTermForLanguage( $languageCode );
-		if ( $hasDescription ) {
-			$description = $fingerprint->getDescription( $languageCode )->getText();
-			$this->assertContains( htmlspecialchars( $description ), $html );
-		} else {
-			$this->assertRegExp( '@class="[^"]*wb-value-empty@', $html );
-		}
-
-		$hasAliases = $fingerprint->getAliasGroups()->hasGroupForLanguage( $languageCode );
-		if ( $hasAliases ) {
-			$aliases = $fingerprint->getAliasGroup( $languageCode )->getAliases();
-			foreach ( $aliases as $alias ) {
-				$this->assertContains( htmlspecialchars( $alias ), $html );
-			}
-			$this->assertNotRegExp( '@class="[^"]*wb-aliases-empty@', $html );
-		} else {
-			$this->assertRegExp( '@class="[^"]*wb-value-empty@', $html );
-			$this->assertRegExp( '@class="[^"]*wb-aliases-empty@', $html );
-		}
-
-		if ( $hasLabel && $hasDescription && $hasAliases ) {
-			$this->assertNotRegExp( '@class="[^"]*wb-value-empty@', $html );
+		$this->assertContains( htmlspecialchars( $fingerprint->getLabel( 'en' )->getText() ), $html );
+		$this->assertContains( htmlspecialchars( $fingerprint->getDescription( 'en' )->getText() ), $html );
+		foreach ( $fingerprint->getAliasGroup( 'en' )->getAliases() as $alias ) {
+			$this->assertContains( htmlspecialchars( $alias ), $html );
 		}
 	}
 
+	public function entityFingerprintProvider() {
+		$fingerprint = $this->getFingerprint();
+
+		return array(
+			'empty' => array( Fingerprint::newEmpty(), new ItemId( 'Q42' ), 'en' ),
+			'other language' => array( $fingerprint, new ItemId( 'Q42' ), 'de' ),
+			'other id' => array( $fingerprint, new ItemId( 'Q12' ), 'en' ),
+		);
+	}
+
 	/**
-	 * @dataProvider provideTestGetHtml
+	 * @dataProvider entityFingerprintProvider
 	 */
-	public function testGetHtmlNotEditable( Fingerprint $fingerprint, EntityId $entityId, $languageCode ) {
-		$fingerprintView = new FingerprintView( new SectionEditLinkGenerator(), $languageCode );
+	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
+		$fingerprintView = $this->getFingerprintView( $languageCode );
+		$html = $fingerprintView->getHtml( $fingerprint, $entityId );
+		$idString = $entityId->getSerialization();
+
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/' . $idString . '/' . $languageCode . '"@', $html );
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetDescription/' . $idString . '/' . $languageCode . '"@', $html );
+		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetAliases/' . $idString . '/' . $languageCode . '"@', $html );
+	}
+
+	/**
+	 * @dataProvider entityFingerprintProvider
+	 */
+	public function testGetHtml_isNotEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
+		$fingerprintView = $this->getFingerprintView( $languageCode );
 		$html = $fingerprintView->getHtml( $fingerprint, $entityId, false );
 
 		$this->assertNotContains( '<a ', $html );
-		$this->assertContains( $entityId->getSerialization(), $html );
 	}
 
-	public function testGetHtmlNoEntityId() {
-		$fingerprintView = new FingerprintView( new SectionEditLinkGenerator(), 'en' );
-		$html = $fingerprintView->getHtml( Fingerprint::newEmpty(), null, true );
+	public function testGetHtml_valuesAreEscaped() {
+		$fingerprintView = $this->getFingerprintView();
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( new Term( 'en', '<a href="#">evil html</a>' ) );
+		$fingerprint->setDescription( new Term( 'en', '<script>alert( "xss" );</script>' ) );
+		$fingerprint->setAliasGroup( new AliasGroup( 'en', array( '<b>bold</b>', '<i>italic</i>' ) ) );
+		$html = $fingerprintView->getHtml( $fingerprint );
 
+		$this->assertContains( 'evil html', $html, 'make sure it works' );
+		$this->assertNotContains( 'href="#"', $html );
+		$this->assertNotContains( '<script>', $html );
+		$this->assertNotContains( '<b>', $html );
+		$this->assertNotContains( '<i>', $html );
+	}
+
+	public function emptyFingerprintProvider() {
+		$noLabel = $this->getFingerprint();
+		$noLabel->removeLabel( 'en' );
+
+		$noDescription = $this->getFingerprint();
+		$noDescription->removeDescription( 'en' );
+
+		$noAliases = $this->getFingerprint();
+		$noAliases->removeAliasGroup( 'en' );
+
+		return array(
+			array( Fingerprint::newEmpty(), 'No' ),
+			array( $noLabel, 'No label' ),
+			array( $noDescription, 'No description' ),
+			array( $noAliases, 'No aliases' ),
+		);
+	}
+
+	/**
+	 * @dataProvider emptyFingerprintProvider
+	 */
+	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint ) {
+		$fingerprintView = $this->getFingerprintView();
+		$html = $fingerprintView->getHtml( $fingerprint );
+
+		$this->assertContains( 'wb-value-empty', $html );
+	}
+
+	public function testGetHtml_isMarkedAsEmptyAliases() {
+		$fingerprintView = $this->getFingerprintView();
+		$fingerprint = $this->getFingerprint();
+		$fingerprint->removeAliasGroup( 'en' );
+		$html = $fingerprintView->getHtml( $fingerprint );
+
+		$this->assertContains( 'wb-aliases-empty', $html );
+	}
+
+	public function testGetHtml_isNotMarkedAsEmpty() {
+		$fingerprintView = $this->getFingerprintView();
+		$html = $fingerprintView->getHtml( $this->getFingerprint() );
+
+		$this->assertNotContains( 'wb-value-empty', $html );
+		$this->assertNotContains( 'wb-aliases-empty', $html );
+	}
+
+	/**
+	 * @dataProvider entityFingerprintProvider
+	 */
+	public function testGetHtml_withEntityId( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
+		$fingerprintView = $this->getFingerprintView( $languageCode );
+		$html = $fingerprintView->getHtml( $fingerprint, $entityId );
+		$idString = $entityId->getSerialization();
+
+		$this->assertNotContains( 'id="wb-firstHeading-new"', $html );
+		$this->assertContains( 'id="wb-firstHeading-' . $idString . '"', $html );
+		$this->assertContains( 'wb-value-supplement', $html );
+		$this->assertRegExp( '/[ "]wb-value[ "].*[ "]wb-value-supplement[ "]/s', $html,
+			'supplement follows value' );
+		$this->assertContains( '<a ', $html );
+	}
+
+	public function testGetHtml_withoutEntityId() {
+		$fingerprintView = $this->getFingerprintView();
+		$html = $fingerprintView->getHtml( Fingerprint::newEmpty() );
+
+		$this->assertContains( 'id="wb-firstHeading-new"', $html );
+		$this->assertNotContains( 'id="wb-firstHeading-Q', $html );
+		$this->assertNotContains( 'wb-value-supplement', $html );
 		$this->assertNotContains( '<a ', $html );
-		$this->assertContains( 'new', $html );
+	}
+
+	public function testGetHtml_containsAliasesLabel() {
+		$fingerprintView = $this->getFingerprintView();
+		$html = $fingerprintView->getHtml( $this->getFingerprint() );
+
+		$this->assertContains( 'A.&thinsp;k.&thinsp;a.:', $html );
+		$this->assertContains( 'strong', $html, 'make sure the setUp works' );
+		$this->assertNotContains( '<strong class="test">', $html );
+	}
+
+	/**
+	 * @dataProvider emptyFingerprintProvider
+	 */
+	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $message ) {
+		$fingerprintView = $this->getFingerprintView();
+		$html = $fingerprintView->getHtml( $fingerprint );
+
+		$this->assertContains( $message, $html );
+		$this->assertContains( 'strong', $html, 'make sure the setUp works' );
+		$this->assertNotContains( '<strong class="test">', $html );
 	}
 
 }
