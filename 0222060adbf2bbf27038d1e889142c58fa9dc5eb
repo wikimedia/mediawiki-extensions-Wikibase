@@ -16,6 +16,24 @@
       "revId": "0222060adbf2bbf27038d1e889142c58fa9dc5eb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ef3000e8",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-18T08:03:47Z",
+      "side": 1,
+      "message": "Actually the variable might contain another class name, see below. Also I think escaping is necessary because we don\u0027t know here if the serialization is ok or not.\n\nAnother nitpick: I think the \u0027use Html;\u0027 import is now unused.",
+      "parentUuid": "8e28a382_9adb07ee",
+      "revId": "0222060adbf2bbf27038d1e889142c58fa9dc5eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
