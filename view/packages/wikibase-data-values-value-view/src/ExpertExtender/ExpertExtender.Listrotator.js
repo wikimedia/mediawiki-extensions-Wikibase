@@ -107,7 +107,7 @@
 		 */
 		getValue: function() {
 			return this.rotator.autoActive() ? null : this.rotator.value();
-		},
+		}
 	} );
 
 } ( jQuery, jQuery.valueview.ExpertExtender ) );
