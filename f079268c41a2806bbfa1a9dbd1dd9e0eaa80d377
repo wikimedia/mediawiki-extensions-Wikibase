@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_ad767dd1",
+        "filename": "lib/resources/Resources.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T20:24:13Z",
+      "side": 1,
+      "message": "As far as I can see SitePageInterface.js was the only file in this module using jquery.ui.suggester. I think this dependency can be removed now. Obviously not a problem to do this later. I created a follow-up so we don\u0027t forget.",
+      "revId": "f079268c41a2806bbfa1a9dbd1dd9e0eaa80d377",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_304d4476",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.pagesuggester.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T20:24:13Z",
+      "side": 1,
+      "message": "Just curious, a special reason to not use value?",
+      "revId": "f079268c41a2806bbfa1a9dbd1dd9e0eaa80d377",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
