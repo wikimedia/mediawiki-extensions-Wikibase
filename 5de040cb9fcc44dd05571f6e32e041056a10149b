@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_b37b7e23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "Very helpful explanation, thank you very much.",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_937ac21d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "Why is this not used in this file? Shouldn\u0027t there a default implementation?",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b39a5e62",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "The order of these parameters ... yea, doesn\u0027t really matter. This is really nitpicking, but I would prefer:\n\n* entityInfoBuilderFactory\n* entityTitleLookup\n* claimHtmlGenerator\n* sectionEditLinkGenerator\n* languagecode\n\nMain reason: The two HTML related things claimHtmlGenerator and sectionEditLinkGenerator are together.",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_73a4f69e",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "I don\u0027t think this is necessary.",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_53b33ae8",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_33b66ed8",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "This is funny: the $editable property was completely unused. Good catch.",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_13adb280",
+        "filename": "repo/includes/View/ClaimsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "Why not call wfMessage here?",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_d3c60a4e",
+        "filename": "repo/tests/phpunit/includes/View/ClaimsViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "Wow, this a a hell lot of dependencies for this test. Are you sure? Wasn\u0027t this patch supposed to unbind/untangle things?",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b3c13e36",
+        "filename": "repo/tests/phpunit/includes/View/ClaimsViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "I miss a test if anything here (IDs and values) appears in the output.",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_93c08230",
+        "filename": "repo/tests/phpunit/includes/View/ClaimsViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T21:35:08Z",
+      "side": 1,
+      "message": "All the libxml stuff should be in a generic assert method and not here in the test. It\u0027s hard to see what the test actually does.",
+      "revId": "5de040cb9fcc44dd05571f6e32e041056a10149b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
