@@ -6,7 +6,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndex;
 
@@ -30,7 +30,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
-		$mock = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback(

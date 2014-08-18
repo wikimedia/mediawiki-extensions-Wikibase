@@ -58,7 +58,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'MockPrefixedText' ) );
 
-		$mockEntityTitleLookup = $this->getMock( '\Wikibase\EntityTitleLookup' );
+		$mockEntityTitleLookup = $this->getMock( '\Wikibase\Lib\Store\EntityTitleLookup' );
 		$mockEntityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );

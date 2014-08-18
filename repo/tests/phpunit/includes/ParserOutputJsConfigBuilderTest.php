@@ -14,12 +14,12 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 
@@ -220,7 +220,7 @@ class ParserOutputJsConfigBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookupMock() {
-		$lookup = $this->getMockBuilder( 'Wikibase\EntityTitleLookup' )
+		$lookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityTitleLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 

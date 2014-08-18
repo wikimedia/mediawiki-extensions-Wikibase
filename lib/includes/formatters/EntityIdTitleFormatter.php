@@ -4,7 +4,7 @@ namespace Wikibase\Lib;
 
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Formats entity IDs by generating the corresponding page title.

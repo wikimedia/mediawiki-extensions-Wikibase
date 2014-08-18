@@ -4,12 +4,12 @@ namespace Wikibase\Serializers;
 
 use InvalidArgumentException;
 use Wikibase\EntityRevision;
-use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Serializers\SerializerObject;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Serializer for some information related to Content. This is not a full Content serialization,

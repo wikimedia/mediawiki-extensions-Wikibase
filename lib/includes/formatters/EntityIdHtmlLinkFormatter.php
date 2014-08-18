@@ -7,8 +7,8 @@ use OutOfBoundsException;
 use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
