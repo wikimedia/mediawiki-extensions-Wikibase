@@ -317,7 +317,6 @@ return call_user_func( function() {
 				'jquery.NativeEventHandler',
 				'jquery.inputautoexpand',
 				'jquery.tablesorter',
-				'jquery.ui.suggester',
 				'util.inherit',
 				'jquery.wikibase.entityselector',
 				'jquery.wikibase.pagesuggester',
