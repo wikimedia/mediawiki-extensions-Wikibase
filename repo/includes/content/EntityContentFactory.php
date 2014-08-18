@@ -10,6 +10,7 @@ use Status;
 use Title;
 use User;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Factory for EntityContent objects.

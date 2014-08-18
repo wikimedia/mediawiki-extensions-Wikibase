@@ -9,8 +9,8 @@ use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Repo\View\SnakHtmlGenerator;
@@ -61,7 +61,7 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityTitleLookup
 	 */
 	protected function getEntityTitleLookupMock() {
-		$lookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
