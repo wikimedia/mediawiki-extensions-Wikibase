@@ -86,7 +86,6 @@ final class LibHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.GuidGenerator.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
 
 				'tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
