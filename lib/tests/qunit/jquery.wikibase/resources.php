@@ -63,7 +63,7 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.utilities.entityselector.tests' => $moduleBase + array(
+		'jquery.wikibase.entityselector.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.entityselector.tests.js',
 			),
