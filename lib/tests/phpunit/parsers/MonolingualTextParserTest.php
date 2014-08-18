@@ -43,7 +43,7 @@ class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @expectedException \DataValues\IllegalValueException
+	 * @expectedException \ValueParsers\ParseException
 	 */
 	public function testParse_missingLanguageOption() {
 		$parser = new MonolingualTextParser();
@@ -59,7 +59,7 @@ class MonolingualTextParserTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException \DataValues\IllegalValueException
+	 * @expectedException \ValueParsers\ParseException
 	 */
 	public function testParse_invalidLanguageOption( $languageCode ) {
 		$options = new ParserOptions( array( 'valuelang' => $languageCode ) );
