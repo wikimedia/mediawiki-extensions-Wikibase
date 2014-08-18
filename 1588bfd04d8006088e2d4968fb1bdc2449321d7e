@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4fe4b4a3",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T13:37:25Z",
+      "side": 1,
+      "message": "You lost a poor semicolon at the end of the line. ;-) See Ic990e0f.",
+      "revId": "1588bfd04d8006088e2d4968fb1bdc2449321d7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2a74b6cb",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T13:37:25Z",
+      "side": 1,
+      "message": "Variable name $editSection is misleading here. See Ic990e0f.",
+      "revId": "1588bfd04d8006088e2d4968fb1bdc2449321d7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4a7142dc",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T13:37:25Z",
+      "side": 1,
+      "message": "This was escaped before but isn\u0027t now. See Ic990e0f.",
+      "revId": "1588bfd04d8006088e2d4968fb1bdc2449321d7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ea758ec7",
+        "filename": "repo/includes/View/FingerprintView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T13:37:25Z",
+      "side": 1,
+      "message": "Constructing message keys like this should be avoided, in my opinion. I want to be able to grep all usages of a message. See Ic990e0f.",
+      "revId": "1588bfd04d8006088e2d4968fb1bdc2449321d7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6f8090c4",
+        "filename": "repo/tests/phpunit/includes/View/FingerprintViewTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T13:37:25Z",
+      "side": 1,
+      "message": "Sorry to say that but this test is horrible. Its more complicated than the code it tests. Should be split and test only one aspect per test. See Ic990e0f.",
+      "revId": "1588bfd04d8006088e2d4968fb1bdc2449321d7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
