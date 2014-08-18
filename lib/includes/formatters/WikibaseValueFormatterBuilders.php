@@ -11,10 +11,10 @@ use ValueFormatters\GeoCoordinateFormatter;
 use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\QuantityFormatter;
 use ValueFormatters\ValueFormatter;
-use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Defines the formatters for DataValues supported by Wikibase.

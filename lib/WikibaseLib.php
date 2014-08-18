@@ -84,6 +84,8 @@ call_user_func( function() {
 
 	define( 'SUMMARY_MAX_LENGTH', 250 );
 
+	class_alias( 'Wikibase\Lib\Store\EntityTitleLookup', 'Wikibase\EntityTitleLookup' );
+
 	// i18n
 	$wgMessagesDirs['WikibaseLib']           = __DIR__ . '/i18n';
 

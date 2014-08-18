@@ -78,7 +78,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$entityRevisionLookup = $mockRepo;
 
-		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

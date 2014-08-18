@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
 use Wikibase\EntityPermissionChecker;
-use Wikibase\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * @covers Wikibase\EditEntity
@@ -75,7 +75,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	protected function newTitleLookupMock() {
-		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )

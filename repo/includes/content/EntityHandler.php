@@ -21,6 +21,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;

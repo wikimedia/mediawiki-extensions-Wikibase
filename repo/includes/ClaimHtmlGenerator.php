@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Wikibase\Lib\Serializers\ClaimSerializer;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
