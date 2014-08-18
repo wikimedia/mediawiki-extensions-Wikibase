@@ -72,7 +72,7 @@ class EntityIdTitleFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	protected function newEntityIdTitleFormatter() {
 		$options = new FormatterOptions();
-		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
 

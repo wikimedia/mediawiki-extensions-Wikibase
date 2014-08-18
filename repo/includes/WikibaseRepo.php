@@ -254,7 +254,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\EntityTitleLookup
+	 * @return EntityTitleLookup
 	 */
 	public function getEntityTitleLookup() {
 		return $this->getEntityContentFactory();

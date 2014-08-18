@@ -8,8 +8,8 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ReferencedEntitiesFinder;
 
 /**
