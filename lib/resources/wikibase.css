@@ -387,11 +387,8 @@ table.wb-terms {
 }
 
 table.wb-terms td {
-    border-top: 1px solid #C9C9C9;
-}
-
-table.wb-terms td {
 	background: #F0F0F0;
+	border-top: 1px solid #C9C9C9;
 }
 table.wb-terms tr:nth-child(4n) td,
 table.wb-terms tr:nth-child(4n-1) td {
