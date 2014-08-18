@@ -85,7 +85,6 @@ final class LibHooks {
 
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ClaimGuidGenerator.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.GuidGenerator.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
 
 				'tests/qunit/jquery.wikibase/jquery.wikibase.entityselector.tests.js',
 				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
@@ -101,7 +100,6 @@ final class LibHooks {
 				'wikibase.utilities',
 				'wikibase.utilities.ClaimGuidGenerator',
 				'wikibase.utilities.GuidGenerator',
-				'wikibase.utilities.jQuery',
 				'jquery.ui.suggester',
 				'jquery.wikibase.entityselector',
 				'jquery.NativeEventHandler',
@@ -109,6 +107,15 @@ final class LibHooks {
 				'jquery.event.special.eachchange',
 				'util.inherit',
 			)
+		);
+
+		$testModules['qunit']['jquery.removeClassByRegex.tests'] = $moduleBase + array(
+			'scripts' => array(
+				'tests/qunit/jquery/jquery.removeClassByRegex.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.removeClassByRegex',
+			),
 		);
 
 		$testModules['qunit']['jquery.ui.tagadata.tests'] = $moduleBase + array(
