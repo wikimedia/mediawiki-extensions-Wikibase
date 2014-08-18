@@ -585,12 +585,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.wikibase/jquery.wikibase.snakview/snakview.js',
 				'jquery.wikibase/jquery.wikibase.snakview/snakview.SnakTypeSelector.js',
-				'jquery.wikibase/jquery.wikibase.snakview/snakview.ViewState.js',
-				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.js',
-				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Variation.js',
-				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Value.js',
-				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.SomeValue.js',
-				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.NoValue.js',
 			),
 			'styles' => array(
 				'jquery.wikibase/jquery.wikibase.snakview/themes/default/snakview.SnakTypeSelector.css',
@@ -601,27 +595,93 @@ return call_user_func( function() {
 				'jquery.ui.position',
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.entityselector',
+				'jquery.wikibase.snakview.variations',
+				'jquery.wikibase.snakview.variations.NoValue',
+				'jquery.wikibase.snakview.variations.SomeValue',
+				'jquery.wikibase.snakview.variations.Value',
+				'jquery.wikibase.snakview.ViewState',
 				'mediawiki.legacy.shared',
 				'mw.config.values.wbRepo',
-				'util.inherit',
 				'wikibase.datamodel',
-				'wikibase.dataTypes',
-				'wikibase.utilities'
+				'wikibase.utilities',
 			),
 			'messages' => array(
 				'wikibase-snakview-property-input-placeholder',
-				'wikibase-snakview-unsupportedsnaktype',
 				'wikibase-snakview-choosesnaktype',
-				'wikibase-snakview-variation-datavaluetypemismatch',
-				'wikibase-snakview-variation-datavaluetypemismatch-details',
-				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
-				'datatypes-type-wikibase-item',
-				'wikibase-snakview-variations-somevalue-label',
-				'wikibase-snakview-variations-novalue-label',
 				'wikibase-snakview-snaktypeselector-value',
 				'wikibase-snakview-snaktypeselector-somevalue',
 				'wikibase-snakview-snaktypeselector-novalue'
-			)
+			),
+		),
+
+		'jquery.wikibase.snakview.variations' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.snakview.variations.Variation',
+				'util.inherit',
+			),
+		),
+
+		'jquery.wikibase.snakview.variations.Variation' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Variation.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+			),
+		),
+
+		'jquery.wikibase.snakview.variations.NoValue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.NoValue.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.snakview.variations',
+				'jquery.wikibase.snakview.variations.Variation',
+				'wikibase.datamodel',
+			),
+			'messages' => array(
+				'wikibase-snakview-variations-novalue-label',
+			),
+		),
+
+		'jquery.wikibase.snakview.variations.SomeValue' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.SomeValue.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.snakview.variations',
+				'jquery.wikibase.snakview.variations.Variation',
+				'wikibase.datamodel',
+			),
+			'messages' => array(
+				'wikibase-snakview-variations-somevalue-label',
+			),
+		),
+
+		'jquery.wikibase.snakview.variations.Value' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.variations.Value.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.snakview.variations',
+				'jquery.wikibase.snakview.variations.Variation',
+				'wikibase.datamodel',
+				'wikibase.dataTypes',
+			),
+			'messages' => array(
+				'wikibase-snakview-variation-datavaluetypemismatch',
+				'wikibase-snakview-variation-datavaluetypemismatch-details',
+				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
+			),
+		),
+
+		'jquery.wikibase.snakview.ViewState' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase/jquery.wikibase.snakview/snakview.ViewState.js',
+			),
 		),
 
 		'jquery.wikibase.claimview' => $moduleTemplate + array(
