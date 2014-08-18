@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_2a4b9689",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-08-18T13:39:32Z",
+      "side": 1,
+      "message": "no dependency on jQuery please",
+      "revId": "bcf794ad349f8d16b3ebf341758566843ef69cec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
