@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Site;
 use SiteStore;
-use Wikibase\EntityTitleLookup;
 use Wikibase\ItemHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**

@@ -7,10 +7,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityRevision;
-use Wikibase\EntityTitleLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Serializers\EntityRevisionSerializationOptions;
 use Wikibase\Serializers\EntityRevisionSerializer;
 
@@ -48,7 +48,7 @@ class EntityRevisionSerializerTest extends SerializerBaseTest {
 	 * @return EntityTitleLookup
 	 */
 	protected function getTitleLookupMock() {
-		$titleLookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

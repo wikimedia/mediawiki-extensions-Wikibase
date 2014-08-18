@@ -7,8 +7,8 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
@@ -115,7 +115,7 @@ class SnakHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityTitleLookup
 	 */
 	protected function getEntityTitleLookupMock() {
-		$lookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );

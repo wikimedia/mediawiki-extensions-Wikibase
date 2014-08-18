@@ -10,8 +10,8 @@ use ValueFormatters\NumberLocalizer;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\MediaWikiNumberLocalizer;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * ValueFormatter for formatting objects that may be encountered in
