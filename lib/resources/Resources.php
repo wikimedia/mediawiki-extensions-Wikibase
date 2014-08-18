@@ -260,14 +260,10 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.utilities.jQuery' => $moduleTemplate + array(
+		'jquery.removeClassByRegex' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.utilities/wikibase.utilities.js',
-				'wikibase.utilities/wikibase.utilities.jQuery.js',
+				'jquery/jquery.removeClassByRegex.js',
 			),
-			'dependencies' => array(
-				'wikibase.utilities'
-			)
 		),
 
 		'jquery.ui.tagadata' => $moduleTemplate + array(
@@ -650,11 +646,11 @@ return call_user_func( function() {
 				'jquery.wikibase/jquery.wikibase.referenceview.js',
 			),
 			'dependencies' => array(
+				'jquery.removeClassByRegex',
 				'jquery.wikibase.listview',
 				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel',
-				'wikibase.utilities.jQuery',
 			)
 		),
 

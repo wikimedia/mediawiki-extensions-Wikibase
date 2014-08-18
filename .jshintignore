@@ -10,5 +10,4 @@
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.tests.js
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.testsOnObject.js
 ./lib/tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.testsOnWidget.js
-./lib/tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js
 ./tests/browser/vendor/
