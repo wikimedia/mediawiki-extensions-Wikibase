@@ -5,9 +5,9 @@ namespace Wikibase\Repo\View;
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Base class for generating Snak html.

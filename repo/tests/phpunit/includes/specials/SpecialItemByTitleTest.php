@@ -8,9 +8,9 @@ use SiteStore;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityTitleLookup;
-use Wikibase\Repo\Specials\SpecialItemByTitle;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\Specials\SpecialItemByTitle;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemByTitle
@@ -32,7 +32,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
-		$mock = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback(
