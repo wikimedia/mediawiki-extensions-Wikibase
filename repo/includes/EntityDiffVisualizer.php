@@ -10,6 +10,7 @@ use Diff\DiffOpRemove;
 use IContextSource;
 use MWException;
 use SiteStore;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 
 /**
