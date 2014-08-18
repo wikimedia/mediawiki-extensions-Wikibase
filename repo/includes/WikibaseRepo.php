@@ -54,6 +54,7 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
@@ -254,7 +255,7 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
-	 * @return \Wikibase\EntityTitleLookup
+	 * @return EntityTitleLookup
 	 */
 	public function getEntityTitleLookup() {
 		return $this->getEntityContentFactory();
