@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use MWException;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Represents a mapping from entity IDs to wiki page titles.

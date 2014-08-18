@@ -23,13 +23,13 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityRevision;
-use Wikibase\EntityTitleLookup;
 use Wikibase\EntityView;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\WikibaseRepo;
@@ -67,7 +67,7 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 	 * @return EntityTitleLookup
 	 */
 	protected function getEntityTitleLookupMock() {
-		$lookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );

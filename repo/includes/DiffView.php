@@ -8,11 +8,12 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Entity\ItemId;
 use Html;
 use IContextSource;
 use MWException;
 use SiteStore;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Class for generating views of DiffOp objects.
