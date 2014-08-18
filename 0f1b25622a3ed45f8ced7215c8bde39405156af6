@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_da5cef51",
+        "filename": "lib/resources/wikibase.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-18T15:07:56Z",
+      "side": 1,
+      "message": "This can be merged with the selector above. Just a hint. Must not be done in this patch if it causes conflicts.",
+      "revId": "0f1b25622a3ed45f8ced7215c8bde39405156af6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
