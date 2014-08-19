@@ -36,7 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ClaimsViewTest extends \MediaWikiLangTestCase {
+class ClaimsViewTest extends \MediaWikiTestCase {
 
 	public function getTitleForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getPrefixedId();
@@ -71,26 +71,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	public function testGetHtml( array $claims ) {
 		$claimsView = $this->newClaimsView();
 
-		// Using a DOM document to parse HTML output:
-		$doc = new DOMDocument();
-
-		// Disable default error handling in order to catch warnings caused by malformed markup:
-		libxml_use_internal_errors( true );
-
-		// Try loading the HTML:
-		$this->assertTrue( $doc->loadHTML( $claimsView->getHtml( $claims ) ) );
-
-		// Check if no warnings have been thrown:
-		$errorString = '';
-		foreach( libxml_get_errors() as $error ) {
-			$errorString .= "\r\n" . $error->message;
-		}
-
-		$this->assertEmpty( $errorString, 'Malformed markup:' . $errorString );
-
-		// Clear error cache and re-enable default error handling:
-		libxml_clear_errors();
-		libxml_use_internal_errors();
+		$this->assertValidHtmlSnippet( $claimsView->getHtml( $claims ) );
 	}
 
 	/**
