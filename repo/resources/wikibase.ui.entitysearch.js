@@ -53,7 +53,7 @@
 
 	} );
 
-	mw.hook( 'wikipage.content' ).add( function() {
+	$( function() {
 		var $form = $( '#searchform ' ),
 			$input = $( '#searchInput' ),
 			$hiddenInput = $( '<input type="hidden" name="search"/>' );
