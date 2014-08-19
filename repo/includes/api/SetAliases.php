@@ -187,16 +187,6 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-list', 'info' => $this->msg( 'wikibase-api-invalid-list' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-		) );
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {

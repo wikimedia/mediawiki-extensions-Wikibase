@@ -204,16 +204,6 @@ class MergeItems extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'not-item', 'info' => $this->msg( 'wikibase-api-not-item' )->text() ),
-			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
-		) );
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {

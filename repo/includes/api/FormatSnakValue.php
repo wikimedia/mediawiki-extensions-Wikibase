@@ -164,16 +164,6 @@ class FormatSnakValue extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge(
-			parent::getPossibleErrors(),
-			array( array( 'code' => 'baddatavalue', 'info' => 'Failed to decode datavalue' ) )
-		);
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams
 	 *
 	 * @since 0.1

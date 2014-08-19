@@ -163,15 +163,6 @@ class SetClaim extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-claim', 'info' => $this->msg( 'wikibase-api-invalid-claim' )->text() ),
-		) );
-	}
-
-	/**
 	 * @see ApiBase::getParamDescription
 	 *
 	 * @since 0.4

@@ -173,19 +173,6 @@ class RemoveReferences extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge(
-			parent::getPossibleErrors(),
-			array(
-				array( 'code' => 'no-such-reference', 'info' => $this->msg( 'wikibase-api-no-such-reference' )->text() ),
-				array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
-			)
-		);
-	}
-
-	/**
 	 * @see ApiBase::getDescription
 	 *
 	 * @since 0.3

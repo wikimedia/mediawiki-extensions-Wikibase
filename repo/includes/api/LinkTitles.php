@@ -197,19 +197,6 @@ class LinkTitles extends ApiWikibase {
 	}
 
 	/**
-	 * Returns a list of all possible errors returned by the module
-	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
-			array( 'code' => 'common-item', 'info' => $this->msg( 'wikibase-api-common-item' )->text() ),
-			array( 'code' => 'no-common-item', 'info' => $this->msg( 'wikibase-api-no-common-item' )->text() ),
-		) );
-	}
-
-	/**
 	 * @see ApiBase::isWriteMode
 	 */
 	public function isWriteMode() {
