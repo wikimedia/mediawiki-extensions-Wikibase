@@ -110,19 +110,6 @@ class CreateClaim extends ModifyClaim {
 	}
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge(
-			parent::getPossibleErrors(),
-			array(
-				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-				array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-			)
-		);
-	}
-
-	/**
 	 * @see \ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {

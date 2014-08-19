@@ -207,18 +207,6 @@ class SetQualifier extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge(
-			parent::getPossibleErrors(),
-			array(
-				array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			)
-		);
-	}
-
-	/**
 	 * @see ApiBase::getDescription
 	 *
 	 * @since 0.3
