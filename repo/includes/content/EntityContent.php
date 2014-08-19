@@ -64,6 +64,7 @@ abstract class EntityContent extends AbstractContent {
 
 	/**
 	 * For use in the wb-status page property to indicate that the entity is empty.
+	 *
 	 * @see getEntityStatus()
 	 */
 	const STATUS_EMPTY = 200;
@@ -76,26 +77,15 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::isValid()
 	 */
 	public function isValid() {
-
 		if ( $this->isRedirect() ) {
-
 			// Under some circumstances, the handler will not support redirects,
 			// but it's still possible to construct Content objects that represent
 			// redirects. In such a case, make sure such Content objects are considered
 			// invalid and do not get saved.
-
-			if ( !$this->getContentHandler()->supportsRedirects() ) {
-				return false;
-			}
-
-			return true;
+			return $this->getContentHandler()->supportsRedirects();
 		}
 
-		if ( is_null( $this->getEntity()->getId() ) ) {
-			return false;
-		}
-
-		return true;
+		return $this->getEntity()->getId() !== null;
 	}
 
 	/**
@@ -302,25 +292,22 @@ abstract class EntityContent extends AbstractContent {
 			$context = RequestContext::getMain();
 		}
 
-		// determine output language ----
-		$langCode = $context->getLanguage()->getCode();
+		$languageCode = $context->getLanguage()->getCode();
 
 		if ( $options !== null ) {
 			// NOTE: Parser Options language overrides context language!
-			$langCode = $options->getUserLang();
+			$languageCode = $options->getUserLang();
 		}
 
-		// make formatter options ----
 		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $langCode );
+		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
 
 		// Force the context's language to be the one specified by the parser options.
-		if ( $context && $context->getLanguage()->getCode() !== $langCode ) {
+		if ( $context && $context->getLanguage()->getCode() !== $languageCode ) {
 			$context = clone $context;
-			$context->setLanguage( $langCode );
+			$context->setLanguage( $languageCode );
 		}
 
-		// apply language fallback chain ----
 		if ( !$uiLanguageFallbackChain ) {
 			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
 			$uiLanguageFallbackChain = $factory->newFromContextForPageView( $context );
@@ -337,9 +324,8 @@ abstract class EntityContent extends AbstractContent {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$idParser = new BasicEntityIdParser();
 
-		$options = $this->makeSerializationOptions( $langCode, $uiLanguageFallbackChain );
+		$options = $this->makeSerializationOptions( $languageCode, $uiLanguageFallbackChain );
 
-		// construct the instance ----
 		$entityView = $this->newEntityView(
 			$context,
 			$snakFormatter,
@@ -389,10 +375,8 @@ abstract class EntityContent extends AbstractContent {
 
 		wfProfileIn( __METHOD__ );
 
-		$entity = $this->getEntity();
-
 		$searchTextGenerator = new EntitySearchTextGenerator();
-		$text = $searchTextGenerator->generate( $entity );
+		$text = $searchTextGenerator->generate( $this->getEntity() );
 
 		wfProfileOut( __METHOD__ );
 		return $text;
@@ -485,12 +469,12 @@ abstract class EntityContent extends AbstractContent {
 	public function getTextForSummary( $maxLength = 250 ) {
 		if ( $this->isRedirect() ) {
 			return $this->getRedirectText();
-		} else {
-			/** @var Language $language */
-			$language = $GLOBALS['wgLang'];
-			$text = $this->getEntity()->getDescription( $language->getCode() );
-			return substr( $text, 0, $maxLength );
 		}
+
+		/* @var Language $language */
+		$language = $GLOBALS['wgLang'];
+		$description = $this->getEntity()->getDescription( $language->getCode() );
+		return substr( $description, 0, $maxLength );
 	}
 
 	/**
@@ -548,19 +532,11 @@ abstract class EntityContent extends AbstractContent {
 	 * @see Content::equals
 	 */
 	public function equals( Content $that = null ) {
-		if ( is_null( $that ) ) {
-			return false;
-		}
-
 		if ( $that === $this ) {
 			return true;
 		}
 
-		if ( $that->getModel() !== $this->getModel() ) {
-			return false;
-		}
-
-		if ( !( $that instanceof EntityContent ) ) {
+		if ( !( $that instanceof EntityContent ) || $that->getModel() !== $this->getModel() ) {
 			return false;
 		}
 
@@ -734,8 +710,7 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $handler->makeEntityRedirectContent( $this->getEntityRedirect() );
 		} else {
-			$entity = $this->getEntity()->copy();
-			return $handler->makeEntityContent( $entity );
+			return $handler->makeEntityContent( $this->getEntity()->copy() );
 		}
 	}
 
@@ -767,16 +742,16 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @param string $langCode
+	 * @param string $languageCode
 	 * @param LanguageFallbackChain $fallbackChain
 	 *
 	 * @return SerializationOptions
 	 */
-	private function makeSerializationOptions( $langCode, LanguageFallbackChain $fallbackChain ) {
-		$langCodes = Utils::getLanguageCodes() + array( $langCode => $fallbackChain );
+	private function makeSerializationOptions( $languageCode, LanguageFallbackChain $fallbackChain ) {
+		$languageCodes = Utils::getLanguageCodes() + array( $languageCode => $fallbackChain );
 
 		$options = new SerializationOptions();
-		$options->setLanguages( $langCodes );
+		$options->setLanguages( $languageCodes );
 
 		return $options;
 	}
@@ -813,10 +788,8 @@ abstract class EntityContent extends AbstractContent {
 			return array();
 		}
 
-		$entity = $this->getEntity();
-
 		$properties = array(
-			'wb-claims' => count( $entity->getClaims() ),
+			'wb-claims' => count( $this->getEntity()->getClaims() ),
 		);
 
 		$status = $this->getEntityStatus();
@@ -836,9 +809,9 @@ abstract class EntityContent extends AbstractContent {
 	 * @note Will fail if this ItemContent is a redirect.
 	 *
 	 * @see getEntityPageProperties()
-	 * @see STATUS_NONE
-	 * @see STATUS_EMPTY
-	 * @see STATUS_STUB
+	 * @see EntityContent::STATUS_NONE
+	 * @see EntityContent::STATUS_STUB
+	 * @see EntityContent::STATUS_EMPTY
 	 *
 	 * @return int
 	 */

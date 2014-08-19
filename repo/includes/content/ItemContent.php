@@ -185,10 +185,9 @@ class ItemContent extends EntityContent {
 		}
 
 		wfProfileIn( __METHOD__ );
-		$item = $this->getItem();
 
 		$searchTextGenerator = new ItemSearchTextGenerator();
-		$text = $searchTextGenerator->generate( $item );
+		$text = $searchTextGenerator->generate( $this->getItem() );
 
 		wfProfileOut( __METHOD__ );
 		return $text;
@@ -250,14 +249,10 @@ class ItemContent extends EntityContent {
 			return array();
 		}
 
-		$item = $this->getItem();
+		$properties = parent::getEntityPageProperties();
+		$properties['wb-sitelinks'] = $this->getItem()->getSiteLinkList()->count();
 
-		return array_merge(
-			parent::getEntityPageProperties(),
-			array(
-				'wb-sitelinks' => $item->getSiteLinkList()->count(),
-			)
-		);
+		return $properties;
 	}
 
 	/**
