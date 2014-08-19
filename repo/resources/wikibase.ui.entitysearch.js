@@ -77,12 +77,15 @@
 			$.removeData( input, 'suggestionsContext' );
 		}
 
-		var $searchContaining = $( ''
-			+ '<div class="suggestions-special">'
-			+ '<div class="special-label">' + mw.msg( 'searchsuggest-containing' ) + '</div>'
-			+ '<div class="special-query"></div>'
-			+ '</div>'
-		);
+		var $searchContaining = $( '<div>' )
+			.addClass( 'suggestions-special' )
+			.append(
+				$( '<div>' )
+					.addClass( 'special-label' )
+					.text( mw.msg( 'searchsuggest-containing' ) ),
+				$( '<div>' )
+					.addClass( 'special-query' )
+			);
 
 		var $searchMenu = $( '<ul/>' ).ooMenu( {
 			customItems: [
