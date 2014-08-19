@@ -16,7 +16,7 @@ use Wikibase\Repo\View\SectionEditLinkGenerator;
  * @author Daniel Kinzler
  * @author Adrian Lang
  */
-class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
+class SectionEditLinkGeneratorTest extends HtmlGeneratorTestCase {
 
 	/**
 	 * @dataProvider getHtmlForEditSectionProvider
@@ -33,6 +33,7 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 			'class' => 'wb-editsection'
 		);
 
+		$this->assertIsValidHtml( $html );
 		$this->assertTag( $matcher, $html, "$action action" );
 		$this->assertRegExp( $expected, $html, "$action button label" );
 	}
@@ -64,6 +65,7 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 
 		$html = $generator->getHtmlForEditSection( $specialPageName, $specialPageParams, wfMessage( 'wikibase-add' ) );
 
+		$this->assertIsValidHtml( $html );
 		$this->assertTag( $expected, $html );
 	}
 
@@ -101,6 +103,7 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 			$enabled
 		);
 
+		$this->assertIsValidHtml( $html );
 		$this->assertNotTag( array(
 			'tag' => 'a',
 			'attributes' => array( 'href' => 'regexp:+\bSpecial:SetLabel\b+' )

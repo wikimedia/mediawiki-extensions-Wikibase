@@ -23,7 +23,7 @@ use Wikibase\Repo\View\SectionEditLinkGenerator;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
  */
-class FingerprintViewTest extends \MediaWikiLangTestCase {
+class FingerprintViewTest extends HtmlGeneratorTestCase {
 
 	protected function setUp() {
 		parent::setUp();
@@ -65,6 +65,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$fingerprint = $this->getFingerprint();
 		$html = $fingerprintView->getHtml( $fingerprint );
 
+		$this->assertIsValidHtml( $html );
 		$this->assertContains( htmlspecialchars( $fingerprint->getLabel( 'en' )->getText() ), $html );
 		$this->assertContains( htmlspecialchars( $fingerprint->getDescription( 'en' )->getText() ), $html );
 		foreach ( $fingerprint->getAliasGroup( 'en' )->getAliases() as $alias ) {
@@ -90,6 +91,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$html = $fingerprintView->getHtml( $fingerprint, $entityId );
 		$idString = $entityId->getSerialization();
 
+		$this->assertIsValidHtml( $html );
 		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetLabel/' . $idString . '/' . $languageCode . '"@', $html );
 		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetDescription/' . $idString . '/' . $languageCode . '"@', $html );
 		$this->assertRegExp( '@<a href="[^"]*\bSpecial:SetAliases/' . $idString . '/' . $languageCode . '"@', $html );
@@ -102,6 +104,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$fingerprintView = $this->getFingerprintView( $languageCode );
 		$html = $fingerprintView->getHtml( $fingerprint, $entityId, false );
 
+		$this->assertIsValidHtml( $html );
 		$this->assertNotContains( '<a ', $html );
 	}
 
@@ -113,6 +116,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$fingerprint->setAliasGroup( new AliasGroup( 'en', array( '<b>bold</b>', '<i>italic</i>' ) ) );
 		$html = $fingerprintView->getHtml( $fingerprint );
 
+		$this->assertIsValidHtml( $html );
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
 		$this->assertNotContains( 'href="#"', $html );
 		$this->assertNotContains( '<script>', $html );
