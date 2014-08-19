@@ -123,20 +123,6 @@ class CreateRedirectModule extends ApiBase {
 	}
 
 	/**
-	 * Returns a list of all possible errors returned by the module
-	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
-	 */
-	public function getPossibleErrors() {
-		$errors = array();
-
-		foreach ( $this->interactor->getErrorCodeInfo() as $code => $info ) {
-			$errors[$code] = $info;
-		}
-
-		return array_merge( parent::getPossibleErrors(), $errors );
-	}
-
-	/**
 	 * @see ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {

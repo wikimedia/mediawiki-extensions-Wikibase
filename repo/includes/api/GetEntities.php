@@ -383,20 +383,6 @@ class GetEntities extends ApiWikibase {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text() ),
-			array(
-				'code' => 'normalize-only-once',
-				'info' => 'Normalize is only allowed if exactly one site and one page have been given'
-			),
-		) );
-	}
-
-	/**
 	 * @see ApiBase::getExamples()
 	 */
 	protected function getExamples() {
