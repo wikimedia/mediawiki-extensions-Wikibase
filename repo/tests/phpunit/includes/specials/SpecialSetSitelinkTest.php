@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use TestSites;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
@@ -85,7 +84,7 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		if ( !self::$badgeId ) {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
+			$sitesTable->saveSites( \TestSites::getSites() );
 
 			$this->createItems();
 			$this->addBadgeMatcher();
@@ -196,4 +195,5 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
 	}
+
 }
