@@ -6,9 +6,13 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
-### 0.3.1 (dev)
+### 0.3.2 (2014-08-19)
 
 * Added wikibase.datamodel.SiteLink.
+* Added wikibase.datamodel.Item.getSiteLinks().
+
+### 0.3.1 (2014-08-14)
+
 * Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
 
 ### 0.3.0 (2014-07-10)

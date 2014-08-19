@@ -68,6 +68,34 @@ $.extend( SELF.prototype, {
 	 */
 	getBadges: function() {
 		return this._badges;
+	},
+
+	/**
+	 * @param {*} siteLink
+	 * @return {boolean}
+	 */
+	equals: function( siteLink ) {
+		if( !( siteLink instanceof SELF ) ) {
+			return false;
+		}
+
+		var otherBadges = siteLink.getBadges();
+
+		if(
+			this._siteId !== siteLink.getSiteId()
+			|| this._pageName !== siteLink.getPageName()
+			|| this._badges.length !== otherBadges.length
+		) {
+			return false;
+		}
+
+		for( var i = 0; i < this._badges.length; i++ ) {
+			if( $.inArray( this._badges[i], otherBadges ) === -1 ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 } );
