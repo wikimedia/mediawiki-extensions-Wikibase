@@ -109,8 +109,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->entityRevision = null;
 		}
 
-		// site
-		$this->site = $request->getVal( 'site', isset( $parts[1] ) ? $parts[1] : '' );
+		$this->site = trim( $request->getVal( 'site', isset( $parts[1] ) ? $parts[1] : '' ) );
 
 		if ( $this->site === '' ) {
 			$this->site = null;
@@ -120,10 +119,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$this->showErrorHTML( $this->msg( 'wikibase-setsitelink-invalid-site', $this->site )->parse() );
 		}
 
-		// title
 		$this->page = $request->getVal( 'page' );
 
-		// badges
 		$this->badges = $request->getArray( 'badges', array() );
 	}
 
@@ -367,18 +364,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string
 	 */
-	protected function getSiteLink( $entity, $siteId ) {
-		if ( $entity === null || !( $entity instanceof Item ) ) {
+	protected function getSiteLink( Item $item = null, $siteId ) {
+		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
 			return '';
 		}
 
-		/* @var Item $entity */
-
-		if ( $entity->hasLinkToSite( $siteId ) ) {
-			return $entity->getSitelink( $siteId )->getPageName();
-		}
-
-		return '';
+		return $item->getSitelink( $siteId )->getPageName();
 	}
 
 	/**
@@ -392,22 +383,16 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @throws OutOfBoundsException
 	 * @return string[]
 	 */
-	protected function getBadges( $entity, $siteId ) {
-		if ( $entity === null || !( $entity instanceof Item ) ) {
+	protected function getBadges( Item $item = null, $siteId ) {
+		if ( $item === null || !$item->hasLinkToSite( $siteId ) ) {
 			return array();
 		}
 
-		/* @var Item $entity */
-
-		if ( $entity->hasLinkToSite( $siteId ) ) {
-			$badges = array();
-			foreach ( $entity->getSitelink( $siteId )->getBadges() as $badge ) {
-				$badges[] = $badge->getPrefixedId();
-			}
-			return $badges;
+		$badges = array();
+		foreach ( $item->getSitelink( $siteId )->getBadges() as $badge ) {
+			$badges[] = $badge->getPrefixedId();
 		}
-
-		return array();
+		return $badges;
 	}
 
 	/**
