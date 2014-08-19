@@ -2,19 +2,13 @@
 
 namespace Wikibase;
 
-use ContextSource;
 use Html;
-use IContextSource;
-use InvalidArgumentException;
+use Language;
 use ParserOutput;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Repo\View\TextInjector;
 
 /**
@@ -32,12 +26,7 @@ use Wikibase\Repo\View\TextInjector;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-abstract class EntityView extends ContextSource {
-
-	/**
-	 * @var EntityInfoBuilderFactory
-	 */
-	protected $entityInfoBuilderFactory;
+abstract class EntityView {
 
 	/**
 	 * @var EntityTitleLookup
@@ -50,11 +39,6 @@ abstract class EntityView extends ContextSource {
 	protected $dataTypeLookup;
 
 	/**
-	 * @var SectionEditLinkGenerator
-	 */
-	protected $sectionEditLinkGenerator;
-
-	/**
 	 * @var TextInjector
 	 */
 	protected $textInjector;
@@ -65,14 +49,19 @@ abstract class EntityView extends ContextSource {
 	protected $configBuilder;
 
 	/**
+	 * @var FingerprintView
+	 */
+	protected $fingerprintView;
+
+	/**
 	 * @var ClaimsView
 	 */
 	protected $claimsView;
 
 	/**
-	 * @var FingerprintView
+	 * @var Language
 	 */
-	protected $fingerprintView;
+	protected $language;
 
 	/**
 	 * Maps entity types to the corresponding entity view.
@@ -90,69 +79,24 @@ abstract class EntityView extends ContextSource {
 		'query' => '\Wikibase\QueryView',
 	);
 
-	/**
-	 * @since 0.1
-	 *
-	 * @param IContextSource|null $context
-	 * @param SnakFormatter $snakFormatter
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param SerializationOptions $options
-	 * @param ParserOutputJsConfigBuilder $configBuilder
-	 *
-	 * @todo: move the $editable flag here, instead of passing it around everywhere
-	 *
-	 * @throws InvalidArgumentException
-	 */
 	public function __construct(
-		IContextSource $context,
-		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		SerializationOptions $options,
-		ParserOutputJsConfigBuilder $configBuilder
+		ParserOutputJsConfigBuilder $configBuilder,
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language
 	) {
-		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
-			throw new InvalidArgumentException( '$snakFormatter is expected to return text/html, not '
-					. $snakFormatter->getFormat() );
-		}
-
-		$this->setContext( $context );
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->options = $options;
 		$this->configBuilder = $configBuilder;
+		$this->fingerprintView = $fingerprintView;
+		$this->claimsView = $claimsView;
+		$this->language = $language;
 
-		$this->sectionEditLinkGenerator = new SectionEditLinkGenerator();
 		$this->textInjector = new TextInjector();
-
-		// @todo inject in constructor
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$snakFormatter,
-			$entityTitleLookup
-		);
-
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$entityTitleLookup
-		);
-
-		$this->claimsView =  new ClaimsView(
-			$entityInfoBuilderFactory,
-			$entityTitleLookup,
-			$this->sectionEditLinkGenerator,
-			$claimHtmlGenerator,
-			$this->getLanguage()->getCode()
-		);
-
-		$this->fingerprintView = new FingerprintView(
-			$this->sectionEditLinkGenerator,
-			$this->getLanguage()->getCode()
-		);
 	}
 
 	/**
@@ -186,22 +130,21 @@ abstract class EntityView extends ContextSource {
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string HTML
 	 */
-	public function getHtml( EntityRevision $entityRevision, $editable = true ) {
+	private function getHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$this->resetPlaceholders();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 
-		$lang = $this->getLanguage();
 		$entityId = $entityRevision->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
 		$html .= wfTemplate( 'wb-entity',
 			$entityRevision->getEntity()->getType(),
 			$entityId,
-			$lang->getCode(),
-			$lang->getDir(),
+			$this->language->getCode(),
+			$this->language->getDir(),
 			$this->getInnerHtml( $entityRevision, $editable )
 		);
 
@@ -217,7 +160,7 @@ if ( $ ) {
 		var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
 		$div.css( "top", $div.height() + "px" );
 		$div.css(
-			"' . ( $lang->isRTL() ? 'right' : 'left' ) . '",
+			"' . ( $this->language->isRTL() ? 'right' : 'left' ) . '",
 			( ( $( this ).width() - $div.width() ) / 2 | 0 ) + "px"
 		);
 		return $div;
@@ -243,7 +186,7 @@ if ( $ ) {
 	 * @param bool $editable
 	 * @return string
 	 */
-	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
+	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
 		$entity = $entityRevision->getEntity();
@@ -284,7 +227,7 @@ if ( $ ) {
 	 *
 	 * @return string
 	 */
-	public function getHtmlForToc() {
+	protected function getHtmlForToc() {
 		$tocContent = '';
 		$tocSections = $this->getTocSections();
 
@@ -371,7 +314,7 @@ if ( $ ) {
 		$configVars = $this->configBuilder->build( $entity, $this->options, $isExperimental );
 		$pout->addJsConfigVars( $configVars );
 
-		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
+		$allSnaks = $entity->getAllSnaks();
 
 		// treat referenced entities as page links ------
 		$refFinder = new ReferencedEntitiesFinder();

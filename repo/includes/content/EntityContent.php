@@ -335,19 +335,55 @@ abstract class EntityContent extends AbstractContent {
 		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
 		$entityInfoBuilderFactory = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilderFactory();
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$idParser = new BasicEntityIdParser();
+
+		$snakHtmlGenerator = new SnakHtmlGenerator(
+			$snakFormatter,
+			$entityContentFactory
+		);
+
+		$claimHtmlGenerator = new ClaimHtmlGenerator(
+			$snakHtmlGenerator,
+			$entityContentFactory
+		);
+
+		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
+
+		$claimsView = new ClaimsView(
+			$entityInfoBuilderFactory,
+			$entityContentFactory,
+			$sectionEditLinkGenerator,
+			$claimHtmlGenerator,
+			$langCode
+		);
+
+		$fingerprintView = new FingerprintView(
+			$sectionEditLinkGenerator,
+			$langCode
+		);
 
 		$options = $this->makeSerializationOptions( $langCode, $uiLanguageFallbackChain );
 
+		//FIXME: we are using the EntityInfoBuilderFactory in two places,
+		// this indicates we are also doing the bulk database queries twice!
+		$idParser = new BasicEntityIdParser();
+
+		$configBuilder = new ParserOutputJsConfigBuilder(
+			$entityInfoBuilderFactory,
+			$idParser,
+			$entityContentFactory,
+			new ReferencedEntitiesFinder(),
+			$context->getLanguage()->getCode()
+		);
+
 		// construct the instance ----
 		$entityView = $this->newEntityView(
-			$context,
-			$snakFormatter,
 			$dataTypeLookup,
-			$entityInfoBuilderFactory,
 			$entityContentFactory,
-			$idParser,
-			$options
+			$options,
+			$configBuilder,
+			$fingerprintView,
+			$claimsView,
+			$context->getLanguage()
 		);
 
 		return $entityView;
@@ -358,24 +394,24 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @see getEntityView()
 	 *
-	 * @param IContextSource $context
-	 * @param SnakFormatter $snakFormatter
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
+	 * @param ParserOutputJsConfigBuilder $configBuilder
+	 * @param FingerprintView $fingerprintView
+	 * @param ClaimsView $claimsView
+	 * @param Language $language
 	 *
 	 * @return EntityView
 	 */
 	protected abstract function newEntityView(
-		IContextSource $context,
-		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
-		EntityIdParser $idParser,
-		SerializationOptions $options
+		SerializationOptions $options,
+		ParserOutputJsConfigBuilder $configBuilder,
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language
 	);
 
 	/**

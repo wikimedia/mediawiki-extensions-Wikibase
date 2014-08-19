@@ -109,41 +109,33 @@ class PropertyContent extends EntityContent {
 	/**
 	 * @see getEntityView()
 	 *
-	 * @param IContextSource $context
-	 * @param SnakFormatter $snakFormatter
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityIdParser $idParser
 	 * @param SerializationOptions $options
+	 * @param ParserOutputJsConfigBuilder $configBuilder
+	 * @param FingerprintView $fingerprintView
+	 * @param ClaimsView $claimsView
+	 * @param Language $language
 	 *
 	 * @return PropertyView
 	 */
 	protected function newEntityView(
-		IContextSource $context,
-		SnakFormatter $snakFormatter,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
-		EntityIdParser $idParser,
-		SerializationOptions $options
+		SerializationOptions $options,
+		ParserOutputJsConfigBuilder $configBuilder,
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language
 	) {
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilderFactory,
-			$idParser,
-			$entityTitleLookup,
-			new ReferencedEntitiesFinder(),
-			$context->getLanguage()->getCode()
-		);
-
 		return new PropertyView(
-			$context,
-			$snakFormatter,
 			$dataTypeLookup,
-			$entityInfoBuilderFactory,
 			$entityTitleLookup,
 			$options,
-			$configBuilder
+			$configBuilder,
+			$fingerprintView,
+			$claimsView,
+			$language
 		);
 	}
 
