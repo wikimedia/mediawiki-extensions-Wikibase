@@ -36,11 +36,15 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ClaimsViewTest extends \MediaWikiLangTestCase {
+class ClaimsViewTest extends \MediaWikiTestCase {
 
 	public function getTitleForId( EntityId $id ) {
 		$name = $id->getEntityType() . ':' . $id->getPrefixedId();
 		return Title::makeTitle( NS_MAIN, $name );
+	}
+
+	public function getHtmlForClaim( Claim $claim, array $entityInfo, $htmlForEditSection ) {
+		return $claim->getGuid();
 	}
 
 	public function getHtmlProvider() {
@@ -71,51 +75,21 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	public function testGetHtml( array $claims ) {
 		$claimsView = $this->newClaimsView();
 
-		// Using a DOM document to parse HTML output:
-		$doc = new DOMDocument();
+		$html = $claimsView->getHtml( $claims );
 
-		// Disable default error handling in order to catch warnings caused by malformed markup:
-		libxml_use_internal_errors( true );
-
-		// Try loading the HTML:
-		$this->assertTrue( $doc->loadHTML( $claimsView->getHtml( $claims ) ) );
-
-		// Check if no warnings have been thrown:
-		$errorString = '';
-		foreach( libxml_get_errors() as $error ) {
-			$errorString .= "\r\n" . $error->message;
+		foreach ( $claims as $claim ) {
+			$this->assertContains( $claim->getGuid(), $html );
 		}
-
-		$this->assertEmpty( $errorString, 'Malformed markup:' . $errorString );
-
-		// Clear error cache and re-enable default error handling:
-		libxml_clear_errors();
-		libxml_use_internal_errors();
 	}
 
 	/**
 	 * @return ClaimsView
 	 */
 	private function newClaimsView() {
-		$formatterOptions = new FormatterOptions();
-		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
-			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
-
+		$mockRepo = new MockRepository();
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
-
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$snakFormatter,
-			$entityTitleLookup
-		);
-
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$entityTitleLookup
-		);
-
-		$mockRepo = $this->getMockRepo();
-
 		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
+		$claimHtmlGenerator = $this->getHtmlClaimGeneratorMock();
 
 		return new ClaimsView(
 			$mockRepo,
@@ -139,61 +113,15 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @return MockRepository
+	 * @return ClaimHtmlGenerator
 	 */
-	private function getMockRepo() {
-		static $mockRepo;
+	private function getClaimHtmlGeneratorMock() {
+		$claimHtmlGenerator = $this->getMock( 'Wikibase\ClaimHtmlGenerator' );
+		$claimHtmlGenerator->expects( $this->any() )
+			->method( 'getHtmlForClaim' )
+			->will( $this->returnCallback( array( $this, 'getHtmlForClaim' ) ) );
 
-		if ( !isset( $mockRepo ) ) {
-			$mockRepo = new MockRepository();
-
-			$mockRepo->putEntity( $this->makeItem( 'Q33' ) );
-			$mockRepo->putEntity( $this->makeItem( 'Q22' ) );
-			$mockRepo->putEntity( $this->makeItem( 'Q23' ) );
-			$mockRepo->putEntity( $this->makeItem( 'Q24' ) );
-
-			$mockRepo->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
-			$mockRepo->putEntity( $this->makeProperty( 'P23', 'string' ) );
-			$mockRepo->putEntity( $this->makeProperty( 'P42', 'url' ) );
-			$mockRepo->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
-		}
-
-		return $mockRepo;
-	}
-
-	private function makeItem( $id, $claims = array() ) {
-		if ( is_string( $id ) ) {
-			$id = new ItemId( $id );
-		}
-
-		$item = Item::newEmpty();
-		$item->setId( $id );
-		$item->setLabel( 'en', "label:$id" );
-		$item->setDescription( 'en', "description:$id" );
-
-		foreach ( $claims as $claim ) {
-			$item->addClaim( $claim );
-		}
-
-		return $item;
-	}
-
-	private function makeProperty( $id, $dataTypeId, $claims = array() ) {
-		if ( is_string( $id ) ) {
-			$id = new PropertyId( $id );
-		}
-
-		$property = Property::newFromType( $dataTypeId );
-		$property->setId( $id );
-
-		$property->setLabel( 'en', "label:$id" );
-		$property->setDescription( 'en', "description:$id" );
-
-		foreach ( $claims as $claim ) {
-			$property->addClaim( $claim );
-		}
-
-		return $property;
+		return $claimHtmlGenerator;
 	}
 
 	protected function makeClaim( Snak $mainSnak, $guid = null ) {
