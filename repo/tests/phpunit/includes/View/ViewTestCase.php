@@ -1,8 +1,11 @@
 <?php
 
+namespace Wikibase\Test;
+
 /**
- * Description of ViewTestCase
+ * Base class for all tests checking HTML output.
  *
+ * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class ViewTestCase extends \MediaWikiLangTestCase {
@@ -29,5 +32,5 @@ abstract class ViewTestCase extends \MediaWikiLangTestCase {
 		libxml_clear_errors();
 		libxml_use_internal_errors();
 	}
-	
+
 }
