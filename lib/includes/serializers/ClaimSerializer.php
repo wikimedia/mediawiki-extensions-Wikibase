@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\Claim;
-use Wikibase\ReferenceList;
-use Wikibase\Snak;
-use Wikibase\SnakList;
-use Wikibase\Statement;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Serializer for Claim objects.
@@ -115,10 +115,10 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			$serialization['qualifiers'] = $qualifiers;
 
 			$serialization['qualifiers-order'] = array();
+			/** @var Snak $snak */
 			foreach( $claim->getQualifiers() as $snak ) {
-				/** @var Snak $snak $id */
 				$id = $snak->getPropertyId()->getPrefixedId();
-				if( !in_array( $id, $serialization['qualifiers-order'] ) ) {
+				if ( !in_array( $id, $serialization['qualifiers-order'] ) ) {
 					$serialization['qualifiers-order'][] = $snak->getPropertyId()->getPrefixedId();
 				}
 			}
@@ -170,7 +170,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 * @return ByPropertyListSerializer|ListSerializer
 	 */
 	private function getListSerializer() {
-		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+		if ( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ) {
 			return new ByPropertyListSerializer(
 				'qualifiers',
 				$this->snakSerializer,
@@ -219,16 +219,15 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		}
 
 		$snakUnserializer = new SnakSerializer(); // FIXME: derp injection
+		$mainSnak = $snakUnserializer->newFromSerialization( $serialization['mainsnak'] );
 
-		$claimClass = $isStatement ? '\Wikibase\Statement' : '\Wikibase\Claim';
+		if ( $isStatement ) {
+			$claim = new Statement( $mainSnak );
+		} else {
+			$claim = new Claim( $mainSnak );
+		}
 
-		/**
-		 * @var Claim $claim
-		 */
-		$claim = new $claimClass( $snakUnserializer->newFromSerialization( $serialization['mainsnak'] ) );
-		assert( $claim instanceof Claim );
-
-		if( array_key_exists( 'id', $serialization ) ){
+		if ( array_key_exists( 'id', $serialization ) ) {
 			$claim->setGuid( $serialization['id'] );
 		}
 
@@ -239,9 +238,6 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 				throw new InvalidArgumentException( 'Invalid statement rank provided' );
 			}
 
-			/**
-			 * @var Statement $claim
-			 */
 			$claim->setRank( self::unserializeRank( $serialization['rank'] ) );
 
 			if ( array_key_exists( 'references', $serialization ) ) {
@@ -273,17 +269,15 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	protected function unserializeQualifiers( $serialization, $snakUnserializer ) {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return new SnakList();
-
 		} else {
-
-			if( $this->isAssociative( $serialization['qualifiers'] ) ){
+			if ( $this->isAssociative( $serialization['qualifiers'] ) ) {
 				$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
 			} else {
 				$unserializer = new ListUnserializer( $snakUnserializer );
 			}
 			$snakList = new SnakList( $unserializer->newFromSerialization( $serialization['qualifiers'] ) );
 
-			if( array_key_exists( 'qualifiers-order', $serialization ) ) {
+			if ( array_key_exists( 'qualifiers-order', $serialization ) ) {
 				$snakList->orderByProperty( $serialization['qualifiers-order'] );
 			}
 
