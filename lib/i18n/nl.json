@@ -26,7 +26,7 @@
 	"wikibase-diffview-alias": "aliassen",
 	"wikibase-diffview-description": "beschrijving",
 	"wikibase-diffview-link": "koppelingen",
-	"wikibase-error-unexpected": "Er is een onverwachte fout opgetreden.",
+	"wikibase-error-unexpected": "Er is een onverwachte fout opgetreden: $1.",
 	"wikibase-error-save-generic": "Er is een fout opgetreden tijdens het opslaan van uw wijzigingen. Uw wijzigingen konden niet worden opgeslagen.",
 	"wikibase-error-remove-generic": "Er is een fout opgetreden tijdens het verwijderen. Uw wijzigingen konden niet worden opgeslagen.",
 	"wikibase-error-save-connection": "Er is een fout in de verbinding opgetreden tijdens het opslaan. Uw wijzigingen konden niet worden opgeslagen. Controleer uw internetverbinding.",
@@ -87,5 +87,6 @@
 	"wikibase-validator-not-allowed": "Ongeldige waarde: $1",
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-commonsMedia": "Mediabestand van Commons",
-	"version-wikibase": "Wikibase"
+	"version-wikibase": "Wikibase",
+	"wikibase-add-badges": "Badges toevoegen"
 }

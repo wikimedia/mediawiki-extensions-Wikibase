@@ -8,5 +8,7 @@
 	"wikibase-editlinks": "Nexus recensere",
 	"wikibase-editlinkstitle": "Nexus inter linguas recensere",
 	"wikibase-rc-hide-wikidata": "$1 Vicidata",
+	"wikibase-rc-hide-wikidata-hide": "Celare",
+	"wikibase-rc-hide-wikidata-show": "Monstrare",
 	"wikibase-rc-wikibase-edit-title": "Recensio apud Wikidata"
 }
