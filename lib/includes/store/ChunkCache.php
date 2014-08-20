@@ -93,8 +93,6 @@ class ChunkCache implements ChunkAccess {
 	 * @return int the position if found, or the negative insert position minus one, if not.
 	 */
 	public function findEntryPosition( $key ) {
-		assert( '$key >= 0' );
-
 		if ( empty( $this->entries ) ) {
 			return -1;
 		}
@@ -212,6 +210,7 @@ class ChunkCache implements ChunkAccess {
 	 * @param int $size the maximum size of the chunk to load
 	 * @param int $before insert into the internal entry list before this position.
 	 *
+	 * @throws MWException
 	 * @return array|bool the cache entry created by inserting the new chunk, or false if
 	 *         there is no more data to load from the source at the given position.
 	 *         The cache entry is an associative array containing the following keys:
@@ -221,9 +220,11 @@ class ChunkCache implements ChunkAccess {
 	 *         - touched: (logical) timestamp of the entry's creation (taken from $this->modCount)
 	 */
 	private function insertChunk( $start, $size, $before ) {
-		assert( '$start >= 0' );
-		assert( '$size >= 0' );
-		assert( '$before >= 0' );
+		if ( !is_int( $start ) || !is_int( $size ) || !is_int( $before )
+			|| $start < 0 || $size < 0 || $before < 0
+		) {
+			throw new MWException( '$start, $size and $before must be non-negative integers.' );
+		}
 
 		$data = $this->source->loadChunk( $start, $size );
 

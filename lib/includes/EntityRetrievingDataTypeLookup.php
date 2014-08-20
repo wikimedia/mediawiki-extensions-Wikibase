@@ -44,11 +44,10 @@ class EntityRetrievingDataTypeLookup implements PropertyDataTypeLookup {
 	private function getProperty( PropertyId $propertyId ) {
 		$property = $this->entityLookup->getEntity( $propertyId );
 
-		if ( $property === null ) {
+		if ( !( $property instanceof Property ) ) {
 			throw new PropertyNotFoundException( $propertyId );
 		}
 
-		assert( $property instanceof Property );
 		return $property;
 	}
 
