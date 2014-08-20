@@ -52,7 +52,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 	 * @return ReflectionMethod
 	 */
 	protected static function getMethod( $methodName ) {
-		$class = new ReflectionClass( '\Wikibase\ByPropertyIdArray' );
+		$class = new ReflectionClass( 'Wikibase\DataModel\ByPropertyIdArray' );
 		$method = $class->getMethod( $methodName );
 		$method->setAccessible( true );
 		return $method;

@@ -27,7 +27,7 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 	}
 
 	public function getInstanceClass() {
-		return '\Wikibase\Test\HashArray\HashArrayWithDuplicates';
+		return 'Wikibase\Test\HashArray\HashArrayWithDuplicates';
 	}
 
 	public function elementInstancesProvider() {

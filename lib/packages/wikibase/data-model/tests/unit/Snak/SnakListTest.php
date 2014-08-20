@@ -33,7 +33,7 @@ class SnakListTest extends HashArrayTest {
 	 * @see GenericArrayObjectTest::getInstanceClass
 	 */
 	public function getInstanceClass() {
-		return '\Wikibase\SnakList';
+		return 'Wikibase\DataModel\Snak\SnakList';
 	}
 
 	/**

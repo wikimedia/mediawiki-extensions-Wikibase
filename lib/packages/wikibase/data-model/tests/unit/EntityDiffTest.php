@@ -118,7 +118,7 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 			$this->assertTrue( $diffOp instanceof DiffOpAdd || $diffOp instanceof DiffOpRemove );
 
 			$claim = $diffOp instanceof DiffOpAdd ? $diffOp->getNewValue() : $diffOp->getOldValue();
-			$this->assertInstanceOf( '\Wikibase\Claim', $claim );
+			$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
 		}
 	}
 
