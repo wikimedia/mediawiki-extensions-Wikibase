@@ -47,6 +47,7 @@ return call_user_func( function() {
 		'wikibase.serialization.entities' => $moduleTemplate + array(
 			'scripts' => array(
 				'src/serialization.EntityUnserializer.js',
+				'src/serialization.EntityUnserializer.itemExpert.js',
 				'src/serialization.EntityUnserializer.propertyExpert.js',
 			),
 			'dependencies' => array(

@@ -28,18 +28,9 @@
 
 	// Globals
 	"predef": [
-		"dataValues",
-		"globeCoordinate",
 		"jQuery",
-		"mediaWiki",
 		"QUnit",
-		"valueFormatters",
-		"valueParsers",
-		"time",
 		"util",
-		// require.js globals:
-		"require",
-		"requirejs",
-		"define"
+		"wikibase"
 	]
 }
