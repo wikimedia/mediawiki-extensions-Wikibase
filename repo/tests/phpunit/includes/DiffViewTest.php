@@ -47,7 +47,13 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 				$linkPath . '/enwiki'
 			),
 			'Link has direction' => array(
-				'@<a\b[^>]* hreflang="en" dir="auto"@',
+				'@<a\b[^>]* dir="auto"@',
+				null,
+				'NEW',
+				$linkPath . '/enwiki'
+			),
+			'Link has hreflang' => array(
+				'@<a\b[^>]* hreflang="en"@',
 				null,
 				'NEW',
 				$linkPath . '/enwiki'
