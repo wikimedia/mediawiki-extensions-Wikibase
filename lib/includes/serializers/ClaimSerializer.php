@@ -118,7 +118,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			/** @var Snak $snak */
 			foreach( $claim->getQualifiers() as $snak ) {
 				$id = $snak->getPropertyId()->getPrefixedId();
-				if ( !in_array( $id, $serialization['qualifiers-order'] ) ) {
+				if( !in_array( $id, $serialization['qualifiers-order'] ) ) {
 					$serialization['qualifiers-order'][] = $snak->getPropertyId()->getPrefixedId();
 				}
 			}
@@ -170,7 +170,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 	 * @return ByPropertyListSerializer|ListSerializer
 	 */
 	private function getListSerializer() {
-		if ( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
+		if( in_array( 'qualifiers', $this->options->getOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES ) ) ){
 			return new ByPropertyListSerializer(
 				'qualifiers',
 				$this->snakSerializer,
@@ -227,7 +227,7 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 			$claim = new Claim( $mainSnak );
 		}
 
-		if ( array_key_exists( 'id', $serialization ) ){
+		if( array_key_exists( 'id', $serialization ) ){
 			$claim->setGuid( $serialization['id'] );
 		}
 
@@ -270,14 +270,14 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		if ( !array_key_exists( 'qualifiers', $serialization ) ) {
 			return new SnakList();
 		} else {
-			if ( $this->isAssociative( $serialization['qualifiers'] ) ){
+			if( $this->isAssociative( $serialization['qualifiers'] ) ){
 				$unserializer = new ByPropertyListUnserializer( $snakUnserializer );
 			} else {
 				$unserializer = new ListUnserializer( $snakUnserializer );
 			}
 			$snakList = new SnakList( $unserializer->newFromSerialization( $serialization['qualifiers'] ) );
 
-			if ( array_key_exists( 'qualifiers-order', $serialization ) ) {
+			if( array_key_exists( 'qualifiers-order', $serialization ) ) {
 				$snakList->orderByProperty( $serialization['qualifiers-order'] );
 			}
 

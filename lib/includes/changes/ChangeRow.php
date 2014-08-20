@@ -187,8 +187,6 @@ class ChangeRow extends ORMRow implements Change {
 	protected function getInfo( $cache = 'no' ) {
 		$info = $this->getField( 'info' );
 
-		assert( !is_string( $info ) );
-
 		if ( !is_array( $info ) ) {
 			$info = array();
 		}
@@ -278,4 +276,5 @@ class ChangeRow extends ORMRow implements Change {
 
 		return $info;
 	}
+
 }
