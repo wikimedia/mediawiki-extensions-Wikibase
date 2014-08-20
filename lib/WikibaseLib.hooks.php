@@ -191,7 +191,6 @@ final class LibHooks {
 				'tests/qunit/jquery.wikibase/jquery.wikibase.pagesuggester.tests.js'
 			),
 			'dependencies' => array(
-				'jquery',
 				'jquery.wikibase.pagesuggester',
 			),
 		);
