@@ -63,5 +63,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-kohteen tunniste",
 	"wikibase-pageinfo-entity-id-none": "Ei mitään",
 	"wikibase-property-render-error": "Ominaisuuden $1 näyttäminen epäonnistui: $2",
-	"wikibase-otherprojects": "Muut projektit"
+	"wikibase-otherprojects": "Muut projektit",
+	"wikibase-otherprojects-beta-message": "Muut projektit -sivupalkki",
+	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion \"{{int:wikibase-otherprojects}}\", joka tarjoaa linkit muihin Wikimedia-projekteihin perustuen dataan sivustolla {{WBREPONAME}}."
 }

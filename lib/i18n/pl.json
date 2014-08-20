@@ -60,6 +60,8 @@
 	"wikibase-globedetails-globe": "Globus",
 	"wikibase-parse-error": "Nieprawidłowa wartość.",
 	"wikibase-parse-error-coordinate": "Wartość współrzędnych ma nieprawidłowy format.",
+	"wikibase-parse-error-entity-id": "Identyfikator encji ma nieprawidłowy format.",
+	"wikibase-parse-error-quantity": "Wartość ma nieprawidłowy format.",
 	"wikibase-parse-error-time": "Wartość czasu ma nieprawidłowy format.",
 	"wikibase-replicationnote": "Zwróć uwagę, że może upłynąć kilka minut, zanim zmiany staną się widoczne na wszystkich wiki",
 	"wikibase-sitelinks-wikipedia": "Strony Wikipedii powiązane z tym elementem",
@@ -83,7 +85,7 @@
 	"wikibase-validator-bad-entity-type": "Nieoczekiwany typ obiektu $1",
 	"wikibase-validator-no-such-entity": "$1 nie znaleziono",
 	"wikibase-validator-no-such-property": "Właściwości $1 nie została znaleziona",
-	"wikibase-validator-bad-value-type": "Zły typ wartości $1, oczekuje się $2",
+	"wikibase-validator-bad-value-type": "Błędny typ wartości $1, oczekiwano $2",
 	"wikibase-validator-bad-url": "Nieprawidłowy URL: $1",
 	"wikibase-validator-bad-url-scheme": "Nieobsługiwany schemat adresu URL: $1",
 	"wikibase-validator-bad-http-url": "Nieprawidłowy URL HTTP: $1",
@@ -94,5 +96,6 @@
 	"datatypes-type-commonsMedia": "Plik multimedialny na Commons",
 	"version-wikibase": "Wikibase",
 	"wikibase-snakformatter-valuetype-mismatch": "Typ wartości „$1” nie jest zgodny z typem właściwości „$2”.",
-	"wikibase-snakformatter-property-not-found": "Właściwość „$1” nie została znaleziona, nie można określić typ danych."
+	"wikibase-snakformatter-property-not-found": "Właściwość „$1” nie została znaleziona, nie można określić typ danych.",
+	"wikibase-add-badges": "dodaj odznaczenia"
 }

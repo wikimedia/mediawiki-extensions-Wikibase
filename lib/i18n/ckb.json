@@ -20,6 +20,9 @@
 	"wikibase-sitelinks-sitename-columnheading-special": "پێگە",
 	"wikibase-sitelinks-siteid-columnheading": "کۆد",
 	"wikibase-sitelinks-link-columnheading": "پەڕەی بەستەردراو",
+	"wikibase-snakview-snaktypeselector-somevalue": "نرخی نەزانراو",
+	"wikibase-snakview-snaktypeselector-novalue": "بێ نرخ",
 	"wikibase-tooltip-error-details": "وردەکارییەکان",
-	"datatypes-type-wikibase-item": "بەند"
+	"datatypes-type-wikibase-item": "بەند",
+	"wikibase-add-badges": "نیشانەکان زیاد بکە"
 }

@@ -5,7 +5,8 @@
 			"Incelemeelemani",
 			"Rapsar",
 			"Marmase",
-			"Sayginer"
+			"Sayginer",
+			"Sucsuzz"
 		]
 	},
 	"wikibase-edit": "değiştir",
@@ -23,6 +24,7 @@
 	"wikibase-aliases-label": "Şu şekilde de bilinir:",
 	"wikibase-shortcopyrightwarning": "\"$1\" düğmesine tıkladığınızda, [[$2|kullanım şartlarını]] kabul ederek katkınızı, $3 kapsamında geri döndürülemez bir biçimde sağlamış olacaksınız.",
 	"special-itembytitle": "Başlığına göre öge",
+	"wikibase-gotolinkedpage-lookup-site": "Site:",
 	"wikibase-itemdisambiguation-lookup-language": "Dil:",
 	"wikibase-newproperty-invalid-datatype": "Geçersiz veri türü belirtildi.",
 	"special-newitem": "Yeni bir öge oluştur",
