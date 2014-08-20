@@ -378,6 +378,10 @@ if ( $ ) {
 			$pout->setExtensionData( 'wikibase-view-chunks', $this->getPlaceholders() );
 		}
 
+		if ( $entity instanceof Item ) {
+			$this->addBadgesToParserOutput( $pout, $entity->getSiteLinkList() );
+		}
+
 		//@todo: record sitelinks as iwlinks
 		//@todo: record CommonsMedia values as imagelinks
 
@@ -401,6 +405,14 @@ if ( $ ) {
 
 		wfProfileOut( __METHOD__ );
 		return $pout;
+	}
+
+	private function addBadgesToParserOutput( ParserOutput $pout, SiteLinkList $siteLinkList ) {
+		foreach ( $siteLinkList as $siteLink ) {
+			foreach ( $siteLink->getBadges() as $badge ) {
+				$pout->addLink( $this->entityTitleLookup->getTitleForID( $badge ) );
+			}
+		}
 	}
 
 	/**
