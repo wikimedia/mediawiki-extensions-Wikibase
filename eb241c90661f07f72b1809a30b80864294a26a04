@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_fea2dff7",
+        "filename": "repo/includes/EntityParserOutput.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-08-20T16:18:12Z",
+      "side": 1,
+      "message": "be careful with the placeholders... this involves the textInjector and markers which change in EntityView during the request",
+      "revId": "eb241c90661f07f72b1809a30b80864294a26a04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
