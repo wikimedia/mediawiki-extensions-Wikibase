@@ -9,6 +9,7 @@ use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use SiteList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -444,13 +445,11 @@ class RdfBuilder {
 
 		switch ( $typeId ) {
 			case 'wikibase-item':
-				$rawValue = $value->getValue();
-
-				assert( $rawValue instanceof EntityId );
-				$valueQName = $this->getEntityQName( self::NS_ENTITY, $rawValue );
+				$entityId = $value->getValue();
+				$valueQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
 				$valueResource = $this->graph->resource( $valueQName );
 				$statementResource->addResource( $propertyValueQName, $valueResource );
-				$this->entityMentioned( $rawValue );
+				$this->entityMentioned( $entityId );
 				break;
 			case 'commonsMedia':
 				$statementResource->addResource( $propertyValueQName, $value );
@@ -510,4 +509,5 @@ class RdfBuilder {
 		$this->addLabels( $entity );
 		$this->addDescriptions( $entity );
 	}
+
 }
