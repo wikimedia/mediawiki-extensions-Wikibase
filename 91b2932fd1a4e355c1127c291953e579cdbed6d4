@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_35a912dd",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-20T23:48:22Z",
+      "side": 1,
+      "message": "Own method please",
+      "revId": "91b2932fd1a4e355c1127c291953e579cdbed6d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
