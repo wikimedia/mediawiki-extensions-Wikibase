@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f8ed578a",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-20T13:24:37Z",
+      "side": 1,
+      "message": "This is not a nice test because it\u0027s so long. It seems it\u0027s testing a lot of things the same time. Unfortunately I don\u0027t have a suggestion how to split it.",
+      "revId": "82547666cee4ac7e0bbfdd17a764ab210a6bae61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
