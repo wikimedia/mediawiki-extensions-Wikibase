@@ -330,80 +330,6 @@ if ( $ ) {
 	}
 
 	/**
-	 * Renders an entity into an ParserOutput object
-	 *
-	 * @since 0.1
-	 *
-	 * @param EntityRevision $entityRevision the entity to analyze/render
-	 * @param bool $editable whether to make the page's content editable
-	 * @param bool $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
-	 *
-	 * @return ParserOutput
-	 */
-	public function getParserOutput( EntityRevision $entityRevision, $editable = true,
-		$generateHtml = true
-	) {
-		wfProfileIn( __METHOD__ );
-
-		// fresh parser output with entity markup
-		$pout = new ParserOutput();
-
-		$entity =  $entityRevision->getEntity();
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-
-		$configVars = $this->configBuilder->build( $entity, $this->options, $isExperimental );
-		$pout->addJsConfigVars( $configVars );
-
-		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
-
-		// treat referenced entities as page links ------
-		$refFinder = new ReferencedEntitiesFinder();
-		$usedEntityIds = $refFinder->findSnakLinks( $allSnaks );
-
-		foreach ( $usedEntityIds as $entityId ) {
-			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
-		}
-
-		// treat URL values as external links ------
-		$urlFinder = new ReferencedUrlFinder( $this->dataTypeLookup );
-		$usedUrls = $urlFinder->findSnakLinks( $allSnaks );
-
-		foreach ( $usedUrls as $url ) {
-			$pout->addExternalLink( $url );
-		}
-
-		if ( $generateHtml ) {
-			$html = $this->getHtml( $entityRevision, $editable );
-			$pout->setText( $html );
-			$pout->setExtensionData( 'wikibase-view-chunks', $this->getPlaceholders() );
-		}
-
-		//@todo: record sitelinks as iwlinks
-		//@todo: record CommonsMedia values as imagelinks
-
-		// make css available for JavaScript-less browsers
-		$pout->addModuleStyles( array(
-			'wikibase.common',
-			'wikibase.toc',
-			'jquery.ui.core',
-			'jquery.wikibase.statementview',
-			'jquery.wikibase.toolbar',
-		) );
-
-		// make sure required client sided resources will be loaded:
-		$pout->addModules( 'wikibase.ui.entityViewInit' );
-
-		//FIXME: some places, like Special:NewItem, don't want to override the page title.
-		//	 But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
-		//	 So, for now, we leave it to the caller to override the display title, if desired.
-		// set the display title
-		//$pout->setTitleText( $entity>getLabel( $langCode ) );
-
-		wfProfileOut( __METHOD__ );
-		return $pout;
-	}
-
-	/**
 	 * Returns the HTML for the heading of the claims section
 	 *
 	 * @since 0.5
@@ -556,6 +482,67 @@ if ( $ ) {
 
 		wfProfileOut( __METHOD__ );
 		return $entityInfoBuilder->getEntityInfo();
+	}
+
+	/**
+	 * Renders an entity into an ParserOutput object
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityRevision $entityRevision the entity to analyze/render
+	 * @param bool $editable whether to make the page's content editable
+	 * @param bool $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
+	 *
+	 * @return ParserOutput
+	 */
+	public function getParserOutput( EntityRevision $entityRevision, $editable = true,
+		$generateHtml = true
+	) {
+		wfProfileIn( __METHOD__ );
+
+		// fresh parser output with entity markup
+		$pout = new EntityParserOutput(
+			$this->configBuilder,
+			$this->options,
+			$this->entityTitleLookup,
+			$this->dataTypeLookup
+		);
+
+		$entity =  $entityRevision->getEntity();
+		$allSnaks = $entity->getAllSnaks();
+
+		$pout->addEntityConfigVars( $entity );
+		$pout->addSnakLinks( $allSnaks );
+
+		if ( $generateHtml ) {
+			$html = $this->getHtml( $entityRevision, $editable );
+			$pout->setText( $html );
+			$pout->setExtensionData( 'wikibase-view-chunks', $this->getPlaceholders() );
+		}
+
+		//@todo: record sitelinks as iwlinks
+		//@todo: record CommonsMedia values as imagelinks
+
+		// make css available for JavaScript-less browsers
+		$pout->addModuleStyles( array(
+			'wikibase.common',
+			'wikibase.toc',
+			'jquery.ui.core',
+			'jquery.wikibase.statementview',
+			'jquery.wikibase.toolbar',
+		) );
+
+		// make sure required client sided resources will be loaded:
+		$pout->addModules( 'wikibase.ui.entityViewInit' );
+
+		//FIXME: some places, like Special:NewItem, don't want to override the page title.
+		//	 But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
+		//	 So, for now, we leave it to the caller to override the display title, if desired.
+		// set the display title
+		//$pout->setTitleText( $entity>getLabel( $langCode ) );
+
+		wfProfileOut( __METHOD__ );
+		return $pout;
 	}
 
 }
