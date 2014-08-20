@@ -346,7 +346,7 @@ if ( $ ) {
 	 * @param bool $editable whether to make the page's content editable
 	 * @param bool $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
 	 *
-	 * @return ParserOutput
+	 * @return EntityParserOutput
 	 */
 	public function getParserOutput( EntityRevision $entityRevision, $editable = true,
 		$generateHtml = true
@@ -354,40 +354,23 @@ if ( $ ) {
 		wfProfileIn( __METHOD__ );
 
 		// fresh parser output with entity markup
-		$pout = new ParserOutput();
+		$pout = new EntityParserOutput(
+			$this->configBuilder,
+			$this->options,
+			$this->entityTitleLookup,
+			$this->dataTypeLookup
+		);
 
 		$entity =  $entityRevision->getEntity();
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+		$allSnaks = $entity->getAllSnaks();
 
-		$configVars = $this->configBuilder->build( $entity, $this->options, $isExperimental );
-		$pout->addJsConfigVars( $configVars );
-
-		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
-
-		// treat referenced entities as page links ------
-		$entitiesFinder = new ReferencedEntitiesFinder();
-		$usedEntityIds = $entitiesFinder->findSnakLinks( $allSnaks );
-
-		foreach ( $usedEntityIds as $entityId ) {
-			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
-		}
-
-		// treat URL values as external links ------
-		$urlFinder = new ReferencedUrlFinder( $this->dataTypeLookup );
-		$usedUrls = $urlFinder->findSnakLinks( $allSnaks );
-
-		foreach ( $usedUrls as $url ) {
-			$pout->addExternalLink( $url );
-		}
+		$pout->addEntityConfigVars( $entity );
+		$pout->addSnakLinks( $allSnaks );
 
 		if ( $generateHtml ) {
 			$html = $this->getHtml( $entityRevision, $editable );
 			$pout->setText( $html );
 			$pout->setExtensionData( 'wikibase-view-chunks', $this->getPlaceholders() );
-		}
-
-		if ( $entity instanceof Item ) {
-			$this->addBadgesToParserOutput( $pout, $entity->getSiteLinkList() );
 		}
 
 		//@todo: record sitelinks as iwlinks
@@ -413,14 +396,6 @@ if ( $ ) {
 
 		wfProfileOut( __METHOD__ );
 		return $pout;
-	}
-
-	private function addBadgesToParserOutput( ParserOutput $pout, SiteLinkList $siteLinkList ) {
-		foreach ( $siteLinkList as $siteLink ) {
-			foreach ( $siteLink->getBadges() as $badge ) {
-				$pout->addLink( $this->entityTitleLookup->getTitleForID( $badge ) );
-			}
-		}
 	}
 
 }
