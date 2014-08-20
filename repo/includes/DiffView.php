@@ -12,6 +12,7 @@ use Html;
 use IContextSource;
 use MWException;
 use SiteStore;
+use Title;
 
 /**
  * Class for generating views of DiffOp objects.
@@ -161,8 +162,9 @@ class DiffView extends ContextSource {
 	private function getDeletedLine( $value, array $path ) {
 		// @todo: inject a formatter instead of doing special cases based on the path here!
 		if ( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
+			$siteId = $path[2] === 'badges' ? null : $path[1]; // Badges are local items
 			return Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-				$this->getSiteLinkElement( $path[1], $value )
+				$this->getSiteLinkElement( $siteId, $value )
 			);
 		} else {
 			return Html::element( 'del', array( 'class' => 'diffchange diffchange-inline' ), $value );
@@ -177,8 +179,9 @@ class DiffView extends ContextSource {
 	private function getAddedLine( $value, array $path ) {
 		// @todo: inject a formatter instead of doing special cases based on the path here!
 		if ( $path[0] === $this->getLanguage()->getMessage( 'wikibase-diffview-link' ) ) {
+			$siteId = $path[2] === 'badges' ? null : $path[1]; // Badges are local items
 			return Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-				$this->getSiteLinkElement( $path[1], $value )
+				$this->getSiteLinkElement( $siteId, $value )
 			);
 		} else {
 			return Html::element( 'ins', array( 'class' => 'diffchange diffchange-inline' ), $value );
@@ -186,19 +189,25 @@ class DiffView extends ContextSource {
 	}
 
 	/**
-	 * @param string $siteId
+	 * @param string|null $siteId Null if pageName is on the local wiki
 	 * @param string $pageName
 	 *
 	 * @return string
 	 */
 	private function getSiteLinkElement( $siteId, $pageName ) {
-		$site = $this->siteStore->getSite( $siteId );
-
-		return Html::element( 'a', array(
-			'href' => $site->getPageUrl( $pageName ),
-			'hreflang' => $site->getLanguageCode(),
+		$attr = array(
 			'dir' => 'auto',
-		), $pageName );
+		);
+
+		if ( $siteId ) {
+			$site = $this->siteStore->getSite( $siteId );
+			$attr['hreflang'] = $site->getLanguageCode();
+			$attr['href'] = $site->getPageUrl( $pageName );
+		} else {
+			$attr['href'] = Title::newFromText( $pageName )->getLinkURL();
+		}
+
+		return Html::element( 'a', $attr, $pageName );
 	}
 
 	/**
