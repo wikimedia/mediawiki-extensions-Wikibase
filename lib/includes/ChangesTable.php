@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+
 use IORMRow;
 use MWException;
 
@@ -54,7 +55,7 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 * @return string
 	 */
 	public function getRowClass() {
-		return '\Wikibase\ChangeRow';
+		return 'Wikibase\ChangeRow';
 	}
 
 	/**
@@ -117,11 +118,10 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 	 *
 	 * @param ChangeRow|IORMRow $row
 	 *
+	 * @throws MWException
 	 * @return array
 	 */
 	protected function getWriteValues( IORMRow $row ) {
-		assert( $row instanceof ChangeRow );
-
 		$values = parent::getWriteValues( $row );
 
 		$infoField = $this->getPrefixedField( 'info' );
@@ -129,6 +129,10 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 		$userIdField = $this->getPrefixedField( 'user_id' );
 
 		if ( isset( $values[$infoField] ) ) {
+			if ( !( $row instanceof ChangeRow ) ) {
+				throw new MWException( '$row must be a ChangeRow.' );
+			}
+
 			$values[$infoField] = $row->serializeInfo( $values[$infoField] );
 		}
 
@@ -181,4 +185,5 @@ class ChangesTable extends \ORMTable implements ChunkAccess {
 		/* @var Change $rec */
 		return $rec->getId();
 	}
+
 }

@@ -496,18 +496,19 @@ class EditEntity extends ModifyEntity {
 
 		foreach ( $claims as $claimArray ) {
 			if( !array_key_exists( 'remove', $claimArray ) ){
-
 				try {
 					$claim = $unserializer->newFromSerialization( $claimArray );
-					assert( $claim instanceof Claim );
-				} catch ( IllegalValueException $illegalValueException ) {
-					$this->dieException( $illegalValueException, 'invalid-claim' );
-				} catch ( MWException $mwException ) {
-					$this->dieException( $mwException, 'invalid-claim' );
-				}
-				/**	 @var $claim Claim  */
 
-				$opsToReturn[] = $this->claimChangeOpFactory->newSetClaimOp( $claim );
+					if ( !( $claim instanceof Claim ) ) {
+						throw new IllegalValueException( 'Claim serialization did not contained a Claim.' );
+					}
+
+					$opsToReturn[] = $this->claimChangeOpFactory->newSetClaimOp( $claim );
+				} catch ( IllegalValueException $ex ) {
+					$this->dieException( $ex, 'invalid-claim' );
+				} catch ( MWException $ex ) {
+					$this->dieException( $ex, 'invalid-claim' );
+				}
 			}
 		}
 		return $opsToReturn;

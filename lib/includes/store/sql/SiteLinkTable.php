@@ -41,13 +41,23 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @param bool $readonly Whether the table can be modified.
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 *
+	 * @throws MWException
 	 */
 	public function __construct( $table, $readonly, $wiki = false ) {
+		if ( !is_string( $table ) ) {
+			throw new MWException( '$table must be a string.' );
+		}
+		if ( !is_bool( $readonly ) ) {
+			throw new MWException( '$readonly must be boolean.' );
+		}
+		if ( !is_string( $wiki ) && $wiki !== false ) {
+			throw new MWException( '$wiki must be a string or false.' );
+		}
+
 		$this->table = $table;
 		$this->readonly = $readonly;
 		$this->wiki = $wiki;
-
-		assert( is_bool( $this->readonly ) );
 	}
 
 	/**
@@ -281,11 +291,11 @@ class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 	 * @since 0.1
 	 *
 	 * @param Item $item
-	 * @param \DatabaseBase|null $db
+	 * @param DatabaseBase|null $db
 	 *
 	 * @return array of array
 	 */
-	public function getConflictsForItem( Item $item, \DatabaseBase $db = null ) {
+	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
 		wfProfileIn( __METHOD__ );
 
 		$links = $item->getSiteLinks();
