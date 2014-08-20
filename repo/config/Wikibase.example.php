@@ -51,6 +51,20 @@ call_user_func( function() {
 	$wgGroupPermissions['wbeditor']['item-set'] = true;
 
 	$wgWBRepoSettings['normalizeItemByTitlePageNames'] = true;
+
+	// the special group includes all the sites in the specialSiteLinkGroups,
+	// grouped together in a 'Pages linked to other sites' section.
+	$wgWBRepoSettings['siteLinkGroups'] = array(
+		'wikipedia',
+		'wikinews',
+		'wikiquote',
+		'wikisource',
+		'wikivoyage',
+		'special'
+	);
+
+	// these are the site_group codes as listed in the sites table
+	$wgWBRepoSettings['specialSiteLinkGroups'] = array( 'commons', 'wikidata' );
 } );
 
 
