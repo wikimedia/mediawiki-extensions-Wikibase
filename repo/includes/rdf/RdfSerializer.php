@@ -143,8 +143,6 @@ class RdfSerializer {
 	public function serializeRdf( EasyRdf_Graph $graph ) {
 		$serialiser = $this->format->newSerialiser();
 		$data = $serialiser->serialise( $graph, $this->format->getName() );
-
-		assert( is_string( $data ) );
 		return $data;
 	}
 
