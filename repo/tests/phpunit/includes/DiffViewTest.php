@@ -7,6 +7,8 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DiffView;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\DiffView
@@ -21,6 +23,9 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 
 	public function diffOpProvider() {
 		$linkPath = wfMessage( 'wikibase-diffview-link' )->text();
+		$itemId = new ItemId( 'Q123' );
+		$itemTitle = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $itemId );
+		$itemLink = $itemTitle->getLinkURL();
 
 		return array(
 			'Empty' => array(
@@ -47,10 +52,22 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 				$linkPath . '/enwiki'
 			),
 			'Link has direction' => array(
-				'@<a\b[^>]* hreflang="en" dir="auto"@',
+				'@<a\b[^>]* dir="auto"@',
 				null,
 				'NEW',
 				$linkPath . '/enwiki'
+			),
+			'Link has hreflang' => array(
+				'@<a\b[^>]* hreflang="en"@',
+				null,
+				'NEW',
+				$linkPath . '/enwiki'
+			),
+			'Badge is linked correctly' => array(
+				'@<a\b[^>]* href="' . preg_quote( $itemLink, '@' ) . '"@',
+				null,
+				'Q123',
+				$linkPath . '/enwiki/badges'
 			),
 		);
 	}
@@ -81,7 +98,8 @@ class DiffViewTest extends \PHPUnit_Framework_TestCase {
 		}
 		$diff = new Diff( $this->getDiffOps( $oldValue, $newValue ) );
 		$siteStore = MockSiteStore::newFromTestSites();
-		$diffView = new DiffView( $path, $diff, $siteStore );
+		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$diffView = new DiffView( $path, $diff, $siteStore, $entityTitleLookup );
 
 		$html = $diffView->getHtml();
 
