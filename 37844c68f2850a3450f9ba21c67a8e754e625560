@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_558b7e72",
+        "filename": "repo/includes/DiffView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-20T23:52:11Z",
+      "side": 1,
+      "message": "Explicit checks please. This will go fail if you have a site with id \"0\"",
+      "revId": "37844c68f2850a3450f9ba21c67a8e754e625560",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
