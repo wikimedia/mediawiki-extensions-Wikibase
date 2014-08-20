@@ -11,10 +11,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\EntityRevision;
+use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRedirectResolvingDecorator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -198,16 +198,12 @@ class EntityDataRequestHandler {
 
 		if ( $format === null || $format === '' ) {
 			// if no format is given, apply content negotiation and return.
-
 			$this->httpContentNegotiation( $request, $output, $entityId, $revision );
 			return;
-		} else {
-			//NOTE: will trigger a 415 if the format is not supported
-			$format = $this->getCanonicalFormat( $format );
 		}
 
-		// we should know the format now.
-		assert( $format !== null && $format !== '' );
+		//NOTE: will trigger a 415 if the format is not supported
+		$format = $this->getCanonicalFormat( $format );
 
 		if ( $doc !== null && $doc !== '' ) {
 			// if subpage syntax is used, always enforce the canonical form
