@@ -378,6 +378,16 @@ if ( $ ) {
 			$pout->setExtensionData( 'wikibase-view-chunks', $this->getPlaceholders() );
 		}
 
+		if ( $entity instanceof Item ) {
+			/** @var SiteLink $siteLink */
+			foreach ( $entity->getSiteLinks() as $siteLink ) {
+				/** @var ItemId $badge */
+				foreach ( $siteLink->getBadges() as $badge ) {
+					$pout->addLink( $this->entityTitleLookup->getTitleForID( $badge ) );
+				}
+			}
+		}
+
 		//@todo: record sitelinks as iwlinks
 		//@todo: record CommonsMedia values as imagelinks
 
