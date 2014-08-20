@@ -107,7 +107,6 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 			}
 		}
 
-		assert( is_array( $this->propertyInfo ) );
 		return $this->propertyInfo;
 	}
 
@@ -184,4 +183,5 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 
 		return true;
 	}
+
 }
