@@ -444,7 +444,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$claim = new Statement( $snak );
 		$claim->setGuid( 'q42$foobarbaz' );
 
-		$this->assertInstanceOf( '\Wikibase\Claim', $claim );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
 
 		$this->assertTrue( $snak->equals( $claim->getMainSnak() ) );
 

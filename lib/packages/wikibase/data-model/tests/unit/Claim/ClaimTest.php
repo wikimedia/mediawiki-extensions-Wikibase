@@ -66,7 +66,7 @@ class ClaimTest extends \PHPUnit_Framework_TestCase {
 	public function testConstructor( Snak $snak, Snaks $qualifiers = null ) {
 		$claim = new Claim( $snak, $qualifiers );
 
-		$this->assertInstanceOf( '\Wikibase\Claim', $claim );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $claim );
 
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 

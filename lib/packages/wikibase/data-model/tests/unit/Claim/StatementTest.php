@@ -66,7 +66,7 @@ class StatementTest extends ClaimTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetReferences( Statement $statement ) {
-		$this->assertInstanceOf( '\Wikibase\References', $statement->getReferences() );
+		$this->assertInstanceOf( 'Wikibase\DataModel\References', $statement->getReferences() );
 	}
 
 	/**
@@ -133,7 +133,7 @@ class StatementTest extends ClaimTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testIsClaim( Statement $statement ) {
-		$this->assertInstanceOf( '\Wikibase\Claim', $statement );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Claim', $statement );
 	}
 
 	/**

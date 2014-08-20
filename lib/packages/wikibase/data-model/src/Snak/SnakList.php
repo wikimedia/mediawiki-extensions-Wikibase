@@ -25,7 +25,7 @@ class SnakList extends HashArray implements Snaks {
 	 * @return string
 	 */
 	public function getObjectType() {
-		return '\Wikibase\DataModel\Snak\Snak';
+		return 'Wikibase\DataModel\Snak\Snak';
 	}
 
 	/**
