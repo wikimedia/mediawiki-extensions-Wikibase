@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_b5bce21b",
+        "filename": "repo/includes/EntityParserOutput.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-20T23:51:16Z",
+      "side": 1,
+      "message": "This inheritance is interesting... probably not the best approach, though at the same time not worse then what was before",
+      "revId": "bdf33f40cd85eeecf66c117f17443fa4837794ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
