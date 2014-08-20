@@ -90,4 +90,18 @@ class ItemView extends EntityView {
 		return $siteLinksView->getHtml( $item->getSiteLinks(), $itemId, $groups, $editable );
 	}
 
+	/**
+	 * @see EntityView::getParserOutput
+	 */
+	public function getParserOutput( EntityRevision $entityRevision, $editable = true,
+		$generateHtml = true
+	) {
+		$pout = parent::getParserOutput( $entityRevision, $editable, $generateHtml );
+
+		$item = $entityRevision->getEntity();
+		$pout->addSiteLinkList( $item->getSiteLinkList() );
+
+		return $pout;
+	}
+
 }

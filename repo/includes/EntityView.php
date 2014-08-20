@@ -332,7 +332,7 @@ if ( $ ) {
 	/**
 	 * Renders an entity into an ParserOutput object
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @param EntityRevision $entityRevision the entity to analyze/render
 	 * @param bool $editable whether to make the page's content editable
@@ -346,31 +346,18 @@ if ( $ ) {
 		wfProfileIn( __METHOD__ );
 
 		// fresh parser output with entity markup
-		$pout = new ParserOutput();
+		$pout = new EntityParserOutput(
+			$this->configBuilder,
+			$this->options,
+			$this->entityTitleLookup,
+			$this->dataTypeLookup
+		);
 
 		$entity =  $entityRevision->getEntity();
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+		$allSnaks = $entity->getAllSnaks();
 
-		$configVars = $this->configBuilder->build( $entity, $this->options, $isExperimental );
-		$pout->addJsConfigVars( $configVars );
-
-		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
-
-		// treat referenced entities as page links ------
-		$refFinder = new ReferencedEntitiesFinder();
-		$usedEntityIds = $refFinder->findSnakLinks( $allSnaks );
-
-		foreach ( $usedEntityIds as $entityId ) {
-			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
-		}
-
-		// treat URL values as external links ------
-		$urlFinder = new ReferencedUrlFinder( $this->dataTypeLookup );
-		$usedUrls = $urlFinder->findSnakLinks( $allSnaks );
-
-		foreach ( $usedUrls as $url ) {
-			$pout->addExternalLink( $url );
-		}
+		$pout->addEntityConfigVars( $entity );
+		$pout->addSnakLinks( $allSnaks );
 
 		if ( $generateHtml ) {
 			$html = $this->getHtml( $entityRevision, $editable );
