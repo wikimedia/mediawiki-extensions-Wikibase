@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Content;
 
 use Diff\DiffOp\Diff\Diff;
-use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 
 /**
  * Represents a diff between two Wikibase\EntityContent instances.

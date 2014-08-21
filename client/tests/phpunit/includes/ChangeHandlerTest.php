@@ -8,7 +8,7 @@ use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -1236,4 +1236,5 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			$this->assertArrayEquals( $exp, $up );
 		}
 	}
+
 }

@@ -10,9 +10,9 @@ use Language;
 use Site;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimDifferenceVisualizer;
-use Wikibase\Repo\Content\EntityContentDiff;
-use Wikibase\DataModel\Entity\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\EntityDiffVisualizer;
+use Wikibase\Repo\Content\EntityContentDiff;
 
 /**
  * @covers Wikibase\EntityDiffVisualizer

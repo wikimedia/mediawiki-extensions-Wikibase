@@ -10,6 +10,8 @@ use Diff\DiffOpRemove;
 use IContextSource;
 use MWException;
 use SiteStore;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
 
 /**
