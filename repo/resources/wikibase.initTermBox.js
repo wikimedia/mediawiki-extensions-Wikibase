@@ -16,116 +16,50 @@
  */
 wb.initTermBox = function( entity, api ) {
 	mw.hook( 'wikibase.domready' ).add( function() {
-		var $termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' ),
+		var $fingerprintview = $( '.wikibase-fingerprintview' ),
 			userSpecifiedLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
 			hasSpecifiedLanguages = userSpecifiedLanguages && userSpecifiedLanguages.length,
 			isUlsDefined = mw.uls !== undefined
 				&& $.uls !== undefined
 				&& $.uls.data !== undefined;
 
-		$( '.wb-terms' ).toolbarcontroller( {
-			edittoolbar: ['terms-labelview', 'terms-descriptionview']
-		} );
-
 		// Skip if having no extra languages is what the user wants
-		if( !$termBoxRows.length && !hasSpecifiedLanguages && isUlsDefined ) {
+		if( !$fingerprintview.length && !hasSpecifiedLanguages && isUlsDefined ) {
 			// No term box present; Ask ULS to provide languages and generate plain HTML
-			var languageCodes = mw.uls.getFrequentLanguageList(),
-				title = new mw.Title(
-					mw.config.get( 'wgTitle' ),
-					mw.config.get( 'wgNamespaceNumber' )
-				);
+			var languageCodes = mw.uls.getFrequentLanguageList();
 
 			if( !languageCodes.length ) {
 				return;
 			}
 
-			var $sectionHeading = addTermBoxSection();
-			$sectionHeading.after(
-				renderTermBox( title, entity, languageCodes.slice( 1, 4 ) )
-			);
+			var $sectionHeading = addTermBoxSection(),
+				$table = mw.template( 'wb-terms', '' );
 
-			$termBoxRows = $( 'tr.wb-terms-label, tr.wb-terms-description' );
+			$sectionHeading.after( $table );
+
+			for( var i = 1; i < languageCodes.length && i < 5; i++ ) {
+				var languageCode = languageCodes[i];
+
+				$table.append( initFingerprintview( $( '<tbody/>' ), languageCode, entity, api ) );
+			}
+
+			return;
 		}
 
-		$termBoxRows.each( function() {
-			var $termsRow = $( this ),
+		$fingerprintview.each( function() {
+			var $singleFingerprintview = $( this ),
 				languageCode;
 
 			// TODO: Find more sane way to figure out language code.
-			$.each( $termsRow.attr( 'class' ).split( ' ' ), function( i, cssClass ) {
-				if(
-					cssClass.indexOf( 'wb-terms-' ) === 0
-					&& cssClass.indexOf( 'wb-terms-label' ) === -1
-					&& cssClass.indexOf( 'wb-terms-description' ) === -1
-				) {
-					languageCode =  cssClass.replace( /wb-terms-/, '' );
+			$.each( $singleFingerprintview.attr( 'class' ).split( ' ' ), function( i, cssClass ) {
+				if( cssClass.indexOf( 'wikibase-fingerprintview-' ) === 0 ) {
+					languageCode =  cssClass.replace( /wikibase-fingerprintview-/, '' );
 					return false;
 				}
 			} );
 
-			if( $termsRow.hasClass( 'wb-terms-label' ) ) {
-				$termsRow.children( 'td' ).eq( 1 ).labelview( {
-					value: {
-						language: languageCode,
-						label: entity.getLabel( languageCode )
-					},
-					helpMessage: mw.msg(
-						'wikibase-label-input-help-message',
-						wb.getLanguageNameByCode( languageCode )
-					),
-					entityId: entity.getId(),
-					api: api
-				} );
-
-				return true;
-			}
-
-			$termsRow.children( 'td' ).first().descriptionview( {
-				value: {
-					language: languageCode,
-					description: entity.getDescription( languageCode )
-				},
-				helpMessage: mw.msg(
-					'wikibase-description-input-help-message',
-					wb.getLanguageNameByCode( languageCode )
-				),
-				entityId: entity.getId(),
-				api: api
-			} );
-
+			initFingerprintview( $singleFingerprintview, languageCode, entity, api );
 		} );
-
-		$( wb )
-		.on( 'startItemPageEditMode', function( event, origin ) {
-			$termBoxRows.find( ':wikibase-labelview, :wikibase-descriptionview' )
-			.not( origin )
-			.each( function() {
-				( $( this ).data( 'labelview' ) || $( this ).data( 'descriptionview' ) )
-					.disable();
-				$( this ).data( 'edittoolbar' ).toolbar.disable();
-			} );
-		} )
-		.on( 'stopItemPageEditMode', function( event, origin ) {
-			$termBoxRows.find( ':wikibase-labelview' ).each( function() {
-				var labelview = $( this ).data( 'labelview' );
-
-				if( labelview.value().label ) {
-					$( this ).data( 'edittoolbar' ).toolbar.enable();
-				}
-				labelview.enable();
-			} );
-
-			$termBoxRows.find( ':wikibase-descriptionview' ).each( function() {
-				var descriptionview = $( this ).data( 'descriptionview' );
-
-				if( descriptionview.value().description ) {
-					$( this ).data( 'edittoolbar' ).toolbar.enable();
-				}
-				descriptionview.enable();
-			} );
-		} );
-
 	} );
 };
 
@@ -165,166 +99,26 @@ function addTermBoxSection() {
 }
 
 /**
- * @param {mediaWiki.Title} title
+ * @param {jQuery} $node
+ * @param {string} languageCode
  * @param {wikibase.datamodel.Entity} entity
- * @param {string[]} languageCodes
- * @return {jQuery|undefined}
+ * @param {wikibase.RepoApi} api
+ * @return {jQuery}
  */
-function renderTermBox( title, entity, languageCodes ) {
-	if( languageCodes === undefined ) {
-		return;
-	}
-	var labels = entity.getLabels(),
-		descriptions = entity.getDescriptions(),
-		$tbody = $( '<tbody>' );
-
-	for( var i = 0; i < languageCodes.length; i++ ) {
-		var languageCode = languageCodes[i];
-
-		$tbody.append( mw.template( 'wb-term',
-			languageCode,
-			$.uls.data.getAutonym( languageCode ),
-			labels.hasOwnProperty( languageCode ) ? labels[languageCode] : '',
-			descriptions.hasOwnProperty( languageCode ) ? descriptions[languageCode] : '',
-			'',
-			'',
-			'',
-			'',
-			title.getUrl( { setlang: languageCode } )
-		) );
-	}
-
-	return mw.template( 'wb-terms-table', $tbody );
+function initFingerprintview( $node, languageCode, entity, api ) {
+	return $node.fingerprintview( {
+		value: {
+			language: languageCode,
+			label: entity.getLabel( languageCode ) || null,
+			description: entity.getDescription( languageCode ) || null
+		},
+		entityId: entity.getId(),
+		api: api,
+		helpMessage: mw.msg(
+			'wikibase-fingerprintview-input-help-message',
+			wb.getLanguageNameByCode( languageCode )
+		)
+	} );
 }
-
-// TODO: Merge with native labelview/descriptionview toolbar definiton
-$.wikibase.toolbarcontroller.definition( 'edittoolbar', {
-	id: 'terms-labelview',
-	selector: '.wb-terms-label',
-	events: {
-		labelviewcreate: function( event, toolbarcontroller ) {
-			var $labelview = $( event.target ),
-				labelview = $labelview.data( 'labelview' );
-
-			$labelview.edittoolbar( {
-				$container: $labelview.next(),
-				interactionWidgetName: $.wikibase.labelview.prototype.widgetName,
-				enableRemove: false
-			} );
-
-			$labelview.on( 'keyup', function( event ) {
-				if( labelview.option( 'disabled' ) ) {
-					return;
-				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
-					labelview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
-					labelview.stopEditing( false );
-				}
-			} );
-
-			if( !labelview.value().label ) {
-				labelview.startEditing();
-			}
-		},
-		'labelviewchange labelviewafterstartediting': function( event ) {
-			var $labelview = $( event.target ),
-				labelview = $labelview.data( 'labelview' ),
-				toolbar = $labelview.data( 'edittoolbar' ).toolbar,
-				$btnSave = toolbar.editGroup.getButton( 'save' ),
-				btnSave = $btnSave.data( 'toolbarbutton' ),
-				enable = labelview.isValid() && !labelview.isInitialValue(),
-				$btnCancel = toolbar.editGroup.getButton( 'cancel' ),
-				btnCancel = $btnCancel.data( 'toolbarbutton' ),
-				currentLabel = labelview.value().label,
-				disableCancel = !currentLabel && labelview.isInitialValue();
-
-			btnSave[enable ? 'enable' : 'disable']();
-			btnCancel[disableCancel ? 'disable' : 'enable']();
-		},
-		labelviewafterstopediting: function( event, dropValue ) {
-			var $labelview = $( event.target ),
-				labelview = $labelview.data( 'labelview' );
-
-			if( !labelview.value().label ) {
-				labelview.startEditing();
-			}
-		},
-		toolbareditgroupedit: function( event, toolbarcontroller ) {
-			var $labelview = $( event.target ).closest( ':wikibase-edittoolbar' ),
-				labelview = $labelview.data( 'labelview' );
-
-			if( !labelview ) {
-				return;
-			}
-
-			labelview.focus();
-		}
-	}
-} );
-$.wikibase.toolbarcontroller.definition( 'edittoolbar', {
-	id: 'terms-descriptionview',
-	selector: '.wb-terms-description',
-	events: {
-		descriptionviewcreate: function( event, toolbarcontroller ) {
-			var $descriptionview = $( event.target ),
-				descriptionview = $descriptionview.data( 'descriptionview' );
-
-			$descriptionview.edittoolbar( {
-				$container: $descriptionview.next(),
-				interactionWidgetName: $.wikibase.descriptionview.prototype.widgetName,
-				enableRemove: false
-			} );
-
-			$descriptionview.on( 'keyup', function( event ) {
-				if( descriptionview.option( 'disabled' ) ) {
-					return;
-				}
-				if( event.keyCode === $.ui.keyCode.ESCAPE ) {
-					descriptionview.stopEditing( true );
-				} else if( event.keyCode === $.ui.keyCode.ENTER ) {
-					descriptionview.stopEditing( false );
-				}
-			} );
-
-			if( !descriptionview.value().description ) {
-				descriptionview.startEditing();
-			}
-		},
-		'descriptionviewchange descriptionviewafterstartediting': function( event ) {
-			var $descriptionview = $( event.target ),
-				descriptionview = $descriptionview.data( 'descriptionview' ),
-				toolbar = $descriptionview.data( 'edittoolbar' ).toolbar,
-				$btnSave = toolbar.editGroup.getButton( 'save' ),
-				btnSave = $btnSave.data( 'toolbarbutton' ),
-				enable = descriptionview.isValid() && !descriptionview.isInitialValue(),
-				$btnCancel = toolbar.editGroup.getButton( 'cancel' ),
-				btnCancel = $btnCancel.data( 'toolbarbutton' ),
-				currentDescription = descriptionview.value().description,
-				disableCancel = !currentDescription && descriptionview.isInitialValue();
-
-			btnSave[enable ? 'enable' : 'disable']();
-			btnCancel[disableCancel ? 'disable' : 'enable']();
-		},
-		descriptionviewafterstopediting: function( event, dropValue ) {
-			var $descriptionview = $( event.target ),
-				descriptionview = $descriptionview.data( 'descriptionview' );
-
-			if( !descriptionview.value().description ) {
-				descriptionview.startEditing();
-			}
-		},
-		toolbareditgroupedit: function( event, toolbarcontroller ) {
-			var $descriptionview = $( event.target ).closest( ':wikibase-edittoolbar' ),
-				descriptionview = $descriptionview.data( 'descriptionview' );
-
-			if( !descriptionview ) {
-				return;
-			}
-
-			descriptionview.focus();
-		}
-	}
-} );
 
 } )( jQuery, mediaWiki, wikibase );
