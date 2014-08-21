@@ -1,0 +1,8 @@
+Verified+1: jenkins-bot
+Code-Review+2: Bene <benestar.wikimedia@gmail.com>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: Bene <benestar.wikimedia@gmail.com>
+Submitted-at: Thu, 21 Aug 2014 12:19:57 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/155180
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
