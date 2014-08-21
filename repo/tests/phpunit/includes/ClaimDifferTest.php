@@ -11,8 +11,8 @@ use Diff\OrderedListDiffer;
 use Wikibase\Claim;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimDifference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\PropertyNoValueSnak;
-use Wikibase\ReferenceList;
 use Wikibase\SnakList;
 use Wikibase\Statement;
 
