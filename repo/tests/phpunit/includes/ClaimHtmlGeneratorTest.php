@@ -7,15 +7,15 @@ use Title;
 use Wikibase\Claim;
 use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
 use Wikibase\Reference;
-use Wikibase\ReferenceList;
+use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\SnakList;
 use Wikibase\Statement;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**
  * @covers Wikibase\ClaimHtmlGenerator

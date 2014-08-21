@@ -2,9 +2,10 @@
 
 namespace Wikibase;
 
-use Diff\DiffOp\Diff\Diff;
 use Diff\Differ\Differ;
+use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use Wikibase\DataModel\ReferenceList;
 
 /**
  * Class for generating a ClaimDifference given two claims.
