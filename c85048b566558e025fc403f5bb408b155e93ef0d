@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_614ebc74",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T15:40:02Z",
+      "side": 1,
+      "message": "Ops, wrong bracket.",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_4153c01a",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T15:40:02Z",
+      "side": 1,
+      "message": "Hm. I understand what this does and why it\u0027s here. However, this looks really complicated and hard to maintain. Can we move this to a helper function, e.g. wb.utilities.ui.buildParentheses( $content ) or wb.utilities.ui.buildPendingCounterWithParentheses() or add an option to the existing function?\n\nSure, this should be done in an other patch.",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_013db8b8",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T15:40:02Z",
+      "side": 1,
+      "message": "Hm. I think we should discuss this shortly. Two points:\n* I had the impression we have a convention to use wb-... as a prefix. This will be the first exception, as far as I know. Personally I think we should stick to wb-...\n* I understand changing the \"sitelinks\" part to \"sitelinklistview\" is a very good idea because it will be the same as the JS class/file. However, is breaking compatibility really worth it? The DOM did not changed much, as far as I can see.",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_e1398ccc",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T15:40:02Z",
+      "side": 1,
+      "message": "Just wondering. I like data attributes but I wonder why it\u0027s needed now? $3 is unused in the JS code.",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_2158b434",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T15:40:02Z",
+      "side": 1,
+      "message": "As said in templates.php I think we should stick to the wb-... naming convention.",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
