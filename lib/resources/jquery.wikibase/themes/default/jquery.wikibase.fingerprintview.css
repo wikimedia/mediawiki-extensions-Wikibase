@@ -1,0 +1,83 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-fingerprintview-language {
+	width: 25%;
+	word-wrap: break-word;
+	padding-left: 10px;
+	border-left: 1px solid #C9C9C9;
+}
+
+.wikibase-fingerprintview-label,
+.wikibase-fingerprintview-description {
+	width: 75%;
+	word-wrap: break-word;
+	padding-left: 10px;
+}
+
+.wikibase-fingerprintview tr td:first-child + td + td {
+	width: 25%;
+}
+
+.wikibase-fingerprintview td {
+	border-top: 1px solid #C9C9C9;
+}
+
+.wikibase-fingerprintview td:last-child {
+	padding-left: 10px;
+}
+
+.wikibase-fingerprintview-label {
+	padding: 10px;
+}
+
+.wikibase-fingerprintview input {
+	font-family: inherit;
+	width: 100%;
+}
+
+.wikibase-fingerprintview .wikibase-descriptionview .wikibase-descriptionview-text {
+	line-height: 1.4;
+	padding-right: 0;
+}
+
+.wikibase-fingerprintview .wikibase-labelview,
+.wikibase-fingerprintview .wikibase-descriptionview {
+	display: block;
+	float: none;
+	margin-top: 0;
+	padding: 10px;
+	width: auto;
+}
+
+.wikibase-fingerprintview.wb-edit .wikibase-labelview,
+.wikibase-fingerprintview.wb-edit .wikibase-descriptionview {
+	padding: 9px 8px 9px 7px;
+}
+
+.wikibase-fingerprintview .wb-error {
+	background-color: #FFDFC9;
+}
+
+/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
+.wikibase-fingerprintview .wb-editsection {
+	width: 18em;
+	position: static; /* clear absolute positioning */
+	float: none; /* overwrite edit section's float: right */
+	padding: 0;
+	margin-left: 0; /* reset edit section's margin which is set in the toolbar group instead;
+	                applying margin to the edit section cell should not have any effect at all */
+}
+
+.wikibase-fingerprintview .wb-editsection .wikibase-toolbar {
+	width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
+}
+
+.wikibase-fingerprintview .wb-editsection .wikibase-toolbar .wikibase-toolbar {
+	margin-left: 1px; /* even out table cell's right border */
+}
+
+.wikibase-fingerprintview .wb-editsection .wikibase-toolbar .wikibase-toolbar {
+	margin-left: 0; /* do not apply margin to nested toolbar groups */
+}
