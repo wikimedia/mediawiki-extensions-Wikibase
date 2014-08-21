@@ -40,8 +40,8 @@ return call_user_func( function() {
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinksByDefault' => false,
 		'otherProjectsLinksBeta' => false,
-		// List of additional CSS class names for site links that have badges, e.g.
-		// array( 'Q101' => 'wb-badge-goldstar' ).
+		// List of additional CSS class names for site links that have badges,
+		// e.g. array( 'Q101' => 'badge-goodarticle' )
 		'badgeClassNames' => array(),
 		// Allow accessing data from other items in the parser functions and via Lua
 		'allowArbitraryDataAccess' => true,
