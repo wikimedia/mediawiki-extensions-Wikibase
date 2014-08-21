@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
