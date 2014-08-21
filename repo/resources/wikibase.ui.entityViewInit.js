@@ -19,7 +19,8 @@
 		$( '.wb-editsection:not(td)' ).remove();
 
 		// remove all infos about empty values which are displayed in non-JS
-		$( '.wb-value-empty' ).empty().removeClass( 'wb-value-empty' );
+		$( '.wb-value-empty' ).not( '.wikibase-fingerprintview td' )
+			.empty().removeClass( 'wb-value-empty' );
 
 		// Since the DOM is altered for the property edit tools to initialize properly, the
 		// following hook informs about these operations having finished.
@@ -181,10 +182,9 @@
 				'claimview',
 				'descriptionview',
 				'labelview',
+				'fingerprintview',
 				'referenceview',
-				'sitelinkview',
-				'terms-labelview',
-				'terms-descriptionview'
+				'sitelinkview'
 			],
 			removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove'],
 			movetoolbar: [
