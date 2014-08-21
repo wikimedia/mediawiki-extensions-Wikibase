@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( $, wb, QUnit ) {
+( function( wb, QUnit ) {
 'use strict';
 
 QUnit.module( 'wikibase.serialization.MultilangualUnserializer' );
@@ -36,4 +36,4 @@ QUnit.test( 'unserialize()', function( assert ) {
 	}
 } );
 
-}( jQuery, wikibase, QUnit ) );
+}( wikibase, QUnit ) );

@@ -20,6 +20,16 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 	);
 
 	// FIXME: Add tests for all components
+	$testModules['qunit']['wikibase.serialization.ClaimsUnserializer.tests'] = $moduleTemplate + array(
+		'scripts' => array(
+			'serialization.ClaimsUnserializer.tests.js',
+		),
+		'dependencies' => array(
+			'wikibase.datamodel',
+			'wikibase.serialization.ClaimsUnserializer',
+		),
+	);
+
 	$testModules['qunit']['wikibase.serialization.MultilingualUnserializer.tests'] = $moduleTemplate + array(
 		'scripts' => array(
 			'serialization.MultilingualUnserializer.tests.js',

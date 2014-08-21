@@ -15,64 +15,7 @@
 	var typeSpecificUnserializers = {};
 
 	/**
-	 * @param {Object[]} array
-	 * @return {*[]}
-	 */
-	function extractValuesFromObjectArray( array ) {
-		return $.map( array, function( valueObj ) {
-			return valueObj.value;
-		} );
-	}
-
-	/**
-	 * Helper for unserializing multilingual value.
-	 *
-	 * @param {Object} serialization
-	 * @return {Object} Map with language codes as fields
-	 */
-	function unserializeMultilingualValue( serialization ) {
-		if( !serialization ) {
-			return {};
-		}
-		var unserialized = {};
-
-		for( var lang in serialization ) {
-			unserialized[lang] = $.isArray( serialization[lang] )
-				? extractValuesFromObjectArray( serialization[lang] )
-				: serialization[lang].value;
-		}
-
-		return unserialized;
-	}
-
-	/**
-	 * Helper for unserializing an Entity's claims.
-	 *
-	 * TODO: we should probably have a ClaimList which then has its own unserializer.
-	 *
-	 * @param {Object} serialization
-	 * @return wb.datamodel.Claim[]
-	 */
-	function unserializeClaims( serialization ) {
-		var claims = [];
-
-		// get claims:
-		for( var propId in serialization || {} ) {
-			var claimsPerProp = serialization[ propId ];
-
-			for( var i in claimsPerProp ) {
-				var serializedClaim = claimsPerProp[ i ],
-					// TODO: use ClaimUnserializer here after it got implemented
-					claim = wb.datamodel.Claim.newFromJSON( serializedClaim );
-
-				claims.push( claim );
-			}
-		}
-		return claims;
-	}
-
-	/**
-	 * Unserializer for Property entities.
+	 * Unserializer for entities.
 	 *
 	 * @constructor
 	 * @extends wb.Unserializer
@@ -87,7 +30,8 @@
 		unserialize: function( serialization ) {
 			var entityType = serialization.type,
 				typeSpecificUnserializer = typeSpecificUnserializers[ entityType ],
-				multilangualUnserializer = new MODULE.MultilingualUnserializer();
+				multilangualUnserializer = new MODULE.MultilingualUnserializer(),
+				claimsUnserializer = new MODULE.ClaimsUnserializer();
 
 			if( !entityType || typeof entityType !== 'string' ) {
 				throw new Error( 'Can not determine type of Entity from serialized object' );
@@ -101,7 +45,7 @@
 				label: multilangualUnserializer.unserialize( serialization.labels ),
 				description: multilangualUnserializer.unserialize( serialization.descriptions ),
 				aliases: multilangualUnserializer.unserialize( serialization.aliases ),
-				claims: unserializeClaims( serialization.claims )
+				claims: claimsUnserializer.unserialize( serialization.claims )
 			};
 
 			// extend map with data which is specific to the entity type if there is handling for

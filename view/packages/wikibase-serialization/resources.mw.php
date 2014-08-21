@@ -51,6 +51,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ClaimsUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.ClaimsUnserializer.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
 		'wikibase.serialization.EntityUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.EntityUnserializer.js',
@@ -59,10 +70,11 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.serialization.MultilingualUnserializer',
-				'wikibase.serialization.Unserializer',
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.ClaimsUnserializer',
+				'wikibase.serialization.MultilingualUnserializer',
+				'wikibase.serialization.Unserializer',
 			),
 		),
 
@@ -71,8 +83,8 @@ return call_user_func( function() {
 				'serialization.MultilingualUnserializer.js',
 			),
 			'dependencies' => array(
-				'wikibase.serialization.Unserializer',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Unserializer',
 			),
 		),
 
