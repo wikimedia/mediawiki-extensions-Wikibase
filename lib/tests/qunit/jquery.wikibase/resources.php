@@ -72,6 +72,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.fingerprintview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.fingerprintview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.fingerprintview',
+			),
+		),
+
 		'jquery.wikibase.labelview.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.labelview.tests.js',

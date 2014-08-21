@@ -72,10 +72,11 @@ class TermBoxView {
 
 		$html .= wfTemplate( 'wb-terms-heading', $this->msg( 'wikibase-terms' ) );
 
-		$rowNumber = 0;
 		foreach ( $languageCodes as $languageCode ) {
 			$label = array_key_exists( $languageCode, $labels ) ? $labels[$languageCode] : false;
-			$description = array_key_exists( $languageCode, $descriptions ) ? $descriptions[$languageCode] : false;
+			$description = array_key_exists( $languageCode, $descriptions )
+				? $descriptions[$languageCode]
+				: false;
 
 			$editLabelSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
 				'SetLabel',
@@ -90,13 +91,19 @@ class TermBoxView {
 				$editable
 			);
 
-			$tbody .= wfTemplate( 'wb-term',
+			$tbody .= wfTemplate( 'wikibase-fingerprintview',
 				$languageCode,
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
-				htmlspecialchars( $label !== false ? $label : $this->msg( 'wikibase-label-empty' )->text() ),
-				htmlspecialchars( $description !== false ? $description : $this->msg( 'wikibase-description-empty' )->text() ),
-				$editLabelSection,
-				$editDescriptionSection,
+				htmlspecialchars( $label !== false
+					? $label
+					: $this->msg( 'wikibase-label-empty' )->text()
+				),
+				htmlspecialchars( $description !== false
+					? $description
+					: $this->msg( 'wikibase-description-empty' )->text()
+				),
+				'<td>' . $editLabelSection . '</td>',
+				'<td>' . $editDescriptionSection . '</td>',
 				$label !== false ? '' : 'wb-value-empty',
 				$description !== false ? '' : 'wb-value-empty',
 				$title->getLocalURL( array( 'setlang' => $languageCode ) )
