@@ -236,19 +236,7 @@ class JsonDumpGenerator {
 			}
 
 			try {
-				try {
-					$entity = $this->entityLookup->getEntity( $entityId );
-
-					if ( !$entity ) {
-						throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
-					}
-				} catch( MWContentSerializationException $ex ) {
-					throw new StorageException( 'Deserialization error for '
-						. $entityId->getSerialization() );
-				}
-
-				$data = $this->entitySerializer->getSerialized( $entity );
-				$json = $this->encode( $data );
+				$json = $this->generateJsonForEntityId( $entityId );
 
 				if ( $dumpCount > 0 ) {
 					$this->writeToDump( ",\n" );
@@ -260,6 +248,24 @@ class JsonDumpGenerator {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump '. $entityId );
 			}
 		}
+	}
+
+	private function generateJsonForEntityId( EntityId $entityId ) {
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
+
+			if ( !$entity ) {
+				throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
+			}
+		} catch( MWContentSerializationException $ex ) {
+			throw new StorageException( 'Deserialization error for '
+				. $entityId->getSerialization() );
+		}
+
+		$data = $this->entitySerializer->getSerialized( $entity );
+		$json = $this->encode( $data );
+
+		return $json;
 	}
 
 	private function idMatchesFilters( EntityId $entityId ) {
