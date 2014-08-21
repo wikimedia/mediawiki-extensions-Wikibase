@@ -41,7 +41,6 @@ var ItemUnserializationExpert =
 } );
 
 // register to EntityUnserializer:
-// FIXME: Modules should not register themselves.
 MODULE.EntityUnserializer.registerTypeSpecificExpert(
 	wb.datamodel.Item.TYPE,
 	ItemUnserializationExpert

@@ -5,10 +5,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 /**
- * File for Wikibase resourceloader modules.
- *
- * @since 0.2
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
@@ -26,36 +22,80 @@ return call_user_func( function() {
 	);
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__,
-		'remoteExtPath' => '../' . $remoteExtPathParts[2] . DIRECTORY_SEPARATOR . $remoteExtPathParts[3],
+		'localBasePath' => __DIR__ . DIRECTORY_SEPARATOR . 'src',
+		'remoteExtPath' => '../' . $remoteExtPathParts[2]
+			. DIRECTORY_SEPARATOR . $remoteExtPathParts[3]
+			. DIRECTORY_SEPARATOR . 'src',
 	);
 
 	$modules = array(
+
 		'wikibase.serialization' => $moduleTemplate + array(
 			'scripts' => array(
-				'src/serialization.js',
-				'src/serialization.Serializer.js',
-				'src/serialization.Unserializer.js',
-				'src/serialization.SerializerFactory.js',
+				'serialization.init.js',
 			),
 			'dependencies' => array(
-				'util.inherit',
-				'wikibase',
-			)
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.EntityUnserializer',
+				'wikibase.serialization.SerializerFactory',
+			),
 		),
 
-		'wikibase.serialization.entities' => $moduleTemplate + array(
+		'wikibase.serialization.__namespace' => $moduleTemplate + array(
 			'scripts' => array(
-				'src/serialization.EntityUnserializer.js',
-				'src/serialization.EntityUnserializer.itemExpert.js',
-				'src/serialization.EntityUnserializer.propertyExpert.js',
+				'serialization.__namespace.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+			),
+		),
+
+		'wikibase.serialization.EntityUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.EntityUnserializer.js',
+				'serialization.EntityUnserializer.itemExpert.js',
+				'serialization.EntityUnserializer.propertyExpert.js',
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.serialization',
+				'wikibase.serialization.Unserializer',
 				'wikibase.datamodel',
-			)
+				'wikibase.serialization.__namespace',
+			),
 		),
+
+		'wikibase.serialization.Serializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.Serializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization.__namespace',
+			),
+		),
+
+		'wikibase.serialization.SerializerFactory' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.SerializerFactory.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
+		'wikibase.serialization.Unserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.Unserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization.__namespace',
+			),
+		),
+
 	);
 
 	$wgResourceModules = array_merge( $wgResourceModules, $modules );

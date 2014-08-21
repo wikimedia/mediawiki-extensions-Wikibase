@@ -119,9 +119,6 @@
 		}
 	} );
 
-	// register in SerializationFactory for wb.datamodel.Entity unserialization handling:
-	MODULE.SerializerFactory.registerUnserializer( SELF, wb.datamodel.Entity );
-
 	/**
 	 * Allows to register advanced unserialization logic for a certain type of Entity. Takes the
 	 * type the additional handling is required for and a Unserializer object which has the job to
