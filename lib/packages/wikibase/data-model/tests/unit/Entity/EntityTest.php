@@ -527,7 +527,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 
 		$actual = $entity0->getDiff( $entity1 );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityDiff', $actual );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Diff\EntityDiff', $actual );
 		$this->assertSameSize( $expected, $actual );
 
 		// TODO: equality check

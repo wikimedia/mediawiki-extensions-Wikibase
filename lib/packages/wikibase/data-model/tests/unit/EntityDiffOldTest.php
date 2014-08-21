@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 
 /**
- * @covers Wikibase\DataModel\Entity\EntityDiff
+ * @covers Wikibase\DataModel\Entity\Diff\EntityDiff
  *
  * @group Wikibase
  * @group WikibaseDataModel
