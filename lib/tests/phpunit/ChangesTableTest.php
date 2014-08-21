@@ -7,8 +7,8 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Wikibase\ChangesTable;
 use Wikibase\Claim;
+use Wikibase\DataModel\Entity\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemDiff;
 use Wikibase\PropertyNoValueSnak;
 
 /**
@@ -164,4 +164,3 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	}
 
 }
-
