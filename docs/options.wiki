@@ -49,7 +49,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
 ;dataRightsUrl: Url to link to license for data contents. Defaults to $wgRightsUrl setting.
 ;dataRightsText: Text for data license link. Defaults to $wgRightsText setting.
-;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item ids pointing to their CSS class names.
+;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item ids pointing to their CSS class names, like <code>array( 'Q101' => 'wb-badge-goodarticle' )</code>. With this class name it is possible to change the icon of a specific badge.
 ;conceptBaseUri: Base URI for building concept URIs (for example used in Rdf output). This has to include the protocol and domain, only an entity identifier will be appended.
 
 === Expert Settings ===
@@ -99,7 +99,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;allowArbitraryDataAccess: switch to allow accessing abitrary items from the <tt>wikibase</tt> Scribunto module and the via the parser functions (instead of just the item which is linked to the current page). Defaults to <tt>true</tt>.
 ;propagateChangesToRepo: switch to enable or disable the propagation of client changes to the repo. Defaults to <tt>true</tt>.
 ;languageLinkSiteGroup: the ID of the site group to be shown as language links. Defaults to <tt>null</tt>, which means the site's own site group.
-;badgeClassNames: A list of additional CSS class names for site links that have badges. The array has to consist of item ids pointing to a class name, like <code>array( 'Q101' => 'wb-badge-goldstar' )</code>. Wikibase delivers two classes by default which are "wb-badge-silverstar" and "wb-badge-goldstar". Both add a star as list style image to the sitelinks.
+;badgeClassNames: A list of additional CSS class names for site links that have badges. The array has to consist of serialized item ids pointing to their CSS class names, like <code>array( 'Q101' => 'badge-goodarticle' )</code>. Note that this extension does not add any CSS to actually display the badges.
 ;otherProjectsLinks: Site global id list of sites which should be linked in the other projects sidebar section.
 ;otherProjectsLinksByDefault: Whether to show links to other projects per default. If not set, the links can be enabled as a beta feature (see otherProjectsLinksBeta).
 ;otherProjectsLinksBeta: If this is set to true links to other projects will be available as beta feature, enabling every user to turn them on/ off if wanted. (Only applies if other project links aren't enabled per default and the BetaFeatures extension is installed)
