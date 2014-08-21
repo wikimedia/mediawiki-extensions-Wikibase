@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Diff\DiffOp\Diff\Diff;
 use Diff\Differ\Differ;
+use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 
 /**
