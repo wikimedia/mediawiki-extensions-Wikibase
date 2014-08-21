@@ -76,7 +76,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 			$this->getContext(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer( $this->propertyNameFormatter, $this->detailedSnakFormatter, $this->terseSnakFormatter, $langCode ),
-			$wikibaseRepo->getSiteStore()
+			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getEntityTitleLookup()
 		);
 
 	}
