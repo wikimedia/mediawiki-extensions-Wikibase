@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_a115c442",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2014-08-21T15:30:40Z",
+      "side": 1,
+      "message": "This variable seems to be unused.",
+      "revId": "432b2db31c6e2e94e58ef267189eeac9f5170dee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
