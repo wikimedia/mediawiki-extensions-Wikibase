@@ -86,7 +86,8 @@
 		 */
 		unserialize: function( serialization ) {
 			var entityType = serialization.type,
-				typeSpecificUnserializer = typeSpecificUnserializers[ entityType ];
+				typeSpecificUnserializer = typeSpecificUnserializers[ entityType ],
+				multilangualUnserializer = new MODULE.MultilingualUnserializer();
 
 			if( !entityType || typeof entityType !== 'string' ) {
 				throw new Error( 'Can not determine type of Entity from serialized object' );
@@ -97,9 +98,9 @@
 				type: entityType,
 				id: serialization.id,
 				title: serialization.title,
-				label: unserializeMultilingualValue( serialization.labels ),
-				description: unserializeMultilingualValue( serialization.descriptions ),
-				aliases: unserializeMultilingualValue( serialization.aliases ),
+				label: multilangualUnserializer.unserialize( serialization.labels ),
+				description: multilangualUnserializer.unserialize( serialization.descriptions ),
+				aliases: multilangualUnserializer.unserialize( serialization.aliases ),
 				claims: unserializeClaims( serialization.claims )
 			};
 

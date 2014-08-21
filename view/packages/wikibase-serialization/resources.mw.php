@@ -59,8 +59,19 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
+				'wikibase.serialization.MultilingualUnserializer',
 				'wikibase.serialization.Unserializer',
 				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+			),
+		),
+
+		'wikibase.serialization.MultilingualUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.MultilingualUnserializer.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization.Unserializer',
 				'wikibase.serialization.__namespace',
 			),
 		),

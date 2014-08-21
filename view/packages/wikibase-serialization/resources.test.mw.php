@@ -13,16 +13,20 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 	);
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__,
-		'remoteExtPath' => '../' . $remoteExtPathParts[2] . DIRECTORY_SEPARATOR . $remoteExtPathParts[3],
+		'localBasePath' => __DIR__ . DIRECTORY_SEPARATOR . 'tests',
+		'remoteExtPath' => '../' . $remoteExtPathParts[2]
+			. DIRECTORY_SEPARATOR . $remoteExtPathParts[3]
+			. DIRECTORY_SEPARATOR . 'tests',
 	);
 
-	// FIXME: No tests here
-	$testModules['qunit']['wikibase.serialization.tests'] = $moduleTemplate + array(
+	// FIXME: Add tests for all components
+	$testModules['qunit']['wikibase.serialization.MultilingualUnserializer.tests'] = $moduleTemplate + array(
 		'scripts' => array(
+			'serialization.MultilingualUnserializer.tests.js',
 		),
 		'dependencies' => array(
-		)
+			'wikibase.serialization.MultilingualUnserializer',
+		),
 	);
 
 	return true;
