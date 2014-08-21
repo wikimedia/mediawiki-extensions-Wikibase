@@ -39,27 +39,27 @@ class JsonDumpGenerator {
 	/**
 	 * @var resource File handle for output
 	 */
-	protected $out;
+	private $out;
 
 	/**
 	 * @var Serializer
 	 */
-	protected $entitySerializer;
+	private $entitySerializer;
 
 	/**
 	 * @var EntityLookup
 	 */
-	protected $entityLookup;
+	private $entityLookup;
 
 	/**
 	 * @var int Total number of shards a request should be split into
 	 */
-	protected $shardingFactor = 1;
+	private $shardingFactor = 1;
 
 	/**
 	 * @var int Number of the requested shard
 	 */
-	protected $shard = 0;
+	private $shard = 0;
 
 	/**
 	 * @var bool
@@ -69,17 +69,17 @@ class JsonDumpGenerator {
 	/**
 	 * @var string|null
 	 */
-	protected $entityType = null;
+	private $entityType = null;
 
 	/**
 	 * @var MessageReporter
 	 */
-	protected $progressReporter;
+	private $progressReporter;
 
 	/**
 	 * @var ExceptionHandler
 	 */
-	protected $exceptionHandler;
+	private $exceptionHandler;
 
 	/**
 	 * @param resource $out
@@ -229,7 +229,7 @@ class JsonDumpGenerator {
 	 * @param EntityId[] $entityIds
 	 * @param int &$dumpCount The number of entities already dumped (will be updated).
 	 */
-	protected function dumpEntities( array $entityIds, &$dumpCount ) {
+	private function dumpEntities( array $entityIds, &$dumpCount ) {
 		foreach ( $entityIds as $entityId ) {
 			if ( !$this->idMatchesFilters( $entityId ) ) {
 				continue;
