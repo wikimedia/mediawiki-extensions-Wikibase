@@ -263,19 +263,17 @@ HTML;
 </table>
 HTML;
 
-// make the wb-value-row a wb-property-container to start with the edit button stuff
-// $1: language-code
-	$templates['wb-term'] =
+	$templates['wikibase-fingerprintview'] =
 <<<HTML
-<tbody>
-	<tr class="wb-terms-label wb-terms-$1">
-		<td class="wb-terms-language wb-terms-language-$1" rowspan="2"><a href="$9">$2</a><!-- language name --></td>
-		<td class="wb-terms-label wb-terms-label-$1 wb-value wb-value-lang-$1 $7">$3<!-- label --></td>
-		<td class="wb-editsection">$5<!-- label toolbar --></td>
+<tbody class="wikibase-fingerprintview wikibase-fingerprintview-$1" >
+	<tr>
+		<td class="wikibase-fingerprintview-language" rowspan="2"><a href="$9">$2</a></td>
+		<td class="wikibase-fingerprintview-label $7">$3</td>
+		<!-- wb-edisection -->$5
 	</tr>
-	<tr class="wb-terms-description wb-terms-$1">
-		<td class="wb-terms-description wb-terms-description-$1 wb-value wb-value-lang-$1 $8">$4<!-- description --></td>
-		<td class="wb-editsection">$6<!-- description toolbar --></td>
+	<tr>
+		<td class="wikibase-fingerprintview-description $8">$4</td>
+		<!-- wb-editsection -->$6
 	</tr>
 </tbody>
 HTML;
