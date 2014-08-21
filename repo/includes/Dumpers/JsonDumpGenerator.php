@@ -3,6 +3,7 @@
 namespace Wikibase\Dumpers;
 
 use InvalidArgumentException;
+use MWContentSerializationException;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityIdPager;
@@ -235,10 +236,15 @@ class JsonDumpGenerator {
 			}
 
 			try {
-				$entity = $this->entityLookup->getEntity( $entityId );
+				try {
+					$entity = $this->entityLookup->getEntity( $entityId );
 
-				if ( !$entity ) {
-					throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
+					if ( !$entity ) {
+						throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
+					}
+				} catch( MWContentSerializationException $ex ) {
+					throw new StorageException( 'Deserialization error for '
+						. $entityId->getSerialization() );
 				}
 
 				$data = $this->entitySerializer->getSerialized( $entity );
