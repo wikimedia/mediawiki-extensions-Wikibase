@@ -13,12 +13,22 @@ use Wikibase\CopyrightMessageBuilder;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class CopyrightMessageBuilderTest extends \PHPUnit_Framework_TestCase {
+class CopyrightMessageBuilderTest extends \MediaWikiTestCase {
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->setMwGlobals( array(
+			'wgContLang' => Language::factory( 'qqx' )
+		) );
+	}
 
 	/**
-	 * @dataProvider getBuildProvider
+	 * @dataProvider buildShortCopyrightWarningMessageProvider
 	 */
-	public function testBuild( $expectedKey, $expectedParams, $rightsUrl, $rightsText ) {
+	public function testBuildShortCopyrightWarningMessage( $expectedKey, $expectedParams,
+		$rightsUrl, $rightsText
+	) {
 		$language = Language::factory( 'qqx' );
 		$messageBuilder = new CopyrightMessageBuilder();
 		$message = $messageBuilder->build( $rightsUrl, $rightsText, $language );
@@ -27,13 +37,13 @@ class CopyrightMessageBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedParams, $message->getParams() );
 	}
 
-	public function getBuildProvider() {
+	public function buildShortCopyrightWarningMessageProvider() {
 		return array(
 			array(
 				'wikibase-shortcopyrightwarning',
 				array(
 					'(wikibase-save)',
-					wfMessage( 'copyrightpage' )->inContentLanguage()->text(),
+					'(copyrightpage)',
 					'[https://creativecommons.org Creative Commons Attribution-Share Alike 3.0]'
 				),
 				'https://creativecommons.org',
