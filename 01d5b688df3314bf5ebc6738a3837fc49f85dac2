@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_460bd6d9",
+        "filename": "repo/tests/phpunit/includes/View/FingerprintViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T13:35:11Z",
+      "side": 1,
+      "message": "I find it pointless to do this over and over again. I tried to split the tests in a way so that each test tests one aspect only. Now you are adding the same aspect to all tests. That\u0027s kind of the opposite of what I wanted to do here.\n\nI suggest to remove most of these new assertions. Keep only three or four in cases where the HTML is really different, e.g.:\n* isNotEditable\n* valuesAreEscaped\n* withoutEntityId",
+      "revId": "01d5b688df3314bf5ebc6738a3837fc49f85dac2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_a6127aff",
+        "filename": "repo/tests/phpunit/includes/View/ViewTestCase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T13:35:11Z",
+      "side": 1,
+      "message": "I find the name a bit to generic. What about HtmlViewTestCase, HtmlTestCase or maybe HtmlGeneratorTestCase?",
+      "revId": "01d5b688df3314bf5ebc6738a3837fc49f85dac2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
