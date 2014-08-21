@@ -249,7 +249,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @return array
 	 */
 	protected function serializeReference( $reference ) {
-		if( !is_a( $reference, '\Wikibase\Reference' ) ) {
+		if ( !( $reference instanceof Reference ) ) {
 			return $reference;
 		} else {
 			$serializerFactory = new SerializerFactory();
@@ -265,12 +265,12 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * @return Reference Reference
 	 */
 	protected function unserializeReference( $reference ) {
-		if( is_a( $reference, '\Wikibase\Reference' ) ) {
+		if ( $reference instanceof Reference ) {
 			return $reference;
 		} else {
 			unset( $reference['hash'] );
 			$serializerFactory = new SerializerFactory();
-			$unserializer = $serializerFactory->newUnserializerForClass( '\Wikibase\Reference' );
+			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Reference' );
 			return $unserializer->newFromSerialization( $reference );
 		}
 	}
