@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_e66ac27d",
+        "filename": "repo/tests/phpunit/includes/CopyrightMessageBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-21T13:21:54Z",
+      "side": 1,
+      "message": "I find this name misleading. The test is not limited to a \"short\" version. Neither is the provider.",
+      "revId": "78f32610e6dc706fc9bb65b62804d933f2f9dbb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
