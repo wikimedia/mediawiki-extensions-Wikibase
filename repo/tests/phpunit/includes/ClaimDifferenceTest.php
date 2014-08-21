@@ -6,8 +6,8 @@ use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Wikibase\ClaimDifference;
+use Wikibase\DataModel\Reference;
 use Wikibase\PropertyNoValueSnak;
-use Wikibase\Reference;
 use Wikibase\Statement;
 
 /**

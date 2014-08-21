@@ -9,10 +9,10 @@ use Wikibase\Claim;
 use Wikibase\ClaimDiffer;
 use Wikibase\Claims;
 use Wikibase\ClaimSummaryBuilder;
+use Wikibase\DataModel\Reference;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
 use Wikibase\Snak;
 use Wikibase\SnakList;
 use Wikibase\Statement;
@@ -166,4 +166,5 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
 		$this->assertEquals( $action, $summary->getActionName() );
 	}
+
 }

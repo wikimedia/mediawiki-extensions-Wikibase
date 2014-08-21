@@ -7,11 +7,11 @@ use OutOfBoundsException;
 use SiteStore;
 use Wikibase\Claim;
 use Wikibase\Claims;
+use Wikibase\DataModel\Reference;
 use Wikibase\EntityFactory;
 use Wikibase\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Property;
-use Wikibase\Reference;
 use Wikibase\Snak;
 
 /**
@@ -142,7 +142,7 @@ class SerializerFactory {
 			//TODO: support extra entity types!
 			case 'Wikibase\Snak':
 				return $this->newSnakUnserializer( $options );
-			case 'Wikibase\Reference':
+			case 'Wikibase\DataModel\Reference':
 				return $this->newReferenceUnserializer($options );
 			case 'Wikibase\Claim':
 				return $this->newClaimUnserializer( $options );
@@ -389,4 +389,5 @@ class SerializerFactory {
 
 		return $mergedOptions;
 	}
+
 }

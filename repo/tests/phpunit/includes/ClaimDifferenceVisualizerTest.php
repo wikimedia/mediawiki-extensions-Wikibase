@@ -11,12 +11,12 @@ use Wikibase\Claim;
 use Wikibase\ClaimDifference;
 use Wikibase\ClaimDifferenceVisualizer;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
 use Wikibase\SnakList;
 use Wikibase\Statement;
 
