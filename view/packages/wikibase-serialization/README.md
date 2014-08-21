@@ -21,6 +21,11 @@ version 1.0 of this package:
 
 ## Release notes
 
+### 1.2 (dev)
+
+* Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityUnserializer</code> instead.
+* Added <code>wikibase.serialization.MultilingualUnserializer</code>.
+
 ### 1.1.3 (2014-09-10)
 
 * Use new version of data-values/javascript
