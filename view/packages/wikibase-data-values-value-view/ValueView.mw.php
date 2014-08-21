@@ -21,7 +21,7 @@ $wgExtensionCredits['datavalues'][] = array(
 		'[https://www.mediawiki.org/wiki/User:Danwe Daniel Werner]',
 		'[http://www.snater.com H. Snater]',
 	),
-	'url' => 'https://www.mediawiki.org/wiki/Extension:ValueView',
+	'url' => 'https://github.com/wmde/ValueView',
 	'descriptionmsg' => 'valueview-desc',
 );
 
