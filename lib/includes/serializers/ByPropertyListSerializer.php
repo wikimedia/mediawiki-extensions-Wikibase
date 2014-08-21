@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\ByPropertyIdArray;
+use Wikibase\DataModel\ByPropertyIdArray;
 
 /**
  * Serializer for Traversable objects that need to be grouped
