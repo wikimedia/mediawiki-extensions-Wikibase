@@ -1,0 +1,9 @@
+Verified+1: jenkins-bot
+Code-Review+2: Addshore <addshorewiki@gmail.com>
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Code-Review+2: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Submitted-by: Addshore <addshorewiki@gmail.com>
+Submitted-at: Thu, 21 Aug 2014 21:31:08 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/155507
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
