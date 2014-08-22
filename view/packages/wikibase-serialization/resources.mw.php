@@ -62,6 +62,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.ClaimUnserializer',
 				'wikibase.serialization.Unserializer',
 			),
 		),
@@ -74,6 +75,9 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.ReferenceUnserializer',
+				'wikibase.serialization.SnakListUnserializer',
+				'wikibase.serialization.SnakUnserializer',
 				'wikibase.serialization.Unserializer',
 			),
 		),
@@ -125,6 +129,7 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.SnakListUnserializer',
 				'wikibase.serialization.Unserializer',
 			),
 		),
@@ -155,6 +160,21 @@ return call_user_func( function() {
 				'serialization.SnakListUnserializer.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.SnakUnserializer',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
+		'wikibase.serialization.SnakUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.SnakUnserializer.js',
+			),
+			'dependencies' => array(
+				'dataValues',
+				'dataValues.values',
 				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',

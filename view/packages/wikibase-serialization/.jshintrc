@@ -28,6 +28,7 @@
 
 	// Globals
 	"predef": [
+		"dataValues",
 		"jQuery",
 		"QUnit",
 		"util",

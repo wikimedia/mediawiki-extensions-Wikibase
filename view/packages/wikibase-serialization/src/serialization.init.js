@@ -13,6 +13,11 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.EntityIdUnserializer,
+		wb.datamodel.EntityId
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.EntityUnserializer,
 		wb.datamodel.Entity
 	);
@@ -25,6 +30,11 @@
 	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.SnakListUnserializer,
 		wb.datamodel.SnakList
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.SnakUnserializer,
+		wb.datamodel.Snak
 	);
 
 }( wikibase ) );

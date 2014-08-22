@@ -23,7 +23,7 @@ MODULE.ClaimUnserializer = util.inherit( 'WbClaimUnserializer', PARENT, {
 	 * @return {wikibase.datamodel.Claim}
 	 */
 	unserialize: function( serialization ) {
-		var mainSnak = wb.datamodel.Snak.newFromJSON( serialization.mainsnak ),
+		var mainSnak = ( new MODULE.SnakUnserializer ).unserialize( serialization.mainsnak ),
 			qualifiers = null,
 			references = [],
 			rank,

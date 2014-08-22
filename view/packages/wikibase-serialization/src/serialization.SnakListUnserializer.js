@@ -66,9 +66,12 @@ MODULE.SnakListUnserializer = util.inherit( 'WbSnakListUnserializer', PARENT, {
  * @return {wikibase.datamodel.SnakList}
  */
 function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
+	var snakUnserializer = new MODULE.SnakUnserializer();
+
 	for( var i = 0; i < serializedSnaks.length; i++ ) {
-		snakList.addSnak( wb.datamodel.Snak.newFromJSON( serializedSnaks[i] ) );
+		snakList.addSnak( snakUnserializer.unserialize( serializedSnaks[i] ) );
 	}
+
 	return snakList;
 }
 
