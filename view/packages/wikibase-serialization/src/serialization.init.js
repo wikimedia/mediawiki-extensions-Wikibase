@@ -17,4 +17,9 @@
 		wb.datamodel.Entity
 	);
 
+	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.SnakListUnserializer,
+		wb.datamodel.SnakList
+	);
+
 }( wikibase ) );

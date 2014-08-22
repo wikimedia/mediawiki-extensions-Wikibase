@@ -27,6 +27,7 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.ClaimSerializer</code>.
 * Added <code>wikibase.serialization.ClaimsUnserializer</code>.
 * Added <code>wikibase.serialization.MultilingualUnserializer</code>.
+* Added <code>wikibase.serialization.SnakListUnserializer</code>.
 
 ### 1.1.3 (2014-09-10)
 

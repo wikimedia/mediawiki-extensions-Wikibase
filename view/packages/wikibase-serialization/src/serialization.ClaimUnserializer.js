@@ -24,14 +24,14 @@ MODULE.ClaimUnserializer = util.inherit( 'WbClaimUnserializer', PARENT, {
 	 */
 	unserialize: function( serialization ) {
 		var mainSnak = wb.datamodel.Snak.newFromJSON( serialization.mainsnak ),
-			qualifiers = new wb.datamodel.SnakList(),
+			qualifiers = null,
 			references = [],
 			rank,
 			guid,
 			isStatement = serialization.type === 'statement';
 
 		if( serialization.qualifiers !== undefined ) {
-			qualifiers = wb.datamodel.SnakList.newFromJSON(
+			qualifiers = ( new wb.serialization.SnakListUnserializer() ).unserialize(
 				serialization.qualifiers,
 				serialization['qualifiers-order']
 			);
