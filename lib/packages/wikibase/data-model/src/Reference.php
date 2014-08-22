@@ -83,9 +83,8 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	 * @return boolean
 	 */
 	public function equals( $mixed ) {
-		return is_object( $mixed )
-			&& $mixed instanceof Reference
-			&& $this->getSnaks()->equals( $mixed->getSnaks() );
+		return $mixed instanceof self
+			&& $this->snaks->equals( $mixed->snaks );
 	}
 
 }
