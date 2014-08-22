@@ -12,30 +12,30 @@
 	 * Wikibase data model.
 	 *
 	 * @constructor
-	 * @since 0.4
+	 * @since 1.0
 	 */
 	var SELF = MODULE.SerializerFactory = function SerializerFactory() {};
 
 	/**
 	 * Array of arrays where the inner arrays holds two constructors. The first one the constructor
 	 * a serializer's output should be the instance of and the second one the actual serializer.
-	 * @type Array[]
+	 * @type {Array[]}
 	 */
 	var serializers = [];
 
 	/**
 	 * Array of arrays where the inner arrays holds two constructors. The first one the constructor
 	 * a unserializer's output should be the instance of and the second one the actual unserializer.
-	 * @type Array[]
+	 * @type {Array[]}
 	 */
 	var unserializers = [];
 
 	/**
 	 * Helper for building a new function for registering a factory member.
 	 *
-	 * @param {Array} store The factory's store.
+	 * @param {Array[]} store The factory's store.
 	 * @param {Function} type Constructor newly registered factory members have to be instances of.
-	 * @return Function
+	 * @return {Function}
 	 */
 	function buildRegisterFn( store, type ) {
 		return function( FactoryMember, constructor ) {
@@ -43,7 +43,8 @@
 				throw new Error( 'No constructor (function) given' );
 			}
 			if( !( ( new FactoryMember() ) instanceof type ) ) {
-				throw new Error( 'Given serializer is not an implementation of wb.serialization.Serializer' );
+				throw new Error( 'Given (un)serializer is not an implementation of '
+					+ 'wb.serialization.(Un/S)erializer' );
 			}
 
 			store.push( [
@@ -57,14 +58,15 @@
 	 * Helper for building a new function for finding the right factory member and creating a new
 	 * instance of it.
 	 *
-	 * @param {Array} store The factory's store.
+	 * @param {Array[]} store The factory's store.
 	 * @param {string} storeSubject The subject of the store, used in error message descriptions.
-	 * @return Function
+	 * @return {Function}
 	 */
 	function buildLookupFn( store, storeSubject ) {
 		return function( constructor, options ) {
 			if( !$.isFunction( constructor ) ) {
-				throw new Error( 'No proper constructor has been provided for choosing a ' + storeSubject );
+				throw new Error( 'No proper constructor has been provided for choosing a '
+					+ storeSubject );
 			}
 
 			// find constructor matching the given one and create new instance of factory member
@@ -83,17 +85,14 @@
 		 * Returns a new serializer object suitable for a given object or for a given constructor's
 		 * instances.
 		 *
-		 * @since 0.4
-		 *
 		 * @param {Object|Function} object
-		 * @param {Object} options
-		 * @return wb.serialization.Serializer
+		 * @param {Object} [options]
+		 * @return {wikibase.serialization.Serializer}
 		 */
 		newSerializerFor: ( function() {
-			// default lookup function as used by 'newUnserializerFor'
-			var lookupFn = buildLookupFn( unserializers, 'Unserializer' );
+			var lookupFn = buildLookupFn( serializers, 'Serializer' );
 
-			// build a function which will do the normal lookup but also allow for giving objects
+			// Build a function which will do the normal lookup but also allows passing and object
 			// as first parameter. In that case we have to get the object's constructor.
 			return function( object, options ) {
 				if( !object ) {
@@ -108,11 +107,9 @@
 		 * Returns a new unserializer object suitable for unserializing some data into an instance
 		 * of the given constructor.
 		 *
-		 * @since 0.4
-		 *
 		 * @param {Function} constructor
-		 * @param {Object} options
-		 * @return wb.serialization.Unserializer
+		 * @param {Object} [options]
+		 * @return {wikibase.serialization.Unserializer}
 		 */
 		newUnserializerFor: buildLookupFn( unserializers, 'Unserializer' )
 	} );
@@ -120,9 +117,7 @@
 	/**
 	 * Registers a serializer for objects of a certain given constructor.
 	 *
-	 * @since 0.4
-	 *
-	 * @param {wb.serialization.Serializer} serializer
+	 * @param {wikibase.serialization.Serializer} serializer
 	 * @param {Function} constructor
 	 */
 	SELF.registerSerializer = buildRegisterFn( serializers, MODULE.Serializer );
@@ -130,9 +125,7 @@
 	/**
 	 * Registers a unserializer for objects of a certain given constructor.
 	 *
-	 * @since 0.4
-	 *
-	 * @param {wb.serialization.Unserializer} unserializer
+	 * @param {wikibase.serialization.Unserializer} unserializer
 	 * @param {Function} constructor
 	 */
 	SELF.registerUnserializer = buildRegisterFn( unserializers, MODULE.Unserializer );
