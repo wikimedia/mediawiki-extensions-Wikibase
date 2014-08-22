@@ -35,7 +35,6 @@ Removal of `toArray` and `newFromArray`:
 Other breaking changes:
 
 * `Claim` and `Statement` no longer implement `Serializable`
-* `ClaimList::getBestClaims` got renamed to `ClaimList::getBestClaimPerProperty`
 * Protected method `Entity::entityToDiffArray` got renamed to `Entity::getDiffArray`
 * Removed `Fingerprint::getAliases`
 * Removed `EntityId::newFromPrefixedId`
