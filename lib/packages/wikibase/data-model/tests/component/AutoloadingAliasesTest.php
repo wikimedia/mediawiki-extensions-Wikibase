@@ -32,7 +32,6 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 				'Wikibase\HashableObjectStorage',
 				'Wikibase\HashArray',
 				'Wikibase\MapHasher',
-				'Wikibase\MapValueHasher',
 				'Wikibase\ByPropertyIdArray',
 				'Wikibase\Claim',
 				'Wikibase\ClaimListAccess',

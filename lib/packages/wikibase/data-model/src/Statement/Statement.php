@@ -147,7 +147,7 @@ class Statement extends Claim {
 		}
 
 		return $this->claimFieldsEqual( $target )
-			&& $this->references->equals( $target->getReferences() );
+			&& $this->references->equals( $target->references );
 	}
 
 	/**

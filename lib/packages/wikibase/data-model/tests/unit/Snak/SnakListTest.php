@@ -20,7 +20,7 @@ use Wikibase\Test\HashArray\HashArrayTest;
  * @uses Wikibase\DataModel\Snak\SnakList
  * @uses Wikibase\DataModel\HashArray
  * @uses Wikibase\DataModel\Snak\SnakObject
- * @uses Wikibase\DataModel\MapValueHasher
+ * @uses Wikibase\DataModel\Internal\MapValueHasher
  * @uses Wikibase\DataModel\Entity\EntityId
  *
  * @licence GNU GPL v2+

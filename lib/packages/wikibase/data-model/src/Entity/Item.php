@@ -333,8 +333,6 @@ class Item extends Entity {
 			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
 		}
 
-		// TODO: ensure guid is valid for entity
-
 		$this->statements[] = $claim;
 	}
 
@@ -357,8 +355,6 @@ class Item extends Entity {
 	}
 
 	/**
-	 * TODO: change to take Claim[]
-	 *
 	 * @since 0.4
 	 *
 	 * @param Claims $claims

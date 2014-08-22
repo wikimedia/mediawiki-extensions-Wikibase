@@ -4,6 +4,7 @@ namespace Wikibase\DataModel;
 
 use Hashable;
 use InvalidArgumentException;
+use Wikibase\DataModel\Internal\MapValueHasher;
 
 /**
  * Generic array object with lookups based on hashes of the elements.
@@ -205,8 +206,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * @return boolean Indicates if the element was added or not.
 	 */
 	public function addElement( Hashable $element ) {
-		// TODO: this duplicates logic of preSetElement
-		// Probably best update setElement in GenericArrayObject to return boolean it got from preSetElement
 		$append = $this->acceptDuplicates || !$this->hasElementHash( $element->getHash() );
 
 		if ( $append ) {
@@ -281,8 +280,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * The hash is purely valuer based. Order of the elements in the array is not held into account.
 	 *
 	 * @since 0.1
-	 *
-	 * @internal param MapHasher $mapHasher
 	 *
 	 * @return string
 	 */
