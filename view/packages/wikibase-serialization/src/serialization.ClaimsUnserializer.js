@@ -10,7 +10,7 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Unserializer;
 
 /**
- * Unserializer for multilingual values.
+ * Unserializer for lists of Claims.
  *
  * @constructor
  * @extends wikibase.serialization.Unserializer
@@ -23,7 +23,8 @@ MODULE.ClaimsUnserializer = util.inherit( 'WbClaimsUnserializer', PARENT, {
 	 * @return {wikibase.datamodel.Claim[]}
 	 */
 	unserialize: function( serialization ) {
-		var claims = [];
+		var claims = [],
+			claimUnserializer = new MODULE.ClaimUnserializer();
 
 		if( !serialization ) {
 			return claims;
@@ -33,11 +34,8 @@ MODULE.ClaimsUnserializer = util.inherit( 'WbClaimsUnserializer', PARENT, {
 			var claimsPerProp = serialization[propId];
 
 			for( var i = 0; i < claimsPerProp.length; i++ ) {
-				var serializedClaim = claimsPerProp[i],
-					// TODO: use ClaimUnserializer here after it got implemented
-					claim = wb.datamodel.Claim.newFromJSON( serializedClaim );
-
-				claims.push( claim );
+				var serializedClaim = claimsPerProp[i];
+				claims.push( claimUnserializer.unserialize( serializedClaim ) );
 			}
 		}
 		return claims;

@@ -31,6 +31,16 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 			),
 		),
 
+		'wikibase.serialization.ClaimUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.ClaimUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.serialization.ClaimUnserializer',
+			),
+		),
+
 		'wikibase.serialization.EntityUnserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.EntityUnserializer.tests.js',
