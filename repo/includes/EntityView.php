@@ -80,7 +80,7 @@ abstract class EntityView extends ContextSource {
 	 *
 	 * @since 0.2
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	public static $typeMap = array(
 		Item::ENTITY_TYPE => '\Wikibase\ItemView',
@@ -166,7 +166,7 @@ abstract class EntityView extends ContextSource {
 	 * Returns the placeholder map build while generating HTML.
 	 * The map returned here may be used with TextInjector.
 	 *
-	 * @return array string -> array
+	 * @return array[] string -> array
 	 */
 	public function getPlaceholders() {
 		return $this->textInjector->getMarkers();
@@ -237,10 +237,10 @@ if ( $ ) {
 	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
 	 * this does not group all the HTMl within one parent node as one entity.
 	 *
-	 * @string
-	 *
 	 * @param EntityRevision $entityRevision
 	 * @param bool $editable
+	 *
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
 	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
@@ -249,7 +249,6 @@ if ( $ ) {
 		$entity = $entityRevision->getEntity();
 
 		$html = '';
-
 		$html .= $this->getHtmlForFingerprint( $entity, $editable );
 		$html .= $this->getHtmlForToc();
 		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
@@ -267,16 +266,6 @@ if ( $ ) {
 	 */
 	protected function getHtmlForFingerprint( Entity $entity, $editable = true ) {
 		return $this->fingerprintView->getHtml( $entity->getFingerprint(), $entity->getId(), $editable );
-	}
-
-	/**
-	 * Builds and returns the HTML for the entity's claims.
-	 *
-	 * @param Enttiy $entity
-	 * @return string
-	 */
-	protected function getHtmlForClaims( Entity $entity ) {
-		return $this->claimsView->getHtml( $entity->getClaims(), 'wikibase-claims' );
 	}
 
 	/**
@@ -320,7 +309,7 @@ if ( $ ) {
 	/**
 	 * Returns the sections that should displayed in the toc.
 	 *
-	 * @return array( link target => system message key )
+	 * @return string[] array( link target => system message key )
 	 */
 	protected function getTocSections() {
 		return array();
