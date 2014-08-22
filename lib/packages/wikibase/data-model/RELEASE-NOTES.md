@@ -52,6 +52,7 @@ Other breaking changes:
 #### Additions
 
 * Added `ClaimList`
+* Added `StatementList`
 * Added `ClaimListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
 * Added `PropertyNotFoundException`
@@ -65,6 +66,7 @@ Other breaking changes:
 * Undeprecated passing an integer to `Item::setId` and `Property::setId`
 * Deprecated `Entity::setId`, `Entity::newClaim` and `Entity::getAllSnaks`
 * Deprecated `Item::getClaims` in favour of `Item::getStatements`
+* The FQN of `Statement` is now `Wikibase\DataModel\Statement\Statement`. The old FQN is deprecated.
 
 ## Version 0.9 (2014-08-15)
 
