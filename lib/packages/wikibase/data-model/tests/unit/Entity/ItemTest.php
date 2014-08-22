@@ -9,7 +9,7 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -691,7 +691,7 @@ class ItemTest extends EntityTest {
 		$item = Item::newEmpty();
 		$statement = $item->newClaim( $snak );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Claim\Statement', $statement );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
 		$this->assertEquals( $snak, $statement->getMainSnak() );
 	}
 

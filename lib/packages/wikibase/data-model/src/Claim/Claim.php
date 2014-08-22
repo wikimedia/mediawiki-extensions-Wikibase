@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * Class that represents a single Wikibase claim.

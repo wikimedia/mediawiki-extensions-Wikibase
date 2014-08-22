@@ -88,7 +88,7 @@ namespace Wikibase {
 	/**
 	 * @deprecated since 0.6, use the base class instead.
 	 */
-	class Statement extends \Wikibase\DataModel\Claim\Statement {}
+	class Statement extends DataModel\Statement\Statement {}
 	/**
 	 * @deprecated since 0.6, use the base class instead.
 	 */
@@ -163,5 +163,14 @@ namespace Wikibase\DataModel\Entity {
 	 * @deprecated since 1.0, use the base class instead.
 	 */
 	class EntityDiff extends \Wikibase\DataModel\Entity\Diff\EntityDiff {}
+
+}
+
+namespace Wikibase\DataModel\Claim {
+
+	/**
+	 * @deprecated since 1.0, use the base class instead.
+	 */
+	class Statement extends \Wikibase\DataModel\Statement\Statement {}
 
 }

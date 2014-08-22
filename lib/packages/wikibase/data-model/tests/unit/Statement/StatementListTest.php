@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -44,7 +44,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getStubStatement( $propertyId, $guid, $rank = Statement::RANK_NORMAL ) {
-		$statement = $this->getMockBuilder( 'Wikibase\DataModel\Claim\Statement' )
+		$statement = $this->getMockBuilder( 'Wikibase\DataModel\Statement\Statement' )
 			->disableOriginalConstructor()->getMock();
 
 		$statement->expects( $this->any() )

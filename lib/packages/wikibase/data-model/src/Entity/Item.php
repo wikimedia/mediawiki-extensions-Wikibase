@@ -10,7 +10,7 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\SiteLink;
@@ -341,7 +341,7 @@ class Item extends Entity {
 	/**
 	 * @since 1.0
 	 *
-	 * @return Statement[]
+	 * @return \Wikibase\DataModel\Statement\Statement[]
 	 */
 	public function getStatements() {
 		return $this->statements;

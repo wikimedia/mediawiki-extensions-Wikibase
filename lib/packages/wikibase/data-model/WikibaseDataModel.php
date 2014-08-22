@@ -38,7 +38,7 @@ class_alias( 'Wikibase\DataModel\ByPropertyIdArray', 'Wikibase\ByPropertyIdArray
 class_alias( 'Wikibase\DataModel\Claim\Claim', 'Wikibase\Claim' );
 class_alias( 'Wikibase\DataModel\Claim\ClaimListAccess', 'Wikibase\ClaimListAccess' );
 class_alias( 'Wikibase\DataModel\Claim\Claims', 'Wikibase\Claims' );
-class_alias( 'Wikibase\DataModel\Claim\Statement', 'Wikibase\Statement' );
+class_alias( 'Wikibase\DataModel\Statement\Statement', 'Wikibase\Statement' );
 class_alias( 'Wikibase\DataModel\Entity\Entity', 'Wikibase\Entity' );
 class_alias( 'Wikibase\DataModel\Entity\Item', 'Wikibase\Item' );
 class_alias( 'Wikibase\DataModel\Entity\Property', 'Wikibase\Property' );
@@ -60,3 +60,4 @@ class_alias( 'Wikibase\DataModel\LegacyIdInterpreter', 'Wikibase\DataModel\Inter
 // Aliases introduced in 1.0
 class_alias( 'Wikibase\DataModel\Entity\Diff\EntityDiff', 'Wikibase\DataModel\Entity\EntityDiff' );
 class_alias( 'Wikibase\DataModel\Entity\Diff\ItemDiff', 'Wikibase\DataModel\Entity\ItemDiff' );
+class_alias( 'Wikibase\DataModel\Statement\Statement', 'Wikibase\DataModel\Claim\Statement' );

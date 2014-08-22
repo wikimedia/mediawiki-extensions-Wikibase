@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Claim\Statement
+ * @covers Wikibase\DataModel\Statement\Statement
  *
  * @group Wikibase
  * @group WikibaseDataModel
@@ -162,7 +162,7 @@ class StatementTest extends ClaimTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetAllSnaks( Claim $claim ) {
-		/* @var Statement $statement */
+		/* @var \Wikibase\DataModel\Statement\Statement $statement */
 		$statement = $claim;
 		$snaks = $statement->getAllSnaks();
 
