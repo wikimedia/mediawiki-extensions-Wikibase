@@ -205,8 +205,6 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * @return boolean Indicates if the element was added or not.
 	 */
 	public function addElement( Hashable $element ) {
-		// TODO: this duplicates logic of preSetElement
-		// Probably best update setElement in GenericArrayObject to return boolean it got from preSetElement
 		$append = $this->acceptDuplicates || !$this->hasElementHash( $element->getHash() );
 
 		if ( $append ) {
