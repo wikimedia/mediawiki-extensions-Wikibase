@@ -51,6 +51,16 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 			),
 		),
 
+		'wikibase.serialization.Unserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.Unserializer.tests.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
 	);
 
 	$testModules['qunit'] = array_merge(

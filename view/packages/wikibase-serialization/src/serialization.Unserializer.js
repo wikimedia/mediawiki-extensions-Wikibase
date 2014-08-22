@@ -14,7 +14,7 @@
 	 *
 	 * @constructor
 	 * @abstract
-	 * @since 0.4
+	 * @since 1.0
 	 */
 	var SELF = MODULE.Unserializer = function WbUnserializer( options ) {
 		if( options ) {
@@ -26,37 +26,35 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type Object
+		 * @type {Object}
 		 */
 		_options: null,
 
 		/**
 		 * Constructs the original object from the provided serialization.
 		 *
-		 * @since 0.4
-		 *
 		 * @param {Object} serialization
 		 */
 		unserialize: util.abstractFunction,
 
 		/**
-		 * Sets the unserializer's options without just keeping a reference to the given object.
+		 * Sets the unserializer's options.
 		 *
-		 * @since 0.4
+		 * @param {Object} options
 		 *
-		 * @param options
+		 * @throws {Error} if options are not an object.
 		 */
 		setOptions: function( options ) {
+			if( !$.isPlainObject( options ) ) {
+				throw new Error( 'Options need to be an object' );
+			}
 			this._options = $.extend( {}, options );
 		},
 
 		/**
-		 * Returns the unserializer's options. Changing the returned object will have no affect on the
-		 * unserializer's actual options until they are set via setOptions.
+		 * Returns the unserializer's options.
 		 *
-		 * @since 0.4
-		 *
-		 * @return Object
+		 * @return {Object}
 		 */
 		getOptions: function() {
 			return $.extend( {}, this._options );
