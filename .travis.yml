@@ -8,8 +8,6 @@ matrix:
   include:
     - env: DBTYPE=mysql LANG=de; MW=master WB=client
       php: 5.3
-    - env: DBTYPE=sqlite LANG=de; MW=master WB=repo
-      php: 5.3
     - env: DBTYPE=sqlite LANG=ar; MW=master WB=both
       php: 5.3
     - env: DBTYPE=sqlite LANG=ru; MW=master WB=both
