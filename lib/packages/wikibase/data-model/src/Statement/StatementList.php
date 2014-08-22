@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Statement;
 use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
