@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel\Snak;
 
 use Wikibase\DataModel\HashArray;
-use Wikibase\DataModel\MapValueHasher;
+use Wikibase\DataModel\Internal\MapValueHasher;
 
 /**
  * Implementation of the Snaks interface.
