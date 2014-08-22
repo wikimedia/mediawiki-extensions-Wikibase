@@ -297,21 +297,23 @@
 			var group = $( this ).data( 'wb-sitelinks-group' ),
 				groupSiteIds = [],
 				$sitesCounterContainer = $( '<span/>' ),
-				siteLinks = entity.getSiteLinks(),
+				siteLinks = {},
 				siteLinksOfGroup = [];
 
 			$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
 				groupSiteIds.push( siteId );
 			} );
 
-			for( var i = 0; i < siteIdsOfGroup.length; i++ ) {
-				for( var j = 0; j < siteLinks.length; j++ ) {
-					if( siteLinks[j].getSiteId() === siteIdsOfGroup[i] ) {
-						siteLinksOfGroup.push( siteLinks[j] );
-						break;
-					}
+			$.each( entity.getSiteLinks(), function( i, siteLink ) {
+				siteLinks[siteLink.getSiteId()] = siteLink;
+			} );
+
+			$.each( siteIdsOfGroup, function( i, siteId ) {
+				var siteLink = siteLinks[siteId];
+				if ( siteLink ) {
+					siteLinksOfGroup.push( siteLink );
 				}
-			}
+			} );
 
 			$( this ).prev().append( $sitesCounterContainer );
 
