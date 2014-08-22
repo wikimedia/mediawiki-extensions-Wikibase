@@ -7,20 +7,20 @@ use Revision;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityContentFactory;
-use Wikibase\EntityId;
 use Wikibase\EntityPerPageTable;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 
 /**
  * @covers Wikibase\Repo\Store\WikiPageEntityStore

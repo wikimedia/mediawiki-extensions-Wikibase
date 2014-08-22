@@ -9,9 +9,9 @@ use Site;
 use SiteStore;
 use Title;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\EntityId;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 
@@ -112,4 +112,5 @@ class MessageParameterFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		return $mock;
 	}
+
 }

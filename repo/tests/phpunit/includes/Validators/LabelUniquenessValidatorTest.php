@@ -3,13 +3,13 @@
 namespace Wikibase\Test\Validators;
 
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\EntityId;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Test\ChangeOpTestMockProvider;
 use Wikibase\Validators\LabelUniquenessValidator;
