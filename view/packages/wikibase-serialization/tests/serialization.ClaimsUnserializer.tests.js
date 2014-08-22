@@ -11,114 +11,58 @@ QUnit.module( 'wikibase.serialization.ClaimsUnserializer' );
 var testCases = [
 	[
 		{
-			P1234: [
-				{
-					id: 'Q1234$5678',
-					mainsnak: {
-						snaktype: 'novalue',
-						property: 'P1234'
-					},
-					type: 'claim',
-					rank: 'normal'
-				}
-			]
+			P1: [{
+				id: 'Q1$1',
+				mainsnak: {
+					snaktype: 'novalue',
+					property: 'P1'
+				},
+				type: 'claim'
+			} ]
 		},
-		[new wb.datamodel.Claim.newFromJSON( {
-			id: 'Q1234$5678',
-			mainsnak: {
-				snaktype: 'novalue',
-				property: 'P1234'
-			},
-			type: 'claim',
-			rank: 'normal'
-		} )]
+		[new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' )]
 	], [
 		{
-			P1234: [
+			P1: [
 				{
-					id: 'Q1234$5678',
+					id: 'Q1$1',
 					mainsnak: {
 						snaktype: 'novalue',
-						property: 'P1234'
+						property: 'P1'
 					},
-					type: 'claim',
-					rank: 'normal'
+					type: 'claim'
 				}, {
-					id: 'Q1234$1234',
+					id: 'Q1$2',
 					mainsnak: {
-						snaktype: 'somevalue',
-						property: 'P1234'
+						snaktype: 'novalue',
+						property: 'P1'
 					},
-					type: 'claim',
-					rank: 'normal'
+					type: 'claim'
 				}
 			],
-			P5678: [{
-				id: 'Q1234$9101112',
+			P2: [{
+				id: 'Q2$1',
 				mainsnak: {
-					snaktype: 'value',
-					property: 'P5678',
-					datavalue: {
-						value: 'some string',
-						type: 'string'
-					}
+					snaktype: 'novalue',
+					property: 'P2'
 				},
-				type: 'statement',
-				rank: 'normal'
+				type: 'claim'
 			}],
-			P9874: [{
-				id: 'Q5678$5678',
+			P3: [{
+				id: 'Q3$1',
 				mainsnak: {
-					snaktype: 'somevalue',
-					property: 'P9874'
+					snaktype: 'novalue',
+					property: 'P3'
 				},
-				type: 'claim',
-				rank: 'preferred'
+				type: 'claim'
 			}]
 		},
 		[
-			new wb.datamodel.Claim.newFromJSON( {
-				id: 'Q1234$5678',
-				mainsnak: {
-					snaktype: 'novalue',
-					property: 'P1234'
-				},
-				type: 'claim',
-				rank: 'normal'
-			} ),
-			new wb.datamodel.Claim.newFromJSON( {
-				id: 'Q1234$1234',
-				mainsnak: {
-					snaktype: 'somevalue',
-					property: 'P1234'
-				},
-				type: 'claim',
-				rank: 'normal'
-			} ),
-			new wb.datamodel.Claim.newFromJSON( {
-				id: 'Q1234$9101112',
-				mainsnak: {
-					snaktype: 'value',
-					property: 'P5678',
-					datavalue: {
-						value: 'some string',
-						type: 'string'
-					}
-				},
-				type: 'statement',
-				rank: 'normal'
-			} ),
-			new wb.datamodel.Claim.newFromJSON( {
-				id: 'Q5678$5678',
-				mainsnak: {
-					snaktype: 'somevalue',
-					property: 'P9874'
-				},
-				type: 'claim',
-				rank: 'preferred'
-			} )
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' ),
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$2' ),
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ), null, 'Q2$1' ),
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ), null, 'Q3$1' )
 		]
-
 	]
 ];
 
