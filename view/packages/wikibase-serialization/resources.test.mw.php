@@ -20,24 +20,44 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 	);
 
 	// FIXME: Add tests for all components
-	$testModules['qunit']['wikibase.serialization.ClaimsUnserializer.tests'] = $moduleTemplate + array(
-		'scripts' => array(
-			'serialization.ClaimsUnserializer.tests.js',
+	$modules = array(
+
+		'wikibase.serialization.ClaimsUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.ClaimsUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.serialization.ClaimsUnserializer',
+			),
 		),
-		'dependencies' => array(
-			'wikibase.datamodel',
-			'wikibase.serialization.ClaimsUnserializer',
+
+		'wikibase.serialization.MultilingualUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.MultilingualUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.serialization.MultilingualUnserializer',
+			),
 		),
+
+		'wikibase.serialization.Serializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.Serializer.tests.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.serialization.Serializer',
+			),
+		),
+
 	);
 
-	$testModules['qunit']['wikibase.serialization.MultilingualUnserializer.tests'] = $moduleTemplate + array(
-		'scripts' => array(
-			'serialization.MultilingualUnserializer.tests.js',
-		),
-		'dependencies' => array(
-			'wikibase.serialization.MultilingualUnserializer',
-		),
+	$testModules['qunit'] = array_merge(
+		$testModules['qunit'],
+		$modules
 	);
+
 
 	return true;
 };

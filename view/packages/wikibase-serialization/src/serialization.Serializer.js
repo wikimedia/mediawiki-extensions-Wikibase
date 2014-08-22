@@ -10,11 +10,11 @@
 	/**
 	 * Base for serializers.
 	 *
-	 * @param {Object} options
+	 * @param {Object} [options]
 	 *
 	 * @constructor
 	 * @abstract
-	 * @since 0.4
+	 * @since 1.0
 	 */
 	var SELF = MODULE.Serializer = function WbSerializer( options ) {
 		if( options ) {
@@ -26,37 +26,35 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type Object
+		 * @type {Object}
 		 */
 		_options: null,
 
 		/**
 		 * Returns the serialized form of some object.
 		 *
-		 * @since 0.4
-		 *
 		 * @param {Object} object
 		 */
 		serialize: util.abstractFunction,
 
 		/**
-		 * Sets the serializer's options without just keeping a reference to the given object.
+		 * Sets the serializer's options.
 		 *
-		 * @since 0.4
+		 * @param {Object} options
 		 *
-		 * @param options
+		 * @throws {Error} if options are not an object.
 		 */
 		setOptions: function( options ) {
+			if( !$.isPlainObject( options ) ) {
+				throw new Error( 'Options need to be an object' );
+			}
 			this._options = $.extend( {}, options );
 		},
 
 		/**
-		 * Returns the serializer's options. Changing the returned object will have no affect on the
-		 * serializer's actual options until they are set via setOptions.
+		 * Returns the serializer's options.
 		 *
-		 * @since 0.4
-		 *
-		 * @return Object
+		 * @return {Object}
 		 */
 		getOptions: function() {
 			return $.extend( {}, this._options );
