@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_87b775d3",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-08-22T06:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e322bf2_614ebc74",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_4153c01a",
         "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
         "patchSetId": 25
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-21T15:40:02Z",
       "side": 1,
       "message": "Hm. I understand what this does and why it\u0027s here. However, this looks really complicated and hard to maintain. Can we move this to a helper function, e.g. wb.utilities.ui.buildParentheses( $content ) or wb.utilities.ui.buildPendingCounterWithParentheses() or add an option to the existing function?\n\nSure, this should be done in an other patch.",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_67ac8985",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-08-22T06:50:36Z",
+      "side": 1,
+      "message": "The logic is simply copied over from wikibase.ui.PropertyEditTool.js. It should definitely be factored out but I did not want to do it in that change to see where whole the refactoring ends up first. wikibase.utilities gets cut down significantly in subsequent changes.",
+      "parentUuid": "4e322bf2_4153c01a",
       "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -64,6 +100,24 @@
       "writtenOn": "2014-08-21T15:40:02Z",
       "side": 1,
       "message": "Just wondering. I like data attributes but I wonder why it\u0027s needed now? $3 is unused in the JS code.",
+      "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_47b18ddb",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 25
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-08-22T06:50:36Z",
+      "side": 1,
+      "message": "That was Tobi\u0027s personal wish. Take a look at the following change...",
+      "parentUuid": "4e322bf2_e1398ccc",
       "revId": "c85048b566558e025fc403f5bb408b155e93ef0d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
