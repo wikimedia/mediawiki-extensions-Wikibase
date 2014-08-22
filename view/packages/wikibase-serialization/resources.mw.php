@@ -39,6 +39,7 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.ClaimUnserializer',
 				'wikibase.serialization.EntityUnserializer',
+				'wikibase.serialization.ReferenceUnserializer',
 				'wikibase.serialization.SerializerFactory',
 				'wikibase.serialization.SnakListUnserializer',
 			),
@@ -99,6 +100,18 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
+		'wikibase.serialization.ReferenceUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.ReferenceUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel',
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.Unserializer',
 			),

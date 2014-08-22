@@ -31,17 +31,16 @@ MODULE.ClaimUnserializer = util.inherit( 'WbClaimUnserializer', PARENT, {
 			isStatement = serialization.type === 'statement';
 
 		if( serialization.qualifiers !== undefined ) {
-			qualifiers = ( new wb.serialization.SnakListUnserializer() ).unserialize(
+			qualifiers = ( new MODULE.SnakListUnserializer() ).unserialize(
 				serialization.qualifiers,
 				serialization['qualifiers-order']
 			);
 		}
 
 		if( isStatement && serialization.references !== undefined ) {
+			var referenceUnserializer = new MODULE.ReferenceUnserializer();
 			for( var i = 0; i < serialization.references.length; i++ ) {
-				references.push(
-					wb.datamodel.Reference.newFromJSON( serialization.references[i] )
-				);
+				references.push( referenceUnserializer.unserialize( serialization.references[i] ) );
 			}
 		}
 

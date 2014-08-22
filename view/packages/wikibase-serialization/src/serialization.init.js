@@ -18,6 +18,11 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.ReferenceUnserializer,
+		wb.datamodel.SnakList
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.SnakListUnserializer,
 		wb.datamodel.SnakList
 	);
