@@ -41,6 +41,7 @@
 			var entityMapData = {
 				type: entityType,
 				id: serialization.id,
+				// TODO: Remove title since it is not part of native serialization format
 				title: serialization.title,
 				label: multilangualUnserializer.unserialize( serialization.labels ),
 				description: multilangualUnserializer.unserialize( serialization.descriptions ),

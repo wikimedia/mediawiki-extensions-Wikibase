@@ -19,7 +19,6 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 			. DIRECTORY_SEPARATOR . 'tests',
 	);
 
-	// FIXME: Add tests for all components
 	$modules = array(
 
 		'wikibase.serialization.ClaimsUnserializer.tests' => $moduleTemplate + array(
@@ -29,6 +28,16 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 			'dependencies' => array(
 				'wikibase.datamodel',
 				'wikibase.serialization.ClaimsUnserializer',
+			),
+		),
+
+		'wikibase.serialization.EntityUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.EntityUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.serialization.EntityUnserializer',
 			),
 		),
 
