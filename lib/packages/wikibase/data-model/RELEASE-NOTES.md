@@ -49,6 +49,8 @@ Other breaking changes:
 * `SiteLinkList::addNewSiteLink` no longer returns a `SiteLinkList` instance
 * Removed the global variable `evilDataValueMap`
 * Removed `ClaimAggregate` interface, which is thus no longer implemented by `Entity`
+* `HashableObjectStorage::getValueHash` no longer accepts a first optional parameter
+* `MapHasher` and `MapValueHasher` are now package private
 
 #### Additions
 

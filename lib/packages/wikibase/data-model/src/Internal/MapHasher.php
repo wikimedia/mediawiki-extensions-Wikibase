@@ -1,14 +1,12 @@
 <?php
 
-namespace Wikibase\DataModel;
+namespace Wikibase\DataModel\Internal;
 
 use Traversable;
 
 /**
  * Interface for objects that can hash a map (ie associative array).
  * Elements must implement Hashable.
- *
- * TODO: might want to make this internal to DataModel.
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

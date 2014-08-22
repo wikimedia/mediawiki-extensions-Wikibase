@@ -3,11 +3,11 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\MapValueHasher;
+use Wikibase\DataModel\Internal\MapValueHasher;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\DataModel\MapValueHasher
+ * @covers Wikibase\DataModel\Internal\MapValueHasher
  *
  * @group Wikibase
  * @group WikibaseDataModel

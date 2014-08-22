@@ -61,12 +61,7 @@ namespace Wikibase {
 	/**
 	 * @deprecated since 0.6, use the base class instead.
 	 */
-	interface MapHasher extends \Wikibase\DataModel\MapHasher {}
-
-	/**
-	 * @deprecated since 0.6, use the base class instead.
-	 */
-	class MapValueHasher extends \Wikibase\DataModel\MapValueHasher {}
+	interface MapHasher extends DataModel\Internal\MapHasher {}
 
 	/**
 	 * @deprecated since 0.6, use the base class instead.
