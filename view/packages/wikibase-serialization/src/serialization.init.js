@@ -8,6 +8,11 @@
 	var MODULE = wb.serialization;
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.ClaimUnserializer,
+		wb.datamodel.Claim
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.EntityUnserializer,
 		wb.datamodel.Entity
 	);
