@@ -110,9 +110,8 @@ class EntityId implements Comparable, Serializable {
 	 * @return boolean
 	 */
 	public function equals( $target ) {
-		return $target instanceof EntityId
-			&& $target->getSerialization() === $this->serialization
-			&& $target->getEntityType() === $this->entityType;
+		return $target instanceof self
+			&& $target->serialization === $this->serialization;
 	}
 
 	/**
