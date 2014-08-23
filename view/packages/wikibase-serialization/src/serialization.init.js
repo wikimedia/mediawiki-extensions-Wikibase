@@ -10,6 +10,11 @@
 	// Register serializers:
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.ClaimSerializer,
+		wb.datamodel.Claim
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.ReferenceSerializer,
 		wb.datamodel.Reference
 	);

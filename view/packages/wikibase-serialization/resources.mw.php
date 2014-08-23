@@ -67,6 +67,20 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ClaimSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.ClaimSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.SnakListSerializer',
+				'wikibase.serialization.SnakSerializer',
+			),
+		),
+
 		'wikibase.serialization.ClaimUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.ClaimUnserializer.js',

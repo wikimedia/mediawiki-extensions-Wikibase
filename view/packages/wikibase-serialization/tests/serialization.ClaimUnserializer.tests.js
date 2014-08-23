@@ -77,11 +77,11 @@ var testSets = [
 ];
 
 QUnit.test( 'unserialize()', function( assert ) {
-	var claimUnserailizer = new wb.serialization.ClaimUnserializer();
+	var claimUnserializer = new wb.serialization.ClaimUnserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
-			claimUnserailizer.unserialize( testSets[i][0] ).equals( testSets[i][1] ),
+			claimUnserializer.unserialize( testSets[i][0] ).equals( testSets[i][1] ),
 			'Test set #' + i + ': Unserializing successful.'
 		);
 	}
