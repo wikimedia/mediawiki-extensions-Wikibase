@@ -8,19 +8,19 @@ use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\ReferencedUrlFinder;
+use Wikibase\ReferencedImageFinder;
 use Wikibase\Snak;
 
 /**
- * @covers Wikibase\ReferencedUrlFinder
+ * @covers Wikibase\ReferencedImageFinderTest
  *
  * @group Wikibase
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
- * @author Daniel Kinzler
+ * @license GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ReferencedUrlFinderTest extends \MediaWikiTestCase {
+class ReferencedImageFinderTest extends \MediaWikiTestCase {
 
 	public function snaksProvider() {
 		$argLists = array();
@@ -41,12 +41,12 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 			array() );
 
 		$argLists["PropertyValueSnak with string value"] = array(
-			array( new PropertyValueSnak( $p23, new StringValue( 'not an url' )  ) ),
+			array( new PropertyValueSnak( $p23, new StringValue( 'not a file' )  ) ),
 			array() );
 
-		$argLists["PropertyValueSnak with url"] = array(
-			array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ),
-			array( 'http://acme.com/test' ) );
+		$argLists["PropertyValueSnak with image"] = array(
+			array( new PropertyValueSnak( $p42, new StringValue( 'File:Image.jpg' ) ) ),
+			array( 'File:Image.jpg' ) );
 
 		return $argLists;
 	}
@@ -63,22 +63,22 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeLookup->setDataTypeForProperty( $p23, 'string' );
-		$dataTypeLookup->setDataTypeForProperty( $p42, 'url' );
+		$dataTypeLookup->setDataTypeForProperty( $p42, 'commonsMedia' );
 
-		$linkFinder = new ReferencedUrlFinder( $dataTypeLookup );
-		$actual = $linkFinder->findFromSnaks( $snaks );
+		$imageFinder = new ReferencedImageFinder( $dataTypeLookup );
+		$actual = $imageFinder->findFromSnaks( $snaks );
 
 		$this->assertArrayEquals( $expected, $actual ); // assertArrayEquals doesn't take a message :(
 	}
 
 	public function testFindFromSnaksForUnknownProperty() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$linkFinder = new ReferencedUrlFinder( $dataTypeLookup );
+		$imageFinder = new ReferencedImageFinder( $dataTypeLookup );
 
 		$p42 = new PropertyId( 'p42' );
-		$snaks = array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' )  ) );
+		$snaks = array( new PropertyValueSnak( $p42, new StringValue( '!nyan' )  ) );
 
-		$actual = $linkFinder->findFromSnaks( $snaks );
+		$actual = $imageFinder->findFromSnaks( $snaks );
 		$this->assertEmpty( $actual ); // since $p42 isn't know, this should return nothing
 	}
 
