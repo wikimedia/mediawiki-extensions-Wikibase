@@ -54,6 +54,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ClaimsSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.ClaimsSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.ClaimSerializer',
+				'wikibase.serialization.Serializer',
+			),
+		),
+
 		'wikibase.serialization.ClaimsUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.ClaimsUnserializer.js',
