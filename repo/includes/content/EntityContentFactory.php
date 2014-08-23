@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Content;
 
 use ContentHandler;
 use MWException;
@@ -9,8 +9,11 @@ use Revision;
 use Status;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**
  * Factory for EntityContent objects.

@@ -1,9 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store;
 
 use Status;
 use User;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Service interface for checking a user's permissions on a given entity.

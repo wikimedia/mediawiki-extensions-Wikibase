@@ -33,7 +33,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetEntityContentFactoryReturnType() {
 		$returnValue = $this->getDefaultInstance()->getEntityContentFactory();
-		$this->assertInstanceOf( 'Wikibase\EntityContentFactory', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\Repo\Content\EntityContentFactory', $returnValue );
 	}
 
 	public function testGetEntityTitleLookupReturnType() {

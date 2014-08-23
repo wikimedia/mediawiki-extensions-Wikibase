@@ -21,7 +21,6 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityContentFactory;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
@@ -53,12 +52,14 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
 use Wikibase\PropertyHandler;
 use Wikibase\ReferencedEntitiesFinder;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\DummyChangeTransmitter;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\SnakFactory;
@@ -622,7 +623,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return \Wikibase\EntityPermissionChecker
+	 * @return EntityPermissionChecker
 	 */
 	public function getEntityPermissionChecker() {
 		return $this->getEntityContentFactory();
