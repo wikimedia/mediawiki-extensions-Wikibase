@@ -37,7 +37,6 @@
 	"wikibase-linkitem-not-loggedin": "Et kasutada seda funktsiooni, pead olema sisse loginud siia vikisse ja [$1 kesksesse andmehoidlasse].",
 	"wikibase-linkitem-success-link": "Leheküljed on edukalt ühendatud. Linke sisaldava üksuse leiad [$1 kesksest andmehoidlast].",
 	"wikibase-property-notfound": "Omadust $1 ei leitud.",
-	"wikibase-property-notsupportedyet": "Vikibaas ei toeta veel omadusele $1 vastavat omaduse tüüpi.",
 	"wikibase-rc-hide-wikidata": "Vikiandmed ($1)",
 	"wikibase-rc-hide-wikidata-hide": "peida",
 	"wikibase-rc-hide-wikidata-show": "näita",
@@ -45,6 +44,7 @@
 	"wikibase-rc-wikibase-edit-letter": "A",
 	"wikibase-rc-wikibase-edit-title": "Vikiandmete muudatus",
 	"wikibase-watchlist-show-changes-pref": "Näita jälgimisloendis Vikiandmete muudatusi",
+	"wikibase-error-serialize-error": "Andmete jadastamine ebaõnnestus.",
 	"wikibase-error-invalid-entity-id": "Sisestatud identifikaator on süsteemis tundmatu. Palun sisesta sobiv olemi identifikaator.",
 	"special-unconnectedpages": "Üksustega ühendamata leheküljed",
 	"wikibase-unconnectedpages-legend": "Ühendamata lehekülgede sätted",
@@ -57,5 +57,7 @@
 	"wikibase-pageinfo-entity-id": "Vikiandmete üksuse identifikaator",
 	"wikibase-pageinfo-entity-id-none": "Puudub",
 	"wikibase-property-render-error": "Omaduse $1 viimistlemine ebaõnnestus: $2",
-	"wikibase-otherprojects": "Teised projektid"
+	"wikibase-otherprojects": "Teistes projektides",
+	"wikibase-otherprojects-beta-message": "Teiste projektide külgriba",
+	"wikibase-otherprojects-beta-description": "Lisab külgribale alaosa \"{{int:wikibase-otherprojects}}\", mis sisaldab Vikiandmetest pärit linke teistesse Wikimedia projektidesse."
 }

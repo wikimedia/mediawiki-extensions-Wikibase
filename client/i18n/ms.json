@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Anakmalaysia",
-			"Aurora"
+			"Aurora",
+			"Aviator"
 		]
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
@@ -30,14 +31,13 @@
 	"wikibase-linkitem-linkpage": "Pautkan dengan halaman",
 	"wikibase-linkitem-selectlink": "Sila pilih tapak dan halaman yang mana ingin anda pautkan halaman ini.",
 	"wikibase-linkitem-input-site": "Bahasa:",
-	"wikibase-linkitem-input-page": "Halaman:",
+	"wikibase-linkitem-input-page": "Laman:",
 	"wikibase-linkitem-confirmitem-text": "Halaman yang telah anda pilih itu sudah dipautkan dengan satu [$1 perkara di repositori pusat kami]. Sila sahkan bahawa {{PLURAL:$2|halaman|halaman-halaman}} yang ditunjukkan seperti berikut adalah yang ingin anda pautkan dengan halaman ini.",
 	"wikibase-linkitem-confirmitem-button": "Sahkan",
 	"wikibase-linkitem-not-loggedin-title": "Anda perlu log masuk",
 	"wikibase-linkitem-not-loggedin": "Anda perlu log masuk ke dalam wiki ini dan juga ke dalam [$1 repositori data pusat] untuk menggunakan ciri ini.",
 	"wikibase-linkitem-success-link": "Halaman-halaman ini telah berjaya dipautkan. Anda boleh mendapati perkara yang mengandungi pautan-pautannya di dalam [$1 repositori data pusat] kami.",
 	"wikibase-property-notfound": "Sifat $1 tidak dijumpai.",
-	"wikibase-property-notsupportedyet": "Wikibase belum menyokong jenis sifat $1.",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
 	"wikibase-rc-show-wikidata-pref": "Paparkan suntingan Wikidata dalam perubahan terkini",
 	"wikibase-watchlist-show-changes-pref": "Paparkan suntingan Wikidata dalam senarai pantau anda",
