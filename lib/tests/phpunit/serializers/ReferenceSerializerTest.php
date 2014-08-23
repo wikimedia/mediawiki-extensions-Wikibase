@@ -3,13 +3,13 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use Wikibase\DataModel\Reference;
 use Wikibase\Lib\Serializers\ReferenceSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
 use Wikibase\PropertyValueSnak;
-use Wikibase\Reference;
 use Wikibase\SnakList;
 
 /**

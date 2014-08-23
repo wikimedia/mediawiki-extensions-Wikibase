@@ -3,12 +3,12 @@
 namespace Wikibase\Lib\Test\Serializers;
 
 use Wikibase\Claim;
+use Wikibase\DataModel\Reference;
 use Wikibase\Item;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Property;
 use Wikibase\PropertyNoValueSnak;
-use Wikibase\Reference;
 
 /**
  * @covers Wikibase\Lib\Serializers\SerializerFactory
