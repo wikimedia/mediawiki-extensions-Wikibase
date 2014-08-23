@@ -25,6 +25,11 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.SiteLinkSerializer,
+		wb.datamodel.SiteLink
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.SnakListSerializer,
 		wb.datamodel.SnakList
 	);
