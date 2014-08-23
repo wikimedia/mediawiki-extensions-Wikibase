@@ -69,7 +69,7 @@ class CreateRedirectModuleTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( 'Wikibase\EntityPermissionChecker' );
+		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )

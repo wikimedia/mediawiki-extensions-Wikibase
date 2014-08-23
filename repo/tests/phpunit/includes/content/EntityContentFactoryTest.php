@@ -2,15 +2,15 @@
 
 namespace Wikibase\Test;
 
+use ContentHandler;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityContentFactory;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
-use ContentHandler;
 
 /**
  * @covers Wikibase\EntityContentFactory

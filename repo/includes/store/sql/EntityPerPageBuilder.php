@@ -1,9 +1,10 @@
 <?php
 namespace Wikibase;
 
-use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\Reporting\MessageReporter;
+use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
  * Utility class for rebuilding the wb_entity_per_page table.
