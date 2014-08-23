@@ -194,6 +194,7 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 			$mockRepo->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P23', 'string' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P42', 'url' ) );
+			$mockRepo->putEntity( $this->makeProperty( 'P43', 'commonsMedia' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
 
 			self::$mockRepo = $mockRepo;
@@ -406,7 +407,7 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 	 * @param Claim[] $claims
 	 * @param string[] $expectedLinks
 	 */
-	public function testParserOutputExternalLinks( array $claims, $expectedLinks ) {
+	public function testParserOutputExternalLinks( array $claims, array $expectedLinks ) {
 		$entityRevision = $this->newEntityRevisionForClaims( $claims );
 		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
 
@@ -447,6 +448,57 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		$argLists["PropertyValueSnak with URL"] = array(
 			array( $this->makeClaim( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ) ),
 			array( 'http://acme.com/test' ) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider getParserOutputImageLinksProvider
+	 *
+	 * @param Claim[] $claims
+	 * @param string[] $expectedImages
+	 */
+	public function testGetParserOutputImageLinks( array $claims, array $expectedImages ) {
+		$entityRevision = $this->newEntityRevisionForClaims( $claims );
+		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
+
+		$out = $entityView->getParserOutput( $entityRevision, true, false );
+		$images = $out->getImages();
+
+		$expectedImages = array_values( $expectedImages );
+		sort( $expectedImages );
+
+		$images = array_keys( $images );
+		sort( $images );
+
+		$this->assertEquals( $expectedImages, $images );
+	}
+
+	public function getParserOutputImageLinksProvider() {
+		$argLists = array();
+
+		$p23 = new PropertyId( 'P23' );
+		$p43 = new PropertyId( 'P43' );
+
+		$argLists["empty"] = array(
+			array(),
+			array() );
+
+		$argLists["PropertyNoValueSnak"] = array(
+			array( $this->makeClaim( new PropertyNoValueSnak( $p43 ) ) ),
+			array());
+
+		$argLists["PropertySomeValueSnak"] = array(
+			array( $this->makeClaim( new PropertySomeValueSnak( $p43 ) ) ),
+			array() );
+
+		$argLists["PropertyValueSnak with string value"] = array(
+			array( $this->makeClaim( new PropertyValueSnak( $p23, new StringValue( 'not an image' )  ) ) ),
+			array() );
+
+		$argLists["PropertyValueSnak with URL"] = array(
+			array( $this->makeClaim( new PropertyValueSnak( $p43, new StringValue( 'File:Image.jpg' ) ) ) ),
+			array( 'File:Image.jpg' ) );
 
 		return $argLists;
 	}
