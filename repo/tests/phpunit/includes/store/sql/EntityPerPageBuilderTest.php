@@ -52,7 +52,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$this->clearTables();
 		$items = $this->addItems();
 
-		assert( $this->countPages() === count( $items ) );
+		if ( $this->countPages() !== count( $items ) ) {
+			throw new RuntimeException( 'Page count must be equal to item count.' );
+		}
 
 		$this->entityPerPageRows = $this->getEntityPerPageData();
 	}
@@ -92,8 +94,9 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$dbw->delete( 'page', array( "1" ) );
 		$this->entityPerPageTable->clear();
 
-		assert( $this->countPages() === 0 );
-		assert( $this->countEntityPerPageRows() === 0 );
+		if ( $this->countPages() !== 0 || $this->countEntityPerPageRows() !== 0 ) {
+			throw new RuntimeException( 'Clear failed.' );
+		}
 	}
 
 	private function itemSupportsRedirect() {
@@ -212,7 +215,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	public function testRebuildAll() {
 		$this->entityPerPageTable->clear();
 
-		assert( $this->countEntityPerPageRows() === 0 );
+		$this->assertEquals( 0, $this->countEntityPerPageRows() );
 
 		$builder = new EntityPerPageBuilder(
 			$this->entityPerPageTable,
@@ -232,7 +235,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$pageId = $this->getPageIdForPartialClear();
 		$this->partialClearEntityPerPageTable( $pageId );
 
-		assert( $this->countEntityPerPageRows() === 6 );
+		$this->assertEquals( 6, $this->countEntityPerPageRows() );
 
 		$builder = new EntityPerPageBuilder(
 			$this->entityPerPageTable,
