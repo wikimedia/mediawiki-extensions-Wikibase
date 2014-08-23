@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityId;
 use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\PropertySomeValueSnak;
@@ -82,4 +82,5 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 		$actual = $linkFinder->findSnakLinks( $snaks );
 		$this->assertEmpty( $actual ); // since $p42 isn't know, this should return nothing
 	}
+
 }

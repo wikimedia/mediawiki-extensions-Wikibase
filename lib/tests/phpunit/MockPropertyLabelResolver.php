@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\PropertyLabelResolver;
 
 /**
@@ -46,4 +46,5 @@ class MockPropertyLabelResolver implements PropertyLabelResolver {
 
 		return $ids;
 	}
+
 }
