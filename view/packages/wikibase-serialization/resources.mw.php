@@ -133,6 +133,23 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.EntitySerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.EntitySerializer.js',
+				'serialization.EntitySerializer.itemExpert.js',
+				'serialization.EntitySerializer.propertyExpert.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.ClaimsSerializer',
+				'wikibase.serialization.MultilingualSerializer',
+				'wikibase.serialization.SiteLinkSerializer',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
 		'wikibase.serialization.EntityUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.EntityUnserializer.js',
@@ -145,6 +162,7 @@ return call_user_func( function() {
 				'wikibase.serialization.__namespace',
 				'wikibase.serialization.ClaimsUnserializer',
 				'wikibase.serialization.MultilingualUnserializer',
+				'wikibase.serialization.SiteLinkUnserializer',
 				'wikibase.serialization.Unserializer',
 			),
 		),
