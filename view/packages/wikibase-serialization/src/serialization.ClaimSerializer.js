@@ -46,6 +46,30 @@ MODULE.ClaimSerializer = util.inherit( 'WbClaimSerializer', PARENT, {
 			serialization['qualifiers-order'] = qualifiers.getPropertyOrder();
 		}
 
+		if( !( claim instanceof wb.datamodel.Statement ) ) {
+			return serialization;
+		}
+
+		var references = claim.getReferences(),
+			referenceSerializer = new MODULE.ReferenceSerializer(),
+			rank = claim.getRank();
+
+		if( references.length ) {
+			serialization.references = [];
+			for( var i = 0; i < references.length; i++ ) {
+				serialization.references.push( referenceSerializer.serialize( references[i] ) );
+			}
+		}
+
+		if( rank !== undefined ) {
+			for( var rankName in wb.datamodel.Statement.RANK ) {
+				if( rank === wb.datamodel.Statement.RANK[rankName] ) {
+					serialization.rank = rankName.toLowerCase();
+					break;
+				}
+			}
+		}
+
 		return serialization;
 	}
 } );
