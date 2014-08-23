@@ -24,19 +24,14 @@ var ItemUnserializationExpert =
 	 * @return {Object}
 	 */
 	unserialize: function( serialization ) {
-		var siteLinks = [];
+		var siteLinkUnserializer = new MODULE.SiteLinkUnserializer(),
+			siteLinks = [];
 
 		for( var siteId in serialization.sitelinks ) {
-			siteLinks.push( new wb.datamodel.SiteLink(
-				siteId,
-				serialization.sitelinks[siteId].title,
-				serialization.sitelinks[siteId].badges
-			) );
+			siteLinks.push( siteLinkUnserializer.unserialize( serialization.sitelinks[siteId] ) );
 		}
 
-		return {
-			sitelinks: siteLinks
-		};
+		return siteLinks;
 	}
 } );
 

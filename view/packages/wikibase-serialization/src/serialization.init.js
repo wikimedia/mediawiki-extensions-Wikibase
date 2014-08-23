@@ -57,6 +57,11 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.SiteLinkUnserializer,
+		wb.datamodel.SiteLink
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.SnakListUnserializer,
 		wb.datamodel.SnakList
 	);

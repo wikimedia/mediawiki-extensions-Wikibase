@@ -197,6 +197,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.SiteLinkUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.SiteLinkUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
 		'wikibase.serialization.Serializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.Serializer.js',
