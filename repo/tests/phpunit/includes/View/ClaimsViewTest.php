@@ -3,26 +3,20 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use DOMDocument;
 use Title;
-use ValueFormatters\FormatterOptions;
 use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\View\ClaimsView
@@ -59,6 +53,17 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 			$this->makeClaim( new PropertyValueSnak(
 				new PropertyId( 'P23' ),
 				new StringValue( 'test' )
+			) ),
+			$this->makeClaim( new PropertyValueSnak(
+				new PropertyId( 'P43' ),
+				new StringValue( 'File:Image.jpg' )
+			) ),
+			$this->makeClaim( new PropertySomeValueSnak(
+				new PropertyId( 'P44' )
+			) ),
+			$this->makeClaim( new PropertyValueSnak(
+				new PropertyId( 'P100' ),
+				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
 		);
 

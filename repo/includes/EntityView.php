@@ -372,12 +372,20 @@ if ( $ ) {
 			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
 		}
 
+		$valuesFinder = new ValuesFinder( $this->dataTypeLookup );
+
 		// treat URL values as external links ------
-		$urlFinder = new ReferencedUrlFinder( $this->dataTypeLookup );
-		$usedUrls = $urlFinder->findSnakLinks( $allSnaks );
+		$usedUrls = $valuesFinder->findFromSnaks( $allSnaks, 'url' );
 
 		foreach ( $usedUrls as $url ) {
-			$pout->addExternalLink( $url );
+			$pout->addExternalLink( $url->getValue() );
+		}
+
+		// treat CommonsMedia values as file transclusions ------
+		$usedImages = $valuesFinder->findFromSnaks( $allSnaks, 'commonsMedia' );
+
+		foreach( $usedImages as $image ) {
+			$pout->addImage( $image->getValue() );
 		}
 
 		if ( $generateHtml ) {
