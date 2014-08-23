@@ -7,6 +7,7 @@ use ContentHandler;
 use LogEventsList;
 use SpecialPage;
 use ViewAction;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -77,7 +78,7 @@ abstract class ViewEntityAction extends ViewAction {
 	 *
 	 * @param EntityPermissionChecker $permissionChecker
 	 */
-	public function setPermissionChecker( $permissionChecker ) {
+	public function setPermissionChecker( EntityPermissionChecker $permissionChecker ) {
 		$this->permissionChecker = $permissionChecker;
 	}
 
