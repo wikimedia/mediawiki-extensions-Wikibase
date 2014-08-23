@@ -7,6 +7,11 @@
 
 	var MODULE = wb.serialization;
 
+	MODULE.SerializerFactory.registerSerializer(
+		MODULE.SnakSerializer,
+		wb.datamodel.Snak
+	);
+
 	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.ClaimUnserializer,
 		wb.datamodel.Claim
