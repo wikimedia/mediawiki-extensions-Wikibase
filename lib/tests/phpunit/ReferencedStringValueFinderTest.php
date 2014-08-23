@@ -3,14 +3,13 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\ReferencedUrlFinder;
+use Wikibase\ReferencedStringValueFinder;
 
 /**
  * @covers Wikibase\ReferencedUrlFinder
@@ -19,9 +18,9 @@ use Wikibase\ReferencedUrlFinder;
  * @group WikibaseLib
  *
  * @licence GNU GPL v2+
- * @author Daniel Kinzler
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ReferencedUrlFinderTest extends \MediaWikiTestCase {
+class ReferencedStringValueFinderTest extends \MediaWikiTestCase {
 
 	public function snaksProvider() {
 		$argLists = array();
@@ -41,12 +40,12 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 			array( new PropertySomeValueSnak( $p42 ) ),
 			array() );
 
-		$argLists["PropertyValueSnak with string value"] = array(
-			array( new PropertyValueSnak( $p23, new StringValue( 'http://not/a/url' )  ) ),
+		$argLists["PropertyValueSnak with string value and wrong data type"] = array(
+			array( new PropertyValueSnak( $p23, new StringValue( 'not an url' ) ) ),
 			array() );
 
-		$argLists["PropertyValueSnak with EntityId"] = array(
-			array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' )  ) ),
+		$argLists["PropertyValueSnak with string value and correct data type"] = array(
+			array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ),
 			array( 'http://acme.com/test' ) );
 
 		return $argLists;
@@ -56,9 +55,9 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 	 * @dataProvider snaksProvider
 	 *
 	 * @param Snak[] $snaks
-	 * @param EntityId[] $expected
+	 * @param string[] $expected
 	 */
-	public function testFindSnakLinks( array $snaks, array $expected ) {
+	public function testFindFromSnaks( array $snaks, array $expected ) {
 		$p23 = new PropertyId( 'p23' );
 		$p42 = new PropertyId( 'p42' );
 
@@ -66,20 +65,20 @@ class ReferencedUrlFinderTest extends \MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( $p23, 'string' );
 		$dataTypeLookup->setDataTypeForProperty( $p42, 'url' );
 
-		$linkFinder = new ReferencedUrlFinder( $dataTypeLookup );
-		$actual = $linkFinder->findSnakLinks( $snaks );
+		$linkFinder = new ReferencedStringValueFinder( $dataTypeLookup, 'url' );
+		$actual = $linkFinder->findFromSnaks( $snaks );
 
 		$this->assertArrayEquals( $expected, $actual ); // assertArrayEquals doesn't take a message :(
 	}
 
-	public function testFindSnakLinksForUnknownProperty() {
+	public function testFindFromSnaksForUnknownProperty() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$linkFinder = new ReferencedUrlFinder( $dataTypeLookup );
+		$linkFinder = new ReferencedStringValueFinder( $dataTypeLookup, 'url' );
 
 		$p42 = new PropertyId( 'p42' );
 		$snaks = array( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' )  ) );
 
-		$actual = $linkFinder->findSnakLinks( $snaks );
+		$actual = $linkFinder->findFromSnaks( $snaks );
 		$this->assertEmpty( $actual ); // since $p42 isn't know, this should return nothing
 	}
 

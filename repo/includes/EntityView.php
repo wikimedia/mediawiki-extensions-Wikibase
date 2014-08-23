@@ -373,11 +373,19 @@ if ( $ ) {
 		}
 
 		// treat URL values as external links ------
-		$urlFinder = new ReferencedUrlFinder( $this->dataTypeLookup );
-		$usedUrls = $urlFinder->findSnakLinks( $allSnaks );
+		$urlFinder = new ReferencedStringValueFinder( $this->dataTypeLookup, 'url' );
+		$usedUrls = $urlFinder->findFromSnaks( $allSnaks );
 
 		foreach ( $usedUrls as $url ) {
 			$pout->addExternalLink( $url );
+		}
+
+		// treat CommonsMedia values as file transclusions ------
+		$imageFinder = new ReferencedStringValueFinder( $this->dataTypeLookup, 'commonsMedia' );
+		$usedImages = $imageFinder->findFromSnaks( $allSnaks );
+
+		foreach( $usedImages as $image ) {
+			$pout->addImage( $image );
 		}
 
 		if ( $generateHtml ) {
