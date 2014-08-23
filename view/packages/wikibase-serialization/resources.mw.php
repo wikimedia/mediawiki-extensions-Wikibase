@@ -96,6 +96,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.EntityIdSerializer' => $moduleTemplate + array(
+				'scripts' => array(
+					'serialization.EntityIdSerializer.js',
+				),
+				'dependencies' => array(
+					'util.inherit',
+					'wikibase.datamodel',
+					'wikibase.serialization.__namespace',
+					'wikibase.serialization.Serializer',
+				),
+			),
+
 		'wikibase.serialization.EntityIdUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.EntityIdUnserializer.js',

@@ -15,6 +15,11 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.EntityIdSerializer,
+		wb.datamodel.EntityId
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.ReferenceSerializer,
 		wb.datamodel.Reference
 	);
