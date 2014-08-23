@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
@@ -55,6 +56,17 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 			$this->makeClaim( new PropertyValueSnak(
 				new PropertyId( 'P23' ),
 				new StringValue( 'test' )
+			) ),
+			$this->makeClaim( new PropertyValueSnak(
+				new PropertyId( 'P43' ),
+				new StringValue( 'File:Image.jpg' )
+			) ),
+			$this->makeClaim( new PropertySomeValueSnak(
+				new PropertyId( 'P44' )
+			) ),
+			$this->makeClaim( new PropertyValueSnak(
+				new PropertyId( 'P100' ),
+				new EntityIdValue( new ItemId( 'Q555' ) )
 			) ),
 		);
 
@@ -155,6 +167,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 			$mockRepo->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P23', 'string' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P42', 'url' ) );
+			$mockRepo->putEntity( $this->makeProperty( 'P43', 'commonsMedia' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
 		}
 

@@ -166,4 +166,55 @@ class ItemViewTest extends EntityViewTest {
 		$this->assertEquals( $expectedLinks, $links );
 	}
 
+	public function getParserOutputImageLinksProvider() {
+		$argLists = array();
+
+		$p23 = new PropertyId( 'P23' );
+		$p43 = new PropertyId( 'P43' );
+
+		$argLists["empty"] = array(
+			array(),
+			array() );
+
+		$argLists["PropertyNoValueSnak"] = array(
+			array( $this->makeStatement( new PropertyNoValueSnak( $p43 ) ) ),
+			array() );
+
+		$argLists["PropertySomeValueSnak"] = array(
+			array( $this->makeStatement( new PropertySomeValueSnak( $p43 ) ) ),
+			array() );
+
+		$argLists["PropertyValueSnak with string value"] = array(
+			array( $this->makeStatement( new PropertyValueSnak( $p23, new StringValue( 'not an image' )  ) ) ),
+			array() );
+
+		$argLists["PropertyValueSnak with image"] = array(
+			array( $this->makeStatement( new PropertyValueSnak( $p43, new StringValue( 'File:Image.jpg' ) ) ) ),
+			array( 'File:Image.jpg' ) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider getParserOutputImageLinksProvider
+	 *
+	 * @param Statement[] $statements
+	 * @param string[] $expectedImages
+	 */
+	public function testGetParserOutputImageLinks( array $statements, array $expectedImages ) {
+		$entityRevision = $this->newEntityRevisionForStatements( $statements );
+		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
+
+		$out = $entityView->getParserOutput( $entityRevision, true, false );
+		$images = $out->getImages();
+
+		$expectedImages = array_values( $expectedImages );
+		sort( $expectedImages );
+
+		$images = array_keys( $images );
+		sort( $images );
+
+		$this->assertEquals( $expectedImages, $images );
+	}
+
 }

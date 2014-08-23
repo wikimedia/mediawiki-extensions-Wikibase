@@ -192,6 +192,7 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 			$mockRepo->putEntity( $this->makeProperty( 'P11', 'wikibase-item' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P23', 'string' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P42', 'url' ) );
+			$mockRepo->putEntity( $this->makeProperty( 'P43', 'commonsMedia' ) );
 			$mockRepo->putEntity( $this->makeProperty( 'P44', 'wikibase-item' ) );
 
 			self::$mockRepo = $mockRepo;
