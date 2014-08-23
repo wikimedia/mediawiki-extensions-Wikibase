@@ -10,6 +10,11 @@
 	// Register serializers:
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.ReferenceSerializer,
+		wb.datamodel.Reference
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.SnakListSerializer,
 		wb.datamodel.SnakList
 	);

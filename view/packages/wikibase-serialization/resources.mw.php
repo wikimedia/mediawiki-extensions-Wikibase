@@ -121,6 +121,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ReferenceSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.ReferenceSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.SnakListSerializer',
+				'wikibase.serialization.Serializer',
+			),
+		),
+
 		'wikibase.serialization.ReferenceUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.ReferenceUnserializer.js',

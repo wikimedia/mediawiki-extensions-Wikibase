@@ -28,6 +28,7 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.ClaimsUnserializer</code>.
 * Added <code>wikibase.serialization.EntityIdUnserializer</code>.
 * Added <code>wikibase.serialization.MultilingualUnserializer</code>.
+* Added <code>wikibase.serialization.ReferenceSerializer</code>.
 * Added <code>wikibase.serialization.ReferenceUnserializer</code>.
 * Added <code>wikibase.serialization.SnakListSerializer</code>.
 * Added <code>wikibase.serialization.SnakListUnserializer</code>.
