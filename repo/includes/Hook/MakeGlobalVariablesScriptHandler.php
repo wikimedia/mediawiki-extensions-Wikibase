@@ -5,9 +5,9 @@ namespace Wikibase\Hook;
 use OutputPage;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
  * @since 0.5

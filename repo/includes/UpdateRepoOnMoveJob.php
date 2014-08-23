@@ -10,9 +10,11 @@ use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
