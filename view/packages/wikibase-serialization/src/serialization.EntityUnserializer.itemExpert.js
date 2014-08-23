@@ -9,10 +9,10 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Unserializer;
 
 /**
- * Unserializer for parts of a Item Entity that are specific to Items.
+ * Unserializer for parts of an Item Entity that are specific to Items.
  *
  * @constructor
- * @extends wikibase.Unserializer
+ * @extends {wikibase.serialization.Unserializer}
  * @since 1.1
  */
 var ItemUnserializationExpert =
@@ -35,7 +35,6 @@ var ItemUnserializationExpert =
 	}
 } );
 
-// register to EntityUnserializer:
 MODULE.EntityUnserializer.registerTypeSpecificExpert(
 	wb.datamodel.Item.TYPE,
 	ItemUnserializationExpert

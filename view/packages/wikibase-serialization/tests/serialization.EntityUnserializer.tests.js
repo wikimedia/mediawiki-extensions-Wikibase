@@ -29,7 +29,7 @@ var testBase = [
 			}
 		},
 		aliases: {
-			en: ['en alias']
+			en: [{ language: 'en', value: 'en alias' }]
 		},
 		claims: {
 			P1: [ {
@@ -43,24 +43,18 @@ var testBase = [
 			} ]
 		}
 	}, {
-		labels: {
+		label: {
 			en: 'en label'
 		},
-		descriptions: {
+		description: {
 			en: 'en description'
 		},
 		aliases: {
 			en: ['en alias']
 		},
-		claims: [ {
-			id: 'Q1$1',
-			mainsnak: {
-				snaktype: 'novalue',
-				property: 'P1'
-			},
-			type: 'claim',
-			rank: 'normal'
-		} ]
+		claims: [
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'Q1$1' )
+		]
 	}
 ];
 
@@ -74,7 +68,8 @@ var testCases = [
 		wb.datamodel.Entity.newFromMap(
 			$.extend( true, {}, testBase[1],  {
 				id: 'P1',
-				type: 'property'
+				type: 'property',
+				datatype: 'string'
 			} )
 		)
 	], [
@@ -113,7 +108,9 @@ QUnit.test( 'unserialize()', function( assert ) {
 		// TODO: Use equals() as soon as it is implemented in wb.datamodel.Entity
 		assert.ok(
 			entity.getId() === expectedEntity.getId()
-			&& entity.getType() === expectedEntity.getType(),
+			&& entity.getType() === expectedEntity.getType()
+			&& entity.getLabel() === expectedEntity.getLabel()
+			&& entity.getDescription() === expectedEntity.getDescription(),
 			'Test set #' + i + ': Unserializing successful.'
 		);
 	}

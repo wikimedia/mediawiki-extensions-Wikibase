@@ -9,19 +9,19 @@
 		PARENT = MODULE.Unserializer;
 
 	/**
-	 * Unserializer for parts of a Property Entity that are specific to Properties.
+	 * Unserializer for parts of a Property Entity that are specific to Property entities.
 	 *
 	 * @constructor
-	 * @extends wb.Unserializer
-	 * @since 0.4
+	 * @extends {wikibase.serialization.Unserializer}
+	 * @since 1.0
 	 */
 	var PropertyUnserializationExpert =
 		util.inherit( 'WbEntityUnserializerPropertyExpert', PARENT,
 	{
 		/**
-		 * @see wb.serialization.Unserializer.unserialize
+		 * @see wikibase.serialization.Unserializer.unserialize
 		 *
-		 * @return Object
+		 * @return {Object}
 		 */
 		unserialize: function( serialization ) {
 			var dataTypeId = serialization.datatype;
@@ -35,7 +35,6 @@
 		}
 	} );
 
-	// register to EntityUnserializer:
 	MODULE.EntityUnserializer.registerTypeSpecificExpert(
 		wb.datamodel.Property.TYPE,
 		PropertyUnserializationExpert

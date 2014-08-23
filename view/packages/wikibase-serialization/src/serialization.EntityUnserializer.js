@@ -10,27 +10,26 @@
 
 	/**
 	 * Unserializers for specific entity types.
-	 * @type wb.serialization.Unserializer
+	 * @type {Object}
 	 */
 	var typeSpecificUnserializers = {};
 
 	/**
-	 * Unserializer for entities.
-	 *
+	 * Unserializer for Entity objects.
 	 * @constructor
-	 * @extends wb.Unserializer
-	 * @since 0.4
+	 * @extends {wikibase.serialization.Unserializer}
+	 * @since 1.0
 	 */
 	var SELF = MODULE.EntityUnserializer = util.inherit( 'WbEntityUnserializer', PARENT, {
 		/**
 		 * @see wb.serialization.Unserializer.unserialize
 		 *
-		 * @return wb.datamodel.Entity
+		 * @return {wikibase.datamodel.Entity}
 		 */
 		unserialize: function( serialization ) {
 			var entityType = serialization.type,
 				typeSpecificUnserializer = typeSpecificUnserializers[ entityType ],
-				multilangualUnserializer = new MODULE.MultilingualUnserializer(),
+				multilingualUnserializer = new MODULE.MultilingualUnserializer(),
 				claimsUnserializer = new MODULE.ClaimsUnserializer();
 
 			if( !entityType || typeof entityType !== 'string' ) {
@@ -43,9 +42,9 @@
 				id: serialization.id,
 				// TODO: Remove title since it is not part of native serialization format
 				title: serialization.title,
-				label: multilangualUnserializer.unserialize( serialization.labels ),
-				description: multilangualUnserializer.unserialize( serialization.descriptions ),
-				aliases: multilangualUnserializer.unserialize( serialization.aliases ),
+				label: multilingualUnserializer.unserialize( serialization.labels ),
+				description: multilingualUnserializer.unserialize( serialization.descriptions ),
+				aliases: multilingualUnserializer.unserialize( serialization.aliases ),
 				claims: claimsUnserializer.unserialize( serialization.claims )
 			};
 
@@ -66,17 +65,15 @@
 	} );
 
 	/**
-	 * Allows to register advanced unserialization logic for a certain type of Entity. Takes the
-	 * type the additional handling is required for and a Unserializer object which has the job to
-	 * return the type specific map data as Object. The Object keys should contain the data which
-	 * is different for the handled type of entity compared to other entity types. The keys should
-	 * be what wb.datamodel.Entity.newFromMap requires to create a new Entity of the specific type.
+	 * Allows registering individual unserialization logic for entities per entity type.
+	 * The returned object is supposed to contain the data which is specific for the handled type
+	 * of entity compared to the generic entity. The keys of the returned object should be what
+	 * wikibase.datamodel.Entity.newFromMap requires to create a new Entity of the specific type.
 	 *
-	 * @since 0.4
+	 * @since 1.0
 	 *
 	 * @param {string} entityType
-	 * @param {Function} TypeSpecificUnserializer Constructor which inherits from
-	 *        wb.serialization.Unserializer.
+	 * @param {Function} TypeSpecificUnserializer
 	 */
 	SELF.registerTypeSpecificExpert = function( entityType, TypeSpecificUnserializer ) {
 		// for performance, we just create one instance of that unserializer and change its
