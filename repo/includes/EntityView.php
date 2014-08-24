@@ -365,8 +365,8 @@ if ( $ ) {
 		$allSnaks = $entityRevision->getEntity()->getAllSnaks();
 
 		// treat referenced entities as page links ------
-		$refFinder = new ReferencedEntitiesFinder();
-		$usedEntityIds = $refFinder->findSnakLinks( $allSnaks );
+		$entitiesFinder = new ReferencedEntitiesFinder();
+		$usedEntityIds = $entitiesFinder->findSnakLinks( $allSnaks );
 
 		foreach ( $usedEntityIds as $entityId ) {
 			$pout->addLink( $this->entityTitleLookup->getTitleForId( $entityId ) );
