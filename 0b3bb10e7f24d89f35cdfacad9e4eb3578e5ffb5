@@ -123,6 +123,24 @@
       "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_c8b7c2d2",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-24T18:38:13Z",
+      "side": 1,
+      "message": "Where did you create that class from pastebin? Or did you just write it for demonstration purposes and did another class recently? I\u0027d also be fine with using the class from pastebin. Thiemo?",
+      "parentUuid": "4e322bf2_689a0ebf",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
