@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DataTypes\DataType;
+use InvalidArgumentException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -18,35 +19,22 @@ use Wikibase\Repo\WikibaseRepo;
 class PropertyView extends EntityView {
 
 	/**
-	 * Builds and returns the inner HTML for representing a whole WikibaseEntity. The difference to getHtml() is that
-	 * this does not group all the HTMl within one parent node as one entity.
-	 *
-	 * @param EntityRevision $entityRevision
-	 * @param bool $editable
-	 *
-	 * @throws \InvalidArgumentException
-	 * @return string
+	 * @see EntityView::getInnerHtml
 	 */
 	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
 		wfProfileIn( __METHOD__ );
 
-		/* @var Property $property */
 		$property = $entityRevision->getEntity();
 
 		if ( !( $property instanceof Property ) ) {
-			throw new \InvalidArgumentException( '$propertyRevision must contain a Property' );
+			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
 		}
 
-		$html = '';
-
-		$html .= $this->getHtmlForFingerprint( $property, $editable );
-		$html .= $this->getHtmlForToc();
-		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
-
+		$html = parent::getInnerHtml( $entityRevision, $editable );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-			$html .= $this->getHtmlForClaims( $property );
+			$html .= $this->claimsView->getHtml( $property->getClaims(), 'wikibase-attributes' );
 		}
 
 		$footer = $this->msg( 'wikibase-property-footer' );
@@ -57,13 +45,6 @@ class PropertyView extends EntityView {
 
 		wfProfileOut( __METHOD__ );
 		return $html;
-	}
-
-	/**
-	 * @see EntityView::getHtmlForClaims
-	 */
-	protected function getHtmlForClaims( Entity $entity ) {
-		return $this->claimsView->getHtml( $entity->getClaims(), 'wikibase-attributes' );
 	}
 
 	private function getDataType( Property $property ) {
