@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_a516df58",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-24T13:13:48Z",
+      "side": 1,
+      "message": "Turning this into a object property does not make sense to me. It just wastes memory but has no use.",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_6510f75b",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-24T13:13:48Z",
+      "side": 1,
+      "message": "Sorry to say that but this level of splitting goes to far, in my opinion. It\u0027s much harder to see what the class does now. Methods names \"handle\" don\u0027t tell me what they do.",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
