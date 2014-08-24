@@ -5,14 +5,14 @@ namespace Wikibase\Lib\Serializers;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use SiteStore;
-use Wikibase\Claim;
-use Wikibase\Claims;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityFactory;
-use Wikibase\Item;
 use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Property;
-use Wikibase\Snak;
 
 /**
  * Factory for constructing Serializer and Unserializer objects.
@@ -135,18 +135,18 @@ class SerializerFactory {
 		}
 
 		switch ( ltrim( $className, '\\' ) ) {
-			case 'Wikibase\Item':
+			case 'Wikibase\DataModel\Entity\Item':
 				return $this->newItemUnserializer( $options );
-			case 'Wikibase\Property':
+			case 'Wikibase\DataModel\Entity\Property':
 				return $this->newPropertyUnserializer( $options );
 			//TODO: support extra entity types!
-			case 'Wikibase\Snak':
+			case 'Wikibase\DataModel\Snak\Snak':
 				return $this->newSnakUnserializer( $options );
 			case 'Wikibase\DataModel\Reference':
 				return $this->newReferenceUnserializer($options );
-			case 'Wikibase\Claim':
+			case 'Wikibase\DataModel\Claim\Claim':
 				return $this->newClaimUnserializer( $options );
-			case 'Wikibase\Claims':
+			case 'Wikibase\DataModel\Claim\Claims':
 				return $this->newClaimsUnserializer( $options );
 		}
 

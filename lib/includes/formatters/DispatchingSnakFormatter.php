@@ -4,7 +4,7 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;
-use Wikibase\Snak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * DispatchingSnakFormatter will format a snak by delegating the formatting to an appropriate

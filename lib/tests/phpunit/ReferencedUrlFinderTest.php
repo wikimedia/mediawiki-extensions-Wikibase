@@ -5,12 +5,12 @@ namespace Wikibase\Lib\Test;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\InMemoryDataTypeLookup;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 use Wikibase\ReferencedUrlFinder;
-use Wikibase\Snak;
 
 /**
  * @covers Wikibase\ReferencedUrlFinder

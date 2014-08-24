@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Property;
 use Wikibase\PropertyInfoStore;
 
 /**

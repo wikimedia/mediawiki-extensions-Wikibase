@@ -79,7 +79,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// test latest item
 		$item = $this->repo->getEntity( $itemId );
 		$this->assertNotNull( $item, "Entity " . $itemId );
-		$this->assertInstanceOf( '\Wikibase\Item', $item, "Entity " . $itemId );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $item, "Entity " . $itemId );
 		$this->assertEquals( 'foo', $item->getLabel( 'en' ) );
 		$this->assertEquals( 'bar', $item->getLabel( 'de' ) );
 
@@ -91,7 +91,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		// test latest prop
 		$prop = $this->repo->getEntity( $propId );
 		$this->assertNotNull( $prop, "Entity " . $propId );
-		$this->assertInstanceOf( '\Wikibase\Property', $prop, "Entity " . $propId );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $prop, "Entity " . $propId );
 	}
 
 	public function testGetEntityRevision() {
@@ -118,14 +118,14 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$itemRev = $this->repo->getEntityRevision( $itemId );
 		$this->assertNotNull( $item, "Entity " . $itemId );
 		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
-		$this->assertInstanceOf( '\Wikibase\Item', $itemRev->getEntity(), "Entity " . $itemId );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $itemRev->getEntity(), "Entity " . $itemId );
 		$this->assertEquals( 24, $itemRev->getRevision() );
 
 		// test item by rev id
 		$itemRev = $this->repo->getEntityRevision( $itemId, 23 );
 		$this->assertNotNull( $item, "Entity " . $itemId . "@23" );
 		$this->assertInstanceOf( '\Wikibase\EntityRevision', $itemRev, "Entity " . $itemId );
-		$this->assertInstanceOf( '\Wikibase\Item', $itemRev->getEntity(), "Entity " . $itemId );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $itemRev->getEntity(), "Entity " . $itemId );
 		$this->assertEquals( 23, $itemRev->getRevision() );
 		$this->assertEquals( "20130101000000", $itemRev->getTimestamp() );
 
@@ -133,7 +133,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$propRev = $this->repo->getEntityRevision( $propId );
 		$this->assertNotNull( $propRev, "Entity " . $propId );
 		$this->assertInstanceOf( '\Wikibase\EntityRevision', $propRev, "Entity " . $propId );
-		$this->assertInstanceOf( '\Wikibase\Property', $propRev->getEntity(), "Entity " . $propId );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Property', $propRev->getEntity(), "Entity " . $propId );
 	}
 
 	public function testGetItemIdForLink() {
@@ -699,4 +699,5 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertTrue( $this->repo->userWasLastToEdit( $user1, $itemId, $rev3->getRevision() ), 'original user was last to edit' );
 		$this->assertFalse( $this->repo->userWasLastToEdit( $user2, $itemId, $rev2->getRevision() ), 'other user was no longer last to edit' );
 	}
+
 }

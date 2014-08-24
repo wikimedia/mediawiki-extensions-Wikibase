@@ -6,9 +6,9 @@ use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Wikibase\ClaimDifference;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\Statement;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\ClaimDifference

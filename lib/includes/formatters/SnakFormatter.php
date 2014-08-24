@@ -1,7 +1,9 @@
 <?php
+
 namespace Wikibase\Lib;
+
 use ValueFormatters\ValueFormatter;
-use Wikibase\Snak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * SnakFormatter is an interface for services that render Snaks to a specific

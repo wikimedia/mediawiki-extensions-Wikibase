@@ -5,10 +5,10 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\DispatchingSnakFormatter;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
 /**

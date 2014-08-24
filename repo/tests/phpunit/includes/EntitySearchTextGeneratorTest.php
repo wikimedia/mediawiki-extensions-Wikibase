@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Entity;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\EntitySearchTextGenerator;
 
 /**

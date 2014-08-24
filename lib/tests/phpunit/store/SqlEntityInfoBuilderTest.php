@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
-use Wikibase\Property;
 use Wikibase\Settings;
 
 /**

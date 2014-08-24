@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\DataValueFactory;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\SnakFactory;
 
 /**
@@ -22,9 +22,9 @@ class SnakFactoryTest extends \MediaWikiTestCase {
 
 	public static function provideNewSnak() {
 		return array(
-			array( 1, 'somevalue', null, null, 'Wikibase\PropertySomeValueSnak', null, null, 'some value' ),
-			array( 1, 'novalue', null, null, 'Wikibase\PropertyNoValueSnak', null, null, 'no value' ),
-			array( 1, 'value', 'string', 'foo', 'Wikibase\PropertyValueSnak', 'DataValues\StringValue', null, 'a value' ),
+			array( 1, 'somevalue', null, null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, null, 'some value' ),
+			array( 1, 'novalue', null, null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, null, 'no value' ),
+			array( 1, 'value', 'string', 'foo', 'Wikibase\DataModel\Snak\PropertyValueSnak', 'DataValues\StringValue', null, 'a value' ),
 			array( 1, 'kittens', null, 'foo', null, null, 'InvalidArgumentException', 'bad snak type' ),
 		);
 	}

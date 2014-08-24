@@ -8,6 +8,7 @@ use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDiff;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -1121,7 +1122,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$repo = self::getMockRepo();
 
 		foreach ( $entities as $id => $siteLinks ) {
-			if ( !( $siteLinks instanceof \Wikibase\Entity ) ) {
+			if ( !( $siteLinks instanceof Entity ) ) {
 				$entity = Item::newEmpty();
 				$entity->setId( new ItemId( $id ) );
 
@@ -1236,4 +1237,5 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			$this->assertArrayEquals( $exp, $up );
 		}
 	}
+
 }

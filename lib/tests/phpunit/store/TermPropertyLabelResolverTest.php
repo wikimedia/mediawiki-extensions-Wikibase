@@ -3,9 +3,9 @@
 namespace Wikibase\Test;
 
 use HashBagOStuff;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Item;
-use Wikibase\Property;
 use Wikibase\PropertyLabelResolver;
 use Wikibase\Term;
 use Wikibase\TermPropertyLabelResolver;
@@ -172,4 +172,5 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			),
 		);
 	}
+
 }

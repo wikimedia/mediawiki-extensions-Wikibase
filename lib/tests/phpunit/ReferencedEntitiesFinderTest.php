@@ -8,11 +8,11 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\ReferencedEntitiesFinder;
-use Wikibase\Snak;
 
 /**
  * @covers Wikibase\ReferencedEntitiesFinder
@@ -154,4 +154,5 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $expected, $actual, $message );
 	}
+
 }

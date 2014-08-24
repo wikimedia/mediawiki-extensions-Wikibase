@@ -172,7 +172,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	/**
 	 * @param string $type
 	 *
-	 * @return \Wikibase\Property
+	 * @return Property
 	 */
 	protected function getNewProperty( $type ) {
 		$property = Property::newFromType( $type );

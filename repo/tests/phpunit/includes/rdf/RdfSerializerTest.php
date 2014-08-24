@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use SiteList;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\EntityRevision;
 use Wikibase\RdfSerializer;
 

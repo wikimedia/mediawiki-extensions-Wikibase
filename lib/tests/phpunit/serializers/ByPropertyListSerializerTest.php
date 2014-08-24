@@ -4,13 +4,13 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\ByPropertyListSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SnakSerializer;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
-use Wikibase\SnakList;
 
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListSerializer
@@ -191,4 +191,5 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 
 		return $validArgs;
 	}
+
 }

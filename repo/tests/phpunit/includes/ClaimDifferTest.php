@@ -8,13 +8,13 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\OrderedListDiffer;
-use Wikibase\Claim;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimDifference;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\SnakList;
-use Wikibase\Statement;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * @covers Wikibase\ClaimDiffer

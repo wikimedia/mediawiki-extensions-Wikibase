@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Test\Serializers;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Serializers\ByPropertyListUnserializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\Lib\Serializers\ByPropertyListUnserializer

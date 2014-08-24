@@ -6,10 +6,10 @@ use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Wikibase\ChangesTable;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\ItemDiff;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\ChangesTable

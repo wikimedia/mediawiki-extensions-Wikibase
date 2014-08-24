@@ -1,10 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Claim;
+
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Entity;
 
 /**
  * @covers Wikibase\ItemView
@@ -44,4 +45,5 @@ class ItemViewTest extends EntityViewTest {
 	protected function makeEntityId( $n ) {
 		return new ItemId( "Q$n");
 	}
+
 }

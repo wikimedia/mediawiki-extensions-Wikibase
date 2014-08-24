@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\Snak;
-use Wikibase\SnakList;
-use Wikibase\Statement;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Serializer for Claim objects.
@@ -219,14 +219,13 @@ class ClaimSerializer extends SerializerObject implements Unserializer {
 		}
 
 		$snakUnserializer = new SnakSerializer(); // FIXME: derp injection
+		$mainSnak = $snakUnserializer->newFromSerialization( $serialization['mainsnak'] );
 
-		$claimClass = $isStatement ? '\Wikibase\Statement' : '\Wikibase\Claim';
-
-		/**
-		 * @var Claim $claim
-		 */
-		$claim = new $claimClass( $snakUnserializer->newFromSerialization( $serialization['mainsnak'] ) );
-		assert( $claim instanceof Claim );
+		if ( $isStatement ) {
+			$claim = new Statement( $mainSnak );
+		} else {
+			$claim = new Claim( $mainSnak );
+		}
 
 		if( array_key_exists( 'id', $serialization ) ){
 			$claim->setGuid( $serialization['id'] );

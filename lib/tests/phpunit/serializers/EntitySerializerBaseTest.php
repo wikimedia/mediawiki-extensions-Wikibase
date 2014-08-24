@@ -3,13 +3,13 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Entity;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\EntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\Lib\Serializers\EntitySerializer

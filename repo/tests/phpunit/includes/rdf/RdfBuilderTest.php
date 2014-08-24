@@ -8,11 +8,11 @@ use EasyRdf_Literal;
 use EasyRdf_Namespace;
 use EasyRdf_Resource;
 use SiteList;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Entity;
 use Wikibase\EntityRevision;
-use Wikibase\Item;
 use Wikibase\RdfBuilder;
 
 /**

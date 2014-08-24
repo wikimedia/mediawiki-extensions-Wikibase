@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use Wikibase\Entity;
-use Wikibase\Property;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * Serializer for properties.

@@ -24,9 +24,9 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;entityPrefixes: ID prefixes to use for the different entity types, as an associative array mapping prefixes to entity type constants. Default:
 <poem>
           array(
-              'q' => \Wikibase\Item::ENTITY_TYPE,
-              'p' => \Wikibase\Property::ENTITY_TYPE,
-              'y' => \Wikibase\Query::ENTITY_TYPE,
+              'q' => Wikibase\DataModel\Entity\Item::ENTITY_TYPE,
+              'p' => Wikibase\DataModel\Entity\Property::ENTITY_TYPE,
+              'y' => Wikibase\DataModel\Entity\Query::ENTITY_TYPE,
           );
 </poem>
 :'''Warning:''' do not change this if you already have Wikibase entities in your database, since they may become unreadable!

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 
 /**
  * @since 0.5

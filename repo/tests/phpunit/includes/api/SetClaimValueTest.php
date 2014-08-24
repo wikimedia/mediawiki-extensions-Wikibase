@@ -8,11 +8,13 @@ use Revision;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -68,7 +70,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$claim = $entity->newClaim( new \Wikibase\PropertyValueSnak( $propertyId, new \DataValues\StringValue( 'o_O' ) ) );
+		$claim = $entity->newClaim( new PropertyValueSnak( $propertyId, new \DataValues\StringValue( 'o_O' ) ) );
 		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
 		$entity->addClaim( $claim );
 
@@ -148,7 +150,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$generatedSummary = $page->getRevision()->getComment( Revision::RAW );
 		$this->assertEquals( $expectedSummary, $generatedSummary, 'Summary mismatch' );
 
-		$claims = new \Wikibase\Claims( $obtainedEntity->getClaims() );
+		$claims = new Claims( $obtainedEntity->getClaims() );
 
 		$this->assertEquals( $claimCount, $claims->count(), 'Claim count should not change after doing a setclaimvalue request' );
 

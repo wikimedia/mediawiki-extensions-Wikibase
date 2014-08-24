@@ -148,7 +148,7 @@ class SetReference extends ModifyClaim {
 		$snaks = new SnakList();
 
 		$serializerFactory = new SerializerFactory();
-		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Snak' );
+		$snakUnserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Snak\Snak' );
 
 		$snakOrder = ( count( $snakOrder ) > 0 ) ? $snakOrder : array_keys( $rawSnaks );
 
