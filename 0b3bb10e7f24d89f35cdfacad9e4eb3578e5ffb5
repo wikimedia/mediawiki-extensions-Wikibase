@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_e8703ea5",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-24T14:07:05Z",
+      "side": 1,
+      "message": "But it helps us splitting stuff into several methods. Another way of doing this would be to pass the array by reference to all methods but this looks quite ugly. If you have fear of wasting memory which I do not see as such a big problem but maybe it is, we can clear the array after returning the value. However, instances of this class won\u0027t live for a long time anyway.",
+      "parentUuid": "4e322bf2_a516df58",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_6510f75b",
         "filename": "lib/includes/ReferencedEntitiesFinder.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-24T13:13:48Z",
       "side": 1,
       "message": "Sorry to say that but this level of splitting goes to far, in my opinion. It\u0027s much harder to see what the class does now. Methods names \"handle\" don\u0027t tell me what they do.",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_483ab2c1",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-24T14:07:05Z",
+      "side": 1,
+      "message": "Hmm, in my opinion it is now much easier to see what the class does because it contains more methods and less comments. I think this method is quite useful because there are two places to add a found entity id, one time for properties and one time for other entities. \n\nFurthermore, I do not see a better name for the handleStuff methods but maybe you can help me by giving some suggestions how they can be improved.",
+      "parentUuid": "4e322bf2_6510f75b",
       "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
