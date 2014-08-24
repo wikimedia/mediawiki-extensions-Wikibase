@@ -24,22 +24,27 @@ class ReferencedEntitiesFinder {
 	 * @since 0.4
 	 *
 	 * @param Snak[] $snaks
-	 * @return EntityId[]
+	 *
+	 * @return EntityId[] Entity id strings pointing to EntityId objects.
 	 */
 	public function findSnakLinks( array $snaks ) {
-		$links = array();
+		$entityIds = array();
 
 		foreach ( $snaks as $snak ) {
 			$propertyId = $snak->getPropertyId();
-			$links[$propertyId->getSerialization()] = $propertyId;
+			$entityIds[$propertyId->getSerialization()] = $propertyId;
 
-			if( $snak instanceof PropertyValueSnak && $snak->getDataValue() instanceof EntityIdValue ) {
-				$entityId = $snak->getDataValue()->getEntityId();
-				$links[$entityId->getSerialization()] = $entityId;
+			if ( $snak instanceof PropertyValueSnak ) {
+				$dataValue = $snak->getDataValue();
+
+				if ( $dataValue instanceof EntityIdValue ) {
+					$entityId = $dataValue->getEntityId();
+					$entityIds[$entityId->getSerialization()] = $entityId;
+				}
 			}
 		}
 
-		return $links;
+		return $entityIds;
 	}
 
 }
