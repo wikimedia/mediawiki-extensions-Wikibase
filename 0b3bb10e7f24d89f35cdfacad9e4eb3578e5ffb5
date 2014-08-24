@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_28bd2617",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-24T14:49:57Z",
+      "side": 1,
+      "message": "The fact that you think you need this private property suggests that the way you split the code is at least a bit strange. I\u0027m pretty sure about this. Sorry to say that.\n\nSee Ibb6e011 for an other possible refactoring.",
+      "parentUuid": "4e322bf2_e8703ea5",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_6510f75b",
         "filename": "lib/includes/ReferencedEntitiesFinder.php",
         "patchSetId": 1
