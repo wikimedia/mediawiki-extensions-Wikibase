@@ -4,7 +4,7 @@ namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use Message;
-use Wikibase\Snak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * MessageSnakFormatter returns the same (localized) message for all snaks.

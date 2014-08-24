@@ -9,10 +9,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\PropertyValueSnak;
 use Wikibase\RepoHooks;
-use Wikibase\Snak;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -409,4 +409,5 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 			)
 		);
 	}
+
 }

@@ -49,8 +49,8 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 
 	public static function provideNewEmpty() {
 		return array(
-			array( Item::ENTITY_TYPE, '\Wikibase\Item' ),
-			array( Property::ENTITY_TYPE, '\Wikibase\Property' ),
+			array( Item::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Item' ),
+			array( Property::ENTITY_TYPE, 'Wikibase\DataModel\Entity\Property' ),
 		);
 	}
 

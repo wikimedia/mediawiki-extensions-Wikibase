@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Test;
 
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\Lib\MessageSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
 
 /**
  * @covers Wikibase\Lib\MessageSnakFormatter

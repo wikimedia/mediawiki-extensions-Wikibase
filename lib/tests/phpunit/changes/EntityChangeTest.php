@@ -69,7 +69,7 @@ class EntityChangeTest extends DiffChangeTest {
 	 * @return string
 	 */
 	protected function getEntityClass() {
-		return 'Wikibase\Entity';
+		return 'Wikibase\DataModel\Entity\Entity';
 	}
 
 	protected function newEntityChange( EntityId $entityId ) {

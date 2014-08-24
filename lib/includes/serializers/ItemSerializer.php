@@ -1,11 +1,12 @@
 <?php
+
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use SiteStore;
-use Wikibase\Entity;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityFactory;
-use Wikibase\Item;
 
 /**
  * Serializer for items.
@@ -107,4 +108,5 @@ class ItemSerializer extends EntitySerializer implements Unserializer {
 
 		return $item;
 	}
+
 }

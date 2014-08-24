@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Revision;
 use Title;
 use Wikibase\ContentRetriever;
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
 use Wikibase\Repo\WikibaseRepo;
 

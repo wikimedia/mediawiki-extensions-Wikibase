@@ -3,15 +3,14 @@
 namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
 use DataValues\StringValue;
-use Language;
-use Wikibase\Claim;
 use Wikibase\DataAccess\PropertyParserFunction\SnaksFinder;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Item;
-use Wikibase\Property;
-use Wikibase\PropertyValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Test\MockPropertyLabelResolver;
 use Wikibase\Test\MockRepository;
 

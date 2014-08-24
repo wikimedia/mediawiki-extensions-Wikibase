@@ -118,7 +118,7 @@ class SetClaim extends ModifyClaim {
 	 */
 	protected function getClaimFromParams( array $params ) {
 		$serializerFactory = new SerializerFactory();
-		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
+		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
 
 		try {
 			$serializedClaim = FormatJson::decode( $params['claim'], true );

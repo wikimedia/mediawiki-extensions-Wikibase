@@ -2,10 +2,10 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\PropertySerializer;
 use Wikibase\Lib\Serializers\SnakSerializer;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\Lib\Serializers\PropertySerializer

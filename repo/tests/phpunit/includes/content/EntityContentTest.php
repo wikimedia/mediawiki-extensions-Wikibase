@@ -114,8 +114,6 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Tests @see Wikibase\Entity::getTextForSearchIndex
-	 *
 	 * @dataProvider getTextForSearchIndexProvider
 	 *
 	 * @param EntityContent $entityContent

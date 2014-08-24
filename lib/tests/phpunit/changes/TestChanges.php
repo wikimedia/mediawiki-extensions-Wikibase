@@ -5,19 +5,19 @@ namespace Wikibase\Test;
 use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\ChangesTable;
-use Wikibase\Claim;
-use Wikibase\Claims;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DiffChange;
-use Wikibase\Entity;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
-use Wikibase\Item;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
 
 /**
  * Test change data for ChangeRowTest
@@ -321,4 +321,5 @@ final class TestChanges {
 
 		return $entityList;
 	}
+
 }

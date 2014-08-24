@@ -7,8 +7,8 @@ use Wikibase\Repo\View\SiteLinksView;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Class for creating views for Wikibase\Item instances.
- * For the Wikibase\Item this basically is what the Parser is for WikitextContent.
+ * Class for creating views for Item instances.
+ * For the Item this basically is what the Parser is for WikitextContent.
  *
  * @since 0.1
  *

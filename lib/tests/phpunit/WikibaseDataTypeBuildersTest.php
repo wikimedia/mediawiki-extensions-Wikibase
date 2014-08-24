@@ -14,8 +14,8 @@ use DataValues\TimeValue;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Item;
 use Wikibase\Lib\WikibaseDataTypeBuilders;
 
 /**
@@ -213,4 +213,5 @@ class WikibaseDataTypeBuildersTest extends \PHPUnit_Framework_TestCase {
 			$this->assertEquals( $expected, $result->isValid(), $message );
 		}
 	}
+
 }

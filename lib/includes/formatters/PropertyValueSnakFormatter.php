@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib;
 
 use DataTypes\DataTypeFactory;
@@ -10,8 +11,8 @@ use Message;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Snak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 
 /**
  * PropertyValueSnakFormatter is a formatter for PropertyValueSnaks. It allows formatters to

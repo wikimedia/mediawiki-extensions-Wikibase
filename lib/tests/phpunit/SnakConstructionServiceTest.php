@@ -66,15 +66,15 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 
 	public function newSnakProvider() {
 		return array(
-			'novalue' => array( 1, 'novalue', null, 'Wikibase\PropertyNoValueSnak', null, null ),
-			'somevalue' => array( 1, 'somevalue', null, 'Wikibase\PropertySomeValueSnak', null, null ),
-			'value' => array( 1, 'value', '"hello"', 'Wikibase\PropertyValueSnak', null, null ),
+			'novalue' => array( 1, 'novalue', null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, null ),
+			'somevalue' => array( 1, 'somevalue', null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, null ),
+			'value' => array( 1, 'value', '"hello"', 'Wikibase\DataModel\Snak\PropertyValueSnak', null, null ),
 
-			'novalue/badprop' => array( 66, 'novalue', null, 'Wikibase\PropertyNoValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
-			'somevalue/badprop' => array( 66, 'somevalue', null, 'Wikibase\PropertySomeValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
-			'value/badprop' => array( 66, 'value', '"hello"', 'Wikibase\PropertyValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
+			'novalue/badprop' => array( 66, 'novalue', null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
+			'somevalue/badprop' => array( 66, 'somevalue', null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
+			'value/badprop' => array( 66, 'value', '"hello"', 'Wikibase\DataModel\Snak\PropertyValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
 
-			'value/badvalue' => array( 1, 'value', array( "foo" ), 'Wikibase\PropertyValueSnak', null, 'DataValues\IllegalValueException' ),
+			'value/badvalue' => array( 1, 'value', array( "foo" ), 'Wikibase\DataModel\Snak\PropertyValueSnak', null, 'DataValues\IllegalValueException' ),
 		);
 	}
 

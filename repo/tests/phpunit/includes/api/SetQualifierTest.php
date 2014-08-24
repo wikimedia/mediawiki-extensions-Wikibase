@@ -63,7 +63,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$propertyId = $this->makeProperty( $prop )->getId();
 
 			$snaks[$type] = new $type( $propertyId, $data );
-			$this->assertInstanceOf( 'Wikibase\Snak', $snaks[$type] );
+			$this->assertInstanceOf( 'Wikibase\DataModel\Snak\Snak', $snaks[$type] );
 		}
 
 		return $snaks[$type];
@@ -110,9 +110,9 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 	public function provideAddRequests() {
 		return array(
-			array( 'Wikibase\PropertyNoValueSnak' ),
-			array( 'Wikibase\PropertySomeValueSnak' ),
-			array( 'Wikibase\PropertyValueSnak', new StringValue( 'o_O' ) )
+			array( 'Wikibase\DataModel\Snak\PropertyNoValueSnak' ),
+			array( 'Wikibase\DataModel\Snak\PropertySomeValueSnak' ),
+			array( 'Wikibase\DataModel\Snak\PropertyValueSnak', new StringValue( 'o_O' ) )
 		);
 	}
 
@@ -134,7 +134,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	public function provideChangeRequests() {
-		return array( array( 'Wikibase\PropertyValueSnak', new StringValue( 'o_O' ) ) );
+		return array( array( 'Wikibase\DataModel\Snak\PropertyValueSnak', new StringValue( 'o_O' ) ) );
 	}
 
 	/**

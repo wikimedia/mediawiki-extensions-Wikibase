@@ -59,8 +59,6 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
-	 * Tests @see Wikibase\Entity::getTextForSearchIndex
-	 *
 	 * @dataProvider getTextForSearchIndexProvider
 	 *
 	 * @param EntityContent $itemContent

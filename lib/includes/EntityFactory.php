@@ -46,8 +46,8 @@ class EntityFactory {
 
 		if ( $instance === false ) {
 			$typeToClass = array(
-				Item::ENTITY_TYPE => '\Wikibase\Item',
-				Property::ENTITY_TYPE => '\Wikibase\Property',
+				Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+				Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
 			);
 
 			$instance = new static( $typeToClass );

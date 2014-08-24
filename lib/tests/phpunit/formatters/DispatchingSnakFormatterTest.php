@@ -4,12 +4,12 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\DispatchingSnakFormatter;
 use Wikibase\Lib\MessageSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\PropertyNoValueSnak;
-use Wikibase\PropertySomeValueSnak;
-use Wikibase\PropertyValueSnak;
 
 /**
  * @covers Wikibase\Lib\DispatchingSnakFormatter

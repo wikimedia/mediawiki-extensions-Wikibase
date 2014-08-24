@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\Claims;
+use Wikibase\DataModel\Claim\Claims;
 
 /**
  * Serializer for lists of claims.

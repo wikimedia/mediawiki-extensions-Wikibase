@@ -14,9 +14,10 @@
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -134,7 +135,7 @@ class importInterlang extends Maintenance {
 	 * @return bool true if the item was created, false otherwise
 	 */
 	protected function createItem( $links ) {
-		$item = \Wikibase\Item::newEmpty();
+		$item = Item::newEmpty();
 
 		foreach ( $links as $lang => $title ) {
 			$name = strtr( $title, "_", " " );

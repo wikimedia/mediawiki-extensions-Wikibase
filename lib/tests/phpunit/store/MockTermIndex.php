@@ -3,8 +3,8 @@
 namespace Wikibase\Test;
 
 use Exception;
-use Wikibase\Entity;
-use Wikibase\EntityId;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Term;
 use Wikibase\TermIndex;
 
@@ -192,4 +192,5 @@ class MockTermIndex implements TermIndex {
 	public function clear() {
 		throw new Exception( 'not implemented by mock class ' );
 	}
+
 }

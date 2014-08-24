@@ -1,11 +1,12 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Claim;
+
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Entity;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\PropertyView
@@ -64,4 +65,5 @@ class PropertyViewTest extends EntityViewTest {
 
 		$this->assertSame( '', $toc, "properties should currently not have a TOC" );
 	}
+
 }

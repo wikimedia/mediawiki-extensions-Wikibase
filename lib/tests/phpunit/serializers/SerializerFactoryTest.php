@@ -2,13 +2,13 @@
 
 namespace Wikibase\Lib\Test\Serializers;
 
-use Wikibase\Claim;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
-use Wikibase\Item;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
-use Wikibase\Property;
-use Wikibase\PropertyNoValueSnak;
 
 /**
  * @covers Wikibase\Lib\Serializers\SerializerFactory
@@ -61,7 +61,7 @@ class SerializerFactoryTest extends \MediaWikiTestCase {
 		$factory = new SerializerFactory();
 		$serializer = $factory->newSerializerForObject( $snak );
 
-		$argLists[] = array( 'Wikibase\Snak', $serializer->getSerialized( $snak ) );
+		$argLists[] = array( 'Wikibase\DataModel\Snak\Snak', $serializer->getSerialized( $snak ) );
 
 		return $argLists;
 	}

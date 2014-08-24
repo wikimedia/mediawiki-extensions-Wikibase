@@ -5,10 +5,10 @@ namespace Wikibase\Lib\Serializers;
 use DataValues\DataValueFactory;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
-use Wikibase\PropertyValueSnak;
-use Wikibase\Snak;
 
 /**
  * Serializer for Snak objects.
@@ -125,9 +125,9 @@ class SnakSerializer extends SerializerObject implements Unserializer {
 		}
 
 		$snakJar = array(
-			'value' => '\Wikibase\PropertyValueSnak',
-			'novalue' => '\Wikibase\PropertyNoValueSnak',
-			'somevalue' => '\Wikibase\PropertySomeValueSnak',
+			'value' => 'Wikibase\DataModel\Snak\PropertyValueSnak',
+			'novalue' => 'Wikibase\DataModel\Snak\PropertyNoValueSnak',
+			'somevalue' => 'Wikibase\DataModel\Snak\PropertySomeValueSnak',
 		);
 
 		if ( !array_key_exists( $snakType, $snakJar ) ) {

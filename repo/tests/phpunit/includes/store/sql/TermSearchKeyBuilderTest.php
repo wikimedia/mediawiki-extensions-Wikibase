@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Item;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Term;
 use Wikibase\TermSearchKeyBuilder;

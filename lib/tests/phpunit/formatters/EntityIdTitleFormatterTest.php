@@ -7,11 +7,11 @@ use Title;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Item;
 use Wikibase\Lib\EntityIdTitleFormatter;
-use Wikibase\Property;
 
 /**
  * @covers Wikibase\Lib\EntityIdTitleFormatter
@@ -79,4 +79,5 @@ class EntityIdTitleFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = new EntityIdTitleFormatter( $options, $titleLookup );
 		return $formatter;
 	}
+
 }

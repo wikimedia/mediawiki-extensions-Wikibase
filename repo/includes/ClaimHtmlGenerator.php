@@ -63,7 +63,7 @@ class ClaimHtmlGenerator {
 			false
 		);
 
-		if( !is_a( $claim, 'Wikibase\Statement' ) ) {
+		if ( !( $claim instanceof Statement ) ) {
 			$claimHtml = wfTemplate( 'wb-claim',
 				$claim->getGuid(),
 				$mainSnakHtml,
@@ -71,7 +71,7 @@ class ClaimHtmlGenerator {
 				$editSectionHtml
 			);
 		} else {
-			/** @var \Wikibase\Statement $claim */
+			/** @var Statement $claim */
 			$serializedRank = ClaimSerializer::serializeRank( $claim->getRank() );
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,

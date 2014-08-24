@@ -3,11 +3,11 @@
 namespace Wikibase\Lib\Serializers;
 
 use InvalidArgumentException;
-use Wikibase\Claims;
+use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Entity;
 use Wikibase\EntityFactory;
 
 /**
@@ -95,8 +95,8 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 			// which currently allows all parameters to be null.
 			$this->entityFactory = new EntityFactory(
 				array(
-					Item::ENTITY_TYPE => '\Wikibase\Item',
-					Property::ENTITY_TYPE => '\Wikibase\Property',
+					Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+					Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
 				)
 			);
 		} else {
@@ -234,4 +234,5 @@ abstract class EntitySerializer extends SerializerObject implements Unserializer
 
 		return $entity;
 	}
+
 }

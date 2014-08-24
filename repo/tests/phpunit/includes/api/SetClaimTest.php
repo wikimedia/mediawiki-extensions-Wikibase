@@ -302,11 +302,11 @@ class SetClaimTest extends WikibaseApiTestCase {
 	) {
 		$serializerFactory = new SerializerFactory();
 
-		if( is_a( $claim, '\Wikibase\Claim' ) ) {
+		if ( $claim instanceof Claim ) {
 			$serializer = $serializerFactory->newSerializerForObject( $claim );
 			$serializedClaim = $serializer->getSerialized( $claim );
 		} else {
-			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
+			$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
 			$serializedClaim = $claim;
 			$claim = $unserializer->newFromSerialization( $serializedClaim );
 		}

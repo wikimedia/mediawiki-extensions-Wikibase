@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Class for creating views for Wikibase\Property instances.
- * For the Wikibase\Property this basically is what the Parser is for WikitextContent.
+ * Class for creating views for Property instances.
+ * For the Property this basically is what the Parser is for WikitextContent.
  *
  * @since 0.1
  *

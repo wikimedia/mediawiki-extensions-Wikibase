@@ -492,7 +492,7 @@ class EditEntity extends ModifyEntity {
 		$opsToReturn = array();
 
 		$serializerFactory = new SerializerFactory();
-		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\Claim' );
+		$unserializer = $serializerFactory->newUnserializerForClass( 'Wikibase\DataModel\Claim\Claim' );
 
 		foreach ( $claims as $claimArray ) {
 			if( !array_key_exists( 'remove', $claimArray ) ){

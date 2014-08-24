@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test\Validators;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Item;
 use Wikibase\Test\MockRepository;
 use Wikibase\Validators\EntityExistsValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
