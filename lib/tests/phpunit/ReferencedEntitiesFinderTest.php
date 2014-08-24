@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataValues\DataValue;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -93,58 +92,6 @@ class ReferencedEntitiesFinderTest extends \PHPUnit_Framework_TestCase {
 		$linkFinder = new ReferencedEntitiesFinder();
 
 		$actual = $linkFinder->findSnakLinks( $snaks );
-
-		$expected = array_values( $expected );
-		$actual = array_values( $actual );
-
-		asort( $expected );
-		asort( $actual );
-
-		$this->assertEquals( $expected, $actual, $message );
-	}
-
-	public function dataValuesProvider() {
-		$p21 = new PropertyId( 'p11' );
-		$q42 = new ItemId( 'q42' );
-		$stringValue = new StringValue( 'q1337' );
-
-		return array(
-			$this->dataValuesTestCaseFromEntity( $p21 ),
-			$this->dataValuesTestCaseFromEntity( $q42 ),
-			array(
-				$stringValue,
-				array(),
-				'StringValue without references'
-			)
-		);
-	}
-
-	/**
-	 * Returns a test definition suitable for "testFindDataValueLinks".
-	 *
-	 * @param string $entity
-	 * @return array
-	 */
-	private function dataValuesTestCaseFromEntity( $entity ) {
-		$definition = array(
-			new EntityIdValue( $entity ),
-			array( $entity ),
-			$entity->getEntityType()
-		);
-		return $definition;
-	}
-
-	/**
-	 * @dataProvider dataValuesProvider
-	 *
-	 * @param DataValue $dataValue
-	 * @param array $expected
-	 * @param string $message
-	 */
-	public function testFindDataValueLinks( DataValue $dataValue, array $expected, $message = '' ) {
-		$linkFinder = new ReferencedEntitiesFinder();
-
-		$actual = $linkFinder->findDataValueLinks( $dataValue );
 
 		$expected = array_values( $expected );
 		$actual = array_values( $actual );
