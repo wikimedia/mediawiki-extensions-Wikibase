@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_88853a5d",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-24T14:58:30Z",
+      "side": 1,
+      "message": "Not wasting my memory in discussing the memory thing...\n\nField usage looks fine to me",
+      "parentUuid": "4e322bf2_e8703ea5",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_6510f75b",
         "filename": "lib/includes/ReferencedEntitiesFinder.php",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Hmm, in my opinion it is now much easier to see what the class does because it contains more methods and less comments. I think this method is quite useful because there are two places to add a found entity id, one time for properties and one time for other entities. \n\nFurthermore, I do not see a better name for the handleStuff methods but maybe you can help me by giving some suggestions how they can be improved.",
       "parentUuid": "4e322bf2_6510f75b",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_689a0ebf",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-24T14:58:30Z",
+      "side": 1,
+      "message": "The method splitting seems fine to me. The \"handle\" names are not good though. \"findEntitiesreferencedByDataValue\" is better than \"handleDataValue\". And perhaps \"record\" is better than \"find\", given a field is used.\n\nI recently did something very similar, and ended up keeping it all in a single method, since the code was trivial enough and I was not planning on adding in more functionality. http://pastebin.com/guAFxKAT",
+      "parentUuid": "4e322bf2_483ab2c1",
       "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
