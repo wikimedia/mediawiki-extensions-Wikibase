@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_f9a24e3a",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:07:55Z",
+      "side": 1,
+      "message": "At least the DateTimeParser (it uses PHP\u0027s internal parser) turns this into May 1st, which is not what we want. There is no way to turn this feature off, as far as I know. Best solution is to parse YearMonth first. We have tests that make sure the order is right. This comment is optional.",
+      "parentUuid": "4e322bf2_d99f92b8",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_99a90adf",
         "filename": "lib/includes/parsers/TimeParser.php",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-25T10:57:50Z",
       "side": 1,
       "message": "this comment is misleading, this is not mediawikis parser, we made it and its name is probably just plain wrong anyway!",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_f9812e93",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:07:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e322bf2_99a90adf",
       "revId": "c417178711169308b788c46be1fc89be6c15f11a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_d94e729b",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:07:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e322bf2_79ae5ee6",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_59b3a24c",
         "filename": "lib/includes/parsers/YearTimeParser.php",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2014-08-25T10:57:50Z",
       "side": 1,
       "message": "private please",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_19851aa0",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:07:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e322bf2_59b3a24c",
       "revId": "c417178711169308b788c46be1fc89be6c15f11a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
