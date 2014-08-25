@@ -960,20 +960,8 @@ class DispatchChanges extends \Maintenance {
 		wfProfileOut( __METHOD__ . '#job' );
 
 		wfProfileIn( __METHOD__ . '#push' );
-		$result = $qgroup->push( $job );
+		$qgroup->push( $job );
 		wfProfileOut( __METHOD__ . '#push' );
-
-		// MediaWiki 1.24+ throws exceptions on error instead of returning false,
-		// but JobQueueGroup::push returns a useless true value.
-		//
-		// We do explicit check for false, for backwards compatibility with MediaWiki 1.23
-		// and to make robust in case the useless true return value is removed in core.
-		//
-		// @todo The check can be removed when we do not support 1.23 anymore.
-		if ( $result === false ) {
-			wfProfileOut( __METHOD__ );
-			throw new \MWException( "Failed to push to job queue for $wikiDB" );
-		}
 
 		$this->trace( "Posted notification job for site $siteID with "
 			. count( $changes ) . " changes to $wikiDB." );
