@@ -30,19 +30,6 @@
 		},
 
 		/**
-		 * @see wb.datamodel.Entity.equals
-		 */
-		equals: function( entity ) {
-			if(
-				entity instanceof SELF
-				&& this.getDataType() !== entity.getDataType()
-			) {
-				return false;
-			}
-			return PARENT.prototype.equals.call( this, entity );
-		},
-
-		/**
 		 * @see wb.datamodel.Entity.toMap
 		 */
 		toMap: function() {
