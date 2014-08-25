@@ -141,6 +141,24 @@
       "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_3e979c95",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T08:56:40Z",
+      "side": 1,
+      "message": "I\u0027m absolutely fine with putting the pretty trivial logic here into a single method. But the proposal on Pastebin misses the array keys.",
+      "parentUuid": "4e322bf2_c8b7c2d2",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
