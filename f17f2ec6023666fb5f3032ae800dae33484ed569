@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_9e39f040",
+        "filename": "client/maintenance/populateInterwiki.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T10:11:16Z",
+      "side": 1,
+      "message": "Why do you need a property for that? Isn\u0027t it easier to call this function in clearCacheEntry? It\u0027s cheap.",
+      "revId": "f17f2ec6023666fb5f3032ae800dae33484ed569",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
