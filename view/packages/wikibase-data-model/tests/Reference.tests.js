@@ -7,57 +7,40 @@
 ( function( wb, dv, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.Reference', QUnit.newWbEnvironment() );
+	QUnit.module( 'wikibase.datamodel.Reference' );
 
-	var snakLists = [
-		new wb.datamodel.SnakList( [
-			new wb.datamodel.PropertyNoValueSnak( 'P9001' ),
-			new wb.datamodel.PropertySomeValueSnak( 'P42' ),
-			new wb.datamodel.PropertyValueSnak( 'P23', new dv.StringValue( '~=[,,_,,]:3' ) )
-		] ),
-		new wb.datamodel.SnakList( [] ),
-		new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'P9001' ) ] )
-	];
+	QUnit.test( 'constructor, getSnaks()', function( assert ) {
+		var snakLists = [
+			new wb.datamodel.SnakList( [] ),
+			new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
+			new wb.datamodel.SnakList( [
+				new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+				new wb.datamodel.PropertySomeValueSnak( 'P2' )
+			] )
+		];
 
-	QUnit.test( 'constructor', function( assert ) {
 		$.each( snakLists, function( i, snakList ) {
 			var reference = new wb.datamodel.Reference( snakList );
 
 			assert.ok(
-				reference.getSnaks().equals( snakList ),
-				'Snaks were set correctly'
+				reference instanceof wb.datamodel.Reference,
+				'Instantiated Reference object.'
 			);
-		} );
-	} );
-
-	QUnit.test( 'setSnaks and getSnaks', function( assert ) {
-		$.each( snakLists, function( i, snakList ) {
-			var reference = new wb.datamodel.Reference( [] );
-
-			reference.setSnaks( snakList );
 
 			assert.ok(
 				reference.getSnaks().equals( new wb.datamodel.SnakList( snakList ) ),
-				'Snaks were set correctly'
+				'Retrieved Snaks passed to the constructor.'
 			);
 		} );
 	} );
 
-	QUnit.test( 'getHash', function( assert ) {
-		var hash = 'hash12390213',
-			reference = new wb.datamodel.Reference( [], hash );
+	QUnit.test( 'getHash()', function( assert ) {
+		var hash = 'hash12390213';
 
 		assert.equal(
-			reference.getHash(),
+			( new wb.datamodel.Reference( [], hash ) ).getHash(),
 			hash,
 			'Reference\'s hash from constructor returned in getHash()'
-		);
-
-		reference.setSnaks( snakLists[0] );
-		assert.equal(
-			reference.getHash(),
-			hash,
-			'Reference\'s hash does not change when snak list changes'
 		);
 
 		assert.equal(
@@ -88,19 +71,14 @@
 		var references = [
 			new wb.datamodel.Reference(),
 			new wb.datamodel.Reference(
-				new wb.datamodel.SnakList(
-					[
-						new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
-						new wb.datamodel.PropertySomeValueSnak( 'P9001' )
-					]
-				),
+				new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
 				'hash12390213'
 			),
 			new wb.datamodel.Reference(
 				new wb.datamodel.SnakList(
 					[
-						new wb.datamodel.PropertyValueSnak( 'P345', new dv.StringValue( 'string' ) ),
-						new wb.datamodel.PropertySomeValueSnak( 'P9001' )
+						new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+						new wb.datamodel.PropertySomeValueSnak( 'P2' )
 					]
 				)
 			)
