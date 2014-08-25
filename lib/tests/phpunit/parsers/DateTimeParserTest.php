@@ -72,7 +72,7 @@ class DateTimeParserTest extends StringValueParserTest {
 				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10.10.2010' =>
 				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
-			'10. 10. 2010' =>
+			'  10.  10.  2010  ' =>
 				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
 			'10 10 2010' =>
 				array( '+0000000000002010-10-10T00:00:00Z', 0 , 0 , 0 , TimeValue::PRECISION_DAY , TimeFormatter::CALENDAR_GREGORIAN ),
@@ -174,6 +174,8 @@ class DateTimeParserTest extends StringValueParserTest {
 			// These are just wrong!
 			'June June June',
 			'111 111 111',
+			'10  .10  .2010',
+			'10...10...2010',
 			'Jann 2014',
 			'1980x',
 			'1980s', // supported by MWTimeIsoParser

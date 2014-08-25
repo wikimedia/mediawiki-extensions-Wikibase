@@ -61,20 +61,17 @@ class DateTimeParser extends StringValueParser {
 		// Place to put large years when they are found
 		$largeYear = null;
 
-		try{
+		try {
 			list( $sign, $value ) = $this->eraParser->parse( $value );
 
-			$value = $this->getValueWithFixedYearLengths(
-				$this->getValueWithFixedSeparators(
-					$this->monthUnlocalizer->unlocalize( trim( $value ) )
-				)
-			);
-
 			$value = trim( $value );
+			$value = $this->monthUnlocalizer->unlocalize( $value );
+			$value = $this->getValueWithFixedSeparators( $value );
+			$value = $this->getValueWithFixedYearLengths( $value );
 
 			// PHP's DateTime object also can't handle larger than 4 digit years,
 			// e.g. 1 June 202020
-			if( preg_match( '/^(.*\D)?(\d{5,})(.*)$/', $value, $matches ) ) {
+			if ( preg_match( '/^(.*\D)?(\d{5,})(.*)$/', $value, $matches ) ) {
 				$value = $matches[1] . substr( $matches[2], -4 ) . $matches[3];
 				$largeYear = $matches[2];
 			}
@@ -83,7 +80,7 @@ class DateTimeParser extends StringValueParser {
 
 			// Parse using the DateTime object (this will allow us to format the date in a nicer way)
 			$dateTime = new DateTime( $value );
-			if( $largeYear === null ) {
+			if ( $largeYear === null ) {
 				$timeString = $sign . $dateTime->format( 'Y-m-d\TH:i:s\Z' );
 			} else {
 				$timeString = $sign . $largeYear . $dateTime->format( '-m-d\TH:i:s\Z' );
@@ -92,8 +89,7 @@ class DateTimeParser extends StringValueParser {
 			// Pass the reformatted string into a base parser that parses this +/-Y-m-d\TH:i:s\Z format with a precision
 			$valueParser = new \ValueParsers\TimeParser( $calendarModelParser, $options );
 			return $valueParser->parse( $timeString );
-		}
-		catch( Exception $exception ) {
+		} catch ( Exception $exception ) {
 			throw new ParseException( $exception->getMessage(), $rawValue, self::FORMAT_NAME );
 		}
 	}
@@ -126,7 +122,7 @@ class DateTimeParser extends StringValueParser {
 	 * @return mixed
 	 */
 	private function getValueWithFixedSeparators( $value ) {
-		return preg_replace( '/[\s.]+/', '.', $value );
+		return preg_replace( '/(?<=\d)[.\s]\s*/', '.', $value );
 	}
 
 	/**
@@ -138,22 +134,22 @@ class DateTimeParser extends StringValueParser {
 	 * @return string
 	 */
 	private function getValueWithFixedYearLengths( $value ) {
-		if( preg_match( '/^(\d+)(\D)(\d+)(\D)(\d+)$/', $value, $dateParts ) ) {
-			if( $dateParts[1] > 31 && $dateParts[5] <= 31 ) {
+		if ( preg_match( '/^(\d+)(\D)(\d+)(\D)(\d+)$/', $value, $dateParts ) ) {
+			if ( $dateParts[1] > 31 && $dateParts[5] <= 31 ) {
 				// the year looks like it is at the front
-				if( strlen( $dateParts[1] ) < 4 ) {
+				if ( strlen( $dateParts[1] ) < 4 ) {
 					$value = str_pad( $dateParts[1], 4, '0', STR_PAD_LEFT )
 						. $dateParts[2] . $dateParts[3] . $dateParts[4] . $dateParts[5];
 				}
 			} else {
 				// presume the year is at the back
-				if( strlen( $dateParts[5] ) < 4 ) {
+				if ( strlen( $dateParts[5] ) < 4 ) {
 					$value = $dateParts[1] . $dateParts[2] . $dateParts[3] . $dateParts[4]
 						. str_pad( $dateParts[5], 4, '0', STR_PAD_LEFT );
 				}
 			}
 		} else {
-			if( preg_match( '/^(.*\D)(\d{1,3})$/', $value, $matches ) ) {
+			if ( preg_match( '/^(.*\D)(\d{1,3})$/', $value, $matches ) ) {
 				$value = $matches[1] . str_pad( $matches[2], 4, '0', STR_PAD_LEFT );
 			}
 		}
