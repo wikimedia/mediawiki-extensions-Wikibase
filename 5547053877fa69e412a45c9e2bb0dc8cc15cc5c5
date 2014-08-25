@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_14d71ff4",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T14:16:56Z",
+      "side": 1,
+      "message": "Suggestion: $header.",
+      "revId": "5547053877fa69e412a45c9e2bb0dc8cc15cc5c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_14c03f2e",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T14:16:56Z",
+      "side": 1,
+      "message": "Isn\u0027t groupSiteIds unused now and can be removed? Must not be done in this patch, obviously.",
+      "revId": "5547053877fa69e412a45c9e2bb0dc8cc15cc5c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
