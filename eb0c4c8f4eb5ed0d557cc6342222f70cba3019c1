@@ -34,6 +34,24 @@
       "revId": "eb0c4c8f4eb5ed0d557cc6342222f70cba3019c1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_d970b2a5",
+        "filename": "lib/tests/phpunit/formatters/MwTimeIsoFormatterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-25T10:49:44Z",
+      "side": 1,
+      "message": "yay :)",
+      "parentUuid": "4e322bf2_593de2b7",
+      "revId": "eb0c4c8f4eb5ed0d557cc6342222f70cba3019c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
