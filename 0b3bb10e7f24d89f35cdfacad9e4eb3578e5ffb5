@@ -159,6 +159,24 @@
       "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_5e10285b",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-25T10:39:57Z",
+      "side": 1,
+      "message": "Do you have one good argument why we should use the keys there? Imo they may bring a slight performance improvement but make the code less readable and therefore increase the complexity unnecessarily.",
+      "parentUuid": "4e322bf2_3e979c95",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
