@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_d99f92b8",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-25T10:57:50Z",
+      "side": 1,
+      "message": "what would this be parsed as instead if it were not first?",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_99a90adf",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-25T10:57:50Z",
+      "side": 1,
+      "message": "this comment is misleading, this is not mediawikis parser, we made it and its name is probably just plain wrong anyway!",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_79ae5ee6",
+        "filename": "lib/includes/parsers/TimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-25T10:57:50Z",
+      "side": 1,
+      "message": "this is also a bit misleading, although not as bad as the previous comment",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_59b3a24c",
+        "filename": "lib/includes/parsers/YearTimeParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-25T10:57:50Z",
+      "side": 1,
+      "message": "private please",
+      "revId": "c417178711169308b788c46be1fc89be6c15f11a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
