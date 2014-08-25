@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_d45ab7f8",
+        "filename": "lib/includes/ReferencedFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:42:14Z",
+      "side": 1,
+      "message": "Why protected and not private?",
+      "revId": "ac18a6967d248f2a411f83fc7c41b4e60e7b9ce2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_346b3b84",
+        "filename": "lib/includes/ReferencedFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:42:14Z",
+      "side": 1,
+      "message": "As I said before: I find the \"handle\" names unhelpful. And I find a bunch of methods working on a property strange. Look at this line: $this-\u003ehandleSnak( $snak )? What does this do? It\u0027s impossible to tell based on this signature. All knowledge is hidden in side effects.\n\nTL:DR: It\u0027s possible to do the same with way less side effects.",
+      "revId": "ac18a6967d248f2a411f83fc7c41b4e60e7b9ce2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_d433d7be",
+        "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:42:14Z",
+      "side": 1,
+      "message": "Space.",
+      "revId": "ac18a6967d248f2a411f83fc7c41b4e60e7b9ce2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
