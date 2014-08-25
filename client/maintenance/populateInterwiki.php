@@ -21,6 +21,11 @@ class PopulateInterwiki extends Maintenance {
 	 */
 	private $source;
 
+	/**
+	 * @var BagOStuff
+	 */
+	private $cache;
+
 	public function __construct() {
 		$this->mDescription = <<<TEXT
 This script will populate the interwiki table, pulling in interwiki links that are used on Wikipedia
@@ -46,6 +51,8 @@ TEXT;
 		$force = $this->getOption( 'force', false );
 		$this->source = $this->getOption( 'source', 'https://en.wikipedia.org/w/api.php' );
 
+		$this->cache = wfGetMainCache();
+
 		$data = $this->fetchLinks();
 
 		if ( $data === false ) {
@@ -64,7 +71,6 @@ TEXT;
 			'format' => 'json'
 		);
 
-		// todo: is valid
 		if ( !empty( $this->source ) ) {
 			try {
 				$baseUrl = rtrim( $this->source, '?' ) . '?';
@@ -105,17 +111,20 @@ TEXT;
 		}
 
 		foreach( $data as $d ) {
+			$prefix = $d['prefix'];
+
 			$row = $dbw->selectRow(
 				'interwiki',
 				'1',
-				array( 'iw_prefix' => $d['prefix'] ),
+				array( 'iw_prefix' => $prefix ),
 				__METHOD__
 			);
 
 			if ( ! $row ) {
 				$dbw->insert(
 					'interwiki',
-					array( 'iw_prefix' => $d['prefix'],
+					array(
+						'iw_prefix' => $prefix,
 						'iw_url' => $d['url'],
 						'iw_local' => 1
 					),
@@ -123,12 +132,23 @@ TEXT;
 					'IGNORE'
 				);
 			}
+
+			$this->clearCacheEntry( $prefix );
 		}
 
 		$this->output( "Interwiki links are populated.\n" );
 
 		return true;
 	}
+
+	/**
+	 * @param string $prefix
+	 */
+	private function clearCacheEntry( $prefix ) {
+		$key = wfMemcKey( 'interwiki', $prefix );
+		$this->cache->delete( $key );
+	}
+
 }
 
 $maintClass = 'PopulateInterwiki';
