@@ -12,14 +12,12 @@
 	 *
 	 * @constructor
 	 * @extends wb.datamodel.Entity
-	 * @since 0.4
-	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Items
+	 * @since 0.3
 	 *
 	 * @param {Object} data
 	 */
 	var SELF = wb.datamodel.Item = util.inherit( 'WbItem', PARENT, {
 		/**
-		 * @since 0.3
 		 * @return {wikibase.datamodel.SiteLink[]}
 		 */
 		getSiteLinks: function() {

@@ -7,10 +7,9 @@
 	'use strict';
 
 	/**
-	 * Represents a Wikibase Reference in JavaScript.
+	 * Represents a Wikibase Reference.
 	 * @constructor
 	 * @since 0.3
-	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#ReferenceRecords
 	 *
 	 * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks]
 	 * @param {string} [hash] The hash of the Reference, required when API is used to change or
@@ -40,7 +39,6 @@
 		/**
 		 * Will return the hash set for the reference initially in the constructor. This is required
 		 * when changing a reference via the API and differs from the PHP's Reference's getHash.
-		 * @since 0.4
 		 *
 		 * @return string|null
 		 */
@@ -79,7 +77,6 @@
 
 		/**
 		 * Returns a JSON structure representing this reference.
-		 * @since 0.4
 		 *
 		 * TODO: implement this as a wb.datamodel.serialization.Serializer
 		 *

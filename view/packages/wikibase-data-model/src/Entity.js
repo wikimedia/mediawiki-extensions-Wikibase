@@ -22,8 +22,7 @@
 	 *
 	 * @constructor
 	 * @abstract
-	 * @since 0.4
-	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Entities
+	 * @since 0.3
 	 *
 	 * @param {Object} data
 	 *
@@ -44,7 +43,6 @@
 
 	/**
 	 * String to identify this type of Entity.
-	 * @since 0.4
 	 * @type String
 	 */
 	SELF.TYPE = null;
@@ -120,8 +118,6 @@
 		 * Returns whether the Entity is considered to be a new one. This is the case if the
 		 * Entity has no ID yet, which will imply that the store has not yet seen this Entity.
 		 *
-		 * @since 0.4
-		 *
 		 * @return {Boolean}
 		 */
 		isNew: function() {
@@ -131,8 +127,6 @@
 		/**
 		 * Returns what type of Entity this is.
 		 *
-		 * @since 0.4
-
 		 * @return string
 		 */
 		getType: function() {
@@ -142,8 +136,6 @@
 		/**
 		 * Returns the Entity's ID.
 		 *
-		 * @since 0.4
-		 *
 		 * @return string|null
 		 */
 		getId: newGetterFn( 'id', null ),
@@ -152,8 +144,6 @@
 		 * Returns the Entity's label in a specified language or null if not available in that
 		 * language.
 		 *
-		 * @since 0.4
-		 *
 		 * @param {string} languageCode
 		 * @return string|null
 		 */
@@ -161,8 +151,6 @@
 
 		/**
 		 * Returns the Entity's label in all languages or in a set of specified languages.
-		 *
-		 * @since 0.4
 		 *
 		 * @param {string[]} languageCode Language codes
 		 * @return {Object} With language codes as keys. If a given code has no value, then the
@@ -174,8 +162,6 @@
 		 * Returns the Entity's description in a specified language or null if not available in that
 		 * language.
 		 *
-		 * @since 0.4
-		 *
 		 * @param {string} languageCode
 		 * @return string|null
 		 */
@@ -183,8 +169,6 @@
 
 		/**
 		 * Returns the Entity's description in all languages or in a set of specified languages.
-		 *
-		 * @since 0.4
 		 *
 		 * @param {string[]} languageCode Language codes
 		 * @return {Object} With language codes as keys. If a given code has no value, then the
@@ -196,8 +180,6 @@
 		 * Returns the Entity's aliases in a specified language or null if not available in that
 		 * language.
 		 *
-		 * @since 0.4
-		 *
 		 * @param {string} languageCode
 		 * @return string[]|null
 		 */
@@ -205,8 +187,6 @@
 
 		/**
 		 * Returns the Entity's aliases in all languages or in a set of specified languages.
-		 *
-		 * @since 0.4
 		 *
 		 * @param {string[]} languageCode Language codes
 		 * @return {Object} With language codes as keys. If a given code has no value, then the
@@ -217,8 +197,6 @@
 		/**
 		 * Returns the Entity's claims.
 		 *
-		 * @since 0.4
-		 *
 		 * @return wb.datamodel.Claim[]
 		 */
 		getClaims: newGetterFn( 'claims', [] ),
@@ -226,8 +204,6 @@
 		/**
 		 * Returns a plain Object representing this Entity. The fields of the object are similar to
 		 * a serialized version of the Entity but values within the fields will not be serialized.
-		 *
-		 * @since 0.4
 		 *
 		 * @return Object
 		 */
@@ -241,8 +217,6 @@
 	/**
 	 * Creates a new Entity Object from a given Object with certain keys and values, what an actual
 	 * Entity would return when calling its toMap().
-	 *
-	 * @since 0.4
 	 *
 	 * @param {Object} map Requires at least 'snaktype' and 'property' fields.
 	 * @return wb.datamodel.Entity|null
@@ -265,8 +239,6 @@
 
 	/**
 	 * Returns a new, empty entity of the given type.
-	 *
-	 * @since 0.4
 	 *
 	 * @param {string} type Entity type
 	 * @return wb.datamodel.Entity

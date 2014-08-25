@@ -1,10 +1,6 @@
 <?php
 
 /**
- * File for Wikibase resourceloader modules.
- *
- * @since 0.2
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >

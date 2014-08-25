@@ -12,8 +12,7 @@
  *
  * @constructor
  * @abstract
- * @since 0.4
- * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Snaks
+ * @since 0.3
  *
  * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks] One or more Snaks in the list initially.
  */
@@ -55,8 +54,6 @@ $.extend( SELF.prototype, {
 	 * Will add a given Snak to the list of Snaks. If an equal Snak is in the list already, the
 	 * Snak will not be added.
 	 *
-	 * @since 0.4
-	 *
 	 * @param {wb.datamodel.Snak} snak
 	 * @return boolean Whether Snak was not yet in the list and therefore added.
 	 */
@@ -75,8 +72,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Removes a given Snak from the list.
-	 *
-	 * @since 0.4
 	 *
 	 * @param {wb.datamodel.Snak} snak
 	 * @return boolean Whether Snak was in the list and therefore removed.
@@ -98,7 +93,6 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns a snak list with the snaks that feature the specified property id. If the property id
 	 * parameter is omitted, a copy of the whole SnakList object is returned.
-	 * @since 0.4
 	 *
 	 * @param {string} [propertyId]
 	 * @return {wikibase.SnakList}
@@ -122,7 +116,6 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns a list of wb.datamodel.SnakList objects, each of them grouped by the property used by the
 	 * snaks.
-	 * @since 0.5
 	 *
 	 * @return {wikibase.SnakList[]}
 	 */
@@ -136,10 +129,9 @@ $.extend( SELF.prototype, {
 
 		return groupedSnakLists;
 	},
+
 	/**
 	 * Returns whether the list contains a Snak equal to a given one.
-	 *
-	 * @since 0.4
 	 *
 	 * @param {wb.datamodel.Snak} snak
 	 * @return boolean
@@ -155,8 +147,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Will return whether a given Snak list equals this one.
-	 *
-	 * @since 0.4
 	 *
 	 * @param {wb.datamodel.SnakList} snakList
 	 * @return boolean
@@ -183,8 +173,6 @@ $.extend( SELF.prototype, {
 	/**
 	 * Iterates over all Snaks in the list, similar to jQuery.each.
 	 *
-	 * @since 0.4
-	 *
 	 * @param {Function} fn A callback, called for each Snak in the list. The callback can have
 	 *        two parameters:
 	 *        (1) {Number} index A continuous number, increased with each callback.
@@ -198,7 +186,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Adds the snaks of another snak list to this snak list.
-	 * @since 0.4
 	 *
 	 * @param {wikibase.SnakList} snakList
 	 */
@@ -234,7 +221,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns a snak's index within the snak list. Returns -1 when the snak could not be found.
-	 * @since 0.4
 	 *
 	 * @param {wikibase.Snak} snak
 	 * @return {number}
@@ -252,7 +238,6 @@ $.extend( SELF.prototype, {
 	 * Returns the indices of the snak list where a certain snak may be moved to. A snak may be
 	 * moved within its property group. It may also be moved to the slots between property groups
 	 * which involves moving the whole property group the snak belongs to.
-	 * @since 0.4
 	 *
 	 * @param {wikibase.Snak} snak
 	 * @return {number[]}
@@ -306,7 +291,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Moves a snaklist's snak to a new index.
-	 * @since 0.4
 	 *
 	 * @param {wikibase.Snak} snak Snak to move within the list.
 	 * @param {number} toIndex
@@ -367,7 +351,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Moves a snak towards the top of the snak list by one step.
-	 * @since 0.4
 	 *
 	 * @param {wikibase.Snak} snak
 	 * @return {wikibase.SnakList} This SnakList object.
@@ -388,7 +371,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Moves a snak towards the bottom of the snak list by one step.
-	 * @since 0.4
 	 *
 	 * @param {wikibase.Snak} snak
 	 * @return {wikibase.SnakList} This SnakList object.
@@ -411,8 +393,6 @@ $.extend( SELF.prototype, {
 	 * Returns a simple JSON structure representing this Snak. The structure will be a map, having
 	 * property IDs as keys and an array of the Snak's JSON as values.
 	 *
-	 * @since 0.4
-	 *
 	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *
 	 * @return Object
@@ -433,8 +413,6 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns all Snaks in this list as an Array of Snaks. Changes to the array will not modify
 	 * the original list Object.
-	 *
-	 * @since 0.4
 	 *
 	 * @return wb.datamodel.Snak[]
 	 */

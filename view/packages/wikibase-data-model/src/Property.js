@@ -12,8 +12,7 @@
 	 *
 	 * @constructor
 	 * @extends wb.datamodel.Entity
-	 * @since 0.4
-	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Properties
+	 * @since 0.3
 	 *
 	 * @param {Object} data
 	 *
@@ -23,8 +22,6 @@
 
 		/**
 		 * Returns the Property's data type's identifier.
-		 *
-		 * @since 0.4
 		 *
 		 * @return string
 		 */
