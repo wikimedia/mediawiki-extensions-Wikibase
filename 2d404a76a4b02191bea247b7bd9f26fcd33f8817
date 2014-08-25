@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_f4e7f339",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T13:28:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure this implementation is better. array_unique is a bit magic and scary when it works with objects.",
+      "revId": "2d404a76a4b02191bea247b7bd9f26fcd33f8817",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
