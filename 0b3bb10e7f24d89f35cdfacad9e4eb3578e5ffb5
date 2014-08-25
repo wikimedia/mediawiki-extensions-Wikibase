@@ -177,6 +177,24 @@
       "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_d949d26b",
+        "filename": "lib/includes/ReferencedEntitiesFinder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-25T10:46:49Z",
+      "side": 1,
+      "message": "Huh? They may not be necessary, but you can say that about like half of the code we write. I think it\u0027s useful and just good practice to do it that way, with array keys.\n\nRelying on the sometimes magic behavior of array_unique is worse in my opinion.",
+      "parentUuid": "4e322bf2_5e10285b",
+      "revId": "0b3bb10e7f24d89f35cdfacad9e4eb3578e5ffb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
