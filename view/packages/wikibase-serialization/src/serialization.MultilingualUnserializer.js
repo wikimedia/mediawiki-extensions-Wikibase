@@ -24,7 +24,7 @@ function extractValuesFromObjectArray( array ) {
  *
  * @constructor
  * @extends wikibase.serialization.Unserializer
- * @since 1.2
+ * @since 2.0
  */
 MODULE.MultilingualUnserializer = util.inherit( 'WbMultilingualUnserializer', PARENT, {
 	/**

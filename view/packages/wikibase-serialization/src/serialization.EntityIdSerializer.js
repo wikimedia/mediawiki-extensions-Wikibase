@@ -13,7 +13,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  * @extends wikibase.serialization.Serializer
- * @since 1.2
+ * @since 2.0
  */
 MODULE.EntityIdSerializer = util.inherit( 'WbEntityIdSerializer', PARENT, {
 	/**

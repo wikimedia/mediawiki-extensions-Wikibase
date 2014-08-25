@@ -14,7 +14,7 @@ var MODULE = wb.serialization,
  *
  * @constructor
  * @extends wikibase.serialization.Unserializer
- * @since 1.2
+ * @since 2.0
  */
 MODULE.ClaimUnserializer = util.inherit( 'WbClaimUnserializer', PARENT, {
 	/**

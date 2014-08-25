@@ -18,7 +18,7 @@
 	 * Serializer for Entity objects.
 	 * @constructor
 	 * @extends {wikibase.serialization.Serializer}
-	 * @since 1.2
+	 * @since 2.0
 	 */
 	var SELF = MODULE.EntitySerializer = util.inherit( 'WbEntitySerializer', PARENT, {
 		/**
@@ -59,8 +59,6 @@
 
 	/**
 	 * Allows registering individual serialization logic for entities per entity type.
-	 *
-	 * @since 1.2
 	 *
 	 * @param {string} entityType
 	 * @param {Function} TypeSpecificSerializer

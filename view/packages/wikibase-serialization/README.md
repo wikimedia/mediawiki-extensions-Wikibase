@@ -21,7 +21,7 @@ version 1.0 of this package:
 
 ## Release notes
 
-### 1.2 (dev)
+### 2.0 (dev)
 
 * Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityUnserializer</code> instead.
 * Added <code>wikibase.serialization.ClaimSerializer</code>.
