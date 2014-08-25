@@ -68,6 +68,10 @@ Other breaking changes:
 * Deprecated `Entity::setId`, `Entity::newClaim` and `Entity::getAllSnaks`
 * Deprecated `Item::getClaims` in favour of `Item::getStatements`
 
+## Version 0.9.1 (2014-08-25)
+
+* Fixed fatal error: Can't inherit abstract function EntityDocument::getType() (previously declared abstract in Entity)
+
 ## Version 0.9 (2014-08-15)
 
 * Changed the signatures of `setLabel`, `setDescription` and `setAliasGroup` in `Fingerprint`
