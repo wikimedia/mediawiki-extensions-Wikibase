@@ -271,8 +271,7 @@ HTML;
 <<<HTML
 <div class="wikibase-sitelinkgroupview" data-wb-sitelinks-group="$5">
 	<h2 class="wb-section-heading wikibase-sitelinkgroupview-heading" dir="auto" id="$1">
-		$2<span class="wikibase-sitelinkgroupview-counter">$3</span>
-	</h2>
+		$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h2>
 	<div class="wikibase-sitelinkgroupview-sitelinklistview">
 		<!-- wikibase-sitelinklistview -->$4
 	</div>
