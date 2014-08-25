@@ -59,6 +59,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 		);
 
 		foreach ( $claims as $i => $claim ) {
+			/** @var $claim Claim */
 			$claim->setGuid( 'ClaimsSerializerTest$claim-' . $i );
 		}
 
