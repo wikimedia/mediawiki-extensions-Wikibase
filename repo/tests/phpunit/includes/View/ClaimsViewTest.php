@@ -17,8 +17,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\EntityTitleLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
 use Wikibase\Repo\View\SnakHtmlGenerator;
@@ -130,7 +130,7 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookupMock() {
-		$lookup = $this->getMock( 'Wikibase\EntityTitleLookup' );
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$lookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( array( $this, 'getTitleForId' ) ) );
