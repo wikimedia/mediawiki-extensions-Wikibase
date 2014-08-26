@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_b7f723f2",
+        "filename": "repo/tests/phpunit/includes/api/RemoveClaimsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-26T15:11:17Z",
+      "side": 1,
+      "message": "What about $obtainedClaims \u003d new Claims();?",
+      "revId": "ab45bc83ba6519e27ce6a035b85737b51153f5bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
