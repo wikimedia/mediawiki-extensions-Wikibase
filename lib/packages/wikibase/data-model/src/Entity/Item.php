@@ -339,7 +339,7 @@ class Item extends Entity {
 	/**
 	 * @since 1.0
 	 *
-	 * @return \Wikibase\DataModel\Statement\Statement[]
+	 * @return Statement[]
 	 */
 	public function getStatements() {
 		return $this->statements;
