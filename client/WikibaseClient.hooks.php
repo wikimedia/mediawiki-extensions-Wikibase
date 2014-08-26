@@ -923,9 +923,6 @@ final class ClientHooks {
 			// show a message to the user that the Wikibase item needs to be
 			// manually updated.
 			wfLogWarning( $e->getMessage() );
-		} catch( RuntimeException $e ) {
-			// B/C for MediaWiki 1.23
-			wfLogWarning( $e->getMessage() );
 		}
 
 		wfProfileOut( __METHOD__ );
