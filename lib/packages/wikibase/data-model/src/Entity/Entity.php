@@ -19,7 +19,8 @@ use Wikibase\DataModel\Term\TermList;
  * Represents a single Wikibase entity.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Values
  *
- * @since 0.1
+ * @deprecated since 1.0 - do not type hint against Entity. See
+ * https://lists.wikimedia.org/pipermail/wikidata-tech/2014-June/000489.html
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
