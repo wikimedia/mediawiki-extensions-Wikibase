@@ -7,6 +7,7 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\ListDiffer;
+use Exception;
 use InvalidArgumentException;
 use Message;
 use RuntimeException;
@@ -54,7 +55,7 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @var string
 	 */
-	private $langCode;
+	private $languageCode;
 
 	/**
 	 * Constructor.
@@ -64,24 +65,27 @@ class ClaimDifferenceVisualizer {
 	 * @param ValueFormatter $propertyIdFormatter Formatter for IDs, must generate HTML.
 	 * @param SnakFormatter $snakDetailsFormatter detailed Formatter for Snaks, must generate HTML.
 	 * @param SnakFormatter $snakBreadCrumbFormatter terse Formatter for Snaks, must generate HTML.
-	 * @param $langCode
+	 * @param string $languageCode
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( ValueFormatter $propertyIdFormatter,
-		SnakFormatter $snakDetailsFormatter, SnakFormatter $snakBreadCrumbFormatter, $langCode
+	public function __construct(
+		ValueFormatter $propertyIdFormatter,
+		SnakFormatter $snakDetailsFormatter,
+		SnakFormatter $snakBreadCrumbFormatter,
+		$languageCode
 	) {
 		if ( $snakDetailsFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-			&& $snakDetailsFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF ) {
-
+			&& $snakDetailsFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF
+		) {
 			throw new InvalidArgumentException(
 				'Expected $snakDetailsFormatter to generate html, not '
 				. $snakDetailsFormatter->getFormat() );
 		}
 
 		if ( $snakBreadCrumbFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
-			&& $snakBreadCrumbFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF ) {
-
+			&& $snakBreadCrumbFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_DIFF
+		) {
 			throw new InvalidArgumentException(
 				'Expected $snakBreadCrumbFormatter to generate html, not '
 				. $snakBreadCrumbFormatter->getFormat() );
@@ -90,8 +94,7 @@ class ClaimDifferenceVisualizer {
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->snakDetailsFormatter = $snakDetailsFormatter;
 		$this->snakBreadCrumbFormatter = $snakBreadCrumbFormatter;
-
-		$this->langCode = $langCode;
+		$this->languageCode = $languageCode;
 	}
 
 	/**
@@ -125,7 +128,7 @@ class ClaimDifferenceVisualizer {
 			$html .= $this->visualizeSnakListChanges(
 				$claimDifference->getReferenceChanges(),
 				$baseClaim,
-				wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->langCode )
+				wfMessage( 'wikibase-diffview-reference' )->inLanguage( $this->languageCode )
 			);
 		}
 
@@ -172,17 +175,21 @@ class ClaimDifferenceVisualizer {
 	 * @return string
 	 */
 	protected function visualizeMainSnakChange( DiffOpChange $mainSnakChange ) {
-		if( $mainSnakChange->getNewValue() === null ){
-			$headerHtml = $this->getSnakLabelHeader( $mainSnakChange->getOldValue() );
+		$oldSnak = $mainSnakChange->getOldValue();
+		$newSnak = $mainSnakChange->getNewValue();
+
+		if ( $newSnak === null ) {
+			$headerHtml = $this->getSnakLabelHeader( $oldSnak );
 		} else {
-			$headerHtml = $this->getSnakLabelHeader( $mainSnakChange->getNewValue() );
+			$headerHtml = $this->getSnakLabelHeader( $newSnak );
 		}
 
 		$valueFormatter = new DiffOpValueFormatter(
 			// todo: should show specific headers for each column
 			$headerHtml,
-			$this->formatSnakDetails( $mainSnakChange->getOldValue() ),
-			$this->formatSnakDetails( $mainSnakChange->getNewValue() )
+			// TODO: How to highlight the actual changes inside the snak?
+			$this->formatSnakDetails( $oldSnak ),
+			$this->formatSnakDetails( $newSnak )
 		);
 
 		return $valueFormatter->generateHtml();
@@ -203,7 +210,7 @@ class ClaimDifferenceVisualizer {
 		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
 
 		$valueFormatter = new DiffOpValueFormatter(
-			$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->langCode )->parse(),
+			$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-rank' )->inLanguage( $this->languageCode )->parse(),
 			$this->getRankHtml( $rankChange->getOldValue() ),
 			$this->getRankHtml( $rankChange->getNewValue() )
 		);
@@ -228,7 +235,7 @@ class ClaimDifferenceVisualizer {
 		// Messages: wikibase-diffview-rank-preferred, wikibase-diffview-rank-normal,
 		// wikibase-diffview-rank-deprecated
 		$msg = wfMessage( 'wikibase-diffview-rank-' . $rank );
-		return $msg->inLanguage( $this->langCode )->parse();
+		return $msg->inLanguage( $this->languageCode )->parse();
 	}
 
 	/**
@@ -236,18 +243,19 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string HTML
 	 */
-	protected function formatSnakDetails( $snak ) {
-		if( $snak === null ){
+	protected function formatSnakDetails( Snak $snak = null ) {
+		if ( $snak === null ) {
 			return null;
 		}
+
 		try {
 			return $this->snakDetailsFormatter->formatSnak( $snak );
-		} catch ( \Exception $ex ) {
+		} catch ( Exception $ex ) {
 			// @fixme maybe there is a way we can render something more useful
 			// we are getting multiple types of exceptions and should handle
 			// consistent (and shared code) with what we do in SnakHtmlGenerator.
 			$messageText = wfMessage( 'wikibase-snakformat-invalid-value' )
-				->inLanguage( $this->langCode )
+				->inLanguage( $this->languageCode )
 				->parse();
 
 			return $messageText;
@@ -259,11 +267,11 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @return string HTML
 	 */
-	protected function formatPropertyId( EntityId $id ) {
+	protected function formatPropertyId( EntityId $entityId ) {
 		try {
-			return $this->propertyIdFormatter->format( $id );
+			return $this->propertyIdFormatter->format( $entityId );
 		} catch ( FormattingException $ex ) {
-			return '?'; // XXX: or include the error message?
+			return $entityId->getSerialization(); // XXX: or include the error message?
 		}
 	}
 
@@ -278,7 +286,7 @@ class ClaimDifferenceVisualizer {
 	 */
 	 protected function getSnakListValues( SnakList $snakList ) {
 		$values = array();
-		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->langCode )->escaped();
+		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped();
 
 		foreach ( $snakList as $snak ) {
 			/** @var $snak Snak */
@@ -296,16 +304,17 @@ class ClaimDifferenceVisualizer {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Snak $snak
+	 * @param Snak|null $snak
 	 *
 	 * @return string HTML
 	 */
-	protected function getSnakLabelHeader( Snak $snak ) {
-		$propertyId = $snak->getPropertyId();
-		$propertyLabel = $this->formatPropertyId( $propertyId );
+	protected function getSnakLabelHeader( Snak $snak = null ) {
+		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->languageCode )->parse();
 
-		$headerText = wfMessage( 'wikibase-entity-property' )->inLanguage( $this->langCode )->parse()
-			. ' / ' . $propertyLabel ;
+		if ( $snak !== null ) {
+			$propertyId = $snak->getPropertyId();
+			$headerText .= ' / ' . $this->formatPropertyId( $propertyId );
+		}
 
 		return $headerText;
 	}
@@ -323,9 +332,9 @@ class ClaimDifferenceVisualizer {
 		$headerText = $this->getSnakLabelHeader( $snak );
 
 		try {
-			$headerText .= wfMessage( 'colon-separator' )->inLanguage( $this->langCode )->escaped()
+			$headerText .= wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped()
 				. $this->snakBreadCrumbFormatter->formatSnak( $snak );
-		} catch ( \Exception $ex ) {
+		} catch ( Exception $ex ) {
 			// just ignore it
 		}
 
@@ -391,7 +400,7 @@ class ClaimDifferenceVisualizer {
 	 */
 	protected function visualizeQualifierChanges( Diff $changes, Claim $claim ) {
 		$html = '';
-		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->langCode )->escaped();
+		$colon = wfMessage( 'colon-separator' )->inLanguage( $this->languageCode )->escaped();
 
 		$claimMainSnak = $claim->getMainSnak();
 		$claimHeader = $this->getSnakValueHeader( $claimMainSnak );
@@ -422,7 +431,7 @@ class ClaimDifferenceVisualizer {
 			}
 
 			$valueFormatter = new DiffOpValueFormatter(
-					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->langCode )->parse(),
+					$claimHeader . ' / ' . wfMessage( 'wikibase-diffview-qualifier' )->inLanguage( $this->languageCode )->parse(),
 					$oldVal,
 					$newVal
 			);
