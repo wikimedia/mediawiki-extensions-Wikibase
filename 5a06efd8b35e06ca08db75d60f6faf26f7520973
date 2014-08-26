@@ -155,6 +155,24 @@
       "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_aaf57fc9",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:32:22Z",
+      "side": 1,
+      "message": "Well, this is now an Interactor, nothing to do with the Api.\nThus API should go totally, and this would be something like Wikibase\\Test\\Interactors",
+      "parentUuid": "4e322bf2_0a07f3ce",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
