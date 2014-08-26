@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_eacee7b8",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:25:26Z",
+      "side": 1,
+      "message": "should probably have a wfProfileOut( __METHOD__ ); before the dieException call",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_8ac52393",
+        "filename": "repo/tests/phpunit/includes/ApiModuleTestHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:25:26Z",
+      "side": 1,
+      "message": "eww, accessing through super $GLOBALS.\nwould be nicer to have global $wgUser.\nand thus use $wgUser.\n\nI guess this is test code so it doesnt matter that much",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_4abf3bf7",
+        "filename": "repo/tests/phpunit/includes/ApiModuleTestHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:25:26Z",
+      "side": 1,
+      "message": "eww space",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_2a34efa6",
+        "filename": "repo/tests/phpunit/includes/EntityModificationTestHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:25:26Z",
+      "side": 1,
+      "message": "space :\u003c",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_ea3dc78b",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:25:26Z",
+      "side": 1,
+      "message": "namespace is probably wrong",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_ca420b13",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:25:26Z",
+      "side": 1,
+      "message": "namespace is probably wrong",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
