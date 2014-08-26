@@ -813,4 +813,11 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( new StatementList(), $item->getStatements() );
 	}
 
+	public function testGetStatementsReturnsCorrectTypeAfterClear() {
+		$item = Item::newEmpty();
+		$item->clear();
+
+		$this->assertEquals( new StatementList(), $item->getStatements() );
+	}
+
 }

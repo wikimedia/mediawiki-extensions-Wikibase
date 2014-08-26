@@ -233,7 +233,7 @@ class Item extends Entity {
 	public function clear() {
 		$this->fingerprint = Fingerprint::newEmpty();
 		$this->siteLinks = new SiteLinkList();
-		$this->statements = array();
+		$this->statements = new StatementList();
 	}
 
 	/**
