@@ -695,7 +695,7 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( $snak, $statement->getMainSnak() );
 	}
 
-	public function testSetStatements() {
+	public function testSetClaims() {
 		$item = Item::newEmpty();
 
 		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
@@ -803,6 +803,14 @@ class ItemTest extends EntityTest {
 			$statements,
 			$item->getStatements()
 		);
+	}
+
+	public function testSetStatements() {
+		$item = Item::newEmpty();
+		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$item->setStatements( new StatementList() );
+		$this->assertEquals( new StatementList(), $item->getStatements() );
 	}
 
 }

@@ -343,6 +343,15 @@ class Item extends Entity {
 	}
 
 	/**
+	 * @since 1.0
+	 *
+	 * @param StatementList $statements
+	 */
+	public function setStatements( StatementList $statements ) {
+		$this->statements = $statements;
+	}
+
+	/**
 	 * @deprecated since 1.0, use getStatements instead
 	 *
 	 * @return Statement[]
@@ -352,7 +361,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @deprecated since 1.0, use getStatements instead
+	 * @deprecated since 1.0, use setStatements instead
 	 *
 	 * @param Claims $claims
 	 */
