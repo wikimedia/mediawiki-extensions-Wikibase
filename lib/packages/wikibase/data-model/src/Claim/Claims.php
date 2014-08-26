@@ -14,12 +14,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
 
 /**
- * Implementation of the Claims interface.
- * @see Claims
- *
  * A claim (identified using it's GUID) can only be added once.
  *
- * @since 0.1
+ * @deprecated since 1.0
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
