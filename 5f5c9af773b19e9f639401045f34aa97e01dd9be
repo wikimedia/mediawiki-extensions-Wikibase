@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_a6581336",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-08-26T21:30:08Z",
+      "side": 1,
+      "message": "Does $2 have punctuation? If yes, the final period should be removed.",
+      "revId": "5f5c9af773b19e9f639401045f34aa97e01dd9be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
