@@ -70,6 +70,9 @@ Other breaking changes:
 * Deprecated `Entity::getAllSnaks`
 * Deprecated `Entity::getDiff` in favour of `EntityDiffer` and more specific differs
 * Deprecated `Item::getClaims` in favour of `Item::getStatements`
+* Deprecated `Item::addClaim` in favour of `Item::getStatements()->add*`
+* Deprecated `Item::setClaims` in favour of `Item::setStatements`
+* Deprecated `Item::hasClaims` in favour of `Item::getStatements()->count`
 
 #### Other changes
 
