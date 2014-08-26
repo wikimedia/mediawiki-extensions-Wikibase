@@ -403,6 +403,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * Returns an EntityDiff between $this and the provided Entity.
 	 *
 	 * @since 0.1
+	 * @deprecated since 1.0 - use EntityDiffer or a more specific differ
 	 *
 	 * @param Entity $target
 	 *

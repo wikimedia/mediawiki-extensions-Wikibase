@@ -66,7 +66,7 @@ Other breaking changes:
 #### Other changes
 
 * Undeprecated passing an integer to `Item::setId` and `Property::setId`
-* Deprecated `Entity::setId`, `Entity::newClaim` and `Entity::getAllSnaks`
+* Deprecated `Entity::setId`, `Entity::newClaim`, `Entity::getAllSnaks` and `Entity::getDiff`
 * Deprecated `Item::getClaims` in favour of `Item::getStatements`
 * The FQN of `Statement` is now `Wikibase\DataModel\Statement\Statement`. The old FQN is deprecated.
 
