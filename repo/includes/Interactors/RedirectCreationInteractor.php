@@ -94,7 +94,7 @@ class RedirectCreationInteractor {
 		$this->checkEmpty( $fromId );
 
 		$summary = new Summary( 'wbcreateredirect' );
-		$summary->addAutoSummaryArgs( $fromId, $toId );
+		$summary->addAutoCommentArgs( $fromId, $toId );
 
 		$redirect = new EntityRedirect( $fromId, $toId );
 		$this->saveRedirect( $redirect, $summary );
