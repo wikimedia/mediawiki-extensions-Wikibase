@@ -3,7 +3,9 @@
 namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -70,6 +72,11 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	private static $badgeId = null;
 
 	/**
+	 * @var string
+	 */
+	private static $redirectId = null;
+
+	/**
 	 * @var array
 	 */
 	private static $oldBadgeItemsSetting;
@@ -110,8 +117,12 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		$item->addSiteLink( new SiteLink( 'dewiki', 'Wikidata', array( $badge->getId() ) ) );
 		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
 
+		$redirect = new EntityRedirect( new ItemId('Q12345678'), $item->getId() );
+		$store->saveRedirect( $redirect, "testing", $GLOBALS['wgUser'], EDIT_NEW );
+
 		self::$badgeId = $badge->getId()->getSerialization();
 		self::$itemId = $item->getId()->getSerialization();
+		self::$redirectId = $redirect->getEntityId()->getSerialization();
 	}
 
 	private function addBadgeMatcher() {
@@ -194,6 +205,12 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 		foreach( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
 		}
+	}
+
+	public function testExecuteRedirect() {
+		list( $output, ) = $this->executeSpecialPage( self::$redirectId  . '/dewiki', null, 'qqx' );
+
+		$this->assertRegExp( '@<p class="error">\(wikibase-wikibaserepopage-unresolved-redirect: .*?\)</p>@', $output, "Expected error message" );
 	}
 
 }
