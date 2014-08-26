@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_ca27ab5e",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": "not sure the WikibaseValidators group quite belongs here",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_ea22674f",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": "I dont think this needed @group database, we dont actually do any api calls!",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_2abf4fcf",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": "Currently the test sill stop working at the first broken assertion.\nTo make this a bit nicer there should be a provider that provides the api modules to be tested.\nThen each of the assert methods below should become a test taking data from the provider.\nOnce this is done one api module could fail three tests for three different things instead of the current setup which hides anything that fails for an api modules after the first assertion has failed!",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_0addb347",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": "it would be nice to split some of the below lines onto multiple lines to make them easier to read",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_aa1c5f19",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": "there should be spaces either side of the . here",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_8a19a329",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": "as above, there should be spaces either side of the . here",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_6a1677f8",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": ". spaces",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_eae147fc",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": ". spaces",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_cae68b13",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": ". spaces",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_aaeb3fda",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": ". spaces",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_8ae883de",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": ". spaces",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_6af557b5",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-26T11:41:28Z",
+      "side": 1,
+      "message": ". spaces",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
