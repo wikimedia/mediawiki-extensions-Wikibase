@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_8a6be381",
+        "filename": "repo/includes/api/MergeItems.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-26T11:30:24Z",
+      "side": 1,
+      "message": "And all calling methods need to try/catch for everything they call, so they can also call wfProfileOut in case some function threw an exception?... not really.\n\nI can do this here if you insist, but ProfileIn/Out never worked with exceptions, and probably never will. Luckily, the system is pretty robust about missing ProfileOut calls.",
+      "parentUuid": "4e322bf2_eacee7b8",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_8ac52393",
         "filename": "repo/tests/phpunit/includes/ApiModuleTestHelper.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-26T11:25:26Z",
       "side": 1,
       "message": "eww, accessing through super $GLOBALS.\nwould be nicer to have global $wgUser.\nand thus use $wgUser.\n\nI guess this is test code so it doesnt matter that much",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_6a68b784",
+        "filename": "repo/tests/phpunit/includes/ApiModuleTestHelper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-26T11:30:24Z",
+      "side": 1,
+      "message": "Actually, i like to use $GLOBALS because that#s a lot easier to splot when browsing the code than \"normal\" globals are...",
+      "parentUuid": "4e322bf2_8ac52393",
       "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -98,6 +134,24 @@
       "writtenOn": "2014-08-26T11:25:26Z",
       "side": 1,
       "message": "namespace is probably wrong",
+      "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_0a07f3ce",
+        "filename": "repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-26T11:30:24Z",
+      "side": 1,
+      "message": "What would be right, then? Test\\Api is consistent with the directory structure. Api\\Test isn\u0027t.",
+      "parentUuid": "4e322bf2_ca420b13",
       "revId": "5a06efd8b35e06ca08db75d60f6faf26f7520973",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
