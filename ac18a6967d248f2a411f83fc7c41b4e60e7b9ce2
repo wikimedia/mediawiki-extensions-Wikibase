@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "4e322bf2_df488b8e",
+        "filename": "lib/includes/ReferencedFinder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-08-26T10:37:35Z",
+      "side": 1,
+      "message": "I agree with Thiemo: accumulating data in a member just to return it is bad. The Finder should either be stateless, or should be a builder-style class, with a \"addLinksFromSnaks\" method and a \"getLinks\" method.\n\nBut a statefull builder needs a factory, so we can create new instances on the fly (we can\u0027t use \"new\", since then we\u0027d have to know about all the services the finder depends on). That seems unnecessary. Much easier to have a stateless finder, and just build the result on the stack.",
+      "revId": "ac18a6967d248f2a411f83fc7c41b4e60e7b9ce2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_d433d7be",
         "filename": "repo/tests/phpunit/includes/EntityViewTest.php",
         "patchSetId": 4
