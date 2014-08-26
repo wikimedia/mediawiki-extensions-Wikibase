@@ -1,0 +1,9 @@
+Code-Review+1: Hashar <hashar@free.fr>
+Code-Review+2: Aude <aude.wiki@gmail.com>
+Verified+1: jenkins-bot
+Verified+2: WikidataJenkins <wikidata-services@wikimedia.de>
+Submitted-by: Aude <aude.wiki@gmail.com>
+Submitted-at: Tue, 26 Aug 2014 05:51:23 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/156165
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
