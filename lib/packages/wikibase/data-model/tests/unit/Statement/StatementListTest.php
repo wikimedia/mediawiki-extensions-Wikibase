@@ -248,4 +248,96 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		new StatementList( null );
 	}
 
+	public function testCountForEmptyList() {
+		$list = new StatementList();
+		$this->assertSame( 0, count( $list ) );
+		$this->assertSame( 0, $list->count() );
+	}
+
+	public function testCountForNonEmptyList() {
+		$list = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+		) );
+
+		$this->assertSame( 2, $list->count() );
+	}
+
+	/**
+	 * @dataProvider statementArrayProvider
+	 */
+	public function testGivenIdenticalLists_equalsReturnsTrue( array $statements ) {
+		$firstStatements = new StatementList( $statements );
+		$secondStatements = new StatementList( $statements );
+
+		$this->assertTrue( $firstStatements->equals( $secondStatements ) );
+	}
+
+	public function statementArrayProvider() {
+		return array(
+			array(
+				array(
+					$this->getStatementWithSnak( 1, 'foo' ),
+					$this->getStatementWithSnak( 2, 'bar' ),
+				)
+			),
+
+			array(
+				array(
+					$this->getStatementWithSnak( 1, 'foo' ),
+				)
+			),
+
+			array(
+				array()
+			),
+		);
+	}
+
+	public function testGivenDifferentLists_equalsReturnsFalse() {
+		$firstStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+		) );
+
+		$secondStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'SPAM' ),
+		) );
+
+		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
+	}
+
+	public function testGivenListsWithDifferentDuplicates_equalsReturnsFalse() {
+		$firstStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+		) );
+
+		$secondStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+		) );
+
+		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
+	}
+
+	public function testGivenListsWithDifferentOrder_equalsReturnsFalse() {
+		$firstStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+			$this->getStatementWithSnak( 3, 'baz' ),
+		) );
+
+		$secondStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 3, 'baz' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+		) );
+
+		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
+	}
+
 }

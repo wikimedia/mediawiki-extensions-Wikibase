@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -37,7 +38,7 @@ class Item extends Entity {
 	private $siteLinks;
 
 	/**
-	 * @var Statement[]
+	 * @var StatementList
 	 */
 	private $statements;
 
@@ -47,9 +48,9 @@ class Item extends Entity {
 	 * @param ItemId|null $id
 	 * @param Fingerprint $fingerprint
 	 * @param SiteLinkList $links
-	 * @param Statement[] $statements
+	 * @param StatementList $statements
 	 */
-	public function __construct( ItemId $id = null, Fingerprint $fingerprint, SiteLinkList $links, array $statements ) {
+	public function __construct( ItemId $id = null, Fingerprint $fingerprint, SiteLinkList $links, StatementList $statements ) {
 		$this->id = $id;
 		$this->fingerprint = $fingerprint;
 		$this->siteLinks = $links;
@@ -182,8 +183,8 @@ class Item extends Entity {
 		return new self(
 			null,
 			Fingerprint::newEmpty(),
-			new SiteLinkList( array() ),
-			array()
+			new SiteLinkList(),
+			new StatementList()
 		);
 	}
 
@@ -199,9 +200,7 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see Entity::newClaim
-	 *
-	 * @since 0.3
+	 * @deprecated since 1.0
 	 *
 	 * @param Snak $mainSnak
 	 *
@@ -222,7 +221,7 @@ class Item extends Entity {
 	public function isEmpty() {
 		return $this->fingerprint->isEmpty()
 			&& $this->siteLinks->isEmpty()
-			&& empty( $this->statements );
+			&& $this->statements->count() === 0;
 	}
 
 	/**
@@ -235,27 +234,6 @@ class Item extends Entity {
 		$this->fingerprint = Fingerprint::newEmpty();
 		$this->siteLinks = new SiteLinkList();
 		$this->statements = array();
-	}
-
-	private function getLinksInDiffFormat() {
-		$links = array();
-
-		/**
-		 * @var SiteLink $siteLink
-		 */
-		foreach ( $this->siteLinks as $siteLink ) {
-			$links[$siteLink->getSiteId()] = array(
-				'name' => $siteLink->getPageName(),
-				'badges' => array_map(
-					function( ItemId $id ) {
-						return $id->getSerialization();
-					},
-					$siteLink->getBadges()
-				)
-			);
-		}
-
-		return $links;
 	}
 
 	/**
@@ -299,6 +277,27 @@ class Item extends Entity {
 		}
 	}
 
+	private function getLinksInDiffFormat() {
+		$links = array();
+
+		/**
+		 * @var SiteLink $siteLink
+		 */
+		foreach ( $this->siteLinks as $siteLink ) {
+			$links[$siteLink->getSiteId()] = array(
+				'name' => $siteLink->getPageName(),
+				'badges' => array_map(
+					function( ItemId $id ) {
+						return $id->getSerialization();
+					},
+					$siteLink->getBadges()
+				)
+			);
+		}
+
+		return $links;
+	}
+
 	private function patchClaims( ItemDiff $patch ) {
 		$patcher = new MapPatcher();
 
@@ -320,29 +319,36 @@ class Item extends Entity {
 	}
 
 	/**
-	 * @see ClaimListAccess::addClaim
+	 * @deprecated since 1.0, use getStatements instead
 	 *
-	 * @since 0.3
-	 *
-	 * @param Claim $claim
+	 * @param Claim $statement This needs to be a Statement as of 1.0
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addClaim( Claim $claim ) {
-		if ( $claim->getGuid() === null ) {
+	public function addClaim( Claim $statement ) {
+		if ( $statement->getGuid() === null ) {
 			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
 		}
 
-		$this->statements[] = $claim;
+		$this->statements->addStatement( $statement );
 	}
 
 	/**
 	 * @since 1.0
 	 *
-	 * @return Statement[]
+	 * @return StatementList
 	 */
 	public function getStatements() {
 		return $this->statements;
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param StatementList $statements
+	 */
+	public function setStatements( StatementList $statements ) {
+		$this->statements = $statements;
 	}
 
 	/**
@@ -351,30 +357,25 @@ class Item extends Entity {
 	 * @return Statement[]
 	 */
 	public function getClaims() {
-		return $this->statements;
+		return $this->statements->toArray();
 	}
 
 	/**
-	 * @since 0.4
+	 * @deprecated since 1.0, use setStatements instead
 	 *
 	 * @param Claims $claims
 	 */
 	public function setClaims( Claims $claims ) {
-		$this->statements = iterator_to_array( $claims );
+		$this->statements = new StatementList( iterator_to_array( $claims ) );
 	}
 
 	/**
-	 * Convenience function to check if the entity contains any claims.
-	 *
-	 * On top of being a convenience function, this implementation allows for doing
-	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
-	 *
-	 * @since 0.2
+	 * @deprecated since 1.0, use getStatements instead
 	 *
 	 * @return bool
 	 */
 	public function hasClaims() {
-		return !empty( $this->statements );
+		return $this->statements->count() !== 0;
 	}
 
 	/**
@@ -405,12 +406,7 @@ class Item extends Entity {
 		 */
 		return $this->fingerprint->equals( $that->fingerprint )
 			&& $this->siteLinks->equals( $that->siteLinks )
-			&& $this->statementsEqual( $that->statements );
-	}
-
-	private function statementsEqual( array $statements ) {
-		$list = new Claims( $this->statements );
-		return $list->equals( new Claims( $statements ) );
+			&& $that->statements->equals( $that->statements );
 	}
 
 }

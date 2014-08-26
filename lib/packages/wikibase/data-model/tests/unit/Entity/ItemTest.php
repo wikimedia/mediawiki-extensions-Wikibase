@@ -25,6 +25,8 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @covers Wikibase\DataModel\Entity\Item
@@ -446,28 +448,29 @@ class ItemTest extends EntityTest {
 	public function patchProvider() {
 		$argLists = parent::patchProvider();
 
-		$claim0 = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim1 = new Claim( new PropertySomeValueSnak( 42 ) );
-		$claim2 = new Claim( new PropertyValueSnak( 42, new StringValue( 'ohi' ) ) );
-		$claim3 = new Claim( new PropertyNoValueSnak( 1 ) );
+		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement1 = new Statement( new PropertySomeValueSnak( 42 ) );
+		$statement2 = new Statement( new PropertyValueSnak( 42, new StringValue( 'ohi' ) ) );
+		$statement3 = new Statement( new PropertyNoValueSnak( 1 ) );
 
-		$claim0->setGuid( 'claim0' );
-		$claim1->setGuid( 'claim1' );
-		$claim2->setGuid( 'claim2' );
-		$claim3->setGuid( 'claim3' );
+		$statement0->setGuid( 'claim0' );
+		$statement1->setGuid( 'claim1' );
+		$statement2->setGuid( 'claim2' );
+		$statement3->setGuid( 'claim3' );
 
-		$source = $this->getNewEmpty();
-		$source->addClaim( $claim0 );
-		$source->addClaim( $claim1 );
+		$source = Item::newEmpty();
+		$source->getStatements()->addStatement( $statement0 );
+		$source->getStatements()->addStatement( $statement1 );
 		$patch = new ItemDiff( array( 'claim' => new Diff( array(
-				'claim0' => new DiffOpRemove( $claim0 ),
-				'claim2' => new DiffOpAdd( $claim2 ),
-				'claim3' => new DiffOpAdd( $claim3 )
+				'claim0' => new DiffOpRemove( $statement0 ),
+				'claim2' => new DiffOpAdd( $statement2 ),
+				'claim3' => new DiffOpAdd( $statement3 )
 			), false ) ) );
-		$expected = $this->getNewEmpty();
-		$expected->addClaim( $claim1 );
-		$expected->addClaim( $claim2 );
-		$expected->addClaim( $claim3 );
+
+		$expected = Item::newEmpty();
+		$expected->getStatements()->addStatement( $statement1 );
+		$expected->getStatements()->addStatement( $statement2 );
+		$expected->getStatements()->addStatement( $statement3 );
 
 		$argLists[] = array( $source, $patch, $expected );
 
@@ -483,14 +486,13 @@ class ItemTest extends EntityTest {
 				), true ),
 			), true ),
 		) );
+
 		$expected = clone $source;
-		$expected->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Berlin',
-				array(
-					new ItemId( 'Q42' )
-				)
+		$expected->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Berlin',
+			array(
+				new ItemId( 'Q42' )
 			)
 		);
 
@@ -519,13 +521,11 @@ class ItemTest extends EntityTest {
 			), true )
 		) );
 		$expected = $this->getNewEmpty();
-		$expected->addSiteLink(
-			new SiteLink(
-				'enwiki',
-				'Foobar',
-				array(
-					new ItemId( 'Q149' )
-				)
+		$expected->getSiteLinkList()->addNewSiteLink(
+			'enwiki',
+			'Foobar',
+			array(
+				new ItemId( 'Q149' )
 			)
 		);
 
@@ -695,7 +695,7 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( $snak, $statement->getMainSnak() );
 	}
 
-	public function testSetStatements() {
+	public function testSetClaims() {
 		$item = Item::newEmpty();
 
 		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
@@ -784,6 +784,33 @@ class ItemTest extends EntityTest {
 		$this->assertTrue( $item->getFingerprint()->isEmpty() );
 		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
 		$this->assertEmpty( $item->getStatements() );
+	}
+
+	public function testCanConstructWithStatementList() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'meh' );
+
+		$statements = new StatementList( array( $statement ) );
+
+		$item = new Item(
+			null,
+			Fingerprint::newEmpty(),
+			new SiteLinkList(),
+			$statements
+		);
+
+		$this->assertEquals(
+			$statements,
+			$item->getStatements()
+		);
+	}
+
+	public function testSetStatements() {
+		$item = Item::newEmpty();
+		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$item->setStatements( new StatementList() );
+		$this->assertEquals( new StatementList(), $item->getStatements() );
 	}
 
 }
