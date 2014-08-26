@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
- * Ordered, non-unique, collection of Claim objects.
+ * Ordered, non-unique, mutable, collection of Claim objects.
  * Provides various filter operations though does not do any indexing by default.
  *
  * @since 1.0

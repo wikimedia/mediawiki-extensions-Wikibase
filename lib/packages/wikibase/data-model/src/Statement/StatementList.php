@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
- * Ordered, non-unique, collection of Statement objects.
+ * Ordered, non-unique, mutable, collection of Statement objects.
  * Provides various filter operations though does not do any indexing by default.
  *
  * @since 1.0
@@ -22,7 +22,7 @@ use Wikibase\DataModel\Snak\Snaks;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementList implements \IteratorAggregate {
+class StatementList implements \IteratorAggregate, \Comparable, \Countable {
 
 	/**
 	 * @var Statement[]
@@ -140,6 +140,47 @@ class StatementList implements \IteratorAggregate {
 	 */
 	public function toArray() {
 		return $this->statements;
+	}
+
+	/**
+	 * @see Countable::count
+	 * @return int
+	 */
+	public function count() {
+		return count( $this->statements );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @param mixed $statementList
+	 *
+	 * @return boolean
+	 */
+	public function equals( $statementList ) {
+		if ( !( $statementList instanceof self ) ) {
+			return false;
+		}
+
+		if ( $this->count() !== $statementList->count() ) {
+			return false;
+		}
+
+		return $this->statementsEqual( $statementList->statements );
+	}
+
+	private function statementsEqual( array $statements ) {
+		reset( $statements );
+
+		foreach ( $this->statements as $statement ) {
+			if ( !$statement->equals( current( $statements ) ) ) {
+				return false;
+			}
+
+			next( $statements );
+		}
+
+		return true;
 	}
 
 }
