@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_5fd7fbf2",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.aliasesview.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-26T09:13:51Z",
+      "side": 1,
+      "message": "Would be nice to make these errors all the same. See my amend.",
+      "revId": "3238393cb67c9700e8849e7bdae86cbd42a29802",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_9f80c3fa",
+        "filename": "repo/tests/phpunit/includes/View/FingerprintViewTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-26T09:13:51Z",
+      "side": 1,
+      "message": "I reworked that. See my amend.",
+      "revId": "3238393cb67c9700e8849e7bdae86cbd42a29802",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_7f7d1717",
+        "filename": "repo/tests/phpunit/includes/View/FingerprintViewTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-26T09:13:51Z",
+      "side": 1,
+      "message": "Personally I liked the longer name \"wb-value-empty\" more. I find the shorter to generic.",
+      "revId": "3238393cb67c9700e8849e7bdae86cbd42a29802",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
