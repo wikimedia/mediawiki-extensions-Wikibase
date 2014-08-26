@@ -279,8 +279,7 @@
 			.first()
 			.attr( 'id', 'claims' );
 
-		// removing site links heading to rebuild it with value counter
-		$( '.wikibase-sitelinklistview' ).each( function() {
+		$( '.wikibase-sitelinkgroupview' ).each( function() {
 			var $sitelinklistview = $( this ),
 				siteIdsOfGroup = [];
 
@@ -295,14 +294,8 @@
 
 			// TODO: Implement sitelinkgrouplistview to manage sitelinklistview widgets
 			var group = $( this ).data( 'wb-sitelinks-group' ),
-				groupSiteIds = [],
-				$sitesCounterContainer = $( '<span/>' ),
 				siteLinks = entity.getSiteLinks(),
 				siteLinksOfGroup = [];
-
-			$.each( wb.sites.getSitesOfGroup( group ), function( siteId, site ) {
-				groupSiteIds.push( siteId );
-			} );
 
 			for( var i = 0; i < siteIdsOfGroup.length; i++ ) {
 				for( var j = 0; j < siteLinks.length; j++ ) {
@@ -313,16 +306,14 @@
 				}
 			}
 
-			$( this ).prev().append( $sitesCounterContainer );
-
-			// actual initialization
-			$( this ).sitelinklistview( {
-				value: siteLinksOfGroup,
-				allowedSiteIds: groupSiteIds,
+			$( this ).sitelinkgroupview( {
+				value: {
+					group: group,
+					siteLinks: siteLinksOfGroup
+				},
 				entityId: entity.getId(),
 				api: repoApi,
-				entityStore: entityStore,
-				$counter: $sitesCounterContainer
+				entityStore: entityStore
 			} );
 		} );
 

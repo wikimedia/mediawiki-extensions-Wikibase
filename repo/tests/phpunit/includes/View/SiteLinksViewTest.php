@@ -74,7 +74,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikipedia' ),
 			false,
 			array(
-				'tag' => 'table',
+				'tag' => 'div',
 				'attributes' => array(
 					'data-wb-sitelinks-group' => 'wikipedia'
 				),
@@ -91,7 +91,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikipedia' ),
 			true,
 			array(
-				'tag' => 'table',
+				'tag' => 'div',
 				'attributes' => array(
 					'data-wb-sitelinks-group' => 'wikipedia'
 				),
@@ -112,14 +112,17 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'special' ),
 			true,
 			array(
-				'tag' => 'table',
+				'tag' => 'div',
 				'attributes' => array(
 					'data-wb-sitelinks-group' => 'special'
 				),
 				'child' => array(
-					'tag' => 'thead',
+					'tag' => 'table',
 					'child' => array(
-						'tag' => 'tr'
+						'tag' => 'thead',
+						'child' => array(
+							'tag' => 'tr'
+						)
 					)
 				)
 			)
@@ -133,10 +136,13 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikipedia', 'special' ),
 			true,
 			array(
-				'tag' => 'table',
-				'child' => array(
-					'tag' => 'thead',
-					'content' => ''
+				'tag' => 'div',
+				'descendant' => array(
+					'tag' => 'table',
+					'child' => array(
+						'tag' => 'thead',
+						'content' => ''
+					)
 				)
 			)
 		);
@@ -151,11 +157,14 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikipedia' ),
 			true,
 			array(
-				'tag' => 'table',
-				'child' => array(
-					'tag' => 'tfoot',
-					'descendant' => array(
-						'class' => 'wikibase-toolbarbutton-disabled'
+				'tag' => 'div',
+				'descendant' => array(
+					'tag' => 'table',
+					'child' => array(
+						'tag' => 'tfoot',
+						'descendant' => array(
+							'class' => 'wikibase-toolbarbutton-disabled'
+						)
 					)
 				)
 			)
@@ -171,8 +180,8 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikipedia' ),
 			true,
 			array(
-				'tag' => 'table',
-				'child' => array(
+				'tag' => 'div',
+				'descendant' => array(
 					'tag' => 'tfoot',
 					'descendant' => array(
 						'class' => 'wikibase-toolbarbutton-enabled'
@@ -191,7 +200,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikipedia' ),
 			true,
 			array(
-				'tag' => 'table',
+				'tag' => 'div',
 				'descendant' => array(
 					'tag' => 'span',
 					'attributes' => array(
@@ -207,7 +216,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			array( 'wikipedia' ),
 			true,
 			array(
-				'tag' => 'table',
+				'tag' => 'div',
 				'descendant' => array(
 					'tag' => 'span',
 					'attributes' => array(
