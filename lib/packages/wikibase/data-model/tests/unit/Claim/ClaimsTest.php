@@ -12,7 +12,7 @@ use ReflectionClass;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;

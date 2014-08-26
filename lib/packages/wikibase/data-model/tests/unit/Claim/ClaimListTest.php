@@ -89,34 +89,6 @@ class ClaimListTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testGetBestClaimPerProperty() {
-		$list = new ClaimList( array(
-			$this->getStubClaim( 1, 'one', Claim::RANK_PREFERRED ),
-			$this->getStubClaim( 1, 'two', Claim::RANK_NORMAL ),
-			$this->getStubClaim( 1, 'three', Claim::RANK_PREFERRED ),
-
-			$this->getStubClaim( 2, 'four', Claim::RANK_DEPRECATED ),
-
-			$this->getStubClaim( 3, 'five', Claim::RANK_DEPRECATED ),
-			$this->getStubClaim( 3, 'six', Claim::RANK_NORMAL ),
-
-			$this->getStubClaim( 4, 'seven', Claim::RANK_PREFERRED ),
-			$this->getStubClaim( 4, 'eight', Claim::RANK_TRUTH ),
-		) );
-
-		$this->assertEquals(
-			array(
-				$this->getStubClaim( 1, 'one', Claim::RANK_PREFERRED ),
-				$this->getStubClaim( 1, 'three', Claim::RANK_PREFERRED ),
-
-				$this->getStubClaim( 3, 'six', Claim::RANK_NORMAL ),
-
-				$this->getStubClaim( 4, 'eight', Claim::RANK_TRUTH ),
-			),
-			$list->getBestClaimPerProperty()->toArray()
-		);
-	}
-
 	public function testGetUniqueMainSnaksReturnsListWithoutDuplicates() {
 		$list = new ClaimList( array(
 			$this->getClaimWithSnak( 1, 'foo' ),

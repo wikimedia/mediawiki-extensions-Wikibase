@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase\DataModel\Claim;
+namespace Wikibase\DataModel\Statement;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\References;

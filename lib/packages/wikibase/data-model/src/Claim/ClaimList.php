@@ -42,26 +42,6 @@ class ClaimList implements \IteratorAggregate {
 	}
 
 	/**
-	 * Returns the best claims per property.
-	 * The best claims are those with the highest rank for a particular property.
-	 * Deprecated ranks are never included.
-	 *
-	 * Caution: the ranking is done per property, not globally, as in the Claims class.
-	 *
-	 * @return self
-	 */
-	public function getBestClaimPerProperty() {
-		$claimList = new self();
-
-		foreach ( $this->getPropertyIds() as $propertyId ) {
-			$claims = new Claims( $this->claims );
-			$claimList->addClaims( $claims->getClaimsForProperty( $propertyId )->getBestClaims() );
-		}
-
-		return $claimList;
-	}
-
-	/**
 	 * Returns the property ids used by the claims.
 	 * The keys of the returned array hold the serializations of the property ids.
 	 *
@@ -75,12 +55,6 @@ class ClaimList implements \IteratorAggregate {
 		}
 
 		return $propertyIds;
-	}
-
-	private function addClaims( Claims $claims ) {
-		foreach ( $claims as $claim ) {
-			$this->addClaim( $claim );
-		}
 	}
 
 	public function addClaim( Claim $claim ) {
