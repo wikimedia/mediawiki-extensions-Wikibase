@@ -60,8 +60,9 @@ Other breaking changes:
 * Added `PropertyNotFoundException`
 * Added `ItemDiffer` and `PropertyDiffer`
 * Added `EntityDiffer` and `EntityDifferStrategy`
-* Added `Item::getStatements`
 * Added `Statement::getClaim`
+* Added `Item::getStatements`
+* Added `Item::setStatements`
 
 #### Deprecations
 
