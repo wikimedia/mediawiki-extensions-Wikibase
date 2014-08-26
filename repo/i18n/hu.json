@@ -7,7 +7,8 @@
 			"Vivaelcelta",
 			"Zolo",
 			"JulesWinnfield-hu",
-			"Tacsipacsi"
+			"Tacsipacsi",
+			"Einstein2"
 		]
 	},
 	"wikibase-desc": "Strukturált adattár",
@@ -33,6 +34,7 @@
 	"wikibase-terms": "Más nyelveken",
 	"wikibase-sitelinks-empty": "Ehhez a fogalomhoz még nincs kapcsolt lap.",
 	"wikibase-sitelinks-input-help-message": "Hivatkozás létrehozása egy ehhez a fogalomhoz kapcsolódó lapra",
+	"wikibase-sitelinks-special": "Egyéb oldalakon lévő kapcsolt lapok",
 	"wikibase-remove": "törlés",
 	"wikibase-move-up": "mozgatás felfelé",
 	"wikibase-move-down": "mozgatás lefelé",

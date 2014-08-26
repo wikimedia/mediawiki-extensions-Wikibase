@@ -3,7 +3,8 @@
 		"authors": [
 			"Iwan Novirion",
 			"Kenrick95",
-			"Snidata"
+			"Snidata",
+			"MF-Warburg"
 		]
 	},
 	"wikibase-client-desc": "Klien untuk ekstensi Wikibase",
@@ -38,8 +39,7 @@
 	"wikibase-linkitem-not-loggedin": "Anda harus masuk log pada wiki ini dan pada [$1 pusat penyimpanan data] untuk menggunakan fitur ini.",
 	"wikibase-linkitem-success-link": "Halaman telah berhasil ditautkan. Anda dapat menemukan item berisi tautan tersebut pada [$1 pusat penyimpanan data] kami.",
 	"wikibase-property-notfound": "Properti $1 tidak ditemukan.",
-	"wikibase-property-notsupportedyet": "Wikibase belum mendukung tipe properti untuk properti $1.",
-	"wikibase-rc-hide-wikidata": "$1 Wikidata",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-show-wikidata-pref": "Tampilkan suntingan Wikidata di perubahan terbaru",
 	"wikibase-watchlist-show-changes-pref": "Tampilkan suntingan Wikidata pada daftar pantauan Anda",
 	"wikibase-error-serialize-error": "Gagal menghubungkan data",

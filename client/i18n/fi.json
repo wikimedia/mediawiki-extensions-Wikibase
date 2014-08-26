@@ -36,7 +36,7 @@
 	"wikibase-linkitem-linkpage": "Linkitä sivuun",
 	"wikibase-linkitem-selectlink": "Valitse sivusto ja sivu, jonka haluat linkittää tähän sivuun.",
 	"wikibase-linkitem-input-site": "Kieli",
-	"wikibase-linkitem-input-page": "Sivu",
+	"wikibase-linkitem-input-page": "Sivu:",
 	"wikibase-linkitem-confirmitem-text": "Valitsemasi sivu on jo liitetty [$1 keskustietovaraston kohteeseen]. Vahvista, että haluat linkittää tämän sivun alla {{PLURAL:$2|näkyvään sivuun|näkyviin sivuihin}}.",
 	"wikibase-linkitem-confirmitem-button": "Vahvista",
 	"wikibase-linkitem-not-loggedin-title": "Sinun täytyy olla sisäänkirjautuneena",

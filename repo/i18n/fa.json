@@ -19,7 +19,8 @@
 			"Taha",
 			"Zolo",
 			"ZxxZxxZ",
-			"درفش کاویانی"
+			"درفش کاویانی",
+			"Alirezaaa"
 		]
 	},
 	"wikibase-desc": "مخزن داده‌های ساخت‌یافته",
@@ -111,11 +112,11 @@
 	"wikibase-itembytitle-lookup-page": "صفحه:",
 	"wikibase-itembytitle-submit": "جستجو",
 	"wikibase-itembytitle-create": "همچنین می‌توانید [{{fullurl:Special:NewItem|site=$1&page=$2}} یک آیتم بسازید].",
-	"special-gotolinkedpage": "باز کردن پیوند صفحه",
+	"special-gotolinkedpage": "رفتن به صفحه مرتبط",
 	"wikibase-gotolinkedpage-lookup-fieldset": "باز کردن صفحۀ پیوندی با توجه به وبگاه و آیتم",
-	"wikibase-gotolinkedpage-lookup-site": "وبگاه:",
+	"wikibase-gotolinkedpage-lookup-site": "وب‌گاه:",
 	"wikibase-gotolinkedpage-lookup-item": "شناسۀ آیتم:",
-	"wikibase-gotolinkedpage-submit": "بیاور",
+	"wikibase-gotolinkedpage-submit": "برو",
 	"special-itemdisambiguation": "ابهام‌زدایی آیتم‌ها",
 	"wikibase-itemdisambiguation-lookup-fieldset": "جستجوی آیتم‌ها بر پایهٔ زبان و برچسب",
 	"wikibase-itemdisambiguation-lookup-language": "زبان:",

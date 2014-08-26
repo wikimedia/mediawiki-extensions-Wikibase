@@ -11,7 +11,8 @@
 			"Reza1615",
 			"Rtemis",
 			"ZxxZxxZ",
-			"درفش کاویانی"
+			"درفش کاویانی",
+			"Alirezaaa"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌بیس",
@@ -29,7 +30,7 @@
 	"wikibase-comment-sitelink-change": "پیوند زبان از $1 به $2 تغییر کرده‌است.",
 	"wikibase-comment-sitelink-remove": "پیوند زبان حذف شد: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|تغییر}}",
-	"wikibase-dataitem": "آیتم این صفحه",
+	"wikibase-dataitem": "آیتم {{WBREPONAME}}",
 	"wikibase-editlinks": "ویرایش پیوندها",
 	"wikibase-editlinkstitle": "ویرایش پیوندهای میان‌ویکی",
 	"wikibase-linkitem-addlinks": "افزودن پیوند",
