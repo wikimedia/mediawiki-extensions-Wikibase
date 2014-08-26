@@ -13,11 +13,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityContent;
-use Wikibase\EntityContentFactory;
 use Wikibase\Hook\MakeGlobalVariablesScriptHandler;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\ParserOutputJsConfigBuilder;
+use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
  * @covers Wikibase\Hook\MakeGlobalVariablesScriptHandler
@@ -123,7 +123,7 @@ class MakeGlobalVariablesScriptHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityContentFactory
 	 */
 	private function getEntityContentFactory() {
-		$entityContentFactory = $this->getMockBuilder( 'Wikibase\EntityContentFactory' )
+		$entityContentFactory = $this->getMockBuilder( 'Wikibase\Repo\Content\EntityContentFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 

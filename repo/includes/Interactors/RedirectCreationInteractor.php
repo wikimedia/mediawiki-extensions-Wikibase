@@ -5,12 +5,12 @@ namespace Wikibase\Repo\Interactors;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityPermissionChecker;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\UnresolvedRedirectException;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
