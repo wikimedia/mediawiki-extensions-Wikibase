@@ -269,29 +269,29 @@ HTML;
 	<h2 class="wb-section-heading wikibase-sitelinkgroupview-heading" dir="auto" id="$1">
 		$2<span class="wikibase-sitelinkgroupview-counter">$3</span>
 	</h2>
-	<table class="wikibase-sitelinkgroupview-sitelinklistview">
-		<!-- wikibase-sitelinklistview -->$4
-	</table>
+	<!-- wikibase-sitelinklistview -->$4
 </div>
 HTML;
 
 	$templates['wikibase-sitelinklistview'] =
 <<<HTML
-<colgroup>
-	<col class="wikibase-sitelinklistview-sitename" />
-	<col class="wikibase-sitelinklistview-siteid" />
-	<col class="wikibase-sitelinklistview-link" />
-	<col class="wb-editsection" />
-</colgroup>
-<thead>
-	$1 <!-- wikibase-sitelinklist-thead -->
-</thead>
-<tbody>
-	$2 <!-- [0,*] wikibase-sitelinkview -->
-</tbody>
-<tfoot>
-	$3 <!-- wikibase-sitelinklistview-tfoot -->
-</tfoot>
+<table class="wikibase-sitelinklistview">
+	<colgroup>
+		<col class="wikibase-sitelinklistview-sitename" />
+		<col class="wikibase-sitelinklistview-siteid" />
+		<col class="wikibase-sitelinklistview-link" />
+		<col class="wb-editsection" />
+	</colgroup>
+	<thead>
+		$1 <!-- wikibase-sitelinklist-thead -->
+	</thead>
+	<tbody>
+		$2 <!-- [0,*] wikibase-sitelinkview -->
+	</tbody>
+	<tfoot>
+		$3 <!-- wikibase-sitelinklistview-tfoot -->
+	</tfoot>
+</table>
 HTML;
 
 	$templates['wikibase-sitelinklistview-thead'] =
