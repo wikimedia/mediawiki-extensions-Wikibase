@@ -50,12 +50,13 @@ Other breaking changes:
 * Removed `ClaimAggregate` interface, which is thus no longer implemented by `Entity`
 * `HashableObjectStorage::getValueHash` no longer accepts a first optional parameter
 * `MapHasher` and `MapValueHasher` are now package private
+* Removed `Claims::getDiff`
 
 #### Additions
 
 * Added `ClaimList`
 * Added `StatementList`
-* Added `ClaimListDiffer`
+* Added `StatementListDiffer`
 * Added `PropertyDataTypeLookup` and trivial implementation `InMemoryDataTypeLookup`
 * Added `PropertyNotFoundException`
 * Added `ItemDiffer` and `PropertyDiffer`
@@ -66,6 +67,7 @@ Other breaking changes:
 
 #### Deprecations
 
+* Deprecated `Claims`
 * Deprecated `Entity::setId`
 * Deprecated `Entity::newClaim`
 * Deprecated `Entity::getAllSnaks`

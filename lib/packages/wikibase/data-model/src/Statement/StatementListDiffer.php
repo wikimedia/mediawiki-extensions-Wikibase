@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Claim;
+namespace Wikibase\DataModel\Statement;
 
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
@@ -9,6 +9,8 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use UnexpectedValueException;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Claims;
 
 /**
  * @since 1.0
@@ -16,29 +18,31 @@ use UnexpectedValueException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimListDiffer {
+class StatementListDiffer {
 
 	/**
 	 * @since 1.0
 	 *
-	 * @param Claims $fromClaims
-	 * @param Claims $toClaims
+	 * @param StatementList $fromStatements
+	 * @param StatementList $toStatements
 	 *
 	 * @return Diff
 	 * @throws UnexpectedValueException
 	 */
-	public function getDiff( Claims $fromClaims, Claims $toClaims ) {
+	public function getDiff( StatementList $fromStatements, StatementList $toStatements ) {
 		$differ = new MapDiffer();
+		$fromStatements = new Claims( $fromStatements->toArray() );
+		$toStatements = new Claims( $toStatements->toArray() );
 
 		$hashDifferences = $differ->doDiff(
-			$fromClaims->getHashes(),
-			$toClaims->getHashes()
+			$fromStatements->getHashes(),
+			$toStatements->getHashes()
 		);
 
 		$diff = new Diff( array(), true );
 
 		foreach ( $hashDifferences as $guid => $diffOp ) {
-			$diff[$guid] = $this->getDiffOp( $diffOp, $guid, $toClaims, $fromClaims );
+			$diff[$guid] = $this->getDiffOp( $diffOp, $guid, $toStatements, $fromStatements );
 		}
 
 		return $diff;

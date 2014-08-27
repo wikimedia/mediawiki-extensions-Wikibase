@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Statement\StatementListDiffer;
 
 /**
  * @since 1.0
@@ -51,8 +52,8 @@ class ItemDiffer implements EntityDifferStrategy {
 		$differ = new MapDiffer( true );
 		$diffOps = $differ->doDiff( $this->toDiffArray( $from ), $this->toDiffArray( $to ) );
 
-		$claims = new Claims( $from->getClaims() );
-		$diffOps['claim'] = $claims->getDiff( new Claims( $to->getClaims() ) );
+		$statementListDiffer = new StatementListDiffer();
+		$diffOps['claim'] = $statementListDiffer->getDiff( $from->getStatements(), $to->getStatements() );
 
 		return new ItemDiff( $diffOps );
 	}
