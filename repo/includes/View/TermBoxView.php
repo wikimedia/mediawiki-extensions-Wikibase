@@ -110,7 +110,7 @@ class TermBoxView {
 			);
 		}
 
-		$html = $html . wfTemplate( 'wb-terms-table', $tbody );
+		$html = $html . wfTemplate( 'wikibase-fingerprintlistview', $tbody );
 
 		wfProfileOut( __METHOD__ );
 		return $html;
