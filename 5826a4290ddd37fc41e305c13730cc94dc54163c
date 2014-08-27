@@ -16,6 +16,24 @@
       "revId": "5826a4290ddd37fc41e305c13730cc94dc54163c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_85918a9e",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-27T14:14:36Z",
+      "side": 1,
+      "message": "The idea was to make the test run with DataModel 1.0. It fails and I don\u0027t understand why.",
+      "parentUuid": "4e322bf2_a5192680",
+      "revId": "5826a4290ddd37fc41e305c13730cc94dc54163c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
