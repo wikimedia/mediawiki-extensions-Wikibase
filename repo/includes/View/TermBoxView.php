@@ -63,14 +63,11 @@ class TermBoxView {
 
 		wfProfileIn( __METHOD__ );
 
-		$html = $thead = $tbody = '';
+		$thead = $tbody = '';
 
 		$entityId = $entity->getId()->getSerialization();
 		$labels = $entity->getLabels();
 		$descriptions = $entity->getDescriptions();
-
-
-		$html .= wfTemplate( 'wb-terms-heading', $this->msg( 'wikibase-terms' ) );
 
 		foreach ( $languageCodes as $languageCode ) {
 			$label = array_key_exists( $languageCode, $labels ) ? $labels[$languageCode] : false;
@@ -110,7 +107,10 @@ class TermBoxView {
 			);
 		}
 
-		$html = $html . wfTemplate( 'wikibase-fingerprintlistview', $tbody );
+		$html = wfTemplate( 'wikibase-fingerprintgroupview',
+			$this->msg( 'wikibase-terms' ),
+			wfTemplate( 'wikibase-fingerprintlistview', $tbody )
+		);
 
 		wfProfileOut( __METHOD__ );
 		return $html;

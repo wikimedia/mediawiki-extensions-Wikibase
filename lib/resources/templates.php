@@ -246,9 +246,12 @@ HTML;
 <a href="#" class="wikibase-toolbarbutton wikibase-toolbarbutton-disabled" tabindex="-1">$1</a>
 HTML;
 
-	$templates['wb-terms-heading'] =
+	$templates['wikibase-fingerprintgroupview'] =
 <<<HTML
-<h2 id="wb-terms" class="wb-terms-heading">$1</h2>
+<div class="wikibase-fingerprintgroupview">
+	<h2 id="wb-terms" class="wb-section-heading wikibase-fingerprintgroupview-heading">$1</h2>
+	<!-- wikibase-fingerprintlistview -->$2
+</div>
 HTML;
 
 	$templates['wikibase-fingerprintlistview'] =
