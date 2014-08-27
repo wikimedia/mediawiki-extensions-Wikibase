@@ -1,0 +1,19 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-fingerprintlistview {
+	border-bottom: 1px solid #C9C9C9;
+	border-right: 1px solid #C9C9C9;
+	border-spacing: 0;
+	clear: both;
+	width: 100%;
+}
+
+.wikibase-fingerprintlistview tr td {
+	background: #F8F8F8;
+}
+
+.wikibase-fingerprintlistview tbody:nth-child(even) td {
+	background: #F0F0F0;
+}
