@@ -259,7 +259,7 @@ HTML;
 <table class="wikibase-fingerprintlistview">
 	<colgroup>
 		<col class="wikibase-fingerprintlistview-language" />
-		<col class="wikibase-fingerprintlistview-label wikibase-fingerprintlistview-description" />
+		<col class="wikibase-fingerprintlistview-label wikibase-fingerprintlistview-description wikibase-fingerprintlistview-aliases" />
 		<col class="wb-editsection" />
 	</colgroup>
 	<!-- [0,*] wikibase-fingerprintview -->$1
@@ -270,13 +270,17 @@ HTML;
 <<<HTML
 <tbody class="wikibase-fingerprintview wikibase-fingerprintview-$1" >
 	<tr>
-		<td class="wikibase-fingerprintview-language" rowspan="2"><a href="$9">$2</a></td>
-		<td class="wikibase-fingerprintview-label $7">$3</td>
+		<td class="wikibase-fingerprintview-language" rowspan="3"><a href="$2">$3</a></td>
+		<td class="wikibase-fingerprintview-label">$4</td>
 		<!-- wb-edisection -->$5
 	</tr>
 	<tr>
-		<td class="wikibase-fingerprintview-description $8">$4</td>
-		<!-- wb-editsection -->$6
+		<td class="wikibase-fingerprintview-description">$6</td>
+		<!-- wb-editsection -->$7
+	</tr>
+	<tr>
+		<td class="wikibase-fingerprintview-aliases">$8</td>
+		<!-- wb-editsection -->$9
 	</tr>
 </tbody>
 HTML;

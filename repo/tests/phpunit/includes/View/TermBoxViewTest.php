@@ -29,10 +29,13 @@ class TermBoxViewTest extends \PHPUnit_Framework_TestCase {
 		$entity = Item::newEmpty();
 		$entity->setId( new ItemId( 'Q23' ) );
 
-		$entity->setLabel( 'en', 'Moskow' );
-		$entity->setLabel( 'de', 'Moskau' );
+		$fingerprint = $entity->getFingerprint();
+		$fingerprint->setLabel( 'en', 'Moskow' );
+		$fingerprint->setLabel( 'de', 'Moskau' );
 
-		$entity->setDescription( 'de', 'Hauptstadt Russlands' );
+		$fingerprint->setDescription( 'de', 'Hauptstadt Russlands' );
+
+		$entity->setFingerprint( $fingerprint );
 
 		$languages = array( 'de', 'ru' );
 
