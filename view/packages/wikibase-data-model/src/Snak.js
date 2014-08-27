@@ -6,11 +6,10 @@
 'use strict';
 
 /**
- * Represents a Wikibase Snak in JavaScript.
+ * Represents a Wikibase Snak.
  * @constructor
  * @abstract
- * @since 0.2
- * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Snaks
+ * @since 0.3
  *
  * @param {String} propertyId
  */
@@ -27,7 +26,6 @@ var SELF = wb.datamodel.Snak = function WbSnak( propertyId ) {
 
 /**
  * String to identify this type of Snak
- * @since 0.3
  * @type String
  */
 SELF.TYPE = null;
@@ -40,8 +38,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns what type of Snak this is.
-	 * @since 0.3
-
+	 *
 	 * @return String
 	 */
 	getType: function() {
@@ -50,7 +47,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns the ID of the property entity the Snak relates to.
-	 * @since 0.3
 	 *
 	 * @return string
 	 */
@@ -79,7 +75,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns a simple JSON structure representing this Snak.
-	 * @since 0.3
 	 *
 	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *
@@ -93,8 +88,6 @@ $.extend( SELF.prototype, {
 	 * Returns a plain Object representing this Snak. Similar to toJSON(), containing the same
 	 * fields but the values within the fields will not be serialized to JSON in the Object returned
 	 * by this function.
-	 *
-	 * @since 0.4
 	 *
 	 * @return {Object} Object with 'snaktype' and 'property' fields and possibly others, depending
 	 *         on the Snak type.
@@ -133,8 +126,6 @@ SELF.newFromJSON = function( json ) {
 /**
  * Creates a new Snak Object from a given Object with certain keys and values, what an actual Snak
  * would return when calling its toMap().
- *
- * @since 0.4
  *
  * @param {Object} map Requires at least 'snaktype' and 'property' fields.
  * @return wb.datamodel.Snak|null

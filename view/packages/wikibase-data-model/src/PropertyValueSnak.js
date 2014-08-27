@@ -15,11 +15,10 @@ var PARENT = wb.datamodel.Snak,
 	};
 
 /**
- * Represents a Wikibase PropertyValueSnak in JavaScript.
+ * Represents a Wikibase PropertyValueSnak.
  * @constructor
  * @extends wb.datamodel.Snak
- * @since 0.2
- * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#PropertyValueSnak
+ * @since 0.3
  *
  * @param {string} propertyId
  * @param {dv.DataValue} value

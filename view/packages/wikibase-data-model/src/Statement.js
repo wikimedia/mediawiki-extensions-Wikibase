@@ -13,11 +13,10 @@ var PARENT = wb.datamodel.Claim,
 	};
 
 /**
- * Represents a Wikibase Statement in JavaScript.
+ * Represents a Wikibase Statement.
  * @constructor
  * @extends wb.datamodel.Claim
  * @since 0.3
- * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
  *
  * @param {wb.datamodel.Snak} mainSnak
  * @param {wb.datamodel.Snak[]} [qualifiers]
@@ -89,7 +88,6 @@ var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constru
 	/**
 	 * Returns whether this statement is equal to another statement.
 	 * @see wb.datamodel.Claim.equals
-	 * @since 0.4
 	 *
 	 * @param {wb.datamodel.Statement|*} other
 	 * @return {boolean}
@@ -122,7 +120,6 @@ var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constru
 
 	/**
 	 * Returns a JSON structure representing this statement.
-	 * @since 0.4
 	 *
 	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *

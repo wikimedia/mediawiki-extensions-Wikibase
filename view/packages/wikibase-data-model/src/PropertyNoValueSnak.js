@@ -8,11 +8,10 @@
 var PARENT = wb.datamodel.Snak;
 
 /**
- * Represents a Wikibase PropertyNoValueSnak in JavaScript.
+ * Represents a Wikibase PropertyNoValueSnak.
  * @constructor
  * @extends wb.datamodel.Snak
- * @since 0.2
- * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#PropertyNoValueSnak
+ * @since 0.3
  *
  * @param {Number} propertyId
  */

@@ -1,6 +1,4 @@
 /**
- * @since 0.4
- *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >

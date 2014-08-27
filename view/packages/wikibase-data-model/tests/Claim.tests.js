@@ -1,9 +1,4 @@
 /**
- * QUnit tests for wikibase.Claim
- * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- *
- * @since 0.3
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >

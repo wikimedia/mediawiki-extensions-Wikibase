@@ -10,7 +10,7 @@
 	/**
 	 * Represents the ID of an Entity.
 	 * @constructor
-	 * @since 0.4
+	 * @since 0.3
 	 *
 	 * @param {String} entityType
 	 * @param {Number} numericId
@@ -43,8 +43,6 @@
 		/**
 		 * Returns the type of the entity.
 		 *
-		 * @since 0.4
-
 		 * @return String
 		 */
 		getEntityType: function() {
@@ -54,8 +52,6 @@
 		/**
 		 * Returns the numeric ID of the entity.
 		 *
-		 * @since 0.4
-		 *
 		 * @return Number
 		 */
 		getNumericId: function() {
@@ -64,8 +60,6 @@
 
 		/**
 		 * Returns the prefixed ID of the entity. Requires a map for formatting the prefix.
-		 *
-		 * @since 0.4
 		 *
 		 * @param {Object} prefixMap Like { prefix: entityType }, e.g. { 'P': 'property' }
 		 *        The same entity type can appear multiple times with different prefixes. If this is
@@ -89,8 +83,6 @@
 
 		/**
 		 * @see dv.DataValue.equals
-		 *
-		 * @since 0.4
 		 */
 		equals: function( entityId ) {
 			if ( entityId === this ) {
@@ -107,8 +99,6 @@
 		/**
 		 * @see dv.DataValue.getValue
 		 *
-		 * @since 0.4
-		 *
 		 * @return wb.datamodel.EntityId
 		 */
 		getValue: function() {
@@ -118,8 +108,6 @@
 		/**
 		 * @see dv.DataValue.getSortKey
 		 *
-		 * @since 0.4
-		 *
 		 * @return String|Number
 		 */
 		getSortKey: function() {
@@ -128,8 +116,6 @@
 
 		/**
 		 * @see dv.DataValue.toJSON
-		 *
-		 * @since 0.4
 		 *
 		 * @return Object
 		 */

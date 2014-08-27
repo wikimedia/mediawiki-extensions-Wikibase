@@ -12,8 +12,7 @@
 	 *
 	 * @constructor
 	 * @extends wb.datamodel.Entity
-	 * @since 0.4
-	 * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Properties
+	 * @since 0.3
 	 *
 	 * @param {Object} data
 	 *
@@ -24,25 +23,10 @@
 		/**
 		 * Returns the Property's data type's identifier.
 		 *
-		 * @since 0.4
-		 *
 		 * @return string
 		 */
 		getDataType: function() {
 			return this._data.datatype;
-		},
-
-		/**
-		 * @see wb.datamodel.Entity.equals
-		 */
-		equals: function( entity ) {
-			if(
-				entity instanceof SELF
-				&& this.getDataType() !== entity.getDataType()
-			) {
-				return false;
-			}
-			return PARENT.prototype.equals.call( this, entity );
 		},
 
 		/**

@@ -6,10 +6,9 @@
 'use strict';
 
 /**
- * Represents a Wikibase Claim in JavaScript.
+ * Represents a Wikibase Claim.
  * @constructor
- * @since 0.2
- * @see https://meta.wikimedia.org/wiki/Wikidata/Data_model#Statements
+ * @since 0.3
  *
  * @param {wb.datamodel.Snak} mainSnak
  * @param {wb.datamodel.SnakList|null} [qualifiers]
@@ -24,7 +23,6 @@ var SELF = wb.datamodel.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
 
 /**
  * String to identify if the object is a statement or a claim.
- * @since 0.4
  * @type {string}
  */
 SELF.TYPE = 'claim';
@@ -48,7 +46,6 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns the GUID (Global Unique Identifier) of the Claim. Returns null if the claim is not
 	 * yet stored in the database.
-	 * @since 0.3
 	 *
 	 * @return String|null
 	 */
@@ -115,8 +112,6 @@ $.extend( SELF.prototype, {
 	 * if they are of the same type and have the same value. The value does not include the guid,
 	 * so Claims with the same value but different guids are still considered equal.
 	 *
-	 * @since 0.4
-	 *
 	 * @param {wb.datamodel.Claim|*} other If this is not a wb.datamodel.Claim, false will be returned.
 	 * @return boolean
 	 */
@@ -131,7 +126,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * Returns a JSON structure representing this claim.
-	 * @since 0.4
 	 *
 	 * TODO: implement this as a wb.datamodel.serialization.Serializer
 	 *

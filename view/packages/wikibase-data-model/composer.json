@@ -29,8 +29,8 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"autoload": {
-		"files" : [
-			"init.mw.php"
+		"files": [
+			"init.php"
 		]
 	}
 }

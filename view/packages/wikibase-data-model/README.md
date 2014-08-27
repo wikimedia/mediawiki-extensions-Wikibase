@@ -6,6 +6,10 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
+### 0.4 (dev)
+
+* Removed wikibase.datamodel.Reference.setSnaks(). Generate new Reference objects when interacting with the API to reflect hash changes performed in the back-end.
+
 ### 0.3.2 (2014-08-19)
 
 * Added wikibase.datamodel.SiteLink.
