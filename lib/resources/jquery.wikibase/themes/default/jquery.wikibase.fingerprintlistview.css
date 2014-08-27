@@ -17,3 +17,7 @@
 .wikibase-fingerprintlistview tbody:nth-child(even) td {
 	background: #F0F0F0;
 }
+
+.wikibase-fingerprintlistview .wb-edit tr td {
+	background: #D6F3FF;
+}
