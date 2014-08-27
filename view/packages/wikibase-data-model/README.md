@@ -9,6 +9,9 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 ### 0.4 (dev)
 
 * Removed wikibase.datamodel.Reference.setSnaks(). Generate new Reference objects when interacting with the API to reflect hash changes performed in the back-end.
+* Removed wikibase.datamodel.Entity.equals().
+* Removed wikibase.datamodel.Reference.setSnaks().
+* wikibase.datamodel.Reference constructor does not accept Snak object(s) any more.
 
 ### 0.3.2 (2014-08-19)
 
