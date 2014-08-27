@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Entity;
 
 use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
+use RuntimeException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
@@ -358,8 +359,10 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * @param Claim $claim
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws RuntimeException
 	 */
 	public function addClaim( Claim $claim ) {
+		throw new RuntimeException( 'Claims on entities are not supported any more.' );
 	}
 
 	/**

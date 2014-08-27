@@ -10,12 +10,12 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 
@@ -326,7 +326,9 @@ class Item extends Entity {
 	 * @throws InvalidArgumentException
 	 */
 	public function addClaim( Claim $statement ) {
-		if ( $statement->getGuid() === null ) {
+		if ( !( $statement instanceof Statement ) ) {
+			throw new InvalidArgumentException( 'Claims are not supported any more, use Statements.' );
+		} elseif ( $statement->getGuid() === null ) {
 			throw new InvalidArgumentException( 'Can\'t add a Claim without a GUID.' );
 		}
 
