@@ -31,10 +31,16 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @param bool $isReadonly Whether the table can be modified.
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $isReadonly, $wiki = false ) {
-		assert( is_bool( $isReadonly ) );
-		assert( is_string( $wiki ) || $wiki === false );
+		if ( !is_bool( $isReadonly ) ) {
+			throw new InvalidArgumentException( '$isReadonly must be boolean.' );
+		}
+		if ( !is_string( $wiki ) && $wiki !== false ) {
+			throw new InvalidArgumentException( '$wiki must be a string or false.' );
+		}
 
 		$this->tableName = 'wb_property_info';
 		$this->isReadonly = $isReadonly;
