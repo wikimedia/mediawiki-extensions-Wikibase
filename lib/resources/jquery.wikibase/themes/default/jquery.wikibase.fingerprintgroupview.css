@@ -1,0 +1,14 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-fingerprintgroupview {
+	float: left;
+}
+
+.wikibase-fingerprintgroupview h2 {
+	margin-top: 0.6em;
+	margin-bottom: 0.2em;
+	padding-left: 10px;
+	border-bottom: none;
+}

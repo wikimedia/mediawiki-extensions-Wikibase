@@ -72,14 +72,14 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.fingerprintview.tests' => $moduleBase + array(
-			'scripts' => array(
-				'jquery.wikibase.fingerprintview.tests.js',
+		'jquery.wikibase.fingerprintgroupview.tests' => $moduleBase + array(
+				'scripts' => array(
+					'jquery.wikibase.fingerprintgroupview.tests.js',
+				),
+				'dependencies' => array(
+					'jquery.wikibase.fingerprintgroupview',
+				),
 			),
-			'dependencies' => array(
-				'jquery.wikibase.fingerprintview',
-			),
-		),
 
 		'jquery.wikibase.fingerprintlistview.tests' => $moduleBase + array(
 			'scripts' => array(
@@ -87,6 +87,15 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.fingerprintlistview',
+			),
+		),
+
+		'jquery.wikibase.fingerprintview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.fingerprintview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.fingerprintview',
 			),
 		),
 
