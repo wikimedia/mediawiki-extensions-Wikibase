@@ -73,9 +73,9 @@
 						return value && value.getValue();
 					},
 					function( value ) {
-						self.calendarRotator._setValue( value );
-						self.calendarRotator.value( value );
-						self.calendarRotator.activate();
+						self.calendarRotator.rotator._setValue( value );
+						self.calendarRotator.rotator.value( value );
+						self.calendarRotator.rotator.activate();
 					}
 				),
 				new vv.ExpertExtender.Toggler(
