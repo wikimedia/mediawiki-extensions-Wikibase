@@ -212,6 +212,19 @@
 		var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 		wb.compileEntityStoreFromMwConfig( entityStore );
 
+		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
+			isUlsDefined = mw.uls !== undefined
+				&& $.uls !== undefined
+				&& $.uls.data !== undefined,
+			languages = [];
+
+		if( !userLanguages.length && isUlsDefined ) {
+			languages = mw.uls.getFrequentLanguageList().slice( 1, 4 );
+		} else {
+			languages = $.merge( [], userLanguages );
+			languages.splice( $.inArray( mw.config.get( 'wgUserLanguage' ), 1 ) );
+		}
+
 		$entityview
 		.entityview( {
 			value: entity,
@@ -222,7 +235,8 @@
 				getParserStore( repoApi ),
 				mw
 			),
-			api: repoApi
+			api: repoApi,
+			languages: languages
 		} )
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
 			var $labelview = $( event.target ),
@@ -247,8 +261,6 @@
 				);
 			}
 		} );
-
-		wb.initTermBox( entity, repoApi );
 	}
 
 	function registerEditRestrictionHandlers() {
