@@ -96,6 +96,8 @@
 	"wikibase-validator-label-with-description-conflict": "Etykietę \"$1\" z takim samym opisem dla języka o kodzie $2 ma już element $3",
 	"wikibase-wikibaserepopage-invalid-langcode": "Kod języka „$1” jest nieznany. Użyj kodu języka, który jest znany w systemie, na przykład „pl”.",
 	"wikibase-wikibaserepopage-invalid-id": "Identyfikator „$1” jest nieznany w systemie. Użyj prawidłowego identyfikatora encji.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 jest przekierowaniem.",
+	"wikibase-wikibaserepopage-storage-exception": "Wystąpił błąd podczas próby ładowania $1: $2.",
 	"special-itembytitle": "Element według tytułu",
 	"wikibase-itembytitle-lookup-fieldset": "Wyszukiwanie elementów według witryny i tytułu",
 	"wikibase-itembytitle-lookup-site": "Witryna:",

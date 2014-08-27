@@ -117,7 +117,7 @@
 	"wikibase-itemdisambiguation-submit": "Buscar",
 	"wikibase-itemdisambiguation-nothing-found": "Lo sentimos, no se encontró ningún elemento con esa etiqueta.",
 	"wikibase-itemdisambiguation-create": "Puedes [{{fullurl:Special:NewItem|label=$1}} crear el elemento].",
-	"wikibase-itemdisambiguation-invalid-langcode": "Lo sentimos, el códio de idioma que ha proporcionado es desconocido para el sistema. Por favor utilice un código de idioma válido como \"en\".",
+	"wikibase-itemdisambiguation-invalid-langcode": "El sistema no reconoce el código de idioma proporcionado. Utiliza un código válido, como «es».",
 	"wikibase-itemdisambiguation-description": "Los valores utilizados para la búsqueda deben ser una entrada de texto completo. El idioma es un identificador, como \"es\".",
 	"special-newproperty": "Crear una nueva propiedad",
 	"wikibase-newproperty-summary": "Asegúrate de comprobar si la propiedad existe!<br />Debes crear una [[Help:Label|etiqueta]] y una [[Help:Description|descripción]] para las nuevas propiedades, y añadir un tipo de propiedad válido.",
@@ -276,6 +276,6 @@
 	"content-model-wikibase-item": "Elemento de Wikibase",
 	"content-model-wikibase-property": "Propiedad de Wikibase",
 	"content-model-wikibase-query": "Consulta de Wikibase",
-	"right-item-merge": "Combinar elementos",
+	"right-item-merge": "Fusionar elementos",
 	"right-property-create": "Crear propiedades"
 }

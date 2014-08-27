@@ -75,6 +75,8 @@
 	"wikibase-validator-label-with-description-conflict": "דאטנאביעקט $3 האט שויך די באצייכענונג \"$1\" אסאציאירט מיט שפראך קאד $2, וואס ניצט דעם זעלבן באשרײַבונג טעקסט.",
 	"wikibase-wikibaserepopage-invalid-langcode": "דער שפראכקאד \"$1\" איז אומבאקאנט. ביטע ניצט א גילטיקן שפראכקאד, למשל \"yi\".",
 	"wikibase-wikibaserepopage-invalid-id": "דער ID \"$1\" איז אומבאוואוסט צו דער סיסטען. זײַט אזוי גוט ניצט א גילטיקן אידענטיפיצירער.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 איז א ווײַטערפֿירונג.",
+	"wikibase-wikibaserepopage-storage-exception": "ס'האט פאסירט א פֿעלער ביים אנלאדן $1: $2.",
 	"special-itembytitle": "דאטנאביעקט לויט טיטל",
 	"wikibase-itembytitle-lookup-fieldset": "זוכן דאטנאביעקטן לויט וועבזײַטל און טיטל",
 	"wikibase-itembytitle-lookup-site": "וועבזײַטל:",

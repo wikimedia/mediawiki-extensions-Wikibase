@@ -98,6 +98,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "''$1''並非一個有效項ID。",
 	"wikibase-wikibaserepopage-invalid-langcode": "語言代碼 \"$1\" 不明。 請使用系統能夠辨識的語言代碼，如 \"en\"。",
 	"wikibase-wikibaserepopage-invalid-id": "ID「$1」未知。請使用有效的實體ID。",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 是一個重新導向。",
+	"wikibase-wikibaserepopage-storage-exception": "嘗試讀取 $1 發生錯誤：$2。",
 	"special-itembytitle": "按標題查找項目",
 	"wikibase-itembytitle-lookup-fieldset": "按站點及標題搜尋",
 	"wikibase-itembytitle-lookup-site": "維基項目：",

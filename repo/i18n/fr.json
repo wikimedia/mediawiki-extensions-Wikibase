@@ -115,6 +115,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "« $1 » n’est pas un identifiant (''id'') d’élément valide.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Le code de langue « $1 » n’est pas connu. Veuillez utiliser un code de langue connu du système, comme « fr ».",
 	"wikibase-wikibaserepopage-invalid-id": "L’ID « $1 » est inconnu du système. Veuillez utiliser un ID d’entité valide.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 est une redirection.",
+	"wikibase-wikibaserepopage-storage-exception": "Une erreur s’est produite lors d’un essai de chargement de $1 : $2.",
 	"special-itembytitle": "Élément par titre",
 	"wikibase-itembytitle-lookup-fieldset": "Rechercher des éléments par site et par titre",
 	"wikibase-itembytitle-lookup-site": "Site&nbsp;:&nbsp;",

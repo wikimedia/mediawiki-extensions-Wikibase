@@ -6,7 +6,8 @@
 			"Guycn1",
 			"Guycn2",
 			"Inkbug",
-			"ערן"
+			"ערן",
+			"Yona b"
 		]
 	},
 	"wikibase-client-desc": "לקוח להרחבה Wikibase",
@@ -64,5 +65,5 @@
 	"wikibase-property-render-error": "כשל בהכנת המאפיין $1 לתצוגה: $2",
 	"wikibase-otherprojects": "מיזמים אחרים",
 	"wikibase-otherprojects-beta-message": "סרגל צד של מיזמים אחרים",
-	"wikibase-otherprojects-beta-description": "הוספה לסרגל הצד של חלק \"{{int:wikibase-otherprojects}}\" שמספק קישורים למיזמי ויקימדיה חרים לפי נתוני {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "הוספה לסרגל הצד של חלק \"{{int:wikibase-otherprojects}}\" שמספק קישורים למיזמי ויקימדיה אחרים לפי נתוני {{WBREPONAME}}."
 }

@@ -106,6 +106,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ ist keine gültige Objektkennung.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Der Sprachcode „$1“ ist unbekannt. Bitte nutze einen gültigen Sprachcode, wie bspw. „de“.",
 	"wikibase-wikibaserepopage-invalid-id": "Die Kennung „$1“ ist unbekannt. Bitte nutze eine gültige Objektkennung.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 ist eine Weiterleitung.",
+	"wikibase-wikibaserepopage-storage-exception": "Beim Laden von $1 ist ein Fehler aufgetreten: $2.",
 	"special-itembytitle": "Datenobjekte nach Titel",
 	"wikibase-itembytitle-lookup-fieldset": "Suche Datenobjekte nach Website und Titel",
 	"wikibase-itembytitle-lookup-site": "Website:",

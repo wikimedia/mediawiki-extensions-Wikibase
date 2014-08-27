@@ -93,6 +93,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" är inte ett giltigt objekt-ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Språkkoden \"$1\" är okänd. Var god använd en språkkod som känns igen av systemet, t.ex. \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "ID:et \"$1\" är okänt för systemet. Var god använd ett giltigt enhets-ID.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 är en omdirigering.",
+	"wikibase-wikibaserepopage-storage-exception": "Ett fel uppstod när $1 skulle läsas in: $2",
 	"special-itembytitle": "Objekt efter titel",
 	"wikibase-itembytitle-lookup-fieldset": "Sök efter objekt med webbplats och titel",
 	"wikibase-itembytitle-lookup-site": "Webbplats:",

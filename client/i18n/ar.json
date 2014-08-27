@@ -45,10 +45,10 @@
 	"wikibase-linkitem-not-loggedin": "لاستخدام هذه الميزة لا بد من تسجيل الدخول على هذه الويكي وعلى [$1 مستودع البيانات المركزي].",
 	"wikibase-linkitem-success-link": "تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [ $1  مستودعنا المركزي للبيانات].",
 	"wikibase-property-notfound": "لم يتم العثور على الخاصية $1.",
-	"wikibase-rc-hide-wikidata": "$1 ويكيبيانات",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "إخفاء",
 	"wikibase-rc-hide-wikidata-show": "أظهر",
-	"wikibase-rc-show-wikidata-pref": "إظهار تعديلات ويكي بيانات في صفحة أحدث التغييرات",
+	"wikibase-rc-show-wikidata-pref": "إظهار تعديلات {{WBREPONAME}} في صفحة أحدث التغييرات",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
 	"wikibase-watchlist-show-changes-pref": "إظهار تعديلات {{WBREPONAME}} في قائمة مراقبتك",
@@ -56,6 +56,9 @@
 	"wikibase-unconnectedpages-submit": "اذهب",
 	"wikibase-unconnectedpages-page-warning": "لا يمكن استخدام عنوان الصفحة في عملية البحث وسيتم تجاهله.",
 	"wikibase-unconnectedpages-iwdata-label": "الصفحات التي تحتوي على وصلات بلغات أخرى فقط",
+	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
-	"wikibase-otherprojects": "مشاريع أخرى"
+	"wikibase-otherprojects": "مشاريع أخرى",
+	"wikibase-otherprojects-beta-message": "المشاريع الأخرى في الشريط الجانبي",
+	"wikibase-otherprojects-beta-description": "إضافة قسم \"{{int:wikibase-otherprojects}}\" إلى الشريط الجانبي لعرض وصلات لمشاريع ويكيميديا الأخرى استنادا إلى معطيات {{WBREPONAME}}."
 }

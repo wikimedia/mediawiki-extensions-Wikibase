@@ -3,7 +3,8 @@
 		"authors": [
 			"Denny",
 			"Roberta F.",
-			"Vivaelcelta"
+			"Vivaelcelta",
+			"Ex13"
 		]
 	},
 	"wikibase-edit": "uredi",
@@ -25,7 +26,6 @@
 	"wikibase-itembytitle-lookup-site": "Projekt:",
 	"wikibase-itembytitle-lookup-page": "Stranica:",
 	"wikibase-itembytitle-submit": "Traži",
-	"wikibase-itembytitle-nothing-found": "Pojam nije pronađen. Molimo preciznije definirajte traženu stranicu.",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Traži poveznice po jeziku i oznaci",
 	"wikibase-itemdisambiguation-lookup-language": "Jezik:",
 	"wikibase-itemdisambiguation-lookup-label": "Oznaka:",
@@ -48,6 +48,7 @@
 	"wikibase-entitieswithoutlabel-label-type": "Vrsta:",
 	"wikibase-entitieswithoutlabel-label-alltypes": "sve",
 	"wikibase-entitieswithoutlabel-submit": "Nađi",
+	"wikibase-api-no-such-sitelink": "Nije moguće pronaći takve poveznice",
 	"wikibase-restoreold": "vrati",
 	"wikibase-listdatatypes-wikibase-item-head": "Stavka",
 	"wikibase-listdatatypes-time-head": "Vrijeme"
