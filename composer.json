@@ -71,5 +71,11 @@
 		"psr-4": {
 			"Wikibase\\Repo\\View\\": "repo/includes/View"
 		}
-	}
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/wmde/WikibaseDataModel.git"
+		}
+	]
 }
