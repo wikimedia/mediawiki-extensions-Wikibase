@@ -10,7 +10,8 @@
 }
 
 .wikibase-fingerprintview-label,
-.wikibase-fingerprintview-description {
+.wikibase-fingerprintview-description,
+.wikibase-fingerprintview-aliases {
 	width: 75%;
 	word-wrap: break-word;
 	padding-left: 10px;
@@ -32,7 +33,8 @@
 	padding: 10px;
 }
 
-.wikibase-fingerprintview input {
+.wikibase-fingerprintview .wikibase-fingerprintview-label input,
+.wikibase-fingerprintview .wikibase-fingerprintview-description input {
 	font-family: inherit;
 	width: 100%;
 }
@@ -43,7 +45,8 @@
 }
 
 .wikibase-fingerprintview .wikibase-labelview,
-.wikibase-fingerprintview .wikibase-descriptionview {
+.wikibase-fingerprintview .wikibase-descriptionview,
+.wikibase-fingerprintview .wikibase-aliasesview {
 	display: block;
 	float: none;
 	margin-top: 0;
@@ -51,8 +54,24 @@
 	width: auto;
 }
 
+.wikibase-fingerprintview .wikibase-aliasesview-container {
+	display: inline-block !important;
+	padding-left: 0;
+	padding-right: 0;
+	width: 100%;
+}
+
+.wikibase-fingerprintview.wb-edit .wikibase-aliasesview-list {
+	font-size: 84%;
+}
+
+.wikibase-fingerprintview.wb-edit .wikibase-aliasesview-list * {
+	font-size: 100%;
+}
+
 .wikibase-fingerprintview.wb-edit .wikibase-labelview,
-.wikibase-fingerprintview.wb-edit .wikibase-descriptionview {
+.wikibase-fingerprintview.wb-edit .wikibase-descriptionview,
+.wikibase-fingerprintview.wb-edit .wikibase-aliasesview {
 	padding: 9px 8px 9px 7px;
 }
 
