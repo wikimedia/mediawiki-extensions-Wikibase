@@ -79,13 +79,12 @@ return call_user_func( function() {
 				'wikibase.initTermBox.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.fingerprintview',
+				'jquery.wikibase.fingerprintlistview',
 				'wikibase',
 				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-terms',
-				'wikibase-fingerprintview-input-help-message',
 			)
 		),
 
