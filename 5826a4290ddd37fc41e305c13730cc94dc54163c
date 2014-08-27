@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_a5192680",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-08-27T13:41:39Z",
+      "side": 1,
+      "message": "Think this was not intentional?",
+      "revId": "5826a4290ddd37fc41e305c13730cc94dc54163c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
