@@ -274,12 +274,18 @@ class GetEntities extends ApiWikibase {
 		} else {
 			$languages = $params['languages'];
 		}
-		if( $params['ungroupedlist'] ) {
-			$options->setOption(
-					SerializationOptions::OPT_GROUP_BY_PROPERTIES,
-					array()
-				);
+
+		if( $params['groupedlist'] ) {
+			$groupedLists = array( 'claims', 'qualifiers', 'references' );
+		} else {
+			$groupedLists = array();
 		}
+
+		$options->setOption(
+			SerializationOptions::OPT_GROUP_BY_PROPERTIES,
+			$groupedLists
+		);
+
 		$options->setLanguages( $languages );
 		$options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_ASC );
 		$options->setOption( EntitySerializer::OPT_PARTS, $props );
@@ -329,7 +335,11 @@ class GetEntities extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
-			'ungroupedlist' => array(
+			'ungroupedlist' => array( // legacy, ignored.
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
+			'groupedlist' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false,
 			),
@@ -368,7 +378,8 @@ class GetEntities extends ApiWikibase {
 			'normalize' => array( 'Try to normalize the page title against the client site.',
 				'This only works if exactly one site and one page have been given.'
 			),
-			'ungroupedlist' => array( 'Do not group snaks by property id.' ),
+			'ungroupedlist' => array( 'Ignored, use groupedlist instead' ),
+			'groupedlist' => array( 'Group snaks by property id.' ),
 			'sitefilter' => array( 'Filter sitelinks in entities to those with these siteids.' ),
 		) );
 	}
