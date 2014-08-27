@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MessageException;
 use MWException;
 use RuntimeException;
 use SiteStore;
@@ -16,6 +17,8 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\UnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -138,13 +141,27 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @throws UserInputException
 	 */
 	protected function loadEntity( EntityId $id ) {
-		$entity = $this->entityRevisionLookup->getEntityRevision( $id );
+		try {
+			$entity = $this->entityRevisionLookup->getEntityRevision( $id );
 
-		if ( $entity === null ) {
+			if ( $entity === null ) {
+				throw new UserInputException(
+					'wikibase-wikibaserepopage-invalid-id',
+					array( $id->getSerialization() ),
+					'Entity id is unknown'
+				);
+			}
+		} catch ( UnresolvedRedirectException $ex ) {
 			throw new UserInputException(
-				'wikibase-wikibaserepopage-invalid-id',
+				'wikibase-wikibaserepopage-unresolved-redirect',
 				array( $id->getSerialization() ),
-				'Entity id is unknown'
+				'Entity id refers to a redirect'
+			);
+		} catch ( StorageException $ex ) {
+			throw new MessageException(
+				'wikibase-wikibaserepopage-storage-exception',
+				array( $id->getSerialization(), $ex->getMessage() ),
+				'Entity could not be loaded'
 			);
 		}
 
