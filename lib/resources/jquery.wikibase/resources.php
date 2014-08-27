@@ -186,6 +186,23 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.fingerprintlistview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.fingerprintlistview.js',
+			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.fingerprintlistview.css',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.fingerprintview',
+			),
+			'messages' => array(
+				'wikibase-fingerprintview-input-help-message',
+			),
+		),
+
 		'jquery.wikibase.fingerprintview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.fingerprintview.js',
