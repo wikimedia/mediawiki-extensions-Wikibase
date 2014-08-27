@@ -14,7 +14,7 @@ use Wikibase\EntityFactory;
 class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function newApiHelperFactory() {
-		$titleLookup = $this->getMock( '\Wikibase\EntityTitleLookup' );
+		$titleLookup = $this->getMock( '\Wikibase\Lib\Store\EntityTitleLookup' );
 		$exceptionLocalizer = $this->getMock( '\Wikibase\Lib\Localizer\ExceptionLocalizer' );
 		$dataTypeLookup = $this->getMock( '\Wikibase\Lib\PropertyDataTypeLookup' );
 
