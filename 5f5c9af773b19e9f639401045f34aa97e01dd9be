@@ -16,6 +16,24 @@
       "revId": "5f5c9af773b19e9f639401045f34aa97e01dd9be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_a2e11c99",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-08-27T13:00:34Z",
+      "side": 1,
+      "message": "As far as I can tell, $2 does not have punctuation.",
+      "parentUuid": "4e322bf2_a6581336",
+      "revId": "5f5c9af773b19e9f639401045f34aa97e01dd9be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
