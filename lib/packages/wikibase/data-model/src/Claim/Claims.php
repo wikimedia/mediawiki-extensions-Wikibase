@@ -12,6 +12,7 @@ use UnexpectedValueException;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\StatementListDiffer;
 
 /**
  * A claim (identified using it's GUID) can only be added once.
@@ -365,19 +366,6 @@ class Claims extends ArrayObject implements ClaimListAccess, Hashable, Comparabl
 		}
 
 		return $snaks;
-	}
-
-	/**
-	 * @since 0.4
-	 *
-	 * @param Claims $claims
-	 *
-	 * @return Diff
-	 * @throws UnexpectedValueException
-	 */
-	public function getDiff( Claims $claims ) {
-		$differ = new ClaimListDiffer();
-		return $differ->getDiff( $this, $claims );
 	}
 
 	/**

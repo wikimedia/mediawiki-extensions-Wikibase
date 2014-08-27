@@ -10,6 +10,9 @@ use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\StatementListDiffer;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\EntityDiff
@@ -87,12 +90,14 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 		$diffs[] = new EntityDiff( $diffOps );
 
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'EntityDiffTest$foo' );
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement->setGuid( 'EntityDiffTest$foo' );
 
-		$claims = new Claims( array( $claim ) );
-
-		$diffOps['claim'] = $claims->getDiff( new Claims() );
+		$statementListDiffer = new StatementListDiffer();
+		$diffOps['claim'] = $statementListDiffer->getDiff(
+			new StatementList( array( $statement ) ),
+			new StatementList()
+		);
 
 		$diffs[] = new EntityDiff( $diffOps );
 
