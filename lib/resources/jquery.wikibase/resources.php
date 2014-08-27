@@ -155,11 +155,15 @@ return call_user_func( function() {
 				'jquery.wikibase.claimgrouplistview',
 				'jquery.wikibase.claimlistview',
 				'jquery.wikibase.descriptionview',
+				'jquery.wikibase.fingerprintgroupview',
 				'jquery.wikibase.labelview',
 				'jquery.wikibase.toolbarcontroller',
 				'jquery.wikibase.statementview',
 				'wikibase',
 				'wikibase.templates',
+			),
+			'messages' => array(
+				'wikibase-terms',
 			),
 		),
 

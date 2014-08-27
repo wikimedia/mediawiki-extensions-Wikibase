@@ -37,7 +37,6 @@ return call_user_func( function() {
 				'wikibase.experts',
 				'wikibase.formatters.getStore',
 				'wikibase.EntityInitializer',
-				'wikibase.initTermBox',
 				'wikibase.parsers.getStore',
 				'wikibase.RepoApi',
 				'wikibase.sites',
@@ -72,19 +71,6 @@ return call_user_func( function() {
 				// implicitly required as dependency.
 				'wikibase.serialization.entities',
 			),
-		),
-
-		'wikibase.initTermBox' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.initTermBox.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.fingerprintgroupview',
-				'wikibase',
-			),
-			'messages' => array(
-				'wikibase-terms',
-			)
 		),
 
 		'wikibase.ui.entitysearch' => $moduleTemplate + array(
