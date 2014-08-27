@@ -90,20 +90,24 @@ class TermBoxView {
 
 			$tbody .= wfTemplate( 'wikibase-fingerprintview',
 				$languageCode,
+				$title->getLocalURL( array( 'setlang' => $languageCode ) ),
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
+				$label !== false ? '' : 'wb-empty',
 				htmlspecialchars( $label !== false
 					? $label
 					: $this->msg( 'wikibase-label-empty' )->text()
 				),
+				'<td>' . $editLabelSection . '</td>',
+				$description !== false ? '' : 'wb-empty',
 				htmlspecialchars( $description !== false
 					? $description
 					: $this->msg( 'wikibase-description-empty' )->text()
 				),
-				'<td>' . $editLabelSection . '</td>',
 				'<td>' . $editDescriptionSection . '</td>',
-				$label !== false ? '' : 'wb-value-empty',
-				$description !== false ? '' : 'wb-value-empty',
-				$title->getLocalURL( array( 'setlang' => $languageCode ) )
+				// TODO: Aliases
+				'',
+				'',
+				''
 			);
 		}
 
