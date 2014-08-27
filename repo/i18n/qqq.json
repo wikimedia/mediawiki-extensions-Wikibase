@@ -394,6 +394,7 @@
 	"content-model-wikibase-query": "The name for Wikibase query content model, used when describing what type of content a page contains.",
 	"right-item-term": "{{doc-right|item-term}}\nRight to alter the [[d:Special:MyLanguage/Wikidata:Glossary#Term|terms]] of [[d:Special:MyLanguage/Wikidata:Glossary#Item|items]].",
 	"right-item-merge": "{{doc-right|item-merge}}\nRight to alter the contents of [[d:Special:MyLanguage/Wikidata:Glossary#Item|items]].\n{{Identical|Merge item}}",
+	"right-item-redirect": "{{doc-right|item-redirect}}\nRight to create [[d:Special:MyLanguage/Wikidata:Glossary#Item|item]] redirects after merging items.",
 	"right-property-term": "{{doc-right|property-term}}\nRight to alter the [[d:Wikidata:Glossary#Term|terms]] of [[d:Wikidata:Glossary#Item|items]].",
 	"right-property-create": "{{doc-right|property-create}}\nRight to create new [[d:Wikidata:Glossary#Property|properties]]."
 }

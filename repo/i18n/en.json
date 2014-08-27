@@ -371,6 +371,7 @@
 	"content-model-wikibase-query": "Wikibase query",
 	"right-item-term": "Change item terms (labels, descriptions, aliases)",
 	"right-item-merge": "Merge items",
+	"right-item-redirect": "Create item redirects",
 	"right-property-term": "Change property terms (labels, descriptions, aliases)",
 	"right-property-create": "Create properties"
 }
