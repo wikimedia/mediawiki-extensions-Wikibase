@@ -6,6 +6,7 @@ use Language;
 use Message;
 use Title;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\Utils;
 
 /**
@@ -63,11 +64,13 @@ class TermBoxView {
 
 		wfProfileIn( __METHOD__ );
 
-		$thead = $tbody = '';
-
 		$entityId = $entity->getId()->getSerialization();
-		$labels = $entity->getLabels();
-		$descriptions = $entity->getDescriptions();
+		$fingerprint = $entity->getFingerprint();
+		$labels = $fingerprint->getLabels();
+		$descriptions = $fingerprint->getDescriptions();
+		$aliasGroups = $fingerprint->getAliasGroups();
+
+		$tbody = '';
 
 		foreach ( $languageCodes as $languageCode ) {
 			$label = array_key_exists( $languageCode, $labels ) ? $labels[$languageCode] : false;
@@ -87,23 +90,32 @@ class TermBoxView {
 				$this->msg( 'wikibase-edit' ),
 				$editable
 			);
+			$editAliasesSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
+				'SetAliases',
+				array( $entityId, $languageCode ),
+				$this->msg( 'wikibase-edit' ),
+				$editable
+			);
 
 			$tbody .= wfTemplate( 'wikibase-fingerprintview',
 				$languageCode,
+				$title->getLocalURL( array( 'setlang' => $languageCode ) ),
 				htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ),
+				$label !== false ? '' : 'wb-empty',
 				htmlspecialchars( $label !== false
 					? $label
 					: $this->msg( 'wikibase-label-empty' )->text()
 				),
+				'<td>' . $editLabelSection . '</td>',
+				$description !== false ? '' : 'wb-empty',
 				htmlspecialchars( $description !== false
 					? $description
 					: $this->msg( 'wikibase-description-empty' )->text()
 				),
-				'<td>' . $editLabelSection . '</td>',
 				'<td>' . $editDescriptionSection . '</td>',
-				$label !== false ? '' : 'wb-value-empty',
-				$description !== false ? '' : 'wb-value-empty',
-				$title->getLocalURL( array( 'setlang' => $languageCode ) )
+				$aliasGroups->hasGroupForLanguage( $languageCode ) ? '' : 'wb-empty',
+				$this->getHtmlForAliases( $aliasGroups, $languageCode ),
+				'<td>' . $editAliasesSection . '</td>'
 			);
 		}
 
@@ -116,4 +128,36 @@ class TermBoxView {
 		return $html;
 	}
 
+	/**
+	 * @param AliasGroupList $aliasGroups
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	private function getHtmlForAliases( AliasGroupList $aliasGroups, $languageCode ) {
+		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
+			return wfTemplate( 'wikibase-aliasesview',
+				'wb-empty',
+				wfMessage( 'wikibase-aliases-empty' )->escaped(),
+				'',
+				''
+			);
+		} else {
+			$aliasesHtml = '';
+			$aliases = $aliasGroups->getByLanguage( $languageCode )->getAliases();
+			foreach ( $aliases as $alias ) {
+				$aliasesHtml .= wfTemplate(
+					'wikibase-aliasesview-list-item',
+					htmlspecialchars( $alias )
+				);
+			}
+
+			return wfTemplate( 'wikibase-aliasesview',
+				'',
+				wfMessage( 'wikibase-aliases-label' )->escaped(),
+				$aliasesHtml,
+				''
+			);
+		}
+	}
 }
