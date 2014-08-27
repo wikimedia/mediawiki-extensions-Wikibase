@@ -52,6 +52,7 @@ return call_user_func( function() {
 				'wikibase.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.aliasesview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.descriptionview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.fingerprintlistview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.fingerprintview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.labelview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
