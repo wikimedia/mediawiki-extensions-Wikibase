@@ -79,9 +79,8 @@ return call_user_func( function() {
 				'wikibase.initTermBox.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.fingerprintlistview',
+				'jquery.wikibase.fingerprintgroupview',
 				'wikibase',
-				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-terms',
