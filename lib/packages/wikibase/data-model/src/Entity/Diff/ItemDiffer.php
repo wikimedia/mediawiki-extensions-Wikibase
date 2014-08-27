@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Entity\Diff;
 
 use Diff\Differ\MapDiffer;
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;

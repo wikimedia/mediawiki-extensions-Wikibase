@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Internal;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
-use Wikibase\DataModel\Internal\MapHasher;
 
 /**
  * Generates hashes for associative arrays based on the values of their elements.

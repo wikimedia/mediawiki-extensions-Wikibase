@@ -4,15 +4,12 @@ namespace Wikibase\DataModel\Claim;
 
 use ArrayObject;
 use Comparable;
-use Diff\DiffOp\Diff\Diff;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
-use UnexpectedValueException;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\StatementListDiffer;
 
 /**
  * A claim (identified using it's GUID) can only be added once.
