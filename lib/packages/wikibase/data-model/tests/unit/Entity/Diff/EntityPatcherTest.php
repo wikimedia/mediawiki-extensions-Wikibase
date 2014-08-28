@@ -2,55 +2,41 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\Diff\EntityDiffer;
+use Wikibase\DataModel\Entity\Diff\EntityPatcher;
+use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\Test\DataModel\Fixtures\EntityOfUnknownType;
 
 /**
- * @covers Wikibase\DataModel\Entity\Diff\EntityDiffer
+ * @covers Wikibase\DataModel\Entity\Diff\EntityPatcher
  *
  * @licence GNU GPL v2+
+ * @author Christoph Fischer < christoph.fischer@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDifferTest extends \PHPUnit_Framework_TestCase {
+class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
 
-	public function testGivenUnknownEntityType_exceptionIsThrown() {
-		$differ = new EntityDiffer();
+    /**
+     * @dataProvider itemProvider
+     */
+    public function testGivenEmptyDiffItemRemainsUnchanged( Item $item ) {
+		$patcher = new EntityPatcher();
 
-		$this->setExpectedException( 'RuntimeException' );
-		$differ->diffEntities( new EntityOfUnknownType(), new EntityOfUnknownType() );
+		$patchedEntity = $patcher->patchEntity( $item, new ItemDiff() );
+        $this->assertEquals( $item, $patchedEntity );
 	}
 
-	public function testGivenEntitiesWithDifferentTypes_exceptionIsThrown() {
-		$differ = new EntityDiffer();
+    public function itemProvider() {
+        $argLists = array();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
-		$differ->diffEntities( Item::newEmpty(), Property::newFromType( 'string' ) );
-	}
+        $nonEmptyItem = Item::newEmpty();
+        $nonEmptyItem->setId( 2 );
 
-	public function testGivenTwoEmptyItems_emptyItemDiffIsReturned() {
-		$differ = new EntityDiffer();
+        $argLists[] = array( Item::newEmpty() );
+        $argLists[] = array( $nonEmptyItem );
 
-		$diff = $differ->diffEntities( Item::newEmpty(), Item::newEmpty() );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Diff\ItemDiff', $diff );
-		$this->assertTrue( $diff->isEmpty() );
-	}
-
-	public function testGivenUnknownEntityType_getConstructionDiffThrowsException() {
-		$differ = new EntityDiffer();
-
-		$this->setExpectedException( 'RuntimeException' );
-		$differ->getConstructionDiff( new EntityOfUnknownType() );
-	}
-
-	public function testGivenUnknownEntityType_getDestructionDiffThrowsException() {
-		$differ = new EntityDiffer();
-
-		$this->setExpectedException( 'RuntimeException' );
-		$differ->getDestructionDiff( new EntityOfUnknownType() );
-	}
+        return $argLists;
+    }
 
 }
 
