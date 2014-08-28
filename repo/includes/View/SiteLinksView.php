@@ -90,11 +90,17 @@ class SiteLinksView {
 
 		$html = '';
 
+		if ( count( $groups ) === 0 ) {
+			return $html;
+		}
+
 		foreach ( $groups as $group ) {
 			$html .= $this->getHtmlForSiteLinkGroup( $siteLinks, $itemId, $group, $editable );
 		}
 
-		return $html;
+		return wfTemplate( 'wikibase-sitelinkgrouplistview',
+			wfTemplate( 'wb-listview', $html )
+		);
 	}
 
 	/**
