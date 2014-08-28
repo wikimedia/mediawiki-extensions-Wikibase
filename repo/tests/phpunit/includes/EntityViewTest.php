@@ -9,7 +9,7 @@ use Language;
 use RequestContext;
 use Title;
 use ValueFormatters\FormatterOptions;
-use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -18,8 +18,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityRevision;
@@ -171,16 +169,16 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		return $entityView;
 	}
 
-    private function getSerializationOptions( $langCode, $langCodes,
-		LanguageFallbackChain $fallbackChain
-	 ) {
-        $langCodes = $langCodes + array( $langCode => $fallbackChain );
+	private function getSerializationOptions( $langCode, $langCodes,
+											  LanguageFallbackChain $fallbackChain
+	) {
+		$langCodes = $langCodes + array( $langCode => $fallbackChain );
 
-        $options = new SerializationOptions();
-        $options->setLanguages( $langCodes );
+		$options = new SerializationOptions();
+		$options->setLanguages( $langCodes );
 
-        return $options;
-    }
+		return $options;
+	}
 
 	protected function getMockRepo() {
 		if ( !isset( self::$mockRepo ) ) {
@@ -209,11 +207,11 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 
 	/**
 	 * @param EntityId $id
-	 * @param Claim[] $claims
+	 * @param Statement[] $statements
 	 *
 	 * @return Entity
 	 */
-	protected abstract function makeEntity( EntityId $id, $claims = array() );
+	protected abstract function makeEntity( EntityId $id, array $statements = array() );
 
 	/**
 	 * Generates a prefixed entity ID based on a numeric ID.
@@ -225,15 +223,15 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 	protected abstract function makeEntityId( $numericId );
 
 	/**
-	 * @param Claim[] $claims
+	 * @param Statement[] $statements
 	 *
 	 * @return EntityRevision
 	 */
-	protected function newEntityRevisionForClaims( $claims ) {
+	protected function newEntityRevisionForStatements( array $statements ) {
 		static $revId = 1234;
 		$revId++;
 
-		$entity = $this->makeEntity( $this->makeEntityId( $revId ), $claims );
+		$entity = $this->makeEntity( $this->makeEntityId( $revId ), $statements );
 
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $entity, $revId, $timestamp );
@@ -267,10 +265,10 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 
 		$claimGuidGenerator = new ClaimGuidGenerator();
 
-		$claim = new Claim( $snak );
-		$claim->setGuid( $claimGuidGenerator->newGuid( $itemId ) );
+		$statement = new Statement( $snak );
+		$statement->setGuid( $claimGuidGenerator->newGuid( $itemId ) );
 
-		$entity->addClaim( $claim );
+		$entity->addClaim( $statement );
 
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $entity, 13044, $timestamp );
@@ -280,32 +278,8 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider getParserOutputLinksProvider
-	 *
-	 * @param Claim[] $claims
-	 * @param EntityId[] $expectedLinks
-	 */
-	public function testParserOutputLinks( array $claims, $expectedLinks ) {
-		$entityRevision = $this->newEntityRevisionForClaims( $claims );
-		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
-
-		$out = $entityView->getParserOutput( $entityRevision, true, false );
-		$links = $out->getLinks();
-
-		// convert expected links to link structure
-		foreach ( $expectedLinks as $entityId ) {
-			$title = $this->getTitleForId( $entityId );
-			$ns = $title->getNamespace();
-			$dbk = $title->getDBkey();
-
-			$this->assertArrayHasKey( $ns, $links, "sub-array for namespace" );
-			$this->assertArrayHasKey( $dbk, $links[$ns], "entry for database key" );
-		}
-	}
-
-	public function testParserOutputLinksForNoClaims() {
-		$entityRevision = $this->newEntityRevisionForClaims( array() );
+	public function testParserOutputLinksForNoStatements() {
+		$entityRevision = $this->newEntityRevisionForStatements( array() );
 		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
 
 		$out = $entityView->getParserOutput( $entityRevision, true, false );
@@ -314,7 +288,7 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 
 	protected $guidCounter = 0;
 
-	protected function makeItem( $id, $claims = array() ) {
+	protected function makeItem( $id, array $statements = array() ) {
 		if ( is_string( $id ) ) {
 			$id = new ItemId( $id );
 		}
@@ -324,14 +298,14 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		$item->setLabel( 'en', "label:$id" );
 		$item->setDescription( 'en', "description:$id" );
 
-		foreach ( $claims as $claim ) {
-			$item->addClaim( $claim );
+		foreach ( $statements as $statement ) {
+			$item->addClaim( $statement );
 		}
 
 		return $item;
 	}
 
-	protected function makeProperty( $id, $dataTypeId, $claims = array() ) {
+	protected function makeProperty( $id, $dataTypeId, array $statements = array() ) {
 		if ( is_string( $id ) ) {
 			$id = new PropertyId( $id );
 		}
@@ -342,113 +316,23 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		$property->setLabel( 'en', "label:$id" );
 		$property->setDescription( 'en', "description:$id" );
 
-		foreach ( $claims as $claim ) {
-			$property->addClaim( $claim );
+		foreach ( $statements as $statement ) {
+			$property->addClaim( $statement );
 		}
 
 		return $property;
 	}
 
-	protected function makeClaim( Snak $mainSnak, $guid = null ) {
+	protected function makeStatement( Snak $mainSnak, $guid = null ) {
 		if ( $guid === null ) {
 			$this->guidCounter++;
 			$guid = 'EntityViewTest$' . $this->guidCounter;
 		}
 
-		$claim = new Claim( $mainSnak );
-		$claim->setGuid( $guid );
+		$statements = new Statement( $mainSnak );
+		$statements->setGuid( $guid );
 
-		return $claim;
-	}
-
-	public function getParserOutputLinksProvider() {
-		$argLists = array();
-
-		$p11 = new PropertyId( 'P11' );
-		$p23 = new PropertyId( 'P42' );
-		$p44 = new PropertyId( 'P44' );
-
-		$q23 = new ItemId( 'Q23' );
-		$q24 = new ItemId( 'Q24' );
-
-		$argLists["PropertyNoValueSnak"] = array(
-			array( $this->makeClaim( new PropertyNoValueSnak( $p44 ) ) ),
-			array( $p44 ) );
-
-		$argLists["PropertySomeValueSnak"] = array(
-			array( $this->makeClaim( new PropertySomeValueSnak( $p44 ) ) ),
-			array( $p44 ) );
-
-		$argLists["PropertyValueSnak with string value"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p23, new StringValue( 'onoez' ) ) ) ),
-			array( $p23 ) );
-
-		$argLists["PropertyValueSnak with EntityId"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p44, new EntityIdValue( $q23 ) ) ) ),
-			array( $p44, $q23 ) );
-
-		$argLists["Mixed Snaks"] = array(
-			array(
-				$this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q23 ) ) ),
-				$this->makeClaim( new PropertyNoValueSnak( $p44 ) ),
-				$this->makeClaim( new PropertySomeValueSnak( $p44 ) ),
-				$this->makeClaim( new PropertyValueSnak( $p44, new StringValue( 'onoez' ) ) ),
-				$this->makeClaim( new PropertyValueSnak( $p44, new EntityIdValue( $q24 ) ) ),
-			),
-			array( $p11, $q23, $p44, $q24 ) );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider getParserOutputExternalLinksProvider
-	 *
-	 * @param Claim[] $claims
-	 * @param string[] $expectedLinks
-	 */
-	public function testParserOutputExternalLinks( array $claims, $expectedLinks ) {
-		$entityRevision = $this->newEntityRevisionForClaims( $claims );
-		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
-
-		$out = $entityView->getParserOutput( $entityRevision, true, false );
-		$links = $out->getExternalLinks();
-
-		$expectedLinks = array_values( $expectedLinks );
-		sort( $expectedLinks );
-
-		$links = array_keys( $links );
-		sort( $links );
-
-		$this->assertEquals( $expectedLinks, $links );
-	}
-
-	public function getParserOutputExternalLinksProvider() {
-		$argLists = array();
-
-		$p23 = new PropertyId( 'P23' );
-		$p42 = new PropertyId( 'P42' );
-
-		$argLists["empty"] = array(
-			array(),
-			array() );
-
-		$argLists["PropertyNoValueSnak"] = array(
-			array( $this->makeClaim( new PropertyNoValueSnak( $p42 ) ) ),
-			array());
-
-		$argLists["PropertySomeValueSnak"] = array(
-			array( $this->makeClaim( new PropertySomeValueSnak( $p42 ) ) ),
-			array() );
-
-		$argLists["PropertyValueSnak with string value"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p23, new StringValue( 'http://not/a/url' )  ) ) ),
-			array() );
-
-		$argLists["PropertyValueSnak with URL"] = array(
-			array( $this->makeClaim( new PropertyValueSnak( $p42, new StringValue( 'http://acme.com/test' ) ) ) ),
-			array( 'http://acme.com/test' ) );
-
-		return $argLists;
+		return $statements;
 	}
 
 	/**
@@ -467,9 +351,9 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		$p11 = new PropertyId( 'p11' );
 		$p77 = new PropertyId( 'p77' ); // unknown property
 
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
-		$entity->addClaim( $this->makeClaim( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
+		$entity->addClaim( $this->makeStatement( new PropertyValueSnak( $p11, new EntityIdValue( $q33 ) ) ) );
+		$entity->addClaim( $this->makeStatement( new PropertyValueSnak( $p11, new EntityIdValue( $q44 ) ) ) );
+		$entity->addClaim( $this->makeStatement( new PropertyValueSnak( $p77, new EntityIdValue( $q33 ) ) ) );
 
 		return $entity;
 	}
