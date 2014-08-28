@@ -94,7 +94,9 @@ class SiteLinksView {
 			$html .= $this->getHtmlForSiteLinkGroup( $siteLinks, $itemId, $group, $editable );
 		}
 
-		return $html;
+		return wfTemplate( 'wikibase-sitelinkgrouplistview',
+			wfTemplate( 'wb-listview', $html )
+		);
 	}
 
 	/**
