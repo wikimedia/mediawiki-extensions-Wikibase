@@ -280,6 +280,11 @@ HTML;
 </tbody>
 HTML;
 
+	$templates['wikibase-sitelinkgrouplistview'] =
+<<<HTML
+<div class="wikibase-sitelinkgrouplistview"><!-- wb-listview -->$1</div>
+HTML;
+
 	$templates['wikibase-sitelinkgroupview'] =
 <<<HTML
 <div class="wikibase-sitelinkgroupview" data-wb-sitelinks-group="$5">
