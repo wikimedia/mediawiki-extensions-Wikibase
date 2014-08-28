@@ -28,9 +28,9 @@ return call_user_func( function() {
 			'styles' => array(
 				// Order must be hierarchical, do not order alphabetically
 				'wikibase.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.aliasesview.css',
-				'jquery.wikibase/themes/default/jquery.wikibase.descriptionview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.labelview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.descriptionview.css',
+				'jquery.wikibase/themes/default/jquery.wikibase.aliasesview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.sitelinklistview.css',
 				'jquery.wikibase/themes/default/jquery.wikibase.sitelinkview.css',
 			)

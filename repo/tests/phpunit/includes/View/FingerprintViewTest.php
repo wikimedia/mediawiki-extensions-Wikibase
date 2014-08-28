@@ -132,23 +132,21 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 		$noAliases->removeAliasGroup( 'en' );
 
 		return array(
-			array( Fingerprint::newEmpty(), array( 'wb-empty' ), 'No' ),
-			array( $noLabel, array( 'wb-empty' ), 'No label' ),
-			array( $noDescription, array( 'wb-empty' ), 'No description' ),
-			array( $noAliases, array( 'wb-empty' ), 'No aliases' ),
+			array( Fingerprint::newEmpty(), 'No' ),
+			array( $noLabel, 'No label' ),
+			array( $noDescription, 'No description' ),
+			array( $noAliases, 'No aliases' ),
 		);
 	}
 
 	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
-	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint, array $classes ) {
+	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint ) {
 		$fingerprintView = $this->getFingerprintView();
 		$html = $fingerprintView->getHtml( $fingerprint );
 
-		foreach ( $classes as $class ) {
-			$this->assertContains( $class, $html );
-		}
+		$this->assertContains( 'wb-empty', $html );
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
@@ -168,6 +166,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 
 		$this->assertNotContains( 'id="wb-firstHeading-new"', $html );
 		$this->assertContains( 'id="wb-firstHeading-' . $idString . '"', $html );
+		$this->assertContains( '(' . $idString . ')', $html );
 		$this->assertContains( '<a ', $html );
 	}
 
@@ -177,6 +176,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 
 		$this->assertContains( 'id="wb-firstHeading-new"', $html );
 		$this->assertNotContains( 'id="wb-firstHeading-Q', $html );
+		$this->assertNotContains( '(new)', $html );
 		$this->assertNotContains( '<a ', $html );
 	}
 
@@ -192,7 +192,7 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	/**
 	 * @dataProvider emptyFingerprintProvider
 	 */
-	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, array $classes, $message ) {
+	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $message ) {
 		$fingerprintView = $this->getFingerprintView();
 		$html = $fingerprintView->getHtml( $fingerprint );
 
