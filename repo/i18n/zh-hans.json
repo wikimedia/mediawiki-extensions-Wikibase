@@ -110,6 +110,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "“$1”不是一个有效的项编号。",
 	"wikibase-wikibaserepopage-invalid-langcode": "语言代码“$1”未知。请使用系统已知的语言代码，例如“zh”。",
 	"wikibase-wikibaserepopage-invalid-id": "ID“$1”未知。请使用有效的实体ID。",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1是重定向。",
+	"wikibase-wikibaserepopage-storage-exception": "尝试加载$1时出错：$2。",
 	"special-itembytitle": "按标题搜索项",
 	"wikibase-itembytitle-lookup-fieldset": "按网站和标题搜索项",
 	"wikibase-itembytitle-lookup-site": "网站：",

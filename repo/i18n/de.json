@@ -335,6 +335,7 @@
 	"content-model-wikibase-query": "Wikibase-Abfrage",
 	"right-item-term": "Bezeichner (Bezeichnungen, Beschreibungen und Aliasse) von Datenobjekten ändern",
 	"right-item-merge": "Objekte zusammenführen",
+	"right-item-redirect": "Objektweiterleitungen erstellen",
 	"right-property-term": "Bezeichner (Bezeichnungen, Beschreibungen und Aliasse) von Eigenschaften ändern",
 	"right-property-create": "Eigenschaften erstellen"
 }

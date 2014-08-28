@@ -98,6 +98,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" non è un ID elemento valido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Il codice di lingua \"$1\" è sconosciuto. Utilizza un codice di lingua conosciuto al sistema, ad esempio \"it\".",
 	"wikibase-wikibaserepopage-invalid-id": "L'ID \"$1\" è sconosciuto al sistema. Utilizza un ID di entità valido.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 è un redirect.",
+	"wikibase-wikibaserepopage-storage-exception": "Si è verificato un errore durante il caricamento di $1: $2.",
 	"special-itembytitle": "Elementi per titolo",
 	"wikibase-itembytitle-lookup-fieldset": "Ricerca elementi per sito e titolo",
 	"wikibase-itembytitle-lookup-site": "Sito:",

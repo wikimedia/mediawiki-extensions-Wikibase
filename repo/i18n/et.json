@@ -3,7 +3,8 @@
 		"authors": [
 			"Avjoska",
 			"Pikne",
-			"WikedKentaur"
+			"WikedKentaur",
+			"Boxmein"
 		]
 	},
 	"wikibase-desc": "Struktureeritud andmehoidla",
@@ -87,6 +88,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" pole sobiv üksuse identifikaator.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Keelekood \"$1\" on tundmatu. Palun kasuta süsteemile tuntavat keelekoodi nagu \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "Identifikaator \"$1\" on süsteemis tundmatu. Palun kasuta sobivat olemi identifikaatorit.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 on ümbersuunatud.",
+	"wikibase-wikibaserepopage-storage-exception": "Tõrge $1 laadimisel: $2.",
 	"special-itembytitle": "Üksus pealkirja järgi",
 	"wikibase-itembytitle-lookup-fieldset": "Üksuste otsimine võrgukoha ja pealkirja järgi",
 	"wikibase-itembytitle-lookup-site": "Võrgukoht:",

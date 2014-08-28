@@ -82,6 +82,7 @@
 	"wikibase-wikibaserepopage-not-itemid": "「$1」は有効な項目 ID ではありません。",
 	"wikibase-wikibaserepopage-invalid-langcode": "言語コード「$1」は不明です。システムに登録されている言語コード (「en」など) を使用してください。",
 	"wikibase-wikibaserepopage-invalid-id": "ID「$1」はシステムに登録されていません。有効なエンティティ ID を使用してください。",
+	"wikibase-wikibaserepopage-storage-exception": "$1 を読み込む際にエラーが発生しました: $2",
 	"special-itembytitle": "ページ名から項目を探す",
 	"wikibase-itembytitle-lookup-fieldset": "サイト名やページ名で項目を探す",
 	"wikibase-itembytitle-lookup-site": "サイト:",

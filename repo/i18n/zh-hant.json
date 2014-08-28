@@ -42,6 +42,7 @@
 	"wikibase-terms": "其他語言",
 	"wikibase-sitelinks-empty": "尚無頁面連結入此項目。",
 	"wikibase-sitelinks-input-help-message": "設定一個本項目相關頁面的連結。",
+	"wikibase-sitelinks-special": "其他網站已連結此項目的頁面",
 	"wikibase-remove": "刪除",
 	"wikibase-move-up": "向上移動",
 	"wikibase-move-down": "向下移動",
@@ -124,7 +125,7 @@
 	"special-newproperty": "建立一個新屬性。",
 	"wikibase-newproperty-summary": "請檢查屬性是否已經存在！<br />您應為所有新屬性建立一個[[Help:Label|標籤]]及[[Help:Description|描述]]，並加上一個有效的屬性類型。",
 	"wikibase-newproperty-fieldset": "建立新屬性",
-	"wikibase-newproperty-datatype": "數據類型：",
+	"wikibase-newproperty-datatype": "資料類型：",
 	"wikibase-newproperty-invalid-datatype": "特定的資料類型無效。",
 	"special-newitem": "建立一個新項目",
 	"wikibase-newitem-summary": "確定已檢查[[Special:ItemByTitle|項目是否已存在]]！<br />您應該對所有的新項目創建一個[[Help:Label|標籤]]和一個[[Help:Description|描述]]。",
@@ -320,6 +321,7 @@
 	"content-model-wikibase-query": "Wikibase查詢",
 	"right-item-term": "更改項機能（標籤、說明與別名）",
 	"right-item-merge": "合併項",
+	"right-item-redirect": "建立項目重新導向",
 	"right-property-term": "更改屬性機能（標籤、說明與別名）",
 	"right-property-create": "建立屬性"
 }

@@ -71,6 +71,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" ass keng valabel ID vun engem Element.",
 	"wikibase-wikibaserepopage-invalid-langcode": "De Sproochcode \"$1\" ass onbekannt. Benotzt w.e.g. e Sproochcode deen dem System bekannt ass, wéi z. Bsp. \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "D'ID \"$1\" ass am System net bekannt. Benotzt w.e.g. en valabel ID vun der Entitéit.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 ass eng Viruleedung",
+	"wikibase-wikibaserepopage-storage-exception": "Beim Luede vu(n) $1 ass e Feeler geschitt: $2",
 	"special-itembytitle": "Element no Titel",
 	"wikibase-itembytitle-lookup-fieldset": "Sicht no Elementer mam Site a mam Titel",
 	"wikibase-itembytitle-lookup-site": "Site:",

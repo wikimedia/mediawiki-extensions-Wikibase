@@ -94,6 +94,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" não é o ID de um item válido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "O identificador de idioma \"$1\" é desconhecido. Por favor, utilize um identificador de idioma reconhecido pelo sistema, como \"pt\".",
 	"wikibase-wikibaserepopage-invalid-id": "O identificador \"$1\" não é conhecido pelo sistema. Utilize um identificador válido.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 é um redirecionamento.",
+	"wikibase-wikibaserepopage-storage-exception": "Ocorreu um erro enquanto tentávamos carregar $1: $2.",
 	"special-itembytitle": "Item por título",
 	"wikibase-itembytitle-lookup-fieldset": "Procurar itens por sítio e título",
 	"wikibase-itembytitle-lookup-site": "Sítio:",

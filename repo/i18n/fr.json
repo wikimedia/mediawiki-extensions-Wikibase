@@ -344,6 +344,7 @@
 	"content-model-wikibase-query": "Requête de Wikibase",
 	"right-item-term": "Modifier les termes de l’élément (libellés, descriptions, alias)",
 	"right-item-merge": "Fusionner les éléments",
+	"right-item-redirect": "Créer des redirections d’élément",
 	"right-property-term": "Modifier les termes de la propriété (libellés, descriptions, alias)",
 	"right-property-create": "Créer des propriétés"
 }

@@ -106,6 +106,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" یک شناسهٔ مورد معتبر نیست.",
 	"wikibase-wikibaserepopage-invalid-langcode": "شناسهٔ زبان «$1» ناشناخته است. لطفاً از یک شناسهٔ زبان که برای سامانه شناخته‌شده است استفاده کنید مثل «fa».",
 	"wikibase-wikibaserepopage-invalid-id": "شناسهٔ «$1» برای سامانه ناشناخته است. لطفاً از یک شناسهٔ موضوع معتبر استفاده کنید.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 یک تغییرمسیر است.",
+	"wikibase-wikibaserepopage-storage-exception": "خطایی هنگام تلاش در بارگذاری $1 رخ داد: $2.",
 	"special-itembytitle": "آیتم بر پایهٔ عنوان",
 	"wikibase-itembytitle-lookup-fieldset": "جستجوی آیتم‌ها بر پایهٔ وب‌گاه و عنوان",
 	"wikibase-itembytitle-lookup-site": "وب‌گاه:",
@@ -326,6 +328,7 @@
 	"content-model-wikibase-query": "کوئری ویکی‌بیس",
 	"right-item-term": "تغییر جزئیات آیتم (برچسب، توضیحات، نام مستعار)",
 	"right-item-merge": "ادغام آیتم‌ها",
+	"right-item-redirect": "ایجاد تغییرمسیر آیتم‌ها",
 	"right-property-term": "تغییر خصوصیات آیتم‌ها (برچسب‌ها، توضیحات، نام‌های مستعار)",
 	"right-property-create": "ایجاد ویژگی‌ها"
 }

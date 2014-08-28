@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"David1010",
-			"Tokoko"
+			"Tokoko",
+			"Otogi"
 		]
 	},
 	"wikibase-client-desc": "ვიკიბაზის გაფართოების კლიენტი",
@@ -36,7 +37,6 @@
 	"wikibase-linkitem-not-loggedin": "ამ ფუნქციის გამოყენებისათვის, თქვენ უნდა გაიაროთ ავტორიზაცია ამ ვიკისა და [$1 მონაცემების ცენტრალურ რეპოზიტორიაში].",
 	"wikibase-linkitem-success-link": "გვერდები წარმატებით დაუკავშირდნენ. კავშირის შემცველი ელემენტი, მდებარეობს ჩვენი [$1 მონაცემების ცენტრალურ საცავში].",
 	"wikibase-property-notfound": "თვისება „$1“ ვერ მოიძებნა.",
-	"wikibase-property-notsupportedyet": "ვიკიბაზას ჯერ არ აქვს $1 თვისების ტიპის მხარდაჭერა.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "დამალე",
 	"wikibase-rc-hide-wikidata-show": "აჩვენეთ",
@@ -53,5 +53,6 @@
 	"wikibase-unconnectedpages-iwdata-label": "მხოლოდ ენათშორისი ბმულების მქონე გვერდები",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)",
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ელემენტის ID",
-	"wikibase-pageinfo-entity-id-none": "არაფერი"
+	"wikibase-pageinfo-entity-id-none": "არაფერი",
+	"wikibase-otherprojects-beta-message": "სხვა პროექტების გვერდითი პანელი"
 }

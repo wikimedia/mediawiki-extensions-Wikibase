@@ -94,6 +94,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" אינו מזהה פריט תקין.",
 	"wikibase-wikibaserepopage-invalid-langcode": "קוד השפה \"$1\" אינו ידוע. נא להשתמש בקוד שפה שידוע למערכת, כגון \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "המזהה \"$1\" אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 היא הפניה",
+	"wikibase-wikibaserepopage-storage-exception": "בעת ניסיון לטעון את $1 אירעה שגיעה: $2.",
 	"special-itembytitle": "פריט לפי כותרת",
 	"wikibase-itembytitle-lookup-fieldset": "חיפוש פריטים לפי אתר וכותרת",
 	"wikibase-itembytitle-lookup-site": "אתר:",
@@ -321,6 +323,7 @@
 	"content-model-wikibase-query": "שאילתת Wikibase",
 	"right-item-term": "שינוי מונחי פריט (תוויות, תיאורים, כינויים)",
 	"right-item-merge": "מיזוג פריטים",
+	"right-item-redirect": "יצירת הפניות פריטים",
 	"right-property-term": "שינוי מונחי מאפיינים (תוויות, תיאורים, כינויים)",
 	"right-property-create": "יצירת מאפיינים"
 }

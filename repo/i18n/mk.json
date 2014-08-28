@@ -88,6 +88,8 @@
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ не претставува важечка назнака на предмет.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Јазичниот код „$1“ е непознат. Внесете јазичен код што му е позната на системот, како на пр. „mk“.",
 	"wikibase-wikibaserepopage-invalid-id": "Назнаката „$1“ не му е позната на системот. Внесете важечка назнака.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 е пренасочување.",
+	"wikibase-wikibaserepopage-storage-exception": "Настана грешка при вчитувањето на $1: $2.",
 	"special-itembytitle": "Предмет по наслов",
 	"wikibase-itembytitle-lookup-fieldset": "Пребарување на предмети по вики или наслов",
 	"wikibase-itembytitle-lookup-site": "Вики:",
@@ -316,6 +318,7 @@
 	"content-model-wikibase-query": "Барање за Викибазата",
 	"right-item-term": "Менување на условите за предметите (етикети, описи, алијаси)",
 	"right-item-merge": "Спојување на предмети",
+	"right-item-redirect": "Создавање на пренасочувања на предмети",
 	"right-property-term": "Менување на условите за својствата (етикети, описи, алијаси)",
 	"right-property-create": "Создавање на својства"
 }
