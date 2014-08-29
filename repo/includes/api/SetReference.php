@@ -234,20 +234,6 @@ class SetReference extends ModifyClaim {
 	}
 
 	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge(
-			parent::getPossibleErrors(),
-			array(
-				array( 'code' => 'no-such-claim', 'info' => $this->msg( 'wikibase-api-no-such-claim' )->text() ),
-				array( 'code' => 'not-statement', 'info' => $this->msg( 'wikibase-api-not-statement' )->text() ),
-				array( 'code' => 'no-such-reference', 'info' => $this->msg( 'wikibase-api-no-such-reference' )->text() ),
-			)
-		);
-	}
-
-	/**
 	 * @see \ApiBase::getParamDescription
 	 *
 	 * @since 0.3

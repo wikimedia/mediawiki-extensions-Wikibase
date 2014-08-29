@@ -94,18 +94,6 @@ class GetClaims extends ApiWikibase {
 	}
 
 	/**
-	 * @see \ApiBase::getPossibleErrors()
-	 * @return array
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'no-such-entity', 'info' => $this->msg( 'wikibase-api-no-such-entity' )->text()  ),
-			array( 'code' => 'param-missing', 'info' => $this->msg( 'wikibase-api-param-missing' )->text() ),
-			array( 'code' => 'param-illegal', 'info' => $this->msg( 'wikibase-api-param-illegal' )->text() ),
-		) );
-	}
-
-	/**
 	 * @since 0.3
 	 *
 	 * @param Entity $entity
