@@ -340,4 +340,28 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
 	}
 
+	public function testEmptyListDoesNotEqualNonEmptyList() {
+		$firstStatements = new StatementList();
+
+		$secondStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 3, 'baz' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+		) );
+
+		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
+	}
+
+	public function testNonEmptyListDoesNotEqualEmptyList() {
+		$firstStatements = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 3, 'baz' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+		) );
+
+		$secondStatements = new StatementList();
+
+		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
+	}
+
 }
