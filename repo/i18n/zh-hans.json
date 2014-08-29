@@ -339,6 +339,7 @@
 	"content-model-wikibase-query": "维基数据库查询",
 	"right-item-term": "更改项术语（标签、说明、别名）",
 	"right-item-merge": "合并项",
+	"right-item-redirect": "创建项重定向",
 	"right-property-term": "更改属性术语（标签、说明、别名）",
 	"right-property-create": "创建属性"
 }

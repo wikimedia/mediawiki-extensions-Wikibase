@@ -14,7 +14,8 @@
 			"Zhuyifei1999",
 			"乌拉跨氪",
 			"Mywood",
-			"Impersonator 1"
+			"Impersonator 1",
+			"Jason924tw"
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
@@ -71,6 +72,6 @@
 	"wikibase-pageinfo-entity-id-none": "无",
 	"wikibase-property-render-error": "无法生成属性$1：$2",
 	"wikibase-otherprojects": "其他项目",
-	"wikibase-otherprojects-beta-message": "其他项目边栏",
+	"wikibase-otherprojects-beta-message": "其他项目侧边栏",
 	"wikibase-otherprojects-beta-description": "在边栏添加“{{int:wikibase-otherprojects}}”节，它包含连入{{WBREPONAME}}数据的其他维基媒体项目的页面连接。"
 }

@@ -3,19 +3,20 @@
 		"authors": [
 			"JAn Dudík",
 			"KuboF",
-			"Teslaton"
+			"Teslaton",
+			"Sudo77(new)"
 		]
 	},
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
-	"specialpages-group-wikibaseclient": "Klient Wikiúdajov",
+	"specialpages-group-wikibaseclient": "Klient {{GRAMMAR:genitív|{{WBREPONAME}}}}",
 	"tooltip-t-wikibase": "Odkaz na prepojenú položku dátového úložiska",
-	"wikibase-after-page-move": "Môžete tiež [$1 aktualizovať] súvisiacu položku Wikiúdajov, aby na presunutej stránke zostali odkazy na iné jazyky.",
-	"wikibase-after-page-move-queued": "Súvisiaca [$1 položka Wikiúdajov] bude zakrátko automaticky aktualizovaná.",
-	"wikibase-comment-add": "Položka Wikiúdajov bola vytvorená.",
-	"wikibase-comment-remove": "Súvisiaca položka Wikiúdajov bola vymazaná. Medzijazykové odkazy odstránené.",
-	"wikibase-comment-linked": "Stránka bola prepojená s položkou Wikiúdajov.",
-	"wikibase-comment-unlink": "Stránka bola odpojená od položky Wikiúdajov. Medzijazykové odkazy odstránené.",
-	"wikibase-comment-restore": "Súvisiaca položka Wikiúdajov bola obnovená. Medzijazykové odkazy obnovené.",
+	"wikibase-after-page-move": "Môžete tiež [$1 aktualizovať] súvisiacu položku {{GRAMMAR:genitív|{{WBREPONAME}}}}, aby na presunutej stránke zostali odkazy na iné jazyky.",
+	"wikibase-after-page-move-queued": "Súvisiaca [$1 položka {{GRAMMAR:genitív|{{WBREPONAME}}}}] bude zakrátko automaticky aktualizovaná.",
+	"wikibase-comment-add": "Položka {{GRAMMAR:genitív|{{WBREPONAME}}}} bola vytvorená.",
+	"wikibase-comment-remove": "Súvisiaca položka {{GRAMMAR:genitív|{{WBREPONAME}}}} bola vymazaná. Medzijazykové odkazy odstránené.",
+	"wikibase-comment-linked": "Stránka bola prepojená s položkou {{GRAMMAR:genitív|{{WBREPONAME}}}}.",
+	"wikibase-comment-unlink": "Stránka bola odpojená od položky {{GRAMMAR:genitív|{{WBREPONAME}}}}. Medzijazykové odkazy odstránené.",
+	"wikibase-comment-restore": "Súvisiaca položka {{GRAMMAR:genitív|{{WBREPONAME}}}} bola obnovená. Medzijazykové odkazy obnovené.",
 	"wikibase-comment-update": "Zmena položky na Wikiúdajoch",
 	"wikibase-comment-sitelink-add": "Pridaný medzijazykový odkaz: $1",
 	"wikibase-comment-sitelink-change": "Medzijazykový odkaz zmenený z $1 na $2",
@@ -49,5 +50,6 @@
 	"wikibase-unconnectedpages-iwdata-label": "Len stránky s medzijazykovými odkazmi",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medzijazykový odkaz|medzijazykové odkazy|medzijazykových odkazov}})",
 	"wikibase-pageinfo-entity-id": "ID položky Wikiúdajov",
-	"wikibase-pageinfo-entity-id-none": "Žiadne"
+	"wikibase-pageinfo-entity-id-none": "Žiadne",
+	"wikibase-otherprojects": "Iné projekty"
 }

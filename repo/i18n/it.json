@@ -327,6 +327,7 @@
 	"content-model-wikibase-query": "Interrogazione Wikibase",
 	"right-item-term": "Modifica termini elementi (etichette, descrizioni, alias)",
 	"right-item-merge": "Unisci elementi",
+	"right-item-redirect": "Crea elementi redirect",
 	"right-property-term": "Modifica termini proprietà (etichette, descrizioni, alias)",
 	"right-property-create": "Crea proprietà"
 }

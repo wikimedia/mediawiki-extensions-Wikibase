@@ -33,7 +33,8 @@
 			"Siebrand",
 			"Stryn",
 			"ZxxZxxZ",
-			"아라"
+			"아라",
+			"Cwlin0416"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -98,7 +99,7 @@
 	"wikibase-statementview-referencesheading-pendingcountersubject": "Used in the heading for the references associated with a statement (see [[d:Wikidata:Glossary]]). The heading is giving information about how many references exist for that statement. This is just the label for the counter's subject: the number of references is not part of this message, and the word order is defined via {{msg-mw|wikibase-ui-pendingquantitycounter-nonpending}}.\n\nParameters:\n* $1 - the number of references for plural usage\n{{Identical|Source}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "Tooltip displayed in the references heading when there are references (see [[d:Wikidata:Glossary]]) in edit mode which are not saved yet.\n\nParameters:\n* $1 - the number of elements not saved yet",
 	"wikibase-snakview-property-input-placeholder": "Placeholder message that is initially displayed within the property input element when adding a new snak. See also [[d:Wikidata:Glossary]].\n{{Identical|Property}}",
-	"wikibase-snakview-unsupportedsnaktype": "Parameters:\n* $1 - snak type\nSee [[d:Wikidata:Glossary#Snak]].",
+	"wikibase-snakview-unsupportedsnaktype": "Parameters:\n* $1 - snak type\nSee [[d:Wikidata:Glossary#Snak]].\n\nSnaks are the basic information structures used to describe Entities in Wikidata. They are an integral part of each Statement (which can be viewed as collection of Snaks about an Entity, together with a list of references).\n\nEx:\n*Berlin (subject) has a population (property) of 3499879 (value).\n*Georgia (subject) has the capital (property) Tbilisi (value).\n*Ghandi (subject) was born on (property) 2 October 1869 (value).",
 	"wikibase-snakview-choosesnaktype": "Message prompting the user to select a Snak type (see [[d:Wikidata:Glossary]]) when adding or editing a Snak.\n\nSince a default Snak type should always be selected when adding a Snak, the message is visible on rare occasions only.\n\nSince \"Snak\" or \"Snak type\" does not express any meaning for the user, these phrases should be avoided in the message.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "Warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value. This should only appear after internal changes or after a property's data type has changed and no scripts for updating the data were executed (there might not even be any scripts for handling all possible causes of this).",
 	"wikibase-snakview-variation-datavaluetypemismatch-details": "Details of the warning displayed if the data value type used by a Snak's (see [[d:Wikidata:Glossary]]) property's data type is different from the data value type of the same Snak's actual value.\n\nParameters:\n* $1 - data value type of the property-value Snak's value.\n* $2 - data value type used by the data type used in the property which is used by the property-value Snak",

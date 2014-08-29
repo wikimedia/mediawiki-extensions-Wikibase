@@ -40,7 +40,6 @@
 	"wikibase-linkitem-not-loggedin": "Морате бити пријављени на овом вики-сајту и на [$1 главном складишту података] како бисте користили ову могућност.",
 	"wikibase-linkitem-success-link": "Странице су успешно повезане. Можете пронаћи ставку која садржи везе на нашој [$1 централној бази података].",
 	"wikibase-property-notfound": "$1 својство није пронађено.",
-	"wikibase-property-notsupportedyet": "Викибаза још не подржава врсту својства за $1 својство.",
 	"wikibase-rc-hide-wikidata": "$1 Википодатке",
 	"wikibase-rc-hide-wikidata-hide": "Сакриј",
 	"wikibase-rc-hide-wikidata-show": "Прикажи",
@@ -59,5 +58,6 @@
 	"wikibase-unconnectedpages-iwdata-label": "Само странице са међујезичким везама",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|међујезичка веза|међујезичких веза}} на страници)",
 	"wikibase-pageinfo-entity-id": "ИД ставке на Википодацима",
-	"wikibase-pageinfo-entity-id-none": "Нема"
+	"wikibase-pageinfo-entity-id-none": "Нема",
+	"wikibase-otherprojects": "Остали пројекти"
 }

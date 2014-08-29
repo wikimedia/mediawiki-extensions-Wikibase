@@ -102,6 +102,7 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" is geen geldig item-ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "De taalcode \"$1\" is niet bekend. Gebruik een taalcode die bekend is in het systeem, zoals \"en\".",
 	"wikibase-wikibaserepopage-invalid-id": "Het ID is \"$1\" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 is een doorverwijzing.",
 	"special-itembytitle": "Item gesorteerd op naam",
 	"wikibase-itembytitle-lookup-fieldset": "Items zoeken op site en paginanaam",
 	"wikibase-itembytitle-lookup-site": "Site:",
@@ -317,6 +318,7 @@
 	"content-model-wikibase-query": "Wikibasezoekopdracht",
 	"right-item-term": "Itemwaarden wijzigen (labels, beschrijvingen, aliassen)",
 	"right-item-merge": "Items samenvoegen",
+	"right-item-redirect": "Item-doorverwijzingen aanmaken",
 	"right-property-term": "Eigenschapswaarden wijzigen (labels, beschrijvingen, aliassen)",
 	"right-property-create": "Eigenschappen aanmaken"
 }
