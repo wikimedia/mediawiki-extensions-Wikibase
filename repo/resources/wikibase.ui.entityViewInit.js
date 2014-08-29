@@ -198,7 +198,9 @@
 				'descriptionview',
 				'labelview',
 				'referenceview',
-				'sitelinkview'
+				'sitelinkview',
+				'terms-labelview',
+				'terms-descriptionview'
 			],
 			removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove'],
 			movetoolbar: [

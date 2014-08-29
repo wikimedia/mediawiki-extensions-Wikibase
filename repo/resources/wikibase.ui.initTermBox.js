@@ -23,10 +23,6 @@ wb.ui.initTermBox = function( entity, api ) {
 				&& $.uls !== undefined
 				&& $.uls.data !== undefined;
 
-		$( '.wb-terms' ).toolbarcontroller( {
-			edittoolbar: ['terms-labelview', 'terms-descriptionview']
-		} );
-
 		// Skip if having no extra languages is what the user wants
 		if( !$termBoxRows.length && !hasSpecifiedLanguages && isUlsDefined ) {
 			// No term box present; Ask ULS to provide languages and generate plain HTML
@@ -188,12 +184,12 @@ function renderTermBox( title, entity, languageCodes ) {
 	}
 	var labels = entity.getLabels(),
 		descriptions = entity.getDescriptions(),
-		$tbody = $( '<tbody>' );
+		$tbody = $();
 
 	for( var i = 0; i < languageCodes.length; i++ ) {
 		var languageCode = languageCodes[i];
 
-		$tbody.append( mw.template( 'wb-term',
+		$tbody = $tbody.add( mw.template( 'wb-term',
 			languageCode,
 			$.uls.data.getAutonym( languageCode ),
 			labels.hasOwnProperty( languageCode ) ? labels[languageCode] : '',

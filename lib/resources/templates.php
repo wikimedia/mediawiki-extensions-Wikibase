@@ -259,7 +259,7 @@ HTML;
 		<col class="wb-terms-term" />
 		<col class="wb-editsection" />
 	</colgroup>
-	<tbody>$1</tbody>
+	<!-- [0,*] wb-term -->$1
 </table>
 HTML;
 
@@ -267,15 +267,17 @@ HTML;
 // $1: language-code
 	$templates['wb-term'] =
 <<<HTML
-<tr class="wb-terms-label wb-terms-$1">
-	<td class="wb-terms-language wb-terms-language-$1" rowspan="2"><a href="$9">$2</a><!-- language name --></td>
-	<td class="wb-terms-label wb-terms-label-$1 wb-value wb-value-lang-$1 $7">$3<!-- label --></td>
-	<td class="wb-editsection">$5<!-- label toolbar --></td>
-</tr>
-<tr class="wb-terms-description wb-terms-$1">
-	<td class="wb-terms-description wb-terms-description-$1 wb-value wb-value-lang-$1 $8">$4<!-- description --></td>
-	<td class="wb-editsection">$6<!-- description toolbar --></td>
-</tr>
+<tbody>
+	<tr class="wb-terms-label wb-terms-$1">
+		<td class="wb-terms-language wb-terms-language-$1" rowspan="2"><a href="$9">$2</a><!-- language name --></td>
+		<td class="wb-terms-label wb-terms-label-$1 wb-value wb-value-lang-$1 $7">$3<!-- label --></td>
+		<td class="wb-editsection">$5<!-- label toolbar --></td>
+	</tr>
+	<tr class="wb-terms-description wb-terms-$1">
+		<td class="wb-terms-description wb-terms-description-$1 wb-value wb-value-lang-$1 $8">$4<!-- description --></td>
+		<td class="wb-editsection">$6<!-- description toolbar --></td>
+	</tr>
+</tbody>
 HTML;
 
 	$templates['wikibase-sitelinkgroupview'] =
