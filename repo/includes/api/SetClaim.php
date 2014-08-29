@@ -6,7 +6,7 @@ use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
 use Diff\Comparer\ComparableComparer;
-use Diff\OrderedListDiffer;
+use Diff\Differ\OrderedListDiffer;
 use FormatJson;
 use InvalidArgumentException;
 use LogicException;

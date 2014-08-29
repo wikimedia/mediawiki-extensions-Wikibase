@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use Content;
 use Diff\Comparer\ComparableComparer;
-use Diff\OrderedListDiffer;
+use Diff\Differ\OrderedListDiffer;
 use DifferenceEngine;
 use Html;
 use IContextSource;

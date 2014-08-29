@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Diff\Comparer\ComparableComparer;
-use Diff\OrderedListDiffer;
+use Diff\Differ\OrderedListDiffer;
 use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;

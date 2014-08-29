@@ -2,11 +2,11 @@
 
 namespace Wikibase;
 
-use Diff\Diff;
+use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use MWException;
 use SiteStore;
