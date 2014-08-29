@@ -76,7 +76,6 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = Item::newEmpty();
 
-			wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
 			$guidGenerator = new ClaimGuidGenerator();
@@ -84,7 +83,6 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 			$item->addClaim( $statement );
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
-			wfRestoreWarnings();
 
 			$this->assertInternalType( 'string', $statement->getGuid() );
 

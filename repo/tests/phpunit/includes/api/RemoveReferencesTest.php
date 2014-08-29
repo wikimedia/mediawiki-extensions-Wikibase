@@ -75,7 +75,6 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = Item::newEmpty();
 
-			wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
@@ -84,7 +83,6 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 			$item->addClaim( $statement );
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
-			wfRestoreWarnings();
 
 			$references = $statement->getReferences();
 

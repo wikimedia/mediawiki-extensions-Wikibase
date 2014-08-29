@@ -71,9 +71,7 @@ class GetClaimsTest extends \ApiTestCase {
 			$item->addClaim( $statement );
 		}
 
-		wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
 		$this->save( $item, EDIT_UPDATE );
-		wfRestoreWarnings();
 
 		return $item;
 	}
