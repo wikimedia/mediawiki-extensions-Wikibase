@@ -110,7 +110,6 @@ class EntityIdLabelFormatter extends EntityIdFormatter {
 			}
 		}
 
-		assert( is_string( $label ) );
 		return $label;
 	}
 

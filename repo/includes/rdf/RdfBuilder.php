@@ -444,13 +444,11 @@ class RdfBuilder {
 
 		switch ( $typeId ) {
 			case 'wikibase-item':
-				$rawValue = $value->getValue();
-
-				assert( $rawValue instanceof EntityId );
-				$valueQName = $this->getEntityQName( self::NS_ENTITY, $rawValue );
-				$valueResource = $this->graph->resource( $valueQName );
-				$statementResource->addResource( $propertyValueQName, $valueResource );
-				$this->entityMentioned( $rawValue );
+				$entityId = $value->getValue();
+				$entityQName = $this->getEntityQName( self::NS_ENTITY, $entityId );
+				$entityResource = $this->graph->resource( $entityQName );
+				$statementResource->addResource( $propertyValueQName, $entityResource );
+				$this->entityMentioned( $entityId );
 				break;
 			case 'commonsMedia':
 				$statementResource->addResource( $propertyValueQName, $value );
@@ -510,4 +508,5 @@ class RdfBuilder {
 		$this->addLabels( $entity );
 		$this->addDescriptions( $entity );
 	}
+
 }

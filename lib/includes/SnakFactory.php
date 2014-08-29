@@ -50,9 +50,6 @@ class SnakFactory {
 				throw new InvalidArgumentException( "bad snak type: $snakType" );
 		}
 
-		assert( isset( $snak ) );
-		assert( $snak instanceof Snak );
-
 		return $snak;
 	}
 
