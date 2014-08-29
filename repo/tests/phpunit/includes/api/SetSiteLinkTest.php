@@ -254,7 +254,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			);
 
 			$this->assertArrayHasKey( 'badges', $sitelink );
-			$this->assertEquals( $expSitelink['badges'], $sitelink['badges'],
+			$this->assertArrayEquals( $expSitelink['badges'], $sitelink['badges'],
 				"Returned incorrect badges"
 			);
 		} else if ( empty( $expected['value'] ) ) {
