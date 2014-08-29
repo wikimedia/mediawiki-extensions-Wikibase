@@ -40,41 +40,53 @@ class GetClaimsTest extends \ApiTestCase {
 
 	/**
 	 * @param Entity $entity
+	 * @param int $flags
 	 *
 	 * @return Entity
 	 */
-	protected function addClaimsAndSave( Entity $entity ) {
-		wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
-
+	private function save( Entity $entity, $flags = EDIT_NEW ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		/** @var $claims Claim[] */
-		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
-		$claims[1] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P404' ) ) );
-		$claims[2] = $entity->newClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) );
-		$claims[3] = $entity->newClaim( new PropertyValueSnak( new PropertyId( 'P9001' ), new StringValue( 'o_O' ) ) );
-
-		foreach( $claims as $key => $claim ){
-			$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
-			$entity->addClaim( $claim );
-		}
-
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
-		wfRestoreWarnings();
+		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags );
 
 		return $entity;
 	}
 
 	/**
+	 * @param Item $item
+	 *
+	 * @return Item
+	 */
+	private function addStatementsAndSave( Item $item ) {
+		$this->save( $item );
+
+		/** @var $statements Statement[] */
+		$statements[0] = $item->newClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
+		$statements[1] = $item->newClaim( new PropertyNoValueSnak( new PropertyId( 'P404' ) ) );
+		$statements[2] = $item->newClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) );
+		$statements[3] = $item->newClaim( new PropertyValueSnak( new PropertyId( 'P9001' ), new StringValue( 'o_O' ) ) );
+
+		foreach ( $statements as $key => $statement ) {
+			$statement->setGuid( $item->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
+			$item->addClaim( $statement );
+		}
+
+		wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
+		$this->save( $item, EDIT_UPDATE );
+		wfRestoreWarnings();
+
+		return $item;
+	}
+
+	/**
 	 * @return Entity[]
 	 */
-	protected function getNewEntities() {
+	private function getNewEntities() {
 		$property = Property::newFromType( 'string' );
 
 		return array(
-			$this->addClaimsAndSave( Item::newEmpty() ),
-			$this->addClaimsAndSave( $property ),
+			$this->addStatementsAndSave( Item::newEmpty() ),
+			$this->save( $property ),
 		);
 	}
 
@@ -191,7 +203,7 @@ class GetClaimsTest extends \ApiTestCase {
 	public function testGetInvalidIds( $entity, $property ) {
 		if ( !$entity ) {
 			$item = Item::newEmpty();
-			$this->addClaimsAndSave( $item );
+			$this->addStatementsAndSave( $item );
 			$entity = $item->getId()->getSerialization();
 		}
 
@@ -215,4 +227,5 @@ class GetClaimsTest extends \ApiTestCase {
 			array( 'whatTheFuck', 'P42' ),
 		);
 	}
+
 }
