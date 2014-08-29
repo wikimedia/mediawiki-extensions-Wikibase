@@ -254,9 +254,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			);
 
 			$this->assertArrayHasKey( 'badges', $sitelink );
-			$this->assertArrayEquals( $expSitelink['badges'], $sitelink['badges'],
-				"Returned incorrect badges"
-			);
+			$this->assertArrayEquals( $expSitelink['badges'], $sitelink['badges'] );
 		} else if ( empty( $expected['value'] ) ) {
 			$this->assertArrayHasKey( 'removed', $sitelink,
 				"Entity doesn't return expected 'removed' marker"
@@ -342,5 +340,5 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$warning = $result['warnings']['wbsetsitelink']['*'];
 		$this->assertRegExp( "/Unrecognized value for parameter 'badges'/", $warning );
 	}
-}
 
+}
