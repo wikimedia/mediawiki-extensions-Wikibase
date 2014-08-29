@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use Diff\Comparer\ComparableComparer;
-use Diff\OrderedListDiffer;
+use Diff\Differ\OrderedListDiffer;
 use Html;
 use IContextSource;
 use Linker;
