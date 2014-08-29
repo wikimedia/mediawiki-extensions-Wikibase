@@ -408,7 +408,7 @@ class Item extends Entity {
 		 */
 		return $this->fingerprint->equals( $that->fingerprint )
 			&& $this->siteLinks->equals( $that->siteLinks )
-			&& $that->statements->equals( $that->statements );
+			&& $this->statements->equals( $that->statements );
 	}
 
 }

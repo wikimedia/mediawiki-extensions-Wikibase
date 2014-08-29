@@ -820,4 +820,23 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( new StatementList(), $item->getStatements() );
 	}
 
+	public function testItemsWithDifferentStatementsAreNotEqual() {
+		$firstItem = Item::newEmpty();
+		$secondItem = Item::newEmpty();
+
+		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$this->assertFalse( $firstItem->equals( $secondItem ) );
+	}
+
+	public function testItemsWithTheSameStatementsAreEqual() {
+		$firstItem = Item::newEmpty();
+		$secondItem = Item::newEmpty();
+
+		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+		$secondItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$this->assertTrue( $firstItem->equals( $secondItem ) );
+	}
+
 }
