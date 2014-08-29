@@ -82,17 +82,17 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 		$one = Item::newEmpty();
 		$one->setId( new ItemId( 'Q1' ) );
-		$one->setLabel( 'en', 'one' );
-		$one->setLabel( 'de', 'eins' );
-		$one->setDescription( 'en', 'number' );
-		$one->setDescription( 'de', 'Zahl' );
+		$one->getFingerprint()->setLabel( 'en', 'one' );
+		$one->getFingerprint()->setLabel( 'de', 'eins' );
+		$one->getFingerprint()->setDescription( 'en', 'number' );
+		$one->getFingerprint()->setDescription( 'de', 'Zahl' );
 
 		$repo->putEntity( $one );
 
 		$oneone = Item::newEmpty();
 		$oneone->setId( new ItemId( 'Q11' ) );
-		$oneone->setLabel( 'en', 'oneone' );
-		$oneone->setLabel( 'de', 'einseins' );
+		$oneone->getFingerprint()->setLabel( 'en', 'oneone' );
+		$oneone->getFingerprint()->setLabel( 'de', 'einseins' );
 
 		$repo->putEntity( $oneone );
 
