@@ -4,32 +4,45 @@ namespace Wikibase\Api;
 
 use ApiBase;
 use ApiMain;
-use InvalidArgumentException;
-use Status;
-use Wikibase\ChangeOp\ChangeOpException;
-use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
+use LogicException;
+use UsageException;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityRevision;
+use Wikibase\Repo\Interactors\ItemMergeException;
+use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
- *
- * @todo allow merging of specific parts of an item only (eg. sitelinks,aliases,claims)
- * @todo allow optional deletion after merging (for admins)
+ * @author Daniel Kinzler
  */
-class MergeItems extends ApiWikibase {
+class MergeItems extends ApiBase {
+
 
 	/**
-	 * @var SiteLinkChangeOpFactory
+	 * @var EntityIdParser
 	 */
-	protected $changeOpFactory;
+	private $idParser;
+
+	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
+	 * @var ItemMergeInteractor
+	 */
+	private $interactor;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -41,192 +54,153 @@ class MergeItems extends ApiWikibase {
 	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
-		$factoryProvider = WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider();
-		$this->changeOpFactory = $factoryProvider->getMergeChangeOpFactory();
-	}
+		$repo = WikibaseRepo::getDefaultInstance();
 
-	/**
-	 * @see Api::getRequiredPermissions
-	 *
-	 * @param Entity $entity
-	 * @param array $params
-	 *
-	 * @return string[]
-	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
-		$permissions[] = 'item-merge';
-		return $permissions;
-	}
-
-	/**
-	 * @see ApiBase::execute
-	 */
-	public function execute() {
-		$user = $this->getUser();
-		$params = $this->extractRequestParams();
-		$this->validateParams( $params );
-
-		$fromEntityRevision = $this->getEntityRevisionFromIdString( $params['fromid'] );
-		$toEntityRevision = $this->getEntityRevisionFromIdString( $params['toid'] );
-
-		if ( !$fromEntityRevision || !$toEntityRevision ) {
-			$this->dieError( 'Item not found for ID.', 'no-such-entity' );
-		}
-
-		$fromEntity = $fromEntityRevision->getEntity();
-		$toEntity = $toEntityRevision->getEntity();
-
-		$this->validateEntity( $fromEntity, $toEntity );
-
-		$status = Status::newGood();
-		$status->merge( $this->checkPermissions( $fromEntity, $user, $params ) );
-		$status->merge( $this->checkPermissions( $toEntity, $user, $params ) );
-		if( !$status->isGood() ){
-			$this->dieStatus( $status, 'permissiondenied' );
-		}
-
-		$ignoreConflicts = $this->getIgnoreConflicts( $params );
-
-		/**
-		 * @var Item $fromEntity
-		 * @var Item $toEntity
-		 */
-		try{
-			$changeOps = $this->changeOpFactory->newMergeOps(
-				$fromEntity,
-				$toEntity,
-				$ignoreConflicts
-			);
-
-			$changeOps->apply();
-		}
-		catch( InvalidArgumentException $e ) {
-			$this->dieException( $e, 'param-invalid' );
-		}
-		catch( ChangeOpException $e ) {
-			$this->dieException( $e, 'failed-save' ); //FIXME: change to modification-failed
-		}
-
-		$this->attemptSaveMerge( $fromEntity, $toEntity, $params );
-	}
-
-	protected function getIgnoreConflicts( $params ) {
-		if( isset( $params['ignoreconflicts'] ) ){
-			return $params['ignoreconflicts'];
-		}
-		return array();
-	}
-
-	protected function addEntityToOutput( Entity $entity, Status $status, $name ) {
-		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), $name );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, $name );
-	}
-
-	private function getEntityRevisionFromIdString( $idString ) {
-		try{
-			$entityId = $this->getIdParser()->parse( $idString );
-			return $this->getEntityRevisionLookup()->getEntityRevision( $entityId );
-		}
-		catch ( EntityIdParsingException $e ){
-			$this->dieError( 'You must provide valid ids' , 'param-invalid' );
-		}
-		return null;
-	}
-
-	/**
-	 * @param Entity $fromEntity
-	 * @param Entity $toEntity
-	 */
-	private function validateEntity( $fromEntity, $toEntity) {
-		if ( !( $fromEntity instanceof Item && $toEntity instanceof Item ) ) {
-			$this->dieError( 'One or more of the entities are not items', 'not-item' );
-		}
-
-		if( $toEntity->getId()->equals( $fromEntity->getId() ) ){
-			$this->dieError( 'You must provide unique ids' , 'param-invalid' );
-		}
-	}
-
-	/**
-	 * @param string[] $params
-	 */
-	private function validateParams( array $params ) {
-		if ( empty( $params['fromid'] ) || empty( $params['toid'] ) ){
-			$this->dieError( 'You must provide a fromid and a toid' , 'param-missing' );
-		}
-	}
-
-	/**
-	 * @param string $direction either 'from' or 'to'
-	 * @param ItemId $getId
-	 * @param array $params
-	 * @return Summary
-	 */
-	private function getSummary( $direction, $getId, $params ) {
-		$summary = new Summary( $this->getModuleName(), $direction, null, array( $getId->getSerialization() ) );
-		if ( !is_null( $params['summary'] ) ) {
-			$summary->setUserSummary( $params['summary'] );
-		}
-		return $summary;
-	}
-
-	/**
-	 * @param Item $fromItem
-	 * @param Item $toItem
-	 * @param $params
-	 */
-	private function attemptSaveMerge( Item $fromItem, Item $toItem, $params ) {
-		$toSummary = $this->getSummary( 'to', $toItem->getId(), $params );
-
-		$fromStatus = $this->attemptSaveEntity(
-			$fromItem,
-			$this->formatSummary( $toSummary )
+		$this->setServices(
+			$repo->getEntityIdParser(),
+			$repo->getApiHelperFactory()->getErrorReporter( $this ),
+			$repo->getApiHelperFactory()->getResultBuilder( $this ),
+			new ItemMergeInteractor(
+				$repo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+				$repo->getEntityRevisionLookup( 'uncached' ),
+				$repo->getEntityStore(),
+				$repo->getEntityPermissionChecker(),
+				$repo->getSummaryFormatter(),
+				$this->getUser()
+			)
 		);
 
-		$this->handleSaveStatus( $fromStatus );
-		$this->addEntityToOutput( $fromItem, $fromStatus, 'from' );
+	}
 
-		if( $fromStatus->isGood() ) {
-			$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $params );
+	public function setServices(
+		EntityIdParser $idParser,
+		ApiErrorReporter $errorReporter,
+		ResultBuilder $resultBuilder,
+		ItemMergeInteractor $interactor
+	) {
+		$this->idParser = $idParser;
+		$this->errorReporter = $errorReporter;
+		$this->resultBuilder = $resultBuilder;
+		$this->interactor = $interactor;
+	}
 
-			$toStatus = $this->attemptSaveEntity(
-				$toItem,
-				$this->formatSummary( $fromSummary )
-			);
-			$this->handleSaveStatus( $toStatus );
-			$this->addEntityToOutput( $toItem, $toStatus, 'to' );
-
-			$this->getResultBuilder()->markSuccess( 1 );
-		} else {
-			$this->getResultBuilder()->markSuccess( 0 );
+	/**
+	 * @param array $parameters
+	 * @param string $name
+	 *
+	 * @return ItemId
+	 *
+	 * @throws UsageException if the given parameter is not a valiue ItemId
+	 * @throws LogicException
+	 */
+	private function getItemIdParam( $parameters, $name ) {
+		if ( !isset( $parameters[$name] ) ) {
+			$this->errorReporter->dieError( 'Missing parameter: ' . $name, 'param-missing' );
 		}
+
+		$value = $parameters[$name];
+
+		try {
+			return new ItemId( $value );
+		} catch ( \InvalidArgumentException $ex ) {
+			$this->errorReporter->dieError( $ex->getMessage(), 'invalid-entity-id' );
+			throw new \LogicException( 'ErrorReporter::dieError did not throw an exception' );
+		}
+	}
+
+	/**
+	 * @see ApiBase::execute()
+	 */
+	public function execute() {
+		wfProfileIn( __METHOD__ );
+
+		$params = $this->extractRequestParams();
+
+		try {
+			$fromId = $this->getItemIdParam( $params, 'fromid' );
+			$toId = $this->getItemIdParam( $params, 'toid' );
+
+			$ignoreConflicts = $params['ignoreconflicts'];
+			$summary = $params['summary'];
+
+			if ( $ignoreConflicts === null ) {
+				$ignoreConflicts = array();
+			}
+
+			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+		} catch ( EntityIdParsingException $ex ) {
+			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
+		} catch ( ItemMergeException $ex ) {
+			$this->handleItemMergeException( $ex );
+		}
+
+		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * @param ItemId $fromId
+	 * @param ItemId $toId
+	 * @param array $ignoreConflicts
+	 * @param string $summary
+	 */
+	private function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts, $summary ) {
+		list( $newRevisionFrom, $newRevisionTo ) = $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );
+
+		$this->resultBuilder->setValue( null, 'success', 1 );
+
+		$this->addEntityToOutput( $newRevisionFrom, 'from' );
+		$this->addEntityToOutput( $newRevisionTo, 'to' );
+	}
+
+	/**
+	 * @param ItemMergeException $ex
+	 *
+	 * @throws UsageException always
+	 */
+	private function handleItemMergeException( ItemMergeException $ex ) {
+		$cause = $ex->getPrevious();
+
+		if ( $cause ) {
+			$this->errorReporter->dieException( $cause, $ex->getErrorCode() );
+		} else {
+			$this->errorReporter->dieError( $ex->getMessage(), $ex->getErrorCode() );
+		}
+	}
+
+	private function addEntityToOutput( EntityRevision $entityRevision, $name ) {
+		$entityId = $entityRevision->getEntity()->getId();
+		$revisionId = $entityRevision->getRevision();
+
+		$this->resultBuilder->addBasicEntityInformation( $entityId, $name );
+
+		$this->resultBuilder->setValue(
+			$name,
+			'lastrevid',
+			intval( $revisionId )
+		);
 	}
 
 	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	public function getAllowedParams() {
-		return array_merge(
-			parent::getAllowedParams(),
-			array(
-				'fromid' => array(
-					ApiBase::PARAM_TYPE => 'string',
-				),
-				'toid' => array(
-					ApiBase::PARAM_TYPE => 'string',
-				),
-				'ignoreconflicts' => array(
-					ApiBase::PARAM_ISMULTI => true,
-					ApiBase::PARAM_TYPE => 'string',
-					ApiBase::PARAM_REQUIRED => false,
-				),
-				'summary' => array(
-					ApiBase::PARAM_TYPE => 'string',
-				),
-				'token' => null,
-				'bot' => false
-			)
+		return array(
+			'fromid' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
+			'toid' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
+			'ignoreconflicts' => array(
+				ApiBase::PARAM_ISMULTI => true,
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => false,
+			),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
+			'token' => null,
+			'bot' => false
 		);
 	}
 
