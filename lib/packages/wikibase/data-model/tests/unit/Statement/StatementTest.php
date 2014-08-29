@@ -23,7 +23,72 @@ use Wikibase\DataModel\Snak\SnakList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementTest extends ClaimTest {
+class StatementTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetGuid( Statement $statement ) {
+		$statement->setGuid( 'foo-bar-baz' );
+		$this->assertEquals( 'foo-bar-baz', $statement->getGuid() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetGuid( Statement $statement ) {
+		$guid = $statement->getGuid();
+		$this->assertTrue( $guid === null || is_string( $guid ) );
+		$this->assertEquals( $guid, $statement->getGuid() );
+
+		$statement->setGuid( 'foobar' );
+		$this->assertEquals( 'foobar', $statement->getGuid() );
+	}
+
+	public function testSetAndGetMainSnak() {
+		$snak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$statement = new Statement( $snak );
+		$this->assertSame( $snak, $statement->getMainSnak() );
+	}
+
+	public function testSetAndGetQualifiers() {
+		$qualifiers = new SnakList( array(
+			new PropertyValueSnak( new PropertyId( 'P42' ), new StringValue( 'a' ) )
+		) );
+
+		$statement = new Statement(
+			new PropertyNoValueSnak( new PropertyId( 'P42' ) ),
+			$qualifiers
+		);
+
+		$this->assertSame( $qualifiers, $statement->getQualifiers() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSerialize( Statement $statement ) {
+		$copy = unserialize( serialize( $statement ) );
+
+		$this->assertEquals( $statement->getHash(), $copy->getHash(), 'Serialization roundtrip should not affect hash' );
+	}
+
+	public function testGuidDoesNotAffectHash() {
+		$statement0 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement0->setGuid( 'statement0' );
+
+		$statement1 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$statement1->setGuid( 'statement1' );
+
+		$this->assertEquals( $statement0->getHash(), $statement1->getHash() );
+	}
+
+	public function testSetInvalidGuidCausesException() {
+		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$statement->setGuid( 42 );
+	}
 
 	public function instanceProvider() {
 		$instances = array();
@@ -35,7 +100,7 @@ class StatementTest extends ClaimTest {
 		$instances[] = $baseInstance;
 
 		$instance = clone $baseInstance;
-		$instance->setRank( Claim::RANK_PREFERRED );
+		$instance->setRank( Statement::RANK_PREFERRED );
 
 		$instances[] = $instance;
 
@@ -91,11 +156,11 @@ class StatementTest extends ClaimTest {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetRank( Claim $claim ) {
-		$rank = $claim->getRank();
+	public function testGetRank( Statement $statement ) {
+		$rank = $statement->getRank();
 		$this->assertInternalType( 'integer', $rank );
 
-		$ranks = array( Claim::RANK_DEPRECATED, Claim::RANK_NORMAL, Claim::RANK_PREFERRED );
+		$ranks = array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED );
 		$this->assertTrue( in_array( $rank, $ranks ), true );
 	}
 
@@ -103,8 +168,8 @@ class StatementTest extends ClaimTest {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSetRank( Statement $statement ) {
-		$statement->setRank( Claim::RANK_DEPRECATED );
-		$this->assertEquals( Claim::RANK_DEPRECATED, $statement->getRank() );
+		$statement->setRank( Statement::RANK_DEPRECATED );
+		$this->assertEquals( Statement::RANK_DEPRECATED, $statement->getRank() );
 	}
 
 	/**
@@ -120,7 +185,7 @@ class StatementTest extends ClaimTest {
 	 */
 	public function testSetRankToTruth( Statement $statement ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$statement->setRank( Claim::RANK_TRUTH );
+		$statement->setRank( Statement::RANK_TRUTH );
 	}
 
 	public function testStatementRankCompatibility() {
@@ -139,31 +204,17 @@ class StatementTest extends ClaimTest {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetPropertyId( Claim $statement ) {
+	public function testGetPropertyId( Statement $statement ) {
 		$this->assertEquals(
 			$statement->getMainSnak()->getPropertyId(),
 			$statement->getPropertyId()
 		);
 	}
 
-	public function testGetHash() {
-		$claim0 = new Statement( new PropertyNoValueSnak( 42 ) );
-		$claim0->setGuid( 'claim0' );
-		$claim0->setRank( Claim::RANK_DEPRECATED );
-
-		$claim1 = new Statement( new PropertyNoValueSnak( 42 ) );
-		$claim1->setGuid( 'claim1' );
-		$claim1->setRank( Claim::RANK_DEPRECATED );
-
-		$this->assertEquals( $claim0->getHash(), $claim1->getHash() );
-	}
-
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetAllSnaks( Claim $claim ) {
-		/* @var \Wikibase\DataModel\Statement\Statement $statement */
-		$statement = $claim;
+	public function testGetAllSnaks( Statement $statement ) {
 		$snaks = $statement->getAllSnaks();
 
 		$c = count( $statement->getQualifiers() ) + 1;
