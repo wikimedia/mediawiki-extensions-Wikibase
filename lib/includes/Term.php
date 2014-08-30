@@ -215,14 +215,13 @@ class Term {
 	public function equals( $that ) {
 		if ( $this === $that ) {
 			return true;
-		} else if ( !( $that instanceof Term ) ) {
+		} else if ( !( $that instanceof self ) ) {
 			return false;
 		} else {
 			if ( count( $this->fields ) != count( $that->fields ) ) {
 				return false;
 			}
 
-			/* @var Term $that */
 			foreach ( $this->fields as $k => $v ) {
 				if ( !isset( $that->fields[$k] ) || $that->fields[$k] !== $v ) {
 					return false;
