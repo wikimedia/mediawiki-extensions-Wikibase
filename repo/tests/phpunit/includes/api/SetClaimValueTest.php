@@ -9,11 +9,13 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\SnakFormatter;
@@ -61,21 +63,21 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	/**
-	 * @param Entity $entity
-	 * @param EntityId $propertyId
+	 * @param Item $item
+	 * @param PropertyId $propertyId
 	 *
-	 * @return Entity
+	 * @return Item
 	 */
-	protected function addClaimsAndSave( Entity $entity, EntityId $propertyId ) {
+	private function addStatementsAndSave( Item $item, PropertyId $propertyId ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
 
-		$claim = $entity->newClaim( new PropertyValueSnak( $propertyId, new \DataValues\StringValue( 'o_O' ) ) );
-		$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
-		$entity->addClaim( $claim );
+		$statement = new Statement( new PropertyValueSnak( $propertyId, new StringValue( 'o_O' ) ) );
+		$statement->setGuid( $item->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P' );
+		$item->addClaim( $statement );
 
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
-		return $entity;
+		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		return $item;
 	}
 
 	/**
@@ -84,13 +86,10 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 * @return Entity[]
 	 */
 	protected function getEntities( EntityId $propertyId ) {
-		$property = Property::newFromType( 'string' );
-
 		$item = Item::newEmpty();
 
 		return array(
-			$this->addClaimsAndSave( $item, $propertyId ),
-			$this->addClaimsAndSave( $property, $propertyId ),
+			$this->addStatementsAndSave( $item, $propertyId ),
 		);
 	}
 
