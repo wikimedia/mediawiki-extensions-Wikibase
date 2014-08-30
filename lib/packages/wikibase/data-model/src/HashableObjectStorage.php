@@ -77,11 +77,10 @@ class HashableObjectStorage extends \SplObjectStorage implements \Comparable {
 	 *
 	 * @param mixed $mixed
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $mixed ) {
-		return is_object( $mixed )
-			&& $mixed instanceof HashableObjectStorage
+		return $mixed instanceof self
 			&& $this->getValueHash() === $mixed->getValueHash();
 	}
 

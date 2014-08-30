@@ -82,14 +82,18 @@ abstract class SnakObject implements Snak {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
-		if ( is_object( $target ) && ( $target instanceof Snak ) ) {
-			return $this->getHash() === $target->getHash();
+		if ( $target === $this ) {
+			return true;
 		}
 
-		return false;
+		if ( !( $target instanceof Snak ) ) {
+			return false;
+		}
+
+		return $this->getHash() === $target->getHash();
 	}
 
 	/**

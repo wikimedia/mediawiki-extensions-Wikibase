@@ -45,7 +45,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @since 0.3
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $acceptDuplicates = false;
 
@@ -114,7 +114,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 * @param int|string $index
 	 * @param Hashable $hashable
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function preSetElement( $index, $hashable ) {
 		$hash = $hashable->getHash();
@@ -147,7 +147,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @param string $elementHash
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasElementHash( $elementHash ) {
 		return array_key_exists( $elementHash, $this->offsetHashes );
@@ -160,7 +160,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @param Hashable $element
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasElement( Hashable $element ) {
 		return $this->hasElementHash( $element->getHash() );
@@ -203,7 +203,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @param Hashable $element
 	 *
-	 * @return boolean Indicates if the element was added or not.
+	 * @return bool Indicates if the element was added or not.
 	 */
 	public function addElement( Hashable $element ) {
 		$append = $this->acceptDuplicates || !$this->hasElementHash( $element->getHash() );
@@ -297,11 +297,10 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @param mixed $mixed
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $mixed ) {
-		return is_object( $mixed )
-			&& $mixed instanceof HashArray
+		return $mixed instanceof self
 			&& $this->getHash() === $mixed->getHash();
 	}
 
@@ -338,7 +337,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @since 0.4
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function indicesAreUpToDate() {
 		foreach ( $this->offsetHashes as $hash => $offsets ) {
@@ -402,7 +401,7 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @param mixed $value
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function hasValidType( $value ) {
 		$class = $this->getObjectType();
@@ -483,11 +482,10 @@ abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable 
 	 *
 	 * @since 1.20
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
 		return $this->count() === 0;
 	}
-
 
 }
