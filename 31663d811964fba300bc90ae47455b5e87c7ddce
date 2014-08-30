@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_329fd457",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimValueTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-08-30T21:28:02Z",
+      "side": 1,
+      "message": "addStatementsAndSave ?",
+      "revId": "31663d811964fba300bc90ae47455b5e87c7ddce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
