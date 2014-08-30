@@ -30,10 +30,10 @@
 		"serialization/serialization": "~3.0"
 	},
 	"require-dev": {
-		"data-values/common": "~0.2.0",
-		"data-values/geo": "~0.1.0",
-		"data-values/number": "~0.3.0",
-		"data-values/time": "~0.3.0"
+		"data-values/common": "~0.2.2",
+		"data-values/geo": "~0.2.0",
+		"data-values/number": "~0.4.0",
+		"data-values/time": "~0.6.0"
 	},
 	"autoload": {
 		"psr-4": {
