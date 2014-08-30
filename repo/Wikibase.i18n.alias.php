@@ -376,21 +376,22 @@ $specialPageAliases['zh-hans'] = array(
 
 /** Traditional Chinese (中文（繁體）‎) */
 $specialPageAliases['zh-hant'] = array(
-	'DispatchStats' => array( '派遣統計' ),
-	'EntityData' => array( '實體數據' ),
+	'DispatchStats' => array( '發佈統計' ),
+	'EntityData' => array( '實體資料' ),
 	'NewItem' => array( '建立項目' ),
 	'NewProperty' => array( '新增屬性' ),
-	'ItemByTitle' => array( '按標題搜尋項目' ),
+	'ItemByTitle' => array( '依標題搜尋項目' ),
+	'GoToLinkedPage' => array( '前往已連結頁面' ),
 	'ItemDisambiguation' => array( '項目消歧義' ),
-	'ListDatatypes' => array( '列出數據類型' ),
+	'ListDatatypes' => array( '資料型態清單' ),
 	'SetLabel' => array( '設定標籤' ),
 	'SetDescription' => array( '設定描述' ),
 	'SetAliases' => array( '設定別名' ),
-	'SetSiteLink' => array( '設定站點連結' ),
-	'MergeItems' => array( '合併項' ),
-	'EntitiesWithoutLabel' => array( '沒有標籤的實體' ),
+	'SetSiteLink' => array( '設定網站連結' ),
+	'MergeItems' => array( '合併項目' ),
+	'EntitiesWithoutLabel' => array( '無標籤實體' ),
 	'EntitiesWithoutDescription' => array( '無類型實體' ),
-	'ItemsWithoutSitelinks' => array( '沒有條目連結的項目' ),
+	'ItemsWithoutSitelinks' => array( '無網站連結項目' ),
 	'MyLanguageFallbackChain' => array( '我的備用語言鏈' ),
 );
 

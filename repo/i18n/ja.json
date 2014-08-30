@@ -89,6 +89,7 @@
 	"wikibase-itembytitle-lookup-page": "ページ:",
 	"wikibase-itembytitle-submit": "検索",
 	"wikibase-itembytitle-create": "[{{fullurl:Special:NewItem|site=$1&page=$2}} 項目を新規作成]することもできます。",
+	"wikibase-gotolinkedpage-lookup-site": "サイト:",
 	"special-itemdisambiguation": "項目の曖昧さ回避",
 	"wikibase-itemdisambiguation-lookup-fieldset": "言語やラベルで項目を検索",
 	"wikibase-itemdisambiguation-lookup-language": "言語:",

@@ -78,6 +78,7 @@
 	"wikibase-tooltip-error-details": "جزئیات",
 	"wikibase-undeserializable-value": "این مقدار معتبر نیست و قابل نمایش نیست.",
 	"wikibase-validator-invalid": "مقدار نامعتبر",
+	"wikibase-validator-missing-field": "زمینه‌ٔ مورد نیاز از دست رفتهٔ \"$1\"",
 	"wikibase-validator-bad-type": "$2 به جای $1",
 	"wikibase-validator-too-long": "نباید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد",
 	"wikibase-validator-too-short": "باید بیشتر از {{PLURAL:$1|یک شناسه|$1 شناسه}} طول داشته باشد",

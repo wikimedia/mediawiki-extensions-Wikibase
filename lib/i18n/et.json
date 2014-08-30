@@ -5,6 +5,7 @@
 			"Pikne"
 		]
 	},
+	"wikibase-lib-desc": "Sisaldab tarkvaralisade Wikibase ja Wikibase Client ühiseid funktsioone.",
 	"wikibase-entity-item": "üksus",
 	"wikibase-entity-property": "omadus",
 	"wikibase-entity-query": "päring",
