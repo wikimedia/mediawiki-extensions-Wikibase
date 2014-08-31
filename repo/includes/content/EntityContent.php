@@ -537,7 +537,7 @@ abstract class EntityContent extends AbstractContent {
 			return true;
 		}
 
-		if ( !( $that instanceof EntityContent ) || $that->getModel() !== $this->getModel() ) {
+		if ( !( $that instanceof self ) || $that->getModel() !== $this->getModel() ) {
 			return false;
 		}
 
