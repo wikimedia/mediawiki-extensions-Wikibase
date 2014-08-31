@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_ff159041",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-08-31T21:15:47Z",
+      "side": 1,
+      "message": "Oh, sorry, I\u0027m too tired for any kind of humour at the moment so never mind. ;-)",
+      "parentUuid": "2e2fb78d_3f0c383d",
+      "revId": "c99d994b25cfa883412fd300a9d73dca336b3d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_7c440e6f",
         "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
         "patchSetId": 1
