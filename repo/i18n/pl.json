@@ -299,6 +299,7 @@
 	"content-model-wikibase-query": "Zapytanie Wikibase",
 	"right-item-term": "Zmiana określeń elementu (etykiet, opisów, aliasów)",
 	"right-item-merge": "Połącz elementy",
+	"right-item-redirect": "Tworzenie przekierowań elementu",
 	"right-property-term": "Zmiana określeń właściwości (etykiet, opisów, aliasów)",
 	"right-property-create": "Tworzenie właściwości"
 }

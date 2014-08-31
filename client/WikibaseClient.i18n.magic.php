@@ -174,5 +174,5 @@ $magicWords['zh-hans'] = array(
 $magicWords['zh-hant'] = array(
 	'noexternallanglinks' => array( 0, '隱藏跨語言連結' ),
 	'property' => array( 0, '屬性' ),
-	'wbreponame' => array( 0, 'wb匯報名' ),
+	'wbreponame' => array( 0, 'wb報表名稱' ),
 );

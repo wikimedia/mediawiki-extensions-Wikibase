@@ -22,7 +22,7 @@
 	"wikibase-comment-sitelink-change": "Legătura linguală a fost schimbată din $1 în $2",
 	"wikibase-comment-sitelink-remove": "Legătură linguală eliminată: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|modificare|modificări|de modificări}}",
-	"wikibase-dataitem": "Element Wikidata",
+	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifică legăturile",
 	"wikibase-editlinkstitle": "Modifică legăturile interlinguale",
 	"wikibase-linkitem-addlinks": "Adaugă legături",
@@ -55,5 +55,7 @@
 	"wikibase-pageinfo-entity-id": "ID element {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nimic",
 	"wikibase-property-render-error": "Nu s-a putut reda proprietatea $1: $2",
-	"wikibase-otherprojects": "Alte proiecte"
+	"wikibase-otherprojects": "Alte proiecte",
+	"wikibase-otherprojects-beta-message": "Bară laterală cu alte proiecte",
+	"wikibase-otherprojects-beta-description": "Adaugă secțiunea „{{int:wikibase-otherprojects}}” în cadrul barei laterale, care oferă legături către alte proiecte ale Wikimediei pe baza datelor furnizate de {{WBREPONAME}}."
 }
