@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_3f0c383d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-31T21:12:12Z",
+      "side": 1,
+      "message": "I tried to be funny. Sorry. Feel free to edit.",
+      "parentUuid": "2e2fb78d_dc1c227f",
+      "revId": "c99d994b25cfa883412fd300a9d73dca336b3d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_7c440e6f",
         "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-31T21:06:18Z",
       "side": 1,
       "message": "use @dataProvider",
+      "revId": "c99d994b25cfa883412fd300a9d73dca336b3d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_3c0d6642",
+        "filename": "repo/tests/phpunit/includes/api/SetClaimTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-31T21:12:12Z",
+      "side": 1,
+      "message": "That\u0027s completely unrelated to what this patch is about. Come on. Focus, please.",
+      "parentUuid": "2e2fb78d_7c440e6f",
       "revId": "c99d994b25cfa883412fd300a9d73dca336b3d01",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
