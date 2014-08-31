@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use Diff\Diff;
+use Diff\DiffOp\Diff\Diff;
 
 /**
  * @since 0.3

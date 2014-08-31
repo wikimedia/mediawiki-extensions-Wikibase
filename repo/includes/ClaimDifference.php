@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use Comparable;
-use Diff\Diff;
-use Diff\DiffOpChange;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpChange;
 
 /**
  * Represents the difference between two Claim objects.

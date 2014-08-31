@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Diff\Diff;
+use Diff\DiffOp\Diff\Diff;
 use Diff\MapDiffer;
 use Wikibase\DiffChange;
 
