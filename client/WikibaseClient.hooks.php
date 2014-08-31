@@ -611,36 +611,8 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Displays a sidebar section for other project links.
-	 *
-	 * @since 0.5
-	 *
-	 * @param Skin $skin
-	 * @param array $bar
-	 *
-	 * @return bool
-	 */
-	public static function onSkinBuildSidebar( Skin $skin, &$bar ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
-		if (
-			!$settings->getSetting( 'otherProjectsLinksBeta' ) &&
-			!$settings->getSetting( 'otherProjectsLinksByDefault' )
-		) {
-			return true;
-		}
-
-		$otherProjectsSidebarGenerator = WikibaseClient::getDefaultInstance()->getOtherProjectsSidebarGenerator();
-		$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $skin->getContext()->getTitle() );
-		if ( count( $otherProjectsSidebar ) !== 0 ) {
-			$bar['wikibase-otherprojects'] = $otherProjectsSidebar;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Filters the display of "other project" sidebar according to the beta feature
+	 * Adds the "other projects" section to the sidebar, if enabled project wide or
+	 * the user has the beta featured enabled.
 	 *
 	 * @since 0.5
 	 *
@@ -650,14 +622,21 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		if (
-			$settings->getSetting( 'otherProjectsLinksBeta' ) &&
-			!$settings->getSetting( 'otherProjectsLinksByDefault' ) &&
-			class_exists( '\BetaFeatures' ) &&
-			!BetaFeatures::isFeatureEnabled( $skin->getUser(), 'wikibase-otherprojects' )
-		) {
-			unset( $sidebar['wikibase-otherprojects'] );
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
+		$betaFeatureEnabled = class_exists( '\BetaFeatures' ) &&
+				$settings->getSetting( 'otherProjectsLinksBeta' ) &&
+				BetaFeatures::isFeatureEnabled( $skin->getUser(), 'wikibase-otherprojects' );
+
+		if ( $settings->getSetting( 'otherProjectsLinksByDefault' ) || $betaFeatureEnabled ) {
+			$otherProjectsSidebarGenerator = $wikibaseClient->getOtherProjectsSidebarGenerator();
+			$title = $skin->getContext()->getTitle();
+			$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+
+			if ( count( $otherProjectsSidebar ) !== 0 ) {
+				$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
+			}
 		}
 
 		return true;
