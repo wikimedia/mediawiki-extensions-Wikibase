@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_9c9b3a1b",
+        "filename": "lib/includes/ReferencedFinder.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-08-31T20:32:48Z",
+      "side": 1,
+      "message": "I\u0027m sorry to say that but I hate this array_filter magic trick. It confuses me every time I see it. Filter by what? By nothing? So what does it return? Null? An empty array? The unchanged array? No, it filters stuff that can be casted to false. This includes strange things like the string \"0\". Ouch. I\u0027m not sure but it looks like this can be relevant here.",
+      "revId": "c814364f5c693d1e8a872d2f38151d64411b3e22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
