@@ -10,6 +10,7 @@ use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
+use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
@@ -18,12 +19,14 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\Lib\Serializers\SerializerFactory as LegacySerializerFactory;
 
 /**
  * @todo Add tests with $options->setIndexTags( true ).
@@ -171,8 +174,8 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q4' ) );
-		$this->addClaimsWithoutQualifiers( $item );
-		$this->addClaimsWithQualifiers( $item );
+		$this->addStatementsWithoutQualifiers( $item );
+		$this->addStatementsWithQualifiers( $item );
 		$this->addStatementsWithRanks( $item );
 		$this->addStatementsWithQualifiersAndReferences( $item );
 		$entities[] = $item;
@@ -228,22 +231,22 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function addClaimsWithoutQualifiers( Item $item ) {
+	private function addStatementsWithoutQualifiers( Item $item ) {
 		foreach ( $this->getSnaks( 'P40' ) as $mainSnak ) {
-			$claim = new Claim( $mainSnak );
-			$this->setGuid( $claim );
-			$item->addClaim( $claim );
+			$statement = new Statement( $mainSnak );
+			$this->setGuid( $statement );
+			$item->addClaim( $statement );
 		}
 	}
 
-	private function addClaimsWithQualifiers( Item $item ) {
+	private function addStatementsWithQualifiers( Item $item ) {
 		$mainSnak = new PropertyNoValueSnak(
 			new PropertyId( 'P501' )
 		);
 		$qualifiers = new SnakList( $this->getSnaks( 'P51' ) );
-		$claim = new Claim( $mainSnak, $qualifiers );
-		$this->setGuid( $claim );
-		$item->addClaim( $claim );
+		$statement = new Statement( $mainSnak, $qualifiers );
+		$this->setGuid( $statement );
+		$item->addClaim( $statement );
 	}
 
 	private function addStatementsWithRanks( Item $item ) {
@@ -275,15 +278,15 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$item->addClaim( $statement );
 	}
 
-	private function setGuid( Claim $claim ) {
-		$claim->setGuid( 'DataModelSerializationRoundtripTest$' . $this->guidCounter );
+	private function setGuid( Statement $statement ) {
+		$statement->setGuid( 'DataModelSerializationRoundtripTest$' . $this->guidCounter );
 		$this->guidCounter++;
 	}
 
 	private function getLegacySerializer( Entity $entity ) {
 		$options = new SerializationOptions();
 
-		$legacySerializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$legacySerializerFactory = new LegacySerializerFactory();
 		$entityType = $entity->getType();
 		return $legacySerializerFactory->newSerializerForEntity( $entityType, $options );
 	}
@@ -291,14 +294,14 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	private function getLegacyUnserializer( Entity $entity ) {
 		$options = new SerializationOptions();
 
-		$legacySerializerFactory = new \Wikibase\Lib\Serializers\SerializerFactory();
+		$legacySerializerFactory = new LegacySerializerFactory();
 		$entityType = $entity->getType();
 		return $legacySerializerFactory->newUnserializerForEntity( $entityType, $options );
 	}
 
 	private function getSerializer() {
 		$dataValueSerializer = new DataValueSerializer();
-		$serializerFactory = new \Wikibase\DataModel\SerializerFactory( $dataValueSerializer );
+		$serializerFactory = new SerializerFactory( $dataValueSerializer );
 		return $serializerFactory->newEntitySerializer();
 	}
 
@@ -309,7 +312,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			'unknown' => 'DataValues\UnknownValue',
 		) );
 		$entityIdParser = new BasicEntityIdParser();
-		$deserializerFactory = new \Wikibase\DataModel\DeserializerFactory( $dataValueDeserializer, $entityIdParser );
+		$deserializerFactory = new DeserializerFactory( $dataValueDeserializer, $entityIdParser );
 		return $deserializerFactory->newEntityDeserializer();
 	}
 
