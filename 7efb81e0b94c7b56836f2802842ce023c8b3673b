@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_1aff4aa9",
+        "filename": "lib/includes/ReferencedFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-01T10:37:11Z",
+      "side": 1,
+      "message": "This class really doesn\u0027t know anything about \"referenced\". It\u0027s about finding values (for a given property). See also me comment about returns DataValues instead of strings below.",
+      "revId": "7efb81e0b94c7b56836f2802842ce023c8b3673b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_5af5d2c6",
+        "filename": "lib/includes/ReferencedFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-01T10:37:11Z",
+      "side": 1,
+      "message": "Why not just feed the data type to the constructor?\nOr feed nothing to the constructor, and make isMatchingProperty abstract.",
+      "revId": "7efb81e0b94c7b56836f2802842ce023c8b3673b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_3af206e0",
+        "filename": "lib/includes/ReferencedFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-01T10:37:11Z",
+      "side": 1,
+      "message": "So a ReferencedFinder will always return strings? That seems a bit inflexible. As a first step, it would be nice to be able to get a list of DataValues. Converting to strings can be done in a second step, if desired, but ReferencedFinder probably shouldn\u0027t know about that.",
+      "revId": "7efb81e0b94c7b56836f2802842ce023c8b3673b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_fafb5eb8",
+        "filename": "lib/includes/ReferencedImageFinder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-01T10:37:11Z",
+      "side": 1,
+      "message": "I propose to use composition instead of subclassing, unless there are situations where a caller would call an unknown kind of ReferenceFinder, which might be a ReferencedImageFinder. But that seems unlikely, since the caller needs to know how to interpret the strings returned by the finder.",
+      "revId": "7efb81e0b94c7b56836f2802842ce023c8b3673b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
