@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_75e8a1af",
+        "filename": "repo/tests/phpunit/includes/api/SetSiteLinkTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-01T12:51:43Z",
+      "side": 1,
+      "message": "Looks like the body of this should be a single assert method",
+      "revId": "9322a3d3d9504e04c54f18972c21a5f86b8d63de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
