@@ -105,6 +105,9 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
+### 0.6.11 (dev)
+* Fixed eachchange event: Cancel event after it got removed.
+
 ### 0.6.10 (2014-08-14)
 * Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
 
