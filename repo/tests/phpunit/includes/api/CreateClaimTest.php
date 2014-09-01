@@ -4,7 +4,6 @@ namespace Wikibase\Test\Api;
 
 use UsageException;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
@@ -26,16 +25,16 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class CreateClaimTest extends WikibaseApiTestCase {
 
-	protected static function getNewEntityAndProperty() {
+	protected static function getNewItemAndProperty() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$entity = Item::newEmpty();
-		$store->saveEntity( $entity, 'test', $GLOBALS['wgUser'], EDIT_NEW );
+		$item = Item::newEmpty();
+		$store->saveEntity( $item, 'test', $GLOBALS['wgUser'], EDIT_NEW );
 
 		$property = Property::newFromType( 'commonsMedia' );
 		$store->saveEntity( $property, 'test', $GLOBALS['wgUser'], EDIT_NEW );
 
-		return array( $entity, $property );
+		return array( $item, $property );
 	}
 
 	protected function assertRequestValidity( $resultArray ) {
@@ -50,14 +49,14 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 	public function testValidRequest() {
 		/**
-		 * @var Entity $entity
+		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $entity, $property ) = self::getNewEntityAndProperty();
+		list( $item, $property ) = self::getNewItemAndProperty();
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getId()->getSerialization(),
+			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
 			'value' => '"Foo.png"',
@@ -73,13 +72,13 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$this->assertArrayHasKey( $requiredKey, $claim, 'claim has a "' . $requiredKey . '" key' );
 		}
 
-		$this->assertStringStartsWith( $entity->getId()->getSerialization() , $claim['id'] );
+		$this->assertStringStartsWith( $item->getId()->getSerialization() , $claim['id'] );
 
 		$this->assertEquals( 'value', $claim['mainsnak']['snaktype'] );
 
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 
-		$claims = new Claims( $entity->getClaims() );
+		$claims = new Claims( $item->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $claim['id'] ) );
 	}
@@ -193,11 +192,11 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		return $argLists;
 	}
 
-	public static function getEntityAndPropertyForInvalid() {
+	public static function getItemAndPropertyForInvalid() {
 		static $array = null;
 
 		if ( $array === null ) {
-			$array = self::getNewEntityAndProperty();
+			$array = self::getNewItemAndProperty();
 		}
 
 		return $array;
@@ -211,13 +210,13 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	 */
 	public function testInvalidRequest( $errorCode, array $params ) {
 		/**
-		 * @var Entity $entity
+		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $entity, $property ) = self::getEntityAndPropertyForInvalid();
+		list( $item, $property ) = self::getItemAndPropertyForInvalid();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
-			$params['entity'] = $entity->getId()->getSerialization();
+			$params['entity'] = $item->getId()->getSerialization();
 		}
 
 		if ( array_key_exists( 'property', $params ) && $params['property'] === '-' ) {
@@ -235,21 +234,21 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			);
 		}
 
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 
-		$this->assertFalse( $entity->hasClaims() );
+		$this->assertFalse( $item->hasClaims() );
 	}
 
 	public function testMultipleRequests() {
 		/**
-		 * @var Entity $entity
+		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $entity, $property ) = self::getNewEntityAndProperty();
+		list( $item, $property ) = self::getNewItemAndProperty();
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getId()->getSerialization(),
+			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
 			'value' => '"Foo.png"',
@@ -265,7 +264,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$params = array(
 			'action' => 'wbcreateclaim',
-			'entity' => $entity->getId()->getSerialization(),
+			'entity' => $item->getId()->getSerialization(),
 			'snaktype' => 'value',
 			'property' => $property->getId()->getSerialization(),
 			'value' => '"Bar.jpg"',
@@ -280,13 +279,13 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 		$secondGuid = $resultArray['claim']['id'];
 
-		$this->assertTrue( (int)$revId < (int)$newRevId );
+		$this->assertGreaterThan( $revId, $newRevId );
 
 		$this->assertNotEquals( $firstGuid, $secondGuid );
 
-		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entity->getId() );
+		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $item->getId() );
 
-		$claims = new Claims( $entity->getClaims() );
+		$claims = new Claims( $item->getClaims() );
 
 		$this->assertTrue( $claims->hasClaimWithGuid( $firstGuid ) );
 		$this->assertTrue( $claims->hasClaimWithGuid( $secondGuid ) );
