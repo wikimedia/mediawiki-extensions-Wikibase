@@ -8,8 +8,6 @@
 	width: 100%;
 }
 
-/* aliases exclusive helper div containing editable value and its toolbar but not the
-PropertyEditTool toolbar */
 .wikibase-aliasesview .wikibase-aliasesview-container {
 	display: block !important;
 	padding-left: 10px;
