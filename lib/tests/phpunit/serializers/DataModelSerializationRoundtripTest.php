@@ -221,10 +221,6 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 				new StringValue( 'string-value' )
 			),
 			new PropertyValueSnak(
-				new PropertyId( $baseId . '5' ),
-				new UnDeserializableValue( 'undeserializable-data', 'string', 'error' )
-			),
-			new PropertyValueSnak(
 				new PropertyId( $baseId . '6' ),
 				new UnknownValue( 'unknown-value' )
 			),
