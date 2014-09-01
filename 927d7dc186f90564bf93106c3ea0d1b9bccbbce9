@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_9aac5a86",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2014-09-01T11:09:33Z",
+      "side": 1,
+      "message": "Before I had the @group database in here, the test would manipulate the database in my local repository for some reasons. Since the group is in here, it works fine.",
+      "parentUuid": "4e322bf2_ea22674f",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_2abf4fcf",
         "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
         "patchSetId": 12
