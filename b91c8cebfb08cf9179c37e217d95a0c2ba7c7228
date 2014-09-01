@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_b0917754",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-01T16:21:47Z",
+      "side": 1,
+      "message": "Yes, fix this. It introduces vulnerabilities.",
+      "revId": "b91c8cebfb08cf9179c37e217d95a0c2ba7c7228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_b0aa9780",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-01T16:21:47Z",
+      "side": 1,
+      "message": "I think \u0027warning\u0027 doesn\u0027t work here.",
+      "revId": "b91c8cebfb08cf9179c37e217d95a0c2ba7c7228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_f076df38",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-01T16:21:47Z",
+      "side": 1,
+      "message": "This looks somewhat funny",
+      "revId": "b91c8cebfb08cf9179c37e217d95a0c2ba7c7228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
