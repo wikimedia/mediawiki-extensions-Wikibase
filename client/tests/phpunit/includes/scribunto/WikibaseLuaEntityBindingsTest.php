@@ -4,7 +4,7 @@ namespace Wikibase\Client\Scribunto\Test;
 
 use Language;
 use Wikibase\Client\Scribunto\WikibaseLuaEntityBindings;
-use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -53,11 +53,11 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 			new PropertyId( 'P123456' ),
 			'somevalue'
 		);
-		$claim = new Claim( $snak );
-		$claim->setGuid( 'gsdfgsadg' );
+		$statement = new Statement( $snak );
+		$statement->setGuid( 'gsdfgsadg' );
 
 		$item = Item::newEmpty();
-		$item->addClaim( $claim );
+		$item->addClaim( $statement );
 
 		return $item;
 	}
@@ -121,4 +121,5 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseLibrary = $this->getWikibaseLibraryImplementation();
 		$this->assertEquals( 'enwiki', $wikibaseLibrary->getGlobalSiteId() );
 	}
+
 }
