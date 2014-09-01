@@ -15,7 +15,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
-### 0.6.0 (dev)
+### 0.6.0 (2014-09-01)
 
 #### Breaking changes
 
