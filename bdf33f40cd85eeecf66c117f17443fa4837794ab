@@ -33,6 +33,23 @@
       "revId": "bdf33f40cd85eeecf66c117f17443fa4837794ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_9a221a4f",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-01T09:13:35Z",
+      "side": 1,
+      "message": "moving this function around makes it hard to see what you did. Diffs suck that way...",
+      "revId": "bdf33f40cd85eeecf66c117f17443fa4837794ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
