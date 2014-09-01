@@ -102,10 +102,15 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
+### 1.1 (dev)
+
+* Compatibility with DataModel 1.x was added
+* DataModel 1.x is now required
+
 ### 1.0.3 (2014-07-28)
 
 * Hashes are now ignored by the SnakDeserializer
-* Compatibility with Wikibase DataModel 1.x was added
+* Compatibility with Wikibase DataModel 1.x was improved
 
 ### 1.0.2 (2014-07-21)
 

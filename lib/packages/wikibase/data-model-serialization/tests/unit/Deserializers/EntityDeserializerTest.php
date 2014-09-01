@@ -3,11 +3,11 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Deserializers\Deserializer;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\EntityDeserializer
@@ -27,7 +27,7 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 			->with( $this->equalTo( 'Q42' ) )
 			->will( $this->returnValue( new ItemId( 'Q42' ) ) );
 
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
+		$claim = new Statement( new PropertyNoValueSnak( 42 ) );
 		$claim->setGuid( 'test' );
 
 		$claimsDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
@@ -178,9 +178,7 @@ class EntityDeserializerTest extends DeserializerBaseTest {
 		);
 
 		$entity = Item::newEmpty();
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
-		$entity->setClaims( new Claims( array( $claim ) ) );
+		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			$entity,
 			array(

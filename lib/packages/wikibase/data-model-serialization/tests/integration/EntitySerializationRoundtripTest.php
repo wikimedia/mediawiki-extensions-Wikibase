@@ -4,8 +4,6 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
@@ -64,18 +62,14 @@ class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$entities[] = array( $entity );
 
 		$entity = Item::newEmpty();
-		$claim = new Claim( new PropertyNoValueSnak( 42 ) );
-		$claim->setGuid( 'test' );
-		$entity->setClaims( new Claims( array( $claim ) ) );
+		$entity->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'guid' );
 		$entities[] = array( $entity );
 
 		$item = Item::newEmpty();
 		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
 		$entities[] = array( $item );
 
-		$property = Property::newEmpty();
-		$property->setDataTypeId( 'string' );
-		$entities[] = array( $property );
+		$entities[] = array( Property::newFromType( 'string' ) );
 
 		return $entities;
 	}
