@@ -9,11 +9,8 @@
 	width: 100%;
 }
 
-.wb-firstHeading .wikibase-labelview.wb-edit {
+.wb-firstHeading .wikibase-labelview.wb-edit:not(.wb-empty) {
 	background-color: #D6F3FF;
-}
-.wb-firstHeading .wikibase-labelview-container.wb-empty .wikibase-labelview-container {
-	background-color: inherit;
 }
 
 .wb-firstHeading .wikibase-labelview-container {
