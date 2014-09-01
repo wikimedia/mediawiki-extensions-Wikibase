@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_b58ba971",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-09-01T11:34:16Z",
+      "side": 1,
+      "message": "Briefly looking at the code below it doesn\u0027t look like it needs WikibaseApiTestCase",
+      "parentUuid": "2e2fb78d_95a9cdde",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_2abf4fcf",
         "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
         "patchSetId": 12
