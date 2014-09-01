@@ -193,7 +193,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testSetLiteLink( $params, $expected ) {
+	public function testSetSiteLink( $params, $expected ) {
 		// -- set any defaults ------------------------------------
 		if ( array_key_exists( 'handle', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( $params['handle'] );
@@ -276,16 +276,19 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		}
 		if ( $expectedInDb ) {
 			$this->assertArrayHasKey( 'sitelinks', $dbEntity );
+			$this->assertCount( $expectedInDb, $dbEntity['sitelinks'] );
 
-			foreach ( array( 'title', 'badges' ) as $prop ) {
-				$dbSitelinks = self::flattenArray( $dbEntity['sitelinks'], 'site', $prop );
-				$this->assertEquals( $expectedInDb, count( $dbSitelinks ) );
-				foreach ( $expected['value'] as $valueSite => $value ) {
-					$this->assertArrayHasKey( $valueSite, $dbSitelinks );
-					$this->assertEquals( $value[$prop], $dbSitelinks[$valueSite],
-						"'$prop' value is not correct"
-					);
-				}
+			foreach ( $expected['value'] as $site => $expectedSiteLink ) {
+				$this->assertArrayHasKey( $site, $dbEntity['sitelinks'] );
+				$dbSiteLink = $dbEntity['sitelinks'][$site];
+
+				$this->assertArrayHasKey( 'title', $dbSiteLink );
+				$this->assertInternalType( 'string', $dbSiteLink['title'] );
+				$this->assertSame( $expectedSiteLink['title'], $dbSiteLink['title'] );
+
+				$this->assertArrayHasKey( 'badges', $dbSiteLink );
+				$this->assertInternalType( 'array', $dbSiteLink['badges'] );
+				$this->assertArrayEquals( $expectedSiteLink['badges'], $dbSiteLink['badges'] );
 			}
 		} else {
 			$this->assertArrayNotHasKey( 'sitelinks', $dbEntity );
