@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_b53a89e2",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-01T14:06:27Z",
+      "side": 1,
+      "message": "pre1? I have no idea what this is",
+      "revId": "f4f7bb7f7263b674edfad5713dd24a4d941f10e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_f558115b",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-01T14:06:27Z",
+      "side": 1,
+      "message": "visibility",
+      "revId": "f4f7bb7f7263b674edfad5713dd24a4d941f10e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_55292599",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-01T14:06:27Z",
+      "side": 1,
+      "message": "5 parameters of which one optional, an if check in this method, tons of comments... This method and it\u0027s data provider could be written a lot clearer.",
+      "revId": "f4f7bb7f7263b674edfad5713dd24a4d941f10e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_d53515f5",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-01T14:06:27Z",
+      "side": 1,
+      "message": ") {",
+      "revId": "f4f7bb7f7263b674edfad5713dd24a4d941f10e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
