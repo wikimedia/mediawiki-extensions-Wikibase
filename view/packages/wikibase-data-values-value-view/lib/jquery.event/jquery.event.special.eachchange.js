@@ -54,6 +54,11 @@
 			$elem.on( eventNameString, function( event ) {
 				eventData = $.data( this, eventId );
 
+				if( !eventData ) {
+					// Event has been removed but event handler is in the loop.
+					return;
+				}
+
 				event.origType = event.type;
 				event.type = 'eachchange';
 
