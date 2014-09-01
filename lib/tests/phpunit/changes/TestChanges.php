@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use Wikibase\Change;
 use Wikibase\ChangeRow;
 use Wikibase\ChangesTable;
-use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -174,10 +174,10 @@ final class TestChanges {
 			// -----
 			$propertyId = new PropertyId( 'p23' );
 			$snak = new PropertyNoValueSnak( $propertyId );
-			$claim = new Claim( $snak );
-			$claim->setGuid( 'TEST$test-guid' );
+			$statement = new Statement( $snak );
+			$statement->setGuid( 'TEST$test-guid' );
 
-			$claims = new Claims( array( $claim ) );
+			$claims = new Claims( array( $statement ) );
 			$new->setClaims( $claims );
 			$changes['add-claim'] = $changeFactory->newFromUpdate( EntityChange::UPDATE, $old, $new );
 			$old = $new->copy();
@@ -226,9 +226,8 @@ final class TestChanges {
 
 		$clones = array();
 
-		/* @var EntityChange $change */
 		foreach ( $changes as $key => $change ) {
-			$clones[$key] = clone $change;
+			$clones[$key] = unserialize( serialize( $change ) );
 		}
 
 		return $clones;
