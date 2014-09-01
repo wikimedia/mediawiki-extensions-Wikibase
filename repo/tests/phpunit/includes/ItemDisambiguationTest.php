@@ -21,14 +21,18 @@ use Wikibase\Lib\EntityIdFormatter;
  */
 class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 
-	protected function newItemDisambiguation( $searchLang, $userLang ) {
-		$disambig = new ItemDisambiguation(
-			$searchLang,
-			$userLang,
+	/**
+	 * @param string $searchLanguageCode
+	 * @param string $userLanguageCode
+	 *
+	 * @return ItemDisambiguation
+	 */
+	private function newItemDisambiguation( $searchLanguageCode, $userLanguageCode ) {
+		return new ItemDisambiguation(
+			$searchLanguageCode,
+			$userLanguageCode,
 			new EntityIdFormatter( new FormatterOptions() )
 		);
-
-		return $disambig;
 	}
 
 	public function getHTMLProvider() {
@@ -47,6 +51,12 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 
 		$cases = array();
 		$matchers = array();
+
+		$matchers['matches'] = array(
+			'tag' => 'ul',
+			'content' => '',
+			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
+		);
 
 		$cases['empty'] = array( 'en', 'en', array(), $matchers );
 
@@ -104,13 +114,13 @@ class ItemDisambiguationTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getHTMLProvider
 	 */
-	public function testGetHTML( $searchLang, $userLang, $items, $matchers ) {
-		$disambig = $this->newItemDisambiguation( $searchLang, $userLang );
+	public function testGetHTML( $searchLanguageCode, $userLanguageCode, array $items, array $matchers ) {
+		$disambig = $this->newItemDisambiguation( $searchLanguageCode, $userLanguageCode );
 
 		$html = $disambig->getHTML( $items );
 
-		foreach( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $html, "Failed to match html output with tag '{$key}''" );
+		foreach ( $matchers as $key => $matcher ) {
+			$this->assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
 		}
 	}
 
