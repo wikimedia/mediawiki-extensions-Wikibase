@@ -39,31 +39,31 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityLookup = new MockRepository();
 
-		$claim1 = new Claim( new PropertyValueSnak(
+		$statement1 = new Statement( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'a kitten!' )
 		) );
-		$claim1->setGuid( 'Q42$1' );
+		$statement1->setGuid( 'Q42$1' );
 
-		$claim2 = new Claim( new PropertyValueSnak(
+		$statement2 = new Statement( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'two kittens!!' )
 		) );
-		$claim2->setGuid( 'Q42$2' );
+		$statement2->setGuid( 'Q42$2' );
 
 		// A Statement with a lower rank which should not affect the output
-		$claim3 = new Statement( new PropertyValueSnak(
+		$statement3 = new Statement( new PropertyValueSnak(
 			$propertyId,
 			new StringValue( 'three kittens!!!' )
 		) );
-		$claim3->setGuid( 'Q42$3' );
-		$claim3->setRank( Claim::RANK_NORMAL );
+		$statement3->setGuid( 'Q42$3' );
+		$statement3->setRank( Claim::RANK_DEPRECATED );
 
 		$item = Item::newEmpty();
 		$item->setId( new ItemId( 'Q42' ) );
-		$item->addClaim( $claim1 );
-		$item->addClaim( $claim2 );
-		$item->addClaim( $claim3 );
+		$item->addClaim( $statement1 );
+		$item->addClaim( $statement2 );
+		$item->addClaim( $statement3 );
 
 		$property = Property::newFromType( 'string' );
 		$property->setId( $propertyId );
