@@ -170,6 +170,7 @@ return call_user_func( function() {
 				'wikibase.RepoApi/wikibase.AbstractedRepoApi.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.entities',
 			)
