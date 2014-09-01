@@ -9,7 +9,6 @@ use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -25,6 +24,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 
@@ -707,10 +707,10 @@ class ItemTest extends EntityTest {
 		$statements = array( $statement0, $statement1 );
 
 		$item->setClaims( new Claims( $statements ) );
-		$this->assertSameSize( $statements, $item->getStatements(), "added some statements" );
+		$this->assertEquals( count( $statements ), $item->getStatements()->count(), "added some statements" );
 
 		$item->setClaims( new Claims() );
-		$this->assertCount( 0, $item->getStatements(), "should be empty again" );
+		$this->assertTrue( $item->getStatements()->isEmpty(), "should be empty again" );
 	}
 
 
@@ -783,7 +783,7 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
 		$this->assertTrue( $item->getFingerprint()->isEmpty() );
 		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
-		$this->assertEmpty( $item->getStatements() );
+		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
 	public function testCanConstructWithStatementList() {
@@ -810,14 +810,14 @@ class ItemTest extends EntityTest {
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
 		$item->setStatements( new StatementList() );
-		$this->assertEquals( new StatementList(), $item->getStatements() );
+		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
 	public function testGetStatementsReturnsCorrectTypeAfterClear() {
 		$item = Item::newEmpty();
 		$item->clear();
 
-		$this->assertEquals( new StatementList(), $item->getStatements() );
+		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
 	public function testItemsWithDifferentStatementsAreNotEqual() {

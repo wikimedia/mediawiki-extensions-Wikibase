@@ -5,10 +5,10 @@ namespace Wikibase\Test;
 use DataValues\StringValue;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
@@ -362,6 +362,20 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$secondStatements = new StatementList();
 
 		$this->assertFalse( $firstStatements->equals( $secondStatements ) );
+	}
+
+	public function testEmptyListIsEmpty() {
+		$list = new StatementList();
+
+		$this->assertTrue( $list->isEmpty() );
+	}
+
+	public function testNonEmptyListIsNotEmpty() {
+		$list = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+		));
+
+		$this->assertFalse( $list->isEmpty() );
 	}
 
 }

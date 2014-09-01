@@ -155,7 +155,7 @@ class StatementList implements \IteratorAggregate, \Comparable, \Countable {
 	 *
 	 * @param mixed $statementList
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $statementList ) {
 		if ( !( $statementList instanceof self ) ) {
@@ -181,6 +181,13 @@ class StatementList implements \IteratorAggregate, \Comparable, \Countable {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return empty( $this->statements );
 	}
 
 }
