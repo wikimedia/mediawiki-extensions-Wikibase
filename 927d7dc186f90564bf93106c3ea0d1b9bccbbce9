@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_353339f5",
+        "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-09-01T11:18:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure, I looked at the history and the change before @database was failing and the change after @database was failing. PS7 \u003e PS8\nhttps://gerrit.wikimedia.org/r/#/c/151659/7..8/repo/tests/phpunit/includes/api/ApiConventionsTest.php\n\nThe change that seemed to fix it was actually a null change (rebase) so it might be the case that the tests started passing due to a change outside of this file\nhttps://gerrit.wikimedia.org/r/#/c/151659/8..9/repo/tests/phpunit/includes/api/ApiConventionsTest.php\n\nIt is probably worth testing without @database again! :)",
+      "parentUuid": "2e2fb78d_da1c227f",
+      "revId": "927d7dc186f90564bf93106c3ea0d1b9bccbbce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e322bf2_2abf4fcf",
         "filename": "repo/tests/phpunit/includes/api/ApiConventionsTest.php",
         "patchSetId": 12
