@@ -27,8 +27,6 @@
 		// adjustments are necessary.
 		mw.hook( 'wikibase.domready' ).fire();
 
-		var repoApi = new wb.RepoApi();
-
 		registerEditRestrictionHandlers();
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
@@ -39,7 +37,7 @@
 			var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
 
 			entityInitializer.getEntity().done( function( entity ) {
-				createEntityDom( entity, $entityview, repoApi );
+				createEntityDom( entity, $entityview );
 				triggerEditRestrictionHandlers();
 			} );
 		}
@@ -205,10 +203,9 @@
 	 *
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @param {jQuery} $entityview
-	 * @param {wikibase.RepoApi} repoApi
 	 */
-	function createEntityDom( entity, $entityview, repoApi ) {
-		var abstractedRepoApi = new wb.AbstractedRepoApi( repoApi );
+	function createEntityDom( entity, $entityview ) {
+		var abstractedRepoApi = new wb.AbstractedRepoApi();
 		var entityStore = new wb.store.EntityStore( abstractedRepoApi );
 		wb.compileEntityStoreFromMwConfig( entityStore );
 
@@ -218,11 +215,11 @@
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
 				experts,
-				getFormatterStore( repoApi, dataTypes ),
-				getParserStore( repoApi ),
+				getFormatterStore( abstractedRepoApi, dataTypes ),
+				getParserStore( abstractedRepoApi ),
 				mw
 			),
-			api: repoApi
+			api: abstractedRepoApi
 		} )
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
 			var $labelview = $( event.target ),
@@ -248,7 +245,7 @@
 			}
 		} );
 
-		wb.ui.initTermBox( entity, repoApi );
+		wb.ui.initTermBox( entity, abstractedRepoApi );
 	}
 
 	function registerEditRestrictionHandlers() {

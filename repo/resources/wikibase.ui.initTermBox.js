@@ -12,7 +12,7 @@
  * @since 0.5
  *
  * @param {wikibase.datamodel.Entity} entity
- * @param {wikibase.RepoApi} api
+ * @param {wikibase.AbstractedRepoApi} api
  */
 wb.ui.initTermBox = function( entity, api ) {
 	mw.hook( 'wikibase.domready' ).add( function() {
