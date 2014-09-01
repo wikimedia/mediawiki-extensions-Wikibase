@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_7a42ce14",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-01T08:47:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_49cf5683",
+      "revId": "7a3ffdb4c663508b7cdc71a516dec1f58d8caea7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_29cc0a8c",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-31T19:16:30Z",
       "side": 1,
       "message": "This is not very readable. We might want to store the beta feature part of the expression in a variable $betaFeatureEnabled.",
+      "revId": "7a3ffdb4c663508b7cdc71a516dec1f58d8caea7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_1a518add",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-01T08:47:38Z",
+      "side": 1,
+      "message": "agree and improved it a bit.",
+      "parentUuid": "2e2fb78d_29cc0a8c",
       "revId": "7a3ffdb4c663508b7cdc71a516dec1f58d8caea7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
