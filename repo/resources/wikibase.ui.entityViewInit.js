@@ -50,7 +50,7 @@
 				'claimview',
 				'descriptionview',
 				'labelview',
-				'fingerprintview',
+				'fingerprintgroupview',
 				'referenceview',
 				'sitelinkview'
 			],
