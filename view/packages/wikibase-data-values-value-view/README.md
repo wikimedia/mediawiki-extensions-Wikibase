@@ -105,8 +105,14 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.6.11 (dev)
+### 0.7.0 (dev)
+
+#### Breaking changes
+* Use version 0.6.0 of DataValuesJavascript
+
+#### Bugfixes
 * Fixed eachchange event: Cancel event after it got removed.
+* Fixed calendar switch to Julian (Bug 65847).
 
 ### 0.6.10 (2014-08-14)
 * Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
