@@ -32,7 +32,7 @@ class SiteLink implements Comparable {
 	/**
 	 * @param string $siteId
 	 * @param string $pageName
-	 * @param ItemIdSet|ItemId[] $badges
+	 * @param ItemIdSet|ItemId[]|null $badges
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -51,11 +51,12 @@ class SiteLink implements Comparable {
 	}
 
 	private function setBadges( $badges ) {
-		if ( is_array( $badges ) ) {
+		if ( $badges === null ) {
+			$badges = new ItemIdSet();
+		} elseif ( is_array( $badges ) ) {
 			$badges = new ItemIdSet( $badges );
-		}
-		elseif ( !( $badges instanceof ItemIdSet ) ) {
-			throw new InvalidArgumentException( '$badges needs to be ItemIdSet or ItemId[]' );
+		} elseif ( !( $badges instanceof ItemIdSet ) ) {
+			throw new InvalidArgumentException( '$badges needs to be ItemIdSet, ItemId[] or null' );
 		}
 
 		$this->badges = $badges;
@@ -97,9 +98,13 @@ class SiteLink implements Comparable {
 	 *
 	 * @param mixed $target
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function equals( $target ) {
+		if ( $target === $this ) {
+			return true;
+		}
+
 		if ( !( $target instanceof self ) ) {
 			return false;
 		}
