@@ -820,23 +820,66 @@ class ItemTest extends EntityTest {
 		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
-	public function testItemsWithDifferentStatementsAreNotEqual() {
+	public function equalsProvider() {
 		$firstItem = Item::newEmpty();
-		$secondItem = Item::newEmpty();
-
 		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
-		$this->assertFalse( $firstItem->equals( $secondItem ) );
-	}
-
-	public function testItemsWithTheSameStatementsAreEqual() {
-		$firstItem = Item::newEmpty();
 		$secondItem = Item::newEmpty();
-
-		$firstItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 		$secondItem->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
+		return array(
+			array( Item::newEmpty(), Item::newEmpty() ),
+			array( $firstItem, $secondItem ),
+		);
+	}
+
+	/**
+	 * @dataProvider equalsProvider
+	 */
+	public function testEquals( Item $firstItem, Item $secondItem ) {
 		$this->assertTrue( $firstItem->equals( $secondItem ) );
+	}
+
+	public function notEqualsProvider() {
+		$item = Item::newEmpty();
+		$item->getFingerprint()->setLabel( 'en', 'Same' );
+		$item->getFingerprint()->setDescription( 'en', 'Same' );
+		$item->getFingerprint()->setAliasGroup( 'en', array( 'Same' ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Same' );
+		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
+
+		$differentLabel = $item->copy();
+		$differentLabel->getFingerprint()->setLabel( 'en', 'Different' );
+
+		$differentDescription = $item->copy();
+		$differentDescription->getFingerprint()->setDescription( 'en', 'Different' );
+
+		$differentAlias = $item->copy();
+		$differentAlias->getFingerprint()->setAliasGroup( 'en', array( 'Different' ) );
+
+		$differentSiteLink = $item->copy();
+		$differentSiteLink->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
+		$differentSiteLink->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Different' );
+
+		$differentStatement = $item->copy();
+		$differentStatement->setStatements( new StatementList() );
+		$differentStatement->getStatements()->addNewStatement( new PropertyNoValueSnak( 24 ) );
+
+		return array(
+			array( $item, Item::newEmpty() ),
+			array( $item, $differentLabel ),
+			array( $item, $differentDescription ),
+			array( $item, $differentAlias ),
+			array( $item, $differentSiteLink ),
+			array( $item, $differentStatement ),
+		);
+	}
+
+	/**
+	 * @dataProvider notEqualsProvider
+	 */
+	public function testNotEquals( Item $firstItem, Item $secondItem ) {
+		$this->assertFalse( $firstItem->equals( $secondItem ) );
 	}
 
 }
