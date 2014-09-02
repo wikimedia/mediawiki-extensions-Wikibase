@@ -64,7 +64,6 @@ class TermBoxView {
 
 		wfProfileIn( __METHOD__ );
 
-		$entityId = $entity->getId()->getSerialization();
 		$fingerprint = $entity->getFingerprint();
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
@@ -75,25 +74,6 @@ class TermBoxView {
 		foreach ( $languageCodes as $languageCode ) {
 			$hasLabel = $labels->hasTermForLanguage( $languageCode );
 			$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
-
-			$editLabelSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
-				'SetLabel',
-				array( $entityId, $languageCode ),
-				$this->msg( 'wikibase-edit' ),
-				$editable
-			);
-			$editDescriptionSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
-				'SetDescription',
-				array( $entityId, $languageCode ),
-				$this->msg( 'wikibase-edit' ),
-				$editable
-			);
-			$editAliasesSection = $this->sectionEditLinkGenerator->getHtmlForEditSection(
-				'SetAliases',
-				array( $entityId, $languageCode ),
-				$this->msg( 'wikibase-edit' ),
-				$editable
-			);
 
 			$tbody .= wfTemplate( 'wikibase-fingerprintview',
 				$languageCode,
@@ -108,7 +88,6 @@ class TermBoxView {
 					'',
 					''
 				),
-				'<td>' . $editLabelSection . '</td>',
 				wfTemplate( 'wikibase-descriptionview',
 					$hasDescription ? '' : 'wb-empty',
 					htmlspecialchars( $hasDescription
@@ -118,15 +97,19 @@ class TermBoxView {
 					'',
 					''
 				),
-				'<td>' . $editDescriptionSection . '</td>',
-				$this->getHtmlForAliases( $aliasGroups, $languageCode ),
-				'<td>' . $editAliasesSection . '</td>'
+				$this->getHtmlForAliases( $aliasGroups, $languageCode )
 			);
 		}
 
 		$html = wfTemplate( 'wikibase-fingerprintgroupview',
 			$this->msg( 'wikibase-terms' ),
-			wfTemplate( 'wikibase-fingerprintlistview', $tbody )
+			wfTemplate( 'wikibase-fingerprintlistview', $tbody ),
+			$this->sectionEditLinkGenerator->getHtmlForEditSection(
+				'SpecialPages',
+				array(),
+				$this->msg( 'wikibase-edit' ),
+				$editable
+			)
 		);
 
 		wfProfileOut( __METHOD__ );
