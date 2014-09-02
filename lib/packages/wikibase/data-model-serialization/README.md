@@ -102,7 +102,7 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
-### 1.1 (dev)
+### 1.1.0 (2014-09-02)
 
 * Compatibility with DataModel 1.x was added
 * DataModel 1.x is now required
