@@ -47,7 +47,6 @@ class TermBoxViewTest extends \PHPUnit_Framework_TestCase {
 		$this->assertRegExp( '/Hauptstadt/', $html, 'expected German description' );
 
 		$this->assertRegExp( '/wikibase-label-empty/', $html, 'expected label-empty message for "ru"' );
-		$this->assertRegExp( '!Q23/de!', $html, 'expected edit link for Q23/de' );
 		$this->assertRegExp( '!<h2 id="wb-terms".*?>\(wikibase-terms\)</h2>!', $html, 'expected h2 header' );
 	}
 
