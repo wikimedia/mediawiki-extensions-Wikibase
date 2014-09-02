@@ -57,8 +57,8 @@ h2.wb-section-heading {
 	position: relative;
 	float: left;
 	width: 100%;
-	padding-top: 2em;
 	margin-bottom: 0.2em;
+	margin-top: 1em;
 	padding-left: 10px;
 	border-bottom: none;
 }

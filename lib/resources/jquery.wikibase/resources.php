@@ -164,6 +164,7 @@ return call_user_func( function() {
 				'wikibase.templates',
 			),
 			'messages' => array(
+				'wikibase-fingerprintgroupview-input-help-message',
 				'wikibase-terms',
 			),
 		),
