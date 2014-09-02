@@ -840,30 +840,38 @@ class ItemTest extends EntityTest {
 		$this->assertTrue( $firstItem->equals( $secondItem ) );
 	}
 
-	public function notEqualsProvider() {
+	private function getBaseItem() {
 		$item = Item::newEmpty();
+
+		$item->setId( 42 );
 		$item->getFingerprint()->setLabel( 'en', 'Same' );
 		$item->getFingerprint()->setDescription( 'en', 'Same' );
 		$item->getFingerprint()->setAliasGroup( 'en', array( 'Same' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Same' );
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
-		$differentLabel = $item->copy();
+		return $item;
+	}
+
+	public function notEqualsProvider() {
+		$differentLabel = $this->getBaseItem();
 		$differentLabel->getFingerprint()->setLabel( 'en', 'Different' );
 
-		$differentDescription = $item->copy();
+		$differentDescription = $this->getBaseItem();
 		$differentDescription->getFingerprint()->setDescription( 'en', 'Different' );
 
-		$differentAlias = $item->copy();
+		$differentAlias = $this->getBaseItem();
 		$differentAlias->getFingerprint()->setAliasGroup( 'en', array( 'Different' ) );
 
-		$differentSiteLink = $item->copy();
+		$differentSiteLink = $this->getBaseItem();
 		$differentSiteLink->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 		$differentSiteLink->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Different' );
 
-		$differentStatement = $item->copy();
+		$differentStatement = $this->getBaseItem();
 		$differentStatement->setStatements( new StatementList() );
 		$differentStatement->getStatements()->addNewStatement( new PropertyNoValueSnak( 24 ) );
+
+		$item = $this->getBaseItem();
 
 		return array(
 			array( $item, Item::newEmpty() ),
