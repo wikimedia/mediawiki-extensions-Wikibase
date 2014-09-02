@@ -249,7 +249,10 @@ HTML;
 	$templates['wikibase-fingerprintgroupview'] =
 <<<HTML
 <div class="wikibase-fingerprintgroupview">
-	<h2 id="wb-terms" class="wb-section-heading wikibase-fingerprintgroupview-heading">$1</h2>
+	<div class="wikibase-fingerprintgroupview-heading-container">
+		<h2 id="wb-terms" class="wb-section-heading wikibase-fingerprintgroupview-heading">$1</h2>
+		<!-- wb-editsection -->$3
+	</div>
 	<!-- wikibase-fingerprintlistview -->$2
 </div>
 HTML;
@@ -260,7 +263,6 @@ HTML;
 	<colgroup>
 		<col class="wikibase-fingerprintlistview-language" />
 		<col class="wikibase-fingerprintlistview-label wikibase-fingerprintlistview-description wikibase-fingerprintlistview-aliases" />
-		<col class="wb-editsection" />
 	</colgroup>
 	<!-- [0,*] wikibase-fingerprintview -->$1
 </table>
@@ -272,15 +274,12 @@ HTML;
 	<tr>
 		<td class="wikibase-fingerprintview-language" rowspan="3"><a href="$2">$3</a></td>
 		<td class="wikibase-fingerprintview-label $4">$5</td>
-		<!-- wb-edisection -->$6
 	</tr>
 	<tr>
-		<td class="wikibase-fingerprintview-description $7">$8</td>
-		<!-- wb-editsection -->$9
+		<td class="wikibase-fingerprintview-description $6">$7</td>
 	</tr>
 	<tr>
-		<td class="wikibase-fingerprintview-aliases $10">$11</td>
-		<!-- wb-editsection -->$12
+		<td class="wikibase-fingerprintview-aliases $8">$9</td>
 	</tr>
 </tbody>
 HTML;
