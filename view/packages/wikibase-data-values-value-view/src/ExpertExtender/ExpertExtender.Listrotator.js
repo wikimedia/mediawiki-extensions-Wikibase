@@ -7,13 +7,13 @@
 
 	/**
 	 * An ExpertExtender module for a jQuery.ui.listrotator
-	 *
 	 * @constructor
 	 *
 	 * @param {string} className
-	 * @param {object[]} values
-	 * @param {function} onValueChange
-	 * @param {function} getUpstreamValue
+	 * @param {Object[]} values
+	 * @param {Function} onValueChange Callback to be triggered when the listrotator's value is
+	 *        changed.
+	 * @param {Function} getUpstreamValue Callback to retrieve the value from a parent component.
 	 */
 	ExpertExtender.Listrotator = function( className, values, onValueChange, getUpstreamValue ) {
 		this._onValueChange = onValueChange;
@@ -29,12 +29,29 @@
 	};
 
 	$.extend( ExpertExtender.Listrotator.prototype, {
+		/**
+		 * @type {Function}
+		 */
 		_onValueChange: null,
+
+		/**
+		 * @type {Function}
+		 */
 		_getUpstreamValue: null,
 
+		/**
+		 * @type {jQuery}
+		 */
 		_$customItem: null,
+
+		/**
+		 * @type {number|null}
+		 */
 		_customValueIndex: null,
 
+		/**
+		 * @type {jQuery.ui.listrotator}
+		 */
 		rotator: null,
 
 		/**
@@ -47,12 +64,12 @@
 				listrotatorEvents = 'listrotatorauto listrotatorselected';
 
 			this.rotator.element
-				.on( listrotatorEvents, function( event, newValue ) {
-					if( newValue !== self._getUpstreamValue() ) {
-						self._onValueChange( newValue );
-					}
-				} )
-				.appendTo( $extender );
+			.on( listrotatorEvents, function( event, newValue ) {
+				if( newValue !== self._getUpstreamValue() ) {
+					self._onValueChange( newValue );
+				}
+			} )
+			.appendTo( $extender );
 
 			this.rotator.initWidths();
 		},
@@ -67,7 +84,7 @@
 			}
 
 			if( this._$customItem ) {
-				this.rotator.options.values.splice(this._customValueIndex, 1);
+				this.rotator.options.values.splice( this._customValueIndex, 1 );
 				this._$customItem.remove();
 				this._$customItem = null;
 				this._customValueIndex = null;
@@ -97,7 +114,7 @@
 				this.rotator = null;
 			}
 			this._getUpstreamValue = null;
-			this._onValueChange = null
+			this._onValueChange = null;
 		},
 
 		/**
