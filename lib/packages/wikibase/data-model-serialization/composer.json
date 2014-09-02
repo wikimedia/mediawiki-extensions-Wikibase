@@ -33,7 +33,6 @@
 		"data-values/serialization": "~1.0"
 	},
 	"require-dev": {
-		"wikibase/data-model": "~1.0@dev",
 		"data-values/common": "~0.2",
 		"data-values/geo": "~0.1",
 		"data-values/number": "~0.2",
