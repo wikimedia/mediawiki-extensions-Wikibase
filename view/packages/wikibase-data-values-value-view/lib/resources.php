@@ -167,6 +167,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.ui.suggestLanguage' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.suggestLanguage.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
+			),
+		),
+
 		'jquery.ui.toggler' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.toggler.js',
