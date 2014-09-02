@@ -4,6 +4,7 @@
  */
 .wikibase-fingerprintgroupview {
 	float: left;
+	width: 100%;
 }
 
 .wikibase-fingerprintgroupview h2 {
@@ -11,4 +12,14 @@
 	margin-bottom: 0.2em;
 	padding-left: 10px;
 	border-bottom: none;
+	width: auto;
+}
+
+.wikibase-fingerprintgroupview .wikibase-fingerprintgroupview-heading-container {
+	position: relative;
+}
+
+.wikibase-fingerprintgroupview .wikibase-fingerprintgroupview-heading-container .wb-editsection {
+	float: right;
+	margin-top: 1.9em;
 }
