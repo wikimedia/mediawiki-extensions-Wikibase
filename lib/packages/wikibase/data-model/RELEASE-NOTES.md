@@ -67,6 +67,7 @@ Other breaking changes:
 
 #### Deprecations
 
+* Deprecated `Entity` (but not the derivatives)
 * Deprecated `Claims`
 * Deprecated `Entity::setId`
 * Deprecated `Entity::newClaim`
