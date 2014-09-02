@@ -13,3 +13,5 @@ $classLoader = require_once( __DIR__ . '/../vendor/autoload.php' );
 $classLoader->addPsr4(
 	'Tests\\Integration\\Wikibase\\InternalSerialization\\', __DIR__ . '/integration/'
 );
+
+unset( $classLoader );
