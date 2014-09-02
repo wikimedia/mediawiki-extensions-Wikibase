@@ -56,7 +56,6 @@
 	"wikibase-undo-badpage": "Zła wersja: wersja $2 nie należy do [[$1]]",
 	"wikibase-undo-firstrev": "Nie można cofnąć utworzenia strony",
 	"wikibase-undo-nocontent": "Nie można wczytać zawartości wersji $2 strony $1",
-	"wikibase-propertyedittool-full": "Lista wartości jest kompletna.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "Jeszcze nie zapisano {{PLURAL:$1|jednej wartości|$1 wartości}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|wpis|wpisy|wpisów}}",
 	"wikibase-sitelinksedittool-full": "Linki są już podane dla wszystkich znanych stron.",

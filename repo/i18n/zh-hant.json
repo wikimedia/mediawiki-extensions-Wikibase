@@ -56,7 +56,6 @@
 	"wikibase-undo-badpage": "錯誤修訂：修訂 $2 並不屬於 [[$1]]。",
 	"wikibase-undo-firstrev": "無法還原頁面建立動作",
 	"wikibase-undo-nocontent": "無法讀取頁面 $1 修訂 $2 的內容",
-	"wikibase-propertyedittool-full": "數值清單已完成。",
 	"wikibase-propertyedittool-counter-pending-tooltip": "$1 個數值尚未儲存",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|條目|條目}}",
 	"wikibase-sitelinksedittool-full": "連結的頁面己經設定於所有己知網站。",

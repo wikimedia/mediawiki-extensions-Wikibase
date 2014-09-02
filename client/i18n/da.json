@@ -62,5 +62,5 @@
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
 	"wikibase-otherprojects": "Andre projekter",
 	"wikibase-otherprojects-beta-message": "Andre projekter sidebar",
-	"wikibase-otherprojects-beta-description": "Tilføjer et \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data."
+	"wikibase-otherprojects-beta-description": "Tilføjer en \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data."
 }

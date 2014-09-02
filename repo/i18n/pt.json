@@ -54,7 +54,6 @@
 	"wikibase-undo-badpage": "Erro: Revisão $2 não pertence a [[$1]].",
 	"wikibase-undo-firstrev": "Não foi possível desfazer a criação da página",
 	"wikibase-undo-nocontent": "Não foi possível carregar o conteúdo da revisão $2 da página $1",
-	"wikibase-propertyedittool-full": "A lista de valores está completa.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Um valor ainda não gravado|$1 valores ainda não gravados}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrada|entradas}}",
 	"wikibase-sitelinksedittool-full": "As ligações para as páginas já estão definidas para todos os sítios conhecidos.",

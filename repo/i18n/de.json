@@ -63,7 +63,6 @@
 	"wikibase-undo-badpage": "Die Versionsnummer ist falsch: Die Version $2 gehört nicht zur Seite [[$1]].",
 	"wikibase-undo-firstrev": "Das Erstellen einer Seite kann nicht rückgängig gemacht werden.",
 	"wikibase-undo-nocontent": "Inhalt der Seite $1 in Version $2 kann nicht geladen werden",
-	"wikibase-propertyedittool-full": "Die Werteliste ist vollständig.",
 	"wikibase-ui-pendingquantitycounter-pending-pendingsubpart": "+$1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Ein Wert wurde|$1 Werte wurden}} noch nicht gespeichert.",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|Eintrag|Einträge}}",

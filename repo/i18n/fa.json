@@ -64,7 +64,6 @@
 	"wikibase-undo-badpage": "نسخهٔ نامناسب: نسخهٔ $2 به [[$1]] تعلق ندارد.",
 	"wikibase-undo-firstrev": "ایجاد صفحه را نمی‌توان واگردانی کرد.",
 	"wikibase-undo-nocontent": "قادر به بارگذرای بازبینی $2 از صفحه $1 نیست",
-	"wikibase-propertyedittool-full": "فهرست مقدارها کامل است.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "هنوز $1 مقدار ذخیره نشده‌است",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|ورودی|ورودی}}",
 	"wikibase-sitelinksedittool-full": "پیوندها به صفحات در حال حاضر برای همهٔ وب‌گاه‌های شناخته‌شده تنظیم شده‌اند.",

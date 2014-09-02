@@ -41,7 +41,6 @@
 	"wikibase-undo-badpage": "Falsch Versioun: D'Versioun $2 gehéiert net zu [[$1]].",
 	"wikibase-undo-firstrev": "D'Uleeë vun der Säit kann net réckgängeg gemaach ginn",
 	"wikibase-undo-nocontent": "Den Inhalt vun der Versioun $2 vun der Säit $1 kann net geluede ginn",
-	"wikibase-propertyedittool-full": "D'Lëscht vun de Wäerter ass komplett.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Ee Wäert gouf|$1 Wäerter goufen}} nach net gespäichert",
 	"wikibase-sitelinksedittool-full": "D'Linken op d'Säiten si schonn agestallt fir all bekannte Siten.",
 	"wikibase-disambiguation-title": "Homonymie fir \"$1\"",

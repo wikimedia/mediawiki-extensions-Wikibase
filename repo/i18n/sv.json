@@ -51,7 +51,6 @@
 	"wikibase-undo-badpage": "Ogiltig version: Versionen $2 hör inte till [[$1]].",
 	"wikibase-undo-firstrev": "Kan inte ångra sidans skapelse",
 	"wikibase-undo-nocontent": "Kan inte läsa in innehållet i versionen $2 av sidan $1",
-	"wikibase-propertyedittool-full": "Listan över värden är komplett.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Ett värde|$1 värden}} har ännu inte sparats",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|uppslag}}",
 	"wikibase-sitelinksedittool-full": "Länkar till sidor är redan inställda för alla kända webbplatser.",
@@ -322,6 +321,7 @@
 	"content-model-wikibase-query": "Wikibase-fråga",
 	"right-item-term": "Ändra termerna för objekt (etiketter, beskrivningar, alias)",
 	"right-item-merge": "Sammanfoga objekt",
+	"right-item-redirect": "Skapa omdirigeringar av objekt",
 	"right-property-term": "Ändra termerna för egenskaper (etiketter, beskrivningar, alias)",
 	"right-property-create": "Skapa egenskaper"
 }

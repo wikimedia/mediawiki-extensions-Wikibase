@@ -65,7 +65,6 @@
 	"wikibase-undo-badpage": "错误版本：版本$2不属于[[$1]]。",
 	"wikibase-undo-firstrev": "无法撤销该页面的创建",
 	"wikibase-undo-nocontent": "无法载入页面$1的版本$2的内容",
-	"wikibase-propertyedittool-full": "值列表完整。",
 	"wikibase-propertyedittool-counter-pending-tooltip": "$1个值还没有保存",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|条}}",
 	"wikibase-sitelinksedittool-full": "所有已知网站均已设置页面链接。",

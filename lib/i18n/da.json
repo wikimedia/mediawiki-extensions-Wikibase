@@ -26,7 +26,7 @@
 	"wikibase-diffview-alias": "aliasser",
 	"wikibase-diffview-description": "beskrivelse",
 	"wikibase-diffview-link": "henvisninger",
-	"wikibase-error-unexpected": "Der opstod en uventet fejl:  $1 .",
+	"wikibase-error-unexpected": "Der opstod en uventet fejl: $1.",
 	"wikibase-error-save-generic": "Der opstod en fejl under forsøget på at gemme og derfor kan ændringerne ikke gennemføres.",
 	"wikibase-error-remove-generic": "Der opstod en fejl under forsøget på at fjerne og derfor kan ændringerne ikke gennemføres.",
 	"wikibase-error-save-connection": "En forbindelsesfejl opstod under forsøget på at gemme og derfor kunne dine ændringer ikke gennemføres. Kontroller forbindelsen til internettet.",

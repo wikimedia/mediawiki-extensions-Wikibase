@@ -47,7 +47,6 @@
 	"wikibase-undo-badpage": "Halb redaktsioon: $2 pole lehekülje [[$1]] redaktsioon.",
 	"wikibase-undo-firstrev": "Lehekülje loomist ei saa tagasi võtta",
 	"wikibase-undo-nocontent": "Lehekülje $1 redaktsiooni $2 sisu ei saa laadida.",
-	"wikibase-propertyedittool-full": "Väärtuste nimekiri on valmis.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Üks väärtus|$1 väärtust}} on veel salvestamata.",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|sissekanne|sissekannet}}",
 	"wikibase-sitelinksedittool-full": "Kõigile teadaolevate võrgukohtade lehekülgedele viitavad lingid määratud.",

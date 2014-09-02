@@ -44,7 +44,6 @@
 	"wikibase-undo-badpage": "Revisión incorrecta: A revisión $2 non pertence a \"[[$1]]\".",
 	"wikibase-undo-firstrev": "Non se pode desfacer a primeira edición dunha páxina",
 	"wikibase-undo-nocontent": "Non se pode cargar o contido da revisión $2 da páxina \"$1\"",
-	"wikibase-propertyedittool-full": "A lista de valores está completa.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valor|$1 valores}} sen gardar",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrada|entradas}}",
 	"wikibase-sitelinksedittool-full": "As ligazóns cara ás páxinas xa están definidas para todos os sitios coñecidos.",

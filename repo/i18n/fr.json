@@ -72,7 +72,6 @@
 	"wikibase-undo-badpage": "Numéro de version erroné&nbsp;: la révision $2 n'appartient pas à [[$1]].",
 	"wikibase-undo-firstrev": "Impossible d'annuler la création de la page",
 	"wikibase-undo-nocontent": "Impossible de charger le contenu de la modification $2 de la page $1",
-	"wikibase-propertyedittool-full": "La liste des valeurs est complète.",
 	"wikibase-ui-pendingquantitycounter-pending-pendingsubpart": "+$1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Une valeur pas encore enregistrée|$1&nbsp;valeurs pas encore enregistrées}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrée|entrées}}",

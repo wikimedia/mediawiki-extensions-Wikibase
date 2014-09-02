@@ -47,7 +47,6 @@
 	"wikibase-undo-badpage": "Versiune greșită: Versiunea $2 nu aparține paginii [[$1]].",
 	"wikibase-undo-firstrev": "Nu se poate anula crearea paginii",
 	"wikibase-undo-nocontent": "Nu s-a putut încărca versiunea $2 a paginii $1",
-	"wikibase-propertyedittool-full": "Lista de valori este completă.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|O valoare nesalvată|$1 valori nesalvate|$1 de valori nesalvate}} încă",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|intrare|intrări|de intrări}}",
 	"wikibase-disambiguation-title": "Dezambiguizare pentru „$1”",

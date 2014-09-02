@@ -61,7 +61,6 @@
 	"wikibase-undo-badpage": "Corrupte versie: versie $2 hoort niet bij [[$1]].",
 	"wikibase-undo-firstrev": "Het is niet mogelijk het aanmaken van de pagina ongedaan te maken.",
 	"wikibase-undo-nocontent": "De inhoud van versie $2 van pagina $1 kan niet geladen worden",
-	"wikibase-propertyedittool-full": "De lijst met waarden is compleet.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Eén waarde|$1 waarden}} nog niet opgeslagen",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|item|items}}",
 	"wikibase-sitelinksedittool-full": "Koppelingen naar pagina's zijn al ingesteld voor alle bekende sites.",

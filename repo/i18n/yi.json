@@ -42,7 +42,6 @@
 	"wikibase-undo-badpage": "שלעכטע ווערסיע: ווערסיע $2 געהערט נישט צו [[$1]].",
 	"wikibase-undo-firstrev": "מ'קען נישט אנולירן דאס שאפֿן א בלאט.",
 	"wikibase-undo-nocontent": "קען נישט אנלאדן אינהאלט פון ווערסיע $2 פון בלאט $1.",
-	"wikibase-propertyedittool-full": "ליסטע פון ווערטן איז גאנץ.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|איין ווערט|$1 ווערטן}} נאך נישט אויפֿגעהיטן",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|פארשרייב|פארשרייבן}}",
 	"wikibase-sitelinksedittool-full": "לינקען צו בלעטער שוין געשטעלט פאר אלע באוואוסטע וועבזײַטלעך.",

@@ -48,7 +48,6 @@
 	"wikibase-undo-badpage": "잘못된 판: $2 판은 [[$1]]에 속하지 않습니다.",
 	"wikibase-undo-firstrev": "문서 만들기를 되돌릴 수 없습니다",
 	"wikibase-undo-nocontent": "$1 페이지의 $2 판의 내용을 불러올 수 없습니다",
-	"wikibase-propertyedittool-full": "값 목록을 완료했습니다.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|값 한 개|값 $1개}}가 아직 저장되지 않음",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|항목}}",
 	"wikibase-sitelinksedittool-full": "문서에 대한 링크는 이미 알려진 모든 사이트에 대해 설정됩니다.",

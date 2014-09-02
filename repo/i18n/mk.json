@@ -45,7 +45,6 @@
 	"wikibase-undo-badpage": "Неисправна преработка: Преработката $2 не припаѓа на [[$1]].",
 	"wikibase-undo-firstrev": "Не можам да го отповикам создавањето на страницава",
 	"wikibase-undo-nocontent": "Не можам да ја вчитам содржината на преработката $2 на страницата $1",
-	"wikibase-propertyedittool-full": "Списокот на вредности е исполнет.",
 	"wikibase-ui-pendingquantitycounter-pending-pendingsubpart": "+$1",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Една вредност остана незачувана|$1 вредности останаа незачувани}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "($1 {{PLURAL:$1|ставка|ставки}})",

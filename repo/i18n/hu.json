@@ -47,7 +47,6 @@
 	"wikibase-undo-samerev": "Nem lehet visszavonni, a visszavonás kiindulópontjául és céljául adott változat ugyanaz.",
 	"wikibase-undo-badpage": "Hibás változat: a $2. számú változat nem a(z) [[$1]] laphoz tartozik.",
 	"wikibase-undo-firstrev": "A lap létrehozását nem lehet visszavonni.",
-	"wikibase-propertyedittool-full": "Az értékek listája teljes.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Egy|$1}} érték még nincs elmentve",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|bejegyzés|bejegyzés}}",
 	"wikibase-sitelinksedittool-full": "Ez a fogalom már minden ismert wikihez hozzá van kapcsolva",

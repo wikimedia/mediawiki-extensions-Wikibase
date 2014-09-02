@@ -66,7 +66,6 @@
 	"wikibase-undo-badpage": "Revisión incorrecta: La revisión $2 no pertenece a [[$1]].",
 	"wikibase-undo-firstrev": "No se puede deshacer la creación de la página",
 	"wikibase-undo-nocontent": "No se puede cargar el contenido de la revisión $2 de la página \"$1\"",
-	"wikibase-propertyedittool-full": "La lista de valores está completa.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valor aún no guardado|$1 valores aún no guardados}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrada|entradas}}",
 	"wikibase-sitelinksedittool-full": "Los enlaces a las páginas están ya definidos para todos los sitios conocidos.",

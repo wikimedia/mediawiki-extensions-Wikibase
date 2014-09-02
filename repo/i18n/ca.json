@@ -50,7 +50,6 @@
 	"wikibase-undo-badpage": "Revisió incorrecta: la revisió $2 no pertany a [[$1]].",
 	"wikibase-undo-firstrev": "No es pot desfer la creació de la pàgina",
 	"wikibase-undo-nocontent": "No es pot carregar el contingut de la revisió $2 de la pàgina $1",
-	"wikibase-propertyedittool-full": "La llista de valors és completa.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valor|$1 valors}} encara no han estat desats",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entrada|entrades}}",
 	"wikibase-disambiguation-title": "Desambiguació de \"$1\"",

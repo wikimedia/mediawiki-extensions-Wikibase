@@ -57,7 +57,6 @@
 	"wikibase-undo-badpage": "Virheellinen versio: Versio $2 ei kuulu sivulle [[$1]].",
 	"wikibase-undo-firstrev": "Sivun luomista ei voi kumota",
 	"wikibase-undo-nocontent": "Sivun $1 version $2 sisältöä ei voitu ladata",
-	"wikibase-propertyedittool-full": "Arvoluettelo on valmis.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Yhtä|$1}} arvoa ei ole vielä tallennettu.",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|linkki|linkkiä}}",
 	"wikibase-sitelinksedittool-full": "Linkit kaikkien tunnettujen sivustojen sivuille on jo asetettu.",
@@ -305,6 +304,7 @@
 	"content-model-wikibase-query": "Wikibase-kysely",
 	"right-item-term": "Muuttaa kohteiden käsitteitä (nimet, kuvaukset, aliakset)",
 	"right-item-merge": "Yhdistää kohteita",
+	"right-item-redirect": "Luoda kohdeohjaussivuja",
 	"right-property-term": "Muuttaa ominaisuuksien käsitteitä (nimet, kuvaukset, aliakset)",
 	"right-property-create": "Luoda ominaisuuksia"
 }

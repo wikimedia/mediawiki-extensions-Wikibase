@@ -46,7 +46,6 @@
 	"wikibase-undo-badpage": "正しくない版: 版 $2 は [[$1]] の版ではありません。",
 	"wikibase-undo-firstrev": "ページの作成は取り消せません",
 	"wikibase-undo-nocontent": "ページ $1 の版 $2 の内容を読み込めません",
-	"wikibase-propertyedittool-full": "値の一覧は完全なものです。",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|$1 個の値}}がまだ保存されていません",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|エントリ}}",
 	"wikibase-sitelinksedittool-full": "既知の全サイトについて、既にページヘのリンクが設定されています。",

@@ -56,7 +56,6 @@
 	"wikibase-undo-badpage": "Versione sbagliata: la versione $2 non appartiene a [[$1]].",
 	"wikibase-undo-firstrev": "Impossibile annullare la creazione della pagina",
 	"wikibase-undo-nocontent": "Non è possibile caricare il contenuto della versione $2 della pagina $1",
-	"wikibase-propertyedittool-full": "L'elenco dei valori è completo.",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Un valore non ancora salvato|$1 valori non ancora salvati}}",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|sito|siti}}",
 	"wikibase-sitelinksedittool-full": "Sono già stati impostati collegamenti alle pagine per tutti i siti conosciuti.",
