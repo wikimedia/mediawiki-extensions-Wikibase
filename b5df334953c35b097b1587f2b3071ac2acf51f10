@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_1534b8a6",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-02T12:56:26Z",
+      "side": 1,
+      "message": "This destroys the whole code formatting. We have to finde a better solution.",
+      "revId": "b5df334953c35b097b1587f2b3071ac2acf51f10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
