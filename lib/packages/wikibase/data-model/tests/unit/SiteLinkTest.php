@@ -98,6 +98,8 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 	public function badgesProvider() {
 		$argLists = array();
 
+		$argLists[] = array( null, array() );
+
 		$badges = array();
 		$expected = array_values( $badges );
 
@@ -147,7 +149,6 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 		$argLists[] = array( 42 );
 		$argLists[] = array( true );
 		$argLists[] = array( 'nyan nyan' );
-		$argLists[] = array( null );
 
 		return $argLists;
 	}
