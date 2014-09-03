@@ -113,6 +113,7 @@ Other methods an Expert needs to provide:
 #### Bugfixes
 * Fixed eachchange event: Cancel event after it got removed.
 * Fixed calendar switch to Julian (Bug 65847).
+* Fixed bug that broke the ListRotator after edit and cancel (Bug 70294).
 
 ### 0.6.10 (2014-08-14)
 * Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
