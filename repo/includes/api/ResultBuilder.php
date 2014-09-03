@@ -47,11 +47,6 @@ class ResultBuilder {
 	protected $entityTitleLookup;
 
 	/**
-	 * @var SerializationOptions
-	 */
-	protected $options;
-
-	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
@@ -71,9 +66,6 @@ class ResultBuilder {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
 		$this->missingEntityCounter = -1;
-
-		$this->options = new SerializationOptions();
-		$this->options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 	}
 
 	/**
@@ -83,7 +75,10 @@ class ResultBuilder {
 	 * @return SerializationOptions
 	 */
 	public function getOptions() {
-		return $this->options;
+		$options = new SerializationOptions();
+		$options->setIndexTags( $this->result->getIsRawMode() );
+		$options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
+		return $options;
 	}
 
 	/**
@@ -275,7 +270,14 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 */
-	public function addEntityRevision( $key, EntityRevision $entityRevision, SerializationOptions $options = null, $props = 'all', $siteIds = array() ) {
+	public function addEntityRevision(
+		$key,
+		EntityRevision $entityRevision,
+		SerializationOptions
+		$options = null,
+		$props = 'all',
+		$siteIds = array()
+	) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
 
@@ -285,12 +287,9 @@ class ResultBuilder {
 
 		$record = array();
 
+		$serializerOptions = $this->getOptions();
 		if ( $options ) {
-			$serializerOptions = new SerializationOptions();
-			$serializerOptions->merge( $this->options );
 			$serializerOptions->merge( $options );
-		} else {
-			$serializerOptions = $this->options;
 		}
 
 		//if there are no props defined only return type and id..
@@ -348,7 +347,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addLabels( array $labels, $path ) {
-		$labelSerializer = $this->serializerFactory->newLabelSerializer( $this->options );
+		$labelSerializer = $this->serializerFactory->newLabelSerializer( $this->getOptions() );
 
 		$values = $labelSerializer->getSerialized( $labels );
 		$this->setList( $path, 'labels', $values, 'label' );
@@ -363,7 +362,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addDescriptions( array $descriptions, $path ) {
-		$descriptionSerializer = $this->serializerFactory->newDescriptionSerializer( $this->options );
+		$descriptionSerializer = $this->serializerFactory->newDescriptionSerializer( $this->getOptions() );
 
 		$values = $descriptionSerializer->getSerialized( $descriptions );
 		$this->setList( $path, 'descriptions', $values, 'description' );
@@ -378,7 +377,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addAliases( array $aliases, $path ) {
-		$aliasSerializer = $this->serializerFactory->newAliasSerializer( $this->options );
+		$aliasSerializer = $this->serializerFactory->newAliasSerializer( $this->getOptions() );
 		$values = $aliasSerializer->getSerialized( $aliases );
 		$this->setList( $path, 'aliases', $values, 'alias' );
 	}
@@ -393,8 +392,7 @@ class ResultBuilder {
 	 * @param array|null $options
 	 */
 	public function addSiteLinks( array $siteLinks, $path, $options = null ) {
-		$serializerOptions = new SerializationOptions();
-		$serializerOptions->merge( $this->options );
+		$serializerOptions = $this->getOptions();
 
 		if ( is_array( $options ) ) {
 			if ( in_array( EntitySerializer::SORT_ASC, $options ) ) {
@@ -429,7 +427,7 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addClaims( array $claims, $path ) {
-		$claimsSerializer = $this->serializerFactory->newClaimsSerializer( $this->options );
+		$claimsSerializer = $this->serializerFactory->newClaimsSerializer( $this->getOptions() );
 
 		$values = $claimsSerializer->getSerialized( new Claims( $claims ) );
 		$this->setList( $path, 'claims', $values, 'claim' );
@@ -443,7 +441,7 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addClaim( Claim $claim ) {
-		$serializer = $this->serializerFactory->newClaimSerializer( $this->options );
+		$serializer = $this->serializerFactory->newClaimSerializer( $this->getOptions() );
 
 		//TODO: this is currently only used to add a Claim as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow claims
@@ -461,7 +459,7 @@ class ResultBuilder {
 	 * @since 0.5
 	 */
 	public function addReference( Reference $reference ) {
-		$serializer = $this->serializerFactory->newReferenceSerializer( $this->options );
+		$serializer = $this->serializerFactory->newReferenceSerializer( $this->getOptions() );
 
 		//TODO: this is currently only used to add a Reference as the top level structure,
 		//      with a null path and a fixed name. Would be nice to also allow references
