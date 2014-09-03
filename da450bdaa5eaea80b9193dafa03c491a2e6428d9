@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_31a9ff78",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-03T13:41:45Z",
+      "side": 0,
+      "message": "The serialization options still need to know about this, right? I was under the impression that the serializer would then use int keys for somethings it would otherwise have represented as a map.",
+      "revId": "da450bdaa5eaea80b9193dafa03c491a2e6428d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
