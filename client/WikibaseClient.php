@@ -63,6 +63,14 @@ if ( !defined( 'WBL_VERSION' ) ) {
 	throw new Exception( 'WikibaseClient depends on the WikibaseLib extension.' );
 }
 
+if ( !defined( 'WBUT_VERSION' ) ) {
+	include_once( __DIR__ . '/../usagetracking/UsageTracking.client.php' );
+}
+
+if ( !defined( 'WBUT_VERSION' ) ) {
+	throw new Exception( 'WikibaseClient depends on the WikiBaseUsageTracking extension.' );
+}
+
 call_user_func( function() {
 	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
 	global $wgAPIMetaModules, $wgSpecialPages, $wgSpecialPageGroups, $wgResourceModules;
