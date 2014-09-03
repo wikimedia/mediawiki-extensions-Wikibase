@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -40,42 +41,70 @@ class GetClaimsTest extends \ApiTestCase {
 
 	/**
 	 * @param Entity $entity
-	 *
-	 * @return Entity
+	 * @param int $flags
 	 */
-	protected function addClaimsAndSave( Entity $entity ) {
-		wfSuppressWarnings(); // We are referencing properties that don't exist. Not relevant here.
-
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
-
-		/** @var $claims Claim[] */
-		$claims[0] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
-		$claims[1] = $entity->newClaim( new PropertyNoValueSnak( new PropertyId( 'P404' ) ) );
-		$claims[2] = $entity->newClaim( new PropertySomeValueSnak( new PropertyId( 'P42' ) ) );
-		$claims[3] = $entity->newClaim( new PropertyValueSnak( new PropertyId( 'P9001' ), new StringValue( 'o_O' ) ) );
-
-		foreach( $claims as $key => $claim ){
-			$claim->setGuid( $entity->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
-			$entity->addClaim( $claim );
+	private function save( Entity $entity, $flags = null ) {
+		if ( $flags === null ) {
+			$flags = $entity->getId() ? EDIT_UPDATE : EDIT_NEW;
 		}
 
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
-		wfRestoreWarnings();
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		return $entity;
+		$rev = $store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags );
+
+		$entity->setId( $rev->getEntity()->getId() );
+	}
+
+	/**
+	 * @param Item $item
+	 */
+	private function addStatements( Item $item, PropertyId $property ) {
+		if ( !$item->getId() ) {
+			$this->save( $item );
+		}
+
+		/** @var $statements Statement[] */
+		$statements[0] = $item->newClaim( new PropertyNoValueSnak( $property ) );
+		$statements[1] = $item->newClaim( new PropertyNoValueSnak( $property ) );
+		$statements[2] = $item->newClaim( new PropertySomeValueSnak( $property ) );
+		$statements[3] = $item->newClaim( new PropertyValueSnak( $property, new StringValue( 'o_O' ) ) );
+
+		foreach ( $statements as $key => $statement ) {
+			$statement->setGuid( $item->getId()->getPrefixedId() . '$D8404CDA-56A1-4334-AF13-A3290BCD9CL' . $key );
+			$item->addClaim( $statement );
+		}
 	}
 
 	/**
 	 * @return Entity[]
 	 */
-	protected function getNewEntities() {
+	private function getNewEntities() {
 		$property = Property::newFromType( 'string' );
+		$this->save( $property );
+
+		$propertyId = $property->getId();
+
+		$item = Item::newEmpty();
+		$this->addStatements( $item, $propertyId );
+		$this->save( $item );
 
 		return array(
-			$this->addClaimsAndSave( Item::newEmpty() ),
-			$this->addClaimsAndSave( $property ),
+			$property,
+			$item,
 		);
+	}
+
+	/**
+	 * @return PropertyDataTypeLookup
+	 */
+	private function getDataTypeLookup() {
+		$lookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+
+		$lookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		return $lookup;
 	}
 
 	public function validRequestProvider() {
@@ -148,7 +177,8 @@ class GetClaimsTest extends \ApiTestCase {
 		if( !$groupedByProperty ) {
 			$options->setOption( SerializationOptions::OPT_GROUP_BY_PROPERTIES, array() );
 		}
-		$serializerFactory = new SerializerFactory();
+
+		$serializerFactory = new SerializerFactory( null, $this->getDataTypeLookup() );
 		$serializer = $serializerFactory->newSerializerForObject( $claims );
 		$serializer->setOptions( $options );
 		$expected = $serializer->getSerialized( $claims );
@@ -191,7 +221,9 @@ class GetClaimsTest extends \ApiTestCase {
 	public function testGetInvalidIds( $entity, $property ) {
 		if ( !$entity ) {
 			$item = Item::newEmpty();
-			$this->addClaimsAndSave( $item );
+			$this->addStatements( $item, new PropertyId( 'P13' ) );
+
+			$this->save( $item );
 			$entity = $item->getId()->getSerialization();
 		}
 
@@ -215,4 +247,5 @@ class GetClaimsTest extends \ApiTestCase {
 			array( 'whatTheFuck', 'P42' ),
 		);
 	}
+
 }
