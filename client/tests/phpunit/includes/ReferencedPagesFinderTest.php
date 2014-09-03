@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use ArrayIterator;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -26,12 +27,11 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 	 * @dataProvider getPagesProvider
 	 */
 	public function testGetPages( array $expected, array $usage, ItemChange $change, $message ) {
-		$itemUsageIndex = $this->getMockBuilder( '\Wikibase\ItemUsageIndex' )
-							->disableOriginalConstructor()->getMock();
+		$usageLookup = $this->getMock( '\Wikibase\UsageLookup' );
 
-		$itemUsageIndex->expects( $this->any() )
-			->method( 'getEntityUsage' )
-			->will( $this->returnValue( $usage ) );
+		$usageLookup->expects( $this->any() )
+			->method( 'getPagesUsing' )
+			->will( $this->returnValue( new ArrayIterator( $usage ) ) );
 
 		$namespaceChecker = $this->getMockBuilder( '\Wikibase\NamespaceChecker' )
 							->disableOriginalConstructor()->getMock();
@@ -41,7 +41,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( true ) );
 
 		$referencedPagesFinder = new ReferencedPagesFinder(
-			$itemUsageIndex,
+			$usageLookup,
 			$namespaceChecker,
 			'enwiki',
 			false

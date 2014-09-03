@@ -66,7 +66,13 @@
 			"repo/includes/",
 			"repo/maintenance/",
 			"repo/tests/phpunit/",
-			"repo/Wikibase.hooks.php"
+			"repo/Wikibase.hooks.php",
+
+			"subscription/includes/",
+			"subscription/tests/phpunit/",
+
+			"usagetracking/includes/",
+			"usagetracking/tests/phpunit/"
 		],
 		"psr-4": {
 			"Wikibase\\Repo\\View\\": "repo/includes/View"
