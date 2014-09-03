@@ -6,16 +6,12 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use Iterator;
 use Title;
 use UnexpectedValueException;
+use Wikibase\Usage\UsageLookup;
 
 /**
- * Interface for change handling. Whenever a change is detected,
- * it should be fed to this service which then takes care handling
- * it.
- *
- * @since 0.1
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
@@ -23,9 +19,9 @@ use UnexpectedValueException;
 class ReferencedPagesFinder {
 
 	/**
-	 * @var ItemUsageIndex
+	 * @var UsageLookup
 	 */
-	private $itemUsageIndex;
+	private $usageLookup;
 
 	/**
 	 * @var NamespaceChecker
@@ -43,14 +39,14 @@ class ReferencedPagesFinder {
 	private $checkPageExistence;
 
 	/**
-	 * @param ItemUsageIndex $itemUsageIndex
+	 * @param UsageLookup $usageLookup
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param string $siteId
 	 * @param boolean $checkPageExistence
 	 */
-	public function __construct( ItemUsageIndex $itemUsageIndex, NamespaceChecker $namespaceChecker,
+	public function __construct( UsageLookup $usageLookup, NamespaceChecker $namespaceChecker,
 		$siteId, $checkPageExistence = true ) {
-		$this->itemUsageIndex = $itemUsageIndex;
+		$this->usageLookup = $usageLookup;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteId = $siteId;
 		$this->checkPageExistence = $checkPageExistence;
@@ -83,7 +79,8 @@ class ReferencedPagesFinder {
 	private function getReferencedPages( ItemChange $change ) {
 		$itemId = $change->getEntityId();
 
-		$pages = $this->itemUsageIndex->getEntityUsage( array( $itemId ) );
+		// FIXME: filter by aspect!
+		$pages = $this->usageLookup->getPagesUsing( array( $itemId ) );
 
 		$siteLinkDiff = $change->getSiteLinkDiff();
 
@@ -105,13 +102,13 @@ class ReferencedPagesFinder {
 
 	/**
 	 * @param Diff $siteLinkDiff
-	 * @param string[] $pages
+	 * @param Iterator $pages
 	 *
 	 * @return string[]
 	 */
-	private function addSiteLinkDiffPages( Diff $siteLinkDiff, array $pages ) {
+	private function addSiteLinkDiffPages( Diff $siteLinkDiff, $pages ) {
 		return array_merge(
-			$pages,
+			iterator_to_array( $pages ),
 			$this->getPagesReferencedInDiff( $siteLinkDiff )
 		);
 	}

@@ -53,7 +53,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->site->addNavigationId( 'en' );
 
 		$repo = self::getMockRepo();
-		$usageIndex = new ItemUsageIndex( $this->site, $repo );
+		$usageIndex = $this->getMock( 'Wikibase\Usage\UsageLookup' );
 
 		$siteList = $this->getMock( 'SiteList' );
 		$siteList->expects( $this->any() )
