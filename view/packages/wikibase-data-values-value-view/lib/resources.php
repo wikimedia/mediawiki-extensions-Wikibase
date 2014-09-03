@@ -176,6 +176,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.animateWithEvent',
+				'jquery.ui.core',
 				'jquery.ui.widget',
 			),
 		),
