@@ -9,11 +9,15 @@ use ParserOutput;
 use StripState;
 use StubUserLang;
 use Title;
+use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
+use Wikibase\Updates\DataUpdateAdapter;
+use Wikibase\Usage\Tests\ParserOutputUsageAccumulatorTest;
+use Wikibase\Usage\UsageAccumulator;
 
 /**
  * ParserOutput related hook handlers.

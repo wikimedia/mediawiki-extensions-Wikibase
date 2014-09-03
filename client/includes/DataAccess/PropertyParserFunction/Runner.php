@@ -6,6 +6,7 @@ use Parser;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Usage\UsageAccumulator;
 
 /**
  * Runner for the {{#property}} parser function.
@@ -72,6 +73,10 @@ class Runner {
 		$renderer = $this->rendererFactory->newRendererFromParser( $parser );
 		$rendered = $renderer->render( $entityId, $propertyLabelOrId );
 		$result = $this->buildResult( $rendered );
+
+		// Track usage of "all" (that is, arbitrary) data from the item.
+		$usageAcc = new UsageAccumulator( $parser->getOutput() );
+		$usageAcc->addUsage( $entityId, 'all' );
 
 		wfProfileOut( __METHOD__ );
 		return $result;

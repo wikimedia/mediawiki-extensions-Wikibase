@@ -737,5 +737,4 @@ final class WikibaseClient {
 			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
 		);
 	}
-
 }

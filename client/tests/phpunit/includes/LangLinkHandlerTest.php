@@ -13,6 +13,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
+use Wikibase\Usage\UsageAccumulator;
 
 /**
  * @covers Wikibase\LangLinkHandler
@@ -590,8 +591,17 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
 		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
-
 		$this->assertEquals( $itemId->getSerialization(), $property );
+
+		$this->assertUsageTracking( $itemId, 'sitelinks', $parserOutput );
+	}
+
+	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
+		$usageAcc = new UsageAccumulator( $parserOutput );
+		$usage = $usageAcc->getUsages();
+
+		$this->assertArrayHasKey( $aspect, $usage );
+		$this->assertContains( $id, $usage[$aspect], '', false, false );
 	}
 
 	public function testUpdateItemIdPropertyForUnconnectedPage() {

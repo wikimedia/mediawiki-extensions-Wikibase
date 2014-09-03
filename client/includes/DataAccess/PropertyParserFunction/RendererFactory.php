@@ -8,6 +8,7 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Usage\UsageAccumulator;
 
 /**
  * @since 0.5
@@ -53,35 +54,40 @@ class RendererFactory {
 	 * @return Renderer
 	 */
 	public function newRendererFromParser( Parser $parser ) {
+		$usageAccumulator = new UsageAccumulator( $parser->getOutput() );
+
 		if ( $this->useVariants( $parser ) ) {
 			$variants = $parser->getConverterLanguage()->getVariants();
-			return $this->newVariantsAwareRenderer( $variants );
+			return $this->newVariantsAwareRenderer( $variants, $usageAccumulator );
 		} else {
 			$targetLanguage = $parser->getTargetLanguage();
-			return $this->newLanguageAwareRenderer( $targetLanguage );
+			return $this->newLanguageAwareRenderer( $targetLanguage, $usageAccumulator );
 		}
 	}
 
 	/**
 	 * @param Language $language
+	 * @param UsageAccumulator|null $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 */
-	public function newLanguageAwareRenderer( Language $language ) {
+	public function newLanguageAwareRenderer( Language $language, UsageAccumulator $usageAccumulator = null ) {
 		return new LanguageAwareRenderer(
 			$language,
 			$this->snaksFinder,
-			$this->newSnakFormatterForLanguage( $language )
+			$this->newSnakFormatterForLanguage( $language ),
+			$usageAccumulator
 		);
 	}
 
 	/**
 	 * @param string[] $variants
+	 * @param UsageAccumulator|null $usageAccumulator
 	 *
 	 * @return VariantsAwareRenderer
 	 */
-	private function newVariantsAwareRenderer( array $variants ) {
-		return new VariantsAwareRenderer( $this, $variants );
+	private function newVariantsAwareRenderer( array $variants, UsageAccumulator $usageAccumulator = null ) {
+		return new VariantsAwareRenderer( $this, $variants, $usageAccumulator );
 	}
 
 	/**
