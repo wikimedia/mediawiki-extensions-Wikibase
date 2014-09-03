@@ -16,6 +16,24 @@
       "revId": "da450bdaa5eaea80b9193dafa03c491a2e6428d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_712ae7d8",
+        "filename": "repo/includes/api/ResultBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-09-03T14:12:21Z",
+      "side": 0,
+      "message": "The setting is just wrong at this point. It\u0027s the default anyway. This line does not do anything and can be removed. You are right in a way: This patch does not solve all issues. See the depending patch for that.",
+      "parentUuid": "2e2fb78d_31a9ff78",
+      "revId": "da450bdaa5eaea80b9193dafa03c491a2e6428d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
