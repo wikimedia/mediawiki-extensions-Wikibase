@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_2e7abe1f",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-09-03T09:03:51Z",
+      "side": 1,
+      "message": "Enter label -\u003e Enter a label",
+      "revId": "b0353e087b2a39ad5124c142fef16ce5c0c7fce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
