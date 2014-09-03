@@ -40,6 +40,8 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 	public function testGetters( $getter, $expectedType ) {
 		$store = $this->newStore();
 
+		$this->assertTrue( method_exists( $store, $getter ), "Method $getter" );
+
 		$obj = $store->$getter();
 
 		$this->assertInstanceOf( $expectedType, $obj );
@@ -47,13 +49,15 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	public static function provideGetters() {
 		return array(
-			array( 'getItemUsageIndex', 'Wikibase\ItemUsageIndex' ),
 			array( 'getSiteLinkTable', 'Wikibase\Lib\Store\SiteLinkTable' ),
 			array( 'getEntityLookup', 'Wikibase\Lib\Store\EntityLookup' ),
 			array( 'getTermIndex', 'Wikibase\TermIndex' ),
 			array( 'getPropertyLabelResolver', 'Wikibase\PropertyLabelResolver' ),
 			array( 'newChangesTable', 'Wikibase\ChangesTable' ),
 			array( 'getPropertyInfoStore', 'Wikibase\PropertyInfoStore' ),
+			array( 'getUsageTracker', 'Wikibase\Usage\UsageTracker' ),
+			array( 'getUsageLookup', 'Wikibase\Usage\UsageLookup' ),
+			array( 'getSubscriptionManager', 'Wikibase\Subscription\SubscriptionManager' ),
 		);
 	}
 

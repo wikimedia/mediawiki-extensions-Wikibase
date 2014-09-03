@@ -68,6 +68,7 @@ class RendererFactory {
 	 * @return LanguageAwareRenderer
 	 */
 	public function newLanguageAwareRenderer( Language $language ) {
+		// FIXME: inject UsageAccumulator!
 		return new LanguageAwareRenderer(
 			$language,
 			$this->snaksFinder,
@@ -81,6 +82,7 @@ class RendererFactory {
 	 * @return VariantsAwareRenderer
 	 */
 	private function newVariantsAwareRenderer( array $variants ) {
+		// FIXME: inject UsageAccumulator!
 		return new VariantsAwareRenderer( $this, $variants );
 	}
 
