@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e2fb78d_0e3022fb",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-09-03T14:34:31Z",
+      "side": 1,
+      "message": "It\u0027s a bit strange that \"Item\" is uppercase when it\u0027s lowercase in all other messages. Not a big problem, just wondering.",
+      "revId": "b91c8cebfb08cf9179c37e217d95a0c2ba7c7228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_d1c87b27",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-09-03T14:34:31Z",
+      "side": 1,
+      "message": "This is a bit strange. The method talks about an \"item id\" but you can freely pick an unrelated parameter name. But I understand why you did it.",
+      "revId": "b91c8cebfb08cf9179c37e217d95a0c2ba7c7228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_b1cdef36",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-09-03T14:34:31Z",
+      "side": 1,
+      "message": "This thing returns a list from a parameter, right? It doesn\u0027t return a \"string list parameter\", whatever this means.",
+      "revId": "b91c8cebfb08cf9179c37e217d95a0c2ba7c7228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_71d787c5",
+        "filename": "repo/includes/specials/SpecialMergeItems.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2014-09-03T14:34:31Z",
+      "side": 1,
+      "message": "Similar, please try to find a more descriptive name.",
+      "revId": "b91c8cebfb08cf9179c37e217d95a0c2ba7c7228",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_b0917754",
         "filename": "repo/includes/specials/SpecialMergeItems.php",
         "patchSetId": 8
