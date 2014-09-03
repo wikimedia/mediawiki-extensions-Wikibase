@@ -73,7 +73,6 @@ class ResultBuilder {
 		$this->missingEntityCounter = -1;
 
 		$this->options = new SerializationOptions();
-		$this->options->setIndexTags( $this->getResult()->getIsRawMode() );
 		$this->options->setOption( EntitySerializer::OPT_SORT_ORDER, EntitySerializer::SORT_NONE );
 	}
 
@@ -85,13 +84,6 @@ class ResultBuilder {
 	 */
 	public function getOptions() {
 		return $this->options;
-	}
-
-	/**
-	 * @return ApiResult
-	 */
-	private function getResult() {
-		return $this->result;
 	}
 
 	/**
@@ -136,15 +128,15 @@ class ResultBuilder {
 		$this->checkNameIsString( $name );
 		$this->checkTagIsString( $tag );
 
-		if ( $this->options->shouldIndexTags() ) {
+		if ( $this->result->getIsRawMode() ) {
 			$values = array_values( $values );
 		}
 
-		if ( $this->getResult()->getIsRawMode() ) {
-			$this->getResult()->setIndexedTagName( $values, $tag );
+		if ( $this->result->getIsRawMode() ) {
+			$this->result->setIndexedTagName( $values, $tag );
 		}
 
-		$this->getResult()->addValue( $path, $name, $values );
+		$this->result->addValue( $path, $name, $values );
 	}
 
 	/**
@@ -169,7 +161,7 @@ class ResultBuilder {
 		$this->checkNameIsString( $name );
 		$this->checkValueIsNotList( $value );
 
-		$this->getResult()->addValue( $path, $name, $value );
+		$this->result->addValue( $path, $name, $value );
 	}
 
 	/**
@@ -188,7 +180,7 @@ class ResultBuilder {
 	 *
 	 * @param $path array|string|null
 	 * @param $key int|string|null the key to use when appending, or null for automatic.
-	 * May be ignored even if given, based on $this->options->shouldIndexTags().
+	 * May be ignored even if given, based on $this->result->getIsRawMode().
 	 * @param $value mixed
 	 * @param string $tag tag name to use for $value in indexed mode
 	 *
@@ -201,14 +193,14 @@ class ResultBuilder {
 
 		$this->checkValueIsNotList( $value );
 
-		if ( $this->options->shouldIndexTags() ) {
+		if ( $this->result->getIsRawMode() ) {
 			$key = null;
 		}
 
-		$this->getResult()->addValue( $path, $key, $value );
+		$this->result->addValue( $path, $key, $value );
 
-		if ( $this->getResult()->getIsRawMode() && !is_string( $key ) ) {
-			$this->getResult()->setIndexedTagName_internal( $path, $tag );
+		if ( $this->result->getIsRawMode() && !is_string( $key ) ) {
+			$this->result->setIndexedTagName_internal( $path, $tag );
 		}
 	}
 
