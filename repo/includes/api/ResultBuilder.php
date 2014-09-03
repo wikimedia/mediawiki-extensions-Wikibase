@@ -429,6 +429,8 @@ class ResultBuilder {
 	 * @param array|string $path where the data is located
 	 */
 	public function addClaims( array $claims, $path ) {
+		// FIXME: This fixes a bug but obviously doesn't belong here.
+		$this->options->setIndexTags( $this->result->getIsRawMode() );
 		$claimsSerializer = $this->serializerFactory->newClaimsSerializer( $this->options );
 
 		$values = $claimsSerializer->getSerialized( new Claims( $claims ) );
