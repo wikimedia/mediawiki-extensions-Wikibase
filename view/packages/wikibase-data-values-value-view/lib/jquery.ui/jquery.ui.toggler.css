@@ -4,7 +4,7 @@
  * @author Daniel Werner < danweetz@web.de >
  */
 
-.ui-toggler {
+.ui-toggler.ui-state-default {
 	background: none;
 	border: 0;
 	display: block;
