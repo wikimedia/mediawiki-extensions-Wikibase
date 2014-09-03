@@ -32,7 +32,7 @@
 	"wikibase-error-save-connection": "Er is een fout in de verbinding opgetreden tijdens het opslaan. Uw wijzigingen konden niet worden opgeslagen. Controleer uw internetverbinding.",
 	"wikibase-error-remove-connection": "Er is een fout in de verbinding opgetreden tijdens het verwijderen. Uw wijzigingen konden niet worden opgeslagen. Controleer uw internetverbinding.",
 	"wikibase-error-save-timeout": "Wij ondervinden technische problemen. Uw wijzigingen kunnen niet worden opgeslagen.",
-	"wikibase-error-remove-timeout": "ij ondervinden technische problemen. Uw wijzigingen kunnen niet worden opgeslagen.",
+	"wikibase-error-remove-timeout": "Wij ondervinden technische problemen. Uw wijzigingen kunnen niet worden opgeslagen.",
 	"wikibase-error-autocomplete-connection": "Het was niet mogelijk de site-API te bereiken. Probeer het later opnieuw.",
 	"wikibase-error-autocomplete-response": "Antwoord van server: $1",
 	"wikibase-error-ui-client-error": "De verbinding met de externe pagina kon niet gemaakt worden. Probeer het later nog eens.",

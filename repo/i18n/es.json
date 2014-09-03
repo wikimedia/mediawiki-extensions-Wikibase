@@ -276,5 +276,6 @@
 	"content-model-wikibase-property": "Propiedad de Wikibase",
 	"content-model-wikibase-query": "Consulta de Wikibase",
 	"right-item-merge": "Fusionar elementos",
+	"right-item-redirect": "Crear redirecciones de elementos",
 	"right-property-create": "Crear propiedades"
 }
