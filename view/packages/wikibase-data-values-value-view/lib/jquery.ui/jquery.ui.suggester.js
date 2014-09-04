@@ -270,7 +270,10 @@
 
 					case keyCode.ESCAPE:
 						self.element.val( self._term );
-						self._close();
+						if( self.options.menu.element.is( ':visible' ) ) {
+							event.stopPropagation();
+							self._close();
+						}
 						break;
 
 					default:
