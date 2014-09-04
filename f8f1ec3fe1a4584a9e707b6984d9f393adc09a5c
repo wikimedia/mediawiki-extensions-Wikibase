@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_8df88a47",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 458
+      },
+      "writtenOn": "2014-09-04T21:08:16Z",
+      "side": 1,
+      "message": "AFAIS, this now uses the current wiki\u0027s edit token instead of the edit token from the repo, breaking JS that runs on the client wiki like the add links widget.",
+      "revId": "f8f1ec3fe1a4584a9e707b6984d9f393adc09a5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
