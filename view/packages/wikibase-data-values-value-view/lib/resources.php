@@ -156,14 +156,24 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.ui.suggestCommons' => $moduleTemplate + array(
+		'jquery.ui.commonssuggester' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.suggestCommons.js',
+				'jquery.ui/jquery.ui.commonssuggester.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.suggester',
 				'jquery.ui.widget',
 				'jquery.util.highlightMatchingCharacters',
+			),
+		),
+
+		'jquery.ui.languagesuggester' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.languagesuggester.js',
+			),
+			'dependencies' => array(
+				'jquery.ui.suggester',
+				'jquery.ui.widget',
 			),
 		),
 

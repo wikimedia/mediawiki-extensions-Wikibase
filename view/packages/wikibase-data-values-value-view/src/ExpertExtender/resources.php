@@ -59,7 +59,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.event.special.eachchange',
-				'jquery.ui.suggester',
+				'jquery.ui.languagesuggester',
 				'jquery.valueview.ExpertExtender',
 			),
 			'messages' => array(

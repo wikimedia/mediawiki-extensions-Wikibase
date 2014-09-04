@@ -4,7 +4,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
- * @example $( 'input' ).suggestCommons();
+ * @example $( 'input' ).commonssuggester();
  *
  * @dependency jQuery.ui.suggester
  * @dependency jQuery.util.highlightMatchingCharacters
@@ -12,7 +12,7 @@
 ( function( $ ) {
 	'use strict';
 
-	$.widget( 'ui.suggestCommons', $.ui.suggester, {
+	$.widget( 'ui.commonssuggester', $.ui.suggester, {
 
 		/**
 		 * @see ui.suggester._create

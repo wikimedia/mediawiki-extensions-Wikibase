@@ -54,7 +54,7 @@
 		 */
 		init: function( $extender ) {
 			if( this._languagesMap ) {
-				this.$selector.suggester( {
+				this.$selector.languagesuggester( {
 					source: $.map( this._languagesMap, function( language ) {
 						return language;
 					} ),
