@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e2fb78d_d0fe2c35",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-09-04T14:14:53Z",
+      "side": 1,
+      "message": "\"mergeitems\" vs \"itemmerge\" - we should choose one of them.",
+      "revId": "53dc1461635083b5cfd4236a237e2c2d614e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_b0fba043",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-09-04T14:14:53Z",
+      "side": 1,
+      "message": "\"itemmerge\" vs \"mergeitems\" - we should choose one of them.",
+      "revId": "53dc1461635083b5cfd4236a237e2c2d614e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_30f0d061",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-09-04T14:14:53Z",
+      "side": 1,
+      "message": "what\u0027s with the exclamation marks?",
+      "revId": "53dc1461635083b5cfd4236a237e2c2d614e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_50eb5c77",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-09-04T14:14:53Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "53dc1461635083b5cfd4236a237e2c2d614e73a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_b0d4c0bf",
         "filename": "repo/includes/specials/SpecialMergeItems.php",
         "patchSetId": 11
