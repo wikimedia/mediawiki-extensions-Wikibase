@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use OutputPage;
 use Site;
 use SiteStore;
 use Title;
