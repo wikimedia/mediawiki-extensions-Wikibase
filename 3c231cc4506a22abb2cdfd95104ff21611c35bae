@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_50011c70",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2014-09-04T13:40:31Z",
+      "side": 1,
+      "message": "can we please be consistent and stay with \"mergeitems\". It\u0027s a bit confusing to have some messages named \"mergeitems\" and some \"itemmerge\".  Also we are not using exclamation marks for the error messages on other special pages, so I don\u0027t think we need them here.",
+      "revId": "3c231cc4506a22abb2cdfd95104ff21611c35bae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
