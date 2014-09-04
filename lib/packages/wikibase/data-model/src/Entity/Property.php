@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -24,16 +25,23 @@ class Property extends Entity {
 	private $dataTypeId;
 
 	/**
+	 * @var StatementList
+	 */
+	private $statements;
+
+	/**
 	 * @since 1.0
 	 *
 	 * @param PropertyId|null $id
 	 * @param Fingerprint $fingerprint
 	 * @param string $dataTypeId
+	 * @param StatementList|null $statements Since 1.1
 	 */
-	public function __construct( PropertyId $id = null, Fingerprint $fingerprint, $dataTypeId ) {
+	public function __construct( PropertyId $id = null, Fingerprint $fingerprint, $dataTypeId, StatementList $statements = null ) {
 		$this->id = $id;
 		$this->fingerprint = $fingerprint;
 		$this->setDataTypeId( $dataTypeId );
+		$this->statements = $statements === null ? new StatementList() : $statements;
 	}
 
 	/**
@@ -106,7 +114,8 @@ class Property extends Entity {
 		return new self(
 			null,
 			Fingerprint::newEmpty(),
-			$dataTypeId
+			$dataTypeId,
+			new StatementList()
 		);
 	}
 
@@ -139,7 +148,8 @@ class Property extends Entity {
 	private function fieldsEqual( Property $that ) {
 		return ( $this->id === null && $that->id === null || $this->id->equals( $that->id ) )
 			&& $this->fingerprint->equals( $that->fingerprint )
-			&& $this->dataTypeId == $that->dataTypeId;
+			&& $this->dataTypeId == $that->dataTypeId
+			&& $this->statements->equals( $that->statements );
 	}
 
 	/**
@@ -151,7 +161,7 @@ class Property extends Entity {
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		return $this->fingerprint->isEmpty();
+		return $this->fingerprint->isEmpty() && $this->statements->isEmpty();
 	}
 
 	/**
@@ -171,6 +181,24 @@ class Property extends Entity {
 	 */
 	public static function newEmpty() {
 		return self::newFromType( '' );
+	}
+
+	/**
+	 * @since 1.1
+	 *
+	 * @return StatementList
+	 */
+	public function getStatements() {
+		return $this->statements;
+	}
+
+	/**
+	 * @since 1.1
+	 *
+	 * @param StatementList $statements
+	 */
+	public function setStatements( StatementList $statements ) {
+		$this->statements = $statements;
 	}
 
 }
