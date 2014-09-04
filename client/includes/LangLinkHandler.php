@@ -6,11 +6,13 @@ use ParserOutput;
 use Site;
 use SiteStore;
 use Title;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
- * Handles language links.
+ * @todo split this up and find a better home for stuff that adds
+ * parser output properties and extension data.
  *
  * @since 0.1
  *
@@ -20,6 +22,11 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Katie Filbert
  */
 class LangLinkHandler {
+
+	/**
+	 * @var OtherProjectsSidebarGenerator
+	 */
+	private $otherProjectsSidebarGenerator;
 
 	/**
 	 * @var string
@@ -47,8 +54,12 @@ class LangLinkHandler {
 	private $siteGroup;
 
 	/**
-	 * Constructs a new LangLinkHandler using the given service instances.
-	 *
+	 * @var ItemId
+	 */
+	private $itemId;
+
+	/**
+	 * @param OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
 	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
@@ -56,12 +67,14 @@ class LangLinkHandler {
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
 	public function __construct(
+		OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator,
 		$siteId,
 		NamespaceChecker $namespaceChecker,
 		SiteLinkLookup $siteLinkLookup,
 		SiteStore $sites,
 		$siteGroup
 	) {
+		$this->otherProjectsSidebarGenerator = $otherProjectsSidebarGenerator;
 		$this->siteId = $siteId;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -85,8 +98,7 @@ class LangLinkHandler {
 
 		$links = array();
 
-		$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
-		$itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+		$itemId = $this->getItemIdForTitle( $title );
 
 		if ( $itemId !== null ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": Item ID for " . $title->getFullText()
@@ -433,13 +445,44 @@ class LangLinkHandler {
 	public function updateItemIdProperty( Title $title, ParserOutput $out ) {
 		wfProfileIn( __METHOD__ );
 
-		$entityIdPropertyUpdater = new EntityIdPropertyUpdater(
-			$this->siteLinkLookup,
-			$this->siteId
-		);
+		$itemId = $this->getItemIdForTitle( $title );
 
-		$entityIdPropertyUpdater->updateItemIdProperty( $out, $title );
+		if ( $itemId ) {
+			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
+		} else {
+			$out->unsetProperty( 'wikibase_item' );
+		}
 
 		wfProfileOut( __METHOD__ );
 	}
+
+	/**
+	 * @param Title $title
+	 * @param ParserOutput $out
+	 */
+	public function updateOtherProjectsLinksData( Title $title, ParserOutput $out ) {
+		$itemId = $this->getItemIdForTitle( $title );
+
+		if ( $itemId ) {
+			$otherProjects = $this->otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
+		} else {
+			$out->setExtensionData( 'wikibase-otherprojects-sidebar', array() );
+		}
+	}
+
+	/**
+	 * @param Title $title
+	 *
+	 * @return ItemId|null
+	 */
+	private function getItemIdForTitle( Title $title ) {
+		if ( !isset( $this->itemId ) ) {
+			$siteLink = new SiteLink( $this->siteId, $title->getFullText() );
+			$this->itemId = $this->siteLinkLookup->getEntityIdForSiteLink( $siteLink );
+		}
+
+		return $this->itemId;
+	}
+
 }
