@@ -346,7 +346,9 @@ final class ClientHooks {
 			return true;
 		}
 
-		if ( !self::isWikibaseEnabled( $parser->getTitle()->getNamespace() ) ) {
+		$title = $parser->getTitle();
+
+		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return true;
 		}
@@ -355,8 +357,6 @@ final class ClientHooks {
 
 		// @todo split up the multiple responsibilities here and in lang link handler
 
-		$parserOutput = $parser->getOutput();
-
 		// only run this once, for the article content and not interface stuff
 		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
 		if ( $parser->getOptions()->getInterfaceMessage() ) {
@@ -364,32 +364,26 @@ final class ClientHooks {
 			return true;
 		}
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+		$langLinkHandler = WikibaseClient::getDefaultInstance()->getLangLinkHandler();
 
-		$langLinkHandler = new LangLinkHandler(
-			$settings->getSetting( 'siteGlobalID' ),
-			$wikibaseClient->getNamespaceChecker(),
-			$wikibaseClient->getStore()->getSiteLinkTable(),
-			$wikibaseClient->getSiteStore(),
-			$wikibaseClient->getLangLinkSiteGroup()
-		);
-
-		$useRepoLinks = $langLinkHandler->useRepoLinks( $parser->getTitle(), $parser->getOutput() );
+		$parserOutput = $parser->getOutput();
+		$useRepoLinks = $langLinkHandler->useRepoLinks( $title, $parserOutput );
 
 		try {
 			if ( $useRepoLinks ) {
 				// add links
-				$langLinkHandler->addLinksFromRepository( $parser->getTitle(), $parser->getOutput() );
+				$langLinkHandler->addLinksFromRepository( $title, $parserOutput );
 			}
 
-			$langLinkHandler->updateItemIdProperty( $parser->getTitle(), $parser->getOutput() );
+			$langLinkHandler->updateItemIdProperty( $title, $parserOutput );
+			$langLinkHandler->updateOtherProjectsLinksData( $title, $parserOutput );
 		} catch ( \Exception $e ) {
 			wfWarn( 'Failed to add repo links: ' . $e->getMessage() );
 		}
 
 		if ( $useRepoLinks || $settings->getSetting( 'alwaysSort' ) ) {
-			// sort links
+			$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
 			$interwikiSorter = new InterwikiSorter(
 				$settings->getSetting( 'sort' ),
 				$settings->getSetting( 'interwikiSortOrders' ),
@@ -551,6 +545,12 @@ final class ClientHooks {
 			$out->setProperty( 'wikibase_item', $itemId );
 		}
 
+		$otherProjects = $pout->getExtensionData( 'wikibase-otherprojects-sidebar' );
+
+		if ( $otherProjects !== null ) {
+			$out->setProperty( 'wikibase-otherprojects-sidebar', $otherProjects );
+		}
+
 		return true;
 	}
 
@@ -630,9 +630,14 @@ final class ClientHooks {
 				BetaFeatures::isFeatureEnabled( $skin->getUser(), 'wikibase-otherprojects' );
 
 		if ( $settings->getSetting( 'otherProjectsLinksByDefault' ) || $betaFeatureEnabled ) {
-			$otherProjectsSidebarGenerator = $wikibaseClient->getOtherProjectsSidebarGenerator();
-			$title = $skin->getContext()->getTitle();
-			$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+			$outputPage = $skin->getContext()->getOutput();
+			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
+
+			// in case of stuff in cache without the other projects
+			if ( !$otherProjectsSidebar ) {
+				$outputPage->getTitle()->invalidateCache();
+				return true;
+			}
 
 			if ( count( $otherProjectsSidebar ) !== 0 ) {
 				$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
