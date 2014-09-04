@@ -473,6 +473,12 @@ class EditEntity {
 		$latestRev = $this->getLatestRevision();
 		$newEntity = $this->getNewEntity();
 
+		if ( !$latestRev ) {
+			wfLogWarning( 'Failed to load latest revision of entity ' . $this->getEntityId() . '! '
+				. 'This may indicate entries missing from thw wb_entities_per_page table.' );
+			return false;
+		}
+
 		// calculate patch against base revision
 		// NOTE: will fail if $baseRev or $base are null, which they may be if
 		// this gets called at an inappropriate time. The data flow in this class
