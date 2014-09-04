@@ -109,6 +109,7 @@ Other methods an Expert needs to provide:
 
 #### Breaking changes
 * Use version 0.6.0 of DataValuesJavascript
+* Renamed jQuery.ui.suggestCommons to jQuery.ui.commonssuggester.
 
 #### Bugfixes
 * Fixed eachchange event: Cancel event after it got removed.

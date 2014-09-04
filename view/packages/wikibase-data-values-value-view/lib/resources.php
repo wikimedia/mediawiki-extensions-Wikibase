@@ -156,9 +156,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.ui.suggestCommons' => $moduleTemplate + array(
+		'jquery.ui.commonssuggester' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.suggestCommons.js',
+				'jquery.ui/jquery.ui.commonssuggester.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.suggester',
