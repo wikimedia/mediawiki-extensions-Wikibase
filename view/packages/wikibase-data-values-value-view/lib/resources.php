@@ -167,9 +167,9 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.ui.suggestLanguage' => $moduleTemplate + array(
+		'jquery.ui.languagesuggester' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.suggestLanguage.js',
+				'jquery.ui/jquery.ui.languagesuggester.js',
 			),
 			'dependencies' => array(
 				'jquery.ui.suggester',

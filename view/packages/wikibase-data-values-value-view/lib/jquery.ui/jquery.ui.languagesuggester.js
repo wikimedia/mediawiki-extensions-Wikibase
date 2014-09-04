@@ -5,7 +5,7 @@
 ( function( $ ) {
 	'use strict';
 
-$.widget( 'ui.suggestLanguage', $.ui.suggester, {
+$.widget( 'ui.languagesuggester', $.ui.suggester, {
 	/**
 	 * @see $.ui.suggester._getSuggestionsFromArray
 	 */
@@ -24,11 +24,11 @@ $.widget( 'ui.suggestLanguage', $.ui.suggester, {
 		deferred.resolve( $.grep( source, function( item ) {
 			return matcher.test( item );
 		} ).sort( function( a, b ) {
-			for ( var i = 0; i < promoters.length; i++ ) {
+			for( var i = 0; i < promoters.length; i++ ) {
 				var promoterA = promoters[i].test( a ),
 					promoterB = promoters[i].test( b );
 
-				if ( promoterA !== promoterB ) {
+				if( promoterA !== promoterB ) {
 					return promoterB - promoterA;
 				}
 			}
@@ -39,6 +39,11 @@ $.widget( 'ui.suggestLanguage', $.ui.suggester, {
 		return deferred.promise();
 	},
 
+	/**
+	 * @param {string} a
+	 * @param {string} b
+	 * @return {boolean}
+	 */
 	_localeCompare: function( a, b ) {
 		return a.localeCompare
 			? a.localeCompare( b )
