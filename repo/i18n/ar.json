@@ -10,7 +10,8 @@
 			"Meno25",
 			"OsamaK",
 			"Tarawneh",
-			"زكريا"
+			"زكريا",
+			"محمد أحمد عبد الفتاح"
 		]
 	},
 	"specialpages-group-wikibaserepo": "مستودع قاعدة ويكي",
@@ -41,7 +42,6 @@
 	"wikibase-restore-title": "استعادة نسخة قديمة من \"$1\"",
 	"wikibase-partial-undo": "يمكن التراجع عن هذا التعديل جزئياً.",
 	"wikibase-undo-revision-error": "فشل عملية الرجوع",
-	"wikibase-propertyedittool-full": "قائمة القيم اكتملت",
 	"wikibase-aliases-label": "تعرف أيضا باسم:",
 	"wikibase-aliases-empty": "لم يتم تعريف أي كنية.",
 	"wikibase-propertypage-datatype": "نوع البيانات",
@@ -49,8 +49,8 @@
 	"wikibase-snakview-property-input-placeholder": "خاصية",
 	"wikibase-snakview-variations-somevalue-label": "قيمة مجهولة",
 	"wikibase-snakview-variations-novalue-label": "لا قيمة",
-	"wikibase-snakview-snaktypeselector-novalue": "لا قيمة",
 	"wikibase-entityselector-more": "المزيد",
+	"special-itembytitle": "العناصر حسب العنوان",
 	"wikibase-itembytitle-lookup-site": "الموقع:",
 	"wikibase-itembytitle-submit": "بحث",
 	"special-itemdisambiguation": "توضيح العنصر",

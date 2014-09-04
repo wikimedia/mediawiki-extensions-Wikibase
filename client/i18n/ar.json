@@ -9,7 +9,8 @@
 			"OsamaK",
 			"Peadara",
 			"Tarawneh",
-			"زكريا"
+			"زكريا",
+			"محمد أحمد عبد الفتاح"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
@@ -52,8 +53,11 @@
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
 	"wikibase-watchlist-show-changes-pref": "إظهار تعديلات {{WBREPONAME}} في قائمة مراقبتك",
+	"special-unconnectedpages": "صفحات غير متصلة بعناصر",
+	"wikibase-unconnectedpages-legend": "خيارات الصفحات غير المتصلة",
 	"wikibase-unconnectedpages-page": "بدء قائمة النتائج بالصفحة:",
 	"wikibase-unconnectedpages-submit": "اذهب",
+	"wikibase-unconnectedpages-invalid-language": "\"$1\" ليس رمز لغة صالح.",
 	"wikibase-unconnectedpages-page-warning": "لا يمكن استخدام عنوان الصفحة في عملية البحث وسيتم تجاهله.",
 	"wikibase-unconnectedpages-iwdata-label": "الصفحات التي تحتوي على وصلات بلغات أخرى فقط",
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
