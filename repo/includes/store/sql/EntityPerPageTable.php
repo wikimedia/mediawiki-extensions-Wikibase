@@ -2,10 +2,13 @@
 
 namespace Wikibase;
 
+use DatabaseBase;
+use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -86,8 +89,6 @@ class EntityPerPageTable implements EntityPerPage {
 			throw new InvalidArgumentException( '$pageId must be greater than 0' );
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
-
 		$redirectTarget = $targetId ? $targetId->getSerialization() : null;
 
 		$values = array(
@@ -100,26 +101,45 @@ class EntityPerPageTable implements EntityPerPage {
 			$values['epp_redirect_target'] = $redirectTarget;
 		}
 
-		$this->deleteConflictingRows( $values );
-
-		$dbw->insert(
-			'wb_entity_per_page',
-			$values,
-			__METHOD__
-		);
+		$this->addRow_internal( $values );
 	}
 
-	private function deleteConflictingRows( array $values  ) {
-		$dbw = wfGetDB( DB_MASTER );
-		$conds = $this->getConflictingRowConditions( $values );
+	/**
+	 * @param array $values
+	 *
+	 * @throws DBError
+	 */
+	private function addRow_internal( array $values ) {
+		$conflictConds = $this->getConflictingRowConditions( $values );
 
-		$count = $dbw->delete(
-			'wb_entity_per_page',
-			$conds,
-			__METHOD__
+		$dbw = wfGetDB( DB_MASTER );
+
+		$thisTable = $this;
+		$ok = $dbw->deadlockLoop(
+			function ( DatabaseBase $dbw, array $values, array $conflictConds ) use ( $thisTable ) {
+				if ( $conflictConds ) {
+					$where = $dbw->makeList( $conflictConds, LIST_OR );
+					$dbw->delete(
+						'wb_entity_per_page',
+						$where,
+						__METHOD__
+					);
+				}
+
+				$dbw->insert(
+					'wb_entity_per_page',
+					$values,
+					__METHOD__
+				);
+
+				return true;
+			},
+			$dbw, $values, $conflictConds
 		);
 
-		return $count;
+		if ( !$ok ) {
+			throw new DBError( $dbw, 'Failed to insert a row into wb_entity_per_page, the deadlock retry limit was exceeded.' );
+		}
 	}
 
 	private function getConflictingRowConditions( array $values ) {
@@ -133,7 +153,7 @@ class EntityPerPageTable implements EntityPerPage {
 			$conditions[] = $dbw->makeList( $indexValues, LIST_AND );
 		}
 
-		return $dbw->makeList( $conditions, LIST_OR );
+		return $conditions;
 	}
 
 	/**
