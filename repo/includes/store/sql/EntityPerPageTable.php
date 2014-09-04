@@ -2,10 +2,13 @@
 
 namespace Wikibase;
 
+use DatabaseBase;
+use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
@@ -100,26 +103,49 @@ class EntityPerPageTable implements EntityPerPage {
 			$values['epp_redirect_target'] = $redirectTarget;
 		}
 
-		$this->deleteConflictingRows( $values );
+		$conflictConds = $this->getConflictingRowConditions( $values );
+
+		// NOTE: deadlockLoop can't directly call a private function, so wrap the call in a closure.
+		$thisTable = $this;
+		$ok = $dbw->deadlockLoop(
+			function ( DatabaseBase $dbw, array $values, array $deletionConds ) use ( $thisTable ) {
+				$thisTable->addRow_internal( $dbw, $values, $deletionConds );
+				return true;
+			},
+			$dbw, $values, $conflictConds
+		);
+
+		if ( !$ok ) {
+			throw new DBError( $dbw, 'Failed to insert a row into wb_entity_per_page, the deadlock retry limit was exceeded.' );
+		}
+	}
+
+	/**
+	 * Inserts a row with the given values. Rows matching $conflictConds will be deleted first.
+	 *
+	 * @param DatabaseBase $dbw
+	 * @param array $values
+	 * @param array $conflictConds
+	 *
+	 * @return bool true
+	 */
+	private function addRow_internal( DatabaseBase $dbw, array $values, array $conflictConds = null ) {
+		if ( $conflictConds ) {
+			$where = $dbw->makeList( $conflictConds, LIST_OR );
+			$dbw->delete(
+				'wb_entity_per_page',
+				$where,
+				__METHOD__
+			);
+		}
 
 		$dbw->insert(
 			'wb_entity_per_page',
 			$values,
 			__METHOD__
 		);
-	}
 
-	private function deleteConflictingRows( array $values  ) {
-		$dbw = wfGetDB( DB_MASTER );
-		$conds = $this->getConflictingRowConditions( $values );
-
-		$count = $dbw->delete(
-			'wb_entity_per_page',
-			$conds,
-			__METHOD__
-		);
-
-		return $count;
+		return true;
 	}
 
 	private function getConflictingRowConditions( array $values ) {
@@ -133,7 +159,7 @@ class EntityPerPageTable implements EntityPerPage {
 			$conditions[] = $dbw->makeList( $indexValues, LIST_AND );
 		}
 
-		return $dbw->makeList( $conditions, LIST_OR );
+		return $conditions;
 	}
 
 	/**
