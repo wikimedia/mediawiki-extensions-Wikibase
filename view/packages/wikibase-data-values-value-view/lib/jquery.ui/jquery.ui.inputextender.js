@@ -131,7 +131,7 @@
 
 		/**
 		 * Caches the timeout when the actual input extender animation should kick in.
-		 * @type {Object}
+		 * @type {number}
 		 */
 		_animationTimeout: null,
 
@@ -162,6 +162,10 @@
 				}
 			} )
 			.on( 'blur.' + this.widgetName, function( event ) {
+				if( self.__extensionFocused ) {
+					delete self.__extensionFocused;
+					return;
+				}
 				clearTimeout( self._animationTimeout );
 				self._animationTimeout = setTimeout( function() {
 					self.hideExtension();
@@ -199,7 +203,7 @@
 			$( 'html' )
 			.off( '.' + this.widgetName )
 			// Blurring by clicking away from the widget (one handler is sufficient):
-			.on( 'click.' + this.widgetName, function( event ) {
+			.on( 'mouseup.' + this.widgetName, function( event ) {
 				// Loop through all widgets and hide content when having clicked out of it:
 				$( ':' + self.widgetBaseClass ).each( function( i, widgetNode ) {
 					var widget = $( widgetNode ).data( self.widgetName ),
@@ -450,8 +454,9 @@
 
 			$extension
 			.append( $closeButton )
-			.on( 'click.' + this.widgetName, function( event ) {
+			.on( 'mousedown.' + this.widgetName, function( event ) {
 				if( !$( event.target ).closest( $closeButton ).length ) {
+					self.__extensionFocused = true;
 					clearTimeout( self._animationTimeout );
 					self.showExtension();
 				}
