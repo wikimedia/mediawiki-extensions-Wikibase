@@ -107,6 +107,9 @@ Other methods an Expert needs to provide:
 
 ### 0.7.0 (dev)
 
+### Enhancements
+* Implemented jQuery.ui.languagesuggester.
+
 #### Breaking changes
 * Use version 0.6.0 of DataValuesJavascript
 * Renamed jQuery.ui.suggestCommons to jQuery.ui.commonssuggester.
