@@ -3,15 +3,12 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
-use Language;
 use LogicException;
 use MWException;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -198,20 +195,12 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see getEntityView()
+	 * @see getEntityViewClass
 	 *
-	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
-	 * @param Language $language
-	 *
-	 * @return ItemView
+	 * @return string
 	 */
-	protected function newEntityView(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	) {
-		return new ItemView( $fingerprintView, $claimsView, $language );
+	protected function getEntityViewClass() {
+		return 'Wikibase\ItemView';
 	}
 
 	/**
