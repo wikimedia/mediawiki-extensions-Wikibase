@@ -5,6 +5,7 @@
 			"Chelin"
 		]
 	},
+	"wikibase-error-unexpected": "All'intrasatta s'è verificato n'errore: $1",
 	"wikibase-timedetails-time": "Tiempo",
 	"wikibase-timedetails-isotime": "Ora e data ISO",
 	"wikibase-timedetails-timezone": "Fuso orario",

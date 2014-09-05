@@ -27,7 +27,7 @@
 	"wikibase-diffview-alias": "Aliasse",
 	"wikibase-diffview-description": "Beschreibung",
 	"wikibase-diffview-link": "Links",
-	"wikibase-error-unexpected": "Es ist ein unerwarteter Fehler aufgetreten: $1",
+	"wikibase-error-unexpected": "Fehler: $1.",
 	"wikibase-error-save-generic": "Beim Speichern ist ein Fehler aufgetreten. Die Änderungen konnten daher nicht vollständig durchgeführt werden.",
 	"wikibase-error-remove-generic": "Beim Versuch zu entfernen, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.",
 	"wikibase-error-save-connection": "Beim Versuch zu speichern ist ein Verbindungsfehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden. Die Internetverbindung sollte überprüft werden.",

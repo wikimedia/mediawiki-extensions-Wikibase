@@ -24,7 +24,7 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "beskrivning",
 	"wikibase-diffview-link": "länkar",
-	"wikibase-error-unexpected": "Ett oväntat fel uppstod: $1",
+	"wikibase-error-unexpected": "Fel: $1.",
 	"wikibase-error-save-generic": "Ett fel uppstod under sparandet. Dina ändringar kunde inte genomföras.",
 	"wikibase-error-remove-generic": "Ett fel uppstod vid borttagningsförsöket. Dina ändringar kunde inte genomföras.",
 	"wikibase-error-save-connection": "Ett anslutningsfel uppstod under sparandet. Dina ändringar kunde inte genomföras. Kontrollera din internetanslutning.",

@@ -27,7 +27,7 @@
 	"wikibase-diffview-alias": "aliasy",
 	"wikibase-diffview-description": "popis",
 	"wikibase-diffview-link": "odkazy",
-	"wikibase-error-unexpected": "Došlo k neočekávané chybě: $1",
+	"wikibase-error-unexpected": "Chyba: $1.",
 	"wikibase-error-save-generic": "Při ukládání došlo k chybě. Vaše změny se nepodařilo dokončit.",
 	"wikibase-error-remove-generic": "Při pokusu o odstranění došlo k chybě. Vaše změny se nepodařilo dokončit.",
 	"wikibase-error-save-connection": "Při ukládání došlo k chybě spojení. Vaše změny se nepodařilo dokončit. Prosím zkontrolujte své připojení k Internetu.",
