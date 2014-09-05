@@ -8,6 +8,7 @@ use HttpStatus;
 use OutputPage;
 use RequestContext;
 use SpecialPage;
+use User;
 use WebRequest;
 
 /**
@@ -55,12 +56,19 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 	 * @param string $sub The subpage parameter to call the page with
 	 * @param WebRequest|null $request Web request that may contain URL parameters, etc
 	 * @param string|null $language The language code which should be used in the context of this special page
+	 * @param User|null $user The user which should be used in the context of this special page
 	 *
-	 * @throws Exception|null
+	 * @throws \Exception
+	 * @throws null
 	 * @return array array( String, \WebResponse ) containing the output generated
 	 *         by the special page.
 	 */
-	protected function executeSpecialPage( $sub = '', WebRequest $request = null, $language = null ) {
+	protected function executeSpecialPage(
+		$sub = '',
+		WebRequest $request = null,
+		$language = null,
+		User $user = null
+	) {
 		if ( $request === null ) {
 			$request = new \FauxRequest();
 		}
@@ -69,8 +77,13 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
+
 		if ( $language !== null ) {
 			$context->setLanguage( $language );
+		}
+
+		if ( $user !== null ) {
+			$context->setUser( $user );
 		}
 
 		$out = new OutputPage( $context );

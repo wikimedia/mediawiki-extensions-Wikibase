@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Interactors;
 use InvalidArgumentException;
 use User;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
@@ -142,6 +143,9 @@ class ItemMergeInteractor {
 
 		$this->validateEntities( $fromEntity, $toEntity );
 
+		// strip any bad values from $ignoreConflicts
+		$ignoreConflicts = array_intersect( $ignoreConflicts, ChangeOpsMerge::$conflictTypes );
+
 		try{
 			$changeOps = $this->changeOpFactory->newMergeOps(
 				$fromEntity,
@@ -150,9 +154,6 @@ class ItemMergeInteractor {
 			);
 
 			$changeOps->apply();
-		}
-		catch( InvalidArgumentException $e ) {
-			throw new ItemMergeException( $e->getMessage(), 'param-invalid', $e );
 		}
 		catch( ChangeOpException $e ) {
 			throw new ItemMergeException( $e->getMessage(), 'failed-modify', $e );
@@ -184,7 +185,7 @@ class ItemMergeInteractor {
 		}
 
 		if( $toEntity->getId()->equals( $fromEntity->getId() ) ){
-			throw new ItemMergeException( 'You must provide unique ids' , 'param-invalid' );
+			throw new ItemMergeException( 'You must provide unique ids' , 'cant-merge-self' );
 		}
 	}
 
@@ -239,7 +240,7 @@ class ItemMergeInteractor {
 				EDIT_UPDATE
 			);
 		} catch ( StorageException $ex ) {
-			throw new ItemMergeException( $ex->getMessage(), 'cant-redirect', $ex );
+			throw new ItemMergeException( $ex->getMessage(), 'failed-save', $ex );
 		}
 	}
 }
