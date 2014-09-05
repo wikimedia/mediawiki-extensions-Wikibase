@@ -144,6 +144,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.sitelinkgrouplistview.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.sitelinkgrouplistview.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.sitelinkgrouplistview',
+				'wikibase.datamodel',
+				'wikibase.tests.qunit.testrunner',
+			),
+		),
+
 		'jquery.wikibase.sitelinkgroupview.tests' => $moduleBase + array(
 			'scripts' => array(
 				'jquery.wikibase.sitelinkgroupview.tests.js',

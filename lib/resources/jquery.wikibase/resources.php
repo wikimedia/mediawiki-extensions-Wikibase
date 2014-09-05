@@ -158,6 +158,7 @@ return call_user_func( function() {
 				'jquery.wikibase.fingerprintgroupview',
 				'jquery.wikibase.labelview',
 				'jquery.wikibase.toolbarcontroller',
+				'jquery.wikibase.sitelinkgrouplistview',
 				'jquery.wikibase.statementview',
 				'wikibase',
 				'wikibase.templates',
@@ -276,6 +277,20 @@ return call_user_func( function() {
 				'jquery.wikibase.snaklistview',
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase.datamodel',
+			),
+		),
+
+		'jquery.wikibase.sitelinkgrouplistview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.sitelinkgrouplistview.js'
+			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.sitelinkgrouplistview.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.listview',
+				'jquery.wikibase.sitelinkgroupview',
 			),
 		),
 
