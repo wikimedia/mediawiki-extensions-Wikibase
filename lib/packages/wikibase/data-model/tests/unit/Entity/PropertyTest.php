@@ -4,6 +4,8 @@ namespace Wikibase\Test\Entity;
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @covers Wikibase\DataModel\Entity\Property
@@ -98,6 +100,46 @@ class PropertyTest extends EntityTest {
 
 		$this->assertEquals( new PropertyId( 'P42' ), $property->getId() );
 		$this->assertTrue( $property->getFingerprint()->isEmpty() );
+	}
+
+	public function testGetStatementsReturnsEmptyListForEmptyProperty() {
+		$property = Property::newFromType( 'string' );
+
+		$this->assertEquals( new StatementList(), $property->getStatements() );
+	}
+
+	public function testSetAndGetStatements() {
+		$property = Property::newFromType( 'string' );
+
+		$statementList = $this->newNonEmptyStatementList();
+		$property->setStatements( $statementList );
+
+		$this->assertEquals( $statementList, $property->getStatements() );
+	}
+
+	private function newNonEmptyStatementList() {
+		$statementList = new StatementList();
+		$statementList->addNewStatement( new PropertyNoValueSnak( 42 ) );
+		$statementList->addNewStatement( new PropertyNoValueSnak( 1337 ) );
+
+		return $statementList;
+	}
+
+	public function testPropertiesWithDifferentStatementsAreNotEqual() {
+		$firstProperty = Property::newFromType( 'string' );
+		$secondProperty = Property::newFromType( 'string' );
+
+		$secondProperty->setStatements( $this->newNonEmptyStatementList() );
+
+		$this->assertFalse( $firstProperty->equals( $secondProperty ) );
+		$this->assertFalse( $secondProperty->equals( $firstProperty ) );
+	}
+
+	public function testPropertyWithStatementsIsNotEmpty() {
+		$property = Property::newFromType( 'string' );
+		$property->setStatements( $this->newNonEmptyStatementList() );
+
+		$this->assertFalse( $property->isEmpty() );
 	}
 
 }

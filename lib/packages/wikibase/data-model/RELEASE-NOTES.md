@@ -1,5 +1,12 @@
 # Wikibase DataModel release notes
 
+## Version 1.1 (dev)
+
+#### Additions
+
+* The `Property` constructor now accepts an optional `StatementList` parameter
+* Added `Property::getStatements` and `Property::setStatements`
+
 ## Version 1.0 (2014-09-02)
 
 #### Breaking changes
