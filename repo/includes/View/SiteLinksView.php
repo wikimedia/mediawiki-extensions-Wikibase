@@ -10,8 +10,8 @@ use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
 /**
@@ -55,19 +55,20 @@ class SiteLinksView {
 	 */
 	private $badgeItems;
 
-	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator,
-			EntityLookup $entityLookup, $languageCode ) {
+	public function __construct(
+		SiteList $sites,
+		SectionEditLinkGenerator $sectionEditLinkGenerator,
+		EntityLookup $entityLookup,
+		$specialSiteLinkGroups,
+		$badgeItems,
+		$languageCode
+	) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->entityLookup = $entityLookup;
 		$this->languageCode = $languageCode;
-
-		// @todo inject option/objects instead of using the singleton
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$settings = $repo->getSettings();
-		$this->specialSiteLinkGroups = $settings->getSetting( 'specialSiteLinkGroups' );
-		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
+		$this->badgeItems = $badgeItems;
 	}
 
 	/**
@@ -75,7 +76,7 @@ class SiteLinksView {
 	 *
 	 * @since 0.5
 	 *
-	 * @param SiteLink[] $siteLinks the site links to render
+	 * @param SiteLinkList $siteLinks the site links to render
 	 * @param ItemId|null $itemId The id of the item or might be null, if a new item.
 	 * @param string[] $groups An array of site group IDs
 	 * @param bool $editable whether editing is allowed (enabled edit links)
@@ -83,11 +84,7 @@ class SiteLinksView {
 	 * @return string
 	 * @throws InvalidArgumentException
 	 */
-	public function getHtml( array $siteLinks, $itemId, array $groups, $editable ) {
-		if ( $itemId !== null && !( $itemId instanceof ItemId ) ) {
-			throw new InvalidArgumentException( '$itemId must be an ItemId or null.' );
-		}
-
+	public function getHtml( SiteLinkList $siteLinks, ItemId $itemId = null, array $groups, $editable ) {
 		$html = '';
 
 		if ( count( $groups ) === 0 ) {
@@ -106,14 +103,14 @@ class SiteLinksView {
 	/**
 	 * Builds and returns the HTML representing a group of a WikibaseEntity's site-links.
 	 *
-	 * @param SiteLink[] $siteLinks the site links to render
+	 * @param SiteLinkList $siteLinks the site links to render
 	 * @param ItemId|null $itemId The id of the item
 	 * @param string $group a site group ID
 	 * @param bool $editable
 	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLinkGroup( array $siteLinks, $itemId, $group, $editable ) {
+	private function getHtmlForSiteLinkGroup( SiteLinkList $siteLinks, $itemId, $group, $editable ) {
 		$isSpecialGroup = $group === 'special';
 
 		$sites = $this->getSitesForGroup( $group );
@@ -182,14 +179,14 @@ class SiteLinksView {
 
 	/**
 	 * @param SiteList $sites
-	 * @param SiteLink[] $itemSiteLinks
+	 * @param SiteLinkList $siteLinks
 	 *
 	 * @return array[]
 	 */
-	private function getSiteLinksForTable( SiteList $sites, array $itemSiteLinks ) {
+	private function getSiteLinksForTable( SiteList $sites, SiteLinkList $siteLinks ) {
 		$siteLinksForTable = array(); // site links of the currently handled site group
 
-		foreach ( $itemSiteLinks as $siteLink ) {
+		foreach ( $siteLinks as $siteLink ) {
 			if ( !$sites->hasSite( $siteLink->getSiteId() ) ) {
 				// FIXME: Maybe show it instead
 				continue;

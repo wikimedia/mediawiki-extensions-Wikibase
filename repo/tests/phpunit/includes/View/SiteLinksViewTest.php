@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\View\SiteLinksView;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\View\SiteLinksView
@@ -25,39 +25,13 @@ use Wikibase\Repo\View\SiteLinksView;
  */
 class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
-	private $settings = array(
-		'specialSiteLinkGroups' => array( 'special group' ),
-		'badgeItems' => array(
-			'Q42' => 'wb-badge-featuredarticle',
-			'Q12' => 'wb-badge-goodarticle'
-		)
-	);
-
-	public function setUp() {
-		parent::setUp();
-		$this->switchSettings();
-	}
-
-	public function tearDown() {
-		parent::tearDown();
-		$this->switchSettings();
-	}
-
-	private function switchSettings() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		foreach ( $this->settings as $name => $value ) {
-			$this->settings[$name] = $settings->getSetting( $name );
-			$settings->setSetting( $name, $value );
-		}
-	}
-
 	/**
 	 * @dataProvider getHtmlProvider
 	 */
 	public function testGetHtml( Item $item, array $groups, $editable, $expectedValue ) {
 		$siteLinksView = $this->getSiteLinksView();
 
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinkList(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
 		$this->assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
@@ -184,7 +158,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 				'descendant' => array(
 					'tag' => 'tfoot',
 					'descendant' => array(
-						'class' => 'wikibase-toolbarbutton-enabled'
+						'class' => 'wikibase-toolbarbutton'
 					)
 				)
 			)
@@ -236,7 +210,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	public function testGetEmptyHtml( Item $item, array $groups, $editable ) {
 		$siteLinksView = $this->getSiteLinksView();
 
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinkList(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
 		$this->assertEquals( '', $value );
 	}
@@ -285,35 +259,15 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	private function getSiteLinksView() {
 		return new SiteLinksView(
 			$this->newSiteList(),
-			$this->getSectionEditLinkGeneratorMock(),
+			new SectionEditLinkGenerator(),
 			$this->getEntityLookupMock(),
+			array( 'special group' ),
+			array(
+				'Q42' => 'wb-badge-featuredarticle',
+				'Q12' => 'wb-badge-goodarticle'
+			),
 			'en'
 		);
-	}
-
-	/**
-	 * @return SectionEditLinkGenerator
-	 */
-	private function getSectionEditLinkGeneratorMock() {
-		$sectionEditLinkGenerator = $this->getMockBuilder( 'Wikibase\Repo\View\SectionEditLinkGenerator' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$sectionEditLinkGenerator->expects( $this->any() )
-			->method( 'getEditUrl' )
-			->will( $this->returnValue( 'editUrl' ) );
-
-		$sectionEditLinkGenerator->expects( $this->any() )
-			->method( 'getHtmlForEditSection' )
-			->will( $this->returnCallback( function ( $url, $msg, $tag, $enabled ) {
-				if( $enabled ) {
-					return '<a class="wikibase-toolbarbutton-enabled">Edit link</a>';
-				} else {
-					return '<a class="wikibase-toolbarbutton-disabled">Disabled edit link</a>';
-				}
-			} ) );
-
-		return $sectionEditLinkGenerator;
 	}
 
 	/**
