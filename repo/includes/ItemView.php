@@ -3,7 +3,10 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Wikibase\Repo\View\ClaimsView;
+use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SiteLinksView;
+use Wikibase\Repo\View\TocGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -19,6 +22,26 @@ use Wikibase\Repo\WikibaseRepo;
 class ItemView extends EntityView {
 
 	/**
+	 * @var FingerprintView
+	 */
+	private $fingerprintView;
+
+	/**
+	 * @var ClaimsView
+	 */
+	private $claimsView;
+
+	public function __construct(
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language
+	) {
+		parent::__construct( $language );
+		$this->fingerprintView = $fingerprintView;
+		$this->claimsView = $claimsView;
+	}
+
+	/**
 	 * @see EntityView::getInnerHtml
 	 */
 	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
@@ -29,25 +52,47 @@ class ItemView extends EntityView {
 		}
 
 		$html = '';
-		$html = parent::getInnerHtml( $entityRevision, $editable );
+		$html .= $this->fingerprintView->getHtml( $item->getFingerprint(), $item->getId(), $editable );
+		$html .= $this->getHtmlForToc();
+		$html .= $this->getHtmlForTermBox( $entityRevision );
 		$html .= $this->claimsView->getHtml( $item->getClaims(), 'wikibase-statements' );
 		$html .= $this->getHtmlForSiteLinks( $item, $editable );
 
 		return $html;
 	}
 
-	/**
-	 * @see EntityView::getTocSections
-	 */
-	protected function getTocSections() {
-		$array = parent::getTocSections();
-		$array['claims'] = 'wikibase-statements';
+	private function getHtmlForToc() {
+		$tocSections = array(
+			// Placeholder for the TOC entry for the term box (which may or may not be used for a given user).
+			// EntityViewPlaceholderExpander must know about the 'termbox-toc' name.
+			// This is a hack because the marker does not exist as a system message it will be added as is.
+			'termbox' => $this->textInjector->newMarker( 'termbox-toc' ),
+			'claims' => 'wikibase-statements'
+		);
+
 		$groups = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'siteLinkGroups' );
 		foreach ( $groups as $group ) {
 			$id = htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES );
-			$array[$id] = 'wikibase-sitelinks-' . $group;
+			$tocSections[$id] = 'wikibase-sitelinks-' . $group;
 		}
-		return $array;
+
+		$tocGenerator = new TocGenerator();
+
+		return $tocGenerator->getHtmlForToc( $tocSections );
+	}
+
+	private function getHtmlForTermBox( EntityRevision $entityRevision ) {
+		if ( $entityRevision->getEntity()->getId() ) {
+			// Placeholder for a termbox for the present item.
+			// EntityViewPlaceholderExpander must know about the parameters used here.
+			return $this->textInjector->newMarker(
+				'termbox',
+				$entityRevision->getEntity()->getId()->getSerialization(),
+				$entityRevision->getRevision()
+			);
+		}
+
+		return '';
 	}
 
 	/**

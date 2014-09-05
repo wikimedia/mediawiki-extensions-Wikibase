@@ -3,10 +3,7 @@
 namespace Wikibase;
 
 use Html;
-use InvalidArgumentException;
 use Language;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\TextInjector;
 
 /**
@@ -27,16 +24,6 @@ use Wikibase\Repo\View\TextInjector;
 abstract class EntityView {
 
 	/**
-	 * @var FingerprintView
-	 */
-	protected $fingerprintView;
-
-	/**
-	 * @var ClaimsView
-	 */
-	protected $claimsView;
-
-	/**
 	 * @var Language
 	 */
 	protected $language;
@@ -46,32 +33,8 @@ abstract class EntityView {
 	 */
 	protected $textInjector;
 
-	/**
-	 * Maps entity types to the corresponding entity view.
-	 * FIXME: remove this stuff, big OCP violation
-	 *
-	 * @since 0.2
-	 *
-	 * @var string[]
-	 */
-	public static $typeMap = array(
-		Item::ENTITY_TYPE => '\Wikibase\ItemView',
-		Property::ENTITY_TYPE => '\Wikibase\PropertyView',
-
-		// TODO: Query::ENTITY_TYPE
-		'query' => '\Wikibase\QueryView',
-	);
-
-	public function __construct(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	) {
-		// @todo: move the $editable flag here, instead of passing it around everywhere
-		$this->fingerprintView = $fingerprintView;
-		$this->claimsView = $claimsView;
+	public function __construct( Language $language ) {
 		$this->language = $language;
-		$this->textInjector = new TextInjector();
 	}
 
 	/**
@@ -99,6 +62,7 @@ abstract class EntityView {
 	 * @return string HTML
 	 */
 	public function getHtml( EntityRevision $entityRevision, $editable = true ) {
+		$this->textInjector = new TextInjector();
 		$entity = $entityRevision->getEntity();
 
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
@@ -147,99 +111,8 @@ if ( $ ) {
 	 * @param EntityRevision $entityRevision
 	 * @param bool $editable
 	 *
-	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
-		wfProfileIn( __METHOD__ );
-
-		$entity = $entityRevision->getEntity();
-
-		$html = '';
-		$html .= $this->getHtmlForFingerprint( $entity, $editable );
-		$html .= $this->getHtmlForToc();
-		$html .= $this->getHtmlForTermBox( $entityRevision, $editable );
-
-		wfProfileOut( __METHOD__ );
-		return $html;
-	}
-
-	/**
-	 * Builds and returns the HTML for the entity's fingerprint.
-	 *
-	 * @param Entity $entity
-	 * @param bool $editable
-	 * @return string
-	 */
-	protected function getHtmlForFingerprint( Entity $entity, $editable = true ) {
-		return $this->fingerprintView->getHtml( $entity->getFingerprint(), $entity->getId(), $editable );
-	}
-
-	/**
-	 * Builds and returns the HTML for the toc.
-	 *
-	 * @return string
-	 */
-	protected function getHtmlForToc() {
-		$tocContent = '';
-		$tocSections = $this->getTocSections();
-
-		if ( count( $tocSections ) < 2 ) {
-			// Including the marker for the termbox toc entry, there is fewer
-			// 3 sections. MediaWiki core doesn't show a TOC unless there are
-			// at least 3 sections, so we shouldn't either.
-			return '';
-		}
-
-		// Placeholder for the TOC entry for the term box (which may or may not be used for a given user).
-		// EntityViewPlaceholderExpander must know about the 'termbox-toc' name.
-		$tocContent .= $this->textInjector->newMarker( 'termbox-toc' );
-
-		$i = 1;
-
-		foreach ( $tocSections as $id => $message ) {
-			$tocContent .= wfTemplate( 'wb-entity-toc-section',
-				$i++,
-				$id,
-				wfMessage( $message )->text()
-			);
-		}
-
-		$toc = wfTemplate( 'wb-entity-toc',
-			wfMessage( 'toc' )->text(),
-			$tocContent
-		);
-
-		return $toc;
-	}
-
-	/**
-	 * Returns the sections that should displayed in the toc.
-	 *
-	 * @return string[] array( link target => system message key )
-	 */
-	protected function getTocSections() {
-		return array();
-	}
-
-	/**
-	 * @param EntityRevision $entityRevision
-	 * @param bool $editable
-	 *
-	 * @return string
-	 */
-	protected function getHtmlForTermBox( EntityRevision $entityRevision ) {
-		if ( $entityRevision->getEntity()->getId() ) {
-			// Placeholder for a termbox for the present item.
-			// EntityViewPlaceholderExpander must know about the parameters used here.
-			return $this->textInjector->newMarker(
-				'termbox',
-				$entityRevision->getEntity()->getId()->getSerialization(),
-				$entityRevision->getRevision()
-			);
-		}
-
-		return '';
-	}
+	protected abstract function getInnerHtml( EntityRevision $entityRevision, $editable = true );
 
 }
