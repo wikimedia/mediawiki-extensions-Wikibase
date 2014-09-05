@@ -200,11 +200,6 @@ HTML;
 </span>
 HTML;
 
-	$templates['wb-property-value-supplement'] =
-<<<HTML
-<span class="wb-value-supplement">$1</span>
-HTML;
-
 	$templates['wikibase-aliasesview'] =
 <<<HTML
 <div class="wikibase-aliasesview $1">
