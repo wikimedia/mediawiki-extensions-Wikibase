@@ -18,10 +18,6 @@
 		$( '.wb-editsection' ).parent( 'td' ).not( '.wb-terms td' ).remove();
 		$( '.wb-editsection:not(td)' ).remove();
 
-		// remove all infos about empty values which are displayed in non-JS
-		$( '.wb-value-empty' ).not( '.wikibase-fingerprintview td' )
-			.empty().removeClass( 'wb-value-empty' );
-
 		// Since the DOM is altered for the property edit tools to initialize properly, the
 		// following hook informs about these operations having finished.
 		// TODO: This hook is not supposed to be permanent. Remove it as soon as no more global DOM
