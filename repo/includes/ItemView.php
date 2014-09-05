@@ -21,20 +21,18 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
-	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
-		wfProfileIn( __METHOD__ );
-
+	protected function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
 		$item = $entityRevision->getEntity();
 
 		if ( !( $item instanceof Item ) ) {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
+		$html = '';
 		$html = parent::getInnerHtml( $entityRevision, $editable );
 		$html .= $this->claimsView->getHtml( $item->getClaims(), 'wikibase-statements' );
 		$html .= $this->getHtmlForSiteLinks( $item, $editable );
 
-		wfProfileOut( __METHOD__ );
 		return $html;
 	}
 
@@ -62,7 +60,7 @@ class ItemView extends EntityView {
 	 *
 	 * @return string
 	 */
-	public function getHtmlForSiteLinks( Item $item, $editable = true ) {
+	protected function getHtmlForSiteLinks( Item $item, $editable = true ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$groups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
 
@@ -71,7 +69,7 @@ class ItemView extends EntityView {
 			$wikibaseRepo->getSiteStore()->getSites(),
 			$this->sectionEditLinkGenerator,
 			$wikibaseRepo->getEntityLookup(),
-			$this->getLanguage()->getCode()
+			$this->language->getCode()
 		);
 
 		$itemId = $item->getId();
