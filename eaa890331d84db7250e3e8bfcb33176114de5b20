@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_f480f34c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-05T11:42:04Z",
+      "side": 1,
+      "message": "Please invalidate this page\u0027s cache here, so it gets re-rendered and we get all the new stuff into the parser cache. Perhaps it\u0027s even sufficient to do that - if we can live with a single request showing an empty sidebar, we don\u0027t need the B/C code below.",
+      "revId": "eaa890331d84db7250e3e8bfcb33176114de5b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
