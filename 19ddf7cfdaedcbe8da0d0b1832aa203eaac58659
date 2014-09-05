@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_3401db71",
+        "filename": "lib/includes/ValuesFinder.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-05T12:41:18Z",
+      "side": 1,
+      "message": "Do we really need the dataValueType as an additional criterion? If so, should it be the type name, or the expected class? Should it at least be possible to omit the dataType, if we only care to filter by value type?",
+      "revId": "19ddf7cfdaedcbe8da0d0b1832aa203eaac58659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_d4ff3761",
+        "filename": "lib/tests/phpunit/ValuesFinderTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-05T12:41:18Z",
+      "side": 1,
+      "message": "the data type and value type should come from the data provider, so we can test other combinations.",
+      "revId": "19ddf7cfdaedcbe8da0d0b1832aa203eaac58659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
