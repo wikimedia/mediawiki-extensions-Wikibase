@@ -45,6 +45,10 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 			->method( 'formatSnak' )
 			->will( $this->returnValue( 'a snak!' ) );
 
+		$snakFormatter->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+
 		return $snakFormatter;
 	}
 
