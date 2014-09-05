@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_14b81fc2",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-05T12:29:44Z",
+      "side": 1,
+      "message": "$settings is actually used one line up :)",
+      "revId": "b60b1ca45a10af69d6e4d5b964c8846544b3d40e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_54a6a7a8",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-05T12:29:44Z",
+      "side": 1,
+      "message": "bail out of wikibase isn\u0027t enabled in this namespace",
+      "revId": "b60b1ca45a10af69d6e4d5b964c8846544b3d40e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_34b31bea",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-05T12:29:44Z",
+      "side": 1,
+      "message": "check for null explicitly",
+      "revId": "b60b1ca45a10af69d6e4d5b964c8846544b3d40e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
