@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use DataValues\StringValue;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -23,7 +22,6 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityRevision;
 use Wikibase\EntityView;
 use Wikibase\LanguageFallbackChain;
-use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -238,53 +236,6 @@ abstract class EntityViewTest extends \MediaWikiLangTestCase {
 		$revision = new EntityRevision( $entity, $revId, $timestamp );
 
 		return $revision;
-	}
-
-	/**
-	 * @dataProvider parserOutputExtensionDataProvider
-	 */
-	public function testParserOutputExtensionData( EntityRevision $revision ) {
-		$entityView = $this->newEntityView( $revision->getEntity()->getType() );
-
-		$parserOutput = $entityView->getParserOutput( $revision, null, false );
-		$configVars = $parserOutput->getJsConfigVars();
-
-		// @todo moar tests
-		$this->assertInternalType( 'array', $configVars );
-	}
-
-	public function parserOutputExtensionDataProvider() {
-		$entity = Item::newEmpty();
-		$itemId = ItemId::newFromNumber( 301 );
-		$entity->setId( $itemId );
-		$entity->setLabel( 'en', 'Cat' );
-
-		$snak = new PropertyValueSnak(
-			new PropertyId( 'p1' ),
-			new StringValue( 'cats!' )
-		);
-
-		$claimGuidGenerator = new ClaimGuidGenerator();
-
-		$statement = new Statement( $snak );
-		$statement->setGuid( $claimGuidGenerator->newGuid( $itemId ) );
-
-		$entity->addClaim( $statement );
-
-		$timestamp = wfTimestamp( TS_MW );
-		$revision = new EntityRevision( $entity, 13044, $timestamp );
-
-		return array(
-			array( $revision )
-		);
-	}
-
-	public function testParserOutputLinksForNoStatements() {
-		$entityRevision = $this->newEntityRevisionForStatements( array() );
-		$entityView = $this->newEntityView( $entityRevision->getEntity()->getType() );
-
-		$out = $entityView->getParserOutput( $entityRevision, true, false );
-		$this->assertEquals( array(), $out->getLinks() );
 	}
 
 	protected $guidCounter = 0;

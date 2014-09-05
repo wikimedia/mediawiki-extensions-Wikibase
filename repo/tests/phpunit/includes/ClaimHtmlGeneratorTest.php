@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\DispatchingSnakFormatter;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\SnakHtmlGenerator;
 
@@ -44,6 +45,10 @@ class ClaimHtmlGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
 			->will( $this->returnValue( 'a snak!' ) );
+
+		$snakFormatter->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
 		return $snakFormatter;
 	}
