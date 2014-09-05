@@ -179,7 +179,7 @@
 				this.options.menu.element.remove();
 			}
 
-			$.Widget.prototype._setOption.apply( this, arguments );
+			var response = $.Widget.prototype._setOption.apply( this, arguments );
 
 			if( key === 'menu' && value instanceof $.ui.ooMenu ) {
 				this.options.menu = this._initMenu( value );
@@ -191,6 +191,8 @@
 				}
 				this.element.prop( 'disabled', value );
 			}
+
+			return response;
 		},
 
 		/**

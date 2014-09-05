@@ -203,7 +203,7 @@
 			$( 'html' )
 			.off( '.' + this.widgetName )
 			// Blurring by clicking away from the widget (one handler is sufficient):
-			.on( 'mouseup.' + this.widgetName, function( event ) {
+			.on( 'click.' + this.widgetName, function( event ) {
 				// Loop through all widgets and hide content when having clicked out of it:
 				$( ':' + self.widgetBaseClass ).each( function( i, widgetNode ) {
 					var widget = $( widgetNode ).data( self.widgetName ),
