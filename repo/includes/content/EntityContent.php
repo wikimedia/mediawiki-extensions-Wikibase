@@ -10,8 +10,6 @@ use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
-use IContextSource;
-use Language;
 use LogicException;
 use MWException;
 use ParserOptions;
@@ -21,21 +19,11 @@ use RuntimeException;
 use Status;
 use Title;
 use User;
-use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EntitySearchTextGenerator;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
-use Wikibase\Repo\View\SectionEditLinkGenerator;
-use Wikibase\Repo\View\SnakHtmlGenerator;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -257,10 +245,21 @@ abstract class EntityContent extends AbstractContent {
 			$revId = $title->getLatestRevID();
 		}
 
+		$context = RequestContext::getMain();
 		$revision = new EntityRevision( $this->getEntity(), $revId );
 
 		// generate parser output
-		$outputGenerator = $this->getEntityParserOutputGenerator( null, $options, null );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityParserOutputGeneratorFactory = new EntityParserOutputGeneratorFactory(
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
+			$wikibaseRepo->getSnakFormatterFactory(),
+			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory(),
+			$wikibaseRepo->getEntityContentFactory(),
+			$wikibaseRepo->getPropertyDataTypeLookup(),
+			$this->getEntityViewClass()
+		);
+
+		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator( $context, $options );
 		$output = $outputGenerator->getParserOutput( $revision, $editable, $generateHtml );
 
 		// Since the output depends on the user language, we must make sure
@@ -274,155 +273,11 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
+	 * Returns the EntityView class used for this entity type.#
 	 *
-	 * @param IContextSource|null $context
-	 * @param ParserOptions|null $options
-	 * @param LanguageFallbackChain|null $uiLanguageFallbackChain
-	 *
-	 * @note: this uses global state to access the services needed for
-	 * displaying the entity.
-	 *
-	 * @return EntityParserOutputGenerator
+	 * @return string
 	 */
-	private function getEntityParserOutputGenerator(
-		IContextSource $context = null,
-		ParserOptions $options = null,
-		LanguageFallbackChain $uiLanguageFallbackChain = null
-	) {
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
-		}
-
-		$languageCode = $context->getLanguage()->getCode();
-
-		if ( $options !== null ) {
-			// NOTE: Parser Options language overrides context language!
-			$languageCode = $options->getUserLang();
-		}
-
-		$formatterOptions = new FormatterOptions();
-		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $languageCode );
-
-		// Force the context's language to be the one specified by the parser options.
-		if ( $context && $context->getLanguage()->getCode() !== $languageCode ) {
-			$context = clone $context;
-			$context->setLanguage( $languageCode );
-		}
-
-		if ( !$uiLanguageFallbackChain ) {
-			$factory = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory();
-			$uiLanguageFallbackChain = $factory->newFromContextForPageView( $context );
-		}
-
-		$formatterOptions->setOption( 'languages', $uiLanguageFallbackChain );
-
-		// get all the necessary services ----
-		$snakFormatter = WikibaseRepo::getDefaultInstance()->getSnakFormatterFactory()
-			->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
-
-		$entityInfoBuilderFactory = WikibaseRepo::getDefaultInstance()->getStore()->getEntityInfoBuilderFactory();
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-		$serializationOptions = $this->makeSerializationOptions( $languageCode, $uiLanguageFallbackChain );
-
-		$entityView = $this->getEntityView(
-			$snakFormatter,
-			$entityContentFactory,
-			$entityInfoBuilderFactory,
-			$context->getLanguage()
-		);
-
-		// ---------------------------------------------------------------------
-
-		$idParser = new BasicEntityIdParser();
-
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilderFactory,
-			$idParser,
-			$entityContentFactory,
-			new ReferencedEntitiesFinder(),
-			$context->getLanguage()->getCode()
-		);
-
-		$dataTypeLookup = WikibaseRepo::getDefaultInstance()->getPropertyDataTypeLookup();
-
-		return new EntityParserOutputGenerator(
-			$entityView,
-			$configBuilder,
-			$serializationOptions,
-			$entityContentFactory,
-			$dataTypeLookup
-		);
-	}
-
-	/**
-	 * Creates an EntityView suitable for rendering the entity.
-	 *
-	 * @since 0.5
-	 *
-	 * @param SnakFormatter $snakFormatter
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
-	 * @param Language $language
-	 *
-	 * @return EntityView
-	 */
-	private function getEntityView(
-		SnakFormatter $snakFormatter,
-		EntityTitleLookup $entityTitleLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
-		Language $language
-	) {
-		//TODO: cache last used entity view
-		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
-
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$snakFormatter,
-			$entityTitleLookup
-		);
-
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$snakHtmlGenerator,
-			$entityTitleLookup
-		);
-
-		$claimsView =  new ClaimsView(
-			$entityInfoBuilderFactory,
-			$entityTitleLookup,
-			$sectionEditLinkGenerator,
-			$claimHtmlGenerator,
-			$language->getCode()
-		);
-
-		$fingerprintView = new FingerprintView(
-			$sectionEditLinkGenerator,
-			$language->getCode()
-		);
-
-		return $this->newEntityView(
-			$fingerprintView,
-			$claimsView,
-			$language
-		);
-	}
-
-	/**
-	 * Instantiates an EntityView.
-	 *
-	 * @see getEntityView()
-	 *
-	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
-	 * @param Language $language
-	 *
-	 * @return EntityView
-	 */
-	protected abstract function newEntityView(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	);
+	protected abstract function getEntityViewClass();
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text
