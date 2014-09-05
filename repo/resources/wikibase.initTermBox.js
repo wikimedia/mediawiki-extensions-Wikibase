@@ -16,110 +16,81 @@
  */
 wb.initTermBox = function( entity, api ) {
 	mw.hook( 'wikibase.domready' ).add( function() {
-		var $fingerprintview = $( '.wikibase-fingerprintview' ),
+		var $fingerprintgroupview = $( '.wikibase-fingerprintgroupview' ),
 			userSpecifiedLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
 			hasSpecifiedLanguages = userSpecifiedLanguages && userSpecifiedLanguages.length,
 			isUlsDefined = mw.uls !== undefined
 				&& $.uls !== undefined
-				&& $.uls.data !== undefined;
+				&& $.uls.data !== undefined,
+			languageCodes = [];
 
 		// Skip if having no extra languages is what the user wants
-		if( !$fingerprintview.length && !hasSpecifiedLanguages && isUlsDefined ) {
+		if( !$fingerprintgroupview.length && !hasSpecifiedLanguages && isUlsDefined ) {
 			// No term box present; Ask ULS to provide languages and generate plain HTML
-			var languageCodes = mw.uls.getFrequentLanguageList();
+			languageCodes = mw.uls.getFrequentLanguageList().slice( 1, 4 );
 
 			if( !languageCodes.length ) {
 				return;
 			}
 
-			var $sectionHeading = addTermBoxSection(),
-				$table = mw.template( 'wikibase-fingerprintlistview', '' );
+			var $precedingNode = $( '#toc' );
 
-			$sectionHeading.after( $table );
-
-			for( var i = 1; i < languageCodes.length && i < 5; i++ ) {
-				var languageCode = languageCodes[i];
-
-				initFingerprintview(
-					$( '<tbody/>' ).appendTo( $table ), languageCode, entity, api
-				);
+			if( $precedingNode.length ) {
+				updateToc( $precedingNode );
+			} else {
+				$precedingNode = $( '.wikibase-aliasesview' );
 			}
 
-			return;
+			$fingerprintgroupview = $( '<div/>' ).insertAfter( $precedingNode );
+
+		} else {
+			// Scrape language codes of existing DOM structure:
+			// TODO: Find more sane way to figure out language code.
+			$fingerprintgroupview.find( '.wikibase-fingerprintview' ).each( function() {
+				$.each( $( this ).attr( 'class' ).split( ' ' ), function( i, cssClass ) {
+					if( cssClass.indexOf( 'wikibase-fingerprintview-' ) === 0 ) {
+						languageCodes.push( cssClass.replace( /wikibase-fingerprintview-/, '' ) );
+						return false;
+					}
+				} );
+			} );
 		}
 
-		$fingerprintview.each( function() {
-			var $singleFingerprintview = $( this ),
-				languageCode;
-
-			// TODO: Find more sane way to figure out language code.
-			$.each( $singleFingerprintview.attr( 'class' ).split( ' ' ), function( i, cssClass ) {
-				if( cssClass.indexOf( 'wikibase-fingerprintview-' ) === 0 ) {
-					languageCode =  cssClass.replace( /wikibase-fingerprintview-/, '' );
-					return false;
-				}
+		var value = [];
+		for( var i = 0; i < languageCodes.length; i++ ) {
+			value.push( {
+				language: languageCodes[i],
+				label: entity.getLabel( languageCodes[i] ) || null,
+				description: entity.getDescription( languageCodes[i] ) || null
 			} );
+		}
 
-			initFingerprintview( $singleFingerprintview, languageCode, entity, api );
+		$fingerprintgroupview.fingerprintgroupview( {
+			value: value,
+			entityId: entity.getId(),
+			api: api
 		} );
 	} );
 };
 
 /**
- * @return {jQuery}
+ * @param {jQuery} $toc
  */
-function addTermBoxSection() {
-	var $sectionHeading = mw.template( 'wb-terms-heading', mw.msg( 'wikibase-terms' ) ),
-		$toc = $( '#toc' ),
-		$precedingNode;
-
-	if( $toc.length ) {
-		$toc
-		.children( 'ul' ).prepend(
-			$( '<li>' )
-			.addClass( 'toclevel-1' )
-			.append(
-				$( '<a>' )
-				.attr( 'href', '#wb-terms' )
-				.text( mw.msg( 'wikibase-terms' ) )
-			)
+function updateToc( $toc ) {
+	$toc
+	.children( 'ul' ).prepend(
+		$( '<li>' )
+		.addClass( 'toclevel-1' )
+		.append(
+			$( '<a>' )
+			.attr( 'href', '#wb-terms' )
+			.text( mw.msg( 'wikibase-terms' ) )
 		)
-		.find( 'li' ).each( function( i, li ) {
-			$( li )
-			.removeClass( 'tocsection-' + i )
-			.addClass( 'tocsection-' + ( i + 1 ) );
-		} );
-
-		$precedingNode = $toc;
-	} else {
-		$precedingNode = $( '.wb-aliases' );
-	}
-
-	$precedingNode.after( $sectionHeading );
-
-	return $sectionHeading;
-}
-
-/**
- * @param {jQuery} $node
- * @param {string} languageCode
- * @param {wikibase.datamodel.Entity} entity
- * @param {wikibase.RepoApi} api
- * @return {jQuery}
- */
-function initFingerprintview( $node, languageCode, entity, api ) {
-	return $node.fingerprintview( {
-		value: {
-			language: languageCode,
-			label: entity.getLabel( languageCode ) || null,
-			description: entity.getDescription( languageCode ) || null
-		},
-		entityId: entity.getId(),
-		api: api,
-		helpMessage: mw.msg(
-			'wikibase-fingerprintview-input-help-message',
-			wb.getLanguageNameByCode( languageCode )
-		)
+	)
+	.find( 'li' ).each( function( i, li ) {
+		$( li )
+		.removeClass( 'tocsection-' + i )
+		.addClass( 'tocsection-' + ( i + 1 ) );
 	} );
 }
 
