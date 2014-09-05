@@ -37,7 +37,7 @@ class PropertyView extends EntityView {
 			$html .= $this->claimsView->getHtml( $property->getClaims(), 'wikibase-attributes' );
 		}
 
-		$footer = $this->msg( 'wikibase-property-footer' );
+		$footer = wfMessage( 'wikibase-property-footer' );
 
 		if ( !$footer->isBlank() ) {
 			$html .= "\n" . $footer->parse();
@@ -60,14 +60,12 @@ class PropertyView extends EntityView {
 	 * @return string
 	 */
 	private function getHtmlForDataType( DataType $dataType ) {
-		$lang = $this->getLanguage();
-
 		return wfTemplate( 'wb-section-heading',
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
 			'datatype'
 		)
 		. wfTemplate( 'wb-property-datatype',
-			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) )
+			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
 		);
 	}
 
