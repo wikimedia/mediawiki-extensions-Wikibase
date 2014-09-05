@@ -6,11 +6,18 @@ use InvalidArgumentException;
 use Language;
 use LogicException;
 use MWException;
+use ParserOutput;
 use Title;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
+use Wikibase\Repo\ParserOutput\SiteLinksParserOutputGenerator;
+use Wikibase\Repo\ParserOutput\StatementsParserOutputGenerator;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
+use Wikibase\Repo\View\ItemView;
+use Wikibase\Repo\View\SectionEditLinkGenerator;
+use Wikibase\Repo\View\SiteLinksView;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -197,38 +204,72 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see getEntityView()
+	 * @see getEntityView
 	 *
-	 * @param FingerprintView $fingerprintView
-	 * @param ClaimsView $claimsView
 	 * @param Language $language
+	 * @param LanguageFallbackChain $languageFallbackChain
 	 *
 	 * @return ItemView
 	 */
-	protected function newEntityView(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	) {
-		return new ItemView( $fingerprintView, $claimsView, $language );
+	protected function getEntityView( Language $language, LanguageFallbackChain $languageFallbackChain ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+
+		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
+
+		$fingerprintView = new FingerprintView(
+			$sectionEditLinkGenerator,
+			$language->getCode()
+		);
+
+		$claimsView = new ClaimsView(
+			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$sectionEditLinkGenerator,
+			$wikibaseRepo->getSnakFormatterFactory(),
+			$languageFallbackChain,
+			$language->getCode()
+		);
+
+		$siteLinksView = new SiteLinksView(
+			$wikibaseRepo->getSiteStore()->getSites(),
+			$sectionEditLinkGenerator,
+			$wikibaseRepo->getEntityLookup(),
+			$settings->getSetting( 'specialSiteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' ),
+			$language->getCode()
+		);
+
+		return new ItemView(
+			$fingerprintView,
+			$claimsView,
+			$siteLinksView,
+			$settings->getSetting( 'siteLinkGroups' ),
+			$language
+		);
 	}
 
 	/**
-	 * @see EntityContent::getEntityPageProperties
+	 * @see EntityContent::addDataToParserOutput
 	 *
-	 * Records the number of sitelinks in the 'wb-sitelinks' key.
-	 *
-	 * @return array A map from property names to property values.
+	 * @param ParserOutput $pout
 	 */
-	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
+	protected function addDataToParserOutput( ParserOutput $pout ) {
+		parent::addDataToParserOutput( $pout );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$properties = parent::getEntityPageProperties();
-		$properties['wb-sitelinks'] = $this->getItem()->getSiteLinkList()->count();
+		$statementsParserOutputGenerator = new StatementsParserOutputGenerator(
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getPropertyDataTypeLookup()
+		);
 
-		return $properties;
+		$statementsParserOutputGenerator->assignToParserOutput( $pout, $this->getItem()->getStatements() );
+
+		$siteLinksParserOutputGenerator = new SiteLinksParserOutputGenerator(
+			$wikibaseRepo->getEntityTitleLookup()
+		);
+
+		$siteLinksParserOutputGenerator->assignToParserOutput( $pout, $this->getItem()->getSiteLinkList() );
 	}
 
 	/**
