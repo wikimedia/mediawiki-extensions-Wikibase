@@ -550,6 +550,7 @@ final class WikibaseClient {
 			$settings = $this->getSettings();
 
 			$this->langLinkHandler = new LangLinkHandler(
+				$this->getOtherProjectsSidebarGenerator(),
 				$settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
