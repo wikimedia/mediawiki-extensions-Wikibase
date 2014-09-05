@@ -4,8 +4,13 @@ namespace Wikibase;
 
 use Content;
 use Language;
+use ParserOutput;
+use Wikibase\Repo\ParserOutput\StatementsParserOutputGenerator;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
+use Wikibase\Repo\View\PropertyView;
+use Wikibase\Repo\View\SectionEditLinkGenerator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -105,16 +110,54 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @see getEntityView()
+	 * @see getEntityView
 	 *
+	 * @param Language $language
+	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @return PropertyView
 	 */
-	protected function newEntityView(
-		FingerprintView $fingerprintView,
-		ClaimsView $claimsView,
-		Language $language
-	) {
-		return new PropertyView( $fingerprintView, $claimsView, $language );
+	protected function getEntityView( Language $language, LanguageFallbackChain $languageFallbackChain ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
+
+		$fingerprintView = new FingerprintView(
+			$sectionEditLinkGenerator,
+			$language->getCode()
+		);
+
+		$claimsView = new ClaimsView(
+			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$sectionEditLinkGenerator,
+			$wikibaseRepo->getSnakFormatterFactory(),
+			$languageFallbackChain,
+			$language->getCode()
+		);
+
+		return new PropertyView(
+			$fingerprintView,
+			$claimsView,
+			$wikibaseRepo->getDataTypeFactory(),
+			$language
+		);
+	}
+
+	/**
+	 * @see EntityContent::addDataToParserOutput
+	 *
+	 * @param ParserOutput $pout
+	 */
+	protected function addDataToParserOutput( ParserOutput $pout ) {
+		parent::addDataToParserOutput( $pout );
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$statementsParserOutputGenerator = new StatementsParserOutputGenerator(
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getPropertyDataTypeLookup()
+		);
+
+		$statementsParserOutputGenerator->assignToParserOutput( $pout, $this->getProperty()->getStatements() );
 	}
 
 }
