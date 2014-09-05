@@ -171,10 +171,6 @@ li.tagadata-choice-modified .tagadata-label-text {
 
 /********** TERMS **********/
 
-.wb-terms .wb-value {
-    display: block;
-}
-
 h2.wb-terms-heading {
     float: left;
     width: 100%;
@@ -188,91 +184,16 @@ table.wb-terms {
     border-spacing: 0;
     width: 100%;
     border-bottom: 1px solid #C9C9C9;
-}
-
-table.wb-terms .wb-terms-language {
-    width: 25%;
-    word-wrap: break-word;
-    padding-left: 10px;
-    border-left: 1px solid #C9C9C9;
-}
-
-table.wb-terms .wb-terms-term {
-    width: 75%;
-    word-wrap: break-word;
-    padding-left: 10px;
-}
-
-table.wb-terms {
     clear: both;
     border-right: 1px solid #C9C9C9;
 }
 
-table.wb-terms td {
-	background: #F0F0F0;
-	border-top: 1px solid #C9C9C9;
-}
-table.wb-terms tr:nth-child(4n) td,
-table.wb-terms tr:nth-child(4n-1) td {
+.wb-terms tr td {
 	background: #F8F8F8;
 }
 
-table.wb-terms td.wb-terms-label {
-	padding: 10px;
-}
-
-table.wb-terms .wb-edit td.wb-terms-label {
-	padding: 8px 8px 9px 7px;
-}
-
-/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
-table.wb-terms .wb-editsection {
-    width: 18em;
-    position: static; /* clear absolute positioning */
-    float: none; /* overwrite edit section's float: right */
-    padding: 0;
-    margin-left: 0; /* reset edit section's margin which is set in the toolbar group instead;
-	                applying margin to the edit section cell should not have any effect at all */
-}
-
-table.wb-terms .wb-editsection .wikibase-toolbar {
-    width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
-}
-
-table.wb-terms .wb-editsection .wikibase-toolbar .wikibase-toolbar {
-    margin-left: 1px; /* even out table cell's right border */
-}
-
-table.wb-terms .wb-editsection .wikibase-toolbar .wikibase-toolbar {
-    margin-left: 0; /* do not apply margin to nested toolbar groups */
-}
-
-table.wb-terms input {
-	font-family: inherit;
-	width: 100%;
-}
-
-.wb-terms .wikibase-descriptionview .wikibase-descriptionview-text {
-	line-height: 1.4;
-	padding-right: 0;
-}
-
-.wb-terms .wikibase-labelview,
-.wb-terms .wikibase-descriptionview {
-	display: block;
-	float: none;
-	margin-top: 0;
-	padding: 10px;
-	width: auto;
-}
-
-.wb-terms .wikibase-labelview.wb-edit,
-.wb-terms .wikibase-descriptionview.wb-edit {
-	padding: 9px 8px 9px 7px;
-}
-
-.wb-terms .wb-error {
-	background-color: #FFDFC9;
+.wb-terms tbody:nth-child(even) td {
+	background: #F0F0F0;
 }
 
 /********** /TERMS **********/

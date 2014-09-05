@@ -121,6 +121,7 @@ return call_user_func( function() {
 			'messages' => array(
 				'wikibase-description-edit-placeholder',
 				'wikibase-description-edit-placeholder-language-aware',
+				'wikibase-description-empty',
 				'wikibase-description-input-help-message',
 			),
 		),
@@ -180,7 +181,29 @@ return call_user_func( function() {
 				'parentheses',
 				'wikibase-label-edit-placeholder',
 				'wikibase-label-edit-placeholder-language-aware',
+				'wikibase-label-empty',
 				'wikibase-label-input-help-message',
+			),
+		),
+
+		'jquery.wikibase.fingerprintview' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.fingerprintview.js',
+			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.fingerprintview.css',
+			),
+			'dependencies' => array(
+				'mediawiki.Title',
+				'wikibase',
+				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.descriptionview',
+				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.labelview',
+				'jquery.wikibase.toolbarcontroller',
+			),
+			'messages' => array(
+				'wikibase-fingerprintview-input-help-message',
 			),
 		),
 
