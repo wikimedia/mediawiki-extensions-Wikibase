@@ -251,15 +251,15 @@ HTML;
 <h2 id="wb-terms" class="wb-terms-heading">$1</h2>
 HTML;
 
-	$templates['wb-terms-table'] =
+	$templates['wikibase-fingerprintlistview'] =
 <<<HTML
-<table class="wb-terms">
+<table class="wikibase-fingerprintlistview">
 	<colgroup>
-		<col class="wb-terms-language" />
-		<col class="wb-terms-term" />
+		<col class="wikibase-fingerprintlistview-language" />
+		<col class="wikibase-fingerprintlistview-label wikibase-fingerprintlistview-description" />
 		<col class="wb-editsection" />
 	</colgroup>
-	<!-- [0,*] wb-term -->$1
+	<!-- [0,*] wikibase-fingerprintview -->$1
 </table>
 HTML;
 

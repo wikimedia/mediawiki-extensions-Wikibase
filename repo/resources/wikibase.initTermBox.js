@@ -33,7 +33,7 @@ wb.initTermBox = function( entity, api ) {
 			}
 
 			var $sectionHeading = addTermBoxSection(),
-				$table = mw.template( 'wb-terms-table', '' );
+				$table = mw.template( 'wikibase-fingerprintlistview', '' );
 
 			$sectionHeading.after( $table );
 
