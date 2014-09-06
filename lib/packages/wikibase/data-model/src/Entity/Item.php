@@ -82,6 +82,15 @@ class Item extends Entity {
 	}
 
 	/**
+	 * @since 0.1 return type changed in 0.3
+	 *
+	 * @return ItemId|null
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
 	 * @since 0.8
 	 *
 	 * @return SiteLinkList
