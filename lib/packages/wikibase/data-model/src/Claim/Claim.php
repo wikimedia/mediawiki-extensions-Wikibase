@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Claim;
 use Comparable;
 use Hashable;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
@@ -132,7 +132,7 @@ class Claim implements Hashable, Comparable {
 	 *
 	 * @since 0.2
 	 *
-	 * @return EntityId
+	 * @return PropertyId
 	 */
 	public function getPropertyId() {
 		return $this->getMainSnak()->getPropertyId();
