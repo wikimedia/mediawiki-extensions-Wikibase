@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_3d63f70b",
+        "filename": "client/includes/ParserOutputUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-06T18:37:51Z",
+      "side": 1,
+      "message": "$localSiteId is probably clearer.",
+      "revId": "8b45bf4ac9135b1574b47dc1e8e8f21587fdfc88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
