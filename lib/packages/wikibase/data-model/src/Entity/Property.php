@@ -69,6 +69,15 @@ class Property extends Entity {
 	}
 
 	/**
+	 * @since 0.1 return type changed in 0.3
+	 *
+	 * @return PropertyId|null
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param string $dataTypeId
