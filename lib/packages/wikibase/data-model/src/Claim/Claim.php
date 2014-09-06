@@ -56,10 +56,6 @@ class Claim implements Hashable, Comparable {
 	protected $guid = null;
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 *
 	 * @param Snak $mainSnak
 	 * @param null|Snaks $qualifiers
 	 */
