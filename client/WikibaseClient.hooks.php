@@ -639,10 +639,13 @@ final class ClientHooks {
 		if ( $settings->getSetting( 'otherProjectsLinksByDefault' ) || $betaFeatureEnabled ) {
 			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
 
-			// in case of stuff in cache without the other projects
+			// update parser output for page if other projects is not yet in cache
 			if ( $otherProjectsSidebar === null ) {
-				$title->invalidateCache();
-				return true;
+				$parserOutputUpdater = $wikibaseClient->getParserOutputUpdater();
+				$otherProjectsSidebar = $parserOutputUpdater->updateOtherProjectsSidebar(
+					$skin->getContext(),
+					$title
+				);
 			}
 
 			if ( !empty( $otherProjectsSidebar ) ) {

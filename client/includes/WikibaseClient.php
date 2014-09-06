@@ -16,6 +16,7 @@ use SiteStore;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\ParserOutputUpdater;
 use Wikibase\ClientStore;
 use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
@@ -560,6 +561,17 @@ final class WikibaseClient {
 		}
 
 		return $this->langLinkHandler;
+	}
+
+	/**
+	 * @return ParserOutputUpdater
+	 */
+	public function getParserOutputUpdater() {
+		return new ParserOutputUpdater(
+			$this->getOtherProjectsSidebarGenerator(),
+			$this->getStore()->getSiteLinkTable(),
+			$this->getSettings()->getSetting( 'siteGlobalID' )
+		);
 	}
 
 	/**
