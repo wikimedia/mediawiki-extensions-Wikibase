@@ -74,7 +74,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityViewClass = $entityViewClass;
 	}
 
-		/**
+	/**
 	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity.
 	 *
 	 * @since 0.5
