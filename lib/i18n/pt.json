@@ -29,7 +29,7 @@
 	"wikibase-diffview-alias": "Nomes alternativos",
 	"wikibase-diffview-description": "descrição",
 	"wikibase-diffview-link": "ligações",
-	"wikibase-error-unexpected": "Ocorreu um erro inesperado: $1",
+	"wikibase-error-unexpected": "Erro: $1.",
 	"wikibase-error-save-generic": "Ocorreu um erro na gravação. Não foi possível efectuar as alterações.",
 	"wikibase-error-remove-generic": "Ocorreu um erro na remoção. Não foi possível efectuar as alterações.",
 	"wikibase-error-save-connection": "Ocorreu um erro de ligação ao tentar gravar. As suas alterações não foram efectuadas. Verifique a sua ligação à Internet, por favor.",

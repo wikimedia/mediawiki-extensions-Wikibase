@@ -176,6 +176,8 @@
 	"wikibase-mergeitems-fromid": "Het itemnummer waarvan samen te voegen",
 	"wikibase-mergeitems-toid": "Het itemnummer waarnaar samen te voegen",
 	"wikibase-mergeitems-submit": "Items samenvoegen",
+	"wikibase-itemmerge-permissiondenied": "Geen toegang.",
+	"wikibase-itemmerge-no-such-entity": "Item niet gevonden.",
 	"special-dispatchstats": "Statistieken over wijzigingenverwerking",
 	"wikibase-dispatchstats-intro": "Op deze pagina worden statistieken over wijzigingenverwerking naar de clients weergegeven.",
 	"wikibase-dispatchstats-no-stats": "Er zijn momenteel geen statistieken beschikbaar.",

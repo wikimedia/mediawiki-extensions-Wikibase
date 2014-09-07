@@ -26,7 +26,7 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "descripción",
 	"wikibase-diffview-link": "enlaces",
-	"wikibase-error-unexpected": "Ocurrió un error inesperado: $1.",
+	"wikibase-error-unexpected": "Error: $1.",
 	"wikibase-error-save-generic": "Hubo un error al guardar. No se pudieron completar tus cambios.",
 	"wikibase-error-remove-generic": "Hubo un error al intentar realizar la eliminación. No se pudieron completar tus cambios.",
 	"wikibase-error-save-connection": "Ha ocurrido un error de conexión al guardar. No se pudieron completar tus cambios. Comprueba tu conexión a internet.",

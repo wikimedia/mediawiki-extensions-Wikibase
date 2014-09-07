@@ -22,7 +22,7 @@
 	"wikibase-diffview-alias": "כינויים",
 	"wikibase-diffview-description": "תיאור",
 	"wikibase-diffview-link": "קישורים",
-	"wikibase-error-unexpected": "אירעה שגיאה בלתי־צפויה: $1",
+	"wikibase-error-unexpected": "שגיאה: $1",
 	"wikibase-error-save-generic": "אירעה שגיאה בעת שמירה. לא ניתן להשלים את השינויים שלך.",
 	"wikibase-error-remove-generic": "אירעה שגיאה בעת ניסיון לבצע הסרה. לא ניתן להשלים את השינויים שלך.",
 	"wikibase-error-save-connection": "אירעה שגיאת התחברות בעת ניסיון לבצע שמירה. לא ניתן להשלים את השינויים שלך. נא לבדוק את חיבור האינטרנט שלך.",

@@ -29,10 +29,10 @@
 	"wikibase-linkitem-failure": "指定したページをリンクする際に不明なエラーが発生しました。",
 	"wikibase-linkitem-title": "ページとのリンク",
 	"wikibase-linkitem-linkpage": "ページとリンク",
-	"wikibase-linkitem-selectlink": "このページとリンクするサイトやページを選択してください。",
+	"wikibase-linkitem-selectlink": "このページにリンクさせたいサイトとページを選択してください。",
 	"wikibase-linkitem-input-site": "言語:",
 	"wikibase-linkitem-input-page": "ページ:",
-	"wikibase-linkitem-confirmitem-text": "指定したページは既に[$1 中央データリポジトリ上の項目]と関連付けられています。このページと以下に列挙した{{PLURAL:$2|ページ}}をリンクしていいか確認してください。",
+	"wikibase-linkitem-confirmitem-text": "指定したページは既に[$1 中央データリポジトリ上の項目]と関連付けられています。このページと以下に列挙した{{PLURAL:$2|ページ}}をリンクしてよいか確認してください。",
 	"wikibase-linkitem-confirmitem-button": "確認",
 	"wikibase-linkitem-not-loggedin-title": "ログインする必要があります",
 	"wikibase-linkitem-not-loggedin": "この機能を使用するには、このウィキおよび[$1 中央データリポジトリ]の両方にログインする必要があります。",
@@ -58,5 +58,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目 ID",
 	"wikibase-pageinfo-entity-id-none": "なし",
 	"wikibase-property-render-error": "プロパティ $1 のレンダリングに失敗しました: $2",
-	"wikibase-otherprojects": "その他のプロジェクト"
+	"wikibase-otherprojects": "他のプロジェクト",
+	"wikibase-otherprojects-beta-message": "サイドバーに他のプロジェクト",
+	"wikibase-otherprojects-beta-description": "サイドバーに他のウィキメディアプロジェクトへのリンクを {{WBREPONAME}} データに基づいて提供する「{{int:wikibase-otherprojects}}」セクションを追加する。"
 }

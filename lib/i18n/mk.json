@@ -21,7 +21,7 @@
 	"wikibase-diffview-alias": "алијаси",
 	"wikibase-diffview-description": "опис",
 	"wikibase-diffview-link": "врски",
-	"wikibase-error-unexpected": "Се појави неочекувана грешка: $1",
+	"wikibase-error-unexpected": "Грешка: $1",
 	"wikibase-error-save-generic": "Наидов на грешка при зачувувањето. Не можам да ги спроведам вашите промени.",
 	"wikibase-error-remove-generic": "Наидов на грешка при преместувањето. Не можам да ги спроведам вашите промени.",
 	"wikibase-error-save-connection": "Не можев да ги зачувам промените бидејќи се појави грешка во линијата. Проверете си ја семрежната врска.",

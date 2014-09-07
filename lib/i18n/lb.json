@@ -17,7 +17,7 @@
 	"wikibase-diffview-alias": "Aliasen",
 	"wikibase-diffview-description": "Beschreiwung",
 	"wikibase-diffview-link": "Linken",
-	"wikibase-error-unexpected": "En onerwaarte Feeler ass geschitt: $1.",
+	"wikibase-error-unexpected": "Feeler: $1.",
 	"wikibase-error-save-generic": "Beim Späicheren ass e Feeler geschitt. Är Ännerungen konnten net ofgeschloss ginn.",
 	"wikibase-error-save-timeout": "Mir hunn technesch Schwieregkeeten. Är Ännerung konnt net \"gespäichert\" ginn.",
 	"wikibase-error-remove-timeout": "Mir hunn technesch Schwieregkeeten. Är \"Ännerung\" konnt net ofgeschloss ginn.",

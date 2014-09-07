@@ -23,7 +23,8 @@
 			"Chocolate con galleta",
 			"아라",
 			"Mcervera",
-			"Macofe"
+			"Macofe",
+			"Mor"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -98,6 +99,7 @@
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" no es un elemento válido de identificación.",
 	"wikibase-wikibaserepopage-invalid-langcode": "El código de idioma «$1» es desconocido. Utiliza un código de idioma que el sistema reconozca, como «es».",
 	"wikibase-wikibaserepopage-invalid-id": "El identificador ID \"$1\" es desconocido para el sistema. Utiliza un identificador de entidad que sea válido.",
+	"wikibase-wikibaserepopage-storage-exception": "Se produjo un error al intentar cargar $1: $2.",
 	"special-itembytitle": "Elemento por título",
 	"wikibase-itembytitle-lookup-fieldset": "Búsqueda de artículos por sitio y título",
 	"wikibase-itembytitle-lookup-site": "Sitio:",
@@ -166,6 +168,7 @@
 	"wikibase-mergeitems-fromid": "La identificación para combinar desde",
 	"wikibase-mergeitems-toid": "La identificación para combinar a",
 	"wikibase-mergeitems-submit": "Combinar elementos",
+	"wikibase-itemmerge-permissiondenied": "Permiso denegado.",
 	"special-dispatchstats": "Estadísticas de distribución de las modificaciones",
 	"wikibase-dispatchstats-intro": "Esta página proporciona estadísticas sobre la distribución de las modificaciones de los clientes.",
 	"wikibase-dispatchstats-no-stats": "Actualmente no hay estadísticas disponibles.",

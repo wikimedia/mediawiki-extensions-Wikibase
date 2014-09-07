@@ -34,7 +34,8 @@
 			"Stryn",
 			"ZxxZxxZ",
 			"아라",
-			"Cwlin0416"
+			"Cwlin0416",
+			"Robby"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=http://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -210,7 +211,7 @@
 	"wikibase-itemmerge-missing-parameter": "Error message shown when a required field was not provided.",
 	"wikibase-itemmerge-not-item": "Error message shown when a provided entity id did not refer to an item.",
 	"wikibase-itemmerge-failed-save": "Error message shown when the merged items could not be saved.",
-	"wikibase-itemmerge-permissiondenied": "Error message shown when the user does not have sufficient permissions to merge items.",
+	"wikibase-itemmerge-permissiondenied": "Error message shown when the user does not have sufficient permissions to merge items.\n{{Identical|Permission denied}}",
 	"wikibase-itemmerge-failed-modify": "Error message shown when the two items could not be merged (due to conflicts).",
 	"wikibase-itemmerge-no-such-entity": "Error message shown when one of the items involved in the merge could not be found.",
 	"wikibase-itemmerge-cant-load-entity-content": "Error message shown when one of the items involved in the merge could not be loaded. This likely indicates some kind of databvase corruption.",

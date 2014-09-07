@@ -30,7 +30,7 @@
 	"wikibase-diffview-alias": "别名",
 	"wikibase-diffview-description": "说明",
 	"wikibase-diffview-link": "链接",
-	"wikibase-error-unexpected": "发生意外错误：$1。",
+	"wikibase-error-unexpected": "错误：$1。",
 	"wikibase-error-save-generic": "保存时发生错误。您所做的更改可能未完成。",
 	"wikibase-error-remove-generic": "执行移除时发生错误。您所做的更改可能未完成。",
 	"wikibase-error-save-connection": "保存时发生连接错误。您的更改可能未完成。请检查您的网络连接。",

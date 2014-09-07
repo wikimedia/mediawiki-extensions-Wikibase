@@ -30,7 +30,7 @@
 	"wikibase-diffview-alias": "別名",
 	"wikibase-diffview-description": "描述",
 	"wikibase-diffview-link": "連結",
-	"wikibase-error-unexpected": "發生未預期的錯誤：$1。",
+	"wikibase-error-unexpected": "錯誤：$1。",
 	"wikibase-error-save-generic": "儲存時發生錯誤，您所作的變更無法完成。",
 	"wikibase-error-remove-generic": "嘗試刪除時發生錯誤，您所作的變更無法完成。",
 	"wikibase-error-save-connection": "儲存時發生連結錯誤，您所作的變更無法完成。請檢查您的網際網路連線。",
