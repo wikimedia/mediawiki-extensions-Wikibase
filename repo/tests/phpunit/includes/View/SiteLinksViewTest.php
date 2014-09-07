@@ -57,7 +57,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	public function testGetHtml( Item $item, array $groups, $editable, $expectedValue ) {
 		$siteLinksView = $this->getSiteLinksView();
 
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinkList(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
 		$this->assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
 	}
@@ -236,7 +236,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 	public function testGetEmptyHtml( Item $item, array $groups, $editable ) {
 		$siteLinksView = $this->getSiteLinksView();
 
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups, $editable );
+		$value = $siteLinksView->getHtml( $item->getSiteLinkList(), $item->getId(), $groups, $editable );
 		$this->assertInternalType( 'string', $value );
 		$this->assertEquals( '', $value );
 	}
