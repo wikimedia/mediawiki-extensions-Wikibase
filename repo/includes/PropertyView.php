@@ -3,8 +3,11 @@
 namespace Wikibase;
 
 use DataTypes\DataType;
+use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
-use Wikibase\Repo\WikibaseRepo;
+use Language;
+use Wikibase\Repo\View\ClaimsView;
+use Wikibase\Repo\View\FingerprintView;
 
 /**
  * Class for creating views for Property instances.
@@ -15,22 +18,51 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class PropertyView extends EntityView {
+
+	/**
+	 * @var FingerprintView
+	 */
+	private $fingerprintView;
+
+	/**
+	 * @var ClaimsView
+	 */
+	private $claimsView;
+
+	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
+	public function __construct(
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		DataTypeFactory $dataTypeFactory,
+		Language $language
+	) {
+		parent::__construct( $language );
+
+		$this->fingerprintView = $fingerprintView;
+		$this->claimsView = $claimsView;
+		$this->dataTypeFactory = $dataTypeFactory;
+	}
 
 	/**
 	 * @see EntityView::getInnerHtml
 	 */
 	public function getInnerHtml( EntityRevision $entityRevision, $editable = true ) {
-		wfProfileIn( __METHOD__ );
-
 		$property = $entityRevision->getEntity();
 
 		if ( !( $property instanceof Property ) ) {
 			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
 		}
 
-		$html = parent::getInnerHtml( $entityRevision, $editable );
+		$html = '';
+		$html .= $this->fingerprintView->getHtml( $property->getFingerprint(), $property->getId(), $editable );
+		$html .= $this->getHtmlForTermBox( $entityRevision );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
@@ -40,25 +72,26 @@ class PropertyView extends EntityView {
 		$footer = wfMessage( 'wikibase-property-footer' );
 
 		if ( !$footer->isBlank() ) {
-			$html .= "\n" . $footer->parse();
+			$html .= $footer->parse();
 		}
 
-		wfProfileOut( __METHOD__ );
 		return $html;
 	}
 
-	private function getDataType( Property $property ) {
-		return WikibaseRepo::getDefaultInstance()->getDataTypeFactory()
-			->getType( $property->getDataTypeId() );
+	private function getHtmlForTermBox( EntityRevision $entityRevision ) {
+		if ( $entityRevision->getEntity()->getId() ) {
+			// Placeholder for a termbox for the present item.
+			// EntityViewPlaceholderExpander must know about the parameters used here.
+			return $this->textInjector->newMarker(
+				'termbox',
+				$entityRevision->getEntity()->getId()->getSerialization(),
+				$entityRevision->getRevision()
+			);
+		}
+
+		return '';
 	}
 
-	/**
-	 * Builds and returns the HTML representing a property entity's data type information.
-	 *
-	 * @param DataType $dataType the data type to render
-	 *
-	 * @return string
-	 */
 	private function getHtmlForDataType( DataType $dataType ) {
 		return wfTemplate( 'wb-section-heading',
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
@@ -67,6 +100,10 @@ class PropertyView extends EntityView {
 		. wfTemplate( 'wb-property-datatype',
 			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
 		);
+	}
+
+	private function getDataType( Property $property ) {
+		return $this->dataTypeFactory->getType( $property->getDataTypeId() );
 	}
 
 }
