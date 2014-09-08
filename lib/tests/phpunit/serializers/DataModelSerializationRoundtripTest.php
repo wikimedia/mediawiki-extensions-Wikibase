@@ -31,6 +31,8 @@ use Wikibase\Lib\Serializers\SerializerFactory as LegacySerializerFactory;
 /**
  * @todo Add tests with $options->setIndexTags( true ).
  *
+ * @group Wikibase
+ *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
@@ -222,7 +224,7 @@ class DataModelSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 			),
 			new PropertyValueSnak(
 				new PropertyId( $baseId . '5' ),
-				new UnDeserializableValue( 'undeserializable-data', 'string', 'error' )
+				new UnDeserializableValue( 'undeserializable-data', 'time', 'array expected' )
 			),
 			new PropertyValueSnak(
 				new PropertyId( $baseId . '6' ),
