@@ -20,7 +20,7 @@
 	"wikibase-diffview-alias": "псеудоними",
 	"wikibase-diffview-description": "опис",
 	"wikibase-diffview-link": "везе",
-	"wikibase-error-unexpected": "Дошло је до неочекиване грешке.",
+	"wikibase-error-unexpected": "Грешка: $1.",
 	"wikibase-error-save-generic": "Дошло је до грешке приликом чувања и због тога, промене не могу бити завршене.",
 	"wikibase-error-remove-generic": "Дошло је до грешке приликом покушаја да се изврши уклањање и због тога, промене не могу бити завршене.",
 	"wikibase-error-save-timeout": "Тренутно имамо техничких потешкоћа и због тога ваша измена није сачувана.",

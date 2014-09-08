@@ -66,5 +66,6 @@
 	"wikibase-pageinfo-entity-id-none": "brak",
 	"wikibase-property-render-error": "Nie można zrenderować właściwości $1: $2",
 	"wikibase-otherprojects": "Inne projekty",
-	"wikibase-otherprojects-beta-message": "Pasek siostrzanych projektów"
+	"wikibase-otherprojects-beta-message": "Pasek siostrzanych projektów",
+	"wikibase-otherprojects-beta-description": "Dodaje sekcję „{{int:wikibase-otherprojects}}” do paska bocznego, zawierającą odnośniki do innych projektów Wikimedia w oparciu o dane w serwisie {{WBREPONAME}}."
 }

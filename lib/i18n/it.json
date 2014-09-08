@@ -22,7 +22,7 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "descrizione",
 	"wikibase-diffview-link": "collegamenti",
-	"wikibase-error-unexpected": "Si è verificato un errore imprevisto: $1",
+	"wikibase-error-unexpected": "Errore: $1.",
 	"wikibase-error-save-generic": "Si è verificato un errore durante il salvataggio. Le tue modifiche potrebbero non essere state completamente memorizzate.",
 	"wikibase-error-remove-generic": "Si è verificato un errore durante il tentativo di rimozione. Le tue modifiche potrebbero non essere state completamente memorizzate.",
 	"wikibase-error-save-connection": "Si è verificato un errore di connessione durante il salvataggio. Le tue modifiche potrebbero non essere state completamente memorizzate. Per favore, controlla la tua connessione ad internet.",

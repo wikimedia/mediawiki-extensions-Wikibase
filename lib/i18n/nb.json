@@ -23,7 +23,7 @@
 	"wikibase-diffview-alias": "kallenavn",
 	"wikibase-diffview-description": "beskrivelse",
 	"wikibase-diffview-link": "lenker",
-	"wikibase-error-unexpected": "En uventet feil oppsto: $1.",
+	"wikibase-error-unexpected": "Feil: $1.",
 	"wikibase-error-save-generic": "Det oppsto en feil under lagring. Endringene dine kunne ikke gjennomføres.",
 	"wikibase-error-remove-generic": "Det oppsto en feil under forsøket på fjerning. Endringene dine kunne ikke gjennomføres.",
 	"wikibase-error-save-connection": "Det oppsto en tilkoblingsfeil under lagringen. Endringene dine kunne ikke gjennomføres. Sjekk internettilkoblingen din.",
