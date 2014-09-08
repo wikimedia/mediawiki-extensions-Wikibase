@@ -31,6 +31,8 @@ use Wikibase\Lib\Serializers\SerializerFactory as LegacySerializerFactory;
 /**
  * @todo Add tests with $options->setIndexTags( true ).
  *
+ * @group Wikibase
+ *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
