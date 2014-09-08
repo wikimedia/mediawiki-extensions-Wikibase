@@ -26,3 +26,7 @@
 	background-image: url(images/WBC-Asset-Pencil-Hover.png);
 	color: #0645AD !important;
 }
+
+.wb-entity-link {
+	unicode-bidi: embed;
+}
