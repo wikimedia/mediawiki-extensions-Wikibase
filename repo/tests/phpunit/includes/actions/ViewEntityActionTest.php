@@ -48,9 +48,10 @@ class ViewEntityActionTest extends ActionTestCase {
 		);
 
 		if ( self::shouldTestRedirects() ) {
+			$redirectMsg = wfMessage( 'redirectto' )->inLanguage( $this->language )->text();
 			$cases[] = array(
 				'Berlin2',
-				'/#REDIRECT/'
+				"/$redirectMsg/"
 			);
 		}
 
