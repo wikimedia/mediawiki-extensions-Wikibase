@@ -16,6 +16,24 @@
       "revId": "a88ac8e98498834a49b8f6a2e5ca210c31177540",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_c0908750",
+        "filename": "client/tests/phpunit/includes/hooks/ParserFunctionRegistrantTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-08T11:05:25Z",
+      "side": 1,
+      "message": "doh!",
+      "parentUuid": "2e2fb78d_20a4ebae",
+      "revId": "a88ac8e98498834a49b8f6a2e5ca210c31177540",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
