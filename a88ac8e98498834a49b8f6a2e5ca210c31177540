@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_20a4ebae",
+        "filename": "client/tests/phpunit/includes/hooks/ParserFunctionRegistrantTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-09-08T11:03:38Z",
+      "side": 1,
+      "message": "redundant",
+      "revId": "a88ac8e98498834a49b8f6a2e5ca210c31177540",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
