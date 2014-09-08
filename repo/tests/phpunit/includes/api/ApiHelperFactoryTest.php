@@ -7,7 +7,11 @@ use Wikibase\Api\ApiHelperFactory;
 use Wikibase\EntityFactory;
 
 /**
- * ApiHelperFactoryTest
+ * @covers Wikibase\Api\ApiHelperFactory
+ *
+ * @group Wikibase
+ * @group WikibaseAPI
+ * @group WikibaseRepo
  *
  * @license GPL 2+
  * @author Daniel Kinzler

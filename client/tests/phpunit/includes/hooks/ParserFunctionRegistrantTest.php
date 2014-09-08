@@ -7,6 +7,11 @@ use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 
 /**
  * @covers Wikibase\Client\Hooks\ParserFunctionRegistrant
+ *
+ * @group Wikibase
+ * @group WikibaseClient
+ *
+ * @covers Wikibase\Client\Hooks\ParserFunctionRegistrant
  */
 class ParserFunctionRegistrantTest extends \PHPUnit_Framework_TestCase {
 
