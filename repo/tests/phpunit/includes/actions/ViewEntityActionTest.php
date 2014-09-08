@@ -50,7 +50,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		if ( self::shouldTestRedirects() ) {
 			$cases[] = array(
 				'Berlin2',
-				'/#REDIRECT/'
+				'/redirectMsg/'
 			);
 		}
 
