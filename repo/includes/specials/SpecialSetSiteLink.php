@@ -468,8 +468,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$summary = $this->getSummary( 'wbsetsitelink' );
 
 		if ( $pageName === '' ) {
-			$pageName = null;
-
 			if ( !$item->hasLinkToSite( $siteId ) ) {
 				$status->fatal( 'wikibase-setsitelink-remove-failed' );
 				return $status;
