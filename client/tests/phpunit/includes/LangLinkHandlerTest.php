@@ -70,6 +70,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		return new LangLinkHandler(
 			$this->getOtherProjectsSidebarGenerator( $otherProjects ),
+			$this->getLanguageLinkBadeDisplay(),
 			'srwiki',
 			new NamespaceChecker( array( NS_TALK ), array() ),
 			$this->mockRepo,
