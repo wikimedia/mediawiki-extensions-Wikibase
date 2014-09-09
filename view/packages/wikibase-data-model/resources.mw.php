@@ -34,6 +34,7 @@ return call_user_func( function() {
 				'SiteLink.js',
 				'SnakList.js',
 				'Statement.js',
+				'Term.js',
 			),
 			'dependencies' => array(
 

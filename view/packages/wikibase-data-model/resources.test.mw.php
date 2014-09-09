@@ -25,6 +25,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			'Snak.tests.js',
 			'SnakList.tests.js',
 			'Statement.tests.js',
+			'Term.tests.js',
 		),
 		'dependencies' => array(
 			'wikibase.datamodel',
