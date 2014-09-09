@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Language;
 use Title;
-use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -63,14 +62,10 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 			$mockRepo->putEntity( $item );
 		}
 
-		$siteStore = MockSiteStore::newFromTestSites();
-		$clientSiteLinkLookup = new ClientSiteLinkLookup( 'dewiki', $mockRepo, $mockRepo );
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
 		return new LanguageLinkBadgeDisplay(
-			$clientSiteLinkLookup,
 			$mockRepo,
-			$siteStore,
 			$badgeClassNames,
 			Language::factory( 'de' )
 		);

@@ -256,10 +256,17 @@ class SidebarHookHandlers {
 	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle
 	 * @param Title $title
+	 * @param OutputPage $output
 	 *
 	 * @return bool
 	 */
-	public function doSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+	public function doSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title, OutputPage $output = null ) {
+		if ( !$output ) {
+			// This would happen for versions of core that do not have change Ic479e2fa5cc applied.
+			wfWarn( __METHOD__ . ': SkinTemplateGetLanguageLink hook called without OutputPage object!' );
+			return true;
+		}
+
 		wfProfileIn( __METHOD__ );
 
 		$this->badgeDisplay->assignBadges( $title, $languageLinkTitle, $languageLink );
