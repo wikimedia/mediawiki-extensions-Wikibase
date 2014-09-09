@@ -14,7 +14,6 @@ use Site;
 use SiteStore;
 use StripState;
 use Title;
-use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
@@ -168,12 +167,6 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$entityLookup = new MockRepository();
 		$entityLookup->putEntity( $this->getBadgeItem() );
 
-		$clientSiteLinkLookup = new ClientSiteLinkLookup(
-			$siteId,
-			$siteLinkLookup,
-			$entityLookup
-		);
-
 		$otherProjectsSidebarGenerator = new OtherProjectsSidebarGenerator(
 			$siteId,
 			$siteLinkLookup,
@@ -181,21 +174,20 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			$otherProjectIds
 		);
 
+		$badgeDisplay = new LanguageLinkBadgeDisplay(
+			$entityLookup,
+			array( 'Q17' => 'featured' ),
+			$en
+		);
+
 		$langLinkHandler = new LangLinkHandler(
 			$otherProjectsSidebarGenerator,
+			$badgeDisplay,
 			$siteId,
 			$namespaceChecker,
 			$siteLinkLookup,
 			$siteStore,
 			$siteGroup
-		);
-
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$clientSiteLinkLookup,
-			$entityLookup,
-			$siteStore,
-			array( 'Q17' => 'featured' ),
-			$en
 		);
 
 		$interwikiSorter = new InterwikiSorter(
