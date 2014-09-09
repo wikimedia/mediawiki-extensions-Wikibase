@@ -1,5 +1,9 @@
 <?php
 
+if ( !defined( 'MEDIAWIKI' ) ) {
+	die( 'Not an entry point.' );
+}
+
 $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'path' => __FILE__,
 	'name' => 'Wikibase DataModel JavaScript',
