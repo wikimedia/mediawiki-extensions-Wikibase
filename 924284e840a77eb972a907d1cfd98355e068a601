@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_84bbaab9",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T14:11:00Z",
+      "side": 1,
+      "message": "evil phpstorm!",
+      "revId": "924284e840a77eb972a907d1cfd98355e068a601",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_e4c6ee4d",
+        "filename": "client/tests/phpunit/includes/hooks/ParserOutputHooksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T14:11:00Z",
+      "side": 1,
+      "message": "omg, $outp? (and $pout)?\n\nhow about $parserOutput and $outputPage?",
+      "revId": "924284e840a77eb972a907d1cfd98355e068a601",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
