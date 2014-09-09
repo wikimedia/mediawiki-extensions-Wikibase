@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_2923af55",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T08:31:36Z",
+      "side": 1,
+      "message": "maybe this should be an object instead of a weird array thing?\n\nI think the array will likely will cause bugs when the params / order gets mixed up some place.",
+      "revId": "fe19e9cc941e50baf8d14e32fff11a8e772ebef6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_0926b363",
+        "filename": "client/includes/store/UsageUpdater.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T08:31:36Z",
+      "side": 1,
+      "message": "?",
+      "revId": "fe19e9cc941e50baf8d14e32fff11a8e772ebef6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_69d89758",
+        "filename": "subscription/includes/Subscription/SubscriptionManager.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T08:31:36Z",
+      "side": 1,
+      "message": "typo :P",
+      "revId": "fe19e9cc941e50baf8d14e32fff11a8e772ebef6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_29e28f00",
+        "filename": "usagetracking/UsageTracking.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T08:31:36Z",
+      "side": 1,
+      "message": "WB_UT_VERSION ?",
+      "revId": "fe19e9cc941e50baf8d14e32fff11a8e772ebef6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_09e59306",
+        "filename": "usagetracking/UsageTracking.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T08:31:36Z",
+      "side": 1,
+      "message": "WB_UT_DIR",
+      "revId": "fe19e9cc941e50baf8d14e32fff11a8e772ebef6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_e9eb67d9",
+        "filename": "usagetracking/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-09T08:31:36Z",
+      "side": 1,
+      "message": "can haz visibility?",
+      "revId": "fe19e9cc941e50baf8d14e32fff11a8e772ebef6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
