@@ -166,8 +166,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetClientSiteLinkLookupReturnType() {
-		$returnValue = $this->getDefaultInstance()->getClientSiteLinkLookup();
-		$this->assertInstanceOf( 'Wikibase\Client\ClientSiteLinkLookup', $returnValue );
+		$returnValue = $this->getDefaultInstance()->getLanguageLinkBadgeDisplay();
+		$this->assertInstanceOf( 'Wikibase\Client\Hooks\LanguageLinkBadgeDisplay', $returnValue );
 	}
 
 	public function testGetOtherProjectsSidebarGeneratorReturnType() {
