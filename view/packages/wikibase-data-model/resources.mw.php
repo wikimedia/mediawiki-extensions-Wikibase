@@ -36,6 +36,7 @@ return call_user_func( function() {
 				'SiteLinkList.js',
 				'SnakList.js',
 				'Statement.js',
+				'StatementList.js',
 				'Term.js',
 				'TermGroup.js',
 				'TermGroupList.js',
