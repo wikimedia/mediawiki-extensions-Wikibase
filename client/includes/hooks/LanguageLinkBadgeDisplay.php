@@ -4,7 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use Language;
 use Sanitizer;
-use SiteList;
+use SiteStore;
 use Title;
 use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\DataModel\Entity\ItemId;
@@ -32,9 +32,9 @@ class LanguageLinkBadgeDisplay {
 	protected $entityLookup;
 
 	/**
-	 * @var SiteList
+	 * @var SiteStore
 	 */
-	protected $sites;
+	protected $siteStore;
 
 	/**
 	 * @var array
@@ -49,15 +49,15 @@ class LanguageLinkBadgeDisplay {
 	/**
 	 * @param ClientSiteLinkLookup $clientSiteLinkLookup
 	 * @param EntityLookup $entityLookup
-	 * @param SiteList $sites
+	 * @param SiteStore $siteStore
 	 * @param array $badgeClassNames
 	 * @param Language $language
 	 */
 	public function __construct( ClientSiteLinkLookup $clientSiteLinkLookup,
-			EntityLookup $entityLookup, SiteList $sites, array $badgeClassNames, Language $language ) {
+			EntityLookup $entityLookup, SiteStore $siteStore, array $badgeClassNames, Language $language ) {
 		$this->clientSiteLinkLookup = $clientSiteLinkLookup;
 		$this->entityLookup = $entityLookup;
-		$this->sites = $sites;
+		$this->siteStore = $siteStore;
 		$this->badgeClassNames = $badgeClassNames;
 		$this->language = $language;
 	}
@@ -73,12 +73,14 @@ class LanguageLinkBadgeDisplay {
 	 * @param array &$languageLink
 	 */
 	public function assignBadges( Title $title, Title $languageLinkTitle, array &$languageLink ) {
+		$sites = $this->siteStore->getSites();
+
 		$navId = $languageLinkTitle->getInterwiki();
-		if ( !$this->sites->hasNavigationId( $navId ) ) {
+		if ( !$sites->hasNavigationId( $navId ) ) {
 			return;
 		}
 
-		$site = $this->sites->getSiteByNavigationId( $navId );
+		$site = $sites->getSiteByNavigationId( $navId );
 		$siteLink = $this->clientSiteLinkLookup->getSiteLink( $title, $site->getGlobalId() );
 		if ( $siteLink === null ) {
 			return;
