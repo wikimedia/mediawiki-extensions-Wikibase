@@ -37,6 +37,57 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_1e726210",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-09T19:40:53Z",
+      "side": 1,
+      "message": "$out -\u003e $outp #anagramcode",
+      "revId": "924284e840a77eb972a907d1cfd98355e068a601",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_3e14fe9f",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-09T19:40:53Z",
+      "side": 1,
+      "message": "self::??? $this-\u003eisWikibaseEnabled",
+      "revId": "924284e840a77eb972a907d1cfd98355e068a601",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_7e684619",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-09T19:40:53Z",
+      "side": 1,
+      "message": "$outputPage $parserOutput",
+      "revId": "924284e840a77eb972a907d1cfd98355e068a601",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_84bbaab9",
         "filename": "client/includes/hooks/ParserOutputHooks.php",
         "patchSetId": 3
@@ -83,6 +134,24 @@
       "side": 1,
       "message": "bah, that\u0027s just not confusing enough",
       "parentUuid": "2e2fb78d_e4c6ee4d",
+      "revId": "924284e840a77eb972a907d1cfd98355e068a601",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_be1fceb9",
+        "filename": "client/tests/phpunit/includes/hooks/ParserOutputHooksTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-09T19:40:53Z",
+      "side": 1,
+      "message": "+1 @Daniel",
+      "parentUuid": "2e2fb78d_ef85a7b2",
       "revId": "924284e840a77eb972a907d1cfd98355e068a601",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
