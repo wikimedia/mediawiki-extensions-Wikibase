@@ -18,6 +18,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 	$testModules['qunit']['wikibase.datamodel.tests'] = $moduleTemplate + array(
 		'scripts' => array(
 			'Claim.tests.js',
+			'Fingerprint.tests.js',
 			'Item.tests.js',
 			'Property.tests.js',
 			'Reference.tests.js',

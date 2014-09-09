@@ -28,6 +28,7 @@ return call_user_func( function() {
 				'Claim.js',
 				'Entity.js',
 				'EntityId.js',
+				'Fingerprint.js',
 				'Item.js',
 				'Property.js',
 				'Reference.js',
