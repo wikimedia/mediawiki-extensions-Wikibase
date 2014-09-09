@@ -92,11 +92,11 @@ call_user_func( function() {
 	$wgHooks['BaseTemplateToolbox'][]			= '\Wikibase\ClientHooks::onBaseTemplateToolbox';
 	$wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 	$wgHooks['OutputPageParserOutput'][]		= '\Wikibase\Client\Hooks\ParserOutputHooks::onOutputPageParserOutput';
+	$wgHooks['SkinTemplateGetLanguageLink'][]		= '\Wikibase\Client\Hooks\ParserOutputHooks::onSkinTemplateGetLanguageLink';
 	$wgHooks['ParserAfterParse'][]				= '\Wikibase\Client\Hooks\ParserOutputHooks::onParserAfterParse';
 	$wgHooks['ParserFirstCallInit'][]			= '\Wikibase\ClientHooks::onParserFirstCallInit';
 	$wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\ClientHooks::onMagicWordwgVariableIDs';
 	$wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\ClientHooks::onParserGetVariableValueSwitch';
-	$wgHooks['SkinTemplateGetLanguageLink'][]		= '\Wikibase\ClientHooks::onSkinTemplateGetLanguageLink';
 	$wgHooks['SkinTemplateOutputPageBeforeExec'][]		= '\Wikibase\ClientHooks::onSkinTemplateOutputPageBeforeExec';
 	$wgHooks['SpecialMovepageAfterMove'][]				= '\Wikibase\ClientHooks::onSpecialMovepageAfterMove';
 	$wgHooks['SpecialWatchlistQuery'][]			= '\Wikibase\ClientHooks::onSpecialWatchlistQuery';
