@@ -4,3 +4,8 @@
 abbr.wikibase-edit {
 	font-weight: bold;
 }
+
+.wb-entity-link {
+	/* Ensure that the Q with the numbers is isolated from dates, usernames, etc. */
+	unicode-bidi: embed;
+}
