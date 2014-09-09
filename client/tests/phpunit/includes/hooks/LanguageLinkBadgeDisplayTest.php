@@ -2,12 +2,16 @@
 
 namespace Wikibase\Test;
 
+use FauxRequest;
 use Language;
+use OutputPage;
+use ParserOutput;
+use RequestContext;
 use Title;
-use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 
 /**
  * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
@@ -63,47 +67,84 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 			$mockRepo->putEntity( $item );
 		}
 
-		$siteStore = MockSiteStore::newFromTestSites();
-		$clientSiteLinkLookup = new ClientSiteLinkLookup( 'dewiki', $mockRepo, $mockRepo );
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
 		return new LanguageLinkBadgeDisplay(
-			$clientSiteLinkLookup,
 			$mockRepo,
-			$siteStore,
 			$badgeClassNames,
 			Language::factory( 'de' )
 		);
 	}
 
 	/**
-	 * @dataProvider assignBadgesProvider
+	 * @dataProvider attachBadgesToOutputProvider
 	 */
-	public function testAssignBadges( $expected, Title $title, Title $languageLinkTitle, $message ) {
+	public function testAttachBadgesToOutput( $expected, $languageLinks ) {
 		$languageLinkBadgeDisplay = $this->getLanguageLinkBadgeDisplay();
+		$parserOutput = new ParserOutput();
 
-		$languageLink = array();
-		$languageLinkBadgeDisplay->assignBadges( $title, $languageLinkTitle, $languageLink );
+		$languageLinkBadgeDisplay->attachBadgesToOutput( $languageLinks, $parserOutput );
 
-		$this->assertEquals( $expected, $languageLink, $message );
+		$this->assertEquals( $expected, $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
-	public function assignBadgesProvider() {
-		$languageLink1 = array(
-			'class' => 'badge-Q3 badge-Q2 bar',
-			'itemtitle' => 'Lesenswerter Artikel'
+	public function attachBadgesToOutputProvider() {
+		$q2 = new ItemId( 'Q2' );
+		$q3 = new ItemId( 'Q3' );
+		$q4 = new ItemId( 'Q4' );
+
+		$link0 = new SiteLink( 'jawiki', 'Bah' );
+		$link1 = new SiteLink( 'dewiki', 'Foo', array( $q3, $q2 ) );
+		$link2 = new SiteLink( 'enwiki', 'Bar', array( $q3, $q4 ) );
+
+		$badge1 = array(
+			'class' => 'badge-Q3 bar badge-Q2',
+			'label' => 'Lesenswerter Artikel'
 		);
-		$languageLink2 = array(
-			'class' => 'badge-Q3 badge-Q4 bar foo',
-			'itemtitle' => 'Lesenswerter Artikel, Exzellenter Artikel'
+		$badge2 = array(
+			'class' => 'badge-Q3 bar badge-Q4 foo',
+			'label' => 'Lesenswerter Artikel, Exzellenter Artikel'
 		);
+
 		return array(
-			array( $languageLink1, Title::newFromText( 'Georg Friedrich Haendel' ), Title::makeTitle( NS_MAIN, 'George Frideric Handel', '', 'en' ), 'passing enwiki title' ),
-			array( $languageLink2, Title::newFromText( 'Benutzer:Testbenutzer' ), Title::makeTitle( NS_USER, 'Testuser', '', 'en' ), 'passing enwiki non-main namespace title' ),
-			array( array(), Title::newFromText( 'Georg Friedrich Haendel' ), Title::makeTitle( NS_MAIN, 'Georg Friedrich Haendel', '', 'nl' ), 'passing nlwiki title' ),
-			array( array(), Title::newFromText( 'Johann Sebastian Bach' ), Title::makeTitle( NS_MAIN, 'Johann Sebastian Bach', '', 'en' ), 'passing an unknown title' ),
-			array( array(), Title::newFromText( 'Georg Friedrich Haendel' ), Title::makeTitle( NS_MAIN, 'Georg Friedrich Haendel', '', 'it' ), 'passing a site without link' ),
+			'empty' => array( array(), array() ),
+			'no badges' => array( array(), array( $link0 ) ),
+			'some badges' => array(
+				array( 'dewiki' => $badge1, 'enwiki' => $badge2 ),
+				array( 'jawiki' => $link0, 'dewiki' => $link1, 'enwiki' => $link2 )
+			),
 		);
+	}
+
+	public function testApplyBadges() {
+		$badges = array(
+			'en' => array(
+				'class' => 'badge-Q3',
+				'label' => 'Lesenswerter Artikel',
+			)
+		);
+
+		$link = array(
+			'href' => 'http://acme.com',
+			'class' => 'foo',
+		);
+
+		$expected = array(
+			'href' => 'http://acme.com',
+			'class' => 'foo badge-Q3',
+			'itemtitle' => 'Lesenswerter Artikel',
+		);
+
+		$languageLinkTitle = Title::makeTitle( NS_MAIN, 'Test', '', 'en' );
+
+		$context = new RequestContext( new FauxRequest() );
+		$output = new OutputPage( $context );
+		$output->setProperty( 'wikibase_badges', $badges );
+
+		$languageLinkBadgeDisplay = $this->getLanguageLinkBadgeDisplay();
+		$languageLinkBadgeDisplay->applyBadges( $link, $languageLinkTitle, $output );
+
+		$this->assertEquals( $expected, $link );
 	}
 
 }

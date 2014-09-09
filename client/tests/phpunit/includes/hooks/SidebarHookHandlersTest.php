@@ -14,7 +14,6 @@ use Site;
 use SiteStore;
 use StripState;
 use Title;
-use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
@@ -23,7 +22,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
@@ -86,48 +84,37 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return SiteLinkLookup
+	 * @param ItemId $id
+	 * @param SiteLink[] $links
+	 *
+	 * @return Item
 	 */
-	private function getSiteLinkLookup() {
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+	private function newItem( ItemId $id, $links ) {
+		$item = Item::newEmpty();
+		$item->setId( $id );
 
-		$badgeId = $this->getBadgeItem()->getId();
+		foreach ( $links as $link ) {
+			$item->addSiteLink( $link );
+		}
 
-		$links = array(
-			'Q1' => array(
-				new SiteLink( 'dewiki', 'Sauerstoff', array( $badgeId ) ),
-				new SiteLink( 'enwiki', 'Oxygen' ),
-				new SiteLink( 'commonswiki', 'Oxygen' ),
-			),
-			'Q7' => array(
-				new SiteLink( 'dewiki', 'User:Foo' ),
-				new SiteLink( 'enwiki', 'User:Foo' ),
-				new SiteLink( 'commonswiki', 'User:Foo' ),
-			),
-		);
+		return $item;
+	}
 
-		$q1 = new ItemId( 'Q1' );
+	/**
+	 * @param array[] $links
+	 *
+	 * @return MockRepository
+	 */
+	private function getMockRepo( $links ) {
+		$repo = new MockRepository();
 
-		$items = array(
-			'dewiki:Sauerstoff' => $q1,
-			'enwiki:Oxygen' => $q1,
-		);
+		foreach ( $links as $itemKey => $itemLinks ) {
+			$itemId = new ItemId( $itemKey );
+			$item = $this->newItem( $itemId, $itemLinks );
+			$repo->putEntity( $item );
+		}
 
-		$lookup->expects( $this->any() )
-			->method( 'getSiteLinksForItem' )
-			->will( $this->returnCallback( function( ItemId $itemId ) use ( $links ) {
-				$key = $itemId->getSerialization();
-				return isset( $links[$key] ) ? $links[$key] : array();
-			} ) );
-
-		$lookup->expects( $this->any() )
-			->method( 'getEntityIdForSiteLink' )
-			->will( $this->returnCallback( function( SiteLink $link ) use ( $items ) {
-				$key = $link->getSiteId() . ':' . $link->getPageName();
-				return isset( $items[$key] ) ? $items[$key] : null;
-			} ) );
-
-		return $lookup;
+		return $repo;
 	}
 
 	/**
@@ -153,6 +140,21 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	private function newSidebarHookHandlers( array $settings = array() ) {
+		$badgeId = $this->getBadgeItem()->getId();
+
+		$links = array(
+			'Q1' => array(
+				new SiteLink( 'dewiki', 'Sauerstoff', array( $badgeId ) ),
+				new SiteLink( 'enwiki', 'Oxygen' ),
+				new SiteLink( 'commonswiki', 'Oxygen' ),
+			),
+			'Q7' => array(
+				new SiteLink( 'dewiki', 'User:Foo' ),
+				new SiteLink( 'enwiki', 'User:Foo' ),
+				new SiteLink( 'commonswiki', 'User:Foo' ),
+			),
+		);
+
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
 
@@ -162,40 +164,33 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$otherProjectIds = $settings->getSetting( 'otherProjectsLinks' );
 
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
-		$siteLinkLookup = $this->getSiteLinkLookup();
 		$siteStore = $this->getSiteStore();
 
-		$entityLookup = new MockRepository();
-		$entityLookup->putEntity( $this->getBadgeItem() );
-
-		$clientSiteLinkLookup = new ClientSiteLinkLookup(
-			$siteId,
-			$siteLinkLookup,
-			$entityLookup
-		);
+		$mockRepo = $this->getMockRepo( $links );
+		$mockRepo->putEntity( $this->getBadgeItem() );
 
 		$otherProjectsSidebarGenerator = new OtherProjectsSidebarGenerator(
 			$siteId,
-			$siteLinkLookup,
+			$mockRepo,
 			$siteStore,
 			$otherProjectIds
 		);
 
-		$langLinkHandler = new LangLinkHandler(
-			$otherProjectsSidebarGenerator,
-			$siteId,
-			$namespaceChecker,
-			$siteLinkLookup,
-			$siteStore,
-			$siteGroup
-		);
-
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$clientSiteLinkLookup,
-			$entityLookup,
-			$siteStore,
+			$mockRepo,
 			array( 'Q17' => 'featured' ),
 			$en
+		);
+
+		$langLinkHandler = new LangLinkHandler(
+			$otherProjectsSidebarGenerator,
+			$badgeDisplay,
+			$siteId,
+			$namespaceChecker,
+			$mockRepo,
+			$mockRepo,
+			$siteStore,
+			$siteGroup
 		);
 
 		$interwikiSorter = new InterwikiSorter(
@@ -236,6 +231,11 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testNewFromGlobalState() {
+		$handler = SidebarHookHandlers::newFromGlobalState();
+		$this->assertInstanceOf( 'Wikibase\Client\Hooks\SidebarHookHandlers', $handler );
+	}
+
 	public function parserAfterParseProvider() {
 		$commonsOxygen = array(
 			'msg' => 'wikibase-otherprojects-commons',
@@ -251,6 +251,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 				array(),
 				array( 'de:Sauerstoff' ),
 				array( $commonsOxygen ),
+				array( 'de' => array( new ItemId( 'Q17' ) ) ),
 			),
 
 			'noexternallanglinks=*' => array(
@@ -275,6 +276,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 				array( 'noexternallanglinks' => serialize( array( 'ja' ) ) ),
 				array( 'de:Sauerstoff' ),
 				array( $commonsOxygen ),
+				array( 'de' => array( new ItemId( 'Q17' ) ) ),
 			),
 
 			'no-item' => array(
@@ -303,7 +305,8 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$expectedItem,
 		array $pagePropsBefore,
 		array $expectedLanguageLinks = null,
-		array $expectedSisterLinks = null
+		array $expectedSisterLinks = null,
+		array $expectedBadges = null
 	) {
 		$parser = $this->newParser( $title, $pagePropsBefore, array() );
 		$handler = $this->newSidebarHookHandlers();
@@ -317,6 +320,15 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
+
+		$actualBadges = $parserOutput->getExtensionData( 'wikibase_badges' );
+
+		if ( $expectedBadges === null ) {
+			$this->assertEmpty( $actualBadges );
+		} else {
+			// $actualBadges contains info arrays, these are checked by LanguageLinkBadgeDisplayTest and LangLinkHandlerTest
+			$this->assertEquals( array_keys( $expectedBadges ) , array_keys( $actualBadges ) );
+		}
 	}
 
 	public function testDoOutputPageParserOutput() {
@@ -358,6 +370,39 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$handler->doOutputPageParserOutput( $outputPage, $parserOutput );
 
 		$this->assertOutputPageProperties( $outputProps, $outputPage );
+	}
+
+	public function testDoSkinTemplateGetLanguageLink() {
+		$badges = array(
+			'en' => array(
+				'class' => 'badge-Q3',
+				'label' => 'Lesenswerter Artikel',
+			)
+		);
+
+		$link = array(
+			'href' => 'http://acme.com',
+			'class' => 'foo',
+		);
+
+		$expected = array(
+			'href' => 'http://acme.com',
+			'class' => 'foo badge-Q3',
+			'itemtitle' => 'Lesenswerter Artikel',
+		);
+
+		$languageLinkTitle = Title::makeTitle( NS_MAIN, 'Test', '', 'en' );
+
+		$dummy = Title::makeTitle( NS_MAIN, 'Dummy' );
+
+		$context = new RequestContext( new FauxRequest() );
+		$output = new OutputPage( $context );
+		$output->setProperty( 'wikibase_badges', $badges );
+
+		$handler = $this->newSidebarHookHandlers();
+		$handler->doSkinTemplateGetLanguageLink( $link, $languageLinkTitle, $dummy, $output );
+
+		$this->assertEquals( $expected, $link );
 	}
 
 	private function assertOutputPageProperties( $props, OutputPage $outputPage ) {
