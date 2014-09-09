@@ -126,25 +126,22 @@ class SpecialSetSitelinkTest extends SpecialPageTestBase {
 	}
 
 	private function addBadgeMatcher() {
-		$badgeMatcher = array(
-			'tag' => 'option',
-			'content' => 'Good article',
+		$name = 'badge-' . self::$badgeId;
+		self::$matchers['badgeinput'] = array(
+			'tag' => 'input',
 			'attributes' => array(
-				'value' => self::$badgeId
+				'name' => $name,
+				'id' => $name,
+				'type' => 'checkbox'
 			) );
 
-		self::$matchers['badges'] = array(
-			'tag' => 'select',
+		self::$matchers['badgelabel'] = array(
+			'tag' => 'label',
 			'attributes' => array(
-				'id' => 'wb-setsitelink-badges',
-				'class' => 'wb-input',
-				'name' => 'badges[]',
-				'multiple' => ''
+				'for' => $name
 			),
-			'children' => array(
-				'count' => 1,
-				'only' => $badgeMatcher
-			) );
+			'content' => 'Good article'
+		);
 	}
 
 	public function testExecuteEmptyForm() {
