@@ -3,11 +3,12 @@
 namespace Wikibase\Client\Hooks;
 
 use Language;
+use OutputPage;
+use ParserOutput;
 use Sanitizer;
-use SiteStore;
 use Title;
-use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityLookup;
 
 /**
@@ -18,23 +19,14 @@ use Wikibase\Lib\Store\EntityLookup;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Daniel Kinzler
  */
 class LanguageLinkBadgeDisplay {
-
-	/**
-	 * @var ClientSiteLinkLookup
-	 */
-	protected $clientSiteLinkLookup;
 
 	/**
 	 * @var EntityLookup
 	 */
 	protected $entityLookup;
-
-	/**
-	 * @var SiteStore
-	 */
-	protected $siteStore;
 
 	/**
 	 * @var array
@@ -47,108 +39,125 @@ class LanguageLinkBadgeDisplay {
 	protected $language;
 
 	/**
-	 * @param ClientSiteLinkLookup $clientSiteLinkLookup
 	 * @param EntityLookup $entityLookup
-	 * @param SiteStore $siteStore
 	 * @param array $badgeClassNames
 	 * @param Language $language
 	 */
-	public function __construct( ClientSiteLinkLookup $clientSiteLinkLookup,
-			EntityLookup $entityLookup, SiteStore $siteStore, array $badgeClassNames, Language $language ) {
-		$this->clientSiteLinkLookup = $clientSiteLinkLookup;
+	public function __construct( EntityLookup $entityLookup, array $badgeClassNames, Language $language ) {
 		$this->entityLookup = $entityLookup;
-		$this->siteStore = $siteStore;
 		$this->badgeClassNames = $badgeClassNames;
 		$this->language = $language;
 	}
 
 	/**
-	 * Looks up the item of the given title and gets all badges for the sitelink to
-	 * the language link title. These badges are added as CSS classes to the language link.
+	 * Attaches info about link badges in the given OutputPage, for later retrieval
+	 * and processing by applyBadges().
+	 *
+	 * This is typically called in the context of parsing a wiki page.
+	 *
+	 * @param SiteLink[] $langLinks A list of language links as
+	 * @param ParserOutput $parserOutput The output page to set the wikibase_badges property on.
+	 */
+	public function attachBadgesToOutput( array $langLinks, ParserOutput $parserOutput ) {
+		$badgeInfoForAllLinks = array();
+
+		foreach ( $langLinks as $key => $link ) {
+			$badges = $link->getBadges();
+
+			if ( !empty( $badges ) ) {
+				$badgeInfoForAllLinks[$key] = $this->getBadgeInfo( $badges );
+			}
+		}
+
+		$parserOutput->setExtensionData( 'wikibase_badges', $badgeInfoForAllLinks );
+	}
+
+	/**
+	 * Applies the badges described in the wikibase_badges property of $output to
+	 * the language link to $languageLinkTitle. The badge info for this linked is
+	 * looked up in the wikibase_badges data using the key returned by
+	 * $languageLinkTitle->getInterwiki().
+	 *
+	 * This is generally called in the context of generating skin output.
 	 *
 	 * @since 0.5
 	 *
-	 * @param Title $title
 	 * @param Title $languageLinkTitle
 	 * @param array &$languageLink
+	 * @param OutputPage $output The output page to take the wikibase_badges property from.
 	 */
-	public function assignBadges( Title $title, Title $languageLinkTitle, array &$languageLink ) {
-		$sites = $this->siteStore->getSites();
+	public function applyBadges( Title $languageLinkTitle, array &$languageLink, OutputPage $output ) {
+		$badges = $output->getProperty( 'wikibase_badges' );
 
-		$navId = $languageLinkTitle->getInterwiki();
-		if ( !$sites->hasNavigationId( $navId ) ) {
-			return;
-		}
-
-		$site = $sites->getSiteByNavigationId( $navId );
-		$siteLink = $this->clientSiteLinkLookup->getSiteLink( $title, $site->getGlobalId() );
-		if ( $siteLink === null ) {
-			return;
-		}
-
-		$badges = $siteLink->getBadges();
 		if ( empty( $badges ) ) {
 			return;
 		}
 
-		$classes = $this->formatClasses( $badges );
-		if ( !isset( $languageLink['class'] ) ) {
-			$languageLink['class'] = $classes;
-		} else {
-			$languageLink['class'] .= ' ' . $classes;
+		$navId = $languageLinkTitle->getInterwiki();
+		if ( !isset( $badges[$navId] ) ) {
+			return;
 		}
 
-		$this->assignExtraBadges( $badges, $languageLink );
+		/** @var array $linksBadgeInfo an associative array with the keys 'class', and 'itemtitle'. */
+		$linksBadgeInfo = $badges[$navId];
+
+		if ( isset( $languageLink['class'] ) ) {
+			$languageLink['class'] .= ' ' . $linksBadgeInfo['class'];
+		} else {
+			$languageLink['class'] = $linksBadgeInfo['class'];
+		}
+
+		$languageLink['itemtitle'] = $linksBadgeInfo['itemtitle'];
 	}
 
 	/**
-	 * Formats the badges array into a string of classes.
+	 * Builds badge information for the given badges.
+	 * CSS classes are derived from the given list of badges, and any extra badge class
+	 * names specified in the badgeClassNames setting are added.
+	 * For badges that have a such an extra class name assigned, this also
+	 * adds a title according to the items' labels. Other badges do not have labels
+	 * added to the link's title attribute, so the can be effectively ignored
+	 * on this client wiki.
 	 *
 	 * @param ItemId[] $badges
 	 *
-	 * @return string
+	 * @return array An associative array with the keys 'class' and 'itemtitle' with assigned
+	 * string values. These fields correspond to the fields in the description array for language
+	 * links used by the SkinTemplateGetLanguageLink hook and expected by the applyBadges()
+	 * function.
 	 */
-	private function formatClasses( array $badges ) {
-		$classes = '';
-		/* @var ItemId $badge */
-		foreach ( $badges as $badge ) {
-			$class = Sanitizer::escapeClass( $badge->getSerialization() );
-			$classes .= "badge-$class ";
-		}
-		return rtrim( $classes );
-	}
-
-	/**
-	 * Assigns the extra badge class names specified in the badgeClassNames setting
-	 * to the language link and also adds a title according to the items' labels.
-	 *
-	 * @param array $badges
-	 * @param array &$languageLink
-	 */
-	private function assignExtraBadges( array $badges, array &$languageLink ) {
+	private function getBadgeInfo( array $badges ) {
+		$classes = array();
 		$titles = array();
-		/** @var ItemId $badge */
+
 		foreach ( $badges as $badge ) {
 			$badgeSerialization = $badge->getSerialization();
+			$classes[] = 'badge-' . Sanitizer::escapeClass( $badgeSerialization );
+
+			// nicer classes for well known badges
 			if ( isset( $this->badgeClassNames[$badgeSerialization] ) ) {
 				// add class name
-				$className = Sanitizer::escapeClass( $this->badgeClassNames[$badgeSerialization] );
-				$languageLink['class'] .= ' ' . $className;
+				$classes[] = Sanitizer::escapeClass( $this->badgeClassNames[$badgeSerialization] );
 
-				// add title
-				$title = $this->getTitle( $badge );
+				// add title (but only if this badge is well known on this wiki)
+				$title = $this->getLabel( $badge );
+
 				if ( $title !== null ) {
 					$titles[] = $title;
 				}
 			}
 		}
-		if ( !empty( $titles ) ) {
-			$languageLink['itemtitle'] = $this->language->commaList( $titles );
-		}
+
+		$info = array(
+			'class' => implode( ' ', $classes ),
+			'itemtitle' => $this->language->commaList( $titles ),
+		);
+
+		return $info;
 	}
 
 	/**
-	 * Returns the title for the given badge.
+	 * Returns the label for the given badge.
 	 *
 	 * @since 0.5
 	 *
@@ -156,7 +165,7 @@ class LanguageLinkBadgeDisplay {
 	 *
 	 * @return string|null
 	 */
-	private function getTitle( ItemId $badge ) {
+	private function getLabel( ItemId $badge ) {
 		$entity = $this->entityLookup->getEntity( $badge );
 		if ( !$entity ) {
 			return null;
