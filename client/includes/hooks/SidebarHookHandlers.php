@@ -18,7 +18,7 @@ use Wikibase\NamespaceChecker;
  * ParserOutput related hook handlers.
  *
  * This class has a static interface for use with MediaWiki's hook mechanism; the static
- * handler functions will create a new instance of ParserOutputHooks and then call the
+ * handler functions will create a new instance of SidebarHookHandlers and then call the
  * corresponding member function on that.
  *
  * @since 0.5.
@@ -29,7 +29,7 @@ use Wikibase\NamespaceChecker;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class ParserOutputHooks {
+class SidebarHookHandlers {
 
 	/**
 	 * @var NamespaceChecker
@@ -85,7 +85,7 @@ class ParserOutputHooks {
 			$settings->getSetting( 'sortPrepend' )
 		);
 
-		return new ParserOutputHooks(
+		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$langLinkHandler,
 			$badgeDisplay,
