@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use ParserOutput;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -16,6 +17,34 @@ use Wikibase\Client\WikibaseClient;
  * @author Daniel Kinzler
  */
 class NoLangLinkHandler {
+
+	/**
+	 * Get the noexternallanglinks page property from the ParserOutput,
+	 * which is set by the {{#noexternallanglinks}} parser function.
+	 *
+	 * @param ParserOutput $out
+	 *
+	 * @return string[] A list of language codes, identifying which repository links to ignore.
+	 *         Empty if {{#noexternallanglinks}} was not used on the page.
+	 */
+	public static function getNoExternalLangLinks( ParserOutput $out ) {
+		$property = $out->getProperty( 'noexternallanglinks' );
+		$nel = is_string( $property ) ? unserialize( $property ) : array();
+		return $nel;
+	}
+
+	/**
+	 * Set the noexternallanglinks page property in the ParserOutput,
+	 * which is set by the {{#noexternallanglinks}} parser function.
+	 *
+	 * @since 0.4
+	 *
+	 * @param ParserOutput $out
+	 * @param string[] $noexternallanglinks a list of languages to suppress
+	 */
+	public static function setNoExternalLangLinks( ParserOutput $out, array $noexternallanglinks ) {
+		$out->setProperty( 'noexternallanglinks', serialize( $noexternallanglinks ) );
+	}
 
 	/**
 	 * Parser function
@@ -40,21 +69,14 @@ class NoLangLinkHandler {
 			return '';
 		}
 
-		$langLinkHandler = new LangLinkHandler(
-			$settings->getSetting( 'siteGlobalID' ),
-			$namespaceChecker,
-			$wikibaseClient->getStore()->getSiteLinkTable(),
-			$wikibaseClient->getSiteStore(),
-			$wikibaseClient->getLangLinkSiteGroup()
-		);
-
 		$langs = func_get_args();
 		// Remove the first member, which is the parser.
 		array_shift( $langs );
 
 		$output = $parser->getOutput();
 
-		$langLinkHandler->excludeRepoLangLinks( $output, $langs );
+		$nel = array_merge( self::getNoExternalLangLinks( $output ), $langs );
+		self::setNoExternalLangLinks( $output, $nel );
 
 		return '';
 	}
