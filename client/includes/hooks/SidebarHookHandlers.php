@@ -13,6 +13,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
+use Wikibase\NoLangLinkHandler;
 
 /**
  * ParserOutput related hook handlers.
@@ -56,7 +57,7 @@ class SidebarHookHandlers {
 	 */
 	private $alwaysSort;
 
-	private static function newFromGlobalState() {
+	public static function newFromGlobalState() {
 		global $wgLang;
 		StubUserLang::unstub( $wgLang );
 
@@ -66,15 +67,11 @@ class SidebarHookHandlers {
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$langLinkHandler = $wikibaseClient->getLangLinkHandler();
 
-		$clientSiteLinkLookup = $wikibaseClient->getClientSiteLinkLookup();
 		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$siteStore = $wikibaseClient->getSiteStore();
 		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$clientSiteLinkLookup,
 			$entityLookup,
-			$siteStore,
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
 		);
@@ -133,12 +130,13 @@ class SidebarHookHandlers {
 	 * @param &$languageLink
 	 * @param Title $languageLinkTitle
 	 * @param Title $title
+	 * @param OutputPage $output
 	 *
 	 * @return bool
 	 */
-	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title, OutputPage $output = null ) {
 		$handler = self::newFromGlobalState();
-		return $handler->doSkinTemplateGetLanguageLink( $languageLink, $languageLinkTitle, $title );
+		return $handler->doSkinTemplateGetLanguageLink( $languageLink, $languageLinkTitle, $title, $output );
 	}
 
 	public function __construct(
@@ -224,7 +222,7 @@ class SidebarHookHandlers {
 			return true;
 		}
 
-		$noExternalLangLinks = $this->langLinkHandler->getNoExternalLangLinks( $parserOutput );
+		$noExternalLangLinks = NoLangLinkHandler::getNoExternalLangLinks( $parserOutput );
 
 		if ( !empty( $noExternalLangLinks ) ) {
 			$out->setProperty( 'noexternallanglinks', $noExternalLangLinks );
@@ -242,6 +240,12 @@ class SidebarHookHandlers {
 			$out->setProperty( 'wikibase-otherprojects-sidebar', $otherProjects );
 		}
 
+		$badges = $parserOutput->getExtensionData( 'wikibase_badges' );
+
+		if ( $badges !== null ) {
+			$out->setProperty( 'wikibase_badges', $badges );
+		}
+
 		return true;
 	}
 
@@ -253,13 +257,20 @@ class SidebarHookHandlers {
 	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle
 	 * @param Title $title
+	 * @param OutputPage|null $output
 	 *
 	 * @return bool
 	 */
-	public function doSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+	public function doSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title, OutputPage $output = null ) {
+		if ( !$output ) {
+			// This would happen for versions of core that do not have change Ic479e2fa5cc applied.
+			wfWarn( __METHOD__ . ': SkinTemplateGetLanguageLink hook called without OutputPage object!' );
+			return true;
+		}
+
 		wfProfileIn( __METHOD__ );
 
-		$this->badgeDisplay->assignBadges( $title, $languageLinkTitle, $languageLink );
+		$this->badgeDisplay->applyBadges( $languageLink, $languageLinkTitle, $output );
 
 		wfProfileOut( __METHOD__ );
 		return true;
