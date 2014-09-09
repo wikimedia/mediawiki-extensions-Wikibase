@@ -6,6 +6,7 @@ use OutputPage;
 use Parser;
 use ParserOutput;
 use StripState;
+use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
@@ -39,6 +40,11 @@ class ParserOutputHooks {
 	private $langLinkHandler;
 
 	/**
+	 * @var LanguageLinkBadgeDisplay
+	 */
+	private $badgeDisplay;
+
+	/**
 	 * @var InterwikiSorter
 	 */
 	private $interwikiSorter;
@@ -49,10 +55,26 @@ class ParserOutputHooks {
 	private $alwaysSort;
 
 	private static function newFromGlobalState() {
+		global $wgLang;
+
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
+		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$langLinkHandler = $wikibaseClient->getLangLinkHandler();
+
+		$clientSiteLinkLookup = $wikibaseClient->getClientSiteLinkLookup();
+		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
+		$siteStore = $wikibaseClient->getSiteStore();
+		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
+
+		$badgeDisplay = new LanguageLinkBadgeDisplay(
+			$clientSiteLinkLookup,
+			$entityLookup,
+			$siteStore,
+			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
+			$wgLang
+		);
 
 		$interwikiSorter = new InterwikiSorter(
 			$settings->getSetting( 'sort' ),
@@ -61,16 +83,16 @@ class ParserOutputHooks {
 		);
 
 		return new ParserOutputHooks(
-			$wikibaseClient->getNamespaceChecker(),
+			$namespaceChecker,
 			$langLinkHandler,
+			$badgeDisplay,
 			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);
 	}
 
 	/**
-	 * Hook runs after internal parsing
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
+	 * Static handler for the ParserAfterParse hook.
 	 *
 	 * @param Parser $parser
 	 * @param string $text
@@ -102,15 +124,31 @@ class ParserOutputHooks {
 		return $handler->doOutputPageParserOutput( $out, $parserOutput );
 	}
 
+	/**
+	 * Static handler for the SkinTemplateGetLanguageLink hook.
+	 *
+	 * @param $languageLink
+	 * @param Title $languageLinkTitle
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+		$handler = self::newFromGlobalState();
+		return $handler->doSkinTemplateGetLanguageLink( $languageLink, $languageLinkTitle, $title );
+	}
+
 	function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandler $langLinkHandler,
+		LanguageLinkBadgeDisplay $badgeDisplay,
 		InterwikiSorter $sorter,
 		$alwaysSort
 	) {
 
 		$this->namespaceChecker = $namespaceChecker;
 		$this->langLinkHandler = $langLinkHandler;
+		$this->badgeDisplay = $badgeDisplay;
 		$this->interwikiSorter = $sorter;
 		$this->alwaysSort = $alwaysSort;
 	}
@@ -213,6 +251,26 @@ class ParserOutputHooks {
 			$out->setProperty( 'wikibase-otherprojects-sidebar', $otherProjects );
 		}
 
+		return true;
+	}
+
+	/**
+	 * Add badges to the language links.
+	 *
+	 * @since 0.5
+	 *
+	 * @param array &$languageLink
+	 * @param Title $languageLinkTitle
+	 * @param Title $title
+	 *
+	 * @return bool
+	 */
+	public function doSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
+		wfProfileIn( __METHOD__ );
+
+		$this->badgeDisplay->assignBadges( $title, $languageLinkTitle, $languageLink );
+
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
