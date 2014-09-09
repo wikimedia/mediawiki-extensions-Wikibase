@@ -131,7 +131,7 @@
 
 		/**
 		 * Caches the timeout when the actual input extender animation should kick in.
-		 * @type {Object}
+		 * @type {number}
 		 */
 		_animationTimeout: null,
 
@@ -162,6 +162,10 @@
 				}
 			} )
 			.on( 'blur.' + this.widgetName, function( event ) {
+				if( self.__extensionFocused ) {
+					delete self.__extensionFocused;
+					return;
+				}
 				clearTimeout( self._animationTimeout );
 				self._animationTimeout = setTimeout( function() {
 					self.hideExtension();
@@ -450,8 +454,9 @@
 
 			$extension
 			.append( $closeButton )
-			.on( 'click.' + this.widgetName, function( event ) {
+			.on( 'mousedown.' + this.widgetName, function( event ) {
 				if( !$( event.target ).closest( $closeButton ).length ) {
+					self.__extensionFocused = true;
 					clearTimeout( self._animationTimeout );
 					self.showExtension();
 				}

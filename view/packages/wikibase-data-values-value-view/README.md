@@ -109,10 +109,12 @@ Other methods an Expert needs to provide:
 
 ### Enhancements
 * Implemented jQuery.ui.languagesuggester.
+* Input extender extension will not be hidden on mousedown event.
 
 #### Breaking changes
 * Use version 0.6.0 of DataValuesJavascript
 * Renamed jQuery.ui.suggestCommons to jQuery.ui.commonssuggester.
+* When pressing ESC on a suggester enhanced input element while the suggester menu is visible, the key event's propagation is stopped.
 
 #### Bugfixes
 * Fixed eachchange event: Cancel event after it got removed.
