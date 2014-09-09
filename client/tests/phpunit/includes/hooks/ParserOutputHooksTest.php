@@ -17,7 +17,7 @@ use Title;
 use Wikibase\Client\ClientSiteLinkLookup;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
-use Wikibase\Client\Hooks\ParserOutputHooks;
+use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -29,7 +29,7 @@ use Wikibase\Settings;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\Client\Hooks\ParserOutputHooks
+ * @covers Wikibase\Client\Hooks\SidebarHookHandlers
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -38,7 +38,7 @@ use Wikibase\SettingsArray;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ParserOutputHooksTest extends \MediaWikiTestCase {
+class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param string $globalId
@@ -150,7 +150,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 		return new SettingsArray( array_merge( $defaults, $settings ) );
 	}
 
-	private function newParserOutputHooks( array $settings = array() ) {
+	private function newSidebarHookHandlers( array $settings = array() ) {
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
 
@@ -202,7 +202,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 			$settings->getSetting( 'sortPrepend' )
 		);
 
-		return new ParserOutputHooks(
+		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$langLinkHandler,
 			$badgeDisplay,
@@ -304,7 +304,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 		array $expectedSisterLinks = null
 	) {
 		$parser = $this->newParser( $title, $pagePropsBefore, array() );
-		$handler = $this->newParserOutputHooks();
+		$handler = $this->newSidebarHookHandlers();
 
 		$text = '';
 		$stripState = new StripState( 'x' );
@@ -330,7 +330,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 			'wikibase_item' => 'Q1',
 		);
 
-		$handler = $this->newParserOutputHooks();
+		$handler = $this->newSidebarHookHandlers();
 
 		$pout = new ParserOutput();
 
