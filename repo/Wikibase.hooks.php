@@ -898,9 +898,9 @@ final class RepoHooks {
 	 *
 	 * @param string[] $data
 	 * @param string $comment reference to the finalized autocomment
-	 * @param string $pre the string before the autocomment
+	 * @param string|bool $pre content before the autocomment
 	 * @param string $auto the autocomment unformatted
-	 * @param string $post the string after the autocomment
+	 * @param string|bool $post content after the autocomment
 	 * @param Title|null $title use for further information
 	 * @param bool $local shall links be generated locally or globally
 	 *
@@ -931,17 +931,27 @@ final class RepoHooks {
 				$auto = $msg->params( $args )->parse();
 
 				// add pre and post fragments
-				if ( $pre !== '' ) {
+				if ( $pre === true ) {
+					// written summary $presep autocomment (summary /* section */)
+					$pre = wfMessage( 'autocomment-prefix' )->escaped();
+				} elseif ( $pre !== '' && $pre !== false ) {
 					// written summary $presep autocomment (summary /* section */)
 					$pre .= wfMessage( 'autocomment-prefix' )->escaped();
+				} elseif ( $pre === false ) {
+					$pre = '';
 				}
-				if ( $post !== '' ) {
+				if ( $post !== '' && $post !== false ) {
 					// autocomment $postsep written summary (/* section */ summary)
 					$auto .= wfMessage( 'colon-separator' )->escaped();
+					if ( $post === true ) {
+						$post = '';
+					}
+				} elseif ( $post === false ) {
+					$post = '';
 				}
 
 				$auto = '<span class="autocomment">' . $auto . '</span>';
-				$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
+				$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . '</span>' . $post;
 			}
 		}
 
