@@ -33,6 +33,7 @@ return call_user_func( function() {
 				'Property.js',
 				'Reference.js',
 				'SiteLink.js',
+				'SiteLinkList.js',
 				'SnakList.js',
 				'Statement.js',
 				'Term.js',

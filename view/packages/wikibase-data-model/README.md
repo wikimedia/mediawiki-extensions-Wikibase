@@ -13,6 +13,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Removed wikibase.datamodel.Reference.setSnaks().
 * wikibase.datamodel.Reference constructor does not accept Snak object(s) any more.
 * Added Fingerprint.
+* Added SiteLinkList.
 * Added Term.
 * Added TermGroup.
 * Added TermGroupList.
