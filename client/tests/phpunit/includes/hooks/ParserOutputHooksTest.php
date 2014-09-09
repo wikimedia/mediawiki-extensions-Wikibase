@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
+use Language;
 use MediaWikiSite;
 use OutputPage;
 use Parser;
@@ -13,6 +14,7 @@ use Site;
 use SiteStore;
 use StripState;
 use Title;
+use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserOutputHooks;
 use Wikibase\DataModel\Entity\ItemId;
@@ -138,6 +140,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 	}
 
 	private function newParserOutputHooks( array $settings = array() ) {
+		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
 
 		$siteId = $settings->getSetting( 'siteGlobalid' );
@@ -165,6 +168,14 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 			$siteGroup
 		);
 
+		$badgeDisplay = new LanguageLinkBadgeDisplay(
+			$siteLinkLookup,
+			$entityLookup,
+			$siteStore,
+			array( 'Q17' => 'featured' ),
+			$en
+		);
+
 		$interwikiSorter = new InterwikiSorter(
 			$settings->getSetting( 'sort' ),
 			$settings->getSetting( 'interwikiSortOrders' ),
@@ -174,6 +185,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 		return new ParserOutputHooks(
 			$namespaceChecker,
 			$langLinkHandler,
+			$badgeDisplay,
 			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);
