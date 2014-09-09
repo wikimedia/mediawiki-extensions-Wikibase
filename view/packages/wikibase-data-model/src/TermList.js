@@ -8,7 +8,7 @@
 /**
  * Unordered set of terms.
  * @constructor
- * @since 0.3
+ * @since 0.4
  *
  * @param {wikibase.datamodel.Term[]} terms
  */

@@ -8,7 +8,7 @@
 /**
  * Container for sets of labels, descriptions and aliases.
  * @constructor
- * @since 0.3
+ * @since 0.4
  *
  * @param {wikibase.datamodel.TermList} labels
  * @param {wikibase.datamodel.TermList} descriptions
