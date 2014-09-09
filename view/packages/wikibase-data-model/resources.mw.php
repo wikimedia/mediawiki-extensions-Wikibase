@@ -52,7 +52,7 @@ return call_user_func( function() {
 
 		'wikibase.datamodel.__namespace' => $moduleTemplate + array(
 			'scripts' => array(
-				'namespace.js',
+				'__namespace.js',
 			),
 			'dependencies' => array(
 				'wikibase', // Just for the namespace
