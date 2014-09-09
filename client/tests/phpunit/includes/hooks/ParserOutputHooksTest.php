@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
+use Language;
 use MediaWikiSite;
 use OutputPage;
 use Parser;
@@ -13,8 +14,11 @@ use Site;
 use SiteStore;
 use StripState;
 use Title;
+use Wikibase\Client\ClientSiteLinkLookup;
+use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserOutputHooks;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\InterwikiSorter;
@@ -70,17 +74,26 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 		return $siteStore;
 	}
 
+	private function getBadgeItem() {
+		$item = Item::newEmpty();
+		$item->setId( new ItemId( 'Q17' ) );
+		$item->setLabel( 'de', 'exzellent' );
+		$item->setLabel( 'en', 'featured' );
+
+		return $item;
+	}
+
 	/**
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookup() {
 		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 
-		$badgeQ7 = new ItemId( 'Q17' );
+		$badgeId = $this->getBadgeItem()->getId();
 
 		$links = array(
 			'Q1' => array(
-				new SiteLink( 'dewiki', 'Sauerstoff', array( $badgeQ7 ) ),
+				new SiteLink( 'dewiki', 'Sauerstoff', array( $badgeId ) ),
 				new SiteLink( 'enwiki', 'Oxygen' ),
 				new SiteLink( 'commonswiki', 'Oxygen' ),
 			),
@@ -138,6 +151,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 	}
 
 	private function newParserOutputHooks( array $settings = array() ) {
+		$en = Language::factory( 'en' );
 		$settings = $this->newSettings( $settings );
 
 		$siteId = $settings->getSetting( 'siteGlobalid' );
@@ -148,6 +162,15 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
 		$siteLinkLookup = $this->getSiteLinkLookup();
 		$siteStore = $this->getSiteStore();
+
+		$entityLookup = new MockRepository();
+		$entityLookup->putEntity( $this->getBadgeItem() );
+
+		$clientSiteLinkLookup = new ClientSiteLinkLookup(
+			$siteId,
+			$siteLinkLookup,
+			$entityLookup
+		);
 
 		$otherProjectsSidebarGenerator = new OtherProjectsSidebarGenerator(
 			$siteId,
@@ -165,6 +188,14 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 			$siteGroup
 		);
 
+		$badgeDisplay = new LanguageLinkBadgeDisplay(
+			$clientSiteLinkLookup,
+			$entityLookup,
+			$siteStore,
+			array( 'Q17' => 'featured' ),
+			$en
+		);
+
 		$interwikiSorter = new InterwikiSorter(
 			$settings->getSetting( 'sort' ),
 			$settings->getSetting( 'interwikiSortOrders' ),
@@ -174,6 +205,7 @@ class ParserOutputHooksTest extends \MediaWikiTestCase {
 		return new ParserOutputHooks(
 			$namespaceChecker,
 			$langLinkHandler,
+			$badgeDisplay,
 			$interwikiSorter,
 			$settings->getSetting( 'alwaysSort' )
 		);
