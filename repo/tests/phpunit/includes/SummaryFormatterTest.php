@@ -365,7 +365,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				'foo', 'wbeditentity', 'bar',
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?</span>bar</span>!'
+				'!foo‎<span dir="auto"><span class="autocomment">.*?</span></span>bar!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
@@ -373,7 +373,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				'foo', 'wbsetlabel-set:1|en', 'bar',
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[en\].*?</span>bar</span>!'
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[en\].*?</span></span>bar!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
@@ -381,7 +381,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				'foo', 'wbsetlabel-set:1|<>', 'bar',
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>bar!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
@@ -389,7 +389,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				'foo', 'wbsetlabel-set:1|&lt;&gt;', 'bar',
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span>bar</span>!'
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>bar!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
@@ -397,7 +397,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				'foo', 'wbsetlabel-set:1|&', 'bar',
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span>bar</span>!'
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span></span>bar!'
 			),
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
@@ -405,7 +405,7 @@ class SummaryFormatterTest extends \MediaWikiLangTestCase {
 				'foo', 'wbsetlabel-set:1|…', 'bar',
 				'Title',
 				false,
-				'!foo‎<span dir="auto"><span class="autocomment">.*?\[…\].*?</span>bar</span>!'
+				'!foo‎<span dir="auto"><span class="autocomment">.*?\[…\].*?</span></span>bar!'
 			)
 		);
 	}
