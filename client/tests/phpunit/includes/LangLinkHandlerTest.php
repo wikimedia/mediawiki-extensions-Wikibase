@@ -5,9 +5,14 @@ namespace Wikibase\Test;
 use MediaWikiSite;
 use ParserOutput;
 use Title;
+use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
+use Wikibase\NoLangLinkHandler;
 
 /**
  * @covers Wikibase\LangLinkHandler
@@ -35,7 +40,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'Foo' );
 		$links = $item->getSiteLinkList();
 		$links->addNewSiteLink( 'dewiki', 'Foo de' );
-		$links->addNewSiteLink( 'enwiki', 'Foo en' );
+		$links->addNewSiteLink( 'enwiki', 'Foo en', array( new ItemId( 'Q17' ) ) );
 		$links->addNewSiteLink( 'srwiki', 'Foo sr' );
 		$links->addNewSiteLink( 'dewiktionary', 'Foo de word' );
 		$links->addNewSiteLink( 'enwiktionary', 'Foo en word' );
@@ -70,14 +75,21 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 		return new LangLinkHandler(
 			$this->getOtherProjectsSidebarGenerator( $otherProjects ),
+			$this->getLanguageLinkBadgeDisplay(),
 			'srwiki',
 			new NamespaceChecker( array( NS_TALK ), array() ),
+			$this->mockRepo,
 			$this->mockRepo,
 			$sites,
 			'wikipedia'
 		);
 	}
 
+	/**
+	 * @param array $otherProjects
+	 *
+	 * @return OtherProjectsSidebarGenerator
+	 */
 	private function getOtherProjectsSidebarGenerator( array $otherProjects ) {
 		$otherProjectsSidebarGenerator = $this->getMockBuilder( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator' )
 			->disableOriginalConstructor()
@@ -88,6 +100,51 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( $otherProjects ) );
 
 		return $otherProjectsSidebarGenerator;
+	}
+
+	/**
+	 * @return LanguageLinkBadgeDisplay
+	 */
+	private function getLanguageLinkBadgeDisplay() {
+		$badgeDisplay = $this->getMockBuilder( 'Wikibase\Client\Hooks\LanguageLinkBadgeDisplay' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$this_ = $this;
+
+		$badgeDisplay->expects( $this->any() )
+			->method( 'attachBadgesToOutput' )
+			->will( $this->returnCallback( function ( array $siteLinks, ParserOutput $parserOutput ) use ( $this_ ) {
+				$badges = $this_->linksToBadges( $siteLinks );
+				$parserOutput->setExtensionData( 'wikibase_badges', $badges );
+			} ) );
+
+		return $badgeDisplay;
+	}
+
+	/**
+	 * @param SiteLink[] $siteLinks
+	 *
+	 * @return string[]
+	 */
+	public function linksToBadges( array $siteLinks ) {
+		$badgesByPrefix = array();
+
+		foreach ( $siteLinks as $link ) {
+			$badges = $link->getBadges();
+
+			if ( empty( $badges ) )  {
+				continue;
+			}
+
+			// strip "wiki" suffix
+			$key = preg_replace( '/wiki$/', '', $link->getSiteId() );
+			$badgesByPrefix[$key] = array_map( function( ItemId $id ) {
+				return $id->getSerialization();
+			}, $badges );
+		}
+
+		return $badgesByPrefix;
 	}
 
 	public static function provideGetEntityLinks() {
@@ -145,7 +202,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 
 	protected function makeParserOutput( $langLinks, $noExternalLangLinks = array() ) {
 		$out = new ParserOutput();
-		$this->langLinkHandler->setNoExternalLangLinks( $out, $noExternalLangLinks );
+		NoLangLinkHandler::setNoExternalLangLinks( $out, $noExternalLangLinks );
 
 		foreach ( $langLinks as $lang => $link ) {
 			$out->addLanguageLink( "$lang:$link" );
@@ -187,18 +244,6 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 				array( 'xy', 'de', 'en' )
 			)
 		);
-	}
-
-	/**
-	 * @dataProvider provideExcludeRepoLinks
-	 */
-	public function testExcludeRepoLinks( $alreadyExcluded, $toExclude, $expected ) {
-		$out = new ParserOutput();
-		$this->langLinkHandler->setNoExternalLangLinks( $out, $alreadyExcluded );
-		$this->langLinkHandler->excludeRepoLangLinks( $out, $toExclude );
-		$nel = $this->langLinkHandler->getNoExternalLangLinks( $out );
-
-		$this->assertEquals( $expected, $nel );
 	}
 
 	public static function provideUseRepoLinks() {
@@ -318,12 +363,40 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
 
 		$links = $this->langLinkHandler->getEffectiveRepoLinks( $title, $out );
+		$links = $this->getPlainLinks( $links );
 
 		$this->assertArrayEquals( $expectedLinks, $links, false, true );
 	}
 
+	/**
+	 * @param SiteLink[] $links
+	 *
+	 * @return array
+	 */
+	private function getPlainLinks( $links ) {
+		$flat = array();
+
+		foreach ( $links as $link ) {
+			$key = $link->getSiteId();
+			$flat[$key] = $link->getPageName();
+		}
+
+		return $flat;
+	}
+
 	public static function provideAddLinksFromRepository() {
 		$cases = self::provideGetEffectiveRepoLinks();
+
+
+		$badges = array(
+			// as defined by getItems()
+			'Foo_en' => array(
+				'en' => array( 'Q17' ),
+			),
+			'Foo_sr' => array(
+				'en' => array( 'Q17' ),
+			),
+		);
 
 		foreach ( $cases as $i => $case ) {
 			// convert associative array to list of links
@@ -333,11 +406,21 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			// expect the expected effective links plus the provided language links
 			$expectedLinks = array_merge( $expectedLinks, $langLinks );
 
+			if ( !in_array( '*', $case[2] ) ) {
+				$expectedBadges = isset( $badges[ $case[0] ] ) ? $badges[ $case[0] ] : array();
+
+				// no badges for languages mentioned in $noExternalLangLinks
+				$expectedBadges = array_diff_key( $expectedBadges, array_flip( $case[2] ) );
+			} else {
+				$expectedBadges = array();
+			}
+
 			$cases[$i] = array(
 				$case[0],
 				$case[1],
 				$case[2],
-				$expectedLinks
+				$expectedLinks,
+				$expectedBadges
 			);
 		}
 
@@ -347,17 +430,18 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideAddLinksFromRepository
 	 */
-	public function testAddLinksFromRepository( $title, $langLinks, $noExternalLangLinks, $expectedLinks ) {
+	public function testAddLinksFromRepository( $title, $langLinks, $noExternalLangLinks, $expectedLinks, $expectedBadges ) {
 		if ( is_string( $title ) ) {
 			$title = Title::newFromText( $title );
 		}
 
 		$out = $this->makeParserOutput( $langLinks, $noExternalLangLinks );
 
-		$this->langLinkHandler->addLinksFromRepository( $title, $out );
-		$links = $out->getLanguageLinks();
+		$langLinkHandler = $this->getLangLinkHandler( array() );
+		$langLinkHandler->addLinksFromRepository( $title, $out );
 
-		$this->assertArrayEquals( $expectedLinks, $links, false, false );
+		$this->assertArrayEquals( $expectedLinks, $out->getLanguageLinks(), false, false );
+		$this->assertArrayEquals( $expectedBadges, $out->getExtensionData( 'wikibase_badges' ), false, true );
 	}
 
 	protected static function mapToLinks( $map ) {
