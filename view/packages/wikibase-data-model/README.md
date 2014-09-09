@@ -14,6 +14,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * wikibase.datamodel.Reference constructor does not accept Snak object(s) any more.
 * Added Term.
 * Added TermGroup.
+* Added TermGroupList.
 * Added TermList.
 
 ### 0.3.2 (2014-08-19)

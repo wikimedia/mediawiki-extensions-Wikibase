@@ -36,6 +36,7 @@ return call_user_func( function() {
 				'Statement.js',
 				'Term.js',
 				'TermGroup.js',
+				'TermGroupList.js',
 				'TermList.js',
 			),
 			'dependencies' => array(
