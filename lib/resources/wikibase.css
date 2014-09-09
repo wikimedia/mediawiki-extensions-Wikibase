@@ -692,6 +692,7 @@ h2.wb-sitelinks-heading {
 
 span.wb-itemlink-id { /* item id within a link to an item (especially on special pages) */
 	font-size: .85em;
+	unicode-bidi: embed;
 }
 
 
