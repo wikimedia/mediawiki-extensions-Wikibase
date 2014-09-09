@@ -14,6 +14,7 @@ use Site;
 use SiteSQLStore;
 use SiteStore;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\ClientStore;
@@ -551,6 +552,7 @@ final class WikibaseClient {
 
 			$this->langLinkHandler = new LangLinkHandler(
 				$this->getOtherProjectsSidebarGenerator(),
+				$this->getLanguageLinkBadgeDisplay(),
 				$settings->getSetting( 'siteGlobalID' ),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkTable(),
@@ -560,6 +562,21 @@ final class WikibaseClient {
 		}
 
 		return $this->langLinkHandler;
+	}
+
+	/**
+	 * @return LanguageLinkBadgeDisplay
+	 */
+	public function getLanguageLinkBadgeDisplay() {
+		global $wgLang;
+
+		$badgeClassNames = $this->getSettings()->getSetting( 'badgeClassNames' );
+
+		return new LanguageLinkBadgeDisplay(
+			$this->getEntityLookup(),
+			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
+			$wgLang
+		);
 	}
 
 	/**
@@ -601,25 +618,6 @@ final class WikibaseClient {
 			$forbiddenSerializer,
 			$this->getInternalEntityDeserializer()
 		);
-	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @return ClientSiteLinkLookup
-	 */
-	public function getClientSiteLinkLookup() {
-		if ( !$this->clientSiteLinkLookup ) {
-			$settings = $this->getSettings();
-
-			$this->clientSiteLinkLookup = new ClientSiteLinkLookup(
-				$settings->getSetting( 'siteGlobalID' ),
-				$this->getStore()->getSiteLinkTable(),
-				$this->getEntityLookup()
-			);
-		}
-
-		return $this->clientSiteLinkLookup;
 	}
 
 	/**
