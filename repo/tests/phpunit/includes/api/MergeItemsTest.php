@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\ApiModuleTestHelper;
+use Wikibase\Test\Api\ApiModuleTestHelper;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Test\Api;
 
 use ApiBase;
 use ApiMain;
@@ -11,8 +11,6 @@ use User;
 use PHPUnit_Framework_Assert as Assert;
 
 /**
- * EntityModificationTestHelper
- *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
@@ -102,4 +100,3 @@ class ApiModuleTestHelper {
 	}
 
 }
- 
