@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_83c4b712",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T18:03:02Z",
+      "side": 1,
+      "message": "just if you want, this should be $this-\u003egetNoExternalLangLinks",
+      "revId": "671c9125e6fef1109a207da53985c0181e4102d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_a3f33368",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T18:03:02Z",
+      "side": 1,
+      "message": "The order of parameters is silly here and should be the inverse to match the order in the hook. Furthermore, it does not match the required parameters of LanguageLinkBadgeDisplay::assignBadges which are applyBadges( Title $languageLinkTitle, array \u0026$languageLink, OutputPage $out\nput )\n\nI propose to change them to applyBadges( array \u0026$languageLink, Title $languageLinkTitle, OutputPage $out\nput )",
+      "revId": "671c9125e6fef1109a207da53985c0181e4102d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
