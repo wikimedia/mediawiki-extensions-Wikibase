@@ -13,6 +13,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer;
 
 /**
  * Factory for constructing deserializers that implement handling for the legacy format.
@@ -48,7 +49,7 @@ class LegacyDeserializerFactory {
 		return new LegacyItemDeserializer(
 			$this->newEntityIdDeserializer(),
 			$this->newSiteLinkListDeserializer(),
-			$this->newClaimDeserializer(),
+			$this->newStatementDeserializer(),
 			$this->newTermsDeserializer()
 		);
 	}
@@ -88,12 +89,29 @@ class LegacyDeserializerFactory {
 	 * @return Deserializer
 	 */
 	public function newClaimDeserializer() {
+		return new LegacyClaimDeserializer(
+			$this->newSnakDeserializer(),
+			$this->newSnakListDeserializer()
+		);
+	}
+
+	/**
+	 * @return Deserializer
+	 */
+	public function newStatementDeserializer() {
+		return new LegacyStatementDeserializer(
+			$this->newClaimDeserializer(),
+			$this->newSnakListDeserializer()
+		);
+	}
+
+	/**
+	 * @return Deserializer
+	 */
+	public function newSnakListDeserializer() {
 		$snakDeserializer = $this->newSnakDeserializer();
 
-		return new LegacyClaimDeserializer(
-			$snakDeserializer,
-			new LegacySnakListDeserializer( $snakDeserializer )
-		);
+		return new LegacySnakListDeserializer( $snakDeserializer );
 	}
 
 	/**
