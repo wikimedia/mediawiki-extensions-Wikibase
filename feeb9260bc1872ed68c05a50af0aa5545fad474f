@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e2fb78d_23fe2367",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T17:46:50Z",
+      "side": 1,
+      "message": "still missing \u0026",
+      "revId": "feeb9260bc1872ed68c05a50af0aa5545fad474f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_83a6f7bc",
         "filename": "client/includes/hooks/ParserOutputHooks.php",
         "patchSetId": 6
@@ -13,6 +30,23 @@
       "writtenOn": "2014-09-10T17:44:20Z",
       "side": 1,
       "message": "This method seems a bit overhead to me. It adds 10 lines and brings no value at all.",
+      "revId": "feeb9260bc1872ed68c05a50af0aa5545fad474f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_03f5677f",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T17:46:50Z",
+      "side": 1,
+      "message": "see above",
       "revId": "feeb9260bc1872ed68c05a50af0aa5545fad474f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
