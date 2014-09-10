@@ -33,6 +33,7 @@
 	"wikibase-error-ui-link-exists": "Не можете да повежете са овом страницом, јер друга ставка већ води до ње.",
 	"wikibase-error-ui-session-failure": "Ваша сесија је истекла. Молимо пријавите се поново.",
 	"wikibase-error-ui-edit-conflict": "Дошло је до сукоба измена. Молимо учитајте и сачувајте поново страну.",
+	"wikibase-timedetails-timezone": "Временска зона",
 	"wikibase-replicationnote": "Имајте на уму да је потребно и до неколико минута да промене постану видљиве на свим викијима.",
 	"wikibase-sitelinks-wikipedia": "Википедијине странице које су повезане са овом ставком",
 	"wikibase-sitelinks-sitename-columnheading": "Језик",

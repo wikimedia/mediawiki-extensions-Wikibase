@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Taxandru"
+		]
+	},
+	"wikibase-comment-add": "Un'elementu de {{WBREPONAME}} est istadu creadu.",
+	"wikibase-comment-update": "Elementu {{WBREPONAME}} cambiadu",
+	"wikibase-dataitem": "Elementu {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id": "ID elementu {{WBREPONAME}}"
+}
