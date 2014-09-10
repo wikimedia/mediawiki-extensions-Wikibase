@@ -16,6 +16,24 @@
       "revId": "33760b827b7cb82abfecdcfca6a8b516f3d21b49",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_23d183d0",
+        "filename": "client/tests/phpunit/includes/hooks/ParserOutputHooksTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:53:39Z",
+      "side": 1,
+      "message": "Naw... There\u0027s knowledge about the test items in various places. In test cases, it\u0027s often harmful to abstract things too much. Explicit, static values are more useful and readable.",
+      "parentUuid": "2e2fb78d_43112fb0",
+      "revId": "33760b827b7cb82abfecdcfca6a8b516f3d21b49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
