@@ -95,11 +95,11 @@ $.extend( SELF.prototype, {
 	 * parameter is omitted, a copy of the whole SnakList object is returned.
 	 *
 	 * @param {string} [propertyId]
-	 * @return {wikibase.SnakList}
+	 * @return {wikibase.datamodel.SnakList}
 	 */
 	getFilteredSnakList: function( propertyId ) {
 		if( !propertyId ) {
-			return this.constructor.newFromJSON( this.toJSON() );
+			return new wb.datamodel.SnakList( $.merge( [], this._snaks ) );
 		}
 
 		var filteredQualifiers = new wb.datamodel.SnakList();
@@ -390,27 +390,6 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a simple JSON structure representing this Snak. The structure will be a map, having
-	 * property IDs as keys and an array of the Snak's JSON as values.
-	 *
-	 * TODO: implement this as a wb.datamodel.serialization.Serializer
-	 *
-	 * @return Object
-	 */
-	toJSON: function() {
-		var json = {};
-
-		this.each( function( i, snak ) {
-			var propertyId = snak.getPropertyId(),
-				snakPlace = json[ propertyId ] || ( json[ propertyId ] = [] );
-
-			snakPlace.push( snak.toJSON() );
-		} );
-
-		return json;
-	},
-
-	/**
 	 * Returns all Snaks in this list as an Array of Snaks. Changes to the array will not modify
 	 * the original list Object.
 	 *
@@ -420,61 +399,5 @@ $.extend( SELF.prototype, {
 		return this._snaks.slice(); // don't reveal internal array!
 	}
 } );
-
-/**
- * Creates a new Snak Object from a given JSON structure.
- *
- * @param {string} json
- * @param {string[]} [order] List of property ids defining the order of the snaks grouped by
- *        property.
- * @return {wikibase.SnakList|null}
- */
-SELF.newFromJSON = function( json, order ) {
-	var snakList = new SELF();
-
-	/**
-	 * @param {object[]} serializedSnaks
-	 * @param {wikibase.SnakList} snakList
-	 * @return {wikibase.SnakList}
-	 */
-	function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
-		for( var i = 0; i < serializedSnaks.length; i++ ) {
-			snakList.addSnak( wb.datamodel.Snak.newFromJSON( serializedSnaks[i] ) );
-		}
-		return snakList;
-	}
-
-	if( !order ) {
-		// No order specified: Just loop through the json object:
-		$.each( json, function( propertyId, snaksPerProperty ) {
-			addSerializedSnaksToSnakList( snaksPerProperty, snakList );
-		} );
-
-	} else {
-		// Check whether all property ids that are featured by snaks are specified in the order
-		// list:
-		$.each( json, function( propertyId, snakListJson ) {
-			if( $.inArray( propertyId, order ) === -1 ) {
-				throw new Error( 'Snak featuring the property id ' + propertyId + ' is not present '
-					+ 'within list of property ids defined for ordering' );
-			}
-		} );
-
-		// Add all snaks grouped by property according to the order specified via the "order"
-		// parameter:
-		for( var i = 0; i < order.length; i++ ) {
-			var propertyId = order[i];
-
-			if( !json[propertyId] ) {
-				throw new Error( 'Trying to oder by property ' + propertyId + ' without any snak '
-					+ ' featuring this property being present' );
-			}
-
-			addSerializedSnaksToSnakList( json[propertyId], snakList );
-		}
-	}
-
-	return snakList;
-};
 
 }( wikibase, jQuery ) );

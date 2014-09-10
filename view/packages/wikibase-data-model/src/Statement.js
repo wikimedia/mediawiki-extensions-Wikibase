@@ -116,38 +116,7 @@ var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constru
 			return false;
 		}
 		return true;
-	},
-
-	/**
-	 * Returns a JSON structure representing this statement.
-	 *
-	 * TODO: implement this as a wb.datamodel.serialization.Serializer
-	 *
-	 * @return {Object}
-	 */
-	toJSON: function() {
-		var self = this,
-			json = PARENT.prototype.toJSON.call( this );
-
-		if ( this._references && this._references.length > 0 ) {
-			json.references = [];
-			$.each( this._references, function( i, reference ) {
-				json.references.push( reference.toJSON() );
-			} );
-		}
-
-		if ( this._rank !== undefined ) {
-			$.each( SELF.RANK, function( rank, i ) {
-				if ( self._rank === i ) {
-					json.rank = rank.toLowerCase();
-					return false;
-				}
-			} );
-		}
-
-		return json;
 	}
-
 } );
 
 /**

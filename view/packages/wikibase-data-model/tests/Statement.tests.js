@@ -61,50 +61,6 @@
 		);
 	} );
 
-	QUnit.test( 'toJSON', function( assert ) {
-		var statement = new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P42' ) );
-
-		assert.ok(
-			statement.equals( wb.datamodel.Claim.newFromJSON( statement.toJSON() ) ),
-			'Exported simple statement to JSON.'
-		);
-
-		statement = new wb.datamodel.Statement(
-			new wb.datamodel.PropertyValueSnak( 'P23', new dv.StringValue( '~=[,,_,,]:3' ) ),
-			new wb.datamodel.SnakList(
-				[
-					new wb.datamodel.PropertyNoValueSnak( 'P9001' ),
-					new wb.datamodel.PropertySomeValueSnak( 'P42' )
-				]
-			),
-			[
-				new wb.datamodel.Reference(
-					new wb.datamodel.SnakList(
-						[
-							new wb.datamodel.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
-							new wb.datamodel.PropertySomeValueSnak( 'P245' )
-						]
-					)
-				),
-				new wb.datamodel.Reference(
-					new wb.datamodel.SnakList(
-						[
-							new wb.datamodel.PropertyValueSnak( 'P856', new dv.StringValue( 'another string' ) ),
-							new wb.datamodel.PropertySomeValueSnak( 'P97' )
-						]
-					)
-				)
-			],
-			wb.datamodel.Statement.RANK.PREFERRED
-		);
-
-		assert.ok(
-			statement.equals( wb.datamodel.Claim.newFromJSON( statement.toJSON() ) ),
-			'Exported complex statement to JSON.'
-		);
-
-	} );
-
 	QUnit.test( 'equals()', function( assert ) {
 		var statements = [
 			new wb.datamodel.Statement( new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ) ),
@@ -178,7 +134,13 @@
 
 		// Compare statements:
 		$.each( statements, function( i, statement ) {
-			var clonedStatement = wb.datamodel.Claim.newFromJSON( statement.toJSON() );
+			var clonedStatement = wb.datamodel.Statement(
+					statement.getMainSnak(),
+					statement.getQualifiers(),
+					statement.getReferences(),
+					statement.getRank(),
+					statement.getGuid()
+				);
 
 			// Check if "cloned" statement is equal:
 			assert.ok(

@@ -50,23 +50,6 @@
 		);
 	} );
 
-	QUnit.test( 'toJSON()', function( assert ) {
-		var reference = new wb.datamodel.Reference(
-			new wb.datamodel.SnakList(
-				[
-					new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
-					new wb.datamodel.PropertySomeValueSnak( 'P9001' )
-				]
-			),
-			'hash12390213'
-		);
-
-		assert.ok(
-			reference.equals( wb.datamodel.Reference.newFromJSON( reference.toJSON() ) ),
-			'Exported reference to JSON.'
-		);
-	} );
-
 	QUnit.test( 'equals()', function( assert ) {
 		var references = [
 			new wb.datamodel.Reference(),
@@ -86,7 +69,10 @@
 
 		// Compare references:
 		$.each( references, function( i, reference ) {
-			var clonedReference = wb.datamodel.Reference.newFromJSON( reference.toJSON() );
+			var clonedReference = new wb.datamodel.Reference(
+				reference.getSnaks(),
+				reference.getHash()
+			);
 
 			// Check if "cloned" reference is equal:
 			assert.ok(

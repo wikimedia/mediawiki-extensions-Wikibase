@@ -60,34 +60,7 @@
 		 */
 		equals: function( reference ) {
 			return this._snaks.equals( reference.getSnaks() );
-		},
-
-		/**
-		 * Returns a JSON structure representing this reference.
-		 *
-		 * TODO: implement this as a wb.datamodel.serialization.Serializer
-		 *
-		 * @return {Object}
-		 */
-		toJSON: function() {
-			var json = {
-				snaks: this._snaks.toJSON(),
-				'snaks-order': this._snaks.getPropertyOrder()
-			};
-
-			if ( this._hash ) {
-				json.hash = this._hash;
-			}
-
-			return json;
 		}
 	} );
-
-	SELF.newFromJSON = function( json ) {
-		return new SELF(
-			wb.datamodel.SnakList.newFromJSON( json.snaks, json['snaks-order'] ),
-			json.hash
-		);
-	};
 
 }( wikibase, jQuery ) );

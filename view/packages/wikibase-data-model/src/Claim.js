@@ -122,67 +122,7 @@ $.extend( SELF.prototype, {
 				&& this._mainSnak.equals( other.getMainSnak() )
 				&& this._qualifiers.equals( other.getQualifiers() )
 			);
-	},
-
-	/**
-	 * Returns a JSON structure representing this claim.
-	 *
-	 * TODO: implement this as a wb.datamodel.serialization.Serializer
-	 *
-	 * @return {Object}
-	 */
-	toJSON: function() {
-		var json = {
-			type: this.constructor.TYPE,
-			mainsnak: this._mainSnak.toJSON()
-		};
-
-		if ( this._guid ) {
-			json.id = this._guid;
-		}
-
-		if ( this._qualifiers ) {
-			json.qualifiers = this._qualifiers.toJSON();
-			json['qualifiers-order'] = this._qualifiers.getPropertyOrder();
-		}
-
-		return json;
 	}
 } );
-
-/**
- * Creates a new Claim object from a given JSON structure.
- *
- * TODO: implement this as a wb.datamodel.serialization.Unserializer
- *
- * @param {Object} json
- * @return {wb.datamodel.Claim}
- */
-SELF.newFromJSON = function( json ) {
-	var mainSnak = wb.datamodel.Snak.newFromJSON( json.mainsnak ),
-		qualifiers = new wb.datamodel.SnakList(),
-		references = [],
-		rank,
-		guid,
-		isStatement = json.type === 'statement';
-
-	if ( json.qualifiers !== undefined ) {
-		qualifiers = wb.datamodel.SnakList.newFromJSON( json.qualifiers, json['qualifiers-order'] );
-	}
-
-	if ( isStatement && json.references !== undefined ) {
-		$.each( json.references, function( i, reference ) {
-			references.push( wb.datamodel.Reference.newFromJSON( reference ) );
-		} );
-	}
-
-	guid = json.id || null;
-
-	if ( isStatement ) {
-		rank = wb.datamodel.Statement.RANK[ json.rank.toUpperCase() ];
-		return new wb.datamodel.Statement( mainSnak, qualifiers, references, rank, guid );
-	}
-	return new wb.datamodel.Claim( mainSnak, qualifiers, guid );
-};
 
 }( wikibase, jQuery ) );

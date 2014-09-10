@@ -50,31 +50,6 @@ var SELF = wb.datamodel.PropertyValueSnak = util.inherit( 'WbPropertyValueSnak',
 		}
 		// ... plus, the actual value has to be equal:
 		return this._value.equals( snak.getValue() );
-	},
-
-	/**
-	 * @see wb.datamodel.Snak.toJSON
-	 * TODO: implement this as a wb.datamodel.serialization.Serializer
-	 */
-	toJSON: function() {
-		var json = this.toMap();
-
-		json.datavalue = {
-			type: json.datavalue.getType(),
-			value: json.datavalue.toJSON()
-		};
-
-		return json;
-	},
-
-	/**
-	 * @see wb.datamodel.Snak.toMap
-	 */
-	toMap: function() {
-		var map = PARENT.prototype.toMap.call( this );
-
-		map.datavalue = this.getValue();
-		return map;
 	}
 } );
 

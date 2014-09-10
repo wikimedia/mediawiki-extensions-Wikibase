@@ -17,46 +17,10 @@
 		];
 		var unequalSnak = new wb.datamodel.PropertyValueSnak( '21', new dv.StringValue( 'not equal!' ) );
 
-		/**
-		 * Does test functions of the Snak prototype which turn the Snak into an Object representing
-		 * the Snak.
-		 *
-		 * @param {wb.datamodel.Snak} snak
-		 * @param {String} methodLabel Objectification method name used in test messages
-		 * @param {String} toObjectFnName name of a function in wb.datamodel.Snak.prototype
-		 * @param {String} fromObjectFnName name of a function in wb.datamodel.Snak
-		 */
-		var snakToObjectTest = function( snak, methodLabel, toObjectFnName, fromObjectFnName ) {
-			var objectifiedSnak = snak[ toObjectFnName ]();
-
-			assert.ok(
-				$.isPlainObject( objectifiedSnak ),
-				toObjectFnName + '() will return a plain object'
-			);
-
-			assert.ok(
-				objectifiedSnak.snaktype === snak.getType(),
-				"In the " + methodLabel + ", the 'snaktype' field is set correctly"
-			);
-
-			var deobjectifiedSnak = wb.datamodel.Snak[ fromObjectFnName ]( objectifiedSnak );
-
-			assert.ok(
-				deobjectifiedSnak instanceof wb.datamodel.Snak,
-				'Constructing new Snak from ' + methodLabel + ' via wb.datamodel.Snak.' + fromObjectFnName
-					+ '() successful'
-			);
-
-			assert.ok(
-				deobjectifiedSnak.equals( snak ) && snak.equals( deobjectifiedSnak ),
-				'Newly constructed Snak from json is equal to original Snak'
-			);
-		};
-
 		$.each( snakInfo, function( i, info ) {
-			var snakConstructor = info[0],
+			var SnakConstructor = info[0],
 				snakParams = info[1] || [ '42' ],
-				snak = new snakConstructor( snakParams[0], snakParams[1] );
+				snak = new SnakConstructor( snakParams[0], snakParams[1] );
 
 			assert.ok(
 				snak instanceof wb.datamodel.Snak,
@@ -81,12 +45,9 @@
 
 			assert.strictEqual(
 				snak.getType(),
-				snakConstructor.TYPE,
+				SnakConstructor.TYPE,
 				'Snak type "' + snak.getType() + '" was set correctly'
 			);
-
-			snakToObjectTest( snak, 'JSON', 'toJSON', 'newFromJSON' );
-			snakToObjectTest( snak, 'Map', 'toMap', 'newFromMap' );
 		} );
 
 	} );

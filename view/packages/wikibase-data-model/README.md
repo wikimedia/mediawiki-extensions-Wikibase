@@ -17,10 +17,9 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Removed useless Entity.isNew(), Entity.newEmpty().
 * Removed Entity.getLabel(), Entity.getLabels(), Entity.getDescription(), Entity.getDescription(), Entity.getAliases(), Entity.getAllAliases(); Acquire data via Entity.getFingerprint() instead.
 * Removed Entity.getClaims(); Acquire claims/statements via Entity specific implementation.
-* Removed Entity.toMap(), Entity.newFromMap(); Use serializers/unserializers instead.
 * Item.getSiteLinks() returns a SiteLinkList object instead of an array of SiteLink objects.
-* Removed Property.toMap(); Use serializer instead.
 * Renamed Property.getDataType() to Property.getDataTypeId().
+* Removed all toJSON(), newFromJSON(), toMap() and newFromMap() functions; Use serializers and unserializers of wikibase.serialization instead.
 
 #### Enhancements
 * Added Fingerprint.

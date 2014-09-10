@@ -75,12 +75,6 @@
 					'being considered equal to the first list.'
 			);
 
-			var newListJson = newSnakList.toJSON();
-			assert.ok(
-				$.isPlainObject( newListJson ),
-				'Snak list\'s toJSON() returns plain object'
-			);
-
 			var newListArray = newSnakList.toArray();
 			assert.ok(
 				$.isArray( newListArray ) && newListArray.length === newSnakList.length,
@@ -93,31 +87,6 @@
 				return new wb.datamodel.SnakList( 'foo' );
 			},
 			'Can not create SnakList with strange constructor argument'
-		);
-	} );
-
-	QUnit.test( 'newFromJSON()', function( assert ) {
-		var snaks = snakSets[0],
-			snakList = new wb.datamodel.SnakList( snaks ),
-			initialOrder = snakList.getPropertyOrder(),
-			clonedSnakList = wb.datamodel.SnakList.newFromJSON( snakList.toJSON() );
-
-		assert.ok(
-			snakList.equals( clonedSnakList ),
-			'Cloned snak list using the JSON representation.'
-		);
-
-		var reorderedClone = wb.datamodel.SnakList.newFromJSON( snakList.toJSON(), ['p42', 'p9001'] ),
-			cloneOrder = reorderedClone.getPropertyOrder();
-
-		assert.ok(
-			!snakList.equals( reorderedClone ),
-			'Cloned snak list with applying a different property order.'
-		);
-
-		assert.ok(
-			initialOrder[0] === cloneOrder[1] && initialOrder[1] === cloneOrder[0],
-			'Verified differing property order.'
 		);
 	} );
 
@@ -164,7 +133,11 @@
 			'Verified property order.'
 		);
 
-		var clonedSnak = wb.datamodel.Snak.newFromJSON( anotherSnak.toJSON() );
+		var clonedSnak = new anotherSnak.constructor(
+			anotherSnak.getPropertyId(),
+			$.isFunction( anotherSnak.getValue ) ? anotherSnak.getValue() : undefined
+		);
+
 		assert.ok(
 			newSnakList.hasSnak( clonedSnak ),
 			'Snak same as newly added Snak recognized as one of the list\'s own Snaks now'

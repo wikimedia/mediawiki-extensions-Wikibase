@@ -72,31 +72,6 @@
 		} );
 	} );
 
-	QUnit.test( 'toJSON()', function( assert ) {
-		var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( '~=[,,_,,]:3' ) ) );
-
-		assert.ok(
-			claim.equals( wb.datamodel.Claim.newFromJSON( claim.toJSON() ) ),
-			'Exported simple claim to JSON.'
-		);
-
-		claim = new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'p42' ),
-			new wb.datamodel.SnakList(
-				[
-					new wb.datamodel.PropertyNoValueSnak( 'p9001' ),
-					new wb.datamodel.PropertySomeValueSnak( 'p42' ),
-					new wb.datamodel.PropertyValueSnak( 'p23', new dv.StringValue( '~=[,,_,,]:3' ) )
-				]
-			)
-		);
-
-		assert.ok(
-			claim.equals( wb.datamodel.Claim.newFromJSON( claim.toJSON() ) ),
-			'Exported complex claim to JSON.'
-		);
-	} );
-
 	QUnit.test( 'equals()', function( assert ) {
 		var claims = [
 			new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
@@ -124,7 +99,11 @@
 
 		// Compare claims:
 		$.each( claims, function( i, claim ) {
-			var clonedClaim = wb.datamodel.Claim.newFromJSON( claim.toJSON() );
+			var clonedClaim = new wb.datamodel.Claim(
+				claim.getMainSnak(),
+				claim.getQualifiers(),
+				claim.getGuid()
+			);
 
 			// Check if "cloned" claim is equal:
 			assert.ok(
