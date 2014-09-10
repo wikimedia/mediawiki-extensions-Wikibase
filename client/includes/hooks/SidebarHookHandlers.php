@@ -6,6 +6,7 @@ use Exception;
 use OutputPage;
 use Parser;
 use ParserOutput;
+use Skin;
 use StripState;
 use StubUserLang;
 use Title;
@@ -139,6 +140,20 @@ class SidebarHookHandlers {
 		return $handler->doSkinTemplateGetLanguageLink( $languageLink, $languageLinkTitle, $title, $output );
 	}
 
+	/**
+	 * Adds the "other projects" section to the sidebar, if enabled project wide or
+	 * the user has the beta featured enabled.
+	 *
+	 * @param Skin $skin
+	 * @param array &$sidebar
+	 *
+	 * @return bool
+	 */
+	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
+		$handler = self::newFromGlobalState();
+		return $handler->doSidebarBeforeOutput( $skin, $sidebar );
+	}
+
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandler $langLinkHandler,
@@ -252,8 +267,6 @@ class SidebarHookHandlers {
 	/**
 	 * Add badges to the language links.
 	 *
-	 * @since 0.5
-	 *
 	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle
 	 * @param Title $title
@@ -273,6 +286,44 @@ class SidebarHookHandlers {
 		$this->badgeDisplay->applyBadges( $languageLink, $languageLinkTitle, $output );
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Adds the "other projects" section to the sidebar, if enabled project wide or
+	 * the user has the beta featured enabled.
+	 *
+	 * @param Skin $skin
+	 * @param array &$sidebar
+	 *
+	 * @return bool
+	 */
+	public function doSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
+		$outputPage = $skin->getContext()->getOutput();
+		$title = $outputPage->getTitle();
+
+		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+			return true;
+		}
+
+		$betaFeatureEnabled = class_exists( '\BetaFeatures' ) &&
+			$settings->getSetting( 'otherProjectsLinksBeta' ) &&
+			\BetaFeatures::isFeatureEnabled( $skin->getUser(), 'wikibase-otherprojects' );
+
+		if ( $settings->getSetting( 'otherProjectsLinksByDefault' ) || $betaFeatureEnabled ) {
+			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
+
+			// in case of stuff in cache without the other projects
+			if ( $otherProjectsSidebar === null ) {
+				$title->invalidateCache();
+				return true;
+			}
+
+			if ( !empty( $otherProjectsSidebar ) ) {
+				$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
+			}
+		}
+
 		return true;
 	}
 
