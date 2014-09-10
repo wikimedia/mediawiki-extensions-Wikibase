@@ -105,7 +105,7 @@ Other methods an Expert needs to provide:
 
 ## Release notes
 
-### 0.7.0 (dev)
+### 0.7.0 (2014-09-10)
 
 ### Enhancements
 * Implemented jQuery.ui.languagesuggester.
