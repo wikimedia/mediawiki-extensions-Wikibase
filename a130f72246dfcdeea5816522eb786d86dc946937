@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_88a614bd",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:30:54Z",
+      "side": 1,
+      "message": "One tab too much",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_6890884e",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:30:54Z",
+      "side": 1,
+      "message": "$linkBadgeInfo? What means the key \u0027badges\u0027?",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_288a801c",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:30:54Z",
+      "side": 1,
+      "message": "This should be done one lone above.  The $className variable isn\u0027t used anywhere else and splitting these lines is not necessary.",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_8d92a6fe",
         "filename": "client/includes/hooks/SidebarHookHandlers.php",
         "patchSetId": 5
@@ -30,6 +81,57 @@
       "writtenOn": "2014-09-10T12:25:18Z",
       "side": 1,
       "message": "$otherProjects? for badges?\n\nalso, I picked hyphen separator for \u0027wikibase-otherprojects-sidebar\u0027 but underscore would be okay there, instead.\n\nI would like them to be consistent, so please change one or the other.",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_e8e6b810",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:30:54Z",
+      "side": 1,
+      "message": "OutputPage|null",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_88bf34cd",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:30:54Z",
+      "side": 1,
+      "message": "Explicit \u003d\u003d\u003d null check please",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_a8f31068",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:30:54Z",
+      "side": 1,
+      "message": "Update method name",
       "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
