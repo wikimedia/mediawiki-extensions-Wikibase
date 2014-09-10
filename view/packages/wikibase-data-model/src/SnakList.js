@@ -14,7 +14,8 @@
  * @abstract
  * @since 0.3
  *
- * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks] One or more Snaks in the list initially.
+ * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks] One or more Snaks in
+ *        the list initially.
  */
 var SELF = wb.datamodel.SnakList = function WbSnakList( snaks ) {
 	this._snaks = [];
@@ -114,10 +115,9 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a list of wb.datamodel.SnakList objects, each of them grouped by the property used by the
-	 * snaks.
+	 * Returns a list of SnakList objects, each of them grouped by the property used by the snaks.
 	 *
-	 * @return {wikibase.SnakList[]}
+	 * @return {wikibase.datamodel.SnakList[]}
 	 */
 	getGroupedSnakLists: function() {
 		var groupedSnakLists = [],
@@ -187,7 +187,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * Adds the snaks of another snak list to this snak list.
 	 *
-	 * @param {wikibase.SnakList} snakList
+	 * @param {wikibase.datamodel.SnakList} snakList
 	 */
 	add: function( snakList ) {
 		var self = this;
@@ -222,7 +222,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns a snak's index within the snak list. Returns -1 when the snak could not be found.
 	 *
-	 * @param {wikibase.Snak} snak
+	 * @param {wikibase.datamodel.Snak} snak
 	 * @return {number}
 	 */
 	indexOf: function( snak ) {
@@ -239,7 +239,7 @@ $.extend( SELF.prototype, {
 	 * moved within its property group. It may also be moved to the slots between property groups
 	 * which involves moving the whole property group the snak belongs to.
 	 *
-	 * @param {wikibase.Snak} snak
+	 * @param {wikibase.datamodel.Snak} snak
 	 * @return {number[]}
 	 */
 	getValidMoveIndices: function( snak ) {
@@ -292,9 +292,9 @@ $.extend( SELF.prototype, {
 	/**
 	 * Moves a snaklist's snak to a new index.
 	 *
-	 * @param {wikibase.Snak} snak Snak to move within the list.
+	 * @param {wikibase.datamodel.Snak} snak Snak to move within the list.
 	 * @param {number} toIndex
-	 * @return {wikibase.SnakList} This SnakList object.
+	 * @return {wikibase.datamodel.SnakList} This SnakList object.
 	 *
 	 * @throws {Error} if snak is not allowed to be moved to toIndex.
 	 */
@@ -352,8 +352,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * Moves a snak towards the top of the snak list by one step.
 	 *
-	 * @param {wikibase.Snak} snak
-	 * @return {wikibase.SnakList} This SnakList object.
+	 * @param {wikibase.datamodel.Snak} snak
+	 * @return {wikibase.datamodel.SnakList} This SnakList object.
 	 */
 	moveUp: function( snak ) {
 		var index = this.indexOf( snak ),
@@ -372,8 +372,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * Moves a snak towards the bottom of the snak list by one step.
 	 *
-	 * @param {wikibase.Snak} snak
-	 * @return {wikibase.SnakList} This SnakList object.
+	 * @param {wikibase.datamodel.Snak} snak
+	 * @return {wikibase.datamodel.SnakList} This SnakList object.
 	 */
 	moveDown: function( snak ) {
 		var index = this.indexOf( snak ),
