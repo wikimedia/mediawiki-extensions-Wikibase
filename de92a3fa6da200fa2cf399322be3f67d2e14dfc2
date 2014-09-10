@@ -33,6 +33,23 @@
       "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_cd7b0eea",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-10T11:48:54Z",
+      "side": 1,
+      "message": "can haz visibility?",
+      "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
