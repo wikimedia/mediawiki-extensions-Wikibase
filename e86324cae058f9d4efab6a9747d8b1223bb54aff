@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_c73e4ab5",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T18:28:42Z",
+      "side": 1,
+      "message": "Makes sense but should be changed below as well",
+      "revId": "e86324cae058f9d4efab6a9747d8b1223bb54aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
