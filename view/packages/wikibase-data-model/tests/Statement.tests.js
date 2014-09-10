@@ -6,7 +6,7 @@
 ( function( wb, dv, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.Statement', QUnit.newWbEnvironment() );
+	QUnit.module( 'wikibase.datamodel.Statement' );
 
 	QUnit.test( 'Rank evaluation on instantiation', function( assert ) {
 		var statement = new wb.datamodel.Statement(

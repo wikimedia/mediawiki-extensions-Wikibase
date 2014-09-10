@@ -35,7 +35,6 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 		),
 		'dependencies' => array(
 			'wikibase.datamodel',
-			'wikibase.tests.qunit.testrunner',
 		)
 	);
 

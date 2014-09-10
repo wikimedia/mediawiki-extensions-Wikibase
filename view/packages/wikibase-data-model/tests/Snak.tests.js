@@ -4,10 +4,10 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
-( function( wb, dv, $, QUnit, undefined ) {
+( function( wb, dv, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.snak.js', QUnit.newMwEnvironment() );
+	QUnit.module( 'wikibase.datamodel.snak.js' );
 
 	QUnit.test( 'wb.datamodel.Snak.prototype, its constructor and wb.datamodel.Snak static functions', function( assert ) {
 		var snakInfo = [

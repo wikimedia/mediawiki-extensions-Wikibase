@@ -7,7 +7,7 @@
 ( function( wb, dv, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.Claim', QUnit.newWbEnvironment() );
+	QUnit.module( 'wikibase.datamodel.Claim' );
 
 	QUnit.test( 'constructor', function( assert ) {
 		var argumentLists = [

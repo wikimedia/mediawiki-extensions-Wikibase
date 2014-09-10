@@ -7,7 +7,7 @@
 ( function( wb, dv, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.SnakList.js', QUnit.newMwEnvironment() );
+	QUnit.module( 'wikibase.datamodel.SnakList.js' );
 
 	var snakSets = [
 		[
