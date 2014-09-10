@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_c88f7cd0",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:38:38Z",
+      "side": 1,
+      "message": "Could be done in one line, that\u0027s taste however",
+      "revId": "2eb913099fcc0d620eb9f9d384809e6088991c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_e880f8a1",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T16:38:38Z",
+      "side": 1,
+      "message": "public function",
+      "revId": "2eb913099fcc0d620eb9f9d384809e6088991c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
