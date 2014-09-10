@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_c3199f7f",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T16:55:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_6d041a81",
+      "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_edefeaac",
         "filename": "client/includes/hooks/ParserOutputHooks.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_832397a5",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T16:55:01Z",
+      "side": 1,
+      "message": "using the parameter names given in docs/hooks.txt",
+      "parentUuid": "2e2fb78d_edefeaac",
+      "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_cd7b0eea",
         "filename": "client/includes/hooks/ParserOutputHooks.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2014-09-10T11:48:54Z",
       "side": 1,
       "message": "can haz visibility?",
+      "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_63266bb7",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T16:55:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_cd7b0eea",
       "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
