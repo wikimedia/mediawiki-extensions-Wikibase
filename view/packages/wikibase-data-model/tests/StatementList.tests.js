@@ -75,6 +75,82 @@ QUnit.test( 'addStatement() & length attribute', function( assert ) {
 	);
 } );
 
+QUnit.test( 'removeStatement()', function( assert ) {
+	var statementList = getDefaultStatementList();
+
+	assert.equal(
+		statementList.length,
+		3,
+		'StatementList contains 3 Statement objects.'
+	);
+
+	assert.throws(
+		function() {
+			statementList.removeStatement(
+				new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P9999' ) )
+			);
+		},
+		'Throwing error when trying to remove a Statement not set.'
+	);
+
+	assert.throws(
+		function() {
+			statementList.removeStatement(
+				new wb.datamodel.Statement(
+					new wb.datamodel.PropertyNoValueSnak( 'P2' ),
+					undefined,
+					undefined,
+					undefined,
+					'i am a guid'
+				)
+			);
+		},
+		'Throwing error when trying to remove a Statement which only differs in the GUID to an '
+		+ 'existing statement not set.'
+	);
+
+	statementList.removeStatement(
+		new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+	);
+
+	assert.ok(
+		!statementList.hasStatement(
+			new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+		),
+		'Removed Statement.'
+	);
+
+	assert.equal(
+		statementList.length,
+		2,
+		'StatementList contains 2 Statement objects.'
+	);
+} );
+
+QUnit.test( 'isEmpty()', function( assert ) {
+	var statementList = new wb.datamodel.StatementList(),
+		statement = new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P1' ) );
+
+	assert.ok(
+		statementList.isEmpty(),
+		'Verified isEmpty() returning TRUE.'
+	);
+
+	statementList.addStatement( statement );
+
+	assert.ok(
+		!statementList.isEmpty(),
+		'Verified isEmpty() returning FALSE.'
+	);
+
+	statementList.removeStatement( statement );
+
+	assert.ok(
+		statementList.isEmpty(),
+		'TRUE after removing last Statement.'
+	);
+} );
+
 QUnit.test( 'equals()', function( assert ) {
 	var statementList = getDefaultStatementList();
 

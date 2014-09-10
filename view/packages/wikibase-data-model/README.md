@@ -8,10 +8,21 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ### 0.4 (dev)
 
+#### Breaking changes
 * Removed wikibase.datamodel.Reference.setSnaks(). Generate new Reference objects when interacting with the API to reflect hash changes performed in the back-end.
 * Removed wikibase.datamodel.Entity.equals().
 * Removed wikibase.datamodel.Reference.setSnaks().
 * wikibase.datamodel.Reference constructor does not accept Snak object(s) any more.
+* An entity cannot be constructed by passing internal object representation to Entity constructor anymore; Use entity specific constructors instead.
+* Removed useless Entity.isNew(), Entity.newEmpty().
+* Removed Entity.getLabel(), Entity.getLabels(), Entity.getDescription(), Entity.getDescription(), Entity.getAliases(), Entity.getAllAliases(); Acquire data via Entity.getFingerprint() instead.
+* Removed Entity.getClaims(); Acquire claims/statements via Entity specific implementation.
+* Removed Entity.toMap(), Entity.newFromMap(); Use serializers/unserializers instead.
+* Item.getSiteLinks() returns a SiteLinkList object instead of an array of SiteLink objects.
+* Removed Property.toMap(); Use serializer instead.
+* Renamed Property.getDataType() to Property.getDataTypeId().
+
+#### Enhancements
 * Added Fingerprint.
 * Added SiteLinkList.
 * Added StatementList.
@@ -19,6 +30,11 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added TermGroup.
 * Added TermGroupList.
 * Added TermList.
+* Added individual constructors for Item and Property.
+* Added Entity.getFingerprint(), Entity.setFingerprint().
+* Added SiteLink and Statement specific functionality to Item.
+* Added Statement specific functionality to Property.
+* Added isEmpty() and equals() functions to Item and Property.
 
 ### 0.3.2 (2014-08-19)
 

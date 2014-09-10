@@ -10,7 +10,7 @@
  * @constructor
  * @since 0.4
  *
- * @param {wikibase.datamodel.Statement[]} statements
+ * @param {wikibase.datamodel.Statement[]} [statements]
  */
 var SELF = wb.datamodel.StatementList = function WbDataModelStatementList( statements ) {
 	statements = statements || [];
@@ -67,6 +67,21 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @param {wikibase.datamodel.Statement} statement
+	 */
+	removeStatement: function( statement ) {
+		for( var i = 0; i < this._statements.length; i++ ) {
+			var myStatement = this._statements[i];
+			if( myStatement.getGuid() === statement.getGuid() && myStatement.equals( statement ) ) {
+				this._statements.splice( i, 1 );
+				this.length--;
+				return;
+			}
+		}
+		throw new Error( 'Trying to remove a non-existing statement' );
+	},
+
+	/**
 	 * @return {string[]}
 	 */
 	getPropertyIds: function() {
@@ -80,6 +95,13 @@ $.extend( SELF.prototype, {
 		}
 
 		return propertyIds;
+	},
+
+	/**
+	 * @return {boolean}
+	 */
+	isEmpty: function() {
+		return this.length === 0;
 	},
 
 	/**

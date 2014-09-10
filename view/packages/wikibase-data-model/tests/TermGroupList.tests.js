@@ -119,7 +119,7 @@ QUnit.test( 'setGroup() & length attribute', function( assert ) {
 		newTermGroup = new wb.datamodel.TermGroup( 'ar', ['ar-string'] ),
 		emptyEnGroup = new wb.datamodel.TermGroup( 'en', [] );
 
-	assert.ok(
+	assert.equal(
 		termGroupList.length,
 		2,
 		'TermGroupList contains 2 TermGroup objects.'
@@ -170,6 +170,29 @@ QUnit.test( 'setGroup() & length attribute', function( assert ) {
 			termGroupList.setGroup( ['string'] );
 		},
 		'Throwing error when trying to set a plain string array.'
+	);
+} );
+
+QUnit.test( 'isEmpty()', function( assert ) {
+	var termGroupList = new wb.datamodel.TermGroupList();
+
+	assert.ok(
+		termGroupList.isEmpty(),
+		'Verified isEmpty() returning TRUE.'
+	);
+
+	termGroupList.setGroup( new wb.datamodel.TermGroup( 'de', ['de-string'] ) );
+
+	assert.ok(
+		!termGroupList.isEmpty(),
+		'Verified isEmpty() returning FALSE.'
+	);
+
+	termGroupList.setGroup( new wb.datamodel.TermGroup( 'de', [] ) );
+
+	assert.ok(
+		termGroupList.isEmpty(),
+		'TRUE after removing last TermGroup.'
 	);
 } );
 

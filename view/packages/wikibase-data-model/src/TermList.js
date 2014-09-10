@@ -10,7 +10,7 @@
  * @constructor
  * @since 0.4
  *
- * @param {wikibase.datamodel.Term[]} terms
+ * @param {wikibase.datamodel.Term[]} [terms]
  */
 var SELF = wb.datamodel.TermList = function WbDataModelTermList( terms ) {
 	terms = terms || [];
@@ -85,6 +85,13 @@ $.extend( SELF.prototype, {
 		}
 
 		this._terms[term.getLanguageCode()] = term;
+	},
+
+	/**
+	 * @return {boolean}
+	 */
+	isEmpty: function() {
+		return this.length === 0;
 	},
 
 	/**

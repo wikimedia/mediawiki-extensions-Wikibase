@@ -106,7 +106,7 @@ QUnit.test( 'setTerm() & length attribute', function( assert ) {
 		newEnTerm = new wb.datamodel.Term( 'en', 'en-string-overwritten' ),
 		newTerm = new wb.datamodel.Term( 'ar', 'ar-string' );
 
-	assert.ok(
+	assert.equal(
 		termList.length,
 		2,
 		'TermList contains 2 Term objects.'
@@ -143,6 +143,29 @@ QUnit.test( 'setTerm() & length attribute', function( assert ) {
 			termList.setTerm( 'string' );
 		},
 		'Throwing error when trying to set a plain string.'
+	);
+} );
+
+QUnit.test( 'isEmpty()', function( assert ) {
+	var termList = new wb.datamodel.TermList();
+
+	assert.ok(
+		termList.isEmpty(),
+		'Verified isEmpty() returning TRUE.'
+	);
+
+	termList.setTerm( new wb.datamodel.Term( 'de', 'de-string' ) );
+
+	assert.ok(
+		!termList.isEmpty(),
+		'Verified isEmpty() returning FALSE.'
+	);
+
+	termList.removeByLanguage( 'de' );
+
+	assert.ok(
+		termList.isEmpty(),
+		'TRUE after removing last Term.'
 	);
 } );
 

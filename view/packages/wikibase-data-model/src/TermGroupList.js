@@ -10,7 +10,7 @@
  * @constructor
  * @since 0.4
  *
- * @param {wikibase.datamodel.TermGroup[]} termGroups
+ * @param {wikibase.datamodel.TermGroup[]} [termGroups]
  */
 var SELF = wb.datamodel.TermGroupList = function WbDataModelTermGroupList( termGroups ) {
 	termGroups = termGroups || [];
@@ -86,6 +86,13 @@ $.extend( SELF.prototype, {
 		}
 
 		this._groups[languageCode] = termGroup;
+	},
+
+	/**
+	 * @return {boolean}
+	 */
+	isEmpty: function() {
+		return this.length === 0;
 	},
 
 	/**

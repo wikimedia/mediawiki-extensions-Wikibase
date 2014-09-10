@@ -10,7 +10,7 @@
  * @constructor
  * @since 0.4
  *
- * @param {wikibase.datamodel.SiteLink[]} siteLinks
+ * @param {wikibase.datamodel.SiteLink[]} [siteLinks]
  */
 var SELF = wb.datamodel.SiteLinkList = function WbDataModelSiteLinkList( siteLinks ) {
 	siteLinks = siteLinks || [];
@@ -53,13 +53,15 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string} siteId
+	 * @param {wikibase.datamodel.SiteLink} siteLink
 	 */
-	removeBySiteId: function( siteId ) {
-		if( this._siteLinks[siteId] ) {
+	removeSiteLink: function( siteLink ) {
+		if( !this.hasSiteLink( siteLink ) ) {
+			throw new Error( 'Trying to remove non-existing SiteLink' );
+		} else {
 			this.length--;
 		}
-		delete this._siteLinks[siteId];
+		delete this._siteLinks[siteLink.getSiteId()];
 	},
 
 	/**
@@ -82,6 +84,13 @@ $.extend( SELF.prototype, {
 		}
 
 		this._siteLinks[siteId] = siteLink;
+	},
+
+	/**
+	 * @return {boolean}
+	 */
+	isEmpty: function() {
+		return this.length === 0;
 	},
 
 	/**

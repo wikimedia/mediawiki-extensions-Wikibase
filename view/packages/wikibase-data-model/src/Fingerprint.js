@@ -158,6 +158,15 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @return {boolean}
+	 */
+	isEmpty: function() {
+		return this._labels.isEmpty()
+			&& this._descriptions.isEmpty()
+			&& this._aliasGroups.isEmpty();
+	},
+
+	/**
 	 * @param {*} fingerprint
 	 * @return {boolean}
 	 */

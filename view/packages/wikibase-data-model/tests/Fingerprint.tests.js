@@ -70,6 +70,44 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 	}
 } );
 
+QUnit.test( 'isEmpty()', function( assert ) {
+	assert.ok(
+		( new wb.datamodel.Fingerprint(
+			new wb.datamodel.TermList(),
+			new wb.datamodel.TermList(),
+			new wb.datamodel.TermGroupList()
+		) ).isEmpty(),
+		'Verified isEmpty() returning TRUE.'
+	);
+
+	assert.ok(
+		!( new wb.datamodel.Fingerprint(
+			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'en-string' )] ),
+			new wb.datamodel.TermList(),
+			new wb.datamodel.TermGroupList()
+		) ).isEmpty(),
+		'FALSE when there is a label.'
+	);
+
+	assert.ok(
+		!( new wb.datamodel.Fingerprint(
+			new wb.datamodel.TermList(),
+			new wb.datamodel.TermList( [new wb.datamodel.Term( 'en', 'en-string' )] ),
+			new wb.datamodel.TermGroupList()
+		) ).isEmpty(),
+		'FALSE when there is a description.'
+	);
+
+	assert.ok(
+		!( new wb.datamodel.Fingerprint(
+			new wb.datamodel.TermList(),
+			new wb.datamodel.TermList(),
+			new wb.datamodel.TermGroupList( [new wb.datamodel.TermGroup( 'en', ['en-string'] )] )
+		) ).isEmpty(),
+		'FALSE when there is an alias.'
+	);
+} );
+
 QUnit.test( 'equals()', function( assert ) {
 	for( var i = 0; i < testSets.length; i++ ) {
 		var fingerprint1 = new wb.datamodel.Fingerprint(

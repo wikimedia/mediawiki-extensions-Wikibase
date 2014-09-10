@@ -54,7 +54,7 @@ QUnit.test( 'getBySiteId()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'removeBySiteId() & length attribute', function( assert ) {
+QUnit.test( 'removeSiteLink() & length attribute', function( assert ) {
 	var siteLinkList = getDefaultSiteLinkList();
 
 	assert.equal(
@@ -63,7 +63,14 @@ QUnit.test( 'removeBySiteId() & length attribute', function( assert ) {
 		'SiteLinkList contains 2 SiteLink objects.'
 	);
 
-	siteLinkList.removeBySiteId( 'de' );
+	assert.throws(
+		function() {
+			siteLinkList.removeSiteLink( new wb.datamodel.SiteLink( 'de', 'does-not-exist' ) );
+		},
+		'Throwing error when trying to remove a site link not set.'
+	);
+
+	siteLinkList.removeSiteLink( new wb.datamodel.SiteLink( 'de', 'de-page' ) );
 
 	assert.strictEqual(
 		siteLinkList.getBySiteId( 'de' ),
@@ -77,16 +84,7 @@ QUnit.test( 'removeBySiteId() & length attribute', function( assert ) {
 		'SiteLinkList contains 1 SiteLink object.'
 	);
 
-	siteLinkList.removeBySiteId( 'does-not-exist' );
-
-	assert.strictEqual(
-		siteLinkList.length,
-		1,
-		'SiteLinkList contains 1 SiteLink object after trying to remove a SiteLink that is not '
-		+ 'set.'
-	);
-
-	siteLinkList.removeBySiteId( 'en' );
+	siteLinkList.removeSiteLink( new wb.datamodel.SiteLink( 'en', 'en-page' ) );
 
 	assert.strictEqual(
 		siteLinkList.getBySiteId( 'en' ),
@@ -127,7 +125,7 @@ QUnit.test( 'setSiteLink() & length attribute', function( assert ) {
 		newEnSiteLink = new wb.datamodel.SiteLink( 'en', 'en-page-overwritten' ),
 		newSiteLink = new wb.datamodel.SiteLink( 'ar', 'ar-page' );
 
-	assert.ok(
+	assert.equal(
 		siteLinkList.length,
 		2,
 		'SiteLinkList contains 2 SiteLink objects.'
@@ -167,6 +165,30 @@ QUnit.test( 'setSiteLink() & length attribute', function( assert ) {
 	);
 } );
 
+QUnit.test( 'isEmpty()', function( assert ) {
+	var siteLinkList = new wb.datamodel.SiteLinkList(),
+		siteLink = new wb.datamodel.SiteLink( 'de', 'de-page' );
+
+	assert.ok(
+		siteLinkList.isEmpty(),
+		'Verified isEmpty() returning TRUE.'
+	);
+
+	siteLinkList.setSiteLink( siteLink );
+
+	assert.ok(
+		!siteLinkList.isEmpty(),
+		'Verified isEmpty() returning FALSE.'
+	);
+
+	siteLinkList.removeSiteLink( siteLink );
+
+	assert.ok(
+		siteLinkList.isEmpty(),
+		'TRUE after removing last SiteLink.'
+	);
+} );
+
 QUnit.test( 'equals()', function( assert ) {
 	var siteLinkList = getDefaultSiteLinkList();
 
@@ -183,7 +205,7 @@ QUnit.test( 'equals()', function( assert ) {
 	);
 
 	siteLinkList = getDefaultSiteLinkList();
-	siteLinkList.removeBySiteId( 'en' );
+	siteLinkList.removeSiteLink( new wb.datamodel.SiteLink( 'en', 'en-page' ) );
 
 	assert.ok(
 		!siteLinkList.equals( getDefaultSiteLinkList() ),

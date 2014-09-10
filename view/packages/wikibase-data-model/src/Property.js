@@ -1,48 +1,106 @@
 /**
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author H. Snater < mediawiki@snater.com >
  */
 ( function( wb, util ) {
 	'use strict';
 
-	var PARENT = wb.datamodel.Entity;
+var PARENT = wb.datamodel.Entity;
+
+/**
+ * Represents a Wikibase Property.
+ * @constructor
+ * @extends wikibase.datamodel.Entity
+ * @since 0.4
+ *
+ * @param {string} entityId
+ * @param {wikibase.datamodel.Fingerprint} fingerprint
+ * @param {string} dataTypeId
+ * @param {wikibase.datamodel.StatementList} statementList
+ */
+var constructor = function( entityId, fingerprint, dataTypeId, statementList ) {
+	if(
+		typeof entityId !== 'string'
+		|| fingerprint === undefined
+		|| typeof dataTypeId !== 'string'
+		|| statementList === undefined
+	) {
+		throw new Error( 'Required parameter(s) missing' );
+	}
+
+	this._id = entityId;
+	this._fingerprint = fingerprint;
+	this._dataTypeId = dataTypeId;
+	this._statementList = statementList;
+};
+
+var SELF = wb.datamodel.Property = util.inherit( 'WbProperty', PARENT, constructor, {
+	/**
+	 * @type {string}
+	 */
+	_dataTypeId: null,
 
 	/**
-	 * Represents a Wikibase Property.
-	 *
-	 * @constructor
-	 * @extends wb.datamodel.Entity
-	 * @since 0.3
-	 *
-	 * @param {Object} data
-	 *
-	 * TODO: implement setters
+	 * @type {wikibase.datamodel.StatementList}
 	 */
-	var SELF = wb.datamodel.Property = util.inherit( 'WbProperty', PARENT, {
+	_statementList: null,
 
-		/**
-		 * Returns the Property's data type's identifier.
-		 *
-		 * @return string
-		 */
-		getDataType: function() {
-			return this._data.datatype;
-		},
+	/**
+	 * @return {string}
+	 */
+	getDataTypeId: function() {
+		return this._dataTypeId;
+	},
 
-		/**
-		 * @see wb.datamodel.Entity.toMap
-		 */
-		toMap: function() {
-			var map = PARENT.prototype.toMap.call( this );
-			map.datatype = this.getDataType();
-			return map;
+	/**
+	 * @return {wikibase.datamodel.StatementList}
+	 */
+	getStatements: function() {
+		return this._statementList;
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Statement} statement
+	 */
+	addStatement: function( statement ) {
+		this._statementList.addStatement( statement );
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Statement} statement
+	 */
+	removeStatement: function( statement ) {
+		this._statementList.removeStatement( statement );
+	},
+
+	/**
+	 * @return {boolean}
+	 */
+	isEmpty: function() {
+		return this._fingerprint.isEmpty() && this._statementList.isEmpty();
+	},
+
+	/**
+	 * @param {*} property
+	 * @return {boolean}
+	 */
+	equals: function( property ) {
+		if( !( property instanceof SELF ) ) {
+			return false;
+		} else if( property === this ) {
+			return true;
 		}
-	} );
+
+		return this._id === property.getId()
+			&& this._fingerprint.equals( property.getFingerprint() )
+			&& this._dataTypeId === property.getDataTypeId();
+	}
+} );
 
 
-	/**
-	 * @see wb.datamodel.Entity.TYPE
-	 */
-	SELF.TYPE = 'property';
+/**
+ * @see wikibase.datamodel.Entity.TYPE
+ */
+SELF.TYPE = 'property';
 
 }( wikibase, util ) );
