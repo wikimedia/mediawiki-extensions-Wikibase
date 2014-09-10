@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_83871766",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_0dffd632",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_88a614bd",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2014-09-10T16:30:54Z",
       "side": 1,
       "message": "One tab too much",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_a3b8d325",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_88a614bd",
       "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_43812f4e",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_6890884e",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_288a801c",
         "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
         "patchSetId": 5
@@ -82,6 +136,24 @@
       "writtenOn": "2014-09-10T16:30:54Z",
       "side": 1,
       "message": "This should be done one lone above.  The $className variable isn\u0027t used anywhere else and splitting these lines is not necessary.",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_638aeb6f",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_288a801c",
       "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_83d5d749",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_8d92a6fe",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_e8e6b810",
         "filename": "client/includes/hooks/SidebarHookHandlers.php",
         "patchSetId": 5
@@ -116,6 +206,24 @@
       "writtenOn": "2014-09-10T16:30:54Z",
       "side": 1,
       "message": "OutputPage|null",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_a3e6933d",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_e8e6b810",
       "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_c3ebdf07",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Not for things with a type hint. Null checks with \u003d\u003d\u003d are only needed (and afaik wanted) in case the variable could be a string or number (or array, i guess).\n\nAs far as I know, the \"implicit\" check is best practice for objects.",
+      "parentUuid": "2e2fb78d_88bf34cd",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_a8f31068",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 5
@@ -150,6 +276,24 @@
       "writtenOn": "2014-09-10T16:30:54Z",
       "side": 1,
       "message": "Update method name",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_03c9e7ad",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T17:11:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_a8f31068",
       "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
