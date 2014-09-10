@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_0dffd632",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-10T12:25:18Z",
+      "side": 1,
+      "message": "addLinksToParserOutput instead of addLinks\n\nthough, it\u0027s a private message thus I am ok with ignoring this :)",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_8d92a6fe",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-10T12:25:18Z",
+      "side": 1,
+      "message": "$otherProjects? for badges?\n\nalso, I picked hyphen separator for \u0027wikibase-otherprojects-sidebar\u0027 but underscore would be okay there, instead.\n\nI would like them to be consistent, so please change one or the other.",
+      "revId": "a130f72246dfcdeea5816522eb786d86dc946937",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
