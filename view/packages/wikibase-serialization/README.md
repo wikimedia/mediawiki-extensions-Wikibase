@@ -21,6 +21,10 @@ version 1.0 of this package:
 
 ## Release notes
 
+### 1.1.3 (2014-09-10)
+
+* Use new version of data-values/javascript
+
 ### 1.1.2 (2014-08-20)
 
 * Added serialization.EntityUnserializer.itemExpert unserializing site links.
