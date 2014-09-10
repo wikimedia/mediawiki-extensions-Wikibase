@@ -6,6 +6,7 @@ use Exception;
 use OutputPage;
 use Parser;
 use ParserOutput;
+use Skin;
 use StripState;
 use StubUserLang;
 use Title;
@@ -14,6 +15,7 @@ use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
+use Wikibase\SettingsArray;
 
 /**
  * ParserOutput related hook handlers.
@@ -57,6 +59,21 @@ class SidebarHookHandlers {
 	 */
 	private $alwaysSort;
 
+	/**
+	 * @var bool
+	 */
+	private $otherProjectsLinksBeta;
+
+	/**
+	 * @var bool
+	 */
+	private $otherProjectsLinksDefault;
+
+	/**
+	 * @var OtherProjectsSidebarGenerator
+	 */
+	private $otherProjectsSidebarGenerator;
+
 	public static function newFromGlobalState() {
 		global $wgLang;
 		StubUserLang::unstub( $wgLang );
@@ -82,12 +99,15 @@ class SidebarHookHandlers {
 			$settings->getSetting( 'sortPrepend' )
 		);
 
+		$otherProjectsSidebarGenerator = $wikibaseClient->getOtherProjectsSidebarGenerator();
+
 		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$langLinkHandler,
 			$badgeDisplay,
 			$interwikiSorter,
-			$settings->getSetting( 'alwaysSort' )
+			$otherProjectsSidebarGenerator,
+			$settings
 		);
 	}
 
@@ -139,19 +159,38 @@ class SidebarHookHandlers {
 		return $handler->doSkinTemplateGetLanguageLink( $languageLink, $languageLinkTitle, $title, $output );
 	}
 
+	/**
+	 * Adds the "other projects" section to the sidebar, if enabled project wide or
+	 * the user has the beta featured enabled.
+	 *
+	 * @param Skin $skin
+	 * @param array &$sidebar
+	 *
+	 * @return bool
+	 */
+	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
+		$handler = self::newFromGlobalState();
+		return $handler->doSidebarBeforeOutput( $skin, $sidebar );
+	}
+
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandler $langLinkHandler,
 		LanguageLinkBadgeDisplay $badgeDisplay,
 		InterwikiSorter $sorter,
-		$alwaysSort
+		OtherProjectsSidebarGenerator $otherProjectsSidebarGenerator,
+		SettingsArray $settings
 	) {
 
 		$this->namespaceChecker = $namespaceChecker;
 		$this->langLinkHandler = $langLinkHandler;
 		$this->badgeDisplay = $badgeDisplay;
 		$this->interwikiSorter = $sorter;
-		$this->alwaysSort = $alwaysSort;
+		$this->otherProjectsSidebarGenerator = $otherProjectsSidebarGenerator;
+
+		$this->alwaysSort = $settings->getSetting( 'alwaysSort' );
+		$this->otherProjectsLinksBeta = $settings->getSetting( 'otherProjectsLinksBeta' );
+		$this->otherProjectsLinksDefault = $settings->getSetting( 'otherProjectsLinksByDefault' );
 	}
 
 	/**
@@ -252,8 +291,6 @@ class SidebarHookHandlers {
 	/**
 	 * Add badges to the language links.
 	 *
-	 * @since 0.5
-	 *
 	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle
 	 * @param Title $title
@@ -273,6 +310,43 @@ class SidebarHookHandlers {
 		$this->badgeDisplay->applyBadges( $languageLink, $languageLinkTitle, $output );
 
 		wfProfileOut( __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Adds the "other projects" section to the sidebar, if enabled project wide or
+	 * the user has the beta featured enabled.
+	 *
+	 * @param Skin $skin
+	 * @param array &$sidebar
+	 *
+	 * @return bool
+	 */
+	public function doSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
+		$outputPage = $skin->getContext()->getOutput();
+		$title = $outputPage->getTitle();
+
+		if ( !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
+			return true;
+		}
+
+		$betaFeatureEnabled = class_exists( '\BetaFeatures' ) &&
+			$this->otherProjectsLinksBeta &&
+			\BetaFeatures::isFeatureEnabled( $skin->getUser(), 'wikibase-otherprojects' );
+
+		if ( $this->otherProjectsLinksDefault || $betaFeatureEnabled ) {
+			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
+
+			// in case of stuff in cache without the other projects
+			if ( $otherProjectsSidebar === null ) {
+				$otherProjectsSidebar = $this->otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
+			}
+
+			if ( !empty( $otherProjectsSidebar ) ) {
+				$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
+			}
+		}
+
 		return true;
 	}
 

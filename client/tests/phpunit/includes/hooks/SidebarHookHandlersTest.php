@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Test\Hooks;
 
 use FauxRequest;
+use IContextSource;
 use Language;
 use MediaWikiSite;
 use OutputPage;
@@ -134,9 +135,28 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			'namespaces' => array( NS_MAIN, NS_CATEGORY ),
 			'alwaysSort' => false,
 			'otherProjectsLinks' => array( 'commonswiki' ),
+			'otherProjectsLinksBeta' => true,
+			'otherProjectsLinksByDefault' => false,
 		);
 
 		return new SettingsArray( array_merge( $defaults, $settings ) );
+	}
+
+	/**
+	 * @param array $projects
+	 *
+	 * @return OtherProjectsSidebarGenerator
+	 */
+	private function getSidebarGenerator( array $projects ) {
+		$sidebarGenerator = $this->getMockBuilder( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$sidebarGenerator->expects( $this->any() )
+			->method( 'buildProjectLinkSidebar' )
+			->will( $this->returnValue( $projects ) );
+
+		return $sidebarGenerator;
 	}
 
 	private function newSidebarHookHandlers( array $settings = array() ) {
@@ -199,12 +219,15 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			$settings->getSetting( 'sortPrepend' )
 		);
 
+		$sidebarGenerator = $this->getSidebarGenerator( array( 'dummy' => 'xyz' ) );
+
 		return new SidebarHookHandlers(
 			$namespaceChecker,
 			$langLinkHandler,
 			$badgeDisplay,
 			$interwikiSorter,
-			$settings->getSetting( 'alwaysSort' )
+			$sidebarGenerator,
+			$settings
 		);
 
 	}
@@ -403,6 +426,81 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$handler->doSkinTemplateGetLanguageLink( $link, $languageLinkTitle, $dummy, $output );
 
 		$this->assertEquals( $expected, $link );
+	}
+
+	/**
+	 * @return \Skin
+	 */
+	private function newSkin( IContextSource $context ) {
+		$skin = $this->getMockBuilder( 'Skin' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$skin->expects( $this->any() )
+			->method( 'getContext' )
+			->will( $this->returnValue( $context ) );
+
+		return $skin;
+	}
+
+	/**
+	 * Call the doSidebarBeforeOutput() function on the SidebarHookHandlers object under test.
+	 *
+	 * @param boolean $enabled
+	 * @param array|null $projects A list of projects
+	 *
+	 * @return array The resulting sidebar array
+	 */
+	private function callDoSidebarBeforeOutput( $enabled, $projects ) {
+		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
+
+		$context = new RequestContext( new FauxRequest() );
+
+		$output = new OutputPage( $context );
+		$output->setTitle( $title );
+		$output->setProperty( 'wikibase-otherprojects-sidebar', $projects );
+
+		$context->setOutput( $output );
+		$skin = $this->newSkin( $context );
+
+		$sidebar = array();
+
+		$handler = $this->newSidebarHookHandlers( array(
+			'otherProjectsLinksByDefault' => $enabled
+		) );
+
+		$handler->doSidebarBeforeOutput( $skin, $sidebar );
+		return $sidebar;
+	}
+
+	public function testDoSidebarBeforeOutput() {
+		$projects = array( 'foo' => 'bar' );
+		$sidebar = $this->callDoSidebarBeforeOutput( true, $projects );
+
+		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
+		$this->assertEquals( $sidebar['wikibase-otherprojects'], $projects );
+	}
+
+	public function testDoSidebarBeforeOutput_empty() {
+		$projects = array();
+		$sidebar = $this->callDoSidebarBeforeOutput( true, $projects );
+
+		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
+	}
+
+	public function testDoSidebarBeforeOutput_disabled() {
+		$projects = array( 'foo' => 'bar' );
+		$sidebar = $this->callDoSidebarBeforeOutput( false, $projects );
+
+		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
+	}
+
+	public function testDoSidebarBeforeOutput_generate() {
+		// If no sidebar is set, it should be generated on the fly
+		$sidebar = $this->callDoSidebarBeforeOutput( true, null );
+
+		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
+		$this->assertNotEmpty( $sidebar );
 	}
 
 	private function assertOutputPageProperties( $props, OutputPage $outputPage ) {
