@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_43112fb0",
+        "filename": "client/tests/phpunit/includes/hooks/ParserOutputHooksTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T17:49:35Z",
+      "side": 1,
+      "message": "$this-\u003egetBadgeItem()-\u003egetId()-\u003egetSerialization() ?",
+      "revId": "33760b827b7cb82abfecdcfca6a8b516f3d21b49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
