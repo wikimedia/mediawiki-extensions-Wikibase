@@ -28,9 +28,17 @@ are also triggered down the document */
 }
 
 .wb-entitypage .ui-state-disabled input,
+.wb-entitypage input.ui-state-disabled
 .wb-entitypage .ui-state-disabled textarea {
 	background-color: #F0F0F0;
 	color: #565656;
+}
+
+/* Overwrite colour for element that are in edit mode although their container element is not */
+.wb-entitypage .ui-state-disabled .wb-edit input:not(.ui-state-disabled),
+.wb-entitypage .ui-state-disabled .wb-edit textarea {
+	background-color: #FFFFFF;
+	color: inherit;
 }
 
 /* Messages displayed while some action is performed (e.g. an API call) */
