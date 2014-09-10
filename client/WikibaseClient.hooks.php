@@ -638,11 +638,14 @@ final class ClientHooks {
 
 		if ( $settings->getSetting( 'otherProjectsLinksByDefault' ) || $betaFeatureEnabled ) {
 			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
+			$otherProjectsSidebar = null;
 
 			// in case of stuff in cache without the other projects
 			if ( $otherProjectsSidebar === null ) {
-				$title->invalidateCache();
-				return true;
+				// @todo remove this fallback before this graduates from
+				// a beta feature, if not sooner.
+				$otherProjectsSidebarGenerator = $wikibaseClient->getOtherProjectsSidebarGenerator();
+				$otherProjectsSidebar = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			}
 
 			if ( !empty( $otherProjectsSidebar ) ) {
