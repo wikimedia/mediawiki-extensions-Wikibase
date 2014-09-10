@@ -16,6 +16,24 @@
       "revId": "3151180be9938f33c9b38f2fa6d2a1adf6727386",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_8d4aa65d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-10T08:24:25Z",
+      "side": 0,
+      "message": "Nowhere. ClientSiteLinkLookup is no longer needed, I deleted it.",
+      "parentUuid": "2e2fb78d_bedc6ee6",
+      "revId": "3151180be9938f33c9b38f2fa6d2a1adf6727386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
