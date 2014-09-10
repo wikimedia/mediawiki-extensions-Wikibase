@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_6d041a81",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T11:29:14Z",
+      "side": 1,
+      "message": "Please be consistent and use \u0026$text like below.",
+      "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_edefeaac",
+        "filename": "client/includes/hooks/ParserOutputHooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2014-09-10T11:29:14Z",
+      "side": 1,
+      "message": "$outputPage would be even cooler but if you prefer $out I\u0027m also fine with that",
+      "revId": "de92a3fa6da200fa2cf399322be3f67d2e14dfc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
