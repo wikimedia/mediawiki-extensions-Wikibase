@@ -459,49 +459,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Adds the "other projects" section to the sidebar, if enabled project wide or
-	 * the user has the beta featured enabled.
-	 *
-	 * @since 0.5
-	 *
-	 * @param Skin $skin
-	 * @param array $sidebar
-	 *
-	 * @return bool
-	 */
-	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
-		$outputPage = $skin->getContext()->getOutput();
-		$title = $outputPage->getTitle();
-
-		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
-			return true;
-		}
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-
-		$betaFeatureEnabled = class_exists( '\BetaFeatures' ) &&
-				$settings->getSetting( 'otherProjectsLinksBeta' ) &&
-				BetaFeatures::isFeatureEnabled( $skin->getUser(), 'wikibase-otherprojects' );
-
-		if ( $settings->getSetting( 'otherProjectsLinksByDefault' ) || $betaFeatureEnabled ) {
-			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
-
-			// in case of stuff in cache without the other projects
-			if ( $otherProjectsSidebar === null ) {
-				$title->invalidateCache();
-				return true;
-			}
-
-			if ( !empty( $otherProjectsSidebar ) ) {
-				$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * Initialise beta feature preferences
 	 *
 	 * @since 0.5

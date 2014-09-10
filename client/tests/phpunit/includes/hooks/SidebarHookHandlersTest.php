@@ -360,6 +360,11 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$this->assertOutputPageProperties( $outputProps, $outputPage );
 	}
 
+	public function testDoSidebarBeforeOutput() {
+		//FIXME
+		$this->fail( 'TEST ME!' );
+	}
+
 	private function assertOutputPageProperties( $props, OutputPage $outputPage ) {
 		$this->assertInternalType( 'array', $props );
 
