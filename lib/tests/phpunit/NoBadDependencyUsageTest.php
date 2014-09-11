@@ -32,6 +32,16 @@ class NoBadDependencyUsageTest extends \PHPUnit_Framework_TestCase {
 		$this->assertStringNotInClient( 'Settings::', 1 );
 	}
 
+	public function testLimitGlobalStateUsageInRepo() {
+		// Increasing this allowance needs special reviews
+		$this->assertStringNotInRepo( 'WikibaseRepo' . '::', 121 );
+	}
+
+	public function testLimitGlobalStateUsageInClient() {
+		// Increasing this allowance needs special reviews
+		$this->assertStringNotInClient( 'WikibaseClient' . '::', 22 );
+	}
+
 	private function assertStringNotInLib( $string, $maxAllowance ) {
 		$this->assertStringNotInDir(
 			$string,
