@@ -20,7 +20,7 @@
 	"wikibase-comment-sitelink-change": "ഭാഷാ കണ്ണി $1 എന്നതിൽ നിന്ന് $2 എന്നാക്കി മാറ്റിയിരിക്കുന്നു",
 	"wikibase-comment-sitelink-remove": "ഭാഷാ കണ്ണി നീക്കം ചെയ്തു: $1",
 	"wikibase-comment-multi": "{{PLURAL:$1|ഒരു മാറ്റം|$1 മാറ്റങ്ങൾ}}",
-	"wikibase-dataitem": "ഡേറ്റാ ഇനം",
+	"wikibase-dataitem": "{{WBREPONAME}} ഇനം",
 	"wikibase-editlinks": "കണ്ണികൾ തിരുത്തുക",
 	"wikibase-editlinkstitle": "അന്തർഭാഷാ കണ്ണികൾ തിരുത്തുക",
 	"wikibase-linkitem-addlinks": "കണ്ണികൾ ചേർക്കുക",
@@ -29,7 +29,7 @@
 	"wikibase-linkitem-failure": "തന്നിരിക്കുന്ന താളിലേയ്ക്ക് കണ്ണി ചേർക്കാൻ ശ്രമിച്ചപ്പോൾ അപരിചിതമായ ഒരു പിഴവുണ്ടായി.",
 	"wikibase-linkitem-title": "താളുമായി കണ്ണി ചേർക്കുക",
 	"wikibase-linkitem-linkpage": "താളുമായി കണ്ണി ചേർക്കുക",
-	"wikibase-linkitem-selectlink": "ദയവായി ഈ താളുമായി കണ്ണി ചേർക്കേണ്ട സൈറ്റും അതിലെ താളും തിരഞ്ഞെടുക്കുക.",
+	"wikibase-linkitem-selectlink": "ദയവായി ഈ താളുമായി കണ്ണി ചേർക്കേണ്ട സൈറ്റും താളും തിരഞ്ഞെടുക്കുക.",
 	"wikibase-linkitem-input-site": "ഭാഷ:",
 	"wikibase-linkitem-input-page": "താൾ:",
 	"wikibase-linkitem-confirmitem-text": "താങ്കൾ തിരഞ്ഞെടുത്ത താൾ മുമ്പേതന്നെ  [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിലെ ഒരിനവുമായി] ബന്ധിപ്പിച്ചിരിക്കുന്നു. ഈ താളുമായി കണ്ണിചേർക്കേണ്ട {{PLURAL:$2|താളാണ്|താളുകളാണ്}} താഴെ പ്രദർശിപ്പിച്ചിരിക്കുന്നതെന്ന് സ്ഥിരീകരിക്കുക.",
@@ -38,7 +38,6 @@
 	"wikibase-linkitem-not-loggedin": "ഈ സൗകര്യം ഉപയോഗിക്കുന്നതിനായി ഈ വിക്കിയിലും [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിലും] താങ്കൾ പ്രവേശിച്ചിരിക്കേണ്ടതുണ്ട്.",
 	"wikibase-linkitem-success-link": "താളുകൾ വിജയകരമായി കണ്ണിചേർത്തിരിക്കുന്നു. താങ്കൾക്ക് ഇനം ഞങ്ങളുടെ [$1 കേന്ദ്രീകൃത വിവര ശേഖരത്തിൽ] കാണാവുന്നതാണ്.",
 	"wikibase-property-notfound": "$1 എന്ന ഗുണം കണ്ടെത്താനായില്ല.",
-	"wikibase-property-notsupportedyet": "വിക്കിബേസിൽ ഇതുവരെ $1 തരത്തിലുള്ള ഗുണം പിന്തുണയ്ക്കുന്നില്ല.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "മറയ്ക്കുക",
 	"wikibase-rc-hide-wikidata-show": "പ്രദർശിപ്പിക്കുക",
@@ -59,5 +58,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ഇനം ഐ.ഡി.",
 	"wikibase-pageinfo-entity-id-none": "ഒന്നുമില്ല",
 	"wikibase-property-render-error": "$1 എന്ന ഗുണഗണം പ്രദർശനസജ്ജമാക്കൽ പരാജയപ്പെട്ടു: $2",
-	"wikibase-otherprojects": "ഇതരപദ്ധതികൾ"
+	"wikibase-otherprojects": "ഇതരപദ്ധതികൾ",
+	"wikibase-otherprojects-beta-message": "ഇതരപദ്ധതികൾ സൈഡ്‌ബാർ",
+	"wikibase-otherprojects-beta-description": "{{WBREPONAME}} വിവരങ്ങൾക്കനുസരിച്ച്, സൈഡ്ബാറിൽ മറ്റ് വിക്കിമീഡിയ പദ്ധതികളിലേക്ക് കണ്ണികൾ നൽകുന്ന \"{{int:wikibase-otherprojects}}\" ഭാഗം ചേർക്കുന്നു."
 }

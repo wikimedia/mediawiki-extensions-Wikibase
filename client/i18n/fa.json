@@ -39,7 +39,7 @@
 	"wikibase-linkitem-failure": "یک خطای ناشناخته در هنگام بارگذاری صفحهٔ پیوند داده‌شده رخ داد.",
 	"wikibase-linkitem-title": "پیوند به صفحه",
 	"wikibase-linkitem-linkpage": "پیوند با صفحه",
-	"wikibase-linkitem-selectlink": "لطفاً سایت و صفحه‌ای که می‌خواهید به این صفحه پیوند دهید را انتخاب کنید.",
+	"wikibase-linkitem-selectlink": "لطفاً وب‌گاه و صفحه‌ای که می‌خواهید به این صفحه پیوند دهید را انتخاب کنید.",
 	"wikibase-linkitem-input-site": "زبان:",
 	"wikibase-linkitem-input-page": "صفحه:",
 	"wikibase-linkitem-confirmitem-text": "این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] مرتبط است. لطفاً تأیید کنید که {{PLURAL:$2|صفحهٔ|صفحه‌های}} زیر همان‌هایی {{PLURAL:$2|هست|هستند}} که شما خواهان پیونددادن به {{PLURAL:$2|آن|آن‌ها}} بودید.",

@@ -264,6 +264,7 @@ $specialPageAliases['mk'] = array(
 	'NewItem' => array( 'СоздајПредмет' ),
 	'NewProperty' => array( 'НовоСвојство' ),
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),
+	'GoToLinkedPage' => array( 'ОдиНаСврзанаСтраница' ),
 	'ItemDisambiguation' => array( 'ПојаснувањеНаПредмет' ),
 	'ListDatatypes' => array( 'СписокПодаточниТипови' ),
 	'SetLabel' => array( 'ЗадајЕтикета' ),

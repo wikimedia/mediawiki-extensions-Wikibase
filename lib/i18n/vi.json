@@ -3,7 +3,8 @@
 		"authors": [
 			"Cheers!",
 			"Minh Nguyen",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Trần Nguyễn Minh Huy"
 		]
 	},
 	"wikibase-lib-desc": "Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase",
@@ -23,7 +24,7 @@
 	"wikibase-diffview-alias": "biệt danh",
 	"wikibase-diffview-description": "miêu tả",
 	"wikibase-diffview-link": "liên kết",
-	"wikibase-error-unexpected": "Đã xuất hiện lỗi bất ngờ: $1.",
+	"wikibase-error-unexpected": "Lỗi: $1.",
 	"wikibase-error-save-generic": "Đã gặp lỗi khi lưu. Không thể thực hiện các thay đổi của bạn.",
 	"wikibase-error-remove-generic": "Đã gặp lỗi khi loại bỏ. Không thể thực hiện các thay đổi của bạn.",
 	"wikibase-error-save-connection": "Đã gặp lỗi kết nối khi lưu. Không thể thực hiện các thay đổi của bạn. Xin hãy kiểm tra kết nối Internet của bạn.",

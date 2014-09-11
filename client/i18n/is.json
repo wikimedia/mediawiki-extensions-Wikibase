@@ -30,7 +30,7 @@
 	"wikibase-linkitem-selectlink": "Vinsamlegast veldu vefsvæði og síðu sem þú vilt tengja þessa síðu við.",
 	"wikibase-linkitem-input-site": "Tungumál:",
 	"wikibase-linkitem-input-page": "Síða:",
-	"wikibase-linkitem-confirmitem-text": "Síðan sem þú valdir er þegar tengd við [$1 hlut á miðlægum gagnagrunni]. Vinsamlegast staðfestu að {{PLURAL:$2|síðan|síðurnar}} fyrir neðan {{PLURAL:$2|sé|séu}} þær sem þú vilt tengja við þessa síðu.",
+	"wikibase-linkitem-confirmitem-text": "Síðan sem þú valdir er þegar tengd við [$1 hlut á miðlægum gagnagrunni]. Vinsamlegast staðfestu að {{PLURAL:$2|síðan|síðurnar}} fyrir neðan {{PLURAL:$2|sé sú|séu þær}} sem þú vilt tengja við þessa síðu.",
 	"wikibase-linkitem-confirmitem-button": "Staðfesta",
 	"wikibase-linkitem-not-loggedin-title": "Þú þarft að vera skráð/ur inn",
 	"wikibase-linkitem-not-loggedin": "Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.",
@@ -55,5 +55,6 @@
 	"wikibase-pageinfo-entity-id": "Auðkenni {{WBREPONAME}} hluts",
 	"wikibase-pageinfo-entity-id-none": "Enginn",
 	"wikibase-property-render-error": "Mistókst að ganga frá eiginleikanum $1: $2",
-	"wikibase-otherprojects": "Önnur verkefni"
+	"wikibase-otherprojects": "Önnur verkefni",
+	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna"
 }
