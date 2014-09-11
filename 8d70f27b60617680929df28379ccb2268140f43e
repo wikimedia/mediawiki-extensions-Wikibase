@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_8164aaaf",
+        "filename": "client/tests/phpunit/includes/hooks/SidebarHookHandlersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-11T13:42:30Z",
+      "side": 1,
+      "message": "this and MockSiteStore don\u0027t appear used.\n\ncan be fixed in follow up",
+      "revId": "8d70f27b60617680929df28379ccb2268140f43e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
