@@ -106,6 +106,11 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
+### 1.2.1 (2014-09-11)
+* Added LegacyStatementDeserializer
+* Adding normalization in LegacyItemDeserializer to handle Claims (e.g. no ranks),
+  on Items for more robustness with old serialization formats.
+
 ### 1.2.0 (2014-09-02)
 
 * Changed used DataModel version to 1.x.
