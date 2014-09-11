@@ -21,7 +21,7 @@
 	"wikibase-diffview-alias": "samheiti",
 	"wikibase-diffview-description": "lýsing",
 	"wikibase-diffview-link": "tenglar",
-	"wikibase-error-unexpected": "Óvænt villa átti sér stað: $1",
+	"wikibase-error-unexpected": "Villa: $1",
 	"wikibase-error-save-generic": "Villa átti sér stað þegar þú vistaðir. Það mistókst að vista breytingarnar þínar.",
 	"wikibase-error-remove-generic": "Villa átti sér stað þegar þú fjarlægðir. Það mistókst að ljúka breytingum þínum.",
 	"wikibase-error-save-connection": "Tengingar villa átti sér stað þegar þú vistaðir. Það mistókst að ljúka breytingunum þínum. Athugaðu hvort þú sért tengd/ur netinu.",
@@ -71,5 +71,6 @@
 	"wikibase-validator-unknown-unit": "Óþekkt eining: $1",
 	"wikibase-validator-not-allowed": "Ógilt gildi: $1",
 	"datatypes-type-wikibase-item": "Hlutur",
-	"datatypes-type-commonsMedia": "Commons margmiðlunarskrá"
+	"datatypes-type-commonsMedia": "Commons margmiðlunarskrá",
+	"wikibase-add-badges": "Bæta við merki"
 }

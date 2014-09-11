@@ -31,13 +31,13 @@
 	"wikibase-diffview-alias": "نام‌های دیگر",
 	"wikibase-diffview-description": "توضیحات",
 	"wikibase-diffview-link": "پیوندها",
-	"wikibase-error-unexpected": "یک خطای غیرمنتظره رخ داد: $1.",
-	"wikibase-error-save-generic": "خطایی هنگام تلاش برای انجام ذخیره‌سازی رخ داد و به این خاطر تکمیل تغییراتتان ناموفق بود.",
-	"wikibase-error-remove-generic": "خطایی هنگام تلاش برای حذف‌کردن رخ داد و به این خاطر تکمیل تغییراتتان ناموفق بود.",
-	"wikibase-error-save-connection": "هنگام انجام ذخیره‌سازی خطایی در اتصال رخ داد، و به این دلیل امکان تکمیل تغییرات شما نبود. خواهشمندیم اتصال اینترنتی خود را بررسی کنید.",
-	"wikibase-error-remove-connection": "هنگام حذف‌کردن خطایی رخ داد و به این دلیل امکان تکمیل تغییراتتان نبود. خواهشمندیم اتصال اینترنتی خود را بررسی کنید.",
-	"wikibase-error-save-timeout": "در حال حاضر با مشکلات فنی‌ای روبه‌رو شده‌ایم و به همین خاطر «ذخیره‌سازی» شما کامل نشد.",
-	"wikibase-error-remove-timeout": "در حال حاضر با مشکلات فنیی‌ای روبه‌رو شده‌ایم و به همین خاطر عمل «حذف‌کردن» کامل نشد.",
+	"wikibase-error-unexpected": "خطا: $1.",
+	"wikibase-error-save-generic": "خطایی هنگام ذخیره‌سازی رخ داد. به این خاطر تغییراتتان کامل نشد.",
+	"wikibase-error-remove-generic": "خطایی هنگام تلاش برای حذف‌کردن رخ داد. به این خاطر تغییراتتان کامل نشد.",
+	"wikibase-error-save-connection": "هنگام انجام ذخیره‌سازی خطایی در اتصال رخ داد. به این خاطر تغییراتتان کامل نشد. خواهشمندیم اتصال اینترنتی خود را بررسی کنید.",
+	"wikibase-error-remove-connection": "هنگام حذف‌کردن خطایی رخ داد. به این خاطر تغییراتتان کامل نشد. خواهشمندیم اتصال اینترنتی خود را بررسی کنید.",
+	"wikibase-error-save-timeout": "در حال حاضر با مشکلات فنی‌ای روبه‌رو شده‌ایم. «ذخیره‌سازی» شما کامل نشد.",
+	"wikibase-error-remove-timeout": "در حال حاضر با مشکلات فنیی‌ای روبه‌رو شده‌ایم. «حذف‌کردن» شما کامل نشد.",
 	"wikibase-error-autocomplete-connection": "امکان پرسمان از واسط برنامه‌نویسی کاربردی  وب‌گاه وجود نداشت. لطفاً بعداً امتحان کنید.",
 	"wikibase-error-autocomplete-response": "پاسخ سرور: $1",
 	"wikibase-error-ui-client-error": "اتصال به صفحهٔ کارخواه ناموفق بود. لطفاً بعداً امتحان کنید.",
@@ -101,5 +101,6 @@
 	"datatypes-type-commonsMedia": "پرونده‌های ویکی‌انبار",
 	"version-wikibase": "ویکی‌بیس",
 	"wikibase-snakformatter-valuetype-mismatch": "نوع مقداری «$1» با نوع ویژگی «$2» انطباق ندارد.",
-	"wikibase-snakformatter-property-not-found": "ویژگی $1 یافت نشد، نمی‌تواند نوع داده‌ای را برای استفاده مشخص کرد."
+	"wikibase-snakformatter-property-not-found": "ویژگی $1 یافت نشد، نمی‌تواند نوع داده‌ای را برای استفاده مشخص کرد.",
+	"wikibase-add-badges": "افزودن نشان‌ها"
 }
