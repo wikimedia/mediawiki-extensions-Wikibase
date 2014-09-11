@@ -416,7 +416,8 @@ abstract class EntityContent extends AbstractContent {
 
 		// @todo this text for filters stuff should be it's own class with test coverage!
 		$codec = WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec();
-		$data = json_decode( $codec->encodeEntity( $this->getEntity() ), true );
+		$json = $codec->encodeEntity( $this->getEntity(), CONTENT_FORMAT_JSON );
+		$data = json_decode( $json, true );
 
 		$values = self::collectValues( $data, $ignore );
 
