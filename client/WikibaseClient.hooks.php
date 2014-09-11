@@ -328,77 +328,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Hook runs after internal parsing
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
-	 *
-	 * @since 0.1
-	 *
-	 * @param Parser $parser
-	 * @param string $text
-	 * @param StripState $stripState
-	 *
-	 * @return bool
-	 */
-	public static function onParserAfterParse( Parser &$parser, &$text, StripState $stripState ) {
-		// this hook tries to access repo SiteLinkTable
-		// it interferes with any test that parses something, like a page or a message
-		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-			return true;
-		}
-
-		$title = $parser->getTitle();
-
-		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
-
-		wfProfileIn( __METHOD__ );
-
-		// @todo split up the multiple responsibilities here and in lang link handler
-
-		// only run this once, for the article content and not interface stuff
-		//FIXME: this also runs for messages in EditPage::showEditTools! Ugh!
-		if ( $parser->getOptions()->getInterfaceMessage() ) {
-			wfProfileOut( __METHOD__ );
-			return true;
-		}
-
-		$langLinkHandler = WikibaseClient::getDefaultInstance()->getLangLinkHandler();
-
-		$parserOutput = $parser->getOutput();
-		$useRepoLinks = $langLinkHandler->useRepoLinks( $title, $parserOutput );
-
-		try {
-			if ( $useRepoLinks ) {
-				// add links
-				$langLinkHandler->addLinksFromRepository( $title, $parserOutput );
-			}
-
-			$langLinkHandler->updateItemIdProperty( $title, $parserOutput );
-			$langLinkHandler->updateOtherProjectsLinksData( $title, $parserOutput );
-		} catch ( \Exception $e ) {
-			wfWarn( 'Failed to add repo links: ' . $e->getMessage() );
-		}
-
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
-		if ( $useRepoLinks || $settings->getSetting( 'alwaysSort' ) ) {
-			$interwikiSorter = new InterwikiSorter(
-				$settings->getSetting( 'sort' ),
-				$settings->getSetting( 'interwikiSortOrders' ),
-				$settings->getSetting( 'sortPrepend' )
-			);
-			$interwikiLinks = $parserOutput->getLanguageLinks();
-			$sortedLinks = $interwikiSorter->sortLinks( $interwikiLinks );
-			$parserOutput->setLanguageLinks( $sortedLinks );
-		}
-
-		wfProfileOut( __METHOD__ );
-		return true;
-	}
-
-	/**
 	 * Add badges to the language links.
 	 *
 	 * @since 0.5
@@ -511,45 +440,6 @@ final class ClientHooks {
 		$beforePageDisplayHandler->addModules( $out, $skin, $actionName );
 
 		wfProfileOut( __METHOD__ );
-
-		return true;
-	}
-
-	/**
-	 * Add output page property if repo links are suppressed, and property for item id
-	 *
-	 * @since 0.4
-	 *
-	 * @param OutputPage &$out
-	 * @param ParserOutput $pout
-	 *
-	 * @return bool
-	 */
-	public static function onOutputPageParserOutput( OutputPage &$out, ParserOutput $pout ) {
-		if ( !self::isWikibaseEnabled( $out->getTitle()->getNamespace() ) ) {
-			// shorten out
-			return true;
-		}
-
-		$langLinkHandler = WikibaseClient::getDefaultInstance()->getLangLinkHandler();
-
-		$noExternalLangLinks = $langLinkHandler->getNoExternalLangLinks( $pout );
-
-		if ( $noExternalLangLinks !== array() ) {
-			$out->setProperty( 'noexternallanglinks', $noExternalLangLinks );
-		}
-
-		$itemId = $pout->getProperty( 'wikibase_item' );
-
-		if ( $itemId !== false ) {
-			$out->setProperty( 'wikibase_item', $itemId );
-		}
-
-		$otherProjects = $pout->getExtensionData( 'wikibase-otherprojects-sidebar' );
-
-		if ( $otherProjects !== null ) {
-			$out->setProperty( 'wikibase-otherprojects-sidebar', $otherProjects );
-		}
 
 		return true;
 	}
