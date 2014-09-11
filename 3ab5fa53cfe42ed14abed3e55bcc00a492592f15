@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_81770afd",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-11T14:34:01Z",
+      "side": 1,
+      "message": "this no longer exists",
+      "revId": "3ab5fa53cfe42ed14abed3e55bcc00a492592f15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
