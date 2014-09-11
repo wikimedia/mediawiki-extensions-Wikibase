@@ -19,6 +19,41 @@ use Wikibase\Client\WikibaseClient;
 class NoLangLinkHandler {
 
 	/**
+	 * @var NamespaceChecker
+	 */
+	private $namespaceChecker;
+
+	/**
+	 * Parser function
+	 *
+	 * @since 0.4
+	 *
+	 * @param \Parser &$parser
+	 *
+	 * @return string
+	 */
+	public static function handle( &$parser ) {
+		$handler = self::newFromGlobalState();
+		$handler->doHandle( $parser );
+	}
+
+	private static function newFromGlobalState() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+
+		$namespaceChecker = new NamespaceChecker(
+			$settings->getSetting( 'excludeNamespaces' ),
+			$settings->getSetting( 'namespaces' )
+		);
+
+		return new NoLangLinkHandler( $namespaceChecker );
+	}
+
+	public function __construct( NamespaceChecker $namespaceChecker ) {
+		$this->namespaceChecker = $namespaceChecker;
+	}
+
+	/**
 	 * Get the noexternallanglinks page property from the ParserOutput,
 	 * which is set by the {{#noexternallanglinks}} parser function.
 	 *
@@ -49,22 +84,15 @@ class NoLangLinkHandler {
 	/**
 	 * Parser function
 	 *
-	 * @since 0.4
+	 * @since 0.5
 	 *
 	 * @param \Parser &$parser
 	 *
 	 * @return string
 	 */
-	public static function handle( &$parser ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
+	public function doHandle( &$parser ) {
 
-		$namespaceChecker = new NamespaceChecker(
-			$settings->getSetting( 'excludeNamespaces' ),
-			$settings->getSetting( 'namespaces' )
-		);
-
-		if ( !$namespaceChecker->isWikibaseEnabled( $parser->getTitle()->getNamespace() ) ) {
+		if ( !$this->namespaceChecker->isWikibaseEnabled( $parser->getTitle()->getNamespace() ) ) {
 			// shorten out
 			return '';
 		}
@@ -76,7 +104,7 @@ class NoLangLinkHandler {
 		$output = $parser->getOutput();
 
 		$nel = array_merge( self::getNoExternalLangLinks( $output ), $langs );
-		self::setNoExternalLangLinks( $output, $nel );
+		$this->setNoExternalLangLinks( $output, $nel );
 
 		return '';
 	}
