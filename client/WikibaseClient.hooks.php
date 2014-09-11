@@ -328,48 +328,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Add badges to the language links.
-	 *
-	 * @since 0.5
-	 *
-	 * @param array &$languageLink
-	 * @param Title $languageLinkTitle
-	 * @param Title $title
-	 *
-	 * @return bool
-	 */
-	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title ) {
-		wfProfileIn( __METHOD__ );
-
-		global $wgLang;
-
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-
-		$clientSiteLinkLookup = $wikibaseClient->getClientSiteLinkLookup();
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
-		$sites = $wikibaseClient->getSiteStore()->getSites();
-		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
-
-		if ( !is_array( $badgeClassNames ) ) {
-			$badgeClassNames = array();
-		}
-
-		$languageLinkBadgeDisplay = new LanguageLinkBadgeDisplay(
-			$clientSiteLinkLookup,
-			$entityLookup,
-			$sites,
-			$badgeClassNames,
-			$wgLang
-		);
-
-		$languageLinkBadgeDisplay->assignBadges( $title, $languageLinkTitle, $languageLink );
-
-		wfProfileOut( __METHOD__ );
-		return true;
-	}
-
-	/**
 	 * Add Wikibase item link in toolbox
 	 *
 	 * @since 0.4
