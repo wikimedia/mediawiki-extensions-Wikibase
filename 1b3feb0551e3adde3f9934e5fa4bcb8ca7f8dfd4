@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_61353ea3",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-11T13:38:15Z",
+      "side": 1,
+      "message": "onOutputPageParserOutput? fior SkinTemplateGetLanguageLink\n\ndoesn\u0027t work very well...",
+      "revId": "1b3feb0551e3adde3f9934e5fa4bcb8ca7f8dfd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
