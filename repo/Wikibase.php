@@ -112,7 +112,7 @@ call_user_func( function() {
 	};
 
 	$wgValueParsers['time'] = 'Wikibase\Lib\Parsers\TimeParser';
-	$wgValueParsers['globecoordinate'] = 'ValueParsers\GlobeCoordinateParser';
+	$wgValueParsers['globecoordinate'] = 'DataValues\Geo\Parsers\GlobeCoordinateParser';
 	$wgValueParsers['null'] = 'ValueParsers\NullParser';
 	$wgValueParsers['monolingualtext'] = 'Wikibase\Parsers\MonolingualTextParser';
 

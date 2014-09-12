@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Test;
 
-use DataValues\GlobeCoordinateValue;
-use DataValues\LatLongValue;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\NumberValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
