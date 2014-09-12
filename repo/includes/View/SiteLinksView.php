@@ -148,7 +148,8 @@ class SiteLinksView {
 				$tbody,
 				$tfoot
 			),
-			htmlspecialchars( $group )
+			htmlspecialchars( $group ),
+			'<div>' . $this->getHtmlForEditSection( $itemId, '', 'edit', $editable ) . '</div>'
 		);
 	}
 
@@ -244,19 +245,17 @@ class SiteLinksView {
 	 * @param object[] $siteLinksForTable
 	 * @param ItemId|null $itemId
 	 * @param bool $isSpecialGroup
-	 * @param bool $editable
 	 *
 	 * @return string
 	 */
-	private function getTableBodyHtml( $siteLinksForTable, $itemId, $isSpecialGroup, $editable ) {
+	private function getTableBodyHtml( $siteLinksForTable, $itemId, $isSpecialGroup ) {
 		$tbody = '';
 
 		foreach ( $siteLinksForTable as $siteLinkForTable ) {
 			$tbody .= $this->getHtmlForSiteLink(
 				$siteLinkForTable,
 				$itemId,
-				$isSpecialGroup,
-				$editable
+				$isSpecialGroup
 			);
 		}
 
@@ -275,7 +274,7 @@ class SiteLinksView {
 
 		$tfoot = wfTemplate( 'wikibase-sitelinklistview-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			'<td>' . $editSection . '</td>'
+			$editSection
 		);
 
 		return $tfoot;
@@ -285,11 +284,10 @@ class SiteLinksView {
 	 * @param object $siteLinkForTable
 	 * @param ItemId|null $itemId The id of the item
 	 * @param bool $isSpecialGroup
-	 * @param bool $editable
 	 *
 	 * @return string
 	 */
-	private function getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup, $editable ) {
+	private function getHtmlForSiteLink( $siteLinkForTable, $itemId, $isSpecialGroup ) {
 		/** @var Site $site */
 		$site = $siteLinkForTable['site'];
 
@@ -323,8 +321,7 @@ class SiteLinksView {
 			'auto',
 			$siteName,
 			htmlspecialchars( $siteId ), // displayed site ID
-			$this->getHtmlForPage( $siteLink, $site ),
-			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId, 'edit', $editable ) . '</td>'
+			$this->getHtmlForPage( $siteLink, $site )
 		);
 	}
 
