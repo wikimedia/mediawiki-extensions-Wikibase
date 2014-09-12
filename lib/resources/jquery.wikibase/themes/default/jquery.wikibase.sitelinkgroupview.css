@@ -1,0 +1,21 @@
+/**
+ * @licence GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.wikibase-sitelinkgroupview {
+	float: left;
+	width: 100%;
+}
+
+.wikibase-sitelinkgroupview h2 {
+	width: auto;
+}
+
+.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container {
+	position: relative;
+}
+
+.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container .wb-editsection {
+	float: right;
+	margin-top: 1.9em;
+}
