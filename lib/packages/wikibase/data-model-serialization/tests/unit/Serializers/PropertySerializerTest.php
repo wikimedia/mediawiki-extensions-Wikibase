@@ -6,6 +6,7 @@ use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\PropertySerializer;
+use Wikibase\DataModel\Serializers\FingerprintSerializer;
 
 /**
  * @covers Wikibase\DataModel\Serializers\PropertySerializer
@@ -22,7 +23,9 @@ class PropertySerializerTest extends SerializerBaseTest {
 			->with( $this->equalTo( new Claims() ) )
 			->will( $this->returnValue( array() ) );
 
-		return new PropertySerializer( $claimsSerializerMock );
+		$fingerprintSerializer = new FingerprintSerializer();
+
+		return new PropertySerializer( $fingerprintSerializer, $claimsSerializerMock );
 	}
 
 	public function serializableProvider() {

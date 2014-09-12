@@ -6,6 +6,7 @@ use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\Serializers\ClaimSerializer;
 use Wikibase\DataModel\Serializers\ClaimsSerializer;
+use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\PropertySerializer;
 use Wikibase\DataModel\Serializers\ReferenceSerializer;
@@ -42,9 +43,10 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newEntitySerializer() {
+		$fingerprintSerializer = new FingerprintSerializer();
 		return new DispatchingSerializer( array(
-			new ItemSerializer( $this->newClaimsSerializer(), $this->newSiteLinkSerializer() ),
-			new PropertySerializer( $this->newClaimsSerializer() ),
+			new ItemSerializer( $fingerprintSerializer, $this->newClaimsSerializer(), $this->newSiteLinkSerializer() ),
+			new PropertySerializer( $fingerprintSerializer, $this->newClaimsSerializer() ),
 		) );
 	}
 
