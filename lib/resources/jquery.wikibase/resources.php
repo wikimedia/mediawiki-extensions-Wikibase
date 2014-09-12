@@ -293,11 +293,17 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'jquery.wikibase.sitelinkgroupview',
 			),
+			'messages' => array(
+				'wikibase-sitelinkgroupview-input-help-message',
+			),
 		),
 
 		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.sitelinkgroupview.js'
+			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.sitelinkgroupview.css',
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
