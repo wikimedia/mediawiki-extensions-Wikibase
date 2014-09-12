@@ -59,7 +59,7 @@ if( !array_key_exists( 'evilDataValueMap', $GLOBALS ) ) {
 $GLOBALS['evilDataValueMap'] = array_merge(
 	$GLOBALS['evilDataValueMap'],
 	 array(
-		'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+		'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
 		'monolingualtext' => 'DataValues\MonolingualTextValue',
 		'multilingualtext' => 'DataValues\MultilingualTextValue',
 		'quantity' => 'DataValues\QuantityValue',

@@ -2,13 +2,13 @@
 
 namespace Wikibase\Lib;
 
-use DataValues\GlobeCoordinateValue;
+use DataValues\Geo\Formatters\GeoCoordinateFormatter;
+use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
+use DataValues\Geo\Values\GlobeCoordinateValue;
 use Html;
 use InvalidArgumentException;
 use Message;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\GeoCoordinateFormatter;
-use ValueFormatters\GlobeCoordinateFormatter;
 use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 

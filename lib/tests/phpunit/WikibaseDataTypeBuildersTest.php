@@ -4,8 +4,8 @@ namespace Wikibase\Test;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
-use DataValues\GlobeCoordinateValue;
-use DataValues\LatLongValue;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\MonolingualTextValue;
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
