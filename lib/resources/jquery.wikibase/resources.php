@@ -299,6 +299,9 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.wikibase.sitelinkgroupview.js'
 			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.sitelinkgroupview.css',
+			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.sitelinklistview',

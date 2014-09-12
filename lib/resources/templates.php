@@ -287,7 +287,10 @@ HTML;
 	$templates['wikibase-sitelinkgroupview'] =
 <<<HTML
 <div class="wikibase-sitelinkgroupview" data-wb-sitelinks-group="$5">
-	<h2 class="wb-section-heading wikibase-sitelinkgroupview-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h2>
+	<div class="wikibase-sitelinkgroupview-heading-container">
+		<h2 class="wb-section-heading wikibase-sitelinkgroupview-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h2>
+		<!-- wb-editsection -->$6
+	</div>
 	<!-- wikibase-sitelinklistview -->$4
 </div>
 HTML;
@@ -327,7 +330,7 @@ HTML;
 <<<HTML
 <tr>
 	<td colspan="3" class="wikibase-sitelinklistview-placeholder">$1</td>
-	$2 <!-- wb-editsection( param1: 'td' ) -->
+	<td><!-- wb-editsection -->$2</td>
 </tr>
 HTML;
 
@@ -337,7 +340,7 @@ HTML;
 	<td class="wikibase-sitelinkview-sitename wikibase-sitelinkview-sitename-$1" lang="$2" dir="$3">$4</td>
 	<td class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-$1">$5</td>
 	<td class="wikibase-sitelinkview-link wikibase-sitelinkview-link-$1" lang="$2" dir="$3"><!-- wikibase-sitelinkview-pagename -->$6</td>
-	$7
+	<td><!-- placeholder for remove toolbar dynamically generated in edit mode --></td>
 </tr>
 HTML;
 
