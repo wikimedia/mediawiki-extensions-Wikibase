@@ -9,8 +9,7 @@
 
 	mw.hook( 'wikipage.content' ).add( function() {
 		// Edit sections are re-generated with JS functionality further below:
-		$( '.wb-editsection' ).parent( 'td' ).remove();
-		$( '.wb-editsection:not(td)' ).remove();
+		$( '.wb-editsection' ).remove();
 
 		var $entityview = $( '.wikibase-entityview' );
 
@@ -43,7 +42,7 @@
 				'claim-qualifiers-snak',
 				'references',
 				'referenceview-snakview',
-				'sitelinklistview'
+				'sitelinkgroupview-sitelinklistview'
 			],
 			edittoolbar: [
 				'aliasesview',
@@ -52,9 +51,13 @@
 				'labelview',
 				'fingerprintgroupview',
 				'referenceview',
-				'sitelinkview'
+				'sitelinkgroupview'
 			],
-			removetoolbar: ['claim-qualifiers-snak', 'referenceview-snakview-remove'],
+			removetoolbar: [
+				'claim-qualifiers-snak',
+				'referenceview-snakview-remove',
+				'sitelinkgroupview-sitelinkview'
+			],
 			movetoolbar: [
 				'claimlistview-claimview',
 				'claim-qualifiers-snak',
