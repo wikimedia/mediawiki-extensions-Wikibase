@@ -456,7 +456,7 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * to find all referenced Entities.
 	 *
 	 * @since 0.5
-	 * @deprecated since 1.0
+	 * @deprecated since 1.0 - use StatementList::getAllSnaks instead
 	 *
 	 * @return Snak[]
 	 */

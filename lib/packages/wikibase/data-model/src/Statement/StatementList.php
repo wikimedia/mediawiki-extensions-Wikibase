@@ -129,6 +129,25 @@ class StatementList implements \IteratorAggregate, \Comparable, \Countable {
 	}
 
 	/**
+	 * Returns a list of all Snaks on this StatementList. This includes at least the main snaks of
+	 * Claims, the snaks from Claim qualifiers, and the snaks from Statement References.
+	 *
+	 * This is a convenience method for use in code that needs to operate on all snaks, e.g.
+	 * to find all referenced Entities.
+	 *
+	 * @since 1.1
+	 *
+	 * @return Snak[]
+	 */
+	public function getAllSnaks() {
+		$snaks = array();
+		foreach ( $this->statements as $statement ) {
+			$snaks = array_merge( $snaks, $statement->getAllSnaks() );
+		}
+		return $snaks;
+	}
+
+	/**
 	 * @return Traversable
 	 */
 	public function getIterator() {
