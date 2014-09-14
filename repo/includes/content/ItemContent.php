@@ -4,11 +4,17 @@ namespace Wikibase;
 
 use Content;
 use InvalidArgumentException;
+use Language;
 use LogicException;
 use MWException;
 use Title;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
+use Wikibase\Repo\View\ClaimsViewFactory;
+use Wikibase\Repo\View\FingerprintView;
+use Wikibase\Repo\View\SectionEditLinkGenerator;
+use Wikibase\Repo\View\SiteLinksView;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -189,12 +195,47 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see getEntityViewClass
+	 * @see getEntityView
 	 *
-	 * @return string
+	 * @param Language $language
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @return ItemView
 	 */
-	protected function getEntityViewClass() {
-		return 'Wikibase\ItemView';
+	protected function getEntityView( Language $language, LanguageFallbackChain $languageFallbackChain ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+
+		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
+
+		$fingerprintView = new FingerprintView(
+			$sectionEditLinkGenerator,
+			$language->getCode()
+		);
+
+		$claimsViewFactory = new ClaimsViewFactory(
+			$wikibaseRepo->getSnakFormatterFactory(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory()
+		);
+
+		$claimsView = $claimsViewFactory->createClaimsView( $language->getCode(), $languageFallbackChain );
+
+		$siteLinksView = new SiteLinksView(
+			$wikibaseRepo->getSiteStore()->getSites(),
+			$sectionEditLinkGenerator,
+			$wikibaseRepo->getEntityLookup(),
+			$settings->getSetting( 'specialSiteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' ),
+			$language->getCode()
+		);
+
+		return new ItemView(
+			$fingerprintView,
+			$claimsView,
+			$siteLinksView,
+			$settings->getSetting( 'siteLinkGroups' ),
+			$language
+		);
 	}
 
 	/**
