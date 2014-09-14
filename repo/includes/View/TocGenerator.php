@@ -35,7 +35,7 @@ class TocGenerator {
 			$message = wfMessage( $messageKey );
 			if ( $message->exists() ) {
 				$tocContent .= wfTemplate( 'wb-entity-toc-section',
-					$i++,
+					$i,
 					$id,
 					$message->text()
 				);
@@ -43,6 +43,7 @@ class TocGenerator {
 				// Trick to allow addition of text injector markers
 				$tocContent .= $messageKey;
 			}
+			$i++;
 		}
 
 		$toc = wfTemplate( 'wb-entity-toc',

@@ -1,9 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use Language;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\EntityRevision;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\SiteLinksView;
@@ -109,33 +111,5 @@ class ItemView extends EntityView {
 
 		return '';
 	}
-
-	/**
-	 * Builds and returns the HTML representing a WikibaseEntity's site-links.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Item $item the entity to render
-	 * @param bool $editable whether editing is allowed (enabled edit links)
-	 *
-	 * @return string
-	 *
-	private function getHtmlForSiteLinks( Item $item, $editable = true ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$groups = $wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' );
-
-		// FIXME: Inject this
-		$siteLinksView = new SiteLinksView(
-			$wikibaseRepo->getSiteStore()->getSites(),
-			new SectionEditLinkGenerator(),
-			$wikibaseRepo->getEntityLookup(),
-			$this->language->getCode()
-		);
-
-		$itemId = $item->getId();
-
-		return $siteLinksView->getHtml( $item->getSiteLinks(), $itemId, $groups, $editable );
-	}
-	*/
 
 }
