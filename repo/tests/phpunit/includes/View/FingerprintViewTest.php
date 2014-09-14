@@ -41,6 +41,8 @@ class FingerprintViewTest extends \MediaWikiLangTestCase {
 	protected function tearDown() {
 		$msgCache = MessageCache::singleton();
 		$msgCache->disable();
+
+		parent::tearDown();
 	}
 
 	private function getFingerprintView( $languageCode = 'en' ) {
