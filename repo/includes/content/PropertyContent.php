@@ -3,6 +3,11 @@
 namespace Wikibase;
 
 use Content;
+use Language;
+use Wikibase\Repo\View\ClaimsViewFactory;
+use Wikibase\Repo\View\FingerprintView;
+use Wikibase\Repo\View\SectionEditLinkGenerator;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -102,12 +107,58 @@ class PropertyContent extends EntityContent {
 	}
 
 	/**
-	 * @see getEntityViewClass
+	 * @see getEntityView
 	 *
-	 * @return string
+	 * @param Language $language
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @return PropertyView
 	 */
-	protected function getEntityViewClass() {
-		return 'Wikibase\PropertyView';
+	protected function getEntityView( Language $language, LanguageFallbackChain $languageFallbackChain ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
+
+		$fingerprintView = new FingerprintView(
+			$sectionEditLinkGenerator,
+			$language->getCode()
+		);
+
+		$claimsViewFactory = new ClaimsViewFactory(
+			$wikibaseRepo->getSnakFormatterFactory(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory()
+		);
+
+		$claimsView = $claimsViewFactory->createClaimsView( $language->getCode(), $languageFallbackChain );
+
+		return new PropertyView(
+			$fingerprintView,
+			$claimsView,
+			$wikibaseRepo->getDataTypeFactory(),
+			$language
+		);
+	}
+
+	/**
+	 * @see EntityContent::addDataToParserOutput
+	 *
+	 * @param ParserOutput $pout
+	 * @param EntityRevision $revision
+	 */
+	protected function addDataToParserOutput( ParserOutput $pout, EntityRevision $revision ) {
+		parent::addDataToParserOutput( $pout, $revision );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		/** @var Property $property */
+		$property = $revision->getEntity();
+
+		$snaksParserOutputGenerator = new SnaksParserOutputGenerator(
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getPropertyDataTypeLookup()
+		);
+
+		$snaksParserOutputGenerator->assignToParserOutput( $pout, $property->getAllSnaks() );
 	}
 
 }

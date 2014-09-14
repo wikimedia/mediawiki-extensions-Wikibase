@@ -4,11 +4,20 @@ namespace Wikibase;
 
 use Content;
 use InvalidArgumentException;
+use Language;
 use LogicException;
 use MWException;
+use ParserOutput;
 use Title;
 use Wikibase\Lib\Store\EntityRedirect;
 use Wikibase\Repo\ItemSearchTextGenerator;
+use Wikibase\Repo\ParserOutput\SiteLinksParserOutputGenerator;
+use Wikibase\Repo\ParserOutput\SnaksParserOutputGenerator;
+use Wikibase\Repo\View\ClaimsViewFactory;
+use Wikibase\Repo\View\FingerprintView;
+use Wikibase\Repo\View\SectionEditLinkGenerator;
+use Wikibase\Repo\View\SiteLinksView;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -189,12 +198,75 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see getEntityViewClass
+	 * @see getEntityView
 	 *
-	 * @return string
+	 * @param Language $language
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @return ItemView
 	 */
-	protected function getEntityViewClass() {
-		return 'Wikibase\ItemView';
+	protected function getEntityView( Language $language, LanguageFallbackChain $languageFallbackChain ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+
+		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
+
+		$fingerprintView = new FingerprintView(
+			$sectionEditLinkGenerator,
+			$language->getCode()
+		);
+
+		$claimsViewFactory = new ClaimsViewFactory(
+			$wikibaseRepo->getSnakFormatterFactory(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory()
+		);
+
+		$claimsView = $claimsViewFactory->createClaimsView( $language->getCode(), $languageFallbackChain );
+
+		$siteLinksView = new SiteLinksView(
+			$wikibaseRepo->getSiteStore()->getSites(),
+			$sectionEditLinkGenerator,
+			$wikibaseRepo->getEntityLookup(),
+			$settings->getSetting( 'specialSiteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' ),
+			$language->getCode()
+		);
+
+		return new ItemView(
+			$fingerprintView,
+			$claimsView,
+			$siteLinksView,
+			$settings->getSetting( 'siteLinkGroups' ),
+			$language
+		);
+	}
+
+	/**
+	 * @see EntityContent::addDataToParserOutput
+	 *
+	 * @param ParserOutput $pout
+	 * @param EntityRevision $revision
+	 */
+	protected function addDataToParserOutput( ParserOutput $pout, EntityRevision $revision ) {
+		parent::addDataToParserOutput( $pout, $revision );
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		/** @var Item $item */
+		$item = $revision->getEntity();
+
+		$snaksParserOutputGenerator = new SnaksParserOutputGenerator(
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getPropertyDataTypeLookup()
+		);
+
+		$snaksParserOutputGenerator->assignToParserOutput( $pout, $item->getAllSnaks() );
+
+		$siteLinksParserOutputGenerator = new SiteLinksParserOutputGenerator(
+			$wikibaseRepo->getEntityTitleLookup()
+		);
+
+		$siteLinksParserOutputGenerator->assignSiteLinksToParserOutput( $pout, $item->getSiteLinkList() );
 	}
 
 	/**
@@ -202,16 +274,12 @@ class ItemContent extends EntityContent {
 	 *
 	 * Records the number of sitelinks in the 'wb-sitelinks' key.
 	 *
+	 * @param Item $item
 	 * @return array A map from property names to property values.
 	 */
-	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
-
+	protected function getEntityPageProperties( Item $item ) {
 		$properties = parent::getEntityPageProperties();
-		$properties['wb-sitelinks'] = $this->getItem()->getSiteLinkList()->count();
-
+		$properties['wb-sitelinks'] = $item->getSiteLinkList()->count();
 		return $properties;
 	}
 
@@ -226,11 +294,12 @@ class ItemContent extends EntityContent {
 	 *
 	 * @note Will fail of this ItemContent is a redirect.
 	 *
+	 * @param Item $item
 	 * @return int
 	 */
-	public function getEntityStatus() {
-		$status = parent::getEntityStatus();
-		$hasSiteLinks = !$this->getItem()->getSiteLinkList()->isEmpty();
+	protected function getEntityStatus( Item $item ) {
+		$status = parent::getEntityStatus( $item );
+		$hasSiteLinks = !$item->getSiteLinkList()->isEmpty();
 
 		if ( $status === self::STATUS_EMPTY && $hasSiteLinks ) {
 			$status = self::STATUS_LINKSTUB;
