@@ -3,11 +3,16 @@
 namespace Wikibase\Repo\View;
 
 use Linker;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\ReferencedEntitiesFinder;
@@ -51,21 +56,43 @@ class ClaimsView {
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EnttiyTitleLookup $entityTitleLookup
 	 * @param SectionEditLinkGenerator $sectionEditLinkGenerator
-	 * @param ClaimHtmlGenerator $claimHtmlGenerator
+	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param string $languageCode
 	 */
 	public function __construct(
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		SectionEditLinkGenerator $sectionEditLinkGenerator,
-		ClaimHtmlGenerator $claimHtmlGenerator,
+		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		LanguageFallbackChain $languageFallbackChain,
 		$languageCode
 	) {
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->claimHtmlGenerator = $claimHtmlGenerator;
 		$this->languageCode = $languageCode;
+
+		$this->claimHtmlGenerator = $this->createClaimHtmlGenerator( $languageFallbackChain, $snakFormatterFactory );
+	}
+
+	private function createClaimHtmlGenerator( LanguageFallbackChain $languageFallbackChain, OutputFormatSnakFormatterFactory $snakFormatterFactory ) {
+		$formatterOptions = new FormatterOptions();
+
+		$formatterOptions->setOption( ValueFormatter::OPT_LANG, $this->languageCode );
+		$formatterOptions->setOption( 'languages', $languageFallbackChain );
+
+		$snakFormatter = $snakFormatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML_WIDGET, $formatterOptions );
+
+		$snakHtmlGenerator = new SnakHtmlGenerator(
+			$snakFormatter,
+			$this->entityTitleLookup
+		);
+
+		return new ClaimHtmlGenerator(
+			$snakHtmlGenerator,
+			$this->entityTitleLookup
+		);
 	}
 
 	/**

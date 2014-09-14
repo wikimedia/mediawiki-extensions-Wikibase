@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
-use Wikibase\Repo\View\ClaimsView;
-use Wikibase\Repo\View\FingerprintView;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\EntityRevision;
 
 /**
  * Class for creating views for Property instances.
@@ -63,11 +63,12 @@ class PropertyView extends EntityView {
 		$html = '';
 		$html .= $this->fingerprintView->getHtml( $property->getFingerprint(), $property->getId(), $editable );
 		$html .= $this->getHtmlForTermBox( $entityRevision );
-		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
 			$html .= $this->claimsView->getHtml( $property->getClaims(), 'wikibase-attributes' );
 		}
+
+		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
 		$footer = wfMessage( 'wikibase-property-footer' );
 

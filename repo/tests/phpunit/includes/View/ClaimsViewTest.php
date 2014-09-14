@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use Title;
-use Wikibase\ClaimHtmlGenerator;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -14,6 +13,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\SectionEditLinkGenerator;
@@ -37,8 +37,8 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return Title::makeTitle( NS_MAIN, $name );
 	}
 
-	public function getHtmlForClaim( Claim $claim, array $entityInfo, $htmlForEditSection ) {
-		return $claim->getGuid();
+	public function formatSnak( Snak $snak ) {
+		return $snak->getHash();
 	}
 
 	public function getHtmlProvider() {
@@ -83,7 +83,14 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		$html = $claimsView->getHtml( $claims );
 
 		foreach ( $claims as $claim ) {
-			$this->assertContains( $claim->getGuid(), $html );
+			$this->assertContains( $claim->getPropertyId()->getSerialization(), $html );
+			$this->assertContainsSnaks( $claim->getAllSnaks(), $html );
+		}
+	}
+
+	private function assertContainsSnaks( array $snaks, $html ) {
+		foreach ( $snaks as $snak ) {
+			$this->assertContains( $snak->getHash(), $html );
 		}
 	}
 
@@ -91,16 +98,12 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 	 * @return ClaimsView
 	 */
 	private function newClaimsView() {
-		$mockRepo = new MockRepository();
-		$entityTitleLookup = $this->getEntityTitleLookupMock();
-		$sectionEditLinkGenerator = new SectionEditLinkGenerator();
-		$claimHtmlGenerator = $this->getClaimHtmlGeneratorMock();
-
 		return new ClaimsView(
-			$mockRepo,
-			$entityTitleLookup,
-			$sectionEditLinkGenerator,
-			$claimHtmlGenerator,
+			new MockRepository(),
+			$this->getEntityTitleLookupMock(),
+			new SectionEditLinkGenerator(),
+			$this->getSnakFormatterFactoryMock(),
+			$this->getLanguageFallbackChainMock(),
 			'en'
 		);
 	}
@@ -117,19 +120,36 @@ class ClaimsViewTest extends \MediaWikiLangTestCase {
 		return $lookup;
 	}
 
-	/**
-	 * @return ClaimHtmlGenerator
-	 */
-	private function getClaimHtmlGeneratorMock() {
-		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\ClaimHtmlGenerator' )
+	private function getSnakFormatterFactoryMock() {
+		$snakFormatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$claimHtmlGenerator->expects( $this->any() )
-			->method( 'getHtmlForClaim' )
-			->will( $this->returnCallback( array( $this, 'getHtmlForClaim' ) ) );
+		$snakFormatterFactory->expects( $this->any() )
+			->method( 'getSnakFormatter' )
+			->will( $this->returnValue( $this->getSnakFormatterMock() ) );
 
-		return $claimHtmlGenerator;
+		return $snakFormatterFactory;
+	}
+
+	private function getSnakFormatterMock() {
+		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+
+		$snakFormatter->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
+
+		$snakFormatter->expects( $this->any() )
+			->method( 'formatSnak' )
+			->will( $this->returnCallback( array( $this, 'formatSnak' ) ) );
+
+		return $snakFormatter;
+	}
+
+	private function getLanguageFallbackChainMock() {
+		return $this->getMockBuilder( 'Wikibase\LanguageFallbackChain' )
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	protected function makeClaim( Snak $mainSnak, $guid = null ) {
