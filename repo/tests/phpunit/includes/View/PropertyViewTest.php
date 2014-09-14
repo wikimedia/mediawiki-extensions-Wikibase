@@ -5,14 +5,13 @@ namespace Wikibase\Test;
 use DataTypes\DataType;
 use InvalidArgumentException;
 use Language;
-use Message;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
-use Wikibase\PropertyView;
+use Wikibase\Repo\View\PropertyView;
 
 /**
- * @covers Wikibase\PropertyView
+ * @covers Wikibase\Repo\View\PropertyView
  *
  * @group Wikibase
  * @group WikibasePropertyView

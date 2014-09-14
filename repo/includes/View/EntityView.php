@@ -1,11 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use Html;
 use Language;
-use Wikibase\Repo\View\TextInjector;
-use Wikibase\Repo\View\EntityViewPlaceholderExpander;
+use Wikibase\EntityRevision;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
