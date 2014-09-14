@@ -10,6 +10,7 @@ use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
+use Language;
 use LogicException;
 use MWException;
 use ParserOptions;
@@ -19,11 +20,14 @@ use RuntimeException;
 use Status;
 use Title;
 use User;
-use Wikibase\Lib\Serializers\SerializationOptions;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\EntitySearchTextGenerator;
+use Wikibase\Repo\ParserOutput\HtmlParserOutputGeneratorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -195,7 +199,7 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
-			return $this->getParserOutputFromEntityView( $title, $revId, $options, $generateHtml );
+			return $this->getParserOutputForEntity( $title, $revId, $options, $generateHtml );
 		}
 	}
 
@@ -236,48 +240,85 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return ParserOutput
 	 */
-	protected function getParserOutputFromEntityView( Title $title, $revId = null,
-		ParserOptions $options = null, $generateHtml = true
+	protected function getParserOutputForEntity(
+		Title $title,
+		$revId = null,
+		ParserOptions $options = null,
+		$generateHtml = true
 	) {
+		$context = $this->getContextFromParserOptions( $options );
 		$editable = !$options? true : $options->getEditSection();
 
 		if ( $revId === null || $revId === 0 ) {
 			$revId = $title->getLatestRevID();
 		}
 
-		$context = RequestContext::getMain();
 		$revision = new EntityRevision( $this->getEntity(), $revId );
-
-		// generate parser output
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityParserOutputGeneratorFactory = new EntityParserOutputGeneratorFactory(
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$wikibaseRepo->getSnakFormatterFactory(),
-			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory(),
-			$wikibaseRepo->getEntityContentFactory(),
-			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$this->getEntityViewClass()
-		);
 
-		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator( $context, $options );
-		$output = $outputGenerator->getParserOutput( $revision, $editable, $generateHtml );
+		$language = $context->getLanguage();
+		$languageFallbackChain = $wikibaseRepo->getLanguageFallbackChainFactory()->newFromContextForPageView( $context );
 
-		// Since the output depends on the user language, we must make sure
-		// ParserCache::getKey() includes it in the cache key.
-		$output->recordOption( 'userlang' );
+		$pout = new ParserOutput();
 
-		// register page properties
-		$this->applyEntityPageProperties( $output );
+		if ( $generateHtml ) {
+			$entityView = $this->getEntityView( $language, $languageFallbackChain );
+			$htmlParserOutputGeneratorFactory = new HtmlParserOutputGeneratorFactory(
+				$wikibaseRepo->getStore()->getEntityInfoBuilderFactory(),
+				$wikibaseRepo->getEntityTitleLookup(),
+				$wikibaseRepo->getPropertyDataTypeLookup()
+			);
+			$htmlParserOutputGenerator = $htmlParserOutputGeneratorFactory->createHtmlParserOutputGenerator(
+				$language,
+				$languageFallbackChain,
+				$entityView
+			);
+			$htmlParserOutputGenerator->assignToParserOutput( $pout, $revision, $editable );
+		}
 
-		return $output;
+		$this->addDataToParserOutput( $pout );
+
+		return $pout;
+	}
+
+	private function getContextFromParserOptions( ParserOptions $options = null ) {
+		$context = RequestContext::getMain();
+
+		if ( $options !== null ) {
+			// Parser Options language overrides context language
+			$context = clone $context;
+			$context->setLanguage( $options->getUserLang() );
+		}
+
+		return $context;
 	}
 
 	/**
-	 * Returns the EntityView class used for this entity type.#
+	 * Creates a new EntityView for this EntityContent.
 	 *
-	 * @return string
+	 * @param Language $language
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @return EntityView
 	 */
-	protected abstract function getEntityViewClass();
+	protected abstract function getEntityView( Language $language, LanguageFallbackChain $languageFallbackChain );
+
+	/**
+	 * Assigns some further information to the ParserOutput.
+	 *
+	 * @param ParserOutput $pout
+	 */
+	protected function addDataToParserOutput( ParserOutput $pout ) {
+		// Since the output depends on the user language, we must make sure
+		// ParserCache::getKey() includes it in the cache key.
+		$pout->recordOption( 'userlang' );
+
+		// register page properties
+		$status = $this->getEntityStatus();
+
+		if ( $status !== self::STATUS_NONE ) {
+			$pout->setProperty( 'wb-status', $status );
+		}
+	}
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text
@@ -663,73 +704,11 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @param string $languageCode
-	 * @param LanguageFallbackChain $fallbackChain
-	 *
-	 * @return SerializationOptions
-	 */
-	private function makeSerializationOptions( $languageCode, LanguageFallbackChain $fallbackChain ) {
-		$languageCodes = Utils::getLanguageCodes() + array( $languageCode => $fallbackChain );
-
-		$options = new SerializationOptions();
-		$options->setLanguages( $languageCodes );
-
-		return $options;
-	}
-
-	/**
-	 * Registers any properties returned by getEntityPageProperties()
-	 * in $output.
-	 *
-	 * @param ParserOutput $output
-	 */
-	private function applyEntityPageProperties( ParserOutput $output ) {
-		$properties = $this->getEntityPageProperties();
-
-		foreach ( $properties as $name => $value ) {
-			$output->setProperty( $name, $value );
-		}
-	}
-
-	/**
-	 * Returns a map of properties about the entity, to be recorded in
-	 * MediaWiki's page_props table. The idea is to allow efficient lookups
-	 * of entities based on such properties.
-	 *
-	 * @see getEntityStatus()
-	 *
-	 * Keys used:
-	 * - wb-status: the entity's status, according to getEntityStatus()
-	 * - wb-claims: the number of claims in the entity
-	 *
-	 * @return array A map from property names to property values.
-	 */
-	public function getEntityPageProperties() {
-		if ( $this->isRedirect() ) {
-			return array();
-		}
-
-		$properties = array(
-			'wb-claims' => count( $this->getEntity()->getClaims() ),
-		);
-
-		$status = $this->getEntityStatus();
-
-		if ( $status !== self::STATUS_NONE ) {
-			$properties['wb-status'] = $status;
-		}
-
-		return $properties;
-	}
-
-	/**
 	 * Returns an identifier representing the status of the entity,
 	 * e.g. STATUS_EMPTY or STATUS_NONE.
-	 * Used by getEntityPageProperties().
 	 *
 	 * @note Will fail if this ItemContent is a redirect.
 	 *
-	 * @see getEntityPageProperties()
 	 * @see EntityContent::STATUS_NONE
 	 * @see EntityContent::STATUS_STUB
 	 * @see EntityContent::STATUS_EMPTY
