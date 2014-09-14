@@ -7,10 +7,10 @@ use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
-use Wikibase\ItemView;
+use Wikibase\Repo\View\ItemView;
 
 /**
- * @covers Wikibase\ItemView
+ * @covers Wikibase\Repo\View\ItemView
  *
  * @group Wikibase
  * @group WikibaseItemView
