@@ -21,8 +21,11 @@ use Title;
 use User;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\ParserOutput\EntityParserOutputFactory;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\EntitySearchTextGenerator;
+use Wikibase\Repo\ParserOutput\HtmlParserOutputGenerator;
+use Wikibase\Repo\ParserOutput\HtmlParserOutputGeneratorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -194,7 +197,7 @@ abstract class EntityContent extends AbstractContent {
 		if ( $this->isRedirect() ) {
 			return $this->getParserOutputForRedirect( $generateHtml );
 		} else {
-			return $this->getParserOutputFromEntityView( $title, $revId, $options, $generateHtml );
+			return $this->getParserOutputFromEntity( $title, $revId, $options, $generateHtml );
 		}
 	}
 
@@ -235,48 +238,74 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @return ParserOutput
 	 */
-	protected function getParserOutputFromEntityView( Title $title, $revId = null,
+	protected function getParserOutputFromEntity( Title $title, $revId = null,
 		ParserOptions $options = null, $generateHtml = true
 	) {
+		$context = $this->getContextFromParserOptions( $options );
 		$editable = !$options? true : $options->getEditSection();
 
 		if ( $revId === null || $revId === 0 ) {
 			$revId = $title->getLatestRevID();
 		}
 
-		$context = RequestContext::getMain();
 		$revision = new EntityRevision( $this->getEntity(), $revId );
-
-		// generate parser output
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityParserOutputGeneratorFactory = new EntityParserOutputGeneratorFactory(
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$wikibaseRepo->getSnakFormatterFactory(),
-			$wikibaseRepo->getStore()->getEntityInfoBuilderFactory(),
-			$wikibaseRepo->getEntityContentFactory(),
-			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$this->getEntityViewClass()
-		);
 
-		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator( $context, $options );
-		$output = $outputGenerator->getParserOutput( $revision, $editable, $generateHtml );
+		$language = $context->getLanguage();
+		$languageFallbackChain = $wikibaseRepo->getLanguageFallbackChainFactory()->newFromContextForPageView( $context );
+
+		$pout = new ParserOutput();
+
+		if ( $generateHtml ) {
+			$entityView = $this->getEntityView( $language, $languageFallbackChain );
+			$htmlParserOutputGeneratorFactory = new HtmlParserOutputGeneratorFactory(
+				$wikibaseRepo->getStore()->getEntityInfoBuilderFactory(),
+				$wikibaseRepo->getEntityTitleLookup(),
+				$wikibaseRepo->getPropertyDataTypeLookup()
+			);
+			$htmlParserOutputGenerator = $htmlParserOutputGeneratorFactory->createHtmlParserOutputGenerator(
+				$language,
+				$languageFallbackChain,
+				$entityView
+			);
+			$htmlParserOutputGenerator->assignToParserOutput( $pout, $revision, $editable );
+		}
 
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
-		$output->recordOption( 'userlang' );
+		$pout->recordOption( 'userlang' );
 
 		// register page properties
-		$this->applyEntityPageProperties( $output );
+		$this->applyEntityPageProperties( $pout );
 
-		return $output;
+		return $pout;
+	}
+
+	private function getContextFromParserOptions( ParserOptions $options = null ) {
+		$context = RequestContext::getMain();
+
+		if ( $options !== null ) {
+			// Parser Options language overrides context language
+			$context = clone $context;
+			$context->setLanguage( $options->getUserLang() );
+		}
+
+		return $context;
 	}
 
 	/**
-	 * Returns the EntityView class used for this entity type.#
+	 * Creates a new EntityView for this EntityContent.
 	 *
-	 * @return string
+	 * @param Language $language
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @return EntityView
 	 */
-	protected abstract function getEntityViewClass();
+	protected abstract function getEntityView( Language $language, LanguageFallbackChain $languageFallbackChain );
+
+	/**
+	 * Assigns some further information to the ParserOutput.
+	 */
+	protected abstract function assignDataToParserOutput( ParserOutput $pout );
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text
@@ -653,21 +682,6 @@ abstract class EntityContent extends AbstractContent {
 
 		wfProfileOut( __METHOD__ );
 		return $status;
-	}
-
-	/**
-	 * @param string $languageCode
-	 * @param LanguageFallbackChain $fallbackChain
-	 *
-	 * @return SerializationOptions
-	 */
-	private function makeSerializationOptions( $languageCode, LanguageFallbackChain $fallbackChain ) {
-		$languageCodes = Utils::getLanguageCodes() + array( $languageCode => $fallbackChain );
-
-		$options = new SerializationOptions();
-		$options->setLanguages( $languageCodes );
-
-		return $options;
 	}
 
 	/**
