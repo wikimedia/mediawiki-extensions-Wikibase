@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 
 /**
@@ -56,19 +55,20 @@ class SiteLinksView {
 	 */
 	private $badgeItems;
 
-	public function __construct( SiteList $sites, SectionEditLinkGenerator $sectionEditLinkGenerator,
-			EntityLookup $entityLookup, $languageCode ) {
+	public function __construct(
+		SiteList $sites,
+		SectionEditLinkGenerator $sectionEditLinkGenerator,
+		EntityLookup $entityLookup,
+		$specialSiteLinkGroups,
+		$badgeItems,
+		$languageCode
+	) {
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->entityLookup = $entityLookup;
 		$this->languageCode = $languageCode;
-
-		// @todo inject option/objects instead of using the singleton
-		$repo = WikibaseRepo::getDefaultInstance();
-
-		$settings = $repo->getSettings();
-		$this->specialSiteLinkGroups = $settings->getSetting( 'specialSiteLinkGroups' );
-		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
+		$this->badgeItems = $badgeItems;
 	}
 
 	/**

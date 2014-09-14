@@ -5,12 +5,12 @@ namespace Wikibase\Test;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\InMemoryDataTypeLookup;
+use Wikibase\ParserOutput\EntityParserOutputGenerator;
 
 /**
- * @covers Wikibase\EntityParserOutputGenerator
+ * @covers Wikibase\ParserOutput\EntityParserOutputGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo
