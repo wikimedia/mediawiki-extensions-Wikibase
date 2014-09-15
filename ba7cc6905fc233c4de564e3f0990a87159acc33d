@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_91b62184",
+        "filename": "repo/tests/phpunit/includes/EntityParserOutputGeneratorTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2014-09-15T13:59:33Z",
+      "side": 1,
+      "message": "OMG :D",
+      "revId": "ba7cc6905fc233c4de564e3f0990a87159acc33d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
