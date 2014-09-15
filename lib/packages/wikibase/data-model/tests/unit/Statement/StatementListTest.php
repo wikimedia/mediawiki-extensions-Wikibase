@@ -119,11 +119,32 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetAllSnaksReturnsAllSnaks() {
+		$list = new StatementList( array(
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'foo' ),
+			$this->getStatementWithSnak( 1, 'foo' ),
+			$this->getStatementWithSnak( 2, 'bar' ),
+			$this->getStatementWithSnak( 1, 'bar' ),
+		) );
+
+		$this->assertEquals(
+			array(
+				$this->newSnak( 1, 'foo' ),
+				$this->newSnak( 2, 'foo' ),
+				$this->newSnak( 1, 'foo' ),
+				$this->newSnak( 2, 'bar' ),
+				$this->newSnak( 1, 'bar' ),
+			),
+			$list->getAllSnaks()
+		);
+	}
+
 	private function getStatementWithSnak( $propertyId, $stringValue ) {
 		$snak = $this->newSnak( $propertyId, $stringValue );
-		$claim = new Statement( $snak );
-		$claim->setGuid( sha1( $snak->getHash() ) );
-		return $claim;
+		$statement = new Statement( $snak );
+		$statement->setGuid( sha1( $snak->getHash() ) );
+		return $statement;
 	}
 
 	private function newSnak( $propertyId, $stringValue ) {
