@@ -156,8 +156,11 @@ class DispatchStats {
 		return $n;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function hasStats() {
-		return is_array( $this->clientStates );
+		return is_array( $this->clientStates ) && !empty( $this->clientStates );
 	}
 
 	/**
