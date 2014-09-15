@@ -12,6 +12,8 @@
  * current one. All these options default to global state / the current page's attributes.
  * @since 0.4
  *
+ * @option mwApiForRep {mediaWiki.Api} A mw.Api instance configured to use the repo's API.
+ *
  * @option pageTitle {string} Title of the page to link.
  *
  * @option globalSiteId {string} Id of the site the given page is on.
@@ -30,11 +32,6 @@
  *        (1) {jQuery.Event}
  */
 $.widget( 'wikibase.linkitem', {
-	/**
-	 * @type wikibase.RepoApi
-	 */
-	_repoApi: null,
-
 	/**
 	 * @type wikibase.PageConnector
 	 */
@@ -74,7 +71,7 @@ $.widget( 'wikibase.linkitem', {
 	 * @see jQuery.Widget.options
 	 */
 	options: {
-		repoApi: null,
+		mwApiForRepo: null,
 		pageTitle: null,
 		globalSiteId: null,
 		namespaceNumber: null,
@@ -92,13 +89,11 @@ $.widget( 'wikibase.linkitem', {
 		var self = this,
 			$dialogSpinner = $.createSpinner();
 
-		this._repoApi = this.options.repoApi;
-
 		this.element
 		.hide()
 		.after( $dialogSpinner );
 
-		this._repoApi.get( {
+		this.options.mwApiForRepo.get( {
 			action: 'query',
 			meta: 'userinfo'
 		} )
@@ -352,7 +347,7 @@ $.widget( 'wikibase.linkitem', {
 		this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
 		this._pageConnector = new wb.PageConnector(
-			this._repoApi,
+			new wb.RepoApi(),
 			this.options.globalSiteId,
 			this.options.pageTitle,
 			this.targetSite,
