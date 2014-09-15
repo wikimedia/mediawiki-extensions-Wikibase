@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_0c157840",
+        "filename": "client/includes/hooks/LanguageLinkBadgeDisplay.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-15T14:05:24Z",
+      "side": 1,
+      "message": "kept this as it was. also, i don\u0027t see a case where that would make a difference.",
+      "parentUuid": "2e2fb78d_f171e5a7",
+      "revId": "89f17904365d72d3f1b13204af53ccfc727998b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_d18a696d",
         "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-15T12:06:44Z",
       "side": 1,
       "message": "The \"g\" in get should be upper cased.",
+      "revId": "89f17904365d72d3f1b13204af53ccfc727998b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_ec234ca4",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-15T14:05:24Z",
+      "side": 1,
+      "message": "bah ;)",
+      "parentUuid": "2e2fb78d_d18a696d",
       "revId": "89f17904365d72d3f1b13204af53ccfc727998b0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
