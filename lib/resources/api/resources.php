@@ -29,7 +29,6 @@ return call_user_func( function() {
 				'FormatValueCaller.js',
 			),
 			'dependencies' => array(
-				'json',
 				'wikibase.api.__namespace',
 			)
 		),
@@ -40,7 +39,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues',
-				'json',
 				'wikibase.api.__namespace',
 			)
 		),
