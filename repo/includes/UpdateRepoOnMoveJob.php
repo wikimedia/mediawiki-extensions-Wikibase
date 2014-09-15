@@ -13,15 +13,11 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Job for updating the repo after a page on the client has been moved.
- *
- * This needs to be in lib as the client needs it for injecting it and
- * the repo to execute it.
  *
  * @since 0.4
  *
