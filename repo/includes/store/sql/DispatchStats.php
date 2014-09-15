@@ -157,7 +157,7 @@ class DispatchStats {
 	}
 
 	public function hasStats() {
-		return is_array( $this->clientStates );
+		return is_array( $this->clientStates ) && count( $this->clientStates );
 	}
 
 	/**
