@@ -346,7 +346,7 @@ HTML;
 
 	$templates['wikibase-sitelinkview-pagename'] =
 <<<HTML
-	<span class="wikibase-sitelinkview-badges">$3</span><span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4" dir="$5">$2</a></span>
+$3<span class="wikibase-sitelinkview-page"><a href="$1" hreflang="$4" dir="$5">$2</a></span>
 HTML;
 
 	$templates['wikibase-sitelinkview-unknown'] =
@@ -355,13 +355,18 @@ HTML;
 	<td class="wikibase-sitelinkview-sitename wikibase-sitelinkview-sitename-unknown"></td>
 	<td class="wikibase-sitelinkview-siteid wikibase-sitelinkview-siteid-unknown">$2</td>
 	<td class="wikibase-sitelinkview-link wikibase-sitelinkview-link-unknown">$3</td>
-	$4
+	<td><!-- placeholder for remove toolbar dynamically generated in edit mode --></td>
 </tr>
 HTML;
 
 	$templates['wb-badge'] =
 <<<HTML
-<span class="wb-badge wb-badge-$1" title="$2"></span>
+<span class="wb-badge wb-badge-$1" title="$2" data-wb-badge="$3"></span>
+HTML;
+
+	$templates['wikibase-badgeselector'] =
+<<<HTML
+<span class="wikibase-badgeselector wikibase-sitelinkview-badges"><!-- [0,*] wb-badge -->$1</span>
 HTML;
 
 	$templates['wb-property-datatype'] =
