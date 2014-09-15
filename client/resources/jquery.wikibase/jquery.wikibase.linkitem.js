@@ -31,9 +31,9 @@
  */
 $.widget( 'wikibase.linkitem', {
 	/**
-	 * @type wikibase.RepoApi
+	 * @type mw.Api
 	 */
-	_repoApi: null,
+	_mwApiForRepo: null,
 
 	/**
 	 * @type wikibase.PageConnector
@@ -74,7 +74,7 @@ $.widget( 'wikibase.linkitem', {
 	 * @see jQuery.Widget.options
 	 */
 	options: {
-		repoApi: null,
+		mwApiForRepo: null,
 		pageTitle: null,
 		globalSiteId: null,
 		namespaceNumber: null,
@@ -92,13 +92,13 @@ $.widget( 'wikibase.linkitem', {
 		var self = this,
 			$dialogSpinner = $.createSpinner();
 
-		this._repoApi = this.options.repoApi;
+		this._mwApiForRepo = this.options.mwApiForRepo;
 
 		this.element
 		.hide()
 		.after( $dialogSpinner );
 
-		this._repoApi.get( {
+		this._mwApiForRepo.get( {
 			action: 'query',
 			meta: 'userinfo'
 		} )
@@ -352,7 +352,7 @@ $.widget( 'wikibase.linkitem', {
 		this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
 		this._pageConnector = new wb.PageConnector(
-			this._repoApi,
+			new wb.RepoApi(),
 			this.options.globalSiteId,
 			this.options.pageTitle,
 			this.targetSite,
