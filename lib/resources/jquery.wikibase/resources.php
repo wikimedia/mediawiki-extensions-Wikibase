@@ -39,6 +39,22 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.badgeselector' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.badgeselector.js',
+			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.badgeselector.css',
+			),
+			'dependencies' => array(
+				'jquery.ui.menu',
+				'jquery.ui.TemplatedWidget',
+				'wikibase.datamodel',
+				'wikibase.templates',
+				'wikibase.utilities',
+			),
+		),
+
 		'jquery.wikibase.claimgrouplabelscroll' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.claimgrouplabelscroll.js',
@@ -337,6 +353,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'parentheses',
+				'wikibase-badgeselector-badge-placeholder-title',
 				'wikibase-propertyedittool-counter-entrieslabel',
 				'wikibase-propertyedittool-counter-pending-tooltip',
 				'wikibase-sitelink-site-edit-placeholder',
@@ -358,6 +375,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.wikibase.badgeselector',
 				'jquery.wikibase.pagesuggester',
 				'jquery.wikibase.siteselector',
 				'jquery.wikibase.toolbarcontroller',
@@ -411,6 +429,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
+				'jquery.ui.menu',
 				'jquery.ui.position',
 				'jquery.ui.toggler',
 				'util.inherit',
