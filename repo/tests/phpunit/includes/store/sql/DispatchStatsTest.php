@@ -446,4 +446,26 @@ class DispatchStatsTest extends \MediaWikiTestCase {
 
 		$this->assertStateEquals( $expected, $stats->getStalest());
 	}
+
+	public function testHasStats() {
+		$stats = $this->getDispatchStats();
+
+		$this->assertTrue( $stats->hasStats() );
+
+		// No stats there before load has been called.
+		$unloadedStats = new DispatchStats();
+		$this->assertFalse( $unloadedStats->hasStats() );
+	}
+
+	public function testHasNoStats() {
+		$dbw = wfGetDB( DB_MASTER );
+
+		$dbw->delete( 'wb_changes', '*' );
+		$dbw->delete( 'wb_changes_dispatch', '*' );
+
+		$stats = new DispatchStats();
+		$stats->load( time() );
+
+		$this->assertFalse( $stats->hasStats() ); // Still no stats as the table is empty
+	}
 }
