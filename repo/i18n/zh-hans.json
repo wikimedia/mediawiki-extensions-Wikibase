@@ -336,7 +336,7 @@
 	"wikibase-listdatatypes-quantity-head": "数量",
 	"wikibase-listdatatypes-quantity-body": "一些精确定义单位的数值的原始数据字段。实际单位也输入到数据中。\n* 数额——字符串的暗示部分（单位未知）\n* 单位——默认为“1”字符串的暗示部分（实体未知）\n* 上限——量的最高界限\n* 下限——量的最低界限",
 	"wikibase-listdatatypes-monolingualtext-head": "单语文本",
-	"wikibase-listdatatypes-monolingualtext-body": "不能译为其他语言的一个串的原始数据字段。该类型的串一经定义就可在所有语言中使用。典型的是用于当地语言书写的地名、某种标识符、化学方程式或拉丁科学名称。\n*语言——标定文本部分语言的明确的值\n*值——特定语言变体字符串的明确的值",
+	"wikibase-listdatatypes-monolingualtext-body": "不会翻译为其他语言的字符串文本数据字段。该类型的字符串一经定义就可在所有语言中使用。典型的用途是用于当地语言书写的地名、某种标识符、化学方程式或拉丁学名。\n* 语言——标定文本部分语言的明确的值\n* 值——特定语言变体字符串的明确的值",
 	"wikibase-listdatatypes-multilingualtext-head": "多语文本",
 	"wikibase-listdatatypes-multilingualtext-body": "一个必须翻译成其他语言的串的原始数据字段。典型的是用于具有不同于当地书写形式但却全球知名的实体名称。它们可能在语言和文字系统上都不同。\n*语言——标定文本部分语言的明确的值\n*值——特定语言变体字符串的明确的值",
 	"wikibase-listdatatypes-string-head": "字符串",

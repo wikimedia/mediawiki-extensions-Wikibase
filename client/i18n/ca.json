@@ -64,5 +64,6 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|enllaç entre llengües|enllaços entre llengües}} a la pàgina)",
 	"wikibase-pageinfo-entity-id": "ID de l'element de Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Cap",
-	"wikibase-property-render-error": "No s'ha pogut representar la propietat $1: $2"
+	"wikibase-property-render-error": "No s'ha pogut representar la propietat $1: $2",
+	"wikibase-otherprojects": "Altres projectes"
 }

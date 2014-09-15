@@ -35,7 +35,7 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "description",
 	"wikibase-diffview-link": "liens",
-	"wikibase-error-unexpected": "Une erreur inattendue s’est produite : $1",
+	"wikibase-error-unexpected": "Erreur : $1",
 	"wikibase-error-save-generic": "Une erreur est survenue lors de l’enregistrement. Vos modifications n’ont pas pu être prises en compte.",
 	"wikibase-error-remove-generic": "Une erreur est survenue lors de la tentative de suppression. Vos modifications n’ont pas pu être prises en compte.",
 	"wikibase-error-save-connection": "Une erreur de connexion est survenue lors de l’enregistrement. Vos modifications n’ont pas pu être prises en compte. Vérifiez votre connexion à Internet.",

@@ -52,8 +52,10 @@
 	"wikibase-unconnectedpages-page": "যে পাতা দিয়ে ফলাফলের তালিকা শুরু হবে:",
 	"wikibase-unconnectedpages-submit": "যাও",
 	"wikibase-unconnectedpages-invalid-language": "\"$1\" কোনো সঠিক ভাষার কোড নয়।",
+	"wikibase-unconnectedpages-iwdata-label": "আন্তঃভাষা সংযোগসহ পাতাসমূহ",
 	"wikibase-unconnectedpages-format-row": "(এই পাতায় $1টি {{PLURAL:$1|আন্তঃউইকি সংযোগ}} রয়েছে)",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} আইটেম আইডি",
 	"wikibase-pageinfo-entity-id-none": "কোনটিই নয়",
-	"wikibase-otherprojects": "অন্যান্য প্রকল্প"
+	"wikibase-otherprojects": "অন্যান্য প্রকল্প",
+	"wikibase-otherprojects-beta-message": "অন্যান্য প্রকল্পের পার্শ্বদণ্ড"
 }
