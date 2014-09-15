@@ -357,7 +357,7 @@ class SiteLinksView {
 		return wfTemplate( 'wikibase-sitelinkview-unknown',
 			htmlspecialchars( $siteId ),
 			htmlspecialchars( $pageName ),
-			'<td>' . $this->getHtmlForEditSection( $itemId, $siteId ) . '</td>'
+			$this->getHtmlForEditSection( $itemId, $siteId )
 		);
 	}
 
@@ -401,11 +401,12 @@ class SiteLinksView {
 
 			$html .= wfTemplate( 'wb-badge',
 				$classes,
-				$this->getTitleForBadge( $badge )
+				$this->getTitleForBadge( $badge ),
+				$badge
 			);
 		}
 
-		return $html;
+		return wfTemplate( 'wikibase-badgeselector', $html );
 	}
 
 	/**
