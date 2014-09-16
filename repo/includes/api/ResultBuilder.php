@@ -23,6 +23,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Daniel Kinzler
  */
 class ResultBuilder {
 
@@ -132,10 +133,11 @@ class ResultBuilder {
 		$this->checkTagIsString( $tag );
 
 		if ( $this->result->getIsRawMode() ) {
-			$values = array_values( $values );
-		}
+			// Unset first, so we don't make the tag name an actual value.
+			// We'll be setting this to $tag by calling setIndexedTagName().
+			unset( $values['_element'] );
 
-		if ( $this->result->getIsRawMode() ) {
+			$values = array_values( $values );
 			$this->result->setIndexedTagName( $values, $tag );
 		}
 
@@ -438,7 +440,10 @@ class ResultBuilder {
 		$claimsSerializer = $this->serializerFactory->newClaimsSerializer( $this->getOptions() );
 
 		$values = $claimsSerializer->getSerialized( new Claims( $claims ) );
-		$this->setList( $path, 'claims', $values, 'claim' );
+
+		// HACK: comply with ApiResult::setIndexedTagName
+		$tag = isset( $values['_element'] ) ? $values['_element'] : 'claim';
+		$this->setList( $path, 'claims', $values, $tag );
 	}
 
 	/**
