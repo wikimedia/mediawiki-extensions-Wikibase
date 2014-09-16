@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Statement;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\References;
 use Wikibase\DataModel\Snak\Snak;
@@ -18,6 +17,7 @@ use Wikibase\DataModel\Snak\Snaks;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class Statement extends Claim {
 
@@ -37,10 +37,25 @@ class Statement extends Claim {
 	 * @param Snak $mainSnak
 	 * @param Snaks|null $qualifiers
 	 * @param References|null $references
+	 * or
+	 * @param Claim $claim
+	 * @param References|null $references
 	 */
-	public function __construct( Snak $mainSnak, Snaks $qualifiers = null, References $references = null ) {
-		parent::__construct( $mainSnak, $qualifiers );
+	public function __construct( $claim /* , $args */ ) {
+		if ( $claim instanceof Claim ) {
+			call_user_func_array( array( $this, 'initFromClaim' ), func_get_args() );
+		} else {
+			call_user_func_array( array( $this, 'initFromSnaks' ), func_get_args() );
+		}
+	}
+
+	private function initFromClaim( Claim $claim, References $references = null ) {
+		$this->setClaim( $claim );
 		$this->references = $references === null ? new ReferenceList() : $references;
+	}
+
+	private function initFromSnaks( Snak $mainSnak, Snaks $qualifiers = null, References $references = null ) {
+		$this->initFromClaim( new Claim( $mainSnak, $qualifiers ), $references );
 	}
 
 	/**
@@ -148,6 +163,17 @@ class Statement extends Claim {
 
 		return $this->claimFieldsEqual( $target )
 			&& $this->references->equals( $target->references );
+	}
+
+	/**
+	 * @since 1.1
+	 *
+	 * @param Claim $claim
+	 */
+	public function setClaim( Claim $claim ) {
+		$this->mainSnak = $claim->getMainSnak();
+		$this->qualifiers = $claim->getQualifiers();
+		$this->guid = $claim->getGuid();
 	}
 
 	/**

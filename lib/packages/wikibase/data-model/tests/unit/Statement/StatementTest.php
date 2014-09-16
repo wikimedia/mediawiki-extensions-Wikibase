@@ -25,6 +25,13 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class StatementTest extends \PHPUnit_Framework_TestCase {
 
+	public function testConstructorTakesGuidFromClaim() {
+		$claim = new Claim( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
+		$claim->setGuid( 'meh' );
+		$statement = new Statement( $claim );
+		$this->assertEquals( 'meh', $statement->getGuid() );
+	}
+
 	/**
 	 * @dataProvider instanceProvider
 	 */
@@ -307,6 +314,22 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertFalse( $statement->equals( $differentStatement ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetClaim( Statement $statement ) {
+		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$qualifiers = new SnakList( array( new PropertyNoValueSnak( 23 ) ) );
+		$claim = new Claim( $mainSnak, $qualifiers );
+
+		$statement->setClaim( $claim );
+
+		$this->assertEquals( $mainSnak, $statement->getClaim()->getMainSnak() );
+		$this->assertEquals( $mainSnak, $statement->getMainSnak() );
+		$this->assertEquals( $qualifiers, $statement->getClaim()->getQualifiers() );
+		$this->assertEquals( $qualifiers, $statement->getQualifiers() );
 	}
 
 	public function testGetClaim() {
