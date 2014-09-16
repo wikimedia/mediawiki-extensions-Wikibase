@@ -2,10 +2,20 @@
 
 ## Version 2.0 (dev)
 
+#### Breaking changes
+
 * Removed all class aliases directly in the `Wikibase` namespace (deprecated since 0.6 or before)
 * Removed the class aliases for `ItemDiff` and `EntityDiff` (deprecated since 1.0)
 * Removed support for deserializing `EntityId` instances from version 0.4 or earlier
 * Removed `References` interface in favour of `ReferenceList`
+
+#### Additions
+
+* Added `Statement::RANK_` enum
+
+#### Deprecations
+* Deprecated `Claim::RANK_` enum in favour of `Statement::RANK_` enum
+* Deprecated `Claim::getRank`
 
 ## Version 1.1 (2014-09-29)
 

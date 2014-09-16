@@ -21,14 +21,23 @@ use Wikibase\DataModel\Snak\Snaks;
 class Statement extends Claim {
 
 	/**
+	 * Rank enum. Higher values are more preferred.
+	 *
+	 * @since 2.0
+	 */
+	const RANK_PREFERRED = 2;
+	const RANK_NORMAL = 1;
+	const RANK_DEPRECATED = 0;
+
+	/**
 	 * @var ReferenceList
 	 */
 	private $references;
 
 	/**
-	 * @var integer, element of the Claim::RANK_ enum
+	 * @var integer, element of the Statement::RANK_ enum
 	 */
-	private $rank = self::RANK_NORMAL;
+	private $rank;
 
 	/**
 	 * @since 0.1
@@ -47,7 +56,6 @@ class Statement extends Claim {
 			call_user_func_array( array( $this, 'initFromSnaks' ), func_get_args() );
 		}
 	}
-
 	private function initFromClaim( Claim $claim, ReferenceList $references = null ) {
 		$this->setClaim( $claim );
 		$this->references = $references === null ? new ReferenceList() : $references;
@@ -81,7 +89,7 @@ class Statement extends Claim {
 
 	/**
 	 * Sets the rank of the statement.
-	 * The rank is an element of the Claim::RANK_ enum, excluding RANK_TRUTH.
+	 * The rank is an element of the Statement::RANK_ enum.
 	 *
 	 * @since 0.1
 	 *
