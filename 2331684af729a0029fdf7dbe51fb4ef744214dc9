@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_8a1ee30f",
+        "filename": "client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-16T07:09:20Z",
+      "side": 1,
+      "message": "Please document option.",
+      "revId": "2331684af729a0029fdf7dbe51fb4ef744214dc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_6a1bb720",
+        "filename": "lib/resources/api/getLocationAgnosticMwApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-16T07:09:20Z",
+      "side": 1,
+      "message": "@return {mw.Api}",
+      "revId": "2331684af729a0029fdf7dbe51fb4ef744214dc9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
