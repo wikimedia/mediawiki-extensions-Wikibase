@@ -163,11 +163,10 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testAddReference( Statement $statement ) {
+	public function testAddNewReference( Statement $statement ) {
 		$snaks = new SnakList( new PropertyNoValueSnak( 256 ) );
 		$reference = $statement->addReference( $snaks );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Reference', $reference );
-		$this->assertTrue( $statement->getReferences()->hasReference( $reference ) );
+		$this->assertTrue( $statement->getReferences()->hasReference( new Reference( $snaks ) ) );
 	}
 
 	/**

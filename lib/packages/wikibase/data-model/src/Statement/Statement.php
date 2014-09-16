@@ -94,12 +94,10 @@ class Statement extends Claim {
 	 * @since 1.1
 	 *
 	 * @param Snaks
-	 * @return Reference
+	 * @param int|null $index
 	 */
-	public function addReference( Snaks $snaks ) {
-		$reference = new Reference( $snaks );
-		$this->references->addReference( $reference );
-		return $reference;
+	public function addReference( Snaks $snaks, $index = null ) {
+		$this->references->addNewReference( $snaks, $index );
 	}
 
 	/**
