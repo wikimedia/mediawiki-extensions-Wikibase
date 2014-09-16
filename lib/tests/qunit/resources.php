@@ -103,12 +103,21 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.store.EntityStore.tests' => $moduleBase + array(
+		'wikibase.store.CombiningEntityStore.tests' => $moduleBase + array(
 			'scripts' => array(
-				'wikibase.store/store.EntityStore.tests.js',
+				'wikibase.store/store.CombiningEntityStore.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.store.EntityStore',
+				'wikibase.store.CombiningEntityStore',
+			),
+		),
+
+		'wikibase.store.MwConfigEntityStore.tests' => $moduleBase + array(
+			'scripts' => array(
+				'wikibase.store/store.MwConfigEntityStore.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.store.MwConfigEntityStore',
 			),
 		),
 
@@ -136,15 +145,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.templates',
-			),
-		),
-
-		'wikibase.compileEntityStoreFromMwConfig.tests' => $moduleBase + array(
-			'scripts' => array(
-				'wikibase.compileEntityStoreFromMwConfig.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.compileEntityStoreFromMwConfig',
 			),
 		),
 
