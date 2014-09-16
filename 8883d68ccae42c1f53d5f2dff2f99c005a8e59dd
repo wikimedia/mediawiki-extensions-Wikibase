@@ -16,6 +16,24 @@
       "revId": "8883d68ccae42c1f53d5f2dff2f99c005a8e59dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_cadf4b3e",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-16T08:19:15Z",
+      "side": 1,
+      "message": "Because RepoApi will get this injected in Ibae5bfca6f5d3b72257a5a97ecaf19b01ed42a15 anyway.",
+      "parentUuid": "2e2fb78d_0a2b1330",
+      "revId": "8883d68ccae42c1f53d5f2dff2f99c005a8e59dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
