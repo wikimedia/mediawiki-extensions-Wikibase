@@ -789,6 +789,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 					'ROOT' => array(
 						'foo' => array( 'x', 'y', '_element' => 'letter' ) )
 				) ),
+
+			'pre-set element name' => array( 'ROOT', 'foo', array( 'x', 'y', '_element' => '_thingy' ), 'letter', true,
+				array(
+					'ROOT' => array(
+						'foo' => array( 'x', 'y', '_element' => 'letter' ) )
+				) ),
+
 		);
 	}
 
@@ -980,6 +987,8 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 				$this->assertEquals( $value, $actual[$key] );
 			}
 		}
+
+		$this->assertEquals( array_keys( $expected ), array_keys( $actual ), "Keys of $path:" );
 	}
 
 }
