@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_101902dc",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.sitelinkgroupview.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-16T14:20:45Z",
+      "side": 1,
+      "message": "So this entity store will never find something, because it has nothing to delegate to?",
+      "revId": "7924ff01e5260bd7f1a09e0161623207b6dfa102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
