@@ -15,8 +15,6 @@ use Wikibase\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @fixme wbgetclaims adds an extra <claim>property</claim> in output! see bug 70531
- *
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
