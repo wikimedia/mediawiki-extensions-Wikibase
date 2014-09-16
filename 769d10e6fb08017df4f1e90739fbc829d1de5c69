@@ -70,6 +70,24 @@
       "revId": "769d10e6fb08017df4f1e90739fbc829d1de5c69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_100462c8",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-09-16T13:48:42Z",
+      "side": 1,
+      "message": "http://grammar.ccc.commnet.edu/grammar/commas.htm : Use a comma to separate the elements in a series (three or more things), including the last two.",
+      "parentUuid": "2e2fb78d_f061d6a4",
+      "revId": "769d10e6fb08017df4f1e90739fbc829d1de5c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
