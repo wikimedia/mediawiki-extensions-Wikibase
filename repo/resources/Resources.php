@@ -39,9 +39,12 @@ return call_user_func( function() {
 				'wikibase.EntityInitializer',
 				'wikibase.parsers.getStore',
 				'wikibase.RepoApi',
+				'wikibase.serialization.entities',
 				'wikibase.sites',
-				'wikibase.store.EntityStore',
-				'wikibase.compileEntityStoreFromMwConfig',
+				'wikibase.store.ApiEntityStore',
+				'wikibase.store.CombiningEntityStore',
+				'wikibase.store.FetchedContentUnserializer',
+				'wikibase.store.MwConfigEntityStore',
 				'wikibase.ValueViewBuilder'
 			),
 			'messages' => array(

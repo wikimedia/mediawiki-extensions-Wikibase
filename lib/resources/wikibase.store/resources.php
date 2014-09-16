@@ -16,14 +16,34 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.store.ApiEntityStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'store.ApiEntityStore.js',
+			),
+			'dependencies' => array(
+				'wikibase.store',
+				'wikibase.store.EntityStore',
+			),
+		),
+
+		'wikibase.store.CombiningEntityStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'store.CombiningEntityStore.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.store',
+				'wikibase.store.EntityStore',
+			),
+		),
+
 		'wikibase.store.EntityStore' => $moduleTemplate + array(
 			'scripts' => array(
 				'store.EntityStore.js',
 			),
 			'dependencies' => array(
-				'mediawiki.Title',
+				'util.inherit',
 				'wikibase.store',
-				'wikibase.store.FetchedContent',
 			),
 		),
 
@@ -32,8 +52,8 @@ return call_user_func( function() {
 				'store.FetchedContent.js',
 			),
 			'dependencies' => array(
-				'wikibase.store',
 				'mediawiki.Title',
+				'wikibase.store',
 			),
 		),
 
@@ -42,6 +62,7 @@ return call_user_func( function() {
 				'store.FetchedContentUnserializer.js',
 			),
 			'dependencies' => array(
+				'mediawiki.Title',
 				'util.inherit',
 				'wikibase.serialization', // For registering in the SerializerFactory
 				'wikibase.store',
@@ -55,6 +76,18 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase',
+			),
+		),
+
+		'wikibase.store.MwConfigEntityStore' => $moduleTemplate + array(
+			'scripts' => array(
+				'store.MwConfigEntityStore.js',
+			),
+			'dependencies' => array(
+				'json',
+				'wikibase.store',
+				'wikibase.store.EntityStore',
+				'wikibase.store.FetchedContent',
 			),
 		),
 

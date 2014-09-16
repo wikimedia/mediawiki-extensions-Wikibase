@@ -24,7 +24,6 @@ return call_user_func( function() {
 				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.RepoApi',
-				'wikibase.serialization.entities',
 			),
 		),
 

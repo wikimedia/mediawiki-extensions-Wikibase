@@ -48,7 +48,6 @@ return call_user_func( function() {
 				'wikibase.AbstractedRepoApi',
 				'wikibase.datamodel',
 				'wikibase.RepoApi',
-				'wikibase.store.EntityStore',
 				'wikibase.store.FetchedContent',
 				'wikibase.ValueViewBuilder',
 			),
@@ -138,7 +137,6 @@ return call_user_func( function() {
 				'wikibase.datamodel',
 				'wikibase.RepoApi',
 				'wikibase.store.FetchedContent',
-				'wikibase.store.EntityStore',
 				'wikibase.ValueViewBuilder',
 				'valueFormatters'
 			),
@@ -207,7 +205,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.snaklistview',
-				'wikibase.store.EntityStore',
 				'wikibase.store.FetchedContent',
 				'wikibase.ValueViewBuilder',
 				'wikibase.datamodel',
