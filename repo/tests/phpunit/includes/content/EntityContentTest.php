@@ -133,6 +133,39 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testWikibaseTextForSearchIndex() {
+		global $wgHooks;
+
+		$entityContent = $this->newEmpty();
+		$entityContent->getEntity()->setLabel( 'en', "cake" );
+
+		$this->stashMwGlobals( 'wgHooks' );
+		$wgHooks['WikibaseTextForSearchIndex'][] =
+			function ( $actualEntityContent, &$text ) use ( $entityContent ) {
+				$this->assertSame( $entityContent, $actualEntityContent );
+				$this->assertRegExp( '/cake/m', $text );
+
+				$text .= "\nHOOK";
+				return true;
+			};
+
+		$text = $entityContent->getTextForSearchIndex();
+		$this->assertRegExp( '/cake.*HOOK/s', $text, 'Text for search index should be updated by the hook' );
+	}
+
+	public function testWikibaseTextForSearchIndex_abort() {
+		global $wgHooks;
+
+		$entityContent = $this->newEmpty();
+		$entityContent->getEntity()->setLabel( 'en', "cake" );
+
+		$this->stashMwGlobals( 'wgHooks' );
+		$wgHooks['WikibaseTextForSearchIndex'][] = function () { return false; };
+
+		$text = $entityContent->getTextForSearchIndex();
+		$this->assertEquals( '', $text, 'Text for search index should be empty if the hook returned false' );
+	}
+
 	public function testGetParserOutput() {
 		$content = $this->newEmpty();
 
