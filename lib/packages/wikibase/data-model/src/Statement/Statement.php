@@ -89,6 +89,20 @@ class Statement extends Claim {
 	}
 
 	/**
+	 * Creates a new reference and attaches it to this statement.
+	 *
+	 * @since 1.1
+	 *
+	 * @param Snaks
+	 * @return Reference
+	 */
+	public function addReference( Snaks $snaks ) {
+		$reference = new Reference( $snaks );
+		$this->references->addReference( $reference );
+		return $reference;
+	}
+
+	/**
 	 * Sets the rank of the statement.
 	 * The rank is an element of the Statement::RANK_ enum.
 	 *
