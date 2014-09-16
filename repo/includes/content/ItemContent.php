@@ -187,8 +187,14 @@ class ItemContent extends EntityContent {
 
 		wfProfileIn( __METHOD__ );
 
+		// TODO: refactor ItemSearchTextGenerator to share an interface with EntitySearchTextGenerator,
+		// so we don't have to re-implement getTextForSearchIndex() here.
 		$searchTextGenerator = new ItemSearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getItem() );
+
+		if ( !wfRunHooks( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
+			return '';
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $text;

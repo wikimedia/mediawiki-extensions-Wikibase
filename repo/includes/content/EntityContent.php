@@ -375,9 +375,12 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		wfProfileIn( __METHOD__ );
-
 		$searchTextGenerator = new EntitySearchTextGenerator();
 		$text = $searchTextGenerator->generate( $this->getEntity() );
+
+		if ( !wfRunHooks( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
+			return '';
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $text;
