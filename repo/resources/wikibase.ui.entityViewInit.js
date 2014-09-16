@@ -81,14 +81,31 @@
 		} );
 	}
 
+	function buildEntityStore( repoApi ) {
+		var serializerFactory = new wb.serialization.SerializerFactory(),
+			entityUnserializer = serializerFactory.newUnserializerFor( wb.datamodel.Entity );
+
+		// Unserializer for fetched content whose content is a wb.datamodel.Entity:
+		var fetchedEntityUnserializer = serializerFactory.newUnserializerFor(
+			wb.store.FetchedContent, {
+				contentUnserializer: entityUnserializer
+			}
+		);
+
+		return new wb.store.CombiningEntityStore( [
+			new wb.store.MwConfigEntityStore( fetchedEntityUnserializer ),
+			new wb.store.ApiEntityStore( repoApi, fetchedEntityUnserializer, [ mw.config.get( 'wgUserLanguage' ) ] )
+		] );
+
+	}
+
 	/**
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @param {jQuery} $entityview
 	 */
 	function createEntityDom( entity, $entityview ) {
 		var abstractedRepoApi = new wb.AbstractedRepoApi();
-		var entityStore = new wb.store.EntityStore( abstractedRepoApi );
-		wb.compileEntityStoreFromMwConfig( entityStore );
+		var entityStore = buildEntityStore( abstractedRepoApi );
 
 		$entityview
 		.entityview( {
