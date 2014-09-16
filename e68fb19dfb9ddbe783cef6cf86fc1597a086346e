@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_b5b220f7",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-09-16T12:03:10Z",
+      "side": 1,
+      "message": "\"Hover\" actions do not exist in touch devices. Are the designers considering useful hinting for those environments?",
+      "revId": "e68fb19dfb9ddbe783cef6cf86fc1597a086346e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
