@@ -23,7 +23,7 @@
 	"wikibase-diffview-alias": "aliasuri",
 	"wikibase-diffview-description": "descriere",
 	"wikibase-diffview-link": "legături",
-	"wikibase-error-unexpected": "A apărut o eroare neașteptată: $1.",
+	"wikibase-error-unexpected": "Eroare: $1.",
 	"wikibase-error-save-generic": "A intervenit o eroare în timpul salvării. Modificările dumneavoastră nu au putut fi finalizate.",
 	"wikibase-error-remove-generic": "A intervenit o eroare în timpul eliminării. Modificările dumneavoastră nu au putut fi finalizate.",
 	"wikibase-error-save-connection": "A intervenit o eroare de conexiune în timpul salvării. Modificările dumneavoastră nu au putut fi finalizate. Verificați-vă conexiunea la internet.",

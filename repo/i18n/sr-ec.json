@@ -113,6 +113,7 @@
 	"wikibase-setaliases-warning-remove": "Да ли заиста желите да уклоните све псеудониме за [[$1]]?",
 	"wikibase-modifyentity-id": "ИД:",
 	"wikibase-modifyterm-language": "Језик:",
+	"wikibase-mergeitems-success": "$1 је успешно спојена у $3.",
 	"special-dispatchstats": "Статистика дневника отпрема",
 	"wikibase-dispatchstats-no-stats": "Тренутно нема расположивих статистика.",
 	"wikibase-dispatchstats-changes": "Статистика дневника промена",
