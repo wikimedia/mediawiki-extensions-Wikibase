@@ -27,11 +27,15 @@ class Claim implements Hashable, Comparable, PropertyIdProvider {
 	 * Rank enum. Higher values are more preferred.
 	 *
 	 * @since 0.1
-	 * @deprecated since 1.1 - use Statement::RANK_ instead
 	 */
+
+	/** @deprecated since 1.1 */
 	const RANK_TRUTH = 3;
+	/** @deprecated since 1.1 - use Statement::RANK_PREFERRED instead */
 	const RANK_PREFERRED = 2;
+	/** @deprecated since 1.1 - use Statement::RANK_NORMAL instead */
 	const RANK_NORMAL = 1;
+	/** @deprecated since 1.1 - use Statement::RANK_DEPRECATED instead */
 	const RANK_DEPRECATED = 0;
 
 	/**

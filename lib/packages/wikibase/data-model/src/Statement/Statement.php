@@ -25,9 +25,9 @@ class Statement extends Claim {
 	 *
 	 * @since 2.0
 	 */
-	const RANK_PREFERRED = 2;
-	const RANK_NORMAL = 1;
-	const RANK_DEPRECATED = 0;
+	const RANK_PREFERRED = Claim::RANK_PREFERRED;
+	const RANK_NORMAL = Claim::RANK_NORMAL;
+	const RANK_DEPRECATED = Claim::RANK_DEPRECATED;
 
 	/**
 	 * @var ReferenceList
