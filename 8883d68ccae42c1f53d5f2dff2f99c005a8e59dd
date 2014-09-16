@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_0a2b1330",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-16T07:02:01Z",
+      "side": 1,
+      "message": "Why not remove the attribute and use mwApi directly in get() and post()?",
+      "revId": "8883d68ccae42c1f53d5f2dff2f99c005a8e59dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
