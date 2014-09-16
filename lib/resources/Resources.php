@@ -67,21 +67,6 @@ return call_user_func( function() {
 			'scripts' => 'templates.js',
 		),
 
-		'wikibase.compileEntityStoreFromMwConfig' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.compileEntityStoreFromMwConfig.js',
-			),
-			'dependencies' => array(
-				'json',
-				'wikibase',
-				'wikibase.serialization',
-				'wikibase.serialization.entities',
-				'wikibase.store.FetchedContent',
-				'wikibase.store.FetchedContentUnserializer',
-				'wikibase.datamodel',
-			),
-		),
-
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
