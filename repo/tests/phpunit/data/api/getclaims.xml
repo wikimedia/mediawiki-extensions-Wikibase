@@ -1,1 +1,1 @@
-<?xml version="1.0"?><api><claims><claim id="P1491009"><claim id="Q80050245$kittens" type="statement" rank="normal"><mainsnak snaktype="novalue" property="P1491009" /><qualifiers /><qualifiers-order /></claim></claim><claim>property</claim></claims></api>
+<?xml version="1.0"?><api><claims><property id="P1491009"><claim id="Q80050245$kittens" type="statement" rank="normal"><mainsnak snaktype="novalue" property="P1491009" /><qualifiers /><qualifiers-order /></claim></property></claims></api>
