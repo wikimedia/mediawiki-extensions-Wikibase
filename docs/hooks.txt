@@ -1,0 +1,33 @@
+This file describes hooks defined by the Wikibase extensions.
+See docs/hooks.txt in the MediaWiki installation root for
+general information on hooks.
+
+
+== Repo ==
+
+'WikibaseTextForSearchIndex': Called by EntityContent::getTextForSearchIndex() to allow
+extra text to be passed to the search engine for indexing. If the hook function returns
+false, no text at all will be passed to the search index.
+$entity: EntityContent to be indexed
+&$text: The text to pass to the indexed (to be modified).
+
+'WikibaseContentModelMapping': called by WikibaseRepo::getContentModelMappings() to allow
+additional mappings between Entity types and content model identifiers to be defiend.
+&$map: an associative array mapping Entity types to content model ids.
+
+'WikibaseRebuildData': DEPRECATED. Used by rebuildAllData.
+$report: A closure that can be called with a string to report that messages.
+
+'WikibaseDeleteData': DEPRECATED. Used by deleteAllData.
+$report: A closure that can be called with a string to report that messages.
+
+
+== Client ==
+
+'WikibaseHandleChanges': Callend by ChangeHandler::handleChange() to allow pre-processing
+of changes.
+$changes: A list of Change objects
+
+'WikibaseHandleChange': Callend by ChangeHandler::handleChange() to allow alternative
+processing of changes.
+$change: A Change object
