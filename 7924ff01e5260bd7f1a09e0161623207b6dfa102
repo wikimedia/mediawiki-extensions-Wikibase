@@ -16,6 +16,24 @@
       "revId": "7924ff01e5260bd7f1a09e0161623207b6dfa102",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_8df393d1",
+        "filename": "lib/tests/qunit/jquery.wikibase/jquery.wikibase.sitelinkgroupview.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-17T07:29:07Z",
+      "side": 1,
+      "message": "Yep. Replaced it with wb.store.EntityStore.",
+      "parentUuid": "2e2fb78d_101902dc",
+      "revId": "7924ff01e5260bd7f1a09e0161623207b6dfa102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
