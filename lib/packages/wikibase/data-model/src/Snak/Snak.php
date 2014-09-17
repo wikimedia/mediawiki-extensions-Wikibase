@@ -2,7 +2,12 @@
 
 namespace Wikibase\DataModel\Snak;
 
+use Comparable;
+use Hashable;
+use Immutable;
+use Serializable;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\PropertyIdProvider;
 
 /**
  * Interface for objects that represent a single Wikibase snak.
@@ -13,16 +18,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Snak extends \Serializable, \Hashable, \Immutable, \Comparable {
-
-	/**
-	 * Returns the id of the snaks property.
-	 *
-	 * @since 0.2
-	 *
-	 * @return PropertyId
-	 */
-	public function getPropertyId();
+interface Snak extends Serializable, Hashable, Immutable, Comparable, PropertyIdProvider {
 
 	/**
 	 * Returns a string that can be used to identify the type of snak.

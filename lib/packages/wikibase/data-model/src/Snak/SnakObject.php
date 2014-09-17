@@ -56,7 +56,7 @@ abstract class SnakObject implements Snak {
 	}
 
 	/**
-	 * @see Snak::getPropertyId
+	 * @see PropertyIdProvider::getPropertyId
 	 *
 	 * @since 0.1
 	 *
