@@ -3,7 +3,7 @@
 namespace Wikibase\DataModel;
 
 /**
- * Interface for all objects containing a property id.
+ * Interface for objects containing a property id.
  *
  * @since 1.1
  *
