@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_966600b7",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-09-17T16:31:16Z",
+      "side": 1,
+      "message": "Why have the if here? The hook could instead empty $text and have no return value.",
+      "revId": "86ea8bbcb68a6bf8978bc41b5d515038e6ffab8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
