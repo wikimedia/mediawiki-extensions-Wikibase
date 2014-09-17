@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel;
 
+use Wikibase\DataModel\Entity\PropertyId;
+
 /**
  * Interface for all objects containing a property id.
  *
