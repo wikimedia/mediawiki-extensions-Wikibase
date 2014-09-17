@@ -34,6 +34,24 @@
       "revId": "86ea8bbcb68a6bf8978bc41b5d515038e6ffab8d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_16e0d0f5",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2014-09-17T16:44:42Z",
+      "side": 1,
+      "message": "Good, I didn\u0027t think of the multiple hooks case.",
+      "parentUuid": "2e2fb78d_56dad851",
+      "revId": "86ea8bbcb68a6bf8978bc41b5d515038e6ffab8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
