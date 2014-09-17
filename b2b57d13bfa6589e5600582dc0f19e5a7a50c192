@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_d6648813",
+        "filename": "repo/includes/store/sql/DispatchStats.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-17T18:01:44Z",
+      "side": 1,
+      "message": "\u0026\u0026 !empty( $this-\u003eclientStates )",
+      "revId": "b2b57d13bfa6589e5600582dc0f19e5a7a50c192",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
