@@ -16,6 +16,24 @@
       "revId": "86ea8bbcb68a6bf8978bc41b5d515038e6ffab8d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_56dad851",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-17T16:42:40Z",
+      "side": 1,
+      "message": "Because there can be more than one hook. If the first one returns false, the second one must not be executed. The intention is to \"abort\" the operation, so forcing the result to \u0027\u0027 in that case seems sensible.",
+      "parentUuid": "2e2fb78d_966600b7",
+      "revId": "86ea8bbcb68a6bf8978bc41b5d515038e6ffab8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
