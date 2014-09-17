@@ -22,7 +22,7 @@
 	"wikibase-diffview-alias": "rööpkujud",
 	"wikibase-diffview-description": "kirjeldus",
 	"wikibase-diffview-link": "lingid",
-	"wikibase-error-unexpected": "Ilmnes tundmatu tõrge: $1.",
+	"wikibase-error-unexpected": "Tõrge: $1.",
 	"wikibase-error-save-generic": "Salvestamisel esines tõrge. Sinu muudatusi ei saanud lõpule viia.",
 	"wikibase-error-remove-generic": "Eemaldamisel esines tõrge. Sinu muudatusi ei saanud lõpule viia.",
 	"wikibase-error-save-connection": "Salvestamisel esines tõrge. Sinu muudatusi ei saanud lõpule viia. Palun kontrolli oma internetiühendust.",
