@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use IContextSource;
 use ParserOptions;
+use PHPUnit_Framework_Assert;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\Entity;
@@ -131,6 +132,39 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		return array(
 			array( $entityContent, '/^cake$/' )
 		);
+	}
+
+	public function testWikibaseTextForSearchIndex() {
+		global $wgHooks;
+
+		$entityContent = $this->newEmpty();
+		$entityContent->getEntity()->setLabel( 'en', "cake" );
+
+		$this->stashMwGlobals( 'wgHooks' );
+		$wgHooks['WikibaseTextForSearchIndex'][] =
+			function ( $actualEntityContent, &$text ) use ( $entityContent ) {
+				PHPUnit_Framework_Assert::assertSame( $entityContent, $actualEntityContent );
+				PHPUnit_Framework_Assert::assertRegExp( '/cake/m', $text );
+
+				$text .= "\nHOOK";
+				return true;
+			};
+
+		$text = $entityContent->getTextForSearchIndex();
+		$this->assertRegExp( '/cake.*HOOK/s', $text, 'Text for search index should be updated by the hook' );
+	}
+
+	public function testWikibaseTextForSearchIndex_abort() {
+		global $wgHooks;
+
+		$entityContent = $this->newEmpty();
+		$entityContent->getEntity()->setLabel( 'en', "cake" );
+
+		$this->stashMwGlobals( 'wgHooks' );
+		$wgHooks['WikibaseTextForSearchIndex'][] = function () { return false; };
+
+		$text = $entityContent->getTextForSearchIndex();
+		$this->assertEquals( '', $text, 'Text for search index should be empty if the hook returned false' );
 	}
 
 	public function testGetParserOutput() {
