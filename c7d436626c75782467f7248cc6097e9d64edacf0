@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_612bd078",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-17T18:10:15Z",
+      "side": 1,
+      "message": "Why is this being put in the same class? The cohesion seems to be very low. It\u0027s sharing the namespaceChecker field, but all the rest seems disjoint. Am I missing something?",
+      "revId": "c7d436626c75782467f7248cc6097e9d64edacf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
