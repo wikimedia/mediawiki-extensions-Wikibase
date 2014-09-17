@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_96316003",
+        "filename": "repo/includes/specials/SpecialWikibaseRepoPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-17T18:04:46Z",
+      "side": 1,
+      "message": "This name is deceptive. It does not initialize the services. It sets the services, which might be done as part of the initialization of this class.",
+      "revId": "1956e8ea5fbb7db0601935ed2d2cccc6b6dc02e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
