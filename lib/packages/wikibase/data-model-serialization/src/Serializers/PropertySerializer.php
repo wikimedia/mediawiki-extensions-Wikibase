@@ -80,7 +80,7 @@ class PropertySerializer implements DispatchableSerializer {
 	}
 
 	private function addClaimsToSerialization( Entity $entity, array &$serialization ) {
-		$claims = new Claims( $entity->getClaims() );
+		$claims = new Claims( $entity->getStatements() );
 
 		$serialization['claims'] = $this->claimsSerializer->serialize( $claims );
 	}
