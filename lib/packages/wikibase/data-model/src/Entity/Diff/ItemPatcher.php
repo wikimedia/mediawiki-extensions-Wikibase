@@ -2,18 +2,16 @@
 
 namespace Wikibase\DataModel\Entity\Diff;
 
-use Diff\Comparer\CallbackComparer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\ListPatcher;
 use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
-use Wikibase\DataModel\Claim\Claim;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Statement\StatementListPatcher;
 
 /**
  * @since 1.1
@@ -28,8 +26,14 @@ class ItemPatcher implements EntityPatcherStrategy {
 	 */
 	private $fingerprintPatcher;
 
+	/**
+	 * @var StatementListPatcher
+	 */
+	private $statementListPatcher;
+
 	public function __construct() {
 		$this->fingerprintPatcher = new FingerprintPatcher();
+		$this->statementListPatcher = new StatementListPatcher();
 	}
 
 	/**
@@ -67,7 +71,10 @@ class ItemPatcher implements EntityPatcherStrategy {
 			$this->patchSiteLinks( $item, $patch->getSiteLinkDiff() );
 		}
 
-		$this->patchClaims( $item, $patch );
+		$item->setStatements( $this->statementListPatcher->getPatchedStatementList(
+			$item->getStatements(),
+			$patch->getClaimsDiff()
+		) );
 	}
 
 	private function patchSiteLinks( Item $item, Diff $siteLinksDiff ) {
@@ -115,26 +122,6 @@ class ItemPatcher implements EntityPatcherStrategy {
 		}
 
 		return $links;
-	}
-
-	private function patchClaims( Item $item, EntityDiff $patch ) {
-		$patcher = new MapPatcher();
-
-		$patcher->setValueComparer( new CallbackComparer(
-			function( Claim $firstClaim, Claim $secondClaim ) {
-				return $firstClaim->equals( $secondClaim );
-			}
-		) );
-
-		$claims = array();
-
-		foreach ( $item->getClaims() as $claim ) {
-			$claims[$claim->getGuid()] = $claim;
-		}
-
-		$claims = $patcher->patch( $claims, $patch->getClaimsDiff() );
-
-		$item->setClaims( new Claims( $claims ) );
 	}
 
 }
