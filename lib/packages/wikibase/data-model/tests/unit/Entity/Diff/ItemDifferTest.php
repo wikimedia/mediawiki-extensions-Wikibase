@@ -6,10 +6,10 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Entity\Diff\ItemDiffer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\ItemDiffer

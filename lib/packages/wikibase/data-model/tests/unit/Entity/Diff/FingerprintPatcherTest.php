@@ -5,19 +5,8 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
-use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Entity\Diff\FingerprintPatcher;
-use Wikibase\DataModel\Entity\Diff\ItemDiff;
-use Wikibase\DataModel\Entity\Diff\ItemPatcher;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Entity\Diff\ItemDiffer;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
