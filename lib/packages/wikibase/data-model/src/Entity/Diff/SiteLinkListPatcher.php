@@ -28,7 +28,7 @@ class SiteLinkListPatcher {
 	private $patcher;
 
 	public function __construct() {
-		$this->patcher = new MapPatcher();
+		$this->patcher = new MapPatcher( false, new ListPatcher() );
 	}
 
 	/**
@@ -39,16 +39,14 @@ class SiteLinkListPatcher {
 	 * @throws InvalidArgumentException
 	 */
 	public function getPatchedSiteLinkList( SiteLinkList $links, Diff $patch ) {
-		$patcher = new MapPatcher( false, new ListPatcher() );
-
 		$links = $this->getLinksInDiffFormat( $links );
-		$links = $patcher->patch( $links, $patch );
+		$links = $this->patcher->patch( $links, $patch );
 
 		$siteLinks = new SiteLinkList();
 
 		foreach ( $links as $siteId => $linkData ) {
 			if ( array_key_exists( 'name', $linkData ) ) {
-				$siteLinks->addSiteLink( new SiteLink(
+				$siteLinks->addNewSiteLink(
 					$siteId,
 					$linkData['name'],
 					array_map(
@@ -57,7 +55,7 @@ class SiteLinkListPatcher {
 						},
 						$linkData['badges']
 					)
-				) );
+				);
 			}
 		}
 
