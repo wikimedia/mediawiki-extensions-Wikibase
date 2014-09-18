@@ -34,7 +34,7 @@ class PropertyPatcher implements EntityPatcherStrategy {
 	public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
 		$this->assertIsProperty( $entity );
 
-		return $this->getPatchedProperty( $entity, $patch );
+		$this->patchProperty( $entity, $patch );
 	}
 
 	private function assertIsProperty( EntityDocument $property ) {
@@ -43,14 +43,12 @@ class PropertyPatcher implements EntityPatcherStrategy {
 		}
 	}
 
-	private function getPatchedProperty( Property $property, EntityDiff $patch ) {
+	private function patchProperty( Property $property, EntityDiff $patch ) {
 		$patcher = new MapPatcher();
 
 		$property->setLabels( $patcher->patch( $property->getLabels(), $patch->getLabelsDiff() ) );
 		$property->setDescriptions( $patcher->patch( $property->getDescriptions(), $patch->getDescriptionsDiff() ) );
 		$property->setAllAliases( $patcher->patch( $property->getAllAliases(), $patch->getAliasesDiff() ) );
-
-		return $property;
 	}
 
 }

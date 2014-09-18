@@ -24,7 +24,6 @@ interface EntityPatcherStrategy {
 	 * @param EntityDocument $entity
 	 * @param EntityDiff $patch
 	 *
-	 * @return EntityDocument
 	 * @throws InvalidArgumentException
 	 */
 	public function patchEntity( EntityDocument $entity, EntityDiff $patch );

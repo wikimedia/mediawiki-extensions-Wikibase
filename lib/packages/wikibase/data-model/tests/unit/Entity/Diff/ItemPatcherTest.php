@@ -25,16 +25,23 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 class ItemPatcherTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyDiff_itemIsReturnedAsIs() {
-		$patcher = new ItemPatcher();
-
 		$item = Item::newEmpty();
 		$item->getFingerprint()->setLabel( 'en', 'foo' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'bar' );
 
-		$patchedItem = $patcher->patchEntity( $item, new ItemDiff() );
+		$patchedItem = $this->getPatchedItem( $item, new ItemDiff() );
 
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\Item', $patchedItem );
 		$this->assertTrue( $item->equals( $patchedItem ) );
+	}
+
+	private function getPatchedItem( Item $item, ItemDiff $patch ) {
+		$patchedItem = $item->copy();
+
+		$patcher = new ItemPatcher();
+		$patcher->patchEntity( $patchedItem, $patch );
+
+		return $patchedItem;
 	}
 
 	public function testCanPatchEntityType() {
@@ -64,8 +71,7 @@ class ItemPatcherTest extends \PHPUnit_Framework_TestCase {
 			) )
 		) );
 
-		$patcher = new ItemPatcher();
-		$patchedItem = $patcher->patchEntity( $item, $patch );
+		$patchedItem = $this->getPatchedItem( $item, $patch );
 
 		$this->assertSame(
 			array(
@@ -105,8 +111,7 @@ class ItemPatcherTest extends \PHPUnit_Framework_TestCase {
 			) )
 		) );
 
-		$patcher = new ItemPatcher();
-		$patchedItem = $patcher->patchEntity( $item, $patch );
+		$patchedItem = $this->getPatchedItem( $item, $patch );
 
 		$expectedLinks = new SiteLinkList();
 		$expectedLinks->addNewSiteLink( 'dewiki', 'bar' );

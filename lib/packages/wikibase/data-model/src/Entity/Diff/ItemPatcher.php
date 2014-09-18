@@ -42,7 +42,7 @@ class ItemPatcher implements EntityPatcherStrategy {
 	public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
 		$this->assertIsItem( $entity );
 
-		return $this->getPatchedItem( $entity, $patch );
+		$this->patchItem( $entity, $patch );
 	}
 
 	private function assertIsItem( EntityDocument $item ) {
@@ -51,7 +51,7 @@ class ItemPatcher implements EntityPatcherStrategy {
 		}
 	}
 
-	private function getPatchedItem( Item $item, EntityDiff $patch ) {
+	private function patchItem( Item $item, EntityDiff $patch ) {
 		$patcher = new MapPatcher();
 
 		$item->setLabels( $patcher->patch( $item->getLabels(), $patch->getLabelsDiff() ) );
@@ -63,8 +63,6 @@ class ItemPatcher implements EntityPatcherStrategy {
 		}
 
 		$this->patchClaims( $item, $patch );
-
-		return $item;
 	}
 
 	private function patchSiteLinks( Item $item, Diff $siteLinksDiff ) {
