@@ -2,15 +2,9 @@
 
 namespace Wikibase\DataModel\Entity\Diff;
 
-use Diff\DiffOp\Diff\Diff;
-use Diff\Patcher\ListPatcher;
-use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\StatementListPatcher;
 
 /**

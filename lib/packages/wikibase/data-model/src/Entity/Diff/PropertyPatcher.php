@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity\Diff;
 
-use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;

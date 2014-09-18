@@ -5,16 +5,10 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\Diff\ItemPatcher;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\SiteLinkList;
-use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Entity\Diff\ItemDiffer;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\ItemPatcher
@@ -80,47 +74,6 @@ class ItemPatcherTest extends \PHPUnit_Framework_TestCase {
 				'nl' => 'baz',
 			),
 			$patchedItem->getFingerprint()->getLabels()->toTextArray()
-		);
-	}
-
-	public function testPatchesSiteLinks() {
-		$item = Item::newEmpty();
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'bar' );
-		$item->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'baz', array( new ItemId( 'Q42' ) ) );
-
-		$patch = new ItemDiff( array(
-			'links' => new Diff( array(
-				'nlwiki' => new Diff( array(
-					'name'   => new DiffOpChange( 'baz', 'kittens' ),
-					'badges' => new Diff(
-						array(
-							new DiffOpRemove( 'Q42' ),
-						),
-						false
-					)
-				) ),
-				'frwiki' => new Diff( array(
-					'name'   => new DiffOpAdd( 'Berlin' ),
-					'badges' => new Diff(
-						array(
-							new DiffOpAdd( 'Q42' ),
-						),
-						false
-					)
-				) )
-			) )
-		) );
-
-		$patchedItem = $this->getPatchedItem( $item, $patch );
-
-		$expectedLinks = new SiteLinkList();
-		$expectedLinks->addNewSiteLink( 'dewiki', 'bar' );
-		$expectedLinks->addNewSiteLink( 'nlwiki', 'kittens' );
-		$expectedLinks->addNewSiteLink( 'frwiki', 'Berlin', array( new ItemId( 'Q42' ) ) );
-
-		$this->assertEquals(
-			$expectedLinks,
-			$patchedItem->getSiteLinkList()
 		);
 	}
 
