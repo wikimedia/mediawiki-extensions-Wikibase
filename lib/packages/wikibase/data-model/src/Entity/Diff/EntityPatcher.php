@@ -36,9 +36,9 @@ class EntityPatcher {
 	 * @throws InvalidArgumentException
 	 * @throws RuntimeException
 	 */
-    public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
-        $this->getPatcherStrategy( $entity->getType() )->patchEntity( $entity, $patch );
-    }
+	public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
+		$this->getPatcherStrategy( $entity->getType() )->patchEntity( $entity, $patch );
+	}
 
 	private function getPatcherStrategy( $entityType ) {
 		foreach ( $this->patcherStrategies as $patcherStrategy ) {
