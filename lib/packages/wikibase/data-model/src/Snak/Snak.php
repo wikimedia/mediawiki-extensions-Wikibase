@@ -6,7 +6,6 @@ use Comparable;
 use Hashable;
 use Immutable;
 use Serializable;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
 
 /**

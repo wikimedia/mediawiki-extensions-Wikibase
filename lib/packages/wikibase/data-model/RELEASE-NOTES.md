@@ -9,6 +9,7 @@
 * Added `StatementList::getAllSnaks` to use instead of `Entity::getAllSnaks`
 * The `Statement` constructor now also accepts a `Claim` parameter
 * Added `Statement::setClaim`
+* Added `PropertyIdProvider` interface
 
 ## Version 1.0 (2014-09-02)
 
