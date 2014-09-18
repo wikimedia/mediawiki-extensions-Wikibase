@@ -2,9 +2,11 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Test\DataModel\Fixtures\EntityOfUnknownType;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\EntityPatcher
@@ -34,9 +36,15 @@ class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
         $argLists[] = array( Item::newEmpty() );
         $argLists[] = array( $nonEmptyItem );
 
-
         return $argLists;
     }
+
+	public function testGivenNonSupportedEntity_exceptionIsThrown() {
+		$patcher = new EntityPatcher();
+
+		$this->setExpectedException( 'RuntimeException' );
+		$patcher->patchEntity( new EntityOfUnknownType(), new EntityDiff() );
+	}
 
 }
 
