@@ -24,6 +24,15 @@ use Wikibase\DataModel\SiteLinkList;
 class ItemPatcher implements EntityPatcherStrategy {
 
 	/**
+	 * @var FingerprintPatcher
+	 */
+	private $fingerprintPatcher;
+
+	public function __construct() {
+		$this->fingerprintPatcher = new FingerprintPatcher();
+	}
+
+	/**
 	 * @param string $entityType
 	 *
 	 * @return boolean
@@ -52,11 +61,7 @@ class ItemPatcher implements EntityPatcherStrategy {
 	}
 
 	private function patchItem( Item $item, EntityDiff $patch ) {
-		$patcher = new MapPatcher();
-
-		$item->setLabels( $patcher->patch( $item->getLabels(), $patch->getLabelsDiff() ) );
-		$item->setDescriptions( $patcher->patch( $item->getDescriptions(), $patch->getDescriptionsDiff() ) );
-		$item->setAllAliases( $patcher->patch( $item->getAllAliases(), $patch->getAliasesDiff() ) );
+		$this->fingerprintPatcher->patchFingerprint( $item->getFingerprint(), $patch );
 
 		if ( $patch instanceof ItemDiff ) {
 			$this->patchSiteLinks( $item, $patch->getSiteLinkDiff() );

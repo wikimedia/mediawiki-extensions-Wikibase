@@ -16,6 +16,15 @@ use Wikibase\DataModel\Entity\Property;
 class PropertyPatcher implements EntityPatcherStrategy {
 
 	/**
+	 * @var FingerprintPatcher
+	 */
+	private $fingerprintPatcher;
+
+	public function __construct() {
+		$this->fingerprintPatcher = new FingerprintPatcher();
+	}
+
+	/**
 	 * @param string $entityType
 	 *
 	 * @return boolean
@@ -44,11 +53,7 @@ class PropertyPatcher implements EntityPatcherStrategy {
 	}
 
 	private function patchProperty( Property $property, EntityDiff $patch ) {
-		$patcher = new MapPatcher();
-
-		$property->setLabels( $patcher->patch( $property->getLabels(), $patch->getLabelsDiff() ) );
-		$property->setDescriptions( $patcher->patch( $property->getDescriptions(), $patch->getDescriptionsDiff() ) );
-		$property->setAllAliases( $patcher->patch( $property->getAllAliases(), $patch->getAliasesDiff() ) );
+		$this->fingerprintPatcher->patchFingerprint( $property->getFingerprint(), $patch );
 	}
 
 }
