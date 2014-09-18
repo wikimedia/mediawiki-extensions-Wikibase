@@ -31,9 +31,15 @@ class ItemPatcher implements EntityPatcherStrategy {
 	 */
 	private $statementListPatcher;
 
+	/**
+	 * @var SiteLinkListPatcher
+	 */
+	private $siteLinkListPatcher;
+
 	public function __construct() {
 		$this->fingerprintPatcher = new FingerprintPatcher();
 		$this->statementListPatcher = new StatementListPatcher();
+		$this->siteLinkListPatcher = new SiteLinkListPatcher();
 	}
 
 	/**
@@ -68,7 +74,10 @@ class ItemPatcher implements EntityPatcherStrategy {
 		$this->fingerprintPatcher->patchFingerprint( $item->getFingerprint(), $patch );
 
 		if ( $patch instanceof ItemDiff ) {
-			$this->patchSiteLinks( $item, $patch->getSiteLinkDiff() );
+			$item->setSiteLinkList( $this->siteLinkListPatcher->getPatchedSiteLinkList(
+				$item->getSiteLinkList(),
+				$patch->getSiteLinkDiff()
+			) );
 		}
 
 		$item->setStatements( $this->statementListPatcher->getPatchedStatementList(
@@ -77,51 +86,6 @@ class ItemPatcher implements EntityPatcherStrategy {
 		) );
 	}
 
-	private function patchSiteLinks( Item $item, Diff $siteLinksDiff ) {
-		$patcher = new MapPatcher( false, new ListPatcher() );
 
-		$links = $this->getLinksInDiffFormat( $item );
-		$links = $patcher->patch( $links, $siteLinksDiff );
-
-		$siteLinks = new SiteLinkList();
-
-		foreach ( $links as $siteId => $linkData ) {
-			if ( array_key_exists( 'name', $linkData ) ) {
-				$siteLinks->addSiteLink( new SiteLink(
-					$siteId,
-					$linkData['name'],
-					array_map(
-						function( $idSerialization ) {
-							return new ItemId( $idSerialization );
-						},
-						$linkData['badges']
-					)
-				) );
-			}
-		}
-
-		$item->setSiteLinkList( $siteLinks );
-	}
-
-	private function getLinksInDiffFormat( Item $item ) {
-		$links = array();
-
-		/**
-		 * @var SiteLink $siteLink
-		 */
-		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			$links[$siteLink->getSiteId()] = array(
-				'name' => $siteLink->getPageName(),
-				'badges' => array_map(
-					function( ItemId $id ) {
-						return $id->getSerialization();
-					},
-					$siteLink->getBadges()
-				)
-			);
-		}
-
-		return $links;
-	}
 
 }
