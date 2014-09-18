@@ -16,6 +16,24 @@
       "revId": "c7d436626c75782467f7248cc6097e9d64edacf0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_7db2dfe5",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-18T11:58:45Z",
+      "side": 1,
+      "message": "The cohesion is not in the services needed, but in the knowledge about what information gets passed through which fields in ParserOutput/OutputPage/skin data.\n\nBasically, this calls encapsulates the knowledge about how the information relevant for building the sidebar is funneled from parse-time information to the skin code constructing the actual sidebar.\n\nPoint in case, there is code further up that transfers the \u0027wikibase-otherprojects\u0027 field from the ParserOutput to the OutputPage. I\u0027d hate to have the knowledge over what these fields are called and what their structure is distributed over multiple classes.",
+      "parentUuid": "2e2fb78d_612bd078",
+      "revId": "c7d436626c75782467f7248cc6097e9d64edacf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
