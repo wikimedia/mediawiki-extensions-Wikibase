@@ -67,6 +67,10 @@ call_user_func( function() {
 	$wgWBRepoSettings['specialSiteLinkGroups'] = array( 'commons', 'wikidata' );
 } );
 
+/*
+// Include Wikibase.searchindex.php to include string and text values in the full text index:
+require_once( __DIR__ . '/Wikibase.searchindex.php' );
+*/
 
 /*
 // Alternative settings, using the main namespace for items.
