@@ -71,7 +71,9 @@ class FingerprintView {
 		$hasLabel = $labels->hasTermForLanguage( $this->languageCode );
 		$id = 'new';
 		$idInParentheses = '';
-		$editSection = $this->getHtmlForEditSection( 'SetLabel', $entityId, $editable );
+		$editSection = wfTemplate( 'wikibase-toolbar-wrapper',
+			$this->getHtmlForEditSection( 'SetLabel', $entityId, $editable )
+		);
 
 		if ( $entityId !== null ) {
 			$id = $entityId->getSerialization();

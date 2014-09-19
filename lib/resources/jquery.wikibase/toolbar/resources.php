@@ -18,11 +18,11 @@ return call_user_func( function() {
 
 		'jquery.wikibase.addtoolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'addtoolbar.js',
+				'jquery.wikibase.addtoolbar.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.toolbarbase',
-				'wikibase.templates',
+				'jquery.wikibase.toolbar',
+				'jquery.wikibase.toolbarbutton',
 			),
 			'messages' => array(
 				'wikibase-add',
@@ -31,32 +31,36 @@ return call_user_func( function() {
 
 		'jquery.wikibase.edittoolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'edittoolbar.js',
+				'jquery.wikibase.edittoolbar.js',
+			),
+			'styles' => array(
+				'themes/default/jquery.wikibase.edittoolbar.css',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbarbase',
-				'jquery.wikibase.toolbareditgroup',
-				'wikibase.templates',
+				'jquery.wikibase.toolbarbutton',
+				'jquery.wikibase.wbtooltip',
 			),
 			'messages' => array(
+				'wikibase-cancel',
+				'wikibase-edit',
+				'wikibase-remove',
 				'wikibase-remove-inprogress',
+				'wikibase-save',
 				'wikibase-save-inprogress',
 			),
 		),
 
 		'jquery.wikibase.movetoolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'movetoolbar.js',
+				'jquery.wikibase.movetoolbar.js',
 			),
 			'styles' => array(
-				'themes/default/movetoolbar.css',
+				'themes/default/jquery.wikibase.movetoolbar.css',
 			),
 			'dependencies' => array(
-				'jquery.ui.widget',
-				'jquery.wikibase.toolbarbase',
+				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbarbutton',
-				'wikibase.templates',
 			),
 			'messages' => array(
 				'wikibase-move-up',
@@ -66,11 +70,11 @@ return call_user_func( function() {
 
 		'jquery.wikibase.removetoolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'removetoolbar.js',
+				'jquery.wikibase.removetoolbar.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.toolbarbase',
-				'wikibase.templates',
+				'jquery.wikibase.toolbar',
+				'jquery.wikibase.toolbarbutton',
 			),
 			'messages' => array(
 				'wikibase-remove',
@@ -79,44 +83,32 @@ return call_user_func( function() {
 
 		'jquery.wikibase.toolbar' => $moduleTemplate + array(
 			'scripts' => array(
-				'toolbar.js',
+				'jquery.wikibase.toolbar.js',
 			),
 			'styles' => array(
-				'themes/default/toolbar.css',
+				'themes/default/jquery.wikibase.toolbar.css',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.toolbarbutton',
-			),
-		),
-
-		'jquery.wikibase.toolbarbase' => $moduleTemplate + array(
-			'scripts' => array(
-				'toolbarbase.js',
-			),
-			'dependencies' => array(
-				'jquery.ui.widget',
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbareditgroup',
-				'wikibase.templates',
+				'jquery.wikibase.toolbaritem',
 			),
 		),
 
 		'jquery.wikibase.toolbarbutton' => $moduleTemplate + array(
 			'scripts' => array(
-				'toolbarbutton.js',
+				'jquery.wikibase.toolbarbutton.js',
 			),
 			'styles' => array(
-				'themes/default/toolbarbutton.css',
+				'themes/default/jquery.wikibase.toolbarbutton.css',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.toolbarlabel',
+				'jquery.wikibase.toolbaritem',
 			),
 		),
 
 		'jquery.wikibase.toolbarcontroller' => $moduleTemplate + array(
 			'scripts' => array(
-				'toolbarcontroller.js',
-				'toolbarcontroller.definitions.js',
+				'jquery.wikibase.toolbarcontroller.js',
+				'jquery.wikibase.toolbarcontroller.definitions.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
@@ -126,34 +118,15 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbareditgroup' => $moduleTemplate + array(
+		'jquery.wikibase.toolbaritem' => $moduleTemplate + array(
 			'scripts' => array(
-				'toolbareditgroup.js',
-			),
-			'dependencies' => array(
-				'jquery.ui.widget',
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.wbtooltip',
-				'wikibase.templates',
-			),
-			'messages' => array(
-				'wikibase-cancel',
-				'wikibase-edit',
-				'wikibase-save',
-				'wikibase-remove',
-			),
-		),
-
-		'jquery.wikibase.toolbarlabel' => $moduleTemplate + array(
-			'scripts' => array(
-				'toolbarlabel.js',
+				'jquery.wikibase.toolbaritem.js',
 			),
 			'styles' => array(
-				'themes/default/toolbarlabel.css',
+				'themes/default/jquery.wikibase.toolbaritem.css',
 			),
 			'dependencies' => array(
-				'jquery.ui.widget',
-				'wikibase.utilities',
+				'jquery.ui.TemplatedWidget',
 			),
 		),
 

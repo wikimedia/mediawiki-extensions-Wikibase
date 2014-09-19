@@ -163,7 +163,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 					'child' => array(
 						'tag' => 'tfoot',
 						'descendant' => array(
-							'class' => 'wikibase-toolbarbutton-disabled'
+							'class' => 'ui-state-disabled'
 						)
 					)
 				)
@@ -307,9 +307,9 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getHtmlForEditSection' )
 			->will( $this->returnCallback( function ( $url, $msg, $tag, $enabled ) {
 				if( $enabled ) {
-					return '<a class="wikibase-toolbarbutton-enabled">Edit link</a>';
+					return '<span><a>Edit link</a></span>';
 				} else {
-					return '<a class="wikibase-toolbarbutton-disabled">Disabled edit link</a>';
+					return '<span class="ui-state-disabled"><a>Disabled edit link</a></span>';
 				}
 			} ) );
 
