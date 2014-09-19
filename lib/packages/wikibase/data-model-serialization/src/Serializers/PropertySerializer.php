@@ -2,16 +2,40 @@
 
 namespace Wikibase\DataModel\Serializers;
 
+use Serializers\Exceptions\SerializationException;
+use Serializers\Exceptions\UnsupportedObjectException;
+use Serializers\Serializer;
+use Serializers\DispatchableSerializer;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Claim\Claims;
 
 /**
  * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class PropertySerializer extends EntitySerializer {
+class PropertySerializer implements DispatchableSerializer {
+
+	/**
+	 * @var FingerprintSerializer
+	 */
+	private $fingerprintSerializer;
+
+	/**
+	 * @var Serializer
+	 */
+	private $claimsSerializer;
+
+	/**
+	 * @param Serializer $claimsSerializer
+	 */
+	public function __construct( FingerprintSerializer $fingerprintSerializer, Serializer $claimsSerializer ) {
+		$this->fingerprintSerializer = $fingerprintSerializer;
+		$this->claimsSerializer = $claimsSerializer;
+	}
 
 	/**
 	 * @see Serializer::isSerializerFor
@@ -24,13 +48,41 @@ class PropertySerializer extends EntitySerializer {
 		return $object instanceof Property;
 	}
 
-	protected function getSpecificSerialization( Entity $entity ) {
-		/**
-		 * @var Property $entity
-		 */
-		return array(
-			'datatype' => $entity->getDataTypeId()
+	/**
+	 * @see Serializer::serialize
+	 *
+	 * @param mixed $object
+	 *
+	 * @return array
+	 * @throws SerializationException
+	 */
+	public function serialize( $object ) {
+		if ( !$this->isSerializerFor( $object ) ) {
+			throw new UnsupportedObjectException(
+				$object,
+				'PropertySerializer can only serialize Property objects.'
+			);
+		}
+
+		return $this->getSerialized( $object );
+	}
+
+	private function getSerialized( Property $entity ) {
+		$serialization = array(
+			'type' => $entity->getType(),
+			'datatype' => $entity->getDataTypeId(),
 		);
+
+		$this->fingerprintSerializer->addBasicsToSerialization( $entity, $serialization );
+		$this->addClaimsToSerialization( $entity, $serialization );
+
+		return $serialization;
+	}
+
+	private function addClaimsToSerialization( Entity $entity, array &$serialization ) {
+		$claims = new Claims( $entity->getClaims() );
+
+		$serialization['claims'] = $this->claimsSerializer->serialize( $claims );
 	}
 
 }
