@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
 
 /**
- * @since 0.1
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon

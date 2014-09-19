@@ -8,7 +8,7 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Entity\Entity;
 
 /**
- * @since 1.2
+ * Package private
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
