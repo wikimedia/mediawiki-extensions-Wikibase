@@ -11,6 +11,7 @@
 * Added `Statement::setClaim`
 * Added `PropertyIdProvider` interface
 * Added `ByPropertyIdGrouper`
+* Added `BestStatementsFinder`
 
 ## Version 1.0 (2014-09-02)
 
