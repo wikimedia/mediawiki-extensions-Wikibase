@@ -17,29 +17,29 @@ use Wikibase\Test\DataModel\Fixtures\EntityOfUnknownType;
  */
 class EntityPatcherTest extends \PHPUnit_Framework_TestCase {
 
-    /**
-     * @dataProvider itemProvider
-     */
-    public function testGivenEmptyDiffItemRemainsUnchanged( Item $item ) {
+	/**
+	 * @dataProvider itemProvider
+	 */
+	public function testGivenEmptyDiffItemRemainsUnchanged( Item $item ) {
 		$patcher = new EntityPatcher();
 
 		$patchedEntity = $item->copy();
 		$patcher->patchEntity( $patchedEntity, new ItemDiff() );
 
-        $this->assertEquals( $item, $patchedEntity );
+		$this->assertEquals( $item, $patchedEntity );
 	}
 
-    public function itemProvider() {
-        $argLists = array();
+	public function itemProvider() {
+		$argLists = array();
 
-        $nonEmptyItem = Item::newEmpty();
-        $nonEmptyItem->setId( 2 );
+		$nonEmptyItem = Item::newEmpty();
+		$nonEmptyItem->setId( 2 );
 
-        $argLists[] = array( Item::newEmpty() );
-        $argLists[] = array( $nonEmptyItem );
+		$argLists[] = array( Item::newEmpty() );
+		$argLists[] = array( $nonEmptyItem );
 
-        return $argLists;
-    }
+		return $argLists;
+	}
 
 	public function testGivenNonSupportedEntity_exceptionIsThrown() {
 		$patcher = new EntityPatcher();
