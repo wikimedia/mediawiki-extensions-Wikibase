@@ -14,11 +14,13 @@ use RequestContext;
 use Site;
 use SiteStore;
 use Skin;
+use StripState;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -275,6 +277,11 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			'hreflang' => 'en',
 		);
 
+		$badgesQ1 = array(
+			'class' => 'badge-Q17 featured',
+			'label' => 'featured',
+		);
+
 		return array(
 			'repo-links' => array(
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
@@ -282,7 +289,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 				array(),
 				array( 'de:Sauerstoff' ),
 				array( $commonsOxygen ),
-				array( 'de' => array( new ItemId( 'Q17' ) ) ),
+				array( 'de' => $badgesQ1 ),
 			),
 
 			'noexternallanglinks=*' => array(
@@ -291,6 +298,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 				array( 'noexternallanglinks' => serialize( array( '*' ) ) ),
 				array(),
 				array( $commonsOxygen ),
+				null,
 			),
 
 			'noexternallanglinks=de' => array(
@@ -299,6 +307,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 				array( 'noexternallanglinks' => serialize( array( 'de' ) ) ),
 				array(),
 				array( $commonsOxygen ),
+				array(),
 			),
 
 			'noexternallanglinks=ja' => array(
@@ -307,23 +316,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 				array( 'noexternallanglinks' => serialize( array( 'ja' ) ) ),
 				array( 'de:Sauerstoff' ),
 				array( $commonsOxygen ),
-				array( 'de' => array( new ItemId( 'Q17' ) ) ),
-			),
-
-			'no-item' => array(
-				Title::makeTitle( NS_MAIN, 'Plutonium' ),
-				null,
-				array(),
-				array(),
-				array(),
-			),
-
-			'ignored-namespace' => array(
-				Title::makeTitle( NS_USER, 'Foo' ),
-				null,
-				array(),
-				array(),
-				null,
+				array( 'de' => $badgesQ1 ),
 			),
 		);
 	}
@@ -334,29 +327,37 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	public function testDoParserAfterParse(
 		Title $title,
 		$expectedItem,
-		array $pagePropsBefore,
-		array $expectedLanguageLinks = null,
-		array $expectedSisterLinks = null,
-		array $expectedBadges = null
+		$pagePropsBefore,
+		$expectedLanguageLinks,
+		$expectedSisterLinks,
+		$expectedBadges
 	) {
 		$parser = $this->newParser( $title, $pagePropsBefore, array() );
 		$handler = $this->newSidebarHookHandlers();
 
 		$handler->doParserAfterParse( $parser );
 
+		$expectedUsage = array(
+			new EntityUsage(
+				new ItemId( $expectedItem ),
+				EntityUsage::SITELINK_USAGE
+			)
+		);
+
 		$parserOutput = $parser->getOutput();
+
 		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
+		$actualUsage = $parserOutput->getExtensionData( 'wikibase-entity-usage' );
+
+		$this->assertEquals( array_values( $expectedUsage ), array_values( $actualUsage ) );
+
 		$actualBadges = $parserOutput->getExtensionData( 'wikibase_badges' );
 
-		if ( $expectedBadges === null ) {
-			$this->assertEmpty( $actualBadges );
-		} else {
-			// $actualBadges contains info arrays, these are checked by LanguageLinkBadgeDisplayTest and LangLinkHandlerTest
-			$this->assertEquals( array_keys( $expectedBadges ) , array_keys( $actualBadges ) );
-		}
+		// $actualBadges contains info arrays, these are checked by LanguageLinkBadgeDisplayTest and LangLinkHandlerTest
+		$this->assertEquals( $expectedBadges , $actualBadges );
 	}
 
 	/**
@@ -364,6 +365,40 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 */
 	public function testOnParserAfterParse_withoutParameters() {
 		$this->assertTrue( SidebarHookHandlers::onParserAfterParse() );
+	}
+
+	public function parserAfterParseProvider_noItem() {
+		return array(
+			'no-item' => array(
+				Title::makeTitle( NS_MAIN, 'Plutonium' ),
+			),
+
+			'ignored-namespace' => array(
+				Title::makeTitle( NS_USER, 'Foo' ),
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider parserAfterParseProvider_noItem
+	 */
+	public function testDoParserAfterParse_noItem( Title $title ) {
+
+		$parser = $this->newParser( $title, array(), array() );
+		$handler = $this->newSidebarHookHandlers();
+
+		$text = '';
+		$stripState = new StripState( 'x' );
+		$handler->doParserAfterParse( $parser, $text, $stripState );
+
+		$parserOutput = $parser->getOutput();
+		$this->assertEquals( null, $parserOutput->getProperty( 'wikibase_item' ) );
+
+		$this->assertEmpty( $parserOutput->getLanguageLinks() );
+		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
+
+		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
 	public function testDoOutputPageParserOutput() {
