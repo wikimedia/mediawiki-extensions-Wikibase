@@ -87,7 +87,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( $enabled ) );
 
-		$repoLinker = $this->getMockBuilder( '\Wikibase\RepoLinker' )
+		$repoLinker = $this->getMockBuilder( '\Wikibase\Client\RepoLinker' )
 			->disableOriginalConstructor()
 			->getMock();
 

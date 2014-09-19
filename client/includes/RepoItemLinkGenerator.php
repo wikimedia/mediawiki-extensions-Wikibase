@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use Title;
+use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**

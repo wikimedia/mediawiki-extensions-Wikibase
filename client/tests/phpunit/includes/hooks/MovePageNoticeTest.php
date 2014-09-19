@@ -5,9 +5,9 @@ namespace Wikibase\Test;
 use Language;
 use Title;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\RepoLinker;
 
 /**
  * @covers Wikibase\Client\MovePageNotice

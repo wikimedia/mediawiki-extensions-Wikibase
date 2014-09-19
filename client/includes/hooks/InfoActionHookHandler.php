@@ -4,11 +4,11 @@ namespace Wikibase\Client\Hooks;
 
 use IContextSource;
 use Title;
+use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
-use Wikibase\RepoLinker;
 
 /**
  * @since 0.5

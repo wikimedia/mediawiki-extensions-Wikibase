@@ -6,6 +6,7 @@ use Language;
 use Linker;
 use Title;
 use User;
+use Wikibase\Client\RepoLinker;
 
 /**
  * Formats a changes line for including changes from the Wikibase repo in
