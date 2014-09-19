@@ -91,6 +91,7 @@ class ClaimsView {
 
 		// TODO: Add link to SpecialPage that allows adding a new claim.
 		$sectionHeading = $this->getHtmlForSectionHeading( $heading );
+		// FIXME: claimgrouplistview should be the topmost claims related template
 		$html = wfTemplate( 'wb-claimlistview', $claimgrouplistviewHtml, '', '' );
 		return $sectionHeading . $html;
 	}
@@ -206,10 +207,12 @@ class ClaimsView {
 			);
 		}
 
-		$toolbarHtml = wfTemplate( 'wikibase-toolbar',
-			'wb-addtoolbar',
-			// TODO: add link to SpecialPage$this->sectionEditLinkGenerator
-			$this->sectionEditLinkGenerator->getHtmlForEditSection( '', array(), wfMessage( 'wikibase-add' ) )
+		$toolbarHtml = wfTemplate( 'wikibase-toolbar-wrapper',
+			$this->sectionEditLinkGenerator->getHtmlForEditSection(
+				'',
+				array(),
+				wfMessage( 'wikibase-add' )
+			)
 		);
 
 		return wfTemplate( 'wb-claimlistview',

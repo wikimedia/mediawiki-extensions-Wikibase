@@ -1,6 +1,4 @@
 /**
- * @since 0.4
- *
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
@@ -16,8 +14,6 @@
 	padding-top: 5px;
 }
 
-.wikibase-toolbar .wikibase-toolbarlabel,
-.wikibase-toolbar .wikibase-toolbarbutton {
+.wikibase-toolbar-container .wikibase-toolbar-item {
 	padding: 0.15em;
 }
-

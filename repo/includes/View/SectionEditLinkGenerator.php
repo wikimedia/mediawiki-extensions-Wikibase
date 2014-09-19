@@ -11,7 +11,7 @@ use SpecialPageFactory;
  * @since 0.5
  * @licence GNU GPL v2+
  *
- * @author Henning Snater
+ * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  * @author Daniel Kinzler
  */
@@ -42,13 +42,11 @@ class SectionEditLinkGenerator {
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
 		$toolbarButton = $this->getToolbarButton( $message->text(), $editUrl );
 
-		$html = wfTemplate( 'wb-editsection',
-			'span',
+		$html = wfTemplate( 'wikibase-toolbar-container',
 			wfTemplate( 'wikibase-toolbar',
 				'',
-				wfTemplate( 'wikibase-toolbareditgroup',
-					'',
-					wfTemplate( 'wikibase-toolbar', '', $toolbarButton )
+				wfTemplate( 'wikibase-toolbar-bracketed',
+					$toolbarButton
 				)
 			)
 		);
@@ -86,14 +84,15 @@ class SectionEditLinkGenerator {
 	 */
 	private function getToolbarButton( $buttonLabel, $editUrl = null ) {
 		if ( $editUrl !== null ) {
-			return wfTemplate(
-				'wikibase-toolbarbutton',
-				$buttonLabel,
-				$editUrl
+			return wfTemplate( 'wikibase-toolbar-button',
+				'',
+				$editUrl,
+				$buttonLabel
 			);
 		} else {
-			return wfTemplate(
-				'wikibase-toolbarbutton-disabled',
+			return wfTemplate( 'wikibase-toolbar-button',
+				'ui-state-disabled',
+				'#',
 				$buttonLabel
 			);
 		}
