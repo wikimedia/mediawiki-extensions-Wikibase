@@ -34,6 +34,24 @@
       "revId": "c7d436626c75782467f7248cc6097e9d64edacf0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_9728c733",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-19T18:04:16Z",
+      "side": 1,
+      "message": "Are you talking about the cohesion of the method? I\u0027m talking about the cohesion of the class.",
+      "parentUuid": "ee62ffec_7db2dfe5",
+      "revId": "c7d436626c75782467f7248cc6097e9d64edacf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
