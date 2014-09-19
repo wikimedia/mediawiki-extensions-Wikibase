@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_dca8a476",
+        "filename": "lib/resources/wikibase.store/store.ApiEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-19T16:14:26Z",
+      "side": 1,
+      "message": "Please document function.",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_3cb100dd",
+        "filename": "lib/resources/wikibase.store/store.ApiEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-19T16:14:26Z",
+      "side": 1,
+      "message": "I guess no one will notice the error then. Btw, would be nice, if wb.RepoApi would return proper wb.RepoApiError objects that could be evaluated/propagated.",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_bcbcd0b2",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-19T16:14:26Z",
+      "side": 1,
+      "message": "Please document parameters. \"f\" is not very meaningful - maybe \"func\" at least?",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_1ccd1c63",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-19T16:14:26Z",
+      "side": 1,
+      "message": "What is the return value of / behaviour on \"reject\"?",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_9c16acab",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2014-09-19T16:14:26Z",
+      "side": 1,
+      "message": "Function name says it, but please document the parameter and return value.",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
