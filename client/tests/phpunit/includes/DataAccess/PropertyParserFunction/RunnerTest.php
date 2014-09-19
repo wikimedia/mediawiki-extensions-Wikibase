@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
 use Language;
 use Parser;
+use ParserOptions;
 use Title;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\ItemId;
@@ -83,9 +84,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getParser() {
 		$parserConfig = array( 'class' => 'Parser' );
+		$title = Title::newFromText( 'Cat' );
+		$popt = new ParserOptions();
 
 		$parser = new Parser( $parserConfig );
-		$parser->setTitle( Title::newFromText( 'Cat' ) );
+		$parser->startExternalParse( $title, $popt, Parser::OT_HTML );
 
 		return $parser;
 	}
