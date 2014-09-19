@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\DataModel\Test;
+namespace Wikibase\Test;
 
-use Wikibase\DataModel\BestStatementsFinder;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Statement\BestStatementsFinder;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\BestStatementsFinder
+ * @covers Wikibase\DataModel\Statement\BestStatementsFinder
  *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >

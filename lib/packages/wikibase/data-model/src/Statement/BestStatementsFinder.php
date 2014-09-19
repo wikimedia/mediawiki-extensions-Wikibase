@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase\DataModel;
+namespace Wikibase\DataModel\Statement;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Traversable;
+use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
