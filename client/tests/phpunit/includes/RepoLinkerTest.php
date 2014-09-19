@@ -2,13 +2,13 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\RepoLinker;
 
 /**
- * @covers Wikibase\RepoLinker
+ * @covers Wikibase\Client\RepoLinker
  *
  * @group WikibaseClient
  * @group RepoLinkerTest

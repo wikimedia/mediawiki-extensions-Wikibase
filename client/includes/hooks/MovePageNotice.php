@@ -6,7 +6,6 @@ use Html;
 use Title;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\RepoLinker;
 
 /**
  * Adds a notice about the Wikibase Item belonging to the current page

@@ -46,7 +46,6 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
-use Wikibase\RepoLinker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
@@ -141,7 +140,7 @@ final class WikibaseClient {
 	 * @since 0.4
 	 *
 	 * @param SettingsArray $settings
-	 * @param Language      $contentLanguage
+	 * @param Language $contentLanguage
 	 * @param SiteStore $siteStore
 	 */
 	public function __construct(
@@ -236,7 +235,7 @@ final class WikibaseClient {
 	 *
 	 * @return SnakFormatter
 	 */
-	public function newSnakFormatter( $format = SnakFormatter::FORMAT_PLAIN, FormatterOptions $options )  {
+	public function newSnakFormatter( $format = SnakFormatter::FORMAT_PLAIN, FormatterOptions $options ) {
 		return $this->getSnakFormatterFactory()->getSnakFormatter( $format, $options );
 	}
 
@@ -404,8 +403,8 @@ final class WikibaseClient {
 
 			if ( !in_array( $localId, $this->site->getLocalIds() ) ) {
 				wfDebugLog( __CLASS__, __FUNCTION__
-						. ": The configured local id $localId does not match any local ID of site $globalId: "
-						. var_export( $this->site->getLocalIds(), true ) );
+					. ": The configured local id $localId does not match any local ID of site $globalId: "
+					. var_export( $this->site->getLocalIds(), true ) );
 			}
 		}
 
@@ -445,6 +444,7 @@ final class WikibaseClient {
 
 			if ( !$site ) {
 				wfWarn( 'Cannot find site ' . $siteId . ' in sites table' );
+
 				return true;
 			}
 
@@ -497,6 +497,7 @@ final class WikibaseClient {
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+
 		return $factory;
 	}
 
@@ -524,6 +525,7 @@ final class WikibaseClient {
 		);
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+
 		return $factory;
 	}
 
