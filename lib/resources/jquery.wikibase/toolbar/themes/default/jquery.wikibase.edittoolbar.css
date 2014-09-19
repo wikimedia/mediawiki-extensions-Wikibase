@@ -1,9 +1,7 @@
 /**
- * @since 0.4
- *
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-.wikibase-toolbarlabel-disabled {
-	color: grey;
+.wikibase-edittoolbar-container > .wikibase-toolbar {
+	padding-left: 0;
 }
