@@ -30,7 +30,7 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 		$html = $generator->getHtmlForEditSection( $pageName, array(), $msg, $enabled );
 		$matcher = array(
 			'tag' => 'span',
-			'class' => 'wb-editsection'
+			'class' => 'wikibase-toolbar'
 		);
 
 		$this->assertTag( $matcher, $html, "$action action" );
@@ -106,8 +106,8 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 			'attributes' => array( 'href' => 'regexp:+\bSpecial:SetLabel\b+' )
 		), $html );
 		$this->assertTag( array(
-			'tag' => 'a',
-			'attributes' => array( 'class' => 'wikibase-toolbarbutton-disabled' )
+			'tag' => 'span',
+			'attributes' => array( 'class' => 'ui-state-disabled' )
 		), $html );
 	}
 

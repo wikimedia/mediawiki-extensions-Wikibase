@@ -71,19 +71,9 @@
 	float: none;
 }
 
-/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
-.wikibase-sitelinklistview .wb-editsection {
-	width: 18em;
+.wikibase-sitelinklistview .wikibase-toolbar-container {
 	float: right;
-	position: static; /* clear absolute positioning */
-}
-
-.wikibase-sitelinklistview .wb-editsection > .wikibase-toolbar {
-	width: 18em; /* additionally assign width to toolbar to enforce width in JS version */
-}
-
-.wikibase-sitelinklistview .wb-editsection .wikibase-toolbar .wikibase-toolbar {
-	margin-left: 0; /* do not apply margin to nested toolbar groups */
+	position: static;
 }
 
 .wikibase-sitelinklistview tfoot td.wikibase-sitelinklistview-placeholder {
