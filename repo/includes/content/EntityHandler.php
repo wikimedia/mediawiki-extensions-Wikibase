@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Content;
 
 use Content;
 use ContentHandler;
@@ -19,17 +19,20 @@ use Title;
 use User;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EntityContent;
+use Wikibase\EntityPerPage;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\NamespaceUtils;
+use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;
 
 /**
  * Base handler class for Wikibase\DataModel\Entity\Entity content classes.
- *
- * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler

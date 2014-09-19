@@ -1,12 +1,17 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Content;
 
 use DataUpdate;
 use Title;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityContent;
+use Wikibase\EntityPerPage;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkCache;
+use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
 use Wikibase\Validators\EntityValidator;
 use Wikibase\Validators\ValidatorErrorLocalizer;

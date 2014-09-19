@@ -25,7 +25,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
-use Wikibase\ItemHandler;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -51,9 +50,10 @@ use Wikibase\Lib\WikibaseDataTypeBuilders;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\ParserOutputJsConfigBuilder;
-use Wikibase\PropertyHandler;
 use Wikibase\ReferencedEntitiesFinder;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Content\ItemHandler;
+use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Notifications\ChangeNotifier;
@@ -495,6 +495,7 @@ class WikibaseRepo {
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory( $builders->getSnakFormatterBuildersForFormats() );
+
 		return $factory;
 	}
 
@@ -519,6 +520,7 @@ class WikibaseRepo {
 		$builders = $this->getValueFormatterBuilders();
 
 		$factory = new OutputFormatValueFormatterFactory( $builders->getValueFormatterBuildersForFormats() );
+
 		return $factory;
 	}
 
@@ -712,7 +714,8 @@ class WikibaseRepo {
 	private function getChangeTransmitter() {
 		if ( $this->settings->getSetting( 'useChangesTable' ) ) {
 			return new DatabaseChangeTransmitter();
-		} else {
+		}
+		else {
 			return new DummyChangeTransmitter();
 		}
 	}
@@ -904,7 +907,10 @@ class WikibaseRepo {
 				$entitySerializerClass );
 		}
 
-		return array( 'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer', 'isBlobUsingLegacyFormat' );
+		return array(
+			'Wikibase\Lib\Serializers\LegacyInternalEntitySerializer',
+			'isBlobUsingLegacyFormat'
+		);
 	}
 
 	/**
@@ -918,4 +924,5 @@ class WikibaseRepo {
 			$this->getEntityFactory()
 		);
 	}
+
 }

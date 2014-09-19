@@ -7,6 +7,7 @@ use ContentHandler;
 use LogEventsList;
 use SpecialPage;
 use ViewAction;
+use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 

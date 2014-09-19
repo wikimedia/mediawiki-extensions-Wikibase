@@ -9,12 +9,12 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
-use Wikibase\ItemHandler;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\ItemHandler
+ * @covers Wikibase\Repo\Content\ItemHandler
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -41,7 +41,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 	 * @return string
 	 */
 	public function getClassName() {
-		return '\Wikibase\ItemHandler';
+		return '\Wikibase\Repo\Content\ItemHandler';
 	}
 
 	/**

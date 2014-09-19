@@ -11,15 +11,15 @@ use Title;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
-use Wikibase\EntityHandler;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Serializers\LegacyInternalEntitySerializer;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\EntityHandler
+ * @covers Wikibase\Repo\Content\EntityHandler
  *
  * @group Wikibase
  * @group WikibaseEntity

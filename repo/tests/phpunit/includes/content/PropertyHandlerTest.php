@@ -6,14 +6,12 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\PropertyContent;
-use Wikibase\PropertyHandler;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\PropertyHandler
+ * @covers Wikibase\Repo\Content\PropertyHandler
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -39,7 +37,7 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	 * @return string
 	 */
 	public function getClassName() {
-		return '\Wikibase\PropertyHandler';
+		return '\Wikibase\Repo\Content\PropertyHandler';
 	}
 
 	/**

@@ -162,13 +162,13 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 	public function testNewItemHandler() {
 		$repo = $this->getDefaultInstance();
 		$handler = $repo->newItemHandler();
-		$this->assertInstanceOf( 'Wikibase\EntityHandler', $handler );
+		$this->assertInstanceOf( 'Wikibase\Repo\Content\EntityHandler', $handler );
 	}
 
 	public function testNewPropertyHandler() {
 		$repo = $this->getDefaultInstance();
 		$handler = $repo->newPropertyHandler();
-		$this->assertInstanceOf( 'Wikibase\EntityHandler', $handler );
+		$this->assertInstanceOf( 'Wikibase\Repo\Content\EntityHandler', $handler );
 	}
 
 	public function testNewItemHandler_noTransform() {
