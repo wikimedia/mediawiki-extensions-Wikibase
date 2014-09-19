@@ -121,7 +121,12 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->page = $request->getVal( 'page' );
 
-		$this->badges = $request->getArray( 'badges', array() );
+		$this->badges = array();
+		foreach ( $this->badgeItems as $badgeId => $value ) {
+			if ( $request->getVal( 'badge-' . $badgeId ) ) {
+				$this->badges[] = $badgeId;
+			}
+		}
 	}
 
 	/**
@@ -240,22 +245,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			. Html::element(
 				'label',
 				array(
-					'for' => 'wb-setsitelink-badges',
 					'class' => 'wb-label'
 				),
 				$this->msg( 'wikibase-setsitelink-badges' )->text()
 			)
-			. Html::openElement(
-				'select',
-				array(
-					'name' => 'badges[]',
-					'class' => 'wb-input',
-					'id' => 'wb-setsitelink-badges',
-					'multiple' => true
-				)
-			)
-			. $this->getBadgesOptionsHtml()
-			. Html::closeElement( 'select' );
+			. $this->getHtmlForBadges();
 		}
 
 		$site = $this->siteStore->getSite( $this->site );
@@ -311,23 +305,36 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	/**
-	 * Returns the HTML containing an option tag for each badge.
+	 * Returns the HTML containing a checkbox for each badge.
 	 *
 	 * @return string
 	 */
-	private function getBadgesOptionsHtml() {
+	private function getHtmlForBadges() {
 		$options = '';
 
 		foreach ( $this->badgeItems as $badgeId => $value ) {
-			$attrs = array( 'value' => $badgeId );
-			if ( in_array( $badgeId, $this->badges ) ) {
-				$attrs['selected'] = true;
-			}
+			$name = 'badge-' . $badgeId;
+			$title = $this->getTitleForBadge( new ItemId( $badgeId ) );
 
-			$options .= Html::element(
-				'option',
-				$attrs,
-				$this->getTitleForBadge( new ItemId( $badgeId ) )
+			$options .= Html::rawElement(
+				'div',
+				array(
+					'class' => 'wb-label'
+				),
+				Html::check(
+					$name,
+					in_array( $badgeId, $this->badges ),
+					array(
+						'id' => $name
+					)
+				)
+				. Html::element(
+					'label',
+					array(
+						'for' => $name
+					),
+					$title
+				)
 			);
 		}
 
