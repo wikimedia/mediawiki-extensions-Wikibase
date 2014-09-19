@@ -9,8 +9,8 @@ use RecentChange;
 use RequestContext;
 use User;
 use Wikibase\ChangeLineFormatter;
+use Wikibase\Client\RepoLinker;
 use Wikibase\ExternalChangeFactory;
-use Wikibase\RepoLinker;
 
 /**
  * @covers Wikibase\ChangeLineFormatter
