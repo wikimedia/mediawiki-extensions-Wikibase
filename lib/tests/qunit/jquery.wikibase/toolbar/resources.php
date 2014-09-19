@@ -17,9 +17,27 @@ return call_user_func( function() {
 
 	$resources = array(
 
+		'jquery.wikibase.addtoolbar.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.addtoolbar.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.addtoolbar',
+			),
+		),
+
+		'jquery.wikibase.edittoolbar.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.edittoolbar.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.edittoolbar',
+			),
+		),
+
 		'jquery.wikibase.movetoolbar.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'movetoolbar.tests.js',
+				'jquery.wikibase.movetoolbar.tests.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.movetoolbar',
@@ -27,54 +45,40 @@ return call_user_func( function() {
 			),
 		),
 
+		'jquery.wikibase.removetoolbar.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.wikibase.removetoolbar.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.removetoolbar',
+			),
+		),
+
 		'jquery.wikibase.toolbar.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'toolbar.tests.js',
+				'jquery.wikibase.toolbar.tests.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbar',
 				'jquery.wikibase.toolbarbutton',
-				'jquery.wikibase.toolbarlabel',
-				'wikibase.utilities',
-			),
-		),
-
-		'jquery.wikibase.toolbarbase.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'toolbarbase.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.toolbarbase',
 			),
 		),
 
 		'jquery.wikibase.toolbarbutton.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'toolbarbutton.tests.js',
+				'jquery.wikibase.toolbarbutton.tests.js',
 			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbarbutton',
-				'wikibase.templates',
 			),
 		),
 
-		'jquery.wikibase.toolbareditgroup.tests' => $moduleTemplate + array(
+		'jquery.wikibase.toolbaritem.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'toolbareditgroup.tests.js',
+				'jquery.wikibase.toolbaritem.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbarbutton',
-				'jquery.wikibase.toolbareditgroup',
-			),
-		),
-
-		'jquery.wikibase.toolbarlabel.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'toolbarlabel.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.toolbarlabel',
+				'jquery.wikibase.toolbaritem',
 			),
 		),
 
