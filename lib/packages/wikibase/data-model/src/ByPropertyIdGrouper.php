@@ -51,6 +51,7 @@ class ByPropertyIdGrouper {
 
 	private function addPropertyIdProvider( PropertyIdProvider $propertyIdProvider ) {
 		$idSerialization = $propertyIdProvider->getPropertyId()->getSerialization();
+
 		if ( isset( $this->byPropertyId[$idSerialization] ) ) {
 			$this->byPropertyId[$idSerialization][] = $propertyIdProvider;
 		} else {
@@ -67,9 +68,11 @@ class ByPropertyIdGrouper {
 	 */
 	public function getPropertyIds() {
 		$propertyIds = array_keys( $this->byPropertyId );
+
 		array_walk( $propertyIds, function( &$propertyId ) {
 			$propertyId = new PropertyId( $propertyId );
 		} );
+
 		return $propertyIds;
 	}
 
@@ -84,6 +87,7 @@ class ByPropertyIdGrouper {
 	 */
 	public function getByPropertyId( PropertyId $propertyId ) {
 		$idSerialization = $propertyId->getSerialization();
+
 		if ( !isset( $this->byPropertyId[$idSerialization] ) ) {
 			throw new OutOfBoundsException( 'Property id does not exist.' );
 		}
