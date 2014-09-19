@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * @todo split this up and find a better home for stuff that adds
@@ -480,6 +481,9 @@ class LangLinkHandler {
 
 		if ( $itemId ) {
 			$out->setProperty( 'wikibase_item', $itemId->getSerialization() );
+
+			$usageAccumulator = new ParserOutputUsageAccumulator( $out );
+			$usageAccumulator->addSitelinksUsage( $itemId );
 		} else {
 			$out->unsetProperty( 'wikibase_item' );
 		}
