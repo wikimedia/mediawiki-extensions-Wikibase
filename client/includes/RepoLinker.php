@@ -23,12 +23,10 @@ class RepoLinker {
 	private $namespaces;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param string $baseUrl
 	 * @param string $articlePath
 	 * @param string $scriptPath
-	 * @param array $namespaces // repoNamespaces setting
+	 * @param string[] $namespaces // repoNamespaces setting
 	 */
 	public function __construct( $baseUrl, $articlePath, $scriptPath, array $namespaces ) {
 		$this->baseUrl = $baseUrl;
@@ -86,8 +84,6 @@ class RepoLinker {
 	}
 
 	/**
-	 * Encode a page title
-	 *
 	 * @param string $page
 	 *
 	 * @return string
@@ -146,7 +142,7 @@ class RepoLinker {
 	 * @todo: use a more robust mechanism for building entity titles
 	 *   if efficient enough, maybe EntityTitleLookup.
 	 *
-	 * @param EntityId
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
@@ -164,7 +160,7 @@ class RepoLinker {
 	/**
 	 * Constructs a link to an entity
 	 *
-	 * @param EntityId
+	 * @param EntityId $entityId
 	 *
 	 * @return string
 	 */
