@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Usage\UsageAccumulator;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -29,12 +30,19 @@ class VariantsAwareRenderer implements Renderer {
 	private $variants;
 
 	/**
+	 * @var \Wikibase\Usage\UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @param RendererFactory $rendererFactory
 	 * @param string[] $variants
+	 * @param UsageAccumulator|null $usageAccumulator
 	 */
-	public function __construct( RendererFactory $rendererFactory, array $variants ) {
+	public function __construct( RendererFactory $rendererFactory, array $variants, UsageAccumulator $usageAccumulator = null ) {
 		$this->rendererFactory = $rendererFactory;
 		$this->variants = $variants;
+		$this->usageAccumulator = $usageAccumulator;
 	}
 
 	/**
@@ -101,7 +109,7 @@ class VariantsAwareRenderer implements Renderer {
 	 */
 	private function getVariantText( $variantCode, EntityId $entityId, $propertyLabel ) {
 		$variantLanguage = Language::factory( $variantCode );
-		$renderer = $this->rendererFactory->newLanguageAwareRenderer( $variantLanguage );
+		$renderer = $this->rendererFactory->newLanguageAwareRenderer( $variantLanguage, $this->usageAccumulator );
 
 		return $renderer->render( $entityId, $propertyLabel );
 	}
