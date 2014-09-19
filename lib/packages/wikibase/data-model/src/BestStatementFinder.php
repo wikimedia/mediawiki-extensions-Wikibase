@@ -18,25 +18,20 @@ use Wikibase\DataModel\Statement\StatementList;
 class BestStatementFinder {
 
 	/**
-	 * @var ByPropertyIdArray
+	 * @var ByPropertyIdGrouper
 	 */
-	private $byPropertyIdArray;
+	private $byPropertyIdGrouper;
 
 	/**
-	 * @param ByPropertyIdArray $byPropertyIdArray
+	 * @param Statement[]|Traversable $statements
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( ByPropertyIdArray $byPropertyIdArray ) {
-		$this->assertAreStatements( $byPropertyIdArray );
-		$this->byPropertyIdArray = $byPropertyIdArray;
-	}
-
-	private function assertAreStatements( ByPropertyIdArray $byPropertyIdArray ) {
-		foreach ( $byPropertyIdArray as $statements ) {
-			if ( !( $statements instanceof StatementList ) ) {
-				throw new InvalidArgumentException( 'All elements need to be of type Statement' );
-			}
+	public function __construct( $statements ) {
+		if ( !( $statements instanceof StatementList ) ) {
+			$statements = new StatementList( $statements );
 		}
+
+		$this->byPropertyIdGrouper = new ByPropertyIdGrouper( $statements );
 	}
 
 	/**
@@ -44,15 +39,17 @@ class BestStatementFinder {
 	 *
 	 * @since 1.1
 	 *
-	 * @return ByPropertyIdArray
+	 * @return Statement[]
 	 */
 	public function getBestStatementsPerProperty() {
-		$bestStatementsPerProperty = new ByPropertyIdArray();
-		foreach ( $this->byPropertyIdArray->getPropertyIds() as $propertyId ) {
+		$statements = array();
+
+		foreach ( $this->byPropertyIdGrouper->getPropertyIds() as $propertyId ) {
 			$bestStatements = $this->getBestStatementsForProperty( $propertyId );
-			$bestStatementsPerProperty = array_merge( $bestStatementsPerProperty, $bestStatements );
+			$statements = array_merge( $statements, $bestStatements );
 		}
-		return $bestStatementsPerProperty;
+
+		return $statements;
 	}
 
 	/**
@@ -61,24 +58,26 @@ class BestStatementFinder {
 	 * @since 1.1
 	 *
 	 * @param PropertyId $propertyId
-	 *
-	 * @return StatementList
+	 * @return Statement[]
+	 * @throws OutOfBoundsException
 	 */
 	public function getBestStatementsForProperty( PropertyId $propertyId ) {
 		$bestRank = Statement::RANK_NORMAL;
-		$statements = new StatementList();
+		$statements = array();
+
 		/** @var Statement $statement */
-		foreach ( $this->byPropertyIdArray->getByPropertyId( $propertyId ) as $statement ) {
+		foreach ( $this->byPropertyIdGrouper->getByPropertyId( $propertyId ) as $statement ) {
 			$rank = $statement->getRank();
 			if ( $rank > $bestRank ) {
 				// clear statements if we found a better one
-				$statements = new StatementList();
+				$statements = array();
 				$bestRank = $rank;
 			}
 			if ( $rank === $bestRank ) {
-				$statements->addStatement( $statement );
+				$statements[] = $statement;
 			}
 		}
+
 		return $statements;
 	}
 
