@@ -9,9 +9,6 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * @covers Wikibase\DataModel\BestStatementFinder
  *
- * @group Wikibase
- * @group WikibaseDataModel
- *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
