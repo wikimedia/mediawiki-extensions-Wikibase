@@ -107,6 +107,10 @@ and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as [
 
 ## Release notes
 
+### 1.3.0 (dev)
+
+* Added `newTypedSnakSerializer` to `SerializerFactory`
+
 ### 1.2.0 (2014-10-15)
 
 * Compatibility with DataModel 2.x added
