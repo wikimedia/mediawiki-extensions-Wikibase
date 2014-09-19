@@ -3,6 +3,8 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 /* TODO: Re-evaluate all styles and clean-up */
+/* TODO: Move firstHeading specific styles out of here */
+
 .wikibase-labelview {
 	float: left;
 	position: relative;
@@ -59,42 +61,36 @@
 	unicode-bidi: isolate;
 }
 
-.wb-firstHeading .wb-editsection {
-	/* this nodes font size will affect the toolbar padding which is specified in em; therefore, the
-	font size should be the same as on every other toolbar container node */
-	font-size: 100%;
+.wikibase-labelview input {
+	width: 100%;
+	font-family: inherit;
+	font-size: inherit;
+	height: 1.2em;
 }
 
-/* vertical positioning */
-/* the following lines are used to vertically position the toolbar on the baseline of the heading
-(label) which has a bigger font size */
-.wb-firstHeading .wb-editsection {
-	/* FIXME: Should use the LESS variable @content-font-family */
-	font-family: sans-serif;
-	line-height: 188%;
-	top: .3em; /* even out margin of label container in view mode */
-}
 .wb-firstHeading .wikibase-toolbar {
 	font-size: 100%;
 	line-height: 1.2; /* adjust to height of value */
 	padding-top: 1px; /* even out border of input box */
 }
 
-.wb-firstHeading .wikibase-toolbar .wikibase-toolbareditgroup {
-	font-size: 53%;
-	margin-bottom: 2px;
-}
-.wb-firstHeading .wikibase-toolbar .wikibase-toolbar, /* inner group (buttons) */
-.wb-firstHeading .wikibase-toolbar .wikibase-toolbarlabel /* tooltip */ {
-	font-size: 100%;
-	margin-bottom: 0; /* even out border of label container in view mode */
+.wb-firstHeading .wikibase-labelview .wikibase-toolbar-wrapper {
+	position: absolute;
+	margin-top: .3em; /* see .wikibase-labelview-container */
+	right: 0;
+	top: 0;
+	width: 18em;
 }
 
-.wikibase-labelview input {
-	width: 100%;
-	font-family: inherit;
-	font-size: inherit;
-	height: 1.2em;
+.wb-firstHeading .wikibase-labelview .wikibase-toolbar-wrapper > .wikibase-toolbar-container {
+	font-size: 188%;
+	position: static;
+	width: auto;
+}
+
+.wb-firstHeading .wikibase-labelview .wikibase-toolbar-wrapper > .wikibase-toolbar-container > * {
+	font-family: sans-serif;
+	font-size: 53%;
 }
 
 /* The wait message displayed when saving the label has to be customized due to diverging font
@@ -108,8 +104,4 @@ sizes and line heights within the heading */
 }
 .wikibase-labelview .wb-actionmsg span {
 	font-size: 53%;
-}
-
-.wb-firstHeading .wb-editsection > .wikibase-toolbar {
-	font-size: 188%;
 }

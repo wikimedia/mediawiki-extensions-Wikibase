@@ -149,7 +149,7 @@ class SiteLinksView {
 				$tfoot
 			),
 			htmlspecialchars( $group ),
-			'<div>' . $this->getHtmlForEditSection( $itemId, '', 'edit', $editable ) . '</div>'
+			$this->getHtmlForEditSection( $itemId, '', 'edit', $editable )
 		);
 	}
 
