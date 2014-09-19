@@ -15,7 +15,10 @@
 	position: relative;
 }
 
-.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container .wb-editsection {
-	float: right;
+.wikibase-sitelinkgroupview .wikibase-toolbar-container .wikibase-toolbar-container {
+	position: static;
+}
+
+.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-container > .wikibase-toolbar-container {
 	margin-top: 1.9em;
 }

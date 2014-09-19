@@ -11,11 +11,12 @@
 	width: auto;
 }
 
-.wikibase-fingerprintgroupview .wikibase-fingerprintgroupview-heading-container {
+.wikibase-fingerprintgroupview .wikibase-toolbar-container .wikibase-toolbar-container  {
 	position: relative;
 }
 
-.wikibase-fingerprintgroupview .wikibase-fingerprintgroupview-heading-container .wb-editsection {
+.wikibase-fingerprintgroupview .wikibase-fingerprintgroupview-heading-container > .wikibase-toolbar-container {
 	float: right;
 	margin-top: 1.9em;
+	position: static;
 }

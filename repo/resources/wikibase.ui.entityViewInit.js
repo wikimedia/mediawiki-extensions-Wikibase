@@ -9,7 +9,7 @@
 
 	mw.hook( 'wikipage.content' ).add( function() {
 		// Edit sections are re-generated with JS functionality further below:
-		$( '.wb-editsection' ).remove();
+		$( '.wikibase-toolbar-container' ).add( '.wikibase-labelview-toolbar-container' ).remove();
 
 		var $entityview = $( '.wikibase-entityview' );
 
@@ -259,12 +259,12 @@
 		// The 'save' button can still have its own tooltip though.
 		var $messageAnchor = $( '<span/>' )
 			.appendTo( 'body' )
-			.toolbarlabel()
+			.toolbaritem()
 			.wbtooltip( {
 				content: $message,
 				permanent: true,
 				gravity: gravity,
-				$anchor: edittoolbar.toolbar.editGroup.getButton( 'save' )
+				$anchor: edittoolbar.getButton( 'save' ).element
 			} );
 
 		$hideMessage.on( 'click', function( event ) {
