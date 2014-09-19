@@ -56,7 +56,6 @@ are also triggered down the document */
 h2.wb-section-heading {
 	position: relative;
 	float: left;
-	width: 100%;
 	margin-bottom: 0.2em;
 	margin-top: 1em;
 	padding-left: 10px;
@@ -113,12 +112,16 @@ h2.wb-section-heading {
 	width: 100%;
 }
 
-/* toolbar container */
-.wb-entitypage .wb-editsection {
+.wikibase-entityview .wikibase-toolbar-container {
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 18em; /* has to be as wide as its content */
+	width: 18em;
+}
+
+.wikibase-entityview .wikibase-toolbar-container > .wikibase-toolbar-container {
+	position: static;
+	width: auto;
 }
 
 .wb-value-container {
@@ -150,18 +153,8 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 	font-style: italic;
 }
 
-.wb-editsection > .wikibase-toolbar {
-	/* Needed to position label toolbar vertically. Applying to other toolbars for consistency. */
-	display: inline-block;
-}
-
-.wb-movetoolbar {
-	position: absolute;
-	top: 5px;
+.wikibase-entityview .wikibase-movetoolbar-container {
 	right: 10px;
-}
-
-.wb-movetoolbar > .wb-editsection {
 	width: auto;
 }
 
@@ -293,26 +286,16 @@ div .wb-snak-value span.error.wb-format-error {
 	font-style: italic;
 }
 
-/* Link to add claim to section */
-.wb-claimlistview > .wb-addtoolbar {
-	min-height: 3em;
+.wb-claimlistview > .wikibase-toolbar-wrapper {
 	background-color: #F8F8F8;
-	width: 100%;
-	position: relative;
 	display: block;
 	float: left;
+	position: relative;
+	width: 100%;
 }
-.wb-claimlistview > .wb-addtoolbar .wb-editsection {
-	position: absolute;
-	top: 10px;
-}
-
-/* General add new claim link */
-div.wb-claimlistview > .wb-addtoolbar {
-	display: block;
-}
-div.wb-claimlistview div.wb-editsection {
+.wb-claimlistview > .wikibase-toolbar-wrapper .wikibase-toolbar-container {
 	position: static;
+	line-height: 3em;
 	float: right;
 }
 
@@ -497,20 +480,23 @@ div.wb-claimlistview div.wb-editsection {
 }
 
 /* "remove" link at each reference's snak */
-.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snakview > .wb-removetoolbar {
-	position: absolute;
+.wb-claim-qualifiers .wb-snaklistview .wb-snaklistview-listview .wb-snakview > .wikibase-toolbar-container {
 	top: 5px;
-	right: 0;
 }
 
 /* "add" link in one reference's snak list */
-.wb-claim-qualifiers .wb-snaklistview > .wb-addtoolbar {
+.wb-claim-qualifiers > .wikibase-toolbar-container {
 	float: right;
-	clear: both;
 	margin-bottom: 1em;
+	position: static;
 }
 
 /***** /QUALIFIERS *****/
+
+.wb-claimgrouplistview > .wikibase-toolbar-container {
+	float: right;
+	position: static;
+}
 
 /********** /CLAIMS **********/
 
@@ -537,7 +523,7 @@ div.wb-claimlistview div.wb-editsection {
 	display: block;
 }
 
-.wb-claimview .wb-editsection {
+.wb-claimview .wikibase-toolbar-container {
 	top: 10px; /* even out padding */
 }
 
@@ -566,7 +552,7 @@ div.wb-claimlistview div.wb-editsection {
 	background-color: #F0F0F0;
 }
 
-.wb-referenceview .wb-referenceview-heading .wb-snaklistview-toolbar .wb-editsection {
+.wb-referenceview .wb-referenceview-heading .wikibase-toolbar-container {
 	top: 5px;
 }
 
@@ -647,7 +633,7 @@ div.wb-claimlistview div.wb-editsection {
 	right: 0;
 	top: 0;
 }
-.wb-referenceview span.wb-editsection {
+.wb-referenceview .wikibase-toolbar-container {
 	top: 5px;
 }
 
@@ -659,14 +645,16 @@ div.wb-claimlistview div.wb-editsection {
 }
 
 /* "add" link in one reference's snak list */
-.wb-referenceview > .wb-addtoolbar {
+.wb-referenceview > .wikibase-addtoolbar-container {
 	float: right;
 	margin-bottom: 1em;
+	position: static;
 }
 
 /* "add reference" link */
-.wb-statement-references > .wikibase-toolbar {
+.wb-statement-references > .wikibase-toolbar-container {
 	float: right;
+	position: static;
 }
 
 /***** /REFERENCES *****/

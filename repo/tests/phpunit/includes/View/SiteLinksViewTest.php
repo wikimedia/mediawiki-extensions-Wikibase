@@ -305,7 +305,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 
 		$sectionEditLinkGenerator->expects( $this->any() )
 			->method( 'getHtmlForEditSection' )
-			->will( $this->returnCallback( function ( $url, $msg, $tag, $enabled ) {
+			->will( $this->returnCallback( function ( $url, $cssClassSuffix, $msg, $tag, $enabled ) {
 				if( $enabled ) {
 					return '<a class="wikibase-toolbarbutton-enabled">Edit link</a>';
 				} else {

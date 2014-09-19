@@ -149,7 +149,7 @@ class SiteLinksView {
 				$tfoot
 			),
 			htmlspecialchars( $group ),
-			'<div>' . $this->getHtmlForEditSection( $itemId, '', 'edit', $editable ) . '</div>'
+			$this->getHtmlForEditSection( $itemId, '', 'edit', $editable )
 		);
 	}
 
@@ -383,6 +383,7 @@ class SiteLinksView {
 		return $this->sectionEditLinkGenerator->getHtmlForEditSection(
 			'SetSiteLink',
 			$specialPageUrlParams,
+			$action,
 			new Message( 'wikibase-' . $action ),
 			$enabled
 		);

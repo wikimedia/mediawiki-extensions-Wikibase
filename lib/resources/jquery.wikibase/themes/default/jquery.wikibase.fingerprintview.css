@@ -39,6 +39,10 @@
 	width: 100%;
 }
 
+.wikibase-fingerprintview .wikibase-descriptionview .wikibase-descriptionview-container {
+	padding-left: 0;
+}
+
 .wikibase-fingerprintview .wikibase-descriptionview .wikibase-descriptionview-text {
 	line-height: 1.4;
 	padding-right: 0;

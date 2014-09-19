@@ -11,7 +11,7 @@ use SpecialPageFactory;
  * @since 0.5
  * @licence GNU GPL v2+
  *
- * @author Henning Snater
+ * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  * @author Daniel Kinzler
  */
@@ -26,6 +26,7 @@ class SectionEditLinkGenerator {
 	 *
 	 * @param string|null $specialPageName the special page for the button
 	 * @param string[] $specialPageUrlParams Additional URL params for the special page
+	 * @param string $cssClassSuffix Suffix of the css class applied to the toolbar button node
 	 * @param Message $message the message to show on the link
 	 * @param bool $enabled can be set to false to display the button disabled
 	 *
@@ -34,21 +35,20 @@ class SectionEditLinkGenerator {
 	public function getHtmlForEditSection(
 		$specialPageName,
 		array $specialPageUrlParams,
+		$cssClassSuffix,
 		Message $message,
 		$enabled = true
 	) {
 		wfProfileIn( __METHOD__ );
 
 		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
-		$toolbarButton = $this->getToolbarButton( $message->text(), $editUrl );
+		$toolbarButton = $this->getToolbarButton( $cssClassSuffix, $message->text(), $editUrl );
 
-		$html = wfTemplate( 'wb-editsection',
-			'span',
+		$html = wfTemplate( 'wikibase-toolbar-container',
 			wfTemplate( 'wikibase-toolbar',
 				'',
-				wfTemplate( 'wikibase-toolbareditgroup',
-					'',
-					wfTemplate( 'wikibase-toolbar', '', $toolbarButton )
+				wfTemplate( 'wikibase-toolbar-bracketed',
+					$toolbarButton
 				)
 			)
 		);
@@ -79,21 +79,23 @@ class SectionEditLinkGenerator {
 	}
 
 	/**
+	 * @param string $cssClassSuffix
 	 * @param string $buttonLabel the message to show on the toolbar button link
 	 * @param string|null $editUrl The edit url
 	 *
 	 * @return string
 	 */
-	private function getToolbarButton( $buttonLabel, $editUrl = null ) {
+	private function getToolbarButton( $cssClassSuffix, $buttonLabel, $editUrl = null ) {
 		if ( $editUrl !== null ) {
-			return wfTemplate(
-				'wikibase-toolbarbutton',
-				$buttonLabel,
-				$editUrl
+			return wfTemplate( 'wikibase-toolbar-button',
+				'wikibase-toolbar-button-' . $cssClassSuffix,
+				$editUrl,
+				$buttonLabel
 			);
 		} else {
-			return wfTemplate(
-				'wikibase-toolbarbutton-disabled',
+			return wfTemplate( 'wikibase-toolbar-button',
+				'wikibase-toolbar-button-' . $cssClassSuffix . ' ui-state-disabled',
+				'#',
 				$buttonLabel
 			);
 		}

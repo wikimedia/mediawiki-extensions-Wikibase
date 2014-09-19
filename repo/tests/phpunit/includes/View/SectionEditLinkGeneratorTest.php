@@ -27,10 +27,10 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 		$key = $action === 'add' ? 'wikibase-add' : 'wikibase-edit';
 		$msg = wfMessage( $key )->inLanguage( $langCode );
 
-		$html = $generator->getHtmlForEditSection( $pageName, array(), $msg, $enabled );
+		$html = $generator->getHtmlForEditSection( $pageName, array(), '', $msg, $enabled );
 		$matcher = array(
 			'tag' => 'span',
-			'class' => 'wb-editsection'
+			'class' => 'wikibase-toolbar'
 		);
 
 		$this->assertTag( $matcher, $html, "$action action" );
@@ -62,7 +62,12 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 	public function testGetHtmlForEditSection_editUrl( $expected, $specialPageName, $specialPageParams ) {
 		$generator = new SectionEditLinkGenerator();
 
-		$html = $generator->getHtmlForEditSection( $specialPageName, $specialPageParams, wfMessage( 'wikibase-add' ) );
+		$html = $generator->getHtmlForEditSection(
+			$specialPageName,
+			$specialPageParams,
+			'add',
+			wfMessage( 'wikibase-add' )
+		);
 
 		$this->assertTag( $expected, $html );
 	}
@@ -97,6 +102,7 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 		$html = $generator->getHtmlForEditSection(
 			$specialPageName,
 			$specialPageUrlParams,
+			'edit',
 			wfMessage( 'wikibase-edit' ),
 			$enabled
 		);
@@ -106,8 +112,8 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 			'attributes' => array( 'href' => 'regexp:+\bSpecial:SetLabel\b+' )
 		), $html );
 		$this->assertTag( array(
-			'tag' => 'a',
-			'attributes' => array( 'class' => 'wikibase-toolbarbutton-disabled' )
+			'tag' => 'span',
+			'attributes' => array( 'class' => 'ui-state-disabled' )
 		), $html );
 	}
 

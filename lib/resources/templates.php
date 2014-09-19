@@ -216,37 +216,12 @@ HTML;
 <li class="wikibase-aliasesview-list-item" dir="auto">$1</li>
 HTML;
 
-	$templates['wb-editsection'] =
-<<<HTML
-<$1 class="wb-editsection">$2</$1>
-HTML;
-
-	$templates['wikibase-toolbar'] =
-<<<HTML
-<span class="wikibase-toolbar $1">$2</span>
-HTML;
-
-	$templates['wikibase-toolbareditgroup'] =
-<<<HTML
-<span class="wikibase-toolbareditgroup $1">[$2]</span>
-HTML;
-
-	$templates['wikibase-toolbarbutton'] =
-<<<HTML
-<a href="$2" class="wikibase-toolbarbutton">$1</a>
-HTML;
-
-	$templates['wikibase-toolbarbutton-disabled'] =
-<<<HTML
-<a href="#" class="wikibase-toolbarbutton wikibase-toolbarbutton-disabled" tabindex="-1">$1</a>
-HTML;
-
 	$templates['wikibase-fingerprintgroupview'] =
 <<<HTML
 <div class="wikibase-fingerprintgroupview">
 	<div class="wikibase-fingerprintgroupview-heading-container">
 		<h2 id="wb-terms" class="wb-section-heading wikibase-fingerprintgroupview-heading">$1</h2>
-		<!-- wb-editsection -->$3
+		<!-- wikibase-toolbar -->$3
 	</div>
 	<!-- wikibase-fingerprintlistview -->$2
 </div>
@@ -289,7 +264,7 @@ HTML;
 <div class="wikibase-sitelinkgroupview" data-wb-sitelinks-group="$5">
 	<div class="wikibase-sitelinkgroupview-heading-container">
 		<h2 class="wb-section-heading wikibase-sitelinkgroupview-heading" dir="auto" id="$1">$2<span class="wikibase-sitelinkgroupview-counter">$3</span></h2>
-		<!-- wb-editsection -->$6
+		<!-- wikibase-toolbar -->$6
 	</div>
 	<!-- wikibase-sitelinklistview -->$4
 </div>
@@ -302,7 +277,7 @@ HTML;
 		<col class="wikibase-sitelinklistview-sitename" />
 		<col class="wikibase-sitelinklistview-siteid" />
 		<col class="wikibase-sitelinklistview-link" />
-		<col class="wb-editsection" />
+		<col/>
 	</colgroup>
 	<thead>
 		<!-- wikibase-sitelinklist-thead -->$1
@@ -330,7 +305,7 @@ HTML;
 <<<HTML
 <tr>
 	<td colspan="3" class="wikibase-sitelinklistview-placeholder">$1</td>
-	<td><!-- wb-editsection -->$2</td>
+	<td><!-- wikibase-toolbar -->$2</td>
 </tr>
 HTML;
 
@@ -374,6 +349,38 @@ HTML;
 <div class="wb-datatype">
 	<div class="wb-datatype-value">$1</div>
 </div>
+HTML;
+
+	$templates['wikibase-toolbar-item'] =
+<<<HTML
+<span class="wikibase-toolbar-item">$1</span>
+HTML;
+
+	$templates['wikibase-toolbar-button'] =
+<<<HTML
+<span class="wikibase-toolbar-item wikibase-toolbar-button $1"><a href="$2">$3</a></span>
+HTML;
+
+	$templates['wikibase-toolbar'] =
+<<<HTML
+<span class="wikibase-toolbar-item wikibase-toolbar $1">$2</span>
+HTML;
+
+	$templates['wikibase-toolbar-container'] =
+<<<HTML
+<span class="wikibase-toolbar-container">$1</span>
+HTML;
+
+// Helper template for styling
+// TODO: Remove template
+	$templates['wikibase-toolbar-wrapper'] =
+<<<HTML
+<span class="wikibase-toolbar-wrapper">$1</span>
+HTML;
+
+	$templates['wikibase-toolbar-bracketed'] =
+<<<HTML
+[$1]
 HTML;
 
 	return $templates;
