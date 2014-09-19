@@ -6,8 +6,12 @@ use InvalidArgumentException;
 use Language;
 use Status;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * Renderer of the {{#property}} parser function.
@@ -24,18 +28,42 @@ use Wikibase\Lib\SnakFormatter;
  */
 class LanguageAwareRenderer implements Renderer {
 
+	/**
+	 * @var Language
+	 */
 	private $language;
+
+	/**
+	 * @var SnaksFinder
+	 */
 	private $snaksFinder;
+
+	/**
+	 * @var SnakFormatter
+	 */
 	private $snakFormatter;
 
+	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
+	 * @param Language $language
+	 * @param SnaksFinder $snaksFinder
+	 * @param SnakFormatter $snakFormatter
+	 * @param UsageAccumulator $usageAcc
+	 */
 	public function __construct(
 		Language $language,
 		SnaksFinder $snaksFinder,
-		SnakFormatter $snakFormatter
+		SnakFormatter $snakFormatter,
+		UsageAccumulator $usageAcc
 	) {
 		$this->language = $language;
 		$this->snaksFinder = $snaksFinder;
 		$this->snakFormatter = $snakFormatter;
+		$this->usageAccumulator = $usageAcc;
 	}
 
 	/**
@@ -92,6 +120,27 @@ class LanguageAwareRenderer implements Renderer {
 	}
 
 	/**
+	 * @param Snak[] $snaks
+	 */
+	private function trackUsage( array $snaks ) {
+		// Note: we track any EntityIdValue as a label usage.
+		// This is making assumptions about what the respective formatter actually does.
+		// Ideally, the formatter itself would perform the tracking, but that seems nasty to model.
+
+		foreach ( $snaks as $snak ) {
+			if ( !( $snak instanceof PropertyValueSnak) ) {
+				continue;
+			}
+
+			$value = $snak->getDataValue();
+
+			if ( $value instanceof EntityIdValue ) {
+				$this->usageAccumulator->addLabelUsage( $value->getEntityId() );
+			}
+		}
+	}
+
+	/**
 	 * @param EntityId $entityId
 	 * @param string $propertyLabel
 	 *
@@ -109,6 +158,8 @@ class LanguageAwareRenderer implements Renderer {
 		if ( !$snaks ) {
 			return Status::newGood( '' );
 		}
+
+		$this->trackUsage( $snaks );
 
 		$text = $this->formatSnaks( $snaks, $propertyLabel );
 		$status = Status::newGood( $text );
