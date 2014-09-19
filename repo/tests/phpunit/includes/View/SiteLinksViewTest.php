@@ -163,7 +163,7 @@ class SiteLinksViewTest extends \PHPUnit_Framework_TestCase {
 					'child' => array(
 						'tag' => 'tfoot',
 						'descendant' => array(
-							'class' => 'wikibase-toolbarbutton-disabled'
+							'class' => 'ui-state-disabled'
 						)
 					)
 				)

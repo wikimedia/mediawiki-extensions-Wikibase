@@ -107,7 +107,7 @@ class SectionEditLinkGeneratorTest extends \MediaWikiLangTestCase {
 		), $html );
 		$this->assertTag( array(
 			'tag' => 'a',
-			'attributes' => array( 'class' => 'wikibase-toolbarbutton-disabled' )
+			'attributes' => array( 'class' => 'ui-state-disabled' )
 		), $html );
 	}
 
