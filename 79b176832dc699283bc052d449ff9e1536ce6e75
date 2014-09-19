@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_773d528a",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2014-09-19T19:29:19Z",
+      "side": 0,
+      "message": "will removing this possibly break any third party scripts etc?",
+      "revId": "79b176832dc699283bc052d449ff9e1536ce6e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
