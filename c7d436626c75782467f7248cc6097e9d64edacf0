@@ -52,6 +52,24 @@
       "revId": "c7d436626c75782467f7248cc6097e9d64edacf0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_77c31362",
+        "filename": "client/includes/hooks/SidebarHookHandlers.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-19T18:14:37Z",
+      "side": 1,
+      "message": "Nope. The methods in this class all deal with the same set of information being passed around using keys in amorphous \"property\" arrays (in ParserOutput, OutputPage, and the arrays used in the skin). The knowledge about what these keys are, and how the data found there is structured and how it should be interpreted, is the knowledge encapsulated by this class.\n\nThis is not quite clean, some of this knowledge is shared with the LangLinkHandler and (e.g. \u0027wikibase-otherprojects-sidebar\u0027 is used there). Further refactoring is needed to clean this up. But the approach of wrapping that knowledge in a single class seems useful.",
+      "parentUuid": "ee62ffec_9728c733",
+      "revId": "c7d436626c75782467f7248cc6097e9d64edacf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
