@@ -25,8 +25,8 @@ class StatementListPatcher {
 		$this->patcher = new MapPatcher();
 
 		$this->patcher->setValueComparer( new CallbackComparer(
-			function( Claim $firstClaim, Claim $secondClaim ) {
-				return $firstClaim->equals( $secondClaim );
+			function( Statement $firstStatement, Statement $secondStatement ) {
+				return $firstStatement->equals( $secondStatement );
 			}
 		) );
 	}
