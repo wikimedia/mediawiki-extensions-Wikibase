@@ -316,8 +316,11 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$handler->doParserAfterParse( $parser, $text, $stripState );
 
+		$expectedUsage = $expectedItem ? array( 'sitelinks' => array( $expectedItem ) ) : null;
+
 		$parserOutput = $parser->getOutput();
 		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
+		$this->assertEquals( $expectedUsage, $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
