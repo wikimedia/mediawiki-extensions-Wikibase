@@ -17,6 +17,7 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -316,10 +317,30 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$handler->doParserAfterParse( $parser, $text, $stripState );
 
+		if ( $expectedItem === null ) {
+			$expectedUsage = null;
+		} else {
+			$expectedUsage = array(
+				new EntityUsage(
+					new ItemId( $expectedItem ),
+					EntityUsage::SITELINK_USAGE
+				)
+			);
+		}
+
 		$parserOutput = $parser->getOutput();
+
 		$this->assertEquals( $expectedItem, $parserOutput->getProperty( 'wikibase_item' ) );
 		$this->assertLanguageLinks( $expectedLanguageLinks, $parserOutput );
 		$this->assertSisterLinks( $expectedSisterLinks, $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
+
+		$actualUsage = $parserOutput->getExtensionData( 'wikibase-entity-usage' );
+
+		if ( $expectedUsage === null ) {
+			$this->assertEmpty( $actualUsage );
+		} else {
+			$this->assertEquals( array_values( $expectedUsage ), array_values( $actualUsage ) );
+		}
 
 		$actualBadges = $parserOutput->getExtensionData( 'wikibase_badges' );
 
