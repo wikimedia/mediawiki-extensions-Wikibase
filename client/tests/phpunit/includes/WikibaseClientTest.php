@@ -60,7 +60,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewRepoLinkerReturnType() {
 		$returnValue = $this->getDefaultInstance()->newRepoLinker();
-		$this->assertInstanceOf( 'Wikibase\RepoLinker', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\Client\RepoLinker', $returnValue );
 	}
 
 	public function testGetLanguageFallbackChainFactoryReturnType() {

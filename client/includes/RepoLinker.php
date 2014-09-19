@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client;
 
 use Html;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * @since 0.2
