@@ -6,6 +6,7 @@ use Language;
 use MediaWikiSite;
 use Site;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DirectSqlStore;
 
 /**
@@ -25,10 +26,11 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$site = new Site( MediaWikiSite::TYPE_MEDIAWIKI );
 		$site->setGlobalId( 'dummy' );
 		$lang = Language::factory( 'en' );
+		$idParser = new BasicEntityIdParser();
 
 		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
 
-		$store = new DirectSqlStore( $contentCodec, $lang, 'DirectStoreSqlTestDummyRepoId');
+		$store = new DirectSqlStore( $contentCodec, $lang, $idParser, 'DirectStoreSqlTestDummyRepoId');
 		$store->setSite( $site ); //TODO: inject via constructor once that is possible
 
 		return $store;
@@ -40,6 +42,8 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 	public function testGetters( $getter, $expectedType ) {
 		$store = $this->newStore();
 
+		$this->assertTrue( method_exists( $store, $getter ), "Method $getter" );
+
 		$obj = $store->$getter();
 
 		$this->assertInstanceOf( $expectedType, $obj );
@@ -47,13 +51,15 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	public static function provideGetters() {
 		return array(
-			array( 'getItemUsageIndex', 'Wikibase\ItemUsageIndex' ),
 			array( 'getSiteLinkTable', 'Wikibase\Lib\Store\SiteLinkTable' ),
 			array( 'getEntityLookup', 'Wikibase\Lib\Store\EntityLookup' ),
 			array( 'getTermIndex', 'Wikibase\TermIndex' ),
 			array( 'getPropertyLabelResolver', 'Wikibase\PropertyLabelResolver' ),
 			array( 'newChangesTable', 'Wikibase\ChangesTable' ),
 			array( 'getPropertyInfoStore', 'Wikibase\PropertyInfoStore' ),
+			array( 'getUsageTracker', 'Wikibase\Client\Usage\UsageTracker' ),
+			array( 'getUsageLookup', 'Wikibase\Client\Usage\UsageLookup' ),
+			array( 'getSubscriptionManager', 'Wikibase\Client\Usage\SubscriptionManager' ),
 		);
 	}
 
