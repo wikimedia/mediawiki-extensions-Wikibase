@@ -107,6 +107,7 @@ class TermBoxView {
 			$this->sectionEditLinkGenerator->getHtmlForEditSection(
 				'SpecialPages',
 				array(),
+				'edit',
 				$this->msg( 'wikibase-edit' ),
 				$editable
 			)

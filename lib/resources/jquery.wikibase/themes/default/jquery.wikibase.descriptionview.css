@@ -6,7 +6,6 @@
 .wikibase-descriptionview {
 	float: left;
 	margin-top: -2px; /* move to top decreasing space between label and description */
-	padding-left: 10px;
 	width: 100%;
 }
 
@@ -18,21 +17,11 @@ div.wikibase-descriptionview.wb-empty {
 }
 
 .wikibase-descriptionview .wikibase-descriptionview-container {
+	padding-left: 10px;
 	position: relative;
 }
 
-.wikibase-descriptionview .wb-editsection {
-	line-height: 2;
-	position: absolute;
-	right: 10px;
-	top: 0.1em;
-}
-
-.wikibase-descriptionview.wb-edit .wb-editsection {
-	right: 7px;
-}
-
-.wikibase-descriptionview.wb-edit {
+.wikibase-descriptionview.wb-edit .wikibase-descriptionview-container {
 	padding-left: 7px;
 }
 
@@ -50,4 +39,11 @@ div.wikibase-descriptionview.wb-empty {
 	width: 100%;
 	padding: 0 2px;
 	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
+}
+
+.wikibase-descriptionview .wikibase-edittoolbar-container {
+	line-height: 2;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
