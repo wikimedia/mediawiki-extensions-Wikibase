@@ -7,12 +7,14 @@ use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * @covers Wikibase\LangLinkHandler
@@ -590,8 +592,17 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
 		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
-
 		$this->assertEquals( $itemId->getSerialization(), $property );
+
+		$this->assertUsageTracking( $itemId, EntityUsage::SITELINK_USAGE, $parserOutput );
+	}
+
+	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
+		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+		$usage = $usageAcc->getUsages();
+		$expected = new EntityUsage( $id, $aspect );
+
+		$this->assertContains( $expected, $usage, '', false, false );
 	}
 
 	public function testUpdateItemIdPropertyForUnconnectedPage() {
