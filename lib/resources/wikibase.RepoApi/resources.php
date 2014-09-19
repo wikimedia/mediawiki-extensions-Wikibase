@@ -33,10 +33,9 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'json',
-				'user.tokens',
-				'mediawiki.api',
 				'mw.config.values.wbRepo',
 				'wikibase',
+				'wikibase.api.getLocationAgnosticMwApi',
 			),
 		),
 

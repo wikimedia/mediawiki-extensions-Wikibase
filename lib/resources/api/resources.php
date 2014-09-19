@@ -33,6 +33,16 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.api.getLocationAgnosticMwApi' => $moduleTemplate + array(
+			'scripts' => array(
+				'getLocationAgnosticMwApi.js',
+			),
+			'dependencies' => array(
+				'mediawiki.api',
+				'wikibase.api.__namespace',
+			),
+		),
+
 		'wikibase.api.ParseValueCaller' => $moduleTemplate + array(
 			'scripts' => array(
 				'ParseValueCaller.js',
