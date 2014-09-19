@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_413e0d28",
+        "filename": "usagetracking/includes/Usage/SqlUsageTracker.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-19T10:52:24Z",
+      "side": 1,
+      "message": "please don\u0027t reinvent this beginWriteTransaciton stuff when we can use $db-\u003estartAtomic()",
+      "revId": "7c2f35da8273fa282c6e73bf09e3a06903806ac6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
