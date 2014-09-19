@@ -2,17 +2,17 @@
 
 namespace Wikibase\DataModel\Test;
 
-use Wikibase\DataModel\BestStatementFinder;
+use Wikibase\DataModel\BestStatementsFinder;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\BestStatementFinder
+ * @covers Wikibase\DataModel\BestStatementsFinder
  *
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class BestStatementFinderTest extends \PHPUnit_Framework_TestCase {
+class BestStatementsFinderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetBestStatementsPerProperty() {
 		$cases = array();
@@ -67,7 +67,7 @@ class BestStatementFinderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideGetBestStatementsPerProperty
 	 */
 	public function testGetBestStatementsPerProperty( $statements, $expectedGuids ) {
-		$bestStatementFinder = new BestStatementFinder( $statements );
+		$bestStatementFinder = new BestStatementsFinder( $statements );
 		$bestStatements = $bestStatementFinder->getBestStatementsPerProperty();
 		$guids = array_map( function( $statement ) {
 			return $statement->getGuid();
@@ -134,7 +134,7 @@ class BestStatementFinderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideGetBestStatementsForProperty
 	 */
 	public function testGetBestStatementsForProperty( $statements, $propertyId, $expectedGuids ) {
-		$bestStatementFinder = new BestStatementFinder( $statements );
+		$bestStatementFinder = new BestStatementsFinder( $statements );
 		$bestStatements = $bestStatementFinder->getBestStatementsForProperty( new PropertyId( $propertyId ) );
 		$guids = array_map( function( $statement ) {
 			return $statement->getGuid();

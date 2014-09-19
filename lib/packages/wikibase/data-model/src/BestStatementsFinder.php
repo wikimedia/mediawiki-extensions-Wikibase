@@ -3,6 +3,8 @@
 namespace Wikibase\DataModel;
 
 use InvalidArgumentException;
+use OutOfBoundsException;
+use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -15,7 +17,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class BestStatementFinder {
+class BestStatementsFinder {
 
 	/**
 	 * @var ByPropertyIdGrouper
