@@ -80,6 +80,4 @@ class ItemPatcher implements EntityPatcherStrategy {
 		) );
 	}
 
-
-
 }
