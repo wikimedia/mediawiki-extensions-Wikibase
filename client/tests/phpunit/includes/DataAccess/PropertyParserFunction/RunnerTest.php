@@ -2,11 +2,14 @@
 
 namespace Wikibase\DataAccess\Tests\PropertyParserFunction;
 
-use Language;
 use Parser;
+use ParserOptions;
+use ParserOutput;
 use Title;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\Runner
@@ -22,9 +25,11 @@ use Wikibase\DataModel\Entity\ItemId;
 class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRunPropertyParserFunction() {
+		$itemId = new ItemId( 'Q3' );
+
 		$runner = new Runner(
 			$this->getRendererFactory(),
-			$this->getSiteLinkLookup(),
+			$this->getSiteLinkLookup( $itemId ),
 			'enwiki'
 		);
 
@@ -38,15 +43,24 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertEquals( $expected, $result );
+		$this->assertUsageTracking( $itemId, EntityUsage::ALL_USAGE, $parser->getOutput() );
 	}
 
-	private function getSiteLinkLookup() {
+	private function assertUsageTracking( ItemId $id, $aspect, ParserOutput $parserOutput ) {
+		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
+		$usage = $usageAcc->getUsages();
+		$expected = new EntityUsage( $id, $aspect );
+
+		$this->assertContains( $expected, $usage, '', false, false );
+	}
+
+	private function getSiteLinkLookup( ItemId $itemId ) {
 		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkLookup' )
 			->getMock();
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getEntityIdForSiteLink' )
-			->will( $this->returnValue( new ItemId( 'Q3' ) ) );
+			->will( $this->returnValue( $itemId ) );
 
 		return $siteLinkLookup;
 	}
@@ -83,9 +97,11 @@ class RunnerTest extends \PHPUnit_Framework_TestCase {
 
 	private function getParser() {
 		$parserConfig = array( 'class' => 'Parser' );
+		$title = Title::newFromText( 'Cat' );
+		$popt = new ParserOptions();
 
 		$parser = new Parser( $parserConfig );
-		$parser->setTitle( Title::newFromText( 'Cat' ) );
+		$parser->startExternalParse( $title, $popt, Parser::OT_HTML );
 
 		return $parser;
 	}
