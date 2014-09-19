@@ -1,0 +1,68 @@
+This file describes how the usage of entities on wiki pages is tracked.
+
+Tracking happens on two levels:
+* the client wiki tracks which pages use (which aspect of) which entity (from which repo).
+* each repo tracks which client uses which entity.
+
+This is used to optimize change notifications on two levels:
+* the repo sends notifications to the clients that use the modified entity in question.
+* the client compares incoming notifications with it's local tracking table to decide which pages to purge/update.
+
+
+== Client side usage tracking ==
+
+Each client wiki tracks which pages use (which aspect of) which entity (from which repo). The "aspect" is used to decide which kind of change is relevant for the given kind of usage, and what kind of update is needed for the page in question. The following aspects are defined:
+
+* sitelinks: only an item's sitelinks are used. This would be the case for a client page that is connected to an item on the repo via an incoming sitelink, but does not access any data of the item directly. A change to the sitelinks may be applied without re-parsing the page, by overwriting the sitelinks in the cached ParserOutput opbject.
+* label: only the entity's label (in the wiki's content language) is used. This would be the case if a reference to the entity is shown on a page. It's also used in cases when a property is referenced by label. A page that uses a label should be updated when that label chances, but this kind of update my be considered low priority. (Caveat: this may be extended to included the description in the local language, in case that is typically used for rendering references).
+* all: any and all aspects of the entity may be used on the given page. This includes statements, claims, and labels. This kind of usage triggers a full re-parse on any change to the entity. This aspect of use is recorded when entity data is accessed via Lua or the #property parser function.
+
+Any incoming change will be classified to be relevant to one or more aspects. Well known aspects are:
+* sitelinks (I): the entity's sitelinks are used.
+* label (L): the entity's label in the local content language is used.
+* page (P): the title of the local page corresponding to the entity is used.
+* all (X): other aspects (such as statement data), or all aspects, are or may be used.
+
+Changes result in updates to pages that use the respective entity based on the aspect that is used. Changes are classified accordingly:
+* sitelinks (I): any change to the entity's sitelinks. Pages that use the I or X aspect are updated.
+* label (L): the label in the local content language changed. Pages that use the L or X aspect are updated.
+* page (P): the sitelink corresponding to the local wiki was changed. Pages that use the P, I, or X aspect are updated.
+* other (X): somethign else about the entity (such as statement data) changed. Only pages that use the X aspect are updated.
+
+This way, editing statements will not cause pages that just show the entities label to be purged.
+
+The database table for tracking client side usage is called wbc_entityusage, and can be thought of as a links table, just like templatelinks or imagelinks. It has the following fields:
+
+  eu_entity_type    VARBINARY(32)  -- the type of the entity being used
+  eu_entity_id      VARBINARY(255) -- the ID of the entity being used
+  eu_aspect         ENUM           -- the aspect of the entity ("sitelinks", "label", or "all").
+  eu_page_id        INT            -- the ID of the page using the entity
+  eu_page_namespace INT            -- the namespace of the page using the entity
+
+The following indexes are provided for efficient access:
+
+  PRIMARY KEY ( eu_entity_id, eu_aspect, eu_page_id )    -- record one usage per page per aspect of an entity
+  INDEX ( eu_page_id, eu_entity_id )                     -- look up (and especially, delete) usage entris by page id
+  INDEX ( eu_entity_type, eu_page_namespace ) -- look up usage by entity type (filter by namespace)
+
+NOTE: when tracking usage of entities from multiple repos, we either need distinct ID prefixes,
+or one table per repo, or both. An additional eu_entity_repo column would introduce a huge
+amount of redundant data, and would not play well with indexes.
+
+
+== Repo side usage tracking ==
+
+Each repo tracks which client uses which entity. This is done in the table wb_entities_per_client, which has the following structure:
+
+  epc_entity_type   VARBINARY(32)  -- the type of the entity being used
+  epc_entity_id     VARBINARY(255) -- the ID of the entity being used
+  epc_site_id       VARBINARY(48)  -- the ID of the client site using the entity
+
+The following indexes are provided for efficient access:
+
+  PRIMARY KEY ( epc_entity_id, epc_site_id )  -- record each entity/client pair only once
+  INDEX ( epc_site_id, epc_entity_type ) -- look up usage by site (filter by type)
+
+This table is updated whenever the client side tracking table is updated. To do this, the client wiki must, whenever a page is edited, determine which entities are used (in order to record this in the local tracking table), but in addition to this, detect whether
+     an entity that wasn't used previously anywhere on the wiki is now used by the edited page, or whether the edit removed the last
+     usage of any of the entities previously used on the page.

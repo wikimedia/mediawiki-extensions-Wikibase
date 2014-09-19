@@ -299,6 +299,7 @@ final class WikibaseClient {
 			$this->store = new DirectSqlStore(
 				$this->getEntityContentDataCodec(),
 				$this->getContentLanguage(),
+				$this->getEntityIdParser(),
 				$repoDatabase
 			);
 		}
