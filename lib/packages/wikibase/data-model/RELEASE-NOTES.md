@@ -10,6 +10,7 @@
 * The `Statement` constructor now also accepts a `Claim` parameter
 * Added `Statement::setClaim`
 * Added `PropertyIdProvider` interface
+* Added `ByPropertyIdGrouper`
 
 ## Version 1.0 (2014-09-02)
 
