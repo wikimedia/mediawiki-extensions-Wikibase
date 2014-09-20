@@ -2,19 +2,16 @@
 
 namespace Wikibase;
 
-use IContextSource;
+use Content;
 use InvalidArgumentException;
+use Language;
 use LogicException;
 use MWException;
 use Title;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRedirect;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\ItemSearchTextGenerator;
+use Wikibase\Repo\View\ClaimsView;
+use Wikibase\Repo\View\FingerprintView;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -203,45 +200,14 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see getEntityView()
 	 *
-	 * @param IContextSource $context
-	 * @param SnakFormatter $snakFormatter
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityIdParser $idParser
-	 * @param SerializationOptions $options
-	 *
 	 * @return ItemView
 	 */
 	protected function newEntityView(
-		IContextSource $context,
-		SnakFormatter $snakFormatter,
-		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
-		EntityTitleLookup $entityTitleLookup,
-		EntityIdParser $idParser,
-		SerializationOptions $options
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language
 	) {
-		//FIXME: we are using the EntityInfoBuilderFactory in two places,
-		// this indicates we are also doing the bulk database queries twice!
-
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilderFactory,
-			$idParser,
-			$entityTitleLookup,
-			new ReferencedEntitiesFinder(),
-			$context->getLanguage()->getCode()
-		);
-
-		return new ItemView(
-			$context,
-			$snakFormatter,
-			$dataTypeLookup,
-			$entityInfoBuilderFactory,
-			$entityTitleLookup,
-			$options,
-			$configBuilder
-		);
+		return new ItemView( $fingerprintView, $claimsView, $language );
 	}
 
 	/**

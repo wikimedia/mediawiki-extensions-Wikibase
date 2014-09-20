@@ -2,13 +2,10 @@
 
 namespace Wikibase;
 
-use IContextSource;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\Serializers\SerializationOptions;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\Store\EntityInfoBuilderFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Content;
+use Language;
+use Wikibase\Repo\View\ClaimsView;
+use Wikibase\Repo\View\FingerprintView;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -110,42 +107,14 @@ class PropertyContent extends EntityContent {
 	/**
 	 * @see getEntityView()
 	 *
-	 * @param IContextSource $context
-	 * @param SnakFormatter $snakFormatter
-	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityIdParser $idParser
-	 * @param SerializationOptions $options
-	 *
 	 * @return PropertyView
 	 */
 	protected function newEntityView(
-		IContextSource $context,
-		SnakFormatter $snakFormatter,
-		PropertyDataTypeLookup $dataTypeLookup,
-		EntityInfoBuilderFactory $entityInfoBuilderFactory,
-		EntityTitleLookup $entityTitleLookup,
-		EntityIdParser $idParser,
-		SerializationOptions $options
+		FingerprintView $fingerprintView,
+		ClaimsView $claimsView,
+		Language $language
 	) {
-		$configBuilder = new ParserOutputJsConfigBuilder(
-			$entityInfoBuilderFactory,
-			$idParser,
-			$entityTitleLookup,
-			new ReferencedEntitiesFinder(),
-			$context->getLanguage()->getCode()
-		);
-
-		return new PropertyView(
-			$context,
-			$snakFormatter,
-			$dataTypeLookup,
-			$entityInfoBuilderFactory,
-			$entityTitleLookup,
-			$options,
-			$configBuilder
-		);
+		return new PropertyView( $fingerprintView, $claimsView, $language );
 	}
 
 }

@@ -59,11 +59,4 @@ class PropertyViewTest extends EntityViewTest {
 		$entityData['datatype'] = $entity->getDataTypeId();
 	}
 
-	public function testGetHtmlForToc() {
-		$entityView = $this->newEntityView( Property::ENTITY_TYPE );
-		$toc = $entityView->getHtmlForToc();
-
-		$this->assertSame( '', $toc, "properties should currently not have a TOC" );
-	}
-
 }
