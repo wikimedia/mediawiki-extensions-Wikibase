@@ -2,9 +2,13 @@
 
 namespace Wikibase\DataModel\Statement;
 
+use ArrayIterator;
+use Comparable;
+use Countable;
 use InvalidArgumentException;
+use IteratorAggregate;
 use Traversable;
-use Wikibase\DataModel\Claim\Claims;
+use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -22,7 +26,7 @@ use Wikibase\DataModel\Snak\Snaks;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementList implements \IteratorAggregate, \Comparable, \Countable {
+class StatementList implements IteratorAggregate, Comparable, Countable {
 
 	/**
 	 * @var Statement[]
@@ -36,24 +40,6 @@ class StatementList implements \IteratorAggregate, \Comparable, \Countable {
 	 */
 	public function __construct( $statements = array() ) {
 		$this->addStatements( $statements );
-	}
-
-	/**
-	 * Returns the best statements per property.
-	 * The best statements are those with the highest rank for a particular property.
-	 * Deprecated ranks are never included.
-	 *
-	 * @return self
-	 */
-	public function getBestStatementPerProperty() {
-		$statementList = new self();
-
-		foreach ( $this->getPropertyIds() as $propertyId ) {
-			$claims = new Claims( $this->statements );
-			$statementList->addStatements( $claims->getClaimsForProperty( $propertyId )->getBestClaims() );
-		}
-
-		return $statementList;
 	}
 
 	private function addStatements( $statements ) {
@@ -77,19 +63,30 @@ class StatementList implements \IteratorAggregate, \Comparable, \Countable {
 	}
 
 	/**
+	 * Returns the best statements per property.
+	 * The best statements are those with the highest rank for a particular property.
+	 * Deprecated ranks are never included.
+	 *
+	 * @deprecated since 1.1 - use BestStatementsFinder instead
+	 *
+	 * @return self
+	 */
+	public function getBestStatementPerProperty() {
+		$bestStatementsFinder = new BestStatementsFinder( $this );
+		return new self( $bestStatementsFinder->getBestStatementsPerProperty() );
+	}
+
+	/**
 	 * Returns the property ids used by the statements.
 	 * The keys of the returned array hold the serializations of the property ids.
+	 *
+	 * @deprecated since 1.1 - use ByPropertyIdGrouper
 	 *
 	 * @return PropertyId[]
 	 */
 	public function getPropertyIds() {
-		$propertyIds = array();
-
-		foreach ( $this->statements as $statement ) {
-			$propertyIds[$statement->getPropertyId()->getSerialization()] = $statement->getPropertyId();
-		}
-
-		return $propertyIds;
+		$byPropertyIdGrouper = new ByPropertyIdGrouper( $this );
+		return $byPropertyIdGrouper->getPropertyIds();
 	}
 
 	public function addStatement( Statement $statement ) {
@@ -151,7 +148,7 @@ class StatementList implements \IteratorAggregate, \Comparable, \Countable {
 	 * @return Traversable
 	 */
 	public function getIterator() {
-		return new \ArrayIterator( $this->statements );
+		return new ArrayIterator( $this->statements );
 	}
 
 	/**
