@@ -2,6 +2,8 @@
 
 namespace Wikibase;
 
+use DataValues\DataValue;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 
@@ -37,6 +39,9 @@ class ValuesFinder {
 
 		foreach ( $snaks as $snak ) {
 			if ( $this->isMatchingSnak( $snak, $dataType ) ) {
+				/**
+				 * @var PropertyValueSnak $snak
+				 */
 				$dataValue = $snak->getDataValue();
 				$found[$dataValue->getHash()] = $dataValue;
 			}
