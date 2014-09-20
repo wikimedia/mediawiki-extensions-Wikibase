@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityFactory;
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
  * Factory for constructing Serializer and Unserializer objects.

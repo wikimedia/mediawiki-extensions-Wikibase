@@ -5,12 +5,12 @@ namespace Wikibase\Lib\Test;
 use DataValues\BooleanValue;
 use DataValues\DataValue;
 use DataValues\StringValue;
+use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\ValuesFinder;
 
 /**

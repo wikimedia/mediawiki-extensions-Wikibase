@@ -21,7 +21,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\Summary;
 

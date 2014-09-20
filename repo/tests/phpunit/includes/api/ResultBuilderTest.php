@@ -63,7 +63,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );
 
-		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\Lib\PropertyDataTypeLookup' );
+		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( $propertyId ) {

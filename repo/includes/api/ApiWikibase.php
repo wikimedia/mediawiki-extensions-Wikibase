@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EditEntity;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Localizer\ExceptionLocalizer;
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;

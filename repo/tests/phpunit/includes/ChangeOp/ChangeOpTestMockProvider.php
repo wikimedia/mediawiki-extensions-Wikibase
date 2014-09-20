@@ -24,7 +24,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\ClaimGuidGenerator;
 use Wikibase\Lib\ClaimGuidValidator;
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\SiteLinkCache;
 use Wikibase\Validators\CompositeFingerprintValidator;
 use Wikibase\Validators\CompositeValidator;
@@ -156,7 +156,7 @@ class ChangeOpTestMockProvider {
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getMockPropertyDataTypeLookup() {
-		$mock = $this->getMock( '\Wikibase\Lib\PropertyDataTypeLookup' );
+		$mock = $this->getMock( '\Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( PHPUnit_Framework_TestCase::returnValue( 'string' ) );
