@@ -35,9 +35,9 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			array(
-				'P1' => new PropertyId( 'P1' ),
-				'P3' => new PropertyId( 'P3' ),
-				'P2' => new PropertyId( 'P2' ),
+				new PropertyId( 'P1' ),
+				new PropertyId( 'P3' ),
+				new PropertyId( 'P2' ),
 			),
 			$list->getPropertyIds()
 		);
