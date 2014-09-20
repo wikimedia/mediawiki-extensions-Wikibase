@@ -72,7 +72,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 
 		$idParser = new BasicEntityIdParser(); // we only test for items and properties here.
 
-		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );

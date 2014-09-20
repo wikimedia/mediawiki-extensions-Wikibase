@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Test;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Test\MockPropertyInfoStore;
@@ -103,7 +103,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 		$expectedDataType
 	) {
 		if ( $expectedDataType === false ) {
-			$this->setExpectedException( 'Wikibase\Lib\PropertyNotFoundException' );
+			$this->setExpectedException( 'Wikibase\DataModel\Entity\PropertyNotFoundException' );
 		}
 
 		$lookup = new PropertyInfoDataTypeLookup( $infoStore, $fallbackLookup );

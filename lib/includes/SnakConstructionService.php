@@ -7,7 +7,9 @@ use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\SnakFactory;
 

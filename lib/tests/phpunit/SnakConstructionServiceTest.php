@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Test;
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\SnakFactory;
 
@@ -70,9 +70,9 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 			'somevalue' => array( 1, 'somevalue', null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, null ),
 			'value' => array( 1, 'value', '"hello"', 'Wikibase\DataModel\Snak\PropertyValueSnak', null, null ),
 
-			'novalue/badprop' => array( 66, 'novalue', null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
-			'somevalue/badprop' => array( 66, 'somevalue', null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
-			'value/badprop' => array( 66, 'value', '"hello"', 'Wikibase\DataModel\Snak\PropertyValueSnak', null, 'Wikibase\Lib\PropertyNotFoundException' ),
+			'novalue/badprop' => array( 66, 'novalue', null, 'Wikibase\DataModel\Snak\PropertyNoValueSnak', null, 'Wikibase\DataModel\Entity\PropertyNotFoundException' ),
+			'somevalue/badprop' => array( 66, 'somevalue', null, 'Wikibase\DataModel\Snak\PropertySomeValueSnak', null, 'Wikibase\DataModel\Entity\PropertyNotFoundException' ),
+			'value/badprop' => array( 66, 'value', '"hello"', 'Wikibase\DataModel\Snak\PropertyValueSnak', null, 'Wikibase\DataModel\Entity\PropertyNotFoundException' ),
 
 			'value/badvalue' => array( 1, 'value', array( "foo" ), 'Wikibase\DataModel\Snak\PropertyValueSnak', null, 'DataValues\IllegalValueException' ),
 		);
