@@ -6,6 +6,7 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\TypedObjectDeserializer;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @since 0.1
@@ -133,10 +134,12 @@ abstract class EntityDeserializer extends TypedObjectDeserializer {
 	}
 
 	private function setClaimsFromSerialization( array $serialization, Entity $entity ) {
-		if ( !array_key_exists( 'claims', $serialization ) || !method_exists( $entity, 'setClaims' ) ) {
+		if ( !array_key_exists( 'claims', $serialization ) || !method_exists( $entity, 'setStatements' ) ) {
 			return;
 		}
 
-		$entity->setClaims( $this->claimsDeserializer->deserialize( $serialization['claims'] ) );
+		$claims = $this->claimsDeserializer->deserialize( $serialization['claims'] );
+		$statements = new StatementList( iterator_to_array( $claims ) );
+		$entity->setStatements( $statements );
 	}
 }

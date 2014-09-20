@@ -6,7 +6,7 @@ env:
 matrix:
   fast_finish: true
   include:
-    - env: DM=1.0.0
+    - env: DM=~1.0@dev
       php: 5.3
     - env: DM=~1.0@dev
       php: 5.4
