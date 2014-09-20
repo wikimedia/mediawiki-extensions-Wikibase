@@ -54,5 +54,6 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)",
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ელემენტის ID",
 	"wikibase-pageinfo-entity-id-none": "არაფერი",
+	"wikibase-otherprojects": "სხვა პროექტები",
 	"wikibase-otherprojects-beta-message": "სხვა პროექტების გვერდითი პანელი"
 }
