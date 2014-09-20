@@ -35,7 +35,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 	 * @return SnakSerializer
 	 */
 	protected function getInstance() {
-		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( array( $this, 'getDataTypeIdForProperty' ) ) );

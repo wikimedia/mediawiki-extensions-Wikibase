@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyNotFoundException;
 
 /**

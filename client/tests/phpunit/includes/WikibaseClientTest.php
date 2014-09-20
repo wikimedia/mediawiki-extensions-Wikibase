@@ -42,7 +42,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getDefaultInstance()->getPropertyDataTypeLookup();
-		$this->assertInstanceOf( 'Wikibase\Lib\PropertyDataTypeLookup', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup', $returnValue );
 	}
 
 	public function testNewSnakFormatterReturnType() {

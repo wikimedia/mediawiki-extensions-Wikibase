@@ -38,7 +38,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	public function newBuilders( $propertyType, EntityId $entityId ) {
-		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( $propertyType ) );

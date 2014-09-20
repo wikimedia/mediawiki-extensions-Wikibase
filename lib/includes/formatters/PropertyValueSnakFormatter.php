@@ -11,6 +11,7 @@ use Message;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 

@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityLookup;
 

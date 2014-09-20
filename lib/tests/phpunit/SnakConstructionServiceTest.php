@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Test;
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
+use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\InMemoryDataTypeLookup;
 use Wikibase\Lib\SnakConstructionService;
 use Wikibase\SnakFactory;
 

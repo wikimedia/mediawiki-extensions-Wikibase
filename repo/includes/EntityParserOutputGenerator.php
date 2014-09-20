@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use ParserOutput;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
