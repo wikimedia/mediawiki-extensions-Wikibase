@@ -36,7 +36,7 @@ use Wikibase\Lib\EntityIdLabelFormatter;
 use Wikibase\Lib\EntityRetrievingDataTypeLookup;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Serializers\ForbiddenSerializer;
 use Wikibase\Lib\SnakFormatter;

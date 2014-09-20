@@ -5,6 +5,7 @@ namespace Wikibase\Lib;
 use DataTypes\DataTypeFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 
 /**
  * Defines the snak formatters supported by Wikibase.

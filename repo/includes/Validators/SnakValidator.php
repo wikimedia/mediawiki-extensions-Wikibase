@@ -15,8 +15,8 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\References;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 
 /**
  * Class SnakValidator for validating Snaks.

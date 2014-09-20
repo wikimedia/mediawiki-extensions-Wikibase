@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
@@ -98,7 +98,7 @@ class GetClaimsTest extends \ApiTestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getDataTypeLookup() {
-		$lookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$lookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 
 		$lookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )

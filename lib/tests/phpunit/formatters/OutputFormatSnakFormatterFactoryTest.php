@@ -25,7 +25,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function testConstructorErrors( $builder, $error ) {
 		$this->setExpectedException( $error );
 
-		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
 		new OutputFormatSnakFormatterFactory( $builder );
