@@ -3,13 +3,13 @@
 namespace Wikibase\Test;
 
 use RecentChange;
+use Wikibase\Client\RecentChanges\ExternalChange;
+use Wikibase\Client\RecentChanges\ExternalChangeFactory;
+use Wikibase\Client\RecentChanges\RevisionData;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ExternalChange;
-use Wikibase\ExternalChangeFactory;
-use Wikibase\RevisionData;
 
 /**
- * @covers Wikibase\ExternalChangeFactory
+ * @covers Wikibase\Client\RecentChanges\ExternalChangeFactory
  *
  * @group WikibaseClient
  * @group Database

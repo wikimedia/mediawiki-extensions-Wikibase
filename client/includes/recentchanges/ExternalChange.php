@@ -1,6 +1,8 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\RecentChanges;
+
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Represents an external change

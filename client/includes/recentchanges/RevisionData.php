@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\RecentChanges;
 
 /**
  * Represents an revision on a site
