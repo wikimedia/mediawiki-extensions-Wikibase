@@ -126,7 +126,7 @@ class EntityParserOutputGenerator {
 		$usedImages = $valuesFinder->findFromSnaks( $snaks, 'commonsMedia' );
 
 		foreach( $usedImages as $image ) {
-			$pout->addImage( $image->getValue() );
+			$pout->addImage( str_replace( ' ', '_', $image->getValue() ) );
 		}
 	}
 
