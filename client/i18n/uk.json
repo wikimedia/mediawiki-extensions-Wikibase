@@ -67,5 +67,6 @@
 	"wikibase-pageinfo-entity-id": "Ідентифікатор елемента у {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Нема",
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
-	"wikibase-otherprojects": "Інші проекти"
+	"wikibase-otherprojects": "Інші проекти",
+	"wikibase-otherprojects-beta-message": "Бічна панель інших проектів"
 }
