@@ -2,10 +2,14 @@
 
 namespace Wikibase\Test;
 
+use DataValues\StringValue;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityParserOutputGenerator;
 use Wikibase\EntityRevision;
 
@@ -27,7 +31,7 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function testGetParserOutput() {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
-		$item = Item::newEmpty();
+		$item = $this->newItem();
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $item, 13044, $timestamp );
 
@@ -36,6 +40,9 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( self::$html, $parserOutput->getText() );
 		$this->assertEquals( self::$placeholders, $parserOutput->getExtensionData( 'wikibase-view-chunks' ) );
 		$this->assertEquals( self::$configVars, $parserOutput->getJsConfigVars() );
+
+		$this->assertEquals( array( 'http://an.url.com', 'https://another.url.org' ), array_keys( $parserOutput->getExternalLinks() ) );
+		$this->assertEquals( array( 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ), array_keys( $parserOutput->getImages() ) );
 	}
 
 	private function newEntityParserOutputGenerator() {
@@ -44,8 +51,23 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$this->getConfigBuilderMock(),
 			$this->getMock( 'Wikibase\Lib\Serializers\SerializationOptions' ),
 			$this->getEntityTitleLookupMock(),
-			new InMemoryDataTypeLookup()
+			$this->getDataTypeLookup()
 		);
+	}
+
+	private function newItem() {
+		$item = Item::newEmpty();
+		$statements = new StatementList();
+
+		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'http://an.url.com' ) ) );
+		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'https://another.url.org' ) ) );
+
+		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:This is a file.pdf' ) ) );
+		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:Selfie.jpg' ) ) );
+
+		$item->setStatements( $statements );
+
+		return $item;
 	}
 
 	private function getEntityViewMock() {
@@ -87,6 +109,13 @@ class EntityParserOutputGeneratorTest extends \PHPUnit_Framework_TestCase {
 			} ) );
 
 		return $entityTitleLookup;
+	}
+
+	private function getDataTypeLookup() {
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P42' ), 'url' );
+		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'commonsMedia' );
+		return $dataTypeLookup;
 	}
 
 }
