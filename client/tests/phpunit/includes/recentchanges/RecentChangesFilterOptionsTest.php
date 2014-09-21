@@ -2,11 +2,11 @@
 namespace Wikibase\Test;
 
 use FormOptions;
+use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\RecentChangesFilterOptions;
 
 /**
- * @covers Wikibase\RecentChangesFilterOptions
+ * @covers Wikibase\Client\RecentChanges\RecentChangesFilterOptions
  *
  * @group WikibaseClient
  * @group Test
