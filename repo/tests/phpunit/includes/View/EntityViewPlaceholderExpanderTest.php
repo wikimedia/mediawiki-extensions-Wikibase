@@ -9,12 +9,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\EntityViewPlaceholderExpander;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 
 /**
- * @covers Wikibase\EntityViewPlaceholderExpander
+ * @covers Wikibase\Repo\View\EntityViewPlaceholderExpander
  *
  * @group Wikibase
  * @group WikibaseRepo
