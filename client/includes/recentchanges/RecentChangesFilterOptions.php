@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\RecentChanges;
+
+use FormOptions;
 use Wikibase\Client\WikibaseClient;
 
 /**
- *
  * @since 0.4
  *
  * @licence GNU GPL v2+
@@ -14,7 +15,7 @@ class RecentChangesFilterOptions {
 
 	private $opts;
 
-	public function __construct( \FormOptions $opts ) {
+	public function __construct( FormOptions $opts ) {
 		$this->opts = $opts;
 	}
 

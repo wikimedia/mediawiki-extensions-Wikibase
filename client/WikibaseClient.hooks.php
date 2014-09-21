@@ -34,6 +34,9 @@ use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\MovePageNotice;
+use Wikibase\Client\RecentChanges\ChangeLineFormatter;
+use Wikibase\Client\RecentChanges\ExternalChangeFactory;
+use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\WikibaseClient;
 
 /**

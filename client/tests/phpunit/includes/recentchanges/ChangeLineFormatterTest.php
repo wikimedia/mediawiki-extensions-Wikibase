@@ -8,12 +8,12 @@ use Language;
 use RecentChange;
 use RequestContext;
 use User;
-use Wikibase\ChangeLineFormatter;
+use Wikibase\Client\RecentChanges\ChangeLineFormatter;
+use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RepoLinker;
-use Wikibase\ExternalChangeFactory;
 
 /**
- * @covers Wikibase\ChangeLineFormatter
+ * @covers Wikibase\Client\RecentChanges\ChangeLineFormatter
  *
  * @group WikibaseClient
  * @group Wikibase

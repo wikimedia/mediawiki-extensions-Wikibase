@@ -1,7 +1,17 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\RecentChanges;
 
+use DatabaseBase;
+use MWException;
+use Title;
+
+/**
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
+ */
 class ExternalRecentChange {
 
 	public $mAttribs = array();
@@ -12,11 +22,11 @@ class ExternalRecentChange {
 	 * @since 0.3
 	 *
 	 * @param array $attribs
-	 * @param \Title $title
+	 * @param Title $title
 	 *
 	 * @return ExternalRecentChange
 	 */
-	public static function newFromAttribs( $attribs, $title ) {
+	public static function newFromAttribs( array $attribs, Title $title ) {
 		$rc = new ExternalRecentChange;
 		$rc->buildAttributes( $attribs, $title );
 		return $rc;
@@ -28,9 +38,9 @@ class ExternalRecentChange {
 	 * @since 0.3
 	 *
 	 * @param array @attribs
-	 * @param \Title $title
+	 * @param Title $title
 	 */
-	private function buildAttributes( $attribs, $title ) {
+	private function buildAttributes( array $attribs, Title $title ) {
 		$metadata = $attribs['wikibase-repo-change'];
 
 		$isBot = false;
@@ -98,15 +108,15 @@ class ExternalRecentChange {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \DatabaseBase $db
+	 * @param DatabaseBase $db
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 *
 	 * @return bool
 	 */
-	public function exists( \DatabaseBase $db = null ) {
+	public function exists( DatabaseBase $db = null ) {
 		if ( ! is_array( $this->mAttribs ) ) {
-			throw new \MWException( 'Recent change attributes are missing.' );
+			throw new MWException( 'Recent change attributes are missing.' );
 		}
 
 		// because this is used before a write operation, to help ensure
