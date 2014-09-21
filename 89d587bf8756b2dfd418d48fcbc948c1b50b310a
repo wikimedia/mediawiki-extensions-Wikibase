@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_83599f03",
+        "filename": "repo/tests/phpunit/includes/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-21T16:35:28Z",
+      "side": 1,
+      "message": ":)",
+      "revId": "89d587bf8756b2dfd418d48fcbc948c1b50b310a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
