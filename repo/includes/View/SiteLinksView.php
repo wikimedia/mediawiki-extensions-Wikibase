@@ -136,7 +136,7 @@ class SiteLinksView {
 		// $siteLinksForTable only has an entry for links to existing sites, this
 		// simple comparison works.
 		$isFull = count( $siteLinksForTable ) >= count( $sites );
-		$tfoot = $this->getTableFootHtml( $itemId, $isFull, $editable );
+		$tfoot = $this->getTableFootHtml( $isFull );
 
 		return $html . wfTemplate( 'wikibase-sitelinkgroupview',
 			// TODO: support entity-id as prefix for element IDs.
@@ -263,18 +263,14 @@ class SiteLinksView {
 	}
 
 	/**
-	 * @param ItemId|null $itemId for the Item
 	 * @param bool $isFull
-	 * @param bool $editable
 	 *
 	 * @return string
 	 */
-	private function getTableFootHtml( $itemId, $isFull, $editable ) {
-		$editSection = $this->getHtmlForEditSection( $itemId, '', 'add', !$isFull && $editable );
-
+	private function getTableFootHtml( $isFull ) {
 		$tfoot = wfTemplate( 'wikibase-sitelinklistview-tfoot',
 			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->parse() : '',
-			$editSection
+			''
 		);
 
 		return $tfoot;

@@ -8,9 +8,6 @@
 	'use strict';
 
 	mw.hook( 'wikipage.content' ).add( function() {
-		// Edit sections are re-generated with JS functionality further below:
-		$( '.wikibase-toolbar-container' ).add( '.wikibase-labelview-toolbar-container' ).remove();
-
 		var $entityview = $( '.wikibase-entityview' );
 
 		if( mw.config.get( 'wbEntity' ) !== null ) {
