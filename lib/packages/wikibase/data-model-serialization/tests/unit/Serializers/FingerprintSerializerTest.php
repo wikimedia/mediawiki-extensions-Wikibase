@@ -12,7 +12,7 @@ use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\DataModel\Serializers\EntitySerializer
+ * @covers Wikibase\DataModel\Serializers\FingerprintSerializer
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
