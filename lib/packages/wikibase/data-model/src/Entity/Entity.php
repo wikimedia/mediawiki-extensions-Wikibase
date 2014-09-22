@@ -8,6 +8,7 @@ use RuntimeException;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\EntityDiffer;
+use Wikibase\DataModel\Entity\Diff\EntityPatcher;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -423,29 +424,13 @@ abstract class Entity implements \Comparable, FingerprintProvider, EntityDocumen
 	 * Apply an EntityDiff to the entity.
 	 *
 	 * @since 0.4
+	 * @deprecated since 1.1 - use EntityPatcher or a more specific patcher
 	 *
 	 * @param EntityDiff $patch
 	 */
 	public final function patch( EntityDiff $patch ) {
-		$patcher = new MapPatcher();
-
-		$this->setLabels( $patcher->patch( $this->getLabels(), $patch->getLabelsDiff() ) );
-		$this->setDescriptions( $patcher->patch( $this->getDescriptions(), $patch->getDescriptionsDiff() ) );
-		$this->setAllAliases( $patcher->patch( $this->getAllAliases(), $patch->getAliasesDiff() ) );
-
-		$this->patchSpecificFields( $patch );
-	}
-
-	/**
-	 * Patch fields specific to the type of entity.
-	 * @see patch
-	 *
-	 * @since 1.0
-	 *
-	 * @param EntityDiff $patch
-	 */
-	protected function patchSpecificFields( EntityDiff $patch ) {
-		// No-op, meant to be overridden in deriving classes to add specific behavior
+		$patcher = new EntityPatcher();
+		$patcher->patchEntity( $this, $patch );
 	}
 
 	/**

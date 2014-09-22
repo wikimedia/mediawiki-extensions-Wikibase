@@ -534,58 +534,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		// (simple serialize does not work, since the order is not relevant, and not only on the top level)
 	}
 
-	public function patchProvider() {
-		$argLists = array();
-
-
-		$source = $this->getNewEmpty();
-		$patch = new EntityDiff();
-		$expected = clone $source;
-
-		$argLists[] = array( $source, $patch, $expected );
-
-
-		$source = $this->getNewEmpty();
-		$source->setLabel( 'en', 'foo' );
-		$source->setLabel( 'nl', 'bar' );
-		$source->setDescription( 'de', 'foobar' );
-		$source->setAliases( 'en', array( 'baz', 'bah' ) );
-
-		$patch = new EntityDiff();
-		$expected = clone $source;
-
-		$argLists[] = array( $source, $patch, $expected );
-
-
-		$source = clone $source;
-
-		$patch = new EntityDiff( array(
-			'description' => new Diff( array(
-				'de' => new DiffOpChange( 'foobar', 'onoez' ),
-				'en' => new DiffOpAdd( 'foobar' ),
-			), true ),
-		) );
-		$expected = clone $source;
-		$expected->setDescription( 'de', 'onoez' );
-		$expected->setDescription( 'en', 'foobar' );
-
-		$argLists[] = array( $source, $patch, $expected );
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider patchProvider
-	 *
-	 * @param Entity $source
-	 * @param EntityDiff $patch
-	 * @param Entity $expected
-	 */
-	public function testPatch( Entity $source, EntityDiff $patch, Entity $expected ) {
-		$source->patch( $patch );
-		$this->assertTrue( $expected->equals( $source ) );
-	}
-
 	/**
 	 * @dataProvider instanceProvider
 	 *
