@@ -18,9 +18,8 @@ use SpecialPageFactory;
 class SectionEditLinkGenerator {
 
 	/**
-	 * Returns a toolbar with an edit link for a single statement. Equivalent to edit toolbar in JavaScript but with
-	 * an edit link pointing to a special page where the statement can be edited. In case JavaScript is available, this
-	 * toolbar will be removed an replaced with the interactive JavaScript one.
+	 * Returns a toolbar with an edit link. In JavaScript, an enhanced toolbar will be initialized
+	 * on top of the generated HTML.
 	 *
 	 * @since 0.2
 	 *
@@ -50,6 +49,40 @@ class SectionEditLinkGenerator {
 				wfTemplate( 'wikibase-toolbar-bracketed',
 					$toolbarButton
 				)
+			)
+		);
+
+		wfProfileOut( __METHOD__ );
+		return $html;
+	}
+
+	/**
+	 * Returns a toolbar with an "add" link. In JavaScript, an enhanced toolbar will be initialized
+	 * on top of the generated HTML.
+	 *
+	 * @since 0.5
+	 *
+	 * @param string|null $specialPageName the special page for the button
+	 * @param string[] $specialPageUrlParams Additional URL params for the special page
+	 * @param Message $message the message to show on the link
+	 * @param bool $enabled can be set to false to display the button disabled
+	 *
+	 * @return string
+	 */
+	public function getHtmlForAddSection(
+		$specialPageName,
+		array $specialPageUrlParams,
+		Message $message,
+		$enabled = true
+	) {
+		wfProfileIn( __METHOD__ );
+
+		$editUrl = $enabled ? $this->getEditUrl( $specialPageName, $specialPageUrlParams ) : null;
+		$toolbarButton = $this->getToolbarButton( $message->text(), $editUrl );
+
+		$html = wfTemplate( 'wikibase-toolbar-container',
+			wfTemplate( 'wikibase-toolbar-bracketed',
+				$toolbarButton
 			)
 		);
 
