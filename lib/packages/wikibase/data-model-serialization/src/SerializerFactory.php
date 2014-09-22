@@ -14,6 +14,7 @@ use Wikibase\DataModel\Serializers\ReferencesSerializer;
 use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Serializers\SnaksSerializer;
+use InvalidArgumentException;
 
 /**
  * Factory for constructing Serializer objects that can serialize WikibaseDataModel objects.
@@ -25,6 +26,15 @@ use Wikibase\DataModel\Serializers\SnaksSerializer;
  */
 class SerializerFactory {
 
+	const OPTION_DEFAULT = 0;
+	const OPTION_OBJECTS_FOR_MAPS = 1;
+	const OPTION_MAXIMUM_VALUE = 1;
+
+	/**
+	 * @var integer $options
+	 */
+	private $options = 0;
+
 	/**
 	 * @var Serializer
 	 */
@@ -32,9 +42,21 @@ class SerializerFactory {
 
 	/**
 	 * @param Serializer $dataValueSerializer serializer for DataValue objects
+	 * @param integer $options set multiple with bitwise or
 	 */
-	public function __construct( Serializer $dataValueSerializer ) {
+	public function __construct( Serializer $dataValueSerializer, $options = 0 ) {
 		$this->dataValueSerializer = $dataValueSerializer;
+		if ( $options > self::OPTION_MAXIMUM_VALUE ) {
+			throw new InvalidArgumentException('The value of argument 2 $options must be less than 1.');
+		}
+		$this->options = $options;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function shouldUseObjectsForMaps() {
+		return (bool)( $this->options & self::OPTION_OBJECTS_FOR_MAPS );
 	}
 
 	/**
@@ -43,9 +65,9 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newEntitySerializer() {
-		$fingerprintSerializer = new FingerprintSerializer();
+		$fingerprintSerializer = new FingerprintSerializer( $this->shouldUseObjectsForMaps() );
 		return new DispatchingSerializer( array(
-			new ItemSerializer( $fingerprintSerializer, $this->newClaimsSerializer(), $this->newSiteLinkSerializer() ),
+			new ItemSerializer( $fingerprintSerializer, $this->newClaimsSerializer(), $this->newSiteLinkSerializer(), $this->shouldUseObjectsForMaps() ),
 			new PropertySerializer( $fingerprintSerializer, $this->newClaimsSerializer() ),
 		) );
 	}
@@ -65,7 +87,7 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newClaimsSerializer() {
-		return new ClaimsSerializer( $this->newClaimSerializer() );
+		return new ClaimsSerializer( $this->newClaimSerializer(), $this->shouldUseObjectsForMaps() );
 	}
 
 	/**
@@ -101,7 +123,7 @@ class SerializerFactory {
 	 * @return Serializer
 	 */
 	public function newSnaksSerializer() {
-		return new SnaksSerializer( $this->newSnakSerializer() );
+		return new SnaksSerializer( $this->newSnakSerializer(), $this->shouldUseObjectsForMaps() );
 	}
 
 	/**

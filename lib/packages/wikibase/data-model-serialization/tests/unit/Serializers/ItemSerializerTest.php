@@ -10,6 +10,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Serializers\FingerprintSerializer;
 use Wikibase\DataModel\SiteLink;
+use stdClass;
 
 /**
  * @covers Wikibase\DataModel\Serializers\ItemSerializer
@@ -53,9 +54,9 @@ class ItemSerializerTest extends SerializerBaseTest {
 				'badges' => array()
 			) ) );
 
-		$fingerprintSerializer = new FingerprintSerializer();
+		$fingerprintSerializer = new FingerprintSerializer( false );
 
-		return new ItemSerializer( $fingerprintSerializer, $claimsSerializerMock, $siteLinkSerializerMock );
+		return new ItemSerializer( $fingerprintSerializer, $claimsSerializerMock, $siteLinkSerializerMock, false );
 	}
 
 	public function serializableProvider() {
@@ -141,6 +142,47 @@ class ItemSerializerTest extends SerializerBaseTest {
 		);
 
 		return $provider;
+	}
+
+	public function testItemSerializerWithOptionObjectsForMaps() {
+		$claimsSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$claimsSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->with( $this->equalTo( new Claims() ) )
+			->will( $this->returnValue( array() ) );
+
+		$siteLinkSerializerMock = $this->getMock( '\Serializers\Serializer' );
+		$siteLinkSerializerMock->expects( $this->any() )
+			->method( 'serialize' )
+			->with( $this->equalTo( new SiteLink( 'enwiki', 'Nyan Cat' ) ) )
+			->will( $this->returnValue( array(
+				'site' => 'enwiki',
+				'title' => 'Nyan Cat',
+				'badges' => array()
+			) ) );
+
+		$fingerprintSerializer = new FingerprintSerializer( false );
+
+		$serializer = new ItemSerializer( $fingerprintSerializer, $claimsSerializerMock, $siteLinkSerializerMock, true );
+
+		$item = Item::newEmpty();
+		$item->addSiteLink( new SiteLink( 'enwiki', 'Nyan Cat' ) );
+
+		$sitelinks = new stdClass();
+		$sitelinks->enwiki = array(
+			'site' => 'enwiki',
+			'title' => 'Nyan Cat',
+			'badges' => array(),
+		);
+		$serial = array(
+			'type' => 'item',
+			'labels' => array(),
+			'descriptions' => array(),
+			'aliases' => array(),
+			'claims' => array(),
+			'sitelinks' => $sitelinks,
+		);
+		$this->assertEquals( $serial, $serializer->serialize( $item ) );
 	}
 
 }
