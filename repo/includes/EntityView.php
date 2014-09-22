@@ -8,6 +8,7 @@ use Language;
 use Wikibase\Repo\View\ClaimsView;
 use Wikibase\Repo\View\FingerprintView;
 use Wikibase\Repo\View\TextInjector;
+use Wikibase\Repo\View\EntityViewPlaceholderExpander;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\View;
 
 use InvalidArgumentException;
 use Language;
@@ -8,10 +8,11 @@ use MWException;
 use RuntimeException;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\View\TermBoxView;
+use Wikibase\UserLanguageLookup;
 
 /**
  * Utility for expanding the placeholders left in the HTML by EntityView.
