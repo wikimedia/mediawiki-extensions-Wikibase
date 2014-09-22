@@ -155,7 +155,7 @@ class FingerprintView {
 				'',
 				wfMessage( 'wikibase-aliases-label' )->escaped(),
 				$aliasesHtml,
-				'<div>' . $editSection . '</div>'
+				$editSection
 			);
 		} else {
 			return wfTemplate( 'wikibase-aliasesview',
