@@ -124,7 +124,7 @@ class SectionEditLinkGenerator {
 			);
 		} else {
 			return wfTemplate( 'wikibase-toolbar-button',
-				'ui-state-disabled',
+				'wikibase-toolbarbutton-disabled ui-state-disabled',
 				'#',
 				$buttonLabel
 			);
