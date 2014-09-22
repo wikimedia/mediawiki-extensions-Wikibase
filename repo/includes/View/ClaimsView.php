@@ -208,7 +208,7 @@ class ClaimsView {
 		}
 
 		$toolbarHtml = wfTemplate( 'wikibase-toolbar-wrapper',
-			$this->sectionEditLinkGenerator->getHtmlForEditSection(
+			$this->sectionEditLinkGenerator->getHtmlForAddSection(
 				'',
 				array(),
 				wfMessage( 'wikibase-add' )
