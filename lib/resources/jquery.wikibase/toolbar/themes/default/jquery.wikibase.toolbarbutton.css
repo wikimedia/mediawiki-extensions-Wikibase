@@ -3,18 +3,18 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-.wikibase-toolbarbutton.ui-state-disabled a {
+.wikibase-toolbarbutton-disabled a {
 	cursor: default;
 }
 
-.wikibase-toolbarbutton.ui-state-disabled a:link,
-.wikibase-toolbarbutton.ui-state-disabled a:hover,
-.wikibase-toolbarbutton.ui-state-disabled a:active,
-.wikibase-toolbarbutton.ui-state-disabled a:visited {
+.wikibase-toolbarbutton-disabled a:link,
+.wikibase-toolbarbutton-disabled a:hover,
+.wikibase-toolbarbutton-disabled a:active,
+.wikibase-toolbarbutton-disabled a:visited {
 	color: grey;
 	text-decoration: none;
 }
 
-.wikibase-toolbarbutton.ui-state-disabled .ui-icon {
+.wikibase-toolbarbutton-disabled .ui-icon {
 	background-image: url(../../../../../../../../resources/lib/jquery.ui/themes/smoothness/images/ui-icons_888888_256x240.png);
 }
