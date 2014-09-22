@@ -13,8 +13,6 @@ interface PropertyDataTypeLookup {
 	/**
 	 * Returns the data type for the Property of which the id is given.
 	 *
-	 * @since 0.4
-	 *
 	 * @param PropertyId $propertyId
 	 *
 	 * @return string
