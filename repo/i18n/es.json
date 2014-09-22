@@ -170,6 +170,7 @@
 	"wikibase-mergeitems-submit": "Combinar elementos",
 	"wikibase-itemmerge-missing-parameter": "Entrada incompleta.",
 	"wikibase-itemmerge-not-item": "La entidad especificada no es un elemento.",
+	"wikibase-itemmerge-failed-save": "No se pudo guardar el elemento.",
 	"wikibase-itemmerge-permissiondenied": "Permiso denegado.",
 	"wikibase-itemmerge-no-such-entity": "No se encontró el elemento.",
 	"wikibase-itemmerge-cant-load-entity-content": "Error al cargar el elemento.",

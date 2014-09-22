@@ -341,6 +341,7 @@ $specialPageAliases['vi'] = array(
 	'NewItem' => array( 'Tạo_khoản_mục' ),
 	'NewProperty' => array( 'Thuộc_tính_mới' ),
 	'ItemByTitle' => array( 'Khoản_mục_theo_tên' ),
+	'GoToLinkedPage' => array( 'Đi_đến_trang_liên_kết' ),
 	'ItemDisambiguation' => array( 'Định_hướng_khoản_mục' ),
 	'ListDatatypes' => array( 'Danh_sách_kiểu_dữ_liệu' ),
 	'SetLabel' => array( 'Đặt_nhãn' ),
