@@ -23,6 +23,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel',
+				'wikibase.RepoApi',
 				'wikibase.serialization.entities',
 			),
 		),
