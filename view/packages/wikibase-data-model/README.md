@@ -20,9 +20,11 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Item.getSiteLinks() returns a SiteLinkList object instead of an array of SiteLink objects.
 * Renamed Property.getDataType() to Property.getDataTypeId().
 * Removed all toJSON(), newFromJSON(), toMap() and newFromMap() functions; Use serializers and unserializers of wikibase.serialization instead.
+* Statement does not accept a plain array of references anymore; Supply a ReferenceList instead.
 
 #### Enhancements
 * Added Fingerprint.
+* Added ReferenceList.
 * Added SiteLinkList.
 * Added StatementList.
 * Added Term.

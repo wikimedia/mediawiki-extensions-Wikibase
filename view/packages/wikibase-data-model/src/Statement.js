@@ -8,7 +8,7 @@
 var PARENT = wb.datamodel.Claim,
 	constructor = function( mainSnak, qualifiers, references, rank, guid ) {
 		PARENT.call( this, mainSnak, qualifiers, guid );
-		this.setReferences( references || [] );
+		this.setReferences( references || new wb.datamodel.ReferenceList() );
 		this.setRank( rank === undefined ? wb.datamodel.Statement.RANK.NORMAL : rank );
 	};
 
@@ -20,15 +20,14 @@ var PARENT = wb.datamodel.Claim,
  *
  * @param {wb.datamodel.Snak} mainSnak
  * @param {wb.datamodel.Snak[]} [qualifiers]
- * @param {wb.datamodel.Reference[]} [references] An array of references or an empty array
+ * @param {wikibase.datamodel.ReferenceList} [references]
  * @param {Number} [rank]
  * @param {String|null} [guid] The Global Unique Identifier of this Statement. Can be omitted or null
  *        if this is a new Statement, not yet stored in the database and associated with some entity.
  */
 var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
 	/**
-	 * @type {wb.datamodel.Reference[]}
-	 * @todo think about implementing a ReferenceList/ClaimList rather than having an Array here
+	 * @type {wikibase.datamodel.ReferenceList}
 	 */
 	_references: null,
 
@@ -39,23 +38,18 @@ var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constru
 	_rank: null,
 
 	/**
-	 * Returns all of the statement's references.
-	 *
-	 * sufficient
-	 * @return {wb.datamodel.Reference[]|null} An array of references or an empty array.
+	 * @return {wikibase.datamodel.ReferenceList}
 	 */
 	getReferences: function() {
 		return this._references;
 	},
 
 	/**
-	 * Overwrites the current set of the statements references.
-	 *
-	 * @param {wb.datamodel.Reference[]} references An array of references or an empty array.
+	 * @param {wikibase.datamodel.ReferenceList} references
 	 */
 	setReferences: function( references ) {
-		if( !$.isArray( references ) ) {
-			throw new Error( 'References have to be an array' );
+		if( !( references instanceof wb.datamodel.ReferenceList ) ) {
+			throw new Error( 'References have to be supplied in a ReferenceList' );
 		}
 		this._references = references;
 	},
@@ -89,33 +83,14 @@ var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constru
 	 * Returns whether this statement is equal to another statement.
 	 * @see wb.datamodel.Claim.equals
 	 *
-	 * @param {wb.datamodel.Statement|*} other
+	 * @param {*} other
 	 * @return {boolean}
 	 */
 	equals: function( other ) {
-		if(
-			!PARENT.prototype.equals.call( this, other )
-			|| this._references.length !== other.getReferences().length
-			|| this._rank !== other.getRank()
-		) {
-			return false;
-		}
-
-		// Check whether references are equal:
-		var ownRefs = this._references,
-			otherRefs = other.getReferences();
-
-		checkOwnRefs: for( var i in ownRefs ) {
-			var ownRef = ownRefs[i];
-
-			for( var j in otherRefs ) {
-				if( ownRef.equals( otherRefs[j] ) ) {
-					continue checkOwnRefs;
-				}
-			}
-			return false;
-		}
-		return true;
+		return other instanceof SELF
+			&& PARENT.prototype.equals.call( this, other )
+			&& this._references.equals( other.getReferences() )
+			&& this._rank === other.getRank();
 	}
 } );
 

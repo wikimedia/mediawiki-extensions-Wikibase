@@ -72,24 +72,26 @@
 						new wb.datamodel.PropertySomeValueSnak( 'P9001' )
 					]
 				),
-				[
-					new wb.datamodel.Reference(
-						new wb.datamodel.SnakList(
-							[
-								new wb.datamodel.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
-								new wb.datamodel.PropertySomeValueSnak( 'P245' )
-							]
+				new wb.datamodel.ReferenceList(
+					[
+						new wb.datamodel.Reference(
+							new wb.datamodel.SnakList(
+								[
+									new wb.datamodel.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
+									new wb.datamodel.PropertySomeValueSnak( 'P245' )
+								]
+							)
+						),
+						new wb.datamodel.Reference(
+							new wb.datamodel.SnakList(
+								[
+									new wb.datamodel.PropertyValueSnak( 'P856', new dv.StringValue( 'another string' ) ),
+									new wb.datamodel.PropertySomeValueSnak( 'P97' )
+								]
+							)
 						)
-					),
-					new wb.datamodel.Reference(
-						new wb.datamodel.SnakList(
-							[
-								new wb.datamodel.PropertyValueSnak( 'P856', new dv.StringValue( 'another string' ) ),
-								new wb.datamodel.PropertySomeValueSnak( 'P97' )
-							]
-						)
-					)
-				],
+					]
+				),
 				wb.datamodel.Statement.RANK.PREFERRED
 			),
 			new wb.datamodel.Statement( new wb.datamodel.PropertyValueSnak( 'P41', new dv.StringValue( 'string' ) ) ),
@@ -110,31 +112,33 @@
 						new wb.datamodel.PropertySomeValueSnak( 'P9001' )
 					]
 				),
-				[
-					new wb.datamodel.Reference(
-						new wb.datamodel.SnakList(
-							[
-								new wb.datamodel.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
-								new wb.datamodel.PropertySomeValueSnak( 'P245' )
-							]
+				new wb.datamodel.ReferenceList(
+					[
+						new wb.datamodel.Reference(
+							new wb.datamodel.SnakList(
+								[
+									new wb.datamodel.PropertyValueSnak( 'P3', new dv.StringValue( 'string' ) ),
+									new wb.datamodel.PropertySomeValueSnak( 'P245' )
+								]
+							)
+						),
+						new wb.datamodel.Reference(
+							new wb.datamodel.SnakList(
+								[
+									new wb.datamodel.PropertyValueSnak( 'P123', new dv.StringValue( 'another string' ) ),
+									new wb.datamodel.PropertySomeValueSnak( 'P97' )
+								]
+							)
 						)
-					),
-					new wb.datamodel.Reference(
-						new wb.datamodel.SnakList(
-							[
-								new wb.datamodel.PropertyValueSnak( 'P123', new dv.StringValue( 'another string' ) ),
-								new wb.datamodel.PropertySomeValueSnak( 'P97' )
-							]
-						)
-					)
-				],
+					]
+				),
 				wb.datamodel.Statement.RANK.PREFERRED
 			)
 		];
 
 		// Compare statements:
 		$.each( statements, function( i, statement ) {
-			var clonedStatement = wb.datamodel.Statement(
+			var clonedStatement = new wb.datamodel.Statement(
 					statement.getMainSnak(),
 					statement.getQualifiers(),
 					statement.getReferences(),
