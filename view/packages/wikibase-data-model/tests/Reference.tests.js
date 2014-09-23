@@ -4,7 +4,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( wb, dv, $, QUnit ) {
+( function( wb, $, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.datamodel.Reference' );
@@ -32,19 +32,27 @@
 				'Retrieved Snaks passed to the constructor.'
 			);
 		} );
+
+		assert.throws(
+			function() {
+				return new wb.datamodel.Reference( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] );
+			},
+			'Throwing an error when trying to instantiate a Reference with a plain array of Snak '
+			+ 'objects.'
+		);
 	} );
 
 	QUnit.test( 'getHash()', function( assert ) {
 		var hash = 'hash12390213';
 
 		assert.equal(
-			( new wb.datamodel.Reference( [], hash ) ).getHash(),
+			( new wb.datamodel.Reference( null, hash ) ).getHash(),
 			hash,
 			'Reference\'s hash from constructor returned in getHash()'
 		);
 
 		assert.equal(
-			( new wb.datamodel.Reference( [] ) ).getHash(),
+			( new wb.datamodel.Reference() ).getHash(),
 			null,
 			'Reference without initial hash will return null in getHash()'
 		);
@@ -94,4 +102,4 @@
 
 	} );
 
-}( wikibase, dataValues, jQuery, QUnit ) );
+}( wikibase, jQuery, QUnit ) );

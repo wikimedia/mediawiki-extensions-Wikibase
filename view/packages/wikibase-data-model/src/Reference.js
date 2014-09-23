@@ -14,11 +14,17 @@
 	 * @constructor
 	 * @since 0.3
 	 *
-	 * @param {wikibase.datamodel.SnakList} [snaks]
+	 * @param {wikibase.datamodel.SnakList|null} [snaks]
 	 * @param {string} [hash] Omit, if the Reference object should represent a new reference.
 	 */
 	var SELF = wb.datamodel.Reference = function WbReference( snaks, hash ) {
-		this._snaks = new wb.datamodel.SnakList( snaks );
+		snaks = snaks || new wb.datamodel.SnakList();
+
+		if( !( snaks instanceof wb.datamodel.SnakList ) ) {
+			throw new Error( 'Snak objects need to be supplied as a SnakList' );
+		}
+
+		this._snaks = snaks;
 		this._hash = hash;
 	};
 
