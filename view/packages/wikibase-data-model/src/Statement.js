@@ -19,8 +19,8 @@ var PARENT = wb.datamodel.Claim,
  * @since 0.3
  *
  * @param {wb.datamodel.Snak} mainSnak
- * @param {wb.datamodel.Snak[]} [qualifiers]
- * @param {wikibase.datamodel.ReferenceList} [references]
+ * @param {wikibase.datamodel.SnakList|null} [qualifiers]
+ * @param {wikibase.datamodel.ReferenceList|null} [references]
  * @param {Number} [rank]
  * @param {String|null} [guid] The Global Unique Identifier of this Statement. Can be omitted or null
  *        if this is a new Statement, not yet stored in the database and associated with some entity.

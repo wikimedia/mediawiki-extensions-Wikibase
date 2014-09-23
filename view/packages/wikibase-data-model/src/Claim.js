@@ -11,7 +11,7 @@
  * @since 0.3
  *
  * @param {wb.datamodel.Snak} mainSnak
- * @param {wb.datamodel.SnakList|null} [qualifiers]
+ * @param {wikibase.datamodel.SnakList|null} [qualifiers]
  * @param {String|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
  *        if this is a new Claim, not yet stored in the database and associated with some entity.
  */
@@ -75,9 +75,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns all qualifiers as a wb.datamodel.SnakList object.
-	 *
-	 * @return wb.datamodel.SnakList
+	 * @return {wikibase.datamodel.SnakList}
 	 */
 	getQualifiers: function( propertyId ) {
 		if( !propertyId ) {
@@ -96,9 +94,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Overwrites the current set of qualifiers.
-	 *
-	 * @param {wb.datamodel.SnakList} qualifiers
+	 * @param {wikibase.datamodel.SnakList} qualifiers
 	 */
 	setQualifiers: function( qualifiers ) {
 		if( !( qualifiers instanceof wb.datamodel.SnakList ) ) {
