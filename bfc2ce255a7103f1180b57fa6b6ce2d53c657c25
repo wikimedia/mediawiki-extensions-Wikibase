@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_74c3fa3d",
+        "filename": "lib/resources/wikibase.store/store.ApiEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-23T08:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_dca8a476",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_3cb100dd",
         "filename": "lib/resources/wikibase.store/store.ApiEntityStore.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-19T16:14:26Z",
       "side": 1,
       "message": "I guess no one will notice the error then. Btw, would be nice, if wb.RepoApi would return proper wb.RepoApiError objects that could be evaluated/propagated.",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_14da7e21",
+        "filename": "lib/resources/wikibase.store/store.ApiEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-23T08:50:03Z",
+      "side": 1,
+      "message": "Yeah, returning RepoApiErrors from the API instead of having to wrap the errors on the client-side would be a great thing :)\n\nAlso, right now the CombiningEntityStore swallows the rejections. I\u0027m not sure how to handle this, since our EntityStore clients don\u0027t handle errors at all.",
+      "parentUuid": "ee62ffec_3cb100dd",
       "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_74f1ba91",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-23T08:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_bcbcd0b2",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_1ccd1c63",
         "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_34eb42a2",
+        "filename": "lib/resources/wikibase.store/store.CombiningEntityStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-23T08:50:03Z",
+      "side": 1,
+      "message": "Rejects when all the passed stores reject. Rejects with nothing.",
+      "parentUuid": "ee62ffec_1ccd1c63",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_9c16acab",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2014-09-19T16:14:26Z",
       "side": 1,
       "message": "Function name says it, but please document the parameter and return value.",
+      "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_b43e1225",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-23T08:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_9c16acab",
       "revId": "bfc2ce255a7103f1180b57fa6b6ce2d53c657c25",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
