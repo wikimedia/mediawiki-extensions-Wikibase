@@ -2,10 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\RevisionData;
+use Wikibase\Client\RecentChanges\RevisionData;
 
 /**
- * @covers Wikibase\RevisionData
+ * @covers Wikibase\Client\RecentChanges\RevisionData
  *
  * @group WikibaseClient
  * @group Wikibase
