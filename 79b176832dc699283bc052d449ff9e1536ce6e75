@@ -16,6 +16,24 @@
       "revId": "79b176832dc699283bc052d449ff9e1536ce6e75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_14bf1ecf",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.AbstractedRepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-23T07:52:51Z",
+      "side": 0,
+      "message": "It\u0027s not used on Wikidata: https://www.wikidata.org/w/index.php?title\u003dSpecial:Search\u0026profile\u003dall\u0026search\u003d\"removeClaim\" There are a lot of own removeClaim implementations, though, but they should rather be in RepoApi, if at all.",
+      "parentUuid": "ee62ffec_773d528a",
+      "revId": "79b176832dc699283bc052d449ff9e1536ce6e75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
