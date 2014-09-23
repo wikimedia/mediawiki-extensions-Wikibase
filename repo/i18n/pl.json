@@ -36,7 +36,7 @@
 	"wikibase-alias-edit-placeholder": "podaj alternatywną nazwę",
 	"wikibase-label-input-help-message": "Podaj etykietę tej encji w języku: $1.",
 	"wikibase-description-input-help-message": "Podaj krótki opis tej encji w języku: $1.",
-	"wikibase-fingerprintview-input-help-message": "Wpisz etykietę tej encji i jej krótki opis w $1.",
+	"wikibase-fingerprintview-input-help-message": "Wpisz etykietę tej encji, krótki opis i aliasy w $1.",
 	"wikibase-claims": "Stwierdzenia",
 	"wikibase-statements": "Deklaracje",
 	"wikibase-attributes": "Atrybuty",

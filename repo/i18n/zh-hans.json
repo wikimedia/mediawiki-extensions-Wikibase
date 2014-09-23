@@ -173,7 +173,7 @@
 	"special-setsitelink": "设置网站链接",
 	"wikibase-setsitelink-introfull": "您正在设置[[$1]]的$2网站链接。",
 	"wikibase-setsitelink-intro": "该表格允许您设置项的网站链接。您需要提供项的ID（如Q23）、网站ID（如“zhwiki”）和要设置的网站链接。",
-	"wikibase-setsitelink-intro-badges": "另外您可以对下方列出的此站点链接设置各种徽章。",
+	"wikibase-setsitelink-intro-badges": "另外您可以对下面列出的该网站链接设置各种徽章。",
 	"wikibase-setsitelink-site": "网站ID：",
 	"wikibase-setsitelink-label": "网站链接：",
 	"wikibase-setsitelink-badges": "星章：",
