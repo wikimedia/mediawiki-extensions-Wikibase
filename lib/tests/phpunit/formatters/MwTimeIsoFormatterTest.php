@@ -75,6 +75,64 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'12342222013',
 			),
 
+			// Rounding for decades is different from rounding for centuries
+			array(
+				'+1982-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'1980s',
+			),
+			array(
+				'+1988-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'1980s',
+			),
+			array(
+				'-1982-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'1980s BCE',
+			),
+			array(
+				'-1988-01-01T01:01:01Z', TimeValue::PRECISION_10a,
+				'1980s BCE',
+			),
+
+			array(
+				'+1822-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'19. century',
+			),
+			array(
+				'+1822-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'19. century',
+			),
+			array(
+				'-1888-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'19. century BCE',
+			),
+			array(
+				'-1888-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'19. century BCE',
+			),
+
+			array(
+				'+1222-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'2. millennium',
+			),
+			array(
+				'+1888-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'2. millennium',
+			),
+			array(
+				'-1222-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'2. millennium BCE',
+			),
+
+			// So what about the "Millenium Disagreement"?
+			array(
+				'+1600-01-01T01:01:01Z', TimeValue::PRECISION_100a,
+				'16. century',
+			),
+			array(
+				'+2000-01-01T01:01:01Z', TimeValue::PRECISION_ka,
+				'2. millennium',
+			),
+
 			// Positive dates, stepping through precisions
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_10a,
@@ -82,11 +140,11 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'+12345678919-01-01T01:01:01Z', TimeValue::PRECISION_10a,
-				'12345678920s',
+				'12345678910s',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100a,
-				'123456789. century',
+				'123456790. century',
 			),
 			array(
 				'+12345678992-01-01T01:01:01Z', TimeValue::PRECISION_100a,
@@ -94,7 +152,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'+12345678112-01-01T01:01:01Z', TimeValue::PRECISION_ka,
-				'12345678. millennium',
+				'12345679. millennium',
 			),
 			array(
 				'+12345678912-01-01T01:01:01Z', TimeValue::PRECISION_ka,
@@ -198,11 +256,11 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'-12345678919-01-01T01:01:01Z', TimeValue::PRECISION_10a,
-				'12345678920s BCE',
+				'12345678910s BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_100a,
-				'123456789. century BCE',
+				'123456790. century BCE',
 			),
 			array(
 				'-12345678992-01-01T01:01:01Z', TimeValue::PRECISION_100a,
@@ -210,7 +268,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'-12345678112-01-01T01:01:01Z', TimeValue::PRECISION_ka,
-				'12345678. millennium BCE',
+				'12345679. millennium BCE',
 			),
 			array(
 				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_ka,
@@ -316,6 +374,20 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 				'0',
 			),
 
+			// centuries and millenia start with 1, so we can format "low" years just fine
+			array(
+				'+100-00-00T00:00:06Z', TimeValue::PRECISION_ka,
+				'1. millennium'
+			),
+			array(
+				'-100-00-00T00:00:06Z', TimeValue::PRECISION_ka,
+				'1. millennium BCE'
+			),
+			array(
+				'+10-00-00T00:00:07Z', TimeValue::PRECISION_100a,
+				'1. century'
+			),
+
 			// Integer overflows should not happen
 			array(
 				'+2147483648-00-00T00:00:00Z', TimeValue::PRECISION_YEAR,
@@ -350,12 +422,6 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 			),
 			array(
 				'+1000-00-00T00:00:05Z', TimeValue::PRECISION_10ka,
-			),
-			array(
-				'+100-00-00T00:00:06Z', TimeValue::PRECISION_ka,
-			),
-			array(
-				'+10-00-00T00:00:07Z', TimeValue::PRECISION_100a,
 			),
 			array(
 				'+1-00-00T00:00:08Z', TimeValue::PRECISION_10a,
@@ -434,7 +500,7 @@ class MwTimeIsoFormatterTest extends \MediaWikiTestCase {
 		$formatter = new MwTimeIsoFormatter( $options );
 		$actual = $formatter->format( $timeValue );
 
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $expected, $actual, 'Testing ' . $timeValue->getTime() . ', precision ' . $timeValue->getPrecision()  );
 		if ( $roundtrip ) {
 			$this->assertCanRoundTrip( $actual, $timeValue, $languageCode );
 		}
