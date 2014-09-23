@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\Lib\Serializers\SnakSerializer;
 
 /**
@@ -35,7 +35,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 	 * @return SnakSerializer
 	 */
 	protected function getInstance() {
-		$dataTypeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( array( $this, 'getDataTypeIdForProperty' ) ) );

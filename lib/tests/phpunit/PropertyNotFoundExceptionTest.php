@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Test;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 
 /**
  * @covers Wikibase\Lib\PropertyNotFoundException

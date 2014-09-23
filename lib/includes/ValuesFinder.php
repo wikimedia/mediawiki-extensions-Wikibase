@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 
 /**
  * Find all data values for a specified data type in an array of snaks.

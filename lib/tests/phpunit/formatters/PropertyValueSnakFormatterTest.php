@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\DispatchingValueFormatter;
-use Wikibase\Lib\PropertyDataTypeLookup;
-use Wikibase\Lib\PropertyNotFoundException;
+use Wikibase\DataModel\Entity\PropertyDataTypeLookup;
+use Wikibase\DataModel\Entity\PropertyNotFoundException;
 use Wikibase\Lib\PropertyValueSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\UnDeserializableValueFormatter;
@@ -64,7 +64,7 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 				new PropertyNotFoundException( new PropertyId( 'P666' ) ) );
 		}
 
-		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->atLeastOnce() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $getDataTypeIdForPropertyResult );
@@ -257,13 +257,13 @@ class PropertyValueSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 				$formatters,
 				PropertyValueSnakFormatter::ON_ERROR_FAIL,
 				null,
-				'Wikibase\Lib\PropertyNotFoundException'
+				'Wikibase\DataModel\Entity\PropertyNotFoundException'
 			),
 		);
 	}
 
 	private function getDummyPropertyValueSnakFormatter( $format = 'test' ) {
-		$typeLookup = $this->getMock( 'Wikibase\Lib\PropertyDataTypeLookup' );
+		$typeLookup = $this->getMock( 'Wikibase\DataModel\Entity\PropertyDataTypeLookup' );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
 		$typeFactory = $this->getMock( 'DataTypes\DataTypeFactory' );
