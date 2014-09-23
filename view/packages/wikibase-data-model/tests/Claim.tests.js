@@ -1,141 +1,142 @@
 /**
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-
 ( function( wb, dv, $, QUnit ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.datamodel.Claim' );
+QUnit.module( 'wikibase.datamodel.Claim' );
 
-	QUnit.test( 'constructor', function( assert ) {
-		var argumentLists = [
-			{
-				mainSnak: new wb.datamodel.PropertyNoValueSnak( 'p42' ),
-				qualifiers: new wb.datamodel.SnakList()
-			}, {
-				mainSnak: new wb.datamodel.PropertySomeValueSnak( 'p9001' ),
-				qualifiers: new wb.datamodel.SnakList()
-			}, {
-				mainSnak: new wb.datamodel.PropertyValueSnak( 'p23', new dv.StringValue( '~=[,,_,,]:3' ) ),
-				qualifiers: new wb.datamodel.SnakList()
-			}
-		];
+QUnit.test( 'Constructor', function( assert ) {
+	var argumentLists = [
+		{
+			mainSnak: new wb.datamodel.PropertyNoValueSnak( 'p1' )
+		}, {
+			mainSnak: new wb.datamodel.PropertySomeValueSnak( 'p2' ),
+			qualifiers: new wb.datamodel.SnakList( [
+				new wb.datamodel.PropertyNoValueSnak( 'p10' ),
+				new wb.datamodel.PropertySomeValueSnak( 'p10' ),
+				new wb.datamodel.PropertyNoValueSnak( 'p11' )
+			] ),
+			guid: 'i am a guid'
+		}
+	];
 
-		$.each( argumentLists, function( i, constructorArguments ) {
-			var claim = new wb.datamodel.Claim(
-				constructorArguments.mainSnak,
-				constructorArguments.qualifiers
-			);
-
-			assert.ok(
-				claim.getMainSnak().equals( constructorArguments.mainSnak ),
-				'Main snak is set correctly'
-			);
-
-			assert.strictEqual(
-				claim.getMainSnak().TYPE,
-				constructorArguments.mainSnak.TYPE,
-				'Main snak type is correct'
-			);
-
-			// TODO: test qualifiers
-		} );
-
-	} );
-
-	QUnit.test( 'setMainSnak and getMainSnak', function( assert ) {
-		var claim = new wb.datamodel.Claim(
-				new wb.datamodel.PropertyNoValueSnak( 'p42' ),
-				new wb.datamodel.SnakList()
-			),
-			snaks = [
-				new wb.datamodel.PropertyNoValueSnak( 'p9001' ),
-				new wb.datamodel.PropertySomeValueSnak( 'p42' ),
-				new wb.datamodel.PropertyValueSnak( 'p23', new dv.StringValue( '~=[,,_,,]:3' ) )
-			];
-
-		$.each( snaks, function( i, snak ) {
-			claim.setMainSnak( snak );
-
-			assert.ok(
-				claim.getMainSnak().equals( snak ),
-				'Main snak is set correctly'
-			);
-
-			assert.strictEqual(
-				claim.getMainSnak().TYPE,
-				snak.TYPE,
-				'Main snak type is correct'
-			);
-		} );
-	} );
-
-	QUnit.test( 'equals()', function( assert ) {
-		var claims = [
-			new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
-			new wb.datamodel.Claim(
-				new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ),
-				new wb.datamodel.SnakList(
-					[
-						new wb.datamodel.PropertyValueSnak( 'p2', new dv.StringValue( 'some string' ) ),
-						new wb.datamodel.PropertySomeValueSnak( 'p9001' )
-					]
-				)
-			),
-			new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'other string' ) ) ),
-			new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'p9001' ) ),
-			new wb.datamodel.Claim(
-				new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ),
-				new wb.datamodel.SnakList(
-					[
-						new wb.datamodel.PropertyValueSnak( 'p43', new dv.StringValue( 'some string' ) ),
-						new wb.datamodel.PropertySomeValueSnak( 'p9001' )
-					]
-				)
-			)
-		];
-
-		// Compare claims:
-		$.each( claims, function( i, claim ) {
-			var clonedClaim = new wb.datamodel.Claim(
-				claim.getMainSnak(),
-				claim.getQualifiers(),
-				claim.getGuid()
-			);
-
-			// Check if "cloned" claim is equal:
-			assert.ok(
-				claim.equals( clonedClaim ),
-				'Verified claim "' + i + '" on equality.'
-			);
-
-			// Compare to all other claims:
-			$.each( claims, function( j, otherClaim ) {
-				if ( j !== i ) {
-					assert.ok(
-						!claim.equals( otherClaim ),
-						'Claim "' + i + '" is not equal to claim "'+ j + '".'
-					);
-				}
-			} );
-
-		} );
-
-		// Compare claim to statement:
-		var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
-			statement = new wb.datamodel.Statement(
-				new wb.datamodel.Claim(
-					new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) )
-				)
-			);
+	$.each( argumentLists, function( i, args ) {
+		var claim = new wb.datamodel.Claim( args.mainSnak, args.qualifiers, args.guid );
 
 		assert.ok(
-			!claim.equals( statement ),
-			'Claim does not equals statement that received nothing but the same claim parameters.'
+			claim.getMainSnak().equals( args.mainSnak ),
+			'Main snak is set correctly.'
 		);
 
+		assert.ok(
+			claim.getQualifiers().equals( args.qualifiers || new wb.datamodel.SnakList() ),
+			'Qualifiers are set correctly.'
+		);
+
+		assert.ok(
+			claim.getGuid() === ( args.guid || null ),
+			'GUID is set correctly.'
+		);
 	} );
+
+	assert.throws(
+		function() {
+			return new wb.datamodel.Claim();
+		},
+		'Throwing error when trying to instantiate a Claim without a main Snak.'
+	);
+} );
+
+QUnit.test( 'setMainSnak() & getMainSnak()', function( assert ) {
+	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
+		snak = new wb.datamodel.PropertyNoValueSnak( 'p2' );
+
+	claim.setMainSnak( snak );
+
+	assert.ok(
+		claim.getMainSnak().equals( snak ),
+		'Altered main Snak.'
+	);
+} );
+
+QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
+	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
+		qualifiers = new wb.datamodel.SnakList( [
+			new wb.datamodel.PropertyNoValueSnak( 'p10' ),
+			new wb.datamodel.PropertyNoValueSnak( 'p11' ),
+			new wb.datamodel.PropertySomeValueSnak( 'p10' )
+		] );
+
+	claim.setQualifiers( qualifiers );
+
+	assert.ok(
+		claim.getQualifiers().equals( qualifiers )
+	);
+
+	assert.ok(
+		claim.getQualifiers( 'p10' ).equals( new wb.datamodel.SnakList( [
+			new wb.datamodel.PropertyNoValueSnak( 'p10' ),
+			new wb.datamodel.PropertySomeValueSnak( 'p10' )
+		] ) ),
+		'Altered qualifiers.'
+	);
+} );
+
+QUnit.test( 'equals()', function( assert ) {
+	var claims = [
+		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
+		new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'p1' ) ),
+		new wb.datamodel.Claim(
+			new wb.datamodel.PropertyNoValueSnak( 'p1' ),
+			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'p10' ) ] )
+		),
+		new wb.datamodel.Claim(
+			new wb.datamodel.PropertyNoValueSnak( 'p1' ),
+			new wb.datamodel.SnakList( [ new wb.datamodel.PropertyNoValueSnak( 'p11' ) ] )
+		)
+	];
+
+	// Compare claims:
+	$.each( claims, function( i, claim ) {
+		var clonedClaim = new wb.datamodel.Claim(
+			claim.getMainSnak(),
+			claim.getQualifiers(),
+			claim.getGuid()
+		);
+
+		// Check if "cloned" claim is equal:
+		assert.ok(
+			claim.equals( clonedClaim ),
+			'Verified claim "' + i + '" on equality.'
+		);
+
+		// Compare to all other claims:
+		$.each( claims, function( j, otherClaim ) {
+			if ( j !== i ) {
+				assert.ok(
+					!claim.equals( otherClaim ),
+					'Claim "' + i + '" is not equal to claim "'+ j + '".'
+				);
+			}
+		} );
+
+	} );
+
+	// Compare claim to statement:
+	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
+		statement = new wb.datamodel.Statement(
+			new wb.datamodel.Claim(
+				new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) )
+			)
+		);
+
+	assert.ok(
+		!claim.equals( statement ),
+		'Claim does not equals statement that received nothing but the same claim parameters.'
+	);
+
+} );
 
 }( wikibase, dataValues, jQuery, QUnit ) );
