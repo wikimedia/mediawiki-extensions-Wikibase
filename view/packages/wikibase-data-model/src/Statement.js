@@ -1,41 +1,59 @@
 /**
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, util, $ ) {
+( function( wb, $ ) {
 'use strict';
-
-var PARENT = wb.datamodel.Claim,
-	constructor = function( mainSnak, qualifiers, references, rank, guid ) {
-		PARENT.call( this, mainSnak, qualifiers, guid );
-		this.setReferences( references || new wb.datamodel.ReferenceList() );
-		this.setRank( rank === undefined ? wb.datamodel.Statement.RANK.NORMAL : rank );
-	};
 
 /**
  * Represents a Wikibase Statement.
  * @constructor
- * @extends wb.datamodel.Claim
  * @since 0.3
  *
- * @param {wb.datamodel.Snak} mainSnak
- * @param {wikibase.datamodel.SnakList|null} [qualifiers]
+ * @param {wikibase.datamodel.Claim} claim
  * @param {wikibase.datamodel.ReferenceList|null} [references]
- * @param {Number} [rank]
- * @param {String|null} [guid] The Global Unique Identifier of this Statement. Can be omitted or null
- *        if this is a new Statement, not yet stored in the database and associated with some entity.
+ * @param {number} [rank]
  */
-var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constructor, {
+var SELF = wb.datamodel.Statement = function( claim, references, rank ) {
+	this.setClaim( claim );
+	this.setReferences( references || new wb.datamodel.ReferenceList() );
+	this.setRank( rank === undefined ? wb.datamodel.Statement.RANK.NORMAL : rank );
+};
+
+$.extend( SELF.prototype, {
+	/**
+	 * @type {wikibase.datamodel.Claim}
+	 */
+	_claim: null,
+
 	/**
 	 * @type {wikibase.datamodel.ReferenceList}
 	 */
 	_references: null,
 
 	/**
-	 * @see wb.datamodel.Statement.RANK
-	 * @type Number
+	 * @see wikibase.datamodel.Statement.RANK
+	 * @type {number}
 	 */
 	_rank: null,
+
+	/**
+	 * @return {wikibase.datamodel.Claim}
+	 */
+	getClaim: function() {
+		return this._claim;
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Claim} claim
+	 */
+	setClaim: function( claim ) {
+		if( !( claim instanceof wb.datamodel.Claim ) ) {
+			throw new Error( 'Claim needs to be an instance of wikibase.datamodel.Claim' );
+		}
+		this._claim = claim;
+	},
 
 	/**
 	 * @return {wikibase.datamodel.ReferenceList}
@@ -55,21 +73,16 @@ var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constru
 	},
 
 	/**
-	 * Returns the rank of the statement.
-	 *
-	 * @return {Number} one of the wb.datamodel.Statement.RANK enum
+	 * @return {number} (see wikibase.datamodel.Statement.RANK)
 	 */
 	getRank: function() {
 		return this._rank;
 	},
 
 	/**
-	 * Allows to set the statements rank.
-	 *
-	 * @param {Number} rank One of the RANK enum
+	 * @param {number} rank (see wikibase.datamodel.Statement.RANK)
 	 */
 	setRank: function( rank ) {
-		// check if given rank is a known rank, then set it. Otherwise, throw error!
 		for( var i in SELF.RANK ) {
 			if( SELF.RANK[i] === rank ) {
 				this._rank = rank;
@@ -80,23 +93,22 @@ var SELF = wb.datamodel.Statement = util.inherit( 'WbStatement', PARENT, constru
 	},
 
 	/**
-	 * Returns whether this statement is equal to another statement.
-	 * @see wb.datamodel.Claim.equals
-	 *
-	 * @param {*} other
+	 * @param {*} statement
 	 * @return {boolean}
 	 */
-	equals: function( other ) {
-		return other instanceof SELF
-			&& PARENT.prototype.equals.call( this, other )
-			&& this._references.equals( other.getReferences() )
-			&& this._rank === other.getRank();
+	equals: function( statement ) {
+		return this === statement
+			|| (
+				statement instanceof SELF
+				&& this._claim.equals( statement.getClaim() )
+				&& this._references.equals( statement.getReferences() )
+				&& this._rank === statement.getRank()
+			);
 	}
 } );
 
 /**
- * Rank enum. Higher values are more preferred.
- * @type Object
+ * @type {Object}
  */
 SELF.RANK = {
 	PREFERRED: 2,
@@ -104,9 +116,4 @@ SELF.RANK = {
 	DEPRECATED: 0
 };
 
-/**
- * @see wb.datamodel.Claim.TYPE
- */
-SELF.TYPE = 'statement';
-
-}( wikibase, util, jQuery ) );
+}( wikibase, jQuery ) );

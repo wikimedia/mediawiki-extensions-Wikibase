@@ -26,7 +26,9 @@ var testSets = [
 		),
 		'i am a data type id',
 		new wb.datamodel.StatementList( [
-			new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+			)
 		] )
 	]
 ];
@@ -82,7 +84,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			),
 			'i am a data type id',
 			new wb.datamodel.StatementList( [new wb.datamodel.Statement(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 			)] )
 		) ).isEmpty(),
 		'Returning FALSE when StatementList is not empty.'

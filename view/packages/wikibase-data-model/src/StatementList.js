@@ -71,8 +71,10 @@ $.extend( SELF.prototype, {
 	 */
 	removeStatement: function( statement ) {
 		for( var i = 0; i < this._statements.length; i++ ) {
-			var myStatement = this._statements[i];
-			if( myStatement.getGuid() === statement.getGuid() && myStatement.equals( statement ) ) {
+			if(
+				this._statements[i].getClaim().getGuid() === statement.getClaim().getGuid()
+				&& this._statements[i].equals( statement )
+			) {
 				this._statements.splice( i, 1 );
 				this.length--;
 				return;

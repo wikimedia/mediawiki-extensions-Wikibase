@@ -28,7 +28,9 @@ var testSets = [
 			new wb.datamodel.SiteLink( 'de', 'de-page' )
 		] ),
 		new wb.datamodel.StatementList( [
-			new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+			)
 		] )
 	]
 ];
@@ -98,7 +100,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 			),
 			new wb.datamodel.SiteLinkList(),
 			new wb.datamodel.StatementList( [new wb.datamodel.Statement(
-				new wb.datamodel.PropertyNoValueSnak( 'P1' )
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 			)] )
 		) ).isEmpty(),
 		'Returning FALSE when StatementList is not empty.'

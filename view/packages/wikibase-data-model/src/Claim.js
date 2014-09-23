@@ -10,9 +10,9 @@
  * @constructor
  * @since 0.3
  *
- * @param {wb.datamodel.Snak} mainSnak
+ * @param {wikibase.datamodel.Snak} mainSnak
  * @param {wikibase.datamodel.SnakList|null} [qualifiers]
- * @param {String|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
+ * @param {string|null} [guid] The Global Unique Identifier of this Claim. Can be omitted or null
  *        if this is a new Claim, not yet stored in the database and associated with some entity.
  */
 var SELF = wb.datamodel.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
@@ -21,25 +21,19 @@ var SELF = wb.datamodel.Claim = function WbClaim( mainSnak, qualifiers, guid ) {
 	this._guid = guid || null;
 };
 
-/**
- * String to identify if the object is a statement or a claim.
- * @type {string}
- */
-SELF.TYPE = 'claim';
-
 $.extend( SELF.prototype, {
 	/**
-	 * @type wb.datamodel.Snak
+	 * @type {wikibase.datamodel.Snak}
 	 */
 	_mainSnak: null,
 
 	/**
-	 * @type {wb.datamodel.SnakList}
+	 * @type {wikibase.datamodel.SnakList}
 	 */
 	_qualifiers: null,
 
 	/**
-	 * @type String|null
+	 * @type {string|null}
 	 */
 	_guid: null,
 
@@ -47,7 +41,7 @@ $.extend( SELF.prototype, {
 	 * Returns the GUID (Global Unique Identifier) of the Claim. Returns null if the claim is not
 	 * yet stored in the database.
 	 *
-	 * @return String|null
+	 * @return {string|null}
 	 */
 	getGuid: function() {
 		return this._guid;
@@ -56,7 +50,7 @@ $.extend( SELF.prototype, {
 	/**
 	 * Returns the main Snak.
 	 *
-	 * @return {wb.datamodel.Snak}
+	 * @return {wikibase.datamodel.Snak}
 	 */
 	getMainSnak: function() {
 		return this._mainSnak;
@@ -65,11 +59,11 @@ $.extend( SELF.prototype, {
 	/**
 	 * Overwrites the current main Snak.
 	 *
-	 * @param {wb.datamodel.Snak} mainSnak
+	 * @param {wikibase.datamodel.Snak} mainSnak
 	 */
 	setMainSnak: function( mainSnak ) {
 		if( !( mainSnak instanceof wb.datamodel.Snak ) ) {
-			throw new Error( 'For creating a new claim, at least a Main Snak is required' );
+			throw new Error( 'Main snak needs to be a Snak instance' );
 		}
 		this._mainSnak = mainSnak;
 	},
@@ -98,7 +92,7 @@ $.extend( SELF.prototype, {
 	 */
 	setQualifiers: function( qualifiers ) {
 		if( !( qualifiers instanceof wb.datamodel.SnakList ) ) {
-			throw new Error( 'Qualifiers have to be a wb.datamodel.SnakList object' );
+			throw new Error( 'Qualifiers have to be a SnakList object' );
 		}
 		this._qualifiers = qualifiers;
 	},
@@ -108,15 +102,15 @@ $.extend( SELF.prototype, {
 	 * if they are of the same type and have the same value. The value does not include the guid,
 	 * so Claims with the same value but different guids are still considered equal.
 	 *
-	 * @param {wb.datamodel.Claim|*} other If this is not a wb.datamodel.Claim, false will be returned.
+	 * @param {*} claim
 	 * @return boolean
 	 */
-	equals: function( other ) {
-		return this === other
-			|| ( // snaks have no IDs, so we don't have to worry about comparing any
-				other instanceof this.constructor
-				&& this._mainSnak.equals( other.getMainSnak() )
-				&& this._qualifiers.equals( other.getQualifiers() )
+	equals: function( claim ) {
+		return this === claim
+			|| (
+				claim instanceof this.constructor
+				&& this._mainSnak.equals( claim.getMainSnak() )
+				&& this._qualifiers.equals( claim.getQualifiers() )
 			);
 	}
 } );

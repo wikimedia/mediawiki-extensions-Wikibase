@@ -21,6 +21,8 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Renamed Property.getDataType() to Property.getDataTypeId().
 * Removed all toJSON(), newFromJSON(), toMap() and newFromMap() functions; Use serializers and unserializers of wikibase.serialization instead.
 * Statement does not accept a plain array of references anymore; Supply a ReferenceList instead.
+* Remove Claim.TYPE and Statement.TYPE attributes.
+* Instead of inheriting from Claim, Statement now features a Claim instance that needs to be passed to the Statement constructor.
 
 #### Enhancements
 * Added Fingerprint.

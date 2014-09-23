@@ -126,12 +126,14 @@
 		// Compare claim to statement:
 		var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
 			statement = new wb.datamodel.Statement(
-				new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) )
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) )
+				)
 			);
 
 		assert.ok(
-			claim.equals( statement ),
-			'Claim equals statement that received the same initialization parameters.'
+			!claim.equals( statement ),
+			'Claim does not equals statement that received nothing but the same claim parameters.'
 		);
 
 	} );

@@ -2,7 +2,6 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-
 ( function( wb, dv, $, QUnit ) {
 	'use strict';
 
@@ -10,7 +9,9 @@
 
 	QUnit.test( 'Rank evaluation on instantiation', function( assert ) {
 		var statement = new wb.datamodel.Statement(
-			new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'string1' ) )
+			new wb.datamodel.Claim(
+				new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'string1' ) )
+			)
 		);
 
 		assert.equal(
@@ -20,8 +21,9 @@
 		);
 
 		statement = new wb.datamodel.Statement(
-			new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'string1' ) ),
-			null,
+			new wb.datamodel.Claim(
+				new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'string1' ) )
+			),
 			null,
 			wb.datamodel.Statement.RANK.DEPRECATED
 		);
@@ -34,7 +36,11 @@
 	} );
 
 	QUnit.test( 'setRank() & getRank()', function( assert ) {
-		var statement = new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P1' ) );
+		var statement = new wb.datamodel.Statement(
+			new wb.datamodel.Claim(
+				new wb.datamodel.PropertyNoValueSnak( 'P1' )
+			)
+		);
 
 		statement.setRank( wb.datamodel.Statement.RANK.PREFERRED );
 
@@ -63,14 +69,20 @@
 
 	QUnit.test( 'equals()', function( assert ) {
 		var statements = [
-			new wb.datamodel.Statement( new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ) ),
 			new wb.datamodel.Statement(
-				new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
-				new wb.datamodel.SnakList(
-					[
-						new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
-						new wb.datamodel.PropertySomeValueSnak( 'P9001' )
-					]
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) )
+				)
+			),
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
+					new wb.datamodel.SnakList(
+						[
+							new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
+							new wb.datamodel.PropertySomeValueSnak( 'P9001' )
+						]
+					)
 				),
 				new wb.datamodel.ReferenceList(
 					[
@@ -94,23 +106,31 @@
 				),
 				wb.datamodel.Statement.RANK.PREFERRED
 			),
-			new wb.datamodel.Statement( new wb.datamodel.PropertyValueSnak( 'P41', new dv.StringValue( 'string' ) ) ),
 			new wb.datamodel.Statement(
-				new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
-				new wb.datamodel.SnakList(
-					[
-						new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
-						new wb.datamodel.PropertySomeValueSnak( 'P9001' )
-					]
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyValueSnak( 'P41', new dv.StringValue( 'string' ) )
 				)
 			),
 			new wb.datamodel.Statement(
-				new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
-				new wb.datamodel.SnakList(
-					[
-						new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
-						new wb.datamodel.PropertySomeValueSnak( 'P9001' )
-					]
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
+					new wb.datamodel.SnakList(
+						[
+							new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
+							new wb.datamodel.PropertySomeValueSnak( 'P9001' )
+						]
+					)
+				)
+			),
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ),
+					new wb.datamodel.SnakList(
+						[
+							new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'some string' ) ),
+							new wb.datamodel.PropertySomeValueSnak( 'P9001' )
+						]
+					)
 				),
 				new wb.datamodel.ReferenceList(
 					[
@@ -139,12 +159,14 @@
 		// Compare statements:
 		$.each( statements, function( i, statement ) {
 			var clonedStatement = new wb.datamodel.Statement(
-					statement.getMainSnak(),
-					statement.getQualifiers(),
-					statement.getReferences(),
-					statement.getRank(),
-					statement.getGuid()
-				);
+				new wb.datamodel.Claim(
+					statement.getClaim().getMainSnak(),
+					statement.getClaim().getQualifiers(),
+					statement.getClaim().getGuid()
+				),
+				statement.getReferences(),
+				statement.getRank()
+			);
 
 			// Check if "cloned" statement is equal:
 			assert.ok(
@@ -165,9 +187,13 @@
 		} );
 
 		// Compare claim to statement:
-		var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) ) ),
-			statement = new wb.datamodel.Statement(
+		var claim = new wb.datamodel.Claim(
 				new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) )
+			),
+			statement = new wb.datamodel.Statement(
+				new wb.datamodel.Claim(
+					new wb.datamodel.PropertyValueSnak( 'P42', new dv.StringValue( 'string' ) )
+				)
 			);
 
 		assert.ok(

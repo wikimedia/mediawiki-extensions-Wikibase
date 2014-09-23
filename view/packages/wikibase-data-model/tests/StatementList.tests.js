@@ -12,9 +12,15 @@ QUnit.module( 'wikibase.datamodel.StatementList' );
  */
 function getDefaultStatementList() {
 	return new wb.datamodel.StatementList( [
-		new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-		new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P2' ) ),
-		new wb.datamodel.Statement( new wb.datamodel.PropertySomeValueSnak( 'P2' ) )
+		new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		),
+		new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+		),
+		new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P2' ) )
+		)
 	] );
 }
 
@@ -35,14 +41,18 @@ QUnit.test( 'Constructor', function( assert ) {
 QUnit.test( 'hasStatement()', function( assert ) {
 	assert.ok(
 		getDefaultStatementList().hasStatement(
-			new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			)
 		),
 		'Verified hasStatement() returning TRUE.'
 	);
 
 	assert.ok(
 		!getDefaultStatementList().hasStatement(
-			new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P9999' ) )
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P9999' ) )
+			)
 		),
 		'Verified hasStatement() returning FALSE.'
 	);
@@ -58,12 +68,16 @@ QUnit.test( 'addStatement() & length attribute', function( assert ) {
 	);
 
 	statementList.addStatement(
-		new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+		new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+		)
 	);
 
 	assert.ok(
 		statementList.hasStatement(
-			new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+			)
 		),
 		'Added Statement.'
 	);
@@ -87,7 +101,9 @@ QUnit.test( 'removeStatement()', function( assert ) {
 	assert.throws(
 		function() {
 			statementList.removeStatement(
-				new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P9999' ) )
+				new wb.datamodel.Statement(
+					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P9999' ) )
+				)
 			);
 		},
 		'Throwing error when trying to remove a Statement not set.'
@@ -97,11 +113,11 @@ QUnit.test( 'removeStatement()', function( assert ) {
 		function() {
 			statementList.removeStatement(
 				new wb.datamodel.Statement(
-					new wb.datamodel.PropertyNoValueSnak( 'P2' ),
-					undefined,
-					undefined,
-					undefined,
-					'i am a guid'
+					new wb.datamodel.Claim(
+						new wb.datamodel.PropertyNoValueSnak( 'P2' ),
+						null,
+						'i am a guid'
+					)
 				)
 			);
 		},
@@ -110,12 +126,16 @@ QUnit.test( 'removeStatement()', function( assert ) {
 	);
 
 	statementList.removeStatement(
-		new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+		new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+		)
 	);
 
 	assert.ok(
 		!statementList.hasStatement(
-			new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			new wb.datamodel.Statement(
+				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+			)
 		),
 		'Removed Statement.'
 	);
@@ -129,7 +149,9 @@ QUnit.test( 'removeStatement()', function( assert ) {
 
 QUnit.test( 'isEmpty()', function( assert ) {
 	var statementList = new wb.datamodel.StatementList(),
-		statement = new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P1' ) );
+		statement = new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		);
 
 	assert.ok(
 		statementList.isEmpty(),
@@ -160,7 +182,9 @@ QUnit.test( 'equals()', function( assert ) {
 	);
 
 	statementList.addStatement(
-		new wb.datamodel.Statement( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+		new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P3' ) )
+		)
 	);
 
 	assert.ok(
