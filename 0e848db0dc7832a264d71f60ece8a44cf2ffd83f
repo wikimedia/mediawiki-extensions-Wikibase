@@ -223,6 +223,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_bf3db8ba",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T23:16:04Z",
+      "side": 1,
+      "message": "Not the only file that has this...",
+      "parentUuid": "ee62ffec_a8fb4143",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_e8d3795f",
         "filename": "client/includes/Usage/UsageTrackerException.php",
         "patchSetId": 7
@@ -251,6 +269,23 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "Seems part of the task here to do this",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_9f3af4be",
+        "filename": "client/tests/phpunit/includes/Usage/EntityUsageTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T23:16:04Z",
+      "side": 1,
+      "message": "Unused import",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -404,6 +439,24 @@
       "writtenOn": "2014-09-24T21:00:09Z",
       "side": 1,
       "message": "agree, but i don\u0027t think this needs to be mentioned here. we have bug for this, right?",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_5f447c4a",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T23:16:04Z",
+      "side": 1,
+      "message": "Indeed. This does not match \"This file describes how the usage of entities on wiki pages is tracked.\"",
+      "parentUuid": "ee62ffec_688c29dc",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
