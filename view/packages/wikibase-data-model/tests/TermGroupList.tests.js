@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( wb, QUnit, $ ) {
 'use strict';
 
 QUnit.module( 'wikibase.datamodel.TermGroupList' );
@@ -36,6 +36,17 @@ QUnit.test( 'Constructor', function( assert ) {
 		},
 		'Throwing error when trying to instantiate a TermGroupList with multiple TermGroup objects '
 		+ 'for one language.'
+	);
+} );
+
+QUnit.test( 'getLanguages()', function( assert ) {
+	var languages = getDefaultTermGroupList().getLanguages();
+
+	assert.ok(
+		languages.length === 2
+		&& $.inArray( 'de', languages ) !== -1
+		&& $.inArray( 'en', languages ) !== -1,
+		'Retrieved languages.'
 	);
 } );
 
@@ -249,4 +260,4 @@ QUnit.test( 'hasGroup()', function( assert ) {
 	);
 } );
 
-}( wikibase, QUnit ) );
+}( wikibase, QUnit, jQuery ) );

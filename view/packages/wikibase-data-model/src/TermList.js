@@ -45,6 +45,19 @@ $.extend( SELF.prototype, {
 	length: 0,
 
 	/**
+	 * @return {string[]}
+	 */
+	getLanguages: function() {
+		var languageCodes = [];
+
+		for( var languageCode in this._terms ) {
+			languageCodes.push( languageCode );
+		}
+
+		return languageCodes;
+	},
+
+	/**
 	 * @param {string} languageCode
 	 * @return {wikibase.datamodel.Term|null}
 	 */

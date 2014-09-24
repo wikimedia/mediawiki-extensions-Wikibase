@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( wb, QUnit, $ ) {
 'use strict';
 
 QUnit.module( 'wikibase.datamodel.TermList' );
@@ -25,6 +25,17 @@ QUnit.test( 'Constructor', function( assert ) {
 			return new wb.datamodel.TermList( ['string1', 'string2'] );
 		},
 		'Throwing error when trying to instantiate TermList without Term objects.'
+	);
+} );
+
+QUnit.test( 'getLanguages()', function( assert ) {
+	var languages = getDefaultTermList().getLanguages();
+
+	assert.ok(
+		languages.length === 2
+		&& $.inArray( 'de', languages ) !== -1
+		&& $.inArray( 'en', languages ) !== -1,
+		'Retrieved languages.'
 	);
 } );
 
@@ -220,4 +231,4 @@ QUnit.test( 'hasTerm()', function( assert ) {
 	);
 } );
 
-}( wikibase, QUnit ) );
+}( wikibase, QUnit, jQuery ) );
