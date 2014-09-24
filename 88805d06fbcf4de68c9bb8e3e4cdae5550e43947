@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_f6b124dd",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-24T11:12:22Z",
+      "side": 1,
+      "message": "Turning this around would be clearer.",
+      "revId": "88805d06fbcf4de68c9bb8e3e4cdae5550e43947",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_b6ca8c48",
+        "filename": "repo/includes/View/SiteLinksView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-24T11:12:22Z",
+      "side": 1,
+      "message": "Does this need a cache cleaning again?",
+      "revId": "88805d06fbcf4de68c9bb8e3e4cdae5550e43947",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
