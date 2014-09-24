@@ -10,19 +10,23 @@
  * @constructor
  * @since 0.4
  *
- * @param {wikibase.datamodel.TermList} labels
- * @param {wikibase.datamodel.TermList} descriptions
- * @param {wikibase.datamodel.TermGroupList} aliasGroups
+ * @param {wikibase.datamodel.TermList|null} [labels]
+ * @param {wikibase.datamodel.TermList|null} [descriptions]
+ * @param {wikibase.datamodel.TermGroupList|null} [aliasGroups]
  */
 var SELF
 	= wb.datamodel.Fingerprint
 	= function WbDataModelFingerprint( labels, descriptions, aliasGroups ) {
+		labels = labels || new wb.datamodel.TermList();
+		descriptions = descriptions || new wb.datamodel.TermList();
+		aliasGroups = aliasGroups || new wb.datamodel.TermGroupList();
+
 		if(
 			!( labels instanceof wb.datamodel.TermList )
 			|| !( descriptions instanceof wb.datamodel.TermList )
 			|| !( aliasGroups instanceof wb.datamodel.TermGroupList )
 		) {
-			throw new Error( 'Required parameter(s) not specified' );
+			throw new Error( 'Required parameter(s) not specified or not defined properly' );
 		}
 
 		this._labels = labels;

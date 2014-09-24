@@ -14,27 +14,32 @@ var PARENT = wb.datamodel.Entity;
  * @since 0.4
  *
  * @param {string} entityId
- * @param {wikibase.datamodel.Fingerprint} fingerprint
  * @param {string} dataTypeId
- * @param {wikibase.datamodel.StatementList} statementList
+ * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
+ * @param {wikibase.datamodel.StatementList|null} [statementList]
  */
-var constructor = function( entityId, fingerprint, dataTypeId, statementList ) {
-	if(
-		typeof entityId !== 'string'
-		|| !( fingerprint instanceof wb.datamodel.Fingerprint )
-		|| typeof dataTypeId !== 'string'
-		|| !( statementList instanceof wb.datamodel.StatementList )
-	) {
-		throw new Error( 'Required parameter(s) missing' );
-	}
+var SELF = wb.datamodel.Property = util.inherit(
+	'WbProperty',
+	PARENT,
+	function( entityId, dataTypeId, fingerprint, statementList ) {
+		fingerprint = fingerprint || new wb.datamodel.Fingerprint();
+		statementList = statementList || new wb.datamodel.StatementList();
 
-	this._id = entityId;
-	this._fingerprint = fingerprint;
-	this._dataTypeId = dataTypeId;
-	this._statementList = statementList;
-};
+		if(
+			typeof entityId !== 'string'
+				|| !( fingerprint instanceof wb.datamodel.Fingerprint )
+				|| typeof dataTypeId !== 'string'
+				|| !( statementList instanceof wb.datamodel.StatementList )
+		) {
+			throw new Error( 'Required parameter(s) missing or not defined properly' );
+		}
 
-var SELF = wb.datamodel.Property = util.inherit( 'WbProperty', PARENT, constructor, {
+		this._id = entityId;
+		this._fingerprint = fingerprint;
+		this._dataTypeId = dataTypeId;
+		this._statementList = statementList;
+	},
+{
 	/**
 	 * @type {string}
 	 */

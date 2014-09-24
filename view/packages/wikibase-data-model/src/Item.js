@@ -14,36 +14,33 @@ var PARENT = wb.datamodel.Entity;
  * @since 0.4
  *
  * @param {string} entityId
- * @param {wikibase.datamodel.Fingerprint} fingerprint
- * @param {wikibase.datamodel.SiteLinkList} siteLinkList
- * @param {wikibase.datamodel.StatementList} statementList
+ * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
+ * @param {wikibase.datamodel.StatementList|null} [statementList]
+ * @param {wikibase.datamodel.SiteLinkList|null} [siteLinkList]
  */
-var constructor = function( entityId, fingerprint, siteLinkList, statementList ) {
+var SELF = wb.datamodel.Item = util.inherit(
+	'WbItem',
+	PARENT,
+	function( entityId, fingerprint, statementList, siteLinkList ) {
+		fingerprint = fingerprint || new wb.datamodel.Fingerprint();
+		statementList = statementList || new wb.datamodel.StatementList();
+		siteLinkList = siteLinkList || new wb.datamodel.SiteLinkList();
+
 		if(
 			typeof entityId !== 'string'
-			|| !( fingerprint instanceof wb.datamodel.Fingerprint )
-			|| !( siteLinkList instanceof wb.datamodel.SiteLinkList )
-			|| !( statementList instanceof wb.datamodel.StatementList )
+				|| !( fingerprint instanceof wb.datamodel.Fingerprint )
+				|| !( siteLinkList instanceof wb.datamodel.SiteLinkList )
+				|| !( statementList instanceof wb.datamodel.StatementList )
 		) {
-			throw new Error( 'Required parameter(s) missing' );
+			throw new Error( 'Required parameter(s) missing or not defined properly' );
 		}
 
 		this._id = entityId;
-		this._fingerprint = fingerprint;
-		this._siteLinkList = siteLinkList;
-		this._statementList = statementList;
-	};
-
-/**
- * Represents a Wikibase Item.
- *
- * @constructor
- * @extends wikibase.datamodel.Entity
- * @since 0.3
- *
- * @param {Object} data
- */
-var SELF = wb.datamodel.Item = util.inherit( 'WbItem', PARENT, constructor, {
+		this._fingerprint = fingerprint || new wb.datamodel.Fingerprint();
+		this._siteLinkList = siteLinkList || wb.datamodel.SiteLinkList();
+		this._statementList = statementList || new wb.datamodel.StatementList();
+	},
+{
 	/**
 	 * @type {wikibase.datamodel.SiteLinkList}
 	 */

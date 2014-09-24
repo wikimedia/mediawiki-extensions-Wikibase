@@ -10,21 +10,21 @@ QUnit.module( 'wikibase.datamodel.Property' );
 var testSets = [
 	[
 		'P1',
+		'i am a data type id',
 		new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermGroupList()
 		),
-		'i am a data type id',
 		new wb.datamodel.StatementList()
 	], [
 		'P2',
+		'i am a data type id',
 		new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-label' )] ),
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-description' )] ),
 			new wb.datamodel.TermGroupList( [new wb.datamodel.TermGroup( 'de', ['de-alias'] )] )
 		),
-		'i am a data type id',
 		new wb.datamodel.StatementList( [
 			new wb.datamodel.Statement(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
@@ -49,12 +49,12 @@ QUnit.test( 'isEmpty()', function( assert ) {
 	assert.ok(
 		( new wb.datamodel.Property(
 			'P1',
+			'i am a data type id',
 			new wb.datamodel.Fingerprint(
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			'i am a data type id',
 			new wb.datamodel.StatementList()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
@@ -63,12 +63,12 @@ QUnit.test( 'isEmpty()', function( assert ) {
 	assert.ok(
 		!( new wb.datamodel.Property(
 			'P1',
+			'i am a data type id',
 			new wb.datamodel.Fingerprint(
 				new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-term' )] ),
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			'i am a data type id',
 			new wb.datamodel.StatementList()
 		) ).isEmpty(),
 		'Returning FALSE when Fingerprint is not empty.'
@@ -77,12 +77,12 @@ QUnit.test( 'isEmpty()', function( assert ) {
 	assert.ok(
 		!( new wb.datamodel.Property(
 			'P1',
+			'i am a data type id',
 			new wb.datamodel.Fingerprint(
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			'i am a data type id',
 			new wb.datamodel.StatementList( [new wb.datamodel.Statement(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 			)] )

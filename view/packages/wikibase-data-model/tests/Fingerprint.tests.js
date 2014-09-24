@@ -43,9 +43,9 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 
 QUnit.test( 'Constructor (negative)', function( assert ) {
 	var negativeTestSets = [
-		[undefined, new wb.datamodel.TermList(), new wb.datamodel.TermGroupList()],
-		[new wb.datamodel.TermList(), undefined, new wb.datamodel.TermGroupList()],
-		[new wb.datamodel.TermList(), new wb.datamodel.TermList(), undefined]
+		['string', new wb.datamodel.TermList(), new wb.datamodel.TermGroupList()],
+		[new wb.datamodel.TermList(), 'string', new wb.datamodel.TermGroupList()],
+		[new wb.datamodel.TermList(), new wb.datamodel.TermList(), 'string']
 	];
 
 	/**

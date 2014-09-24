@@ -15,8 +15,8 @@ var testSets = [
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermGroupList()
 		),
-		new wb.datamodel.SiteLinkList(),
-		new wb.datamodel.StatementList()
+		new wb.datamodel.StatementList(),
+		new wb.datamodel.SiteLinkList()
 	], [
 		'Q2',
 		new wb.datamodel.Fingerprint(
@@ -24,13 +24,13 @@ var testSets = [
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-description' )] ),
 			new wb.datamodel.TermGroupList( [new wb.datamodel.TermGroup( 'de', ['de-alias'] )] )
 		),
-		new wb.datamodel.SiteLinkList( [
-			new wb.datamodel.SiteLink( 'de', 'de-page' )
-		] ),
 		new wb.datamodel.StatementList( [
 			new wb.datamodel.Statement(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 			)
+		] ),
+		new wb.datamodel.SiteLinkList( [
+			new wb.datamodel.SiteLink( 'de', 'de-page' )
 		] )
 	]
 ];
@@ -56,8 +56,8 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			new wb.datamodel.SiteLinkList(),
-			new wb.datamodel.StatementList()
+			new wb.datamodel.StatementList(),
+			new wb.datamodel.SiteLinkList()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
@@ -70,8 +70,8 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			new wb.datamodel.SiteLinkList(),
-			new wb.datamodel.StatementList()
+			new wb.datamodel.StatementList(),
+			new wb.datamodel.SiteLinkList()
 		) ).isEmpty(),
 		'Returning FALSE when Fingerprint is not empty.'
 	);
@@ -84,8 +84,8 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			new wb.datamodel.SiteLinkList( [new wb.datamodel.SiteLink( 'de', 'de-page' )] ),
-			new wb.datamodel.StatementList()
+			new wb.datamodel.StatementList(),
+			new wb.datamodel.SiteLinkList( [new wb.datamodel.SiteLink( 'de', 'de-page' )] )
 		) ).isEmpty(),
 		'Returning FALSE when SiteLinkList is not empty.'
 	);
@@ -98,10 +98,10 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			new wb.datamodel.SiteLinkList(),
 			new wb.datamodel.StatementList( [new wb.datamodel.Statement(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-			)] )
+			)] ),
+			new wb.datamodel.SiteLinkList()
 		) ).isEmpty(),
 		'Returning FALSE when StatementList is not empty.'
 	);
