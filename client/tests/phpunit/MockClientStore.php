@@ -16,7 +16,9 @@ use Wikibase\PropertyInfoStore;
  */
 class MockClientStore implements ClientStore {
 	public function getUsageLookup() {}
-	public function getUsageTracker() {}
+	public function getUsageTracker() {
+		throw new \RuntimeException( 'not implemented' );
+	}
 	public function getSubscriptionManager() {}
 
 	public function getPropertyLabelResolver() {}
