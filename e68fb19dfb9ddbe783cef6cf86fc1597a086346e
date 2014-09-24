@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee62ffec_568c7032",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-24T10:56:13Z",
+      "side": 1,
+      "message": "I\u0027d like to try to wrap this global state in a service and pass it into the badgeselector. Some of the menu handling here should move into that service, too.",
+      "revId": "e68fb19dfb9ddbe783cef6cf86fc1597a086346e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_1696f842",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.badgeselector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-24T10:56:13Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused about this global state vs this.options.badges. They seem to be used interchangeably.",
+      "revId": "e68fb19dfb9ddbe783cef6cf86fc1597a086346e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_b5b220f7",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
