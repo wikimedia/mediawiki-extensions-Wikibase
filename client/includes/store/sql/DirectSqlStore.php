@@ -177,7 +177,7 @@ class DirectSqlStore implements ClientStore {
 		if ( !$this->usageLookup ) {
 			if ( $this->useLegacyUsageIndex ) {
 				$this->usageLookup = new SiteLinkUsageLookup(
-					$this->site->getGlobalId(),
+					$this->getSite()->getGlobalId(),
 					$this->getSiteLinkTable(),
 					new TitleFactory()
 				);
