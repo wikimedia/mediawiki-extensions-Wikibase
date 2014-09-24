@@ -41,6 +41,7 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.SnakListUnserializer</code>.
 * Added <code>wikibase.serialization.SnakSerializer</code>.
 * Added <code>wikibase.serialization.SnakUnserializer</code>.
+* Added <code>wikibase.serialization.TermSerializer</code>.
 
 ### 1.1.3 (2014-09-10)
 
