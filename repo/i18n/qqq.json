@@ -143,7 +143,7 @@
 	"wikibase-gotolinkedpage-lookup-fieldset": "This is the title for the fieldset on the special page for specifiying the search arguments. This is the search for a linked page (sitelink) by site and item ID.",
 	"wikibase-gotolinkedpage-lookup-site": "Label for the textfield holding the site ID. See also Wikidata's glossary for [[d:Wikidata:Glossary#sitelinks|site links]].\n{{Identical|Site}}",
 	"wikibase-gotolinkedpage-lookup-item": "Label for the textfield holding the item ID. See also Wikidata's glossary for [[d:Wikidata:Glossary#Items|items]].",
-	"wikibase-gotolinkedpage-submit": "Text for the submit button in the search form which if successfully will go (redirect) to the sepcified linked page (sitelink).",
+	"wikibase-gotolinkedpage-submit": "Text for the submit button in the search form which if successfully will go (redirect) to the sepcified linked page (sitelink).\n{{Identical|Go}}",
 	"special-itemdisambiguation": "{{doc-special|ItemDisambiguation}}\nThis special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidata's glossary for [[d:Wikidata:Glossary#languageattribute-label|label]] and [[d:Wikidata:Glossary#Items|items]].",
 	"wikibase-itemdisambiguation-lookup-fieldset": "This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.",
 	"wikibase-itemdisambiguation-lookup-language": "Label for the textfield holding the language id.\n{{Identical|Language}}",

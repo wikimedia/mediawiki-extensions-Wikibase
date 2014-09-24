@@ -40,6 +40,7 @@
 	"wikibase-statements": "Declarações",
 	"wikibase-attributes": "Atributos",
 	"wikibase-terms": "Noutras línguas",
+	"wikibase-sitelinkgroupview-input-help-message": "Adicione uma ligação de sítio, especificando um sítio e uma respetiva página, edite ou remova ligações de sítio existentes.",
 	"wikibase-sitelinks-empty": "Nenhuma página está ligada a este item ainda.",
 	"wikibase-sitelinks-input-help-message": "Defina uma ligação para uma página relacionada com este item.",
 	"wikibase-sitelinks-special": "Páginas em outros sítios com ligação a este item",

@@ -59,6 +59,7 @@
 	"wikibase-statements": "Déclarations",
 	"wikibase-attributes": "Attributs",
 	"wikibase-terms": "Autres langues",
+	"wikibase-sitelinkgroupview-input-help-message": "Ajouter un lien de site en spécifiant un site et une page de ce site, modifier ou supprimer des liens de site existant.",
 	"wikibase-sitelinks-empty": "Aucune page n’est encore liée à cet élément.",
 	"wikibase-sitelinks-input-help-message": "Créer un lien vers une page relative à cet élément.",
 	"wikibase-sitelinks-special": "Pages sur d’autres sites liées à cet élément",

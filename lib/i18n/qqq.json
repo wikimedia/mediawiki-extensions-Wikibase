@@ -79,7 +79,7 @@
 	"wikibase-undeserializable-value": "Message to display for any data values that are invalid and cannot be deserialized.  The message is displayed in such places as when users view a diff.",
 	"wikibase-validator-invalid": "Generic input validation error shown when the input is invalid but no further information is provided by the validator.\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-missing-field": "Input validation error shown when a field is missing from the input.\n\nParameters:\n* $1 - the required field\n{{Related|Wikibase-validator}}",
-	"wikibase-validator-bad-type": "Input validation error shown when the input has the wrong type.\n\nParameters:\n* $1 - the expected type\n* $2 - the actual type\n{{Related|Wikibase-validator}}",
+	"wikibase-validator-bad-type": "Input validation error shown when the input has the wrong type.\n\nParameters:\n* $1 - the expected type\n* $2 - the actual type\n{{Related|Wikibase-validator}}\n{{Identical|Instead of}}",
 	"wikibase-validator-too-long": "Input validation error shown when the input is too long. Parameters:\n* $1 - the maximum length\n* $2 - (Unused) the actual length\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-too-short": "Input validation error shown when the input is too short. Parameters:\n* $1 - the minimum length\n* $2 - (Unused) the actual length\n{{Related|Wikibase-validator}}",
 	"wikibase-validator-too-high": "Input validation error shown when the input is too high. Parameters:\n* $1 - the maximum value\n* $2 - (Unused) the actual length\n{{Related|Wikibase-validator}}",

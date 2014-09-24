@@ -51,6 +51,7 @@
 	"wikibase-statements": "اظهارات",
 	"wikibase-attributes": "ویژگی‌ها",
 	"wikibase-terms": "به زبان‌های دیگر",
+	"wikibase-sitelinkgroupview-input-help-message": "پیوندی به مشخص کردن وب‌گاه و صفحهٔ آن وب‌گاه بیافزایید، پیوندهای وب‌گاه‌های موجود را ویرایش یا حذف کنید.",
 	"wikibase-sitelinks-empty": "این آیتم هنوز هیچ صفحه‌ای پیوند ندارد.",
 	"wikibase-sitelinks-input-help-message": "پیوندی به صفحه‌ای مرتبط با این آیتم ایجاد کنید.",
 	"wikibase-sitelinks-special": "صفحه‌های دیگر وبگاه‌ها که به این آیتم پیوند دارند",

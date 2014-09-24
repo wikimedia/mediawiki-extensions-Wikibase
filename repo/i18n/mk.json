@@ -31,6 +31,7 @@
 	"wikibase-statements": "Искази",
 	"wikibase-attributes": "Атрибути",
 	"wikibase-terms": "На други јазици",
+	"wikibase-sitelinkgroupview-input-help-message": "Додајте врска укажувајќи мрежно место и страницата на него, или пак отстранете ги постоечките",
 	"wikibase-sitelinks-empty": "Досега нема страници поврзани со овој предмет.",
 	"wikibase-sitelinks-input-help-message": "Задајте врска до страница поврзана со овој предмет.",
 	"wikibase-sitelinks-special": "Страници на други викија сврзани со овој предмет",
