@@ -2,11 +2,13 @@
 
 namespace Wikibase\Test;
 
+use ArrayIterator;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\ReferencedPagesFinder;
 
 /**
@@ -26,12 +28,11 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 	 * @dataProvider getPagesProvider
 	 */
 	public function testGetPages( array $expected, array $usage, ItemChange $change, $message ) {
-		$itemUsageIndex = $this->getMockBuilder( '\Wikibase\ItemUsageIndex' )
-							->disableOriginalConstructor()->getMock();
+		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
 
-		$itemUsageIndex->expects( $this->any() )
-			->method( 'getEntityUsage' )
-			->will( $this->returnValue( $usage ) );
+		$usageLookup->expects( $this->any() )
+			->method( 'getPagesUsing' )
+			->will( $this->returnValue( new ArrayIterator( $usage ) ) );
 
 		$namespaceChecker = $this->getMockBuilder( '\Wikibase\NamespaceChecker' )
 							->disableOriginalConstructor()->getMock();
@@ -40,9 +41,25 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( true ) );
 
+		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
+
+		$titleFactory->expects( $this->any() )
+			->method( 'newFromID' )
+			->will( $this->returnCallback( function( $id ) {
+				switch ( $id ) {
+					case 1:
+						return Title::makeTitle( NS_MAIN, 'Berlin' );
+					case 2:
+						return Title::makeTitle( NS_MAIN, 'Rome' );
+					default:
+						throw new StorageException( 'Unknown ID: ' . $id );
+				}
+			} ) );
+
 		$referencedPagesFinder = new ReferencedPagesFinder(
-			$itemUsageIndex,
+			$usageLookup,
 			$namespaceChecker,
+			$titleFactory,
 			'enwiki',
 			false
 		);
@@ -118,7 +135,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases[] = array(
 			array( $rome ),
-			array( 'Rome' ),
+			array( 2 ),
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( array( 'enwiki' => 'Rome' ) ),
@@ -147,7 +164,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 
 		$cases[] = array(
 			array( $berlin ),
-			array( 'Berlin' ),
+			array( 1 ),
 			$changeFactory->newFromUpdate( ItemChange::UPDATE, $connectedItem, $connectedItemWithLabel ),
 			'connected item label change'
 		);
