@@ -17,5 +17,5 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'license-name' => 'GPL-2.0+'
 );
 
-include 'resources.mw.php';
-include 'resources.test.mw.php';
+include 'resources.php';
+include 'resources.test.php';
