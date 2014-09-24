@@ -3,7 +3,6 @@
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
-
 ( function( wb, dv, $, QUnit ) {
 	'use strict';
 
@@ -55,32 +54,35 @@
 			[ new wb.datamodel.SnakList( snaks ), 3, 'wb.datamodel.SnakList' ]
 		];
 
-		$.each( constructorArgs, function( i, args ) {
-			var newSnakList = new wb.datamodel.SnakList( args[0] );
+		for( var i = 0; i < constructorArgs.length; i++ ) {
+			var args = constructorArgs[i],
+				newSnakList = new wb.datamodel.SnakList( args[0] );
 
 			assert.ok(
 				newSnakList instanceof wb.datamodel.SnakList,
-				'Instance of wb.datamodel.SnakList created with ' + args[2]
+				'Test set #' + i + ': Instance of wb.datamodel.SnakList created with ' + args[2]
+					+ '.'
 			);
 
 			assert.ok(
 				newSnakList.length === args[1],
-				'Length of Snak list is accurate (' + args[1] + ' Snaks)'
+				'Test set #' + i + ': Length of Snak list is accurate (' + args[1] + ' Snaks).'
 			);
 
 			var equalNewSnakList = new wb.datamodel.SnakList( args[0] );
 			assert.ok(
 				newSnakList.equals( equalNewSnakList ) && equalNewSnakList.equals( newSnakList ),
-				'Another instance of SnakList, created with same constructor arguments, is ' +
-					'being considered equal to the first list.'
+				'Test set #' + i + ': Another instance of SnakList, created with same constructor '
+					+ 'arguments, is being considered equal to the first list.'
 			);
 
 			var newListArray = newSnakList.toArray();
 			assert.ok(
 				$.isArray( newListArray ) && newListArray.length === newSnakList.length,
-				'Snak list\'s toArray() returns simple Array with same length as list'
+				'Test set #' + i + ': SnakList\'s toArray() returns simple Array with same length '
+					+ 'as list.'
 			);
-		} );
+		}
 
 		assert.throws(
 			function() {

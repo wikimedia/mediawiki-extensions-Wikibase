@@ -4,7 +4,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( wb, $, QUnit ) {
+( function( wb, QUnit ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.datamodel.Reference' );
@@ -19,19 +19,19 @@
 			] )
 		];
 
-		$.each( snakLists, function( i, snakList ) {
-			var reference = new wb.datamodel.Reference( snakList );
+		for( var i = 0; i < snakLists.length; i++ ) {
+			var reference = new wb.datamodel.Reference( snakLists[i] );
 
 			assert.ok(
 				reference instanceof wb.datamodel.Reference,
-				'Instantiated Reference object.'
+				'Test set #' + i + ': Instantiated Reference object.'
 			);
 
 			assert.ok(
-				reference.getSnaks().equals( new wb.datamodel.SnakList( snakList ) ),
-				'Retrieved Snaks passed to the constructor.'
+				reference.getSnaks().equals( new wb.datamodel.SnakList( snakLists[i] ) ),
+				'Test set #' + i + ': Retrieved Snaks passed to the constructor.'
 			);
-		} );
+		}
 
 		assert.throws(
 			function() {
@@ -76,30 +76,30 @@
 		];
 
 		// Compare references:
-		$.each( references, function( i, reference ) {
+		for( var i = 0; i < references.length; i++ ) {
 			var clonedReference = new wb.datamodel.Reference(
-				reference.getSnaks(),
-				reference.getHash()
+				references[i].getSnaks(),
+				references[i].getHash()
 			);
 
 			// Check if "cloned" reference is equal:
 			assert.ok(
-				reference.equals( clonedReference ),
+				references[i].equals( clonedReference ),
 				'Verified reference "' + i + '" on equality.'
 			);
 
 			// Compare to all other references:
-			$.each( references, function( j, otherReference ) {
+			for( var j = 0; j < references.length; j++ ) {
 				if ( j !== i ) {
 					assert.ok(
-						!reference.equals( otherReference ),
+						!references[i].equals( references[j] ),
 						'Reference "' + i + '" is not equal to reference "'+ j + '".'
 					);
 				}
-			} );
+			}
 
-		} );
+		}
 
 	} );
 
-}( wikibase, jQuery, QUnit ) );
+}( wikibase, QUnit ) );

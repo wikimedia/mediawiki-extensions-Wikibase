@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, $, QUnit ) {
+( function( wb, QUnit ) {
 	'use strict';
 
 QUnit.module( 'wikibase.datamodel.Claim' );
@@ -22,24 +22,25 @@ QUnit.test( 'Constructor', function( assert ) {
 		}
 	];
 
-	$.each( argumentLists, function( i, args ) {
-		var claim = new wb.datamodel.Claim( args.mainSnak, args.qualifiers, args.guid );
+	for( var i = 0; i < argumentLists.length; i++ ) {
+		var args = argumentLists[i],
+			claim = new wb.datamodel.Claim( args.mainSnak, args.qualifiers, args.guid );
 
 		assert.ok(
 			claim.getMainSnak().equals( args.mainSnak ),
-			'Main snak is set correctly.'
+			'Test set #' + i + ': Main snak is set correctly.'
 		);
 
 		assert.ok(
 			claim.getQualifiers().equals( args.qualifiers || new wb.datamodel.SnakList() ),
-			'Qualifiers are set correctly.'
+			'Test set #' + i + ': Qualifiers are set correctly.'
 		);
 
 		assert.ok(
 			claim.getGuid() === ( args.guid || null ),
-			'GUID is set correctly.'
+			'Test set #' + i + ': GUID is set correctly.'
 		);
-	} );
+	}
 
 	assert.throws(
 		function() {
@@ -99,30 +100,29 @@ QUnit.test( 'equals()', function( assert ) {
 	];
 
 	// Compare claims:
-	$.each( claims, function( i, claim ) {
+	for( var i = 0; i < claims.length; i++ ) {
 		var clonedClaim = new wb.datamodel.Claim(
-			claim.getMainSnak(),
-			claim.getQualifiers(),
-			claim.getGuid()
+			claims[i].getMainSnak(),
+			claims[i].getQualifiers(),
+			claims[i].getGuid()
 		);
 
 		// Check if "cloned" claim is equal:
 		assert.ok(
-			claim.equals( clonedClaim ),
+			claims[i].equals( clonedClaim ),
 			'Verified claim "' + i + '" on equality.'
 		);
 
 		// Compare to all other claims:
-		$.each( claims, function( j, otherClaim ) {
+		for( var j = 0; j < claims.length; j++ ) {
 			if ( j !== i ) {
 				assert.ok(
-					!claim.equals( otherClaim ),
+					!claims[i].equals( claims[j] ),
 					'Claim "' + i + '" is not equal to claim "'+ j + '".'
 				);
 			}
-		} );
-
-	} );
+		}
+	}
 
 	// Compare claim to statement:
 	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p42' ) ),
@@ -137,4 +137,4 @@ QUnit.test( 'equals()', function( assert ) {
 
 } );
 
-}( wikibase, jQuery, QUnit ) );
+}( wikibase, QUnit ) );

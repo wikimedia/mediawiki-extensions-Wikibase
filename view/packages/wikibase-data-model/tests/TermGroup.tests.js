@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, $, QUnit ) {
+( function( wb, QUnit ) {
 'use strict';
 
 QUnit.module( 'wikibase.datamodel.TermGroup' );
@@ -73,4 +73,4 @@ QUnit.test( 'equals()', function( assert ) {
 	}
 } );
 
-}( wikibase, jQuery, QUnit ) );
+}( wikibase, QUnit ) );
