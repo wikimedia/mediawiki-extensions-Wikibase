@@ -34,6 +34,7 @@ return call_user_func( function() {
 				'jquery.wikibase.sitelinkgroupview',
 				'wikibase.AbstractedRepoApi',
 				'wikibase.dataTypes',
+				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.experts',
 				'wikibase.formatters.getStore',
 				'wikibase.EntityInitializer',
