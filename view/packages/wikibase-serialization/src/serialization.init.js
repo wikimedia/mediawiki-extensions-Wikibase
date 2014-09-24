@@ -39,6 +39,16 @@
 		wb.datamodel.Snak
 	);
 
+	MODULE.SerializerFactory.registerSerializer(
+		MODULE.TermSerializer,
+		wb.datamodel.Snak
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
+		MODULE.TermListSerializer,
+		wb.datamodel.Snak
+	);
+
 	// Register unserializers:
 
 	MODULE.SerializerFactory.registerUnserializer(
@@ -73,6 +83,16 @@
 
 	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.SnakUnserializer,
+		wb.datamodel.Snak
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.TermUnserializer,
+		wb.datamodel.Snak
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.TermListUnserializer,
 		wb.datamodel.Snak
 	);
 
