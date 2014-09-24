@@ -35,6 +35,14 @@ $.extend( SELF.prototype, {
 	length: 0,
 
 	/**
+	 * @return {wikibase.datamodel.Statement[]}
+	 */
+	toArray: function() {
+		return this._statements.slice();
+	},
+
+
+	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 * @return {boolean}
 	 */
@@ -48,13 +56,6 @@ $.extend( SELF.prototype, {
 			}
 		}
 		return false;
-	},
-
-	/**
-	 * @return {wikibase.datamodel.Statement[]}
-	 */
-	getStatements: function() {
-		return this._statements;
 	},
 
 	/**

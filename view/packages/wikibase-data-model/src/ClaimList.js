@@ -35,6 +35,13 @@ $.extend( SELF.prototype, {
 	length: 0,
 
 	/**
+	 * @return {wikibase.datamodel.Claim[]}
+	 */
+	toArray: function() {
+		return this._claims.slice();
+	},
+
+	/**
 	 * @param {wikibase.datamodel.Claim} claim
 	 * @return {boolean}
 	 */
@@ -51,13 +58,6 @@ $.extend( SELF.prototype, {
 			}
 		}
 		return false;
-	},
-
-	/**
-	 * @return {wikibase.datamodel.Claim[]}
-	 */
-	getClaims: function() {
-		return this._claims;
 	},
 
 	/**

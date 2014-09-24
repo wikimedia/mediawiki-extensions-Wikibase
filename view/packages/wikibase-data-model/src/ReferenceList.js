@@ -35,6 +35,13 @@ $.extend( SELF.prototype, {
 	length: 0,
 
 	/**
+	 * @return {wikibase.datamodel.Reference[]}
+	 */
+	toArray: function() {
+		return this._references.slice();
+	},
+
+	/**
 	 * @param {wikibase.datamodel.Reference} reference
 	 * @return {boolean}
 	 */
@@ -48,13 +55,6 @@ $.extend( SELF.prototype, {
 			}
 		}
 		return false;
-	},
-
-	/**
-	 * @return {wikibase.datamodel.Reference[]}
-	 */
-	getReferences: function() {
-		return this._references;
 	},
 
 	/**
