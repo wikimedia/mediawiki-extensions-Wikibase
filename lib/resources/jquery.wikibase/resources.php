@@ -29,7 +29,6 @@ return call_user_func( function() {
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.toolbarcontroller',
-				'wikibase.RepoApiError',
 				'wikibase.templates',
 			),
 			'messages' => array(
@@ -92,7 +91,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller',
 				'wikibase',
 				'wikibase.datamodel',
-				'wikibase.RepoApiError',
 				'wikibase.templates',
 				'wikibase.utilities',
 				'wikibase.utilities.ClaimGuidGenerator',
