@@ -26,6 +26,7 @@ return call_user_func( function() {
 		'wikibase.datamodel' => $moduleTemplate + array(
 			'scripts' => array(
 				'Claim.js',
+				'ClaimList.js',
 				'Entity.js',
 				'EntityId.js',
 				'Fingerprint.js',

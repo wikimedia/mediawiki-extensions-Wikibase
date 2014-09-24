@@ -26,6 +26,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Reference constructor does not accept a plain list of Snak objects anymore; Supply a proper SnakList object instead.
 
 #### Enhancements
+* Added ClaimList.
 * Added Fingerprint.
 * Added ReferenceList.
 * Added SiteLinkList.
