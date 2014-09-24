@@ -6,6 +6,7 @@ use MWException;
 use Site;
 use SiteList;
 use Title;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -108,7 +109,7 @@ class ChangeHandler {
 		EntityChangeFactory $changeFactory = null,
 		PageUpdater $updater = null,
 		EntityRevisionLookup $entityRevisionLookup = null,
-		ItemUsageIndex $entityUsageIndex = null,
+		UsageLookup $entityUsage = null,
 		Site $localSite = null,
 		SiteList $sites = null
 	) {
@@ -130,8 +131,8 @@ class ChangeHandler {
 			$entityRevisionLookup = $wikibaseClient->getStore()->getEntityRevisionLookup();
 		}
 
-		if ( !$entityUsageIndex ) {
-			$entityUsageIndex = $wikibaseClient->getStore()->getItemUsageIndex();
+		if ( !$entityUsage ) {
+			$entityUsage = $wikibaseClient->getStore()->getUsageLookup();
 		}
 
 		if ( $sites === null ) {
@@ -154,7 +155,7 @@ class ChangeHandler {
 
 		$this->updater = $updater;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->entityUsageIndex = $entityUsageIndex;
+		$this->usageLookup = $entityUsage;
 
 		$this->site = $localSite;
 		$this->siteId = $localSite->getGlobalId();
@@ -563,7 +564,7 @@ class ChangeHandler {
 
 		// todo inject!
 		$referencedPagesFinder = new ReferencedPagesFinder(
-			$this->entityUsageIndex,
+			$this->usageLookup,
 			$this->namespaceChecker,
 			$this->siteId,
 			$this->checkPageExistence
