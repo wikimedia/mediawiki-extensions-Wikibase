@@ -96,6 +96,7 @@
 		$entityview
 		.entityview( {
 			value: entity,
+			entityChangersFactory: new wb.entityChangers.EntityChangersFactory( abstractedRepoApi, wb.getRevisionStore(), entity ),
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
 				experts,
