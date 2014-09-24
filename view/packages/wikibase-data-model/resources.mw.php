@@ -24,39 +24,24 @@ return call_user_func( function() {
 
 	$modules = array(
 		'wikibase.datamodel' => $moduleTemplate + array(
-			'scripts' => array(
-				'Claim.js',
-				'ClaimList.js',
-				'Entity.js',
-				'EntityId.js',
-				'Fingerprint.js',
-				'Item.js',
-				'Property.js',
-				'Reference.js',
-				'ReferenceList.js',
-				'SiteLink.js',
-				'SiteLinkList.js',
-				'SnakList.js',
-				'Statement.js',
-				'StatementList.js',
-				'Term.js',
-				'TermGroup.js',
-				'TermGroupList.js',
-				'TermList.js',
-			),
 			'dependencies' => array(
-
-				'mw.ext.dataValues', // DataValues extension
-
-				'util.inherit',
-
-				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ClaimList',
+				'wikibase.datamodel.Entity',
+				'wikibase.datamodel.EntityId',
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.Item',
+				'wikibase.datamodel.Property',
 				'wikibase.datamodel.PropertyNoValueSnak',
 				'wikibase.datamodel.PropertySomeValueSnak',
 				'wikibase.datamodel.PropertyValueSnak',
+				'wikibase.datamodel.Reference',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.SiteLink',
+				'wikibase.datamodel.SiteLinkList',
 				'wikibase.datamodel.Snak',
-				'wikibase.datamodel.Snak.newFromMap'
-			)
+				'wikibase.datamodel.Snak.newFromMap',
+			),
 		),
 
 		'wikibase.datamodel.__namespace' => $moduleTemplate + array(
@@ -65,7 +50,86 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase', // Just for the namespace
-			)
+			),
+		),
+
+		'wikibase.datamodel.Claim' => $moduleTemplate + array(
+			'scripts' => array(
+				'Claim.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Snak',
+				'wikibase.datamodel.SnakList',
+			),
+		),
+
+		'wikibase.datamodel.ClaimList' => $moduleTemplate + array(
+			'scripts' => array(
+				'ClaimList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Claim',
+			),
+		),
+
+		'wikibase.datamodel.Entity' => $moduleTemplate + array(
+			'scripts' => array(
+				'Entity.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
+		'wikibase.datamodel.EntityId' => $moduleTemplate + array(
+			'scripts' => array(
+				'EntityId.js',
+			),
+			'dependencies' => array(
+				'mw.ext.dataValues',
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
+		'wikibase.datamodel.Fingerprint' => $moduleTemplate + array(
+			'scripts' => array(
+				'Fingerprint.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.TermGroupList',
+				'wikibase.datamodel.TermList',
+			),
+		),
+
+		'wikibase.datamodel.Item' => $moduleTemplate + array(
+			'scripts' => array(
+				'Item.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Entity',
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.SiteLinkList',
+				'wikibase.datamodel.StatementList',
+			),
+		),
+
+		'wikibase.datamodel.Property' => $moduleTemplate + array(
+			'scripts' => array(
+				'Property.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Entity',
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.StatementList',
+			),
 		),
 
 		'wikibase.datamodel.PropertyNoValueSnak' => $moduleTemplate + array(
@@ -75,8 +139,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Snak'
-			)
+				'wikibase.datamodel.Snak',
+			),
 		),
 
 		'wikibase.datamodel.PropertySomeValueSnak' => $moduleTemplate + array(
@@ -86,8 +150,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Snak'
-			)
+				'wikibase.datamodel.Snak',
+			),
 		),
 
 		'wikibase.datamodel.PropertyValueSnak' => $moduleTemplate + array(
@@ -95,11 +159,50 @@ return call_user_func( function() {
 				'PropertyValueSnak.js',
 			),
 			'dependencies' => array(
-				'mw.ext.dataValues', // DataValues extension
+				'mw.ext.dataValues',
 				'util.inherit',
 				'wikibase.datamodel.__namespace',
-				'wikibase.datamodel.Snak'
-			)
+				'wikibase.datamodel.Snak',
+			),
+		),
+
+		'wikibase.datamodel.Reference' => $moduleTemplate + array(
+			'scripts' => array(
+				'Reference.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.SnakList',
+			),
+		),
+
+		'wikibase.datamodel.ReferenceList' => $moduleTemplate + array(
+			'scripts' => array(
+				'ReferenceList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Reference',
+			),
+		),
+
+		'wikibase.datamodel.SiteLink' => $moduleTemplate + array(
+			'scripts' => array(
+				'SiteLink.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
+		'wikibase.datamodel.SiteLinkList' => $moduleTemplate + array(
+			'scripts' => array(
+				'SiteLinkList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.SiteLink',
+			),
 		),
 
 		'wikibase.datamodel.Snak' => $moduleTemplate + array(
@@ -107,9 +210,8 @@ return call_user_func( function() {
 				'Snak.js',
 			),
 			'dependencies' => array(
-				'mw.ext.dataValues', // DataValues extension
 				'wikibase.datamodel.__namespace',
-			)
+			),
 		),
 
 		'wikibase.datamodel.Snak.newFromMap' => $moduleTemplate + array(
@@ -121,7 +223,76 @@ return call_user_func( function() {
 				'wikibase.datamodel.PropertySomeValueSnak',
 				'wikibase.datamodel.PropertyValueSnak',
 				'wikibase.datamodel.Snak',
-			)
+			),
+		),
+
+		'wikibase.datamodel.SnakList' => $moduleTemplate + array(
+			'scripts' => array(
+				'SnakList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Snak',
+			),
+		),
+
+		'wikibase.datamodel.Statement' => $moduleTemplate + array(
+			'scripts' => array(
+				'Statement.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ReferenceList',
+			),
+		),
+
+		'wikibase.datamodel.StatementList' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Statement',
+			),
+		),
+
+		'wikibase.datamodel.Term' => $moduleTemplate + array(
+			'scripts' => array(
+				'Term.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
+		'wikibase.datamodel.TermGroup' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermGroup.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
+		'wikibase.datamodel.TermGroupList' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermGroupList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.TermGroup',
+			),
+		),
+
+		'wikibase.datamodel.TermList' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Term',
+			),
 		),
 	);
 

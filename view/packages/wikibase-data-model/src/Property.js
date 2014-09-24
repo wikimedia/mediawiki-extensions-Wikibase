@@ -21,9 +21,9 @@ var PARENT = wb.datamodel.Entity;
 var constructor = function( entityId, fingerprint, dataTypeId, statementList ) {
 	if(
 		typeof entityId !== 'string'
-		|| fingerprint === undefined
+		|| !( fingerprint instanceof wb.datamodel.Fingerprint )
 		|| typeof dataTypeId !== 'string'
-		|| statementList === undefined
+		|| !( statementList instanceof wb.datamodel.StatementList )
 	) {
 		throw new Error( 'Required parameter(s) missing' );
 	}
