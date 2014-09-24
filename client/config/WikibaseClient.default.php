@@ -46,7 +46,7 @@ return call_user_func( function() {
 		// Allow accessing data from other items in the parser functions and via Lua
 		'allowArbitraryDataAccess' => true,
 		// The new usage tracking is not hooked up yet
-		'useLegacyUsageIndex' => true,
+		'useLegacyUsageIndex' => false,
 
 		/**
 		 * @todo this is a bit wikimedia-specific and need to find a better place for this stuff,
