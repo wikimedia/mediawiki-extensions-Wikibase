@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Usage;
 
-use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

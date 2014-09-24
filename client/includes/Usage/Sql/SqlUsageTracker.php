@@ -5,6 +5,7 @@ namespace Wikibase\Client\Usage\Sql;
 use ArrayIterator;
 use DatabaseBase;
 use Exception;
+use InvalidArgumentException;
 use Iterator;
 use LoadBalancer;
 use Wikibase\Client\Usage\EntityUsage;
@@ -104,6 +105,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
+	 * @param DatabaseBase $db
 	 * @param string $fname
 	 *
 	 * @return DatabaseBase
@@ -114,13 +116,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
+	 * @param DatabaseBase $db
 	 * @param string $fname
 	 *
 	 * @return DatabaseBase
 	 */
 	private function rollbackAtomicSection( DatabaseBase $db, $fname = __METHOD__ ) {
 		//FIXME: there does not seem to be a clean way to roll back an atomic section?!
-		$db->rollback( $fname );
+		$db->rollback( $fname, 'flush' );
 		$this->releaseConnection( $db );
 	}
 
@@ -128,13 +131,19 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * Re-indexes the given list of EntityIds so that each EntityId can be found by using its
 	 * string representation as a key.
 	 *
-	 * @param EntityId[] $ids
+	 * @param EntityId[] $entityIds
+	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityId[]
 	 */
-	private function reindexEntityIds( array $ids ) {
+	private function reindexEntityIds( array $entityIds ) {
 		$reindexed = array();
 
-		foreach ( $ids as $id ) {
+		foreach ( $entityIds as $id ) {
+			if ( !( $id instanceof EntityId ) ) {
+				throw new InvalidArgumentException( '$entityIds must contain EntityId objects.' );
+			}
+
 			$key = $id->getSerialization();
 			$reindexed[$key] = $id;
 		}
@@ -147,12 +156,18 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * string representation as a key.
 	 *
 	 * @param EntityUsage[] $usages
+	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
 	private function reindexEntityUsages( array $usages ) {
 		$reindexed = array();
 
 		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
 			$key = $usage->toString();
 			$reindexed[$key] = $usage;
 		}
@@ -166,10 +181,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityUsage[] Usages before the update, in the same form as $usages
-	 * @throws UsageTrackerException
 	 */
 	public function trackUsedEntities( $pageId, array $usages ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
 		$db = $this->beginAtomicSection( __METHOD__ );
 
 		try {
@@ -235,12 +254,17 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @param EntityUsage[] $usages
 	 *
+	 * @throws InvalidArgumentException
 	 * @return array[] an associative array mapping aspect ids to lists of EntityIds.
 	 */
 	private function binUsages( array $usages ) {
 		$bins = array();
 
 		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
 			$aspect = $usage->getAspect();
 			$id = $usage->getEntityId();
 			$key = $id->getSerialization();
@@ -255,12 +279,17 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
 	 *
+	 * @throws InvalidArgumentException
 	 * @return array[] A list of rows for use with DatabaseBase::insert
 	 */
 	private function makeUsageRows( $pageId, array $usages ) {
 		$rows = array();
 
 		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
 			$rows[] = array(
 				'eu_page_id' => (int)$pageId,
 				'eu_aspect' => (string)$usage->getAspect(),
@@ -395,9 +424,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param DatabaseBase $db
 	 * @param int $pageId
 	 *
+	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
 	private function queryUsageForPage( DatabaseBase $db, $pageId ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
 		$res = $db->select(
 			$this->tableName,
 			array( 'eu_aspect', 'eu_entity_id' ),
