@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_48a605c0",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "What does this \"I\" stand for?",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_a896a14d",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "Checking the validity of $aspect would be nice",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_edb70b80",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "tableName",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_cd8567b3",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "Field appears to be not used. Which makes releaseConnection pointless. Which makes the currentTrx field pointless.\n\nSo far for throwing the prototype away?",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_2dbe4361",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "visibility. For the 9001th time...",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_083a4d33",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "Parameter is not used",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_286ab112",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "This thing is invoking a lot of private code only used by this method. And this database thing is passed to most of them. Look at modifyUsage - it has 4 parameters (which is a serious code smell). This all suggests the same thing :)",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_add473bf",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "wrong",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_0d725fe2",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "visibility. 9002th time",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_4d6857f2",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "new self",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_e8d3795f",
+        "filename": "client/includes/Usage/UsageTrackerException.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "?",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_c86e7593",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "Seems part of the task here to do this",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_280751cf",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/SqlUsageTrackerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "These methods don\u0027t even have assertions. This causes warnings when running with strict mode",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_a8f221dd",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "9003th time",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_c8f555c9",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "$this-\u003eassertEmpty(), not need to do weird imports",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_c81c351b",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "type hint missing",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_88163df5",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "9004",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_68130906",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "$this-\u003eassertEmpty",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_a8cfc181",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "type hints",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_48bf25ce",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-24T20:46:27Z",
+      "side": 1,
+      "message": "type hint",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
