@@ -206,6 +206,23 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_a8fb4143",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-24T21:00:09Z",
+      "side": 1,
+      "message": "eeek!",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_e8d3795f",
         "filename": "client/includes/Usage/UsageTrackerException.php",
         "patchSetId": 7
@@ -370,6 +387,23 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "type hint",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_688c29dc",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-24T21:00:09Z",
+      "side": 1,
+      "message": "agree, but i don\u0027t think this needs to be mentioned here. we have bug for this, right?",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
