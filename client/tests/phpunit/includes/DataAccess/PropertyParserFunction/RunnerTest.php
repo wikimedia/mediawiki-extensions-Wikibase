@@ -9,7 +9,7 @@ use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\Runner

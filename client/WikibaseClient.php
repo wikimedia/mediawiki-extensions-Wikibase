@@ -94,6 +94,7 @@ call_user_func( function() {
 	$wgHooks['OutputPageParserOutput'][]		= '\Wikibase\Client\Hooks\SidebarHookHandlers::onOutputPageParserOutput';
 	$wgHooks['SkinTemplateGetLanguageLink'][]		= '\Wikibase\Client\Hooks\SidebarHookHandlers::onSkinTemplateGetLanguageLink';
 	$wgHooks['ParserAfterParse'][]				= '\Wikibase\Client\Hooks\SidebarHookHandlers::onParserAfterParse';
+	$wgHooks['ParserAfterParse'][]				= '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onParserAfterParse';
 	$wgHooks['ParserFirstCallInit'][]			= '\Wikibase\ClientHooks::onParserFirstCallInit';
 	$wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\ClientHooks::onMagicWordwgVariableIDs';
 	$wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\ClientHooks::onParserGetVariableValueSwitch';

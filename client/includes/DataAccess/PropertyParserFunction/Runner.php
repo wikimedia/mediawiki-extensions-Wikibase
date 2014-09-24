@@ -6,7 +6,7 @@ use Parser;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * Runner for the {{#property}} parser function.

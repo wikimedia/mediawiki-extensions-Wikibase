@@ -2,11 +2,14 @@
 
 namespace Wikibase\Test;
 
+use ArrayIterator;
 use Diff\Differ\MapDiffer;
 use Site;
+use SiteList;
 use Title;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDiff;
@@ -14,7 +17,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
-use Wikibase\ItemUsageIndex;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers Wikibase\ChangeHandler
@@ -53,16 +56,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$this->site->addNavigationId( 'en' );
 
 		$repo = self::getMockRepo();
-		$usageIndex = new ItemUsageIndex( $this->site, $repo );
 
-		$siteList = $this->getMock( 'SiteList' );
-		$siteList->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnCallback( function( $globalSiteId ) {
-				$site = new \MediaWikiSite();
-				$site->setGlobalId( $globalSiteId );
-				return $site;
-			} ) );
+		$usageLookup = $this->getUsageLookup( $repo );
+		$siteList = $this->getSiteList();
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
@@ -71,7 +67,7 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			$changeFactory,
 			$this->updater,
 			$repo,
-			$usageIndex,
+			$usageLookup,
 			$this->site,
 			$siteList
 		);
@@ -965,14 +961,39 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideGetEditComment
+	 * @return UsageLookup
 	 */
-	public function testGetEditComment( Change $change, \Title $title, $entities, $expected ) {
-		$this->updateMockRepo( $entities );
+	private function getUsageLookup( SiteLinkLookup $siteLinklookup ) {
+		$site = $this->site;
 
-		$repo = self::getMockRepo();
-		$usageIndex = new ItemUsageIndex( $this->site, $repo );
+		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+		$usageLookup->expects( $this->any() )
+			->method( 'getPagesUsing' )
+			->will( $this->returnCallback(
+				function( $ids ) use ( $siteLinklookup, $site ) {
+					$pages = array();
 
+					foreach ( $ids as $id ) {
+						$links = $siteLinklookup->getSiteLinksForItem( $id );
+						foreach ( $links as $link ) {
+							if ( $link->getSiteId() == $site->getGlobalId() ) {
+								$name = $link->getPageName();
+								$pageId = 0;
+								$pages[] = $pageId;
+							}
+						}
+					}
+
+					return new ArrayIterator( $pages );
+				} ) );
+
+		return $usageLookup;
+	}
+
+	/**
+	 * @return SiteList
+	 */
+	private function getSiteList() {
 		$siteList = $this->getMock( 'SiteList' );
 		$siteList->expects( $this->any() )
 			->method( 'getSite' )
@@ -985,14 +1006,27 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				return $site;
 			} ) );
 
+		return $siteList;
+	}
+
+	/**
+	 * @dataProvider provideGetEditComment
+	 */
+	public function testGetEditComment( Change $change, \Title $title, $entities, $expected ) {
+		$this->updateMockRepo( $entities );
+
+		$repo = self::getMockRepo();
+
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
+		$usageLookup = $this->getUsageLookup( $repo );
+		$siteList = $this->getSiteList();
 		$updater = new MockPageUpdater();
 		$handler = new ChangeHandler(
 			$changeFactory,
 			$updater,
 			$repo,
-			$usageIndex,
+			$usageLookup,
 			$this->site,
 			$siteList
 		);

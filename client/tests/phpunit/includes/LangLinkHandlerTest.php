@@ -14,7 +14,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
-use Wikibase\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * @covers Wikibase\LangLinkHandler
