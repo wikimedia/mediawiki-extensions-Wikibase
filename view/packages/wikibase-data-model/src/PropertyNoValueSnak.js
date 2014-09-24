@@ -10,16 +10,15 @@ var PARENT = wb.datamodel.Snak;
 /**
  * Represents a Wikibase PropertyNoValueSnak.
  * @constructor
- * @extends wb.datamodel.Snak
+ * @extends wikibase.datamodel.Snak
  * @since 0.3
  *
- * @param {Number} propertyId
+ * @param {string} propertyId
  */
 var SELF = wb.datamodel.PropertyNoValueSnak = util.inherit( 'WbPropertyNoValueSnak', PARENT, {} );
 
 /**
- * @see wb.datamodel.Snak.TYPE
- * @type String
+ * @see wikibase.datamodel.Snak.TYPE
  */
 SELF.TYPE = 'novalue';
 

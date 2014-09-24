@@ -40,7 +40,6 @@ return call_user_func( function() {
 				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.SiteLinkList',
 				'wikibase.datamodel.Snak',
-				'wikibase.datamodel.Snak.newFromMap',
 			),
 		),
 
@@ -211,18 +210,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
-			),
-		),
-
-		'wikibase.datamodel.Snak.newFromMap' => $moduleTemplate + array(
-			'scripts' => array(
-				'Snak.newFromMap.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.datamodel.PropertySomeValueSnak',
-				'wikibase.datamodel.PropertyValueSnak',
-				'wikibase.datamodel.Snak',
 			),
 		),
 
