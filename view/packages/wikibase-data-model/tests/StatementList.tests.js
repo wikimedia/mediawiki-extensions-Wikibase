@@ -147,6 +147,16 @@ QUnit.test( 'removeStatement()', function( assert ) {
 	);
 } );
 
+QUnit.test( 'getPropertyIds()', function( assert ) {
+	var statementList = getDefaultStatementList();
+
+	assert.deepEqual(
+		statementList.getPropertyIds(),
+		['P1', 'P2'],
+		'Retrieved property ids.'
+	);
+} );
+
 QUnit.test( 'isEmpty()', function( assert ) {
 	var statementList = new wb.datamodel.StatementList(),
 		statement = new wb.datamodel.Statement(

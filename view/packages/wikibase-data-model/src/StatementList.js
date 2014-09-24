@@ -44,7 +44,10 @@ $.extend( SELF.prototype, {
 	 */
 	hasStatement: function( statement ) {
 		for( var i = 0; i < this._statements.length; i++ ) {
-			if( statement.equals( this._statements[i] ) ) {
+			if(
+				statement.getClaim().getGuid() === this._statements[i].getClaim().getGuid()
+				&& statement.equals( this._statements[i] )
+			) {
 				return true;
 			}
 		}
@@ -90,7 +93,7 @@ $.extend( SELF.prototype, {
 		var propertyIds = [];
 
 		for( var i = 0; i < this._statements.length; i++ ) {
-			var propertyId = this._statements[i].getMainSnak().getPropertyId();
+			var propertyId = this._statements[i].getClaim().getMainSnak().getPropertyId();
 			if( $.inArray( propertyId, propertyIds ) === -1 ) {
 				propertyIds.push( propertyId );
 			}
@@ -135,8 +138,8 @@ $.extend( SELF.prototype, {
 	indexOf: function( statement ) {
 		for( var i = 0; i < this._statements.length; i++ ) {
 			if(
-				this._statements[i].equals( statement )
-				&& this._statements[i].getClaim().getGuid() === statement.getClaim().getGuid()
+				this._statements[i].getClaim().getGuid() === statement.getClaim().getGuid()
+				&& this._statements[i].equals( statement )
 			) {
 				return i;
 			}
