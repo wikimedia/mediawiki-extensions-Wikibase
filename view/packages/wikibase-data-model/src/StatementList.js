@@ -120,12 +120,28 @@ $.extend( SELF.prototype, {
 		}
 
 		for( var i = 0; i < this._statements.length; i++ ) {
-			if( !statementList.hasStatement( this._statements[i] ) ) {
+			if( statementList.indexOf( this._statements[i] ) !== i ) {
 				return false;
 			}
 		}
 
 		return true;
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Statement} statement
+	 * @return {number}
+	 */
+	indexOf: function( statement ) {
+		for( var i = 0; i < this._statements.length; i++ ) {
+			if(
+				this._statements[i].equals( statement )
+				&& this._statements[i].getClaim().getGuid() === statement.getClaim().getGuid()
+			) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 } );

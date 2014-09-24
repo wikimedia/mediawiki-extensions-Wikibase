@@ -164,4 +164,17 @@ QUnit.test( 'equals()', function( assert ) {
 	);
 } );
 
+QUnit.test( 'indexOf()', function( assert ) {
+	var referenceList = getDefaultReferenceList();
+
+	assert.strictEqual(
+		referenceList.indexOf( new wb.datamodel.Reference(
+			new wb.datamodel.SnakList(),
+			'i am another hash'
+		) ),
+		1,
+		'Retrieved correct index.'
+	);
+} );
+
 }( wikibase, QUnit ) );

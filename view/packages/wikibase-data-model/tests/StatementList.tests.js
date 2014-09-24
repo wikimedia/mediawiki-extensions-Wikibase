@@ -193,4 +193,16 @@ QUnit.test( 'equals()', function( assert ) {
 	);
 } );
 
+QUnit.test( 'indexOf()', function( assert ) {
+	var referenceList = getDefaultStatementList();
+
+	assert.strictEqual(
+		referenceList.indexOf( new wb.datamodel.Statement(
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
+		) ),
+		1,
+		'Retrieved correct index.'
+	);
+} );
+
 }( wikibase, QUnit ) );
