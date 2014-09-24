@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_76777436",
+        "filename": "lib/resources/wikibase.RepoApi/wikibase.RepoApi.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-24T10:55:36Z",
+      "side": 1,
+      "message": "no documentation? :)",
+      "revId": "8764290028cfd4510fde807d4650f90f9c7e5de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
