@@ -1,11 +1,11 @@
 <?php
-namespace Wikibase\Usage\Tests;
+namespace Wikibase\Client\Usage\Tests;
 
 use ParserOutput;
-use Wikibase\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
- * @covers Wikibase\Usage\ParserOutputUsageAccumulatorTest
+ * @covers Wikibase\Client\Usage\ParserOutputUsageAccumulatorTest
  *
  * @group Wikibase
  * @group WikibaseClient

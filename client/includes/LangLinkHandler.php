@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * @todo split this up and find a better home for stuff that adds

@@ -1,10 +1,10 @@
 <?php
-namespace Wikibase\Usage\Tests;
+namespace Wikibase\Client\Usage\Tests;
 
-use Wikibase\Usage\HashUsageAccumulator;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 
 /**
- * @covers Wikibase\Usage\HashUsageAccumulatorTest
+ * @covers Wikibase\Client\Usage\HashUsageAccumulatorTest
  *
  * @group Wikibase
  * @group WikibaseClient

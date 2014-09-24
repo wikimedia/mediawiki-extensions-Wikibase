@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * Renderer of the {{#property}} parser function.

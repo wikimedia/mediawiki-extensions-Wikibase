@@ -1,9 +1,9 @@
 <?php
-namespace Wikibase\Usage\Tests;
+namespace Wikibase\Client\Usage\Tests;
 
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 use PHPUnit_Framework_Assert as Assert;
 
 /**

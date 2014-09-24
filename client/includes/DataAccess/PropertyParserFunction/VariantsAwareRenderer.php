@@ -4,7 +4,7 @@ namespace Wikibase\DataAccess\PropertyParserFunction;
 
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * Handler of the {{#property}} parser function.
@@ -30,7 +30,7 @@ class VariantsAwareRenderer implements Renderer {
 	private $variants;
 
 	/**
-	 * @var \Wikibase\Usage\UsageAccumulator
+	 * @var \Wikibase\Client\Usage\UsageAccumulator
 	 */
 	private $usageAccumulator;
 

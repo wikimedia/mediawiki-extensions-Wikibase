@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\PropertyLabelNotResolvedException;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\LanguageAwareRenderer
@@ -37,7 +37,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	 * @return UsageAccumulator
 	 */
 	private function getUsageAccumulator( array &$usages ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Usage\UsageAccumulator' )
+		$mock = $this->getMockBuilder( 'Wikibase\Client\Usage\UsageAccumulator' )
 			->disableOriginalConstructor()
 			->getMock();
 

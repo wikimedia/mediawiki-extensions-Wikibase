@@ -1,9 +1,8 @@
 <?php
 
-namespace Wikibase\Usage;
+namespace Wikibase\Client\Usage;
 
 use ParserOutput;
-use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

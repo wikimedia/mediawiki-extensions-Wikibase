@@ -8,7 +8,7 @@ use ParserOptions;
 use Title;
 use User;
 use Wikibase\DataAccess\PropertyParserFunction\RendererFactory;
-use Wikibase\Usage\HashUsageAccumulator;
+use Wikibase\Client\Usage\HashUsageAccumulator;
 
 /**
  * @covers Wikibase\DataAccess\PropertyParserFunction\RendererFactory

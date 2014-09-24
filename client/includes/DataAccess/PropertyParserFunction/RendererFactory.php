@@ -8,8 +8,8 @@ use ValueFormatters\FormatterOptions;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
-use Wikibase\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Usage\UsageAccumulator;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\Usage\UsageAccumulator;
 
 /**
  * @since 0.5
