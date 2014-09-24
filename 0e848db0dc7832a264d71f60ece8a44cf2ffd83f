@@ -104,6 +104,23 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_68de69e0",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2014-09-24T20:54:36Z",
+      "side": 1,
+      "message": "this appears to reinvent $db-\u003estartAtomic()... why?",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_286ab112",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 7
