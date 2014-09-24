@@ -19,10 +19,6 @@ var SELF = wb.datamodel.SiteLinkList = function WbDataModelSiteLinkList( siteLin
 	this.length = 0;
 
 	for( var i = 0; i < siteLinks.length; i++ ) {
-		if( !siteLinks[i] instanceof wb.datamodel.SiteLink ) {
-			throw new Error( 'SiteLinkList may contain SiteLink instances only' );
-		}
-
 		var siteId = siteLinks[i].getSiteId();
 
 		if( this._siteLinks[siteId] ) {
@@ -77,6 +73,10 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.SiteLink} siteLink
 	 */
 	setSiteLink: function( siteLink ) {
+		if( !siteLink instanceof wb.datamodel.SiteLink ) {
+			throw new Error( 'SiteLinkList may contain SiteLink instances only' );
+		}
+
 		var siteId = siteLink.getSiteId();
 
 		if( !this._siteLinks[siteId] ) {

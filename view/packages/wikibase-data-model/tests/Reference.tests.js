@@ -28,7 +28,7 @@
 			);
 
 			assert.ok(
-				reference.getSnaks().equals( new wb.datamodel.SnakList( snakLists[i] ) ),
+				reference.getSnaks().equals( snakLists[i] ),
 				'Test set #' + i + ': Retrieved Snaks passed to the constructor.'
 			);
 		}

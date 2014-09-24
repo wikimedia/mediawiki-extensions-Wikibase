@@ -19,10 +19,6 @@ var SELF = wb.datamodel.StatementList = function WbDataModelStatementList( state
 	this.length = 0;
 
 	for( var i = 0; i < statements.length; i++ ) {
-		if( !( statements[i] instanceof wb.datamodel.Statement ) ) {
-			throw new Error( 'StatementList may contain Statement instances only' );
-		}
-
 		this.addStatement( statements[i] );
 	}
 };
@@ -65,6 +61,9 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.Statement} statement
 	 */
 	addStatement: function( statement ) {
+		if( !( statement instanceof wb.datamodel.Statement ) ) {
+			throw new Error( 'StatementList may contain Statement instances only' );
+		}
 		this._statements.push( statement );
 		this.length++;
 	},

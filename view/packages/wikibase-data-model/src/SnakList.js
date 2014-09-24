@@ -7,92 +7,63 @@
 'use strict';
 
 /**
- * Container for a list of Snaks. Each snak within the list in unique, Snaks considered as equal
- * will not be added to the list a second time.
- *
+ * Ordered set of unique Snak objects.
  * @constructor
  * @abstract
  * @since 0.3
  *
- * @param {wb.datamodel.Snak[]|wb.datamodel.Snak|wb.datamodel.SnakList} [snaks] One or more Snaks in
- *        the list initially.
+ * @param {wikibase.datamodel.Snak[]} [snaks]
  */
 var SELF = wb.datamodel.SnakList = function WbSnakList( snaks ) {
+	snaks = snaks || [];
+
 	this._snaks = [];
 	this.length = 0;
 
-	if( $.isArray( snaks ) ) {
-		for( var i in snaks ) {
-			this.addSnak( snaks[i] );
-		}
-	}
-	else if( snaks instanceof wb.datamodel.SnakList ) {
-		this._snaks = snaks.toArray();
-		this.length = this._snaks.length;
-	}
-	else if( snaks instanceof wb.datamodel.Snak ) {
-		this.addSnak( snaks );
-	}
-	else if( snaks !== undefined ) {
-		throw new Error( 'Unknown first argument in SnakList constructor' );
+	for( var i = 0; i < snaks.length; i++ ) {
+		this.addSnak( snaks[i] );
 	}
 };
 
 $.extend( SELF.prototype, {
 	/**
-	 * Number of snaks in the list currently.
-	 * @type number
+	 * @type {number}
 	 */
 	length: 0,
 
 	/**
-	 * List of snaks for keeping track over Snaks internally.
-	 * @type wb.datamodel.Snak[]
+	 * @type wikibase.datamodel.Snak[]
 	 */
 	_snaks: null,
 
 	/**
-	 * Will add a given Snak to the list of Snaks. If an equal Snak is in the list already, the
-	 * Snak will not be added.
-	 *
-	 * @param {wb.datamodel.Snak} snak
-	 * @return boolean Whether Snak was not yet in the list and therefore added.
+	 * @param {wikibase.datamodel.Snak} snak
 	 */
 	addSnak: function( snak ) {
 		if( !( snak instanceof wb.datamodel.Snak ) ) {
-			throw new Error( 'No Snak given which could be added to the Snak list' );
+			throw new Error( 'SnakList may contain Snak instances only' );
 		}
-		// if an equal Snak is in the list already, don't add it again!
+
 		if( !this.hasSnak( snak ) ) {
 			this._snaks.push( snak );
 			this.length++;
-			return true;
 		}
-		return false;
 	},
 
 	/**
-	 * Removes a given Snak from the list.
-	 *
-	 * @param {wb.datamodel.Snak} snak
-	 * @return boolean Whether Snak was in the list and therefore removed.
+	 * @param {wikibase.datamodel.Snak} snak
 	 */
 	removeSnak: function( snak ) {
-		// if an equal Snak is in the list already, don't add it again
-		for( var i in this._snaks ) {
+		for( var i = 0; i < this._snaks.length; i++ ) {
 			if( this._snaks[i].equals( snak ) ) {
-				// JS will not leave 'gaps' in the array, so no worries about the each()'s
-				// callback's index.
 				this._snaks.splice( i, 1 );
 				this.length--;
-				return true;
 			}
 		}
-		return false;
 	},
 
 	/**
-	 * Returns a snak list with the snaks that feature the specified property id. If the property id
+	 * Returns a SnakList with the snaks featuring a specific property id. If the property id
 	 * parameter is omitted, a copy of the whole SnakList object is returned.
 	 *
 	 * @param {string} [propertyId]
@@ -131,13 +102,11 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns whether the list contains a Snak equal to a given one.
-	 *
-	 * @param {wb.datamodel.Snak} snak
-	 * @return boolean
+	 * @param {wikibase.datamodel.Snak} snak
+	 * @return {boolean}
 	 */
 	hasSnak: function( snak ) {
-		for( var i in this._snaks ) {
+		for( var i = 0; i < this._snaks.length; i++ ) {
 			if( this._snaks[i].equals( snak ) ) {
 				return true;
 			}
@@ -146,15 +115,13 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Will return whether a given Snak list equals this one.
-	 *
-	 * @param {wb.datamodel.SnakList} snakList
-	 * @return boolean
+	 * @param {*} snakList
+	 * @return {boolean}
 	 */
 	equals: function( snakList ) {
-		if( snakList.constructor !== this.constructor
-			|| snakList.length !== this.length
-		) {
+		if( snakList === this ) {
+			return true;
+		} else if( snakList.constructor !== this.constructor || snakList.length !== this.length ) {
 			return false;
 		}
 
@@ -171,21 +138,15 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Iterates over all Snaks in the list, similar to jQuery.each.
-	 *
-	 * @param {Function} fn A callback, called for each Snak in the list. The callback can have
-	 *        two parameters:
-	 *        (1) {Number} index A continuous number, increased with each callback.
-	 *        (2) {wb.datamodel.Snak} snak A Snak from the list.
-	 *        If false is returned by one of the callbacks, the iteration will stop. The context of
-	 *        the callbacks will be the Snak object.
+	 * Iterates over all Snaks in the list.
+	 * @see jQuery.fn.each
 	 */
 	each: function( fn ) {
 		$.each.call( null, this._snaks, fn );
 	},
 
 	/**
-	 * Adds the snaks of another snak list to this snak list.
+	 * Adds the Snaks of another SnakList to this SnakList.
 	 *
 	 * @param {wikibase.datamodel.SnakList} snakList
 	 */
@@ -201,7 +162,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a list of property ids representing the order of the snaks grouped by property.
+	 * Returns a list of property ids representing the order of the Snaks grouped by property.
 	 *
 	 * @return {string[]}
 	 */
@@ -220,7 +181,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a snak's index within the snak list. Returns -1 when the snak could not be found.
+	 * Returns a Snak's index within the SnakList. Returns -1 when the Snak could not be found.
 	 *
 	 * @param {wikibase.datamodel.Snak} snak
 	 * @return {number}
@@ -290,7 +251,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Moves a snaklist's snak to a new index.
+	 * Moves a SnakList's Snak to a new index.
 	 *
 	 * @param {wikibase.datamodel.Snak} snak Snak to move within the list.
 	 * @param {number} toIndex
@@ -393,7 +354,7 @@ $.extend( SELF.prototype, {
 	 * Returns all Snaks in this list as an Array of Snaks. Changes to the array will not modify
 	 * the original list Object.
 	 *
-	 * @return wb.datamodel.Snak[]
+	 * @return {wikibase.datamodel.Snak[]}
 	 */
 	toArray: function() {
 		return this._snaks.slice(); // don't reveal internal array!

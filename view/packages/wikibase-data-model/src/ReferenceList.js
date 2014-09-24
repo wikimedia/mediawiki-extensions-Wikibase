@@ -19,10 +19,6 @@ var SELF = wb.datamodel.ReferenceList = function WbDataModelReferenceList( refer
 	this.length = 0;
 
 	for( var i = 0; i < references.length; i++ ) {
-		if( !( references[i] instanceof wb.datamodel.Reference ) ) {
-			throw new Error( 'ReferenceList may contain Reference instances only' );
-		}
-
 		this.addReference( references[i] );
 	}
 };
@@ -65,6 +61,10 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.Reference} reference
 	 */
 	addReference: function( reference ) {
+		if( !( reference instanceof wb.datamodel.Reference ) ) {
+			throw new Error( 'ReferenceList may contain Reference instances only' );
+		}
+
 		this._references.push( reference );
 		this.length++;
 	},

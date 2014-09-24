@@ -19,10 +19,6 @@ var SELF = wb.datamodel.ClaimList = function WbDataModelClaimList( claims ) {
 	this.length = 0;
 
 	for( var i = 0; i < claims.length; i++ ) {
-		if( !( claims[i] instanceof wb.datamodel.Claim ) ) {
-			throw new Error( 'ClaimList may contain Claim instances only' );
-		}
-
 		this.addClaim( claims[i] );
 	}
 };
@@ -68,6 +64,10 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.Claim} claim
 	 */
 	addClaim: function( claim ) {
+		if( !( claim instanceof wb.datamodel.Claim ) ) {
+			throw new Error( 'ClaimList may contain Claim instances only' );
+		}
+
 		this._claims.push( claim );
 		this.length++;
 	},

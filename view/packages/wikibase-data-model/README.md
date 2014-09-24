@@ -24,6 +24,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Remove Claim.TYPE and Statement.TYPE attributes.
 * Instead of inheriting from Claim, Statement now features a Claim instance that needs to be passed to the Statement constructor.
 * Reference constructor does not accept a plain list of Snak objects anymore; Supply a proper SnakList object instead.
+* SnakList constructor only accepts arrays of Snak objects.
 
 #### Enhancements
 * Added ClaimList.
