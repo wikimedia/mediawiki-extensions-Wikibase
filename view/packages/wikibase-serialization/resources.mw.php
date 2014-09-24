@@ -325,6 +325,18 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.TermListUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.TermListUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.TermList',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.TermUnserializer',
+			),
+		),
 
 		'wikibase.serialization.TermSerializer' => $moduleTemplate + array(
 			'scripts' => array(

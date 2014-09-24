@@ -28,7 +28,7 @@ MODULE.TermListSerializer = util.inherit( 'WbTermListSerializer', PARENT, {
 		}
 
 		var serialization = {},
-			termSerializer = new wb.serialization.TermSerializer(),
+			termSerializer = new MODULE.TermSerializer(),
 			languageCodes = termList.getLanguages();
 
 		for( var i = 0; i < languageCodes.length; i++ ) {
