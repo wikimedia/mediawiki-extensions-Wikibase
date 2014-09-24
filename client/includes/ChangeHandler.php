@@ -6,6 +6,8 @@ use MWException;
 use Site;
 use SiteList;
 use Title;
+use Wikibase\Client\Store\TitleFactory;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
@@ -110,7 +112,8 @@ class ChangeHandler {
 		EntityChangeFactory $changeFactory = null,
 		PageUpdater $updater = null,
 		EntityRevisionLookup $entityRevisionLookup = null,
-		ItemUsageIndex $itemUsageIndex = null,
+		UsageLookup $entityUsage = null,
+		TitleFactory $titleFactory= null,
 		Site $localSite = null,
 		SiteList $sites = null
 	) {
@@ -132,12 +135,16 @@ class ChangeHandler {
 			$entityRevisionLookup = $wikibaseClient->getStore()->getEntityRevisionLookup();
 		}
 
-		if ( !$itemUsageIndex ) {
-			$itemUsageIndex = $wikibaseClient->getStore()->getItemUsageIndex();
+		if ( !$entityUsage ) {
+			$entityUsage = $wikibaseClient->getStore()->getUsageLookup();
 		}
 
 		if ( $sites === null ) {
 			$sites = $wikibaseClient->getSiteStore()->getSites();
+		}
+
+		if ( $titleFactory === null ) {
+			$titleFactory = new TitleFactory();
 		}
 
 		$this->sites = $sites;
@@ -156,10 +163,11 @@ class ChangeHandler {
 
 		$this->updater = $updater;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->itemUsageIndex = $itemUsageIndex;
+		$this->usageLookup = $entityUsage;
 
 		$this->site = $localSite;
 		$this->siteId = $localSite->getGlobalId();
+		$this->titleFactory = $titleFactory;
 
 		// TODO: allow these to be passed in as parameters!
 		$this->setNamespaces(
@@ -563,8 +571,9 @@ class ChangeHandler {
 
 		// todo inject!
 		$referencedPagesFinder = new ReferencedPagesFinder(
-			$this->itemUsageIndex,
+			$this->usageLookup,
 			$this->namespaceChecker,
+			$this->titleFactory,
 			$this->siteId,
 			$this->checkPageExistence
 		);
