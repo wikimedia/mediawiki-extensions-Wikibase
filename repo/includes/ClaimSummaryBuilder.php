@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use InvalidArgumentException;
+use Wikibase\Repo\Diff\ClaimDiffer;
 
 /**
  * EditSummary-Builder for claim operations

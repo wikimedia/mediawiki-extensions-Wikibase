@@ -2,10 +2,10 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DiffOpValueFormatter;
+use Wikibase\Repo\Diff\DiffOpValueFormatter;
 
 /**
- * @covers Wikibase\DiffOpValueFormatter
+ * @covers Wikibase\Repo\Diff\DiffOpValueFormatter
  *
  * @group Wikibase
  * @group WikibaseRepo

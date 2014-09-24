@@ -136,7 +136,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	protected function getDiffEngineClass() {
-		return '\Wikibase\EntityContentDiffView';
+		return '\Wikibase\Repo\Diff\EntityContentDiffView';
 	}
 
 	/**

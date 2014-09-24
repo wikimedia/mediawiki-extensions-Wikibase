@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
@@ -13,6 +13,10 @@ use Message;
 use RuntimeException;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Serializers\ClaimSerializer;
 use Wikibase\Lib\SnakFormatter;
 

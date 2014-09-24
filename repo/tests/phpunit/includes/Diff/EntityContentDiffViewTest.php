@@ -8,12 +8,12 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityContentDiffView;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Repo\Diff\EntityContentDiffView;
 
 /**
- * @covers Wikibase\EntityContentDiffView
+ * @covers Wikibase\Repo\Diff\EntityContentDiffView
  *
  * @group Wikibase
  * @group WikibaseRepo

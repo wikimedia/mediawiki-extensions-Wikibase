@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp;
@@ -10,6 +10,7 @@ use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use MWException;
 use SiteStore;
+use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentDiff;
 

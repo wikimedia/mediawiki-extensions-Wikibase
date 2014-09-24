@@ -8,15 +8,15 @@ use Diff\DiffOp\DiffOpRemove;
 use IContextSource;
 use Language;
 use Site;
-use Wikibase\ClaimDiffer;
-use Wikibase\ClaimDifferenceVisualizer;
 use Wikibase\DataModel\Entity\EntityDiff;
-use Wikibase\EntityDiffVisualizer;
 use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
+use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\EntityDiffVisualizer
+ * @covers Wikibase\Repo\Diff\EntityDiffVisualizer
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -98,7 +98,7 @@ class EntityDiffVisualizerTest extends \MediaWikiTestCase {
 	 * @return ClaimDiffer
 	 */
 	protected function getMockClaimDiffer() {
-		$mock = $this->getMockBuilder( 'Wikibase\ClaimDiffer' )
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Diff\ClaimDiffer' )
 			->disableOriginalConstructor()
 			->getMock();
 		return $mock;
@@ -108,7 +108,7 @@ class EntityDiffVisualizerTest extends \MediaWikiTestCase {
 	 * @return ClaimDifferenceVisualizer
 	 */
 	protected function getMockClaimDiffVisualizer() {
-		$mock = $this->getMockBuilder( 'Wikibase\ClaimDifferenceVisualizer' )
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Diff\ClaimDifferenceVisualizer' )
 			->disableOriginalConstructor()
 			->getMock();
 		return $mock;

@@ -5,13 +5,13 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use Wikibase\ClaimDifference;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\Repo\Diff\ClaimDifference;
 
 /**
- * @covers Wikibase\ClaimDifference
+ * @covers Wikibase\Repo\Diff\ClaimDifference
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -32,7 +32,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getReferenceChanges();
 
-		$this->assertInstanceOf( 'Diff\Diff', $actual );
+		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -45,7 +45,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getQualifierChanges();
 
-		$this->assertInstanceOf( 'Diff\Diff', $actual );
+		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -59,7 +59,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getMainSnakChange();
 
-		$this->assertInstanceOf( 'Diff\DiffOpChange', $actual );
+		$this->assertInstanceOf( 'Diff\DiffOp\DiffOpChange', $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -73,7 +73,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getRankChange();
 
-		$this->assertInstanceOf( 'Diff\DiffOpChange', $actual );
+		$this->assertInstanceOf( 'Diff\DiffOp\DiffOpChange', $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
