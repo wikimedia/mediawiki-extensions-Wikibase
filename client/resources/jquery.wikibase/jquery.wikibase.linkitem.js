@@ -582,7 +582,7 @@ $.widget( 'wikibase.linkitem', {
 	 */
 	_onError: function( errorCode, errorInfo ) {
 		var error = ( errorInfo )
-			? wb.RepoApiError.newFromApiResponse( errorCode, errorInfo )
+			? wb.RepoApiError.newFromApiResponse( errorInfo )
 			: errorCode;
 
 		var $elem = $( '#wbclient-linkItem-page' );

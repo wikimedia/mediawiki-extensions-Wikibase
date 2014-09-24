@@ -71,7 +71,6 @@ return call_user_func( function() {
 				'mw.config.values.wbRepo',
 				'wikibase',
 				'wikibase.api.getLocationAgnosticMwApi',
-				'wikibase.AbstractedRepoApi',
 				'wikibase.RepoApi',
 			),
 		),
@@ -181,6 +180,7 @@ return call_user_func( function() {
 
 	return array_merge(
 		$modules,
+		include( __DIR__ . '/entityChangers/resources.php' ),
 		include( __DIR__ . '/jquery.wikibase/resources.php' )
 	);
 
