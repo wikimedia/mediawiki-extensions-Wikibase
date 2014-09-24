@@ -16,17 +16,6 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'wikibase.AbstractedRepoApi' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.AbstractedRepoApi.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-				'wikibase.datamodel',
-				'wikibase.RepoApi',
-			),
-		),
-
 		'wikibase.RepoApi' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.RepoApi.js',
