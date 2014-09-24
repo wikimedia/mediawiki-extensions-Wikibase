@@ -1,10 +1,14 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Diff;
 
 use Diff\Differ\Differ;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use Wikibase\DataModel\Claim\Claim;
+use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\SnakList;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * Class for generating a ClaimDifference given two claims.

@@ -13,12 +13,12 @@ use LogicException;
 use OutOfBoundsException;
 use UsageException;
 use Wikibase\ChangeOp\ClaimChangeOpFactory;
-use Wikibase\ClaimDiffer;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 

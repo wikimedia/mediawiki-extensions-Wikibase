@@ -7,8 +7,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\ClaimDifference;
-use Wikibase\ClaimDifferenceVisualizer;
 use Wikibase\DataModel\Claim\Claim;
 use Wikibase\DataModel\Claim\Statement;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -19,9 +17,11 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\Diff\ClaimDifference;
+use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 
 /**
- * @covers Wikibase\ClaimDifferenceVisualizer
+ * @covers Wikibase\Repo\Diff\ClaimDifferenceVisualizer
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -70,7 +70,7 @@ class ClaimDifferenceVisualizerTest extends \MediaWikiTestCase {
 
 	public function testConstruction(){
 		$instance = $this->newClaimDifferenceVisualizer();
-		$this->assertInstanceOf( 'Wikibase\ClaimDifferenceVisualizer', $instance );
+		$this->assertInstanceOf( 'Wikibase\Repo\Diff\ClaimDifferenceVisualizer', $instance );
 	}
 
 	public function testConstructionWithBadDetailsFormatter(){
