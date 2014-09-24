@@ -223,6 +223,17 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function( array &$testModul
 			),
 		),
 
+		'wikibase.serialization.TermListSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'serialization.TermListSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Term',
+				'wikibase.datamodel.TermList',
+				'wikibase.serialization.TermListSerializer',
+			),
+		),
+
 		'wikibase.serialization.TermSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'serialization.TermSerializer.tests.js',
