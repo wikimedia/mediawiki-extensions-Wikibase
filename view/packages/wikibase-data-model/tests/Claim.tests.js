@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, dv, $, QUnit ) {
+( function( wb, $, QUnit ) {
 	'use strict';
 
 QUnit.module( 'wikibase.datamodel.Claim' );
@@ -125,11 +125,9 @@ QUnit.test( 'equals()', function( assert ) {
 	} );
 
 	// Compare claim to statement:
-	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) ) ),
+	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p42' ) ),
 		statement = new wb.datamodel.Statement(
-			new wb.datamodel.Claim(
-				new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( 'string' ) )
-			)
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p42' ) )
 		);
 
 	assert.ok(
@@ -139,4 +137,4 @@ QUnit.test( 'equals()', function( assert ) {
 
 } );
 
-}( wikibase, dataValues, jQuery, QUnit ) );
+}( wikibase, jQuery, QUnit ) );
