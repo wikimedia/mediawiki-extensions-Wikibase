@@ -5,6 +5,7 @@ namespace Wikibase\Client\Usage\Sql;
 use ArrayIterator;
 use DatabaseBase;
 use Exception;
+use Instantiator\Exception\InvalidArgumentException;
 use Iterator;
 use LoadBalancer;
 use Wikibase\Client\Usage\EntityUsage;
@@ -105,10 +106,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityId[] $ids
 	 * @return EntityId[]
 	 */
-	private function reindexEntityIds( array $ids ) {
+	private function reindexEntityIds( array $entityIds ) {
 		$reindexed = array();
 
-		foreach ( $ids as $id ) {
+		foreach ( $entityIds as $id ) {
+			if ( !( $id instanceof EntityId ) ) {
+				throw new InvalidArgumentException( '$entityIds must contain EntityId objects.' );
+			}
+
 			$key = $id->getSerialization();
 			$reindexed[$key] = $id;
 		}
@@ -127,6 +132,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$reindexed = array();
 
 		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
 			$key = $usage->toString();
 			$reindexed[$key] = $usage;
 		}
@@ -144,7 +153,11 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @throws UsageTrackerException
 	 */
 	public function trackUsedEntities( $pageId, array $usages ) {
-		$db = $this->beginAtomicSection( __METHOD__ );
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
+		$db = $this->beginWriteTransaction( __METHOD__ );
 
 		try {
 			$oldUsage = $this->queryUsageForPage( $db, $pageId );
@@ -214,6 +227,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		$bins = array();
 
 		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
 			$aspect = $usage->getAspect();
 			$bins[$aspect][] = $usage->getEntityId();
 		}
@@ -265,6 +282,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		// e.g. restoring a large list page after blanking, it may be a thousand entities
 		// or more.
 		foreach ( $usages as $usage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
+				throw new InvalidArgumentException( '$usages must contain EntityUsage objects.' );
+			}
+
 			$id = $usage->getEntityId();
 
 			$db->insert(
@@ -339,6 +360,10 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[]
 	 */
 	private function queryUsageForPage( DatabaseBase $db, $pageId ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
 		$res = $db->select(
 			$this->tableName,
 			array( 'eu_aspect', 'eu_entity_id' ),
