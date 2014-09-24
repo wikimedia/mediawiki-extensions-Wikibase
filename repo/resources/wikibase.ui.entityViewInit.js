@@ -113,20 +113,21 @@
 	 * @param {jQuery} $entityview
 	 */
 	function createEntityDom( entity, $entityview ) {
-		var abstractedRepoApi = new wb.AbstractedRepoApi(),
-			entityStore = buildEntityStore( abstractedRepoApi );
+		var repoApi = new wb.RepoApi(),
+			entityStore = buildEntityStore( repoApi );
 
 		$entityview
 		.entityview( {
 			value: entity,
+			entityChangersFactory: new wb.entityChangers.EntityChangersFactory( repoApi, wb.getRevisionStore(), entity ),
 			entityStore: entityStore,
 			valueViewBuilder: new wb.ValueViewBuilder(
 				experts,
-				getFormatterStore( abstractedRepoApi, dataTypes ),
-				getParserStore( abstractedRepoApi ),
+				getFormatterStore( repoApi, dataTypes ),
+				getParserStore( repoApi ),
 				mw
 			),
-			api: abstractedRepoApi,
+			api: repoApi,
 			languages: getUserLanguages()
 		} )
 		.on( 'labelviewchange labelviewafterstopediting', function( event ) {
