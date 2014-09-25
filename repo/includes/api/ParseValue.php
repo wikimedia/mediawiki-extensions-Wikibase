@@ -209,8 +209,9 @@ class ParseValue extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// 'ex' => 'desc' // TODO
-		);
+			'api.php?action=wbparsevalue&parser=null&values=foo|bar' => 'No change to the format of the string.',
+			'api.php?action=wbparsevalue&parser=time&values=1994-02-08&options={"precision":9}' => 'Parse 1994-02-08 to a date format with a precision of 9 (the year).',
+		)
 	}
 
 	/**
