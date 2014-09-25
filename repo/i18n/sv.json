@@ -37,6 +37,7 @@
 	"wikibase-statements": "Uttalanden",
 	"wikibase-attributes": "Egenskaper",
 	"wikibase-terms": "På andra språk",
+	"wikibase-sitelinkgroupview-input-help-message": "Lägga till en webbplatslänk genom att ange en webbplats och en sida på den webbplatsen, redigera eller ta bort existerande webbplatslänkar.",
 	"wikibase-sitelinks-empty": "Inga sidor är länkade till detta objekt ännu.",
 	"wikibase-sitelinks-input-help-message": "Ange en länk till en sida relaterad till detta objekt.",
 	"wikibase-sitelinks-special": "Sidor på andra webbplatser som är länkade till detta objekt",

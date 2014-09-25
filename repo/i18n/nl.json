@@ -48,6 +48,7 @@
 	"wikibase-sitelinks-empty": "Er is nog geen pagina gekoppeld aan dit item.",
 	"wikibase-sitelinks-input-help-message": "Geef een koppeling op naar een pagina over dit item.",
 	"wikibase-sitelinks-special": "Pagina's op andere sites die gekoppeld zijn aan dit item",
+	"wikibase-badgeselector-badge-placeholder-title": "Klik om een badge toe te wijzen.",
 	"wikibase-remove": "verwijderen",
 	"wikibase-move-up": "omhoog",
 	"wikibase-move-down": "omlaag",

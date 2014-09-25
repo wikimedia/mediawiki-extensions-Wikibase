@@ -35,6 +35,7 @@
 	"wikibase-sitelinks-empty": "Ükski lehekülg pole veel selle üksusega lingitud.",
 	"wikibase-sitelinks-input-help-message": "Määra selle üksusega seotud leheküljele viitav link.",
 	"wikibase-sitelinks-special": "Sellele üksusele viitavad leheküljed teistes võrgukohtades",
+	"wikibase-badgeselector-badge-placeholder-title": "Klõpsa, et äramärkimine lisada.",
 	"wikibase-remove": "eemalda",
 	"wikibase-move-up": "liiguta üles",
 	"wikibase-move-down": "liiguta alla",

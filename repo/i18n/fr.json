@@ -63,6 +63,7 @@
 	"wikibase-sitelinks-empty": "Aucune page n’est encore liée à cet élément.",
 	"wikibase-sitelinks-input-help-message": "Créer un lien vers une page relative à cet élément.",
 	"wikibase-sitelinks-special": "Pages sur d’autres sites liées à cet élément",
+	"wikibase-badgeselector-badge-placeholder-title": "Cliquer pour attribuer un badge.",
 	"wikibase-remove": "supprimer",
 	"wikibase-move-up": "monter",
 	"wikibase-move-down": "descendre",

@@ -53,6 +53,7 @@
 	"wikibase-sitelinks-empty": "Noch keine Seite mit diesem Datenobjekt verknüpft.",
 	"wikibase-sitelinks-input-help-message": "Leg eine Verknüpfung zu einer diesem Datenobjekt entsprechenden Seite fest.",
 	"wikibase-sitelinks-special": "Seiten auf anderen Websites, die auf dieses Objekt verweisen",
+	"wikibase-badgeselector-badge-placeholder-title": "Zum Zuordnen einer Auszeichnung klicken.",
 	"wikibase-remove": "entfernen",
 	"wikibase-move-up": "nach oben verschieben",
 	"wikibase-move-down": "nach unten verschieben",
