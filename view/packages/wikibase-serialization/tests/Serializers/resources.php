@@ -151,6 +151,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.TermGroupListSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermGroupListSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Term',
+				'wikibase.datamodel.TermGroupList',
+				'wikibase.serialization.TermGroupListSerializer',
+			),
+		),
+
 		'wikibase.serialization.TermGroupSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'TermGroupSerializer.tests.js',

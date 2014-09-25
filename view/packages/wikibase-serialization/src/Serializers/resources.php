@@ -177,6 +177,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.TermGroupListSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermGroupListSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.TermGroupList',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.TermGroupSerializer',
+			),
+		),
+
 		'wikibase.serialization.TermGroupSerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'TermGroupSerializer.js',
