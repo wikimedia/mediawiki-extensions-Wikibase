@@ -221,16 +221,6 @@ class ItemMergeInteractor {
 		return array( $fromRev, $toRev );
 	}
 
-	/**
-	 * @see ApiBase::getPossibleErrors
-	 */
-	public function getErrorCodeInfo() {
-		return array(
-			'not-item' => 'Not an item',
-			'no-such-entity-id' => 'Could not find such an entity id',
-		);
-	}
-
 	private function saveEntity( Entity $entity, Summary $summary ) {
 		try {
 			return $this->entityStore->saveEntity(

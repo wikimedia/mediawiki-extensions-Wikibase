@@ -224,25 +224,4 @@ class RedirectCreationInteractor {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-redirect', $ex );
 		}
 	}
-
-	/**
-	 * Returns information about the error codes used with RedirectCreationException by this class.
-	 *
-	 * @return string[] a map of error codes as returned by RedirectCreationException::getErrorCode()
-	 * to a human readable explanation (in English).
-	 *
-	 * @see CreateRedirectException::getErrorCode()
-	 * @see ApiMain::getPossibleErrors
-	 */
-	public function getErrorCodeInfo() {
-		return array(
-			'invalid-entity-id'=> 'Invalid entity ID',
-			'target-not-empty'=> 'The entity that is to be turned into a redirect is not empty',
-			'no-such-entity'=> 'Entity not found',
-			'target-is-redirect'=> 'The redirect target is itself a redirect',
-			'target-is-incompatible'=> 'The redirect target is incompatible (e.g. a different type of entity)',
-			'cant-redirect'=> 'Can\'t create the redirect (e.g. the given type of entity does not support redirects)',
-		);
-	}
-
 }
