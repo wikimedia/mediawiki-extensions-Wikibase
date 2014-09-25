@@ -87,6 +87,11 @@
 	// Register unserializers:
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.ClaimListUnserializer,
+		wb.datamodel.ClaimList
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.ClaimUnserializer,
 		wb.datamodel.Claim
 	);

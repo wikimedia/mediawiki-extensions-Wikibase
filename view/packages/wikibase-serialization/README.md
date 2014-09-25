@@ -25,6 +25,7 @@ version 1.0 of this package:
 
 * Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityUnserializer</code> instead.
 * Added <code>wikibase.serialization.ClaimListSerializer</code>.
+* Added <code>wikibase.serialization.ClaimListUnserializer</code>.
 * Added <code>wikibase.serialization.ClaimSerializer</code>.
 * Added <code>wikibase.serialization.ClaimUnserializer</code>.
 * Added <code>wikibase.serialization.ClaimsSerializer</code>.
