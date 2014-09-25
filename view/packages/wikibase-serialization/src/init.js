@@ -40,6 +40,11 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.SiteLinkListSerializer,
+		wb.datamodel.SiteLinkList
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.SiteLinkSerializer,
 		wb.datamodel.SiteLink
 	);

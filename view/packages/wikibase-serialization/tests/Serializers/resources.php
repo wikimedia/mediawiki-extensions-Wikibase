@@ -120,6 +120,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.SiteLinkListSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'SiteLinkListSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.SiteLink',
+				'wikibase.datamodel.SiteLinkList',
+				'wikibase.serialization.SiteLinkListSerializer',
+			),
+		),
+
 		'wikibase.serialization.SiteLinkSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'SiteLinkSerializer.tests.js',
