@@ -2,7 +2,6 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-
 ( function( wb, QUnit ) {
 'use strict';
 
@@ -20,37 +19,13 @@ var testSets = [
 			type: 'claim'
 		}
 	], [
-		new wb.datamodel.Statement(
-			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-			null,
-			null,
-			wb.datamodel.Statement.RANK.NORMAL,
-			'Q2$2'
-		),
-		{
-			id: 'Q2$2',
-			mainsnak: {
-				snaktype: 'novalue',
-				property: 'P1'
-			},
-			type: 'statement',
-			rank: 'normal'
-		}
-	], [
-		new wb.datamodel.Statement(
+		new wb.datamodel.Claim(
 			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 			new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
-			[
-				new wb.datamodel.Reference(
-					[new wb.datamodel.PropertyNoValueSnak( 'P1' )],
-					'i am a hash'
-				)
-			],
-			wb.datamodel.Statement.RANK.PREFERRED,
-			'Q3$3'
+			'Q1$1'
 		),
 		{
-			id: 'Q3$3',
+			id: 'Q1$1',
 			mainsnak: {
 				snaktype: 'novalue',
 				property: 'P1'
@@ -62,18 +37,7 @@ var testSets = [
 				}]
 			},
 			'qualifiers-order': ['P1'],
-			references: [{
-				hash: 'i am a hash',
-				snaks: {
-					P1: [{
-						snaktype: 'novalue',
-						property: 'P1'
-					}]
-				},
-				'snaks-order': ['P1']
-			}],
-			type: 'statement',
-			rank: 'preferred'
+			type: 'claim'
 		}
 	]
 ];

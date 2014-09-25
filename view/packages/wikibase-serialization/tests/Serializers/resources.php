@@ -37,7 +37,9 @@ return call_user_func( function() {
 				'ClaimSerializer.tests.js',
 			),
 			'dependencies' => array(
-				'wikibase.datamodel',
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.SnakList',
 				'wikibase.serialization.ClaimSerializer',
 			),
 		),
@@ -128,8 +130,24 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'wikibase.datamodel',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.PropertySomeValueSnak',
+				'wikibase.datamodel.PropertyValueSnak',
 				'wikibase.serialization.SnakSerializer',
+			),
+		),
+
+		'wikibase.serialization.StatementSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Reference',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.datamodel.Statement',
+				'wikibase.serialization.StatementSerializer',
 			),
 		),
 
