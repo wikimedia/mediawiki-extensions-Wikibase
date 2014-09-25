@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_b03de7ba",
+        "filename": "lib/resources/entityChangers/EntityChangersFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-25T12:25:59Z",
+      "side": 1,
+      "message": "That\u0027s right. This changes Items and Properties, but we don\u0027t have a common term for them (except Entity, which is less guarantee than ItemOrProperty).",
+      "parentUuid": "ee62ffec_9f0d5444",
+      "revId": "01f100bc49cae2ce725b0d7edf23221dccbcab5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_df1bcc80",
         "filename": "lib/resources/entityChangers/EntityChangersFactory.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-25T02:14:29Z",
       "side": 1,
       "message": "indent",
+      "revId": "01f100bc49cae2ce725b0d7edf23221dccbcab5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_7533e10a",
+        "filename": "lib/resources/entityChangers/EntityChangersFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-25T12:25:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_df1bcc80",
       "revId": "01f100bc49cae2ce725b0d7edf23221dccbcab5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_5530ddfb",
+        "filename": "lib/resources/entityChangers/EntityChangersFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-25T12:25:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_bf10185c",
+      "revId": "01f100bc49cae2ce725b0d7edf23221dccbcab5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_920c2b3f",
         "filename": "lib/resources/entityChangers/EntityChangersFactory.js",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2014-09-25T02:14:29Z",
       "side": 1,
       "message": "Please be aware that at present we only have statements in our system and are moving away from having Statement extend Claim in the PHP code, since that was incongruent with the actual domain.\n\nWe used to allow setting claims to all types of entities up till DataModel 1.0, where the implementation in Entity got nulled and the interface of Item updated to only accept instances of Statement. So the name is probably wrong here. So is the API one, though that is not trivial to change of course. Still, the API is a data access detail and should not be exposed outside of the data access layer, not even in the names of the services that it consists out of (unless those services are private).",
+      "revId": "01f100bc49cae2ce725b0d7edf23221dccbcab5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_152265b1",
+        "filename": "lib/resources/entityChangers/EntityChangersFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2014-09-25T12:25:59Z",
+      "side": 1,
+      "message": "I think this can be fixed as soon as we adopt said change in the overall JS code.",
+      "parentUuid": "ee62ffec_920c2b3f",
       "revId": "01f100bc49cae2ce725b0d7edf23221dccbcab5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
