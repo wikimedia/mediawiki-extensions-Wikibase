@@ -209,19 +209,8 @@ class ParseValue extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			// 'ex' => 'desc' // TODO
+			'https://www.wikidata.org/w/api.php?action=wbparsevalue&parser=time&values=1994-02-08' => 'Parse 1994-02-08 to a date format.', //there should be an example with options here as well
+			'https://www.wikidata.org/w/api.php?action=wbparsevalue&parser=null&values=foo|bar' => 'No change to the format of the string.',
 		);
 	}
-
-	/**
-	 * @see ApiBase::getVersion
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getVersion() {
-		return __CLASS__ . '-0.2';
-	}
-
 }
