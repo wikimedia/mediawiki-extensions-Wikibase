@@ -40,6 +40,13 @@ return call_user_func( function() {
 				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.SiteLinkList',
 				'wikibase.datamodel.Snak',
+				'wikibase.datamodel.SnakList',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementList',
+				'wikibase.datamodel.Term',
+				'wikibase.datamodel.TermGroup',
+				'wikibase.datamodel.TermGroupList',
+				'wikibase.datamodel.TermList',
 			),
 		),
 
