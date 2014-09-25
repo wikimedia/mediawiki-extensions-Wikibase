@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_b50f1933",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "The I in \"link\", since \"L\" was taken.\nCould use \"S\" just as well. Yea, I guess I\u0027ll do that.\nIf I didn\u0027t screw up, this should be as simple as changing this constant :)",
+      "parentUuid": "ee62ffec_48a605c0",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_a896a14d",
         "filename": "client/includes/Usage/EntityUsage.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "Checking the validity of $aspect would be nice",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_950c153f",
+        "filename": "client/includes/Usage/EntityUsage.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_a896a14d",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_3571e9a7",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_edb70b80",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_cd8567b3",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 7
@@ -64,6 +118,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "Field appears to be not used. Which makes releaseConnection pointless. Which makes the currentTrx field pointless.\n\nSo far for throwing the prototype away?",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_55169d4e",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Oh, looks like I started to change the logic from state to parameter at some point, and didn\u0027t finish that. Will look into it.",
+      "parentUuid": "ee62ffec_cd8567b3",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_15282580",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "bah, i really need to find out how to tell phpstorm to put \"public\" there when generating constructors :/",
+      "parentUuid": "ee62ffec_2dbe4361",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_083a4d33",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 7
@@ -98,6 +188,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "Parameter is not used",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_1576e59f",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "ee62ffec_083a4d33",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_b536f9e2",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "because I didn\u0027t know startAtomic - wasn\u0027t there when a last looked... must have been a while ago.",
+      "parentUuid": "ee62ffec_68de69e0",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_e8e9397c",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 7
@@ -132,6 +258,24 @@
       "writtenOn": "2014-09-24T20:55:20Z",
       "side": 1,
       "message": "$db-\u003eendAtomic()",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_d5216d9b",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "oh, nice! didn\u0027t know that one yet!",
+      "parentUuid": "ee62ffec_e8e9397c",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_9533f5f2",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Could be factored out into a separate object, sure. That object would be neither a service, not a value object, nor really an interactor... what would it be? a controller?",
+      "parentUuid": "ee62ffec_286ab112",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_add473bf",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 7
@@ -166,6 +328,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "wrong",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_753081e5",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "the order is not the one used in the actual param list, but neither phpstorm nor doxygen seem to care...",
+      "parentUuid": "ee62ffec_add473bf",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_555b3d26",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "https://youtrack.jetbrains.com/issue/WI-16548",
+      "parentUuid": "ee62ffec_0d725fe2",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_4d6857f2",
         "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
         "patchSetId": 7
@@ -200,6 +398,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "new self",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_d5ae0de4",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_4d6857f2",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -241,6 +457,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_b564b9e2",
+        "filename": "client/includes/Usage/Sql/SqlUsageTrackerSchemaUpdate.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "/me blames phpstorm templates",
+      "parentUuid": "ee62ffec_bf3db8ba",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_e8d3795f",
         "filename": "client/includes/Usage/UsageTrackerException.php",
         "patchSetId": 7
@@ -252,6 +486,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "?",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_f580f14c",
+        "filename": "client/includes/Usage/UsageTrackerException.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "eh, who reads documentation anyway ;)",
+      "parentUuid": "ee62ffec_e8d3795f",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -275,6 +527,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_b5c839ab",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_c86e7593",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_9f3af4be",
         "filename": "client/tests/phpunit/includes/Usage/EntityUsageTest.php",
         "patchSetId": 7
@@ -286,6 +556,24 @@
       "writtenOn": "2014-09-24T23:16:04Z",
       "side": 1,
       "message": "Unused import",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_b5471922",
+        "filename": "client/tests/phpunit/includes/Usage/EntityUsageTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_9f3af4be",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -309,6 +597,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_7551a1dc",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/SqlUsageTrackerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "huh? sure they do...",
+      "parentUuid": "ee62ffec_280751cf",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_a8f221dd",
         "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
         "patchSetId": 7
@@ -320,6 +626,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "9003th time",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_150705cf",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_a8f221dd",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -343,6 +667,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_956bf581",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "This is not a test case, and does not derive from the TestCase base class.",
+      "parentUuid": "ee62ffec_c8f555c9",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_c81c351b",
         "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
         "patchSetId": 7
@@ -354,6 +696,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "type hint missing",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_350209bf",
+        "filename": "client/tests/phpunit/includes/Usage/UsageLookupContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_c81c351b",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -377,6 +737,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_d5104d06",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_88163df5",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_68130906",
         "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
         "patchSetId": 7
@@ -388,6 +766,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "$this-\u003eassertEmpty",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_f50b51d7",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "nope",
+      "parentUuid": "ee62ffec_68130906",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -411,6 +807,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_b5f5d9c9",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_a8cfc181",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_48bf25ce",
         "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
         "patchSetId": 7
@@ -422,6 +836,24 @@
       "writtenOn": "2014-09-24T20:46:27Z",
       "side": 1,
       "message": "type hint",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_95f2d5dd",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackerContractTester.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_48bf25ce",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -456,6 +888,24 @@
       "writtenOn": "2014-09-24T23:16:04Z",
       "side": 1,
       "message": "Indeed. This does not match \"This file describes how the usage of entities on wiki pages is tracked.\"",
+      "parentUuid": "ee62ffec_688c29dc",
+      "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_75ff61a8",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T09:32:51Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "ee62ffec_688c29dc",
       "revId": "0e848db0dc7832a264d71f60ece8a44cf2ffd83f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
