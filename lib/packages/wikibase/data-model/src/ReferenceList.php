@@ -4,6 +4,8 @@ namespace Wikibase\DataModel;
 
 use Hashable;
 use InvalidArgumentException;
+use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Snak\SnakList;
 
 /**
  * Implementation of the References interface.
@@ -167,6 +169,17 @@ class ReferenceList extends HashableObjectStorage implements References {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @since 1.1
+	 *
+	 * @param Snak $snak
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addNewReference( Snak $snak /* Snak, ... */ ) {
+		$this->addReference( new Reference( new SnakList( func_get_args() ) ) );
 	}
 
 }
