@@ -8,14 +8,14 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\IO\EntityIdReader;
-use Wikibase\IO\LineReader;
+use Wikibase\Repo\IO\EntityIdReader;
+use Wikibase\Repo\IO\LineReader;
 
 /**
- * @covers Wikibase\IO\EntityIdReader
+ * @covers Wikibase\Repo\IO\EntityIdReader
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseIO
  *
  * @license GPL 2+

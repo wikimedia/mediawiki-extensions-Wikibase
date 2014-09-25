@@ -6,10 +6,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EntityPerPageIdPager;
+use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
 
 /**
- * @covers Wikibase\EntityPerPageIdPager
+ * @covers Wikibase\Repo\Store\SQL\EntityPerPageIdPager
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -61,7 +61,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 			return $result;
 		};
 
-		$epp = $this->getMock( 'Wikibase\EntityPerPage' );
+		$epp = $this->getMock( 'Wikibase\Repo\Store\EntityPerPage' );
 
 		$epp->expects( $this->any() )
 			->method( 'listEntities' )

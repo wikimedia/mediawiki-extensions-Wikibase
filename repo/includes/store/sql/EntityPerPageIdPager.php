@@ -1,6 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\SQL;
+
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\EntityPerPage;
 
 /**
  * EntityPerPageIdPager is a cursor for iterating over batches of EntityIds from an

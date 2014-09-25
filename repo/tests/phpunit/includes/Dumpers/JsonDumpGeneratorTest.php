@@ -13,10 +13,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\EntityFactory;
-use Wikibase\EntityIdPager;
 use Wikibase\Lib\Serializers\DispatchingEntitySerializer;
 use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\SerializerFactory;
+use Wikibase\Repo\Store\EntityIdPager;
 
 /**
  * @covers Wikibase\Dumpers\JsonDumpGenerator
@@ -149,7 +149,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityIdPager
 	 */
 	protected function makeIdPager( array $ids, $entityType = null ) {
-		$pager = $this->getMock( 'Wikibase\EntityIdPager' );
+		$pager = $this->getMock( 'Wikibase\Repo\Store\EntityIdPager' );
 
 		$this_ = $this;
 		$offset = 0;

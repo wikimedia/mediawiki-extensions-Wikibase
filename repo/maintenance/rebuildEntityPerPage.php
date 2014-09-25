@@ -1,9 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Maintenance;
 
 use LoggedUpdateMaintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
+use Wikibase\Repo\Store\SQL\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -87,10 +88,10 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\RebuildEntityPerPage';
+		return 'Wikibase\Repo\Maintenance\RebuildEntityPerPage';
 	}
 
 }
 
-$maintClass = 'Wikibase\RebuildEntityPerPage';
+$maintClass = 'Wikibase\Repo\Maintenance\RebuildEntityPerPage';
 require_once( RUN_MAINTENANCE_IF_MAIN );

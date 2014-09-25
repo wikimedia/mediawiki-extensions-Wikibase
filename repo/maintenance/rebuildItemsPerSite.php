@@ -1,10 +1,13 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
+use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -81,5 +84,5 @@ class RebuildItemsPerSite extends Maintenance {
 	}
 }
 
-$maintClass = 'Wikibase\RebuildItemsPerSite';
+$maintClass = 'Wikibase\Repo\Maintenance\RebuildItemsPerSite';
 require_once( RUN_MAINTENANCE_IF_MAIN );
