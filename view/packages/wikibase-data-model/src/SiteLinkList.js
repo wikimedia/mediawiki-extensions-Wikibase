@@ -41,6 +41,19 @@ $.extend( SELF.prototype, {
 	length: 0,
 
 	/**
+	 * @return {string[]}
+	 */
+	getSiteIds: function() {
+		var siteIds = [];
+
+		for( var siteId in this._siteLinks ) {
+			siteIds.push( siteId );
+		}
+
+		return siteIds;
+	},
+
+	/**
 	 * @param {string} siteId
 	 * @return {wikibase.datamodel.SiteLink|null}
 	 */
