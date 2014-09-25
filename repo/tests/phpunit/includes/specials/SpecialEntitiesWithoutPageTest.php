@@ -2,10 +2,12 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription;
+use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
+use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Term;
 
 /**
- * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription
+ * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutPage
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -19,10 +21,17 @@ use Wikibase\Repo\Specials\SpecialEntitiesWithoutDescription;
  * @author Bene* < benestar.wikimedia@googlemail.com >
  * @author Adam Shorland
  */
-class SpecialEntitiesWithoutDescriptionTest extends SpecialPageTestBase {
+class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		return new SpecialEntitiesWithoutDescription();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		return new SpecialEntitiesWithoutPage(
+			'EntitiesWithoutLabel',
+			Term::TYPE_LABEL,
+			'wikibase-entitieswithoutlabel-legend',
+			$wikibaseRepo->getStore()->newEntityPerPage(),
+			$wikibaseRepo->getEntityFactory()
+		);
 	}
 
 	public function testExecute() {
