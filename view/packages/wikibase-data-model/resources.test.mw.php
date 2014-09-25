@@ -177,6 +177,20 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.StatementGroup.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementGroup.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.PropertySomeValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementList',
+			),
+		),
+
 		'wikibase.datamodel.StatementList.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementList.tests.js',
