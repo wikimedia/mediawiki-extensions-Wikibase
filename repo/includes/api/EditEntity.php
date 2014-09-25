@@ -733,6 +733,9 @@ class EditEntity extends ModifyEntity {
 				'new' => array(
 					ApiBase::PARAM_TYPE => 'string',
 				),
+				'type' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
 			)
 		);
 	}
@@ -756,6 +759,9 @@ class EditEntity extends ModifyEntity {
 				'new' => array( "If set, a new entity will be created.",
 					"Set this to the type of the entity you want to create - currently 'item'|'property'.",
 					"It is not allowed to have this set when 'id' is also set."
+				),
+				'type' => array( 'A specific type of entity.',
+					"Will default to 'item' as this will be the most common type."
 				),
 			)
 		);
