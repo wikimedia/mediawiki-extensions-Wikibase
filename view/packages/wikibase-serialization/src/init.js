@@ -127,6 +127,11 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.SiteLinkListUnserializer,
+		wb.datamodel.SiteLinkList
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.SiteLinkUnserializer,
 		wb.datamodel.SiteLink
 	);

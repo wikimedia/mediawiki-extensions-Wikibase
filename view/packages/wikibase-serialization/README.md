@@ -42,6 +42,7 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.ReferenceSerializer</code>.
 * Added <code>wikibase.serialization.ReferenceUnserializer</code>.
 * Added <code>wikibase.serialization.SiteLinkListSerializer</code>.
+* Added <code>wikibase.serialization.SiteLinkListUnserializer</code>.
 * Added <code>wikibase.serialization.SiteLinkSerializer</code>.
 * Added <code>wikibase.serialization.SiteLinkUnserializer</code>.
 * Added <code>wikibase.serialization.SnakListSerializer</code>.
