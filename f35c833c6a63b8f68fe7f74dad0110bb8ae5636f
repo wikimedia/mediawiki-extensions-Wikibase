@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_3568c9f1",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Non-explicit check are problematic for strings and arrays, but not for objects.\nAnyway. It\u0027s no longer optional.",
+      "parentUuid": "ee62ffec_7f85009f",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_5f591c5c",
         "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "k)",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_156dc501",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "hm? i mean, yea, it\u0027s ugly, but i don\u0027t see an alternative right now.",
+      "parentUuid": "ee62ffec_5f591c5c",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_d54ded9c",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Well, currently, the formatter decides how the reference to an entity is show. It could be a plain ID (no tracking), the target entity\u0027s label (tracked as label usage), and/or a link to the local page corresponding to the referenced entity (tracked as page usage). \n\nWe could do the tracking via the SnakFinder, but then we\u0027d have to know \"elsewhere\" how EntityIdValues get formatted. One place where that would make sense is the code that decides which formatter to use here.",
+      "parentUuid": "ee62ffec_9f2674c8",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_9fd434c0",
         "filename": "client/includes/Usage/HashUsageAccumulator.php",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "some more info on what the expected format is here would be good",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_750ac12a",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_9fd434c0",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_950d3544",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_dfd2acd4",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_dfe98c7c",
         "filename": "client/includes/Usage/HashUsageAccumulator.php",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "After some long discussion, Thiemo has decreed the holy naming convention for such methods shall be addNewUsage",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_b510395c",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "And I decree that he can discuss this with me ;) Also, shouldn\u0027t that be addNewEntityUsage? But the caller should not know or care what kind of object gets constructed here (or if any object gets constructed).",
+      "parentUuid": "ee62ffec_dfe98c7c",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_5507bd1f",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "i have tried several times, i just can\u0027t find the right place :/",
+      "parentUuid": "ee62ffec_bffed833",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_7ff86046",
         "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
         "patchSetId": 8
@@ -132,6 +258,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "type",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_30fc5708",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_7ff86046",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_10015308",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_bf85b8b3",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_5f8c7cdb",
         "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/LanguageAwareRendererTest.php",
         "patchSetId": 8
@@ -166,6 +328,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "This tests that the usage is rendered? That render works when usage is set? ... Very unclear name. Please describe what is being tested.",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_b00f2733",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/LanguageAwareRendererTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "it tests the render() method, so it\u0027s called testRender. But more precisely, it tests the usage tracking side effect, so it\u0027s called testRender_usage. Will try to think of something better.",
+      "parentUuid": "ee62ffec_5f8c7cdb",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_900c233f",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/LanguageAwareRendererTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_9f82f4a7",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_bfac9833",
         "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
         "patchSetId": 8
@@ -200,6 +398,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "fatal error when you use this",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_f01c7f6c",
+        "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_bfac9833",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_d0217b9b",
+        "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "forgot to fix the namespace. done.",
+      "parentUuid": "ee62ffec_5fa35c3f",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_1f6de401",
         "filename": "client/tests/phpunit/includes/Usage/ParserOutputUsageAccumulatorTest.php",
         "patchSetId": 8
@@ -234,6 +468,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "This does not actually verify the parser output was modified",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_d0585b37",
+        "filename": "client/tests/phpunit/includes/Usage/ParserOutputUsageAccumulatorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "hm, true... need to use some knowledge of the classes internas to test this, though.",
+      "parentUuid": "ee62ffec_1f6de401",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_3071f7a7",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_ff71f0dd",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_df762cd5",
         "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
         "patchSetId": 8
@@ -274,6 +544,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_b064c7e2",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "Yea... could be factored out. Into a test helper to be used by test helpers.\nIf you can give me a good class name, I\u0027ll do it.",
+      "parentUuid": "ee62ffec_df762cd5",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_9f78b4c0",
         "filename": "client/tests/phpunit/includes/hooks/SidebarHookHandlersTest.php",
         "patchSetId": 8
@@ -285,6 +573,24 @@
       "writtenOn": "2014-09-25T01:59:20Z",
       "side": 1,
       "message": "This is serious code rot. Having branching in test code is a code smell. And that\u0027s the only thing added here.",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_30a0d7f0",
+        "filename": "client/tests/phpunit/includes/hooks/SidebarHookHandlersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2014-09-25T12:57:03Z",
+      "side": 1,
+      "message": "if we want to be able to test any combination of empty/non-empty badges and usages, i see no way around this. But i guess it\u0027s fine to just test the \"empty\" case for all fields in one go?...",
+      "parentUuid": "ee62ffec_9f78b4c0",
       "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
