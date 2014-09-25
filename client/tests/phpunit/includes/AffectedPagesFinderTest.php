@@ -7,20 +7,20 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\ItemChange;
-use Wikibase\ReferencedPagesFinder;
+use Wikibase\AffectedPagesFinder;
 
 /**
- * @covers Wikibase\ReferencedPagesFinder
+ * @covers Wikibase\AffectedPagesFinder
  *
  * @group Database
  * @group WikibaseClient
  * @group Wikibase
- * @group ReferencedPagesFinder
+ * @group AffectedPagesFinder
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ReferencedPagesFinderTest extends \MediaWikiTestCase {
+class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider getPagesProvider
@@ -40,7 +40,7 @@ class ReferencedPagesFinderTest extends \MediaWikiTestCase {
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( true ) );
 
-		$referencedPagesFinder = new ReferencedPagesFinder(
+		$referencedPagesFinder = new AffectedPagesFinder(
 			$itemUsageIndex,
 			$namespaceChecker,
 			'enwiki',

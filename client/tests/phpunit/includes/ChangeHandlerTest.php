@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Diff\Differ\MapDiffer;
 use Site;
 use Title;
+use Wikibase\AffectedPagesFinder;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\ChangesTable;
@@ -16,6 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\ItemUsageIndex;
+use Wikibase\NamespaceChecker;
 
 /**
  * @covers Wikibase\ChangeHandler
@@ -74,11 +76,9 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 			$repo,
 			$usageIndex,
 			$this->site,
-			$siteList
+			true,
+			true
 		);
-
-		$handler->setNamespaces( array( NS_MAIN ) );
-		$handler->setCheckPageExistence( false );
 
 		$this->handler = $handler;
 	}

@@ -20,7 +20,7 @@ use UnexpectedValueException;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ReferencedPagesFinder {
+class AffectedPagesFinder {
 
 	/**
 	 * @var ItemUsageIndex
@@ -80,7 +80,7 @@ class ReferencedPagesFinder {
 	 *
 	 * @return Title[] the titles of the pages to update
 	 */
-	private function getReferencedPages( ItemChange $change ) {
+	private function getAffectedPages( ItemChange $change ) {
 		$itemId = $change->getEntityId();
 
 		$pages = $this->itemUsageIndex->getEntityUsage( array( $itemId ) );
