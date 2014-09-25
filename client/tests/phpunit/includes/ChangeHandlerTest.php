@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use ArrayIterator;
 use Diff\Differ\MapDiffer;
 use Site;
-use SiteList;
 use Title;
+use Wikibase\AffectedPagesFinder;
 use Wikibase\Change;
 use Wikibase\ChangeHandler;
 use Wikibase\ChangesTable;
@@ -21,6 +21,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\NamespaceChecker;
 use Wikibase\PageUpdater;
 
 /**
@@ -57,7 +58,15 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 		$usageLookup = $this->getUsageLookup( $repo );
 		$titleFactory = $this->getTitleFactory( $entities );
 
-		$siteList = $this->getSiteList();
+		$namespaceChecker = new NamespaceChecker( array(), array( NS_MAIN ) );
+
+		$affectedPagesFinder = new AffectedPagesFinder(
+			$usageLookup,
+			$namespaceChecker,
+			$titleFactory,
+			'enwiki',
+			false
+		);
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
@@ -67,16 +76,13 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 
 		$handler = new ChangeHandler(
 			$changeFactory,
+			$affectedPagesFinder,
 			$updater,
 			$repo,
-			$usageLookup,
-			$titleFactory,
 			$this->site,
-			$siteList
+			true,
+			true
 		);
-
-		$handler->setNamespaces( array( NS_MAIN ) );
-		$handler->setCheckPageExistence( false );
 
 		return $handler;
 	}
@@ -1072,25 +1078,6 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 				} ) );
 
 		return $usageLookup;
-	}
-
-	/**
-	 * @return SiteList
-	 */
-	private function getSiteList() {
-		$siteList = $this->getMock( 'SiteList' );
-		$siteList->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnCallback( function( $globalSiteId ) {
-				$site = new \MediaWikiSite();
-
-				$site->setGlobalId( $globalSiteId );
-				$site->setLanguageCode( substr( $globalSiteId, 0, 2 ) );
-
-				return $site;
-			} ) );
-
-		return $siteList;
 	}
 
 	/**

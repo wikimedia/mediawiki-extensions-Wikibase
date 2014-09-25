@@ -17,7 +17,12 @@ class ChangeNotificationJob extends \Job {
 	/**
 	 * @var Change[] $changes: initialized lazily by getChanges().
 	 */
-	protected $changes = null;
+	private $changes = null;
+
+	/**
+	 * @var ChangeHandler|null
+	 */
+	private $changeHandler = null;
 
 	/**
 	 * Creates a ChangeNotificationJob representing the given changes.
@@ -124,8 +129,8 @@ class ChangeNotificationJob extends \Job {
 	public function run() {
 		$changes = $this->getChanges();
 
-		//TODO: allow mock handler for testing?
-		ChangeHandler::singleton()->handleChanges( $changes );
+		$changeHandler = $this->getChangeHandler();
+		$changeHandler->handleChanges( $changes );
 
 		if ( $changes ) {
 			/* @var Change $last */
@@ -142,4 +147,14 @@ class ChangeNotificationJob extends \Job {
 		return true;
 	}
 
+	/**
+	 * @return ChangeHandler
+	 */
+	private function getChangeHandler() {
+		if ( !$this->changeHandler ) {
+			$this->changeHandler = WikibaseClient::getDefaultInstance()->getChangeHandler();
+		}
+
+		return $this->changeHandler;
+	}
 }

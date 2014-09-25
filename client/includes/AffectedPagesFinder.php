@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\StorageException;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class ReferencedPagesFinder {
+class AffectedPagesFinder {
 
 	/**
 	 * @var UsageLookup
@@ -79,7 +79,7 @@ class ReferencedPagesFinder {
 			return array();
 		}
 
-		$titles = $this->getReferencedPages( $change );
+		$titles = $this->getAffectedPages( $change );
 
 		return $this->filterTitlesToUpdate( $titles );
 	}
@@ -91,7 +91,7 @@ class ReferencedPagesFinder {
 	 *
 	 * @return Title[] the titles of the pages to update. May contain duplicates.
 	 */
-	private function getReferencedPages( ItemChange $change ) {
+	private function getAffectedPages( ItemChange $change ) {
 		$itemId = $change->getEntityId();
 
 		$pageIds = $this->usageLookup->getPagesUsing( array( $itemId ) );

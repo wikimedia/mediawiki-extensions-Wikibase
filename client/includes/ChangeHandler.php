@@ -4,11 +4,7 @@ namespace Wikibase;
 
 use MWException;
 use Site;
-use SiteList;
 use Title;
-use Wikibase\Client\Store\TitleFactory;
-use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\ItemDiff;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -56,27 +52,9 @@ class ChangeHandler {
 	const HISTORY_ENTRY_ACTION = 16;
 
 	/**
-	 * Returns the global instance of the ChangeHandler interface.
-	 *
-	 * @since 0.1
-	 *
-	 * @return ChangeHandler
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
-	/**
 	 * @var PageUpdater $updater
 	 */
 	private $updater;
-
 
 	/**
 	 * @var EntityRevisionLookup $entityRevisionLookup
@@ -84,127 +62,38 @@ class ChangeHandler {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var Site $site
-	 */
-	private $site;
-
-	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
-	 * @var NamespaceChecker $namespaceChecker
-	 */
-	private $namespaceChecker;
-
-	/**
-	 * @var bool
-	 */
-	private $checkPageExistence = true;
-
-	/**
 	 * @var EntityChangeFactory
 	 */
 	private $changeFactory;
 
+	/**
+	 * @var AffectedPagesFinder
+	 */
+	private $affectedPagesFinder;
+
+	/**
+	 * @var Site
+	 */
+	private $localSite;
+
 	public function __construct(
-		EntityChangeFactory $changeFactory = null,
-		PageUpdater $updater = null,
-		EntityRevisionLookup $entityRevisionLookup = null,
-		UsageLookup $entityUsage = null,
-		TitleFactory $titleFactory= null,
-		Site $localSite = null,
-		SiteList $sites = null
+		EntityChangeFactory $changeFactory,
+		AffectedPagesFinder $affectedPagesFinder,
+		PageUpdater $updater,
+		EntityRevisionLookup $entityRevisionLookup,
+		Site $localSite,
+		$injectRC,
+		$allowDataTransclusion
 	) {
-		wfProfileIn( __METHOD__ );
-
-		//FIXME: proper injection!
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-
-		if ( !$changeFactory ) {
-			$changeFactory = $wikibaseClient->getEntityChangeFactory();
-		}
-
-		if ( !$updater ) {
-			$updater = new WikiPageUpdater();
-		}
-
-		if ( !$entityRevisionLookup ) {
-			$entityRevisionLookup = $wikibaseClient->getStore()->getEntityRevisionLookup();
-		}
-
-		if ( !$entityUsage ) {
-			$entityUsage = $wikibaseClient->getStore()->getUsageLookup();
-		}
-
-		if ( $sites === null ) {
-			$sites = $wikibaseClient->getSiteStore()->getSites();
-		}
-
-		if ( $titleFactory === null ) {
-			$titleFactory = new TitleFactory();
-		}
-
-		$this->sites = $sites;
-
-		if ( !$localSite ) {
-			//XXX: DB lookup in a constructor, ugh
-			$siteGlobalId = $settings->getSetting( 'siteGlobalID' );
-			$localSite = $this->sites->getSite( $siteGlobalId );
-
-			if ( $localSite === null ) {
-				throw new MWException( "Unknown site ID configured: $siteGlobalId" );
-			}
-		}
-
 		$this->changeFactory = $changeFactory;
-
+		$this->affectedPagesFinder = $affectedPagesFinder;
 		$this->updater = $updater;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->usageLookup = $entityUsage;
-
-		$this->site = $localSite;
-		$this->siteId = $localSite->getGlobalId();
-		$this->titleFactory = $titleFactory;
-
-		// TODO: allow these to be passed in as parameters!
-		$this->setNamespaces(
-			$settings->getSetting( 'namespaces' ),
-			$settings->getSetting( 'excludeNamespaces' )
-		);
-
-		$this->injectRC = $settings->getSetting( 'injectRecentChanges' );
+		$this->localSite = $localSite;
+		$this->injectRC = (bool)$injectRC;
+		$this->dataTransclusionAllowed = $allowDataTransclusion;
 
 		$this->mirrorUpdater = null;
-
-		$this->dataTransclusionAllowed = $settings->getSetting( 'allowDataTransclusion' );
-		$this->actionMask = 0xFFFF; //TODO: use changeHanderActions setting
-
-		wfProfileOut( __METHOD__ );
-	}
-
-	/**
-	 * Enable or disable page existence checks. Useful for unit tests.
-	 *
-	 * @param boolean $checkPageExistence
-	 */
-	public function setCheckPageExistence( $checkPageExistence ) {
-		$this->checkPageExistence = $checkPageExistence;
-	}
-
-	/**
-	 * Set the namespaces to include or exclude.
-	 *
-	 * @param int[] $include a list of namespace IDs to include
-	 * @param int[] $exclude a list of namespace IDs to exclude
-	 */
-	public function setNamespaces( array $include, array $exclude = array() ) {
-		$this->namespaceChecker = new NamespaceChecker(
-			$exclude,
-			$include
-		);
 	}
 
 	/**
@@ -369,7 +258,7 @@ class ChangeHandler {
 					|| $currentEntity !== $entityId;
 
 				$breakNext = false;
-				$siteGlobalId = $this->site->getGlobalId();
+				$siteGlobalId = $this->localSite->getGlobalId();
 
 				if ( !$break && ( $change instanceof ItemChange ) ) {
 					$siteLinkDiff = $change->getSiteLinkDiff();
@@ -404,7 +293,7 @@ class ChangeHandler {
 				$currentRun[] = $change;
 			// skip any change that failed to process in some way (bug 49417)
 			} catch ( \Exception $e ) {
-				wfLogWarning( __CLASS__, __METHOD__ . ':' . $e->getMessage() );
+				wfLogWarning( __METHOD__ . ':' . $e->getMessage() );
 			}
 		}
 
@@ -569,16 +458,7 @@ class ChangeHandler {
 	public function getPagesToUpdate( Change $change ) {
 		wfProfileIn( __METHOD__ );
 
-		// todo inject!
-		$referencedPagesFinder = new ReferencedPagesFinder(
-			$this->usageLookup,
-			$this->namespaceChecker,
-			$this->titleFactory,
-			$this->siteId,
-			$this->checkPageExistence
-		);
-
-		$pagesToUpdate = $referencedPagesFinder->getPages( $change );
+		$pagesToUpdate = $this->affectedPagesFinder->getPages( $change );
 
 		wfProfileOut( __METHOD__ );
 
@@ -733,8 +613,6 @@ class ChangeHandler {
 			}
 		}
 
-		$actions = $actions & $this->actionMask;
-
 		wfProfileOut( __METHOD__ );
 		return $actions;
 	}
@@ -753,7 +631,7 @@ class ChangeHandler {
 	 */
 	public function getEditComment( EntityChange $change ) {
 		$commentCreator = new SiteLinkCommentCreator(
-			$this->site->getGlobalId()
+			$this->localSite->getGlobalId()
 		);
 
 		//FIXME: this will only work for instances of ItemChange
