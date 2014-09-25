@@ -118,7 +118,9 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'dataValues.values',
-				'wikibase.datamodel',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.PropertySomeValueSnak',
+				'wikibase.datamodel.PropertyValueSnak',
 				'wikibase.serialization.SnakUnserializer',
 			),
 		),

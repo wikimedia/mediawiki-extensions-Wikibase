@@ -27,12 +27,17 @@ MODULE.SnakSerializer = util.inherit( 'WbSnakSerializer', PARENT, {
 			throw new Error( 'Not an instance of wikibase.datamodel.Snak' );
 		}
 
-		var serialization = snak.toMap();
+		var serialization = {
+			snaktype: snak.getType(),
+			property: snak.getPropertyId()
+		};
 
-		if( serialization.datavalue ) {
+		if( snak instanceof wikibase.datamodel.PropertyValueSnak ) {
+			var dataValue = snak.getValue();
+
 			serialization.datavalue = {
-				type: serialization.datavalue.getType(),
-				value: serialization.datavalue.toJSON()
+				type: dataValue.getType(),
+				value: dataValue.toJSON()
 			};
 		}
 

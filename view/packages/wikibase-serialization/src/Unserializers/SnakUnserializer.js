@@ -23,19 +23,25 @@ MODULE.SnakUnserializer = util.inherit( 'WbSnakUnserializer', PARENT, {
 	 * @return {wikibase.datamodel.Snak}
 	 */
 	unserialize: function( serialization ) {
-		// Prevent altering original serialization:
-		var map = $.extend( {}, serialization );
-
-		if( serialization.snaktype === 'value' ) {
-			var type = serialization.datavalue.type,
+		if( serialization.snaktype === 'novalue' ) {
+			return new wb.datamodel.PropertyNoValueSnak( serialization.property );
+		} else if( serialization.snaktype === 'somevalue' ) {
+			return new wb.datamodel.PropertySomeValueSnak( serialization.property );
+		} else if( serialization.snaktype === 'value' ) {
+			var dataValue = null,
+				type = serialization.datavalue.type,
 				value = serialization.datavalue.value;
+
 			try {
-				map.datavalue = dv.newDataValue( type, value );
-			} catch( e ) {
-				map.datavalue = new dv.UnUnserializableValue( value, type, e );
+				dataValue = dv.newDataValue( type, value );
+			} catch( error ) {
+				dataValue = new dv.UnUnserializableValue( type, value, error );
 			}
+
+			return new wb.datamodel.PropertyValueSnak( serialization.property, dataValue );
 		}
-		return wb.datamodel.Snak.newFromMap( map );
+
+		throw new Error( 'Incompatible snak type' );
 	}
 } );
 
