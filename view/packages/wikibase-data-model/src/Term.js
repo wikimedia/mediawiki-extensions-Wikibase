@@ -14,12 +14,8 @@
  * @param {string} text
  */
 var SELF = wb.datamodel.Term = function WbDataModelTerm( languageCode, text ) {
-	if( typeof languageCode !== 'string' || typeof text !== 'string' ) {
-		throw new Error( 'Required parameters not specified' );
-	}
-
-	this._languageCode = languageCode;
-	this._text = text;
+	this.setLanguageCode( languageCode );
+	this.setText( text );
 };
 
 $.extend( SELF.prototype, {
@@ -41,6 +37,16 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @param {string} languageCode
+	 */
+	setLanguageCode: function( languageCode ) {
+		if( languageCode === undefined ) {
+			throw new Error( 'Language codes may not be undefined' );
+		}
+		this._languageCode = languageCode;
+	},
+
+	/**
 	 * @return {string}
 	 */
 	getText: function() {
@@ -51,6 +57,9 @@ $.extend( SELF.prototype, {
 	 * @param {string} text
 	 */
 	setText: function( text ) {
+		if( typeof text !== 'string' ) {
+			throw new Error( 'Text needs to be a string' );
+		}
 		this._text = text;
 	},
 
