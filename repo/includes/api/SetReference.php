@@ -246,6 +246,7 @@ class SetReference extends ModifyClaim {
 			array(
 				'statement' => 'A GUID identifying the statement for which a reference is being set',
 				'snaks' => 'The snaks to set the reference to. JSON object with property ids pointing to arrays containing the snaks for that property',
+				'snaks-order' => 'The order of the snaks. Comma-separated list of property ids',
 				'reference' => 'A hash of the reference that should be updated. Optional. When not provided, a new reference is created',
 				'index' => 'The index within the statement\'s list of references where to move the reference to. Optional. When not provided, an existing reference will stay in place while a new reference will be appended.',
 			)

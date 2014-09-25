@@ -519,9 +519,6 @@ abstract class ModifyEntity extends ApiWikibase {
 				autocomment together with the summary is 260 characters. Be aware that everything above that
 				limit will be cut off."
 			),
-			'type' => array( 'A specific type of entity.',
-				"Will default to 'item' as this will be the most common type."
-			),
 			'token' => 'A "edittoken" token previously obtained through the token module (prop=info).',
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'
