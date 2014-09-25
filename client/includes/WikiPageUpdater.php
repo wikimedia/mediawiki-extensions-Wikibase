@@ -6,6 +6,7 @@ use Job;
 use JobQueueGroup;
 use RefreshLinksJob;
 use Title;
+use Wikibase\Client\RecentChanges\ExternalRecentChange;
 
 /**
  * Service object for triggering different kinds of page updates
