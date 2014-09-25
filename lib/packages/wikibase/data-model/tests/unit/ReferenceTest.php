@@ -239,4 +239,24 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $reference0->getHash(), $reference1->getHash() );
 	}
 
+	public function testCanConstructWithSnakArray() {
+		$snaks = array(
+			new PropertyNoValueSnak( 1 ),
+			new PropertyNoValueSnak( 3 ),
+			new PropertyNoValueSnak( 2 ),
+		);
+
+		$reference = new Reference( $snaks );
+
+		$this->assertEquals(
+			new SnakList( $snaks ),
+			$reference->getSnaks()
+		);
+	}
+
+	public function testGivenInvalidArgument_constructorThrowsException() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new Reference( new PropertyNoValueSnak( 1 ) );
+	}
+
 }
