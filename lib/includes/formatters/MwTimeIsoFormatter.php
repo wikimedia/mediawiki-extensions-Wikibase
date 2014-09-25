@@ -217,53 +217,71 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string
 	 */
 	private function getLocalizedYear( $isoTimestamp, $precision ) {
-		$shift = 1e-0;
-		$round = 0;
+		$shift = 1e+0;
+		$unshift = 1e-0;
+		$func = 'round';
 
 		switch ( $precision ) {
 			case TimeValue::PRECISION_Ga:
 				$msg = 'Gannum';
-				$shift = 1e-9;
+				$shift = 1e+9;
 				break;
 			case TimeValue::PRECISION_100Ma:
 				$msg = 'Mannum';
-				$shift = 1e-6;
-				$round = -2;
+				$shift = 1e+8;
+				$unshift = 1e+2;
 				break;
 			case TimeValue::PRECISION_10Ma:
 				$msg = 'Mannum';
-				$shift = 1e-6;
-				$round = -1;
+				$shift = 1e+7;
+				$unshift = 1e+1;
 				break;
 			case TimeValue::PRECISION_Ma:
 				$msg = 'Mannum';
-				$shift = 1e-6;
+				$shift = 1e+6;
 				break;
 			case TimeValue::PRECISION_100ka:
 				$msg = 'annum';
-				$round = -5;
+				$shift = 1e+5;
+				$unshift = 1e+5;
 				break;
 			case TimeValue::PRECISION_10ka:
 				$msg = 'annum';
-				$round = -4;
+				$shift = 1e+4;
+				$unshift = 1e+4;
 				break;
 			case TimeValue::PRECISION_ka:
 				$msg = 'millennium';
-				$shift = 1e-3;
+				$func = 'ceil';
+				$shift = 1e+3;
 				break;
 			case TimeValue::PRECISION_100a:
 				$msg = 'century';
-				$shift = 1e-2;
+				$func = 'ceil';
+				$shift = 1e+2;
 				break;
 			case TimeValue::PRECISION_10a:
 				$msg = '10annum';
-				$round = -1;
+				$func = 'floor';
+				$shift = 1e+1;
+				$unshift = 1e+1;
 				break;
 		}
 
 		$isBCE = substr( $isoTimestamp, 0, 1 ) === '-';
 		$year = abs( floatval( $isoTimestamp ) );
-		$number = round( $year * $shift, $round );
+
+		switch ( $func ) {
+			case 'ceil':
+				$number = round( ceil( $year / $shift ) * $unshift );
+				break;
+			case 'floor':
+				$number = round( floor( $year / $shift ) * $unshift );
+				break;
+			default:
+				$number = round( round( $year / $shift ) * $unshift );
+		}
+
 		$formattedNumber = $this->language->formatNum( $number, true );
 
 		if ( empty( $number )
