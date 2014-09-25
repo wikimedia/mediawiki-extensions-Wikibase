@@ -22,7 +22,20 @@ return call_user_func( function() {
 				'jquery.wikibase.aliasesview.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.aliasesview'
+				'jquery.wikibase.aliasesview',
+			),
+		),
+
+		'jquery.wikibase.badgeselector.tests' => $moduleBase + array(
+			'scripts' => array(
+				'jquery.wikibase.badgeselector.tests.js',
+			),
+			'dependencies' => array(
+				'jquery.wikibase.badgeselector',
+				'mediawiki.Title',
+				'wikibase.datamodel',
+				'wikibase.store.EntityStore',
+				'wikibase.store.FetchedContent',
 			),
 		),
 
@@ -31,7 +44,7 @@ return call_user_func( function() {
 				'jquery.wikibase.claimgrouplabelscroll.tests.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.claimgrouplabelscroll'
+				'jquery.wikibase.claimgrouplabelscroll',
 			),
 		),
 
