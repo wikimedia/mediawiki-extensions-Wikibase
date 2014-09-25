@@ -107,7 +107,7 @@ $.extend( SELF.prototype, {
 	 * @return {string}
 	 */
 	getDescription: function( languageCode ) {
-		this._descriptions.getByLanguage( languageCode );
+		return this._descriptions.getByLanguage( languageCode );
 	},
 
 	/**
