@@ -201,8 +201,8 @@ class SetSiteLink extends ModifyEntity {
 			parent::getParamDescriptionForEntity(),
 			array(
 				'linksite' => 'The identifier of the site on which the article to link resides',
-				'badges' => 'The IDs of items to be set as badges. They will replace the current ones. If this parameter is not set, the badges will not be changed',
 				'linktitle' => 'The title of the article to link. If this parameter is an empty string or both linktitle and badges are not set, the link will be removed.',
+				'badges' => 'The IDs of items to be set as badges. They will replace the current ones. If this parameter is not set, the badges will not be changed',
 			)
 		);
 	}
