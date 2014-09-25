@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use MWContentSerializationException;
 use MWException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityIdPager;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
@@ -14,6 +13,7 @@ use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Store\EntityIdPager;
 
 /**
  * JsonDumpGenerator generates an JSON dump of a given set of entities.

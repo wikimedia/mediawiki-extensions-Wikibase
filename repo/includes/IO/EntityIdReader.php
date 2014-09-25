@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\IO;
+namespace Wikibase\Repo\IO;
 
 use Disposable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\EntityIdPager;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
+use Wikibase\Repo\Store\EntityIdPager;
 
 /**
  * EntityIdReader reads entity IDs from a file, one per line.

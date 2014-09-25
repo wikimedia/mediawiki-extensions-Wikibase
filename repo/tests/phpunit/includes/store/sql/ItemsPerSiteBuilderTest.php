@@ -4,13 +4,13 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityIdPager;
 use Wikibase\Lib\Store\EntityLookup;
-use Wikibase\ItemsPerSiteBuilder;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
 
 /**
- * @covers Wikibase\ItemsPerSiteBuilder
+ * @covers Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder
  *
  * @license GPL 2+
  *
@@ -97,7 +97,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityIdPager
 	 */
 	private function getEntityIdPager() {
-		$entityIdPager = $this->getMock( 'Wikibase\EntityIdPager' );
+		$entityIdPager = $this->getMock( 'Wikibase\Repo\Store\EntityIdPager' );
 
 		$itemIds = array(
 			$this->getTestItemId(),

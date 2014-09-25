@@ -1,14 +1,17 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\SQL;
 
 use DatabaseBase;
 use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Store\EntityPerPage;
 
 /**
  * Represents a lookup database table that make the link between entities and pages.
