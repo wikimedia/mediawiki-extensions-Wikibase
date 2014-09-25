@@ -142,6 +142,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.TermGroupListUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'TermGroupListUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.TermGroup',
+				'wikibase.datamodel.TermGroupList',
+				'wikibase.serialization.TermGroupListUnserializer',
+			),
+		),
+
 		'wikibase.serialization.TermGroupUnserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'TermGroupUnserializer.tests.js',

@@ -11,7 +11,7 @@ var testCases = [
 	[
 		{
 			en: { language: 'en', value: 'en-test' },
-			de: { language: 'de', value: 'de-test'}
+			de: { language: 'de', value: 'de-test' }
 		},
 		new wb.datamodel.TermList( [
 			new wb.datamodel.Term( 'en', 'en-test' ),
