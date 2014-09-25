@@ -92,6 +92,11 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.FingerprintUnserializer,
+		wb.datamodel.Fingerprint
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.ReferenceListUnserializer,
 		wb.datamodel.ReferenceList
 	);

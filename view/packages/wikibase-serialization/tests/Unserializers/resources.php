@@ -64,6 +64,20 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.FingerprintUnserializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'FingerprintUnserializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.datamodel.Term',
+				'wikibase.datamodel.TermGroup',
+				'wikibase.datamodel.TermGroupList',
+				'wikibase.datamodel.TermList',
+				'wikibase.serialization.FingerprintUnserializer',
+			),
+		),
+
 		'wikibase.serialization.MultilingualUnserializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultilingualUnserializer.tests.js',
