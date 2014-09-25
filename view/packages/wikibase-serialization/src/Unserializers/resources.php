@@ -41,9 +41,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'util.inherit',
-				'wikibase.datamodel',
+				'wikibase.datamodel.Claim',
 				'wikibase.serialization.__namespace',
-				'wikibase.serialization.ReferenceUnserializer',
 				'wikibase.serialization.SnakListUnserializer',
 				'wikibase.serialization.SnakUnserializer',
 				'wikibase.serialization.Unserializer',
@@ -153,6 +152,20 @@ return call_user_func( function() {
 				'wikibase.datamodel.PropertySomeValueSnak',
 				'wikibase.datamodel.PropertyValueSnak',
 				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
+		'wikibase.serialization.StatementUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Statement',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.ClaimUnserializer',
+				'wikibase.serialization.ReferenceListUnserializer',
 				'wikibase.serialization.Unserializer',
 			),
 		),
