@@ -19,6 +19,21 @@ use Wikibase\DataModel\Statement\StatementListDiffer;
 class ItemDiffer implements EntityDifferStrategy {
 
 	/**
+	 * @var MapDiffer
+	 */
+	private $recursiveMapDiffer;
+
+	/**
+	 * @var StatementListDiffer
+	 */
+	private $statementListDiffer;
+
+	public function __construct() {
+		$this->recursiveMapDiffer = new MapDiffer( true );
+		$this->statementListDiffer = new StatementListDiffer();
+	}
+
+	/**
 	 * @param string $entityType
 	 *
 	 * @return bool
@@ -48,11 +63,12 @@ class ItemDiffer implements EntityDifferStrategy {
 	}
 
 	public function diffItems( Item $from, Item $to ) {
-		$differ = new MapDiffer( true );
-		$diffOps = $differ->doDiff( $this->toDiffArray( $from ), $this->toDiffArray( $to ) );
+		$diffOps = $this->recursiveMapDiffer->doDiff(
+			$this->toDiffArray( $from ),
+			$this->toDiffArray( $to )
+		);
 
-		$statementListDiffer = new StatementListDiffer();
-		$diffOps['claim'] = $statementListDiffer->getDiff( $from->getStatements(), $to->getStatements() );
+		$diffOps['claim'] = $this->statementListDiffer->getDiff( $from->getStatements(), $to->getStatements() );
 
 		return new ItemDiff( $diffOps );
 	}
