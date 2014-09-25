@@ -71,6 +71,17 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ReferenceListSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ReferenceListSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Reference',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.serialization.ReferenceListSerializer',
+			),
+		),
+
 		'wikibase.serialization.ReferenceSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'ReferenceSerializer.tests.js',

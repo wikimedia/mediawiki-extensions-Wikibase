@@ -33,6 +33,7 @@ version 1.0 of this package:
 * Added <code>wikibase.serialization.EntitySerializer</code>.
 * Added <code>wikibase.serialization.MultilingualSerializer</code>.
 * Added <code>wikibase.serialization.MultilingualUnserializer</code>.
+* Added <code>wikibase.serialization.ReferenceListSerializer</code>.
 * Added <code>wikibase.serialization.ReferenceSerializer</code>.
 * Added <code>wikibase.serialization.ReferenceUnserializer</code>.
 * Added <code>wikibase.serialization.SiteLinkSerializer</code>.

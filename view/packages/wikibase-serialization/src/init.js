@@ -20,6 +20,11 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.ReferenceListSerializer,
+		wb.datamodel.ReferenceList
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.ReferenceSerializer,
 		wb.datamodel.Reference
 	);
@@ -41,12 +46,12 @@
 
 	MODULE.SerializerFactory.registerSerializer(
 		MODULE.TermSerializer,
-		wb.datamodel.Snak
+		wb.datamodel.Term
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
 		MODULE.TermListSerializer,
-		wb.datamodel.Snak
+		wb.datamodel.TermList
 	);
 
 	// Register unserializers:
@@ -88,12 +93,12 @@
 
 	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.TermUnserializer,
-		wb.datamodel.Snak
+		wb.datamodel.Term
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.TermListUnserializer,
-		wb.datamodel.Snak
+		wb.datamodel.TermList
 	);
 
 }( wikibase ) );
