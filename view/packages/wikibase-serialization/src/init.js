@@ -20,6 +20,11 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.FingerprintSerializer,
+		wb.datamodel.Fingerprint
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.ReferenceListSerializer,
 		wb.datamodel.ReferenceList
 	);

@@ -78,6 +78,20 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.FingerprintSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'FingerprintSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Fingerprint',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.Serializer',
+				'wikibase.serialization.TermListSerializer',
+				'wikibase.serialization.TermGroupListSerializer',
+			),
+		),
+
 		'wikibase.serialization.MultilingualSerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'MultilingualSerializer.js',
