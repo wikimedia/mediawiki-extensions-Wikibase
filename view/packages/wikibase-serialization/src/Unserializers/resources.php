@@ -90,6 +90,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.ReferenceListUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'ReferenceListUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.ReferenceList',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.ReferenceUnserializer',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
 		'wikibase.serialization.ReferenceUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'ReferenceUnserializer.js',

@@ -72,8 +72,13 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.ReferenceListUnserializer,
+		wb.datamodel.ReferenceList
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.ReferenceUnserializer,
-		wb.datamodel.SnakList
+		wb.datamodel.Reference
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
