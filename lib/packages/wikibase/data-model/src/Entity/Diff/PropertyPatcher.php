@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Entity\Diff;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Statement\StatementListPatcher;
 
 /**
  * @since 1.1
@@ -19,8 +20,14 @@ class PropertyPatcher implements EntityPatcherStrategy {
 	 */
 	private $fingerprintPatcher;
 
+	/**
+	 * @var StatementListPatcher
+	 */
+	private $statementListPatcher;
+
 	public function __construct() {
 		$this->fingerprintPatcher = new FingerprintPatcher();
+		$this->statementListPatcher = new StatementListPatcher();
 	}
 
 	/**
@@ -53,6 +60,11 @@ class PropertyPatcher implements EntityPatcherStrategy {
 
 	private function patchProperty( Property $property, EntityDiff $patch ) {
 		$this->fingerprintPatcher->patchFingerprint( $property->getFingerprint(), $patch );
+
+		$property->setStatements( $this->statementListPatcher->getPatchedStatementList(
+			$property->getStatements(),
+			$patch->getClaimsDiff()
+		) );
 	}
 
 }

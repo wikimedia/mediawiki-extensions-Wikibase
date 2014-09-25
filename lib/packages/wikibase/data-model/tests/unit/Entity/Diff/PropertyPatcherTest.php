@@ -2,11 +2,15 @@
 
 namespace Wikibase\Test;
 
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Diff\EntityDiff;
 use Wikibase\DataModel\Entity\Diff\PropertyPatcher;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\DataModel\Entity\Diff\PropertyPatcher
@@ -49,6 +53,38 @@ class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$patcher->patchEntity( Item::newEmpty(), new EntityDiff() );
+	}
+
+	public function testStatementsArePatched() {
+		$s1337 = new Statement( new PropertyNoValueSnak( 1337 ) );
+		$s1337->setGuid( 's1337' );
+
+		$s23 = new Statement( new PropertyNoValueSnak( 23 ) );
+		$s23->setGuid( 's23' );
+
+		$s42 = new Statement( new PropertyNoValueSnak( 42 ) );
+		$s42->setGuid( 's42' );
+
+		$patch = new EntityDiff( array(
+				'claim' => new Diff( array(
+					's42' => new DiffOpRemove( $s42 ),
+					's23' => new DiffOpAdd( $s23 ),
+				) )
+			)
+		);
+
+		$property = Property::newFromType( 'kittens' );
+		$property->getStatements()->addStatement( $s1337 );
+		$property->getStatements()->addStatement( $s42 );
+
+		$expectedProperty = Property::newFromType( 'kittens' );
+		$expectedProperty->getStatements()->addStatement( $s1337 );
+		$expectedProperty->getStatements()->addStatement( $s23 );
+
+		$this->assertEquals(
+			$expectedProperty,
+			$this->getPatchedProperty( $property, $patch )
+		);
 	}
 
 }
