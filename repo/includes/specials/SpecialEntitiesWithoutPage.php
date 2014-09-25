@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Wikibase\EntityFactory;
+use Wikibase\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Utils;
 use XmlSelect;
@@ -12,38 +13,64 @@ use XmlSelect;
  * Base page for pages listing entities without a specific value.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
- * @author Bene*
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
+class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 
 	/**
 	 * The language used
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $language = '';
+	private $language = '';
 
 	/**
 	 * The type used
 	 *
-	 * @since 0.4
-	 *
 	 * @var string
 	 */
-	protected $type = null;
+	private $type = null;
 
 	/**
 	 * Map entity types to objects representing the corresponding entity
 	 *
-	 * @since 0.4
-	 *
 	 * @var array
 	 */
-	protected $possibleTypes;
+	private $possibleTypes;
+
+	/**
+	 * @var string
+	 */
+	private $termType;
+
+	/**
+	 * @var string
+	 */
+	private $legendMsg;
+
+	/**
+	 * @var EntityPerPage
+	 */
+	private $entityPerPage;
+
+	/**
+	 * @var EntityFactory
+	 */
+	private $entityFactory;
+
+	public function __construct( $name,  $termType, $legendMsg,
+		EntityPerPage $entityPerPage, EntityFactory $entityFactory
+	) {
+		parent::__construct( $name );
+
+		$this->termType = $termType;
+		$this->legendMsg = $legendMsg;
+		$this->entityPerPage = $entityPerPage;
+		$this->entityFactory = $entityFactory;
+	}
 
 	/**
 	 * @see SpecialWikibasePage::execute
@@ -92,7 +119,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		}
 
 		$this->type = $request->getText( 'type', $this->type );
-		$this->possibleTypes = EntityFactory::singleton()->getEntityTypes();
+		$this->possibleTypes = $this->entityFactory->getEntityTypes();
 		if ( $this->type === '' ) {
 			$this->type = null;
 		}
@@ -136,7 +163,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			Html::element(
 				'legend',
 				array(),
-				$this->getLegend()
+				$this->msg( $this->legendMsg )->text()
 			) .
 			Html::openElement( 'p' ) .
 			Html::element(
@@ -183,8 +210,7 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @since 0.4
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		$entityPerPage = WikibaseRepo::getDefaultInstance()->getStore()->newEntityPerPage();
-		return $entityPerPage->getEntitiesWithoutTerm( $this->getTermType(), $this->language, $this->type, $limit, $offset );
+		return $this->entityPerPage->getEntitiesWithoutTerm( $this->termType, $this->language, $this->type, $limit, $offset );
 	}
 
 
@@ -196,19 +222,5 @@ abstract class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	protected function getTitleForNavigation() {
 		return $this->getPageTitle( $this->language . '/' . $this->type );
 	}
-
-	/**
-	 * Get the term type (member of Term::TYPE_ enum)
-	 *
-	 * @since 0.4
-	 */
-	protected abstract function getTermType();
-
-	/**
-	 * Get the legend in HTML format
-	 *
-	 * @since 0.4
-	 */
-	protected abstract function getLegend();
 
 }

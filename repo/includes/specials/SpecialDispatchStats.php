@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use Wikibase\DispatchStats;
 
 /**
  * Page for displaying diagnostics about the dispatch process.
@@ -63,7 +64,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 
 		$lang = $this->getContext()->getLanguage();
 
-		$stats = new \Wikibase\DispatchStats();
+		$stats = new DispatchStats();
 		$stats->load();
 
 		$this->getOutput()->addHTML( Html::rawElement( 'p', array(),
