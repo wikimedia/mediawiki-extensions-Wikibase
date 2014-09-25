@@ -7,7 +7,7 @@ use Diff\DiffOp\DiffOp;
 use Wikibase\DataModel\Entity\Item;
 
 /**
- * Represents a diff between two Entity instances.
+ * Represents a diff between two entities.
  *
  * @since 0.1
  *
@@ -20,7 +20,7 @@ class EntityDiff extends Diff {
 	 * @since 0.4
 	 *
 	 * @param string $entityType
-	 * @param \Diff\DiffOp[] $operations
+	 * @param DiffOp[] $operations
 	 *
 	 * @return self
 	 */
@@ -34,8 +34,6 @@ class EntityDiff extends Diff {
 	}
 
 	/**
-	 * Constructor.
-	 *
 	 * @param DiffOp[] $operations
 	 */
 	public function __construct( array $operations = array() ) {
