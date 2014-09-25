@@ -132,6 +132,11 @@
 	);
 
 	MODULE.SerializerFactory.registerUnserializer(
+		MODULE.StatementListUnserializer,
+		wb.datamodel.StatementList
+	);
+
+	MODULE.SerializerFactory.registerUnserializer(
 		MODULE.TermGroupListUnserializer,
 		wb.datamodel.TermGroup
 	);

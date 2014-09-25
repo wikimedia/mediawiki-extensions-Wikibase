@@ -170,6 +170,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StatementListUnserializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementListUnserializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.StatementList',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.StatementUnserializer',
+				'wikibase.serialization.Unserializer',
+			),
+		),
+
 		'wikibase.serialization.StatementUnserializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementUnserializer.js',
