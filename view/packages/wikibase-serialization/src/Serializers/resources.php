@@ -177,6 +177,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StatementListSerializer' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementListSerializer.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.StatementList',
+				'wikibase.serialization.__namespace',
+				'wikibase.serialization.StatementSerializer',
+				'wikibase.serialization.Serializer',
+			),
+		),
+
 		'wikibase.serialization.StatementSerializer' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementSerializer.js',

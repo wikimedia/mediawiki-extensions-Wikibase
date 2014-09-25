@@ -50,6 +50,11 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.StatementListSerializer,
+		wb.datamodel.StatementList
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.StatementSerializer,
 		wb.datamodel.Statement
 	);

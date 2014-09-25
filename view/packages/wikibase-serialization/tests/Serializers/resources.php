@@ -151,6 +151,19 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.serialization.StatementListSerializer.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'StatementListSerializer.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.PropertyNoValueSnak',
+				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementList',
+				'wikibase.serialization.StatementListSerializer',
+			),
+		),
+
 		'wikibase.serialization.StatementSerializer.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'StatementSerializer.tests.js',
