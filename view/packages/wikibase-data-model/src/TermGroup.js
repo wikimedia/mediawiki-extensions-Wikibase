@@ -14,12 +14,8 @@
  * @param {string[]} texts
  */
 var SELF = wb.datamodel.TermGroup = function WbDataModelTermGroup( languageCode, texts ) {
-	if( languageCode === undefined || !$.isArray( texts ) ) {
-		throw new Error( 'Required parameter(s) not specified' );
-	}
-
-	this._languageCode = languageCode;
-	this._texts = texts;
+	this.setLanguageCode( languageCode );
+	this.setTexts( texts );
 };
 
 $.extend( SELF.prototype, {
@@ -41,10 +37,30 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @param {string} languageCode
+	 */
+	setLanguageCode: function( languageCode ) {
+		if( languageCode === undefined ) {
+			throw new Error( 'Language codes may not be undefined' );
+		}
+		this._languageCode = languageCode;
+	},
+
+	/**
 	 * @return {string[]}
 	 */
 	getTexts: function() {
 		return $.merge( [], this._texts );
+	},
+
+	/**
+	 * @param {string[]} texts
+	 */
+	setTexts: function( texts ) {
+		if( !$.isArray( texts ) ) {
+			throw new Error( 'Required parameter(s) not specified' );
+		}
+		this._texts = texts;
 	},
 
 	/**
