@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_7f85009f",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "non-explicit check\n\nNull Object Pattern seems applicable",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_5f591c5c",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "k)",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_9f2674c8",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/LanguageAwareRenderer.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "Is this really the best place to handle this? In a class that generates output in a specific format? It already contains both formatting and fetching code, and now yet another thing is added. Why not have this tracked via the snaks finder (could be done with a decorator)? That would avoid duplicating this all over the presentation layer, people introducing new usages without realizing they need to call this usage tracking stuff and seems more cohesive overall.",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_9fd434c0",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "some more info on what the expected format is here would be good",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_dfd2acd4",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "missing type",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_dfe98c7c",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "After some long discussion, Thiemo has decreed the holy naming convention for such methods shall be addNewUsage",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_bffed833",
+        "filename": "client/includes/Usage/HashUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "Please fix your IDE - this is in all the files",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_7ff86046",
+        "filename": "client/includes/Usage/ParserOutputUsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "type",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_bf85b8b3",
+        "filename": "client/includes/Usage/UsageAccumulator.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "\"helper object\"? This is an interface and I\u0027m not sure what is particularly \"helper\" about it compared to other code.",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_5f8c7cdb",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/LanguageAwareRendererTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "This tests that the usage is rendered? That render works when usage is set? ... Very unclear name. Please describe what is being tested.",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_9f82f4a7",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/LanguageAwareRendererTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "type hint",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_bfac9833",
+        "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "fatal error when you use this",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_5fa35c3f",
+        "filename": "client/tests/phpunit/includes/Usage/HashUsageAccumulatorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "If this is in the WikibaseClient group, then the classes should also be in the Wikibase Client namespace. Either it\u0027s in Client or it is not.",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_1f6de401",
+        "filename": "client/tests/phpunit/includes/Usage/ParserOutputUsageAccumulatorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "This does not actually verify the parser output was modified",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_ff71f0dd",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "This doc adds no value",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_df762cd5",
+        "filename": "client/tests/phpunit/includes/Usage/UsageAccumulatorContractTester.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "type hint. Also the 5th time I see this code. *frown*",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_9f78b4c0",
+        "filename": "client/tests/phpunit/includes/hooks/SidebarHookHandlersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2014-09-25T01:59:20Z",
+      "side": 1,
+      "message": "This is serious code rot. Having branching in test code is a code smell. And that\u0027s the only thing added here.",
+      "revId": "f35c833c6a63b8f68fe7f74dad0110bb8ae5636f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
