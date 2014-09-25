@@ -50,6 +50,11 @@
 	);
 
 	MODULE.SerializerFactory.registerSerializer(
+		MODULE.TermGroupSerializer,
+		wb.datamodel.TermGroup
+	);
+
+	MODULE.SerializerFactory.registerSerializer(
 		MODULE.TermSerializer,
 		wb.datamodel.Term
 	);
