@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store;
 
 /**
  * A cursor for paging through EntityIds.

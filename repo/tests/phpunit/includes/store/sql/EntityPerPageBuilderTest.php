@@ -5,14 +5,14 @@ namespace Wikibase\Test;
 use ContentHandler;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityPerPage;
-use Wikibase\EntityPerPageBuilder;
 use Wikibase\Lib\Store\EntityRedirect;
+use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\SQL\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\EntityPerPageBuilder
+ * @covers Wikibase\Repo\Store\SQL\EntityPerPageBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo

@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Interface to a table that join wiki pages and entities.
