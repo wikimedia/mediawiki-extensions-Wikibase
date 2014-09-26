@@ -1,10 +1,12 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\SQL;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
+use Wikibase\Repo\Store\EntityIdPager;
 
 /**
  * Utility class for rebuilding the wb_items_per_site table.

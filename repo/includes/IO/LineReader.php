@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\IO;
+namespace Wikibase\Repo\IO;
 
 use Disposable;
 use Iterator;

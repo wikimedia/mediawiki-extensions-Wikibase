@@ -2,13 +2,13 @@
 
 namespace Wikibase\Test\IO;
 
-use Wikibase\IO\LineReader;
+use Wikibase\Repo\IO\LineReader;
 
 /**
- * @covers Wikibase\IO\LineReader
+ * @covers Wikibase\Repo\IO\LineReader
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseIO
  *
  * @license GPL 2+

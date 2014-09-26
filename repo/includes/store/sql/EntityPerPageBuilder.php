@@ -1,10 +1,13 @@
 <?php
-namespace Wikibase;
+
+namespace Wikibase\Repo\Store\SQL;
 
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\MessageReporter;
+use Wikibase\NamespaceUtils;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Store\EntityPerPage;
 
 /**
  * Utility class for rebuilding the wb_entity_per_page table.

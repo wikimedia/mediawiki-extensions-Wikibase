@@ -24,7 +24,9 @@ use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\WikiPageEntityStore;
+use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -359,7 +361,10 @@ class SqlStore implements Store {
 				$this->getUpdateScriptPath( 'AddEntityPerPage', $db->getType() )
 			);
 
-			$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
+			$updater->addPostDatabaseUpdateMaintenance(
+				'Wikibase\Repo\Maintenance\RebuildEntityPerPage'
+			);
+
 		} elseif ( $this->useRedirectTargetColumn ) {
 			$updater->addExtensionField(
 				'wb_entity_per_page',

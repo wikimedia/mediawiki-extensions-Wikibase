@@ -6,11 +6,11 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityPerPageTable;
+use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\EntityPerPageTable
+ * @covers Wikibase\Repo\Store\SQL\EntityPerPageTable
  *
  * @group Wikibase
  * @group WikibaseRepo

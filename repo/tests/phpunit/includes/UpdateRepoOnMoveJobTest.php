@@ -8,8 +8,8 @@ use TestSites;
 use Wikibase\UpdateRepoOnMoveJob;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\Store\WikiPageEntityStore;
-use Wikibase\EntityPerPageTable;
 
 /**
  * @covers Wikibase\UpdateRepoOnMoveJob

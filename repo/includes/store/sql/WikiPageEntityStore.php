@@ -11,7 +11,6 @@ use WatchAction;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
-use Wikibase\EntityPerPage;
 use Wikibase\EntityRevision;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityRedirect;
@@ -20,6 +19,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\GenericEventDispatcher;
+use Wikibase\Repo\Store\EntityPerPage;
 use WikiPage;
 
 /**

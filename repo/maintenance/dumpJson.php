@@ -7,8 +7,6 @@ use Maintenance;
 use MWException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Dumpers\JsonDumpGenerator;
-use Wikibase\IO\EntityIdReader;
-use Wikibase\IO\LineReader;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
@@ -17,6 +15,9 @@ use Wikibase\Lib\Serializers\SerializationOptions;
 use Wikibase\Lib\Serializers\Serializer;
 use Wikibase\Lib\Serializers\SerializerFactory;
 use Wikibase\Lib\Store\EntityLookup;
+use Wikibase\Repo\IO\EntityIdReader;
+use Wikibase\Repo\IO\LineReader;
+use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
