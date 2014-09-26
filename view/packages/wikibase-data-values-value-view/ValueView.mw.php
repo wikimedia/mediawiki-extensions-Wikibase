@@ -23,6 +23,7 @@ $wgExtensionCredits['datavalues'][] = array(
 	),
 	'url' => 'https://github.com/wmde/ValueView',
 	'descriptionmsg' => 'valueview-desc',
+	'license-name' => 'GPL-2.0+'
 );
 
 $wgMessagesDirs['ValueView'] = __DIR__ . '/i18n';
