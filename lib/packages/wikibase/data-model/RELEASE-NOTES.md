@@ -13,10 +13,6 @@
 * Added `ByPropertyIdGrouper`
 * Added `BestStatementsFinder`
 
-#### Deprecations
-
-* Deprecated `ByPropertyIdArray` in favour of `ByPropertyIdGrouper`
-
 ## Version 1.0 (2014-09-02)
 
 #### Breaking changes
