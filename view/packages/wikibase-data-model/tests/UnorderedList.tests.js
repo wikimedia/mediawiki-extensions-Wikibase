@@ -265,6 +265,26 @@ QUnit.test( 'setItem() & length attribute', function( assert ) {
 	);
 } );
 
+QUnit.test( 'addItem()', function( assert ) {
+	var items = getTestItems( 2 ),
+		list = createList( items ),
+		item = getTestItems( 3 )[2];
+
+	list.addItem( item );
+
+	assert.ok(
+		list.hasItem( item ),
+		'Added item.'
+	);
+
+	assert.throws(
+		function() {
+			list.addItem( item );
+		},
+		'Throwing an error when trying to add an item featuring a key represented already.'
+	);
+} );
+
 QUnit.test( 'removeItem()', function( assert ) {
 	var items = getTestItems( 2 ),
 		list = createList( items );

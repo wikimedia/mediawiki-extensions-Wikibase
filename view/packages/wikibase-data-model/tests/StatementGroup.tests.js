@@ -29,13 +29,13 @@ QUnit.test( 'Constructor', function( assert ) {
 	);
 
 	assert.equal(
-		statementGroup.getPropertyId(),
+		statementGroup.getKey(),
 		'P1',
 		'Verified property id.'
 	);
 
 	assert.ok(
-		statementGroup.getStatementList().equals( defaultStatementList ),
+		statementGroup.getItemList().equals( defaultStatementList ),
 		'Verified StatementList.'
 	);
 
@@ -60,20 +60,20 @@ QUnit.test( 'setStatementList() & getStatementList()', function( assert ) {
 		] );
 
 	assert.ok(
-		statementGroup.getStatementList() !== defaultStatementList,
+		statementGroup.getItemList() !== defaultStatementList,
 		'Not returning original StatementList object.'
 	);
 
-	statementGroup.setStatementList( statementList );
+	statementGroup.setItemList( statementList );
 
 	assert.ok(
-		statementGroup.getStatementList().equals( statementList ),
+		statementGroup.getItemList().equals( statementList ),
 		'Set new StatementList.'
 	);
 
 	assert.throws(
 		function() {
-			statementGroup.setStatementList( new wb.datamodel.StatementList( [
+			statementGroup.setItemList( new wb.datamodel.StatementList( [
 				new wb.datamodel.Statement(
 					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
 				)
@@ -86,14 +86,14 @@ QUnit.test( 'setStatementList() & getStatementList()', function( assert ) {
 QUnit.test( 'addStatement() & hasStatement()', function( assert ) {
 	var statementGroup = getDefaultStatementGroup();
 
-	statementGroup.addStatement(
+	statementGroup.addItem(
 		new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P1' ) )
 		)
 	);
 
 	assert.ok(
-		statementGroup.hasStatement(
+		statementGroup.hasItem(
 			new wb.datamodel.Statement(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 			)
@@ -103,7 +103,7 @@ QUnit.test( 'addStatement() & hasStatement()', function( assert ) {
 
 	assert.throws(
 		function() {
-			statementGroup.addStatement(
+			statementGroup.addItem(
 				new wb.datamodel.Statement(
 					new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
 				)
@@ -122,7 +122,7 @@ QUnit.test( 'equals()', function( assert ) {
 		'Verified equals() retuning TRUE.'
 	);
 
-	statementGroup.addStatement(
+	statementGroup.addItem(
 		new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P1' ) )
 		)

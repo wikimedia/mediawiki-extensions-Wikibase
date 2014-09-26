@@ -36,7 +36,7 @@ var SELF = wb.datamodel.UnorderedList
 	for( var i = 0; i < items.length; i++ ) {
 		this._assertIsItem( items[i] );
 
-		if( this._items[this._getItemKey( items[i] )] ) {
+		if( this._items[this.getItemKey( items[i] )] ) {
 			throw new Error( 'There may only be one item per item key' );
 		}
 
@@ -76,7 +76,7 @@ $.extend( SELF.prototype, {
 	 * @param {*} item
 	 * @return {string}
 	 */
-	_getItemKey: function( item ) {
+	getItemKey: function( item ) {
 		return item[this._itemKeyFunctionName]();
 	},
 
@@ -125,7 +125,7 @@ $.extend( SELF.prototype, {
 	setItem: function( item ) {
 		this._assertIsItem( item );
 
-		var key = this._getItemKey( item );
+		var key = this.getItemKey( item );
 
 		if( !this._items[key] ) {
 			this.length++;
@@ -137,10 +137,23 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {*} item
 	 */
+	addItem: function( item ) {
+		this._assertIsItem( item );
+
+		if( this.hasItem( item ) ) {
+			throw new Error( 'Item with key ' + this.getItemKey( item ) + ' exists already' );
+		}
+
+		this.setItem( item );
+	},
+
+	/**
+	 * @param {*} item
+	 */
 	removeItem: function( item ) {
 		this._assertIsItem( item );
 
-		var key = this._getItemKey( item );
+		var key = this.getItemKey( item );
 
 		if( item.equals( this._items[key] ) ) {
 			this.removeByKey( key );
@@ -182,7 +195,7 @@ $.extend( SELF.prototype, {
 	 */
 	hasItem: function( item ) {
 		this._assertIsItem( item );
-		var key = this._getItemKey( item );
+		var key = this.getItemKey( item );
 		return this._items[key] && this._items[key].equals( item );
 	},
 

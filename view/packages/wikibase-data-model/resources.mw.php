@@ -79,8 +79,10 @@ return call_user_func( function() {
 				'ClaimGroup.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.ClaimList',
+				'wikibase.datamodel.Group',
 			),
 		),
 
@@ -139,6 +141,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.datamodel.Group' => $moduleTemplate + array(
+			'scripts' => array(
+				'Group.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
 		'wikibase.datamodel.Item' => $moduleTemplate + array(
 			'scripts' => array(
 				'Item.js',
@@ -158,7 +169,6 @@ return call_user_func( function() {
 				'OrderedList.js',
 			),
 			'dependencies' => array(
-				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			),
 		),
@@ -290,7 +300,9 @@ return call_user_func( function() {
 				'StatementGroup.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Group',
 				'wikibase.datamodel.StatementList',
 			),
 		),
@@ -366,7 +378,6 @@ return call_user_func( function() {
 				'UnorderedList.js',
 			),
 			'dependencies' => array(
-				'util.inherit',
 				'wikibase.datamodel.__namespace',
 			),
 		),

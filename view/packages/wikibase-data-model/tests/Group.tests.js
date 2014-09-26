@@ -2,21 +2,52 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit ) {
+( function( wb, QUnit, $ ) {
 'use strict';
 
 QUnit.module( 'wikibase.datamodel.ClaimGroup' );
 
 /**
- * @return {wikibase.datamodel.ClaimGroup}
+ * @constructor
+ * @param {string} key
  */
-function getDefaultClaimGroup() {
-	return new wb.datamodel.ClaimGroup( 'P1', new wb.datamodel.ClaimList( [
-		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-	] ) );
+var TestConstructor = function( key ) {
+	this._key = key;
+};
+$.extend( TestConstructor.prototype, {
+	equals: function( other ) {
+		return other === this;
+	},
+	getKey: function() {
+		return this._key;
+	}
+} );
+
+var TestListConstructor = function()
+
+/**
+ * @param {number} n
+ * @return {TestConstructor[]}
+ */
+function getTestItems( n ) {
+	var items = [];
+
+	for( var i = 0; i < n; i++ ) {
+		items.push( new TestConstructor( '' + i ) );
+	}
+
+	return items;
 }
 
+function createList( items ) {
+	return new wb.datamodel.UnorderedList( TestConstructor, 'getKey', items );
+}
+
+
 QUnit.test( 'Constructor', function( assert ) {
+	var items = getTestItems( 2 ),
+		group = new wb.datamodel.Group( items );
+
 	var claimGroup = getDefaultClaimGroup();
 
 	assert.ok(
@@ -25,13 +56,13 @@ QUnit.test( 'Constructor', function( assert ) {
 	);
 
 	assert.equal(
-		claimGroup.getKey(),
+		claimGroup.getPropertyId(),
 		'P1',
 		'Verified property id.'
 	);
 
 	assert.ok(
-		claimGroup.getItemList().equals( new wb.datamodel.ClaimList( [
+		claimGroup.getClaimList().equals( new wb.datamodel.ClaimList( [
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		] ) ),
 		'Verified ClaimList.'
@@ -47,29 +78,29 @@ QUnit.test( 'Constructor', function( assert ) {
 	);
 } );
 
-QUnit.test( 'setItemList() & getItemList()', function( assert ) {
+QUnit.test( 'setClaimList() & getClaimList()', function( assert ) {
 	var claimGroup = getDefaultClaimGroup(),
 		claimList = new wb.datamodel.ClaimList( [
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		] );
 
 	assert.ok(
-		claimGroup.getItemList() !== new wb.datamodel.ClaimList( [
+		claimGroup.getClaimList() !== new wb.datamodel.ClaimList( [
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		] ),
 		'Not returning original ClaimList object.'
 	);
 
-	claimGroup.setItemList( claimList );
+	claimGroup.setClaimList( claimList );
 
 	assert.ok(
-		claimGroup.getItemList().equals( claimList ),
+		claimGroup.getClaimList().equals( claimList ),
 		'Set new ClaimList.'
 	);
 
 	assert.throws(
 		function() {
-			claimGroup.setItemList( new wb.datamodel.ClaimList( [
+			claimGroup.setClaimList( new wb.datamodel.ClaimList( [
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
 			] ) );
 		},
@@ -77,15 +108,15 @@ QUnit.test( 'setItemList() & getItemList()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'addItem() & hasItem()', function( assert ) {
+QUnit.test( 'addClaim() & hasClaim()', function( assert ) {
 	var claimGroup = getDefaultClaimGroup();
 
-	claimGroup.addItem(
+	claimGroup.addClaim(
 		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'guid' )
 	);
 
 	assert.ok(
-		claimGroup.hasItem(
+		claimGroup.hasClaim(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'guid' )
 		),
 		'Verified having added a Claim.'
@@ -93,7 +124,7 @@ QUnit.test( 'addItem() & hasItem()', function( assert ) {
 
 	assert.throws(
 		function() {
-			claimGroup.addItem(
+			claimGroup.addClaim(
 				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
 			);
 		},
@@ -110,7 +141,7 @@ QUnit.test( 'equals()', function( assert ) {
 		'Verified equals() retuning TRUE.'
 	);
 
-	claimGroup.addItem(
+	claimGroup.addClaim(
 		new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P1' ) )
 	);
 
@@ -120,4 +151,4 @@ QUnit.test( 'equals()', function( assert ) {
 	);
 } );
 
-}( wikibase, QUnit ) );
+}( wikibase, QUnit, jQuery ) );

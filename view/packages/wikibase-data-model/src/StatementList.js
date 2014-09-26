@@ -31,6 +31,14 @@ wb.datamodel.StatementList = util.inherit( 'wbStatementList', PARENT, function( 
 		}
 
 		return propertyIds;
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Statement} statement
+	 * @return {string}
+	 */
+	getItemKey: function( statement ) {
+		return statement.getClaim().getMainSnak().getPropertyId();
 	}
 } );
 

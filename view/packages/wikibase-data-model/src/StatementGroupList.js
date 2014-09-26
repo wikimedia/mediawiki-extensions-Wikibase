@@ -18,7 +18,7 @@ wb.datamodel.StatementGroupList = util.inherit(
 	'wbStatementGroupList',
 	PARENT,
 	function( statementGroups ) {
-		PARENT.call( this, wb.datamodel.StatementGroup, 'getPropertyId', statementGroups );
+		PARENT.call( this, wb.datamodel.StatementGroup, 'getKey', statementGroups );
 	}
 );
 

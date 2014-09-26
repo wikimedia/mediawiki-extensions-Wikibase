@@ -15,7 +15,7 @@ var PARENT = wb.datamodel.UnorderedList;
  * @param {wikibase.datamodel.ClaimGroup[]} [claimGroups]
  */
 wb.datamodel.ClaimGroupList = util.inherit( 'wbClaimGroupList', PARENT, function( claimGroups ) {
-	PARENT.call( this, wb.datamodel.ClaimGroup, 'getPropertyId', claimGroups );
+	PARENT.call( this, wb.datamodel.ClaimGroup, 'getKey', claimGroups );
 } );
 
 }( wikibase ) );

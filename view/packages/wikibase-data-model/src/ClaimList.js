@@ -31,6 +31,14 @@ wb.datamodel.ClaimList = util.inherit( 'wbClaimList', PARENT, function( claims )
 		}
 
 		return propertyIds;
+	},
+
+	/**
+	 * @param {wikibase.datamodel.Claim} claim
+	 * @return {string}
+	 */
+	getItemKey: function( claim ) {
+		return claim.getMainSnak().getPropertyId();
 	}
 } );
 
