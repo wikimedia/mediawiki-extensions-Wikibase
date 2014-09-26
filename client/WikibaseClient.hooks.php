@@ -37,6 +37,7 @@ use Wikibase\Client\MovePageNotice;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
+use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\WikibaseClient;
 
 /**
