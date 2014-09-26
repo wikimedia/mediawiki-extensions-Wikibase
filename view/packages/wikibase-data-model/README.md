@@ -27,6 +27,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * SnakList constructor only accepts arrays of Snak objects.
 
 #### Enhancements
+* Added ClaimGroup.
 * Added ClaimList.
 * Added Fingerprint.
 * Added ReferenceList.

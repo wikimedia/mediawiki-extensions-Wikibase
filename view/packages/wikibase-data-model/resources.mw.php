@@ -26,6 +26,7 @@ return call_user_func( function() {
 		'wikibase.datamodel' => $moduleTemplate + array(
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.ClaimGroup',
 				'wikibase.datamodel.ClaimList',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.EntityId',
@@ -69,6 +70,16 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
+			),
+		),
+
+		'wikibase.datamodel.ClaimGroup' => $moduleTemplate + array(
+			'scripts' => array(
+				'ClaimGroup.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.ClaimList',
 			),
 		),
 
