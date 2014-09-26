@@ -243,4 +243,37 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( 0, count( $references ) );
 	}
 
+	public function testGivenOneSnak_addNewReferenceAddsSnak() {
+		$references = new ReferenceList();
+		$snak = new PropertyNoValueSnak( 1 );
+
+		$references->addNewReference( $snak );
+		$this->assertTrue( $references->hasReference( new Reference( new SnakList( array( $snak ) ) ) ) );
+	}
+
+	public function testGivenMultipleSnaks_addNewReferenceAddsThem() {
+		$references = new ReferenceList();
+
+		$references->addNewReference(
+			new PropertyNoValueSnak( 1 ),
+			new PropertyNoValueSnak( 3 ),
+			new PropertyNoValueSnak( 2 )
+		);
+
+		$expectedSnaks = array(
+			new PropertyNoValueSnak( 1 ),
+			new PropertyNoValueSnak( 3 ),
+			new PropertyNoValueSnak( 2 )
+		);
+
+		$this->assertTrue( $references->hasReference( new Reference( new SnakList( $expectedSnaks ) ) ) );
+	}
+
+	public function testGivenNoneSnak_addNewReferenceThrowsException() {
+		$references = new ReferenceList();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$references->addNewReference( new PropertyNoValueSnak( 1 ), null );
+	}
+
 }
