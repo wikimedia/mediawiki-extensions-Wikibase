@@ -150,6 +150,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.datamodel.Groupable' => $moduleTemplate + array(
+			'scripts' => array(
+				'Groupable.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
+			),
+		),
+
 		'wikibase.datamodel.Item' => $moduleTemplate + array(
 			'scripts' => array(
 				'Item.js',
@@ -169,7 +179,9 @@ return call_user_func( function() {
 				'List.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Groupable',
 			),
 		),
 
@@ -378,7 +390,9 @@ return call_user_func( function() {
 				'Set.js',
 			),
 			'dependencies' => array(
+				'util.inherit',
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.Groupable',
 			),
 		),
 

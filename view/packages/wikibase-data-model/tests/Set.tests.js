@@ -11,10 +11,10 @@ QUnit.module( 'wikibase.datamodel.Set' );
  * @constructor
  * @param {string} key
  */
-var TestConstructor = function( key ) {
+var TestItem = function( key ) {
 	this._key = key;
 };
-$.extend( TestConstructor.prototype, {
+$.extend( TestItem.prototype, {
 	equals: function( other ) {
 		return other === this;
 	},
@@ -25,20 +25,20 @@ $.extend( TestConstructor.prototype, {
 
 /**
  * @param {number} n
- * @return {TestConstructor[]}
+ * @return {TestItem[]}
  */
 function getTestItems( n ) {
 	var items = [];
 
 	for( var i = 0; i < n; i++ ) {
-		items.push( new TestConstructor( '' + i ) );
+		items.push( new TestItem( '' + i ) );
 	}
 
 	return items;
 }
 
 function createList( items ) {
-	return new wb.datamodel.Set( TestConstructor, 'getKey', items );
+	return new wb.datamodel.Set( TestItem, 'getKey', items );
 }
 
 QUnit.test( 'Constructor', function( assert ) {
@@ -69,7 +69,7 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Set( TestConstructor );
+			return new wb.datamodel.Set( TestItem );
 		},
 		'Throwing error when trying to instantiate an Set without "getKey" function.'
 	);
@@ -84,7 +84,7 @@ QUnit.test( 'Constructor', function( assert ) {
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.Set( TestConstructor, 'doesNotExist' );
+			return new wb.datamodel.Set( TestItem, 'doesNotExist' );
 		},
 		'Throwing error when trying to instantiate an Set wit an improper "getKey" '
 			+ 'function name.'

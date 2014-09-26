@@ -32,6 +32,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added ClaimList.
 * Added Fingerprint.
 * Added Group.
+* Added Groupable.
 * Added List.
 * Added ReferenceList.
 * Added SiteLinkList.

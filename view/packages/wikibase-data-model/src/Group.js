@@ -6,45 +6,38 @@
 'use strict';
 
 /**
- * A Group contains a list of which all items feature the key specified with the Group.
+ * A Group referencing a container of which all items feature the key specified with the Group.
  * @constructor
  * @since 0.4
  *
  * @param {*} key
- * @param {Function} ItemListConstructor
- * @param {string} itemListKeysFunctionName
- * @param {*} itemList
+ * @param {Function} ItemContainerConstructor
+ * @param {string} itemContainerKeysFunctionName
+ * @param {wikibase.datamodel.Groupable} itemContainer
  */
 var SELF = wb.datamodel.Group = function WbDataModelGroup(
 	key,
-	ItemListConstructor,
-	itemListKeysFunctionName,
-	itemList
+	ItemContainerConstructor,
+	itemContainerKeysFunctionName,
+	itemContainer
 ) {
 	if( key === undefined ) {
 		throw new Error( 'Key may not be undefined' );
-	} else if( !$.isFunction( ItemListConstructor ) ) {
-		throw new Error( 'Item list constructor needs to be a Function' );
+	} else if( !$.isFunction( ItemContainerConstructor ) ) {
+		throw new Error( 'Item container constructor needs to be a Function' );
+	} else if( !( new ItemContainerConstructor() ) instanceof wb.datamodel.Groupable ) {
+		throw new Error( 'Item container constructor needs to implement Groupable' );
 	} else if(
-		// TODO: Implement abstract base class for Set and List
-		!$.isFunction( ItemListConstructor.prototype.toArray )
-		|| !$.isFunction( ItemListConstructor.prototype.hasItem )
-		|| !$.isFunction( ItemListConstructor.prototype.addItem )
-		|| !$.isFunction( ItemListConstructor.prototype.removeItem )
-		|| !$.isFunction( ItemListConstructor.prototype.isEmpty )
-		|| !$.isFunction( ItemListConstructor.prototype.equals )
-		|| !$.isFunction( ItemListConstructor.prototype.getItemKey )
+		!$.isFunction( ItemContainerConstructor.prototype[itemContainerKeysFunctionName] )
 	) {
-		throw new Error( 'Item prototype needs equals() method' );
-	} else if( !$.isFunction( ItemListConstructor.prototype[itemListKeysFunctionName] ) ) {
-		throw new Error( 'Missing ' + ItemListConstructor + '() in list item prototype to receive '
-			+ 'the item key from' );
+		throw new Error( 'Missing ' + ItemContainerConstructor + '() in container item prototype '
+			+ 'to receive the item key from' );
 	}
 
 	this._key = key;
-	this._ItemListConstructor = ItemListConstructor;
-	this._itemListKeysFunctionName = itemListKeysFunctionName;
-	this.setItemList( itemList || new ItemListConstructor() );
+	this._ItemContainerConstructor = ItemContainerConstructor;
+	this._itemContainerKeysFunctionName = itemContainerKeysFunctionName;
+	this.setItemContainer( itemContainer || new ItemContainerConstructor() );
 };
 
 $.extend( SELF.prototype, {
@@ -56,17 +49,17 @@ $.extend( SELF.prototype, {
 		/**
 	 * @type {Function}
 	 */
-	_ItemListConstructor: null,
+	_ItemContainerConstructor: null,
 
 	/**
 	 * @type {string}
 	 */
-	_itemListKeysFunctionName: null,
+	_itemContainerKeysFunctionName: null,
 
 	/**
-	 * @type {*}
+	 * @type {wikibase.datamodel.Groupable}
 	 */
-	_items: null,
+	_itemContainer: null,
 
 	/**
 	 * @return {*}
@@ -76,26 +69,18 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {*} itemList
-	 * @return {string}
-	 */
-	getItemListKeys: function( itemList ) {
-		return itemList[this._itemListKeysFunctionName]();
-	},
-
-	/**
 	 * @return {*}
 	 */
-	getItemList: function() {
-		// Do not allow altering the encapsulated ClaimList.
-		return new this._ItemListConstructor( this._itemList.toArray() );
+	getItemContainer: function() {
+		// Do not allow altering the encapsulated ClaimContainer.
+		return new this._ItemContainerConstructor( this._itemContainer.toArray() );
 	},
 
 	/**
-	 * @param {*} itemList
+	 * @param {*} itemContainer
 	 */
-	setItemList: function( itemList ) {
-		var keys = this.getItemListKeys( itemList );
+	setItemContainer: function( itemContainer ) {
+		var keys = this._getItemContainerKeys( itemContainer );
 
 		for( var i = 0; i < keys.length; i++ ) {
 			if( keys[i] !== this._key ) {
@@ -104,7 +89,15 @@ $.extend( SELF.prototype, {
 			}
 		}
 
-		this._itemList = itemList;
+		this._itemContainer = itemContainer;
+	},
+
+	/**
+	 * @param {*} itemContainer
+	 * @return {string}
+	 */
+	_getItemContainerKeys: function( itemContainer ) {
+		return itemContainer[this._itemContainerKeysFunctionName]();
 	},
 
 	/**
@@ -112,34 +105,34 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	hasItem: function( item ) {
-		return this._itemList.hasItem( item );
+		return this._itemContainer.hasItem( item );
 	},
 
 	/**
 	 * @param {*} item
 	 */
 	addItem: function( item ) {
-		if( this._itemList.getItemKey( item ) !== this._key ) {
+		if( this._itemContainer.getItemKey( item ) !== this._key ) {
 			throw new Error(
 				'Mismatching key: Expected ' + this._key + ', received '
-					+ this._itemList.getItemKey( item )
+					+ this._itemContainer.getItemKey( item )
 			);
 		}
-		this._itemList.addItem( item );
+		this._itemContainer.addItem( item );
 	},
 
 	/**
 	 * @param {*} item
 	 */
 	removeItem: function( item ) {
-		this._itemList.removeItem( item );
+		this._itemContainer.removeItem( item );
 	},
 
 	/**
 	 * @return {boolean}
 	 */
 	isEmpty: function() {
-		return this._itemList.isEmpty();
+		return this._itemContainer.isEmpty();
 	},
 
 	/**
@@ -150,7 +143,7 @@ $.extend( SELF.prototype, {
 		return group === this
 			|| group instanceof SELF
 			&& this._key === group.getKey()
-			&& this._itemList.equals( group.getItemList() );
+			&& this._itemContainer.equals( group.getItemContainer() );
 	}
 
 } );

@@ -2,153 +2,237 @@
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( wb, QUnit, $ ) {
+( function( wb, QUnit, $, util ) {
 'use strict';
 
-QUnit.module( 'wikibase.datamodel.ClaimGroup' );
+QUnit.module( 'wikibase.datamodel.Group' );
 
 /**
  * @constructor
- * @param {string} key
+ * @param {*} key
+ * @param {*} value
  */
-var TestConstructor = function( key ) {
+var TestItem = function( key, value ) {
 	this._key = key;
+	this._value = value;
 };
-$.extend( TestConstructor.prototype, {
+$.extend( TestItem.prototype, {
 	equals: function( other ) {
-		return other === this;
+		return other.getValue() === this.getValue();
 	},
 	getKey: function() {
 		return this._key;
+	},
+	getValue: function() {
+		return this._value;
 	}
 } );
 
-var TestListConstructor = function()
+/**
+ * @constructor
+ * @param {TestItem[]} items
+ */
+var TestContainer = util.inherit(
+	'TestContainer',
+	wb.datamodel.Groupable,
+	function( items ) {
+		this._items = items || [];
+	},
+{
+	toArray: function() {
+		return this._items;
+	},
+	hasItem: function( item ) {
+		return $.inArray( item, this._items ) !== -1;
+	},
+	addItem: function( item ) {
+		this._items.push( item );
+	},
+	removeItem: function( item ) {
+		for( var i = 0; i < this._items.length; i++ ) {
+			if( this._items[i].equals( item ) ) {
+				this._items.splice( i, 1 );
+				break;
+			}
+		}
+	},
+	isEmpty: function() {
+		return !!this._items.length;
+	},
+	equals: function( testContainer ) {
+		if( testContainer === this ) {
+			return true;
+		} else if(
+			!( testContainer instanceof this.constructor )
+			|| testContainer.toArray().length !== this._items.length
+		) {
+			return false;
+		}
+
+		var otherItems = testContainer.toArray();
+
+		for( var i = 0; i < this._items.length; i++ ) {
+			if( !this._items[i].equals( otherItems[i] ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	},
+	getItemKey: function( item ) {
+		return item.getKey();
+	},
+	getKeys: function() {
+		var keys = [];
+		for( var i = 0; i < this._items.length; i++ ) {
+			var key = this._items[i].getKey();
+			if( $.inArray( key, keys ) === -1 ) {
+				keys.push( key );
+			}
+		}
+		return keys;
+	}
+} );
 
 /**
+ * @param {*} key
  * @param {number} n
- * @return {TestConstructor[]}
+ * @return {TestItem[]}
  */
-function getTestItems( n ) {
+function getTestItems( key, n ) {
 	var items = [];
 
 	for( var i = 0; i < n; i++ ) {
-		items.push( new TestConstructor( '' + i ) );
+		items.push( new TestItem( key, i ) );
 	}
 
 	return items;
 }
 
-function createList( items ) {
-	return new wb.datamodel.UnorderedList( TestConstructor, 'getKey', items );
+/**
+ * @param {*} key
+ * @param {number} n
+ * @return {TestContainer}
+ */
+function getTestContainer( key, n ) {
+	return new TestContainer( getTestItems( key, n ) );
 }
 
+/**
+ * @param {*} key
+ * @param {TestContainer} [container]
+ * @return {wikibase.datamodel.Group}
+ */
+function createGroup( key, container ) {
+	return new wb.datamodel.Group( key, TestContainer, 'getKeys', container );
+}
 
 QUnit.test( 'Constructor', function( assert ) {
-	var items = getTestItems( 2 ),
-		group = new wb.datamodel.Group( items );
+	assert.ok(
+		createGroup( 'key', new TestContainer() ) instanceof wb.datamodel.Group,
+		'Instantiated empty Group.'
+	);
 
-	var claimGroup = getDefaultClaimGroup();
+	var group = createGroup( 'key', getTestContainer( 'key', 2 ) );
 
 	assert.ok(
-		claimGroup instanceof wb.datamodel.ClaimGroup,
-		'Instantiated ClaimGroup.'
+		group instanceof wb.datamodel.Group,
+		'Instantiated filled Group.'
 	);
 
 	assert.equal(
-		claimGroup.getPropertyId(),
-		'P1',
-		'Verified property id.'
+		group.getKey(),
+		'key',
+		'Verified key being set.'
 	);
 
 	assert.ok(
-		claimGroup.getClaimList().equals( new wb.datamodel.ClaimList( [
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		] ) ),
-		'Verified ClaimList.'
+		group.getItemContainer().equals( getTestContainer( 'key', 2 ) ),
+		'Verified sub-widget being set.'
 	);
 
 	assert.throws(
 		function() {
-			return new wb.datamodel.ClaimGroup( 'P1', new wb.datamodel.ClaimList( [
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
-			] ) );
+			createGroup( 'key', getTestContainer( 'otherKey', 1 ) );
 		},
-		'Throwing error when trying to instantiate ClaimGroup mismatching property ids.'
+		'Throwing error when trying to instantiate a Group with mismatching key.'
 	);
 } );
 
-QUnit.test( 'setClaimList() & getClaimList()', function( assert ) {
-	var claimGroup = getDefaultClaimGroup(),
-		claimList = new wb.datamodel.ClaimList( [
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		] );
+QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
+	var container = getTestContainer( 'key', 1 ),
+		group = createGroup( 'key', container ),
+		newContainer = getTestContainer( 'key', 2 );
 
 	assert.ok(
-		claimGroup.getClaimList() !== new wb.datamodel.ClaimList( [
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		] ),
-		'Not returning original ClaimList object.'
+		group.getItemContainer() !== container,
+		'Not returning original container.'
 	);
 
-	claimGroup.setClaimList( claimList );
+	assert.ok(
+		group.getItemContainer().equals( container ),
+		'Verified returned container matching returned container.'
+	);
 
 	assert.ok(
-		claimGroup.getClaimList().equals( claimList ),
-		'Set new ClaimList.'
+		!group.getItemContainer().equals( newContainer ),
+		'Verified returned container not matching not yet set new container.'
+	);
+
+	group.setItemContainer( newContainer );
+
+	assert.ok(
+		group.getItemContainer().equals( newContainer ),
+		'Set new container.'
 	);
 
 	assert.throws(
 		function() {
-			claimGroup.setClaimList( new wb.datamodel.ClaimList( [
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
-			] ) );
+			group.setItemContainer( getTestContainer( 'otherKey', 1 ) );
 		},
-		'Throwing error when trying to set a ClaimList with mismatching property id.'
+		'Throwing error when trying to set a container with mismatching key.'
 	);
 } );
 
-QUnit.test( 'addClaim() & hasClaim()', function( assert ) {
-	var claimGroup = getDefaultClaimGroup();
-
-	claimGroup.addClaim(
-		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'guid' )
-	);
+QUnit.test( 'addItem() & hasItem()', function( assert ) {
+	var container = getTestContainer( 'key', 1 ),
+		group = createGroup( 'key', container ),
+		newItem = getTestItems( 'key', 2 )[1];
 
 	assert.ok(
-		claimGroup.hasClaim(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ), null, 'guid' )
-		),
-		'Verified having added a Claim.'
+		!group.hasItem( newItem ),
+		'Verified Group not containing item not yet added.'
+	);
+
+	group.addItem( newItem );
+
+	assert.ok(
+		group.hasItem( newItem ),
+		'Added new item.'
 	);
 
 	assert.throws(
 		function() {
-			claimGroup.addClaim(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P2' ) )
-			);
+			group.addItem( getTestItems( 'anotherKey', 2 )[1] );
 		},
-		'Throwing error when trying to add a Claim that does not match the ClaimGroup '
-			+ 'object\'s property id.'
+		'Throwing error when trying to add an item with mismatching key.'
 	);
 } );
 
 QUnit.test( 'equals()', function( assert ) {
-	var claimGroup = getDefaultClaimGroup();
+	var group = createGroup( 'key', getTestContainer( 'key', 1 ) );
 
 	assert.ok(
-		claimGroup.equals( getDefaultClaimGroup() ),
+		group.equals( createGroup( 'key', getTestContainer( 'key', 1 ) ) ),
 		'Verified equals() retuning TRUE.'
 	);
 
-	claimGroup.addClaim(
-		new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'P1' ) )
-	);
+	group.addItem( getTestItems( 'key', 2 )[1] );
 
 	assert.ok(
-		!claimGroup.equals( getDefaultClaimGroup() ),
-		'FALSE after adding another Claim object.'
+		!group.equals( createGroup( 'key', getTestContainer( 'key', 1 ) ) ),
+		'FALSE compared to initial group after adding an item.'
 	);
 } );
 
-}( wikibase, QUnit, jQuery ) );
+}( wikibase, QUnit, jQuery, util ) );

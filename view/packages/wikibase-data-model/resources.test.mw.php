@@ -82,6 +82,17 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.Group.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'Group.tests.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.Group',
+				'wikibase.datamodel.Groupable',
+			),
+		),
+
 		'wikibase.datamodel.Item.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'Item.tests.js',

@@ -5,6 +5,8 @@
 ( function( wb, $ ) {
 'use strict';
 
+var PARENT = wb.datamodel.Groupable;
+
 /**
  * Ordered list.
  * @constructor
@@ -13,7 +15,7 @@
  * @param {Function} ItemConstructor
  * @param {*[]} [items]
  */
-var SELF = wb.datamodel.List = function WbDataModelList( ItemConstructor, items ) {
+var SELF = wb.datamodel.List = util.inherit( 'WbDataModelList', PARENT, function( ItemConstructor, items ) {
 	if( !$.isFunction( ItemConstructor ) ) {
 		throw new Error( 'Item constructor needs to be a Function' );
 	} else if( !$.isFunction( ItemConstructor.prototype.equals ) ) {
@@ -29,9 +31,7 @@ var SELF = wb.datamodel.List = function WbDataModelList( ItemConstructor, items 
 	for( var i = 0; i < items.length; i++ ) {
 		this.addItem( items[i] );
 	}
-};
-
-$.extend( SELF.prototype, {
+}, {
 	/**
 	 * @type {Function}
 	 */

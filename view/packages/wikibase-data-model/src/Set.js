@@ -5,6 +5,8 @@
 ( function( wb, $ ) {
 'use strict';
 
+var PARENT = wb.datamodel.Groupable;
+
 /**
  * Unordered set.
  * @constructor
@@ -14,8 +16,10 @@
  * @param {string} itemKeyFunctionName
  * @param {*[]} [items]
  */
-var SELF = wb.datamodel.Set
-	= function WbDataModelSet( ItemConstructor, itemKeyFunctionName, items ) {
+var SELF = wb.datamodel.Set = util.inherit(
+	'WbDataModelSet',
+	PARENT,
+	function( ItemConstructor, itemKeyFunctionName, items ) {
 
 	if( !$.isFunction( ItemConstructor ) ) {
 		throw new Error( 'Item constructor needs to be a Function' );
@@ -42,9 +46,7 @@ var SELF = wb.datamodel.Set
 
 		this.setItem( items[i] );
 	}
-};
-
-$.extend( SELF.prototype, {
+}, {
 	/**
 	 * @type {Function}
 	 */

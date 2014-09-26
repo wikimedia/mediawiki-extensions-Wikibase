@@ -10,20 +10,20 @@ QUnit.module( 'wikibase.datamodel.List' );
 /**
  * @constructor
  */
-var TestConstructor = function() {};
-TestConstructor.prototype.equals = function( other ) {
+var TestItem = function() {};
+TestItem.prototype.equals = function( other ) {
 	return other === this;
 };
 
 /**
  * @param {number} n
- * @return {TestConstructor[]}
+ * @return {TestItem[]}
  */
 function getTestItems( n ) {
 	var items = [];
 
 	for( var i = 0; i < n; i++ ) {
-		items.push( new TestConstructor() );
+		items.push( new TestItem() );
 	}
 
 	return items;
@@ -31,11 +31,11 @@ function getTestItems( n ) {
 
 QUnit.test( 'Constructor', function( assert ) {
 	assert.ok(
-		( new wb.datamodel.List( TestConstructor ) ) instanceof wb.datamodel.List,
+		( new wb.datamodel.List( TestItem ) ) instanceof wb.datamodel.List,
 		'Instantiated empty List.'
 	);
 
-	var list = new wb.datamodel.List( TestConstructor, getTestItems( 2 ) );
+	var list = new wb.datamodel.List( TestItem, getTestItems( 2 ) );
 
 	assert.ok(
 		list instanceof wb.datamodel.List,
@@ -65,7 +65,7 @@ QUnit.test( 'Constructor', function( assert ) {
 
 QUnit.test( 'each()', function( assert ) {
 	var items = getTestItems( 2 ),
-		list = new wb.datamodel.List( TestConstructor, items );
+		list = new wb.datamodel.List( TestItem, items );
 
 	list.each( function( i, item ) {
 		assert.ok(
@@ -77,7 +77,7 @@ QUnit.test( 'each()', function( assert ) {
 
 QUnit.test( 'hasItem()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.List( TestConstructor, items );
+		list = new wb.datamodel.List( TestItem, items );
 
 	assert.ok(
 		list.hasItem( items[2] ),
@@ -93,7 +93,7 @@ QUnit.test( 'hasItem()', function( assert ) {
 QUnit.test( 'addItem() & length attribute', function( assert ) {
 	var items = getTestItems( 3 ),
 		newItems = getTestItems( 1 ),
-		list = new wb.datamodel.List( TestConstructor, items );
+		list = new wb.datamodel.List( TestItem, items );
 
 	assert.equal(
 		list.length,
@@ -118,7 +118,7 @@ QUnit.test( 'addItem() & length attribute', function( assert ) {
 QUnit.test( 'removeItem()', function( assert ) {
 	var items = getTestItems( 3 ),
 		unsetItems = getTestItems( 1 ),
-		list = new wb.datamodel.List( TestConstructor, items );
+		list = new wb.datamodel.List( TestItem, items );
 
 	assert.equal(
 		list.length,
@@ -149,7 +149,7 @@ QUnit.test( 'removeItem()', function( assert ) {
 
 QUnit.test( 'isEmpty()', function( assert ) {
 	var items = getTestItems( 1 ),
-		list = new wb.datamodel.List( TestConstructor );
+		list = new wb.datamodel.List( TestItem );
 
 	assert.ok(
 		list.isEmpty(),
@@ -173,24 +173,24 @@ QUnit.test( 'isEmpty()', function( assert ) {
 
 QUnit.test( 'equals()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.List( TestConstructor, items );
+		list = new wb.datamodel.List( TestItem, items );
 
 	assert.ok(
-		list.equals( new wb.datamodel.List( TestConstructor, items ) ),
+		list.equals( new wb.datamodel.List( TestItem, items ) ),
 		'Verified equals() retuning TRUE.'
 	);
 
 	list.addItem( getTestItems( 1 )[0] );
 
 	assert.ok(
-		!list.equals( new wb.datamodel.List( TestConstructor, items ) ),
+		!list.equals( new wb.datamodel.List( TestItem, items ) ),
 		'FALSE after adding another item object.'
 	);
 } );
 
 QUnit.test( 'indexOf()', function( assert ) {
 	var items = getTestItems( 3 ),
-		list = new wb.datamodel.List( TestConstructor, items );
+		list = new wb.datamodel.List( TestItem, items );
 
 	assert.strictEqual(
 		list.indexOf( items [1] ),
