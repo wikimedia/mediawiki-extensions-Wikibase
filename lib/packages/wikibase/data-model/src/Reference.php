@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel;
 
-use Instantiator\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
