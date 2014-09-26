@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\UnresolvedRedirectException;
 /**
  * @covers Wikibase\Lib\Store\RedirectResolvingEntityLookup
  *
- * @group WikibaseRepo
+ * @group WikibaseLib
  * @group Wikibase
  *
  * @licence GNU GPL v2+

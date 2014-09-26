@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityRedirect;
 /**
  * @covers Wikibase\Lib\Store\EntityRedirect
  *
- * @group WikibaseRepo
+ * @group WikibaseLib
  * @group Wikibase
  *
  * @licence GNU GPL v2+

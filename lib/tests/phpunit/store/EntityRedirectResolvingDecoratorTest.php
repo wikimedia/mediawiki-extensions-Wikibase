@@ -15,7 +15,7 @@ use Wikibase\PropertyLabelResolver;
 /**
  * @covers Wikibase\Lib\Store\EntityRedirectResolver
  *
- * @group WikibaseRepo
+ * @group WikibaseLib
  * @group Wikibase
  *
  * @licence GNU GPL v2+

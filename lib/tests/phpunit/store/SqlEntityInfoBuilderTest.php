@@ -12,7 +12,7 @@ use Wikibase\Settings;
  * @covers Wikibase\SqlEntityInfoBuilder
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseLib
  * @group WikibaseStore
  * @group WikibasePropertyInfo
  * @group Database
