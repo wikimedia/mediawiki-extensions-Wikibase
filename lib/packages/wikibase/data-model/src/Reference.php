@@ -2,11 +2,13 @@
 
 namespace Wikibase\DataModel;
 
+use InvalidArgumentException;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Snak\Snaks;
 
 /**
- * Interface for objects that represent a single Wikibase reference.
+ * Object that represents a single Wikibase reference.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#ReferenceRecords
  *
  * @since 0.1, instantiable since 0.4
@@ -22,12 +24,24 @@ class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
 	private $snaks;
 
 	/**
-	 * @since 0.1
+	 * An array of Snak is only supported since version 1.1.
 	 *
-	 * @param Snaks|null $snaks
+	 * @param Snaks|Snak[]|null $snaks
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( Snaks $snaks = null ) {
-		$this->snaks = $snaks === null ? new SnakList() : $snaks;
+	public function __construct( $snaks = null ) {
+		if ( $snaks === null ) {
+			$this->snaks = new SnakList();
+		}
+		elseif ( $snaks instanceof Snaks ) {
+			$this->snaks = $snaks;
+		}
+		elseif ( is_array( $snaks ) ) {
+			$this->snaks = new SnakList( $snaks );
+		}
+		else {
+			throw new InvalidArgumentException();
+		}
 	}
 
 	/**
