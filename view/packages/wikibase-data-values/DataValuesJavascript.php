@@ -25,6 +25,7 @@ $GLOBALS['wgExtensionCredits']['datavalues'][] = array(
 	),
 	'url' => 'https://github.com/wmde/DataValuesJavascript',
 	'description' => 'JavaScript related to the DataValues library',
+	'license-name' => 'GPL-2.0+'
 );
 
 // Resource Loader module registration
