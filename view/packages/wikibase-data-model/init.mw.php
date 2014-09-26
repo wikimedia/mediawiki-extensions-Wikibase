@@ -9,7 +9,8 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 		'[http://www.snater.com H. Snater]',
 	),
 	'url' => 'https://github.com/wmde/WikibaseDataModelJavascript',
-	'description' => 'Javascript implementation of the Wikibase data model'
+	'description' => 'Javascript implementation of the Wikibase data model',
+	'license-name' => 'GPL-2.0+'
 );
 
 include 'resources.mw.php';
