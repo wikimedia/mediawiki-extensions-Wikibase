@@ -27,6 +27,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.ClaimGroup',
+				'wikibase.datamodel.ClaimGroupList',
 				'wikibase.datamodel.ClaimList',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.EntityId',
@@ -80,6 +81,16 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.ClaimList',
+			),
+		),
+
+		'wikibase.datamodel.ClaimGroupList' => $moduleTemplate + array(
+			'scripts' => array(
+				'ClaimGroupList.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.ClaimGroup',
 			),
 		),
 

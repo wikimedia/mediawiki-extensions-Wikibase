@@ -28,6 +28,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 #### Enhancements
 * Added ClaimGroup.
+* Added ClaimGroupList.
 * Added ClaimList.
 * Added Fingerprint.
 * Added ReferenceList.
