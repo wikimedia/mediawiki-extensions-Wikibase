@@ -40,8 +40,8 @@ $.extend( SELF.prototype, {
 	 * @param {string} languageCode
 	 */
 	setLanguageCode: function( languageCode ) {
-		if( languageCode === undefined ) {
-			throw new Error( 'Language codes may not be undefined' );
+		if( typeof languageCode !== 'string' ) {
+			throw new Error( 'Language code has to be a string' );
 		}
 		this._languageCode = languageCode;
 	},

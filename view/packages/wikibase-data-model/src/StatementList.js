@@ -41,7 +41,6 @@ $.extend( SELF.prototype, {
 		return this._statements.slice();
 	},
 
-
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 * @return {boolean}

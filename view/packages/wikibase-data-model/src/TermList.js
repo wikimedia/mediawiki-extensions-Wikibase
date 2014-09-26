@@ -23,9 +23,7 @@ var SELF = wb.datamodel.TermList = function WbDataModelTermList( terms ) {
 			throw new Error( 'TermList may contain Term instances only' );
 		}
 
-		var languageCode = terms[i].getLanguageCode();
-
-		if( this._terms[languageCode] ) {
+		if( this._terms[terms[i].getLanguageCode()] ) {
 			throw new Error( 'There may only be one Term per language' );
 		}
 

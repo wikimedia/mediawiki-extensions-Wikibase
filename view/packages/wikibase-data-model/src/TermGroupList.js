@@ -23,9 +23,7 @@ var SELF = wb.datamodel.TermGroupList = function WbDataModelTermGroupList( termG
 			throw new Error( 'TermGroupList may contain TermGroup instances only' );
 		}
 
-		var languageCode = termGroups[i].getLanguageCode();
-
-		if( this._groups[languageCode] ) {
+		if( this._groups[termGroups[i].getLanguageCode()] ) {
 			throw new Error( 'There may only be one TermGroup per language' );
 		}
 

@@ -27,8 +27,8 @@ var SELF = wb.datamodel.Property = util.inherit(
 
 		if(
 			typeof entityId !== 'string'
-			|| !( fingerprint instanceof wb.datamodel.Fingerprint )
 			|| typeof dataTypeId !== 'string'
+			|| !( fingerprint instanceof wb.datamodel.Fingerprint )
 			|| !( statementGroupList instanceof wb.datamodel.StatementGroupList )
 		) {
 			throw new Error( 'Required parameter(s) missing or not defined properly' );

@@ -28,7 +28,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 		[undefined, []],
 		['', undefined],
 		['de', 1],
-		[1, '']
+		[1, ['']]
 	];
 
 	/**
