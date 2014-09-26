@@ -158,7 +158,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.Fingerprint',
-				'wikibase.datamodel.StatementList',
+				'wikibase.datamodel.StatementGroupList',
 			),
 		),
 

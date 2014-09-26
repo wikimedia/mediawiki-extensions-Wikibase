@@ -16,20 +16,20 @@ var PARENT = wb.datamodel.Entity;
  * @param {string} entityId
  * @param {string} dataTypeId
  * @param {wikibase.datamodel.Fingerprint|null} [fingerprint]
- * @param {wikibase.datamodel.StatementList|null} [statementList]
+ * @param {wikibase.datamodel.StatementGroupList|null} [statementGroupList]
  */
 var SELF = wb.datamodel.Property = util.inherit(
 	'WbProperty',
 	PARENT,
-	function( entityId, dataTypeId, fingerprint, statementList ) {
+	function( entityId, dataTypeId, fingerprint, statementGroupList ) {
 		fingerprint = fingerprint || new wb.datamodel.Fingerprint();
-		statementList = statementList || new wb.datamodel.StatementList();
+		statementGroupList = statementGroupList || new wb.datamodel.StatementGroupList();
 
 		if(
 			typeof entityId !== 'string'
-				|| !( fingerprint instanceof wb.datamodel.Fingerprint )
-				|| typeof dataTypeId !== 'string'
-				|| !( statementList instanceof wb.datamodel.StatementList )
+			|| !( fingerprint instanceof wb.datamodel.Fingerprint )
+			|| typeof dataTypeId !== 'string'
+			|| !( statementGroupList instanceof wb.datamodel.StatementGroupList )
 		) {
 			throw new Error( 'Required parameter(s) missing or not defined properly' );
 		}
@@ -37,7 +37,7 @@ var SELF = wb.datamodel.Property = util.inherit(
 		this._id = entityId;
 		this._fingerprint = fingerprint;
 		this._dataTypeId = dataTypeId;
-		this._statementList = statementList;
+		this._statementGroupList = statementGroupList;
 	},
 {
 	/**
@@ -46,9 +46,9 @@ var SELF = wb.datamodel.Property = util.inherit(
 	_dataTypeId: null,
 
 	/**
-	 * @type {wikibase.datamodel.StatementList}
+	 * @type {wikibase.datamodel.StatementGroupList}
 	 */
-	_statementList: null,
+	_statementGroupList: null,
 
 	/**
 	 * @return {string}
@@ -58,31 +58,31 @@ var SELF = wb.datamodel.Property = util.inherit(
 	},
 
 	/**
-	 * @return {wikibase.datamodel.StatementList}
+	 * @return {wikibase.datamodel.StatementGroupList}
 	 */
 	getStatements: function() {
-		return this._statementList;
+		return this._statementGroupList;
 	},
 
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 */
 	addStatement: function( statement ) {
-		this._statementList.addStatement( statement );
+		this._statementGroupList.addStatement( statement );
 	},
 
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 */
 	removeStatement: function( statement ) {
-		this._statementList.removeStatement( statement );
+		this._statementGroupList.removeStatement( statement );
 	},
 
 	/**
 	 * @return {boolean}
 	 */
 	isEmpty: function() {
-		return this._fingerprint.isEmpty() && this._statementList.isEmpty();
+		return this._fingerprint.isEmpty() && this._statementGroupList.isEmpty();
 	},
 
 	/**
@@ -93,8 +93,9 @@ var SELF = wb.datamodel.Property = util.inherit(
 		return property === this
 			|| property instanceof SELF
 				&& this._id === property.getId()
+				&& this._dataTypeId === property.getDataTypeId()
 				&& this._fingerprint.equals( property.getFingerprint() )
-				&& this._dataTypeId === property.getDataTypeId();
+				&& this._statementGroupList.equals( property.getStatements() );
 	}
 } );
 

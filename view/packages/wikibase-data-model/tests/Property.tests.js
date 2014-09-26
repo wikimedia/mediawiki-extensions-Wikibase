@@ -16,7 +16,7 @@ var testSets = [
 			new wb.datamodel.TermList(),
 			new wb.datamodel.TermGroupList()
 		),
-		new wb.datamodel.StatementList()
+		new wb.datamodel.StatementGroupList()
 	], [
 		'P2',
 		'i am a data type id',
@@ -25,9 +25,13 @@ var testSets = [
 			new wb.datamodel.TermList( [new wb.datamodel.Term( 'de', 'de-description' )] ),
 			new wb.datamodel.TermGroupList( [new wb.datamodel.TermGroup( 'de', ['de-alias'] )] )
 		),
-		new wb.datamodel.StatementList( [
-			new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+		new wb.datamodel.StatementGroupList( [
+			new wb.datamodel.StatementGroup( 'P1',
+				new wb.datamodel.StatementList( [
+					new wb.datamodel.Statement(
+						new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+					)
+				] )
 			)
 		] )
 	]
@@ -55,7 +59,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			new wb.datamodel.StatementList()
+			new wb.datamodel.StatementGroupList()
 		) ).isEmpty(),
 		'Verified isEmpty() returning TRUE.'
 	);
@@ -69,7 +73,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			new wb.datamodel.StatementList()
+			new wb.datamodel.StatementGroupList()
 		) ).isEmpty(),
 		'Returning FALSE when Fingerprint is not empty.'
 	);
@@ -83,11 +87,15 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new wb.datamodel.TermList(),
 				new wb.datamodel.TermGroupList()
 			),
-			new wb.datamodel.StatementList( [new wb.datamodel.Statement(
-				new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-			)] )
+			new wb.datamodel.StatementGroupList( [
+				new wb.datamodel.StatementGroup( 'P1',
+					new wb.datamodel.StatementList( [new wb.datamodel.Statement(
+						new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
+					)] )
+				)
+			] )
 		) ).isEmpty(),
-		'Returning FALSE when StatementList is not empty.'
+		'Returning FALSE when StatementGroupList is not empty.'
 	);
 } );
 
