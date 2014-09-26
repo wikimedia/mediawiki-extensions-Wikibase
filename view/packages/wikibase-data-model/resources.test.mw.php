@@ -94,6 +94,8 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.SiteLinkList',
 				'wikibase.datamodel.Statement',
+				'wikibase.datamodel.StatementGroup',
+				'wikibase.datamodel.StatementGroupList',
 				'wikibase.datamodel.StatementList',
 				'wikibase.datamodel.Term',
 				'wikibase.datamodel.TermGroup',

@@ -145,7 +145,7 @@ return call_user_func( function() {
 				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.SiteLinkList',
-				'wikibase.datamodel.StatementList',
+				'wikibase.datamodel.StatementGroupList',
 			),
 		),
 
