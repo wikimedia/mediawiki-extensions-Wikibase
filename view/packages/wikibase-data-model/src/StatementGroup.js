@@ -75,7 +75,7 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	hasStatement: function( statement ) {
-		return this._statementList.hasStatement( statement );
+		return this._statementList.hasItem( statement );
 	},
 
 	/**
@@ -88,14 +88,14 @@ $.extend( SELF.prototype, {
 					+ statement.getClaim().getMainSnak().getPropertyId()
 			);
 		}
-		this._statementList.addStatement( statement );
+		this._statementList.addItem( statement );
 	},
 
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 */
 	removeStatement: function( statement ) {
-		this._statementList.removeStatement( statement );
+		this._statementList.removeItem( statement );
 	},
 
 	/**

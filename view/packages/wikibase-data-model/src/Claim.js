@@ -80,7 +80,7 @@ $.extend( SELF.prototype, {
 
 		this._qualifiers.each( function( i, snak ) {
 			if( snak.getPropertyId() === propertyId ) {
-				filteredQualifiers.addSnak( snak );
+				filteredQualifiers.addItem( snak );
 			}
 		} );
 
@@ -105,8 +105,7 @@ $.extend( SELF.prototype, {
 		return claim === this
 			|| claim instanceof this.constructor
 				&& this._mainSnak.equals( claim.getMainSnak() )
-				&& this._qualifiers.equals( claim.getQualifiers()
-			);
+				&& this._qualifiers.equals( claim.getQualifiers() );
 	}
 } );
 

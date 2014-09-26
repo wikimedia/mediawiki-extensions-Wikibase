@@ -1,67 +1,23 @@
 /**
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( wb, $ ) {
 'use strict';
 
+var PARENT = wb.datamodel.OrderedList;
+
 /**
- * Ordered set of unique Snak objects.
+ * Ordered set Snak objects.
  * @constructor
  * @abstract
  * @since 0.3
  *
  * @param {wikibase.datamodel.Snak[]} [snaks]
  */
-var SELF = wb.datamodel.SnakList = function WbSnakList( snaks ) {
-	snaks = snaks || [];
-
-	this._snaks = [];
-	this.length = 0;
-
-	for( var i = 0; i < snaks.length; i++ ) {
-		this.addSnak( snaks[i] );
-	}
-};
-
-$.extend( SELF.prototype, {
-	/**
-	 * @type {number}
-	 */
-	length: 0,
-
-	/**
-	 * @type wikibase.datamodel.Snak[]
-	 */
-	_snaks: null,
-
-	/**
-	 * @param {wikibase.datamodel.Snak} snak
-	 */
-	addSnak: function( snak ) {
-		if( !( snak instanceof wb.datamodel.Snak ) ) {
-			throw new Error( 'SnakList may contain Snak instances only' );
-		}
-
-		if( !this.hasSnak( snak ) ) {
-			this._snaks.push( snak );
-			this.length++;
-		}
-	},
-
-	/**
-	 * @param {wikibase.datamodel.Snak} snak
-	 */
-	removeSnak: function( snak ) {
-		for( var i = 0; i < this._snaks.length; i++ ) {
-			if( this._snaks[i].equals( snak ) ) {
-				this._snaks.splice( i, 1 );
-				this.length--;
-			}
-		}
-	},
-
+wb.datamodel.SnakList = util.inherit( 'wbSnakList', PARENT, function( snaks ) {
+	PARENT.call( this, wikibase.datamodel.Snak, snaks );
+}, {
 	/**
 	 * Returns a SnakList with the snaks featuring a specific property id. If the property id
 	 * parameter is omitted, a copy of the whole SnakList object is returned.
@@ -71,14 +27,14 @@ $.extend( SELF.prototype, {
 	 */
 	getFilteredSnakList: function( propertyId ) {
 		if( !propertyId ) {
-			return new wb.datamodel.SnakList( $.merge( [], this._snaks ) );
+			return new wb.datamodel.SnakList( $.merge( [], this._items ) );
 		}
 
 		var filteredQualifiers = new wb.datamodel.SnakList();
 
 		this.each( function( i, snak ) {
 			if( snak.getPropertyId() === propertyId ) {
-				filteredQualifiers.addSnak( snak );
+				filteredQualifiers.addItem( snak );
 			}
 		} );
 
@@ -102,60 +58,16 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Snak} snak
-	 * @return {boolean}
-	 */
-	hasSnak: function( snak ) {
-		for( var i = 0; i < this._snaks.length; i++ ) {
-			if( this._snaks[i].equals( snak ) ) {
-				return true;
-			}
-		}
-		return false;
-	},
-
-	/**
-	 * @param {*} snakList
-	 * @return {boolean}
-	 */
-	equals: function( snakList ) {
-		if( snakList === this ) {
-			return true;
-		} else if( snakList.constructor !== this.constructor || snakList.length !== this.length ) {
-			return false;
-		}
-
-		var otherSnaks = snakList.toArray();
-
-		// Compare to other snak lists snaks considering order:
-		for( var i = 0; i < otherSnaks.length; i++ ) {
-			if( !this._snaks[i].equals( otherSnaks[i] ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	},
-
-	/**
-	 * Iterates over all Snaks in the list.
-	 * @see jQuery.fn.each
-	 */
-	each: function( fn ) {
-		$.each.call( null, this._snaks, fn );
-	},
-
-	/**
 	 * Adds the Snaks of another SnakList to this SnakList.
 	 *
 	 * @param {wikibase.datamodel.SnakList} snakList
 	 */
-	add: function( snakList ) {
+	merge: function( snakList ) {
 		var self = this;
 
 		snakList.each( function( i, snak ) {
-			if( !self.hasSnak( snak ) ) {
-				self._snaks.push( snak );
+			if( !self.hasItem( snak ) ) {
+				self._items.push( snak );
 				self.length++;
 			}
 		} );
@@ -181,21 +93,6 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns a Snak's index within the SnakList. Returns -1 when the Snak could not be found.
-	 *
-	 * @param {wikibase.datamodel.Snak} snak
-	 * @return {number}
-	 */
-	indexOf: function( snak ) {
-		for( var i = 0; i < this._snaks.length; i++ ) {
-			if( this._snaks[i].equals( snak ) ) {
-				return i;
-			}
-		}
-		return -1;
-	},
-
-	/**
 	 * Returns the indices of the snak list where a certain snak may be moved to. A snak may be
 	 * moved within its property group. It may also be moved to the slots between property groups
 	 * which involves moving the whole property group the snak belongs to.
@@ -214,7 +111,7 @@ $.extend( SELF.prototype, {
 				if( snakListSnak !== snak ) {
 					indices.push( i );
 				} else {
-					var nextSnak = self._snaks[i + 1];
+					var nextSnak = self._items[i + 1];
 					if( nextSnak && nextSnak.getPropertyId() !== snak.getPropertyId() ) {
 						// Snak is the last of its group.
 						isGroupLast = true;
@@ -222,7 +119,7 @@ $.extend( SELF.prototype, {
 				}
 			} else {
 				// Detect slots between property groups.
-				var previousSnak = self._snaks[i - 1],
+				var previousSnak = self._items[i - 1],
 					isNewPropertyGroup = (
 						i !== 0
 						&& snakListSnak.getPropertyId() !== previousSnak.getPropertyId()
@@ -243,8 +140,8 @@ $.extend( SELF.prototype, {
 		} );
 
 		// Allow moving to last position if snak is not at the end already:
-		if( snak !== this._snaks[this._snaks.length - 1] ) {
-			indices.push( this._snaks.length );
+		if( snak !== this._items[this._items.length - 1] ) {
+			indices.push( this._items.length );
 		}
 
 		return indices;
@@ -271,38 +168,38 @@ $.extend( SELF.prototype, {
 				+ 'indices are allowed: ' + validIndices.join( ', ' ) );
 		}
 
-		var previousSnak = this._snaks[toIndex -1],
-			nextSnak = this._snaks[toIndex + 1],
-			insertBefore = this._snaks[toIndex];
+		var previousSnak = this._items[toIndex -1],
+			nextSnak = this._items[toIndex + 1],
+			insertBefore = this._items[toIndex];
 
 		if(
 			previousSnak && previousSnak.getPropertyId() === snak.getPropertyId()
 			|| nextSnak && nextSnak.getPropertyId() === snak.getPropertyId()
 		) {
 			// Moving snak within its property group.
-			this._snaks.splice( this.indexOf( snak ), 1 );
+			this._items.splice( this.indexOf( snak ), 1 );
 
 			if( insertBefore ) {
-				this._snaks.splice( toIndex, 0, snak );
+				this._items.splice( toIndex, 0, snak );
 			} else {
-				this._snaks.push( snak );
+				this._items.push( snak );
 			}
 		} else {
 			// Moving the whole snak group.
 			var groupedSnaks = [];
 
-			for( var i = 0; i < this._snaks.length; i++ ) {
-				if( this._snaks[i].getPropertyId() === snak.getPropertyId() ) {
-					groupedSnaks.push( this._snaks[i] );
+			for( var i = 0; i < this._items.length; i++ ) {
+				if( this._items[i].getPropertyId() === snak.getPropertyId() ) {
+					groupedSnaks.push( this._items[i] );
 				}
 			}
 
 			for( i = 0; i < groupedSnaks.length; i++ ) {
-				this._snaks.splice( this.indexOf( groupedSnaks[i] ), 1 );
+				this._items.splice( this.indexOf( groupedSnaks[i] ), 1 );
 				if( insertBefore ) {
-					this._snaks.splice( this.indexOf( insertBefore ), 0, groupedSnaks[i] );
+					this._items.splice( this.indexOf( insertBefore ), 0, groupedSnaks[i] );
 				} else {
-					this._snaks.push( groupedSnaks[i] );
+					this._items.push( groupedSnaks[i] );
 				}
 			}
 		}
@@ -348,16 +245,6 @@ $.extend( SELF.prototype, {
 		}
 
 		return this;
-	},
-
-	/**
-	 * Returns all Snaks in this list as an Array of Snaks. Changes to the array will not modify
-	 * the original list Object.
-	 *
-	 * @return {wikibase.datamodel.Snak[]}
-	 */
-	toArray: function() {
-		return this._snaks.slice(); // don't reveal internal array!
 	}
 } );
 

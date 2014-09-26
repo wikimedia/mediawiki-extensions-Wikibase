@@ -5,6 +5,8 @@
 ( function( wb, $ ) {
 'use strict';
 
+var PARENT = wb.datamodel.OrderedList;
+
 /**
  * Ordered set of Statement objects.
  * @constructor
@@ -12,138 +14,24 @@
  *
  * @param {wikibase.datamodel.Statement[]} [statements]
  */
-var SELF = wb.datamodel.StatementList = function WbDataModelStatementList( statements ) {
-	statements = statements || [];
-
-	this._statements = [];
-	this.length = 0;
-
-	for( var i = 0; i < statements.length; i++ ) {
-		this.addStatement( statements[i] );
-	}
-};
-
-$.extend( SELF.prototype, {
-	/**
-	 * @type {wikibase.datamodel.Statement[]}
-	 */
-	_statements: null,
-
-	/**
-	 * @type {number}
-	 */
-	length: 0,
-
-	/**
-	 * @return {wikibase.datamodel.Statement[]}
-	 */
-	toArray: function() {
-		return this._statements.slice();
-	},
-
-	/**
-	 * @param {wikibase.datamodel.Statement} statement
-	 * @return {boolean}
-	 */
-	hasStatement: function( statement ) {
-		for( var i = 0; i < this._statements.length; i++ ) {
-			if(
-				statement.getClaim().getGuid() === this._statements[i].getClaim().getGuid()
-				&& statement.equals( this._statements[i] )
-			) {
-				return true;
-			}
-		}
-		return false;
-	},
-
-	/**
-	 * @param {wikibase.datamodel.Statement} statement
-	 */
-	addStatement: function( statement ) {
-		if( !( statement instanceof wb.datamodel.Statement ) ) {
-			throw new Error( 'StatementList may contain Statement instances only' );
-		}
-		this._statements.push( statement );
-		this.length++;
-	},
-
-	/**
-	 * @param {wikibase.datamodel.Statement} statement
-	 */
-	removeStatement: function( statement ) {
-		for( var i = 0; i < this._statements.length; i++ ) {
-			if(
-				this._statements[i].getClaim().getGuid() === statement.getClaim().getGuid()
-				&& this._statements[i].equals( statement )
-			) {
-				this._statements.splice( i, 1 );
-				this.length--;
-				return;
-			}
-		}
-		throw new Error( 'Trying to remove a non-existing statement' );
-	},
-
+wb.datamodel.StatementList = util.inherit( 'wbStatementList', PARENT, function( statements ) {
+	PARENT.call( this, wikibase.datamodel.Statement, statements );
+}, {
 	/**
 	 * @return {string[]}
 	 */
 	getPropertyIds: function() {
 		var propertyIds = [];
 
-		for( var i = 0; i < this._statements.length; i++ ) {
-			var propertyId = this._statements[i].getClaim().getMainSnak().getPropertyId();
+		for( var i = 0; i < this._items.length; i++ ) {
+			var propertyId = this._items[i].getClaim().getMainSnak().getPropertyId();
 			if( $.inArray( propertyId, propertyIds ) === -1 ) {
 				propertyIds.push( propertyId );
 			}
 		}
 
 		return propertyIds;
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isEmpty: function() {
-		return this.length === 0;
-	},
-
-	/**
-	 * @param {*} statementList
-	 * @return {boolean}
-	 */
-	equals: function( statementList ) {
-		if( statementList === this ) {
-			return true;
-		} else if( !( statementList instanceof SELF ) || this.length !== statementList.length ) {
-			return false;
-		}
-
-		for( var i = 0; i < this._statements.length; i++ ) {
-			if( statementList.indexOf( this._statements[i] ) !== i ) {
-				return false;
-			}
-		}
-
-		return true;
-	},
-
-	/**
-	 * @param {wikibase.datamodel.Statement} statement
-	 * @return {number}
-	 */
-	indexOf: function( statement ) {
-		for( var i = 0; i < this._statements.length; i++ ) {
-			if(
-				this._statements[i].getClaim().getGuid() === statement.getClaim().getGuid()
-				&& this._statements[i].equals( statement )
-			) {
-				return i;
-			}
-		}
-		return -1;
 	}
-
 } );
 
 }( wikibase, jQuery ) );

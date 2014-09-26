@@ -31,6 +31,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 * Added ClaimGroupList.
 * Added ClaimList.
 * Added Fingerprint.
+* Added OrderedList.
 * Added ReferenceList.
 * Added SiteLinkList.
 * Added StatementGroup.

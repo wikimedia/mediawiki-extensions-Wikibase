@@ -101,6 +101,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
 				'wikibase.datamodel.Claim',
+				'wikibase.datamodel.OrderedList',
 			),
 		),
 
@@ -146,6 +147,16 @@ return call_user_func( function() {
 				'wikibase.datamodel.Fingerprint',
 				'wikibase.datamodel.SiteLinkList',
 				'wikibase.datamodel.StatementGroupList',
+			),
+		),
+
+		'wikibase.datamodel.OrderedList' => $moduleTemplate + array(
+			'scripts' => array(
+				'OrderedList.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.datamodel.__namespace',
 			),
 		),
 
@@ -212,6 +223,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.OrderedList',
 				'wikibase.datamodel.Reference',
 			),
 		),
@@ -250,6 +262,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.OrderedList',
 				'wikibase.datamodel.Snak',
 			),
 		),
@@ -291,6 +304,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.__namespace',
+				'wikibase.datamodel.OrderedList',
 				'wikibase.datamodel.Statement',
 			),
 		),

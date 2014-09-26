@@ -1,6 +1,5 @@
 /**
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( wb, dv, $, QUnit ) {
@@ -8,30 +7,29 @@
 
 QUnit.module( 'wikibase.datamodel.SnakList' );
 
-var snakSets = [
+var testSets = [
+	[],
 	[
-		new wb.datamodel.PropertyNoValueSnak( 'p9001' ),
-		new wb.datamodel.PropertySomeValueSnak( 'p42' ),
-		new wb.datamodel.PropertySomeValueSnak( 'p42' ), // two times 42!
-		new wb.datamodel.PropertyValueSnak( 'p42', new dv.StringValue( '~=[,,_,,]:3' ) )
+		new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+		new wb.datamodel.PropertySomeValueSnak( 'P2' ),
+		new wb.datamodel.PropertySomeValueSnak( 'p2' ), // same Snak
+		new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'string' ) )
 	],
 	[
-		new wb.datamodel.PropertyValueSnak( 'p1', new dv.StringValue( 'a' ) ),
-		new wb.datamodel.PropertyValueSnak( 'p1', new dv.StringValue( 'b' ) ),
-		new wb.datamodel.PropertyValueSnak( 'p2', new dv.StringValue( 'c' ) ),
-		new wb.datamodel.PropertyValueSnak( 'p2', new dv.StringValue( 'd' ) ),
-		new wb.datamodel.PropertyValueSnak( 'p2', new dv.StringValue( 'e' ) ),
-		new wb.datamodel.PropertyValueSnak( 'p3', new dv.StringValue( 'f' ) ),
-		new wb.datamodel.PropertyValueSnak( 'p4', new dv.StringValue( 'g' ) )
+		new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'a' ) ),
+		new wb.datamodel.PropertyValueSnak( 'P1', new dv.StringValue( 'b' ) ),
+		new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'c' ) ),
+		new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'd' ) ),
+		new wb.datamodel.PropertyValueSnak( 'P2', new dv.StringValue( 'e' ) ),
+		new wb.datamodel.PropertyValueSnak( 'P3', new dv.StringValue( 'f' ) ),
+		new wb.datamodel.PropertyValueSnak( 'P4', new dv.StringValue( 'g' ) )
 	]
 ];
-var anotherSnak = new wb.datamodel.PropertySomeValueSnak( 'p1' ),
-	anotherSnak2 = new wb.datamodel.PropertySomeValueSnak( 'p2' );
 
 /**
  * Returns the concatenated string values of a snak list's snaks.
  *
- * @param {wikibase.SnakList} snakList
+ * @param {wikibase.datamodel.SnakList} snakList
  * @return {string}
  */
 function snakOrder( snakList ) {
@@ -45,39 +43,18 @@ function snakOrder( snakList ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
-	var snaks = snakSets[0];
-
-	var constructorArgs = [
-		[snaks, 3, 'array of wb.datamodel.Snak'],
-		[undefined, 0, 'undefined']
-	];
-
-	for( var i = 0; i < constructorArgs.length; i++ ) {
-		var args = constructorArgs[i],
-			newSnakList = new wb.datamodel.SnakList( args[0] );
+	for( var i = 0; i < testSets.length; i++ ) {
+		var snakList = new wb.datamodel.SnakList( testSets[i] );
 
 		assert.ok(
-			newSnakList instanceof wb.datamodel.SnakList,
-			'Test set #' + i + ': Instance created with ' + args[2] + '.'
+			snakList instanceof wb.datamodel.SnakList,
+			'Test set #' + i + ': Create instance.'
 		);
 
-		assert.ok(
-			newSnakList.length === args[1],
-			'Test set #' + i + ': Length of SnakList is accurate (' + args[1] + ' Snaks).'
-		);
-
-		var equalNewSnakList = new wb.datamodel.SnakList( args[0] );
-		assert.ok(
-			newSnakList.equals( equalNewSnakList ) && equalNewSnakList.equals( newSnakList ),
-			'Test set #' + i + ': Another instance of SnakList, created with same constructor '
-				+ 'arguments, is being considered equal to the first list.'
-		);
-
-		var newListArray = newSnakList.toArray();
-		assert.ok(
-			$.isArray( newListArray ) && newListArray.length === newSnakList.length,
-			'Test set #' + i + ': SnakList\'s toArray() returns simple Array with same length as '
-				+ 'list.'
+		assert.equal(
+			snakList.length,
+			testSets[i].length,
+			'Test set #' + i + ': Verified length.'
 		);
 	}
 
@@ -85,222 +62,78 @@ QUnit.test( 'Constructor', function( assert ) {
 		function() {
 			return new wb.datamodel.SnakList( 'foo' );
 		},
-		'Can not create SnakList with strange constructor argument.'
-	);
-} );
-
-QUnit.test( 'SnakList list operations', function( assert ) {
-	var snaks = snakSets[0],
-		newSnakList = new wb.datamodel.SnakList( snaks ),
-		initialLength = newSnakList.length;
-
-	assert.ok(
-		!newSnakList.equals( new wb.datamodel.SnakList() )
-			&& !( new wb.datamodel.SnakList() ).equals( newSnakList ),
-		'SnakList is not equal to a new, empty SnakList.'
-	);
-
-	assert.ok(
-		newSnakList.hasSnak( snaks[0] ),
-		'New SnakList recognizes a Snak from constructor array as one of its own.'
-	);
-
-	assert.ok(
-		!newSnakList.hasSnak( anotherSnak ),
-		'New SnakList does not recognize another Snak, not in the list as one of its own.'
-	);
-
-	assert.deepEqual(
-		newSnakList.getPropertyOrder(),
-		['p9001', 'p42'],
-		'Verified property order.'
-	);
-
-	newSnakList.addSnak( anotherSnak );
-
-	assert.ok(
-		newSnakList.length === initialLength + 1,
-		'Another snak added, length attribute increased by one.'
-	);
-
-	assert.ok(
-		newSnakList.hasSnak( anotherSnak ),
-		'Newly added Snak recognized as one of the list\'s own Snaks now.'
-	);
-
-	assert.deepEqual(
-		newSnakList.getPropertyOrder(),
-		['p9001', 'p42', 'p1'],
-		'Verified property order.'
-	);
-
-	var clonedSnak = new anotherSnak.constructor(
-		anotherSnak.getPropertyId(),
-		$.isFunction( anotherSnak.getValue ) ? anotherSnak.getValue() : undefined
-	);
-
-	assert.ok(
-		newSnakList.hasSnak( clonedSnak ),
-		'Snak same as newly added Snak recognized as one of the list\'s own Snaks now.'
-	);
-
-	newSnakList.addSnak( clonedSnak );
-
-	assert.ok(
-		newSnakList.length === initialLength + 1,
-		'Try to add snak equal to last one, length did not increase again, Snak not added.'
-	);
-
-	newSnakList.addSnak( anotherSnak2 );
-
-	assert.ok(
-		newSnakList.length === initialLength + 2,
-		'Added another Snak. Basically for upcoming test to check whether indexes won\'t be mixed '
-			+ 'up since we could have created a gap in the internal organization of the list.'
-	);
-
-	newSnakList.removeSnak( clonedSnak );
-
-	assert.ok(
-		newSnakList.length === initialLength + 1,
-		'Newly added Snak removed again (identified by cloned Snak, so we test for non === case; '
-			+ 'list length decreased by one.'
-	);
-
-	assert.deepEqual(
-		newSnakList.getPropertyOrder(),
-		['p9001', 'p42', 'p2'],
-		'Verified property order.'
-	);
-
-	var i = 0;
-	newSnakList.each( function( index, snak ) {
-		assert.equal(
-			index,
-			i++,
-			'Given index in SnakList.each() callback not incremented by more than one.'
-		);
-		assert.ok(
-			newSnakList.hasSnak( snak ),
-			'Given Snak in SnakList.each() callback actually is member of related list.'
-		);
-	} );
-
-	assert.equal(
-		i,
-		newSnakList.length,
-		'SnakList.each() did iterate over all Snaks in the list.'
-	);
-
-	var newListArray = newSnakList.toArray();
-	newListArray.push( 'foo' );
-	assert.ok(
-		newSnakList.length === newListArray.length - 1,
-		'Array returned by toArray() is not a reference to list\'s internal Snak array.'
-	);
-
-	assert.throws(
-		function() {
-			newSnakList.addSnak( 'foo' );
-		},
-		'Can not add some strange thing to the SnakList.'
+		'Can not create SnakList with other than a list of Snak objects.'
 	);
 } );
 
 QUnit.test( 'getFilteredSnakList()', function( assert ) {
-	var snaks = snakSets[1],
-		snakList = new wb.datamodel.SnakList();
-
-	assert.ok(
-		snakList.getFilteredSnakList() instanceof wb.datamodel.SnakList,
-		'Returned SnakList object when issuing getFilteredSnakList() without parameter.'
-	);
-
-	assert.equal(
-		snakList.getFilteredSnakList( 'p42' ).length,
-		0,
-		'No filtered SnakList returned for an empty SnakList.'
-	);
-
-	snakList = new wb.datamodel.SnakList( snaks );
-
-	assert.ok(
-		snakList.getFilteredSnakList().equals( snakList ),
-		'Returning SnakList clone when issuing getFilteredSnakList() without parameter.'
-	);
-
-	/**
-	 * Indexed by property id, this object references the index of snaks belonging to the
-	 * property group as to the array used as source for this test's SnakList object.
-	 * @type {Object}
-	 */
-	var snakListGroups = {
-		p1: [0, 1],
-		p2: [2, 3, 4],
-		p3: [5],
-		p4: [6]
-	};
-
-	/**
-	 * SnakList object containing the snaks grouped by property as to the snakListGroups
-	 * variable specified above.
-	 * @type {wikibase.datamodel.SnakList}
-	 */
-	var groupedSnakList;
-
-	for( var propertyId in snakListGroups ) {
-		groupedSnakList = new wb.datamodel.SnakList();
-
-		for( var i = 0; i < snakListGroups[propertyId].length; i++ ) {
-			groupedSnakList.addSnak( snaks[snakListGroups[propertyId][i]] );
-		}
+	for( var i = 0; i < testSets.length; i++ ) {
+		var snakList = new wb.datamodel.SnakList( testSets[i] );
 
 		assert.ok(
-			snakList.getFilteredSnakList( propertyId ).equals( groupedSnakList ),
-			'Verified result of getFilteredSnakList() (property id: ' + propertyId + ').'
+			snakList.getFilteredSnakList() instanceof wb.datamodel.SnakList,
+			'Returned SnakList object when issuing getFilteredSnakList() without parameter.'
+		);
+
+		assert.strictEqual(
+			snakList.getFilteredSnakList( 'P9999' ).length,
+			0,
+			'No filtered SnakList returned for an empty SnakList.'
+		);
+
+		assert.ok(
+			snakList.getFilteredSnakList().equals( new wb.datamodel.SnakList( snakList.toArray() ) ),
+			'Returning SnakList clone when issuing getFilteredSnakList() without parameter.'
+		);
+
+		var groupedSnakLists = {},
+			propertyId;
+
+		for( var j = 0; j < testSets[i].length; j++ ) {
+			propertyId = testSets[i][j].getPropertyId();
+			if( !groupedSnakLists[propertyId] ) {
+				groupedSnakLists[propertyId] = new wb.datamodel.SnakList();
+			}
+			groupedSnakLists[propertyId].addItem( testSets[i][j] );
+		}
+
+		for( propertyId in groupedSnakLists ) {
+			assert.ok(
+				snakList.getFilteredSnakList( propertyId ).equals( groupedSnakLists[propertyId] ),
+				'Test set #' + i + ': Verified result of getFilteredSnakList() (property id: '
+					+ propertyId + ').'
+			);
+		}
+	}
+} );
+
+QUnit.test( 'merge()', function( assert ) {
+	for( var i = 0; i < testSets.length; i++ ) {
+		var snakList = new wb.datamodel.SnakList(),
+			newSnak = new wb.datamodel.PropertyNoValueSnak( 'P10' );
+
+		snakList.merge( new wb.datamodel.SnakList( testSets[i] ) );
+
+		assert.ok(
+			snakList.equals( new wb.datamodel.SnakList( testSets[i] ) ),
+			'Merged SnakList into existing SnakList.'
+		);
+
+		snakList.merge( new wb.datamodel.SnakList( [newSnak] ) );
+
+		var extendedSnakList = new wb.datamodel.SnakList( testSets[i] );
+		extendedSnakList.addItem( newSnak );
+
+		assert.ok(
+			snakList.equals( extendedSnakList ),
+			'Merged in another SnakList.'
 		);
 	}
 } );
 
-QUnit.test( 'add()', function( assert ) {
-	var snaks = snakSets[1],
-		snakList = new wb.datamodel.SnakList();
-
-	snakList.add( new wb.datamodel.SnakList() );
-
-	assert.equal(
-		snakList.length,
-		0,
-		'Nothing changed when adding an empty SnakList to an empty SnakList.'
-	);
-
-	snakList.add( new wb.datamodel.SnakList( snaks ) );
-
-	assert.ok(
-		snakList.equals( new wb.datamodel.SnakList( snaks ) ),
-		'Added SnakList to existing SnakList.'
-	);
-
-	snakList.add( new wb.datamodel.SnakList() );
-
-	assert.ok(
-		snakList.equals( new wb.datamodel.SnakList( snaks ) ),
-		'Nothing changed when adding an empty SnakList.'
-	);
-
-	snakList.add( new wb.datamodel.SnakList( [ anotherSnak ] ) );
-
-	var extendedSnakList = new wb.datamodel.SnakList( snaks );
-	extendedSnakList.addSnak( anotherSnak );
-
-	assert.ok(
-		snakList.equals( extendedSnakList ),
-		'Added another SnakList.'
-	);
-} );
-
 QUnit.test( 'getValidMoveIndices()', function( assert ) {
-	var snaks = snakSets[1];
+	var snaks = testSets[2],
+		snakList = new wb.datamodel.SnakList( snaks );
 
 	/**
 	 * Expected indices where the individual snaks (with or without its groups) may be moved to.
@@ -316,8 +149,6 @@ QUnit.test( 'getValidMoveIndices()', function( assert ) {
 		[0, 2, 5]
 	];
 
-	var snakList = new wb.datamodel.SnakList( snaks );
-
 	for( var i = 0; i < validIndices.length; i++ ) {
 		assert.deepEqual(
 			snakList.getValidMoveIndices( snaks[i] ),
@@ -327,11 +158,11 @@ QUnit.test( 'getValidMoveIndices()', function( assert ) {
 	}
 
 	snakList = new wb.datamodel.SnakList(
-		[ new wb.datamodel.PropertyValueSnak( 'p1',  new dv.StringValue( 'a' ) ) ]
+		[ new wb.datamodel.PropertyValueSnak( 'P1',  new dv.StringValue( 'a' ) ) ]
 	);
 
 	assert.strictEqual(
-		snakList.getValidMoveIndices( snakList._snaks[0] ).length,
+		snakList.getValidMoveIndices( snakList.toArray()[0] ).length,
 		0,
 		'No indices returned when SnakList does not contain more than one Snak.'
 	);
@@ -339,7 +170,7 @@ QUnit.test( 'getValidMoveIndices()', function( assert ) {
 } );
 
 QUnit.test( 'move()', function( assert ) {
-	var snaks = snakSets[1],
+	var snaks = testSets[2],
 		snakList;
 
 	/**
@@ -381,7 +212,7 @@ QUnit.test( 'move()', function( assert ) {
 		[ 6, 5, 'abcdegf' ]
 	];
 
-	for( var i = 0; i < testCases.length; i++ ) {
+	for( var i = 1; i < testCases.length; i++ ) {
 		snakList = new wb.datamodel.SnakList( snaks );
 
 		snakList.move( snaks[testCases[i][0]], testCases[i][1] );
@@ -412,7 +243,7 @@ QUnit.test( 'move()', function( assert ) {
 } );
 
 QUnit.test( 'moveUp() and moveDown()', function( assert ) {
-	var snaks = snakSets[1],
+	var snaks = testSets[2],
 		snakList;
 
 	/**

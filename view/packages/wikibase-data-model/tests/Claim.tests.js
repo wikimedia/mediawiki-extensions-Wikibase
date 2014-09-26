@@ -73,7 +73,8 @@ QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
 	claim.setQualifiers( qualifiers );
 
 	assert.ok(
-		claim.getQualifiers().equals( qualifiers )
+		claim.getQualifiers().equals( qualifiers ),
+		'Verified qualifiers being set.'
 	);
 
 	assert.ok(

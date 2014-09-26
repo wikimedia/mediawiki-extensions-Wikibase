@@ -73,7 +73,7 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	hasClaim: function( claim ) {
-		return this._claimList.hasClaim( claim );
+		return this._claimList.hasItem( claim );
 	},
 
 	/**
@@ -86,14 +86,14 @@ $.extend( SELF.prototype, {
 					+ claim.getMainSnak().getPropertyId()
 			);
 		}
-		this._claimList.addClaim( claim );
+		this._claimList.addItem( claim );
 	},
 
 	/**
 	 * @param {wikibase.datamodel.Claim} claim
 	 */
 	removeClaim: function( claim ) {
-		this._claimList.removeClaim( claim );
+		this._claimList.removeItem( claim );
 	},
 
 	/**

@@ -104,6 +104,15 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 			),
 		),
 
+		'wikibase.datamodel.OrderedList.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'OrderedList.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel.OrderedList',
+			),
+		),
+
 		'wikibase.datamodel.Property.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'Property.tests.js',
@@ -138,7 +147,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function( array &$testModules, \Resour
 
 		'wikibase.datamodel.ReferenceList.tests' => $moduleTemplate + array(
 			'scripts' => array(
-				'Reference.tests.js',
+				'ReferenceList.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.datamodel.Reference',
