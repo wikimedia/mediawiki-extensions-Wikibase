@@ -4,13 +4,13 @@ namespace Wikibase\Test;
 
 use Language;
 use Title;
+use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\NamespaceChecker;
-use Wikibase\RepoItemLinkGenerator;
 
 /**
- * @covers Wikibase\RepoItemLinkGenerator
+ * @covers Wikibase\Client\RepoItemLinkGenerator
  *
  * @group WikibaseClient
  * @group RepoItemLinkGenerator
