@@ -13,6 +13,7 @@
 * Added `ByPropertyIdGrouper`
 * Added `BestStatementsFinder`
 * The `Reference` constructor now accepts a `Snak` array
+* Added `ReferenceList::addNewReference`
 
 ## Version 1.0 (2014-09-02)
 
