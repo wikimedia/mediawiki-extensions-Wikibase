@@ -62,10 +62,7 @@ $.extend( SELF.prototype, {
 		}
 
 		return snak === this
-			|| (
-				this.getPropertyId() === snak.getPropertyId()
-				&& this.getType() === snak.getType()
-			);
+			|| this.getPropertyId() === snak.getPropertyId() && this.getType() === snak.getType();
 	}
 } );
 

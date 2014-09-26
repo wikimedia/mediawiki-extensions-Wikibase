@@ -112,11 +112,9 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( termList ) {
-		if( !( termList instanceof SELF ) ) {
-			return false;
-		}
-
-		if( this.length !== termList.length ) {
+		if( termList === this ) {
+			return true;
+		} else if( !( termList instanceof SELF ) || this.length !== termList.length ) {
 			return false;
 		}
 

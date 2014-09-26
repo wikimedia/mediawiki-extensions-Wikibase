@@ -112,8 +112,8 @@ $.extend( SELF.prototype, {
 	equals: function( statementGroup ) {
 		return statementGroup === this
 			|| statementGroup instanceof SELF
-			&& this._propertyId === statementGroup.getPropertyId()
-			&& this._statementList.equals( statementGroup.getStatementList() );
+				&& this._propertyId === statementGroup.getPropertyId()
+				&& this._statementList.equals( statementGroup.getStatementList() );
 	}
 
 } );

@@ -98,19 +98,14 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Returns whether this Claim is equal to another Claim. Two Claims are considered equal
-	 * if they are of the same type and have the same value. The value does not include the guid,
-	 * so Claims with the same value but different guids are still considered equal.
-	 *
 	 * @param {*} claim
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	equals: function( claim ) {
-		return this === claim
-			|| (
-				claim instanceof this.constructor
+		return claim === this
+			|| claim instanceof this.constructor
 				&& this._mainSnak.equals( claim.getMainSnak() )
-				&& this._qualifiers.equals( claim.getQualifiers() )
+				&& this._qualifiers.equals( claim.getQualifiers()
 			);
 	}
 } );

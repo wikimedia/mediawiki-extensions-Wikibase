@@ -98,11 +98,9 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( referenceList ) {
-		if( !( referenceList instanceof SELF ) ) {
-			return false;
-		}
-
-		if( this.length !== referenceList.length ) {
+		if( referenceList === this ) {
+			return true;
+		} else if( !( referenceList instanceof SELF ) || this.length !== referenceList.length ) {
 			return false;
 		}
 

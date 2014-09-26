@@ -97,13 +97,11 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( statement ) {
-		return this === statement
-			|| (
-				statement instanceof SELF
+		return statement === this
+			|| statement instanceof SELF
 				&& this._claim.equals( statement.getClaim() )
 				&& this._references.equals( statement.getReferences() )
-				&& this._rank === statement.getRank()
-			);
+				&& this._rank === statement.getRank();
 	}
 } );
 

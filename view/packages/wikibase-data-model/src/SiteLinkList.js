@@ -111,11 +111,9 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( siteLinkList ) {
-		if( !( siteLinkList instanceof SELF ) ) {
-			return false;
-		}
-
-		if( this.length !== siteLinkList.length ) {
+		if( siteLinkList === this ) {
+			return true;
+		} else if( !( siteLinkList instanceof SELF ) || this.length !== siteLinkList.length ) {
 			return false;
 		}
 

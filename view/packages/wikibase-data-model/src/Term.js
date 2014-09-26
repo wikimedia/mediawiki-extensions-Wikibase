@@ -68,11 +68,10 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( term ) {
-		if( !( term instanceof SELF ) ) {
-			return false;
-		}
-
-		return this._languageCode === term.getLanguageCode() && this._text === term.getText();
+		return term === this
+			|| term instanceof SELF
+				&& this._languageCode === term.getLanguageCode()
+				&& this._text === term.getText();
 	}
 
 } );

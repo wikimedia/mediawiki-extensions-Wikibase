@@ -68,11 +68,12 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( termGroup ) {
-		if( !( termGroup instanceof SELF ) ) {
-			return false;
-		}
-
-		if( this._languageCode !== termGroup.getLanguageCode() ) {
+		if( termGroup === this ) {
+			return true;
+		} else if(
+			!( termGroup instanceof SELF )
+			|| this._languageCode !== termGroup.getLanguageCode()
+		) {
 			return false;
 		}
 

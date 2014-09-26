@@ -175,13 +175,11 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( fingerprint ) {
-		if( !( fingerprint instanceof SELF ) ) {
-			return false;
-		}
-
-		return this._labels.equals( fingerprint.getLabels() )
-			&& this._descriptions.equals( fingerprint.getDescriptions() )
-			&& this._aliasGroups.equals( fingerprint.getAliasGroups() );
+		return fingerprint === this
+			|| fingerprint instanceof SELF
+				&& this._labels.equals( fingerprint.getLabels() )
+				&& this._descriptions.equals( fingerprint.getDescriptions() )
+				&& this._aliasGroups.equals( fingerprint.getAliasGroups() );
 	}
 
 } );

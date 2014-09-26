@@ -104,19 +104,15 @@ var SELF = wb.datamodel.Item = util.inherit(
 
 	/**
 	 * @param {*} item
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	equals: function( item ) {
-		if( !( item instanceof SELF ) ) {
-			return false;
-		} else if( item === this ) {
-			return true;
-		}
-
-		return this._id === item.getId()
-			&& this._fingerprint.equals( item.getFingerprint() )
-			&& this._siteLinkList.equals( item.getSiteLinks() )
-			&& this._statementList.equals( item.getStatements() );
+		return item === this
+			|| item instanceof SELF
+				&& this._id === item.getId()
+				&& this._fingerprint.equals( item.getFingerprint() )
+				&& this._siteLinkList.equals( item.getSiteLinks() )
+				&& this._statementList.equals( item.getStatements() );
 	}
 } );
 

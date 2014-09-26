@@ -115,9 +115,8 @@ $.extend( SELF.prototype, {
 	equals: function( statementGroupList ) {
 		if( statementGroupList === this ) {
 			return true;
-		} else if (
-			!( statementGroupList instanceof SELF )
-			|| this.length !== statementGroupList.length
+		} else if(
+			!( statementGroupList instanceof SELF ) || this.length !== statementGroupList.length
 		) {
 			return false;
 		}

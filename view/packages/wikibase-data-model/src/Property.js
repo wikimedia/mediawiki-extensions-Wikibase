@@ -90,15 +90,11 @@ var SELF = wb.datamodel.Property = util.inherit(
 	 * @return {boolean}
 	 */
 	equals: function( property ) {
-		if( !( property instanceof SELF ) ) {
-			return false;
-		} else if( property === this ) {
-			return true;
-		}
-
-		return this._id === property.getId()
-			&& this._fingerprint.equals( property.getFingerprint() )
-			&& this._dataTypeId === property.getDataTypeId();
+		return property === this
+			|| property instanceof SELF
+				&& this._id === property.getId()
+				&& this._fingerprint.equals( property.getFingerprint() )
+				&& this._dataTypeId === property.getDataTypeId();
 	}
 } );
 

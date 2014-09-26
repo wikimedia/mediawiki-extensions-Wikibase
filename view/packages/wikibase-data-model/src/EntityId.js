@@ -82,18 +82,13 @@
 		},
 
 		/**
-		 * @see dv.DataValue.equals
+		 * @see dataValues.DataValue.equals
 		 */
 		equals: function( entityId ) {
-			if ( entityId === this ) {
-				return true;
-			}
-			if( !( entityId instanceof this.constructor ) ) {
-				return false;
-			}
-
-			return this.getEntityType() === entityId.getEntityType()
-				&& this.getNumericId() === entityId.getNumericId();
+			return entityId === this
+				|| entityId instanceof this.constructor
+					&& this.getEntityType() === entityId.getEntityType()
+					&& this.getNumericId() === entityId.getNumericId();
 		},
 
 		/**

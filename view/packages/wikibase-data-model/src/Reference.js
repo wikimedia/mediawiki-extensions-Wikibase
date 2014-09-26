@@ -58,14 +58,11 @@
 		},
 
 		/**
-		 * Returns whether the Reference object is equal to another Reference object by comparing
-		 * the References' Snaks.
-		 *
-		 * @param {wikibase.datamodel.Reference} reference
+		 * @param {*} reference
 		 * @return {boolean}
 		 */
 		equals: function( reference ) {
-			return this._snaks.equals( reference.getSnaks() );
+			return reference === this || this._snaks.equals( reference.getSnaks() );
 		}
 	} );
 

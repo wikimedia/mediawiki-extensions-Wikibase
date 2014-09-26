@@ -114,11 +114,9 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( claimList ) {
-		if( !( claimList instanceof SELF ) ) {
-			return false;
-		}
-
-		if( this.length !== claimList.length ) {
+		if( claimList === this ) {
+			return true;
+		} else if( !( claimList instanceof SELF ) || this.length !== claimList.length ) {
 			return false;
 		}
 

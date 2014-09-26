@@ -113,11 +113,9 @@ $.extend( SELF.prototype, {
 	 * @return {boolean}
 	 */
 	equals: function( termGroupList ) {
-		if( !( termGroupList instanceof SELF ) ) {
-			return false;
-		}
-
-		if( this.length !== termGroupList.length ) {
+		if( termGroupList === this ) {
+			return true;
+		} else if( !( termGroupList instanceof SELF ) || this.length !== termGroupList.length ) {
 			return false;
 		}
 
