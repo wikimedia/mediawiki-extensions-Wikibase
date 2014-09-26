@@ -8,7 +8,6 @@ use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;
-use Wikibase\DataModel\ByPropertyIdGrouper;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -67,8 +66,6 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * The best statements are those with the highest rank for a particular property.
 	 * Deprecated ranks are never included.
 	 *
-	 * @deprecated since 1.1 - use BestStatementsFinder instead
-	 *
 	 * @return self
 	 */
 	public function getBestStatementPerProperty() {
@@ -80,13 +77,16 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 	 * Returns the property ids used by the statements.
 	 * The keys of the returned array hold the serializations of the property ids.
 	 *
-	 * @deprecated since 1.1 - use ByPropertyIdGrouper
-	 *
 	 * @return PropertyId[]
 	 */
 	public function getPropertyIds() {
-		$byPropertyIdGrouper = new ByPropertyIdGrouper( $this );
-		return $byPropertyIdGrouper->getPropertyIds();
+		$propertyIds = array();
+
+		foreach ( $this->statements as $statement ) {
+			$propertyIds[$statement->getPropertyId()->getSerialization()] = $statement->getPropertyId();
+		}
+
+		return $propertyIds;
 	}
 
 	public function addStatement( Statement $statement ) {

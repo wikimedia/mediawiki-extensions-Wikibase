@@ -13,11 +13,6 @@
 * Added `ByPropertyIdGrouper`
 * Added `BestStatementsFinder`
 
-#### Deprecations
-
-* Deprecated `StatementList::getBestStatementPerProperty` in favour of `BestStatementsFinder`
-* Deprecated `StatementList::getPropertyIds` in favour of `ByPropertyIdGrouper`
-
 ## Version 1.0 (2014-09-02)
 
 #### Breaking changes
